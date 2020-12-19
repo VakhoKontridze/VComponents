@@ -60,7 +60,7 @@ extension VCircularButtonDemoView {
 }
 
 // MARK: Preview
-private struct VCircularButtonDemoView_Previews: PreviewProvider {
+struct VCircularButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VCircularButtonDemoView()
     }

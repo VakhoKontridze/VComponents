@@ -63,7 +63,7 @@ public extension VButton {
 }
 
 // MARK:- Preview
-private struct VButton_Previews: PreviewProvider {
+struct VButton_Previews: PreviewProvider {
     static var previews: some View {
         VButton(
             state: .enabled, type: .compact, viewModel: .init(),

@@ -29,7 +29,7 @@ extension ComponentsNavigationView {
 }
 
 // MARK:- Preview
-private struct ComponentsNavigationView_Previews: PreviewProvider {
+struct ComponentsNavigationView_Previews: PreviewProvider {
     static var previews: some View {
         ComponentsNavigationView()
     }

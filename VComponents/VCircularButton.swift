@@ -42,7 +42,7 @@ public extension VCircularButton {
 }
 
 // MARK:- Preview
-private struct VCircularButton_Previews: PreviewProvider {
+struct VCircularButton_Previews: PreviewProvider {
     static var previews: some View {
         VCircularButton(
             state: .enabled, viewModel: .init(),

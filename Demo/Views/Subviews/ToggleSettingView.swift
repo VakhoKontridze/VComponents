@@ -34,7 +34,7 @@ extension ToggleSettingView {
 }
 
 // MARK:- Preview
-private struct ToggleSettingView_Previews: PreviewProvider {
+struct ToggleSettingView_Previews: PreviewProvider {
     static var previews: some View {
         ToggleSettingView(isOn: .constant(true), title: "Title")
     }

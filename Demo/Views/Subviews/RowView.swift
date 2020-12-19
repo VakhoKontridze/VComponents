@@ -49,7 +49,7 @@ extension RowView {
 
 
 // MARK:- Preview
-private struct RowView_Previews: PreviewProvider {
+struct RowView_Previews: PreviewProvider {
     static var previews: some View {
         RowView(title: "Title", content: {
             Color.pink
