@@ -1,5 +1,5 @@
 //
-//  VButtonType.swift
+//  VPrimaryButtonType.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK:- V Button Type
-public enum VButtonType: CaseIterable {
+// MARK:- V Primary Button Type
+public enum VPrimaryButtonType: CaseIterable {
     case compact
     case fixed
     case flexible

@@ -1,5 +1,5 @@
 //
-//  VButtonDemoView.swift
+//  VPrimaryButtonDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -8,24 +8,24 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Button Demo View
-struct VButtonDemoView: View {
+// MARK:- V Primary Button Demo View
+struct VPrimaryButtonDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Button"
+    static let sceneTitle: String = "Primary Button"
     
     private let buttonTitle: String = "Press"
     
-    @State private var compactButtonState: VButtonState = .enabled
-    @State private var fixedButtonState: VButtonState = .enabled
-    @State private var flexibleButtonState: VButtonState = .enabled
+    @State private var compactButtonState: VPrimaryButtonState = .enabled
+    @State private var fixedButtonState: VPrimaryButtonState = .enabled
+    @State private var flexibleButtonState: VPrimaryButtonState = .enabled
 }
 
 // MARK:- Body
-extension VButtonDemoView {
+extension VPrimaryButtonDemoView {
     var body: some View {
         VLazyListView(viewModel: .init(), content: {
             controller
-            vButtons
+            vPrimaryButtons
         })
             .navigationTitle(Self.sceneTitle)
     }
@@ -66,31 +66,31 @@ extension VButtonDemoView {
         })
     }
 
-    private var vButtons: some View {
+    private var vPrimaryButtons: some View {
         VStack(content: {
             RowView(
                 title: "Compact",
                 content: {
-                    VButton(state: compactButtonState, type: .compact, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle)
+                    VPrimaryButton(state: compactButtonState, type: .compact, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle)
                 }
             )
             
             RowView(
                 title: "Fixed",
-                content: { VButton(state: fixedButtonState, type: .fixed, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
+                content: { VPrimaryButton(state: fixedButtonState, type: .fixed, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
             )
             
             RowView(
                 title: "Flexible",
-                content: { VButton(state: flexibleButtonState, type: .flexible, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
+                content: { VPrimaryButton(state: flexibleButtonState, type: .flexible, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
             )
         })
     }
 }
 
 // MARK: Preview
-struct VButtonDemoView_Previews: PreviewProvider {
+struct VPrimaryButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VButtonDemoView()
+        VPrimaryButtonDemoView()
     }
 }

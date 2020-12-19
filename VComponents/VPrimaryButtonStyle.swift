@@ -1,5 +1,5 @@
 //
-//  VButtonStyle.swift
+//  VPrimaryButtonStyle.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-// MARK:- V Button Style
-struct VButtonStyle: ButtonStyle {
+// MARK:- V Primary Button Style
+struct VPrimaryButtonStyle: ButtonStyle {
     // MARK: Properties
-    private let state: VButtonState
-    private let buttonType: VButtonType
-    private let viewModel: VButtonViewModel
+    private let state: VPrimaryButtonState
+    private let buttonType: VPrimaryButtonType
+    private let viewModel: VPrimaryButtonViewModel
     
     // MARK: Initializers
-    init(state: VButtonState, type buttonType: VButtonType, viewModel: VButtonViewModel) {
+    init(state: VPrimaryButtonState, type buttonType: VPrimaryButtonType, viewModel: VPrimaryButtonViewModel) {
         self.state = state
         self.buttonType = buttonType
         self.viewModel = viewModel
@@ -23,7 +23,7 @@ struct VButtonStyle: ButtonStyle {
 }
 
 // MARK:- Style
-extension VButtonStyle {
+extension VPrimaryButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         contentView(label: configuration.label, actualState: actualState(configuration: configuration))
             .padding(.horizontal, viewModel.layout.contentInset)
@@ -35,7 +35,7 @@ extension VButtonStyle {
             .background(backgroundView(actualState: actualState(configuration: configuration)))
     }
     
-    private func contentView(label: ButtonStyleConfiguration.Label, actualState: VButtonActualState) -> some View {
+    private func contentView(label: ButtonStyleConfiguration.Label, actualState: VPrimaryButtonActualState) -> some View {
         HStack(alignment: .center, spacing: 20, content: {
             loaderCompensatorView(actualState: actualState)
             textView(label: label, actualState: actualState)
@@ -43,45 +43,45 @@ extension VButtonStyle {
         })
     }
     
-    private func textView(label: ButtonStyleConfiguration.Label, actualState: VButtonActualState) -> some View {
+    private func textView(label: ButtonStyleConfiguration.Label, actualState: VPrimaryButtonActualState) -> some View {
         label
             .lineLimit(1)
             .multilineTextAlignment(.center)
             .truncationMode(.tail)
-            .foregroundColor(VButtonViewModel.Colors.foreground(state: actualState, vm: viewModel))
+            .foregroundColor(VPrimaryButtonViewModel.Colors.foreground(state: actualState, vm: viewModel))
             .font(viewModel.fonts.title)
     }
     
-    @ViewBuilder private func loaderCompensatorView(actualState: VButtonActualState) -> some View {
+    @ViewBuilder private func loaderCompensatorView(actualState: VPrimaryButtonActualState) -> some View {
         if actualState == .loading {
-            Spacer().frame(width: VButtonViewModel.Static.progressViewWidth, alignment: .leading)
+            Spacer().frame(width: VPrimaryButtonViewModel.Static.progressViewWidth, alignment: .leading)
             if buttonType != .compact { Spacer() }
         }
     }
     
-    @ViewBuilder private func loaderView(actualState: VButtonActualState) -> some View {
+    @ViewBuilder private func loaderView(actualState: VPrimaryButtonActualState) -> some View {
         if actualState == .loading {
             if buttonType != .compact { Spacer() }
-            VSpinner(type: .continous, viewModel: .init()).frame(width: VButtonViewModel.Static.progressViewWidth, alignment: .trailing)
+            VSpinner(type: .continous, viewModel: .init()).frame(width: VPrimaryButtonViewModel.Static.progressViewWidth, alignment: .trailing)
         }
     }
     
-    private func backgroundView(actualState: VButtonActualState) -> some View {
+    private func backgroundView(actualState: VPrimaryButtonActualState) -> some View {
         RoundedRectangle(cornerRadius: viewModel.layout.cornerRadius, style: .continuous)
-            .foregroundColor(VButtonViewModel.Colors.background(state: actualState, vm: viewModel))
+            .foregroundColor(VPrimaryButtonViewModel.Colors.background(state: actualState, vm: viewModel))
     }
 }
 
 // MARK:- Actual State
-private enum VButtonActualState {
+private enum VPrimaryButtonActualState {
     case enabled
     case pressed
     case disabled
     case loading
 }
 
-private extension VButtonStyle {
-    func actualState(configuration: Configuration) -> VButtonActualState {
+private extension VPrimaryButtonStyle {
+    func actualState(configuration: Configuration) -> VPrimaryButtonActualState {
         if configuration.isPressed && state.shouldBeEnabled {
             return .pressed
         } else {
@@ -95,8 +95,8 @@ private extension VButtonStyle {
 }
 
 // MARK:- ViewModel Mapping
-private extension VButtonViewModel.Colors {
-    static func foreground(state: VButtonActualState, vm: VButtonViewModel) -> Color {
+private extension VPrimaryButtonViewModel.Colors {
+    static func foreground(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Color {
         switch state {
         case .enabled: return vm.colors.foreground.enabled
         case .pressed: return vm.colors.foreground.pressed
@@ -105,7 +105,7 @@ private extension VButtonViewModel.Colors {
         }
     }
 
-    static func background(state: VButtonActualState, vm: VButtonViewModel) -> Color {
+    static func background(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Color {
         switch state {
         case .enabled: return vm.colors.background.enabled
         case .pressed: return vm.colors.background.pressed

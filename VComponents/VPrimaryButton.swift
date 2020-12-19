@@ -1,5 +1,5 @@
 //
-//  VButton.swift
+//  VPrimaryButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-// MARK:- V Button
-public struct VButton<Content>: View where Content: View {
+// MARK:- V Primary Button
+public struct VPrimaryButton<Content>: View where Content: View {
     // MARK: Properties
-    private let state: VButtonState
+    private let state: VPrimaryButtonState
     
-    private let buttonType: VButtonType
-    private let viewModel: VButtonViewModel
+    private let buttonType: VPrimaryButtonType
+    private let viewModel: VPrimaryButtonViewModel
     
     private let action: () -> Void
     
@@ -21,9 +21,9 @@ public struct VButton<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
-        state: VButtonState,
-        type buttonType: VButtonType,
-        viewModel: VButtonViewModel,
+        state: VPrimaryButtonState,
+        type buttonType: VPrimaryButtonType,
+        viewModel: VPrimaryButtonViewModel,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -35,11 +35,11 @@ public struct VButton<Content>: View where Content: View {
     }
 }
 
-extension VButton where Content == Text {
+extension VPrimaryButton where Content == Text {
     public init<S>(
-        state: VButtonState,
-        type: VButtonType,
-        viewModel: VButtonViewModel,
+        state: VPrimaryButtonState,
+        type: VPrimaryButtonType,
+        viewModel: VPrimaryButtonViewModel,
         action: @escaping () -> Void,
         title: S
     )
@@ -54,18 +54,18 @@ extension VButton where Content == Text {
 }
 
 // MARK:- Body
-public extension VButton {
+public extension VPrimaryButton {
     var body: some View {
         Button(action: action, label: content)
             .disabled(!state.shouldBeEnabled)
-            .buttonStyle(VButtonStyle(state: state, type: buttonType, viewModel: viewModel))
+            .buttonStyle(VPrimaryButtonStyle(state: state, type: buttonType, viewModel: viewModel))
     }
 }
 
 // MARK:- Preview
-struct VButton_Previews: PreviewProvider {
+struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VButton(
+        VPrimaryButton(
             state: .enabled, type: .compact, viewModel: .init(),
             action: {},
             title: "Press"

@@ -1,5 +1,5 @@
 //
-//  VButtonViewModel.swift
+//  VPrimaryButtonViewModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Button ViewModel
-public struct VButtonViewModel {
+// MARK:- V Primary Button ViewModel
+public struct VPrimaryButtonViewModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -31,7 +31,7 @@ public struct VButtonViewModel {
 }
 
 // MARK:- Layout
-extension VButtonViewModel {
+extension VPrimaryButtonViewModel {
     public struct Layout {
         // MARK: Properties
         public let height: CGFloat
@@ -59,7 +59,7 @@ extension VButtonViewModel {
 }
 
 // MARK:- Colors
-extension VButtonViewModel {
+extension VPrimaryButtonViewModel {
     public struct Colors {
         // MARK: Properties
         public let foreground: StateColors
@@ -99,7 +99,7 @@ extension VButtonViewModel {
 }
 
 // MARK:- Fonts
-extension VButtonViewModel {
+extension VPrimaryButtonViewModel {
     public struct Fonts {
         // MARK: Properties
         public let title: Font
@@ -118,7 +118,7 @@ extension VButtonViewModel {
 }
 
 // MARK:- Static View Model
-extension VButtonViewModel {
+extension VPrimaryButtonViewModel {
     struct Static {
         // MARK: Properties
         static let progressViewWidth: CGFloat = 10

@@ -1,5 +1,5 @@
 //
-//  VCircularButtonViewModel.swift
+//  VPlainButtonViewModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Circular Button ViewModel
-public struct VCircularButtonViewModel {
+// MARK:- V Plain Button ViewModel
+public struct VPlainButtonViewModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -31,50 +31,44 @@ public struct VCircularButtonViewModel {
 }
 
 // MARK:- Layout
-extension VCircularButtonViewModel {
+extension VPlainButtonViewModel {
     public struct Layout {
         // MARK: Properties
-        public let dimension: CGFloat
+        public let hitAreaOffsetHor: CGFloat
+        public let hitAreaOffsetVer: CGFloat
         
         // MARK: Initializers
-        init(dimension: CGFloat) {
-            self.dimension = dimension
+        public init(hitAreaOffsetHor: CGFloat, hitAreaOffsetVer: CGFloat) {
+            self.hitAreaOffsetHor = hitAreaOffsetHor
+            self.hitAreaOffsetVer = hitAreaOffsetVer
         }
         
-        init() {
+        public init() {
             self.init(
-                dimension: 44
+                hitAreaOffsetHor: 15,
+                hitAreaOffsetVer: 5
             )
         }
     }
 }
 
 // MARK:- Colors
-extension VCircularButtonViewModel {
+extension VPlainButtonViewModel {
     public struct Colors {
         // MARK: Properties
         public let foreground: StateColors
-        public let background: StateColors
         
         // MARK: Initializers
-        public init(foreground: StateColors, background: StateColors) {
+        public init(foreground: StateColors) {
             self.foreground = foreground
-            self.background = background
         }
         
         public init() {
             self.init(
                 foreground: .init(
-                    enabled: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1),
-                    pressed: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1),
-                    disabled: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 0.5),
-                    loading: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 0.5)
-                ),
-                background: .init(
-                    enabled: Color(red: 50/255, green: 130/255, blue: 230/255, opacity: 1),
-                    pressed: Color(red: 30/255, green: 90/255, blue: 160/255, opacity: 1),
-                    disabled: Color(red: 130/255, green: 180/255, blue: 240/255, opacity: 1),
-                    loading: Color(red: 130/255, green: 180/255, blue: 240/255, opacity: 1)
+                    enabled: Color(red: 10/255, green: 120/255, blue: 255/255, opacity: 1),
+                    pressed: Color(red: 110/255, green: 160/255, blue: 250/255, opacity: 1),
+                    disabled: Color(red: 130/255, green: 180/255, blue: 240/255, opacity: 1)
                 )
             )
         }
@@ -85,12 +79,11 @@ extension VCircularButtonViewModel {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
-        public let loading: Color
     }
 }
 
 // MARK:- Fonts
-extension VCircularButtonViewModel {
+extension VPlainButtonViewModel {
     public struct Fonts {
         // MARK: Properties
         public let title: Font
@@ -102,7 +95,7 @@ extension VCircularButtonViewModel {
         
         public init() {
             self.init(
-                title: .system(size: 12, weight: .semibold, design: .default)
+                title: .system(size: 14, weight: .semibold, design: .default)
             )
         }
     }

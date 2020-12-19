@@ -18,7 +18,8 @@ extension ComponentsNavigationView {
     var body: some View {
         NavigationView(content: {
             List(content: {
-                NavigationLink(VButtonDemoView.sceneTitle, destination: VButtonDemoView())
+                NavigationLink(VPrimaryButtonDemoView.sceneTitle, destination: VPrimaryButtonDemoView())
+                NavigationLink(VPlainButtonDemoView.sceneTitle, destination: VPlainButtonDemoView())
                 NavigationLink(VCircularButtonDemoView.sceneTitle, destination: VCircularButtonDemoView())
                 NavigationLink(VSliderDemoView.sceneTitle, destination: VSliderDemoView())
                 NavigationLink(VSpinnerDemoView.sceneTitle, destination: VSpinnerDemoView())

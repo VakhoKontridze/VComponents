@@ -1,34 +1,29 @@
 //
-//  VCircularButtonDemoView.swift
+//  VPlainButtonDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 18.12.20.
+//  Created by Vakhtang Kontridze on 19.12.20.
 //
 
 import SwiftUI
 import VComponents
 
-// MARK:- V Circular Button Demo View
-struct VCircularButtonDemoView: View {
+// MARK:- V Plain Button Demo View
+struct VPlainButtonDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Circular Button"
+    static let sceneTitle: String = "Plain Button"
     
-    private func buttonContent() -> some View {
-        Image(systemName: "swift")
-            .resizable()
-            .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(.white)
-    }
-
-    @State private var buttonState: VCircularButtonState = .enabled
+    private let buttonTitle: String = "Press"
+    
+    @State private var buttonState: VPlainButtonState = .enabled
 }
 
 // MARK:- Body
-extension VCircularButtonDemoView {
+extension VPlainButtonDemoView {
     var body: some View {
         VLazyListView(viewModel: .init(), content: {
             controller
-            vRoundedButtons
+            vPlainButtons
         })
             .navigationTitle(Self.sceneTitle)
     }
@@ -47,19 +42,20 @@ extension VCircularButtonDemoView {
         })
     }
     
-    private var vRoundedButtons: some View {
+    private var vPlainButtons: some View {
         VStack(content: {
             RowView(
                 title: nil,
-                content: { VCircularButton(state: buttonState, viewModel: .init(), action: { print("Pressed") }, content: buttonContent) }
+                content: { VPlainButton(state: buttonState, viewModel: .init(), action: {}, title: buttonTitle) }
             )
         })
     }
 }
 
 // MARK: Preview
-struct VCircularButtonDemoView_Previews: PreviewProvider {
+struct VPlainButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VCircularButtonDemoView()
+        VPlainButtonDemoView()
     }
 }
+
