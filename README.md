@@ -14,6 +14,8 @@ VComponents is a SwiftUI framework that contains customizable UI components
 Framework is being developed macOS 11.0 Big Sur in XCode 12. Project contains Demo sub-module, which can be run to showcase all components.
 
 ## History
+Dec 19 2020. VLazyListView
+
 Dec 19 2020. VSlider
 
 Dec 18 2020. VSpinner
