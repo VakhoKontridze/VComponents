@@ -62,7 +62,7 @@ extension VButtonStyle {
     @ViewBuilder private func loaderView(actualState: VButtonActualState) -> some View {
         if actualState == .loading {
             if buttonType != .compact { Spacer() }
-            //VSpinner(type: .continous, viewModel: .init()).frame(width: VButtonViewModel.Static.progressViewWidth, alignment: .trailing)
+            VSpinner(type: .continous, viewModel: .init()).frame(width: VButtonViewModel.Static.progressViewWidth, alignment: .trailing)
         }
     }
     

@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		7A3C1543258DE65F00CE1D96 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1542258DE65F00CE1D96 /* View.swift */; };
 		7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */; };
+		7A3C1555258DE7B900CE1D96 /* VSpinnerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */; };
+		7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1552258DE7B900CE1D96 /* VSpinner.swift */; };
+		7A3C1557258DE7B900CE1D96 /* VSpinnerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1553258DE7B900CE1D96 /* VSpinnerViewModel.swift */; };
+		7A3C1558258DE7B900CE1D96 /* VContinousSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1554258DE7B900CE1D96 /* VContinousSpinner.swift */; };
+		7A3C1560258DE7F400CE1D96 /* VSpinnerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */; };
 		7A48FDC7258DE48E00AA4D4D /* VCircularButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC3258DE48E00AA4D4D /* VCircularButtonStyle.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */; };
 		7A48FDC9258DE48E00AA4D4D /* VCircularButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC5258DE48E00AA4D4D /* VCircularButtonViewModel.swift */; };
@@ -34,6 +39,11 @@
 /* Begin PBXFileReference section */
 		7A3C1542258DE65F00CE1D96 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
+		7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerStyle.swift; sourceTree = "<group>"; };
+		7A3C1552258DE7B900CE1D96 /* VSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinner.swift; sourceTree = "<group>"; };
+		7A3C1553258DE7B900CE1D96 /* VSpinnerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerViewModel.swift; sourceTree = "<group>"; };
+		7A3C1554258DE7B900CE1D96 /* VContinousSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VContinousSpinner.swift; sourceTree = "<group>"; };
+		7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpinnerDemoView.swift; sourceTree = "<group>"; };
 		7A48FDC3258DE48E00AA4D4D /* VCircularButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonStyle.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButton.swift; sourceTree = "<group>"; };
 		7A48FDC5258DE48E00AA4D4D /* VCircularButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonViewModel.swift; sourceTree = "<group>"; };
@@ -84,6 +94,17 @@
 				7A3C1542258DE65F00CE1D96 /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7A3C1550258DE7AC00CE1D96 /* VSpinner */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C1552258DE7B900CE1D96 /* VSpinner.swift */,
+				7A3C1554258DE7B900CE1D96 /* VContinousSpinner.swift */,
+				7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */,
+				7A3C1553258DE7B900CE1D96 /* VSpinnerViewModel.swift */,
+			);
+			name = VSpinner;
 			sourceTree = "<group>";
 		};
 		7A48FDC1258DE43700AA4D4D /* VCircularButon */ = {
@@ -139,6 +160,7 @@
 			children = (
 				7A8A9722258DDD9B00309886 /* VButton */,
 				7A48FDC1258DE43700AA4D4D /* VCircularButon */,
+				7A3C1550258DE7AC00CE1D96 /* VSpinner */,
 			);
 			name = Components;
 			sourceTree = "<group>";
@@ -241,6 +263,7 @@
 			children = (
 				7A8A9738258DDEEE00309886 /* VButtonDemoView.swift */,
 				7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */,
+				7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
@@ -365,14 +388,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A3C1555258DE7B900CE1D96 /* VSpinnerStyle.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VButtonState.swift in Sources */,
 				7A48FDC9258DE48E00AA4D4D /* VCircularButtonViewModel.swift in Sources */,
 				7A8A972B258DDDA800309886 /* VButtonViewModel.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */,
 				7A8A972A258DDDA800309886 /* VButtonType.swift in Sources */,
+				7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */,
 				7A8A9729258DDDA800309886 /* VButton.swift in Sources */,
+				7A3C1557258DE7B900CE1D96 /* VSpinnerViewModel.swift in Sources */,
 				7A8A9728258DDDA800309886 /* VButtonStyle.swift in Sources */,
 				7A48FDC7258DE48E00AA4D4D /* VCircularButtonStyle.swift in Sources */,
+				7A3C1558258DE7B900CE1D96 /* VContinousSpinner.swift in Sources */,
 				7A48FDCA258DE48E00AA4D4D /* VCircularButtonState.swift in Sources */,
 				7A8A971F258DDD8400309886 /* View.swift in Sources */,
 			);
@@ -388,6 +415,7 @@
 				7A48FDDE258DE58800AA4D4D /* VCircularButtonDemoView.swift in Sources */,
 				7A8A9739258DDEEE00309886 /* VButtonDemoView.swift in Sources */,
 				7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */,
+				7A3C1560258DE7F400CE1D96 /* VSpinnerDemoView.swift in Sources */,
 				7A3C1543258DE65F00CE1D96 /* View.swift in Sources */,
 				7A8A9700258DDC7800309886 /* ComponentsNavigationView.swift in Sources */,
 			);
