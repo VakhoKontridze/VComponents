@@ -1,5 +1,5 @@
 //
-//  VButtonViewModel.swift
+//  VCircularButtonViewModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Button ViewModel
-public struct VButtonViewModel {
+// MARK:- V Circular Button ViewModel
+public struct VCircularButtonViewModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -31,35 +31,26 @@ public struct VButtonViewModel {
 }
 
 // MARK:- Layout
-extension VButtonViewModel {
+extension VCircularButtonViewModel {
     public struct Layout {
         // MARK: Properties
-        public let height: CGFloat
-        public let widthFixed: CGFloat
-        public let cornerRadius: CGFloat
-        public let contentInset: CGFloat
+        public let dimension: CGFloat
         
         // MARK: Initializers
-        public init(height: CGFloat, widthFixed: CGFloat, cornerRadius: CGFloat, contentInset: CGFloat) {
-            self.height = height
-            self.widthFixed = widthFixed
-            self.cornerRadius = cornerRadius
-            self.contentInset = contentInset
+        init(dimension: CGFloat) {
+            self.dimension = dimension
         }
         
-        public init() {
+        init() {
             self.init(
-                height: 50,
-                widthFixed: 300,
-                cornerRadius: 20,
-                contentInset: 15
+                dimension: 44
             )
         }
     }
 }
 
 // MARK:- Colors
-extension VButtonViewModel {
+extension VCircularButtonViewModel {
     // MARK: Properties
     public struct Colors {
         // MARK: Properties
@@ -99,7 +90,7 @@ extension VButtonViewModel {
 }
 
 // MARK:- Fonts
-extension VButtonViewModel {
+extension VCircularButtonViewModel {
     public struct Fonts {
         // MARK: Properties
         public let title: Font
@@ -111,19 +102,8 @@ extension VButtonViewModel {
         
         public init() {
             self.init(
-                title: .system(size: 14, weight: .semibold, design: .default)
+                title: .system(size: 11, weight: .semibold, design: .default)
             )
         }
-    }
-}
-
-// MARK:- Static View Model
-extension VButtonViewModel {
-    struct Static {
-        // MARK: Properties
-        static let progressViewWidth: CGFloat = 10
-
-        // MARK: Initializers
-        private init() {}
     }
 }

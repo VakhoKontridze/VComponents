@@ -8,16 +8,16 @@
 import SwiftUI
 import VComponents
 
-// MARK:- VButton Demo View
+// MARK:- V Button Demo View
 struct VButtonDemoView: View {
     // MARK: Properties
     static let sceneTitle: String = "Button"
     
     private let buttonTitle: String = "Press"
     
-    @State private var vButtonCompactState: VButtonState = .enabled
-    @State private var vButtonFixedState: VButtonState = .enabled
-    @State private var vButtonFlexibleState: VButtonState = .enabled
+    @State private var compactButtonState: VButtonState = .enabled
+    @State private var fixedButtonState: VButtonState = .enabled
+    @State private var flexibleButtonState: VButtonState = .enabled
 }
 
 // MARK:- Body
@@ -37,43 +37,34 @@ extension VButtonDemoView {
             HStack(content: {
                 Spacer()
                 
-                VStack(content: {
-                    Toggle(
-                        "",
-                        isOn: .init(
-                            get: { ![vButtonCompactState, vButtonFixedState, vButtonFlexibleState].contains(where: { $0 != .disabled }) },
-                            set: {
-                                vButtonCompactState = $0 ? .disabled : .enabled
-                                vButtonFixedState = $0 ? .disabled : .enabled
-                                vButtonFlexibleState = $0 ? .disabled : .enabled
-                            }
-                        )
-                    )
-                    
-                    Text("Disabled")
-                })
+                ToggleSettingView(
+                    isOn: .init(
+                        get: { ![compactButtonState, fixedButtonState, flexibleButtonState].contains(where: { $0 != .disabled }) },
+                        set: {
+                            compactButtonState = $0 ? .disabled : .enabled
+                            fixedButtonState = $0 ? .disabled : .enabled
+                            flexibleButtonState = $0 ? .disabled : .enabled
+                        }
+                    ),
+                    title: "Disabled"
+                )
                 
                 Spacer()
                 
-                VStack(content: {
-                    Toggle(
-                        "",
-                        isOn: .init(
-                            get: { ![vButtonCompactState, vButtonFixedState, vButtonFlexibleState].contains(where: { $0 != .loading }) },
-                            set: {
-                                vButtonCompactState = $0 ? .loading : .enabled
-                                vButtonFixedState = $0 ? .loading : .enabled
-                                vButtonFlexibleState = $0 ? .loading : .enabled
-                            }
-                        )
-                    )
-                    
-                    Text("Loading")
-                })
-                
+                ToggleSettingView(
+                    isOn: .init(
+                        get: { ![compactButtonState, fixedButtonState, flexibleButtonState].contains(where: { $0 != .loading }) },
+                        set: {
+                            compactButtonState = $0 ? .loading : .enabled
+                            fixedButtonState = $0 ? .loading : .enabled
+                            flexibleButtonState = $0 ? .loading : .enabled
+                        }
+                    ),
+                    title: "Loading"
+                )
+
                 Spacer()
             })
-                .labelsHidden()
         })
     }
 
@@ -82,18 +73,18 @@ extension VButtonDemoView {
             RowView(
                 title: "Compact",
                 content: {
-                    VButton(state: vButtonCompactState, type: .compact, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle)
+                    VButton(state: compactButtonState, type: .compact, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle)
                 }
             )
             
             RowView(
                 title: "Fixed",
-                content: { VButton(state: vButtonFixedState, type: .fixed, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
+                content: { VButton(state: fixedButtonState, type: .fixed, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
             )
             
             RowView(
                 title: "Flexible",
-                content: { VButton(state: vButtonFlexibleState, type: .flexible, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
+                content: { VButton(state: flexibleButtonState, type: .flexible, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
             )
         })
     }

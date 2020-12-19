@@ -1,13 +1,13 @@
 //
 //  VButtonStyle.swift
-//  Components
+//  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
 import SwiftUI
 
-// MARK:- V Button Configuration
+// MARK:- V Button Style
 struct VButtonStyle: ButtonStyle {
     // MARK: Properties
     private let state: VButtonState

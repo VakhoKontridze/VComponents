@@ -1,37 +1,11 @@
 //
 //  View.swift
-//  VComponents
+//  Demo
 //
-//  Created by Vakhtang Kontridze on 18.12.20.
+//  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import Foundation
 import SwiftUI
-
-// MARK:- Conditional Modifiers
-extension View {
-    @ViewBuilder func `if`<Transform: View>(
-        _ condition: Bool, transform: (Self) -> Transform
-    ) -> some View {
-        if condition {
-            transform(self)
-        } else {
-            self
-        }
-    }
-
-    @ViewBuilder func `if`<IfContent: View, ElseContent: View>(
-        _ condition: Bool,
-        ifTransform: (Self) -> IfContent,
-        elseTransform: (Self) -> ElseContent
-    ) -> some View {
-        if condition {
-            ifTransform(self)
-        } else {
-            elseTransform(self)
-        }
-    }
-}
 
 // MARK:- Frame
 extension View {

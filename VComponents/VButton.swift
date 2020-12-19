@@ -1,6 +1,6 @@
 //
 //  VButton.swift
-//  Components
+//  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
@@ -62,7 +62,7 @@ public extension VButton {
     }
 }
 
-// MARK:- Prwview
+// MARK:- Preview
 private struct VButton_Previews: PreviewProvider {
     static var previews: some View {
         VButton(
