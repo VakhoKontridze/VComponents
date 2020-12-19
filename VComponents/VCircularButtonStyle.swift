@@ -53,7 +53,7 @@ private enum VRoundedButtonActualState {
 
 private extension VCircularButtonStyle {
     func actualState(configuration: Configuration) -> VRoundedButtonActualState {
-        if configuration.isPressed && state.shouldBeEnabled {
+        if configuration.isPressed && state.isEnabled {
             return .pressed
         } else {
             switch state {

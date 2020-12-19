@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Primary Button Type
-public enum VPrimaryButtonType: CaseIterable {
+public enum VPrimaryButtonType: Int, CaseIterable {
     case compact
     case fixed
     case flexible

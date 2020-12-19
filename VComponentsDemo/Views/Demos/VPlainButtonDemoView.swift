@@ -25,13 +25,13 @@ extension VPlainButtonDemoView {
             controller
             
             VLazyListView(viewModel: .init(), content: {
-                vPlainButtons
+                buttons
             })
         })
     }
     
     private var controller: some View {
-        RowView(title: nil, content: {
+        RowView(type: .controller, content: {
             HStack(content: {
                 ToggleSettingView(
                     isOn: .init(
@@ -44,10 +44,10 @@ extension VPlainButtonDemoView {
         })
     }
     
-    private var vPlainButtons: some View {
+    private var buttons: some View {
         VStack(content: {
             RowView(
-                title: nil,
+                type: .untitled,
                 content: { VPlainButton(state: buttonState, viewModel: .init(), action: {}, title: buttonTitle) }
             )
         })
@@ -60,4 +60,3 @@ struct VPlainButtonDemoView_Previews: PreviewProvider {
         VPlainButtonDemoView()
     }
 }
-

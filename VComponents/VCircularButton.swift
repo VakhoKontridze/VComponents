@@ -36,7 +36,7 @@ public struct VCircularButton<Content>: View where Content: View {
 public extension VCircularButton {
     var body: some View {
         Button(action: action, label: content)
-            .disabled(!state.shouldBeEnabled)
+            .disabled(!state.isEnabled)
             .buttonStyle(VCircularButtonStyle(state: state, viewModel: viewModel))
     }
 }

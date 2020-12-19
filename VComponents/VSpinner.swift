@@ -27,10 +27,9 @@ public struct VSpinner: View {
 // MARK:- Body
 public extension VSpinner {
     @ViewBuilder var body: some View {
-        if spinnerType == .dashed {
-            dashedSpinner
-        } else if spinnerType == .continous {
-            continousSpinner
+        switch spinnerType {
+        case .dashed: dashedSpinner
+        case .continous: continousSpinner
         }
     }
     

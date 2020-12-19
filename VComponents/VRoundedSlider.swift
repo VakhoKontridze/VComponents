@@ -53,7 +53,7 @@ extension VRoundedSlider {
                         .onEnded(dragEnded)
                 )
         })
-            .disabled(!state.shouldBeEnabled)
+            .disabled(!state.isEnabled)
         
             .frame(height: viewModel.layout.rounded.height)
             .mask(RoundedRectangle(cornerRadius: viewModel.layout.rounded.cornerRadius))

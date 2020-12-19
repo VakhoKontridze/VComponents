@@ -8,11 +8,11 @@
 import Foundation
 
 // MARK:- V Plain Button State
-public enum VPlainButtonState: CaseIterable {
+public enum VPlainButtonState: Int, CaseIterable {
     case enabled
     case disabled
     
-    var shouldBeEnabled: Bool {
+    var isEnabled: Bool {
         switch self {
         case .enabled: return true
         case .disabled: return false

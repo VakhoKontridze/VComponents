@@ -10,17 +10,32 @@ import SwiftUI
 // MARK:- Row View
 struct RowView<Content>: View where Content: View {
     // MARK: Properties
-    private let title: String?
+    private let rowType: RowType
+    enum RowType {
+        case untitled
+        case titled(_ title: String)
+        case controller
+        
+        var isRow: Bool {
+            switch self {
+            case .untitled: return true
+            case .titled: return true
+            case .controller: return false
+            }
+        }
+    }
+    
     private let titleColor: Color
     
     private let content: () -> Content
     
     // MARK: Initializers
     init(
-        title: String?, titleColor: Color = .primary,
+        type rowType: RowType,
+        titleColor: Color = .primary,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.title = title
+        self.rowType = rowType
         self.titleColor = titleColor
         self.content = content
     }
@@ -33,7 +48,7 @@ extension RowView {
             VStack(spacing: 10, content: {
                 content()
                 
-                if let title = title {
+                if case .titled(let title) = rowType {
                     Text(title)
                         .foregroundColor(titleColor)
                         .font(.footnote)
@@ -45,15 +60,16 @@ extension RowView {
             Divider()
                 .padding(.horizontal, 10)
         })
-            .id(UUID())
+            .if(!rowType.isRow, transform: {
+                $0.background(Color(red: 240/255, green: 240/255, blue: 240/255))
+            })
     }
 }
-
 
 // MARK:- Preview
 struct RowView_Previews: PreviewProvider {
     static var previews: some View {
-        RowView(title: "Title", content: {
+        RowView(type: .titled("Title"), content: {
             Color.pink
                 .frame(width: 100, height: 100)
         })

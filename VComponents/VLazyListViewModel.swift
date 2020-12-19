@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- VLazyListViewModel
+// MARK:- V Lazy List ViewModel
 public struct VLazyListViewModel {
     // MARK: Properties
-    public let scrollDirection: ScrollDirection
+    public let scrollDirection: VLazyListScrollDirection
     public let showsIndicators: Bool
     
     // MARK: Iniitalizers
-    public init(scrollDirection: ScrollDirection, showsIndicators: Bool) {
+    public init(scrollDirection: VLazyListScrollDirection, showsIndicators: Bool) {
         self.scrollDirection = scrollDirection
         self.showsIndicators = showsIndicators
     }
@@ -27,7 +27,8 @@ public struct VLazyListViewModel {
     }
 }
 
-public enum ScrollDirection {
+// MARK:- V Lazy List Scrolling Direction
+public enum VLazyListScrollDirection {
     case vertical(alignment: HorizontalAlignment)
     case horizontal(aligment: VerticalAlignment)
 }

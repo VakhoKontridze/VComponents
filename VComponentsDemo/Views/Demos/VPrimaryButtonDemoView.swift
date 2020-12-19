@@ -27,14 +27,14 @@ extension VPrimaryButtonDemoView {
             controller
             
             VLazyListView(viewModel: .init(), content: {
-                vPrimaryButtons
+                buttons
             })
         })
             .navigationTitle(Self.sceneTitle)
     }
     
     private var controller: some View {
-        RowView(title: nil, content: {
+        RowView(type: .controller, content: {
             HStack(content: {
                 Spacer()
                 
@@ -69,22 +69,22 @@ extension VPrimaryButtonDemoView {
         })
     }
 
-    private var vPrimaryButtons: some View {
+    private var buttons: some View {
         VStack(content: {
             RowView(
-                title: "Compact",
+                type: .titled("Compact"),
                 content: {
                     VPrimaryButton(state: compactButtonState, type: .compact, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle)
                 }
             )
             
             RowView(
-                title: "Fixed",
+                type: .titled("Fixed"),
                 content: { VPrimaryButton(state: fixedButtonState, type: .fixed, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
             )
             
             RowView(
-                title: "Flexible",
+                type: .titled("Flexible"),
                 content: { VPrimaryButton(state: flexibleButtonState, type: .flexible, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
             )
         })

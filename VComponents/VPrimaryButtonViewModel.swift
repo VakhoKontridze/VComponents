@@ -90,7 +90,6 @@ extension VPrimaryButtonViewModel {
     }
     
     public struct StateColors {
-        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color

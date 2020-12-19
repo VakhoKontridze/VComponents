@@ -21,6 +21,7 @@ extension ComponentsNavigationView {
                 NavigationLink(VPrimaryButtonDemoView.sceneTitle, destination: VPrimaryButtonDemoView())
                 NavigationLink(VPlainButtonDemoView.sceneTitle, destination: VPlainButtonDemoView())
                 NavigationLink(VCircularButtonDemoView.sceneTitle, destination: VCircularButtonDemoView())
+                NavigationLink(VToggleDemoView.sceneTitle, destination: VToggleDemoView())
                 NavigationLink(VSliderDemoView.sceneTitle, destination: VSliderDemoView())
                 NavigationLink(VSpinnerDemoView.sceneTitle, destination: VSpinnerDemoView())
             })

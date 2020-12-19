@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Slider Type
-public enum VSliderType {
+public enum VSliderType: Int {
     case rounded
     case thin
 }

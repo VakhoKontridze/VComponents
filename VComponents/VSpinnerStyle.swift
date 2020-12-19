@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Spinner Type
-public enum VSpinnerType: CaseIterable {
+public enum VSpinnerType: Int, CaseIterable {
     case dashed
     case continous
 }

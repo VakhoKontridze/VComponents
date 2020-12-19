@@ -8,11 +8,11 @@
 import Foundation
 
 // MARK:- V Slider State
-public enum VSliderState: CaseIterable {
+public enum VSliderState: Int, CaseIterable {
     case enabled
     case disabled
     
-    var shouldBeEnabled: Bool {
+    var isEnabled: Bool {
         switch self {
         case .enabled: return true
         case .disabled: return false

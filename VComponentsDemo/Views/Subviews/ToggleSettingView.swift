@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VComponents
 
 // MARK:- Toggle Setting View
 struct ToggleSettingView: View {
@@ -24,8 +25,7 @@ struct ToggleSettingView: View {
 extension ToggleSettingView {
     var body: some View {
         VStack(content: {
-            Toggle("",isOn: $isOn)
-                .labelsHidden()
+            VToggle(isOn: $isOn, state: .enabled, viewModel: .init())
                 
             Text(title)
                 .font(.system(size: 12))

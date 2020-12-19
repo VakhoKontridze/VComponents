@@ -30,13 +30,13 @@ extension VCircularButtonDemoView {
             controller
             
             VLazyListView(viewModel: .init(), content: {
-                vRoundedButtons
+                buttons
             })
         })
     }
     
     private var controller: some View {
-        RowView(title: nil, content: {
+        RowView(type: .controller, content: {
             HStack(content: {
                 ToggleSettingView(
                     isOn: .init(
@@ -49,10 +49,10 @@ extension VCircularButtonDemoView {
         })
     }
     
-    private var vRoundedButtons: some View {
+    private var buttons: some View {
         VStack(content: {
             RowView(
-                title: nil,
+                type: .untitled,
                 content: { VCircularButton(state: buttonState, viewModel: .init(), action: { print("Pressed") }, content: buttonContent) }
             )
         })

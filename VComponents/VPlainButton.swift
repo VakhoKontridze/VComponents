@@ -32,8 +32,8 @@ public struct VPlainButton<Content>: View where Content: View {
     }
 }
 
-extension VPlainButton where Content == Text {
-    public init<S>(
+public extension VPlainButton where Content == Text {
+    init<S>(
         state: VPlainButtonState,
         viewModel: VPlainButtonViewModel,
         action: @escaping () -> Void,
@@ -41,10 +41,12 @@ extension VPlainButton where Content == Text {
     )
         where S: StringProtocol
     {
-        self.state = state
-        self.viewModel = viewModel
-        self.action = action
-        self.content = { Text(title) }
+        self.init(
+            state: state,
+            viewModel: viewModel,
+            action: action,
+            content: { Text(title) }
+        )
     }
 }
 
@@ -52,7 +54,7 @@ extension VPlainButton where Content == Text {
 public extension VPlainButton {
     var body: some View {
         Button(action: action, label: content)
-            .disabled(!state.shouldBeEnabled)
+            .disabled(!state.isEnabled)
             .buttonStyle(VPlainButtonStyle(state: state, viewModel: viewModel))
     }
 }

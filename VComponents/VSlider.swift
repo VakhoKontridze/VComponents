@@ -120,13 +120,13 @@ public extension VSlider {
     
     private var thinSlider: some View {
         Slider(value: $value, in: min...max, onEditingChanged: { action?($0) })
-            .disabled(!state.shouldBeEnabled)
+            .disabled(!state.isEnabled)
             .accentColor(viewModel.colors.thin.slider)
     }
     
     private func thinSteppedSlider(step: Double) -> some View {
         Slider(value: $value, in: min...max, step: step, onEditingChanged: { action?($0) })
-            .disabled(!state.shouldBeEnabled)
+            .disabled(!state.isEnabled)
             .accentColor(viewModel.colors.thin.slider)
     }
 }

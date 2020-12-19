@@ -167,7 +167,6 @@ extension VSliderViewModel {
     }
     
     public struct StateColors {
-        // MARK: Properties
         public let enabled: Color
         public let disabled: Color
     }

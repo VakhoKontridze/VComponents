@@ -82,7 +82,7 @@ private enum VPrimaryButtonActualState {
 
 private extension VPrimaryButtonStyle {
     func actualState(configuration: Configuration) -> VPrimaryButtonActualState {
-        if configuration.isPressed && state.shouldBeEnabled {
+        if configuration.isPressed && state.isEnabled {
             return .pressed
         } else {
             switch state {

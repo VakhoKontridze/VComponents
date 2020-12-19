@@ -45,11 +45,13 @@ extension VPrimaryButton where Content == Text {
     )
         where S: StringProtocol
     {
-        self.state = state
-        self.buttonType = type
-        self.viewModel = viewModel
-        self.action = action
-        self.content = { Text(title) }
+        self.init(
+            state: state,
+            type: type,
+            viewModel: viewModel,
+            action: action,
+            content: { Text(title) }
+        )
     }
 }
 
@@ -57,7 +59,7 @@ extension VPrimaryButton where Content == Text {
 public extension VPrimaryButton {
     var body: some View {
         Button(action: action, label: content)
-            .disabled(!state.shouldBeEnabled)
+            .disabled(!state.isEnabled)
             .buttonStyle(VPrimaryButtonStyle(state: state, type: buttonType, viewModel: viewModel))
     }
 }

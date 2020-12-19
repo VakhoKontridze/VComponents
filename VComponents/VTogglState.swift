@@ -1,5 +1,5 @@
 //
-//  VCircularButtonState.swift
+//  VTogglState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK:- V Circular Button State
-public enum VCircularButtonState: Int, CaseIterable {
+// MARK:- V Toggle State
+public enum VToggleState: Int, CaseIterable {
     case enabled
     case disabled
     
