@@ -17,13 +17,9 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        ScrollView(content: {
-            LazyVStack(content: {
-                ForEach(VSpinnerType.allCases, id: \.self, content: { type in
-                    RowView(title: type.description, titleColor: .white, content: {
-                        VSpinner(type: type, viewModel: .init())
-                    })
-                })
+        VLazyListView(viewModel: .init(), data: VSpinnerType.allCases, id: \.self, rowContent: { type in
+            RowView(title: type.description, titleColor: .white, content: {
+                VSpinner(type: type, viewModel: .init())
             })
         })
             .navigationTitle(Self.sceneTitle)

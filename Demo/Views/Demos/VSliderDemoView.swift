@@ -26,12 +26,10 @@ struct VSliderDemoView: View {
 // MARK:- Body
 extension VSliderDemoView {
     var body: some View {
-        ScrollView(content: {
-            LazyVStack(content: {
-                roundedSliders
-                roundedSlidersAnimation
-                thinSliders
-            })
+        VLazyListView(viewModel: .init(), content: {
+            roundedSliders
+            roundedSlidersAnimation
+            thinSliders
         })
             .navigationTitle(Self.sceneTitle)
     }

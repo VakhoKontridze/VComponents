@@ -26,11 +26,9 @@ struct VCircularButtonDemoView: View {
 // MARK:- Body
 extension VCircularButtonDemoView {
     var body: some View {
-        ScrollView(content: {
-            LazyVStack(content: {
-                controller
-                vRoundedButtons
-            })
+        VLazyListView(viewModel: .init(), content: {
+            controller
+            vRoundedButtons
         })
             .navigationTitle(Self.sceneTitle)
     }

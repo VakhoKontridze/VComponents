@@ -23,11 +23,9 @@ struct VButtonDemoView: View {
 // MARK:- Body
 extension VButtonDemoView {
     var body: some View {
-        ScrollView(content: {
-            LazyVStack(content: {
-                controller
-                vButtons
-            })
+        VLazyListView(viewModel: .init(), content: {
+            controller
+            vButtons
         })
             .navigationTitle(Self.sceneTitle)
     }
