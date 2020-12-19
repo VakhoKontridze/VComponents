@@ -20,6 +20,7 @@ extension ComponentsNavigationView {
             List(content: {
                 NavigationLink(VButtonDemoView.sceneTitle, destination: VButtonDemoView())
                 NavigationLink(VCircularButtonDemoView.sceneTitle, destination: VCircularButtonDemoView())
+                NavigationLink(VSliderDemoView.sceneTitle, destination: VSliderDemoView())
                 NavigationLink(VSpinnerDemoView.sceneTitle, destination: VSpinnerDemoView())
             })
                 .navigationTitle(Self.sceneTitle)

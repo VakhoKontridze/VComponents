@@ -60,18 +60,10 @@ extension VButtonViewModel {
 
 // MARK:- Colors
 extension VButtonViewModel {
-    // MARK: Properties
     public struct Colors {
         // MARK: Properties
         public let foreground: StateColors
         public let background: StateColors
-        
-        public struct StateColors {
-            public let enabled: Color
-            public let pressed: Color
-            public let disabled: Color
-            public let loading: Color
-        }
         
         // MARK: Initializers
         public init(foreground: StateColors, background: StateColors) {
@@ -95,6 +87,14 @@ extension VButtonViewModel {
                 )
             )
         }
+    }
+    
+    public struct StateColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let pressed: Color
+        public let disabled: Color
+        public let loading: Color
     }
 }
 
