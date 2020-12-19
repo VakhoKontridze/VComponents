@@ -1,6 +1,6 @@
 //
 //  View.swift
-//  Demo
+//  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
 //

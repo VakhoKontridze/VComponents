@@ -66,9 +66,9 @@
 		7A8A96E5258DDA9200309886 /* VComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8A96E8258DDA9200309886 /* VComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VComponents.h; sourceTree = "<group>"; };
 		7A8A96E9258DDA9200309886 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7A8A96F9258DDC7800309886 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7A8A96FB258DDC7800309886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7A8A96FD258DDC7800309886 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		7A8A96F9258DDC7800309886 /* VComponentsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VComponentsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A8A96FB258DDC7800309886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = "App Controls/AppDelegate.swift"; sourceTree = "<group>"; };
+		7A8A96FD258DDC7800309886 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SceneDelegate.swift; path = "App Controls/SceneDelegate.swift"; sourceTree = "<group>"; };
 		7A8A96FF258DDC7800309886 /* ComponentsNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsNavigationView.swift; sourceTree = "<group>"; };
 		7A8A9701258DDC7A00309886 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A8A9704258DDC7A00309886 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -164,7 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				7A8A96E7258DDA9200309886 /* VComponents */,
-				7A8A96FA258DDC7800309886 /* Demo */,
+				7A8A96FA258DDC7800309886 /* VComponentsDemo */,
 				7A8A96E6258DDA9200309886 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -173,7 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				7A8A96E5258DDA9200309886 /* VComponents.framework */,
-				7A8A96F9258DDC7800309886 /* Demo.app */,
+				7A8A96F9258DDC7800309886 /* VComponentsDemo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -209,17 +209,17 @@
 			name = Components;
 			sourceTree = "<group>";
 		};
-		7A8A96FA258DDC7800309886 /* Demo */ = {
+		7A8A96FA258DDC7800309886 /* VComponentsDemo */ = {
 			isa = PBXGroup;
 			children = (
 				7A8A9717258DDCC700309886 /* App Info */,
-				7A8A9713258DDCB900309886 /* App Controls */,
+				7A8A9713258DDCB900309886 /* App Control */,
 				7A8A9718258DDCD300309886 /* Views */,
 				7A3C1541258DE65700CE1D96 /* Extensions */,
 				7A8A9716258DDCBF00309886 /* Resources */,
 				7A8A9703258DDC7A00309886 /* Preview Content */,
 			);
-			path = Demo;
+			path = VComponentsDemo;
 			sourceTree = "<group>";
 		};
 		7A8A9703258DDC7A00309886 /* Preview Content */ = {
@@ -230,13 +230,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		7A8A9713258DDCB900309886 /* App Controls */ = {
+		7A8A9713258DDCB900309886 /* App Control */ = {
 			isa = PBXGroup;
 			children = (
 				7A8A96FB258DDC7800309886 /* AppDelegate.swift */,
 				7A8A96FD258DDC7800309886 /* SceneDelegate.swift */,
 			);
-			path = "App Controls";
+			name = "App Control";
 			sourceTree = "<group>";
 		};
 		7A8A9716258DDCBF00309886 /* Resources */ = {
@@ -354,9 +354,9 @@
 			productReference = 7A8A96E5258DDA9200309886 /* VComponents.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		7A8A96F8258DDC7800309886 /* Demo */ = {
+		7A8A96F8258DDC7800309886 /* VComponentsDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7A8A970C258DDC7A00309886 /* Build configuration list for PBXNativeTarget "Demo" */;
+			buildConfigurationList = 7A8A970C258DDC7A00309886 /* Build configuration list for PBXNativeTarget "VComponentsDemo" */;
 			buildPhases = (
 				7A8A96F5258DDC7800309886 /* Sources */,
 				7A8A96F6258DDC7800309886 /* Frameworks */,
@@ -366,9 +366,9 @@
 			);
 			dependencies = (
 			);
-			name = Demo;
+			name = VComponentsDemo;
 			productName = Demo;
-			productReference = 7A8A96F9258DDC7800309886 /* Demo.app */;
+			productReference = 7A8A96F9258DDC7800309886 /* VComponentsDemo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -403,7 +403,7 @@
 			projectRoot = "";
 			targets = (
 				7A8A96E4258DDA9200309886 /* VComponents */,
-				7A8A96F8258DDC7800309886 /* Demo */,
+				7A8A96F8258DDC7800309886 /* VComponentsDemo */,
 			);
 		};
 /* End PBXProject section */
@@ -666,15 +666,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Demo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"VComponentsDemo/Preview Content\"";
 				DEVELOPMENT_TEAM = XRWP42VX24;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Demo/Info.plist;
+				INFOPLIST_FILE = VComponentsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vakhtang-kontridze.Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vakhtang-kontridze.VComponentsDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -687,15 +687,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_ASSET_PATHS = "\"Demo/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"VComponentsDemo/Preview Content\"";
 				DEVELOPMENT_TEAM = XRWP42VX24;
 				ENABLE_PREVIEWS = YES;
-				INFOPLIST_FILE = Demo/Info.plist;
+				INFOPLIST_FILE = VComponentsDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vakhtang-kontridze.Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.vakhtang-kontridze.VComponentsDemo";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -723,7 +723,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7A8A970C258DDC7A00309886 /* Build configuration list for PBXNativeTarget "Demo" */ = {
+		7A8A970C258DDC7A00309886 /* Build configuration list for PBXNativeTarget "VComponentsDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7A8A970A258DDC7A00309886 /* Debug */,

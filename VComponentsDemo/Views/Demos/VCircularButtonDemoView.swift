@@ -1,6 +1,6 @@
 //
 //  VCircularButtonDemoView.swift
-//  Demo
+//  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
 //
