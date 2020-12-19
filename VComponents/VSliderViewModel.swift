@@ -136,12 +136,12 @@ extension VSliderViewModel {
         public init() {
             self.init(
                 slider: .init(
-                    enabled: Color(red: 50/255, green: 130/255, blue: 230/255, opacity: 1),
-                    disabled: Color(red: 150/255, green: 190/255, blue: 240/255, opacity: 1)
+                    enabled: ColorBook.Primary.Fill.enabled,
+                    disabled: ColorBook.Primary.Fill.disabledLight
                 ),
                 track: .init(
-                    enabled: Color(red: 230/255, green: 230/255, blue: 230/255, opacity: 1),
-                    disabled: Color(red: 240/255, green: 240/255, blue: 240/255, opacity: 1)
+                    enabled: ColorBook.Gray.Fill.enabled,
+                    disabled: ColorBook.Gray.Fill.disabled
                 )
             )
         }
@@ -158,7 +158,7 @@ extension VSliderViewModel {
         
         public init() {
             self.init(
-                slider: Color(red: 50/255, green: 130/255, blue: 230/255, opacity: 1)
+                slider: ColorBook.Primary.Fill.enabled
             )
         }
     }

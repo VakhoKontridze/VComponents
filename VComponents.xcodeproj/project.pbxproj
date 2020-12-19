@@ -13,6 +13,8 @@
 		7A007329258E28B20003F0E9 /* VPlainButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007328258E28B20003F0E9 /* VPlainButtonStyle.swift */; };
 		7A00732F258E2B7D0003F0E9 /* VPlainButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */; };
 		7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00733E258E2F000003F0E9 /* VSliderState.swift */; };
+		7A007352258E38E40003F0E9 /* FontBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007351258E38E40003F0E9 /* FontBook.swift */; };
+		7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007357258E38E90003F0E9 /* ColorBook.swift */; };
 		7A3C1543258DE65F00CE1D96 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1542258DE65F00CE1D96 /* View.swift */; };
 		7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */; };
 		7A3C1555258DE7B900CE1D96 /* VSpinnerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */; };
@@ -56,6 +58,8 @@
 		7A007328258E28B20003F0E9 /* VPlainButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonStyle.swift; sourceTree = "<group>"; };
 		7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonDemoView.swift; sourceTree = "<group>"; };
 		7A00733E258E2F000003F0E9 /* VSliderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderState.swift; sourceTree = "<group>"; };
+		7A007351258E38E40003F0E9 /* FontBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBook.swift; sourceTree = "<group>"; };
+		7A007357258E38E90003F0E9 /* ColorBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBook.swift; sourceTree = "<group>"; };
 		7A3C1542258DE65F00CE1D96 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
 		7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerStyle.swift; sourceTree = "<group>"; };
@@ -162,6 +166,15 @@
 			name = Rounded;
 			sourceTree = "<group>";
 		};
+		7A007350258E38D30003F0E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7A007357258E38E90003F0E9 /* ColorBook.swift */,
+				7A007351258E38E40003F0E9 /* FontBook.swift */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		7A3C1541258DE65700CE1D96 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +253,7 @@
 				7A8A96F1258DDA9E00309886 /* Framework Info */,
 				7A8A96F3258DDB0800309886 /* Components */,
 				7A3C1582258DFF4B00CE1D96 /* Containers */,
+				7A007350258E38D30003F0E9 /* Resources */,
 				7A8A971D258DDD7900309886 /* Extensions */,
 			);
 			path = VComponents;
@@ -500,7 +514,9 @@
 				7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */,
 				7A8A972A258DDDA800309886 /* VPrimaryButtonType.swift in Sources */,
 				7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */,
+				7A007352258E38E40003F0E9 /* FontBook.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
+				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
 				7A3C156B258DED7C00CE1D96 /* VSliderType.swift in Sources */,
 				7A8A9729258DDDA800309886 /* VPrimaryButton.swift in Sources */,
 				7A3C159B258E0A3D00CE1D96 /* VLazyListViewModel.swift in Sources */,

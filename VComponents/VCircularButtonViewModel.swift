@@ -65,16 +65,14 @@ extension VCircularButtonViewModel {
         public init() {
             self.init(
                 foreground: .init(
-                    enabled: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1),
-                    pressed: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1),
-                    disabled: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 0.5),
-                    loading: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 0.5)
+                    enabled: ColorBook.White.Text.enabled,
+                    pressed: ColorBook.White.Text.pressed,
+                    disabled: ColorBook.White.Text.disabled
                 ),
                 background: .init(
-                    enabled: Color(red: 50/255, green: 130/255, blue: 230/255, opacity: 1),
-                    pressed: Color(red: 30/255, green: 90/255, blue: 160/255, opacity: 1),
-                    disabled: Color(red: 130/255, green: 180/255, blue: 240/255, opacity: 1),
-                    loading: Color(red: 130/255, green: 180/255, blue: 240/255, opacity: 1)
+                    enabled: ColorBook.Primary.Fill.enabled,
+                    pressed: ColorBook.Primary.Fill.pressed,
+                    disabled: ColorBook.Primary.Fill.disabledDark
                 )
             )
         }
@@ -85,7 +83,6 @@ extension VCircularButtonViewModel {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
-        public let loading: Color
     }
 }
 
@@ -102,7 +99,7 @@ extension VCircularButtonViewModel {
         
         public init() {
             self.init(
-                title: .system(size: 12, weight: .semibold, design: .default)
+                title: FontBook.buttonSmall
             )
         }
     }

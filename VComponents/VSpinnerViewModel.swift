@@ -65,7 +65,7 @@ extension VSpinnerViewModel {
         
         public init() {
             self.init(
-                spinner: Color(red: 255/255, green: 255/255, blue: 255/255, opacity: 1)
+                spinner: ColorBook.White.Text.enabled
             )
         }
     }

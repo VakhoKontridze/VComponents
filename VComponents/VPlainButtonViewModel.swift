@@ -66,9 +66,9 @@ extension VPlainButtonViewModel {
         public init() {
             self.init(
                 foreground: .init(
-                    enabled: Color(red: 10/255, green: 120/255, blue: 255/255, opacity: 1),
-                    pressed: Color(red: 110/255, green: 160/255, blue: 250/255, opacity: 1),
-                    disabled: Color(red: 130/255, green: 180/255, blue: 240/255, opacity: 1)
+                    enabled: ColorBook.Primary.Text.enabled,
+                    pressed: ColorBook.Primary.Text.pressed,
+                    disabled: ColorBook.Primary.Text.disabled
                 )
             )
         }
@@ -95,7 +95,7 @@ extension VPlainButtonViewModel {
         
         public init() {
             self.init(
-                title: .system(size: 14, weight: .semibold, design: .default)
+                title: FontBook.buttonLarge
             )
         }
     }
