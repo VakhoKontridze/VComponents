@@ -39,9 +39,11 @@ extension RowView {
                         .font(.footnote)
                 }
             })
-                .padding()
+                .padding(10)
+                .padding(.top, 10)
             
             Divider()
+                .padding(.horizontal, 10)
         })
             .id(UUID())
     }

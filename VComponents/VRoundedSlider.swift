@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Rounded Slider
 struct VRoundedSlider: View {
     // MARK: Properties
+    private let state: VSliderState
+    
     @Binding private var value: Double
     private let min, max: Double
     private let step: Double?
@@ -20,12 +22,14 @@ struct VRoundedSlider: View {
     
     // MARK: Initializers
     init(
+        state: VSliderState,
         value: Binding<Double>,
         min: Double, max: Double,
         step: Double?,
         viewModel: VSliderViewModel,
         onChange action: ((Bool) -> Void)?
     ) {
+        self.state = state
         self._value = value
         self.min = min
         self.max = max
@@ -43,6 +47,8 @@ extension VRoundedSlider {
                 track
                 progress(proxy: proxy)
             }
+                .disabled(!state.shouldBeEnabled)
+            
                 .frame(height: viewModel.layout.rounded.height)
             
                 .mask(Capsule())
@@ -57,7 +63,7 @@ extension VRoundedSlider {
 
     private var track: some View {
         Rectangle()
-            .foregroundColor(viewModel.colors.rounded.track)
+            .foregroundColor(VSliderViewModel.Colors.track(state: state, vm: viewModel))
     }
 
     private func progress(proxy: GeometryProxy) -> some View {
@@ -70,7 +76,7 @@ extension VRoundedSlider {
                 return (value / range) * width
             }())
 
-            .foregroundColor(viewModel.colors.rounded.slider)
+            .foregroundColor(VSliderViewModel.Colors.slider(state: state, vm: viewModel))
     }
 }
 
@@ -124,7 +130,24 @@ struct VRoundedSlider_Previews: PreviewProvider {
     @State private static var value: Double = 0.5
     
     static var previews: some View {
-        VRoundedSlider(value: $value, min: 0, max: 1, step: 0.1, viewModel: .init(), onChange: nil)
+        VRoundedSlider(state: .enabled, value: $value, min: 0, max: 1, step: 0.1, viewModel: .init(), onChange: nil)
             .padding()
+    }
+}
+
+// MARK:- ViewModel Mapping
+private extension VSliderViewModel.Colors {
+    static func slider(state: VSliderState, vm: VSliderViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.rounded.slider.enabled
+        case .disabled: return vm.colors.rounded.slider.disabled
+        }
+    }
+    
+    static func track(state: VSliderState, vm: VSliderViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.rounded.track.enabled
+        case .disabled: return vm.colors.rounded.track.disabled
+        }
     }
 }

@@ -21,11 +21,13 @@ struct VPlainButtonDemoView: View {
 // MARK:- Body
 extension VPlainButtonDemoView {
     var body: some View {
-        VLazyListView(viewModel: .init(), content: {
+        VStack(content: {
             controller
-            vPlainButtons
+            
+            VLazyListView(viewModel: .init(), content: {
+                vPlainButtons
+            })
         })
-            .navigationTitle(Self.sceneTitle)
     }
     
     private var controller: some View {

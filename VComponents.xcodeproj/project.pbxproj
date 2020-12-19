@@ -12,6 +12,7 @@
 		7A007323258E27C40003F0E9 /* VPlainButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007322258E27C40003F0E9 /* VPlainButtonViewModel.swift */; };
 		7A007329258E28B20003F0E9 /* VPlainButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007328258E28B20003F0E9 /* VPlainButtonStyle.swift */; };
 		7A00732F258E2B7D0003F0E9 /* VPlainButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */; };
+		7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00733E258E2F000003F0E9 /* VSliderState.swift */; };
 		7A3C1543258DE65F00CE1D96 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1542258DE65F00CE1D96 /* View.swift */; };
 		7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */; };
 		7A3C1555258DE7B900CE1D96 /* VSpinnerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */; };
@@ -54,6 +55,7 @@
 		7A007322258E27C40003F0E9 /* VPlainButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonViewModel.swift; sourceTree = "<group>"; };
 		7A007328258E28B20003F0E9 /* VPlainButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonStyle.swift; sourceTree = "<group>"; };
 		7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonDemoView.swift; sourceTree = "<group>"; };
+		7A00733E258E2F000003F0E9 /* VSliderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderState.swift; sourceTree = "<group>"; };
 		7A3C1542258DE65F00CE1D96 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
 		7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerStyle.swift; sourceTree = "<group>"; };
@@ -123,6 +125,43 @@
 			name = VPlainButton;
 			sourceTree = "<group>";
 		};
+		7A007348258E30900003F0E9 /* Continous */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C1554258DE7B900CE1D96 /* VContinousSpinner.swift */,
+			);
+			name = Continous;
+			sourceTree = "<group>";
+		};
+		7A007349258E30960003F0E9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C1552258DE7B900CE1D96 /* VSpinner.swift */,
+				7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */,
+				7A3C1553258DE7B900CE1D96 /* VSpinnerViewModel.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		7A00734A258E309F0003F0E9 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C1564258DECF400CE1D96 /* VSlider.swift */,
+				7A00733E258E2F000003F0E9 /* VSliderState.swift */,
+				7A3C156A258DED7C00CE1D96 /* VSliderType.swift */,
+				7A3C1570258DF24800CE1D96 /* VSliderViewModel.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		7A00734B258E30A50003F0E9 /* Rounded */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C1574258DF51000CE1D96 /* VRoundedSlider.swift */,
+			);
+			name = Rounded;
+			sourceTree = "<group>";
+		};
 		7A3C1541258DE65700CE1D96 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,10 +173,8 @@
 		7A3C1550258DE7AC00CE1D96 /* VSpinner */ = {
 			isa = PBXGroup;
 			children = (
-				7A3C1552258DE7B900CE1D96 /* VSpinner.swift */,
-				7A3C1554258DE7B900CE1D96 /* VContinousSpinner.swift */,
-				7A3C1551258DE7B900CE1D96 /* VSpinnerStyle.swift */,
-				7A3C1553258DE7B900CE1D96 /* VSpinnerViewModel.swift */,
+				7A007349258E30960003F0E9 /* Common */,
+				7A007348258E30900003F0E9 /* Continous */,
 			);
 			name = VSpinner;
 			sourceTree = "<group>";
@@ -145,10 +182,8 @@
 		7A3C1563258DECEA00CE1D96 /* VSlider */ = {
 			isa = PBXGroup;
 			children = (
-				7A3C1564258DECF400CE1D96 /* VSlider.swift */,
-				7A3C1574258DF51000CE1D96 /* VRoundedSlider.swift */,
-				7A3C156A258DED7C00CE1D96 /* VSliderType.swift */,
-				7A3C1570258DF24800CE1D96 /* VSliderViewModel.swift */,
+				7A00734A258E309F0003F0E9 /* Common */,
+				7A00734B258E30A50003F0E9 /* Rounded */,
 			);
 			name = VSlider;
 			sourceTree = "<group>";
@@ -456,6 +491,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */,
 				7A3C1555258DE7B900CE1D96 /* VSpinnerStyle.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
 				7A48FDC9258DE48E00AA4D4D /* VCircularButtonViewModel.swift in Sources */,

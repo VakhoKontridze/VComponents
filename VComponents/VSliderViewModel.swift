@@ -124,19 +124,25 @@ extension VSliderViewModel {
     
     public struct RoundedSliderColors {
         // MARK: Properties
-        public let slider: Color
-        public let track: Color
+        public let slider: StateColors
+        public let track: StateColors
         
         // MARK: Initializers
-        public init(slider: Color, track: Color) {
+        public init(slider: StateColors, track: StateColors) {
             self.track = track
             self.slider = slider
         }
         
         public init() {
             self.init(
-                slider: Color(red: 50/255, green: 130/255, blue: 230/255, opacity: 1),
-                track: Color(red: 230/255, green: 230/255, blue: 230/255, opacity: 1)
+                slider: .init(
+                    enabled: Color(red: 50/255, green: 130/255, blue: 230/255, opacity: 1),
+                    disabled: Color(red: 150/255, green: 190/255, blue: 240/255, opacity: 1)
+                ),
+                track: .init(
+                    enabled: Color(red: 230/255, green: 230/255, blue: 230/255, opacity: 1),
+                    disabled: Color(red: 240/255, green: 240/255, blue: 240/255, opacity: 1)
+                )
             )
         }
     }
@@ -155,5 +161,11 @@ extension VSliderViewModel {
                 slider: Color(red: 50/255, green: 130/255, blue: 230/255, opacity: 1)
             )
         }
+    }
+    
+    public struct StateColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let disabled: Color
     }
 }

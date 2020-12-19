@@ -13,6 +13,8 @@ struct VSliderDemoView: View {
     // MARK: Properties
     static let sceneTitle: String = "Slider"
     
+    @State private var sliderState: VSliderState = .enabled
+    
     @State private var roundedSliderValue: Double = 0.5
     @State private var roundedSliderSteppedValue: Double = 0.5
     
@@ -26,24 +28,41 @@ struct VSliderDemoView: View {
 // MARK:- Body
 extension VSliderDemoView {
     var body: some View {
-        VLazyListView(viewModel: .init(), content: {
-            roundedSliders
-            roundedSlidersAnimation
-            thinSliders
+        VStack(content: {
+            controller
+            
+            VLazyListView(viewModel: .init(), content: {
+                roundedSliders
+                roundedSlidersAnimation
+                thinSliders
+            })
         })
-            .navigationTitle(Self.sceneTitle)
+    }
+    
+    private var controller: some View {
+        RowView(title: nil, content: {
+            HStack(content: {
+                ToggleSettingView(
+                    isOn: .init(
+                        get: { sliderState == .disabled },
+                        set: { sliderState = $0 ? .disabled : .enabled }
+                    ),
+                    title: "Disabled"
+                )
+            })
+        })
     }
     
     private var roundedSliders: some View {
         VStack(content: {
             RowView(
                 title: "Rounded",
-                content: { VSlider(value: $roundedSliderValue, type: .rounded, viewModel: .init(), onChange: nil) }
+                content: { VSlider(state: sliderState, value: $roundedSliderValue, type: .rounded, viewModel: .init(), onChange: nil) }
             )
             
             RowView(
                 title: "Rounded (Steps)",
-                content: { VSlider(value: $roundedSliderSteppedValue, step: 0.1, type: .rounded, viewModel: .init(), onChange: nil) }
+                content: { VSlider(state: sliderState, value: $roundedSliderSteppedValue, step: 0.1, type: .rounded, viewModel: .init(), onChange: nil) }
             )
         })
     }
@@ -60,12 +79,12 @@ extension VSliderDemoView {
         return VStack(content: {
             RowView(
                 title: "Rounded (Animation)",
-                content: { VSlider(value: $roundedSliderAnimationsValue, type: .rounded, viewModel: viewModel, onChange: nil) }
+                content: { VSlider(state: sliderState, value: $roundedSliderAnimationsValue, type: .rounded, viewModel: viewModel, onChange: nil) }
             )
             
             RowView(
                 title: "Rounded (Steps, Animation)",
-                content: { VSlider(value: $roundedSliderSteppedAnimationsValue, step: 0.1, type: .rounded, viewModel: viewModel, onChange: nil) }
+                content: { VSlider(state: sliderState, value: $roundedSliderSteppedAnimationsValue, step: 0.1, type: .rounded, viewModel: viewModel, onChange: nil) }
             )
         })
     }
@@ -74,12 +93,12 @@ extension VSliderDemoView {
         VStack(content: {
             RowView(
                 title: "Thin",
-                content: { VSlider(value: $thinSliderValue, type: .thin, viewModel: .init(), onChange: nil) }
+                content: { VSlider(state: sliderState, value: $thinSliderValue, type: .thin, viewModel: .init(), onChange: nil) }
             )
             
             RowView(
                 title: "Thin (Steps)",
-                content: { VSlider(value: $thinSliderSteppedValue, step: 0.1, type: .thin, viewModel: .init(), onChange: nil) }
+                content: { VSlider(state: sliderState, value: $thinSliderSteppedValue, step: 0.1, type: .thin, viewModel: .init(), onChange: nil) }
             )
         })
     }

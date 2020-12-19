@@ -23,9 +23,12 @@ struct VPrimaryButtonDemoView: View {
 // MARK:- Body
 extension VPrimaryButtonDemoView {
     var body: some View {
-        VLazyListView(viewModel: .init(), content: {
+        VStack(content: {
             controller
-            vPrimaryButtons
+            
+            VLazyListView(viewModel: .init(), content: {
+                vPrimaryButtons
+            })
         })
             .navigationTitle(Self.sceneTitle)
     }
