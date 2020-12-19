@@ -86,15 +86,18 @@ extension VSliderViewModel {
     public struct RoundedSliderLayout {
         // MARK: Properties
         public let height: CGFloat
+        public let cornerRadius: CGFloat
         
         // MARK: Initializers
-        public init(height: CGFloat) {
+        public init(height: CGFloat, cornerRadius: CGFloat) {
             self.height = height
+            self.cornerRadius = cornerRadius
         }
         
         public init() {
             self.init(
-                height: 10
+                height: 10,
+                cornerRadius: 5
             )
         }
     }

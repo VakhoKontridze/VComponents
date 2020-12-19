@@ -18,6 +18,8 @@ struct VSliderDemoView: View {
     @State private var roundedSliderValue: Double = 0.5
     @State private var roundedSliderSteppedValue: Double = 0.5
     
+    @State private var roundedRectangularSliderValue: Double = 0.5
+    
     @State private var roundedSliderAnimationsValue: Double = 0.5
     @State private var roundedSliderSteppedAnimationsValue: Double = 0.5
     
@@ -34,6 +36,7 @@ extension VSliderDemoView {
             VLazyListView(viewModel: .init(), content: {
                 roundedSliders
                 roundedSlidersAnimation
+                roundedRectangularSliders
                 thinSliders
             })
         })
@@ -63,6 +66,26 @@ extension VSliderDemoView {
             RowView(
                 title: "Rounded (Steps)",
                 content: { VSlider(state: sliderState, value: $roundedSliderSteppedValue, step: 0.1, type: .rounded, viewModel: .init(), onChange: nil) }
+            )
+        })
+    }
+    
+    private var roundedRectangularSliders: some View {
+        let viewModel: VSliderViewModel = .init(
+            behavior: .init(),
+            layout: .init(
+                rounded: .init(
+                    height: 30,
+                    cornerRadius: 10
+                )
+            ),
+            colors: .init()
+        )
+        
+        return VStack(content: {
+            RowView(
+                title: "Rounded (Smaller Corner Radius)",
+                content: { VSlider(state: sliderState, value: $roundedRectangularSliderValue, type: .rounded, viewModel: viewModel, onChange: nil) }
             )
         })
     }

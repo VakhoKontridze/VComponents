@@ -47,18 +47,16 @@ extension VRoundedSlider {
                 track
                 progress(proxy: proxy)
             }
-                .disabled(!state.shouldBeEnabled)
-            
-                .frame(height: viewModel.layout.rounded.height)
-            
-                .mask(Capsule())
-
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged({ dragChanged($0, in: proxy) })
                         .onEnded(dragEnded)
                 )
         })
+            .disabled(!state.shouldBeEnabled)
+        
+            .frame(height: viewModel.layout.rounded.height)
+            .mask(RoundedRectangle(cornerRadius: viewModel.layout.rounded.cornerRadius))
     }
 
     private var track: some View {
