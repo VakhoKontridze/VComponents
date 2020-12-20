@@ -15,18 +15,10 @@ public struct VPrimaryButtonViewModel {
     public let fonts: Fonts
     
     // MARK: Initializers
-    public init(layout: Layout, colors: Colors, fonts: Fonts) {
+    public init(layout: Layout = .init(), colors: Colors = .init(), fonts: Fonts = .init()) {
         self.layout = layout
         self.colors = colors
         self.fonts = fonts
-    }
-    
-    public init() {
-        self.init(
-            layout: .init(),
-            colors: .init(),
-            fonts: .init()
-        )
     }
 }
 
@@ -38,16 +30,9 @@ extension VPrimaryButtonViewModel {
         public let fixed: Fixed
         
         // MARK: Initializers
-        public init(common: Common, fixed: Fixed) {
+        public init(common: Common = .init(), fixed: Fixed = .init()) {
             self.common = common
             self.fixed = fixed
-        }
-        
-        public init() {
-            self.init(
-                common: .init(),
-                fixed: .init()
-            )
         }
     }
     
@@ -97,38 +82,19 @@ extension VPrimaryButtonViewModel {
 extension VPrimaryButtonViewModel {
     public struct Colors {
         // MARK: Properties
-        public let foreground: ForegroundStateColors
-        public let background: BackgroundStateColors
+        public let foreground: ForegroundColors
+        public let background: BackgroundColors
         
         // MARK: Initializers
-        public init(foreground: ForegroundStateColors, background: BackgroundStateColors) {
+        public init(foreground: ForegroundColors = .init(), background: BackgroundColors = .init()) {
             self.foreground = foreground
             self.background = background
-        }
-        
-        public init() {
-            self.init(
-                foreground: .init(
-                    enabled: ColorBook.PrimaryButton.Text.enabled,
-                    pressed: ColorBook.PrimaryButton.Text.pressed,
-                    disabled: ColorBook.PrimaryButton.Text.disabled,
-                    loading: ColorBook.PrimaryButton.Text.loading,
-                    
-                    pressedOpacity: 0.5
-                ),
-                background: .init(
-                    enabled: ColorBook.PrimaryButton.Fill.enabled,
-                    pressed: ColorBook.PrimaryButton.Fill.pressed,
-                    disabled: ColorBook.PrimaryButton.Fill.disabled,
-                    loading: ColorBook.PrimaryButton.Fill.loading
-                )
-            )
         }
     }
 }
 
 extension VPrimaryButtonViewModel.Colors {
-    public struct ForegroundStateColors {
+    public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
@@ -145,9 +111,20 @@ extension VPrimaryButtonViewModel.Colors {
             self.loading = loading
             self.pressedOpacity = pressedOpacity
         }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.PrimaryButton.Text.enabled,
+                pressed: ColorBook.PrimaryButton.Text.pressed,
+                disabled: ColorBook.PrimaryButton.Text.disabled,
+                loading: ColorBook.PrimaryButton.Text.loading,
+                
+                pressedOpacity: 0.5
+            )
+        }
     }
     
-    public struct BackgroundStateColors {
+    public struct BackgroundColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
@@ -160,6 +137,15 @@ extension VPrimaryButtonViewModel.Colors {
             self.pressed = pressed
             self.disabled = disabled
             self.loading = loading
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.PrimaryButton.Fill.enabled,
+                pressed: ColorBook.PrimaryButton.Fill.pressed,
+                disabled: ColorBook.PrimaryButton.Fill.disabled,
+                loading: ColorBook.PrimaryButton.Fill.loading
+            )
         }
     }
 }

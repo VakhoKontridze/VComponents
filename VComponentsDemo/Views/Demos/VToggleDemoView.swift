@@ -41,7 +41,7 @@ extension VToggleDemoView {
         VStack(content: {
             controller
             
-            VLazyListView(viewModel: .init(), content: {
+            VLazyListView(content: {
                 noContentToggle
                 rightContentToggle
                 leftFlexibleContentToggle
@@ -98,11 +98,11 @@ extension VToggleDemoView {
     
     private var noLoweredOpacityDisabledContentToggle: some View {
         let viewModel: VToggleViewModel = .init(
-            behavior: .init(
-                disabledOpacity: 1
-            ),
-            layout: .init(),
-            colors: .init()
+            colors: .init(
+                content: .init(
+                    disabledOpacity: 1
+                )
+            )
         )
         
         return VStack(content: {

@@ -17,9 +17,9 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        VLazyListView(viewModel: .init(), data: VSpinnerType.allCases, id: \.self, rowContent: { type in
+        VLazyListView(data: VSpinnerType.allCases, id: \.self, rowContent: { type in
             RowView(type: .titled(type.description), titleColor: .white, content: {
-                VSpinner(type: type, viewModel: .init())
+                VSpinner(type: type)
             })
         })
             .navigationTitle(Self.sceneTitle)

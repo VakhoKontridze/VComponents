@@ -16,7 +16,7 @@ public struct VSpinner: View {
     // MARK: Initializers
     public init(
         type spinnerType: VSpinnerType,
-        viewModel: VSpinnerViewModel
+        viewModel: VSpinnerViewModel = .init()
     ) {
         self.spinnerType = spinnerType
         self.viewModel = viewModel
@@ -47,7 +47,7 @@ struct VSpinner_Previews: PreviewProvider {
     static var previews: some View {
         ZStack(content: {
             Color.blue
-            VSpinner(type: .continous, viewModel: .init())
+            VSpinner(type: .continous)
         })
             .frame(width: .infinity, height: .infinity)
             .edgesIgnoringSafeArea(.bottom)

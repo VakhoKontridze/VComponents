@@ -15,18 +15,10 @@ public struct VCircularButtonViewModel {
     public let fonts: Fonts
     
     // MARK: Initializers
-    public init(layout: Layout, colors: Colors, fonts: Fonts) {
+    public init(layout: Layout = .init(), colors: Colors = .init(), fonts: Fonts = .init()) {
         self.layout = layout
         self.colors = colors
         self.fonts = fonts
-    }
-    
-    public init() {
-        self.init(
-            layout: .init(),
-            colors: .init(),
-            fonts: .init()
-        )
     }
 }
 
@@ -37,11 +29,11 @@ extension VCircularButtonViewModel {
         public let dimension: CGFloat
         
         // MARK: Initializers
-        init(dimension: CGFloat) {
+        public init(dimension: CGFloat) {
             self.dimension = dimension
         }
         
-        init() {
+        public init() {
             self.init(
                 dimension: 44
             )
@@ -53,35 +45,19 @@ extension VCircularButtonViewModel {
 extension VCircularButtonViewModel {
     public struct Colors {
         // MARK: Properties
-        public let foreground: ForegroundStateColors
-        public let background: BackgroundStateColors
+        public let foreground: ForegroundColors
+        public let background: BackgroundColors
         
         // MARK: Initializers
-        public init(foreground: ForegroundStateColors, background: BackgroundStateColors) {
+        public init(foreground: ForegroundColors = .init(), background: BackgroundColors = .init()) {
             self.foreground = foreground
             self.background = background
-        }
-        
-        public init() {
-            self.init(
-                foreground: .init(
-                    enabled: ColorBook.CircularButton.Text.enabled,
-                    pressed: ColorBook.CircularButton.Text.pressed,
-                    disabled: ColorBook.CircularButton.Text.disabled,
-                    pressedOpacity: 0.5
-                ),
-                background: .init(
-                    enabled: ColorBook.CircularButton.Fill.enabled,
-                    pressed: ColorBook.CircularButton.Fill.pressed,
-                    disabled: ColorBook.CircularButton.Fill.disabled
-                )
-            )
         }
     }
 }
 
 extension VCircularButtonViewModel {
-    public struct ForegroundStateColors {
+    public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
@@ -96,9 +72,18 @@ extension VCircularButtonViewModel {
             self.disabled = disabled
             self.pressedOpacity = pressedOpacity
         }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.CircularButton.Text.enabled,
+                pressed: ColorBook.CircularButton.Text.pressed,
+                disabled: ColorBook.CircularButton.Text.disabled,
+                pressedOpacity: 0.5
+            )
+        }
     }
     
-    public struct BackgroundStateColors {
+    public struct BackgroundColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
@@ -109,6 +94,14 @@ extension VCircularButtonViewModel {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.CircularButton.Fill.enabled,
+                pressed: ColorBook.CircularButton.Fill.pressed,
+                disabled: ColorBook.CircularButton.Fill.disabled
+            )
         }
     }
 }

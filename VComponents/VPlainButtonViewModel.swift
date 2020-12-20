@@ -15,18 +15,10 @@ public struct VPlainButtonViewModel {
     public let fonts: Fonts
     
     // MARK: Initializers
-    public init(layout: Layout, colors: Colors, fonts: Fonts) {
+    public init(layout: Layout = .init(), colors: Colors = .init(), fonts: Fonts = .init()) {
         self.layout = layout
         self.colors = colors
         self.fonts = fonts
-    }
-    
-    public init() {
-        self.init(
-            layout: .init(),
-            colors: .init(),
-            fonts: .init()
-        )
     }
 }
 
@@ -56,28 +48,17 @@ extension VPlainButtonViewModel {
 extension VPlainButtonViewModel {
     public struct Colors {
         // MARK: Properties
-        public let foreground: StateColors
+        public let foreground: ForegroundColors
         
         // MARK: Initializers
-        public init(foreground: StateColors) {
+        public init(foreground: ForegroundColors = .init()) {
             self.foreground = foreground
-        }
-        
-        public init() {
-            self.init(
-                foreground: .init(
-                    enabled: ColorBook.PlainButton.Text.enabled,
-                    pressed: ColorBook.PlainButton.Text.pressed,
-                    disabled: ColorBook.PlainButton.Text.disabled,
-                    pressedOpacity: 0.5
-                )
-            )
         }
     }
 }
 
 extension VPlainButtonViewModel.Colors {
-    public struct StateColors {
+    public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
@@ -91,6 +72,15 @@ extension VPlainButtonViewModel.Colors {
             self.pressed = pressed
             self.disabled = disabled
             self.pressedOpacity = pressedOpacity
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.PlainButton.Text.enabled,
+                pressed: ColorBook.PlainButton.Text.pressed,
+                disabled: ColorBook.PlainButton.Text.disabled,
+                pressedOpacity: 0.5
+            )
         }
     }
 }

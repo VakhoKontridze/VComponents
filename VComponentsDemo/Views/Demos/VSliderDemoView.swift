@@ -33,7 +33,7 @@ extension VSliderDemoView {
         VStack(content: {
             controller
 
-            VLazyListView(viewModel: .init(), content: {
+            VLazyListView(content: {
                 sliders
                 steppedSliders
                 animatedSliders
@@ -91,9 +91,7 @@ extension VSliderDemoView {
         let viewModel: VSliderViewModel = .init(
             behavior: .init(
                 useAnimation: true
-            ),
-            layout: .init(),
-            colors: .init()
+            )
         )
         
         return VStack(content: {

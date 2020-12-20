@@ -123,14 +123,14 @@ public extension VToggle {
     
     private func toggleContent(from content: (() -> Content)?) -> some View {
         content?()
-            .opacity(state.isEnabled ? 1 : viewModel.behavior.disabledOpacity)
+            .opacity(VToggleViewModel.Colors.contentDisabledOpacity(state: state, vm: viewModel))
     }
 }
 
 // MARK:- Action
 private extension VToggle {
     func action() {
-        withAnimation(Animation.easeIn(duration: 0.1), { isOn.toggle() })
+        withAnimation(viewModel.behavior.animation, { isOn.toggle() })
     }
 }
 

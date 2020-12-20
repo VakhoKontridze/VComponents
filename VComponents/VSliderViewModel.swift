@@ -15,18 +15,10 @@ public struct VSliderViewModel {
     public let colors: Colors
     
     // MARK: Initializers
-    public init(behavior: Behavior, layout: Layout, colors: Colors) {
+    public init(behavior: Behavior = .init(), layout: Layout = .init(), colors: Colors = .init()) {
         self.behavior = behavior
         self.layout = layout
         self.colors = colors
-    }
-    
-    public init() {
-        self.init(
-            behavior: .init(),
-            layout: .init(),
-            colors: .init()
-        )
     }
 }
 
@@ -58,18 +50,10 @@ extension VSliderViewModel {
         public let solidThumb: SolidThumb
         
         // MARK: Initializers
-        public init(slider: Slider, thumb: Thumb, solidThumb: SolidThumb) {
+        public init(slider: Slider = .init(), thumb: Thumb = .init(), solidThumb: SolidThumb = .init()) {
             self.slider = slider
             self.thumb = thumb
             self.solidThumb = solidThumb
-        }
-        
-        public init() {
-            self.init(
-                slider: .init(),
-                thumb: .init(),
-                solidThumb: .init()
-            )
         }
     }
 }
@@ -152,18 +136,10 @@ extension VSliderViewModel {
         public let solidThumb: SolidThumb
         
         // MARK: Initializers
-        public init(common: Common, thumb: Thumb, solidThumb: SolidThumb) {
+        public init(common: Common = .init(), thumb: Thumb = .init(), solidThumb: SolidThumb = .init()) {
             self.common = common
             self.thumb = thumb
             self.solidThumb = solidThumb
-        }
-        
-        public init() {
-            self.init(
-                common: .init(),
-                thumb: .init(),
-                solidThumb: .init()
-            )
         }
     }
 }
@@ -171,86 +147,19 @@ extension VSliderViewModel {
 extension VSliderViewModel.Colors {
     public struct Common {
         // MARK: Properties
-        public let progress: StateColors
-        public let track: StateColors
+        public let progress: ProgressColors
+        public let track: TrackColors
         
         // MARK: Initializers
-        public init(progress: StateColors, track: StateColors) {
+        public init(progress: ProgressColors = .init(), track: TrackColors = .init()) {
             self.progress = progress
             self.track = track
         }
-        
-        public init() {
-            self.init(
-                progress: .init(
-                    enabled: ColorBook.Slider.Progress.enabled,
-                    disabled: ColorBook.Slider.Progress.disabled
-                ),
-                track: .init(
-                    enabled: ColorBook.Slider.Track.enabled,
-                    disabled: ColorBook.Slider.Track.disabled
-                )
-            )
-        }
     }
 }
 
-extension VSliderViewModel.Colors {
-    public struct Thumb {
-        // MARK: Properties
-        public let fill: StateColors
-        public let shadow: StateColors
-        
-        // MARK: Initializers
-        public init(fill: StateColors, shadow: StateColors) {
-            self.fill = fill
-            self.shadow = shadow
-        }
-        
-        public init() {
-            self.init(
-                fill: .init(
-                    enabled: ColorBook.Slider.Thumb.enabled,
-                    disabled: ColorBook.Slider.Thumb.disabled
-                ),
-                shadow: .init(
-                    enabled: ColorBook.Slider.Shadow.enabled,
-                    disabled: ColorBook.Slider.Shadow.disabled
-                )
-            )
-        }
-    }
-}
-
-extension VSliderViewModel.Colors {
-    public struct SolidThumb {
-        // MARK: Properties
-        public let fill: StateColors
-        public let stroke: StateColors
-        
-        // MARK: Initializers
-        public init(fill: StateColors, stroke: StateColors) {
-            self.fill = fill
-            self.stroke = stroke
-        }
-        
-        public init() {
-            self.init(
-                fill: .init(
-                    enabled: ColorBook.Slider.Thumb.enabled,
-                    disabled: ColorBook.Slider.Thumb.disabled
-                ),
-                stroke: .init(
-                    enabled: ColorBook.Slider.ThumbStroke.enabled,
-                    disabled: ColorBook.Slider.ThumbStroke.disabled
-                )
-            )
-        }
-    }
-}
-
-extension VSliderViewModel.Colors {
-    public struct StateColors {
+extension VSliderViewModel.Colors.Common {
+    public struct ProgressColors {
         // MARK: Properties
         public let enabled: Color
         public let disabled: Color
@@ -259,6 +168,140 @@ extension VSliderViewModel.Colors {
         public init(enabled: Color, disabled: Color) {
             self.enabled = enabled
             self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.Slider.Progress.enabled,
+                disabled: ColorBook.Slider.Progress.disabled
+            )
+        }
+    }
+    
+    public struct TrackColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.Slider.Track.enabled,
+                disabled: ColorBook.Slider.Track.disabled
+            )
+        }
+    }
+}
+
+extension VSliderViewModel.Colors {
+    public struct Thumb {
+        // MARK: Properties
+        public let fill: FillColors
+        public let shadow: ShadowColors
+        
+        // MARK: Initializers
+        public init(fill: FillColors = .init(), shadow: ShadowColors = .init()) {
+            self.fill = fill
+            self.shadow = shadow
+        }
+    }
+}
+
+extension VSliderViewModel.Colors.Thumb {
+    public struct FillColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.Slider.Thumb.enabled,
+                disabled: ColorBook.Slider.Thumb.disabled
+            )
+        }
+    }
+    
+    public struct ShadowColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.Slider.Shadow.enabled,
+                disabled: ColorBook.Slider.Shadow.disabled
+            )
+        }
+    }
+}
+
+extension VSliderViewModel.Colors {
+    public struct SolidThumb {
+        // MARK: Properties
+        public let fill: FillColors
+        public let stroke: StrokeColors
+        
+        // MARK: Initializers
+        public init(fill: FillColors = .init(), stroke: StrokeColors = .init()) {
+            self.fill = fill
+            self.stroke = stroke
+        }
+    }
+}
+
+extension VSliderViewModel.Colors.SolidThumb {
+    public struct FillColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.Slider.Thumb.enabled,
+                disabled: ColorBook.Slider.Thumb.disabled
+            )
+        }
+    }
+    
+    public struct StrokeColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabled: ColorBook.Slider.ThumbStroke.enabled,
+                disabled: ColorBook.Slider.ThumbStroke.disabled
+            )
         }
     }
 }

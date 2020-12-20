@@ -16,7 +16,7 @@ public struct VLazyListView<Content>: View where Content: View {
     
     // MARK: Initializers
     public init(
-        viewModel: VLazyListViewModel,
+        viewModel: VLazyListViewModel = .init(),
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.viewModel = viewModel
@@ -26,7 +26,7 @@ public struct VLazyListView<Content>: View where Content: View {
 
 public extension VLazyListView {
     init<Data, ID, RowContent>(
-        viewModel: VLazyListViewModel,
+        viewModel: VLazyListViewModel = .init(),
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -50,7 +50,7 @@ public extension VLazyListView {
 
 public extension VLazyListView {
     init<Data, ID, RowContent>(
-        viewModel: VLazyListViewModel,
+        viewModel: VLazyListViewModel = .init(),
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -94,7 +94,7 @@ public extension VLazyListView {
 struct VLazyListView_Previews: PreviewProvider {
     private static let data: [Int] = (1...100).map { $0 }
     
-    private static let horizontaVM: VLazyListViewModel = .init(
+    private static let horizontalVM: VLazyListViewModel = .init(
         scrollDirection: .horizontal(aligment: .center),
         showsIndicators: true
     )
@@ -102,11 +102,11 @@ struct VLazyListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(content: {
             HStack(content: {
-                VLazyListView(viewModel: .init(), data: data, id: \.self, rowContent: { number in
+                VLazyListView(data: data, id: \.self, rowContent: { number in
                     Text(String(number))
                 })
                 
-                VLazyListView(viewModel: .init(), content: {
+                VLazyListView(content: {
                     ForEach(data, id: \.self, content: { number in
                         Text(String(number))
                     })
@@ -114,11 +114,11 @@ struct VLazyListView_Previews: PreviewProvider {
             })
             
             HStack(content: {
-                VLazyListView(viewModel: horizontaVM, data: data, id: \.self, rowContent: { number in
+                VLazyListView(viewModel: horizontalVM, data: data, id: \.self, rowContent: { number in
                     Text(String(number))
                 })
                 
-                VLazyListView(viewModel: horizontaVM, content: {
+                VLazyListView(viewModel: horizontalVM, content: {
                     ForEach(data, id: \.self, content: { number in
                         Text(String(number))
                     })

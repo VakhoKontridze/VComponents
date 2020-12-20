@@ -63,7 +63,7 @@ extension VPrimaryButtonStyle {
     @ViewBuilder private func loaderView(actualState: VPrimaryButtonActualState) -> some View {
         if actualState == .loading {
             if buttonType != .compact { Spacer() }
-            VSpinner(type: .continous, viewModel: .init()).frame(width: viewModel.layout.common.loaderWidth, alignment: .trailing)
+            VSpinner(type: .continous).frame(width: viewModel.layout.common.loaderWidth, alignment: .trailing)
         }
     }
     

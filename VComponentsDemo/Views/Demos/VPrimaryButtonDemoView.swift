@@ -31,7 +31,7 @@ extension VPrimaryButtonDemoView {
         VStack(content: {
             controller
             
-            VLazyListView(viewModel: .init(), content: {
+            VLazyListView(content: {
                 buttonsByType
                 imageButtons
             })

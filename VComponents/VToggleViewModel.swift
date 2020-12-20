@@ -17,7 +17,7 @@ public struct VToggleViewModel {
     let plainButtonViewModel: VPlainButtonViewModel
     
     // MARK: Initializers
-    public init(behavior: Behavior, layout: Layout, colors: Colors) {
+    public init(behavior: Behavior = .init(), layout: Layout = .init(), colors: Colors = .init()) {
         self.behavior = behavior
         self.layout = layout
         self.colors = colors
@@ -34,16 +34,7 @@ public struct VToggleViewModel {
                     disabled: .clear,
                     pressedOpacity: 1
                 )
-            ),
-            fonts: .init()
-        )
-    }
-    
-    public init() {
-        self.init(
-            behavior: .init(),
-            layout: .init(),
-            colors: .init()
+            )
         )
     }
 }
@@ -52,16 +43,16 @@ public struct VToggleViewModel {
 extension VToggleViewModel {
     public struct Behavior {
         // MARK: Properties
-        public let disabledOpacity: Double
+        public let animation: Animation
         
         // MARK: Initializers
-        public init(disabledOpacity: Double) {
-            self.disabledOpacity = disabledOpacity
+        public init(animation: Animation) {
+            self.animation = animation
         }
         
         public init() {
             self.init(
-                disabledOpacity: 0.25
+                animation: Animation.easeIn(duration: 0.1)
             )
         }
     }
@@ -75,16 +66,9 @@ extension VToggleViewModel {
         public let rightContent: RightContent
         
         // MARK: Initializers
-        public init(common: Common, rightContent: RightContent) {
+        public init(common: Common = .init(), rightContent: RightContent = .init()) {
             self.common = common
             self.rightContent = rightContent
-        }
-        
-        public init() {
-            self.init(
-                common: .init(),
-                rightContent: .init()
-            )
         }
     }
     
@@ -133,34 +117,21 @@ extension VToggleViewModel {
 extension VToggleViewModel {
     public struct Colors {
         // MARK: Properties
-        public let fill: StateColors
-        public let thumb: StateColors
+        public let fill: FillColors
+        public let thumb: ThumbColors
+        public let content: ContentColors
         
         // MARK: Initializers
-        public init(fill: StateColors, thumb: StateColors) {
+        public init(fill: FillColors = .init(), thumb: ThumbColors = .init(), content: ContentColors = .init()) {
             self.fill = fill
             self.thumb = thumb
-        }
-        
-        public init() {
-            self.init(
-                fill: .init(
-                    enabledOn: ColorBook.Toggle.Fill.enabledOn,
-                    enabledOff: ColorBook.Toggle.Fill.enabledOff,
-                    disabled: ColorBook.Toggle.Fill.disabled
-                ),
-                thumb: .init(
-                    enabledOn: ColorBook.Toggle.Thumb.enabledOn,
-                    enabledOff: ColorBook.Toggle.Thumb.enabledOff,
-                    disabled: ColorBook.Toggle.Thumb.disabled
-                )
-            )
+            self.content = content
         }
     }
 }
 
 extension VToggleViewModel {
-    public struct StateColors {
+    public struct FillColors {
         // MARK: Properties
         public let enabledOn: Color
         public let enabledOff: Color
@@ -171,6 +142,52 @@ extension VToggleViewModel {
             self.enabledOn = enabledOn
             self.enabledOff = enabledOff
             self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabledOn: ColorBook.Toggle.Fill.enabledOn,
+                enabledOff: ColorBook.Toggle.Fill.enabledOff,
+                disabled: ColorBook.Toggle.Fill.disabled
+            )
+        }
+    }
+    
+    public struct ThumbColors {
+        // MARK: Properties
+        public let enabledOn: Color
+        public let enabledOff: Color
+        public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabledOn: Color, enabledOff: Color, disabled: Color) {
+            self.enabledOn = enabledOn
+            self.enabledOff = enabledOff
+            self.disabled = disabled
+        }
+        
+        public init() {
+            self.init(
+                enabledOn: ColorBook.Toggle.Thumb.enabledOn,
+                enabledOff: ColorBook.Toggle.Thumb.enabledOff,
+                disabled: ColorBook.Toggle.Thumb.disabled
+            )
+        }
+    }
+    
+    public struct ContentColors {
+        // MARK: Properties
+        public let disabledOpacity: Double
+        
+        // MARK: Initializers
+        public init(disabledOpacity: Double) {
+            self.disabledOpacity = disabledOpacity
+        }
+        
+        public init() {
+            self.init(
+                disabledOpacity: 0.5
+            )
         }
     }
 }
@@ -190,6 +207,13 @@ extension VToggleViewModel.Colors {
         case (true, .enabled): return vm.colors.thumb.enabledOn
         case (false, .enabled): return vm.colors.thumb.enabledOff
         case (_, .disabled): return vm.colors.thumb.disabled
+        }
+    }
+    
+    static func contentDisabledOpacity(state: VToggleState, vm: VToggleViewModel) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .disabled: return vm.colors.content.disabledOpacity
         }
     }
 }

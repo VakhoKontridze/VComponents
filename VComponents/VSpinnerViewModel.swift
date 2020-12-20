@@ -15,17 +15,10 @@ public struct VSpinnerViewModel {
     public let colors: Colors
     
     // MARK: Initializers
-    public init(layout: Layout, colors: Colors) {
+    public init(layout: Layout = .init(), colors: Colors = .init()) {
         self.behavior = .init()
         self.layout = layout
         self.colors = colors
-    }
-    
-    public init() {
-        self.init(
-            layout: .init(),
-            colors: .init()
-        )
     }
 }
 
