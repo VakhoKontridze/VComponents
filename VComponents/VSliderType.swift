@@ -10,6 +10,6 @@ import Foundation
 // MARK:- V Slider Type
 public enum VSliderType {
     case plain
-    case knob
-    case solidKnob
+    case thumb
+    case solidThumb
 }

@@ -113,14 +113,14 @@ extension ColorBook {
             private init() {}
         }
         
-        struct Knob {
+        struct Thumb {
             static let enabled: Color = PrimaryButton.Text.enabled
             static let disabled: Color = enabled
             
             private init() {}
         }
         
-        struct KnobStroke {
+        struct ThumbStroke {
             static let enabled: Color = .init(.s96, .s96, .s96, .o100)
             static let disabled: Color = .init(.s192, .s192, .s192, .o100)
             

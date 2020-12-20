@@ -54,21 +54,21 @@ extension VSliderViewModel {
     public struct Layout {
         // MARK: Properties
         public let slider: Slider
-        public let knob: Knob
-        public let solidKnob: SolidKnob
+        public let thumb: Thumb
+        public let solidThumb: SolidThumb
         
         // MARK: Initializers
-        public init(slider: Slider, knob: Knob, solidKnob: SolidKnob) {
+        public init(slider: Slider, thumb: Thumb, solidThumb: SolidThumb) {
             self.slider = slider
-            self.knob = knob
-            self.solidKnob = solidKnob
+            self.thumb = thumb
+            self.solidThumb = solidThumb
         }
         
         public init() {
             self.init(
                 slider: .init(),
-                knob: .init(),
-                solidKnob: .init()
+                thumb: .init(),
+                solidThumb: .init()
             )
         }
     }
@@ -96,7 +96,7 @@ extension VSliderViewModel.Layout {
 }
 
 extension VSliderViewModel.Layout {
-    public struct Knob {
+    public struct Thumb {
         // MARK: Properties
         public let dimension: CGFloat
         public let cornerRadius: CGFloat
@@ -117,7 +117,7 @@ extension VSliderViewModel.Layout {
 }
 
 extension VSliderViewModel.Layout {
-    public struct SolidKnob {
+    public struct SolidThumb {
         // MARK: Properties
         public let dimension: CGFloat
         public let cornerRadius: CGFloat
@@ -147,21 +147,21 @@ extension VSliderViewModel {
     public struct Colors {
         // MARK: Properties
         public let common: Common
-        public let knob: Knob
-        public let solidKnob: SolidKnob
+        public let thumb: Thumb
+        public let solidThumb: SolidThumb
         
         // MARK: Initializers
-        public init(common: Common, knob: Knob, solidKnob: SolidKnob) {
+        public init(common: Common, thumb: Thumb, solidThumb: SolidThumb) {
             self.common = common
-            self.knob = knob
-            self.solidKnob = solidKnob
+            self.thumb = thumb
+            self.solidThumb = solidThumb
         }
         
         public init() {
             self.init(
                 common: .init(),
-                knob: .init(),
-                solidKnob: .init()
+                thumb: .init(),
+                solidThumb: .init()
             )
         }
     }
@@ -195,7 +195,7 @@ extension VSliderViewModel.Colors {
 }
 
 extension VSliderViewModel.Colors {
-    public struct Knob {
+    public struct Thumb {
         // MARK: Properties
         public let fill: StateColors
         public let shadow: StateColors
@@ -209,8 +209,8 @@ extension VSliderViewModel.Colors {
         public init() {
             self.init(
                 fill: .init(
-                    enabled: ColorBook.Slider.Knob.enabled,
-                    disabled: ColorBook.Slider.Knob.disabled
+                    enabled: ColorBook.Slider.Thumb.enabled,
+                    disabled: ColorBook.Slider.Thumb.disabled
                 ),
                 shadow: .init(
                     enabled: ColorBook.Slider.Shadow.enabled,
@@ -222,7 +222,7 @@ extension VSliderViewModel.Colors {
 }
 
 extension VSliderViewModel.Colors {
-    public struct SolidKnob {
+    public struct SolidThumb {
         // MARK: Properties
         public let fill: StateColors
         public let stroke: StateColors
@@ -236,12 +236,12 @@ extension VSliderViewModel.Colors {
         public init() {
             self.init(
                 fill: .init(
-                    enabled: ColorBook.Slider.Knob.enabled,
-                    disabled: ColorBook.Slider.Knob.disabled
+                    enabled: ColorBook.Slider.Thumb.enabled,
+                    disabled: ColorBook.Slider.Thumb.disabled
                 ),
                 stroke: .init(
-                    enabled: ColorBook.Slider.KnobStroke.enabled,
-                    disabled: ColorBook.Slider.KnobStroke.disabled
+                    enabled: ColorBook.Slider.ThumbStroke.enabled,
+                    disabled: ColorBook.Slider.ThumbStroke.disabled
                 )
             )
         }
@@ -278,31 +278,31 @@ extension VSliderViewModel.Colors {
         }
     }
     
-    static func knobFill(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func thumbFill(state: VSliderState, vm: VSliderViewModel) -> Color {
         switch state {
-        case .enabled: return vm.colors.knob.fill.enabled
-        case .disabled: return vm.colors.knob.fill.disabled
+        case .enabled: return vm.colors.thumb.fill.enabled
+        case .disabled: return vm.colors.thumb.fill.disabled
         }
     }
     
-    static func knobShadow(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func thumbShadow(state: VSliderState, vm: VSliderViewModel) -> Color {
         switch state {
-        case .enabled: return vm.colors.knob.shadow.enabled
-        case .disabled: return vm.colors.knob.shadow.disabled
+        case .enabled: return vm.colors.thumb.shadow.enabled
+        case .disabled: return vm.colors.thumb.shadow.disabled
         }
     }
     
-    static func solidKnobFill(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func solidThumbFill(state: VSliderState, vm: VSliderViewModel) -> Color {
         switch state {
-        case .enabled: return vm.colors.solidKnob.fill.enabled
-        case .disabled: return vm.colors.solidKnob.fill.disabled
+        case .enabled: return vm.colors.solidThumb.fill.enabled
+        case .disabled: return vm.colors.solidThumb.fill.disabled
         }
     }
     
-    static func solidKnobStroke(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func solidThumbStroke(state: VSliderState, vm: VSliderViewModel) -> Color {
         switch state {
-        case .enabled: return vm.colors.solidKnob.stroke.enabled
-        case .disabled: return vm.colors.solidKnob.stroke.disabled
+        case .enabled: return vm.colors.solidThumb.stroke.enabled
+        case .disabled: return vm.colors.solidThumb.stroke.disabled
         }
     }
 }

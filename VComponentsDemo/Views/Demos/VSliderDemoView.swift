@@ -16,12 +16,12 @@ struct VSliderDemoView: View {
     @State private var sliderState: VSliderState = .enabled
 
     @State private var plainSliderValue: Double = 0.5
-    @State private var knobSliderValue: Double = 0.5
-    @State private var solidKnobSliderValue: Double = 0.5
+    @State private var thumbSliderValue: Double = 0.5
+    @State private var solidThumbSliderValue: Double = 0.5
     
     @State private var steppedPlainSliderValue: Double = 0.5
-    @State private var steppedKnobSliderValue: Double = 0.5
-    @State private var steppedSolidKnobSliderValue: Double = 0.5
+    @State private var steppedThumbSliderValue: Double = 0.5
+    @State private var steppedSolidThumbSliderValue: Double = 0.5
     
     @State private var animatedSliderValue: Double = 0.5
     @State private var animatedSteppedSliderValue: Double = 0.5
@@ -61,12 +61,12 @@ extension VSliderDemoView {
                 VSlider(.plain, state: sliderState, value: $plainSliderValue, onChange: nil)
             })
             
-            RowView(type: .titled("Knob"), content: {
-                VSlider(.knob, state: sliderState, value: $knobSliderValue, onChange: nil)
+            RowView(type: .titled("Thumb"), content: {
+                VSlider(.thumb, state: sliderState, value: $thumbSliderValue, onChange: nil)
             })
             
-            RowView(type: .titled("Solid Knob"), content: {
-                VSlider(.solidKnob, state: sliderState, value: $solidKnobSliderValue, onChange: nil)
+            RowView(type: .titled("Solid Thumb"), content: {
+                VSlider(.solidThumb, state: sliderState, value: $solidThumbSliderValue, onChange: nil)
             })
         })
     }
@@ -77,12 +77,12 @@ extension VSliderDemoView {
                 VSlider(.plain, step: 0.1, state: sliderState, value: $steppedPlainSliderValue, onChange: nil)
             })
             
-            RowView(type: .titled("Knob (Stepped)"), content: {
-                VSlider(.knob, step: 0.1, state: sliderState, value: $steppedKnobSliderValue, onChange: nil)
+            RowView(type: .titled("Thumb (Stepped)"), content: {
+                VSlider(.thumb, step: 0.1, state: sliderState, value: $steppedThumbSliderValue, onChange: nil)
             })
             
-            RowView(type: .titled("Solid Knob (Stepped)"), content: {
-                VSlider(.solidKnob, step: 0.1, state: sliderState, value: $steppedSolidKnobSliderValue, onChange: nil)
+            RowView(type: .titled("Solid Thumb (Stepped)"), content: {
+                VSlider(.solidThumb, step: 0.1, state: sliderState, value: $steppedSolidThumbSliderValue, onChange: nil)
             })
         })
     }

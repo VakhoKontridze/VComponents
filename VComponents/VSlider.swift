@@ -90,7 +90,7 @@ public extension VSlider {
             })
                 .mask(RoundedRectangle(cornerRadius: viewModel.layout.slider.cornerRadius))
             
-                .overlay(knob(in: proxy))
+                .overlay(thumb(in: proxy))
             
                 .disabled(!state.isEnabled)
                 .gesture(
@@ -114,29 +114,29 @@ public extension VSlider {
             .foregroundColor(VSliderViewModel.Colors.progress(state: state, vm: viewModel))
     }
     
-    private func knob(in proxy: GeometryProxy) -> some View {
+    private func thumb(in proxy: GeometryProxy) -> some View {
         Group(content: {
             Group(content: {
                 switch sliderType {
                 case .plain:
                     EmptyView()
                     
-                case .knob:
-                    RoundedRectangle(cornerRadius: viewModel.layout.knob.cornerRadius)
-                        .foregroundColor(VSliderViewModel.Colors.knobFill(state: state, vm: viewModel))
-                        .shadow(color: VSliderViewModel.Colors.knobShadow(state: state, vm: viewModel), radius: 2)
+                case .thumb:
+                    RoundedRectangle(cornerRadius: viewModel.layout.thumb.cornerRadius)
+                        .foregroundColor(VSliderViewModel.Colors.thumbFill(state: state, vm: viewModel))
+                        .shadow(color: VSliderViewModel.Colors.thumbShadow(state: state, vm: viewModel), radius: 2)
                     
-                        .frame(size: .init(width: viewModel.layout.knob.dimension, height: viewModel.layout.knob.dimension))
+                        .frame(size: .init(width: viewModel.layout.thumb.dimension, height: viewModel.layout.thumb.dimension))
                     
-                case .solidKnob:
-                    RoundedRectangle(cornerRadius: viewModel.layout.solidKnob.cornerRadius)
-                        .stroke(VSliderViewModel.Colors.solidKnobStroke(state: state, vm: viewModel), lineWidth: viewModel.layout.solidKnob.stroke)
-                        .background(RoundedRectangle(cornerRadius: 5).foregroundColor(VSliderViewModel.Colors.solidKnobFill(state: state, vm: viewModel)))
+                case .solidThumb:
+                    RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius)
+                        .stroke(VSliderViewModel.Colors.solidThumbStroke(state: state, vm: viewModel), lineWidth: viewModel.layout.solidThumb.stroke)
+                        .background(RoundedRectangle(cornerRadius: 5).foregroundColor(VSliderViewModel.Colors.solidThumbFill(state: state, vm: viewModel)))
                     
-                        .frame(size: .init(width: viewModel.layout.solidKnob.dimension, height: viewModel.layout.solidKnob.dimension))
+                        .frame(size: .init(width: viewModel.layout.solidThumb.dimension, height: viewModel.layout.solidThumb.dimension))
                 }
             })
-                .offset(x: knobOffset(in: proxy), y: 0)
+                .offset(x: thumbOffset(in: proxy), y: 0)
         })
             .frame(maxWidth: .infinity, alignment: .leading)
             .allowsHitTesting(false)
@@ -186,18 +186,18 @@ private extension VSlider {
         return (value / range) * width
     }
     
-    func knobOffset(in proxy: GeometryProxy) -> CGFloat {
+    func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
         let progressW: CGFloat = progressWidth(in: proxy)
         
-        let knobW: CGFloat = {
+        let thumbW: CGFloat = {
             switch sliderType {
             case .plain: return 0
-            case .knob: return viewModel.layout.knob.dimension
-            case .solidKnob: return viewModel.layout.solidKnob.dimension
+            case .thumb: return viewModel.layout.thumb.dimension
+            case .solidThumb: return viewModel.layout.solidThumb.dimension
             }
         }()
         
-        let offset: CGFloat = progressW - knobW / 2
+        let offset: CGFloat = progressW - thumbW / 2
 
         return offset
     }
@@ -223,8 +223,8 @@ struct VSlider_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20, content: {
             VSlider(.plain, state: .enabled, value: $value, onChange: nil)
-            VSlider(.knob, state: .enabled, value: $value, onChange: nil)
-            VSlider(.solidKnob, state: .enabled, value: $value, onChange: nil)
+            VSlider(.thumb, state: .enabled, value: $value, onChange: nil)
+            VSlider(.solidThumb, state: .enabled, value: $value, onChange: nil)
         })
             .padding()
     }
