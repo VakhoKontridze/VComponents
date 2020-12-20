@@ -124,14 +124,14 @@ public extension VSlider {
                 case .thumb:
                     RoundedRectangle(cornerRadius: viewModel.layout.thumb.cornerRadius)
                         .foregroundColor(VSliderViewModel.Colors.thumbFill(state: state, vm: viewModel))
-                        .shadow(color: VSliderViewModel.Colors.thumbShadow(state: state, vm: viewModel), radius: 2)
+                        .shadow(color: VSliderViewModel.Colors.thumbShadow(state: state, vm: viewModel), radius: viewModel.layout.thumb.shadowRadius)
                     
                         .frame(size: .init(width: viewModel.layout.thumb.dimension, height: viewModel.layout.thumb.dimension))
                     
                 case .solidThumb:
                     RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius)
                         .stroke(VSliderViewModel.Colors.solidThumbStroke(state: state, vm: viewModel), lineWidth: viewModel.layout.solidThumb.stroke)
-                        .background(RoundedRectangle(cornerRadius: 5).foregroundColor(VSliderViewModel.Colors.solidThumbFill(state: state, vm: viewModel)))
+                        .background(RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius).foregroundColor(VSliderViewModel.Colors.solidThumbFill(state: state, vm: viewModel)))
                     
                         .frame(size: .init(width: viewModel.layout.solidThumb.dimension, height: viewModel.layout.solidThumb.dimension))
                 }

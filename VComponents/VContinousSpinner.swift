@@ -10,11 +10,9 @@ import SwiftUI
 // MARK:- V Continous Spinner
 struct VContinousSpinner: View {
     // MARK: Properties
-    @State private var isAnimating: Bool = false
-    
-    private let animationDuration: Double = 0.75
-    
     private let viewModel: VSpinnerViewModel
+    
+    @State private var isAnimating: Bool = false
     
     // MARK: Initializers
     init(viewModel: VSpinnerViewModel) {
@@ -33,7 +31,7 @@ extension VContinousSpinner {
             )
             .frame(width: viewModel.layout.dimension, height: viewModel.layout.dimension)
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
-            .animation(Animation.linear(duration: animationDuration).repeatForever(autoreverses: false))
+            .animation(viewModel.behavior.animation.repeatForever(autoreverses: false))
             .onAppear(perform: { isAnimating.toggle() })
     }
 }

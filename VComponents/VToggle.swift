@@ -89,7 +89,7 @@ public extension VToggle {
     }
     
     private func rightContentToggle(content: @escaping () -> Content) -> some View {
-        HStack(alignment: .center, spacing: viewModel.layout.right.spacing, content: {
+        HStack(alignment: .center, spacing: viewModel.layout.rightContent.spacing, content: {
             toggle
             toggleContent(from: content)
         })
@@ -104,14 +104,33 @@ public extension VToggle {
     }
     
     private var toggle: some View {
-        Toggle(isOn: $isOn, label: { EmptyView() })
-            .labelsHidden()
-            .toggleStyle(SwitchToggleStyle(tint: VToggleViewModel.Colors.toggle(state: state, vm: viewModel)))
+        VPlainButton(viewModel: viewModel.plainButtonViewModel, state: .enabled, action: action, content: {
+            ZStack(content: {
+                RoundedRectangle(cornerRadius: viewModel.layout.common.size.height)
+                    .foregroundColor(VToggleViewModel.Colors.fill(isOn: isOn, state: state, vm: viewModel))
+                
+                Circle()
+                    .frame(dimension: viewModel.layout.common.thumbDimension)
+                    .foregroundColor(VToggleViewModel.Colors.thumb(isOn: isOn, state: state, vm: viewModel))
+                    .offset(
+                        x: isOn ? viewModel.layout.common.animationOffset : -viewModel.layout.common.animationOffset,
+                        y: 0
+                    )
+            })
+                .frame(size: viewModel.layout.common.size)
+        })
     }
     
     private func toggleContent(from content: (() -> Content)?) -> some View {
         content?()
             .opacity(state.isEnabled ? 1 : viewModel.behavior.disabledOpacity)
+    }
+}
+
+// MARK:- Action
+private extension VToggle {
+    func action() {
+        withAnimation(Animation.easeIn(duration: 0.1), { isOn.toggle() })
     }
 }
 

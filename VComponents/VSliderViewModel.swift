@@ -100,6 +100,7 @@ extension VSliderViewModel.Layout {
         // MARK: Properties
         public let dimension: CGFloat
         public let cornerRadius: CGFloat
+        let shadowRadius: CGFloat = 2
         
         // MARK: Initializers
         public init(dimension: CGFloat, cornerRadius: CGFloat) {

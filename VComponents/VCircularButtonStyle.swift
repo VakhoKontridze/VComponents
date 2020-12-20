@@ -24,7 +24,7 @@ struct VCircularButtonStyle: ButtonStyle {
 extension VCircularButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         contentView(label: configuration.label, actualState: state.actualState(configuration: configuration))
-            .frame(width: viewModel.layout.dimension, height: viewModel.layout.dimension)
+            .frame(dimension: viewModel.layout.dimension)
     
             .background(backgroundView(actualState: state.actualState(configuration: configuration)))
     }

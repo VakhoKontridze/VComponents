@@ -57,6 +57,9 @@ extension VPrimaryButtonViewModel {
         public let cornerRadius: CGFloat
         public let contentInset: CGFloat
         
+        let loaderSpacing: CGFloat = 20
+        let loaderWidth: CGFloat = 10
+        
         // MARK: Initializers
         public init(height: CGFloat, cornerRadius: CGFloat, contentInset: CGFloat) {
             self.height = height

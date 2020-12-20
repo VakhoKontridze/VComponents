@@ -79,8 +79,17 @@ extension ColorBook {
 extension ColorBook {
     struct Toggle {
         struct Fill {
-            static let enabled: Color = PrimaryButton.Fill.enabled
-            static let disabled: Color = .init(.s144, .s192, .s240, .o100)
+            static let enabledOn: Color = PrimaryButton.Fill.enabled
+            static let enabledOff: Color = .init(.s224, .s224, .s224, .o100)
+            static let disabled: Color = .init(.s208, .s208, .s208, .o100)
+            
+            private init() {}
+        }
+        
+        struct Thumb {
+            static let enabledOn: Color = PrimaryButton.Text.enabled
+            static let enabledOff: Color = enabledOn
+            static let disabled: Color = enabledOn
             
             private init() {}
         }
@@ -107,7 +116,7 @@ extension ColorBook {
         }
         
         struct Progress {
-            static let enabled: Color = Toggle.Fill.enabled
+            static let enabled: Color = Toggle.Fill.enabledOn
             static let disabled: Color = Toggle.Fill.disabled
             
             private init() {}

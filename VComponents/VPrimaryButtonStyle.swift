@@ -36,7 +36,7 @@ extension VPrimaryButtonStyle {
     }
     
     private func contentView(label: ButtonStyleConfiguration.Label, actualState: VPrimaryButtonActualState) -> some View {
-        HStack(alignment: .center, spacing: 20, content: {
+        HStack(alignment: .center, spacing: viewModel.layout.common.loaderSpacing, content: {
             loaderCompensatorView(actualState: actualState)
             textView(label: label, actualState: actualState)
             loaderView(actualState: actualState)
@@ -55,7 +55,7 @@ extension VPrimaryButtonStyle {
     
     @ViewBuilder private func loaderCompensatorView(actualState: VPrimaryButtonActualState) -> some View {
         if actualState == .loading {
-            Spacer().frame(width: 10, alignment: .leading)
+            Spacer().frame(width: viewModel.layout.common.loaderWidth, alignment: .leading)
             if buttonType != .compact { Spacer() }
         }
     }
@@ -63,7 +63,7 @@ extension VPrimaryButtonStyle {
     @ViewBuilder private func loaderView(actualState: VPrimaryButtonActualState) -> some View {
         if actualState == .loading {
             if buttonType != .compact { Spacer() }
-            VSpinner(type: .continous, viewModel: .init()).frame(width: 10, alignment: .trailing)
+            VSpinner(type: .continous, viewModel: .init()).frame(width: viewModel.layout.common.loaderWidth, alignment: .trailing)
         }
     }
     

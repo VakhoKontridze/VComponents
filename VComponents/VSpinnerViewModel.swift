@@ -10,11 +10,13 @@ import SwiftUI
 // MARK:- V Spinner ViewModel
 public struct VSpinnerViewModel {
     // MARK: Proeprties
+    let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
     
     // MARK: Initializers
     public init(layout: Layout, colors: Colors) {
+        self.behavior = .init()
         self.layout = layout
         self.colors = colors
     }
@@ -24,6 +26,25 @@ public struct VSpinnerViewModel {
             layout: .init(),
             colors: .init()
         )
+    }
+}
+
+// MARK:- Behavior
+extension VSpinnerViewModel {
+    public struct Behavior {
+        // MARK: Proeprties
+        public let animation: Animation
+        
+        // MARK: Initializers
+        public init(animation: Animation) {
+            self.animation = animation
+        }
+        
+        public init() {
+            self.init(
+                animation: Animation.linear(duration: 0.75)
+            )
+        }
     }
 }
 
