@@ -20,7 +20,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    public init(
+    private init(
         _ buttonType: VPrimaryButtonType,
         viewModel: VPrimaryButtonViewModel = .init(),
         state: VPrimaryButtonState,
