@@ -13,6 +13,8 @@ struct VCircularButtonDemoView: View {
     // MARK: Properties
     static let sceneTitle: String = "Circular Button"
     
+    private let buttonTitle: String = "Press"
+    
     private func buttonContent() -> some View {
         Image(systemName: "swift")
             .resizable()
@@ -51,8 +53,14 @@ extension VCircularButtonDemoView {
     
     private var buttons: some View {
         VStack(content: {
-            RowView(type: .untitled, content: {
+            RowView(type: .titled("Image"), content: {
                 VCircularButton(state: buttonState, action: action, content: buttonContent)
+            })
+            
+            RowView(type: .titled("Text"), content: {
+                VCircularButton(state: buttonState, action: action, content: {
+                    Text(buttonTitle)
+                })
             })
         })
     }

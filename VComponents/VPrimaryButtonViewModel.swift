@@ -94,11 +94,11 @@ extension VPrimaryButtonViewModel {
 extension VPrimaryButtonViewModel {
     public struct Colors {
         // MARK: Properties
-        public let foreground: StateColors
-        public let background: StateColors
+        public let foreground: ForegroundStateColors
+        public let background: BackgroundStateColors
         
         // MARK: Initializers
-        public init(foreground: StateColors, background: StateColors) {
+        public init(foreground: ForegroundStateColors, background: BackgroundStateColors) {
             self.foreground = foreground
             self.background = background
         }
@@ -109,7 +109,9 @@ extension VPrimaryButtonViewModel {
                     enabled: ColorBook.PrimaryButton.Text.enabled,
                     pressed: ColorBook.PrimaryButton.Text.pressed,
                     disabled: ColorBook.PrimaryButton.Text.disabled,
-                    loading: ColorBook.PrimaryButton.Text.loading
+                    loading: ColorBook.PrimaryButton.Text.loading,
+                    
+                    pressedOpacity: 0.5
                 ),
                 background: .init(
                     enabled: ColorBook.PrimaryButton.Fill.enabled,
@@ -123,7 +125,26 @@ extension VPrimaryButtonViewModel {
 }
 
 extension VPrimaryButtonViewModel.Colors {
-    public struct StateColors {
+    public struct ForegroundStateColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let pressed: Color
+        public let disabled: Color
+        public let loading: Color
+        
+        public let pressedOpacity: Double
+        
+        // MARK: Initializers
+        public init(enabled: Color, pressed: Color, disabled: Color, loading: Color, pressedOpacity: Double) {
+            self.enabled = enabled
+            self.pressed = pressed
+            self.disabled = disabled
+            self.loading = loading
+            self.pressedOpacity = pressedOpacity
+        }
+    }
+    
+    public struct BackgroundStateColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
@@ -176,6 +197,15 @@ extension VPrimaryButtonViewModel.Colors {
         case .pressed: return vm.colors.background.pressed
         case .disabled: return vm.colors.background.disabled
         case .loading: return vm.colors.background.loading
+        }
+    }
+    
+    static func foregroundOpacity(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return vm.colors.foreground.pressedOpacity
+        case .disabled: return 1
+        case .loading: return 1
         }
     }
 }

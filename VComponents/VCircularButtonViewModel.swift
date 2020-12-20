@@ -53,11 +53,11 @@ extension VCircularButtonViewModel {
 extension VCircularButtonViewModel {
     public struct Colors {
         // MARK: Properties
-        public let foreground: StateColors
-        public let background: StateColors
+        public let foreground: ForegroundStateColors
+        public let background: BackgroundStateColors
         
         // MARK: Initializers
-        public init(foreground: StateColors, background: StateColors) {
+        public init(foreground: ForegroundStateColors, background: BackgroundStateColors) {
             self.foreground = foreground
             self.background = background
         }
@@ -67,7 +67,8 @@ extension VCircularButtonViewModel {
                 foreground: .init(
                     enabled: ColorBook.CircularButton.Text.enabled,
                     pressed: ColorBook.CircularButton.Text.pressed,
-                    disabled: ColorBook.CircularButton.Text.disabled
+                    disabled: ColorBook.CircularButton.Text.disabled,
+                    pressedOpacity: 0.5
                 ),
                 background: .init(
                     enabled: ColorBook.CircularButton.Fill.enabled,
@@ -80,7 +81,24 @@ extension VCircularButtonViewModel {
 }
 
 extension VCircularButtonViewModel {
-    public struct StateColors {
+    public struct ForegroundStateColors {
+        // MARK: Properties
+        public let enabled: Color
+        public let pressed: Color
+        public let disabled: Color
+        
+        public let pressedOpacity: Double
+        
+        // MARK: Initializers
+        public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double) {
+            self.enabled = enabled
+            self.pressed = pressed
+            self.disabled = disabled
+            self.pressedOpacity = pressedOpacity
+        }
+    }
+    
+    public struct BackgroundStateColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
@@ -129,6 +147,14 @@ extension VCircularButtonViewModel.Colors {
         case .enabled: return vm.colors.background.enabled
         case .pressed: return vm.colors.background.pressed
         case .disabled: return vm.colors.background.disabled
+        }
+    }
+    
+    static func foregroundOpacity(state: VRoundedButtonActualState, vm: VCircularButtonViewModel) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return vm.colors.foreground.pressedOpacity
+        case .disabled: return 1
         }
     }
 }

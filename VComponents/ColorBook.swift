@@ -42,7 +42,7 @@ extension ColorBook {
     struct PlainButton {
         struct Text {
             static let enabled: Color = .init(.s16, .s112, .s255, .o100)
-            static let pressed: Color = .init(.s112, .s160, .s240, .o100)
+            static let pressed: Color = enabled
             static let disabled: Color = .init(.s128, .s176, .s255, .o100)
             
             private init() {}

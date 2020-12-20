@@ -28,7 +28,7 @@ public struct VSlider: View {
         step: Double?,
         state: VSliderState,
         value: Binding<Double>,
-        onChange action: ((Bool) -> Void)?
+        onChange action: ((Bool) -> Void)? = nil
     )
         where V: BinaryFloatingPoint, V.Stride :BinaryFloatingPoint
     {
@@ -48,7 +48,7 @@ public struct VSlider: View {
         step: Double?,
         state: VSliderState,
         value: Binding<Double>,
-        onChange action: ((Bool) -> Void)?
+        onChange action: ((Bool) -> Void)? = nil
     ) {
         self.init(
             sliderType,
@@ -66,7 +66,7 @@ public struct VSlider: View {
         viewModel: VSliderViewModel = .init(),
         state: VSliderState,
         value: Binding<Double>,
-        onChange action: ((Bool) -> Void)?
+        onChange action: ((Bool) -> Void)? = nil
     ) {
         self.init(
             sliderType,
@@ -222,9 +222,9 @@ struct VSlider_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack(spacing: 20, content: {
-            VSlider(.plain, state: .enabled, value: $value, onChange: nil)
-            VSlider(.thumb, state: .enabled, value: $value, onChange: nil)
-            VSlider(.solidThumb, state: .enabled, value: $value, onChange: nil)
+            VSlider(.plain, state: .enabled, value: $value)
+            VSlider(.thumb, state: .enabled, value: $value)
+            VSlider(.solidThumb, state: .enabled, value: $value)
         })
             .padding()
     }

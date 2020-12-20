@@ -58,15 +58,15 @@ extension VSliderDemoView {
     private var sliders: some View {
         VStack(content: {
             RowView(type: .titled("Plain"), content: {
-                VSlider(.plain, state: sliderState, value: $plainSliderValue, onChange: nil)
+                VSlider(.plain, state: sliderState, value: $plainSliderValue)
             })
             
             RowView(type: .titled("Thumb"), content: {
-                VSlider(.thumb, state: sliderState, value: $thumbSliderValue, onChange: nil)
+                VSlider(.thumb, state: sliderState, value: $thumbSliderValue)
             })
             
             RowView(type: .titled("Solid Thumb"), content: {
-                VSlider(.solidThumb, state: sliderState, value: $solidThumbSliderValue, onChange: nil)
+                VSlider(.solidThumb, state: sliderState, value: $solidThumbSliderValue)
             })
         })
     }
@@ -74,15 +74,15 @@ extension VSliderDemoView {
     private var steppedSliders: some View {
         VStack(content: {
             RowView(type: .titled("Plain (Stepped)"), content: {
-                VSlider(.plain, step: 0.1, state: sliderState, value: $steppedPlainSliderValue, onChange: nil)
+                VSlider(.plain, step: 0.1, state: sliderState, value: $steppedPlainSliderValue)
             })
             
             RowView(type: .titled("Thumb (Stepped)"), content: {
-                VSlider(.thumb, step: 0.1, state: sliderState, value: $steppedThumbSliderValue, onChange: nil)
+                VSlider(.thumb, step: 0.1, state: sliderState, value: $steppedThumbSliderValue)
             })
             
             RowView(type: .titled("Solid Thumb (Stepped)"), content: {
-                VSlider(.solidThumb, step: 0.1, state: sliderState, value: $steppedSolidThumbSliderValue, onChange: nil)
+                VSlider(.solidThumb, step: 0.1, state: sliderState, value: $steppedSolidThumbSliderValue)
             })
         })
     }
@@ -98,11 +98,11 @@ extension VSliderDemoView {
         
         return VStack(content: {
             RowView(type: .titled("Animation"), content: {
-                VSlider(.plain, viewModel: viewModel, state: sliderState, value: $animatedSliderValue, onChange: nil)
+                VSlider(.plain, viewModel: viewModel, state: sliderState, value: $animatedSliderValue)
             })
             
             RowView(type: .titled("Animation (Steped)"), content: {
-                VSlider(.plain, viewModel: viewModel, step: 0.1, state: sliderState, value: $animatedSteppedSliderValue, onChange: nil)
+                VSlider(.plain, viewModel: viewModel, step: 0.1, state: sliderState, value: $animatedSteppedSliderValue)
             })
         })
     }

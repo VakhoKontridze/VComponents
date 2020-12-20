@@ -10,14 +10,14 @@ import SwiftUI
 // MARK:- V Primary Button Style
 struct VPrimaryButtonStyle: ButtonStyle {
     // MARK: Properties
-    private let state: VPrimaryButtonState
     private let buttonType: VPrimaryButtonType
+    private let state: VPrimaryButtonState
     private let viewModel: VPrimaryButtonViewModel
     
     // MARK: Initializers
-    init(state: VPrimaryButtonState, type buttonType: VPrimaryButtonType, viewModel: VPrimaryButtonViewModel) {
-        self.state = state
+    init(type buttonType: VPrimaryButtonType, state: VPrimaryButtonState, viewModel: VPrimaryButtonViewModel) {
         self.buttonType = buttonType
+        self.state = state
         self.viewModel = viewModel
     }
 }
@@ -49,6 +49,7 @@ extension VPrimaryButtonStyle {
             .multilineTextAlignment(.center)
             .truncationMode(.tail)
             .foregroundColor(VPrimaryButtonViewModel.Colors.foreground(state: actualState, vm: viewModel))
+            .opacity(VPrimaryButtonViewModel.Colors.foregroundOpacity(state: actualState, vm: viewModel))
             .font(viewModel.fonts.title)
     }
     

@@ -19,7 +19,7 @@ public struct VPlainButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    private init(
+    public init(
         viewModel: VPlainButtonViewModel = .init(),
         state: VPlainButtonState,
         action: @escaping () -> Void,

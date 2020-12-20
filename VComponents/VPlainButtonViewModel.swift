@@ -68,7 +68,8 @@ extension VPlainButtonViewModel {
                 foreground: .init(
                     enabled: ColorBook.PlainButton.Text.enabled,
                     pressed: ColorBook.PlainButton.Text.pressed,
-                    disabled: ColorBook.PlainButton.Text.disabled
+                    disabled: ColorBook.PlainButton.Text.disabled,
+                    pressedOpacity: 0.5
                 )
             )
         }
@@ -82,11 +83,14 @@ extension VPlainButtonViewModel.Colors {
         public let pressed: Color
         public let disabled: Color
         
+        public let pressedOpacity: Double
+        
         // MARK: Initializers
-        public init(enabled: Color, pressed: Color, disabled: Color) {
+        public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
+            self.pressedOpacity = pressedOpacity
         }
     }
 }
@@ -117,6 +121,14 @@ extension VPlainButtonViewModel.Colors {
         case .enabled: return vm.colors.foreground.enabled
         case .pressed: return vm.colors.foreground.pressed
         case .disabled: return vm.colors.foreground.disabled
+        }
+    }
+    
+    static func foregroundOpacity(state: VPlainButtonActualState, vm: VPlainButtonViewModel) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return vm.colors.foreground.pressedOpacity
+        case .disabled: return 1
         }
     }
 }

@@ -15,6 +15,13 @@ struct VPlainButtonDemoView: View {
     
     private let buttonTitle: String = "Press"
     
+    private func buttonContent() -> some View {
+        Image(systemName: "swift")
+            .resizable()
+            .frame(size: .init(width: 20, height: 20))
+            .foregroundColor(.accentColor)
+    }
+    
     @State private var buttonState: VPlainButtonState = .enabled
 }
 
@@ -46,8 +53,21 @@ extension VPlainButtonDemoView {
     
     private var buttons: some View {
         VStack(content: {
-            RowView(type: .untitled, content: {
+            RowView(type: .titled("Text"), content: {
                 VPlainButton(state: buttonState, action: action, title: buttonTitle)
+            })
+            
+            RowView(type: .titled("Image"), content: {
+                VPlainButton(state: buttonState, action: action, content: buttonContent)
+            })
+            
+            RowView(type: .titled("Image and Text"), content: {
+                VPlainButton(state: buttonState, action: action, content: {
+                    VStack(spacing: 5, content: {
+                        buttonContent()
+                        Text(buttonTitle)
+                    })
+                })
             })
         })
     }

@@ -20,7 +20,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    private init(
+    public init(
         _ buttonType: VPrimaryButtonType,
         viewModel: VPrimaryButtonViewModel = .init(),
         state: VPrimaryButtonState,
@@ -60,7 +60,7 @@ public extension VPrimaryButton {
     var body: some View {
         Button(action: action, label: content)
             .disabled(!state.isEnabled)
-            .buttonStyle(VPrimaryButtonStyle(state: state, type: buttonType, viewModel: viewModel))
+            .buttonStyle(VPrimaryButtonStyle(type: buttonType, state: state, viewModel: viewModel))
     }
 }
 

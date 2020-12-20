@@ -35,6 +35,7 @@ extension VCircularButtonStyle {
             .multilineTextAlignment(.center)
             .truncationMode(.tail)
             .foregroundColor(VCircularButtonViewModel.Colors.foreground(state: actualState, vm: viewModel))
+            .opacity(VCircularButtonViewModel.Colors.foregroundOpacity(state: actualState, vm: viewModel))
             .font(viewModel.fonts.title)
     }
     

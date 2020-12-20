@@ -34,6 +34,7 @@ extension VPlainButtonStyle {
             .multilineTextAlignment(.center)
             .truncationMode(.tail)
             .foregroundColor(VPlainButtonViewModel.Colors.foreground(state: actualState, vm: viewModel))
+            .opacity(VPlainButtonViewModel.Colors.foregroundOpacity(state: actualState, vm: viewModel))
             .font(viewModel.fonts.title)
     }
 }

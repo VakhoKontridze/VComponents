@@ -15,9 +15,14 @@ struct VPrimaryButtonDemoView: View {
     
     private let buttonTitle: String = "Press"
     
-    @State private var compactButtonState: VPrimaryButtonState = .enabled
-    @State private var fixedButtonState: VPrimaryButtonState = .enabled
-    @State private var flexibleButtonState: VPrimaryButtonState = .enabled
+    private func buttonContent() -> some View {
+        Image(systemName: "swift")
+            .resizable()
+            .frame(size: .init(width: 20, height: 20))
+            .foregroundColor(.white)
+    }
+    
+    @State private var buttonState: VPrimaryButtonState = .enabled
 }
 
 // MARK:- Body
@@ -27,7 +32,8 @@ extension VPrimaryButtonDemoView {
             controller
             
             VLazyListView(viewModel: .init(), content: {
-                buttons
+                buttonsByType
+                imageButtons
             })
         })
             .navigationTitle(Self.sceneTitle)
@@ -40,12 +46,8 @@ extension VPrimaryButtonDemoView {
                 
                 ToggleSettingView(
                     isOn: .init(
-                        get: { ![compactButtonState, fixedButtonState, flexibleButtonState].contains(where: { $0 != .disabled }) },
-                        set: {
-                            compactButtonState = $0 ? .disabled : .enabled
-                            fixedButtonState = $0 ? .disabled : .enabled
-                            flexibleButtonState = $0 ? .disabled : .enabled
-                        }
+                        get: { buttonState == .disabled },
+                        set: { buttonState = $0 ? .disabled : .enabled }
                     ),
                     title: "Disabled"
                 )
@@ -54,12 +56,8 @@ extension VPrimaryButtonDemoView {
                 
                 ToggleSettingView(
                     isOn: .init(
-                        get: { ![compactButtonState, fixedButtonState, flexibleButtonState].contains(where: { $0 != .loading }) },
-                        set: {
-                            compactButtonState = $0 ? .loading : .enabled
-                            fixedButtonState = $0 ? .loading : .enabled
-                            flexibleButtonState = $0 ? .loading : .enabled
-                        }
+                        get: { buttonState == .loading },
+                        set: { buttonState = $0 ? .loading : .enabled }
                     ),
                     title: "Loading"
                 )
@@ -69,18 +67,35 @@ extension VPrimaryButtonDemoView {
         })
     }
 
-    private var buttons: some View {
+    private var buttonsByType: some View {
         VStack(content: {
             RowView(type: .titled("Compact"), content: {
-                VPrimaryButton(.compact, state: compactButtonState, action: action, title: buttonTitle)
+                VPrimaryButton(.compact, state: buttonState, action: action, title: buttonTitle)
             })
             
             RowView(type: .titled("Fixed"), content: {
-                VPrimaryButton(.fixed, state: fixedButtonState, action: action, title: buttonTitle)
+                VPrimaryButton(.fixed, state: buttonState, action: action, title: buttonTitle)
             })
             
             RowView(type: .titled("Flexible"), content: {
-                VPrimaryButton(.flexible, state: flexibleButtonState, action: action, title: buttonTitle)
+                VPrimaryButton(.flexible, state: buttonState, action: action, title: buttonTitle)
+            })
+        })
+    }
+    
+    private var imageButtons: some View {
+        VStack(content: {
+            RowView(type: .titled("Image"), content: {
+                VPrimaryButton(.fixed, state: buttonState, action: action, content: buttonContent)
+            })
+
+            RowView(type: .titled("Image and Text"), content: {
+                VPrimaryButton(.fixed, state: buttonState, action: action, content: {
+                    HStack(spacing: 5, content: {
+                        buttonContent()
+                        Text(buttonTitle)
+                    })
+                })
             })
         })
     }
