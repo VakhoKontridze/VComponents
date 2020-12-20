@@ -11,7 +11,6 @@ import SwiftUI
 public struct VSpinner: View {
     // MARK: Proeprties
     private let spinnerType: VSpinnerType
-    
     private let viewModel: VSpinnerViewModel
     
     // MARK: Initializers
@@ -28,18 +27,18 @@ public struct VSpinner: View {
 public extension VSpinner {
     @ViewBuilder var body: some View {
         switch spinnerType {
-        case .dashed: dashedSpinner
         case .continous: continousSpinner
+        case .dashed: dashedSpinner
         }
+    }
+    
+    private var continousSpinner: some View {
+        VContinousSpinner(viewModel: viewModel)
     }
     
     private var dashedSpinner: some View {
         ProgressView()
             .progressViewStyle(CircularProgressViewStyle(tint: viewModel.colors.spinner))
-    }
-    
-    private var continousSpinner: some View {
-        VContinousSpinner(viewModel: viewModel)
     }
 }
 

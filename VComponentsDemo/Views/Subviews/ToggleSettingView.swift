@@ -25,8 +25,8 @@ struct ToggleSettingView: View {
 extension ToggleSettingView {
     var body: some View {
         VStack(content: {
-            VToggle(isOn: $isOn, state: .enabled, viewModel: .init())
-                
+            VToggle(isOn: $isOn, state: .enabled)
+            
             Text(title)
                 .font(.system(size: 12))
         })

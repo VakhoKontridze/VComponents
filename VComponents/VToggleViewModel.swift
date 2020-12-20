@@ -30,20 +30,20 @@ public struct VToggleViewModel {
     }
 }
 
-// MARK:- Colors
+// MARK:- Behavior
 extension VToggleViewModel {
     public struct Behavior {
         // MARK: Properties
-        public let contentIsClickable: Bool
+        public let disabledOpacity: Double
         
         // MARK: Initializers
-        public init(contentIsClickable: Bool) {
-            self.contentIsClickable = contentIsClickable
+        public init(disabledOpacity: Double) {
+            self.disabledOpacity = disabledOpacity
         }
         
         public init() {
             self.init(
-                contentIsClickable: true
+                disabledOpacity: 0.25
             )
         }
     }
@@ -53,23 +53,32 @@ extension VToggleViewModel {
 extension VToggleViewModel {
     public struct Layout {
         // MARK: Properties
-        public let contentLayout: ContentLayout
+        public let right: Right
         
         // MARK: Initializers
-        public init(contentLayout: ContentLayout) {
-            self.contentLayout = contentLayout
+        public init(right: Right) {
+            self.right = right
         }
         
         public init() {
             self.init(
-                contentLayout: .right(spacing: 10)
+                right: .init()
             )
         }
     }
     
-    public enum ContentLayout {
-        case right(spacing: CGFloat)
-        case leftFlexible
+    public struct Right {
+        // MARK: Properties
+        public let spacing: CGFloat
+        
+        // MARK: Initializers
+        public init(spacing: CGFloat) {
+            self.spacing = spacing
+        }
+        
+        public init() {
+            self.init(spacing: 10)
+        }
     }
 }
 
@@ -87,15 +96,34 @@ extension VToggleViewModel {
         public init() {
             self.init(
                 toggle: .init(
-                    enabled: ColorBook.Primary.Fill.enabled,
-                    disabled: ColorBook.Primary.Fill.disabledLight
+                    enabled: ColorBook.Toggle.Fill.enabled,
+                    disabled: ColorBook.Toggle.Fill.disabled
                 )
             )
         }
     }
-    
+}
+
+extension VToggleViewModel {
     public struct StateColors {
+        // MARK: Properties
         public let enabled: Color
         public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+    }
+}
+
+// MARK:- Mapping
+extension VToggleViewModel.Colors {
+    static func toggle(state: VToggleState, vm: VToggleViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.toggle.enabled
+        case .disabled: return vm.colors.toggle.disabled
+        }
     }
 }

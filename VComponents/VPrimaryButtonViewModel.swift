@@ -34,15 +34,32 @@ public struct VPrimaryButtonViewModel {
 extension VPrimaryButtonViewModel {
     public struct Layout {
         // MARK: Properties
+        public let common: Common
+        public let fixed: Fixed
+        
+        // MARK: Initializers
+        public init(common: Common, fixed: Fixed) {
+            self.common = common
+            self.fixed = fixed
+        }
+        
+        public init() {
+            self.init(
+                common: .init(),
+                fixed: .init()
+            )
+        }
+    }
+    
+    public struct Common {
+        // MARK: Properties
         public let height: CGFloat
-        public let widthFixed: CGFloat
         public let cornerRadius: CGFloat
         public let contentInset: CGFloat
         
         // MARK: Initializers
-        public init(height: CGFloat, widthFixed: CGFloat, cornerRadius: CGFloat, contentInset: CGFloat) {
+        public init(height: CGFloat, cornerRadius: CGFloat, contentInset: CGFloat) {
             self.height = height
-            self.widthFixed = widthFixed
             self.cornerRadius = cornerRadius
             self.contentInset = contentInset
         }
@@ -50,9 +67,24 @@ extension VPrimaryButtonViewModel {
         public init() {
             self.init(
                 height: 50,
-                widthFixed: 300,
                 cornerRadius: 20,
                 contentInset: 15
+            )
+        }
+    }
+    
+    public struct Fixed {
+        // MARK: Properties
+        public let width: CGFloat
+        
+        // MARK: Initializers
+        public init(width: CGFloat) {
+            self.width = width
+        }
+        
+        public init() {
+            self.init(
+                width: 300
             )
         }
     }
@@ -74,26 +106,37 @@ extension VPrimaryButtonViewModel {
         public init() {
             self.init(
                 foreground: .init(
-                    enabled: ColorBook.White.Text.enabled,
-                    pressed: ColorBook.White.Text.pressed,
-                    disabled: ColorBook.White.Text.disabled,
-                    loading: ColorBook.White.Text.disabled
+                    enabled: ColorBook.PrimaryButton.Text.enabled,
+                    pressed: ColorBook.PrimaryButton.Text.pressed,
+                    disabled: ColorBook.PrimaryButton.Text.disabled,
+                    loading: ColorBook.PrimaryButton.Text.loading
                 ),
                 background: .init(
-                    enabled: ColorBook.Primary.Fill.enabled,
-                    pressed: ColorBook.Primary.Fill.pressed,
-                    disabled: ColorBook.Primary.Fill.disabledDark,
-                    loading: ColorBook.Primary.Fill.disabledDark
+                    enabled: ColorBook.PrimaryButton.Fill.enabled,
+                    pressed: ColorBook.PrimaryButton.Fill.pressed,
+                    disabled: ColorBook.PrimaryButton.Fill.disabled,
+                    loading: ColorBook.PrimaryButton.Fill.loading
                 )
             )
         }
     }
-    
+}
+
+extension VPrimaryButtonViewModel.Colors {
     public struct StateColors {
+        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         public let loading: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, pressed: Color, disabled: Color, loading: Color) {
+            self.enabled = enabled
+            self.pressed = pressed
+            self.disabled = disabled
+            self.loading = loading
+        }
     }
 }
 
@@ -116,13 +159,23 @@ extension VPrimaryButtonViewModel {
     }
 }
 
-// MARK:- Static View Model
-extension VPrimaryButtonViewModel {
-    struct Static {
-        // MARK: Properties
-        static let progressViewWidth: CGFloat = 10
+// MARK:- Mapping
+extension VPrimaryButtonViewModel.Colors {
+    static func foreground(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.foreground.enabled
+        case .pressed: return vm.colors.foreground.pressed
+        case .disabled: return vm.colors.foreground.disabled
+        case .loading: return vm.colors.foreground.loading
+        }
+    }
 
-        // MARK: Initializers
-        private init() {}
+    static func background(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.background.enabled
+        case .pressed: return vm.colors.background.pressed
+        case .disabled: return vm.colors.background.disabled
+        case .loading: return vm.colors.background.loading
+        }
     }
 }

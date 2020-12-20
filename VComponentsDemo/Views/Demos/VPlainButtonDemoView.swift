@@ -46,11 +46,17 @@ extension VPlainButtonDemoView {
     
     private var buttons: some View {
         VStack(content: {
-            RowView(
-                type: .untitled,
-                content: { VPlainButton(state: buttonState, viewModel: .init(), action: {}, title: buttonTitle) }
-            )
+            RowView(type: .untitled, content: {
+                VPlainButton(state: buttonState, action: action, title: buttonTitle)
+            })
         })
+    }
+}
+
+// MARK:- Action
+private extension VPlainButtonDemoView {
+    func action() {
+        print("Pressed")
     }
 }
 

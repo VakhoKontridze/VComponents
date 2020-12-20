@@ -32,8 +32,8 @@ extension VSpinnerDemoView {
 private extension VSpinnerType {
     var description: String {
         switch self {
-        case .dashed: return "Dashed"
         case .continous: return "Continous"
+        case .dashed: return "Dashed"
         }
     }
 }

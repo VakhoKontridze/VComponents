@@ -10,9 +10,9 @@ import SwiftUI
 // MARK:- V Plain Button
 public struct VPlainButton<Content>: View where Content: View {
     // MARK: Properties
-    private let state: VPlainButtonState
-
     private let viewModel: VPlainButtonViewModel
+    
+    private let state: VPlainButtonState
     
     private let action: () -> Void
     
@@ -20,13 +20,13 @@ public struct VPlainButton<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
+        viewModel: VPlainButtonViewModel = .init(),
         state: VPlainButtonState,
-        viewModel: VPlainButtonViewModel,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.state = state
         self.viewModel = viewModel
+        self.state = state
         self.action = action
         self.content = content
     }
@@ -34,16 +34,16 @@ public struct VPlainButton<Content>: View where Content: View {
 
 public extension VPlainButton where Content == Text {
     init<S>(
+        viewModel: VPlainButtonViewModel = .init(),
         state: VPlainButtonState,
-        viewModel: VPlainButtonViewModel,
         action: @escaping () -> Void,
         title: S
     )
         where S: StringProtocol
     {
         self.init(
-            state: state,
             viewModel: viewModel,
+            state: state,
             action: action,
             content: { Text(title) }
         )
@@ -62,6 +62,6 @@ public extension VPlainButton {
 // MARK:- Preview
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButton(state: .enabled, viewModel: .init(), action: {}, title: "Press")
+        VPlainButton(state: .enabled, action: {}, title: "Press")
     }
 }

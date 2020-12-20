@@ -65,7 +65,7 @@ extension VSpinnerViewModel {
         
         public init() {
             self.init(
-                spinner: ColorBook.White.Text.enabled
+                spinner: ColorBook.Spinner.fill
             )
         }
     }

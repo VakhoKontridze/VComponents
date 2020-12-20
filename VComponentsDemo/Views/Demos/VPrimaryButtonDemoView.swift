@@ -71,27 +71,29 @@ extension VPrimaryButtonDemoView {
 
     private var buttons: some View {
         VStack(content: {
-            RowView(
-                type: .titled("Compact"),
-                content: {
-                    VPrimaryButton(state: compactButtonState, type: .compact, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle)
-                }
-            )
+            RowView(type: .titled("Compact"), content: {
+                VPrimaryButton(.compact, state: compactButtonState, action: action, title: buttonTitle)
+            })
             
-            RowView(
-                type: .titled("Fixed"),
-                content: { VPrimaryButton(state: fixedButtonState, type: .fixed, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
-            )
+            RowView(type: .titled("Fixed"), content: {
+                VPrimaryButton(.fixed, state: fixedButtonState, action: action, title: buttonTitle)
+            })
             
-            RowView(
-                type: .titled("Flexible"),
-                content: { VPrimaryButton(state: flexibleButtonState, type: .flexible, viewModel: .init(), action: { print("Pressed") }, title: buttonTitle) }
-            )
+            RowView(type: .titled("Flexible"), content: {
+                VPrimaryButton(.flexible, state: flexibleButtonState, action: action, title: buttonTitle)
+            })
         })
     }
 }
 
-// MARK: Preview
+// MARK:- Action
+private extension VPrimaryButtonDemoView {
+    func action() {
+        print("Pressed")
+    }
+}
+
+// MARK:- Preview
 struct VPrimaryButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VPrimaryButtonDemoView()

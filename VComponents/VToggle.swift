@@ -10,55 +10,61 @@ import SwiftUI
 // MARK:- V Toggle
 public struct VToggle<Content>: View where Content: View {
     // MARK: Properties
+    private let toggleType: VToggleType?
+    private let viewModel: VToggleViewModel
+    
     @Binding private var isOn: Bool
     private let state: VToggleState
-    
-    private let viewModel: VToggleViewModel
     
     private let content: (() -> Content)?
     
     // MARK: Initializers
     public init(
+        _ toggleType: VToggleType,
+        viewModel: VToggleViewModel = .init(),
         isOn: Binding<Bool>,
         state: VToggleState,
-        viewModel: VToggleViewModel,
         @ViewBuilder content: @escaping () -> Content
     ) {
+        self.toggleType = toggleType
+        self.viewModel = viewModel
         self._isOn = isOn
         self.state = state
-        self.viewModel = viewModel
         self.content = content
-    }
-}
-
-public extension VToggle where Content == Never {
-    init(
-        isOn: Binding<Bool>,
-        state: VToggleState,
-        viewModel: VToggleViewModel
-    ) {
-        self._isOn = isOn
-        self.state = state
-        self.viewModel = viewModel
-        self.content = nil
     }
 }
 
 public extension VToggle where Content == Text {
     init<S>(
+        _ toggleType: VToggleType,
+        viewModel: VToggleViewModel = .init(),
         isOn: Binding<Bool>,
         state: VToggleState,
-        viewModel: VToggleViewModel,
         title: S
     )
         where S: StringProtocol
     {
         self.init(
+            toggleType,
+            viewModel: viewModel,
             isOn: isOn,
             state: state,
-            viewModel: viewModel,
             content: { Text(title) }
         )
+    }
+}
+
+public extension VToggle where Content == Never {
+    init(
+        viewModel: VToggleViewModel = .init(),
+        isOn: Binding<Bool>,
+        state: VToggleState
+    ) {
+        self.toggleType = nil
+        self.viewModel = viewModel
+        self._isOn = isOn
+        self.state = state
+        self.content = nil
     }
 }
 
@@ -66,11 +72,13 @@ public extension VToggle where Content == Text {
 public extension VToggle {
     var body: some View {
         Group(content: {
-            switch (viewModel.layout.contentLayout, content) {
-            case (.right, nil): plainToggle
-            case (.right(let spacing), let content?): rightContentToggle(spacing: spacing, content: content)
+            switch (toggleType, content) {
+            case (nil, _): plainToggle
             
-            case (.leftFlexible, _): leftFlexibleContentToggle(content: content)
+            case (.rightContent, nil): plainToggle
+            case (.rightContent, let content?): rightContentToggle(content: content)
+            
+            case (.spacedLeftContent, _): spacedLeftContentToggle(content: content)
             }
         })
             .disabled(!state.isEnabled)
@@ -80,14 +88,14 @@ public extension VToggle {
         toggle
     }
     
-    private func rightContentToggle(spacing: CGFloat, content: @escaping () -> Content) -> some View {
-        HStack(alignment: .center, spacing: spacing, content: {
+    private func rightContentToggle(content: @escaping () -> Content) -> some View {
+        HStack(alignment: .center, spacing: viewModel.layout.right.spacing, content: {
             toggle
             toggleContent(from: content)
         })
     }
 
-    private func leftFlexibleContentToggle(content: (() -> Content)?) -> some View {
+    private func spacedLeftContentToggle(content: (() -> Content)?) -> some View {
         HStack(alignment: .center, spacing: 0, content: {
             toggleContent(from: content)
             Spacer()
@@ -102,39 +110,14 @@ public extension VToggle {
     }
     
     private func toggleContent(from content: (() -> Content)?) -> some View {
-        Group(content: {
-            switch viewModel.behavior.contentIsClickable {
-            case false:
-                content?()
-                
-            case true:
-                content?()
-                    .contentShape(Rectangle())
-                    .onTapGesture(count: 1, perform: { withAnimation { isOn.toggle() } })
-            }
-        })
-            .opacity(state.isEnabled ? 1 : 0.25)
+        content?()
+            .opacity(state.isEnabled ? 1 : viewModel.behavior.disabledOpacity)
     }
 }
 
 // MARK:- Preview
 struct VToggle_Previews: PreviewProvider {
     static var previews: some View {
-        VToggle(
-            isOn: .constant(true),
-            state: .enabled,
-            viewModel: .init(),
-            title: "Toggle"
-        )
-    }
-}
-
-// MARK:- ViewModel Mapping
-private extension VToggleViewModel.Colors {
-    static func toggle(state: VToggleState, vm: VToggleViewModel) -> Color {
-        switch state {
-        case .enabled: return vm.colors.toggle.enabled
-        case .disabled: return vm.colors.toggle.disabled
-        }
+        VToggle(.rightContent, isOn: .constant(true), state: .enabled, title: "Toggle")
     }
 }

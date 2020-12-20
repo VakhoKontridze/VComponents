@@ -66,19 +66,28 @@ extension VPlainButtonViewModel {
         public init() {
             self.init(
                 foreground: .init(
-                    enabled: ColorBook.Primary.Text.enabled,
-                    pressed: ColorBook.Primary.Text.pressed,
-                    disabled: ColorBook.Primary.Text.disabled
+                    enabled: ColorBook.PlainButton.Text.enabled,
+                    pressed: ColorBook.PlainButton.Text.pressed,
+                    disabled: ColorBook.PlainButton.Text.disabled
                 )
             )
         }
     }
-    
+}
+
+extension VPlainButtonViewModel.Colors {
     public struct StateColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, pressed: Color, disabled: Color) {
+            self.enabled = enabled
+            self.pressed = pressed
+            self.disabled = disabled
+        }
     }
 }
 
@@ -97,6 +106,17 @@ extension VPlainButtonViewModel {
             self.init(
                 title: FontBook.buttonLarge
             )
+        }
+    }
+}
+
+// MARK:- Mapping
+extension VPlainButtonViewModel.Colors {
+    static func foreground(state: VPlainButtonActualState, vm: VPlainButtonViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.foreground.enabled
+        case .pressed: return vm.colors.foreground.pressed
+        case .disabled: return vm.colors.foreground.disabled
         }
     }
 }

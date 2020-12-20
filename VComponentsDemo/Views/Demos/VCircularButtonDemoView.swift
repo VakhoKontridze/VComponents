@@ -51,11 +51,17 @@ extension VCircularButtonDemoView {
     
     private var buttons: some View {
         VStack(content: {
-            RowView(
-                type: .untitled,
-                content: { VCircularButton(state: buttonState, viewModel: .init(), action: { print("Pressed") }, content: buttonContent) }
-            )
+            RowView(type: .untitled, content: {
+                VCircularButton(state: buttonState, action: action, content: buttonContent)
+            })
         })
+    }
+}
+
+// MARK:- Action
+private extension VCircularButtonDemoView {
+    func action() {
+        print("Pressed")
     }
 }
 

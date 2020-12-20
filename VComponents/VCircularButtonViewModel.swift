@@ -65,23 +65,33 @@ extension VCircularButtonViewModel {
         public init() {
             self.init(
                 foreground: .init(
-                    enabled: ColorBook.White.Text.enabled,
-                    pressed: ColorBook.White.Text.pressed,
-                    disabled: ColorBook.White.Text.disabled
+                    enabled: ColorBook.CircularButton.Text.enabled,
+                    pressed: ColorBook.CircularButton.Text.pressed,
+                    disabled: ColorBook.CircularButton.Text.disabled
                 ),
                 background: .init(
-                    enabled: ColorBook.Primary.Fill.enabled,
-                    pressed: ColorBook.Primary.Fill.pressed,
-                    disabled: ColorBook.Primary.Fill.disabledDark
+                    enabled: ColorBook.CircularButton.Fill.enabled,
+                    pressed: ColorBook.CircularButton.Fill.pressed,
+                    disabled: ColorBook.CircularButton.Fill.disabled
                 )
             )
         }
     }
-    
+}
+
+extension VCircularButtonViewModel {
     public struct StateColors {
+        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
+        
+        // MARK: Initializers
+        public init(enabled: Color, pressed: Color, disabled: Color) {
+            self.enabled = enabled
+            self.pressed = pressed
+            self.disabled = disabled
+        }
     }
 }
 
@@ -100,6 +110,25 @@ extension VCircularButtonViewModel {
             self.init(
                 title: FontBook.buttonSmall
             )
+        }
+    }
+}
+
+// MARK:- Mapping
+extension VCircularButtonViewModel.Colors {
+    static func foreground(state: VRoundedButtonActualState, vm: VCircularButtonViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.foreground.enabled
+        case .pressed: return vm.colors.foreground.pressed
+        case .disabled: return vm.colors.foreground.disabled
+        }
+    }
+
+    static func background(state: VRoundedButtonActualState, vm: VCircularButtonViewModel) -> Color {
+        switch state {
+        case .enabled: return vm.colors.background.enabled
+        case .pressed: return vm.colors.background.pressed
+        case .disabled: return vm.colors.background.disabled
         }
     }
 }

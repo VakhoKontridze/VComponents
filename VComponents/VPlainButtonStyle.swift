@@ -23,48 +23,17 @@ struct VPlainButtonStyle: ButtonStyle {
 // MARK:- Style
 extension VPlainButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
-        contentView(label: configuration.label, actualState: actualState(configuration: configuration))
+        contentView(label: configuration.label, actualState: state.actualState(configuration: configuration))
             .padding(.horizontal, viewModel.layout.hitAreaOffsetHor)
             .padding(.vertical, viewModel.layout.hitAreaOffsetVer)
     }
     
-    private func contentView(label: ButtonStyleConfiguration.Label, actualState: VPlainButtonStyleActualState) -> some View {
+    private func contentView(label: ButtonStyleConfiguration.Label, actualState: VPlainButtonActualState) -> some View {
         label
             .lineLimit(1)
             .multilineTextAlignment(.center)
             .truncationMode(.tail)
             .foregroundColor(VPlainButtonViewModel.Colors.foreground(state: actualState, vm: viewModel))
             .font(viewModel.fonts.title)
-    }
-}
-
-// MARK:- Actual State
-private enum VPlainButtonStyleActualState {
-    case enabled
-    case pressed
-    case disabled
-}
-
-private extension VPlainButtonStyle {
-    func actualState(configuration: Configuration) -> VPlainButtonStyleActualState {
-        if configuration.isPressed && state.isEnabled {
-            return .pressed
-        } else {
-            switch state {
-            case .enabled: return .enabled
-            case .disabled: return .disabled
-            }
-        }
-    }
-}
-
-// MARK:- ViewModel Mapping
-private extension VPlainButtonViewModel.Colors {
-    static func foreground(state: VPlainButtonStyleActualState, vm: VPlainButtonViewModel) -> Color {
-        switch state {
-        case .enabled: return vm.colors.foreground.enabled
-        case .pressed: return vm.colors.foreground.pressed
-        case .disabled: return vm.colors.foreground.disabled
-        }
     }
 }

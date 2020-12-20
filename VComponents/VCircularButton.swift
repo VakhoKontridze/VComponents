@@ -10,9 +10,9 @@ import SwiftUI
 // MARK:- V Circular Button
 public struct VCircularButton<Content>: View where Content: View {
     // MARK: Properties
-    private let state: VCircularButtonState
-    
     private let viewModel: VCircularButtonViewModel
+    
+    private let state: VCircularButtonState
     
     private let action: () -> Void
     
@@ -20,13 +20,13 @@ public struct VCircularButton<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
+        viewModel: VCircularButtonViewModel = .init(),
         state: VCircularButtonState,
-        viewModel: VCircularButtonViewModel,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.state = state
         self.viewModel = viewModel
+        self.state = state
         self.action = action
         self.content = content
     }
@@ -44,15 +44,11 @@ public extension VCircularButton {
 // MARK:- Preview
 struct VCircularButton_Previews: PreviewProvider {
     static var previews: some View {
-        VCircularButton(
-            state: .enabled, viewModel: .init(),
-            action: {},
-            content: {
-                Image(systemName: "swift")
-                    .resizable()
-                    .frame(size: .init(width: 20, height: 20))
-                    .foregroundColor(.white)
-            }
-        )
+        VCircularButton(state: .enabled, action: {}, content: {
+            Image(systemName: "swift")
+                .resizable()
+                .frame(size: .init(width: 20, height: 20))
+                .foregroundColor(.white)
+        })
     }
 }
