@@ -17,14 +17,24 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        VLazyListView(data: VSpinnerType.allCases, id: \.self, rowContent: { type in
-            RowView(type: .titled(type.description), titleColor: .white, content: {
-                VSpinner(type: type)
-            })
+        VLazyListView(content: {
+            spinners
         })
             .navigationTitle(Self.sceneTitle)
             .background(Color.blue)
             .edgesIgnoringSafeArea(.bottom)
+    }
+    
+    private var spinners: some View {
+        VStack(content: {
+            RowView(type: .titled("Continous"), titleColor: .white, content: {
+                VSpinner(type: .continous())
+            })
+            
+            RowView(type: .titled("Dashed"), titleColor: .white, content: {
+                VSpinner(type: .dashed())
+            })
+        })
     }
 }
 

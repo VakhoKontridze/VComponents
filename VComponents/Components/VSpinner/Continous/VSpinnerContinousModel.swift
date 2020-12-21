@@ -1,48 +1,48 @@
 //
-//  VSpinnerModel.swift
+//  VSpinnerContinousModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 12/21/20.
 //
 
 import SwiftUI
 
 // MARK:- V Spinner Model
-public struct VSpinnerModel {
+public struct VSpinnerContinousModel {
     // MARK: Proeprties
-    let behavior: Behavior
+    public let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
     
     // MARK: Initializers
-    public init(layout: Layout = .init(), colors: Colors = .init()) {
-        self.behavior = .init()
+    public init(
+        behavior: Behavior = .init(),
+        layout: Layout = .init(),
+        colors: Colors = .init()
+    ) {
+        self.behavior = behavior
         self.layout = layout
         self.colors = colors
     }
 }
 
 // MARK:- Behavior
-extension VSpinnerModel {
+extension VSpinnerContinousModel {
     public struct Behavior {
         // MARK: Proeprties
         public let animation: Animation
         
         // MARK: Initializers
-        public init(animation: Animation) {
+        public init(
+            animation: Animation = .linear(duration: 0.75)
+        ) {
             self.animation = animation
-        }
-        
-        public init() {
-            self.init(
-                animation: Animation.linear(duration: 0.75)
-            )
         }
     }
 }
 
 // MARK:- Layout
-extension VSpinnerModel {
+extension VSpinnerContinousModel {
     public struct Layout {
         // MARK: Proeprties
         public let dimension: CGFloat
@@ -50,30 +50,28 @@ extension VSpinnerModel {
         public let thickness: CGFloat
         
         // MARK: Initializers
-        public init(dimension: CGFloat, legth: CGFloat, thickness: CGFloat) {
+        public init(
+            dimension: CGFloat = 15,
+            legth: CGFloat = 0.75,
+            thickness: CGFloat = 2
+        ) {
             self.dimension = dimension
             self.legth = legth
             self.thickness = thickness
-        }
-        
-        public init() {
-            self.init(
-                dimension: 15,
-                legth: 0.75,
-                thickness: 2
-            )
         }
     }
 }
 
 // MARK:- Colors
-extension VSpinnerModel {
+extension VSpinnerContinousModel {
     public struct Colors {
         // MARK: Proeprties
         public let spinner: Color
         
         // MARK: Initializers
-        public init(spinner: Color) {
+        public init(
+            spinner: Color
+        ) {
             self.spinner = spinner
         }
         

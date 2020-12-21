@@ -24,7 +24,7 @@ struct VPrimaryButtonLoaderView: View {
 extension VPrimaryButtonLoaderView {
     @ViewBuilder var body: some View {
         if isVisible {
-            VSpinner(type: .continous).frame(width: width, alignment: .trailing)
+            VSpinner(type: .continous()).frame(width: width, alignment: .trailing)
         }
     }
 }

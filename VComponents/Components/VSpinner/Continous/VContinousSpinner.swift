@@ -1,5 +1,5 @@
 //
-//  VContinousSpinner.swift
+//  VSpinnerContinous.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-// MARK:- V Continous Spinner
-struct VContinousSpinner: View {
+// MARK:- V Spinner Continous
+struct VSpinnerContinous: View {
     // MARK: Properties
-    private let model: VSpinnerModel
+    private let model: VSpinnerContinousModel
     
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers
-    init(model: VSpinnerModel) {
+    init(model: VSpinnerContinousModel) {
         self.model = model
     }
 }
 
 // MARK:- Body
-extension VContinousSpinner {
+extension VSpinnerContinous {
     var body: some View {
         Circle()
             .trim(from: 0, to: model.layout.legth)
@@ -33,5 +33,16 @@ extension VContinousSpinner {
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
             .animation(model.behavior.animation.repeatForever(autoreverses: false))
             .onAppear(perform: { isAnimating.toggle() })
+    }
+}
+
+struct VSpinnerContinous_Previews: PreviewProvider {
+    static var previews: some View {
+        ZStack(content: {
+            Color.blue
+            VSpinnerContinous(model: .init())
+        })
+            .frame(width: .infinity, height: .infinity)
+            .edgesIgnoringSafeArea(.bottom)
     }
 }
