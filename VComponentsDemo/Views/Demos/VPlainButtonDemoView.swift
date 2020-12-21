@@ -35,6 +35,7 @@ extension VPlainButtonDemoView {
                 buttons
             })
         })
+            .navigationTitle(Self.sceneTitle)
     }
     
     private var controller: some View {

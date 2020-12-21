@@ -60,9 +60,8 @@ extension RowView {
             Divider()
                 .padding(.horizontal, 10)
         })
-            .if(!rowType.isRow, transform: {
-                $0.background(Color(red: 240/255, green: 240/255, blue: 240/255))
-            })
+            .padding(.horizontal, 10)
+            .if(!rowType.isRow, transform: { $0.background(Color(red: 240/255, green: 240/255, blue: 240/255)) })
     }
 }
 

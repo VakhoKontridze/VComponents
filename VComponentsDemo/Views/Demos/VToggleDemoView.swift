@@ -55,6 +55,7 @@ extension VToggleDemoView {
                 noLoweredOpacityDisabledContentToggle
             })
         })
+            .navigationTitle(Self.sceneTitle)
     }
     
     private var controller: some View {

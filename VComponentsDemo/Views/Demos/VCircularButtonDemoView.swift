@@ -35,6 +35,7 @@ extension VCircularButtonDemoView {
                 buttons
             })
         })
+            .navigationTitle(Self.sceneTitle)
     }
     
     private var controller: some View {
