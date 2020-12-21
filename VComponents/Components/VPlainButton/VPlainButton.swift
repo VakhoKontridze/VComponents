@@ -13,6 +13,8 @@ public struct VPlainButton<Content>: View where Content: View {
     private let viewModel: VPlainButtonViewModel
     
     private let state: VPlainButtonState
+    @State private var isPressed: Bool = false
+    private var actualState: VPlainButtonActualState { state.actualState(isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -53,9 +55,21 @@ public extension VPlainButton where Content == Text {
 // MARK:- Body
 public extension VPlainButton {
     var body: some View {
-        Button(action: action, label: content)
-            .disabled(!state.isEnabled)
-            .buttonStyle(VPlainButtonStyle(state: state, viewModel: viewModel))
+        TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
+            content()
+                .padding(.horizontal, viewModel.layout.hitAreaOffsetHor)
+                .padding(.vertical, viewModel.layout.hitAreaOffsetVer)
+                
+                // Text
+                .lineLimit(1)
+                .multilineTextAlignment(.center)
+                .truncationMode(.tail)
+                .foregroundColor(viewModel.colors.foregroundColor(state: actualState))
+                .font(viewModel.fonts.title)
+            
+                // Text + Image
+                .opacity(viewModel.colors.foregroundOpacity(state: actualState))
+        })
     }
 }
 

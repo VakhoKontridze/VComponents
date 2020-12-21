@@ -16,8 +16,8 @@ enum VPlainButtonActualState {
 
 // MARK:- Mapping
 extension VPlainButtonState {
-    func actualState(configuration: ButtonStyleConfiguration) -> VPlainButtonActualState {
-        if configuration.isPressed && isEnabled {
+    func actualState(isPressed: Bool) -> VPlainButtonActualState {
+        if isPressed && !isDisabled {
             return .pressed
         } else {
             switch self {
@@ -27,4 +27,3 @@ extension VPlainButtonState {
         }
     }
 }
-

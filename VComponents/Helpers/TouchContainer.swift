@@ -11,17 +11,21 @@ import UIKit
 // MARK:- Touch Container
 struct TouchConatiner<Content>: View where Content: View {
     // MARK: Properties
-    let action: () -> Void
-    let pressHandler: (Bool) -> Void
+    private let isDisabled: Bool
     
-    let content: () -> Content
+    private let action: () -> Void
+    private let pressHandler: (Bool) -> Void
+    
+    private let content: () -> Content
     
     // MARK: Initializers
     init(
+        isDisabled: Bool,
         action: @escaping () -> Void,
         onPress pressHandler: @escaping (Bool) -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
+        self.isDisabled = isDisabled
         self.action = action
         self.pressHandler = pressHandler
         self.content = content
@@ -30,7 +34,7 @@ struct TouchConatiner<Content>: View where Content: View {
     // MARK:- Body
     var body: some View {
         content()
-            .overlay(UIKitTouchView(action: action, pressHandler: pressHandler))
+            .overlay(UIKitTouchView(isDisabled: isDisabled, action: action, pressHandler: pressHandler))
     }
 }
 
@@ -38,14 +42,18 @@ struct TouchConatiner<Content>: View where Content: View {
 // MARK:- UIKit Touch View
 private struct UIKitTouchView: UIViewRepresentable {
     // MARK:- Properties
+    private let isDisabled: Bool
+    
     private let action: () -> Void
     private let pressHandler: (Bool) -> Void
     
     // MARK: Initializers
     init(
+        isDisabled: Bool,
         action: @escaping () -> Void,
         pressHandler: @escaping (Bool) -> Void
     ) {
+        self.isDisabled = isDisabled
         self.action = action
         self.pressHandler = pressHandler
     }
@@ -55,7 +63,7 @@ private struct UIKitTouchView: UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<UIKitTouchView>) -> UIView {
         let view: UIView = .init(frame: .zero)
-        view.isUserInteractionEnabled = true
+        view.isUserInteractionEnabled = !isDisabled
         view.addGestureRecognizer(context.coordinator.makeGesture(
             action: action,
             pressHandler: pressHandler
@@ -63,7 +71,9 @@ private struct UIKitTouchView: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<UIKitTouchView>) {}
+    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<UIKitTouchView>) {
+        uiView.isUserInteractionEnabled = !isDisabled
+    }
 }
 
 // MARK:- UIKit Touch Coordination

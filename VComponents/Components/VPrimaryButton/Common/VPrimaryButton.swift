@@ -11,7 +11,6 @@ import SwiftUI
 public struct VPrimaryButton<Content>: View where Content: View {
     // MARK: Properties
     private let buttonType: VPrimaryButtonType
-    private let viewModel: VPrimaryButtonViewModel
     
     private let state: VPrimaryButtonState
     @State private var isPressed: Bool = false
@@ -24,13 +23,11 @@ public struct VPrimaryButton<Content>: View where Content: View {
     // MARK: Initializers
     public init(
         _ buttonType: VPrimaryButtonType,
-        viewModel: VPrimaryButtonViewModel = .init(),
         state: VPrimaryButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.buttonType = buttonType
-        self.viewModel = viewModel
         self.state = state
         self.action = action
         self.content = content
@@ -40,7 +37,6 @@ public struct VPrimaryButton<Content>: View where Content: View {
 extension VPrimaryButton where Content == Text {
     public init<S>(
         _ buttonType: VPrimaryButtonType,
-        viewModel: VPrimaryButtonViewModel = .init(),
         state: VPrimaryButtonState,
         action: @escaping () -> Void,
         title: S
@@ -49,7 +45,6 @@ extension VPrimaryButton where Content == Text {
     {
         self.init(
             buttonType,
-            viewModel: viewModel,
             state: state,
             action: action,
             content: { Text(title) }

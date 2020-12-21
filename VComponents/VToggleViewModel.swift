@@ -33,7 +33,8 @@ public struct VToggleViewModel {
                     enabled: .clear,
                     pressed: .clear,
                     disabled: .clear,
-                    pressedOpacity: 1
+                    pressedOpacity: 1,
+                    disabledOpacity: 1
                 )
             )
         )
@@ -48,7 +49,8 @@ public struct VToggleViewModel {
                     enabled: .clear,
                     pressed: .clear,
                     disabled: .clear,
-                    pressedOpacity: 0.5
+                    pressedOpacity: 0.5,
+                    disabledOpacity: 0.5
                 )
             )
         )

@@ -65,13 +65,15 @@ extension VPlainButtonViewModel.Colors {
         public let disabled: Color
         
         public let pressedOpacity: Double
+        public let disabledOpacity: Double
         
         // MARK: Initializers
-        public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double) {
+        public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double, disabledOpacity: Double) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
             self.pressedOpacity = pressedOpacity
+            self.disabledOpacity = disabledOpacity
         }
         
         public init() {
@@ -79,7 +81,8 @@ extension VPlainButtonViewModel.Colors {
                 enabled: ColorBook.PlainButton.Text.enabled,
                 pressed: ColorBook.PlainButton.Text.pressed,
                 disabled: ColorBook.PlainButton.Text.disabled,
-                pressedOpacity: 0.5
+                pressedOpacity: 0.5,
+                disabledOpacity: 0.5
             )
         }
     }
@@ -106,19 +109,19 @@ extension VPlainButtonViewModel {
 
 // MARK:- Mapping
 extension VPlainButtonViewModel.Colors {
-    static func foreground(state: VPlainButtonActualState, vm: VPlainButtonViewModel) -> Color {
+    func foregroundColor(state: VPlainButtonActualState) -> Color {
         switch state {
-        case .enabled: return vm.colors.foreground.enabled
-        case .pressed: return vm.colors.foreground.pressed
-        case .disabled: return vm.colors.foreground.disabled
+        case .enabled: return foreground.enabled
+        case .pressed: return foreground.pressed
+        case .disabled: return foreground.disabled
         }
     }
     
-    static func foregroundOpacity(state: VPlainButtonActualState, vm: VPlainButtonViewModel) -> Double {
+    func foregroundOpacity(state: VPlainButtonActualState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return vm.colors.foreground.pressedOpacity
-        case .disabled: return 1
+        case .pressed: return foreground.pressedOpacity
+        case .disabled: return foreground.disabledOpacity
         }
     }
 }

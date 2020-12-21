@@ -37,7 +37,7 @@ struct VPrimaryButtonFixed<Content>: View where Content: View {
 // MARK:- Body
 extension VPrimaryButtonFixed {
     var body: some View {
-        TouchConatiner(action: action, onPress: { isPressed = $0 }, content: {
+        TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             HStack(alignment: .center, spacing: viewModel.layout.loaderSpacing, content: {
                 VPrimaryButtonLoaderCompensatorView(
                     isVisible: actualState.isLoading,
@@ -71,7 +71,6 @@ extension VPrimaryButtonFixed {
                     )
                 )
         })
-            .disabled(state.isDisabled)
     }
 }
 

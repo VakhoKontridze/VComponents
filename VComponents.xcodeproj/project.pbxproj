@@ -10,7 +10,6 @@
 		7A00731B258E27490003F0E9 /* VPlainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00731A258E27490003F0E9 /* VPlainButton.swift */; };
 		7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */; };
 		7A007323258E27C40003F0E9 /* VPlainButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007322258E27C40003F0E9 /* VPlainButtonViewModel.swift */; };
-		7A007329258E28B20003F0E9 /* VPlainButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007328258E28B20003F0E9 /* VPlainButtonStyle.swift */; };
 		7A00732F258E2B7D0003F0E9 /* VPlainButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */; };
 		7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00733E258E2F000003F0E9 /* VSliderState.swift */; };
 		7A007352258E38E40003F0E9 /* FontBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007351258E38E40003F0E9 /* FontBook.swift */; };
@@ -46,7 +45,6 @@
 		7A8A971F258DDD8400309886 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A971E258DDD8400309886 /* View.swift */; };
 		7A8A9729258DDDA800309886 /* VPrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9724258DDDA800309886 /* VPrimaryButton.swift */; };
 		7A8A972A258DDDA800309886 /* VPrimaryButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9725258DDDA800309886 /* VPrimaryButtonType.swift */; };
-		7A8A972B258DDDA800309886 /* VPrimaryButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9726258DDDA800309886 /* VPrimaryButtonViewModel.swift */; };
 		7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */; };
 		7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */; };
 		7A8A9744258DDF4200309886 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9743258DDF4200309886 /* RowView.swift */; };
@@ -72,7 +70,6 @@
 		7A00731A258E27490003F0E9 /* VPlainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButton.swift; sourceTree = "<group>"; };
 		7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonState.swift; sourceTree = "<group>"; };
 		7A007322258E27C40003F0E9 /* VPlainButtonViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonViewModel.swift; sourceTree = "<group>"; };
-		7A007328258E28B20003F0E9 /* VPlainButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonStyle.swift; sourceTree = "<group>"; };
 		7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonDemoView.swift; sourceTree = "<group>"; };
 		7A00733E258E2F000003F0E9 /* VSliderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderState.swift; sourceTree = "<group>"; };
 		7A007351258E38E40003F0E9 /* FontBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBook.swift; sourceTree = "<group>"; };
@@ -112,7 +109,6 @@
 		7A8A971E258DDD8400309886 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		7A8A9724258DDDA800309886 /* VPrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPrimaryButton.swift; sourceTree = "<group>"; };
 		7A8A9725258DDDA800309886 /* VPrimaryButtonType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonType.swift; sourceTree = "<group>"; };
-		7A8A9726258DDDA800309886 /* VPrimaryButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonViewModel.swift; sourceTree = "<group>"; };
 		7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonState.swift; sourceTree = "<group>"; };
 		7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonDemoView.swift; sourceTree = "<group>"; };
 		7A8A9743258DDF4200309886 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
@@ -152,18 +148,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7A007311258E27270003F0E9 /* VPlainButton */ = {
-			isa = PBXGroup;
-			children = (
-				7A00731A258E27490003F0E9 /* VPlainButton.swift */,
-				7A007322258E27C40003F0E9 /* VPlainButtonViewModel.swift */,
-				7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */,
-				7AA499AF258F70E9002BD362 /* VPlainButtonActualState.swift */,
-				7A007328258E28B20003F0E9 /* VPlainButtonStyle.swift */,
-			);
-			name = VPlainButton;
-			sourceTree = "<group>";
-		};
 		7A007348258E30900003F0E9 /* Continous */ = {
 			isa = PBXGroup;
 			children = (
@@ -294,8 +278,6 @@
 		7A8A96F3258DDB0800309886 /* zComponents */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A9722258DDD9B00309886 /* VPrimaryButton */,
-				7A007311258E27270003F0E9 /* VPlainButton */,
 				7A48FDC1258DE43700AA4D4D /* VCircularButon */,
 				7A007361258E47130003F0E9 /* VToggle */,
 				7A3C1563258DECEA00CE1D96 /* VSlider */,
@@ -352,18 +334,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7A8A9722258DDD9B00309886 /* VPrimaryButton */ = {
-			isa = PBXGroup;
-			children = (
-				7AA9F3EF2590A76D0060F210 /* Common */,
-				7AA9F3F02590A7720060F210 /* Compact */,
-				7AA9F4082590AF2E0060F210 /* Fixed */,
-				7AA9F3F72590A9000060F210 /* Subviews */,
-				7A8A9726258DDDA800309886 /* VPrimaryButtonViewModel.swift */,
-			);
-			name = VPrimaryButton;
-			sourceTree = "<group>";
-		};
 		7A8A9733258DDED200309886 /* Launscreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,38 +372,11 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		7AA9F3EF2590A76D0060F210 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Common;
-			sourceTree = "<group>";
-		};
-		7AA9F3F02590A7720060F210 /* Compact */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Compact;
-			sourceTree = "<group>";
-		};
-		7AA9F3F72590A9000060F210 /* Subviews */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Subviews;
-			sourceTree = "<group>";
-		};
-		7AA9F4082590AF2E0060F210 /* Fixed */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Fixed;
-			sourceTree = "<group>";
-		};
 		7AA9F41E2590B08C0060F210 /* Components */ = {
 			isa = PBXGroup;
 			children = (
 				7AA9F41F2590B09D0060F210 /* VPrimaryButton */,
+				7AA9F4452590B34A0060F210 /* VPlainButton */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -531,6 +474,17 @@
 				7A8A96FD258DDC7800309886 /* SceneDelegate.swift */,
 			);
 			path = "App Control";
+			sourceTree = "<group>";
+		};
+		7AA9F4452590B34A0060F210 /* VPlainButton */ = {
+			isa = PBXGroup;
+			children = (
+				7A00731A258E27490003F0E9 /* VPlainButton.swift */,
+				7A007322258E27C40003F0E9 /* VPlainButtonViewModel.swift */,
+				7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */,
+				7AA499AF258F70E9002BD362 /* VPlainButtonActualState.swift */,
+			);
+			path = VPlainButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -650,7 +604,6 @@
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
 				7A48FDC9258DE48E00AA4D4D /* VCircularButtonViewModel.swift in Sources */,
 				7A007323258E27C40003F0E9 /* VPlainButtonViewModel.swift in Sources */,
-				7A8A972B258DDDA800309886 /* VPrimaryButtonViewModel.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */,
 				7A8A972A258DDDA800309886 /* VPrimaryButtonType.swift in Sources */,
 				7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */,
@@ -667,7 +620,6 @@
 				7A3C1557258DE7B900CE1D96 /* VSpinnerViewModel.swift in Sources */,
 				7A48FDC7258DE48E00AA4D4D /* VCircularButtonStyle.swift in Sources */,
 				7AA9F4052590ACB00060F210 /* VPrimaryButtonBackgroundView.swift in Sources */,
-				7A007329258E28B20003F0E9 /* VPlainButtonStyle.swift in Sources */,
 				7A3C1558258DE7B900CE1D96 /* VContinousSpinner.swift in Sources */,
 				7AA9F3F22590A7820060F210 /* VPrimaryButtonCompact.swift in Sources */,
 				7AA9F3F92590A9270060F210 /* VPrimaryButtonLoaderCompensatorView.swift in Sources */,
