@@ -18,7 +18,7 @@ Dec 19 2020. VToggle
 
 Dec 19 2020. VPlainButton
 
-Dec 19 2020. VLazyListView
+Dec 19 2020. VLazyList
 
 Dec 19 2020. VSlider
 

@@ -1,5 +1,5 @@
 //
-//  VLazyListView.swift
+//  VLazyList.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 29.09.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Lazy List View
-public struct VLazyListView<Content>: View where Content: View {
+// MARK:- V Lazy List
+public struct VLazyList<Content>: View where Content: View {
     // MARK: Properties
     private let model: VLazyListModel
     
@@ -24,7 +24,7 @@ public struct VLazyListView<Content>: View where Content: View {
     }
 }
 
-public extension VLazyListView {
+public extension VLazyList {
     init<Data, ID, RowContent>(
         model: VLazyListModel = .init(),
         data: Data,
@@ -48,7 +48,7 @@ public extension VLazyListView {
     }
 }
 
-public extension VLazyListView {
+public extension VLazyList {
     init<Data, ID, RowContent>(
         model: VLazyListModel = .init(),
         data: Data,
@@ -70,7 +70,7 @@ public extension VLazyListView {
 }
 
 // MARK:- Body
-public extension VLazyListView {
+public extension VLazyList {
     @ViewBuilder var body: some View {
         switch model.scrollDirection {
         case .vertical(let horizontalAlignment):
@@ -102,11 +102,11 @@ struct VLazyListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(content: {
             HStack(content: {
-                VLazyListView(data: data, id: \.self, rowContent: { number in
+                VLazyList(data: data, id: \.self, rowContent: { number in
                     Text(String(number))
                 })
                 
-                VLazyListView(content: {
+                VLazyList(content: {
                     ForEach(data, id: \.self, content: { number in
                         Text(String(number))
                     })
@@ -114,11 +114,11 @@ struct VLazyListView_Previews: PreviewProvider {
             })
             
             HStack(content: {
-                VLazyListView(model: horizontalVM, data: data, id: \.self, rowContent: { number in
+                VLazyList(model: horizontalVM, data: data, id: \.self, rowContent: { number in
                     Text(String(number))
                 })
                 
-                VLazyListView(model: horizontalVM, content: {
+                VLazyList(model: horizontalVM, content: {
                     ForEach(data, id: \.self, content: { number in
                         Text(String(number))
                     })

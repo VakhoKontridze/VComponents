@@ -33,7 +33,7 @@ extension VSliderDemoView {
         VStack(content: {
             controller
 
-            VLazyListView(content: {
+            VLazyList(content: {
                 sliders
                 steppedSliders
                 animatedSliders

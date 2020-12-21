@@ -17,7 +17,7 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        VLazyListView(content: {
+        VLazyList(content: {
             spinners
         })
             .navigationTitle(Self.sceneTitle)

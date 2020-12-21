@@ -31,7 +31,7 @@ extension VCircularButtonDemoView {
         VStack(content: {
             controller
             
-            VLazyListView(content: {
+            VLazyList(content: {
                 buttons
             })
         })

@@ -26,7 +26,7 @@
 		7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1564258DECF400CE1D96 /* VSlider.swift */; };
 		7A3C1571258DF24800CE1D96 /* VSliderSolidThumbModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1570258DF24800CE1D96 /* VSliderSolidThumbModel.swift */; };
 		7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */; };
-		7A3C1584258DFF5A00CE1D96 /* VLazyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1583258DFF5A00CE1D96 /* VLazyListView.swift */; };
+		7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */; };
 		7A3C159B258E0A3D00CE1D96 /* VLazyListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C159A258E0A3D00CE1D96 /* VLazyListModel.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */; };
 		7A48FDC9258DE48E00AA4D4D /* VCircularButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC5258DE48E00AA4D4D /* VCircularButtonModel.swift */; };
@@ -96,7 +96,7 @@
 		7A3C1564258DECF400CE1D96 /* VSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSlider.swift; sourceTree = "<group>"; };
 		7A3C1570258DF24800CE1D96 /* VSliderSolidThumbModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderSolidThumbModel.swift; sourceTree = "<group>"; };
 		7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
-		7A3C1583258DFF5A00CE1D96 /* VLazyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListView.swift; sourceTree = "<group>"; };
+		7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyList.swift; sourceTree = "<group>"; };
 		7A3C159A258E0A3D00CE1D96 /* VLazyListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListModel.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButton.swift; sourceTree = "<group>"; };
 		7A48FDC5258DE48E00AA4D4D /* VCircularButtonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonModel.swift; sourceTree = "<group>"; };
@@ -174,23 +174,6 @@
 				7A3C1542258DE65F00CE1D96 /* View.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		7A3C1582258DFF4B00CE1D96 /* zContainers */ = {
-			isa = PBXGroup;
-			children = (
-				7A3C158B258E00B100CE1D96 /* VLazyListView */,
-			);
-			name = zContainers;
-			sourceTree = "<group>";
-		};
-		7A3C158B258E00B100CE1D96 /* VLazyListView */ = {
-			isa = PBXGroup;
-			children = (
-				7A3C1583258DFF5A00CE1D96 /* VLazyListView.swift */,
-				7A3C159A258E0A3D00CE1D96 /* VLazyListModel.swift */,
-			);
-			name = VLazyListView;
 			sourceTree = "<group>";
 		};
 		7A8A73782590BEB5001024FB /* VToggle */ = {
@@ -359,10 +342,10 @@
 			children = (
 				7A8A96F1258DDA9E00309886 /* Framework Info */,
 				7AA9F41E2590B08C0060F210 /* Components */,
+				7AC5060C25911B5900226656 /* Containers */,
 				7AA9F4362590B1D60060F210 /* Helpers */,
 				7AA9F42F2590B18D0060F210 /* Extensions */,
 				7AA9F4342590B1C00060F210 /* Resources */,
-				7A3C1582258DFF4B00CE1D96 /* zContainers */,
 			);
 			path = VComponents;
 			sourceTree = "<group>";
@@ -579,6 +562,23 @@
 			path = VPlainButton;
 			sourceTree = "<group>";
 		};
+		7AC5060C25911B5900226656 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				7AC5060D25911B6000226656 /* VLazyListView */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
+		7AC5060D25911B6000226656 /* VLazyListView */ = {
+			isa = PBXGroup;
+			children = (
+				7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */,
+				7A3C159A258E0A3D00CE1D96 /* VLazyListModel.swift */,
+			);
+			path = VLazyListView;
+			sourceTree = "<group>";
+		};
 		7AF4C8CF2590BA3A00275C76 /* VCircularButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -740,7 +740,7 @@
 				7AA9F3EC2590A6330060F210 /* VPrimaryButtonCompactModel.swift in Sources */,
 				7A8A742E259102AA001024FB /* VSliderPlain.swift in Sources */,
 				7AA9F4152590AFE20060F210 /* VPrimaryButtonFixed.swift in Sources */,
-				7A3C1584258DFF5A00CE1D96 /* VLazyListView.swift in Sources */,
+				7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */,
 				7AA9F4012590AA8A0060F210 /* VPrimaryButtonContentView.swift in Sources */,
 				7A8A7467259118DF001024FB /* VSpinnerContinousModel.swift in Sources */,
 				7A8A7434259102CF001024FB /* VSliderPlainModel.swift in Sources */,

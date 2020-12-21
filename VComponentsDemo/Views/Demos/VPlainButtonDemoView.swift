@@ -31,7 +31,7 @@ extension VPlainButtonDemoView {
         VStack(content: {
             controller
             
-            VLazyListView(content: {
+            VLazyList(content: {
                 buttons
             })
         })

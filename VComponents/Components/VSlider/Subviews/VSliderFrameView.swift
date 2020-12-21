@@ -48,7 +48,9 @@ struct VSliderFrameView<ThumbContent>: View where ThumbContent: View {
         action: ((Bool) -> Void)?,
         @ViewBuilder thumbContent: @escaping (GeometryProxy) -> ThumbContent
     )
-        where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint
+        where
+            V: BinaryFloatingPoint,
+            V.Stride: BinaryFloatingPoint
     {
         self.animation = animation
         self.height = height
@@ -83,7 +85,9 @@ extension VSliderFrameView where ThumbContent == Never {
         
         action: ((Bool) -> Void)?
     )
-        where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint
+        where
+            V: BinaryFloatingPoint,
+            V.Stride: BinaryFloatingPoint
     {
         self.animation = animation
         self.height = height

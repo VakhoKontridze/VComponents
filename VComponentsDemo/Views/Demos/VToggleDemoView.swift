@@ -45,7 +45,7 @@ extension VToggleDemoView {
         VStack(content: {
             controller
             
-            VLazyListView(content: {
+            VLazyList(content: {
                 noContentToggle
                 rightContentToggles
                 leftFlexibleContentToggles

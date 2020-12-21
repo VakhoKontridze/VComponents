@@ -29,7 +29,9 @@ public struct VSlider: View {
         value: Binding<Double>,
         onChange action: ((Bool) -> Void)? = nil
     )
-        where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint
+        where
+            V: BinaryFloatingPoint,
+            V.Stride: BinaryFloatingPoint
     {
         self.sliderType = sliderType
         self.min = .init(range.lowerBound)
