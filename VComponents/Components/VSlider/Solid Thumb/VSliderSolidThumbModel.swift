@@ -9,12 +9,10 @@ import SwiftUI
 
 // MARK:- V Slider View Model
 public struct VSliderSolidThumbModel {
-    // MARK: Properties
     public let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
     
-    // MARK: Initializers
     public init(
         behavior: Behavior = .init(),
         layout: Layout = .init(),
@@ -29,10 +27,8 @@ public struct VSliderSolidThumbModel {
 // MARK:- Behavior
 extension VSliderSolidThumbModel {
     public struct Behavior {
-        // MARK: Properties
         public let animation: Animation?
         
-        // MARK: Initializers
         public init(
             animation: Animation? = nil
         ) {
@@ -44,11 +40,9 @@ extension VSliderSolidThumbModel {
 // MARK:- Layout
 extension VSliderSolidThumbModel {
     public struct Layout {
-        // MARK: Properties
         public let slider: Slider
         public let thumb: Thumb
         
-        // MARK: Initializers
         public init(
             slider: Slider = .init(),
             thumb: Thumb = .init()
@@ -61,11 +55,9 @@ extension VSliderSolidThumbModel {
 
 extension VSliderSolidThumbModel.Layout {
     public struct Slider {
-        // MARK: Properties
         public let height: CGFloat
         public let cornerRadius: CGFloat
         
-        // MARK: Initializers
         public init(
             height: CGFloat = 10,
             cornerRadius: CGFloat = 5
@@ -78,38 +70,28 @@ extension VSliderSolidThumbModel.Layout {
 
 extension VSliderSolidThumbModel.Layout {
     public struct Thumb {
-        // MARK: Properties
         public let dimension: CGFloat
         public let cornerRadius: CGFloat
-        
         public let stroke: CGFloat
         
-        // MARK: Initializers
-        public init(dimension: CGFloat, cornerRadius: CGFloat, stroke: CGFloat) {
+        public init(
+            dimension: CGFloat = 20,
+            cornerRadius: CGFloat = 10,
+            stroke: CGFloat = 1
+        ) {
             self.dimension = dimension
             self.cornerRadius = cornerRadius
             self.stroke = stroke
-        }
-        
-        public init() {
-            self.init(
-                dimension: 20,
-                cornerRadius: 10,
-                stroke: 1
-            )
         }
     }
 }
 
 // MARK:- Colors
 extension VSliderSolidThumbModel {
-    // MARK: Properties
     public struct Colors {
-        // MARK: Properties
         public let slider: Slider
         public let thumb: Thumb
         
-        // MARK: Initializers
         public init(
             slider: Slider = .init(),
             thumb: Thumb = .init()
@@ -122,11 +104,9 @@ extension VSliderSolidThumbModel {
 
 extension VSliderSolidThumbModel.Colors {
     public struct Slider {
-        // MARK: Properties
         public let progress: ProgressColors
         public let track: TrackColors
         
-        // MARK: Initializers
         public init(
             progress: ProgressColors = .init(),
             track: TrackColors = .init()
@@ -139,52 +119,41 @@ extension VSliderSolidThumbModel.Colors {
 
 extension VSliderSolidThumbModel.Colors.Slider {
     public struct ProgressColors {
-        // MARK: Properties
         public let enabled: Color
         public let disabled: Color
         
-        // MARK: Initializers
-        public init(enabled: Color, disabled: Color) {
+        public init(
+            enabled: Color = ColorBook.Slider.Progress.enabled,
+            disabled: Color = ColorBook.Slider.Progress.disabled
+        ) {
             self.enabled = enabled
             self.disabled = disabled
-        }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.Slider.Progress.enabled,
-                disabled: ColorBook.Slider.Progress.disabled
-            )
         }
     }
     
     public struct TrackColors {
-        // MARK: Properties
         public let enabled: Color
         public let disabled: Color
         
-        // MARK: Initializers
-        public init(enabled: Color, disabled: Color) {
+        public init(
+            enabled: Color = ColorBook.Slider.Track.enabled,
+            disabled: Color = ColorBook.Slider.Track.disabled
+        ) {
             self.enabled = enabled
             self.disabled = disabled
-        }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.Slider.Track.enabled,
-                disabled: ColorBook.Slider.Track.disabled
-            )
         }
     }
 }
 
 extension VSliderSolidThumbModel.Colors {
     public struct Thumb {
-        // MARK: Properties
         public let fill: FillColors
         public let stroke: StrokeColors
         
-        // MARK: Initializers
-        public init(fill: FillColors = .init(), stroke: StrokeColors = .init()) {
+        public init(
+            fill: FillColors = .init(),
+            stroke: StrokeColors = .init()
+        ) {
             self.fill = fill
             self.stroke = stroke
         }
@@ -193,40 +162,28 @@ extension VSliderSolidThumbModel.Colors {
 
 extension VSliderSolidThumbModel.Colors.Thumb {
     public struct FillColors {
-        // MARK: Properties
         public let enabled: Color
         public let disabled: Color
         
-        // MARK: Initializers
-        public init(enabled: Color, disabled: Color) {
+        public init(
+            enabled: Color = ColorBook.Slider.Thumb.enabled,
+            disabled: Color = ColorBook.Slider.Thumb.disabled
+        ) {
             self.enabled = enabled
             self.disabled = disabled
-        }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.Slider.Thumb.enabled,
-                disabled: ColorBook.Slider.Thumb.disabled
-            )
         }
     }
     
     public struct StrokeColors {
-        // MARK: Properties
         public let enabled: Color
         public let disabled: Color
         
-        // MARK: Initializers
-        public init(enabled: Color, disabled: Color) {
+        public init(
+            enabled: Color = ColorBook.Slider.ThumbStroke.enabled,
+            disabled: Color = ColorBook.Slider.ThumbStroke.disabled
+        ) {
             self.enabled = enabled
             self.disabled = disabled
-        }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.Slider.ThumbStroke.enabled,
-                disabled: ColorBook.Slider.ThumbStroke.disabled
-            )
         }
     }
 }

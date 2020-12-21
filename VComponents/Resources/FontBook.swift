@@ -8,10 +8,10 @@
 import SwiftUI
 
 // MARK:- Font Book
-struct FontBook {
+public struct FontBook {
     // MARK: Properties
-    static let buttonLarge: Font = .system(size: 14, weight: .semibold, design: .default)
-    static let buttonSmall: Font = .system(size: 14, weight: .semibold, design: .default)
+    public static let buttonLarge: Font = .system(size: 14, weight: .semibold, design: .default)
+    public static let buttonSmall: Font = .system(size: 14, weight: .semibold, design: .default)
     
     // MARK: Initalizers
     private init() {}

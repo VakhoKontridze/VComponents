@@ -9,13 +9,15 @@ import SwiftUI
 
 // MARK:- V Toggle Model
 public struct VToggleRightContentModel {
-    // MARK: Properties
     public let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
     
-    // MARK: Initializers
-    public init(behavior: Behavior = .init(), layout: Layout = .init(), colors: Colors = .init()) {
+    public init(
+        behavior: Behavior = .init(),
+        layout: Layout = .init(),
+        colors: Colors = .init()
+    ) {
         self.behavior = behavior
         self.layout = layout
         self.colors = colors
@@ -25,11 +27,9 @@ public struct VToggleRightContentModel {
 // MARK:- Behavior
 extension VToggleRightContentModel {
     public struct Behavior {
-        // MARK: Properties
         public let contentIsClickable: Bool
         public let animation: Animation
         
-        // MARK: Initializers
         public init(
             contentIsClickable: Bool = true,
             animation: Animation = Animation.easeIn(duration: 0.1)
@@ -43,13 +43,11 @@ extension VToggleRightContentModel {
 // MARK:- Layout
 extension VToggleRightContentModel {
     public struct Layout {
-        // MARK: Properties
         public let size: CGSize
         public let thumbDimension: CGFloat
         public let contentSpacing: CGFloat
         let animationOffset: CGFloat
         
-        // MARK: Initializers
         public init(
             size: CGSize = .init(width: 51, height: 31),
             thumbDimension: CGFloat = 27,
@@ -71,13 +69,15 @@ extension VToggleRightContentModel {
 // MARK:- Colors
 extension VToggleRightContentModel {
     public struct Colors {
-        // MARK: Properties
         public let fill: FillColors
         public let thumb: ThumbColors
         public let content: ContentColors
         
-        // MARK: Initializers
-        public init(fill: FillColors = .init(), thumb: ThumbColors = .init(), content: ContentColors = .init()) {
+        public init(
+            fill: FillColors = .init(),
+            thumb: ThumbColors = .init(),
+            content: ContentColors = .init()
+        ) {
             self.fill = fill
             self.thumb = thumb
             self.content = content
@@ -87,65 +87,47 @@ extension VToggleRightContentModel {
 
 extension VToggleRightContentModel {
     public struct FillColors {
-        // MARK: Properties
         public let enabledOn: Color
         public let enabledOff: Color
         public let disabled: Color
         
-        // MARK: Initializers
-        public init(enabledOn: Color, enabledOff: Color, disabled: Color) {
+        public init(
+            enabledOn: Color = ColorBook.Toggle.Fill.enabledOn,
+            enabledOff: Color = ColorBook.Toggle.Fill.enabledOff,
+            disabled: Color = ColorBook.Toggle.Fill.disabled
+        ) {
             self.enabledOn = enabledOn
             self.enabledOff = enabledOff
             self.disabled = disabled
-        }
-        
-        public init() {
-            self.init(
-                enabledOn: ColorBook.Toggle.Fill.enabledOn,
-                enabledOff: ColorBook.Toggle.Fill.enabledOff,
-                disabled: ColorBook.Toggle.Fill.disabled
-            )
         }
     }
     
     public struct ThumbColors {
-        // MARK: Properties
         public let enabledOn: Color
         public let enabledOff: Color
         public let disabled: Color
         
-        // MARK: Initializers
-        public init(enabledOn: Color, enabledOff: Color, disabled: Color) {
+        public init(
+            enabledOn: Color = ColorBook.Toggle.Thumb.enabledOn,
+            enabledOff: Color = ColorBook.Toggle.Thumb.enabledOff,
+            disabled: Color = ColorBook.Toggle.Thumb.disabled
+        ) {
             self.enabledOn = enabledOn
             self.enabledOff = enabledOff
             self.disabled = disabled
         }
-        
-        public init() {
-            self.init(
-                enabledOn: ColorBook.Toggle.Thumb.enabledOn,
-                enabledOff: ColorBook.Toggle.Thumb.enabledOff,
-                disabled: ColorBook.Toggle.Thumb.disabled
-            )
-        }
     }
     
     public struct ContentColors {
-        // MARK: Properties
         public let pressedOpacity: Double
         public let disabledOpacity: Double
         
-        // MARK: Initializers
-        public init(pressedOpacity: Double, disabledOpacity: Double) {
+        public init(
+            pressedOpacity: Double = 0.5,
+            disabledOpacity: Double = 0.5
+        ) {
             self.pressedOpacity = pressedOpacity
             self.disabledOpacity = disabledOpacity
-        }
-        
-        public init() {
-            self.init(
-                pressedOpacity: 0.5,
-                disabledOpacity: 0.5
-            )
         }
     }
 }

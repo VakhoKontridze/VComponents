@@ -9,13 +9,15 @@ import SwiftUI
 
 // MARK:- V Primary Button Fixed Model
 public struct VPrimaryButtonFixedModel {
-    // MARK: Properties
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
     
-    // MARK: Initializers
-    public init(layout: Layout = .init(), colors: Colors = .init(), fonts: Fonts = .init()) {
+    public init(
+        layout: Layout = .init(),
+        colors: Colors = .init(),
+        fonts: Fonts = .init()
+    ) {
         self.layout = layout
         self.colors = colors
         self.fonts = fonts
@@ -25,15 +27,13 @@ public struct VPrimaryButtonFixedModel {
 // MARK:- Layout
 public extension VPrimaryButtonFixedModel {
     struct Layout {
-        // MARK: Properties
         public let size: CGSize
         public let cornerRadius: CGFloat
         public let borderWidth: CGFloat
         public let contentInset: CGFloat
-        let loaderSpacing: CGFloat = 20
-        let loaderWidth: CGFloat = 10
+        let loaderSpacing: CGFloat
+        let loaderWidth: CGFloat
         
-        // MARK: Initializers
         public init(
             size: CGSize = .init(width: 300, height: 50),
             cornerRadius: CGFloat = 20,
@@ -44,6 +44,8 @@ public extension VPrimaryButtonFixedModel {
             self.cornerRadius = cornerRadius
             self.borderWidth = borderWidth
             self.contentInset = contentInset
+            self.loaderSpacing = 20
+            self.loaderWidth = 10
         }
     }
 }
@@ -51,13 +53,15 @@ public extension VPrimaryButtonFixedModel {
 // MARK:- Colors
 public extension VPrimaryButtonFixedModel {
     struct Colors {
-        // MARK: Properties
         public let foreground: ForegroundColors
         public let fill: FillColors
         public let border: BorderColors
         
-        // MARK: Initializers
-        public init(foreground: ForegroundColors = .init(), fill: FillColors = .init(), border: BorderColors = .init()) {
+        public init(
+            foreground: ForegroundColors = .init(),
+            fill: FillColors = .init(),
+            border: BorderColors = .init()
+        ) {
             self.foreground = foreground
             self.fill = fill
             self.border = border
@@ -67,81 +71,63 @@ public extension VPrimaryButtonFixedModel {
 
 extension VPrimaryButtonFixedModel.Colors {
     public struct ForegroundColors {
-        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         public let loading: Color
         public let pressedOpacity: Double
         
-        // MARK: Initializers
-        public init(enabled: Color, pressed: Color, disabled: Color, loading: Color, pressedOpacity: Double) {
+        public init(
+            enabled: Color = ColorBook.PrimaryButton.Text.enabled,
+            pressed: Color = ColorBook.PrimaryButton.Text.pressed,
+            disabled: Color = ColorBook.PrimaryButton.Text.disabled,
+            loading: Color = ColorBook.PrimaryButton.Text.loading,
+            
+            pressedOpacity: Double = 0.5
+        ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
             self.loading = loading
             self.pressedOpacity = pressedOpacity
         }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.PrimaryButton.Text.enabled,
-                pressed: ColorBook.PrimaryButton.Text.pressed,
-                disabled: ColorBook.PrimaryButton.Text.disabled,
-                loading: ColorBook.PrimaryButton.Text.loading,
-                
-                pressedOpacity: 0.5
-            )
-        }
     }
     
     public struct FillColors {
-        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         public let loading: Color
         
-        // MARK: Initializers
-        public init(enabled: Color, pressed: Color, disabled: Color, loading: Color) {
+        public init(
+            enabled: Color = ColorBook.PrimaryButton.Fill.enabled,
+            pressed: Color = ColorBook.PrimaryButton.Fill.pressed,
+            disabled: Color = ColorBook.PrimaryButton.Fill.disabled,
+            loading: Color = ColorBook.PrimaryButton.Fill.loading
+        ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
             self.loading = loading
-        }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.PrimaryButton.Fill.enabled,
-                pressed: ColorBook.PrimaryButton.Fill.pressed,
-                disabled: ColorBook.PrimaryButton.Fill.disabled,
-                loading: ColorBook.PrimaryButton.Fill.loading
-            )
         }
     }
     
     public struct BorderColors {
-        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         public let loading: Color
         
-        // MARK: Initializers
-        public init(enabled: Color, pressed: Color, disabled: Color, loading: Color) {
+        public init(
+            enabled: Color = ColorBook.PrimaryButton.Border.enabled,
+            pressed: Color = ColorBook.PrimaryButton.Border.pressed,
+            disabled: Color = ColorBook.PrimaryButton.Border.disabled,
+            loading: Color = ColorBook.PrimaryButton.Border.loading
+        ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
             self.loading = loading
-        }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.PrimaryButton.Border.enabled,
-                pressed: ColorBook.PrimaryButton.Border.pressed,
-                disabled: ColorBook.PrimaryButton.Border.disabled,
-                loading: ColorBook.PrimaryButton.Border.loading
-            )
         }
     }
 }
@@ -149,18 +135,12 @@ extension VPrimaryButtonFixedModel.Colors {
 // MARK:- Fonts
 public extension VPrimaryButtonFixedModel {
     struct Fonts {
-        // MARK: Properties
         public let title: Font
         
-        // MARK: Initializers
-        public init(title: Font) {
+        public init(
+            title: Font = FontBook.buttonLarge
+        ) {
             self.title = title
-        }
-        
-        public init() {
-            self.init(
-                title: FontBook.buttonLarge
-            )
         }
     }
 }

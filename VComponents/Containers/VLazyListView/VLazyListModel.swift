@@ -9,21 +9,15 @@ import SwiftUI
 
 // MARK:- V Lazy List Model
 public struct VLazyListModel {
-    // MARK: Properties
     public let scrollDirection: VLazyListScrollDirection
     public let showsIndicators: Bool
     
-    // MARK: Iniitalizers
-    public init(scrollDirection: VLazyListScrollDirection, showsIndicators: Bool) {
+    public init(
+        scrollDirection: VLazyListScrollDirection = .vertical(alignment: .center),
+        showsIndicators: Bool = true
+    ) {
         self.scrollDirection = scrollDirection
         self.showsIndicators = showsIndicators
-    }
-    
-    public init() {
-        self.init(
-            scrollDirection: .vertical(alignment: .center),
-            showsIndicators: true
-        )
     }
 }
 

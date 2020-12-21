@@ -43,8 +43,8 @@ extension VSliderThumb {
         VSliderFrameView(
             animation: model.behavior.animation,
             
-            height: model.layout.slider.height,
-            cornerRadius: model.layout.slider.cornerRadius,
+            height: model.layout.height,
+            cornerRadius: model.layout.cornerRadius,
             
             trackColor: model.colors.trackColor(state: state),
             progressColor: model.colors.progressColor(state: state),
@@ -62,11 +62,11 @@ extension VSliderThumb {
     }
     
     private func thumbContent(_ proxy: GeometryProxy) -> some View {
-        RoundedRectangle(cornerRadius: model.layout.thumb.cornerRadius)
+        RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
             .foregroundColor(model.colors.thumbFillColor(state: state))
-            .shadow(color: model.colors.thumbShadow(state: state), radius: model.layout.thumb.shadowRadius)
+            .shadow(color: model.colors.thumbShadow(state: state), radius: model.layout.thumbShadowRadius)
 
-            .frame(dimension: model.layout.thumb.dimension)
+            .frame(dimension: model.layout.thumbDimension)
             .offset(x: thumbOffset(in: proxy), y: 0)
     }
 }
@@ -75,7 +75,7 @@ extension VSliderThumb {
 private extension VSliderThumb {
     func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
         let progressW: CGFloat = progressWidth(in: proxy)
-        let thumbW: CGFloat = model.layout.thumb.dimension
+        let thumbW: CGFloat = model.layout.thumbDimension
         let offset: CGFloat = progressW - thumbW / 2
         
         return offset

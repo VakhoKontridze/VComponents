@@ -9,13 +9,15 @@ import SwiftUI
 
 // MARK:- V Circular Button Model
 public struct VCircularButtonModel {
-    // MARK: Properties
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
     
-    // MARK: Initializers
-    public init(layout: Layout = .init(), colors: Colors = .init(), fonts: Fonts = .init()) {
+    public init(
+        layout: Layout = .init(),
+        colors: Colors = .init(),
+        fonts: Fonts = .init()
+    ) {
         self.layout = layout
         self.colors = colors
         self.fonts = fonts
@@ -25,10 +27,8 @@ public struct VCircularButtonModel {
 // MARK:- Layout
 extension VCircularButtonModel {
     public struct Layout {
-        // MARK: Properties
         public let dimension: CGFloat
         
-        // MARK: Initializers
         public init(
             dimension: CGFloat = 44
         ) {
@@ -40,12 +40,13 @@ extension VCircularButtonModel {
 // MARK:- Colors
 extension VCircularButtonModel {
     public struct Colors {
-        // MARK: Properties
         public let foreground: ForegroundColors
         public let background: BackgroundColors
         
-        // MARK: Initializers
-        public init(foreground: ForegroundColors = .init(), background: BackgroundColors = .init()) {
+        public init(
+            foreground: ForegroundColors = .init(),
+            background: BackgroundColors = .init()
+        ) {
             self.foreground = foreground
             self.background = background
         }
@@ -54,50 +55,37 @@ extension VCircularButtonModel {
 
 extension VCircularButtonModel {
     public struct ForegroundColors {
-        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
-        
         public let pressedOpacity: Double
         
-        // MARK: Initializers
-        public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double) {
+        public init(
+            enabled: Color = ColorBook.CircularButton.Text.enabled,
+            pressed: Color = ColorBook.CircularButton.Text.pressed,
+            disabled: Color = ColorBook.CircularButton.Text.disabled,
+            pressedOpacity: Double = 0.5
+        ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
             self.pressedOpacity = pressedOpacity
         }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.CircularButton.Text.enabled,
-                pressed: ColorBook.CircularButton.Text.pressed,
-                disabled: ColorBook.CircularButton.Text.disabled,
-                pressedOpacity: 0.5
-            )
-        }
     }
     
     public struct BackgroundColors {
-        // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         
-        // MARK: Initializers
-        public init(enabled: Color, pressed: Color, disabled: Color) {
+        public init(
+            enabled: Color = ColorBook.CircularButton.Fill.enabled,
+            pressed: Color = ColorBook.CircularButton.Fill.pressed,
+            disabled: Color = ColorBook.CircularButton.Fill.disabled
+        ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
-        }
-        
-        public init() {
-            self.init(
-                enabled: ColorBook.CircularButton.Fill.enabled,
-                pressed: ColorBook.CircularButton.Fill.pressed,
-                disabled: ColorBook.CircularButton.Fill.disabled
-            )
         }
     }
 }
@@ -105,18 +93,12 @@ extension VCircularButtonModel {
 // MARK:- Fonts
 extension VCircularButtonModel {
     public struct Fonts {
-        // MARK: Properties
         public let title: Font
         
-        // MARK: Initializers
-        public init(title: Font) {
+        public init(
+            title: Font = FontBook.buttonSmall
+        ) {
             self.title = title
-        }
-        
-        public init() {
-            self.init(
-                title: FontBook.buttonSmall
-            )
         }
     }
 }

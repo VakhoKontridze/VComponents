@@ -9,10 +9,8 @@ import SwiftUI
 
 // MARK:- V Spinner Model
 public struct VSpinnerDashedModel {
-    // MARK: Proeprties
     public let colors: Colors
     
-    // MARK: Initializers
     public init(
         colors: Colors = .init()
     ) {
@@ -23,20 +21,12 @@ public struct VSpinnerDashedModel {
 // MARK:- Colors
 extension VSpinnerDashedModel {
     public struct Colors {
-        // MARK: Proeprties
         public let spinner: Color
         
-        // MARK: Initializers
         public init(
-            spinner: Color
+            spinner: Color = ColorBook.Spinner.fill
         ) {
             self.spinner = spinner
-        }
-        
-        public init() {
-            self.init(
-                spinner: ColorBook.Spinner.fill
-            )
         }
     }
 }
