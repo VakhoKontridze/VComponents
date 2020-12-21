@@ -43,15 +43,13 @@ extension VSliderDemoView {
 
     private var controller: some View {
         RowView(type: .controller, content: {
-            HStack(content: {
-                ToggleSettingView(
-                    isOn: .init(
-                        get: { sliderState == .disabled },
-                        set: { sliderState = $0 ? .disabled : .enabled }
-                    ),
-                    title: "Disabled"
-                )
-            })
+            ToggleSettingView(
+                isOn: .init(
+                    get: { sliderState == .disabled },
+                    set: { sliderState = $0 ? .disabled : .enabled }
+                ),
+                title: "Disabled"
+            )
         })
     }
 
@@ -88,7 +86,7 @@ extension VSliderDemoView {
     }
     
     private var animatedSliders: some View {
-        let viewModel: VSliderViewModel = .init(
+        let model: VSliderModel = .init(
             behavior: .init(
                 useAnimation: true
             )
@@ -96,11 +94,11 @@ extension VSliderDemoView {
         
         return VStack(content: {
             RowView(type: .titled("Animation"), content: {
-                VSlider(.plain, viewModel: viewModel, state: sliderState, value: $animatedSliderValue)
+                VSlider(.plain, model: model, state: sliderState, value: $animatedSliderValue)
             })
             
             RowView(type: .titled("Animation (Steped)"), content: {
-                VSlider(.plain, viewModel: viewModel, step: 0.1, state: sliderState, value: $animatedSteppedSliderValue)
+                VSlider(.plain, model: model, step: 0.1, state: sliderState, value: $animatedSteppedSliderValue)
             })
         })
     }

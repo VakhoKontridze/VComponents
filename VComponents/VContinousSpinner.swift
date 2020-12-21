@@ -10,13 +10,13 @@ import SwiftUI
 // MARK:- V Continous Spinner
 struct VContinousSpinner: View {
     // MARK: Properties
-    private let viewModel: VSpinnerViewModel
+    private let model: VSpinnerModel
     
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers
-    init(viewModel: VSpinnerViewModel) {
-        self.viewModel = viewModel
+    init(model: VSpinnerModel) {
+        self.model = model
     }
 }
 
@@ -24,14 +24,14 @@ struct VContinousSpinner: View {
 extension VContinousSpinner {
     var body: some View {
         Circle()
-            .trim(from: 0, to: viewModel.layout.legth)
+            .trim(from: 0, to: model.layout.legth)
             .stroke(
-                viewModel.colors.spinner,
-                style: .init(lineWidth: viewModel.layout.thickness, lineCap: .round)
+                model.colors.spinner,
+                style: .init(lineWidth: model.layout.thickness, lineCap: .round)
             )
-            .frame(width: viewModel.layout.dimension, height: viewModel.layout.dimension)
+            .frame(width: model.layout.dimension, height: model.layout.dimension)
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
-            .animation(viewModel.behavior.animation.repeatForever(autoreverses: false))
+            .animation(model.behavior.animation.repeatForever(autoreverses: false))
             .onAppear(perform: { isAnimating.toggle() })
     }
 }

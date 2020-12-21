@@ -41,7 +41,7 @@ extension VToggleSpacerView {
 struct VToggleSpacerView_Previews: PreviewProvider {
     static var previews: some View {
         VToggleSpacerView(
-            width: VToggleRightContentViewModel.Layout().contentSpacing,
+            width: VToggleRightContentModel.Layout().contentSpacing,
             isDisabled: false,
             action: {}
         )

@@ -1,5 +1,5 @@
 //
-//  VSliderViewModel.swift
+//  VSliderModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Slider View Model
-public struct VSliderViewModel {
+public struct VSliderModel {
     // MARK: Properties
     public let behavior: Behavior
     public let layout: Layout
@@ -23,7 +23,7 @@ public struct VSliderViewModel {
 }
 
 // MARK:- Behavior
-extension VSliderViewModel {
+extension VSliderModel {
     public struct Behavior {
         // MARK: Properties
         public let useAnimation: Bool
@@ -42,7 +42,7 @@ extension VSliderViewModel {
 }
 
 // MARK:- Layout
-extension VSliderViewModel {
+extension VSliderModel {
     public struct Layout {
         // MARK: Properties
         public let slider: Slider
@@ -58,7 +58,7 @@ extension VSliderViewModel {
     }
 }
 
-extension VSliderViewModel.Layout {
+extension VSliderModel.Layout {
     public struct Slider {
         // MARK: Properties
         public let height: CGFloat
@@ -79,7 +79,7 @@ extension VSliderViewModel.Layout {
     }
 }
 
-extension VSliderViewModel.Layout {
+extension VSliderModel.Layout {
     public struct Thumb {
         // MARK: Properties
         public let dimension: CGFloat
@@ -101,7 +101,7 @@ extension VSliderViewModel.Layout {
     }
 }
 
-extension VSliderViewModel.Layout {
+extension VSliderModel.Layout {
     public struct SolidThumb {
         // MARK: Properties
         public let dimension: CGFloat
@@ -127,7 +127,7 @@ extension VSliderViewModel.Layout {
 }
 
 // MARK:- Colors
-extension VSliderViewModel {
+extension VSliderModel {
     // MARK: Properties
     public struct Colors {
         // MARK: Properties
@@ -144,7 +144,7 @@ extension VSliderViewModel {
     }
 }
 
-extension VSliderViewModel.Colors {
+extension VSliderModel.Colors {
     public struct Common {
         // MARK: Properties
         public let progress: ProgressColors
@@ -158,7 +158,7 @@ extension VSliderViewModel.Colors {
     }
 }
 
-extension VSliderViewModel.Colors.Common {
+extension VSliderModel.Colors.Common {
     public struct ProgressColors {
         // MARK: Properties
         public let enabled: Color
@@ -198,7 +198,7 @@ extension VSliderViewModel.Colors.Common {
     }
 }
 
-extension VSliderViewModel.Colors {
+extension VSliderModel.Colors {
     public struct Thumb {
         // MARK: Properties
         public let fill: FillColors
@@ -212,7 +212,7 @@ extension VSliderViewModel.Colors {
     }
 }
 
-extension VSliderViewModel.Colors.Thumb {
+extension VSliderModel.Colors.Thumb {
     public struct FillColors {
         // MARK: Properties
         public let enabled: Color
@@ -252,7 +252,7 @@ extension VSliderViewModel.Colors.Thumb {
     }
 }
 
-extension VSliderViewModel.Colors {
+extension VSliderModel.Colors {
     public struct SolidThumb {
         // MARK: Properties
         public let fill: FillColors
@@ -266,7 +266,7 @@ extension VSliderViewModel.Colors {
     }
 }
 
-extension VSliderViewModel.Colors.SolidThumb {
+extension VSliderModel.Colors.SolidThumb {
     public struct FillColors {
         // MARK: Properties
         public let enabled: Color
@@ -307,43 +307,43 @@ extension VSliderViewModel.Colors.SolidThumb {
 }
 
 // MARK:- Mapping
-extension VSliderViewModel.Colors {
-    static func progress(state: VSliderState, vm: VSliderViewModel) -> Color {
+extension VSliderModel.Colors {
+    static func progress(state: VSliderState, vm: VSliderModel) -> Color {
         switch state {
         case .enabled: return vm.colors.common.progress.enabled
         case .disabled: return vm.colors.common.progress.disabled
         }
     }
 
-    static func track(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func track(state: VSliderState, vm: VSliderModel) -> Color {
         switch state {
         case .enabled: return vm.colors.common.track.enabled
         case .disabled: return vm.colors.common.track.disabled
         }
     }
     
-    static func thumbFill(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func thumbFill(state: VSliderState, vm: VSliderModel) -> Color {
         switch state {
         case .enabled: return vm.colors.thumb.fill.enabled
         case .disabled: return vm.colors.thumb.fill.disabled
         }
     }
     
-    static func thumbShadow(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func thumbShadow(state: VSliderState, vm: VSliderModel) -> Color {
         switch state {
         case .enabled: return vm.colors.thumb.shadow.enabled
         case .disabled: return vm.colors.thumb.shadow.disabled
         }
     }
     
-    static func solidThumbFill(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func solidThumbFill(state: VSliderState, vm: VSliderModel) -> Color {
         switch state {
         case .enabled: return vm.colors.solidThumb.fill.enabled
         case .disabled: return vm.colors.solidThumb.fill.disabled
         }
     }
     
-    static func solidThumbStroke(state: VSliderState, vm: VSliderViewModel) -> Color {
+    static func solidThumbStroke(state: VSliderState, vm: VSliderModel) -> Color {
         switch state {
         case .enabled: return vm.colors.solidThumb.stroke.enabled
         case .disabled: return vm.colors.solidThumb.stroke.disabled

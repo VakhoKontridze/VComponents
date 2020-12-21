@@ -40,10 +40,10 @@ extension VPrimaryButtonBackgroundView {
 struct VPrimaryButtonBackgroundView_Previews: PreviewProvider {
     static var previews: some View {
         VPrimaryButtonBackgroundView(
-            cornerRadius: VPrimaryButtonCompactViewModel.Layout().cornerRadius,
-            borderWidth: VPrimaryButtonCompactViewModel.Layout().borderWidth,
-            fillColor: VPrimaryButtonCompactViewModel.Colors.FillColors().enabled,
-            borderColor: VPrimaryButtonCompactViewModel.Colors.BorderColors().enabled
+            cornerRadius: VPrimaryButtonCompactModel.Layout().cornerRadius,
+            borderWidth: VPrimaryButtonCompactModel.Layout().borderWidth,
+            fillColor: VPrimaryButtonCompactModel.Colors.FillColors().enabled,
+            borderColor: VPrimaryButtonCompactModel.Colors.BorderColors().enabled
         )
     }
 }

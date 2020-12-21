@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Primary Button Compact
 struct VPrimaryButtonCompact<Content>: View where Content: View {
     // MARK: Properties
-    private let viewModel: VPrimaryButtonCompactViewModel
+    private let model: VPrimaryButtonCompactModel
     
     private let state: VPrimaryButtonState
     @State private var isPressed: Bool = false
@@ -22,12 +22,12 @@ struct VPrimaryButtonCompact<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        viewModel: VPrimaryButtonCompactViewModel,
+        model: VPrimaryButtonCompactModel,
         state: VPrimaryButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.viewModel = viewModel
+        self.model = model
         self.state = state
         self.action = action
         self.content = content
@@ -38,32 +38,32 @@ struct VPrimaryButtonCompact<Content>: View where Content: View {
 extension VPrimaryButtonCompact {
     var body: some View {
         TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
-            HStack(alignment: .center, spacing: viewModel.layout.loaderSpacing, content: {
+            HStack(alignment: .center, spacing: model.layout.loaderSpacing, content: {
                 VPrimaryButtonLoaderCompensatorView(
                     isVisible: internalState.isLoading,
-                    width: viewModel.layout.loaderWidth
+                    width: model.layout.loaderWidth
                 )
                 
                 VPrimaryButtonContentView(
-                    foregroundColor: viewModel.colors.foregroundColor(state: internalState),
-                    foregroundOpacity: viewModel.colors.foregroundOpacity(state: internalState),
-                    font: viewModel.fonts.title,
+                    foregroundColor: model.colors.foregroundColor(state: internalState),
+                    foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
+                    font: model.fonts.title,
                     content: content
                 )
                 
                 VPrimaryButtonLoaderView(
                     isVisible: internalState.isLoading,
-                    width: viewModel.layout.loaderWidth
+                    width: model.layout.loaderWidth
                 )
             })
-                .padding(.horizontal, viewModel.layout.contentInset)
-                .frame(height: viewModel.layout.height)
+                .padding(.horizontal, model.layout.contentInset)
+                .frame(height: model.layout.height)
                 .background(
                     VPrimaryButtonBackgroundView(
-                        cornerRadius: viewModel.layout.cornerRadius,
-                        borderWidth: viewModel.layout.borderWidth,
-                        fillColor: viewModel.colors.fillColor(state: internalState),
-                        borderColor: viewModel.colors.borderColor(state: internalState)
+                        cornerRadius: model.layout.cornerRadius,
+                        borderWidth: model.layout.borderWidth,
+                        fillColor: model.colors.fillColor(state: internalState),
+                        borderColor: model.colors.borderColor(state: internalState)
                     )
                 )
         })
@@ -73,6 +73,6 @@ extension VPrimaryButtonCompact {
 // MARK:- Preview
 struct VPrimaryButtonCompact_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButtonCompact(viewModel: .init(), state: .enabled, action: {}, content: { Text("Press") })
+        VPrimaryButtonCompact(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
     }
 }

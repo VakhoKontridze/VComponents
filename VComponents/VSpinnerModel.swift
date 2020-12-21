@@ -1,5 +1,5 @@
 //
-//  VSpinnerViewModel.swift
+//  VSpinnerModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Spinner ViewModel
-public struct VSpinnerViewModel {
+// MARK:- V Spinner Model
+public struct VSpinnerModel {
     // MARK: Proeprties
     let behavior: Behavior
     public let layout: Layout
@@ -23,7 +23,7 @@ public struct VSpinnerViewModel {
 }
 
 // MARK:- Behavior
-extension VSpinnerViewModel {
+extension VSpinnerModel {
     public struct Behavior {
         // MARK: Proeprties
         public let animation: Animation
@@ -42,7 +42,7 @@ extension VSpinnerViewModel {
 }
 
 // MARK:- Layout
-extension VSpinnerViewModel {
+extension VSpinnerModel {
     public struct Layout {
         // MARK: Proeprties
         public let dimension: CGFloat
@@ -67,7 +67,7 @@ extension VSpinnerViewModel {
 }
 
 // MARK:- Colors
-extension VSpinnerViewModel {
+extension VSpinnerModel {
     public struct Colors {
         // MARK: Proeprties
         public let spinner: Color

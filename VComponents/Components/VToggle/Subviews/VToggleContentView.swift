@@ -49,7 +49,7 @@ extension VToggleContentView {
 struct VToggleContentView_Previews: PreviewProvider {
     static var previews: some View {
         VToggleContentView(
-            opacity: VToggleRightContentViewModel.Colors().contentDisabledOpacity(state: .enabled),
+            opacity: VToggleRightContentModel.Colors().contentDisabledOpacity(state: .enabled),
             isDisabled: false,
             isPressed: .constant(false),
             action: {},

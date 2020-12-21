@@ -11,7 +11,7 @@ import SwiftUI
 public struct VSlider: View {
     // MARK: Properties
     private let sliderType: VSliderType
-    private let viewModel: VSliderViewModel
+    private let model: VSliderModel
     private let min, max: Double
     private let step: Double?
     
@@ -23,7 +23,7 @@ public struct VSlider: View {
     // MARK: Initializers
     public init<V>(
         _ sliderType: VSliderType,
-        viewModel: VSliderViewModel = .init(),
+        model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,
         step: Double?,
         state: VSliderState,
@@ -33,7 +33,7 @@ public struct VSlider: View {
         where V: BinaryFloatingPoint, V.Stride :BinaryFloatingPoint
     {
         self.sliderType = sliderType
-        self.viewModel = viewModel
+        self.model = model
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
         self.step = step
@@ -44,7 +44,7 @@ public struct VSlider: View {
     
     public init(
         _ sliderType: VSliderType,
-        viewModel: VSliderViewModel = .init(),
+        model: VSliderModel = .init(),
         step: Double?,
         state: VSliderState,
         value: Binding<Double>,
@@ -52,7 +52,7 @@ public struct VSlider: View {
     ) {
         self.init(
             sliderType,
-            viewModel: viewModel,
+            model: model,
             range: 0...1,
             step: step,
             state: state,
@@ -63,14 +63,14 @@ public struct VSlider: View {
     
     public init(
         _ sliderType: VSliderType,
-        viewModel: VSliderViewModel = .init(),
+        model: VSliderModel = .init(),
         state: VSliderState,
         value: Binding<Double>,
         onChange action: ((Bool) -> Void)? = nil
     ) {
         self.init(
             sliderType,
-            viewModel: viewModel,
+            model: model,
             range: 0...1,
             step: nil,
             state: state,
@@ -88,7 +88,7 @@ public extension VSlider {
                 track
                 progress(in: proxy)
             })
-                .mask(RoundedRectangle(cornerRadius: viewModel.layout.slider.cornerRadius))
+                .mask(RoundedRectangle(cornerRadius: model.layout.slider.cornerRadius))
             
                 .overlay(thumb(in: proxy))
             
@@ -99,19 +99,19 @@ public extension VSlider {
                         .onEnded(dragEnded)
                 )
         })
-            .frame(height: viewModel.layout.slider.height)
+            .frame(height: model.layout.slider.height)
     }
 
     private var track: some View {
         Rectangle()
-            .foregroundColor(VSliderViewModel.Colors.track(state: state, vm: viewModel))
+            .foregroundColor(VSliderModel.Colors.track(state: state, vm: model))
     }
 
     private func progress(in proxy: GeometryProxy) -> some View {
         Rectangle()
             .frame(width: progressWidth(in: proxy))
 
-            .foregroundColor(VSliderViewModel.Colors.progress(state: state, vm: viewModel))
+            .foregroundColor(VSliderModel.Colors.progress(state: state, vm: model))
     }
     
     private func thumb(in proxy: GeometryProxy) -> some View {
@@ -122,21 +122,21 @@ public extension VSlider {
                     EmptyView()
                     
                 case .thumb:
-                    RoundedRectangle(cornerRadius: viewModel.layout.thumb.cornerRadius)
-                        .foregroundColor(VSliderViewModel.Colors.thumbFill(state: state, vm: viewModel))
-                        .shadow(color: VSliderViewModel.Colors.thumbShadow(state: state, vm: viewModel), radius: viewModel.layout.thumb.shadowRadius)
+                    RoundedRectangle(cornerRadius: model.layout.thumb.cornerRadius)
+                        .foregroundColor(VSliderModel.Colors.thumbFill(state: state, vm: model))
+                        .shadow(color: VSliderModel.Colors.thumbShadow(state: state, vm: model), radius: model.layout.thumb.shadowRadius)
                     
-                        .frame(size: .init(width: viewModel.layout.thumb.dimension, height: viewModel.layout.thumb.dimension))
+                        .frame(size: .init(width: model.layout.thumb.dimension, height: model.layout.thumb.dimension))
                     
                 case .solidThumb:
-                    RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius)
-                        .strokeBorder(VSliderViewModel.Colors.solidThumbStroke(state: state, vm: viewModel), lineWidth: viewModel.layout.solidThumb.stroke)
+                    RoundedRectangle(cornerRadius: model.layout.solidThumb.cornerRadius)
+                        .strokeBorder(VSliderModel.Colors.solidThumbStroke(state: state, vm: model), lineWidth: model.layout.solidThumb.stroke)
                         .background(
-                            RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius)
-                                .foregroundColor(VSliderViewModel.Colors.solidThumbFill(state: state, vm: viewModel))
+                            RoundedRectangle(cornerRadius: model.layout.solidThumb.cornerRadius)
+                                .foregroundColor(VSliderModel.Colors.solidThumbFill(state: state, vm: model))
                         )
                     
-                        .frame(size: .init(width: viewModel.layout.solidThumb.dimension, height: viewModel.layout.solidThumb.dimension))
+                        .frame(size: .init(width: model.layout.solidThumb.dimension, height: model.layout.solidThumb.dimension))
                 }
             })
                 .offset(x: thumbOffset(in: proxy), y: 0)
@@ -149,7 +149,7 @@ public extension VSlider {
 // MARK:- Drag
 private extension VSlider {
     func dragChanged(_ draggedValue: DragGesture.Value, in proxy: GeometryProxy) {
-        switch viewModel.behavior.useAnimation {
+        switch model.behavior.useAnimation {
         case false: calculateDragChangedValue(draggedValue, in: proxy)
         case true: withAnimation{ calculateDragChangedValue(draggedValue, in: proxy) }
         }
@@ -195,8 +195,8 @@ private extension VSlider {
         let thumbW: CGFloat = {
             switch sliderType {
             case .plain: return 0
-            case .thumb: return viewModel.layout.thumb.dimension
-            case .solidThumb: return viewModel.layout.solidThumb.dimension
+            case .thumb: return model.layout.thumb.dimension
+            case .solidThumb: return model.layout.solidThumb.dimension
             }
         }()
         

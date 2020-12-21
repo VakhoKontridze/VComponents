@@ -32,6 +32,6 @@ extension VPrimaryButtonLoaderView {
 // MARK:- Preview
 struct VPrimaryButtonLoaderView_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButtonLoaderView(isVisible: true, width: VPrimaryButtonCompactViewModel.Layout().loaderWidth)
+        VPrimaryButtonLoaderView(isVisible: true, width: VPrimaryButtonCompactModel.Layout().loaderWidth)
     }
 }

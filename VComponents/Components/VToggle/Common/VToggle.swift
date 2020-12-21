@@ -65,8 +65,8 @@ public extension VToggle where Content == Never {
 public extension VToggle {
     @ViewBuilder var body: some View {
         switch toggleType {
-        case .rightContent(let viewModel): VToggleRightContent(viewModel: viewModel, isOn: $isOn, state: state, content: content)
-        case .spacedLeftContent(let viewModel): VToggleLeftFlexibleContent(viewModel: viewModel, isOn: $isOn, state: state, content: content)
+        case .rightContent(let model): VToggleRightContent(model: model, isOn: $isOn, state: state, content: content)
+        case .spacedLeftContent(let model): VToggleLeftFlexibleContent(model: model, isOn: $isOn, state: state, content: content)
         }
     }
 }

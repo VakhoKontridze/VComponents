@@ -102,7 +102,7 @@ extension VPrimaryButtonDemoView {
     }
     
     private var borderedButton: some View {
-        let viewModel: VPrimaryButtonFixedViewModel = .init(
+        let model: VPrimaryButtonFixedModel = .init(
             layout: .init(
                 borderWidth: 5
             ),
@@ -118,7 +118,7 @@ extension VPrimaryButtonDemoView {
         
         return VStack(content: {
             RowView(type: .titled("Bordered"), content: {
-                VPrimaryButton(.fixed(viewModel: viewModel), state: buttonState, action: action, content: buttonContent)
+                VPrimaryButton(.fixed(model), state: buttonState, action: action, content: buttonContent)
             })
         })
     }

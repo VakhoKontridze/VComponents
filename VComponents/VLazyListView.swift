@@ -10,23 +10,23 @@ import SwiftUI
 // MARK:- V Lazy List View
 public struct VLazyListView<Content>: View where Content: View {
     // MARK: Properties
-    private let viewModel: VLazyListViewModel
+    private let model: VLazyListModel
     
     private let content: () -> Content
     
     // MARK: Initializers
     public init(
-        viewModel: VLazyListViewModel = .init(),
+        model: VLazyListModel = .init(),
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.viewModel = viewModel
+        self.model = model
         self.content = content
     }
 }
 
 public extension VLazyListView {
     init<Data, ID, RowContent>(
-        viewModel: VLazyListViewModel = .init(),
+        model: VLazyListModel = .init(),
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -38,7 +38,7 @@ public extension VLazyListView {
             RowContent: View
     {
         self.init(
-            viewModel: viewModel,
+            model: model,
             content: {
                 ForEach(data, id: id, content: { element in
                     rowContent(element)
@@ -50,7 +50,7 @@ public extension VLazyListView {
 
 public extension VLazyListView {
     init<Data, ID, RowContent>(
-        viewModel: VLazyListViewModel = .init(),
+        model: VLazyListModel = .init(),
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -61,7 +61,7 @@ public extension VLazyListView {
             RowContent: View
     {
         self.init(
-            viewModel: viewModel,
+            model: model,
             data: data,
             id: \Data.Element.id,
             rowContent: rowContent
@@ -72,16 +72,16 @@ public extension VLazyListView {
 // MARK:- Body
 public extension VLazyListView {
     @ViewBuilder var body: some View {
-        switch viewModel.scrollDirection {
+        switch model.scrollDirection {
         case .vertical(let horizontalAlignment):
-            ScrollView(.vertical, showsIndicators: viewModel.showsIndicators, content: {
+            ScrollView(.vertical, showsIndicators: model.showsIndicators, content: {
                 LazyVStack(alignment: horizontalAlignment, spacing: 0, content: {
                     content()
                 })
             })
             
         case .horizontal(let verticalAlignment):
-            ScrollView(.horizontal, showsIndicators: viewModel.showsIndicators, content: {
+            ScrollView(.horizontal, showsIndicators: model.showsIndicators, content: {
                 LazyHStack(alignment: verticalAlignment, spacing: 0, content: {
                     content()
                 })
@@ -94,7 +94,7 @@ public extension VLazyListView {
 struct VLazyListView_Previews: PreviewProvider {
     private static let data: [Int] = (1...100).map { $0 }
     
-    private static let horizontalVM: VLazyListViewModel = .init(
+    private static let horizontalVM: VLazyListModel = .init(
         scrollDirection: .horizontal(aligment: .center),
         showsIndicators: true
     )
@@ -114,11 +114,11 @@ struct VLazyListView_Previews: PreviewProvider {
             })
             
             HStack(content: {
-                VLazyListView(viewModel: horizontalVM, data: data, id: \.self, rowContent: { number in
+                VLazyListView(model: horizontalVM, data: data, id: \.self, rowContent: { number in
                     Text(String(number))
                 })
                 
-                VLazyListView(viewModel: horizontalVM, content: {
+                VLazyListView(model: horizontalVM, content: {
                     ForEach(data, id: \.self, content: { number in
                         Text(String(number))
                     })

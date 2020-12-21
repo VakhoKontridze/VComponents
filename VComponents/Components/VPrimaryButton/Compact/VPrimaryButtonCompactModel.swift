@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonFixedViewModel.swift
+//  VPrimaryButtonCompactModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button Fixed ViewModel
-public struct VPrimaryButtonFixedViewModel {
+// MARK:- V Primary Button Compact Model
+public struct VPrimaryButtonCompactModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -23,10 +23,10 @@ public struct VPrimaryButtonFixedViewModel {
 }
 
 // MARK:- Layout
-public extension VPrimaryButtonFixedViewModel {
+public extension VPrimaryButtonCompactModel {
     struct Layout {
         // MARK: Properties
-        public let size: CGSize
+        public let height: CGFloat
         public let cornerRadius: CGFloat
         public let borderWidth: CGFloat
         public let contentInset: CGFloat
@@ -35,12 +35,12 @@ public extension VPrimaryButtonFixedViewModel {
         
         // MARK: Initializers
         public init(
-            size: CGSize = .init(width: 300, height: 50),
+            height: CGFloat = 50,
             cornerRadius: CGFloat = 20,
             borderWidth: CGFloat = 0,
             contentInset: CGFloat = 15
         ) {
-            self.size = size
+            self.height = height
             self.cornerRadius = cornerRadius
             self.borderWidth = borderWidth
             self.contentInset = contentInset
@@ -49,7 +49,7 @@ public extension VPrimaryButtonFixedViewModel {
 }
 
 // MARK:- Colors
-public extension VPrimaryButtonFixedViewModel {
+public extension VPrimaryButtonCompactModel {
     struct Colors {
         // MARK: Properties
         public let foreground: ForegroundColors
@@ -65,7 +65,7 @@ public extension VPrimaryButtonFixedViewModel {
     }
 }
 
-extension VPrimaryButtonFixedViewModel.Colors {
+extension VPrimaryButtonCompactModel.Colors {
     public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
@@ -147,7 +147,7 @@ extension VPrimaryButtonFixedViewModel.Colors {
 }
 
 // MARK:- Fonts
-public extension VPrimaryButtonFixedViewModel {
+public extension VPrimaryButtonCompactModel {
     struct Fonts {
         // MARK: Properties
         public let title: Font
@@ -166,7 +166,7 @@ public extension VPrimaryButtonFixedViewModel {
 }
 
 // MARK:- Mapping
-extension VPrimaryButtonFixedViewModel.Colors {
+extension VPrimaryButtonCompactModel.Colors {
     func foregroundColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled

@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonCompactViewModel.swift
+//  VPrimaryButtonFlexibleModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button Compact ViewModel
-public struct VPrimaryButtonCompactViewModel {
+// MARK:- V Primary Button Flexible Model
+public struct VPrimaryButtonFlexibleModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -23,7 +23,7 @@ public struct VPrimaryButtonCompactViewModel {
 }
 
 // MARK:- Layout
-public extension VPrimaryButtonCompactViewModel {
+public extension VPrimaryButtonFlexibleModel {
     struct Layout {
         // MARK: Properties
         public let height: CGFloat
@@ -49,7 +49,7 @@ public extension VPrimaryButtonCompactViewModel {
 }
 
 // MARK:- Colors
-public extension VPrimaryButtonCompactViewModel {
+public extension VPrimaryButtonFlexibleModel {
     struct Colors {
         // MARK: Properties
         public let foreground: ForegroundColors
@@ -65,7 +65,7 @@ public extension VPrimaryButtonCompactViewModel {
     }
 }
 
-extension VPrimaryButtonCompactViewModel.Colors {
+extension VPrimaryButtonFlexibleModel.Colors {
     public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
@@ -147,7 +147,7 @@ extension VPrimaryButtonCompactViewModel.Colors {
 }
 
 // MARK:- Fonts
-public extension VPrimaryButtonCompactViewModel {
+public extension VPrimaryButtonFlexibleModel {
     struct Fonts {
         // MARK: Properties
         public let title: Font
@@ -166,7 +166,7 @@ public extension VPrimaryButtonCompactViewModel {
 }
 
 // MARK:- Mapping
-extension VPrimaryButtonCompactViewModel.Colors {
+extension VPrimaryButtonFlexibleModel.Colors {
     func foregroundColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled

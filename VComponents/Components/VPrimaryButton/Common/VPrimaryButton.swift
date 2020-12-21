@@ -54,9 +54,9 @@ extension VPrimaryButton where Content == Text {
 public extension VPrimaryButton {
     @ViewBuilder var body: some View {
         switch buttonType {
-        case .compact(let viewModel): VPrimaryButtonCompact(viewModel: viewModel, state: state, action: action, content: content)
-        case .fixed(let viewModel): VPrimaryButtonFixed(viewModel: viewModel, state: state, action: action, content: content)
-        case .flexible(let viewModel): VPrimaryButtonFlexible(viewModel: viewModel, state: state, action: action, content: content)
+        case .compact(let model): VPrimaryButtonCompact(model: model, state: state, action: action, content: content)
+        case .fixed(let model): VPrimaryButtonFixed(model: model, state: state, action: action, content: content)
+        case .flexible(let model): VPrimaryButtonFlexible(model: model, state: state, action: action, content: content)
         }
     }
 }

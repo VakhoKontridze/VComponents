@@ -39,15 +39,13 @@ extension VPlainButtonDemoView {
     
     private var controller: some View {
         RowView(type: .controller, content: {
-            HStack(content: {
-                ToggleSettingView(
-                    isOn: .init(
-                        get: { buttonState == .disabled },
-                        set: { buttonState = $0 ? .disabled : .enabled }
-                    ),
-                    title: "Disabled"
-                )
-            })
+            ToggleSettingView(
+                isOn: .init(
+                    get: { buttonState == .disabled },
+                    set: { buttonState = $0 ? .disabled : .enabled }
+                ),
+                title: "Disabled"
+            )
         })
     }
     

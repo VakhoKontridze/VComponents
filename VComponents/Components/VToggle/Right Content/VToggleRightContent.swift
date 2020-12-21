@@ -10,24 +10,24 @@ import SwiftUI
 // MARK:- VToggleRightContent
 struct VToggleRightContent<Content>: View where Content: View {
     // MARK: Properties
-    private let viewModel: VToggleRightContentViewModel
+    private let model: VToggleRightContentModel
     
     @Binding private var isOn: Bool
     @State private var isPressed: Bool = false
     private let state: VToggleState
     private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
-    private var contentIsDisabled: Bool { state.isDisabled || !viewModel.behavior.contentIsClickable }
+    private var contentIsDisabled: Bool { state.isDisabled || !model.behavior.contentIsClickable }
     
     private let content: (() -> Content)?
     
     // MARK: Initializers
     init(
-        viewModel: VToggleRightContentViewModel,
+        model: VToggleRightContentModel,
         isOn: Binding<Bool>,
         state: VToggleState,
         content: (() -> Content)?
     ) {
-        self.viewModel = viewModel
+        self.model = model
         self._isOn = isOn
         self.state = state
         self.content = content
@@ -45,11 +45,11 @@ extension VToggleRightContent {
     
     private var toggle: some View {
         VToggleToggleView(
-            size: viewModel.layout.size,
-            thumbDimension: viewModel.layout.thumbDimension,
-            animationOffset: viewModel.layout.animationOffset,
-            fillColor: viewModel.colors.fillColor(isOn: isOn, state: internalState),
-            thumbColor: viewModel.colors.thumbColor(isOn: isOn, state: internalState),
+            size: model.layout.size,
+            thumbDimension: model.layout.thumbDimension,
+            animationOffset: model.layout.animationOffset,
+            fillColor: model.colors.fillColor(isOn: isOn, state: internalState),
+            thumbColor: model.colors.thumbColor(isOn: isOn, state: internalState),
             isOn: isOn,
             isDisabled: state.isDisabled,
             action: action
@@ -61,13 +61,13 @@ extension VToggleRightContent {
             toggle
             
             VToggleSpacerView(
-                width: viewModel.layout.contentSpacing,
+                width: model.layout.contentSpacing,
                 isDisabled: contentIsDisabled,
                 action: action
             )
             
             VToggleContentView(
-                opacity: viewModel.colors.contentDisabledOpacity(state: internalState),
+                opacity: model.colors.contentDisabledOpacity(state: internalState),
                 isDisabled: contentIsDisabled,
                 isPressed: $isPressed,
                 action: action,
@@ -80,7 +80,7 @@ extension VToggleRightContent {
 // MARK:- Action
 private extension VToggleRightContent {
     func action() {
-        withAnimation(viewModel.behavior.animation, { isOn.toggle() })
+        withAnimation(model.behavior.animation, { isOn.toggle() })
     }
 }
 
@@ -90,7 +90,7 @@ struct VToggleRightContent_Previews: PreviewProvider {
     
     static var previews: some View {
         VToggleRightContent(
-            viewModel: .init(),
+            model: .init(),
             isOn: $isOn,
             state: .enabled,
             content: { Text("Press") }

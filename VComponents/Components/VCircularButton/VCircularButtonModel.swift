@@ -1,5 +1,5 @@
 //
-//  VCircularButtonViewModel.swift
+//  VCircularButtonModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Circular Button ViewModel
-public struct VCircularButtonViewModel {
+// MARK:- V Circular Button Model
+public struct VCircularButtonModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -23,7 +23,7 @@ public struct VCircularButtonViewModel {
 }
 
 // MARK:- Layout
-extension VCircularButtonViewModel {
+extension VCircularButtonModel {
     public struct Layout {
         // MARK: Properties
         public let dimension: CGFloat
@@ -38,7 +38,7 @@ extension VCircularButtonViewModel {
 }
 
 // MARK:- Colors
-extension VCircularButtonViewModel {
+extension VCircularButtonModel {
     public struct Colors {
         // MARK: Properties
         public let foreground: ForegroundColors
@@ -52,7 +52,7 @@ extension VCircularButtonViewModel {
     }
 }
 
-extension VCircularButtonViewModel {
+extension VCircularButtonModel {
     public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
@@ -103,7 +103,7 @@ extension VCircularButtonViewModel {
 }
 
 // MARK:- Fonts
-extension VCircularButtonViewModel {
+extension VCircularButtonModel {
     public struct Fonts {
         // MARK: Properties
         public let title: Font
@@ -122,7 +122,7 @@ extension VCircularButtonViewModel {
 }
 
 // MARK:- Mapping
-extension VCircularButtonViewModel.Colors {
+extension VCircularButtonModel.Colors {
     func foregroundColor(state: VCircularButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled

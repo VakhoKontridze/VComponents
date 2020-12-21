@@ -59,15 +59,13 @@ extension VToggleDemoView {
     
     private var controller: some View {
         RowView(type: .controller, content: {
-            HStack(content: {
-                ToggleSettingView(
-                    isOn: .init(
-                        get: { toggleState == .disabled },
-                        set: { toggleState = $0 ? .disabled : .enabled }
-                    ),
-                    title: "Disabled"
-                )
-            })
+            ToggleSettingView(
+                isOn: .init(
+                    get: { toggleState == .disabled },
+                    set: { toggleState = $0 ? .disabled : .enabled }
+                ),
+                title: "Disabled"
+            )
         })
     }
     
@@ -104,19 +102,19 @@ extension VToggleDemoView {
     }
     
     private var nonInteractiveContentRightContentToggle: some View {
-        let viewModel: VToggleRightContentViewModel = .init(
+        let model: VToggleRightContentModel = .init(
             behavior: .init(
                 contentIsClickable: false
             )
         )
         
         return RowView(type: .titled("Non-interractive Content"), content: {
-            VToggle(.rightContent(viewModel: viewModel), isOn: $nonInteractiveContentRightContentToggleIsOn, state: toggleState, title: toggleTitle)
+            VToggle(.rightContent(model), isOn: $nonInteractiveContentRightContentToggleIsOn, state: toggleState, title: toggleTitle)
         })
     }
     
     private var interactiveContentLeftFlexibleContentToggle: some View {
-        let viewModel: VToggleLeftFlexibleContentViewModel = .init(
+        let model: VToggleLeftFlexibleContentModel = .init(
             behavior: .init(
                 contentIsClickable: true,
                 spaceIsClickable: true,
@@ -125,12 +123,12 @@ extension VToggleDemoView {
         )
         
         return RowView(type: .titled("Interractive Spacing"), content: {
-            VToggle(.spacedLeftContent(viewModel: viewModel), isOn: $interactiveContentLeftFlexibleContentToggleIsOn, state: toggleState, title: toggleTitle)
+            VToggle(.spacedLeftContent(model), isOn: $interactiveContentLeftFlexibleContentToggleIsOn, state: toggleState, title: toggleTitle)
         })
     }
     
     private var noLoweredOpacityPressedContentToggle: some View {
-        let viewModel: VToggleRightContentViewModel = .init(
+        let model: VToggleRightContentModel = .init(
             colors: .init(
                 content: .init(
                     pressedOpacity: 1,
@@ -141,13 +139,13 @@ extension VToggleDemoView {
         
         return VStack(content: {
             RowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                VToggle(.rightContent(viewModel: viewModel), isOn: $noLoweredOpacityPressedContentToggleIsOn, state: toggleState, title: toggleTitle)
+                VToggle(.rightContent(model), isOn: $noLoweredOpacityPressedContentToggleIsOn, state: toggleState, title: toggleTitle)
             })
         })
     }
     
     private var noLoweredOpacityDisabledContentToggle: some View {
-        let viewModel: VToggleRightContentViewModel = .init(
+        let model: VToggleRightContentModel = .init(
             colors: .init(
                 content: .init(
                     pressedOpacity: 0.5,
@@ -158,7 +156,7 @@ extension VToggleDemoView {
         
         return VStack(content: {
             RowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                VToggle(.rightContent(viewModel: viewModel), isOn: $noLoweredOpacityDisabledContentToggleIsOn, state: toggleState, title: toggleTitle)
+                VToggle(.rightContent(model), isOn: $noLoweredOpacityDisabledContentToggleIsOn, state: toggleState, title: toggleTitle)
             })
         })
     }

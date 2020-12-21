@@ -10,25 +10,25 @@ import SwiftUI
 // MARK:- VToggleLeftFlexibleContent
 struct VToggleLeftFlexibleContent<Content>: View where Content: View {
     // MARK: Properties
-    private let viewModel: VToggleLeftFlexibleContentViewModel
+    private let model: VToggleLeftFlexibleContentModel
     
     @Binding private var isOn: Bool
     @State private var isPressed: Bool = false
     private let state: VToggleState
     private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
-    private var contentIsDisabled: Bool { state.isDisabled || !viewModel.behavior.contentIsClickable }
-    private var spaceIsDisabled: Bool { state.isDisabled || !viewModel.behavior.spaceIsClickable }
+    private var contentIsDisabled: Bool { state.isDisabled || !model.behavior.contentIsClickable }
+    private var spaceIsDisabled: Bool { state.isDisabled || !model.behavior.spaceIsClickable }
     
     private let content: (() -> Content)?
     
     // MARK: Initializers
     init(
-        viewModel: VToggleLeftFlexibleContentViewModel,
+        model: VToggleLeftFlexibleContentModel,
         isOn: Binding<Bool>,
         state: VToggleState,
         content: (() -> Content)?
     ) {
-        self.viewModel = viewModel
+        self.model = model
         self._isOn = isOn
         self.state = state
         self.content = content
@@ -46,11 +46,11 @@ extension VToggleLeftFlexibleContent {
     
     private var toggle: some View {
         VToggleToggleView(
-            size: viewModel.layout.size,
-            thumbDimension: viewModel.layout.thumbDimension,
-            animationOffset: viewModel.layout.animationOffset,
-            fillColor: viewModel.colors.fillColor(isOn: isOn, state: internalState),
-            thumbColor: viewModel.colors.thumbColor(isOn: isOn, state: internalState),
+            size: model.layout.size,
+            thumbDimension: model.layout.thumbDimension,
+            animationOffset: model.layout.animationOffset,
+            fillColor: model.colors.fillColor(isOn: isOn, state: internalState),
+            thumbColor: model.colors.thumbColor(isOn: isOn, state: internalState),
             isOn: isOn,
             isDisabled: state.isDisabled,
             action: action
@@ -60,7 +60,7 @@ extension VToggleLeftFlexibleContent {
     private func toggle(with content: @escaping () -> Content) -> some View {
         HStack(alignment: .center, spacing: 0, content: {
             VToggleContentView(
-                opacity: viewModel.colors.contentDisabledOpacity(state: internalState),
+                opacity: model.colors.contentDisabledOpacity(state: internalState),
                 isDisabled: contentIsDisabled,
                 isPressed: $isPressed,
                 action: action,
@@ -81,7 +81,7 @@ extension VToggleLeftFlexibleContent {
 // MARK:- Action
 private extension VToggleLeftFlexibleContent {
     func action() {
-        withAnimation(viewModel.behavior.animation, { isOn.toggle() })
+        withAnimation(model.behavior.animation, { isOn.toggle() })
     }
 }
 
@@ -91,7 +91,7 @@ struct VToggleLeftFlexibleContent_Previews: PreviewProvider {
     
     static var previews: some View {
         VToggleLeftFlexibleContent(
-            viewModel: .init(),
+            model: .init(),
             isOn: $isOn,
             state: .enabled,
             content: { Text("Press") }

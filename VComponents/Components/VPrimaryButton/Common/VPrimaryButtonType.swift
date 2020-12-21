@@ -9,7 +9,7 @@ import Foundation
 
 // MARK:- V Primary Button Type
 public enum VPrimaryButtonType {
-    case compact(viewModel: VPrimaryButtonCompactViewModel = .init())
-    case fixed(viewModel: VPrimaryButtonFixedViewModel = .init())
-    case flexible(viewModel: VPrimaryButtonFlexibleViewModel = .init())
+    case compact(_ model: VPrimaryButtonCompactModel = .init())
+    case fixed(_ model: VPrimaryButtonFixedModel = .init())
+    case flexible(_ model: VPrimaryButtonFlexibleModel = .init())
 }

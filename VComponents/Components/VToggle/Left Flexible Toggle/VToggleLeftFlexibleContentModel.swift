@@ -1,5 +1,5 @@
 //
-//  VToggleRightContentViewModel.swift
+//  VToggleLeftFlexibleContentModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Toggle ViewModel
-public struct VToggleRightContentViewModel {
+// MARK:- V Toggle Model
+public struct VToggleLeftFlexibleContentModel {
     // MARK: Properties
     public let behavior: Behavior
     public let layout: Layout
@@ -23,41 +23,41 @@ public struct VToggleRightContentViewModel {
 }
 
 // MARK:- Behavior
-extension VToggleRightContentViewModel {
+extension VToggleLeftFlexibleContentModel {
     public struct Behavior {
         // MARK: Properties
         public let contentIsClickable: Bool
+        public let spaceIsClickable: Bool
         public let animation: Animation
         
         // MARK: Initializers
         public init(
             contentIsClickable: Bool = true,
+            spaceIsClickable: Bool = false,
             animation: Animation = Animation.easeIn(duration: 0.1)
         ) {
             self.contentIsClickable = contentIsClickable
+            self.spaceIsClickable = spaceIsClickable
             self.animation = animation
         }
     }
 }
 
 // MARK:- Layout
-extension VToggleRightContentViewModel {
+extension VToggleLeftFlexibleContentModel {
     public struct Layout {
         // MARK: Properties
         public let size: CGSize
         public let thumbDimension: CGFloat
-        public let contentSpacing: CGFloat
         let animationOffset: CGFloat
         
         // MARK: Initializers
         public init(
             size: CGSize = .init(width: 51, height: 31),
-            thumbDimension: CGFloat = 27,
-            contentSpacing: CGFloat = 10
+            thumbDimension: CGFloat = 27
         ) {
             self.size = size
             self.thumbDimension = thumbDimension
-            self.contentSpacing = contentSpacing
             self.animationOffset = {
                 let spacing: CGFloat = (size.height - thumbDimension)/2
                 let thumnStartPoint: CGFloat = (size.width - thumbDimension)/2
@@ -69,7 +69,7 @@ extension VToggleRightContentViewModel {
 }
 
 // MARK:- Colors
-extension VToggleRightContentViewModel {
+extension VToggleLeftFlexibleContentModel {
     public struct Colors {
         // MARK: Properties
         public let fill: FillColors
@@ -85,7 +85,7 @@ extension VToggleRightContentViewModel {
     }
 }
 
-extension VToggleRightContentViewModel {
+extension VToggleLeftFlexibleContentModel {
     public struct FillColors {
         // MARK: Properties
         public let enabledOn: Color
@@ -151,7 +151,7 @@ extension VToggleRightContentViewModel {
 }
 
 // MARK:- Mapping
-extension VToggleRightContentViewModel.Colors {
+extension VToggleLeftFlexibleContentModel.Colors {
     func fillColor(isOn: Bool, state: VToggleInternalState) -> Color {
         switch (isOn, state) {
         case (true, .enabled): return fill.enabledOn

@@ -1,5 +1,5 @@
 //
-//  VPlainButtonViewModel.swift
+//  VPlainButtonModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Plain Button ViewModel
-public struct VPlainButtonViewModel {
+// MARK:- V Plain Button Model
+public struct VPlainButtonModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -23,7 +23,7 @@ public struct VPlainButtonViewModel {
 }
 
 // MARK:- Layout
-extension VPlainButtonViewModel {
+extension VPlainButtonModel {
     public struct Layout {
         // MARK: Properties
         public let hitAreaOffsetHor: CGFloat
@@ -41,7 +41,7 @@ extension VPlainButtonViewModel {
 }
 
 // MARK:- Colors
-extension VPlainButtonViewModel {
+extension VPlainButtonModel {
     public struct Colors {
         // MARK: Properties
         public let foreground: ForegroundColors
@@ -53,7 +53,7 @@ extension VPlainButtonViewModel {
     }
 }
 
-extension VPlainButtonViewModel.Colors {
+extension VPlainButtonModel.Colors {
     public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
@@ -85,7 +85,7 @@ extension VPlainButtonViewModel.Colors {
 }
 
 // MARK:- Fonts
-extension VPlainButtonViewModel {
+extension VPlainButtonModel {
     public struct Fonts {
         // MARK: Properties
         public let title: Font
@@ -104,7 +104,7 @@ extension VPlainButtonViewModel {
 }
 
 // MARK:- Mapping
-extension VPlainButtonViewModel.Colors {
+extension VPlainButtonModel.Colors {
     func foregroundColor(state: VPlainButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled

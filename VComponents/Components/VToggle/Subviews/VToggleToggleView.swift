@@ -69,11 +69,11 @@ extension VToggleToggleView {
 struct VToggleToggleView_Previews: PreviewProvider {
     static var previews: some View {
         VToggleToggleView(
-            size: VToggleRightContentViewModel.Layout().size,
-            thumbDimension: VToggleRightContentViewModel.Layout().thumbDimension,
-            animationOffset: VToggleRightContentViewModel.Layout().animationOffset,
-            fillColor: VToggleRightContentViewModel.Colors().fill.enabledOn,
-            thumbColor: VToggleRightContentViewModel.Colors().thumb.enabledOn,
+            size: VToggleRightContentModel.Layout().size,
+            thumbDimension: VToggleRightContentModel.Layout().thumbDimension,
+            animationOffset: VToggleRightContentModel.Layout().animationOffset,
+            fillColor: VToggleRightContentModel.Colors().fill.enabledOn,
+            thumbColor: VToggleRightContentModel.Colors().thumb.enabledOn,
             isOn: true,
             isDisabled: false,
             action: {}
