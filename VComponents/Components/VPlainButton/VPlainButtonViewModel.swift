@@ -30,16 +30,12 @@ extension VPlainButtonViewModel {
         public let hitAreaOffsetVer: CGFloat
         
         // MARK: Initializers
-        public init(hitAreaOffsetHor: CGFloat, hitAreaOffsetVer: CGFloat) {
+        public init(
+            hitAreaOffsetHor: CGFloat = 15,
+            hitAreaOffsetVer: CGFloat = 5
+        ) {
             self.hitAreaOffsetHor = hitAreaOffsetHor
             self.hitAreaOffsetVer = hitAreaOffsetVer
-        }
-        
-        public init() {
-            self.init(
-                hitAreaOffsetHor: 15,
-                hitAreaOffsetVer: 5
-            )
         }
     }
 }

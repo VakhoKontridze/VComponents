@@ -13,8 +13,6 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let buttonType: VPrimaryButtonType
     
     private let state: VPrimaryButtonState
-    @State private var isPressed: Bool = false
-    private var actualState: VPrimaryButtonActualState { state.actualState(isPressed: isPressed) }
     
     private let action: () -> Void
     

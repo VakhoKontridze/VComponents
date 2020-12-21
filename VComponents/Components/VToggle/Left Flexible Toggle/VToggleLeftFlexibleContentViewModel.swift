@@ -1,106 +1,61 @@
 //
-//  VToggleViewModel.swift
+//  VToggleLeftFlexibleContentViewModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 12/21/20.
 //
 
 import SwiftUI
 
 // MARK:- V Toggle ViewModel
-public struct VToggleViewModel {
+public struct VToggleLeftFlexibleContentViewModel {
     // MARK: Properties
     public let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
-    
-    let plainButtonToggleViewModel: VPlainButtonViewModel
-    let plainButtonContentViewModel: VPlainButtonViewModel
     
     // MARK: Initializers
     public init(behavior: Behavior = .init(), layout: Layout = .init(), colors: Colors = .init()) {
         self.behavior = behavior
         self.layout = layout
         self.colors = colors
-        
-        self.plainButtonToggleViewModel = .init(
-            layout: .init(
-                hitAreaOffsetHor: 0,
-                hitAreaOffsetVer: 0
-            ),
-            colors: .init(
-                foreground: .init(
-                    enabled: .clear,
-                    pressed: .clear,
-                    disabled: .clear,
-                    pressedOpacity: 1,
-                    disabledOpacity: 1
-                )
-            )
-        )
-        
-        self.plainButtonContentViewModel = .init(
-            layout: .init(
-                hitAreaOffsetHor: 0,
-                hitAreaOffsetVer: 0
-            ),
-            colors: .init(
-                foreground: .init(
-                    enabled: .clear,
-                    pressed: .clear,
-                    disabled: .clear,
-                    pressedOpacity: 0.5,
-                    disabledOpacity: 0.5
-                )
-            )
-        )
     }
 }
 
 // MARK:- Behavior
-extension VToggleViewModel {
+extension VToggleLeftFlexibleContentViewModel {
     public struct Behavior {
         // MARK: Properties
         public let contentIsClickable: Bool
+        public let spaceIsClickable: Bool
         public let animation: Animation
         
         // MARK: Initializers
-        public init(contentIsClickable: Bool, animation: Animation) {
+        public init(
+            contentIsClickable: Bool = true,
+            spaceIsClickable: Bool = false,
+            animation: Animation = Animation.easeIn(duration: 0.1)
+        ) {
             self.contentIsClickable = contentIsClickable
+            self.spaceIsClickable = spaceIsClickable
             self.animation = animation
-        }
-        
-        public init() {
-            self.init(
-                contentIsClickable: true,
-                animation: Animation.easeIn(duration: 0.1)
-            )
         }
     }
 }
 
 // MARK:- Layout
-extension VToggleViewModel {
+extension VToggleLeftFlexibleContentViewModel {
     public struct Layout {
-        // MARK: Properties
-        public let common: Common
-        public let rightContent: RightContent
-        
-        // MARK: Initializers
-        public init(common: Common = .init(), rightContent: RightContent = .init()) {
-            self.common = common
-            self.rightContent = rightContent
-        }
-    }
-    
-    public struct Common {
         // MARK: Properties
         public let size: CGSize
         public let thumbDimension: CGFloat
         let animationOffset: CGFloat
         
         // MARK: Initializers
-        public init(size: CGSize, thumbDimension: CGFloat) {
+        public init(
+            size: CGSize = .init(width: 51, height: 31),
+            thumbDimension: CGFloat = 27
+        ) {
             self.size = size
             self.thumbDimension = thumbDimension
             self.animationOffset = {
@@ -110,32 +65,11 @@ extension VToggleViewModel {
                 return offset
             }()
         }
-        
-        public init() {
-            self.init(
-                size: .init(width: 51, height: 31),
-                thumbDimension: 27
-            )
-        }
-    }
-    
-    public struct RightContent {
-        // MARK: Properties
-        public let spacing: CGFloat
-        
-        // MARK: Initializers
-        public init(spacing: CGFloat) {
-            self.spacing = spacing
-        }
-        
-        public init() {
-            self.init(spacing: 10)
-        }
     }
 }
 
 // MARK:- Colors
-extension VToggleViewModel {
+extension VToggleLeftFlexibleContentViewModel {
     public struct Colors {
         // MARK: Properties
         public let fill: FillColors
@@ -151,7 +85,7 @@ extension VToggleViewModel {
     }
 }
 
-extension VToggleViewModel {
+extension VToggleLeftFlexibleContentViewModel {
     public struct FillColors {
         // MARK: Properties
         public let enabledOn: Color
@@ -198,15 +132,18 @@ extension VToggleViewModel {
     
     public struct ContentColors {
         // MARK: Properties
+        public let pressedOpacity: Double
         public let disabledOpacity: Double
         
         // MARK: Initializers
-        public init(disabledOpacity: Double) {
+        public init(pressedOpacity: Double, disabledOpacity: Double) {
+            self.pressedOpacity = pressedOpacity
             self.disabledOpacity = disabledOpacity
         }
         
         public init() {
             self.init(
+                pressedOpacity: 0.5,
                 disabledOpacity: 0.5
             )
         }
@@ -214,27 +151,32 @@ extension VToggleViewModel {
 }
 
 // MARK:- Mapping
-extension VToggleViewModel.Colors {
-    static func fill(isOn: Bool, state: VToggleState, vm: VToggleViewModel) -> Color {
+extension VToggleLeftFlexibleContentViewModel.Colors {
+    func fillColor(isOn: Bool, state: VToggleActualState) -> Color {
         switch (isOn, state) {
-        case (true, .enabled): return vm.colors.fill.enabledOn
-        case (false, .enabled): return vm.colors.fill.enabledOff
-        case (_, .disabled): return vm.colors.fill.disabled
+        case (true, .enabled): return fill.enabledOn
+        case (false, .enabled): return fill.enabledOff
+        case (true, .pressed): return fill.enabledOn
+        case (false, .pressed): return fill.enabledOff
+        case (_, .disabled): return fill.disabled
         }
     }
     
-    static func thumb(isOn: Bool, state: VToggleState, vm: VToggleViewModel) -> Color {
+    func thumbColor(isOn: Bool, state: VToggleActualState) -> Color {
         switch (isOn, state) {
-        case (true, .enabled): return vm.colors.thumb.enabledOn
-        case (false, .enabled): return vm.colors.thumb.enabledOff
-        case (_, .disabled): return vm.colors.thumb.disabled
+        case (true, .enabled): return thumb.enabledOn
+        case (false, .enabled): return thumb.enabledOff
+        case (true, .pressed): return thumb.enabledOn
+        case (false, .pressed): return thumb.enabledOff
+        case (_, .disabled): return thumb.disabled
         }
     }
     
-    static func contentDisabledOpacity(state: VToggleState, vm: VToggleViewModel) -> Double {
+    func contentDisabledOpacity(state: VToggleActualState) -> Double {
         switch state {
         case .enabled: return 1
-        case .disabled: return vm.colors.content.disabledOpacity
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
         }
     }
 }

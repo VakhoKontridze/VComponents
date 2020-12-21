@@ -1,22 +1,22 @@
 //
-//  VCircularButtonActualState.swift
+//  VToggleActualState.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 20.12.20.
+//  Created by Vakhtang Kontridze on 12/21/20.
 //
 
 import Foundation
 
-// MARK:- V Circular Button Actual State
-enum VCircularButtonActualState {
+// MARK:- V Toggle Actual State
+enum VToggleActualState {
     case enabled
     case pressed
     case disabled
 }
 
 // MARK:- Mapping
-extension VCircularButtonState {
-    func actualState(isPressed: Bool) -> VCircularButtonActualState {
+extension VToggleState {
+    func actualState(isPressed: Bool) -> VToggleActualState {
         if isPressed && !isDisabled {
             return .pressed
         } else {

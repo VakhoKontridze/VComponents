@@ -29,14 +29,10 @@ extension VCircularButtonViewModel {
         public let dimension: CGFloat
         
         // MARK: Initializers
-        public init(dimension: CGFloat) {
+        public init(
+            dimension: CGFloat = 44
+        ) {
             self.dimension = dimension
-        }
-        
-        public init() {
-            self.init(
-                dimension: 44
-            )
         }
     }
 }

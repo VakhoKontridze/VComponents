@@ -34,20 +34,16 @@ public extension VPrimaryButtonFixedViewModel {
         let loaderWidth: CGFloat = 10
         
         // MARK: Initializers
-        public init(size: CGSize, cornerRadius: CGFloat, borderWidth: CGFloat, contentInset: CGFloat) {
+        public init(
+            size: CGSize = .init(width: 300, height: 50),
+            cornerRadius: CGFloat = 20,
+            borderWidth: CGFloat = 0,
+            contentInset: CGFloat = 15
+        ) {
             self.size = size
             self.cornerRadius = cornerRadius
             self.borderWidth = borderWidth
             self.contentInset = contentInset
-        }
-        
-        public init() {
-            self.init(
-                size: .init(width: 300, height: 50),
-                cornerRadius: 20,
-                borderWidth: 0,
-                contentInset: 15
-            )
         }
     }
 }

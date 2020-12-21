@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 20.12.20.
 //
 
-import SwiftUI
+import Foundation
 
 // MARK:- V Primary Button Actual State
 enum VPrimaryButtonActualState {

@@ -34,20 +34,16 @@ public extension VPrimaryButtonFlexibleViewModel {
         let loaderWidth: CGFloat = 10
         
         // MARK: Initializers
-        public init(height: CGFloat, cornerRadius: CGFloat, borderWidth: CGFloat, contentInset: CGFloat) {
+        public init(
+            height: CGFloat = 50,
+            cornerRadius: CGFloat = 20,
+            borderWidth: CGFloat = 0,
+            contentInset: CGFloat = 15
+        ) {
             self.height = height
             self.cornerRadius = cornerRadius
             self.borderWidth = borderWidth
             self.contentInset = contentInset
-        }
-        
-        public init() {
-            self.init(
-                height: 50,
-                cornerRadius: 20,
-                borderWidth: 0,
-                contentInset: 15
-            )
         }
     }
 }

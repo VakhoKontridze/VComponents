@@ -70,15 +70,15 @@ extension VPrimaryButtonDemoView {
 
     private var buttonsByType: some View {
         VStack(content: {
-            RowView(type: .titled("Compact"), content: {
+            RowView(type: .titled("Compact Width"), content: {
                 VPrimaryButton(.compact(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            RowView(type: .titled("Fixed"), content: {
+            RowView(type: .titled("Fixed Width"), content: {
                 VPrimaryButton(.fixed(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            RowView(type: .titled("Flexible"), content: {
+            RowView(type: .titled("Flexible Width"), content: {
                 VPrimaryButton(.flexible(), state: buttonState, action: action, title: buttonTitle)
             })
         })
@@ -104,17 +104,14 @@ extension VPrimaryButtonDemoView {
     private var borderedButton: some View {
         let viewModel: VPrimaryButtonFixedViewModel = .init(
             layout: .init(
-                size: .init(width: 300, height: 50),
-                cornerRadius: 15,
-                borderWidth: 5,
-                contentInset: 15
+                borderWidth: 5
             ),
             colors: .init(
                 border: .init(
-                    enabled: Color(UIColor.systemBlue.cgColor).opacity(1),
-                    pressed: Color(UIColor.systemBlue.cgColor).opacity(1),
-                    disabled: Color(UIColor.systemBlue.cgColor).opacity(0.25),
-                    loading: Color(UIColor.systemBlue.cgColor).opacity(0.25)
+                    enabled: Color(red: 49/255, green: 119/255, blue: 223/255, opacity: 1),
+                    pressed: Color(red: 19/255, green: 89/255, blue: 123/255, opacity: 1),
+                    disabled: Color(red: 49/255, green: 119/255, blue: 223/255, opacity: 0.25),
+                    loading: Color(red: 49/255, green: 119/255, blue: 223/255, opacity: 0.25)
                 )
             )
         )

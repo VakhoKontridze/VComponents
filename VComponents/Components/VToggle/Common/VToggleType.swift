@@ -9,6 +9,6 @@ import Foundation
 
 // MARK:- V Toggle Type
 public enum VToggleType {
-    case rightContent
-    case spacedLeftContent
+    case rightContent(viewModel: VToggleRightContentViewModel = .init())
+    case spacedLeftContent(viewModel: VToggleLeftFlexibleContentViewModel = .init())
 }
