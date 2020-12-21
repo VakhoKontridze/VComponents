@@ -35,7 +35,6 @@
 		7A48FDDE258DE58800AA4D4D /* VCircularButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */; };
 		7A8A73832590BFE1001024FB /* VToggleRightContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73822590BFE1001024FB /* VToggleRightContent.swift */; };
 		7A8A73872590BFFA001024FB /* VToggleRightContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73862590BFFA001024FB /* VToggleRightContentViewModel.swift */; };
-		7A8A738B2590C087001024FB /* VToggleActualState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A738A2590C087001024FB /* VToggleActualState.swift */; };
 		7A8A73922590C343001024FB /* VToggleToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73912590C343001024FB /* VToggleToggleView.swift */; };
 		7A8A73962590C6DF001024FB /* VToggleLeftFlexibleContentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73952590C6DF001024FB /* VToggleLeftFlexibleContentViewModel.swift */; };
 		7A8A739A2590C72B001024FB /* VToggleLeftFlexible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73992590C72B001024FB /* VToggleLeftFlexible.swift */; };
@@ -54,9 +53,6 @@
 		7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */; };
 		7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */; };
 		7A8A9744258DDF4200309886 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9743258DDF4200309886 /* RowView.swift */; };
-		7AA499AC258F705C002BD362 /* VPrimaryButtonActualState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA499AB258F705C002BD362 /* VPrimaryButtonActualState.swift */; };
-		7AA499B0258F70E9002BD362 /* VPlainButtonActualState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA499AF258F70E9002BD362 /* VPlainButtonActualState.swift */; };
-		7AA499B4258F7132002BD362 /* VCircularButtonActualState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA499B3258F7132002BD362 /* VCircularButtonActualState.swift */; };
 		7AA499B8258F72C1002BD362 /* VToggleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA499B7258F72C1002BD362 /* VToggleType.swift */; };
 		7AA499CA258F82D2002BD362 /* VSliderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA499C9258F82D2002BD362 /* VSliderType.swift */; };
 		7AA9F3E425909E230060F210 /* TouchContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F3E325909E230060F210 /* TouchContainer.swift */; };
@@ -101,7 +97,6 @@
 		7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCircularButtonDemoView.swift; sourceTree = "<group>"; };
 		7A8A73822590BFE1001024FB /* VToggleRightContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContent.swift; sourceTree = "<group>"; };
 		7A8A73862590BFFA001024FB /* VToggleRightContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContentViewModel.swift; sourceTree = "<group>"; };
-		7A8A738A2590C087001024FB /* VToggleActualState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleActualState.swift; sourceTree = "<group>"; };
 		7A8A73912590C343001024FB /* VToggleToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleToggleView.swift; sourceTree = "<group>"; };
 		7A8A73952590C6DF001024FB /* VToggleLeftFlexibleContentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleLeftFlexibleContentViewModel.swift; sourceTree = "<group>"; };
 		7A8A73992590C72B001024FB /* VToggleLeftFlexible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleLeftFlexible.swift; sourceTree = "<group>"; };
@@ -124,9 +119,6 @@
 		7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonState.swift; sourceTree = "<group>"; };
 		7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonDemoView.swift; sourceTree = "<group>"; };
 		7A8A9743258DDF4200309886 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
-		7AA499AB258F705C002BD362 /* VPrimaryButtonActualState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonActualState.swift; sourceTree = "<group>"; };
-		7AA499AF258F70E9002BD362 /* VPlainButtonActualState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonActualState.swift; sourceTree = "<group>"; };
-		7AA499B3258F7132002BD362 /* VCircularButtonActualState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCircularButtonActualState.swift; sourceTree = "<group>"; };
 		7AA499B7258F72C1002BD362 /* VToggleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleType.swift; sourceTree = "<group>"; };
 		7AA499C9258F82D2002BD362 /* VSliderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderType.swift; sourceTree = "<group>"; };
 		7AA9F3E325909E230060F210 /* TouchContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchContainer.swift; sourceTree = "<group>"; };
@@ -240,7 +232,6 @@
 				7A00736A258E47280003F0E9 /* VToggle.swift */,
 				7AA499B7258F72C1002BD362 /* VToggleType.swift */,
 				7A007374258E75DF0003F0E9 /* VToggleState.swift */,
-				7A8A738A2590C087001024FB /* VToggleActualState.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -467,7 +458,6 @@
 				7A8A9724258DDDA800309886 /* VPrimaryButton.swift */,
 				7A8A9725258DDDA800309886 /* VPrimaryButtonType.swift */,
 				7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */,
-				7AA499AB258F705C002BD362 /* VPrimaryButtonActualState.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -521,7 +511,6 @@
 				7A00731A258E27490003F0E9 /* VPlainButton.swift */,
 				7A007322258E27C40003F0E9 /* VPlainButtonViewModel.swift */,
 				7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */,
-				7AA499AF258F70E9002BD362 /* VPlainButtonActualState.swift */,
 			);
 			path = VPlainButton;
 			sourceTree = "<group>";
@@ -532,7 +521,6 @@
 				7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */,
 				7A48FDC5258DE48E00AA4D4D /* VCircularButtonViewModel.swift */,
 				7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */,
-				7AA499B3258F7132002BD362 /* VCircularButtonActualState.swift */,
 			);
 			path = VCircularButton;
 			sourceTree = "<group>";
@@ -665,11 +653,9 @@
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
 				7A8A73872590BFFA001024FB /* VToggleRightContentViewModel.swift in Sources */,
 				7A8A9729258DDDA800309886 /* VPrimaryButton.swift in Sources */,
-				7AA499B4258F7132002BD362 /* VCircularButtonActualState.swift in Sources */,
 				7A3C159B258E0A3D00CE1D96 /* VLazyListViewModel.swift in Sources */,
 				7A3C1571258DF24800CE1D96 /* VSliderViewModel.swift in Sources */,
 				7AA9F3E425909E230060F210 /* TouchContainer.swift in Sources */,
-				7A8A738B2590C087001024FB /* VToggleActualState.swift in Sources */,
 				7A3C1557258DE7B900CE1D96 /* VSpinnerViewModel.swift in Sources */,
 				7A8A73832590BFE1001024FB /* VToggleRightContent.swift in Sources */,
 				7AA9F4052590ACB00060F210 /* VPrimaryButtonBackgroundView.swift in Sources */,
@@ -679,8 +665,6 @@
 				7A8A739A2590C72B001024FB /* VToggleLeftFlexible.swift in Sources */,
 				7AA499B8258F72C1002BD362 /* VToggleType.swift in Sources */,
 				7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */,
-				7AA499AC258F705C002BD362 /* VPrimaryButtonActualState.swift in Sources */,
-				7AA499B0258F70E9002BD362 /* VPlainButtonActualState.swift in Sources */,
 				7A8A73922590C343001024FB /* VToggleToggleView.swift in Sources */,
 				7A48FDCA258DE48E00AA4D4D /* VCircularButtonState.swift in Sources */,
 				7A00736B258E47280003F0E9 /* VToggle.swift in Sources */,

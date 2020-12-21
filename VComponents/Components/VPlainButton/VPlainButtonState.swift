@@ -19,3 +19,21 @@ public enum VPlainButtonState: Int, CaseIterable {
         }
     }
 }
+
+// MARK:- V Plain Button Internal State
+enum VPlainButtonInternalState {
+    case enabled
+    case pressed
+    case disabled
+    
+    init(state: VPlainButtonState, isPressed: Bool) {
+        if isPressed && !state.isDisabled {
+            self = .pressed
+        } else {
+            switch state {
+            case .enabled: self = .enabled
+            case .disabled: self = .disabled
+            }
+        }
+    }
+}

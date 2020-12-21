@@ -14,7 +14,7 @@ public struct VPlainButton<Content>: View where Content: View {
     
     private let state: VPlainButtonState
     @State private var isPressed: Bool = false
-    private var actualState: VPlainButtonActualState { state.actualState(isPressed: isPressed) }
+    private var internalState: VPlainButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -64,11 +64,11 @@ public extension VPlainButton {
                 .lineLimit(1)
                 .multilineTextAlignment(.center)
                 .truncationMode(.tail)
-                .foregroundColor(viewModel.colors.foregroundColor(state: actualState))
+                .foregroundColor(viewModel.colors.foregroundColor(state: internalState))
                 .font(viewModel.fonts.title)
             
                 // Text + Image
-                .opacity(viewModel.colors.foregroundOpacity(state: actualState))
+                .opacity(viewModel.colors.foregroundOpacity(state: internalState))
         })
     }
 }

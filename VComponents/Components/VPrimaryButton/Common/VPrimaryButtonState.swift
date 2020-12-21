@@ -21,3 +21,32 @@ public enum VPrimaryButtonState: Int, CaseIterable {
         }
     }
 }
+
+// MARK:- V Primary Button Internal State
+enum VPrimaryButtonInternalState {
+    case enabled
+    case pressed
+    case disabled
+    case loading
+    
+    var isLoading: Bool {
+        switch self {
+        case .enabled: return false
+        case .pressed: return false
+        case .disabled: return false
+        case .loading: return true
+        }
+    }
+    
+    init(state: VPrimaryButtonState, isPressed: Bool) {
+        if isPressed && !state.isDisabled {
+            self = .pressed
+        } else {
+            switch state {
+            case .enabled: self = .enabled
+            case .disabled: self = .disabled
+            case .loading: self = .loading
+            }
+        }
+    }
+}

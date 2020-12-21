@@ -19,3 +19,21 @@ public enum VToggleState: Int, CaseIterable {
         }
     }
 }
+
+// MARK:- V Toggle Internal State
+enum VToggleInternalState {
+    case enabled
+    case pressed
+    case disabled
+    
+    init(state: VToggleState, isPressed: Bool) {
+        if isPressed && !state.isDisabled {
+            self = .pressed
+        } else {
+            switch state {
+            case .enabled: self = .enabled
+            case .disabled: self = .disabled
+            }
+        }
+    }
+}

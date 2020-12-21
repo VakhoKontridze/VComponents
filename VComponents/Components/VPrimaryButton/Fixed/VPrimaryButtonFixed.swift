@@ -14,7 +14,7 @@ struct VPrimaryButtonFixed<Content>: View where Content: View {
     
     private let state: VPrimaryButtonState
     @State private var isPressed: Bool = false
-    private var actualState: VPrimaryButtonActualState { state.actualState(isPressed: isPressed) }
+    private var internalState: VPrimaryButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -40,15 +40,15 @@ extension VPrimaryButtonFixed {
         TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             HStack(alignment: .center, spacing: viewModel.layout.loaderSpacing, content: {
                 VPrimaryButtonLoaderCompensatorView(
-                    isVisible: actualState.isLoading,
+                    isVisible: internalState.isLoading,
                     width: viewModel.layout.loaderWidth
                 )
                 
                 Spacer()
                 
                 VPrimaryButtonContentView(
-                    foregroundColor: viewModel.colors.foregroundColor(state: actualState),
-                    foregroundOpacity: viewModel.colors.foregroundOpacity(state: actualState),
+                    foregroundColor: viewModel.colors.foregroundColor(state: internalState),
+                    foregroundOpacity: viewModel.colors.foregroundOpacity(state: internalState),
                     font: viewModel.fonts.title,
                     content: content
                 )
@@ -56,7 +56,7 @@ extension VPrimaryButtonFixed {
                 Spacer()
                 
                 VPrimaryButtonLoaderView(
-                    isVisible: actualState.isLoading,
+                    isVisible: internalState.isLoading,
                     width: viewModel.layout.loaderWidth
                 )
             })
@@ -66,8 +66,8 @@ extension VPrimaryButtonFixed {
                     VPrimaryButtonBackgroundView(
                         cornerRadius: viewModel.layout.cornerRadius,
                         borderWidth: viewModel.layout.borderWidth,
-                        fillColor: viewModel.colors.fillColor(state: actualState),
-                        borderColor: viewModel.colors.borderColor(state: actualState)
+                        fillColor: viewModel.colors.fillColor(state: internalState),
+                        borderColor: viewModel.colors.borderColor(state: internalState)
                     )
                 )
         })

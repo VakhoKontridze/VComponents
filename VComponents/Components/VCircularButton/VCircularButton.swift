@@ -14,7 +14,7 @@ public struct VCircularButton<Content>: View where Content: View {
     
     private let state: VCircularButtonState
     @State private var isPressed: Bool = false
-    private var actualState: VCircularButtonActualState { state.actualState(isPressed: isPressed) }
+    private var internalState: VCircularButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -45,15 +45,15 @@ public extension VCircularButton {
                 .lineLimit(1)
                 .multilineTextAlignment(.center)
                 .truncationMode(.tail)
-                .foregroundColor(viewModel.colors.foregroundColor(state: actualState))
+                .foregroundColor(viewModel.colors.foregroundColor(state: internalState))
                 .font(viewModel.fonts.title)
             
                 // Text + Image
-                .opacity(viewModel.colors.foregroundOpacity(state: actualState))
+                .opacity(viewModel.colors.foregroundOpacity(state: internalState))
             
                 .background(
                     Circle()
-                        .foregroundColor(viewModel.colors.backgroundColor(state: actualState))
+                        .foregroundColor(viewModel.colors.backgroundColor(state: internalState))
                 )
         })
     }

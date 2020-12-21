@@ -152,7 +152,7 @@ extension VToggleRightContentViewModel {
 
 // MARK:- Mapping
 extension VToggleRightContentViewModel.Colors {
-    func fillColor(isOn: Bool, state: VToggleActualState) -> Color {
+    func fillColor(isOn: Bool, state: VToggleInternalState) -> Color {
         switch (isOn, state) {
         case (true, .enabled): return fill.enabledOn
         case (false, .enabled): return fill.enabledOff
@@ -162,7 +162,7 @@ extension VToggleRightContentViewModel.Colors {
         }
     }
     
-    func thumbColor(isOn: Bool, state: VToggleActualState) -> Color {
+    func thumbColor(isOn: Bool, state: VToggleInternalState) -> Color {
         switch (isOn, state) {
         case (true, .enabled): return thumb.enabledOn
         case (false, .enabled): return thumb.enabledOff
@@ -172,7 +172,7 @@ extension VToggleRightContentViewModel.Colors {
         }
     }
     
-    func contentDisabledOpacity(state: VToggleActualState) -> Double {
+    func contentDisabledOpacity(state: VToggleInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return content.pressedOpacity

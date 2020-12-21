@@ -15,7 +15,7 @@ struct VToggleLeftFlexibleContent<Content>: View where Content: View {
     @Binding private var isOn: Bool
     @State private var isPressed: Bool = false
     private let state: VToggleState
-    private var actualState: VToggleActualState { state.actualState(isPressed: isPressed) }
+    private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
     private var contentIsDisabled: Bool { state.isDisabled || !viewModel.behavior.contentIsClickable }
     private var spaceIsDisabled: Bool { state.isDisabled || !viewModel.behavior.spaceIsClickable }
     
@@ -49,8 +49,8 @@ extension VToggleLeftFlexibleContent {
             size: viewModel.layout.size,
             thumbDimension: viewModel.layout.thumbDimension,
             animationOffset: viewModel.layout.animationOffset,
-            fillColor: viewModel.colors.fillColor(isOn: isOn, state: actualState),
-            thumbColor: viewModel.colors.thumbColor(isOn: isOn, state: actualState),
+            fillColor: viewModel.colors.fillColor(isOn: isOn, state: internalState),
+            thumbColor: viewModel.colors.thumbColor(isOn: isOn, state: internalState),
             isOn: isOn,
             isDisabled: state.isDisabled,
             action: action
@@ -60,7 +60,7 @@ extension VToggleLeftFlexibleContent {
     private func toggle(with content: @escaping () -> Content) -> some View {
         HStack(alignment: .center, spacing: 0, content: {
             VToggleContentView(
-                opacity: viewModel.colors.contentDisabledOpacity(state: actualState),
+                opacity: viewModel.colors.contentDisabledOpacity(state: internalState),
                 isDisabled: contentIsDisabled,
                 isPressed: $isPressed,
                 action: action,

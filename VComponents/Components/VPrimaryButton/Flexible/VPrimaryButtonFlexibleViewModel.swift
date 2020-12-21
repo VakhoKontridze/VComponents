@@ -167,7 +167,7 @@ public extension VPrimaryButtonFlexibleViewModel {
 
 // MARK:- Mapping
 extension VPrimaryButtonFlexibleViewModel.Colors {
-    func foregroundColor(state: VPrimaryButtonActualState) -> Color {
+    func foregroundColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
         case .pressed: return foreground.pressed
@@ -176,7 +176,7 @@ extension VPrimaryButtonFlexibleViewModel.Colors {
         }
     }
 
-    func fillColor(state: VPrimaryButtonActualState) -> Color {
+    func fillColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return fill.enabled
         case .pressed: return fill.pressed
@@ -185,7 +185,7 @@ extension VPrimaryButtonFlexibleViewModel.Colors {
         }
     }
     
-    func borderColor(state: VPrimaryButtonActualState) -> Color {
+    func borderColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return border.enabled
         case .pressed: return border.pressed
@@ -194,7 +194,7 @@ extension VPrimaryButtonFlexibleViewModel.Colors {
         }
     }
     
-    func foregroundOpacity(state: VPrimaryButtonActualState) -> Double {
+    func foregroundOpacity(state: VPrimaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return foreground.pressedOpacity

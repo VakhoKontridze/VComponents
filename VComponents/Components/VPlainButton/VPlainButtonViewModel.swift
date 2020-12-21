@@ -105,7 +105,7 @@ extension VPlainButtonViewModel {
 
 // MARK:- Mapping
 extension VPlainButtonViewModel.Colors {
-    func foregroundColor(state: VPlainButtonActualState) -> Color {
+    func foregroundColor(state: VPlainButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
         case .pressed: return foreground.pressed
@@ -113,7 +113,7 @@ extension VPlainButtonViewModel.Colors {
         }
     }
     
-    func foregroundOpacity(state: VPlainButtonActualState) -> Double {
+    func foregroundOpacity(state: VPlainButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return foreground.pressedOpacity
