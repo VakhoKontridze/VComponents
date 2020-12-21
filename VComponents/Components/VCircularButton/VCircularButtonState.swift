@@ -12,10 +12,10 @@ public enum VCircularButtonState: Int, CaseIterable {
     case enabled
     case disabled
     
-    var isEnabled: Bool {
+    var isDisabled: Bool {
         switch self {
-        case .enabled: return true
-        case .disabled: return false
+        case .enabled: return false
+        case .disabled: return true
         }
     }
 }

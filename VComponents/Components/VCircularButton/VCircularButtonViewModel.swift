@@ -127,26 +127,26 @@ extension VCircularButtonViewModel {
 
 // MARK:- Mapping
 extension VCircularButtonViewModel.Colors {
-    static func foreground(state: VRoundedButtonActualState, vm: VCircularButtonViewModel) -> Color {
+    func foregroundColor(state: VCircularButtonActualState) -> Color {
         switch state {
-        case .enabled: return vm.colors.foreground.enabled
-        case .pressed: return vm.colors.foreground.pressed
-        case .disabled: return vm.colors.foreground.disabled
+        case .enabled: return foreground.enabled
+        case .pressed: return foreground.pressed
+        case .disabled: return foreground.disabled
         }
     }
 
-    static func background(state: VRoundedButtonActualState, vm: VCircularButtonViewModel) -> Color {
+    func backgroundColor(state: VCircularButtonActualState) -> Color {
         switch state {
-        case .enabled: return vm.colors.background.enabled
-        case .pressed: return vm.colors.background.pressed
-        case .disabled: return vm.colors.background.disabled
+        case .enabled: return background.enabled
+        case .pressed: return background.pressed
+        case .disabled: return background.disabled
         }
     }
     
-    static func foregroundOpacity(state: VRoundedButtonActualState, vm: VCircularButtonViewModel) -> Double {
+    func foregroundOpacity(state: VCircularButtonActualState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return vm.colors.foreground.pressedOpacity
+        case .pressed: return foreground.pressedOpacity
         case .disabled: return 1
         }
     }

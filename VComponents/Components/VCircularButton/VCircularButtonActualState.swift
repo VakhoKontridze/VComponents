@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Rounded Button Actual State
-enum VRoundedButtonActualState {
+// MARK:- V Circular Button Actual State
+enum VCircularButtonActualState {
     case enabled
     case pressed
     case disabled
@@ -16,8 +16,8 @@ enum VRoundedButtonActualState {
 
 // MARK:- Mapping
 extension VCircularButtonState {
-    func actualState(configuration: ButtonStyleConfiguration) -> VRoundedButtonActualState {
-        if configuration.isPressed && isEnabled {
+    func actualState(isPressed: Bool) -> VCircularButtonActualState {
+        if isPressed && !isDisabled {
             return .pressed
         } else {
             switch self {

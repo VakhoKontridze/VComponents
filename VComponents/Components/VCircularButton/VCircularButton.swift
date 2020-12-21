@@ -13,6 +13,8 @@ public struct VCircularButton<Content>: View where Content: View {
     private let viewModel: VCircularButtonViewModel
     
     private let state: VCircularButtonState
+    @State private var isPressed: Bool = false
+    private var actualState: VCircularButtonActualState { state.actualState(isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -35,9 +37,25 @@ public struct VCircularButton<Content>: View where Content: View {
 // MARK:- Body
 public extension VCircularButton {
     var body: some View {
-        Button(action: action, label: content)
-            .disabled(!state.isEnabled)
-            .buttonStyle(VCircularButtonStyle(state: state, viewModel: viewModel))
+        TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
+            content()
+                .frame(dimension: viewModel.layout.dimension)
+                
+                // Text
+                .lineLimit(1)
+                .multilineTextAlignment(.center)
+                .truncationMode(.tail)
+                .foregroundColor(viewModel.colors.foregroundColor(state: actualState))
+                .font(viewModel.fonts.title)
+            
+                // Text + Image
+                .opacity(viewModel.colors.foregroundOpacity(state: actualState))
+            
+                .background(
+                    Circle()
+                        .foregroundColor(viewModel.colors.backgroundColor(state: actualState))
+                )
+        })
     }
 }
 

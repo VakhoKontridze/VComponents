@@ -30,7 +30,6 @@
 		7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */; };
 		7A3C1584258DFF5A00CE1D96 /* VLazyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1583258DFF5A00CE1D96 /* VLazyListView.swift */; };
 		7A3C159B258E0A3D00CE1D96 /* VLazyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C159A258E0A3D00CE1D96 /* VLazyListViewModel.swift */; };
-		7A48FDC7258DE48E00AA4D4D /* VCircularButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC3258DE48E00AA4D4D /* VCircularButtonStyle.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */; };
 		7A48FDC9258DE48E00AA4D4D /* VCircularButtonViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC5258DE48E00AA4D4D /* VCircularButtonViewModel.swift */; };
 		7A48FDCA258DE48E00AA4D4D /* VCircularButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */; };
@@ -90,7 +89,6 @@
 		7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
 		7A3C1583258DFF5A00CE1D96 /* VLazyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListView.swift; sourceTree = "<group>"; };
 		7A3C159A258E0A3D00CE1D96 /* VLazyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListViewModel.swift; sourceTree = "<group>"; };
-		7A48FDC3258DE48E00AA4D4D /* VCircularButtonStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonStyle.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButton.swift; sourceTree = "<group>"; };
 		7A48FDC5258DE48E00AA4D4D /* VCircularButtonViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonViewModel.swift; sourceTree = "<group>"; };
 		7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonState.swift; sourceTree = "<group>"; };
@@ -222,18 +220,6 @@
 			name = VLazyListView;
 			sourceTree = "<group>";
 		};
-		7A48FDC1258DE43700AA4D4D /* VCircularButon */ = {
-			isa = PBXGroup;
-			children = (
-				7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */,
-				7A48FDC5258DE48E00AA4D4D /* VCircularButtonViewModel.swift */,
-				7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */,
-				7AA499B3258F7132002BD362 /* VCircularButtonActualState.swift */,
-				7A48FDC3258DE48E00AA4D4D /* VCircularButtonStyle.swift */,
-			);
-			name = VCircularButon;
-			sourceTree = "<group>";
-		};
 		7A8A96DB258DDA9200309886 = {
 			isa = PBXGroup;
 			children = (
@@ -278,7 +264,6 @@
 		7A8A96F3258DDB0800309886 /* zComponents */ = {
 			isa = PBXGroup;
 			children = (
-				7A48FDC1258DE43700AA4D4D /* VCircularButon */,
 				7A007361258E47130003F0E9 /* VToggle */,
 				7A3C1563258DECEA00CE1D96 /* VSlider */,
 				7A3C1550258DE7AC00CE1D96 /* VSpinner */,
@@ -377,6 +362,7 @@
 			children = (
 				7AA9F41F2590B09D0060F210 /* VPrimaryButton */,
 				7AA9F4452590B34A0060F210 /* VPlainButton */,
+				7AF4C8CF2590BA3A00275C76 /* VCircularButton */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -485,6 +471,17 @@
 				7AA499AF258F70E9002BD362 /* VPlainButtonActualState.swift */,
 			);
 			path = VPlainButton;
+			sourceTree = "<group>";
+		};
+		7AF4C8CF2590BA3A00275C76 /* VCircularButton */ = {
+			isa = PBXGroup;
+			children = (
+				7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */,
+				7A48FDC5258DE48E00AA4D4D /* VCircularButtonViewModel.swift */,
+				7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */,
+				7AA499B3258F7132002BD362 /* VCircularButtonActualState.swift */,
+			);
+			path = VCircularButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -618,7 +615,6 @@
 				7A3C1571258DF24800CE1D96 /* VSliderViewModel.swift in Sources */,
 				7AA9F3E425909E230060F210 /* TouchContainer.swift in Sources */,
 				7A3C1557258DE7B900CE1D96 /* VSpinnerViewModel.swift in Sources */,
-				7A48FDC7258DE48E00AA4D4D /* VCircularButtonStyle.swift in Sources */,
 				7AA9F4052590ACB00060F210 /* VPrimaryButtonBackgroundView.swift in Sources */,
 				7A3C1558258DE7B900CE1D96 /* VContinousSpinner.swift in Sources */,
 				7AA9F3F22590A7820060F210 /* VPrimaryButtonCompact.swift in Sources */,
