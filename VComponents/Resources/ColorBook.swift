@@ -15,6 +15,15 @@ struct ColorBook {
 // MARK:- Primary Button
 extension ColorBook {
     struct PrimaryButton {
+        struct Text {
+            static let enabled: Color = .init(.s255, .s255, .s255, .o100)
+            static let pressed: Color = enabled
+            static let disabled: Color = .init(.s255, .s255, .s255, .o50)
+            static let loading: Color = disabled
+            
+            private init() {}
+        }
+        
         struct Fill {
             static let enabled: Color = .init(.s48, .s128, .s224, .o100)
             static let pressed: Color = .init(.s32, .s96, .s160, .o100)
@@ -24,11 +33,11 @@ extension ColorBook {
             private init() {}
         }
         
-        struct Text {
-            static let enabled: Color = .init(.s255, .s255, .s255, .o100)
-            static let pressed: Color = enabled
-            static let disabled: Color = .init(.s255, .s255, .s255, .o50)
-            static let loading: Color = disabled
+        struct Border {
+            static let enabled: Color = Fill.disabled
+            static let pressed: Color = Fill.disabled
+            static let disabled: Color = Fill.disabled
+            static let loading: Color = Fill.disabled
             
             private init() {}
         }

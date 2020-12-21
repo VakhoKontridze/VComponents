@@ -13,12 +13,21 @@ enum VPrimaryButtonActualState {
     case pressed
     case disabled
     case loading
+    
+    var isLoading: Bool {
+        switch self {
+        case .enabled: return false
+        case .pressed: return false
+        case .disabled: return false
+        case .loading: return true
+        }
+    }
 }
 
 // MARK:- Mapping
 extension VPrimaryButtonState {
-    func actualState(configuration: ButtonStyleConfiguration) -> VPrimaryButtonActualState {
-        if configuration.isPressed && isEnabled {
+    func actualState(isPressed: Bool) -> VPrimaryButtonActualState {
+        if isPressed && !isDisabled {
             return .pressed
         } else {
             switch self {

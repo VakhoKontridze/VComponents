@@ -13,11 +13,11 @@ public enum VPrimaryButtonState: Int, CaseIterable {
     case disabled
     case loading
     
-    var isEnabled: Bool {
+    var isDisabled: Bool {
         switch self {
-        case .enabled: return true
-        case .disabled: return false
-        case .loading: return false
+        case .enabled: return false
+        case .disabled: return true
+        case .loading: return true
         }
     }
 }

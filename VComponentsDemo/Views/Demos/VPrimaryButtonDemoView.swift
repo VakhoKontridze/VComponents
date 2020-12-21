@@ -34,6 +34,7 @@ extension VPrimaryButtonDemoView {
             VLazyListView(content: {
                 buttonsByType
                 imageButtons
+                borderedButton
             })
         })
             .navigationTitle(Self.sceneTitle)
@@ -70,15 +71,15 @@ extension VPrimaryButtonDemoView {
     private var buttonsByType: some View {
         VStack(content: {
             RowView(type: .titled("Compact"), content: {
-                VPrimaryButton(.compact, state: buttonState, action: action, title: buttonTitle)
+                VPrimaryButton(.compact(), state: buttonState, action: action, title: buttonTitle)
             })
             
             RowView(type: .titled("Fixed"), content: {
-                VPrimaryButton(.fixed, state: buttonState, action: action, title: buttonTitle)
+                VPrimaryButton(.fixed(), state: buttonState, action: action, title: buttonTitle)
             })
             
             RowView(type: .titled("Flexible"), content: {
-                VPrimaryButton(.flexible, state: buttonState, action: action, title: buttonTitle)
+                VPrimaryButton(.flexible(), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }
@@ -86,16 +87,41 @@ extension VPrimaryButtonDemoView {
     private var imageButtons: some View {
         VStack(content: {
             RowView(type: .titled("Image"), content: {
-                VPrimaryButton(.fixed, state: buttonState, action: action, content: buttonContent)
+                VPrimaryButton(.fixed(), state: buttonState, action: action, content: buttonContent)
             })
 
             RowView(type: .titled("Image and Text"), content: {
-                VPrimaryButton(.fixed, state: buttonState, action: action, content: {
+                VPrimaryButton(.fixed(), state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
                         Text(buttonTitle)
                     })
                 })
+            })
+        })
+    }
+    
+    private var borderedButton: some View {
+        let viewModel: VPrimaryButtonFixedViewModel = .init(
+            layout: .init(
+                size: .init(width: 300, height: 50),
+                cornerRadius: 15,
+                borderWidth: 5,
+                contentInset: 15
+            ),
+            colors: .init(
+                border: .init(
+                    enabled: Color(UIColor.systemBlue.cgColor).opacity(1),
+                    pressed: Color(UIColor.systemBlue.cgColor).opacity(1),
+                    disabled: Color(UIColor.systemBlue.cgColor).opacity(0.25),
+                    loading: Color(UIColor.systemBlue.cgColor).opacity(0.25)
+                )
+            )
+        )
+        
+        return VStack(content: {
+            RowView(type: .titled("Bordered"), content: {
+                VPrimaryButton(.fixed(viewModel: viewModel), state: buttonState, action: action, content: buttonContent)
             })
         })
     }

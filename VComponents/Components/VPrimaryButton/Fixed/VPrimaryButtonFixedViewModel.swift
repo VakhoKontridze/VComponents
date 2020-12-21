@@ -1,49 +1,14 @@
 //
-//  VPrimaryButtonViewModel.swift
+//  VPrimaryButtonFixedViewModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 12/21/20.
 //
 
 import SwiftUI
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// MARK:- V Primary Button ViewModel
-public struct VPrimaryButtonViewModel {
+// MARK:- V Primary Button Fixed ViewModel
+public struct VPrimaryButtonFixedViewModel {
     // MARK: Properties
     public let layout: Layout
     public let colors: Colors
@@ -58,65 +23,38 @@ public struct VPrimaryButtonViewModel {
 }
 
 // MARK:- Layout
-extension VPrimaryButtonViewModel {
-    public struct Layout {
+public extension VPrimaryButtonFixedViewModel {
+    struct Layout {
         // MARK: Properties
-        public let common: Common
-        public let fixed: Fixed
-        
-        // MARK: Initializers
-        public init(common: Common = .init(), fixed: Fixed = .init()) {
-            self.common = common
-            self.fixed = fixed
-        }
-    }
-    
-    public struct Common {
-        // MARK: Properties
-        public let height: CGFloat
+        public let size: CGSize
         public let cornerRadius: CGFloat
-        
+        public let borderWidth: CGFloat
         public let contentInset: CGFloat
-        
         let loaderSpacing: CGFloat = 20
         let loaderWidth: CGFloat = 10
         
         // MARK: Initializers
-        public init(height: CGFloat, cornerRadius: CGFloat, contentInset: CGFloat) {
-            self.height = height
+        public init(size: CGSize, cornerRadius: CGFloat, borderWidth: CGFloat, contentInset: CGFloat) {
+            self.size = size
             self.cornerRadius = cornerRadius
+            self.borderWidth = borderWidth
             self.contentInset = contentInset
         }
         
         public init() {
             self.init(
-                height: 50,
+                size: .init(width: 300, height: 50),
                 cornerRadius: 20,
+                borderWidth: 0,
                 contentInset: 15
-            )
-        }
-    }
-    
-    public struct Fixed {
-        // MARK: Properties
-        public let width: CGFloat
-        
-        // MARK: Initializers
-        public init(width: CGFloat) {
-            self.width = width
-        }
-        
-        public init() {
-            self.init(
-                width: 300
             )
         }
     }
 }
 
 // MARK:- Colors
-extension VPrimaryButtonViewModel {
-    public struct Colors {
+public extension VPrimaryButtonFixedViewModel {
+    struct Colors {
         // MARK: Properties
         public let foreground: ForegroundColors
         public let fill: FillColors
@@ -131,14 +69,13 @@ extension VPrimaryButtonViewModel {
     }
 }
 
-extension VPrimaryButtonViewModel.Colors {
+extension VPrimaryButtonFixedViewModel.Colors {
     public struct ForegroundColors {
         // MARK: Properties
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         public let loading: Color
-        
         public let pressedOpacity: Double
         
         // MARK: Initializers
@@ -214,8 +151,8 @@ extension VPrimaryButtonViewModel.Colors {
 }
 
 // MARK:- Fonts
-extension VPrimaryButtonViewModel {
-    public struct Fonts {
+public extension VPrimaryButtonFixedViewModel {
+    struct Fonts {
         // MARK: Properties
         public let title: Font
         
@@ -233,29 +170,38 @@ extension VPrimaryButtonViewModel {
 }
 
 // MARK:- Mapping
-extension VPrimaryButtonViewModel.Colors {
-    static func foreground(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Color {
+extension VPrimaryButtonFixedViewModel.Colors {
+    func foregroundColor(state: VPrimaryButtonActualState) -> Color {
         switch state {
-        case .enabled: return vm.colors.foreground.enabled
-        case .pressed: return vm.colors.foreground.pressed
-        case .disabled: return vm.colors.foreground.disabled
-        case .loading: return vm.colors.foreground.loading
+        case .enabled: return foreground.enabled
+        case .pressed: return foreground.pressed
+        case .disabled: return foreground.disabled
+        case .loading: return foreground.loading
         }
     }
 
-    static func background(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Color {
+    func fillColor(state: VPrimaryButtonActualState) -> Color {
         switch state {
-        case .enabled: return vm.colors.fill.enabled
-        case .pressed: return vm.colors.fill.pressed
-        case .disabled: return vm.colors.fill.disabled
-        case .loading: return vm.colors.fill.loading
+        case .enabled: return fill.enabled
+        case .pressed: return fill.pressed
+        case .disabled: return fill.disabled
+        case .loading: return fill.loading
         }
     }
     
-    static func foregroundOpacity(state: VPrimaryButtonActualState, vm: VPrimaryButtonViewModel) -> Double {
+    func borderColor(state: VPrimaryButtonActualState) -> Color {
+        switch state {
+        case .enabled: return border.enabled
+        case .pressed: return border.pressed
+        case .disabled: return border.disabled
+        case .loading: return border.loading
+        }
+    }
+    
+    func foregroundOpacity(state: VPrimaryButtonActualState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return vm.colors.foreground.pressedOpacity
+        case .pressed: return foreground.pressedOpacity
         case .disabled: return 1
         case .loading: return 1
         }

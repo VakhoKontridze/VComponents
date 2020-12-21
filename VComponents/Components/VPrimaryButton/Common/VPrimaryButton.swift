@@ -14,6 +14,8 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let viewModel: VPrimaryButtonViewModel
     
     private let state: VPrimaryButtonState
+    @State private var isPressed: Bool = false
+    private var actualState: VPrimaryButtonActualState { state.actualState(isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -57,16 +59,18 @@ extension VPrimaryButton where Content == Text {
 
 // MARK:- Body
 public extension VPrimaryButton {
-    var body: some View {
-        Button(action: action, label: content)
-            .disabled(!state.isEnabled)
-            .buttonStyle(VPrimaryButtonStyle(type: buttonType, state: state, viewModel: viewModel))
+    @ViewBuilder var body: some View {
+        switch buttonType {
+        case .compact(let viewModel): VPrimaryButtonCompact(viewModel: viewModel, state: state, action: action, content: content)
+        case .fixed(let viewModel): VPrimaryButtonFixed(viewModel: viewModel, state: state, action: action, content: content)
+        case .flexible(let viewModel): VPrimaryButtonFlexible(viewModel: viewModel, state: state, action: action, content: content)
+        }
     }
 }
 
 // MARK:- Preview
 struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButton(.compact, state: .enabled, action: {}, title: "Press")
+        VPrimaryButton(.compact(), state: .enabled, action: {}, title: "Press")
     }
 }

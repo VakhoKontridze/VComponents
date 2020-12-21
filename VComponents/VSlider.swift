@@ -130,8 +130,11 @@ public extension VSlider {
                     
                 case .solidThumb:
                     RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius)
-                        .stroke(VSliderViewModel.Colors.solidThumbStroke(state: state, vm: viewModel), lineWidth: viewModel.layout.solidThumb.stroke)
-                        .background(RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius).foregroundColor(VSliderViewModel.Colors.solidThumbFill(state: state, vm: viewModel)))
+                        .strokeBorder(VSliderViewModel.Colors.solidThumbStroke(state: state, vm: viewModel), lineWidth: viewModel.layout.solidThumb.stroke)
+                        .background(
+                            RoundedRectangle(cornerRadius: viewModel.layout.solidThumb.cornerRadius)
+                                .foregroundColor(VSliderViewModel.Colors.solidThumbFill(state: state, vm: viewModel))
+                        )
                     
                         .frame(size: .init(width: viewModel.layout.solidThumb.dimension, height: viewModel.layout.solidThumb.dimension))
                 }

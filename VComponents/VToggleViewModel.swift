@@ -14,7 +14,8 @@ public struct VToggleViewModel {
     public let layout: Layout
     public let colors: Colors
     
-    let plainButtonViewModel: VPlainButtonViewModel
+    let plainButtonToggleViewModel: VPlainButtonViewModel
+    let plainButtonContentViewModel: VPlainButtonViewModel
     
     // MARK: Initializers
     public init(behavior: Behavior = .init(), layout: Layout = .init(), colors: Colors = .init()) {
@@ -22,7 +23,7 @@ public struct VToggleViewModel {
         self.layout = layout
         self.colors = colors
         
-        self.plainButtonViewModel = .init(
+        self.plainButtonToggleViewModel = .init(
             layout: .init(
                 hitAreaOffsetHor: 0,
                 hitAreaOffsetVer: 0
@@ -36,6 +37,21 @@ public struct VToggleViewModel {
                 )
             )
         )
+        
+        self.plainButtonContentViewModel = .init(
+            layout: .init(
+                hitAreaOffsetHor: 0,
+                hitAreaOffsetVer: 0
+            ),
+            colors: .init(
+                foreground: .init(
+                    enabled: .clear,
+                    pressed: .clear,
+                    disabled: .clear,
+                    pressedOpacity: 0.5
+                )
+            )
+        )
     }
 }
 
@@ -43,15 +59,18 @@ public struct VToggleViewModel {
 extension VToggleViewModel {
     public struct Behavior {
         // MARK: Properties
+        public let contentIsClickable: Bool
         public let animation: Animation
         
         // MARK: Initializers
-        public init(animation: Animation) {
+        public init(contentIsClickable: Bool, animation: Animation) {
+            self.contentIsClickable = contentIsClickable
             self.animation = animation
         }
         
         public init() {
             self.init(
+                contentIsClickable: true,
                 animation: Animation.easeIn(duration: 0.1)
             )
         }

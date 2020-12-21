@@ -104,7 +104,7 @@ public extension VToggle {
     }
     
     private var toggle: some View {
-        VPlainButton(viewModel: viewModel.plainButtonViewModel, state: .enabled, action: action, content: {
+        VPlainButton(viewModel: viewModel.plainButtonToggleViewModel, state: .enabled, action: action, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: viewModel.layout.common.size.height)
                     .foregroundColor(VToggleViewModel.Colors.fill(isOn: isOn, state: state, vm: viewModel))
@@ -121,9 +121,18 @@ public extension VToggle {
         })
     }
     
-    private func toggleContent(from content: (() -> Content)?) -> some View {
-        content?()
-            .opacity(VToggleViewModel.Colors.contentDisabledOpacity(state: state, vm: viewModel))
+    @ViewBuilder private func toggleContent(from content: (() -> Content)?) -> some View {
+        switch content {
+        case nil:
+            EmptyView()
+            
+        case let content?:
+            VPlainButton(viewModel: viewModel.plainButtonContentViewModel, state: .enabled, action: action, content: {
+                content()
+                    .foregroundColor(.accentColor)
+                    .opacity(VToggleViewModel.Colors.contentDisabledOpacity(state: state, vm: viewModel))
+            })
+        }
     }
 }
 
