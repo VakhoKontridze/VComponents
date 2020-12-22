@@ -11,9 +11,11 @@
 VComponents is a SwiftUI framework that contains customizable UI components
 
 ## Technologies
-Framework is being developed macOS 11.0 Big Sur in XCode 12. Project contains Demo sub-module, which can be run to showcase all components.
+Framework supports iOS 14.0 and up. Framework is being developed macOS 11.0 Big Sur in XCode 12. Project contains Demo sub-module, which can be run to showcase all components.
 
 ## History
+Dec 21 2020. VInteractiveView
+
 Dec 19 2020. VToggle
 
 Dec 19 2020. VPlainButton

@@ -37,7 +37,7 @@ struct VPrimaryButtonCompact<Content>: View where Content: View {
 // MARK:- Body
 extension VPrimaryButtonCompact {
     var body: some View {
-        TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
+        VInteractiveView(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             HStack(alignment: .center, spacing: model.layout.loaderSpacing, content: {
                 VPrimaryButtonLoaderCompensatorView(
                     isVisible: internalState.isLoading,
@@ -52,8 +52,9 @@ extension VPrimaryButtonCompact {
                 )
                 
                 VPrimaryButtonLoaderView(
-                    isVisible: internalState.isLoading,
-                    width: model.layout.loaderWidth
+                    loaderColor: model.colors.loader.color,
+                    width: model.layout.loaderWidth,
+                    isVisible: internalState.isLoading
                 )
             })
                 .padding(.horizontal, model.layout.contentInset)

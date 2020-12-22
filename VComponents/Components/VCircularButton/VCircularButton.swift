@@ -23,7 +23,7 @@ public struct VCircularButton<Content>: View where Content: View {
     // MARK: Initializers
     public init(
         model: VCircularButtonModel = .init(),
-        state: VCircularButtonState,
+        state: VCircularButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -37,7 +37,7 @@ public struct VCircularButton<Content>: View where Content: View {
 // MARK:- Body
 public extension VCircularButton {
     var body: some View {
-        TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
+        VInteractiveView(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
                 .frame(dimension: model.layout.dimension)
                 
@@ -62,11 +62,11 @@ public extension VCircularButton {
 // MARK:- Preview
 struct VCircularButton_Previews: PreviewProvider {
     static var previews: some View {
-        VCircularButton(state: .enabled, action: {}, content: {
+        VCircularButton(action: {}, content: {
             Image(systemName: "swift")
                 .resizable()
                 .frame(size: .init(width: 20, height: 20))
-                .foregroundColor(.white)
+                .foregroundColor(ColorBook.primaryInverted)
         })
     }
 }

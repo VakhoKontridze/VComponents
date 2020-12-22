@@ -19,7 +19,7 @@ struct VCircularButtonDemoView: View {
         Image(systemName: "swift")
             .resizable()
             .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(.white)
+            .foregroundColor(ColorBook.primaryInverted)
     }
 
     @State private var buttonState: VCircularButtonState = .enabled
@@ -31,11 +31,12 @@ extension VCircularButtonDemoView {
         VStack(content: {
             controller
             
-            VLazyList(content: {
+            ComponentListView(content: {
                 buttons
             })
         })
             .navigationTitle(Self.sceneTitle)
+            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

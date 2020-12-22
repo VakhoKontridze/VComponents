@@ -17,34 +17,28 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        VLazyList(content: {
-            spinners
+        VStack(content: {
+            Spacer()
+                .frame(height: 10)
+            
+            ComponentListView(content: {
+                spinners
+            })
         })
             .navigationTitle(Self.sceneTitle)
-            .background(Color.blue)
-            .edgesIgnoringSafeArea(.bottom)
+            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var spinners: some View {
         VStack(content: {
-            RowView(type: .titled("Continous"), titleColor: .white, content: {
+            RowView(type: .titled("Continous"), content: {
                 VSpinner(type: .continous())
             })
             
-            RowView(type: .titled("Dashed"), titleColor: .white, content: {
+            RowView(type: .titled("Dashed"), content: {
                 VSpinner(type: .dashed())
             })
         })
-    }
-}
-
-// MARK:- Descriptions
-private extension VSpinnerType {
-    var description: String {
-        switch self {
-        case .continous: return "Continous"
-        case .dashed: return "Dashed"
-        }
     }
 }
 

@@ -25,7 +25,7 @@ public struct VSlider: View {
         _ sliderType: VSliderType,
         range: ClosedRange<V> = 0...1,
         step: Double?,
-        state: VSliderState,
+        state: VSliderState = .enabled,
         value: Binding<Double>,
         onChange action: ((Bool) -> Void)? = nil
     )
@@ -45,7 +45,7 @@ public struct VSlider: View {
     public init(
         _ sliderType: VSliderType,
         step: Double?,
-        state: VSliderState,
+        state: VSliderState = .enabled,
         value: Binding<Double>,
         onChange action: ((Bool) -> Void)? = nil
     ) {
@@ -61,7 +61,7 @@ public struct VSlider: View {
     
     public init(
         _ sliderType: VSliderType,
-        state: VSliderState,
+        state: VSliderState = .enabled,
         value: Binding<Double>,
         onChange action: ((Bool) -> Void)? = nil
     ) {
@@ -93,9 +93,9 @@ struct VSlider_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack(spacing: 20, content: {
-            VSlider(.plain(), state: .enabled, value: $value)
-            VSlider(.thumb(), state: .enabled, value: $value)
-            VSlider(.solidThumb(), state: .enabled, value: $value)
+            VSlider(.plain(), value: $value)
+            VSlider(.thumb(), value: $value)
+            VSlider(.solidThumb(), value: $value)
         })
             .padding()
     }

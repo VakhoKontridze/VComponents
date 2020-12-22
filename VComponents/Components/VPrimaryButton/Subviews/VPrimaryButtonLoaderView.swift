@@ -10,13 +10,19 @@ import SwiftUI
 // MARK:- V Primary Button Loader View
 struct VPrimaryButtonLoaderView: View {
     // MARK: Properties
-    private let isVisible: Bool
+    private let spinnerModel: VSpinnerContinousModel
     private let width: CGFloat
+    private let isVisible: Bool
     
     // MARK: Initializers
-    init(isVisible: Bool, width: CGFloat) {
-        self.isVisible = isVisible
+    init(loaderColor: Color, width: CGFloat, isVisible: Bool) {
+        self.spinnerModel = .init(
+            colors: .init(
+                spinner: loaderColor
+            )
+        )
         self.width = width
+        self.isVisible = isVisible
     }
 }
 
@@ -24,7 +30,7 @@ struct VPrimaryButtonLoaderView: View {
 extension VPrimaryButtonLoaderView {
     @ViewBuilder var body: some View {
         if isVisible {
-            VSpinner(type: .continous()).frame(width: width, alignment: .trailing)
+            VSpinner(type: .continous(spinnerModel)).frame(width: width, alignment: .trailing)
         }
     }
 }
@@ -32,6 +38,10 @@ extension VPrimaryButtonLoaderView {
 // MARK:- Preview
 struct VPrimaryButtonLoaderView_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButtonLoaderView(isVisible: true, width: VPrimaryButtonCompactModel.Layout().loaderWidth)
+        VPrimaryButtonLoaderView(
+            loaderColor: ColorBook.PrimaryButton.Text.enabled,
+            width: VPrimaryButtonCompactModel.Layout().loaderWidth,
+            isVisible: true
+        )
     }
 }

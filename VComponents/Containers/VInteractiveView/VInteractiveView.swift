@@ -1,5 +1,5 @@
 //
-//  TouchContainer.swift
+//  VInteractiveView.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -8,8 +8,8 @@
 import SwiftUI
 import UIKit
 
-// MARK:- Touch Container
-struct TouchConatiner<Content>: View where Content: View {
+// MARK:- V Interactive View
+public struct VInteractiveView<Content>: View where Content: View {
     // MARK: Properties
     private let isDisabled: Bool
     
@@ -19,7 +19,7 @@ struct TouchConatiner<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers
-    init(
+    public init(
         isDisabled: Bool,
         action: @escaping () -> Void,
         onPress pressHandler: @escaping (Bool) -> Void,
@@ -32,7 +32,7 @@ struct TouchConatiner<Content>: View where Content: View {
     }
 
     // MARK:- Body
-    var body: some View {
+    public var body: some View {
         content()
             .overlay(UIKitTouchView(isDisabled: isDisabled, action: action, pressHandler: pressHandler))
     }
@@ -41,7 +41,7 @@ struct TouchConatiner<Content>: View where Content: View {
 
 // MARK:- UIKit Touch View
 private struct UIKitTouchView: UIViewRepresentable {
-    // MARK:- Properties
+    // MARK: Properties
     private let isDisabled: Bool
     
     private let action: () -> Void

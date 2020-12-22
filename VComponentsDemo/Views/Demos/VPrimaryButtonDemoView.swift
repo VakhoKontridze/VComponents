@@ -19,7 +19,7 @@ struct VPrimaryButtonDemoView: View {
         Image(systemName: "swift")
             .resizable()
             .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(.white)
+            .foregroundColor(ColorBook.primaryInverted)
     }
     
     @State private var buttonState: VPrimaryButtonState = .enabled
@@ -31,13 +31,14 @@ extension VPrimaryButtonDemoView {
         VStack(content: {
             controller
             
-            VLazyList(content: {
+            ComponentListView(content: {
                 buttonsByType
                 imageButtons
                 borderedButton
             })
         })
             .navigationTitle(Self.sceneTitle)
+            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

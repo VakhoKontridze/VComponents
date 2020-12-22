@@ -32,6 +32,10 @@
 		7A48FDC9258DE48E00AA4D4D /* VCircularButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC5258DE48E00AA4D4D /* VCircularButtonModel.swift */; };
 		7A48FDCA258DE48E00AA4D4D /* VCircularButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */; };
 		7A48FDDE258DE58800AA4D4D /* VCircularButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */; };
+		7A4C4240259132F5000207DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C423F259132F5000207DD /* Assets.xcassets */; };
+		7A4C424A2591EC29000207DD /* ComponentListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C42492591EC29000207DD /* ComponentListView.swift */; };
+		7A4C42862591FB5B000207DD /* VComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8A96E5258DDA9200309886 /* VComponents.framework */; };
+		7A4C42872591FB5B000207DD /* VComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8A96E5258DDA9200309886 /* VComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7A8A73832590BFE1001024FB /* VToggleRightContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73822590BFE1001024FB /* VToggleRightContent.swift */; };
 		7A8A73872590BFFA001024FB /* VToggleRightContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73862590BFFA001024FB /* VToggleRightContentModel.swift */; };
 		7A8A73922590C343001024FB /* VToggleToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73912590C343001024FB /* VToggleToggleView.swift */; };
@@ -49,7 +53,7 @@
 		7A8A96EA258DDA9200309886 /* VComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A8A96E8258DDA9200309886 /* VComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A8A96FC258DDC7800309886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A96FB258DDC7800309886 /* AppDelegate.swift */; };
 		7A8A96FE258DDC7800309886 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A96FD258DDC7800309886 /* SceneDelegate.swift */; };
-		7A8A9700258DDC7800309886 /* ComponentsNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A96FF258DDC7800309886 /* ComponentsNavigationView.swift */; };
+		7A8A9700258DDC7800309886 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A96FF258DDC7800309886 /* HomeView.swift */; };
 		7A8A9702258DDC7A00309886 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A8A9701258DDC7A00309886 /* Assets.xcassets */; };
 		7A8A9705258DDC7A00309886 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A8A9704258DDC7A00309886 /* Preview Assets.xcassets */; };
 		7A8A9708258DDC7A00309886 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7A8A9706258DDC7A00309886 /* LaunchScreen.storyboard */; };
@@ -61,7 +65,7 @@
 		7A8A9744258DDF4200309886 /* RowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9743258DDF4200309886 /* RowView.swift */; };
 		7AA499B8258F72C1002BD362 /* VToggleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA499B7258F72C1002BD362 /* VToggleType.swift */; };
 		7AA499CA258F82D2002BD362 /* VSliderType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA499C9258F82D2002BD362 /* VSliderType.swift */; };
-		7AA9F3E425909E230060F210 /* TouchContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F3E325909E230060F210 /* TouchContainer.swift */; };
+		7AA9F3E425909E230060F210 /* VInteractiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F3E325909E230060F210 /* VInteractiveView.swift */; };
 		7AA9F3EC2590A6330060F210 /* VPrimaryButtonCompactModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F3EB2590A6330060F210 /* VPrimaryButtonCompactModel.swift */; };
 		7AA9F3F22590A7820060F210 /* VPrimaryButtonCompact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F3F12590A7820060F210 /* VPrimaryButtonCompact.swift */; };
 		7AA9F3F92590A9270060F210 /* VPrimaryButtonLoaderCompensatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F3F82590A9270060F210 /* VPrimaryButtonLoaderCompensatorView.swift */; };
@@ -75,6 +79,30 @@
 		7AC5060125911A0800226656 /* VSpinnerDashedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5060025911A0800226656 /* VSpinnerDashedModel.swift */; };
 		7AC5060725911A4000226656 /* VSpinnerDashed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5060625911A4000226656 /* VSpinnerDashed.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		7A4C42882591FB5B000207DD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7A8A96DC258DDA9200309886 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7A8A96E4258DDA9200309886;
+			remoteInfo = VComponents;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		7A4C428A2591FB5B000207DD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7A4C42872591FB5B000207DD /* VComponents.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		7A00731A258E27490003F0E9 /* VPlainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButton.swift; sourceTree = "<group>"; };
@@ -102,6 +130,8 @@
 		7A48FDC5258DE48E00AA4D4D /* VCircularButtonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonModel.swift; sourceTree = "<group>"; };
 		7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonState.swift; sourceTree = "<group>"; };
 		7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCircularButtonDemoView.swift; sourceTree = "<group>"; };
+		7A4C423F259132F5000207DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7A4C42492591EC29000207DD /* ComponentListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentListView.swift; sourceTree = "<group>"; };
 		7A8A73822590BFE1001024FB /* VToggleRightContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContent.swift; sourceTree = "<group>"; };
 		7A8A73862590BFFA001024FB /* VToggleRightContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContentModel.swift; sourceTree = "<group>"; };
 		7A8A73912590C343001024FB /* VToggleToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleToggleView.swift; sourceTree = "<group>"; };
@@ -122,7 +152,7 @@
 		7A8A96F9258DDC7800309886 /* VComponentsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VComponentsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8A96FB258DDC7800309886 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A8A96FD258DDC7800309886 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7A8A96FF258DDC7800309886 /* ComponentsNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentsNavigationView.swift; sourceTree = "<group>"; };
+		7A8A96FF258DDC7800309886 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		7A8A9701258DDC7A00309886 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A8A9704258DDC7A00309886 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		7A8A9707258DDC7A00309886 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -135,7 +165,7 @@
 		7A8A9743258DDF4200309886 /* RowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowView.swift; sourceTree = "<group>"; };
 		7AA499B7258F72C1002BD362 /* VToggleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleType.swift; sourceTree = "<group>"; };
 		7AA499C9258F82D2002BD362 /* VSliderType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderType.swift; sourceTree = "<group>"; };
-		7AA9F3E325909E230060F210 /* TouchContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchContainer.swift; sourceTree = "<group>"; };
+		7AA9F3E325909E230060F210 /* VInteractiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VInteractiveView.swift; sourceTree = "<group>"; };
 		7AA9F3EB2590A6330060F210 /* VPrimaryButtonCompactModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonCompactModel.swift; sourceTree = "<group>"; };
 		7AA9F3F12590A7820060F210 /* VPrimaryButtonCompact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonCompact.swift; sourceTree = "<group>"; };
 		7AA9F3F82590A9270060F210 /* VPrimaryButtonLoaderCompensatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonLoaderCompensatorView.swift; sourceTree = "<group>"; };
@@ -162,6 +192,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A4C42862591FB5B000207DD /* VComponents.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +205,14 @@
 				7A3C1542258DE65F00CE1D96 /* View.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7A4C42532591EFBE000207DD /* VInteractiveView */ = {
+			isa = PBXGroup;
+			children = (
+				7AA9F3E325909E230060F210 /* VInteractiveView.swift */,
+			);
+			path = VInteractiveView;
 			sourceTree = "<group>";
 		};
 		7A8A73782590BEB5001024FB /* VToggle */ = {
@@ -343,7 +382,6 @@
 				7A8A96F1258DDA9E00309886 /* Framework Info */,
 				7AA9F41E2590B08C0060F210 /* Components */,
 				7AC5060C25911B5900226656 /* Containers */,
-				7AA9F4362590B1D60060F210 /* Helpers */,
 				7AA9F42F2590B18D0060F210 /* Extensions */,
 				7AA9F4342590B1C00060F210 /* Resources */,
 			);
@@ -418,7 +456,7 @@
 		7A8A9734258DDED800309886 /* Navigation View */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A96FF258DDC7800309886 /* ComponentsNavigationView.swift */,
+				7A8A96FF258DDC7800309886 /* HomeView.swift */,
 			);
 			path = "Navigation View";
 			sourceTree = "<group>";
@@ -439,6 +477,7 @@
 		7A8A9742258DDF3000309886 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				7A4C42492591EC29000207DD /* ComponentListView.swift */,
 				7A8A9743258DDF4200309886 /* RowView.swift */,
 				7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */,
 			);
@@ -529,18 +568,11 @@
 		7AA9F4342590B1C00060F210 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				7A4C423F259132F5000207DD /* Assets.xcassets */,
 				7A007357258E38E90003F0E9 /* ColorBook.swift */,
 				7A007351258E38E40003F0E9 /* FontBook.swift */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		7AA9F4362590B1D60060F210 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				7AA9F3E325909E230060F210 /* TouchContainer.swift */,
-			);
-			path = Helpers;
 			sourceTree = "<group>";
 		};
 		7AA9F43A2590B1F50060F210 /* App Control */ = {
@@ -565,6 +597,7 @@
 		7AC5060C25911B5900226656 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
+				7A4C42532591EFBE000207DD /* VInteractiveView */,
 				7AC5060D25911B6000226656 /* VLazyListView */,
 			);
 			path = Containers;
@@ -628,10 +661,12 @@
 				7A8A96F5258DDC7800309886 /* Sources */,
 				7A8A96F6258DDC7800309886 /* Frameworks */,
 				7A8A96F7258DDC7800309886 /* Resources */,
+				7A4C428A2591FB5B000207DD /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				7A4C42892591FB5B000207DD /* PBXTargetDependency */,
 			);
 			name = VComponentsDemo;
 			productName = Demo;
@@ -680,6 +715,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A4C4240259132F5000207DD /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -720,7 +756,7 @@
 				7A8A9729258DDDA800309886 /* VPrimaryButton.swift in Sources */,
 				7A3C159B258E0A3D00CE1D96 /* VLazyListModel.swift in Sources */,
 				7A3C1571258DF24800CE1D96 /* VSliderSolidThumbModel.swift in Sources */,
-				7AA9F3E425909E230060F210 /* TouchContainer.swift in Sources */,
+				7AA9F3E425909E230060F210 /* VInteractiveView.swift in Sources */,
 				7A8A73832590BFE1001024FB /* VToggleRightContent.swift in Sources */,
 				7A8A745125910F89001024FB /* VSliderThumb.swift in Sources */,
 				7AA9F4052590ACB00060F210 /* VPrimaryButtonBackgroundView.swift in Sources */,
@@ -759,6 +795,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A8A96FC258DDC7800309886 /* AppDelegate.swift in Sources */,
+				7A4C424A2591EC29000207DD /* ComponentListView.swift in Sources */,
 				7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */,
 				7A8A9744258DDF4200309886 /* RowView.swift in Sources */,
 				7A8A96FE258DDC7800309886 /* SceneDelegate.swift in Sources */,
@@ -768,12 +805,20 @@
 				7A3C1560258DE7F400CE1D96 /* VSpinnerDemoView.swift in Sources */,
 				7A00737F258E7C7A0003F0E9 /* VToggleDemoView.swift in Sources */,
 				7A3C1543258DE65F00CE1D96 /* View.swift in Sources */,
-				7A8A9700258DDC7800309886 /* ComponentsNavigationView.swift in Sources */,
+				7A8A9700258DDC7800309886 /* HomeView.swift in Sources */,
 				7A00732F258E2B7D0003F0E9 /* VPlainButtonDemoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		7A4C42892591FB5B000207DD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7A8A96E4258DDA9200309886 /* VComponents */;
+			targetProxy = 7A4C42882591FB5B000207DD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7A8A9706258DDC7A00309886 /* LaunchScreen.storyboard */ = {
@@ -919,8 +964,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				INFOPLIST_FILE = VComponents/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -945,8 +992,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE = NO;
 				INFOPLIST_FILE = VComponents/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -970,6 +1019,7 @@
 				DEVELOPMENT_TEAM = XRWP42VX24;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VComponentsDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -991,6 +1041,7 @@
 				DEVELOPMENT_TEAM = XRWP42VX24;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = VComponentsDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

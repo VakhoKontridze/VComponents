@@ -33,13 +33,14 @@ extension VSliderDemoView {
         VStack(content: {
             controller
 
-            VLazyList(content: {
+            ComponentListView(content: {
                 sliders
                 steppedSliders
                 animatedSliders
             })
         })
             .navigationTitle(Self.sceneTitle)
+            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
 
     private var controller: some View {

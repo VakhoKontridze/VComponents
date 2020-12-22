@@ -47,7 +47,7 @@ struct VToggleToggleView: View {
 // MARK:- Body
 extension VToggleToggleView {
     var body: some View {
-        TouchConatiner(isDisabled: isDisabled, action: action, onPress: { _ in }, content: {
+        VInteractiveView(isDisabled: isDisabled, action: action, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: size.height)
                     .foregroundColor(fillColor)

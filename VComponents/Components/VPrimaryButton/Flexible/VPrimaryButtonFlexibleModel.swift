@@ -25,8 +25,8 @@ public struct VPrimaryButtonFlexibleModel {
 }
 
 // MARK:- Layout
-public extension VPrimaryButtonFlexibleModel {
-    struct Layout {
+extension VPrimaryButtonFlexibleModel {
+    public struct Layout {
         public let height: CGFloat
         public let cornerRadius: CGFloat
         public let borderWidth: CGFloat
@@ -51,20 +51,23 @@ public extension VPrimaryButtonFlexibleModel {
 }
 
 // MARK:- Colors
-public extension VPrimaryButtonFlexibleModel {
-    struct Colors {
+extension VPrimaryButtonFlexibleModel {
+    public struct Colors {
         public let foreground: ForegroundColors
         public let fill: FillColors
         public let border: BorderColors
+        public let loader: LoaderColors
         
         public init(
             foreground: ForegroundColors = .init(),
             fill: FillColors = .init(),
-            border: BorderColors = .init()
+            border: BorderColors = .init(),
+            loader: LoaderColors = .init()
         ) {
             self.foreground = foreground
             self.fill = fill
             self.border = border
+            self.loader = loader
         }
     }
 }
@@ -76,20 +79,22 @@ extension VPrimaryButtonFlexibleModel.Colors {
         public let disabled: Color
         public let loading: Color
         public let pressedOpacity: Double
+        public let disabledOpacity: Double
         
         public init(
             enabled: Color = ColorBook.PrimaryButton.Text.enabled,
             pressed: Color = ColorBook.PrimaryButton.Text.pressed,
             disabled: Color = ColorBook.PrimaryButton.Text.disabled,
             loading: Color = ColorBook.PrimaryButton.Text.loading,
-            
-            pressedOpacity: Double = 0.5
+            pressedOpacity: Double = 0.5,
+            disabledOpacity: Double = 0.5
         ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
             self.loading = loading
             self.pressedOpacity = pressedOpacity
+            self.disabledOpacity = disabledOpacity
         }
     }
     
@@ -130,11 +135,21 @@ extension VPrimaryButtonFlexibleModel.Colors {
             self.loading = loading
         }
     }
+    
+    public struct LoaderColors {
+        public let color: Color
+        
+        public init(
+            color: Color = ColorBook.PrimaryButton.Text.enabled
+        ) {
+            self.color = color
+        }
+    }
 }
 
 // MARK:- Fonts
-public extension VPrimaryButtonFlexibleModel {
-    struct Fonts {
+extension VPrimaryButtonFlexibleModel {
+    public struct Fonts {
         public let title: Font
         
         public init(
@@ -178,8 +193,8 @@ extension VPrimaryButtonFlexibleModel.Colors {
         switch state {
         case .enabled: return 1
         case .pressed: return foreground.pressedOpacity
-        case .disabled: return 1
-        case .loading: return 1
+        case .disabled: return foreground.disabledOpacity
+        case .loading: return foreground.disabledOpacity
         }
     }
 }

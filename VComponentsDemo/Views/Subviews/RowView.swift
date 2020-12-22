@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VComponents
 
 // MARK:- Row View
 struct RowView<Content>: View where Content: View {
@@ -25,18 +26,14 @@ struct RowView<Content>: View where Content: View {
         }
     }
     
-    private let titleColor: Color
-    
     private let content: () -> Content
     
     // MARK: Initializers
     init(
         type rowType: RowType,
-        titleColor: Color = .primary,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.rowType = rowType
-        self.titleColor = titleColor
         self.content = content
     }
 }
@@ -50,18 +47,18 @@ extension RowView {
                 
                 if case .titled(let title) = rowType {
                     Text(title)
-                        .foregroundColor(titleColor)
                         .font(.footnote)
                 }
             })
                 .padding(10)
                 .padding(.top, 10)
             
-            Divider()
-                .padding(.horizontal, 10)
+            if rowType.isRow {
+                Divider()
+                    .padding(.horizontal, 10)
+            }
         })
             .padding(.horizontal, 10)
-            .if(!rowType.isRow, transform: { $0.background(Color(red: 240/255, green: 240/255, blue: 240/255)) })
     }
 }
 

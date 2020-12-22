@@ -19,7 +19,7 @@ struct VPlainButtonDemoView: View {
         Image(systemName: "swift")
             .resizable()
             .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(.accentColor)
+            .foregroundColor(VComponents.ColorBook.accent)
     }
     
     @State private var buttonState: VPlainButtonState = .enabled
@@ -31,11 +31,12 @@ extension VPlainButtonDemoView {
         VStack(content: {
             controller
             
-            VLazyList(content: {
+            ComponentListView(content: {
                 buttons
             })
         })
             .navigationTitle(Self.sceneTitle)
+            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

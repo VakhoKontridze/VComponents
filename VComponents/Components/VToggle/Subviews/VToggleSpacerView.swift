@@ -29,7 +29,7 @@ struct VToggleSpacerView: View {
 // MARK:- Body
 extension VToggleSpacerView {
     var body: some View {
-        TouchConatiner(isDisabled: isDisabled, action: action, onPress: { _ in }, content: {
+        VInteractiveView(isDisabled: isDisabled, action: action, onPress: { _ in }, content: {
             Rectangle()
                 .foregroundColor(.clear)
                 .ifLet(width, transform: { $0.frame(width: $1) })

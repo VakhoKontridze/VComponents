@@ -20,8 +20,8 @@ extension SceneDelegate: UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         
         window = .init(windowScene: windowScene)
-        let CcmponentsNavigationView: ComponentsNavigationView = .init()
-        window?.rootViewController = UIHostingController(rootView: CcmponentsNavigationView)
+        let homeView: HomeView = .init()
+        window?.rootViewController = UIHostingController(rootView: homeView)
         window?.makeKeyAndVisible()
     }
 }

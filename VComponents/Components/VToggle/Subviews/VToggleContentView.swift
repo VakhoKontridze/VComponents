@@ -38,7 +38,7 @@ struct VToggleContentView<Conent>: View where Conent: View {
 // MARK:- Body
 extension VToggleContentView {
     var body: some View {
-        TouchConatiner(isDisabled: isDisabled, action: action, onPress: { isPressed = $0 }, content: {
+        VInteractiveView(isDisabled: isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
                 .opacity(opacity)
         })

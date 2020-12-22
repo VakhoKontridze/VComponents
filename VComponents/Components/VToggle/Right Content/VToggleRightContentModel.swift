@@ -89,32 +89,38 @@ extension VToggleRightContentModel {
     public struct FillColors {
         public let enabledOn: Color
         public let enabledOff: Color
-        public let disabled: Color
+        public let disabledOn: Color
+        public let disabledOff: Color
         
         public init(
             enabledOn: Color = ColorBook.Toggle.Fill.enabledOn,
             enabledOff: Color = ColorBook.Toggle.Fill.enabledOff,
-            disabled: Color = ColorBook.Toggle.Fill.disabled
+            disabledOn: Color = ColorBook.Toggle.Fill.disabledOn,
+            disabledOff: Color = ColorBook.Toggle.Fill.disabledOff
         ) {
             self.enabledOn = enabledOn
             self.enabledOff = enabledOff
-            self.disabled = disabled
+            self.disabledOn = disabledOn
+            self.disabledOff = disabledOff
         }
     }
     
     public struct ThumbColors {
         public let enabledOn: Color
         public let enabledOff: Color
-        public let disabled: Color
+        public let disabledOn: Color
+        public let disabledOff: Color
         
         public init(
             enabledOn: Color = ColorBook.Toggle.Thumb.enabledOn,
             enabledOff: Color = ColorBook.Toggle.Thumb.enabledOff,
-            disabled: Color = ColorBook.Toggle.Thumb.disabled
+            disabledOn: Color = ColorBook.Toggle.Thumb.disabledOn,
+            disabledOff: Color = ColorBook.Toggle.Thumb.disabledOff
         ) {
             self.enabledOn = enabledOn
             self.enabledOff = enabledOff
-            self.disabled = disabled
+            self.disabledOn = disabledOn
+            self.disabledOff = disabledOff
         }
     }
     
@@ -140,7 +146,8 @@ extension VToggleRightContentModel.Colors {
         case (false, .enabled): return fill.enabledOff
         case (true, .pressed): return fill.enabledOn
         case (false, .pressed): return fill.enabledOff
-        case (_, .disabled): return fill.disabled
+        case (true, .disabled): return fill.disabledOn
+        case (false, .disabled): return fill.disabledOff
         }
     }
     
@@ -150,7 +157,8 @@ extension VToggleRightContentModel.Colors {
         case (false, .enabled): return thumb.enabledOff
         case (true, .pressed): return thumb.enabledOn
         case (false, .pressed): return thumb.enabledOff
-        case (_, .disabled): return thumb.disabled
+        case (true, .disabled): return thumb.disabledOn
+        case (false, .disabled): return thumb.disabledOff
         }
     }
     

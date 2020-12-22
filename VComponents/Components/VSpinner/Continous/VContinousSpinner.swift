@@ -38,11 +38,6 @@ extension VSpinnerContinous {
 
 struct VSpinnerContinous_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack(content: {
-            Color.blue
-            VSpinnerContinous(model: .init())
-        })
-            .frame(width: .infinity, height: .infinity)
-            .edgesIgnoringSafeArea(.bottom)
+        VSpinnerContinous(model: .init())
     }
 }

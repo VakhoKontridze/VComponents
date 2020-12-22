@@ -19,7 +19,7 @@ struct VToggleDemoView: View {
         Image(systemName: "swift")
             .resizable()
             .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(.accentColor)
+            .foregroundColor(VComponents.ColorBook.accent)
     }
     
     @State private var noContentToggleIsOn: Bool = true
@@ -45,7 +45,7 @@ extension VToggleDemoView {
         VStack(content: {
             controller
             
-            VLazyList(content: {
+            ComponentListView(content: {
                 noContentToggle
                 rightContentToggles
                 leftFlexibleContentToggles
@@ -56,6 +56,7 @@ extension VToggleDemoView {
             })
         })
             .navigationTitle(Self.sceneTitle)
+            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

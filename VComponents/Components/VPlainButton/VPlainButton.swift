@@ -23,7 +23,7 @@ public struct VPlainButton<Content>: View where Content: View {
     // MARK: Initializers
     public init(
         model: VPlainButtonModel = .init(),
-        state: VPlainButtonState,
+        state: VPlainButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -37,7 +37,7 @@ public struct VPlainButton<Content>: View where Content: View {
 public extension VPlainButton where Content == Text {
     init<S>(
         model: VPlainButtonModel = .init(),
-        state: VPlainButtonState,
+        state: VPlainButtonState = .enabled,
         action: @escaping () -> Void,
         title: S
     )
@@ -55,7 +55,7 @@ public extension VPlainButton where Content == Text {
 // MARK:- Body
 public extension VPlainButton {
     var body: some View {
-        TouchConatiner(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
+        VInteractiveView(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
                 .padding(.horizontal, model.layout.hitAreaOffsetHor)
                 .padding(.vertical, model.layout.hitAreaOffsetVer)
@@ -76,6 +76,6 @@ public extension VPlainButton {
 // MARK:- Preview
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButton(state: .enabled, action: {}, title: "Press")
+        VPlainButton(action: {}, title: "Press")
     }
 }

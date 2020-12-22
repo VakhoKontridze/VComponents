@@ -21,7 +21,7 @@ public struct VToggle<Content>: View where Content: View {
     public init(
         _ toggleType: VToggleType,
         isOn: Binding<Bool>,
-        state: VToggleState,
+        state: VToggleState = .enabled,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.toggleType = toggleType
@@ -35,7 +35,7 @@ public extension VToggle where Content == Text {
     init<S>(
         _ toggleType: VToggleType,
         isOn: Binding<Bool>,
-        state: VToggleState,
+        state: VToggleState = .enabled,
         title: S
     )
         where S: StringProtocol
@@ -52,7 +52,7 @@ public extension VToggle where Content == Text {
 public extension VToggle where Content == Never {
     init(
         isOn: Binding<Bool>,
-        state: VToggleState
+        state: VToggleState = .enabled
     ) {
         self.toggleType = .rightContent()
         self._isOn = isOn
@@ -76,6 +76,6 @@ struct VToggle_Previews: PreviewProvider {
     @State private static var isOn: Bool = true
     
     static var previews: some View {
-        VToggle(.rightContent(), isOn: $isOn, state: .enabled, title: "Toggle")
+        VToggle(.rightContent(), isOn: $isOn, title: "Toggle")
     }
 }
