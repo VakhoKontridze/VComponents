@@ -69,6 +69,24 @@ public extension VLazyList {
     }
 }
 
+public extension VLazyList {
+    init<RowContent>(
+        model: VLazyListModel = .init(),
+        range: Range<Int>,
+        rowContent: @escaping (Int) -> RowContent
+    )
+        where
+            Content == ForEach<Range<Int>, Int, RowContent>
+    {
+        self.init(
+            model: model,
+            content: {
+                ForEach(range, content: rowContent)
+            }
+        )
+    }
+}
+
 // MARK:- Body
 public extension VLazyList {
     @ViewBuilder var body: some View {
@@ -92,7 +110,7 @@ public extension VLazyList {
 
 // MARK:- Preview
 struct VLazyListView_Previews: PreviewProvider {
-    private static let data: [Int] = (1...100).map { $0 }
+    private static let range: Range<Int> = 1..<100
     
     private static let horizontalVM: VLazyListModel = .init(
         scrollDirection: .horizontal(aligment: .center),
@@ -102,26 +120,22 @@ struct VLazyListView_Previews: PreviewProvider {
     static var previews: some View {
         VStack(content: {
             HStack(content: {
-                VLazyList(data: data, id: \.self, rowContent: { number in
+                VLazyList(range: range, rowContent: { number in
                     Text(String(number))
                 })
                 
-                VLazyList(content: {
-                    ForEach(data, id: \.self, content: { number in
-                        Text(String(number))
-                    })
+                VLazyList(range: range, rowContent: { number in
+                    Text(String(number))
                 })
             })
             
             HStack(content: {
-                VLazyList(model: horizontalVM, data: data, id: \.self, rowContent: { number in
+                VLazyList(model: horizontalVM, range: range, rowContent: { number in
                     Text(String(number))
                 })
                 
-                VLazyList(model: horizontalVM, content: {
-                    ForEach(data, id: \.self, content: { number in
-                        Text(String(number))
-                    })
+                VLazyList(model: horizontalVM, range: range, rowContent: { number in
+                    Text(String(number))
                 })
             })
         })

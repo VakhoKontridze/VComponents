@@ -13,6 +13,8 @@ public struct FontBook {
     public static let buttonLarge: Font = .system(size: 14, weight: .semibold, design: .default)
     public static let buttonSmall: Font = .system(size: 14, weight: .semibold, design: .default)
     
+    public static let navigationBarTitle: Font = .system(size: 17, weight: .semibold, design: .default)
+    
     // MARK: Initalizers
     private init() {}
 }

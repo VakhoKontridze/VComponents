@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Plain Button Demo View
 struct VPlainButtonDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Plain Button"
+    static let navigationBarTitle: String = "Plain Button"
     
     private let buttonTitle: String = "Press"
     
@@ -28,15 +28,9 @@ struct VPlainButtonDemoView: View {
 // MARK:- Body
 extension VPlainButtonDemoView {
     var body: some View {
-        VStack(content: {
-            controller
-            
-            ComponentListView(content: {
-                buttons
-            })
+        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+            buttons
         })
-            .navigationTitle(Self.sceneTitle)
-            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

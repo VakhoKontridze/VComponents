@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Primary Button Demo View
 struct VPrimaryButtonDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Primary Button"
+    static let navigationBarTitle: String = "Primary Button"
     
     private let buttonTitle: String = "Press"
     
@@ -28,17 +28,13 @@ struct VPrimaryButtonDemoView: View {
 // MARK:- Body
 extension VPrimaryButtonDemoView {
     var body: some View {
-        VStack(content: {
-            controller
-            
-            ComponentListView(content: {
+        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+            ScrollView(content: {
                 buttonsByType
                 imageButtons
                 borderedButton
             })
         })
-            .navigationTitle(Self.sceneTitle)
-            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

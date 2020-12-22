@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Slider Demo View
 struct VSliderDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Slider"
+    static let navigationBarTitle: String = "Slider"
 
     @State private var sliderState: VSliderState = .enabled
 
@@ -30,17 +30,13 @@ struct VSliderDemoView: View {
 // MARK:- Body
 extension VSliderDemoView {
     var body: some View {
-        VStack(content: {
-            controller
-
-            ComponentListView(content: {
+        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+            ScrollView(content: {
                 sliders
                 steppedSliders
                 animatedSliders
             })
         })
-            .navigationTitle(Self.sceneTitle)
-            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
 
     private var controller: some View {

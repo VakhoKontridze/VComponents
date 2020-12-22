@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Circular Button Demo View
 struct VCircularButtonDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Circular Button"
+    static let navigationBarTitle: String = "Circular Button"
     
     private let buttonTitle: String = "Press"
     
@@ -28,15 +28,9 @@ struct VCircularButtonDemoView: View {
 // MARK:- Body
 extension VCircularButtonDemoView {
     var body: some View {
-        VStack(content: {
-            controller
-            
-            ComponentListView(content: {
-                buttons
-            })
+        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+            buttons
         })
-            .navigationTitle(Self.sceneTitle)
-            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Toggle Demo View
 struct VToggleDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Toggle"
+    static let navigationBarTitle: String = "Toggle"
     
     private let toggleTitle: String = "Toggle"
     
@@ -42,10 +42,8 @@ struct VToggleDemoView: View {
 // MARK:- Body
 extension VToggleDemoView {
     var body: some View {
-        VStack(content: {
-            controller
-            
-            ComponentListView(content: {
+        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+            ScrollView(content: {
                 noContentToggle
                 rightContentToggles
                 leftFlexibleContentToggles
@@ -55,8 +53,6 @@ extension VToggleDemoView {
                 noLoweredOpacityDisabledContentToggle
             })
         })
-            .navigationTitle(Self.sceneTitle)
-            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var controller: some View {

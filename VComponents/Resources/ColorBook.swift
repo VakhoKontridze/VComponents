@@ -171,6 +171,15 @@ extension ColorBook {
     }
 }
 
+// MARK:- Navigation View
+extension ColorBook {
+    public struct NavigationView {
+        public static let background: Color = ColorBook.canvas
+        
+        private init() {}
+    }
+}
+
 // MARK:- Helper
 private extension Color {
     init(_ name: String) {

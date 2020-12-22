@@ -1,5 +1,5 @@
 //
-//  View.swift
+//  ViewExtensions.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -10,9 +10,11 @@ import SwiftUI
 
 // MARK:- Conditional Modifiers
 extension View {
-    @ViewBuilder func `if`<Transform: View>(
-        _ condition: Bool, transform: (Self) -> Transform
-    ) -> some View {
+    @ViewBuilder func `if`<Content>(
+        _ condition: Bool, transform: (Self) -> Content
+    ) -> some View
+        where Content: View
+    {
         if condition {
             transform(self)
         } else {
@@ -20,11 +22,15 @@ extension View {
         }
     }
 
-    @ViewBuilder func `if`<IfContent: View, ElseContent: View>(
+    @ViewBuilder func `if`<IfContent, ElseContent>(
         _ condition: Bool,
         ifTransform: (Self) -> IfContent,
         elseTransform: (Self) -> ElseContent
-    ) -> some View {
+    ) -> some View
+        where
+            IfContent: View,
+            ElseContent: View
+    {
         if condition {
             ifTransform(self)
         } else {
@@ -32,10 +38,12 @@ extension View {
         }
     }
     
-    @ViewBuilder func ifLet<V, Transform: View>(
-        _ value: V?,
-        transform: (Self, V) -> Transform
-    ) -> some View {
+    @ViewBuilder func ifLet<Content, Condition>(
+        _ value: Condition?,
+        transform: (Self, Condition) -> Content
+    ) -> some View
+        where Content: View
+    {
         if let value = value {
             transform(self, value)
         } else {
@@ -71,4 +79,31 @@ extension View {
 
 struct SizeConfiguration {
     let min, ideal, max: CGSize
+}
+
+// MARK:- Round Corners
+extension View {
+    func cornerRadius(radius: CGFloat, corners: UIRectCorner) -> some View {
+        ModifiedContent(content: self, modifier: CornerRadiusStyle(radius: radius, corners: corners))
+    }
+}
+
+struct CornerRadiusStyle: ViewModifier {
+    var radius: CGFloat
+    var corners: UIRectCorner
+
+    struct CornerRadiusShape: Shape {
+        var radius: CGFloat = .infinity
+        var corners: UIRectCorner = .allCorners
+
+        func path(in rect: CGRect) -> Path {
+            let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+            return Path(path.cgPath)
+        }
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .clipShape(CornerRadiusShape(radius: radius, corners: corners))
+    }
 }

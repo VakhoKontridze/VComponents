@@ -11,22 +11,15 @@ import VComponents
 // MARK:- V Spinner Demo View
 struct VSpinnerDemoView: View {
     // MARK: Properties
-    static let sceneTitle: String = "Spinner"
+    static let navigationBarTitle: String = "Spinner"
 }
 
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        VStack(content: {
-            Spacer()
-                .frame(height: 10)
-            
-            ComponentListView(content: {
-                spinners
-            })
+        BaseDemoView(title: Self.navigationBarTitle, content: {
+            spinners
         })
-            .navigationTitle(Self.sceneTitle)
-            .background(VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom))
     }
     
     private var spinners: some View {
