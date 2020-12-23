@@ -70,7 +70,6 @@ extension VBaseViewNavigationBar {
     func body(content: Content) -> some View {
         content
             .navigationBarBackButtonHidden(true)
-            
             .toolbar(content: { ToolbarItem(placement: .navigationBarLeading, content: { items }) })
     }
 
@@ -78,7 +77,7 @@ extension VBaseViewNavigationBar {
         Group(content: {
             switch model.layout.titleAlignment {
             case .leading:
-                HStack(spacing: 10, content: {
+                HStack(spacing: model.layout.spacing, content: {
                     if let leadingItem = leadingItem { leadingItem.layoutPriority(1) }
                     
                     if isDestination { VChevronButton(direction: .left, action: back).layoutPriority(1) }
@@ -93,8 +92,8 @@ extension VBaseViewNavigationBar {
                 })
                 
             case .center:
-                HStack(spacing: nil, content: {
-                    HStack(spacing: 10, content: {
+                HStack(spacing: model.layout.spacing, content: {
+                    HStack(spacing: model.layout.spacing, content: {
                         if let leadingItem = leadingItem { leadingItem }
                         
                         if isDestination { VChevronButton(direction: .left, action: back) }
@@ -105,14 +104,14 @@ extension VBaseViewNavigationBar {
                     
                     Spacer()
                     
-                    HStack(spacing: 10, content: {
+                    HStack(spacing: model.layout.spacing, content: {
                         Text(title)
                             .font(model.fonts.title)
                     })
                     
                     Spacer()
                     
-                    HStack(spacing: 10, content: {
+                    HStack(spacing: model.layout.spacing, content: {
                         if let trailingItem = trailingItem { trailingItem }
                     })
                         .frame(minWidth: leadingTrailingWidth, alignment: .trailing)
@@ -122,7 +121,7 @@ extension VBaseViewNavigationBar {
             }
         })
             .lineLimit(1)
-            .frame(width: UIScreen.main.bounds.width - 2 * 20)
+            .frame(width: model.layout.width)
     }
 }
 

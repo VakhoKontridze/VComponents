@@ -110,7 +110,7 @@ public extension VLazyList {
 
 // MARK:- Preview
 struct VLazyListView_Previews: PreviewProvider {
-    private static let range: Range<Int> = 1..<100
+    private static let range: Range<Int> = 1..<101
     
     private static let horizontalVM: VLazyListModel = .init(
         scrollDirection: .horizontal(aligment: .center),

@@ -25,11 +25,18 @@ public struct VBaseViewModel {
 extension VBaseViewModel {
     public struct Layout {
         public let titleAlignment: TitleAlignment
+        public let margin: CGFloat
+        public let spacing: CGFloat
+        var width: CGFloat { UIScreen.main.bounds.width - 2 * margin }
         
         public init(
-            titleAlignment: TitleAlignment = .leading
+            titleAlignment: TitleAlignment = .leading,
+            margin: CGFloat = 16,
+            spacing: CGFloat = 10
         ) {
             self.titleAlignment = titleAlignment
+            self.margin = margin
+            self.spacing = spacing
         }
     }
 }

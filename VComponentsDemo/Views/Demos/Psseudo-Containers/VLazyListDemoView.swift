@@ -44,7 +44,7 @@ extension VLazyListDemoView {
                 Text("\(num)")
                     .frame(height: 30)
                     .frame(maxWidth: .infinity)
-                    .background(VComponents.ColorBook.primary.opacity(0.75))
+                    .background(VComponents.ColorBook.accent.opacity(0.75))
                     .cornerRadius(5)
                     .padding(.vertical, 3)
                     .onAppear(perform: { initializedRows.insert(num) })
