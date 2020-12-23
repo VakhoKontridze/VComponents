@@ -38,6 +38,10 @@ extension HomeView {
                     section(title: "Misc", content: {
                         HomeRowView(title: VSpinnerDemoView.navigationBarTitle, destination: VSpinnerDemoView(), showSeparator: false)
                     })
+                    
+                    section(title: "Containers", content: {
+                        EmptyView()
+                    })
                 })
                     .padding(10)
             })

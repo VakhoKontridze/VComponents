@@ -463,8 +463,7 @@
 			isa = PBXGroup;
 			children = (
 				7A8A96F1258DDA9E00309886 /* Framework Info */,
-				7AA9F41E2590B08C0060F210 /* Components */,
-				7AC5060C25911B5900226656 /* Containers */,
+				7ABEAA472593403000A90B56 /* Components */,
 				7AA9F42F2590B18D0060F210 /* Extensions */,
 				7AA9F4342590B1C00060F210 /* Resources */,
 			);
@@ -522,7 +521,8 @@
 			children = (
 				7A8A9733258DDED200309886 /* Launscreen */,
 				7A8A9734258DDED800309886 /* Home */,
-				7A8A9737258DDEDF00309886 /* Demos */,
+				7A8A9737258DDEDF00309886 /* Component Demos */,
+				7ABEA9DF25932A6700A90B56 /* Container Demos */,
 				7A8A9742258DDF3000309886 /* Subviews */,
 			);
 			path = Views;
@@ -544,7 +544,7 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		7A8A9737258DDEDF00309886 /* Demos */ = {
+		7A8A9737258DDEDF00309886 /* Component Demos */ = {
 			isa = PBXGroup;
 			children = (
 				7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */,
@@ -555,7 +555,7 @@
 				7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */,
 				7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */,
 			);
-			path = Demos;
+			path = "Component Demos";
 			sourceTree = "<group>";
 		};
 		7A8A9742258DDF3000309886 /* Subviews */ = {
@@ -680,13 +680,45 @@
 			path = VPlainButton;
 			sourceTree = "<group>";
 		};
+		7ABEA9DF25932A6700A90B56 /* Container Demos */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Container Demos";
+			sourceTree = "<group>";
+		};
+		7ABEAA452593400200A90B56 /* Base Views */ = {
+			isa = PBXGroup;
+			children = (
+				7A4C42532591EFBE000207DD /* VInteractiveView */,
+				7A4C42F1259228CF000207DD /* VBaseNavigationView */,
+				7A4C42F2259228D6000207DD /* VBaseView */,
+			);
+			path = "Base Views";
+			sourceTree = "<group>";
+		};
+		7ABEAA472593403000A90B56 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				7AA9F41E2590B08C0060F210 /* Components */,
+				7AC5060C25911B5900226656 /* Containers */,
+				7ABEAA452593400200A90B56 /* Base Views */,
+				7ABEAA492593403900A90B56 /* Pseudo-Components */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		7ABEAA492593403900A90B56 /* Pseudo-Components */ = {
+			isa = PBXGroup;
+			children = (
+				7AC5060D25911B6000226656 /* VLazyListView */,
+			);
+			path = "Pseudo-Components";
+			sourceTree = "<group>";
+		};
 		7AC5060C25911B5900226656 /* Containers */ = {
 			isa = PBXGroup;
 			children = (
-				7A4C42F1259228CF000207DD /* VBaseNavigationView */,
-				7A4C42F2259228D6000207DD /* VBaseView */,
-				7A4C42532591EFBE000207DD /* VInteractiveView */,
-				7AC5060D25911B6000226656 /* VLazyListView */,
 				7A59958C25924F360087902B /* VSheet */,
 			);
 			path = Containers;

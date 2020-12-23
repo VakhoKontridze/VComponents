@@ -15,8 +15,6 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
-##### 2020 Dec 23
-
 2020 Dec 23. VChevronButton
 
 2020 Dec 22. VSheet
