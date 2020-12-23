@@ -16,37 +16,30 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 ## History
 
 ##### 2020 Dec 23
-VChevronButton
 
-##### 2020 Dec 22
+2020 Dec 23. VChevronButton
 
-VSheet
+2020 Dec 22. VSheet
 
-VBaseView
+2020 Dec 22. VBaseView
 
-VBaseNavigationView
+2020 Dec 22. VBaseNavigationView
 
-##### 2020 Dec 21
+2020 Dec 21. VInteractiveView
 
-VInteractiveView
+2020 Dec 19. VToggle
 
-##### 2020 Dec 19
+2020 Dec 19. VPlainButton
 
-VToggle
+2020 Dec 19. VLazyList
 
-VPlainButton
+2020 Dec 19. VSlider
 
-VLazyList
+2020 Dec 18. VSpinner
 
-VSlider
+2020 Dec 18. VCircularButton
 
-##### 2020 Dec 18
-
-VSpinner
-
-VCircularButton
-
-VPrimaryButton
+2020 Dec 18. VPrimaryButton
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)
