@@ -15,6 +15,8 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         NavigationBarTrailingItem: View
 {
     // MARK: Properties
+    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+    
     private let model: VBaseViewModel
     
     private let navigationBarTitle: String
@@ -97,7 +99,9 @@ public extension VBaseView {
                 leadingItem: navigationBarLeadingItem,
                 trailingItem: navigationBarTrailingItem
             )
-            .addNavigationBarSwipeGesture()
+            .addNavigationBarSwipeGesture(completion: {
+                withAnimation { presentationMode.wrappedValue.dismiss() }
+            })
     }
 }
 
