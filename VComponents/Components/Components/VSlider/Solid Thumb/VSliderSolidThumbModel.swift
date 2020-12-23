@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Slider View Model
+// MARK:- V Slider Solid Thumb Model
 public struct VSliderSolidThumbModel {
     public let behavior: Behavior
     public let layout: Layout

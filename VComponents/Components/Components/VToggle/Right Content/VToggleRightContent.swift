@@ -89,11 +89,23 @@ struct VToggleRightContent_Previews: PreviewProvider {
     @State private static var isOn: Bool = true
     
     static var previews: some View {
-        VToggleRightContent(
-            model: .init(),
-            isOn: $isOn,
-            state: .enabled,
-            content: { Text("Press") }
-        )
+        VStack(content: {
+            VToggleRightContent(
+                model: .init(),
+                isOn: $isOn,
+                state: .enabled,
+                content: { Text("Press") }
+            )
+            
+            VToggleRightContent(
+                model: .init(),
+                isOn: $isOn,
+                state: .enabled,
+                content: { Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit") }
+            )
+            
+            Spacer()
+        })
+            .padding(20)
     }
 }

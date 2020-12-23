@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Slider View Model
+// MARK:- V Slider Thumb Model
 public struct VSliderThumbModel {
     public let behavior: Behavior
     public let layout: Layout
@@ -63,7 +63,6 @@ extension VSliderThumbModel {
 
 // MARK:- Colors
 extension VSliderThumbModel {
-    // MARK: Properties
     public struct Colors {
         public let slider: Slider
         public let thumb: Thumb

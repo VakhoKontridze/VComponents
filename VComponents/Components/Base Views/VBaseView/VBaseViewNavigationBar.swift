@@ -9,39 +9,59 @@ import SwiftUI
 
 // MARK:- Modifier
 extension View {
-    func setUpBaseViewNavigationBar<TrailingItemsContent: View>(
+    func setUpBaseViewNavigationBar<LeadingItem, TrailingItem>(
         model: VBaseViewModel,
         title: String,
-        trailingItemsContent: (() -> TrailingItemsContent)?
-    ) -> some View {
+        leadingItem: LeadingItem?,
+        trailingItem: TrailingItem?
+    ) -> some View
+        where
+            LeadingItem: View,
+            TrailingItem: View
+    {
         modifier(VBaseViewNavigationBar(
             model: model,
             title: title,
-            trailingItemsContent: trailingItemsContent
+            leadingItem: leadingItem,
+            trailingItem: trailingItem
         ))
     }
 }
 
 // MARK:- V Base View Navigation Bar
-struct VBaseViewNavigationBar<TrailingItemsContent>: ViewModifier where TrailingItemsContent: View {
+struct VBaseViewNavigationBar<TrailingItem, LeadingItem>: ViewModifier
+    where
+        LeadingItem: View,
+        TrailingItem: View
+{
     // MARK: Properties
     private let title: String
     private let model: VBaseViewModel
     
-    private let trailingItemsContent: (() -> TrailingItemsContent)?
+    private let leadingItem: LeadingItem?
+    private let trailingItem: TrailingItem?
     
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     private var isDestination: Bool { presentationMode.wrappedValue.isPresented }
+    
+    @State private var leadingWidth: CGFloat = .zero
+    @State private var trailingWidth: CGFloat = .zero
+    private var leadingTrailingWidth: CGFloat? {
+        let max: CGFloat? = [leadingWidth, trailingWidth].max()
+        return max != .zero ? max : nil
+    }
     
     // MARK: Initializers
     init(
         model: VBaseViewModel,
         title: String,
-        trailingItemsContent: (() -> TrailingItemsContent)?
+        leadingItem: LeadingItem?,
+        trailingItem: TrailingItem?
     ) {
         self.model = model
         self.title = title
-        self.trailingItemsContent = trailingItemsContent
+        self.leadingItem = leadingItem
+        self.trailingItem = trailingItem
     }
 }
 
@@ -50,42 +70,59 @@ extension VBaseViewNavigationBar {
     func body(content: Content) -> some View {
         content
             .navigationBarBackButtonHidden(true)
-            .if(model.layout.titleAlignment == .center, transform: {
-                $0.toolbar(content: { ToolbarItem(placement: .principal, content: { centerItems }) })
-            })
-            .navigationBarItems(
-                leading: leadingItems,
-                trailing: trailingItems
-            )
+            
+            .toolbar(content: { ToolbarItem(placement: .navigationBarLeading, content: { items }) })
     }
-    
-    private var leadingItems: some View {
-        HStack(alignment: .center, spacing: model.layout.itemSpacing, content: {
-            if isDestination {
-                VChevronButton(direction: .left, action: back)
-            }
 
-            if model.layout.titleAlignment == .leading {
-                titleView
+    private var items: some View {
+        Group(content: {
+            switch model.layout.titleAlignment {
+            case .leading:
+                HStack(spacing: 10, content: {
+                    if let leadingItem = leadingItem { leadingItem.layoutPriority(1) }
+                    
+                    if isDestination { VChevronButton(direction: .left, action: back).layoutPriority(1) }
+                    
+                    Text(title)
+                        .layoutPriority(0)
+                        .font(model.fonts.title)
+                    
+                    Spacer()
+                    
+                    if let trailingItem = trailingItem { trailingItem.layoutPriority(1) }
+                })
+                
+            case .center:
+                HStack(spacing: nil, content: {
+                    HStack(spacing: 10, content: {
+                        if let leadingItem = leadingItem { leadingItem }
+                        
+                        if isDestination { VChevronButton(direction: .left, action: back) }
+                    })
+                        .frame(minWidth: leadingTrailingWidth, alignment: .leading)
+                        .layoutPriority(1)
+                        .readSize(onChange: { leadingWidth = $0.width })
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 10, content: {
+                        Text(title)
+                            .font(model.fonts.title)
+                    })
+                    
+                    Spacer()
+                    
+                    HStack(spacing: 10, content: {
+                        if let trailingItem = trailingItem { trailingItem }
+                    })
+                        .frame(minWidth: leadingTrailingWidth, alignment: .trailing)
+                        .layoutPriority(1)
+                        .readSize(onChange: { trailingWidth = $0.width })
+                })
             }
         })
-    }
-    
-    private var centerItems: some View {
-        titleView
-    }
-    
-    @ViewBuilder private var trailingItems: some View {
-        if let trailingItemsContent = trailingItemsContent {
-            trailingItemsContent()
-        } else {
-            EmptyView()
-        }
-    }
-
-    private var titleView: some View {
-        Text(title)
-            .font(model.fonts.title)
+            .lineLimit(1)
+            .frame(width: UIScreen.main.bounds.width - 2 * 20)
     }
 }
 

@@ -66,7 +66,8 @@ extension VToggleLeftFlexibleContent {
                 action: action,
                 content: content
             )
-            
+                .layoutPriority(1)
+
             VToggleSpacerView(
                 width: nil,
                 isDisabled: spaceIsDisabled,
@@ -90,11 +91,23 @@ struct VToggleLeftFlexibleContent_Previews: PreviewProvider {
     @State private static var isOn: Bool = true
     
     static var previews: some View {
-        VToggleLeftFlexibleContent(
-            model: .init(),
-            isOn: $isOn,
-            state: .enabled,
-            content: { Text("Press") }
-        )
+        VStack(content: {
+            VToggleLeftFlexibleContent(
+                model: .init(),
+                isOn: $isOn,
+                state: .enabled,
+                content: { Text("Press") }
+            )
+            
+            VToggleLeftFlexibleContent(
+                model: .init(),
+                isOn: $isOn,
+                state: .enabled,
+                content: { Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit") }
+            )
+            
+            Spacer()
+        })
+            .padding(20)
     }
 }

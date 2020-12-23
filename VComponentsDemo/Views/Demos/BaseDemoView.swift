@@ -24,7 +24,7 @@ struct BaseDemoView<Content, ControllerContent>: View
     init(
         title navigationBarTitle: String,
         @ViewBuilder controller controllerContent: @escaping () -> ControllerContent,
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.navigationBarTitle = navigationBarTitle
         self.controllerContent = controllerContent
@@ -35,7 +35,7 @@ struct BaseDemoView<Content, ControllerContent>: View
 extension BaseDemoView where ControllerContent == Never {
     init(
         title navigationBarTitle: String,
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.navigationBarTitle = navigationBarTitle
         self.controllerContent = nil
@@ -55,7 +55,7 @@ extension BaseDemoView {
                 
                 VSheet(type: .roundTop(), content: {
                     VStack(content: {
-                        content()
+                        ScrollView(content: content)
                         Spacer()
                     })
                 })

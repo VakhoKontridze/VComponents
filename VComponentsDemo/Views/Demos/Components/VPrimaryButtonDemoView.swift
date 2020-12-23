@@ -29,11 +29,9 @@ struct VPrimaryButtonDemoView: View {
 extension VPrimaryButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            ScrollView(content: {
-                buttonsByType
-                imageButtons
-                borderedButton
-            })
+            buttonsByType
+            imageButtons
+            borderedButton
         })
     }
     

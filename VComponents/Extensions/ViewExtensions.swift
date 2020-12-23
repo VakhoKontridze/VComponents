@@ -107,3 +107,21 @@ struct CornerRadiusStyle: ViewModifier {
             .clipShape(CornerRadiusShape(radius: radius, corners: corners))
     }
 }
+
+// MARK:- Reading Size
+extension View {
+    func readSize(onChange completion: @escaping (CGSize) -> Void) -> some View {
+        background(
+            GeometryReader(content: { proxy in
+                Color.clear
+                    .preference(key: SizePreferenceKey.self, value: proxy.size)
+            })
+        )
+            .onPreferenceChange(SizePreferenceKey.self, perform: completion)
+    }
+}
+
+struct SizePreferenceKey: PreferenceKey {
+    static var defaultValue: CGSize = .zero
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
+}

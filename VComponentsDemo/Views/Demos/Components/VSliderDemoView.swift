@@ -31,11 +31,9 @@ struct VSliderDemoView: View {
 extension VSliderDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            ScrollView(content: {
-                sliders
-                steppedSliders
-                animatedSliders
-            })
+            sliders
+            steppedSliders
+            animatedSliders
         })
     }
 

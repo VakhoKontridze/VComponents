@@ -19,7 +19,7 @@ extension HomeView {
     var body: some View {
         VBaseNavigationView(model: .init(), content: {
             VBaseView(title: Self.navigationBarTitle, content: {
-                ScrollView(content: {
+                ScrollView(showsIndicators: false, content: {
                     section(title: "Buttons", content: {
                         HomeRowView(title: VPrimaryButtonDemoView.navigationBarTitle, destination: VPrimaryButtonDemoView())
                         HomeRowView(title: VPlainButtonDemoView.navigationBarTitle, destination: VPlainButtonDemoView())
@@ -40,13 +40,22 @@ extension HomeView {
                     })
                     
                     section(title: "Containers", content: {
-                        EmptyView()
+                        HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView(), showSeparator: false)
+                    })
+                    
+                    section(title: "Base", content: {
+                        HomeRowView(title: VInteractiveViewDemoView.navigationBarTitle, destination: VInteractiveViewDemoView())
+                        HomeRowView(title: VBaseNavigationViewDemoView.navigationBarTitle, destination: VBaseNavigationViewDemoView())
+                        HomeRowView(title: VBaseViewDemoView.navigationBarTitle, destination: VBaseViewDemoView(), showSeparator: false)
+                    })
+                    
+                    section(title: "Pseudo-Components", content: {
+                        HomeRowView(title: VLazyListDemoView.navigationBarTitle, destination: VLazyListDemoView(), showSeparator: false)
                     })
                 })
                     .padding(10)
             })
-                .background(ColorBook.canvas)
-                .edgesIgnoringSafeArea(.bottom)
+                .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
         })
     }
 

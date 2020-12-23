@@ -43,15 +43,13 @@ struct VToggleDemoView: View {
 extension VToggleDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            ScrollView(content: {
-                noContentToggle
-                rightContentToggles
-                leftFlexibleContentToggles
-                nonInteractiveContentRightContentToggle
-                interactiveContentLeftFlexibleContentToggle
-                noLoweredOpacityPressedContentToggle
-                noLoweredOpacityDisabledContentToggle
-            })
+            noContentToggle
+            rightContentToggles
+            leftFlexibleContentToggles
+            nonInteractiveContentRightContentToggle
+            interactiveContentLeftFlexibleContentToggle
+            noLoweredOpacityPressedContentToggle
+            noLoweredOpacityDisabledContentToggle
         })
     }
     

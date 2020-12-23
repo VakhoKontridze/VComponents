@@ -8,16 +8,18 @@
 import SwiftUI
 
 // MARK:- V Base View
-public struct VBaseView<Content, NavigationBarTrailingItemsContent>: View
+public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailingItem>: View
     where
         Content: View,
-        NavigationBarTrailingItemsContent: View
+        NavigationBarLeadingItem: View,
+        NavigationBarTrailingItem: View
 {
     // MARK: Properties
     private let model: VBaseViewModel
     
     private let navigationBarTitle: String
-    private let navigationBarTrailingItemsContent: (() -> NavigationBarTrailingItemsContent)?
+    private let navigationBarLeadingItem: NavigationBarLeadingItem?
+    private let navigationBarTrailingItem: NavigationBarTrailingItem?
     
     private let content: () -> Content
     
@@ -25,17 +27,53 @@ public struct VBaseView<Content, NavigationBarTrailingItemsContent>: View
     public init(
         model: VBaseViewModel = .init(),
         title navigationBarTitle: String,
-        @ViewBuilder trailingItems navigationBarTrailingItemsContent: @escaping () -> NavigationBarTrailingItemsContent,
+        leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
+        trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.navigationBarTitle = navigationBarTitle
-        self.navigationBarTrailingItemsContent = navigationBarTrailingItemsContent
+        self.navigationBarLeadingItem = navigationBarLeadingItem
+        self.navigationBarTrailingItem = navigationBarTrailingItem
         self.content = content
     }
 }
 
-public extension VBaseView where NavigationBarTrailingItemsContent == Never {
+public extension VBaseView where NavigationBarLeadingItem == Never {
+    init(
+        model: VBaseViewModel = .init(),
+        title navigationBarTitle: String,
+        trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.model = model
+        self.navigationBarTitle = navigationBarTitle
+        self.navigationBarLeadingItem = nil
+        self.navigationBarTrailingItem = navigationBarTrailingItem
+        self.content = content
+    }
+}
+
+public extension VBaseView where NavigationBarTrailingItem == Never {
+    init(
+        model: VBaseViewModel = .init(),
+        title navigationBarTitle: String,
+        leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.model = model
+        self.navigationBarTitle = navigationBarTitle
+        self.navigationBarLeadingItem = navigationBarLeadingItem
+        self.navigationBarTrailingItem = nil
+        self.content = content
+    }
+}
+
+public extension VBaseView
+    where
+        NavigationBarLeadingItem == Never,
+        NavigationBarTrailingItem == Never
+{
     init(
         model: VBaseViewModel = .init(),
         title navigationBarTitle: String,
@@ -43,7 +81,8 @@ public extension VBaseView where NavigationBarTrailingItemsContent == Never {
     ) {
         self.model = model
         self.navigationBarTitle = navigationBarTitle
-        self.navigationBarTrailingItemsContent = nil
+        self.navigationBarLeadingItem = nil
+        self.navigationBarTrailingItem = nil
         self.content = content
     }
 }
@@ -55,7 +94,8 @@ public extension VBaseView {
             .setUpBaseViewNavigationBar(
                 model: model,
                 title: navigationBarTitle,
-                trailingItemsContent: navigationBarTrailingItemsContent
+                leadingItem: navigationBarLeadingItem,
+                trailingItem: navigationBarTrailingItem
             )
             .addNavigationBarSwipeGesture()
     }
@@ -65,7 +105,7 @@ public extension VBaseView {
 struct VBaseView_Previews: PreviewProvider {
     static var previews: some View {
         VBaseNavigationView(content: {
-            VBaseView(title: "Home", trailingItems: { Button("Search", action: {}) }, content: {
+            VBaseView(title: "Home", trailingItem: Button("Search", action: {}), content: {
                 ZStack(content: {
                     Color.pink.edgesIgnoringSafeArea(.bottom)
                     

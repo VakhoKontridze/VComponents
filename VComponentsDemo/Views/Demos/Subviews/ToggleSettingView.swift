@@ -28,7 +28,7 @@ extension ToggleSettingView {
             VToggle(isOn: $isOn)
             
             Text(title)
-                .font(.system(size: 12))
+                .font(.footnote)
         })
     }
 }

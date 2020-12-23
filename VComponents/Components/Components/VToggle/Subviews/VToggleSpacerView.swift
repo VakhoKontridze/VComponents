@@ -31,8 +31,9 @@ extension VToggleSpacerView {
     var body: some View {
         VInteractiveView(isDisabled: isDisabled, action: action, onPress: { _ in }, content: {
             Rectangle()
-                .foregroundColor(.clear)
+                .fixedSize(horizontal: false, vertical: true)
                 .ifLet(width, transform: { $0.frame(width: $1) })
+                .foregroundColor(.clear)
         })
     }
 }

@@ -35,6 +35,7 @@ extension HomeRowView {
             NavigationLink(destination: destination, label: {
                 HStack(content: {
                     Text(title)
+                        .font(.body)
                         .foregroundColor(VComponents.ColorBook.primary)
                     
                     Spacer()
@@ -47,7 +48,7 @@ extension HomeRowView {
             
             if showSeparator {
                 Divider()
-                    .padding(.vertical, 10)
+                    .padding(.vertical, 7)
             }
         })
     }
