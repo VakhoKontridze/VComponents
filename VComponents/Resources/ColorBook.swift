@@ -86,7 +86,30 @@ extension ColorBook {
         public struct Text {
             public static let enabled: Color = PrimaryButton.Text.enabled
             public static let pressed: Color = enabled   // Opacity is applied
-            public static let disabled: Color = enabled     // Opacity is applied
+            public static let disabled: Color = enabled
+            
+            private init() {}
+        }
+        
+        private init() {}
+    }
+}
+
+// MARK:- Chevron Button
+extension ColorBook {
+    public struct ChevronButton {
+        public struct Fill {
+            public static let enabled: Color = .init("ChevronButton.Fill.enabled")
+            public static let pressed: Color = .init("ChevronButton.Fill.pressed")
+            public static let disabled: Color = .init("ChevronButton.Fill.disabled")
+            
+            private init() {}
+        }
+        
+        public struct Icon {
+            public static let enabled: Color = ColorBook.primary
+            public static let pressed: Color = enabled   // Opacity is applied
+            public static let disabled: Color = enabled
             
             private init() {}
         }

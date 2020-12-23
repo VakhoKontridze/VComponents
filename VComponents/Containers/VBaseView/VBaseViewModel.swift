@@ -21,7 +21,7 @@ public struct VBaseViewModel {
     }
 }
 
-// MARK:- Colors
+// MARK:- Layout
 extension VBaseViewModel {
     public struct Layout {
         public let titleAlignment: TitleAlignment

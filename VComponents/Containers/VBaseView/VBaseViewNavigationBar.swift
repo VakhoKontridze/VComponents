@@ -62,9 +62,7 @@ extension VBaseViewNavigationBar {
     private var leadingItems: some View {
         HStack(alignment: .center, spacing: model.layout.itemSpacing, content: {
             if isDestination {
-                Button(action: back, label: {
-                    Image(systemName: "arrow.left")
-                })
+                VChevronButton(direction: .left, action: back)
             }
 
             if model.layout.titleAlignment == .leading {

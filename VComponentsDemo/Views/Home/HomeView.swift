@@ -23,7 +23,8 @@ extension HomeView {
                     section(title: "Buttons", content: {
                         HomeRowView(title: VPrimaryButtonDemoView.navigationBarTitle, destination: VPrimaryButtonDemoView())
                         HomeRowView(title: VPlainButtonDemoView.navigationBarTitle, destination: VPlainButtonDemoView())
-                        HomeRowView(title: VCircularButtonDemoView.navigationBarTitle, destination: VCircularButtonDemoView(), showSeparator: false)
+                        HomeRowView(title: VCircularButtonDemoView.navigationBarTitle, destination: VCircularButtonDemoView())
+                        HomeRowView(title: VChevronButtonDemoView.navigationBarTitle, destination: VChevronButtonDemoView(), showSeparator: false)
                     })
 
                     section(title: "Toggler", content: {
