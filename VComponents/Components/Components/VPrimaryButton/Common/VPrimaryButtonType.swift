@@ -12,4 +12,6 @@ public enum VPrimaryButtonType {
     case compact(_ model: VPrimaryButtonCompactModel = .init())
     case fixed(_ model: VPrimaryButtonFixedModel = .init())
     case flexible(_ model: VPrimaryButtonFlexibleModel = .init())
+    
+    public static let `default`: VPrimaryButtonType = .compact()
 }

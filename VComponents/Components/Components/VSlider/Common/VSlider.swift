@@ -22,7 +22,7 @@ public struct VSlider: View {
     
     // MARK: Initializers
     public init<V>(
-        _ sliderType: VSliderType,
+        _ sliderType: VSliderType = .default,
         range: ClosedRange<V> = 0...1,
         step: Double?,
         state: VSliderState = .enabled,
@@ -43,7 +43,7 @@ public struct VSlider: View {
     }
     
     public init(
-        _ sliderType: VSliderType,
+        _ sliderType: VSliderType = .default,
         step: Double?,
         state: VSliderState = .enabled,
         value: Binding<Double>,
@@ -60,7 +60,7 @@ public struct VSlider: View {
     }
     
     public init(
-        _ sliderType: VSliderType,
+        _ sliderType: VSliderType = .default,
         state: VSliderState = .enabled,
         value: Binding<Double>,
         onChange action: ((Bool) -> Void)? = nil
@@ -80,9 +80,8 @@ public struct VSlider: View {
 public extension VSlider {
     @ViewBuilder var body: some View {
         switch sliderType {
+        case .standard(let model): VSliderStandard(model: model, range: range, step: step, state: state, value: $value, onChange: action)
         case .plain(let model): VSliderPlain(model: model, range: range, step: step, state: state, value: $value, onChange: action)
-        case .thumb(let model): VSliderThumb(model: model, range: range, step: step, state: state, value: $value, onChange: action)
-        case .solidThumb(let model): VSliderSolidThumb(model: model, range: range, step: step, state: state, value: $value, onChange: action)
         }
     }
 }
@@ -93,9 +92,8 @@ struct VSlider_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack(spacing: 20, content: {
+            VSlider(.standard(), value: $value)
             VSlider(.plain(), value: $value)
-            VSlider(.thumb(), value: $value)
-            VSlider(.solidThumb(), value: $value)
         })
             .padding()
     }

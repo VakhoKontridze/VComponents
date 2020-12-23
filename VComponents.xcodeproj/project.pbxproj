@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7A00731B258E27490003F0E9 /* VPlainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00731A258E27490003F0E9 /* VPlainButton.swift */; };
 		7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */; };
-		7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007322258E27C40003F0E9 /* VPlainButtonModel.swift */; };
+		7A007323258E27C40003F0E9 /* VPlainButtonStandardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007322258E27C40003F0E9 /* VPlainButtonStandardModel.swift */; };
 		7A00732F258E2B7D0003F0E9 /* VPlainButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */; };
 		7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00733E258E2F000003F0E9 /* VSliderState.swift */; };
 		7A007352258E38E40003F0E9 /* FontBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007351258E38E40003F0E9 /* FontBook.swift */; };
@@ -24,12 +24,11 @@
 		7A3C1558258DE7B900CE1D96 /* VContinousSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1554258DE7B900CE1D96 /* VContinousSpinner.swift */; };
 		7A3C1560258DE7F400CE1D96 /* VSpinnerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */; };
 		7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1564258DECF400CE1D96 /* VSlider.swift */; };
-		7A3C1571258DF24800CE1D96 /* VSliderSolidThumbModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1570258DF24800CE1D96 /* VSliderSolidThumbModel.swift */; };
 		7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */; };
 		7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */; };
 		7A3C159B258E0A3D00CE1D96 /* VLazyListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C159A258E0A3D00CE1D96 /* VLazyListModel.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */; };
-		7A48FDC9258DE48E00AA4D4D /* VCircularButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC5258DE48E00AA4D4D /* VCircularButtonModel.swift */; };
+		7A48FDC9258DE48E00AA4D4D /* VCircularButtonStandardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC5258DE48E00AA4D4D /* VCircularButtonStandardModel.swift */; };
 		7A48FDCA258DE48E00AA4D4D /* VCircularButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */; };
 		7A48FDDE258DE58800AA4D4D /* VCircularButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */; };
 		7A4C4240259132F5000207DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C423F259132F5000207DD /* Assets.xcassets */; };
@@ -49,21 +48,24 @@
 		7A59958E25924F420087902B /* VSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59958D25924F420087902B /* VSheet.swift */; };
 		7A59959125924F6C0087902B /* VSheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59959025924F6C0087902B /* VSheetType.swift */; };
 		7A59959425924FD00087902B /* VSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59959325924FD00087902B /* VSheetModel.swift */; };
+		7A6689502593AE0200A46F08 /* VPlainButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66894F2593AE0200A46F08 /* VPlainButtonType.swift */; };
+		7A66895D2593AEF800A46F08 /* VPlainButtonStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66895C2593AEF800A46F08 /* VPlainButtonStandard.swift */; };
+		7A6689632593B05B00A46F08 /* VCircularButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6689622593B05B00A46F08 /* VCircularButtonType.swift */; };
+		7A6689692593B0AC00A46F08 /* VCircularButtonStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6689682593B0AC00A46F08 /* VCircularButtonStandard.swift */; };
 		7A860D46259312B100B19A53 /* SettingRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D45259312B100B19A53 /* SettingRootView.swift */; };
 		7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */; };
-		7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */; };
+		7A860D4F2593169600B19A53 /* VChevronButtonFilledModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4E2593169600B19A53 /* VChevronButtonFilledModel.swift */; };
 		7A860D5225931B3C00B19A53 /* VChevronButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */; };
-		7A8A73832590BFE1001024FB /* VToggleRightContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73822590BFE1001024FB /* VToggleRightContent.swift */; };
-		7A8A73872590BFFA001024FB /* VToggleRightContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73862590BFFA001024FB /* VToggleRightContentModel.swift */; };
+		7A8A73832590BFE1001024FB /* VToggleStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73822590BFE1001024FB /* VToggleStandard.swift */; };
+		7A8A73872590BFFA001024FB /* VToggleStandardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73862590BFFA001024FB /* VToggleStandardModel.swift */; };
 		7A8A73922590C343001024FB /* VToggleToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73912590C343001024FB /* VToggleToggleView.swift */; };
-		7A8A73962590C6DF001024FB /* VToggleLeftFlexibleContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73952590C6DF001024FB /* VToggleLeftFlexibleContentModel.swift */; };
+		7A8A73962590C6DF001024FB /* VToggleSettingModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73952590C6DF001024FB /* VToggleSettingModel.swift */; };
 		7A8A739A2590C72B001024FB /* VToggleLeftFlexible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73992590C72B001024FB /* VToggleLeftFlexible.swift */; };
 		7A8A73A02590CCAE001024FB /* VToggleSpacerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A739F2590CCAE001024FB /* VToggleSpacerView.swift */; };
 		7A8A73A42590CDCE001024FB /* VToggleContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73A32590CDCE001024FB /* VToggleContentView.swift */; };
 		7A8A7448259109FD001024FB /* VSliderFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A7447259109FD001024FB /* VSliderFrameView.swift */; };
-		7A8A744D25910E46001024FB /* VSliderThumbModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A744C25910E46001024FB /* VSliderThumbModel.swift */; };
-		7A8A745125910F89001024FB /* VSliderThumb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A745025910F89001024FB /* VSliderThumb.swift */; };
-		7A8A745C25911470001024FB /* VSliderSolidThumb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A745B25911470001024FB /* VSliderSolidThumb.swift */; };
+		7A8A744D25910E46001024FB /* VSliderStandardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A744C25910E46001024FB /* VSliderStandardModel.swift */; };
+		7A8A745125910F89001024FB /* VSliderStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A745025910F89001024FB /* VSliderStandard.swift */; };
 		7A8A7467259118DF001024FB /* VSpinnerContinousModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A7466259118DF001024FB /* VSpinnerContinousModel.swift */; };
 		7A8A96EA258DDA9200309886 /* VComponents.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A8A96E8258DDA9200309886 /* VComponents.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A8A96FC258DDC7800309886 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A96FB258DDC7800309886 /* AppDelegate.swift */; };
@@ -102,6 +104,10 @@
 		7ABEAADC2593969E00A90B56 /* VLazyListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEAADB2593969E00A90B56 /* VLazyListDemoView.swift */; };
 		7AC5060125911A0800226656 /* VSpinnerDashedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5060025911A0800226656 /* VSpinnerDashedModel.swift */; };
 		7AC5060725911A4000226656 /* VSpinnerDashed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5060625911A4000226656 /* VSpinnerDashed.swift */; };
+		7AE32A472593B89300DFD0C3 /* VChevronButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE32A462593B89300DFD0C3 /* VChevronButtonType.swift */; };
+		7AE32A4C2593B90400DFD0C3 /* VChevronButtonFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE32A4B2593B90400DFD0C3 /* VChevronButtonFilled.swift */; };
+		7AE32A722593BD3400DFD0C3 /* VChevronButtonPlainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE32A712593BD3400DFD0C3 /* VChevronButtonPlainModel.swift */; };
+		7AE32A762593BD7900DFD0C3 /* VChevronButtonPlain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE32A752593BD7900DFD0C3 /* VChevronButtonPlain.swift */; };
 		7AE6078325926994009CDB28 /* HomeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6078225926994009CDB28 /* HomeRowView.swift */; };
 /* End PBXBuildFile section */
 
@@ -132,7 +138,7 @@
 /* Begin PBXFileReference section */
 		7A00731A258E27490003F0E9 /* VPlainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButton.swift; sourceTree = "<group>"; };
 		7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonState.swift; sourceTree = "<group>"; };
-		7A007322258E27C40003F0E9 /* VPlainButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonModel.swift; sourceTree = "<group>"; };
+		7A007322258E27C40003F0E9 /* VPlainButtonStandardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonStandardModel.swift; sourceTree = "<group>"; };
 		7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonDemoView.swift; sourceTree = "<group>"; };
 		7A00733E258E2F000003F0E9 /* VSliderState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderState.swift; sourceTree = "<group>"; };
 		7A007351258E38E40003F0E9 /* FontBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontBook.swift; sourceTree = "<group>"; };
@@ -147,12 +153,11 @@
 		7A3C1554258DE7B900CE1D96 /* VContinousSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VContinousSpinner.swift; sourceTree = "<group>"; };
 		7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpinnerDemoView.swift; sourceTree = "<group>"; };
 		7A3C1564258DECF400CE1D96 /* VSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSlider.swift; sourceTree = "<group>"; };
-		7A3C1570258DF24800CE1D96 /* VSliderSolidThumbModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderSolidThumbModel.swift; sourceTree = "<group>"; };
 		7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
 		7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyList.swift; sourceTree = "<group>"; };
 		7A3C159A258E0A3D00CE1D96 /* VLazyListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListModel.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButton.swift; sourceTree = "<group>"; };
-		7A48FDC5258DE48E00AA4D4D /* VCircularButtonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonModel.swift; sourceTree = "<group>"; };
+		7A48FDC5258DE48E00AA4D4D /* VCircularButtonStandardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonStandardModel.swift; sourceTree = "<group>"; };
 		7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCircularButtonState.swift; sourceTree = "<group>"; };
 		7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCircularButtonDemoView.swift; sourceTree = "<group>"; };
 		7A4C423F259132F5000207DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -170,21 +175,24 @@
 		7A59958D25924F420087902B /* VSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheet.swift; sourceTree = "<group>"; };
 		7A59959025924F6C0087902B /* VSheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetType.swift; sourceTree = "<group>"; };
 		7A59959325924FD00087902B /* VSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetModel.swift; sourceTree = "<group>"; };
+		7A66894F2593AE0200A46F08 /* VPlainButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonType.swift; sourceTree = "<group>"; };
+		7A66895C2593AEF800A46F08 /* VPlainButtonStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonStandard.swift; sourceTree = "<group>"; };
+		7A6689622593B05B00A46F08 /* VCircularButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCircularButtonType.swift; sourceTree = "<group>"; };
+		7A6689682593B0AC00A46F08 /* VCircularButtonStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCircularButtonStandard.swift; sourceTree = "<group>"; };
 		7A860D45259312B100B19A53 /* SettingRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRootView.swift; sourceTree = "<group>"; };
 		7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonDirection.swift; sourceTree = "<group>"; };
-		7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonModel.swift; sourceTree = "<group>"; };
+		7A860D4E2593169600B19A53 /* VChevronButtonFilledModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonFilledModel.swift; sourceTree = "<group>"; };
 		7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonState.swift; sourceTree = "<group>"; };
-		7A8A73822590BFE1001024FB /* VToggleRightContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContent.swift; sourceTree = "<group>"; };
-		7A8A73862590BFFA001024FB /* VToggleRightContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContentModel.swift; sourceTree = "<group>"; };
+		7A8A73822590BFE1001024FB /* VToggleStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleStandard.swift; sourceTree = "<group>"; };
+		7A8A73862590BFFA001024FB /* VToggleStandardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleStandardModel.swift; sourceTree = "<group>"; };
 		7A8A73912590C343001024FB /* VToggleToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleToggleView.swift; sourceTree = "<group>"; };
-		7A8A73952590C6DF001024FB /* VToggleLeftFlexibleContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleLeftFlexibleContentModel.swift; sourceTree = "<group>"; };
+		7A8A73952590C6DF001024FB /* VToggleSettingModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleSettingModel.swift; sourceTree = "<group>"; };
 		7A8A73992590C72B001024FB /* VToggleLeftFlexible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleLeftFlexible.swift; sourceTree = "<group>"; };
 		7A8A739F2590CCAE001024FB /* VToggleSpacerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleSpacerView.swift; sourceTree = "<group>"; };
 		7A8A73A32590CDCE001024FB /* VToggleContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleContentView.swift; sourceTree = "<group>"; };
 		7A8A7447259109FD001024FB /* VSliderFrameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderFrameView.swift; sourceTree = "<group>"; };
-		7A8A744C25910E46001024FB /* VSliderThumbModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderThumbModel.swift; sourceTree = "<group>"; };
-		7A8A745025910F89001024FB /* VSliderThumb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderThumb.swift; sourceTree = "<group>"; };
-		7A8A745B25911470001024FB /* VSliderSolidThumb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderSolidThumb.swift; sourceTree = "<group>"; };
+		7A8A744C25910E46001024FB /* VSliderStandardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderStandardModel.swift; sourceTree = "<group>"; };
+		7A8A745025910F89001024FB /* VSliderStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderStandard.swift; sourceTree = "<group>"; };
 		7A8A7466259118DF001024FB /* VSpinnerContinousModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpinnerContinousModel.swift; sourceTree = "<group>"; };
 		7A8A96E5258DDA9200309886 /* VComponents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VComponents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A8A96E8258DDA9200309886 /* VComponents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VComponents.h; sourceTree = "<group>"; };
@@ -227,6 +235,10 @@
 		7ABEAADB2593969E00A90B56 /* VLazyListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListDemoView.swift; sourceTree = "<group>"; };
 		7AC5060025911A0800226656 /* VSpinnerDashedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpinnerDashedModel.swift; sourceTree = "<group>"; };
 		7AC5060625911A4000226656 /* VSpinnerDashed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpinnerDashed.swift; sourceTree = "<group>"; };
+		7AE32A462593B89300DFD0C3 /* VChevronButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonType.swift; sourceTree = "<group>"; };
+		7AE32A4B2593B90400DFD0C3 /* VChevronButtonFilled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonFilled.swift; sourceTree = "<group>"; };
+		7AE32A712593BD3400DFD0C3 /* VChevronButtonPlainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonPlainModel.swift; sourceTree = "<group>"; };
+		7AE32A752593BD7900DFD0C3 /* VChevronButtonPlain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonPlain.swift; sourceTree = "<group>"; };
 		7AE6078225926994009CDB28 /* HomeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -292,10 +304,9 @@
 		7A599585259249AC0087902B /* VChevronButton */ = {
 			isa = PBXGroup;
 			children = (
-				7A599586259249BB0087902B /* VChevronButton.swift */,
-				7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */,
-				7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */,
-				7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */,
+				7AE32A422593B87600DFD0C3 /* Common */,
+				7AE32A442593B87C00DFD0C3 /* Filled */,
+				7AE32A702593BD2700DFD0C3 /* Plain */,
 			);
 			path = VChevronButton;
 			sourceTree = "<group>";
@@ -310,12 +321,50 @@
 			path = VSheet;
 			sourceTree = "<group>";
 		};
+		7A6689532593AE9F00A46F08 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7A00731A258E27490003F0E9 /* VPlainButton.swift */,
+				7A66894F2593AE0200A46F08 /* VPlainButtonType.swift */,
+				7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7A6689552593AEA500A46F08 /* Standard */ = {
+			isa = PBXGroup;
+			children = (
+				7A66895C2593AEF800A46F08 /* VPlainButtonStandard.swift */,
+				7A007322258E27C40003F0E9 /* VPlainButtonStandardModel.swift */,
+			);
+			path = Standard;
+			sourceTree = "<group>";
+		};
+		7A6689602593AFE000A46F08 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */,
+				7A6689622593B05B00A46F08 /* VCircularButtonType.swift */,
+				7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7A6689652593B09600A46F08 /* Standard */ = {
+			isa = PBXGroup;
+			children = (
+				7A6689682593B0AC00A46F08 /* VCircularButtonStandard.swift */,
+				7A48FDC5258DE48E00AA4D4D /* VCircularButtonStandardModel.swift */,
+			);
+			path = Standard;
+			sourceTree = "<group>";
+		};
 		7A8A73782590BEB5001024FB /* VToggle */ = {
 			isa = PBXGroup;
 			children = (
 				7A8A737D2590BED4001024FB /* Common */,
-				7A8A737E2590BEDF001024FB /* Right Content */,
-				7A8A737F2590BEE8001024FB /* Left Flexible Toggle */,
+				7A8A737E2590BEDF001024FB /* Standard */,
+				7A8A737F2590BEE8001024FB /* Setting */,
 				7A8A73902590C326001024FB /* Subviews */,
 			);
 			path = VToggle;
@@ -331,22 +380,22 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		7A8A737E2590BEDF001024FB /* Right Content */ = {
+		7A8A737E2590BEDF001024FB /* Standard */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A73822590BFE1001024FB /* VToggleRightContent.swift */,
-				7A8A73862590BFFA001024FB /* VToggleRightContentModel.swift */,
+				7A8A73822590BFE1001024FB /* VToggleStandard.swift */,
+				7A8A73862590BFFA001024FB /* VToggleStandardModel.swift */,
 			);
-			path = "Right Content";
+			path = Standard;
 			sourceTree = "<group>";
 		};
-		7A8A737F2590BEE8001024FB /* Left Flexible Toggle */ = {
+		7A8A737F2590BEE8001024FB /* Setting */ = {
 			isa = PBXGroup;
 			children = (
 				7A8A73992590C72B001024FB /* VToggleLeftFlexible.swift */,
-				7A8A73952590C6DF001024FB /* VToggleLeftFlexibleContentModel.swift */,
+				7A8A73952590C6DF001024FB /* VToggleSettingModel.swift */,
 			);
-			path = "Left Flexible Toggle";
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		7A8A73902590C326001024FB /* Subviews */ = {
@@ -363,9 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				7A8A7429259100D5001024FB /* Common */,
+				7A8A744B25910E33001024FB /* Standard */,
 				7ABEAA5C2593463600A90B56 /* Plain */,
-				7A8A744B25910E33001024FB /* Thumb */,
-				7A8A745625911317001024FB /* Solid Thumb */,
 				7A8A7446259109EF001024FB /* Subviews */,
 			);
 			path = VSlider;
@@ -389,22 +437,13 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
-		7A8A744B25910E33001024FB /* Thumb */ = {
+		7A8A744B25910E33001024FB /* Standard */ = {
 			isa = PBXGroup;
 			children = (
-				7A8A745025910F89001024FB /* VSliderThumb.swift */,
-				7A8A744C25910E46001024FB /* VSliderThumbModel.swift */,
+				7A8A745025910F89001024FB /* VSliderStandard.swift */,
+				7A8A744C25910E46001024FB /* VSliderStandardModel.swift */,
 			);
-			path = Thumb;
-			sourceTree = "<group>";
-		};
-		7A8A745625911317001024FB /* Solid Thumb */ = {
-			isa = PBXGroup;
-			children = (
-				7A8A745B25911470001024FB /* VSliderSolidThumb.swift */,
-				7A3C1570258DF24800CE1D96 /* VSliderSolidThumbModel.swift */,
-			);
-			path = "Solid Thumb";
+			path = Standard;
 			sourceTree = "<group>";
 		};
 		7A8A7462259118B3001024FB /* VSpinner */ = {
@@ -673,9 +712,8 @@
 		7AA9F4452590B34A0060F210 /* VPlainButton */ = {
 			isa = PBXGroup;
 			children = (
-				7A00731A258E27490003F0E9 /* VPlainButton.swift */,
-				7A007322258E27C40003F0E9 /* VPlainButtonModel.swift */,
-				7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */,
+				7A6689532593AE9F00A46F08 /* Common */,
+				7A6689552593AEA500A46F08 /* Standard */,
 			);
 			path = VPlainButton;
 			sourceTree = "<group>";
@@ -799,12 +837,40 @@
 			path = VLazyList;
 			sourceTree = "<group>";
 		};
+		7AE32A422593B87600DFD0C3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7A599586259249BB0087902B /* VChevronButton.swift */,
+				7AE32A462593B89300DFD0C3 /* VChevronButtonType.swift */,
+				7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */,
+				7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7AE32A442593B87C00DFD0C3 /* Filled */ = {
+			isa = PBXGroup;
+			children = (
+				7AE32A4B2593B90400DFD0C3 /* VChevronButtonFilled.swift */,
+				7A860D4E2593169600B19A53 /* VChevronButtonFilledModel.swift */,
+			);
+			path = Filled;
+			sourceTree = "<group>";
+		};
+		7AE32A702593BD2700DFD0C3 /* Plain */ = {
+			isa = PBXGroup;
+			children = (
+				7AE32A752593BD7900DFD0C3 /* VChevronButtonPlain.swift */,
+				7AE32A712593BD3400DFD0C3 /* VChevronButtonPlainModel.swift */,
+			);
+			path = Plain;
+			sourceTree = "<group>";
+		};
 		7AF4C8CF2590BA3A00275C76 /* VCircularButton */ = {
 			isa = PBXGroup;
 			children = (
-				7A48FDC4258DE48E00AA4D4D /* VCircularButton.swift */,
-				7A48FDC5258DE48E00AA4D4D /* VCircularButtonModel.swift */,
-				7A48FDC6258DE48E00AA4D4D /* VCircularButtonState.swift */,
+				7A6689602593AFE000A46F08 /* Common */,
+				7A6689652593B09600A46F08 /* Standard */,
 			);
 			path = VCircularButton;
 			sourceTree = "<group>";
@@ -923,13 +989,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A66895D2593AEF800A46F08 /* VPlainButtonStandard.swift in Sources */,
 				7AA9F42C2590B1310060F210 /* VPrimaryButtonFlexibleModel.swift in Sources */,
 				7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */,
 				7A59959125924F6C0087902B /* VSheetType.swift in Sources */,
 				7A3C1555258DE7B900CE1D96 /* VSpinnerType.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
-				7A48FDC9258DE48E00AA4D4D /* VCircularButtonModel.swift in Sources */,
-				7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */,
+				7A48FDC9258DE48E00AA4D4D /* VCircularButtonStandardModel.swift in Sources */,
+				7A007323258E27C40003F0E9 /* VPlainButtonStandardModel.swift in Sources */,
+				7A6689692593B0AC00A46F08 /* VCircularButtonStandard.swift in Sources */,
 				7AC5060125911A0800226656 /* VSpinnerDashedModel.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VCircularButton.swift in Sources */,
 				7ABEAA6A2593474C00A90B56 /* VSheetRoundCustomModel.swift in Sources */,
@@ -943,14 +1011,14 @@
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
 				7AA9F4112590AFD60060F210 /* VPrimaryButtonFixedModel.swift in Sources */,
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
-				7A8A73872590BFFA001024FB /* VToggleRightContentModel.swift in Sources */,
+				7A8A73872590BFFA001024FB /* VToggleStandardModel.swift in Sources */,
+				7AE32A762593BD7900DFD0C3 /* VChevronButtonPlain.swift in Sources */,
 				7A8A9729258DDDA800309886 /* VPrimaryButton.swift in Sources */,
 				7A3C159B258E0A3D00CE1D96 /* VLazyListModel.swift in Sources */,
-				7A3C1571258DF24800CE1D96 /* VSliderSolidThumbModel.swift in Sources */,
 				7A59959425924FD00087902B /* VSheetModel.swift in Sources */,
 				7AA9F3E425909E230060F210 /* VInteractiveView.swift in Sources */,
-				7A8A73832590BFE1001024FB /* VToggleRightContent.swift in Sources */,
-				7A8A745125910F89001024FB /* VSliderThumb.swift in Sources */,
+				7A8A73832590BFE1001024FB /* VToggleStandard.swift in Sources */,
+				7A8A745125910F89001024FB /* VSliderStandard.swift in Sources */,
 				7A4C43012592297F000207DD /* VBaseViewNavigationBar.swift in Sources */,
 				7AA9F4052590ACB00060F210 /* VPrimaryButtonBackgroundView.swift in Sources */,
 				7A3C1558258DE7B900CE1D96 /* VContinousSpinner.swift in Sources */,
@@ -964,13 +1032,14 @@
 				7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */,
 				7A8A73922590C343001024FB /* VToggleToggleView.swift in Sources */,
 				7A599587259249BC0087902B /* VChevronButton.swift in Sources */,
+				7AE32A722593BD3400DFD0C3 /* VChevronButtonPlainModel.swift in Sources */,
 				7A8A7448259109FD001024FB /* VSliderFrameView.swift in Sources */,
-				7A8A744D25910E46001024FB /* VSliderThumbModel.swift in Sources */,
+				7A8A744D25910E46001024FB /* VSliderStandardModel.swift in Sources */,
 				7A4C431A259237CA000207DD /* VBaseNavigationViewNavigationBar.swift in Sources */,
 				7AC5060725911A4000226656 /* VSpinnerDashed.swift in Sources */,
 				7A48FDCA258DE48E00AA4D4D /* VCircularButtonState.swift in Sources */,
 				7A00736B258E47280003F0E9 /* VToggle.swift in Sources */,
-				7A8A73962590C6DF001024FB /* VToggleLeftFlexibleContentModel.swift in Sources */,
+				7A8A73962590C6DF001024FB /* VToggleSettingModel.swift in Sources */,
 				7A4C4317259237BB000207DD /* VBaseNavigationViewModel.swift in Sources */,
 				7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */,
 				7AA9F3EC2590A6330060F210 /* VPrimaryButtonCompactModel.swift in Sources */,
@@ -978,19 +1047,22 @@
 				7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */,
 				7A860D5225931B3C00B19A53 /* VChevronButtonState.swift in Sources */,
 				7AA9F4012590AA8A0060F210 /* VPrimaryButtonContentView.swift in Sources */,
+				7A6689632593B05B00A46F08 /* VCircularButtonType.swift in Sources */,
 				7A4C4304259229B2000207DD /* VBaseViewSwipeGesture.swift in Sources */,
 				7A8A7467259118DF001024FB /* VSpinnerContinousModel.swift in Sources */,
 				7AA9F4262590B1040060F210 /* VPrimaryButtonFlexible.swift in Sources */,
+				7AE32A4C2593B90400DFD0C3 /* VChevronButtonFilled.swift in Sources */,
 				7ABEAA5F2593465000A90B56 /* VSliderPlain.swift in Sources */,
 				7A007375258E75DF0003F0E9 /* VToggleState.swift in Sources */,
 				7AA499CA258F82D2002BD362 /* VSliderType.swift in Sources */,
+				7AE32A472593B89300DFD0C3 /* VChevronButtonType.swift in Sources */,
 				7A59957E2592442A0087902B /* VBaseNavigationViewAppearance.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
-				7A8A745C25911470001024FB /* VSliderSolidThumb.swift in Sources */,
 				7AA9F3FD2590A9BC0060F210 /* VPrimaryButtonLoaderView.swift in Sources */,
 				7A4C42F825922914000207DD /* VBaseView.swift in Sources */,
-				7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */,
+				7A860D4F2593169600B19A53 /* VChevronButtonFilledModel.swift in Sources */,
 				7A00731B258E27490003F0E9 /* VPlainButton.swift in Sources */,
+				7A6689502593AE0200A46F08 /* VPlainButtonType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

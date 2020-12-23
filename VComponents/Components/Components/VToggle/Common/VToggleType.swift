@@ -9,6 +9,8 @@ import Foundation
 
 // MARK:- V Toggle Type
 public enum VToggleType {
-    case rightContent(_ model: VToggleRightContentModel = .init())
-    case spacedLeftContent(_ model: VToggleLeftFlexibleContentModel = .init())
+    case standard(_ model: VToggleStandardModel = .init())
+    case setting(_ model: VToggleSettingModel = .init())
+    
+    public static let `default`: VToggleType = .standard()
 }

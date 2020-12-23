@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Chevron Button
 public struct VChevronButton<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VChevronButtonModel
+    private let buttonType: VChevronButtonType
     
     private let direction: VChevronButtonDirection
     private let state: VChevronButtonState
@@ -21,13 +21,13 @@ public struct VChevronButton<Content>: View where Content: View {
     
     // MARK: Direction
     public init(
-        model: VChevronButtonModel = .init(),
+        _ buttonType: VChevronButtonType = .default,
         direction: VChevronButtonDirection,
         state: VChevronButtonState = .enabled,
         action: @escaping () -> Void,
         content: @escaping () -> Content
     ) {
-        self.model = model
+        self.buttonType = buttonType
         self.direction = direction
         self.state = state
         self.action = action
@@ -37,12 +37,12 @@ public struct VChevronButton<Content>: View where Content: View {
 
 public extension VChevronButton where Content == Never {
     init(
-        model: VChevronButtonModel = .init(),
+        _ buttonType: VChevronButtonType = .default,
         direction: VChevronButtonDirection,
         state: VChevronButtonState = .enabled,
         action: @escaping () -> Void
     ) {
-        self.model = model
+        self.buttonType = buttonType
         self.direction = direction
         self.state = state
         self.action = action
@@ -52,21 +52,22 @@ public extension VChevronButton where Content == Never {
 
 // MARK:- Body
 public extension VChevronButton {
-    var body: some View {
-        VCircularButton(model: model.circularButtonModel, state: state, action: action, content: {
-            Group(content: {
-                switch content {
-                case nil: defaultChevronButton
-                case let content?: content()
-                }
-            })
-                .frame(dimension: model.layout.iconDimension)
-        })
+    @ViewBuilder var body: some View {
+        switch buttonType {
+        case .filled(let model): VChevronButtonFilled(model: model, direction: direction, state: state, action: action, content: { chevronButtonContent })
+        case .plain(let model): VChevronButtonPlain(model: model, direction: direction, state: state, action: action, content: { chevronButtonContent })
+        }
     }
-    
-    private var defaultChevronButton: some View {
-        Image(systemName: "chevron.up")
-            .rotationEffect(.init(degrees: direction.angle))
+
+    @ViewBuilder private var chevronButtonContent: some View {
+        switch content {
+        case nil:
+            Image(systemName: "chevron.up")
+                .rotationEffect(.init(degrees: direction.angle))
+        
+        case let content?:
+            content()
+        }
     }
 }
 

@@ -11,4 +11,6 @@ import Foundation
 public enum VSpinnerType {
     case continous(_ model: VSpinnerContinousModel = .init())
     case dashed(_ model: VSpinnerDashedModel = .init())
+    
+    public static let `default`: VSpinnerType = .continous()
 }

@@ -1,5 +1,5 @@
 //
-//  VToggleRightContentModel.swift
+//  VToggleLeftFlexibleContentModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Toggle Model
-public struct VToggleRightContentModel {
+// MARK:- V Toggle Setting Model
+public struct VToggleSettingModel {
     public let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
@@ -25,37 +25,37 @@ public struct VToggleRightContentModel {
 }
 
 // MARK:- Behavior
-extension VToggleRightContentModel {
+extension VToggleSettingModel {
     public struct Behavior {
         public let contentIsClickable: Bool
+        public let spaceIsClickable: Bool
         public let animation: Animation
         
         public init(
             contentIsClickable: Bool = true,
+            spaceIsClickable: Bool = false,
             animation: Animation = Animation.easeIn(duration: 0.1)
         ) {
             self.contentIsClickable = contentIsClickable
+            self.spaceIsClickable = spaceIsClickable
             self.animation = animation
         }
     }
 }
 
 // MARK:- Layout
-extension VToggleRightContentModel {
+extension VToggleSettingModel {
     public struct Layout {
         public let size: CGSize
         public let thumbDimension: CGFloat
-        public let contentSpacing: CGFloat
         let animationOffset: CGFloat
         
         public init(
             size: CGSize = .init(width: 51, height: 31),
-            thumbDimension: CGFloat = 27,
-            contentSpacing: CGFloat = 10
+            thumbDimension: CGFloat = 27
         ) {
             self.size = size
             self.thumbDimension = thumbDimension
-            self.contentSpacing = contentSpacing
             self.animationOffset = {
                 let spacing: CGFloat = (size.height - thumbDimension)/2
                 let thumnStartPoint: CGFloat = (size.width - thumbDimension)/2
@@ -67,7 +67,7 @@ extension VToggleRightContentModel {
 }
 
 // MARK:- Colors
-extension VToggleRightContentModel {
+extension VToggleSettingModel {
     public struct Colors {
         public let fill: FillColors
         public let thumb: ThumbColors
@@ -85,7 +85,7 @@ extension VToggleRightContentModel {
     }
 }
 
-extension VToggleRightContentModel {
+extension VToggleSettingModel {
     public struct FillColors {
         public let enabledOn: Color
         public let enabledOff: Color
@@ -139,7 +139,7 @@ extension VToggleRightContentModel {
 }
 
 // MARK:- Mapping
-extension VToggleRightContentModel.Colors {
+extension VToggleSettingModel.Colors {
     func fillColor(isOn: Bool, state: VToggleInternalState) -> Color {
         switch (isOn, state) {
         case (true, .enabled): return fill.enabledOn

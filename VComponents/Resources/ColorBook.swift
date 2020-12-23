@@ -29,8 +29,8 @@ extension ColorBook {
         public struct Text {
             public static let enabled: Color = ColorBook.primaryInverted
             public static let pressed: Color = enabled
-            public static let disabled: Color = enabled // Opacity is applied
-            public static let loading: Color = enabled // Opacity is applied
+            public static let disabled: Color = enabled     // Opacity is applied
+            public static let loading: Color = enabled      // Opacity is applied
             
             private init() {}
         }
@@ -62,8 +62,8 @@ extension ColorBook {
     public struct PlainButton {
         public struct Text {
             public static let enabled: Color = ColorBook.accent
-            public static let pressed: Color = enabled  // Opacity is applied
-            public static let disabled: Color = enabled  // Opacity is applied
+            public static let pressed: Color = enabled      // Opacity is applied
+            public static let disabled: Color = enabled     // Opacity is applied
             
             private init() {}
         }
@@ -85,8 +85,8 @@ extension ColorBook {
         
         public struct Text {
             public static let enabled: Color = PrimaryButton.Text.enabled
-            public static let pressed: Color = enabled   // Opacity is applied
-            public static let disabled: Color = enabled
+            public static let pressed: Color = enabled      // Opacity is applied
+            public static let disabled: Color = enabled     // Opacity is applied
             
             private init() {}
         }
@@ -108,8 +108,16 @@ extension ColorBook {
         
         public struct Icon {
             public static let enabled: Color = ColorBook.primary
-            public static let pressed: Color = enabled   // Opacity is applied
-            public static let disabled: Color = enabled
+            public static let pressed: Color = enabled      // Opacity is applied
+            public static let disabled: Color = enabled     // Opacity is applied
+            
+            private init() {}
+        }
+        
+        public struct IconPlain {
+            public static let enabled: Color = .init("ChevronButton.IconPlain.enabled")
+            public static let pressed: Color = enabled      // Opacity is applied
+            public static let disabled: Color = enabled     // Opacity is applied
             
             private init() {}
         }
@@ -153,13 +161,6 @@ extension ColorBook {
             private init() {}
         }
         
-        public struct Shadow {
-            public static let enabled: Color = .init("Slider.Shadow.enabled")
-            public static let disabled: Color = .init("Slider.Shadow.disabled")
-            
-            private init() {}
-        }
-        
         public struct Progress {
             public static let enabled: Color = Toggle.Fill.enabledOn
             public static let disabled: Color = Toggle.Fill.disabledOn
@@ -167,7 +168,7 @@ extension ColorBook {
             private init() {}
         }
         
-        public struct Thumb {
+        public struct ThumbFill {
             public static let enabled: Color = Toggle.Thumb.enabledOn
             public static let disabled: Color = enabled
             
@@ -177,6 +178,13 @@ extension ColorBook {
         public struct ThumbStroke {
             public static let enabled: Color = .init("Slider.ThumbStroke.enabled")
             public static let disabled: Color = .init("Slider.ThumbStroke.disabled")
+            
+            private init() {}
+        }
+        
+        public struct ThumbShadow {
+            public static let enabled: Color = .init("Slider.ThumbShadow.enabled")
+            public static let disabled: Color = .init("Slider.ThumbShadow.disabled")
             
             private init() {}
         }

@@ -13,4 +13,6 @@ public enum VSheetType {
     case roundTop(_ model: VSheetRoundTopModel = .init())
     case roundBottom(_ model: VSheetRoundBottomModel = .init())
     case roundCustom(_ model: VSheetRoundCustomModel = .init())
+    
+    public static let `default`: VSheetType = .roundAll()
 }

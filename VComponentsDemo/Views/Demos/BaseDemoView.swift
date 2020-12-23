@@ -53,7 +53,7 @@ extension BaseDemoView {
                 case let controllerContent?: controllerContent()
                 }
                 
-                VSheet(type: .roundTop(), content: {
+                VSheet(.roundTop(), content: {
                     VStack(content: {
                         ScrollView(content: content)
                         Spacer()

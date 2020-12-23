@@ -40,9 +40,8 @@ extension HomeRowView {
                     
                     Spacer()
                     
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.secondary)
-                        .opacity(0.5)
+                    VChevronButton(.plain(), direction: .right, action: {})
+                        .allowsHitTesting(false)
                 })
             })
             

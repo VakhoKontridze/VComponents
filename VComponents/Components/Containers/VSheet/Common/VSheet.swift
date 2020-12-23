@@ -15,7 +15,7 @@ public struct VSheet<Content>: View where Content: View {
     
     // MARK: Initializers
     public init(
-        type sheetType: VSheetType,
+        _ sheetType: VSheetType = .default,
         content: @escaping () -> Content
     ) {
         self.sheetType = sheetType
@@ -25,7 +25,7 @@ public struct VSheet<Content>: View where Content: View {
 
 public extension VSheet where Content == Never {
     init(
-        type sheetType: VSheetType
+        _ sheetType: VSheetType = .default
     ) {
         self.sheetType = sheetType
         self.content = nil
@@ -84,7 +84,7 @@ public extension VSheet {
 // MARK:- Preview
 struct VSheet_Previews: PreviewProvider {
     static var previews: some View {
-        VSheet(type: .roundAll(), content: {
+        VSheet(content: {
             VLazyList(range: 1..<100, rowContent: { num in
                 Text(String(num))
                     .padding(.vertical, 10)

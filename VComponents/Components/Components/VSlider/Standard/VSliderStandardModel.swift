@@ -1,5 +1,5 @@
 //
-//  VSliderThumbModel.swift
+//  VSliderStandardModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Slider Thumb Model
-public struct VSliderThumbModel {
+// MARK:- V Slider Standard Model
+public struct VSliderStandardModel {
     public let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
@@ -25,7 +25,7 @@ public struct VSliderThumbModel {
 }
 
 // MARK:- Behavior
-extension VSliderThumbModel {
+extension VSliderStandardModel {
     public struct Behavior {
         public let animation: Animation?
         
@@ -38,31 +38,35 @@ extension VSliderThumbModel {
 }
 
 // MARK:- Layout
-extension VSliderThumbModel {
+extension VSliderStandardModel {
     public struct Layout {
         public let height: CGFloat
         public let cornerRadius: CGFloat
         public let thumbDimension: CGFloat
         public let thumbCornerRadius: CGFloat
-        let thumbShadowRadius: CGFloat
+        public let thumbStroke: CGFloat
+        public let thumbShadowRadius: CGFloat
         
         public init(
             height: CGFloat = 10,
             cornerRadius: CGFloat = 5,
             thumbDimension: CGFloat = 20,
-            thumbCornerRadius: CGFloat = 10
+            thumbCornerRadius: CGFloat = 10,
+            thumbStroke: CGFloat = 0,
+            thumbShadowRadius: CGFloat = 2
         ) {
             self.height = height
             self.cornerRadius = cornerRadius
             self.thumbDimension = thumbDimension
             self.thumbCornerRadius = thumbCornerRadius
-            self.thumbShadowRadius = 2
+            self.thumbShadowRadius = thumbShadowRadius
+            self.thumbStroke = thumbStroke
         }
     }
 }
 
 // MARK:- Colors
-extension VSliderThumbModel {
+extension VSliderStandardModel {
     public struct Colors {
         public let slider: Slider
         public let thumb: Thumb
@@ -77,7 +81,7 @@ extension VSliderThumbModel {
     }
 }
 
-extension VSliderThumbModel.Colors {
+extension VSliderStandardModel.Colors {
     public struct Slider {
         public let progress: ProgressColors
         public let track: TrackColors
@@ -92,7 +96,7 @@ extension VSliderThumbModel.Colors {
     }
 }
 
-extension VSliderThumbModel.Colors.Slider {
+extension VSliderStandardModel.Colors.Slider {
     public struct ProgressColors {
         public let enabled: Color
         public let disabled: Color
@@ -120,29 +124,45 @@ extension VSliderThumbModel.Colors.Slider {
     }
 }
 
-extension VSliderThumbModel.Colors {
+extension VSliderStandardModel.Colors {
     public struct Thumb {
         public let fill: FillColors
+        public let stroke: StrokeColors
         public let shadow: ShadowColors
         
         public init(
             fill: FillColors = .init(),
+            stroke: StrokeColors = .init(),
             shadow: ShadowColors = .init()
         ) {
             self.fill = fill
+            self.stroke = stroke
             self.shadow = shadow
         }
     }
 }
 
-extension VSliderThumbModel.Colors.Thumb {
+extension VSliderStandardModel.Colors.Thumb {
     public struct FillColors {
         public let enabled: Color
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.Slider.Thumb.enabled,
-            disabled: Color = ColorBook.Slider.Thumb.disabled
+            enabled: Color = ColorBook.Slider.ThumbFill.enabled,
+            disabled: Color = ColorBook.Slider.ThumbFill.disabled
+        ) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+    }
+    
+    public struct StrokeColors {
+        public let enabled: Color
+        public let disabled: Color
+
+        public init(
+            enabled: Color = ColorBook.Slider.ThumbStroke.enabled,
+            disabled: Color = ColorBook.Slider.ThumbStroke.disabled
         ) {
             self.enabled = enabled
             self.disabled = disabled
@@ -154,8 +174,8 @@ extension VSliderThumbModel.Colors.Thumb {
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.Slider.Shadow.enabled,
-            disabled: Color = ColorBook.Slider.Shadow.disabled
+            enabled: Color = ColorBook.Slider.ThumbShadow.enabled,
+            disabled: Color = ColorBook.Slider.ThumbShadow.disabled
         ) {
             self.enabled = enabled
             self.disabled = disabled
@@ -164,7 +184,7 @@ extension VSliderThumbModel.Colors.Thumb {
 }
 
 // MARK:- Mapping
-extension VSliderThumbModel.Colors {
+extension VSliderStandardModel.Colors {
     func progressColor(state: VSliderState) -> Color {
         switch state {
         case .enabled: return slider.progress.enabled
@@ -183,6 +203,13 @@ extension VSliderThumbModel.Colors {
         switch state {
         case .enabled: return thumb.fill.enabled
         case .disabled: return thumb.fill.disabled
+        }
+    }
+    
+    func thumbStroke(state: VSliderState) -> Color {
+        switch state {
+        case .enabled: return thumb.stroke.enabled
+        case .disabled: return thumb.stroke.disabled
         }
     }
     

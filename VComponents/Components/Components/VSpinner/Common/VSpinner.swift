@@ -14,7 +14,7 @@ public struct VSpinner: View {
     
     // MARK: Initializers
     public init(
-        type spinnerType: VSpinnerType
+        type spinnerType: VSpinnerType = .default
     ) {
         self.spinnerType = spinnerType
     }

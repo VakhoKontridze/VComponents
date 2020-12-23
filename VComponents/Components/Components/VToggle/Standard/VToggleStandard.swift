@@ -1,5 +1,5 @@
 //
-//  VToggleLeftFlexible.swift
+//  VToggleStandard.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,23 +7,22 @@
 
 import SwiftUI
 
-// MARK:- VToggleLeftFlexibleContent
-struct VToggleLeftFlexibleContent<Content>: View where Content: View {
+// MARK:- V Toggle Standard
+struct VToggleStandard<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VToggleLeftFlexibleContentModel
+    private let model: VToggleStandardModel
     
     @Binding private var isOn: Bool
     @State private var isPressed: Bool = false
     private let state: VToggleState
     private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
     private var contentIsDisabled: Bool { state.isDisabled || !model.behavior.contentIsClickable }
-    private var spaceIsDisabled: Bool { state.isDisabled || !model.behavior.spaceIsClickable }
     
     private let content: (() -> Content)?
     
     // MARK: Initializers
     init(
-        model: VToggleLeftFlexibleContentModel,
+        model: VToggleStandardModel,
         isOn: Binding<Bool>,
         state: VToggleState,
         content: (() -> Content)?
@@ -36,7 +35,7 @@ struct VToggleLeftFlexibleContent<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VToggleLeftFlexibleContent {
+extension VToggleStandard {
     @ViewBuilder var body: some View {
         switch content {
         case nil: toggle
@@ -59,6 +58,14 @@ extension VToggleLeftFlexibleContent {
     
     private func toggle(with content: @escaping () -> Content) -> some View {
         HStack(alignment: .center, spacing: 0, content: {
+            toggle
+            
+            VToggleSpacerView(
+                width: model.layout.contentSpacing,
+                isDisabled: contentIsDisabled,
+                action: action
+            )
+            
             VToggleContentView(
                 opacity: model.colors.contentDisabledOpacity(state: internalState),
                 isDisabled: contentIsDisabled,
@@ -66,40 +73,31 @@ extension VToggleLeftFlexibleContent {
                 action: action,
                 content: content
             )
-                .layoutPriority(1)
-
-            VToggleSpacerView(
-                width: nil,
-                isDisabled: spaceIsDisabled,
-                action: action
-            )
-            
-            toggle
         })
     }
 }
 
 // MARK:- Action
-private extension VToggleLeftFlexibleContent {
+private extension VToggleStandard {
     func action() {
         withAnimation(model.behavior.animation, { isOn.toggle() })
     }
 }
 
 // MARK:- Preview
-struct VToggleLeftFlexibleContent_Previews: PreviewProvider {
+struct VToggleStandard_Previews: PreviewProvider {
     @State private static var isOn: Bool = true
     
     static var previews: some View {
         VStack(content: {
-            VToggleLeftFlexibleContent(
+            VToggleStandard(
                 model: .init(),
                 isOn: $isOn,
                 state: .enabled,
                 content: { Text("Press") }
             )
             
-            VToggleLeftFlexibleContent(
+            VToggleStandard(
                 model: .init(),
                 isOn: $isOn,
                 state: .enabled,

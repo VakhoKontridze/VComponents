@@ -11,7 +11,6 @@ import SwiftUI
 public struct VLazyList<Content>: View where Content: View {
     // MARK: Properties
     private let model: VLazyListModel
-    
     private let content: () -> Content
     
     // MARK: Initializers

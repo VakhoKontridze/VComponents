@@ -72,7 +72,7 @@ extension HomeView {
                 .font(.system(size: 12, weight: .bold, design: .default))
                 .foregroundColor(VComponents.ColorBook.primary)
             
-            VSheet(type: .roundAll(.init(layout: .init(contentPadding: 10))), content: {
+            VSheet(.roundAll(.init(layout: .init(contentPadding: 10))), content: {
                 VStack(content: content)
             })
         })

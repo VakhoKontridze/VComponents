@@ -41,23 +41,11 @@ extension VBaseViewDemoView {
             VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom)
             
             VStack(content: {
-                VToggle(
-                    .spacedLeftContent(),
-                    isOn: $navigationBarTitleIsLeading,
-                    title: "Title is on left"
-                )
+                VToggle(isOn: $navigationBarTitleIsLeading, title: "Title is on left")
                 
-                VToggle(
-                    .spacedLeftContent(),
-                    isOn: $navigationBarHasLeadingItem,
-                    title: "Leading items"
-                )
+                VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
                 
-                VToggle(
-                    .spacedLeftContent(),
-                    isOn: $navigationBarHasTrailingItem,
-                    title: "Trailing items"
-                )
+                VToggle(isOn: $navigationBarHasTrailingItem, title: "Trailing items")
             })
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(20)
@@ -69,7 +57,7 @@ extension VBaseViewDemoView {
     @ViewBuilder var leadingItem: some View {
         if navigationBarHasLeadingItem {
             HStack(content: {
-                Button(action: {}, label: { Image(systemName: "line.horizontal.3") })
+                Text("Item")
             })
         }
     }

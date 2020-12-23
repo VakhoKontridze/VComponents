@@ -19,7 +19,7 @@ public struct VToggle<Content>: View where Content: View {
     
     // MARK: Initializers
     public init(
-        _ toggleType: VToggleType,
+        _ toggleType: VToggleType = .default,
         isOn: Binding<Bool>,
         state: VToggleState = .enabled,
         @ViewBuilder content: @escaping () -> Content
@@ -33,7 +33,7 @@ public struct VToggle<Content>: View where Content: View {
 
 public extension VToggle where Content == Text {
     init<S>(
-        _ toggleType: VToggleType,
+        _ toggleType: VToggleType = .default,
         isOn: Binding<Bool>,
         state: VToggleState = .enabled,
         title: S
@@ -54,7 +54,7 @@ public extension VToggle where Content == Never {
         isOn: Binding<Bool>,
         state: VToggleState = .enabled
     ) {
-        self.toggleType = .rightContent()
+        self.toggleType = .default
         self._isOn = isOn
         self.state = state
         self.content = nil
@@ -65,8 +65,8 @@ public extension VToggle where Content == Never {
 public extension VToggle {
     @ViewBuilder var body: some View {
         switch toggleType {
-        case .rightContent(let model): VToggleRightContent(model: model, isOn: $isOn, state: state, content: content)
-        case .spacedLeftContent(let model): VToggleLeftFlexibleContent(model: model, isOn: $isOn, state: state, content: content)
+        case .standard(let model): VToggleStandard(model: model, isOn: $isOn, state: state, content: content)
+        case .setting(let model): VToggleSetting(model: model, isOn: $isOn, state: state, content: content)
         }
     }
 }
@@ -76,6 +76,6 @@ struct VToggle_Previews: PreviewProvider {
     @State private static var isOn: Bool = true
     
     static var previews: some View {
-        VToggle(.rightContent(), isOn: $isOn, title: "Toggle")
+        VToggle(isOn: $isOn, title: "Toggle")
     }
 }

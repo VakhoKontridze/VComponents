@@ -17,7 +17,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
-        _ buttonType: VPrimaryButtonType,
+        _ buttonType: VPrimaryButtonType = .default,
         state: VPrimaryButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
@@ -31,7 +31,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
 
 extension VPrimaryButton where Content == Text {
     public init<S>(
-        _ buttonType: VPrimaryButtonType,
+        _ buttonType: VPrimaryButtonType = .default,
         state: VPrimaryButtonState = .enabled,
         action: @escaping () -> Void,
         title: S
@@ -61,6 +61,6 @@ public extension VPrimaryButton {
 // MARK:- Preview
 struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButton(.compact(), action: {}, title: "Press")
+        VPrimaryButton(action: {}, title: "Press")
     }
 }

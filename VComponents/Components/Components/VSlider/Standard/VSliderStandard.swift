@@ -1,5 +1,5 @@
 //
-//  VSliderSolidThumb.swift
+//  VSliderStandard.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-// MARK:- V Slider Solid Thumb
-struct VSliderSolidThumb<V>: View where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint {
+// MARK:- V Slider Standard
+struct VSliderStandard<V>: View where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint {
     // MARK: Properties
-    private let model: VSliderSolidThumbModel
+    private let model: VSliderStandardModel
     private let range: ClosedRange<V>
     private let step: Double?
     
@@ -21,7 +21,7 @@ struct VSliderSolidThumb<V>: View where V: BinaryFloatingPoint, V.Stride: Binary
     
     // MARK: Initializers
     public init(
-        model: VSliderSolidThumbModel,
+        model: VSliderStandardModel,
         range: ClosedRange<V>,
         step: Double?,
         state: VSliderState,
@@ -38,13 +38,13 @@ struct VSliderSolidThumb<V>: View where V: BinaryFloatingPoint, V.Stride: Binary
 }
 
 // MARK:- Body
-extension VSliderSolidThumb {
+extension VSliderStandard {
     var body: some View {
         VSliderFrameView(
             animation: model.behavior.animation,
             
-            height: model.layout.slider.height,
-            cornerRadius: model.layout.slider.cornerRadius,
+            height: model.layout.height,
+            cornerRadius: model.layout.cornerRadius,
             
             trackColor: model.colors.trackColor(state: state),
             progressColor: model.colors.progressColor(state: state),
@@ -62,23 +62,24 @@ extension VSliderSolidThumb {
     }
     
     private func thumbContent(_ proxy: GeometryProxy) -> some View {
-        RoundedRectangle(cornerRadius: model.layout.thumb.cornerRadius)
-            .strokeBorder(model.colors.thumbStroke(state: state), lineWidth: model.layout.thumb.stroke)
-            .background(
-                RoundedRectangle(cornerRadius: model.layout.thumb.cornerRadius)
-                    .foregroundColor(model.colors.thumbFillColor(state: state))
-            )
-
-            .frame(dimension: model.layout.thumb.dimension)
+        ZStack(content: {
+            RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
+                .foregroundColor(model.colors.thumbFillColor(state: state))
+                .shadow(color: model.colors.thumbShadow(state: state), radius: model.layout.thumbShadowRadius)
+            
+            RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
+                .strokeBorder(model.colors.thumbStroke(state: state), lineWidth: model.layout.thumbStroke)
+        })
+            .frame(dimension: model.layout.thumbDimension)
             .offset(x: thumbOffset(in: proxy), y: 0)
     }
 }
 
 // MARK:- Thumb Progress
-private extension VSliderSolidThumb {
+private extension VSliderStandard {
     func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
         let progressW: CGFloat = progressWidth(in: proxy)
-        let thumbW: CGFloat = model.layout.thumb.dimension
+        let thumbW: CGFloat = model.layout.thumbDimension
         let offset: CGFloat = progressW - thumbW / 2
         
         return offset
@@ -94,11 +95,11 @@ private extension VSliderSolidThumb {
 }
 
 // MARK:- Preview
-struct VSliderSolidThumb_Previews: PreviewProvider {
+struct VSliderStandard_Previews: PreviewProvider {
     @State private static var value: Double = 0.5
     
     static var previews: some View {
-        VSliderSolidThumb(
+        VSliderStandard(
             model: .init(),
             range: 0...1,
             step: nil,

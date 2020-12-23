@@ -1,5 +1,5 @@
 //
-//  VToggleRightContent.swift
+//  VToggleLeftFlexible.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,22 +7,23 @@
 
 import SwiftUI
 
-// MARK:- VToggleRightContent
-struct VToggleRightContent<Content>: View where Content: View {
+// MARK:- V Toggle Setting
+struct VToggleSetting<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VToggleRightContentModel
+    private let model: VToggleSettingModel
     
     @Binding private var isOn: Bool
     @State private var isPressed: Bool = false
     private let state: VToggleState
     private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
     private var contentIsDisabled: Bool { state.isDisabled || !model.behavior.contentIsClickable }
+    private var spaceIsDisabled: Bool { state.isDisabled || !model.behavior.spaceIsClickable }
     
     private let content: (() -> Content)?
     
     // MARK: Initializers
     init(
-        model: VToggleRightContentModel,
+        model: VToggleSettingModel,
         isOn: Binding<Bool>,
         state: VToggleState,
         content: (() -> Content)?
@@ -35,7 +36,7 @@ struct VToggleRightContent<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VToggleRightContent {
+extension VToggleSetting {
     @ViewBuilder var body: some View {
         switch content {
         case nil: toggle
@@ -58,14 +59,6 @@ extension VToggleRightContent {
     
     private func toggle(with content: @escaping () -> Content) -> some View {
         HStack(alignment: .center, spacing: 0, content: {
-            toggle
-            
-            VToggleSpacerView(
-                width: model.layout.contentSpacing,
-                isDisabled: contentIsDisabled,
-                action: action
-            )
-            
             VToggleContentView(
                 opacity: model.colors.contentDisabledOpacity(state: internalState),
                 isDisabled: contentIsDisabled,
@@ -73,31 +66,40 @@ extension VToggleRightContent {
                 action: action,
                 content: content
             )
+                .layoutPriority(1)
+
+            VToggleSpacerView(
+                width: nil,
+                isDisabled: spaceIsDisabled,
+                action: action
+            )
+            
+            toggle
         })
     }
 }
 
 // MARK:- Action
-private extension VToggleRightContent {
+private extension VToggleSetting {
     func action() {
         withAnimation(model.behavior.animation, { isOn.toggle() })
     }
 }
 
 // MARK:- Preview
-struct VToggleRightContent_Previews: PreviewProvider {
+struct VToggleSetting_Previews: PreviewProvider {
     @State private static var isOn: Bool = true
     
     static var previews: some View {
         VStack(content: {
-            VToggleRightContent(
+            VToggleSetting(
                 model: .init(),
                 isOn: $isOn,
                 state: .enabled,
                 content: { Text("Press") }
             )
             
-            VToggleRightContent(
+            VToggleSetting(
                 model: .init(),
                 isOn: $isOn,
                 state: .enabled,

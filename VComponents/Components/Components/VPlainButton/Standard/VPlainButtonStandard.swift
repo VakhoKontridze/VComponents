@@ -1,20 +1,20 @@
 //
-//  VCircularButton.swift
+//  VPlainButtonStandard.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 12/23/20.
 //
 
 import SwiftUI
 
-// MARK:- V Circular Button
-public struct VCircularButton<Content>: View where Content: View {
+// MARK:- V Plain Button Standard
+struct VPlainButtonStandard<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VCircularButtonModel
+    private let model: VPlainButtonStandardModel
     
-    private let state: VCircularButtonState
+    private let state: VPlainButtonState
     @State private var isPressed: Bool = false
-    private var internalState: VCircularButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VPlainButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -22,8 +22,8 @@ public struct VCircularButton<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
-        model: VCircularButtonModel = .init(),
-        state: VCircularButtonState = .enabled,
+        model: VPlainButtonStandardModel,
+        state: VPlainButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -35,11 +35,12 @@ public struct VCircularButton<Content>: View where Content: View {
 }
 
 // MARK:- Body
-public extension VCircularButton {
+extension VPlainButtonStandard {
     var body: some View {
         VInteractiveView(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
-                .frame(dimension: model.layout.dimension)
+                .padding(.horizontal, model.layout.hitAreaOffsetHor)
+                .padding(.vertical, model.layout.hitAreaOffsetVer)
                 
                 // Text
                 .lineLimit(1)
@@ -50,23 +51,13 @@ public extension VCircularButton {
             
                 // Text + Image
                 .opacity(model.colors.foregroundOpacity(state: internalState))
-            
-                .background(
-                    Circle()
-                        .foregroundColor(model.colors.backgroundColor(state: internalState))
-                )
         })
     }
 }
 
 // MARK:- Preview
-struct VCircularButton_Previews: PreviewProvider {
+struct VPlainButtonStandard_Previews: PreviewProvider {
     static var previews: some View {
-        VCircularButton(action: {}, content: {
-            Image(systemName: "swift")
-                .resizable()
-                .frame(size: .init(width: 20, height: 20))
-                .foregroundColor(ColorBook.primaryInverted)
-        })
+        VPlainButtonStandard(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
     }
 }

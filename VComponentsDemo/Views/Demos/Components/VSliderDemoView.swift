@@ -15,13 +15,13 @@ struct VSliderDemoView: View {
 
     @State private var sliderState: VSliderState = .enabled
 
+    @State private var standardSliderValue: Double = 0.5
     @State private var plainSliderValue: Double = 0.5
-    @State private var thumbSliderValue: Double = 0.5
-    @State private var solidThumbSliderValue: Double = 0.5
     
+    @State private var steppedStandardSliderValue: Double = 0.5
     @State private var steppedPlainSliderValue: Double = 0.5
-    @State private var steppedThumbSliderValue: Double = 0.5
-    @State private var steppedSolidThumbSliderValue: Double = 0.5
+    
+    @State private var strokeSliderValue: Double = 0.5
     
     @State private var animatedSliderValue: Double = 0.5
     @State private var animatedSteppedSliderValue: Double = 0.5
@@ -33,6 +33,7 @@ extension VSliderDemoView {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
             sliders
             steppedSliders
+            strokeSlider
             animatedSliders
         })
     }
@@ -51,32 +52,51 @@ extension VSliderDemoView {
 
     private var sliders: some View {
         VStack(content: {
+            RowView(type: .titled("Standard"), content: {
+                VSlider(.standard(), state: sliderState, value: $standardSliderValue)
+            })
+            
             RowView(type: .titled("Plain"), content: {
                 VSlider(.plain(), state: sliderState, value: $plainSliderValue)
-            })
-            
-            RowView(type: .titled("Thumb"), content: {
-                VSlider(.thumb(), state: sliderState, value: $thumbSliderValue)
-            })
-            
-            RowView(type: .titled("Solid Thumb"), content: {
-                VSlider(.solidThumb(), state: sliderState, value: $solidThumbSliderValue)
             })
         })
     }
     
     private var steppedSliders: some View {
         VStack(content: {
+            RowView(type: .titled("Standard (Stepped)"), content: {
+                VSlider(.standard(), step: 0.1, state: sliderState, value: $steppedStandardSliderValue)
+            })
+            
             RowView(type: .titled("Plain (Stepped)"), content: {
                 VSlider(.plain(), step: 0.1, state: sliderState, value: $steppedPlainSliderValue)
             })
-            
-            RowView(type: .titled("Thumb (Stepped)"), content: {
-                VSlider(.thumb(), step: 0.1, state: sliderState, value: $steppedThumbSliderValue)
-            })
-            
-            RowView(type: .titled("Solid Thumb (Stepped)"), content: {
-                VSlider(.solidThumb(), step: 0.1, state: sliderState, value: $steppedSolidThumbSliderValue)
+        })
+    }
+    
+    private var strokeSlider: some View {
+        let model: VSliderStandardModel = .init(
+            layout: .init(
+                thumbStroke: 1,
+                thumbShadowRadius: 0
+            ),
+            colors: .init(
+                thumb: .init(
+                    stroke: .init(
+                        enabled: .black,
+                        disabled: .gray
+                    ),
+                    shadow: .init(
+                        enabled: .clear,
+                        disabled: .clear
+                    )
+                )
+            )
+        )
+        
+        return VStack(content: {
+            RowView(type: .titled("Thumb Stroke"), content: {
+                VSlider(.standard(model), state: sliderState, value: $strokeSliderValue)
             })
         })
     }
