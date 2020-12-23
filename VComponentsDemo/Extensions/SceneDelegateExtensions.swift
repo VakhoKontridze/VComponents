@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK:- Changing Root
+// MARK:- Setting Root View
 extension SceneDelegate {
-    static func changeRootView<Content>(
+    static func setRootView<Content>(
         to view: Content
     )
         where Content: View
@@ -20,7 +20,7 @@ extension SceneDelegate {
         else {
             return
         }
-        
+
         windowScenedelegate.window?.rootViewController = UIHostingController(rootView: view)
     }
 }

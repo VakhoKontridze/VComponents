@@ -53,7 +53,10 @@ extension VBaseViewNavigationBar {
             .if(model.layout.titleAlignment == .center, transform: {
                 $0.toolbar(content: { ToolbarItem(placement: .principal, content: { centerItems }) })
             })
-            .navigationBarItems(leading: leadingItems, trailing: trailingItems)
+            .navigationBarItems(
+                leading: leadingItems,
+                trailing: trailingItems
+            )
     }
     
     private var leadingItems: some View {

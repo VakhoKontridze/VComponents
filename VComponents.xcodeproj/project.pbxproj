@@ -49,6 +49,7 @@
 		7A59958E25924F420087902B /* VSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59958D25924F420087902B /* VSheet.swift */; };
 		7A59959125924F6C0087902B /* VSheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59959025924F6C0087902B /* VSheetType.swift */; };
 		7A59959425924FD00087902B /* VSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59959325924FD00087902B /* VSheetModel.swift */; };
+		7A860D46259312B100B19A53 /* SettingRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D45259312B100B19A53 /* SettingRootView.swift */; };
 		7A8A73832590BFE1001024FB /* VToggleRightContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73822590BFE1001024FB /* VToggleRightContent.swift */; };
 		7A8A73872590BFFA001024FB /* VToggleRightContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73862590BFFA001024FB /* VToggleRightContentModel.swift */; };
 		7A8A73922590C343001024FB /* VToggleToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A73912590C343001024FB /* VToggleToggleView.swift */; };
@@ -159,6 +160,7 @@
 		7A59958D25924F420087902B /* VSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheet.swift; sourceTree = "<group>"; };
 		7A59959025924F6C0087902B /* VSheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetType.swift; sourceTree = "<group>"; };
 		7A59959325924FD00087902B /* VSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetModel.swift; sourceTree = "<group>"; };
+		7A860D45259312B100B19A53 /* SettingRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRootView.swift; sourceTree = "<group>"; };
 		7A8A73822590BFE1001024FB /* VToggleRightContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContent.swift; sourceTree = "<group>"; };
 		7A8A73862590BFFA001024FB /* VToggleRightContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleRightContentModel.swift; sourceTree = "<group>"; };
 		7A8A73912590C343001024FB /* VToggleToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleToggleView.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				7A4C4316259237BB000207DD /* VBaseNavigationViewModel.swift */,
 				7A59957D2592442A0087902B /* VBaseNavigationViewAppearance.swift */,
 				7A4C4319259237CA000207DD /* VBaseNavigationViewNavigationBar.swift */,
+				7A860D45259312B100B19A53 /* SettingRootView.swift */,
 			);
 			path = VBaseNavigationView;
 			sourceTree = "<group>";
@@ -823,6 +826,7 @@
 				7A8A73A02590CCAE001024FB /* VToggleSpacerView.swift in Sources */,
 				7A8A972A258DDDA800309886 /* VPrimaryButtonType.swift in Sources */,
 				7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */,
+				7A860D46259312B100B19A53 /* SettingRootView.swift in Sources */,
 				7A8A73A42590CDCE001024FB /* VToggleContentView.swift in Sources */,
 				7A007352258E38E40003F0E9 /* FontBook.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
