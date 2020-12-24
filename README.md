@@ -15,13 +15,13 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
-2020 Dec 24. VSquareButton *(+ Bordered)*
+2020 Dec 24. VSquareButton *(+ bordered)*
 
-2020 Dec 24. VSecondaryButton *(Filled, Bordered)*
+2020 Dec 24. VSecondaryButton *(filled, bordered)*
 
-2020 Dec 24. VLazyList *(+ Horizontal)*
+2020 Dec 24. VLazyList *(+ horizontal)*
 
-2020 Dec 23. VChevronButton
+2020 Dec 23. VChevronButton *(filled, plain)*
 
 2020 Dec 22. VSheet *(roundAll, roundTop, roundBottom, roundCustom)*
 
@@ -31,19 +31,19 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2020 Dec 21. VInteractiveView
 
-2020 Dec 19. VToggle
+2020 Dec 19. VToggle *(standard, setting)*
 
-2020 Dec 19. VPlainButton *(Standard)*
+2020 Dec 19. VPlainButton *(standard)*
 
-2020 Dec 19. VLazyList *(Vertical)*
+2020 Dec 19. VLazyList *(vertical)*
 
-2020 Dec 19. VSlider *(Standard, Plain)*
+2020 Dec 19. VSlider *(standard, plain)*
 
-2020 Dec 18. VSpinner
+2020 Dec 18. VSpinner *(continous, dashed)*
 
-2020 Dec 18. VSquareButton *(Filled)*
+2020 Dec 18. VSquareButton *(filled)*
 
-2020 Dec 18. VPrimaryButton *(Filled, Bordered)*
+2020 Dec 18. VPrimaryButton *(filled, bordered)*
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)

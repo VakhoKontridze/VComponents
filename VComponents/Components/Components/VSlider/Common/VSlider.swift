@@ -91,9 +91,9 @@ struct VSlider_Previews: PreviewProvider {
     @State private static var value: Double = 0.5
     
     static var previews: some View {
-        VStack(spacing: 20, content: {
-            VSlider(.standard(), value: $value)
-            VSlider(.plain(), value: $value)
+        VStack(content: {
+            VSliderStandard_Previews.previews
+            VSliderPlain_Previews.previews
         })
             .padding()
     }

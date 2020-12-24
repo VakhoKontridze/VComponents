@@ -187,7 +187,7 @@ extension ColorBook {
 
 // MARK:- Plain Button
 extension ColorBook {
-    public struct PlainButton {
+    public struct PlainButtonStandard {
         public struct Foreground {
             public static let enabled: Color = ColorBook.accent
             public static let pressed: Color = enabled      // Opacity is applied
@@ -234,33 +234,6 @@ extension ColorBook {
         private init() {}
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // MARK:- Toggle
 extension ColorBook {
@@ -311,7 +284,7 @@ extension ColorBook {
             private init() {}
         }
         
-        public struct thumbBorderWidth {
+        public struct ThumbBorder {
             public static let enabled: Color = .init("Slider.thumbBorderWidth.enabled")
             public static let disabled: Color = .init("Slider.thumbBorderWidth.disabled")
             

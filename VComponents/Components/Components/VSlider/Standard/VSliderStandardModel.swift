@@ -161,8 +161,8 @@ extension VSliderStandardModel.Colors.Thumb {
         public let disabled: Color
 
         public init(
-            enabled: Color = ColorBook.Slider.thumbBorderWidth.enabled,
-            disabled: Color = ColorBook.Slider.thumbBorderWidth.disabled
+            enabled: Color = ColorBook.Slider.ThumbBorder.enabled,
+            disabled: Color = ColorBook.Slider.ThumbBorder.disabled
         ) {
             self.enabled = enabled
             self.disabled = disabled

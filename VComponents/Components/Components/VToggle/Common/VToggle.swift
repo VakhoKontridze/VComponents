@@ -76,6 +76,10 @@ struct VToggle_Previews: PreviewProvider {
     @State private static var isOn: Bool = true
     
     static var previews: some View {
-        VToggle(isOn: $isOn, title: "Toggle")
+        VStack(content: {
+            VToggleStandard_Previews.previews
+            VToggleSetting_Previews.previews
+        })
+            .padding()
     }
 }
