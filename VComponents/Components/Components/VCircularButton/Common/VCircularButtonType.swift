@@ -9,7 +9,8 @@ import Foundation
 
 // MARK:- V Circular Button Type
 public enum VCircularButtonType {
-    case standard(_ model: VCircularButtonStandardModel = .init())
+    case filled(_ model: VCircularButtonFilledModel = .init())
+    case bordered(_ model: VCircularButtonBorderedModel = .init())
     
-    public static let `default`: VCircularButtonType = .standard()
+    public static let `default`: VCircularButtonType = .filled()
 }

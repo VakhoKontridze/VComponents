@@ -1,20 +1,20 @@
 //
-//  VSecondaryButtonFilled.swift
+//  VCircularButtonFilled.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 12/23/20.
 //
 
 import SwiftUI
 
-// MARK:- V Secondary Button Filled
-struct VSecondaryButtonFilled<Content>: View where Content: View {
+// MARK:- V Circular Button Standard
+struct VCircularButtonFilled<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSecondaryButtonFilledModel
+    private let model: VCircularButtonFilledModel
     
-    private let state: VSecondaryButtonState
+    private let state: VCircularButtonState
     @State private var isPressed: Bool = false
-    private var internalState: VSecondaryButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VCircularButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -22,8 +22,8 @@ struct VSecondaryButtonFilled<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VSecondaryButtonFilledModel,
-        state: VSecondaryButtonState,
+        model: VCircularButtonFilledModel,
+        state: VCircularButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -35,7 +35,7 @@ struct VSecondaryButtonFilled<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VSecondaryButtonFilled {
+extension VCircularButtonFilled {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
@@ -53,7 +53,7 @@ extension VSecondaryButtonFilled {
     
     private var buttonView: some View {
         buttonContent
-            .frame(height: model.layout.height)
+            .frame(dimension: model.layout.dimension)
             .background(backgroundView)
     }
     
@@ -75,8 +75,25 @@ extension VSecondaryButtonFilled {
 }
 
 // MARK:- Preview
-struct VSecondaryButtonFilled_Previews: PreviewProvider {
+struct VCircularButtonFilled_Previews: PreviewProvider {
+    private static let roundedModel: VCircularButtonFilledModel = .init(
+        layout: .init(
+            frame: .rounded()
+        )
+    )
+    
+    private static var content: some View {
+        Image(systemName: "swift")
+            .resizable()
+            .frame(size: .init(width: 20, height: 20))
+            .foregroundColor(ColorBook.primaryInverted)
+    }
+    
     static var previews: some View {
-        VSecondaryButtonFilled(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
+        HStack(content: {
+            VCircularButtonFilled(model: .init(), state: .enabled, action: {}, content: { content })
+            
+            VCircularButtonFilled(model: roundedModel, state: .enabled, action: {}, content: { content })
+        })
     }
 }

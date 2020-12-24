@@ -64,11 +64,11 @@ extension VSecondaryButtonDemoView {
         )
         
         return VStack(content: {
-            DemoRowView(type: .titled("Bordered (Continous)"), content: {
+            DemoRowView(type: .titled("Continous Border"), content: {
                 VSecondaryButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            DemoRowView(type: .titled("Bordered (Dashed)"), content: {
+            DemoRowView(type: .titled("Dashed Border"), content: {
                 VSecondaryButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })

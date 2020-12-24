@@ -38,7 +38,7 @@ struct VChevronButtonPlain<Content>: View where Content: View {
 // MARK:- Body
 extension VChevronButtonPlain {
     var body: some View {
-        VCircularButton(.standard(model.circularButtonModel), state: state, action: action, content: {
+        VCircularButton(.filled(model.circularButtonModel), state: state, action: action, content: {
             content()
                 .frame(dimension: model.layout.iconDimension)
         })

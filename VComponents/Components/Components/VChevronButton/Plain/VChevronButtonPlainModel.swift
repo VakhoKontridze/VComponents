@@ -11,7 +11,7 @@ import SwiftUI
 public struct VChevronButtonPlainModel {
     public let layout: Layout
     public let colors: Colors
-    let circularButtonModel: VCircularButtonStandardModel
+    let circularButtonModel: VCircularButtonFilledModel
     
     public init(
         layout: Layout = .init(),
@@ -32,7 +32,7 @@ public struct VChevronButtonPlainModel {
                     pressedOpacity: colors.pressedOpacity,
                     disabledOpacity: colors.disabledOpacity
                 ),
-                background: .init(
+                fill: .init(
                     enabled: .clear,
                     pressed: .clear,
                     disabled: .clear

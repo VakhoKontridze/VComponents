@@ -11,7 +11,7 @@ import SwiftUI
 public struct VChevronButtonFilledModel {
     public let layout: Layout
     public let colors: Colors
-    let circularButtonModel: VCircularButtonStandardModel
+    let circularButtonModel: VCircularButtonFilledModel
     
     public init(
         layout: Layout = .init(),
@@ -32,10 +32,10 @@ public struct VChevronButtonFilledModel {
                     pressedOpacity: colors.foreground.pressedOpacity,
                     disabledOpacity: colors.foreground.disabledOpacity
                 ),
-                background: .init(
-                    enabled: colors.background.enabled,
-                    pressed: colors.background.pressed,
-                    disabled: colors.background.disabled
+                fill: .init(
+                    enabled: colors.fill.enabled,
+                    pressed: colors.fill.pressed,
+                    disabled: colors.fill.disabled
                 )
             )
         )
@@ -62,14 +62,14 @@ extension VChevronButtonFilledModel {
 extension VChevronButtonFilledModel {
     public struct Colors {
         public let foreground: ForegroundColors
-        public let background: BackgroundColors
+        public let fill: FillColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            background: BackgroundColors = .init()
+            fill: FillColors = .init()
         ) {
             self.foreground = foreground
-            self.background = background
+            self.fill = fill
         }
     }
 }
@@ -97,7 +97,7 @@ extension VChevronButtonFilledModel {
         }
     }
     
-    public struct BackgroundColors {
+    public struct FillColors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color

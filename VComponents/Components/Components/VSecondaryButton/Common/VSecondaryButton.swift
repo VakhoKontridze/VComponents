@@ -60,9 +60,9 @@ public extension VSecondaryButton {
 // MARK:- Preview
 struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 20, content: {
-            VSecondaryButton(.filled(), action: {}, title: "Press")
-            VSecondaryButton(.bordered(), action: {}, title: "Press")
+        VStack(content: {
+            VSecondaryButtonFilled_Previews.previews
+            VSecondaryButtonBordered_Previews.previews
         })
             .padding()
     }

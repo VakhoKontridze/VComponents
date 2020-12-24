@@ -60,9 +60,9 @@ public extension VPrimaryButton {
 // MARK:- Preview
 struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 20, content: {
-            VPrimaryButton(.filled(), action: {}, title: "Press")
-            VPrimaryButton(.bordered(), action: {}, title: "Press")
+        VStack(content: {
+            VPrimaryButtonFilled_Previews.previews
+            VPrimaryButtonBordered_Previews.previews
         })
             .padding()
     }

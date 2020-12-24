@@ -80,11 +80,11 @@ extension VPrimaryButtonDemoView {
         )
         
         return VStack(content: {
-            DemoRowView(type: .titled("Bordered (Continous)"), content: {
+            DemoRowView(type: .titled("Continous Border"), content: {
                 VPrimaryButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            DemoRowView(type: .titled("Bordered (Dashed)"), content: {
+            DemoRowView(type: .titled("Dashed Border"), content: {
                 VPrimaryButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })

@@ -29,11 +29,30 @@ public struct VCircularButton<Content>: View where Content: View {
     }
 }
 
+extension VCircularButton where Content == Text {
+    public init<S>(
+        _ buttonType: VCircularButtonType = .default,
+        state: VCircularButtonState = .enabled,
+        action: @escaping () -> Void,
+        title: S
+    )
+        where S: StringProtocol
+    {
+        self.init(
+            buttonType,
+            state: state,
+            action: action,
+            content: { Text(title) }
+        )
+    }
+}
+
 // MARK:- Body
 public extension VCircularButton {
     @ViewBuilder var body: some View {
         switch buttonType {
-        case .standard(let model): VCircularButtonStandard(model: model, state: state, action: action, content: content)
+        case .filled(let model): VCircularButtonFilled(model: model, state: state, action: action, content: content)
+        case .bordered(let model): VCircularButtonBordered(model: model, state: state, action: action, content: content)
         }
     }
 }
@@ -41,11 +60,10 @@ public extension VCircularButton {
 // MARK:- Preview
 struct VCircularButton_Previews: PreviewProvider {
     static var previews: some View {
-        VCircularButton(action: {}, content: {
-            Image(systemName: "swift")
-                .resizable()
-                .frame(size: .init(width: 20, height: 20))
-                .foregroundColor(ColorBook.primaryInverted)
+        VStack(content: {
+            VCircularButtonFilled_Previews.previews
+            VCircularButtonBordered_Previews.previews
         })
+            .padding()
     }
 }

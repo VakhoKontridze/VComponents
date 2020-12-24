@@ -59,7 +59,7 @@ extension VSecondaryButtonBordered {
     }
     
     private var buttonContent: some View {
-        VPrimaryButtonContentView(
+        VGenericButtonContentView(
             foregroundColor: model.colors.foregroundColor(state: internalState),
             foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
             font: model.fonts.title,
@@ -94,6 +94,5 @@ extension VSecondaryButtonBordered {
 struct VSecondaryButtonBordered_Previews: PreviewProvider {
     static var previews: some View {
         VSecondaryButtonBordered(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
-            .padding()
     }
 }

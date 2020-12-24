@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonContentView.swift
+//  VGenericButtonContentView.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Primary Button Content View
-struct VPrimaryButtonContentView<Content>: View where Content: View {
+struct VGenericButtonContentView<Content>: View where Content: View {
     // MARK: Properties
     private let foregroundColor: Color
     private let foregroundOpacity: Double
@@ -31,7 +31,7 @@ struct VPrimaryButtonContentView<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VPrimaryButtonContentView {
+extension VGenericButtonContentView {
     @ViewBuilder var body: some View {
         content()
             // Text
@@ -49,7 +49,7 @@ extension VPrimaryButtonContentView {
 // MARK:- Preview
 struct VPrimaryButtonContentView_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButtonContentView(
+        VGenericButtonContentView(
             foregroundColor: VPrimaryButtonFilledModel.Colors().foreground.enabled,
             foregroundOpacity: VPrimaryButtonFilledModel.Colors().foreground.pressedOpacity,
             font: VPrimaryButtonFilledModel.Fonts().title,

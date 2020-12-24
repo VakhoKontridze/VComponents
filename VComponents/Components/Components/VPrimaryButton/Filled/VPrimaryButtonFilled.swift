@@ -64,7 +64,7 @@ extension VPrimaryButtonFilled {
                 width: model.layout.loaderWidth
             )
 
-            VPrimaryButtonContentView(
+            VGenericButtonContentView(
                 foregroundColor: model.colors.foregroundColor(state: internalState),
                 foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
                 font: model.fonts.title,

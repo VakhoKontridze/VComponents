@@ -1,20 +1,20 @@
 //
-//  VPrimaryButtonBordered.swift
+//  VCircularButtonBordered.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 12/23/20.
 //
 
 import SwiftUI
 
-// MARK:- V Primary Button Bordered
-struct VPrimaryButtonBordered<Content>: View where Content: View {
+// MARK:- V Circular Button Standard
+struct VCircularButtonBordered<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VPrimaryButtonBorderedModel
+    private let model: VCircularButtonBorderedModel
     
-    private let state: VPrimaryButtonState
+    private let state: VCircularButtonState
     @State private var isPressed: Bool = false
-    private var internalState: VPrimaryButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VCircularButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -22,8 +22,8 @@ struct VPrimaryButtonBordered<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VPrimaryButtonBorderedModel,
-        state: VPrimaryButtonState,
+        model: VCircularButtonBorderedModel,
+        state: VCircularButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -35,7 +35,7 @@ struct VPrimaryButtonBordered<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VPrimaryButtonBordered {
+extension VCircularButtonBordered {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
@@ -53,32 +53,18 @@ extension VPrimaryButtonBordered {
     
     private var buttonView: some View {
         buttonContent
-            .frame(height: model.layout.height)
+            .frame(dimension: model.layout.dimension)
             .background(backgroundView)
             .overlay(border)
     }
     
     private var buttonContent: some View {
-        HStack(alignment: .center, spacing: model.layout.loaderSpacing, content: {
-            VPrimaryButtonLoaderCompensatorView(
-                isVisible: internalState.isLoading,
-                width: model.layout.loaderWidth
-            )
-
-            VGenericButtonContentView(
-                foregroundColor: model.colors.foregroundColor(state: internalState),
-                foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-                font: model.fonts.title,
-                content: content
-            )
-                .frame(maxWidth: .infinity)
-
-            VPrimaryButtonLoaderView(
-                loaderColor: model.colors.loader.color,
-                width: model.layout.loaderWidth,
-                isVisible: internalState.isLoading
-            )
-        })
+        VGenericButtonContentView(
+            foregroundColor: model.colors.foregroundColor(state: internalState),
+            foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
+            font: model.fonts.title,
+            content: content
+        )
             .padding(.horizontal, model.layout.contentMarginX)
             .padding(.vertical, model.layout.contentMarginY)
     }
@@ -105,9 +91,25 @@ extension VPrimaryButtonBordered {
 }
 
 // MARK:- Preview
-struct VPrimaryButtonBordered_Previews: PreviewProvider {
+struct VCircularButtonBordered_Previews: PreviewProvider {
+    private static let roundedModel: VCircularButtonBorderedModel = .init(
+        layout: .init(
+            frame: .rounded()
+        )
+    )
+    
+    private static var content: some View {
+        Image(systemName: "swift")
+            .resizable()
+            .frame(size: .init(width: 20, height: 20))
+            .foregroundColor(ColorBook.primaryInverted)
+    }
+    
     static var previews: some View {
-        VPrimaryButtonBordered(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
-            .padding()
+        HStack(content: {
+            VCircularButtonBordered(model: .init(), state: .enabled, action: {}, content: { content })
+            
+            VCircularButtonBordered(model: roundedModel, state: .enabled, action: {}, content: { content })
+        })
     }
 }
