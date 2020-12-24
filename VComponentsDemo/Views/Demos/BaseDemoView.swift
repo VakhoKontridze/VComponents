@@ -53,11 +53,9 @@ extension BaseDemoView {
                 case let controllerContent?: controllerContent()
                 }
                 
-                VSheet(.roundTop(), content: {
-                    VStack(content: {
-                        ScrollView(content: content)
-                        Spacer()
-                    })
+                ScrollView(content: {
+                    HomeSectionView(title: nil, content: content)
+                        .padding(.horizontal, 10)
                 })
             })
         })

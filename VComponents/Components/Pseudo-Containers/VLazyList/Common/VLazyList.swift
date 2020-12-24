@@ -10,22 +10,22 @@ import SwiftUI
 // MARK:- V Lazy List
 public struct VLazyList<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VLazyListModel
+    private let listType: VLazyListType
     private let content: () -> Content
     
     // MARK: Initializers
     public init(
-        model: VLazyListModel = .init(),
+        _ listType: VLazyListType = .default,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.listType = listType
         self.content = content
     }
 }
 
 public extension VLazyList {
     init<Data, ID, RowContent>(
-        model: VLazyListModel = .init(),
+        _ listType: VLazyListType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -37,7 +37,7 @@ public extension VLazyList {
             RowContent: View
     {
         self.init(
-            model: model,
+            listType,
             content: {
                 ForEach(data, id: id, content: { element in
                     rowContent(element)
@@ -49,7 +49,7 @@ public extension VLazyList {
 
 public extension VLazyList {
     init<Data, ID, RowContent>(
-        model: VLazyListModel = .init(),
+        _ listType: VLazyListType = .default,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -60,7 +60,7 @@ public extension VLazyList {
             RowContent: View
     {
         self.init(
-            model: model,
+            listType,
             data: data,
             id: \Data.Element.id,
             rowContent: rowContent
@@ -70,7 +70,7 @@ public extension VLazyList {
 
 public extension VLazyList {
     init<RowContent>(
-        model: VLazyListModel = .init(),
+        _ listType: VLazyListType = .default,
         range: Range<Int>,
         rowContent: @escaping (Int) -> RowContent
     )
@@ -78,7 +78,7 @@ public extension VLazyList {
             Content == ForEach<Range<Int>, Int, RowContent>
     {
         self.init(
-            model: model,
+            listType,
             content: {
                 ForEach(range, content: rowContent)
             }
@@ -89,20 +89,9 @@ public extension VLazyList {
 // MARK:- Body
 public extension VLazyList {
     @ViewBuilder var body: some View {
-        switch model.scrollDirection {
-        case .vertical(let horizontalAlignment):
-            ScrollView(.vertical, showsIndicators: model.showsIndicators, content: {
-                LazyVStack(alignment: horizontalAlignment, spacing: 0, content: {
-                    content()
-                })
-            })
-            
-        case .horizontal(let verticalAlignment):
-            ScrollView(.horizontal, showsIndicators: model.showsIndicators, content: {
-                LazyHStack(alignment: verticalAlignment, spacing: 0, content: {
-                    content()
-                })
-            })
+        switch listType {
+        case .vertical(let model): VLazyListVertical(model: model, content: content)
+        case .horizontal(let model): VLazyListHorizontal(model: model, content: content)
         }
     }
 }
@@ -110,33 +99,17 @@ public extension VLazyList {
 // MARK:- Preview
 struct VLazyListView_Previews: PreviewProvider {
     private static let range: Range<Int> = 1..<101
-    
-    private static let horizontalVM: VLazyListModel = .init(
-        scrollDirection: .horizontal(aligment: .center),
-        showsIndicators: true
-    )
-    
+
     static var previews: some View {
         VStack(content: {
-            HStack(content: {
-                VLazyList(range: range, rowContent: { number in
-                    Text(String(number))
-                })
-                
-                VLazyList(range: range, rowContent: { number in
-                    Text(String(number))
-                })
+            VLazyList(.vertical(), range: range, rowContent: { number in
+                Text(String(number)).padding(5)
             })
-            
-            HStack(content: {
-                VLazyList(model: horizontalVM, range: range, rowContent: { number in
-                    Text(String(number))
-                })
-                
-                VLazyList(model: horizontalVM, range: range, rowContent: { number in
-                    Text(String(number))
-                })
+
+            VLazyList(.horizontal(), range: range, rowContent: { number in
+                Text(String(number)).padding(5)
             })
         })
+            .padding()
     }
 }

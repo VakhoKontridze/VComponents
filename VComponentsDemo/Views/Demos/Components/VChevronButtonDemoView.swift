@@ -26,7 +26,7 @@ extension VChevronButtonDemoView {
     }
     
     private var controller: some View {
-        RowView(type: .controller, content: {
+        DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 isOn: .init(
                     get: { buttonState == .disabled },
@@ -39,19 +39,19 @@ extension VChevronButtonDemoView {
     
     private var filledButtons: some View {
         VStack(content: {
-            RowView(type: .titled("Filled Up"), content: {
+            DemoRowView(type: .titled("Filled Up"), content: {
                 VChevronButton(.filled(), direction: .up, state: buttonState, action: action)
             })
             
-            RowView(type: .titled("Filled Right"), content: {
+            DemoRowView(type: .titled("Filled Right"), content: {
                 VChevronButton(.filled(), direction: .right, state: buttonState, action: action)
             })
             
-            RowView(type: .titled("Filled Down"), content: {
+            DemoRowView(type: .titled("Filled Down"), content: {
                 VChevronButton(.filled(), direction: .down, state: buttonState, action: action)
             })
             
-            RowView(type: .titled("Filled Left"), content: {
+            DemoRowView(type: .titled("Filled Left"), content: {
                 VChevronButton(.filled(), direction: .left, state: buttonState, action: action)
             })
         })
@@ -59,19 +59,19 @@ extension VChevronButtonDemoView {
     
     private var plainButtons: some View {
         VStack(content: {
-            RowView(type: .titled("Plain Up"), content: {
+            DemoRowView(type: .titled("Plain Up"), content: {
                 VChevronButton(.plain(), direction: .up, state: buttonState, action: action)
             })
             
-            RowView(type: .titled("Plain Right"), content: {
+            DemoRowView(type: .titled("Plain Right"), content: {
                 VChevronButton(.plain(), direction: .right, state: buttonState, action: action)
             })
             
-            RowView(type: .titled("Plain Down"), content: {
+            DemoRowView(type: .titled("Plain Down"), content: {
                 VChevronButton(.plain(), direction: .down, state: buttonState, action: action)
             })
             
-            RowView(type: .titled("Plain Left"), content: {
+            DemoRowView(type: .titled("Plain Left"), content: {
                 VChevronButton(.plain(), direction: .left, state: buttonState, action: action)
             })
         })

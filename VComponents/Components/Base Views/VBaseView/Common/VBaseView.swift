@@ -17,7 +17,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     // MARK: Properties
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     
-    private let model: VBaseViewModel
+    private let viewType: VBaseViewType
     
     private let navigationBarTitle: String
     private let navigationBarLeadingItem: NavigationBarLeadingItem?
@@ -27,13 +27,13 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     
     // MARK: Initializers
     public init(
-        model: VBaseViewModel = .init(),
+        _ viewType: VBaseViewType = .default,
         title navigationBarTitle: String,
         leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
         trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.viewType = viewType
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = navigationBarLeadingItem
         self.navigationBarTrailingItem = navigationBarTrailingItem
@@ -43,12 +43,12 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 
 public extension VBaseView where NavigationBarLeadingItem == Never {
     init(
-        model: VBaseViewModel = .init(),
+        _ viewType: VBaseViewType = .default,
         title navigationBarTitle: String,
         trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.viewType = viewType
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
         self.navigationBarTrailingItem = navigationBarTrailingItem
@@ -58,12 +58,12 @@ public extension VBaseView where NavigationBarLeadingItem == Never {
 
 public extension VBaseView where NavigationBarTrailingItem == Never {
     init(
-        model: VBaseViewModel = .init(),
+        _ viewType: VBaseViewType = .default,
         title navigationBarTitle: String,
         leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.viewType = viewType
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = navigationBarLeadingItem
         self.navigationBarTrailingItem = nil
@@ -77,11 +77,11 @@ public extension VBaseView
         NavigationBarTrailingItem == Never
 {
     init(
-        model: VBaseViewModel = .init(),
+        _ viewType: VBaseViewType = .default,
         title navigationBarTitle: String,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.viewType = viewType
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
         self.navigationBarTrailingItem = nil
@@ -91,17 +91,41 @@ public extension VBaseView
 
 // MARK:- Body
 public extension VBaseView {
-    var body: some View {
+    @ViewBuilder var body: some View {
+        switch viewType {
+        case .centerTitle(let model):
+            baseViewFrame
+                .setUpBaseViewCenterNavigationBar(
+                    model: model,
+                    title: navigationBarTitle,
+                    leadingItem: navigationBarLeadingItem,
+                    trailingItem: navigationBarTrailingItem,
+                    onBack: back
+                )
+            
+        case .leadingTitle(let model):
+            baseViewFrame
+                .setUpBaseViewLeadingNavigationBar(
+                    model: model,
+                    title: navigationBarTitle,
+                    leadingItem: navigationBarLeadingItem,
+                    trailingItem: navigationBarTrailingItem,
+                    onBack: back
+                )
+        }
+    }
+    
+    private var baseViewFrame: some View {
         content()
-            .setUpBaseViewNavigationBar(
-                model: model,
-                title: navigationBarTitle,
-                leadingItem: navigationBarLeadingItem,
-                trailingItem: navigationBarTrailingItem
-            )
-            .addNavigationBarSwipeGesture(completion: {
-                withAnimation { presentationMode.wrappedValue.dismiss() }
-            })
+            .navigationBarBackButtonHidden(true)
+            .addNavigationBarSwipeGesture(completion: back)
+    }
+}
+
+// MARK:- Back
+private extension VBaseView {
+    func back() {
+        withAnimation { presentationMode.wrappedValue.dismiss() }
     }
 }
 

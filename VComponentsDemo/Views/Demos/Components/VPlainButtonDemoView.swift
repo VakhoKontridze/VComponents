@@ -34,7 +34,7 @@ extension VPlainButtonDemoView {
     }
     
     private var controller: some View {
-        RowView(type: .controller, content: {
+        DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 isOn: .init(
                     get: { buttonState == .disabled },
@@ -47,15 +47,15 @@ extension VPlainButtonDemoView {
     
     private var buttons: some View {
         VStack(content: {
-            RowView(type: .titled("Text"), content: {
+            DemoRowView(type: .titled("Text"), content: {
                 VPlainButton(state: buttonState, action: action, title: buttonTitle)
             })
             
-            RowView(type: .titled("Image"), content: {
+            DemoRowView(type: .titled("Image"), content: {
                 VPlainButton(state: buttonState, action: action, content: buttonContent)
             })
             
-            RowView(type: .titled("Image and Text"), content: {
+            DemoRowView(type: .titled("Image and Text"), content: {
                 VPlainButton(state: buttonState, action: action, content: {
                     VStack(spacing: 5, content: {
                         buttonContent()

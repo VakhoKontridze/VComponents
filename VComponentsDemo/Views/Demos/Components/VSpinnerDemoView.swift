@@ -24,11 +24,11 @@ extension VSpinnerDemoView {
     
     private var spinners: some View {
         VStack(content: {
-            RowView(type: .titled("Continous"), content: {
+            DemoRowView(type: .titled("Continous"), content: {
                 VSpinner(type: .continous())
             })
             
-            RowView(type: .titled("Dashed"), content: {
+            DemoRowView(type: .titled("Dashed"), content: {
                 VSpinner(type: .dashed())
             })
         })

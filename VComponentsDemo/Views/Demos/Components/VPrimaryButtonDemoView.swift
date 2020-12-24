@@ -36,7 +36,7 @@ extension VPrimaryButtonDemoView {
     }
     
     private var controller: some View {
-        RowView(type: .controller, content: {
+        DemoRowView(type: .controller, content: {
             HStack(content: {
                 Spacer()
                 
@@ -65,15 +65,15 @@ extension VPrimaryButtonDemoView {
 
     private var buttonsByType: some View {
         VStack(content: {
-            RowView(type: .titled("Compact Width"), content: {
+            DemoRowView(type: .titled("Compact Width"), content: {
                 VPrimaryButton(.compact(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            RowView(type: .titled("Fixed Width"), content: {
+            DemoRowView(type: .titled("Fixed Width"), content: {
                 VPrimaryButton(.fixed(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            RowView(type: .titled("Flexible Width"), content: {
+            DemoRowView(type: .titled("Flexible Width"), content: {
                 VPrimaryButton(.flexible(), state: buttonState, action: action, title: buttonTitle)
             })
         })
@@ -81,11 +81,11 @@ extension VPrimaryButtonDemoView {
     
     private var imageButtons: some View {
         VStack(content: {
-            RowView(type: .titled("Image"), content: {
+            DemoRowView(type: .titled("Image"), content: {
                 VPrimaryButton(.fixed(), state: buttonState, action: action, content: buttonContent)
             })
 
-            RowView(type: .titled("Image and Text"), content: {
+            DemoRowView(type: .titled("Image and Text"), content: {
                 VPrimaryButton(.fixed(), state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
@@ -112,7 +112,7 @@ extension VPrimaryButtonDemoView {
         )
         
         return VStack(content: {
-            RowView(type: .titled("Bordered"), content: {
+            DemoRowView(type: .titled("Bordered"), content: {
                 VPrimaryButton(.fixed(model), state: buttonState, action: action, content: buttonContent)
             })
         })

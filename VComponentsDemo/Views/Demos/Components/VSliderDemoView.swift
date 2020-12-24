@@ -39,7 +39,7 @@ extension VSliderDemoView {
     }
 
     private var controller: some View {
-        RowView(type: .controller, content: {
+        DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 isOn: .init(
                     get: { sliderState == .disabled },
@@ -52,11 +52,11 @@ extension VSliderDemoView {
 
     private var sliders: some View {
         VStack(content: {
-            RowView(type: .titled("Standard"), content: {
+            DemoRowView(type: .titled("Standard"), content: {
                 VSlider(.standard(), state: sliderState, value: $standardSliderValue)
             })
             
-            RowView(type: .titled("Plain"), content: {
+            DemoRowView(type: .titled("Plain"), content: {
                 VSlider(.plain(), state: sliderState, value: $plainSliderValue)
             })
         })
@@ -64,11 +64,11 @@ extension VSliderDemoView {
     
     private var steppedSliders: some View {
         VStack(content: {
-            RowView(type: .titled("Standard (Stepped)"), content: {
+            DemoRowView(type: .titled("Standard (Stepped)"), content: {
                 VSlider(.standard(), step: 0.1, state: sliderState, value: $steppedStandardSliderValue)
             })
             
-            RowView(type: .titled("Plain (Stepped)"), content: {
+            DemoRowView(type: .titled("Plain (Stepped)"), content: {
                 VSlider(.plain(), step: 0.1, state: sliderState, value: $steppedPlainSliderValue)
             })
         })
@@ -95,7 +95,7 @@ extension VSliderDemoView {
         )
         
         return VStack(content: {
-            RowView(type: .titled("Thumb Stroke"), content: {
+            DemoRowView(type: .titled("Thumb Stroke"), content: {
                 VSlider(.standard(model), state: sliderState, value: $strokeSliderValue)
             })
         })
@@ -109,11 +109,11 @@ extension VSliderDemoView {
         )
         
         return VStack(content: {
-            RowView(type: .titled("Animation"), content: {
+            DemoRowView(type: .titled("Animation"), content: {
                 VSlider(.plain(model), state: sliderState, value: $animatedSliderValue)
             })
             
-            RowView(type: .titled("Animation (Steped)"), content: {
+            DemoRowView(type: .titled("Animation (Steped)"), content: {
                 VSlider(.plain(model), step: 0.1, state: sliderState, value: $animatedSteppedSliderValue)
             })
         })

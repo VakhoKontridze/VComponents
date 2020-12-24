@@ -54,7 +54,7 @@ extension VToggleDemoView {
     }
     
     private var controller: some View {
-        RowView(type: .controller, content: {
+        DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 isOn: .init(
                     get: { toggleState == .disabled },
@@ -66,18 +66,18 @@ extension VToggleDemoView {
     }
     
     private var noContentToggle: some View {
-        RowView(type: .titled("No Content"), content: {
+        DemoRowView(type: .titled("No Content"), content: {
             VToggle(isOn: $noContentToggleIsOn, state: toggleState)
         })
     }
     
     private var standardIconToggles: some View {
         VStack(content: {
-            RowView(type: .titled("Standard (Text)"), content: {
+            DemoRowView(type: .titled("Standard (Text)"), content: {
                 VToggle(.standard(), isOn: $standardTitleToggleIsOn, state: toggleState, title: toggleTitle)
             })
             
-            RowView(type: .titled("Standard (Icon)"), content: {
+            DemoRowView(type: .titled("Standard (Icon)"), content: {
                 VToggle(.standard(), isOn: $standardIconToggleIsOn, state: toggleState, content: toggleContent)
             })
         })
@@ -85,11 +85,11 @@ extension VToggleDemoView {
     
     private var leftFlexibleContentToggles: some View {
         VStack(content: {
-            RowView(type: .titled("Setting (Text)"), content: {
+            DemoRowView(type: .titled("Setting (Text)"), content: {
                 VToggle(.setting(), isOn: $settingTitleToggleIsOn, state: toggleState, title: toggleTitle)
             })
             
-            RowView(type: .titled("Setting (Icon)"), content: {
+            DemoRowView(type: .titled("Setting (Icon)"), content: {
                 VToggle(.setting(), isOn: $settingIconToggleIsOn, state: toggleState, content: toggleContent)
             })
         })
@@ -102,7 +102,7 @@ extension VToggleDemoView {
             )
         )
         
-        return RowView(type: .titled("Non-interractive Content"), content: {
+        return DemoRowView(type: .titled("Non-interractive Content"), content: {
             VToggle(.standard(model), isOn: $nonInteractiveContentstandardIconToggleIsOn, state: toggleState, title: toggleTitle)
         })
     }
@@ -116,7 +116,7 @@ extension VToggleDemoView {
             )
         )
         
-        return RowView(type: .titled("Interractive Spacing"), content: {
+        return DemoRowView(type: .titled("Interractive Spacing"), content: {
             VToggle(.setting(model), isOn: $interactiveContentLeftFlexibleContentToggleIsOn, state: toggleState, title: toggleTitle)
         })
     }
@@ -132,7 +132,7 @@ extension VToggleDemoView {
         )
         
         return VStack(content: {
-            RowView(type: .titled("No Lowered Opacity when Pressed"), content: {
+            DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
                 VToggle(.standard(model), isOn: $noLoweredOpacityPressedContentToggleIsOn, state: toggleState, title: toggleTitle)
             })
         })
@@ -149,7 +149,7 @@ extension VToggleDemoView {
         )
         
         return VStack(content: {
-            RowView(type: .titled("No Lowered Opacity when Disabled"), content: {
+            DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
                 VToggle(.standard(model), isOn: $noLoweredOpacityDisabledContentToggleIsOn, state: toggleState, title: toggleTitle)
             })
         })

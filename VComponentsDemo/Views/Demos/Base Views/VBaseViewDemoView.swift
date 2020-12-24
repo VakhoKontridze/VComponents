@@ -17,10 +17,11 @@ struct VBaseViewDemoView: View {
     @State private var navigationBarHasLeadingItem: Bool = false
     @State private var navigationBarHasTrailingItem: Bool = false
     
-    var model: VBaseViewModel {
-        .init(layout: .init(
-            titleAlignment: navigationBarTitleIsLeading ? .leading : .center
-        ))
+    var viewType: VBaseViewType {
+        switch navigationBarTitleIsLeading {
+        case false: return .centerTitle()
+        case true: return .leadingTitle()
+        }
     }
 }
 
@@ -28,7 +29,7 @@ struct VBaseViewDemoView: View {
 extension VBaseViewDemoView {
     var body: some View {
         VBaseView(
-            model: model,
+            viewType,
             title: Self.navigationBarTitle,
             leadingItem: leadingItem,
             trailingItem: trailingItem,
@@ -41,11 +42,11 @@ extension VBaseViewDemoView {
             VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom)
             
             VStack(content: {
-                VToggle(isOn: $navigationBarTitleIsLeading, title: "Title is on left")
+                VToggle(.setting(), isOn: $navigationBarTitleIsLeading, title: "Title is on left")
                 
-                VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
+                VToggle(.setting(), isOn: $navigationBarHasLeadingItem, title: "Leading items")
                 
-                VToggle(isOn: $navigationBarHasTrailingItem, title: "Trailing items")
+                VToggle(.setting(), isOn: $navigationBarHasTrailingItem, title: "Trailing items")
             })
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(20)

@@ -34,7 +34,7 @@ extension VCircularButtonDemoView {
     }
     
     private var controller: some View {
-        RowView(type: .controller, content: {
+        DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 isOn: .init(
                     get: { buttonState == .disabled },
@@ -47,11 +47,11 @@ extension VCircularButtonDemoView {
     
     private var buttons: some View {
         VStack(content: {
-            RowView(type: .titled("Image"), content: {
+            DemoRowView(type: .titled("Image"), content: {
                 VCircularButton(state: buttonState, action: action, content: buttonContent)
             })
             
-            RowView(type: .titled("Text"), content: {
+            DemoRowView(type: .titled("Text"), content: {
                 VCircularButton(state: buttonState, action: action, content: {
                     Text(buttonTitle)
                 })

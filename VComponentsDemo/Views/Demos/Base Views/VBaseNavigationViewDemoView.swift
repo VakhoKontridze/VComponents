@@ -18,19 +18,38 @@ struct VBaseNavigationViewDemoView: View {
 extension VBaseNavigationViewDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            ZStack(content: {
-                VComponents.ColorBook.canvas.edgesIgnoringSafeArea(.bottom)
-                
-                Button("Start Demo", action: { SceneDelegate.setRootView(to: NavigationDemoView1()) })
+            ScrollView(showsIndicators: false, content: {
+                HomeSectionView(title: nil, content: {
+                    HomeRowView(
+                        title: "Filled",
+                        action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .filled())) }
+                    )
+                    
+                    HomeRowView(
+                        title: "Transparent",
+                        action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .transparent())) },
+                        showSeparator: false
+                    )
+                })
             })
+                .padding(10)
         })
+            .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
     }
 }
 
 // MARK:- Walkthrough
 private struct NavigationDemoView1: View {
+    private let type: VBaseNavigationViewType
+    
+    init(type: VBaseNavigationViewType) {
+        self.type = type
+    }
+}
+
+extension NavigationDemoView1 {
     var body: some View {
-        VBaseNavigationView(content: {
+        VBaseNavigationView(type, content: {
             VBaseView(title: "Home", content: {
                 NavigationDemoView(
                     color: .red,
@@ -117,7 +136,7 @@ extension NavigationDemoView {
         ZStack(content: {
             color
                 .opacity(0.25)
-                .edgesIgnoringSafeArea(.bottom)
+                .edgesIgnoringSafeArea(.all)
             
             Text(instruction)
                 .frame(maxHeight: .infinity, alignment: .top)

@@ -1,14 +1,14 @@
 //
-//  VBaseViewModel.swift
+//  VBaseViewCenterModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/22/20.
+//  Created by Vakhtang Kontridze on 12/24/20.
 //
 
 import SwiftUI
 
-// MARK:- V Base View Model
-public struct VBaseViewModel {
+// MARK:- V Base View Center Model
+public struct VBaseViewCenterModel {
     public let layout: Layout
     public let fonts: Fonts
     
@@ -22,34 +22,24 @@ public struct VBaseViewModel {
 }
 
 // MARK:- Layout
-extension VBaseViewModel {
+extension VBaseViewCenterModel {
     public struct Layout {
-        public let titleAlignment: TitleAlignment
         public let margin: CGFloat
         public let spacing: CGFloat
         var width: CGFloat { UIScreen.main.bounds.width - 2 * margin }
         
         public init(
-            titleAlignment: TitleAlignment = .leading,
             margin: CGFloat = 16,
             spacing: CGFloat = 10
         ) {
-            self.titleAlignment = titleAlignment
             self.margin = margin
             self.spacing = spacing
         }
     }
 }
 
-extension VBaseViewModel.Layout {
-    public enum TitleAlignment {
-        case leading
-        case center
-    }
-}
-
 // MARK:- Fonts
-extension VBaseViewModel {
+extension VBaseViewCenterModel {
     public struct Fonts {
         public let title: Font
         

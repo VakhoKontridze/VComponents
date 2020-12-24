@@ -1,5 +1,5 @@
 //
-//  RowView.swift
+//  DemoRowView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -8,8 +8,8 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Row View
-struct RowView<Content>: View where Content: View {
+// MARK:- Demo Row View
+struct DemoRowView<Content>: View where Content: View {
     // MARK: Properties
     private let rowType: RowType
     enum RowType {
@@ -39,7 +39,7 @@ struct RowView<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension RowView {
+extension DemoRowView {
     var body: some View {
         VStack(content: {
             VStack(spacing: 10, content: {
@@ -55,17 +55,15 @@ extension RowView {
             
             if rowType.isRow {
                 Divider()
-                    .padding(.horizontal, 10)
             }
         })
-            .padding(.horizontal, 10)
     }
 }
 
 // MARK:- Preview
-struct RowView_Previews: PreviewProvider {
+struct DemoRowView_Previews: PreviewProvider {
     static var previews: some View {
-        RowView(type: .titled("Title"), content: {
+        DemoRowView(type: .titled("Title"), content: {
             Color.pink
                 .frame(width: 100, height: 100)
         })

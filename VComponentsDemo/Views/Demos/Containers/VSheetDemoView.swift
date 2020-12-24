@@ -35,19 +35,19 @@ extension VSheetDemoView {
     
     private var sheet: some View {
         VStack(content: {
-            RowView(type: .titled("Round All"), content: {
+            DemoRowView(type: .titled("Round All"), content: {
                 VSheet(.roundAll(), content: sheeContent)
             })
             
-            RowView(type: .titled("Round Top"), content: {
+            DemoRowView(type: .titled("Round Top"), content: {
                 VSheet(.roundTop(), content: sheeContent)
             })
             
-            RowView(type: .titled("Round Bottom"), content: {
+            DemoRowView(type: .titled("Round Bottom"), content: {
                 VSheet(.roundBottom(), content: sheeContent)
             })
             
-            RowView(type: .titled("Round Custom"), content: {
+            DemoRowView(type: .titled("Round Custom"), content: {
                 VSheet(.roundCustom(.init(layout: .init(corners: [.topLeft, .bottomRight]))), content: sheeContent)
             })
         })
