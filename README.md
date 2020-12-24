@@ -33,7 +33,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2020 Dec 19. VToggle
 
-2020 Dec 19. VPlainButton
+2020 Dec 19. VPlainButton *(Standard)*
 
 2020 Dec 19. VLazyList *(Vertical)*
 

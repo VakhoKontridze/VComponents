@@ -29,7 +29,8 @@ struct VPlainButtonDemoView: View {
 extension VPlainButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            buttons
+            buttonsByContent
+            clippedHitBoxButton
         })
     }
     
@@ -45,7 +46,7 @@ extension VPlainButtonDemoView {
         })
     }
     
-    private var buttons: some View {
+    private var buttonsByContent: some View {
         VStack(content: {
             DemoRowView(type: .titled("Text"), content: {
                 VPlainButton(state: buttonState, action: action, title: buttonTitle)
@@ -62,6 +63,21 @@ extension VPlainButtonDemoView {
                         Text(buttonTitle)
                     })
                 })
+            })
+        })
+    }
+    
+    private var clippedHitBoxButton: some View {
+        let clippedHitBoxButtonModel: VPlainButtonStandardModel = .init(
+            layout: .init(
+                hitBoxExtendX: 0,
+                hitBoxExtendY: 0
+            )
+        )
+        
+        return VStack(content: {
+            DemoRowView(type: .titled("Clipped Hit Box"), content: {
+                VPlainButton(.standard(clippedHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }

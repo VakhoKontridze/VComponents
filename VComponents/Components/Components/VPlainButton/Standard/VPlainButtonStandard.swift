@@ -37,21 +37,27 @@ struct VPlainButtonStandard<Content>: View where Content: View {
 // MARK:- Body
 extension VPlainButtonStandard {
     var body: some View {
-        VInteractiveView(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
-            content()
-                .padding(.horizontal, model.layout.hitBoxExtendX)
-                .padding(.vertical, model.layout.hitBoxExtendY)
-                
-                // Text
-                .lineLimit(1)
-                .multilineTextAlignment(.center)
-                .truncationMode(.tail)
-                .foregroundColor(model.colors.foregroundColor(state: internalState))
-                .font(model.fonts.title)
-            
-                // Text + Image
-                .opacity(model.colors.foregroundOpacity(state: internalState))
-        })
+        VInteractiveView(
+            isDisabled: state.isDisabled,
+            action: action,
+            onPress: { isPressed = $0 },
+            content: { hitBox }
+        )
+    }
+    
+    private var hitBox: some View {
+        buttonView
+            .padding(.horizontal, model.layout.hitBoxExtendX)
+            .padding(.vertical, model.layout.hitBoxExtendY)
+    }
+    
+    private var buttonView: some View {
+        VGenericButtonContentView(
+            foregroundColor: model.colors.foregroundColor(state: internalState),
+            foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
+            font: model.fonts.title,
+            content: content
+        )
     }
 }
 

@@ -59,6 +59,9 @@ public extension VPlainButton {
 // MARK:- Preview
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButton(action: {}, title: "Press")
+        VStack(content: {
+            VPlainButtonStandard_Previews.previews
+        })
+            .padding()
     }
 }

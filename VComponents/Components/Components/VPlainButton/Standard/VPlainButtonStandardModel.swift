@@ -62,9 +62,9 @@ extension VPlainButtonStandardModel.Colors {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.PlainButton.Text.enabled,
-            pressed: Color = ColorBook.PlainButton.Text.pressed,
-            disabled: Color = ColorBook.PlainButton.Text.disabled,
+            enabled: Color = ColorBook.PlainButton.Foreground.enabled,
+            pressed: Color = ColorBook.PlainButton.Foreground.pressed,
+            disabled: Color = ColorBook.PlainButton.Foreground.disabled,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {

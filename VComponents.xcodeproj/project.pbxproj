@@ -788,8 +788,8 @@
 			children = (
 				7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */,
 				7A4D0C4B2594C91400108575 /* VSecondaryButtonDemoView.swift */,
-				7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */,
 				7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */,
+				7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */,
 				7ABEA9DB259326EA00A90B56 /* VChevronButtonDemoView.swift */,
 				7A00737E258E7C7A0003F0E9 /* VToggleDemoView.swift */,
 				7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */,
