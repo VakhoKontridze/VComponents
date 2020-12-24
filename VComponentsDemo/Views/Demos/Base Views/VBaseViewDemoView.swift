@@ -23,6 +23,13 @@ struct VBaseViewDemoView: View {
         case true: return .leadingTitle()
         }
     }
+    
+    private var plainButtonModel: VPlainButtonStandardModel = .init(
+        layout: .init(
+            hitBoxSpacingX: 0,
+            hitBoxSpacingY: 0
+        )
+    )
 }
 
 // MARK:- Body
@@ -58,7 +65,7 @@ extension VBaseViewDemoView {
     @ViewBuilder var leadingItem: some View {
         if navigationBarHasLeadingItem {
             HStack(content: {
-                Text("Item")
+                VPlainButton(.standard(plainButtonModel), action: {}, title: "Item")
             })
         }
     }
@@ -66,8 +73,8 @@ extension VBaseViewDemoView {
     @ViewBuilder var trailingItem: some View {
         if navigationBarHasTrailingItem {
             HStack(content: {
-                Text("Item 1")
-                Text("Item 2")
+                VPlainButton(.standard(plainButtonModel), action: {}, title: "Item 1")
+                VPlainButton(.standard(plainButtonModel), action: {}, title: "Item 2")
             })
         }
     }

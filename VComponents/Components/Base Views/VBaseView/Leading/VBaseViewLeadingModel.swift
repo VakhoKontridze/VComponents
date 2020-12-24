@@ -29,7 +29,7 @@ extension VBaseViewLeadingModel {
         var width: CGFloat { UIScreen.main.bounds.width - 2 * margin }
         
         public init(
-            margin: CGFloat = 16,
+            margin: CGFloat = 20,
             spacing: CGFloat = 10
         ) {
             self.margin = margin

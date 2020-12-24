@@ -145,8 +145,14 @@ extension NavigationDemoView {
                 .multilineTextAlignment(.center)
             
             switch action {
-            case .navigation(let desitnation): NavigationLink("Continue", destination: desitnation)
-            case .custom(let action): Button("Continue", action: action)
+            case .navigation(let desitnation):
+                NavigationLink(destination: desitnation, label: {
+                    VSecondaryButton(action: {}, title: "Continue")
+                        .allowsHitTesting(false)
+                })
+                
+            case .custom(let action):
+                VSecondaryButton(action: action, title: "Continue")
             }
         })
     }

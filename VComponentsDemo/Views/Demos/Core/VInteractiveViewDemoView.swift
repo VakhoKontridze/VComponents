@@ -20,7 +20,7 @@ struct VInteractiveViewDemoView: View {
         
         var title: String {
             switch self {
-            case .prompt: return "Please click on circle"
+            case .prompt: return "Click on circle"
             case .clicked: return "You clicked on circle"
             }
         }
