@@ -66,8 +66,10 @@ extension VToggleDemoView {
     }
     
     private var noContentToggle: some View {
-        DemoRowView(type: .titled("No Content"), content: {
-            VToggle(isOn: $noContentToggleIsOn, state: toggleState)
+        VStack(content: {
+            DemoRowView(type: .titled("No Content"), content: {
+                VToggle(isOn: $noContentToggleIsOn, state: toggleState)
+            })
         })
     }
     

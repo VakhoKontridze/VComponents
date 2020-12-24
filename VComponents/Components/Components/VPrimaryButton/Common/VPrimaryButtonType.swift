@@ -9,9 +9,8 @@ import Foundation
 
 // MARK:- V Primary Button Type
 public enum VPrimaryButtonType {
-    case compact(_ model: VPrimaryButtonCompactModel = .init())
-    case fixed(_ model: VPrimaryButtonFixedModel = .init())
-    case flexible(_ model: VPrimaryButtonFlexibleModel = .init())
+    case filled(_ model: VPrimaryButtonFilledModel = .init())
+    case bordered(_ model: VPrimaryButtonBorderedModel = .init())
     
-    public static let `default`: VPrimaryButtonType = .compact()
+    public static let `default`: VPrimaryButtonType = .filled()
 }

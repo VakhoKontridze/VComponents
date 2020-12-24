@@ -39,8 +39,8 @@ extension VPrimaryButtonLoaderView {
 struct VPrimaryButtonLoaderView_Previews: PreviewProvider {
     static var previews: some View {
         VPrimaryButtonLoaderView(
-            loaderColor: ColorBook.PrimaryButton.Text.enabled,
-            width: VPrimaryButtonCompactModel.Layout().loaderWidth,
+            loaderColor: ColorBook.PrimaryButtonFilled.Foreground.enabled,
+            width: VPrimaryButtonFilledModel.Layout().loaderWidth,
             isVisible: true
         )
     }

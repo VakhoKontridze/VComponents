@@ -25,8 +25,8 @@ extension ColorBook {
 
 // MARK:- Primary Button
 extension ColorBook {
-    public struct PrimaryButton {
-        public struct Text {
+    public struct PrimaryButtonFilled {
+        public struct Foreground {
             public static let enabled: Color = ColorBook.primaryInverted
             public static let pressed: Color = enabled
             public static let disabled: Color = enabled     // Opacity is applied
@@ -36,22 +36,48 @@ extension ColorBook {
         }
         
         public struct Fill {
-            public static let enabled: Color = .init("PrimaryButton.Fill.enabled")
-            public static let pressed: Color = .init("PrimaryButton.Fill.pressed")
-            public static let disabled: Color = .init("PrimaryButton.Fill.disabled")
+            public static let enabled: Color = .init("PrimaryButtonFilled.Fill.enabled")
+            public static let pressed: Color = .init("PrimaryButtonFilled.Fill.pressed")
+            public static let disabled: Color = .init("PrimaryButtonFilled.Fill.disabled")
+            public static let loading: Color = disabled
+            
+            private init() {}
+        }
+        
+        public static let loader: Color = Foreground.enabled
+        
+        private init() {}
+    }
+    
+    public struct PrimaryButtonBordered {
+        public struct Foreground {
+            public static let enabled: Color = PrimaryButtonFilled.Fill.enabled
+            public static let pressed: Color = enabled
+            public static let disabled: Color = enabled     // Opacity is applied
+            public static let loading: Color = enabled      // Opacity is applied
+            
+            private init() {}
+        }
+        
+        public struct Fill {
+            public static let enabled: Color = .init("PrimaryButtonBordered.Fill.enabled")
+            public static let pressed: Color = .init("PrimaryButtonBordered.Fill.pressed")
+            public static let disabled: Color = .init("PrimaryButtonBordered.Fill.disabled")
             public static let loading: Color = disabled
             
             private init() {}
         }
         
         public struct Border {
-            public static let enabled: Color = Fill.disabled
-            public static let pressed: Color = Fill.disabled
-            public static let disabled: Color = Fill.disabled
-            public static let loading: Color = Fill.disabled
+            public static let enabled: Color = PrimaryButtonFilled.Fill.enabled
+            public static let pressed: Color = PrimaryButtonFilled.Fill.disabled    // It's better this way
+            public static let disabled: Color = PrimaryButtonFilled.Fill.disabled
+            public static let loading: Color = PrimaryButtonFilled.Fill.loading
             
             private init() {}
         }
+        
+        public static let loader: Color = Foreground.enabled
         
         private init() {}
     }
@@ -76,15 +102,15 @@ extension ColorBook {
 extension ColorBook {
     public struct CircularButton {
         public struct Fill {
-            public static let enabled: Color = PrimaryButton.Fill.enabled
-            public static let pressed: Color = PrimaryButton.Fill.pressed
-            public static let disabled: Color = PrimaryButton.Fill.disabled
+            public static let enabled: Color = PrimaryButtonFilled.Fill.enabled
+            public static let pressed: Color = PrimaryButtonFilled.Fill.pressed
+            public static let disabled: Color = PrimaryButtonFilled.Fill.disabled
             
             private init() {}
         }
         
         public struct Text {
-            public static let enabled: Color = PrimaryButton.Text.enabled
+            public static let enabled: Color = PrimaryButtonFilled.Foreground.enabled
             public static let pressed: Color = enabled      // Opacity is applied
             public static let disabled: Color = enabled     // Opacity is applied
             
@@ -130,9 +156,9 @@ extension ColorBook {
 extension ColorBook {
     public struct Toggle {
         public struct Fill {
-            public static let enabledOn: Color = PrimaryButton.Fill.enabled
+            public static let enabledOn: Color = PrimaryButtonFilled.Fill.enabled
             public static let enabledOff: Color = .init("Toggle.Fill.enabledOff")
-            public static let disabledOn: Color = PrimaryButton.Fill.disabled
+            public static let disabledOn: Color = PrimaryButtonFilled.Fill.disabled
             public static let disabledOff: Color = .init("Toggle.Fill.disabledOff")
             
             private init() {}
@@ -175,9 +201,9 @@ extension ColorBook {
             private init() {}
         }
         
-        public struct ThumbStroke {
-            public static let enabled: Color = .init("Slider.ThumbStroke.enabled")
-            public static let disabled: Color = .init("Slider.ThumbStroke.disabled")
+        public struct thumbBorderWidth {
+            public static let enabled: Color = .init("Slider.thumbBorderWidth.enabled")
+            public static let disabled: Color = .init("Slider.thumbBorderWidth.disabled")
             
             private init() {}
         }

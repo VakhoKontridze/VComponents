@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonFlexibleModel.swift
+//  VPrimaryButtonFilledModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button Flexible Model
-public struct VPrimaryButtonFlexibleModel {
+// MARK:- V Primary Button Filled Model
+public struct VPrimaryButtonFilledModel {
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
@@ -25,54 +25,55 @@ public struct VPrimaryButtonFlexibleModel {
 }
 
 // MARK:- Layout
-extension VPrimaryButtonFlexibleModel {
+extension VPrimaryButtonFilledModel {
     public struct Layout {
         public let height: CGFloat
         public let cornerRadius: CGFloat
-        public let borderWidth: CGFloat
         public let contentInset: CGFloat
-        let loaderSpacing: CGFloat
+        public let loaderSpacing: CGFloat
         let loaderWidth: CGFloat
+        public let hitBoxExtendX: CGFloat
+        public let hitBoxExtendY: CGFloat
         
         public init(
             height: CGFloat = 50,
             cornerRadius: CGFloat = 20,
-            borderWidth: CGFloat = 0,
-            contentInset: CGFloat = 15
+            contentInset: CGFloat = 15,
+            loaderSpacing: CGFloat = 20,
+            hitBoxExtendX: CGFloat = 0,
+            hitBoxExtendY: CGFloat = 0
         ) {
             self.height = height
             self.cornerRadius = cornerRadius
-            self.borderWidth = borderWidth
             self.contentInset = contentInset
-            self.loaderSpacing = 20
+            self.loaderSpacing = loaderSpacing
             self.loaderWidth = 10
+            self.hitBoxExtendX = hitBoxExtendX
+            self.hitBoxExtendY = hitBoxExtendY
         }
     }
 }
 
 // MARK:- Colors
-extension VPrimaryButtonFlexibleModel {
+extension VPrimaryButtonFilledModel {
     public struct Colors {
         public let foreground: ForegroundColors
         public let fill: FillColors
-        public let border: BorderColors
         public let loader: LoaderColors
         
         public init(
             foreground: ForegroundColors = .init(),
             fill: FillColors = .init(),
-            border: BorderColors = .init(),
             loader: LoaderColors = .init()
         ) {
             self.foreground = foreground
             self.fill = fill
-            self.border = border
             self.loader = loader
         }
     }
 }
 
-extension VPrimaryButtonFlexibleModel.Colors {
+extension VPrimaryButtonFilledModel.Colors {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -82,10 +83,10 @@ extension VPrimaryButtonFlexibleModel.Colors {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.PrimaryButton.Text.enabled,
-            pressed: Color = ColorBook.PrimaryButton.Text.pressed,
-            disabled: Color = ColorBook.PrimaryButton.Text.disabled,
-            loading: Color = ColorBook.PrimaryButton.Text.loading,
+            enabled: Color = ColorBook.PrimaryButtonFilled.Foreground.enabled,
+            pressed: Color = ColorBook.PrimaryButtonFilled.Foreground.pressed,
+            disabled: Color = ColorBook.PrimaryButtonFilled.Foreground.disabled,
+            loading: Color = ColorBook.PrimaryButtonFilled.Foreground.loading,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
@@ -105,29 +106,10 @@ extension VPrimaryButtonFlexibleModel.Colors {
         public let loading: Color
         
         public init(
-            enabled: Color = ColorBook.PrimaryButton.Fill.enabled,
-            pressed: Color = ColorBook.PrimaryButton.Fill.pressed,
-            disabled: Color = ColorBook.PrimaryButton.Fill.disabled,
-            loading: Color = ColorBook.PrimaryButton.Fill.loading
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-            self.loading = loading
-        }
-    }
-    
-    public struct BorderColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        public let loading: Color
-        
-        public init(
-            enabled: Color = ColorBook.PrimaryButton.Border.enabled,
-            pressed: Color = ColorBook.PrimaryButton.Border.pressed,
-            disabled: Color = ColorBook.PrimaryButton.Border.disabled,
-            loading: Color = ColorBook.PrimaryButton.Border.loading
+            enabled: Color = ColorBook.PrimaryButtonFilled.Fill.enabled,
+            pressed: Color = ColorBook.PrimaryButtonFilled.Fill.pressed,
+            disabled: Color = ColorBook.PrimaryButtonFilled.Fill.disabled,
+            loading: Color = ColorBook.PrimaryButtonFilled.Fill.loading
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -140,7 +122,7 @@ extension VPrimaryButtonFlexibleModel.Colors {
         public let color: Color
         
         public init(
-            color: Color = ColorBook.PrimaryButton.Text.enabled
+            color: Color = ColorBook.PrimaryButtonFilled.loader
         ) {
             self.color = color
         }
@@ -148,7 +130,7 @@ extension VPrimaryButtonFlexibleModel.Colors {
 }
 
 // MARK:- Fonts
-extension VPrimaryButtonFlexibleModel {
+extension VPrimaryButtonFilledModel {
     public struct Fonts {
         public let title: Font
         
@@ -161,7 +143,7 @@ extension VPrimaryButtonFlexibleModel {
 }
 
 // MARK:- Mapping
-extension VPrimaryButtonFlexibleModel.Colors {
+extension VPrimaryButtonFilledModel.Colors {
     func foregroundColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
@@ -177,15 +159,6 @@ extension VPrimaryButtonFlexibleModel.Colors {
         case .pressed: return fill.pressed
         case .disabled: return fill.disabled
         case .loading: return fill.loading
-        }
-    }
-    
-    func borderColor(state: VPrimaryButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return border.enabled
-        case .pressed: return border.pressed
-        case .disabled: return border.disabled
-        case .loading: return border.loading
         }
     }
     

@@ -39,8 +39,8 @@ extension VPlainButtonStandard {
     var body: some View {
         VInteractiveView(isDisabled: state.isDisabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
-                .padding(.horizontal, model.layout.hitAreaOffsetHor)
-                .padding(.vertical, model.layout.hitAreaOffsetVer)
+                .padding(.horizontal, model.layout.hitBoxExtendX)
+                .padding(.vertical, model.layout.hitBoxExtendY)
                 
                 // Text
                 .lineLimit(1)

@@ -37,7 +37,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2020 Dec 18. VCircularButton
 
-2020 Dec 18. VPrimaryButton
+2020 Dec 18. VPrimaryButton *(Filled, Bordered)*
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)

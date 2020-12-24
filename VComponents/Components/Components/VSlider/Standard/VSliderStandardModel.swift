@@ -44,7 +44,7 @@ extension VSliderStandardModel {
         public let cornerRadius: CGFloat
         public let thumbDimension: CGFloat
         public let thumbCornerRadius: CGFloat
-        public let thumbStroke: CGFloat
+        public let thumbBorderWidth: CGFloat
         public let thumbShadowRadius: CGFloat
         
         public init(
@@ -52,7 +52,7 @@ extension VSliderStandardModel {
             cornerRadius: CGFloat = 5,
             thumbDimension: CGFloat = 20,
             thumbCornerRadius: CGFloat = 10,
-            thumbStroke: CGFloat = 0,
+            thumbBorderWidth: CGFloat = 0,
             thumbShadowRadius: CGFloat = 2
         ) {
             self.height = height
@@ -60,7 +60,7 @@ extension VSliderStandardModel {
             self.thumbDimension = thumbDimension
             self.thumbCornerRadius = thumbCornerRadius
             self.thumbShadowRadius = thumbShadowRadius
-            self.thumbStroke = thumbStroke
+            self.thumbBorderWidth = thumbBorderWidth
         }
     }
 }
@@ -161,8 +161,8 @@ extension VSliderStandardModel.Colors.Thumb {
         public let disabled: Color
 
         public init(
-            enabled: Color = ColorBook.Slider.ThumbStroke.enabled,
-            disabled: Color = ColorBook.Slider.ThumbStroke.disabled
+            enabled: Color = ColorBook.Slider.thumbBorderWidth.enabled,
+            disabled: Color = ColorBook.Slider.thumbBorderWidth.disabled
         ) {
             self.enabled = enabled
             self.disabled = disabled
@@ -206,7 +206,7 @@ extension VSliderStandardModel.Colors {
         }
     }
     
-    func thumbStroke(state: VSliderState) -> Color {
+    func thumbBorderWidth(state: VSliderState) -> Color {
         switch state {
         case .enabled: return thumb.stroke.enabled
         case .disabled: return thumb.stroke.disabled

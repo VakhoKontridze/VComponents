@@ -29,9 +29,10 @@ struct VPrimaryButtonDemoView: View {
 extension VPrimaryButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            buttonsByType
-            imageButtons
+            filledButton
             borderedButton
+            imageButtons
+            biggerHitBoxButton
         })
     }
     
@@ -63,18 +64,28 @@ extension VPrimaryButtonDemoView {
         })
     }
 
-    private var buttonsByType: some View {
+    private var filledButton: some View {
         VStack(content: {
-            DemoRowView(type: .titled("Compact Width"), content: {
-                VPrimaryButton(.compact(), state: buttonState, action: action, title: buttonTitle)
+            DemoRowView(type: .titled("Filled"), content: {
+                VPrimaryButton(.filled(), state: buttonState, action: action, title: buttonTitle)
+            })
+        })
+    }
+    
+    private var borderedButton: some View {
+        let dashedButtonModel: VPrimaryButtonBorderedModel = .init(
+            layout: .init(
+                borderType: .dashed()
+            )
+        )
+        
+        return VStack(content: {
+            DemoRowView(type: .titled("Bordered (Continous)"), content: {
+                VPrimaryButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            DemoRowView(type: .titled("Fixed Width"), content: {
-                VPrimaryButton(.fixed(), state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Flexible Width"), content: {
-                VPrimaryButton(.flexible(), state: buttonState, action: action, title: buttonTitle)
+            DemoRowView(type: .titled("Bordered (Dashed)"), content: {
+                VPrimaryButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }
@@ -82,11 +93,11 @@ extension VPrimaryButtonDemoView {
     private var imageButtons: some View {
         VStack(content: {
             DemoRowView(type: .titled("Image"), content: {
-                VPrimaryButton(.fixed(), state: buttonState, action: action, content: buttonContent)
+                VPrimaryButton(state: buttonState, action: action, content: buttonContent)
             })
 
             DemoRowView(type: .titled("Image and Text"), content: {
-                VPrimaryButton(.fixed(), state: buttonState, action: action, content: {
+                VPrimaryButton(state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
                         Text(buttonTitle)
@@ -96,24 +107,17 @@ extension VPrimaryButtonDemoView {
         })
     }
     
-    private var borderedButton: some View {
-        let model: VPrimaryButtonFixedModel = .init(
+    private var biggerHitBoxButton: some View {
+        let biggerHitBoxButtonModel: VPrimaryButtonFilledModel = .init(
             layout: .init(
-                borderWidth: 5
-            ),
-            colors: .init(
-                border: .init(
-                    enabled: Color(red: 49/255, green: 119/255, blue: 223/255, opacity: 1),
-                    pressed: Color(red: 19/255, green: 89/255, blue: 123/255, opacity: 1),
-                    disabled: Color(red: 49/255, green: 119/255, blue: 223/255, opacity: 0.25),
-                    loading: Color(red: 49/255, green: 119/255, blue: 223/255, opacity: 0.25)
-                )
+                hitBoxExtendX: 20,
+                hitBoxExtendY: 20
             )
         )
         
         return VStack(content: {
-            DemoRowView(type: .titled("Bordered"), content: {
-                VPrimaryButton(.fixed(model), state: buttonState, action: action, content: buttonContent)
+            DemoRowView(type: .titled("Bigger Hit Box"), content: {
+                VPrimaryButton(.filled(biggerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }

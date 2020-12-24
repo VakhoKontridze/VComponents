@@ -68,7 +68,7 @@ extension VSliderStandard {
                 .shadow(color: model.colors.thumbShadow(state: state), radius: model.layout.thumbShadowRadius)
             
             RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                .strokeBorder(model.colors.thumbStroke(state: state), lineWidth: model.layout.thumbStroke)
+                .strokeBorder(model.colors.thumbBorderWidth(state: state), lineWidth: model.layout.thumbBorderWidth)
         })
             .frame(dimension: model.layout.thumbDimension)
             .offset(x: thumbOffset(in: proxy), y: 0)
