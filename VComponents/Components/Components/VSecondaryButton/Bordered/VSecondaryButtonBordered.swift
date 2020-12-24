@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonBordered.swift
+//  VSecondaryButtonBordered.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button Bordered
-struct VPrimaryButtonBordered<Content>: View where Content: View {
+// MARK:- V Secondary Button Bordered
+struct VSecondaryButtonBordered<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VPrimaryButtonBorderedModel
+    private let model: VSecondaryButtonBorderedModel
     
-    private let state: VPrimaryButtonState
+    private let state: VSecondaryButtonState
     @State private var isPressed: Bool = false
-    private var internalState: VPrimaryButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VSecondaryButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -22,8 +22,8 @@ struct VPrimaryButtonBordered<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VPrimaryButtonBorderedModel,
-        state: VPrimaryButtonState,
+        model: VSecondaryButtonBorderedModel,
+        state: VSecondaryButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -35,7 +35,7 @@ struct VPrimaryButtonBordered<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VPrimaryButtonBordered {
+extension VSecondaryButtonBordered {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
@@ -59,26 +59,12 @@ extension VPrimaryButtonBordered {
     }
     
     private var buttonContent: some View {
-        HStack(alignment: .center, spacing: model.layout.loaderSpacing, content: {
-            VPrimaryButtonLoaderCompensatorView(
-                isVisible: internalState.isLoading,
-                width: model.layout.loaderWidth
-            )
-
-            VPrimaryButtonContentView(
-                foregroundColor: model.colors.foregroundColor(state: internalState),
-                foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-                font: model.fonts.title,
-                content: content
-            )
-                .frame(maxWidth: .infinity)
-
-            VPrimaryButtonLoaderView(
-                loaderColor: model.colors.loader.color,
-                width: model.layout.loaderWidth,
-                isVisible: internalState.isLoading
-            )
-        })
+        VPrimaryButtonContentView(
+            foregroundColor: model.colors.foregroundColor(state: internalState),
+            foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
+            font: model.fonts.title,
+            content: content
+        )
             .padding(.horizontal, model.layout.contentMarginX)
             .padding(.vertical, model.layout.contentMarginY)
     }
@@ -105,9 +91,9 @@ extension VPrimaryButtonBordered {
 }
 
 // MARK:- Preview
-struct VPrimaryButtonBordered_Previews: PreviewProvider {
+struct VSecondaryButtonBordered_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButtonBordered(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
+        VSecondaryButtonBordered(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
             .padding()
     }
 }

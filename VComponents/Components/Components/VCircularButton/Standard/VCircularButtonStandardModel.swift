@@ -115,20 +115,20 @@ extension VCircularButtonStandardModel.Colors {
         case .disabled: return foreground.disabled
         }
     }
-
-    func backgroundColor(state: VCircularButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return background.enabled
-        case .pressed: return background.pressed
-        case .disabled: return background.disabled
-        }
-    }
     
     func foregroundOpacity(state: VCircularButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return foreground.pressedOpacity
         case .disabled: return foreground.disabledOpacity
+        }
+    }
+
+    func backgroundColor(state: VCircularButtonInternalState) -> Color {
+        switch state {
+        case .enabled: return background.enabled
+        case .pressed: return background.pressed
+        case .disabled: return background.disabled
         }
     }
 }

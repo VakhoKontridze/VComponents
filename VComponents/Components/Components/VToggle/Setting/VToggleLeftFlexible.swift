@@ -60,7 +60,7 @@ extension VToggleSetting {
     private func toggle(with content: @escaping () -> Content) -> some View {
         HStack(alignment: .center, spacing: 0, content: {
             VToggleContentView(
-                opacity: model.colors.contentDisabledOpacity(state: internalState),
+                opacity: model.colors.foregroundOpacity(state: internalState),
                 isDisabled: contentIsDisabled,
                 isPressed: $isPressed,
                 action: action,

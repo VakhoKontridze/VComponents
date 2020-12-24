@@ -83,6 +83,86 @@ extension ColorBook {
     }
 }
 
+// MARK:- Secondary Button
+extension ColorBook {
+    public struct SecondaryButtonFilled {
+        public struct Foreground {
+            public static let enabled: Color = PrimaryButtonFilled.Foreground.enabled
+            public static let pressed: Color = PrimaryButtonFilled.Foreground.pressed
+            public static let disabled: Color = PrimaryButtonFilled.Foreground.disabled
+            
+            private init() {}
+        }
+        
+        public struct Fill {
+            public static let enabled: Color = PrimaryButtonFilled.Fill.enabled
+            public static let pressed: Color = PrimaryButtonFilled.Fill.pressed
+            public static let disabled: Color = PrimaryButtonFilled.Fill.disabled
+            
+            private init() {}
+        }
+        
+        private init() {}
+    }
+    
+    public struct SecondaryButtonBordered {
+        public struct Foreground {
+            public static let enabled: Color = PrimaryButtonBordered.Foreground.enabled
+            public static let pressed: Color = PrimaryButtonBordered.Foreground.pressed
+            public static let disabled: Color = PrimaryButtonBordered.Foreground.disabled
+            
+            private init() {}
+        }
+        
+        public struct Fill {
+            public static let enabled: Color = PrimaryButtonBordered.Fill.enabled
+            public static let pressed: Color = PrimaryButtonBordered.Fill.pressed
+            public static let disabled: Color = PrimaryButtonBordered.Fill.disabled
+            
+            private init() {}
+        }
+        
+        public struct Border {
+            public static let enabled: Color = PrimaryButtonBordered.Border.enabled
+            public static let pressed: Color = PrimaryButtonBordered.Border.pressed
+            public static let disabled: Color = PrimaryButtonBordered.Border.disabled
+            
+            private init() {}
+        }
+        
+        private init() {}
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // MARK:- Plain Button
 extension ColorBook {
     public struct PlainButton {

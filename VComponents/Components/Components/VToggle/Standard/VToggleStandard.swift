@@ -67,7 +67,7 @@ extension VToggleStandard {
             )
             
             VToggleContentView(
-                opacity: model.colors.contentDisabledOpacity(state: internalState),
+                opacity: model.colors.foregroundOpacity(state: internalState),
                 isDisabled: contentIsDisabled,
                 isPressed: $isPressed,
                 action: action,

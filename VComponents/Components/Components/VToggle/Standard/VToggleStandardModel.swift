@@ -140,6 +140,14 @@ extension VToggleStandardModel {
 
 // MARK:- Mapping
 extension VToggleStandardModel.Colors {
+    func foregroundOpacity(state: VToggleInternalState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
+        }
+    }
+    
     func fillColor(isOn: Bool, state: VToggleInternalState) -> Color {
         switch (isOn, state) {
         case (true, .enabled): return fill.enabledOn
@@ -159,14 +167,6 @@ extension VToggleStandardModel.Colors {
         case (false, .pressed): return thumb.enabledOff
         case (true, .disabled): return thumb.disabledOn
         case (false, .disabled): return thumb.disabledOff
-        }
-    }
-    
-    func contentDisabledOpacity(state: VToggleInternalState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
         }
     }
 }

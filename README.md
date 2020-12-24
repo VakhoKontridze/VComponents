@@ -15,13 +15,17 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
+2020 Dec 24. VSecondaryButton *(Filled, Bordered)*
+
+2020 Dec 24. VLazyList *(+ Horizontal)*
+
 2020 Dec 23. VChevronButton
 
-2020 Dec 22. VSheet
+2020 Dec 22. VSheet *(roundAll, roundTop, roundBottom, roundCustom)*
 
-2020 Dec 22. VBaseView
+2020 Dec 22. VBaseView *(centerTitle, leadingTitle)*
 
-2020 Dec 22. VBaseNavigationView
+2020 Dec 22. VBaseNavigationView *(filled, transparent)*
 
 2020 Dec 21. VInteractiveView
 
@@ -29,9 +33,9 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2020 Dec 19. VPlainButton
 
-2020 Dec 19. VLazyList
+2020 Dec 19. VLazyList *(Vertical)*
 
-2020 Dec 19. VSlider
+2020 Dec 19. VSlider *(Standard, Plain)*
 
 2020 Dec 18. VSpinner
 

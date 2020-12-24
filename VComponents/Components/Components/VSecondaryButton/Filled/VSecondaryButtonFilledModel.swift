@@ -1,14 +1,14 @@
 //
-//  VPrimaryButtonFilledModel.swift
+//  VSecondaryButtonFilledModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/21/20.
+//  Created by Vakhtang Kontridze on 12/24/20.
 //
 
 import SwiftUI
 
-// MARK:- V Primary Button Filled Model
-public struct VPrimaryButtonFilledModel {
+// MARK:- V Secondary Button Filled Model
+public struct VSecondaryButtonFilledModel {
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
@@ -25,32 +25,26 @@ public struct VPrimaryButtonFilledModel {
 }
 
 // MARK:- Layout
-extension VPrimaryButtonFilledModel {
+extension VSecondaryButtonFilledModel {
     public struct Layout {
         public let height: CGFloat
-        public let cornerRadius: CGFloat
+        let cornerRadius: CGFloat
         public let contentMarginX: CGFloat
         public let contentMarginY: CGFloat
-        public let loaderSpacing: CGFloat
-        let loaderWidth: CGFloat
         public let hitBoxExtendX: CGFloat
         public let hitBoxExtendY: CGFloat
         
         public init(
-            height: CGFloat = 50,
-            cornerRadius: CGFloat = 20,
-            contentMarginX: CGFloat = 15,
+            height: CGFloat = 32,
+            contentMarginX: CGFloat = 10,
             contentMarginY: CGFloat = 3,
-            loaderSpacing: CGFloat = 20,
-            hitBoxExtendX: CGFloat = 0,
-            hitBoxExtendY: CGFloat = 0
+            hitBoxExtendX: CGFloat = 10,
+            hitBoxExtendY: CGFloat = 10
         ) {
             self.height = height
-            self.cornerRadius = cornerRadius
+            self.cornerRadius = height / 2
             self.contentMarginX = contentMarginX
             self.contentMarginY = contentMarginY
-            self.loaderSpacing = loaderSpacing
-            self.loaderWidth = 10
             self.hitBoxExtendX = hitBoxExtendX
             self.hitBoxExtendY = hitBoxExtendY
         }
@@ -58,45 +52,39 @@ extension VPrimaryButtonFilledModel {
 }
 
 // MARK:- Colors
-extension VPrimaryButtonFilledModel {
+extension VSecondaryButtonFilledModel {
     public struct Colors {
         public let foreground: ForegroundColors
         public let fill: FillColors
-        public let loader: LoaderColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            fill: FillColors = .init(),
-            loader: LoaderColors = .init()
+            fill: FillColors = .init()
         ) {
             self.foreground = foreground
             self.fill = fill
-            self.loader = loader
         }
     }
 }
 
-extension VPrimaryButtonFilledModel.Colors {
+extension VSecondaryButtonFilledModel.Colors {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
-        public let loading: Color
         public let pressedOpacity: Double
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.PrimaryButtonFilled.Foreground.enabled,
-            pressed: Color = ColorBook.PrimaryButtonFilled.Foreground.pressed,
-            disabled: Color = ColorBook.PrimaryButtonFilled.Foreground.disabled,
-            loading: Color = ColorBook.PrimaryButtonFilled.Foreground.loading,
+            enabled: Color = ColorBook.SecondaryButtonFilled.Foreground.enabled,
+            pressed: Color = ColorBook.SecondaryButtonFilled.Foreground.pressed,
+            disabled: Color = ColorBook.SecondaryButtonFilled.Foreground.disabled,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
-            self.loading = loading
             self.pressedOpacity = pressedOpacity
             self.disabledOpacity = disabledOpacity
         }
@@ -106,34 +94,21 @@ extension VPrimaryButtonFilledModel.Colors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
-        public let loading: Color
         
         public init(
-            enabled: Color = ColorBook.PrimaryButtonFilled.Fill.enabled,
-            pressed: Color = ColorBook.PrimaryButtonFilled.Fill.pressed,
-            disabled: Color = ColorBook.PrimaryButtonFilled.Fill.disabled,
-            loading: Color = ColorBook.PrimaryButtonFilled.Fill.loading
+            enabled: Color = ColorBook.SecondaryButtonFilled.Fill.enabled,
+            pressed: Color = ColorBook.SecondaryButtonFilled.Fill.pressed,
+            disabled: Color = ColorBook.SecondaryButtonFilled.Fill.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
-            self.loading = loading
-        }
-    }
-    
-    public struct LoaderColors {
-        public let color: Color
-        
-        public init(
-            color: Color = ColorBook.PrimaryButtonFilled.loader
-        ) {
-            self.color = color
         }
     }
 }
 
 // MARK:- Fonts
-extension VPrimaryButtonFilledModel {
+extension VSecondaryButtonFilledModel {
     public struct Fonts {
         public let title: Font
         
@@ -146,31 +121,28 @@ extension VPrimaryButtonFilledModel {
 }
 
 // MARK:- Mapping
-extension VPrimaryButtonFilledModel.Colors {
-    func foregroundColor(state: VPrimaryButtonInternalState) -> Color {
+extension VSecondaryButtonFilledModel.Colors {
+    func foregroundColor(state: VSecondaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
         case .pressed: return foreground.pressed
         case .disabled: return foreground.disabled
-        case .loading: return foreground.loading
         }
     }
     
-    func foregroundOpacity(state: VPrimaryButtonInternalState) -> Double {
+    func foregroundOpacity(state: VSecondaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return foreground.pressedOpacity
         case .disabled: return foreground.disabledOpacity
-        case .loading: return foreground.disabledOpacity
         }
     }
 
-    func fillColor(state: VPrimaryButtonInternalState) -> Color {
+    func fillColor(state: VSecondaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return fill.enabled
         case .pressed: return fill.pressed
         case .disabled: return fill.disabled
-        case .loading: return fill.loading
         }
     }
 }
