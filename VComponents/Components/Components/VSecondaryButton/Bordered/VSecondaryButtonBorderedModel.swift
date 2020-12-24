@@ -68,16 +68,16 @@ extension VSecondaryButtonBorderedModel.Layout {
 extension VSecondaryButtonBorderedModel {
     public struct Colors {
         public let foreground: ForegroundColors
-        public let fill: FillColors
+        public let background: BackgroundColors
         public let border: BorderColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            fill: FillColors = .init(),
+            background: BackgroundColors = .init(),
             border: BorderColors = .init()
         ) {
             self.foreground = foreground
-            self.fill = fill
+            self.background = background
             self.border = border
         }
     }
@@ -106,15 +106,15 @@ extension VSecondaryButtonBorderedModel.Colors {
         }
     }
     
-    public struct FillColors {
+    public struct BackgroundColors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.SecondaryButtonBordered.Fill.enabled,
-            pressed: Color = ColorBook.SecondaryButtonBordered.Fill.pressed,
-            disabled: Color = ColorBook.SecondaryButtonBordered.Fill.disabled
+            enabled: Color = ColorBook.SecondaryButtonBordered.Background.enabled,
+            pressed: Color = ColorBook.SecondaryButtonBordered.Background.pressed,
+            disabled: Color = ColorBook.SecondaryButtonBordered.Background.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -170,11 +170,11 @@ extension VSecondaryButtonBorderedModel.Colors {
         }
     }
 
-    func fillColor(state: VSecondaryButtonInternalState) -> Color {
+    func backgroundColor(state: VSecondaryButtonInternalState) -> Color {
         switch state {
-        case .enabled: return fill.enabled
-        case .pressed: return fill.pressed
-        case .disabled: return fill.disabled
+        case .enabled: return background.enabled
+        case .pressed: return background.pressed
+        case .disabled: return background.disabled
         }
     }
     

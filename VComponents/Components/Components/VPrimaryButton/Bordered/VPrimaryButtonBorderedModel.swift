@@ -74,18 +74,18 @@ extension VPrimaryButtonBorderedModel.Layout {
 extension VPrimaryButtonBorderedModel {
     public struct Colors {
         public let foreground: ForegroundColors
-        public let fill: FillColors
+        public let background: BackgroundColors
         public let border: BorderColors
         public let loader: LoaderColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            fill: FillColors = .init(),
+            background: BackgroundColors = .init(),
             border: BorderColors = .init(),
             loader: LoaderColors = .init()
         ) {
             self.foreground = foreground
-            self.fill = fill
+            self.background = background
             self.border = border
             self.loader = loader
         }
@@ -118,17 +118,17 @@ extension VPrimaryButtonBorderedModel.Colors {
         }
     }
     
-    public struct FillColors {
+    public struct BackgroundColors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         public let loading: Color
         
         public init(
-            enabled: Color = ColorBook.PrimaryButtonBordered.Fill.enabled,
-            pressed: Color = ColorBook.PrimaryButtonBordered.Fill.pressed,
-            disabled: Color = ColorBook.PrimaryButtonBordered.Fill.disabled,
-            loading: Color = ColorBook.PrimaryButtonBordered.Fill.loading
+            enabled: Color = ColorBook.PrimaryButtonBordered.Background.enabled,
+            pressed: Color = ColorBook.PrimaryButtonBordered.Background.pressed,
+            disabled: Color = ColorBook.PrimaryButtonBordered.Background.disabled,
+            loading: Color = ColorBook.PrimaryButtonBordered.Background.loading
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -200,12 +200,12 @@ extension VPrimaryButtonBorderedModel.Colors {
         }
     }
 
-    func fillColor(state: VPrimaryButtonInternalState) -> Color {
+    func backgroundColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
-        case .enabled: return fill.enabled
-        case .pressed: return fill.pressed
-        case .disabled: return fill.disabled
-        case .loading: return fill.loading
+        case .enabled: return background.enabled
+        case .pressed: return background.pressed
+        case .disabled: return background.disabled
+        case .loading: return background.loading
         }
     }
     

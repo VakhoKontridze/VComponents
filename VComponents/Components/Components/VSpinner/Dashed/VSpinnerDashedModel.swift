@@ -24,7 +24,7 @@ extension VSpinnerDashedModel {
         public let spinner: Color
         
         public init(
-            spinner: Color = ColorBook.Spinner.fill
+            spinner: Color = ColorBook.Spinner.background
         ) {
             self.spinner = spinner
         }

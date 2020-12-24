@@ -85,7 +85,7 @@ extension VPrimaryButtonBordered {
     
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-            .foregroundColor(model.colors.fillColor(state: internalState))
+            .foregroundColor(model.colors.backgroundColor(state: internalState))
     }
     
     @ViewBuilder private var border: some View {

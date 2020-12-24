@@ -61,16 +61,16 @@ extension VPrimaryButtonFilledModel {
 extension VPrimaryButtonFilledModel {
     public struct Colors {
         public let foreground: ForegroundColors
-        public let fill: FillColors
+        public let background: Background
         public let loader: LoaderColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            fill: FillColors = .init(),
+            background: Background = .init(),
             loader: LoaderColors = .init()
         ) {
             self.foreground = foreground
-            self.fill = fill
+            self.background = background
             self.loader = loader
         }
     }
@@ -102,17 +102,17 @@ extension VPrimaryButtonFilledModel.Colors {
         }
     }
     
-    public struct FillColors {
+    public struct Background {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         public let loading: Color
         
         public init(
-            enabled: Color = ColorBook.PrimaryButtonFilled.Fill.enabled,
-            pressed: Color = ColorBook.PrimaryButtonFilled.Fill.pressed,
-            disabled: Color = ColorBook.PrimaryButtonFilled.Fill.disabled,
-            loading: Color = ColorBook.PrimaryButtonFilled.Fill.loading
+            enabled: Color = ColorBook.PrimaryButtonFilled.Background.enabled,
+            pressed: Color = ColorBook.PrimaryButtonFilled.Background.pressed,
+            disabled: Color = ColorBook.PrimaryButtonFilled.Background.disabled,
+            loading: Color = ColorBook.PrimaryButtonFilled.Background.loading
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -165,12 +165,12 @@ extension VPrimaryButtonFilledModel.Colors {
         }
     }
 
-    func fillColor(state: VPrimaryButtonInternalState) -> Color {
+    func backgroundColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
-        case .enabled: return fill.enabled
-        case .pressed: return fill.pressed
-        case .disabled: return fill.disabled
-        case .loading: return fill.loading
+        case .enabled: return background.enabled
+        case .pressed: return background.pressed
+        case .disabled: return background.disabled
+        case .loading: return background.loading
         }
     }
 }

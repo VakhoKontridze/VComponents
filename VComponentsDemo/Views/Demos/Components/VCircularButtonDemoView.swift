@@ -8,10 +8,10 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Circular Button Demo View
+// MARK:- V Square Button Demo View
 struct VSquareButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Circular Button"
+    static let navigationBarTitle: String = "Square Button"
     
     private let buttonTitle: String = "Press"
     
@@ -57,7 +57,7 @@ extension VSquareButtonDemoView {
         )
         
         return VStack(content: {
-            DemoRowView(type: .titled("Circle"), content: {
+            DemoRowView(type: .titled("Circular"), content: {
                 VSquareButton(state: buttonState, action: action, title: buttonTitle)
             })
             

@@ -35,10 +35,10 @@ public struct VChevronButtonFilledModel {
                     pressedOpacity: colors.foreground.pressedOpacity,
                     disabledOpacity: colors.foreground.disabledOpacity
                 ),
-                fill: .init(
-                    enabled: colors.fill.enabled,
-                    pressed: colors.fill.pressed,
-                    disabled: colors.fill.disabled
+                background: .init(
+                    enabled: colors.background.enabled,
+                    pressed: colors.background.pressed,
+                    disabled: colors.background.disabled
                 )
             )
         )
@@ -71,14 +71,14 @@ extension VChevronButtonFilledModel {
 extension VChevronButtonFilledModel {
     public struct Colors {
         public let foreground: ForegroundColors
-        public let fill: FillColors
+        public let background: BackgroundColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            fill: FillColors = .init()
+            background: BackgroundColors = .init()
         ) {
             self.foreground = foreground
-            self.fill = fill
+            self.background = background
         }
     }
 }
@@ -106,15 +106,15 @@ extension VChevronButtonFilledModel {
         }
     }
     
-    public struct FillColors {
+    public struct BackgroundColors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.ChevronButtonFilled.Fill.enabled,
-            pressed: Color = ColorBook.ChevronButtonFilled.Fill.pressed,
-            disabled: Color = ColorBook.ChevronButtonFilled.Fill.disabled
+            enabled: Color = ColorBook.ChevronButtonFilled.Background.enabled,
+            pressed: Color = ColorBook.ChevronButtonFilled.Background.pressed,
+            disabled: Color = ColorBook.ChevronButtonFilled.Background.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed

@@ -46,7 +46,7 @@ extension VSheetRoundCustomModel {
         public let background: Color
         
         public init(
-            background: Color = ColorBook.layer
+            background: Color = ColorBook.SheetCustom.background
         ) {
             self.background = background
         }

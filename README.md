@@ -15,6 +15,8 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
+2020 Dec 24. VSideBar *(standard)*
+
 2020 Dec 24. VSquareButton *(+ bordered)*
 
 2020 Dec 24. VSecondaryButton *(filled, bordered)*

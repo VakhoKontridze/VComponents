@@ -81,16 +81,16 @@ extension VSquareButtonBorderedModel.Layout {
 extension VSquareButtonBorderedModel {
     public struct Colors {
         public let foreground: ForegroundColors
-        public let fill: FillColors
+        public let background: BackgroundColors
         public let border: BorderColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            fill: FillColors = .init(),
+            background: BackgroundColors = .init(),
             border: BorderColors = .init()
         ) {
             self.foreground = foreground
-            self.fill = fill
+            self.background = background
             self.border = border
         }
     }
@@ -119,15 +119,15 @@ extension VSquareButtonBorderedModel {
         }
     }
     
-    public struct FillColors {
+    public struct BackgroundColors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.SquareButtonBordered.Fill.enabled,
-            pressed: Color = ColorBook.SquareButtonBordered.Fill.pressed,
-            disabled: Color = ColorBook.SquareButtonBordered.Fill.disabled
+            enabled: Color = ColorBook.SquareButtonBordered.Background.enabled,
+            pressed: Color = ColorBook.SquareButtonBordered.Background.pressed,
+            disabled: Color = ColorBook.SquareButtonBordered.Background.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -183,11 +183,11 @@ extension VSquareButtonBorderedModel.Colors {
         }
     }
 
-    func fillColor(state: VSquareButtonInternalState) -> Color {
+    func backgroundColor(state: VSquareButtonInternalState) -> Color {
         switch state {
-        case .enabled: return fill.enabled
-        case .pressed: return fill.pressed
-        case .disabled: return fill.disabled
+        case .enabled: return background.enabled
+        case .pressed: return background.pressed
+        case .disabled: return background.disabled
         }
     }
     

@@ -48,7 +48,7 @@ extension VSheetModel {
         public let background: Color
         
         public init(
-            background: Color = ColorBook.layer
+            background: Color = ColorBook.Sheet.background
         ) {
             self.background = background
         }

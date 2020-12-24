@@ -35,7 +35,7 @@ public struct VChevronButtonPlainModel {
                     pressedOpacity: colors.pressedOpacity,
                     disabledOpacity: colors.disabledOpacity
                 ),
-                fill: .init(
+                background: .init(
                     enabled: .clear,
                     pressed: .clear,
                     disabled: .clear

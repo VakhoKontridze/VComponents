@@ -70,14 +70,14 @@ extension VSquareButtonFilledModel.Layout {
 extension VSquareButtonFilledModel {
     public struct Colors {
         public let foreground: ForegroundColors
-        public let fill: FillColors
+        public let background: BackgroundColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            fill: FillColors = .init()
+            background: BackgroundColors = .init()
         ) {
             self.foreground = foreground
-            self.fill = fill
+            self.background = background
         }
     }
 }
@@ -105,15 +105,15 @@ extension VSquareButtonFilledModel {
         }
     }
     
-    public struct FillColors {
+    public struct BackgroundColors {
         public let enabled: Color
         public let pressed: Color
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.SquareButtonFilled.Fill.enabled,
-            pressed: Color = ColorBook.SquareButtonFilled.Fill.pressed,
-            disabled: Color = ColorBook.SquareButtonFilled.Fill.disabled
+            enabled: Color = ColorBook.SquareButtonFilled.Background.enabled,
+            pressed: Color = ColorBook.SquareButtonFilled.Background.pressed,
+            disabled: Color = ColorBook.SquareButtonFilled.Background.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -153,11 +153,11 @@ extension VSquareButtonFilledModel.Colors {
         }
     }
 
-    func fillColor(state: VSquareButtonInternalState) -> Color {
+    func backgroundColor(state: VSquareButtonInternalState) -> Color {
         switch state {
-        case .enabled: return fill.enabled
-        case .pressed: return fill.pressed
-        case .disabled: return fill.disabled
+        case .enabled: return background.enabled
+        case .pressed: return background.pressed
+        case .disabled: return background.disabled
         }
     }
 }

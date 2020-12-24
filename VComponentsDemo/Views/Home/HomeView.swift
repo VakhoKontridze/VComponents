@@ -42,7 +42,8 @@ extension HomeView {
                         })
                         
                         HomeSectionView(title: "Containers", content: {
-                            HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView(), showSeparator: false)
+                            HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView())
+                            HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView(), showSeparator: false)
                         })
                         
                         HomeSectionView(title: "Pseudo-Containers", content: {
