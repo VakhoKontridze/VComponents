@@ -31,22 +31,22 @@ extension VSecondaryButtonFilledModel {
         let cornerRadius: CGFloat
         public let contentMarginX: CGFloat
         public let contentMarginY: CGFloat
-        public let hitBoxExtendX: CGFloat
-        public let hitBoxExtendY: CGFloat
+        public let hitBoxSpacingX: CGFloat
+        public let hitBoxSpacingY: CGFloat
         
         public init(
             height: CGFloat = 32,
             contentMarginX: CGFloat = 10,
             contentMarginY: CGFloat = 3,
-            hitBoxExtendX: CGFloat = 10,
-            hitBoxExtendY: CGFloat = 10
+            hitBoxSpacingX: CGFloat = 10,
+            hitBoxSpacingY: CGFloat = 10
         ) {
             self.height = height
             self.cornerRadius = height / 2
             self.contentMarginX = contentMarginX
             self.contentMarginY = contentMarginY
-            self.hitBoxExtendX = hitBoxExtendX
-            self.hitBoxExtendY = hitBoxExtendY
+            self.hitBoxSpacingX = hitBoxSpacingX
+            self.hitBoxSpacingY = hitBoxSpacingY
         }
     }
 }

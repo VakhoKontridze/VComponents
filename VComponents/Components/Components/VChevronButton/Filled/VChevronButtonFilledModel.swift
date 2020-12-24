@@ -22,7 +22,10 @@ public struct VChevronButtonFilledModel {
         
         self.circularButtonModel = .init(
             layout: .init(
-                dimension: layout.dimension
+                frame: .circular,
+                dimension: layout.dimension,
+                hitBoxSpacingX: layout.hitBoxSpacingX,
+                hitBoxSpacingY: layout.hitBoxSpacingY
             ),
             colors: .init(
                 foreground: .init(
@@ -47,13 +50,19 @@ extension VChevronButtonFilledModel {
     public struct Layout {
         public let dimension: CGFloat
         public let iconDimension: CGFloat
+        public let hitBoxSpacingX: CGFloat
+        public let hitBoxSpacingY: CGFloat
         
         public init(
             dimension: CGFloat = 32,
-            iconDimension: CGFloat = 20
+            iconDimension: CGFloat = 20,
+            hitBoxSpacingX: CGFloat = 0,
+            hitBoxSpacingY: CGFloat = 0
         ) {
             self.dimension = dimension
             self.iconDimension = iconDimension
+            self.hitBoxSpacingX = hitBoxSpacingX
+            self.hitBoxSpacingY = hitBoxSpacingY
         }
     }
 }
@@ -83,9 +92,9 @@ extension VChevronButtonFilledModel {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.ChevronButton.Icon.enabled,
-            pressed: Color = ColorBook.ChevronButton.Icon.pressed,
-            disabled: Color = ColorBook.ChevronButton.Icon.disabled,
+            enabled: Color = ColorBook.ChevronButtonFilled.Foreground.enabled,
+            pressed: Color = ColorBook.ChevronButtonFilled.Foreground.pressed,
+            disabled: Color = ColorBook.ChevronButtonFilled.Foreground.disabled,
             pressedOpacity: Double = 1,
             disabledOpacity: Double = 0.5
         ) {
@@ -103,9 +112,9 @@ extension VChevronButtonFilledModel {
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.ChevronButton.Fill.enabled,
-            pressed: Color = ColorBook.ChevronButton.Fill.pressed,
-            disabled: Color = ColorBook.ChevronButton.Fill.disabled
+            enabled: Color = ColorBook.ChevronButtonFilled.Fill.enabled,
+            pressed: Color = ColorBook.ChevronButtonFilled.Fill.pressed,
+            disabled: Color = ColorBook.ChevronButtonFilled.Fill.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed

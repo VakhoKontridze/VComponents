@@ -22,6 +22,7 @@ extension VChevronButtonDemoView {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
             filledButtons
             plainButtons
+            largerHitBoxButton
         })
     }
     
@@ -73,6 +74,21 @@ extension VChevronButtonDemoView {
             
             DemoRowView(type: .titled("Plain Left"), content: {
                 VChevronButton(.plain(), direction: .left, state: buttonState, action: action)
+            })
+        })
+    }
+    
+    private var largerHitBoxButton: some View {
+        let largerHitBoxButtonModel: VChevronButtonFilledModel = .init(
+            layout: .init(
+                hitBoxSpacingX: 5,
+                hitBoxSpacingY: 5
+            )
+        )
+        
+        return VStack(content: {
+            DemoRowView(type: .titled("Larger Hit Box"), content: {
+                VChevronButton(.filled(largerHitBoxButtonModel), direction: .left, state: buttonState, action: action)
             })
         })
     }

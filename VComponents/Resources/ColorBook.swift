@@ -200,45 +200,18 @@ extension ColorBook {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // MARK:- Chevron Button
 extension ColorBook {
-    public struct ChevronButton {
+    public struct ChevronButtonFilled {
         public struct Fill {
-            public static let enabled: Color = .init("ChevronButton.Fill.enabled")
-            public static let pressed: Color = .init("ChevronButton.Fill.pressed")
-            public static let disabled: Color = .init("ChevronButton.Fill.disabled")
+            public static let enabled: Color = .init("ChevronButtonFilled.Fill.enabled")
+            public static let pressed: Color = .init("ChevronButtonFilled.Fill.pressed")
+            public static let disabled: Color = .init("ChevronButtonFilled.Fill.disabled")
             
             private init() {}
         }
         
-        public struct Icon {
+        public struct Foreground {
             public static let enabled: Color = ColorBook.primary
             public static let pressed: Color = enabled      // Opacity is applied
             public static let disabled: Color = enabled     // Opacity is applied
@@ -246,8 +219,12 @@ extension ColorBook {
             private init() {}
         }
         
-        public struct IconPlain {
-            public static let enabled: Color = .init("ChevronButton.IconPlain.enabled")
+        private init() {}
+    }
+    
+    public struct ChevronButtonPlain {
+        public struct Foreground {
+            public static let enabled: Color = .init("ChevronButtonPlain.Foreground.enabled")
             public static let pressed: Color = enabled      // Opacity is applied
             public static let disabled: Color = enabled     // Opacity is applied
             
@@ -257,6 +234,33 @@ extension ColorBook {
         private init() {}
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // MARK:- Toggle
 extension ColorBook {

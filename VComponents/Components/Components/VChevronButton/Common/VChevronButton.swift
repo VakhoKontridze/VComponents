@@ -86,6 +86,10 @@ private extension VChevronButtonDirection {
 // MARK:- Preview
 struct VChevronButton_Previews: PreviewProvider {
     static var previews: some View {
-        VChevronButton(direction: .left, action: {})
+        VStack(content: {
+            VChevronButtonFilled_Previews.previews
+            VChevronButtonPlain_Previews.previews
+        })
+            .padding()
     }
 }

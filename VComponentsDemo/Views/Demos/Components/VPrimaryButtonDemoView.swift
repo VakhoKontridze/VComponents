@@ -110,8 +110,8 @@ extension VPrimaryButtonDemoView {
     private var biggerHitBoxButton: some View {
         let biggerHitBoxButtonModel: VPrimaryButtonFilledModel = .init(
             layout: .init(
-                hitBoxExtendX: 20,
-                hitBoxExtendY: 20
+                hitBoxSpacingX: 20,
+                hitBoxSpacingY: 20
             )
         )
         

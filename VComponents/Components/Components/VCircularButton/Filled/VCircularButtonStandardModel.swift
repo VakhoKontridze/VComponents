@@ -32,16 +32,16 @@ extension VCircularButtonFilledModel {
         public let dimension: CGFloat
         public let contentMarginX: CGFloat
         public let contentMarginY: CGFloat
-        public let hitBoxExtendX: CGFloat
-        public let hitBoxExtendY: CGFloat
+        public let hitBoxSpacingX: CGFloat
+        public let hitBoxSpacingY: CGFloat
         
         public init(
             frame: Frame = .circular,
             dimension: CGFloat = 56,
             contentMarginX: CGFloat = 3,
             contentMarginY: CGFloat = 3,
-            hitBoxExtendX: CGFloat = 0,
-            hitBoxExtendY: CGFloat = 0
+            hitBoxSpacingX: CGFloat = 0,
+            hitBoxSpacingY: CGFloat = 0
         ) {
             self.frame = frame
             self.cornerRadius = {
@@ -53,8 +53,8 @@ extension VCircularButtonFilledModel {
             self.dimension = dimension
             self.contentMarginX = contentMarginX
             self.contentMarginY = contentMarginY
-            self.hitBoxExtendX = hitBoxExtendX
-            self.hitBoxExtendY = hitBoxExtendY
+            self.hitBoxSpacingX = hitBoxSpacingX
+            self.hitBoxSpacingY = hitBoxSpacingY
         }
     }
 }

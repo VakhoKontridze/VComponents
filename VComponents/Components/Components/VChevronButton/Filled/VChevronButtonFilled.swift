@@ -41,6 +41,8 @@ extension VChevronButtonFilled {
         VCircularButton(.filled(model.circularButtonModel), state: state, action: action, content: {
             content()
                 .frame(dimension: model.layout.iconDimension)
+                .padding(.horizontal, model.layout.hitBoxSpacingX)
+                .padding(.vertical, model.layout.hitBoxSpacingY)
         })
     }
 }

@@ -35,8 +35,8 @@ extension VPrimaryButtonBorderedModel {
         public let contentMarginY: CGFloat
         public let loaderSpacing: CGFloat
         let loaderWidth: CGFloat
-        public let hitBoxExtendX: CGFloat
-        public let hitBoxExtendY: CGFloat
+        public let hitBoxSpacingX: CGFloat
+        public let hitBoxSpacingY: CGFloat
         
         public init(
             height: CGFloat = 50,
@@ -46,8 +46,8 @@ extension VPrimaryButtonBorderedModel {
             contentMarginX: CGFloat = 15,
             contentMarginY: CGFloat = 3,
             loaderSpacing: CGFloat = 20,
-            hitBoxExtendX: CGFloat = 0,
-            hitBoxExtendY: CGFloat = 0
+            hitBoxSpacingX: CGFloat = 0,
+            hitBoxSpacingY: CGFloat = 0
         ) {
             self.height = height
             self.cornerRadius = cornerRadius
@@ -57,8 +57,8 @@ extension VPrimaryButtonBorderedModel {
             self.contentMarginY = contentMarginY
             self.loaderSpacing = loaderSpacing
             self.loaderWidth = 10
-            self.hitBoxExtendX = hitBoxExtendX
-            self.hitBoxExtendY = hitBoxExtendY
+            self.hitBoxSpacingX = hitBoxSpacingX
+            self.hitBoxSpacingY = hitBoxSpacingY
         }
     }
 }

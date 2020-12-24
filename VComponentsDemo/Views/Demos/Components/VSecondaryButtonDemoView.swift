@@ -94,8 +94,8 @@ extension VSecondaryButtonDemoView {
     private var clippedHitBoxButton: some View {
         let clippedHitBoxButtonModel: VSecondaryButtonFilledModel = .init(
             layout: .init(
-                hitBoxExtendX: 0,
-                hitBoxExtendY: 0
+                hitBoxSpacingX: 0,
+                hitBoxSpacingY: 0
             )
         )
         

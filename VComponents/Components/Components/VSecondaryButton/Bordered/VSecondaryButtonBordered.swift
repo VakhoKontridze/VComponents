@@ -47,8 +47,8 @@ extension VSecondaryButtonBordered {
     
     private var hitBox: some View {
         buttonView
-            .padding(.horizontal, model.layout.hitBoxExtendX)
-            .padding(.vertical, model.layout.hitBoxExtendY)
+            .padding(.horizontal, model.layout.hitBoxSpacingX)
+            .padding(.vertical, model.layout.hitBoxSpacingY)
     }
     
     private var buttonView: some View {

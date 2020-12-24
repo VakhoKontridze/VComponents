@@ -27,15 +27,15 @@ public struct VPlainButtonStandardModel {
 // MARK:- Layout
 extension VPlainButtonStandardModel {
     public struct Layout {
-        public let hitBoxExtendX: CGFloat
-        public let hitBoxExtendY: CGFloat
+        public let hitBoxSpacingX: CGFloat
+        public let hitBoxSpacingY: CGFloat
         
         public init(
-            hitBoxExtendX: CGFloat = 15,
-            hitBoxExtendY: CGFloat = 5
+            hitBoxSpacingX: CGFloat = 15,
+            hitBoxSpacingY: CGFloat = 5
         ) {
-            self.hitBoxExtendX = hitBoxExtendX
-            self.hitBoxExtendY = hitBoxExtendY
+            self.hitBoxSpacingX = hitBoxSpacingX
+            self.hitBoxSpacingY = hitBoxSpacingY
         }
     }
 }
