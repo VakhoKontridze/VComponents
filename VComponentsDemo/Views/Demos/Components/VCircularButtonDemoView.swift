@@ -33,7 +33,7 @@ extension VSquareButtonDemoView {
             filledButton
             borderedButton
             imageButtons
-            biggerHitBoxButton
+            largerHitBoxButton
         })
     }
     
@@ -110,8 +110,8 @@ extension VSquareButtonDemoView {
         })
     }
     
-    private var biggerHitBoxButton: some View {
-        let biggerHitBoxButtonModel: VSquareButtonFilledModel = .init(
+    private var largerHitBoxButton: some View {
+        let largerHitBoxButtonModel: VSquareButtonFilledModel = .init(
             layout: .init(
                 hitBoxSpacingX: 20,
                 hitBoxSpacingY: 20
@@ -119,8 +119,8 @@ extension VSquareButtonDemoView {
         )
         
         return VStack(content: {
-            DemoRowView(type: .titled("Bigger Hit Box"), content: {
-                VSquareButton(.filled(biggerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
+            DemoRowView(type: .titled("Larger Hit Box"), content: {
+                VSquareButton(.filled(largerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }

@@ -61,6 +61,7 @@ extension HomeView {
                     })
                         .padding(.horizontal, 10)
                 })
+                    .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
             })
                 .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
         })

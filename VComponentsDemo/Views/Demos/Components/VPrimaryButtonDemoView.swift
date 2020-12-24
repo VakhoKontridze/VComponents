@@ -32,7 +32,7 @@ extension VPrimaryButtonDemoView {
             filledButton
             borderedButton
             imageButtons
-            biggerHitBoxButton
+            largerHitBoxButton
         })
     }
     
@@ -107,8 +107,8 @@ extension VPrimaryButtonDemoView {
         })
     }
     
-    private var biggerHitBoxButton: some View {
-        let biggerHitBoxButtonModel: VPrimaryButtonFilledModel = .init(
+    private var largerHitBoxButton: some View {
+        let largerHitBoxButtonModel: VPrimaryButtonFilledModel = .init(
             layout: .init(
                 hitBoxSpacingX: 20,
                 hitBoxSpacingY: 20
@@ -116,8 +116,8 @@ extension VPrimaryButtonDemoView {
         )
         
         return VStack(content: {
-            DemoRowView(type: .titled("Bigger Hit Box"), content: {
-                VPrimaryButton(.filled(biggerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
+            DemoRowView(type: .titled("Larger Hit Box"), content: {
+                VPrimaryButton(.filled(largerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }
