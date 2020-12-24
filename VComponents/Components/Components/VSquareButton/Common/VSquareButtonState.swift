@@ -1,5 +1,5 @@
 //
-//  VCircularButtonState.swift
+//  VSquareButtonState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK:- V Circular Button State
-public enum VCircularButtonState: Int, CaseIterable {
+// MARK:- V Square Button State
+public enum VSquareButtonState: Int, CaseIterable {
     case enabled
     case disabled
     
@@ -20,13 +20,13 @@ public enum VCircularButtonState: Int, CaseIterable {
     }
 }
 
-// MARK:- V Circular Button Internal State
-enum VCircularButtonInternalState {
+// MARK:- V Square Button Internal State
+enum VSquareButtonInternalState {
     case enabled
     case pressed
     case disabled
     
-    init(state: VCircularButtonState, isPressed: Bool) {
+    init(state: VSquareButtonState, isPressed: Bool) {
         if isPressed && !state.isDisabled {
             self = .pressed
         } else {

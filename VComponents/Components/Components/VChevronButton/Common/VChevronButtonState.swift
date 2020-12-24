@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK:- V Chevron Button State
-public typealias VChevronButtonState = VCircularButtonState
+public typealias VChevronButtonState = VSquareButtonState

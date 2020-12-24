@@ -136,7 +136,7 @@ extension ColorBook {
 
 // MARK:- Circular Button
 extension ColorBook {
-    public struct CircularButtonFilled {
+    public struct SquareButtonFilled {
         public struct Foreground {
             public static let enabled: Color = PrimaryButtonFilled.Foreground.enabled
             public static let pressed: Color = PrimaryButtonFilled.Foreground.enabled
@@ -156,7 +156,7 @@ extension ColorBook {
         private init() {}
     }
     
-    public struct CircularButtonBordered {
+    public struct SquareButtonBordered {
         public struct Foreground {
             public static let enabled: Color = PrimaryButtonBordered.Foreground.enabled
             public static let pressed: Color = PrimaryButtonBordered.Foreground.pressed

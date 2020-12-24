@@ -1,5 +1,5 @@
 //
-//  VCircularButtonBordered.swift
+//  VSquareButtonBordered.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- V Circular Button Standard
-struct VCircularButtonBordered<Content>: View where Content: View {
+// MARK:- V Square Button Bordered
+struct VSquareButtonBordered<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VCircularButtonBorderedModel
+    private let model: VSquareButtonBorderedModel
     
-    private let state: VCircularButtonState
+    private let state: VSquareButtonState
     @State private var isPressed: Bool = false
-    private var internalState: VCircularButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VSquareButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -22,8 +22,8 @@ struct VCircularButtonBordered<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VCircularButtonBorderedModel,
-        state: VCircularButtonState,
+        model: VSquareButtonBorderedModel,
+        state: VSquareButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -35,7 +35,7 @@ struct VCircularButtonBordered<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VCircularButtonBordered {
+extension VSquareButtonBordered {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
@@ -91,8 +91,8 @@ extension VCircularButtonBordered {
 }
 
 // MARK:- Preview
-struct VCircularButtonBordered_Previews: PreviewProvider {
-    private static let roundedModel: VCircularButtonBorderedModel = .init(
+struct VSquareButtonBordered_Previews: PreviewProvider {
+    private static let roundedModel: VSquareButtonBorderedModel = .init(
         layout: .init(
             frame: .rounded()
         )
@@ -107,9 +107,9 @@ struct VCircularButtonBordered_Previews: PreviewProvider {
     
     static var previews: some View {
         HStack(content: {
-            VCircularButtonBordered(model: .init(), state: .enabled, action: {}, content: { content })
+            VSquareButtonBordered(model: .init(), state: .enabled, action: {}, content: { content })
             
-            VCircularButtonBordered(model: roundedModel, state: .enabled, action: {}, content: { content })
+            VSquareButtonBordered(model: roundedModel, state: .enabled, action: {}, content: { content })
         })
     }
 }

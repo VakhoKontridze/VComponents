@@ -1,5 +1,5 @@
 //
-//  VCircularButton.swift
+//  VSquareButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,18 +7,18 @@
 
 import SwiftUI
 
-// MARK:- V Circular Button
-public struct VCircularButton<Content>: View where Content: View {
+// MARK:- V Square Button
+public struct VSquareButton<Content>: View where Content: View {
     // MARK: Properties
-    private let buttonType: VCircularButtonType
-    private let state: VCircularButtonState
+    private let buttonType: VSquareButtonType
+    private let state: VSquareButtonState
     private let action: () -> Void
     private let content: () -> Content
 
     // MARK: Initializers
     public init(
-        _ buttonType: VCircularButtonType = .default,
-        state: VCircularButtonState = .enabled,
+        _ buttonType: VSquareButtonType = .default,
+        state: VSquareButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -29,10 +29,10 @@ public struct VCircularButton<Content>: View where Content: View {
     }
 }
 
-extension VCircularButton where Content == Text {
+extension VSquareButton where Content == Text {
     public init<S>(
-        _ buttonType: VCircularButtonType = .default,
-        state: VCircularButtonState = .enabled,
+        _ buttonType: VSquareButtonType = .default,
+        state: VSquareButtonState = .enabled,
         action: @escaping () -> Void,
         title: S
     )
@@ -48,21 +48,21 @@ extension VCircularButton where Content == Text {
 }
 
 // MARK:- Body
-public extension VCircularButton {
+public extension VSquareButton {
     @ViewBuilder var body: some View {
         switch buttonType {
-        case .filled(let model): VCircularButtonFilled(model: model, state: state, action: action, content: content)
-        case .bordered(let model): VCircularButtonBordered(model: model, state: state, action: action, content: content)
+        case .filled(let model): VSquareButtonFilled(model: model, state: state, action: action, content: content)
+        case .bordered(let model): VSquareButtonBordered(model: model, state: state, action: action, content: content)
         }
     }
 }
 
 // MARK:- Preview
-struct VCircularButton_Previews: PreviewProvider {
+struct VSquareButton_Previews: PreviewProvider {
     static var previews: some View {
         VStack(content: {
-            VCircularButtonFilled_Previews.previews
-            VCircularButtonBordered_Previews.previews
+            VSquareButtonFilled_Previews.previews
+            VSquareButtonBordered_Previews.previews
         })
             .padding()
     }

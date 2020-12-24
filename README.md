@@ -15,7 +15,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
-2020 Dec 24. VCircularButton *(+ Bordered)*
+2020 Dec 24. VSquareButton *(+ Bordered)*
 
 2020 Dec 24. VSecondaryButton *(Filled, Bordered)*
 
@@ -41,7 +41,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2020 Dec 18. VSpinner
 
-2020 Dec 18. VCircularButton *(Filled)*
+2020 Dec 18. VSquareButton *(Filled)*
 
 2020 Dec 18. VPrimaryButton *(Filled, Bordered)*
 

@@ -1,5 +1,5 @@
 //
-//  VCircularButtonBorderedModel.swift
+//  VSquareButtonBorderedModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Circular Button Standard Model
-public struct VCircularButtonBorderedModel {
+// MARK:- V Square Button Bordered Model
+public struct VSquareButtonBorderedModel {
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
@@ -25,7 +25,7 @@ public struct VCircularButtonBorderedModel {
 }
 
 // MARK:- Layout
-extension VCircularButtonBorderedModel {
+extension VSquareButtonBorderedModel {
     public struct Layout {
         public let frame: Frame
         let cornerRadius: CGFloat
@@ -65,7 +65,7 @@ extension VCircularButtonBorderedModel {
     }
 }
 
-extension VCircularButtonBorderedModel.Layout {
+extension VSquareButtonBorderedModel.Layout {
     public enum Frame {
         case circular
         case rounded(radius: CGFloat = 16)
@@ -78,7 +78,7 @@ extension VCircularButtonBorderedModel.Layout {
 }
 
 // MARK:- Colors
-extension VCircularButtonBorderedModel {
+extension VSquareButtonBorderedModel {
     public struct Colors {
         public let foreground: ForegroundColors
         public let fill: FillColors
@@ -96,7 +96,7 @@ extension VCircularButtonBorderedModel {
     }
 }
 
-extension VCircularButtonBorderedModel {
+extension VSquareButtonBorderedModel {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -105,9 +105,9 @@ extension VCircularButtonBorderedModel {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.CircularButtonBordered.Foreground.enabled,
-            pressed: Color = ColorBook.CircularButtonBordered.Foreground.pressed,
-            disabled: Color = ColorBook.CircularButtonBordered.Foreground.disabled,
+            enabled: Color = ColorBook.SquareButtonBordered.Foreground.enabled,
+            pressed: Color = ColorBook.SquareButtonBordered.Foreground.pressed,
+            disabled: Color = ColorBook.SquareButtonBordered.Foreground.disabled,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
@@ -125,9 +125,9 @@ extension VCircularButtonBorderedModel {
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.CircularButtonBordered.Fill.enabled,
-            pressed: Color = ColorBook.CircularButtonBordered.Fill.pressed,
-            disabled: Color = ColorBook.CircularButtonBordered.Fill.disabled
+            enabled: Color = ColorBook.SquareButtonBordered.Fill.enabled,
+            pressed: Color = ColorBook.SquareButtonBordered.Fill.pressed,
+            disabled: Color = ColorBook.SquareButtonBordered.Fill.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -141,9 +141,9 @@ extension VCircularButtonBorderedModel {
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.CircularButtonBordered.Border.enabled,
-            pressed: Color = ColorBook.CircularButtonBordered.Border.pressed,
-            disabled: Color = ColorBook.CircularButtonBordered.Border.disabled
+            enabled: Color = ColorBook.SquareButtonBordered.Border.enabled,
+            pressed: Color = ColorBook.SquareButtonBordered.Border.pressed,
+            disabled: Color = ColorBook.SquareButtonBordered.Border.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -153,7 +153,7 @@ extension VCircularButtonBorderedModel {
 }
 
 // MARK:- Fonts
-extension VCircularButtonBorderedModel {
+extension VSquareButtonBorderedModel {
     public struct Fonts {
         public let title: Font
         
@@ -166,8 +166,8 @@ extension VCircularButtonBorderedModel {
 }
 
 // MARK:- Mapping
-extension VCircularButtonBorderedModel.Colors {
-    func foregroundColor(state: VCircularButtonInternalState) -> Color {
+extension VSquareButtonBorderedModel.Colors {
+    func foregroundColor(state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
         case .pressed: return foreground.pressed
@@ -175,7 +175,7 @@ extension VCircularButtonBorderedModel.Colors {
         }
     }
     
-    func foregroundOpacity(state: VCircularButtonInternalState) -> Double {
+    func foregroundOpacity(state: VSquareButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return foreground.pressedOpacity
@@ -183,7 +183,7 @@ extension VCircularButtonBorderedModel.Colors {
         }
     }
 
-    func fillColor(state: VCircularButtonInternalState) -> Color {
+    func fillColor(state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return fill.enabled
         case .pressed: return fill.pressed
@@ -191,7 +191,7 @@ extension VCircularButtonBorderedModel.Colors {
         }
     }
     
-    func borderColor(state: VCircularButtonInternalState) -> Color {
+    func borderColor(state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return border.enabled
         case .pressed: return border.pressed

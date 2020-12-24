@@ -11,7 +11,7 @@ import SwiftUI
 public struct VChevronButtonFilledModel {
     public let layout: Layout
     public let colors: Colors
-    let circularButtonModel: VCircularButtonFilledModel
+    let squareButtonModel: VSquareButtonFilledModel
     
     public init(
         layout: Layout = .init(),
@@ -20,7 +20,7 @@ public struct VChevronButtonFilledModel {
         self.layout = layout
         self.colors = colors
         
-        self.circularButtonModel = .init(
+        self.squareButtonModel = .init(
             layout: .init(
                 frame: .circular,
                 dimension: layout.dimension,

@@ -1,5 +1,5 @@
 //
-//  VCircularButtonFilledModel.swift
+//  VSquareButtonFilledModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Circular Button Standard Model
-public struct VCircularButtonFilledModel {
+// MARK:- V Square Button Standard Model
+public struct VSquareButtonFilledModel {
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
@@ -25,7 +25,7 @@ public struct VCircularButtonFilledModel {
 }
 
 // MARK:- Layout
-extension VCircularButtonFilledModel {
+extension VSquareButtonFilledModel {
     public struct Layout {
         public let frame: Frame
         let cornerRadius: CGFloat
@@ -59,7 +59,7 @@ extension VCircularButtonFilledModel {
     }
 }
 
-extension VCircularButtonFilledModel.Layout {
+extension VSquareButtonFilledModel.Layout {
     public enum Frame {
         case circular
         case rounded(radius: CGFloat = 16)
@@ -67,7 +67,7 @@ extension VCircularButtonFilledModel.Layout {
 }
 
 // MARK:- Colors
-extension VCircularButtonFilledModel {
+extension VSquareButtonFilledModel {
     public struct Colors {
         public let foreground: ForegroundColors
         public let fill: FillColors
@@ -82,7 +82,7 @@ extension VCircularButtonFilledModel {
     }
 }
 
-extension VCircularButtonFilledModel {
+extension VSquareButtonFilledModel {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -91,9 +91,9 @@ extension VCircularButtonFilledModel {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.CircularButtonFilled.Foreground.enabled,
-            pressed: Color = ColorBook.CircularButtonFilled.Foreground.pressed,
-            disabled: Color = ColorBook.CircularButtonFilled.Foreground.disabled,
+            enabled: Color = ColorBook.SquareButtonFilled.Foreground.enabled,
+            pressed: Color = ColorBook.SquareButtonFilled.Foreground.pressed,
+            disabled: Color = ColorBook.SquareButtonFilled.Foreground.disabled,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
@@ -111,9 +111,9 @@ extension VCircularButtonFilledModel {
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.CircularButtonFilled.Fill.enabled,
-            pressed: Color = ColorBook.CircularButtonFilled.Fill.pressed,
-            disabled: Color = ColorBook.CircularButtonFilled.Fill.disabled
+            enabled: Color = ColorBook.SquareButtonFilled.Fill.enabled,
+            pressed: Color = ColorBook.SquareButtonFilled.Fill.pressed,
+            disabled: Color = ColorBook.SquareButtonFilled.Fill.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -123,7 +123,7 @@ extension VCircularButtonFilledModel {
 }
 
 // MARK:- Fonts
-extension VCircularButtonFilledModel {
+extension VSquareButtonFilledModel {
     public struct Fonts {
         public let title: Font
         
@@ -136,8 +136,8 @@ extension VCircularButtonFilledModel {
 }
 
 // MARK:- Mapping
-extension VCircularButtonFilledModel.Colors {
-    func foregroundColor(state: VCircularButtonInternalState) -> Color {
+extension VSquareButtonFilledModel.Colors {
+    func foregroundColor(state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
         case .pressed: return foreground.pressed
@@ -145,7 +145,7 @@ extension VCircularButtonFilledModel.Colors {
         }
     }
     
-    func foregroundOpacity(state: VCircularButtonInternalState) -> Double {
+    func foregroundOpacity(state: VSquareButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return foreground.pressedOpacity
@@ -153,7 +153,7 @@ extension VCircularButtonFilledModel.Colors {
         }
     }
 
-    func fillColor(state: VCircularButtonInternalState) -> Color {
+    func fillColor(state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return fill.enabled
         case .pressed: return fill.pressed

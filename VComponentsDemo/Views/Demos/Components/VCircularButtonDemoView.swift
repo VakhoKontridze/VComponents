@@ -1,5 +1,5 @@
 //
-//  VCircularButtonDemoView.swift
+//  VSquareButtonDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -9,7 +9,7 @@ import SwiftUI
 import VComponents
 
 // MARK:- V Circular Button Demo View
-struct VCircularButtonDemoView: View {
+struct VSquareButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Circular Button"
     
@@ -22,11 +22,11 @@ struct VCircularButtonDemoView: View {
             .foregroundColor(ColorBook.primaryInverted)
     }
 
-    @State private var buttonState: VCircularButtonState = .enabled
+    @State private var buttonState: VSquareButtonState = .enabled
 }
 
 // MARK:- Body
-extension VCircularButtonDemoView {
+extension VSquareButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
             shapeButtons
@@ -50,7 +50,7 @@ extension VCircularButtonDemoView {
     }
     
     private var shapeButtons: some View {
-        let roundedButtonModel: VCircularButtonFilledModel = .init(
+        let roundedButtonModel: VSquareButtonFilledModel = .init(
             layout: .init(
                 frame: .rounded()
             )
@@ -58,11 +58,11 @@ extension VCircularButtonDemoView {
         
         return VStack(content: {
             DemoRowView(type: .titled("Circle"), content: {
-                VCircularButton(state: buttonState, action: action, title: buttonTitle)
+                VSquareButton(state: buttonState, action: action, title: buttonTitle)
             })
             
             DemoRowView(type: .titled("Rounded"), content: {
-                VCircularButton(.filled(roundedButtonModel), state: buttonState, action: action, title: buttonTitle)
+                VSquareButton(.filled(roundedButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }
@@ -70,13 +70,13 @@ extension VCircularButtonDemoView {
     private var filledButton: some View {
         VStack(content: {
             DemoRowView(type: .titled("Filled"), content: {
-                VCircularButton(.filled(), state: buttonState, action: action, title: buttonTitle)
+                VSquareButton(.filled(), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }
     
     private var borderedButton: some View {
-        let dashedButtonModel: VCircularButtonBorderedModel = .init(
+        let dashedButtonModel: VSquareButtonBorderedModel = .init(
             layout: .init(
                 borderType: .dashed()
             )
@@ -84,11 +84,11 @@ extension VCircularButtonDemoView {
         
         return VStack(content: {
             DemoRowView(type: .titled("Continous Border"), content: {
-                VCircularButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
+                VSquareButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
             })
             
             DemoRowView(type: .titled("Dashed Border"), content: {
-                VCircularButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
+                VSquareButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }
@@ -96,11 +96,11 @@ extension VCircularButtonDemoView {
     private var imageButtons: some View {
         VStack(content: {
             DemoRowView(type: .titled("Image"), content: {
-                VCircularButton(state: buttonState, action: action, content: buttonContent)
+                VSquareButton(state: buttonState, action: action, content: buttonContent)
             })
 
             DemoRowView(type: .titled("Image and Text"), content: {
-                VCircularButton(state: buttonState, action: action, content: {
+                VSquareButton(state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
                         Text("A")
@@ -111,7 +111,7 @@ extension VCircularButtonDemoView {
     }
     
     private var biggerHitBoxButton: some View {
-        let biggerHitBoxButtonModel: VCircularButtonFilledModel = .init(
+        let biggerHitBoxButtonModel: VSquareButtonFilledModel = .init(
             layout: .init(
                 hitBoxSpacingX: 20,
                 hitBoxSpacingY: 20
@@ -120,22 +120,22 @@ extension VCircularButtonDemoView {
         
         return VStack(content: {
             DemoRowView(type: .titled("Bigger Hit Box"), content: {
-                VCircularButton(.filled(biggerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
+                VSquareButton(.filled(biggerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }
 }
 
 // MARK:- Action
-private extension VCircularButtonDemoView {
+private extension VSquareButtonDemoView {
     func action() {
         print("Pressed")
     }
 }
 
 // MARK: Preview
-struct VCircularButtonDemoView_Previews: PreviewProvider {
+struct VSquareButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VCircularButtonDemoView()
+        VSquareButtonDemoView()
     }
 }

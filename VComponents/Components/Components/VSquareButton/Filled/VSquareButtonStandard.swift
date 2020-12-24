@@ -1,5 +1,5 @@
 //
-//  VCircularButtonFilled.swift
+//  VSquareButtonFilled.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- V Circular Button Standard
-struct VCircularButtonFilled<Content>: View where Content: View {
+// MARK:- V Square Button Standard
+struct VSquareButtonFilled<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VCircularButtonFilledModel
+    private let model: VSquareButtonFilledModel
     
-    private let state: VCircularButtonState
+    private let state: VSquareButtonState
     @State private var isPressed: Bool = false
-    private var internalState: VCircularButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VSquareButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -22,8 +22,8 @@ struct VCircularButtonFilled<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VCircularButtonFilledModel,
-        state: VCircularButtonState,
+        model: VSquareButtonFilledModel,
+        state: VSquareButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -35,7 +35,7 @@ struct VCircularButtonFilled<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VCircularButtonFilled {
+extension VSquareButtonFilled {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
@@ -75,8 +75,8 @@ extension VCircularButtonFilled {
 }
 
 // MARK:- Preview
-struct VCircularButtonFilled_Previews: PreviewProvider {
-    private static let roundedModel: VCircularButtonFilledModel = .init(
+struct VSquareButtonFilled_Previews: PreviewProvider {
+    private static let roundedModel: VSquareButtonFilledModel = .init(
         layout: .init(
             frame: .rounded()
         )
@@ -91,9 +91,9 @@ struct VCircularButtonFilled_Previews: PreviewProvider {
     
     static var previews: some View {
         HStack(content: {
-            VCircularButtonFilled(model: .init(), state: .enabled, action: {}, content: { content })
+            VSquareButtonFilled(model: .init(), state: .enabled, action: {}, content: { content })
             
-            VCircularButtonFilled(model: roundedModel, state: .enabled, action: {}, content: { content })
+            VSquareButtonFilled(model: roundedModel, state: .enabled, action: {}, content: { content })
         })
     }
 }
