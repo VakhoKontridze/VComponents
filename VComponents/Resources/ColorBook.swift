@@ -330,7 +330,7 @@ extension ColorBook {
 extension ColorBook {
     public struct SideBarStandard {
         public static let background: Color = ColorBook.Sheet.background
-        public static let blinder: Color = .init("SideBarStandard.Blinder")
+        public static let blinding: Color = .init("SideBarStandard.Blinding")
         
         private init() {}
     }

@@ -97,7 +97,7 @@ extension VSideBarStandardModel {
         
         public init(
             background: Color = ColorBook.SideBarStandard.background,
-            blinding: Color = ColorBook.SideBarStandard.blinder
+            blinding: Color = ColorBook.SideBarStandard.blinding
         ) {
             self.background = background
             self.blinding = blinding
