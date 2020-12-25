@@ -64,7 +64,7 @@ extension HomeRowView {
         HStack(content: {
             Text(title)
                 .font(.body)
-                .foregroundColor(VComponents.ColorBook.primary)
+                .foregroundColor(ColorBook.primary)
             
             Spacer()
             

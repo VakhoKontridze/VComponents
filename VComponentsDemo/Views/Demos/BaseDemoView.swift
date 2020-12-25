@@ -60,7 +60,7 @@ extension BaseDemoView {
                     .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
             })
         })
-            .background(VComponents.ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
+            .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
     }
 }
 

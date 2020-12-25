@@ -29,7 +29,7 @@ extension VSheetDemoView {
                     sheet
                 })
             })
-                .background(VComponents.ColorBook.canvas)
+                .background(ColorBook.canvas)
         })
     }
     

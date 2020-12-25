@@ -19,15 +19,12 @@ extension VSideBarDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             VStack(spacing: 20, content: {
-                Text([
-                    "Side Bar should only ever be used on a root view",
-                    "Continue?"
-                ].joined(separator: "\n\n"))
+                Text("Side Bar should only ever be used on a root view. Continue?")
                     .multilineTextAlignment(.center)
                 
                 VSecondaryButton(
                     action: { SceneDelegate.setRootView(to: VSideBarWalkthroughView()) },
-                    title: "Continue"
+                    title: "Start Demo"
                 )
             })
                 .padding(20)
@@ -37,13 +34,13 @@ extension VSideBarDemoView {
 
 // MARK:- V Side Bar Walkthrough View
 private struct VSideBarWalkthroughView: View {
-    static let navigationBarTitle: String = VSideBarDemoView.navigationBarTitle
+    static let navigationBarTitle: String = ""
     @State private var isPresented: Bool = false
 }
 
 private extension VSideBarWalkthroughView {
     var body: some View {
-        VBaseNavigationView(content: {
+        VNavigationView(content: {
             VBaseView(title: Self.navigationBarTitle, leadingItem: sidBarIcon, content: {
                 ZStack(content: {
                     Color.pink
@@ -78,7 +75,7 @@ private extension VSideBarWalkthroughView {
             Text("\(num)")
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)
-                .background(VComponents.ColorBook.accent.opacity(0.75))
+                .background(ColorBook.accent.opacity(0.75))
                 .cornerRadius(5)
                 .padding(.vertical, 3)
         })

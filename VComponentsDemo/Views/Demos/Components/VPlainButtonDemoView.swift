@@ -19,7 +19,7 @@ struct VPlainButtonDemoView: View {
         Image(systemName: "swift")
             .resizable()
             .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(VComponents.ColorBook.accent)
+            .foregroundColor(ColorBook.accent)
     }
     
     @State private var buttonState: VPlainButtonState = .enabled

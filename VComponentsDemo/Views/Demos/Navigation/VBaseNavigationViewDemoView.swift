@@ -1,5 +1,5 @@
 //
-//  VBaseNavigationViewDemoView.swift
+//  VNavigationViewDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -8,28 +8,33 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Base Navigation View and Base View Demo View
-struct VBaseNavigationViewDemoView: View {
+// MARK:- V Navigation View and Base View Demo View
+struct VNavigationViewDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Base Navigation View"
+    static let navigationBarTitle: String = "Navigation View"
 }
 
 // MARK:- Body
-extension VBaseNavigationViewDemoView {
+extension VNavigationViewDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            ScrollView(showsIndicators: false, content: {
-                HomeSectionView(title: nil, content: {
-                    HomeRowView(
-                        title: "Filled",
-                        action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .filled())) }
-                    )
-                    
-                    HomeRowView(
-                        title: "Transparent",
-                        action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .transparent())) },
-                        showSeparator: false
-                    )
+            VStack(spacing: 20, content: {
+                Text("Navigation View should only ever be used on a root view. Continue?")
+                    .multilineTextAlignment(.center)
+                
+                ScrollView(showsIndicators: false, content: {
+                    HomeSectionView(title: nil, content: {
+                        HomeRowView(
+                            title: "Filled",
+                            action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .filled())) }
+                        )
+                        
+                        HomeRowView(
+                            title: "Transparent",
+                            action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .transparent())) },
+                            showSeparator: false
+                        )
+                    })
                 })
             })
                 .padding(10)
@@ -40,16 +45,16 @@ extension VBaseNavigationViewDemoView {
 
 // MARK:- Walkthrough
 private struct NavigationDemoView1: View {
-    private let type: VBaseNavigationViewType
+    private let type: VNavigationViewType
     
-    init(type: VBaseNavigationViewType) {
+    init(type: VNavigationViewType) {
         self.type = type
     }
 }
 
 extension NavigationDemoView1 {
     var body: some View {
-        VBaseNavigationView(type, content: {
+        VNavigationView(type, content: {
             VBaseView(title: "Home", content: {
                 NavigationDemoView(
                     color: .red,
@@ -159,8 +164,8 @@ extension NavigationDemoView {
 }
 
 // MARK:- Preview
-struct VBaseNavigationViewDemoView_Previews: PreviewProvider {
+struct VNavigationViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VBaseNavigationViewDemoView()
+        VNavigationViewDemoView()
     }
 }

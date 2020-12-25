@@ -1,5 +1,5 @@
 //
-//  VBaseNavigationViewTransparentModel.swift
+//  VNavigationViewTransparentModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Base Navigation View Transparent Model
-public struct VBaseNavigationViewTransparentModel {
+// MARK:- V Navigation View Transparent Model
+public struct VNavigationViewTransparentModel {
     public let colors: Colors
     
     public init(
@@ -19,7 +19,7 @@ public struct VBaseNavigationViewTransparentModel {
 }
 
 // MARK:- Colors
-extension VBaseNavigationViewTransparentModel {
+extension VNavigationViewTransparentModel {
     public struct Colors {
         public let divider: Color
         

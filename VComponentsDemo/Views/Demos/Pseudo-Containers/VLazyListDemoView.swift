@@ -56,7 +56,7 @@ private extension VLazyListDemoDetailView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             ZStack(content: {
-                VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom)
+                ColorBook.layer.edgesIgnoringSafeArea(.bottom)
                 lazyList
             })
         })
@@ -90,7 +90,7 @@ private extension VLazyListDemoDetailView {
             Text("\(num)")
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)
-                .background(VComponents.ColorBook.accent.opacity(0.75))
+                .background(ColorBook.accent.opacity(0.75))
                 .cornerRadius(5)
                 .padding(.vertical, 3)
                 .onAppear(perform: { initializedRows.insert(num) })
@@ -102,7 +102,7 @@ private extension VLazyListDemoDetailView {
             Text("\(num)")
                 .frame(width: 30)
                 .frame(maxHeight: .infinity)
-                .background(VComponents.ColorBook.accent.opacity(0.75))
+                .background(ColorBook.accent.opacity(0.75))
                 .cornerRadius(5)
                 .padding(.horizontal, 3)
                 .onAppear(perform: { initializedRows.insert(num) })

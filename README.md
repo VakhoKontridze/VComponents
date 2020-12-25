@@ -29,7 +29,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2020 Dec 22. VBaseView *(centerTitle, leadingTitle)*
 
-2020 Dec 22. VBaseNavigationView *(filled, transparent)*
+2020 Dec 22. VNavigationView *(filled, transparent)*
 
 2020 Dec 21. VInteractiveView
 

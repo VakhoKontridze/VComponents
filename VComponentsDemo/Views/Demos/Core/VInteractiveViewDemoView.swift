@@ -52,7 +52,7 @@ extension VInteractiveViewDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             ZStack(content: {
-                VComponents.ColorBook.layer.edgesIgnoringSafeArea(.bottom)
+                ColorBook.layer.edgesIgnoringSafeArea(.bottom)
                 interactiveView
             })
         })

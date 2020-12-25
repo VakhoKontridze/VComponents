@@ -33,7 +33,7 @@ extension HomeSectionView {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 10)
                     .font(.system(size: 12, weight: .bold, design: .default))
-                    .foregroundColor(VComponents.ColorBook.primary)
+                    .foregroundColor(ColorBook.primary)
             }
             
             VSheet(.roundAll(.init(layout: .init(contentPadding: 10))), content: {

@@ -17,7 +17,7 @@ struct HomeView: View {
 // MARK:- Body
 extension HomeView {
     var body: some View {
-        VBaseNavigationView(content: {
+        VNavigationView(content: {
             VBaseView(title: Self.navigationBarTitle, content: {
                 ScrollView(content: {
                     Group(content: {
@@ -25,11 +25,14 @@ extension HomeView {
                             HomeRowView(title: VPrimaryButtonDemoView.navigationBarTitle, destination: VPrimaryButtonDemoView())
                             HomeRowView(title: VSecondaryButtonDemoView.navigationBarTitle, destination: VSecondaryButtonDemoView())
                             HomeRowView(title: VSquareButtonDemoView.navigationBarTitle, destination: VSquareButtonDemoView())
-                            HomeRowView(title: VPlainButtonDemoView.navigationBarTitle, destination: VPlainButtonDemoView())
+                            HomeRowView(title: VPlainButtonDemoView.navigationBarTitle, destination: VPlainButtonDemoView(), showSeparator: false)
+                        })
+                        
+                        HomeSectionView(title: "Derived Buttons", content: {
                             HomeRowView(title: VChevronButtonDemoView.navigationBarTitle, destination: VChevronButtonDemoView(), showSeparator: false)
                         })
 
-                        HomeSectionView(title: "Toggler", content: {
+                        HomeSectionView(title: "Togglable", content: {
                             HomeRowView(title: VToggleDemoView.navigationBarTitle, destination: VToggleDemoView(), showSeparator: false)
                         })
 
@@ -40,23 +43,23 @@ extension HomeView {
                         HomeSectionView(title: "Misc", content: {
                             HomeRowView(title: VSpinnerDemoView.navigationBarTitle, destination: VSpinnerDemoView(), showSeparator: false)
                         })
-                        
+
                         HomeSectionView(title: "Containers", content: {
-                            HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView())
-                            HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView(), showSeparator: false)
+                            HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView(), showSeparator: false)
                         })
-                        
+
                         HomeSectionView(title: "Pseudo-Containers", content: {
                             HomeRowView(title: VLazyListDemoView.navigationBarTitle, destination: VLazyListDemoView(), showSeparator: false)
                         })
-                        
-                        HomeSectionView(title: "Base", content: {
-                            HomeRowView(title: VBaseNavigationViewDemoView.navigationBarTitle, destination: VBaseNavigationViewDemoView())
-                            HomeRowView(title: VBaseViewDemoView.navigationBarTitle, destination: VBaseViewDemoView(), showSeparator: false)
+
+                        HomeSectionView(title: "Navigation", content: {
+                            HomeRowView(title: VNavigationViewDemoView.navigationBarTitle, destination: VNavigationViewDemoView())
+                            HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView(), showSeparator: false)
                         })
-                        
+
                         HomeSectionView(title: "Core", content: {
-                            HomeRowView(title: VInteractiveViewDemoView.navigationBarTitle, destination: VInteractiveViewDemoView(), showSeparator: false)
+                            HomeRowView(title: VInteractiveViewDemoView.navigationBarTitle, destination: VInteractiveViewDemoView())
+                            HomeRowView(title: VBaseViewDemoView.navigationBarTitle, destination: VBaseViewDemoView(), showSeparator: false)
                         })
                     })
                         .padding(.horizontal, 10)

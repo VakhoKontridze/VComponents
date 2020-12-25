@@ -1,5 +1,5 @@
 //
-//  VBaseNavigationViewFilledModel.swift
+//  VNavigationViewFilledModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/22/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Base Navigation View Standard Model
-public struct VBaseNavigationViewFilledModel {
+// MARK:- V Navigation View Standard Model
+public struct VNavigationViewFilledModel {
     public let colors: Colors
     
     public init(
@@ -19,7 +19,7 @@ public struct VBaseNavigationViewFilledModel {
 }
 
 // MARK:- Colors
-extension VBaseNavigationViewFilledModel {
+extension VNavigationViewFilledModel {
     public struct Colors {
         public let background: Color
         public let divider: Color

@@ -1,29 +1,29 @@
 //
-//  VBaseNavigationViewTransparentAppearance.swift
+//  VNavigationViewFilledAppearance.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 12/22/20.
 //
 
 import SwiftUI
 
 // MARK:- Modifier
 extension View {
-    func setUpBaseNavigationBarTransparentAppearance(model: VBaseNavigationViewTransparentModel) -> some View {
-        modifier(VBaseNavigationViewTransparentAppearance(model: model))
+    func setUpNavigationBarFilledAppearance(model: VNavigationViewFilledModel) -> some View {
+        modifier(VNavigationViewFilledAppearance(model: model))
     }
 }
 
-// MARK:- V Base Navigation View Transparent Appearance
-struct VBaseNavigationViewTransparentAppearance: ViewModifier {
+// MARK:- V Navigation View Filled Appearance
+struct VNavigationViewFilledAppearance: ViewModifier {
     init(
-        model: VBaseNavigationViewTransparentModel
+        model: VNavigationViewFilledModel
     ) {
         let appearance: UINavigationBarAppearance = {
             let appearance: UINavigationBarAppearance = .init()
             
-            appearance.configureWithTransparentBackground()
-            appearance.backgroundColor = .clear
+            appearance.configureWithOpaqueBackground()
+            appearance.backgroundColor = .init(model.colors.background)
             
             appearance.shadowColor = .init(model.colors.divider)
             
@@ -37,7 +37,7 @@ struct VBaseNavigationViewTransparentAppearance: ViewModifier {
 }
 
 // MARK:- View
-extension VBaseNavigationViewTransparentAppearance {
+extension VNavigationViewFilledAppearance {
     func body(content: Content) -> some View {
         content
     }

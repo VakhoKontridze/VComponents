@@ -132,7 +132,7 @@ private extension VBaseView {
 // MARK:- Preview
 struct VBaseView_Previews: PreviewProvider {
     static var previews: some View {
-        VBaseNavigationView(content: {
+        VNavigationView(content: {
             VBaseView(title: "Home", trailingItem: Button("Search", action: {}), content: {
                 ZStack(content: {
                     Color.pink.edgesIgnoringSafeArea(.bottom)
