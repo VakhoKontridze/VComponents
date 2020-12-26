@@ -53,6 +53,7 @@ extension HomeView {
                         })
 
                         HomeSectionView(title: "Navigation", content: {
+                            HomeRowView(title: VTabNavigationViewDemoView.navigationBarTitle, destination: VTabNavigationViewDemoView())
                             HomeRowView(title: VNavigationViewDemoView.navigationBarTitle, destination: VNavigationViewDemoView())
                             HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView(), showSeparator: false)
                         })

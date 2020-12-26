@@ -18,9 +18,11 @@ extension ColorBook {
     public static let layer: Color = .init("Layer")
     
     public static let primary: Color = .init("Primary")
-    public static let accent: Color = .init("Accent")
-    
     public static let primaryInverted: Color = .init("PrimaryInverted")
+    
+    public static let secondary: Color = .init("Secondary")
+    
+    public static let accent: Color = .init("Accent")
 }
 
 // MARK:- Primary Button
@@ -326,11 +328,12 @@ extension ColorBook {
     }
 }
 
-// MARK:- Side Bar
+// MARK:- Tab Navigation View
 extension ColorBook {
-    public struct SideBarStandard {
-        public static let background: Color = ColorBook.Sheet.background
-        public static let blinding: Color = .init("SideBarStandard.Blinding")
+    public struct TabNavigationViewStandard {
+        public static let background: Color = ColorBook.canvas
+        public static let item: Color = ColorBook.secondary
+        public static let itemSelected: Color = ColorBook.accent
         
         private init() {}
     }
@@ -340,6 +343,16 @@ extension ColorBook {
 extension ColorBook {
     public struct NavigationView {
         public static let background: Color = ColorBook.canvas
+        
+        private init() {}
+    }
+}
+
+// MARK:- Side Bar
+extension ColorBook {
+    public struct SideBarStandard {
+        public static let background: Color = ColorBook.Sheet.background
+        public static let blinding: Color = .init("SideBarStandard.Blinding")
         
         private init() {}
     }
