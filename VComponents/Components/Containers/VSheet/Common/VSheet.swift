@@ -21,12 +21,12 @@ public struct VSheet<Content>: View where Content: View {
         self.sheetType = sheetType
         self.content = content
     }
-}
 
-public extension VSheet where Content == Never {
-    init(
+    public init(
         _ sheetType: VSheetType = .default
-    ) {
+    )
+        where Content == Never
+    {
         self.sheetType = sheetType
         self.content = nil
     }

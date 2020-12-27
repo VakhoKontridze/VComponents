@@ -10,12 +10,12 @@ import SwiftUI
 // MARK:- V Lazy List Vertical
 struct VLazyListVertical<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VLazyListVerticalModel
+    private let model: VLazyListModelVertical
     private let content: () -> Content
     
     // MARK: Initializers
     public init(
-        model: VLazyListVerticalModel,
+        model: VLazyListModelVertical,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model

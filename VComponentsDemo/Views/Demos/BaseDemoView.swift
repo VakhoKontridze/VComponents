@@ -30,13 +30,13 @@ struct BaseDemoView<Content, ControllerContent>: View
         self.controllerContent = controllerContent
         self.content = content
     }
-}
 
-extension BaseDemoView where ControllerContent == Never {
     init(
         title navigationBarTitle: String,
         @ViewBuilder content: @escaping () -> Content
-    ) {
+    )
+        where ControllerContent == Never
+    {
         self.navigationBarTitle = navigationBarTitle
         self.controllerContent = nil
         self.content = content

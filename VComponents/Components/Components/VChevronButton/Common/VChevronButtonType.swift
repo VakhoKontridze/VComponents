@@ -9,8 +9,8 @@ import Foundation
 
 // MARK:- V Chevron Button Type
 public enum VChevronButtonType {
-    case filled(_ model: VChevronButtonFilledModel = .init())
-    case plain(_ model: VChevronButtonPlainModel = .init())
+    case filled(_ model: VChevronButtonModelFilled = .init())
+    case plain(_ model: VChevronButtonModelPlain = .init())
     
     public static let `default`: VChevronButtonType = .filled()
 }

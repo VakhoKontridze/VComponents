@@ -27,16 +27,16 @@ public struct VPlainButton<Content>: View where Content: View {
         self.action = action
         self.content = content
     }
-}
 
-public extension VPlainButton where Content == Text {
-    init<S>(
+    public init<S>(
         _ buttonType: VPlainButtonType = .default,
         state: VPlainButtonState = .enabled,
         action: @escaping () -> Void,
         title: S
     )
-        where S: StringProtocol
+        where
+            Content == Text,
+            S: StringProtocol
     {
         self.init(
             buttonType,

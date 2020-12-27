@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Primary Button Bordered
 struct VPrimaryButtonBordered<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VPrimaryButtonBorderedModel
+    private let model: VPrimaryButtonModelBordered
     
     private let state: VPrimaryButtonState
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ struct VPrimaryButtonBordered<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VPrimaryButtonBorderedModel,
+        model: VPrimaryButtonModelBordered,
         state: VPrimaryButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content

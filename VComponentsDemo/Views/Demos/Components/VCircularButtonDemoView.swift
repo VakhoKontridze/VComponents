@@ -50,7 +50,7 @@ extension VSquareButtonDemoView {
     }
     
     private var shapeButtons: some View {
-        let roundedButtonModel: VSquareButtonFilledModel = .init(
+        let roundedButtonModel: VSquareButtonModelFilled = .init(
             layout: .init(
                 frame: .rounded()
             )
@@ -76,7 +76,7 @@ extension VSquareButtonDemoView {
     }
     
     private var borderedButton: some View {
-        let dashedButtonModel: VSquareButtonBorderedModel = .init(
+        let dashedButtonModel: VSquareButtonModelBordered = .init(
             layout: .init(
                 borderType: .dashed()
             )
@@ -111,7 +111,7 @@ extension VSquareButtonDemoView {
     }
     
     private var largerHitBoxButton: some View {
-        let largerHitBoxButtonModel: VSquareButtonFilledModel = .init(
+        let largerHitBoxButtonModel: VSquareButtonModelFilled = .init(
             layout: .init(
                 hitBoxSpacingX: 20,
                 hitBoxSpacingY: 20

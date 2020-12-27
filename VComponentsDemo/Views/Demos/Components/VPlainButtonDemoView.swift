@@ -68,7 +68,7 @@ extension VPlainButtonDemoView {
     }
     
     private var clippedHitBoxButton: some View {
-        let clippedHitBoxButtonModel: VPlainButtonStandardModel = .init(
+        let clippedHitBoxButtonModel: VPlainButtonModelStandard = .init(
             layout: .init(
                 hitBoxSpacingX: 0,
                 hitBoxSpacingY: 0

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Primary Button Loader View
 struct VPrimaryButtonLoaderView: View {
     // MARK: Properties
-    private let spinnerModel: VSpinnerContinousModel
+    private let spinnerModel: VSpinnerModelContinous
     private let width: CGFloat
     private let isVisible: Bool
     
@@ -40,7 +40,7 @@ struct VPrimaryButtonLoaderView_Previews: PreviewProvider {
     static var previews: some View {
         VPrimaryButtonLoaderView(
             loaderColor: ColorBook.PrimaryButtonFilled.Foreground.enabled,
-            width: VPrimaryButtonFilledModel.Layout().loaderWidth,
+            width: VPrimaryButtonModelFilled.Layout().loaderWidth,
             isVisible: true
         )
     }

@@ -9,8 +9,8 @@ import Foundation
 
 // MARK:- V Square Button Type
 public enum VSquareButtonType {
-    case filled(_ model: VSquareButtonFilledModel = .init())
-    case bordered(_ model: VSquareButtonBorderedModel = .init())
+    case filled(_ model: VSquareButtonModelFilled = .init())
+    case bordered(_ model: VSquareButtonModelBordered = .init())
     
     public static let `default`: VSquareButtonType = .filled()
 }

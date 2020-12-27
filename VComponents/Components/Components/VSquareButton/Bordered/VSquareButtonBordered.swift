@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Square Button Bordered
 struct VSquareButtonBordered<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSquareButtonBorderedModel
+    private let model: VSquareButtonModelBordered
     
     private let state: VSquareButtonState
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ struct VSquareButtonBordered<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VSquareButtonBorderedModel,
+        model: VSquareButtonModelBordered,
         state: VSquareButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
@@ -92,7 +92,7 @@ extension VSquareButtonBordered {
 
 // MARK:- Preview
 struct VSquareButtonBordered_Previews: PreviewProvider {
-    private static let roundedModel: VSquareButtonBorderedModel = .init(
+    private static let roundedModel: VSquareButtonModelBordered = .init(
         layout: .init(
             frame: .rounded()
         )

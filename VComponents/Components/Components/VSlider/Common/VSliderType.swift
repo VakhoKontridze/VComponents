@@ -9,8 +9,8 @@ import Foundation
 
 // MARK:- V Slider Type
 public enum VSliderType {
-    case standard(_ model: VSliderStandardModel = .init())
-    case plain(_ model: VSliderPlainModel = .init())
+    case standard(_ model: VSliderModelStandard = .init())
+    case plain(_ model: VSliderModelPlain = .init())
     
     public static let `default`: VSliderType = .standard()
 }

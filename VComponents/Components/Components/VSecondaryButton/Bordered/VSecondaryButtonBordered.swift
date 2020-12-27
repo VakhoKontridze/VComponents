@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Secondary Button Bordered
 struct VSecondaryButtonBordered<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSecondaryButtonBorderedModel
+    private let model: VSecondaryButtonModelBordered
     
     private let state: VSecondaryButtonState
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ struct VSecondaryButtonBordered<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VSecondaryButtonBorderedModel,
+        model: VSecondaryButtonModelBordered,
         state: VSecondaryButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content

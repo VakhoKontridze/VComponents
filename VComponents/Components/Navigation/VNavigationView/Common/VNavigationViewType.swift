@@ -9,7 +9,7 @@ import Foundation
 
 // MARK:- V Navigation View Type
 public enum VNavigationViewType {
-    case filled(_ model: VNavigationViewFilledModel = .init())
+    case filled(_ model: VNavigationViewModelFilled = .init())
     case transparent(_ model: VNavigationViewTransparentModel = .init())
     
     public static let `default`: VNavigationViewType = .filled()

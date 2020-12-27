@@ -31,14 +31,14 @@ struct HomeRowView<Content>: View where Content: View {
         self.rowType = .link(destination)
         self.showSeparator = showSeparator
     }
-}
 
-extension HomeRowView where Content == Never {
     init(
         title: String,
         action: @escaping () -> Void,
         showSeparator: Bool = true
-    ) {
+    )
+        where Content == Never
+    {
         self.title = title
         self.rowType = .custom(action)
         self.showSeparator = showSeparator

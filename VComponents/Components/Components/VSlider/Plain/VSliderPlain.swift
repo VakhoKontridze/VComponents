@@ -8,9 +8,13 @@
 import SwiftUI
 
 // MARK:- V Slider Plain
-struct VSliderPlain<V>: View where V: BinaryFloatingPoint, V.Stride: BinaryFloatingPoint {
+struct VSliderPlain<V>: View
+    where
+        V: BinaryFloatingPoint,
+        V.Stride: BinaryFloatingPoint
+{
     // MARK: Properties
-    private let model: VSliderPlainModel
+    private let model: VSliderModelPlain
     private let range: ClosedRange<V>
     private let step: Double?
     
@@ -21,7 +25,7 @@ struct VSliderPlain<V>: View where V: BinaryFloatingPoint, V.Stride: BinaryFloat
     
     // MARK: Initializers
     public init(
-        model: VSliderPlainModel,
+        model: VSliderModelPlain,
         range: ClosedRange<V>,
         step: Double?,
         state: VSliderState,

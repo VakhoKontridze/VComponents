@@ -122,14 +122,14 @@ private struct NavigationDemoView<Destination>: View where Destination: View {
         self.instruction = instruction
         self.action = .navigation(destination)
     }
-}
 
-extension NavigationDemoView where Destination == Never {
     init(
         color: Color,
         instruction: String,
         action: @escaping () -> Void
-    ) {
+    )
+        where Destination == Never 
+    {
         self.color = color
         self.instruction = instruction
         self.action = .custom(action)

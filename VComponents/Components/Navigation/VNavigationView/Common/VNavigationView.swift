@@ -27,7 +27,7 @@ public struct VNavigationView<Content>: View where Content: View {
 public extension VNavigationView {
     @ViewBuilder var body: some View {
         switch navigationType {
-        case .filled(let model): navigationViewFrame.setUpNavigationBarFilledAppearance(model: model)
+        case .filled(let model): navigationViewFrame.setUpNavigationBarAppearanceFilled(model: model)
         case .transparent(let model): navigationViewFrame.setUpNavigationBarTransparentAppearance(model: model)
         }
     }

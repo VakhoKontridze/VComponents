@@ -78,3 +78,19 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
+
+
+//@State private var isPresented: Bool = false
+//
+//var body: some View {
+//    ZStack(content: {
+//        Color.yellow
+//        
+//        Button("??", action: { isPresented = true
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
+//                isPresented = false
+//            })
+//        })
+//    })
+//        .vAlert(isPresented: $isPresented, dialog: .one(dismissButton: .init(title: "PRESS", action: {})), title: "TITLE", description: "DESCRIPTION")
+//}

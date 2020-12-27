@@ -29,10 +29,7 @@ struct VPrimaryButtonDemoView: View {
 extension VPrimaryButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            filledButton
-            borderedButton
-            imageButtons
-            largerHitBoxButton
+            buttons
         })
     }
     
@@ -64,34 +61,16 @@ extension VPrimaryButtonDemoView {
         })
     }
 
-    private var filledButton: some View {
+    private var buttons: some View {
         VStack(content: {
             DemoRowView(type: .titled("Filled"), content: {
                 VPrimaryButton(.filled(), state: buttonState, action: action, title: buttonTitle)
             })
-        })
-    }
-    
-    private var borderedButton: some View {
-        let dashedButtonModel: VPrimaryButtonBorderedModel = .init(
-            layout: .init(
-                borderType: .dashed()
-            )
-        )
-        
-        return VStack(content: {
-            DemoRowView(type: .titled("Continous Border"), content: {
+            
+            DemoRowView(type: .titled("Bordered"), content: {
                 VPrimaryButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
             })
             
-            DemoRowView(type: .titled("Dashed Border"), content: {
-                VPrimaryButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
-            })
-        })
-    }
-    
-    private var imageButtons: some View {
-        VStack(content: {
             DemoRowView(type: .titled("Image"), content: {
                 VPrimaryButton(state: buttonState, action: action, content: buttonContent)
             })
@@ -103,21 +82,6 @@ extension VPrimaryButtonDemoView {
                         Text(buttonTitle)
                     })
                 })
-            })
-        })
-    }
-    
-    private var largerHitBoxButton: some View {
-        let largerHitBoxButtonModel: VPrimaryButtonFilledModel = .init(
-            layout: .init(
-                hitBoxSpacingX: 20,
-                hitBoxSpacingY: 20
-            )
-        )
-        
-        return VStack(content: {
-            DemoRowView(type: .titled("Larger Hit Box"), content: {
-                VPrimaryButton(.filled(largerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
             })
         })
     }

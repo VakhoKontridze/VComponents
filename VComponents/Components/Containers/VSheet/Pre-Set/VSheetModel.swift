@@ -8,11 +8,11 @@
 import SwiftUI
 
 // MARK:- Type Aliases
-public typealias VSheetRoundAllModel = VSheetModel
-public typealias VSheetRoundTopModel = VSheetModel
-public typealias VSheetRoundBottomModel = VSheetModel
+public typealias VSheetModelRoundAll = VSheetModel
+public typealias VSheetModelRoundTop = VSheetModel
+public typealias VSheetModelRoundBottom = VSheetModel
 
-// MARK:- Sheet View Model
+// MARK:- V Sheet Model
 public struct VSheetModel {
     public let layout: Layout
     public let colors: Colors

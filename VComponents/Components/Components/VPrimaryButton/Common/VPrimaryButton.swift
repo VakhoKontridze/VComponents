@@ -27,16 +27,16 @@ public struct VPrimaryButton<Content>: View where Content: View {
         self.action = action
         self.content = content
     }
-}
 
-extension VPrimaryButton where Content == Text {
     public init<S>(
         _ buttonType: VPrimaryButtonType = .default,
         state: VPrimaryButtonState = .enabled,
         action: @escaping () -> Void,
         title: S
     )
-        where S: StringProtocol
+        where
+            Content == Text,
+            S: StringProtocol
     {
         self.init(
             buttonType,

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Plain Button Standard
 struct VPlainButtonStandard<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VPlainButtonStandardModel
+    private let model: VPlainButtonModelStandard
     
     private let state: VPlainButtonState
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ struct VPlainButtonStandard<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
-        model: VPlainButtonStandardModel,
+        model: VPlainButtonModelStandard,
         state: VPlainButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content

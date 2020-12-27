@@ -79,7 +79,7 @@ extension VChevronButtonDemoView {
     }
     
     private var largerHitBoxButton: some View {
-        let largerHitBoxButtonModel: VChevronButtonFilledModel = .init(
+        let largerHitBoxButtonModel: VChevronButtonModelFilled = .init(
             layout: .init(
                 hitBoxSpacingX: 5,
                 hitBoxSpacingY: 5

@@ -39,48 +39,46 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         self.navigationBarTrailingItem = navigationBarTrailingItem
         self.content = content
     }
-}
 
-public extension VBaseView where NavigationBarLeadingItem == Never {
-    init(
+    public init(
         _ viewType: VBaseViewType = .default,
         title navigationBarTitle: String,
         trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
-    ) {
+    )
+        where NavigationBarLeadingItem == Never
+    {
         self.viewType = viewType
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
         self.navigationBarTrailingItem = navigationBarTrailingItem
         self.content = content
     }
-}
 
-public extension VBaseView where NavigationBarTrailingItem == Never {
-    init(
+    public init(
         _ viewType: VBaseViewType = .default,
         title navigationBarTitle: String,
         leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
         @ViewBuilder content: @escaping () -> Content
-    ) {
+    )
+        where NavigationBarTrailingItem == Never
+    {
         self.viewType = viewType
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = navigationBarLeadingItem
         self.navigationBarTrailingItem = nil
         self.content = content
     }
-}
 
-public extension VBaseView
-    where
-        NavigationBarLeadingItem == Never,
-        NavigationBarTrailingItem == Never
-{
-    init(
+    public init(
         _ viewType: VBaseViewType = .default,
         title navigationBarTitle: String,
         @ViewBuilder content: @escaping () -> Content
-    ) {
+    )
+        where
+            NavigationBarLeadingItem == Never,
+            NavigationBarTrailingItem == Never
+    {
         self.viewType = viewType
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
@@ -95,7 +93,7 @@ public extension VBaseView {
         switch viewType {
         case .centerTitle(let model):
             baseViewFrame
-                .setUpBaseViewCenterNavigationBar(
+                .setUpBaseViewNavigationBarCenter(
                     model: model,
                     title: navigationBarTitle,
                     leadingItem: navigationBarLeadingItem,
@@ -105,7 +103,7 @@ public extension VBaseView {
             
         case .leadingTitle(let model):
             baseViewFrame
-                .setUpBaseViewLeadingNavigationBar(
+                .setUpBaseViewNavigationBarLeading(
                     model: model,
                     title: navigationBarTitle,
                     leadingItem: navigationBarLeadingItem,

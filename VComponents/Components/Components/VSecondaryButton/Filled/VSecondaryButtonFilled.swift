@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Secondary Button Filled
 struct VSecondaryButtonFilled<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSecondaryButtonFilledModel
+    private let model: VSecondaryButtonModelFilled
     
     private let state: VSecondaryButtonState
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ struct VSecondaryButtonFilled<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VSecondaryButtonFilledModel,
+        model: VSecondaryButtonModelFilled,
         state: VSecondaryButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content

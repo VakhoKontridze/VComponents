@@ -33,15 +33,15 @@ public struct VChevronButton<Content>: View where Content: View {
         self.action = action
         self.content = content
     }
-}
 
-public extension VChevronButton where Content == Never {
-    init(
+    public init(
         _ buttonType: VChevronButtonType = .default,
         direction: VChevronButtonDirection,
         state: VChevronButtonState = .enabled,
         action: @escaping () -> Void
-    ) {
+    )
+        where Content == Never
+    {
         self.buttonType = buttonType
         self.direction = direction
         self.state = state

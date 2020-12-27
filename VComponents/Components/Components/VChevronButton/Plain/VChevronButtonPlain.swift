@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Chevron Button Plain
 struct VChevronButtonPlain<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VChevronButtonPlainModel
+    private let model: VChevronButtonModelPlain
     
     private let direction: VChevronButtonDirection
     private let state: VChevronButtonState
@@ -21,7 +21,7 @@ struct VChevronButtonPlain<Content>: View where Content: View {
     
     // MARK: Direction
     public init(
-        model: VChevronButtonPlainModel,
+        model: VChevronButtonModelPlain,
         direction: VChevronButtonDirection,
         state: VChevronButtonState,
         action: @escaping () -> Void,

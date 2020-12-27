@@ -29,16 +29,16 @@ public struct VToggle<Content>: View where Content: View {
         self.state = state
         self.content = content
     }
-}
 
-public extension VToggle where Content == Text {
-    init<S>(
+    public init<S>(
         _ toggleType: VToggleType = .default,
         isOn: Binding<Bool>,
         state: VToggleState = .enabled,
         title: S
     )
-        where S: StringProtocol
+        where
+            Content == Text,
+            S: StringProtocol
     {
         self.init(
             toggleType,
@@ -47,13 +47,13 @@ public extension VToggle where Content == Text {
             content: { Text(title) }
         )
     }
-}
 
-public extension VToggle where Content == Never {
-    init(
+    public init(
         isOn: Binding<Bool>,
         state: VToggleState = .enabled
-    ) {
+    )
+        where Content == Never
+    {
         self.toggleType = .default
         self._isOn = isOn
         self.state = state

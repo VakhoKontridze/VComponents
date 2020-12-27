@@ -10,12 +10,12 @@ import SwiftUI
 // MARK:- V Lazy List Horizontal
 struct VLazyListHorizontal<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VLazyListHorizontalModel
+    private let model: VLazyListModelHorizontal
     private let content: () -> Content
     
     // MARK: Initializers
     public init(
-        model: VLazyListHorizontalModel,
+        model: VLazyListModelHorizontal,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model

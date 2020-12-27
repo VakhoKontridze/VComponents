@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Toggle Standard
 struct VToggleStandard<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VToggleStandardModel
+    private let model: VToggleModelStandard
     
     @Binding private var isOn: Bool
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ struct VToggleStandard<Content>: View where Content: View {
     
     // MARK: Initializers
     init(
-        model: VToggleStandardModel,
+        model: VToggleModelStandard,
         isOn: Binding<Bool>,
         state: VToggleState,
         content: (() -> Content)?

@@ -98,7 +98,7 @@ extension VToggleDemoView {
     }
     
     private var nonInteractiveContentstandardIconToggle: some View {
-        let model: VToggleStandardModel = .init(
+        let model: VToggleModelStandard = .init(
             behavior: .init(
                 contentIsClickable: false
             )
@@ -110,7 +110,7 @@ extension VToggleDemoView {
     }
     
     private var interactiveContentLeftFlexibleContentToggle: some View {
-        let model: VToggleSettingModel = .init(
+        let model: VToggleModelSetting = .init(
             behavior: .init(
                 contentIsClickable: true,
                 spaceIsClickable: true,
@@ -124,7 +124,7 @@ extension VToggleDemoView {
     }
     
     private var noLoweredOpacityPressedContentToggle: some View {
-        let model: VToggleStandardModel = .init(
+        let model: VToggleModelStandard = .init(
             colors: .init(
                 content: .init(
                     pressedOpacity: 1,
@@ -141,7 +141,7 @@ extension VToggleDemoView {
     }
     
     private var noLoweredOpacityDisabledContentToggle: some View {
-        let model: VToggleStandardModel = .init(
+        let model: VToggleModelStandard = .init(
             colors: .init(
                 content: .init(
                     pressedOpacity: 0.5,

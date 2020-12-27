@@ -46,70 +46,63 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageFour = pageFour
         self.pageFive = pageFive
     }
-}
-
-public extension VTabNavigationView
-    where
-        C2 == Never,
-        C3 == Never,
-        C4 == Never
-{
-    init(
-        _ navigationViewType: VTabNavigationViewType = .default,
-        selection: Binding<Int>,
-        pageOne: VTabNavigationViewPage<C0, ItemContent>,
-        pageTwo: VTabNavigationViewPage<C1, ItemContent>
-    ) {
-        self.navigationViewType = navigationViewType
-        self._selection = selection
-        self.pageOne = pageOne
-        self.pageTwo = pageTwo
-        self.pageThree = nil
-        self.pageFour = nil
-        self.pageFive = nil
-    }
-}
-
-public extension VTabNavigationView
-    where
-        C3 == Never,
-        C4 == Never
-{
-    init(
-        _ navigationViewType: VTabNavigationViewType = .default,
-        selection: Binding<Int>,
-        pageOne: VTabNavigationViewPage<C0, ItemContent>,
-        pageTwo: VTabNavigationViewPage<C1, ItemContent>,
-        pageThree: VTabNavigationViewPage<C2, ItemContent>
-    ) {
-        self.navigationViewType = navigationViewType
-        self._selection = selection
-        self.pageOne = pageOne
-        self.pageTwo = pageTwo
-        self.pageThree = pageThree
-        self.pageFour = nil
-        self.pageFive = nil
-    }
-}
-
-public extension VTabNavigationView
-    where
-        C4 == Never
-{
-    init(
+    
+    public init(
         _ navigationViewType: VTabNavigationViewType = .default,
         selection: Binding<Int>,
         pageOne: VTabNavigationViewPage<C0, ItemContent>,
         pageTwo: VTabNavigationViewPage<C1, ItemContent>,
         pageThree: VTabNavigationViewPage<C2, ItemContent>,
         pageFour: VTabNavigationViewPage<C3, ItemContent>
-    ) {
+    )
+        where C4 == Never
+    {
         self.navigationViewType = navigationViewType
         self._selection = selection
         self.pageOne = pageOne
         self.pageTwo = pageTwo
         self.pageThree = pageThree
         self.pageFour = pageFour
+        self.pageFive = nil
+    }
+    
+    public init(
+        _ navigationViewType: VTabNavigationViewType = .default,
+        selection: Binding<Int>,
+        pageOne: VTabNavigationViewPage<C0, ItemContent>,
+        pageTwo: VTabNavigationViewPage<C1, ItemContent>,
+        pageThree: VTabNavigationViewPage<C2, ItemContent>
+    )
+        where
+            C3 == Never,
+            C4 == Never
+    {
+        self.navigationViewType = navigationViewType
+        self._selection = selection
+        self.pageOne = pageOne
+        self.pageTwo = pageTwo
+        self.pageThree = pageThree
+        self.pageFour = nil
+        self.pageFive = nil
+    }
+
+    public init(
+        _ navigationViewType: VTabNavigationViewType = .default,
+        selection: Binding<Int>,
+        pageOne: VTabNavigationViewPage<C0, ItemContent>,
+        pageTwo: VTabNavigationViewPage<C1, ItemContent>
+    )
+        where
+            C2 == Never,
+            C3 == Never,
+            C4 == Never
+    {
+        self.navigationViewType = navigationViewType
+        self._selection = selection
+        self.pageOne = pageOne
+        self.pageTwo = pageTwo
+        self.pageThree = nil
+        self.pageFour = nil
         self.pageFive = nil
     }
 }

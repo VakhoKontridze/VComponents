@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Primary Button Filled
 struct VPrimaryButtonFilled<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VPrimaryButtonFilledModel
+    private let model: VPrimaryButtonModelFilled
     
     private let state: VPrimaryButtonState
     @State private var isPressed: Bool = false
@@ -22,7 +22,7 @@ struct VPrimaryButtonFilled<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VPrimaryButtonFilledModel,
+        model: VPrimaryButtonModelFilled,
         state: VPrimaryButtonState,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content

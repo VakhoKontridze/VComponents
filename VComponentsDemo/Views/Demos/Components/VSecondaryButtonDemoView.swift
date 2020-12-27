@@ -57,7 +57,7 @@ extension VSecondaryButtonDemoView {
     }
     
     private var borderedButton: some View {
-        let dashedButtonModel: VSecondaryButtonBorderedModel = .init(
+        let dashedButtonModel: VSecondaryButtonModelBordered = .init(
             layout: .init(
                 borderType: .dashed()
             )
@@ -92,7 +92,7 @@ extension VSecondaryButtonDemoView {
     }
     
     private var clippedHitBoxButton: some View {
-        let clippedHitBoxButtonModel: VSecondaryButtonFilledModel = .init(
+        let clippedHitBoxButtonModel: VSecondaryButtonModelFilled = .init(
             layout: .init(
                 hitBoxSpacingX: 0,
                 hitBoxSpacingY: 0

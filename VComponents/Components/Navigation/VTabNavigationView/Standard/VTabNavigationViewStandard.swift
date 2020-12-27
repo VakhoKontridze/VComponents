@@ -18,7 +18,7 @@ struct VTabNavigationViewStandard<C0, C1, C2, C3, C4, ItemContent>: View
         ItemContent: View
 {
     // MARK: Properties
-    private let model: VTabNavigationViewStandardModel
+    private let model: VTabNavigationViewModelStandard
     
     @Binding private var selection: Int
 
@@ -30,7 +30,7 @@ struct VTabNavigationViewStandard<C0, C1, C2, C3, C4, ItemContent>: View
     
     // MARK: Initializers
     init(
-        model: VTabNavigationViewStandardModel,
+        model: VTabNavigationViewModelStandard,
         selection: Binding<Int>,
         pageOne: VTabNavigationViewPage<C0, ItemContent>?,
         pageTwo: VTabNavigationViewPage<C1, ItemContent>?,
@@ -58,7 +58,7 @@ extension VTabNavigationViewStandard {
             if let page = pageFour { pageContent(page).tag(3) }
             if let page = pageFive { pageContent(page).tag(4) }
         })
-            .setUpTabNavigationViewStandardAppearance(model: model)
+            .setUpTabNavigationViewAppearanceStandard(model: model)
     }
     
     private func pageContent<PageContent>(

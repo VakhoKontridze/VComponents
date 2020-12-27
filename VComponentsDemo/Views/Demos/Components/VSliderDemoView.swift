@@ -75,7 +75,7 @@ extension VSliderDemoView {
     }
     
     private var strokeSlider: some View {
-        let model: VSliderStandardModel = .init(
+        let model: VSliderModelStandard = .init(
             layout: .init(
                 thumbBorderWidth: 1,
                 thumbShadowRadius: 0
@@ -102,7 +102,7 @@ extension VSliderDemoView {
     }
     
     private var animatedSliders: some View {
-        let model: VSliderPlainModel = .init(
+        let model: VSliderModelPlain = .init(
             behavior: .init(
                 animation: .default
             )

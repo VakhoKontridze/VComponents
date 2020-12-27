@@ -65,9 +65,7 @@ struct VSliderFrameView<ThumbContent>: View where ThumbContent: View {
         self.action = action
         self.thumbContent = thumbContent
     }
-}
 
-extension VSliderFrameView where ThumbContent == Never {
     init<V>(
         animation: Animation?,
         
@@ -86,6 +84,7 @@ extension VSliderFrameView where ThumbContent == Never {
         action: ((Bool) -> Void)?
     )
         where
+            ThumbContent == Never,
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {

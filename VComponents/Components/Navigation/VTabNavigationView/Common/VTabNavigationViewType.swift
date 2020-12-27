@@ -9,7 +9,7 @@ import Foundation
 
 // MARK:- V Tab Navigation View Type
 public enum VTabNavigationViewType {
-    case standard(_ model: VTabNavigationViewStandardModel = .init())
+    case standard(_ model: VTabNavigationViewModelStandard = .init())
     
     public static let `default`: VTabNavigationViewType = standard()
 }

@@ -27,16 +27,16 @@ public struct VSecondaryButton<Content>: View where Content: View {
         self.action = action
         self.content = content
     }
-}
 
-extension VSecondaryButton where Content == Text {
     public init<S>(
         _ buttonType: VSecondaryButtonType = .default,
         state: VSecondaryButtonState = .enabled,
         action: @escaping () -> Void,
         title: S
     )
-        where S: StringProtocol
+        where
+            Content == Text,
+            S: StringProtocol
     {
         self.init(
             buttonType,

@@ -21,10 +21,8 @@ public struct VLazyList<Content>: View where Content: View {
         self.listType = listType
         self.content = content
     }
-}
 
-public extension VLazyList {
-    init<Data, ID, RowContent>(
+    public init<Data, ID, RowContent>(
         _ listType: VLazyListType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
@@ -45,10 +43,8 @@ public extension VLazyList {
             }
         )
     }
-}
 
-public extension VLazyList {
-    init<Data, ID, RowContent>(
+    public init<Data, ID, RowContent>(
         _ listType: VLazyListType = .default,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -66,16 +62,13 @@ public extension VLazyList {
             rowContent: rowContent
         )
     }
-}
 
-public extension VLazyList {
-    init<RowContent>(
+    public init <RowContent>(
         _ listType: VLazyListType = .default,
         range: Range<Int>,
         rowContent: @escaping (Int) -> RowContent
     )
-        where
-            Content == ForEach<Range<Int>, Int, RowContent>
+        where Content == ForEach<Range<Int>, Int, RowContent>
     {
         self.init(
             listType,

@@ -1,5 +1,5 @@
 //
-//  VSquareButtonFilledModel.swift
+//  VSquareButtonModelFilled.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Square Button Standard Model
-public struct VSquareButtonFilledModel {
+// MARK:- V Square Button Model Standard
+public struct VSquareButtonModelFilled {
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
@@ -25,7 +25,7 @@ public struct VSquareButtonFilledModel {
 }
 
 // MARK:- Layout
-extension VSquareButtonFilledModel {
+extension VSquareButtonModelFilled {
     public struct Layout {
         public let frame: Frame
         let cornerRadius: CGFloat
@@ -59,7 +59,7 @@ extension VSquareButtonFilledModel {
     }
 }
 
-extension VSquareButtonFilledModel.Layout {
+extension VSquareButtonModelFilled.Layout {
     public enum Frame {
         case circular
         case rounded(radius: CGFloat = 16)
@@ -67,7 +67,7 @@ extension VSquareButtonFilledModel.Layout {
 }
 
 // MARK:- Colors
-extension VSquareButtonFilledModel {
+extension VSquareButtonModelFilled {
     public struct Colors {
         public let foreground: ForegroundColors
         public let background: BackgroundColors
@@ -82,7 +82,7 @@ extension VSquareButtonFilledModel {
     }
 }
 
-extension VSquareButtonFilledModel {
+extension VSquareButtonModelFilled {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -123,7 +123,7 @@ extension VSquareButtonFilledModel {
 }
 
 // MARK:- Fonts
-extension VSquareButtonFilledModel {
+extension VSquareButtonModelFilled {
     public struct Fonts {
         public let title: Font
         
@@ -136,7 +136,7 @@ extension VSquareButtonFilledModel {
 }
 
 // MARK:- Mapping
-extension VSquareButtonFilledModel.Colors {
+extension VSquareButtonModelFilled.Colors {
     func foregroundColor(state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
