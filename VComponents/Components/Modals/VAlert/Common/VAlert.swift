@@ -45,8 +45,9 @@ extension VAlert {
 }
 
 // MARK:- Preview
-//struct VAlert_Previews: PreviewProvider {
-//    static var previews: some View {
+struct VAlert_Previews: PreviewProvider {
+    static var previews: some View {
 //        VAlert()
-//    }
-//}
+        Text("???")
+    }
+}

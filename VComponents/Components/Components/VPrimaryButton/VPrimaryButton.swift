@@ -97,7 +97,7 @@ public extension VPrimaryButton {
     
     @ViewBuilder private var loaderView: some View {
         if internalState.isLoading {
-            VSpinner(type: .continous(model.spinnerModel))
+            VSpinner(.continous(model.spinnerModel))
                 .frame(width: model.layout.loaderWidth, alignment: .trailing)
         }
     }

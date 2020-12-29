@@ -15,39 +15,39 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
-2020 Dec 24. VTabNavigationView *(standard)*
+2020 Dec 24. VTabNavigationView
 
-2020 Dec 24. VSideBar *(standard)*
+2020 Dec 24. VSideBar
 
-2020 Dec 24. VSquareButton *(+ bordered)*
+2020 Dec 24. VSquareButton
 
-2020 Dec 24. VSecondaryButton *(filled, bordered)*
+2020 Dec 24. VSecondaryButton
 
 2020 Dec 24. VLazyList *(+ horizontal)*
 
-2020 Dec 23. VChevronButton *(filled, plain)*
+2020 Dec 23. VChevronButton
 
-2020 Dec 22. VSheet *(roundAll, roundTop, roundBottom, roundCustom)*
+2020 Dec 22. VSheet
 
 2020 Dec 22. VBaseView *(centerTitle, leadingTitle)*
 
-2020 Dec 22. VNavigationView *(filled, transparent)*
+2020 Dec 22. VNavigationView
 
 2020 Dec 21. VInteractiveView
 
-2020 Dec 19. VToggle *(standard, setting)*
+2020 Dec 19. VToggle
 
-2020 Dec 19. VPlainButton *(standard)*
+2020 Dec 19. VPlainButton
 
 2020 Dec 19. VLazyList *(vertical)*
 
-2020 Dec 19. VSlider *(standard, plain)*
+2020 Dec 19. VSlider
 
 2020 Dec 18. VSpinner *(continous, dashed)*
 
-2020 Dec 18. VSquareButton *(filled)*
+2020 Dec 18. VSquareButton
 
-2020 Dec 18. VPrimaryButton *(filled, bordered)*
+2020 Dec 18. VPrimaryButton
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)

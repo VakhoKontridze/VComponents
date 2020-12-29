@@ -14,7 +14,7 @@ public struct VSpinner: View {
     
     // MARK: Initializers
     public init(
-        type spinnerType: VSpinnerType = .default
+        _ spinnerType: VSpinnerType = .default
     ) {
         self.spinnerType = spinnerType
     }
@@ -33,6 +33,6 @@ public extension VSpinner {
 // MARK:- Preview
 struct VSpinner_Previews: PreviewProvider {
     static var previews: some View {
-        VSpinner(type: .continous())
+        VSpinner(.continous())
     }
 }
