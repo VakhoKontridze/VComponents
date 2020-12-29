@@ -59,8 +59,14 @@ public extension VSquareButton {
             isDisabled: state.isDisabled,
             action: action,
             onPress: { isPressed = $0 },
-            content: { buttonView }
+            content: { hitBox }
         )
+    }
+    
+    private var hitBox: some View {
+        buttonView
+            .padding(.horizontal, model.layout.hitBoxSpacingX)
+            .padding(.vertical, model.layout.hitBoxSpacingY)
     }
     
     private var buttonView: some View {

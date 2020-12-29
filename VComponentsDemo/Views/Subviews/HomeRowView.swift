@@ -21,6 +21,21 @@ struct HomeRowView<Content>: View where Content: View {
     
     private let showSeparator: Bool
     
+    private let chevronButtonModel: VChevronButtonModel = .init(
+        colors: .init(
+            foreground: .init(
+                enabled: .init("ChevronButtonPlain.Foreground.enabled"),
+                pressed: .init("ChevronButtonPlain.Foreground.enabled"),
+                disabled: .init("ChevronButtonPlain.Foreground.enabled")
+            ),
+            background: .init(
+                enabled: .clear,
+                pressed: .clear,
+                disabled: .clear
+            )
+        )
+    )
+    
     // MARK: Initalizers
     init(
         title: String,
@@ -68,7 +83,7 @@ extension HomeRowView {
             
             Spacer()
             
-            VChevronButton(.plain(), direction: .right, action: {})
+            VChevronButton(model: chevronButtonModel, direction: .right, action: {})
                 .allowsHitTesting(false)
         })
     }

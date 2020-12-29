@@ -53,6 +53,13 @@ struct VSquareButtonDemoView: View {
             )
         )
     }()
+    
+    private let largerHitBoxButtonModel: VSquareButtonModel = .init(
+        layout: .init(
+            hitBoxSpacingX: 10,
+            hitBoxSpacingY: 10
+        )
+    )
 }
 
 // MARK:- Body
@@ -82,6 +89,10 @@ extension VSquareButtonDemoView {
             
             DemoRowView(type: .titled("Bordered"), content: {
                 VSquareButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
+            })
+            
+            DemoRowView(type: .titled("Larger Hit Box"), content: {
+                VSquareButton(model: largerHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
             })
         })
     }

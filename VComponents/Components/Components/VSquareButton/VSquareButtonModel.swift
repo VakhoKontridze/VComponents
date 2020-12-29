@@ -36,12 +36,17 @@ extension VSquareButtonModel {
         public let contentMarginX: CGFloat
         public let contentMarginY: CGFloat
         
+        public let hitBoxSpacingX: CGFloat
+        public let hitBoxSpacingY: CGFloat
+        
         public init(
             dimension: CGFloat = 56,
             cornerRadius: CGFloat = 16,
             borderWidth: CGFloat = 1,
             contentMarginX: CGFloat = 3,
-            contentMarginY: CGFloat = 3
+            contentMarginY: CGFloat = 3,
+            hitBoxSpacingX: CGFloat = 0,
+            hitBoxSpacingY: CGFloat = 0
         ) {
             self.dimension = dimension
             self.cornerRadius = cornerRadius
@@ -49,6 +54,8 @@ extension VSquareButtonModel {
             self.hasBorder = borderWidth > 0
             self.contentMarginX = contentMarginX
             self.contentMarginY = contentMarginY
+            self.hitBoxSpacingX = hitBoxSpacingX
+            self.hitBoxSpacingY = hitBoxSpacingY
         }
     }
 }

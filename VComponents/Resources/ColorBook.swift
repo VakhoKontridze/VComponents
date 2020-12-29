@@ -25,42 +25,6 @@ extension ColorBook {
     public static let accent: Color = .init(componentAsset: "Accent")
 }
 
-
-// MARK:- Chevron Button
-extension ColorBook {
-    public struct ChevronButtonFilled {
-        public struct Background {
-            public static let enabled: Color = .init(componentAsset: "ChevronButtonFilled.Background.enabled")
-            public static let pressed: Color = .init(componentAsset: "ChevronButtonFilled.Background.pressed")
-            public static let disabled: Color = .init(componentAsset: "ChevronButtonFilled.Background.disabled")
-            
-            private init() {}
-        }
-        
-        public struct Foreground {
-            public static let enabled: Color = ColorBook.primary
-            public static let pressed: Color = enabled      // Opacity is applied
-            public static let disabled: Color = enabled     // Opacity is applied
-            
-            private init() {}
-        }
-        
-        private init() {}
-    }
-    
-    public struct ChevronButtonPlain {
-        public struct Foreground {
-            public static let enabled: Color = .init(componentAsset: "ChevronButtonPlain.Foreground.enabled")
-            public static let pressed: Color = enabled      // Opacity is applied
-            public static let disabled: Color = enabled     // Opacity is applied
-            
-            private init() {}
-        }
-        
-        private init() {}
-    }
-}
-
 // MARK:- Toggle
 extension ColorBook {
     public struct Toggle {

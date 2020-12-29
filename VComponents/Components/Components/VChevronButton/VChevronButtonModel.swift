@@ -1,5 +1,5 @@
 //
-//  VChevronButtonModelFilled.swift
+//  VChevronButtonModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK:- V Chevron Button Model Filled
-public struct VChevronButtonModelFilled {
+// MARK:- V Chevron Button Model
+public struct VChevronButtonModel {
     public let layout: Layout
     public let colors: Colors
-//    let squareButtonModel: VSquareButtonModelFilled
+    let squareButtonModel: VSquareButtonModel
     
     public init(
         layout: Layout = .init(),
@@ -20,36 +20,37 @@ public struct VChevronButtonModelFilled {
         self.layout = layout
         self.colors = colors
         
-//        self.squareButtonModel = .init(
-//            layout: .init(
-//                frame: .circular,
-//                dimension: layout.dimension,
-//                hitBoxSpacingX: layout.hitBoxSpacingX,
-//                hitBoxSpacingY: layout.hitBoxSpacingY
-//            ),
-//            colors: .init(
-//                foreground: .init(
-//                    enabled: colors.foreground.enabled,
-//                    pressed: colors.foreground.pressed,
-//                    disabled: colors.foreground.disabled,
-//                    pressedOpacity: colors.foreground.pressedOpacity,
-//                    disabledOpacity: colors.foreground.disabledOpacity
-//                ),
-//                background: .init(
-//                    enabled: colors.background.enabled,
-//                    pressed: colors.background.pressed,
-//                    disabled: colors.background.disabled
-//                )
-//            )
-//        )
+        self.squareButtonModel = .init(
+            layout: .init(
+                dimension: layout.dimension,
+                cornerRadius: layout.dimension / 2,
+                hitBoxSpacingX: layout.hitBoxSpacingX,
+                hitBoxSpacingY: layout.hitBoxSpacingY
+            ),
+            colors: .init(
+                foreground: .init(
+                    enabled: colors.foreground.enabled,
+                    pressed: colors.foreground.pressed,
+                    disabled: colors.foreground.disabled,
+                    pressedOpacity: colors.foreground.pressedOpacity,
+                    disabledOpacity: colors.foreground.disabledOpacity
+                ),
+                background: .init(
+                    enabled: colors.background.enabled,
+                    pressed: colors.background.pressed,
+                    disabled: colors.background.disabled
+                )
+            )
+        )
     }
 }
 
 // MARK:- Layout
-extension VChevronButtonModelFilled {
+extension VChevronButtonModel {
     public struct Layout {
         public let dimension: CGFloat
         public let iconDimension: CGFloat
+        
         public let hitBoxSpacingX: CGFloat
         public let hitBoxSpacingY: CGFloat
         
@@ -68,7 +69,7 @@ extension VChevronButtonModelFilled {
 }
 
 // MARK:- Colors
-extension VChevronButtonModelFilled {
+extension VChevronButtonModel {
     public struct Colors {
         public let foreground: ForegroundColors
         public let background: BackgroundColors
@@ -83,7 +84,7 @@ extension VChevronButtonModelFilled {
     }
 }
 
-extension VChevronButtonModelFilled {
+extension VChevronButtonModel {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -92,10 +93,10 @@ extension VChevronButtonModelFilled {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.ChevronButtonFilled.Foreground.enabled,
-            pressed: Color = ColorBook.ChevronButtonFilled.Foreground.pressed,
-            disabled: Color = ColorBook.ChevronButtonFilled.Foreground.disabled,
-            pressedOpacity: Double = 1,
+            enabled: Color = ColorBook.primary,
+            pressed: Color = ColorBook.primary,
+            disabled: Color = ColorBook.primary,
+            pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
             self.enabled = enabled
@@ -112,9 +113,9 @@ extension VChevronButtonModelFilled {
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.ChevronButtonFilled.Background.enabled,
-            pressed: Color = ColorBook.ChevronButtonFilled.Background.pressed,
-            disabled: Color = ColorBook.ChevronButtonFilled.Background.disabled
+            enabled: Color = .init(componentAsset: "ChevronButton.Background.enabled"),
+            pressed: Color = .init(componentAsset: "ChevronButton.Background.pressed"),
+            disabled: Color = .init(componentAsset: "ChevronButton.Background.disabled")
         ) {
             self.enabled = enabled
             self.pressed = pressed
