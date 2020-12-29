@@ -84,12 +84,12 @@ private extension VChevronButtonDirection {
 }
 
 // MARK:- Preview
-struct VChevronButton_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(content: {
-            VChevronButtonFilled_Previews.previews
-            VChevronButtonPlain_Previews.previews
-        })
-            .padding()
-    }
-}
+//struct VChevronButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack(content: {
+//            VChevronButtonFilled_Previews.previews
+//            VChevronButtonPlain_Previews.previews
+//        })
+//            .padding()
+//    }
+//}

@@ -62,6 +62,8 @@ extension VSecondaryButtonModel {
 // MARK:- Colors
 extension VSecondaryButtonModel {
     public struct Colors {
+        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
+        
         public let foreground: ForegroundColors
         public let background: BackgroundColors
         public let border: BorderColors
@@ -87,9 +89,9 @@ extension VSecondaryButtonModel.Colors {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = VPrimaryButtonModel.Colors.ForegroundColors().enabled,
-            pressed: Color = VPrimaryButtonModel.Colors.ForegroundColors().pressed,
-            disabled: Color = VPrimaryButtonModel.Colors.ForegroundColors().disabled,
+            enabled: Color = primaryButtonColors.foreground.enabled,
+            pressed: Color = primaryButtonColors.foreground.pressed,
+            disabled: Color = primaryButtonColors.foreground.disabled,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
@@ -107,9 +109,9 @@ extension VSecondaryButtonModel.Colors {
         public let disabled: Color
         
         public init(
-            enabled: Color = VPrimaryButtonModel.Colors.BackgroundColors().enabled,
-            pressed: Color = VPrimaryButtonModel.Colors.BackgroundColors().pressed,
-            disabled: Color = VPrimaryButtonModel.Colors.BackgroundColors().disabled
+            enabled: Color = primaryButtonColors.background.enabled,
+            pressed: Color = primaryButtonColors.background.pressed,
+            disabled: Color = primaryButtonColors.background.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -123,9 +125,9 @@ extension VSecondaryButtonModel.Colors {
         public let disabled: Color
         
         public init(
-            enabled: Color = .clear,
-            pressed: Color = .clear,
-            disabled: Color = .clear
+            enabled: Color = primaryButtonColors.border.enabled,
+            pressed: Color = primaryButtonColors.border.pressed,
+            disabled: Color = primaryButtonColors.border.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed

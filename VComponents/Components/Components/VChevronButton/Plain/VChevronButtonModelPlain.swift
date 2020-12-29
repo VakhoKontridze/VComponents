@@ -11,7 +11,7 @@ import SwiftUI
 public struct VChevronButtonModelPlain {
     public let layout: Layout
     public let colors: Colors
-    let squareButtonModel: VSquareButtonModelFilled
+//    let squareButtonModel: VSquareButtonModelFilled
     
     public init(
         layout: Layout = .init(),
@@ -20,28 +20,28 @@ public struct VChevronButtonModelPlain {
         self.layout = layout
         self.colors = colors
         
-        self.squareButtonModel = .init(
-            layout: .init(
-                frame: .circular,
-                dimension: layout.dimension,
-                hitBoxSpacingX: layout.hitBoxSpacingX,
-                hitBoxSpacingY: layout.hitBoxSpacingY
-            ),
-            colors: .init(
-                foreground: .init(
-                    enabled: colors.enabled,
-                    pressed: colors.pressed,
-                    disabled: colors.disabled,
-                    pressedOpacity: colors.pressedOpacity,
-                    disabledOpacity: colors.disabledOpacity
-                ),
-                background: .init(
-                    enabled: .clear,
-                    pressed: .clear,
-                    disabled: .clear
-                )
-            )
-        )
+//        self.squareButtonModel = .init(
+//            layout: .init(
+//                frame: .circular,
+//                dimension: layout.dimension,
+//                hitBoxSpacingX: layout.hitBoxSpacingX,
+//                hitBoxSpacingY: layout.hitBoxSpacingY
+//            ),
+//            colors: .init(
+//                foreground: .init(
+//                    enabled: colors.enabled,
+//                    pressed: colors.pressed,
+//                    disabled: colors.disabled,
+//                    pressedOpacity: colors.pressedOpacity,
+//                    disabledOpacity: colors.disabledOpacity
+//                ),
+//                background: .init(
+//                    enabled: .clear,
+//                    pressed: .clear,
+//                    disabled: .clear
+//                )
+//            )
+//        )
     }
 }
 

@@ -1,16 +1,16 @@
 //
-//  VSquareButtonFilled.swift
+//  VSquareButton.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/23/20.
+//  Created by Vakhtang Kontridze on 19.12.20.
 //
 
 import SwiftUI
 
-// MARK:- V Square Button Standard
-struct VSquareButtonFilled<Content>: View where Content: View {
+// MARK:- V Square Button
+public struct VSquareButton<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSquareButtonModelFilled
+    private let model: VSquareButtonModel
     
     private let state: VSquareButtonState
     @State private var isPressed: Bool = false
@@ -21,9 +21,9 @@ struct VSquareButtonFilled<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    init(
-        model: VSquareButtonModelFilled,
-        state: VSquareButtonState,
+    public init(
+        model: VSquareButtonModel = .init(),
+        state: VSquareButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -32,36 +32,49 @@ struct VSquareButtonFilled<Content>: View where Content: View {
         self.action = action
         self.content = content
     }
+
+    public init<S>(
+        model: VSquareButtonModel = .init(),
+        state: VSquareButtonState = .enabled,
+        action: @escaping () -> Void,
+        title: S
+    )
+        where
+            Content == Text,
+            S: StringProtocol
+    {
+        self.init(
+            model: model,
+            state: state,
+            action: action,
+            content: { Text(title) }
+        )
+    }
 }
 
 // MARK:- Body
-extension VSquareButtonFilled {
+public extension VSquareButton {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
             action: action,
             onPress: { isPressed = $0 },
-            content: { hitBox }
+            content: { buttonView }
         )
-    }
-    
-    private var hitBox: some View {
-        buttonView
-            .padding(.horizontal, model.layout.hitBoxSpacingX)
-            .padding(.vertical, model.layout.hitBoxSpacingY)
     }
     
     private var buttonView: some View {
         buttonContent
             .frame(dimension: model.layout.dimension)
             .background(backgroundView)
+            .overlay(border)
     }
     
     private var buttonContent: some View {
         GenericButtonContentView(
             foregroundColor: model.colors.foregroundColor(state: internalState),
             foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-            font: model.fonts.title,
+            font: model.font,
             content: content
         )
             .padding(.horizontal, model.layout.contentMarginX)
@@ -72,28 +85,22 @@ extension VSquareButtonFilled {
         RoundedRectangle(cornerRadius: model.layout.cornerRadius)
             .foregroundColor(model.colors.backgroundColor(state: internalState))
     }
+    
+    @ViewBuilder private var border: some View {
+        if model.layout.hasBorder {
+            RoundedRectangle(cornerRadius: model.layout.cornerRadius)
+                .strokeBorder(model.colors.borderColor(state: internalState), lineWidth: model.layout.borderWidth)
+        }
+    }
 }
 
 // MARK:- Preview
-struct VSquareButtonFilled_Previews: PreviewProvider {
-    private static let roundedModel: VSquareButtonModelFilled = .init(
-        layout: .init(
-            frame: .rounded()
-        )
-    )
-    
-    private static var content: some View {
-        Image(systemName: "swift")
-            .resizable()
-            .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(ColorBook.primaryInverted)
-    }
-    
-    static var previews: some View {
-        HStack(content: {
-            VSquareButtonFilled(model: .init(), state: .enabled, action: {}, content: { content })
-            
-            VSquareButtonFilled(model: roundedModel, state: .enabled, action: {}, content: { content })
-        })
-    }
-}
+//struct VSquareButton_Previews: PreviewProvider {
+//    static var previews: some View {
+//        VStack(content: {
+//            VSquareButtonFilled_Previews.previews
+//            VSquareButtonBordered_Previews.previews
+//        })
+//            .padding()
+//    }
+//}

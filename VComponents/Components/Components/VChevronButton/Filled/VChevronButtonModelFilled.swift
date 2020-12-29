@@ -11,7 +11,7 @@ import SwiftUI
 public struct VChevronButtonModelFilled {
     public let layout: Layout
     public let colors: Colors
-    let squareButtonModel: VSquareButtonModelFilled
+//    let squareButtonModel: VSquareButtonModelFilled
     
     public init(
         layout: Layout = .init(),
@@ -20,28 +20,28 @@ public struct VChevronButtonModelFilled {
         self.layout = layout
         self.colors = colors
         
-        self.squareButtonModel = .init(
-            layout: .init(
-                frame: .circular,
-                dimension: layout.dimension,
-                hitBoxSpacingX: layout.hitBoxSpacingX,
-                hitBoxSpacingY: layout.hitBoxSpacingY
-            ),
-            colors: .init(
-                foreground: .init(
-                    enabled: colors.foreground.enabled,
-                    pressed: colors.foreground.pressed,
-                    disabled: colors.foreground.disabled,
-                    pressedOpacity: colors.foreground.pressedOpacity,
-                    disabledOpacity: colors.foreground.disabledOpacity
-                ),
-                background: .init(
-                    enabled: colors.background.enabled,
-                    pressed: colors.background.pressed,
-                    disabled: colors.background.disabled
-                )
-            )
-        )
+//        self.squareButtonModel = .init(
+//            layout: .init(
+//                frame: .circular,
+//                dimension: layout.dimension,
+//                hitBoxSpacingX: layout.hitBoxSpacingX,
+//                hitBoxSpacingY: layout.hitBoxSpacingY
+//            ),
+//            colors: .init(
+//                foreground: .init(
+//                    enabled: colors.foreground.enabled,
+//                    pressed: colors.foreground.pressed,
+//                    disabled: colors.foreground.disabled,
+//                    pressedOpacity: colors.foreground.pressedOpacity,
+//                    disabledOpacity: colors.foreground.disabledOpacity
+//                ),
+//                background: .init(
+//                    enabled: colors.background.enabled,
+//                    pressed: colors.background.pressed,
+//                    disabled: colors.background.disabled
+//                )
+//            )
+//        )
     }
 }
 

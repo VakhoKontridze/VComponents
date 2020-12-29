@@ -43,9 +43,8 @@
 		7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */; };
 		7A3C159B258E0A3D00CE1D96 /* VLazyListModelVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C159A258E0A3D00CE1D96 /* VLazyListModelVertical.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */; };
-		7A48FDC9258DE48E00AA4D4D /* VSquareButtonStandardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC5258DE48E00AA4D4D /* VSquareButtonStandardModel.swift */; };
 		7A48FDCA258DE48E00AA4D4D /* VSquareButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */; };
-		7A48FDDE258DE58800AA4D4D /* VCircularButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */; };
+		7A48FDDE258DE58800AA4D4D /* VSquareButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDDD258DE58800AA4D4D /* VSquareButtonDemoView.swift */; };
 		7A4C4240259132F5000207DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7A4C423F259132F5000207DD /* Assets.xcassets */; };
 		7A4C42862591FB5B000207DD /* VComponents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8A96E5258DDA9200309886 /* VComponents.framework */; };
 		7A4C42872591FB5B000207DD /* VComponents.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7A8A96E5258DDA9200309886 /* VComponents.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -60,10 +59,9 @@
 		7A4D0C1525949FF700108575 /* HomeSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C1425949FF700108575 /* HomeSectionView.swift */; };
 		7A4D0C2E2594C06A00108575 /* VSecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C2D2594C06A00108575 /* VSecondaryButton.swift */; };
 		7A4D0C372594C0CE00108575 /* VSecondaryButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C362594C0CE00108575 /* VSecondaryButtonState.swift */; };
-		7A4D0C442594C71D00108575 /* VSecondaryButtonModelBordered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C432594C71D00108575 /* VSecondaryButtonModelBordered.swift */; };
+		7A4D0C442594C71D00108575 /* VSecondaryButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C432594C71D00108575 /* VSecondaryButtonModel.swift */; };
 		7A4D0C4C2594C91400108575 /* VSecondaryButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C4B2594C91400108575 /* VSecondaryButtonDemoView.swift */; };
-		7A4D0C562594D30A00108575 /* VSquareButtonModelBordered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C552594D30A00108575 /* VSquareButtonModelBordered.swift */; };
-		7A4D0C5A2594D34200108575 /* VSquareButtonBordered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C592594D34200108575 /* VSquareButtonBordered.swift */; };
+		7A4D0C562594D30A00108575 /* VSquareButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C552594D30A00108575 /* VSquareButtonModel.swift */; };
 		7A59957E2592442A0087902B /* VNavigationViewAppearanceFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59957D2592442A0087902B /* VNavigationViewAppearanceFilled.swift */; };
 		7A599581259245660087902B /* BaseDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A599580259245660087902B /* BaseDemoView.swift */; };
 		7A599587259249BC0087902B /* VChevronButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A599586259249BB0087902B /* VChevronButton.swift */; };
@@ -83,8 +81,6 @@
 		7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218372594956400515688 /* VLazyListHorizontal.swift */; };
 		7A6689502593AE0200A46F08 /* VPlainButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66894F2593AE0200A46F08 /* VPlainButtonType.swift */; };
 		7A66895D2593AEF800A46F08 /* VPlainButtonStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A66895C2593AEF800A46F08 /* VPlainButtonStandard.swift */; };
-		7A6689632593B05B00A46F08 /* VSquareButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6689622593B05B00A46F08 /* VSquareButtonType.swift */; };
-		7A6689692593B0AC00A46F08 /* VSquareButtonStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6689682593B0AC00A46F08 /* VSquareButtonStandard.swift */; };
 		7A860D46259312B100B19A53 /* SettingRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D45259312B100B19A53 /* SettingRootView.swift */; };
 		7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */; };
 		7A860D4F2593169600B19A53 /* VChevronButtonModelFilled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4E2593169600B19A53 /* VChevronButtonModelFilled.swift */; };
@@ -201,9 +197,8 @@
 		7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyList.swift; sourceTree = "<group>"; };
 		7A3C159A258E0A3D00CE1D96 /* VLazyListModelVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListModelVertical.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButton.swift; sourceTree = "<group>"; };
-		7A48FDC5258DE48E00AA4D4D /* VSquareButtonStandardModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButtonStandardModel.swift; sourceTree = "<group>"; };
 		7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButtonState.swift; sourceTree = "<group>"; };
-		7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCircularButtonDemoView.swift; sourceTree = "<group>"; };
+		7A48FDDD258DE58800AA4D4D /* VSquareButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSquareButtonDemoView.swift; sourceTree = "<group>"; };
 		7A4C423F259132F5000207DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A4C42F3259228E8000207DD /* VNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationView.swift; sourceTree = "<group>"; };
 		7A4C42F725922914000207DD /* VBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseView.swift; sourceTree = "<group>"; };
@@ -216,10 +211,9 @@
 		7A4D0C1425949FF700108575 /* HomeSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSectionView.swift; sourceTree = "<group>"; };
 		7A4D0C2D2594C06A00108575 /* VSecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButton.swift; sourceTree = "<group>"; };
 		7A4D0C362594C0CE00108575 /* VSecondaryButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButtonState.swift; sourceTree = "<group>"; };
-		7A4D0C432594C71D00108575 /* VSecondaryButtonModelBordered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButtonModelBordered.swift; sourceTree = "<group>"; };
+		7A4D0C432594C71D00108575 /* VSecondaryButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButtonModel.swift; sourceTree = "<group>"; };
 		7A4D0C4B2594C91400108575 /* VSecondaryButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButtonDemoView.swift; sourceTree = "<group>"; };
-		7A4D0C552594D30A00108575 /* VSquareButtonModelBordered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSquareButtonModelBordered.swift; sourceTree = "<group>"; };
-		7A4D0C592594D34200108575 /* VSquareButtonBordered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSquareButtonBordered.swift; sourceTree = "<group>"; };
+		7A4D0C552594D30A00108575 /* VSquareButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSquareButtonModel.swift; sourceTree = "<group>"; };
 		7A59957D2592442A0087902B /* VNavigationViewAppearanceFilled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VNavigationViewAppearanceFilled.swift; sourceTree = "<group>"; };
 		7A599580259245660087902B /* BaseDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDemoView.swift; sourceTree = "<group>"; };
 		7A599586259249BB0087902B /* VChevronButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButton.swift; sourceTree = "<group>"; };
@@ -239,8 +233,6 @@
 		7A6218372594956400515688 /* VLazyListHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListHorizontal.swift; sourceTree = "<group>"; };
 		7A66894F2593AE0200A46F08 /* VPlainButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonType.swift; sourceTree = "<group>"; };
 		7A66895C2593AEF800A46F08 /* VPlainButtonStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonStandard.swift; sourceTree = "<group>"; };
-		7A6689622593B05B00A46F08 /* VSquareButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSquareButtonType.swift; sourceTree = "<group>"; };
-		7A6689682593B0AC00A46F08 /* VSquareButtonStandard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSquareButtonStandard.swift; sourceTree = "<group>"; };
 		7A860D45259312B100B19A53 /* SettingRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingRootView.swift; sourceTree = "<group>"; };
 		7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonDirection.swift; sourceTree = "<group>"; };
 		7A860D4E2593169600B19A53 /* VChevronButtonModelFilled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonModelFilled.swift; sourceTree = "<group>"; };
@@ -446,18 +438,9 @@
 			children = (
 				7A4D0C2D2594C06A00108575 /* VSecondaryButton.swift */,
 				7A4D0C362594C0CE00108575 /* VSecondaryButtonState.swift */,
-				7A4D0C432594C71D00108575 /* VSecondaryButtonModelBordered.swift */,
+				7A4D0C432594C71D00108575 /* VSecondaryButtonModel.swift */,
 			);
 			path = VSecondaryButton;
-			sourceTree = "<group>";
-		};
-		7A4D0C542594D2D900108575 /* Bordered */ = {
-			isa = PBXGroup;
-			children = (
-				7A4D0C592594D34200108575 /* VSquareButtonBordered.swift */,
-				7A4D0C552594D30A00108575 /* VSquareButtonModelBordered.swift */,
-			);
-			path = Bordered;
 			sourceTree = "<group>";
 		};
 		7A599585259249AC0087902B /* VChevronButton */ = {
@@ -599,25 +582,6 @@
 				7A007322258E27C40003F0E9 /* VPlainButtonModelStandard.swift */,
 			);
 			path = Standard;
-			sourceTree = "<group>";
-		};
-		7A6689602593AFE000A46F08 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */,
-				7A6689622593B05B00A46F08 /* VSquareButtonType.swift */,
-				7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		7A6689652593B09600A46F08 /* Filled */ = {
-			isa = PBXGroup;
-			children = (
-				7A6689682593B0AC00A46F08 /* VSquareButtonStandard.swift */,
-				7A48FDC5258DE48E00AA4D4D /* VSquareButtonStandardModel.swift */,
-			);
-			path = Filled;
 			sourceTree = "<group>";
 		};
 		7A8A73782590BEB5001024FB /* VToggle */ = {
@@ -851,7 +815,7 @@
 			children = (
 				7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */,
 				7A4D0C4B2594C91400108575 /* VSecondaryButtonDemoView.swift */,
-				7A48FDDD258DE58800AA4D4D /* VCircularButtonDemoView.swift */,
+				7A48FDDD258DE58800AA4D4D /* VSquareButtonDemoView.swift */,
 				7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */,
 				7ABEA9DB259326EA00A90B56 /* VChevronButtonDemoView.swift */,
 				7A00737E258E7C7A0003F0E9 /* VToggleDemoView.swift */,
@@ -1115,9 +1079,9 @@
 		7AF4C8CF2590BA3A00275C76 /* VSquareButton */ = {
 			isa = PBXGroup;
 			children = (
-				7A6689602593AFE000A46F08 /* Common */,
-				7A6689652593B09600A46F08 /* Filled */,
-				7A4D0C542594D2D900108575 /* Bordered */,
+				7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */,
+				7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */,
+				7A4D0C552594D30A00108575 /* VSquareButtonModel.swift */,
 			);
 			path = VSquareButton;
 			sourceTree = "<group>";
@@ -1239,7 +1203,7 @@
 				7A6218292594938C00515688 /* VLazyListType.swift in Sources */,
 				7A66895D2593AEF800A46F08 /* VPlainButtonStandard.swift in Sources */,
 				7A08F85C259731E60049FB10 /* VTabNavigationViewAppearanceStandard.swift in Sources */,
-				7A4D0C562594D30A00108575 /* VSquareButtonModelBordered.swift in Sources */,
+				7A4D0C562594D30A00108575 /* VSquareButtonModel.swift in Sources */,
 				7A259B6E259784CF00A12F8C /* VAlertDialogButton.swift in Sources */,
 				7A621834259494CB00515688 /* VLazyListVertical.swift in Sources */,
 				7AD809572594FF2F00DABE49 /* VSideBarStandard.swift in Sources */,
@@ -1248,10 +1212,8 @@
 				7A59959125924F6C0087902B /* VSheetType.swift in Sources */,
 				7A3C1555258DE7B900CE1D96 /* VSpinnerType.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
-				7A48FDC9258DE48E00AA4D4D /* VSquareButtonStandardModel.swift in Sources */,
 				7A007323258E27C40003F0E9 /* VPlainButtonModelStandard.swift in Sources */,
 				7A259B652597828700A12F8C /* VAlertExtension.swift in Sources */,
-				7A6689692593B0AC00A46F08 /* VSquareButtonStandard.swift in Sources */,
 				7AC5060125911A0800226656 /* VSpinnerModelDashed.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */,
 				7ABEAA6A2593474C00A90B56 /* VSheetModelRoundCustom.swift in Sources */,
@@ -1265,7 +1227,7 @@
 				7A08F84825972DBC0049FB10 /* VTabNavigationViewType.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
-				7A4D0C442594C71D00108575 /* VSecondaryButtonModelBordered.swift in Sources */,
+				7A4D0C442594C71D00108575 /* VSecondaryButtonModel.swift in Sources */,
 				7A62181725948BBC00515688 /* VBaseViewType.swift in Sources */,
 				7A8A73872590BFFA001024FB /* VToggleModelStandard.swift in Sources */,
 				7AE32A762593BD7900DFD0C3 /* VChevronButtonPlain.swift in Sources */,
@@ -1313,9 +1275,7 @@
 				7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */,
 				7AD809532594FE1600DABE49 /* VSideBarType.swift in Sources */,
 				7A860D5225931B3C00B19A53 /* VChevronButtonState.swift in Sources */,
-				7A4D0C5A2594D34200108575 /* VSquareButtonBordered.swift in Sources */,
 				7A259B682597834100A12F8C /* VAlertType.swift in Sources */,
-				7A6689632593B05B00A46F08 /* VSquareButtonType.swift in Sources */,
 				7A4C4304259229B2000207DD /* VBaseViewSwipeGesture.swift in Sources */,
 				7A8A7467259118DF001024FB /* VSpinnerModelContinous.swift in Sources */,
 				7AE32A4C2593B90400DFD0C3 /* VChevronButtonFilled.swift in Sources */,
@@ -1350,7 +1310,7 @@
 				7AD809612595073C00DABE49 /* VSideBarDemoView.swift in Sources */,
 				7A2D6F30259734CB005513A7 /* VTabNavigationViewDemoView.swift in Sources */,
 				7A8A96FE258DDC7800309886 /* SceneDelegate.swift in Sources */,
-				7A48FDDE258DE58800AA4D4D /* VCircularButtonDemoView.swift in Sources */,
+				7A48FDDE258DE58800AA4D4D /* VSquareButtonDemoView.swift in Sources */,
 				7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */,
 				7ABEAA7325934E5100A90B56 /* VNavigationViewDemoView.swift in Sources */,
 				7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */,

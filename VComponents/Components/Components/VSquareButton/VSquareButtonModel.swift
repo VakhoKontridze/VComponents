@@ -1,5 +1,5 @@
 //
-//  VSquareButtonModelFilled.swift
+//  VSquareButtonModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,82 +7,74 @@
 
 import SwiftUI
 
-// MARK:- V Square Button Model Standard
-public struct VSquareButtonModelFilled {
+// MARK:- V Square Button Model
+public struct VSquareButtonModel {
     public let layout: Layout
     public let colors: Colors
-    public let fonts: Fonts
+    public let font: Font
     
     public init(
         layout: Layout = .init(),
         colors: Colors = .init(),
-        fonts: Fonts = .init()
+        font: Font = .system(size: 14, weight: .semibold, design: .default)
     ) {
         self.layout = layout
         self.colors = colors
-        self.fonts = fonts
+        self.font = font
     }
 }
 
 // MARK:- Layout
-extension VSquareButtonModelFilled {
+extension VSquareButtonModel {
     public struct Layout {
-        public let frame: Frame
-        let cornerRadius: CGFloat
         public let dimension: CGFloat
+        public let cornerRadius: CGFloat
+        
+        public let borderWidth: CGFloat
+        let hasBorder: Bool
+        
         public let contentMarginX: CGFloat
         public let contentMarginY: CGFloat
-        public let hitBoxSpacingX: CGFloat
-        public let hitBoxSpacingY: CGFloat
         
         public init(
-            frame: Frame = .circular,
             dimension: CGFloat = 56,
+            cornerRadius: CGFloat = 16,
+            borderWidth: CGFloat = 1,
             contentMarginX: CGFloat = 3,
-            contentMarginY: CGFloat = 3,
-            hitBoxSpacingX: CGFloat = 0,
-            hitBoxSpacingY: CGFloat = 0
+            contentMarginY: CGFloat = 3
         ) {
-            self.frame = frame
-            self.cornerRadius = {
-                switch frame {
-                case .circular: return dimension / 2
-                case .rounded(let radius): return radius
-                }
-            }()
             self.dimension = dimension
+            self.cornerRadius = cornerRadius
+            self.borderWidth = borderWidth
+            self.hasBorder = borderWidth > 0
             self.contentMarginX = contentMarginX
             self.contentMarginY = contentMarginY
-            self.hitBoxSpacingX = hitBoxSpacingX
-            self.hitBoxSpacingY = hitBoxSpacingY
         }
-    }
-}
-
-extension VSquareButtonModelFilled.Layout {
-    public enum Frame {
-        case circular
-        case rounded(radius: CGFloat = 16)
     }
 }
 
 // MARK:- Colors
-extension VSquareButtonModelFilled {
+extension VSquareButtonModel {
     public struct Colors {
+        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
+        
         public let foreground: ForegroundColors
         public let background: BackgroundColors
+        public let border: BorderColors
         
         public init(
             foreground: ForegroundColors = .init(),
-            background: BackgroundColors = .init()
+            background: BackgroundColors = .init(),
+            border: BorderColors = .init()
         ) {
             self.foreground = foreground
             self.background = background
+            self.border = border
         }
     }
 }
 
-extension VSquareButtonModelFilled {
+extension VSquareButtonModel.Colors {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -91,9 +83,9 @@ extension VSquareButtonModelFilled {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.SquareButtonFilled.Foreground.enabled,
-            pressed: Color = ColorBook.SquareButtonFilled.Foreground.pressed,
-            disabled: Color = ColorBook.SquareButtonFilled.Foreground.disabled,
+            enabled: Color = primaryButtonColors.foreground.enabled,
+            pressed: Color = primaryButtonColors.foreground.pressed,
+            disabled: Color = primaryButtonColors.foreground.disabled,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
@@ -111,9 +103,25 @@ extension VSquareButtonModelFilled {
         public let disabled: Color
         
         public init(
-            enabled: Color = ColorBook.SquareButtonFilled.Background.enabled,
-            pressed: Color = ColorBook.SquareButtonFilled.Background.pressed,
-            disabled: Color = ColorBook.SquareButtonFilled.Background.disabled
+            enabled: Color = primaryButtonColors.background.enabled,
+            pressed: Color = primaryButtonColors.background.pressed,
+            disabled: Color = primaryButtonColors.background.disabled
+        ) {
+            self.enabled = enabled
+            self.pressed = pressed
+            self.disabled = disabled
+        }
+    }
+    
+    public struct BorderColors {
+        public let enabled: Color
+        public let pressed: Color
+        public let disabled: Color
+        
+        public init(
+            enabled: Color = primaryButtonColors.border.enabled,
+            pressed: Color = primaryButtonColors.border.pressed,
+            disabled: Color = primaryButtonColors.border.disabled
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -122,21 +130,8 @@ extension VSquareButtonModelFilled {
     }
 }
 
-// MARK:- Fonts
-extension VSquareButtonModelFilled {
-    public struct Fonts {
-        public let title: Font
-        
-        public init(
-            title: Font = FontBook.buttonSmall
-        ) {
-            self.title = title
-        }
-    }
-}
-
 // MARK:- Mapping
-extension VSquareButtonModelFilled.Colors {
+extension VSquareButtonModel.Colors {
     func foregroundColor(state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
@@ -158,6 +153,14 @@ extension VSquareButtonModelFilled.Colors {
         case .enabled: return background.enabled
         case .pressed: return background.pressed
         case .disabled: return background.disabled
+        }
+    }
+    
+    func borderColor(state: VSquareButtonInternalState) -> Color {
+        switch state {
+        case .enabled: return border.enabled
+        case .pressed: return border.pressed
+        case .disabled: return border.disabled
         }
     }
 }
