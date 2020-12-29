@@ -11,18 +11,18 @@ import SwiftUI
 public struct VPrimaryButtonModel {
     public let layout: Layout
     public let colors: Colors
-    public let fonts: Fonts
+    public let font: Font
     
     let spinnerModel: VSpinnerModelContinous
     
     public init(
         layout: Layout = .init(),
         colors: Colors = .init(),
-        fonts: Fonts = .init()
+        font: Font = .system(size: 16, weight: .semibold, design: .default)
     ) {
         self.layout = layout
         self.colors = colors
-        self.fonts = fonts
+        self.font = font
         self.spinnerModel = .init(
             colors: .init(spinner: colors.loader)
         )
@@ -149,19 +149,6 @@ extension VPrimaryButtonModel.Colors {
             self.pressed = pressed
             self.disabled = disabled
             self.loading = loading
-        }
-    }
-}
-
-// MARK:- Fonts
-extension VPrimaryButtonModel {
-    public struct Fonts {
-        public let title: Font
-        
-        public init(
-            title: Font = .system(size: 16, weight: .semibold, design: .default)
-        ) {
-            self.title = title
         }
     }
 }

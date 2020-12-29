@@ -23,59 +23,47 @@ struct VSecondaryButtonDemoView: View {
     }
     
     @State private var buttonState: VSecondaryButtonState = .enabled
+    
+    private let borderedModel: VSecondaryButtonModel = {
+        let defaultModel: VSecondaryButtonModel = .init()
+        
+        return .init(
+            colors: .init(
+                foreground: .init(
+                    enabled: defaultModel.colors.background.enabled,
+                    pressed: defaultModel.colors.background.pressed,
+                    disabled: defaultModel.colors.background.disabled
+                ),
+                background: .init(
+                    enabled: .init("PrimaryButtonBordered.Background.enabled"),
+                    pressed: .init("PrimaryButtonBordered.Background.pressed"),
+                    disabled: .init("PrimaryButtonBordered.Background.disabled")
+                ),
+                border: .init(
+                    enabled: defaultModel.colors.background.enabled,
+                    pressed: defaultModel.colors.background.pressed,
+                    disabled: defaultModel.colors.background.disabled
+                )
+            )
+        )
+    }()
+    
+    private let clippedHitBoxModel: VSecondaryButtonModel = .init(
+        layout: .init(
+            hitBoxSpacingX: 0,
+            hitBoxSpacingY: 0
+        )
+    )
 }
 
 // MARK:- Body
 extension VSecondaryButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            filledButton
-            borderedButton
-            imageButtons
-            clippedHitBoxButton
-        })
-    }
-    
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ToggleSettingView(
-                isOn: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
-        })
-    }
-
-    private var filledButton: some View {
-        VStack(content: {
-            DemoRowView(type: .titled("Filled"), content: {
-                VSecondaryButton(.filled(), state: buttonState, action: action, title: buttonTitle)
-            })
-        })
-    }
-    
-    private var borderedButton: some View {
-        let dashedButtonModel: VSecondaryButtonModelBordered = .init(
-            layout: .init(
-                borderType: .dashed()
-            )
-        )
-        
-        return VStack(content: {
-            DemoRowView(type: .titled("Continous Border"), content: {
-                VSecondaryButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
+            DemoRowView(type: .titled("Text"), content: {
+                VSecondaryButton(state: buttonState, action: action, title: buttonTitle)
             })
             
-            DemoRowView(type: .titled("Dashed Border"), content: {
-                VSecondaryButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
-            })
-        })
-    }
-    
-    private var imageButtons: some View {
-        VStack(content: {
             DemoRowView(type: .titled("Image"), content: {
                 VSecondaryButton(state: buttonState, action: action, content: buttonContent)
             })
@@ -88,21 +76,26 @@ extension VSecondaryButtonDemoView {
                     })
                 })
             })
+            
+            DemoRowView(type: .titled("Bordered"), content: {
+                VSecondaryButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
+            })
+            
+            DemoRowView(type: .titled("Clipped Hit Box"), content: {
+                VSecondaryButton(model: clippedHitBoxModel, state: buttonState, action: action, title: buttonTitle)
+            })
         })
     }
     
-    private var clippedHitBoxButton: some View {
-        let clippedHitBoxButtonModel: VSecondaryButtonModelFilled = .init(
-            layout: .init(
-                hitBoxSpacingX: 0,
-                hitBoxSpacingY: 0
+    private var controller: some View {
+        DemoRowView(type: .controller, content: {
+            ToggleSettingView(
+                isOn: .init(
+                    get: { buttonState == .disabled },
+                    set: { buttonState = $0 ? .disabled : .enabled }
+                ),
+                title: "Disabled"
             )
-        )
-        
-        return VStack(content: {
-            DemoRowView(type: .titled("Clipped Hit Box"), content: {
-                VSecondaryButton(.filled(clippedHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
-            })
         })
     }
 }

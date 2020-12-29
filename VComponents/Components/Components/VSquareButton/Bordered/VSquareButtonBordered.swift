@@ -59,7 +59,7 @@ extension VSquareButtonBordered {
     }
     
     private var buttonContent: some View {
-        VGenericButtonContentView(
+        GenericButtonContentView(
             foregroundColor: model.colors.foregroundColor(state: internalState),
             foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
             font: model.fonts.title,

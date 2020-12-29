@@ -25,57 +25,6 @@ extension ColorBook {
     public static let accent: Color = .init(componentAsset: "Accent")
 }
 
-// MARK:- Secondary Button
-extension ColorBook {
-    public struct SecondaryButtonFilled {
-        public struct Foreground {
-            public static let enabled: Color = .clear//PrimaryButtonFilled.Foreground.enabled
-            public static let pressed: Color = .clear//PrimaryButtonFilled.Foreground.pressed
-            public static let disabled: Color = .clear//PrimaryButtonFilled.Foreground.disabled
-            
-            private init() {}
-        }
-        
-        public struct Background {
-            public static let enabled: Color = .clear//PrimaryButtonFilled.Background.enabled
-            public static let pressed: Color = .clear//PrimaryButtonFilled.Background.pressed
-            public static let disabled: Color = .clear//PrimaryButtonFilled.Background.disabled
-            
-            private init() {}
-        }
-        
-        private init() {}
-    }
-    
-    public struct SecondaryButtonBordered {
-        public struct Foreground {
-            public static let enabled: Color = .clear//PrimaryButtonBordered.Foreground.enabled
-            public static let pressed: Color = .clear//PrimaryButtonBordered.Foreground.pressed
-            public static let disabled: Color = .clear//PrimaryButtonBordered.Foreground.disabled
-            
-            private init() {}
-        }
-        
-        public struct Background {
-            public static let enabled: Color = .clear//PrimaryButtonBordered.Background.enabled
-            public static let pressed: Color = .clear//PrimaryButtonBordered.Background.pressed
-            public static let disabled: Color = .clear//PrimaryButtonBordered.Background.disabled
-            
-            private init() {}
-        }
-        
-        public struct Border {
-            public static let enabled: Color = .clear//PrimaryButtonBordered.Border.enabled
-            public static let pressed: Color = .clear//PrimaryButtonBordered.Border.pressed
-            public static let disabled: Color = .clear//PrimaryButtonBordered.Border.disabled
-            
-            private init() {}
-        }
-        
-        private init() {}
-    }
-}
-
 // MARK:- Square Button
 extension ColorBook {
     public struct SquareButtonFilled {

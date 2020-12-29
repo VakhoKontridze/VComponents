@@ -1,5 +1,5 @@
 //
-//  VSecondaryButtonBordered.swift
+//  VSecondaryButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-// MARK:- V Secondary Button Bordered
-struct VSecondaryButtonBordered<Content>: View where Content: View {
+// MARK:- V Secondary Button
+public struct VSecondaryButton<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSecondaryButtonModelBordered
+    private let model: VSecondaryButtonModel
     
     private let state: VSecondaryButtonState
     @State private var isPressed: Bool = false
@@ -21,9 +21,9 @@ struct VSecondaryButtonBordered<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    init(
-        model: VSecondaryButtonModelBordered,
-        state: VSecondaryButtonState,
+    public init(
+        model: VSecondaryButtonModel = .init(),
+        state: VSecondaryButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -32,10 +32,28 @@ struct VSecondaryButtonBordered<Content>: View where Content: View {
         self.action = action
         self.content = content
     }
+
+    public init<S>(
+        model: VSecondaryButtonModel = .init(),
+        state: VSecondaryButtonState = .enabled,
+        action: @escaping () -> Void,
+        title: S
+    )
+        where
+            Content == Text,
+            S: StringProtocol
+    {
+        self.init(
+            model: model,
+            state: state,
+            action: action,
+            content: { Text(title) }
+        )
+    }
 }
 
 // MARK:- Body
-extension VSecondaryButtonBordered {
+public extension VSecondaryButton {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
@@ -59,10 +77,10 @@ extension VSecondaryButtonBordered {
     }
     
     private var buttonContent: some View {
-        VGenericButtonContentView(
+        GenericButtonContentView(
             foregroundColor: model.colors.foregroundColor(state: internalState),
             foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-            font: model.fonts.title,
+            font: model.font,
             content: content
         )
             .padding(.horizontal, model.layout.contentMarginX)
@@ -75,24 +93,17 @@ extension VSecondaryButtonBordered {
     }
     
     @ViewBuilder private var border: some View {
-        switch model.layout.borderType {
-        case .continous:
+        if model.layout.hasBorder {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                 .strokeBorder(model.colors.borderColor(state: internalState), lineWidth: model.layout.borderWidth)
-            
-        case .dashed(let spacing):
-            RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .strokeBorder(
-                    model.colors.borderColor(state: internalState),
-                    style: .init(lineWidth: model.layout.borderWidth, dash: [spacing])
-                )
         }
     }
 }
 
 // MARK:- Preview
-struct VSecondaryButtonBordered_Previews: PreviewProvider {
+struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSecondaryButtonBordered(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
+        VSecondaryButton(action: {}, title: "Press")
+            .padding()
     }
 }

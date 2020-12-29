@@ -74,10 +74,10 @@ public extension VPrimaryButton {
         HStack(alignment: .center, spacing: model.layout.loaderSpacing, content: {
             loaderCompensatorView
 
-            VGenericButtonContentView(
+            GenericButtonContentView(
                 foregroundColor: model.colors.foregroundColor(state: internalState),
                 foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-                font: model.fonts.title,
+                font: model.font,
                 content: content
             )
                 .frame(maxWidth: .infinity)

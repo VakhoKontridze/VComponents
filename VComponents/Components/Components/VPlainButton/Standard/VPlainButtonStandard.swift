@@ -52,7 +52,7 @@ extension VPlainButtonStandard {
     }
     
     private var buttonView: some View {
-        VGenericButtonContentView(
+        GenericButtonContentView(
             foregroundColor: model.colors.foregroundColor(state: internalState),
             foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
             font: model.fonts.title,

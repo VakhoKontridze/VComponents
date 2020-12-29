@@ -1,5 +1,5 @@
 //
-//  VGenericButtonContentView.swift
+//  GenericButtonContentView.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button Content View
-struct VGenericButtonContentView<Content>: View where Content: View {
+// MARK:- Generic Button Content View
+struct GenericButtonContentView<Content>: View where Content: View {
     // MARK: Properties
     private let foregroundColor: Color
     private let foregroundOpacity: Double
@@ -31,7 +31,7 @@ struct VGenericButtonContentView<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VGenericButtonContentView {
+extension GenericButtonContentView {
     @ViewBuilder var body: some View {
         content()
             // Text
@@ -47,12 +47,12 @@ extension VGenericButtonContentView {
 }
 
 // MARK:- Preview
-struct VPrimaryButtonContentView_Previews: PreviewProvider {
+struct GenericButtonContentView_Previews: PreviewProvider {
     static var previews: some View {
-        VGenericButtonContentView(
+        GenericButtonContentView(
             foregroundColor: VPrimaryButtonModel.Colors().foreground.enabled,
             foregroundOpacity: VPrimaryButtonModel.Colors().foreground.pressedOpacity,
-            font: VPrimaryButtonModel.Fonts().title,
+            font: VPrimaryButtonModel().font,
             content: { Text("Press") }
         )
     }
