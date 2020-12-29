@@ -18,12 +18,6 @@ struct VSpinnerDemoView: View {
 extension VSpinnerDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, content: {
-            spinners
-        })
-    }
-    
-    private var spinners: some View {
-        VStack(content: {
             DemoRowView(type: .titled("Continous"), content: {
                 VSpinner(type: .continous())
             })

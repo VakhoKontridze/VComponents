@@ -39,14 +39,7 @@ public extension Color {
 
 
 
-// MARK:- Spinner
-extension ColorBook {
-    public struct Spinner {
-        public static let background: Color = ColorBook.accent
-        
-        private init() {}
-    }
-}
+
 
 // MARK:- Sheet
 extension ColorBook {

@@ -9,24 +9,11 @@ import SwiftUI
 
 // MARK:- V Spinner Model Dashed
 public struct VSpinnerModelDashed {
-    public let colors: Colors
+    public let color: Color
     
     public init(
-        colors: Colors = .init()
+        color: Color = ColorBook.accent
     ) {
-        self.colors = colors
-    }
-}
-
-// MARK:- Colors
-extension VSpinnerModelDashed {
-    public struct Colors {
-        public let spinner: Color
-        
-        public init(
-            spinner: Color = ColorBook.Spinner.background
-        ) {
-            self.spinner = spinner
-        }
+        self.color = color
     }
 }

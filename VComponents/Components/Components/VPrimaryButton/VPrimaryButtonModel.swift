@@ -24,7 +24,7 @@ public struct VPrimaryButtonModel {
         self.colors = colors
         self.font = font
         self.spinnerModel = .init(
-            colors: .init(spinner: colors.loader)
+            color: colors.loader
         )
     }
 }

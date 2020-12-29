@@ -33,11 +33,6 @@ public extension VSpinner {
 // MARK:- Preview
 struct VSpinner_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack(content: {
-            Color.blue
-            VSpinner(type: .continous())
-        })
-            .frame(width: .infinity, height: .infinity)
-            .edgesIgnoringSafeArea(.bottom)
+        VSpinner(type: .continous())
     }
 }

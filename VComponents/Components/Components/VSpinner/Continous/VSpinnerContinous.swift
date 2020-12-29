@@ -26,7 +26,7 @@ extension VSpinnerContinous {
         Circle()
             .trim(from: 0, to: model.layout.legth)
             .stroke(
-                model.colors.spinner,
+                model.color,
                 style: .init(lineWidth: model.layout.thickness, lineCap: .round)
             )
             .frame(width: model.layout.dimension, height: model.layout.dimension)

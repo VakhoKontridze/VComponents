@@ -11,16 +11,16 @@ import SwiftUI
 public struct VSpinnerModelContinous {
     public let behavior: Behavior
     public let layout: Layout
-    public let colors: Colors
+    public let color: Color
     
     public init(
         behavior: Behavior = .init(),
         layout: Layout = .init(),
-        colors: Colors = .init()
+        color: Color = ColorBook.accent
     ) {
         self.behavior = behavior
         self.layout = layout
-        self.colors = colors
+        self.color = color
     }
 }
 
@@ -52,19 +52,6 @@ extension VSpinnerModelContinous {
             self.dimension = dimension
             self.legth = legth
             self.thickness = thickness
-        }
-    }
-}
-
-// MARK:- Colors
-extension VSpinnerModelContinous {
-    public struct Colors {
-        public let spinner: Color
-        
-        public init(
-            spinner: Color = ColorBook.Spinner.background
-        ) {
-            self.spinner = spinner
         }
     }
 }

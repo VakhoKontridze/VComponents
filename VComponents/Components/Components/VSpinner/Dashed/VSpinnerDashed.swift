@@ -22,7 +22,7 @@ struct VSpinnerDashed: View {
 extension VSpinnerDashed {
     var body: some View {
         ProgressView()
-            .progressViewStyle(CircularProgressViewStyle(tint: model.colors.spinner))
+            .progressViewStyle(CircularProgressViewStyle(tint: model.color))
     }
 }
 
