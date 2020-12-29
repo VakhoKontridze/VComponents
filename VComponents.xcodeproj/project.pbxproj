@@ -422,8 +422,8 @@
 		7A62181925948C0C00515688 /* Leading */ = {
 			isa = PBXGroup;
 			children = (
-				7A4C431225923778000207DD /* VBaseViewModelLeading.swift */,
 				7A4C43002592297F000207DD /* VBaseViewNavigationBarLeading.swift */,
+				7A4C431225923778000207DD /* VBaseViewModelLeading.swift */,
 			);
 			path = Leading;
 			sourceTree = "<group>";
