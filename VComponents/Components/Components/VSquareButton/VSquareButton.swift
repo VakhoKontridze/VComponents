@@ -95,12 +95,9 @@ public extension VSquareButton {
 }
 
 // MARK:- Preview
-//struct VSquareButton_Previews: PreviewProvider {
-//    static var previews: some View {
-//        VStack(content: {
-//            VSquareButtonFilled_Previews.previews
-//            VSquareButtonBordered_Previews.previews
-//        })
-//            .padding()
-//    }
-//}
+struct VSquareButton_Previews: PreviewProvider {
+    static var previews: some View {
+        VSquareButton(action: {}, title: "Press")
+            .padding()
+    }
+}

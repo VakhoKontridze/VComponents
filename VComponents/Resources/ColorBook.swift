@@ -26,21 +26,6 @@ extension ColorBook {
 }
 
 
-// MARK:- Plain Button
-extension ColorBook {
-    public struct PlainButtonStandard {
-        public struct Foreground {
-            public static let enabled: Color = ColorBook.accent
-            public static let pressed: Color = enabled      // Opacity is applied
-            public static let disabled: Color = enabled     // Opacity is applied
-            
-            private init() {}
-        }
-        
-        private init() {}
-    }
-}
-
 // MARK:- Chevron Button
 extension ColorBook {
     public struct ChevronButtonFilled {

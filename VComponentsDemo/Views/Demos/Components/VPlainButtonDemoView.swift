@@ -23,31 +23,19 @@ struct VPlainButtonDemoView: View {
     }
     
     @State private var buttonState: VPlainButtonState = .enabled
+    
+    let clippedHitBoxButtonModel: VPlainButtonModel = .init(
+        layout: .init(
+            hitBoxSpacingX: 0,
+            hitBoxSpacingY: 0
+        )
+    )
 }
 
 // MARK:- Body
 extension VPlainButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            buttonsByContent
-            clippedHitBoxButton
-        })
-    }
-    
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ToggleSettingView(
-                isOn: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
-        })
-    }
-    
-    private var buttonsByContent: some View {
-        VStack(content: {
             DemoRowView(type: .titled("Text"), content: {
                 VPlainButton(state: buttonState, action: action, title: buttonTitle)
             })
@@ -64,21 +52,22 @@ extension VPlainButtonDemoView {
                     })
                 })
             })
+            
+            DemoRowView(type: .titled("Clipped Hit Box"), content: {
+                VPlainButton(model: clippedHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
+            })
         })
     }
     
-    private var clippedHitBoxButton: some View {
-        let clippedHitBoxButtonModel: VPlainButtonModelStandard = .init(
-            layout: .init(
-                hitBoxSpacingX: 0,
-                hitBoxSpacingY: 0
+    private var controller: some View {
+        DemoRowView(type: .controller, content: {
+            ToggleSettingView(
+                isOn: .init(
+                    get: { buttonState == .disabled },
+                    set: { buttonState = $0 ? .disabled : .enabled }
+                ),
+                title: "Disabled"
             )
-        )
-        
-        return VStack(content: {
-            DemoRowView(type: .titled("Clipped Hit Box"), content: {
-                VPlainButton(.standard(clippedHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
-            })
         })
     }
 }

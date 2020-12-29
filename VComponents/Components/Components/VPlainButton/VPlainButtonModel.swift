@@ -1,5 +1,5 @@
 //
-//  VPlainButtonModelStandard.swift
+//  VPlainButtonModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -8,24 +8,24 @@
 import SwiftUI
 
 // MARK:- V Plain Model Button
-public struct VPlainButtonModelStandard {
+public struct VPlainButtonModel {
     public let layout: Layout
     public let colors: Colors
-    public let fonts: Fonts
+    public let font: Font
     
     public init(
         layout: Layout = .init(),
         colors: Colors = .init(),
-        fonts: Fonts = .init()
+        font: Font = .system(size: 14, weight: .semibold, design: .default)
     ) {
         self.layout = layout
         self.colors = colors
-        self.fonts = fonts
+        self.font = font
     }
 }
 
 // MARK:- Layout
-extension VPlainButtonModelStandard {
+extension VPlainButtonModel {
     public struct Layout {
         public let hitBoxSpacingX: CGFloat
         public let hitBoxSpacingY: CGFloat
@@ -41,7 +41,7 @@ extension VPlainButtonModelStandard {
 }
 
 // MARK:- Colors
-extension VPlainButtonModelStandard {
+extension VPlainButtonModel {
     public struct Colors {
         public let foreground: ForegroundColors
         
@@ -53,7 +53,7 @@ extension VPlainButtonModelStandard {
     }
 }
 
-extension VPlainButtonModelStandard.Colors {
+extension VPlainButtonModel.Colors {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -62,9 +62,9 @@ extension VPlainButtonModelStandard.Colors {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.PlainButtonStandard.Foreground.enabled,
-            pressed: Color = ColorBook.PlainButtonStandard.Foreground.pressed,
-            disabled: Color = ColorBook.PlainButtonStandard.Foreground.disabled,
+            enabled: Color = ColorBook.accent,
+            pressed: Color = ColorBook.accent,
+            disabled: Color = ColorBook.accent,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
@@ -77,21 +77,8 @@ extension VPlainButtonModelStandard.Colors {
     }
 }
 
-// MARK:- Fonts
-extension VPlainButtonModelStandard {
-    public struct Fonts {
-        public let title: Font
-        
-        public init(
-            title: Font = FontBook.buttonLarge
-        ) {
-            self.title = title
-        }
-    }
-}
-
 // MARK:- Mapping
-extension VPlainButtonModelStandard.Colors {
+extension VPlainButtonModel.Colors {
     func foregroundColor(state: VPlainButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled

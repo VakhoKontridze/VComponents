@@ -1,16 +1,16 @@
 //
-//  VPlainButtonStandard.swift
+//  VPlainButton.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/23/20.
+//  Created by Vakhtang Kontridze on 19.12.20.
 //
 
 import SwiftUI
 
-// MARK:- V Plain Button Standard
-struct VPlainButtonStandard<Content>: View where Content: View {
+// MARK:- V Plain Button
+public struct VPlainButton<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VPlainButtonModelStandard
+    private let model: VPlainButtonModel
     
     private let state: VPlainButtonState
     @State private var isPressed: Bool = false
@@ -22,8 +22,8 @@ struct VPlainButtonStandard<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
-        model: VPlainButtonModelStandard,
-        state: VPlainButtonState,
+        model: VPlainButtonModel = .init(),
+        state: VPlainButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -32,10 +32,28 @@ struct VPlainButtonStandard<Content>: View where Content: View {
         self.action = action
         self.content = content
     }
+
+    public init<S>(
+        model: VPlainButtonModel = .init(),
+        state: VPlainButtonState = .enabled,
+        action: @escaping () -> Void,
+        title: S
+    )
+        where
+            Content == Text,
+            S: StringProtocol
+    {
+        self.init(
+            model: model,
+            state: state,
+            action: action,
+            content: { Text(title) }
+        )
+    }
 }
 
 // MARK:- Body
-extension VPlainButtonStandard {
+public extension VPlainButton {
     var body: some View {
         VInteractiveView(
             isDisabled: state.isDisabled,
@@ -55,15 +73,16 @@ extension VPlainButtonStandard {
         GenericButtonContentView(
             foregroundColor: model.colors.foregroundColor(state: internalState),
             foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-            font: model.fonts.title,
+            font: model.font,
             content: content
         )
     }
 }
 
 // MARK:- Preview
-struct VPlainButtonStandard_Previews: PreviewProvider {
+struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButtonStandard(model: .init(), state: .enabled, action: {}, content: { Text("Press") })
+        VPlainButton(action: {}, title: "Press")
+            .padding()
     }
 }
