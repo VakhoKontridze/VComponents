@@ -39,50 +39,6 @@ public extension Color {
 
 
 
-
-
-// MARK:- Slider
-extension ColorBook {
-    public struct Slider {
-        public struct Track {
-            public static let enabled: Color = .clear//Toggle.Fill.enabledOff
-            public static let disabled: Color = .clear//Toggle.Fill.disabledOff
-            
-            private init() {}
-        }
-        
-        public struct Progress {
-            public static let enabled: Color = .clear//Toggle.Fill.enabledOn
-            public static let disabled: Color = .clear//Toggle.Fill.disabledOn
-            
-            private init() {}
-        }
-        
-        public struct ThumbFill {
-            public static let enabled: Color = .clear//Toggle.Thumb.enabledOn
-            public static let disabled: Color = enabled
-            
-            private init() {}
-        }
-        
-        public struct ThumbBorder {
-            public static let enabled: Color = .init(componentAsset: "Slider.ThumbBorderWidth.enabled")
-            public static let disabled: Color = .init(componentAsset: "Slider.ThumbBorderWidth.disabled")
-            
-            private init() {}
-        }
-        
-        public struct ThumbShadow {
-            public static let enabled: Color = .init(componentAsset: "Slider.ThumbShadow.enabled")
-            public static let disabled: Color = .init(componentAsset: "Slider.ThumbShadow.disabled")
-            
-            private init() {}
-        }
-        
-        private init() {}
-    }
-}
-
 // MARK:- Spinner
 extension ColorBook {
     public struct Spinner {

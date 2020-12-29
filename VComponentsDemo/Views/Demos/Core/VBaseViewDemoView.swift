@@ -48,7 +48,7 @@ extension VBaseViewDemoView {
         ZStack(content: {
             ColorBook.layer.edgesIgnoringSafeArea(.bottom)
             
-            VStack(content: {
+            VStack(alignment: .leading, content: {
                 VToggle(isOn: $navigationBarTitleIsLeading, title: "Title is on left")
                 
                 VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
