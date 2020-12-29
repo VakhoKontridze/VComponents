@@ -1,5 +1,5 @@
 //
-//  VSideBarStandard.swift
+//  VSideBar.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -7,30 +7,30 @@
 
 import SwiftUI
 
-// MARK:- V Side Bar Standard
-struct VSideBarStandard<Content>: View where Content: View {
+// MARK:- V Side Bar
+struct VSideBar<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSideBarModelStandard
+    private let model: VSideBarModel
     @Binding private var isPresented: Bool
-    private let dismiss: () -> Void
+    private let dismissAction: (() -> Void)?
     private let content: () -> Content
 
     // MARK: Initializers
     init(
-        model: VSideBarModelStandard,
+        model: VSideBarModel,
         isPresented: Binding<Bool>,
-        dismiss: @escaping () -> Void,
+        onDismiss dismissAction: (() -> Void)?,
         content: @escaping () -> Content
     ) {
         self.model = model
         self._isPresented = isPresented
-        self.dismiss = dismiss
+        self.dismissAction = dismissAction
         self.content = content
     }
 }
 
 // MARK:- Body
-extension VSideBarStandard {
+extension VSideBar {
     var body: some View {
         ZStack(alignment: .leading, content: {
             blinding
@@ -64,15 +64,23 @@ extension VSideBarStandard {
                 .padding(.top, model.layout.contentMargin.top)
                 .padding(.bottom, model.layout.contentMargin.bottom)
         })
-            .frame(width: model.layout._width)
+            .frame(width: model.layout.width.value)
     }
 
 }
 
+// MARK:- Actions
+private extension VSideBar {
+    func dismiss() {
+        dismissAction?()
+        withAnimation { isPresented = false }
+    }
+}
+
 // MARK:- Preview
-struct VSideBarStandard_Previews: PreviewProvider {
+struct VSideBar_Previews: PreviewProvider {
     static var previews: some View {
         Color.red.edgesIgnoringSafeArea(.all)
-            .overlay(VSideBarStandard(model: .init(), isPresented: .constant(true), dismiss: {}, content: { Color.blue }))
+            .vSideBar(isPresented: .constant(true), content: { Color.blue })
     }
 }

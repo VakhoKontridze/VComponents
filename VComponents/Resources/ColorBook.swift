@@ -38,19 +38,3 @@ public extension Color {
         self.init(uiColor)
     }
 }
-
-
-
-
-
-
-
-// MARK:- Side Bar
-extension ColorBook {
-    public struct SideBarStandard {
-        public static let background: Color = .clear//ColorBook.Sheet.background
-        public static let blinding: Color = .init(componentAsset: "SideBarStandard.Blinding")
-        
-        private init() {}
-    }
-}

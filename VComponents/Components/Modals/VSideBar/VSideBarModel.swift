@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Side Bar Model Standard
-public struct VSideBarModelStandard {
+// MARK:- V Side Bar Model
+public struct VSideBarModel {
     public let layout: Layout
     public let colors: Colors
     let sheetModel: VSheetModel
@@ -31,10 +31,9 @@ public struct VSideBarModelStandard {
 }
 
 // MARK:- Layout
-extension VSideBarModelStandard {
+extension VSideBarModel {
     public struct Layout {
         public let width: Width
-        let _width: CGFloat
         public let roundCorners: Bool
         public let cornerRadius: CGFloat
         public let contentMargin: ContentMargin
@@ -46,12 +45,6 @@ extension VSideBarModelStandard {
             contentMargin: ContentMargin = .init()
         ) {
             self.width = width
-            self._width = {
-                switch width {
-                case .relative(let ratio): return UIScreen.main.bounds.width * ratio
-                case .fixed(let width): return width
-                }
-            }()
             self.roundCorners = roundCorners
             self.cornerRadius = cornerRadius
             self.contentMargin = contentMargin
@@ -59,14 +52,21 @@ extension VSideBarModelStandard {
     }
 }
 
-extension VSideBarModelStandard.Layout {
+extension VSideBarModel.Layout {
     public enum Width {
         case relative(_ screenRatio: CGFloat = 2/3)
         case fixed(_ width: CGFloat = 300)
+        
+        var value: CGFloat {
+            switch self {
+            case .relative(let ratio): return UIScreen.main.bounds.width * ratio
+            case .fixed(let width): return width
+            }
+        }
     }
 }
 
-extension VSideBarModelStandard.Layout {
+extension VSideBarModel.Layout {
     public struct ContentMargin {
         public let leading: CGFloat
         public let trailing: CGFloat
@@ -88,14 +88,16 @@ extension VSideBarModelStandard.Layout {
 }
 
 // MARK:- Colors
-extension VSideBarModelStandard {
+extension VSideBarModel {
     public struct Colors {
+        public static let sheetColor: Color = VSheetModel().color
+        
         public let background: Color
         public let blinding: Color
         
         public init(
-            background: Color = ColorBook.SideBarStandard.background,
-            blinding: Color = ColorBook.SideBarStandard.blinding
+            background: Color = sheetColor,
+            blinding: Color = .init(componentAsset: "SideBar.Blinding")
         ) {
             self.background = background
             self.blinding = blinding

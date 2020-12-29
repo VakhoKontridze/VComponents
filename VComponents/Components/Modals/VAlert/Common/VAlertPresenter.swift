@@ -44,7 +44,8 @@ private extension VAlertPresenter {
             let blinding: UIView = .init()
             blinding.translatesAutoresizingMaskIntoConstraints = false
             blinding.isUserInteractionEnabled = false
-            blinding.backgroundColor = .init(ColorBook.SideBarStandard.blinding)
+//            blinding.backgroundColor = .init(ColorBook.SideBarStandard.blinding)
+            fatalError()
             blinding.tag = blindingID
             return blinding
         }()

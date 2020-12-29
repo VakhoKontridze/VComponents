@@ -53,7 +53,7 @@ private extension VSideBarWalkthroughView {
 
                     VSecondaryButton(
                         action: { SceneDelegate.setRootView(to: HomeView()) },
-                        title: "Go back"
+                        title: "Go Back"
                     )
                         .frame(maxHeight: .infinity, alignment: .bottom)
                 })

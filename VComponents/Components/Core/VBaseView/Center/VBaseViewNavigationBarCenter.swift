@@ -93,7 +93,7 @@ extension VBaseViewNavigationBarCenter {
 
             HStack(spacing: model.layout.spacing, content: {
                 Text(title)
-                    .font(model.fonts.title)
+                    .font(model.font)
             })
 
             Spacer()

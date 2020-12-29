@@ -10,14 +10,14 @@ import SwiftUI
 // MARK:- V Base View Model Center
 public struct VBaseViewModelCenter {
     public let layout: Layout
-    public let fonts: Fonts
+    public let font: Font
     
     public init(
         layout: Layout = .init(),
-        fonts: Fonts = .init()
+        font: Font = .system(size: 17, weight: .semibold, design: .default)
     ) {
         self.layout = layout
-        self.fonts = fonts
+        self.font = font
     }
 }
 
@@ -34,19 +34,6 @@ extension VBaseViewModelCenter {
         ) {
             self.margin = margin
             self.spacing = spacing
-        }
-    }
-}
-
-// MARK:- Fonts
-extension VBaseViewModelCenter {
-    public struct Fonts {
-        public let title: Font
-        
-        public init(
-            title: Font = FontBook.navigationBarTitle
-        ) {
-            self.title = title
         }
     }
 }

@@ -79,7 +79,7 @@ extension VBaseViewNavigationBarLeading {
 
             Text(title)
                 .layoutPriority(0)
-                .font(model.fonts.title)
+                .font(model.font)
 
             Spacer()
 
