@@ -45,17 +45,6 @@ public extension Color {
 
 
 
-// MARK:- Tab Navigation View
-extension ColorBook {
-    public struct TabNavigationViewStandard {
-        public static let background: Color = ColorBook.canvas
-        public static let item: Color = ColorBook.secondary
-        public static let itemSelected: Color = ColorBook.accent
-        
-        private init() {}
-    }
-}
-
 // MARK:- Navigation View
 extension ColorBook {
     public struct NavigationView {

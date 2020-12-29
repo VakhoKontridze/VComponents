@@ -59,6 +59,8 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
                         destination: VBaseView(title: "Details", content: { Color.orange }),
                         label: { VSecondaryButton(action: {}, title: "Go to Details").allowsHitTesting(false) }
                     )
+                    
+                    goBackButton
                 })
             })
         })
@@ -66,20 +68,38 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
 
     private var pageTwo: some View {
         VBaseView(title: "Green Page", content: {
-            Color.green
+            ZStack(content: {
+                Color.green
+                goBackButton
+            })
         })
     }
 
     private var pageThree: some View {
         VBaseView(title: "Blue Page", content: {
-            Color.blue
+            ZStack(content: {
+                Color.blue
+                goBackButton
+            })
         })
     }
 
     private var pageFour: some View {
         VBaseView(title: "Yellow Page", content: {
-            Color.yellow
+            ZStack(content: {
+                Color.yellow
+                goBackButton
+            })
         })
+    }
+    
+    private var goBackButton: some View {
+        VSecondaryButton(
+            action: { SceneDelegate.setRootView(to: HomeView())  },
+            title: "Go Back"
+        )
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding(.bottom, 25)
     }
 
     private func tabItem(iconName: String, title: String) -> some View {

@@ -1,5 +1,5 @@
 //
-//  VTabNavigationViewAppearanceStandard.swift
+//  VTabNavigationViewAppearance.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -9,19 +9,19 @@ import SwiftUI
 
 // MARK:- Modifier
 extension View {
-    func setUpTabNavigationViewAppearanceStandard(model: VTabNavigationViewModelStandard) -> some View {
-        modifier(VTabNavigationViewAppearanceStandard(model: model))
+    func setUpTabNavigationViewAppearance(model: VTabNavigationViewModel) -> some View {
+        modifier(VTabNavigationViewAppearance(model: model))
     }
 }
 
-// MARK:- V Navigation View Appearance Filled
-struct VTabNavigationViewAppearanceStandard: ViewModifier {
+// MARK:- V Navigation View Appearance
+struct VTabNavigationViewAppearance: ViewModifier {
     // MARK: Properties
-    private let model: VTabNavigationViewModelStandard
+    private let model: VTabNavigationViewModel
     
     // MARK: Initializers
     init(
-        model: VTabNavigationViewModelStandard
+        model: VTabNavigationViewModel
     ) {
         self.model = model
         
@@ -32,7 +32,7 @@ struct VTabNavigationViewAppearanceStandard: ViewModifier {
 }
 
 // MARK:- View
-extension VTabNavigationViewAppearanceStandard {
+extension VTabNavigationViewAppearance {
     func body(content: Content) -> some View {
         content
             .accentColor(model.colors.itemSelected)
