@@ -22,34 +22,24 @@ struct VSheetDemoView: View {
 extension VSheetDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            VStack(content: {
-                Spacer().frame(height: 10)
+            ScrollView(content: {
+                DemoRowView(type: .titled("Round All"), content: {
+                    VSheet(model: .init(layout: .init(roundedCorners: .all)), content: sheeContent)
+                })
                 
-                ScrollView(content: {
-                    sheet
+                DemoRowView(type: .titled("Round Top"), content: {
+                    VSheet(model: .init(layout: .init(roundedCorners: .top)), content: sheeContent)
+                })
+                
+                DemoRowView(type: .titled("Round Bottom"), content: {
+                    VSheet(model: .init(layout: .init(roundedCorners: .bottom)), content: sheeContent)
+                })
+                
+                DemoRowView(type: .titled("Round Custom"), content: {
+                    VSheet(model: .init(layout: .init(roundedCorners: .custom([.topLeft, .bottomRight]))), content: sheeContent)
                 })
             })
                 .background(ColorBook.canvas)
-        })
-    }
-    
-    private var sheet: some View {
-        VStack(content: {
-            DemoRowView(type: .titled("Round All"), content: {
-                VSheet(.roundAll(), content: sheeContent)
-            })
-            
-            DemoRowView(type: .titled("Round Top"), content: {
-                VSheet(.roundTop(), content: sheeContent)
-            })
-            
-            DemoRowView(type: .titled("Round Bottom"), content: {
-                VSheet(.roundBottom(), content: sheeContent)
-            })
-            
-            DemoRowView(type: .titled("Round Custom"), content: {
-                VSheet(.roundCustom(.init(layout: .init(corners: [.topLeft, .bottomRight]))), content: sheeContent)
-            })
         })
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 public struct VSideBarModelStandard {
     public let layout: Layout
     public let colors: Colors
-    let sheetModel: VSheetModelRoundCustom
+    let sheetModel: VSheetModel
     
     public init(
         layout: Layout = .init(),
@@ -21,13 +21,11 @@ public struct VSideBarModelStandard {
         self.colors = colors
         self.sheetModel = .init(
             layout: .init(
-                corners: layout.roundCorners ? [.topRight, .bottomRight] : [],
-                radius: layout.cornerRadius,
+                roundedCorners: layout.roundCorners ? .custom([.topRight, .bottomRight]) : .none,
+                cornerRadius: layout.cornerRadius,
                 contentPadding: 0
             ),
-            colors: .init(
-                background: colors.background
-            )
+            color: colors.background
         )
     }
 }

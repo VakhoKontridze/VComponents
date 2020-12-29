@@ -36,7 +36,7 @@ extension HomeSectionView {
                     .foregroundColor(ColorBook.primary)
             }
             
-            VSheet(.roundAll(.init(layout: .init(contentPadding: 10))), content: {
+            VSheet(model: .init(layout: .init(contentPadding: 10)), content: {
                 VStack(spacing: 0, content: content)
             })
         })

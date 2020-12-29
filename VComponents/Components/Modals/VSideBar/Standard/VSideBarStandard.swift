@@ -55,7 +55,7 @@ extension VSideBarStandard {
 
     private var sideBarContent: some View {
         ZStack(content: {
-            VSheet(.roundCustom(model.sheetModel))
+            VSheet(model: model.sheetModel)
                 .edgesIgnoringSafeArea(.vertical)
 
             content()
