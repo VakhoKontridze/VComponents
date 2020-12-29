@@ -1,14 +1,14 @@
 //
-//  VNavigationViewTransparentModel.swift
+//  VNavigationViewFilledModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 12/22/20.
 //
 
 import SwiftUI
 
-// MARK:- V Navigation View Transparent Model
-public struct VNavigationViewTransparentModel {
+// MARK:- V Navigation View Model
+public struct VNavigationViewModel {
     public let colors: Colors
     
     public init(
@@ -19,13 +19,16 @@ public struct VNavigationViewTransparentModel {
 }
 
 // MARK:- Colors
-extension VNavigationViewTransparentModel {
+extension VNavigationViewModel {
     public struct Colors {
+        public let background: Color
         public let divider: Color
         
         public init(
+            background: Color = ColorBook.canvas,
             divider: Color = .clear
         ) {
+            self.background = background
             self.divider = divider
         }
     }

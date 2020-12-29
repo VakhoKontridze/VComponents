@@ -45,15 +45,6 @@ public extension Color {
 
 
 
-// MARK:- Navigation View
-extension ColorBook {
-    public struct NavigationView {
-        public static let background: Color = ColorBook.canvas
-        
-        private init() {}
-    }
-}
-
 // MARK:- Side Bar
 extension ColorBook {
     public struct SideBarStandard {

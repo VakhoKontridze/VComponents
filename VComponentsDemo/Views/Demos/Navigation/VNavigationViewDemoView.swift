@@ -22,39 +22,20 @@ extension VNavigationViewDemoView {
                 Text("Navigation View should only ever be used on a root view. Continue?")
                     .multilineTextAlignment(.center)
                 
-                ScrollView(showsIndicators: false, content: {
-                    HomeSectionView(title: nil, content: {
-                        HomeRowView(
-                            title: "Filled",
-                            action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .filled())) }
-                        )
-                        
-                        HomeRowView(
-                            title: "Transparent",
-                            action: { SceneDelegate.setRootView(to: NavigationDemoView1(type: .transparent())) },
-                            showSeparator: false
-                        )
-                    })
-                })
+                VSecondaryButton(
+                    action: { SceneDelegate.setRootView(to: NavigationDemoView1()) },
+                    title: "Start Demo"
+                )
             })
                 .padding(10)
         })
-            .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
     }
 }
 
 // MARK:- Walkthrough
 private struct NavigationDemoView1: View {
-    private let type: VNavigationViewType
-    
-    init(type: VNavigationViewType) {
-        self.type = type
-    }
-}
-
-extension NavigationDemoView1 {
     var body: some View {
-        VNavigationView(type, content: {
+        VNavigationView(content: {
             VBaseView(title: "Home", content: {
                 NavigationDemoView(
                     color: .red,

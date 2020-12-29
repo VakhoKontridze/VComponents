@@ -10,34 +10,28 @@ import SwiftUI
 // MARK:- V Navigation View
 public struct VNavigationView<Content>: View where Content: View {
     // MARK: Properties
-    private let navigationType: VNavigationViewType
+    private let model: VNavigationViewModel
     private let content: () -> Content
     
     // MARK: Initializers
     public init(
-        _ navigationType: VNavigationViewType = .default,
+        model: VNavigationViewModel = .init(),
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.navigationType = navigationType
+        self.model = model
         self.content = content
     }
 }
 
 // MARK:- Body
 public extension VNavigationView {
-    @ViewBuilder var body: some View {
-        switch navigationType {
-        case .filled(let model): navigationViewFrame.setUpNavigationBarAppearanceFilled(model: model)
-        case .transparent(let model): navigationViewFrame.setUpNavigationBarTransparentAppearance(model: model)
-        }
-    }
-    
-    private var navigationViewFrame: some View {
+    var body: some View {
         NavigationView(content: {
             content()
                 .setUpNavigationViewNavigationBar()
         })
             .navigationViewStyle(StackNavigationViewStyle())
+            .setUpNavigationBarAppearance(model: model)
     }
 }
 

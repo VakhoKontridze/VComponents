@@ -54,7 +54,10 @@ extension HomeView {
 
                         HomeSectionView(title: "Navigation", content: {
                             HomeRowView(title: VTabNavigationViewDemoView.navigationBarTitle, destination: VTabNavigationViewDemoView())
-                            HomeRowView(title: VNavigationViewDemoView.navigationBarTitle, destination: VNavigationViewDemoView())
+                            HomeRowView(title: VNavigationViewDemoView.navigationBarTitle, destination: VNavigationViewDemoView(), showSeparator: false)
+                        })
+                        
+                        HomeSectionView(title: "Modals", content: {
                             HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView(), showSeparator: false)
                         })
 
@@ -63,7 +66,7 @@ extension HomeView {
                             HomeRowView(title: VBaseViewDemoView.navigationBarTitle, destination: VBaseViewDemoView(), showSeparator: false)
                         })
                     })
-                        .padding(.horizontal, 10)
+                        .padding(10)
                 })
                     .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
             })
