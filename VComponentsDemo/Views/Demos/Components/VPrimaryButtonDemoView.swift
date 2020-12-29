@@ -23,13 +23,59 @@ struct VPrimaryButtonDemoView: View {
     }
     
     @State private var buttonState: VPrimaryButtonState = .enabled
+    
+    private let borderedModel: VPrimaryButtonModel = {
+        let defaultModel: VPrimaryButtonModel = .init()
+        
+        return .init(
+            colors: .init(
+                foreground: .init(
+                    enabled: defaultModel.colors.background.enabled,
+                    pressed: defaultModel.colors.background.pressed,
+                    disabled: defaultModel.colors.background.disabled,
+                    loading: defaultModel.colors.background.loading
+                ),
+                background: .init(
+                    enabled: .init("PrimaryButtonBordered.Background.enabled"),
+                    pressed: .init("PrimaryButtonBordered.Background.pressed"),
+                    disabled: .init("PrimaryButtonBordered.Background.disabled"),
+                    loading: .init("PrimaryButtonBordered.Background.disabled")
+                ),
+                border: .init(
+                    enabled: defaultModel.colors.background.enabled,
+                    pressed: defaultModel.colors.background.disabled,   // It's better this way
+                    disabled: defaultModel.colors.background.disabled,
+                    loading: defaultModel.colors.background.loading
+                )
+            )
+        )
+    }()
 }
 
 // MARK:- Body
 extension VPrimaryButtonDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            buttons
+            DemoRowView(type: .titled("Text"), content: {
+                VPrimaryButton(state: buttonState, action: action, title: buttonTitle)
+            })
+            
+            DemoRowView(type: .titled("Image"), content: {
+                VPrimaryButton(state: buttonState, action: action, content: buttonContent)
+            })
+
+            DemoRowView(type: .titled("Image and Text"), content: {
+                VPrimaryButton(state: buttonState, action: action, content: {
+                    HStack(spacing: 5, content: {
+                        buttonContent()
+                        Text(buttonTitle)
+                    })
+                })
+            })
+            
+            DemoRowView(type: .titled("Bordered"), content: {
+                VPrimaryButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
+            })
         })
     }
     
@@ -57,31 +103,6 @@ extension VPrimaryButtonDemoView {
                 )
 
                 Spacer()
-            })
-        })
-    }
-
-    private var buttons: some View {
-        VStack(content: {
-            DemoRowView(type: .titled("Filled"), content: {
-                VPrimaryButton(.filled(), state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Bordered"), content: {
-                VPrimaryButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Image"), content: {
-                VPrimaryButton(state: buttonState, action: action, content: buttonContent)
-            })
-
-            DemoRowView(type: .titled("Image and Text"), content: {
-                VPrimaryButton(state: buttonState, action: action, content: {
-                    HStack(spacing: 5, content: {
-                        buttonContent()
-                        Text(buttonTitle)
-                    })
-                })
             })
         })
     }

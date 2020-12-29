@@ -50,9 +50,9 @@ extension VGenericButtonContentView {
 struct VPrimaryButtonContentView_Previews: PreviewProvider {
     static var previews: some View {
         VGenericButtonContentView(
-            foregroundColor: VPrimaryButtonModelFilled.Colors().foreground.enabled,
-            foregroundOpacity: VPrimaryButtonModelFilled.Colors().foreground.pressedOpacity,
-            font: VPrimaryButtonModelFilled.Fonts().title,
+            foregroundColor: VPrimaryButtonModel.Colors().foreground.enabled,
+            foregroundOpacity: VPrimaryButtonModel.Colors().foreground.pressedOpacity,
+            font: VPrimaryButtonModel.Fonts().title,
             content: { Text("Press") }
         )
     }

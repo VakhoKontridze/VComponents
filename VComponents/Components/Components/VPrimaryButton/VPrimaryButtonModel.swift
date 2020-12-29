@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button Model Bordered
-public struct VPrimaryButtonModelBordered {
+// MARK:- V Primary Button Model
+public struct VPrimaryButtonModel {
     public let layout: Layout
     public let colors: Colors
     public let fonts: Fonts
+    
+    let spinnerModel: VSpinnerModelContinous
     
     public init(
         layout: Layout = .init(),
@@ -21,27 +23,30 @@ public struct VPrimaryButtonModelBordered {
         self.layout = layout
         self.colors = colors
         self.fonts = fonts
+        self.spinnerModel = .init(
+            colors: .init(spinner: colors.loader)
+        )
     }
 }
 
 // MARK:- Layout
-extension VPrimaryButtonModelBordered {
+extension VPrimaryButtonModel {
     public struct Layout {
         public let height: CGFloat
         public let cornerRadius: CGFloat
-        public let borderType: BorderType
+        
         public let borderWidth: CGFloat
+        let hasBorder: Bool
+        
         public let contentMarginX: CGFloat
         public let contentMarginY: CGFloat
+        
         public let loaderSpacing: CGFloat
         let loaderWidth: CGFloat
-        public let hitBoxSpacingX: CGFloat
-        public let hitBoxSpacingY: CGFloat
         
         public init(
             height: CGFloat = 50,
             cornerRadius: CGFloat = 20,
-            borderType: BorderType = .continous,
             borderWidth: CGFloat = 1,
             contentMarginX: CGFloat = 15,
             contentMarginY: CGFloat = 3,
@@ -51,38 +56,29 @@ extension VPrimaryButtonModelBordered {
         ) {
             self.height = height
             self.cornerRadius = cornerRadius
-            self.borderType = borderType
             self.borderWidth = borderWidth
+            self.hasBorder = borderWidth > 0
             self.contentMarginX = contentMarginX
             self.contentMarginY = contentMarginY
             self.loaderSpacing = loaderSpacing
             self.loaderWidth = 10
-            self.hitBoxSpacingX = hitBoxSpacingX
-            self.hitBoxSpacingY = hitBoxSpacingY
         }
     }
 }
 
-extension VPrimaryButtonModelBordered.Layout {
-    public enum BorderType {
-        case continous
-        case dashed(spacing: CGFloat = 3)
-    }
-}
-
 // MARK:- Colors
-extension VPrimaryButtonModelBordered {
+extension VPrimaryButtonModel {
     public struct Colors {
         public let foreground: ForegroundColors
         public let background: BackgroundColors
         public let border: BorderColors
-        public let loader: LoaderColors
+        public let loader: Color
         
         public init(
             foreground: ForegroundColors = .init(),
             background: BackgroundColors = .init(),
             border: BorderColors = .init(),
-            loader: LoaderColors = .init()
+            loader: Color = ColorBook.primaryInverted
         ) {
             self.foreground = foreground
             self.background = background
@@ -92,7 +88,7 @@ extension VPrimaryButtonModelBordered {
     }
 }
 
-extension VPrimaryButtonModelBordered.Colors {
+extension VPrimaryButtonModel.Colors {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color
@@ -102,10 +98,10 @@ extension VPrimaryButtonModelBordered.Colors {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = ColorBook.PrimaryButtonBordered.Foreground.enabled,
-            pressed: Color = ColorBook.PrimaryButtonBordered.Foreground.pressed,
-            disabled: Color = ColorBook.PrimaryButtonBordered.Foreground.disabled,
-            loading: Color = ColorBook.PrimaryButtonBordered.Foreground.loading,
+            enabled: Color = ColorBook.primaryInverted,
+            pressed: Color = ColorBook.primaryInverted,
+            disabled: Color = ColorBook.primaryInverted,
+            loading: Color = ColorBook.primaryInverted,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {
@@ -125,10 +121,10 @@ extension VPrimaryButtonModelBordered.Colors {
         public let loading: Color
         
         public init(
-            enabled: Color = ColorBook.PrimaryButtonBordered.Background.enabled,
-            pressed: Color = ColorBook.PrimaryButtonBordered.Background.pressed,
-            disabled: Color = ColorBook.PrimaryButtonBordered.Background.disabled,
-            loading: Color = ColorBook.PrimaryButtonBordered.Background.loading
+            enabled: Color = .init(componentAsset: "PrimaryButton.Background.enabled"),
+            pressed: Color = .init(componentAsset: "PrimaryButton.Background.pressed"),
+            disabled: Color = .init(componentAsset: "PrimaryButton.Background.disabled"),
+            loading: Color = .init(componentAsset: "PrimaryButton.Background.disabled")
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -144,10 +140,10 @@ extension VPrimaryButtonModelBordered.Colors {
         public let loading: Color
         
         public init(
-            enabled: Color = ColorBook.PrimaryButtonBordered.Border.enabled,
-            pressed: Color = ColorBook.PrimaryButtonBordered.Border.pressed,
-            disabled: Color = ColorBook.PrimaryButtonBordered.Border.disabled,
-            loading: Color = ColorBook.PrimaryButtonBordered.Border.loading
+            enabled: Color = .clear,
+            pressed: Color = .clear,
+            disabled: Color = .clear,
+            loading: Color = .clear
         ) {
             self.enabled = enabled
             self.pressed = pressed
@@ -155,25 +151,15 @@ extension VPrimaryButtonModelBordered.Colors {
             self.loading = loading
         }
     }
-    
-    public struct LoaderColors {
-        public let color: Color
-        
-        public init(
-            color: Color = ColorBook.PrimaryButtonBordered.loader
-        ) {
-            self.color = color
-        }
-    }
 }
 
 // MARK:- Fonts
-extension VPrimaryButtonModelBordered {
+extension VPrimaryButtonModel {
     public struct Fonts {
         public let title: Font
         
         public init(
-            title: Font = FontBook.buttonLarge
+            title: Font = .system(size: 16, weight: .semibold, design: .default)
         ) {
             self.title = title
         }
@@ -181,7 +167,7 @@ extension VPrimaryButtonModelBordered {
 }
 
 // MARK:- Mapping
-extension VPrimaryButtonModelBordered.Colors {
+extension VPrimaryButtonModel.Colors {
     func foregroundColor(state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return foreground.enabled
