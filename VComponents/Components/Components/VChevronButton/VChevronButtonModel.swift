@@ -84,7 +84,7 @@ extension VChevronButtonModel {
     }
 }
 
-extension VChevronButtonModel {
+extension VChevronButtonModel.Colors {
     public struct ForegroundColors {
         public let enabled: Color
         public let pressed: Color

@@ -9,11 +9,6 @@ import SwiftUI
 
 // MARK:- Color Book
 public struct ColorBook {
-    private init() {}
-}
-
-// MARK:- General
-extension ColorBook {
     public static let canvas: Color = .init(componentAsset: "Canvas")
     public static let layer: Color = .init(componentAsset: "Layer")
     
@@ -23,52 +18,48 @@ extension ColorBook {
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
     public static let accent: Color = .init(componentAsset: "Accent")
+    
+    private init() {}
 }
 
-// MARK:- Toggle
-extension ColorBook {
-    public struct Toggle {
-        public struct Fill {
-            public static let enabledOn: Color = .clear//PrimaryButtonFilled.Background.enabled
-            public static let enabledOff: Color = .init(componentAsset: "Toggle.Fill.enabledOff")
-            public static let disabledOn: Color = .clear//PrimaryButtonFilled.Background.disabled
-            public static let disabledOff: Color = .init(componentAsset: "Toggle.Fill.disabledOff")
-            
-            private init() {}
+// MARK:- Helper
+public extension Color {
+    init(componentAsset name: String) {
+        guard
+            let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents"),
+            let uiColor = UIColor(named: name, in: bundle, compatibleWith: nil)
+        else {
+            preconditionFailure()
         }
         
-        public struct Thumb {
-            public static let enabledOn: Color = .init(componentAsset: "Toggle.Thumb.enabledOn")
-            public static let enabledOff: Color = enabledOn
-            public static let disabledOn: Color = enabledOn
-            public static let disabledOff: Color = enabledOn
-            
-            private init() {}
-        }
-        
-        private init() {}
+        self.init(uiColor)
     }
 }
+
+
+
+
+
 
 // MARK:- Slider
 extension ColorBook {
     public struct Slider {
         public struct Track {
-            public static let enabled: Color = Toggle.Fill.enabledOff
-            public static let disabled: Color = Toggle.Fill.disabledOff
+            public static let enabled: Color = .clear//Toggle.Fill.enabledOff
+            public static let disabled: Color = .clear//Toggle.Fill.disabledOff
             
             private init() {}
         }
         
         public struct Progress {
-            public static let enabled: Color = Toggle.Fill.enabledOn
-            public static let disabled: Color = Toggle.Fill.disabledOn
+            public static let enabled: Color = .clear//Toggle.Fill.enabledOn
+            public static let disabled: Color = .clear//Toggle.Fill.disabledOn
             
             private init() {}
         }
         
         public struct ThumbFill {
-            public static let enabled: Color = Toggle.Thumb.enabledOn
+            public static let enabled: Color = .clear//Toggle.Thumb.enabledOn
             public static let disabled: Color = enabled
             
             private init() {}
@@ -143,19 +134,5 @@ extension ColorBook {
         public static let blinding: Color = .init(componentAsset: "SideBarStandard.Blinding")
         
         private init() {}
-    }
-}
-
-// MARK:- Helper
-public extension Color {
-    init(componentAsset name: String) {
-        guard
-            let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents"),
-            let uiColor = UIColor(named: name, in: bundle, compatibleWith: nil)
-        else {
-            preconditionFailure()
-        }
-        
-        self.init(uiColor)
     }
 }

@@ -22,20 +22,34 @@ struct VToggleDemoView: View {
             .foregroundColor(ColorBook.accent)
     }
     
-    @State private var noContentToggleIsOn: Bool = true
+    let nonClickableContentModel: VToggleModel = .init(
+        behavior: .init(
+            contentIsClickable: false
+        )
+    )
     
-    @State private var standardTitleToggleIsOn: Bool = true
-    @State private var standardIconToggleIsOn: Bool = true
+    let noLoweredOpacityWhenPressedModel: VToggleModel = .init(
+        colors: .init(
+            content: .init(
+                pressedOpacity: 1
+            )
+        )
+    )
     
-    @State private var settingTitleToggleIsOn: Bool = true
-    @State private var settingIconToggleIsOn: Bool = true
+    let noLoweredOpacityWhenDisabledModel: VToggleModel = .init(
+        colors: .init(
+            content: .init(
+                disabledOpacity: 1
+            )
+        )
+    )
     
-    @State private var nonInteractiveContentstandardIconToggleIsOn: Bool = true
-    @State private var interactiveContentLeftFlexibleContentToggleIsOn: Bool = true
-    
-    @State private var noLoweredOpacityPressedContentToggleIsOn: Bool = true
-    @State private var noLoweredOpacityDisabledContentToggleIsOn: Bool = true
-    
+    @State private var toggle1IsOn: Bool = true
+    @State private var toggle2IsOn: Bool = true
+    @State private var toggle3IsOn: Bool = true
+    @State private var toggle4IsOn: Bool = true
+    @State private var toggle5IsOn: Bool = true
+    @State private var toggle6IsOn: Bool = true
     @State private var toggleState: VToggleState = .enabled
 }
 
@@ -43,13 +57,29 @@ struct VToggleDemoView: View {
 extension VToggleDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            noContentToggle
-            standardIconToggles
-            leftFlexibleContentToggles
-            nonInteractiveContentstandardIconToggle
-            interactiveContentLeftFlexibleContentToggle
-            noLoweredOpacityPressedContentToggle
-            noLoweredOpacityDisabledContentToggle
+            DemoRowView(type: .titled("No Content"), content: {
+                VToggle(isOn: $toggle1IsOn, state: toggleState)
+            })
+            
+            DemoRowView(type: .titled("Text"), content: {
+                VToggle(isOn: $toggle2IsOn, state: toggleState, title: toggleTitle)
+            })
+            
+            DemoRowView(type: .titled("Icon"), content: {
+                VToggle(isOn: $toggle3IsOn, state: toggleState, content: toggleContent)
+            })
+            
+            DemoRowView(type: .titled("Non-clickable Content"), content: {
+                VToggle(model: nonClickableContentModel, isOn: $toggle4IsOn, state: toggleState, title: toggleTitle)
+            })
+            
+            DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
+                VToggle(model: noLoweredOpacityWhenPressedModel, isOn: $toggle5IsOn, state: toggleState, title: toggleTitle)
+            })
+            
+            DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
+                VToggle(model: noLoweredOpacityWhenDisabledModel, isOn: $toggle6IsOn, state: toggleState, title: toggleTitle)
+            })
         })
     }
     
@@ -62,98 +92,6 @@ extension VToggleDemoView {
                 ),
                 title: "Disabled"
             )
-        })
-    }
-    
-    private var noContentToggle: some View {
-        VStack(content: {
-            DemoRowView(type: .titled("No Content"), content: {
-                VToggle(isOn: $noContentToggleIsOn, state: toggleState)
-            })
-        })
-    }
-    
-    private var standardIconToggles: some View {
-        VStack(content: {
-            DemoRowView(type: .titled("Standard (Text)"), content: {
-                VToggle(.standard(), isOn: $standardTitleToggleIsOn, state: toggleState, title: toggleTitle)
-            })
-            
-            DemoRowView(type: .titled("Standard (Icon)"), content: {
-                VToggle(.standard(), isOn: $standardIconToggleIsOn, state: toggleState, content: toggleContent)
-            })
-        })
-    }
-    
-    private var leftFlexibleContentToggles: some View {
-        VStack(content: {
-            DemoRowView(type: .titled("Setting (Text)"), content: {
-                VToggle(.setting(), isOn: $settingTitleToggleIsOn, state: toggleState, title: toggleTitle)
-            })
-            
-            DemoRowView(type: .titled("Setting (Icon)"), content: {
-                VToggle(.setting(), isOn: $settingIconToggleIsOn, state: toggleState, content: toggleContent)
-            })
-        })
-    }
-    
-    private var nonInteractiveContentstandardIconToggle: some View {
-        let model: VToggleModelStandard = .init(
-            behavior: .init(
-                contentIsClickable: false
-            )
-        )
-        
-        return DemoRowView(type: .titled("Non-interractive Content"), content: {
-            VToggle(.standard(model), isOn: $nonInteractiveContentstandardIconToggleIsOn, state: toggleState, title: toggleTitle)
-        })
-    }
-    
-    private var interactiveContentLeftFlexibleContentToggle: some View {
-        let model: VToggleModelSetting = .init(
-            behavior: .init(
-                contentIsClickable: true,
-                spaceIsClickable: true,
-                animation: .default
-            )
-        )
-        
-        return DemoRowView(type: .titled("Interractive Spacing"), content: {
-            VToggle(.setting(model), isOn: $interactiveContentLeftFlexibleContentToggleIsOn, state: toggleState, title: toggleTitle)
-        })
-    }
-    
-    private var noLoweredOpacityPressedContentToggle: some View {
-        let model: VToggleModelStandard = .init(
-            colors: .init(
-                content: .init(
-                    pressedOpacity: 1,
-                    disabledOpacity: 0.5
-                )
-            )
-        )
-        
-        return VStack(content: {
-            DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                VToggle(.standard(model), isOn: $noLoweredOpacityPressedContentToggleIsOn, state: toggleState, title: toggleTitle)
-            })
-        })
-    }
-    
-    private var noLoweredOpacityDisabledContentToggle: some View {
-        let model: VToggleModelStandard = .init(
-            colors: .init(
-                content: .init(
-                    pressedOpacity: 0.5,
-                    disabledOpacity: 1
-                )
-            )
-        )
-        
-        return VStack(content: {
-            DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                VToggle(.standard(model), isOn: $noLoweredOpacityDisabledContentToggleIsOn, state: toggleState, title: toggleTitle)
-            })
         })
     }
 }

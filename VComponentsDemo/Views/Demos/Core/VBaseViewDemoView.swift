@@ -49,11 +49,11 @@ extension VBaseViewDemoView {
             ColorBook.layer.edgesIgnoringSafeArea(.bottom)
             
             VStack(content: {
-                VToggle(.setting(), isOn: $navigationBarTitleIsLeading, title: "Title is on left")
+                VToggle(isOn: $navigationBarTitleIsLeading, title: "Title is on left")
                 
-                VToggle(.setting(), isOn: $navigationBarHasLeadingItem, title: "Leading items")
+                VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
                 
-                VToggle(.setting(), isOn: $navigationBarHasTrailingItem, title: "Trailing items")
+                VToggle(isOn: $navigationBarHasTrailingItem, title: "Trailing items")
             })
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(20)

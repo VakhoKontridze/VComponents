@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Toggle Model Standard
-public struct VToggleModelStandard {
+// MARK:- V Toggle Model
+public struct VToggleModel {
     public let behavior: Behavior
     public let layout: Layout
     public let colors: Colors
@@ -25,7 +25,7 @@ public struct VToggleModelStandard {
 }
 
 // MARK:- Behavior
-extension VToggleModelStandard {
+extension VToggleModel {
     public struct Behavior {
         public let contentIsClickable: Bool
         public let animation: Animation
@@ -41,7 +41,7 @@ extension VToggleModelStandard {
 }
 
 // MARK:- Layout
-extension VToggleModelStandard {
+extension VToggleModel {
     public struct Layout {
         public let size: CGSize
         public let thumbDimension: CGFloat
@@ -67,8 +67,10 @@ extension VToggleModelStandard {
 }
 
 // MARK:- Colors
-extension VToggleModelStandard {
+extension VToggleModel {
     public struct Colors {
+        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
+        
         public let fill: FillColors
         public let thumb: ThumbColors
         public let content: ContentColors
@@ -85,7 +87,7 @@ extension VToggleModelStandard {
     }
 }
 
-extension VToggleModelStandard {
+extension VToggleModel.Colors {
     public struct FillColors {
         public let enabledOn: Color
         public let enabledOff: Color
@@ -93,10 +95,10 @@ extension VToggleModelStandard {
         public let disabledOff: Color
         
         public init(
-            enabledOn: Color = .clear,//ColorBook.ToggleStandard.Fill.enabledOn,
-            enabledOff: Color = .clear,//ColorBook.ToggleStandard.Fill.enabledOff,
-            disabledOn: Color = .clear,//ColorBook.ToggleStandard.Fill.disabledOn,
-            disabledOff: Color = .clear//ColorBook.ToggleStandard.Fill.disabledOff
+            enabledOn: Color = primaryButtonColors.background.enabled,
+            enabledOff: Color = .init(componentAsset: "Toggle.Fill.enabledOff"),
+            disabledOn: Color = primaryButtonColors.background.disabled,
+            disabledOff: Color = .init(componentAsset: "Toggle.Fill.disabledOff")
         ) {
             self.enabledOn = enabledOn
             self.enabledOff = enabledOff
@@ -112,10 +114,10 @@ extension VToggleModelStandard {
         public let disabledOff: Color
         
         public init(
-            enabledOn: Color = .clear,//ColorBook.ToggleStandard.Thumb.enabledOn,
-            enabledOff: Color = .clear,//ColorBook.ToggleStandard.Thumb.enabledOff,
-            disabledOn: Color = .clear,//ColorBook.ToggleStandard.Thumb.disabledOn,
-            disabledOff: Color = .clear//ColorBook.ToggleStandard.Thumb.disabledOff
+            enabledOn: Color = .init(componentAsset: "Toggle.Thumb.enabledOn"),
+            enabledOff: Color = .init(componentAsset: "Toggle.Thumb.enabledOn"),
+            disabledOn: Color = .init(componentAsset: "Toggle.Thumb.enabledOn"),
+            disabledOff: Color = .init(componentAsset: "Toggle.Thumb.enabledOn")
         ) {
             self.enabledOn = enabledOn
             self.enabledOff = enabledOff
@@ -139,7 +141,7 @@ extension VToggleModelStandard {
 }
 
 // MARK:- Mapping
-extension VToggleModelStandard.Colors {
+extension VToggleModel.Colors {
     func foregroundOpacity(state: VToggleInternalState) -> Double {
         switch state {
         case .enabled: return 1
