@@ -17,12 +17,13 @@ struct VAlertPresenter {
 extension VAlertPresenter {
     static func present<AlertContent>(
         _ alert: AlertContent,
+        model: VAlertModel,
         if isPresented: Binding<Bool>
     )
         where AlertContent: View
     {
         if isPresented.wrappedValue {
-            VAlertPresenter.present(alert)
+            VAlertPresenter.present(alert, model: model)
         } else {
             VAlertPresenter.dismiss()
         }
@@ -31,21 +32,20 @@ extension VAlertPresenter {
 
 // MARK:- Presenting
 private extension VAlertPresenter {
-    static func present<AlertContent>(_ alert: AlertContent) where AlertContent: View {
+    static func present<AlertContent>(_ alert: AlertContent, model: VAlertModel) where AlertContent: View {
         guard let superView = superView else { return }
         
-        addBlinding(in: superView)
+        addBlinding(in: superView, model: model)
         let alertUIView: UIView = addAlert(in: superView, with: alert)
         animateIn(alertUIView)
     }
     
-    static func addBlinding(in superView: UIView) {
+    static func addBlinding(in superView: UIView, model: VAlertModel) {
         let blinding: UIView = {
             let blinding: UIView = .init()
             blinding.translatesAutoresizingMaskIntoConstraints = false
             blinding.isUserInteractionEnabled = false
-//            blinding.backgroundColor = .init(ColorBook.SideBarStandard.blinding)
-            fatalError()
+            blinding.backgroundColor = .init(model.colors.blinding)
             blinding.tag = blindingID
             return blinding
         }()
@@ -72,6 +72,7 @@ private extension VAlertPresenter {
             let hostingController: UIHostingController = .init(rootView: content)
             let alertUIView: UIView = hostingController.view
             alertUIView.translatesAutoresizingMaskIntoConstraints = false
+            alertUIView.backgroundColor = .clear
             alertUIView.tag = alertID
             return alertUIView
         }()

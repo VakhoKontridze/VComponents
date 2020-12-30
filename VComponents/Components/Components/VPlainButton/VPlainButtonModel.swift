@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK:- V Plain Model Button
 public struct VPlainButtonModel {
+    public static let squareButtonFont: Font = VSquareButtonModel().font
+    
     public let layout: Layout
     public let colors: Colors
     public let font: Font
@@ -16,7 +18,7 @@ public struct VPlainButtonModel {
     public init(
         layout: Layout = .init(),
         colors: Colors = .init(),
-        font: Font = .system(size: 14, weight: .semibold, design: .default)
+        font: Font = squareButtonFont
     ) {
         self.layout = layout
         self.colors = colors

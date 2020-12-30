@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK:- V Secondary Button Model
 public struct VSecondaryButtonModel {
+    public static let primaryButtonFont: Font = VPrimaryButtonModel().font
+    
     public let layout: Layout
     public let colors: Colors
     public let font: Font
@@ -16,7 +18,7 @@ public struct VSecondaryButtonModel {
     public init(
         layout: Layout = .init(),
         colors: Colors = .init(),
-        font: Font = .system(size: 16, weight: .semibold, design: .default)
+        font: Font = primaryButtonFont
     ) {
         self.layout = layout
         self.colors = colors

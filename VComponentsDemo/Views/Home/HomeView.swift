@@ -58,7 +58,8 @@ extension HomeView {
                         })
                         
                         HomeSectionView(title: "Modals", content: {
-                            HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView(), showSeparator: false)
+                            HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView())
+                            HomeRowView(title: VAlertDemoView.navigationBarTitle, destination: VAlertDemoView(), showSeparator: false)
                         })
 
                         HomeSectionView(title: "Core", content: {
@@ -81,19 +82,3 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
     }
 }
-
-
-//@State private var isPresented: Bool = false
-//
-//var body: some View {
-//    ZStack(content: {
-//        Color.yellow
-//        
-//        Button("??", action: { isPresented = true
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: {
-//                isPresented = false
-//            })
-//        })
-//    })
-//        .vAlert(isPresented: $isPresented, dialog: .one(dismissButton: .init(title: "PRESS", action: {})), title: "TITLE", description: "DESCRIPTION")
-//}

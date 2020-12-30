@@ -50,9 +50,7 @@ extension VPrimaryButtonModel {
             borderWidth: CGFloat = 1,
             contentMarginX: CGFloat = 15,
             contentMarginY: CGFloat = 3,
-            loaderSpacing: CGFloat = 20,
-            hitBoxSpacingX: CGFloat = 0,
-            hitBoxSpacingY: CGFloat = 0
+            loaderSpacing: CGFloat = 20
         ) {
             self.height = height
             self.cornerRadius = cornerRadius

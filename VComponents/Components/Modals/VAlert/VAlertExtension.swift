@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- Extension
 public extension View {
     func vAlert(
-        _ alertType: VAlertType = .default,
+        model: VAlertModel = .init(),
         isPresented: Binding<Bool>,
         dialog dialogType: VAlertDialogType,
         title: String?,
@@ -18,12 +18,13 @@ public extension View {
     ) -> some View {
         VAlertPresenter.present(
             VAlert(
-                alertType,
+                model: model,
                 isPresented: isPresented,
                 dialog: dialogType,
                 title: title,
                 description: description
             ),
+            model: model,
             if: isPresented
         )
         
