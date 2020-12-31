@@ -82,7 +82,7 @@ public extension VToggle {
     }
     
     private var toggle: some View {
-        VInteractiveView(isDisabled: state.isDisabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isDisabled: state.isDisabled, action: action, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.size.height)
                     .foregroundColor(model.colors.fillColor(isOn: isOn, state: internalState))
@@ -100,7 +100,7 @@ public extension VToggle {
     }
     
     private var spacerView: some View {
-        VInteractiveView(isDisabled: contentIsDisabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isDisabled: contentIsDisabled, action: action, onPress: { _ in }, content: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .ifLet(model.layout.contentSpacing, transform: { $0.frame(width: $1) })
@@ -111,7 +111,7 @@ public extension VToggle {
     private func contentView(
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        VInteractiveView(isDisabled: contentIsDisabled, action: action, onPress: { isPressed = $0 }, content: {
+        VBaseButton(isDisabled: contentIsDisabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
                 .opacity(model.colors.foregroundOpacity(state: internalState))
         })

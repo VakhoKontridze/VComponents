@@ -55,7 +55,7 @@ public struct VPlainButton<Content>: View where Content: View {
 // MARK:- Body
 public extension VPlainButton {
     var body: some View {
-        VInteractiveView(
+        VBaseButton(
             isDisabled: state.isDisabled,
             action: action,
             onPress: { isPressed = $0 },

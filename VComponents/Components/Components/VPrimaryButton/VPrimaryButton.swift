@@ -55,7 +55,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
 // MARK:- Body
 public extension VPrimaryButton {
     var body: some View {
-        VInteractiveView(
+        VBaseButton(
             isDisabled: state.isDisabled,
             action: action,
             onPress: { isPressed = $0 },

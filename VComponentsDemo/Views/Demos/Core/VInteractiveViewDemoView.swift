@@ -64,7 +64,7 @@ extension VInteractiveViewDemoView {
                 .fontWeight(.semibold)
                 .frame(height: 20)
             
-            VInteractiveView(isDisabled: false, action: action, onPress: pressAction, content: {
+            VBaseButton(isDisabled: false, action: action, onPress: pressAction, content: {
                 Circle()
                     .frame(dimension: 200)
                     .foregroundColor(Color.pink.opacity(pressInsturction.opacity))

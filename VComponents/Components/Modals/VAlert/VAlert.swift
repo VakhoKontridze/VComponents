@@ -43,7 +43,6 @@ extension VAlert {
             contentView
         })
             .frame(width: model.layout.width)
-            //.frame(minHeight: 150)
     }
     
     private var background: some View {
@@ -53,8 +52,8 @@ extension VAlert {
     
     private var contentView: some View {
         VStack(spacing: model.layout.contentSpacing, content: {
-            textView//.frame(maxHeight: .infinity, alignment: .top)
-            dialogView//.frame(maxHeight: .infinity, alignment: .bottom)
+            textView
+            dialogView
         })
             .padding(model.layout.contentInset)
     }
@@ -82,7 +81,7 @@ extension VAlert {
     @ViewBuilder private var descriptionView: some View {
         if !description.isEmpty {
             Text(description)
-                .lineLimit(5)
+                .lineLimit(10)
                 .multilineTextAlignment(.center)
                 .truncationMode(.tail)
                 .foregroundColor(model.colors.description)

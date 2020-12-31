@@ -55,7 +55,7 @@ public struct VSecondaryButton<Content>: View where Content: View {
 // MARK:- Body
 public extension VSecondaryButton {
     var body: some View {
-        VInteractiveView(
+        VBaseButton(
             isDisabled: state.isDisabled,
             action: action,
             onPress: { isPressed = $0 },

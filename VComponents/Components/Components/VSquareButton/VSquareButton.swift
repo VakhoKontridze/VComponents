@@ -55,7 +55,7 @@ public struct VSquareButton<Content>: View where Content: View {
 // MARK:- Body
 public extension VSquareButton {
     var body: some View {
-        VInteractiveView(
+        VBaseButton(
             isDisabled: state.isDisabled,
             action: action,
             onPress: { isPressed = $0 },

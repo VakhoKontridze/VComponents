@@ -1,5 +1,5 @@
 //
-//  VInteractiveView.swift
+//  VBaseButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -8,8 +8,8 @@
 import SwiftUI
 import UIKit
 
-// MARK:- V Interactive View
-public struct VInteractiveView<Content>: View where Content: View {
+// MARK:- V Base Button
+public struct VBaseButton<Content>: View where Content: View {
     // MARK: Properties
     private let isDisabled: Bool
     
