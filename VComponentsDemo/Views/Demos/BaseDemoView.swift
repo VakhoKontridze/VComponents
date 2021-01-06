@@ -55,7 +55,6 @@ extension BaseDemoView {
                 
                 ScrollView(content: {
                     HomeSectionView(title: nil, content: content)
-                        .padding(.horizontal, 10)
                 })
                     .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
             })
