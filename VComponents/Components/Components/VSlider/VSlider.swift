@@ -89,12 +89,12 @@ public extension VSlider {
             
                 .overlay(thumb(in: proxy))
             
-                .disabled(state.isDisabled)
                 .gesture(
                     DragGesture(minimumDistance: 0)
                         .onChanged({ dragChanged($0, in: proxy) })
                         .onEnded(dragEnded)
                 )
+                .disabled(state.isDisabled)
         })
             .frame(height: model.layout.height)
     }
@@ -122,7 +122,7 @@ public extension VSlider {
                     .strokeBorder(model.colors.thumbBorderWidth(state: state), lineWidth: model.layout.thumbBorderWidth)
             })
                 .frame(dimension: model.layout.thumbDimension)
-                .offset(x: thumbOffset(in: proxy), y: 0)
+                .offset(x: thumbOffset(in: proxy))
         })
             .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
             .allowsHitTesting(false)

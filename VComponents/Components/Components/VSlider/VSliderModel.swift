@@ -111,7 +111,7 @@ extension VSliderModel.Colors.SliderColors {
         
         public init(
             enabled: Color = VSliderModel.Colors.toggleColors.fill.enabledOff,
-            disabled: Color = VSliderModel.Colors.toggleColors.fill.enabledOff
+            disabled: Color = VSliderModel.Colors.toggleColors.fill.disabledOff
         ) {
             self.enabled = enabled
             self.disabled = disabled
@@ -124,7 +124,7 @@ extension VSliderModel.Colors.SliderColors {
         
         public init(
             enabled: Color = VSliderModel.Colors.toggleColors.fill.enabledOn,
-            disabled: Color = VSliderModel.Colors.toggleColors.fill.enabledOn
+            disabled: Color = VSliderModel.Colors.toggleColors.fill.disabledOn
         ) {
             self.enabled = enabled
             self.disabled = disabled
