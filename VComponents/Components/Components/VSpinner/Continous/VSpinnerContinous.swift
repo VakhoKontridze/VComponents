@@ -31,7 +31,7 @@ extension VSpinnerContinous {
             )
             .frame(width: model.layout.dimension, height: model.layout.dimension)
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
-            .animation(model.behavior.animation.repeatForever(autoreverses: false))
+            .animation(model.animation.repeatForever(autoreverses: false))
             .onAppear(perform: { isAnimating.toggle() })
     }
 }

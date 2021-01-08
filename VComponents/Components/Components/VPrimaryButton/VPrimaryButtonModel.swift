@@ -13,7 +13,11 @@ public struct VPrimaryButtonModel {
     public var colors: Colors = .init()
     public var font: Font = .system(size: 16, weight: .semibold, design: .default)  // Only used in init with string
     
-    var spinnerModel: VSpinnerModelContinous { .init(color: colors.loader) }
+    var spinnerModel: VSpinnerModelContinous {
+        var model: VSpinnerModelContinous = .init()
+        model.color = colors.loader
+        return model
+    }
     
     public init() {}
 }
