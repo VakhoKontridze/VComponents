@@ -19,14 +19,17 @@ public struct VSideBarModel {
     ) {
         self.layout = layout
         self.colors = colors
-        self.sheetModel = .init(
-            layout: .init(
-                roundedCorners: layout.roundCorners ? .custom([.topRight, .bottomRight]) : .none,
-                cornerRadius: layout.cornerRadius,
-                contentPadding: 0
-            ),
-            color: colors.background
-        )
+        self.sheetModel = {
+            var model: VSheetModel = .init()
+            
+            model.layout.roundedCorners = layout.roundCorners ? .custom([.topRight, .bottomRight]) : .none
+            model.layout.cornerRadius = layout.cornerRadius
+            model.layout.contentPadding = 0
+            
+            model.color = colors.background
+            
+            return model
+        }()
     }
 }
 

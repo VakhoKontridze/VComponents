@@ -16,6 +16,12 @@ struct VSheetDemoView: View {
     private func sheeContent() -> some View {
         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
     }
+    
+    private func model(roundedCorners: VSheetModel.Layout.RoundedCorners) -> VSheetModel {
+        var model: VSheetModel = .init()
+        model.layout.roundedCorners = roundedCorners
+        return model
+    }
 }
 
 // MARK:- Body
@@ -24,19 +30,19 @@ extension VSheetDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             ScrollView(content: {
                 DemoRowView(type: .titled("Round All"), content: {
-                    VSheet(model: .init(layout: .init(roundedCorners: .all)), content: sheeContent)
+                    VSheet(model: model(roundedCorners: .all), content: sheeContent)
                 })
                 
                 DemoRowView(type: .titled("Round Top"), content: {
-                    VSheet(model: .init(layout: .init(roundedCorners: .top)), content: sheeContent)
+                    VSheet(model: model(roundedCorners: .top), content: sheeContent)
                 })
                 
                 DemoRowView(type: .titled("Round Bottom"), content: {
-                    VSheet(model: .init(layout: .init(roundedCorners: .bottom)), content: sheeContent)
+                    VSheet(model: model(roundedCorners: .bottom), content: sheeContent)
                 })
                 
                 DemoRowView(type: .titled("Round Custom"), content: {
-                    VSheet(model: .init(layout: .init(roundedCorners: .custom([.topLeft, .bottomRight]))), content: sheeContent)
+                    VSheet(model: model(roundedCorners: .custom([.topLeft, .bottomRight])), content: sheeContent)
                 })
             })
                 .background(ColorBook.canvas)

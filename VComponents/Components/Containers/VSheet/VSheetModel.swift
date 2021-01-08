@@ -14,35 +14,21 @@ public typealias VSheetModelRoundBottom = VSheetModel
 
 // MARK:- V Sheet Model
 public struct VSheetModel {
-    public let layout: Layout
-    public let color: Color
+    public var layout: Layout = .init()
+    public var color: Color = ColorBook.layer
     
-    public init(
-        layout: Layout = .init(),
-        color: Color = ColorBook.layer
-    ) {
-        self.layout = layout
-        self.color = color
-    }
+    public init() {}
 }
 
 // MARK:- Layout
 extension VSheetModel {
     public struct Layout {
-        public let roundedCorners: RoundedCorners
-        public let cornerRadius: CGFloat
+        public var roundedCorners: RoundedCorners = .all
+        public var cornerRadius: CGFloat = 15
         
-        public let contentPadding: CGFloat
+        public var contentPadding: CGFloat = 16
         
-        public init(
-            roundedCorners: RoundedCorners = .all,
-            cornerRadius: CGFloat = 15,
-            contentPadding: CGFloat = 16
-        ) {
-            self.roundedCorners = roundedCorners
-            self.cornerRadius = cornerRadius
-            self.contentPadding = contentPadding
-        }
+        public init() {}
     }
 }
 

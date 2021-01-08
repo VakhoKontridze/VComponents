@@ -14,6 +14,12 @@ struct HomeSectionView<Content>: View where Content: View {
     private let title: String?
     private let content: () -> Content
     
+    private let sheetModel: VSheetModel = {
+        var model: VSheetModel = .init()
+        model.layout.contentPadding = 10
+        return model
+    }()
+    
     // MARK: Initializers
     init(
         title: String?,
@@ -36,7 +42,7 @@ extension HomeSectionView {
                     .foregroundColor(ColorBook.primary)
             }
             
-            VSheet(model: .init(layout: .init(contentPadding: 10)), content: {
+            VSheet(model: sheetModel, content: {
                 VStack(spacing: 0, content: content)
             })
         })
