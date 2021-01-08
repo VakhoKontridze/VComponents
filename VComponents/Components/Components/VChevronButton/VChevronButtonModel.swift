@@ -20,28 +20,27 @@ public struct VChevronButtonModel {
         self.layout = layout
         self.colors = colors
         
-        self.squareButtonModel = .init(
-            layout: .init(
-                dimension: layout.dimension,
-                cornerRadius: layout.dimension / 2,
-                hitBoxSpacingX: layout.hitBoxSpacingX,
-                hitBoxSpacingY: layout.hitBoxSpacingY
-            ),
-            colors: .init(
-                foreground: .init(
-                    enabled: colors.foreground.enabled,
-                    pressed: colors.foreground.pressed,
-                    disabled: colors.foreground.disabled,
-                    pressedOpacity: colors.foreground.pressedOpacity,
-                    disabledOpacity: colors.foreground.disabledOpacity
-                ),
-                background: .init(
-                    enabled: colors.background.enabled,
-                    pressed: colors.background.pressed,
-                    disabled: colors.background.disabled
-                )
-            )
-        )
+        self.squareButtonModel = {
+            var model: VSquareButtonModel = .init()
+            
+            model.layout.dimension = layout.dimension
+            model.layout.cornerRadius = layout.dimension / 2
+            model.layout.hitBoxSpacingX = layout.hitBoxSpacingX
+            model.layout.hitBoxSpacingY = layout.hitBoxSpacingY
+            
+            model.colors.foreground.pressedOpacity = colors.foreground.pressedOpacity
+            model.colors.foreground.disabledOpacity = colors.foreground.disabledOpacity
+            
+            model.colors.text.enabled = colors.foreground.enabled
+            model.colors.text.pressed = colors.foreground.pressed
+            model.colors.text.disabled = colors.foreground.disabled
+            
+            model.colors.background.enabled = colors.background.enabled
+            model.colors.background.pressed = colors.background.pressed
+            model.colors.background.disabled = colors.background.disabled
+            
+            return model
+        }()
     }
 }
 

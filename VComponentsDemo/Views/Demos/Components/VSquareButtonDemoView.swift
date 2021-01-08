@@ -19,42 +19,43 @@ struct VSquareButtonDemoView: View {
 
     @State private var buttonState: VSquareButtonState = .enabled
     
-    private let circularModel: VSquareButtonModel = .init(
-        layout: .init(
-            cornerRadius: VSquareButtonModel.Layout().dimension / 2
-        )
-    )
-    
+    private let circularModel: VSquareButtonModel = {
+        var model: VSquareButtonModel = .init()
+        
+        model.layout.cornerRadius = VSquareButtonModel.Layout().dimension / 2
+        
+        return model
+    }()
+
     private let borderedModel: VSquareButtonModel = {
         let defaultModel: VSquareButtonModel = .init()
         
-        return .init(
-            colors: .init(
-                foreground: .init(
-                    enabled: defaultModel.colors.background.enabled,
-                    pressed: defaultModel.colors.background.pressed,
-                    disabled: defaultModel.colors.background.disabled
-                ),
-                background: .init(
-                    enabled: .init("PrimaryButtonBordered.Background.enabled"),
-                    pressed: .init("PrimaryButtonBordered.Background.pressed"),
-                    disabled: .init("PrimaryButtonBordered.Background.disabled")
-                ),
-                border: .init(
-                    enabled: defaultModel.colors.background.enabled,
-                    pressed: defaultModel.colors.background.pressed,
-                    disabled: defaultModel.colors.background.disabled
-                )
-            )
-        )
+        var model: VSquareButtonModel = .init()
+        
+        model.colors.text.enabled = defaultModel.colors.background.enabled
+        model.colors.text.pressed = defaultModel.colors.background.pressed
+        model.colors.text.disabled = defaultModel.colors.background.disabled
+        
+        model.colors.background.enabled = .init("PrimaryButtonBordered.Background.enabled")
+        model.colors.background.pressed = .init("PrimaryButtonBordered.Background.pressed")
+        model.colors.background.disabled = .init("PrimaryButtonBordered.Background.disabled")
+        
+        model.colors.border.enabled = defaultModel.colors.background.enabled
+        model.colors.border.pressed = defaultModel.colors.background.disabled   // It's better this way
+        model.colors.border.disabled = defaultModel.colors.background.disabled
+        
+        return model
     }()
     
-    private let largerHitBoxButtonModel: VSquareButtonModel = .init(
-        layout: .init(
-            hitBoxSpacingX: 10,
-            hitBoxSpacingY: 10
-        )
-    )
+    
+    private let largerHitBoxButtonModel: VSquareButtonModel = {
+        var model: VSquareButtonModel = .init()
+        
+        model.layout.hitBoxSpacingX = 10
+        model.layout.hitBoxSpacingY = 10
+        
+        return model
+    }()
 }
 
 // MARK:- Body
@@ -73,7 +74,7 @@ extension VSquareButtonDemoView {
                 VSquareButton(state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
-                        Text("A")
+                        Text("A").foregroundColor(ColorBook.primaryInverted)
                     })
                 })
             })
