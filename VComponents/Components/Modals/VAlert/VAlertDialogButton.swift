@@ -10,8 +10,8 @@ import Foundation
 // MARK:- V Alert Dialog Button
 public struct VAlertDialogButton {
     // MARK: Properties
-    public let title: String
-    public let action: () -> Void
+    public var title: String
+    public var action: () -> Void
     
     // MARK: Initializers
     public init(

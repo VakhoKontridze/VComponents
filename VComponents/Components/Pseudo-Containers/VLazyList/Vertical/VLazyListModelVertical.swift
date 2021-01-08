@@ -17,8 +17,8 @@ public struct VLazyListModelVertical {
 // MARK:- Layout
 extension VLazyListModelVertical {
     public struct Layout {
-        public let alignment: HorizontalAlignment = .center
-        public let showsIndicators: Bool = true
+        public var alignment: HorizontalAlignment = .center
+        public var showsIndicators: Bool = true
         
         public init() {}
     }

@@ -9,8 +9,8 @@ import SwiftUI
 
 // MARK:- V Base View Model Center
 public struct VBaseViewModelCenter {
-    public let layout: Layout = .init()
-    public let font: Font = .system(size: 17, weight: .semibold, design: .default)
+    public var layout: Layout = .init()
+    public var font: Font = .system(size: 17, weight: .semibold, design: .default)
     
     public init() {}
 }

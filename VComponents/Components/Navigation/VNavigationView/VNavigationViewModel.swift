@@ -17,8 +17,8 @@ public struct VNavigationViewModel {
 // MARK:- Colors
 extension VNavigationViewModel {
     public struct Colors {
-        public let background: Color = ColorBook.canvas
-        public let divider: Color = .clear
+        public var background: Color = ColorBook.canvas
+        public var divider: Color = .clear
         
         public init() {}
     }

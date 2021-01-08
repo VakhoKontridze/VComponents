@@ -14,8 +14,8 @@ public struct VTabNavigationViewPage<Content, ItemContent>
         ItemContent: View
 {
     // MARK: Properties
-    public let item: ItemContent
-    public let content: Content
+    public var item: ItemContent
+    public var content: Content
     
     // MARK: Initializers
     public init(
