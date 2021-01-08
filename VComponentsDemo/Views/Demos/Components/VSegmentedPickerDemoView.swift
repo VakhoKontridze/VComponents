@@ -59,7 +59,7 @@ extension VSegmentedPickerDemoView {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection1,
                     state: segmentedPickerState,
-                    data: segmentedPickerTitles.map { VSegmentedPickerTextRow(title: $0) }
+                    titles: segmentedPickerTitles
                 )
             })
             
@@ -67,7 +67,7 @@ extension VSegmentedPickerDemoView {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection2,
                     state: segmentedPickerState,
-                    data: segmentedPickerContents.map { VSegmentedPickerRow(content: $0) }
+                    data: segmentedPickerContents
                 )
             })
             
@@ -76,12 +76,10 @@ extension VSegmentedPickerDemoView {
                     selection: $segmentedPickerSelection3,
                     state: segmentedPickerState,
                     data: segmentedPickerContents.indices.map { i in
-                        .init(content:
-                            HStack(spacing: 5, content: {
-                                segmentedPickerContents[i]
-                                Text(segmentedPickerTitles[i])
-                            })
-                        )
+                        HStack(spacing: 5, content: {
+                            segmentedPickerContents[i]
+                            Text(segmentedPickerTitles[i])
+                        })
                     }
                 )
             })
@@ -90,7 +88,8 @@ extension VSegmentedPickerDemoView {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection4,
                     state: segmentedPickerState,
-                    data: segmentedPickerTitles.enumerated().map { VSegmentedPickerTextRow(title: $1, isEnabled: $0 != 1) }
+                    titles: segmentedPickerTitles,
+                    disabledIndexes: [1]
                 )
             })
             
@@ -99,7 +98,7 @@ extension VSegmentedPickerDemoView {
                     model: noAnimationSegmentedModel,
                     selection: $segmentedPickerSelection5,
                     state: segmentedPickerState,
-                    data: segmentedPickerTitles.map { VSegmentedPickerTextRow(title: $0) }
+                    titles: segmentedPickerTitles
                 )
             })
             
@@ -108,7 +107,7 @@ extension VSegmentedPickerDemoView {
                     model: noLoweredOpacityWhenPressedModel,
                     selection: $segmentedPickerSelection6,
                     state: segmentedPickerState,
-                    data: segmentedPickerTitles.map { VSegmentedPickerTextRow(title: $0) }
+                    titles: segmentedPickerTitles
                 )
             })
             
@@ -117,7 +116,7 @@ extension VSegmentedPickerDemoView {
                     model: noSmallerIndcatorWhenPressedModel,
                     selection: $segmentedPickerSelection7,
                     state: segmentedPickerState,
-                    data: segmentedPickerTitles.map { VSegmentedPickerTextRow(title: $0) }
+                    titles: segmentedPickerTitles
                 )
             })
             
@@ -126,7 +125,8 @@ extension VSegmentedPickerDemoView {
                     model: noLoweredOpacityWhenDisabledModel,
                     selection: $segmentedPickerSelection8,
                     state: segmentedPickerState,
-                    data: segmentedPickerTitles.enumerated().map { VSegmentedPickerTextRow(title: $1, isEnabled: $0 != 1) }
+                    titles: segmentedPickerTitles,
+                    disabledIndexes: [1]
                 )
             })
         })

@@ -66,7 +66,7 @@ extension VBaseViewDemoView {
                         get: { navigationBarTitlePosition.rawValue },
                         set: { navigationBarTitlePosition = NavigationBarTitlePosition(rawValue: $0)! }
                     ),
-                    data: NavigationBarTitlePosition.allCases.map { .init(title: $0.title) }
+                    titles: NavigationBarTitlePosition.allCases.map { $0.title }
                 )
                 
                 VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")

@@ -42,7 +42,6 @@
 		7A41A49525A759BD000A6F80 /* VSegmentedPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */; };
 		7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */; };
 		7A41A49B25A76932000A6F80 /* VGenericTitleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49A25A76932000A6F80 /* VGenericTitleContent.swift */; };
-		7A41A4A125A769C7000A6F80 /* VSegmentedPickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A4A025A769C7000A6F80 /* VSegmentedPickerRow.swift */; };
 		7A43A612259CAE130029E3C9 /* VAlertDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */; };
 		7A48FDCA258DE48E00AA4D4D /* VSquareButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */; };
@@ -174,7 +173,6 @@
 		7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerModel.swift; sourceTree = "<group>"; };
 		7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerState.swift; sourceTree = "<group>"; };
 		7A41A49A25A76932000A6F80 /* VGenericTitleContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGenericTitleContent.swift; sourceTree = "<group>"; };
-		7A41A4A025A769C7000A6F80 /* VSegmentedPickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerRow.swift; sourceTree = "<group>"; };
 		7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDemoView.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButton.swift; sourceTree = "<group>"; };
 		7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButtonState.swift; sourceTree = "<group>"; };
@@ -323,7 +321,6 @@
 			children = (
 				7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */,
 				7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */,
-				7A41A4A025A769C7000A6F80 /* VSegmentedPickerRow.swift */,
 				7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */,
 			);
 			path = VSegmentedPicker;
@@ -966,7 +963,6 @@
 				7A4C431325923778000207DD /* VBaseViewModelLeading.swift in Sources */,
 				7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */,
 				7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */,
-				7A41A4A125A769C7000A6F80 /* VSegmentedPickerRow.swift in Sources */,
 				7A860D46259312B100B19A53 /* SettingRootView.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,

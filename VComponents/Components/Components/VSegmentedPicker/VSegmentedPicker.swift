@@ -17,11 +17,12 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
     private let state: VSegmentedPickerState
     @State private var pressedIndex: Int? = nil
     private func rowState(for index: Int) -> VSegmentedPickerRowState { .init(
-        isEnabled: !state.isDisabled && data[index].isEnabled,
+        isEnabled: !state.isDisabled && !disabledIndexes.contains(index),
         isPressed: pressedIndex == index
     ) }
     
-    let data: [VSegmentedPickerRow<RowContent>]
+    private let data: [RowContent]
+    private let disabledIndexes: Set<Int>
     
     @State private var rowWidth: CGFloat = .zero
     
@@ -30,19 +31,22 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
-        data: [VSegmentedPickerRow<RowContent>]
+        data: [RowContent],
+        disabledIndexes: Set<Int> = .init()
     ) {
         self.model = model
         self._selection = selection
         self.state = state
         self.data = data
+        self.disabledIndexes = disabledIndexes
     }
     
     public init<S>(
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
-        data: [VSegmentedPickerTextRow<S>]
+        titles: [S],
+        disabledIndexes: Set<Int> = .init()
     )
         where
             RowContent == VGenericTitleContentView<S>,
@@ -52,12 +56,8 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
             model: model,
             selection: selection,
             state: state,
-            data: data.map { row in
-                .init(
-                    content: VGenericTitleContentView(title: row.title, color: model.colors.textColor(for: state), font: model.font),
-                    isEnabled: row.isEnabled
-                )
-            }
+            data: titles.map { VGenericTitleContentView(title: $0, color: model.colors.textColor(for: state), font: model.font) },
+            disabledIndexes: disabledIndexes
         )
     }
 }
@@ -99,11 +99,11 @@ public extension VSegmentedPicker {
         HStack(spacing: 0, content: {
             ForEach(0..<data.count, content: { i in
                 VBaseButton(
-                    isDisabled: state.isDisabled || !data[i].isEnabled,
+                    isDisabled: state.isDisabled || disabledIndexes.contains(i),
                     action: { selection = i },
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {
-                        data[i].content
+                        data[i]
                             .padding(model.layout.actualRowContentPadding)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             
@@ -160,12 +160,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
     @State private static var selection: Int = 0
     
     static var previews: some View {
-        VSegmentedPicker(selection: $selection, data: [
-            .init(title: "One", isEnabled: true),
-            .init(title: "Two", isEnabled: true),
-            .init(title: "Three", isEnabled: false),
-            .init(title: "Four", isEnabled: true),
-        ])
+        VSegmentedPicker(selection: $selection, titles: ["One", "Two", "Three", "Four"], disabledIndexes: [2])
             .padding(20)
     }
 }

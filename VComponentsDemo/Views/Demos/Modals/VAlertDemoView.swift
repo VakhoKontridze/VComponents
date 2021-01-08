@@ -56,14 +56,14 @@ extension VAlertDemoView {
                 
                 VStack(spacing: 3, content: {
                     Text("Dialog Type")
-                        .font(.caption)
+                        .font(.footnote)
                     
                     VSegmentedPicker(
                         selection: .init(
                             get: { dialogType.rawValue },
                             set: { dialogType = DialogType(rawValue: $0)! }
                         ),
-                        data: DialogType.allCases.map { .init(title: $0.title) }
+                        titles: DialogType.allCases.map { $0.title }
                     )
                 })
                 
