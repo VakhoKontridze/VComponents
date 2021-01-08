@@ -22,33 +22,31 @@ struct VSecondaryButtonDemoView: View {
     private let borderedModel: VSecondaryButtonModel = {
         let defaultModel: VSecondaryButtonModel = .init()
         
-        return .init(
-            colors: .init(
-                foreground: .init(
-                    enabled: defaultModel.colors.background.enabled,
-                    pressed: defaultModel.colors.background.pressed,
-                    disabled: defaultModel.colors.background.disabled
-                ),
-                background: .init(
-                    enabled: .init("PrimaryButtonBordered.Background.enabled"),
-                    pressed: .init("PrimaryButtonBordered.Background.pressed"),
-                    disabled: .init("PrimaryButtonBordered.Background.disabled")
-                ),
-                border: .init(
-                    enabled: defaultModel.colors.background.enabled,
-                    pressed: defaultModel.colors.background.pressed,
-                    disabled: defaultModel.colors.background.disabled
-                )
-            )
-        )
+        var model: VSecondaryButtonModel = .init()
+        
+        model.colors.text.enabled = defaultModel.colors.background.enabled
+        model.colors.text.pressed = defaultModel.colors.background.pressed
+        model.colors.text.disabled = defaultModel.colors.background.disabled
+        
+        model.colors.background.enabled = .init("PrimaryButtonBordered.Background.enabled")
+        model.colors.background.pressed = .init("PrimaryButtonBordered.Background.pressed")
+        model.colors.background.disabled = .init("PrimaryButtonBordered.Background.disabled")
+        
+        model.colors.border.enabled = defaultModel.colors.background.enabled
+        model.colors.border.pressed = defaultModel.colors.background.disabled   // It's better this way
+        model.colors.border.disabled = defaultModel.colors.background.disabled
+        
+        return model
     }()
     
-    private let clippedHitBoxModel: VSecondaryButtonModel = .init(
-        layout: .init(
-            hitBoxSpacingX: 0,
-            hitBoxSpacingY: 0
-        )
-    )
+    private let clippedHitBoxModel: VSecondaryButtonModel = {
+        var model: VSecondaryButtonModel = .init()
+        
+        model.layout.hitBoxSpacingX = 0
+        model.layout.hitBoxSpacingY = 0
+        
+        return model
+    }()
 }
 
 // MARK:- Body
@@ -67,7 +65,7 @@ extension VSecondaryButtonDemoView {
                 VSecondaryButton(state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
-                        Text(buttonTitle)
+                        Text(buttonTitle).foregroundColor(ColorBook.primaryInverted)
                     })
                 })
             })

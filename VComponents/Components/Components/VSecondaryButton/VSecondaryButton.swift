@@ -40,14 +40,20 @@ public struct VSecondaryButton<Content>: View where Content: View {
         title: S
     )
         where
-            Content == Text,
+            Content == VGenericTitleContentView<S>,
             S: StringProtocol
     {
         self.init(
             model: model,
             state: state,
             action: action,
-            content: { Text(title) }
+            content: {
+                VGenericTitleContentView(
+                    title: title,
+                    color: model.colors.textColor(state: .init(state: state, isPressed: false)),
+                    font: model.font
+                )
+            }
         )
     }
 }
@@ -77,14 +83,10 @@ public extension VSecondaryButton {
     }
     
     private var buttonContent: some View {
-        GenericButtonContentView(
-            foregroundColor: model.colors.foregroundColor(state: internalState),
-            foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-            font: model.font,
-            content: content
-        )
+        content()
             .padding(.horizontal, model.layout.contentMarginX)
             .padding(.vertical, model.layout.contentMarginY)
+            .opacity(model.colors.foregroundOpacity(state: internalState))
     }
     
     private var backgroundView: some View {

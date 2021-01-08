@@ -11,53 +11,29 @@ import SwiftUI
 public struct VSecondaryButtonModel {
     public static let primaryButtonFont: Font = VPrimaryButtonModel().font
     
-    public let layout: Layout
-    public let colors: Colors
-    public let font: Font
+    public var layout: Layout = .init()
+    public var colors: Colors = .init()
+    public var font: Font = primaryButtonFont   // Only used in init with string
     
-    public init(
-        layout: Layout = .init(),
-        colors: Colors = .init(),
-        font: Font = primaryButtonFont
-    ) {
-        self.layout = layout
-        self.colors = colors
-        self.font = font
-    }
+    public init() {}
 }
 
 // MARK:- Layout
 extension VSecondaryButtonModel {
     public struct Layout {
-        public let height: CGFloat
-        let cornerRadius: CGFloat
+        public var height: CGFloat = 32
+        var cornerRadius: CGFloat { height / 2 }
         
-        public let borderWidth: CGFloat
-        let hasBorder: Bool
+        public var borderWidth: CGFloat = 1
+        var hasBorder: Bool { borderWidth > 0 }
         
-        public let contentMarginX: CGFloat
-        public let contentMarginY: CGFloat
+        public var contentMarginX: CGFloat = 10
+        public var contentMarginY: CGFloat = 3
         
-        public let hitBoxSpacingX: CGFloat
-        public let hitBoxSpacingY: CGFloat
+        public var hitBoxSpacingX: CGFloat = 10
+        public var hitBoxSpacingY: CGFloat = 10
         
-        public init(
-            height: CGFloat = 32,
-            borderWidth: CGFloat = 1,
-            contentMarginX: CGFloat = 10,
-            contentMarginY: CGFloat = 3,
-            hitBoxSpacingX: CGFloat = 10,
-            hitBoxSpacingY: CGFloat = 10
-        ) {
-            self.height = height
-            self.cornerRadius = height / 2
-            self.borderWidth = borderWidth
-            self.hasBorder = borderWidth > 0
-            self.contentMarginX = contentMarginX
-            self.contentMarginY = contentMarginY
-            self.hitBoxSpacingX = hitBoxSpacingX
-            self.hitBoxSpacingY = hitBoxSpacingY
-        }
+        public init() {}
     }
 }
 
@@ -66,88 +42,51 @@ extension VSecondaryButtonModel {
     public struct Colors {
         public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
         
-        public let foreground: ForegroundColors
-        public let background: BackgroundColors
-        public let border: BorderColors
+        public var foreground: StateOpacityColors = .init(
+            pressedOpacity: 0.5,
+            disabledOpacity: 0.5
+        )
         
-        public init(
-            foreground: ForegroundColors = .init(),
-            background: BackgroundColors = .init(),
-            border: BorderColors = .init()
-        ) {
-            self.foreground = foreground
-            self.background = background
-            self.border = border
-        }
+        public var text: StateColors = .init(   // Only used in init with string
+            enabled: primaryButtonColors.text.enabled,
+            pressed: primaryButtonColors.text.pressed,
+            disabled: primaryButtonColors.text.disabled
+        )
+        
+        public var background: StateColors = .init(
+            enabled: primaryButtonColors.background.enabled,
+            pressed: primaryButtonColors.background.pressed,
+            disabled: primaryButtonColors.background.disabled
+        )
+        
+        public var border: StateColors = .init(
+            enabled: primaryButtonColors.border.enabled,
+            pressed: primaryButtonColors.border.pressed,
+            disabled: primaryButtonColors.border.disabled
+        )
+        
+        public init() { }
     }
 }
 
 extension VSecondaryButtonModel.Colors {
-    public struct ForegroundColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        public let pressedOpacity: Double
-        public let disabledOpacity: Double
+    public struct StateColors {
+        public var enabled: Color
+        public var pressed: Color
+        public var disabled: Color
         
-        public init(
-            enabled: Color = primaryButtonColors.text.enabled,
-            pressed: Color = primaryButtonColors.text.pressed,
-            disabled: Color = primaryButtonColors.text.disabled,
-            pressedOpacity: Double = 0.5,
-            disabledOpacity: Double = 0.5
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-            self.pressedOpacity = pressedOpacity
-            self.disabledOpacity = disabledOpacity
-        }
-    }
-    
-    public struct BackgroundColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        
-        public init(
-            enabled: Color = primaryButtonColors.background.enabled,
-            pressed: Color = primaryButtonColors.background.pressed,
-            disabled: Color = primaryButtonColors.background.disabled
-        ) {
+        public init(enabled: Color, pressed: Color, disabled: Color) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
         }
     }
     
-    public struct BorderColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        
-        public init(
-            enabled: Color = primaryButtonColors.border.enabled,
-            pressed: Color = primaryButtonColors.border.pressed,
-            disabled: Color = primaryButtonColors.border.disabled
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-        }
-    }
+    public typealias StateOpacityColors = VPrimaryButtonModel.Colors.StateOpacityColors
 }
 
 // MARK:- Mapping
 extension VSecondaryButtonModel.Colors {
-    func foregroundColor(state: VSecondaryButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return foreground.enabled
-        case .pressed: return foreground.pressed
-        case .disabled: return foreground.disabled
-        }
-    }
-    
     func foregroundOpacity(state: VSecondaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
@@ -155,20 +94,24 @@ extension VSecondaryButtonModel.Colors {
         case .disabled: return foreground.disabledOpacity
         }
     }
+    
+    func textColor(state: VSecondaryButtonInternalState) -> Color {
+        color(for: state, from: text)
+    }
 
     func backgroundColor(state: VSecondaryButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return background.enabled
-        case .pressed: return background.pressed
-        case .disabled: return background.disabled
-        }
+        color(for: state, from: background)
     }
     
     func borderColor(state: VSecondaryButtonInternalState) -> Color {
+        color(for: state, from: border)
+    }
+    
+    private func color(for state: VSecondaryButtonInternalState, from colorSet: StateColors) -> Color {
         switch state {
-        case .enabled: return border.enabled
-        case .pressed: return border.pressed
-        case .disabled: return border.disabled
+        case .enabled: return colorSet.enabled
+        case .pressed: return colorSet.pressed
+        case .disabled: return colorSet.disabled
         }
     }
 }
