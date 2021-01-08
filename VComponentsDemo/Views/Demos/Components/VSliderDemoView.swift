@@ -12,56 +12,6 @@ import VComponents
 struct VSliderDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Slider"
-    
-    private let thumbBorderModel: VSliderModel = .init(
-        layout: .init(
-            thumbBorderWidth: 1,
-            thumbShadowRadius: 0
-        ),
-        colors: .init(
-            thumb: .init(
-                border: .init(
-                    enabled: .black,
-                    disabled: .gray
-                ),
-                shadow: .init(
-                    enabled: .clear,
-                    disabled: .clear
-                )
-            )
-        )
-    )
-    
-    private let plainModel: VSliderModel = .init(
-        layout: .init(
-            thumbDimension: 0,
-            thumbCornerRadius: 0,
-            thumbBorderWidth: 0,
-            thumbShadowRadius: 0
-        ),
-        colors: .init(
-            thumb: .init(
-                fill: .init(
-                    enabled: .clear,
-                    disabled: .clear
-                ),
-                border: .init(
-                    enabled: .clear,
-                    disabled: .clear
-                ),
-                shadow: .init(
-                    enabled: .clear,
-                    disabled: .clear
-                )
-            )
-        )
-    )
-    
-    private let animationModel: VSliderModel = .init(
-        behavior: .init(
-            animation: .default
-        )
-    )
 
     @State private var sliderState: VSliderState = .enabled
 
@@ -70,6 +20,49 @@ struct VSliderDemoView: View {
     @State private var standard3Value: Double = 0.5
     @State private var standard4Value: Double = 0.5
     @State private var standard5Value: Double = 0.5
+    
+    private let thumbBorderModel: VSliderModel = {
+        var model: VSliderModel = .init()
+        
+        model.layout.thumbBorderWidth = 1
+        model.layout.thumbShadowRadius = 0
+        
+        model.colors.thumb.border.enabled = .black
+        model.colors.thumb.border.disabled = .gray
+        
+        model.colors.thumb.shadow.enabled = .clear
+        model.colors.thumb.shadow.disabled = .clear
+        
+        return model
+    }()
+
+    private let plainModel: VSliderModel = {
+        var model: VSliderModel = .init()
+        
+        model.layout.thumbDimension = 0
+        model.layout.thumbCornerRadius = 0
+        model.layout.thumbBorderWidth = 0
+        model.layout.thumbShadowRadius = 0
+        
+        model.colors.thumb.fill.enabled = .clear
+        model.colors.thumb.fill.disabled = .clear
+        
+        model.colors.thumb.border.enabled = .clear
+        model.colors.thumb.border.disabled = .clear
+        
+        model.colors.thumb.shadow.enabled = .clear
+        model.colors.thumb.shadow.disabled = .clear
+        
+        return model
+    }()
+    
+    private let animationModel: VSliderModel = {
+        var model: VSliderModel = .init()
+        
+        model.animation = .default
+        
+        return model
+    }()
 }
 
 // MARK:- Body

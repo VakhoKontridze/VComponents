@@ -132,7 +132,7 @@ public extension VSlider {
 // MARK:- Drag
 private extension VSlider {
     func dragChanged(_ draggedValue: DragGesture.Value, in proxy: GeometryProxy) {
-        switch model.behavior.animation {
+        switch model.animation {
         case nil: calculateDragChangedValue(draggedValue, in: proxy)
         case let animation?: withAnimation(animation, { calculateDragChangedValue(draggedValue, in: proxy) })
         }

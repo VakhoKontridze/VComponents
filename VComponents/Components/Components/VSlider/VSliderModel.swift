@@ -9,65 +9,29 @@ import SwiftUI
 
 // MARK:- V Slider Model
 public struct VSliderModel {
-    public let behavior: Behavior
-    public let layout: Layout
-    public let colors: Colors
+    public var layout: Layout = .init()
+    public var colors: Colors = .init()
+    public var animation: Animation? = nil
     
-    public init(
-        behavior: Behavior = .init(),
-        layout: Layout = .init(),
-        colors: Colors = .init()
-    ) {
-        self.behavior = behavior
-        self.layout = layout
-        self.colors = colors
-    }
-}
-
-// MARK:- Behavior
-extension VSliderModel {
-    public struct Behavior {
-        public let animation: Animation?
-        
-        public init(
-            animation: Animation? = nil
-        ) {
-            self.animation = animation
-        }
-    }
+    public init() {}
 }
 
 // MARK:- Layout
 extension VSliderModel {
     public struct Layout {
-        public let height: CGFloat
-        public let cornerRadius: CGFloat
+        public var height: CGFloat = 10
+        public var cornerRadius: CGFloat = 5
         
-        public let thumbDimension: CGFloat
-        public let thumbCornerRadius: CGFloat
+        public var thumbDimension: CGFloat = 20
+        public var thumbCornerRadius: CGFloat = 10
         
-        public let thumbBorderWidth: CGFloat
+        public var thumbBorderWidth: CGFloat = 0
         
-        public let thumbShadowRadius: CGFloat
+        public var thumbShadowRadius: CGFloat = 2
         
-        let hasThumb: Bool
+        var hasThumb: Bool { thumbDimension > 0 }
         
-        public init(
-            height: CGFloat = 10,
-            cornerRadius: CGFloat = 5,
-            thumbDimension: CGFloat = 20,
-            thumbCornerRadius: CGFloat = 10,
-            thumbBorderWidth: CGFloat = 0,
-            thumbShadowRadius: CGFloat = 2
-        ) {
-            self.height = height
-            self.cornerRadius = cornerRadius
-            self.thumbDimension = thumbDimension
-            self.thumbCornerRadius = thumbCornerRadius
-            self.thumbShadowRadius = thumbShadowRadius
-            self.thumbBorderWidth = thumbBorderWidth
-            self.hasThumb = thumbDimension > 0
-        }
+        public init() {}
     }
 }
 
@@ -76,155 +40,88 @@ extension VSliderModel {
     public struct Colors {
         public static let toggleColors: VToggleModel.Colors = .init()
         
-        public let slider: SliderColors
-        public let thumb: ThumbColors
+        public var slider: SliderColors = .init()
+        public var thumb: ThumbColors = .init()
         
-        public init(
-            slider: SliderColors = .init(),
-            thumb: ThumbColors = .init()
-        ) {
-            self.slider = slider
-            self.thumb = thumb
+        public init() {}
+    }
+}
+
+extension VSliderModel.Colors {
+    public struct StateColors {
+        public var enabled: Color
+        public var disabled: Color
+        
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
         }
     }
 }
 
 extension VSliderModel.Colors {
     public struct SliderColors {
-        public let track: TrackColors
-        public let progress: ProgressColors
+        public var track: StateColors = .init(
+            enabled: VSliderModel.Colors.toggleColors.fill.enabledOff,
+            disabled: VSliderModel.Colors.toggleColors.fill.disabledOff
+        )
         
-        public init(
-            track: TrackColors = .init(),
-            progress: ProgressColors = .init()
-        ) {
-            self.track = track
-            self.progress = progress
-        }
-    }
-}
-
-extension VSliderModel.Colors.SliderColors {
-    public struct TrackColors {
-        public let enabled: Color
-        public let disabled: Color
+        public var progress: StateColors = .init(
+            enabled: VSliderModel.Colors.toggleColors.fill.enabledOn,
+            disabled: VSliderModel.Colors.toggleColors.fill.disabledOn
+        )
         
-        public init(
-            enabled: Color = VSliderModel.Colors.toggleColors.fill.enabledOff,
-            disabled: Color = VSliderModel.Colors.toggleColors.fill.disabledOff
-        ) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
-    }
-    
-    public struct ProgressColors {
-        public let enabled: Color
-        public let disabled: Color
-        
-        public init(
-            enabled: Color = VSliderModel.Colors.toggleColors.fill.enabledOn,
-            disabled: Color = VSliderModel.Colors.toggleColors.fill.disabledOn
-        ) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
+        public init() {}
     }
 }
 
 extension VSliderModel.Colors {
     public struct ThumbColors {
-        public let fill: FillColors
-        public let border: BorderColors
-        public let shadow: ShadowColors
+        public var fill: StateColors = .init(
+            enabled: VSliderModel.Colors.toggleColors.thumb.enabledOn,
+            disabled: VSliderModel.Colors.toggleColors.thumb.enabledOn
+        )
         
-        public init(
-            fill: FillColors = .init(),
-            border: BorderColors = .init(),
-            shadow: ShadowColors = .init()
-        ) {
-            self.fill = fill
-            self.border = border
-            self.shadow = shadow
-        }
-    }
-}
-
-extension VSliderModel.Colors.ThumbColors {
-    public struct FillColors {
-        public let enabled: Color
-        public let disabled: Color
+        public var border: StateColors = .init(
+            enabled: .init(componentAsset: "Slider.Thumb.Border.enabled"),
+            disabled: .init(componentAsset: "Slider.Thumb.Border.disabled")
+        )
         
-        public init(
-            enabled: Color = VSliderModel.Colors.toggleColors.thumb.enabledOn,
-            disabled: Color = VSliderModel.Colors.toggleColors.thumb.enabledOn
-        ) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
-    }
-    
-    public struct BorderColors {
-        public let enabled: Color
-        public let disabled: Color
-
-        public init(
-            enabled: Color = .init(componentAsset: "Slider.Thumb.Border.enabled"),
-            disabled: Color = .init(componentAsset: "Slider.Thumb.Border.disabled")
-        ) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
-    }
-    
-    public struct ShadowColors {
-        public let enabled: Color
-        public let disabled: Color
+        public var shadow: StateColors = .init(
+            enabled: .init(componentAsset: "Slider.Thumb.Shadow.enabled"),
+            disabled: .init(componentAsset: "Slider.Thumb.Shadow.disabled")
+        )
         
-        public init(
-            enabled: Color = .init(componentAsset: "Slider.Thumb.Shadow.enabled"),
-            disabled: Color = .init(componentAsset: "Slider.Thumb.Shadow.disabled")
-        ) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
+        public init() {}
     }
 }
 
 // MARK:- Mapping
 extension VSliderModel.Colors {
     func trackColor(state: VSliderState) -> Color {
-        switch state {
-        case .enabled: return slider.track.enabled
-        case .disabled: return slider.track.disabled
-        }
+        color(for: state, from: slider.track)
     }
     
     func progressColor(state: VSliderState) -> Color {
-        switch state {
-        case .enabled: return slider.progress.enabled
-        case .disabled: return slider.progress.disabled
-        }
+        color(for: state, from: slider.progress)
     }
     
     func thumbFillColor(state: VSliderState) -> Color {
-        switch state {
-        case .enabled: return thumb.fill.enabled
-        case .disabled: return thumb.fill.disabled
-        }
+        color(for: state, from: thumb.fill)
     }
     
     func thumbBorderWidth(state: VSliderState) -> Color {
-        switch state {
-        case .enabled: return thumb.border.enabled
-        case .disabled: return thumb.border.disabled
-        }
+        color(for: state, from: thumb.border)
     }
     
     func thumbShadow(state: VSliderState) -> Color {
+        color(for: state, from: thumb.shadow)
+    }
+    
+    private func color(for state: VSliderState, from colorSet: StateColors) -> Color {
         switch state {
-        case .enabled: return thumb.shadow.enabled
-        case .disabled: return thumb.shadow.disabled
+        case .enabled: return colorSet.enabled
+        case .disabled: return colorSet.disabled
         }
     }
 }
