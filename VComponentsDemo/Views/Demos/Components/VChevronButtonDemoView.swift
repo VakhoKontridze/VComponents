@@ -15,12 +15,14 @@ struct VChevronButtonDemoView: View {
 
     @State private var buttonState: VChevronButtonState = .enabled
     
-    private let largerHitBoxButtonModel: VChevronButtonModel = .init(
-        layout: .init(
-            hitBoxSpacingX: 10,
-            hitBoxSpacingY: 10
-        )
-    )
+    private let largerHitBoxButtonModel: VChevronButtonModel = {
+        var model: VChevronButtonModel = .init()
+        
+        model.layout.hitBoxSpacingX = 10
+        model.layout.hitBoxSpacingY = 10
+        
+        return model
+    }()
 }
 
 // MARK:- Body

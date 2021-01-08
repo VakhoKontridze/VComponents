@@ -13,7 +13,10 @@ public struct VChevronButton: View {
     private let model: VChevronButtonModel
     
     private let direction: VChevronButtonDirection
+    
     private let state: VChevronButtonState
+    @State private var isPressed: Bool = false
+    private var internalState: VChevronButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -34,18 +37,37 @@ public struct VChevronButton: View {
 // MARK:- Body
 public extension VChevronButton {
     var body: some View {
-        VSquareButton(
-            model: model.squareButtonModel,
-            state: state,
+        VBaseButton(
+            isDisabled: state.isDisabled,
             action: action,
-            content: { buttonView } // Hitbox is applied on VSquareButton in model
+            onPress: { isPressed = $0 },
+            content: { hitBox }
         )
     }
-
+    
+    private var hitBox: some View {
+        buttonView
+            .padding(.horizontal, model.layout.hitBoxSpacingX)
+            .padding(.vertical, model.layout.hitBoxSpacingY)
+    }
+    
     private var buttonView: some View {
+        buttonContent
+            .frame(dimension: model.layout.dimension)
+            .background(backgroundView)
+    }
+    
+    private var buttonContent: some View {
         Image(systemName: "chevron.up")
-            .frame(dimension: model.layout.iconDimension)
+            .font(model.font)
+            .foregroundColor(model.colors.foregroundColor(state: internalState))
+            .opacity(model.colors.foregroundOpacity(state: internalState))
             .rotationEffect(.init(degrees: direction.angle))
+    }
+    
+    private var backgroundView: some View {
+        Circle()
+            .foregroundColor(model.colors.backgroundColor(state: internalState))
     }
 }
 

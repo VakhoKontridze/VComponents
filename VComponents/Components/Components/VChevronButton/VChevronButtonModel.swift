@@ -9,116 +9,91 @@ import SwiftUI
 
 // MARK:- V Chevron Button Model
 public struct VChevronButtonModel {
-    public let layout: Layout
-    public let colors: Colors
-    let squareButtonModel: VSquareButtonModel
+    public var layout: Layout = .init()
+    public var colors: Colors = .init()
+    var font: Font { .system(size: layout.iconDimension, weight: .semibold, design: .default) }
     
-    public init(
-        layout: Layout = .init(),
-        colors: Colors = .init()
-    ) {
-        self.layout = layout
-        self.colors = colors
-        
-        self.squareButtonModel = {
-            var model: VSquareButtonModel = .init()
-            
-            model.layout.dimension = layout.dimension
-            model.layout.cornerRadius = layout.dimension / 2
-            model.layout.hitBoxSpacingX = layout.hitBoxSpacingX
-            model.layout.hitBoxSpacingY = layout.hitBoxSpacingY
-            
-            model.colors.foreground.pressedOpacity = colors.foreground.pressedOpacity
-            model.colors.foreground.disabledOpacity = colors.foreground.disabledOpacity
-            
-            model.colors.text.enabled = colors.foreground.enabled
-            model.colors.text.pressed = colors.foreground.pressed
-            model.colors.text.disabled = colors.foreground.disabled
-            
-            model.colors.background.enabled = colors.background.enabled
-            model.colors.background.pressed = colors.background.pressed
-            model.colors.background.disabled = colors.background.disabled
-            
-            return model
-        }()
-    }
+    public init() {}
 }
 
 // MARK:- Layout
 extension VChevronButtonModel {
     public struct Layout {
-        public let dimension: CGFloat
-        public let iconDimension: CGFloat
+        public var dimension: CGFloat = 32
         
-        public let hitBoxSpacingX: CGFloat
-        public let hitBoxSpacingY: CGFloat
+        public var iconDimension: CGFloat = 14
         
-        public init(
-            dimension: CGFloat = 32,
-            iconDimension: CGFloat = 20,
-            hitBoxSpacingX: CGFloat = 0,
-            hitBoxSpacingY: CGFloat = 0
-        ) {
-            self.dimension = dimension
-            self.iconDimension = iconDimension
-            self.hitBoxSpacingX = hitBoxSpacingX
-            self.hitBoxSpacingY = hitBoxSpacingY
-        }
+        public var hitBoxSpacingX: CGFloat = 0
+        public var hitBoxSpacingY: CGFloat = 0
+        
+        public init() {}
     }
 }
 
 // MARK:- Colors
 extension VChevronButtonModel {
     public struct Colors {
-        public let foreground: ForegroundColors
-        public let background: BackgroundColors
+        public var foreground: StateAndOpacityColors = .init(
+            enabled: ColorBook.primary,
+            pressed: ColorBook.primary,
+            disabled: ColorBook.primary,
+            pressedOpacity: 0.5,
+            disabledOpacity: 0.5
+        )
         
-        public init(
-            foreground: ForegroundColors = .init(),
-            background: BackgroundColors = .init()
-        ) {
-            self.foreground = foreground
-            self.background = background
-        }
+        public var background: StateColors = .init(
+            enabled: .init(componentAsset: "ChevronButton.Background.enabled"),
+            pressed: .init(componentAsset: "ChevronButton.Background.pressed"),
+            disabled: .init(componentAsset: "ChevronButton.Background.disabled")
+        )
+        
+        public init() {}
     }
 }
 
 extension VChevronButtonModel.Colors {
-    public struct ForegroundColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        public let pressedOpacity: Double
-        public let disabledOpacity: Double
-        
-        public init(
-            enabled: Color = ColorBook.primary,
-            pressed: Color = ColorBook.primary,
-            disabled: Color = ColorBook.primary,
-            pressedOpacity: Double = 0.5,
-            disabledOpacity: Double = 0.5
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-            self.pressedOpacity = pressedOpacity
-            self.disabledOpacity = disabledOpacity
+    public typealias StateColors = VSecondaryButtonModel.Colors.StateColors
+    
+    public struct StateAndOpacityColors {
+        public var enabled: Color
+        public var pressed: Color
+        public var disabled: Color
+        public var pressedOpacity: Double
+        public var disabledOpacity: Double
+    }
+}
+
+// MARK:- Mapping
+extension VChevronButtonModel.Colors {
+    func foregroundColor(state: VChevronButtonInternalState) -> Color {
+        color(for: state, from: foreground)
+    }
+    
+    func foregroundOpacity(state: VChevronButtonInternalState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return foreground.pressedOpacity
+        case .disabled: return foreground.disabledOpacity
         }
     }
     
-    public struct BackgroundColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        
-        public init(
-            enabled: Color = .init(componentAsset: "ChevronButton.Background.enabled"),
-            pressed: Color = .init(componentAsset: "ChevronButton.Background.pressed"),
-            disabled: Color = .init(componentAsset: "ChevronButton.Background.disabled")
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
+    func backgroundColor(state: VChevronButtonInternalState) -> Color {
+        color(for: state, from: background)
+    }
+    
+    private func color(for state: VChevronButtonInternalState, from colorSet: StateColors) -> Color {
+        switch state {
+        case .enabled: return colorSet.enabled
+        case .pressed: return colorSet.pressed
+        case .disabled: return colorSet.disabled
+        }
+    }
+
+    private func color(for state: VChevronButtonInternalState, from colorSet: StateAndOpacityColors) -> Color {
+        switch state {
+        case .enabled: return colorSet.enabled
+        case .pressed: return colorSet.pressed
+        case .disabled: return colorSet.disabled
         }
     }
 }

@@ -21,20 +21,19 @@ struct HomeRowView<Content>: View where Content: View {
     
     private let showSeparator: Bool
     
-    private let chevronButtonModel: VChevronButtonModel = .init(
-        colors: .init(
-            foreground: .init(
-                enabled: .init("ChevronButtonPlain.Foreground.enabled"),
-                pressed: .init("ChevronButtonPlain.Foreground.enabled"),
-                disabled: .init("ChevronButtonPlain.Foreground.enabled")
-            ),
-            background: .init(
-                enabled: .clear,
-                pressed: .clear,
-                disabled: .clear
-            )
-        )
-    )
+    private let chevronButtonModel: VChevronButtonModel = {
+        var model: VChevronButtonModel = .init()
+        
+        model.colors.foreground.enabled = .init("ChevronButtonPlain.Foreground.enabled")
+        model.colors.foreground.pressed = .init("ChevronButtonPlain.Foreground.enabled")
+        model.colors.foreground.disabled = .init("ChevronButtonPlain.Foreground.enabled")
+        
+        model.colors.background.enabled = .clear
+        model.colors.background.pressed = .clear
+        model.colors.background.disabled = .clear
+        
+        return model
+    }()
     
     // MARK: Initalizers
     init(

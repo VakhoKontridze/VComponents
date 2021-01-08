@@ -68,7 +68,6 @@
 		7A599587259249BC0087902B /* VChevronButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A599586259249BB0087902B /* VChevronButton.swift */; };
 		7A59958E25924F420087902B /* VSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59958D25924F420087902B /* VSheet.swift */; };
 		7A59959425924FD00087902B /* VSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A59959325924FD00087902B /* VSheetModel.swift */; };
-		7A5D8231259B41E800C2E9DC /* GenericButtonContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5D822E259B41E800C2E9DC /* GenericButtonContentView.swift */; };
 		7A62181725948BBC00515688 /* VBaseViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62181625948BBC00515688 /* VBaseViewType.swift */; };
 		7A62182025948DAB00515688 /* VBaseViewModelCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62181F25948DAB00515688 /* VBaseViewModelCenter.swift */; };
 		7A62182425948DE800515688 /* VBaseViewNavigationBarCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62182325948DE800515688 /* VBaseViewNavigationBarCenter.swift */; };
@@ -198,7 +197,6 @@
 		7A599586259249BB0087902B /* VChevronButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButton.swift; sourceTree = "<group>"; };
 		7A59958D25924F420087902B /* VSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheet.swift; sourceTree = "<group>"; };
 		7A59959325924FD00087902B /* VSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetModel.swift; sourceTree = "<group>"; };
-		7A5D822E259B41E800C2E9DC /* GenericButtonContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericButtonContentView.swift; sourceTree = "<group>"; };
 		7A62181625948BBC00515688 /* VBaseViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseViewType.swift; sourceTree = "<group>"; };
 		7A62181F25948DAB00515688 /* VBaseViewModelCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseViewModelCenter.swift; sourceTree = "<group>"; };
 		7A62182325948DE800515688 /* VBaseViewNavigationBarCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseViewNavigationBarCenter.swift; sourceTree = "<group>"; };
@@ -558,7 +556,6 @@
 			children = (
 				7A8A96F1258DDA9E00309886 /* Framework Info */,
 				7ABEAA472593403000A90B56 /* Components */,
-				7A5D822E259B41E800C2E9DC /* GenericButtonContentView.swift */,
 				7AE5C25C25A8BC1D001B62B2 /* Core */,
 				7AA9F42F2590B18D0060F210 /* Extensions */,
 				7AA9F4342590B1C00060F210 /* Resources */,
@@ -1027,7 +1024,6 @@
 				7A4C42F825922914000207DD /* VBaseView.swift in Sources */,
 				7A41A49225A73E6D000A6F80 /* VSegmentedPicker.swift in Sources */,
 				7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */,
-				7A5D8231259B41E800C2E9DC /* GenericButtonContentView.swift in Sources */,
 				7A00731B258E27490003F0E9 /* VPlainButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
