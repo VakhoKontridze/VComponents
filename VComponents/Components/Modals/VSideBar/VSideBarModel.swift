@@ -9,49 +9,35 @@ import SwiftUI
 
 // MARK:- V Side Bar Model
 public struct VSideBarModel {
-    public let layout: Layout
-    public let colors: Colors
-    let sheetModel: VSheetModel
+    public var layout: Layout = .init()
+    public var colors: Colors = .init()
     
-    public init(
-        layout: Layout = .init(),
-        colors: Colors = .init()
-    ) {
-        self.layout = layout
-        self.colors = colors
-        self.sheetModel = {
-            var model: VSheetModel = .init()
-            
-            model.layout.roundedCorners = layout.roundCorners ? .custom([.topRight, .bottomRight]) : .none
-            model.layout.cornerRadius = layout.cornerRadius
-            model.layout.contentPadding = 0
-            
-            model.color = colors.background
-            
-            return model
-        }()
+    var sheetModel: VSheetModel {
+        var model: VSheetModel = .init()
+        
+        model.layout.roundedCorners = layout.roundCorners ? .custom([.topRight, .bottomRight]) : .none
+        model.layout.cornerRadius = layout.cornerRadius
+        model.layout.contentPadding = 0
+        
+        model.color = colors.background
+        
+        return model
     }
+    
+    public init() {}
 }
 
 // MARK:- Layout
 extension VSideBarModel {
     public struct Layout {
-        public let width: Width
-        public let roundCorners: Bool
-        public let cornerRadius: CGFloat
-        public let contentMargin: ContentMargin
+        public var width: Width = .relative()
         
-        public init(
-            width: Width = .relative(),
-            roundCorners: Bool = true,
-            cornerRadius: CGFloat = 20,
-            contentMargin: ContentMargin = .init()
-        ) {
-            self.width = width
-            self.roundCorners = roundCorners
-            self.cornerRadius = cornerRadius
-            self.contentMargin = contentMargin
-        }
+        public var cornerRadius: CGFloat = 20
+        var roundCorners: Bool { cornerRadius > 0 }
+        
+        public var contentMargin: ContentMargin = .init()
+        
+        public init() {}
     }
 }
 
@@ -71,22 +57,12 @@ extension VSideBarModel.Layout {
 
 extension VSideBarModel.Layout {
     public struct ContentMargin {
-        public let leading: CGFloat
-        public let trailing: CGFloat
-        public let top: CGFloat
-        public let bottom: CGFloat
+        public var leading: CGFloat = 20
+        public var trailing: CGFloat = 20
+        public var top: CGFloat = 20
+        public var bottom: CGFloat = 20
         
-        public init(
-            leading: CGFloat = 20,
-            trailing: CGFloat = 20,
-            top: CGFloat = 20,
-            bottom: CGFloat = 20
-        ) {
-            self.leading = leading
-            self.trailing = trailing
-            self.top = top
-            self.bottom = bottom
-        }
+        public init() {}
     }
 }
 
@@ -95,15 +71,9 @@ extension VSideBarModel {
     public struct Colors {
         public static let sheetColor: Color = VSheetModel().color
         
-        public let background: Color
-        public let blinding: Color
+        public var background: Color = sheetColor
+        public var blinding: Color = .init(componentAsset: "SideBar.Blinding")
         
-        public init(
-            background: Color = sheetColor,
-            blinding: Color = .init(componentAsset: "SideBar.Blinding")
-        ) {
-            self.background = background
-            self.blinding = blinding
-        }
+        public init() {}
     }
 }
