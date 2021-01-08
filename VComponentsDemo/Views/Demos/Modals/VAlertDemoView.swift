@@ -15,21 +15,33 @@ struct VAlertDemoView: View {
     
     @State private var title: String = "Title"
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-    @State private var hasTwoButtons: Bool = true
+    @State private var dialogType: DialogType = .two
     
     @State private var alertIsShown: Bool = false
     private var alertDialog: VAlertDialogType {
-        switch hasTwoButtons {
-        case false:
+        switch dialogType {
+        case .one:
             return .one(
                 button: .init(title: "Ok", action: {})
             )
         
-        case true:
+        case .two:
             return .two(
                 primary: .init(title: "Confirm", action: {}),
                 secondary: .init(title: "Cancel", action: {})
             )
+        }
+    }
+    
+    private enum DialogType: Int, CaseIterable {
+        case one
+        case two
+        
+        var title: String {
+            switch self {
+            case .one: return "One Button"
+            case .two: return "Two Buttons"
+            }
         }
     }
 }
@@ -38,12 +50,22 @@ struct VAlertDemoView: View {
 extension VAlertDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            VStack(spacing: 10, content: {
+            VStack(spacing: 20, content: {
                 TextField("Title", text: $title)
                 TextField("Description", text: $description)
                 
-                VToggle(isOn: $hasTwoButtons, title: "Has Two Buttons")
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                VStack(spacing: 3, content: {
+                    Text("Dialog Type")
+                        .font(.caption)
+                    
+                    VSegmentedPicker(
+                        selection: .init(
+                            get: { dialogType.rawValue },
+                            set: { dialogType = DialogType(rawValue: $0)! }
+                        ),
+                        data: DialogType.allCases.map { .init(title: $0.title) }
+                    )
+                })
                 
                 VSecondaryButton(action: { alertIsShown = true }, title: "Demo Alert")
                 

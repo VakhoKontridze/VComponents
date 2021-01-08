@@ -13,14 +13,26 @@ struct VBaseViewDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base View"
     
-    @State private var navigationBarTitleIsLeading: Bool = true
+    @State private var navigationBarTitlePosition: NavigationBarTitlePosition = .leading
     @State private var navigationBarHasLeadingItem: Bool = false
     @State private var navigationBarHasTrailingItem: Bool = false
     
+    private enum NavigationBarTitlePosition: Int, CaseIterable {
+        case leading
+        case center
+        
+        var title: String {
+            switch self {
+            case .leading: return "Leading"
+            case .center: return "Center"
+            }
+        }
+    }
+    
     var viewType: VBaseViewType {
-        switch navigationBarTitleIsLeading {
-        case false: return .centerTitle()
-        case true: return .leadingTitle()
+        switch navigationBarTitlePosition {
+        case .leading: return .leadingTitle()
+        case .center: return .centerTitle()
         }
     }
     
@@ -48,8 +60,14 @@ extension VBaseViewDemoView {
         ZStack(content: {
             ColorBook.layer.edgesIgnoringSafeArea(.bottom)
             
-            VStack(alignment: .leading, content: {
-                VToggle(isOn: $navigationBarTitleIsLeading, title: "Title is on left")
+            VStack(alignment: .leading, spacing: 20, content: {
+                VSegmentedPicker(
+                    selection: .init(
+                        get: { navigationBarTitlePosition.rawValue },
+                        set: { navigationBarTitlePosition = NavigationBarTitlePosition(rawValue: $0)! }
+                    ),
+                    data: NavigationBarTitlePosition.allCases.map { .init(title: $0.title) }
+                )
                 
                 VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
                 
