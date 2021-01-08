@@ -9,86 +9,66 @@ import SwiftUI
 
 // MARK:- V Alert Model
 public struct VAlertModel {
-    public let layout: Layout
-    public let colors: Colors
-    public let fonts: Fonts
-    let primaryButtonModel: VPrimaryButtonModel
-    let secondaryButtonModel: VPrimaryButtonModel
-
-    public init(
-        layout: Layout = .init(),
-        colors: Colors = .init(),
-        fonts: Fonts = .init()
-    ) {
-        self.layout = layout
-        self.colors = colors
-        self.fonts = fonts
-        self.primaryButtonModel = {
-            var model: VPrimaryButtonModel = .init()
-            
-            model.layout.height = layout.buttonHeight
-            model.layout.cornerRadius = layout.buttonHeight / 4
-            
-            model.colors.foreground.pressedOpacity = colors.primaryButton.foreground.pressedOpacity
-            
-            model.colors.text.enabled = colors.primaryButton.foreground.enabled
-            model.colors.text.pressed = colors.primaryButton.foreground.pressed
-            
-            model.colors.background.enabled = colors.primaryButton.background.enabled
-            model.colors.background.pressed = colors.primaryButton.background.pressed
-            
-            model.font = fonts.primaryButton
-            
-            return model
-        }()
-        self.secondaryButtonModel = {
-            var model: VPrimaryButtonModel = .init()
-            
-            model.layout.height = layout.buttonHeight
-            model.layout.cornerRadius = layout.buttonHeight / 4
-            
-            model.colors.foreground.pressedOpacity = colors.secondaryButton.foreground.pressedOpacity
-            
-            model.colors.text.enabled = colors.secondaryButton.foreground.enabled
-            model.colors.text.pressed = colors.secondaryButton.foreground.pressed
-            
-            model.colors.background.enabled = colors.secondaryButton.background.enabled
-            model.colors.background.pressed = colors.secondaryButton.background.pressed
-            
-            model.font = fonts.secondaryButton
-            
-            return model
-        }()
+    public var layout: Layout = .init()
+    public var colors: Colors = .init()
+    public var fonts: Fonts = .init()
+    
+    var primaryButtonModel: VPrimaryButtonModel {
+        var model: VPrimaryButtonModel = .init()
+        
+        model.layout.height = layout.buttonHeight
+        model.layout.cornerRadius = layout.buttonHeight / 4
+        
+        model.colors.foreground.pressedOpacity = colors.primaryButton.foreground.pressedOpacity
+        
+        model.colors.text.enabled = colors.primaryButton.text.enabled
+        model.colors.text.pressed = colors.primaryButton.text.pressed
+        
+        model.colors.background.enabled = colors.primaryButton.background.enabled
+        model.colors.background.pressed = colors.primaryButton.background.pressed
+        
+        model.font = fonts.primaryButton
+        
+        return model
     }
+    
+    var secondaryButtonModel: VPrimaryButtonModel {
+        var model: VPrimaryButtonModel = .init()
+        
+        model.layout.height = layout.buttonHeight
+        model.layout.cornerRadius = layout.buttonHeight / 4
+        
+        model.colors.foreground.pressedOpacity = colors.secondaryButton.foreground.pressedOpacity
+        
+        model.colors.text.enabled = colors.secondaryButton.text.enabled
+        model.colors.text.pressed = colors.secondaryButton.text.pressed
+        
+        model.colors.background.enabled = colors.secondaryButton.background.enabled
+        model.colors.background.pressed = colors.secondaryButton.background.pressed
+        
+        model.font = fonts.secondaryButton
+        
+        return model
+    }
+
+    public init() {}
 }
 
 // MARK:- Layout
 extension VAlertModel {
     public struct Layout {
-        public let width: CGFloat
-        public let cornerRadius: CGFloat
-        public let contentInset: CGFloat
-        let textPaddingTop: CGFloat
-        let textPaddingHor: CGFloat
-        let textSpacing: CGFloat
-        let contentSpacing: CGFloat
-        public let buttonHeight: CGFloat
+        public var width: CGFloat = UIScreen.main.bounds.width * 0.7
+        public var cornerRadius: CGFloat = 20
+        
+        public var contentInset: CGFloat = 15
+        var textPaddingTop: CGFloat { max(25 - contentInset, 0) }
+        let textPaddingHor: CGFloat = 10
+        let textSpacing: CGFloat = 5
+        let contentSpacing: CGFloat = 20
+        
+        public var buttonHeight: CGFloat = 40
 
-        public init(
-            width: CGFloat = UIScreen.main.bounds.width * 0.7,
-            cornerRadius: CGFloat = 20,
-            contentInset: CGFloat = 15,
-            buttonHeight: CGFloat = 40
-        ) {
-            self.width = width
-            self.cornerRadius = cornerRadius
-            self.contentInset = contentInset
-            self.textPaddingTop = max(25 - contentInset, 0)
-            self.textPaddingHor = 10
-            self.textSpacing = 5
-            self.contentSpacing = 20
-            self.buttonHeight = buttonHeight
-        }
+        public init() {}
     }
 }
 
@@ -98,91 +78,74 @@ extension VAlertModel {
         public static let sideBarColors: VSideBarModel.Colors = .init()
         public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
         
-        public let background: Color
-        public let blinding: Color
-        public let title: Color
-        public let description: Color
-        public let primaryButton: ButtonColors
-        public let secondaryButton: ButtonColors
-
-        public init(
-            background: Color = sideBarColors.background,
-            blinding: Color = sideBarColors.blinding,
-            title: Color = ColorBook.primary,
-            description: Color = ColorBook.primary,
-            primaryButton: ButtonColors = .init(
-                foreground: .init(
-                    enabled: primaryButtonColors.text.enabled,
-                    pressed: primaryButtonColors.text.pressed
-                ),
-                background: .init(
-                    enabled: primaryButtonColors.background.enabled,
-                    pressed: primaryButtonColors.background.pressed
-                )
+        public var background: Color = sideBarColors.background
+        public var blinding: Color = sideBarColors.blinding
+        
+        public var title: Color = ColorBook.primary
+        public var description: Color = ColorBook.primary
+        
+        public var primaryButton: ButtonColors = .init(
+            foreground: .init(
+                pressedOpacity: 0.5
             ),
-            secondaryButton: ButtonColors = .init(
-                foreground: .init(
-                    enabled: primaryButtonColors.background.enabled,
-                    pressed: primaryButtonColors.background.pressed
-                ),
-                background: .init(
-                    enabled: .clear,
-                    pressed: .clear
-                )
+            text: .init(
+                enabled: primaryButtonColors.text.enabled,
+                pressed: primaryButtonColors.text.pressed
+            ),
+            background: .init(
+                enabled: primaryButtonColors.background.enabled,
+                pressed: primaryButtonColors.background.pressed
             )
-        ) {
-            self.background = background
-            self.blinding = blinding
-            self.title = title
-            self.description = description
-            self.primaryButton = primaryButton
-            self.secondaryButton = secondaryButton
-        }
+        )
+        
+        public var secondaryButton: ButtonColors = .init(
+            foreground: .init(
+                pressedOpacity: 0.5
+            ),
+            text: .init(
+                enabled: primaryButtonColors.background.enabled,
+                pressed: primaryButtonColors.background.pressed
+            ),
+            background: .init(
+                enabled: .clear,
+                pressed: .clear
+            )
+        )
+
+        public init() {}
     }
 }
 
 extension VAlertModel.Colors {
     public struct ButtonColors {
-        public let foreground: Foreground
-        public let background: Background
-
-        public init(
-            foreground: Foreground,
-            background: Background
-        ) {
+        public var foreground: StateOpacityColors
+        public var text: StateColors
+        public var background: StateColors
+        
+        public init(foreground: StateOpacityColors, text: StateColors, background: StateColors) {
             self.foreground = foreground
+            self.text = text
             self.background = background
         }
     }
 }
 
 extension VAlertModel.Colors.ButtonColors {
-    public struct Foreground {
-        public let enabled: Color
-        public let pressed: Color
-        public let pressedOpacity: Double
+    public struct StateColors {
+        public var enabled: Color
+        public var pressed: Color
 
-        public init(
-            enabled: Color,
-            pressed: Color,
-            pressedOpacity: Double = 0.5
-        ) {
+        public init(enabled: Color, pressed: Color) {
             self.enabled = enabled
             self.pressed = pressed
-            self.pressedOpacity = pressedOpacity
         }
     }
+    
+    public struct StateOpacityColors {
+        public var pressedOpacity: Double
 
-    public struct Background {
-        public let enabled: Color
-        public let pressed: Color
-
-        public init(
-            enabled: Color,
-            pressed: Color
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
+        public init(pressedOpacity: Double) {
+            self.pressedOpacity = pressedOpacity
         }
     }
 }
@@ -192,21 +155,11 @@ extension VAlertModel {
     public struct Fonts {
         public static let primaryButtonFont: Font = VPrimaryButtonModel().font
         
-        public let title: Font
-        public let description: Font
-        public let primaryButton: Font
-        public let secondaryButton: Font
+        public var title: Font = .system(size: 16, weight: .bold, design: .default)
+        public var description: Font = .system(size: 14, weight: .regular, design: .default)
+        public var primaryButton: Font = primaryButtonFont
+        public var secondaryButton: Font = primaryButtonFont
         
-        public init(
-            title: Font = .system(size: 16, weight: .bold, design: .default),
-            description: Font = .system(size: 14, weight: .regular, design: .default),
-            primaryButton: Font = primaryButtonFont,
-            secondaryButton: Font = primaryButtonFont
-        ) {
-            self.title = title
-            self.description = description
-            self.primaryButton = primaryButton
-            self.secondaryButton = secondaryButton
-        }
+        public init() {}
     }
 }
