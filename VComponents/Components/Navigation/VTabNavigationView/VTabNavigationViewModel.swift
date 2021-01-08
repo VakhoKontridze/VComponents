@@ -9,30 +9,18 @@ import SwiftUI
 
 // MARK:- V Tab Navigation View Model
 public struct VTabNavigationViewModel {
-    public let colors: Colors
+    public var colors: Colors = .init()
     
-    public init(
-        colors: Colors = .init()
-    ) {
-        self.colors = colors
-    }
+    public init() {}
 }
 
 // MARK:- Colors
 extension VTabNavigationViewModel {
     public struct Colors {
-        public let background: Color
-        public let item: Color
-        public let itemSelected: Color
+        public var background: Color = ColorBook.canvas
+        public var item: Color = ColorBook.secondary
+        public var itemSelected: Color = ColorBook.accent
         
-        public init(
-            background: Color = ColorBook.canvas,
-            item: Color = ColorBook.secondary,
-            itemSelected: Color = ColorBook.accent
-        ) {
-            self.background = background
-            self.item = item
-            self.itemSelected = itemSelected
-        }
+        public init() {}
     }
 }
