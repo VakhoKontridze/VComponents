@@ -36,12 +36,14 @@ struct VBaseViewDemoView: View {
         }
     }
     
-    private var plainButtonModel: VPlainButtonModel = .init(
-        layout: .init(
-            hitBoxSpacingX: 0,
-            hitBoxSpacingY: 0
-        )
-    )
+    private var plainButtonModel: VPlainButtonModel = {
+        var model: VPlainButtonModel = .init()
+        
+        model.layout.hitBoxSpacingX = 0
+        model.layout.hitBoxSpacingY = 0
+        
+        return model
+    }()
 }
 
 // MARK:- Body

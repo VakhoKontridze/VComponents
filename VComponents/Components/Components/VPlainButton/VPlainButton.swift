@@ -40,14 +40,20 @@ public struct VPlainButton<Content>: View where Content: View {
         title: S
     )
         where
-            Content == Text,
+            Content == VGenericTitleContentView<S>,
             S: StringProtocol
     {
         self.init(
             model: model,
             state: state,
             action: action,
-            content: { Text(title) }
+            content: {
+                VGenericTitleContentView(
+                    title: title,
+                    color: model.colors.textColor(state: .init(state: state, isPressed: false)),
+                    font: model.font
+                )
+            }
         )
     }
 }
@@ -70,12 +76,8 @@ public extension VPlainButton {
     }
     
     private var buttonView: some View {
-        GenericButtonContentView(
-            foregroundColor: model.colors.foregroundColor(state: internalState),
-            foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-            font: model.font,
-            content: content
-        )
+        content()
+            .opacity(model.colors.foregroundOpacity(state: internalState))
     }
 }
 

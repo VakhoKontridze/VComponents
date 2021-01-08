@@ -19,12 +19,14 @@ struct VPlainButtonDemoView: View {
     
     @State private var buttonState: VPlainButtonState = .enabled
     
-    let clippedHitBoxButtonModel: VPlainButtonModel = .init(
-        layout: .init(
-            hitBoxSpacingX: 0,
-            hitBoxSpacingY: 0
-        )
-    )
+    let clippedHitBoxButtonModel: VPlainButtonModel = {
+        var model: VPlainButtonModel = .init()
+        
+        model.layout.hitBoxSpacingX = 0
+        model.layout.hitBoxSpacingY = 0
+        
+        return model
+    }()
 }
 
 // MARK:- Body
@@ -43,7 +45,7 @@ extension VPlainButtonDemoView {
                 VPlainButton(state: buttonState, action: action, content: {
                     VStack(spacing: 5, content: {
                         buttonContent()
-                        Text(buttonTitle)
+                        Text(buttonTitle).foregroundColor(ColorBook.accent)
                     })
                 })
             })
