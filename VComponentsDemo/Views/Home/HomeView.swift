@@ -32,12 +32,9 @@ extension HomeView {
                             HomeRowView(title: VChevronButtonDemoView.navigationBarTitle, destination: VChevronButtonDemoView(), showSeparator: false)
                         })
 
-                        HomeSectionView(title: "Selectors", content: {
+                        HomeSectionView(title: "Pickers", content: {
                             HomeRowView(title: VToggleDemoView.navigationBarTitle, destination: VToggleDemoView())
-                            HomeRowView(title: VSegmentedPickerDemoView.navigationBarTitle, destination: VSegmentedPickerDemoView(), showSeparator: false)
-                        })
-
-                        HomeSectionView(title: "Range Pickers", content: {
+                            HomeRowView(title: VSegmentedPickerDemoView.navigationBarTitle, destination: VSegmentedPickerDemoView())
                             HomeRowView(title: VSliderDemoView.navigationBarTitle, destination: VSliderDemoView(), showSeparator: false)
                         })
 
