@@ -443,8 +443,8 @@
 		7A62181E25948D9A00515688 /* Center */ = {
 			isa = PBXGroup;
 			children = (
-				7A62181F25948DAB00515688 /* VBaseViewModelCenter.swift */,
 				7A62182325948DE800515688 /* VBaseViewNavigationBarCenter.swift */,
+				7A62181F25948DAB00515688 /* VBaseViewModelCenter.swift */,
 			);
 			path = Center;
 			sourceTree = "<group>";

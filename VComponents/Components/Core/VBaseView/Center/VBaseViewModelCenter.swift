@@ -9,31 +9,19 @@ import SwiftUI
 
 // MARK:- V Base View Model Center
 public struct VBaseViewModelCenter {
-    public let layout: Layout
-    public let font: Font
+    public let layout: Layout = .init()
+    public let font: Font = .system(size: 17, weight: .semibold, design: .default)
     
-    public init(
-        layout: Layout = .init(),
-        font: Font = .system(size: 17, weight: .semibold, design: .default)
-    ) {
-        self.layout = layout
-        self.font = font
-    }
+    public init() {}
 }
 
 // MARK:- Layout
 extension VBaseViewModelCenter {
     public struct Layout {
-        public let margin: CGFloat
-        public let spacing: CGFloat
+        public var margin: CGFloat = 20
+        public var spacing: CGFloat = 10
         var width: CGFloat { UIScreen.main.bounds.width - 2 * margin }
-        
-        public init(
-            margin: CGFloat = 20,
-            spacing: CGFloat = 10
-        ) {
-            self.margin = margin
-            self.spacing = spacing
-        }
+
+        public init() {}
     }
 }
