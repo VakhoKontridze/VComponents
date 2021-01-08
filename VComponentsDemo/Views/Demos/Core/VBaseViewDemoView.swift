@@ -17,11 +17,11 @@ struct VBaseViewDemoView: View {
     @State private var navigationBarHasLeadingItem: Bool = false
     @State private var navigationBarHasTrailingItem: Bool = false
     
-    private enum NavigationBarTitlePosition: Int, CaseIterable {
+    private enum NavigationBarTitlePosition: Int, CaseIterable, VPickerTitledEnumerableOption {
         case leading
         case center
         
-        var title: String {
+        var pickerTitle: String {
             switch self {
             case .leading: return "Leading"
             case .center: return "Center"
@@ -61,13 +61,7 @@ extension VBaseViewDemoView {
             ColorBook.layer.edgesIgnoringSafeArea(.bottom)
             
             VStack(alignment: .leading, spacing: 20, content: {
-                VSegmentedPicker(
-                    selection: .init(
-                        get: { navigationBarTitlePosition.rawValue },
-                        set: { navigationBarTitlePosition = NavigationBarTitlePosition(rawValue: $0)! }
-                    ),
-                    titles: NavigationBarTitlePosition.allCases.map { $0.title }
-                )
+                VSegmentedPicker(selection: $navigationBarTitlePosition)
                 
                 VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
                 

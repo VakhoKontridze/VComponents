@@ -12,19 +12,48 @@ import VComponents
 struct VSegmentedPickerDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Segmented Picker"
-    
-    private let segmentedPickerTitles: [String] = ["One", "Two", "Three"]
-    private let segmentedPickerContents: [VDemoIconContentView] = [Color.red, .green, .blue].map { VDemoIconContentView(dimension: 15, color: $0) }
-    
-    @State private var segmentedPickerSelection1: Int = 0
-    @State private var segmentedPickerSelection2: Int = 0
+
+    @State private var segmentedPickerSelection1: TitleOptions = .red
+    @State private var segmentedPickerSelection2: ContentOptions = .red
     @State private var segmentedPickerSelection3: Int = 0
-    @State private var segmentedPickerSelection4: Int = 0
-    @State private var segmentedPickerSelection5: Int = 0
-    @State private var segmentedPickerSelection6: Int = 0
-    @State private var segmentedPickerSelection7: Int = 0
-    @State private var segmentedPickerSelection8: Int = 0
+    @State private var segmentedPickerSelection4: TitleOptions = .red
+    @State private var segmentedPickerSelection5: TitleOptions = .red
+    @State private var segmentedPickerSelection6: TitleOptions = .red
+    @State private var segmentedPickerSelection7: TitleOptions = .red
+    @State private var segmentedPickerSelection8: TitleOptions = .red
     @State private var segmentedPickerState: VSegmentedPickerState = .enabled
+    
+    private enum ContentOptions: Int, CaseIterable, VPickerEnumerableOption {
+        case red
+        case green
+        case blue
+        
+        var pickerSymbol: some View {
+            let color: Color = {
+                switch self {
+                case .red: return .red
+                case .green: return .green
+                case .blue: return .blue
+                }
+            }()
+            
+            return VDemoIconContentView(dimension: 15, color: color)
+        }
+    }
+    
+    private enum TitleOptions: Int, CaseIterable, VPickerTitledEnumerableOption {
+        case red
+        case green
+        case blue
+        
+        var pickerTitle: String {
+            switch self {
+            case .red: return "Red"
+            case .green: return "Green"
+            case .blue: return "Blue"
+            }
+        }
+    }
     
     private let noAnimationSegmentedModel: VSegmentedPickerModel = {
         var model: VSegmentedPickerModel = .init()
@@ -58,27 +87,25 @@ extension VSegmentedPickerDemoView {
             DemoRowView(type: .titled("Text"), content: {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection1,
-                    state: segmentedPickerState,
-                    titles: segmentedPickerTitles
+                    state: segmentedPickerState
                 )
             })
             
             DemoRowView(type: .titled("Image"), content: {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection2,
-                    state: segmentedPickerState,
-                    data: segmentedPickerContents
+                    state: segmentedPickerState
                 )
             })
-            
+
             DemoRowView(type: .titled("Image and Text"), content: {
                 VSegmentedPicker(
-                    selection: $segmentedPickerSelection3,
+                    selectedIndex: $segmentedPickerSelection3,
                     state: segmentedPickerState,
-                    data: segmentedPickerContents.indices.map { i in
+                    views: ContentOptions.allCases.indices.map { i in
                         HStack(spacing: 5, content: {
-                            segmentedPickerContents[i]
-                            Text(segmentedPickerTitles[i])
+                            ContentOptions.allCases[i].pickerSymbol
+                            Text(TitleOptions.allCases[i].pickerTitle)
                         })
                     }
                 )
@@ -88,7 +115,6 @@ extension VSegmentedPickerDemoView {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection4,
                     state: segmentedPickerState,
-                    titles: segmentedPickerTitles,
                     disabledIndexes: [1]
                 )
             })
@@ -97,8 +123,7 @@ extension VSegmentedPickerDemoView {
                 VSegmentedPicker(
                     model: noAnimationSegmentedModel,
                     selection: $segmentedPickerSelection5,
-                    state: segmentedPickerState,
-                    titles: segmentedPickerTitles
+                    state: segmentedPickerState
                 )
             })
             
@@ -106,8 +131,7 @@ extension VSegmentedPickerDemoView {
                 VSegmentedPicker(
                     model: noLoweredOpacityWhenPressedModel,
                     selection: $segmentedPickerSelection6,
-                    state: segmentedPickerState,
-                    titles: segmentedPickerTitles
+                    state: segmentedPickerState
                 )
             })
             
@@ -115,8 +139,7 @@ extension VSegmentedPickerDemoView {
                 VSegmentedPicker(
                     model: noSmallerIndcatorWhenPressedModel,
                     selection: $segmentedPickerSelection7,
-                    state: segmentedPickerState,
-                    titles: segmentedPickerTitles
+                    state: segmentedPickerState
                 )
             })
             
@@ -125,7 +148,6 @@ extension VSegmentedPickerDemoView {
                     model: noLoweredOpacityWhenDisabledModel,
                     selection: $segmentedPickerSelection8,
                     state: segmentedPickerState,
-                    titles: segmentedPickerTitles,
                     disabledIndexes: [1]
                 )
             })

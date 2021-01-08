@@ -33,11 +33,11 @@ struct VAlertDemoView: View {
         }
     }
     
-    private enum DialogType: Int, CaseIterable {
+    private enum DialogType: Int, CaseIterable, VPickerTitledEnumerableOption {
         case one
         case two
         
-        var title: String {
+        var pickerTitle: String {
             switch self {
             case .one: return "One Button"
             case .two: return "Two Buttons"
@@ -58,13 +58,7 @@ extension VAlertDemoView {
                     Text("Dialog Type")
                         .font(.footnote)
                     
-                    VSegmentedPicker(
-                        selection: .init(
-                            get: { dialogType.rawValue },
-                            set: { dialogType = DialogType(rawValue: $0)! }
-                        ),
-                        titles: DialogType.allCases.map { $0.title }
-                    )
+                    VSegmentedPicker(selection: $dialogType)
                 })
                 
                 VSecondaryButton(action: { alertIsShown = true }, title: "Demo Alert")
