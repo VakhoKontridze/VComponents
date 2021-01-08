@@ -90,10 +90,7 @@ public extension VToggle {
                 Circle()
                     .frame(dimension: model.layout.thumbDimension)
                     .foregroundColor(model.colors.thumbColor(isOn: isOn, state: internalState))
-                    .offset(
-                        x: isOn ? model.layout.animationOffset : -model.layout.animationOffset,
-                        y: 0
-                    )
+                    .offset(x: isOn ? model.layout.animationOffset : -model.layout.animationOffset)
             })
                 .frame(size: model.layout.size)
         })

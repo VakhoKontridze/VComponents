@@ -15,12 +15,7 @@ struct VToggleDemoView: View {
     
     private let toggleTitle: String = "Toggle"
     
-    private func toggleContent() -> some View {
-        Image(systemName: "swift")
-            .resizable()
-            .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(ColorBook.accent)
-    }
+    private func toggleContent() -> some View { VDemoIconContentView() }
     
     let nonClickableContentModel: VToggleModel = .init(
         behavior: .init(

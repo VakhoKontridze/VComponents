@@ -38,6 +38,11 @@
 		7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */; };
 		7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */; };
 		7A3C159B258E0A3D00CE1D96 /* VLazyListModelVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C159A258E0A3D00CE1D96 /* VLazyListModelVertical.swift */; };
+		7A41A49225A73E6D000A6F80 /* VSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */; };
+		7A41A49525A759BD000A6F80 /* VSegmentedPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */; };
+		7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */; };
+		7A41A49B25A76932000A6F80 /* VGenericTitleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49A25A76932000A6F80 /* VGenericTitleContent.swift */; };
+		7A41A4A125A769C7000A6F80 /* VSegmentedPickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A4A025A769C7000A6F80 /* VSegmentedPickerRow.swift */; };
 		7A43A612259CAE130029E3C9 /* VAlertDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */; };
 		7A48FDCA258DE48E00AA4D4D /* VSquareButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */; };
@@ -105,6 +110,7 @@
 		7AD809502594FDF900DABE49 /* VSideBarSwipeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD8094F2594FDF900DABE49 /* VSideBarSwipeGesture.swift */; };
 		7AD8095A2594FF3D00DABE49 /* VSideBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809592594FF3D00DABE49 /* VSideBarModel.swift */; };
 		7AD809612595073C00DABE49 /* VSideBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809602595073C00DABE49 /* VSideBarDemoView.swift */; };
+		7AE5C25825A893A5001B62B2 /* VSegmentedPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5C25725A893A5001B62B2 /* VSegmentedPickerDemoView.swift */; };
 		7AE6078325926994009CDB28 /* HomeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6078225926994009CDB28 /* HomeRowView.swift */; };
 /* End PBXBuildFile section */
 
@@ -164,6 +170,11 @@
 		7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
 		7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyList.swift; sourceTree = "<group>"; };
 		7A3C159A258E0A3D00CE1D96 /* VLazyListModelVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListModelVertical.swift; sourceTree = "<group>"; };
+		7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPicker.swift; sourceTree = "<group>"; };
+		7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerModel.swift; sourceTree = "<group>"; };
+		7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerState.swift; sourceTree = "<group>"; };
+		7A41A49A25A76932000A6F80 /* VGenericTitleContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGenericTitleContent.swift; sourceTree = "<group>"; };
+		7A41A4A025A769C7000A6F80 /* VSegmentedPickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerRow.swift; sourceTree = "<group>"; };
 		7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDemoView.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButton.swift; sourceTree = "<group>"; };
 		7A48FDC6258DE48E00AA4D4D /* VSquareButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButtonState.swift; sourceTree = "<group>"; };
@@ -233,6 +244,7 @@
 		7AD8094F2594FDF900DABE49 /* VSideBarSwipeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarSwipeGesture.swift; sourceTree = "<group>"; };
 		7AD809592594FF3D00DABE49 /* VSideBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarModel.swift; sourceTree = "<group>"; };
 		7AD809602595073C00DABE49 /* VSideBarDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarDemoView.swift; sourceTree = "<group>"; };
+		7AE5C25725A893A5001B62B2 /* VSegmentedPickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerDemoView.swift; sourceTree = "<group>"; };
 		7AE6078225926994009CDB28 /* HomeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -304,6 +316,25 @@
 				7A4C4343259242B7000207DD /* SceneDelegateExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		7A41A48B25A73E49000A6F80 /* VSegmentedPicker */ = {
+			isa = PBXGroup;
+			children = (
+				7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */,
+				7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */,
+				7A41A4A025A769C7000A6F80 /* VSegmentedPickerRow.swift */,
+				7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */,
+			);
+			path = VSegmentedPicker;
+			sourceTree = "<group>";
+		};
+		7A41A49D25A76937000A6F80 /* VGenericTitleContent */ = {
+			isa = PBXGroup;
+			children = (
+				7A41A49A25A76932000A6F80 /* VGenericTitleContent.swift */,
+			);
+			path = VGenericTitleContent;
 			sourceTree = "<group>";
 		};
 		7A4C42532591EFBE000207DD /* VBaseButton */ = {
@@ -378,6 +409,7 @@
 		7A6217E52593D8C900515688 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7A41A49D25A76937000A6F80 /* VGenericTitleContent */,
 				7A4C42532591EFBE000207DD /* VBaseButton */,
 				7A4C42F2259228D6000207DD /* VBaseView */,
 			);
@@ -616,6 +648,7 @@
 				7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */,
 				7ABEA9DB259326EA00A90B56 /* VChevronButtonDemoView.swift */,
 				7A00737E258E7C7A0003F0E9 /* VToggleDemoView.swift */,
+				7AE5C25725A893A5001B62B2 /* VSegmentedPickerDemoView.swift */,
 				7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */,
 				7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */,
 			);
@@ -640,6 +673,7 @@
 				7AA9F4452590B34A0060F210 /* VPlainButton */,
 				7A599585259249AC0087902B /* VChevronButton */,
 				7A8A73782590BEB5001024FB /* VToggle */,
+				7A41A48B25A73E49000A6F80 /* VSegmentedPicker */,
 				7A8A7428259100B4001024FB /* VSlider */,
 				7A8A7462259118B3001024FB /* VSpinner */,
 			);
@@ -932,6 +966,7 @@
 				7A4C431325923778000207DD /* VBaseViewModelLeading.swift in Sources */,
 				7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */,
 				7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */,
+				7A41A4A125A769C7000A6F80 /* VSegmentedPickerRow.swift in Sources */,
 				7A860D46259312B100B19A53 /* SettingRootView.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
@@ -959,10 +994,12 @@
 				7A599587259249BC0087902B /* VChevronButton.swift in Sources */,
 				7A259B7825979FC000A12F8C /* VAlertModel.swift in Sources */,
 				7AD809432594FCF000DABE49 /* VSideBar.swift in Sources */,
+				7A41A49B25A76932000A6F80 /* VGenericTitleContent.swift in Sources */,
 				7A8A744D25910E46001024FB /* VSliderModel.swift in Sources */,
 				7A4C431A259237CA000207DD /* VNavigationViewNavigationBar.swift in Sources */,
 				7AC5060725911A4000226656 /* VSpinnerDashed.swift in Sources */,
 				7A48FDCA258DE48E00AA4D4D /* VSquareButtonState.swift in Sources */,
+				7A41A49525A759BD000A6F80 /* VSegmentedPickerModel.swift in Sources */,
 				7A259BBE2598FC7C00A12F8C /* VPrimaryButtonModel.swift in Sources */,
 				7A00736B258E47280003F0E9 /* VToggle.swift in Sources */,
 				7A08F851259730B50049FB10 /* VTabNavigationViewPage.swift in Sources */,
@@ -971,6 +1008,7 @@
 				7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */,
 				7A860D5225931B3C00B19A53 /* VChevronButtonState.swift in Sources */,
 				7A4C4304259229B2000207DD /* VBaseViewSwipeGesture.swift in Sources */,
+				7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */,
 				7A8A7467259118DF001024FB /* VSpinnerModelContinous.swift in Sources */,
 				7A08F84E25972EB40049FB10 /* VTabNavigationViewModel.swift in Sources */,
 				7A259B6B259783A100A12F8C /* VAlertDialogType.swift in Sources */,
@@ -979,6 +1017,7 @@
 				7A259B7325979F9300A12F8C /* VAlertPresenter.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
 				7A4C42F825922914000207DD /* VBaseView.swift in Sources */,
+				7A41A49225A73E6D000A6F80 /* VSegmentedPicker.swift in Sources */,
 				7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */,
 				7A5D8231259B41E800C2E9DC /* GenericButtonContentView.swift in Sources */,
 				7A00731B258E27490003F0E9 /* VPlainButton.swift in Sources */,
@@ -1009,6 +1048,7 @@
 				7A4D0C4C2594C91400108575 /* VSecondaryButtonDemoView.swift in Sources */,
 				7A3C1543258DE65F00CE1D96 /* ViewExtensions.swift in Sources */,
 				7A4D0C1525949FF700108575 /* HomeSectionView.swift in Sources */,
+				7AE5C25825A893A5001B62B2 /* VSegmentedPickerDemoView.swift in Sources */,
 				7A8A9700258DDC7800309886 /* HomeView.swift in Sources */,
 				7A00732F258E2B7D0003F0E9 /* VPlainButtonDemoView.swift in Sources */,
 				7ABEA9DC259326EA00A90B56 /* VChevronButtonDemoView.swift in Sources */,

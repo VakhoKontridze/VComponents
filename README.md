@@ -15,6 +15,8 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
+2021 Jan 8. VSegmentedPicker
+
 2020 Dec 30. VAlert
 
 2020 Dec 24. VTabNavigationView

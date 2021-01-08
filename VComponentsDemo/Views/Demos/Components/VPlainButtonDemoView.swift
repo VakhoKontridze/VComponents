@@ -15,12 +15,7 @@ struct VPlainButtonDemoView: View {
     
     private let buttonTitle: String = "Press"
     
-    private func buttonContent() -> some View {
-        Image(systemName: "swift")
-            .resizable()
-            .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(ColorBook.accent)
-    }
+    private func buttonContent() -> some View { VDemoIconContentView() }
     
     @State private var buttonState: VPlainButtonState = .enabled
     

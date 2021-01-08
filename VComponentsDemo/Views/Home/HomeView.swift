@@ -33,7 +33,8 @@ extension HomeView {
                         })
 
                         HomeSectionView(title: "Togglable", content: {
-                            HomeRowView(title: VToggleDemoView.navigationBarTitle, destination: VToggleDemoView(), showSeparator: false)
+                            HomeRowView(title: VToggleDemoView.navigationBarTitle, destination: VToggleDemoView())
+                            HomeRowView(title: VSegmentedPickerDemoView.navigationBarTitle, destination: VSegmentedPickerDemoView(), showSeparator: false)
                         })
 
                         HomeSectionView(title: "Range", content: {

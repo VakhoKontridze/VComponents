@@ -38,3 +38,90 @@ public extension Color {
         self.init(uiColor)
     }
 }
+
+// MARK:- Assets
+
+/*
+ 
+ ChevronButton.Background.disabled
+ 245.245.245
+ 80.80.80
+ 
+ ChevronButton.Background.enabled
+ 235.235.235
+ *40.40.40
+ 
+ ChevronButton.Background.pressed
+ 210.210.210
+ *30.30.30
+ 
+ PrimaryButton.Background.enabled
+ 128.176.240
+ 
+ PrimaryButton.Background.disabled
+ 24.126.240
+ 25.131.255
+ 
+ PrimaryButton.Background.pressed
+ 31.104.182
+ 36.106.186
+ 
+ SegmentedPicker.Indicator.disabled
+ *254.254.254
+ 60.60.60
+ 
+ SegmentedPicker.Indicator.enabled
+ *254.254.254
+ 90.90.90
+ 
+ SideBar.Blinding
+ *100.100.100 @ 30
+ 
+ Slider.Thumb.Border.disabled
+ 192.192.192
+ 
+ Slider.Thumb.Border.enabled
+ *96.96.96
+ 
+ Slider.Thumb.Shadow.disabled
+ *96.96.96 @ 20
+ 
+ Slider.Thumb.Shadow.enabled
+ *96.96.96 @ 50
+ 
+ Toggle.Fill.disabledOff
+ 244.244.244
+ *30.30.30
+ 
+ Toggle.Fill.enabledOff
+ 233.233.233
+ *40.40.40
+ 
+ Toggle.Thumb.enabledOn
+ *254.254.254
+ 
+ Accent
+ 0.122.255
+ 10.132.255
+ 
+ Canvas
+ 247.247.247
+ 22.22.22
+ 
+ Layer
+ *254.254.254
+ 18.18.18
+ 
+ Primary
+ *20.20.20
+ *254.254.254
+ 
+ PrimaryInverted
+ *254.254.254
+ *20.20.20
+ 
+ Secondary
+ 200.200.200
+ *100.100.100
+ 
+*/

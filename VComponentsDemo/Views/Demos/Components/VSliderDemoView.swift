@@ -76,7 +76,7 @@ struct VSliderDemoView: View {
 extension VSliderDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
-            DemoRowView(type: .titled("Infinite"), content: {
+            DemoRowView(type: .titled("Default"), content: {
                 VSlider(state: sliderState, value: $standard1Value)
             })
             

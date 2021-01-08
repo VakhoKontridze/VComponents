@@ -15,12 +15,7 @@ struct VPrimaryButtonDemoView: View {
     
     private let buttonTitle: String = "Press"
     
-    private func buttonContent() -> some View {
-        Image(systemName: "swift")
-            .resizable()
-            .frame(size: .init(width: 20, height: 20))
-            .foregroundColor(ColorBook.primaryInverted)
-    }
+    private func buttonContent() -> some View { VDemoIconContentView(color: ColorBook.primaryInverted) }
     
     @State private var buttonState: VPrimaryButtonState = .enabled
     
