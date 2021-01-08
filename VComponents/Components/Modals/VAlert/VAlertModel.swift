@@ -119,7 +119,7 @@ extension VAlertModel {
 extension VAlertModel.Colors {
     public struct ButtonColors {
         public var foreground: StateOpacityColors
-        public var text: StateColors
+        public var text: StateColors    // Only used in init with string
         public var background: StateColors
         
         public init(foreground: StateOpacityColors, text: StateColors, background: StateColors) {

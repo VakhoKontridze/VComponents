@@ -58,7 +58,7 @@ extension VToggleModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(
+        public var text: StateColors = .init(   // Only used in init with string
             enabledOn: ColorBook.primary,
             enabledOff: ColorBook.primary,
             disabledOn: ColorBook.primary,
