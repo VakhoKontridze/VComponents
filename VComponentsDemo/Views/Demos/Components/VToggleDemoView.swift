@@ -17,27 +17,23 @@ struct VToggleDemoView: View {
     
     private func toggleContent() -> some View { VDemoIconContentView() }
     
-    let nonClickableContentModel: VToggleModel = .init(
-        behavior: .init(
-            contentIsClickable: false
-        )
-    )
+    let nonClickableContentModel: VToggleModel = {
+        var model: VToggleModel = .init()
+        model.behavior.contentIsClickable = false
+        return model
+    }()
     
-    let noLoweredOpacityWhenPressedModel: VToggleModel = .init(
-        colors: .init(
-            content: .init(
-                pressedOpacity: 1
-            )
-        )
-    )
+    let noLoweredOpacityWhenPressedModel: VToggleModel = {
+        var model: VToggleModel = .init()
+        model.colors.content.pressedOpacity = 1
+        return model
+    }()
     
-    let noLoweredOpacityWhenDisabledModel: VToggleModel = .init(
-        colors: .init(
-            content: .init(
-                disabledOpacity: 1
-            )
-        )
-    )
+    let noLoweredOpacityWhenDisabledModel: VToggleModel = {
+        var model: VToggleModel = .init()
+        model.colors.content.disabledOpacity = 1
+        return model
+    }()
     
     @State private var toggle1IsOn: Bool = true
     @State private var toggle2IsOn: Bool = true

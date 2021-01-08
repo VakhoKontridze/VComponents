@@ -47,7 +47,14 @@ public struct VToggle<Content>: View where Content: View {
             model: model,
             isOn: isOn,
             state: state,
-            content: { Text(title) }
+            content: {
+                Text(title)
+                    .foregroundColor(model.colors.textColor(
+                        isOn: isOn.wrappedValue,
+                        state: .init(state: state, isPressed: false)
+                    ))
+                    .font(model.font)
+            }
         )
     }
 
@@ -110,7 +117,7 @@ public extension VToggle {
     ) -> some View {
         VBaseButton(isDisabled: contentIsDisabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
-                .opacity(model.colors.foregroundOpacity(state: internalState))
+                .opacity(model.colors.contentOpacity(state: internalState))
         })
     }
 }
