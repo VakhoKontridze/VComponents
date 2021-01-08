@@ -408,7 +408,6 @@
 		7A6217E52593D8C900515688 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				7A41A49D25A76937000A6F80 /* VGenericTitleContent */,
 				7A4C42532591EFBE000207DD /* VBaseButton */,
 				7A4C42F2259228D6000207DD /* VBaseView */,
 			);
@@ -559,6 +558,7 @@
 			children = (
 				7A8A96F1258DDA9E00309886 /* Framework Info */,
 				7ABEAA472593403000A90B56 /* Components */,
+				7A5D822E259B41E800C2E9DC /* GenericButtonContentView.swift */,
 				7AE5C25C25A8BC1D001B62B2 /* Core */,
 				7AA9F42F2590B18D0060F210 /* Extensions */,
 				7AA9F4342590B1C00060F210 /* Resources */,
@@ -686,7 +686,6 @@
 				7A8A9724258DDDA800309886 /* VPrimaryButton.swift */,
 				7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */,
 				7A259BBD2598FC7C00A12F8C /* VPrimaryButtonModel.swift */,
-				7A5D822E259B41E800C2E9DC /* GenericButtonContentView.swift */,
 			);
 			path = VPrimaryButton;
 			sourceTree = "<group>";
@@ -829,6 +828,7 @@
 		7AE5C25C25A8BC1D001B62B2 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				7A41A49D25A76937000A6F80 /* VGenericTitleContent */,
 				7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOptions.swift */,
 			);
 			path = Core;

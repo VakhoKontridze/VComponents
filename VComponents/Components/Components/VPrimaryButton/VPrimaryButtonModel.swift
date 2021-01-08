@@ -9,159 +9,96 @@ import SwiftUI
 
 // MARK:- V Primary Button Model
 public struct VPrimaryButtonModel {
-    public let layout: Layout
-    public let colors: Colors
-    public let font: Font
+    public var layout: Layout = .init()
+    public var colors: Colors = .init()
+    public var font: Font = .system(size: 16, weight: .semibold, design: .default)  // Only used in init with string
+    var spinnerModel: VSpinnerModelContinous { .init(color: colors.loader) }
     
-    let spinnerModel: VSpinnerModelContinous
-    
-    public init(
-        layout: Layout = .init(),
-        colors: Colors = .init(),
-        font: Font = .system(size: 16, weight: .semibold, design: .default)
-    ) {
-        self.layout = layout
-        self.colors = colors
-        self.font = font
-        self.spinnerModel = .init(
-            color: colors.loader
-        )
-    }
+    public init() {}
 }
 
 // MARK:- Layout
 extension VPrimaryButtonModel {
     public struct Layout {
-        public let height: CGFloat
-        public let cornerRadius: CGFloat
+        public var height: CGFloat = 50
+        public var cornerRadius: CGFloat = 20
         
-        public let borderWidth: CGFloat
-        let hasBorder: Bool
+        public var borderWidth: CGFloat = 1
+        var hasBorder: Bool { borderWidth > 0 }
         
-        public let contentMarginX: CGFloat
-        public let contentMarginY: CGFloat
+        public var contentMarginX: CGFloat = 15
+        public var contentMarginY: CGFloat = 3
         
-        public let loaderSpacing: CGFloat
-        let loaderWidth: CGFloat
+        public var loaderSpacing: CGFloat = 20
+        let loaderWidth: CGFloat = 10
         
-        public init(
-            height: CGFloat = 50,
-            cornerRadius: CGFloat = 20,
-            borderWidth: CGFloat = 1,
-            contentMarginX: CGFloat = 15,
-            contentMarginY: CGFloat = 3,
-            loaderSpacing: CGFloat = 20
-        ) {
-            self.height = height
-            self.cornerRadius = cornerRadius
-            self.borderWidth = borderWidth
-            self.hasBorder = borderWidth > 0
-            self.contentMarginX = contentMarginX
-            self.contentMarginY = contentMarginY
-            self.loaderSpacing = loaderSpacing
-            self.loaderWidth = 10
-        }
+        public init() {}
     }
 }
 
 // MARK:- Colors
 extension VPrimaryButtonModel {
     public struct Colors {
-        public let foreground: ForegroundColors
-        public let background: BackgroundColors
-        public let border: BorderColors
-        public let loader: Color
+        public var foreground: StateOpacityColors = .init(
+            pressedOpacity: 0.5,
+            disabledOpacity: 0.5
+        )
         
-        public init(
-            foreground: ForegroundColors = .init(),
-            background: BackgroundColors = .init(),
-            border: BorderColors = .init(),
-            loader: Color = ColorBook.primaryInverted
-        ) {
-            self.foreground = foreground
-            self.background = background
-            self.border = border
-            self.loader = loader
-        }
+        public var text: StateColors = .init(    // Only used in init with string
+            enabled: ColorBook.primaryInverted,
+            pressed: ColorBook.primaryInverted,
+            disabled: ColorBook.primaryInverted,
+            loading: ColorBook.primaryInverted
+        )
+        
+        public var background: StateColors = .init(
+            enabled: .init(componentAsset: "PrimaryButton.Background.enabled"),
+            pressed: .init(componentAsset: "PrimaryButton.Background.pressed"),
+            disabled: .init(componentAsset: "PrimaryButton.Background.disabled"),
+            loading: .init(componentAsset: "PrimaryButton.Background.disabled")
+        )
+        
+        public var border: StateColors = .init(
+            enabled: .clear,
+            pressed: .clear,
+            disabled: .clear,
+            loading: .clear
+        )
+        
+        public var loader: Color = ColorBook.primaryInverted
+        
+        public init() {}
     }
 }
 
 extension VPrimaryButtonModel.Colors {
-    public struct ForegroundColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        public let loading: Color
-        public let pressedOpacity: Double
-        public let disabledOpacity: Double
+    public struct StateColors {
+        public var enabled: Color
+        public var pressed: Color
+        public var disabled: Color
+        public var loading: Color
         
-        public init(
-            enabled: Color = ColorBook.primaryInverted,
-            pressed: Color = ColorBook.primaryInverted,
-            disabled: Color = ColorBook.primaryInverted,
-            loading: Color = ColorBook.primaryInverted,
-            pressedOpacity: Double = 0.5,
-            disabledOpacity: Double = 0.5
-        ) {
+        public init(enabled: Color, pressed: Color, disabled: Color, loading: Color) {
             self.enabled = enabled
             self.pressed = pressed
             self.disabled = disabled
             self.loading = loading
+        }
+    }
+    
+    public struct StateOpacityColors {
+        public var pressedOpacity: Double
+        public var disabledOpacity: Double
+        
+        public init(pressedOpacity: Double, disabledOpacity: Double) {
             self.pressedOpacity = pressedOpacity
             self.disabledOpacity = disabledOpacity
-        }
-    }
-    
-    public struct BackgroundColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        public let loading: Color
-        
-        public init(
-            enabled: Color = .init(componentAsset: "PrimaryButton.Background.enabled"),
-            pressed: Color = .init(componentAsset: "PrimaryButton.Background.pressed"),
-            disabled: Color = .init(componentAsset: "PrimaryButton.Background.disabled"),
-            loading: Color = .init(componentAsset: "PrimaryButton.Background.disabled")
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-            self.loading = loading
-        }
-    }
-    
-    public struct BorderColors {
-        public let enabled: Color
-        public let pressed: Color
-        public let disabled: Color
-        public let loading: Color
-        
-        public init(
-            enabled: Color = .clear,
-            pressed: Color = .clear,
-            disabled: Color = .clear,
-            loading: Color = .clear
-        ) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-            self.loading = loading
         }
     }
 }
 
 // MARK:- Mapping
 extension VPrimaryButtonModel.Colors {
-    func foregroundColor(state: VPrimaryButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return foreground.enabled
-        case .pressed: return foreground.pressed
-        case .disabled: return foreground.disabled
-        case .loading: return foreground.loading
-        }
-    }
-    
     func foregroundOpacity(state: VPrimaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
@@ -170,22 +107,25 @@ extension VPrimaryButtonModel.Colors {
         case .loading: return foreground.disabledOpacity
         }
     }
+    
+    func textColor(state: VPrimaryButtonInternalState) -> Color {
+        color(for: state, from: text)
+    }
 
     func backgroundColor(state: VPrimaryButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return background.enabled
-        case .pressed: return background.pressed
-        case .disabled: return background.disabled
-        case .loading: return background.loading
-        }
+        color(for: state, from: background)
     }
     
     func borderColor(state: VPrimaryButtonInternalState) -> Color {
+        color(for: state, from: border)
+    }
+    
+    private func color(for state: VPrimaryButtonInternalState, from colorSet: StateColors) -> Color {
         switch state {
-        case .enabled: return border.enabled
-        case .pressed: return border.pressed
-        case .disabled: return border.disabled
-        case .loading: return border.loading
+        case .enabled: return colorSet.enabled
+        case .pressed: return colorSet.pressed
+        case .disabled: return colorSet.disabled
+        case .loading: return colorSet.loading
         }
     }
 }

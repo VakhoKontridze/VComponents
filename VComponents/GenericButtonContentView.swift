@@ -46,14 +46,14 @@ extension GenericButtonContentView {
     }
 }
 
-// MARK:- Preview
-struct GenericButtonContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        GenericButtonContentView(
-            foregroundColor: VPrimaryButtonModel.Colors().foreground.enabled,
-            foregroundOpacity: VPrimaryButtonModel.Colors().foreground.pressedOpacity,
-            font: VPrimaryButtonModel().font,
-            content: { Text("Press") }
-        )
-    }
-}
+//// MARK:- Preview
+//struct GenericButtonContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        GenericButtonContentView(
+//            foregroundColor: VPrimaryButtonModel.Colors().foreground.enabled,
+//            foregroundOpacity: VPrimaryButtonModel.Colors().foreground.pressedOpacity,
+//            font: VPrimaryButtonModel().font,
+//            content: { Text("Press") }
+//        )
+//    }
+//}

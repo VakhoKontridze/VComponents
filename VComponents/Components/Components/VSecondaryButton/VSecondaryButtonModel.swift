@@ -91,9 +91,9 @@ extension VSecondaryButtonModel.Colors {
         public let disabledOpacity: Double
         
         public init(
-            enabled: Color = primaryButtonColors.foreground.enabled,
-            pressed: Color = primaryButtonColors.foreground.pressed,
-            disabled: Color = primaryButtonColors.foreground.disabled,
+            enabled: Color = primaryButtonColors.text.enabled,
+            pressed: Color = primaryButtonColors.text.pressed,
+            disabled: Color = primaryButtonColors.text.disabled,
             pressedOpacity: Double = 0.5,
             disabledOpacity: Double = 0.5
         ) {

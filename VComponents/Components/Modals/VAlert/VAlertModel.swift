@@ -23,42 +23,42 @@ public struct VAlertModel {
         self.layout = layout
         self.colors = colors
         self.fonts = fonts
-        self.primaryButtonModel = .init(
-            layout: .init(
-                height: layout.buttonHeight,
-                cornerRadius: layout.buttonHeight / 4
-            ),
-            colors: .init(
-                foreground: .init(
-                    enabled: colors.primaryButton.foreground.enabled,
-                    pressed: colors.primaryButton.foreground.pressed,
-                    pressedOpacity: colors.primaryButton.foreground.pressedOpacity
-                ),
-                background: .init(
-                    enabled: colors.primaryButton.background.enabled,
-                    pressed: colors.primaryButton.background.pressed
-                )
-            ),
-            font: fonts.primaryButton
-        )
-        self.secondaryButtonModel = .init(
-            layout: .init(
-                height: layout.buttonHeight,
-                cornerRadius: layout.buttonHeight / 4
-            ),
-            colors: .init(
-                foreground: .init(
-                    enabled: colors.secondaryButton.foreground.enabled,
-                    pressed: colors.secondaryButton.foreground.pressed,
-                    pressedOpacity: colors.secondaryButton.foreground.pressedOpacity
-                ),
-                background: .init(
-                    enabled: colors.secondaryButton.background.enabled,
-                    pressed: colors.secondaryButton.background.pressed
-                )
-            ),
-            font: fonts.secondaryButton
-        )
+        self.primaryButtonModel = {
+            var model: VPrimaryButtonModel = .init()
+            
+            model.layout.height = layout.buttonHeight
+            model.layout.cornerRadius = layout.buttonHeight / 4
+            
+            model.colors.foreground.pressedOpacity = colors.primaryButton.foreground.pressedOpacity
+            
+            model.colors.text.enabled = colors.primaryButton.foreground.enabled
+            model.colors.text.pressed = colors.primaryButton.foreground.pressed
+            
+            model.colors.background.enabled = colors.primaryButton.background.enabled
+            model.colors.background.pressed = colors.primaryButton.background.pressed
+            
+            model.font = fonts.primaryButton
+            
+            return model
+        }()
+        self.secondaryButtonModel = {
+            var model: VPrimaryButtonModel = .init()
+            
+            model.layout.height = layout.buttonHeight
+            model.layout.cornerRadius = layout.buttonHeight / 4
+            
+            model.colors.foreground.pressedOpacity = colors.secondaryButton.foreground.pressedOpacity
+            
+            model.colors.text.enabled = colors.secondaryButton.foreground.enabled
+            model.colors.text.pressed = colors.secondaryButton.foreground.pressed
+            
+            model.colors.background.enabled = colors.secondaryButton.background.enabled
+            model.colors.background.pressed = colors.secondaryButton.background.pressed
+            
+            model.font = fonts.secondaryButton
+            
+            return model
+        }()
     }
 }
 
@@ -112,8 +112,8 @@ extension VAlertModel {
             description: Color = ColorBook.primary,
             primaryButton: ButtonColors = .init(
                 foreground: .init(
-                    enabled: primaryButtonColors.foreground.enabled,
-                    pressed: primaryButtonColors.foreground.pressed
+                    enabled: primaryButtonColors.text.enabled,
+                    pressed: primaryButtonColors.text.pressed
                 ),
                 background: .init(
                     enabled: primaryButtonColors.background.enabled,

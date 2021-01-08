@@ -40,14 +40,20 @@ public struct VPrimaryButton<Content>: View where Content: View {
         title: S
     )
         where
-            Content == Text,
+            Content == VGenericTitleContentView<S>,
             S: StringProtocol
     {
         self.init(
             model: model,
             state: state,
             action: action,
-            content: { Text(title) }
+            content: {
+                VGenericTitleContentView(
+                    title: title,
+                    color: model.colors.textColor(state: .init(state: state, isPressed: false)),
+                    font: model.font
+                )
+            }
         )
     }
 }
@@ -74,13 +80,9 @@ public extension VPrimaryButton {
         HStack(alignment: .center, spacing: model.layout.loaderSpacing, content: {
             loaderCompensatorView
 
-            GenericButtonContentView(
-                foregroundColor: model.colors.foregroundColor(state: internalState),
-                foregroundOpacity: model.colors.foregroundOpacity(state: internalState),
-                font: model.font,
-                content: content
-            )
+            content()
                 .frame(maxWidth: .infinity)
+                .opacity(model.colors.foregroundOpacity(state: internalState))
 
             loaderView
         })

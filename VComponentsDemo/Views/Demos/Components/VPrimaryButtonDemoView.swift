@@ -22,28 +22,24 @@ struct VPrimaryButtonDemoView: View {
     private let borderedModel: VPrimaryButtonModel = {
         let defaultModel: VPrimaryButtonModel = .init()
         
-        return .init(
-            colors: .init(
-                foreground: .init(
-                    enabled: defaultModel.colors.background.enabled,
-                    pressed: defaultModel.colors.background.pressed,
-                    disabled: defaultModel.colors.background.disabled,
-                    loading: defaultModel.colors.background.loading
-                ),
-                background: .init(
-                    enabled: .init("PrimaryButtonBordered.Background.enabled"),
-                    pressed: .init("PrimaryButtonBordered.Background.pressed"),
-                    disabled: .init("PrimaryButtonBordered.Background.disabled"),
-                    loading: .init("PrimaryButtonBordered.Background.disabled")
-                ),
-                border: .init(
-                    enabled: defaultModel.colors.background.enabled,
-                    pressed: defaultModel.colors.background.disabled,   // It's better this way
-                    disabled: defaultModel.colors.background.disabled,
-                    loading: defaultModel.colors.background.loading
-                )
-            )
-        )
+        var model: VPrimaryButtonModel = .init()
+        
+        model.colors.text.enabled = defaultModel.colors.background.enabled
+        model.colors.text.pressed = defaultModel.colors.background.pressed
+        model.colors.text.disabled = defaultModel.colors.background.disabled
+        model.colors.text.loading = defaultModel.colors.background.loading
+        
+        model.colors.background.enabled = .init("PrimaryButtonBordered.Background.enabled")
+        model.colors.background.pressed = .init("PrimaryButtonBordered.Background.pressed")
+        model.colors.background.disabled = .init("PrimaryButtonBordered.Background.disabled")
+        model.colors.background.loading = .init("PrimaryButtonBordered.Background.disabled")
+        
+        model.colors.border.enabled = defaultModel.colors.background.enabled
+        model.colors.border.pressed = defaultModel.colors.background.disabled   // It's better this way
+        model.colors.border.disabled = defaultModel.colors.background.disabled
+        model.colors.border.loading = defaultModel.colors.background.loading
+        
+        return model
     }()
 }
 
@@ -63,7 +59,7 @@ extension VPrimaryButtonDemoView {
                 VPrimaryButton(state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
-                        Text(buttonTitle)
+                        Text(buttonTitle).foregroundColor(ColorBook.primaryInverted)
                     })
                 })
             })

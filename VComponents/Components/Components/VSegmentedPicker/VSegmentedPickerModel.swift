@@ -44,9 +44,14 @@ extension VSegmentedPickerModel {
         public static let toggleColors: VToggleModel.Colors = .init()
         public static let sliderColors: VSliderModel.Colors = .init()
         
-        public var background: StateColors = .init(
-            enabled: toggleColors.fill.enabledOff,
-            disabled: toggleColors.fill.disabledOff
+        public var foreground: StateOpacityColors = .init(
+            pressedOpacity: 0.5,
+            disabledOpacity: 0.5
+        )
+        
+        public var text: StateColors = .init(   // Only used in init with string
+            enabled: ColorBook.primary,
+            disabled: ColorBook.primary
         )
         
         public var indicator: StateColors = .init(
@@ -58,13 +63,10 @@ extension VSegmentedPickerModel {
             disabled: sliderColors.thumb.shadow.disabled
         )
         
-        public var text: StateColors = .init(   // Only used in init with string
-            enabled: ColorBook.primary,
-            disabled: ColorBook.primary
+        public var background: StateColors = .init(
+            enabled: toggleColors.fill.enabledOff,
+            disabled: toggleColors.fill.disabledOff
         )
-        
-        public var pressedOpacity: Double = 0.5
-        public var disabledOpacity: Double = 0.5
         
         public init() {}
     }
@@ -80,6 +82,8 @@ extension VSegmentedPickerModel.Colors {
             self.disabled = disabled
         }
     }
+    
+    public typealias StateOpacityColors = VPrimaryButtonModel.Colors.StateOpacityColors
 }
 
 // MARK:- Behavior
@@ -93,8 +97,16 @@ extension VSegmentedPickerModel {
 
 // MARK:- Mapping
 extension VSegmentedPickerModel.Colors {
-    func backgroundColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: background)
+    func foregroundOpacity(state: VSegmentedPickerRowState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return foreground.pressedOpacity
+        case .disabled: return foreground.disabledOpacity
+        }
+    }
+    
+    func textColor(for state: VSegmentedPickerState) -> Color {
+        color(for: state, from: text)
     }
     
     func indicatorColor(for state: VSegmentedPickerState) -> Color {
@@ -105,16 +117,8 @@ extension VSegmentedPickerModel.Colors {
         color(for: state, from: indicatorShadow)
     }
     
-    func textColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: text)
-    }
-    
-    func foregroundOpacity(state: VSegmentedPickerRowState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
+    func backgroundColor(for state: VSegmentedPickerState) -> Color {
+        color(for: state, from: background)
     }
     
     private func color(for state: VSegmentedPickerState, from colorSet: StateColors) -> Color {
