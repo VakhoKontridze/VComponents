@@ -92,7 +92,7 @@ extension VToggleModel {
     }
 }
 
-// MARK:- Mapping
+// MARK:- ViewModel
 extension VToggleModel.Colors {
     func fillColor(state: VToggleInternalState) -> Color {
         color(state: state, from: fill)

@@ -22,6 +22,7 @@ struct VSegmentedPickerDemoView: View {
     @State private var segmentedPickerSelection7: TitleOptions = .red
     @State private var segmentedPickerSelection8: TitleOptions = .red
     @State private var segmentedPickerSelection9: TitleOptions = .red
+    @State private var segmentedPickerSelection10: TitleOptions = .red
     @State private var segmentedPickerState: VSegmentedPickerState = .enabled
     
     private enum ContentOptions: Int, CaseIterable, VPickerEnumerableOption {
@@ -112,7 +113,7 @@ extension VSegmentedPickerDemoView {
                 )
             })
             
-            DemoRowView(type: .titled("Titled"), content: {
+            DemoRowView(type: .titled("Picker with Title"), content: {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection4,
                     state: segmentedPickerState,
@@ -120,9 +121,18 @@ extension VSegmentedPickerDemoView {
                 )
             })
             
+            DemoRowView(type: .titled("Picker with Title and Subtitle"), content: {
+                VSegmentedPicker(
+                    selection: $segmentedPickerSelection4,
+                    state: segmentedPickerState,
+                    title: "Lorem ipsum dolor sit amet",
+                    subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus."
+                )
+            })
+            
             DemoRowView(type: .titled("Disabled Row"), content: {
                 VSegmentedPicker(
-                    selection: $segmentedPickerSelection5,
+                    selection: $segmentedPickerSelection6,
                     state: segmentedPickerState,
                     disabledIndexes: [1]
                 )
@@ -131,7 +141,7 @@ extension VSegmentedPickerDemoView {
             DemoRowView(type: .titled("No Animation"), content: {
                 VSegmentedPicker(
                     model: noAnimationSegmentedModel,
-                    selection: $segmentedPickerSelection6,
+                    selection: $segmentedPickerSelection7,
                     state: segmentedPickerState
                 )
             })
@@ -139,7 +149,7 @@ extension VSegmentedPickerDemoView {
             DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
                 VSegmentedPicker(
                     model: noLoweredOpacityWhenPressedModel,
-                    selection: $segmentedPickerSelection7,
+                    selection: $segmentedPickerSelection8,
                     state: segmentedPickerState
                 )
             })
@@ -147,7 +157,7 @@ extension VSegmentedPickerDemoView {
             DemoRowView(type: .titled("No Smaller Indicator when Pressed"), content: {
                 VSegmentedPicker(
                     model: noSmallerIndcatorWhenPressedModel,
-                    selection: $segmentedPickerSelection8,
+                    selection: $segmentedPickerSelection9,
                     state: segmentedPickerState
                 )
             })
@@ -155,7 +165,7 @@ extension VSegmentedPickerDemoView {
             DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
                 VSegmentedPicker(
                     model: noLoweredOpacityWhenDisabledModel,
-                    selection: $segmentedPickerSelection9,
+                    selection: $segmentedPickerSelection10,
                     state: segmentedPickerState,
                     disabledIndexes: [1]
                 )

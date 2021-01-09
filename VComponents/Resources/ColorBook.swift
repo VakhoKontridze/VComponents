@@ -93,6 +93,10 @@ public extension Color {
  Slider.Thumb.Shadow.enabled
  *96.96.96 @ 50
  
+ TabNavigationView.Item
+ 190.190.190
+ *100.100.100
+ 
  Toggle.Fill.disabled
  244.244.244
  *30.30.30
@@ -125,7 +129,7 @@ public extension Color {
  *20.20.20
  
  Secondary
- 200.200.200
- *100.100.100
+ 120.120.120
+ 140.140.140
  
 */

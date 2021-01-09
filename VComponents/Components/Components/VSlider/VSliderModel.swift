@@ -97,7 +97,7 @@ extension VSliderModel.Colors {
     }
 }
 
-// MARK:- Mapping
+// MARK:- ViewModel
 extension VSliderModel.Colors {
     func trackColor(state: VSliderState) -> Color {
         color(for: state, from: slider.track)

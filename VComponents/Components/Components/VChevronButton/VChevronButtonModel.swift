@@ -63,7 +63,7 @@ extension VChevronButtonModel.Colors {
     }
 }
 
-// MARK:- Mapping
+// MARK:- ViewModel
 extension VChevronButtonModel.Colors {
     func foregroundColor(state: VChevronButtonInternalState) -> Color {
         color(for: state, from: foreground)

@@ -52,7 +52,7 @@ extension VPlainButtonModel.Colors {
     public typealias StateOpacityColors = VSecondaryButtonModel.Colors.StateOpacityColors
 }
 
-// MARK:- Mapping
+// MARK:- ViewModel
 extension VPlainButtonModel.Colors {
     func foregroundOpacity(state: VPlainButtonInternalState) -> Double {
         switch state {

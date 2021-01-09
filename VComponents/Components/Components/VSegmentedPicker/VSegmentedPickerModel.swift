@@ -76,6 +76,11 @@ extension VSegmentedPickerModel {
             disabled: .init(componentAsset: "SegmentedPicker.Title")
         )
         
+        public var subtitle: StateColors = .init(
+            enabled: ColorBook.secondary,
+            disabled: ColorBook.secondary
+        )
+        
         public init() {}
     }
 }
@@ -111,7 +116,7 @@ extension VSegmentedPickerModel {
     }
 }
 
-// MARK:- Mapping
+// MARK:- ViewModel
 extension VSegmentedPickerModel.Colors {
     func foregroundOpacity(state: VSegmentedPickerState) -> Double {
         switch state {
@@ -146,6 +151,10 @@ extension VSegmentedPickerModel.Colors {
     
     func titleColor(for state: VSegmentedPickerState) -> Color {
         color(for: state, from: title)
+    }
+    
+    func subtitleColor(for state: VSegmentedPickerState) -> Color {
+        color(for: state, from: subtitle)
     }
     
     private func color(for state: VSegmentedPickerState, from colorSet: StateColors) -> Color {

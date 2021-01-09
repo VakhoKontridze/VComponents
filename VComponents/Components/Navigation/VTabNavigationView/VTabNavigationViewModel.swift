@@ -18,7 +18,7 @@ public struct VTabNavigationViewModel {
 extension VTabNavigationViewModel {
     public struct Colors {
         public var background: Color = ColorBook.canvas
-        public var item: Color = ColorBook.secondary
+        public var item: Color = .init(componentAsset: "TabNavigationView.Item")
         public var itemSelected: Color = ColorBook.accent
         
         public init() {}

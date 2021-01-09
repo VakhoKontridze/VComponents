@@ -22,6 +22,8 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
     ) }
     
     private let title: String?
+    private let subtitle: String?
+    
     private let data: [RowContent]
     private let disabledIndexes: Set<Int>
     
@@ -33,6 +35,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
         title: String? = nil,
+        subtitle: String? = nil,
         views: [RowContent],
         disabledIndexes: Set<Int> = .init()
     ) {
@@ -40,6 +43,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         self._selectedIndex = selectedIndex
         self.state = state
         self.title = title
+        self.subtitle = subtitle
         self.data = views
         self.disabledIndexes = disabledIndexes
     }
@@ -49,6 +53,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
         title: String? = nil,
+        subtitle: String? = nil,
         titles: [S],
         disabledIndexes: Set<Int> = .init()
     )
@@ -61,6 +66,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
             selectedIndex: selectedIndex,
             state: state,
             title: title,
+            subtitle: subtitle,
             views: titles.map { VGenericTitleContentView(title: $0, color: model.colors.textColor(for: state), font: model.fonts.rows) },
             disabledIndexes: disabledIndexes
         )
@@ -71,6 +77,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         selection: Binding<Option>,
         state: VSegmentedPickerState = .enabled,
         title: String? = nil,
+        subtitle: String? = nil,
         disabledIndexes: Set<Int> = .init()
     )
         where
@@ -85,6 +92,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
             ),
             state: state,
             title: title,
+            subtitle: subtitle,
             views: Option.allCases.map { $0.pickerSymbol },
             disabledIndexes: disabledIndexes
         )
@@ -95,6 +103,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         selection: Binding<Option>,
         state: VSegmentedPickerState = .enabled,
         title: String? = nil,
+        subtitle: String? = nil,
         disabledIndexes: Set<Int> = .init()
     )
         where
@@ -110,6 +119,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
             ),
             state: state,
             title: title,
+            subtitle: subtitle,
             views: Option.allCases.map { VGenericTitleContentView(title: $0.pickerTitle, color: model.colors.textColor(for: state), font: model.fonts.rows) },
             disabledIndexes: disabledIndexes
         )
@@ -122,6 +132,7 @@ public extension VSegmentedPicker {
         VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
             titleView
             pickerView
+            subtitleView
         })
     }
     
@@ -143,6 +154,20 @@ public extension VSegmentedPicker {
                 color: model.colors.titleColor(for: state),
                 font: model.fonts.title,
                 alignment: .leading
+            )
+                .padding(.leading, model.layout.titlePaddingLeft)
+                .opacity(model.colors.foregroundOpacity(state: state))
+        }
+    }
+    
+    @ViewBuilder private var subtitleView: some View {
+        if let subtitle = subtitle, !subtitle.isEmpty {
+            VGenericTitleContentView(
+                title: subtitle,
+                color: model.colors.subtitleColor(for: state),
+                font: model.fonts.title,
+                alignment: .leading,
+                lineLimit: nil
             )
                 .padding(.leading, model.layout.titlePaddingLeft)
                 .opacity(model.colors.foregroundOpacity(state: state))

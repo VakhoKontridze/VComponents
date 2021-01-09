@@ -102,7 +102,7 @@ extension VPrimaryButtonModel.Colors {
     }
 }
 
-// MARK:- Mapping
+// MARK:- ViewModel
 extension VPrimaryButtonModel.Colors {
     func foregroundOpacity(state: VPrimaryButtonInternalState) -> Double {
         switch state {
