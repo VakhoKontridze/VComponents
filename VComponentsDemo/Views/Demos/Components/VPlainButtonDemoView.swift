@@ -45,7 +45,10 @@ extension VPlainButtonDemoView {
                 VPlainButton(state: buttonState, action: action, content: {
                     VStack(spacing: 5, content: {
                         buttonContent()
-                        Text(buttonTitle).foregroundColor(ColorBook.accent)
+
+                        Text(buttonTitle)
+                            .font(VPlainButtonModel().font)
+                            .foregroundColor(ColorBook.accent)
                     })
                 })
             })
@@ -59,9 +62,9 @@ extension VPlainButtonDemoView {
     private var controller: some View {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
-                isOn: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
+                state: .init(
+                    get: { buttonState == .disabled ? .on : .off },
+                    set: { buttonState = $0.isOn ? .disabled : .enabled }
                 ),
                 title: "Disabled"
             )

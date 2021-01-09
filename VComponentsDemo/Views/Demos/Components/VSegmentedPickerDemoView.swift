@@ -37,7 +37,7 @@ struct VSegmentedPickerDemoView: View {
                 }
             }()
             
-            return VDemoIconContentView(dimension: 15, color: color)
+            return VDemoIconContentView(color: color)
         }
     }
     
@@ -157,9 +157,9 @@ extension VSegmentedPickerDemoView {
     private var controller: some View {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
-                isOn: .init(
-                    get: { segmentedPickerState == .disabled },
-                    set: { segmentedPickerState = $0 ? .disabled : .enabled }
+                state: .init(
+                    get: { segmentedPickerState == .disabled ? .on : .off },
+                    set: { segmentedPickerState = $0.isOn ? .disabled : .enabled }
                 ),
                 title: "Disabled"
             )
@@ -178,7 +178,7 @@ struct VDemoIconContentView: View {
     private let dimension: CGFloat
     private let color: Color
     
-    init(dimension: CGFloat = 20, color: Color = ColorBook.accent) {
+    init(dimension: CGFloat = 15, color: Color = ColorBook.accent) {
         self.dimension = dimension
         self.color = color
     }

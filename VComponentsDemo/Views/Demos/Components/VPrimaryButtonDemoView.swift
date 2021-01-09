@@ -15,7 +15,7 @@ struct VPrimaryButtonDemoView: View {
     
     private let buttonTitle: String = "Press"
     
-    private func buttonContent() -> some View { VDemoIconContentView(color: ColorBook.primaryInverted) }
+    private func buttonContent() -> some View { VDemoIconContentView(dimension: 20, color: ColorBook.primaryInverted) }
     
     @State private var buttonState: VPrimaryButtonState = .enabled
     
@@ -59,7 +59,10 @@ extension VPrimaryButtonDemoView {
                 VPrimaryButton(state: buttonState, action: action, content: {
                     HStack(spacing: 5, content: {
                         buttonContent()
-                        Text(buttonTitle).foregroundColor(ColorBook.primaryInverted)
+                        
+                        Text(buttonTitle)
+                            .font(VPrimaryButtonModel().font)
+                            .foregroundColor(ColorBook.primaryInverted)
                     })
                 })
             })
@@ -76,9 +79,9 @@ extension VPrimaryButtonDemoView {
                 Spacer()
                 
                 ToggleSettingView(
-                    isOn: .init(
-                        get: { buttonState == .disabled },
-                        set: { buttonState = $0 ? .disabled : .enabled }
+                    state: .init(
+                        get: { buttonState == .disabled ? .on : .off },
+                        set: { buttonState = $0.isOn ? .disabled : .enabled }
                     ),
                     title: "Disabled"
                 )
@@ -86,9 +89,9 @@ extension VPrimaryButtonDemoView {
                 Spacer()
                 
                 ToggleSettingView(
-                    isOn: .init(
-                        get: { buttonState == .loading },
-                        set: { buttonState = $0 ? .loading : .enabled }
+                    state: .init(
+                        get: { buttonState == .loading ? .on : .off },
+                        set: { buttonState = $0.isOn ? .loading : .enabled }
                     ),
                     title: "Loading"
                 )

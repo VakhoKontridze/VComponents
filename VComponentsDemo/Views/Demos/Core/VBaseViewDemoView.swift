@@ -14,8 +14,8 @@ struct VBaseViewDemoView: View {
     static let navigationBarTitle: String = "Base View"
     
     @State private var navigationBarTitlePosition: NavigationBarTitlePosition = .leading
-    @State private var navigationBarHasLeadingItem: Bool = false
-    @State private var navigationBarHasTrailingItem: Bool = false
+    @State private var navigationBarLeadingItem: VToggleState = .off
+    @State private var navigationBarTrailingItemState: VToggleState = .off
     
     private enum NavigationBarTitlePosition: Int, CaseIterable, VPickerTitledEnumerableOption {
         case leading
@@ -65,9 +65,9 @@ extension VBaseViewDemoView {
             VStack(alignment: .leading, spacing: 20, content: {
                 VSegmentedPicker(selection: $navigationBarTitlePosition)
                 
-                VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
+                VToggle(state: $navigationBarLeadingItem, title: "Leading items")
                 
-                VToggle(isOn: $navigationBarHasTrailingItem, title: "Trailing items")
+                VToggle(state: $navigationBarTrailingItemState, title: "Trailing items")
             })
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(20)
@@ -77,7 +77,7 @@ extension VBaseViewDemoView {
     }
     
     @ViewBuilder var leadingItem: some View {
-        if navigationBarHasLeadingItem {
+        if navigationBarLeadingItem.isOn {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item")
             })
@@ -85,7 +85,7 @@ extension VBaseViewDemoView {
     }
     
     @ViewBuilder var trailingItem: some View {
-        if navigationBarHasTrailingItem {
+        if navigationBarTrailingItemState.isOn {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 1")
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 2")

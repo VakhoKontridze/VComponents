@@ -9,12 +9,30 @@ import Foundation
 
 // MARK:- V Toggle State
 public enum VToggleState: Int, CaseIterable {
-    case enabled
+    case off
+    case on
     case disabled
+    
+    public var isOn: Bool {
+        switch self {
+        case .off: return false
+        case .on: return true
+        case .disabled: return false
+        }
+    }
+    
+    mutating func nextState() {
+        switch self {
+        case .off: self = .on
+        case .on: self = .off
+        case .disabled: break
+        }
+    }
     
     var isDisabled: Bool {
         switch self {
-        case .enabled: return false
+        case .off: return false
+        case .on: return false
         case .disabled: return true
         }
     }
@@ -28,18 +46,13 @@ enum VToggleInternalState {
     case pressedOn
     case disabled
     
-    init(state: VToggleState, isOn: Bool, isPressed: Bool) {
-        if isPressed && !state.isDisabled {
-            switch isOn {
-            case false: self = .pressedOff
-            case true: self = .pressedOn
-            }
-        } else {
-            switch (state, isOn) {
-            case (.enabled, false): self = .off
-            case (.enabled, true): self = .on
-            case (.disabled, _): self = .disabled
-            }
+    init(state: VToggleState, isPressed: Bool) {
+        switch (state, isPressed) {
+        case (.off, false): self = .off
+        case (.off, true): self = .pressedOff
+        case (.on, false): self = .on
+        case (.on, true): self = .pressedOn
+        case (.disabled, _): self = .disabled
         }
     }
 }

@@ -11,12 +11,12 @@ import VComponents
 // MARK:- Toggle Setting View
 struct ToggleSettingView: View {
     // MARK: Properties
-    @Binding var isOn: Bool
+    @Binding var state: VToggleState
     private let title: String
     
     // MARK: Initializers
-    init(isOn: Binding<Bool>, title: String) {
-        self._isOn = isOn
+    init(state: Binding<VToggleState>, title: String) {
+        self._state = state
         self.title = title
     }
 }
@@ -25,7 +25,7 @@ struct ToggleSettingView: View {
 extension ToggleSettingView {
     var body: some View {
         VStack(content: {
-            VToggle(isOn: $isOn)
+            VToggle(state: $state)
             
             Text(title)
                 .font(.footnote)
@@ -36,6 +36,6 @@ extension ToggleSettingView {
 // MARK:- Preview
 struct ToggleSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        ToggleSettingView(isOn: .constant(true), title: "Title")
+        ToggleSettingView(state: .constant(.on), title: "Title")
     }
 }

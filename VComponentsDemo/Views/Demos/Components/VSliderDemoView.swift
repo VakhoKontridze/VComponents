@@ -94,9 +94,9 @@ extension VSliderDemoView {
     private var controller: some View {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
-                isOn: .init(
-                    get: { sliderState == .disabled },
-                    set: { sliderState = $0 ? .disabled : .enabled }
+                state: .init(
+                    get: { sliderState == .disabled ? .on : .off },
+                    set: { sliderState = $0.isOn ? .disabled : .enabled }
                 ),
                 title: "Disabled"
             )

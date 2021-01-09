@@ -54,9 +54,9 @@ extension VChevronButtonDemoView {
     private var controller: some View {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
-                isOn: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
+                state: .init(
+                    get: { buttonState == .disabled ? .on : .off },
+                    set: { buttonState = $0.isOn ? .disabled : .enabled }
                 ),
                 title: "Disabled"
             )

@@ -12,10 +12,9 @@ public struct VToggle<Content>: View where Content: View {
     // MARK: Properties
     private let model: VToggleModel
     
-    @Binding private var isOn: Bool
+    @Binding private var state: VToggleState
     @State private var isPressed: Bool = false
-    private let state: VToggleState
-    private var internalState: VToggleInternalState { .init(state: state, isOn: _isOn.wrappedValue, isPressed: isPressed) }
+    private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
     private var contentIsDisabled: Bool { state.isDisabled || !model.behavior.contentIsClickable }
     
     private let content: (() -> Content)?
@@ -23,20 +22,17 @@ public struct VToggle<Content>: View where Content: View {
     // MARK: Initializers
     public init(
         model: VToggleModel = .init(),
-        isOn: Binding<Bool>,
-        state: VToggleState = .enabled,
+        state: Binding<VToggleState>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self._isOn = isOn
-        self.state = state
+        self._state = state
         self.content = content
     }
 
     public init<S>(
         model: VToggleModel = .init(),
-        isOn: Binding<Bool>,
-        state: VToggleState = .enabled,
+        state: Binding<VToggleState>,
         title: S
     )
         where
@@ -45,11 +41,10 @@ public struct VToggle<Content>: View where Content: View {
     {
         self.init(
             model: model,
-            isOn: isOn,
             state: state,
             content: {
                 Text(title)
-                    .foregroundColor(model.colors.textColor(state: .init(state: state, isOn: isOn.wrappedValue, isPressed: false)))
+                    .foregroundColor(model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)))
                     .font(model.font)
             }
         )
@@ -57,14 +52,12 @@ public struct VToggle<Content>: View where Content: View {
 
     public init(
         model: VToggleModel = .init(),
-        isOn: Binding<Bool>,
-        state: VToggleState = .enabled
+        state: Binding<VToggleState>
     )
         where Content == Never
     {
         self.model = model
-        self._isOn = isOn
-        self.state = state
+        self._state = state
         self.content = nil
     }
 }
@@ -137,16 +130,16 @@ private extension VToggle {
 // MARK:- Action
 private extension VToggle {
     func action() {
-        withAnimation(model.behavior.animation, { isOn.toggle() })
+        withAnimation(model.behavior.animation, { state.nextState() })
     }
 }
 
 // MARK:- Preview
 struct VToggle_Previews: PreviewProvider {
-    @State private static var isOn: Bool = true
+    @State private static var state: VToggleState = .on
 
     static var previews: some View {
-        VToggle(isOn: $isOn, title: "Press")
+        VToggle(state: $state, title: "Press")
             .padding()
     }
 }

@@ -39,14 +39,11 @@ enum VPrimaryButtonInternalState {
     }
     
     init(state: VPrimaryButtonState, isPressed: Bool) {
-        if isPressed && !state.isDisabled {
-            self = .pressed
-        } else {
-            switch state {
-            case .enabled: self = .enabled
-            case .disabled: self = .disabled
-            case .loading: self = .loading
-            }
+        switch (state, isPressed) {
+        case (.enabled, false): self = .enabled
+        case (.enabled, true): self = .pressed
+        case (.disabled, _): self = .disabled
+        case (.loading, _): self = .loading
         }
     }
 }

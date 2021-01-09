@@ -27,13 +27,10 @@ enum VSecondaryButtonInternalState {
     case disabled
     
     init(state: VSecondaryButtonState, isPressed: Bool) {
-        if isPressed && !state.isDisabled {
-            self = .pressed
-        } else {
-            switch state {
-            case .enabled: self = .enabled
-            case .disabled: self = .disabled
-            }
+        switch (state, isPressed) {
+        case (.enabled, false): self = .enabled
+        case (.enabled, true): self = .pressed
+        case (.disabled, _): self = .disabled
         }
     }
 }

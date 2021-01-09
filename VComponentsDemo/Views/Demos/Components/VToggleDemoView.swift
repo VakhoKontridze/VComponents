@@ -35,13 +35,12 @@ struct VToggleDemoView: View {
         return model
     }()
     
-    @State private var toggle1IsOn: Bool = true
-    @State private var toggle2IsOn: Bool = true
-    @State private var toggle3IsOn: Bool = true
-    @State private var toggle4IsOn: Bool = true
-    @State private var toggle5IsOn: Bool = true
-    @State private var toggle6IsOn: Bool = true
-    @State private var toggleState: VToggleState = .enabled
+    @State private var toggle1State: VToggleState = .on
+    @State private var toggle2State: VToggleState = .on
+    @State private var toggle3State: VToggleState = .on
+    @State private var toggle4State: VToggleState = .on
+    @State private var toggle5State: VToggleState = .on
+    @State private var toggle6State: VToggleState = .on
 }
 
 // MARK:- Body
@@ -49,27 +48,27 @@ extension VToggleDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
             DemoRowView(type: .titled("No Content"), content: {
-                VToggle(isOn: $toggle1IsOn, state: toggleState)
+                VToggle(state: $toggle1State)
             })
             
             DemoRowView(type: .titled("Text"), content: {
-                VToggle(isOn: $toggle2IsOn, state: toggleState, title: toggleTitle)
+                VToggle(state: $toggle2State, title: toggleTitle)
             })
             
             DemoRowView(type: .titled("Icon"), content: {
-                VToggle(isOn: $toggle3IsOn, state: toggleState, content: toggleContent)
+                VToggle(state: $toggle3State, content: toggleContent)
             })
             
             DemoRowView(type: .titled("Non-clickable Content"), content: {
-                VToggle(model: nonClickableContentModel, isOn: $toggle4IsOn, state: toggleState, title: toggleTitle)
+                VToggle(model: nonClickableContentModel, state: $toggle4State, title: toggleTitle)
             })
             
             DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                VToggle(model: noLoweredOpacityWhenPressedModel, isOn: $toggle5IsOn, state: toggleState, title: toggleTitle)
+                VToggle(model: noLoweredOpacityWhenPressedModel, state: $toggle5State, title: toggleTitle)
             })
             
             DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                VToggle(model: noLoweredOpacityWhenDisabledModel, isOn: $toggle6IsOn, state: toggleState, title: toggleTitle)
+                VToggle(model: noLoweredOpacityWhenDisabledModel, state: $toggle6State, title: toggleTitle)
             })
         })
     }
@@ -77,9 +76,22 @@ extension VToggleDemoView {
     private var controller: some View {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
-                isOn: .init(
-                    get: { toggleState == .disabled },
-                    set: { toggleState = $0 ? .disabled : .enabled }
+                state: .init(
+                    get: {
+                        let combinedState: VToggleState? =
+                            ![toggle1State, toggle2State, toggle3State, toggle4State, toggle5State, toggle6State].contains(.disabled) ?
+                            nil :
+                            .disabled
+                        return combinedState == .disabled ? .on : .off
+                    },
+                    set: {
+                        toggle1State = $0.isOn ? .disabled : .off
+                        toggle2State = $0.isOn ? .disabled : .off
+                        toggle3State = $0.isOn ? .disabled : .off
+                        toggle4State = $0.isOn ? .disabled : .off
+                        toggle5State = $0.isOn ? .disabled : .off
+                        toggle6State = $0.isOn ? .disabled : .off
+                    }
                 ),
                 title: "Disabled"
             )
