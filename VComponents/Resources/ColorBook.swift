@@ -80,6 +80,7 @@ public extension Color {
  
  SideBar.Blinding
  *100.100.100 @ 30
+ *20.20.20 @ 30
  
  Slider.Thumb.Border.disabled
  192.192.192

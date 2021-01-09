@@ -41,15 +41,11 @@ private extension VAlertPresenter {
     }
     
     static func addBlinding(in superView: UIView, model: VAlertModel) {
-        let blinding: UIView = {
-            let blinding: UIView = .init()
-            blinding.translatesAutoresizingMaskIntoConstraints = false
-            blinding.isUserInteractionEnabled = false
-            blinding.backgroundColor = .init(model.colors.blinding)
-            blinding.tag = blindingID
-            return blinding
-        }()
-        
+        let blinding: UIView = createHostingView(
+            with: model.colors.blinding.edgesIgnoringSafeArea(.all),
+            id: blindingID
+        )
+
         superView.addSubview(blinding)
         
         NSLayoutConstraint.activate([
@@ -68,14 +64,7 @@ private extension VAlertPresenter {
     ) -> UIView
         where AlertContent: View
     {
-        let alertUIView: UIView = {
-            let hostingController: UIHostingController = .init(rootView: content)
-            let alertUIView: UIView = hostingController.view
-            alertUIView.translatesAutoresizingMaskIntoConstraints = false
-            alertUIView.backgroundColor = .clear
-            alertUIView.tag = alertID
-            return alertUIView
-        }()
+        let alertUIView: UIView = createHostingView(with: content, id: alertID)
         
         superView.addSubview(alertUIView)
         
@@ -140,5 +129,19 @@ private extension VAlertPresenter {
         }
         
         return superView
+    }
+    
+    static private func createHostingView<Content>(
+        with content: Content,
+        id: Int
+    ) -> UIView
+        where Content: View
+    {
+        let hostingController: UIHostingController = .init(rootView: content)
+        let alertUIView: UIView = hostingController.view
+        alertUIView.translatesAutoresizingMaskIntoConstraints = false
+        alertUIView.backgroundColor = .clear
+        alertUIView.tag = id
+        return alertUIView
     }
 }
