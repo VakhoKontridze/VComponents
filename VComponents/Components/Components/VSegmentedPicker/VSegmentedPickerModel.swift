@@ -11,7 +11,7 @@ import SwiftUI
 public struct VSegmentedPickerModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 13, weight: .medium, design: .default)    // Only used in init with string
+    public var fonts: Fonts = .init()
     public var behavior: Behavior = .init()
     
     public init() {}
@@ -31,6 +31,9 @@ extension VSegmentedPickerModel {
         
         public var rowContentPadding: CGFloat = 2
         var actualRowContentPadding: CGFloat { indicatorPadding + rowContentPadding }
+        
+        public var titleSpacing: CGFloat = 3
+        public var titlePaddingLeft: CGFloat = 10
         
         public var dividerHeight: CGFloat = 17
         
@@ -68,6 +71,11 @@ extension VSegmentedPickerModel {
             disabled: toggleColors.fill.disabled
         )
         
+        public var title: StateColors = .init(
+            enabled: .init(componentAsset: "SegmentedPicker.Title"),
+            disabled: .init(componentAsset: "SegmentedPicker.Title")
+        )
+        
         public init() {}
     }
 }
@@ -86,6 +94,14 @@ extension VSegmentedPickerModel.Colors {
     public typealias StateOpacityColors = VPrimaryButtonModel.Colors.StateOpacityColors
 }
 
+// MARK:- Fonts
+extension VSegmentedPickerModel {
+    public struct Fonts {
+        public var title: Font = .system(size: 13, weight: .regular, design: .default)
+        public var rows: Font = .system(size: 13, weight: .medium, design: .default)    // Only used in init with string
+    }
+}
+
 // MARK:- Behavior
 extension VSegmentedPickerModel {
     public struct Behavior {
@@ -97,6 +113,13 @@ extension VSegmentedPickerModel {
 
 // MARK:- Mapping
 extension VSegmentedPickerModel.Colors {
+    func foregroundOpacity(state: VSegmentedPickerState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .disabled: return foreground.disabledOpacity
+        }
+    }
+    
     func foregroundOpacity(state: VSegmentedPickerRowState) -> Double {
         switch state {
         case .enabled: return 1
@@ -119,6 +142,10 @@ extension VSegmentedPickerModel.Colors {
     
     func backgroundColor(for state: VSegmentedPickerState) -> Color {
         color(for: state, from: background)
+    }
+    
+    func titleColor(for state: VSegmentedPickerState) -> Color {
+        color(for: state, from: title)
     }
     
     private func color(for state: VSegmentedPickerState, from colorSet: StateColors) -> Color {

@@ -10,6 +10,7 @@ import SwiftUI
 // MARK:- V Base View Model Center
 public struct VBaseViewModelCenter {
     public var layout: Layout = .init()
+    public var titleColor: Color = ColorBook.primary
     public var font: Font = .system(size: 17, weight: .semibold, design: .default)
     
     public init() {}

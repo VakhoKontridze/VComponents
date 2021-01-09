@@ -21,6 +21,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         isPressed: pressedIndex == index
     ) }
     
+    private let title: String?
     private let data: [RowContent]
     private let disabledIndexes: Set<Int>
     
@@ -31,12 +32,14 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
+        title: String? = nil,
         views: [RowContent],
         disabledIndexes: Set<Int> = .init()
     ) {
         self.model = model
         self._selectedIndex = selectedIndex
         self.state = state
+        self.title = title
         self.data = views
         self.disabledIndexes = disabledIndexes
     }
@@ -45,6 +48,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
+        title: String? = nil,
         titles: [S],
         disabledIndexes: Set<Int> = .init()
     )
@@ -56,7 +60,8 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
             model: model,
             selectedIndex: selectedIndex,
             state: state,
-            views: titles.map { VGenericTitleContentView(title: $0, color: model.colors.textColor(for: state), font: model.font) },
+            title: title,
+            views: titles.map { VGenericTitleContentView(title: $0, color: model.colors.textColor(for: state), font: model.fonts.rows) },
             disabledIndexes: disabledIndexes
         )
     }
@@ -65,6 +70,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Option>,
         state: VSegmentedPickerState = .enabled,
+        title: String? = nil,
         disabledIndexes: Set<Int> = .init()
     )
         where
@@ -78,6 +84,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
                 set: { selection.wrappedValue = Option(rawValue: $0)! }
             ),
             state: state,
+            title: title,
             views: Option.allCases.map { $0.pickerSymbol },
             disabledIndexes: disabledIndexes
         )
@@ -87,6 +94,7 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Option>,
         state: VSegmentedPickerState = .enabled,
+        title: String? = nil,
         disabledIndexes: Set<Int> = .init()
     )
         where
@@ -101,7 +109,8 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
                 set: { selection.wrappedValue = Option(rawValue: $0)! }
             ),
             state: state,
-            views: Option.allCases.map { VGenericTitleContentView(title: $0.pickerTitle, color: model.colors.textColor(for: state), font: model.font) },
+            title: title,
+            views: Option.allCases.map { VGenericTitleContentView(title: $0.pickerTitle, color: model.colors.textColor(for: state), font: model.fonts.rows) },
             disabledIndexes: disabledIndexes
         )
     }
@@ -110,6 +119,13 @@ public struct VSegmentedPicker<RowContent>: View where RowContent: View {
 // MARK:- Body
 public extension VSegmentedPicker {
     var body: some View {
+        VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
+            titleView
+            pickerView
+        })
+    }
+    
+    private var pickerView: some View {
         ZStack(alignment: .leading, content: {
             background
             indicator
@@ -118,6 +134,19 @@ public extension VSegmentedPicker {
         })
             .frame(height: model.layout.height)
             .cornerRadius(model.layout.cornerRadius)
+    }
+    
+    @ViewBuilder private var titleView: some View {
+        if let title = title, !title.isEmpty {
+            VGenericTitleContentView(
+                title: title,
+                color: model.colors.titleColor(for: state),
+                font: model.fonts.title,
+                alignment: .leading
+            )
+                .padding(.leading, model.layout.titlePaddingLeft)
+                .opacity(model.colors.foregroundOpacity(state: state))
+        }
     }
     
     private var background: some View {
@@ -152,7 +181,7 @@ public extension VSegmentedPicker {
                             .padding(model.layout.actualRowContentPadding)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                             
-                            .font(model.font)
+                            .font(model.fonts.rows)
                             .opacity(foregroundOpacity(for: i))
                             
                             .readSize(onChange: { rowWidth = $0.width })

@@ -52,7 +52,7 @@ public extension Color {
  *40.40.40
  
  ChevronButton.Background.pressed
- 210.210.210
+ *210.210.210
  *30.30.30
  
  PrimaryButton.Background.enabled
@@ -68,11 +68,15 @@ public extension Color {
  
  SegmentedPicker.Indicator.disabled
  *254.254.254
- 60.60.60
+ *60.60.60
  
  SegmentedPicker.Indicator.enabled
  *254.254.254
  90.90.90
+ 
+ SegmentedPicker.Title
+ *60.60.60
+ *210.210.210
  
  SideBar.Blinding
  *100.100.100 @ 30

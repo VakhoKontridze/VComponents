@@ -36,16 +36,19 @@ public struct VToggle<Content>: View where Content: View {
         title: S
     )
         where
-            Content == Text,
+            Content == VGenericTitleContentView<S>,
             S: StringProtocol
     {
         self.init(
             model: model,
             state: state,
             content: {
-                Text(title)
-                    .foregroundColor(model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)))
-                    .font(model.font)
+                VGenericTitleContentView(
+                    title: title,
+                    color: model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)),
+                    font: model.font,
+                    lineLimit: nil
+                )
             }
         )
     }

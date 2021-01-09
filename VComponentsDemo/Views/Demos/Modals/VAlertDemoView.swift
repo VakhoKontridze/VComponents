@@ -54,12 +54,7 @@ extension VAlertDemoView {
                 TextField("Title", text: $title)
                 TextField("Description", text: $description)
                 
-                VStack(spacing: 3, content: {
-                    Text("Dialog Type")
-                        .font(.footnote)
-                    
-                    VSegmentedPicker(selection: $dialogType)
-                })
+                VSegmentedPicker(selection: $dialogType, title: "Dialog Type")
                 
                 VSecondaryButton(action: { alertIsShown = true }, title: "Demo Alert")
                 

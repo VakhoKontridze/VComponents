@@ -13,12 +13,22 @@ public struct VGenericTitleContentView<S>: View where S: StringProtocol {
     private let title: S
     private let color: Color
     private let font: Font
+    private let alignment: TextAlignment
+    private let lineLimit: Int?
     
     // MARK: Initializers
-    public init(title: S, color: Color, font: Font) {
+    public init(
+        title: S,
+        color: Color,
+        font: Font,
+        alignment: TextAlignment = .center,
+        lineLimit: Int? = 1
+    ) {
         self.title = title
         self.color = color
         self.font = font
+        self.alignment = alignment
+        self.lineLimit = lineLimit
     }
 }
 
@@ -26,8 +36,8 @@ public struct VGenericTitleContentView<S>: View where S: StringProtocol {
 public extension VGenericTitleContentView {
     var body: some View {
         Text(title)
-            .lineLimit(1)
-            .multilineTextAlignment(.center)
+            .lineLimit(lineLimit)
+            .multilineTextAlignment(alignment)
             .truncationMode(.tail)
             .foregroundColor(color)
             .font(font)
