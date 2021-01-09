@@ -16,6 +16,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 {
     // MARK: Properties
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
+    @Environment(\.vNavigationViewBackButtonHidden) private var vNavigationViewBackButtonHidden: Bool
     
     private let viewType: VBaseViewType
     
@@ -98,6 +99,7 @@ public extension VBaseView {
                     title: navigationBarTitle,
                     leadingItem: navigationBarLeadingItem,
                     trailingItem: navigationBarTrailingItem,
+                    showBackButton: !vNavigationViewBackButtonHidden,
                     onBack: back
                 )
             
@@ -108,6 +110,7 @@ public extension VBaseView {
                     title: navigationBarTitle,
                     leadingItem: navigationBarLeadingItem,
                     trailingItem: navigationBarTrailingItem,
+                    showBackButton: !vNavigationViewBackButtonHidden,
                     onBack: back
                 )
         }
@@ -116,6 +119,7 @@ public extension VBaseView {
     private var baseViewFrame: some View {
         content()
             .navigationBarBackButtonHidden(true)
+            .environment(\.vNavigationViewBackButtonHidden, true)
             .addNavigationBarSwipeGesture(completion: back)
     }
 }
@@ -135,13 +139,17 @@ struct VBaseView_Previews: PreviewProvider {
                 ZStack(content: {
                     Color.pink.edgesIgnoringSafeArea(.bottom)
                     
-                    NavigationLink("Go to Details", destination: {
-                        VBaseView(title: "Details", content: {
-                            Color.blue.edgesIgnoringSafeArea(.bottom)
-                        })
-                    }())
+                    VNavigationLink(destination: Destination(), label: { Text("Go to Details") })
                 })
             })
         })
+    }
+    
+    private struct Destination: View {
+        var body: some View {
+            VBaseView(title: "Details", content: {
+                Color.blue.edgesIgnoringSafeArea(.bottom)
+            })
+        }
     }
 }

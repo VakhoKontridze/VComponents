@@ -14,6 +14,7 @@ extension View {
         title: String,
         leadingItem: LeadingItem?,
         trailingItem: TrailingItem?,
+        showBackButton: Bool,
         onBack backAction: @escaping () -> Void
     ) -> some View
         where
@@ -25,6 +26,7 @@ extension View {
             title: title,
             leadingItem: leadingItem,
             trailingItem: trailingItem,
+            showBackButton: showBackButton,
             onBack: backAction
         ))
     }
@@ -42,18 +44,10 @@ struct VBaseViewNavigationBarCenter<TrailingItem, LeadingItem>: ViewModifier
     
     private let leadingItem: LeadingItem?
     private let trailingItem: TrailingItem?
-    
+
+    private let showBackButton: Bool
     private let backAction: () -> Void
-    
-    @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-    @State private var wasMainPresentation: Bool = false    // Envriornment var returns false after futher navigation
-    private var isDestination: Bool {
-        let state: Bool = presentationMode.wrappedValue.isPresented
-        let actualState: Bool = wasMainPresentation || state
-        DispatchQueue.main.async(execute: { if !wasMainPresentation { wasMainPresentation = state } })
-        return actualState
-    }
-    
+
     @State private var leadingWidth: CGFloat = .zero
     @State private var trailingWidth: CGFloat = .zero
     private var leadingTrailingWidth: CGFloat? {
@@ -67,12 +61,14 @@ struct VBaseViewNavigationBarCenter<TrailingItem, LeadingItem>: ViewModifier
         title: String,
         leadingItem: LeadingItem?,
         trailingItem: TrailingItem?,
+        showBackButton: Bool,
         onBack backAction: @escaping () -> Void
     ) {
         self.model = model
         self.title = title
         self.leadingItem = leadingItem
         self.trailingItem = trailingItem
+        self.showBackButton = showBackButton
         self.backAction = backAction
     }
 }
@@ -89,7 +85,7 @@ extension VBaseViewNavigationBarCenter {
             HStack(spacing: model.layout.spacing, content: {
                 if let leadingItem = leadingItem { leadingItem }
 
-                if isDestination { VChevronButton(direction: .left, action: backAction) }
+                if showBackButton { VChevronButton(direction: .left, action: backAction) }
             })
                 .frame(minWidth: leadingTrailingWidth, alignment: .leading)
                 .layoutPriority(1)

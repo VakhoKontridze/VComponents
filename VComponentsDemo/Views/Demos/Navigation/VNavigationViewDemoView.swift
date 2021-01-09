@@ -132,7 +132,7 @@ extension NavigationDemoView {
             
             switch action {
             case .navigation(let desitnation):
-                NavigationLink(destination: desitnation, label: {
+                VNavigationLink(destination: desitnation, label: {
                     VSecondaryButton(action: {}, title: "Continue")
                         .allowsHitTesting(false)
                 })

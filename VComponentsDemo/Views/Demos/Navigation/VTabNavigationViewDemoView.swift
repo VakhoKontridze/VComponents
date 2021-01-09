@@ -55,7 +55,7 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
                 ZStack(content: {
                     Color.red
                     
-                    NavigationLink(
+                    VNavigationLink(
                         destination: VBaseView(title: "Details", content: { Color.orange }),
                         label: { VSecondaryButton(action: {}, title: "Go to Details").allowsHitTesting(false) }
                     )

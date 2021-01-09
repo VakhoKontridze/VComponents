@@ -64,7 +64,7 @@ extension HomeRowView {
     var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
             switch rowType {
-            case .link(let destination): NavigationLink(destination: destination, label: { rowView })
+            case .link(let destination): VNavigationLink(destination: destination, label: { rowView })
             case .custom(let action): Button(action: action, label: { rowView })
             }
             

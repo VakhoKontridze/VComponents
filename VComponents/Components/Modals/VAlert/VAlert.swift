@@ -69,23 +69,21 @@ extension VAlert {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            Text(title)
-                .lineLimit(1)
-                .multilineTextAlignment(.center)
-                .truncationMode(.tail)
-                .foregroundColor(model.colors.title)
-                .font(model.fonts.title)
+            VGenericTitleContentView(
+                title: title,
+                color: model.colors.title,
+                font: model.fonts.title
+            )
         }
     }
     
     @ViewBuilder private var descriptionView: some View {
         if !description.isEmpty {
-            Text(description)
-                .lineLimit(10)
-                .multilineTextAlignment(.center)
-                .truncationMode(.tail)
-                .foregroundColor(model.colors.description)
-                .font(model.fonts.description)
+            VGenericTitleContentView(
+                title: description,
+                color: model.colors.description,
+                font: model.fonts.description
+            )
         }
     }
     
