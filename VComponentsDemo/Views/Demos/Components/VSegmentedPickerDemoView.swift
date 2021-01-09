@@ -123,7 +123,7 @@ extension VSegmentedPickerDemoView {
             
             DemoRowView(type: .titled("Picker with Title and Subtitle"), content: {
                 VSegmentedPicker(
-                    selection: $segmentedPickerSelection4,
+                    selection: $segmentedPickerSelection5,
                     state: segmentedPickerState,
                     title: "Lorem ipsum dolor sit amet",
                     subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus."

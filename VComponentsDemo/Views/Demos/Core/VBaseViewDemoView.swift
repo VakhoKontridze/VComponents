@@ -66,7 +66,7 @@ extension VBaseViewDemoView {
                 VSegmentedPicker(
                     selection: $navigationBarTitlePosition,
                     title: "Title Position",
-                    subtitle: "Changing title position causes view to re-draw itself. Meaning, state of the view may be lost."
+                    subtitle: "Changing title position causes view to re-draw itself"
                 )
                 
                 VToggle(state: $navigationBarLeadingItem, title: "Leading items")
