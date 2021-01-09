@@ -10,20 +10,20 @@ import SwiftUI
 // MARK:- V Spinner
 public struct VSpinner: View {
     // MARK: Proeprties
-    private let spinnerType: VSpinnerType
+    private let model: VSpinnerModel
     
     // MARK: Initializers
     public init(
-        _ spinnerType: VSpinnerType = .default
+        model: VSpinnerModel = .default
     ) {
-        self.spinnerType = spinnerType
+        self.model = model
     }
 }
 
 // MARK:- Body
 public extension VSpinner {
     @ViewBuilder var body: some View {
-        switch spinnerType {
+        switch model {
         case .continous(let model): VSpinnerContinous(model: model)
         case .dashed(let model): VSpinnerDashed(model: model)
         }
@@ -33,6 +33,6 @@ public extension VSpinner {
 // MARK:- Preview
 struct VSpinner_Previews: PreviewProvider {
     static var previews: some View {
-        VSpinner(.continous())
+        VSpinner()
     }
 }

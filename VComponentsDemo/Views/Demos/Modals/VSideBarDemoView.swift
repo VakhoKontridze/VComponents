@@ -71,7 +71,7 @@ private extension VSideBarWalkthroughView {
     }
     
     private var sideBarContent: some View {
-        VLazyList(.vertical(), range: 1..<11, rowContent: { num in
+        VLazyList(model: .vertical(), range: 1..<11, rowContent: { num in
             Text("\(num)")
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)

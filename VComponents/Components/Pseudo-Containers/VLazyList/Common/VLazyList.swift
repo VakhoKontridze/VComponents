@@ -10,20 +10,20 @@ import SwiftUI
 // MARK:- V Lazy List
 public struct VLazyList<Content>: View where Content: View {
     // MARK: Properties
-    private let listType: VLazyListType
+    private let model: VLazyListModel
     private let content: () -> Content
     
     // MARK: Initializers
     public init(
-        _ listType: VLazyListType = .default,
+        model: VLazyListModel = .default,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.listType = listType
+        self.model = model
         self.content = content
     }
 
     public init<Data, ID, RowContent>(
-        _ listType: VLazyListType = .default,
+        model: VLazyListModel = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -35,7 +35,7 @@ public struct VLazyList<Content>: View where Content: View {
             RowContent: View
     {
         self.init(
-            listType,
+            model: model,
             content: {
                 ForEach(data, id: id, content: { element in
                     rowContent(element)
@@ -45,7 +45,7 @@ public struct VLazyList<Content>: View where Content: View {
     }
 
     public init<Data, ID, RowContent>(
-        _ listType: VLazyListType = .default,
+        model: VLazyListModel = .default,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -56,7 +56,7 @@ public struct VLazyList<Content>: View where Content: View {
             RowContent: View
     {
         self.init(
-            listType,
+            model: model,
             data: data,
             id: \Data.Element.id,
             rowContent: rowContent
@@ -64,14 +64,14 @@ public struct VLazyList<Content>: View where Content: View {
     }
 
     public init <RowContent>(
-        _ listType: VLazyListType = .default,
+        model: VLazyListModel = .default,
         range: Range<Int>,
         rowContent: @escaping (Int) -> RowContent
     )
         where Content == ForEach<Range<Int>, Int, RowContent>
     {
         self.init(
-            listType,
+            model: model,
             content: {
                 ForEach(range, content: rowContent)
             }
@@ -82,7 +82,7 @@ public struct VLazyList<Content>: View where Content: View {
 // MARK:- Body
 public extension VLazyList {
     @ViewBuilder var body: some View {
-        switch listType {
+        switch model {
         case .vertical(let model): VLazyListVertical(model: model, content: content)
         case .horizontal(let model): VLazyListHorizontal(model: model, content: content)
         }
@@ -95,11 +95,11 @@ struct VLazyListView_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(content: {
-            VLazyList(.vertical(), range: range, rowContent: { number in
+            VLazyList(model: .vertical(), range: range, rowContent: { number in
                 Text(String(number)).padding(5)
             })
 
-            VLazyList(.horizontal(), range: range, rowContent: { number in
+            VLazyList(model: .horizontal(), range: range, rowContent: { number in
                 Text(String(number)).padding(5)
             })
         })

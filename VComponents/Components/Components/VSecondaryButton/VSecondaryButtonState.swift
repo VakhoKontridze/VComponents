@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Secondary Button Type
+// MARK:- V Secondary Button State
 public enum VSecondaryButtonState: Int, CaseIterable {
     case enabled
     case disabled

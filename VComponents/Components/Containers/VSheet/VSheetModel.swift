@@ -7,11 +7,6 @@
 
 import SwiftUI
 
-// MARK:- Type Aliases
-public typealias VSheetModelRoundAll = VSheetModel
-public typealias VSheetModelRoundTop = VSheetModel
-public typealias VSheetModelRoundBottom = VSheetModel
-
 // MARK:- V Sheet Model
 public struct VSheetModel {
     public var layout: Layout = .init()

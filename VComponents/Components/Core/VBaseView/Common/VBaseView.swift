@@ -18,7 +18,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
     @Environment(\.vNavigationViewBackButtonHidden) private var vNavigationViewBackButtonHidden: Bool
     
-    private let viewType: VBaseViewType
+    private let model: VBaseViewModel
     
     private let navigationBarTitle: String
     private let navigationBarLeadingItem: NavigationBarLeadingItem?
@@ -28,13 +28,13 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     
     // MARK: Initializers
     public init(
-        _ viewType: VBaseViewType = .default,
+        model: VBaseViewModel = .default,
         title navigationBarTitle: String,
         leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
         trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.viewType = viewType
+        self.model = model
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = navigationBarLeadingItem
         self.navigationBarTrailingItem = navigationBarTrailingItem
@@ -42,14 +42,14 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     }
 
     public init(
-        _ viewType: VBaseViewType = .default,
+        model: VBaseViewModel = .default,
         title navigationBarTitle: String,
         trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     )
         where NavigationBarLeadingItem == Never
     {
-        self.viewType = viewType
+        self.model = model
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
         self.navigationBarTrailingItem = navigationBarTrailingItem
@@ -57,14 +57,14 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     }
 
     public init(
-        _ viewType: VBaseViewType = .default,
+        model: VBaseViewModel = .default,
         title navigationBarTitle: String,
         leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
         @ViewBuilder content: @escaping () -> Content
     )
         where NavigationBarTrailingItem == Never
     {
-        self.viewType = viewType
+        self.model = model
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = navigationBarLeadingItem
         self.navigationBarTrailingItem = nil
@@ -72,7 +72,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     }
 
     public init(
-        _ viewType: VBaseViewType = .default,
+        model: VBaseViewModel = .default,
         title navigationBarTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
@@ -80,7 +80,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
             NavigationBarLeadingItem == Never,
             NavigationBarTrailingItem == Never
     {
-        self.viewType = viewType
+        self.model = model
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
         self.navigationBarTrailingItem = nil
@@ -91,7 +91,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 // MARK:- Body
 public extension VBaseView {
     @ViewBuilder var body: some View {
-        switch viewType {
+        switch model {
         case .centerTitle(let model):
             baseViewFrame
                 .setUpBaseViewNavigationBarCenter(

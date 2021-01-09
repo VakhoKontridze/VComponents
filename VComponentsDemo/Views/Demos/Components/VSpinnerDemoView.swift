@@ -19,11 +19,11 @@ extension VSpinnerDemoView {
     var body: some View {
         BaseDemoView(title: Self.navigationBarTitle, content: {
             DemoRowView(type: .titled("Continous"), content: {
-                VSpinner(.continous())
+                VSpinner(model: .continous())
             })
             
             DemoRowView(type: .titled("Dashed"), content: {
-                VSpinner(.dashed())
+                VSpinner(model: .dashed())
             })
         })
     }
