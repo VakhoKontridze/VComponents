@@ -155,7 +155,7 @@ public extension VSegmentedPicker {
                 font: model.fonts.title,
                 alignment: .leading
             )
-                .padding(.leading, model.layout.titlePaddingLeft)
+                .padding(.horizontal, model.layout.titlePaddingHor)
                 .opacity(model.colors.foregroundOpacity(state: state))
         }
     }
@@ -169,7 +169,7 @@ public extension VSegmentedPicker {
                 alignment: .leading,
                 lineLimit: nil
             )
-                .padding(.leading, model.layout.titlePaddingLeft)
+                .padding(.horizontal, model.layout.titlePaddingHor)
                 .opacity(model.colors.foregroundOpacity(state: state))
         }
     }

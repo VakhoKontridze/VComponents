@@ -33,7 +33,7 @@ extension VSegmentedPickerModel {
         var actualRowContentPadding: CGFloat { indicatorPadding + rowContentPadding }
         
         public var titleSpacing: CGFloat = 3
-        public var titlePaddingLeft: CGFloat = 10
+        public var titlePaddingHor: CGFloat = 10
         
         public var dividerHeight: CGFloat = 17
         
