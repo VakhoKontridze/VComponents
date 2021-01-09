@@ -165,7 +165,7 @@ public extension VSegmentedPicker {
             VGenericTitleContentView(
                 title: subtitle,
                 color: model.colors.subtitleColor(for: state),
-                font: model.fonts.title,
+                font: model.fonts.subtitle,
                 alignment: .leading,
                 lineLimit: nil
             )
