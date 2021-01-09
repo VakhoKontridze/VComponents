@@ -46,7 +46,13 @@ struct VBaseViewNavigationBarCenter<TrailingItem, LeadingItem>: ViewModifier
     private let backAction: () -> Void
     
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
-    private var isDestination: Bool { presentationMode.wrappedValue.isPresented }
+    @State private var wasMainPresentation: Bool = false    // Envriornment var returns false after futher navigation
+    private var isDestination: Bool {
+        let state: Bool = presentationMode.wrappedValue.isPresented
+        let actualState: Bool = wasMainPresentation || state
+        DispatchQueue.main.async(execute: { if !wasMainPresentation { wasMainPresentation = state } })
+        return actualState
+    }
     
     @State private var leadingWidth: CGFloat = .zero
     @State private var trailingWidth: CGFloat = .zero
