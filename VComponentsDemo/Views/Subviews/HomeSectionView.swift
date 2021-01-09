@@ -34,7 +34,7 @@ struct HomeSectionView<Content>: View where Content: View {
 extension HomeSectionView {
     var body: some View {
         VStack(alignment: .leading, spacing: 10, content: {
-            if let title = title {
+            if let title = title, !title.isEmpty {
                 Text(title)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 10)
