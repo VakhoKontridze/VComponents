@@ -25,11 +25,8 @@ extension HomeView {
                             HomeRowView(title: VPrimaryButtonDemoView.navigationBarTitle, destination: VPrimaryButtonDemoView())
                             HomeRowView(title: VSecondaryButtonDemoView.navigationBarTitle, destination: VSecondaryButtonDemoView())
                             HomeRowView(title: VSquareButtonDemoView.navigationBarTitle, destination: VSquareButtonDemoView())
+                            HomeRowView(title: "     \(VChevronButtonDemoView.navigationBarTitle)", destination: VChevronButtonDemoView())
                             HomeRowView(title: VPlainButtonDemoView.navigationBarTitle, destination: VPlainButtonDemoView(), showSeparator: false)
-                        })
-                        
-                        HomeSectionView(title: "Derived Buttons", content: {
-                            HomeRowView(title: VChevronButtonDemoView.navigationBarTitle, destination: VChevronButtonDemoView(), showSeparator: false)
                         })
 
                         HomeSectionView(title: "Pickers", content: {

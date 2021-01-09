@@ -46,7 +46,7 @@ extension HomeSectionView {
                 VStack(spacing: 0, content: content)
             })
         })
-            .padding(.bottom, 25)
+            .padding(.bottom, 20)
     }
 }
 
