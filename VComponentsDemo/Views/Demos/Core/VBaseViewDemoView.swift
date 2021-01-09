@@ -63,7 +63,11 @@ extension VBaseViewDemoView {
             ColorBook.layer.edgesIgnoringSafeArea(.bottom)
             
             VStack(alignment: .leading, spacing: 20, content: {
-                VSegmentedPicker(selection: $navigationBarTitlePosition)
+                VSegmentedPicker(
+                    selection: $navigationBarTitlePosition,
+                    title: "Title Position",
+                    subtitle: "Changing title position causes view to re-draw itself. Meaning, state of the view may be lost."
+                )
                 
                 VToggle(state: $navigationBarLeadingItem, title: "Leading items")
                 
