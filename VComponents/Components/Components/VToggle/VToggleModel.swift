@@ -40,17 +40,15 @@ extension VToggleModel {
         public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
         
         public var fill: StateColors = .init(
-            enabledOn: primaryButtonColors.background.enabled,
-            enabledOff: .init(componentAsset: "Toggle.Fill.enabledOff"),
-            disabledOn: primaryButtonColors.background.disabled,
-            disabledOff: .init(componentAsset: "Toggle.Fill.disabledOff")
+            off: .init(componentAsset: "Toggle.Fill.off"),
+            on: primaryButtonColors.background.enabled,
+            disabled: .init(componentAsset: "Toggle.Fill.disabled")
         )
         
         public var thumb: StateColors = .init(
-            enabledOn: .init(componentAsset: "Toggle.Thumb.enabledOn"),
-            enabledOff: .init(componentAsset: "Toggle.Thumb.enabledOn"),
-            disabledOn: .init(componentAsset: "Toggle.Thumb.enabledOn"),
-            disabledOff: .init(componentAsset: "Toggle.Thumb.enabledOn")
+            off: .init(componentAsset: "Toggle.Thumb"),
+            on: .init(componentAsset: "Toggle.Thumb"),
+            disabled: .init(componentAsset: "Toggle.Thumb")
         )
         
         public var content: StateOpacityColors = .init(
@@ -59,10 +57,9 @@ extension VToggleModel {
         )
         
         public var text: StateColors = .init(   // Only used in init with string
-            enabledOn: ColorBook.primary,
-            enabledOff: ColorBook.primary,
-            disabledOn: ColorBook.primary,
-            disabledOff: ColorBook.primary
+            off: ColorBook.primary,
+            on: ColorBook.primary,
+            disabled: ColorBook.primary
         )
         
         public init() {}
@@ -71,16 +68,14 @@ extension VToggleModel {
 
 extension VToggleModel.Colors {
     public struct StateColors {
-        public var enabledOn: Color
-        public var enabledOff: Color
-        public var disabledOn: Color
-        public var disabledOff: Color
+        public var off: Color
+        public var on: Color
+        public var disabled: Color
         
-        public init(enabledOn: Color, enabledOff: Color, disabledOn: Color, disabledOff: Color) {
-            self.enabledOn = enabledOn
-            self.enabledOff = enabledOff
-            self.disabledOn = disabledOn
-            self.disabledOff = disabledOff
+        public init(off: Color, on: Color, disabled: Color) {
+            self.off = off
+            self.on = on
+            self.disabled = disabled
         }
     }
 
@@ -99,34 +94,34 @@ extension VToggleModel {
 
 // MARK:- Mapping
 extension VToggleModel.Colors {
-    func fillColor(isOn: Bool, state: VToggleInternalState) -> Color {
-        color(isOn: isOn, state: state, from: fill)
+    func fillColor(state: VToggleInternalState) -> Color {
+        color(state: state, from: fill)
     }
     
-    func thumbColor(isOn: Bool, state: VToggleInternalState) -> Color {
-        color(isOn: isOn, state: state, from: thumb)
+    func thumbColor(state: VToggleInternalState) -> Color {
+        color(state: state, from: thumb)
     }
     
     func contentOpacity(state: VToggleInternalState) -> Double {
         switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
+        case .off: return 1
+        case .on: return 1
+        case .pressedOff, .pressedOn: return content.pressedOpacity
         case .disabled: return content.disabledOpacity
         }
     }
     
-    func textColor(isOn: Bool, state: VToggleInternalState) -> Color {
-        color(isOn: isOn, state: state, from: text)
+    func textColor(state: VToggleInternalState) -> Color {
+        color(state: state, from: text)
     }
     
-    private func color(isOn: Bool, state: VToggleInternalState, from colorSet: StateColors) -> Color {
-        switch (isOn, state) {
-        case (true, .enabled): return colorSet.enabledOn
-        case (false, .enabled): return colorSet.enabledOff
-        case (true, .pressed): return colorSet.enabledOn
-        case (false, .pressed): return colorSet.enabledOff
-        case (true, .disabled): return colorSet.disabledOn
-        case (false, .disabled): return colorSet.disabledOff
+    private func color(state: VToggleInternalState, from colorSet: StateColors) -> Color {
+        switch state {
+        case .off: return colorSet.off
+        case .on: return colorSet.on
+        case .pressedOff: return colorSet.off
+        case .pressedOn: return colorSet.on
+        case .disabled: return colorSet.disabled
         }
     }
 }

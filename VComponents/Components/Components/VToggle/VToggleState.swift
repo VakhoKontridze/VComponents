@@ -22,17 +22,23 @@ public enum VToggleState: Int, CaseIterable {
 
 // MARK:- V Toggle Internal State
 enum VToggleInternalState {
-    case enabled
-    case pressed
+    case off
+    case on
+    case pressedOff
+    case pressedOn
     case disabled
     
-    init(state: VToggleState, isPressed: Bool) {
+    init(state: VToggleState, isOn: Bool, isPressed: Bool) {
         if isPressed && !state.isDisabled {
-            self = .pressed
+            switch isOn {
+            case false: self = .pressedOff
+            case true: self = .pressedOn
+            }
         } else {
-            switch state {
-            case .enabled: self = .enabled
-            case .disabled: self = .disabled
+            switch (state, isOn) {
+            case (.enabled, false): self = .off
+            case (.enabled, true): self = .on
+            case (.disabled, _): self = .disabled
             }
         }
     }

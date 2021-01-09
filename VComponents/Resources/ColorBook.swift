@@ -89,15 +89,15 @@ public extension Color {
  Slider.Thumb.Shadow.enabled
  *96.96.96 @ 50
  
- Toggle.Fill.disabledOff
+ Toggle.Fill.disabled
  244.244.244
  *30.30.30
  
- Toggle.Fill.enabledOff
+ Toggle.Fill.off
  233.233.233
  *40.40.40
  
- Toggle.Thumb.enabledOn
+ Toggle.Thumb
  *254.254.254
  
  Accent

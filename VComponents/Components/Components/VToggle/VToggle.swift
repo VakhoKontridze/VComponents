@@ -15,7 +15,7 @@ public struct VToggle<Content>: View where Content: View {
     @Binding private var isOn: Bool
     @State private var isPressed: Bool = false
     private let state: VToggleState
-    private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VToggleInternalState { .init(state: state, isOn: _isOn.wrappedValue, isPressed: isPressed) }
     private var contentIsDisabled: Bool { state.isDisabled || !model.behavior.contentIsClickable }
     
     private let content: (() -> Content)?
@@ -49,10 +49,7 @@ public struct VToggle<Content>: View where Content: View {
             state: state,
             content: {
                 Text(title)
-                    .foregroundColor(model.colors.textColor(
-                        isOn: isOn.wrappedValue,
-                        state: .init(state: state, isPressed: false)
-                    ))
+                    .foregroundColor(model.colors.textColor(state: .init(state: state, isOn: isOn.wrappedValue, isPressed: false)))
                     .font(model.font)
             }
         )
@@ -92,12 +89,12 @@ public extension VToggle {
         VBaseButton(isDisabled: state.isDisabled, action: action, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.size.height)
-                    .foregroundColor(model.colors.fillColor(isOn: isOn, state: internalState))
+                    .foregroundColor(model.colors.fillColor(state: internalState))
 
                 Circle()
                     .frame(dimension: model.layout.thumbDimension)
-                    .foregroundColor(model.colors.thumbColor(isOn: isOn, state: internalState))
-                    .offset(x: isOn ? model.layout.animationOffset : -model.layout.animationOffset)
+                    .foregroundColor(model.colors.thumbColor(state: internalState))
+                    .offset(x: thumbOffset)
             })
                 .frame(size: model.layout.size)
         })
@@ -119,6 +116,21 @@ public extension VToggle {
             content()
                 .opacity(model.colors.contentOpacity(state: internalState))
         })
+    }
+}
+
+// MARK:- Thumb Position
+private extension VToggle {
+    var thumbOffset: CGFloat {
+        let offset: CGFloat = model.layout.animationOffset
+        
+        switch internalState {
+        case .off: return -offset
+        case .on: return offset
+        case .pressedOff: return -offset
+        case .pressedOn: return offset
+        case .disabled: return -offset
+        }
     }
 }
 

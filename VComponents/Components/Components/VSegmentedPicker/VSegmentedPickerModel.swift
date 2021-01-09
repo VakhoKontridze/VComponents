@@ -64,8 +64,8 @@ extension VSegmentedPickerModel {
         )
         
         public var background: StateColors = .init(
-            enabled: toggleColors.fill.enabledOff,
-            disabled: toggleColors.fill.disabledOff
+            enabled: toggleColors.fill.off,
+            disabled: toggleColors.fill.disabled
         )
         
         public init() {}

@@ -38,6 +38,7 @@ extension VSliderModel {
 // MARK:- Colors
 extension VSliderModel {
     public struct Colors {
+        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
         public static let toggleColors: VToggleModel.Colors = .init()
         
         public var slider: SliderColors = .init()
@@ -62,13 +63,13 @@ extension VSliderModel.Colors {
 extension VSliderModel.Colors {
     public struct SliderColors {
         public var track: StateColors = .init(
-            enabled: VSliderModel.Colors.toggleColors.fill.enabledOff,
-            disabled: VSliderModel.Colors.toggleColors.fill.disabledOff
+            enabled: VSliderModel.Colors.toggleColors.fill.off,
+            disabled: VSliderModel.Colors.toggleColors.fill.disabled
         )
         
         public var progress: StateColors = .init(
-            enabled: VSliderModel.Colors.toggleColors.fill.enabledOn,
-            disabled: VSliderModel.Colors.toggleColors.fill.disabledOn
+            enabled: VSliderModel.Colors.toggleColors.fill.on,
+            disabled: VSliderModel.Colors.primaryButtonColors.background.disabled
         )
         
         public init() {}
@@ -78,8 +79,8 @@ extension VSliderModel.Colors {
 extension VSliderModel.Colors {
     public struct ThumbColors {
         public var fill: StateColors = .init(
-            enabled: VSliderModel.Colors.toggleColors.thumb.enabledOn,
-            disabled: VSliderModel.Colors.toggleColors.thumb.enabledOn
+            enabled: VSliderModel.Colors.toggleColors.thumb.on,
+            disabled: VSliderModel.Colors.toggleColors.thumb.on
         )
         
         public var border: StateColors = .init(
