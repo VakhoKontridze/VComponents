@@ -94,6 +94,10 @@ public extension Color {
  Slider.Thumb.Shadow.enabled
  *96.96.96 @ 50
  
+ GenericListContent.Separator
+ *120.120.120 @ 15
+ 160.160.160 @ 15
+ 
  TabNavigationView.Item
  190.190.190
  *100.100.100
@@ -130,7 +134,7 @@ public extension Color {
  *20.20.20
  
  Secondary
- 120.120.120
+ *120.120.120
  140.140.140
  
 */

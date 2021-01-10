@@ -40,11 +40,9 @@ extension HomeView {
                         })
 
                         HomeSectionView(title: "Containers", content: {
-                            HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView(), showSeparator: false)
-                        })
-
-                        HomeSectionView(title: "Pseudo-Containers", content: {
-                            HomeRowView(title: VLazyListDemoView.navigationBarTitle, destination: VLazyListDemoView(), showSeparator: false)
+                            HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView())
+                            HomeRowView(title: VTableDemoView.navigationBarTitle, destination: VTableDemoView())
+                            HomeRowView(title: VSectionDemoView.navigationBarTitle, destination: VSectionDemoView(), showSeparator: false)
                         })
 
                         HomeSectionView(title: "Navigation", content: {
@@ -59,7 +57,8 @@ extension HomeView {
 
                         HomeSectionView(title: "Core", content: {
                             HomeRowView(title: VInteractiveViewDemoView.navigationBarTitle, destination: VInteractiveViewDemoView())
-                            HomeRowView(title: VBaseViewDemoView.navigationBarTitle, destination: VBaseViewDemoView(), showSeparator: false)
+                            HomeRowView(title: VBaseViewDemoView.navigationBarTitle, destination: VBaseViewDemoView())
+                            HomeRowView(title: VLazyListDemoView.navigationBarTitle, destination: VLazyListDemoView(), showSeparator: false)
                         })
                     })
                         .padding(10)

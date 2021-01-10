@@ -10,6 +10,7 @@ import SwiftUI
 // MARK:- V Lazy List Model Vertical
 public struct VLazyListModelVertical {
     public var layout: Layout = .init()
+    public var showIndicator: Bool = true
     
     public init() {}
 }
@@ -18,7 +19,6 @@ public struct VLazyListModelVertical {
 extension VLazyListModelVertical {
     public struct Layout {
         public var alignment: HorizontalAlignment = .center
-        public var showsIndicators: Bool = true
         
         public init() {}
     }

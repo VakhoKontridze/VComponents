@@ -13,7 +13,7 @@ struct VSheetDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Sheet"
     
-    private func sheeContent() -> some View {
+    private func sheetContent() -> some View {
         Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
     }
     
@@ -28,24 +28,28 @@ struct VSheetDemoView: View {
 extension VSheetDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            ScrollView(content: {
-                DemoRowView(type: .titled("Round All"), content: {
-                    VSheet(model: model(roundedCorners: .all), content: sheeContent)
-                })
+            ZStack(content: {
+                ColorBook.canvas.edgesIgnoringSafeArea(.all)
                 
-                DemoRowView(type: .titled("Round Top"), content: {
-                    VSheet(model: model(roundedCorners: .top), content: sheeContent)
+                ScrollView(content: {
+                    DemoRowView(type: .titled("Round All"), content: {
+                        VSheet(model: model(roundedCorners: .all), content: sheetContent)
+                    })
+                    
+                    DemoRowView(type: .titled("Round Top"), content: {
+                        VSheet(model: model(roundedCorners: .top), content: sheetContent)
+                    })
+                    
+                    DemoRowView(type: .titled("Round Bottom"), content: {
+                        VSheet(model: model(roundedCorners: .bottom), content: sheetContent)
+                    })
+                    
+                    DemoRowView(type: .titled("Round Custom"), content: {
+                        VSheet(model: model(roundedCorners: .custom([.topLeft, .bottomRight])), content: sheetContent)
+                    })
                 })
-                
-                DemoRowView(type: .titled("Round Bottom"), content: {
-                    VSheet(model: model(roundedCorners: .bottom), content: sheeContent)
-                })
-                
-                DemoRowView(type: .titled("Round Custom"), content: {
-                    VSheet(model: model(roundedCorners: .custom([.topLeft, .bottomRight])), content: sheeContent)
-                })
+                    .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
             })
-                .background(ColorBook.canvas)
         })
     }
 }
