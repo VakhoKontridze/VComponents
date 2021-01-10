@@ -36,6 +36,14 @@ struct VBaseViewDemoView: View {
         }
     }
     
+    private var segmentedPickerModel: VSegmentedPickerModel = {
+        var model: VSegmentedPickerModel = .init()
+        
+        model.animation = nil
+        
+        return model
+    }()
+    
     private var plainButtonModel: VPlainButtonModel = {
         var model: VPlainButtonModel = .init()
         
@@ -64,6 +72,7 @@ extension VBaseViewDemoView {
             
             VStack(alignment: .leading, spacing: 20, content: {
                 VSegmentedPicker(
+                    model: segmentedPickerModel,
                     selection: $navigationBarTitlePosition,
                     title: "Title Position",
                     subtitle: "Changing title position causes view to re-draw itself"

@@ -110,7 +110,7 @@
 		7AD8095A2594FF3D00DABE49 /* VSideBarModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809592594FF3D00DABE49 /* VSideBarModel.swift */; };
 		7AD809612595073C00DABE49 /* VSideBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809602595073C00DABE49 /* VSideBarDemoView.swift */; };
 		7AE5C25825A893A5001B62B2 /* VSegmentedPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5C25725A893A5001B62B2 /* VSegmentedPickerDemoView.swift */; };
-		7AE5C25E25A8BC2E001B62B2 /* VPickerEnumerableOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOptions.swift */; };
+		7AE5C25E25A8BC2E001B62B2 /* VPickerEnumerableOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOption.swift */; };
 		7AE6078325926994009CDB28 /* HomeRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6078225926994009CDB28 /* HomeRowView.swift */; };
 /* End PBXBuildFile section */
 
@@ -244,7 +244,7 @@
 		7AD809592594FF3D00DABE49 /* VSideBarModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarModel.swift; sourceTree = "<group>"; };
 		7AD809602595073C00DABE49 /* VSideBarDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarDemoView.swift; sourceTree = "<group>"; };
 		7AE5C25725A893A5001B62B2 /* VSegmentedPickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerDemoView.swift; sourceTree = "<group>"; };
-		7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPickerEnumerableOptions.swift; sourceTree = "<group>"; };
+		7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPickerEnumerableOption.swift; sourceTree = "<group>"; };
 		7AE6078225926994009CDB28 /* HomeRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -829,7 +829,7 @@
 			isa = PBXGroup;
 			children = (
 				7A41A49D25A76937000A6F80 /* VGenericTitleContent */,
-				7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOptions.swift */,
+				7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOption.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -965,7 +965,7 @@
 				7A621834259494CB00515688 /* VLazyListVertical.swift in Sources */,
 				7AD8095A2594FF3D00DABE49 /* VSideBarModel.swift in Sources */,
 				7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */,
-				7AE5C25E25A8BC2E001B62B2 /* VPickerEnumerableOptions.swift in Sources */,
+				7AE5C25E25A8BC2E001B62B2 /* VPickerEnumerableOption.swift in Sources */,
 				7A3C1555258DE7B900CE1D96 /* VSpinnerModel.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
 				7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */,

@@ -12,7 +12,7 @@ public struct VSegmentedPickerModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
-    public var behavior: Behavior = .init()
+    public var animation: Animation? = .easeInOut(duration: 0.2)
     
     public init() {}
 }
@@ -106,15 +106,6 @@ extension VSegmentedPickerModel {
         public var subtitle: Font = .system(size: 13, weight: .regular, design: .default)
         
         public var rows: Font = .system(size: 14, weight: .medium, design: .default)    // Only used in init with string
-    }
-}
-
-// MARK:- Behavior
-extension VSegmentedPickerModel {
-    public struct Behavior {
-        public var selectionAnimation: Animation? = .easeInOut(duration: 0.2)
-        
-        public init() {}
     }
 }
 

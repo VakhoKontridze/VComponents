@@ -51,7 +51,8 @@ public struct VLazyList<Content>: View where Content: View {
     )
         where
             Content == ForEach<Data, ID, RowContent>,
-            Data: RandomAccessCollection, Data.Element: Identifiable,
+            Data: RandomAccessCollection,
+            Data.Element: Identifiable,
             ID == Data.Element.ID,
             RowContent: View
     {
