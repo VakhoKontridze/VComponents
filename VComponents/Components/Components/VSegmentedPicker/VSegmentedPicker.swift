@@ -67,7 +67,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<S>,
-            RowContent == VGenericTitleContentView<S>,
+            RowContent == VGenericTextContent<S>,
             S: StringProtocol
     {
         self.init(
@@ -79,7 +79,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             disabledIndexes: disabledIndexes,
             data: titles,
             rowContent: { title in
-                VGenericTitleContentView(
+                VGenericTextContent(
                     title: title,
                     color: model.colors.textColor(for: state),
                     font: model.fonts.rows
@@ -126,7 +126,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Option>,
-            RowContent == VGenericTitleContentView<Option.S>,
+            RowContent == VGenericTextContent<Option.S>,
             Option: VPickerTitledEnumerableOption
     {
         self.init(
@@ -141,7 +141,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             disabledIndexes: disabledIndexes,
             data: .init(Option.allCases),
             rowContent: { option in
-                VGenericTitleContentView(
+                VGenericTextContent(
                     title: option.pickerTitle,
                     color: model.colors.textColor(for: state),
                     font: model.fonts.rows
@@ -174,7 +174,7 @@ public extension VSegmentedPicker {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VGenericTitleContentView(
+            VGenericTextContent(
                 title: title,
                 color: model.colors.titleColor(for: state),
                 font: model.fonts.title,
@@ -187,7 +187,7 @@ public extension VSegmentedPicker {
     
     @ViewBuilder private var subtitleView: some View {
         if let subtitle = subtitle, !subtitle.isEmpty {
-            VGenericTitleContentView(
+            VGenericTextContent(
                 title: subtitle,
                 color: model.colors.subtitleColor(for: state),
                 font: model.fonts.subtitle,

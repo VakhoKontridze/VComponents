@@ -69,7 +69,7 @@ extension VAlert {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VGenericTitleContentView(
+            VGenericTextContent(
                 title: title,
                 color: model.colors.title,
                 font: model.fonts.title
@@ -79,7 +79,7 @@ extension VAlert {
     
     @ViewBuilder private var descriptionView: some View {
         if !description.isEmpty {
-            VGenericTitleContentView(
+            VGenericTextContent(
                 title: description,
                 color: model.colors.description,
                 font: model.fonts.description

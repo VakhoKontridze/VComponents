@@ -40,7 +40,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
         title: S
     )
         where
-            Content == VGenericTitleContentView<S>,
+            Content == VGenericTextContent<S>,
             S: StringProtocol
     {
         self.init(
@@ -48,7 +48,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
             state: state,
             action: action,
             content: {
-                VGenericTitleContentView(
+                VGenericTextContent(
                     title: title,
                     color: model.colors.textColor(state: .init(state: state, isPressed: false)),
                     font: model.font

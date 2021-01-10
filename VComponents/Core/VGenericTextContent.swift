@@ -1,5 +1,5 @@
 //
-//  VGenericTitleContent.swift
+//  VGenericTextContent.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/7/21.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- Generic Title Content View
-public struct VGenericTitleContentView<S>: View where S: StringProtocol {
+// MARK:- V Generic Text Content
+public struct VGenericTextContent<S>: View where S: StringProtocol {
     // MARK: Properties
     private let title: S
     private let color: Color
@@ -33,7 +33,7 @@ public struct VGenericTitleContentView<S>: View where S: StringProtocol {
 }
 
 // MARK:- Body
-public extension VGenericTitleContentView {
+public extension VGenericTextContent {
     var body: some View {
         Text(title)
             .lineLimit(lineLimit)
@@ -45,8 +45,8 @@ public extension VGenericTitleContentView {
 }
 
 // MARK:- Preview
-struct VGenericTitleContentView_Previews: PreviewProvider {
+struct VGenericTextContent_Previews: PreviewProvider {
     static var previews: some View {
-        VGenericTitleContentView(title: "TITLE", color: ColorBook.primary, font: .body)
+        VGenericTextContent(title: "TITLE", color: ColorBook.primary, font: .body)
     }
 }

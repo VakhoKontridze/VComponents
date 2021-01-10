@@ -21,7 +21,7 @@ public struct VTableDefaultHeaderFooter<S>: View where S: StringProtocol {
 // MARK:- Body
 public extension VTableDefaultHeaderFooter {
     var body: some View {
-        VGenericTitleContentView(
+        VGenericTextContent(
             title: title,
             color: ColorBook.secondary,
             font: .system(size: 13),
