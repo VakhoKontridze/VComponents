@@ -63,8 +63,8 @@ extension VAlert {
             titleView
             descriptionView
         })
-            .padding(.horizontal, model.layout.textPaddingHor)
-            .padding(.top, model.layout.textPaddingTop)
+            .padding(.horizontal, model.layout.textMarginHor)
+            .padding(.top, model.layout.textMarginTop)
     }
     
     @ViewBuilder private var titleView: some View {

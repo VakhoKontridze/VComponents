@@ -49,7 +49,7 @@ public extension VSheet {
     
     private var contentView: some View {
         content()
-            .padding(model.layout.contentPadding)
+            .padding(model.layout.contentMargin)
     }
 }
 

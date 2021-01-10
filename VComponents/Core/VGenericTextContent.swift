@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK:- V Generic Text Content
-public struct VGenericTextContent<S>: View where S: StringProtocol {
+public struct VGenericTextContent: View {
     // MARK: Properties
-    private let title: S
+    private let title: String
     private let color: Color
     private let font: Font
     private let alignment: TextAlignment
@@ -18,7 +18,7 @@ public struct VGenericTextContent<S>: View where S: StringProtocol {
     
     // MARK: Initializers
     public init(
-        title: S,
+        title: String,
         color: Color,
         font: Font,
         alignment: TextAlignment = .center,

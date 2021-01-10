@@ -17,7 +17,7 @@ public struct VSideBarModel {
         
         model.layout.roundedCorners = layout.roundCorners ? .custom([.topRight, .bottomRight]) : .none
         model.layout.cornerRadius = layout.cornerRadius
-        model.layout.contentPadding = 0
+        model.layout.contentMargin = 0
         
         model.color = colors.background
         

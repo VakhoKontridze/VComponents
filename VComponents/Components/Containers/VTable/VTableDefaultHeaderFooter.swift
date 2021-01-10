@@ -8,12 +8,12 @@
 import SwiftUI
 
 // MARK:- V Table Default Header Footer
-public struct VTableDefaultHeaderFooter<S>: View where S: StringProtocol {
+public struct VTableDefaultHeaderFooter: View {
     // MARK: Proeprties
-    private let title: S
+    private let title: String
     
     // MARK: Initializers
-    public init(title: S) {
+    public init(title: String) {
         self.title = title
     }
 }

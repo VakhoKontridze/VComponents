@@ -59,7 +59,7 @@ extension VSectionDemoView {
             ZStack(content: {
                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
                 
-                VSection(data: rows, content: { row in
+                VSection(title: "Lorem ipsum dolor sit amet", data: rows, content: { row in
                     rowContent(title: row.title, color: row.color)
                 })
                     .padding(20)

@@ -30,14 +30,12 @@ public struct VToggle<Content>: View where Content: View {
         self.content = content
     }
 
-    public init<S>(
+    public init(
         model: VToggleModel = .init(),
         state: Binding<VToggleState>,
-        title: S
+        title: String
     )
-        where
-            Content == VGenericTextContent<S>,
-            S: StringProtocol
+        where Content == VGenericTextContent
     {
         self.init(
             model: model,

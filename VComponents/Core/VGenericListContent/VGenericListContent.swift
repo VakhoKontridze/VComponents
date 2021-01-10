@@ -16,6 +16,7 @@ struct VGenericListContent<Data, ID, Content>: View
 {
     // MARK: Properties
     private let model: VGenericListContentModel
+    
     private let data: [VGenericListContentElement<ID, Data.Element>]
     private let id: KeyPath<Data.Element, ID>
     private let content: (Data.Element) -> Content

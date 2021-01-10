@@ -11,6 +11,7 @@ import SwiftUI
 public struct VSectionModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var titleFont: Font = .system(size: 14, weight: .bold, design: .default)
     public var showIndicator: Bool = true
     
     var tableModel: VGenericListContentModel {
@@ -18,7 +19,7 @@ public struct VSectionModel {
         
         model.showIndicator = showIndicator
         
-        model.layout.marginTrailing = layout.contentPadding
+        model.layout.marginTrailing = layout.contentMargin
         model.layout.itemSpacing = layout.itemSpacing
         model.layout.separatorHeight = layout.separatorHeight
         
@@ -31,7 +32,7 @@ public struct VSectionModel {
         var model: VSheetModel = .init()
         
         model.layout.cornerRadius = layout.cornerRadius
-        model.layout.contentPadding = 0
+        model.layout.contentMargin = 0
         
         model.color = colors.background
         
@@ -47,8 +48,11 @@ extension VSectionModel {
         public static let genericListContentLayout: VGenericListContentModel.Layout = .init()
         public static let sheetLayout: VSheetModel.Layout = .init()
         
+        public var titleMarginHor: CGFloat = 10
+        public var titleMarginBottom: CGFloat = 10
+        
         public var cornerRadius: CGFloat = sheetLayout.cornerRadius
-        public var contentPadding: CGFloat = sheetLayout.contentPadding
+        public var contentMargin: CGFloat = sheetLayout.contentMargin
         public var itemSpacing: CGFloat = genericListContentLayout.itemSpacing
         public var separatorHeight: CGFloat = genericListContentLayout.separatorHeight
         
@@ -62,6 +66,7 @@ extension VSectionModel {
         public static let genericListContentColors: VGenericListContentModel.Colors = .init()
         public static let sheetColor: Color = VSheetModel().color
         
+        public var title: Color = ColorBook.primary
         public var background: Color = sheetColor
         public var separator: Color = genericListContentColors.separator
         

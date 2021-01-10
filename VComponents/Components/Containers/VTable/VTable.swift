@@ -27,9 +27,12 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
 {
     // MARK: Properties
     private let model: VTableModel
+    
     private let sections: [Section]
+    
     private let headerContent: ((Section) -> HeaderContent)?
     private let footerContent: ((Section) -> FooterContent)?
+    
     private let rowContent: (Row) -> RowContent
     
     // MARK: Initializers
@@ -105,9 +108,9 @@ public extension VTable {
                     footerView(i: i, section: section)
                     padding(i: i)
                 })
-                    .padding(.trailing, model.layout.contentPadding)
+                    .padding(.trailing, model.layout.contentMargin)
             })
-                .padding([.top, .bottom, .leading], model.layout.contentPadding)
+                .padding([.top, .bottom, .leading], model.layout.contentMargin)
         })
     }
 
@@ -126,7 +129,7 @@ public extension VTable {
     }
 
     @ViewBuilder private func padding(i: Int) -> some View {
-        if showSectionPadding(for: i) {
+        if showSectionSpacing(for: i) {
             Spacer()
                 .frame(height: model.layout.sectionSpacing)
         }
@@ -135,7 +138,7 @@ public extension VTable {
 
 // MARK:- Helpers
 private extension VTable {
-    func showSectionPadding(for i: Int) -> Bool {
+    func showSectionSpacing(for i: Int) -> Bool {
         i <= sections.count-2
     }
 }

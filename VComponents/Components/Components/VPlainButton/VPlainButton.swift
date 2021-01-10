@@ -33,15 +33,13 @@ public struct VPlainButton<Content>: View where Content: View {
         self.content = content
     }
 
-    public init<S>(
+    public init(
         model: VPlainButtonModel = .init(),
         state: VPlainButtonState = .enabled,
         action: @escaping () -> Void,
-        title: S
+        title: String
     )
-        where
-            Content == VGenericTextContent<S>,
-            S: StringProtocol
+        where Content == VGenericTextContent
     {
         self.init(
             model: model,

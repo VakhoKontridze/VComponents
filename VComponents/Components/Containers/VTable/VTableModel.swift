@@ -30,7 +30,7 @@ public struct VTableModel {
         var model: VSheetModel = .init()
         
         model.layout.cornerRadius = layout.cornerRadius
-        model.layout.contentPadding = 0
+        model.layout.contentMargin = 0
         
         model.color = colors.background
         
@@ -46,7 +46,7 @@ extension VTableModel {
         public static let sectionLayout: VSectionModel.Layout = .init()
         
         public var cornerRadius: CGFloat = sectionLayout.cornerRadius
-        public var contentPadding: CGFloat = sectionLayout.contentPadding
+        public var contentMargin: CGFloat = sectionLayout.contentMargin
         
         public var headerMarginBottom: CGFloat = 10
         public var itemSpacing: CGFloat = sectionLayout.itemSpacing

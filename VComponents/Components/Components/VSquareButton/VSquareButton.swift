@@ -33,15 +33,13 @@ public struct VSquareButton<Content>: View where Content: View {
         self.content = content
     }
 
-    public init<S>(
+    public init(
         model: VSquareButtonModel = .init(),
         state: VSquareButtonState = .enabled,
         action: @escaping () -> Void,
-        title: S
+        title: String
     )
-        where
-            Content == VGenericTextContent<S>,
-            S: StringProtocol
+        where Content == VGenericTextContent
     {
         self.init(
             model: model,

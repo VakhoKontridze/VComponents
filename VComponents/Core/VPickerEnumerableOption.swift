@@ -12,6 +12,5 @@ public protocol VPickerEnumerableOption: RawRepresentable, CaseIterable where Ra
 
 // MARK:- V Picker Titled Enumerable Option
 public protocol VPickerTitledEnumerableOption: VPickerEnumerableOption {
-    associatedtype S: StringProtocol
-    var pickerTitle: S { get }
+    var pickerTitle: String { get }
 }

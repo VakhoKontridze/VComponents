@@ -56,19 +56,18 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.rowContent = rowContent
     }
 
-    public init<S>(
+    public init(
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
         title: String? = nil,
         subtitle: String? = nil,
         disabledIndexes: Set<Int> = .init(),
-        titles: [S]
+        titles: [String]
     )
         where
-            Data == Array<S>,
-            RowContent == VGenericTextContent<S>,
-            S: StringProtocol
+            Data == Array<String>,
+            RowContent == VGenericTextContent
     {
         self.init(
             model: model,
@@ -126,7 +125,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Option>,
-            RowContent == VGenericTextContent<Option.S>,
+            RowContent == VGenericTextContent,
             Option: VPickerTitledEnumerableOption
     {
         self.init(
@@ -205,7 +204,7 @@ public extension VSegmentedPicker {
     
     private var indicator: some View {
         RoundedRectangle(cornerRadius: model.layout.indicatorCornerRadius)
-            .padding(model.layout.indicatorPadding)
+            .padding(model.layout.indicatorMargin)
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale)
             .offset(x: rowWidth * .init(selectedIndex))
@@ -228,7 +227,7 @@ public extension VSegmentedPicker {
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {
                         rowContent(data[i])
-                            .padding(model.layout.actualRowContentPadding)
+                            .padding(model.layout.actualRowContentMargin)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
                             .font(model.fonts.rows)

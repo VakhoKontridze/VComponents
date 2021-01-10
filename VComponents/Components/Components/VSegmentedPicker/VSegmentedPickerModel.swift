@@ -24,13 +24,13 @@ extension VSegmentedPickerModel {
         public var cornerRadius: CGFloat = 7
         
         public var indicatorCornerRadius: CGFloat = 6
-        public var indicatorPadding: CGFloat = 2
+        public var indicatorMargin: CGFloat = 2
         public var indicatorPressedScale: CGFloat = 0.95
         let indicatorShadowRadius: CGFloat = 1
         let indicatorShadowOffsetY: CGFloat = 1
         
-        public var rowContentPadding: CGFloat = 2
-        var actualRowContentPadding: CGFloat { indicatorPadding + rowContentPadding }
+        public var rowContentMargin: CGFloat = 2
+        var actualRowContentMargin: CGFloat { indicatorMargin + rowContentMargin }
         
         public var titleSpacing: CGFloat = 3
         public var titlePaddingHor: CGFloat = 10

@@ -61,8 +61,8 @@ extension VAlertModel {
         public var cornerRadius: CGFloat = 20
         
         public var contentInset: CGFloat = 15
-        var textPaddingTop: CGFloat { max(25 - contentInset, 0) }
-        let textPaddingHor: CGFloat = 10
+        var textMarginTop: CGFloat { max(25 - contentInset, 0) }
+        let textMarginHor: CGFloat = 10
         let textSpacing: CGFloat = 5
         let contentSpacing: CGFloat = 20
         

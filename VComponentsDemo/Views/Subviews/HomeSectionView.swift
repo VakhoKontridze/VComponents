@@ -16,7 +16,7 @@ struct HomeSectionView<Content>: View where Content: View {
     
     private let sheetModel: VSheetModel = {
         var model: VSheetModel = .init()
-        model.layout.contentPadding = 10
+        model.layout.contentMargin = 10
         return model
     }()
     
