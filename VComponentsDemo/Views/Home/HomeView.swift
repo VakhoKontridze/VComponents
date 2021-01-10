@@ -61,7 +61,7 @@ extension HomeView {
                             HomeRowView(title: VLazyListDemoView.navigationBarTitle, destination: VLazyListDemoView(), showSeparator: false)
                         })
                     })
-                        .padding(10)
+                        .padding(16)
                 })
                     .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
             })

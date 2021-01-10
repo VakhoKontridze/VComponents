@@ -19,7 +19,7 @@ public struct VBaseViewModelCenter {
 // MARK:- Layout
 extension VBaseViewModelCenter {
     public struct Layout {
-        public var margin: CGFloat = 20
+        public var margin: CGFloat = 16
         public var spacing: CGFloat = 10
         var width: CGFloat { UIScreen.main.bounds.width - 2 * margin }
 
