@@ -1,17 +1,17 @@
 //
-//  VTableModel.swift
+//  VAccordionModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 1/10/21.
+//  Created by Vakhtang Kontridze on 1/11/21.
 //
 
 import SwiftUI
 
-// MARK:- V Table Model
-public struct VTableModel {
+// MARK:- V Accordion Model
+public struct VAccordionModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    static let defaultHeaderFooterFont: Font = .system(size: 13, weight: .regular, design: .default)
+    static let defaultHeaderFont: Font = .system(size: 15, weight: .semibold, design: .default)
     public var showIndicator: Bool = true
     
     var genericListContentModel: VGenericListContentModel {
@@ -19,6 +19,7 @@ public struct VTableModel {
         
         model.showIndicator = showIndicator
         
+        model.layout.marginTrailing = layout.marginTrailing + layout.contentMarginTrailing
         model.layout.itemSpacing = layout.itemSpacing
         model.layout.separatorHeight = layout.separatorHeight
         
@@ -42,30 +43,42 @@ public struct VTableModel {
 }
 
 // MARK:- Layout
-extension VTableModel {
+extension VAccordionModel {
     public struct Layout {
         public static let sectionLayout: VSectionModel.Layout = .init()
         
         public var cornerRadius: CGFloat = sectionLayout.cornerRadius
-        public var contentMargin: CGFloat = sectionLayout.contentMargin
         
-        public var headerMarginBottom: CGFloat = 10
-        public var itemSpacing: CGFloat = sectionLayout.itemSpacing
-        public var footerMarginTop: CGFloat = 10
-        public var sectionSpacing: CGFloat = 20
+        public var marginLeading: CGFloat = 16
+        public var marginTrailing: CGFloat = 16
+        public var marginTop: CGFloat = 8
+        public var marginBottomCollapsed: CGFloat = 8
+        public var marginBottomExpanded: CGFloat = 16
+        
+        public var headerSeparatorHeight: CGFloat = 1
+        public var headerSeparatorMarginTop: CGFloat = 8
+        public var headerSeparatorMarginBottom: CGFloat = 10
+        
+        public var contentMarginLeading: CGFloat = 5
+        public var contentMarginTrailing: CGFloat = 5
+        public var contentMarginTop: CGFloat = 0
+        public var contentMarginBottom: CGFloat = 5
         
         public var separatorHeight: CGFloat = sectionLayout.separatorHeight
+        
+        public var itemSpacing: CGFloat = sectionLayout.itemSpacing
         
         public init() {}
     }
 }
 
 // MARK:- Colors
-extension VTableModel {
+extension VAccordionModel {
     public struct Colors {
         public static let sectionColors: VSectionModel.Colors = .init()
         
-        static let defaultHeaderFooter: Color = ColorBook.secondary
+        static let defaultHeader: Color = ColorBook.primary
+        public var headerSeparator: Color = .init(componentAsset: "Accordion.Separator")
         public var separator: Color = sectionColors.separator
         public var background: Color = sectionColors.background
         

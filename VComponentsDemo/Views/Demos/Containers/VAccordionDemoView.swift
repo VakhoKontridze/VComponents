@@ -1,52 +1,37 @@
 //
-//  VTableDemoView.swift
+//  VAccordionDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/10/21.
+//  Created by Vakhtang Kontridze on 1/11/21.
 //
 
 import SwiftUI
 import VComponents
 
-// MARK:- V Table Demo View
-struct VTableDemoView: View {
+// MARK:- V Accordion Demo View
+struct VAccordionDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Table"
+    static let navigationBarTitle: String = "Accordion"
     
-    @State private var sectionCount: Int = 2
-    @State private var rowCount: Int = 3
+    @State private var rowCount: Int = 5
     
     @State private var form: VSectionDemoView.Form = .fixed
     
+    @State private var accordionState: VAccordionState = .expanded
     
-    // Copied and modified from VTable's preview
-    private struct Section: VTableSection {
-        let id: Int
-        let title: String
-        let rows: [Row]
-    }
-
-    private struct Row: VTableRow {
+    // Copied from VSectionDemoView
+    private struct Row: Identifiable {
         let id: Int
         let color: Color
         let title: String
     }
-
-    private var sections: [Section] {
-        (0..<sectionCount).map { i in
+    
+    private var rows: [Row] {
+        (0..<rowCount).map { i in
             .init(
                 id: i,
-                
-                title: spellOut(i + 1),
-                
-                rows: (0..<rowCount).map { ii in
-                    let num: Int = i * rowCount + ii + 1
-                    return .init(
-                        id: num,
-                        color: [.red, .green, .blue][ii % 3],
-                        title: spellOut(num)
-                    )
-                }
+                color: [.red, .green, .blue][i % 3],
+                title: spellOut(i + 1)
             )
         }
     }
@@ -72,31 +57,29 @@ struct VTableDemoView: View {
 }
 
 // MARK:- Body
-extension VTableDemoView {
+extension VAccordionDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: form.demoViewType, controller: controller, content: {
-                VTable(
-                    layout: form.tableLayout,
-                    sections: sections,
-                    headerContent: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
-                    footerContent: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
-                    rowContent: { row in rowContent(title: row.title, color: row.color) }
+                VAccordion(
+                    layout: form.accordionLayout,
+                    state: $accordionState,
+                    headerContent: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+                    data: rows,
+                    rowContent: { rowContent(title: $0.title, color: $0.color) }
                 )
-                    .frame(height: form.height)
+                    .frame(height: form.height, alignment: .top)
             })
         })
     }
     
     private var controller: some View {
         VStack(spacing: 20, content: {
-            Stepper("Sections", value: $sectionCount, in: 0...10)
-            
-            Stepper("Rows", value: $rowCount, in: 0...10)
-            
+            Stepper("Rows", value: $rowCount, in: 0...20)
+
             VSegmentedPicker(
                 selection: $form,
-                title: "Table Height",
+                title: "Accordion Height",
                 subtitle: form.subtitle
             )
                 .frame(height: 90, alignment: .top)
@@ -106,7 +89,7 @@ extension VTableDemoView {
 
 // MARK:- Helpers
 private extension VSectionDemoView.Form {
-    var tableLayout: VTableLayout {
+    var accordionLayout: VAccordionLayout {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible
@@ -116,8 +99,8 @@ private extension VSectionDemoView.Form {
 }
 
 // MARK:- Preview
-struct VTableDemoView_Previews: PreviewProvider {
+struct VAccordionDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VTableDemoView()
+        VAccordionDemoView()
     }
 }

@@ -48,9 +48,10 @@ extension DemoRowView {
                 if case .titled(let title) = rowType {
                     Text(title)
                         .font(.footnote)
+                        .foregroundColor(ColorBook.secondary)
                 }
             })
-                .padding(.top, 16)
+//                .padding(.top, 16)
             
             if rowType.isRow {
                 Divider()

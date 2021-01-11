@@ -14,7 +14,7 @@ public struct VSectionModel {
     public var titleFont: Font = .system(size: 14, weight: .bold, design: .default)
     public var showIndicator: Bool = true
     
-    var tableModel: VGenericListContentModel {
+    var genericListContentModel: VGenericListContentModel {
         var model: VGenericListContentModel = .init()
         
         model.showIndicator = showIndicator
@@ -67,8 +67,8 @@ extension VSectionModel {
         public static let sheetColor: Color = VSheetModel().color
         
         public var title: Color = ColorBook.primary
-        public var background: Color = sheetColor
         public var separator: Color = genericListContentColors.separator
+        public var background: Color = sheetColor
         
         public init() {}
     }

@@ -28,6 +28,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Properties
     private let model: VTableModel
     
+    private let layout: VTableLayout
+    
     private let sections: [Section]
     
     private let headerContent: ((Section) -> HeaderContent)?
@@ -38,12 +40,14 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Initializers
     public init(
         model: VTableModel = .init(),
+        layout: VTableLayout = .fixed,
         sections: [Section],
         @ViewBuilder headerContent: @escaping (Section) -> HeaderContent,
         @ViewBuilder footerContent: @escaping (Section) -> FooterContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
     ) {
         self.model = model
+        self.layout = layout
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = footerContent
@@ -52,6 +56,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     public init(
         model: VTableModel = .init(),
+        layout: VTableLayout = .fixed,
         sections: [Section],
         @ViewBuilder headerContent: @escaping (Section) -> HeaderContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -59,6 +64,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         where FooterContent == Never
     {
         self.model = model
+        self.layout = layout
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = nil
@@ -67,6 +73,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     public init(
         model: VTableModel = .init(),
+        layout: VTableLayout = .fixed,
         sections: [Section],
         @ViewBuilder footerContent: @escaping (Section) -> FooterContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -74,6 +81,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         where HeaderContent == Never
     {
         self.model = model
+        self.layout = layout
         self.sections = sections
         self.headerContent = nil
         self.footerContent = footerContent
@@ -82,6 +90,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     public init(
         model: VTableModel = .init(),
+        layout: VTableLayout = .fixed,
         sections: [Section],
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
     )
@@ -90,6 +99,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             FooterContent == Never
     {
         self.model = model
+        self.layout = layout
         self.sections = sections
         self.headerContent = nil
         self.footerContent = nil
@@ -110,7 +120,9 @@ public extension VTable {
                 })
                     .padding(.trailing, model.layout.contentMargin)
             })
-                .padding([.leading, .top, .bottom], model.layout.contentMargin)
+                .if(!sections.isEmpty, transform: {
+                    $0.padding([.leading, .top, .bottom], model.layout.contentMargin)
+                })
         })
     }
 
@@ -120,7 +132,13 @@ public extension VTable {
     }
 
     private func rowViews(section: Section) -> some View {
-        VGenericListContent(model: .init(), data: section.rows, id: \.id, content: rowContent)
+        VGenericListContent(
+            model: model.genericListContentModel,
+            layout: layout,
+            data: section.rows,
+            id: \.id,
+            content: rowContent
+        )
     }
 
     private func footerView(i: Int, section: Section) -> some View {
@@ -190,6 +208,7 @@ struct VTable_Previews: PreviewProvider {
                 .edgesIgnoringSafeArea(.all)
 
             VTable(
+                layout: .fixed,
                 sections: sections,
                 headerContent: { section in
                     VTableDefaultHeaderFooter(title: "Header \(section.title)")

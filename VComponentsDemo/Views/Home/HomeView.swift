@@ -17,7 +17,7 @@ struct HomeView: View {
         .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton]),
         .init(id: 1, title: "Pickers", rows: [.toggle, .segmentedPicker, .slider]),
         .init(id: 2, title: "Misc", rows: [.spinner]),
-        .init(id: 3, title: "Containers", rows: [.sheet, .table, .section]),
+        .init(id: 3, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
         .init(id: 4, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
         .init(id: 5, title: "Modals", rows: [.sideBar, .alert]),
         .init(id: 6, title: "Core", rows: [.interactiveView, .baseView, .lazyList])
@@ -27,7 +27,7 @@ struct HomeView: View {
         case primaryButton, secondaryButton, squareButton, chevronButton, plainButton
         case toggle, segmentedPicker, slider
         case spinner
-        case sheet, table, section
+        case sheet, section, table, accordion
         case tabNavigationView, navigationView
         case sideBar, alert
         case interactiveView, baseView, lazyList
@@ -47,8 +47,9 @@ struct HomeView: View {
             case .spinner: return VSpinnerDemoView.navigationBarTitle
                 
             case .sheet: return VSheetDemoView.navigationBarTitle
-            case .table: return VTableDemoView.navigationBarTitle
             case .section: return VSectionDemoView.navigationBarTitle
+            case .table: return VTableDemoView.navigationBarTitle
+            case .accordion: return VAccordionDemoView.navigationBarTitle
                 
             case .tabNavigationView: return VTabNavigationViewDemoView.navigationBarTitle
             case .navigationView: return VNavigationViewDemoView.navigationBarTitle
@@ -79,6 +80,7 @@ struct HomeView: View {
             case .sheet: VSheetDemoView()
             case .table: VTableDemoView()
             case .section: VSectionDemoView()
+            case .accordion: VAccordionDemoView()
                 
             case .tabNavigationView: VTabNavigationViewDemoView()
             case .navigationView: VNavigationViewDemoView()

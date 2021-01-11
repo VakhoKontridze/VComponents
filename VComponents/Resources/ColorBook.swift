@@ -43,6 +43,10 @@ public extension Color {
 
 /*
  
+ Accordion.Separator
+ *120.120.120 @ 50
+ @160.160.160 @ 50
+ 
  ChevronButton.Background.disabled
  245.245.245
  80.80.80
@@ -54,6 +58,10 @@ public extension Color {
  ChevronButton.Background.pressed
  *210.210.210
  *30.30.30
+ 
+ GenericListContent.Separator
+ *120.120.120 @ 15
+ @160.160.160 @ 15
  
  PrimaryButton.Background.enabled
  128.176.240
@@ -93,10 +101,6 @@ public extension Color {
  
  Slider.Thumb.Shadow.enabled
  *96.96.96 @ 50
- 
- GenericListContent.Separator
- *120.120.120 @ 15
- 160.160.160 @ 15
  
  TabNavigationView.Item
  190.190.190

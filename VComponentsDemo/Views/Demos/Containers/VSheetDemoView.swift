@@ -28,7 +28,7 @@ struct VSheetDemoView: View {
 extension VSheetDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .freeform, content: {
+            DemoView(type: .freeFormFlexible, content: {
                 DemoRowView(type: .titled("Round All"), content: {
                     VSheet(model: model(roundedCorners: .all), content: sheetContent)
                 })

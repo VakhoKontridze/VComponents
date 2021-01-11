@@ -13,19 +13,65 @@ struct VSectionDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Section"
     
-    @State private var form: VTableDemoView.Form = .free
+    @State private var rowCount: Int = 5
     
-    // Copied from VSection's preview
+    @State private var form: Form = .fixed
+    
+    enum Form: Int, VPickerTitledEnumerableOption {
+        case fixed
+        case flexible
+        case constrained
+        
+        fileprivate var sectionLayout: VSectionLayout {
+            switch self {
+            case .fixed: return .fixed
+            case .flexible: return .flexible
+            case .constrained: return .flexible
+            }
+        }
+        
+        var demoViewType: DemoViewType {
+            switch self {
+            case .fixed: return .freeFormFlexible
+            case .flexible: return .freeFormFixed
+            case .constrained: return .freeFormFixed
+            }
+        }
+        
+        var pickerTitle: String {
+            switch self {
+            case .fixed: return "Fixed"
+            case .flexible: return "Flexible"
+            case .constrained: return "Constrained"
+            }
+        }
+        
+        var subtitle: String {
+            switch self {
+            case .fixed: return "Content would stretch to take required vertical space"
+            case .flexible: return "Content would stretch vertically to occupy maximum space"
+            case .constrained: return "Content would be limited in vertical space by applying frame modifier"
+            }
+        }
+        
+        var height: CGFloat? {
+            switch self {
+            case .fixed: return nil
+            case .flexible: return nil
+            case .constrained: return 500
+            }
+        }
+    }
+    
+    // Copied and modifier from VSection's preview
     private struct Row: Identifiable {
         let id: Int
         let color: Color
         let title: String
-
-        static let count: Int = 20
     }
     
     private var rows: [Row] {
-        (0..<Row.count).map { i in
+        (0..<rowCount).map { i in
             .init(
                 id: i,
                 color: [.red, .green, .blue][i % 3],
@@ -40,17 +86,17 @@ struct VSectionDemoView: View {
         return formatter.string(from: .init(value: i))?.capitalized ?? ""
     }
     
-    private  func rowContent(title: String, color: Color) -> some View {
+    private func rowContent(title: String, color: Color) -> some View {
         HStack(spacing: 10, content: {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(color.opacity(0.8))
                 .frame(dimension: 32)
 
             Text(title)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.body)
                 .foregroundColor(ColorBook.primary)
         })
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
@@ -58,22 +104,29 @@ struct VSectionDemoView: View {
 extension VSectionDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .freeform, controller: controller, content: {
-                VSection(title: "Lorem ipsum dolor sit amet", data: rows, content: { row in
-                    rowContent(title: row.title, color: row.color)
-                })
+            DemoView(type: form.demoViewType, controller: controller, content: {
+                VSection(
+                    layout: form.sectionLayout,
+                    title: "Lorem ipsum dolor sit amet",
+                    data: rows,
+                    content: { rowContent(title: $0.title, color: $0.color) }
+                )
                     .frame(height: form.height)
             })
         })
     }
     
     private var controller: some View {
-        VSegmentedPicker(
-            selection: $form,
-            title: "Section Height",
-            subtitle: form.subtitle
-        )
-            .frame(height: 90, alignment: .top)
+        VStack(spacing: 20, content: {
+            Stepper("Rows", value: $rowCount, in: 0...20)
+            
+            VSegmentedPicker(
+                selection: $form,
+                title: "Section Height",
+                subtitle: form.subtitle
+            )
+                .frame(height: 90, alignment: .top)
+        })
     }
 }
 

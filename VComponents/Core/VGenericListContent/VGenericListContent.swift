@@ -17,18 +17,24 @@ struct VGenericListContent<Data, ID, Content>: View
     // MARK: Properties
     private let model: VGenericListContentModel
     
-    private let data: [VGenericListContentElement<ID, Data.Element>]
+    private let layout: VGenericListLayout
+    
+    private let data: [Element]
     private let id: KeyPath<Data.Element, ID>
     private let content: (Data.Element) -> Content
+    
+    typealias Element = VGenericListContentElement<ID, Data.Element>
     
     // MARK: Initializers
     init(
         model: VGenericListContentModel,
+        layout: VGenericListLayout,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.model = model
+        self.layout = layout
         self.data = data.map { .init(id: $0[keyPath: id], value: $0) }
         self.id = id
         self.content = content
@@ -37,25 +43,39 @@ struct VGenericListContent<Data, ID, Content>: View
 
 // MARK:- Body
 extension VGenericListContent {
-    var body: some View {
-        VLazyList(
-            model: .vertical(model.lazyListModel),
-            data: data.enumeratedArray(),
-            id: \.element.id,
-            rowContent: { (i, element) in
-                VStack(alignment: .leading, spacing: 0, content: {
-                    content(element.value)
+    @ViewBuilder var body: some View {
+        switch layout {
+        case .fixed:
+            VStack(spacing: 0, content: {
+                ForEach(
+                    data.enumeratedArray(),
+                    id: \.element.id,
+                    content: { contentView(i: $0, element: $1) }
+                )
+            })
+            
+        case .flexible:
+            VLazyList(
+                model: .vertical(model.lazyListModel),
+                data: data.enumeratedArray(),
+                id: \.element.id,
+                rowContent: { contentView(i: $0, element: $1) }
+            )
+        }
+    }
+    
+    private func contentView(i: Int, element: Element) -> some View {
+        VStack(spacing: 0, content: {
+            content(element.value)
 
-                    if showSeparator(for: i) {
-                        Rectangle()
-                            .frame(height: model.layout.separatorHeight)
-                            .padding(.vertical, model.layout.separatorMarginVer)
-                            .foregroundColor(model.colors.separator)
-                    }
-                })
-                    .padding(.trailing, model.layout.marginTrailing)
+            if showSeparator(for: i) {
+                Rectangle()
+                    .frame(height: model.layout.separatorHeight)
+                    .padding(.vertical, model.layout.separatorMarginVer)
+                    .foregroundColor(model.colors.separator)
             }
-        )
+        })
+            .padding(.trailing, model.layout.marginTrailing)
     }
 }
 
@@ -74,7 +94,7 @@ struct VGenericListContent_Previews: PreviewProvider {
         let color: Color
         let title: String
 
-        static let count: Int = 20
+        static let count: Int = 10
     }
     
     static let rows: [Row] = (0..<Row.count).map { i in
@@ -98,16 +118,17 @@ struct VGenericListContent_Previews: PreviewProvider {
                 .frame(dimension: 32)
 
             Text(title)
-                .frame(maxWidth: .infinity, alignment: .leading)
                 .font(.body)
                 .foregroundColor(ColorBook.primary)
         })
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     static var previews: some View {
-        VGenericListContent(model: .init(), data: rows, id: \.id, content: { row in
+        VGenericListContent(model: .init(), layout: .fixed, data: rows, id: \.id, content: { row in
             rowContent(title: row.title, color: row.color)
         })
+            .frame(maxHeight: .infinity, alignment: .top)
             .padding(20)
     }
 }

@@ -17,6 +17,8 @@ public struct VSection<Data, ID, Content>: View
     // MARK: Properties
     private let model: VSectionModel
     
+    private let layout: VSectionLayout
+    
     private let title: String?
     
     private let data: Data
@@ -26,12 +28,14 @@ public struct VSection<Data, ID, Content>: View
     // MARK: Initializers
     public init(
         model: VSectionModel = .init(),
+        layout: VSectionLayout = .fixed,
         title: String? = nil,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.model = model
+        self.layout = layout
         self.title = title
         self.data = data
         self.id = id
@@ -40,6 +44,7 @@ public struct VSection<Data, ID, Content>: View
 
     public init(
         model: VSectionModel = .init(),
+        layout: VSectionLayout = .fixed,
         title: String? = nil,
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -50,6 +55,7 @@ public struct VSection<Data, ID, Content>: View
     {
         self.init(
             model: model,
+            layout: layout,
             title: title,
             data: data,
             id: \Data.Element.id,
@@ -71,11 +77,14 @@ public extension VSection {
             }
             
             VSheet(model: model.sheetModel, content: {
-                VGenericListContent(model: model.tableModel, data: data, id: id, content: { row in
-                    content(row)
-                        //.padding(.trailing, model.layout.contentMargin) Passed to Table via model
-                })
-                    .padding([.leading, .top, .bottom,], model.layout.contentMargin)
+                VGenericListContent(
+                    model: model.genericListContentModel,
+                    layout: layout,
+                    data: data,
+                    id: id,
+                    content: content
+                )
+                    .padding([.leading, .top, .bottom], model.layout.contentMargin)
             })
         })
     }
@@ -88,7 +97,7 @@ struct VSection_Previews: PreviewProvider {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
             
-            VSection(title: "TITLE", data: VGenericListContent_Previews.rows, content: { row in
+            VSection(layout: .fixed, title: "TITLE", data: VGenericListContent_Previews.rows, content: { row in
                 VGenericListContent_Previews.rowContent(title: row.title, color: row.color)
             })
                 .padding(20)

@@ -8,6 +8,14 @@
 import SwiftUI
 import VComponents
 
+// MARK:- Demo View Type
+enum DemoViewType {
+    case rowed
+    case section
+    case freeFormFlexible
+    case freeFormFixed
+}
+
 // MARK:- Demo Rowed View
 struct DemoView<Content, ControllerContent>: View
     where
@@ -15,40 +23,35 @@ struct DemoView<Content, ControllerContent>: View
         ControllerContent: View
 {
     // MARK: Properties
-    private let demoType: DemoType
-    enum DemoType {
-        case rowed
-        case section
-        case freeform
-    }
+    private let viewType: DemoViewType
     
     private let controllerContent: ControllerContent?
     private let content: () -> Content
     
     private let sheetModel: VSheetModel = {
         var model: VSheetModel = .init()
-        model.layout.contentMargin = 10
+        model.layout.contentMargin = 16
         return model
     }()
     
     // MARK: Initializers
     init(
-        type demoType: DemoType = .rowed,
+        type viewType: DemoViewType = .rowed,
         controller controllerContent: ControllerContent,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.demoType = demoType
+        self.viewType = viewType
         self.controllerContent = controllerContent
         self.content = content
     }
 
     init(
-        type demoType: DemoType = .rowed,
+        type viewType: DemoViewType = .rowed,
         @ViewBuilder content: @escaping () -> Content
     )
         where ControllerContent == Never
     {
-        self.demoType = demoType
+        self.viewType = viewType
         self.controllerContent = nil
         self.content = content
     }
@@ -57,16 +60,20 @@ struct DemoView<Content, ControllerContent>: View
 // MARK:- Body
 extension DemoView {
     var body: some View {
-        ZStack(content: {
+        ZStack(alignment: .top, content: {
             ColorBook.canvas.edgesIgnoringSafeArea(.all)
             
             VStack(spacing: 20, content: {
                 switch controllerContent {
-                case nil: EmptyView()
-                case let controllerContent?: controllerContent
+                case nil:
+                    EmptyView()
+                
+                case let controllerContent?:
+                    controllerContent
+                        .padding(.trailing, 16)
                 }
                 
-                switch demoType {
+                switch viewType {
                 case .rowed:
                     ScrollView(content: {
                         VSheet(model: sheetModel, content: content)
@@ -80,11 +87,15 @@ extension DemoView {
                     })
                         .frame(maxHeight: .infinity, alignment: .top)
                     
-                case .freeform:
+                case .freeFormFlexible:
                     ScrollView(content: {
                         content()
                             .padding(.trailing, 16)
                     })
+                    
+                case .freeFormFixed:
+                    content()
+                        .padding(.trailing, 16)
                 }
             })
                 .padding([.leading, .top, .bottom], 16)

@@ -21,7 +21,7 @@ public enum VToggleState: Int, CaseIterable {
         }
     }
     
-    mutating func nextState() {
+    public mutating func nextState() {
         switch self {
         case .off: self = .on
         case .on: self = .off

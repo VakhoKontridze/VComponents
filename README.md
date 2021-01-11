@@ -15,9 +15,11 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
-2021 Jan 10. VSection
+2021 Jan 11. Accordion
 
 2021 Jan 10. VTable
+
+2021 Jan 10. VSection
 
 2021 Jan 8. VSegmentedPicker
 
