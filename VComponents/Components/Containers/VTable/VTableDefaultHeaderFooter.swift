@@ -19,8 +19,8 @@ public struct VTableDefaultHeaderFooter: View {
 }
 
 // MARK:- Body
-public extension VTableDefaultHeaderFooter {
-    var body: some View {
+extension VTableDefaultHeaderFooter {
+    public var body: some View {
         VGenericTextContent(
             title: title,
             color: VTableModel.Colors.defaultHeaderFooter,

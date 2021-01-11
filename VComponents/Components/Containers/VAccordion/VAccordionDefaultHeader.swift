@@ -19,8 +19,8 @@ public struct VAccordionDefaultHeader: View {
 }
 
 // MARK:- Body
-public extension VAccordionDefaultHeader {
-    var body: some View {
+extension VAccordionDefaultHeader {
+    public var body: some View {
         VGenericTextContent(
             title: title,
             color: VAccordionModel.Colors.defaultHeader,

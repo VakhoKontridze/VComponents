@@ -89,8 +89,8 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 }
 
 // MARK:- Body
-public extension VBaseView {
-    @ViewBuilder var body: some View {
+extension VBaseView {
+    @ViewBuilder public var body: some View {
         switch model {
         case .centerTitle(let model):
             baseViewFrame

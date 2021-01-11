@@ -81,8 +81,8 @@ public struct VLazyList<Content>: View where Content: View {
 }
 
 // MARK:- Body
-public extension VLazyList {
-    @ViewBuilder var body: some View {
+extension VLazyList {
+    @ViewBuilder public var body: some View {
         switch model {
         case .vertical(let model): VLazyListVertical(model: model, content: content)
         case .horizontal(let model): VLazyListHorizontal(model: model, content: content)

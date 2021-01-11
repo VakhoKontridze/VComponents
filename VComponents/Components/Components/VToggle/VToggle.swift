@@ -64,8 +64,8 @@ public struct VToggle<Content>: View where Content: View {
 }
 
 // MARK:- Body
-public extension VToggle {
-    @ViewBuilder var body: some View {
+extension VToggle {
+    @ViewBuilder public var body: some View {
         switch content {
         case nil:
             toggle

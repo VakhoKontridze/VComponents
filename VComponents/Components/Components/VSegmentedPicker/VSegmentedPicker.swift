@@ -151,8 +151,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
 }
 
 // MARK:- Body
-public extension VSegmentedPicker {
-    var body: some View {
+extension VSegmentedPicker {
+    public var body: some View {
         VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
             titleView
             pickerView

@@ -78,8 +78,8 @@ public struct VSlider: View {
 }
 
 // MARK:- Body
-public extension VSlider {
-    var body: some View {
+extension VSlider {
+    public var body: some View {
         GeometryReader(content: { proxy in
             ZStack(alignment: .leading, content: {
                 track

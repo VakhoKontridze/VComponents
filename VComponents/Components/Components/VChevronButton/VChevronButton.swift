@@ -35,8 +35,8 @@ public struct VChevronButton: View {
 }
 
 // MARK:- Body
-public extension VChevronButton {
-    var body: some View {
+extension VChevronButton {
+    public var body: some View {
         VBaseButton(
             isDisabled: state.isDisabled,
             action: action,

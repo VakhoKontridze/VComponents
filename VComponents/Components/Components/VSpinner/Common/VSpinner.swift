@@ -21,8 +21,8 @@ public struct VSpinner: View {
 }
 
 // MARK:- Body
-public extension VSpinner {
-    @ViewBuilder var body: some View {
+extension VSpinner {
+    @ViewBuilder public var body: some View {
         switch model {
         case .continous(let model): VSpinnerContinous(model: model)
         case .dashed(let model): VSpinnerDashed(model: model)

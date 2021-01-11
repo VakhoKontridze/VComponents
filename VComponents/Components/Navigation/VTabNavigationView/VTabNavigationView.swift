@@ -108,8 +108,8 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
 }
 
 // MARK:- Body
-public extension VTabNavigationView {
-    var body: some View {
+extension VTabNavigationView {
+    public var body: some View {
         TabView(selection: $selection, content: {
             if let page = pageOne { pageContent(page).tag(0) }
             if let page = pageTwo { pageContent(page).tag(1) }

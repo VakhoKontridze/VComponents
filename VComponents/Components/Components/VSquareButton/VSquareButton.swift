@@ -57,8 +57,8 @@ public struct VSquareButton<Content>: View where Content: View {
 }
 
 // MARK:- Body
-public extension VSquareButton {
-    var body: some View {
+extension VSquareButton {
+    public var body: some View {
         VBaseButton(
             isDisabled: state.isDisabled,
             action: action,

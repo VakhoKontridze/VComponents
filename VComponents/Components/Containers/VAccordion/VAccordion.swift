@@ -100,8 +100,8 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
 }
 
 // MARK:- Body
-public extension VAccordion {
-    var body: some View {
+extension VAccordion {
+    public var body: some View {
         VSheet(model: model.sheetModel, content: {
             VStack(spacing: 0, content: {
                 header

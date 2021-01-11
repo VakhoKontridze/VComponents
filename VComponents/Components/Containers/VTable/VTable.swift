@@ -108,8 +108,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
 }
 
 // MARK:- View
-public extension VTable {
-    var body: some View {
+extension VTable {
+    public var body: some View {
         VSheet(model: model.sheetModel, content: {
             VLazyList(content: {
                 ForEach(sections.enumeratedArray(), id: \.element.id, content: { (i, section) in

@@ -33,8 +33,8 @@ public struct VSheet<Content>: View where Content: View {
 }
 
 // MARK:- Body
-public extension VSheet {
-    var body: some View {
+extension VSheet {
+    public var body: some View {
         contentView
             .background(sheetView)
     }

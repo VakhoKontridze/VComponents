@@ -65,8 +65,8 @@ public struct VSection<Data, ID, Content>: View
 }
 
 // MARK:- Body
-public extension VSection {
-    var body: some View {
+extension VSection {
+    public var body: some View {
         VStack(alignment: .leading, spacing: model.layout.titleMarginBottom, content: {
             if let title = title, !title.isEmpty {
                 Text(title)

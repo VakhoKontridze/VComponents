@@ -33,8 +33,8 @@ public struct VGenericTextContent: View {
 }
 
 // MARK:- Body
-public extension VGenericTextContent {
-    var body: some View {
+extension VGenericTextContent {
+    public var body: some View {
         Text(title)
             .lineLimit(lineLimit)
             .multilineTextAlignment(alignment)

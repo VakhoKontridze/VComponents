@@ -24,8 +24,8 @@ public struct VNavigationView<Content>: View where Content: View {
 }
 
 // MARK:- Body
-public extension VNavigationView {
-    var body: some View {
+extension VNavigationView {
+    public var body: some View {
         NavigationView(content: {
             content()
                 .setUpNavigationViewNavigationBar()

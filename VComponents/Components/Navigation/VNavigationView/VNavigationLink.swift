@@ -40,8 +40,8 @@ public struct VNavigationLink<Destination, Label>: View
 }
 
 // MARK:- Body
-public extension VNavigationLink {
-    var body: some View {
+extension VNavigationLink {
+    public var body: some View {
         NavigationLink(
             destination: destination.environment(\.vNavigationViewBackButtonHidden, false),
             label: label
