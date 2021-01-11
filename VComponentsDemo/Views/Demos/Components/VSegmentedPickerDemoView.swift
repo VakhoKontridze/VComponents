@@ -79,7 +79,7 @@ struct VSegmentedPickerDemoView: View {
 // MARK:- Body
 extension VSegmentedPickerDemoView {
     var body: some View {
-        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+        DemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
             DemoRowView(type: .titled("Text"), content: {
                 VSegmentedPicker(
                     selection: $segmentedPickerSelection1,

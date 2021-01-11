@@ -18,6 +18,7 @@ public struct VLazyListModelHorizontal {
 // MARK:- Layout
 extension VLazyListModelHorizontal {
     public struct Layout {
+        public var spacing: CGFloat = 0
         public var alignment: VerticalAlignment = .center
         
         public init() {}

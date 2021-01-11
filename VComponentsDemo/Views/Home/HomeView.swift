@@ -8,64 +8,151 @@
 import SwiftUI
 import VComponents
 
+
+
+// ----------------
+
+
+
+protocol DemoableRow: Identifiable, RawRepresentable, CaseIterable where RawValue == Int {
+    var title: String { get }
+    
+    associatedtype Content: View
+    var body: Content { get }
+}
+
+extension DemoableRow {
+    var id: Int { rawValue }
+}
+
+
+// ----------------
+
+
+
+struct DemoSection<Row>: Identifiable where Row: DemoableRow {
+    let id: Int
+    let title: String?
+    let rows: [Row]
+}
+
+
+
+// ----------------
+
+
+
+enum HomeRow: Int, DemoableRow {
+    case primaryButton, secondaryButton, squareButton, chevronButton, plainButton
+    case toggle, segmentedPicker, slider
+    case spinner
+    case sheet, table, section
+    case tabNavigationView, navigationView
+    case sideBar, alert
+    case interactiveView, baseView, lazyList
+    
+    var title: String {
+        switch self {
+        case .primaryButton: return VPrimaryButtonDemoView.navigationBarTitle
+        case .secondaryButton: return VSecondaryButtonDemoView.navigationBarTitle
+        case .squareButton: return VSquareButtonDemoView.navigationBarTitle
+        case .chevronButton: return "     \(VChevronButtonDemoView.navigationBarTitle)"
+        case .plainButton: return VPlainButtonDemoView.navigationBarTitle
+            
+        case .toggle: return VToggleDemoView.navigationBarTitle
+        case .segmentedPicker: return VSegmentedPickerDemoView.navigationBarTitle
+        case .slider: return VSliderDemoView.navigationBarTitle
+            
+        case .spinner: return VSpinnerDemoView.navigationBarTitle
+            
+        case .sheet: return VSheetDemoView.navigationBarTitle
+        case .table: return VTableDemoView.navigationBarTitle
+        case .section: return VSectionDemoView.navigationBarTitle
+            
+        case .tabNavigationView: return VTabNavigationViewDemoView.navigationBarTitle
+        case .navigationView: return VNavigationViewDemoView.navigationBarTitle
+            
+        case .sideBar: return VSideBarDemoView.navigationBarTitle
+        case .alert: return VAlertDemoView.navigationBarTitle
+            
+        case .interactiveView: return VInteractiveViewDemoView.navigationBarTitle
+        case .baseView: return VBaseViewDemoView.navigationBarTitle
+        case .lazyList: return VLazyListDemoView.navigationBarTitle
+        }
+    }
+    
+    @ViewBuilder var body: some View {
+        switch self {
+        case .primaryButton: VPrimaryButtonDemoView()
+        case .secondaryButton: VSecondaryButtonDemoView()
+        case .squareButton: VSquareButtonDemoView()
+        case .chevronButton: VChevronButtonDemoView()
+        case .plainButton: VPlainButtonDemoView()
+            
+        case .toggle: VToggleDemoView()
+        case .segmentedPicker: VSegmentedPickerDemoView()
+        case .slider: VSliderDemoView()
+            
+        case .spinner: VSpinnerDemoView()
+            
+        case .sheet: VSheetDemoView()
+        case .table: VTableDemoView()
+        case .section: VSectionDemoView()
+            
+        case .tabNavigationView: VTabNavigationViewDemoView()
+        case .navigationView: VNavigationViewDemoView()
+            
+        case .sideBar: VSideBarDemoView()
+        case .alert: VAlertDemoView()
+            
+        case .interactiveView: VInteractiveViewDemoView()
+        case .baseView: VBaseViewDemoView()
+        case .lazyList: VLazyListDemoView()
+        }
+    }
+}
+
+
+// ----------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // MARK:- Home View
 struct HomeView: View {
     // MARK: Properties
     private static let navigationBarTitle: String = "VComponents Demo"
+
+    let sections: [DemoSection<HomeRow>] = [
+        .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton]),
+        .init(id: 1, title: "Pickers", rows: [.toggle, .segmentedPicker, .slider]),
+        .init(id: 2, title: "Misc", rows: [.spinner]),
+        .init(id: 3, title: "Containers", rows: [.sheet, .table, .section]),
+        .init(id: 4, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
+        .init(id: 5, title: "Modals", rows: [.sideBar, .alert]),
+        .init(id: 6, title: "Core", rows: [.interactiveView, .baseView, .lazyList])
+    ]
 }
 
 // MARK:- Body
 extension HomeView {
     var body: some View {
         VNavigationView(content: {
-            VBaseView(title: Self.navigationBarTitle, content: {
-                ScrollView(content: {
-                    Group(content: {
-                        HomeSectionView(title: "Buttons", content: {
-                            HomeRowView(title: VPrimaryButtonDemoView.navigationBarTitle, destination: VPrimaryButtonDemoView())
-                            HomeRowView(title: VSecondaryButtonDemoView.navigationBarTitle, destination: VSecondaryButtonDemoView())
-                            HomeRowView(title: VSquareButtonDemoView.navigationBarTitle, destination: VSquareButtonDemoView())
-                            HomeRowView(title: "     \(VChevronButtonDemoView.navigationBarTitle)", destination: VChevronButtonDemoView())
-                            HomeRowView(title: VPlainButtonDemoView.navigationBarTitle, destination: VPlainButtonDemoView(), showSeparator: false)
-                        })
-
-                        HomeSectionView(title: "Pickers", content: {
-                            HomeRowView(title: VToggleDemoView.navigationBarTitle, destination: VToggleDemoView())
-                            HomeRowView(title: VSegmentedPickerDemoView.navigationBarTitle, destination: VSegmentedPickerDemoView())
-                            HomeRowView(title: VSliderDemoView.navigationBarTitle, destination: VSliderDemoView(), showSeparator: false)
-                        })
-
-                        HomeSectionView(title: "Misc", content: {
-                            HomeRowView(title: VSpinnerDemoView.navigationBarTitle, destination: VSpinnerDemoView(), showSeparator: false)
-                        })
-
-                        HomeSectionView(title: "Containers", content: {
-                            HomeRowView(title: VSheetDemoView.navigationBarTitle, destination: VSheetDemoView())
-                            HomeRowView(title: VTableDemoView.navigationBarTitle, destination: VTableDemoView())
-                            HomeRowView(title: VSectionDemoView.navigationBarTitle, destination: VSectionDemoView(), showSeparator: false)
-                        })
-
-                        HomeSectionView(title: "Navigation", content: {
-                            HomeRowView(title: VTabNavigationViewDemoView.navigationBarTitle, destination: VTabNavigationViewDemoView())
-                            HomeRowView(title: VNavigationViewDemoView.navigationBarTitle, destination: VNavigationViewDemoView(), showSeparator: false)
-                        })
-                        
-                        HomeSectionView(title: "Modals", content: {
-                            HomeRowView(title: VSideBarDemoView.navigationBarTitle, destination: VSideBarDemoView())
-                            HomeRowView(title: VAlertDemoView.navigationBarTitle, destination: VAlertDemoView(), showSeparator: false)
-                        })
-
-                        HomeSectionView(title: "Core", content: {
-                            HomeRowView(title: VInteractiveViewDemoView.navigationBarTitle, destination: VInteractiveViewDemoView())
-                            HomeRowView(title: VBaseViewDemoView.navigationBarTitle, destination: VBaseViewDemoView())
-                            HomeRowView(title: VLazyListDemoView.navigationBarTitle, destination: VLazyListDemoView(), showSeparator: false)
-                        })
-                    })
-                        .padding(16)
-                })
-                    .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
-            })
-                .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
+            DemoListView(title: Self.navigationBarTitle, sections: sections)
         })
     }
 }

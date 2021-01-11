@@ -17,7 +17,7 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        BaseDemoView(title: Self.navigationBarTitle, content: {
+        DemoView(title: Self.navigationBarTitle, content: {
             DemoRowView(type: .titled("Continous"), content: {
                 VSpinner(model: .continous())
             })

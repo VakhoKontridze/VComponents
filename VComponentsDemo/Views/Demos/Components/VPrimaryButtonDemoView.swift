@@ -46,7 +46,7 @@ struct VPrimaryButtonDemoView: View {
 // MARK:- Body
 extension VPrimaryButtonDemoView {
     var body: some View {
-        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+        DemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
             DemoRowView(type: .titled("Text"), content: {
                 VPrimaryButton(state: buttonState, action: action, title: buttonTitle)
             })

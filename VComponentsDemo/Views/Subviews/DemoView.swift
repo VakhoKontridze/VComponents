@@ -1,5 +1,5 @@
 //
-//  BaseDemoView.swift
+//  DemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 12/22/20.
@@ -8,8 +8,8 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Base Demo View
-struct BaseDemoView<Content, ControllerContent>: View
+// MARK:- Demo View
+struct DemoView<Content, ControllerContent>: View
     where
         Content: View,
         ControllerContent: View
@@ -44,7 +44,7 @@ struct BaseDemoView<Content, ControllerContent>: View
 }
 
 // MARK:- Body
-extension BaseDemoView {
+extension DemoView {
     var body: some View {
         VBaseView(title: navigationBarTitle, content: {
             VStack(content: {
@@ -53,10 +53,7 @@ extension BaseDemoView {
                 case let controllerContent?: controllerContent()
                 }
                 
-                ScrollView(content: {
-                    HomeSectionView(title: nil, content: content)
-                })
-                    .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
+                DemoSectionView(title: nil, content: content)
             })
         })
             .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
@@ -64,9 +61,9 @@ extension BaseDemoView {
 }
 
 // MARK:- Preview
-struct BaseDemoView_Previews: PreviewProvider {
+struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
-        BaseDemoView(title: VPrimaryButtonDemoView.navigationBarTitle, content: {
+        DemoView(title: VPrimaryButtonDemoView.navigationBarTitle, content: {
             VPrimaryButtonDemoView()
         })
     }

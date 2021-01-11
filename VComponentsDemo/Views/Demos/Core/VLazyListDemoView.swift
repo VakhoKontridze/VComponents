@@ -12,23 +12,35 @@ import VComponents
 struct VLazyListDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Lazy List"
+    
+    private let sections: [DemoSection<LazyListRow>] = [
+        .init(id: 0, title: nil, rows: [.vertical, .horizontal])
+    ]
+    
+    enum LazyListRow: Int, DemoableRow {
+        case vertical
+        case horizontal
+        
+        var title: String {
+            switch self {
+            case .vertical: return "Vertical"
+            case .horizontal: return "Horizontal"
+            }
+        }
+        
+        var body: some View {
+            switch self {
+            case .vertical: return VLazyListDemoDetailView(.vertical())
+            case .horizontal: return VLazyListDemoDetailView(.horizontal())
+            }
+        }
+    }
 }
 
 // MARK:- Body
 extension VLazyListDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            ScrollView(showsIndicators: false, content: {
-                HomeSectionView(title: nil, content: {
-                    HomeRowView(title: "Vertical", destination: VLazyListDemoDetailView(.vertical()))
-                    
-                    HomeRowView(title: "Horizontal", destination: VLazyListDemoDetailView(.horizontal()), showSeparator: false)
-                })
-            })
-                .padding(10)
-                .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
-        })
-            .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
+        DemoListView(title: Self.navigationBarTitle, sections: sections)
     }
 }
 

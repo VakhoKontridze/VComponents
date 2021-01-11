@@ -75,7 +75,7 @@ public extension VSection {
                     content(row)
                         //.padding(.trailing, model.layout.contentMargin) Passed to Table via model
                 })
-                    .padding([.top, .bottom, .leading], model.layout.contentMargin)
+                    .padding([.leading, .top, .bottom,], model.layout.contentMargin)
             })
         })
     }

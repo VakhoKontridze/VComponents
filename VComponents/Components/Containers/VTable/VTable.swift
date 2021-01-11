@@ -110,7 +110,7 @@ public extension VTable {
                 })
                     .padding(.trailing, model.layout.contentMargin)
             })
-                .padding([.top, .bottom, .leading], model.layout.contentMargin)
+                .padding([.leading, .top, .bottom], model.layout.contentMargin)
         })
     }
 

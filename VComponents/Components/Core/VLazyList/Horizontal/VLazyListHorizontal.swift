@@ -27,7 +27,7 @@ struct VLazyListHorizontal<Content>: View where Content: View {
 extension VLazyListHorizontal {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: model.showIndicator, content: {
-            LazyHStack(alignment: model.layout.alignment, spacing: 0, content: {
+            LazyHStack(alignment: model.layout.alignment, spacing: model.layout.spacing, content: {
                 content()
             })
         })

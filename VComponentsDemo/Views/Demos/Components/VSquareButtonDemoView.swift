@@ -61,7 +61,7 @@ struct VSquareButtonDemoView: View {
 // MARK:- Body
 extension VSquareButtonDemoView {
     var body: some View {
-        BaseDemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+        DemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
             DemoRowView(type: .titled("Text"), content: {
                 VSquareButton(state: buttonState, action: action, title: buttonTitle)
             })

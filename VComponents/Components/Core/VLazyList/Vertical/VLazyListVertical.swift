@@ -27,7 +27,7 @@ struct VLazyListVertical<Content>: View where Content: View {
 extension VLazyListVertical {
     var body: some View {
         ScrollView(.vertical, showsIndicators: model.showIndicator, content: {
-            LazyVStack(alignment: model.layout.alignment, spacing: 0, content: {
+            LazyVStack(alignment: model.layout.alignment, spacing: model.layout.spacing, content: {
                 content()
             })
         })
