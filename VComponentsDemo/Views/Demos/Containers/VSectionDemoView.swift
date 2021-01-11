@@ -13,6 +13,8 @@ struct VSectionDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Section"
     
+    @State private var form: VTableDemoView.Form = .free
+    
     // Copied from VSection's preview
     private struct Row: Identifiable {
         let id: Int
@@ -55,16 +57,21 @@ struct VSectionDemoView: View {
 // MARK:- Body
 extension VSectionDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            ZStack(content: {
-                ColorBook.canvas.edgesIgnoringSafeArea(.all)
-                
-                VSection(title: "Lorem ipsum dolor sit amet", data: rows, content: { row in
-                    rowContent(title: row.title, color: row.color)
-                })
-                    .padding(20)
+        DemoView(type: .freeform, title: Self.navigationBarTitle, controller: controller, content: {
+            VSection(title: "Lorem ipsum dolor sit amet", data: rows, content: { row in
+                rowContent(title: row.title, color: row.color)
             })
+                .frame(height: form.height)
         })
+    }
+    
+    private var controller: some View {
+        VSegmentedPicker(
+            selection: $form,
+            title: "Section Height",
+            subtitle: form.subtitle
+        )
+            .frame(height: 90, alignment: .top)
     }
 }
 

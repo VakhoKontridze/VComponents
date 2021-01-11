@@ -17,9 +17,9 @@ struct VTabNavigationViewDemoView: View {
 // MARK:- Body
 extension VTabNavigationViewDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        DemoView(type: .section, title: Self.navigationBarTitle, content: {
             VStack(spacing: 20, content: {
-                Text("Tan Navigation View should only ever be used on a root view. Continue?")
+                Text("Tab Navigation View should only ever be used on a root view. Continue?")
                     .multilineTextAlignment(.center)
                 
                 VSecondaryButton(
@@ -27,7 +27,6 @@ extension VTabNavigationViewDemoView {
                     title: "Start Demo"
                 )
             })
-                .padding(20)
         })
     }
 }

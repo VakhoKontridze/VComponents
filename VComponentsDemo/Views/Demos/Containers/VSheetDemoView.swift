@@ -27,28 +27,21 @@ struct VSheetDemoView: View {
 // MARK:- Body
 extension VSheetDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            ZStack(content: {
-                ColorBook.canvas.edgesIgnoringSafeArea(.all)
-                
-                ScrollView(content: {
-                    DemoRowView(type: .titled("Round All"), content: {
-                        VSheet(model: model(roundedCorners: .all), content: sheetContent)
-                    })
-                    
-                    DemoRowView(type: .titled("Round Top"), content: {
-                        VSheet(model: model(roundedCorners: .top), content: sheetContent)
-                    })
-                    
-                    DemoRowView(type: .titled("Round Bottom"), content: {
-                        VSheet(model: model(roundedCorners: .bottom), content: sheetContent)
-                    })
-                    
-                    DemoRowView(type: .titled("Round Custom"), content: {
-                        VSheet(model: model(roundedCorners: .custom([.topLeft, .bottomRight])), content: sheetContent)
-                    })
-                })
-                    .padding(.vertical, 1)  // ScrollView is bugged in SwiftUI 2.0
+        DemoView(type: .freeform, title: Self.navigationBarTitle, content: {
+            DemoRowView(type: .titled("Round All"), content: {
+                VSheet(model: model(roundedCorners: .all), content: sheetContent)
+            })
+            
+            DemoRowView(type: .titled("Round Top"), content: {
+                VSheet(model: model(roundedCorners: .top), content: sheetContent)
+            })
+            
+            DemoRowView(type: .titled("Round Bottom"), content: {
+                VSheet(model: model(roundedCorners: .bottom), content: sheetContent)
+            })
+            
+            DemoRowView(type: .titled("Round Custom"), content: {
+                VSheet(model: model(roundedCorners: .custom([.topLeft, .bottomRight])), content: sheetContent)
             })
         })
     }

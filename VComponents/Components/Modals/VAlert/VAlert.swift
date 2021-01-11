@@ -82,7 +82,8 @@ extension VAlert {
             VGenericTextContent(
                 title: description,
                 color: model.colors.description,
-                font: model.fonts.description
+                font: model.fonts.description,
+                lineLimit: 5
             )
         }
     }

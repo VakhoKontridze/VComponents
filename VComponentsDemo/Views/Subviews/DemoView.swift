@@ -8,35 +8,52 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Demo View
+// MARK:- Demo Rowed View
 struct DemoView<Content, ControllerContent>: View
     where
         Content: View,
         ControllerContent: View
 {
     // MARK: Properties
+    private let demoType: DemoType
+    enum DemoType {
+        case rowed
+        case section
+        case freeform
+    }
+    
     private let navigationBarTitle: String
     
-    private let controllerContent: (() -> ControllerContent)?
+    private let controllerContent: ControllerContent?
     private let content: () -> Content
+    
+    private let sheetModel: VSheetModel = {
+        var model: VSheetModel = .init()
+        model.layout.contentMargin = 10
+        return model
+    }()
     
     // MARK: Initializers
     init(
+        type demoType: DemoType = .rowed,
         title navigationBarTitle: String,
-        @ViewBuilder controller controllerContent: @escaping () -> ControllerContent,
+        controller controllerContent: ControllerContent,
         @ViewBuilder content: @escaping () -> Content
     ) {
+        self.demoType = demoType
         self.navigationBarTitle = navigationBarTitle
         self.controllerContent = controllerContent
         self.content = content
     }
 
     init(
+        type demoType: DemoType = .rowed,
         title navigationBarTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
         where ControllerContent == Never
     {
+        self.demoType = demoType
         self.navigationBarTitle = navigationBarTitle
         self.controllerContent = nil
         self.content = content
@@ -47,16 +64,39 @@ struct DemoView<Content, ControllerContent>: View
 extension DemoView {
     var body: some View {
         VBaseView(title: navigationBarTitle, content: {
-            VStack(content: {
-                switch controllerContent {
-                case nil: Spacer().frame(height: 10)
-                case let controllerContent?: controllerContent()
-                }
+            ZStack(content: {
+                ColorBook.canvas.edgesIgnoringSafeArea(.all)
                 
-                DemoSectionView(title: nil, content: content)
+                VStack(spacing: 20, content: {
+                    switch controllerContent {
+                    case nil: EmptyView()
+                    case let controllerContent?: controllerContent
+                    }
+                    
+                    switch demoType {
+                    case .rowed:
+                        ScrollView(content: {
+                            VSheet(model: sheetModel, content: content)
+                                .padding(.trailing, 16)
+                        })
+                        
+                    case .section:
+                        VSheet(content: {
+                            content()
+                                .frame(maxWidth: .infinity)
+                        })
+                            .frame(maxHeight: .infinity, alignment: .top)
+                        
+                    case .freeform:
+                        ScrollView(content: {
+                            content()
+                                .padding(.trailing, 16)
+                        })
+                    }
+                })
+                    .padding([.leading, .top, .bottom], 16)
             })
         })
-            .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
     }
 }
 

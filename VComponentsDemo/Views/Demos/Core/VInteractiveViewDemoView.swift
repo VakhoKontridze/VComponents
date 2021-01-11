@@ -50,16 +50,7 @@ struct VInteractiveViewDemoView: View {
 // MARK:- Body
 extension VInteractiveViewDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            ZStack(content: {
-                ColorBook.layer.edgesIgnoringSafeArea(.bottom)
-                interactiveView
-            })
-        })
-    }
-    
-    private var interactiveView: some View {
-        VStack(spacing: 20, content: {
+        DemoView(type: .freeform, title: Self.navigationBarTitle, content: {
             Text(clickInstruction.title)
                 .fontWeight(.semibold)
                 .frame(height: 20)

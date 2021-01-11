@@ -42,7 +42,7 @@ struct DemoRowView<Content>: View where Content: View {
 extension DemoRowView {
     var body: some View {
         VStack(content: {
-            VStack(spacing: 10, content: {
+            VStack(spacing: 16, content: {
                 content()
                 
                 if case .titled(let title) = rowType {
@@ -50,8 +50,7 @@ extension DemoRowView {
                         .font(.footnote)
                 }
             })
-                .padding(10)
-                .padding(.top, 10)
+                .padding(.top, 16)
             
             if rowType.isRow {
                 Divider()

@@ -17,7 +17,7 @@ struct VSideBarDemoView: View {
 // MARK:- Body
 extension VSideBarDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        DemoView(type: .section, title: Self.navigationBarTitle, content: {
             VStack(spacing: 20, content: {
                 Text("Side Bar should only ever be used on a root view. Continue?")
                     .multilineTextAlignment(.center)
@@ -27,7 +27,6 @@ extension VSideBarDemoView {
                     title: "Start Demo"
                 )
             })
-                .padding(20)
         })
     }
 }

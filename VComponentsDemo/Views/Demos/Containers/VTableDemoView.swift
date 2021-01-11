@@ -13,6 +13,33 @@ struct VTableDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Table"
     
+    @State private var form: Form = .free
+    enum Form: Int, VPickerTitledEnumerableOption {
+        case free
+        case constrained
+        
+        var pickerTitle: String {
+            switch self {
+            case .free: return "Free"
+            case .constrained: return "Constrained"
+            }
+        }
+        
+        var subtitle: String {
+            switch self {
+            case .free: return "Content would stretch vertically to occupy maximum space"
+            case .constrained: return "Content would be limited in vertical space. Content can be scrolled using internal scrller."
+            }
+        }
+        
+        var height: CGFloat? {
+            switch self {
+            case .free: return nil
+            case .constrained: return 500
+            }
+        }
+    }
+    
     // Copied from VTable's preview
     private struct Section: VTableSection {
         let id: Int
@@ -72,25 +99,24 @@ struct VTableDemoView: View {
 // MARK:- Body
 extension VTableDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            ZStack(content: {
-                ColorBook.canvas.edgesIgnoringSafeArea(.all)
-                
-                VTable(
-                    sections: sections,
-                    headerContent: { section in
-                        VTableDefaultHeaderFooter(title: "Header \(section.title)")
-                    },
-                    footerContent: { section in
-                        VTableDefaultHeaderFooter(title: "Footer \(section.title)")
-                    },
-                    rowContent: { row in
-                        rowContent(title: row.title, color: row.color)
-                    }
-                )
-                    .padding(20)
-            })
+        DemoView(type: .freeform, title: Self.navigationBarTitle, controller: controller, content: {
+            VTable(
+                sections: sections,
+                headerContent: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
+                footerContent: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
+                rowContent: { row in rowContent(title: row.title, color: row.color) }
+            )
+                .frame(height: form.height)
         })
+    }
+    
+    private var controller: some View {
+        VSegmentedPicker(
+            selection: $form,
+            title: "Table Height",
+            subtitle: form.subtitle
+        )
+            .frame(height: 90, alignment: .top)
     }
 }
 

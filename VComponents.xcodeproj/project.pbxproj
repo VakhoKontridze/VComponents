@@ -57,7 +57,6 @@
 		7A4C4317259237BB000207DD /* VNavigationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C4316259237BB000207DD /* VNavigationViewModel.swift */; };
 		7A4C431A259237CA000207DD /* VNavigationViewNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C4319259237CA000207DD /* VNavigationViewNavigationBar.swift */; };
 		7A4C4344259242B7000207DD /* SceneDelegateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4C4343259242B7000207DD /* SceneDelegateExtensions.swift */; };
-		7A4D0C1525949FF700108575 /* DemoSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C1425949FF700108575 /* DemoSectionView.swift */; };
 		7A4D0C2E2594C06A00108575 /* VSecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C2D2594C06A00108575 /* VSecondaryButton.swift */; };
 		7A4D0C372594C0CE00108575 /* VSecondaryButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C362594C0CE00108575 /* VSecondaryButtonState.swift */; };
 		7A4D0C442594C71D00108575 /* VSecondaryButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4D0C432594C71D00108575 /* VSecondaryButtonModel.swift */; };
@@ -199,7 +198,6 @@
 		7A4C4316259237BB000207DD /* VNavigationViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VNavigationViewModel.swift; sourceTree = "<group>"; };
 		7A4C4319259237CA000207DD /* VNavigationViewNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VNavigationViewNavigationBar.swift; sourceTree = "<group>"; };
 		7A4C4343259242B7000207DD /* SceneDelegateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegateExtensions.swift; sourceTree = "<group>"; };
-		7A4D0C1425949FF700108575 /* DemoSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSectionView.swift; sourceTree = "<group>"; };
 		7A4D0C2D2594C06A00108575 /* VSecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButton.swift; sourceTree = "<group>"; };
 		7A4D0C362594C0CE00108575 /* VSecondaryButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButtonState.swift; sourceTree = "<group>"; };
 		7A4D0C432594C71D00108575 /* VSecondaryButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSecondaryButtonModel.swift; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 				7A871E7825AC78EE007E27E3 /* DemoListView.swift */,
 				7AE6078225926994009CDB28 /* DemoListRowView.swift */,
 				7A599580259245660087902B /* DemoView.swift */,
-				7A4D0C1425949FF700108575 /* DemoSectionView.swift */,
 				7A8A9743258DDF4200309886 /* DemoRowView.swift */,
 			);
 			path = Subviews;
@@ -1102,7 +1099,6 @@
 				7AC670F725AB7DCC00D7CA8E /* VTableDemoView.swift in Sources */,
 				7A4D0C4C2594C91400108575 /* VSecondaryButtonDemoView.swift in Sources */,
 				7A3C1543258DE65F00CE1D96 /* ViewExtensions.swift in Sources */,
-				7A4D0C1525949FF700108575 /* DemoSectionView.swift in Sources */,
 				7AE5C25825A893A5001B62B2 /* VSegmentedPickerDemoView.swift in Sources */,
 				7AC670FA25AB84AC00D7CA8E /* VSectionDemoView.swift in Sources */,
 				7A8A9700258DDC7800309886 /* HomeView.swift in Sources */,

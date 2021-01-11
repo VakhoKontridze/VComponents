@@ -32,7 +32,7 @@ struct VPlainButtonDemoView: View {
 // MARK:- Body
 extension VPlainButtonDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: { controller }, content: {
+        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
             DemoRowView(type: .titled("Text"), content: {
                 VPlainButton(state: buttonState, action: action, title: buttonTitle)
             })

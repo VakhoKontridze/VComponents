@@ -67,9 +67,7 @@ extension VBaseViewDemoView {
     }
     
     private var viewContent: some View {
-        ZStack(content: {
-            ColorBook.layer.edgesIgnoringSafeArea(.bottom)
-            
+        DemoView(type: .section, title: "", content: {
             VStack(alignment: .leading, spacing: 20, content: {
                 VSegmentedPicker(
                     model: segmentedPickerModel,
@@ -82,10 +80,6 @@ extension VBaseViewDemoView {
                 
                 VToggle(state: $navigationBarTrailingItemState, title: "Trailing items")
             })
-                .frame(maxHeight: .infinity, alignment: .top)
-                .padding(20)
-            
-                .font(.body)
         })
     }
     

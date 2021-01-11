@@ -17,7 +17,7 @@ struct VNavigationViewDemoView: View {
 // MARK:- Body
 extension VNavigationViewDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        DemoView(type: .section, title: Self.navigationBarTitle, content: {
             VStack(spacing: 20, content: {
                 Text("Navigation View should only ever be used on a root view. Continue?")
                     .multilineTextAlignment(.center)
@@ -27,7 +27,6 @@ extension VNavigationViewDemoView {
                     title: "Start Demo"
                 )
             })
-                .padding(10)
         })
     }
 }
