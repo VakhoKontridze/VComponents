@@ -50,20 +50,24 @@ struct VInteractiveViewDemoView: View {
 // MARK:- Body
 extension VInteractiveViewDemoView {
     var body: some View {
-        DemoView(type: .freeform, title: Self.navigationBarTitle, content: {
-            Text(clickInstruction.title)
-                .fontWeight(.semibold)
-                .frame(height: 20)
-            
-            VBaseButton(isDisabled: false, action: action, onPress: pressAction, content: {
-                Circle()
-                    .frame(dimension: 200)
-                    .foregroundColor(Color.pink.opacity(pressInsturction.opacity))
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(type: .section, content: {
+                VStack(spacing: 20, content: {
+                    Text(clickInstruction.title)
+                        .fontWeight(.semibold)
+                        .frame(height: 20)
+                    
+                    VBaseButton(isDisabled: false, action: action, onPress: pressAction, content: {
+                        Circle()
+                            .frame(dimension: 200)
+                            .foregroundColor(Color.pink.opacity(pressInsturction.opacity))
+                    })
+                    
+                    Text(pressInsturction.title)
+                        .fontWeight(.semibold)
+                        .frame(height: 20)
+                })
             })
-            
-            Text(pressInsturction.title)
-                .fontWeight(.semibold)
-                .frame(height: 20)
         })
     }
 }

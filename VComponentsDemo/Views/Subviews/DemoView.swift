@@ -22,8 +22,6 @@ struct DemoView<Content, ControllerContent>: View
         case freeform
     }
     
-    private let navigationBarTitle: String
-    
     private let controllerContent: ControllerContent?
     private let content: () -> Content
     
@@ -36,25 +34,21 @@ struct DemoView<Content, ControllerContent>: View
     // MARK: Initializers
     init(
         type demoType: DemoType = .rowed,
-        title navigationBarTitle: String,
         controller controllerContent: ControllerContent,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.demoType = demoType
-        self.navigationBarTitle = navigationBarTitle
         self.controllerContent = controllerContent
         self.content = content
     }
 
     init(
         type demoType: DemoType = .rowed,
-        title navigationBarTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
         where ControllerContent == Never
     {
         self.demoType = demoType
-        self.navigationBarTitle = navigationBarTitle
         self.controllerContent = nil
         self.content = content
     }
@@ -63,39 +57,37 @@ struct DemoView<Content, ControllerContent>: View
 // MARK:- Body
 extension DemoView {
     var body: some View {
-        VBaseView(title: navigationBarTitle, content: {
-            ZStack(content: {
-                ColorBook.canvas.edgesIgnoringSafeArea(.all)
+        ZStack(content: {
+            ColorBook.canvas.edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 20, content: {
+                switch controllerContent {
+                case nil: EmptyView()
+                case let controllerContent?: controllerContent
+                }
                 
-                VStack(spacing: 20, content: {
-                    switch controllerContent {
-                    case nil: EmptyView()
-                    case let controllerContent?: controllerContent
-                    }
+                switch demoType {
+                case .rowed:
+                    ScrollView(content: {
+                        VSheet(model: sheetModel, content: content)
+                            .padding(.trailing, 16)
+                    })
                     
-                    switch demoType {
-                    case .rowed:
-                        ScrollView(content: {
-                            VSheet(model: sheetModel, content: content)
-                                .padding(.trailing, 16)
-                        })
-                        
-                    case .section:
-                        VSheet(content: {
-                            content()
-                                .frame(maxWidth: .infinity)
-                        })
-                            .frame(maxHeight: .infinity, alignment: .top)
-                        
-                    case .freeform:
-                        ScrollView(content: {
-                            content()
-                                .padding(.trailing, 16)
-                        })
-                    }
-                })
-                    .padding([.leading, .top, .bottom], 16)
+                case .section:
+                    VSheet(content: {
+                        content()
+                            .frame(maxWidth: .infinity)
+                    })
+                        .frame(maxHeight: .infinity, alignment: .top)
+                    
+                case .freeform:
+                    ScrollView(content: {
+                        content()
+                            .padding(.trailing, 16)
+                    })
+                }
             })
+                .padding([.leading, .top, .bottom], 16)
         })
     }
 }
@@ -103,7 +95,7 @@ extension DemoView {
 // MARK:- Preview
 struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
-        DemoView(title: VPrimaryButtonDemoView.navigationBarTitle, content: {
+        DemoView(content: {
             VPrimaryButtonDemoView()
         })
     }

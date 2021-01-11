@@ -79,94 +79,96 @@ struct VSegmentedPickerDemoView: View {
 // MARK:- Body
 extension VSegmentedPickerDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("Text"), content: {
-                VSegmentedPicker(
-                    selection: $segmentedPickerSelection1,
-                    state: segmentedPickerState
-                )
-            })
-            
-            DemoRowView(type: .titled("Image"), content: {
-                VSegmentedPicker(
-                    selection: $segmentedPickerSelection2,
-                    state: segmentedPickerState,
-                    rowContent: {
-                        $0.pickerSymbol
-                    }
-                )
-            })
-            
-            DemoRowView(type: .titled("Image and Text"), content: {
-                VSegmentedPicker(
-                    selectedIndex: $segmentedPickerSelection3,
-                    state: segmentedPickerState,
-                    data: Options.allCases,
-                    rowContent: { option in
-                        HStack(spacing: 5, content: {
-                            option.pickerSymbol
-                            Text(option.pickerTitle)
-                        })
-                    }
-                )
-            })
-            
-            DemoRowView(type: .titled("Picker with Title"), content: {
-                VSegmentedPicker(
-                    selection: $segmentedPickerSelection4,
-                    state: segmentedPickerState,
-                    title: "Lorem ipsum dolor sit amet"
-                )
-            })
-            
-            DemoRowView(type: .titled("Picker with Title and Subtitle"), content: {
-                VSegmentedPicker(
-                    selection: $segmentedPickerSelection5,
-                    state: segmentedPickerState,
-                    title: "Lorem ipsum dolor sit amet",
-                    subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus."
-                )
-            })
-            
-            DemoRowView(type: .titled("Disabled Row"), content: {
-                VSegmentedPicker(
-                    selection: $segmentedPickerSelection6,
-                    state: segmentedPickerState,
-                    disabledIndexes: [1]
-                )
-            })
-            
-            DemoRowView(type: .titled("No Animation"), content: {
-                VSegmentedPicker(
-                    model: noAnimationSegmentedModel,
-                    selection: $segmentedPickerSelection7,
-                    state: segmentedPickerState
-                )
-            })
-            
-            DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                VSegmentedPicker(
-                    model: noLoweredOpacityWhenPressedModel,
-                    selection: $segmentedPickerSelection8,
-                    state: segmentedPickerState
-                )
-            })
-            
-            DemoRowView(type: .titled("No Smaller Indicator when Pressed"), content: {
-                VSegmentedPicker(
-                    model: noSmallerIndcatorWhenPressedModel,
-                    selection: $segmentedPickerSelection9,
-                    state: segmentedPickerState
-                )
-            })
-            
-            DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                VSegmentedPicker(
-                    model: noLoweredOpacityWhenDisabledModel,
-                    selection: $segmentedPickerSelection10,
-                    state: segmentedPickerState,
-                    disabledIndexes: [1]
-                )
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("Text"), content: {
+                    VSegmentedPicker(
+                        selection: $segmentedPickerSelection1,
+                        state: segmentedPickerState
+                    )
+                })
+                
+                DemoRowView(type: .titled("Image"), content: {
+                    VSegmentedPicker(
+                        selection: $segmentedPickerSelection2,
+                        state: segmentedPickerState,
+                        rowContent: {
+                            $0.pickerSymbol
+                        }
+                    )
+                })
+                
+                DemoRowView(type: .titled("Image and Text"), content: {
+                    VSegmentedPicker(
+                        selectedIndex: $segmentedPickerSelection3,
+                        state: segmentedPickerState,
+                        data: Options.allCases,
+                        rowContent: { option in
+                            HStack(spacing: 5, content: {
+                                option.pickerSymbol
+                                Text(option.pickerTitle)
+                            })
+                        }
+                    )
+                })
+                
+                DemoRowView(type: .titled("Picker with Title"), content: {
+                    VSegmentedPicker(
+                        selection: $segmentedPickerSelection4,
+                        state: segmentedPickerState,
+                        title: "Lorem ipsum dolor sit amet"
+                    )
+                })
+                
+                DemoRowView(type: .titled("Picker with Title and Subtitle"), content: {
+                    VSegmentedPicker(
+                        selection: $segmentedPickerSelection5,
+                        state: segmentedPickerState,
+                        title: "Lorem ipsum dolor sit amet",
+                        subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus."
+                    )
+                })
+                
+                DemoRowView(type: .titled("Disabled Row"), content: {
+                    VSegmentedPicker(
+                        selection: $segmentedPickerSelection6,
+                        state: segmentedPickerState,
+                        disabledIndexes: [1]
+                    )
+                })
+                
+                DemoRowView(type: .titled("No Animation"), content: {
+                    VSegmentedPicker(
+                        model: noAnimationSegmentedModel,
+                        selection: $segmentedPickerSelection7,
+                        state: segmentedPickerState
+                    )
+                })
+                
+                DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
+                    VSegmentedPicker(
+                        model: noLoweredOpacityWhenPressedModel,
+                        selection: $segmentedPickerSelection8,
+                        state: segmentedPickerState
+                    )
+                })
+                
+                DemoRowView(type: .titled("No Smaller Indicator when Pressed"), content: {
+                    VSegmentedPicker(
+                        model: noSmallerIndcatorWhenPressedModel,
+                        selection: $segmentedPickerSelection9,
+                        state: segmentedPickerState
+                    )
+                })
+                
+                DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
+                    VSegmentedPicker(
+                        model: noLoweredOpacityWhenDisabledModel,
+                        selection: $segmentedPickerSelection10,
+                        state: segmentedPickerState,
+                        disabledIndexes: [1]
+                    )
+                })
             })
         })
     }

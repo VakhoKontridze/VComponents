@@ -49,15 +49,17 @@ struct VAlertDemoView: View {
 // MARK:- Body
 extension VAlertDemoView {
     var body: some View {
-        DemoView(type: .section, title: Self.navigationBarTitle, content: {
-            VStack(spacing: 20, content: {
-                TextField("Title", text: $title).textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                TextField("Description", text: $description).textFieldStyle(RoundedBorderTextFieldStyle())
-                
-                VSegmentedPicker(selection: $dialogType, title: "Dialog Type")
-                
-                VSecondaryButton(action: { alertIsShown = true }, title: "Demo Alert")
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(type: .section, content: {
+                VStack(spacing: 20, content: {
+                    TextField("Title", text: $title).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    TextField("Description", text: $description).textFieldStyle(RoundedBorderTextFieldStyle())
+                    
+                    VSegmentedPicker(selection: $dialogType, title: "Dialog Type")
+                    
+                    VSecondaryButton(action: { alertIsShown = true }, title: "Demo Alert")
+                })
             })
         })
             .vAlert(

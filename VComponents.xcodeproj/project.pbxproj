@@ -114,6 +114,8 @@
 		7AC5060725911A4000226656 /* VSpinnerDashed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC5060625911A4000226656 /* VSpinnerDashed.swift */; };
 		7AC670F725AB7DCC00D7CA8E /* VTableDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC670F625AB7DCC00D7CA8E /* VTableDemoView.swift */; };
 		7AC670FA25AB84AC00D7CA8E /* VSectionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC670F925AB84AC00D7CA8E /* VSectionDemoView.swift */; };
+		7ACC3EBE25AC893300EAD184 /* DemoableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EBD25AC893300EAD184 /* DemoableRow.swift */; };
+		7ACC3EC225AC895000EAD184 /* DemoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EC125AC895000EAD184 /* DemoSection.swift */; };
 		7AD809432594FCF000DABE49 /* VSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809422594FCF000DABE49 /* VSideBar.swift */; };
 		7AD809472594FD9100DABE49 /* VSideBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809462594FD9100DABE49 /* VSideBarExtension.swift */; };
 		7AD809502594FDF900DABE49 /* VSideBarSwipeGesture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD8094F2594FDF900DABE49 /* VSideBarSwipeGesture.swift */; };
@@ -259,6 +261,8 @@
 		7AC5060625911A4000226656 /* VSpinnerDashed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpinnerDashed.swift; sourceTree = "<group>"; };
 		7AC670F625AB7DCC00D7CA8E /* VTableDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTableDemoView.swift; sourceTree = "<group>"; };
 		7AC670F925AB84AC00D7CA8E /* VSectionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSectionDemoView.swift; sourceTree = "<group>"; };
+		7ACC3EBD25AC893300EAD184 /* DemoableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoableRow.swift; sourceTree = "<group>"; };
+		7ACC3EC125AC895000EAD184 /* DemoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSection.swift; sourceTree = "<group>"; };
 		7AD809422594FCF000DABE49 /* VSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBar.swift; sourceTree = "<group>"; };
 		7AD809462594FD9100DABE49 /* VSideBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarExtension.swift; sourceTree = "<group>"; };
 		7AD8094F2594FDF900DABE49 /* VSideBarSwipeGesture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarSwipeGesture.swift; sourceTree = "<group>"; };
@@ -628,6 +632,7 @@
 				7A8A9717258DDCC700309886 /* App Info */,
 				7AA9F43A2590B1F50060F210 /* App Control */,
 				7A8A9718258DDCD300309886 /* Views */,
+				7ACC3EBC25AC891300EAD184 /* Models */,
 				7A3C1541258DE65700CE1D96 /* Extensions */,
 				7A8A9716258DDCBF00309886 /* Resources */,
 				7A8A9703258DDC7A00309886 /* Preview Content */,
@@ -844,6 +849,15 @@
 				7A62182E2594942C00515688 /* Horizontal */,
 			);
 			path = VLazyList;
+			sourceTree = "<group>";
+		};
+		7ACC3EBC25AC891300EAD184 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7ACC3EBD25AC893300EAD184 /* DemoableRow.swift */,
+				7ACC3EC125AC895000EAD184 /* DemoSection.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		7AD809402594FCD900DABE49 /* VSideBar */ = {
@@ -1081,12 +1095,14 @@
 				7A8A96FC258DDC7800309886 /* AppDelegate.swift in Sources */,
 				7A4C4344259242B7000207DD /* SceneDelegateExtensions.swift in Sources */,
 				7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */,
+				7ACC3EBE25AC893300EAD184 /* DemoableRow.swift in Sources */,
 				7A599581259245660087902B /* DemoView.swift in Sources */,
 				7A8A9744258DDF4200309886 /* DemoRowView.swift in Sources */,
 				7AD809612595073C00DABE49 /* VSideBarDemoView.swift in Sources */,
 				7A2D6F30259734CB005513A7 /* VTabNavigationViewDemoView.swift in Sources */,
 				7A8A96FE258DDC7800309886 /* SceneDelegate.swift in Sources */,
 				7A48FDDE258DE58800AA4D4D /* VSquareButtonDemoView.swift in Sources */,
+				7ACC3EC225AC895000EAD184 /* DemoSection.swift in Sources */,
 				7A43A612259CAE130029E3C9 /* VAlertDemoView.swift in Sources */,
 				7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */,
 				7A871E7925AC78EE007E27E3 /* DemoListView.swift in Sources */,

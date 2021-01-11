@@ -32,29 +32,31 @@ struct VPlainButtonDemoView: View {
 // MARK:- Body
 extension VPlainButtonDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("Text"), content: {
-                VPlainButton(state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Image"), content: {
-                VPlainButton(state: buttonState, action: action, content: buttonContent)
-            })
-            
-            DemoRowView(type: .titled("Image and Text"), content: {
-                VPlainButton(state: buttonState, action: action, content: {
-                    VStack(spacing: 5, content: {
-                        buttonContent()
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("Text"), content: {
+                    VPlainButton(state: buttonState, action: action, title: buttonTitle)
+                })
+                
+                DemoRowView(type: .titled("Image"), content: {
+                    VPlainButton(state: buttonState, action: action, content: buttonContent)
+                })
+                
+                DemoRowView(type: .titled("Image and Text"), content: {
+                    VPlainButton(state: buttonState, action: action, content: {
+                        VStack(spacing: 5, content: {
+                            buttonContent()
 
-                        Text(buttonTitle)
-                            .font(VPlainButtonModel().font)
-                            .foregroundColor(ColorBook.accent)
+                            Text(buttonTitle)
+                                .font(VPlainButtonModel().font)
+                                .foregroundColor(ColorBook.accent)
+                        })
                     })
                 })
-            })
-            
-            DemoRowView(type: .titled("Clipped Hit Box"), content: {
-                VPlainButton(model: clippedHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
+                
+                DemoRowView(type: .titled("Clipped Hit Box"), content: {
+                    VPlainButton(model: clippedHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
+                })
             })
         })
     }

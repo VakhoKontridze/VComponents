@@ -17,7 +17,7 @@ struct VLazyListDemoView: View {
         .init(id: 0, title: nil, rows: [.vertical, .horizontal])
     ]
     
-    enum LazyListRow: Int, DemoableRow {
+    private enum LazyListRow: Int, DemoableRow {
         case vertical
         case horizontal
         
@@ -40,7 +40,9 @@ struct VLazyListDemoView: View {
 // MARK:- Body
 extension VLazyListDemoView {
     var body: some View {
-        DemoListView(title: Self.navigationBarTitle, sections: sections)
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoListView(sections: sections)
+        })
     }
 }
 

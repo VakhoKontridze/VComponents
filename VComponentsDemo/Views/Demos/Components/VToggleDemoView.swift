@@ -46,29 +46,31 @@ struct VToggleDemoView: View {
 // MARK:- Body
 extension VToggleDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("No Content"), content: {
-                VToggle(state: $toggle1State)
-            })
-            
-            DemoRowView(type: .titled("Text"), content: {
-                VToggle(state: $toggle2State, title: toggleTitle)
-            })
-            
-            DemoRowView(type: .titled("Icon"), content: {
-                VToggle(state: $toggle3State, content: toggleContent)
-            })
-            
-            DemoRowView(type: .titled("Non-clickable Content"), content: {
-                VToggle(model: nonClickableContentModel, state: $toggle4State, title: toggleTitle)
-            })
-            
-            DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                VToggle(model: noLoweredOpacityWhenPressedModel, state: $toggle5State, title: toggleTitle)
-            })
-            
-            DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                VToggle(model: noLoweredOpacityWhenDisabledModel, state: $toggle6State, title: toggleTitle)
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("No Content"), content: {
+                    VToggle(state: $toggle1State)
+                })
+                
+                DemoRowView(type: .titled("Text"), content: {
+                    VToggle(state: $toggle2State, title: toggleTitle)
+                })
+                
+                DemoRowView(type: .titled("Icon"), content: {
+                    VToggle(state: $toggle3State, content: toggleContent)
+                })
+                
+                DemoRowView(type: .titled("Non-clickable Content"), content: {
+                    VToggle(model: nonClickableContentModel, state: $toggle4State, title: toggleTitle)
+                })
+                
+                DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
+                    VToggle(model: noLoweredOpacityWhenPressedModel, state: $toggle5State, title: toggleTitle)
+                })
+                
+                DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
+                    VToggle(model: noLoweredOpacityWhenDisabledModel, state: $toggle6State, title: toggleTitle)
+                })
             })
         })
     }

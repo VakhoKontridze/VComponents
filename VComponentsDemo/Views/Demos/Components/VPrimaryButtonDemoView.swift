@@ -46,29 +46,31 @@ struct VPrimaryButtonDemoView: View {
 // MARK:- Body
 extension VPrimaryButtonDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("Text"), content: {
-                VPrimaryButton(state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Image"), content: {
-                VPrimaryButton(state: buttonState, action: action, content: buttonContent)
-            })
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("Text"), content: {
+                    VPrimaryButton(state: buttonState, action: action, title: buttonTitle)
+                })
+                
+                DemoRowView(type: .titled("Image"), content: {
+                    VPrimaryButton(state: buttonState, action: action, content: buttonContent)
+                })
 
-            DemoRowView(type: .titled("Image and Text"), content: {
-                VPrimaryButton(state: buttonState, action: action, content: {
-                    HStack(spacing: 5, content: {
-                        buttonContent()
-                        
-                        Text(buttonTitle)
-                            .font(VPrimaryButtonModel().font)
-                            .foregroundColor(ColorBook.primaryInverted)
+                DemoRowView(type: .titled("Image and Text"), content: {
+                    VPrimaryButton(state: buttonState, action: action, content: {
+                        HStack(spacing: 5, content: {
+                            buttonContent()
+                            
+                            Text(buttonTitle)
+                                .font(VPrimaryButtonModel().font)
+                                .foregroundColor(ColorBook.primaryInverted)
+                        })
                     })
                 })
-            })
-            
-            DemoRowView(type: .titled("Bordered"), content: {
-                VPrimaryButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
+                
+                DemoRowView(type: .titled("Bordered"), content: {
+                    VPrimaryButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
+                })
             })
         })
     }

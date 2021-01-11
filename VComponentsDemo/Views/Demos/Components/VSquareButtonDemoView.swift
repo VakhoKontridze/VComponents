@@ -61,37 +61,39 @@ struct VSquareButtonDemoView: View {
 // MARK:- Body
 extension VSquareButtonDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("Text"), content: {
-                VSquareButton(state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Image"), content: {
-                VSquareButton(state: buttonState, action: action, content: buttonContent)
-            })
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("Text"), content: {
+                    VSquareButton(state: buttonState, action: action, title: buttonTitle)
+                })
+                
+                DemoRowView(type: .titled("Image"), content: {
+                    VSquareButton(state: buttonState, action: action, content: buttonContent)
+                })
 
-            DemoRowView(type: .titled("Image and Text"), content: {
-                VSquareButton(state: buttonState, action: action, content: {
-                    HStack(spacing: 5, content: {
-                        buttonContent()
-                        
-                        Text("A")
-                            .font(VSquareButtonModel().font)
-                            .foregroundColor(ColorBook.primaryInverted)
+                DemoRowView(type: .titled("Image and Text"), content: {
+                    VSquareButton(state: buttonState, action: action, content: {
+                        HStack(spacing: 5, content: {
+                            buttonContent()
+                            
+                            Text("A")
+                                .font(VSquareButtonModel().font)
+                                .foregroundColor(ColorBook.primaryInverted)
+                        })
                     })
                 })
-            })
-            
-            DemoRowView(type: .titled("Cirular"), content: {
-                VSquareButton(model: circularModel, state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Bordered"), content: {
-                VSquareButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Larger Hit Box"), content: {
-                VSquareButton(model: largerHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
+                
+                DemoRowView(type: .titled("Cirular"), content: {
+                    VSquareButton(model: circularModel, state: buttonState, action: action, title: buttonTitle)
+                })
+                
+                DemoRowView(type: .titled("Bordered"), content: {
+                    VSquareButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
+                })
+                
+                DemoRowView(type: .titled("Larger Hit Box"), content: {
+                    VSquareButton(model: largerHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
+                })
             })
         })
     }

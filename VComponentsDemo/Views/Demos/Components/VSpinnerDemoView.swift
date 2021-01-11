@@ -17,13 +17,15 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, content: {
-            DemoRowView(type: .titled("Continous"), content: {
-                VSpinner(model: .continous())
-            })
-            
-            DemoRowView(type: .titled("Dashed"), content: {
-                VSpinner(model: .dashed())
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(content: {
+                DemoRowView(type: .titled("Continous"), content: {
+                    VSpinner(model: .continous())
+                })
+                
+                DemoRowView(type: .titled("Dashed"), content: {
+                    VSpinner(model: .dashed())
+                })
             })
         })
     }

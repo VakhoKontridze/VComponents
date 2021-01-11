@@ -11,7 +11,6 @@ import VComponents
 // MARK:- Demo List View
 struct DemoListView<Row>: View where Row: DemoableRow {
     // MARK: Properties
-    private let title: String
     private let sections: [DemoSection<Row>]
     
     private let lazyListModel: VLazyListModelVertical = {
@@ -21,8 +20,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     }()
     
     // MARK: Initializers
-    init(title: String, sections: [DemoSection<Row>]) {
-        self.title = title
+    init(sections: [DemoSection<Row>]) {
         self.sections = sections
     }
 }
@@ -30,7 +28,9 @@ struct DemoListView<Row>: View where Row: DemoableRow {
 // MARK:- Body
 extension DemoListView {
     var body: some View {
-        VBaseView(title: title, content: {
+        ZStack(content: {
+            ColorBook.canvas.edgesIgnoringSafeArea(.bottom)
+            
             VLazyList(model: .vertical(lazyListModel), data: sections, rowContent: { section in
                 VSection(title: section.title, data: section.rows, content: { row in
                     DemoListRowView(title: row.title, destination: row.body)
@@ -39,7 +39,6 @@ extension DemoListView {
             })
                 .padding([.leading, .top, .bottom], 16)
         })
-            .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
     }
 }
 

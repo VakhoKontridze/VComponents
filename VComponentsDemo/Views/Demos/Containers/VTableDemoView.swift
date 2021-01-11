@@ -99,14 +99,16 @@ struct VTableDemoView: View {
 // MARK:- Body
 extension VTableDemoView {
     var body: some View {
-        DemoView(type: .freeform, title: Self.navigationBarTitle, controller: controller, content: {
-            VTable(
-                sections: sections,
-                headerContent: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
-                footerContent: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
-                rowContent: { row in rowContent(title: row.title, color: row.color) }
-            )
-                .frame(height: form.height)
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(type: .freeform, controller: controller, content: {
+                VTable(
+                    sections: sections,
+                    headerContent: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
+                    footerContent: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
+                    rowContent: { row in rowContent(title: row.title, color: row.color) }
+                )
+                    .frame(height: form.height)
+            })
         })
     }
     

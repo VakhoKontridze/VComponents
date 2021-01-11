@@ -17,15 +17,17 @@ struct VTabNavigationViewDemoView: View {
 // MARK:- Body
 extension VTabNavigationViewDemoView {
     var body: some View {
-        DemoView(type: .section, title: Self.navigationBarTitle, content: {
-            VStack(spacing: 20, content: {
-                Text("Tab Navigation View should only ever be used on a root view. Continue?")
-                    .multilineTextAlignment(.center)
-                
-                VSecondaryButton(
-                    action: { SceneDelegate.setRootView(to: VTabNavigationViewDemoViewWalkthroughView()) },
-                    title: "Start Demo"
-                )
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(type: .section, content: {
+                VStack(spacing: 20, content: {
+                    Text("Tab Navigation View should only ever be used on a root view. Continue?")
+                        .multilineTextAlignment(.center)
+                    
+                    VSecondaryButton(
+                        action: { SceneDelegate.setRootView(to: VTabNavigationViewDemoViewWalkthroughView()) },
+                        title: "Start Demo"
+                    )
+                })
             })
         })
     }

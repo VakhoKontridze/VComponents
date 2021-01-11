@@ -28,25 +28,27 @@ struct VChevronButtonDemoView: View {
 // MARK:- Body
 extension VChevronButtonDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("Up"), content: {
-                VChevronButton(direction: .up, state: buttonState, action: action)
-            })
-            
-            DemoRowView(type: .titled("Right"), content: {
-                VChevronButton(direction: .right, state: buttonState, action: action)
-            })
-            
-            DemoRowView(type: .titled("Down"), content: {
-                VChevronButton(direction: .down, state: buttonState, action: action)
-            })
-            
-            DemoRowView(type: .titled("Left"), content: {
-                VChevronButton(direction: .left, state: buttonState, action: action)
-            })
-            
-            DemoRowView(type: .titled("Larger Hit Box"), content: {
-                VChevronButton(model: largerHitBoxButtonModel, direction: .right, state: buttonState, action: action)
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("Up"), content: {
+                    VChevronButton(direction: .up, state: buttonState, action: action)
+                })
+                
+                DemoRowView(type: .titled("Right"), content: {
+                    VChevronButton(direction: .right, state: buttonState, action: action)
+                })
+                
+                DemoRowView(type: .titled("Down"), content: {
+                    VChevronButton(direction: .down, state: buttonState, action: action)
+                })
+                
+                DemoRowView(type: .titled("Left"), content: {
+                    VChevronButton(direction: .left, state: buttonState, action: action)
+                })
+                
+                DemoRowView(type: .titled("Larger Hit Box"), content: {
+                    VChevronButton(model: largerHitBoxButtonModel, direction: .right, state: buttonState, action: action)
+                })
             })
         })
     }

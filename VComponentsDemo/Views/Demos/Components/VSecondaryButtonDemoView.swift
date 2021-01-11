@@ -52,33 +52,35 @@ struct VSecondaryButtonDemoView: View {
 // MARK:- Body
 extension VSecondaryButtonDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("Text"), content: {
-                VSecondaryButton(state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Image"), content: {
-                VSecondaryButton(state: buttonState, action: action, content: buttonContent)
-            })
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("Text"), content: {
+                    VSecondaryButton(state: buttonState, action: action, title: buttonTitle)
+                })
+                
+                DemoRowView(type: .titled("Image"), content: {
+                    VSecondaryButton(state: buttonState, action: action, content: buttonContent)
+                })
 
-            DemoRowView(type: .titled("Image and Text"), content: {
-                VSecondaryButton(state: buttonState, action: action, content: {
-                    HStack(spacing: 5, content: {
-                        buttonContent()
-                        
-                        Text(buttonTitle)
-                            .font(VSecondaryButtonModel().font)
-                            .foregroundColor(ColorBook.primaryInverted)
+                DemoRowView(type: .titled("Image and Text"), content: {
+                    VSecondaryButton(state: buttonState, action: action, content: {
+                        HStack(spacing: 5, content: {
+                            buttonContent()
+                            
+                            Text(buttonTitle)
+                                .font(VSecondaryButtonModel().font)
+                                .foregroundColor(ColorBook.primaryInverted)
+                        })
                     })
                 })
-            })
-            
-            DemoRowView(type: .titled("Bordered"), content: {
-                VSecondaryButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
-            })
-            
-            DemoRowView(type: .titled("Clipped Hit Box"), content: {
-                VSecondaryButton(model: clippedHitBoxModel, state: buttonState, action: action, title: buttonTitle)
+                
+                DemoRowView(type: .titled("Bordered"), content: {
+                    VSecondaryButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
+                })
+                
+                DemoRowView(type: .titled("Clipped Hit Box"), content: {
+                    VSecondaryButton(model: clippedHitBoxModel, state: buttonState, action: action, title: buttonTitle)
+                })
             })
         })
     }

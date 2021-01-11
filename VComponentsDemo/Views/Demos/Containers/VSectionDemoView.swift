@@ -57,11 +57,13 @@ struct VSectionDemoView: View {
 // MARK:- Body
 extension VSectionDemoView {
     var body: some View {
-        DemoView(type: .freeform, title: Self.navigationBarTitle, controller: controller, content: {
-            VSection(title: "Lorem ipsum dolor sit amet", data: rows, content: { row in
-                rowContent(title: row.title, color: row.color)
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(type: .freeform, controller: controller, content: {
+                VSection(title: "Lorem ipsum dolor sit amet", data: rows, content: { row in
+                    rowContent(title: row.title, color: row.color)
+                })
+                    .frame(height: form.height)
             })
-                .frame(height: form.height)
         })
     }
     

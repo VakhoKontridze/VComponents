@@ -68,25 +68,27 @@ struct VSliderDemoView: View {
 // MARK:- Body
 extension VSliderDemoView {
     var body: some View {
-        DemoView(title: Self.navigationBarTitle, controller: controller, content: {
-            DemoRowView(type: .titled("Default"), content: {
-                VSlider(state: sliderState, value: $standard1Value)
-            })
-            
-            DemoRowView(type: .titled("Stepped"), content: {
-                VSlider(step: 0.1, state: sliderState, value: $standard2Value)
-            })
-            
-            DemoRowView(type: .titled("Thumb Border"), content: {
-                VSlider(model: thumbBorderModel, state: sliderState, value: $standard3Value)
-            })
-            
-            DemoRowView(type: .titled("Plain"), content: {
-                VSlider(model: plainModel, state: sliderState, value: $standard4Value)
-            })
-            
-            DemoRowView(type: .titled("Animation"), content: {
-                VSlider(model: animationModel, state: sliderState, value: $standard5Value)
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(controller: controller, content: {
+                DemoRowView(type: .titled("Default"), content: {
+                    VSlider(state: sliderState, value: $standard1Value)
+                })
+                
+                DemoRowView(type: .titled("Stepped"), content: {
+                    VSlider(step: 0.1, state: sliderState, value: $standard2Value)
+                })
+                
+                DemoRowView(type: .titled("Thumb Border"), content: {
+                    VSlider(model: thumbBorderModel, state: sliderState, value: $standard3Value)
+                })
+                
+                DemoRowView(type: .titled("Plain"), content: {
+                    VSlider(model: plainModel, state: sliderState, value: $standard4Value)
+                })
+                
+                DemoRowView(type: .titled("Animation"), content: {
+                    VSlider(model: animationModel, state: sliderState, value: $standard5Value)
+                })
             })
         })
     }

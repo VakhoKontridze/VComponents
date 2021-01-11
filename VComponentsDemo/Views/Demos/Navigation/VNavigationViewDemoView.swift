@@ -17,15 +17,17 @@ struct VNavigationViewDemoView: View {
 // MARK:- Body
 extension VNavigationViewDemoView {
     var body: some View {
-        DemoView(type: .section, title: Self.navigationBarTitle, content: {
-            VStack(spacing: 20, content: {
-                Text("Navigation View should only ever be used on a root view. Continue?")
-                    .multilineTextAlignment(.center)
-                
-                VSecondaryButton(
-                    action: { SceneDelegate.setRootView(to: NavigationDemoView1()) },
-                    title: "Start Demo"
-                )
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(type: .section, content: {
+                VStack(spacing: 20, content: {
+                    Text("Navigation View should only ever be used on a root view. Continue?")
+                        .multilineTextAlignment(.center)
+                    
+                    VSecondaryButton(
+                        action: { SceneDelegate.setRootView(to: NavigationDemoView1()) },
+                        title: "Start Demo"
+                    )
+                })
             })
         })
     }

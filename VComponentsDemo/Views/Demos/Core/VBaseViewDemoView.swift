@@ -62,25 +62,23 @@ extension VBaseViewDemoView {
             title: Self.navigationBarTitle,
             leadingItem: leadingItem,
             trailingItem: trailingItem,
-            content: { viewContent }
+            content: {
+                DemoView(type: .section, content: {
+                    VStack(alignment: .leading, spacing: 20, content: {
+                        VSegmentedPicker(
+                            model: segmentedPickerModel,
+                            selection: $navigationBarTitlePosition,
+                            title: "Title Position",
+                            subtitle: "Changing title position causes view to re-draw itself"
+                        )
+                        
+                        VToggle(state: $navigationBarLeadingItem, title: "Leading items")
+                        
+                        VToggle(state: $navigationBarTrailingItemState, title: "Trailing items")
+                    })
+                })
+            }
         )
-    }
-    
-    private var viewContent: some View {
-        DemoView(type: .section, title: "", content: {
-            VStack(alignment: .leading, spacing: 20, content: {
-                VSegmentedPicker(
-                    model: segmentedPickerModel,
-                    selection: $navigationBarTitlePosition,
-                    title: "Title Position",
-                    subtitle: "Changing title position causes view to re-draw itself"
-                )
-                
-                VToggle(state: $navigationBarLeadingItem, title: "Leading items")
-                
-                VToggle(state: $navigationBarTrailingItemState, title: "Trailing items")
-            })
-        })
     }
     
     @ViewBuilder var leadingItem: some View {
