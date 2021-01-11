@@ -75,6 +75,14 @@ extension VAccordionDemoView {
     
     private var controller: some View {
         VStack(spacing: 20, content: {
+            ToggleSettingView(
+                state: .init(
+                    get: { accordionState == .disabled ? .on : .off },
+                    set: { state in withAnimation { accordionState = state.isOn ? .disabled : .collapsed } }
+                ),
+                title: "Disabled"
+            )
+            
             Stepper("Rows", value: $rowCount, in: 0...20)
 
             VSegmentedPicker(

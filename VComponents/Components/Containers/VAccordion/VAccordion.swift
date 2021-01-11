@@ -118,6 +118,7 @@ public extension VAccordion {
     private var header: some View {
         HStack(spacing: 0, content: {
             headerContent()
+                .opacity(model.headerOpacity(for: state))
             
             Spacer()
             

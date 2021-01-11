@@ -78,10 +78,23 @@ extension VAccordionModel {
         public static let sectionColors: VSectionModel.Colors = .init()
         
         static let defaultHeader: Color = ColorBook.primary
+        
+        public var headerDisabledOpacity: Double = 0.5
         public var headerSeparator: Color = .init(componentAsset: "Accordion.Separator")
         public var separator: Color = sectionColors.separator
         public var background: Color = sectionColors.background
         
         public init() {}
+    }
+}
+
+// MARK:- VM
+extension VAccordionModel {
+    func headerOpacity(for state: VAccordionState) -> Double {
+        switch state {
+        case .collapsed: return 1
+        case .expanded: return 1
+        case .disabled: return colors.headerDisabledOpacity
+        }
     }
 }
