@@ -47,7 +47,7 @@ extension VSegmentedPickerModel {
         public static let toggleColors: VToggleModel.Colors = .init()
         public static let sliderColors: VSliderModel.Colors = .init()
         
-        public var foreground: StateOpacityColors = .init(
+        public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -96,7 +96,7 @@ extension VSegmentedPickerModel.Colors {
         }
     }
     
-    public typealias StateOpacityColors = VPrimaryButtonModel.Colors.StateOpacityColors
+    public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
 }
 
 // MARK:- Fonts
@@ -114,15 +114,15 @@ extension VSegmentedPickerModel.Colors {
     func foregroundOpacity(state: VSegmentedPickerState) -> Double {
         switch state {
         case .enabled: return 1
-        case .disabled: return foreground.disabledOpacity
+        case .disabled: return content.disabledOpacity
         }
     }
     
     func foregroundOpacity(state: VSegmentedPickerRowState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return foreground.pressedOpacity
-        case .disabled: return foreground.disabledOpacity
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
         }
     }
     

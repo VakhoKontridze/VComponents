@@ -25,11 +25,11 @@ extension VSquareButtonModel {
         public var borderWidth: CGFloat = 1
         var hasBorder: Bool { borderWidth > 0 }
         
-        public var contentMarginX: CGFloat = 3
-        public var contentMarginY: CGFloat = 3
+        public var contentMarginHor: CGFloat = 3
+        public var contentMarginVer: CGFloat = 3
         
-        public var hitBoxSpacingX: CGFloat = 0
-        public var hitBoxSpacingY: CGFloat = 0
+        public var hitBoxHor: CGFloat = 0
+        public var hitBoxVer: CGFloat = 0
         
         public init() {}
     }
@@ -40,7 +40,7 @@ extension VSquareButtonModel {
     public struct Colors {
         public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
         
-        public var foreground: StateOpacityColors = .init(
+        public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -70,16 +70,16 @@ extension VSquareButtonModel {
 extension VSquareButtonModel.Colors {
     public typealias StateColors = VSecondaryButtonModel.Colors.StateColors
     
-    public typealias StateOpacityColors = VSecondaryButtonModel.Colors.StateOpacityColors
+    public typealias StateOpacity = VSecondaryButtonModel.Colors.StateOpacity
 }
 
 // MARK:- ViewModel
 extension VSquareButtonModel.Colors {
-    func foregroundOpacity(state: VSquareButtonInternalState) -> Double {
+    func contentOpacity(state: VSquareButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return foreground.pressedOpacity
-        case .disabled: return foreground.disabledOpacity
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
         }
     }
     

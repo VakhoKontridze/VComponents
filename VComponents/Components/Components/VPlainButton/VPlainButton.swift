@@ -69,13 +69,13 @@ extension VPlainButton {
     
     private var hitBox: some View {
         buttonView
-            .padding(.horizontal, model.layout.hitBoxSpacingX)
-            .padding(.vertical, model.layout.hitBoxSpacingY)
+            .padding(.horizontal, model.layout.hitBoxHor)
+            .padding(.vertical, model.layout.hitBoxVer)
     }
     
     private var buttonView: some View {
         content()
-            .opacity(model.colors.foregroundOpacity(state: internalState))
+            .opacity(model.colors.contentOpacity(state: internalState))
     }
 }
 

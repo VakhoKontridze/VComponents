@@ -51,8 +51,8 @@ struct VSquareButtonDemoView: View {
     private let largerHitBoxButtonModel: VSquareButtonModel = {
         var model: VSquareButtonModel = .init()
         
-        model.layout.hitBoxSpacingX = 10
-        model.layout.hitBoxSpacingY = 10
+        model.layout.hitBoxHor = 10
+        model.layout.hitBoxVer = 10
         
         return model
     }()
@@ -109,82 +109,6 @@ extension VSquareButtonDemoView {
             )
         })
     }
-    
-//    private var shapeButtons: some View {
-//        let roundedButtonModel: VSquareButtonModelFilled = .init(
-//            layout: .init(
-//                frame: .rounded()
-//            )
-//        )
-//        
-//        return VStack(content: {
-//            DemoRowView(type: .titled("Circular"), content: {
-//                VSquareButton(state: buttonState, action: action, title: buttonTitle)
-//            })
-//            
-//            DemoRowView(type: .titled("Rounded"), content: {
-//                VSquareButton(.filled(roundedButtonModel), state: buttonState, action: action, title: buttonTitle)
-//            })
-//        })
-//    }
-//
-//    private var filledButton: some View {
-//        VStack(content: {
-//            DemoRowView(type: .titled("Filled"), content: {
-//                VSquareButton(.filled(), state: buttonState, action: action, title: buttonTitle)
-//            })
-//        })
-//    }
-//    
-//    private var borderedButton: some View {
-//        let dashedButtonModel: VSquareButtonModel = .init(
-//            layout: .init(
-//                borderType: .dashed()
-//            )
-//        )
-//        
-//        return VStack(content: {
-//            DemoRowView(type: .titled("Continous Border"), content: {
-//                VSquareButton(.bordered(), state: buttonState, action: action, title: buttonTitle)
-//            })
-//            
-//            DemoRowView(type: .titled("Dashed Border"), content: {
-//                VSquareButton(.bordered(dashedButtonModel), state: buttonState, action: action, title: buttonTitle)
-//            })
-//        })
-//    }
-//    
-//    private var imageButtons: some View {
-//        VStack(content: {
-//            DemoRowView(type: .titled("Image"), content: {
-//                VSquareButton(state: buttonState, action: action, content: buttonContent)
-//            })
-//
-//            DemoRowView(type: .titled("Image and Text"), content: {
-//                VSquareButton(state: buttonState, action: action, content: {
-//                    HStack(spacing: 5, content: {
-//                        buttonContent()
-//                        Text("A")
-//                    })
-//                })
-//            })
-//        })
-//    }
-//    
-//    private var largerHitBoxButton: some View {
-//        let largerHitBoxButtonModel: VSquareButtonModelFilled = .init(
-//            layout: .init(
-//                hitBoxSpacingX: 20,
-//                hitBoxSpacingY: 20
-//            )
-//        )
-//        
-//        return VStack(content: {
-//            DemoRowView(type: .titled("Larger Hit Box"), content: {
-//                VSquareButton(.filled(largerHitBoxButtonModel), state: buttonState, action: action, title: buttonTitle)
-//            })
-//        })
-//    }
 }
 
 // MARK:- Action

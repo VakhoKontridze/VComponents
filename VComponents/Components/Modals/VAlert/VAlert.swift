@@ -55,7 +55,7 @@ extension VAlert {
             textView
             dialogView
         })
-            .padding(model.layout.contentInset)
+            .padding(model.layout.contentMargin)
     }
     
     private var textView: some View {

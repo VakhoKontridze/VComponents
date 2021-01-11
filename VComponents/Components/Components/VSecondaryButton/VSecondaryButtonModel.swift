@@ -27,11 +27,11 @@ extension VSecondaryButtonModel {
         public var borderWidth: CGFloat = 1
         var hasBorder: Bool { borderWidth > 0 }
         
-        public var contentMarginX: CGFloat = 10
-        public var contentMarginY: CGFloat = 3
+        public var contentMarginHor: CGFloat = 10
+        public var contentMarginVer: CGFloat = 3
         
-        public var hitBoxSpacingX: CGFloat = 10
-        public var hitBoxSpacingY: CGFloat = 10
+        public var hitBoxHor: CGFloat = 10
+        public var hitBoxVer: CGFloat = 10
         
         public init() {}
     }
@@ -42,7 +42,7 @@ extension VSecondaryButtonModel {
     public struct Colors {
         public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
         
-        public var foreground: StateOpacityColors = .init(
+        public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -82,16 +82,16 @@ extension VSecondaryButtonModel.Colors {
         }
     }
     
-    public typealias StateOpacityColors = VPrimaryButtonModel.Colors.StateOpacityColors
+    public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
 }
 
 // MARK:- ViewModel
 extension VSecondaryButtonModel.Colors {
-    func foregroundOpacity(state: VSecondaryButtonInternalState) -> Double {
+    func contentOpacity(state: VSecondaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return foreground.pressedOpacity
-        case .disabled: return foreground.disabledOpacity
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
         }
     }
     

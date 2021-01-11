@@ -31,8 +31,8 @@ extension VPrimaryButtonModel {
         public var borderWidth: CGFloat = 1
         var hasBorder: Bool { borderWidth > 0 }
         
-        public var contentMarginX: CGFloat = 15
-        public var contentMarginY: CGFloat = 3
+        public var contentMarginHor: CGFloat = 15
+        public var contentMarginVer: CGFloat = 3
         
         public var loaderSpacing: CGFloat = 20
         let loaderWidth: CGFloat = 10
@@ -44,7 +44,7 @@ extension VPrimaryButtonModel {
 // MARK:- Colors
 extension VPrimaryButtonModel {
     public struct Colors {
-        public var foreground: StateOpacityColors = .init(
+        public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -91,7 +91,7 @@ extension VPrimaryButtonModel.Colors {
         }
     }
     
-    public struct StateOpacityColors {
+    public struct StateOpacity {
         public var pressedOpacity: Double
         public var disabledOpacity: Double
         
@@ -104,12 +104,12 @@ extension VPrimaryButtonModel.Colors {
 
 // MARK:- ViewModel
 extension VPrimaryButtonModel.Colors {
-    func foregroundOpacity(state: VPrimaryButtonInternalState) -> Double {
+    func contentOpacity(state: VPrimaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return foreground.pressedOpacity
-        case .disabled: return foreground.disabledOpacity
-        case .loading: return foreground.disabledOpacity
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
+        case .loading: return content.disabledOpacity
         }
     }
     

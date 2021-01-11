@@ -51,7 +51,7 @@ extension VToggleModel {
             disabled: .init(componentAsset: "Toggle.Thumb")
         )
         
-        public var content: StateOpacityColors = .init(
+        public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -79,7 +79,7 @@ extension VToggleModel.Colors {
         }
     }
 
-    public typealias StateOpacityColors = VPrimaryButtonModel.Colors.StateOpacityColors
+    public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
 }
 
 // MARK:- Behavior

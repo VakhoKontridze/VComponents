@@ -22,9 +22,9 @@ struct DemoListRowView<Content>: View where Content: View {
     private let chevronButtonModel: VChevronButtonModel = {
         var model: VChevronButtonModel = .init()
 
-        model.colors.foreground.enabled = .init("ChevronButtonPlain.Foreground.enabled")
-        model.colors.foreground.pressed = .init("ChevronButtonPlain.Foreground.enabled")
-        model.colors.foreground.disabled = .init("ChevronButtonPlain.Foreground.enabled")
+        model.colors.content.enabled = .init("ChevronButtonPlain.Foreground.enabled")
+        model.colors.content.pressed = .init("ChevronButtonPlain.Foreground.enabled")
+        model.colors.content.disabled = .init("ChevronButtonPlain.Foreground.enabled")
 
         model.colors.background.enabled = .clear
         model.colors.background.pressed = .clear

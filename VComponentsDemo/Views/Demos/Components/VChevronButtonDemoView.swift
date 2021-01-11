@@ -18,8 +18,8 @@ struct VChevronButtonDemoView: View {
     private let largerHitBoxButtonModel: VChevronButtonModel = {
         var model: VChevronButtonModel = .init()
         
-        model.layout.hitBoxSpacingX = 10
-        model.layout.hitBoxSpacingY = 10
+        model.layout.hitBoxHor = 10
+        model.layout.hitBoxVer = 10
         
         return model
     }()

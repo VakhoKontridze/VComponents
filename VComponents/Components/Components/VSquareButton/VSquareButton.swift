@@ -69,8 +69,8 @@ extension VSquareButton {
     
     private var hitBox: some View {
         buttonView
-            .padding(.horizontal, model.layout.hitBoxSpacingX)
-            .padding(.vertical, model.layout.hitBoxSpacingY)
+            .padding(.horizontal, model.layout.hitBoxHor)
+            .padding(.vertical, model.layout.hitBoxVer)
     }
     
     private var buttonView: some View {
@@ -82,9 +82,9 @@ extension VSquareButton {
     
     private var buttonContent: some View {
         content()
-            .padding(.horizontal, model.layout.contentMarginX)
-            .padding(.vertical, model.layout.contentMarginY)
-            .opacity(model.colors.foregroundOpacity(state: internalState))
+            .padding(.horizontal, model.layout.contentMarginHor)
+            .padding(.vertical, model.layout.contentMarginVer)
+            .opacity(model.colors.contentOpacity(state: internalState))
     }
     
     private var backgroundView: some View {

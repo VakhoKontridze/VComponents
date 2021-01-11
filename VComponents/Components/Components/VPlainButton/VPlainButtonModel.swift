@@ -21,8 +21,8 @@ public struct VPlainButtonModel {
 // MARK:- Layout
 extension VPlainButtonModel {
     public struct Layout {
-        public var hitBoxSpacingX: CGFloat = 15
-        public var hitBoxSpacingY: CGFloat = 5
+        public var hitBoxHor: CGFloat = 15
+        public var hitBoxVer: CGFloat = 5
         
         public init() {}
     }
@@ -31,7 +31,7 @@ extension VPlainButtonModel {
 // MARK:- Colors
 extension VPlainButtonModel {
     public struct Colors {
-        public var foreground: StateOpacityColors = .init(
+        public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -49,16 +49,16 @@ extension VPlainButtonModel {
 extension VPlainButtonModel.Colors {
     public typealias StateColors = VSecondaryButtonModel.Colors.StateColors
     
-    public typealias StateOpacityColors = VSecondaryButtonModel.Colors.StateOpacityColors
+    public typealias StateOpacity = VSecondaryButtonModel.Colors.StateOpacity
 }
 
 // MARK:- ViewModel
 extension VPlainButtonModel.Colors {
-    func foregroundOpacity(state: VPlainButtonInternalState) -> Double {
+    func contentOpacity(state: VPlainButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return foreground.pressedOpacity
-        case .disabled: return foreground.disabledOpacity
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
         }
     }
     

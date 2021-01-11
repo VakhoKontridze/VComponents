@@ -80,12 +80,12 @@ extension VPrimaryButton {
 
             content()
                 .frame(maxWidth: .infinity)
-                .opacity(model.colors.foregroundOpacity(state: internalState))
+                .opacity(model.colors.contentOpacity(state: internalState))
 
             loaderView
         })
-            .padding(.horizontal, model.layout.contentMarginX)
-            .padding(.vertical, model.layout.contentMarginY)
+            .padding(.horizontal, model.layout.contentMarginHor)
+            .padding(.vertical, model.layout.contentMarginVer)
     }
     
     @ViewBuilder private var loaderCompensatorView: some View {

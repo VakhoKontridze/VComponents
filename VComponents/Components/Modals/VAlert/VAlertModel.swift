@@ -19,7 +19,7 @@ public struct VAlertModel {
         model.layout.height = layout.buttonHeight
         model.layout.cornerRadius = layout.buttonHeight / 4
         
-        model.colors.foreground.pressedOpacity = colors.primaryButton.foreground.pressedOpacity
+        model.colors.content.pressedOpacity = colors.primaryButton.content.pressedOpacity
         
         model.colors.text.enabled = colors.primaryButton.text.enabled
         model.colors.text.pressed = colors.primaryButton.text.pressed
@@ -38,7 +38,7 @@ public struct VAlertModel {
         model.layout.height = layout.buttonHeight
         model.layout.cornerRadius = layout.buttonHeight / 4
         
-        model.colors.foreground.pressedOpacity = colors.secondaryButton.foreground.pressedOpacity
+        model.colors.content.pressedOpacity = colors.secondaryButton.content.pressedOpacity
         
         model.colors.text.enabled = colors.secondaryButton.text.enabled
         model.colors.text.pressed = colors.secondaryButton.text.pressed
@@ -60,8 +60,8 @@ extension VAlertModel {
         public var width: CGFloat = UIScreen.main.bounds.width * 0.7
         public var cornerRadius: CGFloat = 20
         
-        public var contentInset: CGFloat = 15
-        var textMarginTop: CGFloat { max(25 - contentInset, 0) }
+        public var contentMargin: CGFloat = 15
+        var textMarginTop: CGFloat { max(25 - contentMargin, 0) }
         let textMarginHor: CGFloat = 10
         let textSpacing: CGFloat = 5
         let contentSpacing: CGFloat = 20
@@ -118,12 +118,12 @@ extension VAlertModel {
 
 extension VAlertModel.Colors {
     public struct ButtonColors {
-        public var foreground: StateOpacityColors
+        public var content: StateOpacity
         public var text: StateColors    // Only used in init with string
         public var background: StateColors
         
-        public init(foreground: StateOpacityColors, text: StateColors, background: StateColors) {
-            self.foreground = foreground
+        public init(foreground: StateOpacity, text: StateColors, background: StateColors) {
+            self.content = foreground
             self.text = text
             self.background = background
         }
@@ -141,7 +141,7 @@ extension VAlertModel.Colors.ButtonColors {
         }
     }
     
-    public struct StateOpacityColors {
+    public struct StateOpacity {
         public var pressedOpacity: Double
 
         public init(pressedOpacity: Double) {

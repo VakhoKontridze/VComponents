@@ -42,8 +42,8 @@ struct VSecondaryButtonDemoView: View {
     private let clippedHitBoxModel: VSecondaryButtonModel = {
         var model: VSecondaryButtonModel = .init()
         
-        model.layout.hitBoxSpacingX = 0
-        model.layout.hitBoxSpacingY = 0
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
         
         return model
     }()

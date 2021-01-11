@@ -23,8 +23,8 @@ extension VChevronButtonModel {
         
         public var iconDimension: CGFloat = 14
         
-        public var hitBoxSpacingX: CGFloat = 0
-        public var hitBoxSpacingY: CGFloat = 0
+        public var hitBoxHor: CGFloat = 0
+        public var hitBoxVer: CGFloat = 0
         
         public init() {}
     }
@@ -33,7 +33,7 @@ extension VChevronButtonModel {
 // MARK:- Colors
 extension VChevronButtonModel {
     public struct Colors {
-        public var foreground: StateAndOpacityColors = .init(
+        public var content: StateColorsAndOpacity = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
             disabled: ColorBook.primary,
@@ -54,7 +54,7 @@ extension VChevronButtonModel {
 extension VChevronButtonModel.Colors {
     public typealias StateColors = VSecondaryButtonModel.Colors.StateColors
     
-    public struct StateAndOpacityColors {
+    public struct StateColorsAndOpacity {
         public var enabled: Color
         public var pressed: Color
         public var disabled: Color
@@ -66,14 +66,14 @@ extension VChevronButtonModel.Colors {
 // MARK:- ViewModel
 extension VChevronButtonModel.Colors {
     func foregroundColor(state: VChevronButtonInternalState) -> Color {
-        color(for: state, from: foreground)
+        color(for: state, from: content)
     }
     
     func foregroundOpacity(state: VChevronButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return foreground.pressedOpacity
-        case .disabled: return foreground.disabledOpacity
+        case .pressed: return content.pressedOpacity
+        case .disabled: return content.disabledOpacity
         }
     }
     
@@ -89,7 +89,7 @@ extension VChevronButtonModel.Colors {
         }
     }
 
-    private func color(for state: VChevronButtonInternalState, from colorSet: StateAndOpacityColors) -> Color {
+    private func color(for state: VChevronButtonInternalState, from colorSet: StateColorsAndOpacity) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .pressed: return colorSet.pressed

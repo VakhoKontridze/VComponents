@@ -59,7 +59,7 @@ struct VSegmentedPickerDemoView: View {
     
     private let noLoweredOpacityWhenPressedModel: VSegmentedPickerModel = {
         var model: VSegmentedPickerModel = .init()
-        model.colors.foreground.pressedOpacity = 1
+        model.colors.content.pressedOpacity = 1
         return model
     }()
     
@@ -71,7 +71,7 @@ struct VSegmentedPickerDemoView: View {
     
     private let noLoweredOpacityWhenDisabledModel: VSegmentedPickerModel = {
         var model: VSegmentedPickerModel = .init()
-        model.colors.foreground.disabledOpacity = 1
+        model.colors.content.disabledOpacity = 1
         return model
     }()
 }

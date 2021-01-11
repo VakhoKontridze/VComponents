@@ -47,8 +47,8 @@ struct VBaseViewDemoView: View {
     private var plainButtonModel: VPlainButtonModel = {
         var model: VPlainButtonModel = .init()
         
-        model.layout.hitBoxSpacingX = 0
-        model.layout.hitBoxSpacingY = 0
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
         
         return model
     }()
