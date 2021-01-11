@@ -62,7 +62,7 @@ extension VAccordionDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: form.demoViewType, controller: controller, content: {
                 VAccordion(
-                    layout: form.accordionLayout,
+                    layout: form.accordionlayoutType,
                     state: $accordionState,
                     headerContent: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
                     data: rows,
@@ -89,7 +89,7 @@ extension VAccordionDemoView {
 
 // MARK:- Helpers
 private extension VSectionDemoView.Form {
-    var accordionLayout: VAccordionLayout {
+    var accordionlayoutType: VAccordionLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible

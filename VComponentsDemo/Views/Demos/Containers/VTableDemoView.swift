@@ -77,7 +77,7 @@ extension VTableDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: form.demoViewType, controller: controller, content: {
                 VTable(
-                    layout: form.tableLayout,
+                    layout: form.tablelayoutType,
                     sections: sections,
                     headerContent: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
                     footerContent: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
@@ -106,7 +106,7 @@ extension VTableDemoView {
 
 // MARK:- Helpers
 private extension VSectionDemoView.Form {
-    var tableLayout: VTableLayout {
+    var tablelayoutType: VTableLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible

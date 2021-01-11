@@ -17,7 +17,7 @@ struct VGenericListContent<Data, ID, Content>: View
     // MARK: Properties
     private let model: VGenericListContentModel
     
-    private let layout: VGenericListLayout
+    private let layoutType: VGenericListLayoutType
     
     private let data: [Element]
     private let id: KeyPath<Data.Element, ID>
@@ -28,13 +28,13 @@ struct VGenericListContent<Data, ID, Content>: View
     // MARK: Initializers
     init(
         model: VGenericListContentModel,
-        layout: VGenericListLayout,
+        layoutType: VGenericListLayoutType,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.model = model
-        self.layout = layout
+        self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: id], value: $0) }
         self.id = id
         self.content = content
@@ -44,7 +44,7 @@ struct VGenericListContent<Data, ID, Content>: View
 // MARK:- Body
 extension VGenericListContent {
     @ViewBuilder var body: some View {
-        switch layout {
+        switch layoutType {
         case .fixed:
             VStack(spacing: 0, content: {
                 ForEach(
@@ -125,7 +125,7 @@ struct VGenericListContent_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VGenericListContent(model: .init(), layout: .fixed, data: rows, id: \.id, content: { row in
+        VGenericListContent(model: .init(), layoutType: .fixed, data: rows, id: \.id, content: { row in
             rowContent(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)

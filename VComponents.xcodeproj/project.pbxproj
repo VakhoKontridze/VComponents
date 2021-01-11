@@ -118,9 +118,9 @@
 		7ACC3EC225AC895000EAD184 /* DemoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EC125AC895000EAD184 /* DemoSection.swift */; };
 		7ACC3EC625AC91A700EAD184 /* VAccordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EC525AC91A700EAD184 /* VAccordion.swift */; };
 		7ACC3ECC25ACB1AD00EAD184 /* VGenericListContentLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ECB25ACB1AD00EAD184 /* VGenericListContentLayout.swift */; };
-		7ACC3ECF25ACB1D900EAD184 /* VTableLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ECE25ACB1D900EAD184 /* VTableLayout.swift */; };
-		7ACC3ED225ACB22700EAD184 /* VSectionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED125ACB22700EAD184 /* VSectionLayout.swift */; };
-		7ACC3ED525ACB9DD00EAD184 /* VAccordionLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED425ACB9DD00EAD184 /* VAccordionLayout.swift */; };
+		7ACC3ECF25ACB1D900EAD184 /* VTableLayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ECE25ACB1D900EAD184 /* VTableLayoutType.swift */; };
+		7ACC3ED225ACB22700EAD184 /* VSectionLayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED125ACB22700EAD184 /* VSectionLayoutType.swift */; };
+		7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */; };
 		7ACC3ED825ACC1C600EAD184 /* VAccordionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */; };
 		7ACC3EDB25ACC22E00EAD184 /* VAccordionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */; };
 		7ACC3EDF25ACC50100EAD184 /* VAccordionDefaultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EDE25ACC50100EAD184 /* VAccordionDefaultHeader.swift */; };
@@ -274,9 +274,9 @@
 		7ACC3EC125AC895000EAD184 /* DemoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSection.swift; sourceTree = "<group>"; };
 		7ACC3EC525AC91A700EAD184 /* VAccordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordion.swift; sourceTree = "<group>"; };
 		7ACC3ECB25ACB1AD00EAD184 /* VGenericListContentLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VGenericListContentLayout.swift; sourceTree = "<group>"; };
-		7ACC3ECE25ACB1D900EAD184 /* VTableLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTableLayout.swift; sourceTree = "<group>"; };
-		7ACC3ED125ACB22700EAD184 /* VSectionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSectionLayout.swift; sourceTree = "<group>"; };
-		7ACC3ED425ACB9DD00EAD184 /* VAccordionLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionLayout.swift; sourceTree = "<group>"; };
+		7ACC3ECE25ACB1D900EAD184 /* VTableLayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTableLayoutType.swift; sourceTree = "<group>"; };
+		7ACC3ED125ACB22700EAD184 /* VSectionLayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSectionLayoutType.swift; sourceTree = "<group>"; };
+		7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionLayoutType.swift; sourceTree = "<group>"; };
 		7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionState.swift; sourceTree = "<group>"; };
 		7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionModel.swift; sourceTree = "<group>"; };
 		7ACC3EDE25ACC50100EAD184 /* VAccordionDefaultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionDefaultHeader.swift; sourceTree = "<group>"; };
@@ -439,7 +439,7 @@
 			isa = PBXGroup;
 			children = (
 				7A59577625AB546700B5B6E7 /* VSection.swift */,
-				7ACC3ED125ACB22700EAD184 /* VSectionLayout.swift */,
+				7ACC3ED125ACB22700EAD184 /* VSectionLayoutType.swift */,
 				7A59577925AB584300B5B6E7 /* VSectionModel.swift */,
 			);
 			path = VSection;
@@ -449,7 +449,7 @@
 			isa = PBXGroup;
 			children = (
 				7A59577E25AB5B7400B5B6E7 /* VTable.swift */,
-				7ACC3ECE25ACB1D900EAD184 /* VTableLayout.swift */,
+				7ACC3ECE25ACB1D900EAD184 /* VTableLayoutType.swift */,
 				7A59578625AB6FCC00B5B6E7 /* VTableModel.swift */,
 				7A6C601325AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift */,
 			);
@@ -889,7 +889,7 @@
 				7ACC3EC525AC91A700EAD184 /* VAccordion.swift */,
 				7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */,
 				7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */,
-				7ACC3ED425ACB9DD00EAD184 /* VAccordionLayout.swift */,
+				7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */,
 				7ACC3EDE25ACC50100EAD184 /* VAccordionDefaultHeader.swift */,
 			);
 			path = VAccordion;
@@ -1068,7 +1068,7 @@
 				7AD809502594FDF900DABE49 /* VSideBarSwipeGesture.swift in Sources */,
 				7A3C159B258E0A3D00CE1D96 /* VLazyListModelVertical.swift in Sources */,
 				7A62182425948DE800515688 /* VBaseViewNavigationBarCenter.swift in Sources */,
-				7ACC3ED225ACB22700EAD184 /* VSectionLayout.swift in Sources */,
+				7ACC3ED225ACB22700EAD184 /* VSectionLayoutType.swift in Sources */,
 				7ACC3ED825ACC1C600EAD184 /* VAccordionState.swift in Sources */,
 				7A62182025948DAB00515688 /* VBaseViewModelCenter.swift in Sources */,
 				7A59959425924FD00087902B /* VSheetModel.swift in Sources */,
@@ -1116,14 +1116,14 @@
 				7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */,
 				7A8A7467259118DF001024FB /* VSpinnerModelContinous.swift in Sources */,
 				7A08F84E25972EB40049FB10 /* VTabNavigationViewModel.swift in Sources */,
-				7ACC3ECF25ACB1D900EAD184 /* VTableLayout.swift in Sources */,
+				7ACC3ECF25ACB1D900EAD184 /* VTableLayoutType.swift in Sources */,
 				7A259B6B259783A100A12F8C /* VAlertDialogType.swift in Sources */,
 				7A59578725AB6FCC00B5B6E7 /* VTableModel.swift in Sources */,
 				7A007375258E75DF0003F0E9 /* VToggleState.swift in Sources */,
 				7A59957E2592442A0087902B /* VNavigationViewAppearance.swift in Sources */,
 				7A259B7325979F9300A12F8C /* VAlertPresenter.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
-				7ACC3ED525ACB9DD00EAD184 /* VAccordionLayout.swift in Sources */,
+				7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */,
 				7A4C42F825922914000207DD /* VBaseView.swift in Sources */,
 				7A41A49225A73E6D000A6F80 /* VSegmentedPicker.swift in Sources */,
 				7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */,

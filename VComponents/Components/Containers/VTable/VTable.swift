@@ -28,7 +28,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Properties
     private let model: VTableModel
     
-    private let layout: VTableLayout
+    private let layoutType: VTableLayoutType
     
     private let sections: [Section]
     
@@ -40,14 +40,14 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Initializers
     public init(
         model: VTableModel = .init(),
-        layout: VTableLayout = .fixed,
+        layout layoutType: VTableLayoutType = .fixed,
         sections: [Section],
         @ViewBuilder headerContent: @escaping (Section) -> HeaderContent,
         @ViewBuilder footerContent: @escaping (Section) -> FooterContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
     ) {
         self.model = model
-        self.layout = layout
+        self.layoutType = layoutType
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = footerContent
@@ -56,7 +56,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     public init(
         model: VTableModel = .init(),
-        layout: VTableLayout = .fixed,
+        layout layoutType: VTableLayoutType = .fixed,
         sections: [Section],
         @ViewBuilder headerContent: @escaping (Section) -> HeaderContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -64,7 +64,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         where FooterContent == Never
     {
         self.model = model
-        self.layout = layout
+        self.layoutType = layoutType
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = nil
@@ -73,7 +73,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     public init(
         model: VTableModel = .init(),
-        layout: VTableLayout = .fixed,
+        layout layoutType: VTableLayoutType = .fixed,
         sections: [Section],
         @ViewBuilder footerContent: @escaping (Section) -> FooterContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -81,7 +81,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         where HeaderContent == Never
     {
         self.model = model
-        self.layout = layout
+        self.layoutType = layoutType
         self.sections = sections
         self.headerContent = nil
         self.footerContent = footerContent
@@ -90,7 +90,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     public init(
         model: VTableModel = .init(),
-        layout: VTableLayout = .fixed,
+        layout layoutType: VTableLayoutType = .fixed,
         sections: [Section],
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
     )
@@ -99,7 +99,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             FooterContent == Never
     {
         self.model = model
-        self.layout = layout
+        self.layoutType = layoutType
         self.sections = sections
         self.headerContent = nil
         self.footerContent = nil
@@ -134,7 +134,7 @@ public extension VTable {
     private func rowViews(section: Section) -> some View {
         VGenericListContent(
             model: model.genericListContentModel,
-            layout: layout,
+            layoutType: layoutType,
             data: section.rows,
             id: \.id,
             content: rowContent

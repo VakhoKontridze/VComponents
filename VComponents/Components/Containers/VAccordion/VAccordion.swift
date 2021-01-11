@@ -18,7 +18,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
 {
     // MARK: Properties
     private let model: VAccordionModel
-    private let layout: VAccordionLayout
+    private let layoutType: VAccordionLayoutType
     
     @Binding private var state: VAccordionState
     
@@ -33,7 +33,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     // MARK: Initializers
     public init(
         model: VAccordionModel = .init(),
-        layout: VAccordionLayout = .fixed,
+        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content
@@ -44,7 +44,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
             RowContent == Never
     {
         self.model = model
-        self.layout = layout
+        self.layoutType = layoutType
         self._state = state
         self.headerContent = headerContent
         self.contentType = .freeForm(
@@ -54,7 +54,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     
     public init(
         model: VAccordionModel = .init(),
-        layout: VAccordionLayout = .fixed,
+        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
         data: Data,
@@ -64,7 +64,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
         where Content == Never
     {
         self.model = model
-        self.layout = layout
+        self.layoutType = layoutType
         self._state = state
         self.headerContent = headerContent
         self.contentType = .list(
@@ -76,7 +76,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
 
     public init(
         model: VAccordionModel = .init(),
-        layout: VAccordionLayout = .fixed,
+        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
         data: Data,
@@ -89,7 +89,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     {
         self.init(
             model: model,
-            layout: layout,
+            layout: layoutType,
             state: state,
             headerContent: headerContent,
             data: data,
@@ -155,7 +155,7 @@ public extension VAccordion {
             case .list(let data, let id, let rowContent):
                 VGenericListContent(
                     model: model.genericListContentModel,
-                    layout: layout,
+                    layoutType: layoutType,
                     data: data,
                     id: id,
                     content: rowContent

@@ -22,7 +22,7 @@ struct VSectionDemoView: View {
         case flexible
         case constrained
         
-        fileprivate var sectionLayout: VSectionLayout {
+        fileprivate var sectionlayoutType: VSectionLayoutType {
             switch self {
             case .fixed: return .fixed
             case .flexible: return .flexible
@@ -106,7 +106,7 @@ extension VSectionDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: form.demoViewType, controller: controller, content: {
                 VSection(
-                    layout: form.sectionLayout,
+                    layout: form.sectionlayoutType,
                     title: "Lorem ipsum dolor sit amet",
                     data: rows,
                     content: { rowContent(title: $0.title, color: $0.color) }
