@@ -14,7 +14,12 @@ struct VSheetDemoView: View {
     static let navigationBarTitle: String = "Sheet"
     
     private func sheetContent() -> some View {
-        Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.")
+        VBaseTitle(
+            title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.",
+            color: ColorBook.primaryInverted,
+            font: .body,
+            type: .oneLine
+        )
     }
     
     private func model(roundedCorners: VSheetModel.Layout.RoundedCorners) -> VSheetModel {

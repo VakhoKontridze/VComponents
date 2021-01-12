@@ -60,9 +60,12 @@ extension DemoListRowView {
 
     private var rowView: some View {
         HStack(spacing: 0, content: {
-            Text(title)
-                .font(.body)
-                .foregroundColor(ColorBook.primary)
+            VBaseTitle(
+                title: title,
+                color: ColorBook.primary,
+                font: .body,
+                type: .oneLine
+            )
 
             Spacer()
 

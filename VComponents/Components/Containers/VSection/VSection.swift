@@ -69,17 +69,20 @@ extension VSection {
     public var body: some View {
         VStack(alignment: .leading, spacing: model.layout.titleMarginBottom, content: {
             if let title = title, !title.isEmpty {
-                Text(title)
+                VBaseTitle(
+                    title: title,
+                    color: model.colors.title,
+                    font: model.titleFont,
+                    type: .oneLine
+                )
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, model.layout.titleMarginHor)
-                    .font(model.titleFont)
-                    .foregroundColor(model.colors.title)
             }
             
             VSheet(model: model.sheetModel, content: {
                 VBaseList(
                     model: model.genericListContentModel,
-                    layoutType: layoutType,
+                    layout: layoutType,
                     data: data,
                     id: id,
                     content: content

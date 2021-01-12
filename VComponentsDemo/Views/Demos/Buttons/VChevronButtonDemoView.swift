@@ -29,7 +29,7 @@ struct VChevronButtonDemoView: View {
 extension VChevronButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(controller: controller, content: {
+            DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Up"), content: {
                     VChevronButton(direction: .up, state: buttonState, action: action)
                 })

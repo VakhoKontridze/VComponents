@@ -14,7 +14,7 @@ struct HomeView: View {
     private static let navigationBarTitle: String = "VComponents Demo"
 
     private let sections: [DemoSection<HomeRow>] = [
-        .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .chevronButton, .plainButton]),
+        .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton]),
         .init(id: 1, title: "State Pickers", rows: [.toggle]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.slider]),
@@ -26,11 +26,11 @@ struct HomeView: View {
         .init(id: 7, title: "Messages", rows: [.alert]),
         .init(id: 8, title: "Indicators", rows: [.spinner]),
         //.init(id: 9, title: "Misc", rows: []),
-        .init(id: 10, title: "Core", rows: [.interactiveView, .baseView, .lazyList])
+        .init(id: 10, title: "Core", rows: [.baseTitle, .baseButton, .lazyList, .baseList, .baseView])
     ]
     
     private enum HomeRow: Int, DemoableRow {
-        case primaryButton, secondaryButton, squareButton, chevronButton, plainButton
+        case primaryButton, secondaryButton, squareButton, plainButton, chevronButton
         case toggle /*, checkBox*/ /*, radioButton*/
         case segmentedPicker /*, wheelPicker*/ /*, dropDown*/ /*, tabHeader*/
         case /*stepper,*/ slider /*, rangeSlider*/
@@ -42,15 +42,15 @@ struct HomeView: View {
         case alert /*, banner*/ /*, toast*/
         case spinner /*, progressBar*/ /*, pagingIndicator*/
         /*case*/ /*shimmer*/
-        case interactiveView, baseView, lazyList
+        case baseTitle, baseButton, lazyList, baseList, baseView
         
         var title: String {
             switch self {
             case .primaryButton: return VPrimaryButtonDemoView.navigationBarTitle
             case .secondaryButton: return VSecondaryButtonDemoView.navigationBarTitle
             case .squareButton: return VSquareButtonDemoView.navigationBarTitle
-            case .chevronButton: return "     \(VChevronButtonDemoView.navigationBarTitle)"
             case .plainButton: return VPlainButtonDemoView.navigationBarTitle
+            case .chevronButton: return VChevronButtonDemoView.navigationBarTitle
                 
             case .toggle: return VToggleDemoView.navigationBarTitle
                 
@@ -72,10 +72,11 @@ struct HomeView: View {
                 
             case .spinner: return VSpinnerDemoView.navigationBarTitle
                 
-//            case .baseText: return VBaseTextDemoView.navigationBarTitle
-            case .interactiveView: return VInteractiveViewDemoView.navigationBarTitle
-            case .baseView: return VBaseViewDemoView.navigationBarTitle
+            case .baseTitle: return VBaseTitleDemoView.navigationBarTitle
+            case .baseButton: return VBaseButtonDemoView.navigationBarTitle
             case .lazyList: return VLazyListDemoView.navigationBarTitle
+            case .baseList: return VBaseListDemoView.navigationBarTitle
+            case .baseView: return VBaseViewDemoView.navigationBarTitle
             }
         }
         
@@ -84,8 +85,8 @@ struct HomeView: View {
             case .primaryButton: VPrimaryButtonDemoView()
             case .secondaryButton: VSecondaryButtonDemoView()
             case .squareButton: VSquareButtonDemoView()
-            case .chevronButton: VChevronButtonDemoView()
             case .plainButton: VPlainButtonDemoView()
+            case .chevronButton: VChevronButtonDemoView()
                 
             case .toggle: VToggleDemoView()
                 
@@ -107,10 +108,11 @@ struct HomeView: View {
                 
             case .spinner: VSpinnerDemoView()
                 
-//            case .baseText: VBaseTextDemoView()
-            case .interactiveView: VInteractiveViewDemoView()
-            case .baseView: VBaseViewDemoView()
+            case .baseTitle: VBaseTitleDemoView()
+            case .baseButton: VBaseButtonDemoView()
             case .lazyList: VLazyListDemoView()
+            case .baseList: VBaseListDemoView()
+            case .baseView: VBaseViewDemoView()
             }
         }
     }

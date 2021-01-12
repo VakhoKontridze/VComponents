@@ -53,7 +53,7 @@ struct VSecondaryButtonDemoView: View {
 extension VSecondaryButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(controller: controller, content: {
+            DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Text"), content: {
                     VSecondaryButton(state: buttonState, action: action, title: buttonTitle)
                 })
@@ -67,9 +67,12 @@ extension VSecondaryButtonDemoView {
                         HStack(spacing: 5, content: {
                             buttonContent()
                             
-                            Text(buttonTitle)
-                                .font(VSecondaryButtonModel().font)
-                                .foregroundColor(ColorBook.primaryInverted)
+                            VBaseTitle(
+                                title: buttonTitle,
+                                color: ColorBook.primaryInverted,
+                                font: VSecondaryButtonModel().font,
+                                type: .oneLine
+                            )
                         })
                     })
                 })

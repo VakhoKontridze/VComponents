@@ -79,11 +79,11 @@ extension VBaseViewNavigationBarLeading {
 
             if showBackButton { VChevronButton(direction: .left, action: backAction).layoutPriority(1) }
 
-            VBaseText(
+            VBaseTitle(
                 title: title,
                 color: model.titleColor,
                 font: model.font,
-                alignment: .leading
+                type: .oneLine
             )
                 .layoutPriority(0)
 

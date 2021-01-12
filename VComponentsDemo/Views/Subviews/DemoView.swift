@@ -36,7 +36,7 @@ struct DemoView<Content, ControllerContent>: View
     
     // MARK: Initializers
     init(
-        type viewType: DemoViewType = .rowed,
+        type viewType: DemoViewType,
         controller controllerContent: ControllerContent,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -46,7 +46,7 @@ struct DemoView<Content, ControllerContent>: View
     }
 
     init(
-        type viewType: DemoViewType = .rowed,
+        type viewType: DemoViewType,
         @ViewBuilder content: @escaping () -> Content
     )
         where ControllerContent == Never
@@ -85,6 +85,7 @@ extension DemoView {
                         content()
                             .frame(maxWidth: .infinity)
                     })
+                        .padding(.trailing, 16)
                         .frame(maxHeight: .infinity, alignment: .top)
                     
                 case .freeFormFlexible:
@@ -106,7 +107,7 @@ extension DemoView {
 // MARK:- Preview
 struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
-        DemoView(content: {
+        DemoView(type: .rowed, content: {
             VPrimaryButtonDemoView()
         })
     }

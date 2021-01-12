@@ -134,9 +134,8 @@ extension VTable {
     private func rowViews(section: Section) -> some View {
         VBaseList(
             model: model.genericListContentModel,
-            layoutType: layoutType,
+            layout: layoutType,
             data: section.rows,
-            id: \.id,
             content: rowContent
         )
     }

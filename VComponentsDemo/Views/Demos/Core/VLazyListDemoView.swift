@@ -79,8 +79,12 @@ private extension VLazyListDemoDetailView {
          
     private var lazyList: some View {
         VStack(spacing: 25, content: {
-            Text("Scroll rows and see lazy initialization")
-                .font(.callout)
+            VBaseTitle(
+                title: "Scroll rows and see lazy initialization",
+                color: ColorBook.primary,
+                font: .callout,
+                type: .oneLine
+            )
 
             switch lazyListType {
             case .vertical: vertical
@@ -88,13 +92,20 @@ private extension VLazyListDemoDetailView {
             }
             
             VStack(spacing: 10, content: {
-                Text("Initialized Rows")
-                    .font(.callout)
+                VBaseTitle(
+                    title: "Initialized Rows",
+                    color: ColorBook.primary,
+                    font: .callout,
+                    type: .oneLine
+                )
                 
-                Text(initializedRowsDescription)
+                VBaseTitle(
+                    title: initializedRowsDescription,
+                    color: ColorBook.primary,
+                    font: .footnote,
+                    type: .multiLine(limit: nil, alignment: .leading)
+                )
                     .frame(height: 200, alignment: .top)
-                    .font(.footnote)
-                    .multilineTextAlignment(.leading)
             })
         })
             .padding()
@@ -102,7 +113,12 @@ private extension VLazyListDemoDetailView {
     
     private var vertical: some View {
         VLazyList(model: .vertical(), range: 1..<101, rowContent: { num in
-            Text("\(num)")
+            VBaseTitle(
+                title: "\(num)",
+                color: ColorBook.primary,
+                font: .body,
+                type: .oneLine
+            )
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)
                 .background(ColorBook.accent.opacity(0.75))
@@ -114,7 +130,12 @@ private extension VLazyListDemoDetailView {
     
     private var horizontal: some View {
         VLazyList(model: .horizontal(), range: 1..<101, rowContent: { num in
-            Text("\(num)")
+            VBaseTitle(
+                title: "\(num)",
+                color: ColorBook.primary,
+                font: .body,
+                type: .oneLine
+            )
                 .frame(width: 30)
                 .frame(maxHeight: .infinity)
                 .background(ColorBook.accent.opacity(0.75))

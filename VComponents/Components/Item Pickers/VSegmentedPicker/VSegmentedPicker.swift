@@ -67,7 +67,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<String>,
-            RowContent == VBaseText
+            RowContent == VBaseTitle
     {
         self.init(
             model: model,
@@ -78,10 +78,11 @@ public struct VSegmentedPicker<Data, RowContent>: View
             disabledIndexes: disabledIndexes,
             data: titles,
             rowContent: { title in
-                VBaseText(
+                VBaseTitle(
                     title: title,
                     color: model.colors.textColor(for: state),
-                    font: model.fonts.rows
+                    font: model.fonts.rows,
+                    type: .oneLine
                 )
             }
         )
@@ -125,7 +126,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Option>,
-            RowContent == VBaseText,
+            RowContent == VBaseTitle,
             Option: VPickerTitledEnumerableOption
     {
         self.init(
@@ -140,10 +141,11 @@ public struct VSegmentedPicker<Data, RowContent>: View
             disabledIndexes: disabledIndexes,
             data: .init(Option.allCases),
             rowContent: { option in
-                VBaseText(
+                VBaseTitle(
                     title: option.pickerTitle,
                     color: model.colors.textColor(for: state),
-                    font: model.fonts.rows
+                    font: model.fonts.rows,
+                    type: .oneLine
                 )
             }
         )
@@ -173,11 +175,11 @@ extension VSegmentedPicker {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VBaseText(
+            VBaseTitle(
                 title: title,
                 color: model.colors.titleColor(for: state),
                 font: model.fonts.title,
-                alignment: .leading
+                type: .oneLine
             )
                 .padding(.horizontal, model.layout.titlePaddingHor)
                 .opacity(model.colors.foregroundOpacity(state: state))
@@ -186,12 +188,11 @@ extension VSegmentedPicker {
     
     @ViewBuilder private var subtitleView: some View {
         if let subtitle = subtitle, !subtitle.isEmpty {
-            VBaseText(
+            VBaseTitle(
                 title: subtitle,
                 color: model.colors.subtitleColor(for: state),
                 font: model.fonts.subtitle,
-                alignment: .leading,
-                lineLimit: nil
+                type: .multiLine(limit: nil, alignment: .leading)
             )
                 .padding(.horizontal, model.layout.titlePaddingHor)
                 .opacity(model.colors.foregroundOpacity(state: state))

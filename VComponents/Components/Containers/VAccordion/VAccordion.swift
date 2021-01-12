@@ -156,7 +156,7 @@ extension VAccordion {
             case .list(let data, let id, let rowContent):
                 VBaseList(
                     model: model.genericListContentModel,
-                    layoutType: layoutType,
+                    layout: layoutType,
                     data: data,
                     id: id,
                     content: rowContent

@@ -27,8 +27,12 @@ extension ToggleSettingView {
         VStack(content: {
             VToggle(state: $state)
             
-            Text(title)
-                .font(.footnote)
+            VBaseTitle(
+                title: title,
+                color: ColorBook.primary,
+                font: .footnote,
+                type: .oneLine
+            )
         })
     }
 }

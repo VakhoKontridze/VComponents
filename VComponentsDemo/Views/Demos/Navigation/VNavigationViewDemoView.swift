@@ -20,8 +20,12 @@ extension VNavigationViewDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    Text("Navigation View should only ever be used on a root view. Continue?")
-                        .multilineTextAlignment(.center)
+                    VBaseTitle(
+                        title: "Navigation View should only ever be used on a root view. Continue?",
+                        color: ColorBook.primary,
+                        font: .body,
+                        type: .multiLine(limit: nil, alignment: .center)
+                    )
                     
                     VSecondaryButton(
                         action: { SceneDelegate.setRootView(to: NavigationDemoView1()) },
@@ -125,11 +129,14 @@ extension NavigationDemoView {
                 .opacity(0.25)
                 .edgesIgnoringSafeArea(.all)
             
-            Text(instruction)
+            VBaseTitle(
+                title: instruction,
+                color: ColorBook.primary,
+                font: .system(size: 16, weight: .semibold, design: .default),
+                type: .multiLine(limit: nil, alignment: .center)
+            )
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.top, 50)
-                .font(.system(size: 16, weight: .semibold, design: .default))
-                .multilineTextAlignment(.center)
             
             switch action {
             case .navigation(let desitnation):

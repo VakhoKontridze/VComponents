@@ -47,7 +47,7 @@ struct VPrimaryButtonDemoView: View {
 extension VPrimaryButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(controller: controller, content: {
+            DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Text"), content: {
                     VPrimaryButton(state: buttonState, action: action, title: buttonTitle)
                 })
@@ -61,9 +61,12 @@ extension VPrimaryButtonDemoView {
                         HStack(spacing: 5, content: {
                             buttonContent()
                             
-                            Text(buttonTitle)
-                                .font(VPrimaryButtonModel().font)
-                                .foregroundColor(ColorBook.primaryInverted)
+                            VBaseTitle(
+                                title: buttonTitle,
+                                color: ColorBook.primaryInverted,
+                                font: VPrimaryButtonModel().font,
+                                type: .oneLine
+                            )
                         })
                     })
                 })

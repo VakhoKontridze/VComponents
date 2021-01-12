@@ -69,21 +69,22 @@ extension VAlert {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VBaseText(
+            VBaseTitle(
                 title: title,
                 color: model.colors.title,
-                font: model.fonts.title
+                font: model.fonts.title,
+                type: .oneLine
             )
         }
     }
     
     @ViewBuilder private var descriptionView: some View {
         if !description.isEmpty {
-            VBaseText(
+            VBaseTitle(
                 title: description,
                 color: model.colors.description,
                 font: model.fonts.description,
-                lineLimit: 5
+                type: .multiLine(limit: 5, alignment: .center)
             )
         }
     }
@@ -134,7 +135,6 @@ private extension VAlert {
 // MARK:- Preview
 struct VAlert_Previews: PreviewProvider {
     static var previews: some View {
-//        VAlert()
-        Text("???")
+        EmptyView()
     }
 }

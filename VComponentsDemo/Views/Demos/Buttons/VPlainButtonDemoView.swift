@@ -33,7 +33,7 @@ struct VPlainButtonDemoView: View {
 extension VPlainButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(controller: controller, content: {
+            DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Text"), content: {
                     VPlainButton(state: buttonState, action: action, title: buttonTitle)
                 })
@@ -47,9 +47,12 @@ extension VPlainButtonDemoView {
                         VStack(spacing: 5, content: {
                             buttonContent()
 
-                            Text(buttonTitle)
-                                .font(VPlainButtonModel().font)
-                                .foregroundColor(ColorBook.accent)
+                            VBaseTitle(
+                                title: buttonTitle,
+                                color: ColorBook.accent,
+                                font: VPlainButtonModel().font,
+                                type: .oneLine
+                            )
                         })
                     })
                 })

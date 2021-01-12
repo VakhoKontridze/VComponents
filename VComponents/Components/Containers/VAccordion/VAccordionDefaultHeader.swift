@@ -21,11 +21,11 @@ public struct VAccordionDefaultHeader: View {
 // MARK:- Body
 extension VAccordionDefaultHeader {
     public var body: some View {
-        VBaseText(
+        VBaseTitle(
             title: title,
             color: VAccordionModel.Colors.defaultHeader,
             font: VAccordionModel.defaultHeaderFont,
-            alignment: .leading
+            type: .oneLine
         )
             .frame(maxWidth: .infinity, alignment: .leading)
     }

@@ -35,17 +35,17 @@ public struct VToggle<Content>: View where Content: View {
         state: Binding<VToggleState>,
         title: String
     )
-        where Content == VBaseText
+        where Content == VBaseTitle
     {
         self.init(
             model: model,
             state: state,
             content: {
-                VBaseText(
+                VBaseTitle(
                     title: title,
                     color: model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
-                    lineLimit: nil
+                    type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
         )

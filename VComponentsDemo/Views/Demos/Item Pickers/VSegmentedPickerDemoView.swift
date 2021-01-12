@@ -80,7 +80,7 @@ struct VSegmentedPickerDemoView: View {
 extension VSegmentedPickerDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(controller: controller, content: {
+            DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Text"), content: {
                     VSegmentedPicker(
                         selection: $segmentedPickerSelection1,
@@ -106,7 +106,13 @@ extension VSegmentedPickerDemoView {
                         rowContent: { option in
                             HStack(spacing: 5, content: {
                                 option.pickerSymbol
-                                Text(option.pickerTitle)
+                                
+                                VBaseTitle(
+                                    title: option.pickerTitle,
+                                    color: ColorBook.primaryInverted,
+                                    font: VSegmentedPickerModel.Fonts().rows,
+                                    type: .oneLine
+                                )
                             })
                         }
                     )

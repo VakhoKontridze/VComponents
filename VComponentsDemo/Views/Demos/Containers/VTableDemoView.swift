@@ -16,7 +16,7 @@ struct VTableDemoView: View {
     @State private var sectionCount: Int = 2
     @State private var rowCount: Int = 3
     
-    @State private var form: VSectionDemoView.Form = .fixed
+    @State private var form: VBaseListDemoView.Form = .fixed
     
     
     // Copied and modified from VTable's preview
@@ -63,9 +63,12 @@ struct VTableDemoView: View {
                 .foregroundColor(color.opacity(0.8))
                 .frame(dimension: 32)
 
-            Text(title)
-                .font(.body)
-                .foregroundColor(ColorBook.primary)
+            VBaseTitle(
+                title: title,
+                color: ColorBook.primary,
+                font: .body,
+                type: .oneLine
+            )
         })
             .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -105,7 +108,7 @@ extension VTableDemoView {
 }
 
 // MARK:- Helpers
-private extension VSectionDemoView.Form {
+private extension VBaseListDemoView.Form {
     var tablelayoutType: VTableLayoutType {
         switch self {
         case .fixed: return .fixed

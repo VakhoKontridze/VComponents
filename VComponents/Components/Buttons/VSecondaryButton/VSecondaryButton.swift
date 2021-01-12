@@ -39,17 +39,18 @@ public struct VSecondaryButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Content == VBaseText
+        where Content == VBaseTitle
     {
         self.init(
             model: model,
             state: state,
             action: action,
             content: {
-                VBaseText(
+                VBaseTitle(
                     title: title,
                     color: model.colors.textColor(state: .init(state: state, isPressed: false)),
-                    font: model.font
+                    font: model.font,
+                    type: .oneLine
                 )
             }
         )

@@ -20,8 +20,13 @@ extension VSideBarDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    Text("Side Bar should only ever be used on a root view. Continue?")
-                        .multilineTextAlignment(.center)
+                    VBaseTitle(
+                        title: "Side Bar should only ever be used on a root view. Continue?",
+                        color: ColorBook.primary,
+                        font: .body,
+                        type: .multiLine(limit: nil, alignment: .center)
+                    )
+                        .padding(20)
                     
                     VSecondaryButton(
                         action: { SceneDelegate.setRootView(to: VSideBarWalkthroughView()) },
@@ -47,9 +52,13 @@ private extension VSideBarWalkthroughView {
                     Color.pink
                         .opacity(0.3)
                         .edgesIgnoringSafeArea(.all)
-                    
-                    Text("You can open Side Bar by tapping on a button in the navigation bar")
-                        .multilineTextAlignment(.center)
+
+                    VBaseTitle(
+                        title: "You can open Side Bar by tapping on a button in the navigation bar",
+                        color: ColorBook.primary,
+                        font: .body,
+                        type: .multiLine(limit: nil, alignment: .center)
+                    )
                         .padding(20)
 
                     VSecondaryButton(
@@ -73,7 +82,12 @@ private extension VSideBarWalkthroughView {
     
     private var sideBarContent: some View {
         VLazyList(model: .vertical(), range: 1..<11, rowContent: { num in
-            Text("\(num)")
+            VBaseTitle(
+                title: "\(num)",
+                color: ColorBook.primaryInverted,
+                font: .body,
+                type: .oneLine
+            )
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)
                 .background(ColorBook.accent.opacity(0.75))

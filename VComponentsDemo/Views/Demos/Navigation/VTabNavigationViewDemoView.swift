@@ -20,8 +20,12 @@ extension VTabNavigationViewDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    Text("Tab Navigation View should only ever be used on a root view. Continue?")
-                        .multilineTextAlignment(.center)
+                    VBaseTitle(
+                        title: "Tab Navigation View should only ever be used on a root view. Continue?",
+                        color: ColorBook.primary,
+                        font: .body,
+                        type: .multiLine(limit: nil, alignment: .center)
+                    )
                     
                     VSecondaryButton(
                         action: { SceneDelegate.setRootView(to: VTabNavigationViewDemoViewWalkthroughView()) },
@@ -106,7 +110,13 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
     private func tabItem(iconName: String, title: String) -> some View {
         VStack(content: {
             Image(iconName).renderingMode(.template)
-            Text(title)
+            
+            VBaseTitle(
+                title: title,
+                color: ColorBook.primary,
+                font: .body,
+                type: .oneLine
+            )
         })
     }
 }

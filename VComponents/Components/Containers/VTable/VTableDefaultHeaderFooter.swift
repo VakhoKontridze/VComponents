@@ -21,11 +21,11 @@ public struct VTableDefaultHeaderFooter: View {
 // MARK:- Body
 extension VTableDefaultHeaderFooter {
     public var body: some View {
-        VBaseText(
+        VBaseTitle(
             title: title,
             color: VTableModel.Colors.defaultHeaderFooter,
             font: VTableModel.defaultHeaderFooterFont,
-            alignment: .leading
+            type: .oneLine
         )
             .frame(maxWidth: .infinity, alignment: .leading)
     }

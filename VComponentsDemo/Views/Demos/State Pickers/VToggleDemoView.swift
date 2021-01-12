@@ -47,7 +47,7 @@ struct VToggleDemoView: View {
 extension VToggleDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(controller: controller, content: {
+            DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("No Content"), content: {
                     VToggle(state: $toggle1State)
                 })

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Base List
-struct VBaseList<Data, ID, Content>: View
+public struct VBaseList<Data, ID, Content>: View
     where
         Data: RandomAccessCollection,
         ID: Hashable,
@@ -20,15 +20,14 @@ struct VBaseList<Data, ID, Content>: View
     private let layoutType: VBaseListLayoutType
     
     private let data: [Element]
-    private let id: KeyPath<Data.Element, ID>
     private let content: (Data.Element) -> Content
     
     typealias Element = VBaseListElement<ID, Data.Element>
     
     // MARK: Initializers
-    init(
-        model: VBaseListModel,
-        layoutType: VBaseListLayoutType,
+    public init(
+        model: VBaseListModel = .init(),
+        layout layoutType: VBaseListLayoutType = .fixed,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -36,14 +35,29 @@ struct VBaseList<Data, ID, Content>: View
         self.model = model
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: id], value: $0) }
-        self.id = id
+        self.content = content
+    }
+    
+    public init(
+        model: VBaseListModel = .init(),
+        layout layoutType: VBaseListLayoutType = .fixed,
+        data: Data,
+        @ViewBuilder content: @escaping (Data.Element) -> Content
+    )
+        where
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
+    {
+        self.model = model
+        self.layoutType = layoutType
+        self.data = data.map { .init(id: $0[keyPath: \Data.Element.id], value: $0) }
         self.content = content
     }
 }
 
 // MARK:- Body
 extension VBaseList {
-    @ViewBuilder var body: some View {
+    @ViewBuilder public var body: some View {
         switch layoutType {
         case .fixed:
             VStack(spacing: 0, content: {
@@ -125,7 +139,7 @@ struct VBaseList_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VBaseList(model: .init(), layoutType: .fixed, data: rows, id: \.id, content: { row in
+        VBaseList(layout: .fixed, data: rows, id: \.id, content: { row in
             rowContent(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)

@@ -1,5 +1,5 @@
 //
-//  VInteractiveViewDemoView.swift
+//  VBaseButtonDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -8,10 +8,10 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Interactive View Demo View
-struct VInteractiveViewDemoView: View {
+// MARK:- V Base Button Demo View
+struct VBaseButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Interactive View"
+    static let navigationBarTitle: String = "Base Buton"
     
     @State private var clickInstruction: ClickInstruction = .prompt
     private enum ClickInstruction {
@@ -48,13 +48,17 @@ struct VInteractiveViewDemoView: View {
 }
 
 // MARK:- Body
-extension VInteractiveViewDemoView {
+extension VBaseButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    Text(clickInstruction.title)
-                        .fontWeight(.semibold)
+                    VBaseTitle(
+                        title: clickInstruction.title,
+                        color: ColorBook.primary,
+                        font: .system(size: 16, weight: .semibold, design: .default),
+                        type: .oneLine
+                    )
                         .frame(height: 20)
                     
                     VBaseButton(isDisabled: false, action: action, onPress: pressAction, content: {
@@ -63,8 +67,12 @@ extension VInteractiveViewDemoView {
                             .foregroundColor(Color.pink.opacity(pressInsturction.opacity))
                     })
                     
-                    Text(pressInsturction.title)
-                        .fontWeight(.semibold)
+                    VBaseTitle(
+                        title: pressInsturction.title,
+                        color: ColorBook.primary,
+                        font: .system(size: 16, weight: .semibold, design: .default),
+                        type: .oneLine
+                    )
                         .frame(height: 20)
                 })
             })
@@ -73,7 +81,7 @@ extension VInteractiveViewDemoView {
 }
 
 // MARK:- Actions
-private extension VInteractiveViewDemoView {
+private extension VBaseButtonDemoView {
     func action() {
         clickInstruction = .clicked
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { clickInstruction = .prompt })
@@ -88,8 +96,8 @@ private extension VInteractiveViewDemoView {
 }
 
 // MARK:- Preview
-struct VInteractiveViewDemoView_Previews: PreviewProvider {
+struct VBaseButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VInteractiveViewDemoView()
+        VBaseButtonDemoView()
     }
 }

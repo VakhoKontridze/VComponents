@@ -62,7 +62,7 @@ struct VSquareButtonDemoView: View {
 extension VSquareButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(controller: controller, content: {
+            DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Text"), content: {
                     VSquareButton(state: buttonState, action: action, title: buttonTitle)
                 })
@@ -76,9 +76,12 @@ extension VSquareButtonDemoView {
                         HStack(spacing: 5, content: {
                             buttonContent()
                             
-                            Text("A")
-                                .font(VSquareButtonModel().font)
-                                .foregroundColor(ColorBook.primaryInverted)
+                            VBaseTitle(
+                                title: "A",
+                                color: ColorBook.primaryInverted,
+                                font: VSquareButtonModel().font,
+                                type: .oneLine
+                            )
                         })
                     })
                 })

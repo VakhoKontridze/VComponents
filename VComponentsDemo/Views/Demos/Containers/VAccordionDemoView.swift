@@ -15,7 +15,7 @@ struct VAccordionDemoView: View {
     
     @State private var rowCount: Int = 5
     
-    @State private var form: VSectionDemoView.Form = .fixed
+    @State private var form: VBaseListDemoView.Form = .fixed
     
     @State private var accordionState: VAccordionState = .expanded
     
@@ -48,9 +48,12 @@ struct VAccordionDemoView: View {
                 .foregroundColor(color.opacity(0.8))
                 .frame(dimension: 32)
 
-            Text(title)
-                .font(.body)
-                .foregroundColor(ColorBook.primary)
+            VBaseTitle(
+                title: title,
+                color: ColorBook.primary,
+                font: .body,
+                type: .oneLine
+            )
         })
             .frame(maxWidth: .infinity, alignment: .leading)
     }
@@ -96,7 +99,7 @@ extension VAccordionDemoView {
 }
 
 // MARK:- Helpers
-private extension VSectionDemoView.Form {
+private extension VBaseListDemoView.Form {
     var accordionlayoutType: VAccordionLayoutType {
         switch self {
         case .fixed: return .fixed
