@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK:- V Table Layout Type
-public typealias VTableLayoutType = VGenericListLayoutType
+public typealias VTableLayoutType = VBaseListLayoutType

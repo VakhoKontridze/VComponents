@@ -67,7 +67,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<String>,
-            RowContent == VGenericTextContent
+            RowContent == VBaseText
     {
         self.init(
             model: model,
@@ -78,7 +78,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             disabledIndexes: disabledIndexes,
             data: titles,
             rowContent: { title in
-                VGenericTextContent(
+                VBaseText(
                     title: title,
                     color: model.colors.textColor(for: state),
                     font: model.fonts.rows
@@ -125,7 +125,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Option>,
-            RowContent == VGenericTextContent,
+            RowContent == VBaseText,
             Option: VPickerTitledEnumerableOption
     {
         self.init(
@@ -140,7 +140,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             disabledIndexes: disabledIndexes,
             data: .init(Option.allCases),
             rowContent: { option in
-                VGenericTextContent(
+                VBaseText(
                     title: option.pickerTitle,
                     color: model.colors.textColor(for: state),
                     font: model.fonts.rows
@@ -173,7 +173,7 @@ extension VSegmentedPicker {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VGenericTextContent(
+            VBaseText(
                 title: title,
                 color: model.colors.titleColor(for: state),
                 font: model.fonts.title,
@@ -186,7 +186,7 @@ extension VSegmentedPicker {
     
     @ViewBuilder private var subtitleView: some View {
         if let subtitle = subtitle, !subtitle.isEmpty {
-            VGenericTextContent(
+            VBaseText(
                 title: subtitle,
                 color: model.colors.subtitleColor(for: state),
                 font: model.fonts.subtitle,

@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK:- V Section Layout Type
-public typealias VSectionLayoutType = VGenericListLayoutType
+public typealias VSectionLayoutType = VBaseListLayoutType

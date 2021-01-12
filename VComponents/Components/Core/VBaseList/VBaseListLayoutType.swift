@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK:- V Generic List Layout Type
-public enum VGenericListLayoutType: Int, CaseIterable {
+// MARK:- V Base List Layout Type
+public enum VBaseListLayoutType: Int, CaseIterable {
     case fixed
     case flexible
 }

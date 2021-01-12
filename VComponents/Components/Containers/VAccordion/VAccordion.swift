@@ -154,7 +154,7 @@ extension VAccordion {
                     .padding(.bottom, model.layout.contentMarginBottom)
                 
             case .list(let data, let id, let rowContent):
-                VGenericListContent(
+                VBaseList(
                     model: model.genericListContentModel,
                     layoutType: layoutType,
                     data: data,

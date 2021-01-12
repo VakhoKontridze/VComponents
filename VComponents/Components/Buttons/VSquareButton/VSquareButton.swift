@@ -1,5 +1,5 @@
 //
-//  VPlainButton.swift
+//  VSquareButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- V Plain Button
-public struct VPlainButton<Content>: View where Content: View {
+// MARK:- V Square Button
+public struct VSquareButton<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VPlainButtonModel
+    private let model: VSquareButtonModel
     
-    private let state: VPlainButtonState
+    private let state: VSquareButtonState
     @State private var isPressed: Bool = false
-    private var internalState: VPlainButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VSquareButtonInternalState { .init(state: state, isPressed: isPressed) }
     
     private let action: () -> Void
     
@@ -22,8 +22,8 @@ public struct VPlainButton<Content>: View where Content: View {
 
     // MARK: Initializers
     public init(
-        model: VPlainButtonModel = .init(),
-        state: VPlainButtonState = .enabled,
+        model: VSquareButtonModel = .init(),
+        state: VSquareButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -34,19 +34,19 @@ public struct VPlainButton<Content>: View where Content: View {
     }
 
     public init(
-        model: VPlainButtonModel = .init(),
-        state: VPlainButtonState = .enabled,
+        model: VSquareButtonModel = .init(),
+        state: VSquareButtonState = .enabled,
         action: @escaping () -> Void,
         title: String
     )
-        where Content == VGenericTextContent
+        where Content == VBaseText
     {
         self.init(
             model: model,
             state: state,
             action: action,
             content: {
-                VGenericTextContent(
+                VBaseText(
                     title: title,
                     color: model.colors.textColor(state: .init(state: state, isPressed: false)),
                     font: model.font
@@ -57,7 +57,7 @@ public struct VPlainButton<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VPlainButton {
+extension VSquareButton {
     public var body: some View {
         VBaseButton(
             isDisabled: state.isDisabled,
@@ -74,15 +74,36 @@ extension VPlainButton {
     }
     
     private var buttonView: some View {
+        buttonContent
+            .frame(dimension: model.layout.dimension)
+            .background(backgroundView)
+            .overlay(border)
+    }
+    
+    private var buttonContent: some View {
         content()
+            .padding(.horizontal, model.layout.contentMarginHor)
+            .padding(.vertical, model.layout.contentMarginVer)
             .opacity(model.colors.contentOpacity(state: internalState))
+    }
+    
+    private var backgroundView: some View {
+        RoundedRectangle(cornerRadius: model.layout.cornerRadius)
+            .foregroundColor(model.colors.backgroundColor(state: internalState))
+    }
+    
+    @ViewBuilder private var border: some View {
+        if model.layout.hasBorder {
+            RoundedRectangle(cornerRadius: model.layout.cornerRadius)
+                .strokeBorder(model.colors.borderColor(state: internalState), lineWidth: model.layout.borderWidth)
+        }
     }
 }
 
 // MARK:- Preview
-struct VPlainButton_Previews: PreviewProvider {
+struct VSquareButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButton(action: {}, title: "Press")
+        VSquareButton(action: {}, title: "Press")
             .padding()
     }
 }

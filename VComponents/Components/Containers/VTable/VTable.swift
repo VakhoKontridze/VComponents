@@ -132,7 +132,7 @@ extension VTable {
     }
 
     private func rowViews(section: Section) -> some View {
-        VGenericListContent(
+        VBaseList(
             model: model.genericListContentModel,
             layoutType: layoutType,
             data: section.rows,
@@ -217,7 +217,7 @@ struct VTable_Previews: PreviewProvider {
                     VTableDefaultHeaderFooter(title: "Footer \(section.title)")
                 },
                 rowContent: { row in
-                    VGenericListContent_Previews.rowContent(
+                    VBaseList_Previews.rowContent(
                         title: row.title,
                         color: row.color
                     )

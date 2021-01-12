@@ -1,5 +1,5 @@
 //
-//  VGenericTextContent.swift
+//  VBaseText.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/7/21.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Generic Text Content
-public struct VGenericTextContent: View {
+// MARK:- V Base Text
+public struct VBaseText: View {
     // MARK: Properties
     private let title: String
     private let color: Color
@@ -33,7 +33,7 @@ public struct VGenericTextContent: View {
 }
 
 // MARK:- Body
-extension VGenericTextContent {
+extension VBaseText {
     public var body: some View {
         Text(title)
             .lineLimit(lineLimit)
@@ -45,8 +45,8 @@ extension VGenericTextContent {
 }
 
 // MARK:- Preview
-struct VGenericTextContent_Previews: PreviewProvider {
+struct VBaseText_Previews: PreviewProvider {
     static var previews: some View {
-        VGenericTextContent(title: "TITLE", color: ColorBook.primary, font: .body)
+        VBaseText(title: "TITLE", color: ColorBook.primary, font: .body)
     }
 }

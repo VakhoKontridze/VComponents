@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK:- V Accordion Layout Type
-public typealias VAccordionLayoutType = VGenericListLayoutType
+public typealias VAccordionLayoutType = VBaseListLayoutType

@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- V Generic List Content Model
-public struct VGenericListContentModel {
+// MARK:- V Base List Model
+public struct VBaseListModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var showIndicator: Bool = true
@@ -23,7 +23,7 @@ public struct VGenericListContentModel {
 }
 
 // MARK:- Layout
-extension VGenericListContentModel {
+extension VBaseListModel {
     public struct Layout {
         public var marginTrailing: CGFloat = 0
         
@@ -38,7 +38,7 @@ extension VGenericListContentModel {
 }
 
 // MARK:- Colors
-extension VGenericListContentModel {
+extension VBaseListModel {
     public struct Colors {
         public var separator: Color = .init(componentAsset: "GenericListContent.Separator")
         

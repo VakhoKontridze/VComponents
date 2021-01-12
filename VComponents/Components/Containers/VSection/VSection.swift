@@ -77,7 +77,7 @@ extension VSection {
             }
             
             VSheet(model: model.sheetModel, content: {
-                VGenericListContent(
+                VBaseList(
                     model: model.genericListContentModel,
                     layoutType: layoutType,
                     data: data,
@@ -97,8 +97,8 @@ struct VSection_Previews: PreviewProvider {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
             
-            VSection(layout: .fixed, title: "TITLE", data: VGenericListContent_Previews.rows, content: { row in
-                VGenericListContent_Previews.rowContent(title: row.title, color: row.color)
+            VSection(layout: .fixed, title: "TITLE", data: VBaseList_Previews.rows, content: { row in
+                VBaseList_Previews.rowContent(title: row.title, color: row.color)
             })
                 .padding(20)
         })

@@ -1,5 +1,5 @@
 //
-//  VGenericListContent.swift
+//  VBaseList.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -7,28 +7,28 @@
 
 import SwiftUI
 
-// MARK:- V Generic List Content
-struct VGenericListContent<Data, ID, Content>: View
+// MARK:- V Base List
+struct VBaseList<Data, ID, Content>: View
     where
         Data: RandomAccessCollection,
         ID: Hashable,
         Content: View
 {
     // MARK: Properties
-    private let model: VGenericListContentModel
+    private let model: VBaseListModel
     
-    private let layoutType: VGenericListLayoutType
+    private let layoutType: VBaseListLayoutType
     
     private let data: [Element]
     private let id: KeyPath<Data.Element, ID>
     private let content: (Data.Element) -> Content
     
-    typealias Element = VGenericListContentElement<ID, Data.Element>
+    typealias Element = VBaseListElement<ID, Data.Element>
     
     // MARK: Initializers
     init(
-        model: VGenericListContentModel,
-        layoutType: VGenericListLayoutType,
+        model: VBaseListModel,
+        layoutType: VBaseListLayoutType,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -42,7 +42,7 @@ struct VGenericListContent<Data, ID, Content>: View
 }
 
 // MARK:- Body
-extension VGenericListContent {
+extension VBaseList {
     @ViewBuilder var body: some View {
         switch layoutType {
         case .fixed:
@@ -80,7 +80,7 @@ extension VGenericListContent {
 }
 
 // MARK:- Helpers
-private extension VGenericListContent {
+private extension VBaseList {
     func showSeparator(for i: Int) -> Bool {
         model.layout.hasSeparator &&
         i <= data.count-2
@@ -88,7 +88,7 @@ private extension VGenericListContent {
 }
 
 // MARK:- Preview
-struct VGenericListContent_Previews: PreviewProvider {
+struct VBaseList_Previews: PreviewProvider {
     struct Row: Identifiable {
         let id: Int
         let color: Color
@@ -125,7 +125,7 @@ struct VGenericListContent_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VGenericListContent(model: .init(), layoutType: .fixed, data: rows, id: \.id, content: { row in
+        VBaseList(model: .init(), layoutType: .fixed, data: rows, id: \.id, content: { row in
             rowContent(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)

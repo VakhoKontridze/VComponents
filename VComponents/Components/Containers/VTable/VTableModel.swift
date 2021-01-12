@@ -14,8 +14,8 @@ public struct VTableModel {
     static let defaultHeaderFooterFont: Font = .system(size: 13, weight: .regular, design: .default)
     public var showIndicator: Bool = true
     
-    var genericListContentModel: VGenericListContentModel {
-        var model: VGenericListContentModel = .init()
+    var genericListContentModel: VBaseListModel {
+        var model: VBaseListModel = .init()
         
         model.showIndicator = showIndicator
         

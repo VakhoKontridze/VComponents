@@ -14,8 +14,8 @@ public struct VAccordionModel {
     static let defaultHeaderFont: Font = .system(size: 15, weight: .semibold, design: .default)
     public var showIndicator: Bool = true
     
-    var genericListContentModel: VGenericListContentModel {
-        var model: VGenericListContentModel = .init()
+    var genericListContentModel: VBaseListModel {
+        var model: VBaseListModel = .init()
         
         model.showIndicator = showIndicator
         
