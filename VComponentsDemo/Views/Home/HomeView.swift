@@ -24,7 +24,7 @@ struct HomeView: View {
         .init(id: 5, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
         .init(id: 6, title: "Modals", rows: [.sideBar]),
         .init(id: 7, title: "Messages", rows: [.alert]),
-        .init(id: 8, title: "Indicators", rows: [.spinner]),
+        .init(id: 8, title: "Indicators", rows: [.spinner, .progressBar]),
         //.init(id: 9, title: "Misc", rows: []),
         .init(id: 10, title: "Core", rows: [.baseTitle, .baseButton, .lazyList, .baseList, .baseView])
     ]
@@ -40,7 +40,7 @@ struct HomeView: View {
         case tabNavigationView, navigationView /*, topTabNavigationView*/
         case /*bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/ sideBar
         case alert /*, banner*/ /*, toast*/
-        case spinner /*, progressBar*/ /*, pagingIndicator*/
+        case spinner, progressBar /*, pagingIndicator*/
         /*case*/ /*shimmer*/
         case baseTitle, baseButton, lazyList, baseList, baseView
         
@@ -71,6 +71,7 @@ struct HomeView: View {
             case .alert: return VAlertDemoView.navigationBarTitle
                 
             case .spinner: return VSpinnerDemoView.navigationBarTitle
+            case .progressBar: return VProgressBarDemoView.navigationBarTitle
                 
             case .baseTitle: return VBaseTitleDemoView.navigationBarTitle
             case .baseButton: return VBaseButtonDemoView.navigationBarTitle
@@ -107,6 +108,7 @@ struct HomeView: View {
             case .alert: VAlertDemoView()
                 
             case .spinner: VSpinnerDemoView()
+            case .progressBar: VProgressBarDemoView()
                 
             case .baseTitle: VBaseTitleDemoView()
             case .baseButton: VBaseButtonDemoView()

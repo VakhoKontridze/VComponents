@@ -27,7 +27,7 @@ public struct VSlider: View {
         range: ClosedRange<V> = 0...1,
         step: Double? = nil,
         state: VSliderState = .enabled,
-        value: Binding<Double>,
+        value: Binding<V>,
         onChange action: ((Bool) -> Void)? = nil
     )
         where
@@ -38,42 +38,20 @@ public struct VSlider: View {
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
         self.step = step
-        self._value = value
+        self._value = .init(
+            get: {
+                switch value.wrappedValue {
+                case ...range.lowerBound: return .init(range.lowerBound)
+                case range.upperBound...: return .init(range.upperBound)
+                default: return .init(value.wrappedValue)
+                }
+            },
+            set: {
+                value.wrappedValue = .init($0)
+            }
+        )
         self.state = state
         self.action = action
-    }
-    
-    public init(
-        model: VSliderModel = .init(),
-        step: Double? = nil,
-        state: VSliderState = .enabled,
-        value: Binding<Double>,
-        onChange action: ((Bool) -> Void)? = nil
-    ) {
-        self.init(
-            model: model,
-            range: 0...1,
-            step: step,
-            state: state,
-            value: value,
-            onChange: action
-        )
-    }
-    
-    public init(
-        model: VSliderModel = .init(),
-        state: VSliderState = .enabled,
-        value: Binding<Double>,
-        onChange action: ((Bool) -> Void)? = nil
-    ) {
-        self.init(
-            model: model,
-            range: 0...1,
-            step: nil,
-            state: state,
-            value: value,
-            onChange: action
-        )
     }
 }
 
