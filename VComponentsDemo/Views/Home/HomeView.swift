@@ -17,7 +17,7 @@ struct HomeView: View {
         .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton]),
         .init(id: 1, title: "State Pickers", rows: [.toggle]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker]),
-        .init(id: 3, title: "Value Pickers", rows: [.slider]),
+        .init(id: 3, title: "Value Pickers", rows: [.slider, .rangeSlider]),
         //.init(id: 4, title: "Custom Pickers", rows: []),
         //.init(id: 5, title: "Inputs", rows: []),
         .init(id: 4, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
@@ -33,7 +33,7 @@ struct HomeView: View {
         case primaryButton, secondaryButton, squareButton, plainButton, chevronButton
         case toggle /*, checkBox*/ /*, radioButton*/
         case segmentedPicker /*, wheelPicker*/ /*, dropDown*/ /*, tabHeader*/
-        case /*stepper,*/ slider /*, rangeSlider*/
+        case /*stepper,*/ slider,  rangeSlider
         /*case*/ /*datePicker*/ /*, colorPicker*/
         /*case*/ /*textField*/ /*, searchBar*/ /*, textView*/
         case sheet, section, table, accordion
@@ -57,6 +57,7 @@ struct HomeView: View {
             case .segmentedPicker: return VSegmentedPickerDemoView.navigationBarTitle
                 
             case .slider: return VSliderDemoView.navigationBarTitle
+            case .rangeSlider: return VRangeSliderDemoView.navigationBarTitle
                 
             case .sheet: return VSheetDemoView.navigationBarTitle
             case .section: return VSectionDemoView.navigationBarTitle
@@ -94,6 +95,7 @@ struct HomeView: View {
             case .segmentedPicker: VSegmentedPickerDemoView()
                 
             case .slider: VSliderDemoView()
+            case .rangeSlider: VRangeSliderDemoView()
                 
             case .sheet: VSheetDemoView()
             case .table: VTableDemoView()

@@ -27,11 +27,11 @@ public struct VProgressBar: View {
         self.model = model
         self.range = Double(range.lowerBound)...Double(range.upperBound)
         self.value = {
-            switch value {
-            case ...range.lowerBound: return .init(range.lowerBound)
-            case range.upperBound...: return .init(range.upperBound)
-            default: return .init(value)
-            }
+            let value: Double = .init(value)
+            let min: Double = .init(range.lowerBound)
+            let max: Double = .init(range.upperBound)
+            
+            return value.fixedInRange(min: min, max: max, step: nil)
         }()
     }
 }

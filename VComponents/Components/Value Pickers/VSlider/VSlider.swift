@@ -25,7 +25,7 @@ public struct VSlider: View {
     public init<V>(
         model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,
-        step: Double? = nil,
+        step: V? = nil,
         state: VSliderState = .enabled,
         value: Binding<V>,
         onChange action: ((Bool) -> Void)? = nil
@@ -37,19 +37,13 @@ public struct VSlider: View {
         self.model = model
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
-        self.step = step
-        self._value = .init(
-            get: {
-                switch value.wrappedValue {
-                case ...range.lowerBound: return .init(range.lowerBound)
-                case range.upperBound...: return .init(range.upperBound)
-                default: return .init(value.wrappedValue)
-                }
-            },
-            set: {
-                value.wrappedValue = .init($0)
+        self.step = {
+            switch step {
+            case nil: return nil
+            case let step?: return .init(step)
             }
-        )
+        }()
+        self._value = .init(from: value, range: range, step: step)
         self.state = state
         self.action = action
     }
@@ -89,50 +83,40 @@ extension VSlider {
             .foregroundColor(model.colors.progressColor(state: state))
     }
     
-    private func thumb(in proxy: GeometryProxy) -> some View {
-        Group(content: {
-            ZStack(content: {
-                RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .foregroundColor(model.colors.thumbFillColor(state: state))
-                    .shadow(color: model.colors.thumbShadow(state: state), radius: model.layout.thumbShadowRadius)
-                
-                RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .strokeBorder(model.colors.thumbBorderWidth(state: state), lineWidth: model.layout.thumbBorderWidth)
+    @ViewBuilder private func thumb(in proxy: GeometryProxy) -> some View {
+        if model.layout.hasThumb {
+            Group(content: {
+                ZStack(content: {
+                    RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
+                        .foregroundColor(model.colors.thumbFillColor(state: state))
+                        .shadow(color: model.colors.thumbShadow(state: state), radius: model.layout.thumbShadowRadius)
+                    
+                    RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
+                        .strokeBorder(model.colors.thumbBorderWidth(state: state), lineWidth: model.layout.thumbBorderWidth)
+                })
+                    .frame(dimension: model.layout.thumbDimension)
+                    .offset(x: thumbOffset(in: proxy))
             })
-                .frame(dimension: model.layout.thumbDimension)
-                .offset(x: thumbOffset(in: proxy))
-        })
-            .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
-            .allowsHitTesting(false)
+                .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
+                .allowsHitTesting(false)
+        }
     }
 }
 
 // MARK:- Drag
 private extension VSlider {
     func dragChanged(_ draggedValue: DragGesture.Value, in proxy: GeometryProxy) {
-        switch model.animation {
-        case nil: calculateDragChangedValue(draggedValue, in: proxy)
-        case let animation?: withAnimation(animation, { calculateDragChangedValue(draggedValue, in: proxy) })
-        }
+        let range: Double = max - min
+        let width: Double = .init(proxy.size.width)
+        let draggedValue: Double = .init(draggedValue.location.x)
 
+        let rawValue: Double = (draggedValue / width) * range
+        
+        let valueFixed: Double = rawValue.fixedInRange(min: min, max: max, step: step)
+        
+        withAnimation(model.animation, { value = valueFixed })
+        
         action?(true)
-    }
-    
-    func calculateDragChangedValue(_ draggedValue: DragGesture.Value, in proxy: GeometryProxy) {
-        value = {
-            let range: Double = max - min
-            let width: Double = .init(proxy.size.width)
-            let draggedValue: Double = .init(draggedValue.location.x)
-
-            let rawValue: Double = (draggedValue / width) * range
-            
-            switch (rawValue, step) {
-            case (...min, _): return min
-            case (max..., _): return max
-            case (_, nil): return rawValue
-            case (_, let step?): return rawValue.roundWithPrecision(step, min: min, max: max)
-            }
-        }()
     }
     
     func dragEnded(_ draggedValue: DragGesture.Value) {
@@ -149,26 +133,16 @@ private extension VSlider {
 
         return (value / range) * width
     }
-    
+}
+
+// MARK:- Thumb Offset
+private extension VSlider {
     func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
         let progressW: CGFloat = progressWidth(in: proxy)
         let thumbW: CGFloat = model.layout.thumbDimension
         let offset: CGFloat = progressW - thumbW / 2
         
         return offset
-    }
-}
-
-// MARK:- Helpers
-private extension Double {
-    func roundWithPrecision(_ step: Double, min: Double, max: Double) -> Double {
-        let rawValue: Double = (self/step).rounded() * step
-        
-        switch rawValue {
-        case ...min: return min
-        case max...: return max
-        case _: return rawValue
-        }
     }
 }
 

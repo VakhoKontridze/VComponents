@@ -71,31 +71,31 @@ extension VSliderDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Default"), content: {
-                    Self.rowView(value: slider1Value, content: {
+                    Self.rowView(title: .init(slider1Value), content: {
                         VSlider(state: sliderState, value: $slider1Value)
                     })
                 })
                 
                 DemoRowView(type: .titled("Stepped"), content: {
-                    Self.rowView(value: slider2Value, content: {
+                    Self.rowView(title: .init(slider2Value), content: {
                         VSlider(step: 0.1, state: sliderState, value: $slider2Value)
                     })
                 })
                 
                 DemoRowView(type: .titled("Thumb Border"), content: {
-                    Self.rowView(value: slider3Value, content: {
+                    Self.rowView(title: .init(slider3Value), content: {
                         VSlider(model: thumbBorderModel, state: sliderState, value: $slider3Value)
                     })
                 })
                 
                 DemoRowView(type: .titled("Plain"), content: {
-                    Self.rowView(value: slider4Value, content: {
+                    Self.rowView(title: .init(slider4Value), content: {
                         VSlider(model: plainModel, state: sliderState, value: $slider4Value)
                     })
                 })
                 
                 DemoRowView(type: .titled("Animation"), content: {
-                    Self.rowView(value: slider5Value, content: {
+                    Self.rowView(title: .init(slider5Value), content: {
                         VSlider(model: animationModel, state: sliderState, value: $slider5Value)
                     })
                 })
@@ -104,16 +104,16 @@ extension VSliderDemoView {
     }
     
     static func rowView<Content>(
-        value: Double,
+        title: String,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View
         where Content: View
     {
         VStack(spacing: 10, content: {
             VBaseTitle(
-                title: .init(value),
+                title: title,
                 color: ColorBook.primary,
-                font: .footnote,
+                font: .system(size: 14, weight: .regular, design: .monospaced),
                 type: .oneLine
             )
                 .animation(.none)

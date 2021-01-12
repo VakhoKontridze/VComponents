@@ -26,7 +26,7 @@ extension VProgressBarDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Default"), content: {
-                    VSliderDemoView.rowView(value: value, content: {
+                    VSliderDemoView.rowView(title: .init(value), content: {
                         VProgressBar(value: value)
                     })
                 })
@@ -55,10 +55,9 @@ private extension VProgressBarDemoView {
         var valueToSet: Double = value + increment
         if valueToSet >= 1 + increment { valueToSet = 0 }
         
-        switch useAnimation {
-        case false: value = valueToSet
-        case true: withAnimation { value  = valueToSet }
-        }
+        withAnimation(useAnimation ? .default : nil, {
+            value  = valueToSet
+        })
     }
 }
 
