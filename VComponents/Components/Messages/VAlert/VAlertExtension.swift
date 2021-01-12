@@ -14,15 +14,47 @@ public extension View {
         isPresented: Binding<Bool>,
         dialog dialogType: VAlertDialogType,
         title: String?,
-        description: String
+        description: String?,
+        onDisappear disappearAciton: (() -> Void)? = nil
     ) -> some View {
+        VAlertPresenter.present(
+            VAlert<Never>(
+                model: model,
+                isPresented: isPresented,
+                dialog: dialogType,
+                title: title,
+                description: description,
+                content: nil,
+                onDisappear: disappearAciton
+            ),
+            model: model,
+            if: isPresented
+        )
+        
+        return self
+    }
+    
+    func vAlert<Content>(
+        model: VAlertModel = .init(),
+        isPresented: Binding<Bool>,
+        dialog dialogType: VAlertDialogType,
+        title: String?,
+        description: String?,
+        @ViewBuilder content: @escaping () -> Content,
+        onDisappear disappearAciton: (() -> Void)? = nil
+    ) -> some View
+        where
+            Content: View
+    {
         VAlertPresenter.present(
             VAlert(
                 model: model,
                 isPresented: isPresented,
                 dialog: dialogType,
                 title: title,
-                description: description
+                description: description,
+                content: content,
+                onDisappear: disappearAciton
             ),
             model: model,
             if: isPresented

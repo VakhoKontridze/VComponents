@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Alert
-struct VAlert: View {
+struct VAlert<Content>: View where Content: View {
     // MARK: Properties
     private let model: VAlertModel
     
@@ -17,7 +17,9 @@ struct VAlert: View {
     private let dialogType: VAlertDialogType
     
     private let title: String?
-    private let description: String
+    private let description: String?
+    private let content: (() -> Content)?
+    private let disappearAciton: (() -> Void)?
     
     // MARK: Initializers
     init(
@@ -25,13 +27,17 @@ struct VAlert: View {
         isPresented: Binding<Bool>,
         dialog dialogType: VAlertDialogType,
         title: String?,
-        description: String
+        description: String?,
+        content: (() -> Content)?,
+        onDisappear disappearAciton: (() -> Void)? = nil
     ) {
         self.model = model
         self._isPresented = isPresented
         self.dialogType = dialogType
         self.title = title
         self.description = description
+        self.content = content
+        self.disappearAciton = disappearAciton
     }
 }
 
@@ -43,6 +49,7 @@ extension VAlert {
             contentView
         })
             .frame(width: model.layout.width)
+            .onDisappear(perform: disappearAciton)
     }
     
     private var background: some View {
@@ -52,16 +59,17 @@ extension VAlert {
     
     private var contentView: some View {
         VStack(spacing: model.layout.contentSpacing, content: {
-            textView
+            alertContentView
             dialogView
         })
             .padding(model.layout.contentMargin)
     }
     
-    private var textView: some View {
+    private var alertContentView: some View {
         VStack(spacing: model.layout.textSpacing, content: {
             titleView
             descriptionView
+            freeContentView
         })
             .padding(.horizontal, model.layout.textMarginHor)
             .padding(.top, model.layout.textMarginTop)
@@ -79,13 +87,19 @@ extension VAlert {
     }
     
     @ViewBuilder private var descriptionView: some View {
-        if !description.isEmpty {
+        if let description = description, !description.isEmpty {
             VBaseTitle(
                 title: description,
                 color: model.colors.description,
                 font: model.fonts.description,
                 type: .multiLine(limit: 5, alignment: .center)
             )
+        }
+    }
+    
+    @ViewBuilder private var freeContentView: some View {
+        if let content = content {
+            content()
         }
     }
     

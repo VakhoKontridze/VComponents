@@ -44,6 +44,8 @@ struct VAlertDemoView: View {
             }
         }
     }
+    
+    @State private var text: String = ""
 }
 
 // MARK:- Body
@@ -66,7 +68,8 @@ extension VAlertDemoView {
                 isPresented: $alertIsShown,
                 dialog: alertDialog,
                 title: title,
-                description: description
+                description: description,
+                content: { TextField("", text: $text).textFieldStyle(RoundedBorderTextFieldStyle()) }
             )
     }
 }
