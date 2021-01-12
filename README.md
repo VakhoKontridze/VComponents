@@ -25,6 +25,8 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2021 Jan 10. VSection
 
+2021 Jan 10. VBaseList
+
 2021 Jan 8. VSegmentedPicker
 
 2020 Dec 30. VAlert
@@ -33,9 +35,9 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 2020 Dec 24. VSideBar
 
-2020 Dec 24. VSquareButton
-
 2020 Dec 24. VSecondaryButton
+
+2020 Dec 24. VBaseTitle
 
 2020 Dec 24. VLazyList *(+ horizontal)*
 
