@@ -26,7 +26,9 @@ extension VProgressBarDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .rowed, controller: controller, content: {
                 DemoRowView(type: .titled("Default"), content: {
-                    VProgressBar(value: value)
+                    VSliderDemoView.rowView(value: value, content: {
+                        VProgressBar(value: value)
+                    })
                 })
             })
         })
