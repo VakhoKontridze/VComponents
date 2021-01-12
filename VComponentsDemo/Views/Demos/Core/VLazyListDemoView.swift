@@ -70,45 +70,40 @@ private struct VLazyListDemoDetailView: View {
 private extension VLazyListDemoDetailView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            ZStack(content: {
-                ColorBook.layer.edgesIgnoringSafeArea(.bottom)
-                lazyList
-            })
-        })
-    }
-         
-    private var lazyList: some View {
-        VStack(spacing: 25, content: {
-            VBaseTitle(
-                title: "Scroll rows and see lazy initialization",
-                color: ColorBook.primary,
-                font: .callout,
-                type: .oneLine
-            )
+            DemoView(type: .section, content: {
+                VStack(spacing: 25, content: {
+                    VBaseTitle(
+                        title: "Scroll rows and see lazy initialization",
+                        color: ColorBook.primary,
+                        font: .callout,
+                        type: .oneLine
+                    )
 
-            switch lazyListType {
-            case .vertical: vertical
-            case .horizontal: horizontal
-            }
-            
-            VStack(spacing: 10, content: {
-                VBaseTitle(
-                    title: "Initialized Rows",
-                    color: ColorBook.primary,
-                    font: .callout,
-                    type: .oneLine
-                )
-                
-                VBaseTitle(
-                    title: initializedRowsDescription,
-                    color: ColorBook.primary,
-                    font: .footnote,
-                    type: .multiLine(limit: nil, alignment: .leading)
-                )
-                    .frame(height: 200, alignment: .top)
+                    switch lazyListType {
+                    case .vertical: vertical
+                    case .horizontal: horizontal
+                    }
+                    
+                    VStack(spacing: 10, content: {
+                        VBaseTitle(
+                            title: "Initialized Rows",
+                            color: ColorBook.primary,
+                            font: .callout,
+                            type: .oneLine
+                        )
+                        
+                        VBaseTitle(
+                            title: initializedRowsDescription,
+                            color: ColorBook.primary,
+                            font: .footnote,
+                            type: .multiLine(limit: nil, alignment: .leading)
+                        )
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(height: 200, alignment: .top)
+                    })
+                })
             })
         })
-            .padding()
     }
     
     private var vertical: some View {
@@ -149,6 +144,7 @@ private extension VLazyListDemoDetailView {
 // MARK:- Preview
 struct VLazyListDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VLazyListDemoView()
+//        VLazyListDemoView()
+        VLazyListDemoDetailView(.vertical(.init()))
     }
 }

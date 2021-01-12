@@ -48,9 +48,9 @@ struct VBaseListDemoView: View {
         
         var subtitle: String {
             switch self {
-            case .fixed: return "Content would stretch to take required vertical space"
-            case .flexible: return "Content would stretch vertically to occupy maximum space"
-            case .constrained: return "Content would be limited in vertical space by applying frame modifier"
+            case .fixed: return "Content would stretch vertically to take required space"
+            case .flexible: return "Content would stretch vertically to occupy maximum space. Scrolling may be enabled"
+            case .constrained: return "Content would be limited in vertical space by applying frame modifier. Scrolling may be enabled."
             }
         }
         
