@@ -23,9 +23,11 @@ public struct VAlertModel {
         
         model.colors.text.enabled = colors.primaryButton.text.enabled
         model.colors.text.pressed = colors.primaryButton.text.pressed
+        model.colors.text.disabled = colors.primaryButton.text.disabled
         
         model.colors.background.enabled = colors.primaryButton.background.enabled
         model.colors.background.pressed = colors.primaryButton.background.pressed
+        model.colors.background.disabled = colors.primaryButton.background.disabled
         
         model.font = fonts.primaryButton
         
@@ -42,9 +44,11 @@ public struct VAlertModel {
         
         model.colors.text.enabled = colors.secondaryButton.text.enabled
         model.colors.text.pressed = colors.secondaryButton.text.pressed
+        model.colors.text.disabled = colors.secondaryButton.text.disabled
         
         model.colors.background.enabled = colors.secondaryButton.background.enabled
         model.colors.background.pressed = colors.secondaryButton.background.pressed
+        model.colors.background.disabled = colors.secondaryButton.background.disabled
         
         model.font = fonts.secondaryButton
         
@@ -90,11 +94,13 @@ extension VAlertModel {
             ),
             text: .init(
                 enabled: primaryButtonColors.text.enabled,
-                pressed: primaryButtonColors.text.pressed
+                pressed: primaryButtonColors.text.pressed,
+                disabled: primaryButtonColors.text.disabled
             ),
             background: .init(
                 enabled: primaryButtonColors.background.enabled,
-                pressed: primaryButtonColors.background.pressed
+                pressed: primaryButtonColors.background.pressed,
+                disabled: primaryButtonColors.background.disabled
             )
         )
         
@@ -104,11 +110,13 @@ extension VAlertModel {
             ),
             text: .init(
                 enabled: primaryButtonColors.background.enabled,
-                pressed: primaryButtonColors.background.pressed
+                pressed: primaryButtonColors.background.pressed,
+                disabled: primaryButtonColors.background.disabled
             ),
             background: .init(
                 enabled: .clear,
-                pressed: .clear
+                pressed: .clear,
+                disabled: .clear
             )
         )
 
@@ -134,10 +142,12 @@ extension VAlertModel.Colors.ButtonColors {
     public struct StateColors {
         public var enabled: Color
         public var pressed: Color
+        public var disabled: Color
 
-        public init(enabled: Color, pressed: Color) {
+        public init(enabled: Color, pressed: Color, disabled: Color) {
             self.enabled = enabled
             self.pressed = pressed
+            self.disabled = disabled
         }
     }
     

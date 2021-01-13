@@ -20,12 +20,12 @@
 		7A08F851259730B50049FB10 /* VTabNavigationViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08F850259730B50049FB10 /* VTabNavigationViewPage.swift */; };
 		7A08F858259731350049FB10 /* VTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08F857259731350049FB10 /* VTabNavigationView.swift */; };
 		7A08F85C259731E60049FB10 /* VTabNavigationViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08F85B259731E60049FB10 /* VTabNavigationViewAppearance.swift */; };
-		7A259B652597828700A12F8C /* VAlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B642597828700A12F8C /* VAlertExtension.swift */; };
+		7A259B652597828700A12F8C /* VAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B642597828700A12F8C /* VAlert.swift */; };
 		7A259B6B259783A100A12F8C /* VAlertDialogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6A259783A100A12F8C /* VAlertDialogType.swift */; };
 		7A259B6E259784CF00A12F8C /* VAlertDialogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6D259784CF00A12F8C /* VAlertDialogButton.swift */; };
-		7A259B7325979F9300A12F8C /* VAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B7225979F9300A12F8C /* VAlertPresenter.swift */; };
+		7A259B7325979F9300A12F8C /* ModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B7225979F9300A12F8C /* ModalPresenter.swift */; };
 		7A259B7825979FC000A12F8C /* VAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B7725979FC000A12F8C /* VAlertModel.swift */; };
-		7A259B842597B2C600A12F8C /* VAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B832597B2C600A12F8C /* VAlert.swift */; };
+		7A259B842597B2C600A12F8C /* _VAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B832597B2C600A12F8C /* _VAlert.swift */; };
 		7A259BBE2598FC7C00A12F8C /* VPrimaryButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259BBD2598FC7C00A12F8C /* VPrimaryButtonModel.swift */; };
 		7A2D6F30259734CB005513A7 /* VTabNavigationViewDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2D6F2F259734CB005513A7 /* VTabNavigationViewDemoView.swift */; };
 		7A3B880225ADAD2500295A87 /* VBaseTitleDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B880125ADAD2500295A87 /* VBaseTitleDemoView.swift */; };
@@ -184,12 +184,12 @@
 		7A08F850259730B50049FB10 /* VTabNavigationViewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationViewPage.swift; sourceTree = "<group>"; };
 		7A08F857259731350049FB10 /* VTabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationView.swift; sourceTree = "<group>"; };
 		7A08F85B259731E60049FB10 /* VTabNavigationViewAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationViewAppearance.swift; sourceTree = "<group>"; };
-		7A259B642597828700A12F8C /* VAlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertExtension.swift; sourceTree = "<group>"; };
+		7A259B642597828700A12F8C /* VAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlert.swift; sourceTree = "<group>"; };
 		7A259B6A259783A100A12F8C /* VAlertDialogType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDialogType.swift; sourceTree = "<group>"; };
 		7A259B6D259784CF00A12F8C /* VAlertDialogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDialogButton.swift; sourceTree = "<group>"; };
-		7A259B7225979F9300A12F8C /* VAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertPresenter.swift; sourceTree = "<group>"; };
+		7A259B7225979F9300A12F8C /* ModalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPresenter.swift; sourceTree = "<group>"; };
 		7A259B7725979FC000A12F8C /* VAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertModel.swift; sourceTree = "<group>"; };
-		7A259B832597B2C600A12F8C /* VAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlert.swift; sourceTree = "<group>"; };
+		7A259B832597B2C600A12F8C /* _VAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VAlert.swift; sourceTree = "<group>"; };
 		7A259BBD2598FC7C00A12F8C /* VPrimaryButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonModel.swift; sourceTree = "<group>"; };
 		7A2D6F2F259734CB005513A7 /* VTabNavigationViewDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationViewDemoView.swift; sourceTree = "<group>"; };
 		7A3B880125ADAD2500295A87 /* VBaseTitleDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseTitleDemoView.swift; sourceTree = "<group>"; };
@@ -345,12 +345,11 @@
 		7A259B632597827800A12F8C /* VAlert */ = {
 			isa = PBXGroup;
 			children = (
-				7A259B642597828700A12F8C /* VAlertExtension.swift */,
-				7A259B832597B2C600A12F8C /* VAlert.swift */,
+				7A259B642597828700A12F8C /* VAlert.swift */,
+				7A259B832597B2C600A12F8C /* _VAlert.swift */,
 				7A259B7725979FC000A12F8C /* VAlertModel.swift */,
 				7A259B6A259783A100A12F8C /* VAlertDialogType.swift */,
 				7A259B6D259784CF00A12F8C /* VAlertDialogButton.swift */,
-				7A259B7225979F9300A12F8C /* VAlertPresenter.swift */,
 			);
 			path = VAlert;
 			sourceTree = "<group>";
@@ -1046,6 +1045,7 @@
 			children = (
 				7AE5C25D25A8BC2E001B62B2 /* VPickerEnumerableOption.swift */,
 				7AC4E03E25AE1D2800CE2816 /* SliderDoubleInits.swift */,
+				7A259B7225979F9300A12F8C /* ModalPresenter.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1186,7 +1186,7 @@
 				7A3C1555258DE7B900CE1D96 /* VSpinnerModel.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
 				7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */,
-				7A259B652597828700A12F8C /* VAlertExtension.swift in Sources */,
+				7A259B652597828700A12F8C /* VAlert.swift in Sources */,
 				7AC5060125911A0800226656 /* VSpinnerModelDashed.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */,
 				7A4C431325923778000207DD /* VBaseViewModelLeading.swift in Sources */,
@@ -1223,7 +1223,7 @@
 				7A59577A25AB584300B5B6E7 /* VSectionModel.swift in Sources */,
 				7A4C42F4259228E8000207DD /* VNavigationView.swift in Sources */,
 				7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */,
-				7A259B842597B2C600A12F8C /* VAlert.swift in Sources */,
+				7A259B842597B2C600A12F8C /* _VAlert.swift in Sources */,
 				7A4D0C2E2594C06A00108575 /* VSecondaryButton.swift in Sources */,
 				7A599587259249BC0087902B /* VChevronButton.swift in Sources */,
 				7ACC3EDB25ACC22E00EAD184 /* VAccordionModel.swift in Sources */,
@@ -1261,7 +1261,7 @@
 				7A59578725AB6FCC00B5B6E7 /* VTableModel.swift in Sources */,
 				7A007375258E75DF0003F0E9 /* VToggleState.swift in Sources */,
 				7A59957E2592442A0087902B /* VNavigationViewAppearance.swift in Sources */,
-				7A259B7325979F9300A12F8C /* VAlertPresenter.swift in Sources */,
+				7A259B7325979F9300A12F8C /* ModalPresenter.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
 				7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */,
 				7A4C42F825922914000207DD /* VBaseView.swift in Sources */,

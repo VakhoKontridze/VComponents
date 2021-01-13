@@ -22,12 +22,12 @@ struct VAlertDemoView: View {
         switch dialogType {
         case .one:
             return .one(
-                button: .init(title: "Ok", action: {})
+                button: .init(isEnabled: !text.isEmpty, title: "Ok", action: {})
             )
         
         case .two:
             return .two(
-                primary: .init(title: "Confirm", action: {}),
+                primary: .init(isEnabled: !text.isEmpty, title: "Confirm", action: {}),
                 secondary: .init(title: "Cancel", action: {})
             )
         }
@@ -64,13 +64,12 @@ extension VAlertDemoView {
                 })
             })
         })
-            .vAlert(
-                isPresented: $alertIsShown,
-                dialog: alertDialog,
-                title: title,
-                description: description,
-                content: { TextField("", text: $text).textFieldStyle(RoundedBorderTextFieldStyle()) }
-            )
+            .vAlert(isPresented: $alertIsShown, alert: {
+                VAlert(dialog: alertDialog, title: title, description: description, content: {
+                    TextField("", text: $text)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                })
+            })
     }
 }
 

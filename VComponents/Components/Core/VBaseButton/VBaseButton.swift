@@ -58,7 +58,7 @@ private struct UIKitTouchView: UIViewRepresentable {
         self.pressHandler = pressHandler
     }
     
-    // MARK:- Representable
+    // MARK: Representable
     func makeCoordinator() -> UIKitTouchCoordinator { .init() }
     
     func makeUIView(context: UIViewRepresentableContext<UIKitTouchView>) -> UIView {
