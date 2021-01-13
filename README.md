@@ -15,6 +15,10 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## History
 
+2021 Jan 13. VModal
+
+2021 Jan 13. VCloseButton
+
 2021 Jan 12. VRangeSlider
 
 2021 Jan 12. VProgressBar

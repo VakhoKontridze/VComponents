@@ -13,11 +13,11 @@ struct VAlertDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Alert"
     
-    @State private var title: String = "Title"
+    @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     @State private var dialogType: DialogType = .two
     
-    @State private var alertIsShown: Bool = false
+    @State private var isPresented: Bool = false
     private var alertDialog: VAlertDialogType {
         switch dialogType {
         case .one:
@@ -60,14 +60,16 @@ extension VAlertDemoView {
                     
                     VSegmentedPicker(selection: $dialogType, title: "Dialog Type")
                     
-                    VSecondaryButton(action: { alertIsShown = true }, title: "Demo Alert")
+                    VSecondaryButton(action: { isPresented = true }, title: "Demo Alert")
                 })
             })
         })
-            .vAlert(isPresented: $alertIsShown, alert: {
+            .vAlert(isPresented: $isPresented, alert: {
                 VAlert(dialog: alertDialog, title: title, description: description, content: {
                     TextField("", text: $text)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
+                }, onDisappear: {
+                    text = ""
                 })
             })
     }

@@ -79,11 +79,11 @@ extension VAlertModel {
 // MARK:- Colors
 extension VAlertModel {
     public struct Colors {
-        public static let sideBarColors: VSideBarModel.Colors = .init()
+        public static let modalColors: VModalModel.Colors = .init()
         public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
         
-        public var background: Color = sideBarColors.background
-        public var blinding: Color = sideBarColors.blinding
+        public var background: Color = modalColors.background
+        public var blinding: Color = modalColors.blinding
         
         public var title: Color = ColorBook.primary
         public var description: Color = ColorBook.primary

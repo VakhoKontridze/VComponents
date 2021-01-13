@@ -20,9 +20,9 @@ public struct VTableModel {
         model.showIndicator = showIndicator
         
         model.layout.itemSpacing = layout.itemSpacing
-        model.layout.separatorHeight = layout.separatorHeight
+        model.layout.dividerHeight = layout.dividerHeight
         
-        model.colors.separator = colors.separator
+        model.colors.divider = colors.divider
         
         return model
     }
@@ -54,7 +54,7 @@ extension VTableModel {
         public var footerMarginTop: CGFloat = 10
         public var sectionSpacing: CGFloat = 20
         
-        public var separatorHeight: CGFloat = sectionLayout.separatorHeight
+        public var dividerHeight: CGFloat = sectionLayout.dividerHeight
         
         public init() {}
     }
@@ -66,7 +66,7 @@ extension VTableModel {
         public static let sectionColors: VSectionModel.Colors = .init()
         
         static let defaultHeaderFooter: Color = ColorBook.secondary
-        public var separator: Color = sectionColors.separator
+        public var divider: Color = sectionColors.divider
         public var background: Color = sectionColors.background
         
         public init() {}

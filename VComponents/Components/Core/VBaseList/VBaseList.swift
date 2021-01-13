@@ -82,11 +82,11 @@ extension VBaseList {
         VStack(spacing: 0, content: {
             content(element.value)
 
-            if showSeparator(for: i) {
+            if showDivider(for: i) {
                 Rectangle()
-                    .frame(height: model.layout.separatorHeight)
-                    .padding(.vertical, model.layout.separatorMarginVer)
-                    .foregroundColor(model.colors.separator)
+                    .frame(height: model.layout.dividerHeight)
+                    .padding(.vertical, model.layout.dividerMarginVer)
+                    .foregroundColor(model.colors.divider)
             }
         })
             .padding(.trailing, model.layout.marginTrailing)
@@ -95,8 +95,8 @@ extension VBaseList {
 
 // MARK:- Helpers
 private extension VBaseList {
-    func showSeparator(for i: Int) -> Bool {
-        model.layout.hasSeparator &&
+    func showDivider(for i: Int) -> Bool {
+        model.layout.hasDivider &&
         i <= data.count-2
     }
 }

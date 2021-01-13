@@ -43,7 +43,7 @@ public extension Color {
 
 /*
  
- Accordion.Separator
+ Accordion.Divider
  *120.120.120 @ 50
  @160.160.160 @ 50
  
@@ -59,9 +59,13 @@ public extension Color {
  *210.210.210
  *30.30.30
  
- GenericListContent.Separator
+ GenericListContent.Divider
  *120.120.120 @ 15
  @160.160.160 @ 15
+ 
+ Modal.Blinding
+ *100.100.100 @ 30
+ *20.20.20 @ 30
  
  PrimaryButton.Background.enabled
  128.176.240
@@ -85,10 +89,6 @@ public extension Color {
  SegmentedPicker.Title
  *60.60.60
  *210.210.210
- 
- SideBar.Blinding
- *100.100.100 @ 30
- *20.20.20 @ 30
  
  Slider.Thumb.Border.disabled
  192.192.192

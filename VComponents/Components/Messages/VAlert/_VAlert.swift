@@ -19,7 +19,9 @@ struct _VAlert<Content>: View where Content: View {
     private let title: String?
     private let description: String?
     private let content: (() -> Content)?
-    private let disappearAciton: (() -> Void)?
+    
+    private let appearAction: (() -> Void)?
+    private let disappearAction: (() -> Void)?
     
     // MARK: Initializers
     init(
@@ -33,18 +35,20 @@ struct _VAlert<Content>: View where Content: View {
             title: alert.title,
             description: alert.description,
             content: alert.content,
-            onDisappear: alert.disappearAciton
+            onAppear: alert.appearAction,
+            onDisappear: alert.disappearAction
         )
     }
     
     private init(
-        model: VAlertModel = .init(),
+        model: VAlertModel,
         isPresented: Binding<Bool>,
         dialog dialogType: VAlertDialogType,
         title: String?,
         description: String?,
         content: (() -> Content)?,
-        onDisappear disappearAciton: (() -> Void)? = nil
+        onAppear appearAction: (() -> Void)?,
+        onDisappear disappearAction: (() -> Void)?
     ) {
         self.model = model
         self._isPresented = isPresented
@@ -52,7 +56,8 @@ struct _VAlert<Content>: View where Content: View {
         self.title = title
         self.description = description
         self.content = content
-        self.disappearAciton = disappearAciton
+        self.appearAction = appearAction
+        self.disappearAction = disappearAction
     }
 }
 
@@ -64,7 +69,8 @@ extension _VAlert {
             contentView
         })
             .frame(width: model.layout.width)
-            .onDisappear(perform: disappearAciton)
+            .onAppear(perform: appearAction)
+            .onDisappear(perform: disappearAction)
     }
     
     private var background: some View {
@@ -162,8 +168,20 @@ private extension _VAlert {
 }
 
 // MARK:- Preview
-struct _VAlert_Previews: PreviewProvider {
+struct VAlert_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyView()
+        ZStack(content: {
+            VAlertModel.Colors().blinding.edgesIgnoringSafeArea(.all)
+            
+            _VAlert(isPresented: .constant(true), alert: VAlert(
+                dialog: .two(
+                    primary: .init(title: "OK", action: {}),
+                    secondary: .init(title: "Cancel", action: {})
+                ),
+                title: "TITLE",
+                description: "Description Description Description Description Description"
+            ))
+                .frame(height: 160) // ???
+        })
     }
 }

@@ -15,14 +15,23 @@ struct VModalVCRepresentable<ModalContent, BlindingContent>
 {
     // MARK: Properties
     @Binding private var isPresented: Bool
+    
     private let content: ModalContent
     private let blinding: BlindingContent
+    
+    private let backTapAction: (() -> Void)?
 
     // MARK: Initializers
-    init(isPresented: Binding<Bool>, content: ModalContent, blinding: BlindingContent) {
+    init(
+        isPresented: Binding<Bool>,
+        content: ModalContent,
+        blinding: BlindingContent,
+        onBackTap backTapAction: (() -> Void)? = nil
+    ) {
         self._isPresented = isPresented
         self.content = content
         self.blinding = blinding
+        self.backTapAction = backTapAction
     }
 }
 
@@ -31,7 +40,7 @@ extension VModalVCRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(
         context: UIViewControllerRepresentableContext<VModalVCRepresentable>
     ) -> VModalVC<ModalContent, BlindingContent> {
-        VModalVC(content: content, blinding: blinding)
+        VModalVC(content: content, blinding: blinding, onBackTap: backTapAction)
     }
 
     func updateUIViewController(
@@ -69,9 +78,16 @@ final class VModalVC<ModalContent, BlindingContent>: UIViewController
     
     var modalHC: UIHostingController<ModalContent>?
     var blindingHC: UIHostingController<BlindingContent>?
+    
+    let backTapAction: (() -> Void)?
 
     // MARK: Initializers
-    init(content: ModalContent, blinding: BlindingContent) {
+    init(
+        content: ModalContent,
+        blinding: BlindingContent,
+        onBackTap backTapAction: (() -> Void)?
+    ) {
+        self.backTapAction = backTapAction
         super.init(nibName: nil, bundle: nil)
         present(content, blinding: blinding)
     }
@@ -79,6 +95,10 @@ final class VModalVC<ModalContent, BlindingContent>: UIViewController
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: Misc
+    // Extensions of generic classes cannot contain '@objc' members
+    @objc func blindingViewTapped(_ sender: UITapGestureRecognizer) { backTapAction?() }
 }
 
 // MARK:- Presenting
@@ -91,7 +111,7 @@ private extension VModalVC {
     }
     
     func addBlinding(_ blinding: BlindingContent, in appSuperView: UIView) {
-        let blindingHC: UIHostingController = createHostingController(with: blinding, id: blindingID)
+        let blindingHC: UIHostingController = createHostingController(content: blinding, id: blindingID)
         self.blindingHC = blindingHC
         
         let blindingView: UIView = blindingHC.view
@@ -106,10 +126,12 @@ private extension VModalVC {
         ])
         
         blindingView.bringSubviewToFront(blindingView)
+        
+        addTapGestureRecognizer(on: blindingView)
     }
     
     func addModal(_ content: ModalContent, in appSuperView: UIView) {
-        let modalHC: UIHostingController = createHostingController(with: content, id: modalID)
+        let modalHC: UIHostingController = createHostingController(content: content, id: modalID)
         self.modalHC = modalHC
         
         let modalView: UIView = modalHC.view
@@ -183,11 +205,19 @@ private extension VModalVC {
         return appSuperView
     }
 }
+
+// MARK:- Dismiss On Tap
+private extension VModalVC {
+    func addTapGestureRecognizer(on view: UIView) {
+        let tapGesture: UITapGestureRecognizer = .init(target: self, action: #selector(blindingViewTapped))
+        view.addGestureRecognizer(tapGesture)
+    }
+}
     
 // MARK:- Helpers
 private extension VModalVC {
     func createHostingController<Content>(
-        with content: Content,
+        content: Content,
         id: Int
     ) -> UIHostingController<Content>
         where Content: View

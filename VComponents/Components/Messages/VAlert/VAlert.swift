@@ -15,7 +15,8 @@ public struct VAlert<Content> where Content: View {
     public var title: String?
     public var description: String?
     public var content: (() -> Content)?
-    public var disappearAciton: (() -> Void)? = nil
+    public var appearAction: (() -> Void)?
+    public var disappearAction: (() -> Void)?
     
     // MARK: Initializers
     public init(
@@ -24,14 +25,16 @@ public struct VAlert<Content> where Content: View {
         title: String?,
         description: String?,
         @ViewBuilder content: @escaping () -> Content,
-        onDisappear disappearAciton: (() -> Void)? = nil
+        onAppear appearAction: (() -> Void)? = nil,
+        onDisappear disappearAction: (() -> Void)? = nil
     ) {
         self.model = model
         self.dialogType = dialogType
         self.title = title
         self.description = description
         self.content = content
-        self.disappearAciton = disappearAciton
+        self.appearAction = appearAction
+        self.disappearAction = disappearAction
     }
     
     public init(
@@ -39,7 +42,8 @@ public struct VAlert<Content> where Content: View {
         dialog dialogType: VAlertDialogType,
         title: String?,
         description: String?,
-        onDisappear disappearAciton: (() -> Void)? = nil
+        onAppear appearAction: (() -> Void)? = nil,
+        onDisappear disappearAction: (() -> Void)? = nil
     )
         where Content == Never
     {
@@ -48,7 +52,8 @@ public struct VAlert<Content> where Content: View {
         self.title = title
         self.description = description
         self.content = nil
-        self.disappearAciton = disappearAciton
+        self.appearAction = appearAction
+        self.disappearAction = disappearAction
     }
 }
 

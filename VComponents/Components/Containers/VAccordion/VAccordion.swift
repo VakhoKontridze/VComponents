@@ -105,11 +105,11 @@ extension VAccordion {
         VSheet(model: model.sheetModel, content: {
             VStack(spacing: 0, content: {
                 header
-                separator
+                divider
                 contentView
             })
                 .padding(.leading, model.layout.marginLeading)
-                //.padding(.trailing, model.layout.marginTrailing)  Is applied to header and separator, as content requries custom login
+                //.padding(.trailing, model.layout.marginTrailing)  Is applied to header and divider, as content requries custom login
                 .padding(.top, model.layout.marginTop)
                 .padding(.bottom, state.isExpanded ? model.layout.marginBottomExpanded : model.layout.marginBottomCollapsed)
         })
@@ -132,14 +132,14 @@ extension VAccordion {
             .padding(.trailing, model.layout.marginTrailing)
     }
     
-    @ViewBuilder private var separator: some View {
+    @ViewBuilder private var divider: some View {
         if state.isExpanded {
             Rectangle()
-                .frame(height: model.layout.headerSeparatorHeight)
-                .padding(.top, model.layout.headerSeparatorMarginTop)
-                .padding(.bottom, model.layout.headerSeparatorMarginBottom)
+                .frame(height: model.layout.headerDividerHeight)
+                .padding(.top, model.layout.headerDividerMarginTop)
+                .padding(.bottom, model.layout.headerDividerMarginBottom)
                 .padding(.trailing, model.layout.marginTrailing)
-                .foregroundColor(model.colors.headerSeparator)
+                .foregroundColor(model.colors.headerDivider)
         }
     }
     

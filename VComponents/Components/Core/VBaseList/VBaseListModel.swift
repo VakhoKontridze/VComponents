@@ -29,9 +29,9 @@ extension VBaseListModel {
         
         public var itemSpacing: CGFloat = 18
         
-        public var separatorHeight: CGFloat = 1
-        public var hasSeparator: Bool { separatorHeight > 0 }
-        public var separatorMarginVer: CGFloat { itemSpacing / 2 }
+        public var dividerHeight: CGFloat = 1
+        public var hasDivider: Bool { dividerHeight > 0 }
+        public var dividerMarginVer: CGFloat { itemSpacing / 2 }
         
         init() {}
     }
@@ -40,7 +40,7 @@ extension VBaseListModel {
 // MARK:- Colors
 extension VBaseListModel {
     public struct Colors {
-        public var separator: Color = .init(componentAsset: "GenericListContent.Separator")
+        public var divider: Color = .init(componentAsset: "GenericListContent.Divider")
         
         init() {}
     }

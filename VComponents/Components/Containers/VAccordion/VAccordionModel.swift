@@ -21,9 +21,9 @@ public struct VAccordionModel {
         
         model.layout.marginTrailing = layout.marginTrailing + layout.contentMarginTrailing
         model.layout.itemSpacing = layout.itemSpacing
-        model.layout.separatorHeight = layout.separatorHeight
+        model.layout.dividerHeight = layout.dividerHeight
         
-        model.colors.separator = colors.separator
+        model.colors.divider = colors.divider
         
         return model
     }
@@ -55,16 +55,16 @@ extension VAccordionModel {
         public var marginBottomCollapsed: CGFloat = 8
         public var marginBottomExpanded: CGFloat = 16
         
-        public var headerSeparatorHeight: CGFloat = 1
-        public var headerSeparatorMarginTop: CGFloat = 8
-        public var headerSeparatorMarginBottom: CGFloat = 10
+        public var headerDividerHeight: CGFloat = 1
+        public var headerDividerMarginTop: CGFloat = 8
+        public var headerDividerMarginBottom: CGFloat = 10
         
         public var contentMarginLeading: CGFloat = 5
         public var contentMarginTrailing: CGFloat = 5
         public var contentMarginTop: CGFloat = 0
         public var contentMarginBottom: CGFloat = 5
         
-        public var separatorHeight: CGFloat = sectionLayout.separatorHeight
+        public var dividerHeight: CGFloat = sectionLayout.dividerHeight
         
         public var itemSpacing: CGFloat = sectionLayout.itemSpacing
         
@@ -80,8 +80,8 @@ extension VAccordionModel {
         static let defaultHeader: Color = ColorBook.primary
         
         public var headerDisabledOpacity: Double = 0.5
-        public var headerSeparator: Color = .init(componentAsset: "Accordion.Separator")
-        public var separator: Color = sectionColors.separator
+        public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
+        public var divider: Color = sectionColors.divider
         public var background: Color = sectionColors.background
         
         public init() {}

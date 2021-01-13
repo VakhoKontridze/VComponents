@@ -70,9 +70,10 @@ extension VSideBarModel.Layout {
 extension VSideBarModel {
     public struct Colors {
         public static let sheetColor: Color = VSheetModel().color
+        public static let modalColors: VModalModel.Colors = .init()
         
         public var background: Color = sheetColor
-        public var blinding: Color = .init(componentAsset: "SideBar.Blinding")
+        public var blinding: Color = modalColors.blinding
         
         public init() {}
     }

@@ -21,9 +21,9 @@ public struct VSectionModel {
         
         model.layout.marginTrailing = layout.contentMargin
         model.layout.itemSpacing = layout.itemSpacing
-        model.layout.separatorHeight = layout.separatorHeight
+        model.layout.dividerHeight = layout.dividerHeight
         
-        model.colors.separator = colors.separator
+        model.colors.divider = colors.divider
         
         return model
     }
@@ -54,7 +54,7 @@ extension VSectionModel {
         public var cornerRadius: CGFloat = sheetLayout.cornerRadius
         public var contentMargin: CGFloat = sheetLayout.contentMargin
         public var itemSpacing: CGFloat = genericListContentLayout.itemSpacing
-        public var separatorHeight: CGFloat = genericListContentLayout.separatorHeight
+        public var dividerHeight: CGFloat = genericListContentLayout.dividerHeight
         
         public init() {}
     }
@@ -67,7 +67,7 @@ extension VSectionModel {
         public static let sheetColor: Color = VSheetModel().color
         
         public var title: Color = ColorBook.primary
-        public var separator: Color = genericListContentColors.separator
+        public var divider: Color = genericListContentColors.divider
         public var background: Color = sheetColor
         
         public init() {}

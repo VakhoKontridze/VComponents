@@ -14,7 +14,7 @@ struct HomeView: View {
     private static let navigationBarTitle: String = "VComponents Demo"
 
     private let sections: [DemoSection<HomeRow>] = [
-        .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton]),
+        .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton, .closeButton]),
         .init(id: 1, title: "State Pickers", rows: [.toggle]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.slider, .rangeSlider]),
@@ -22,7 +22,7 @@ struct HomeView: View {
         //.init(id: 5, title: "Inputs", rows: []),
         .init(id: 4, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
         .init(id: 5, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
-        .init(id: 6, title: "Modals", rows: [.sideBar]),
+        .init(id: 6, title: "Modals", rows: [.modal, .sideBar]),
         .init(id: 7, title: "Messages", rows: [.alert]),
         .init(id: 8, title: "Indicators", rows: [.spinner, .progressBar]),
         //.init(id: 9, title: "Misc", rows: []),
@@ -30,7 +30,7 @@ struct HomeView: View {
     ]
     
     private enum HomeRow: Int, DemoableRow {
-        case primaryButton, secondaryButton, squareButton, plainButton, chevronButton
+        case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton
         case toggle /*, checkBox*/ /*, radioButton*/
         case segmentedPicker /*, wheelPicker*/ /*, dropDown*/ /*, tabHeader*/
         case /*stepper,*/ slider,  rangeSlider
@@ -38,7 +38,7 @@ struct HomeView: View {
         /*case*/ /*textField*/ /*, searchBar*/ /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView /*, topTabNavigationView*/
-        case /*bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/ sideBar
+        case modal, /*bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/ sideBar
         case alert /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
         /*case*/ /*shimmer*/
@@ -51,6 +51,7 @@ struct HomeView: View {
             case .squareButton: return VSquareButtonDemoView.navigationBarTitle
             case .plainButton: return VPlainButtonDemoView.navigationBarTitle
             case .chevronButton: return VChevronButtonDemoView.navigationBarTitle
+            case .closeButton: return VCloseButtonDemoView.navigationBarTitle
                 
             case .toggle: return VToggleDemoView.navigationBarTitle
                 
@@ -67,6 +68,7 @@ struct HomeView: View {
             case .tabNavigationView: return VTabNavigationViewDemoView.navigationBarTitle
             case .navigationView: return VNavigationViewDemoView.navigationBarTitle
                 
+            case .modal: return VModalDemoView.navigationBarTitle
             case .sideBar: return VSideBarDemoView.navigationBarTitle
                 
             case .alert: return VAlertDemoView.navigationBarTitle
@@ -89,6 +91,7 @@ struct HomeView: View {
             case .squareButton: VSquareButtonDemoView()
             case .plainButton: VPlainButtonDemoView()
             case .chevronButton: VChevronButtonDemoView()
+            case .closeButton: VCloseButtonDemoView()
                 
             case .toggle: VToggleDemoView()
                 
@@ -105,6 +108,7 @@ struct HomeView: View {
             case .tabNavigationView: VTabNavigationViewDemoView()
             case .navigationView: VNavigationViewDemoView()
                 
+            case .modal: VModalDemoView()
             case .sideBar: VSideBarDemoView()
                 
             case .alert: VAlertDemoView()
