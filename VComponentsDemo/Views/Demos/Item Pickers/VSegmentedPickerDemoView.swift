@@ -109,7 +109,7 @@ extension VSegmentedPickerDemoView {
                                 
                                 VBaseTitle(
                                     title: option.pickerTitle,
-                                    color: ColorBook.primaryInverted,
+                                    color: ColorBook.primary,
                                     font: VSegmentedPickerModel.Fonts().rows,
                                     type: .oneLine
                                 )

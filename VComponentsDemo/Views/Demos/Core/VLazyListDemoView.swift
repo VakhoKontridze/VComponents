@@ -41,7 +41,7 @@ struct VLazyListDemoView: View {
 extension VLazyListDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoListView(sections: sections)
+            DemoListView(type: .section, sections: sections)
         })
     }
 }

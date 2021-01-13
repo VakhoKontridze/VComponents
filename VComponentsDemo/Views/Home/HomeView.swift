@@ -131,7 +131,7 @@ extension HomeView {
     var body: some View {
         VNavigationView(content: {
             VBaseView(title: Self.navigationBarTitle, content: {
-                DemoListView(sections: sections)
+                DemoListView(type: .accordion, sections: sections)
             })
         })
     }

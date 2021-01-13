@@ -16,9 +16,9 @@ struct VSheetDemoView: View {
     private func sheetContent() -> some View {
         VBaseTitle(
             title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.",
-            color: ColorBook.primaryInverted,
+            color: ColorBook.primary,
             font: .body,
-            type: .oneLine
+            type: .multiLine(limit: nil, alignment: .center)
         )
     }
     
