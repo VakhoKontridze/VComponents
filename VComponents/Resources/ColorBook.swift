@@ -63,7 +63,7 @@ extension Color {
  80.80.80
  
  ChevronButton.Background.enabled
- 240.240.240
+ 235.235.235
  *40.40.40
  
  ChevronButton.Background.pressed
