@@ -48,15 +48,15 @@ public extension Color {
  @160.160.160 @ 50
  
  ChevronButton.Background.disabled
- 245.245.245
+ 250.250.250
  80.80.80
  
  ChevronButton.Background.enabled
- 235.235.235
+ 240.240.240
  *40.40.40
  
  ChevronButton.Background.pressed
- *210.210.210
+ 225.225.225
  *30.30.30
  
  GenericListContent.Divider
@@ -88,7 +88,7 @@ public extension Color {
  
  SegmentedPicker.Title
  *60.60.60
- *210.210.210
+ 210.210.210
  
  Slider.Thumb.Border.disabled
  192.192.192
