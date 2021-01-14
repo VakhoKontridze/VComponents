@@ -55,7 +55,7 @@ public struct VToggle<Content>: View where Content: View {
     ///
     /// - Parameters:
     ///   - model: Model that describes UI
-    ///   - state: State that describes state, such as off, on, or disabled
+    ///   - state: Enum that describes state, such as off, on, or disabled
     ///   - content: View that describes purpose of the action
     public init(
         model: VToggleModel = .init(),
@@ -139,7 +139,7 @@ public struct VToggle<Content>: View where Content: View {
     ///
     /// - Parameters:
     ///   - model: Model that describes UI
-    ///   - state: State that describes state, such as off, on, or disabled
+    ///   - state: Enum that describes state, such as off, on, or disabled
     ///   - title: Title that describes purpose of the action
     public init(
         model: VToggleModel = .init(),
@@ -233,7 +233,7 @@ public struct VToggle<Content>: View where Content: View {
     ///
     /// - Parameters:
     ///   - model: Model that describes UI
-    ///   - state: State that describes state, such as off, on, or disabled
+    ///   - state: Enum that describes state, such as off, on, or disabled
     public init(
         model: VToggleModel = .init(),
         state: Binding<VToggleState>

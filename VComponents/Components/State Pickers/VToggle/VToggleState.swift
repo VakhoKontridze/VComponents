@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Toggle State
-/// State that describes state, such as off, on, or disabled
+/// Enum that describes state, such as off, on, or disabled
 public enum VToggleState: Int, CaseIterable {
     case off
     case on
@@ -68,8 +68,8 @@ enum VToggleInternalState {
 }
 
 // MARK:- Helpers
-public extension Binding where Value == VToggleState {
-    init(bool: Binding<Bool>) {
+extension Binding where Value == VToggleState {
+    public init(bool: Binding<Bool>) {
         self.init(
             get: { bool.wrappedValue ? .on : .off },
             set: { bool.wrappedValue = $0.isOn }

@@ -112,7 +112,7 @@ extension VAlertDialogButtonModelCustom {
 extension VAlertDialogButtonModelCustom {
     public struct Colors {
         public var content: StateOpacity
-        public var text: StateColors    // Only used in init with string
+        public var text: StateColors    // Only applicable during init with title
         public var background: StateColors
         
         public init(foreground: StateOpacity, text: StateColors, background: StateColors) {

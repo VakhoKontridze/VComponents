@@ -56,7 +56,7 @@ public struct VChevronButton: View {
     /// - Parameters:
     ///   - model: Model that describes UI
     ///   - direction: Enum that describes direction, such as left, right, up, or down
-    ///   - state: State that describes state, such as enabled or disabled
+    ///   - state: Enum that describes state, such as enabled or disabled
     ///   - action: Action to perform when the user triggers button
     public init(
         model: VChevronButtonModel = .init(),

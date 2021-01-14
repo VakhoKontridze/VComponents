@@ -70,13 +70,13 @@ public struct VModal<Content, TitleContent>
 }
 
 // MARK:- Extension
-public extension View {
+extension View {
     /// Presents modal
     /// - Parameters:
     ///   - isPresented: Binding to whether the modal is presented
     ///   - modal: Closure returning the modal to presenter
     /// - Returns: Presenter
-    func vModal<Content, TitleContent>(
+    public func vModal<Content, TitleContent>(
         isPresented: Binding<Bool>,
         modal: @escaping () -> VModal<Content, TitleContent>
     ) -> some View

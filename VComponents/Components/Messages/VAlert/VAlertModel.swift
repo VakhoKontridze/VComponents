@@ -29,8 +29,7 @@ extension VAlertModel {
         
         public var contentSpacing: CGFloat = 5
         public var contentMarginHor: CGFloat = 0
-        public var contentMarginTop: CGFloat = 25
-        var actualContentMarginHor: CGFloat { max(contentMarginTop - margin, 0) }
+        public var contentMarginTop: CGFloat = 5
 
         public init() {}
     }

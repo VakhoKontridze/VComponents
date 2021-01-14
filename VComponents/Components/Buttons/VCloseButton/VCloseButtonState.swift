@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Close Button State
-/// State that describes state, such as enabled or disabled
+/// Enum that describes state, such as enabled or disabled
 public typealias VCloseButtonState = VChevronButtonState
 
 // MARK:- V Close Button Internal State

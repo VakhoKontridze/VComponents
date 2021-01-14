@@ -93,7 +93,7 @@ extension _VAlert {
             freeContentView
         })
             .padding(.horizontal, model.layout.contentMarginHor)
-            .padding(.top, model.layout.actualContentMarginHor)
+            .padding(.top, model.layout.contentMarginTop)
     }
     
     @ViewBuilder private var titleView: some View {

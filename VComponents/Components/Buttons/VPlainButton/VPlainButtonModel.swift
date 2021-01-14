@@ -14,7 +14,7 @@ public struct VPlainButtonModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = squareButtonFont    // Only used in init with string
+    public var font: Font = squareButtonFont    // Only applicable during init with title
     
     public init() { }
 }
@@ -37,7 +37,7 @@ extension VPlainButtonModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(   // Only used in init with string
+        public var text: StateColors = .init(   // Only applicable during init with title
             enabled: ColorBook.accent,
             pressed: ColorBook.accent,
             disabled: ColorBook.accent

@@ -62,7 +62,7 @@ public struct VSlider: View {
     ///   - model: Model that describes UI
     ///   - range: Range of values
     ///   - step: Increment of value over range
-    ///   - state: State that describes state, such as enabled or disabled
+    ///   - state: Enum that describes state, such as enabled or disabled
     ///   - value: Selected value
     ///   - action: Callback for when editing begins and ends
     public init<V>(

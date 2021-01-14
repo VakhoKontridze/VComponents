@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Accordion
-/// Expandable container component that draws a background, and either hosts contenr, or computes views on demad from an underlying collection of identified data
+/// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data
 public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     where
         HeaderContent: View,

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- Extension
-public extension View {
+extension View {
     /// Presents modal
     /// - Parameters:
     ///   - model: Model that describes UI
@@ -16,7 +16,7 @@ public extension View {
     ///   - dismissAction: Callback for when component dissapears
     ///   - content: Sidebar content
     /// - Returns: Presenter
-    func vSideBar<Content>(
+    public func vSideBar<Content>(
         model: VSideBarModel = .init(),
         isPresented: Binding<Bool>,
         onDismiss dismissAction: (() -> Void)? = nil,

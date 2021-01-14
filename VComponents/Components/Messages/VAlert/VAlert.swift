@@ -78,13 +78,13 @@ public struct VAlert<Content> where Content: View {
 }
 
 // MARK:- Extension
-public extension View {
+extension View {
     /// Presents alert
     /// - Parameters:
     ///   - isPresented: Binding to whether the alert is presented
     ///   - alert: Closure returning the alert to presenter
     /// - Returns: Presenter
-    func vAlert<Content>(
+    public func vAlert<Content>(
         isPresented: Binding<Bool>,
         alert: @escaping () -> VAlert<Content>
     ) -> some View

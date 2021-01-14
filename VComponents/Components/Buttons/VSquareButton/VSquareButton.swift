@@ -59,7 +59,7 @@ public struct VSquareButton<Content>: View where Content: View {
     ///
     /// - Parameters:
     ///   - model: Model that describes UI
-    ///   - state: State that describes state, such as enabled or disabled
+    ///   - state: Enum that describes state, such as enabled or disabled
     ///   - action: Action to perform when the user triggers button
     ///   - content: View that describes purpose of the action
     public init(
@@ -101,7 +101,7 @@ public struct VSquareButton<Content>: View where Content: View {
     ///
     /// - Parameters:
     ///   - model: Model that describes UI
-    ///   - state: State that describes state, such as enabled or disabled
+    ///   - state: Enum that describes state, such as enabled or disabled
     ///   - action: Action to perform when the user triggers button
     ///   - title: Title that describes purpose of the action
     public init(

@@ -86,7 +86,7 @@ public struct VRangeSlider: View {
     ///   - range: Range of values
     ///   - difference: Max allowed difference between low and high values
     ///   - step: Increment of value over range
-    ///   - state: State that describes state, such as enabled or disabled
+    ///   - state: Enum that describes state, such as enabled or disabled
     ///   - valueLow: Selected low value
     ///   - valueHigh: Selected high value
     ///   - actionLow: Callback for when editing of low value begins and ends

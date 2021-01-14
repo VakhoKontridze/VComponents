@@ -89,9 +89,9 @@ public struct VSegmentedPicker<Data, RowContent>: View
     /// - Parameters:
     ///   - model: Model that describes UI
     ///   - selectedIndex: Index of the selected item
-    ///   - state: State that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of the picker
-    ///   - subtitle: Subtitle that describes purpose of the picker
+    ///   - state: Enum that describes state, such as enabled or disabled
+    ///   - title: Title that describes purpose of picker
+    ///   - subtitle: Subtitle that describes purpose of picker
     ///   - disabledIndexes: Indexes that disable selection
     ///   - data: Data that represents picker items
     ///   - rowContent: View that represents picker item
@@ -155,9 +155,9 @@ public struct VSegmentedPicker<Data, RowContent>: View
     /// - Parameters:
     ///   - model: Model that describes UI
     ///   - selectedIndex: Index of the selected item
-    ///   - state: State that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of the picker
-    ///   - subtitle: Subtitle that describes purpose of the picker
+    ///   - state: Enum that describes state, such as enabled or disabled
+    ///   - title: Title that describes purpose of picker
+    ///   - subtitle: Subtitle that describes purpose of picker
     ///   - disabledIndexes: Indexes that disable selection
     ///   - titles: Titles that represents picker items
     public init(
@@ -264,9 +264,9 @@ public struct VSegmentedPicker<Data, RowContent>: View
     /// - Parameters:
     ///   - model: Model that describes UI
     ///   - selection: Selected item
-    ///   - state: State that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of the picker
-    ///   - subtitle: Subtitle that describes purpose of the picker
+    ///   - state: Enum that describes state, such as enabled or disabled
+    ///   - title: Title that describes purpose of picker
+    ///   - subtitle: Subtitle that describes purpose of picker
     ///   - disabledItems: Items that disable seelction
     ///   - rowContent: View that represents picker item
     public init<Option>(
@@ -355,9 +355,9 @@ public struct VSegmentedPicker<Data, RowContent>: View
     /// - Parameters:
     ///   - model: Model that describes UI
     ///   - selection: Selected item
-    ///   - state: State that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of the picker
-    ///   - subtitle: Subtitle that describes purpose of the picker
+    ///   - state: Enum that describes state, such as enabled or disabled
+    ///   - title: Title that describes purpose of picker
+    ///   - subtitle: Subtitle that describes purpose of picker
     ///   - disabledItems: Items that disable seelction
     public init<Option>(
         model: VSegmentedPickerModel = .init(),

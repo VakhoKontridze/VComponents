@@ -55,7 +55,7 @@ extension VSegmentedPickerModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(   // Only used in init with string
+        public var text: StateColors = .init(   // Only applicable during init with title
             enabled: ColorBook.primary,
             disabled: ColorBook.primary
         )
@@ -108,7 +108,7 @@ extension VSegmentedPickerModel {
         public var title: Font = .system(size: 14, weight: .regular, design: .default)
         public var subtitle: Font = .system(size: 13, weight: .regular, design: .default)
         
-        public var rows: Font = .system(size: 14, weight: .medium, design: .default)    // Only used in init with string
+        public var rows: Font = .system(size: 14, weight: .medium, design: .default)    // Only applicable during init with title
         
         public init() {}
     }

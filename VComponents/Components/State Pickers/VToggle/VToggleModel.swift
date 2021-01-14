@@ -12,7 +12,7 @@ import SwiftUI
 public struct VToggleModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 15, weight: .regular, design: .default)    // Only used in init with string
+    public var font: Font = .system(size: 15, weight: .regular, design: .default)    // Only applicable during init with title
     public var behavior: Behavior = .init()
     
     public init() {}
@@ -57,7 +57,7 @@ extension VToggleModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(   // Only used in init with string
+        public var text: StateColors = .init(   // Only applicable during init with title
             off: ColorBook.primary,
             on: ColorBook.primary,
             disabled: ColorBook.primary

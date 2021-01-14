@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Segmented Picker State
-/// State that describes state, such as enabled or disabled
+/// Enum that describes state, such as enabled or disabled
 public enum VSegmentedPickerState: Int, CaseIterable {
     case enabled
     case disabled

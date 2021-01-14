@@ -12,7 +12,7 @@ import SwiftUI
 public struct VSquareButtonModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 14, weight: .semibold, design: .default)  // Only used in init with string
+    public var font: Font = .system(size: 14, weight: .semibold, design: .default)  // Only applicable during init with title
     
     public init() {}
 }
@@ -46,7 +46,7 @@ extension VSquareButtonModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(   // Only used in init with string
+        public var text: StateColors = .init(   // Only applicable during init with title
             enabled: primaryButtonColors.text.enabled,
             pressed: primaryButtonColors.text.pressed,
             disabled: primaryButtonColors.text.disabled

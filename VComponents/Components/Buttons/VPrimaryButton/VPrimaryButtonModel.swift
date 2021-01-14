@@ -12,7 +12,7 @@ import SwiftUI
 public struct VPrimaryButtonModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 16, weight: .semibold, design: .default)  // Only used in init with string
+    public var font: Font = .system(size: 16, weight: .semibold, design: .default)  // Only applicable during init with title
     
     var spinnerModel: VSpinnerModelContinous {
         var model: VSpinnerModelContinous = .init()
@@ -50,7 +50,7 @@ extension VPrimaryButtonModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(    // Only used in init with string
+        public var text: StateColors = .init(    // Only applicable during init with title
             enabled: ColorBook.primaryInverted,
             pressed: ColorBook.primaryInverted,
             disabled: ColorBook.primaryInverted,
