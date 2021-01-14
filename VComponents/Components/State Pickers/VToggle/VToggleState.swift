@@ -30,11 +30,11 @@ public enum VToggleState: Int, CaseIterable {
         }
     }
     
-    var isDisabled: Bool {
+    var isEnabled: Bool {
         switch self {
-        case .off: return false
-        case .on: return false
-        case .disabled: return true
+        case .off: return true
+        case .on: return true
+        case .disabled: return false
         }
     }
 }

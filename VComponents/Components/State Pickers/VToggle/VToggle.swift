@@ -16,7 +16,7 @@ public struct VToggle<Content>: View where Content: View {
     @Binding private var state: VToggleState
     @State private var isPressed: Bool = false
     private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
-    private var contentIsDisabled: Bool { state.isDisabled || !model.behavior.contentIsClickable }
+    private var contentIsEnabled: Bool { state.isEnabled && model.behavior.contentIsClickable }
     
     private let content: (() -> Content)?
     
@@ -299,7 +299,7 @@ extension VToggle {
     }
     
     private var toggle: some View {
-        VBaseButton(isDisabled: state.isDisabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: state.isEnabled, action: action, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.size.height)
                     .foregroundColor(model.colors.fillColor(state: internalState))
@@ -314,7 +314,7 @@ extension VToggle {
     }
     
     private var spacerView: some View {
-        VBaseButton(isDisabled: contentIsDisabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { _ in }, content: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: model.layout.contentMargin)
@@ -325,7 +325,7 @@ extension VToggle {
     private func contentView(
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        VBaseButton(isDisabled: contentIsDisabled, action: action, onPress: { isPressed = $0 }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
                 .opacity(model.colors.contentOpacity(state: internalState))
         })

@@ -12,7 +12,7 @@ import UIKit
 /// Core component that is used throughout the framework as button
 public struct VBaseButton<Content>: View where Content: View {
     // MARK: Properties
-    private let isDisabled: Bool
+    private let isEnabled: Bool
     
     private let action: () -> Void
     private let pressHandler: (Bool) -> Void
@@ -23,17 +23,17 @@ public struct VBaseButton<Content>: View where Content: View {
     /// Initializes component with state, action, press action, and content
     /// 
     /// - Parameters:
-    ///   - isDisabled: Bool that describes state
+    ///   - isEnabled: Bool that describes state
     ///   - action: Action to perform when the user triggers button
     ///   - pressHandler: Callback for when button is being pressed
     ///   - content: View that describes purpose of the action
     public init(
-        isDisabled: Bool,
+        isEnabled: Bool,
         action: @escaping () -> Void,
         onPress pressHandler: @escaping (Bool) -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.isDisabled = isDisabled
+        self.isEnabled = isEnabled
         self.action = action
         self.pressHandler = pressHandler
         self.content = content
@@ -44,25 +44,25 @@ public struct VBaseButton<Content>: View where Content: View {
 extension VBaseButton {
     public var body: some View {
         content()
-            .overlay(UIKitTouchView(isDisabled: isDisabled, action: action, pressHandler: pressHandler))
+            .overlay(UIKitTouchView(isEnabled: isEnabled, action: action, pressHandler: pressHandler))
     }
 }
 
 // MARK:- UIKit Touch View
 private struct UIKitTouchView: UIViewRepresentable {
     // MARK: Properties
-    private let isDisabled: Bool
+    private let isEnabled: Bool
     
     private let action: () -> Void
     private let pressHandler: (Bool) -> Void
     
     // MARK: Initializers
     init(
-        isDisabled: Bool,
+        isEnabled: Bool,
         action: @escaping () -> Void,
         pressHandler: @escaping (Bool) -> Void
     ) {
-        self.isDisabled = isDisabled
+        self.isEnabled = isEnabled
         self.action = action
         self.pressHandler = pressHandler
     }
@@ -72,7 +72,7 @@ private struct UIKitTouchView: UIViewRepresentable {
     
     func makeUIView(context: UIViewRepresentableContext<UIKitTouchView>) -> UIView {
         let view: UIView = .init(frame: .zero)
-        view.isUserInteractionEnabled = !isDisabled
+        view.isUserInteractionEnabled = isEnabled
         view.addGestureRecognizer(context.coordinator.makeGesture(
             action: action,
             pressHandler: pressHandler
@@ -81,7 +81,7 @@ private struct UIKitTouchView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<UIKitTouchView>) {
-        uiView.isUserInteractionEnabled = !isDisabled
+        uiView.isUserInteractionEnabled = isEnabled
     }
 }
 

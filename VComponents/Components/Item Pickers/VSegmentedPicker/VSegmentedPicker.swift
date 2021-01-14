@@ -23,7 +23,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     private let state: VSegmentedPickerState
     @State private var pressedIndex: Int? = nil
     private func rowState(for index: Int) -> VSegmentedPickerRowState { .init(
-        isEnabled: !state.isDisabled && !disabledIndexes.contains(index),
+        isEnabled: state.isEnabled && !disabledIndexes.contains(index),
         isPressed: pressedIndex == index
     ) }
     
@@ -466,7 +466,7 @@ extension VSegmentedPicker {
         HStack(spacing: 0, content: {
             ForEach(0..<data.count, content: { i in
                 VBaseButton(
-                    isDisabled: state.isDisabled || disabledIndexes.contains(i),
+                    isEnabled: state.isEnabled && !disabledIndexes.contains(i),
                     action: { selectedIndex = i },
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {

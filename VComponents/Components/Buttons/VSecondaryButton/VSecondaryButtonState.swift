@@ -13,10 +13,10 @@ public enum VSecondaryButtonState: Int, CaseIterable {
     case enabled
     case disabled
     
-    var isDisabled: Bool {
+    var isEnabled: Bool {
         switch self {
-        case .enabled: return false
-        case .disabled: return true
+        case .enabled: return true
+        case .disabled: return false
         }
     }
 }

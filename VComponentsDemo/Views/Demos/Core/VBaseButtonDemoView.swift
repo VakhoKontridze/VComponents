@@ -61,7 +61,7 @@ extension VBaseButtonDemoView {
                     )
                         .frame(height: 20)
                     
-                    VBaseButton(isDisabled: false, action: action, onPress: pressAction, content: {
+                    VBaseButton(isEnabled: true, action: action, onPress: pressAction, content: {
                         Circle()
                             .frame(dimension: 200)
                             .foregroundColor(Color.pink.opacity(pressInsturction.opacity))

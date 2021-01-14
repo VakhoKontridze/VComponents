@@ -75,7 +75,7 @@ public struct VChevronButton: View {
 extension VChevronButton {
     public var body: some View {
         VBaseButton(
-            isDisabled: state.isDisabled,
+            isEnabled: state.isEnabled,
             action: action,
             onPress: { isPressed = $0 },
             content: { hitBox }

@@ -132,7 +132,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
 extension VPrimaryButton {
     public var body: some View {
         VBaseButton(
-            isDisabled: state.isDisabled,
+            isEnabled: state.isEnabled,
             action: action,
             onPress: { isPressed = $0 },
             content: { buttonView }
