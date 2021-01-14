@@ -89,8 +89,8 @@ extension VAccordionDemoView {
         VStack(spacing: 20, content: {
             ToggleSettingView(
                 state: .init(
-                    get: { accordionState == .disabled ? .on : .off },
-                    set: { state in withAnimation { accordionState = state.isOn ? .disabled : .collapsed } }
+                    get: { accordionState == .disabled },
+                    set: { state in withAnimation { accordionState = state ? .disabled : .collapsed } }
                 ),
                 title: "Disabled"
             )
@@ -107,10 +107,7 @@ extension VAccordionDemoView {
             HStack(content: {
                 VBaseTitle(title: "Expand/Collapse on Header Tap", color: ColorBook.primary, font: .callout, type: .oneLine)
                 Spacer()
-                VToggle(state: .init(
-                    get: { expandCollapseOnHeaderTap ? .on : .off },
-                    set: { expandCollapseOnHeaderTap = $0.isOn }
-                ))
+                VToggle(state: $expandCollapseOnHeaderTap)
             })
         })
     }

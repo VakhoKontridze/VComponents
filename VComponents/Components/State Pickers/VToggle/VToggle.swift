@@ -29,6 +29,18 @@ public struct VToggle<Content>: View where Content: View {
         self._state = state
         self.content = content
     }
+    
+    public init(
+        model: VToggleModel = .init(),
+        state: Binding<Bool>,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.init(
+            model: model,
+            state: Binding<VToggleState>(bool: state),
+            content: content
+        )
+    }
 
     public init(
         model: VToggleModel = .init(),
@@ -50,6 +62,27 @@ public struct VToggle<Content>: View where Content: View {
             }
         )
     }
+    
+    public init(
+        model: VToggleModel = .init(),
+        state: Binding<Bool>,
+        title: String
+    )
+        where Content == VBaseTitle
+    {
+        self.init(
+            model: model,
+            state: state,
+            content: {
+                VBaseTitle(
+                    title: title,
+                    color: model.colors.textColor(state: .init(bool: state.wrappedValue, isPressed: false)),
+                    font: model.font,
+                    type: .multiLine(limit: nil, alignment: .leading)
+                )
+            }
+        )
+    }
 
     public init(
         model: VToggleModel = .init(),
@@ -59,6 +92,17 @@ public struct VToggle<Content>: View where Content: View {
     {
         self.model = model
         self._state = state
+        self.content = nil
+    }
+    
+    public init(
+        model: VToggleModel = .init(),
+        state: Binding<Bool>
+    )
+        where Content == Never
+    {
+        self.model = model
+        self._state = .init(bool: state)
         self.content = nil
     }
 }

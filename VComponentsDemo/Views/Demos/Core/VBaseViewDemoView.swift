@@ -14,8 +14,8 @@ struct VBaseViewDemoView: View {
     static let navigationBarTitle: String = "Base View"
     
     @State private var navigationBarTitlePosition: NavigationBarTitlePosition = .leading
-    @State private var navigationBarLeadingItem: VToggleState = .off
-    @State private var navigationBarTrailingItemState: VToggleState = .off
+    @State private var navigationBarHasLeadingItem: Bool = false
+    @State private var navigationBarHasTrailingItemState: Bool = false
     
     private enum NavigationBarTitlePosition: Int, CaseIterable, VPickerTitledEnumerableOption {
         case leading
@@ -72,9 +72,9 @@ extension VBaseViewDemoView {
                             subtitle: "Changing title position causes view to re-draw itself"
                         )
                         
-                        VToggle(state: $navigationBarLeadingItem, title: "Leading items")
+                        VToggle(state: $navigationBarHasLeadingItem, title: "Leading items")
                         
-                        VToggle(state: $navigationBarTrailingItemState, title: "Trailing items")
+                        VToggle(state: $navigationBarHasTrailingItemState, title: "Trailing items")
                     })
                 })
             }
@@ -82,7 +82,7 @@ extension VBaseViewDemoView {
     }
     
     @ViewBuilder var leadingItem: some View {
-        if navigationBarLeadingItem.isOn {
+        if navigationBarHasLeadingItem {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item")
             })
@@ -90,7 +90,7 @@ extension VBaseViewDemoView {
     }
     
     @ViewBuilder var trailingItem: some View {
-        if navigationBarTrailingItemState.isOn {
+        if navigationBarHasTrailingItemState {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 1")
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 2")

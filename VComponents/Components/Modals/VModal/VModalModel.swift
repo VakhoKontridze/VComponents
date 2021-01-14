@@ -50,7 +50,7 @@ extension VModalModel {
         public var dividerHeight: CGFloat = 0
         var hasDivider: Bool { dividerHeight > 0 }
         
-        static let headerSpacing: CGFloat = 10
+        public var headerSpacing: CGFloat = 10
         public var spacing: CGFloat = 10
         
         public init() {}

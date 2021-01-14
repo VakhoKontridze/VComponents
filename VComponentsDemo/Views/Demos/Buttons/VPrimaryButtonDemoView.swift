@@ -85,18 +85,18 @@ extension VPrimaryButtonDemoView {
                 
                 ToggleSettingView(
                     state: .init(
-                        get: { buttonState == .disabled ? .on : .off },
-                        set: { buttonState = $0.isOn ? .disabled : .enabled }
+                        get: { buttonState == .disabled },
+                        set: { buttonState = $0 ? .disabled : .enabled }
                     ),
                     title: "Disabled"
                 )
-                
+
                 Spacer()
                 
                 ToggleSettingView(
                     state: .init(
-                        get: { buttonState == .loading ? .on : .off },
-                        set: { buttonState = $0.isOn ? .loading : .enabled }
+                        get: { buttonState == .loading },
+                        set: { buttonState = $0 ? .loading : .enabled }
                     ),
                     title: "Loading"
                 )

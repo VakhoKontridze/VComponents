@@ -183,8 +183,8 @@ extension VSegmentedPickerDemoView {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 state: .init(
-                    get: { segmentedPickerState == .disabled ? .on : .off },
-                    set: { segmentedPickerState = $0.isOn ? .disabled : .enabled }
+                    get: { segmentedPickerState == .disabled },
+                    set: { segmentedPickerState = $0 ? .disabled : .enabled }
                 ),
                 title: "Disabled"
             )

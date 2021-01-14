@@ -99,7 +99,7 @@ extension _VModal {
         case (let titleContent?, .leading, .leading):
             HStack(spacing: 0, content: {
                 closeButton
-                Spacer().frame(width: VModalModel.Layout.headerSpacing)
+                Spacer().frame(width: model.layout.headerSpacing)
                 titleContent()
                 Spacer()
             })

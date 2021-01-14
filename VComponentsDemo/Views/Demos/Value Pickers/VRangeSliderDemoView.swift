@@ -109,8 +109,8 @@ extension VRangeSliderDemoView {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 state: .init(
-                    get: { sliderState == .disabled ? .on : .off },
-                    set: { sliderState = $0.isOn ? .disabled : .enabled }
+                    get: { sliderState == .disabled },
+                    set: { sliderState = $0 ? .disabled : .enabled }
                 ),
                 title: "Disabled"
             )

@@ -15,8 +15,8 @@ struct ToggleSettingView: View {
     private let title: String
     
     // MARK: Initializers
-    init(state: Binding<VToggleState>, title: String) {
-        self._state = state
+    init(state: Binding<Bool>, title: String) {
+        self._state = .init(bool: state)
         self.title = title
     }
 }
@@ -40,6 +40,6 @@ extension ToggleSettingView {
 // MARK:- Preview
 struct ToggleSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        ToggleSettingView(state: .constant(.on), title: "Title")
+        ToggleSettingView(state: .constant(true), title: "Title")
     }
 }

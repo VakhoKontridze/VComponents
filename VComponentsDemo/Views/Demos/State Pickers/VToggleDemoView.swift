@@ -80,19 +80,16 @@ extension VToggleDemoView {
             ToggleSettingView(
                 state: .init(
                     get: {
-                        let combinedState: VToggleState? =
-                            ![toggle1State, toggle2State, toggle3State, toggle4State, toggle5State, toggle6State].contains(.disabled) ?
-                            nil :
-                            .disabled
-                        return combinedState == .disabled ? .on : .off
+                        [toggle1State, toggle2State, toggle3State, toggle4State, toggle5State, toggle6State]
+                            .contains(.disabled)
                     },
                     set: {
-                        toggle1State = $0.isOn ? .disabled : .off
-                        toggle2State = $0.isOn ? .disabled : .off
-                        toggle3State = $0.isOn ? .disabled : .off
-                        toggle4State = $0.isOn ? .disabled : .off
-                        toggle5State = $0.isOn ? .disabled : .off
-                        toggle6State = $0.isOn ? .disabled : .off
+                        toggle1State = $0 ? .disabled : .off
+                        toggle2State = $0 ? .disabled : .off
+                        toggle3State = $0 ? .disabled : .off
+                        toggle4State = $0 ? .disabled : .off
+                        toggle5State = $0 ? .disabled : .off
+                        toggle6State = $0 ? .disabled : .off
                     }
                 ),
                 title: "Disabled"
@@ -107,4 +104,3 @@ struct VToggleDemoView_Previews: PreviewProvider {
         VToggleDemoView()
     }
 }
-

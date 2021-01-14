@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK:- V Toggle State
 public enum VToggleState: Int, CaseIterable {
@@ -54,5 +54,24 @@ enum VToggleInternalState {
         case (.on, true): self = .pressedOn
         case (.disabled, _): self = .disabled
         }
+    }
+    
+    init(bool state: Bool, isPressed: Bool) {
+        switch (state, isPressed) {
+        case (false, false): self = .off
+        case (false, true): self = .pressedOff
+        case (true, false): self = .on
+        case (true, true): self = .pressedOn
+        }
+    }
+}
+
+// MARK:- Helpers
+public extension Binding where Value == VToggleState {
+    init(bool: Binding<Bool>) {
+        self.init(
+            get: { bool.wrappedValue ? .on : .off },
+            set: { bool.wrappedValue = $0.isOn }
+        )
     }
 }

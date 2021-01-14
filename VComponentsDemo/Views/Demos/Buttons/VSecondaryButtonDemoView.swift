@@ -92,8 +92,8 @@ extension VSecondaryButtonDemoView {
         DemoRowView(type: .controller, content: {
             ToggleSettingView(
                 state: .init(
-                    get: { buttonState == .disabled ? .on : .off },
-                    set: { buttonState = $0.isOn ? .disabled : .enabled }
+                    get: { buttonState == .disabled },
+                    set: { buttonState = $0 ? .disabled : .enabled }
                 ),
                 title: "Disabled"
             )
