@@ -78,7 +78,7 @@ extension VSliderDemoView {
                 
                 DemoRowView(type: .titled("Stepped"), content: {
                     Self.rowView(title: .init(slider2Value), content: {
-                        VSlider(step: 0.1, state: sliderState, value: $slider2Value)
+                        VSlider(step: 0.15, state: sliderState, value: $slider2Value)
                     })
                 })
                 

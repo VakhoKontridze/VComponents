@@ -144,13 +144,13 @@ private extension VRangeSlider {
             case .low:
                 return rawValue.fixedInRange(
                     min: min,
-                    max: Swift.min(valueHigh - difference, max),
+                    max: Swift.min((valueHigh - difference).roundedDownWithStep(step), max),
                     step: step
                 )
 
             case .high:
                 return rawValue.fixedInRange(
-                    min: Swift.max(valueLow + difference, min),
+                    min: Swift.max((valueLow + difference).roundedUpWithStep(step), min),
                     max: max,
                     step: step
                 )

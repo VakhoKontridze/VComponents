@@ -71,7 +71,7 @@ extension VRangeSliderDemoView {
                     VSliderDemoView.rowView(title: "\(slider2ValueLow) - \(slider2ValueHigh)", content: {
                         VRangeSlider(
                             difference: difference,
-                            step: 0.1,
+                            step: 0.15,
                             valueLow: $slider2ValueLow,
                             valueHigh: $slider2ValueHigh
                         )
