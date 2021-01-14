@@ -142,7 +142,7 @@ extension VToggle {
         VBaseButton(isDisabled: contentIsDisabled, action: action, onPress: { _ in }, content: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .ifLet(model.layout.contentSpacing, transform: { $0.frame(width: $1) })
+                .frame(width: model.layout.contentMargin)
                 .foregroundColor(.clear)
         })
     }
