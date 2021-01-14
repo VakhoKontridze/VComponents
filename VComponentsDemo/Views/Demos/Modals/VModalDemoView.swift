@@ -13,7 +13,7 @@ struct VModalDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Modal"
     
-    @State private var titlePosition: VModalModel.Layout.VModalTitlePosition
+    @State private var titlePositionInternal: VModalTitlePositionIntenral
     @State private var closeButtonPosition: VModalModel.Layout.VModalCloseButtonPosition
     
     @State private var isPresented: Bool = false
@@ -21,9 +21,15 @@ struct VModalDemoView: View {
     private var modalModel: VModalModel {
         var model: VModalModel = .init()
         
-        model.layout.titlePosition = titlePosition
+        if let titlePosition = titlePositionInternal.actualTitlePosition { model.layout.titlePosition = titlePosition }
         model.layout.closeButtonPosition = closeButtonPosition
         
+        return model
+    }
+    
+    private var pickerModel: VSegmentedPickerModel {
+        var model: VSegmentedPickerModel = .init()
+        model.animation = nil
         return model
     }
     
@@ -31,7 +37,7 @@ struct VModalDemoView: View {
     init() {
         let modalLayout: VModalModel.Layout = .init()
         
-        self._titlePosition = State(initialValue: modalLayout.titlePosition)
+        self._titlePositionInternal = State(initialValue: .init(from: modalLayout.titlePosition))
         self._closeButtonPosition = State(initialValue: modalLayout.closeButtonPosition)
     }
 }
@@ -42,44 +48,93 @@ extension VModalDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    VSegmentedPicker(selection: $titlePosition, title: "Title Position")
-                    VSegmentedPicker(selection: $closeButtonPosition, title: "Close Button Position")
+                    VSegmentedPicker(model: pickerModel, selection: $titlePositionInternal, title: "Title Position")
+                    VSegmentedPicker(model: pickerModel, selection: $closeButtonPosition, title: "Close Button Position")
                     
                     VSecondaryButton(action: { isPresented = true }, title: "Demo Modal")
                 })
             })
         })
-            .vModal(isPresented: $isPresented, modal: {
-                VModal(model: modalModel, title: { VModalDefaultTitle(title: "Lorem ipsum dolor sit amet") }, content: {
-                    ZStack(content: {
-                        Color.red.opacity(0.5)
-                        
-                        if closeButtonPosition == .none {
-                            VStack(content: {
-                                VBaseTitle(
-                                    title: "When close button is \"none\", Modal can only be dismissed programatically",
-                                    color: ColorBook.primary,
-                                    font: .system(size: 14, weight: .semibold, design: .default),
-                                    type: .multiLine(limit: nil, alignment: .center)
-                                )
-                                
-                                VSecondaryButton(action: { isPresented = false }, title: "Dismiss")
-                            })
-                                .frame(maxHeight: .infinity, alignment: .bottom)
-                                .padding(16)
-                        }
-                    })
+            .if(titlePositionInternal.hasContent,
+                ifTransform: {
+                    $0
+                        .vModal(isPresented: $isPresented, modal: {
+                            VModal(
+                                model: modalModel,
+                                title: { VModalDefaultTitle(title: "Lorem ipsum dolor sit amet") },
+                                content: { modalContent }
+                            )
+                        })
+                }, elseTransform: {
+                    $0
+                        .vModal(isPresented: $isPresented, modal: {
+                            VModal(
+                                model: modalModel,
+                                content: { modalContent }
+                            )
+                        })
+                }
+            )
+    }
+    
+    private var modalContent: some View {
+        ZStack(content: {
+            Color.red.opacity(0.5)
+            
+            if closeButtonPosition == .none {
+                VStack(content: {
+                    VBaseTitle(
+                        title: "When close button is \"none\", Modal can only be dismissed programatically",
+                        color: ColorBook.primary,
+                        font: .system(size: 14, weight: .semibold, design: .default),
+                        type: .multiLine(limit: nil, alignment: .center)
+                    )
+                    
+                    VSecondaryButton(action: { isPresented = false }, title: "Dismiss")
                 })
-            })
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .padding(16)
+            }
+        })
     }
 }
 
 // MARK:- Helpers
-extension VModalModel.Layout.VModalTitlePosition: VPickerTitledEnumerableOption {
-    public var pickerTitle: String {
-        switch self {
-        case .leading: return "Leading"
-        case .center: return "Center"
+private extension VModalDemoView {
+    enum VModalTitlePositionIntenral: Int, CaseIterable, VPickerTitledEnumerableOption {
+        case leading
+        case center
+        case none
+        
+        public var pickerTitle: String {
+            switch self {
+            case .leading: return "Leading"
+            case .center: return "Center"
+            case .none: return "*None"
+            }
+        }
+        
+        var hasContent: Bool {
+            switch self {
+            case .leading: return true
+            case .center: return true
+            case .none: return false
+            }
+        }
+        
+        var actualTitlePosition: VModalModel.Layout.VModalTitlePosition? {
+            switch self {
+            case .leading: return .leading
+            case .center: return .center
+            case .none: return nil
+            }
+        }
+        
+        init(from position: VModalModel.Layout.VModalTitlePosition) {
+            switch position {
+            case .leading: self = .leading
+            case .center: self = .center
+            }
         }
     }
 }
