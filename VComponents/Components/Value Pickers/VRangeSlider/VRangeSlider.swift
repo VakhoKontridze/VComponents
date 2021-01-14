@@ -8,6 +8,9 @@
 import SwiftUI
 
 // MARK:- V Range Slider
+/// Value picker component that selects values from a bounde a bounded linear range of values to represent a range
+///
+/// If invalid parameters are passed during init, layout would invalidate itself, and refuse to draw
 public struct VRangeSlider: View {
     // MARK: Properties
     private let model: VRangeSliderModel
@@ -20,7 +23,7 @@ public struct VRangeSlider: View {
     @Binding private var valueLow: Double
     @Binding private var valueHigh: Double
     private let state: VRangeSliderState
-
+    
     private let actionLow: ((Bool) -> Void)?
     private let actionHigh: ((Bool) -> Void)?
     
@@ -29,6 +32,65 @@ public struct VRangeSlider: View {
     fileprivate enum Thumb { case low, high }
 
     // MARK: Initializers
+    /// Initializes component with low and high values
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var valueLow: Double = 0.3
+    /// @State var valueHigh: Double = 0.8
+    ///
+    /// var body: some View {
+    ///     VRangeSlider(
+    ///         difference: 0.1,
+    ///         valueLow: $valueLow,
+    ///         valueHigh: $valueHigh
+    ///     )
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VRangeSliderModel = .init()
+    /// @State var state: VRangeSliderState = .enabled
+    /// @State var valueLow: Double = 0.3
+    /// @State var valueHigh: Double = 0.8
+    ///
+    /// var body: some View {
+    ///     VRangeSlider(
+    ///         model: model,
+    ///         range: 0...1,
+    ///         difference: 0.1,
+    ///         step: 0.1,
+    ///         state: state,
+    ///         valueLow: $valueLow,
+    ///         valueHigh: $valueHigh,
+    ///         onChangeLow: { isDragged in
+    ///             switch isDragged {
+    ///             case false: print("Low drag ended")
+    ///             case true: print("Low value changed")
+    ///             }
+    ///         },
+    ///         onChangeHigh: { isDragged in
+    ///             switch isDragged {
+    ///             case false: print("High drag ended")
+    ///             case true: print("High value changed")
+    ///             }
+    ///         }
+    ///     )
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - range: Range of values
+    ///   - difference: Max allowed difference between low and high values
+    ///   - step: Increment of value over range
+    ///   - state: State that describes state, such as enabled or disabled
+    ///   - valueLow: Selected low value
+    ///   - valueHigh: Selected high value
+    ///   - actionLow: Callback for when editing of low value begins and ends
+    ///   - actionHigh: Callback for when editing of high value begins and ends
     public init<V>(
         model: VRangeSliderModel = .init(),
         range: ClosedRange<V> = 0...1,

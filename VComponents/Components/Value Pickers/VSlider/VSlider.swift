@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Slider
+/// Value picker component that selects value from a bounde a bounded linear range of values
 public struct VSlider: View {
     // MARK: Properties
     private let model: VSliderModel
@@ -22,6 +23,48 @@ public struct VSlider: View {
     private let action: ((Bool) -> Void)?
     
     // MARK: Initializers
+    /// Initializes component with value
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var value: Double = 0.5
+    ///
+    /// var body: some View {
+    ///     VSlider(value: $value)
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VSliderModel = .init()
+    /// @State var state: VSliderState = .enabled
+    /// @State var value: Double = 0.5
+    ///
+    /// var body: some View {
+    ///     VSlider(
+    ///         model: model,
+    ///         range: 0...1,
+    ///         step: 0.1,
+    ///         state: state,
+    ///         value: $value,
+    ///         onChange: { isDragged in
+    ///             switch isDragged {
+    ///             case false: print("Drag ended")
+    ///             case true: print("Value changed")
+    ///             }
+    ///         }
+    ///     )
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - range: Range of values
+    ///   - step: Increment of value over range
+    ///   - state: State that describes state, such as enabled or disabled
+    ///   - value: Selected value
+    ///   - action: Callback for when editing begins and ends
     public init<V>(
         model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,

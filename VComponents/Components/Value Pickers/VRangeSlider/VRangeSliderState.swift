@@ -8,4 +8,5 @@
 import Foundation
 
 // MARK:- V Range Slider State
+/// State that describes state, such as enabled or disabled
 public typealias VRangeSliderState = VSliderState

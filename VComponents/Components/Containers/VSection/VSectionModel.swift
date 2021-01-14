@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Section Model
+/// Model that describes UI
 public struct VSectionModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
@@ -48,7 +49,7 @@ extension VSectionModel {
         public static let genericListContentLayout: VBaseListModel.Layout = .init()
         public static let sheetLayout: VSheetModel.Layout = .init()
         
-        public var titleMarginHor: CGFloat = 10
+        public var titleMarginHor: CGFloat = sheetLayout.contentMargin
         public var titleMarginBottom: CGFloat = 10
         
         public var cornerRadius: CGFloat = sheetLayout.cornerRadius

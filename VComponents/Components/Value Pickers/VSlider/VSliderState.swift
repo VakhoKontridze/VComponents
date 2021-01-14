@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK:- V Slider State
+/// State that describes state, such as enabled or disabled
 public enum VSliderState: Int, CaseIterable {
     case enabled
     case disabled

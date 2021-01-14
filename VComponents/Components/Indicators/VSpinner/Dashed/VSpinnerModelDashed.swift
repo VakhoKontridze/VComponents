@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Spinner Model Dashed
+/// Model that describes UI
 public struct VSpinnerModelDashed {
     public var color: Color = ColorBook.accent
     

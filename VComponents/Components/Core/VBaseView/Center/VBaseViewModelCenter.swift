@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Base View Model Center
+/// Model that describes UI
 public struct VBaseViewModelCenter {
     public var layout: Layout = .init()
     public var titleColor: Color = ColorBook.primary

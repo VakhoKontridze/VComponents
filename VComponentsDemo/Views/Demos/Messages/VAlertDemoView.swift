@@ -40,7 +40,7 @@ struct VAlertDemoView: View {
         }
     }
     
-    private enum DialogType: Int, CaseIterable, VPickerTitledEnumerableOption {
+    private enum DialogType: Int, CaseIterable, VPickerTitledEnumerableItem {
         case one
         case two
         case many

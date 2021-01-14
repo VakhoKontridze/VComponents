@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Chevron Button Model
+/// Model that describes UI
 public struct VChevronButtonModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Secondary Button
+/// Small colored button component that performs action when triggered
 public struct VSecondaryButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSecondaryButtonModel
@@ -21,6 +22,46 @@ public struct VSecondaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
+    /// Initializes component with action and content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// var body: some View {
+    ///     VSecondaryButton(action: { print("Pressed") }, content: {
+    ///         Image(systemName: "swift")
+    ///             .resizable()
+    ///             .frame(width: 20, height: 20)
+    ///             .foregroundColor(.white)
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VSecondaryButtonModel = .init()
+    /// @State var state: VSecondaryButtonState = .enabled
+    ///
+    /// var body: some View {
+    ///     VSecondaryButton(
+    ///         model: model,
+    ///         state: state,
+    ///         action: { print("Pressed") },
+    ///         content: {
+    ///             Image(systemName: "swift")
+    ///                 .resizable()
+    ///                 .frame(width: 20, height: 20)
+    ///                 .foregroundColor(.white)
+    ///         }
+    ///     )
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - state: State that describes state, such as enabled or disabled
+    ///   - action: Action to perform when the user triggers button
+    ///   - content: View that describes purpose of the action
     public init(
         model: VSecondaryButtonModel = .init(),
         state: VSecondaryButtonState = .enabled,
@@ -33,6 +74,36 @@ public struct VSecondaryButton<Content>: View where Content: View {
         self.content = content
     }
 
+    /// Initializes component with action and title
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// var body: some View {
+    ///     VSecondaryButton(action: { print("Pressed") }, title: "Press")
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VSecondaryButtonModel = .init()
+    /// @State var state: VSecondaryButtonState = .enabled
+    ///
+    /// var body: some View {
+    ///     VSecondaryButton(
+    ///         model: model,
+    ///         state: state,
+    ///         action: { print("Pressed") },
+    ///         title: "Press"
+    ///     )
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - state: State that describes state, such as enabled or disabled
+    ///   - action: Action to perform when the user triggers button
+    ///   - title: Title that describes purpose of the action
     public init(
         model: VSecondaryButtonModel = .init(),
         state: VSecondaryButtonState = .enabled,

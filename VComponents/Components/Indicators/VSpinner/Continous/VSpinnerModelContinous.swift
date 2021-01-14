@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Spinner Model Continous
+/// Model that describes UI
 public struct VSpinnerModelContinous {
     public var animation: Animation = .linear(duration: 0.75)
     public var layout: Layout = .init()

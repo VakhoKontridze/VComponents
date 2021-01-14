@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Alert Model
+/// Model that describes UI
 public struct VAlertModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

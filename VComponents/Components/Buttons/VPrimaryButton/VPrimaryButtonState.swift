@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK:- V Primary Button State
+/// State that describes state, such as enabled, disabled, or loading
 public enum VPrimaryButtonState: Int, CaseIterable {
     case enabled
     case disabled

@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Square Button Model
+/// Model that describes UI
 public struct VSquareButtonModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

@@ -8,11 +8,22 @@
 import SwiftUI
 
 // MARK:- V Accordion Default Header
+/// View that can be used for accordion header
 public struct VAccordionDefaultHeader: View {
     // MARK: Proeprties
     private let title: String
     
     // MARK: Initializers
+    /// Initializes component with title
+    ///
+    /// # Usage Example #
+    /// ```
+    /// var body: some View {
+    ///     VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
+    /// }
+    /// ```
+    ///
+    /// - Parameter title: Title that describes container
     public init(title: String) {
         self.title = title
     }

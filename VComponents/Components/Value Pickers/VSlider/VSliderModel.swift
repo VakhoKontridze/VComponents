@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Slider Model
+/// Model that describes UI
 public struct VSliderModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

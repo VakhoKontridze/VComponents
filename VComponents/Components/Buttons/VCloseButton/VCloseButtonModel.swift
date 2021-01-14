@@ -8,4 +8,5 @@
 import Foundation
 
 // MARK:- V Close Button Model
+/// Model that describes UI
 public typealias VCloseButtonModel = VChevronButtonModel

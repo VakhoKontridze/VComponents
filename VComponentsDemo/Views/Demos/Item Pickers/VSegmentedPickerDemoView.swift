@@ -25,7 +25,7 @@ struct VSegmentedPickerDemoView: View {
     @State private var segmentedPickerSelection10: Options = .red
     @State private var segmentedPickerState: VSegmentedPickerState = .enabled
     
-    private enum Options: Int, CaseIterable, VPickerTitledEnumerableOption {
+    private enum Options: Int, CaseIterable, VPickerTitledEnumerableItem {
         case red
         case green
         case blue
@@ -139,7 +139,7 @@ extension VSegmentedPickerDemoView {
                     VSegmentedPicker(
                         selection: $segmentedPickerSelection6,
                         state: segmentedPickerState,
-                        disabledIndexes: [1]
+                        disabledItems: [.green]
                     )
                 })
                 
@@ -172,7 +172,7 @@ extension VSegmentedPickerDemoView {
                         model: noLoweredOpacityWhenDisabledModel,
                         selection: $segmentedPickerSelection10,
                         state: segmentedPickerState,
-                        disabledIndexes: [1]
+                        disabledItems: [.green]
                     )
                 })
             })

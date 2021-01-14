@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK:- V Spinner Model
+/// Enum of models that describes UI
 public enum VSpinnerModel {
     case continous(_ model: VSpinnerModelContinous = .init())
     case dashed(_ model: VSpinnerModelDashed = .init())

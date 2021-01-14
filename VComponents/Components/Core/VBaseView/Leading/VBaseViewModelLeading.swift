@@ -8,4 +8,5 @@
 import SwiftUI
 
 // MARK:- V Base View Model Leading
+/// Model that describes UI
 public typealias VBaseViewModelLeading = VBaseViewModelCenter

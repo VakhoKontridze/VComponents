@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Toggle State
+/// State that describes state, such as off, on, or disabled
 public enum VToggleState: Int, CaseIterable {
     case off
     case on

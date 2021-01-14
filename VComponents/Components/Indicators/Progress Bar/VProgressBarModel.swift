@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Progress Bar Model
+/// Model that describes UI
 public struct VProgressBarModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

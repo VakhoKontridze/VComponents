@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Navigation View Model
+/// Model that describes UI
 public struct VNavigationViewModel {
     public var colors: Colors = .init()
     

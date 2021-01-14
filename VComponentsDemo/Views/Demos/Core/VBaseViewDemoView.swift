@@ -17,7 +17,7 @@ struct VBaseViewDemoView: View {
     @State private var navigationBarHasLeadingItem: Bool = false
     @State private var navigationBarHasTrailingItemState: Bool = false
     
-    private enum NavigationBarTitlePosition: Int, CaseIterable, VPickerTitledEnumerableOption {
+    private enum NavigationBarTitlePosition: Int, CaseIterable, VPickerTitledEnumerableItem {
         case leading
         case center
         
@@ -72,9 +72,9 @@ extension VBaseViewDemoView {
                             subtitle: "Changing title position causes view to re-draw itself"
                         )
                         
-                        VToggle(state: $navigationBarHasLeadingItem, title: "Leading items")
+                        VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
                         
-                        VToggle(state: $navigationBarHasTrailingItemState, title: "Trailing items")
+                        VToggle(isOn: $navigationBarHasTrailingItemState, title: "Trailing items")
                     })
                 })
             }

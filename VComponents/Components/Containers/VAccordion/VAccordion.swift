@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Accordion
+/// Expandable container component that draws a background, and either hosts contenr, or computes views on demad from an underlying collection of identified data
 public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     where
         HeaderContent: View,
@@ -31,6 +32,68 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     }
     
     // MARK: Initializers
+    /// Initializes component with state, header, and content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var state: VAccordionState = .expanded
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VAccordion(
+    ///             state: $state,
+    ///             headerContent: {
+    ///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
+    ///             },
+    ///             content: {
+    ///                 Image(systemName: "swift")
+    ///                     .resizable()
+    ///                     .frame(width: 200, height: 200)
+    ///                     .foregroundColor(.accentColor)
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VAccordionModel = .init()
+    /// @State var state: VAccordionState = .expanded
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VAccordion(
+    ///             model: model,
+    ///             layout: .fixed,
+    ///             state: $state,
+    ///             headerContent: {
+    ///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
+    ///             },
+    ///             content: {
+    ///                 Image(systemName: "swift")
+    ///                     .resizable()
+    ///                     .frame(width: 200, height: 200)
+    ///                     .foregroundColor(.accentColor)
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
+    ///   - state: Enum that describes state, such as collapsed, expanded, or disabled
+    ///   - headerContent: View that describes container
+    ///   - content: Accordion content
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -52,6 +115,78 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
         )
     }
     
+    /// Initializes component with state, data, id, and row content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var state: VAccordionState = .expanded
+    /// @State var data: [String] = ["Red", "Green", "Blue"]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VAccordion(
+    ///             state: $state,
+    ///             headerContent: {
+    ///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
+    ///             },
+    ///             data: data,
+    ///             id: \.self,
+    ///             rowContent: { title in
+    ///                 Text(title)
+    ///                     .frame(
+    ///                         maxWidth: .infinity,
+    ///                         alignment: .leading
+    ///                     )
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VAccordionModel = .init()
+    /// @State var state: VAccordionState = .expanded
+    /// @State var data: [String] = ["Red", "Green", "Blue"]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VAccordion(
+    ///             model: model,
+    ///             layout: .fixed,
+    ///             state: $state,
+    ///             headerContent: {
+    ///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
+    ///             },
+    ///             data: data,
+    ///             id: \.self,
+    ///             rowContent: { title in
+    ///                 Text(title)
+    ///                     .frame(
+    ///                         maxWidth: .infinity,
+    ///                         alignment: .leading
+    ///                     )
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
+    ///   - state: Enum that describes state, such as collapsed, expanded, or disabled
+    ///   - headerContent: View that describes container
+    ///   - data: Data used to create views dynamically
+    ///   - id: Key path to the provided data's identifier
+    ///   - rowContent: View builder that creates views dynamically
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -73,7 +208,94 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
             rowContent: rowContent
         )
     }
-
+    
+    /// Initializes component with state, data, and row content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// struct AccordionRow: Identifiable {
+    ///     let id: UUID = .init()
+    ///     let title: String
+    /// }
+    ///
+    /// @State var state: VAccordionState = .expanded
+    /// @State var data: [AccordionRow] = [
+    ///     .init(title: "Red"),
+    ///     .init(title: "Green"),
+    ///     .init(title: "Blue")
+    /// ]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VAccordion(
+    ///             state: $state,
+    ///             headerContent: {
+    ///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
+    ///             },
+    ///             data: data,
+    ///             rowContent: { row in
+    ///                 Text(row.title)
+    ///                     .frame(
+    ///                         maxWidth: .infinity,
+    ///                         alignment: .leading
+    ///                     )
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// struct AccordionRow: Identifiable {
+    ///     let id: UUID = .init()
+    ///     let title: String
+    /// }
+    ///
+    /// let model: VAccordionModel = .init()
+    /// @State var state: VAccordionState = .expanded
+    /// @State var data: [AccordionRow] = [
+    ///     .init(title: "Red"),
+    ///     .init(title: "Green"),
+    ///     .init(title: "Blue")
+    /// ]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VAccordion(
+    ///             model: model,
+    ///             layout: .fixed,
+    ///             state: $state,
+    ///             headerContent: {
+    ///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
+    ///             },
+    ///             data: data,
+    ///             rowContent: { row in
+    ///                 Text(row.title)
+    ///                     .frame(
+    ///                         maxWidth: .infinity,
+    ///                         alignment: .leading
+    ///                     )
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
+    ///   - state: Enum that describes state, such as collapsed, expanded, or disabled
+    ///   - headerContent: View that describes container
+    ///   - data: Identified data used to create views dynamically
+    ///   - rowContent: View builder that creates views dynamically
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,

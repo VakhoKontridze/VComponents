@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Alert Dialog Button Model Model
+/// Model that describes UI
 public enum VAlertDialogButtonModel {
     case primary
     case secondary
@@ -61,6 +62,7 @@ public enum VAlertDialogButtonModel {
 }
 
 // MARK:- V Alert Dialog Button Model Custom
+/// Model that describes UI
 public struct VAlertDialogButtonModelCustom {
     public static let primaryButtonFont: Font = VPrimaryButtonModel().font
     

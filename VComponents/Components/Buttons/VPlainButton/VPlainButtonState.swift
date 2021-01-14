@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK:- V Plain Button State
+/// State that describes state, such as enabled or disabled
 public enum VPlainButtonState: Int, CaseIterable {
     case enabled
     case disabled

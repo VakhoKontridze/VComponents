@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Lazy List Model Horizontal
+/// Model that describes UI
 public struct VLazyListModelHorizontal {
     public var layout: Layout = .init()
     public var showIndicator: Bool = true

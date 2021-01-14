@@ -8,24 +8,26 @@
 import SwiftUI
 
 // MARK:- V Base Title
+/// Core component that is used throughout the framework as title
 public struct VBaseTitle: View {
     // MARK: Properties
     private let title: String
     private let color: Color
     private let font: Font
-    private let titleType: TitleType
-    
-    public enum TitleType {
-        case oneLine
-        case multiLine(limit: Int?, alignment: TextAlignment)
-    }
+    private let titleType: VBaseTitleType
     
     // MARK: Initializers
+    /// Initializes component with title, color, font, and type
+    /// - Parameters:
+    ///   - title: Title
+    ///   - color: Title font
+    ///   - font: Title font
+    ///   - titleType: Enum that describes layout, such as one-line or multi-line
     public init(
         title: String,
         color: Color,
         font: Font,
-        type titleType: TitleType
+        type titleType: VBaseTitleType
     ) {
         self.title = title
         self.color = color

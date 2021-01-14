@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Segmented Picker Model
+/// Model that describes UI
 public struct VSegmentedPickerModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
@@ -20,6 +21,8 @@ public struct VSegmentedPickerModel {
 // MARK:- Layout
 extension VSegmentedPickerModel {
     public struct Layout {
+        public static let sectionLayout: VSectionModel.Layout = .init()
+        
         public var height: CGFloat = 31
         public var cornerRadius: CGFloat = 7
         
@@ -33,7 +36,7 @@ extension VSegmentedPickerModel {
         var actualRowContentMargin: CGFloat { indicatorMargin + rowContentMargin }
         
         public var titleSpacing: CGFloat = 3
-        public var titlePaddingHor: CGFloat = 10
+        public var titlePaddingHor: CGFloat = sectionLayout.titleMarginHor
         
         public var dividerHeight: CGFloat = 17
         

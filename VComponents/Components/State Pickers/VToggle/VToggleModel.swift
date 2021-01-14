@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Toggle Model
+/// Model that describes UI
 public struct VToggleModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

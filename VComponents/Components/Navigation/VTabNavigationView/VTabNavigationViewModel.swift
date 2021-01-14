@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Tab Navigation View Model
+/// Model that describes UI
 public struct VTabNavigationViewModel {
     public var colors: Colors = .init()
     

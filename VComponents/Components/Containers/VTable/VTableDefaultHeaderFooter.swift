@@ -8,11 +8,22 @@
 import SwiftUI
 
 // MARK:- V Table Default Header Footer
+/// View that can be used for table header and footer
 public struct VTableDefaultHeaderFooter: View {
     // MARK: Proeprties
     private let title: String
     
     // MARK: Initializers
+    /// Initializes component with title
+    ///
+    /// # Usage Example #
+    /// ```
+    /// var body: some View {
+    ///     VTableDefaultHeaderFooter(title: "Lorem ipsum dolor sit amet")
+    /// }
+    /// ```
+    ///
+    /// - Parameter title: Title that describes section
     public init(title: String) {
         self.title = title
     }

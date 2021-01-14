@@ -20,6 +20,7 @@ extension EnvironmentValues {
 }
 
 // MARK:- V Navigation Link
+/// Button that controls a navigation presentation
 public struct VNavigationLink<Destination, Label>: View
     where
         Destination: View,
@@ -30,6 +31,11 @@ public struct VNavigationLink<Destination, Label>: View
     private let label: () -> Label
     
     // MARK: Initializers
+    /// Initialzies component with destination and label
+    ///
+    /// - Parameters:
+    ///   - destination: Destination content
+    ///   - label: View that describes purpose of the action
     public init(
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label

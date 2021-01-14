@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Table Model
+/// Model that describes UI
 public struct VTableModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

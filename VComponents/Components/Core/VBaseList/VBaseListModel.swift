@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Base List Model
+/// Model that describes UI
 public struct VBaseListModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

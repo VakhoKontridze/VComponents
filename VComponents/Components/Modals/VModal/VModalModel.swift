@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Modal Model
+/// Model that describes UI
 public struct VModalModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

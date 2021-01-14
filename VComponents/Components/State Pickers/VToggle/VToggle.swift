@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Toggle
+/// State picker component that toggles between off, on, or disabled states, and displays content
 public struct VToggle<Content>: View where Content: View {
     // MARK: Properties
     private let model: VToggleModel
@@ -20,6 +21,42 @@ public struct VToggle<Content>: View where Content: View {
     private let content: (() -> Content)?
     
     // MARK: Initializers
+    /// Initializes component with content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var state: VToggleState = .on
+    ///
+    /// var body: some View {
+    ///     VToggle(state: $state, content: {
+    ///         Image(systemName: "swift")
+    ///             .resizable()
+    ///             .frame(width: 20, height: 20)
+    ///             .foregroundColor(.accentColor)
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VToggleModel = .init()
+    /// @State var state: VToggleState = .on
+    ///
+    /// var body: some View {
+    ///     VToggle(model: model, state: $state, content: {
+    ///         Image(systemName: "swift")
+    ///             .resizable()
+    ///             .frame(width: 20, height: 20)
+    ///             .foregroundColor(.accentColor)
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - state: State that describes state, such as off, on, or disabled
+    ///   - content: View that describes purpose of the action
     public init(
         model: VToggleModel = .init(),
         state: Binding<VToggleState>,
@@ -30,18 +67,80 @@ public struct VToggle<Content>: View where Content: View {
         self.content = content
     }
     
+    /// Initializes component with content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var isOn: Bool = true
+    ///
+    /// var body: some View {
+    ///     VToggle(isOn: $isOn, content: {
+    ///         Image(systemName: "swift")
+    ///             .resizable()
+    ///             .frame(width: 20, height: 20)
+    ///             .foregroundColor(.accentColor)
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VToggleModel = .init()
+    /// @State var isOn: Bool = true
+    ///
+    /// var body: some View {
+    ///     VToggle(model: model, isOn: $isOn, content: {
+    ///         Image(systemName: "swift")
+    ///             .resizable()
+    ///             .frame(width: 20, height: 20)
+    ///             .foregroundColor(.accentColor)
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - isOn: Bool that describes state
+    ///   - content: View that describes purpose of the action
     public init(
         model: VToggleModel = .init(),
-        state: Binding<Bool>,
+        isOn: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.init(
             model: model,
-            state: Binding<VToggleState>(bool: state),
+            state: Binding<VToggleState>(bool: isOn),
             content: content
         )
     }
 
+    /// Initializes component with title
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var state: VToggleState = .on
+    ///
+    /// var body: some View {
+    ///     VToggle(state: $state, title: "Press")
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VToggleModel = .init()
+    /// @State var state: VToggleState = .on
+    ///
+    /// var body: some View {
+    ///     VToggle(model: model, state: $state, title: "Press")
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - state: State that describes state, such as off, on, or disabled
+    ///   - title: Title that describes purpose of the action
     public init(
         model: VToggleModel = .init(),
         state: Binding<VToggleState>,
@@ -63,20 +162,46 @@ public struct VToggle<Content>: View where Content: View {
         )
     }
     
+    /// Initializes component with title
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var isOn: Bool = true
+    ///
+    /// var body: some View {
+    ///     VToggle(isOn: $isOn, title: "Press")
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VToggleModel = .init()
+    /// @State var isOn: Bool = true
+    ///
+    /// var body: some View {
+    ///     VToggle(model: model, isOn: $isOn, title: "Press")
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - isOn: Bool that describes state
+    ///   - title: Title that describes purpose of the action
     public init(
         model: VToggleModel = .init(),
-        state: Binding<Bool>,
+        isOn: Binding<Bool>,
         title: String
     )
         where Content == VBaseTitle
     {
         self.init(
             model: model,
-            state: state,
+            state: .init(bool: isOn),
             content: {
                 VBaseTitle(
                     title: title,
-                    color: model.colors.textColor(state: .init(bool: state.wrappedValue, isPressed: false)),
+                    color: model.colors.textColor(state: .init(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -84,6 +209,31 @@ public struct VToggle<Content>: View where Content: View {
         )
     }
 
+    /// Initializes component
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var state: VToggleState = .on
+    ///
+    /// var body: some View {
+    ///     VToggle(state: $state)
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VToggleModel = .init()
+    /// @State var state: VToggleState = .on
+    ///
+    /// var body: some View {
+    ///     VToggle(model: model, state: $state)
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - state: State that describes state, such as off, on, or disabled
     public init(
         model: VToggleModel = .init(),
         state: Binding<VToggleState>
@@ -95,14 +245,39 @@ public struct VToggle<Content>: View where Content: View {
         self.content = nil
     }
     
+    /// Initializes component
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var isOn: Bool = true
+    ///
+    /// var body: some View {
+    ///     VToggle(isOn: $isOn)
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VToggleModel = .init()
+    /// @State var isOn: Bool = true
+    ///
+    /// var body: some View {
+    ///     VToggle(model: model, isOn: $isOn)
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - isOn: Bool that describes state
     public init(
         model: VToggleModel = .init(),
-        state: Binding<Bool>
+        isOn: Binding<Bool>
     )
         where Content == Never
     {
         self.model = model
-        self._state = .init(bool: state)
+        self._state = .init(bool: isOn)
         self.content = nil
     }
 }

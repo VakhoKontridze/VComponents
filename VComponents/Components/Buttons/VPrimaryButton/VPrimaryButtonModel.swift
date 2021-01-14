@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Primary Button Model
+/// Model that describes UI
 public struct VPrimaryButtonModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Secondary Button Model
+/// Model that describes UI
 public struct VSecondaryButtonModel {
     public static let primaryButtonFont: Font = VPrimaryButtonModel().font
     

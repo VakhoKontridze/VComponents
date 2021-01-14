@@ -8,12 +8,18 @@
 import SwiftUI
 
 // MARK:- V Navigation View
+/// Navigation component that presents stack of views with a visible path in a navigation hierarchy
 public struct VNavigationView<Content>: View where Content: View {
     // MARK: Properties
     private let model: VNavigationViewModel
     private let content: () -> Content
     
     // MARK: Initializers
+    /// Initializes component with content
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - content: Navigation root. VBaseView should be used.
     public init(
         model: VNavigationViewModel = .init(),
         @ViewBuilder content: @escaping () -> Content

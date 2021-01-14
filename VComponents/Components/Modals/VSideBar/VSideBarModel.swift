@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Side Bar Model
+/// Model that describes UI
 public struct VSideBarModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()

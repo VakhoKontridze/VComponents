@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Plain Model Button
+/// Model that describes UI
 public struct VPlainButtonModel {
     public static let squareButtonFont: Font = VSquareButtonModel().font
     

@@ -18,11 +18,11 @@ struct _VModal<Content, TitleContent>: View
     
     @Binding private var isPresented: Bool
     
-    public var titleContent: (() -> TitleContent)?
-    public var content: () -> Content
+    let titleContent: (() -> TitleContent)?
+    let content: () -> Content
     
-    public var appearAction: (() -> Void)?
-    public var disappearAction: (() -> Void)?
+    let appearAction: (() -> Void)?
+    let disappearAction: (() -> Void)?
     
     var headerExists: Bool { titleContent != nil || model.layout.closeButtonPosition.exists }
     

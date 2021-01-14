@@ -101,7 +101,7 @@ extension VModalDemoView {
 
 // MARK:- Helpers
 private extension VModalDemoView {
-    enum VModalTitlePositionIntenral: Int, CaseIterable, VPickerTitledEnumerableOption {
+    enum VModalTitlePositionIntenral: Int, CaseIterable, VPickerTitledEnumerableItem {
         case leading
         case center
         case none
@@ -139,7 +139,7 @@ private extension VModalDemoView {
     }
 }
 
-extension VModalModel.Layout.VModalCloseButtonPosition: VPickerTitledEnumerableOption {
+extension VModalModel.Layout.VModalCloseButtonPosition: VPickerTitledEnumerableItem {
     public var pickerTitle: String {
         switch self {
         case .none: return "None"

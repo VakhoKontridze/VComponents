@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Section
+/// Container component that draws a background, and computes views on demad from an underlying collection of identified data
 public struct VSection<Data, ID, Content>: View
     where
         Data: RandomAccessCollection,
@@ -26,6 +27,61 @@ public struct VSection<Data, ID, Content>: View
     private let content: (Data.Element) -> Content
     
     // MARK: Initializers
+    /// Initializes component with data, id, and row content
+    /// 
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// @State var data: [String] = ["Red", "Green", "Blue"]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VSection(data: data, id: \.self, content: { title in
+    ///             Text(title)
+    ///                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///         })
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VSectionModel = .init()
+    /// @State var data: [String] = ["Red", "Green", "Blue"]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VSection(
+    ///             model: model,
+    ///             layout: .fixed,
+    ///             title: "Lorem ipsum dolor sit amet",
+    ///             data: data,
+    ///             id: \.self,
+    ///             content: { title in
+    ///                 Text(title)
+    ///                     .frame(
+    ///                         maxWidth: .infinity,
+    ///                         alignment: . leading
+    ///                     )
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
+    ///   - title: Title that describes container
+    ///   - data: Data used to create views dynamically
+    ///   - id: Key path to the provided data's identifier
+    ///   - content: View builder that creates views dynamically
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .fixed,
@@ -42,6 +98,78 @@ public struct VSection<Data, ID, Content>: View
         self.content = content
     }
 
+    // MARK: Initializers
+    /// Initializes component with data and row content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// struct SectionRow: Identifiable {
+    ///     let id: UUID = .init()
+    ///     let title: String
+    /// }
+    ///
+    /// @State var data: [SectionRow] = [
+    ///     .init(title: "Red"),
+    ///     .init(title: "Green"),
+    ///     .init(title: "Blue")
+    /// ]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VSection(data: data, content: { row in
+    ///             Text(row.title)
+    ///                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///         })
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// struct SectionRow: Identifiable {
+    ///     let id: UUID = .init()
+    ///     let title: String
+    /// }
+    ///
+    /// let model: VSectionModel = .init()
+    /// @State var data: [SectionRow] = [
+    ///     .init(title: "Red"),
+    ///     .init(title: "Green"),
+    ///     .init(title: "Blue")
+    /// ]
+    ///
+    /// var body: some View {
+    ///     ZStack(alignment: .top, content: {
+    ///         ColorBook.canvas
+    ///
+    ///         VSection(
+    ///             model: model,
+    ///             layout: .fixed,
+    ///             title: "Lorem ipsum dolor sit amet",
+    ///             data: data,
+    ///             content: { row in
+    ///                 Text(row.title)
+    ///                     .frame(
+    ///                         maxWidth: .infinity,
+    ///                         alignment: .leading
+    ///                     )
+    ///             }
+    ///         )
+    ///             .padding()
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
+    ///   - title: Title that describes container
+    ///   - data: Identified data used to create views dynamically
+    ///   - content: View builder that creates views dynamically
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .fixed,

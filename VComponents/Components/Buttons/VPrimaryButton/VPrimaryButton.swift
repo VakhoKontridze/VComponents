@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Primary Button
+/// Large colored button component that performs action when triggered
 public struct VPrimaryButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VPrimaryButtonModel
@@ -21,6 +22,46 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
+    /// Initializes component with action and content
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// var body: some View {
+    ///     VPrimaryButton(action: { print("Pressed") }, content: {
+    ///         Image(systemName: "swift")
+    ///             .resizable()
+    ///             .frame(width: 20, height: 20)
+    ///             .foregroundColor(.white)
+    ///     })
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VPrimaryButtonModel = .init()
+    /// @State var state: VPrimaryButtonState = .enabled
+    ///
+    /// var body: some View {
+    ///     VPrimaryButton(
+    ///         model: model,
+    ///         state: state,
+    ///         action: { print("Pressed") },
+    ///         content: {
+    ///             Image(systemName: "swift")
+    ///                 .resizable()
+    ///                 .frame(width: 20, height: 20)
+    ///                 .foregroundColor(.white)
+    ///         }
+    ///     )
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - state: State that describes state, such as enabled, disabled, or loading
+    ///   - action: Action to perform when the user triggers button
+    ///   - content: View that describes purpose of the action
     public init(
         model: VPrimaryButtonModel = .init(),
         state: VPrimaryButtonState = .enabled,
@@ -33,6 +74,36 @@ public struct VPrimaryButton<Content>: View where Content: View {
         self.content = content
     }
 
+    /// Initializes component with action and title
+    ///
+    /// # Usage Example #
+    /// Short initialization
+    /// ```
+    /// var body: some View {
+    ///     VPrimaryButton(action: { print("Pressed") }, title: "Press")
+    /// }
+    /// ```
+    ///
+    /// Full initialization
+    /// ```
+    /// let model: VPrimaryButtonModel = .init()
+    /// @State var state: VPrimaryButtonState = .enabled
+    ///
+    /// var body: some View {
+    ///     VPrimaryButton(
+    ///         model: model,
+    ///         state: state,
+    ///         action: { print("Pressed") },
+    ///         title: "Press"
+    ///     )
+    /// }
+    /// ```
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - state: State that describes state, such as enabled, disabled, or loading
+    ///   - action: Action to perform when the user triggers button
+    ///   - title: Title that describes purpose of the action
     public init(
         model: VPrimaryButtonModel = .init(),
         state: VPrimaryButtonState = .enabled,

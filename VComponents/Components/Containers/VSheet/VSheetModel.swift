@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Sheet Model
+/// Model that describes UI
 public struct VSheetModel {
     public var layout: Layout = .init()
     public var color: Color = ColorBook.layer

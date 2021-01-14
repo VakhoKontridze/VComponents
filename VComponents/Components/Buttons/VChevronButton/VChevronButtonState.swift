@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK:- V Chevron Button State
+/// State that describes state, such as enabled or disabled
 public typealias VChevronButtonState = VSquareButtonState
 
 // MARK:- V Chevron Button Internal State

@@ -8,26 +8,38 @@
 import SwiftUI
 
 // MARK:- Color Book
+/// Contains basic colors used throughout the framework
 public struct ColorBook {
     private init() {}
 }
 
 // MARK:- Colors
 extension ColorBook {
+    /// Canvas color that should be used as view background
     public static let canvas: Color = .init(componentAsset: "Canvas")
+    
+    /// Background color for most component
     public static let layer: Color = .init(componentAsset: "Layer")
     
+    /// Primary text color
     public static let primary: Color = .init(componentAsset: "Primary")
+    
+    /// Primary text color that inverts color schemes
     public static let primaryInverted: Color = .init(componentAsset: "PrimaryInverted")
     
+    /// Secondary text color
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
+    /// Blue accent color
     public static let accent: Color = .init(componentAsset: "Accent")
 }
 
 // MARK:- Helper
-public extension Color {
-    init(componentAsset name: String) {
+extension Color {
+    /// Initializes color from framework's local assets folder using a name
+    ///
+    /// - Parameter name: Name of the color
+    public init(componentAsset name: String) {
         guard
             let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents"),
             let uiColor = UIColor(named: name, in: bundle, compatibleWith: nil)

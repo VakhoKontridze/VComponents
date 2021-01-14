@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK:- V Base List
+/// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data
 public struct VBaseList<Data, ID, Content>: View
     where
         Data: RandomAccessCollection,
@@ -25,6 +26,14 @@ public struct VBaseList<Data, ID, Content>: View
     typealias Element = VBaseListElement<ID, Data.Element>
     
     // MARK: Initializers
+    /// Initializes component with layout type, data, id, and row content
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - layoutType: Enum that describes layout, such as fixed or flexible
+    ///   - data: Data used to create views dynamically
+    ///   - id: Key path to the provided data's identifier
+    ///   - content: View builder that creates views dynamically
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .fixed,
@@ -38,6 +47,13 @@ public struct VBaseList<Data, ID, Content>: View
         self.content = content
     }
     
+    /// Initializes component with layout type, data, and row content
+    ///
+    /// - Parameters:
+    ///   - model: Model that describes UI
+    ///   - layoutType: Enum that describes layout, such as fixed or flexible
+    ///   - data: Identified fata used to create views dynamically
+    ///   - content: View builder that creates views dynamically
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .fixed,

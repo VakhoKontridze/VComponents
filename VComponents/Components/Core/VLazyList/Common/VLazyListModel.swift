@@ -8,6 +8,7 @@
 import Foundation
 
 // MARK:- V Lazy List Model
+/// Enum of models that describes UI
 public enum VLazyListModel {
     case vertical(_ model: VLazyListModelVertical = .init())
     case horizontal(_ model: VLazyListModelHorizontal = .init())

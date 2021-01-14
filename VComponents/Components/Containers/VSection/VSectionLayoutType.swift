@@ -8,4 +8,5 @@
 import Foundation
 
 // MARK:- V Section Layout Type
+/// Enum that describes layout, such as fixed or flexible
 public typealias VSectionLayoutType = VBaseListLayoutType

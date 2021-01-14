@@ -14,7 +14,7 @@ struct VLazyListHorizontal<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers
-    public init(
+    init(
         model: VLazyListModelHorizontal,
         @ViewBuilder content: @escaping () -> Content
     ) {

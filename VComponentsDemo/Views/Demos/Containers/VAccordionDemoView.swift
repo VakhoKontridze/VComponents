@@ -107,7 +107,7 @@ extension VAccordionDemoView {
             HStack(content: {
                 VBaseTitle(title: "Expand/Collapse on Header Tap", color: ColorBook.primary, font: .callout, type: .oneLine)
                 Spacer()
-                VToggle(state: $expandCollapseOnHeaderTap)
+                VToggle(isOn: $expandCollapseOnHeaderTap)
             })
         })
     }

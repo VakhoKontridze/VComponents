@@ -8,11 +8,15 @@
 import SwiftUI
 
 // MARK:- V Modal Default Title
+/// View that can be used for modal header
 public struct VModalDefaultTitle: View {
     // MARK: Proeprties
     private let title: String
     
     // MARK: Initializers
+    /// Initializes component with title
+    ///
+    /// - Parameter title: Title that describes section
     public init(title: String) {
         self.title = title
     }
