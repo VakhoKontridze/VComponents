@@ -111,19 +111,26 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
 extension VTable {
     public var body: some View {
         VSheet(model: model.sheetModel, content: {
-            VLazyList(content: {
-                ForEach(sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
-                    headerView(i: i, section: section)
-                    rowViews(section: section)
-                    footerView(i: i, section: section)
-                    padding(i: i)
-                })
-                    .padding(.trailing, model.layout.contentMargin)
+            Group(content: {
+                switch layoutType {
+                case .fixed: VStack(spacing: 0, content: { contentView })
+                case .flexible: VLazyList(content: { contentView })
+                }
             })
                 .if(!sections.isEmpty, transform: {
                     $0.padding([.leading, .top, .bottom], model.layout.contentMargin)
                 })
         })
+    }
+    
+    private var contentView: some View {
+        ForEach(sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
+            headerView(i: i, section: section)
+            rowViews(section: section)
+            footerView(i: i, section: section)
+            padding(i: i)
+        })
+            .padding(.trailing, model.layout.contentMargin)
     }
 
     private func headerView(i: Int, section: Section) -> some View {
@@ -134,7 +141,7 @@ extension VTable {
     private func rowViews(section: Section) -> some View {
         VBaseList(
             model: model.genericListContentModel,
-            layout: layoutType,
+            layout: .fixed,
             data: section.rows,
             content: rowContent
         )
