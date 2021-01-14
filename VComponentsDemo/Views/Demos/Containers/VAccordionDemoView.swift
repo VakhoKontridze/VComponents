@@ -19,6 +19,8 @@ struct VAccordionDemoView: View {
     
     @State private var accordionState: VAccordionState = .expanded
     
+    @State private var expandCollapseOnHeaderTap: Bool = true
+    
     // Copied from VSectionDemoView
     private struct Row: Identifiable {
         let id: Int
@@ -57,6 +59,12 @@ struct VAccordionDemoView: View {
         })
             .frame(maxWidth: .infinity, alignment: .leading)
     }
+    
+    private var accordionModel: VAccordionModel {
+        var model: VAccordionModel = .init()
+        model.expandCollapseOnHeaderTap = expandCollapseOnHeaderTap
+        return model
+    }
 }
 
 // MARK:- Body
@@ -65,6 +73,7 @@ extension VAccordionDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: form.demoViewType, controller: controller, content: {
                 VAccordion(
+                    model: accordionModel,
                     layout: form.accordionlayoutType,
                     state: $accordionState,
                     headerContent: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
@@ -94,6 +103,15 @@ extension VAccordionDemoView {
                 subtitle: form.subtitle
             )
                 .frame(height: 90, alignment: .top)
+
+            HStack(content: {
+                VBaseTitle(title: "Expand/Collapse on Header Tap", color: ColorBook.primary, font: .callout, type: .oneLine)
+                Spacer()
+                VToggle(state: .init(
+                    get: { expandCollapseOnHeaderTap ? .on : .off },
+                    set: { expandCollapseOnHeaderTap = $0.isOn }
+                ))
+            })
         })
     }
 }

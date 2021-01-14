@@ -13,6 +13,7 @@ public struct VAccordionModel {
     public var colors: Colors = .init()
     static let defaultHeaderFont: Font = .system(size: 15, weight: .semibold, design: .default)
     public var showIndicator: Bool = true
+    public var expandCollapseOnHeaderTap: Bool = true
     
     var genericListContentModel: VBaseListModel {
         var model: VBaseListModel = .init()

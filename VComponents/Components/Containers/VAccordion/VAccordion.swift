@@ -126,10 +126,13 @@ extension VAccordion {
                 model: .init(),
                 direction: state.chevronButtonDirection,
                 state: state.chevronButtonState,
-                action: { withAnimation { state.nextState() } }
+                action: expandCollapse
             )
+                .allowsHitTesting(!model.expandCollapseOnHeaderTap) // No need for two-layer tap area
         })
             .padding(.trailing, model.layout.marginTrailing)
+            .contentShape(Rectangle())
+            .onTapGesture(perform: expandCollapseFromHeaderTap)
     }
     
     @ViewBuilder private var divider: some View {
@@ -166,6 +169,17 @@ extension VAccordion {
                     .padding(.bottom, model.layout.contentMarginBottom)
             }
         }
+    }
+}
+
+// MARK:- Expand & Collapse
+private extension VAccordion {
+    func expandCollapse() {
+        withAnimation { state.nextState() }
+    }
+    
+    func expandCollapseFromHeaderTap() {
+        if model.expandCollapseOnHeaderTap { expandCollapse() }
     }
 }
 
