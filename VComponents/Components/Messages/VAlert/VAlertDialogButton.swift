@@ -10,16 +10,19 @@ import Foundation
 // MARK:- V Alert Dialog Button
 public struct VAlertDialogButton {
     // MARK: Properties
+    public var model: VAlertDialogButtonModel
     public var isEnabled: Bool
     public var title: String
     public var action: () -> Void
     
     // MARK: Initializers
     public init(
+        model: VAlertDialogButtonModel,
         isEnabled: Bool = true,
         title: String,
         action: @escaping () -> Void
     ) {
+        self.model = model
         self.isEnabled = isEnabled
         self.title = title
         self.action = action

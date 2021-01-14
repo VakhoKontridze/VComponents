@@ -128,12 +128,13 @@ extension _VAlert {
         switch dialogType {
         case .one(let button): oneButtonDialogView(button: button)
         case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
+        case .multi(let buttons): multiButtonDialogView(buttons: buttons)
         }
     }
     
     private func oneButtonDialogView(button: VAlertDialogButton) -> some View {
         VPrimaryButton(
-            model: model.primaryButtonModel,
+            model: button.model.primaryButtonModel,
             state: button.isEnabled ? .enabled : .disabled,
             action: { dismiss(and: button.action) },
             title: button.title
@@ -143,18 +144,31 @@ extension _VAlert {
     private func twoButtonDialogView(primary: VAlertDialogButton, secondary: VAlertDialogButton) -> some View {
         HStack(spacing: model.layout.contentSpacing, content: {
             VPrimaryButton(
-                model: model.secondaryButtonModel,
+                model: secondary.model.primaryButtonModel,
                 state: secondary.isEnabled ? .enabled : .disabled,
                 action: { dismiss(and: secondary.action) },
                 title: secondary.title
             )
             
             VPrimaryButton(
-                model: model.primaryButtonModel,
+                model: primary.model.primaryButtonModel,
                 state: primary.isEnabled ? .enabled : .disabled,
                 action: { dismiss(and: primary.action) },
                 title: primary.title
             )
+        })
+    }
+    
+    private func multiButtonDialogView(buttons: [VAlertDialogButton]) -> some View {
+        VStack(spacing: model.layout.contentSpacing, content: {
+            ForEach(0..<buttons.count, content: { i in
+                VPrimaryButton(
+                    model: buttons[i].model.primaryButtonModel,
+                    state: buttons[i].isEnabled ? .enabled : .disabled,
+                    action: { dismiss(and: buttons[i].action) },
+                    title: buttons[i].title
+                )
+            })
         })
     }
 }
@@ -175,8 +189,8 @@ struct VAlert_Previews: PreviewProvider {
             
             _VAlert(isPresented: .constant(true), alert: VAlert(
                 dialog: .two(
-                    primary: .init(title: "OK", action: {}),
-                    secondary: .init(title: "Cancel", action: {})
+                    primary: .init(model: .secondary, title: "OK", action: {}),
+                    secondary: .init(model: .secondary, title: "Cancel", action: {})
                 ),
                 title: "TITLE",
                 description: "Description Description Description Description Description"

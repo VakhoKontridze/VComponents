@@ -22,25 +22,34 @@ struct VAlertDemoView: View {
         switch dialogType {
         case .one:
             return .one(
-                button: .init(isEnabled: !text.isEmpty, title: "Ok", action: {})
+                button: .init(model: .primary, isEnabled: !text.isEmpty, title: "Ok", action: {})
             )
         
         case .two:
             return .two(
-                primary: .init(isEnabled: !text.isEmpty, title: "Confirm", action: {}),
-                secondary: .init(title: "Cancel", action: {})
+                primary: .init(model: .primary, isEnabled: !text.isEmpty, title: "Confirm", action: {}),
+                secondary: .init(model: .secondary, title: "Cancel", action: {})
             )
+            
+        case .multi:
+            return .multi([
+                .init(model: .primary, title: "Option A", action: {}),
+                .init(model: .primary, title: "Option B", action: {}),
+                .init(model: .secondary, title: "Cancel", action: {})
+            ])
         }
     }
     
     private enum DialogType: Int, CaseIterable, VPickerTitledEnumerableOption {
         case one
         case two
+        case multi
         
         var pickerTitle: String {
             switch self {
             case .one: return "One Button"
             case .two: return "Two Buttons"
+            case .multi: return "Many Buttons"
             }
         }
     }

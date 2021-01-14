@@ -153,6 +153,7 @@
 		7AF3C8EA25AF684E00D56042 /* VCloseButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8E925AF684E00D56042 /* VCloseButtonDemoView.swift */; };
 		7AF3C8EF25AF694400D56042 /* VModalDefaultTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8EE25AF694400D56042 /* VModalDefaultTitle.swift */; };
 		7AF3C8F225AF6FB200D56042 /* VModalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8F125AF6FB200D56042 /* VModalDemoView.swift */; };
+		7AF3C95F25B04F2B00D56042 /* VAlertDialogButtonModelCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C95E25B04F2B00D56042 /* VAlertDialogButtonModelCustom.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -328,6 +329,7 @@
 		7AF3C8E925AF684E00D56042 /* VCloseButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCloseButtonDemoView.swift; sourceTree = "<group>"; };
 		7AF3C8EE25AF694400D56042 /* VModalDefaultTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModalDefaultTitle.swift; sourceTree = "<group>"; };
 		7AF3C8F125AF6FB200D56042 /* VModalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModalDemoView.swift; sourceTree = "<group>"; };
+		7AF3C95E25B04F2B00D56042 /* VAlertDialogButtonModelCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDialogButtonModelCustom.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,6 +370,7 @@
 				7A259B7725979FC000A12F8C /* VAlertModel.swift */,
 				7A259B6A259783A100A12F8C /* VAlertDialogType.swift */,
 				7A259B6D259784CF00A12F8C /* VAlertDialogButton.swift */,
+				7AF3C95E25B04F2B00D56042 /* VAlertDialogButtonModelCustom.swift */,
 			);
 			path = VAlert;
 			sourceTree = "<group>";
@@ -1242,6 +1245,7 @@
 				7A860D46259312B100B19A53 /* SettingRootView.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
+				7AF3C95F25B04F2B00D56042 /* VAlertDialogButtonModelCustom.swift in Sources */,
 				7A4D0C442594C71D00108575 /* VSecondaryButtonModel.swift in Sources */,
 				7A62181725948BBC00515688 /* VBaseViewModel.swift in Sources */,
 				7A8A73872590BFFA001024FB /* VToggleModel.swift in Sources */,
