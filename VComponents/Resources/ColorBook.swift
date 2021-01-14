@@ -44,8 +44,7 @@ public extension Color {
 /*
  
  Accordion.Divider
- *120.120.120 @ 50
- @160.160.160 @ 50
+ @140.140.140 @ 50
  
  ChevronButton.Background.disabled
  250.250.250

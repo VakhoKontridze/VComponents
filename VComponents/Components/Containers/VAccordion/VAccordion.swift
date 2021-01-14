@@ -109,7 +109,7 @@ extension VAccordion {
                 contentView
             })
                 .padding(.leading, model.layout.marginLeading)
-                //.padding(.trailing, model.layout.marginTrailing)  Is applied to header and divider, as content requries custom login
+                //.padding(.trailing, model.layout.marginTrailing)  Only applied to header and divider, as content requries custom logic
                 .padding(.top, model.layout.marginTop)
                 .padding(.bottom, state.isExpanded ? model.layout.marginBottomExpanded : model.layout.marginBottomCollapsed)
         })
