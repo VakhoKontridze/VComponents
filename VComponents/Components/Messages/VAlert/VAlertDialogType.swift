@@ -11,5 +11,5 @@ import Foundation
 public enum VAlertDialogType {
     case one(button: VAlertDialogButton)
     case two(primary: VAlertDialogButton, secondary: VAlertDialogButton)
-    case multi(_ buttons: [VAlertDialogButton])
+    case many(_ buttons: [VAlertDialogButton])
 }

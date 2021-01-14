@@ -31,8 +31,8 @@ struct VAlertDemoView: View {
                 secondary: .init(model: .secondary, title: "Cancel", action: {})
             )
             
-        case .multi:
-            return .multi([
+        case .many:
+            return .many([
                 .init(model: .primary, title: "Option A", action: {}),
                 .init(model: .primary, title: "Option B", action: {}),
                 .init(model: .secondary, title: "Cancel", action: {})
@@ -43,13 +43,13 @@ struct VAlertDemoView: View {
     private enum DialogType: Int, CaseIterable, VPickerTitledEnumerableOption {
         case one
         case two
-        case multi
+        case many
         
         var pickerTitle: String {
             switch self {
             case .one: return "One Button"
             case .two: return "Two Buttons"
-            case .multi: return "Many Buttons"
+            case .many: return "Many Buttons"
             }
         }
     }

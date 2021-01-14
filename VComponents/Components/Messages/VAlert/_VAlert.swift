@@ -79,21 +79,21 @@ extension _VAlert {
     }
     
     private var contentView: some View {
-        VStack(spacing: model.layout.contentSpacing, content: {
+        VStack(spacing: model.layout.spacing, content: {
             alertContentView
             dialogView
         })
-            .padding(model.layout.contentMargin)
+            .padding(model.layout.margin)
     }
     
     private var alertContentView: some View {
-        VStack(spacing: model.layout.textSpacing, content: {
+        VStack(spacing: model.layout.contentSpacing, content: {
             titleView
             descriptionView
             freeContentView
         })
-            .padding(.horizontal, model.layout.textMarginHor)
-            .padding(.top, model.layout.textMarginTop)
+            .padding(.horizontal, model.layout.contentMarginHor)
+            .padding(.top, model.layout.actualContentMarginHor)
     }
     
     @ViewBuilder private var titleView: some View {
@@ -128,7 +128,7 @@ extension _VAlert {
         switch dialogType {
         case .one(let button): oneButtonDialogView(button: button)
         case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
-        case .multi(let buttons): multiButtonDialogView(buttons: buttons)
+        case .many(let buttons): manyButtonDialogView(buttons: buttons)
         }
     }
     
@@ -159,7 +159,7 @@ extension _VAlert {
         })
     }
     
-    private func multiButtonDialogView(buttons: [VAlertDialogButton]) -> some View {
+    private func manyButtonDialogView(buttons: [VAlertDialogButton]) -> some View {
         VStack(spacing: model.layout.contentSpacing, content: {
             ForEach(0..<buttons.count, content: { i in
                 VPrimaryButton(

@@ -22,11 +22,14 @@ extension VAlertModel {
         public var width: CGFloat = UIScreen.main.bounds.width * 0.7
         public var cornerRadius: CGFloat = 20
         
-        public var contentMargin: CGFloat = 15
-        var textMarginTop: CGFloat { max(25 - contentMargin, 0) }
-        let textMarginHor: CGFloat = 10
-        let textSpacing: CGFloat = 5
-        let contentSpacing: CGFloat = 20
+        public var margin: CGFloat = 15
+        
+        public var spacing: CGFloat = 20
+        
+        public var contentSpacing: CGFloat = 5
+        public var contentMarginHor: CGFloat = 0
+        public var contentMarginTop: CGFloat = 25
+        var actualContentMarginHor: CGFloat { max(contentMarginTop - margin, 0) }
 
         public init() {}
     }
