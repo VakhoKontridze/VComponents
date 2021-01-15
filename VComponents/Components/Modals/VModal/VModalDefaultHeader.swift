@@ -1,5 +1,5 @@
 //
-//  VModalDefaultTitle.swift
+//  VModalDefaultHeader.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/13/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK:- V Modal Default Title
+// MARK:- V Modal Default Header
 /// View that can be used for modal header
 ///
 /// View is aligned to the leading edge
-public struct VModalDefaultTitle: View {
+public struct VModalDefaultHeader: View {
     // MARK: Proeprties
     private let title: String
     
@@ -22,7 +22,7 @@ public struct VModalDefaultTitle: View {
 }
 
 // MARK:- Body
-extension VModalDefaultTitle {
+extension VModalDefaultHeader {
     public var body: some View {
         VBaseTitle(
             title: title,
@@ -35,7 +35,7 @@ extension VModalDefaultTitle {
 }
 
 // MARK:- Preview
-struct VModalDefaultTitle_Previews: PreviewProvider {
+struct VModalDefaultHeader_Previews: PreviewProvider {
     static var previews: some View {
         VModal_Previews.previews
     }

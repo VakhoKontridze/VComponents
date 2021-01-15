@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Modal
 /// Modal component that draws a background, hosts content, and is present when condition is true
 ///
-/// Model, title, and onAppear and onDisappear callbacks can be passed as parameters
+/// Model, header, and onAppear and onDisappear callbacks can be passed as parameters
 ///
 /// # Usage Example #
 ///
@@ -24,22 +24,22 @@ import SwiftUI
 ///     )
 ///         .vModal(isPresented: $isPresented, modal: {
 ///             VModal(
-///                 title: { VModalDefaultTitle(title: "Lorem ipsum dolor sit amet") },
+///                 header: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
 ///                 content: { ColorBook.accent }
 ///             )
 ///         })
 /// }
 /// ```
 ///
-public struct VModal<Content, TitleContent>
+public struct VModal<Content, HeaderContent>
     where
         Content: View,
-        TitleContent: View
+        HeaderContent: View
 {
     // MARK: Properties
     public var model: VModalModel
     
-    public var titleContent: (() -> TitleContent)?
+    public var headerContent: (() -> HeaderContent)?
     public var content: () -> Content
     
     public var appearAction: (() -> Void)?
@@ -48,13 +48,13 @@ public struct VModal<Content, TitleContent>
     // MARK: Initializers
     public init(
         model: VModalModel = .init(),
-        @ViewBuilder title titleContent: @escaping () -> TitleContent,
+        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content,
         onAppear appearAction: (() -> Void)? = nil,
         onDisappear disappearAction: (() -> Void)? = nil
     ) {
         self.model = model
-        self.titleContent = titleContent
+        self.headerContent = headerContent
         self.content = content
         self.appearAction = appearAction
         self.disappearAction = disappearAction
@@ -66,10 +66,10 @@ public struct VModal<Content, TitleContent>
         onAppear appearAction: (() -> Void)? = nil,
         onDisappear disappearAction: (() -> Void)? = nil
     )
-        where TitleContent == Never
+        where HeaderContent == Never
     {
         self.model = model
-        self.titleContent = nil
+        self.headerContent = nil
         self.content = content
         self.appearAction = appearAction
         self.disappearAction = disappearAction
@@ -79,13 +79,13 @@ public struct VModal<Content, TitleContent>
 // MARK:- Extension
 extension View {
     /// Presents modal
-    public func vModal<Content, TitleContent>(
+    public func vModal<Content, headerContent>(
         isPresented: Binding<Bool>,
-        modal: @escaping () -> VModal<Content, TitleContent>
+        modal: @escaping () -> VModal<Content, headerContent>
     ) -> some View
         where
             Content: View,
-            TitleContent: View
+            headerContent: View
     {
         ZStack(content: {
             self

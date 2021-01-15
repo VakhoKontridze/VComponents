@@ -45,7 +45,7 @@ extension DemoListView {
                 VLazyList(model: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
                     VAccordion(
                         state: $accordionStates[i],
-                        header: { VModalDefaultTitle(title: section.title ?? "") },
+                        header: { VModalDefaultHeader(title: section.title ?? "") },
                         data: section.rows,
                         content: { row in DemoListRowView(title: row.title, destination: row.body) }
                     )

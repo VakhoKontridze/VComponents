@@ -8,33 +8,33 @@
 import SwiftUI
 
 // MARK:- _ V Modal
-struct _VModal<Content, TitleContent>: View
+struct _VModal<Content, HeaderContent>: View
     where
         Content: View,
-        TitleContent: View
+        HeaderContent: View
 {
     // MARK: Properties
     public var model: VModalModel
     
     @Binding private var isPresented: Bool
     
-    let titleContent: (() -> TitleContent)?
+    let headerContent: (() -> HeaderContent)?
     let content: () -> Content
     
     let appearAction: (() -> Void)?
     let disappearAction: (() -> Void)?
     
-    var headerExists: Bool { titleContent != nil || model.layout.closeButtonPosition.exists }
+    var headerExists: Bool { headerContent != nil || model.layout.closeButtonPosition.exists }
     
     // MARK: Initializers
     init(
         isPresented: Binding<Bool>,
-        modal: VModal<Content, TitleContent>
+        modal: VModal<Content, HeaderContent>
     ) {
         self.init(
             model: modal.model,
             isPresented: isPresented,
-            titleContent: modal.titleContent,
+            headerContent: modal.headerContent,
             content: modal.content,
             appearAction: modal.appearAction,
             disappearAction: modal.disappearAction
@@ -44,14 +44,14 @@ struct _VModal<Content, TitleContent>: View
     private init(
         model: VModalModel,
         isPresented: Binding<Bool>,
-        titleContent: (() -> TitleContent)?,
+        headerContent: (() -> HeaderContent)?,
         @ViewBuilder content: @escaping () -> Content,
         appearAction: (() -> Void)?,
         disappearAction: (() -> Void)?
     ) {
         self.model = model
         self._isPresented = isPresented
-        self.titleContent = titleContent
+        self.headerContent = headerContent
         self.content = content
         self.appearAction = appearAction
         self.disappearAction = disappearAction
@@ -84,7 +84,7 @@ extension _VModal {
     }
     
     @ViewBuilder private var headerView: some View {
-        switch (titleContent, model.layout.closeButtonPosition) {
+        switch (headerContent, model.layout.closeButtonPosition) {
         case (nil, .leading):
             closeButton
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -96,21 +96,21 @@ extension _VModal {
         case (nil, _):
             EmptyView()
             
-        case (let titleContent?, .leading):
+        case (let headerContent?, .leading):
             HStack(spacing: model.layout.headerSpacing, content: {
                 closeButton
-                titleContent()
+                headerContent()
             })
             
-        case (let titleContent?, .trailing):
+        case (let headerContent?, .trailing):
             HStack(spacing: 0, content: {
-                titleContent()
+                headerContent()
                 Spacer()
                 closeButton
             })
             
-        case (let titleContent?, _):
-            titleContent()
+        case (let headerContent?, _):
+            headerContent()
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
@@ -147,7 +147,7 @@ struct VModal_Previews: PreviewProvider {
             VModalModel.Colors().blinding.edgesIgnoringSafeArea(.all)
             
             _VModal(isPresented: .constant(true), modal: VModal(
-                title: { VModalDefaultTitle(title: "Lorem ipsum dolor sit amet") },
+                header: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
                 content: { Color.red }
             ))
         })
