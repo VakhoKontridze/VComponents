@@ -81,7 +81,7 @@ extension VBaseViewNavigationBarCenter {
     }
 
     private var items: some View {
-        HStack(spacing: model.layout.spacing, content: {
+        HStack(spacing: 0, content: {
             HStack(spacing: model.layout.spacing, content: {
                 if let leadingItem = leadingItem { leadingItem }
 

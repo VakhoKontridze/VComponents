@@ -165,12 +165,16 @@ private extension VBaseView {
 struct VBaseView_Previews: PreviewProvider {
     static var previews: some View {
         VNavigationView(content: {
-            VBaseView(title: "Home", trailingItem: Button("Search", action: {}), content: {
-                ZStack(content: {
-                    Color.pink.edgesIgnoringSafeArea(.bottom)
-                    
-                    VNavigationLink(destination: Destination(), label: { Text("Go to Details") })
-                })
+            VBaseView(
+                title: "Home",
+                trailingItem: Button("Search", action: {}),
+                content: {
+                    ZStack(content: {
+                        Color.pink.edgesIgnoringSafeArea(.bottom)
+                        
+                        VNavigationLink(destination: Destination(), label: { Text("Go to Details") })
+                    }
+                )
             })
         })
     }
