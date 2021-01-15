@@ -9,6 +9,41 @@ import SwiftUI
 
 // MARK:- V Base List
 /// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data
+///
+/// Model, and layout can be passed as parameters
+///
+/// There are three posible layouts:
+/// 1. Fixed. Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
+/// 2. Flexible. Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component.
+/// 3. Constrained. `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
+///
+/// # Usage Example #
+///
+/// ```
+/// struct ListRow: Identifiable {
+///     let id: UUID = .init()
+///     let title: String
+/// }
+///
+/// @State var data: [ListRow] = [
+///     .init(title: "Red"),
+///     .init(title: "Green"),
+///     .init(title: "Blue")
+/// ]
+///
+/// var body: some View {
+///     ZStack(alignment: .top, content: {
+///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///         VBaseList(data: data, content: { row in
+///             Text(row.title)
+///                 .frame(maxWidth: .infinity, alignment: .leading)
+///         })
+///             .padding()
+///     })
+/// }
+/// ```
+///
 public struct VBaseList<Data, ID, Content>: View
     where
         Data: RandomAccessCollection,
@@ -26,14 +61,6 @@ public struct VBaseList<Data, ID, Content>: View
     typealias Element = VBaseListElement<ID, Data.Element>
     
     // MARK: Initializers
-    /// Initializes component with layout type, data, id, and row content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - layoutType: Enum that describes layout, such as fixed or flexible
-    ///   - data: Data used to create views dynamically
-    ///   - id: Key path to the provided data's identifier
-    ///   - content: View builder that creates views dynamically
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .fixed,
@@ -47,13 +74,6 @@ public struct VBaseList<Data, ID, Content>: View
         self.content = content
     }
     
-    /// Initializes component with layout type, data, and row content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - layoutType: Enum that describes layout, such as fixed or flexible
-    ///   - data: Identified fata used to create views dynamically
-    ///   - content: View builder that creates views dynamically
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .fixed,

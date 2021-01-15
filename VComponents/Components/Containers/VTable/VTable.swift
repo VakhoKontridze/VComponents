@@ -9,6 +9,63 @@ import SwiftUI
 
 // MARK:- V Table
 /// Sectioned container component that draws a background, and computes views on demad from an underlying collection of identified data
+///
+/// Model, layout, and header, and footer can be passed as parameters
+///
+/// There are three posible layouts:
+/// 1. Fixed. Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
+/// 2. Flexible. Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component.
+/// 3. Constrained. `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
+///
+/// # Usage Example #
+///
+/// ```
+/// struct TableSection: Identifiable, VTableSection {
+///     let id: UUID = .init()
+///     let title: String
+///     let rows: [TableRow]
+/// }
+///
+/// struct TableRow: VTableRow {
+///     let id: UUID = .init()
+///     let title: String
+/// }
+///
+/// @State var sections: [TableSection] = [
+///     .init(title: "First", rows: [
+///         .init(title: "Red"),
+///         .init(title: "Green"),
+///         .init(title: "Blue")
+///     ]),
+///     .init(title: "Second", rows: [
+///         .init(title: "Red"),
+///         .init(title: "Green"),
+///         .init(title: "Blue")
+///     ])
+/// ]
+///
+/// var body: some View {
+///     ZStack(alignment: .top, content: {
+///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///         VTable(
+///             sections: sections,
+///             headerContent: { section in
+///                 VTableDefaultHeaderFooter(title: section.title)
+///             },
+///             footerContent: { section in
+///                 VTableDefaultHeaderFooter(title: section.title)
+///             },
+///             rowContent: { row in
+///                 Text(row.title)
+///                     .frame(maxWidth: .infinity, alignment: .leading)
+///             }
+///         )
+///             .padding()
+///     })
+/// }
+/// ```
+///
 public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: View
     where
         Section: VTableSection,
@@ -30,121 +87,6 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     private let rowContent: (Row) -> RowContent
     
     // MARK: Initializers
-    /// Initializes component with sections, header, footer, and row content
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(
-    ///             sections: sections,
-    ///             headerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             footerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             rowContent: { row in
-    ///                 Text(row.title)
-    ///                     .frame(
-    ///                         maxWidth: .infinity,
-    ///                         alignment: .leading
-    ///                     )
-    ///             }
-    ///         )
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// let model: VTableModel = .init()
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(
-    ///             model: model,
-    ///             layout: .fixed,
-    ///             sections: sections,
-    ///             headerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             footerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             rowContent: { row in
-    ///                 Text(row.title)
-    ///                     .frame(
-    ///                         maxWidth: .infinity,
-    ///                         alignment: .leading
-    ///                     )
-    ///             }
-    ///         )
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
-    ///   - sections: Identified data used to create views dynamically
-    ///   - headerContent: View that describes container
-    ///   - footerContent: View that describes container
-    ///   - rowContent: View builder that creates views dynamically
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .fixed,
@@ -160,115 +102,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.footerContent = footerContent
         self.rowContent = rowContent
     }
-    
-    /// Initializes component with sections, header, and row content
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(
-    ///             sections: sections,
-    ///             headerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             rowContent: { row in
-    ///                 Text(row.title)
-    ///                     .frame(
-    ///                         maxWidth: .infinity,
-    ///                         alignment: .leading
-    ///                     )
-    ///             }
-    ///         )
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// let model: VTableModel = .init()
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(
-    ///             model: model,
-    ///             layout: .fixed,
-    ///             sections: sections,
-    ///             headerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             rowContent: { row in
-    ///                 Text(row.title)
-    ///                     .frame(
-    ///                         maxWidth: .infinity,
-    ///                         alignment: .leading
-    ///                     )
-    ///             }
-    ///         )
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
-    ///   - sections: Identified data used to create views dynamically
-    ///   - headerContent: View that describes container
-    ///   - rowContent: View builder that creates views dynamically
+
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .fixed,
@@ -285,115 +119,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.footerContent = nil
         self.rowContent = rowContent
     }
-    
-    /// Initializes component with sections, footer, and row content
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(
-    ///             sections: sections,
-    ///             footerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             rowContent: { row in
-    ///                 Text(row.title)
-    ///                     .frame(
-    ///                         maxWidth: .infinity,
-    ///                         alignment: .leading
-    ///                     )
-    ///             }
-    ///         )
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// let model: VTableModel = .init()
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(
-    ///             model: model,
-    ///             layout: .fixed,
-    ///             sections: sections,
-    ///             footerContent: { section in
-    ///                 VTableDefaultHeaderFooter(title: section.title)
-    ///             },
-    ///             rowContent: { row in
-    ///                 Text(row.title)
-    ///                     .frame(
-    ///                         maxWidth: .infinity,
-    ///                         alignment: .leading
-    ///                     )
-    ///             }
-    ///         )
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
-    ///   - sections: Identified data used to create views dynamically
-    ///   - footerContent: View that describes container
-    ///   - rowContent: View builder that creates views dynamically
+
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .fixed,
@@ -410,102 +136,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.footerContent = footerContent
         self.rowContent = rowContent
     }
-    
-    /// Initializes component with sections and row content
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(sections: sections, rowContent: { row in
-    ///             Text(row.title)
-    ///                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///         })
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// struct TableSection: Identifiable, VTableSection {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    ///     let rows: [TableRow]
-    /// }
-    ///
-    /// struct TableRow: VTableRow {
-    ///     let id: UUID = .init()
-    ///     let title: String
-    /// }
-    ///
-    /// let model: VTableModel = .init()
-    /// @State var sections: [TableSection] = [
-    ///     .init(title: "First", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ]),
-    ///     .init(title: "Second", rows: [
-    ///         .init(title: "Red"),
-    ///         .init(title: "Green"),
-    ///         .init(title: "Blue")
-    ///     ])
-    /// ]
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VTable(
-    ///             model: model,
-    ///             layout: .fixed,
-    ///             sections: sections,
-    ///             rowContent: { row in
-    ///                 Text(row.title)
-    ///                     .frame(
-    ///                         maxWidth: .infinity,
-    ///                         alignment: .leading
-    ///                     )
-    ///             }
-    ///         )
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - layoutType: Enum that describes layout type, such as fixed or flexible
-    ///   - sections: Identified data used to create views dynamically
-    ///   - rowContent: View builder that creates views dynamically
+
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .fixed,

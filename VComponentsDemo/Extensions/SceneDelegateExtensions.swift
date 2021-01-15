@@ -9,11 +9,7 @@ import SwiftUI
 
 // MARK:- Setting Root View
 extension SceneDelegate {
-    static func setRootView<Content>(
-        to view: Content
-    )
-        where Content: View
-    {
+    static func setRootView<Content>(to view: Content) where Content: View {
         guard
             let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
             let windowScenedelegate = scene.delegate as? SceneDelegate

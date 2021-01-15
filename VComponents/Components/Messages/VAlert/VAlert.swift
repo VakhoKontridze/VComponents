@@ -9,6 +9,40 @@ import SwiftUI
 
 // MARK:- V Alert
 /// Message component that presents dialog when condition is true
+///
+/// Model, title, description, onAppear and onDisappear callbacks, and content can be passed as parameters
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var isPresented: Bool = false
+///
+/// var body: some View {
+///     VSecondaryButton(
+///         action: { isPresented = true },
+///         title: "Present"
+///     )
+///     .vAlert(isPresented: $isPresented, alert: {
+///         VAlert(
+///             dialog: .two(
+///                 primary: .init(
+///                     model: .primary,
+///                     title: "Confirm",
+///                     action: { print("Confirmed") }
+///                 ),
+///                 secondary: .init(
+///                     model: .secondary,
+///                     title: "Cancel",
+///                     action: { print("Cancelled") }
+///                 )
+///             ),
+///             title: "Lorem ipsum dolor sit amet",
+///             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///         )
+///     })
+/// }
+/// ```
+///
 public struct VAlert<Content> where Content: View {
     // MARK: Properties
     public var model: VAlertModel = .init()
@@ -20,16 +54,6 @@ public struct VAlert<Content> where Content: View {
     public var disappearAction: (() -> Void)?
     
     // MARK: Initializers
-    /// Initializes component with dialog type, title, description, and content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - dialogType: Enum that describes alert dialog, such as one button, two buttons, or many buttons
-    ///   - title: Title that describes purpose of alert
-    ///   - description: Description that describes purpose of alert
-    ///   - content: Alert content
-    ///   - appearAction: Callback for when component appears
-    ///   - disappearAction: Callback for when component dissapears
     public init(
         model: VAlertModel = .init(),
         dialog dialogType: VAlertDialogType,
@@ -48,15 +72,6 @@ public struct VAlert<Content> where Content: View {
         self.disappearAction = disappearAction
     }
     
-    /// Initializes component with dialog type, title and description
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - dialogType: Enum that describes alert dialog, such as one button, two buttons, or many buttons
-    ///   - title: Title that describes purpose of alert
-    ///   - description: Description that describes purpose of alert
-    ///   - appearAction: Callback for when component appears
-    ///   - disappearAction: Callback for when component dissapears
     public init(
         model: VAlertModel = .init(),
         dialog dialogType: VAlertDialogType,
@@ -80,10 +95,6 @@ public struct VAlert<Content> where Content: View {
 // MARK:- Extension
 extension View {
     /// Presents alert
-    /// - Parameters:
-    ///   - isPresented: Binding to whether the alert is presented
-    ///   - alert: Closure returning the alert to presenter
-    /// - Returns: Presenter
     public func vAlert<Content>(
         isPresented: Binding<Bool>,
         alert: @escaping () -> VAlert<Content>

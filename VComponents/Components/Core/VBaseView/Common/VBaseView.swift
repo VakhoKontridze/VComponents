@@ -9,6 +9,35 @@ import SwiftUI
 
 // MARK:- V Base View
 /// Core component that is used throughout the framework as SwiftUI's equivalent of UIViewController
+///
+/// Model, and leading and trailing items can be passed as parameters
+///
+/// # Usage Example #
+/// ```
+/// var body: some View {
+///     VNavigationView(content: {
+///         VBaseView(
+///             title: "Lorem ipsum dolor sit amet",
+///             trailingItem: trailingItem,
+///             content: {
+///                 ZStack(alignment: .top, content: {
+///                     ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///                     VSheet()
+///                 })
+///             }
+///         )
+///     })
+/// }
+///
+/// var trailingItem: some View {
+///     VPlainButton(
+///         action: { print("Pressed") },
+///         title: "Press"
+///     )
+/// }
+/// ```
+///
 public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailingItem>: View
     where
         Content: View,
@@ -28,14 +57,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     private let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with title, leading and trailing items, and content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - navigationBarTitle: Title that describes view by placing it on navigation bar
-    ///   - navigationBarLeadingItem: Navigation bar leading item
-    ///   - navigationBarTrailingItem: Navigation bar trailing item
-    ///   - content: View content
     public init(
         model: VBaseViewModel = .default,
         title navigationBarTitle: String,
@@ -50,13 +71,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         self.content = content
     }
 
-    /// Initializes component with title, leading item, and content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - navigationBarTitle: Title that describes view by placing it on navigation bar
-    ///   - navigationBarLeadingItem: Navigation bar leading item
-    ///   - content: View content
     public init(
         model: VBaseViewModel = .default,
         title navigationBarTitle: String,
@@ -72,13 +86,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         self.content = content
     }
 
-    /// Initializes component with title, trailing item, and content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - navigationBarTitle: Title that describes view by placing it on navigation bar
-    ///   - navigationBarTrailingItem: Navigation bar trailing item
-    ///   - content: View content
     public init(
         model: VBaseViewModel = .default,
         title navigationBarTitle: String,
@@ -94,12 +101,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         self.content = content
     }
 
-    /// Initializes component with title and content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - navigationBarTitle: Title that describes view by placing it on navigation bar
-    ///   - content: View content
     public init(
         model: VBaseViewModel = .default,
         title navigationBarTitle: String,

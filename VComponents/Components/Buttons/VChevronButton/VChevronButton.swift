@@ -9,6 +9,21 @@ import SwiftUI
 
 // MARK:- V Chevron Button
 /// Circular colored chevron button component that performs action when triggered
+///
+/// Model and state can be passed as parameters
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var direction: VChevronButtonDirection = .left
+///
+/// var body: some View {
+///     VChevronButton(direction: direction, action: {
+///         print("Pressed")
+///     })
+/// }
+/// ```
+///
 public struct VChevronButton: View {
     // MARK: Properties
     private let model: VChevronButtonModel
@@ -22,42 +37,6 @@ public struct VChevronButton: View {
     private let action: () -> Void
     
     // MARK: Direction
-    /// Initializes component with direction and action
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// @State var direction: VChevronButtonDirection = .left
-    ///
-    /// var body: some View {
-    ///     VChevronButton(
-    ///         direction: direction,
-    ///         action: { print("Pressed") }
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// let model: VChevronButtonModel = .init()
-    /// @State var direction: VChevronButtonDirection = .left
-    /// @State var state: VPlainButtonState = .enabled
-    ///
-    /// var body: some View {
-    ///     VChevronButton(
-    ///         model: model,
-    ///         state: state,
-    ///         direction: direction,
-    ///         action: { print("Pressed") }
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - direction: Enum that describes direction, such as left, right, up, or down
-    ///   - state: Enum that describes state, such as enabled or disabled
-    ///   - action: Action to perform when the user triggers button
     public init(
         model: VChevronButtonModel = .init(),
         direction: VChevronButtonDirection,

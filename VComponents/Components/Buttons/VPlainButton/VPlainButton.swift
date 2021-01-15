@@ -9,6 +9,19 @@ import SwiftUI
 
 // MARK:- V Plain Button
 /// Plain button component that performs action when triggered
+///
+/// Model and state can be passed as parameters
+///
+/// # Usage Example #
+///
+/// ```
+/// var body: some View {
+///     VPlainButton(action: { print("Pressed") }, title: "Press")
+/// }
+/// ```
+///
+/// Component can also be initialized with content
+///
 public struct VPlainButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VPlainButtonModel
@@ -22,46 +35,6 @@ public struct VPlainButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    /// Initializes component with action and content
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// var body: some View {
-    ///     VPlainButton(action: { print("Pressed") }, content: {
-    ///         Image(systemName: "swift")
-    ///             .resizable()
-    ///             .frame(width: 20, height: 20)
-    ///             .foregroundColor(.accentColor)
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// let model: VPlainButtonModel = .init()
-    /// @State var state: VPlainButtonState = .enabled
-    ///
-    /// var body: some View {
-    ///     VPlainButton(
-    ///         model: model,
-    ///         state: state,
-    ///         action: { print("Pressed") },
-    ///         content: {
-    ///             Image(systemName: "swift")
-    ///                 .resizable()
-    ///                 .frame(width: 20, height: 20)
-    ///                 .foregroundColor(.accentColor)
-    ///         }
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - state: Enum that describes state, such as enabled or disabled
-    ///   - action: Action to perform when the user triggers button
-    ///   - content: View that describes purpose of the action
     public init(
         model: VPlainButtonModel = .init(),
         state: VPlainButtonState = .enabled,
@@ -74,36 +47,6 @@ public struct VPlainButton<Content>: View where Content: View {
         self.content = content
     }
 
-    /// Initializes component with action and title
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// var body: some View {
-    ///     VPlainButton(action: { print("Pressed") }, title: "Press")
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// let model: VPlainButtonModel = .init()
-    /// @State var state: VPlainButtonState = .enabled
-    ///
-    /// var body: some View {
-    ///     VSecondaryButton(
-    ///         model: model,
-    ///         state: state,
-    ///         action: { print("Pressed") },
-    ///         title: "Press"
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - state: Enum that describes state, such as enabled or disabled
-    ///   - action: Action to perform when the user triggers button
-    ///   - title: Title that describes purpose of the action
     public init(
         model: VPlainButtonModel = .init(),
         state: VPlainButtonState = .enabled,

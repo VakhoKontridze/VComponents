@@ -21,37 +21,61 @@ extension EnvironmentValues {
 
 // MARK:- V Navigation Link
 /// Button that controls a navigation presentation
+///
+/// Can be initialized with destination and label
+/// Can be initialized with destination, activation state, and label
 public struct VNavigationLink<Destination, Label>: View
     where
         Destination: View,
         Label: View
 {
     // MARK: Properties
+    private let linkType: LinkType
+    private enum LinkType {
+        case interactive
+        case stateTriggered
+    }
+    
     private let destination: Destination
+    @Binding private var isActive: Bool
     private let label: () -> Label
     
     // MARK: Initializers
-    /// Initialzies component with destination and label
-    ///
-    /// - Parameters:
-    ///   - destination: Destination content
-    ///   - label: View that describes purpose of the action
     public init(
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
+        self.linkType = .interactive
+        
         self.destination = destination
+        self._isActive = .constant(false)
+        self.label = label
+    }
+    
+    public init(
+        destination: Destination,
+        isActive: Binding<Bool>,
+        @ViewBuilder label: @escaping () -> Label
+    ) {
+        self.linkType = .stateTriggered
+        
+        self.destination = destination
+        self._isActive = isActive
         self.label = label
     }
 }
 
 // MARK:- Body
 extension VNavigationLink {
-    public var body: some View {
-        NavigationLink(
-            destination: destination.environment(\.vNavigationViewBackButtonHidden, false),
-            label: label
-        )
+    @ViewBuilder public var body: some View {
+        switch linkType {
+        case .interactive: NavigationLink(destination: destinationView, label: label)
+        case .stateTriggered: NavigationLink(destination: destinationView, isActive: $isActive, label: label)
+        }
+    }
+    
+    private var destinationView: some View {
+        destination.environment(\.vNavigationViewBackButtonHidden, false)
     }
 }
 

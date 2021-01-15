@@ -10,58 +10,34 @@ import SwiftUI
 // MARK:- V Sheet
 /// Container component that draws a background and hosts content
 ///
+/// Model can be passed as parameter
+///
 /// If content is passed during init, sheet would resize according to the size of the content. If content is not passed, sheet would expand to occupy maximum space.
+///
+/// # Usage Example #
+///
+/// ```
+/// var body: some View {
+///     ZStack(alignment: .top, content: {
+///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///         VSheet(content: {
+///             Image(systemName: "swift")
+///                 .resizable()
+///                 .frame(width: 200, height: 200)
+///                 .foregroundColor(.accentColor)
+///         })
+///             .padding()
+///     })
+/// }
+/// ```
+///
 public struct VSheet<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSheetModel
     private let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with content
-    ///
-    /// Sheet resizes according to the size of the content
-    ///
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VSheet(content: {
-    ///             Image(systemName: "swift")
-    ///                 .resizable()
-    ///                 .frame(width: 200, height: 200)
-    ///                 .foregroundColor(.accentColor)
-    ///         })
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// let model: VSheetModel = .init()
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VSheet(model: model, content: {
-    ///             Image(systemName: "swift")
-    ///                 .resizable()
-    ///                 .frame(width: 200, height: 200)
-    ///                 .foregroundColor(.accentColor)
-    ///         })
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - content: Sheet content
     public init(
         model: VSheetModel = .init(),
         content: @escaping () -> Content
@@ -69,47 +45,14 @@ public struct VSheet<Content>: View where Content: View {
         self.model = model
         self.content = content
     }
-
-    /// Initializes component
-    ///
-    /// Sheet expands to occupy maximum space
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VSheet()
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// let model: VSheetModel = .init()
-    ///
-    /// var body: some View {
-    ///     ZStack(alignment: .top, content: {
-    ///         ColorBook.canvas
-    ///
-    ///         VSheet(model: model)
-    ///             .padding()
-    ///     })
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
+    
     public init(
         model: VSheetModel = .init()
     )
-        where Content == Spacer
+        where Content == Color
     {
         self.model = model
-        self.content = { Spacer() }
+        self.content = { Color.clear }
     }
 }
 

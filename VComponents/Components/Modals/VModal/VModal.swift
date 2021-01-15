@@ -8,7 +8,29 @@
 import SwiftUI
 
 // MARK:- V Modal
-/// Modal component that draws a background and hosts content, and is present when condition is true
+/// Modal component that draws a background, hosts content, and is present when condition is true
+///
+/// Model, title, and onAppear and onDisappear callbacks can be passed as parameters
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var isPresented: Bool = false
+///
+/// var body: some View {
+///     VSecondaryButton(
+///         action: { isPresented = true },
+///         title: "Present"
+///     )
+///         .vModal(isPresented: $isPresented, modal: {
+///             VModal(
+///                 title: { VModalDefaultTitle(title: "Lorem ipsum dolor sit amet") },
+///                 content: { ColorBook.accent }
+///             )
+///         })
+/// }
+/// ```
+///
 public struct VModal<Content, TitleContent>
     where
         Content: View,
@@ -24,14 +46,6 @@ public struct VModal<Content, TitleContent>
     public var disappearAction: (() -> Void)?
     
     // MARK: Initializers
-    /// Initializes component with title and content
-    /// 
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - titleContent: View that describes container
-    ///   - content: Modal content
-    ///   - appearAction: Callback for when component appears
-    ///   - disappearAction: Callback for when component dissapears
     public init(
         model: VModalModel = .init(),
         @ViewBuilder title titleContent: @escaping () -> TitleContent,
@@ -46,13 +60,6 @@ public struct VModal<Content, TitleContent>
         self.disappearAction = disappearAction
     }
     
-    /// Initializes component with content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - content: Modal content
-    ///   - appearAction: Callback for when component appears
-    ///   - disappearAction: Callback for when component dissapears
     public init(
         model: VModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content,
@@ -72,10 +79,6 @@ public struct VModal<Content, TitleContent>
 // MARK:- Extension
 extension View {
     /// Presents modal
-    /// - Parameters:
-    ///   - isPresented: Binding to whether the modal is presented
-    ///   - modal: Closure returning the modal to presenter
-    /// - Returns: Presenter
     public func vModal<Content, TitleContent>(
         isPresented: Binding<Bool>,
         modal: @escaping () -> VModal<Content, TitleContent>

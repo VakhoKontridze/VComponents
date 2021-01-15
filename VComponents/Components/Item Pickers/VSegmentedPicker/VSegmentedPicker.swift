@@ -9,6 +9,35 @@ import SwiftUI
 
 // MARK:- V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
+///
+/// Model, state, title, subtitle, and disabled indexes can be passed as parameters
+///
+/// # Usage Example #
+///
+/// ```
+/// enum PickerRow: Int, CaseIterable, VPickerTitledEnumerableItem {
+///     case red, green, blue
+///
+///     var pickerTitle: String {
+///         switch self {
+///         case .red: return "Red"
+///         case .green: return "Green"
+///         case .blue: return "Blue"
+///         }
+///     }
+/// }
+///
+/// @State var selection: PickerRow = .red
+///
+/// var body: some View {
+///     VSegmentedPicker(selection: $selection)
+/// }
+/// ```
+///
+/// Component can also be initialized with data and row viewbuilder
+///
+/// Component can also be initialized with VPickerEnumerableItem and row viewbuilder
+///
 public struct VSegmentedPicker<Data, RowContent>: View
     where
         Data: RandomAccessCollection,
@@ -37,64 +66,6 @@ public struct VSegmentedPicker<Data, RowContent>: View
     @State private var rowWidth: CGFloat = .zero
     
     // MARK: Initializers
-    /// Initializes component with selected index, data, and row content
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// @State var selectedIndex: Int = 0
-    /// @State var data: [Color] = [.red, .green, .blue]
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(
-    ///         selectedIndex: $selectedIndex,
-    ///         data: data,
-    ///         rowContent: { color in
-    ///             Image(systemName: "swift")
-    ///                 .resizable()
-    ///                 .frame(width: 15, height: 15)
-    ///                 .foregroundColor(color)
-    ///         }
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// let model: VSegmentedPickerModel = .init()
-    /// @State var selectedIndex: Int = 0
-    /// @State var state: VSegmentedPickerState = .enabled
-    /// @State var disabledIndexes: Set<Int> = []
-    /// @State var data: [Color] = [.red, .green, .blue]
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(
-    ///         model: model,
-    ///         selectedIndex: $selectedIndex,
-    ///         state: state,
-    ///         title: "Lorem ipsum dolor sit amet",
-    ///         subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///         disabledIndexes: disabledIndexes,
-    ///         data: data,
-    ///         rowContent: { color in
-    ///             Image(systemName: "swift")
-    ///                 .resizable()
-    ///                 .frame(width: 15, height: 15)
-    ///                 .foregroundColor(color)
-    ///         }
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selectedIndex: Index of the selected item
-    ///   - state: Enum that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of picker
-    ///   - subtitle: Subtitle that describes purpose of picker
-    ///   - disabledIndexes: Indexes that disable selection
-    ///   - data: Data that represents picker items
-    ///   - rowContent: View that represents picker item
     public init(
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
@@ -115,51 +86,6 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.rowContent = rowContent
     }
 
-    /// Initializes component with selected index and titles
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// @State var selectedIndex: Int = 0
-    /// @State var titles: [String] = ["Red", "Green", "Blue"]
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(
-    ///         selectedIndex: $selectedIndex,
-    ///         titles: titles
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// let model: VSegmentedPickerModel = .init()
-    /// @State var selectedIndex: Int = 0
-    /// @State var state: VSegmentedPickerState = .enabled
-    /// @State var disabledIndexes: Set<Int> = []
-    /// @State var titles: [String] = ["Red", "Green", "Blue"]
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(
-    ///         model: model,
-    ///         selectedIndex: $selectedIndex,
-    ///         state: state,
-    ///         title: "Lorem ipsum dolor sit amet",
-    ///         subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///         disabledIndexes: disabledIndexes,
-    ///         titles: titles
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selectedIndex: Index of the selected item
-    ///   - state: Enum that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of picker
-    ///   - subtitle: Subtitle that describes purpose of picker
-    ///   - disabledIndexes: Indexes that disable selection
-    ///   - titles: Titles that represents picker items
     public init(
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
@@ -192,83 +118,6 @@ public struct VSegmentedPicker<Data, RowContent>: View
         )
     }
 
-    /// Initializes component with selected item and row content
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// enum PickerRow: Int, CaseIterable, VPickerEnumerableItem {
-    ///     case red, green, blue
-    ///
-    ///     var color: Color {
-    ///         switch self {
-    ///         case .red: return .red
-    ///         case .green: return .green
-    ///         case .blue: return .blue
-    ///         }
-    ///     }
-    /// }
-    ///
-    /// @State var selection: PickerRow = .red
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(
-    ///         selection: $selection,
-    ///         rowContent: { item in
-    ///             Image(systemName: "swift")
-    ///                 .resizable()
-    ///                 .frame(width: 15, height: 15)
-    ///                 .foregroundColor(item.color)
-    ///         }
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// enum PickerRow: Int, CaseIterable, VPickerEnumerableItem {
-    ///     case red, green, blue
-    ///
-    ///     var color: Color {
-    ///         switch self {
-    ///         case .red: return .red
-    ///         case .green: return .green
-    ///         case .blue: return .blue
-    ///         }
-    ///     }
-    /// }
-    ///
-    /// let model: VSegmentedPickerModel = .init()
-    /// @State var selection: PickerRow = .red
-    /// @State var state: VSegmentedPickerState = .enabled
-    /// @State var disabledItems: Set<PickerRow> = []
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(
-    ///         model: model,
-    ///         selection: $selection,
-    ///         state: state,
-    ///         title: "Lorem ipsum dolor sit amet",
-    ///         subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///         disabledItems: disabledItems,
-    ///         rowContent: { item in
-    ///             Image(systemName: "swift")
-    ///                 .resizable()
-    ///                 .frame(width: 15, height: 15)
-    ///                 .foregroundColor(item.color)
-    ///         }
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selection: Selected item
-    ///   - state: Enum that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of picker
-    ///   - subtitle: Subtitle that describes purpose of picker
-    ///   - disabledItems: Items that disable seelction
-    ///   - rowContent: View that represents picker item
     public init<Option>(
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Option>,
@@ -296,69 +145,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             rowContent: rowContent
         )
     }
-    
-    /// Initializes component with selected item
-    ///
-    /// # Usage Example #
-    /// Short initialization
-    /// ```
-    /// enum PickerRow: Int, CaseIterable, VPickerTitledEnumerableItem {
-    ///     case red, green, blue
-    ///
-    ///     var pickerTitle: String {
-    ///         switch self {
-    ///         case .red: return "Red"
-    ///         case .green: return "Green"
-    ///         case .blue: return "Blue"
-    ///         }
-    ///     }
-    /// }
-    ///
-    /// @State var selection: PickerRow = .red
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(selection: $selection)
-    /// }
-    /// ```
-    ///
-    /// Full initialization
-    /// ```
-    /// enum PickerRow: Int, CaseIterable, VPickerTitledEnumerableItem {
-    ///     case red, green, blue
-    ///
-    ///     var pickerTitle: String {
-    ///         switch self {
-    ///         case .red: return "Red"
-    ///         case .green: return "Green"
-    ///         case .blue: return "Blue"
-    ///         }
-    ///     }
-    /// }
-    ///
-    /// let model: VSegmentedPickerModel = .init()
-    /// @State var selection: PickerRow = .red
-    /// @State var state: VSegmentedPickerState = .enabled
-    /// @State var disabledItems: Set<PickerRow> = []
-    ///
-    /// var body: some View {
-    ///     VSegmentedPicker(
-    ///         model: model,
-    ///         selection: $selection,
-    ///         state: state,
-    ///         title: "Lorem ipsum dolor sit amet",
-    ///         subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///         disabledItems: disabledItems
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selection: Selected item
-    ///   - state: Enum that describes state, such as enabled or disabled
-    ///   - title: Title that describes purpose of picker
-    ///   - subtitle: Subtitle that describes purpose of picker
-    ///   - disabledItems: Items that disable seelction
+
     public init<Option>(
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Option>,

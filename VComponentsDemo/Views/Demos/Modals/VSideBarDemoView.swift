@@ -70,7 +70,9 @@ private extension VSideBarWalkthroughView {
                     .background(ColorBook.canvas.edgesIgnoringSafeArea(.bottom))
             })
         })
-            .vSideBar(isPresented: $isPresented, content: { sideBarContent })
+            .vSideBar(isPresented: $isPresented, sideBar: {
+                VSideBar(content: { sideBarContent })
+            })
     }
     
     private var sidBarIcon: some View {

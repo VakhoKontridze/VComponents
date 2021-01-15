@@ -9,6 +9,20 @@ import SwiftUI
 
 // MARK:- V Progress Bar
 /// Indicator component that indicates progress towards completion of a task
+///
+/// Model and total value can be passed as parameter
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var proggess: Double = 0.5
+///
+/// var body: some View {
+///     VProgressBar(value: proggess)
+///         .padding()
+/// }
+/// ```
+///
 public struct VProgressBar: View {
     // MARK: Properties
     private let model: VProgressBarModel
@@ -16,12 +30,7 @@ public struct VProgressBar: View {
     private let range: ClosedRange<Double>
     private let value: Double
     
-    /// Initializes componetn with value
-    /// 
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - total: The full amount representing the complete scope of the task
-    ///   - value: The completed amount of the task to this point
+    // MARK: Initializers
     public init<V>(
         model: VProgressBarModel = .init(),
         total: V = 1,

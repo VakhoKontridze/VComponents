@@ -9,17 +9,68 @@ import SwiftUI
 
 // MARK:- V Navigation View
 /// Navigation component that presents stack of views with a visible path in a navigation hierarchy
+///
+/// Model can be passed as parameter
+///
+/// Use this method to set root view on navigation stack. It acts as SwiftUI's version of settings UINavigationController root.
+///
+/// ```
+/// extension SceneDelegate {
+///    static func setRootView<Content>(to view: Content) where Content: View {
+///        guard
+///            let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+///            let windowScenedelegate = scene.delegate as? SceneDelegate
+///        else {
+///            return
+///        }
+///
+///        windowScenedelegate.window?.rootViewController = UIHostingController(rootView: view)
+///     }
+/// }
+/// ```
+///
+/// # Usage Example #
+///
+/// ```
+/// var body: some View {
+///     VNavigationView(content: {
+///         VBaseView(title: "Home", content: {
+///             ZStack(content: {
+///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///                 VSheet()
+///
+///                 VNavigationLink(
+///                     destination: destination,
+///                     label: { label }
+///                 )
+///             })
+///         })
+///     })
+/// }
+///
+/// var destination: some View {
+///     VBaseView(title: "Details", content: {
+///         ZStack(content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///             VSheet()
+///         })
+///     })
+/// }
+///
+/// var label: some View {
+///     VSecondaryButton(action: {}, title: "Navigate to Details")
+///         .allowsHitTesting(false)
+/// }
+/// ```
+///
 public struct VNavigationView<Content>: View where Content: View {
     // MARK: Properties
     private let model: VNavigationViewModel
     private let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - content: Navigation root. VBaseView should be used.
     public init(
         model: VNavigationViewModel = .init(),
         @ViewBuilder content: @escaping () -> Content

@@ -9,17 +9,46 @@ import SwiftUI
 
 // MARK:- V Lazy List
 /// Core component that is used throughout the framework as a lazy structure that either hosts content, or computes views on demad from an underlying collection of identified data
+///
+/// Model can be passed as parameter
+///
+/// Component is a wrapped behind ScrollView and LazyVStack/LazyHStack, and supports lazy initialization
+///
+/// # Usage Example #
+///
+/// ```
+/// struct ListRow: Identifiable {
+///     let id: UUID = .init()
+///     let title: String
+/// }
+///
+/// @State var data: [ListRow] = [
+///     .init(title: "Red"),
+///     .init(title: "Green"),
+///     .init(title: "Blue")
+/// ]
+///
+/// var body: some View {
+///     ZStack(alignment: .top, content: {
+///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///         VLazyList(data: data, rowContent: { row in
+///             Text(row.title)
+///                 .frame(maxWidth: .infinity, alignment: .leading)
+///         })
+///             .padding()
+///     })
+/// }
+/// ```
+/// 
+/// Component can also be initialized with content
+///
 public struct VLazyList<Content>: View where Content: View {
     // MARK: Properties
     private let model: VLazyListModel
     private let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with content
-    /// 
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - content: List content
     public init(
         model: VLazyListModel = .default,
         @ViewBuilder content: @escaping () -> Content
@@ -27,14 +56,7 @@ public struct VLazyList<Content>: View where Content: View {
         self.model = model
         self.content = content
     }
-    
-    /// Initializes component with data, id, and row content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - data: Data used to create views dynamically
-    ///   - id: Key path to the provided data's identifier
-    ///   - rowContent: View builder that creates views dynamically
+
     public init<Data, ID, RowContent>(
         model: VLazyListModel = .default,
         data: Data,
@@ -57,12 +79,6 @@ public struct VLazyList<Content>: View where Content: View {
         )
     }
     
-    /// Initializes component with data and row content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - data: Identified data used to create views dynamically
-    ///   - rowContent: View builder that creates views dynamically
     public init<Data, ID, RowContent>(
         model: VLazyListModel = .default,
         data: Data,
@@ -82,13 +98,7 @@ public struct VLazyList<Content>: View where Content: View {
             rowContent: rowContent
         )
     }
-    
-    /// Initializes component with range and row content
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - range: Constant range
-    ///   - rowContent: View builder that creates views dynamically
+
     public init <RowContent>(
         model: VLazyListModel = .default,
         range: Range<Int>,

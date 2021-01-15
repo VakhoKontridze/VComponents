@@ -37,8 +37,6 @@ extension ColorBook {
 // MARK:- Helper
 extension Color {
     /// Initializes color from framework's local assets folder using a name
-    ///
-    /// - Parameter name: Name of the color
     public init(componentAsset name: String) {
         guard
             let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents"),

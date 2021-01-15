@@ -14,9 +14,6 @@ public struct VModalDefaultTitle: View {
     private let title: String
     
     // MARK: Initializers
-    /// Initializes component with title
-    ///
-    /// - Parameter title: Title that describes section
     public init(title: String) {
         self.title = title
     }

@@ -8,79 +8,66 @@
 import SwiftUI
 
 // MARK:- V Side Bar
-struct VSideBar<Content>: View where Content: View {
+/// Modal component that draws a from left side with background, hosts content, and is present when condition is true
+///
+/// Model, and onAppear and onDisappear callbacks can be passed as parameters
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var isPresented: Bool = false
+///
+/// var body: some View {
+///     VSecondaryButton(
+///         action: { isPresented = true },
+///         title: "Present"
+///     )
+///         .vSideBar(isPresented: $isPresented, sideBar: {
+///             VSideBar(content: {
+///                 ColorBook.accent
+///             })
+///         })
+/// }
+/// ```
+///
+public struct VSideBar<Content> where Content: View {
     // MARK: Properties
-    private let model: VSideBarModel
-    @Binding private var isPresented: Bool
-    private let dismissAction: (() -> Void)?
-    private let content: () -> Content
-
+    public var model: VSideBarModel
+    
+    public var content: () -> Content
+    
+    public var appearAction: (() -> Void)?
+    public var disappearAction: (() -> Void)?
+    
     // MARK: Initializers
-    init(
-        model: VSideBarModel,
-        isPresented: Binding<Bool>,
-        onDismiss dismissAction: (() -> Void)?,
-        content: @escaping () -> Content
+    public init(
+        model: VSideBarModel = .init(),
+        @ViewBuilder content: @escaping () -> Content,
+        onAppear appearAction: (() -> Void)? = nil,
+        onDisappear disappearAction: (() -> Void)? = nil
     ) {
         self.model = model
-        self._isPresented = isPresented
-        self.dismissAction = dismissAction
         self.content = content
+        self.appearAction = appearAction
+        self.disappearAction = disappearAction
     }
 }
 
-// MARK:- Body
-extension VSideBar {
-    var body: some View {
-        ZStack(alignment: .leading, content: {
-            blinding
-            sideBarContent
-        })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .opacity(isPresented ? 1 : 0)
-            .offset(
-                x: isPresented ? 0 : -UIScreen.main.bounds.width,
-                y: 0
-            )
-            .addSideBarSwipeGesture(completion: dismiss)
-    }
-
-    @ViewBuilder private var blinding: some View {
-        if isPresented {
-            model.colors.blinding
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture(perform: dismiss)
-        }
-    }
-
-    private var sideBarContent: some View {
+// MARK:- Extension
+extension View {
+    /// Presents side bar
+    public func vSideBar<Content>(
+        isPresented: Binding<Bool>,
+        sideBar: @escaping () -> VSideBar<Content>
+    ) -> some View
+        where Content: View
+    {
         ZStack(content: {
-            VSheet(model: model.sheetModel)
-                .edgesIgnoringSafeArea(.vertical)
-
-            content()
-                .padding(.leading, model.layout.contentMargin.leading)
-                .padding(.trailing, model.layout.contentMargin.trailing)
-                .padding(.top, model.layout.contentMargin.top)
-                .padding(.bottom, model.layout.contentMargin.bottom)
+            self
+            
+            if isPresented.wrappedValue {
+                _VSideBar(isPresented: isPresented, sideBar: sideBar())
+            }
         })
-            .frame(width: model.layout.width.value)
-    }
-
-}
-
-// MARK:- Actions
-private extension VSideBar {
-    func dismiss() {
-        dismissAction?()
-        withAnimation { isPresented = false }
-    }
-}
-
-// MARK:- Preview
-struct VSideBar_Previews: PreviewProvider {
-    static var previews: some View {
-        Color.red.edgesIgnoringSafeArea(.all)
-            .vSideBar(isPresented: .constant(true), content: { Color.blue })
     }
 }

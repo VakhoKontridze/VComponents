@@ -10,6 +10,27 @@ import UIKit
 
 // MARK:- V Base Button
 /// Core component that is used throughout the framework as button
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var isEnabled: Bool = true
+///
+/// var body: some View {
+///     VBaseButton(
+///         isEnabled: isEnabled,
+///         action: { print("Pressed") },
+///         onPress: { isPressed in
+///             switch isPressed {
+///             case false: print("Press ended")
+///             case true: print("Press began")
+///             }
+///         },
+///         content: { Text("Press") }
+///     )
+/// }
+/// ```
+///
 public struct VBaseButton<Content>: View where Content: View {
     // MARK: Properties
     private let isEnabled: Bool
@@ -20,13 +41,6 @@ public struct VBaseButton<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with state, action, press action, and content
-    /// 
-    /// - Parameters:
-    ///   - isEnabled: Bool that describes state
-    ///   - action: Action to perform when the user triggers button
-    ///   - pressHandler: Callback for when button is being pressed
-    ///   - content: View that describes purpose of the action
     public init(
         isEnabled: Bool,
         action: @escaping () -> Void,

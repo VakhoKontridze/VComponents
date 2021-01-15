@@ -9,6 +9,53 @@ import SwiftUI
 
 // MARK:- V Tab Navigation View
 /// Navigation component that switches between multiple views using interactive user interface elements
+///
+/// Model can be passed as parameter
+///
+/// Due to the limitations of TabView, tab items only support `Text` and  `Image`
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var selection: Int = 0
+///
+/// func item(_ title: String) -> some View {
+///     VStack(spacing: 5, content: {
+///         Image(systemName: "swift")
+///             .resizable()
+///             .frame(width: 20, height: 20)
+///
+///         Text(title)
+///     })
+/// }
+///
+/// var body: some View {
+///     VTabNavigationView(
+///         selection: $selection,
+///         pageOne: VTabNavigationViewPage(
+///             item: item("Red"),
+///             content: Color.red
+///         ),
+///         pageTwo: VTabNavigationViewPage(
+///             item: item("Green"),
+///             content: Color.green
+///         ),
+///         pageThree: VTabNavigationViewPage(
+///             item: item("Blue"),
+///             content: Color.blue
+///         ),
+///         pageFour: VTabNavigationViewPage(
+///             item: item("Pink"),
+///             content: Color.pink
+///         ),
+///         pageFive: VTabNavigationViewPage(
+///             item: item("Orange"),
+///             content: Color.orange
+///         )
+///     )
+/// }
+/// ```
+///
 public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
     where
         C0: View,
@@ -30,57 +77,6 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
     private let pageFive: VTabNavigationViewPage<C4, ItemContent>?
     
     // MARK: Initializers
-    /// Initializes component with selection and pages
-    ///
-    /// # Usage Examples #
-    /// ```
-    /// @State var selection: Int = 0
-    ///
-    /// func item(_ title: String) -> some View {
-    ///     VStack(spacing: 5, content: {
-    ///         Image(systemName: "swift")
-    ///             .resizable()
-    ///             .frame(width: 20, height: 20)
-    ///
-    ///         Text(title)
-    ///     })
-    /// }
-    ///
-    /// var body: some View {
-    ///     VTabNavigationView(
-    ///         selection: $selection,
-    ///         pageOne: VTabNavigationViewPage(
-    ///             item: item("Red"),
-    ///             content: Color.red
-    ///         ),
-    ///         pageTwo: VTabNavigationViewPage(
-    ///             item: item("Green"),
-    ///             content: Color.green
-    ///         ),
-    ///         pageThree: VTabNavigationViewPage(
-    ///             item: item("Blue"),
-    ///             content: Color.blue
-    ///         ),
-    ///         pageFour: VTabNavigationViewPage(
-    ///             item: item("Pink"),
-    ///             content: Color.pink
-    ///         ),
-    ///         pageFive: VTabNavigationViewPage(
-    ///             item: item("Orange"),
-    ///             content: Color.orange
-    ///         )
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selection: Index of selected page
-    ///   - pageOne: Page one tab item and content
-    ///   - pageTwo: Page two tab item and content
-    ///   - pageThree: Page three tab item and content
-    ///   - pageFour: Page four tab item and content
-    ///   - pageFive: Page fibe tab item and content
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -99,52 +95,6 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageFive = pageFive
     }
     
-    /// Initializes component with selection and pages
-    ///
-    /// # Usage Examples #
-    /// ```
-    /// @State var selection: Int = 0
-    ///
-    /// func item(_ title: String) -> some View {
-    ///     VStack(spacing: 5, content: {
-    ///         Image(systemName: "swift")
-    ///             .resizable()
-    ///             .frame(width: 20, height: 20)
-    ///
-    ///         Text(title)
-    ///     })
-    /// }
-    ///
-    /// var body: some View {
-    ///     VTabNavigationView(
-    ///         selection: $selection,
-    ///         pageOne: VTabNavigationViewPage(
-    ///             item: item("Red"),
-    ///             content: Color.red
-    ///         ),
-    ///         pageTwo: VTabNavigationViewPage(
-    ///             item: item("Green"),
-    ///             content: Color.green
-    ///         ),
-    ///         pageThree: VTabNavigationViewPage(
-    ///             item: item("Blue"),
-    ///             content: Color.blue
-    ///         ),
-    ///         pageFour: VTabNavigationViewPage(
-    ///             item: item("Pink"),
-    ///             content: Color.pink
-    ///         )
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selection: Index of selected page
-    ///   - pageOne: Page one tab item and content
-    ///   - pageTwo: Page two tab item and content
-    ///   - pageThree: Page three tab item and content
-    ///   - pageFour: Page four tab item and content
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -163,48 +113,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageFour = pageFour
         self.pageFive = nil
     }
-    
-    /// Initializes component with selection and pages
-    ///
-    /// # Usage Examples #
-    /// ```
-    /// @State var selection: Int = 0
-    ///
-    /// func item(_ title: String) -> some View {
-    ///     VStack(spacing: 5, content: {
-    ///         Image(systemName: "swift")
-    ///             .resizable()
-    ///             .frame(width: 20, height: 20)
-    ///
-    ///         Text(title)
-    ///     })
-    /// }
-    ///
-    /// var body: some View {
-    ///     VTabNavigationView(
-    ///         selection: $selection,
-    ///         pageOne: VTabNavigationViewPage(
-    ///             item: item("Red"),
-    ///             content: Color.red
-    ///         ),
-    ///         pageTwo: VTabNavigationViewPage(
-    ///             item: item("Green"),
-    ///             content: Color.green
-    ///         ),
-    ///         pageThree: VTabNavigationViewPage(
-    ///             item: item("Blue"),
-    ///             content: Color.blue
-    ///         )
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selection: Index of selected page
-    ///   - pageOne: Page one tab item and content
-    ///   - pageTwo: Page two tab item and content
-    ///   - pageThree: Page three tab item and content
+
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -225,42 +134,6 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageFive = nil
     }
 
-    /// Initializes component with selection and pages
-    ///
-    /// # Usage Examples #
-    /// ```
-    /// @State var selection: Int = 0
-    ///
-    /// func item(_ title: String) -> some View {
-    ///     VStack(spacing: 5, content: {
-    ///         Image(systemName: "swift")
-    ///             .resizable()
-    ///             .frame(width: 20, height: 20)
-    ///
-    ///         Text(title)
-    ///     })
-    /// }
-    ///
-    /// var body: some View {
-    ///     VTabNavigationView(
-    ///         selection: $selection,
-    ///         pageOne: VTabNavigationViewPage(
-    ///             item: item("Red"),
-    ///             content: Color.red
-    ///         ),
-    ///         pageTwo: VTabNavigationViewPage(
-    ///             item: item("Green"),
-    ///             content: Color.green
-    ///         )
-    ///     )
-    /// }
-    /// ```
-    ///
-    /// - Parameters:
-    ///   - model: Model that describes UI
-    ///   - selection: Index of selected page
-    ///   - pageOne: Page one tab item and content
-    ///   - pageTwo: Page two tab item and content
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
