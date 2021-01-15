@@ -15,77 +15,25 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 ## Components
 
-#### Buttons ####
+**Buttons.** VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VChevronButton, VCloseButton
 
-VPrimaryButton
+**State Pickers.** VToggle
 
-VSecondaryButton
+**Item Pickers.** VSegmentedPicker
 
-VSquareButton
+**Value Pickers.** VSlider, VRangeSlider
 
-VPlainButton
+**Containers.** VSheet, VSection, VTable, VAccordion
 
-VChevronButton
+**Navigation.** VTabNavigationView, VNavigationView
 
-VCloseButton
+**Modals.** VModal, VSideBar
 
-#### State Pickers ####
+**Messages.** VAlert
 
-VToggle
+**Indicators.** VSpinner, VProgressBar
 
-#### Item Pickers ####
-
-VSegmentedPicker
-
-#### Value Pickers ####
-
-VSlider
-
-VRangeSlider
-
-#### Containers ####
-
-VSheet
-
-VSection
-
-VTable
-
-VAccordion
-
-#### Navigation ####
-
-VTabNavigationView
-
-VNavigationView
-
-#### Modals ####
-
-VModal
-
-VSideBar
-
-#### Messages ####
-
-VAlert
-
-#### Indicators ####
-
-VSpinner
-
-VProgressBar
-
-#### Core ####
-
-VBaseTitle
-
-VBaseButton
-
-VLazyList
-
-VBaseList
-
-VBaseView
+**Core.** VBaseTitle, VBaseButton, VLazyList, VBaseList, VBaseView
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)
