@@ -13,7 +13,8 @@ public struct VToggleModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var font: Font = .system(size: 15, weight: .regular, design: .default)    // Only applicable during init with title
-    public var behavior: Behavior = .init()
+    public var animation: Animation = .easeIn(duration: 0.1)
+    public var contentIsClickable: Bool = true
     
     public init() {}
 }
@@ -81,16 +82,6 @@ extension VToggleModel.Colors {
     }
 
     public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
-}
-
-// MARK:- Behavior
-extension VToggleModel {
-    public struct Behavior {
-        public var contentIsClickable: Bool = true
-        public var animation: Animation = .easeIn(duration: 0.1)
-        
-        public init() {}
-    }
 }
 
 // MARK:- ViewModel

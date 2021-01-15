@@ -84,57 +84,34 @@ extension _VModal {
     }
     
     @ViewBuilder private var headerView: some View {
-        switch (titleContent, model.layout.titlePosition, model.layout.closeButtonPosition) {
-        case (nil, _, .leading):
+        switch (titleContent, model.layout.closeButtonPosition) {
+        case (nil, .leading):
             closeButton
                 .frame(maxWidth: .infinity, alignment: .leading)
-        
-        case (nil, _, .trailing):
+            
+        case (nil, .trailing):
             closeButton
                 .frame(maxWidth: .infinity, alignment: .trailing)
-        
-        case (nil, _, _):
+            
+        case (nil, _):
             EmptyView()
             
-        case (let titleContent?, .leading, .leading):
-            HStack(spacing: 0, content: {
+        case (let titleContent?, .leading):
+            HStack(spacing: model.layout.headerSpacing, content: {
                 closeButton
-                Spacer().frame(width: model.layout.headerSpacing)
                 titleContent()
-                Spacer()
             })
-        
-        case (let titleContent?, .leading, .trailing):
+            
+        case (let titleContent?, .trailing):
             HStack(spacing: 0, content: {
                 titleContent()
                 Spacer()
                 closeButton
             })
-        
-        case (let titleContent?, .leading, _):
+            
+        case (let titleContent?, _):
             titleContent()
                 .frame(maxWidth: .infinity, alignment: .leading)
-            
-        case (let titleContent?, .center, .leading):
-            HStack(spacing: 0, content: {
-                closeButton
-                Spacer()
-                titleContent()
-                Spacer()
-                closeButtonCompensator
-            })
-        
-        case (let titleContent?, .center, .trailing):
-            HStack(spacing: 0, content: {
-                closeButtonCompensator
-                Spacer()
-                titleContent()
-                Spacer()
-                closeButton
-            })
-        
-        case (let titleContent?, .center, _):
-            titleContent()
         }
     }
 

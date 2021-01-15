@@ -13,7 +13,7 @@ struct VModalDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Modal"
     
-    @State private var titlePositionInternal: VModalTitlePositionIntenral
+    @State private var hasTitle: Bool = true
     @State private var closeButtonPosition: VModalModel.Layout.VModalCloseButtonPosition
     
     @State private var isPresented: Bool = false
@@ -21,7 +21,6 @@ struct VModalDemoView: View {
     private var modalModel: VModalModel {
         var model: VModalModel = .init()
         
-        if let titlePosition = titlePositionInternal.actualTitlePosition { model.layout.titlePosition = titlePosition }
         model.layout.closeButtonPosition = closeButtonPosition
         
         return model
@@ -37,7 +36,6 @@ struct VModalDemoView: View {
     init() {
         let modalLayout: VModalModel.Layout = .init()
         
-        self._titlePositionInternal = State(initialValue: .init(from: modalLayout.titlePosition))
         self._closeButtonPosition = State(initialValue: modalLayout.closeButtonPosition)
     }
 }
@@ -48,14 +46,15 @@ extension VModalDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    VSegmentedPicker(model: pickerModel, selection: $titlePositionInternal, title: "Title Position")
+                    VToggle(isOn: $hasTitle, title: "Modal Has Title").frame(maxWidth: .infinity, alignment: .leading)
+                    
                     VSegmentedPicker(model: pickerModel, selection: $closeButtonPosition, title: "Close Button Position")
                     
                     VSecondaryButton(action: { isPresented = true }, title: "Demo Modal")
                 })
             })
         })
-            .if(titlePositionInternal.hasContent,
+            .if(hasTitle,
                 ifTransform: {
                     $0
                         .vModal(isPresented: $isPresented, modal: {
@@ -100,45 +99,6 @@ extension VModalDemoView {
 }
 
 // MARK:- Helpers
-private extension VModalDemoView {
-    enum VModalTitlePositionIntenral: Int, CaseIterable, VPickerTitledEnumerableItem {
-        case leading
-        case center
-        case none
-        
-        public var pickerTitle: String {
-            switch self {
-            case .leading: return "Leading"
-            case .center: return "Center"
-            case .none: return "*None"
-            }
-        }
-        
-        var hasContent: Bool {
-            switch self {
-            case .leading: return true
-            case .center: return true
-            case .none: return false
-            }
-        }
-        
-        var actualTitlePosition: VModalModel.Layout.VModalTitlePosition? {
-            switch self {
-            case .leading: return .leading
-            case .center: return .center
-            case .none: return nil
-            }
-        }
-        
-        init(from position: VModalModel.Layout.VModalTitlePosition) {
-            switch position {
-            case .leading: self = .leading
-            case .center: self = .center
-            }
-        }
-    }
-}
-
 extension VModalModel.Layout.VModalCloseButtonPosition: VPickerTitledEnumerableItem {
     public var pickerTitle: String {
         switch self {

@@ -42,9 +42,7 @@ extension VModalModel {
         public var roundedCorners: VSheetModel.Layout.RoundedCorners = sheetLayout.roundedCorners
         public var cornerRadius: CGFloat = sheetLayout.cornerRadius
         public var margin: CGFloat = sheetLayout.contentMargin
-        
-        public var titlePosition: VModalTitlePosition = .leading
-        
+
         public var closeButtonPosition: VModalCloseButtonPosition = .trailing
         let closeButtonWidth: CGFloat = closeButtonLayout.dimension
         
@@ -59,11 +57,6 @@ extension VModalModel {
 }
 
 extension VModalModel.Layout {
-    public enum VModalTitlePosition: Int, CaseIterable {
-        case leading
-        case center
-    }
-
     public enum VModalCloseButtonPosition: Int, CaseIterable {
         case none
         case leading

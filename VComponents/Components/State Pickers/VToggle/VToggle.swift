@@ -33,7 +33,7 @@ public struct VToggle<Content>: View where Content: View {
     @Binding private var state: VToggleState
     @State private var isPressed: Bool = false
     private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
-    private var contentIsEnabled: Bool { state.isEnabled && model.behavior.contentIsClickable }
+    private var contentIsEnabled: Bool { state.isEnabled && model.contentIsClickable }
     
     private let content: (() -> Content)?
     
@@ -193,7 +193,7 @@ private extension VToggle {
 // MARK:- Action
 private extension VToggle {
     func action() {
-        withAnimation(model.behavior.animation, { state.nextState() })
+        withAnimation(model.animation, { state.nextState() })
     }
 }
 

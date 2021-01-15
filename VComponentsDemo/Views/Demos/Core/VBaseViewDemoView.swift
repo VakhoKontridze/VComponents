@@ -13,11 +13,11 @@ struct VBaseViewDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base View"
     
-    @State private var navigationBarTitlePosition: NavigationBarTitlePosition = .leading
-    @State private var navigationBarHasLeadingItem: Bool = false
-    @State private var navigationBarHasTrailingItemState: Bool = false
+    @State private var titlePosition: TitlePosition = .leading
+    @State private var hasLeadingItem: Bool = false
+    @State private var hasTrailingItem: Bool = false
     
-    private enum NavigationBarTitlePosition: Int, CaseIterable, VPickerTitledEnumerableItem {
+    private enum TitlePosition: Int, CaseIterable, VPickerTitledEnumerableItem {
         case leading
         case center
         
@@ -30,7 +30,7 @@ struct VBaseViewDemoView: View {
     }
     
     var viewModel: VBaseViewModel {
-        switch navigationBarTitlePosition {
+        switch titlePosition {
         case .leading: return .leadingTitle()
         case .center: return .centerTitle()
         }
@@ -64,17 +64,17 @@ extension VBaseViewDemoView {
             trailingItem: trailingItem,
             content: {
                 DemoView(type: .section, content: {
-                    VStack(alignment: .leading, spacing: 20, content: {
+                    VStack(spacing: 20, content: {
                         VSegmentedPicker(
                             model: segmentedPickerModel,
-                            selection: $navigationBarTitlePosition,
+                            selection: $titlePosition,
                             title: "Title Position",
                             subtitle: "Changing title position causes view to re-draw itself"
                         )
                         
-                        VToggle(isOn: $navigationBarHasLeadingItem, title: "Leading items")
+                        VToggle(isOn: $hasLeadingItem, title: "Leading items").frame(maxWidth: .infinity, alignment: .leading)
                         
-                        VToggle(isOn: $navigationBarHasTrailingItemState, title: "Trailing items")
+                        VToggle(isOn: $hasTrailingItem, title: "Trailing items").frame(maxWidth: .infinity, alignment: .leading)
                     })
                 })
             }
@@ -82,7 +82,7 @@ extension VBaseViewDemoView {
     }
     
     @ViewBuilder var leadingItem: some View {
-        if navigationBarHasLeadingItem {
+        if hasLeadingItem {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item")
             })
@@ -90,7 +90,7 @@ extension VBaseViewDemoView {
     }
     
     @ViewBuilder var trailingItem: some View {
-        if navigationBarHasTrailingItemState {
+        if hasTrailingItem {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 1")
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 2")

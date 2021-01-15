@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK:- V Modal Default Title
 /// View that can be used for modal header
+///
+/// View is aligned to the leading edge
 public struct VModalDefaultTitle: View {
     // MARK: Proeprties
     private let title: String
@@ -28,6 +30,7 @@ extension VModalDefaultTitle {
             font: VModalModel.defaultHeaderFont,
             type: .oneLine
         )
+            .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 

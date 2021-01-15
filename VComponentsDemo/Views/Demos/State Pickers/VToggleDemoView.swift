@@ -19,7 +19,7 @@ struct VToggleDemoView: View {
     
     let nonClickableContentModel: VToggleModel = {
         var model: VToggleModel = .init()
-        model.behavior.contentIsClickable = false
+        model.contentIsClickable = false
         return model
     }()
     
