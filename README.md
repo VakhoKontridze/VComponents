@@ -3,7 +3,7 @@
 ## Table of contents
 - [Description](#description)
 - [Technologies](#technologies)
-- [History](#history)
+- [Components](#components)
 - [Contact](#contact)
 - [Copyright](#copyright)
 
@@ -13,61 +13,79 @@ VComponents is a SwiftUI framework that contains customizable UI components. Pro
 ## Technologies
 Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Sur in XCode 12.
 
-## History
+## Components
 
-2021 Jan 13. VModal
+#### Buttons ####
 
-2021 Jan 13. VCloseButton
+VPrimaryButton
 
-2021 Jan 12. VRangeSlider
+VSecondaryButton
 
-2021 Jan 12. VProgressBar
+VSquareButton
 
-2021 Jan 11. VAccordion
+VPlainButton
 
-2021 Jan 10. VTable
+VChevronButton
 
-2021 Jan 10. VSection
+VCloseButton
 
-2021 Jan 10. VBaseList
+#### State Pickers ####
 
-2021 Jan 8. VSegmentedPicker
+VToggle
 
-2020 Dec 30. VAlert
+#### Item Pickers ####
 
-2020 Dec 24. VTabNavigationView
+VSegmentedPicker
 
-2020 Dec 24. VSideBar
+#### Value Pickers ####
 
-2020 Dec 24. VSecondaryButton
+VSlider
 
-2020 Dec 24. VBaseTitle
+VRangeSlider
 
-2020 Dec 24. VLazyList *(+ horizontal)*
+#### Containers ####
 
-2020 Dec 23. VChevronButton
+VSheet
 
-2020 Dec 22. VSheet
+VSection
 
-2020 Dec 22. VBaseView *(centerTitle, leadingTitle)*
+VTable
 
-2020 Dec 22. VNavigationView
+VAccordion
 
-2020 Dec 21. VBaseButton
+#### Navigation ####
 
-2020 Dec 19. VToggle
+VTabNavigationView
 
-2020 Dec 19. VPlainButton
+VNavigationView
 
-2020 Dec 19. VLazyList *(vertical)*
+#### Modals ####
 
-2020 Dec 19. VSlider
+VModal
 
-2020 Dec 18. VSpinner *(continous, dashed)*
+VSideBar
 
-2020 Dec 18. VSquareButton
+#### Messages ####
 
-2020 Dec 18. VPrimaryButton
+VAlert
+
+#### Indicators ####
+
+VSpinner
+
+VProgressBar
+
+#### Core ####
+
+VBaseTitle
+
+VBaseButton
+
+VLazyList
+
+VBaseList
+
+VBaseView
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)

@@ -25,8 +25,7 @@ struct HomeView: View {
         .init(id: 6, title: "Modals", rows: [.modal, .sideBar]),
         .init(id: 7, title: "Messages", rows: [.alert]),
         .init(id: 8, title: "Indicators", rows: [.spinner, .progressBar]),
-        //.init(id: 9, title: "Misc", rows: []),
-        .init(id: 10, title: "Core", rows: [.baseTitle, .baseButton, .lazyList, .baseList, .baseView])
+        .init(id: 9, title: "Core", rows: [.baseTitle, .baseButton, .lazyList, .baseList, .baseView])
     ]
     
     private enum HomeRow: Int, DemoableRow {
@@ -38,10 +37,9 @@ struct HomeView: View {
         /*case*/ /*textField*/ /*, searchBar*/ /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView /*, topTabNavigationView*/
-        case modal, /*bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/ sideBar
+        case modal, sideBar /*,bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/
         case alert /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
-        /*case*/ /*shimmer*/
         case baseTitle, baseButton, lazyList, baseList, baseView
         
         var title: String {
