@@ -81,7 +81,7 @@ extension VBaseViewDemoView {
         )
     }
     
-    @ViewBuilder var leadingItem: some View {
+    @ViewBuilder func leadingItem() -> some View {
         if hasLeadingItem {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item")
@@ -89,7 +89,7 @@ extension VBaseViewDemoView {
         }
     }
     
-    @ViewBuilder var trailingItem: some View {
+    @ViewBuilder func trailingItem() -> some View {
         if hasTrailingItem {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 1")

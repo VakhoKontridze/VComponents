@@ -12,8 +12,8 @@ extension View {
     func setUpBaseViewNavigationBarLeading<LeadingItem, TrailingItem>(
         model: VBaseViewModelLeading,
         title: String,
-        leadingItem: LeadingItem?,
-        trailingItem: TrailingItem?,
+        leadingItemContent: (() -> LeadingItem)?,
+        trailingItemContent: (() -> TrailingItem)?,
         showBackButton: Bool,
         onBack backAction: @escaping () -> Void
     ) -> some View
@@ -24,8 +24,8 @@ extension View {
         modifier(VBaseViewNavigationBarLeading(
             model: model,
             title: title,
-            leadingItem: leadingItem,
-            trailingItem: trailingItem,
+            leadingItemContent: leadingItemContent,
+            trailingItemContent: trailingItemContent,
             showBackButton: showBackButton,
             onBack: backAction
         ))
@@ -42,8 +42,8 @@ struct VBaseViewNavigationBarLeading<TrailingItem, LeadingItem>: ViewModifier
     private let title: String
     private let model: VBaseViewModelLeading
     
-    private let leadingItem: LeadingItem?
-    private let trailingItem: TrailingItem?
+    private let leadingItemContent: (() -> LeadingItem)?
+    private let trailingItemContent: (() -> TrailingItem)?
     
     private let showBackButton: Bool
     private let backAction: () -> Void
@@ -52,15 +52,15 @@ struct VBaseViewNavigationBarLeading<TrailingItem, LeadingItem>: ViewModifier
     init(
         model: VBaseViewModelLeading,
         title: String,
-        leadingItem: LeadingItem?,
-        trailingItem: TrailingItem?,
+        leadingItemContent: (() -> LeadingItem)?,
+        trailingItemContent: (() -> TrailingItem)?,
         showBackButton: Bool,
         onBack backAction: @escaping () -> Void
     ) {
         self.model = model
         self.title = title
-        self.leadingItem = leadingItem
-        self.trailingItem = trailingItem
+        self.leadingItemContent = leadingItemContent
+        self.trailingItemContent = trailingItemContent
         self.showBackButton = showBackButton
         self.backAction = backAction
     }
@@ -75,7 +75,7 @@ extension VBaseViewNavigationBarLeading {
 
     private var items: some View {
         HStack(spacing: model.layout.spacing, content: {
-            if let leadingItem = leadingItem { leadingItem.layoutPriority(1) }
+            if let leadingItemContent = leadingItemContent { leadingItemContent().layoutPriority(1) }
 
             if showBackButton { VChevronButton(direction: .left, action: backAction).layoutPriority(1) }
 
@@ -89,7 +89,7 @@ extension VBaseViewNavigationBarLeading {
 
             Spacer()
 
-            if let trailingItem = trailingItem { trailingItem.layoutPriority(1) }
+            if let trailingItemContent = trailingItemContent { trailingItemContent().layoutPriority(1) }
         })
             .lineLimit(1)
             .frame(width: model.layout.width)

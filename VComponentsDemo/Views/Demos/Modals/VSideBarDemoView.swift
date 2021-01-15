@@ -75,7 +75,7 @@ private extension VSideBarWalkthroughView {
             })
     }
     
-    private var sidBarIcon: some View {
+    private func sidBarIcon() -> some View {
         Button(action: { withAnimation { isPresented = true } }, label: {
             Image(systemName: "sidebar.left")
                 .foregroundColor(ColorBook.primary)

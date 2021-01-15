@@ -51,8 +51,8 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     private let model: VBaseViewModel
     
     private let navigationBarTitle: String
-    private let navigationBarLeadingItem: NavigationBarLeadingItem?
-    private let navigationBarTrailingItem: NavigationBarTrailingItem?
+    private let navigationBarLeadingItem: (() -> NavigationBarLeadingItem)?
+    private let navigationBarTrailingItem: (() -> NavigationBarTrailingItem)?
     
     private let content: () -> Content
     
@@ -60,8 +60,8 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     public init(
         model: VBaseViewModel = .default,
         title navigationBarTitle: String,
-        leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
-        trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
+        @ViewBuilder leadingItem navigationBarLeadingItem: @escaping () -> NavigationBarLeadingItem,
+        @ViewBuilder trailingItem navigationBarTrailingItem: @escaping () -> NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
@@ -74,7 +74,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     public init(
         model: VBaseViewModel = .default,
         title navigationBarTitle: String,
-        leadingItem navigationBarLeadingItem: NavigationBarLeadingItem,
+        @ViewBuilder leadingItem navigationBarLeadingItem: @escaping () -> NavigationBarLeadingItem,
         @ViewBuilder content: @escaping () -> Content
     )
         where NavigationBarTrailingItem == Never
@@ -89,7 +89,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     public init(
         model: VBaseViewModel = .default,
         title navigationBarTitle: String,
-        trailingItem navigationBarTrailingItem: NavigationBarTrailingItem,
+        @ViewBuilder trailingItem navigationBarTrailingItem: @escaping () -> NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     )
         where NavigationBarLeadingItem == Never
@@ -127,8 +127,8 @@ extension VBaseView {
                 .setUpBaseViewNavigationBarCenter(
                     model: model,
                     title: navigationBarTitle,
-                    leadingItem: navigationBarLeadingItem,
-                    trailingItem: navigationBarTrailingItem,
+                    leadingItemContent: navigationBarLeadingItem,
+                    trailingItemContent: navigationBarTrailingItem,
                     showBackButton: !vNavigationViewBackButtonHidden,
                     onBack: back
                 )
@@ -138,8 +138,8 @@ extension VBaseView {
                 .setUpBaseViewNavigationBarLeading(
                     model: model,
                     title: navigationBarTitle,
-                    leadingItem: navigationBarLeadingItem,
-                    trailingItem: navigationBarTrailingItem,
+                    leadingItemContent: navigationBarLeadingItem,
+                    trailingItemContent: navigationBarTrailingItem,
                     showBackButton: !vNavigationViewBackButtonHidden,
                     onBack: back
                 )
@@ -167,7 +167,7 @@ struct VBaseView_Previews: PreviewProvider {
         VNavigationView(content: {
             VBaseView(
                 title: "Home",
-                trailingItem: Button("Search", action: {}),
+                trailingItem: { Button("Search", action: {}) },
                 content: {
                     ZStack(content: {
                         Color.pink.edgesIgnoringSafeArea(.bottom)
