@@ -34,9 +34,7 @@ struct VModalDemoView: View {
     
     // MARK: Initializers
     init() {
-        let modalLayout: VModalModel.Layout = .init()
-        
-        self._closeButtonPosition = State(initialValue: modalLayout.closeButtonPosition)
+        self._closeButtonPosition = State(initialValue: .default)
     }
 }
 

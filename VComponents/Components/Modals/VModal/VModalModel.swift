@@ -43,7 +43,7 @@ extension VModalModel {
         public var cornerRadius: CGFloat = sheetLayout.cornerRadius
         public var margin: CGFloat = sheetLayout.contentMargin
 
-        public var closeButtonPosition: VModalCloseButtonPosition = .trailing
+        public var closeButtonPosition: VModalCloseButtonPosition = .default
         let closeButtonWidth: CGFloat = closeButtonLayout.dimension
         
         public var dividerHeight: CGFloat = 0
@@ -62,6 +62,8 @@ extension VModalModel.Layout {
         case leading
         case trailing
         case backTap
+        
+        public static let `default`: VModalCloseButtonPosition = .trailing
         
         var exists: Bool {
             switch self {
