@@ -12,6 +12,8 @@ import SwiftUI
 ///
 /// Model, title, description, onAppear and onDisappear callbacks, and content can be passed as parameters
 ///
+/// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
+///
 /// # Usage Example #
 ///
 /// ```

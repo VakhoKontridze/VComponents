@@ -30,6 +30,9 @@ extension VAlertModel {
         public var contentSpacing: CGFloat = 5
         public var contentMarginHor: CGFloat = 0
         public var contentMarginTop: CGFloat = 5
+        
+        public var twoButtonSpacing: CGFloat = 10
+        public var manyButtonSpacing: CGFloat = 10
 
         public init() {}
     }

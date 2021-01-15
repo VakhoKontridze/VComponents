@@ -142,7 +142,7 @@ extension _VAlert {
     }
     
     private func twoButtonDialogView(primary: VAlertDialogButton, secondary: VAlertDialogButton) -> some View {
-        HStack(spacing: model.layout.contentSpacing, content: {
+        HStack(spacing: model.layout.twoButtonSpacing, content: {
             VPrimaryButton(
                 model: secondary.model.primaryButtonModel,
                 state: secondary.isEnabled ? .enabled : .disabled,
@@ -160,7 +160,7 @@ extension _VAlert {
     }
     
     private func manyButtonDialogView(buttons: [VAlertDialogButton]) -> some View {
-        VStack(spacing: model.layout.contentSpacing, content: {
+        VStack(spacing: model.layout.manyButtonSpacing, content: {
             ForEach(0..<buttons.count, content: { i in
                 VPrimaryButton(
                     model: buttons[i].model.primaryButtonModel,

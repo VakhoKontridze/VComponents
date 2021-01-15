@@ -33,8 +33,8 @@ struct VAlertDemoView: View {
             
         case .many:
             return .many([
-                .init(model: .primary, title: "Option A", action: {}),
-                .init(model: .primary, title: "Option B", action: {}),
+                .init(model: .primary, isEnabled: !text.isEmpty, title: "Option A", action: {}),
+                .init(model: .primary, isEnabled: !text.isEmpty, title: "Option B", action: {}),
                 .init(model: .secondary, title: "Cancel", action: {})
             ])
         }

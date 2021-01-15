@@ -118,7 +118,7 @@ extension VSegmentedPickerDemoView {
                     )
                 })
                 
-                DemoRowView(type: .titled("Picker with Title"), content: {
+                DemoRowView(type: .titled("Title"), content: {
                     VSegmentedPicker(
                         selection: $segmentedPickerSelection4,
                         state: segmentedPickerState,
@@ -126,7 +126,7 @@ extension VSegmentedPickerDemoView {
                     )
                 })
                 
-                DemoRowView(type: .titled("Picker with Title and Subtitle"), content: {
+                DemoRowView(type: .titled("Title and Subtitle"), content: {
                     VSegmentedPicker(
                         selection: $segmentedPickerSelection5,
                         state: segmentedPickerState,
