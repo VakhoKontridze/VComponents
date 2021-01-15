@@ -107,7 +107,7 @@ private extension VLazyListDemoDetailView {
     }
     
     private var vertical: some View {
-        VLazyList(model: .vertical(), range: 1..<101, rowContent: { num in
+        VLazyList(model: .vertical(), range: 1..<101, content: { num in
             VBaseTitle(
                 title: "\(num)",
                 color: ColorBook.primary,
@@ -124,7 +124,7 @@ private extension VLazyListDemoDetailView {
     }
     
     private var horizontal: some View {
-        VLazyList(model: .horizontal(), range: 1..<101, rowContent: { num in
+        VLazyList(model: .horizontal(), range: 1..<101, content: { num in
             VBaseTitle(
                 title: "\(num)",
                 color: ColorBook.primary,

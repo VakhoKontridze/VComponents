@@ -15,7 +15,7 @@ struct VAccordionDemoView: View {
     
     @State private var rowCount: Int = 5
     
-    @State private var form: VBaseListDemoView.Form = .fixed
+    @State private var form: VBaseListDemoView.Form = .default
     
     @State private var accordionState: VAccordionState = .expanded
     
@@ -76,9 +76,9 @@ extension VAccordionDemoView {
                     model: accordionModel,
                     layout: form.accordionlayoutType,
                     state: $accordionState,
-                    headerContent: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+                    header: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
                     data: rows,
-                    rowContent: { rowContent(title: $0.title, color: $0.color) }
+                    content: { rowContent(title: $0.title, color: $0.color) }
                 )
                     .frame(height: form.height, alignment: .top)
             })

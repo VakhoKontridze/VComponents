@@ -68,7 +68,7 @@ public struct VSection<Data, ID, Content>: View
     // MARK: Initializers
     public init(
         model: VSectionModel = .init(),
-        layout layoutType: VSectionLayoutType = .fixed,
+        layout layoutType: VSectionLayoutType = .default,
         title: String? = nil,
         data: Data,
         id: KeyPath<Data.Element, ID>,
@@ -84,7 +84,7 @@ public struct VSection<Data, ID, Content>: View
     
     public init(
         model: VSectionModel = .init(),
-        layout layoutType: VSectionLayoutType = .fixed,
+        layout layoutType: VSectionLayoutType = .default,
         title: String? = nil,
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -140,7 +140,7 @@ struct VSection_Previews: PreviewProvider {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
             
-            VSection(layout: .fixed, title: "TITLE", data: VBaseList_Previews.rows, content: { row in
+            VSection(title: "Lorem ipsum dolor sit amet", data: VBaseList_Previews.rows, content: { row in
                 VBaseList_Previews.rowContent(title: row.title, color: row.color)
             })
                 .padding(20)

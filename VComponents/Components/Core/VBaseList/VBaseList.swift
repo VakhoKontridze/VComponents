@@ -63,7 +63,7 @@ public struct VBaseList<Data, ID, Content>: View
     // MARK: Initializers
     public init(
         model: VBaseListModel = .init(),
-        layout layoutType: VBaseListLayoutType = .fixed,
+        layout layoutType: VBaseListLayoutType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -76,7 +76,7 @@ public struct VBaseList<Data, ID, Content>: View
     
     public init(
         model: VBaseListModel = .init(),
-        layout layoutType: VBaseListLayoutType = .fixed,
+        layout layoutType: VBaseListLayoutType = .default,
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     )
@@ -109,7 +109,7 @@ extension VBaseList {
                 model: .vertical(model.lazyListModel),
                 data: data.enumeratedArray(),
                 id: \.element.id,
-                rowContent: { contentView(i: $0, element: $1) }
+                content: { contentView(i: $0, element: $1) }
             )
         }
     }
@@ -175,7 +175,7 @@ struct VBaseList_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VBaseList(layout: .fixed, data: rows, id: \.id, content: { row in
+        VBaseList(data: rows, id: \.id, content: { row in
             rowContent(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)

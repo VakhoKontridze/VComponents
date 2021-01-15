@@ -192,8 +192,8 @@ struct VAlert_Previews: PreviewProvider {
                     primary: .init(model: .secondary, title: "OK", action: {}),
                     secondary: .init(model: .secondary, title: "Cancel", action: {})
                 ),
-                title: "TITLE",
-                description: "Description Description Description Description Description"
+                title: "Lorem ipsum dolor sit amet",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             ))
                 .frame(height: 160) // ???
         })

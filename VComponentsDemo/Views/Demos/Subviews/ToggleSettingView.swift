@@ -40,6 +40,6 @@ extension ToggleSettingView {
 // MARK:- Preview
 struct ToggleSettingView_Previews: PreviewProvider {
     static var previews: some View {
-        ToggleSettingView(state: .constant(true), title: "Title")
+        ToggleSettingView(state: .constant(true), title: "Lorem ipsum dolor sit amet")
     }
 }

@@ -85,7 +85,7 @@ struct VSheet_Previews: PreviewProvider {
                 .edgesIgnoringSafeArea(.all)
             
             VSheet(content: {
-                VLazyList(range: 1..<100, rowContent: { num in
+                VLazyList(range: 1..<100, content: { num in
                     Text(String(num))
                         .padding(.vertical, 10)
                 })

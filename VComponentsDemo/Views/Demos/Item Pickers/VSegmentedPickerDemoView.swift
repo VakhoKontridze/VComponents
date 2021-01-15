@@ -92,7 +92,7 @@ extension VSegmentedPickerDemoView {
                     VSegmentedPicker(
                         selection: $segmentedPickerSelection2,
                         state: segmentedPickerState,
-                        rowContent: {
+                        content: {
                             $0.pickerSymbol
                         }
                     )
@@ -103,7 +103,7 @@ extension VSegmentedPickerDemoView {
                         selectedIndex: $segmentedPickerSelection3,
                         state: segmentedPickerState,
                         data: Options.allCases,
-                        rowContent: { option in
+                        content: { option in
                             HStack(spacing: 5, content: {
                                 option.pickerSymbol
                                 

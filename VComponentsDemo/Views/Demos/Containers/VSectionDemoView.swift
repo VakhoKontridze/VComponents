@@ -15,7 +15,7 @@ struct VSectionDemoView: View {
     
     @State private var rowCount: Int = 5
     
-    @State private var form: VBaseListDemoView.Form = .fixed
+    @State private var form: VBaseListDemoView.Form = .default
     
     // Copied and modifier from VSection's preview
     private struct Row: Identifiable {

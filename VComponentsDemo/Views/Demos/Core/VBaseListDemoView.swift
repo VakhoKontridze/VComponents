@@ -15,12 +15,14 @@ struct VBaseListDemoView: View {
     
     @State private var rowCount: Int = 5
     
-    @State private var form: Form = .fixed
+    @State private var form: Form = .default
     
     enum Form: Int, VPickerTitledEnumerableItem {
         case fixed
         case flexible
         case constrained
+        
+        static let `default`: Form = .flexible
         
         fileprivate var layoutType: VBaseListLayoutType {
             switch self {

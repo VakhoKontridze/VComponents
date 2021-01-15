@@ -16,7 +16,7 @@ struct VTableDemoView: View {
     @State private var sectionCount: Int = 2
     @State private var rowCount: Int = 3
     
-    @State private var form: VBaseListDemoView.Form = .fixed
+    @State private var form: VBaseListDemoView.Form = .default
     
     
     // Copied and modified from VTable's preview
@@ -82,9 +82,9 @@ extension VTableDemoView {
                 VTable(
                     layout: form.tablelayoutType,
                     sections: sections,
-                    headerContent: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
-                    footerContent: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
-                    rowContent: { row in rowContent(title: row.title, color: row.color) }
+                    header: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
+                    footer: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
+                    content: { row in rowContent(title: row.title, color: row.color) }
                 )
                     .frame(height: form.height)
             })

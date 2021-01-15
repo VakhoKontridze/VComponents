@@ -38,11 +38,11 @@ import SwiftUI
 ///
 ///         VAccordion(
 ///             state: $state,
-///             headerContent: {
+///             header: {
 ///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
 ///             },
 ///             data: data,
-///             rowContent: { row in
+///             content: { row in
 ///                 Text(row.title)
 ///                     .frame(
 ///                         maxWidth: .infinity,
@@ -83,9 +83,9 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     // MARK: Initializers
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
+        layout layoutType: VAccordionLayoutType = .default,
         state: Binding<VAccordionState>,
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
+        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content
     )
         where
@@ -104,12 +104,12 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
+        layout layoutType: VAccordionLayoutType = .default,
         state: Binding<VAccordionState>,
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
+        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
     )
         where Content == Never
     {
@@ -126,11 +126,11 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
 
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
+        layout layoutType: VAccordionLayoutType = .default,
         state: Binding<VAccordionState>,
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
+        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
     )
         where
             Content == Never,
@@ -141,10 +141,10 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
             model: model,
             layout: layoutType,
             state: state,
-            headerContent: headerContent,
+            header: headerContent,
             data: data,
             id: \Data.Element.id,
-            rowContent: rowContent
+            content: rowContent
         )
     }
 }
@@ -242,12 +242,11 @@ struct VAccordion_Previews: PreviewProvider {
             ColorBook.canvas.edgesIgnoringSafeArea(.all)
             
             VAccordion(
-                layout: .fixed,
                 state: $accordionState,
-                headerContent: { VAccordionDefaultHeader(title: "Title") },
+                header: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
                 data: ["One", "Two", "Three"],
                 id: \.self,
-                rowContent: {
+                content: {
                     Text($0)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }

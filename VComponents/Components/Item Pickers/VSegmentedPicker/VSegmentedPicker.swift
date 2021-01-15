@@ -38,11 +38,11 @@ import SwiftUI
 ///
 /// Component can also be initialized with VPickerEnumerableItem and row viewbuilder
 ///
-public struct VSegmentedPicker<Data, RowContent>: View
+public struct VSegmentedPicker<Data, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Index == Int,
-        RowContent: View
+        Content: View
 {
     // MARK: Properties
     private let model: VSegmentedPickerModel
@@ -61,7 +61,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     private let disabledIndexes: Set<Int>
     
     private let data: Data
-    private let rowContent: (Data.Element) -> RowContent
+    private let content: (Data.Element) -> Content
     
     @State private var rowWidth: CGFloat = .zero
     
@@ -74,7 +74,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         subtitle: String? = nil,
         disabledIndexes: Set<Int> = .init(),
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.model = model
         self._selectedIndex = selectedIndex
@@ -83,7 +83,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.subtitle = subtitle
         self.disabledIndexes = disabledIndexes
         self.data = data
-        self.rowContent = rowContent
+        self.content = content
     }
 
     public init(
@@ -97,7 +97,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<String>,
-            RowContent == VBaseTitle
+            Content == VBaseTitle
     {
         self.init(
             model: model,
@@ -107,7 +107,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             subtitle: subtitle,
             disabledIndexes: disabledIndexes,
             data: titles,
-            rowContent: { title in
+            content: { title in
                 VBaseTitle(
                     title: title,
                     color: model.colors.textColor(for: state),
@@ -125,7 +125,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         title: String? = nil,
         subtitle: String? = nil,
         disabledItems: Set<Option> = .init(),
-        @ViewBuilder rowContent: @escaping (Option) -> RowContent
+        @ViewBuilder content: @escaping (Option) -> Content
     )
         where
             Data == Array<Option>,
@@ -142,7 +142,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             subtitle: subtitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Option.allCases),
-            rowContent: rowContent
+            content: content
         )
     }
 
@@ -156,7 +156,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Option>,
-            RowContent == VBaseTitle,
+            Content == VBaseTitle,
             Option: VPickerTitledEnumerableItem
     {
         self.init(
@@ -170,7 +170,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             subtitle: subtitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Option.allCases),
-            rowContent: { option in
+            content: { option in
                 VBaseTitle(
                     title: option.pickerTitle,
                     color: model.colors.textColor(for: state),
@@ -257,7 +257,7 @@ extension VSegmentedPicker {
                     action: { selectedIndex = i },
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {
-                        rowContent(data[i])
+                        content(data[i])
                             .padding(model.layout.actualRowContentMargin)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
 

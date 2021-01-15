@@ -32,7 +32,7 @@ import SwiftUI
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VLazyList(data: data, rowContent: { row in
+///         VLazyList(data: data, content: { row in
 ///             Text(row.title)
 ///                 .frame(maxWidth: .infinity, alignment: .leading)
 ///         })
@@ -61,7 +61,7 @@ public struct VLazyList<Content>: View where Content: View {
         model: VLazyListModel = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
     )
         where
             Content == ForEach<Data, ID, RowContent>,
@@ -82,7 +82,7 @@ public struct VLazyList<Content>: View where Content: View {
     public init<Data, ID, RowContent>(
         model: VLazyListModel = .default,
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
     )
         where
             Content == ForEach<Data, ID, RowContent>,
@@ -95,14 +95,14 @@ public struct VLazyList<Content>: View where Content: View {
             model: model,
             data: data,
             id: \Data.Element.id,
-            rowContent: rowContent
+            content: rowContent
         )
     }
 
     public init <RowContent>(
         model: VLazyListModel = .default,
         range: Range<Int>,
-        rowContent: @escaping (Int) -> RowContent
+        content rowContent: @escaping (Int) -> RowContent
     )
         where Content == ForEach<Range<Int>, Int, RowContent>
     {
@@ -131,11 +131,11 @@ struct VLazyListView_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(content: {
-            VLazyList(model: .vertical(), range: range, rowContent: { number in
+            VLazyList(model: .vertical(), range: range, content: { number in
                 Text(String(number)).padding(5)
             })
 
-            VLazyList(model: .horizontal(), range: range, rowContent: { number in
+            VLazyList(model: .horizontal(), range: range, content: { number in
                 Text(String(number)).padding(5)
             })
         })

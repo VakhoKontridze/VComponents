@@ -83,7 +83,7 @@ private extension VSideBarWalkthroughView {
     }
     
     private var sideBarContent: some View {
-        VLazyList(model: .vertical(), range: 1..<11, rowContent: { num in
+        VLazyList(model: .vertical(), range: 1..<11, content: { num in
             VBaseTitle(
                 title: "\(num)",
                 color: ColorBook.primaryInverted,

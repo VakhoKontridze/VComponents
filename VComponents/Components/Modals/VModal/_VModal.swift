@@ -170,7 +170,7 @@ struct VModal_Previews: PreviewProvider {
             VModalModel.Colors().blinding.edgesIgnoringSafeArea(.all)
             
             _VModal(isPresented: .constant(true), modal: VModal(
-                title: { VModalDefaultTitle(title: "TITLE") },
+                title: { VModalDefaultTitle(title: "Lorem ipsum dolor sit amet") },
                 content: { Color.red }
             ))
         })

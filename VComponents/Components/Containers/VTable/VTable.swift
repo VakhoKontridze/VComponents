@@ -50,13 +50,13 @@ import SwiftUI
 ///
 ///         VTable(
 ///             sections: sections,
-///             headerContent: { section in
+///             header: { section in
 ///                 VTableDefaultHeaderFooter(title: section.title)
 ///             },
-///             footerContent: { section in
+///             footer: { section in
 ///                 VTableDefaultHeaderFooter(title: section.title)
 ///             },
-///             rowContent: { row in
+///             content: { row in
 ///                 Text(row.title)
 ///                     .frame(maxWidth: .infinity, alignment: .leading)
 ///             }
@@ -66,13 +66,13 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: View
+public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
     where
         Section: VTableSection,
         Row == Section.VTableRow,
         HeaderContent: View,
         FooterContent: View,
-        RowContent: View
+        Content: View
 {
     // MARK: Properties
     private let model: VTableModel
@@ -84,31 +84,31 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     private let headerContent: ((Section) -> HeaderContent)?
     private let footerContent: ((Section) -> FooterContent)?
     
-    private let rowContent: (Row) -> RowContent
+    private let content: (Row) -> Content
     
     // MARK: Initializers
     public init(
         model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .fixed,
+        layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder headerContent: @escaping (Section) -> HeaderContent,
-        @ViewBuilder footerContent: @escaping (Section) -> FooterContent,
-        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+        @ViewBuilder header headerContent: @escaping (Section) -> HeaderContent,
+        @ViewBuilder footer footerContent: @escaping (Section) -> FooterContent,
+        @ViewBuilder content: @escaping (Row) -> Content
     ) {
         self.model = model
         self.layoutType = layoutType
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = footerContent
-        self.rowContent = rowContent
+        self.content = content
     }
 
     public init(
         model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .fixed,
+        layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder headerContent: @escaping (Section) -> HeaderContent,
-        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+        @ViewBuilder header headerContent: @escaping (Section) -> HeaderContent,
+        @ViewBuilder content: @escaping (Row) -> Content
     )
         where FooterContent == Never
     {
@@ -117,15 +117,15 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = nil
-        self.rowContent = rowContent
+        self.content = content
     }
 
     public init(
         model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .fixed,
+        layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder footerContent: @escaping (Section) -> FooterContent,
-        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+        @ViewBuilder footer footerContent: @escaping (Section) -> FooterContent,
+        @ViewBuilder content: @escaping (Row) -> Content
     )
         where HeaderContent == Never
     {
@@ -134,14 +134,14 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.sections = sections
         self.headerContent = nil
         self.footerContent = footerContent
-        self.rowContent = rowContent
+        self.content = content
     }
 
     public init(
         model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .fixed,
+        layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+        @ViewBuilder content: @escaping (Row) -> Content
     )
         where
             HeaderContent == Never,
@@ -152,7 +152,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.sections = sections
         self.headerContent = nil
         self.footerContent = nil
-        self.rowContent = rowContent
+        self.content = content
     }
 }
 
@@ -192,7 +192,7 @@ extension VTable {
             model: model.genericListContentModel,
             layout: .fixed,
             data: section.rows,
-            content: rowContent
+            content: content
         )
     }
 
@@ -263,15 +263,14 @@ struct VTable_Previews: PreviewProvider {
                 .edgesIgnoringSafeArea(.all)
 
             VTable(
-                layout: .fixed,
                 sections: sections,
-                headerContent: { section in
+                header: { section in
                     VTableDefaultHeaderFooter(title: "Header \(section.title)")
                 },
-                footerContent: { section in
+                footer: { section in
                     VTableDefaultHeaderFooter(title: "Footer \(section.title)")
                 },
-                rowContent: { row in
+                content: { row in
                     VBaseList_Previews.rowContent(
                         title: row.title,
                         color: row.color

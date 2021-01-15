@@ -69,6 +69,6 @@ extension VBaseTitle {
 // MARK:- Preview
 struct VBaseTitle_Previews: PreviewProvider {
     static var previews: some View {
-        VBaseTitle(title: "TITLE", color: ColorBook.primary, font: .body, type: .oneLine)
+        VBaseTitle(title: "Lorem ipsum dolor sit amet", color: ColorBook.primary, font: .body, type: .oneLine)
     }
 }

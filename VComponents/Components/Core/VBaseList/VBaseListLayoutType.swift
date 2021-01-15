@@ -12,4 +12,6 @@ import Foundation
 public enum VBaseListLayoutType: Int, CaseIterable {
     case fixed
     case flexible
+    
+    public static let `default`: VBaseListLayoutType = .flexible
 }

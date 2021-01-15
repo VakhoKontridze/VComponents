@@ -66,7 +66,7 @@ extension DemoRowView {
 // MARK:- Preview
 struct DemoRowView_Previews: PreviewProvider {
     static var previews: some View {
-        DemoRowView(type: .titled("Title"), content: {
+        DemoRowView(type: .titled("Lorem ipsum dolor sit amet"), content: {
             Color.pink
                 .frame(width: 100, height: 100)
         })
