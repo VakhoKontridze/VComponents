@@ -19,7 +19,7 @@ public struct VSheetModel {
 // MARK:- Layout
 extension VSheetModel {
     public struct Layout {
-        public var roundedCorners: RoundedCorners = .all
+        public var roundedCorners: RoundedCorners = .default
         public var cornerRadius: CGFloat = 15
         
         public var contentMargin: CGFloat = 16
@@ -35,6 +35,8 @@ extension VSheetModel.Layout {
         case bottom
         case custom(_ corners: UIRectCorner)
         case none
+        
+        public static let `default`: RoundedCorners = .all
         
         var uiRectCorner: UIRectCorner {
             switch self {

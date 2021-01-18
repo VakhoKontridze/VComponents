@@ -31,7 +31,7 @@ public struct VSideBarModel {
 // MARK:- Layout
 extension VSideBarModel {
     public struct Layout {
-        public var width: Width = .relative()
+        public var widthType: WidthType = .default
         
         public var cornerRadius: CGFloat = 20
         var roundCorners: Bool { cornerRadius > 0 }
@@ -43,11 +43,13 @@ extension VSideBarModel {
 }
 
 extension VSideBarModel.Layout {
-    public enum Width {
+    public enum WidthType {
         case relative(_ screenRatio: CGFloat = 2/3)
         case fixed(_ width: CGFloat = 300)
         
-        var value: CGFloat {
+        public static let `default`: WidthType = .relative()
+        
+        var width: CGFloat {
             switch self {
             case .relative(let ratio): return UIScreen.main.bounds.width * ratio
             case .fixed(let width): return width

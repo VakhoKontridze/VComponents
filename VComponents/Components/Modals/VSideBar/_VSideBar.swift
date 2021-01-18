@@ -61,7 +61,7 @@ extension _VSideBar {
                 .padding(.top, model.layout.contentMargin.top)
                 .padding(.bottom, model.layout.contentMargin.bottom)
         })
-            .frame(width: model.layout.width.value)
+            .frame(width: model.layout.widthType.value)
             .onAppear(perform: appearAction)
             .onDisappear(perform: disappearAction)
             .addSideBarSwipeGesture(completion: dismiss)

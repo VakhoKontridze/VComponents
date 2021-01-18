@@ -70,7 +70,7 @@ extension View {
                     isPresented: isPresented,
                     content: _VSideBar(isPresented: isPresented, sideBar: sideBar()),
                     blinding: sideBar().model.colors.blinding.edgesIgnoringSafeArea(.all),
-                    contentWidth: sideBar().model.layout.width.value,
+                    contentWidth: sideBar().model.layout.widthType.value,
                     onBackTap: { withAnimation { isPresented.wrappedValue = false } }
                 )
             }
