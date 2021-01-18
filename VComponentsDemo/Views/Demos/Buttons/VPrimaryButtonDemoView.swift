@@ -13,7 +13,7 @@ struct VPrimaryButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Primary Button"
     
-    private let buttonTitle: String = "Press"
+    private let buttonTitle: String = "Lorem ipsum"
     
     private func buttonContent() -> some View { VDemoIconContentView(dimension: 20, color: ColorBook.primaryInverted) }
     
@@ -82,28 +82,22 @@ extension VPrimaryButtonDemoView {
         DemoRowView(type: .controller, content: {
             HStack(content: {
                 Spacer()
-                
-                ControllerToggleView(
-                    state: .init(
-                        get: { buttonState == .disabled },
-                        set: { buttonState = $0 ? .disabled : .enabled }
-                    ),
-                    title: "Disabled"
-                )
-
+                controllerToggle(active: .disabled, title: "Disabled")
                 Spacer()
-                
-                ControllerToggleView(
-                    state: .init(
-                        get: { buttonState == .loading },
-                        set: { buttonState = $0 ? .loading : .enabled }
-                    ),
-                    title: "Loading"
-                )
-
+                controllerToggle(active: .loading, title: "Loading")
                 Spacer()
             })
         })
+    }
+    
+    private func controllerToggle(active state: VPrimaryButtonState, title: String) -> some View {
+        ControllerToggleView(
+            state: .init(
+                get: { buttonState == state },
+                set: { buttonState = $0 ? state : .enabled }
+            ),
+            title: title
+        )
     }
 }
 

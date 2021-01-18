@@ -23,9 +23,11 @@ public struct VToggleModel {
 extension VToggleModel {
     public struct Layout {
         public var size: CGSize = .init(width: 51, height: 31)
+        var cornerRadius: CGFloat { size.height }
+        
         public var thumbDimension: CGFloat = 27
         
-        public var contentMargin: CGFloat = 7
+        public var contentMarginLeading: CGFloat = 7
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2
@@ -97,8 +99,9 @@ extension VToggleModel.Colors {
     func contentOpacity(state: VToggleInternalState) -> Double {
         switch state {
         case .off: return 1
+        case .pressedOff: return content.pressedOpacity
         case .on: return 1
-        case .pressedOff, .pressedOn: return content.pressedOpacity
+        case .pressedOn: return content.pressedOpacity
         case .disabled: return content.disabledOpacity
         }
     }
@@ -110,8 +113,8 @@ extension VToggleModel.Colors {
     private func color(state: VToggleInternalState, from colorSet: StateColors) -> Color {
         switch state {
         case .off: return colorSet.off
-        case .on: return colorSet.on
         case .pressedOff: return colorSet.off
+        case .on: return colorSet.on
         case .pressedOn: return colorSet.on
         case .disabled: return colorSet.disabled
         }

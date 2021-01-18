@@ -33,7 +33,7 @@ import SwiftUI
 /// var trailingItem: some View {
 ///     VPlainButton(
 ///         action: { print("Pressed") },
-///         title: "Press"
+///         title: "Lorem"
 ///     )
 /// }
 /// ```

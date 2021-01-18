@@ -26,7 +26,7 @@ import UIKit
 ///             case true: print("Press began")
 ///             }
 ///         },
-///         content: { Text("Press") }
+///         content: { Text("Lorem ipsum") }
 ///     )
 /// }
 /// ```

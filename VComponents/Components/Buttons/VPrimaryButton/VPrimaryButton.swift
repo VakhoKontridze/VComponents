@@ -16,7 +16,10 @@ import SwiftUI
 ///
 /// ```
 /// var body: some View {
-///     VPrimaryButton(action: { print("Pressed") }, title: "Press")
+///     VPrimaryButton(
+///         action: { print("Pressed") },
+///         title: "Lorem ipsum"
+///     )
 ///         .padding()
 /// }
 /// ```
@@ -134,7 +137,7 @@ extension VPrimaryButton {
 // MARK:- Preview
 struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButton(action: {}, title: "Press")
+        VPrimaryButton(action: {}, title: "Lorem ipsum")
             .padding()
     }
 }

@@ -13,7 +13,7 @@ struct VToggleDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Toggle"
     
-    private let toggleTitle: String = "Toggle"
+    private let toggleTitle: String = "Lorem ipsum"
     
     private func toggleContent() -> some View { VDemoIconContentView() }
     

@@ -1,24 +1,24 @@
 //
-//  VToggle.swift
+//  VCheckBox.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 1/18/21.
 //
 
 import SwiftUI
 
-// MARK:- V Toggle
-/// State picker component that toggles between off, on, or disabled states, and displays content
+// MARK:- V Check Box
+/// State picker component that toggles between off, on, intermediate, or disabled states, and displays content
 ///
 /// Model can be passed as parameter
 ///
 /// # Usage Example #
 ///
 /// ```
-/// @State var state: VToggleState = .on
+/// @State var state: VCheckBoxState = .on
 ///
 /// var body: some View {
-///     VToggle(
+///     VCheckBox(
 ///         state: $state,
 ///         title: "Lorem ipsum"
 ///     )
@@ -29,21 +29,21 @@ import SwiftUI
 ///
 /// Component can also be initialized with bool as state
 ///
-public struct VToggle<Content>: View where Content: View {
+public struct VCheckBox<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VToggleModel
+    private let model: VCheckBoxModel
     
-    @Binding private var state: VToggleState
+    @Binding private var state: VCheckBoxState
     @State private var isPressed: Bool = false
-    private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VCheckBoxInternalState { .init(state: state, isPressed: isPressed) }
     private var contentIsEnabled: Bool { state.isEnabled && model.contentIsClickable }
     
     private let content: (() -> Content)?
     
     // MARK: Initializers
     public init(
-        model: VToggleModel = .init(),
-        state: Binding<VToggleState>,
+        model: VCheckBoxModel = .init(),
+        state: Binding<VCheckBoxState>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
@@ -52,20 +52,20 @@ public struct VToggle<Content>: View where Content: View {
     }
 
     public init(
-        model: VToggleModel = .init(),
+        model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.init(
             model: model,
-            state: Binding<VToggleState>(bool: isOn),
+            state: Binding<VCheckBoxState>(bool: isOn),
             content: content
         )
     }
 
     public init(
-        model: VToggleModel = .init(),
-        state: Binding<VToggleState>,
+        model: VCheckBoxModel = .init(),
+        state: Binding<VCheckBoxState>,
         title: String
     )
         where Content == VBaseTitle
@@ -85,7 +85,7 @@ public struct VToggle<Content>: View where Content: View {
     }
 
     public init(
-        model: VToggleModel = .init(),
+        model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,
         title: String
     )
@@ -106,8 +106,8 @@ public struct VToggle<Content>: View where Content: View {
     }
 
     public init(
-        model: VToggleModel = .init(),
-        state: Binding<VToggleState>
+        model: VCheckBoxModel = .init(),
+        state: Binding<VCheckBoxState>
     )
         where Content == Never
     {
@@ -117,7 +117,7 @@ public struct VToggle<Content>: View where Content: View {
     }
 
     public init(
-        model: VToggleModel = .init(),
+        model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>
     )
         where Content == Never
@@ -129,33 +129,39 @@ public struct VToggle<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VToggle {
+extension VCheckBox {
     @ViewBuilder public var body: some View {
         switch content {
         case nil:
-            toggle
+            checkBox
             
         case let content?:
             HStack(spacing: 0, content: {
-                toggle
+                checkBox
                 spacerView
                 contentView(content: content)
             })
         }
     }
     
-    private var toggle: some View {
+    private var checkBox: some View {
         VBaseButton(isEnabled: state.isEnabled, action: action, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                     .foregroundColor(model.colors.fillColor(state: internalState))
+                
+                RoundedRectangle(cornerRadius: model.layout.cornerRadius)
+                    .strokeBorder(model.colors.borderColor(state: internalState), lineWidth: model.layout.borderWith)
 
-                Circle()
-                    .frame(dimension: model.layout.thumbDimension)
-                    .foregroundColor(model.colors.thumbColor(state: internalState))
-                    .offset(x: thumbOffset)
+                if let icon = icon {
+                    icon
+                        .resizable()
+                        .frame(dimension: model.layout.iconDimension)
+                        .foregroundColor(model.colors.iconColor(state: internalState))
+                }
             })
-                .frame(size: model.layout.size)
+                .frame(dimension: model.layout.dimension)
+                .padding(model.layout.hitBox)
         })
     }
     
@@ -178,33 +184,30 @@ extension VToggle {
     }
 }
 
-// MARK:- Thumb Position
-private extension VToggle {
-    var thumbOffset: CGFloat {
-        let offset: CGFloat = model.layout.animationOffset
-        
-        switch internalState {
-        case .off: return -offset
-        case .on: return offset
-        case .pressedOff: return -offset
-        case .pressedOn: return offset
-        case .disabled: return -offset
+// MARK:- Icon
+private extension VCheckBox {
+    var icon: Image? {
+        switch state {
+        case .off: return nil
+        case .on: return ImageBook.checkBoxOn
+        case .intermediate: return ImageBook.checkBoxInterm
+        case .disabled: return nil
         }
     }
 }
 
 // MARK:- Action
-private extension VToggle {
+private extension VCheckBox {
     func action() {
         withAnimation(model.animation, { state.nextState() })
     }
 }
 
 // MARK:- Preview
-struct VToggle_Previews: PreviewProvider {
-    @State private static var state: VToggleState = .on
+struct VCheckBox_Previews: PreviewProvider {
+    @State private static var state: VCheckBoxState = .on
 
     static var previews: some View {
-        VToggle(state: $state, title: "Lorem ipsum")
+        VCheckBox(state: $state, title: "Lorem ipsum")
     }
 }

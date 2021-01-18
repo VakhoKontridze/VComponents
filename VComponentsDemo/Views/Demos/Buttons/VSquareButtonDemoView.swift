@@ -13,7 +13,7 @@ struct VSquareButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Square Button"
     
-    private let buttonTitle: String = "Press"
+    private let buttonTitle: String = "Lorem"
     
     private func buttonContent() -> some View { VDemoIconContentView(color: ColorBook.primaryInverted) }
 

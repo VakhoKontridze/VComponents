@@ -13,7 +13,7 @@ struct VNavigationLinkDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Navigation Link"
     
-    private let buttonTitle: String = "Press"
+    private let buttonTitle: String = "Lorem ipsum"
     
     private func buttonContent() -> some View { VDemoIconContentView(dimension: 20, color: ColorBook.accent) }
 

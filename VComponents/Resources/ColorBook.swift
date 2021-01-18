@@ -55,6 +55,14 @@ extension Color {
  
  Accordion.Divider
  @140.140.140 @ 50
+
+ CheckBox.Border.disabled
+ 230.230.230
+ *40.40.40
+ 
+ CheckBox.Border.off
+ 200.200.200
+ *60.60.60
  
  ChevronButton.Background.disabled
  250.250.250

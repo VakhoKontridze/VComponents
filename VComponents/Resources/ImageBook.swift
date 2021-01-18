@@ -14,8 +14,10 @@ struct ImageBook {
 
 // MARK:- Images
 extension ImageBook {
-    static let chevronUp: Image = Image(componentAsset: "Chevron.Up").renderingMode(.template)
-    static let xMark: Image = Image(componentAsset: "XMark").renderingMode(.template)
+    static let chevronUp: Image = .init(componentAsset: "Chevron.Up")
+    static let xMark: Image = .init(componentAsset: "XMark")
+    static let checkBoxOn: Image = .init(componentAsset: "CheckBox.On")
+    static let checkBoxInterm: Image = .init(componentAsset: "CheckBox.Interm")
 }
 
 // MARK:- Helper
@@ -29,5 +31,6 @@ extension Image {
         }
         
         self = Image(name, bundle: bundle)
+            .renderingMode(.template)
     }
 }

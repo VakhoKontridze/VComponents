@@ -16,7 +16,10 @@ import SwiftUI
 ///
 /// ```
 /// var body: some View {
-///     VPlainButton(action: { print("Pressed") }, title: "Press")
+///     VPlainButton(
+///         action: { print("Pressed") },
+///         title: "Lorem ipsum"
+///     )
 /// }
 /// ```
 ///
@@ -97,7 +100,7 @@ extension VPlainButton {
 // MARK:- Preview
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButton(action: {}, title: "Press")
+        VPlainButton(action: {}, title: "Lorem ipsum")
             .padding()
     }
 }

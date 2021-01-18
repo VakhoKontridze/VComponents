@@ -13,7 +13,7 @@ struct VSecondaryButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Secondary Button"
     
-    private let buttonTitle: String = "Press"
+    private let buttonTitle: String = "Lorem ipsum"
     
     private func buttonContent() -> some View { VDemoIconContentView(color: ColorBook.primaryInverted) }
     

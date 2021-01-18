@@ -16,7 +16,10 @@ import SwiftUI
 ///
 /// ```
 /// var body: some View {
-///     VSecondaryButton(action: { print("Pressed") }, title: "Press")
+///     VSecondaryButton(
+///         action: { print("Pressed") },
+///         title: "Lorem ipsum"
+///     )
 /// }
 /// ```
 ///
@@ -118,7 +121,7 @@ extension VSecondaryButton {
 // MARK:- Preview
 struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSecondaryButton(action: {}, title: "Press")
+        VSecondaryButton(action: {}, title: "Lorem ipsum")
             .padding()
     }
 }

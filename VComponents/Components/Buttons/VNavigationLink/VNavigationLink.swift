@@ -25,7 +25,7 @@ import SwiftUI
 ///                 VNavigationLink(
 ///                     preset: .secondary(),
 ///                     destination: destination,
-///                     title: "Press"
+///                     title: "Lorem ipsum"
 ///                 )
 ///             })
 ///         })
@@ -248,7 +248,7 @@ struct VNavigationLink_Previews: PreviewProvider {
                     VNavigationLink(
                         preset: .secondary(),
                         destination: destination,
-                        title: "Press"
+                        title: "Lorem ipsum"
                     )
                 })
             })

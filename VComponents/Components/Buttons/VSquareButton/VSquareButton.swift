@@ -123,7 +123,11 @@ extension VSquareButton {
 // MARK:- Preview
 struct VSquareButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSquareButton(action: {}, title: "Press")
-            .padding()
+        VSquareButton(action: {}, content: {
+            Image(systemName: "swift")
+                .resizable()
+                .frame(width: 20, height: 20)
+                .foregroundColor(.white)
+        })
     }
 }

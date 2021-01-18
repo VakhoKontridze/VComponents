@@ -15,7 +15,7 @@ struct HomeView: View {
 
     private let sections: [DemoSection<HomeRow>] = [
         .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton, .closeButton, .navigationLink]),
-        .init(id: 1, title: "State Pickers", rows: [.toggle]),
+        .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.slider, .rangeSlider]),
         //.init(id: 4, title: "Custom Pickers", rows: []),
@@ -30,7 +30,7 @@ struct HomeView: View {
     
     private enum HomeRow: Int, DemoableRow {
         case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink
-        case toggle /*, checkBox*/ /*, radioButton*/
+        case toggle, checkBox /*, radioButton*/
         case segmentedPicker /*, wheelPicker*/ /*, dropDown*/ /*, tabHeader*/
         case /*stepper,*/ slider,  rangeSlider
         /*case*/ /*datePicker*/ /*, colorPicker*/
@@ -53,6 +53,7 @@ struct HomeView: View {
             case .navigationLink: return VNavigationLinkDemoView.navigationBarTitle
                 
             case .toggle: return VToggleDemoView.navigationBarTitle
+            case .checkBox: return VCheckBoxDemoView.navigationBarTitle
                 
             case .segmentedPicker: return VSegmentedPickerDemoView.navigationBarTitle
                 
@@ -94,6 +95,7 @@ struct HomeView: View {
             case .navigationLink: VNavigationLinkDemoView()
                 
             case .toggle: VToggleDemoView()
+            case .checkBox: VCheckBoxDemoView()
                 
             case .segmentedPicker: VSegmentedPickerDemoView()
                 

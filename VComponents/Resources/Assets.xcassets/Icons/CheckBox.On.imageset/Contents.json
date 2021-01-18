@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "Checkmark.On.svg",
+      "filename" : "CheckBox.On-1.svg",
       "idiom" : "universal"
     },
     {
@@ -11,7 +11,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Checkmark.On-1.svg",
+      "filename" : "CheckBox.On.svg",
       "idiom" : "universal"
     }
   ],
