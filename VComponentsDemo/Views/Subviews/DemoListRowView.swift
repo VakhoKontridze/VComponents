@@ -71,6 +71,7 @@ extension DemoListRowView {
 
             VChevronButton(model: chevronButtonModel, direction: .right, action: {})
         })
+            .contentShape(Rectangle())
     }
 }
 

@@ -51,30 +51,6 @@ struct _VSideBar<Content>: View where Content: View {
 // MARK:- Body
 extension _VSideBar {
     var body: some View {
-        ZStack(alignment: .leading, content: {
-            blinding
-            sideBarContent
-        })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onAppear(perform: appearAction)
-            .onDisappear(perform: disappearAction)
-//            .opacity(isPresented ? 1 : 0)
-            .offset(
-                x: isPresented ? 0 : -UIScreen.main.bounds.width,
-                y: 0
-            )
-            .addSideBarSwipeGesture(completion: dismiss)
-    }
-
-    @ViewBuilder private var blinding: some View {
-        if isPresented {
-            model.colors.blinding
-                .edgesIgnoringSafeArea(.all)
-                .onTapGesture(perform: dismiss)
-        }
-    }
-
-    private var sideBarContent: some View {
         ZStack(content: {
             VSheet(model: model.sheetModel)
                 .edgesIgnoringSafeArea(.vertical)
@@ -86,8 +62,10 @@ extension _VSideBar {
                 .padding(.bottom, model.layout.contentMargin.bottom)
         })
             .frame(width: model.layout.width.value)
+            .onAppear(perform: appearAction)
+            .onDisappear(perform: disappearAction)
+            .addSideBarSwipeGesture(completion: dismiss)
     }
-
 }
 
 // MARK:- Actions
