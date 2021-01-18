@@ -31,13 +31,13 @@ struct HomeView: View {
     private enum HomeRow: Int, DemoableRow {
         case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink
         case toggle, checkBox /*, radioButton*/
-        case segmentedPicker /*, wheelPicker*/ /*, dropDown*/ /*, tabHeader*/
+        case segmentedPicker /*, wheelPicker*/ /*, dropDown*/ /*, actionSheet*/ /*, contextMenu*/ /* tabHeader*/
         case /*stepper,*/ slider,  rangeSlider
         /*case*/ /*datePicker*/ /*, colorPicker*/
         /*case*/ /*textField*/ /*, searchBar*/ /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView /*, topTabNavigationView*/
-        case modal, sideBar /*,bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/
+        case modal, sideBar /*,bottomSheet*/
         case alert /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
         case baseTitle, baseButton, lazyList, baseList, baseView
