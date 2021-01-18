@@ -61,8 +61,9 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
                     Color.red
                     
                     VNavigationLink(
+                        preset: .secondary(),
                         destination: VBaseView(title: "Details", content: { Color.orange }),
-                        label: { VSecondaryButton(action: {}, title: "Go to Details").allowsHitTesting(false) }
+                        title: "Go to Details"
                     )
                     
                     goBackButton

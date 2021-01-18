@@ -70,7 +70,6 @@ extension DemoListRowView {
             Spacer()
 
             VChevronButton(model: chevronButtonModel, direction: .right, action: {})
-                .allowsHitTesting(false)
         })
     }
 }

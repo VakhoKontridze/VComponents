@@ -83,7 +83,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     // MARK: Initializers
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .default,
+        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
         @ViewBuilder header headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content
@@ -104,7 +104,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .default,
+        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
         @ViewBuilder header headerContent: @escaping () -> HeaderContent,
         data: Data,
@@ -126,7 +126,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
 
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .default,
+        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
         @ViewBuilder header headerContent: @escaping () -> HeaderContent,
         data: Data,

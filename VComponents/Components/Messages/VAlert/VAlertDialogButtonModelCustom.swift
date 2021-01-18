@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Alert Dialog Button Model Model
-/// Model that describes UI
+/// Enum that describes dialog button model, such as primary, secondary, or custom
 public enum VAlertDialogButtonModel {
     case primary
     case secondary

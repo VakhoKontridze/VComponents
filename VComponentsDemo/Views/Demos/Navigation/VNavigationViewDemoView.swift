@@ -139,11 +139,8 @@ extension NavigationDemoView {
                 .padding(.top, 50)
             
             switch action {
-            case .navigation(let desitnation):
-                VNavigationLink(destination: desitnation, label: {
-                    VSecondaryButton(action: {}, title: "Continue")
-                        .allowsHitTesting(false)
-                })
+            case .navigation(let destination):
+                VNavigationLink(preset: .secondary(), destination: destination, title: "Continue")
                 
             case .custom(let action):
                 VSecondaryButton(action: action, title: "Continue")

@@ -14,7 +14,7 @@ struct HomeView: View {
     private static let navigationBarTitle: String = "VComponents Demo"
 
     private let sections: [DemoSection<HomeRow>] = [
-        .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton, .closeButton]),
+        .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton, .closeButton, .navigationLink]),
         .init(id: 1, title: "State Pickers", rows: [.toggle]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.slider, .rangeSlider]),
@@ -29,7 +29,7 @@ struct HomeView: View {
     ]
     
     private enum HomeRow: Int, DemoableRow {
-        case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton
+        case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink
         case toggle /*, checkBox*/ /*, radioButton*/
         case segmentedPicker /*, wheelPicker*/ /*, dropDown*/ /*, tabHeader*/
         case /*stepper,*/ slider,  rangeSlider
@@ -50,6 +50,7 @@ struct HomeView: View {
             case .plainButton: return VPlainButtonDemoView.navigationBarTitle
             case .chevronButton: return VChevronButtonDemoView.navigationBarTitle
             case .closeButton: return VCloseButtonDemoView.navigationBarTitle
+            case .navigationLink: return VNavigationLinkDemoView.navigationBarTitle
                 
             case .toggle: return VToggleDemoView.navigationBarTitle
                 
@@ -90,6 +91,7 @@ struct HomeView: View {
             case .plainButton: VPlainButtonDemoView()
             case .chevronButton: VChevronButtonDemoView()
             case .closeButton: VCloseButtonDemoView()
+            case .navigationLink: VNavigationLinkDemoView()
                 
             case .toggle: VToggleDemoView()
                 

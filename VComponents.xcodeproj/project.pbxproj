@@ -40,6 +40,9 @@
 		7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */; };
 		7A3C1584258DFF5A00CE1D96 /* VLazyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */; };
 		7A3C159B258E0A3D00CE1D96 /* VLazyListModelVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C159A258E0A3D00CE1D96 /* VLazyListModelVertical.swift */; };
+		7A3EE37625B2CFBF00303EE7 /* VNavigationViewBackButtonHidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3EE37525B2CFBF00303EE7 /* VNavigationViewBackButtonHidden.swift */; };
+		7A3EE37925B2DE0C00303EE7 /* VNavigationLinkState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3EE37825B2DE0C00303EE7 /* VNavigationLinkState.swift */; };
+		7A3EE37C25B2F27500303EE7 /* VNavigationLinkPreset.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3EE37B25B2F27500303EE7 /* VNavigationLinkPreset.swift */; };
 		7A41A49225A73E6D000A6F80 /* VSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */; };
 		7A41A49525A759BD000A6F80 /* VSegmentedPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */; };
 		7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */; };
@@ -84,6 +87,7 @@
 		7A621834259494CB00515688 /* VLazyListVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A621833259494CB00515688 /* VLazyListVertical.swift */; };
 		7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218372594956400515688 /* VLazyListHorizontal.swift */; };
 		7A6C601425AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C601325AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift */; };
+		7A781E2C25B32B58005C44CB /* VNavigationLinkDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A781E2B25B32B58005C44CB /* VNavigationLinkDemoView.swift */; };
 		7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */; };
 		7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */; };
 		7A860D5225931B3C00B19A53 /* VChevronButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */; };
@@ -217,6 +221,9 @@
 		7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
 		7A3C1583258DFF5A00CE1D96 /* VLazyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyList.swift; sourceTree = "<group>"; };
 		7A3C159A258E0A3D00CE1D96 /* VLazyListModelVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListModelVertical.swift; sourceTree = "<group>"; };
+		7A3EE37525B2CFBF00303EE7 /* VNavigationViewBackButtonHidden.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationViewBackButtonHidden.swift; sourceTree = "<group>"; };
+		7A3EE37825B2DE0C00303EE7 /* VNavigationLinkState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationLinkState.swift; sourceTree = "<group>"; };
+		7A3EE37B25B2F27500303EE7 /* VNavigationLinkPreset.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationLinkPreset.swift; sourceTree = "<group>"; };
 		7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPicker.swift; sourceTree = "<group>"; };
 		7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerModel.swift; sourceTree = "<group>"; };
 		7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerState.swift; sourceTree = "<group>"; };
@@ -259,6 +266,7 @@
 		7A621833259494CB00515688 /* VLazyListVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListVertical.swift; sourceTree = "<group>"; };
 		7A6218372594956400515688 /* VLazyListHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListHorizontal.swift; sourceTree = "<group>"; };
 		7A6C601325AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTableDefaultHeaderFooter.swift; sourceTree = "<group>"; };
+		7A781E2B25B32B58005C44CB /* VNavigationLinkDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationLinkDemoView.swift; sourceTree = "<group>"; };
 		7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonDirection.swift; sourceTree = "<group>"; };
 		7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonModel.swift; sourceTree = "<group>"; };
 		7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonState.swift; sourceTree = "<group>"; };
@@ -510,6 +518,17 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		7A3EE37325B2CFAF00303EE7 /* VNavigationLink */ = {
+			isa = PBXGroup;
+			children = (
+				7AACBC1A25A9EBFE0066E754 /* VNavigationLink.swift */,
+				7A3EE37B25B2F27500303EE7 /* VNavigationLinkPreset.swift */,
+				7A3EE37825B2DE0C00303EE7 /* VNavigationLinkState.swift */,
+				7A3EE37525B2CFBF00303EE7 /* VNavigationViewBackButtonHidden.swift */,
+			);
+			path = VNavigationLink;
+			sourceTree = "<group>";
+		};
 		7A41A48B25A73E49000A6F80 /* VSegmentedPicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -533,7 +552,6 @@
 			children = (
 				7A4C42F3259228E8000207DD /* VNavigationView.swift */,
 				7A4C4319259237CA000207DD /* VNavigationViewNavigationBar.swift */,
-				7AACBC1A25A9EBFE0066E754 /* VNavigationLink.swift */,
 				7A4C4316259237BB000207DD /* VNavigationViewModel.swift */,
 				7A59957D2592442A0087902B /* VNavigationViewAppearance.swift */,
 			);
@@ -874,6 +892,7 @@
 				7A00732E258E2B7D0003F0E9 /* VPlainButtonDemoView.swift */,
 				7ABEA9DB259326EA00A90B56 /* VChevronButtonDemoView.swift */,
 				7AF3C8E925AF684E00D56042 /* VCloseButtonDemoView.swift */,
+				7A781E2B25B32B58005C44CB /* VNavigationLinkDemoView.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -895,6 +914,7 @@
 				7AA9F4452590B34A0060F210 /* VPlainButton */,
 				7A599585259249AC0087902B /* VChevronButton */,
 				7AF3C8DB25AF672800D56042 /* VCloseButton */,
+				7A3EE37325B2CFAF00303EE7 /* VNavigationLink */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1266,6 +1286,7 @@
 				7AF3C95F25B04F2B00D56042 /* VAlertDialogButtonModelCustom.swift in Sources */,
 				7A4D0C442594C71D00108575 /* VSecondaryButtonModel.swift in Sources */,
 				7A62181725948BBC00515688 /* VBaseViewModel.swift in Sources */,
+				7A3EE37C25B2F27500303EE7 /* VNavigationLinkPreset.swift in Sources */,
 				7A8A73872590BFFA001024FB /* VToggleModel.swift in Sources */,
 				7A8A9729258DDDA800309886 /* VPrimaryButton.swift in Sources */,
 				7AD809502594FDF900DABE49 /* VSideBarSwipeGesture.swift in Sources */,
@@ -1296,6 +1317,7 @@
 				7A259B842597B2C600A12F8C /* _VAlert.swift in Sources */,
 				7A4D0C2E2594C06A00108575 /* VSecondaryButton.swift in Sources */,
 				7A599587259249BC0087902B /* VChevronButton.swift in Sources */,
+				7A3EE37925B2DE0C00303EE7 /* VNavigationLinkState.swift in Sources */,
 				7ACC3EDB25ACC22E00EAD184 /* VAccordionModel.swift in Sources */,
 				7A259B7825979FC000A12F8C /* VAlertModel.swift in Sources */,
 				7AD809432594FCF000DABE49 /* _VSideBar.swift in Sources */,
@@ -1333,6 +1355,7 @@
 				7A259B6B259783A100A12F8C /* VAlertDialogType.swift in Sources */,
 				7A59578725AB6FCC00B5B6E7 /* VTableModel.swift in Sources */,
 				7A007375258E75DF0003F0E9 /* VToggleState.swift in Sources */,
+				7A3EE37625B2CFBF00303EE7 /* VNavigationViewBackButtonHidden.swift in Sources */,
 				7A59957E2592442A0087902B /* VNavigationViewAppearance.swift in Sources */,
 				7A259B7325979F9300A12F8C /* ModalPresenter.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
@@ -1368,6 +1391,7 @@
 				7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */,
 				7A871E7925AC78EE007E27E3 /* DemoListView.swift in Sources */,
 				7ABEAA7325934E5100A90B56 /* VNavigationViewDemoView.swift in Sources */,
+				7A781E2C25B32B58005C44CB /* VNavigationLinkDemoView.swift in Sources */,
 				7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */,
 				7ABEAADC2593969E00A90B56 /* VLazyListDemoView.swift in Sources */,
 				7ABEAA4F2593423400A90B56 /* VSheetDemoView.swift in Sources */,
