@@ -12,9 +12,9 @@ final class UIKitPresenterCommon {
     private init() {}
 }
 
-// MARK:- Adding
+// MARK:- Presenting
 extension UIKitPresenterCommon {
-    static func addBlinding<Content>(
+    static func presentBlinding<Content>(
         _ blinding: Content,
         id: Int
     ) -> UIHostingController<Content>?

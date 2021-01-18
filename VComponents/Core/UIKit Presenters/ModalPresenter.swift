@@ -68,10 +68,13 @@ final class VModalVC<ModalContent, BlindingContent>: UIViewController
     private let modalID: Int = 999_999_999
     private let blindingID: Int = 999_999_998
     
-    private let animationDuration: TimeInterval = 0.1
-    
     fileprivate var modalHC: UIHostingController<ModalContent>!
     fileprivate var blindingHC: UIHostingController<BlindingContent>!
+    
+    private var initialTransform: CGAffineTransform { .init(scaleX: 1.01, y: 1.01) }
+    private var presentedTransform: CGAffineTransform { .init(scaleX: 1, y: 1) }
+    private var dismissedTransform: CGAffineTransform { presentedTransform }
+    private let animationDuration: TimeInterval = 0.1
     
     private let backTapAction: (() -> Void)?
 
@@ -98,18 +101,18 @@ final class VModalVC<ModalContent, BlindingContent>: UIViewController
 // MARK:- Presenting
 private extension VModalVC {
     func present(_ content: ModalContent, blinding: BlindingContent) {
-        addBlinding(blinding)
-        addModal(content)
+        presentBlinding(blinding)
+        presentModal(content)
     }
     
-    func addBlinding(_ blinding: BlindingContent) {
-        blindingHC = UIKitPresenterCommon.addBlinding(blinding, id: blindingID)
+    func presentBlinding(_ blinding: BlindingContent) {
+        blindingHC = UIKitPresenterCommon.presentBlinding(blinding, id: blindingID)
         
         let tapGesture: UITapGestureRecognizer = .init(target: self, action: #selector(didTapBlindingView))
         blindingHC?.view.addGestureRecognizer(tapGesture)
     }
     
-    func addModal(_ content: ModalContent) {
+    func presentModal(_ content: ModalContent) {
         guard let appSuperView = UIKitPresenterCommon.appSuperView else { return }
         
         modalHC = UIKitPresenterCommon.createHostingController(content: content, id: modalID)
@@ -122,14 +125,14 @@ private extension VModalVC {
         ])
         appSuperView.bringSubviewToFront(modalView)
         
-        modalView.transform = beginTransform
+        modalView.transform = initialTransform
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
             options: .curveEaseInOut,
             animations: { [weak self] in
                 guard let self = self else { return }
-                modalView.transform = self.presentTransform
+                modalView.transform = self.presentedTransform
             },
             completion: nil
         )
@@ -150,25 +153,18 @@ private extension VModalVC {
     func dismissModal() {
         guard let modalView = UIKitPresenterCommon.view(id: modalID) else { return }
         
-        modalView.transform = presentTransform
+        modalView.transform = presentedTransform
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
             options: [.curveEaseInOut, .transitionCrossDissolve],
             animations: { [weak self] in
                 guard let self = self else { return }
-                modalView.transform = self.endTransform
+                modalView.transform = self.dismissedTransform
             },
             completion: { _ in
                 modalView.removeFromSuperview()
             }
         )
     }
-}
-
-// MARK:- Transforms
-private extension VModalVC {
-    var beginTransform: CGAffineTransform { .init(scaleX: 1.01, y: 1.01) }
-    var presentTransform: CGAffineTransform { .init(scaleX: 1, y: 1) }
-    var endTransform: CGAffineTransform { presentTransform }
 }

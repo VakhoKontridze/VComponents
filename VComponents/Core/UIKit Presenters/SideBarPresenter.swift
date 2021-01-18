@@ -70,10 +70,13 @@ final class VSideBarVC<SideBarContent, BlindingContent>: UIViewController where
     private let sideBarID: Int = 999_999_997
     private let blindingID: Int = 999_999_996
     
-    private let animationDuration: TimeInterval = 0.25
-    
     fileprivate var sideBarHC: UIHostingController<SideBarContent>!
     fileprivate var blindingHC: UIHostingController<BlindingContent>!
+    
+    private let animationDuration: TimeInterval = 0.25
+    private var initialTransform: CGAffineTransform { .init(translationX: -contentWidth, y: 0) }
+    private var presentedTransform: CGAffineTransform { .init(translationX: 0, y: 0) }
+    private var dismissedTransform: CGAffineTransform { initialTransform }
     
     private let contentWidth: CGFloat
     private let backTapAction: (() -> Void)?
@@ -103,18 +106,18 @@ final class VSideBarVC<SideBarContent, BlindingContent>: UIViewController where
 // MARK:- Presenting
 private extension VSideBarVC {
     func present(_ content: SideBarContent, blinding: BlindingContent) {
-        addBlinding(blinding)
-        addSideBar(content)
+        presentBlinding(blinding)
+        presentSideBar(content)
     }
     
-    func addBlinding(_ blinding: BlindingContent) {
-        blindingHC = UIKitPresenterCommon.addBlinding(blinding, id: blindingID)
+    func presentBlinding(_ blinding: BlindingContent) {
+        blindingHC = UIKitPresenterCommon.presentBlinding(blinding, id: blindingID)
         
         let tapGesture: UITapGestureRecognizer = .init(target: self, action: #selector(didTapBlindingView))
         blindingHC?.view.addGestureRecognizer(tapGesture)
     }
     
-    func addSideBar(_ content: SideBarContent) {
+    func presentSideBar(_ content: SideBarContent) {
         guard let appSuperView = UIKitPresenterCommon.appSuperView else { return }
         
         sideBarHC = UIKitPresenterCommon.createHostingController(content: content, id: sideBarID)
@@ -128,14 +131,14 @@ private extension VSideBarVC {
         ])
         appSuperView.bringSubviewToFront(sideBarView)
         
-        sideBarView.transform = beginTransform
+        sideBarView.transform = initialTransform
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
             options: .curveLinear,
             animations: { [weak self] in
                 guard let self = self else { return }
-                sideBarView.transform = self.presentTransform
+                sideBarView.transform = self.presentedTransform
             },
             completion: nil
         )
@@ -156,25 +159,18 @@ private extension VSideBarVC {
     func dismissSideBar() {
         guard let sideBarView = UIKitPresenterCommon.view(id: sideBarID) else { return }
         
-        sideBarView.transform = presentTransform
+        sideBarView.transform = presentedTransform
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
             options: .curveLinear,
             animations: { [weak self] in
                 guard let self = self else { return }
-                sideBarView.transform = self.endTransform
+                sideBarView.transform = self.dismissedTransform
             },
             completion: { _ in
                 sideBarView.removeFromSuperview()
             }
         )
     }
-}
-
-// MARK:- Transforms
-private extension VSideBarVC {
-    var beginTransform: CGAffineTransform { .init(translationX: -contentWidth, y: 0) }
-    var presentTransform: CGAffineTransform { .init(translationX: 0, y: 0) }
-    var endTransform: CGAffineTransform { beginTransform }
 }
