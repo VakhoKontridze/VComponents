@@ -12,7 +12,6 @@ import SwiftUI
 public struct VChevronButtonModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    var font: Font { .system(size: layout.iconDimension, weight: .semibold, design: .default) }
     
     public init() {}
 }

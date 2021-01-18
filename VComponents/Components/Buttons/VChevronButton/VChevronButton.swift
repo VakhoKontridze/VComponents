@@ -74,8 +74,9 @@ extension VChevronButton {
     }
     
     private var buttonContent: some View {
-        Image(systemName: "chevron.up")
-            .font(model.font)
+        ImageBook.chevronUp
+            .resizable()
+            .frame(dimension: model.layout.iconDimension)
             .foregroundColor(model.colors.foregroundColor(state: internalState))
             .opacity(model.colors.foregroundOpacity(state: internalState))
             .rotationEffect(.init(degrees: direction.angle))

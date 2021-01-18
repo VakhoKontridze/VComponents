@@ -68,8 +68,9 @@ extension VCloseButton {
     }
     
     private var buttonContent: some View {
-        Image(systemName: "xmark")
-            .font(model.font)
+        ImageBook.xMark
+            .resizable()
+            .frame(dimension: model.layout.iconDimension)
             .foregroundColor(model.colors.foregroundColor(state: internalState))
             .opacity(model.colors.foregroundOpacity(state: internalState))
     }
