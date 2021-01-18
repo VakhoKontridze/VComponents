@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Toggle
 /// State picker component that toggles between off, on, or disabled states, and displays content
 ///
+/// Component can be initialized with content, title, or without body. Bool can also be passed as state.
+///
 /// Model can be passed as parameter
 ///
 /// # Usage Example #
@@ -24,10 +26,6 @@ import SwiftUI
 ///     )
 /// }
 /// ```
-///
-/// Component can also be initialized with title, or with or withour any content
-///
-/// Component can also be initialized with bool as state
 ///
 public struct VToggle<Content>: View where Content: View {
     // MARK: Properties

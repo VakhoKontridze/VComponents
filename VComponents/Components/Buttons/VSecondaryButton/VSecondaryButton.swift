@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Secondary Button
 /// Small colored button component that performs action when triggered
 ///
+/// Component can be initialized with content or title
+///
 /// Model and state can be passed as parameters
 ///
 /// # Usage Example #
@@ -22,8 +24,6 @@ import SwiftUI
 ///     )
 /// }
 /// ```
-///
-/// Component can also be initialized with content
 ///
 public struct VSecondaryButton<Content>: View where Content: View {
     // MARK: Properties

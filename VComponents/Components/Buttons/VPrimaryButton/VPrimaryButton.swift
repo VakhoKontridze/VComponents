@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Primary Button
 /// Large colored button component that performs action when triggered
 ///
+/// Component can be initialized with content or title
+///
 /// Model and state can be passed as parameters
 ///
 /// # Usage Example #
@@ -23,8 +25,6 @@ import SwiftUI
 ///         .padding()
 /// }
 /// ```
-///
-/// Component can also be initialized with content
 ///
 public struct VPrimaryButton<Content>: View where Content: View {
     // MARK: Properties

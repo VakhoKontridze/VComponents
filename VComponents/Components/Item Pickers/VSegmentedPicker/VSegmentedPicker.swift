@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
 ///
+/// Component ca be initialized with data, VPickerEnumerableItem, or VPickerTitledEnumerableItem
+///
 /// Model, state, title, subtitle, and disabled indexes can be passed as parameters
 ///
 /// # Usage Example #
@@ -33,10 +35,6 @@ import SwiftUI
 ///     VSegmentedPicker(selection: $selection)
 /// }
 /// ```
-///
-/// Component can also be initialized with data and row viewbuilder
-///
-/// Component can also be initialized with VPickerEnumerableItem and row viewbuilder
 ///
 public struct VSegmentedPicker<Data, Content>: View
     where

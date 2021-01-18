@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Navigation Link
 /// Button component that controls a navigation presentation
 ///
+/// Component can be initialized with content or title. Component supports presets or existing button types.
+///
 /// State can be passed as parameter
 ///
 /// # Usage Example #
@@ -42,10 +44,6 @@ import SwiftUI
 ///     })
 /// }
 /// ```
-///
-/// Component can also be initialized with content or title, with or without external activation state
-///
-/// Component can also  be initialized with content without a preset, with or withour extrnal activation state
 ///
 public struct VNavigationLink<Destination, Label>: View
     where

@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Accordion
 /// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data
 ///
+/// Component ca be initialized with data, VPickerEnumerableItem, VPickerTitledEnumerableItem, or free content
+///
 /// Model and layout can be passed as parameters
 ///
 /// There are three posible layouts:
@@ -54,9 +56,6 @@ import SwiftUI
 ///     })
 /// }
 /// ```
-/// Component can also be initialized with content
-///
-/// Component can also be initialized with VPickerEnumerableItem and row viewbuilder
 ///
 public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     where
