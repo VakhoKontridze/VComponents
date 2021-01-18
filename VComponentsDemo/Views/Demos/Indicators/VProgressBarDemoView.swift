@@ -37,7 +37,7 @@ extension VProgressBarDemoView {
     
     private var controller: some View {
         DemoRowView(type: .controller, content: {
-            ToggleSettingView(state: $useAnimation, title: "Animation")
+            ControllerToggleView(state: $useAnimation, title: "Animation")
         })
     }
 }

@@ -77,7 +77,7 @@ extension VToggleDemoView {
     
     private var controller: some View {
         DemoRowView(type: .controller, content: {
-            ToggleSettingView(
+            ControllerToggleView(
                 state: .init(
                     get: {
                         [toggle1State, toggle2State, toggle3State, toggle4State, toggle5State, toggle6State]

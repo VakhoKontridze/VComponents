@@ -44,7 +44,7 @@ extension VModalDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    VToggle(isOn: $hasTitle, title: "Modal Has Title").frame(maxWidth: .infinity, alignment: .leading)
+                    ToggleSettingView(isOn: $hasTitle, title: "Modal Has Title")
                     
                     VSegmentedPicker(model: pickerModel, selection: $closeButtonPosition, title: "Close Button Position")
                     

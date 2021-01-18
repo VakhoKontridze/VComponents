@@ -31,7 +31,7 @@
 		7A3B880225ADAD2500295A87 /* VBaseTitleDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B880125ADAD2500295A87 /* VBaseTitleDemoView.swift */; };
 		7A3B880825ADB4A700295A87 /* VBaseListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B880725ADB4A700295A87 /* VBaseListDemoView.swift */; };
 		7A3C1543258DE65F00CE1D96 /* ViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1542258DE65F00CE1D96 /* ViewExtensions.swift */; };
-		7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */; };
+		7A3C154D258DE69900CE1D96 /* ControllerToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C154C258DE69900CE1D96 /* ControllerToggleView.swift */; };
 		7A3C1555258DE7B900CE1D96 /* VSpinnerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1551258DE7B900CE1D96 /* VSpinnerModel.swift */; };
 		7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1552258DE7B900CE1D96 /* VSpinner.swift */; };
 		7A3C1558258DE7B900CE1D96 /* VSpinnerContinous.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C1554258DE7B900CE1D96 /* VSpinnerContinous.swift */; };
@@ -108,6 +108,7 @@
 		7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */; };
 		7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */; };
 		7A8A9744258DDF4200309886 /* DemoRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8A9743258DDF4200309886 /* DemoRowView.swift */; };
+		7A92926425B5B74400BBEA8A /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */; };
 		7AA9F3E425909E230060F210 /* VBaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA9F3E325909E230060F210 /* VBaseButton.swift */; };
 		7AACBC1B25A9EBFE0066E754 /* VNavigationLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AACBC1A25A9EBFE0066E754 /* VNavigationLink.swift */; };
 		7ABEA9DC259326EA00A90B56 /* VChevronButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEA9DB259326EA00A90B56 /* VChevronButtonDemoView.swift */; };
@@ -213,7 +214,7 @@
 		7A3B880125ADAD2500295A87 /* VBaseTitleDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseTitleDemoView.swift; sourceTree = "<group>"; };
 		7A3B880725ADB4A700295A87 /* VBaseListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseListDemoView.swift; sourceTree = "<group>"; };
 		7A3C1542258DE65F00CE1D96 /* ViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewExtensions.swift; sourceTree = "<group>"; };
-		7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
+		7A3C154C258DE69900CE1D96 /* ControllerToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControllerToggleView.swift; sourceTree = "<group>"; };
 		7A3C1551258DE7B900CE1D96 /* VSpinnerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerModel.swift; sourceTree = "<group>"; };
 		7A3C1552258DE7B900CE1D96 /* VSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinner.swift; sourceTree = "<group>"; };
 		7A3C1554258DE7B900CE1D96 /* VSpinnerContinous.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerContinous.swift; sourceTree = "<group>"; };
@@ -292,6 +293,7 @@
 		7A8A9727258DDDA800309886 /* VPrimaryButtonState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonState.swift; sourceTree = "<group>"; };
 		7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonDemoView.swift; sourceTree = "<group>"; };
 		7A8A9743258DDF4200309886 /* DemoRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoRowView.swift; sourceTree = "<group>"; };
+		7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
 		7AA9F3E325909E230060F210 /* VBaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseButton.swift; sourceTree = "<group>"; };
 		7AACBC1A25A9EBFE0066E754 /* VNavigationLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationLink.swift; sourceTree = "<group>"; };
 		7ABEA9DB259326EA00A90B56 /* VChevronButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonDemoView.swift; sourceTree = "<group>"; };
@@ -902,7 +904,8 @@
 		7A8A9742258DDF3000309886 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				7A3C154C258DE69900CE1D96 /* ToggleSettingView.swift */,
+				7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */,
+				7A3C154C258DE69900CE1D96 /* ControllerToggleView.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -1396,7 +1399,8 @@
 				7A871E7925AC78EE007E27E3 /* DemoListView.swift in Sources */,
 				7ABEAA7325934E5100A90B56 /* VNavigationViewDemoView.swift in Sources */,
 				7A781E2C25B32B58005C44CB /* VNavigationLinkDemoView.swift in Sources */,
-				7A3C154D258DE69900CE1D96 /* ToggleSettingView.swift in Sources */,
+				7A3C154D258DE69900CE1D96 /* ControllerToggleView.swift in Sources */,
+				7A92926425B5B74400BBEA8A /* ToggleSettingView.swift in Sources */,
 				7ABEAADC2593969E00A90B56 /* VLazyListDemoView.swift in Sources */,
 				7ABEAA4F2593423400A90B56 /* VSheetDemoView.swift in Sources */,
 				7A3C1560258DE7F400CE1D96 /* VSpinnerDemoView.swift in Sources */,

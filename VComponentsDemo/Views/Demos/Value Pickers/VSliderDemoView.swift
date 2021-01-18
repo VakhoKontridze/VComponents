@@ -124,7 +124,7 @@ extension VSliderDemoView {
 
     private var controller: some View {
         DemoRowView(type: .controller, content: {
-            ToggleSettingView(
+            ControllerToggleView(
                 state: .init(
                     get: { sliderState == .disabled },
                     set: { sliderState = $0 ? .disabled : .enabled }

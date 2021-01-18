@@ -72,9 +72,9 @@ extension VBaseViewDemoView {
                             subtitle: "Changing title position causes view to re-draw itself"
                         )
                         
-                        VToggle(isOn: $hasLeadingItem, title: "Leading items").frame(maxWidth: .infinity, alignment: .leading)
+                        ToggleSettingView(isOn: $hasLeadingItem, title: "Leading items")
                         
-                        VToggle(isOn: $hasTrailingItem, title: "Trailing items").frame(maxWidth: .infinity, alignment: .leading)
+                        ToggleSettingView(isOn: $hasTrailingItem, title: "Trailing items")
                     })
                 })
             }

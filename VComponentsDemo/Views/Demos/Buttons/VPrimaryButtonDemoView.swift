@@ -83,7 +83,7 @@ extension VPrimaryButtonDemoView {
             HStack(content: {
                 Spacer()
                 
-                ToggleSettingView(
+                ControllerToggleView(
                     state: .init(
                         get: { buttonState == .disabled },
                         set: { buttonState = $0 ? .disabled : .enabled }
@@ -93,7 +93,7 @@ extension VPrimaryButtonDemoView {
 
                 Spacer()
                 
-                ToggleSettingView(
+                ControllerToggleView(
                     state: .init(
                         get: { buttonState == .loading },
                         set: { buttonState = $0 ? .loading : .enabled }

@@ -71,7 +71,7 @@ extension VNavigationLinkDemoView {
     
     private var controller: some View {
         DemoRowView(type: .controller, content: {
-            ToggleSettingView(
+            ControllerToggleView(
                 state: .init(
                     get: { buttonState == .disabled },
                     set: { buttonState = $0 ? .disabled : .enabled }
