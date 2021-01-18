@@ -21,7 +21,7 @@ extension VChevronButtonModel {
     public struct Layout {
         public var dimension: CGFloat = 32
         
-        public var iconDimension: CGFloat = 14
+        public var iconDimension: CGFloat = 13
         
         public var hitBoxHor: CGFloat = 0
         public var hitBoxVer: CGFloat = 0
