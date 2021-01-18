@@ -90,3 +90,16 @@ extension UIKitPresenterCommon {
 //    func updateUIViewController(_ host: UIHostingController<Content>, context: Context) {
 //        host.rootView = content
 //    }
+
+// MARK:- Animation Curve Mappng
+extension UIView.AnimationCurve {
+    var animationOption: UIView.AnimationOptions {
+        switch self {
+        case .linear: return .curveLinear
+        case .easeIn: return .curveEaseIn
+        case .easeOut: return .curveEaseOut
+        case .easeInOut: return .curveEaseOut
+        @unknown default: return .curveLinear
+        }
+    }
+}

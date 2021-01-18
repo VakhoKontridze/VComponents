@@ -20,6 +20,8 @@ struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
     private let blinding: BlindingContent
 
     private let contentWidth: CGFloat
+    private let animationCurve: UIView.AnimationCurve
+    private let animationDuration: TimeInterval
     private let backTapAction: (() -> Void)?
 
     // MARK: Initializers
@@ -28,12 +30,16 @@ struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
         content: SideBarContent,
         blinding: BlindingContent,
         contentWidth: CGFloat,
+        animationCurve: UIView.AnimationCurve,
+        animationDuration: TimeInterval,
         onBackTap backTapAction: (() -> Void)? = nil
     ) {
         self._isPresented = isPresented
         self.content = content
         self.blinding = blinding
         self.contentWidth = contentWidth
+        self.animationCurve = animationCurve
+        self.animationDuration = animationDuration
         self.backTapAction = backTapAction
     }
 }
@@ -43,7 +49,14 @@ extension VSideBarVCRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(
         context: UIViewControllerRepresentableContext<Self>
     ) -> VSideBarVC<SideBarContent, BlindingContent> {
-        .init(content: content, blinding: blinding, contentWidth: contentWidth, onBackTap: backTapAction)
+        .init(
+            content: content,
+            blinding: blinding,
+            contentWidth: contentWidth,
+            animationCurve: animationCurve,
+            animationDuration: animationDuration,
+            onBackTap: backTapAction
+        )
     }
 
     func updateUIViewController(
@@ -73,12 +86,13 @@ final class VSideBarVC<SideBarContent, BlindingContent>: UIViewController where
     fileprivate var sideBarHC: UIHostingController<SideBarContent>!
     fileprivate var blindingHC: UIHostingController<BlindingContent>!
     
-    private let animationDuration: TimeInterval = 0.25
     private var initialTransform: CGAffineTransform { .init(translationX: -contentWidth, y: 0) }
     private var presentedTransform: CGAffineTransform { .init(translationX: 0, y: 0) }
     private var dismissedTransform: CGAffineTransform { initialTransform }
     
     private let contentWidth: CGFloat
+    private let animationCurve: UIView.AnimationCurve
+    private let animationDuration: TimeInterval
     private let backTapAction: (() -> Void)?
 
     // MARK: Initializers
@@ -86,9 +100,13 @@ final class VSideBarVC<SideBarContent, BlindingContent>: UIViewController where
         content: SideBarContent,
         blinding: BlindingContent,
         contentWidth: CGFloat,
+        animationCurve: UIView.AnimationCurve,
+        animationDuration: TimeInterval,
         onBackTap backTapAction: (() -> Void)?
     ) {
         self.contentWidth = contentWidth
+        self.animationCurve = animationCurve
+        self.animationDuration = animationDuration
         self.backTapAction = backTapAction
         super.init(nibName: nil, bundle: nil)
         present(content, blinding: blinding)
@@ -135,7 +153,7 @@ private extension VSideBarVC {
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
-            options: .curveLinear,
+            options: animationCurve.animationOption,
             animations: { [weak self] in
                 guard let self = self else { return }
                 sideBarView.transform = self.presentedTransform
@@ -163,7 +181,7 @@ private extension VSideBarVC {
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
-            options: .curveLinear,
+            options: animationCurve.animationOption,
             animations: { [weak self] in
                 guard let self = self else { return }
                 sideBarView.transform = self.dismissedTransform

@@ -74,6 +74,7 @@ final class VModalVC<ModalContent, BlindingContent>: UIViewController
     private var initialTransform: CGAffineTransform { .init(scaleX: 1.01, y: 1.01) }
     private var presentedTransform: CGAffineTransform { .init(scaleX: 1, y: 1) }
     private var dismissedTransform: CGAffineTransform { presentedTransform }
+    private let animationCurve: UIView.AnimationOptions = UIView.AnimationCurve.linear.animationOption
     private let animationDuration: TimeInterval = 0.1
     
     private let backTapAction: (() -> Void)?
@@ -129,7 +130,7 @@ private extension VModalVC {
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
-            options: .curveEaseInOut,
+            options: animationCurve,
             animations: { [weak self] in
                 guard let self = self else { return }
                 modalView.transform = self.presentedTransform
@@ -157,7 +158,7 @@ private extension VModalVC {
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
-            options: [.curveEaseInOut, .transitionCrossDissolve],
+            options: [animationCurve, .transitionCrossDissolve],
             animations: { [weak self] in
                 guard let self = self else { return }
                 modalView.transform = self.dismissedTransform

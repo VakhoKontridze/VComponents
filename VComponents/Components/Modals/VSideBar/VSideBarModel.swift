@@ -12,6 +12,7 @@ import SwiftUI
 public struct VSideBarModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var animations: Animations = .init()
     
     var sheetModel: VSheetModel {
         var model: VSheetModel = .init()
@@ -77,6 +78,16 @@ extension VSideBarModel {
         
         public var background: Color = sheetColor
         public var blinding: Color = modalColors.blinding
+        
+        public init() {}
+    }
+}
+
+// MARK:- Animations
+extension VSideBarModel {
+    public struct Animations {
+        public var curve: UIView.AnimationCurve = .linear
+        public var duration: TimeInterval = 0.25
         
         public init() {}
     }

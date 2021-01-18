@@ -71,6 +71,8 @@ extension View {
                     content: _VSideBar(isPresented: isPresented, sideBar: sideBar()),
                     blinding: sideBar().model.colors.blinding.edgesIgnoringSafeArea(.all),
                     contentWidth: sideBar().model.layout.widthType.width,
+                    animationCurve: sideBar().model.animations.curve,
+                    animationDuration: sideBar().model.animations.duration,
                     onBackTap: { withAnimation { isPresented.wrappedValue = false } }
                 )
             }
