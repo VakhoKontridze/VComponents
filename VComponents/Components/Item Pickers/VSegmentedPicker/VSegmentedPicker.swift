@@ -314,7 +314,7 @@ private extension VSegmentedPicker {
 struct VSegmentedPicker_Previews: PreviewProvider {
     @State private static var selection: PickerRow = .red
     
-    enum PickerRow: Int, VPickableTitledItem {
+    private enum PickerRow: Int, VPickableTitledItem {
         case red, green, blue
     
         var pickerTitle: String {

@@ -17,26 +17,23 @@ import SwiftUI
 /// # Usage Example #
 ///
 /// ```
-/// enum PickerRow: Int, VPickableTitledItem {
-///     case red, green, blue
+/// @State var selectedIndex: Int = 7
 ///
-///     var pickerTitle: String {
-///         switch self {
-///         case .red: return "Red"
-///         case .green: return "Green"
-///         case .blue: return "Blue"
-///         }
-///     }
-/// }
-///
-/// @State var selection: PickerRow = .red
+/// let titles: [String] = [
+///     "January", "February", "March",
+///     "April", "May", "June",
+///     "July", "August", "September",
+///     "October", "November", "December"
+/// ]
 ///
 /// var body: some View {
 ///     VWheelPicker(
-///         selection: $selection,
+///         selectedIndex: $selectedIndex,
 ///         title: "Lorem ipsum dolor sit amet",
-///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         titles: titles
 ///     )
+///         .padding(20)
 /// }
 /// ```
 ///
@@ -224,13 +221,21 @@ extension VWheelPicker {
 
 // MARK:- Preview
 struct VWheelPicker_Previews: PreviewProvider {
-    @State private static var selection: VSegmentedPicker_Previews.PickerRow = .red
+    @State private static var selectedIndex: Int = 7
+    
+    private static let titles: [String] = [
+        "January", "February", "March",
+        "April", "May", "June",
+        "July", "August", "September",
+        "October", "November", "December"
+    ]
 
     static var previews: some View {
         VWheelPicker(
-            selection: $selection,
+            selectedIndex: $selectedIndex,
             title: "Lorem ipsum dolor sit amet",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            titles: titles
         )
             .padding(20)
     }
