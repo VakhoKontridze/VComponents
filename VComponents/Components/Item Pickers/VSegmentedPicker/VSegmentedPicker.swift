@@ -313,6 +313,7 @@ private extension VSegmentedPicker {
 // MARK:- Preview
 struct VSegmentedPicker_Previews: PreviewProvider {
     @State private static var selection: PickerRow = .red
+    
     enum PickerRow: Int, VPickableTitledItem {
         case red, green, blue
     
@@ -331,6 +332,6 @@ struct VSegmentedPicker_Previews: PreviewProvider {
             title: "Lorem ipsum dolor sit amet",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         )
-        .padding(20)
+            .padding(20)
     }
 }
