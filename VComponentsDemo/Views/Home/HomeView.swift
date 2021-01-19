@@ -42,7 +42,6 @@ struct HomeView: View {
         case spinner, progressBar /*, pagingIndicator*/
         case baseTitle, baseButton, lazyList, baseList, baseView
         
-        
         var title: String {
             switch self {
             case .primaryButton: return VPrimaryButtonDemoView.navigationBarTitle
