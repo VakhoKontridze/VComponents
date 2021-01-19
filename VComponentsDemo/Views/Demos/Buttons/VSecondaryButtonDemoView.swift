@@ -15,7 +15,7 @@ struct VSecondaryButtonDemoView: View {
     
     private let buttonTitle: String = "Lorem ipsum"
     
-    private func buttonContent() -> some View { VDemoIconContentView(color: ColorBook.primaryInverted) }
+    private func buttonContent() -> some View { DemoIconContentView(color: ColorBook.primaryInverted) }
     
     @State private var buttonState: VSecondaryButtonState = .enabled
     

@@ -15,7 +15,7 @@ struct VPrimaryButtonDemoView: View {
     
     private let buttonTitle: String = "Lorem ipsum"
     
-    private func buttonContent() -> some View { VDemoIconContentView(dimension: 20, color: ColorBook.primaryInverted) }
+    private func buttonContent() -> some View { DemoIconContentView(dimension: 20, color: ColorBook.primaryInverted) }
     
     @State private var buttonState: VPrimaryButtonState = .enabled
     

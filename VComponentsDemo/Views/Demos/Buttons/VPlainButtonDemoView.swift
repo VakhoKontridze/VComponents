@@ -15,7 +15,7 @@ struct VPlainButtonDemoView: View {
     
     private let buttonTitle: String = "Lorem ipsum"
     
-    private func buttonContent() -> some View { VDemoIconContentView() }
+    private func buttonContent() -> some View { DemoIconContentView() }
     
     @State private var buttonState: VPlainButtonState = .enabled
     

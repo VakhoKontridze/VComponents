@@ -33,7 +33,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 **Indicators.** VSpinner, VProgressBar
 
-**Core.** VBaseTitle, VBaseButton, VLazyList, VBaseList, VBaseView
+**Core.** VBaseTitle, VBaseButton, VBaseTextField, VLazyList, VBaseList, VBaseView
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)

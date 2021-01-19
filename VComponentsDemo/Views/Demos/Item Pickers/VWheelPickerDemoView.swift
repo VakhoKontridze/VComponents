@@ -43,7 +43,7 @@ struct VWheelPickerDemoView: View {
                 }
             }()
             
-            return VDemoIconContentView(color: color)
+            return DemoIconContentView(color: color)
         }
     }
 

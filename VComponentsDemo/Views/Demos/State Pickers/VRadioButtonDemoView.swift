@@ -15,7 +15,7 @@ struct VRadioButtonDemoView: View {
     
     private let radioButtonTitle: String = "Lorem ipsum"
     
-    private func radioButtonContent() -> some View { VDemoIconContentView() }
+    private func radioButtonContent() -> some View { DemoIconContentView() }
     
     let nonClickableContentModel: VRadioButtonModel = {
         var model: VRadioButtonModel = .init()

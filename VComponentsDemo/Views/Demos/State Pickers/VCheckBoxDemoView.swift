@@ -15,7 +15,7 @@ struct VCheckBoxDemoView: View {
     
     private let checkBoxTitle: String = "Lorem ipsum"
     
-    private func checkBoxContent() -> some View { VDemoIconContentView() }
+    private func checkBoxContent() -> some View { DemoIconContentView() }
     
     let nonClickableContentModel: VCheckBoxModel = {
         var model: VCheckBoxModel = .init()

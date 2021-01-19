@@ -15,7 +15,7 @@ struct VToggleDemoView: View {
     
     private let toggleTitle: String = "Lorem ipsum"
     
-    private func toggleContent() -> some View { VDemoIconContentView() }
+    private func toggleContent() -> some View { DemoIconContentView() }
     
     let nonClickableContentModel: VToggleModel = {
         var model: VToggleModel = .init()

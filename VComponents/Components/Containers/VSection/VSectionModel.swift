@@ -49,7 +49,7 @@ extension VSectionModel {
         public static let genericListContentLayout: VBaseListModel.Layout = .init()
         public static let sheetLayout: VSheetModel.Layout = .init()
         
-        public var titleMarginHor: CGFloat = sheetLayout.contentMargin
+        public var titleMarginHor: CGFloat = 0
         public var titleMarginBottom: CGFloat = 10
         
         public var cornerRadius: CGFloat = sheetLayout.cornerRadius

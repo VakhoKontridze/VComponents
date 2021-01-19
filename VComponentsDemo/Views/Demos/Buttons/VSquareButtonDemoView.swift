@@ -15,7 +15,7 @@ struct VSquareButtonDemoView: View {
     
     private let buttonTitle: String = "Lorem"
     
-    private func buttonContent() -> some View { VDemoIconContentView(color: ColorBook.primaryInverted) }
+    private func buttonContent() -> some View { DemoIconContentView(color: ColorBook.primaryInverted) }
 
     @State private var buttonState: VSquareButtonState = .enabled
     

@@ -47,7 +47,7 @@ struct VSegmentedPickerDemoView: View {
                 }
             }()
             
-            return VDemoIconContentView(color: color)
+            return DemoIconContentView(color: color)
         }
     }
 
@@ -196,22 +196,5 @@ extension VSegmentedPickerDemoView {
 struct VSegmentedPickerDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSegmentedPickerDemoView()
-    }
-}
-
-struct VDemoIconContentView: View {
-    private let dimension: CGFloat
-    private let color: Color
-    
-    init(dimension: CGFloat = 15, color: Color = ColorBook.accent) {
-        self.dimension = dimension
-        self.color = color
-    }
-    
-    var body: some View {
-        Image(systemName: "swift")
-            .resizable()
-            .frame(dimension: dimension)
-            .foregroundColor(color)
     }
 }

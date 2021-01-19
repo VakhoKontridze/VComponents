@@ -25,23 +25,23 @@ struct HomeView: View {
         .init(id: 6, title: "Modals", rows: [.modal, .sideBar]),
         .init(id: 7, title: "Messages", rows: [.alert]),
         .init(id: 8, title: "Indicators", rows: [.spinner, .progressBar]),
-        .init(id: 9, title: "Core", rows: [.baseTitle, .baseButton, .lazyList, .baseList, .baseView])
+        .init(id: 9, title: "Core", rows: [.baseTitle, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
     ]
-    
+
     private enum HomeRow: Int, DemoableRow {
         case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink
         case toggle, checkBox, radioButton
-        case segmentedPicker, wheelPicker /*, dropDown*/ /*, actionSheet*/ /*, contextMenu*/ /* tabHeader*/
+        case segmentedPicker, /* pagingPicker,*/ wheelPicker /*, dropDown*/
         case /*stepper,*/ slider,  rangeSlider
         /*case*/ /*datePicker*/ /*, colorPicker*/
         /*case*/ /*textField*/ /*, searchBar*/ /*, textView*/
         case sheet, section, table, accordion
-        case tabNavigationView, navigationView /*, topTabNavigationView*/
-        case modal, sideBar /*,bottomSheet*/
+        case tabNavigationView, navigationView
+        case modal, sideBar /*,bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/
         case alert /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
-        case baseTitle, baseButton, lazyList, baseList, baseView
-        
+        case baseTitle, baseButton, baseTextField, lazyList, baseList, baseView
+
         var title: String {
             switch self {
             case .primaryButton: return VPrimaryButtonDemoView.navigationBarTitle
@@ -51,41 +51,42 @@ struct HomeView: View {
             case .chevronButton: return VChevronButtonDemoView.navigationBarTitle
             case .closeButton: return VCloseButtonDemoView.navigationBarTitle
             case .navigationLink: return VNavigationLinkDemoView.navigationBarTitle
-                
+
             case .toggle: return VToggleDemoView.navigationBarTitle
             case .checkBox: return VCheckBoxDemoView.navigationBarTitle
             case .radioButton: return VRadioButtonDemoView.navigationBarTitle
-                
+
             case .segmentedPicker: return VSegmentedPickerDemoView.navigationBarTitle
             case .wheelPicker: return VWheelPickerDemoView.navigationBarTitle
-                
+
             case .slider: return VSliderDemoView.navigationBarTitle
             case .rangeSlider: return VRangeSliderDemoView.navigationBarTitle
-                
+
             case .sheet: return VSheetDemoView.navigationBarTitle
             case .section: return VSectionDemoView.navigationBarTitle
             case .table: return VTableDemoView.navigationBarTitle
             case .accordion: return VAccordionDemoView.navigationBarTitle
-                
+
             case .tabNavigationView: return VTabNavigationViewDemoView.navigationBarTitle
             case .navigationView: return VNavigationViewDemoView.navigationBarTitle
-                
+
             case .modal: return VModalDemoView.navigationBarTitle
             case .sideBar: return VSideBarDemoView.navigationBarTitle
-                
+
             case .alert: return VAlertDemoView.navigationBarTitle
-                
+
             case .spinner: return VSpinnerDemoView.navigationBarTitle
             case .progressBar: return VProgressBarDemoView.navigationBarTitle
-                
+
             case .baseTitle: return VBaseTitleDemoView.navigationBarTitle
             case .baseButton: return VBaseButtonDemoView.navigationBarTitle
+            case .baseTextField: return VBaseTextFieldDemoView.navigationBarTitle
             case .lazyList: return VLazyListDemoView.navigationBarTitle
             case .baseList: return VBaseListDemoView.navigationBarTitle
             case .baseView: return VBaseViewDemoView.navigationBarTitle
             }
         }
-        
+
         @ViewBuilder var body: some View {
             switch self {
             case .primaryButton: VPrimaryButtonDemoView()
@@ -95,35 +96,36 @@ struct HomeView: View {
             case .chevronButton: VChevronButtonDemoView()
             case .closeButton: VCloseButtonDemoView()
             case .navigationLink: VNavigationLinkDemoView()
-                
+
             case .toggle: VToggleDemoView()
             case .checkBox: VCheckBoxDemoView()
             case .radioButton: VRadioButtonDemoView()
-                
+
             case .segmentedPicker: VSegmentedPickerDemoView()
             case .wheelPicker: VWheelPickerDemoView()
-                
+
             case .slider: VSliderDemoView()
             case .rangeSlider: VRangeSliderDemoView()
-                
+
             case .sheet: VSheetDemoView()
             case .table: VTableDemoView()
             case .section: VSectionDemoView()
             case .accordion: VAccordionDemoView()
-                
+
             case .tabNavigationView: VTabNavigationViewDemoView()
             case .navigationView: VNavigationViewDemoView()
-                
+
             case .modal: VModalDemoView()
             case .sideBar: VSideBarDemoView()
-                
+
             case .alert: VAlertDemoView()
-                
+
             case .spinner: VSpinnerDemoView()
             case .progressBar: VProgressBarDemoView()
-                
+
             case .baseTitle: VBaseTitleDemoView()
             case .baseButton: VBaseButtonDemoView()
+            case .baseTextField: VBaseTextFieldDemoView()
             case .lazyList: VLazyListDemoView()
             case .baseList: VBaseListDemoView()
             case .baseView: VBaseViewDemoView()

@@ -15,7 +15,7 @@ struct VNavigationLinkDemoView: View {
     
     private let buttonTitle: String = "Lorem ipsum"
     
-    private func buttonContent() -> some View { VDemoIconContentView(dimension: 20, color: ColorBook.accent) }
+    private func buttonContent() -> some View { DemoIconContentView(dimension: 20, color: ColorBook.accent) }
 
     @State private var buttonState: VNavigationLinkState = .enabled
 }
