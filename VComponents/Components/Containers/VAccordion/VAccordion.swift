@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Accordion
 /// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data
 ///
-/// Component ca be initialized with data, VPickerEnumerableItem, VPickerTitledEnumerableItem, or free content
+/// Component ca be initialized with data, VPickableItem, VPickableTitledItem, or free content
 ///
 /// Model and layout can be passed as parameters
 ///

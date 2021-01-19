@@ -51,18 +51,6 @@ public struct VCheckBox<Content>: View where Content: View {
 
     public init(
         model: VCheckBoxModel = .init(),
-        isOn: Binding<Bool>,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.init(
-            model: model,
-            state: Binding<VCheckBoxState>(bool: isOn),
-            content: content
-        )
-    }
-
-    public init(
-        model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>,
         title: String
     )
@@ -79,6 +67,29 @@ public struct VCheckBox<Content>: View where Content: View {
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
+        )
+    }
+    
+    public init(
+        model: VCheckBoxModel = .init(),
+        state: Binding<VCheckBoxState>
+    )
+        where Content == Never
+    {
+        self.model = model
+        self._state = state
+        self.content = nil
+    }
+    
+    public init(
+        model: VCheckBoxModel = .init(),
+        isOn: Binding<Bool>,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.init(
+            model: model,
+            state: Binding<VCheckBoxState>(bool: isOn),
+            content: content
         )
     }
 
@@ -101,17 +112,6 @@ public struct VCheckBox<Content>: View where Content: View {
                 )
             }
         )
-    }
-
-    public init(
-        model: VCheckBoxModel = .init(),
-        state: Binding<VCheckBoxState>
-    )
-        where Content == Never
-    {
-        self.model = model
-        self._state = state
-        self.content = nil
     }
 
     public init(

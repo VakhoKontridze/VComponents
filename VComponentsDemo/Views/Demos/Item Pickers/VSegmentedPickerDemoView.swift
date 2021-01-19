@@ -13,19 +13,19 @@ struct VSegmentedPickerDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Segmented Picker"
 
-    @State private var segmentedPickerSelection1: Options = .red
-    @State private var segmentedPickerSelection2: Options = .red
+    @State private var segmentedPickerSelection1: Items = .red
+    @State private var segmentedPickerSelection2: Items = .red
     @State private var segmentedPickerSelection3: Int = 0
-    @State private var segmentedPickerSelection4: Options = .red
-    @State private var segmentedPickerSelection5: Options = .red
-    @State private var segmentedPickerSelection6: Options = .red
-    @State private var segmentedPickerSelection7: Options = .red
-    @State private var segmentedPickerSelection8: Options = .red
-    @State private var segmentedPickerSelection9: Options = .red
-    @State private var segmentedPickerSelection10: Options = .red
+    @State private var segmentedPickerSelection4: Items = .red
+    @State private var segmentedPickerSelection5: Items = .red
+    @State private var segmentedPickerSelection6: Items = .red
+    @State private var segmentedPickerSelection7: Items = .red
+    @State private var segmentedPickerSelection8: Items = .red
+    @State private var segmentedPickerSelection9: Items = .red
+    @State private var segmentedPickerSelection10: Items = .red
     @State private var segmentedPickerState: VSegmentedPickerState = .enabled
     
-    private enum Options: Int, CaseIterable, VPickerTitledEnumerableItem {
+    private enum Items: Int, CaseIterable, VPickableTitledItem {
         case red
         case green
         case blue
@@ -102,13 +102,13 @@ extension VSegmentedPickerDemoView {
                     VSegmentedPicker(
                         selectedIndex: $segmentedPickerSelection3,
                         state: segmentedPickerState,
-                        data: Options.allCases,
-                        content: { option in
+                        data: Items.allCases,
+                        content: { item in
                             HStack(spacing: 5, content: {
-                                option.pickerSymbol
+                                item.pickerSymbol
                                 
                                 VBaseTitle(
-                                    title: option.pickerTitle,
+                                    title: item.pickerTitle,
                                     color: ColorBook.primary,
                                     font: VSegmentedPickerModel.Fonts().rows,
                                     type: .oneLine

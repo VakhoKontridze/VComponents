@@ -97,7 +97,7 @@ extension VModalDemoView {
 }
 
 // MARK:- Helpers
-extension VModalModel.Layout.VModalCloseButtonPosition: VPickerTitledEnumerableItem {
+extension VModalModel.Layout.VModalCloseButtonPosition: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
         case .none: return "None"

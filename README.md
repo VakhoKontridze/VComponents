@@ -17,7 +17,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 **Buttons.** VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VChevronButton, VCloseButton, VNavigationLink
 
-**State Pickers.** VToggle, VCheckBox
+**State Pickers.** VToggle, VCheckBox, VRadioButton
 
 **Item Pickers.** VSegmentedPicker
 

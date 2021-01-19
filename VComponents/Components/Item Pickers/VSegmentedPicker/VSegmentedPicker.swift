@@ -10,14 +10,14 @@ import SwiftUI
 // MARK:- V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
 ///
-/// Component ca be initialized with data, VPickerEnumerableItem, or VPickerTitledEnumerableItem
+/// Component ca be initialized with data, VPickableItem, or VPickableTitledItem
 ///
 /// Model, state, title, subtitle, and disabled indexes can be passed as parameters
 ///
 /// # Usage Example #
 ///
 /// ```
-/// enum PickerRow: Int, CaseIterable, VPickerTitledEnumerableItem {
+/// enum PickerRow: Int, CaseIterable, VPickableTitledItem {
 ///     case red, green, blue
 ///
 ///     var pickerTitle: String {
@@ -116,61 +116,61 @@ public struct VSegmentedPicker<Data, Content>: View
         )
     }
 
-    public init<Option>(
+    public init<Item>(
         model: VSegmentedPickerModel = .init(),
-        selection: Binding<Option>,
+        selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
         title: String? = nil,
         subtitle: String? = nil,
-        disabledItems: Set<Option> = .init(),
-        @ViewBuilder content: @escaping (Option) -> Content
+        disabledItems: Set<Item> = .init(),
+        @ViewBuilder content: @escaping (Item) -> Content
     )
         where
-            Data == Array<Option>,
-            Option: VPickerEnumerableItem
+            Data == Array<Item>,
+            Item: VPickableItem
     {
         self.init(
             model: model,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Option(rawValue: $0)! }
+                set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
             title: title,
             subtitle: subtitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
-            data: .init(Option.allCases),
+            data: .init(Item.allCases),
             content: content
         )
     }
 
-    public init<Option>(
+    public init<Item>(
         model: VSegmentedPickerModel = .init(),
-        selection: Binding<Option>,
+        selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
         title: String? = nil,
         subtitle: String? = nil,
-        disabledItems: Set<Option> = .init()
+        disabledItems: Set<Item> = .init()
     )
         where
-            Data == Array<Option>,
+            Data == Array<Item>,
             Content == VBaseTitle,
-            Option: VPickerTitledEnumerableItem
+            Item: VPickableTitledItem
     {
         self.init(
             model: model,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Option(rawValue: $0)! }
+                set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
             title: title,
             subtitle: subtitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
-            data: .init(Option.allCases),
-            content: { option in
+            data: .init(Item.allCases),
+            content: { item in
                 VBaseTitle(
-                    title: option.pickerTitle,
+                    title: item.pickerTitle,
                     color: model.colors.textColor(for: state),
                     font: model.fonts.rows,
                     type: .oneLine
@@ -309,8 +309,8 @@ private extension VSegmentedPicker {
 
 // MARK:- Preview
 struct VSegmentedPicker_Previews: PreviewProvider {
-    @State private static var selection: Options = .one
-    private enum Options: Int, CaseIterable, VPickerTitledEnumerableItem {
+    @State private static var selection: Items = .one
+    private enum Items: Int, CaseIterable, VPickableTitledItem {
         case one
         case two
         case three

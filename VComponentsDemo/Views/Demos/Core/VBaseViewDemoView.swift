@@ -17,7 +17,7 @@ struct VBaseViewDemoView: View {
     @State private var hasLeadingItem: Bool = false
     @State private var hasTrailingItem: Bool = false
     
-    private enum TitlePosition: Int, CaseIterable, VPickerTitledEnumerableItem {
+    private enum TitlePosition: Int, CaseIterable, VPickableTitledItem {
         case leading
         case center
         

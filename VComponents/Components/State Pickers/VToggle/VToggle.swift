@@ -51,18 +51,6 @@ public struct VToggle<Content>: View where Content: View {
 
     public init(
         model: VToggleModel = .init(),
-        isOn: Binding<Bool>,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.init(
-            model: model,
-            state: Binding<VToggleState>(bool: isOn),
-            content: content
-        )
-    }
-
-    public init(
-        model: VToggleModel = .init(),
         state: Binding<VToggleState>,
         title: String
     )
@@ -79,6 +67,29 @@ public struct VToggle<Content>: View where Content: View {
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
+        )
+    }
+    
+    public init(
+        model: VToggleModel = .init(),
+        state: Binding<VToggleState>
+    )
+        where Content == Never
+    {
+        self.model = model
+        self._state = state
+        self.content = nil
+    }
+    
+    public init(
+        model: VToggleModel = .init(),
+        isOn: Binding<Bool>,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.init(
+            model: model,
+            state: Binding<VToggleState>(bool: isOn),
+            content: content
         )
     }
 
@@ -101,17 +112,6 @@ public struct VToggle<Content>: View where Content: View {
                 )
             }
         )
-    }
-
-    public init(
-        model: VToggleModel = .init(),
-        state: Binding<VToggleState>
-    )
-        where Content == Never
-    {
-        self.model = model
-        self._state = state
-        self.content = nil
     }
 
     public init(

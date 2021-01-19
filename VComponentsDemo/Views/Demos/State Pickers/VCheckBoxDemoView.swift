@@ -103,8 +103,8 @@ extension VCheckBoxDemoView {
         ControllerToggleView(
             state: .init(
                 get: {
-                    [checkBox1State, checkBox2State, checkBox3State, checkBox4State, checkBox5State, checkBox6State, checkBox7State]
-                        .contains(state)
+                    ![checkBox1State, checkBox2State, checkBox3State, checkBox4State, checkBox5State, checkBox6State, checkBox7State]
+                        .contains(where: { $0 != state })
                 },
                 set: {
                     checkBox1State = $0 ? state : .off

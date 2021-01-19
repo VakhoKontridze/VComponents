@@ -17,7 +17,7 @@ struct VBaseListDemoView: View {
     
     @State private var form: Form = .default
     
-    enum Form: Int, VPickerTitledEnumerableItem {
+    enum Form: Int, VPickableTitledItem {
         case fixed
         case flexible
         case constrained
