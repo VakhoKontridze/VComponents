@@ -100,7 +100,7 @@ extension VTableDemoView {
             VSegmentedPicker(
                 selection: $form,
                 title: "Table Height",
-                subtitle: form.subtitle
+                description: form.description
             )
                 .frame(height: 90, alignment: .top)
         })

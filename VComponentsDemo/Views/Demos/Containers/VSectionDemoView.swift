@@ -80,7 +80,7 @@ extension VSectionDemoView {
             VSegmentedPicker(
                 selection: $form,
                 title: "Section Height",
-                subtitle: form.subtitle
+                description: form.description
             )
                 .frame(height: 90, alignment: .top)
         })

@@ -22,7 +22,7 @@ extension VSheetModel {
         public var roundedCorners: RoundedCorners = .default
         public var cornerRadius: CGFloat = 15
         
-        public var contentMargin: CGFloat = 16
+        public var contentMargin: CGFloat = 15
         
         public init() {}
     }

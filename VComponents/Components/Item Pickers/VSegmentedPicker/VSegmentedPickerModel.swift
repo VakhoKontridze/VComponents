@@ -79,7 +79,7 @@ extension VSegmentedPickerModel {
             disabled: .init(componentAsset: "SegmentedPicker.Title")
         )
         
-        public var subtitle: StateColors = .init(
+        public var description: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondary
         )
@@ -106,7 +106,7 @@ extension VSegmentedPickerModel.Colors {
 extension VSegmentedPickerModel {
     public struct Fonts {
         public var title: Font = .system(size: 14, weight: .regular, design: .default)
-        public var subtitle: Font = .system(size: 13, weight: .regular, design: .default)
+        public var description: Font = .system(size: 13, weight: .regular, design: .default)
         
         public var rows: Font = .system(size: 14, weight: .medium, design: .default)    // Only applicable during init with title
         
@@ -151,8 +151,8 @@ extension VSegmentedPickerModel.Colors {
         color(for: state, from: title)
     }
     
-    func subtitleColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: subtitle)
+    func descriptionColor(for state: VSegmentedPickerState) -> Color {
+        color(for: state, from: description)
     }
     
     private func color(for state: VSegmentedPickerState, from colorSet: StateColors) -> Color {

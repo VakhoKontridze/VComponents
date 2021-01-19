@@ -17,7 +17,7 @@ struct VBaseViewDemoView: View {
     @State private var hasLeadingItem: Bool = false
     @State private var hasTrailingItem: Bool = false
     
-    private enum TitlePosition: Int, CaseIterable, VPickableTitledItem {
+    private enum TitlePosition: Int, VPickableTitledItem {
         case leading
         case center
         
@@ -69,7 +69,7 @@ extension VBaseViewDemoView {
                             model: segmentedPickerModel,
                             selection: $titlePosition,
                             title: "Title Position",
-                            subtitle: "Changing title position causes view to re-draw itself"
+                            description: "Changing title position causes view to re-draw itself"
                         )
                         
                         ToggleSettingView(isOn: $hasLeadingItem, title: "Leading items")

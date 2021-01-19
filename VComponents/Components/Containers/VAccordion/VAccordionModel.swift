@@ -51,11 +51,11 @@ extension VAccordionModel {
         
         public var cornerRadius: CGFloat = sectionLayout.cornerRadius
         
-        public var marginLeading: CGFloat = 16
-        public var marginTrailing: CGFloat = 16
+        public var marginLeading: CGFloat = 15
+        public var marginTrailing: CGFloat = 15
         public var marginTop: CGFloat = 8
         public var marginBottomCollapsed: CGFloat = 8
-        public var marginBottomExpanded: CGFloat = 16
+        public var marginBottomExpanded: CGFloat = 15
         
         public var headerDividerHeight: CGFloat = 1
         public var headerDividerMarginTop: CGFloat = 8

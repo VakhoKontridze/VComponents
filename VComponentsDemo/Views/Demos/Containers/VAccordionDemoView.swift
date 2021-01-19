@@ -100,7 +100,7 @@ extension VAccordionDemoView {
             VSegmentedPicker(
                 selection: $form,
                 title: "Accordion Height",
-                subtitle: form.subtitle
+                description: form.description
             )
                 .frame(height: 90, alignment: .top)
 

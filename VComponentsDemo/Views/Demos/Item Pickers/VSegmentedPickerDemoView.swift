@@ -25,7 +25,7 @@ struct VSegmentedPickerDemoView: View {
     @State private var segmentedPickerSelection10: Items = .red
     @State private var segmentedPickerState: VSegmentedPickerState = .enabled
     
-    private enum Items: Int, CaseIterable, VPickableTitledItem {
+    private enum Items: Int, VPickableTitledItem {
         case red
         case green
         case blue
@@ -126,12 +126,12 @@ extension VSegmentedPickerDemoView {
                     )
                 })
                 
-                DemoRowView(type: .titled("Title and Subtitle"), content: {
+                DemoRowView(type: .titled("Title and description"), content: {
                     VSegmentedPicker(
                         selection: $segmentedPickerSelection5,
                         state: segmentedPickerState,
                         title: "Lorem ipsum dolor sit amet",
-                        subtitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus."
+                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus."
                     )
                 })
                 

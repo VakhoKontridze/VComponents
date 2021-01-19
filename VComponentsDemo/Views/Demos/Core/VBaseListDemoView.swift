@@ -48,7 +48,7 @@ struct VBaseListDemoView: View {
             }
         }
         
-        var subtitle: String {
+        var description: String {
             switch self {
             case .fixed: return "Component stretches vertically to take required space. Scrolling may be enabled on page."
             case .flexible: return "Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component."
@@ -127,7 +127,7 @@ extension VBaseListDemoView {
             VSegmentedPicker(
                 selection: $form,
                 title: "Section Height",
-                subtitle: form.subtitle
+                description: form.description
             )
                 .frame(height: 90, alignment: .top)
         })

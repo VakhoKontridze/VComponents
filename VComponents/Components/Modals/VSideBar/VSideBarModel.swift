@@ -61,10 +61,10 @@ extension VSideBarModel.Layout {
 
 extension VSideBarModel.Layout {
     public struct ContentMargin {
-        public var leading: CGFloat = 16
-        public var trailing: CGFloat = 16
-        public var top: CGFloat = 16
-        public var bottom: CGFloat = 16
+        public var leading: CGFloat = 15
+        public var trailing: CGFloat = 15
+        public var top: CGFloat = 15
+        public var bottom: CGFloat = 15
         
         public init() {}
     }

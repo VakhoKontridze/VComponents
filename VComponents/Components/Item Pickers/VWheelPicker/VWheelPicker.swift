@@ -1,18 +1,18 @@
 //
-//  VSegmentedPicker.swift
+//  VWheelPicker.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 1/7/21.
+//  Created by Vakhtang Kontridze on 1/19/21.
 //
 
 import SwiftUI
 
-// MARK:- V Segmented Picker
-/// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
+// MARK:- V Wheel Picker
+/// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel
 ///
 /// Component ca be initialized with data, VPickableItem, or VPickableTitledItem
 ///
-/// Model, state, title, description, and disabled indexes can be passed as parameters
+/// Model, state, title, and description can be passed as parameters
 ///
 /// # Usage Example #
 ///
@@ -32,7 +32,7 @@ import SwiftUI
 /// @State var selection: PickerRow = .red
 ///
 /// var body: some View {
-///     VSegmentedPicker(
+///     VWheelPicker(
 ///         selection: $selection,
 ///         title: "Lorem ipsum dolor sit amet",
 ///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
@@ -40,27 +40,20 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VSegmentedPicker<Data, Content>: View
+public struct VWheelPicker<Data, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Index == Int,
         Content: View
 {
     // MARK: Properties
-    private let model: VSegmentedPickerModel
+    private let model: VWheelPickerModel
     
     @Binding private var selectedIndex: Int
-    
-    private let state: VSegmentedPickerState
-    @State private var pressedIndex: Int? = nil
-    private func rowState(for index: Int) -> VSegmentedPickerRowState { .init(
-        isEnabled: state.isEnabled && !disabledIndexes.contains(index),
-        isPressed: pressedIndex == index
-    ) }
+    private let state: VWheelPickerState
     
     private let title: String?
     private let description: String?
-    private let disabledIndexes: Set<Int>
     
     private let data: Data
     private let content: (Data.Element) -> Content
@@ -69,12 +62,11 @@ public struct VSegmentedPicker<Data, Content>: View
     
     // MARK: Initializers
     public init(
-        model: VSegmentedPickerModel = .init(),
+        model: VWheelPickerModel = .init(),
         selectedIndex: Binding<Int>,
-        state: VSegmentedPickerState = .enabled,
+        state: VWheelPickerState = .enabled,
         title: String? = nil,
         description: String? = nil,
-        disabledIndexes: Set<Int> = .init(),
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
@@ -83,18 +75,16 @@ public struct VSegmentedPicker<Data, Content>: View
         self.state = state
         self.title = title
         self.description = description
-        self.disabledIndexes = disabledIndexes
         self.data = data
         self.content = content
     }
 
     public init(
-        model: VSegmentedPickerModel = .init(),
+        model: VWheelPickerModel = .init(),
         selectedIndex: Binding<Int>,
-        state: VSegmentedPickerState = .enabled,
+        state: VWheelPickerState = .enabled,
         title: String? = nil,
         description: String? = nil,
-        disabledIndexes: Set<Int> = .init(),
         titles: [String]
     )
         where
@@ -107,7 +97,6 @@ public struct VSegmentedPicker<Data, Content>: View
             state: state,
             title: title,
             description: description,
-            disabledIndexes: disabledIndexes,
             data: titles,
             content: { title in
                 VBaseTitle(
@@ -121,12 +110,11 @@ public struct VSegmentedPicker<Data, Content>: View
     }
 
     public init<Item>(
-        model: VSegmentedPickerModel = .init(),
+        model: VWheelPickerModel = .init(),
         selection: Binding<Item>,
-        state: VSegmentedPickerState = .enabled,
+        state: VWheelPickerState = .enabled,
         title: String? = nil,
         description: String? = nil,
-        disabledItems: Set<Item> = .init(),
         @ViewBuilder content: @escaping (Item) -> Content
     )
         where
@@ -142,19 +130,17 @@ public struct VSegmentedPicker<Data, Content>: View
             state: state,
             title: title,
             description: description,
-            disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
             content: content
         )
     }
 
     public init<Item>(
-        model: VSegmentedPickerModel = .init(),
+        model: VWheelPickerModel = .init(),
         selection: Binding<Item>,
-        state: VSegmentedPickerState = .enabled,
+        state: VWheelPickerState = .enabled,
         title: String? = nil,
-        description: String? = nil,
-        disabledItems: Set<Item> = .init()
+        description: String? = nil
     )
         where
             Data == Array<Item>,
@@ -170,7 +156,6 @@ public struct VSegmentedPicker<Data, Content>: View
             state: state,
             title: title,
             description: description,
-            disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
             content: { item in
                 VBaseTitle(
@@ -185,7 +170,7 @@ public struct VSegmentedPicker<Data, Content>: View
 }
 
 // MARK:- Body
-extension VSegmentedPicker {
+extension VWheelPicker {
     public var body: some View {
         VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
             titleView
@@ -195,14 +180,19 @@ extension VSegmentedPicker {
     }
     
     private var pickerView: some View {
-        ZStack(alignment: .leading, content: {
-            background
-            indicator
-            rows
-            dividers
+        Picker(selection: $selectedIndex, label: EmptyView(), content: {
+            ForEach(0..<data.count, content: { i in
+                content(data[i])
+                    .tag(i)
+            })
         })
-            .frame(height: model.layout.height)
-            .cornerRadius(model.layout.cornerRadius)
+            .pickerStyle(WheelPickerStyle())
+            .labelsHidden()
+            
+            .disabled(!state.isEnabled) // Luckily, doesn't affect colors
+            .opacity(model.colors.foregroundOpacity(state: state))
+            
+            .background(model.colors.backgroundColor(for: state).cornerRadius(model.layout.cornerRadius))
     }
     
     @ViewBuilder private var titleView: some View {
@@ -230,107 +220,18 @@ extension VSegmentedPicker {
                 .opacity(model.colors.foregroundOpacity(state: state))
         }
     }
-    
-    private var background: some View {
-        model.colors.backgroundColor(for: state)
-    }
-    
-    private var indicator: some View {
-        RoundedRectangle(cornerRadius: model.layout.indicatorCornerRadius)
-            .padding(model.layout.indicatorMargin)
-            .frame(width: rowWidth)
-            .scaleEffect(indicatorScale)
-            .offset(x: rowWidth * .init(selectedIndex))
-            .animation(model.animation)
-            
-            .foregroundColor(model.colors.indicatorColor(for: state))
-            .shadow(
-                color: model.colors.indicatorShadowColor(for: state),
-                radius: model.layout.indicatorShadowRadius,
-                y: model.layout.indicatorShadowOffsetY
-            )
-    }
-    
-    private var rows: some View {
-        HStack(spacing: 0, content: {
-            ForEach(0..<data.count, content: { i in
-                VBaseButton(
-                    isEnabled: state.isEnabled && !disabledIndexes.contains(i),
-                    action: { selectedIndex = i },
-                    onPress: { pressedIndex = $0 ? i : nil },
-                    content: {
-                        content(data[i])
-                            .padding(model.layout.actualRowContentMargin)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-                            .opacity(foregroundOpacity(for: i))
-
-                            .readSize(onChange: { rowWidth = $0.width })
-                    }
-                )
-            })
-        })
-    }
-    
-    private var dividers: some View {
-        HStack(spacing: 0, content: {
-            ForEach(0..<data.count, content: { i in
-                Spacer()
-
-                if i <= data.count-2 {
-                    Divider()
-                        .opacity(dividerOpacity(for: i))
-                        .frame(height: model.layout.dividerHeight)
-                }
-            })
-        })
-    }
-}
-
-// MARK:- State Indication
-private extension VSegmentedPicker {
-    var indicatorScale: CGFloat {
-        switch selectedIndex {
-        case pressedIndex: return model.layout.indicatorPressedScale
-        case _: return 1
-        }
-    }
-    
-    func foregroundOpacity(for index: Int) -> Double {
-        model.colors.foregroundOpacity(state: rowState(for: index))
-    }
-    
-    func dividerOpacity(for index: Int) -> Double {
-        let isBeforeIndicator: Bool = index < selectedIndex
-        
-        switch isBeforeIndicator {
-        case false: return index - selectedIndex < 1 ? 0 : 1
-        case true: return selectedIndex - index <= 1 ? 0 : 1
-        }
-    }
 }
 
 // MARK:- Preview
-struct VSegmentedPicker_Previews: PreviewProvider {
-    @State private static var selection: PickerRow = .red
-    enum PickerRow: Int, VPickableTitledItem {
-        case red, green, blue
-    
-        var pickerTitle: String {
-            switch self {
-            case .red: return "Red"
-            case .green: return "Green"
-            case .blue: return "Blue"
-            }
-        }
-    }
+struct VWheelPicker_Previews: PreviewProvider {
+    @State private static var selection: VSegmentedPicker_Previews.PickerRow = .red
 
     static var previews: some View {
-        VSegmentedPicker(
+        VWheelPicker(
             selection: $selection,
             title: "Lorem ipsum dolor sit amet",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         )
-        .padding(20)
+            .padding(20)
     }
 }
