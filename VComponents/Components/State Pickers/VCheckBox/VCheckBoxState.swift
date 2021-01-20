@@ -24,21 +24,24 @@ public enum VCheckBoxState: Int, CaseIterable {
         }
     }
     
-    public mutating func nextState() {
-        switch self {
-        case .off: self = .on
-        case .on: self = .off
-        case .intermediate: self = .on
-        case .disabled: break
-        }
-    }
-    
     var isEnabled: Bool {
         switch self {
         case .off: return true
         case .on: return true
         case .intermediate: return true
         case .disabled: return false
+        }
+    }
+}
+
+// MARK:- Next State
+extension VCheckBoxState {
+    public mutating func nextState() {
+        switch self {
+        case .off: self = .on
+        case .on: self = .off
+        case .intermediate: self = .on
+        case .disabled: break
         }
     }
 }

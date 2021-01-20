@@ -27,7 +27,7 @@ extension VToggleModel {
         
         public var thumbDimension: CGFloat = 27
         
-        public var contentMarginLeading: CGFloat = 7
+        public var contentMarginLeading: CGFloat = 5
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2

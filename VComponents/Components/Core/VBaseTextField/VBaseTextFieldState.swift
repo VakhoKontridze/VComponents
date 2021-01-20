@@ -29,7 +29,10 @@ public enum VBaseTextFieldState: Int, CaseIterable {
         case .disabled: return false
         }
     }
-    
+}
+
+// MARK:- Next State
+extension VBaseTextFieldState {
     mutating func setFocus(from state: Bool) {
         guard isFocused != state else { return }
         

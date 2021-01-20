@@ -22,19 +22,22 @@ public enum VRadioButtonState: Int, CaseIterable {
         }
     }
     
-    public mutating func nextState() {
-        switch self {
-        case .off: self = .on
-        case .on: break
-        case .disabled: break
-        }
-    }
-    
     var isEnabled: Bool {
         switch self {
         case .off: return true
         case .on: return true
         case .disabled: return false
+        }
+    }
+}
+
+// MARK:- Next State
+extension VRadioButtonState {
+    public mutating func nextState() {
+        switch self {
+        case .off: self = .on
+        case .on: break
+        case .disabled: break
         }
     }
 }

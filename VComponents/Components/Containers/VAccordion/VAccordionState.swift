@@ -37,7 +37,10 @@ public enum VAccordionState: Int, CaseIterable {
         case .disabled: return .up
         }
     }
-    
+}
+
+// MARK:- Next State
+extension VAccordionState {
     public mutating func nextState() {
         switch self {
         case .collapsed: self = .expanded
