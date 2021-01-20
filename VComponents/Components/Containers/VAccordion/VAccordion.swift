@@ -172,7 +172,7 @@ extension VAccordion {
             Spacer()
             
             VChevronButton(
-                model: .init(),
+                model: model.chevronButonModel,
                 direction: state.chevronButtonDirection,
                 state: state.chevronButtonState,
                 action: expandCollapse

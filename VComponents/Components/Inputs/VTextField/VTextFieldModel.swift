@@ -107,6 +107,8 @@ extension VTextFieldModel {
         
         public var clearButtonDimension: CGFloat = 22
         public var clearButtonIconDimension: CGFloat = 10
+        
+        public var buttonSpacing: CGFloat = 10
 
         public var titleSpacing: CGFloat = segmentedPickerLayout.titleSpacing
         public var titleMarginHor: CGFloat = segmentedPickerLayout.titleMarginHor

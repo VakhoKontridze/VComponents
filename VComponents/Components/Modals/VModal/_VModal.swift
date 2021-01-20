@@ -124,12 +124,12 @@ extension _VModal {
     }
     
     private var closeButton: some View {
-        VCloseButton(action: dismiss)
+        VCloseButton(model: model.closeButtonModel, action: dismiss)
     }
 
     private var closeButtonCompensator: some View {
         Spacer()
-            .frame(width: model.layout.closeButtonWidth)
+            .frame(width: model.layout.closeButtonDimension)
     }
 }
 

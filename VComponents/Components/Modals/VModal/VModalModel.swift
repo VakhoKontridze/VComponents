@@ -25,6 +25,20 @@ public struct VModalModel {
         return model
     }
     
+    var closeButtonModel: VCloseButtonModel {
+        var model: VCloseButtonModel = .init()
+        
+        model.layout.dimension = layout.closeButtonDimension
+        model.layout.iconDimension = layout.closeButtonIconDimension
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = colors.closeButtonBackground
+        model.colors.content = colors.closeButtonIcon
+        
+        return model
+    }
+    
     public init() {}
 }
 
@@ -44,7 +58,8 @@ extension VModalModel {
         public var margin: CGFloat = sheetLayout.contentMargin
 
         public var closeButtonPosition: VModalCloseButtonPosition = .default
-        let closeButtonWidth: CGFloat = closeButtonLayout.dimension
+        public var closeButtonDimension: CGFloat = closeButtonLayout.dimension
+        public var closeButtonIconDimension: CGFloat = closeButtonLayout.iconDimension
         
         public var dividerHeight: CGFloat = 0
         var hasDivider: Bool { dividerHeight > 0 }
@@ -80,13 +95,25 @@ extension VModalModel.Layout {
 extension VModalModel {
     public struct Colors {
         public static let sheetColor: Color = VSheetModel().color
+        public static let closeButtonColors: VCloseButtonModel.Colors = .init()
         
         static let defaultHeader: Color = ColorBook.primary
         
         public var background: Color = sheetColor
+        
+        public var closeButtonBackground: StateColors = closeButtonColors.background
+        public var closeButtonIcon: StateColorsAndOpacity = closeButtonColors.content
+        
         public var divider: Color = .clear
+        
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")
         
         public init() {}
     }
+}
+
+extension VModalModel.Colors {
+    public typealias StateColors = VCloseButtonModel.Colors.StateColors
+    
+    public typealias StateColorsAndOpacity = VCloseButtonModel.Colors.StateColorsAndOpacity
 }

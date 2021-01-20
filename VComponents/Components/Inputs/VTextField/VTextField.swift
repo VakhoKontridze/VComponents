@@ -144,8 +144,8 @@ extension VTextField {
     }
     
     private var textFieldView: some View {
-        HStack(spacing: 10, content: {
-            HStack(spacing: 10, content: {
+        HStack(spacing: model.layout.buttonSpacing, content: {
+            HStack(spacing: model.layout.buttonSpacing, content: {
                 textFieldContentView
                 clearButton
             })

@@ -41,6 +41,20 @@ public struct VAccordionModel {
         return model
     }
     
+    var chevronButonModel: VChevronButtonModel {
+        var model: VChevronButtonModel = .init()
+        
+        model.layout.dimension = layout.chevronButtonDimension
+        model.layout.iconDimension = layout.chevronButtonIconDimension
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = colors.chevronButtonBackground
+        model.colors.content = colors.chevronButtonIcon
+        
+        return model
+    }
+    
     public init() {}
 }
 
@@ -48,6 +62,7 @@ public struct VAccordionModel {
 extension VAccordionModel {
     public struct Layout {
         public static let sectionLayout: VSectionModel.Layout = .init()
+        public static let chevronButtonLayout: VChevronButtonModel.Layout = .init()
         
         public var cornerRadius: CGFloat = sectionLayout.cornerRadius
         
@@ -66,6 +81,9 @@ extension VAccordionModel {
         public var contentMarginTop: CGFloat = 0
         public var contentMarginBottom: CGFloat = 5
         
+        public var chevronButtonDimension: CGFloat = chevronButtonLayout.dimension
+        public var chevronButtonIconDimension: CGFloat = chevronButtonLayout.iconDimension
+        
         public var dividerHeight: CGFloat = sectionLayout.dividerHeight
         
         public var itemSpacing: CGFloat = sectionLayout.itemSpacing
@@ -78,16 +96,40 @@ extension VAccordionModel {
 extension VAccordionModel {
     public struct Colors {
         public static let sectionColors: VSectionModel.Colors = .init()
+        public static let chevronButtonColors: VChevronButtonModel.Colors = .init()
         
         static let defaultHeader: Color = ColorBook.primary
         
-        public var headerDisabledOpacity: Double = 0.5
-        public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
-        public var divider: Color = sectionColors.divider
         public var background: Color = sectionColors.background
+        
+        public var header: StateOpacity = .init(
+            disabledOpacity: 0.5
+        )
+        
+        public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
+        
+        public var chevronButtonBackground: StateColors = chevronButtonColors.background
+        
+        public var chevronButtonIcon: StateColorsAndOpacity = chevronButtonColors.content
+        
+        public var divider: Color = sectionColors.divider
         
         public init() {}
     }
+}
+
+extension VAccordionModel.Colors {
+    public struct StateOpacity {
+        public var disabledOpacity: Double
+        
+        public init(disabledOpacity: Double) {
+            self.disabledOpacity = disabledOpacity
+        }
+    }
+    
+    public typealias StateColors = VChevronButtonModel.Colors.StateColors
+    
+    public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
 }
 
 // MARK:- ViewModel
@@ -96,7 +138,7 @@ extension VAccordionModel {
         switch state {
         case .collapsed: return 1
         case .expanded: return 1
-        case .disabled: return colors.headerDisabledOpacity
+        case .disabled: return colors.header.disabledOpacity
         }
     }
 }
