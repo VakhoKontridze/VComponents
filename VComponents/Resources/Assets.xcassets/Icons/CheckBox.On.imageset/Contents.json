@@ -1,16 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "CheckBox.On-1.svg",
-      "idiom" : "universal"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
       "filename" : "CheckBox.On.svg",
       "idiom" : "universal"
     }
