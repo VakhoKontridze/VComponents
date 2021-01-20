@@ -18,14 +18,13 @@ struct HomeView: View {
         .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.slider, .rangeSlider]),
-//        .init(id: 4, title: "Custom Pickers", rows: []),
-        .init(id: 5, title: "Inputs", rows: [.textField]),
-        .init(id: 6, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
-        .init(id: 7, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
-        .init(id: 8, title: "Modals", rows: [.modal, .sideBar]),
-        .init(id: 9, title: "Messages", rows: [.alert]),
-        .init(id: 10, title: "Indicators", rows: [.spinner, .progressBar]),
-        .init(id: 11, title: "Core", rows: [.baseText, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
+        .init(id: 4, title: "Inputs", rows: [.textField]),
+        .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
+        .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
+        .init(id: 7, title: "Modals", rows: [.modal, .sideBar]),
+        .init(id: 8, title: "Messages", rows: [.alert]),
+        .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar]),
+        .init(id: 10, title: "Core", rows: [.baseText, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
     ]
 
     private enum HomeRow: Int, DemoableRow {
@@ -33,7 +32,6 @@ struct HomeView: View {
         case toggle, checkBox, radioButton
         case segmentedPicker, /*dropDown,*/ wheelPicker /*, tabHeader*/
         case /*stepper,*/ slider,  rangeSlider
-        /*case*/ /*datePicker*/ /*, colorPicker*/
         case textField /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView
