@@ -156,7 +156,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
     }
 }
 
-// MARK:- View
+// MARK:- Body
 extension VTable {
     public var body: some View {
         VSheet(model: model.sheetModel, content: {

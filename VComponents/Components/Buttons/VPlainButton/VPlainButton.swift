@@ -65,7 +65,7 @@ public struct VPlainButton<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(state: state, isPressed: false)),
+                    color: model.colors.text.for(.init(state: state, isPressed: false)),
                     font: model.font,
                     type: .oneLine
                 )
@@ -93,7 +93,7 @@ extension VPlainButton {
     
     private var buttonView: some View {
         content()
-            .opacity(model.colors.contentOpacity(state: internalState))
+            .opacity(model.colors.content.for(internalState))
     }
 }
 

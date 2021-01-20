@@ -98,7 +98,7 @@ public struct VWheelPicker<Data, Content>: View
             content: { title in
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: state),
+                    color: model.colors.text.for(state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )
@@ -157,7 +157,7 @@ public struct VWheelPicker<Data, Content>: View
             content: { item in
                 VBaseText(
                     title: item.pickerTitle,
-                    color: model.colors.textColor(state: state),
+                    color: model.colors.text.for(state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )
@@ -187,21 +187,21 @@ extension VWheelPicker {
             .labelsHidden()
             
             .disabled(!state.isEnabled) // Luckily, doesn't affect colors
-            .opacity(model.colors.contentOpacity(state: state))
+            .opacity(model.colors.content.for(state))
             
-            .background(model.colors.backgroundColor(state: state).cornerRadius(model.layout.cornerRadius))
+            .background(model.colors.background.for(state).cornerRadius(model.layout.cornerRadius))
     }
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
             VBaseText(
                 title: title,
-                color: model.colors.titleColor(state: state),
+                color: model.colors.title.for(state),
                 font: model.fonts.title,
                 type: .oneLine
             )
                 .padding(.horizontal, model.layout.titleMarginHor)
-                .opacity(model.colors.contentOpacity(state: state))
+                .opacity(model.colors.content.for(state))
         }
     }
     
@@ -209,12 +209,12 @@ extension VWheelPicker {
         if let description = description, !description.isEmpty {
             VBaseText(
                 title: description,
-                color: model.colors.descriptionColor(state: state),
+                color: model.colors.description.for(state),
                 font: model.fonts.description,
                 type: .multiLine(limit: nil, alignment: .leading)
             )
                 .padding(.horizontal, model.layout.titleMarginHor)
-                .opacity(model.colors.contentOpacity(state: state))
+                .opacity(model.colors.content.for(state))
         }
     }
 }

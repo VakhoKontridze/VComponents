@@ -62,7 +62,7 @@ public struct VToggle<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)),
+                    color: model.colors.text.for(.init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -106,7 +106,7 @@ public struct VToggle<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(bool: isOn.wrappedValue, isPressed: false)),
+                    color: model.colors.text.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -146,11 +146,11 @@ extension VToggle {
         VBaseButton(isEnabled: state.isEnabled, action: action, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                    .foregroundColor(model.colors.fillColor(state: internalState))
+                    .foregroundColor(model.colors.fill.for(internalState))
 
                 Circle()
                     .frame(dimension: model.layout.thumbDimension)
-                    .foregroundColor(model.colors.thumbColor(state: internalState))
+                    .foregroundColor(model.colors.thumb.for(internalState))
                     .offset(x: thumbOffset)
             })
                 .frame(size: model.layout.size)
@@ -171,7 +171,7 @@ extension VToggle {
     ) -> some View {
         VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
-                .opacity(model.colors.contentOpacity(state: internalState))
+                .opacity(model.colors.content.for(internalState))
         })
     }
 }

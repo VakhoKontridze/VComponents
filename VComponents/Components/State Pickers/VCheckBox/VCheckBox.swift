@@ -62,7 +62,7 @@ public struct VCheckBox<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)),
+                    color: model.colors.text.for(.init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -106,7 +106,7 @@ public struct VCheckBox<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(bool: isOn.wrappedValue, isPressed: false)),
+                    color: model.colors.text.for(.init(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -146,16 +146,16 @@ extension VCheckBox {
         VBaseButton(isEnabled: state.isEnabled, action: action, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                    .foregroundColor(model.colors.fillColor(state: internalState))
+                    .foregroundColor(model.colors.fill.for(internalState))
                 
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                    .strokeBorder(model.colors.borderColor(state: internalState), lineWidth: model.layout.borderWith)
+                    .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
 
                 if let icon = icon {
                     icon
                         .resizable()
                         .frame(dimension: model.layout.iconDimension)
-                        .foregroundColor(model.colors.iconColor(state: internalState))
+                        .foregroundColor(model.colors.icon.for(internalState))
                 }
             })
                 .frame(dimension: model.layout.dimension)
@@ -177,7 +177,7 @@ extension VCheckBox {
     ) -> some View {
         VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
-                .opacity(model.colors.contentOpacity(state: internalState))
+                .opacity(model.colors.content.for(internalState))
         })
     }
 }

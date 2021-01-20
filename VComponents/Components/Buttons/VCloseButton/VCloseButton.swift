@@ -71,13 +71,13 @@ extension VCloseButton {
         ImageBook.xMark
             .resizable()
             .frame(dimension: model.layout.iconDimension)
-            .foregroundColor(model.colors.foregroundColor(state: internalState))
-            .opacity(model.colors.contentOpacity(state: internalState))
+            .foregroundColor(model.colors.content.for(internalState))
+            .opacity(model.colors.content.for(internalState))
     }
     
     private var backgroundView: some View {
         Circle()
-            .foregroundColor(model.colors.backgroundColor(state: internalState))
+            .foregroundColor(model.colors.background.for(internalState))
     }
 }
 

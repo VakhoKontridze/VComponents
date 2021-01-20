@@ -125,20 +125,17 @@ extension VAccordionModel.Colors {
         public init(disabledOpacity: Double) {
             self.disabledOpacity = disabledOpacity
         }
+        
+        func `for`(_ state: VAccordionState) -> Double {
+            switch state {
+            case .collapsed: return 1
+            case .expanded: return 1
+            case .disabled: return disabledOpacity
+            }
+        }
     }
     
     public typealias StateColors = VChevronButtonModel.Colors.StateColors
     
     public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
-}
-
-// MARK:- ViewModel
-extension VAccordionModel {
-    func headerOpacity(for state: VAccordionState) -> Double {
-        switch state {
-        case .collapsed: return 1
-        case .expanded: return 1
-        case .disabled: return colors.header.disabledOpacity
-        }
-    }
 }

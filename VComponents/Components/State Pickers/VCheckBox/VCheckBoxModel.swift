@@ -96,50 +96,33 @@ extension VCheckBoxModel.Colors {
             self.intermediate = intermediate
             self.disabled = disabled
         }
+        
+        func `for`(_ state: VCheckBoxInternalState) -> Color {
+            switch state {
+            case .off: return off
+            case .pressedOff: return off
+            case .on: return on
+            case .pressedOn: return on
+            case .intermediate: return intermediate
+            case .pressedIntermediate: return intermediate
+            case .disabled: return disabled
+            }
+        }
     }
 
     public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
 }
 
-// MARK:- ViewModel
-extension VCheckBoxModel.Colors {
-    func fillColor(state: VCheckBoxInternalState) -> Color {
-        color(from: fill, state: state)
-    }
-    
-    func borderColor(state: VCheckBoxInternalState) -> Color {
-        color(from: border, state: state)
-    }
-    
-    func iconColor(state: VCheckBoxInternalState) -> Color {
-        color(from: icon, state: state)
-    }
-
-    func contentOpacity(state: VCheckBoxInternalState) -> Double {
+extension VCheckBoxModel.Colors.StateOpacity {
+    func `for`(_ state: VCheckBoxInternalState) -> Double {
         switch state {
         case .off: return 1
-        case .pressedOff: return content.pressedOpacity
+        case .pressedOff: return pressedOpacity
         case .on: return 1
-        case .pressedOn: return content.pressedOpacity
+        case .pressedOn: return pressedOpacity
         case .intermediate: return 1
-        case .pressedIntermediate: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
-        }
-    }
-
-    func textColor(state: VCheckBoxInternalState) -> Color {
-        color(from: text, state: state)
-    }
-
-    private func color(from colorSet: StateColors, state: VCheckBoxInternalState) -> Color {
-        switch state {
-        case .off: return colorSet.off
-        case .pressedOff: return colorSet.off
-        case .on: return colorSet.on
-        case .pressedOn: return colorSet.on
-        case .intermediate: return colorSet.intermediate
-        case .pressedIntermediate: return colorSet.intermediate
-        case .disabled: return colorSet.disabled
+        case .pressedIntermediate: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }

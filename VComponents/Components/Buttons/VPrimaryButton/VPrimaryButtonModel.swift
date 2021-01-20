@@ -90,6 +90,15 @@ extension VPrimaryButtonModel.Colors {
             self.disabled = disabled
             self.loading = loading
         }
+        
+        func `for`(_ state: VPrimaryButtonInternalState) -> Color {
+            switch state {
+            case .enabled: return enabled
+            case .pressed: return pressed
+            case .disabled: return disabled
+            case .loading: return loading
+            }
+        }
     }
     
     public struct StateOpacity {
@@ -100,38 +109,14 @@ extension VPrimaryButtonModel.Colors {
             self.pressedOpacity = pressedOpacity
             self.disabledOpacity = disabledOpacity
         }
-    }
-}
-
-// MARK:- ViewModel
-extension VPrimaryButtonModel.Colors {
-    func contentOpacity(state: VPrimaryButtonInternalState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
-        case .loading: return content.disabledOpacity
-        }
-    }
-    
-    func textColor(state: VPrimaryButtonInternalState) -> Color {
-        color(from: text, state: state)
-    }
-
-    func backgroundColor(state: VPrimaryButtonInternalState) -> Color {
-        color(from: background, state: state)
-    }
-    
-    func borderColor(state: VPrimaryButtonInternalState) -> Color {
-        color(from: border, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VPrimaryButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
-        case .loading: return colorSet.loading
+        
+        func `for`(_ state: VPrimaryButtonInternalState) -> Double {
+            switch state {
+            case .enabled: return 1
+            case .pressed: return pressedOpacity
+            case .disabled: return disabledOpacity
+            case .loading: return disabledOpacity
+            }
         }
     }
 }

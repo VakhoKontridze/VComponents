@@ -87,8 +87,8 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
         textField.text = text
         
         textField.font = model.font
-        textField.textColor = .init(model.colors.text(state: state))
-        textField.alpha = .init(model.colors.textOpacity(state: state))
+        textField.textColor = .init(model.colors.text.for(state))
+        textField.alpha = .init(model.colors.text.for(state))
         textField.backgroundColor = .clear
         
         let returnKeyChanged: Bool = textField.returnKeyType != model.returnButton

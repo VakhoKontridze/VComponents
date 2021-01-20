@@ -50,18 +50,6 @@ extension VSliderModel {
 }
 
 extension VSliderModel.Colors {
-    public struct StateColors {
-        public var enabled: Color
-        public var disabled: Color
-        
-        public init(enabled: Color, disabled: Color) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
-    }
-}
-
-extension VSliderModel.Colors {
     public struct SliderColors {
         public var track: StateColors = .init(
             enabled: VSliderModel.Colors.toggleColors.fill.off,
@@ -98,32 +86,21 @@ extension VSliderModel.Colors {
     }
 }
 
-// MARK:- ViewModel
 extension VSliderModel.Colors {
-    func trackColor(state: VSliderState) -> Color {
-        color(from: slider.track, state: state)
-    }
-    
-    func progressColor(state: VSliderState) -> Color {
-        color(from: slider.progress, state: state)
-    }
-    
-    func thumbFillColor(state: VSliderState) -> Color {
-        color(from: thumb.fill, state: state)
-    }
-    
-    func thumbBorderWidth(state: VSliderState) -> Color {
-        color(from: thumb.border, state: state)
-    }
-    
-    func thumbShadow(state: VSliderState) -> Color {
-        color(from: thumb.shadow, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VSliderState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .disabled: return colorSet.disabled
+    public struct StateColors {
+        public var enabled: Color
+        public var disabled: Color
+        
+        public init(enabled: Color, disabled: Color) {
+            self.enabled = enabled
+            self.disabled = disabled
+        }
+        
+        func `for`(_ state: VSliderState) -> Color {
+            switch state {
+            case .enabled: return enabled
+            case .disabled: return disabled
+            }
         }
     }
 }

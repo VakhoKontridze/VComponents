@@ -81,38 +81,25 @@ extension VSecondaryButtonModel.Colors {
             self.pressed = pressed
             self.disabled = disabled
         }
+        
+        func `for`(_ state: VSecondaryButtonInternalState) -> Color {
+            switch state {
+            case .enabled: return enabled
+            case .pressed: return pressed
+            case .disabled: return disabled
+            }
+        }
     }
     
     public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
 }
 
-// MARK:- ViewModel
-extension VSecondaryButtonModel.Colors {
-    func contentOpacity(state: VSecondaryButtonInternalState) -> Double {
+extension VSecondaryButtonModel.Colors.StateOpacity {
+    func `for`(_ state: VSecondaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
-        }
-    }
-    
-    func textColor(state: VSecondaryButtonInternalState) -> Color {
-        color(from: text, state: state)
-    }
-
-    func backgroundColor(state: VSecondaryButtonInternalState) -> Color {
-        color(from: background, state: state)
-    }
-    
-    func borderColor(state: VSecondaryButtonInternalState) -> Color {
-        color(from: border, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VSecondaryButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }

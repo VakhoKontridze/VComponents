@@ -53,25 +53,22 @@ extension VPlainButtonModel.Colors {
     public typealias StateOpacity = VSecondaryButtonModel.Colors.StateOpacity
 }
 
-// MARK:- ViewModel
-extension VPlainButtonModel.Colors {
-    func contentOpacity(state: VPlainButtonInternalState) -> Double {
+extension VPlainButtonModel.Colors.StateColors {
+    func `for`(_ state: VPlainButtonInternalState) -> Color {
         switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
         }
     }
-    
-    func textColor(state: VPlainButtonInternalState) -> Color {
-        color(from: text, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VPlainButtonInternalState) -> Color {
+}
+
+extension VPlainButtonModel.Colors.StateOpacity {
+    func `for`(_ state: VPlainButtonInternalState) -> Double {
         switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }

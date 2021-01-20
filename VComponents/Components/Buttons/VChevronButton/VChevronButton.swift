@@ -77,14 +77,14 @@ extension VChevronButton {
         ImageBook.chevronUp
             .resizable()
             .frame(dimension: model.layout.iconDimension)
-            .foregroundColor(model.colors.foregroundColor(state: internalState))
-            .opacity(model.colors.contentOpacity(state: internalState))
+            .foregroundColor(model.colors.content.for(internalState))
+            .opacity(model.colors.content.for(internalState))
             .rotationEffect(.init(degrees: direction.angle))
     }
     
     private var backgroundView: some View {
         Circle()
-            .foregroundColor(model.colors.backgroundColor(state: internalState))
+            .foregroundColor(model.colors.background.for(internalState))
     }
 }
 

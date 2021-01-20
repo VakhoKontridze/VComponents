@@ -77,28 +77,21 @@ extension VBaseTextFieldModel.Colors {
             self.disabled = disabled
             self.disabledOpacity = disabledOpacity
         }
-    }
-}
-
-// MARK:- ViewModel
-extension VBaseTextFieldModel.Colors {
-    func text(state: VBaseTextFieldState) -> Color {
-        color(from: text, state: state)
-    }
-    
-    func textOpacity(state: VBaseTextFieldState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .focused: return 1
-        case .disabled: return text.disabledOpacity
+        
+        func `for`(_ state: VBaseTextFieldState) -> Color {
+            switch state {
+            case .enabled: return enabled
+            case .focused: return enabled
+            case .disabled: return disabled
+            }
         }
-    }
-    
-    private func color(from colorSet: StateColorsAndOpacity, state: VBaseTextFieldState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .focused: return colorSet.enabled
-        case .disabled: return colorSet.disabled
+        
+        func `for`(_ state: VBaseTextFieldState) -> Double {
+            switch state {
+            case .enabled: return 1
+            case .focused: return 1
+            case .disabled: return disabledOpacity
+            }
         }
     }
 }

@@ -64,6 +64,22 @@ extension VWheelPickerModel.Colors {
         public init(disabledOpacity: Double) {
             self.disabledOpacity = disabledOpacity
         }
+        
+        func `for`(_ state: VWheelPickerState) -> Double {
+            switch state {
+            case .enabled: return 1
+            case .disabled: return disabledOpacity
+            }
+        }
+    }
+}
+
+extension VWheelPickerModel.Colors.StateColors {
+    func `for`(_ state: VWheelPickerState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .disabled: return disabled
+        }
     }
 }
 
@@ -78,38 +94,5 @@ extension VWheelPickerModel {
         public var rows: Font = segmentedPickerFonts.rows    // Only applicable during init with title
         
         public init() {}
-    }
-}
-
-// MARK:- ViewModel
-extension VWheelPickerModel.Colors {
-    func contentOpacity(state: VWheelPickerState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .disabled: return content.disabledOpacity
-        }
-    }
-    
-    func textColor(state: VWheelPickerState) -> Color {
-        color(from: text, state: state)
-    }
-    
-    func backgroundColor(state: VWheelPickerState) -> Color {
-        color(from: background, state: state)
-    }
-    
-    func titleColor(state: VWheelPickerState) -> Color {
-        color(from: title, state: state)
-    }
-    
-    func descriptionColor(state: VWheelPickerState) -> Color {
-        color(from: description, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VWheelPickerState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .disabled: return colorSet.disabled
-        }
     }
 }

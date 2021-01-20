@@ -50,38 +50,3 @@ extension VCloseButtonModel.Colors {
     
     public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
 }
-
-// MARK:- ViewModel
-extension VCloseButtonModel.Colors {
-    func foregroundColor(state: VCloseButtonInternalState) -> Color {
-        color(from: content, state: state)
-    }
-    
-    func contentOpacity(state: VCloseButtonInternalState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
-        }
-    }
-    
-    func backgroundColor(state: VCloseButtonInternalState) -> Color {
-        color(from: background, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VCloseButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
-        }
-    }
-
-    private func color(from colorSet: StateColorsAndOpacity, state: VCloseButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
-        }
-    }
-}

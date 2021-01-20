@@ -89,7 +89,7 @@ public struct VRadioButton<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)),
+                    color: model.colors.text.for(.init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -133,7 +133,7 @@ public struct VRadioButton<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(bool: isOn.wrappedValue, isPressed: false)),
+                    color: model.colors.text.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -188,7 +188,7 @@ public struct VRadioButton<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: selectingValue.pickerTitle,
-                    color: model.colors.textColor(state: .init(bool: selection.wrappedValue == selectingValue, isPressed: false)),
+                    color: model.colors.text.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -218,15 +218,15 @@ extension VRadioButton {
             ZStack(content: {
                 Circle()
                     .frame(dimension: model.layout.dimension)
-                    .foregroundColor(model.colors.fillColor(state: internalState))
+                    .foregroundColor(model.colors.fill.for(internalState))
                 
                 Circle()
-                    .strokeBorder(model.colors.borderColor(state: internalState), lineWidth: model.layout.borderWith)
+                    .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
                     .frame(dimension: model.layout.dimension)
                 
                 Circle()
                     .frame(dimension: model.layout.bulletDimension)
-                    .foregroundColor(model.colors.bulletColor(state: internalState))
+                    .foregroundColor(model.colors.bullet.for(internalState))
             })
                 .frame(dimension: model.layout.dimension)
                 .padding(model.layout.hitBox)
@@ -247,7 +247,7 @@ extension VRadioButton {
     ) -> some View {
         VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { isPressed = $0 }, content: {
             content()
-                .opacity(model.colors.contentOpacity(state: internalState))
+                .opacity(model.colors.content.for(internalState))
         })
     }
 }

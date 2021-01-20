@@ -34,7 +34,7 @@ public struct VTextFieldModel {
         model.layout.textAlignment = layout.textAlignment
         
         model.colors.text = .init(
-            enabled: colors.textColor(state: state),    // .disabled wouldn't matter
+            enabled: colors.text.for(state),    // .disabled wouldn't matter
             disabled: colors.text.disabled,
             disabledOpacity: colors.content.disabledOpacity
         )
@@ -60,14 +60,14 @@ public struct VTextFieldModel {
         model.layout.hitBoxVer = 0
         
         model.colors.background = .init(
-            enabled: colors.color(from: colors.clearButtonBackground, state: state, highlight: highlight),  // .disabled wouldn't matter
-            pressed: colors.color(from: colors.clearButtonBackground, highlight: highlight),
+            enabled: colors.clearButtonBackground.for(state, highlight: highlight),  // .disabled wouldn't matter
+            pressed: colors.clearButtonBackground.for(highlight: highlight),
             disabled: colors.clearButtonBackground.disabled
         )
         
         model.colors.content = .init(
-            enabled: colors.color(from: colors.clearButtonIcon, state: state, highlight: highlight),    // .disabled wouldn't matter
-            pressed: colors.color(from: colors.clearButtonIcon, highlight: highlight),
+            enabled: colors.clearButtonIcon.for(state, highlight: highlight),       // .disabled wouldn't matter
+            pressed: colors.clearButtonIcon.for(highlight: highlight),
             disabled: colors.clearButtonIcon.disabled,
             pressedOpacity: Colors.closeButtonColors.content.pressedOpacity,
             disabledOpacity: Colors.closeButtonColors.content.disabledOpacity
@@ -277,6 +277,14 @@ extension VTextFieldModel.Colors {
             self.focused = focused
             self.disabled = disabled
         }
+        
+        func `for`(_ state: VTextFieldState) -> Color {
+            switch state {
+            case .enabled: return enabled
+            case .focused: return focused
+            case .disabled: return disabled
+            }
+        }
     }
     
     public struct StateColorsHighlighted {
@@ -293,6 +301,18 @@ extension VTextFieldModel.Colors {
             self.error = error
             self.disabled = disabled
         }
+        
+        func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
+            switch (highlight, state) {
+            case (_, .disabled): return disabled
+            case (.none, .enabled): return enabled
+            case (.none, .focused): return focused
+            case (.success, .enabled): return success
+            case (.success, .focused): return success
+            case (.error, .enabled): return error
+            case (.error, .focused): return error
+            }
+        }
     }
     
     public struct StateOpacity {
@@ -300,6 +320,14 @@ extension VTextFieldModel.Colors {
         
         public init(disabledOpacity: Double) {
             self.disabledOpacity = disabledOpacity
+        }
+        
+        func `for`(_ state: VTextFieldState) -> Double {
+            switch state {
+            case .enabled: return 1
+            case .focused: return 1
+            case .disabled: return disabledOpacity
+            }
         }
     }
     
@@ -325,6 +353,26 @@ extension VTextFieldModel.Colors {
             self.errorPressed = errorPressed
             self.disabled = disabled
         }
+        
+        func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
+            switch (highlight, state) {
+            case (_, .disabled): return disabled
+            case (.none, .enabled): return enabled
+            case (.none, .focused): return focused
+            case (.success, .enabled): return success
+            case (.success, .focused): return success
+            case (.error, .enabled): return error
+            case (.error, .focused): return error
+            }
+        }
+        
+        fileprivate func `for`(highlight: VTextFieldHighlight) -> Color {
+            switch highlight {
+            case .none: return enabledPressed
+            case .success: return successPressed
+            case .error: return errorPressed
+            }
+        }
     }
     
     public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
@@ -346,84 +394,5 @@ extension VTextFieldModel {
         public var cancelButton: Font = cancelButtonFont
         
         public init() {}
-    }
-}
-
-// MARK:- ViewModel
-extension VTextFieldModel.Colors {
-    func contentOpacity(state: VTextFieldState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .focused: return 1
-        case .disabled: return content.disabledOpacity
-        }
-    }
-    
-    func textColor(state: VTextFieldState) -> Color {
-        color(from: text, state: state)
-    }
-    
-    func backgroundColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        color(from: background, state: state, highlight: highlight)
-    }
-    
-    func borderColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        color(from: border, state: state, highlight: highlight)
-    }
-    
-    func titleColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        color(from: title, state: state, highlight: highlight)
-    }
-    
-    func descriptionColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        color(from: description, state: state, highlight: highlight)
-    }
-    
-    func searchIconColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        color(from: searchIcon, state: state, highlight: highlight)
-    }
-    
-    func visibilityIconColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        color(from: visibilityButtonIcon, state: state, highlight: highlight)
-    }
-    
-    private func color(from colorSet: StateColors, state: VTextFieldState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .focused: return colorSet.focused
-        case .disabled: return colorSet.disabled
-        }
-    }
-    
-    private func color(from colorSet: StateColorsHighlighted, state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        switch (highlight, state) {
-        case (_, .disabled): return colorSet.disabled
-        case (.none, .enabled): return colorSet.enabled
-        case (.none, .focused): return colorSet.focused
-        case (.success, .enabled): return colorSet.success
-        case (.success, .focused): return colorSet.success
-        case (.error, .enabled): return colorSet.error
-        case (.error, .focused): return colorSet.error
-        }
-    }
-    
-    fileprivate func color(from colorSet: ButtonStateColorsHighlighted, state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-        switch (highlight, state) {
-        case (_, .disabled): return colorSet.disabled
-        case (.none, .enabled): return colorSet.enabled
-        case (.none, .focused): return colorSet.focused
-        case (.success, .enabled): return colorSet.success
-        case (.success, .focused): return colorSet.success
-        case (.error, .enabled): return colorSet.error
-        case (.error, .focused): return colorSet.error
-        }
-    }
-    
-    fileprivate func color(from colorSet: ButtonStateColorsHighlighted, highlight: VTextFieldHighlight) -> Color {
-        switch highlight {
-        case .none: return colorSet.enabledPressed
-        case .success: return colorSet.successPressed
-        case .error: return colorSet.errorPressed
-        }
     }
 }

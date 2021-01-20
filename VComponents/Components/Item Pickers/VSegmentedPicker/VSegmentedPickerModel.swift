@@ -97,9 +97,33 @@ extension VSegmentedPickerModel.Colors {
             self.enabled = enabled
             self.disabled = disabled
         }
+        
+        func `for`(_ state: VSegmentedPickerState) -> Color {
+            switch state {
+            case .enabled: return enabled
+            case .disabled: return disabled
+            }
+        }
     }
     
     public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
+}
+
+extension VSegmentedPickerModel.Colors.StateOpacity {
+    func `for`(_ state: VSegmentedPickerState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .disabled: return disabledOpacity
+        }
+    }
+    
+    func `for`(_ state: VSegmentedPickerRowState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
+        }
+    }
 }
 
 // MARK:- Fonts
@@ -111,54 +135,5 @@ extension VSegmentedPickerModel {
         public var rows: Font = .system(size: 14, weight: .medium, design: .default)    // Only applicable during init with title
         
         public init() {}
-    }
-}
-
-// MARK:- ViewModel
-extension VSegmentedPickerModel.Colors {
-    func contentOpacity(state: VSegmentedPickerState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .disabled: return content.disabledOpacity
-        }
-    }
-    
-    func contentOpacity(state: VSegmentedPickerRowState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
-        }
-    }
-    
-    func textColor(state: VSegmentedPickerState) -> Color {
-        color(from: text, state: state)
-    }
-    
-    func indicatorColor(state: VSegmentedPickerState) -> Color {
-        color(from: indicator, state: state)
-    }
-    
-    func indicatorShadowColor(state: VSegmentedPickerState) -> Color {
-        color(from: indicatorShadow, state: state)
-    }
-    
-    func backgroundColor(state: VSegmentedPickerState) -> Color {
-        color(from: background, state: state)
-    }
-    
-    func titleColor(state: VSegmentedPickerState) -> Color {
-        color(from: title, state: state)
-    }
-    
-    func descriptionColor(state: VSegmentedPickerState) -> Color {
-        color(from: description, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VSegmentedPickerState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .disabled: return colorSet.disabled
-        }
     }
 }

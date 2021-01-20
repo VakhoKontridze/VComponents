@@ -65,7 +65,7 @@ public struct VSecondaryButton<Content>: View where Content: View {
             content: {
                 VBaseText(
                     title: title,
-                    color: model.colors.textColor(state: .init(state: state, isPressed: false)),
+                    color: model.colors.text.for(.init(state: state, isPressed: false)),
                     font: model.font,
                     type: .oneLine
                 )
@@ -102,18 +102,18 @@ extension VSecondaryButton {
         content()
             .padding(.horizontal, model.layout.contentMarginHor)
             .padding(.vertical, model.layout.contentMarginVer)
-            .opacity(model.colors.contentOpacity(state: internalState))
+            .opacity(model.colors.content.for(internalState))
     }
     
     private var backgroundView: some View {
         RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-            .foregroundColor(model.colors.backgroundColor(state: internalState))
+            .foregroundColor(model.colors.background.for(internalState))
     }
     
     @ViewBuilder private var border: some View {
         if model.layout.hasBorder {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .strokeBorder(model.colors.borderColor(state: internalState), lineWidth: model.layout.borderWidth)
+                .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWidth)
         }
     }
 }

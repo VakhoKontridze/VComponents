@@ -60,40 +60,29 @@ extension VChevronButtonModel.Colors {
         public var disabled: Color
         public var pressedOpacity: Double
         public var disabledOpacity: Double
-    }
-}
-
-// MARK:- ViewModel
-extension VChevronButtonModel.Colors {
-    func foregroundColor(state: VChevronButtonInternalState) -> Color {
-        color(from: content, state: state)
-    }
-    
-    func contentOpacity(state: VChevronButtonInternalState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
+        
+        public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double, disabledOpacity: Double) {
+            self.enabled = enabled
+            self.pressed = pressed
+            self.disabled = disabled
+            self.pressedOpacity = pressedOpacity
+            self.disabledOpacity = disabledOpacity
         }
-    }
-    
-    func backgroundColor(state: VChevronButtonInternalState) -> Color {
-        color(from: background, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VChevronButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
+        
+        func `for`(_ state: VChevronButtonInternalState) -> Color {
+            switch state {
+            case .enabled: return enabled
+            case .pressed: return pressed
+            case .disabled: return disabled
+            }
         }
-    }
-
-    private func color(from colorSet: StateColorsAndOpacity, state: VChevronButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
+        
+        func `for`(_ state: VChevronButtonInternalState) -> Double {
+            switch state {
+            case .enabled: return 1
+            case .pressed: return pressedOpacity
+            case .disabled: return disabledOpacity
+            }
         }
     }
 }

@@ -74,33 +74,22 @@ extension VSquareButtonModel.Colors {
     public typealias StateOpacity = VSecondaryButtonModel.Colors.StateOpacity
 }
 
-// MARK:- ViewModel
-extension VSquareButtonModel.Colors {
-    func contentOpacity(state: VSquareButtonInternalState) -> Double {
+extension VSquareButtonModel.Colors.StateColors {
+    func `for`(_ state: VSquareButtonInternalState) -> Color {
         switch state {
-        case .enabled: return 1
-        case .pressed: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
         }
     }
-    
-    func textColor(state: VSquareButtonInternalState) -> Color {
-        color(from: text, state: state)
-    }
+}
 
-    func backgroundColor(state: VSquareButtonInternalState) -> Color {
-        color(from: background, state: state)
-    }
-    
-    func borderColor(state: VSquareButtonInternalState) -> Color {
-        color(from: border, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VSquareButtonInternalState) -> Color {
+extension VSquareButtonModel.Colors.StateOpacity {
+    func `for`(_ state: VSquareButtonInternalState) -> Double {
         switch state {
-        case .enabled: return colorSet.enabled
-        case .pressed: return colorSet.pressed
-        case .disabled: return colorSet.disabled
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }

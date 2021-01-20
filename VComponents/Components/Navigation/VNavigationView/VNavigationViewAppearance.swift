@@ -36,7 +36,7 @@ struct VNavigationViewAppearance: ViewModifier {
     }
 }
 
-// MARK:- View
+// MARK:- Body
 extension VNavigationViewAppearance {
     func body(content: Content) -> some View {
         content

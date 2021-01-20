@@ -31,7 +31,7 @@ struct VTabNavigationViewAppearance: ViewModifier {
     }
 }
 
-// MARK:- View
+// MARK:- Body
 extension VTabNavigationViewAppearance {
     func body(content: Content) -> some View {
         content

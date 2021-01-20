@@ -81,41 +81,26 @@ extension VRadioButtonModel.Colors {
     public typealias StateOpacity = VToggleModel.Colors.StateOpacity
 }
 
-// MARK:- ViewModel
-extension VRadioButtonModel.Colors {
-    func fillColor(state: VRadioButtonInternalState) -> Color {
-        color(from: fill, state: state)
-    }
-    
-    func borderColor(state: VRadioButtonInternalState) -> Color {
-        color(from: border, state: state)
-    }
-    
-    func bulletColor(state: VRadioButtonInternalState) -> Color {
-        color(from: bullet, state: state)
-    }
-
-    func contentOpacity(state: VRadioButtonInternalState) -> Double {
+extension VRadioButtonModel.Colors.StateColors {
+    func `for`(_ state: VRadioButtonInternalState) -> Color {
         switch state {
-        case .off: return 1
-        case .pressedOff: return content.pressedOpacity
-        case .on: return 1
-        case .pressedOn: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
+        case .off: return off
+        case .pressedOff: return off
+        case .on: return on
+        case .pressedOn: return on
+        case .disabled: return disabled
         }
     }
+}
 
-    func textColor(state: VRadioButtonInternalState) -> Color {
-        color(from: text, state: state)
-    }
-
-    private func color(from colorSet: StateColors, state: VRadioButtonInternalState) -> Color {
+extension VRadioButtonModel.Colors.StateOpacity {
+    func `for`(_ state: VRadioButtonInternalState) -> Double {
         switch state {
-        case .off: return colorSet.off
-        case .pressedOff: return colorSet.off
-        case .on: return colorSet.on
-        case .pressedOn: return colorSet.on
-        case .disabled: return colorSet.disabled
+        case .off: return 1
+        case .pressedOff: return pressedOpacity
+        case .on: return 1
+        case .pressedOn: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }

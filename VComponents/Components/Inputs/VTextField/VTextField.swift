@@ -179,12 +179,12 @@ extension VTextField {
         if let title = title, !title.isEmpty {
             VBaseText(
                 title: title,
-                color: model.colors.titleColor(state: state, highlight: highlight),
+                color: model.colors.title.for(state, highlight: highlight),
                 font: model.fonts.title,
                 type: .oneLine
             )
                 .padding(.horizontal, model.layout.titleMarginHor)
-                .opacity(model.colors.contentOpacity(state: state))
+                .opacity(model.colors.content.for(state))
         }
     }
     
@@ -210,8 +210,8 @@ extension VTextField {
             ImageBook.search
                 .resizable()
                 .frame(dimension: model.layout.searchIconDimension)
-                .foregroundColor(model.colors.searchIconColor(state: state, highlight: highlight))
-                .opacity(model.colors.contentOpacity(state: state))
+                .foregroundColor(model.colors.searchIcon.for(state, highlight: highlight))
+                .opacity(model.colors.content.for(state))
         }
     }
     
@@ -249,7 +249,7 @@ extension VTextField {
                     visiblityIcon
                         .resizable()
                         .frame(dimension: model.layout.visibilityButtonIconDimension)
-                        .foregroundColor(model.colors.visibilityIconColor(state: state, highlight: highlight))
+                        .foregroundColor(model.colors.visibilityButtonIcon.for(state, highlight: highlight))
                 }
             )
         }
@@ -269,10 +269,10 @@ extension VTextField {
     private var background: some View {
         ZStack(content: {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .foregroundColor(model.colors.backgroundColor(state: state, highlight: highlight))
+                .foregroundColor(model.colors.background.for(state, highlight: highlight))
             
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .strokeBorder(model.colors.borderColor(state: state, highlight: highlight), lineWidth: model.layout.borderWidth)
+                .strokeBorder(model.colors.border.for(state, highlight: highlight), lineWidth: model.layout.borderWidth)
         })
     }
     
@@ -280,12 +280,12 @@ extension VTextField {
         if let description = description, !description.isEmpty {
             VBaseText(
                 title: description,
-                color: model.colors.descriptionColor(state: state, highlight: highlight),
+                color: model.colors.description.for(state, highlight: highlight),
                 font: model.fonts.description,
                 type: .multiLine(limit: nil, alignment: .leading)
             )
                 .padding(.horizontal, model.layout.titleMarginHor)
-                .opacity(model.colors.contentOpacity(state: state))
+                .opacity(model.colors.content.for(state))
         }
     }
 }

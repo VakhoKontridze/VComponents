@@ -81,42 +81,29 @@ extension VToggleModel.Colors {
             self.on = on
             self.disabled = disabled
         }
+        
+        func `for`(_ state: VToggleInternalState) -> Color {
+            switch state {
+            case .off: return off
+            case .pressedOff: return off
+            case .on: return on
+            case .pressedOn: return on
+            case .disabled: return disabled
+            }
+        }
     }
 
     public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
 }
 
-// MARK:- ViewModel
-extension VToggleModel.Colors {
-    func fillColor(state: VToggleInternalState) -> Color {
-        color(from: fill, state: state)
-    }
-    
-    func thumbColor(state: VToggleInternalState) -> Color {
-        color(from: thumb, state: state)
-    }
-    
-    func contentOpacity(state: VToggleInternalState) -> Double {
+extension VToggleModel.Colors.StateOpacity {
+    func `for`(_ state: VToggleInternalState) -> Double {
         switch state {
         case .off: return 1
-        case .pressedOff: return content.pressedOpacity
+        case .pressedOff: return pressedOpacity
         case .on: return 1
-        case .pressedOn: return content.pressedOpacity
-        case .disabled: return content.disabledOpacity
-        }
-    }
-    
-    func textColor(state: VToggleInternalState) -> Color {
-        color(from: text, state: state)
-    }
-    
-    private func color(from colorSet: StateColors, state: VToggleInternalState) -> Color {
-        switch state {
-        case .off: return colorSet.off
-        case .pressedOff: return colorSet.off
-        case .on: return colorSet.on
-        case .pressedOn: return colorSet.on
-        case .disabled: return colorSet.disabled
+        case .pressedOn: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }
