@@ -14,14 +14,14 @@ struct VModalDemoView: View {
     static let navigationBarTitle: String = "Modal"
     
     @State private var hasTitle: Bool = true
-    @State private var closeButtonPosition: VModalModel.Layout.VModalCloseButtonPosition
+    @State private var closeButton: Set<VModalModel.Layout.VModalCloseButton>
     
     @State private var isPresented: Bool = false
     
     private var modalModel: VModalModel {
         var model: VModalModel = .init()
         
-        model.layout.closeButtonPosition = closeButtonPosition
+        model.layout.closeButton = closeButton
         
         return model
     }
@@ -34,7 +34,7 @@ struct VModalDemoView: View {
     
     // MARK: Initializers
     init() {
-        self._closeButtonPosition = State(initialValue: .default)
+        self._closeButton = State(initialValue: [.default])
     }
 }
 
@@ -46,7 +46,16 @@ extension VModalDemoView {
                 VStack(spacing: 20, content: {
                     ToggleSettingView(isOn: $hasTitle, title: "Title")
                     
-                    VSegmentedPicker(model: pickerModel, selection: $closeButtonPosition, title: "Close Button Position")
+                    VStack(spacing: 3, content: {
+                        VBaseText(title: "Close Button", color: ColorBook.primary, font: .callout, type: .oneLine)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        
+                        HStack(content: {
+                            ForEach(VModalModel.Layout.VModalCloseButton.allCases, id: \.rawValue, content: { position in
+                                closeButtonView(position)
+                            })
+                        })
+                    })
                     
                     VSecondaryButton(action: { isPresented = true }, title: "Demo Modal")
                 })
@@ -74,11 +83,26 @@ extension VModalDemoView {
             )
     }
     
+    private func closeButtonView(_ position: VModalModel.Layout.VModalCloseButton) -> some View {
+        VCheckBox(
+            isOn: .init(
+                get: { closeButton.contains(position) },
+                set: { isOn in
+                    switch isOn {
+                    case false: closeButton.remove(position)
+                    case true: closeButton.insert(position)
+                    }
+                }
+            ),
+            title: position.title
+        )
+    }
+    
     private var modalContent: some View {
         ZStack(content: {
             Color.red.opacity(0.5)
             
-            if closeButtonPosition == .none {
+            if closeButton.isEmpty {
                 VStack(content: {
                     VBaseText(
                         title: "When close button is \"none\", Modal can only be dismissed programatically",
@@ -97,10 +121,9 @@ extension VModalDemoView {
 }
 
 // MARK:- Helpers
-extension VModalModel.Layout.VModalCloseButtonPosition: VPickableTitledItem {
-    public var pickerTitle: String {
+private extension VModalModel.Layout.VModalCloseButton {
+    var title: String {
         switch self {
-        case .none: return "None"
         case .leading: return "Leading"
         case .trailing: return "Trailing"
         case .backTap: return "Back Tap"

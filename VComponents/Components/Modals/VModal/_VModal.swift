@@ -24,7 +24,7 @@ struct _VModal<Content, HeaderContent>: View
     let appearAction: (() -> Void)?
     let disappearAction: (() -> Void)?
     
-    var headerExists: Bool { headerContent != nil || model.layout.closeButtonPosition.exists }
+    var headerExists: Bool { headerContent != nil || model.layout.closeButton.hasButton }
     
     // MARK: Initializers
     init(
@@ -83,38 +83,28 @@ extension _VModal {
             .padding(model.layout.margin)
     }
     
+    
     @ViewBuilder private var headerView: some View {
-        switch (headerContent, model.layout.closeButtonPosition) {
-        case (nil, .leading):
-            closeButton
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-        case (nil, .trailing):
-            closeButton
-                .frame(maxWidth: .infinity, alignment: .trailing)
-            
-        case (nil, _):
-            EmptyView()
-            
-        case (let headerContent?, .leading):
+        if headerExists {
             HStack(spacing: model.layout.headerSpacing, content: {
-                closeButton
-                headerContent()
+                if model.layout.closeButton.contains(.leading) {
+                    closeButton
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                
+                if let headerContent = headerContent {
+                    headerContent()
+                        .layoutPriority(1)  // Overrides close button's maxWidth: .infinity. Also, header content is by default maxWidth and leading justified.
+                }
+                
+                if model.layout.closeButton.contains(.trailing) {
+                    closeButton
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                }
             })
-            
-        case (let headerContent?, .trailing):
-            HStack(spacing: 0, content: {
-                headerContent()
-                Spacer()
-                closeButton
-            })
-            
-        case (let headerContent?, _):
-            headerContent()
-                .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
-
+    
     @ViewBuilder private var dividerView: some View {
         if headerExists && model.layout.hasDivider {
             Rectangle()
@@ -137,6 +127,13 @@ extension _VModal {
 private extension _VModal {
     func dismiss() {
         withAnimation { isPresented = false }
+    }
+}
+
+// MARK:- Helpers
+private extension Set where Element == VModalModel.Layout.VModalCloseButton {
+    var hasButton: Bool {
+        contains(where: { [.leading, .trailing].contains($0) })
     }
 }
 

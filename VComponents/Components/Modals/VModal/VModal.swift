@@ -96,7 +96,7 @@ extension View {
                     content: _VModal(isPresented: isPresented, modal: modal()),
                     blinding: modal().model.colors.blinding.edgesIgnoringSafeArea(.all),
                     onBackTap: {
-                        if modal().model.layout.closeButtonPosition == .backTap {
+                        if modal().model.layout.closeButton.contains(.backTap) {
                             withAnimation { isPresented.wrappedValue = false }
                         }
                     }
