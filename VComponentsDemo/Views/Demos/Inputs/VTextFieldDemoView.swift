@@ -127,7 +127,7 @@ extension VTextFieldType: VPickableTitledItem {
 extension VTextFieldHighlight: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
-        case .standard: return "Standard"
+        case .none: return "None"
         case .success:  return "Success"
         case .error:  return "Error"
         }

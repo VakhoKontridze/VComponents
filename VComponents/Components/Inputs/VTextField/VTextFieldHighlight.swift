@@ -8,11 +8,11 @@
 import Foundation
 
 // MARK:- V Text Field Highlight
-/// State that describes highlight state, such as normal, success, or error
+/// State that describes highlight state, such as none, success, or error
 public enum VTextFieldHighlight: Int, CaseIterable {
-    case standard
+    case none
     case success
     case error
     
-    public static let `default`: Self = .standard
+    public static let `default`: Self = .none
 }

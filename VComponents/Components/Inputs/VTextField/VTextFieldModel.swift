@@ -398,8 +398,8 @@ extension VTextFieldModel.Colors {
     private func color(from colorSet: StateColorsHighlighted, state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         switch (highlight, state) {
         case (_, .disabled): return colorSet.disabled
-        case (.standard, .enabled): return colorSet.enabled
-        case (.standard, .focused): return colorSet.focused
+        case (.none, .enabled): return colorSet.enabled
+        case (.none, .focused): return colorSet.focused
         case (.success, .enabled): return colorSet.success
         case (.success, .focused): return colorSet.success
         case (.error, .enabled): return colorSet.error
@@ -410,8 +410,8 @@ extension VTextFieldModel.Colors {
     fileprivate func color(from colorSet: ButtonStateColorsHighlighted, state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         switch (highlight, state) {
         case (_, .disabled): return colorSet.disabled
-        case (.standard, .enabled): return colorSet.enabled
-        case (.standard, .focused): return colorSet.focused
+        case (.none, .enabled): return colorSet.enabled
+        case (.none, .focused): return colorSet.focused
         case (.success, .enabled): return colorSet.success
         case (.success, .focused): return colorSet.success
         case (.error, .enabled): return colorSet.error
@@ -421,7 +421,7 @@ extension VTextFieldModel.Colors {
     
     fileprivate func color(from colorSet: ButtonStateColorsHighlighted, highlight: VTextFieldHighlight) -> Color {
         switch highlight {
-        case .standard: return colorSet.enabledPressed
+        case .none: return colorSet.enabledPressed
         case .success: return colorSet.successPressed
         case .error: return colorSet.errorPressed
         }
