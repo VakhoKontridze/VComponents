@@ -50,7 +50,7 @@ struct VAccordionDemoView: View {
                 .foregroundColor(color.opacity(0.8))
                 .frame(dimension: 32)
 
-            VBaseText(
+            VText(
                 title: title,
                 color: ColorBook.primary,
                 font: .body,

@@ -31,7 +31,7 @@ struct HomeView: View {
     private enum HomeRow: Int, DemoableRow {
         case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink
         case toggle, checkBox, radioButton
-        case segmentedPicker, /* pagingPicker,*/ wheelPicker /*, dropDown*/
+        case segmentedPicker, /*dropDown,*/ wheelPicker /*, tabHeader*/
         case /*stepper,*/ slider,  rangeSlider
         /*case*/ /*datePicker*/ /*, colorPicker*/
         case textField /*, textView*/
@@ -80,7 +80,7 @@ struct HomeView: View {
             case .spinner: return VSpinnerDemoView.navigationBarTitle
             case .progressBar: return VProgressBarDemoView.navigationBarTitle
 
-            case .baseText: return VBaseTextDemoView.navigationBarTitle
+            case .baseText: return VTextDemoView.navigationBarTitle
             case .baseButton: return VBaseButtonDemoView.navigationBarTitle
             case .baseTextField: return VBaseTextFieldDemoView.navigationBarTitle
             case .lazyList: return VLazyListDemoView.navigationBarTitle
@@ -127,7 +127,7 @@ struct HomeView: View {
             case .spinner: VSpinnerDemoView()
             case .progressBar: VProgressBarDemoView()
 
-            case .baseText: VBaseTextDemoView()
+            case .baseText: VTextDemoView()
             case .baseButton: VBaseButtonDemoView()
             case .baseTextField: VBaseTextFieldDemoView()
             case .lazyList: VLazyListDemoView()

@@ -20,7 +20,7 @@ extension VNavigationViewDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    VBaseText(
+                    VText(
                         title: "Navigation View should only ever be used on a root view. Continue?",
                         color: ColorBook.primary,
                         font: .body,
@@ -129,7 +129,7 @@ extension NavigationDemoView {
                 .opacity(0.25)
                 .edgesIgnoringSafeArea(.all)
             
-            VBaseText(
+            VText(
                 title: instruction,
                 color: ColorBook.primary,
                 font: .system(size: 16, weight: .semibold, design: .default),

@@ -107,7 +107,7 @@ extension VSegmentedPickerDemoView {
                             HStack(spacing: 5, content: {
                                 item.pickerSymbol
                                 
-                                VBaseText(
+                                VText(
                                     title: item.pickerTitle,
                                     color: ColorBook.primary,
                                     font: VSegmentedPickerModel.Fonts().rows,

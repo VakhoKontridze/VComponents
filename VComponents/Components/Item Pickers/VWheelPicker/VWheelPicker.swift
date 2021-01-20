@@ -86,7 +86,7 @@ public struct VWheelPicker<Data, Content>: View
     )
         where
             Data == Array<String>,
-            Content == VBaseText
+            Content == VText
     {
         self.init(
             model: model,
@@ -96,7 +96,7 @@ public struct VWheelPicker<Data, Content>: View
             description: description,
             data: titles,
             content: { title in
-                VBaseText(
+                VText(
                     title: title,
                     color: model.colors.text.for(state),
                     font: model.fonts.rows,
@@ -141,7 +141,7 @@ public struct VWheelPicker<Data, Content>: View
     )
         where
             Data == Array<Item>,
-            Content == VBaseText,
+            Content == VText,
             Item: VPickableTitledItem
     {
         self.init(
@@ -155,7 +155,7 @@ public struct VWheelPicker<Data, Content>: View
             description: description,
             data: .init(Item.allCases),
             content: { item in
-                VBaseText(
+                VText(
                     title: item.pickerTitle,
                     color: model.colors.text.for(state),
                     font: model.fonts.rows,
@@ -194,7 +194,7 @@ extension VWheelPicker {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VBaseText(
+            VText(
                 title: title,
                 color: model.colors.title.for(state),
                 font: model.fonts.title,
@@ -207,7 +207,7 @@ extension VWheelPicker {
     
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
-            VBaseText(
+            VText(
                 title: description,
                 color: model.colors.description.for(state),
                 font: model.fonts.description,

@@ -46,7 +46,7 @@ extension VNavigationLinkDemoView {
                         HStack(spacing: 5, content: {
                             buttonContent()
                             
-                            VBaseText(
+                            VText(
                                 title: buttonTitle,
                                 color: ColorBook.accent,
                                 font: VSecondaryButtonModel().font,

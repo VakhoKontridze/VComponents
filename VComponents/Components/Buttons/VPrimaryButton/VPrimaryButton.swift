@@ -57,14 +57,14 @@ public struct VPrimaryButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Content == VBaseText
+        where Content == VText
     {
         self.init(
             model: model,
             state: state,
             action: action,
             content: {
-                VBaseText(
+                VText(
                     title: title,
                     color: model.colors.text.for(.init(state: state, isPressed: false)),
                     font: model.font,

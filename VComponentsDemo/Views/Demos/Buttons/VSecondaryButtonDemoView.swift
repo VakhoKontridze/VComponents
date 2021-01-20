@@ -67,7 +67,7 @@ extension VSecondaryButtonDemoView {
                         HStack(spacing: 5, content: {
                             buttonContent()
                             
-                            VBaseText(
+                            VText(
                                 title: buttonTitle,
                                 color: ColorBook.primaryInverted,
                                 font: VSecondaryButtonModel().font,

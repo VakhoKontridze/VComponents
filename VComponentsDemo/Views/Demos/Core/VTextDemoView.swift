@@ -1,5 +1,5 @@
 //
-//  VBaseTextDemoView.swift
+//  VTextDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 1/12/21.
@@ -8,8 +8,8 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Base View Demo View
-struct VBaseTextDemoView: View {
+// MARK:- V Text Demo View
+struct VTextDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base Title"
     
@@ -22,27 +22,27 @@ struct VBaseTextDemoView: View {
 }
 
 // MARK:- Body
-extension VBaseTextDemoView {
+extension VTextDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .rowed, content: {
                 DemoRowView(type: .titled("Leading"), content: {
-                    VBaseText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
+                    VText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 })
                 
                 DemoRowView(type: .titled("Centered"), content: {
-                    VBaseText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
+                    VText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
                         .frame(maxWidth: .infinity, alignment: .center)
                 })
                 
                 DemoRowView(type: .titled("Trailing"), content: {
-                    VBaseText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
+                    VText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 })
                 
                 DemoRowView(type: .titled("Multi-Line"), content: {
-                    VBaseText(title: baseTextText, color: titleColor, font: textFont, type: .multiLine(limit: 5, alignment: .leading))
+                    VText(title: baseTextText, color: titleColor, font: textFont, type: .multiLine(limit: 5, alignment: .leading))
                 })
             })
         })
@@ -50,8 +50,8 @@ extension VBaseTextDemoView {
 }
 
 // MARK:- Preview
-struct VBaseTextDemoView_Previews: PreviewProvider {
+struct VTextDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VBaseTextDemoView()
+        VTextDemoView()
     }
 }

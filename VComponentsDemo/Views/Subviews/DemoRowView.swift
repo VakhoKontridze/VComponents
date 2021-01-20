@@ -46,7 +46,7 @@ extension DemoRowView {
                 content()
                 
                 if case .titled(let title) = rowType {
-                    VBaseText(
+                    VText(
                         title: title,
                         color: ColorBook.secondary,
                         font: .footnote,

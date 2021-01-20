@@ -27,10 +27,10 @@ struct ToggleSettingView<Content>: View where Content: View {
         isOn: Binding<Bool>,
         title: String
     )
-        where Content == VBaseText
+        where Content == VText
     {
         self._isOn = isOn
-        self.content = { VBaseText(title: title, color: ColorBook.primary, font: .callout, type: .oneLine) }
+        self.content = { VText(title: title, color: ColorBook.primary, font: .callout, type: .oneLine) }
     }
     
     init(
@@ -38,19 +38,19 @@ struct ToggleSettingView<Content>: View where Content: View {
         title: String,
         description: String
     )
-        where Content == VStack<TupleView<(VBaseText, VBaseText)>>
+        where Content == VStack<TupleView<(VText, VText)>>
     {
         self._isOn = isOn
         self.content = {
             VStack(alignment: .leading, spacing: 3, content: {
-                VBaseText(
+                VText(
                     title: title,
                     color: ColorBook.primary,
                     font: .callout,
                     type: .oneLine
                 )
                 
-                VBaseText(
+                VText(
                     title: description,
                     color: ColorBook.secondary,
                     font: .footnote,

@@ -27,7 +27,7 @@ extension ControllerToggleView {
         VStack(content: {
             VToggle(state: $isOn)
             
-            VBaseText(
+            VText(
                 title: title,
                 color: ColorBook.primary,
                 font: .footnote,

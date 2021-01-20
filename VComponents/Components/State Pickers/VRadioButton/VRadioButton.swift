@@ -81,13 +81,13 @@ public struct VRadioButton<Content>: View where Content: View {
         state: Binding<VRadioButtonState>,
         title: String
     )
-        where Content == VBaseText
+        where Content == VText
     {
         self.init(
             model: model,
             state: state,
             content: {
-                VBaseText(
+                VText(
                     title: title,
                     color: model.colors.text.for(.init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
@@ -125,13 +125,13 @@ public struct VRadioButton<Content>: View where Content: View {
         isOn: Binding<Bool>,
         title: String
     )
-        where Content == VBaseText
+        where Content == VText
     {
         self.init(
             model: model,
             state: .init(bool: isOn),
             content: {
-                VBaseText(
+                VText(
                     title: title,
                     color: model.colors.text.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,
@@ -176,7 +176,7 @@ public struct VRadioButton<Content>: View where Content: View {
         selects selectingValue: Item
     )
         where
-            Content == VBaseText,
+            Content == VText,
             Item: VPickableTitledItem
     {
         self.init(
@@ -186,7 +186,7 @@ public struct VRadioButton<Content>: View where Content: View {
                 set: { if $0.isOn { selection.wrappedValue = selectingValue } }
             ),
             content: {
-                VBaseText(
+                VText(
                     title: selectingValue.pickerTitle,
                     color: model.colors.text.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
                     font: model.font,

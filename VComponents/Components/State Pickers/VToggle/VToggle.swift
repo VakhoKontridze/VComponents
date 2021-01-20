@@ -54,13 +54,13 @@ public struct VToggle<Content>: View where Content: View {
         state: Binding<VToggleState>,
         title: String
     )
-        where Content == VBaseText
+        where Content == VText
     {
         self.init(
             model: model,
             state: state,
             content: {
-                VBaseText(
+                VText(
                     title: title,
                     color: model.colors.text.for(.init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
@@ -98,13 +98,13 @@ public struct VToggle<Content>: View where Content: View {
         isOn: Binding<Bool>,
         title: String
     )
-        where Content == VBaseText
+        where Content == VText
     {
         self.init(
             model: model,
             state: .init(bool: isOn),
             content: {
-                VBaseText(
+                VText(
                     title: title,
                     color: model.colors.text.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,

@@ -94,7 +94,7 @@ extension VBaseViewNavigationBarCenter {
             Spacer()
 
             HStack(spacing: model.layout.spacing, content: {
-                VBaseText(
+                VText(
                     title: title,
                     color: model.titleColor,
                     font: model.font,

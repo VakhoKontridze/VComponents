@@ -47,7 +47,7 @@ extension VModalDemoView {
                     ToggleSettingView(isOn: $hasTitle, title: "Title")
                     
                     VStack(spacing: 3, content: {
-                        VBaseText(title: "Close Button", color: ColorBook.primary, font: .callout, type: .oneLine)
+                        VText(title: "Close Button", color: ColorBook.primary, font: .callout, type: .oneLine)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack(content: {
@@ -104,7 +104,7 @@ extension VModalDemoView {
             
             if closeButton.isEmpty {
                 VStack(content: {
-                    VBaseText(
+                    VText(
                         title: "When close button is \"none\", Modal can only be dismissed programatically",
                         color: ColorBook.primary,
                         font: .system(size: 14, weight: .semibold, design: .default),

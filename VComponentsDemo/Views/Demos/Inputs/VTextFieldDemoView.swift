@@ -75,7 +75,7 @@ extension VTextFieldDemoView {
                     
                     VAccordion(state: $buttonsAccordionState, header: { VAccordionDefaultHeader(title: "Buttons") }, content: {
                         VStack(spacing: 20, content: {
-                            VBaseText(
+                            VText(
                                 title: "Return Button can als be set. Not shown here.",
                                 color: ColorBook.primary,
                                 font: .callout,
