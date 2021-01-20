@@ -201,7 +201,7 @@ extension VAccordion {
             case .freeForm(let content):
                 content()
                     .padding(.leading, model.layout.contentMarginLeading)
-                    .padding(.trailing, model.layout.contentMarginTrailing)
+                    .padding(.trailing, model.layout.marginTrailing + model.layout.contentMarginTrailing)
                     .padding(.top, model.layout.contentMarginTop)
                     .padding(.bottom, model.layout.contentMarginBottom)
                 

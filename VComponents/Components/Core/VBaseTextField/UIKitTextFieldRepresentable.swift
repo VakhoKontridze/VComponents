@@ -73,9 +73,13 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
     private func setBindedValues(_ textField: FocusableTextField, context: Context) {
         textField.isUserInteractionEnabled = state.isEnabled
         
-        textField.textAlignment = model.layout.textAlignment.nsTextAlignment
+        let keybardTypeChanged: Bool = textField.keyboardType != model.keyboardType
+        textField.keyboardType = model.keyboardType
+        if keybardTypeChanged { textField.reloadInputViews() }
         
         textField.autocorrectionType = model.useAutoCorrect ? .yes : .no
+        
+        textField.textAlignment = model.layout.textAlignment.nsTextAlignment
         
         textField.placeholder = placeholder
         textField.text = text
@@ -85,11 +89,9 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
         textField.alpha = .init(model.colors.textOpacity(state: state))
         textField.backgroundColor = .clear
         
-        textField.keyboardType = model.keyboardType
-        
-        let shouldReloadInputValues: Bool = textField.returnKeyType != model.returnButton
+        let returnKeyChanged: Bool = textField.returnKeyType != model.returnButton
         textField.returnKeyType = model.returnButton
-        if shouldReloadInputValues { textField.reloadInputViews() }
+        if returnKeyChanged { textField.reloadInputViews() }
 
         switch state.isFocused {
         case false:

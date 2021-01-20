@@ -13,26 +13,69 @@ struct VBaseTextFieldDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base TextField"
     
+    @State private var stateAccordionState: VAccordionState = .expanded
+    @State private var textsAccordionState: VAccordionState = .collapsed
+    @State private var formattingAccordionState: VAccordionState = .collapsed
+    
     @State private var textFieldState: VBaseTextFieldState = .enabled
     @State private var hasPlaceholder: Bool = true
+    @State private var numericalKeyboard: Bool = false
+    @State private var textAlignment: VBaseTextFieldModel.Layout.TextAlignment = .default
+    @State private var hasAutoCorrect: Bool = VBaseTextFieldModel().useAutoCorrect
     @State private var textFieldText: String = ""
+    
+    private var textFieldModel: VBaseTextFieldModel {
+        var model: VBaseTextFieldModel = .init()
+        
+        model.keyboardType = numericalKeyboard ? .numberPad : .default
+        model.useAutoCorrect = hasAutoCorrect
+        
+        model.layout.textAlignment = textAlignment
+        
+        return model
+    }
 }
 
 // MARK:- Body
 extension VBaseTextFieldDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .section, content: {
+            DemoView(type: .freeFormFlexible, content: {
                 VStack(spacing: 20, content: {
-                    VSegmentedPicker(selection: $textFieldState, title: "State")
+                    VAccordion(state: $stateAccordionState, header: { VAccordionDefaultHeader(title: "State") }, content: {
+                        VStack(spacing: 20, content: {
+                            VSegmentedPicker(selection: $textFieldState, title: "State")
+                        })
+                    })
                     
-                    ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
+                    VAccordion(state: $textsAccordionState, header: { VAccordionDefaultHeader(title: "Texts") }, content: {
+                        VStack(spacing: 20, content: {
+                            ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
+                        })
+                    })
                     
-                    VBaseTextField(
-                        state: $textFieldState,
-                        placeholder: hasPlaceholder ? "Lorem ipsum" : "",
-                        text: $textFieldText
-                    )
+                    VAccordion(state: $formattingAccordionState, header: { VAccordionDefaultHeader(title: "Formatting") }, content: {
+                        VStack(spacing: 20, content: {
+                            ToggleSettingView(
+                                isOn: $numericalKeyboard,
+                                title: "Numerical Keyboard",
+                                description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
+                            )
+                            
+                            ToggleSettingView(isOn: $hasAutoCorrect, title: "Autocorrect")
+                            
+                            VSegmentedPicker(selection: $textAlignment, title: "Alignment")
+                        })
+                    })
+                    
+                    VSheet(content: {
+                        VBaseTextField(
+                            model: textFieldModel,
+                            state: $textFieldState,
+                            placeholder: hasPlaceholder ? "Lorem ipsum" : "",
+                            text: $textFieldText
+                        )
+                    })
                 })
             })
         })
@@ -46,6 +89,17 @@ extension VBaseTextFieldState: VPickableTitledItem {
         case .enabled: return "Enabled"
         case .focused: return "Focused"
         case .disabled: return "Disabled"
+        }
+    }
+}
+
+extension VTextFieldModel.Layout.TextAlignment: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .leading: return "Leading"
+        case .center: return "Center"
+        case .trailing: return "Trailing"
+        case .automatic: return "Automatic"
         }
     }
 }

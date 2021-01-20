@@ -107,7 +107,7 @@ extension VTextFieldModel {
         public var height: CGFloat = 50
         public var cornerRadius: CGFloat = 10
         
-        public var textAlignment: VBaseTextFieldModel.Layout.TextAlignment = .default
+        public var textAlignment: TextAlignment = .default
         
         public var borderWidth: CGFloat = 2
         
@@ -123,6 +123,10 @@ extension VTextFieldModel {
         
         public init() {}
     }
+}
+
+extension VTextFieldModel.Layout {
+    public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
 }
 
 // MARK:- Colors

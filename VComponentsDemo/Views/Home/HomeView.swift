@@ -136,41 +136,18 @@ struct HomeView: View {
             }
         }
     }
-    
-    let model: VTextFieldModel = {
-        var model: VTextFieldModel = .init()
-        
-        
-        
-        return model
-    }()
-    
-    @State private var state: VTextFieldState = .enabled
-    @State private var text: String = "Lorem ipsum"
-    
-    var body: some View {
-        VTextField(
-            model: model,
-            state: $state,
-            placeholder: "Lorem ipsum",
-            title: "Lorem ipsum dolor sit amet",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            text: $text
-        )
-            .padding()
-    }
 }
 
-//// MARK:- Body
-//extension HomeView {
-//    var body: some View {
-//        VNavigationView(content: {
-//            VBaseView(title: Self.navigationBarTitle, content: {
-//                DemoListView(type: .accordion, sections: sections)
-//            })
-//        })
-//    }
-//}
+// MARK:- Body
+extension HomeView {
+    var body: some View {
+        VNavigationView(content: {
+            VBaseView(title: Self.navigationBarTitle, content: {
+                DemoListView(type: .accordion, sections: sections)
+            })
+        })
+    }
+}
 
 // MARK:- Preview
 struct HomeView_Previews: PreviewProvider {

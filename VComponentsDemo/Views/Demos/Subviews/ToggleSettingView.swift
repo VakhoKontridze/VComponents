@@ -9,15 +9,55 @@ import SwiftUI
 import VComponents
 
 // MARK:- Toggle Setting View
-struct ToggleSettingView: View {
+struct ToggleSettingView<Content>: View where Content: View {
     // MARK: Properties
     @Binding private var isOn: Bool
-    private let title: String
+    private let content: () -> Content
     
     // MARK: Initailizers
-    init(isOn: Binding<Bool>, title: String) {
+    init(
+        isOn: Binding<Bool>,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
         self._isOn = isOn
-        self.title = title
+        self.content = content
+    }
+    
+    init(
+        isOn: Binding<Bool>,
+        title: String
+    )
+        where Content == VBaseText
+    {
+        self._isOn = isOn
+        self.content = { VBaseText(title: title, color: ColorBook.primary, font: .callout, type: .oneLine) }
+    }
+    
+    init(
+        isOn: Binding<Bool>,
+        title: String,
+        description: String
+    )
+        where Content == VStack<TupleView<(VBaseText, VBaseText)>>
+    {
+        self._isOn = isOn
+        self.content = {
+            VStack(alignment: .leading, spacing: 3, content: {
+                VBaseText(
+                    title: title,
+                    color: ColorBook.primary,
+                    font: .callout,
+                    type: .oneLine
+                )
+                
+                VBaseText(
+                    title: description,
+                    color: ColorBook.secondary,
+                    font: .footnote,
+                    type: .multiLine(limit: nil, alignment: .leading)
+                )
+            })
+        }
     }
 }
 
@@ -25,7 +65,7 @@ struct ToggleSettingView: View {
 extension ToggleSettingView {
     var body: some View {
         HStack(spacing: 0, content: {
-            VBaseText(title: title, color: ColorBook.primary, font: .callout, type: .oneLine)
+            content()
             Spacer()
             VToggle(isOn: $isOn)
         })
