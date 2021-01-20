@@ -98,13 +98,12 @@ extension VTextFieldModel {
     public struct Layout {
         public static let segmentedPickerLayout: VSegmentedPickerModel.Layout = .init()
         
-        var height: CGFloat { margin * 2 + clearButtonDimension }
-        
-        public var margin: CGFloat = 15
-        
+        public var height: CGFloat = 50
         public var cornerRadius: CGFloat = 10
         
         public var borderWidth: CGFloat = 2
+        
+        public var contentMarginHorizontal: CGFloat = 15
         
         public var clearButtonDimension: CGFloat = 22
         public var clearButtonIconDimension: CGFloat = 10

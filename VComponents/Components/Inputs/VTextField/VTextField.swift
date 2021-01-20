@@ -149,12 +149,13 @@ extension VTextField {
                 textFieldContentView
                 clearButton
             })
-                .padding(model.layout.margin)
+                .padding(.horizontal, model.layout.contentMarginHorizontal)
                 .frame(height: model.layout.height)
                 .background(background)
             
             cancelButton
         })
+            .frame(height: model.layout.height)
     }
     
     private var textFieldContentView: some View {
