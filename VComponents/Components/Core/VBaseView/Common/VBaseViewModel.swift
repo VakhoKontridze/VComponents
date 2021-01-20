@@ -5,13 +5,64 @@
 //  Created by Vakhtang Kontridze on 12/24/20.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK:- V Base View Model
-/// Enum of models that describe UI
-public enum VBaseViewModel {
-    case centerTitle(_ model: VBaseViewModelCenter = .init())
-    case leadingTitle(_ model: VBaseViewModelLeading = .init())
+/// Model that describes UI
+public struct VBaseViewModel {
+    public var layout: Layout = .init()
+    public var colors: Colors = .init()
+    public var titleColor: Color = ColorBook.primary
+    public var font: Font = .system(size: 17, weight: .semibold, design: .default)
     
-    public static let `default`: Self = .leadingTitle()
+    var backButtonModel: VChevronButtonModel {
+        var model: VChevronButtonModel = .init()
+        
+        model.layout.dimension = layout.backButtonDimension
+        model.layout.iconDimension = layout.backButtonIconDimension
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = colors.closeButtonBackground
+        model.colors.content = colors.closeButtonIcon
+        
+        return model
+    }
+    
+    public init() {}
+}
+
+// MARK:- Layout
+extension VBaseViewModel {
+    public struct Layout {
+        public static let chevronButtonLayout: VChevronButtonModel.Layout = .init()
+        
+        public var margin: CGFloat = 15
+        public var spacing: CGFloat = 10
+        var width: CGFloat { UIScreen.main.bounds.width - 2 * margin }
+        
+        public var backButtonDimension: CGFloat = chevronButtonLayout.dimension
+        public var backButtonIconDimension: CGFloat = chevronButtonLayout.iconDimension
+
+        public init() {}
+    }
+}
+
+// MARK:- Colors
+extension VBaseViewModel {
+    public struct Colors {
+        public static let chevronButtonColors: VChevronButtonModel.Colors = .init()
+        
+        public var closeButtonBackground: StateColors = chevronButtonColors.background
+        
+        public var closeButtonIcon: StateColorsAndOpacity = chevronButtonColors.content
+        
+        public init() {}
+    }
+}
+
+extension VBaseViewModel.Colors {
+    public typealias StateColors = VChevronButtonModel.Colors.StateColors
+    
+    public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
 }

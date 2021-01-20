@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- Modifier
 extension View {
     func setUpBaseViewNavigationBarLeading<LeadingItem, TrailingItem>(
-        model: VBaseViewModelLeading,
+        model: VBaseViewModel,
         title: String,
         leadingItemContent: (() -> LeadingItem)?,
         trailingItemContent: (() -> TrailingItem)?,
@@ -40,7 +40,7 @@ struct VBaseViewNavigationBarLeading<TrailingItem, LeadingItem>: ViewModifier
 {
     // MARK: Properties
     private let title: String
-    private let model: VBaseViewModelLeading
+    private let model: VBaseViewModel
     
     private let leadingItemContent: (() -> LeadingItem)?
     private let trailingItemContent: (() -> TrailingItem)?
@@ -50,7 +50,7 @@ struct VBaseViewNavigationBarLeading<TrailingItem, LeadingItem>: ViewModifier
     
     // MARK: Initializers
     init(
-        model: VBaseViewModelLeading,
+        model: VBaseViewModel,
         title: String,
         leadingItemContent: (() -> LeadingItem)?,
         trailingItemContent: (() -> TrailingItem)?,

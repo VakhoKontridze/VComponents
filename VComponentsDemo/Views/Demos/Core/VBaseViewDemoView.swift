@@ -29,10 +29,10 @@ struct VBaseViewDemoView: View {
         }
     }
     
-    var viewModel: VBaseViewModel {
+    private var viewType: VBaseViewType {
         switch titlePosition {
-        case .leading: return .leadingTitle()
-        case .center: return .centerTitle()
+        case .leading: return .leadingTitle
+        case .center: return .centerTitle
         }
     }
     
@@ -58,7 +58,7 @@ struct VBaseViewDemoView: View {
 extension VBaseViewDemoView {
     var body: some View {
         VBaseView(
-            model: viewModel,
+            type: viewType,
             title: Self.navigationBarTitle,
             leadingItem: leadingItem,
             trailingItem: trailingItem,
