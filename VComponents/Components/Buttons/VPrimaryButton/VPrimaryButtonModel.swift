@@ -29,7 +29,7 @@ extension VPrimaryButtonModel {
         public var height: CGFloat = 50
         public var cornerRadius: CGFloat = 20
         
-        public var borderWidth: CGFloat = 1
+        public var borderWidth: CGFloat = 0
         var hasBorder: Bool { borderWidth > 0 }
         
         public var contentMarginHor: CGFloat = 15

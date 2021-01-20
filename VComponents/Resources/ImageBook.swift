@@ -14,10 +14,17 @@ struct ImageBook {
 
 // MARK:- Images
 extension ImageBook {
-    static let chevronUp: Image = .init(componentAsset: "Chevron.Up")
-    static let xMark: Image = .init(componentAsset: "XMark")
     static let checkBoxOn: Image = .init(componentAsset: "CheckBox.On")
     static let checkBoxInterm: Image = .init(componentAsset: "CheckBox.Interm")
+    
+    static let chevronUp: Image = .init(componentAsset: "Chevron.Up")
+    
+    static let search: Image = .init(componentAsset: "Search")
+    
+    static let visibilityOff: Image = .init(componentAsset: "Visibility.off")
+    static let visibilityOn: Image = .init(componentAsset: "Visibility.on")
+    
+    static let xMark: Image = .init(componentAsset: "XMark")
 }
 
 // MARK:- Helper

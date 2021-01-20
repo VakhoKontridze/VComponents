@@ -73,6 +73,8 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
     private func setBindedValues(_ textField: FocusableTextField, context: Context) {
         textField.isUserInteractionEnabled = state.isEnabled
         
+        textField.isSecureTextEntry = model.isSecureTextEntry
+        
         let keybardTypeChanged: Bool = textField.keyboardType != model.keyboardType
         textField.keyboardType = model.keyboardType
         if keybardTypeChanged { textField.reloadInputViews() }

@@ -25,7 +25,7 @@ extension VSecondaryButtonModel {
         public var height: CGFloat = 32
         var cornerRadius: CGFloat { height / 2 }
         
-        public var borderWidth: CGFloat = 1
+        public var borderWidth: CGFloat = 0
         var hasBorder: Bool { borderWidth > 0 }
         
         public var contentMarginHor: CGFloat = 10

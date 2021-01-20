@@ -18,6 +18,7 @@ struct VTextFieldDemoView: View {
     @State private var buttonsAccordionState: VAccordionState = .collapsed
     @State private var formattingAccordionState: VAccordionState = .collapsed
     
+    @State private var textFieldType: VTextFieldType = .default
     @State private var textFieldState: VTextFieldState = .enabled
     @State private var textFieldHighlight: VTextFieldHighlight = .default
     @State private var hasPlaceholder: Bool = true
@@ -52,8 +53,10 @@ extension VTextFieldDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .freeFormFlexible, content: {
                 VStack(spacing: 20, content: {
-                    VAccordion(state: $stateAccordionState, header: { VAccordionDefaultHeader(title: "State") }, content: {
+                    VAccordion(state: $stateAccordionState, header: { VAccordionDefaultHeader(title: "General") }, content: {
                         VStack(spacing: 20, content: {
+                            VSegmentedPicker(selection: $textFieldType, title: "Type")
+                            
                             VSegmentedPicker(selection: $textFieldState, title: "State")
                             
                             VSegmentedPicker(selection: $textFieldHighlight, title: "Highlight")
@@ -95,6 +98,7 @@ extension VTextFieldDemoView {
                     VSheet(content: {
                         VTextField(
                             model: textFieldModel,
+                            type: textFieldType,
                             state: $textFieldState,
                             highlight: textFieldHighlight,
                             placeholder: hasPlaceholder ? textFieldPlaceholder : "",
@@ -110,6 +114,16 @@ extension VTextFieldDemoView {
 }
 
 // MARK:- Helpers
+extension VTextFieldType: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .standard: return "Standard"
+        case .secure: return "Secure"
+        case .search: return "Search"
+        }
+    }
+}
+
 extension VTextFieldHighlight: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {

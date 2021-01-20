@@ -28,7 +28,7 @@ public struct VTextFieldModel {
     
     public var cancelButton: String? = nil
     
-    func baseTextFieldModel(state: VTextFieldState) -> VBaseTextFieldModel {
+    func baseTextFieldModel(state: VTextFieldState, isSecureTextEntry: Bool) -> VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         
         model.layout.textAlignment = layout.textAlignment
@@ -40,6 +40,8 @@ public struct VTextFieldModel {
         )
         
         model.font = fonts.textFont
+        
+        model.isSecureTextEntry = isSecureTextEntry
         
         model.keyboardType = keyboardType
         model.useAutoCorrect = useAutoCorrect
@@ -69,6 +71,30 @@ public struct VTextFieldModel {
             disabled: colors.clearButtonIcon.disabled,
             pressedOpacity: Colors.closeButtonColors.content.pressedOpacity,
             disabledOpacity: Colors.closeButtonColors.content.disabledOpacity
+        )
+        
+        return model
+    }
+    
+    func visibilityButtonModel(state: VTextFieldState, highlight: VTextFieldHighlight) -> VSquareButtonModel {
+        var model: VSquareButtonModel = .init()
+        
+        model.layout.dimension = layout.visibilityButtonDimension
+        model.layout.cornerRadius = layout.visibilityButtonDimension / 2
+        model.layout.contentMarginHor = 0
+        model.layout.contentMarginVer = 0
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = .init(
+            enabled: .clear,
+            pressed: .clear,
+            disabled: .clear
+        )
+        
+        model.colors.content = .init(
+            pressedOpacity: Colors.squareButtonColors.content.pressedOpacity,
+            disabledOpacity: Colors.squareButtonColors.content.disabledOpacity
         )
         
         return model
@@ -113,8 +139,13 @@ extension VTextFieldModel {
         
         public var contentMarginHorizontal: CGFloat = 15
         
+        public var searchIconDimension: CGFloat = 15
+        
         public var clearButtonDimension: CGFloat = 22
         public var clearButtonIconDimension: CGFloat = 10
+        
+        public var visibilityButtonDimension: CGFloat = 22
+        public var visibilityButtonIconDimension: CGFloat = 20
         
         public var buttonSpacing: CGFloat = 10
 
@@ -133,6 +164,7 @@ extension VTextFieldModel.Layout {
 extension VTextFieldModel {
     public struct Colors {
         public static let segmentedPickerColors: VSegmentedPickerModel.Colors = .init()
+        public static let squareButtonColors: VSquareButtonModel.Colors = .init()
         public static let plainButtonColors: VPlainButtonModel.Colors = .init()
         public static let closeButtonColors: VCloseButtonModel.Colors = .init()
         
@@ -176,6 +208,26 @@ extension VTextFieldModel {
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
             disabled: segmentedPickerColors.description.disabled
+        )
+        
+        public var searchIcon: StateColorsHighlighted = .init(
+            enabled: segmentedPickerColors.title.enabled,
+            focused: segmentedPickerColors.title.enabled,
+            success: .init(componentAsset: "TextField.Border.success"),
+            error: .init(componentAsset: "TextField.Border.error"),
+            disabled: segmentedPickerColors.title.disabled
+        )
+        
+        public var visibilityButtonIcon: ButtonStateColorsHighlighted = .init(
+            enabled: segmentedPickerColors.title.enabled,
+            enabledPressed: segmentedPickerColors.title.enabled,
+            focused: segmentedPickerColors.title.enabled,
+            focusedPressed: segmentedPickerColors.title.enabled,
+            success: .init(componentAsset: "TextField.Border.success"),
+            successPressed: .init(componentAsset: "TextField.Border.success"),
+            error: .init(componentAsset: "TextField.Border.error"),
+            errorPressed: .init(componentAsset: "TextField.Border.error"),
+            disabled: segmentedPickerColors.title.disabled
         )
         
         public var clearButtonBackground: ButtonStateColorsHighlighted = .init(
@@ -325,6 +377,14 @@ extension VTextFieldModel.Colors {
     
     func descriptionColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         color(from: description, state: state, highlight: highlight)
+    }
+    
+    func searchIconColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
+        color(from: searchIcon, state: state, highlight: highlight)
+    }
+    
+    func visibilityIconColor(state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
+        color(from: visibilityButtonIcon, state: state, highlight: highlight)
     }
     
     private func color(from colorSet: StateColors, state: VTextFieldState) -> Color {

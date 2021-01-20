@@ -32,7 +32,7 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// Full use of overriden action and event callbacks lookes like this:
+/// Full use of overriden action and event callbacks:
 /// ```
 /// @State private var state: VBaseTextFieldState = .enabled
 /// @State private var text: String = "Lorem ipsum"

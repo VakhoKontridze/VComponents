@@ -17,6 +17,7 @@ struct VBaseTextFieldDemoView: View {
     @State private var textsAccordionState: VAccordionState = .collapsed
     @State private var formattingAccordionState: VAccordionState = .collapsed
     
+    @State private var isSecure: Bool = VBaseTextFieldModel().isSecureTextEntry
     @State private var textFieldState: VBaseTextFieldState = .enabled
     @State private var hasPlaceholder: Bool = true
     @State private var numericalKeyboard: Bool = false
@@ -27,6 +28,7 @@ struct VBaseTextFieldDemoView: View {
     private var textFieldModel: VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         
+        model.isSecureTextEntry = isSecure
         model.keyboardType = numericalKeyboard ? .numberPad : .default
         model.useAutoCorrect = hasAutoCorrect
         
@@ -42,8 +44,10 @@ extension VBaseTextFieldDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .freeFormFlexible, content: {
                 VStack(spacing: 20, content: {
-                    VAccordion(state: $stateAccordionState, header: { VAccordionDefaultHeader(title: "State") }, content: {
+                    VAccordion(state: $stateAccordionState, header: { VAccordionDefaultHeader(title: "General") }, content: {
                         VStack(spacing: 20, content: {
+                            ToggleSettingView(isOn: $isSecure, title: "Secure Field")
+                            
                             VSegmentedPicker(selection: $textFieldState, title: "State")
                         })
                     })
@@ -68,14 +72,12 @@ extension VBaseTextFieldDemoView {
                         })
                     })
                     
-                    VSheet(content: {
-                        VBaseTextField(
-                            model: textFieldModel,
-                            state: $textFieldState,
-                            placeholder: hasPlaceholder ? "Lorem ipsum" : "",
-                            text: $textFieldText
-                        )
-                    })
+                    VBaseTextField(
+                        model: textFieldModel,
+                        state: $textFieldState,
+                        placeholder: hasPlaceholder ? "Lorem ipsum" : "",
+                        text: $textFieldText
+                    )
                 })
             })
         })

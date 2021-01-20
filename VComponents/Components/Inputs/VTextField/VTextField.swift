@@ -10,7 +10,11 @@ import SwiftUI
 // MARK:- V Text Field
 /// Input component that displays an editable text interface
 ///
-/// Model, highligh, palceholder, title, subtitle, and event callbacks can be passed as parameters
+/// Model, type, highlight, palceholder, title, subtitle, and event callbacks can be passed as parameters
+///
+/// By default, component type is standard.
+/// If secure type is used, visiblity button would replace clear button. When text field is secure, clear and cancel buttons are not visible.
+/// If search type is used, a magnification glass icon would appear on the left.
 ///
 /// It is possible to override actions of return, clear, and cancel buttons by passing them as a parameter
 ///
@@ -32,7 +36,7 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// Full use of overriden actions and event callbacks looks like this:
+/// Full use of overriden actions and event callbacks:
 /// ```
 /// let model: VTextFieldModel = {
 ///     var model: VTextFieldModel = .init()
@@ -66,8 +70,45 @@ import SwiftUI
 /// }
 /// ```
 ///
+/// Secure text field:
+/// ```
+/// @State var state: VTextFieldState = .enabled
+/// @State var text: String = "Lorem ipsum"
+///
+/// var body: some View {
+///     VTextField(
+///         type: .secure,
+///         state: $state,
+///         placeholder: "Lorem ipsum",
+///         title: "Lorem ipsum dolor sit amet",
+///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         text: $text
+///     )
+///         .padding()
+/// }
+/// ```
+///
+/// Search text field:
+/// ```
+/// @State var state: VTextFieldState = .enabled
+/// @State var text: String = "Lorem ipsum"
+///
+/// var body: some View {
+///     VTextField(
+///         type: .search,
+///         state: $state,
+///         placeholder: "Lorem ipsum",
+///         title: "Lorem ipsum dolor sit amet",
+///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         text: $text
+///     )
+///         .padding()
+/// }
+/// ```
+///
 public struct VTextField: View {
     private let model: VTextFieldModel
+    private let textFieldType: VTextFieldType
     
     @Binding private var state: VTextFieldState
     private let highlight: VTextFieldHighlight
@@ -85,11 +126,13 @@ public struct VTextField: View {
     private let clearButtonAction: VTextFieldClearButtonAction
     private let cancelButtonAction: VTextFieldCancelButtonAction
     
-    @State private var nonEmptyText: Bool
+    @State private var nonEmptyText: Bool = false
+    @State private var secureFieldIsVisible: Bool = false
 
     // MARK: Initialiers
     public init(
         model: VTextFieldModel = .init(),
+        type textFieldType: VTextFieldType = .default,
         state: Binding<VTextFieldState>,
         highlight: VTextFieldHighlight = .default,
         placeholder: String? = nil,
@@ -104,6 +147,7 @@ public struct VTextField: View {
         onCancel cancelButtonAction: VTextFieldCancelButtonAction = .default
     ) {
         self.model = model
+        self.textFieldType = textFieldType
         self._state = state
         self.highlight = highlight
         self.placeholder = placeholder
@@ -116,14 +160,15 @@ public struct VTextField: View {
         self.returnButtonAction = returnButtonAction
         self.clearButtonAction = clearButtonAction
         self.cancelButtonAction = cancelButtonAction
-        self._nonEmptyText = .init(wrappedValue: !text.wrappedValue.isEmpty)
     }
 }
 
 // MARK:- Body
 extension VTextField {
     public var body: some View {
-        VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
+        performStateResets()
+        
+        return VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
             titleView
             textFieldView
             descriptionView
@@ -146,8 +191,10 @@ extension VTextField {
     private var textFieldView: some View {
         HStack(spacing: model.layout.buttonSpacing, content: {
             HStack(spacing: model.layout.buttonSpacing, content: {
+                searchIcon
                 textFieldContentView
                 clearButton
+                visibilityButton
             })
                 .padding(.horizontal, model.layout.contentMarginHorizontal)
                 .frame(height: model.layout.height)
@@ -158,9 +205,19 @@ extension VTextField {
             .frame(height: model.layout.height)
     }
     
+    @ViewBuilder private var searchIcon: some View {
+        if textFieldType.isSearch {
+            ImageBook.search
+                .resizable()
+                .frame(dimension: model.layout.searchIconDimension)
+                .foregroundColor(model.colors.searchIconColor(state: state, highlight: highlight))
+                .opacity(model.colors.contentOpacity(state: state))
+        }
+    }
+    
     private var textFieldContentView: some View {
         UIKitTextFieldRepresentable(
-            model: model.baseTextFieldModel(state: state),
+            model: model.baseTextFieldModel(state: state, isSecureTextEntry: textFieldType.isSecure && !secureFieldIsVisible),
             state: $state,
             placeholder: placeholder,
             text: $text,
@@ -173,7 +230,7 @@ extension VTextField {
     }
     
     @ViewBuilder private var clearButton: some View {
-        if nonEmptyText && model.clearButton {
+        if !textFieldType.isSecure && nonEmptyText && model.clearButton {
             VCloseButton(
                 model: model.clearButtonModel(state: state, highlight: highlight),
                 state: state.clearButtonState,
@@ -182,8 +239,24 @@ extension VTextField {
         }
     }
     
+    @ViewBuilder private var visibilityButton: some View {
+        if textFieldType.isSecure {
+            VSquareButton(
+                model: model.visibilityButtonModel(state: state, highlight: highlight),
+                state: state.visiblityButtonState,
+                action: { secureFieldIsVisible.toggle() },
+                content: {
+                    visiblityIcon
+                        .resizable()
+                        .frame(dimension: model.layout.visibilityButtonIconDimension)
+                        .foregroundColor(model.colors.visibilityIconColor(state: state, highlight: highlight))
+                }
+            )
+        }
+    }
+    
     @ViewBuilder private var cancelButton: some View {
-        if state.isFocused, nonEmptyText, let cancelButton = model.cancelButton, !cancelButton.isEmpty {
+        if !textFieldType.isSecure, nonEmptyText, state.isFocused, let cancelButton = model.cancelButton, !cancelButton.isEmpty {
             VPlainButton(
                 model: model.cancelButtonModel,
                 state: state.cancelButtonState,
@@ -217,7 +290,17 @@ extension VTextField {
     }
 }
 
-// MARK:- Helpers
+// MARK:- Visiblity Icon
+private extension VTextField {
+    var visiblityIcon: Image {
+        switch secureFieldIsVisible {
+        case false: return ImageBook.visibilityOff
+        case true: return ImageBook.visibilityOn
+        }
+    }
+}
+
+// MARK:- Actions
 private extension VTextField {
     func textChanged(_ text: String) {
         let shouldShow: Bool = !text.isEmpty
@@ -254,19 +337,35 @@ private extension VTextField {
     }
 }
 
+// MARK:- Resets
+private extension VTextField {
+    func performStateResets() {
+        DispatchQueue.main.async(execute: {
+            self.nonEmptyText = !text.isEmpty
+            
+            if self.secureFieldIsVisible && !textFieldType.isSecure { self.secureFieldIsVisible = false }
+        })
+    }
+}
+
 // MARK:- Preview
 struct VTextField_Previews: PreviewProvider {
     @State private static var state: VTextFieldState = .enabled
     @State private static var text: String = "Lorem ipsum"
 
     static var previews: some View {
-        VTextField(
-            state: $state,
-            placeholder: "Lorem ipsum",
-            title: "Lorem ipsum dolor sit amet",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            text: $text
-        )
+        VStack(spacing: 50, content: {
+            ForEach(VTextFieldType.allCases, id: \.self, content: { type in
+                VTextField(
+                    type: type,
+                    state: $state,
+                    placeholder: "Lorem ipsum",
+                    title: "Lorem ipsum dolor sit amet",
+                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    text: $text
+                )
+            })
+        })
             .padding()
     }
 }

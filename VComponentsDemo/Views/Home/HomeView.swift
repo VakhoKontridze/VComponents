@@ -34,7 +34,7 @@ struct HomeView: View {
         case segmentedPicker, /* pagingPicker,*/ wheelPicker /*, dropDown*/
         case /*stepper,*/ slider,  rangeSlider
         /*case*/ /*datePicker*/ /*, colorPicker*/
-        case textField /*, searchBar*/ /*, textView*/
+        case textField /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView
         case modal, sideBar /*,bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/

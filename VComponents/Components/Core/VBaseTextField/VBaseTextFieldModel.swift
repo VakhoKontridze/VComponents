@@ -14,6 +14,8 @@ public struct VBaseTextFieldModel {
     public var colors: Colors = .init()
     public var font: UIFont = .systemFont(ofSize: 16, weight: .regular)
     
+    public var isSecureTextEntry: Bool = false
+    
     public var keyboardType: UIKeyboardType = .default
     public var useAutoCorrect: Bool = true
     

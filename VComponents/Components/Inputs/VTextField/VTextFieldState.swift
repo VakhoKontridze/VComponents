@@ -21,6 +21,14 @@ extension VTextFieldState {
         }
     }
     
+    var visiblityButtonState: VSquareButtonState {
+        switch self {
+        case .enabled: return .enabled
+        case .focused: return .enabled
+        case .disabled: return .disabled
+        }
+    }
+    
     var cancelButtonState: VPlainButtonState {
         switch self {
         case .enabled: return .enabled
