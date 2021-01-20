@@ -97,18 +97,18 @@ extension VSecondaryButtonModel.Colors {
     }
     
     func textColor(state: VSecondaryButtonInternalState) -> Color {
-        color(for: state, from: text)
+        color(from: text, state: state)
     }
 
     func backgroundColor(state: VSecondaryButtonInternalState) -> Color {
-        color(for: state, from: background)
+        color(from: background, state: state)
     }
     
     func borderColor(state: VSecondaryButtonInternalState) -> Color {
-        color(for: state, from: border)
+        color(from: border, state: state)
     }
     
-    private func color(for state: VSecondaryButtonInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VSecondaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .pressed: return colorSet.pressed

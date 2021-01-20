@@ -63,7 +63,7 @@ extension VModalModel.Layout {
         case trailing
         case backTap
         
-        public static let `default`: VModalCloseButtonPosition = .trailing
+        public static let `default`: Self = .trailing
         
         var exists: Bool {
             switch self {

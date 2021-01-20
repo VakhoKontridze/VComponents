@@ -104,15 +104,15 @@ extension VCheckBoxModel.Colors {
 // MARK:- ViewModel
 extension VCheckBoxModel.Colors {
     func fillColor(state: VCheckBoxInternalState) -> Color {
-        color(state: state, from: fill)
+        color(from: fill, state: state)
     }
     
     func borderColor(state: VCheckBoxInternalState) -> Color {
-        color(state: state, from: border)
+        color(from: border, state: state)
     }
     
     func iconColor(state: VCheckBoxInternalState) -> Color {
-        color(state: state, from: icon)
+        color(from: icon, state: state)
     }
 
     func contentOpacity(state: VCheckBoxInternalState) -> Double {
@@ -128,10 +128,10 @@ extension VCheckBoxModel.Colors {
     }
 
     func textColor(state: VCheckBoxInternalState) -> Color {
-        color(state: state, from: text)
+        color(from: text, state: state)
     }
 
-    private func color(state: VCheckBoxInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VCheckBoxInternalState) -> Color {
         switch state {
         case .off: return colorSet.off
         case .pressedOff: return colorSet.off

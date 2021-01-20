@@ -37,16 +37,11 @@ struct VModalVCRepresentable<ModalContent, BlindingContent>
 
 // MARK:- Representable
 extension VModalVCRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(
-        context: UIViewControllerRepresentableContext<Self>
-    ) -> VModalVC<ModalContent, BlindingContent> {
+    func makeUIViewController(context: Context) -> VModalVC<ModalContent, BlindingContent> {
         .init(content: content, blinding: blinding, onBackTap: backTapAction)
     }
 
-    func updateUIViewController(
-        _ uiViewController: VModalVC<ModalContent, BlindingContent>,
-        context: UIViewControllerRepresentableContext<Self>
-    ) {
+    func updateUIViewController(_ uiViewController: VModalVC<ModalContent, BlindingContent>, context: Context) {
         switch isPresented {
         case false:
             uiViewController.dismiss()

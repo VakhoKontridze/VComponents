@@ -90,7 +90,7 @@ extension VAccordionModel {
     }
 }
 
-// MARK:- VM
+// MARK:- ViewModel
 extension VAccordionModel {
     func headerOpacity(for state: VAccordionState) -> Double {
         switch state {

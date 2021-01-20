@@ -20,8 +20,15 @@ public struct VProgressBarModel {
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.thumbDimension = 0
         
-        model.colors.slider.track.enabled = colors.track
-        model.colors.slider.progress.enabled = colors.progress
+        model.colors.slider.track = .init(
+            enabled: colors.track,
+            disabled: Colors.sliderColors.track.disabled
+        )
+        
+        model.colors.slider.progress = .init(
+            enabled: colors.progress,
+            disabled: Colors.sliderColors.progress.disabled
+        )
         
         return model
     }

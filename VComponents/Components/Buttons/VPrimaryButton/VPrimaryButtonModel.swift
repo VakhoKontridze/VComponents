@@ -115,18 +115,18 @@ extension VPrimaryButtonModel.Colors {
     }
     
     func textColor(state: VPrimaryButtonInternalState) -> Color {
-        color(for: state, from: text)
+        color(from: text, state: state)
     }
 
     func backgroundColor(state: VPrimaryButtonInternalState) -> Color {
-        color(for: state, from: background)
+        color(from: background, state: state)
     }
     
     func borderColor(state: VPrimaryButtonInternalState) -> Color {
-        color(for: state, from: border)
+        color(from: border, state: state)
     }
     
-    private func color(for state: VPrimaryButtonInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .pressed: return colorSet.pressed

@@ -18,8 +18,8 @@ struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
 
     private let content: SideBarContent
     private let blinding: BlindingContent
-
-    private let contentWidth: CGFloat
+ 
+    private let contentWidth: CGFloat   // Doesn't need to be updated with updateUIViewController(), as somehow passign content to HC does it
     private let animationCurve: UIView.AnimationCurve
     private let animationDuration: TimeInterval
     private let backTapAction: (() -> Void)?
@@ -46,9 +46,7 @@ struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
 
 // MARK:- Representabe
 extension VSideBarVCRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(
-        context: UIViewControllerRepresentableContext<Self>
-    ) -> VSideBarVC<SideBarContent, BlindingContent> {
+    func makeUIViewController(context: Context) -> VSideBarVC<SideBarContent, BlindingContent> {
         .init(
             content: content,
             blinding: blinding,
@@ -59,10 +57,7 @@ extension VSideBarVCRepresentable: UIViewControllerRepresentable {
         )
     }
 
-    func updateUIViewController(
-        _ uiViewController: VSideBarVC<SideBarContent, BlindingContent>,
-        context: UIViewControllerRepresentableContext<Self>
-    ) {
+    func updateUIViewController(_ uiViewController: VSideBarVC<SideBarContent, BlindingContent>, context: Context) {
         switch isPresented {
         case false:
             uiViewController.dismiss()

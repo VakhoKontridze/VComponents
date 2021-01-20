@@ -36,7 +36,7 @@ extension VSheetModel.Layout {
         case custom(_ corners: UIRectCorner)
         case none
         
-        public static let `default`: RoundedCorners = .all
+        public static let `default`: Self = .all
         
         var uiRectCorner: UIRectCorner {
             switch self {

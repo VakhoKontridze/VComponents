@@ -10,19 +10,42 @@ import SwiftUI
 // MARK:- V Base Text Field
 /// Core component that is used throughout the framework as text field
 ///
-/// Model, state, focus, and event callbacks can be passed as parameters
+/// Model, placeholder, event callbacks, and button action can be passed as parameters
+///
+/// It is possible to override action of return button by passing it as a parameter
+///
+/// If two TextField's state is managed by a single property, unpredictable behaviors would occur
 ///
 /// # Usage Example #
 ///
 /// ```
+/// @State var state: VBaseTextFieldState = .focused
 /// @State var text: String = "Lorem ipsum"
 ///
 /// var body: some View {
 ///     VBaseTextField(
+///         state: $state,
+///         placeholder: "Lorem ipsum",
+///         text: $text
+///     )
+///         .padding()
+/// }
+/// ```
+///
+/// Full use of overriden action and event callbacks lookes like this:
+/// ```
+/// @State private var state: VBaseTextFieldState = .enabled
+/// @State private var text: String = "Lorem ipsum"
+///
+/// var body: some View {
+///     VBaseTextField(
+///         state: $state,
+///         placeholder: "Lorem ipsum",
 ///         text: $text,
 ///         onBegin: { print("Editing Began") },
 ///         onChange: {  print("Editing Changed") },
-///         onEnd: { print("Editing Ended") }
+///         onEnd: { print("Editing Ended") },
+///         onReturn: .returnAndCustom({ print("Returned and ...") })
 ///     )
 ///         .padding()
 /// }
@@ -31,9 +54,7 @@ import SwiftUI
 public struct VBaseTextField: View {
     private let model: VBaseTextFieldModel
     
-    private let state: VBaseTextFieldState
-    @Binding private var isFocused: Bool
-    private let isFocusable: Bool
+    @Binding private var state: VBaseTextFieldState
     
     private let placeholder: String?
     @Binding private var text: String
@@ -42,46 +63,27 @@ public struct VBaseTextField: View {
     private let changeHandler: (() -> Void)?
     private let endHandler: (() -> Void)?
     
+    private let returnAction: VBaseTextFieldReturnButtonAction
+    
     // MARK: Initialiers
     public init(
         model: VBaseTextFieldModel = .init(),
-        state: VBaseTextFieldState = .enabled,
-        isFocused: Binding<Bool>,
+        state: Binding<VBaseTextFieldState>,
         placeholder: String? = nil,
         text: Binding<String>,
         onBegin beginHandler: (() -> Void)? = nil,
         onChange changeHandler: (() -> Void)? = nil,
-        onEnd endHandler: (() -> Void)? = nil
+        onEnd endHandler: (() -> Void)? = nil,
+        onReturn returnAction: VBaseTextFieldReturnButtonAction = .default
     ) {
         self.model = model
-        self.state = state
-        self._isFocused = isFocused
-        self.isFocusable = true
+        self._state = state
         self.placeholder = placeholder
         self._text = text
         self.beginHandler = beginHandler
         self.changeHandler = changeHandler
         self.endHandler = endHandler
-    }
-    
-    public init(
-        model: VBaseTextFieldModel = .init(),
-        state: VBaseTextFieldState = .enabled,
-        placeholder: String? = nil,
-        text: Binding<String>,
-        onBegin beginHandler: (() -> Void)? = nil,
-        onChange changeHandler: (() -> Void)? = nil,
-        onEnd endHandler: (() -> Void)? = nil
-    ) {
-        self.model = model
-        self.state = state
-        self._isFocused = .constant(false)
-        self.isFocusable = false
-        self.placeholder = placeholder
-        self._text = text
-        self.beginHandler = beginHandler
-        self.changeHandler = changeHandler
-        self.endHandler = endHandler
+        self.returnAction = returnAction
     }
 }
 
@@ -90,28 +92,27 @@ extension VBaseTextField {
     public var body: some View {
         UIKitTextFieldRepresentable(
             model: model,
-            state: state,
-            isFocused: $isFocused,
-            isFocusable: isFocusable,
+            state: $state,
             placeholder: placeholder,
             text: $text,
             onBegin: beginHandler,
             onChange: changeHandler,
-            onEnd: endHandler
+            onEnd: endHandler,
+            onReturn: returnAction
         )
     }
 }
 
 // MARK:- Preview
 struct VBaseTextField_Previews: PreviewProvider {
+    @State private static var state: VBaseTextFieldState = .enabled
     @State private static var text: String = "Lorem ipsum"
     
     static var previews: some View {
         VBaseTextField(
-            text: $text,
-            onBegin: { print("Editing Began") },
-            onChange: {  print("Editing Changed") },
-            onEnd: { print("Editing Ended") }
+            state: $state,
+            placeholder: "Lorem ipsum",
+            text: $text
         )
             .padding()
     }

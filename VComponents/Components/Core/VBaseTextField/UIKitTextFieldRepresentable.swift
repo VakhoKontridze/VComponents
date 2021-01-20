@@ -12,9 +12,7 @@ struct UIKitTextFieldRepresentable {
     // MARK: Properties
     private let model: VBaseTextFieldModel
     
-    private let state: VBaseTextFieldState
-    @Binding private var isFocused: Bool
-    private let isFocusable: Bool
+    @Binding private var state: VBaseTextFieldState
     
     private let placeholder: String?
     @Binding private var text: String
@@ -23,29 +21,27 @@ struct UIKitTextFieldRepresentable {
     let changeHandler: (() -> Void)?
     let endHandler: (() -> Void)?
     
-    @State private var manualRefresh: Int = 0
+    let returnAction: VBaseTextFieldReturnButtonAction
     
     // MARK: Initialiers
     init(
         model: VBaseTextFieldModel,
-        state: VBaseTextFieldState,
-        isFocused: Binding<Bool>,
-        isFocusable: Bool,
+        state: Binding<VBaseTextFieldState>,
         placeholder: String?,
         text: Binding<String>,
         onBegin beginHandler: (() -> Void)?,
         onChange changeHandler: (() -> Void)?,
-        onEnd endHandler: (() -> Void)?
+        onEnd endHandler: (() -> Void)?,
+        onReturn returnAction: VBaseTextFieldReturnButtonAction
     ) {
         self.model = model
-        self.state = state
-        self._isFocused = isFocused
-        self.isFocusable = isFocusable
+        self._state = state
         self.placeholder = placeholder
         self._text = text
         self.beginHandler = beginHandler
         self.changeHandler = changeHandler
         self.endHandler = endHandler
+        self.returnAction = returnAction
     }
 }
 
@@ -59,19 +55,10 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
         let textField: FocusableTextField = .init(representable: self)
         
         textField.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        textField.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        textField.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
-        textField.isUserInteractionEnabled = state.isEnabled
-        
-        textField.placeholder = placeholder ?? ""
-        textField.text = text
-        
-        textField.font = model.font
-        textField.textColor = .init(model.colors.color)
-        textField.alpha = .init(model.colors.textOpacity(state: state))
-        textField.backgroundColor = .clear
-        
-        textField.keyboardType = model.keyboardType
-        textField.returnKeyType = model.returnKeyType
+        setBindedValues(textField, context: context)
         
         textField.delegate = context.coordinator
         textField.addTarget(context.coordinator, action: #selector(context.coordinator.textFieldDidChange), for: .editingChanged)
@@ -80,62 +67,37 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: FocusableTextField, context: Context) {
-        uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        uiView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-        
-        updateKeyboardType(in: uiView)
-        updateReturnType(in: uiView)
-        updateState(in: uiView)
-        updateText(in: uiView)
-        updateFocus(in: uiView, context: context)
+        setBindedValues(uiView, context: context)
     }
     
-    private func updateKeyboardType(in textField: FocusableTextField) {
-        guard textField.keyboardType != model.keyboardType else { return }
+    private func setBindedValues(_ textField: FocusableTextField, context: Context) {
+        textField.isUserInteractionEnabled = state.isEnabled
+        
+        textField.placeholder = placeholder
+        textField.text = text
+        
+        textField.font = model.font
+        textField.textColor = .init(model.colors.text(state: state))
+        textField.alpha = .init(model.colors.textOpacity(state: state))
+        textField.backgroundColor = .clear
         
         textField.keyboardType = model.keyboardType
-    }
-    
-    private func updateReturnType(in textField: FocusableTextField) {
-        guard textField.returnKeyType != model.returnKeyType else { return }
         
-        textField.returnKeyType = model.returnKeyType
-        textField.reloadInputViews()
-    }
-    
-    private func updateState(in textField: FocusableTextField) {
-        guard textField.isUserInteractionEnabled != state.isEnabled else { return }
-        
-        textField.isUserInteractionEnabled = state.isEnabled
-        textField.alpha = .init(model.colors.textOpacity(state: state))
-    }
-    
-    private func updateText(in textField: FocusableTextField) {
-        guard textField.text != text else { return }
-        
-        textField.text = text
-    }
-    
-    private func updateFocus(in textField: FocusableTextField, context: Context) {
-        let isFocused: Bool = {
-            switch isFocusable {
-            case false: return textField.isFirstResponder
-            case true: return self.isFocused
-            }
-        }()
-        
-        switch isFocused {
+        let shouldReloadInputValues: Bool = textField.returnKeyType != model.returnBUtton
+        textField.returnKeyType = model.returnBUtton
+        if shouldReloadInputValues { textField.reloadInputViews() }
+
+        switch state.isFocused {
         case false:
             _ = textField.resignFirstResponder()
             
         case true:
             guard
+                !textField.isFirstResponder,
                 state.isEnabled,
                 textField.canBecomeFirstResponder,
-                textField.window != nil,
                 context.environment.isEnabled
             else {
-                _ = textField.resignFirstResponder()
                 return
             }
             
@@ -146,30 +108,16 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
 
 // MARK:- Focus and Commit
 extension UIKitTextFieldRepresentable {
-    func commitText(_ text: String?) {
-        DispatchQueue.main.async(execute: {
-            self.text = text ?? ""
-        })
+    func textFieldReturned(_ textField: UITextField) {
+        DispatchQueue.main.async(execute: { self.state.setFocus(from: false) }) // Animation here is glitchy
     }
     
-    func textFieldReturned(_ textField: UITextField) {
-        DispatchQueue.main.async(execute: {
-            let textField = textField as! FocusableTextField
-            
-            switch isFocusable {
-            case false: _ = textField.resignFirstResponder(); manualRefresh += 1
-            case true: isFocused = false
-            }
-        })
+    func commitText(_ text: String?) {
+        DispatchQueue.main.async(execute: { self.text = text ?? "" })
     }
     
     func setBindedFocus(to state: Bool) {
-        DispatchQueue.main.async(execute: {
-            switch isFocusable {
-            case false: break
-            case true: isFocused = state
-            }
-        })
+        DispatchQueue.main.async(execute: { withAnimation { self.state.setFocus(from: state) } })
     }
 }
 

@@ -24,8 +24,20 @@ extension UIKitTextFieldRepresentable {
 // MARK:- Text Field Delegate
 extension UIKitTextFieldRepresentable.Coordinator: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        representable.textFieldReturned(textField)
-        return true
+        switch representable.returnAction {
+        case .return:
+            representable.textFieldReturned(textField)
+            return true
+            
+        case .custom(let action):
+            action()
+            return false
+            
+        case .returnAndCustom(let action):
+            action()
+            representable.textFieldReturned(textField)
+            return true
+        }
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {

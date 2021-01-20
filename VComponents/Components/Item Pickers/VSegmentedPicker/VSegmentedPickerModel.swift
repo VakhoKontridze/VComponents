@@ -36,7 +36,7 @@ extension VSegmentedPickerModel {
         var actualRowContentMargin: CGFloat { indicatorMargin + rowContentMargin }
         
         public var titleSpacing: CGFloat = 3
-        public var titlePaddingHor: CGFloat = sectionLayout.titleMarginHor
+        public var titleMarginHor: CGFloat = 10
         
         public var dividerHeight: CGFloat = 17
         
@@ -116,14 +116,14 @@ extension VSegmentedPickerModel {
 
 // MARK:- ViewModel
 extension VSegmentedPickerModel.Colors {
-    func foregroundOpacity(state: VSegmentedPickerState) -> Double {
+    func contentOpacity(state: VSegmentedPickerState) -> Double {
         switch state {
         case .enabled: return 1
         case .disabled: return content.disabledOpacity
         }
     }
     
-    func foregroundOpacity(state: VSegmentedPickerRowState) -> Double {
+    func contentOpacity(state: VSegmentedPickerRowState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return content.pressedOpacity
@@ -131,31 +131,31 @@ extension VSegmentedPickerModel.Colors {
         }
     }
     
-    func textColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: text)
+    func textColor(state: VSegmentedPickerState) -> Color {
+        color(from: text, state: state)
     }
     
-    func indicatorColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: indicator)
+    func indicatorColor(state: VSegmentedPickerState) -> Color {
+        color(from: indicator, state: state)
     }
     
-    func indicatorShadowColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: indicatorShadow)
+    func indicatorShadowColor(state: VSegmentedPickerState) -> Color {
+        color(from: indicatorShadow, state: state)
     }
     
-    func backgroundColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: background)
+    func backgroundColor(state: VSegmentedPickerState) -> Color {
+        color(from: background, state: state)
     }
     
-    func titleColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: title)
+    func titleColor(state: VSegmentedPickerState) -> Color {
+        color(from: title, state: state)
     }
     
-    func descriptionColor(for state: VSegmentedPickerState) -> Color {
-        color(for: state, from: description)
+    func descriptionColor(state: VSegmentedPickerState) -> Color {
+        color(from: description, state: state)
     }
     
-    private func color(for state: VSegmentedPickerState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VSegmentedPickerState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .disabled: return colorSet.disabled

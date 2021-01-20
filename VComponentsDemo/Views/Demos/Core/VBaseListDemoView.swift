@@ -22,7 +22,7 @@ struct VBaseListDemoView: View {
         case flexible
         case constrained
         
-        static let `default`: Form = .flexible
+        static let `default`: Self = .flexible
         
         fileprivate var layoutType: VBaseListLayoutType {
             switch self {

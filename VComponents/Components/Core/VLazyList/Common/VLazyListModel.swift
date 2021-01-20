@@ -8,10 +8,10 @@
 import Foundation
 
 // MARK:- V Lazy List Model
-/// Enum of models that describes UI
+/// Enum of models that describe UI
 public enum VLazyListModel {
     case vertical(_ model: VLazyListModelVertical = .init())
     case horizontal(_ model: VLazyListModelHorizontal = .init())
     
-    public static let `default`: VLazyListModel = .vertical()
+    public static let `default`: Self = .vertical()
 }

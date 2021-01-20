@@ -98,7 +98,7 @@ public struct VWheelPicker<Data, Content>: View
             content: { title in
                 VBaseTitle(
                     title: title,
-                    color: model.colors.textColor(for: state),
+                    color: model.colors.textColor(state: state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )
@@ -157,7 +157,7 @@ public struct VWheelPicker<Data, Content>: View
             content: { item in
                 VBaseTitle(
                     title: item.pickerTitle,
-                    color: model.colors.textColor(for: state),
+                    color: model.colors.textColor(state: state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )
@@ -187,21 +187,21 @@ extension VWheelPicker {
             .labelsHidden()
             
             .disabled(!state.isEnabled) // Luckily, doesn't affect colors
-            .opacity(model.colors.foregroundOpacity(state: state))
+            .opacity(model.colors.contentOpacity(state: state))
             
-            .background(model.colors.backgroundColor(for: state).cornerRadius(model.layout.cornerRadius))
+            .background(model.colors.backgroundColor(state: state).cornerRadius(model.layout.cornerRadius))
     }
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
             VBaseTitle(
                 title: title,
-                color: model.colors.titleColor(for: state),
+                color: model.colors.titleColor(state: state),
                 font: model.fonts.title,
                 type: .oneLine
             )
-                .padding(.horizontal, model.layout.titlePaddingHor)
-                .opacity(model.colors.foregroundOpacity(state: state))
+                .padding(.horizontal, model.layout.titleMarginHor)
+                .opacity(model.colors.contentOpacity(state: state))
         }
     }
     
@@ -209,12 +209,12 @@ extension VWheelPicker {
         if let description = description, !description.isEmpty {
             VBaseTitle(
                 title: description,
-                color: model.colors.descriptionColor(for: state),
+                color: model.colors.descriptionColor(state: state),
                 font: model.fonts.description,
                 type: .multiLine(limit: nil, alignment: .leading)
             )
-                .padding(.horizontal, model.layout.titlePaddingHor)
-                .opacity(model.colors.foregroundOpacity(state: state))
+                .padding(.horizontal, model.layout.titleMarginHor)
+                .opacity(model.colors.contentOpacity(state: state))
         }
     }
 }

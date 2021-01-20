@@ -13,5 +13,5 @@ public enum VBaseListLayoutType: Int, CaseIterable {
     case fixed
     case flexible
     
-    public static let `default`: VBaseListLayoutType = .flexible
+    public static let `default`: Self = .flexible
 }

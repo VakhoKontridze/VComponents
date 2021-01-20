@@ -25,7 +25,7 @@ extension VWheelPickerModel {
         public var cornerRadius: CGFloat = 15
         
         public var titleSpacing: CGFloat = segmentedPickerLayout.titleSpacing
-        public var titlePaddingHor: CGFloat = segmentedPickerLayout.titlePaddingHor
+        public var titleMarginHor: CGFloat = segmentedPickerLayout.titleMarginHor
         
         public init() {}
     }
@@ -83,30 +83,30 @@ extension VWheelPickerModel {
 
 // MARK:- ViewModel
 extension VWheelPickerModel.Colors {
-    func foregroundOpacity(state: VWheelPickerState) -> Double {
+    func contentOpacity(state: VWheelPickerState) -> Double {
         switch state {
         case .enabled: return 1
         case .disabled: return content.disabledOpacity
         }
     }
     
-    func textColor(for state: VWheelPickerState) -> Color {
-        color(for: state, from: text)
+    func textColor(state: VWheelPickerState) -> Color {
+        color(from: text, state: state)
     }
     
-    func backgroundColor(for state: VWheelPickerState) -> Color {
-        color(for: state, from: background)
+    func backgroundColor(state: VWheelPickerState) -> Color {
+        color(from: background, state: state)
     }
     
-    func titleColor(for state: VWheelPickerState) -> Color {
-        color(for: state, from: title)
+    func titleColor(state: VWheelPickerState) -> Color {
+        color(from: title, state: state)
     }
     
-    func descriptionColor(for state: VWheelPickerState) -> Color {
-        color(for: state, from: description)
+    func descriptionColor(state: VWheelPickerState) -> Color {
+        color(from: description, state: state)
     }
     
-    private func color(for state: VWheelPickerState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VWheelPickerState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .disabled: return colorSet.disabled

@@ -85,18 +85,18 @@ extension VSquareButtonModel.Colors {
     }
     
     func textColor(state: VSquareButtonInternalState) -> Color {
-        color(for: state, from: text)
+        color(from: text, state: state)
     }
 
     func backgroundColor(state: VSquareButtonInternalState) -> Color {
-        color(for: state, from: background)
+        color(from: background, state: state)
     }
     
     func borderColor(state: VSquareButtonInternalState) -> Color {
-        color(for: state, from: border)
+        color(from: border, state: state)
     }
     
-    private func color(for state: VSquareButtonInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VSquareButtonInternalState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .pressed: return colorSet.pressed

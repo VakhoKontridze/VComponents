@@ -112,7 +112,7 @@ public struct VSegmentedPicker<Data, Content>: View
             content: { title in
                 VBaseTitle(
                     title: title,
-                    color: model.colors.textColor(for: state),
+                    color: model.colors.textColor(state: state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )
@@ -175,7 +175,7 @@ public struct VSegmentedPicker<Data, Content>: View
             content: { item in
                 VBaseTitle(
                     title: item.pickerTitle,
-                    color: model.colors.textColor(for: state),
+                    color: model.colors.textColor(state: state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )
@@ -209,12 +209,12 @@ extension VSegmentedPicker {
         if let title = title, !title.isEmpty {
             VBaseTitle(
                 title: title,
-                color: model.colors.titleColor(for: state),
+                color: model.colors.titleColor(state: state),
                 font: model.fonts.title,
                 type: .oneLine
             )
-                .padding(.horizontal, model.layout.titlePaddingHor)
-                .opacity(model.colors.foregroundOpacity(state: state))
+                .padding(.horizontal, model.layout.titleMarginHor)
+                .opacity(model.colors.contentOpacity(state: state))
         }
     }
     
@@ -222,17 +222,17 @@ extension VSegmentedPicker {
         if let description = description, !description.isEmpty {
             VBaseTitle(
                 title: description,
-                color: model.colors.descriptionColor(for: state),
+                color: model.colors.descriptionColor(state: state),
                 font: model.fonts.description,
                 type: .multiLine(limit: nil, alignment: .leading)
             )
-                .padding(.horizontal, model.layout.titlePaddingHor)
-                .opacity(model.colors.foregroundOpacity(state: state))
+                .padding(.horizontal, model.layout.titleMarginHor)
+                .opacity(model.colors.contentOpacity(state: state))
         }
     }
     
     private var background: some View {
-        model.colors.backgroundColor(for: state)
+        model.colors.backgroundColor(state: state)
     }
     
     private var indicator: some View {
@@ -243,9 +243,9 @@ extension VSegmentedPicker {
             .offset(x: rowWidth * .init(selectedIndex))
             .animation(model.animation)
             
-            .foregroundColor(model.colors.indicatorColor(for: state))
+            .foregroundColor(model.colors.indicatorColor(state: state))
             .shadow(
-                color: model.colors.indicatorShadowColor(for: state),
+                color: model.colors.indicatorShadowColor(state: state),
                 radius: model.layout.indicatorShadowRadius,
                 y: model.layout.indicatorShadowOffsetY
             )
@@ -263,7 +263,7 @@ extension VSegmentedPicker {
                             .padding(model.layout.actualRowContentMargin)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                            .opacity(foregroundOpacity(for: i))
+                            .opacity(contentOpacity(for: i))
 
                             .readSize(onChange: { rowWidth = $0.width })
                     }
@@ -296,8 +296,8 @@ private extension VSegmentedPicker {
         }
     }
     
-    func foregroundOpacity(for index: Int) -> Double {
-        model.colors.foregroundOpacity(state: rowState(for: index))
+    func contentOpacity(for index: Int) -> Double {
+        model.colors.contentOpacity(state: rowState(for: index))
     }
     
     func dividerOpacity(for index: Int) -> Double {

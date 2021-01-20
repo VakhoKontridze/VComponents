@@ -78,7 +78,7 @@ extension VChevronButton {
             .resizable()
             .frame(dimension: model.layout.iconDimension)
             .foregroundColor(model.colors.foregroundColor(state: internalState))
-            .opacity(model.colors.foregroundOpacity(state: internalState))
+            .opacity(model.colors.contentOpacity(state: internalState))
             .rotationEffect(.init(degrees: direction.angle))
     }
     

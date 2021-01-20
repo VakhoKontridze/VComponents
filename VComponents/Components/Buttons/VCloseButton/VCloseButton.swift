@@ -72,7 +72,7 @@ extension VCloseButton {
             .resizable()
             .frame(dimension: model.layout.iconDimension)
             .foregroundColor(model.colors.foregroundColor(state: internalState))
-            .opacity(model.colors.foregroundOpacity(state: internalState))
+            .opacity(model.colors.contentOpacity(state: internalState))
     }
     
     private var backgroundView: some View {

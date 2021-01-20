@@ -25,19 +25,24 @@ struct UIKitTouchView: UIViewRepresentable {
         self.action = action
         self.pressHandler = pressHandler
     }
-    
-    // MARK: Representable
-    func makeUIView(context: UIViewRepresentableContext<UIKitTouchView>) -> UIView {
+}
+
+// MARK:- Representable
+extension UIKitTouchView {
+    func makeUIView(context: Context) -> UIView {
         let view: UIView = .init(frame: .zero)
-        view.isUserInteractionEnabled = isEnabled
-        view.addGestureRecognizer(UIKitEventRecognizer(
-            action: action,
-            pressHandler: pressHandler
-        ))
+        
+        setBindedValues(view, context: context)
+        view.addGestureRecognizer(UIKitEventRecognizer(action: action, pressHandler: pressHandler))
+        
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: UIViewRepresentableContext<UIKitTouchView>) {
-        uiView.isUserInteractionEnabled = isEnabled
+    func updateUIView(_ uiView: UIView, context: Context) {
+        setBindedValues(uiView, context: context)
+    }
+    
+    private func setBindedValues(_ view: UIView, context: Context) {
+        view.isUserInteractionEnabled = isEnabled
     }
 }

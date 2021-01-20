@@ -8,10 +8,10 @@
 import Foundation
 
 // MARK:- V Base View Model
-/// Enum of models that describes UI
+/// Enum of models that describe UI
 public enum VBaseViewModel {
     case centerTitle(_ model: VBaseViewModelCenter = .init())
     case leadingTitle(_ model: VBaseViewModelLeading = .init())
     
-    public static let `default`: VBaseViewModel = .leadingTitle()
+    public static let `default`: Self = .leadingTitle()
 }

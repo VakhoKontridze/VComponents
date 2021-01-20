@@ -48,7 +48,7 @@ extension VSideBarModel.Layout {
         case relative(_ screenRatio: CGFloat = 2/3)
         case fixed(_ width: CGFloat = 300)
         
-        public static let `default`: WidthType = .relative()
+        public static let `default`: Self = .relative()
         
         var width: CGFloat {
             switch self {

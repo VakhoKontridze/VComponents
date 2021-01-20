@@ -123,6 +123,41 @@ extension Color {
  190.190.190
  *100.100.100
  
+ TextField.Background.error
+ 255.215.215
+ *255.100.100
+ 
+ TextField.Background.focused
+ 215.215.215
+ 50.50.50
+ 
+ TextField.Background.success
+ 210.255.220
+ *0.200.130
+ 
+ TextField.Border.error
+ *255.100.100
+ 220.90.100
+ 
+ TextField.Border.success
+ *0.200.130
+ 0.160.130
+ 
+ TextField.ClearButton.Background.disabled
+ 220.220.220
+ *40.40.40
+ 
+ TextField.ClearButton.Background.enabled
+ 170.170.170
+ *30.30.30
+ 
+ TextField.ClearButton.Background.pressed
+ 150.150.150
+ *20.20.20
+ 
+ TextField.ClearButton.Icon
+ *254.254.254
+ 
  Toggle.Fill.disabled
  244.244.244
  *30.30.30

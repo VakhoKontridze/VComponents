@@ -8,10 +8,10 @@
 import Foundation
 
 // MARK:- V Spinner Model
-/// Enum of models that describes UI
+/// Enum of models that describe UI
 public enum VSpinnerModel {
     case continous(_ model: VSpinnerModelContinous = .init())
     case dashed(_ model: VSpinnerModelDashed = .init())
     
-    public static let `default`: VSpinnerModel = .continous()
+    public static let `default`: Self = .continous()
 }

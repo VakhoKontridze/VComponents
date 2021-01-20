@@ -21,7 +21,7 @@ extension VChevronButtonModel {
     public struct Layout {
         public var dimension: CGFloat = 32
         
-        public var iconDimension: CGFloat = 13
+        public var iconDimension: CGFloat = 12
         
         public var hitBoxHor: CGFloat = 0
         public var hitBoxVer: CGFloat = 0
@@ -66,10 +66,10 @@ extension VChevronButtonModel.Colors {
 // MARK:- ViewModel
 extension VChevronButtonModel.Colors {
     func foregroundColor(state: VChevronButtonInternalState) -> Color {
-        color(for: state, from: content)
+        color(from: content, state: state)
     }
     
-    func foregroundOpacity(state: VChevronButtonInternalState) -> Double {
+    func contentOpacity(state: VChevronButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1
         case .pressed: return content.pressedOpacity
@@ -78,10 +78,10 @@ extension VChevronButtonModel.Colors {
     }
     
     func backgroundColor(state: VChevronButtonInternalState) -> Color {
-        color(for: state, from: background)
+        color(from: background, state: state)
     }
     
-    private func color(for state: VChevronButtonInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VChevronButtonInternalState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .pressed: return colorSet.pressed
@@ -89,7 +89,7 @@ extension VChevronButtonModel.Colors {
         }
     }
 
-    private func color(for state: VChevronButtonInternalState, from colorSet: StateColorsAndOpacity) -> Color {
+    private func color(from colorSet: StateColorsAndOpacity, state: VChevronButtonInternalState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .pressed: return colorSet.pressed

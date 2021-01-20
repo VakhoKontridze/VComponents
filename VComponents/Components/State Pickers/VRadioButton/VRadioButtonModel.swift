@@ -84,15 +84,15 @@ extension VRadioButtonModel.Colors {
 // MARK:- ViewModel
 extension VRadioButtonModel.Colors {
     func fillColor(state: VRadioButtonInternalState) -> Color {
-        color(state: state, from: fill)
+        color(from: fill, state: state)
     }
     
     func borderColor(state: VRadioButtonInternalState) -> Color {
-        color(state: state, from: border)
+        color(from: border, state: state)
     }
     
     func bulletColor(state: VRadioButtonInternalState) -> Color {
-        color(state: state, from: bullet)
+        color(from: bullet, state: state)
     }
 
     func contentOpacity(state: VRadioButtonInternalState) -> Double {
@@ -106,10 +106,10 @@ extension VRadioButtonModel.Colors {
     }
 
     func textColor(state: VRadioButtonInternalState) -> Color {
-        color(state: state, from: text)
+        color(from: text, state: state)
     }
 
-    private func color(state: VRadioButtonInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VRadioButtonInternalState) -> Color {
         switch state {
         case .off: return colorSet.off
         case .pressedOff: return colorSet.off

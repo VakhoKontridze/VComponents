@@ -101,26 +101,26 @@ extension VSliderModel.Colors {
 // MARK:- ViewModel
 extension VSliderModel.Colors {
     func trackColor(state: VSliderState) -> Color {
-        color(for: state, from: slider.track)
+        color(from: slider.track, state: state)
     }
     
     func progressColor(state: VSliderState) -> Color {
-        color(for: state, from: slider.progress)
+        color(from: slider.progress, state: state)
     }
     
     func thumbFillColor(state: VSliderState) -> Color {
-        color(for: state, from: thumb.fill)
+        color(from: thumb.fill, state: state)
     }
     
     func thumbBorderWidth(state: VSliderState) -> Color {
-        color(for: state, from: thumb.border)
+        color(from: thumb.border, state: state)
     }
     
     func thumbShadow(state: VSliderState) -> Color {
-        color(for: state, from: thumb.shadow)
+        color(from: thumb.shadow, state: state)
     }
     
-    private func color(for state: VSliderState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VSliderState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .disabled: return colorSet.disabled

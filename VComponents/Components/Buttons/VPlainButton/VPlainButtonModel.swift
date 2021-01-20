@@ -64,10 +64,10 @@ extension VPlainButtonModel.Colors {
     }
     
     func textColor(state: VPlainButtonInternalState) -> Color {
-        color(for: state, from: text)
+        color(from: text, state: state)
     }
     
-    private func color(for state: VPlainButtonInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VPlainButtonInternalState) -> Color {
         switch state {
         case .enabled: return colorSet.enabled
         case .pressed: return colorSet.pressed

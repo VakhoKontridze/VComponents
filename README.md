@@ -23,6 +23,8 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 **Value Pickers.** VSlider, VRangeSlider
 
+**Inputs.** VTextField
+
 **Containers.** VSheet, VSection, VTable, VAccordion
 
 **Navigation.** VTabNavigationView, VNavigationView

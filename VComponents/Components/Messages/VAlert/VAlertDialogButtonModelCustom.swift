@@ -76,15 +76,24 @@ public struct VAlertDialogButtonModelCustom {
         model.layout.height = layout.height
         model.layout.cornerRadius = layout.cornerRadius
 
-        model.colors.content.pressedOpacity = colors.content.pressedOpacity
+        model.colors.content = .init(
+            pressedOpacity: colors.content.pressedOpacity,
+            disabledOpacity: Colors.primaryButtonColors.content.disabledOpacity
+        )
 
-        model.colors.text.enabled = colors.text.enabled
-        model.colors.text.pressed = colors.text.pressed
-        model.colors.text.disabled = colors.text.disabled
-
-        model.colors.background.enabled = colors.background.enabled
-        model.colors.background.pressed = colors.background.pressed
-        model.colors.background.disabled = colors.background.disabled
+        model.colors.text = .init(
+            enabled: colors.text.enabled,
+            pressed: colors.text.pressed,
+            disabled: colors.text.disabled,
+            loading: Colors.primaryButtonColors.text.loading
+        )
+        
+        model.colors.background = .init(
+            enabled: colors.background.enabled,
+            pressed: colors.background.pressed,
+            disabled: colors.background.disabled,
+            loading: Colors.primaryButtonColors.background.loading
+        )
 
         model.font = font
 
@@ -111,6 +120,8 @@ extension VAlertDialogButtonModelCustom {
 // MARK:- Colors
 extension VAlertDialogButtonModelCustom {
     public struct Colors {
+        fileprivate static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
+        
         public var content: StateOpacity
         public var text: StateColors    // Only applicable during init with title
         public var background: StateColors

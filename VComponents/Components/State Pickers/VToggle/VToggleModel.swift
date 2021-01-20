@@ -89,11 +89,11 @@ extension VToggleModel.Colors {
 // MARK:- ViewModel
 extension VToggleModel.Colors {
     func fillColor(state: VToggleInternalState) -> Color {
-        color(state: state, from: fill)
+        color(from: fill, state: state)
     }
     
     func thumbColor(state: VToggleInternalState) -> Color {
-        color(state: state, from: thumb)
+        color(from: thumb, state: state)
     }
     
     func contentOpacity(state: VToggleInternalState) -> Double {
@@ -107,10 +107,10 @@ extension VToggleModel.Colors {
     }
     
     func textColor(state: VToggleInternalState) -> Color {
-        color(state: state, from: text)
+        color(from: text, state: state)
     }
     
-    private func color(state: VToggleInternalState, from colorSet: StateColors) -> Color {
+    private func color(from colorSet: StateColors, state: VToggleInternalState) -> Color {
         switch state {
         case .off: return colorSet.off
         case .pressedOff: return colorSet.off
