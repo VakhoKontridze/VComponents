@@ -66,7 +66,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
             content: {
                 VText(
                     title: title,
-                    color: model.colors.text.for(.init(state: state, isPressed: false)),
+                    color: model.colors.textContent.for(.init(state: state, isPressed: false)),
                     font: model.font,
                     type: .oneLine
                 )

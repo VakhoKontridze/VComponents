@@ -37,7 +37,7 @@ extension VPlainButtonModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(   // Only applicable during init with title
+        public var textContent: StateColors = .init(   // Only applicable during init with title
             enabled: ColorBook.accent,
             pressed: ColorBook.accent,
             disabled: ColorBook.accent

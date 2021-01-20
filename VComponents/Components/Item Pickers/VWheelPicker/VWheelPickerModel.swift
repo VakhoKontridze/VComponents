@@ -40,7 +40,7 @@ extension VWheelPickerModel {
             disabledOpacity: segmentedPickerColors.content.disabledOpacity
         )
         
-        public var text: StateColors = segmentedPickerColors.text   // Only applicable during init with title
+        public var textContent: StateColors = segmentedPickerColors.textContent   // Only applicable during init with title
         
         public var background: StateColors = .init(
             enabled: ColorBook.layer,

@@ -22,9 +22,9 @@ public enum VAlertDialogButtonModel {
                 pressedOpacity: 0.5
             ),
             text: .init(
-                enabled: Self.primaryButtonColors.text.enabled,
-                pressed: Self.primaryButtonColors.text.pressed,
-                disabled: Self.primaryButtonColors.text.disabled
+                enabled: Self.primaryButtonColors.textContent.enabled,
+                pressed: Self.primaryButtonColors.textContent.pressed,
+                disabled: Self.primaryButtonColors.textContent.disabled
             ),
             background: .init(
                 enabled: Self.primaryButtonColors.background.enabled,
@@ -81,11 +81,11 @@ public struct VAlertDialogButtonModelCustom {
             disabledOpacity: Colors.primaryButtonColors.content.disabledOpacity
         )
 
-        model.colors.text = .init(
+        model.colors.textContent = .init(
             enabled: colors.text.enabled,
             pressed: colors.text.pressed,
             disabled: colors.text.disabled,
-            loading: Colors.primaryButtonColors.text.loading
+            loading: Colors.primaryButtonColors.textContent.loading
         )
         
         model.colors.background = .init(

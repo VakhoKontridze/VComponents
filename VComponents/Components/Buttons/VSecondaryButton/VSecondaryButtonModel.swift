@@ -48,10 +48,10 @@ extension VSecondaryButtonModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(   // Only applicable during init with title
-            enabled: primaryButtonColors.text.enabled,
-            pressed: primaryButtonColors.text.pressed,
-            disabled: primaryButtonColors.text.disabled
+        public var textContent: StateColors = .init(   // Only applicable during init with title
+            enabled: primaryButtonColors.textContent.enabled,
+            pressed: primaryButtonColors.textContent.pressed,
+            disabled: primaryButtonColors.textContent.disabled
         )
         
         public var background: StateColors = .init(

@@ -62,7 +62,7 @@ public struct VCheckBox<Content>: View where Content: View {
             content: {
                 VText(
                     title: title,
-                    color: model.colors.text.for(.init(state: state.wrappedValue, isPressed: false)),
+                    color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -106,7 +106,7 @@ public struct VCheckBox<Content>: View where Content: View {
             content: {
                 VText(
                     title: title,
-                    color: model.colors.text.for(.init(bool: isOn.wrappedValue, isPressed: false)),
+                    color: model.colors.textContent.for(.init(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )

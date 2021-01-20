@@ -56,7 +56,7 @@ extension VBaseTextFieldModel.Layout {
 // MARK:- Colors
 extension VBaseTextFieldModel {
     public struct Colors {
-        public var text: StateColorsAndOpacity = .init(
+        public var textContent: StateColorsAndOpacity = .init(
             enabled: ColorBook.primary,
             disabled: ColorBook.primary,
             disabledOpacity: 0.5

@@ -98,7 +98,7 @@ public struct VWheelPicker<Data, Content>: View
             content: { title in
                 VText(
                     title: title,
-                    color: model.colors.text.for(state),
+                    color: model.colors.textContent.for(state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )
@@ -157,7 +157,7 @@ public struct VWheelPicker<Data, Content>: View
             content: { item in
                 VText(
                     title: item.pickerTitle,
-                    color: model.colors.text.for(state),
+                    color: model.colors.textContent.for(state),
                     font: model.fonts.rows,
                     type: .oneLine
                 )

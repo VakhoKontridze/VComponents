@@ -89,7 +89,7 @@ public struct VRadioButton<Content>: View where Content: View {
             content: {
                 VText(
                     title: title,
-                    color: model.colors.text.for(.init(state: state.wrappedValue, isPressed: false)),
+                    color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -133,7 +133,7 @@ public struct VRadioButton<Content>: View where Content: View {
             content: {
                 VText(
                     title: title,
-                    color: model.colors.text.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
+                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
@@ -188,7 +188,7 @@ public struct VRadioButton<Content>: View where Content: View {
             content: {
                 VText(
                     title: selectingValue.pickerTitle,
-                    color: model.colors.text.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
+                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
                     font: model.font,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )

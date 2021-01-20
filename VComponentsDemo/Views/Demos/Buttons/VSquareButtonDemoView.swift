@@ -32,9 +32,9 @@ struct VSquareButtonDemoView: View {
         
         var model: VSquareButtonModel = .init()
         
-        model.colors.text.enabled = defaultModel.colors.background.enabled
-        model.colors.text.pressed = defaultModel.colors.background.pressed
-        model.colors.text.disabled = defaultModel.colors.background.disabled
+        model.colors.textContent.enabled = defaultModel.colors.background.enabled
+        model.colors.textContent.pressed = defaultModel.colors.background.pressed
+        model.colors.textContent.disabled = defaultModel.colors.background.disabled
         
         model.colors.background.enabled = .init("PrimaryButtonBordered.Background.enabled")
         model.colors.background.pressed = .init("PrimaryButtonBordered.Background.pressed")

@@ -65,10 +65,10 @@ extension VRadioButtonModel {
 
         public var content: StateOpacity = checkBoxColors.content
 
-        public var text: StateColors = .init(   // Only applicable during init with title
-            off: checkBoxColors.text.off,
-            on: checkBoxColors.text.on,
-            disabled: checkBoxColors.text.disabled
+        public var textContent: StateColors = .init(   // Only applicable during init with title
+            off: checkBoxColors.textContent.off,
+            on: checkBoxColors.textContent.on,
+            disabled: checkBoxColors.textContent.disabled
         )
 
         public init() {}

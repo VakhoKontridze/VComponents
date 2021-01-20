@@ -33,9 +33,9 @@ public struct VTextFieldModel {
         
         model.layout.textAlignment = layout.textAlignment
         
-        model.colors.text = .init(
-            enabled: colors.text.for(state),    // .disabled wouldn't matter
-            disabled: colors.text.disabled,
+        model.colors.textContent = .init(
+            enabled: colors.textContent.for(state),    // .disabled wouldn't matter
+            disabled: colors.textContent.disabled,
             disabledOpacity: colors.content.disabledOpacity
         )
         
@@ -111,7 +111,7 @@ public struct VTextFieldModel {
             disabledOpacity: colors.cancelButton.disabledOpacity
         )
         
-        model.colors.text = .init(
+        model.colors.textContent = .init(
             enabled: colors.cancelButton.enabled,
             pressed: colors.cancelButton.pressed,
             disabled: colors.cancelButton.disabled
@@ -172,7 +172,7 @@ extension VTextFieldModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(
+        public var textContent: StateColors = .init(
             enabled: ColorBook.primary,
             focused: ColorBook.primary,
             disabled: ColorBook.primary

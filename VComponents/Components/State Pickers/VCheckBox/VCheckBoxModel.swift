@@ -72,11 +72,11 @@ extension VCheckBoxModel {
             disabledOpacity: toggleColors.content.disabledOpacity
         )
 
-        public var text: StateColors = .init(   // Only applicable during init with title
-            off: toggleColors.text.off,
-            on: toggleColors.text.on,
-            intermediate: toggleColors.text.on,
-            disabled: toggleColors.text.disabled
+        public var textContent: StateColors = .init(   // Only applicable during init with title
+            off: toggleColors.textContent.off,
+            on: toggleColors.textContent.on,
+            intermediate: toggleColors.textContent.on,
+            disabled: toggleColors.textContent.disabled
         )
 
         public init() {}

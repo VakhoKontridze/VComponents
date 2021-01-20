@@ -55,7 +55,7 @@ extension VSegmentedPickerModel {
             disabledOpacity: 0.5
         )
         
-        public var text: StateColors = .init(   // Only applicable during init with title
+        public var textContent: StateColors = .init(   // Only applicable during init with title
             enabled: ColorBook.primary,
             disabled: ColorBook.primary
         )
