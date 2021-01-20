@@ -11,13 +11,15 @@ import SwiftUI
 /// Model that describes UI
 public struct VTextFieldModel {
     public static let baseTextFieldKeyboardType: UIKeyboardType = VBaseTextFieldModel().keyboardType
-    public static let baseTextFieldReturnButton: UIReturnKeyType = VBaseTextFieldModel().returnBUtton
+    public static let baseTextFieldReturnButton: UIReturnKeyType = VBaseTextFieldModel().returnButton
+    public static let baseTextFieldAutoCorrect: Bool = VBaseTextFieldModel().useAutoCorrect
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
     
     public var keyboardType: UIKeyboardType = baseTextFieldKeyboardType
+    public var useAutoCorrect: Bool = baseTextFieldAutoCorrect
     
     public var returnButton: UIReturnKeyType = baseTextFieldReturnButton
     
@@ -29,6 +31,8 @@ public struct VTextFieldModel {
     func baseTextFieldModel(state: VTextFieldState) -> VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         
+        model.layout.textAlignment = layout.textAlignment
+        
         model.colors.text = .init(
             enabled: colors.textColor(state: state),    // .disabled wouldn't matter
             disabled: colors.text.disabled,
@@ -38,7 +42,9 @@ public struct VTextFieldModel {
         model.font = fonts.textFont
         
         model.keyboardType = keyboardType
-        model.returnBUtton = returnButton
+        model.useAutoCorrect = useAutoCorrect
+        
+        model.returnButton = returnButton
         
         return model
     }
@@ -100,6 +106,8 @@ extension VTextFieldModel {
         
         public var height: CGFloat = 50
         public var cornerRadius: CGFloat = 10
+        
+        public var textAlignment: VBaseTextFieldModel.Layout.TextAlignment = .default
         
         public var borderWidth: CGFloat = 2
         
