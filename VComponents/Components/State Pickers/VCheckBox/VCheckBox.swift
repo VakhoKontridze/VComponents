@@ -54,13 +54,13 @@ public struct VCheckBox<Content>: View where Content: View {
         state: Binding<VCheckBoxState>,
         title: String
     )
-        where Content == VBaseTitle
+        where Content == VBaseText
     {
         self.init(
             model: model,
             state: state,
             content: {
-                VBaseTitle(
+                VBaseText(
                     title: title,
                     color: model.colors.textColor(state: .init(state: state.wrappedValue, isPressed: false)),
                     font: model.font,
@@ -98,13 +98,13 @@ public struct VCheckBox<Content>: View where Content: View {
         isOn: Binding<Bool>,
         title: String
     )
-        where Content == VBaseTitle
+        where Content == VBaseText
     {
         self.init(
             model: model,
             state: .init(bool: isOn),
             content: {
-                VBaseTitle(
+                VBaseText(
                     title: title,
                     color: model.colors.textColor(state: .init(bool: isOn.wrappedValue, isPressed: false)),
                     font: model.font,

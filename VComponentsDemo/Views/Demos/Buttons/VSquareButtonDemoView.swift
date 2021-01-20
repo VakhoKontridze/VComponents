@@ -76,7 +76,7 @@ extension VSquareButtonDemoView {
                         HStack(spacing: 5, content: {
                             buttonContent()
                             
-                            VBaseTitle(
+                            VBaseText(
                                 title: "A",
                                 color: ColorBook.primaryInverted,
                                 font: VSquareButtonModel().font,

@@ -25,7 +25,7 @@ struct ToggleSettingView: View {
 extension ToggleSettingView {
     var body: some View {
         HStack(spacing: 0, content: {
-            VBaseTitle(title: title, color: ColorBook.primary, font: .callout, type: .oneLine)
+            VBaseText(title: title, color: ColorBook.primary, font: .callout, type: .oneLine)
             Spacer()
             VToggle(isOn: $isOn)
         })

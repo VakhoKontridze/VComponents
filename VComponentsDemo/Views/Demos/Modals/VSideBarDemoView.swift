@@ -39,7 +39,7 @@ extension VSideBarDemoView {
     
     private var sideBarContent: some View {
         VLazyList(model: .vertical(), range: 1..<11, content: { num in
-            VBaseTitle(
+            VBaseText(
                 title: "\(num)",
                 color: ColorBook.primaryInverted,
                 font: .body,

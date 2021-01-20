@@ -26,7 +26,7 @@ public enum VNavigationLinkPreset {
         }
     }
     
-    func baseTitle(from title: String, isEnabled: Bool) -> VBaseTitle {
+    func baseText(from title: String, isEnabled: Bool) -> VBaseText {
         let color: Color = {
             switch self {
             case .primary(let model): return model.colors.textColor(state: isEnabled ? .enabled : .disabled)

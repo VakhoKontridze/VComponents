@@ -24,7 +24,7 @@ public struct VModalDefaultHeader: View {
 // MARK:- Body
 extension VModalDefaultHeader {
     public var body: some View {
-        VBaseTitle(
+        VBaseText(
             title: title,
             color: VModalModel.Colors.defaultHeader,
             font: VModalModel.defaultHeaderFont,

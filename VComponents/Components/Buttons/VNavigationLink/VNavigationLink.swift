@@ -103,13 +103,13 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         title: String
     )
-        where Label == VBaseTitle
+        where Label == VBaseText
     {
         self.init(
             preset: linkPreset,
             state: state,
             destination: destination,
-            label: { linkPreset.baseTitle(from: title, isEnabled: state.isEnabled) }
+            label: { linkPreset.baseText(from: title, isEnabled: state.isEnabled) }
         )
     }
     
@@ -120,14 +120,14 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         title: String
     )
-        where Label == VBaseTitle
+        where Label == VBaseText
     {
         self.init(
             preset: linkPreset,
             isActive: isActive,
             state: state,
             destination: destination,
-            label: { linkPreset.baseTitle(from: title, isEnabled: state.isEnabled) }
+            label: { linkPreset.baseText(from: title, isEnabled: state.isEnabled) }
         )
     }
     

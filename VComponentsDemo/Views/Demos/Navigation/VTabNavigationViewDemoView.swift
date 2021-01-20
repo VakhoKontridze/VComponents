@@ -20,7 +20,7 @@ extension VTabNavigationViewDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    VBaseTitle(
+                    VBaseText(
                         title: "Tab Navigation View should only ever be used on a root view. Continue?",
                         color: ColorBook.primary,
                         font: .body,
@@ -112,7 +112,7 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
         VStack(content: {
             Image(iconName).renderingMode(.template)
             
-            VBaseTitle(
+            VBaseText(
                 title: title,
                 color: ColorBook.primary,
                 font: .body,

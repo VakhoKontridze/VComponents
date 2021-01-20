@@ -80,7 +80,7 @@ extension VModalDemoView {
             
             if closeButtonPosition == .none {
                 VStack(content: {
-                    VBaseTitle(
+                    VBaseText(
                         title: "When close button is \"none\", Modal can only be dismissed programatically",
                         color: ColorBook.primary,
                         font: .system(size: 14, weight: .semibold, design: .default),

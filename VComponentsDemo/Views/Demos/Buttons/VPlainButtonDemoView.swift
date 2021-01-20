@@ -47,7 +47,7 @@ extension VPlainButtonDemoView {
                         VStack(spacing: 5, content: {
                             buttonContent()
 
-                            VBaseTitle(
+                            VBaseText(
                                 title: buttonTitle,
                                 color: ColorBook.accent,
                                 font: VPlainButtonModel().font,

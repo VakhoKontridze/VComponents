@@ -22,7 +22,7 @@ public struct VTableDefaultHeaderFooter: View {
 // MARK:- Body
 extension VTableDefaultHeaderFooter {
     public var body: some View {
-        VBaseTitle(
+        VBaseText(
             title: title,
             color: VTableModel.Colors.defaultHeaderFooter,
             font: VTableModel.defaultHeaderFooterFont,

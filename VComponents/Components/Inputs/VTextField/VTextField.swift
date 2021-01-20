@@ -132,7 +132,7 @@ extension VTextField {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VBaseTitle(
+            VBaseText(
                 title: title,
                 color: model.colors.titleColor(state: state, highlight: highlight),
                 font: model.fonts.title,
@@ -204,7 +204,7 @@ extension VTextField {
     
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
-            VBaseTitle(
+            VBaseText(
                 title: description,
                 color: model.colors.descriptionColor(state: state, highlight: highlight),
                 font: model.fonts.description,

@@ -99,7 +99,7 @@ public struct VSegmentedPicker<Data, Content>: View
     )
         where
             Data == Array<String>,
-            Content == VBaseTitle
+            Content == VBaseText
     {
         self.init(
             model: model,
@@ -110,7 +110,7 @@ public struct VSegmentedPicker<Data, Content>: View
             disabledIndexes: disabledIndexes,
             data: titles,
             content: { title in
-                VBaseTitle(
+                VBaseText(
                     title: title,
                     color: model.colors.textColor(state: state),
                     font: model.fonts.rows,
@@ -158,7 +158,7 @@ public struct VSegmentedPicker<Data, Content>: View
     )
         where
             Data == Array<Item>,
-            Content == VBaseTitle,
+            Content == VBaseText,
             Item: VPickableTitledItem
     {
         self.init(
@@ -173,7 +173,7 @@ public struct VSegmentedPicker<Data, Content>: View
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
             content: { item in
-                VBaseTitle(
+                VBaseText(
                     title: item.pickerTitle,
                     color: model.colors.textColor(state: state),
                     font: model.fonts.rows,
@@ -207,7 +207,7 @@ extension VSegmentedPicker {
     
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
-            VBaseTitle(
+            VBaseText(
                 title: title,
                 color: model.colors.titleColor(state: state),
                 font: model.fonts.title,
@@ -220,7 +220,7 @@ extension VSegmentedPicker {
     
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
-            VBaseTitle(
+            VBaseText(
                 title: description,
                 color: model.colors.descriptionColor(state: state),
                 font: model.fonts.description,

@@ -72,7 +72,7 @@ private extension VLazyListDemoDetailView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 25, content: {
-                    VBaseTitle(
+                    VBaseText(
                         title: "Scroll rows and see lazy initialization",
                         color: ColorBook.primary,
                         font: .callout,
@@ -85,14 +85,14 @@ private extension VLazyListDemoDetailView {
                     }
                     
                     VStack(spacing: 10, content: {
-                        VBaseTitle(
+                        VBaseText(
                             title: "Initialized Rows",
                             color: ColorBook.primary,
                             font: .callout,
                             type: .oneLine
                         )
                         
-                        VBaseTitle(
+                        VBaseText(
                             title: initializedRowsDescription,
                             color: ColorBook.primary,
                             font: .footnote,
@@ -108,7 +108,7 @@ private extension VLazyListDemoDetailView {
     
     private var vertical: some View {
         VLazyList(model: .vertical(), range: 1..<101, content: { num in
-            VBaseTitle(
+            VBaseText(
                 title: "\(num)",
                 color: ColorBook.primary,
                 font: .body,
@@ -125,7 +125,7 @@ private extension VLazyListDemoDetailView {
     
     private var horizontal: some View {
         VLazyList(model: .horizontal(), range: 1..<101, content: { num in
-            VBaseTitle(
+            VBaseText(
                 title: "\(num)",
                 color: ColorBook.primary,
                 font: .body,

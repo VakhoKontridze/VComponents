@@ -85,7 +85,7 @@ extension VWheelPickerDemoView {
                             HStack(spacing: 5, content: {
                                 item.pickerSymbol
                                 
-                                VBaseTitle(
+                                VBaseText(
                                     title: item.pickerTitle,
                                     color: ColorBook.primary,
                                     font: VWheelPickerModel.Fonts().rows,

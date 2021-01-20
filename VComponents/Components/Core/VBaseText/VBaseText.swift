@@ -1,5 +1,5 @@
 //
-//  VBaseTitle.swift
+//  VBaseText.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/7/21.
@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// ```
 /// var body: some View {
-///     VBaseTitle(
+///     VBaseText(
 ///         title: "Lorem ipsum dolor sit amet",
 ///         color: ColorBook.primary,
 ///         font: .body,
@@ -23,19 +23,19 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VBaseTitle: View {
+public struct VBaseText: View {
     // MARK: Properties
     private let title: String
     private let color: Color
     private let font: Font
-    private let titleType: VBaseTitleType
+    private let titleType: VBaseTextType
     
     // MARK: Initializers
     public init(
         title: String,
         color: Color,
         font: Font,
-        type titleType: VBaseTitleType
+        type titleType: VBaseTextType
     ) {
         self.title = title
         self.color = color
@@ -45,7 +45,7 @@ public struct VBaseTitle: View {
 }
 
 // MARK:- Body
-extension VBaseTitle {
+extension VBaseText {
     @ViewBuilder public var body: some View {
         switch titleType {
         case .oneLine:
@@ -67,8 +67,8 @@ extension VBaseTitle {
 }
 
 // MARK:- Preview
-struct VBaseTitle_Previews: PreviewProvider {
+struct VBaseText_Previews: PreviewProvider {
     static var previews: some View {
-        VBaseTitle(title: "Lorem ipsum dolor sit amet", color: ColorBook.primary, font: .body, type: .oneLine)
+        VBaseText(title: "Lorem ipsum dolor sit amet", color: ColorBook.primary, font: .body, type: .oneLine)
     }
 }

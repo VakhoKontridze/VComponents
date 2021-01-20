@@ -56,14 +56,14 @@ public struct VPlainButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Content == VBaseTitle
+        where Content == VBaseText
     {
         self.init(
             model: model,
             state: state,
             action: action,
             content: {
-                VBaseTitle(
+                VBaseText(
                     title: title,
                     color: model.colors.textColor(state: .init(state: state, isPressed: false)),
                     font: model.font,

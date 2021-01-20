@@ -63,7 +63,7 @@ struct VTableDemoView: View {
                 .foregroundColor(color.opacity(0.8))
                 .frame(dimension: 32)
 
-            VBaseTitle(
+            VBaseText(
                 title: title,
                 color: ColorBook.primary,
                 font: .body,

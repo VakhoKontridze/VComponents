@@ -25,7 +25,7 @@ struct HomeView: View {
         .init(id: 8, title: "Modals", rows: [.modal, .sideBar]),
         .init(id: 9, title: "Messages", rows: [.alert]),
         .init(id: 10, title: "Indicators", rows: [.spinner, .progressBar]),
-        .init(id: 11, title: "Core", rows: [.baseTitle, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
+        .init(id: 11, title: "Core", rows: [.baseText, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
     ]
 
     private enum HomeRow: Int, DemoableRow {
@@ -40,7 +40,7 @@ struct HomeView: View {
         case modal, sideBar /*,bottomSheet*/ /*, actionSheet*/ /*, contextMenu*/
         case alert /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
-        case baseTitle, baseButton, baseTextField, lazyList, baseList, baseView
+        case baseText, baseButton, baseTextField, lazyList, baseList, baseView
 
         var title: String {
             switch self {
@@ -80,7 +80,7 @@ struct HomeView: View {
             case .spinner: return VSpinnerDemoView.navigationBarTitle
             case .progressBar: return VProgressBarDemoView.navigationBarTitle
 
-            case .baseTitle: return VBaseTitleDemoView.navigationBarTitle
+            case .baseText: return VBaseTextDemoView.navigationBarTitle
             case .baseButton: return VBaseButtonDemoView.navigationBarTitle
             case .baseTextField: return VBaseTextFieldDemoView.navigationBarTitle
             case .lazyList: return VLazyListDemoView.navigationBarTitle
@@ -127,7 +127,7 @@ struct HomeView: View {
             case .spinner: VSpinnerDemoView()
             case .progressBar: VProgressBarDemoView()
 
-            case .baseTitle: VBaseTitleDemoView()
+            case .baseText: VBaseTextDemoView()
             case .baseButton: VBaseButtonDemoView()
             case .baseTextField: VBaseTextFieldDemoView()
             case .lazyList: VLazyListDemoView()

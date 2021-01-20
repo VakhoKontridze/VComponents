@@ -110,7 +110,7 @@ extension VSliderDemoView {
         where Content: View
     {
         VStack(spacing: 10, content: {
-            VBaseTitle(
+            VBaseText(
                 title: title,
                 color: ColorBook.primary,
                 font: .system(size: 14, weight: .regular, design: .monospaced),

@@ -109,7 +109,7 @@ extension VSection {
     public var body: some View {
         VStack(alignment: .leading, spacing: model.layout.titleMarginBottom, content: {
             if let title = title, !title.isEmpty {
-                VBaseTitle(
+                VBaseText(
                     title: title,
                     color: model.colors.title,
                     font: model.titleFont,

@@ -53,7 +53,7 @@ extension VBaseButtonDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    VBaseTitle(
+                    VBaseText(
                         title: clickInstruction.title,
                         color: ColorBook.primary,
                         font: .system(size: 16, weight: .semibold, design: .default),
@@ -67,7 +67,7 @@ extension VBaseButtonDemoView {
                             .foregroundColor(Color.pink.opacity(pressInsturction.opacity))
                     })
                     
-                    VBaseTitle(
+                    VBaseText(
                         title: pressInsturction.title,
                         color: ColorBook.primary,
                         font: .system(size: 16, weight: .semibold, design: .default),

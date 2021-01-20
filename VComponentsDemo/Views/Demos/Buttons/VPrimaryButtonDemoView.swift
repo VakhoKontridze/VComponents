@@ -61,7 +61,7 @@ extension VPrimaryButtonDemoView {
                         HStack(spacing: 5, content: {
                             buttonContent()
                             
-                            VBaseTitle(
+                            VBaseText(
                                 title: buttonTitle,
                                 color: ColorBook.primaryInverted,
                                 font: VPrimaryButtonModel().font,
