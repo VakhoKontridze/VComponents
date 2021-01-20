@@ -69,8 +69,8 @@ public struct VTextFieldModel {
             enabled: colors.clearButtonIcon.for(state, highlight: highlight),       // .disabled wouldn't matter
             pressed: colors.clearButtonIcon.for(highlight: highlight),
             disabled: colors.clearButtonIcon.disabled,
-            pressedOpacity: Colors.closeButtonColors.content.pressedOpacity,
-            disabledOpacity: Colors.closeButtonColors.content.disabledOpacity
+            pressedOpacity: colors.clearButtonIcon.pressedOpacity,
+            disabledOpacity: colors.clearButtonIcon.disabledOpacity
         )
         
         return model
@@ -93,8 +93,8 @@ public struct VTextFieldModel {
         )
         
         model.colors.content = .init(
-            pressedOpacity: Colors.squareButtonColors.content.pressedOpacity,
-            disabledOpacity: Colors.squareButtonColors.content.disabledOpacity
+            pressedOpacity: colors.visibilityButtonIcon.pressedOpacity,
+            disabledOpacity: colors.visibilityButtonIcon.disabledOpacity
         )
         
         return model
@@ -218,7 +218,7 @@ extension VTextFieldModel {
             disabled: segmentedPickerColors.title.disabled
         )
         
-        public var visibilityButtonIcon: ButtonStateColorsHighlighted = .init(
+        public var visibilityButtonIcon: ButtonStateColorsAndOpacityHighlighted = .init(
             enabled: segmentedPickerColors.title.enabled,
             enabledPressed: segmentedPickerColors.title.enabled,
             focused: segmentedPickerColors.title.enabled,
@@ -227,7 +227,9 @@ extension VTextFieldModel {
             successPressed: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
             errorPressed: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerColors.title.disabled
+            disabled: segmentedPickerColors.title.disabled,
+            pressedOpacity: squareButtonColors.content.pressedOpacity,
+            disabledOpacity: squareButtonColors.content.disabledOpacity
         )
         
         public var clearButtonBackground: ButtonStateColorsHighlighted = .init(
@@ -242,7 +244,7 @@ extension VTextFieldModel {
             disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
         )
         
-        public var clearButtonIcon: ButtonStateColorsHighlighted = .init(
+        public var clearButtonIcon: ButtonStateColorsAndOpacityHighlighted = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Icon"),
             enabledPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             focused: .init(componentAsset: "TextField.ClearButton.Icon"),
@@ -251,7 +253,9 @@ extension VTextFieldModel {
             successPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             error: .init(componentAsset: "TextField.ClearButton.Icon"),
             errorPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
-            disabled: .init(componentAsset: "TextField.ClearButton.Icon")
+            disabled: .init(componentAsset: "TextField.ClearButton.Icon"),
+            pressedOpacity: closeButtonColors.content.pressedOpacity,
+            disabledOpacity: closeButtonColors.content.disabledOpacity
         )
         
         public var cancelButton: StateColorsAndOpacity = .init(
@@ -352,6 +356,54 @@ extension VTextFieldModel.Colors {
             self.error = error
             self.errorPressed = errorPressed
             self.disabled = disabled
+        }
+        
+        func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
+            switch (highlight, state) {
+            case (_, .disabled): return disabled
+            case (.none, .enabled): return enabled
+            case (.none, .focused): return focused
+            case (.success, .enabled): return success
+            case (.success, .focused): return success
+            case (.error, .enabled): return error
+            case (.error, .focused): return error
+            }
+        }
+        
+        fileprivate func `for`(highlight: VTextFieldHighlight) -> Color {
+            switch highlight {
+            case .none: return enabledPressed
+            case .success: return successPressed
+            case .error: return errorPressed
+            }
+        }
+    }
+    
+    public struct ButtonStateColorsAndOpacityHighlighted {
+        public var enabled: Color
+        public var enabledPressed: Color
+        public var focused: Color
+        public var focusedPressed: Color
+        public var success: Color
+        public var successPressed: Color
+        public var error: Color
+        public var errorPressed: Color
+        public var disabled: Color
+        public var pressedOpacity: Double
+        public var disabledOpacity: Double
+        
+        public init(enabled: Color, enabledPressed: Color, focused: Color, focusedPressed: Color, success: Color, successPressed: Color, error: Color, errorPressed: Color, disabled: Color, pressedOpacity: Double, disabledOpacity: Double) {
+            self.enabled = enabled
+            self.enabledPressed = enabledPressed
+            self.focused = focused
+            self.focusedPressed = focusedPressed
+            self.success = success
+            self.successPressed = successPressed
+            self.error = error
+            self.errorPressed = errorPressed
+            self.disabled = disabled
+            self.pressedOpacity = pressedOpacity
+            self.disabledOpacity = disabledOpacity
         }
         
         func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
