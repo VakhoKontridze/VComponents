@@ -10,6 +10,9 @@ import SwiftUI
 // MARK:- V Side Bar Model
 /// Model that describes UI
 public struct VSideBarModel {
+    public static let sheetModel: VSheetModel = .init()
+    public static let modalModel: VModalModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var animations: Animations = .init()
@@ -73,11 +76,8 @@ extension VSideBarModel.Layout {
 // MARK:- Colors
 extension VSideBarModel {
     public struct Colors {
-        public static let sheetColor: Color = VSheetModel().color
-        public static let modalColors: VModalModel.Colors = .init()
-        
-        public var background: Color = sheetColor
-        public var blinding: Color = modalColors.blinding
+        public var background: Color = VSideBarModel.sheetModel.color
+        public var blinding: Color = VSideBarModel.modalModel.colors.blinding
         
         public init() {}
     }

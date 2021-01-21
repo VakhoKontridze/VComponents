@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Close Button Model
 /// Model that describes UI
 public struct VCloseButtonModel {
+    public static let chevronButtonModel: VChevronButtonModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     
@@ -19,14 +21,12 @@ public struct VCloseButtonModel {
 // MARK:- Layout
 extension VCloseButtonModel {
     public struct Layout {
-        public static let chevronLayout: VChevronButtonModel.Layout = .init()
-        
-        public var dimension: CGFloat = chevronLayout.dimension
+        public var dimension: CGFloat = VCloseButtonModel.chevronButtonModel.layout.dimension
         
         public var iconDimension: CGFloat = 11
         
-        public var hitBoxHor: CGFloat = chevronLayout.hitBoxHor
-        public var hitBoxVer: CGFloat = chevronLayout.hitBoxVer
+        public var hitBoxHor: CGFloat = VCloseButtonModel.chevronButtonModel.layout.hitBoxHor
+        public var hitBoxVer: CGFloat = VCloseButtonModel.chevronButtonModel.layout.hitBoxVer
         
         public init() {}
     }
@@ -35,11 +35,9 @@ extension VCloseButtonModel {
 // MARK:- Colors
 extension VCloseButtonModel {
     public struct Colors {
-        public static let chevronColors: VChevronButtonModel.Colors = .init()
+        public var content: StateColorsAndOpacity = VCloseButtonModel.chevronButtonModel.colors.content
         
-        public var content: StateColorsAndOpacity = chevronColors.content
-        
-        public var background: StateColors = chevronColors.background
+        public var background: StateColors = VCloseButtonModel.chevronButtonModel.colors.background
         
         public init() {}
     }

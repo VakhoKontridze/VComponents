@@ -10,6 +10,9 @@ import SwiftUI
 // MARK:- V Slider Model
 /// Model that describes UI
 public struct VSliderModel {
+    public static let primaryButtonModel: VPrimaryButtonModel = .init()
+    public static let toggleModel: VToggleModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var animation: Animation? = nil
@@ -39,9 +42,6 @@ extension VSliderModel {
 // MARK:- Colors
 extension VSliderModel {
     public struct Colors {
-        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
-        public static let toggleColors: VToggleModel.Colors = .init()
-        
         public var slider: SliderColors = .init()
         public var thumb: ThumbColors = .init()
         
@@ -52,13 +52,13 @@ extension VSliderModel {
 extension VSliderModel.Colors {
     public struct SliderColors {
         public var track: StateColors = .init(
-            enabled: VSliderModel.Colors.toggleColors.fill.off,
-            disabled: VSliderModel.Colors.toggleColors.fill.disabled
+            enabled: VSliderModel.toggleModel.colors.fill.off,
+            disabled: VSliderModel.toggleModel.colors.fill.disabled
         )
         
         public var progress: StateColors = .init(
-            enabled: VSliderModel.Colors.toggleColors.fill.on,
-            disabled: VSliderModel.Colors.primaryButtonColors.background.disabled
+            enabled: VSliderModel.toggleModel.colors.fill.on,
+            disabled: VSliderModel.primaryButtonModel.colors.background.disabled
         )
         
         public init() {}
@@ -68,8 +68,8 @@ extension VSliderModel.Colors {
 extension VSliderModel.Colors {
     public struct ThumbColors {
         public var fill: StateColors = .init(
-            enabled: VSliderModel.Colors.toggleColors.thumb.on,
-            disabled: VSliderModel.Colors.toggleColors.thumb.on
+            enabled: VSliderModel.toggleModel.colors.thumb.on,
+            disabled: VSliderModel.toggleModel.colors.thumb.on
         )
         
         public var border: StateColors = .init(

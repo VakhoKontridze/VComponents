@@ -10,15 +10,14 @@ import SwiftUI
 // MARK:- V Radio Button Model
 /// Model that describes UI
 public struct VRadioButtonModel {
-    public static let toggleFont: Font = VToggleModel().font
-    public static let toggleAnimation: Animation = VToggleModel().animation
-    public static let toggleContentIsClickable: Bool = VToggleModel().contentIsClickable
+    public static let toggleModel: VToggleModel = .init()
+    public static let checkBoxModel: VCheckBoxModel = .init()
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = toggleFont    // Only applicable during init with title
-    public var animation: Animation = toggleAnimation
-    public var contentIsClickable: Bool = toggleContentIsClickable
+    public var font: Font = toggleModel.font    // Only applicable during init with title
+    public var animation: Animation = toggleModel.animation
+    public var contentIsClickable: Bool = toggleModel.contentIsClickable
 
     public init() {}
 }
@@ -26,25 +25,21 @@ public struct VRadioButtonModel {
 // MARK:- Layout
 extension VRadioButtonModel {
     public struct Layout {
-        public static let checkBoxLayout: VCheckBoxModel.Layout = .init()
+        public var dimension: CGFloat = VRadioButtonModel.checkBoxModel.layout.dimension
         
-        public var dimension: CGFloat = checkBoxLayout.dimension
-        
-        public var borderWith: CGFloat = checkBoxLayout.borderWith
+        public var borderWith: CGFloat = VRadioButtonModel.checkBoxModel.layout.borderWith
         
         public var bulletDimension: CGFloat = 8
         
-        public var hitBox: CGFloat = checkBoxLayout.hitBox
+        public var hitBox: CGFloat = VRadioButtonModel.checkBoxModel.layout.hitBox
         
-        public var contentMarginLeading: CGFloat = checkBoxLayout.contentMarginLeading
+        public var contentMarginLeading: CGFloat = VRadioButtonModel.checkBoxModel.layout.contentMarginLeading
     }
 }
 
 // MARK:- Colors
 extension VRadioButtonModel {
     public struct Colors {
-        public static let checkBoxColors: VCheckBoxModel.Colors = .init()
-
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
             on: ColorBook.primaryInverted,
@@ -52,23 +47,23 @@ extension VRadioButtonModel {
         )
         
         public var border: StateColors = .init(
-            off: checkBoxColors.border.off,
-            on: checkBoxColors.fill.on,
-            disabled: checkBoxColors.border.disabled
+            off: VRadioButtonModel.checkBoxModel.colors.border.off,
+            on: VRadioButtonModel.checkBoxModel.colors.fill.on,
+            disabled: VRadioButtonModel.checkBoxModel.colors.border.disabled
         )
         
         public var bullet: StateColors = .init(
             off: .clear,
-            on: checkBoxColors.fill.on,
+            on: VRadioButtonModel.checkBoxModel.colors.fill.on,
             disabled: .clear
         )
 
-        public var content: StateOpacity = checkBoxColors.content
+        public var content: StateOpacity = VRadioButtonModel.checkBoxModel.colors.content
 
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            off: checkBoxColors.textContent.off,
-            on: checkBoxColors.textContent.on,
-            disabled: checkBoxColors.textContent.disabled
+            off: VRadioButtonModel.checkBoxModel.colors.textContent.off,
+            on: VRadioButtonModel.checkBoxModel.colors.textContent.on,
+            disabled: VRadioButtonModel.checkBoxModel.colors.textContent.disabled
         )
 
         public init() {}

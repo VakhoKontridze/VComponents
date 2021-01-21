@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Alert Model
 /// Model that describes UI
 public struct VAlertModel {
+    public static let modalModel: VModalModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -41,11 +43,8 @@ extension VAlertModel {
 // MARK:- Colors
 extension VAlertModel {
     public struct Colors {
-        public static let modalColors: VModalModel.Colors = .init()
-        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
-        
-        public var background: Color = modalColors.background
-        public var blinding: Color = modalColors.blinding
+        public var background: Color = VAlertModel.modalModel.colors.background
+        public var blinding: Color = VAlertModel.modalModel.colors.blinding
         
         public var title: Color = ColorBook.primary
         public var description: Color = ColorBook.primary

@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Wheel Picker Model
 /// Model that describes UI
 public struct VWheelPickerModel {
+    public static let segmentedPickerModel: VSegmentedPickerModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -20,12 +22,10 @@ public struct VWheelPickerModel {
 // MARK:- Layout
 extension VWheelPickerModel {
     public struct Layout {
-        public static let segmentedPickerLayout: VSegmentedPickerModel.Layout = .init()
-        
         public var cornerRadius: CGFloat = 15
         
-        public var titleSpacing: CGFloat = segmentedPickerLayout.titleSpacing
-        public var titleMarginHor: CGFloat = segmentedPickerLayout.titleMarginHor
+        public var titleSpacing: CGFloat = VWheelPickerModel.segmentedPickerModel.layout.titleSpacing
+        public var titleMarginHor: CGFloat = VWheelPickerModel.segmentedPickerModel.layout.titleMarginHor
         
         public init() {}
     }
@@ -34,22 +34,20 @@ extension VWheelPickerModel {
 // MARK:- Colors
 extension VWheelPickerModel {
     public struct Colors {
-        public static let segmentedPickerColors: VSegmentedPickerModel.Colors = .init()
-        
         public var content: StateOpacity = .init(
-            disabledOpacity: segmentedPickerColors.content.disabledOpacity
+            disabledOpacity: VWheelPickerModel.segmentedPickerModel.colors.content.disabledOpacity
         )
         
-        public var textContent: StateColors = segmentedPickerColors.textContent   // Only applicable during init with title
+        public var textContent: StateColors = VWheelPickerModel.segmentedPickerModel.colors.textContent   // Only applicable during init with title
         
         public var background: StateColors = .init(
             enabled: ColorBook.layer,
             disabled: ColorBook.layer
         )
 
-        public var title: StateColors = segmentedPickerColors.title
+        public var title: StateColors = VWheelPickerModel.segmentedPickerModel.colors.title
         
-        public var description: StateColors = segmentedPickerColors.description
+        public var description: StateColors = VWheelPickerModel.segmentedPickerModel.colors.description
         
         public init() {}
     }
@@ -86,12 +84,10 @@ extension VWheelPickerModel.Colors.StateColors {
 // MARK:- Fonts
 extension VWheelPickerModel {
     public struct Fonts {
-        public static let segmentedPickerFonts: VSegmentedPickerModel.Fonts = .init()
+        public var title: Font = VWheelPickerModel.segmentedPickerModel.fonts.title
+        public var description: Font = VWheelPickerModel.segmentedPickerModel.fonts.description
         
-        public var title: Font = segmentedPickerFonts.title
-        public var description: Font = segmentedPickerFonts.description
-        
-        public var rows: Font = segmentedPickerFonts.rows    // Only applicable during init with title
+        public var rows: Font = VWheelPickerModel.segmentedPickerModel.fonts.rows    // Only applicable during init with title
         
         public init() {}
     }

@@ -10,11 +10,11 @@ import SwiftUI
 // MARK:- V Secondary Button Model
 /// Model that describes UI
 public struct VSecondaryButtonModel {
-    public static let primaryButtonFont: Font = VPrimaryButtonModel().font
+    public static let primaryButtonModel: VPrimaryButtonModel = .init()
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = primaryButtonFont   // Only applicable during init with title
+    public var font: Font = primaryButtonModel.font   // Only applicable during init with title
     
     public init() {}
 }
@@ -41,29 +41,27 @@ extension VSecondaryButtonModel {
 // MARK:- Colors
 extension VSecondaryButtonModel {
     public struct Colors {
-        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
-        
         public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
         
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            enabled: primaryButtonColors.textContent.enabled,
-            pressed: primaryButtonColors.textContent.pressed,
-            disabled: primaryButtonColors.textContent.disabled
+            enabled: VSecondaryButtonModel.primaryButtonModel.colors.textContent.enabled,
+            pressed: VSecondaryButtonModel.primaryButtonModel.colors.textContent.pressed,
+            disabled: VSecondaryButtonModel.primaryButtonModel.colors.textContent.disabled
         )
         
         public var background: StateColors = .init(
-            enabled: primaryButtonColors.background.enabled,
-            pressed: primaryButtonColors.background.pressed,
-            disabled: primaryButtonColors.background.disabled
+            enabled: VSecondaryButtonModel.primaryButtonModel.colors.background.enabled,
+            pressed: VSecondaryButtonModel.primaryButtonModel.colors.background.pressed,
+            disabled: VSecondaryButtonModel.primaryButtonModel.colors.background.disabled
         )
         
         public var border: StateColors = .init(
-            enabled: primaryButtonColors.border.enabled,
-            pressed: primaryButtonColors.border.pressed,
-            disabled: primaryButtonColors.border.disabled
+            enabled: VSecondaryButtonModel.primaryButtonModel.colors.border.enabled,
+            pressed: VSecondaryButtonModel.primaryButtonModel.colors.border.pressed,
+            disabled: VSecondaryButtonModel.primaryButtonModel.colors.border.disabled
         )
         
         public init() { }

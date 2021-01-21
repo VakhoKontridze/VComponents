@@ -10,6 +10,9 @@ import SwiftUI
 // MARK:- V Segmented Picker Model
 /// Model that describes UI
 public struct VSegmentedPickerModel {
+    public static let toggleModel: VToggleModel = .init()
+    public static let sliderModel: VSliderModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -21,8 +24,6 @@ public struct VSegmentedPickerModel {
 // MARK:- Layout
 extension VSegmentedPickerModel {
     public struct Layout {
-        public static let sectionLayout: VSectionModel.Layout = .init()
-        
         public var height: CGFloat = 31
         public var cornerRadius: CGFloat = 7
         
@@ -47,9 +48,6 @@ extension VSegmentedPickerModel {
 // MARK:- Colors
 extension VSegmentedPickerModel {
     public struct Colors {
-        public static let toggleColors: VToggleModel.Colors = .init()
-        public static let sliderColors: VSliderModel.Colors = .init()
-        
         public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
@@ -65,13 +63,13 @@ extension VSegmentedPickerModel {
             disabled: .init(componentAsset: "SegmentedPicker.Indicator.disabled")
         )
         public var indicatorShadow: StateColors = .init(
-            enabled: sliderColors.thumb.shadow.enabled,
-            disabled: sliderColors.thumb.shadow.disabled
+            enabled: VSegmentedPickerModel.sliderModel.colors.thumb.shadow.enabled,
+            disabled: VSegmentedPickerModel.sliderModel.colors.thumb.shadow.disabled
         )
         
         public var background: StateColors = .init(
-            enabled: toggleColors.fill.off,
-            disabled: toggleColors.fill.disabled
+            enabled: VSegmentedPickerModel.toggleModel.colors.fill.off,
+            disabled: VSegmentedPickerModel.toggleModel.colors.fill.disabled
         )
         
         public var title: StateColors = .init(

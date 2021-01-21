@@ -14,22 +14,20 @@ public enum VAlertDialogButtonModel {
     case secondary
     case custom(_ model: VAlertDialogButtonModelCustom)
     
-    private static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
-    
     private static let primaryModel: VAlertDialogButtonModelCustom = .init(
         colors: .init(
             foreground: .init(
                 pressedOpacity: 0.5
             ),
             text: .init(
-                enabled: Self.primaryButtonColors.textContent.enabled,
-                pressed: Self.primaryButtonColors.textContent.pressed,
-                disabled: Self.primaryButtonColors.textContent.disabled
+                enabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.enabled,
+                pressed: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.pressed,
+                disabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.disabled
             ),
             background: .init(
-                enabled: Self.primaryButtonColors.background.enabled,
-                pressed: Self.primaryButtonColors.background.pressed,
-                disabled: Self.primaryButtonColors.background.disabled
+                enabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
+                pressed: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
+                disabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
             )
         )
     )
@@ -40,9 +38,9 @@ public enum VAlertDialogButtonModel {
                 pressedOpacity: 0.5
             ),
             text: .init(
-                enabled: Self.primaryButtonColors.background.enabled,
-                pressed: Self.primaryButtonColors.background.pressed,
-                disabled: Self.primaryButtonColors.background.disabled
+                enabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
+                pressed: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
+                disabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
             ),
             background: .init(
                 enabled: .clear,
@@ -64,7 +62,7 @@ public enum VAlertDialogButtonModel {
 // MARK:- V Alert Dialog Button Model Custom
 /// Model that describes UI
 public struct VAlertDialogButtonModelCustom {
-    public static let primaryButtonFont: Font = VPrimaryButtonModel().font
+    public static let primaryButtonModel: VPrimaryButtonModel = .init()
     
     public var layout: Layout
     public var colors: Colors
@@ -78,21 +76,21 @@ public struct VAlertDialogButtonModelCustom {
 
         model.colors.content = .init(
             pressedOpacity: colors.content.pressedOpacity,
-            disabledOpacity: Colors.primaryButtonColors.content.disabledOpacity
+            disabledOpacity: Self.primaryButtonModel.colors.content.disabledOpacity
         )
 
         model.colors.textContent = .init(
             enabled: colors.text.enabled,
             pressed: colors.text.pressed,
             disabled: colors.text.disabled,
-            loading: Colors.primaryButtonColors.textContent.loading
+            loading: Self.primaryButtonModel.colors.textContent.loading
         )
         
         model.colors.background = .init(
             enabled: colors.background.enabled,
             pressed: colors.background.pressed,
             disabled: colors.background.disabled,
-            loading: Colors.primaryButtonColors.background.loading
+            loading: Self.primaryButtonModel.colors.background.loading
         )
 
         model.font = font
@@ -100,7 +98,7 @@ public struct VAlertDialogButtonModelCustom {
         return model
     }
     
-    public init(layout: Layout = .init(), colors: Colors, font: Font = primaryButtonFont) {
+    public init(layout: Layout = .init(), colors: Colors, font: Font = primaryButtonModel.font) {
         self.layout = layout
         self.colors = colors
         self.font = font
@@ -120,8 +118,6 @@ extension VAlertDialogButtonModelCustom {
 // MARK:- Colors
 extension VAlertDialogButtonModelCustom {
     public struct Colors {
-        fileprivate static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
-        
         public var content: StateOpacity
         public var text: StateColors    // Only applicable during init with title
         public var background: StateColors

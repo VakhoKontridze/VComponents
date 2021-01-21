@@ -10,6 +10,9 @@ import SwiftUI
 // MARK:- V Section Model
 /// Model that describes UI
 public struct VSectionModel {
+    public static let baseListModel: VBaseListModel = .init()
+    public static let sheetModel: VSheetModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var titleFont: Font = .system(size: 14, weight: .bold, design: .default)
@@ -46,16 +49,13 @@ public struct VSectionModel {
 // MARK:- Layout
 extension VSectionModel {
     public struct Layout {
-        public static let genericListContentLayout: VBaseListModel.Layout = .init()
-        public static let sheetLayout: VSheetModel.Layout = .init()
-        
         public var titleMarginHor: CGFloat = 0
         public var titleMarginBottom: CGFloat = 10
         
-        public var cornerRadius: CGFloat = sheetLayout.cornerRadius
-        public var contentMargin: CGFloat = sheetLayout.contentMargin
-        public var itemSpacing: CGFloat = genericListContentLayout.itemSpacing
-        public var dividerHeight: CGFloat = genericListContentLayout.dividerHeight
+        public var cornerRadius: CGFloat = VSectionModel.sheetModel.layout.cornerRadius
+        public var contentMargin: CGFloat = VSectionModel.sheetModel.layout.contentMargin
+        public var itemSpacing: CGFloat = VSectionModel.baseListModel.layout.itemSpacing
+        public var dividerHeight: CGFloat = VSectionModel.baseListModel.layout.dividerHeight
         
         public init() {}
     }
@@ -64,12 +64,9 @@ extension VSectionModel {
 // MARK:- Colors
 extension VSectionModel {
     public struct Colors {
-        public static let genericListContentColors: VBaseListModel.Colors = .init()
-        public static let sheetColor: Color = VSheetModel().color
-        
         public var title: Color = ColorBook.primary
-        public var divider: Color = genericListContentColors.divider
-        public var background: Color = sheetColor
+        public var divider: Color = VSectionModel.baseListModel.colors.divider
+        public var background: Color = VSectionModel.sheetModel.color
         
         public init() {}
     }

@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Table Model
 /// Model that describes UI
 public struct VTableModel {
+    public static let sectionModel: VSectionModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     static let defaultHeaderFooterFont: Font = .system(size: 13, weight: .regular, design: .default)
@@ -45,17 +47,15 @@ public struct VTableModel {
 // MARK:- Layout
 extension VTableModel {
     public struct Layout {
-        public static let sectionLayout: VSectionModel.Layout = .init()
-        
-        public var cornerRadius: CGFloat = sectionLayout.cornerRadius
-        public var contentMargin: CGFloat = sectionLayout.contentMargin
+        public var cornerRadius: CGFloat = VTableModel.sectionModel.layout.cornerRadius
+        public var contentMargin: CGFloat = VTableModel.sectionModel.layout.contentMargin
         
         public var headerMarginBottom: CGFloat = 10
-        public var itemSpacing: CGFloat = sectionLayout.itemSpacing
+        public var itemSpacing: CGFloat = VTableModel.sectionModel.layout.itemSpacing
         public var footerMarginTop: CGFloat = 10
         public var sectionSpacing: CGFloat = 20
         
-        public var dividerHeight: CGFloat = sectionLayout.dividerHeight
+        public var dividerHeight: CGFloat = VTableModel.sectionModel.layout.dividerHeight
         
         public init() {}
     }
@@ -64,11 +64,9 @@ extension VTableModel {
 // MARK:- Colors
 extension VTableModel {
     public struct Colors {
-        public static let sectionColors: VSectionModel.Colors = .init()
-        
         static let defaultHeaderFooter: Color = ColorBook.secondary
-        public var divider: Color = sectionColors.divider
-        public var background: Color = sectionColors.background
+        public var divider: Color = VTableModel.sectionModel.colors.divider
+        public var background: Color = VTableModel.sectionModel.colors.background
         
         public init() {}
     }

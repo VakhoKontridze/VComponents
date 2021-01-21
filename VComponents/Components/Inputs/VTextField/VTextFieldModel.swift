@@ -10,18 +10,20 @@ import SwiftUI
 // MARK:- V Text Field Model
 /// Model that describes UI
 public struct VTextFieldModel {
-    public static let baseTextFieldKeyboardType: UIKeyboardType = VBaseTextFieldModel().keyboardType
-    public static let baseTextFieldReturnButton: UIReturnKeyType = VBaseTextFieldModel().returnButton
-    public static let baseTextFieldAutoCorrect: Bool = VBaseTextFieldModel().useAutoCorrect
+    public static let baseTextFieldModel: VBaseTextFieldModel = .init()
+    public static let squareButtonModel: VSquareButtonModel = .init()
+    public static let plainButtonModel: VPlainButtonModel = .init()
+    public static let closeButtonModel: VCloseButtonModel = .init()
+    public static let segmentedPickerModel: VSegmentedPickerModel = .init()
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
     
-    public var keyboardType: UIKeyboardType = baseTextFieldKeyboardType
-    public var useAutoCorrect: Bool = baseTextFieldAutoCorrect
+    public var keyboardType: UIKeyboardType = baseTextFieldModel.keyboardType
+    public var useAutoCorrect: Bool = baseTextFieldModel.useAutoCorrect
     
-    public var returnButton: UIReturnKeyType = baseTextFieldReturnButton
+    public var returnButton: UIReturnKeyType = baseTextFieldModel.returnButton
     
     public var clearButton: Bool = true
     public var clearButtonAnimation: Animation? = .easeInOut
@@ -128,8 +130,6 @@ public struct VTextFieldModel {
 // MARK:- Layout
 extension VTextFieldModel {
     public struct Layout {
-        public static let segmentedPickerLayout: VSegmentedPickerModel.Layout = .init()
-        
         public var height: CGFloat = 50
         public var cornerRadius: CGFloat = 10
         
@@ -147,10 +147,10 @@ extension VTextFieldModel {
         public var visibilityButtonDimension: CGFloat = 22
         public var visibilityButtonIconDimension: CGFloat = 20
         
-        public var buttonSpacing: CGFloat = 10
+        public var contentSpacing: CGFloat = 10
 
-        public var titleSpacing: CGFloat = segmentedPickerLayout.titleSpacing
-        public var titleMarginHor: CGFloat = segmentedPickerLayout.titleMarginHor
+        public var titleSpacing: CGFloat = VTextFieldModel.segmentedPickerModel.layout.titleSpacing
+        public var titleMarginHor: CGFloat = VTextFieldModel.segmentedPickerModel.layout.titleMarginHor
         
         public init() {}
     }
@@ -163,11 +163,6 @@ extension VTextFieldModel.Layout {
 // MARK:- Colors
 extension VTextFieldModel {
     public struct Colors {
-        public static let segmentedPickerColors: VSegmentedPickerModel.Colors = .init()
-        public static let squareButtonColors: VSquareButtonModel.Colors = .init()
-        public static let plainButtonColors: VPlainButtonModel.Colors = .init()
-        public static let closeButtonColors: VCloseButtonModel.Colors = .init()
-        
         public var content: StateOpacity = .init(
             disabledOpacity: 0.5
         )
@@ -179,11 +174,11 @@ extension VTextFieldModel {
         )
         
         public var background: StateColorsHighlighted = .init(
-            enabled: segmentedPickerColors.background.enabled,
+            enabled: VTextFieldModel.segmentedPickerModel.colors.background.enabled,
             focused: .init(componentAsset: "TextField.Background.focused"),
             success: .init(componentAsset: "TextField.Background.success"),
             error: .init(componentAsset: "TextField.Background.error"),
-            disabled: segmentedPickerColors.background.disabled
+            disabled: VTextFieldModel.segmentedPickerModel.colors.background.disabled
         )
         
         public var border: StateColorsHighlighted = .init(
@@ -195,41 +190,41 @@ extension VTextFieldModel {
         )
         
         public var title: StateColorsHighlighted = .init(
-            enabled: segmentedPickerColors.title.enabled,
-            focused: segmentedPickerColors.title.enabled,
+            enabled: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
+            focused: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerColors.title.disabled
+            disabled: VTextFieldModel.segmentedPickerModel.colors.title.disabled
         )
         
         public var description: StateColorsHighlighted = .init(
-            enabled: segmentedPickerColors.description.enabled,
-            focused: segmentedPickerColors.description.enabled,
+            enabled: VTextFieldModel.segmentedPickerModel.colors.description.enabled,
+            focused: VTextFieldModel.segmentedPickerModel.colors.description.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerColors.description.disabled
+            disabled: VTextFieldModel.segmentedPickerModel.colors.description.disabled
         )
         
         public var searchIcon: StateColorsHighlighted = .init(
-            enabled: segmentedPickerColors.title.enabled,
-            focused: segmentedPickerColors.title.enabled,
+            enabled: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
+            focused: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerColors.title.disabled
+            disabled: VTextFieldModel.segmentedPickerModel.colors.title.disabled
         )
         
         public var visibilityButtonIcon: ButtonStateColorsAndOpacityHighlighted = .init(
-            enabled: segmentedPickerColors.title.enabled,
-            enabledPressed: segmentedPickerColors.title.enabled,
-            focused: segmentedPickerColors.title.enabled,
-            focusedPressed: segmentedPickerColors.title.enabled,
+            enabled: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
+            enabledPressed: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
+            focused: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
+            focusedPressed: VTextFieldModel.segmentedPickerModel.colors.title.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             successPressed: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
             errorPressed: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerColors.title.disabled,
-            pressedOpacity: squareButtonColors.content.pressedOpacity,
-            disabledOpacity: squareButtonColors.content.disabledOpacity
+            disabled: VTextFieldModel.segmentedPickerModel.colors.title.disabled,
+            pressedOpacity: VTextFieldModel.squareButtonModel.colors.content.pressedOpacity,
+            disabledOpacity: VTextFieldModel.squareButtonModel.colors.content.disabledOpacity
         )
         
         public var clearButtonBackground: ButtonStateColorsHighlighted = .init(
@@ -254,16 +249,16 @@ extension VTextFieldModel {
             error: .init(componentAsset: "TextField.ClearButton.Icon"),
             errorPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             disabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressedOpacity: closeButtonColors.content.pressedOpacity,
-            disabledOpacity: closeButtonColors.content.disabledOpacity
+            pressedOpacity: VTextFieldModel.closeButtonModel.colors.content.pressedOpacity,
+            disabledOpacity: VTextFieldModel.closeButtonModel.colors.content.disabledOpacity
         )
         
         public var cancelButton: StateColorsAndOpacity = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
             disabled: ColorBook.primary,
-            pressedOpacity: plainButtonColors.content.pressedOpacity,
-            disabledOpacity: plainButtonColors.content.disabledOpacity
+            pressedOpacity: VTextFieldModel.plainButtonModel.colors.content.pressedOpacity,
+            disabledOpacity: VTextFieldModel.plainButtonModel.colors.content.disabledOpacity
         )
         
         public init() {}
@@ -433,17 +428,13 @@ extension VTextFieldModel.Colors {
 // MARK:- Fonts
 extension VTextFieldModel {
     public struct Fonts {
-        public static let baseTextFieldFont: UIFont = VBaseTextFieldModel().font
-        public static let segmentedPickerFonts: VSegmentedPickerModel.Fonts = .init()
-        public static let cancelButtonFont: Font = VPlainButtonModel().font
+        public var textFont: UIFont = VTextFieldModel.baseTextFieldModel.font
         
-        public var textFont: UIFont = baseTextFieldFont
+        public var placeholder: Font = VTextFieldModel.segmentedPickerModel.fonts.description
+        public var title: Font = VTextFieldModel.segmentedPickerModel.fonts.title
+        public var description: Font = VTextFieldModel.segmentedPickerModel.fonts.description
         
-        public var placeholder: Font = segmentedPickerFonts.description
-        public var title: Font = segmentedPickerFonts.title
-        public var description: Font = segmentedPickerFonts.description
-        
-        public var cancelButton: Font = cancelButtonFont
+        public var cancelButton: Font = VTextFieldModel.plainButtonModel.font
         
         public init() {}
     }

@@ -10,6 +10,9 @@ import SwiftUI
 // MARK:- V Accordion Model
 /// Model that describes UI
 public struct VAccordionModel {
+    public static let sectionModel: VSectionModel = .init()
+    public static let chevronButtonModel: VChevronButtonModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     static let defaultHeaderFont: Font = .system(size: 15, weight: .semibold, design: .default)
@@ -61,10 +64,7 @@ public struct VAccordionModel {
 // MARK:- Layout
 extension VAccordionModel {
     public struct Layout {
-        public static let sectionLayout: VSectionModel.Layout = .init()
-        public static let chevronButtonLayout: VChevronButtonModel.Layout = .init()
-        
-        public var cornerRadius: CGFloat = sectionLayout.cornerRadius
+        public var cornerRadius: CGFloat = VAccordionModel.sectionModel.layout.cornerRadius
         
         public var marginLeading: CGFloat = 15
         public var marginTrailing: CGFloat = 15
@@ -81,12 +81,12 @@ extension VAccordionModel {
         public var contentMarginTop: CGFloat = 0
         public var contentMarginBottom: CGFloat = 5
         
-        public var chevronButtonDimension: CGFloat = chevronButtonLayout.dimension
-        public var chevronButtonIconDimension: CGFloat = chevronButtonLayout.iconDimension
+        public var chevronButtonDimension: CGFloat = VAccordionModel.chevronButtonModel.layout.dimension
+        public var chevronButtonIconDimension: CGFloat = VAccordionModel.chevronButtonModel.layout.iconDimension
         
-        public var dividerHeight: CGFloat = sectionLayout.dividerHeight
+        public var dividerHeight: CGFloat = VAccordionModel.sectionModel.layout.dividerHeight
         
-        public var itemSpacing: CGFloat = sectionLayout.itemSpacing
+        public var itemSpacing: CGFloat = VAccordionModel.sectionModel.layout.itemSpacing
         
         public init() {}
     }
@@ -95,12 +95,9 @@ extension VAccordionModel {
 // MARK:- Colors
 extension VAccordionModel {
     public struct Colors {
-        public static let sectionColors: VSectionModel.Colors = .init()
-        public static let chevronButtonColors: VChevronButtonModel.Colors = .init()
-        
         static let defaultHeader: Color = ColorBook.primary
         
-        public var background: Color = sectionColors.background
+        public var background: Color = VAccordionModel.sectionModel.colors.background
         
         public var header: StateOpacity = .init(
             disabledOpacity: 0.5
@@ -108,11 +105,11 @@ extension VAccordionModel {
         
         public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
         
-        public var chevronButtonBackground: StateColors = chevronButtonColors.background
+        public var chevronButtonBackground: StateColors = VAccordionModel.chevronButtonModel.colors.background
         
-        public var chevronButtonIcon: StateColorsAndOpacity = chevronButtonColors.content
+        public var chevronButtonIcon: StateColorsAndOpacity = VAccordionModel.chevronButtonModel.colors.content
         
-        public var divider: Color = sectionColors.divider
+        public var divider: Color = VAccordionModel.sectionModel.colors.divider
         
         public init() {}
     }

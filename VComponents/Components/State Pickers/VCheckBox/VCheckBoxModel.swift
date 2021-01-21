@@ -10,15 +10,13 @@ import SwiftUI
 // MARK:- V CheckBox Model
 /// Model that describes UI
 public struct VCheckBoxModel {
-    public static let toggleFont: Font = VToggleModel().font
-    public static let toggleAnimation: Animation = VToggleModel().animation
-    public static let toggleContentIsClickable: Bool = VToggleModel().contentIsClickable
+    public static let toggleModel: VToggleModel = .init()
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = toggleFont    // Only applicable during init with title
-    public var animation: Animation = toggleAnimation
-    public var contentIsClickable: Bool = toggleContentIsClickable
+    public var font: Font = toggleModel.font    // Only applicable during init with title
+    public var animation: Animation = toggleModel.animation
+    public var contentIsClickable: Bool = toggleModel.contentIsClickable
 
     public init() {}
 }
@@ -26,8 +24,6 @@ public struct VCheckBoxModel {
 // MARK:- Layout
 extension VCheckBoxModel {
     public struct Layout {
-        public static let toggleLayout: VToggleModel.Layout = .init()
-        
         public var dimension: CGFloat = 16
         public var cornerRadius: CGFloat = 4
         
@@ -35,7 +31,7 @@ extension VCheckBoxModel {
         
         public var iconDimension: CGFloat = 10
         
-        public var hitBox: CGFloat = toggleLayout.contentMarginLeading
+        public var hitBox: CGFloat = VCheckBoxModel.toggleModel.layout.contentMarginLeading
         
         public var contentMarginLeading: CGFloat = 0
     }
@@ -44,12 +40,10 @@ extension VCheckBoxModel {
 // MARK:- Colors
 extension VCheckBoxModel {
     public struct Colors {
-        public static let toggleColors: VToggleModel.Colors = .init()
-
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
-            on: toggleColors.fill.on,
-            intermediate: toggleColors.fill.on,
+            on: VCheckBoxModel.toggleModel.colors.fill.on,
+            intermediate: VCheckBoxModel.toggleModel.colors.fill.on,
             disabled: ColorBook.primaryInverted
         )
         
@@ -62,21 +56,21 @@ extension VCheckBoxModel {
         
         public var icon: StateColors = .init(
             off: .clear,
-            on: toggleColors.thumb.off,
-            intermediate: toggleColors.thumb.on,
+            on: VCheckBoxModel.toggleModel.colors.thumb.off,
+            intermediate: VCheckBoxModel.toggleModel.colors.thumb.on,
             disabled: .clear
         )
 
         public var content: StateOpacity = .init(
-            pressedOpacity: toggleColors.content.pressedOpacity,
-            disabledOpacity: toggleColors.content.disabledOpacity
+            pressedOpacity: VCheckBoxModel.toggleModel.colors.content.pressedOpacity,
+            disabledOpacity: VCheckBoxModel.toggleModel.colors.content.disabledOpacity
         )
 
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            off: toggleColors.textContent.off,
-            on: toggleColors.textContent.on,
-            intermediate: toggleColors.textContent.on,
-            disabled: toggleColors.textContent.disabled
+            off: VCheckBoxModel.toggleModel.colors.textContent.off,
+            on: VCheckBoxModel.toggleModel.colors.textContent.on,
+            intermediate: VCheckBoxModel.toggleModel.colors.textContent.on,
+            disabled: VCheckBoxModel.toggleModel.colors.textContent.disabled
         )
 
         public init() {}

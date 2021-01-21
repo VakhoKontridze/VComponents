@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Base View Model
 /// Model that describes UI
 public struct VBaseViewModel {
+    public static let chevronButtonModel: VChevronButtonModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var titleColor: Color = ColorBook.primary
@@ -35,14 +37,12 @@ public struct VBaseViewModel {
 // MARK:- Layout
 extension VBaseViewModel {
     public struct Layout {
-        public static let chevronButtonLayout: VChevronButtonModel.Layout = .init()
-        
         public var margin: CGFloat = 15
         public var spacing: CGFloat = 10
         var width: CGFloat { UIScreen.main.bounds.width - 2 * margin }
         
-        public var backButtonDimension: CGFloat = chevronButtonLayout.dimension
-        public var backButtonIconDimension: CGFloat = chevronButtonLayout.iconDimension
+        public var backButtonDimension: CGFloat = VBaseViewModel.chevronButtonModel.layout.dimension
+        public var backButtonIconDimension: CGFloat = VBaseViewModel.chevronButtonModel.layout.iconDimension
 
         public init() {}
     }
@@ -51,11 +51,9 @@ extension VBaseViewModel {
 // MARK:- Colors
 extension VBaseViewModel {
     public struct Colors {
-        public static let chevronButtonColors: VChevronButtonModel.Colors = .init()
+        public var closeButtonBackground: StateColors = VBaseViewModel.chevronButtonModel.colors.background
         
-        public var closeButtonBackground: StateColors = chevronButtonColors.background
-        
-        public var closeButtonIcon: StateColorsAndOpacity = chevronButtonColors.content
+        public var closeButtonIcon: StateColorsAndOpacity = VBaseViewModel.chevronButtonModel.colors.content
         
         public init() {}
     }

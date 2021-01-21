@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Square Button Model
 /// Model that describes UI
 public struct VSquareButtonModel {
+    public static let primaryButtonModel: VPrimaryButtonModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var font: Font = .system(size: 14, weight: .semibold, design: .default)  // Only applicable during init with title
@@ -39,29 +41,27 @@ extension VSquareButtonModel {
 // MARK:- Colors
 extension VSquareButtonModel {
     public struct Colors {
-        public static let primaryButtonColors: VPrimaryButtonModel.Colors = .init()
-        
         public var content: StateOpacity = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
         
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            enabled: primaryButtonColors.textContent.enabled,
-            pressed: primaryButtonColors.textContent.pressed,
-            disabled: primaryButtonColors.textContent.disabled
+            enabled: VSquareButtonModel.primaryButtonModel.colors.textContent.enabled,
+            pressed: VSquareButtonModel.primaryButtonModel.colors.textContent.pressed,
+            disabled: VSquareButtonModel.primaryButtonModel.colors.textContent.disabled
         )
         
         public var background: StateColors = .init(
-            enabled: primaryButtonColors.background.enabled,
-            pressed: primaryButtonColors.background.pressed,
-            disabled: primaryButtonColors.background.disabled
+            enabled: VSquareButtonModel.primaryButtonModel.colors.background.enabled,
+            pressed: VSquareButtonModel.primaryButtonModel.colors.background.pressed,
+            disabled: VSquareButtonModel.primaryButtonModel.colors.background.disabled
         )
         
         public var border: StateColors = .init(
-            enabled: primaryButtonColors.border.enabled,
-            pressed: primaryButtonColors.border.pressed,
-            disabled: primaryButtonColors.border.disabled
+            enabled: VSquareButtonModel.primaryButtonModel.colors.border.enabled,
+            pressed: VSquareButtonModel.primaryButtonModel.colors.border.pressed,
+            disabled: VSquareButtonModel.primaryButtonModel.colors.border.disabled
         )
         
         public init() {}

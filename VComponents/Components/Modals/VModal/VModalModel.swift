@@ -10,6 +10,9 @@ import SwiftUI
 // MARK:- V Modal Model
 /// Model that describes UI
 public struct VModalModel {
+    public static let closeButtonModel: VCloseButtonModel = .init()
+    public static let sheetModel: VSheetModel = .init()
+    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     static let defaultHeaderFont: Font = .system(size: 17, weight: .bold, design: .default)
@@ -45,21 +48,18 @@ public struct VModalModel {
 // MARK:- Layout
 extension VModalModel {
     public struct Layout {
-        public static let closeButtonLayout: VCloseButtonModel.Layout = .init()
-        public static let sheetLayout: VSheetModel.Layout = .init()
-        
         public var size: CGSize = .init(
             width: UIScreen.main.bounds.width * 0.9,
             height: UIScreen.main.bounds.height * 0.6
         )
         
-        public var roundedCorners: VSheetModel.Layout.RoundedCorners = sheetLayout.roundedCorners
-        public var cornerRadius: CGFloat = sheetLayout.cornerRadius
-        public var margin: CGFloat = sheetLayout.contentMargin
+        public var roundedCorners: RoundedCorners = VModalModel.sheetModel.layout.roundedCorners
+        public var cornerRadius: CGFloat = VModalModel.sheetModel.layout.cornerRadius
+        public var margin: CGFloat = VModalModel.sheetModel.layout.contentMargin
 
         public var closeButton: Set<VModalCloseButton> = [.default]
-        public var closeButtonDimension: CGFloat = closeButtonLayout.dimension
-        public var closeButtonIconDimension: CGFloat = closeButtonLayout.iconDimension
+        public var closeButtonDimension: CGFloat = VModalModel.closeButtonModel.layout.dimension
+        public var closeButtonIconDimension: CGFloat = VModalModel.closeButtonModel.layout.iconDimension
         
         public var dividerHeight: CGFloat = 0
         var hasDivider: Bool { dividerHeight > 0 }
@@ -72,6 +72,8 @@ extension VModalModel {
 }
 
 extension VModalModel.Layout {
+    public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
+    
     public enum VModalCloseButton: Int, CaseIterable {
         case leading
         case trailing
@@ -92,15 +94,12 @@ extension VModalModel.Layout {
 // MARK:- Colors
 extension VModalModel {
     public struct Colors {
-        public static let sheetColor: Color = VSheetModel().color
-        public static let closeButtonColors: VCloseButtonModel.Colors = .init()
-        
         static let defaultHeader: Color = ColorBook.primary
         
-        public var background: Color = sheetColor
+        public var background: Color = VModalModel.sheetModel.color
         
-        public var closeButtonBackground: StateColors = closeButtonColors.background
-        public var closeButtonIcon: StateColorsAndOpacity = closeButtonColors.content
+        public var closeButtonBackground: StateColors = VModalModel.closeButtonModel.colors.background
+        public var closeButtonIcon: StateColorsAndOpacity = VModalModel.closeButtonModel.colors.content
         
         public var divider: Color = .clear
         

@@ -10,11 +10,11 @@ import SwiftUI
 // MARK:- V Plain Model Button
 /// Model that describes UI
 public struct VPlainButtonModel {
-    public static let squareButtonFont: Font = VSquareButtonModel().font
+    public static let squareButtonModel: VSquareButtonModel = .init()
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = squareButtonFont    // Only applicable during init with title
+    public var font: Font = squareButtonModel.font    // Only applicable during init with title
     
     public init() { }
 }
