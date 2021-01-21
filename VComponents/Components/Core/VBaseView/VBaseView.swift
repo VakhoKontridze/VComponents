@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Base View
 /// Core component that is used throughout the framework as SwiftUI's equivalent of UIViewController
 ///
-/// Model, type, and leading and trailing items can be passed as parameters
+/// Model, and leading and trailing items can be passed as parameters
 ///
 /// # Usage Example #
 /// ```
@@ -49,7 +49,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     @Environment(\.vNavigationViewBackButtonHidden) private var vNavigationViewBackButtonHidden: Bool
     
     private let model: VBaseViewModel
-    private let type: VBaseViewType
     
     private let navigationBarTitle: String
     private let navigationBarLeadingItem: (() -> NavigationBarLeadingItem)?
@@ -60,14 +59,12 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     // MARK: Initializers
     public init(
         model: VBaseViewModel = .init(),
-        type: VBaseViewType = .default,
         title navigationBarTitle: String,
         @ViewBuilder leadingItem navigationBarLeadingItem: @escaping () -> NavigationBarLeadingItem,
         @ViewBuilder trailingItem navigationBarTrailingItem: @escaping () -> NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self.type = type
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = navigationBarLeadingItem
         self.navigationBarTrailingItem = navigationBarTrailingItem
@@ -76,7 +73,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 
     public init(
         model: VBaseViewModel = .init(),
-        type: VBaseViewType = .default,
         title navigationBarTitle: String,
         @ViewBuilder leadingItem navigationBarLeadingItem: @escaping () -> NavigationBarLeadingItem,
         @ViewBuilder content: @escaping () -> Content
@@ -84,7 +80,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         where NavigationBarTrailingItem == Never
     {
         self.model = model
-        self.type = type
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = navigationBarLeadingItem
         self.navigationBarTrailingItem = nil
@@ -93,7 +88,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 
     public init(
         model: VBaseViewModel = .init(),
-        type: VBaseViewType = .default,
         title navigationBarTitle: String,
         @ViewBuilder trailingItem navigationBarTrailingItem: @escaping () -> NavigationBarTrailingItem,
         @ViewBuilder content: @escaping () -> Content
@@ -101,7 +95,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         where NavigationBarLeadingItem == Never
     {
         self.model = model
-        self.type = type
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
         self.navigationBarTrailingItem = navigationBarTrailingItem
@@ -110,7 +103,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 
     public init(
         model: VBaseViewModel = .init(),
-        type: VBaseViewType = .default,
         title navigationBarTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
@@ -119,7 +111,6 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
             NavigationBarTrailingItem == Never
     {
         self.model = model
-        self.type = type
         self.navigationBarTitle = navigationBarTitle
         self.navigationBarLeadingItem = nil
         self.navigationBarTrailingItem = nil
@@ -130,8 +121,8 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
 // MARK:- Body
 extension VBaseView {
     @ViewBuilder public var body: some View {
-        switch type {
-        case .centerTitle:
+        switch model.layout.titlePosition {
+        case .center:
             baseViewFrame
                 .setUpBaseViewNavigationBarCenter(
                     model: model,
@@ -142,7 +133,7 @@ extension VBaseView {
                     onBack: back
                 )
             
-        case .leadingTitle:
+        case .leading:
             baseViewFrame
                 .setUpBaseViewNavigationBarLeading(
                     model: model,

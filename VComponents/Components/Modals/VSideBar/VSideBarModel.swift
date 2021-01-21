@@ -47,6 +47,7 @@ extension VSideBarModel {
 }
 
 extension VSideBarModel.Layout {
+    /// Enum that describes width type, such as relative or fixed
     public enum WidthType {
         case relative(_ screenRatio: CGFloat = 2/3)
         case fixed(_ width: CGFloat = 300)

@@ -13,29 +13,18 @@ struct VBaseViewDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base View"
     
-    @State private var titlePosition: TitlePosition = .leading
+    @State private var titlePosition: VBaseViewModel.Layout.TitlePosition = .leading
     @State private var hasLeadingItem: Bool = false
     @State private var hasTrailingItem: Bool = false
     
-    private enum TitlePosition: Int, VPickableTitledItem {
-        case leading
-        case center
+    private var baseViewModel: VBaseViewModel {
+        var model: VBaseViewModel = .init()
         
-        var pickerTitle: String {
-            switch self {
-            case .leading: return "Leading"
-            case .center: return "Center"
-            }
-        }
+        model.layout.titlePosition = titlePosition
+        
+        return model
     }
-    
-    private var viewType: VBaseViewType {
-        switch titlePosition {
-        case .leading: return .leadingTitle
-        case .center: return .centerTitle
-        }
-    }
-    
+
     private var segmentedPickerModel: VSegmentedPickerModel = {
         var model: VSegmentedPickerModel = .init()
         
@@ -58,7 +47,7 @@ struct VBaseViewDemoView: View {
 extension VBaseViewDemoView {
     var body: some View {
         VBaseView(
-            type: viewType,
+            model: baseViewModel,
             title: Self.navigationBarTitle,
             leadingItem: leadingItem,
             trailingItem: trailingItem,
@@ -68,8 +57,7 @@ extension VBaseViewDemoView {
                         VSegmentedPicker(
                             model: segmentedPickerModel,
                             selection: $titlePosition,
-                            title: "Title Position",
-                            description: "Changing title position causes view to re-draw itself"
+                            title: "Title Position"
                         )
                         
                         ToggleSettingView(isOn: $hasLeadingItem, title: "Leading items")
@@ -95,6 +83,16 @@ extension VBaseViewDemoView {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 1")
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 2")
             })
+        }
+    }
+}
+
+// MARK:- Helpers
+extension VBaseViewModel.Layout.TitlePosition: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .leading: return "Leading"
+        case .center: return "Center"
         }
     }
 }

@@ -34,6 +34,7 @@ extension VBaseTextFieldModel {
 }
 
 extension VBaseTextFieldModel.Layout {
+    /// Enum that describes text alignment, such as leading, center, trailing, or automatic
     public enum TextAlignment: Int, CaseIterable {
         case leading
         case center

@@ -8,10 +8,10 @@
 import Foundation
 
 // MAR:- V Text Field Actins
-/// Enum that represents action performed when pressing return button
+/// Enum that describes action performed when pressing return button
 public typealias VTextFieldReturnButtonAction = VBaseTextFieldReturnButtonAction
 
-/// Enum that represents action performed when pressing clear button
+/// Enum that describes action performed when pressing clear button
 public enum VTextFieldClearButtonAction {
     case clear
     case custom(_ action: () -> Void)
@@ -20,7 +20,7 @@ public enum VTextFieldClearButtonAction {
     public static let `default`: Self = .clear
 }
 
-/// Enum that represents action performed when pressing cancel button
+/// Enum that describes action performed when pressing cancel button
 public enum VTextFieldCancelButtonAction {
     case clear
     case custom(_ action: () -> Void)

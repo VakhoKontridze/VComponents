@@ -72,8 +72,10 @@ extension VModalModel {
 }
 
 extension VModalModel.Layout {
+    /// Enum that describes rounded corners, such as all, top, bottom, custom, or none
     public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
     
+    /// Enum that decribes close button, such as leading, trailing, or back tap
     public enum VModalCloseButton: Int, CaseIterable {
         case leading
         case trailing

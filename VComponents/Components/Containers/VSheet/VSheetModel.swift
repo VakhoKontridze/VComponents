@@ -29,6 +29,7 @@ extension VSheetModel {
 }
 
 extension VSheetModel.Layout {
+    /// Enum that describes rounded corners, such as all, top, bottom, custom, or none
     public enum RoundedCorners {
         case all
         case top
