@@ -47,7 +47,7 @@ extension VModalDemoView {
                     ToggleSettingView(isOn: $hasTitle, title: "Title")
                     
                     VStack(spacing: 3, content: {
-                        VText(title: "Close Button", color: ColorBook.primary, font: .callout, type: .oneLine)
+                        VText(title: "Close Button:", color: ColorBook.primary, font: .callout, type: .oneLine)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack(content: {
@@ -55,6 +55,7 @@ extension VModalDemoView {
                                 closeButtonView(position)
                             })
                         })
+                            .frame(maxWidth: .infinity, alignment: .leading)
                     })
                     
                     VSecondaryButton(action: { isPresented = true }, title: "Demo Modal")
