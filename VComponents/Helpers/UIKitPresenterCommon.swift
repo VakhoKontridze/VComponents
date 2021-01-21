@@ -9,6 +9,8 @@ import SwiftUI
     
 // MARK:- UIKit Presenter Common
 final class UIKitPresenterCommon {
+    static let safeAreaHeight: CGFloat = appSuperView?.safeAreaInsets.bottom ?? 0
+    
     private init() {}
 }
 

@@ -1,25 +1,25 @@
 //
-//  SideBarPresenter.swift
+//  VBottomSheeetPresenter.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 1/18/21.
+//  Created by Vakhtang Kontridze on 1/21/21.
 //
 
 import SwiftUI
 
-// MARK:- V Side Bar VC Representable
-struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
+// MARK:- V Bottom Sheet VC Representable
+struct VBottomSheetVCRepresentable<BottomSheetContent, BlindingContent>
     where
-        SideBarContent: View,
+        BottomSheetContent: View,
         BlindingContent: View
     {
     // MARK: Properties
     @Binding private var isPresented: Bool
 
-    private let content: SideBarContent
+    private let content: BottomSheetContent
     private let blinding: BlindingContent
  
-    private let contentWidth: CGFloat   // Doesn't need to be updated with updateUIViewController(), as somehow passign content to HC does it
+    private let contentHeight: CGFloat   // Doesn't need to be updated with updateUIViewController(), as somehow passign content to HC does it
     private let animationCurve: UIView.AnimationCurve
     private let animationDuration: TimeInterval
     private let backTapAction: (() -> Void)?
@@ -27,9 +27,9 @@ struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
     // MARK: Initializers
     init(
         isPresented: Binding<Bool>,
-        content: SideBarContent,
+        content: BottomSheetContent,
         blinding: BlindingContent,
-        contentWidth: CGFloat,
+        contentHeight: CGFloat,
         animationCurve: UIView.AnimationCurve,
         animationDuration: TimeInterval,
         onBackTap backTapAction: (() -> Void)? = nil
@@ -37,7 +37,7 @@ struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
         self._isPresented = isPresented
         self.content = content
         self.blinding = blinding
-        self.contentWidth = contentWidth
+        self.contentHeight = contentHeight
         self.animationCurve = animationCurve
         self.animationDuration = animationDuration
         self.backTapAction = backTapAction
@@ -45,61 +45,68 @@ struct VSideBarVCRepresentable<SideBarContent, BlindingContent>
 }
 
 // MARK:- Representabe
-extension VSideBarVCRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> VSideBarVC<SideBarContent, BlindingContent> {
+extension VBottomSheetVCRepresentable: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> VBottomSheetVC<BottomSheetContent, BlindingContent> {
         .init(
             content: content,
             blinding: blinding,
-            contentWidth: contentWidth,
+            contentHeight: contentHeight,
             animationCurve: animationCurve,
             animationDuration: animationDuration,
             onBackTap: backTapAction
         )
     }
 
-    func updateUIViewController(_ uiViewController: VSideBarVC<SideBarContent, BlindingContent>, context: Context) {
+    func updateUIViewController(_ uiViewController: VBottomSheetVC<BottomSheetContent, BlindingContent>, context: Context) {
         switch isPresented {
         case false:
             uiViewController.dismiss()
         
         case true:
-            uiViewController.sideBarHC?.rootView = content
+            uiViewController.bottomSheetHC?.rootView = content
             uiViewController.blindingHC?.rootView = blinding
         }
     }
 }
 
-// MARK:- V Side Bar VC
-final class VSideBarVC<SideBarContent, BlindingContent>: UIViewController where
-        SideBarContent: View,
+// MARK:- V Bottom Sheet VC
+final class VBottomSheetVC<BottomSheetContent, BlindingContent>: UIViewController
+    where
+        BottomSheetContent: View,
         BlindingContent: View
 {
     // MARK: Properties
-    private let sideBarID: Int = 999_999_997
-    private let blindingID: Int = 999_999_996
+    private let bottomSheetID: Int = 999_999_995
+    private let blindingID: Int = 999_999_994
     
-    fileprivate var sideBarHC: UIHostingController<SideBarContent>!
+    fileprivate var bottomSheetHC: UIHostingController<BottomSheetContent>!
     fileprivate var blindingHC: UIHostingController<BlindingContent>!
     
-    private var initialTransform: CGAffineTransform { .init(translationX: -contentWidth, y: 0) }
-    private var presentedTransform: CGAffineTransform { .init(translationX: 0, y: 0) }
-    private var dismissedTransform: CGAffineTransform { initialTransform }
+    private var initialTransform: CGAffineTransform {
+        .init(translationX: 0, y: UIScreen.main.bounds.height + (contentHeight + UIKitPresenterCommon.safeAreaHeight))
+    }
+    private var presentedTransform: CGAffineTransform {
+        .init(translationX: 0, y: UIScreen.main.bounds.height - (contentHeight + UIKitPresenterCommon.safeAreaHeight))
+    }
+    private var dismissedTransform: CGAffineTransform {
+        initialTransform
+    }
     
-    private let contentWidth: CGFloat
+    private let contentHeight: CGFloat
     private let animationCurve: UIView.AnimationCurve
     private let animationDuration: TimeInterval
     private let backTapAction: (() -> Void)?
 
     // MARK: Initializers
     init(
-        content: SideBarContent,
+        content: BottomSheetContent,
         blinding: BlindingContent,
-        contentWidth: CGFloat,
+        contentHeight: CGFloat,
         animationCurve: UIView.AnimationCurve,
         animationDuration: TimeInterval,
         onBackTap backTapAction: (() -> Void)?
     ) {
-        self.contentWidth = contentWidth
+        self.contentHeight = contentHeight
         self.animationCurve = animationCurve
         self.animationDuration = animationDuration
         self.backTapAction = backTapAction
@@ -117,10 +124,10 @@ final class VSideBarVC<SideBarContent, BlindingContent>: UIViewController where
 }
 
 // MARK:- Presenting
-private extension VSideBarVC {
-    func present(_ content: SideBarContent, blinding: BlindingContent) {
+private extension VBottomSheetVC {
+    func present(_ content: BottomSheetContent, blinding: BlindingContent) {
         presentBlinding(blinding)
-        presentSideBar(content)
+        presentBottomSheet(content)
     }
     
     func presentBlinding(_ blinding: BlindingContent) {
@@ -130,28 +137,28 @@ private extension VSideBarVC {
         blindingHC?.view.addGestureRecognizer(tapGesture)
     }
     
-    func presentSideBar(_ content: SideBarContent) {
+    func presentBottomSheet(_ content: BottomSheetContent) {
         guard let appSuperView = UIKitPresenterCommon.appSuperView else { return }
         
-        sideBarHC = UIKitPresenterCommon.createHostingController(content: content, id: sideBarID)
-        let sideBarView: UIView = sideBarHC.view
+        bottomSheetHC = UIKitPresenterCommon.createHostingController(content: content, id: bottomSheetID)
+        let bottomSheetView: UIView = bottomSheetHC.view
 
-        appSuperView.addSubview(sideBarView)
+        appSuperView.addSubview(bottomSheetView)
         NSLayoutConstraint.activate([
-            sideBarView.leadingAnchor.constraint(equalTo: appSuperView.leadingAnchor),
-            sideBarView.topAnchor.constraint(equalTo: appSuperView.topAnchor),
-            sideBarView.bottomAnchor.constraint(equalTo: appSuperView.bottomAnchor)
+            bottomSheetView.leadingAnchor.constraint(equalTo: appSuperView.leadingAnchor),
+            bottomSheetView.trailingAnchor.constraint(equalTo: appSuperView.trailingAnchor),
+            bottomSheetView.topAnchor.constraint(equalTo: appSuperView.topAnchor)
         ])
-        appSuperView.bringSubviewToFront(sideBarView)
+        appSuperView.bringSubviewToFront(bottomSheetView)
         
-        sideBarView.transform = initialTransform
+        bottomSheetView.transform = initialTransform
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
             options: animationCurve.animationOption,
             animations: { [weak self] in
                 guard let self = self else { return }
-                sideBarView.transform = self.presentedTransform
+                bottomSheetView.transform = self.presentedTransform
             },
             completion: nil
         )
@@ -159,30 +166,30 @@ private extension VSideBarVC {
 }
 
 // MARK:- Dismissing
-private extension VSideBarVC {
+private extension VBottomSheetVC {
     func dismiss() {
         dismissBlinding()
-        dismissSideBar()
+        dismissBottomSheet()
     }
     
     func dismissBlinding() {
         UIKitPresenterCommon.dismissView(id: blindingID)
     }
     
-    func dismissSideBar() {
-        guard let sideBarView = UIKitPresenterCommon.view(id: sideBarID) else { return }
+    func dismissBottomSheet() {
+        guard let bottomSheetView = UIKitPresenterCommon.view(id: bottomSheetID) else { return }
         
-        sideBarView.transform = presentedTransform
+        bottomSheetView.transform = presentedTransform
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
             options: animationCurve.animationOption,
             animations: { [weak self] in
                 guard let self = self else { return }
-                sideBarView.transform = self.dismissedTransform
+                bottomSheetView.transform = self.dismissedTransform
             },
             completion: { _ in
-                sideBarView.removeFromSuperview()
+                bottomSheetView.removeFromSuperview()
             }
         )
     }

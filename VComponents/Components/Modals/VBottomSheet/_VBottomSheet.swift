@@ -1,16 +1,16 @@
 //
-//  _VSideBar.swift
+//  _VBottomSheet.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 1/21/21.
 //
 
 import SwiftUI
 
-// MARK:- _ V Side Bar
-struct _VSideBar<Content>: View where Content: View {
+// MARK:- _ V Bottom Bar
+struct _VBottomSheet<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSideBarModel
+    private let model: VBottomSheetModel
     
     @Binding private var isPresented: Bool
     
@@ -22,19 +22,19 @@ struct _VSideBar<Content>: View where Content: View {
     // MARK: Initializers
     init(
         isPresented: Binding<Bool>,
-        sideBar: VSideBar<Content>
+        BottomSheet: VBottomSheet<Content>
     ) {
         self.init(
-            model: sideBar.model,
+            model: BottomSheet.model,
             isPresented: isPresented,
-            content: sideBar.content,
-            onAppear: sideBar.appearAction,
-            onDisappear: sideBar.disappearAction
+            content: BottomSheet.content,
+            onAppear: BottomSheet.appearAction,
+            onDisappear: BottomSheet.disappearAction
         )
     }
     
     private init(
-        model: VSideBarModel,
+        model: VBottomSheetModel,
         isPresented: Binding<Bool>,
         content: @escaping () -> Content,
         onAppear appearAction: (() -> Void)?,
@@ -49,7 +49,7 @@ struct _VSideBar<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension _VSideBar {
+extension _VBottomSheet {
     var body: some View {
         ZStack(content: {
             VSheet(model: model.sheetModel)
@@ -60,27 +60,27 @@ extension _VSideBar {
                 .padding(.trailing, model.layout.contentMargin.trailing)
                 .padding(.top, model.layout.contentMargin.top)
                 .padding(.bottom, model.layout.contentMargin.bottom)
+                .padding(.bottom, model.layout.hasSafeAreaMargin ? UIKitPresenterCommon.safeAreaHeight : 0)
         })
-            .frame(width: model.layout.widthType.width)
+            .frame(height: model.layout.heightType.height + UIKitPresenterCommon.safeAreaHeight + 1)   // Breaks without this
             .onAppear(perform: appearAction)
             .onDisappear(perform: disappearAction)
-            .addSideBarSwipeGesture(completion: dismiss)
     }
 }
 
 // MARK:- Actions
-private extension _VSideBar {
+private extension _VBottomSheet {
     func dismiss() {
         withAnimation { isPresented = false }
     }
 }
 
 // MARK:- Preview
-struct VSideBar_Previews: PreviewProvider {
+struct VBottomSheet_Previews: PreviewProvider {
     static var previews: some View {
         Color.red.edgesIgnoringSafeArea(.all)
-            .vSideBar(isPresented: .constant(true), sideBar: {
-                VSideBar(content: {
+            .vBottomSheet(isPresented: .constant(true), bottomSheet: {
+                VBottomSheet(content: {
                     Color.red
                 })
             })

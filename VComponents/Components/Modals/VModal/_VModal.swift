@@ -131,7 +131,7 @@ private extension _VModal {
 }
 
 // MARK:- Helpers
-private extension Set where Element == VModalModel.Layout.VModalCloseButton {
+private extension Set where Element == VModalModel.Layout.CloseButtonType {
     var hasButton: Bool {
         contains(where: { [.leading, .trailing].contains($0) })
     }

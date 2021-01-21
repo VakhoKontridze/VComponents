@@ -20,11 +20,15 @@
 		7A08F851259730B50049FB10 /* VTabNavigationViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08F850259730B50049FB10 /* VTabNavigationViewPage.swift */; };
 		7A08F858259731350049FB10 /* VTabNavigationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08F857259731350049FB10 /* VTabNavigationView.swift */; };
 		7A08F85C259731E60049FB10 /* VTabNavigationViewAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A08F85B259731E60049FB10 /* VTabNavigationViewAppearance.swift */; };
+		7A0BB66725B9C7FD00E7FCA1 /* VBottomSheetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BB66625B9C7FD00E7FCA1 /* VBottomSheetModel.swift */; };
+		7A0BB66A25B9CBAD00E7FCA1 /* VBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BB66925B9CBAD00E7FCA1 /* VBottomSheet.swift */; };
+		7A0BB67125B9CDAF00E7FCA1 /* _VBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BB67025B9CDAF00E7FCA1 /* _VBottomSheet.swift */; };
+		7A0BB67525B9CEF900E7FCA1 /* VBottomSheeetPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BB67425B9CEF900E7FCA1 /* VBottomSheeetPresentable.swift */; };
 		7A184A7925B72DDA009DCD65 /* VBaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A184A7825B72DDA009DCD65 /* VBaseTextField.swift */; };
 		7A259B652597828700A12F8C /* VAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B642597828700A12F8C /* VAlert.swift */; };
 		7A259B6B259783A100A12F8C /* VAlertDialogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6A259783A100A12F8C /* VAlertDialogType.swift */; };
 		7A259B6E259784CF00A12F8C /* VAlertDialogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6D259784CF00A12F8C /* VAlertDialogButton.swift */; };
-		7A259B7325979F9300A12F8C /* ModalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B7225979F9300A12F8C /* ModalPresenter.swift */; };
+		7A259B7325979F9300A12F8C /* VModalPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B7225979F9300A12F8C /* VModalPresentable.swift */; };
 		7A259B7825979FC000A12F8C /* VAlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B7725979FC000A12F8C /* VAlertModel.swift */; };
 		7A259B842597B2C600A12F8C /* _VAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B832597B2C600A12F8C /* _VAlert.swift */; };
 		7A259BBE2598FC7C00A12F8C /* VPrimaryButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259BBD2598FC7C00A12F8C /* VPrimaryButtonModel.swift */; };
@@ -107,7 +111,7 @@
 		7A767CF625B705580008D2E9 /* UIKitEventRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767CF525B705580008D2E9 /* UIKitEventRecognizer.swift */; };
 		7A767CF925B717280008D2E9 /* VBaseButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767CF825B717280008D2E9 /* VBaseButtonState.swift */; };
 		7A781E2C25B32B58005C44CB /* VNavigationLinkDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A781E2B25B32B58005C44CB /* VNavigationLinkDemoView.swift */; };
-		7A781E2F25B577E2005C44CB /* SideBarPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A781E2E25B577E2005C44CB /* SideBarPresenter.swift */; };
+		7A781E2F25B577E2005C44CB /* VSideBarPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A781E2E25B577E2005C44CB /* VSideBarPresentable.swift */; };
 		7A79F8D425B89555009B66D4 /* VTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A79F8D325B89555009B66D4 /* VTextFieldType.swift */; };
 		7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */; };
 		7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */; };
@@ -233,11 +237,15 @@
 		7A08F850259730B50049FB10 /* VTabNavigationViewPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationViewPage.swift; sourceTree = "<group>"; };
 		7A08F857259731350049FB10 /* VTabNavigationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationView.swift; sourceTree = "<group>"; };
 		7A08F85B259731E60049FB10 /* VTabNavigationViewAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationViewAppearance.swift; sourceTree = "<group>"; };
+		7A0BB66625B9C7FD00E7FCA1 /* VBottomSheetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBottomSheetModel.swift; sourceTree = "<group>"; };
+		7A0BB66925B9CBAD00E7FCA1 /* VBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBottomSheet.swift; sourceTree = "<group>"; };
+		7A0BB67025B9CDAF00E7FCA1 /* _VBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VBottomSheet.swift; sourceTree = "<group>"; };
+		7A0BB67425B9CEF900E7FCA1 /* VBottomSheeetPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBottomSheeetPresentable.swift; sourceTree = "<group>"; };
 		7A184A7825B72DDA009DCD65 /* VBaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseTextField.swift; sourceTree = "<group>"; };
 		7A259B642597828700A12F8C /* VAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlert.swift; sourceTree = "<group>"; };
 		7A259B6A259783A100A12F8C /* VAlertDialogType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDialogType.swift; sourceTree = "<group>"; };
 		7A259B6D259784CF00A12F8C /* VAlertDialogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDialogButton.swift; sourceTree = "<group>"; };
-		7A259B7225979F9300A12F8C /* ModalPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalPresenter.swift; sourceTree = "<group>"; };
+		7A259B7225979F9300A12F8C /* VModalPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModalPresentable.swift; sourceTree = "<group>"; };
 		7A259B7725979FC000A12F8C /* VAlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertModel.swift; sourceTree = "<group>"; };
 		7A259B832597B2C600A12F8C /* _VAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VAlert.swift; sourceTree = "<group>"; };
 		7A259BBD2598FC7C00A12F8C /* VPrimaryButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPrimaryButtonModel.swift; sourceTree = "<group>"; };
@@ -318,7 +326,7 @@
 		7A767CF525B705580008D2E9 /* UIKitEventRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitEventRecognizer.swift; sourceTree = "<group>"; };
 		7A767CF825B717280008D2E9 /* VBaseButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseButtonState.swift; sourceTree = "<group>"; };
 		7A781E2B25B32B58005C44CB /* VNavigationLinkDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationLinkDemoView.swift; sourceTree = "<group>"; };
-		7A781E2E25B577E2005C44CB /* SideBarPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarPresenter.swift; sourceTree = "<group>"; };
+		7A781E2E25B577E2005C44CB /* VSideBarPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBarPresentable.swift; sourceTree = "<group>"; };
 		7A79F8D325B89555009B66D4 /* VTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldType.swift; sourceTree = "<group>"; };
 		7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonDirection.swift; sourceTree = "<group>"; };
 		7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonModel.swift; sourceTree = "<group>"; };
@@ -440,6 +448,17 @@
 			path = VTabNavigationView;
 			sourceTree = "<group>";
 		};
+		7A0BB66525B9C7BE00E7FCA1 /* VBottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				7A0BB66925B9CBAD00E7FCA1 /* VBottomSheet.swift */,
+				7A0BB67025B9CDAF00E7FCA1 /* _VBottomSheet.swift */,
+				7A0BB66625B9C7FD00E7FCA1 /* VBottomSheetModel.swift */,
+				7A0BB67425B9CEF900E7FCA1 /* VBottomSheeetPresentable.swift */,
+			);
+			path = VBottomSheet;
+			sourceTree = "<group>";
+		};
 		7A259B632597827800A12F8C /* VAlert */ = {
 			isa = PBXGroup;
 			children = (
@@ -466,6 +485,7 @@
 			children = (
 				7AF3C8CC25AF4E4D00D56042 /* VModal */,
 				7AD809402594FCD900DABE49 /* VSideBar */,
+				7A0BB66525B9C7BE00E7FCA1 /* VBottomSheet */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -895,7 +915,7 @@
 			children = (
 				7A8A96F1258DDA9E00309886 /* Framework Info */,
 				7ABEAA472593403000A90B56 /* Components */,
-				7AE5C25C25A8BC1D001B62B2 /* Core */,
+				7AE5C25C25A8BC1D001B62B2 /* Helpers */,
 				7AA9F42F2590B18D0060F210 /* Extensions */,
 				7AA9F4342590B1C00060F210 /* Resources */,
 			);
@@ -998,15 +1018,6 @@
 				7ADCCC7C25B7245300E99E1B /* DemoIconContentView.swift */,
 			);
 			path = Subviews;
-			sourceTree = "<group>";
-		};
-		7A92926925B5BE4B00BBEA8A /* Misc */ = {
-			isa = PBXGroup;
-			children = (
-				7AE5C25D25A8BC2E001B62B2 /* VPickableItems.swift */,
-				7AC4E03E25AE1D2800CE2816 /* SliderDoubleInits.swift */,
-			);
-			path = Misc;
 			sourceTree = "<group>";
 		};
 		7AA763D625B738D30088FC69 /* Inputs */ = {
@@ -1223,19 +1234,21 @@
 			children = (
 				7AD809462594FD9100DABE49 /* VSideBar.swift */,
 				7AD809422594FCF000DABE49 /* _VSideBar.swift */,
-				7AD8094F2594FDF900DABE49 /* VSideBarSwipeGesture.swift */,
 				7AD809592594FF3D00DABE49 /* VSideBarModel.swift */,
+				7A781E2E25B577E2005C44CB /* VSideBarPresentable.swift */,
+				7AD8094F2594FDF900DABE49 /* VSideBarSwipeGesture.swift */,
 			);
 			path = VSideBar;
 			sourceTree = "<group>";
 		};
-		7AE5C25C25A8BC1D001B62B2 /* Core */ = {
+		7AE5C25C25A8BC1D001B62B2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7AF3CA9825B210A000D56042 /* UIKit Presenters */,
-				7A92926925B5BE4B00BBEA8A /* Misc */,
+				7AE5C25D25A8BC2E001B62B2 /* VPickableItems.swift */,
+				7AC4E03E25AE1D2800CE2816 /* SliderDoubleInits.swift */,
+				7AF3CA9925B210B100D56042 /* UIKitPresenterCommon.swift */,
 			);
-			path = Core;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		7AF3C8CC25AF4E4D00D56042 /* VModal */ = {
@@ -1244,6 +1257,7 @@
 				7AF3C8CD25AF4E5C00D56042 /* VModal.swift */,
 				7AF3C8D425AF5C1A00D56042 /* _VModal.swift */,
 				7AF3C8D125AF511800D56042 /* VModalModel.swift */,
+				7A259B7225979F9300A12F8C /* VModalPresentable.swift */,
 				7AF3C8EE25AF694400D56042 /* VModalDefaultHeader.swift */,
 			);
 			path = VModal;
@@ -1257,16 +1271,6 @@
 				7AF3C8E525AF679400D56042 /* VCloseButtonModel.swift */,
 			);
 			path = VCloseButton;
-			sourceTree = "<group>";
-		};
-		7AF3CA9825B210A000D56042 /* UIKit Presenters */ = {
-			isa = PBXGroup;
-			children = (
-				7AF3CA9925B210B100D56042 /* UIKitPresenterCommon.swift */,
-				7A259B7225979F9300A12F8C /* ModalPresenter.swift */,
-				7A781E2E25B577E2005C44CB /* SideBarPresenter.swift */,
-			);
-			path = "UIKit Presenters";
 			sourceTree = "<group>";
 		};
 		7AF4C8CF2590BA3A00275C76 /* VSquareButton */ = {
@@ -1407,6 +1411,7 @@
 				7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */,
 				7AE5C25E25A8BC2E001B62B2 /* VPickableItems.swift in Sources */,
 				7A3C1555258DE7B900CE1D96 /* VSpinnerModel.swift in Sources */,
+				7A0BB66A25B9CBAD00E7FCA1 /* VBottomSheet.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
 				7AF3C8E125AF675300D56042 /* VCloseButtonState.swift in Sources */,
 				7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */,
@@ -1420,7 +1425,7 @@
 				7A59576F25AB503E00B5B6E7 /* VBaseListElement.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
-				7A781E2F25B577E2005C44CB /* SideBarPresenter.swift in Sources */,
+				7A781E2F25B577E2005C44CB /* VSideBarPresentable.swift in Sources */,
 				7AF3C95F25B04F2B00D56042 /* VAlertDialogButtonModelCustom.swift in Sources */,
 				7A4D0C442594C71D00108575 /* VSecondaryButtonModel.swift in Sources */,
 				7A767C3925B5C70A0008D2E9 /* VCheckBox.swift in Sources */,
@@ -1446,6 +1451,7 @@
 				7A59576925AB492D00B5B6E7 /* CollectionExtensions.swift in Sources */,
 				7A59577325AB509D00B5B6E7 /* VBaseListModel.swift in Sources */,
 				7ACC3EC625AC91A700EAD184 /* VAccordion.swift in Sources */,
+				7A0BB66725B9C7FD00E7FCA1 /* VBottomSheetModel.swift in Sources */,
 				7A4D0C372594C0CE00108575 /* VSecondaryButtonState.swift in Sources */,
 				7A59577725AB546700B5B6E7 /* VSection.swift in Sources */,
 				7AF3CA9A25B210B100D56042 /* UIKitPresenterCommon.swift in Sources */,
@@ -1488,6 +1494,7 @@
 				7A08F851259730B50049FB10 /* VTabNavigationViewPage.swift in Sources */,
 				7A59577F25AB5B7400B5B6E7 /* VTable.swift in Sources */,
 				7AEE70AD25AB471C00239969 /* VBaseList.swift in Sources */,
+				7A0BB67125B9CDAF00E7FCA1 /* _VBottomSheet.swift in Sources */,
 				7A4C4317259237BB000207DD /* VNavigationViewModel.swift in Sources */,
 				7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */,
 				7AC4E01825ADFB9900CE2816 /* VProgressBarModel.swift in Sources */,
@@ -1504,6 +1511,7 @@
 				7AF3CA8B25B0AD5A00D56042 /* VTableSection.swift in Sources */,
 				7AC4E03F25AE1D2800CE2816 /* SliderDoubleInits.swift in Sources */,
 				7AF3C8CE25AF4E5C00D56042 /* VModal.swift in Sources */,
+				7A0BB67525B9CEF900E7FCA1 /* VBottomSheeetPresentable.swift in Sources */,
 				7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */,
 				7AC4E03825AE065F00CE2816 /* VRangeSliderState.swift in Sources */,
 				7A8A7467259118DF001024FB /* VSpinnerModelContinous.swift in Sources */,
@@ -1515,7 +1523,7 @@
 				7A767CD025B6E8DB0008D2E9 /* VWheelPickerState.swift in Sources */,
 				7A3EE37625B2CFBF00303EE7 /* VNavigationViewBackButtonHidden.swift in Sources */,
 				7A59957E2592442A0087902B /* VNavigationViewAppearance.swift in Sources */,
-				7A259B7325979F9300A12F8C /* ModalPresenter.swift in Sources */,
+				7A259B7325979F9300A12F8C /* VModalPresentable.swift in Sources */,
 				7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
 				7A767CE625B700960008D2E9 /* VBaseTextFieldModel.swift in Sources */,

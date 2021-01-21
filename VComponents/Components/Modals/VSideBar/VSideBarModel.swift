@@ -37,7 +37,7 @@ extension VSideBarModel {
     public struct Layout {
         public var widthType: WidthType = .default
         
-        public var cornerRadius: CGFloat = 20
+        public var cornerRadius: CGFloat = VSideBarModel.sheetModel.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
         
         public var contentMargin: ContentMargin = .init()
@@ -47,17 +47,17 @@ extension VSideBarModel {
 }
 
 extension VSideBarModel.Layout {
-    /// Enum that describes width type, such as relative or fixed
+    /// Enum that describes width type, such as relative or constant
     public enum WidthType {
-        case relative(_ screenRatio: CGFloat = 2/3)
-        case fixed(_ width: CGFloat = 300)
+        case relative(_ value: CGFloat = 2/3)
+        case constant(_ value: CGFloat = 300)
         
         public static let `default`: Self = .relative()
         
         var width: CGFloat {
             switch self {
             case .relative(let ratio): return UIScreen.main.bounds.width * ratio
-            case .fixed(let width): return width
+            case .constant(let value): return value
             }
         }
     }
@@ -65,10 +65,10 @@ extension VSideBarModel.Layout {
 
 extension VSideBarModel.Layout {
     public struct ContentMargin {
-        public var leading: CGFloat = 15
-        public var trailing: CGFloat = 15
-        public var top: CGFloat = 15
-        public var bottom: CGFloat = 15
+        public var leading: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
+        public var trailing: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
+        public var top: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
+        public var bottom: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
         
         public init() {}
     }

@@ -14,7 +14,7 @@ struct VModalDemoView: View {
     static let navigationBarTitle: String = "Modal"
     
     @State private var hasTitle: Bool = true
-    @State private var closeButton: Set<VModalModel.Layout.VModalCloseButton>
+    @State private var closeButton: Set<VModalModel.Layout.CloseButtonType>
     
     @State private var isPresented: Bool = false
     
@@ -51,7 +51,7 @@ extension VModalDemoView {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack(content: {
-                            ForEach(VModalModel.Layout.VModalCloseButton.allCases, id: \.rawValue, content: { position in
+                            ForEach(VModalModel.Layout.CloseButtonType.allCases, id: \.rawValue, content: { position in
                                 closeButtonView(position)
                             })
                         })
@@ -84,7 +84,7 @@ extension VModalDemoView {
             )
     }
     
-    private func closeButtonView(_ position: VModalModel.Layout.VModalCloseButton) -> some View {
+    private func closeButtonView(_ position: VModalModel.Layout.CloseButtonType) -> some View {
         VCheckBox(
             isOn: .init(
                 get: { closeButton.contains(position) },
@@ -122,7 +122,7 @@ extension VModalDemoView {
 }
 
 // MARK:- Helpers
-private extension VModalModel.Layout.VModalCloseButton {
+private extension VModalModel.Layout.CloseButtonType {
     var title: String {
         switch self {
         case .leading: return "Leading"

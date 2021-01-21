@@ -1,5 +1,5 @@
 //
-//  ModalPresenter.swift
+//  VModalPresentable.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.

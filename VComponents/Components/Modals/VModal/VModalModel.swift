@@ -57,7 +57,7 @@ extension VModalModel {
         public var cornerRadius: CGFloat = VModalModel.sheetModel.layout.cornerRadius
         public var margin: CGFloat = VModalModel.sheetModel.layout.contentMargin
 
-        public var closeButton: Set<VModalCloseButton> = [.default]
+        public var closeButton: Set<CloseButtonType> = [.default]
         public var closeButtonDimension: CGFloat = VModalModel.closeButtonModel.layout.dimension
         public var closeButtonIconDimension: CGFloat = VModalModel.closeButtonModel.layout.iconDimension
         
@@ -75,8 +75,8 @@ extension VModalModel.Layout {
     /// Enum that describes rounded corners, such as all, top, bottom, custom, or none
     public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
     
-    /// Enum that decribes close button, such as leading, trailing, or back tap
-    public enum VModalCloseButton: Int, CaseIterable {
+    /// Enum that decribes close button type, such as leading, trailing, or back tap
+    public enum CloseButtonType: Int, CaseIterable {
         case leading
         case trailing
         case backTap
