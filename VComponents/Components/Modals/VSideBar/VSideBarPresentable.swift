@@ -149,7 +149,7 @@ private extension VSideBarVC {
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
-            options: animationCurve.animationOption,
+            options: animationCurve.uiKit,
             animations: { [weak self] in
                 guard let self = self else { return }
                 sideBarView.transform = self.presentedTransform
@@ -177,7 +177,7 @@ private extension VSideBarVC {
         UIView.animate(
             withDuration: animationDuration,
             delay: 0,
-            options: animationCurve.animationOption,
+            options: animationCurve.uiKit,
             animations: { [weak self] in
                 guard let self = self else { return }
                 sideBarView.transform = self.dismissedTransform

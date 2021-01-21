@@ -93,15 +93,25 @@ extension UIKitPresenterCommon {
 //        host.rootView = content
 //    }
 
-// MARK:- Animation Curve Mappng
+// MARK:- Animation Mappng
 extension UIView.AnimationCurve {
-    var animationOption: UIView.AnimationOptions {
+    var uiKit: UIView.AnimationOptions {
         switch self {
         case .linear: return .curveLinear
         case .easeIn: return .curveEaseIn
         case .easeOut: return .curveEaseOut
         case .easeInOut: return .curveEaseOut
         @unknown default: return .curveLinear
+        }
+    }
+    
+    func swiftUI(duration: TimeInterval) -> Animation {
+        switch self {
+        case .linear: return .linear(duration: duration)
+        case .easeIn: return .easeIn(duration: duration)
+        case .easeOut: return .easeOut(duration: duration)
+        case .easeInOut: return .easeInOut(duration: duration)
+        @unknown default: return .linear(duration: duration)
         }
     }
 }

@@ -14,7 +14,7 @@ public struct VBottomSheetModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var animations: Animations = .init()
+    public var animation: VAnimation = .init(curve: .linear, duration: 0.25)
     
     var sheetModel: VSheetModel {
         var model: VSheetModel = .init()
@@ -34,7 +34,7 @@ public struct VBottomSheetModel {
 // MARK:- Layout
 extension VBottomSheetModel {
     public struct Layout {
-        public var heightType: HeightClass = .default
+        public var heightClass: HeightClass = .default
         
         public var cornerRadius: CGFloat = VBottomSheetModel.sideBarModel.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
@@ -114,16 +114,6 @@ extension VBottomSheetModel {
     public struct Colors {
         public var background: Color = VBottomSheetModel.sideBarModel.colors.background
         public var blinding: Color = VBottomSheetModel.sideBarModel.colors.blinding
-        
-        public init() {}
-    }
-}
-
-// MARK:- Animations
-extension VBottomSheetModel {
-    public struct Animations {
-        public var curve: UIView.AnimationCurve = VBottomSheetModel.sideBarModel.animations.curve
-        public var duration: TimeInterval = VBottomSheetModel.sideBarModel.animations.duration
         
         public init() {}
     }

@@ -17,6 +17,8 @@ public struct VBottomSheet<Content> where Content: View {
     public var appearAction: (() -> Void)?
     public var disappearAction: (() -> Void)?
     
+    @ObservedObject fileprivate var state: ABC = .init()
+    
     // MARK: Initializers
     public init(
         model: VBottomSheetModel = .init(),
@@ -28,6 +30,8 @@ public struct VBottomSheet<Content> where Content: View {
         self.content = content
         self.appearAction = appearAction
         self.disappearAction = disappearAction
+        
+        self.state.update(specified: model.layout.heightClass.height)
     }
 }
 
@@ -40,24 +44,38 @@ extension View {
     ) -> some View
         where Content: View
     {
-        ZStack(content: {
+        let bottomSheet = bottomSheet()
+        
+        return ZStack(content: {
             self
             
             if isPresented.wrappedValue {
-                VBottomSheetVCRepresentable(
-                    isPresented: isPresented,
-                    content: _VBottomSheet(isPresented: isPresented, BottomSheet: bottomSheet()),
-                    blinding: bottomSheet().model.colors.blinding.edgesIgnoringSafeArea(.all),
-                    contentHeight: bottomSheet().model.layout.heightType.height,
-                    animationCurve: bottomSheet().model.animations.curve,
-                    animationDuration: bottomSheet().model.animations.duration,
-                    onBackTap: {
-//                        if bottomSheet().model.layout.closeButton.contains(.backTap) {
-                            withAnimation { isPresented.wrappedValue = false }
-//                        }
-                    }
+                UIKitRepresentable(isPresented: isPresented, content:
+                    _VBottomSheet(
+                        model: bottomSheet.model,
+                        state: bottomSheet.state,
+                        isPresented: isPresented,
+                        content: bottomSheet.content,
+                        onAppear: bottomSheet.appearAction,
+                        onDisappear: bottomSheet.disappearAction
+                    )
                 )
             }
         })
+    }
+}
+
+final class ABC: ObservableObject {
+    @Published var specified: CGFloat = .zero
+    @Published var current: CGFloat = .zero
+    
+    func update(specified: CGFloat) {
+        if self.specified == .zero { self.specified = specified }
+        if self.current == .zero { self.current = specified }
+        
+        if self.specified != specified {
+            self.specified = specified
+            self.current = specified
+        }
     }
 }

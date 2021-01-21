@@ -144,7 +144,9 @@ extension HomeView {
         VNavigationView(content: {
             VBaseView(title: Self.navigationBarTitle, content: {
 //                DemoListView(type: .accordion, sections: sections)
-                Button("ACTIVATE", action: { isPresented = true })
+                Button("ACTIVATE", action: {
+                    isPresented = true
+                })
                     .vBottomSheet(isPresented: $isPresented, bottomSheet: {
                         VBottomSheet(content: {
                             Color.red
