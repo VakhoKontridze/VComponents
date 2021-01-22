@@ -1,5 +1,5 @@
 //
-//  VAlert.swift
+//  VDialog.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK:- V Alert
+// MARK:- V Dialog
 /// Message component that presents dialog when condition is true
 ///
 /// Model, title, description, onAppear and onDisappear callbacks, and content can be passed as parameters
 ///
-/// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
+/// Dialog can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
 ///
 /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
 ///
@@ -26,8 +26,8 @@ import SwiftUI
 ///         action: { isPresented = true },
 ///         title: "Present"
 ///     )
-///     .vAlert(isPresented: $isPresented, alert: {
-///         VAlert(
+///     .vDialog(isPresented: $isPresented, dialog: {
+///         VDialog(
 ///             dialog: .two(
 ///                 primary: .init(
 ///                     model: .primary,
@@ -47,10 +47,10 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VAlert<Content> where Content: View {
+public struct VDialog<Content> where Content: View {
     // MARK: Properties
-    public var model: VAlertModel = .init()
-    public var dialogType: VAlertDialogType
+    public var model: VDialogModel = .init()
+    public var dialogType: VDialogType
     public var title: String?
     public var description: String?
     public var content: (() -> Content)?
@@ -59,8 +59,8 @@ public struct VAlert<Content> where Content: View {
     
     // MARK: Initializers
     public init(
-        model: VAlertModel = .init(),
-        dialog dialogType: VAlertDialogType,
+        model: VDialogModel = .init(),
+        dialog dialogType: VDialogType,
         title: String?,
         description: String?,
         @ViewBuilder content: @escaping () -> Content,
@@ -77,8 +77,8 @@ public struct VAlert<Content> where Content: View {
     }
     
     public init(
-        model: VAlertModel = .init(),
-        dialog dialogType: VAlertDialogType,
+        model: VDialogModel = .init(),
+        dialog dialogType: VDialogType,
         title: String?,
         description: String?,
         onAppear appearAction: (() -> Void)? = nil,
@@ -98,10 +98,10 @@ public struct VAlert<Content> where Content: View {
 
 // MARK:- Extension
 extension View {
-    /// Presents alert
-    public func vAlert<Content>(
+    /// Presents dialog
+    public func vDialog<Content>(
         isPresented: Binding<Bool>,
-        alert: @escaping () -> VAlert<Content>
+        dialog: @escaping () -> VDialog<Content>
     ) -> some View
         where Content: View
     {
@@ -111,8 +111,8 @@ extension View {
             if isPresented.wrappedValue {
                 VModalVCRepresentable(
                     isPresented: isPresented,
-                    content: _VAlert(isPresented: isPresented, alert: alert()),
-                    blinding: alert().model.colors.blinding.edgesIgnoringSafeArea(.all)
+                    content: _VDialog(isPresented: isPresented, dialog: dialog()),
+                    blinding: dialog().model.colors.blinding.edgesIgnoringSafeArea(.all)
                 )
             }
         })

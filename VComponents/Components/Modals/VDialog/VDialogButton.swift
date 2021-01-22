@@ -1,5 +1,5 @@
 //
-//  VAlertDialogButton.swift
+//  VDialogButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -7,18 +7,18 @@
 
 import Foundation
 
-// MARK:- V Alert Dialog Button
-/// Data source that creates alert dialog button
-public struct VAlertDialogButton {
+// MARK:- V Dialog Button
+/// Data source that creates dialog buttons
+public struct VDialogButton {
     // MARK: Properties
-    public var model: VAlertDialogButtonModel
+    public var model: VDialogButtonModel
     public var isEnabled: Bool
     public var title: String
     public var action: () -> Void
     
     // MARK: Initializers
     public init(
-        model: VAlertDialogButtonModel,
+        model: VDialogButtonModel,
         isEnabled: Bool = true,
         title: String,
         action: @escaping () -> Void

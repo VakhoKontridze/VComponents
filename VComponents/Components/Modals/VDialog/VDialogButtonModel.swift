@@ -1,5 +1,5 @@
 //
-//  VAlertDialogButtonModelCustom.swift
+//  VDialogButtonModelCustom.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/14/21.
@@ -7,40 +7,40 @@
 
 import SwiftUI
 
-// MARK:- V Alert Dialog Button Model Model
+// MARK:- V Dialog Button Model Model
 /// Enum that describes dialog button model, such as primary, secondary, or custom
-public enum VAlertDialogButtonModel {
+public enum VDialogButtonModel {
     case primary
     case secondary
-    case custom(_ model: VAlertDialogButtonModelCustom)
+    case custom(_ model: VDialogButtonModelCustom)
     
-    private static let primaryModel: VAlertDialogButtonModelCustom = .init(
+    private static let primaryModel: VDialogButtonModelCustom = .init(
         colors: .init(
             foreground: .init(
                 pressedOpacity: 0.5
             ),
             text: .init(
-                enabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.enabled,
-                pressed: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.pressed,
-                disabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.disabled
+                enabled: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.enabled,
+                pressed: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.pressed,
+                disabled: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.disabled
             ),
             background: .init(
-                enabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
-                pressed: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
-                disabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
+                enabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
+                pressed: VDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
+                disabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
             )
         )
     )
     
-    private static let secondaryModel: VAlertDialogButtonModelCustom = .init(
+    private static let secondaryModel: VDialogButtonModelCustom = .init(
         colors: .init(
             foreground: .init(
                 pressedOpacity: 0.5
             ),
             text: .init(
-                enabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
-                pressed: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
-                disabled: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
+                enabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
+                pressed: VDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
+                disabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
             ),
             background: .init(
                 enabled: .clear,
@@ -52,16 +52,16 @@ public enum VAlertDialogButtonModel {
     
     var primaryButtonModel: VPrimaryButtonModel {
         switch self {
-        case .primary: return VAlertDialogButtonModel.primaryModel.primaryButtonSubModel
-        case .secondary: return VAlertDialogButtonModel.secondaryModel.primaryButtonSubModel
+        case .primary: return VDialogButtonModel.primaryModel.primaryButtonSubModel
+        case .secondary: return VDialogButtonModel.secondaryModel.primaryButtonSubModel
         case .custom(let model): return model.primaryButtonSubModel
         }
     }
 }
 
-// MARK:- V Alert Dialog Button Model Custom
+// MARK:- V Dialog Button Model Custom
 /// Model that describes UI
-public struct VAlertDialogButtonModelCustom {
+public struct VDialogButtonModelCustom {
     public static let primaryButtonModel: VPrimaryButtonModel = .init()
     
     public var layout: Layout
@@ -76,21 +76,21 @@ public struct VAlertDialogButtonModelCustom {
 
         model.colors.content = .init(
             pressedOpacity: colors.content.pressedOpacity,
-            disabledOpacity: VAlertDialogButtonModelCustom.primaryButtonModel.colors.content.disabledOpacity
+            disabledOpacity: VDialogButtonModelCustom.primaryButtonModel.colors.content.disabledOpacity
         )
 
         model.colors.textContent = .init(
             enabled: colors.text.enabled,
             pressed: colors.text.pressed,
             disabled: colors.text.disabled,
-            loading: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.loading
+            loading: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.loading
         )
         
         model.colors.background = .init(
             enabled: colors.background.enabled,
             pressed: colors.background.pressed,
             disabled: colors.background.disabled,
-            loading: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.loading
+            loading: VDialogButtonModelCustom.primaryButtonModel.colors.background.loading
         )
 
         model.font = font
@@ -106,7 +106,7 @@ public struct VAlertDialogButtonModelCustom {
 }
 
 // MARK:- Layout
-extension VAlertDialogButtonModelCustom {
+extension VDialogButtonModelCustom {
     public struct Layout {
         public var height: CGFloat = 40
         public var cornerRadius: CGFloat = 10
@@ -116,7 +116,7 @@ extension VAlertDialogButtonModelCustom {
 }
 
 // MARK:- Colors
-extension VAlertDialogButtonModelCustom {
+extension VDialogButtonModelCustom {
     public struct Colors {
         public var content: StateOpacity
         public var text: StateColors    // Only applicable during init with title
@@ -130,7 +130,7 @@ extension VAlertDialogButtonModelCustom {
     }
 }
 
-extension VAlertDialogButtonModelCustom.Colors {
+extension VDialogButtonModelCustom.Colors {
     public struct StateColors {
         public var enabled: Color
         public var pressed: Color

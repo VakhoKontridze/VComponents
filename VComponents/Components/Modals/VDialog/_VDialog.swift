@@ -1,5 +1,5 @@
 //
-//  _VAlert.swift
+//  _VDialog.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- _ V Alert
-struct _VAlert<Content>: View where Content: View {
+// MARK:- _ V Dialog
+struct _VDialog<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VAlertModel
+    private let model: VDialogModel
     
     @Binding private var isPresented: Bool
     
-    private let dialogType: VAlertDialogType
+    private let dialogType: VDialogType
     
     private let title: String?
     private let description: String?
@@ -26,24 +26,24 @@ struct _VAlert<Content>: View where Content: View {
     // MARK: Initializers
     init(
         isPresented: Binding<Bool>,
-        alert: VAlert<Content>
+        dialog: VDialog<Content>
     ) {
         self.init(
-            model: alert.model,
+            model: dialog.model,
             isPresented: isPresented,
-            dialog: alert.dialogType,
-            title: alert.title,
-            description: alert.description,
-            content: alert.content,
-            onAppear: alert.appearAction,
-            onDisappear: alert.disappearAction
+            dialog: dialog.dialogType,
+            title: dialog.title,
+            description: dialog.description,
+            content: dialog.content,
+            onAppear: dialog.appearAction,
+            onDisappear: dialog.disappearAction
         )
     }
     
     private init(
-        model: VAlertModel,
+        model: VDialogModel,
         isPresented: Binding<Bool>,
-        dialog dialogType: VAlertDialogType,
+        dialog dialogType: VDialogType,
         title: String?,
         description: String?,
         content: (() -> Content)?,
@@ -62,7 +62,7 @@ struct _VAlert<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension _VAlert {
+extension _VDialog {
     var body: some View {
         ZStack(content: {
             background
@@ -80,13 +80,13 @@ extension _VAlert {
     
     private var contentView: some View {
         VStack(spacing: model.layout.spacing, content: {
-            alertContentView
+            dialogContentView
             dialogView
         })
             .padding(model.layout.margin)
     }
     
-    private var alertContentView: some View {
+    private var dialogContentView: some View {
         VStack(spacing: model.layout.contentSpacing, content: {
             titleView
             descriptionView
@@ -132,7 +132,7 @@ extension _VAlert {
         }
     }
     
-    private func oneButtonDialogView(button: VAlertDialogButton) -> some View {
+    private func oneButtonDialogView(button: VDialogButton) -> some View {
         VPrimaryButton(
             model: button.model.primaryButtonModel,
             state: button.isEnabled ? .enabled : .disabled,
@@ -141,7 +141,7 @@ extension _VAlert {
         )
     }
     
-    private func twoButtonDialogView(primary: VAlertDialogButton, secondary: VAlertDialogButton) -> some View {
+    private func twoButtonDialogView(primary: VDialogButton, secondary: VDialogButton) -> some View {
         HStack(spacing: model.layout.twoButtonSpacing, content: {
             VPrimaryButton(
                 model: secondary.model.primaryButtonModel,
@@ -159,7 +159,7 @@ extension _VAlert {
         })
     }
     
-    private func manyButtonDialogView(buttons: [VAlertDialogButton]) -> some View {
+    private func manyButtonDialogView(buttons: [VDialogButton]) -> some View {
         VStack(spacing: model.layout.manyButtonSpacing, content: {
             ForEach(0..<buttons.count, content: { i in
                 VPrimaryButton(
@@ -174,7 +174,7 @@ extension _VAlert {
 }
 
 // MARK:- Dismiss
-private extension _VAlert {
+private extension _VDialog {
     func dismiss(and action: @escaping () -> Void ) {
         withAnimation { isPresented = false }
         action()
@@ -182,12 +182,12 @@ private extension _VAlert {
 }
 
 // MARK:- Preview
-struct VAlert_Previews: PreviewProvider {
+struct VDialog_Previews: PreviewProvider {
     static var previews: some View {
         ZStack(content: {
-            VAlertModel.Colors().blinding.edgesIgnoringSafeArea(.all)
+            VDialogModel.Colors().blinding.edgesIgnoringSafeArea(.all)
             
-            _VAlert(isPresented: .constant(true), alert: VAlert(
+            _VDialog(isPresented: .constant(true), dialog: VDialog(
                 dialog: .two(
                     primary: .init(model: .secondary, title: "OK", action: {}),
                     secondary: .init(model: .secondary, title: "Cancel", action: {})

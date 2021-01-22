@@ -21,8 +21,8 @@ struct HomeView: View {
         .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
         .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
-        .init(id: 7, title: "Modals", rows: [.modal, .sideBar]),
-        .init(id: 8, title: "Messages", rows: [.alert]),
+        .init(id: 7, title: "Modals", rows: [.modal, .sideBar, .dialog]),
+//        .init(id: 8, title: "Messages", rows: []),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar]),
         .init(id: 10, title: "Core", rows: [.baseText, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
     ]
@@ -35,8 +35,8 @@ struct HomeView: View {
         case textField /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView
-        case modal, /*,halfModal*/ sideBar /*, menu*/ /*, actionSheet*/
-        case alert /*, banner*/ /*, toast*/
+        case modal, /*,halfModal*/ sideBar, dialog /*, menu*/ /*, actionSheet*/
+        /*case*/ /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
         case baseText, baseButton, baseTextField, lazyList, baseList, baseView
 
@@ -72,8 +72,7 @@ struct HomeView: View {
 
             case .modal: return VModalDemoView.navigationBarTitle
             case .sideBar: return VSideBarDemoView.navigationBarTitle
-
-            case .alert: return VAlertDemoView.navigationBarTitle
+            case .dialog: return VDialogDemoView.navigationBarTitle
 
             case .spinner: return VSpinnerDemoView.navigationBarTitle
             case .progressBar: return VProgressBarDemoView.navigationBarTitle
@@ -119,8 +118,7 @@ struct HomeView: View {
 
             case .modal: VModalDemoView()
             case .sideBar: VSideBarDemoView()
-
-            case .alert: VAlertDemoView()
+            case .dialog: VDialogDemoView()
 
             case .spinner: VSpinnerDemoView()
             case .progressBar: VProgressBarDemoView()

@@ -1,5 +1,5 @@
 //
-//  VAlertModel.swift
+//  VDialogModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK:- V Alert Model
+// MARK:- V Dialog Model
 /// Model that describes UI
-public struct VAlertModel {
+public struct VDialogModel {
     public static let modalModel: VModalModel = .init()
     
     public var layout: Layout = .init()
@@ -20,9 +20,9 @@ public struct VAlertModel {
 }
 
 // MARK:- Layout
-extension VAlertModel {
+extension VDialogModel {
     public struct Layout {
-        public var width: CGFloat = UIScreen.main.bounds.width * 0.67
+        public var width: CGFloat = UIScreen.main.bounds.width * 0.75
         public var cornerRadius: CGFloat = 20
         
         public var margin: CGFloat = 15
@@ -41,10 +41,10 @@ extension VAlertModel {
 }
 
 // MARK:- Colors
-extension VAlertModel {
+extension VDialogModel {
     public struct Colors {
-        public var background: Color = VAlertModel.modalModel.colors.background
-        public var blinding: Color = VAlertModel.modalModel.colors.blinding
+        public var background: Color = VDialogModel.modalModel.colors.background
+        public var blinding: Color = VDialogModel.modalModel.colors.blinding
         
         public var title: Color = ColorBook.primary
         public var description: Color = ColorBook.primary
@@ -54,7 +54,7 @@ extension VAlertModel {
 }
 
 // MARK:- Fonts
-extension VAlertModel {
+extension VDialogModel {
     public struct Fonts {
         public var title: Font = .system(size: 16, weight: .bold, design: .default)
         public var description: Font = .system(size: 14, weight: .regular, design: .default)

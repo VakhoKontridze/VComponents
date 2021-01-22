@@ -1,5 +1,5 @@
 //
-//  VAlertDemoView.swift
+//  VDialogDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 12/30/20.
@@ -8,17 +8,17 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Alert Demo View
-struct VAlertDemoView: View {
+// MARK:- V Dialog Demo View
+struct VDialogDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Alert"
+    static let navigationBarTitle: String = "Dialog"
     
     @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     @State private var dialogType: DialogType = .two
     
     @State private var isPresented: Bool = false
-    private var alertDialog: VAlertDialogType {
+    private var dialogTypeParam: VComponents.VDialogType {
         switch dialogType {
         case .one:
             return .one(
@@ -58,7 +58,7 @@ struct VAlertDemoView: View {
 }
 
 // MARK:- Body
-extension VAlertDemoView {
+extension VDialogDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
@@ -69,24 +69,28 @@ extension VAlertDemoView {
                     
                     VSegmentedPicker(selection: $dialogType, title: "Dialog Type")
                     
-                    VSecondaryButton(action: { isPresented = true }, title: "Demo Alert")
+                    VSecondaryButton(action: { isPresented = true }, title: "Demo Dialog")
                 })
             })
         })
-            .vAlert(isPresented: $isPresented, alert: {
-                VAlert(dialog: alertDialog, title: title, description: description, content: {
-                    TextField("", text: $text)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                }, onDisappear: {
-                    text = ""
-                })
+            .vDialog(isPresented: $isPresented, dialog: {
+                VDialog(
+                    dialog: dialogTypeParam,
+                    title: title,
+                    description: description,
+                    content: {
+                        TextField("", text: $text)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                    },
+                    onDisappear: { text = "" }
+                )
             })
     }
 }
 
 // MARK:- Preview
-struct VAlertDemoView_Previews: PreviewProvider {
+struct VDialogDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VAlertDemoView()
+        VDialogDemoView()
     }
 }
