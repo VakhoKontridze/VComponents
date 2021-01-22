@@ -14,10 +14,17 @@ struct VDialogDemoView: View {
     static let navigationBarTitle: String = "Dialog"
     
     @State private var title: String = "Lorem ipsum dolor sit amet"
+    @State private var titleTextFieldState: VTextFieldState = .enabled
+    
+    @State private var descriptionTextFieldState: VTextFieldState = .enabled
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    
     @State private var dialogType: DialogType = .two
     
     @State private var isPresented: Bool = false
+    @State private var textFieldState: VTextFieldState = .enabled
+    @State private var text: String = ""
+    
     private var dialogTypeParam: VComponents.VDialogType {
         switch dialogType {
         case .one:
@@ -53,8 +60,6 @@ struct VDialogDemoView: View {
             }
         }
     }
-    
-    @State private var text: String = ""
 }
 
 // MARK:- Body
@@ -63,9 +68,19 @@ extension VDialogDemoView {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(type: .section, content: {
                 VStack(spacing: 20, content: {
-                    TextField("Title", text: $title).textFieldStyle(RoundedBorderTextFieldStyle())
+                    VTextField(
+                        state: $titleTextFieldState,
+                        placeholder: "Title",
+                        title: "Title",
+                        text: $title
+                    )
                     
-                    TextField("Description", text: $description).textFieldStyle(RoundedBorderTextFieldStyle())
+                    VTextField(
+                        state: $descriptionTextFieldState,
+                        placeholder: "Description",
+                        title: "Description",
+                        text: $description
+                    )
                     
                     VSegmentedPicker(selection: $dialogType, title: "Dialog Type")
                     
@@ -79,8 +94,11 @@ extension VDialogDemoView {
                     title: title,
                     description: description,
                     content: {
-                        TextField("", text: $text)
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                        VTextField(
+                            state: $textFieldState,
+                            placeholder: "Name",
+                            text: $text
+                        )
                     },
                     onDisappear: { text = "" }
                 )
