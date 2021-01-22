@@ -14,14 +14,14 @@ struct VModalDemoView: View {
     static let navigationBarTitle: String = "Modal"
     
     @State private var hasTitle: Bool = true
-    @State private var closeButton: Set<VModalModel.Layout.CloseButtonType>
+    @State private var dismissType: Set<VModalModel.DismissType>
     
     @State private var isPresented: Bool = false
     
     private var modalModel: VModalModel {
         var model: VModalModel = .init()
         
-        model.layout.closeButton = closeButton
+        model.dismissType = dismissType
         
         return model
     }
@@ -34,7 +34,7 @@ struct VModalDemoView: View {
     
     // MARK: Initializers
     init() {
-        self._closeButton = State(initialValue: [.default])
+        self._dismissType = State(initialValue: .default)
     }
 }
 
@@ -47,12 +47,12 @@ extension VModalDemoView {
                     ToggleSettingView(isOn: $hasTitle, title: "Title")
                     
                     VStack(spacing: 3, content: {
-                        VText(title: "Close Button:", color: ColorBook.primary, font: .callout, type: .oneLine)
+                        VText(title: "Dismiss Type:", color: ColorBook.primary, font: .callout, type: .oneLine)
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack(content: {
-                            ForEach(VModalModel.Layout.CloseButtonType.allCases, id: \.rawValue, content: { position in
-                                closeButtonView(position)
+                            ForEach(VModalModel.DismissType.allCases, id: \.rawValue, content: { position in
+                                dimissTypeView(position)
                             })
                         })
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -84,14 +84,14 @@ extension VModalDemoView {
             )
     }
     
-    private func closeButtonView(_ position: VModalModel.Layout.CloseButtonType) -> some View {
+    private func dimissTypeView(_ position: VModalModel.DismissType) -> some View {
         VCheckBox(
             isOn: .init(
-                get: { closeButton.contains(position) },
+                get: { dismissType.contains(position) },
                 set: { isOn in
                     switch isOn {
-                    case false: closeButton.remove(position)
-                    case true: closeButton.insert(position)
+                    case false: dismissType.remove(position)
+                    case true: dismissType.insert(position)
                     }
                 }
             ),
@@ -101,9 +101,9 @@ extension VModalDemoView {
     
     private var modalContent: some View {
         ZStack(content: {
-            Color.red.opacity(0.5)
+            ColorBook.accent.opacity(0.5)
             
-            if closeButton.isEmpty {
+            if dismissType.isEmpty {
                 VStack(content: {
                     VText(
                         title: "When close button is \"none\", Modal can only be dismissed programatically",
@@ -122,7 +122,7 @@ extension VModalDemoView {
 }
 
 // MARK:- Helpers
-private extension VModalModel.Layout.CloseButtonType {
+private extension VModalModel.DismissType {
     var title: String {
         switch self {
         case .leading: return "Leading"

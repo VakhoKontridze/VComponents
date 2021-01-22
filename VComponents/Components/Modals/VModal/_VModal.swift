@@ -18,13 +18,13 @@ struct _VModal<Content, HeaderContent>: View
     
     @Binding private var isPresented: Bool
     
-    let headerContent: (() -> HeaderContent)?
-    let content: () -> Content
+    private let headerContent: (() -> HeaderContent)?
+    private let content: () -> Content
     
-    let appearAction: (() -> Void)?
-    let disappearAction: (() -> Void)?
+    private let appearAction: (() -> Void)?
+    private let disappearAction: (() -> Void)?
     
-    var headerExists: Bool { headerContent != nil || model.layout.closeButton.hasButton }
+    private var headerExists: Bool { headerContent != nil || model.dismissType.hasButton }
     
     // MARK: Initializers
     init(
@@ -71,7 +71,7 @@ extension _VModal {
     }
     
     private var sheetView: some View {
-        VSheet(model: model.sheetModel)
+        VSheet(model: model.sheetSubModel)
     }
 
     private var contentView: some View {
@@ -87,7 +87,7 @@ extension _VModal {
     @ViewBuilder private var headerView: some View {
         if headerExists {
             HStack(spacing: model.layout.headerSpacing, content: {
-                if model.layout.closeButton.contains(.leading) {
+                if model.dismissType.contains(.leading) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -97,7 +97,7 @@ extension _VModal {
                         .layoutPriority(1)  // Overrides close button's maxWidth: .infinity. Also, header content is by default maxWidth and leading justified.
                 }
                 
-                if model.layout.closeButton.contains(.trailing) {
+                if model.dismissType.contains(.trailing) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -114,12 +114,7 @@ extension _VModal {
     }
     
     private var closeButton: some View {
-        VCloseButton(model: model.closeButtonModel, action: dismiss)
-    }
-
-    private var closeButtonCompensator: some View {
-        Spacer()
-            .frame(width: model.layout.closeButtonDimension)
+        VCloseButton(model: model.closeButtonSubModel, action: dismiss)
     }
 }
 
@@ -127,13 +122,6 @@ extension _VModal {
 private extension _VModal {
     func dismiss() {
         withAnimation { isPresented = false }
-    }
-}
-
-// MARK:- Helpers
-private extension Set where Element == VModalModel.Layout.CloseButtonType {
-    var hasButton: Bool {
-        contains(where: { [.leading, .trailing].contains($0) })
     }
 }
 
@@ -145,7 +133,7 @@ struct VModal_Previews: PreviewProvider {
             
             _VModal(isPresented: .constant(true), modal: VModal(
                 header: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
-                content: { Color.red }
+                content: { ColorBook.accent }
             ))
         })
     }

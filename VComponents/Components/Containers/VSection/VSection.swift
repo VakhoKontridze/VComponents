@@ -119,9 +119,9 @@ extension VSection {
                     .padding(.horizontal, model.layout.titleMarginHor)
             }
             
-            VSheet(model: model.sheetModel, content: {
+            VSheet(model: model.sheetSubModel, content: {
                 VBaseList(
-                    model: model.genericListContentModel,
+                    model: model.baseListSubModel,
                     layout: layoutType,
                     data: data,
                     id: id,

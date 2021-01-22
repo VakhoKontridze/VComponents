@@ -17,7 +17,7 @@ public struct VTableModel {
     static let defaultHeaderFooterFont: Font = .system(size: 13, weight: .regular, design: .default)
     public var showIndicator: Bool = true
     
-    var genericListContentModel: VBaseListModel {
+    var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
         model.showIndicator = showIndicator
@@ -30,7 +30,7 @@ public struct VTableModel {
         return model
     }
     
-    var sheetModel: VSheetModel {
+    var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
         
         model.layout.cornerRadius = layout.cornerRadius

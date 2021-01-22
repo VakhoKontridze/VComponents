@@ -1,5 +1,5 @@
 //
-//  SliderDoubleInits.swift
+//  SliderHelpers.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/12/21.

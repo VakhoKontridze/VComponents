@@ -15,7 +15,7 @@ public struct VProgressBarModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     
-    var sliderModel: VSliderModel {
+    var sliderSubModel: VSliderModel {
         var model: VSliderModel = .init()
         
         model.layout.height = layout.height
@@ -24,12 +24,12 @@ public struct VProgressBarModel {
         
         model.colors.slider.track = .init(
             enabled: colors.track,
-            disabled: Self.sliderModel.colors.slider.track.disabled
+            disabled: VProgressBarModel.sliderModel.colors.slider.track.disabled
         )
         
         model.colors.slider.progress = .init(
             enabled: colors.progress,
-            disabled: Self.sliderModel.colors.slider.progress.disabled
+            disabled: VProgressBarModel.sliderModel.colors.slider.progress.disabled
         )
         
         return model

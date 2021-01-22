@@ -12,6 +12,8 @@ import SwiftUI
 ///
 /// Model, and onAppear and onDisappear callbacks can be passed as parameters
 ///
+/// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+///
 /// # Usage Example #
 ///
 /// ```
@@ -70,7 +72,7 @@ extension View {
                     isPresented: isPresented,
                     content: _VSideBar(isPresented: isPresented, sideBar: sideBar()),
                     blinding: sideBar().model.colors.blinding.edgesIgnoringSafeArea(.all),
-                    contentWidth: sideBar().model.layout.widthType.width,
+                    contentWidth: sideBar().model.layout.width,
                     animationCurve: sideBar().model.animations.curve,
                     animationDuration: sideBar().model.animations.duration,
                     onBackTap: { withAnimation { isPresented.wrappedValue = false } }

@@ -30,7 +30,7 @@ public struct VTextFieldModel {
     
     public var cancelButton: String? = nil
     
-    func baseTextFieldModel(state: VTextFieldState, isSecureTextEntry: Bool) -> VBaseTextFieldModel {
+    func baseTextFieldSubModel(state: VTextFieldState, isSecureTextEntry: Bool) -> VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         
         model.layout.textAlignment = layout.textAlignment
@@ -53,7 +53,7 @@ public struct VTextFieldModel {
         return model
     }
     
-    func clearButtonModel(state: VTextFieldState, highlight: VTextFieldHighlight) -> VCloseButtonModel {
+    func clearSubButtonModel(state: VTextFieldState, highlight: VTextFieldHighlight) -> VCloseButtonModel {
         var model: VCloseButtonModel = .init()
         
         model.layout.dimension = layout.clearButtonDimension
@@ -78,7 +78,7 @@ public struct VTextFieldModel {
         return model
     }
     
-    func visibilityButtonModel(state: VTextFieldState, highlight: VTextFieldHighlight) -> VSquareButtonModel {
+    func visibilityButtonSubModel(state: VTextFieldState, highlight: VTextFieldHighlight) -> VSquareButtonModel {
         var model: VSquareButtonModel = .init()
         
         model.layout.dimension = layout.visibilityButtonDimension
@@ -102,7 +102,7 @@ public struct VTextFieldModel {
         return model
     }
     
-    var cancelButtonModel: VPlainButtonModel {
+    var cancelButtonSubModel: VPlainButtonModel {
         var model: VPlainButtonModel = .init()
         
         model.layout.hitBoxHor = 0

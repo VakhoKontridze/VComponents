@@ -151,7 +151,7 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
 // MARK:- Body
 extension VAccordion {
     public var body: some View {
-        VSheet(model: model.sheetModel, content: {
+        VSheet(model: model.sheetSubModel, content: {
             VStack(spacing: 0, content: {
                 header
                 divider
@@ -172,7 +172,7 @@ extension VAccordion {
             Spacer()
             
             VChevronButton(
-                model: model.chevronButonModel,
+                model: model.chevronButonSubModel,
                 direction: state.chevronButtonDirection,
                 state: state.chevronButtonState,
                 action: expandCollapse
@@ -207,7 +207,7 @@ extension VAccordion {
                 
             case .list(let data, let id, let rowContent):
                 VBaseList(
-                    model: model.genericListContentModel,
+                    model: model.baseListSubModel,
                     layout: layoutType,
                     data: data,
                     id: id,

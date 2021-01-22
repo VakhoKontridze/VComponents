@@ -35,7 +35,7 @@ struct HomeView: View {
         case textField /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView
-        case modal, sideBar /*,bottomSheet*/ /*, menu*/ /*, actionSheet*/
+        case modal, /*,halfModal*/ sideBar /*, menu*/ /*, actionSheet*/
         case alert /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
         case baseText, baseButton, baseTextField, lazyList, baseList, baseView
@@ -134,8 +134,6 @@ struct HomeView: View {
             }
         }
     }
-    
-    @State private var isPresented: Bool = false
 }
 
 // MARK:- Body
@@ -143,15 +141,7 @@ extension HomeView {
     var body: some View {
         VNavigationView(content: {
             VBaseView(title: Self.navigationBarTitle, content: {
-//                DemoListView(type: .accordion, sections: sections)
-                Button("ACTIVATE", action: {
-                    isPresented = true
-                })
-                    .vBottomSheet(isPresented: $isPresented, bottomSheet: {
-                        VBottomSheet(content: {
-                            Color.red
-                        })
-                    })
+                DemoListView(type: .accordion, sections: sections)
             })
         })
     }

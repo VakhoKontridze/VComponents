@@ -29,7 +29,7 @@ extension UIKitRepresentable: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: UIKitPresenterVC<Content>, context: Context) {
         switch isPresented {
         case false: uiViewController.dismiss()
-        case true: uiViewController.hostingController?.rootView = content
+        case true: uiViewController.update(with: content)
         }
     }
 }
@@ -37,8 +37,8 @@ extension UIKitRepresentable: UIViewControllerRepresentable {
 // MARK:- UI Kit Presenter VC
 final class UIKitPresenterVC<Content>: UIViewController where Content: View {
     // MARK: Properties
-    private let hostedViewID: Int = 999_999_999
-    fileprivate var hostingController: UIHostingController<Content>!
+    private let hostedViewTag: Int = 999_999_999
+    private var hostingController: UIHostingController<Content>!
 
     // MARK: Initializers
     init(content: Content) {
@@ -59,7 +59,7 @@ private extension UIKitPresenterVC {
         let hostedView: UIView = hostingController.view
         hostedView.translatesAutoresizingMaskIntoConstraints = false
         hostedView.backgroundColor = .clear
-        hostedView.tag = hostedViewID
+        hostedView.tag = hostedViewTag
         
         guard let appSuperView = UIView.appSuperView else { preconditionFailure() }
         
@@ -76,9 +76,16 @@ private extension UIKitPresenterVC {
     }
 }
 
+// MARK:- Updating
+fileprivate extension UIKitPresenterVC {
+    func update(with content: Content) {
+        hostingController?.rootView = content
+    }
+}
+
 // MARK:- Dismissing
 private extension UIKitPresenterVC {
     func dismiss() {
-        UIView.appSuperView?.subviews.first(where: { $0.tag == hostedViewID })?.removeFromSuperview()
+        UIView.appSuperView?.subviews.first(where: { $0.tag == hostedViewTag })?.removeFromSuperview()
     }
 }

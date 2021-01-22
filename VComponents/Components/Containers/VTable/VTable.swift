@@ -159,7 +159,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
 // MARK:- Body
 extension VTable {
     public var body: some View {
-        VSheet(model: model.sheetModel, content: {
+        VSheet(model: model.sheetSubModel, content: {
             Group(content: {
                 switch layoutType {
                 case .fixed: VStack(spacing: 0, content: { contentView })
@@ -189,7 +189,7 @@ extension VTable {
 
     private func rowViews(section: Section) -> some View {
         VBaseList(
-            model: model.genericListContentModel,
+            model: model.baseListSubModel,
             layout: .fixed,
             data: section.rows,
             content: content

@@ -14,7 +14,7 @@ public struct VBaseListModel {
     public var colors: Colors = .init()
     public var showIndicator: Bool = true
     
-    var lazyListModel: VLazyListModelVertical {
+    var lazyListSubModel: VLazyListModelVertical {
         var model: VLazyListModelVertical = .init()
         model.showIndicator = showIndicator
         return model

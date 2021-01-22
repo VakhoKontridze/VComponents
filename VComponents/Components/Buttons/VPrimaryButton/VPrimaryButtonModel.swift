@@ -14,7 +14,7 @@ public struct VPrimaryButtonModel {
     public var colors: Colors = .init()
     public var font: Font = .system(size: 16, weight: .semibold, design: .default)  // Only applicable during init with title
     
-    var spinnerModel: VSpinnerModelContinous {
+    var spinnerSubModel: VSpinnerModelContinous {
         var model: VSpinnerModelContinous = .init()
         model.color = colors.loader
         return model

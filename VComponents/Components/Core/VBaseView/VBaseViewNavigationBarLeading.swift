@@ -39,6 +39,8 @@ struct VBaseViewNavigationBarLeading<TrailingItem, LeadingItem>: ViewModifier
         TrailingItem: View
 {
     // MARK: Properties
+    @Environment(\.vHalfModalNavigationViewCloseButton) private var vHalfModalNavigationViewCloseButton: Bool
+    
     private let title: String
     private let model: VBaseViewModel
     
@@ -77,11 +79,11 @@ extension VBaseViewNavigationBarLeading {
         HStack(spacing: model.layout.spacing, content: {
             if let leadingItemContent = leadingItemContent { leadingItemContent().layoutPriority(1) }
 
-            if showBackButton { VChevronButton(model: model.backButtonModel, direction: .left, action: backAction).layoutPriority(1) }
+            if showBackButton { VChevronButton(model: model.backButtonSubModel, direction: .left, action: backAction).layoutPriority(1) }
 
             VText(
                 title: title,
-                color: model.titleColor,
+                color: model.colors.titleColor,
                 font: model.font,
                 type: .oneLine
             )
@@ -92,6 +94,7 @@ extension VBaseViewNavigationBarLeading {
             if let trailingItemContent = trailingItemContent { trailingItemContent().layoutPriority(1) }
         })
             .lineLimit(1)
+            .padding(.trailing, vHalfModalNavigationViewCloseButton ? VHalfModalModel.Layout.navigationViewHalfModalCloseButtonMarginTrailing : 0)
             .frame(width: model.layout.width)
     }
 }

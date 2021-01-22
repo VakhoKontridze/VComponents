@@ -22,7 +22,7 @@ public struct VAlertModel {
 // MARK:- Layout
 extension VAlertModel {
     public struct Layout {
-        public var width: CGFloat = UIScreen.main.bounds.width * 0.7
+        public var width: CGFloat = UIScreen.main.bounds.width * 0.67
         public var cornerRadius: CGFloat = 20
         
         public var margin: CGFloat = 15

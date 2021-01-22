@@ -14,6 +14,8 @@ import SwiftUI
 ///
 /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
 ///
+/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+///
 /// # Usage Example #
 ///
 /// ```

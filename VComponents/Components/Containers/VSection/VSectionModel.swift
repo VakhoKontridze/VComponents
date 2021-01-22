@@ -18,7 +18,7 @@ public struct VSectionModel {
     public var titleFont: Font = .system(size: 14, weight: .bold, design: .default)
     public var showIndicator: Bool = true
     
-    var genericListContentModel: VBaseListModel {
+    var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
         model.showIndicator = showIndicator
@@ -32,7 +32,7 @@ public struct VSectionModel {
         return model
     }
     
-    var sheetModel: VSheetModel {
+    var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
         
         model.layout.cornerRadius = layout.cornerRadius

@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Model, range, step, state, and onChange callbacks can be passed as parameters
 ///
-/// If invalid parameters are passed during init, layout would invalidate itself, and refuse to draw
+/// If invalid value parameters are passed during init, layout would invalidate itself, and refuse to draw
 ///
 /// # Usage Example #
 ///
@@ -80,6 +80,7 @@ public struct VRangeSlider: View {
         self.state = state
         self.actionLow = actionLow
         self.actionHigh = actionHigh
+        
         self.validLayout = valueLow.wrappedValue <= valueHigh.wrappedValue - difference
     }
 }
@@ -145,20 +146,20 @@ extension VRangeSlider {
 
             .gesture(
                 DragGesture(minimumDistance: 0)
-                    .onChanged({ dragChanged($0, in: proxy, thumb: thumb) })
-                    .onEnded({ dragEnded($0, thumb: thumb) })
+                    .onChanged({ dragChanged(drag: $0, in: proxy, thumb: thumb) })
+                    .onEnded({ dragEnded(drag: $0, thumb: thumb) })
             )
     }
 }
 
 // MARK:- Drag
 private extension VRangeSlider {
-    func dragChanged(_ draggedValue: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
+    func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
         let range: Double = max - min
         let width: Double = .init(proxy.size.width)
-        let draggedValue: Double = .init(draggedValue.location.x)
+        let drag: Double = .init(drag.location.x)
 
-        let rawValue: Double = (draggedValue / width) * range
+        let rawValue: Double = (drag / width) * range
 
         let valueFixed: Double = {
             switch thumb {
@@ -191,7 +192,7 @@ private extension VRangeSlider {
         }
     }
 
-    func dragEnded(_ draggedValue: DragGesture.Value, thumb: Thumb) {
+    func dragEnded(drag: DragGesture.Value, thumb: Thumb) {
         switch thumb {
         case .low: actionLow?(false)
         case .high: actionHigh?(false)

@@ -52,7 +52,7 @@ struct _VSideBar<Content>: View where Content: View {
 extension _VSideBar {
     var body: some View {
         ZStack(content: {
-            VSheet(model: model.sheetModel)
+            VSheet(model: model.sheetSubModel)
                 .edgesIgnoringSafeArea(.vertical)
 
             content()
@@ -61,7 +61,7 @@ extension _VSideBar {
                 .padding(.top, model.layout.contentMargin.top)
                 .padding(.bottom, model.layout.contentMargin.bottom)
         })
-            .frame(width: model.layout.widthType.width)
+            .frame(width: model.layout.width)
             .onAppear(perform: appearAction)
             .onDisappear(perform: disappearAction)
             .addSideBarSwipeGesture(completion: dismiss)
@@ -81,7 +81,7 @@ struct VSideBar_Previews: PreviewProvider {
         Color.red.edgesIgnoringSafeArea(.all)
             .vSideBar(isPresented: .constant(true), sideBar: {
                 VSideBar(content: {
-                    Color.red
+                    ColorBook.accent
                 })
             })
     }

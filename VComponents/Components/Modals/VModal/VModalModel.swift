@@ -16,8 +16,9 @@ public struct VModalModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     static let defaultHeaderFont: Font = .system(size: 17, weight: .bold, design: .default)
+    public var dismissType: Set<DismissType> = .default
     
-    var sheetModel: VSheetModel {
+    var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
         
         model.layout.roundedCorners = layout.roundedCorners
@@ -28,7 +29,7 @@ public struct VModalModel {
         return model
     }
     
-    var closeButtonModel: VCloseButtonModel {
+    var closeButtonSubModel: VCloseButtonModel {
         var model: VCloseButtonModel = .init()
         
         model.layout.dimension = layout.closeButtonDimension
@@ -45,6 +46,23 @@ public struct VModalModel {
     public init() {}
 }
 
+extension VModalModel {
+    /// Enum that decribes dismiss type, such as leading button, trailing button, or backtap
+    public enum DismissType: Int, CaseIterable {
+        case leading
+        case trailing
+        case backTap
+    }
+}
+
+extension Set where Element == VModalModel.DismissType {
+    public static let `default`: Self = [.trailing]
+    
+    var hasButton: Bool {
+        contains(where: { [.leading, .trailing].contains($0) })
+    }
+}
+
 // MARK:- Layout
 extension VModalModel {
     public struct Layout {
@@ -57,7 +75,6 @@ extension VModalModel {
         public var cornerRadius: CGFloat = VModalModel.sheetModel.layout.cornerRadius
         public var margin: CGFloat = VModalModel.sheetModel.layout.contentMargin
 
-        public var closeButton: Set<CloseButtonType> = [.default]
         public var closeButtonDimension: CGFloat = VModalModel.closeButtonModel.layout.dimension
         public var closeButtonIconDimension: CGFloat = VModalModel.closeButtonModel.layout.iconDimension
         
@@ -74,23 +91,6 @@ extension VModalModel {
 extension VModalModel.Layout {
     /// Enum that describes rounded corners, such as all, top, bottom, custom, or none
     public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
-    
-    /// Enum that decribes close button type, such as leading, trailing, or back tap
-    public enum CloseButtonType: Int, CaseIterable {
-        case leading
-        case trailing
-        case backTap
-        
-        public static let `default`: Self = .trailing
-        
-        var exists: Bool {
-            switch self {
-            case .leading: return true
-            case .trailing: return true
-            case .backTap: return false
-            }
-        }
-    }
 }
 
 // MARK:- Colors

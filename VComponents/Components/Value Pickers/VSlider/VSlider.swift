@@ -78,7 +78,7 @@ extension VSlider {
             
                 .gesture(
                     DragGesture(minimumDistance: 0)
-                        .onChanged({ dragChanged($0, in: proxy) })
+                        .onChanged({ dragChanged(drag: $0, in: proxy) })
                         .onEnded(dragEnded)
                 )
                 .disabled(state.isDisabled)
@@ -120,10 +120,10 @@ extension VSlider {
 
 // MARK:- Drag
 private extension VSlider {
-    func dragChanged(_ draggedValue: DragGesture.Value, in proxy: GeometryProxy) {
+    func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
         let range: Double = max - min
         let width: Double = .init(proxy.size.width)
-        let draggedValue: Double = .init(draggedValue.location.x)
+        let draggedValue: Double = .init(drag.location.x)
 
         let rawValue: Double = (draggedValue / width) * range
         
@@ -134,7 +134,7 @@ private extension VSlider {
         action?(true)
     }
     
-    func dragEnded(_ draggedValue: DragGesture.Value) {
+    func dragEnded(drag: DragGesture.Value) {
         action?(false)
     }
 }

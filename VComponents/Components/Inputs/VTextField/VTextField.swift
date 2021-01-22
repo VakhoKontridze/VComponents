@@ -217,7 +217,7 @@ extension VTextField {
     
     private var textFieldContentView: some View {
         UIKitTextFieldRepresentable(
-            model: model.baseTextFieldModel(state: state, isSecureTextEntry: textFieldType.isSecure && !secureFieldIsVisible),
+            model: model.baseTextFieldSubModel(state: state, isSecureTextEntry: textFieldType.isSecure && !secureFieldIsVisible),
             state: $state,
             placeholder: placeholder,
             text: $text,
@@ -232,7 +232,7 @@ extension VTextField {
     @ViewBuilder private var clearButton: some View {
         if !textFieldType.isSecure && nonEmptyText && model.clearButton {
             VCloseButton(
-                model: model.clearButtonModel(state: state, highlight: highlight),
+                model: model.clearSubButtonModel(state: state, highlight: highlight),
                 state: state.clearButtonState,
                 action: runClearAction
             )
@@ -242,7 +242,7 @@ extension VTextField {
     @ViewBuilder private var visibilityButton: some View {
         if textFieldType.isSecure {
             VSquareButton(
-                model: model.visibilityButtonModel(state: state, highlight: highlight),
+                model: model.visibilityButtonSubModel(state: state, highlight: highlight),
                 state: state.visiblityButtonState,
                 action: { secureFieldIsVisible.toggle() },
                 content: {
@@ -258,7 +258,7 @@ extension VTextField {
     @ViewBuilder private var cancelButton: some View {
         if !textFieldType.isSecure, nonEmptyText, state.isFocused, let cancelButton = model.cancelButton, !cancelButton.isEmpty {
             VPlainButton(
-                model: model.cancelButtonModel,
+                model: model.cancelButtonSubModel,
                 state: state.cancelButtonState,
                 action: runCancelAction,
                 title: cancelButton
@@ -337,7 +337,7 @@ private extension VTextField {
     }
 }
 
-// MARK:- Resets
+// MARK:- State Resets
 private extension VTextField {
     func performStateResets() {
         DispatchQueue.main.async(execute: {

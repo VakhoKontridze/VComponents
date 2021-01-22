@@ -55,7 +55,7 @@ public struct VProgressBar: View {
 extension VProgressBar {
     public var body: some View {
         VSlider(
-            model: model.sliderModel,
+            model: model.sliderSubModel,
             range: range,
             step: nil,
             state: .enabled,

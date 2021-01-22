@@ -41,8 +41,9 @@ import SwiftUI
 ///                 VSheet()
 ///
 ///                 VNavigationLink(
+///                     preset: .secondary(),
 ///                     destination: destination,
-///                     label: { label }
+///                     title: "Navigate to Details"
 ///                 )
 ///             })
 ///         })
@@ -57,11 +58,6 @@ import SwiftUI
 ///             VSheet()
 ///         })
 ///     })
-/// }
-///
-/// var label: some View {
-///     VSecondaryButton(action: {}, title: "Navigate to Details")
-///         .allowsHitTesting(false)
 /// }
 /// ```
 ///

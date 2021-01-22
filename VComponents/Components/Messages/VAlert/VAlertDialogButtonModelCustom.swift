@@ -52,9 +52,9 @@ public enum VAlertDialogButtonModel {
     
     var primaryButtonModel: VPrimaryButtonModel {
         switch self {
-        case .primary: return Self.primaryModel.primaryButtonModel
-        case .secondary: return Self.secondaryModel.primaryButtonModel
-        case .custom(let model): return model.primaryButtonModel
+        case .primary: return VAlertDialogButtonModel.primaryModel.primaryButtonSubModel
+        case .secondary: return VAlertDialogButtonModel.secondaryModel.primaryButtonSubModel
+        case .custom(let model): return model.primaryButtonSubModel
         }
     }
 }
@@ -68,7 +68,7 @@ public struct VAlertDialogButtonModelCustom {
     public var colors: Colors
     public var font: Font
     
-    fileprivate var primaryButtonModel: VPrimaryButtonModel {
+    fileprivate var primaryButtonSubModel: VPrimaryButtonModel {
         var model: VPrimaryButtonModel = .init()
 
         model.layout.height = layout.height
@@ -76,21 +76,21 @@ public struct VAlertDialogButtonModelCustom {
 
         model.colors.content = .init(
             pressedOpacity: colors.content.pressedOpacity,
-            disabledOpacity: Self.primaryButtonModel.colors.content.disabledOpacity
+            disabledOpacity: VAlertDialogButtonModelCustom.primaryButtonModel.colors.content.disabledOpacity
         )
 
         model.colors.textContent = .init(
             enabled: colors.text.enabled,
             pressed: colors.text.pressed,
             disabled: colors.text.disabled,
-            loading: Self.primaryButtonModel.colors.textContent.loading
+            loading: VAlertDialogButtonModelCustom.primaryButtonModel.colors.textContent.loading
         )
         
         model.colors.background = .init(
             enabled: colors.background.enabled,
             pressed: colors.background.pressed,
             disabled: colors.background.disabled,
-            loading: Self.primaryButtonModel.colors.background.loading
+            loading: VAlertDialogButtonModelCustom.primaryButtonModel.colors.background.loading
         )
 
         model.font = font

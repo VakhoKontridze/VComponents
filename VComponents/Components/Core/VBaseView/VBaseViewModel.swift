@@ -14,10 +14,9 @@ public struct VBaseViewModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var titleColor: Color = ColorBook.primary
     public var font: Font = .system(size: 17, weight: .semibold, design: .default)
     
-    var backButtonModel: VChevronButtonModel {
+    var backButtonSubModel: VChevronButtonModel {
         var model: VChevronButtonModel = .init()
         
         model.layout.dimension = layout.backButtonDimension
@@ -25,8 +24,8 @@ public struct VBaseViewModel {
         model.layout.hitBoxHor = 0
         model.layout.hitBoxVer = 0
         
-        model.colors.background = colors.closeButtonBackground
-        model.colors.content = colors.closeButtonIcon
+        model.colors.background = colors.backButtonBackground
+        model.colors.content = colors.backButtonIcon
         
         return model
     }
@@ -63,9 +62,11 @@ extension VBaseViewModel.Layout {
 // MARK:- Colors
 extension VBaseViewModel {
     public struct Colors {
-        public var closeButtonBackground: StateColors = VBaseViewModel.chevronButtonModel.colors.background
+        public var titleColor: Color = ColorBook.primary
         
-        public var closeButtonIcon: StateColorsAndOpacity = VBaseViewModel.chevronButtonModel.colors.content
+        public var backButtonBackground: StateColors = VBaseViewModel.chevronButtonModel.colors.background
+        
+        public var backButtonIcon: StateColorsAndOpacity = VBaseViewModel.chevronButtonModel.colors.content
         
         public init() {}
     }

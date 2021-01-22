@@ -12,6 +12,8 @@ import SwiftUI
 ///
 /// Model, header, and onAppear and onDisappear callbacks can be passed as parameters
 ///
+/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+///
 /// # Usage Example #
 ///
 /// ```
@@ -96,7 +98,7 @@ extension View {
                     content: _VModal(isPresented: isPresented, modal: modal()),
                     blinding: modal().model.colors.blinding.edgesIgnoringSafeArea(.all),
                     onBackTap: {
-                        if modal().model.layout.closeButton.contains(.backTap) {
+                        if modal().model.dismissType.contains(.backTap) {
                             withAnimation { isPresented.wrappedValue = false }
                         }
                     }
