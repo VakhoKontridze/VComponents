@@ -32,9 +32,9 @@ public enum VAccordionState: Int, CaseIterable {
     
     var chevronButtonDirection: VChevronButtonDirection {
         switch self {
-        case .collapsed: return .up
-        case .expanded: return .down
-        case .disabled: return .up
+        case .collapsed: return .down
+        case .expanded: return .up
+        case .disabled: return .down
         }
     }
 }
