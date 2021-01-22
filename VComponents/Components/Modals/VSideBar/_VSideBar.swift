@@ -12,7 +12,8 @@ struct _VSideBar<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSideBarModel
     
-    @Binding private var isPresented: Bool
+    @Binding private var isHCPresented: Bool
+    @State private var isViewPresented: Bool = false
     
     private let content: () -> Content
     
@@ -21,19 +22,6 @@ struct _VSideBar<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        isPresented: Binding<Bool>,
-        sideBar: VSideBar<Content>
-    ) {
-        self.init(
-            model: sideBar.model,
-            isPresented: isPresented,
-            content: sideBar.content,
-            onAppear: sideBar.appearAction,
-            onDisappear: sideBar.disappearAction
-        )
-    }
-    
-    private init(
         model: VSideBarModel,
         isPresented: Binding<Bool>,
         content: @escaping () -> Content,
@@ -41,7 +29,7 @@ struct _VSideBar<Content>: View where Content: View {
         onDisappear disappearAction: (() -> Void)?
     ) {
         self.model = model
-        self._isPresented = isPresented
+        self._isHCPresented = isPresented
         self.content = content
         self.appearAction = appearAction
         self.disappearAction = disappearAction
@@ -51,9 +39,25 @@ struct _VSideBar<Content>: View where Content: View {
 // MARK:- Body
 extension _VSideBar {
     var body: some View {
+        ZStack(alignment: .leading, content: {
+            blinding
+            sideBarView
+        })
+            //.edgesIgnoringSafeArea(.all) Applied inidividually
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear(perform: animateIn)
+    }
+    
+    private var blinding: some View {
+        model.colors.blinding
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture(perform: animateOut)
+    }
+    
+    private var sideBarView: some View {
         ZStack(content: {
             VSheet(model: model.sheetSubModel)
-                .edgesIgnoringSafeArea(.vertical)
+                .edgesIgnoringSafeArea(.all)
 
             content()
                 .padding(.leading, model.layout.contentMargin.leading)
@@ -62,27 +66,49 @@ extension _VSideBar {
                 .padding(.bottom, model.layout.contentMargin.bottom)
         })
             .frame(width: model.layout.width)
+            .offset(x: isViewPresented ? 0 : -model.layout.width)
             .onAppear(perform: appearAction)
             .onDisappear(perform: disappearAction)
-            .addSideBarSwipeGesture(completion: dismiss)
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged(dragChanged)
+            )
     }
 }
 
 // MARK:- Actions
 private extension _VSideBar {
-    func dismiss() {
-        withAnimation { isPresented = false }
+    func animateIn() {
+        withAnimation(model.animations.appear?.swiftUIAnimation, { isViewPresented = true })
+    }
+    
+    func animateOut() {
+        withAnimation(model.animations.disappear?.swiftUIAnimation, { isViewPresented = false })
+        DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
+    }
+}
+
+// MARK:- Gestures
+private extension _VSideBar {
+    func dragChanged(drag: DragGesture.Value) {
+        let isDraggedLeft: Bool = drag.translation.width <= 0
+        guard isDraggedLeft else { return }
+        
+        guard abs(drag.translation.width) >= model.layout.translationToDismiss else { return }
+        
+        animateOut()
     }
 }
 
 // MARK:- Preview
 struct VSideBar_Previews: PreviewProvider {
     static var previews: some View {
-        Color.red.edgesIgnoringSafeArea(.all)
-            .vSideBar(isPresented: .constant(true), sideBar: {
-                VSideBar(content: {
-                    ColorBook.accent
-                })
-            })
+        _VSideBar(
+            model: .init(),
+            isPresented: .constant(true),
+            content: { ColorBook.accent },
+            onAppear: nil,
+            onDisappear: nil
+        )
     }
 }

@@ -10,8 +10,8 @@ import SwiftUI
 // MARK:- V Half Modal Model
 /// Model that describes UI
 public struct VHalfModalModel {
+    public static let sheetModel: VSheetModel = .init()
     public static let modalModel: VModalModel = .init()
-    public static let sideBarModel: VSideBarModel = .init()
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
@@ -71,7 +71,7 @@ extension VHalfModalModel {
     public struct Layout {
         public var height: HeightType = .default
         
-        public var cornerRadius: CGFloat = VHalfModalModel.sideBarModel.layout.cornerRadius
+        public var cornerRadius: CGFloat = VHalfModalModel.modalModel.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
         
         public var contentMargin: ContentMargin = .init()
@@ -129,7 +129,14 @@ extension VHalfModalModel.Layout {
         }
     }
     
-    public typealias ContentMargin = VSideBarModel.Layout.ContentMargin
+    public struct ContentMargin {
+        public var leading: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
+        public var trailing: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
+        public var top: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
+        public var bottom: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
+        
+        public init() {}
+    }
 }
 
 // MARK:- Colors

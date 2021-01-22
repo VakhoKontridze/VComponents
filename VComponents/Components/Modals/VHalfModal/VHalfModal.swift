@@ -149,20 +149,21 @@ extension View {
         let halfModal = halfModal()
         
         return ZStack(content: {
-
             self
             
             if isPresented.wrappedValue {
-                UIKitRepresentable(isPresented: isPresented, content:
-                    _VHalfModal(
-                        model: halfModal.model,
-                        isPresented: isPresented,
-                        headerContent: halfModal.headerContent,
-                        content: halfModal.content,
-                        onAppear: halfModal.appearAction,
-                        onDisappear: halfModal.disappearAction
-                    )
-                        .environment(\.vHalfModalNavigationViewCloseButton, halfModal.model.dismissType.contains(.navigationViewCloseButton))
+                UIKitRepresentable(
+                    isPresented: isPresented,
+                    content:
+                        _VHalfModal(
+                            model: halfModal.model,
+                            isPresented: isPresented,
+                            headerContent: halfModal.headerContent,
+                            content: halfModal.content,
+                            onAppear: halfModal.appearAction,
+                            onDisappear: halfModal.disappearAction
+                        )
+                            .environment(\.vHalfModalNavigationViewCloseButton, halfModal.model.dismissType.contains(.navigationViewCloseButton))
                 )
             }
         })

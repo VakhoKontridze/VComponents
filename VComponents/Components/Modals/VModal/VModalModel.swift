@@ -15,6 +15,7 @@ public struct VModalModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var animations: Animations = .init()
     static let defaultHeaderFont: Font = .system(size: 17, weight: .bold, design: .default)
     public var dismissType: Set<DismissType> = .default
     
@@ -115,4 +116,18 @@ extension VModalModel.Colors {
     public typealias StateColors = VCloseButtonModel.Colors.StateColors
     
     public typealias StateColorsAndOpacity = VCloseButtonModel.Colors.StateColorsAndOpacity
+}
+
+// MARK:- Animations
+extension VModalModel {
+    public struct Animations {
+        public var appear: BasicAnimation? = .init(curve: .linear, duration: 0.05)
+        public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
+        
+        public var scaleEffect: CGFloat = 1.01
+        public var opacity: Double = 0.5
+        public var blur: CGFloat = 3
+        
+        public init() {}
+    }
 }

@@ -15,6 +15,7 @@ public struct VDialogModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
+    public var animations: Animations = .init()
 
     public init() {}
 }
@@ -61,4 +62,9 @@ extension VDialogModel {
         
         public init() {}
     }
+}
+
+// MARK:- Animations
+extension VDialogModel {
+    public typealias Animations = VModalModel.Animations
 }

@@ -101,7 +101,7 @@ extension VModalDemoView {
     
     private var modalContent: some View {
         ZStack(content: {
-            ColorBook.accent.opacity(0.5)
+            ColorBook.accent.opacity(0.75)
             
             if dismissType.isEmpty {
                 VStack(content: {

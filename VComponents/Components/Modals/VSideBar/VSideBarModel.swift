@@ -10,8 +10,8 @@ import SwiftUI
 // MARK:- V Side Bar Model
 /// Model that describes UI
 public struct VSideBarModel {
-    public static let sheetModel: VSheetModel = .init()
     public static let modalModel: VModalModel = .init()
+    public static let halfModalModel: VHalfModalModel = .init()
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
@@ -37,30 +37,25 @@ extension VSideBarModel {
     public struct Layout {
         public var width: CGFloat = UIScreen.main.bounds.width * 0.67
         
-        public var cornerRadius: CGFloat = VSideBarModel.sheetModel.layout.cornerRadius
+        public var cornerRadius: CGFloat = VSideBarModel.modalModel.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
         
         public var contentMargin: ContentMargin = .init()
+        
+        public var translationToDismiss: CGFloat = 100
         
         public init() {}
     }
 }
 
 extension VSideBarModel.Layout {
-    public struct ContentMargin {
-        public var leading: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
-        public var trailing: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
-        public var top: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
-        public var bottom: CGFloat = VSideBarModel.sheetModel.layout.contentMargin
-        
-        public init() {}
-    }
+    public typealias ContentMargin = VHalfModalModel.Layout.ContentMargin
 }
 
 // MARK:- Colors
 extension VSideBarModel {
     public struct Colors {
-        public var background: Color = VSideBarModel.sheetModel.color
+        public var background: Color = VSideBarModel.modalModel.colors.background
         public var blinding: Color = VSideBarModel.modalModel.colors.blinding
         
         public init() {}
@@ -70,8 +65,8 @@ extension VSideBarModel {
 // MARK:- Animations
 extension VSideBarModel {
     public struct Animations {
-        public var curve: UIView.AnimationCurve = .linear
-        public var duration: TimeInterval = 0.25
+        public var appear: BasicAnimation? = VSideBarModel.halfModalModel.animations.appear
+        public var disappear: BasicAnimation? = VSideBarModel.halfModalModel.animations.disappear
         
         public init() {}
     }

@@ -16,7 +16,8 @@ struct _VModal<Content, HeaderContent>: View
     // MARK: Properties
     public var model: VModalModel
     
-    @Binding private var isPresented: Bool
+    @Binding private var isHCPresented: Bool
+    @State private var isViewPresented: Bool = false
     
     private let headerContent: (() -> HeaderContent)?
     private let content: () -> Content
@@ -28,20 +29,6 @@ struct _VModal<Content, HeaderContent>: View
     
     // MARK: Initializers
     init(
-        isPresented: Binding<Bool>,
-        modal: VModal<Content, HeaderContent>
-    ) {
-        self.init(
-            model: modal.model,
-            isPresented: isPresented,
-            headerContent: modal.headerContent,
-            content: modal.content,
-            appearAction: modal.appearAction,
-            disappearAction: modal.disappearAction
-        )
-    }
-    
-    private init(
         model: VModalModel,
         isPresented: Binding<Bool>,
         headerContent: (() -> HeaderContent)?,
@@ -50,7 +37,7 @@ struct _VModal<Content, HeaderContent>: View
         disappearAction: (() -> Void)?
     ) {
         self.model = model
-        self._isPresented = isPresented
+        self._isHCPresented = isPresented
         self.headerContent = headerContent
         self.content = content
         self.appearAction = appearAction
@@ -61,28 +48,38 @@ struct _VModal<Content, HeaderContent>: View
 // MARK:- Body
 extension _VModal {
     var body: some View {
-        ZStack(alignment: .top, content: {
-            sheetView
-            contentView
+        ZStack(content: {
+            blinding
+            modalView
+        })
+            .edgesIgnoringSafeArea(.all)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear(perform: animateIn)
+    }
+    
+    private var blinding: some View {
+        model.colors.blinding
+            .onTapGesture(perform: animateOut)
+    }
+    
+    private var modalView: some View {
+        ZStack(content: {
+            VSheet(model: model.sheetSubModel)
+            
+            VStack(spacing: model.layout.spacing, content: {
+                headerView
+                dividerView
+                content()
+            })
+                .padding(model.layout.margin)
         })
             .frame(size: model.layout.size)
+            .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
+            .opacity(isViewPresented ? 1 : model.animations.opacity)
+            .blur(radius: isViewPresented ? 0 : model.animations.blur)
             .onAppear(perform: appearAction)
             .onDisappear(perform: disappearAction)
     }
-    
-    private var sheetView: some View {
-        VSheet(model: model.sheetSubModel)
-    }
-
-    private var contentView: some View {
-        VStack(spacing: model.layout.spacing, content: {
-            headerView
-            dividerView
-            content()
-        })
-            .padding(model.layout.margin)
-    }
-    
     
     @ViewBuilder private var headerView: some View {
         if headerExists {
@@ -114,27 +111,32 @@ extension _VModal {
     }
     
     private var closeButton: some View {
-        VCloseButton(model: model.closeButtonSubModel, action: dismiss)
+        VCloseButton(model: model.closeButtonSubModel, action: animateOut)
     }
 }
 
-// MARK:- Dismiss
+// MARK:- Animations
 private extension _VModal {
-    func dismiss() {
-        withAnimation { isPresented = false }
+    func animateIn() {
+        withAnimation(model.animations.appear?.swiftUIAnimation, { isViewPresented = true })
+    }
+    
+    func animateOut() {
+        withAnimation(model.animations.disappear?.swiftUIAnimation, { isViewPresented = false })
+        DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
     }
 }
 
 // MARK:- Previews
 struct VModal_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack(content: {
-            VModalModel.Colors().blinding.edgesIgnoringSafeArea(.all)
-            
-            _VModal(isPresented: .constant(true), modal: VModal(
-                header: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
-                content: { ColorBook.accent }
-            ))
-        })
+        _VModal(
+            model: .init(),
+            isPresented: .constant(true),
+            headerContent: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+            content: { ColorBook.accent },
+            appearAction: nil,
+            disappearAction: nil
+        )
     }
 }

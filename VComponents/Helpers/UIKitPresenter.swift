@@ -54,7 +54,7 @@ final class UIKitPresenterVC<Content>: UIViewController where Content: View {
 // MARK:- Presenting
 private extension UIKitPresenterVC {
     func present(_ content: Content) {
-        let hostingController: UIHostingController = .init(rootView: content)
+        hostingController = .init(rootView: content)
         
         let hostedView: UIView = hostingController.view
         hostedView.translatesAutoresizingMaskIntoConstraints = false

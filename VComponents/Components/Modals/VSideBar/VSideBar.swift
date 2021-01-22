@@ -64,18 +64,22 @@ extension View {
     ) -> some View
         where Content: View
     {
-        ZStack(content: {
+        let sideBar = sideBar()
+        
+        return ZStack(content: {
             self
             
             if isPresented.wrappedValue {
-                VSideBarVCRepresentable(
+                UIKitRepresentable(
                     isPresented: isPresented,
-                    content: _VSideBar(isPresented: isPresented, sideBar: sideBar()),
-                    blinding: sideBar().model.colors.blinding.edgesIgnoringSafeArea(.all),
-                    contentWidth: sideBar().model.layout.width,
-                    animationCurve: sideBar().model.animations.curve,
-                    animationDuration: sideBar().model.animations.duration,
-                    onBackTap: { withAnimation { isPresented.wrappedValue = false } }
+                    content:
+                        _VSideBar(
+                            model: sideBar.model,
+                            isPresented: isPresented,
+                            content: sideBar.content,
+                            onAppear: sideBar.appearAction,
+                            onDisappear: sideBar.disappearAction
+                        )
                 )
             }
         })

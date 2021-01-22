@@ -89,19 +89,23 @@ extension View {
             Content: View,
             headerContent: View
     {
-        ZStack(content: {
+        let modal = modal()
+        
+        return ZStack(content: {
             self
             
             if isPresented.wrappedValue {
-                VModalVCRepresentable(
+                UIKitRepresentable(
                     isPresented: isPresented,
-                    content: _VModal(isPresented: isPresented, modal: modal()),
-                    blinding: modal().model.colors.blinding.edgesIgnoringSafeArea(.all),
-                    onBackTap: {
-                        if modal().model.dismissType.contains(.backTap) {
-                            withAnimation { isPresented.wrappedValue = false }
-                        }
-                    }
+                    content:
+                        _VModal(
+                            model: modal.model,
+                            isPresented: isPresented,
+                            headerContent: modal.headerContent,
+                            content: modal.content,
+                            appearAction: modal.appearAction,
+                            disappearAction: modal.disappearAction
+                        )
                 )
             }
         })

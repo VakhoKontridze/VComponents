@@ -64,7 +64,7 @@ extension _VHalfModal {
             modalView
         })
             .edgesIgnoringSafeArea(.all)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onAppear(perform: animateIn)
     }
     
@@ -77,7 +77,18 @@ extension _VHalfModal {
         if validLayout {
             ZStack(content: {
                 VSheet(model: model.sheetModel)
-                contentView
+                
+                VStack(spacing: model.layout.spacing, content: {
+                    headerView
+                    dividerView
+                    content()
+                })
+                    .padding(.leading, model.layout.contentMargin.leading)
+                    .padding(.trailing, model.layout.contentMargin.trailing)
+                    .padding(.top, model.layout.contentMargin.top)
+                    .padding(.bottom, model.layout.contentMargin.bottom)
+                    .padding(.bottom, model.layout.hasSafeAreaMargin ? UIView.bottomSafeAreaHeight : 0)
+                
                 navigationBarCloseButton
             })
                 .frame(height: model.layout.height.max)
@@ -90,19 +101,6 @@ extension _VHalfModal {
                         .onEnded(dragEnded)
                 )
         }
-    }
-
-    private var contentView: some View {
-        VStack(spacing: model.layout.spacing, content: {
-            headerView
-            dividerView
-            content()
-        })
-            .padding(.leading, model.layout.contentMargin.leading)
-            .padding(.trailing, model.layout.contentMargin.trailing)
-            .padding(.top, model.layout.contentMargin.top)
-            .padding(.bottom, model.layout.contentMargin.bottom)
-            .padding(.bottom, model.layout.hasSafeAreaMargin ? UIView.bottomSafeAreaHeight : 0)
     }
 
     @ViewBuilder private var headerView: some View {

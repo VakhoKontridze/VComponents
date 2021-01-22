@@ -12,7 +12,8 @@ struct _VDialog<Content>: View where Content: View {
     // MARK: Properties
     private let model: VDialogModel
     
-    @Binding private var isPresented: Bool
+    @Binding private var isHCPresented: Bool
+    @State private var isViewPresented: Bool = false
     
     private let dialogType: VDialogType
     
@@ -40,7 +41,7 @@ struct _VDialog<Content>: View where Content: View {
         )
     }
     
-    private init(
+    init(
         model: VDialogModel,
         isPresented: Binding<Bool>,
         dialog dialogType: VDialogType,
@@ -51,7 +52,7 @@ struct _VDialog<Content>: View where Content: View {
         onDisappear disappearAction: (() -> Void)?
     ) {
         self.model = model
-        self._isPresented = isPresented
+        self._isHCPresented = isPresented
         self.dialogType = dialogType
         self.title = title
         self.description = description
@@ -65,9 +66,39 @@ struct _VDialog<Content>: View where Content: View {
 extension _VDialog {
     var body: some View {
         ZStack(content: {
-            background
-            contentView
+            blinding
+            modalView
         })
+            .edgesIgnoringSafeArea(.all)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onAppear(perform: animateIn)
+    }
+    
+    private var blinding: some View {
+        model.colors.blinding
+    }
+    
+    private var modalView: some View {
+        VStack(spacing: model.layout.spacing, content: {
+            VStack(spacing: model.layout.contentSpacing, content: {
+                titleView
+                descriptionView
+                freeContentView
+            })
+                .padding(.horizontal, model.layout.contentMarginHor)
+                .padding(.top, model.layout.contentMarginTop)
+            
+            switch dialogType {
+            case .one(let button): oneButtonDialogView(button: button)
+            case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
+            case .many(let buttons): manyButtonDialogView(buttons: buttons)
+            }
+        })
+            .padding(model.layout.margin)
+            .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
+            .opacity(isViewPresented ? 1 : model.animations.opacity)
+            .blur(radius: isViewPresented ? 0 : model.animations.blur)
+            .background(background)
             .frame(width: model.layout.width)
             .onAppear(perform: appearAction)
             .onDisappear(perform: disappearAction)
@@ -76,24 +107,6 @@ extension _VDialog {
     private var background: some View {
         model.colors.background
             .cornerRadius(model.layout.cornerRadius)
-    }
-    
-    private var contentView: some View {
-        VStack(spacing: model.layout.spacing, content: {
-            dialogContentView
-            dialogView
-        })
-            .padding(model.layout.margin)
-    }
-    
-    private var dialogContentView: some View {
-        VStack(spacing: model.layout.contentSpacing, content: {
-            titleView
-            descriptionView
-            freeContentView
-        })
-            .padding(.horizontal, model.layout.contentMarginHor)
-            .padding(.top, model.layout.contentMarginTop)
     }
     
     @ViewBuilder private var titleView: some View {
@@ -124,19 +137,11 @@ extension _VDialog {
         }
     }
     
-    @ViewBuilder private var dialogView: some View {
-        switch dialogType {
-        case .one(let button): oneButtonDialogView(button: button)
-        case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
-        case .many(let buttons): manyButtonDialogView(buttons: buttons)
-        }
-    }
-    
     private func oneButtonDialogView(button: VDialogButton) -> some View {
         VPrimaryButton(
             model: button.model.primaryButtonModel,
             state: button.isEnabled ? .enabled : .disabled,
-            action: { dismiss(and: button.action) },
+            action: { animateOut(and: button.action) },
             title: button.title
         )
     }
@@ -146,14 +151,14 @@ extension _VDialog {
             VPrimaryButton(
                 model: secondary.model.primaryButtonModel,
                 state: secondary.isEnabled ? .enabled : .disabled,
-                action: { dismiss(and: secondary.action) },
+                action: { animateOut(and: secondary.action) },
                 title: secondary.title
             )
             
             VPrimaryButton(
                 model: primary.model.primaryButtonModel,
                 state: primary.isEnabled ? .enabled : .disabled,
-                action: { dismiss(and: primary.action) },
+                action: { animateOut(and: primary.action) },
                 title: primary.title
             )
         })
@@ -165,7 +170,7 @@ extension _VDialog {
                 VPrimaryButton(
                     model: buttons[i].model.primaryButtonModel,
                     state: buttons[i].isEnabled ? .enabled : .disabled,
-                    action: { dismiss(and: buttons[i].action) },
+                    action: { animateOut(and: buttons[i].action) },
                     title: buttons[i].title
                 )
             })
@@ -173,29 +178,34 @@ extension _VDialog {
     }
 }
 
-// MARK:- Dismiss
+// MARK:- Animations
 private extension _VDialog {
-    func dismiss(and action: @escaping () -> Void ) {
-        withAnimation { isPresented = false }
+    func animateIn() {
+        withAnimation(model.animations.appear?.swiftUIAnimation, { isViewPresented = true })
+    }
+    
+    func animateOut(and action: @escaping () -> Void) {
         action()
+        withAnimation(model.animations.disappear?.swiftUIAnimation, { isViewPresented = false })
+        DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
     }
 }
 
 // MARK:- Preview
 struct VDialog_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack(content: {
-            VDialogModel.Colors().blinding.edgesIgnoringSafeArea(.all)
-            
-            _VDialog(isPresented: .constant(true), dialog: VDialog(
-                dialog: .two(
-                    primary: .init(model: .secondary, title: "OK", action: {}),
-                    secondary: .init(model: .secondary, title: "Cancel", action: {})
-                ),
-                title: "Lorem ipsum dolor sit amet",
-                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-            ))
-                .frame(height: 160) // ???
-        })
+        _VDialog(
+            model: .init(),
+            isPresented: .constant(true),
+            dialog: .two(
+                primary: .init(model: .primary, title: "OK", action: {}),
+                secondary: .init(model: .secondary, title: "Cancel", action: {})
+            ),
+            title: "Lorem ipsum dolor sit amet",
+            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            content: { VTextField(state: .constant(.enabled), text: .constant("Lorem ipsum dolor sit amet")) },
+            onAppear: nil,
+            onDisappear: nil
+        )
     }
 }

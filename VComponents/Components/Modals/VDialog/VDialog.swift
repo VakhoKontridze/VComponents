@@ -105,14 +105,25 @@ extension View {
     ) -> some View
         where Content: View
     {
-        ZStack(content: {
+        let dialog = dialog()
+        
+        return ZStack(content: {
             self
             
             if isPresented.wrappedValue {
-                VModalVCRepresentable(
+                UIKitRepresentable(
                     isPresented: isPresented,
-                    content: _VDialog(isPresented: isPresented, dialog: dialog()),
-                    blinding: dialog().model.colors.blinding.edgesIgnoringSafeArea(.all)
+                    content:
+                        _VDialog(
+                            model: dialog.model,
+                            isPresented: isPresented,
+                            dialog: dialog.dialogType,
+                            title: dialog.title,
+                            description: dialog.description,
+                            content: dialog.content,
+                            onAppear: dialog.appearAction,
+                            onDisappear: dialog.disappearAction
+                        )
                 )
             }
         })
