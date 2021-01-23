@@ -19,7 +19,7 @@ struct VCheckBoxDemoView: View {
     
     let nonClickableContentModel: VCheckBoxModel = {
         var model: VCheckBoxModel = .init()
-        model.contentIsClickable = false
+        model.misc.contentIsClickable = false
         return model
     }()
     

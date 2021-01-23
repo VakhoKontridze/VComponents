@@ -43,7 +43,6 @@ extension _VSideBar {
             blinding
             sideBarView
         })
-            //.edgesIgnoringSafeArea(.all) Applied inidividually
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onAppear(perform: animateIn)
     }
@@ -64,6 +63,7 @@ extension _VSideBar {
                 .padding(.trailing, model.layout.contentMargin.trailing)
                 .padding(.top, model.layout.contentMargin.top)
                 .padding(.bottom, model.layout.contentMargin.bottom)
+                .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
         })
             .frame(width: model.layout.width)
             .offset(x: isViewPresented ? 0 : -model.layout.width)

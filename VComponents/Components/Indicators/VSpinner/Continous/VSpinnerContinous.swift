@@ -26,12 +26,12 @@ extension VSpinnerContinous {
         Circle()
             .trim(from: 0, to: model.layout.legth)
             .stroke(
-                model.color,
+                model.colors.spinner,
                 style: .init(lineWidth: model.layout.thickness, lineCap: .round)
             )
             .frame(width: model.layout.dimension, height: model.layout.dimension)
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
-            .animation(model.animation.repeatForever(autoreverses: false))
+            .animation(model.animations.spinning.repeatForever(autoreverses: false))
             .onAppear(perform: { isAnimating.toggle() })
     }
 }

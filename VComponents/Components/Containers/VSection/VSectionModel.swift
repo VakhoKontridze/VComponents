@@ -15,13 +15,13 @@ public struct VSectionModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var titleFont: Font = .system(size: 14, weight: .bold, design: .default)
-    public var showIndicator: Bool = true
+    public var fonts: Fonts = .init()
+    public var misc: Misc = .init()
     
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
-        model.showIndicator = showIndicator
+        model.misc.showIndicator = misc.showIndicator
         
         model.layout.marginTrailing = layout.contentMargin
         model.layout.itemSpacing = layout.itemSpacing
@@ -38,7 +38,7 @@ public struct VSectionModel {
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.contentMargin = 0
         
-        model.color = colors.background
+        model.colors.background = colors.background
         
         return model
     }
@@ -66,7 +66,25 @@ extension VSectionModel {
     public struct Colors {
         public var title: Color = ColorBook.primary
         public var divider: Color = VSectionModel.baseListModel.colors.divider
-        public var background: Color = VSectionModel.sheetModel.color
+        public var background: Color = VSectionModel.sheetModel.colors.background
+        
+        public init() {}
+    }
+}
+
+// MARK:- Fonts
+extension VSectionModel {
+    public struct Fonts {
+        public var title: Font = .system(size: 14, weight: .bold, design: .default)
+        
+        public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VSectionModel {
+    public struct Misc {
+        public var showIndicator: Bool = true
         
         public init() {}
     }

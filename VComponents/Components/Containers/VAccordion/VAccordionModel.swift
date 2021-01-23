@@ -15,14 +15,12 @@ public struct VAccordionModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    static let defaultHeaderFont: Font = .system(size: 15, weight: .semibold, design: .default)
-    public var showIndicator: Bool = true
-    public var expandCollapseOnHeaderTap: Bool = true
+    public var misc: Misc = .init()
     
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
-        model.showIndicator = showIndicator
+        model.misc.showIndicator = misc.showIndicator
         
         model.layout.marginTrailing = layout.marginTrailing + layout.contentMarginTrailing
         model.layout.itemSpacing = layout.itemSpacing
@@ -39,7 +37,7 @@ public struct VAccordionModel {
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.contentMargin = 0
         
-        model.color = colors.background
+        model.colors.background = colors.background
         
         return model
     }
@@ -135,4 +133,21 @@ extension VAccordionModel.Colors {
     public typealias StateColors = VChevronButtonModel.Colors.StateColors
     
     public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
+}
+
+// MARK:- Fonts
+extension VAccordionModel {
+    struct Fonts {
+        static let header: Font = .system(size: 15, weight: .semibold, design: .default)
+    }
+}
+
+// MARK:- Misc
+extension VAccordionModel {
+    public struct Misc {
+        public var showIndicator: Bool = true
+        public var expandCollapseOnHeaderTap: Bool = true
+        
+        public init() {}
+    }
 }

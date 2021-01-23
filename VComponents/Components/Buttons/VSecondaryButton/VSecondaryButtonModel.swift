@@ -14,7 +14,7 @@ public struct VSecondaryButtonModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = primaryButtonModel.font   // Only applicable during init with title
+    public var fonts: Fonts = .init()
     
     public init() {}
 }
@@ -99,5 +99,14 @@ extension VSecondaryButtonModel.Colors.StateOpacity {
         case .pressed: return pressedOpacity
         case .disabled: return disabledOpacity
         }
+    }
+}
+
+// MARK:- Fonts
+extension VSecondaryButtonModel {
+    public struct Fonts {
+        public var title: Font = VSecondaryButtonModel.primaryButtonModel.fonts.title   // Only applicable during init with title
+        
+        public init() {}
     }
 }

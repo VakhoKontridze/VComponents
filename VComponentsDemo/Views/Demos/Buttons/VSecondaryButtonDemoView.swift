@@ -70,7 +70,7 @@ extension VSecondaryButtonDemoView {
                             VText(
                                 title: buttonTitle,
                                 color: ColorBook.primaryInverted,
-                                font: VSecondaryButtonModel().font,
+                                font: VSecondaryButtonModel.Fonts().title,
                                 type: .oneLine
                             )
                         })

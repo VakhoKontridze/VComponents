@@ -84,7 +84,7 @@ extension VBaseViewNavigationBarLeading {
             VText(
                 title: title,
                 color: model.colors.titleColor,
-                font: model.font,
+                font: model.fonts.title,
                 type: .oneLine
             )
                 .layoutPriority(0)

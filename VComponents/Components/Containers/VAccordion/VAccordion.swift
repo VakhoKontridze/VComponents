@@ -177,7 +177,7 @@ extension VAccordion {
                 state: state.chevronButtonState,
                 action: expandCollapse
             )
-                .allowsHitTesting(!model.expandCollapseOnHeaderTap) // No need for two-layer tap area
+            .allowsHitTesting(!model.misc.expandCollapseOnHeaderTap) // No need for two-layer tap area
         })
             .padding(.trailing, model.layout.marginTrailing)
             .contentShape(Rectangle())
@@ -228,7 +228,7 @@ private extension VAccordion {
     }
     
     func expandCollapseFromHeaderTap() {
-        if model.expandCollapseOnHeaderTap { expandCollapse() }
+        if model.misc.expandCollapseOnHeaderTap { expandCollapse() }
     }
 }
 

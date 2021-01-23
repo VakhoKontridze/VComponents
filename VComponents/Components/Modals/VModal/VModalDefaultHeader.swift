@@ -27,7 +27,7 @@ extension VModalDefaultHeader {
         VText(
             title: title,
             color: VModalModel.Colors.defaultHeader,
-            font: VModalModel.defaultHeaderFont,
+            font: VModalModel.Fonts.header,
             type: .oneLine
         )
             .frame(maxWidth: .infinity, alignment: .leading)

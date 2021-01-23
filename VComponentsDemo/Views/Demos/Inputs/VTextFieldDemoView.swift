@@ -26,22 +26,22 @@ struct VTextFieldDemoView: View {
     @State private var hasDescription: Bool = true
     @State private var numericalKeyboard: Bool = false
     @State private var textAlignment: VTextFieldModel.Layout.TextAlignment = .default
-    @State private var hasAutoCorrect: Bool = VTextFieldModel().useAutoCorrect
-    @State private var hasClearButton: Bool = VTextFieldModel().clearButton
-    @State private var hasCancelButton: Bool = VTextFieldModel().cancelButton != nil
+    @State private var hasAutoCorrect: Bool = VTextFieldModel.Misc().useAutoCorrect
+    @State private var hasClearButton: Bool = VTextFieldModel.Misc().clearButton
+    @State private var hasCancelButton: Bool = VTextFieldModel.Misc().cancelButton != nil
     @State private var textFieldText: String = ""
     private let textFieldPlaceholder: String = "Lorem ipsum"
     
     private var textFieldModel: VTextFieldModel {
         var model: VTextFieldModel = .init()
         
-        model.keyboardType = numericalKeyboard ? .numberPad : .default
-        model.useAutoCorrect = hasAutoCorrect
-        
-        model.clearButton = hasClearButton
-        model.cancelButton = hasCancelButton ? "Cancel" : nil
-        
         model.layout.textAlignment = textAlignment
+        
+        model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
+        model.misc.useAutoCorrect = hasAutoCorrect
+        
+        model.misc.clearButton = hasClearButton
+        model.misc.cancelButton = hasCancelButton ? "Cancel" : nil
         
         return model
     }

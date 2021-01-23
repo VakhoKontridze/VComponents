@@ -25,7 +25,7 @@ extension VAccordionDefaultHeader {
         VText(
             title: title,
             color: VAccordionModel.Colors.defaultHeader,
-            font: VAccordionModel.defaultHeaderFont,
+            font: VAccordionModel.Fonts.header,
             type: .oneLine
         )
             .frame(maxWidth: .infinity, alignment: .leading)

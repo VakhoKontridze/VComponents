@@ -14,14 +14,14 @@ struct VModalDemoView: View {
     static let navigationBarTitle: String = "Modal"
     
     @State private var hasTitle: Bool = true
-    @State private var dismissType: Set<VModalModel.DismissType>
+    @State private var dismissType: Set<VModalModel.Misc.DismissType>
     
     @State private var isPresented: Bool = false
     
     private var modalModel: VModalModel {
         var model: VModalModel = .init()
         
-        model.dismissType = dismissType
+        model.misc.dismissType = dismissType
         
         return model
     }
@@ -51,7 +51,7 @@ extension VModalDemoView {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         HStack(content: {
-                            ForEach(VModalModel.DismissType.allCases, id: \.rawValue, content: { position in
+                            ForEach(VModalModel.Misc.DismissType.allCases, id: \.rawValue, content: { position in
                                 dimissTypeView(position)
                             })
                         })
@@ -84,7 +84,7 @@ extension VModalDemoView {
             )
     }
     
-    private func dimissTypeView(_ position: VModalModel.DismissType) -> some View {
+    private func dimissTypeView(_ position: VModalModel.Misc.DismissType) -> some View {
         VCheckBox(
             isOn: .init(
                 get: { dismissType.contains(position) },
@@ -122,7 +122,7 @@ extension VModalDemoView {
 }
 
 // MARK:- Helpers
-private extension VModalModel.DismissType {
+private extension VModalModel.Misc.DismissType {
     var title: String {
         switch self {
         case .leading: return "Leading"

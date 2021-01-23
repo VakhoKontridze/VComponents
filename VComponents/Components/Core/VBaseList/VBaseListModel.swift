@@ -12,11 +12,11 @@ import SwiftUI
 public struct VBaseListModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var showIndicator: Bool = true
+    public var misc: Misc = .init()
     
     var lazyListSubModel: VLazyListModelVertical {
         var model: VLazyListModelVertical = .init()
-        model.showIndicator = showIndicator
+        model.misc.showIndicator = misc.showIndicator
         return model
     }
     
@@ -42,6 +42,15 @@ extension VBaseListModel {
 extension VBaseListModel {
     public struct Colors {
         public var divider: Color = .init(componentAsset: "GenericListContent.Divider")
+        
+        init() {}
+    }
+}
+
+// MARK:- Misc
+extension VBaseListModel {
+    public struct Misc {
+        public var showIndicator: Bool = true
         
         init() {}
     }

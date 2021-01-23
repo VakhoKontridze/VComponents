@@ -14,9 +14,9 @@ public struct VCheckBoxModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = toggleModel.font    // Only applicable during init with title
-    public var animation: Animation = toggleModel.animation
-    public var contentIsClickable: Bool = toggleModel.contentIsClickable
+    public var fonts: Fonts = .init()
+    public var animations: Animations = .init()
+    public var misc: Misc = .init()
 
     public init() {}
 }
@@ -118,5 +118,32 @@ extension VCheckBoxModel.Colors.StateOpacity {
         case .pressedIntermediate: return pressedOpacity
         case .disabled: return disabledOpacity
         }
+    }
+}
+
+// MARK:- Fonts
+extension VCheckBoxModel {
+    public struct Fonts {
+        public var title: Font = VCheckBoxModel.toggleModel.fonts.title    // Only applicable during init with title
+        
+        public init() {}
+    }
+}
+
+// MARK:- Animations
+extension VCheckBoxModel {
+    public struct Animations {
+        public var stateChange: Animation? = VCheckBoxModel.toggleModel.animations.stateChange
+        
+        public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VCheckBoxModel {
+    public struct Misc {
+        public var contentIsClickable: Bool = VCheckBoxModel.toggleModel.misc.contentIsClickable
+        
+        public init() {}
     }
 }

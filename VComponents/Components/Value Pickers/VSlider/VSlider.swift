@@ -129,7 +129,7 @@ private extension VSlider {
         
         let valueFixed: Double = rawValue.fixedInRange(min: min, max: max, step: step)
         
-        withAnimation(model.animation, { value = valueFixed })
+        withAnimation(model.animations.progress, { value = valueFixed })
         
         action?(true)
     }

@@ -41,9 +41,9 @@ import SwiftUI
 /// let model: VTextFieldModel = {
 ///     var model: VTextFieldModel = .init()
 ///
-///     model.returnButton = .default
-///     model.clearButton = true
-///     model.cancelButton = "Cancel"
+///     model.misc.returnButton = .default
+///     model.misc.clearButton = true
+///     model.misc.cancelButton = "Cancel"
 ///
 ///     return model
 /// }()
@@ -230,7 +230,7 @@ extension VTextField {
     }
     
     @ViewBuilder private var clearButton: some View {
-        if !textFieldType.isSecure && nonEmptyText && model.clearButton {
+        if !textFieldType.isSecure && nonEmptyText && model.misc.clearButton {
             VCloseButton(
                 model: model.clearSubButtonModel(state: state, highlight: highlight),
                 state: state.clearButtonState,
@@ -256,7 +256,7 @@ extension VTextField {
     }
     
     @ViewBuilder private var cancelButton: some View {
-        if !textFieldType.isSecure, nonEmptyText, state.isFocused, let cancelButton = model.cancelButton, !cancelButton.isEmpty {
+        if !textFieldType.isSecure, nonEmptyText, state.isFocused, let cancelButton = model.misc.cancelButton, !cancelButton.isEmpty {
             VPlainButton(
                 model: model.cancelButtonSubModel,
                 state: state.cancelButtonState,
@@ -308,7 +308,7 @@ private extension VTextField {
         let animation: Animation? = {
             switch shouldShow {
             case false: return nil
-            case true: return model.clearButtonAnimation
+            case true: return model.animations.buttonsAppearDisAppear
             }
         }()
 
@@ -333,7 +333,7 @@ private extension VTextField {
     
     func zeroText() {
         text = ""
-        withAnimation(model.clearButtonAnimation, { nonEmptyText = false })
+        withAnimation(model.animations.buttonsAppearDisAppear, { nonEmptyText = false })
     }
 }
 

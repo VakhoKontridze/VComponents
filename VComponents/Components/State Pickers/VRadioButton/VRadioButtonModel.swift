@@ -15,9 +15,9 @@ public struct VRadioButtonModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = toggleModel.font    // Only applicable during init with title
-    public var animation: Animation = toggleModel.animation
-    public var contentIsClickable: Bool = toggleModel.contentIsClickable
+    public var fonts: Fonts = .init()
+    public var animations: Animations = .init()
+    public var misc: Misc = .init()
 
     public init() {}
 }
@@ -97,5 +97,32 @@ extension VRadioButtonModel.Colors.StateOpacity {
         case .pressedOn: return pressedOpacity
         case .disabled: return disabledOpacity
         }
+    }
+}
+
+// MARK:- Fonts
+extension VRadioButtonModel {
+    public struct Fonts {
+        public var title: Font = VRadioButtonModel.toggleModel.fonts.title    // Only applicable during init with title
+        
+        public init() {}
+    }
+}
+
+// MARK:- Animations
+extension VRadioButtonModel {
+    public struct Animations {
+        public var stateChange: Animation? = VRadioButtonModel.toggleModel.animations.stateChange
+        
+        public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VRadioButtonModel {
+    public struct Misc {
+        public var contentIsClickable: Bool = VRadioButtonModel.toggleModel.misc.contentIsClickable
+        
+        public init() {}
     }
 }

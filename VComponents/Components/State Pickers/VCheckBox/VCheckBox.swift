@@ -34,7 +34,7 @@ public struct VCheckBox<Content>: View where Content: View {
     @Binding private var state: VCheckBoxState
     @State private var isPressed: Bool = false
     private var internalState: VCheckBoxInternalState { .init(state: state, isPressed: isPressed) }
-    private var contentIsEnabled: Bool { state.isEnabled && model.contentIsClickable }
+    private var contentIsEnabled: Bool { state.isEnabled && model.misc.contentIsClickable }
     
     private let content: (() -> Content)?
     
@@ -63,7 +63,7 @@ public struct VCheckBox<Content>: View where Content: View {
                 VText(
                     title: title,
                     color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
@@ -107,7 +107,7 @@ public struct VCheckBox<Content>: View where Content: View {
                 VText(
                     title: title,
                     color: model.colors.textContent.for(.init(bool: isOn.wrappedValue, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
@@ -197,7 +197,7 @@ private extension VCheckBox {
 // MARK:- Action
 private extension VCheckBox {
     func action() {
-        withAnimation(model.animation, { state.nextState() })
+        withAnimation(model.animations.stateChange, { state.nextState() })
     }
 }
 

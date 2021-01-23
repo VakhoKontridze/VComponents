@@ -25,7 +25,7 @@ extension VTableDefaultHeaderFooter {
         VText(
             title: title,
             color: VTableModel.Colors.defaultHeaderFooter,
-            font: VTableModel.defaultHeaderFooterFont,
+            font: VTableModel.Fonts.headerFooter,
             type: .oneLine
         )
             .frame(maxWidth: .infinity, alignment: .leading)

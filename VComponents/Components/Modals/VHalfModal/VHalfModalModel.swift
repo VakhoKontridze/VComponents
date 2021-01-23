@@ -16,7 +16,7 @@ public struct VHalfModalModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var animations: Animations = .init()
-    public var dismissType: Set<DismissType> = .default
+    public var misc: Misc = .init()
     
     var sheetModel: VSheetModel {
         var model: VSheetModel = .init()
@@ -25,7 +25,7 @@ public struct VHalfModalModel {
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.contentMargin = 0
         
-        model.color = colors.background
+        model.colors.background = colors.background
         
         return model
     }
@@ -47,25 +47,6 @@ public struct VHalfModalModel {
     public init() {}
 }
 
-extension VHalfModalModel {
-    /// Enum that decribes dismiss type, such as leading button, trailing button, backtap, or pull down
-    public enum DismissType: Int, CaseIterable {
-        case leading
-        case trailing
-        case backTap
-        case pullDown
-        case navigationViewCloseButton
-    }
-}
-
-extension Set where Element == VHalfModalModel.DismissType {
-    public static let `default`: Self = [.trailing, .pullDown]
-    
-    var hasButton: Bool {
-        contains(where: { [.leading, .trailing].contains($0) })
-    }
-}
-
 // MARK:- Layout
 extension VHalfModalModel {
     public struct Layout {
@@ -75,7 +56,13 @@ extension VHalfModalModel {
         var roundCorners: Bool { cornerRadius > 0 }
         
         public var contentMargin: ContentMargin = .init()
-        public var hasSafeAreaMargin: Bool = true
+        public var hasSafeAreaMarginBottom: Bool = true
+        var edgesToIgnore: Edge.Set {
+            switch hasSafeAreaMarginBottom {
+            case false: return .bottom
+            case true: return []
+            }
+        }
         
         public var closeButtonDimension: CGFloat = VHalfModalModel.modalModel.layout.closeButtonDimension
         public var closeButtonIconDimension: CGFloat = VHalfModalModel.modalModel.layout.closeButtonIconDimension
@@ -174,5 +161,33 @@ extension VHalfModalModel {
         static let dragDisappear: BasicAnimation = .init(curve: .easeIn, duration: 0.1)
         
         public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VHalfModalModel {
+    public struct Misc {
+        public var dismissType: Set<DismissType> = .default
+        
+        public init() {}
+    }
+}
+
+extension VHalfModalModel.Misc {
+    /// Enum that decribes dismiss type, such as leading button, trailing button, backtap, or pull down
+    public enum DismissType: Int, CaseIterable {
+        case leading
+        case trailing
+        case backTap
+        case pullDown
+        case navigationViewCloseButton
+    }
+}
+
+extension Set where Element == VHalfModalModel.Misc.DismissType {
+    public static let `default`: Self = [.trailing, .pullDown]
+    
+    var hasButton: Bool {
+        contains(where: { [.leading, .trailing].contains($0) })
     }
 }

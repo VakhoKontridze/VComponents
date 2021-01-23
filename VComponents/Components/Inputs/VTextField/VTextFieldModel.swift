@@ -19,16 +19,8 @@ public struct VTextFieldModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
-    
-    public var keyboardType: UIKeyboardType = baseTextFieldModel.keyboardType
-    public var useAutoCorrect: Bool = baseTextFieldModel.useAutoCorrect
-    
-    public var returnButton: UIReturnKeyType = baseTextFieldModel.returnButton
-    
-    public var clearButton: Bool = true
-    public var clearButtonAnimation: Animation? = .easeInOut
-    
-    public var cancelButton: String? = nil
+    public var animations: Animations = .init()
+    public var misc: Misc = .init()
     
     func baseTextFieldSubModel(state: VTextFieldState, isSecureTextEntry: Bool) -> VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
@@ -41,14 +33,14 @@ public struct VTextFieldModel {
             disabledOpacity: colors.content.disabledOpacity
         )
         
-        model.font = fonts.textFont
+        model.fonts.text = fonts.text
         
-        model.isSecureTextEntry = isSecureTextEntry
+        model.misc.isSecureTextEntry = isSecureTextEntry
         
-        model.keyboardType = keyboardType
-        model.useAutoCorrect = useAutoCorrect
+        model.misc.keyboardType = misc.keyboardType
+        model.misc.useAutoCorrect = misc.useAutoCorrect
         
-        model.returnButton = returnButton
+        model.misc.returnButton = misc.returnButton
         
         return model
     }
@@ -119,7 +111,7 @@ public struct VTextFieldModel {
             disabled: colors.cancelButton.disabled
         )
         
-        model.font = fonts.cancelButton
+        model.fonts.title = fonts.cancelButton
         
         return model
     }
@@ -429,13 +421,36 @@ extension VTextFieldModel.Colors {
 // MARK:- Fonts
 extension VTextFieldModel {
     public struct Fonts {
-        public var textFont: UIFont = VTextFieldModel.baseTextFieldModel.font
+        public var text: UIFont = VTextFieldModel.baseTextFieldModel.fonts.text
         
         public var placeholder: Font = VTextFieldModel.segmentedPickerModel.fonts.description
         public var title: Font = VTextFieldModel.segmentedPickerModel.fonts.title
         public var description: Font = VTextFieldModel.segmentedPickerModel.fonts.description
         
-        public var cancelButton: Font = VTextFieldModel.plainButtonModel.font
+        public var cancelButton: Font = VTextFieldModel.plainButtonModel.fonts.title
+        
+        public init() {}
+    }
+}
+
+// MARK:- Animations
+extension VTextFieldModel {
+    public struct Animations {
+        public var buttonsAppearDisAppear: Animation? = .easeInOut
+        
+        public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VTextFieldModel {
+    public struct Misc {
+        public var keyboardType: UIKeyboardType = baseTextFieldModel.misc.keyboardType
+        public var useAutoCorrect: Bool = baseTextFieldModel.misc.useAutoCorrect
+        
+        public var returnButton: UIReturnKeyType = baseTextFieldModel.misc.returnButton
+        public var clearButton: Bool = true
+        public var cancelButton: String? = nil
         
         public init() {}
     }

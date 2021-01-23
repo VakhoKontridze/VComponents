@@ -16,8 +16,7 @@ public struct VModalModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var animations: Animations = .init()
-    static let defaultHeaderFont: Font = .system(size: 17, weight: .bold, design: .default)
-    public var dismissType: Set<DismissType> = .default
+    public var misc: Misc = .init()
     
     var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
@@ -25,7 +24,7 @@ public struct VModalModel {
         model.layout.roundedCorners = layout.roundedCorners
         model.layout.cornerRadius = layout.cornerRadius
         
-        model.color = colors.background
+        model.colors.background = colors.background
         
         return model
     }
@@ -45,23 +44,6 @@ public struct VModalModel {
     }
     
     public init() {}
-}
-
-extension VModalModel {
-    /// Enum that decribes dismiss type, such as leading button, trailing button, or backtap
-    public enum DismissType: Int, CaseIterable {
-        case leading
-        case trailing
-        case backTap
-    }
-}
-
-extension Set where Element == VModalModel.DismissType {
-    public static let `default`: Self = [.trailing]
-    
-    var hasButton: Bool {
-        contains(where: { [.leading, .trailing].contains($0) })
-    }
 }
 
 // MARK:- Layout
@@ -99,7 +81,7 @@ extension VModalModel {
     public struct Colors {
         static let defaultHeader: Color = ColorBook.primary
         
-        public var background: Color = VModalModel.sheetModel.color
+        public var background: Color = VModalModel.sheetModel.colors.background
         
         public var closeButtonBackground: StateColors = VModalModel.closeButtonModel.colors.background
         public var closeButtonIcon: StateColorsAndOpacity = VModalModel.closeButtonModel.colors.content
@@ -118,6 +100,13 @@ extension VModalModel.Colors {
     public typealias StateColorsAndOpacity = VCloseButtonModel.Colors.StateColorsAndOpacity
 }
 
+// MARK:- Fonts
+extension VModalModel {
+    struct Fonts {
+        static let header: Font = .system(size: 17, weight: .bold, design: .default)
+    }
+}
+
 // MARK:- Animations
 extension VModalModel {
     public struct Animations {
@@ -129,5 +118,31 @@ extension VModalModel {
         public var blur: CGFloat = 3
         
         public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VModalModel {
+    public struct Misc {
+        public var dismissType: Set<DismissType> = .default
+        
+        public init() {}
+    }
+}
+
+extension VModalModel.Misc {
+    /// Enum that decribes dismiss type, such as leading button, trailing button, or backtap
+    public enum DismissType: Int, CaseIterable {
+        case leading
+        case trailing
+        case backTap
+    }
+}
+
+extension Set where Element == VModalModel.Misc.DismissType {
+    public static let `default`: Self = [.trailing]
+    
+    var hasButton: Bool {
+        contains(where: { [.leading, .trailing].contains($0) })
     }
 }

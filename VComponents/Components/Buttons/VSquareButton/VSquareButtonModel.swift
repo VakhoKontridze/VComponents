@@ -14,7 +14,7 @@ public struct VSquareButtonModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 14, weight: .semibold, design: .default)  // Only applicable during init with title
+    public var fonts: Fonts = .init()
     
     public init() {}
 }
@@ -91,5 +91,14 @@ extension VSquareButtonModel.Colors.StateOpacity {
         case .pressed: return pressedOpacity
         case .disabled: return disabledOpacity
         }
+    }
+}
+
+// MARK:- Fonts
+extension VSquareButtonModel {
+    public struct Fonts {
+        public var title: Font = .system(size: 14, weight: .semibold, design: .default)  // Only applicable during init with title
+        
+        public init() {}
     }
 }

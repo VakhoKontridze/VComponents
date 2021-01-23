@@ -14,9 +14,9 @@ public struct VToggleModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 15, weight: .regular, design: .default)    // Only applicable during init with title
-    public var animation: Animation = .easeIn(duration: 0.1)
-    public var contentIsClickable: Bool = true
+    public var fonts: Fonts = .init()
+    public var animations: Animations = .init()
+    public var misc: Misc = .init()
     
     public init() {}
 }
@@ -105,5 +105,32 @@ extension VToggleModel.Colors.StateOpacity {
         case .pressedOn: return pressedOpacity
         case .disabled: return disabledOpacity
         }
+    }
+}
+
+// MARK:- Fonts
+extension VToggleModel {
+    public struct Fonts {
+        public var title: Font = .system(size: 15, weight: .regular, design: .default)    // Only applicable during init with title
+        
+        public init() {}
+    }
+}
+
+// MARK:- Animations
+extension VToggleModel {
+    public struct Animations {
+        public var stateChange: Animation? = .easeIn(duration: 0.1)
+        
+        public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VToggleModel {
+    public struct Misc {
+        public var contentIsClickable: Bool = true
+        
+        public init() {}
     }
 }

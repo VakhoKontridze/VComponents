@@ -14,7 +14,7 @@ public struct VBaseViewModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 17, weight: .semibold, design: .default)
+    public var fonts: Fonts = .init()
     
     var backButtonSubModel: VChevronButtonModel {
         var model: VChevronButtonModel = .init()
@@ -76,4 +76,13 @@ extension VBaseViewModel.Colors {
     public typealias StateColors = VChevronButtonModel.Colors.StateColors
     
     public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
+}
+
+// MARK:- Fonts
+extension VBaseViewModel {
+    public struct Fonts {
+        public var title: Font = .system(size: 17, weight: .semibold, design: .default)
+        
+        public init() {}
+    }
 }

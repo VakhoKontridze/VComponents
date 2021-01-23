@@ -64,7 +64,7 @@ extension VPrimaryButtonDemoView {
                             VText(
                                 title: buttonTitle,
                                 color: ColorBook.primaryInverted,
-                                font: VPrimaryButtonModel().font,
+                                font: VPrimaryButtonModel.Fonts().title,
                                 type: .oneLine
                             )
                         })

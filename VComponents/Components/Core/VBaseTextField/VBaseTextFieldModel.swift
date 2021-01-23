@@ -12,14 +12,8 @@ import SwiftUI
 public struct VBaseTextFieldModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: UIFont = .systemFont(ofSize: 16, weight: .regular)
-    
-    public var isSecureTextEntry: Bool = false
-    
-    public var keyboardType: UIKeyboardType = .default
-    public var useAutoCorrect: Bool = true
-    
-    public var returnButton: UIReturnKeyType = .default
+    public var fonts: Fonts = .init()
+    public var misc: Misc = .init()
     
     public init() {}
 }
@@ -94,5 +88,28 @@ extension VBaseTextFieldModel.Colors {
             case .disabled: return disabledOpacity
             }
         }
+    }
+}
+
+// MARK:- Fonts
+extension VBaseTextFieldModel {
+    public struct Fonts {
+        public var text: UIFont = .systemFont(ofSize: 16, weight: .regular)
+        
+        public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VBaseTextFieldModel {
+    public struct Misc {
+        public var isSecureTextEntry: Bool = false
+        
+        public var keyboardType: UIKeyboardType = .default
+        public var useAutoCorrect: Bool = true
+        
+        public var returnButton: UIReturnKeyType = .default
+        
+        public init() {}
     }
 }

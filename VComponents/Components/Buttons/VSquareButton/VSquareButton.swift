@@ -68,7 +68,7 @@ public struct VSquareButton<Content>: View where Content: View {
                 VText(
                     title: title,
                     color: model.colors.textContent.for(.init(state: state, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .oneLine
                 )
             }

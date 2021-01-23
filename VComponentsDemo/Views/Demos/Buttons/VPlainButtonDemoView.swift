@@ -50,7 +50,7 @@ extension VPlainButtonDemoView {
                             VText(
                                 title: buttonTitle,
                                 color: ColorBook.accent,
-                                font: VPlainButtonModel().font,
+                                font: VPlainButtonModel.Fonts().title,
                                 type: .oneLine
                             )
                         })

@@ -12,11 +12,11 @@ import SwiftUI
 public struct VPrimaryButtonModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = .system(size: 16, weight: .semibold, design: .default)  // Only applicable during init with title
+    public var fonts: Fonts = .init()
     
     var spinnerSubModel: VSpinnerModelContinous {
         var model: VSpinnerModelContinous = .init()
-        model.color = colors.loader
+        model.colors.spinner = colors.loader
         return model
     }
     
@@ -118,5 +118,14 @@ extension VPrimaryButtonModel.Colors {
             case .loading: return disabledOpacity
             }
         }
+    }
+}
+
+// MARK:- Fonts
+extension VPrimaryButtonModel {
+    public struct Fonts {
+        public var title: Font = .system(size: 16, weight: .semibold, design: .default)  // Only applicable during init with title
+        
+        public init() {}
     }
 }

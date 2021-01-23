@@ -19,7 +19,7 @@ struct VRadioButtonDemoView: View {
     
     let nonClickableContentModel: VRadioButtonModel = {
         var model: VRadioButtonModel = .init()
-        model.contentIsClickable = false
+        model.misc.contentIsClickable = false
         return model
     }()
     

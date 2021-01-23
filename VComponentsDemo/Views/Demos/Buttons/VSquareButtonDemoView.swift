@@ -79,7 +79,7 @@ extension VSquareButtonDemoView {
                             VText(
                                 title: "A",
                                 color: ColorBook.primaryInverted,
-                                font: VSquareButtonModel().font,
+                                font: VSquareButtonModel.Fonts().title,
                                 type: .oneLine
                             )
                         })

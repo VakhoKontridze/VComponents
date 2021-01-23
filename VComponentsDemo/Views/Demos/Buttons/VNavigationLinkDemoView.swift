@@ -49,7 +49,7 @@ extension VNavigationLinkDemoView {
                             VText(
                                 title: buttonTitle,
                                 color: ColorBook.accent,
-                                font: VSecondaryButtonModel().font,
+                                font: VSecondaryButtonModel.Fonts().title,
                                 type: .oneLine
                             )
                         })

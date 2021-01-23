@@ -62,7 +62,7 @@ struct VAccordionDemoView: View {
     
     private var accordionModel: VAccordionModel {
         var model: VAccordionModel = .init()
-        model.expandCollapseOnHeaderTap = expandCollapseOnHeaderTap
+        model.misc.expandCollapseOnHeaderTap = expandCollapseOnHeaderTap
         return model
     }
 }

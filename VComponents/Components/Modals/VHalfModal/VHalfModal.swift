@@ -44,9 +44,9 @@ import SwiftUI
 /// var model: VHalfModalModel {
 ///     var model: VHalfModalModel = .init()
 ///
-///     model.dismissType.remove(.leading)
-///     model.dismissType.remove(.trailing)
-///     model.dismissType.insert(.navigationViewCloseButton)
+///     model.misc.dismissType.remove(.leading)
+///     model.misc.dismissType.remove(.trailing)
+///     model.misc.dismissType.insert(.navigationViewCloseButton)
 ///
 ///     return model
 /// }
@@ -137,7 +137,7 @@ public struct VHalfModal<Content, HeaderContent>
 
 // MARK:- Extension
 extension View {
-    /// Presents bottom sheet
+    /// Presents half modal
     public func vHalfModal<Content, HeaderContent>(
         isPresented: Binding<Bool>,
         halfModal: @escaping () -> VHalfModal<Content, HeaderContent>
@@ -163,7 +163,7 @@ extension View {
                             onAppear: halfModal.appearAction,
                             onDisappear: halfModal.disappearAction
                         )
-                            .environment(\.vHalfModalNavigationViewCloseButton, halfModal.model.dismissType.contains(.navigationViewCloseButton))
+                            .environment(\.vHalfModalNavigationViewCloseButton, halfModal.model.misc.dismissType.contains(.navigationViewCloseButton))
                 )
             }
         })

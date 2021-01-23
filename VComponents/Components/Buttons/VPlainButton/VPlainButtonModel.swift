@@ -14,7 +14,7 @@ public struct VPlainButtonModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var font: Font = squareButtonModel.font    // Only applicable during init with title
+    public var fonts: Fonts = .init()
     
     public init() { }
 }
@@ -70,5 +70,14 @@ extension VPlainButtonModel.Colors.StateOpacity {
         case .pressed: return pressedOpacity
         case .disabled: return disabledOpacity
         }
+    }
+}
+
+// MARK:- Fonts
+extension VPlainButtonModel {
+    public struct Fonts {
+        public var title: Font = VPlainButtonModel.squareButtonModel.fonts.title    // Only applicable during init with title
+        
+        public init() {}
     }
 }

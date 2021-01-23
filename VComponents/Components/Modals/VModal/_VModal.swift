@@ -25,7 +25,7 @@ struct _VModal<Content, HeaderContent>: View
     private let appearAction: (() -> Void)?
     private let disappearAction: (() -> Void)?
     
-    private var headerExists: Bool { headerContent != nil || model.dismissType.hasButton }
+    private var headerExists: Bool { headerContent != nil || model.misc.dismissType.hasButton }
     
     // MARK: Initializers
     init(
@@ -84,7 +84,7 @@ extension _VModal {
     @ViewBuilder private var headerView: some View {
         if headerExists {
             HStack(spacing: model.layout.headerSpacing, content: {
-                if model.dismissType.contains(.leading) {
+                if model.misc.dismissType.contains(.leading) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -94,7 +94,7 @@ extension _VModal {
                         .layoutPriority(1)  // Overrides close button's maxWidth: .infinity. Also, header content is by default maxWidth and leading justified.
                 }
                 
-                if model.dismissType.contains(.trailing) {
+                if model.misc.dismissType.contains(.trailing) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }

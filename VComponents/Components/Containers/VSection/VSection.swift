@@ -112,7 +112,7 @@ extension VSection {
                 VText(
                     title: title,
                     color: model.colors.title,
-                    font: model.titleFont,
+                    font: model.fonts.title,
                     type: .oneLine
                 )
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -10,7 +10,19 @@ import SwiftUI
 // MARK:- V Spinner Model Dashed
 /// Model that describes UI
 public struct VSpinnerModelDashed {
-    public var color: Color = ColorBook.accent
+    public static let spinnerModelContinous: VSpinnerModelContinous = .init()
+    
+    public var colors: Colors = .init()
     
     public init() {}
 }
+
+// MARK:- Colors
+extension VSpinnerModelDashed {
+    public struct Colors {
+        public var spinner: Color = VSpinnerModelDashed.spinnerModelContinous.colors.spinner
+        
+        public init() {}
+    }
+}
+

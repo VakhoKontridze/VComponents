@@ -34,7 +34,7 @@ public struct VToggle<Content>: View where Content: View {
     @Binding private var state: VToggleState
     @State private var isPressed: Bool = false
     private var internalState: VToggleInternalState { .init(state: state, isPressed: isPressed) }
-    private var contentIsEnabled: Bool { state.isEnabled && model.contentIsClickable }
+    private var contentIsEnabled: Bool { state.isEnabled && model.misc.contentIsClickable }
     
     private let content: (() -> Content)?
     
@@ -63,7 +63,7 @@ public struct VToggle<Content>: View where Content: View {
                 VText(
                     title: title,
                     color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
@@ -107,7 +107,7 @@ public struct VToggle<Content>: View where Content: View {
                 VText(
                     title: title,
                     color: model.colors.textContent.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
@@ -194,7 +194,7 @@ private extension VToggle {
 // MARK:- Action
 private extension VToggle {
     func action() {
-        withAnimation(model.animation, { state.nextState() })
+        withAnimation(model.animations.stateChange, { state.nextState() })
     }
 }
 

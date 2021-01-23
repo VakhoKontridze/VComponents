@@ -14,13 +14,12 @@ public struct VTableModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    static let defaultHeaderFooterFont: Font = .system(size: 13, weight: .regular, design: .default)
-    public var showIndicator: Bool = true
+    public var misc: Misc = .init()
     
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
-        model.showIndicator = showIndicator
+        model.misc.showIndicator = misc.showIndicator
         
         model.layout.itemSpacing = layout.itemSpacing
         model.layout.dividerHeight = layout.dividerHeight
@@ -36,7 +35,7 @@ public struct VTableModel {
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.contentMargin = 0
         
-        model.color = colors.background
+        model.colors.background = colors.background
         
         return model
     }
@@ -67,6 +66,22 @@ extension VTableModel {
         static let defaultHeaderFooter: Color = ColorBook.secondary
         public var divider: Color = VTableModel.sectionModel.colors.divider
         public var background: Color = VTableModel.sectionModel.colors.background
+        
+        public init() {}
+    }
+}
+
+// MARK:- Fonts
+extension VTableModel {
+    struct Fonts {
+        static var headerFooter: Font = .system(size: 13, weight: .regular, design: .default)
+    }
+}
+
+// MARK:- Misc
+extension VTableModel {
+    public struct Misc {
+        public var showIndicator: Bool = true
         
         public init() {}
     }

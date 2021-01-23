@@ -179,7 +179,7 @@ private extension VRangeSlider {
             }
         }()
 
-        withAnimation(model.animation, {
+        withAnimation(model.animations.progress, {
             switch thumb {
             case .low: valueLow = valueFixed
             case .high: valueHigh = valueFixed

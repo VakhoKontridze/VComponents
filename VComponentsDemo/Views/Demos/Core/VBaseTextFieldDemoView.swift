@@ -17,20 +17,20 @@ struct VBaseTextFieldDemoView: View {
     @State private var textsAccordionState: VAccordionState = .collapsed
     @State private var formattingAccordionState: VAccordionState = .collapsed
     
-    @State private var isSecure: Bool = VBaseTextFieldModel().isSecureTextEntry
+    @State private var isSecure: Bool = VBaseTextFieldModel.Misc().isSecureTextEntry
     @State private var textFieldState: VBaseTextFieldState = .enabled
     @State private var hasPlaceholder: Bool = true
     @State private var numericalKeyboard: Bool = false
     @State private var textAlignment: VBaseTextFieldModel.Layout.TextAlignment = .default
-    @State private var hasAutoCorrect: Bool = VBaseTextFieldModel().useAutoCorrect
+    @State private var hasAutoCorrect: Bool = VBaseTextFieldModel.Misc().useAutoCorrect
     @State private var textFieldText: String = ""
     
     private var textFieldModel: VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         
-        model.isSecureTextEntry = isSecure
-        model.keyboardType = numericalKeyboard ? .numberPad : .default
-        model.useAutoCorrect = hasAutoCorrect
+        model.misc.isSecureTextEntry = isSecure
+        model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
+        model.misc.useAutoCorrect = hasAutoCorrect
         
         model.layout.textAlignment = textAlignment
         

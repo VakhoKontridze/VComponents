@@ -66,7 +66,7 @@ public struct VDialogButtonModelCustom {
     
     public var layout: Layout
     public var colors: Colors
-    public var font: Font
+    public var fonts: Fonts
     
     fileprivate var primaryButtonSubModel: VPrimaryButtonModel {
         var model: VPrimaryButtonModel = .init()
@@ -93,15 +93,15 @@ public struct VDialogButtonModelCustom {
             loading: VDialogButtonModelCustom.primaryButtonModel.colors.background.loading
         )
 
-        model.font = font
+        model.fonts.title = fonts.title
 
         return model
     }
     
-    public init(layout: Layout = .init(), colors: Colors, font: Font = primaryButtonModel.font) {
+    public init(layout: Layout = .init(), colors: Colors, fonts: Fonts = .init()) {
         self.layout = layout
         self.colors = colors
-        self.font = font
+        self.fonts = fonts
     }
 }
 
@@ -149,5 +149,14 @@ extension VDialogButtonModelCustom.Colors {
         public init(pressedOpacity: Double) {
             self.pressedOpacity = pressedOpacity
         }
+    }
+}
+
+// MARK:- Fonts
+extension VDialogButtonModelCustom {
+    public struct Fonts {
+        public var title: Font = VDialogButtonModelCustom.primaryButtonModel.fonts.title
+        
+        public init() {}
     }
 }

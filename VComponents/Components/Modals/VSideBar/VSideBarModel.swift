@@ -24,7 +24,7 @@ public struct VSideBarModel {
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.contentMargin = 0
         
-        model.color = colors.background
+        model.colors.background = colors.background
         
         return model
     }
@@ -41,6 +41,16 @@ extension VSideBarModel {
         var roundCorners: Bool { cornerRadius > 0 }
         
         public var contentMargin: ContentMargin = .init()
+        public var hasSafeAreaMarginTop: Bool = true
+        public var hasSafeAreaMarginBottom: Bool = true
+        var edgesToIgnore: Edge.Set {
+            switch (hasSafeAreaMarginTop, hasSafeAreaMarginBottom) {
+            case (false, false): return [.top, .bottom]
+            case (false, true): return .top
+            case (true, false): return .bottom
+            case (true, true): return []
+            }
+        }
         
         public var translationToDismiss: CGFloat = 100
         

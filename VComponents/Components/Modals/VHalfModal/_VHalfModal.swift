@@ -28,7 +28,7 @@ struct _VHalfModal<Content, HeaderContent>: View
     @State private var offset: CGFloat?
     @State private var offsetBeforeDrag: CGFloat?
     
-    private var headerExists: Bool { headerContent != nil || model.dismissType.hasButton }
+    private var headerExists: Bool { headerContent != nil || model.misc.dismissType.hasButton }
     
     private let validLayout: Bool
 
@@ -63,13 +63,13 @@ extension _VHalfModal {
             blinding
             modalView
         })
-            .edgesIgnoringSafeArea(.all)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .onAppear(perform: animateIn)
     }
     
     private var blinding: some View {
         model.colors.blinding
+            .edgesIgnoringSafeArea(.all)
             .onTapGesture(perform: animateOut)
     }
     
@@ -77,6 +77,7 @@ extension _VHalfModal {
         if validLayout {
             ZStack(content: {
                 VSheet(model: model.sheetModel)
+                    .edgesIgnoringSafeArea(.all)
                 
                 VStack(spacing: model.layout.spacing, content: {
                     headerView
@@ -87,9 +88,10 @@ extension _VHalfModal {
                     .padding(.trailing, model.layout.contentMargin.trailing)
                     .padding(.top, model.layout.contentMargin.top)
                     .padding(.bottom, model.layout.contentMargin.bottom)
-                    .padding(.bottom, model.layout.hasSafeAreaMargin ? UIView.bottomSafeAreaHeight : 0)
+                    .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
                 
                 navigationBarCloseButton
+                    .edgesIgnoringSafeArea(.all)
             })
                 .frame(height: model.layout.height.max)
                 .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max)
@@ -106,7 +108,7 @@ extension _VHalfModal {
     @ViewBuilder private var headerView: some View {
         if headerExists {
             HStack(spacing: model.layout.headerSpacing, content: {
-                if model.dismissType.contains(.leading) {
+                if model.misc.dismissType.contains(.leading) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -116,7 +118,7 @@ extension _VHalfModal {
                         .layoutPriority(1)  // Overrides close button's maxWidth: .infinity. Also, header content is by default maxWidth and leading justified.
                 }
 
-                if model.dismissType.contains(.trailing) {
+                if model.misc.dismissType.contains(.trailing) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
@@ -137,7 +139,7 @@ extension _VHalfModal {
     }
     
     @ViewBuilder private var navigationBarCloseButton: some View {
-        if model.dismissType.contains(.navigationViewCloseButton) {
+        if model.misc.dismissType.contains(.navigationViewCloseButton) {
             VCloseButton(model: model.closeButtonSubModel, action: animateOut)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
                 .padding(.trailing, model.layout.contentMargin.trailing)
@@ -190,7 +192,7 @@ private extension _VHalfModal {
         offset = {
             switch rawOffset {
             case ...minAllowedOffset: return minAllowedOffset
-            case maxAllowedOffset...: return model.dismissType.contains(.pullDown) ? rawOffset : minAllowedOffset
+            case maxAllowedOffset...: return model.misc.dismissType.contains(.pullDown) ? rawOffset : minAllowedOffset
             default: return rawOffset
             }
         }()
@@ -204,7 +206,7 @@ private extension _VHalfModal {
             let rawOffset: CGFloat = offsetBeforeDrag + drag.translation.height
             let maxAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.min
             
-            guard model.dismissType.contains(.pullDown) else { return false }
+            guard model.misc.dismissType.contains(.pullDown) else { return false }
 
             let isDraggedDown: Bool = drag.translation.height > 0
             guard isDraggedDown else { return false }

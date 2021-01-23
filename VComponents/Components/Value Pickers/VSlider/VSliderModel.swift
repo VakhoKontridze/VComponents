@@ -15,7 +15,7 @@ public struct VSliderModel {
     
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var animation: Animation? = nil
+    public var animations: Animations = .init()
     
     public init() {}
 }
@@ -102,5 +102,14 @@ extension VSliderModel.Colors {
             case .disabled: return disabled
             }
         }
+    }
+}
+
+// MARK:- Animations
+extension VSliderModel {
+    public struct Animations {
+        public var progress: Animation? = nil
+        
+        public init() {}
     }
 }

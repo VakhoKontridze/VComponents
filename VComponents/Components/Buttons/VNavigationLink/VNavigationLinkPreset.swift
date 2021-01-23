@@ -38,10 +38,10 @@ public enum VNavigationLinkPreset {
         
         let font: Font = {
             switch self {
-            case .primary(let model): return model.font
-            case .secondary(let model): return model.font
-            case .square(let model): return model.font
-            case .plain(let model): return model.font
+            case .primary(let model): return model.fonts.title
+            case .secondary(let model): return model.fonts.title
+            case .square(let model): return model.fonts.title
+            case .plain(let model): return model.fonts.title
             }
         }()
         

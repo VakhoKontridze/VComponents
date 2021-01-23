@@ -88,11 +88,7 @@ extension _VDialog {
                 .padding(.horizontal, model.layout.contentMarginHor)
                 .padding(.top, model.layout.contentMarginTop)
             
-            switch dialogType {
-            case .one(let button): oneButtonDialogView(button: button)
-            case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
-            case .many(let buttons): manyButtonDialogView(buttons: buttons)
-            }
+            dialogView
         })
             .padding(model.layout.margin)
             .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
@@ -134,6 +130,14 @@ extension _VDialog {
     @ViewBuilder private var freeContentView: some View {
         if let content = content {
             content()
+        }
+    }
+    
+    @ViewBuilder private var dialogView: some View {
+        switch dialogType {
+        case .one(let button): oneButtonDialogView(button: button)
+        case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
+        case .many(let buttons): manyButtonDialogView(buttons: buttons)
         }
     }
     

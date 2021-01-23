@@ -61,7 +61,7 @@ public struct VRadioButton<Content>: View where Content: View {
     @Binding private var state: VRadioButtonState
     @State private var isPressed: Bool = false
     private var internalState: VRadioButtonInternalState { .init(state: state, isPressed: isPressed) }
-    private var contentIsEnabled: Bool { state.isEnabled && model.contentIsClickable }
+    private var contentIsEnabled: Bool { state.isEnabled && model.misc.contentIsClickable }
     
     private let content: (() -> Content)?
     
@@ -90,7 +90,7 @@ public struct VRadioButton<Content>: View where Content: View {
                 VText(
                     title: title,
                     color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
@@ -134,7 +134,7 @@ public struct VRadioButton<Content>: View where Content: View {
                 VText(
                     title: title,
                     color: model.colors.textContent.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
@@ -189,7 +189,7 @@ public struct VRadioButton<Content>: View where Content: View {
                 VText(
                     title: selectingValue.pickerTitle,
                     color: model.colors.textContent.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
-                    font: model.font,
+                    font: model.fonts.title,
                     type: .multiLine(limit: nil, alignment: .leading)
                 )
             }
@@ -255,7 +255,7 @@ extension VRadioButton {
 // MARK:- Action
 private extension VRadioButton {
     func action() {
-        withAnimation(model.animation, { state.nextState() })
+        withAnimation(model.animations.stateChange, { state.nextState() })
     }
 }
 

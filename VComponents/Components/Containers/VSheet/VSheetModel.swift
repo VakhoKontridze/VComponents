@@ -11,7 +11,7 @@ import SwiftUI
 /// Model that describes UI
 public struct VSheetModel {
     public var layout: Layout = .init()
-    public var color: Color = ColorBook.layer
+    public var colors: Colors = .init()
     
     public init() {}
 }
@@ -48,5 +48,14 @@ extension VSheetModel.Layout {
             case .none: return []
             }
         }
+    }
+}
+
+// MARK:- Colors
+extension VSheetModel {
+    public struct Colors {
+        public var background: Color = ColorBook.layer
+        
+        public init() {}
     }
 }

@@ -64,7 +64,7 @@ extension VSheet {
     }
     
     private var sheetView: some View {
-        model.color
+        model.colors.background
             .cornerRadius(
                 radius: model.layout.cornerRadius,
                 corners: model.layout.roundedCorners.uiRectCorner

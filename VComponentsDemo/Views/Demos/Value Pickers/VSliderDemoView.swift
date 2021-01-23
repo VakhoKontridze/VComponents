@@ -59,7 +59,7 @@ struct VSliderDemoView: View {
     private let animationModel: VSliderModel = {
         var model: VSliderModel = .init()
         
-        model.animation = .default
+        model.animations.progress = .default
         
         return model
     }()
