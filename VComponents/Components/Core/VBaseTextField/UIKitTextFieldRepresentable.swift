@@ -79,7 +79,17 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
         textField.keyboardType = model.misc.keyboardType
         if keybardTypeChanged { textField.reloadInputViews() }
         
-        textField.autocorrectionType = model.misc.useAutoCorrect ? .yes : .no
+        let spellCheckChanged: Bool = textField.spellCheckingType != model.misc.spellCheck
+        textField.spellCheckingType = model.misc.spellCheck
+        if spellCheckChanged {
+            let text = textField.text
+            textField.text = ""
+            textField.text = text   // Breaks when going from no to yes
+        }
+        
+        let autocorrectChanged: Bool = textField.autocorrectionType != model.misc.autoCorrect
+        textField.autocorrectionType = model.misc.autoCorrect
+        if autocorrectChanged { textField.reloadInputViews() }
         
         textField.textAlignment = model.layout.textAlignment.nsTextAlignment
         

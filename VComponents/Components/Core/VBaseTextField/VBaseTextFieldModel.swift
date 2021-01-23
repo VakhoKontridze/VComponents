@@ -106,7 +106,8 @@ extension VBaseTextFieldModel {
         public var isSecureTextEntry: Bool = false
         
         public var keyboardType: UIKeyboardType = .default
-        public var useAutoCorrect: Bool = true
+        public var spellCheck: UITextSpellCheckingType = .default
+        public var autoCorrect: UITextAutocorrectionType = .default
         
         public var returnButton: UIReturnKeyType = .default
         

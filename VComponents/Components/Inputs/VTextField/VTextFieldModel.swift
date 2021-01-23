@@ -346,7 +346,8 @@ extension VTextFieldModel {
 extension VTextFieldModel {
     public struct Misc {
         public var keyboardType: UIKeyboardType = baseTextFieldReference.misc.keyboardType
-        public var useAutoCorrect: Bool = baseTextFieldReference.misc.useAutoCorrect
+        public var spellCheck: UITextSpellCheckingType = baseTextFieldReference.misc.spellCheck
+        public var autoCorrect: UITextAutocorrectionType = baseTextFieldReference.misc.autoCorrect
         
         public var returnButton: UIReturnKeyType = baseTextFieldReference.misc.returnButton
         public var clearButton: Bool = true
@@ -383,7 +384,8 @@ extension VTextFieldModel {
         model.misc.isSecureTextEntry = isSecureTextEntry
         
         model.misc.keyboardType = misc.keyboardType
-        model.misc.useAutoCorrect = misc.useAutoCorrect
+        model.misc.spellCheck = misc.spellCheck
+        model.misc.autoCorrect = misc.autoCorrect
         
         model.misc.returnButton = misc.returnButton
         
