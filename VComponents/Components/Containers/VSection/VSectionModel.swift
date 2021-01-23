@@ -10,14 +10,66 @@ import SwiftUI
 // MARK:- V Section Model
 /// Model that describes UI
 public struct VSectionModel {
-    public static let baseListModel: VBaseListModel = .init()
-    public static let sheetModel: VSheetModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
     public var misc: Misc = .init()
     
+    public init() {}
+}
+
+// MARK:- Layout
+extension VSectionModel {
+    public struct Layout {
+        public var titleMarginHor: CGFloat = 0
+        public var titleMarginBottom: CGFloat = 10
+        
+        public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
+        public var contentMargin: CGFloat = sheetReference.layout.contentMargin
+        public var itemSpacing: CGFloat = baseListReference.layout.itemSpacing
+        public var dividerHeight: CGFloat = baseListReference.layout.dividerHeight
+        
+        public init() {}
+    }
+}
+
+// MARK:- Colors
+extension VSectionModel {
+    public struct Colors {
+        public var title: Color = ColorBook.primary
+        public var divider: Color = baseListReference.colors.divider
+        public var background: Color = sheetReference.colors.background
+        
+        public init() {}
+    }
+}
+
+// MARK:- Fonts
+extension VSectionModel {
+    public struct Fonts {
+        public var title: Font = .system(size: 14, weight: .bold, design: .default)
+        
+        public init() {}
+    }
+}
+
+// MARK:- Misc
+extension VSectionModel {
+    public struct Misc {
+        public var showIndicator: Bool = true
+        
+        public init() {}
+    }
+}
+
+// MARK:- References
+extension VSectionModel {
+    public static let baseListReference: VBaseListModel = .init()
+    public static let sheetReference: VSheetModel = .init()
+}
+
+// MARK:- Sub-Models
+extension VSectionModel {
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
@@ -41,51 +93,5 @@ public struct VSectionModel {
         model.colors.background = colors.background
         
         return model
-    }
-    
-    public init() {}
-}
-
-// MARK:- Layout
-extension VSectionModel {
-    public struct Layout {
-        public var titleMarginHor: CGFloat = 0
-        public var titleMarginBottom: CGFloat = 10
-        
-        public var cornerRadius: CGFloat = VSectionModel.sheetModel.layout.cornerRadius
-        public var contentMargin: CGFloat = VSectionModel.sheetModel.layout.contentMargin
-        public var itemSpacing: CGFloat = VSectionModel.baseListModel.layout.itemSpacing
-        public var dividerHeight: CGFloat = VSectionModel.baseListModel.layout.dividerHeight
-        
-        public init() {}
-    }
-}
-
-// MARK:- Colors
-extension VSectionModel {
-    public struct Colors {
-        public var title: Color = ColorBook.primary
-        public var divider: Color = VSectionModel.baseListModel.colors.divider
-        public var background: Color = VSectionModel.sheetModel.colors.background
-        
-        public init() {}
-    }
-}
-
-// MARK:- Fonts
-extension VSectionModel {
-    public struct Fonts {
-        public var title: Font = .system(size: 14, weight: .bold, design: .default)
-        
-        public init() {}
-    }
-}
-
-// MARK:- Misc
-extension VSectionModel {
-    public struct Misc {
-        public var showIndicator: Bool = true
-        
-        public init() {}
     }
 }

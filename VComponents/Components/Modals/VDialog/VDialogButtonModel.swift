@@ -13,34 +13,45 @@ public enum VDialogButtonModel {
     case primary
     case secondary
     case custom(_ model: VDialogButtonModelCustom)
+}
+
+// MARK:- Sub-Models
+extension VDialogButtonModel {
+    var buttonSubModel: VPrimaryButtonModel {
+        switch self {
+        case .primary: return VDialogButtonModel.primaryButtonSubModel.primaryButtonSubModel
+        case .secondary: return VDialogButtonModel.secondaryButtonSubModel.primaryButtonSubModel
+        case .custom(let model): return model.primaryButtonSubModel
+        }
+    }
     
-    private static let primaryModel: VDialogButtonModelCustom = .init(
+    private static let primaryButtonSubModel: VDialogButtonModelCustom = .init(
         colors: .init(
             foreground: .init(
                 pressedOpacity: 0.5
             ),
             text: .init(
-                enabled: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.enabled,
-                pressed: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.pressed,
-                disabled: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.disabled
+                enabled: VDialogButtonModelCustom.primaryButtonReference.colors.textContent.enabled,
+                pressed: VDialogButtonModelCustom.primaryButtonReference.colors.textContent.pressed,
+                disabled: VDialogButtonModelCustom.primaryButtonReference.colors.textContent.disabled
             ),
             background: .init(
-                enabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
-                pressed: VDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
-                disabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
+                enabled: VDialogButtonModelCustom.primaryButtonReference.colors.background.enabled,
+                pressed: VDialogButtonModelCustom.primaryButtonReference.colors.background.pressed,
+                disabled: VDialogButtonModelCustom.primaryButtonReference.colors.background.disabled
             )
         )
     )
     
-    private static let secondaryModel: VDialogButtonModelCustom = .init(
+    private static let secondaryButtonSubModel: VDialogButtonModelCustom = .init(
         colors: .init(
             foreground: .init(
                 pressedOpacity: 0.5
             ),
             text: .init(
-                enabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.enabled,
-                pressed: VDialogButtonModelCustom.primaryButtonModel.colors.background.pressed,
-                disabled: VDialogButtonModelCustom.primaryButtonModel.colors.background.disabled
+                enabled: VDialogButtonModelCustom.primaryButtonReference.colors.background.enabled,
+                pressed: VDialogButtonModelCustom.primaryButtonReference.colors.background.pressed,
+                disabled: VDialogButtonModelCustom.primaryButtonReference.colors.background.disabled
             ),
             background: .init(
                 enabled: .clear,
@@ -49,54 +60,14 @@ public enum VDialogButtonModel {
             )
         )
     )
-    
-    var primaryButtonModel: VPrimaryButtonModel {
-        switch self {
-        case .primary: return VDialogButtonModel.primaryModel.primaryButtonSubModel
-        case .secondary: return VDialogButtonModel.secondaryModel.primaryButtonSubModel
-        case .custom(let model): return model.primaryButtonSubModel
-        }
-    }
 }
 
 // MARK:- V Dialog Button Model Custom
 /// Model that describes UI
 public struct VDialogButtonModelCustom {
-    public static let primaryButtonModel: VPrimaryButtonModel = .init()
-    
     public var layout: Layout
     public var colors: Colors
     public var fonts: Fonts
-    
-    fileprivate var primaryButtonSubModel: VPrimaryButtonModel {
-        var model: VPrimaryButtonModel = .init()
-
-        model.layout.height = layout.height
-        model.layout.cornerRadius = layout.cornerRadius
-
-        model.colors.content = .init(
-            pressedOpacity: colors.content.pressedOpacity,
-            disabledOpacity: VDialogButtonModelCustom.primaryButtonModel.colors.content.disabledOpacity
-        )
-
-        model.colors.textContent = .init(
-            enabled: colors.text.enabled,
-            pressed: colors.text.pressed,
-            disabled: colors.text.disabled,
-            loading: VDialogButtonModelCustom.primaryButtonModel.colors.textContent.loading
-        )
-        
-        model.colors.background = .init(
-            enabled: colors.background.enabled,
-            pressed: colors.background.pressed,
-            disabled: colors.background.disabled,
-            loading: VDialogButtonModelCustom.primaryButtonModel.colors.background.loading
-        )
-
-        model.fonts.title = fonts.title
-
-        return model
-    }
     
     public init(layout: Layout = .init(), colors: Colors, fonts: Fonts = .init()) {
         self.layout = layout
@@ -155,8 +126,46 @@ extension VDialogButtonModelCustom.Colors {
 // MARK:- Fonts
 extension VDialogButtonModelCustom {
     public struct Fonts {
-        public var title: Font = VDialogButtonModelCustom.primaryButtonModel.fonts.title
+        public var title: Font = primaryButtonReference.fonts.title
         
         public init() {}
+    }
+}
+
+// MARK:- References
+extension VDialogButtonModelCustom {
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
+}
+
+// MARK:- Sub-Models
+extension VDialogButtonModelCustom {
+    fileprivate var primaryButtonSubModel: VPrimaryButtonModel {
+        var model: VPrimaryButtonModel = .init()
+
+        model.layout.height = layout.height
+        model.layout.cornerRadius = layout.cornerRadius
+
+        model.colors.content = .init(
+            pressedOpacity: colors.content.pressedOpacity,
+            disabledOpacity: VDialogButtonModelCustom.primaryButtonReference.colors.content.disabledOpacity
+        )
+
+        model.colors.textContent = .init(
+            enabled: colors.text.enabled,
+            pressed: colors.text.pressed,
+            disabled: colors.text.disabled,
+            loading: VDialogButtonModelCustom.primaryButtonReference.colors.textContent.loading
+        )
+        
+        model.colors.background = .init(
+            enabled: colors.background.enabled,
+            pressed: colors.background.pressed,
+            disabled: colors.background.disabled,
+            loading: VDialogButtonModelCustom.primaryButtonReference.colors.background.loading
+        )
+
+        model.fonts.title = fonts.title
+
+        return model
     }
 }

@@ -10,8 +10,6 @@ import SwiftUI
 // MARK:- V Square Button Model
 /// Model that describes UI
 public struct VSquareButtonModel {
-    public static let primaryButtonModel: VPrimaryButtonModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -47,21 +45,21 @@ extension VSquareButtonModel {
         )
         
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            enabled: VSquareButtonModel.primaryButtonModel.colors.textContent.enabled,
-            pressed: VSquareButtonModel.primaryButtonModel.colors.textContent.pressed,
-            disabled: VSquareButtonModel.primaryButtonModel.colors.textContent.disabled
+            enabled: primaryButtonReference.colors.textContent.enabled,
+            pressed: primaryButtonReference.colors.textContent.pressed,
+            disabled: primaryButtonReference.colors.textContent.disabled
         )
         
         public var background: StateColors = .init(
-            enabled: VSquareButtonModel.primaryButtonModel.colors.background.enabled,
-            pressed: VSquareButtonModel.primaryButtonModel.colors.background.pressed,
-            disabled: VSquareButtonModel.primaryButtonModel.colors.background.disabled
+            enabled: primaryButtonReference.colors.background.enabled,
+            pressed: primaryButtonReference.colors.background.pressed,
+            disabled: primaryButtonReference.colors.background.disabled
         )
         
         public var border: StateColors = .init(
-            enabled: VSquareButtonModel.primaryButtonModel.colors.border.enabled,
-            pressed: VSquareButtonModel.primaryButtonModel.colors.border.pressed,
-            disabled: VSquareButtonModel.primaryButtonModel.colors.border.disabled
+            enabled: primaryButtonReference.colors.border.enabled,
+            pressed: primaryButtonReference.colors.border.pressed,
+            disabled: primaryButtonReference.colors.border.disabled
         )
         
         public init() {}
@@ -101,4 +99,9 @@ extension VSquareButtonModel {
         
         public init() {}
     }
+}
+
+// MARK:- References
+extension VSquareButtonModel {
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

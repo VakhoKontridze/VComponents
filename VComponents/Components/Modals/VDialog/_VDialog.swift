@@ -143,7 +143,7 @@ extension _VDialog {
     
     private func oneButtonDialogView(button: VDialogButton) -> some View {
         VPrimaryButton(
-            model: button.model.primaryButtonModel,
+            model: button.model.buttonSubModel,
             state: button.isEnabled ? .enabled : .disabled,
             action: { animateOut(and: button.action) },
             title: button.title
@@ -153,14 +153,14 @@ extension _VDialog {
     private func twoButtonDialogView(primary: VDialogButton, secondary: VDialogButton) -> some View {
         HStack(spacing: model.layout.twoButtonSpacing, content: {
             VPrimaryButton(
-                model: secondary.model.primaryButtonModel,
+                model: secondary.model.buttonSubModel,
                 state: secondary.isEnabled ? .enabled : .disabled,
                 action: { animateOut(and: secondary.action) },
                 title: secondary.title
             )
             
             VPrimaryButton(
-                model: primary.model.primaryButtonModel,
+                model: primary.model.buttonSubModel,
                 state: primary.isEnabled ? .enabled : .disabled,
                 action: { animateOut(and: primary.action) },
                 title: primary.title
@@ -172,7 +172,7 @@ extension _VDialog {
         VStack(spacing: model.layout.manyButtonSpacing, content: {
             ForEach(0..<buttons.count, content: { i in
                 VPrimaryButton(
-                    model: buttons[i].model.primaryButtonModel,
+                    model: buttons[i].model.buttonSubModel,
                     state: buttons[i].isEnabled ? .enabled : .disabled,
                     action: { animateOut(and: buttons[i].action) },
                     title: buttons[i].title

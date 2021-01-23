@@ -10,13 +10,10 @@ import SwiftUI
 // MARK:- V Segmented Picker Model
 /// Model that describes UI
 public struct VSegmentedPickerModel {
-    public static let toggleModel: VToggleModel = .init()
-    public static let sliderModel: VSliderModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
-    public var animation: Animation? = .easeInOut(duration: 0.2)
+    public var animations: Animations = .init()
     
     public init() {}
 }
@@ -63,13 +60,13 @@ extension VSegmentedPickerModel {
             disabled: .init(componentAsset: "SegmentedPicker.Indicator.disabled")
         )
         public var indicatorShadow: StateColors = .init(
-            enabled: VSegmentedPickerModel.sliderModel.colors.thumb.shadow.enabled,
-            disabled: VSegmentedPickerModel.sliderModel.colors.thumb.shadow.disabled
+            enabled: sliderReference.colors.thumb.shadow.enabled,
+            disabled: sliderReference.colors.thumb.shadow.disabled
         )
         
         public var background: StateColors = .init(
-            enabled: VSegmentedPickerModel.toggleModel.colors.fill.off,
-            disabled: VSegmentedPickerModel.toggleModel.colors.fill.disabled
+            enabled: toggleReference.colors.fill.off,
+            disabled: toggleReference.colors.fill.disabled
         )
         
         public var title: StateColors = .init(
@@ -134,4 +131,19 @@ extension VSegmentedPickerModel {
         
         public init() {}
     }
+}
+
+// MARK:- Animations
+extension VSegmentedPickerModel {
+    public struct Animations {
+        public var selection: Animation? = .easeInOut(duration: 0.2)
+        
+        public init() {}
+    }
+}
+
+// MARK:- References
+extension VSegmentedPickerModel {
+    public static let toggleReference: VToggleModel = .init()
+    public static let sliderReference: VSliderModel = .init()
 }

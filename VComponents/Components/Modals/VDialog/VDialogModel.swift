@@ -10,8 +10,6 @@ import SwiftUI
 // MARK:- V Dialog Model
 /// Model that describes UI
 public struct VDialogModel {
-    public static let modalModel: VModalModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -44,8 +42,8 @@ extension VDialogModel {
 // MARK:- Colors
 extension VDialogModel {
     public struct Colors {
-        public var background: Color = VDialogModel.modalModel.colors.background
-        public var blinding: Color = VDialogModel.modalModel.colors.blinding
+        public var background: Color = modalReference.colors.background
+        public var blinding: Color = modalReference.colors.blinding
         
         public var title: Color = ColorBook.primary
         public var description: Color = ColorBook.primary
@@ -67,4 +65,9 @@ extension VDialogModel {
 // MARK:- Animations
 extension VDialogModel {
     public typealias Animations = VModalModel.Animations
+}
+
+// MARK:- References
+extension VDialogModel {
+    public static let modalReference: VModalModel = .init()
 }

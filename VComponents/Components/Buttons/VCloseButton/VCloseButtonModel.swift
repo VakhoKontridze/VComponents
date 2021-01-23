@@ -10,8 +10,6 @@ import SwiftUI
 // MARK:- V Close Button Model
 /// Model that describes UI
 public struct VCloseButtonModel {
-    public static let chevronButtonModel: VChevronButtonModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     
@@ -21,12 +19,12 @@ public struct VCloseButtonModel {
 // MARK:- Layout
 extension VCloseButtonModel {
     public struct Layout {
-        public var dimension: CGFloat = VCloseButtonModel.chevronButtonModel.layout.dimension
+        public var dimension: CGFloat = chevronButtonReference.layout.dimension
         
         public var iconDimension: CGFloat = 11
         
-        public var hitBoxHor: CGFloat = VCloseButtonModel.chevronButtonModel.layout.hitBoxHor
-        public var hitBoxVer: CGFloat = VCloseButtonModel.chevronButtonModel.layout.hitBoxVer
+        public var hitBoxHor: CGFloat = chevronButtonReference.layout.hitBoxHor
+        public var hitBoxVer: CGFloat = chevronButtonReference.layout.hitBoxVer
         
         public init() {}
     }
@@ -35,9 +33,9 @@ extension VCloseButtonModel {
 // MARK:- Colors
 extension VCloseButtonModel {
     public struct Colors {
-        public var content: StateColorsAndOpacity = VCloseButtonModel.chevronButtonModel.colors.content
+        public var content: StateColorsAndOpacity = chevronButtonReference.colors.content
         
-        public var background: StateColors = VCloseButtonModel.chevronButtonModel.colors.background
+        public var background: StateColors = chevronButtonReference.colors.background
         
         public init() {}
     }
@@ -47,4 +45,9 @@ extension VCloseButtonModel.Colors {
     public typealias StateColors = VChevronButtonModel.Colors.StateColors
     
     public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
+}
+
+// MARK:- References
+extension VCloseButtonModel {
+    public static let chevronButtonReference: VChevronButtonModel = .init()
 }

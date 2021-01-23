@@ -28,7 +28,7 @@ struct VModalDemoView: View {
     
     private var pickerModel: VSegmentedPickerModel {
         var model: VSegmentedPickerModel = .init()
-        model.animation = nil
+        model.animations.selection = nil
         return model
     }
     

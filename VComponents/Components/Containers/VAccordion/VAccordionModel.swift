@@ -10,51 +10,9 @@ import SwiftUI
 // MARK:- V Accordion Model
 /// Model that describes UI
 public struct VAccordionModel {
-    public static let sectionModel: VSectionModel = .init()
-    public static let chevronButtonModel: VChevronButtonModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var misc: Misc = .init()
-    
-    var baseListSubModel: VBaseListModel {
-        var model: VBaseListModel = .init()
-        
-        model.misc.showIndicator = misc.showIndicator
-        
-        model.layout.marginTrailing = layout.marginTrailing + layout.contentMarginTrailing
-        model.layout.itemSpacing = layout.itemSpacing
-        model.layout.dividerHeight = layout.dividerHeight
-        
-        model.colors.divider = colors.divider
-        
-        return model
-    }
-    
-    var sheetSubModel: VSheetModel {
-        var model: VSheetModel = .init()
-        
-        model.layout.cornerRadius = layout.cornerRadius
-        model.layout.contentMargin = 0
-        
-        model.colors.background = colors.background
-        
-        return model
-    }
-    
-    var chevronButonSubModel: VChevronButtonModel {
-        var model: VChevronButtonModel = .init()
-        
-        model.layout.dimension = layout.chevronButtonDimension
-        model.layout.iconDimension = layout.chevronButtonIconDimension
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
-        
-        model.colors.background = colors.chevronButtonBackground
-        model.colors.content = colors.chevronButtonIcon
-        
-        return model
-    }
     
     public init() {}
 }
@@ -62,7 +20,7 @@ public struct VAccordionModel {
 // MARK:- Layout
 extension VAccordionModel {
     public struct Layout {
-        public var cornerRadius: CGFloat = VAccordionModel.sectionModel.layout.cornerRadius
+        public var cornerRadius: CGFloat = sectionReference.layout.cornerRadius
         
         public var marginLeading: CGFloat = 15
         public var marginTrailing: CGFloat = 15
@@ -79,12 +37,12 @@ extension VAccordionModel {
         public var contentMarginTop: CGFloat = 0
         public var contentMarginBottom: CGFloat = 5
         
-        public var chevronButtonDimension: CGFloat = VAccordionModel.chevronButtonModel.layout.dimension
-        public var chevronButtonIconDimension: CGFloat = VAccordionModel.chevronButtonModel.layout.iconDimension
+        public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
+        public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        public var dividerHeight: CGFloat = VAccordionModel.sectionModel.layout.dividerHeight
+        public var dividerHeight: CGFloat = sectionReference.layout.dividerHeight
         
-        public var itemSpacing: CGFloat = VAccordionModel.sectionModel.layout.itemSpacing
+        public var itemSpacing: CGFloat = sectionReference.layout.itemSpacing
         
         public init() {}
     }
@@ -95,7 +53,7 @@ extension VAccordionModel {
     public struct Colors {
         static let defaultHeader: Color = ColorBook.primary
         
-        public var background: Color = VAccordionModel.sectionModel.colors.background
+        public var background: Color = sectionReference.colors.background
         
         public var header: StateOpacity = .init(
             disabledOpacity: 0.5
@@ -103,11 +61,11 @@ extension VAccordionModel {
         
         public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
         
-        public var chevronButtonBackground: StateColors = VAccordionModel.chevronButtonModel.colors.background
+        public var chevronButtonBackground: StateColors = chevronButtonReference.colors.background
         
-        public var chevronButtonIcon: StateColorsAndOpacity = VAccordionModel.chevronButtonModel.colors.content
+        public var chevronButtonIcon: StateColorsAndOpacity = chevronButtonReference.colors.content
         
-        public var divider: Color = VAccordionModel.sectionModel.colors.divider
+        public var divider: Color = sectionReference.colors.divider
         
         public init() {}
     }
@@ -149,5 +107,53 @@ extension VAccordionModel {
         public var expandCollapseOnHeaderTap: Bool = true
         
         public init() {}
+    }
+}
+
+// MARK:- References
+extension VAccordionModel {
+    public static let sectionReference: VSectionModel = .init()
+    public static let chevronButtonReference: VChevronButtonModel = .init()
+}
+
+// MARK:- Sub-Models
+extension VAccordionModel {
+    var baseListSubModel: VBaseListModel {
+        var model: VBaseListModel = .init()
+        
+        model.misc.showIndicator = misc.showIndicator
+        
+        model.layout.marginTrailing = layout.marginTrailing + layout.contentMarginTrailing
+        model.layout.itemSpacing = layout.itemSpacing
+        model.layout.dividerHeight = layout.dividerHeight
+        
+        model.colors.divider = colors.divider
+        
+        return model
+    }
+    
+    var sheetSubModel: VSheetModel {
+        var model: VSheetModel = .init()
+        
+        model.layout.cornerRadius = layout.cornerRadius
+        model.layout.contentMargin = 0
+        
+        model.colors.background = colors.background
+        
+        return model
+    }
+    
+    var chevronButonSubModel: VChevronButtonModel {
+        var model: VChevronButtonModel = .init()
+        
+        model.layout.dimension = layout.chevronButtonDimension
+        model.layout.iconDimension = layout.chevronButtonIconDimension
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = colors.chevronButtonBackground
+        model.colors.content = colors.chevronButtonIcon
+        
+        return model
     }
 }

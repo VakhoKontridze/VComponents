@@ -10,25 +10,9 @@ import SwiftUI
 // MARK:- V Base View Model
 /// Model that describes UI
 public struct VBaseViewModel {
-    public static let chevronButtonModel: VChevronButtonModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
-    
-    var backButtonSubModel: VChevronButtonModel {
-        var model: VChevronButtonModel = .init()
-        
-        model.layout.dimension = layout.backButtonDimension
-        model.layout.iconDimension = layout.backButtonIconDimension
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
-        
-        model.colors.background = colors.backButtonBackground
-        model.colors.content = colors.backButtonIcon
-        
-        return model
-    }
     
     public init() {}
 }
@@ -84,5 +68,27 @@ extension VBaseViewModel {
         public var title: Font = .system(size: 17, weight: .semibold, design: .default)
         
         public init() {}
+    }
+}
+
+// MARK:- References
+extension VBaseViewModel {
+    public static let chevronButtonModel: VChevronButtonModel = .init()
+}
+
+// MARK:- Sub-Models
+extension VBaseViewModel {
+    var backButtonSubModel: VChevronButtonModel {
+        var model: VChevronButtonModel = .init()
+        
+        model.layout.dimension = layout.backButtonDimension
+        model.layout.iconDimension = layout.backButtonIconDimension
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = colors.backButtonBackground
+        model.colors.content = colors.backButtonIcon
+        
+        return model
     }
 }

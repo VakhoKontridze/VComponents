@@ -10,8 +10,6 @@ import SwiftUI
 // MARK:- V Secondary Button Model
 /// Model that describes UI
 public struct VSecondaryButtonModel {
-    public static let primaryButtonModel: VPrimaryButtonModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -47,21 +45,21 @@ extension VSecondaryButtonModel {
         )
         
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            enabled: VSecondaryButtonModel.primaryButtonModel.colors.textContent.enabled,
-            pressed: VSecondaryButtonModel.primaryButtonModel.colors.textContent.pressed,
-            disabled: VSecondaryButtonModel.primaryButtonModel.colors.textContent.disabled
+            enabled: primaryButtonReference.colors.textContent.enabled,
+            pressed: primaryButtonReference.colors.textContent.pressed,
+            disabled: primaryButtonReference.colors.textContent.disabled
         )
         
         public var background: StateColors = .init(
-            enabled: VSecondaryButtonModel.primaryButtonModel.colors.background.enabled,
-            pressed: VSecondaryButtonModel.primaryButtonModel.colors.background.pressed,
-            disabled: VSecondaryButtonModel.primaryButtonModel.colors.background.disabled
+            enabled: primaryButtonReference.colors.background.enabled,
+            pressed: primaryButtonReference.colors.background.pressed,
+            disabled: primaryButtonReference.colors.background.disabled
         )
         
         public var border: StateColors = .init(
-            enabled: VSecondaryButtonModel.primaryButtonModel.colors.border.enabled,
-            pressed: VSecondaryButtonModel.primaryButtonModel.colors.border.pressed,
-            disabled: VSecondaryButtonModel.primaryButtonModel.colors.border.disabled
+            enabled: primaryButtonReference.colors.border.enabled,
+            pressed: primaryButtonReference.colors.border.pressed,
+            disabled: primaryButtonReference.colors.border.disabled
         )
         
         public init() { }
@@ -105,8 +103,13 @@ extension VSecondaryButtonModel.Colors.StateOpacity {
 // MARK:- Fonts
 extension VSecondaryButtonModel {
     public struct Fonts {
-        public var title: Font = VSecondaryButtonModel.primaryButtonModel.fonts.title   // Only applicable during init with title
+        public var title: Font = primaryButtonReference.fonts.title   // Only applicable during init with title
         
         public init() {}
     }
+}
+
+// MARK:- References
+extension VSecondaryButtonModel {
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

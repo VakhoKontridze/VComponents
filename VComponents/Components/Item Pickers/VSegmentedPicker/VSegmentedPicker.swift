@@ -241,7 +241,6 @@ extension VSegmentedPicker {
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale)
             .offset(x: rowWidth * .init(selectedIndex))
-            .animation(model.animation)
             
             .foregroundColor(model.colors.indicator.for(state))
             .shadow(
@@ -256,7 +255,7 @@ extension VSegmentedPicker {
             ForEach(0..<data.count, content: { i in
                 VBaseButton(
                     isEnabled: state.isEnabled && !disabledIndexes.contains(i),
-                    action: { selectedIndex = i },
+                    action: { withAnimation(model.animations.selection, { selectedIndex = i }) },
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {
                         content(data[i])

@@ -10,30 +10,8 @@ import SwiftUI
 // MARK:- V Progress Bar Model
 /// Model that describes UI
 public struct VProgressBarModel {
-    public static let sliderModel: VSliderModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    
-    var sliderSubModel: VSliderModel {
-        var model: VSliderModel = .init()
-        
-        model.layout.height = layout.height
-        model.layout.cornerRadius = layout.cornerRadius
-        model.layout.thumbDimension = 0
-        
-        model.colors.slider.track = .init(
-            enabled: colors.track,
-            disabled: VProgressBarModel.sliderModel.colors.slider.track.disabled
-        )
-        
-        model.colors.slider.progress = .init(
-            enabled: colors.progress,
-            disabled: VProgressBarModel.sliderModel.colors.slider.progress.disabled
-        )
-        
-        return model
-    }
     
     public init() {}
 }
@@ -51,9 +29,37 @@ extension VProgressBarModel {
 // MARK:- Colors
 extension VProgressBarModel {
     public struct Colors {
-        public var track: Color = VProgressBarModel.sliderModel.colors.slider.track.enabled
-        public var progress: Color = VProgressBarModel.sliderModel.colors.slider.progress.enabled
+        public var track: Color = sliderReference.colors.slider.track.enabled
+        public var progress: Color = sliderReference.colors.slider.progress.enabled
 
         public init() {}
+    }
+}
+
+// MARK:- References
+extension VProgressBarModel {
+    public static let sliderReference: VSliderModel = .init()
+}
+
+// MARK:- Sub-Models
+extension VProgressBarModel {
+    var sliderSubModel: VSliderModel {
+        var model: VSliderModel = .init()
+        
+        model.layout.height = layout.height
+        model.layout.cornerRadius = layout.cornerRadius
+        model.layout.thumbDimension = 0
+        
+        model.colors.slider.track = .init(
+            enabled: colors.track,
+            disabled: VProgressBarModel.sliderReference.colors.slider.track.disabled
+        )
+        
+        model.colors.slider.progress = .init(
+            enabled: colors.progress,
+            disabled: VProgressBarModel.sliderReference.colors.slider.progress.disabled
+        )
+        
+        return model
     }
 }

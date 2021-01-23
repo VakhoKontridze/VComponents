@@ -10,9 +10,6 @@ import SwiftUI
 // MARK:- V Radio Button Model
 /// Model that describes UI
 public struct VRadioButtonModel {
-    public static let toggleModel: VToggleModel = .init()
-    public static let checkBoxModel: VCheckBoxModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -25,15 +22,15 @@ public struct VRadioButtonModel {
 // MARK:- Layout
 extension VRadioButtonModel {
     public struct Layout {
-        public var dimension: CGFloat = VRadioButtonModel.checkBoxModel.layout.dimension
+        public var dimension: CGFloat = checkBoxReference.layout.dimension
         
-        public var borderWith: CGFloat = VRadioButtonModel.checkBoxModel.layout.borderWith
+        public var borderWith: CGFloat = checkBoxReference.layout.borderWith
         
         public var bulletDimension: CGFloat = 8
         
-        public var hitBox: CGFloat = VRadioButtonModel.checkBoxModel.layout.hitBox
+        public var hitBox: CGFloat = checkBoxReference.layout.hitBox
         
-        public var contentMarginLeading: CGFloat = VRadioButtonModel.checkBoxModel.layout.contentMarginLeading
+        public var contentMarginLeading: CGFloat = checkBoxReference.layout.contentMarginLeading
     }
 }
 
@@ -47,23 +44,23 @@ extension VRadioButtonModel {
         )
         
         public var border: StateColors = .init(
-            off: VRadioButtonModel.checkBoxModel.colors.border.off,
-            on: VRadioButtonModel.checkBoxModel.colors.fill.on,
-            disabled: VRadioButtonModel.checkBoxModel.colors.border.disabled
+            off: checkBoxReference.colors.border.off,
+            on: checkBoxReference.colors.fill.on,
+            disabled: checkBoxReference.colors.border.disabled
         )
         
         public var bullet: StateColors = .init(
             off: .clear,
-            on: VRadioButtonModel.checkBoxModel.colors.fill.on,
+            on: checkBoxReference.colors.fill.on,
             disabled: .clear
         )
 
-        public var content: StateOpacity = VRadioButtonModel.checkBoxModel.colors.content
+        public var content: StateOpacity = checkBoxReference.colors.content
 
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            off: VRadioButtonModel.checkBoxModel.colors.textContent.off,
-            on: VRadioButtonModel.checkBoxModel.colors.textContent.on,
-            disabled: VRadioButtonModel.checkBoxModel.colors.textContent.disabled
+            off: checkBoxReference.colors.textContent.off,
+            on: checkBoxReference.colors.textContent.on,
+            disabled: checkBoxReference.colors.textContent.disabled
         )
 
         public init() {}
@@ -103,7 +100,7 @@ extension VRadioButtonModel.Colors.StateOpacity {
 // MARK:- Fonts
 extension VRadioButtonModel {
     public struct Fonts {
-        public var title: Font = VRadioButtonModel.toggleModel.fonts.title    // Only applicable during init with title
+        public var title: Font = toggleRefrence.fonts.title    // Only applicable during init with title
         
         public init() {}
     }
@@ -112,7 +109,7 @@ extension VRadioButtonModel {
 // MARK:- Animations
 extension VRadioButtonModel {
     public struct Animations {
-        public var stateChange: Animation? = VRadioButtonModel.toggleModel.animations.stateChange
+        public var stateChange: Animation? = toggleRefrence.animations.stateChange
         
         public init() {}
     }
@@ -121,8 +118,14 @@ extension VRadioButtonModel {
 // MARK:- Misc
 extension VRadioButtonModel {
     public struct Misc {
-        public var contentIsClickable: Bool = VRadioButtonModel.toggleModel.misc.contentIsClickable
+        public var contentIsClickable: Bool = toggleRefrence.misc.contentIsClickable
         
         public init() {}
     }
+}
+
+// MARK:- References
+extension VRadioButtonModel {
+    public static let toggleRefrence: VToggleModel = .init()
+    public static let checkBoxReference: VCheckBoxModel = .init()
 }

@@ -10,39 +10,10 @@ import SwiftUI
 // MARK:- V Half Modal Model
 /// Model that describes UI
 public struct VHalfModalModel {
-    public static let sheetModel: VSheetModel = .init()
-    public static let modalModel: VModalModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var animations: Animations = .init()
     public var misc: Misc = .init()
-    
-    var sheetModel: VSheetModel {
-        var model: VSheetModel = .init()
-        
-        model.layout.roundedCorners = layout.roundCorners ? .custom([.topLeft, .topRight]) : .none
-        model.layout.cornerRadius = layout.cornerRadius
-        model.layout.contentMargin = 0
-        
-        model.colors.background = colors.background
-        
-        return model
-    }
-    
-    var closeButtonSubModel: VCloseButtonModel {
-        var model: VCloseButtonModel = .init()
-        
-        model.layout.dimension = layout.closeButtonDimension
-        model.layout.iconDimension = layout.closeButtonIconDimension
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
-        
-        model.colors.background = colors.closeButtonBackground
-        model.colors.content = colors.closeButtonIcon
-        
-        return model
-    }
     
     public init() {}
 }
@@ -52,7 +23,7 @@ extension VHalfModalModel {
     public struct Layout {
         public var height: HeightType = .default
         
-        public var cornerRadius: CGFloat = VHalfModalModel.modalModel.layout.cornerRadius
+        public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
         
         public var contentMargin: ContentMargin = .init()
@@ -64,14 +35,14 @@ extension VHalfModalModel {
             }
         }
         
-        public var closeButtonDimension: CGFloat = VHalfModalModel.modalModel.layout.closeButtonDimension
-        public var closeButtonIconDimension: CGFloat = VHalfModalModel.modalModel.layout.closeButtonIconDimension
+        public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
+        public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
 
         public var dividerHeight: CGFloat = 0
         var hasDivider: Bool { dividerHeight > 0 }
 
-        public var headerSpacing: CGFloat = VHalfModalModel.modalModel.layout.headerSpacing
-        public var spacing: CGFloat = VHalfModalModel.modalModel.layout.spacing
+        public var headerSpacing: CGFloat = modalReference.layout.headerSpacing
+        public var spacing: CGFloat = modalReference.layout.spacing
         
         public var translationBelowMinHeightToDismiss: CGFloat = 100
         
@@ -117,10 +88,10 @@ extension VHalfModalModel.Layout {
     }
     
     public struct ContentMargin {
-        public var leading: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
-        public var trailing: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
-        public var top: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
-        public var bottom: CGFloat = VHalfModalModel.sheetModel.layout.contentMargin
+        public var leading: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
+        public var trailing: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
+        public var top: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
+        public var bottom: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
         
         public init() {}
     }
@@ -131,14 +102,14 @@ extension VHalfModalModel {
     public struct Colors {
         static let defaultHeader: Color = VModalModel.Colors.defaultHeader
         
-        public var background: Color = VHalfModalModel.modalModel.colors.background
+        public var background: Color = modalReference.colors.background
         
-        public var closeButtonBackground: StateColors = VHalfModalModel.modalModel.colors.closeButtonBackground
-        public var closeButtonIcon: StateColorsAndOpacity = VHalfModalModel.modalModel.colors.closeButtonIcon
+        public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
+        public var closeButtonIcon: StateColorsAndOpacity = modalReference.colors.closeButtonIcon
         
-        public var divider: Color = VHalfModalModel.modalModel.colors.divider
+        public var divider: Color = modalReference.colors.divider
         
-        public var blinding: Color = VHalfModalModel.modalModel.colors.blinding
+        public var blinding: Color = modalReference.colors.blinding
         
         public init() {}
     }
@@ -189,5 +160,40 @@ extension Set where Element == VHalfModalModel.Misc.DismissType {
     
     var hasButton: Bool {
         contains(where: { [.leading, .trailing].contains($0) })
+    }
+}
+
+// MARK:- References
+extension VHalfModalModel {
+    public static let sheetReference: VSheetModel = .init()
+    public static let modalReference: VModalModel = .init()
+}
+
+// MARK:- Sub-Models
+extension VHalfModalModel {
+    var sheetModel: VSheetModel {
+        var model: VSheetModel = .init()
+        
+        model.layout.roundedCorners = layout.roundCorners ? .custom([.topLeft, .topRight]) : .none
+        model.layout.cornerRadius = layout.cornerRadius
+        model.layout.contentMargin = 0
+        
+        model.colors.background = colors.background
+        
+        return model
+    }
+    
+    var closeButtonSubModel: VCloseButtonModel {
+        var model: VCloseButtonModel = .init()
+        
+        model.layout.dimension = layout.closeButtonDimension
+        model.layout.iconDimension = layout.closeButtonIconDimension
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = colors.closeButtonBackground
+        model.colors.content = colors.closeButtonIcon
+        
+        return model
     }
 }

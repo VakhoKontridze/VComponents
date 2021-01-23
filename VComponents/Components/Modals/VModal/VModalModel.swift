@@ -10,38 +10,10 @@ import SwiftUI
 // MARK:- V Modal Model
 /// Model that describes UI
 public struct VModalModel {
-    public static let closeButtonModel: VCloseButtonModel = .init()
-    public static let sheetModel: VSheetModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var animations: Animations = .init()
     public var misc: Misc = .init()
-    
-    var sheetSubModel: VSheetModel {
-        var model: VSheetModel = .init()
-        
-        model.layout.roundedCorners = layout.roundedCorners
-        model.layout.cornerRadius = layout.cornerRadius
-        
-        model.colors.background = colors.background
-        
-        return model
-    }
-    
-    var closeButtonSubModel: VCloseButtonModel {
-        var model: VCloseButtonModel = .init()
-        
-        model.layout.dimension = layout.closeButtonDimension
-        model.layout.iconDimension = layout.closeButtonIconDimension
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
-        
-        model.colors.background = colors.closeButtonBackground
-        model.colors.content = colors.closeButtonIcon
-        
-        return model
-    }
     
     public init() {}
 }
@@ -54,12 +26,12 @@ extension VModalModel {
             height: UIScreen.main.bounds.height * 0.6
         )
         
-        public var roundedCorners: RoundedCorners = VModalModel.sheetModel.layout.roundedCorners
-        public var cornerRadius: CGFloat = VModalModel.sheetModel.layout.cornerRadius
-        public var margin: CGFloat = VModalModel.sheetModel.layout.contentMargin
+        public var roundedCorners: RoundedCorners = sheetReference.layout.roundedCorners
+        public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
+        public var margin: CGFloat = sheetReference.layout.contentMargin
 
-        public var closeButtonDimension: CGFloat = VModalModel.closeButtonModel.layout.dimension
-        public var closeButtonIconDimension: CGFloat = VModalModel.closeButtonModel.layout.iconDimension
+        public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
+        public var closeButtonIconDimension: CGFloat = closeButtonReference.layout.iconDimension
         
         public var dividerHeight: CGFloat = 0
         var hasDivider: Bool { dividerHeight > 0 }
@@ -81,10 +53,10 @@ extension VModalModel {
     public struct Colors {
         static let defaultHeader: Color = ColorBook.primary
         
-        public var background: Color = VModalModel.sheetModel.colors.background
+        public var background: Color = sheetReference.colors.background
         
-        public var closeButtonBackground: StateColors = VModalModel.closeButtonModel.colors.background
-        public var closeButtonIcon: StateColorsAndOpacity = VModalModel.closeButtonModel.colors.content
+        public var closeButtonBackground: StateColors = closeButtonReference.colors.background
+        public var closeButtonIcon: StateColorsAndOpacity = closeButtonReference.colors.content
         
         public var divider: Color = .clear
         
@@ -144,5 +116,39 @@ extension Set where Element == VModalModel.Misc.DismissType {
     
     var hasButton: Bool {
         contains(where: { [.leading, .trailing].contains($0) })
+    }
+}
+
+// MARK:- References
+extension VModalModel {
+    public static let closeButtonReference: VCloseButtonModel = .init()
+    public static let sheetReference: VSheetModel = .init()
+}
+
+// MARK:- Sub-Models
+extension VModalModel {
+    var sheetSubModel: VSheetModel {
+        var model: VSheetModel = .init()
+        
+        model.layout.roundedCorners = layout.roundedCorners
+        model.layout.cornerRadius = layout.cornerRadius
+        
+        model.colors.background = colors.background
+        
+        return model
+    }
+    
+    var closeButtonSubModel: VCloseButtonModel {
+        var model: VCloseButtonModel = .init()
+        
+        model.layout.dimension = layout.closeButtonDimension
+        model.layout.iconDimension = layout.closeButtonIconDimension
+        model.layout.hitBoxHor = 0
+        model.layout.hitBoxVer = 0
+        
+        model.colors.background = colors.closeButtonBackground
+        model.colors.content = colors.closeButtonIcon
+        
+        return model
     }
 }

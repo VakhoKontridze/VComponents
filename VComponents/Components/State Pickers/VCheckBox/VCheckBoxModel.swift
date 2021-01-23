@@ -10,8 +10,6 @@ import SwiftUI
 // MARK:- V CheckBox Model
 /// Model that describes UI
 public struct VCheckBoxModel {
-    public static let toggleModel: VToggleModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -31,7 +29,7 @@ extension VCheckBoxModel {
         
         public var iconDimension: CGFloat = 10
         
-        public var hitBox: CGFloat = VCheckBoxModel.toggleModel.layout.contentMarginLeading
+        public var hitBox: CGFloat = toggleReference.layout.contentMarginLeading
         
         public var contentMarginLeading: CGFloat = 0
     }
@@ -42,8 +40,8 @@ extension VCheckBoxModel {
     public struct Colors {
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
-            on: VCheckBoxModel.toggleModel.colors.fill.on,
-            intermediate: VCheckBoxModel.toggleModel.colors.fill.on,
+            on: toggleReference.colors.fill.on,
+            intermediate: toggleReference.colors.fill.on,
             disabled: ColorBook.primaryInverted
         )
         
@@ -56,21 +54,21 @@ extension VCheckBoxModel {
         
         public var icon: StateColors = .init(
             off: .clear,
-            on: VCheckBoxModel.toggleModel.colors.thumb.off,
-            intermediate: VCheckBoxModel.toggleModel.colors.thumb.on,
+            on: toggleReference.colors.thumb.off,
+            intermediate: toggleReference.colors.thumb.on,
             disabled: .clear
         )
 
         public var content: StateOpacity = .init(
-            pressedOpacity: VCheckBoxModel.toggleModel.colors.content.pressedOpacity,
-            disabledOpacity: VCheckBoxModel.toggleModel.colors.content.disabledOpacity
+            pressedOpacity: toggleReference.colors.content.pressedOpacity,
+            disabledOpacity: toggleReference.colors.content.disabledOpacity
         )
 
         public var textContent: StateColors = .init(   // Only applicable during init with title
-            off: VCheckBoxModel.toggleModel.colors.textContent.off,
-            on: VCheckBoxModel.toggleModel.colors.textContent.on,
-            intermediate: VCheckBoxModel.toggleModel.colors.textContent.on,
-            disabled: VCheckBoxModel.toggleModel.colors.textContent.disabled
+            off: toggleReference.colors.textContent.off,
+            on: toggleReference.colors.textContent.on,
+            intermediate: toggleReference.colors.textContent.on,
+            disabled: toggleReference.colors.textContent.disabled
         )
 
         public init() {}
@@ -124,7 +122,7 @@ extension VCheckBoxModel.Colors.StateOpacity {
 // MARK:- Fonts
 extension VCheckBoxModel {
     public struct Fonts {
-        public var title: Font = VCheckBoxModel.toggleModel.fonts.title    // Only applicable during init with title
+        public var title: Font = toggleReference.fonts.title    // Only applicable during init with title
         
         public init() {}
     }
@@ -133,7 +131,7 @@ extension VCheckBoxModel {
 // MARK:- Animations
 extension VCheckBoxModel {
     public struct Animations {
-        public var stateChange: Animation? = VCheckBoxModel.toggleModel.animations.stateChange
+        public var stateChange: Animation? = toggleReference.animations.stateChange
         
         public init() {}
     }
@@ -142,8 +140,13 @@ extension VCheckBoxModel {
 // MARK:- Misc
 extension VCheckBoxModel {
     public struct Misc {
-        public var contentIsClickable: Bool = VCheckBoxModel.toggleModel.misc.contentIsClickable
+        public var contentIsClickable: Bool = toggleReference.misc.contentIsClickable
         
         public init() {}
     }
+}
+
+// MARK:- References
+extension VCheckBoxModel {
+    public static let toggleReference: VToggleModel = .init()
 }

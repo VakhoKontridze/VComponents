@@ -14,12 +14,6 @@ public struct VBaseListModel {
     public var colors: Colors = .init()
     public var misc: Misc = .init()
     
-    var lazyListSubModel: VLazyListModelVertical {
-        var model: VLazyListModelVertical = .init()
-        model.misc.showIndicator = misc.showIndicator
-        return model
-    }
-    
     public init() {}
 }
 
@@ -53,5 +47,14 @@ extension VBaseListModel {
         public var showIndicator: Bool = true
         
         init() {}
+    }
+}
+
+// MARK:- Sub-Models
+extension VBaseListModel {
+    var lazyListSubModel: VLazyListModelVertical {
+        var model: VLazyListModelVertical = .init()
+        model.misc.showIndicator = misc.showIndicator
+        return model
     }
 }

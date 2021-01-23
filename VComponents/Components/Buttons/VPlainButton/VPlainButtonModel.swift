@@ -10,8 +10,6 @@ import SwiftUI
 // MARK:- V Plain Model Button
 /// Model that describes UI
 public struct VPlainButtonModel {
-    public static let squareButtonModel: VSquareButtonModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -76,8 +74,13 @@ extension VPlainButtonModel.Colors.StateOpacity {
 // MARK:- Fonts
 extension VPlainButtonModel {
     public struct Fonts {
-        public var title: Font = VPlainButtonModel.squareButtonModel.fonts.title    // Only applicable during init with title
+        public var title: Font = squareButtonReference.fonts.title    // Only applicable during init with title
         
         public init() {}
     }
+}
+
+// MARK:- References
+extension VPlainButtonModel {
+    public static let squareButtonReference: VSquareButtonModel = .init()
 }

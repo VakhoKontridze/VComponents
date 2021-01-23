@@ -10,8 +10,6 @@ import SwiftUI
 // MARK:- V Toggle Model
 /// Model that describes UI
 public struct VToggleModel {
-    public static let primaryButtonModel: VPrimaryButtonModel = .init()
-    
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
@@ -45,7 +43,7 @@ extension VToggleModel {
     public struct Colors {
         public var fill: StateColors = .init(
             off: .init(componentAsset: "Toggle.Fill.off"),
-            on: VToggleModel.primaryButtonModel.colors.background.enabled,
+            on: primaryButtonReference.colors.background.enabled,
             disabled: .init(componentAsset: "Toggle.Fill.disabled")
         )
         
@@ -133,4 +131,9 @@ extension VToggleModel {
         
         public init() {}
     }
+}
+
+// MARK:- References
+extension VToggleModel {
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

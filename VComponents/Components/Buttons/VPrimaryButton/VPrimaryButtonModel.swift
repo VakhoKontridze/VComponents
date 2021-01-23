@@ -14,12 +14,6 @@ public struct VPrimaryButtonModel {
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
     
-    var spinnerSubModel: VSpinnerModelContinous {
-        var model: VSpinnerModelContinous = .init()
-        model.colors.spinner = colors.loader
-        return model
-    }
-    
     public init() {}
 }
 
@@ -127,5 +121,14 @@ extension VPrimaryButtonModel {
         public var title: Font = .system(size: 16, weight: .semibold, design: .default)  // Only applicable during init with title
         
         public init() {}
+    }
+}
+
+// MARK:- Sub-Models
+extension VPrimaryButtonModel {
+    var spinnerSubModel: VSpinnerModelContinous {
+        var model: VSpinnerModelContinous = .init()
+        model.colors.spinner = colors.loader
+        return model
     }
 }
