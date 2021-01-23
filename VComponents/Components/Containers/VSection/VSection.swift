@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Section
 /// Container component that draws a background, and computes views on demad from an underlying collection of identified data
 ///
+/// Component ca be initialized with data or free content
+///
 /// Model, layout, and title can be passed as parameters
 ///
 /// There are three posible layouts:
@@ -38,7 +40,7 @@ import SwiftUI
 ///         VSection(
 ///             title: "Lorem ipsum dolor sit amet",
 ///             data: data,
-///             content: { row in
+///             rowContent: { row in
 ///                 Text(row.title)
 ///                     .frame(maxWidth: .infinity, alignment: .leading)
 ///             }
@@ -48,11 +50,12 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VSection<Data, ID, Content>: View
+public struct VSection<Content, Data, ID, RowContent>: View
     where
+        Content: View,
         Data: RandomAccessCollection,
         ID: Hashable,
-        Content: View
+        RowContent: View
     {
     // MARK: Properties
     private let model: VSectionModel
@@ -61,25 +64,30 @@ public struct VSection<Data, ID, Content>: View
     
     private let title: String?
     
-    private let data: Data
-    private let id: KeyPath<Data.Element, ID>
-    private let content: (Data.Element) -> Content
+    private let contentType: ContentType
+    private enum ContentType {
+        case freeForm(content: () -> Content)
+        case list(data: Data, id: KeyPath<Data.Element, ID>, rowContent: (Data.Element) -> RowContent)
+    }
     
     // MARK: Initializers
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .default,
         title: String? = nil,
-        data: Data,
-        id: KeyPath<Data.Element, ID>,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
-    ) {
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where
+            Data == Array<Never>,
+            ID == Never,
+            RowContent == Never
+    {
         self.model = model
         self.layoutType = layoutType
         self.title = title
-        self.data = data
-        self.id = id
-        self.content = content
+        self.contentType = .freeForm(
+            content: content
+        )
     }
     
     public init(
@@ -87,9 +95,30 @@ public struct VSection<Data, ID, Content>: View
         layout layoutType: VSectionLayoutType = .default,
         title: String? = nil,
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        id: KeyPath<Data.Element, ID>,
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+    )
+        where Content == Never
+    {
+        self.model = model
+        self.layoutType = layoutType
+        self.title = title
+        self.contentType = .list(
+            data: data,
+            id: id,
+            rowContent: rowContent
+        )
+    }
+    
+    public init(
+        model: VSectionModel = .init(),
+        layout layoutType: VSectionLayoutType = .default,
+        title: String? = nil,
+        data: Data,
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
         where
+            Content == Never,
             Data.Element: Identifiable,
             ID == Data.Element.ID
     {
@@ -99,7 +128,7 @@ public struct VSection<Data, ID, Content>: View
             title: title,
             data: data,
             id: \Data.Element.id,
-            content: content
+            rowContent: rowContent
         )
     }
 }
@@ -119,17 +148,26 @@ extension VSection {
                     .padding(.horizontal, model.layout.titleMarginHor)
             }
             
-            VSheet(model: model.sheetSubModel, content: {
-                VBaseList(
-                    model: model.baseListSubModel,
-                    layout: layoutType,
-                    data: data,
-                    id: id,
-                    content: content
-                )
-                    .padding([.leading, .top, .bottom], model.layout.contentMargin)
-            })
+            VSheet(model: model.sheetSubModel, content: { contentView })
         })
+    }
+    
+    @ViewBuilder private var contentView: some View {
+        switch contentType {
+        case .freeForm(let content):
+            content()
+                .padding(model.layout.contentMargin)
+            
+        case .list(let data, let id, let rowContent):
+            VBaseList(
+                model: model.baseListSubModel,
+                layout: layoutType,
+                data: data,
+                id: id,
+                content: rowContent
+            )
+                .padding([.leading, .top, .bottom], model.layout.contentMargin)
+        }
     }
 }
 
@@ -140,7 +178,7 @@ struct VSection_Previews: PreviewProvider {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
             
-            VSection(title: "Lorem ipsum dolor sit amet", data: VBaseList_Previews.rows, content: { row in
+            VSection(title: "Lorem ipsum dolor sit amet", data: VBaseList_Previews.rows, rowContent: { row in
                 VBaseList_Previews.rowContent(title: row.title, color: row.color)
             })
                 .padding(20)
