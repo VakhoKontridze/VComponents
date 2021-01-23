@@ -121,15 +121,17 @@ extension VSlider {
 // MARK:- Drag
 private extension VSlider {
     func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
-        let range: Double = max - min
-        let width: Double = .init(proxy.size.width)
-        let draggedValue: Double = .init(drag.location.x)
+        let rawValue: Double = {
+            let value: Double = .init(drag.location.x)
+            let range: Double = max - min
+            let width: Double = .init(proxy.size.width)
 
-        let rawValue: Double = (draggedValue / width) * range
+            return (value / width) * range + min
+        }()
         
         let valueFixed: Double = rawValue.fixedInRange(min: min, max: max, step: step)
         
-        withAnimation(model.animations.progress, { value = valueFixed })
+        withAnimation(model.animations.progress, { self.value = valueFixed })
         
         action?(true)
     }
@@ -142,9 +144,9 @@ private extension VSlider {
 // MARK:- Progress
 private extension VSlider {
     func progressWidth(in proxy: GeometryProxy) -> CGFloat {
+        let value: CGFloat = .init(self.value - min)
         let range: CGFloat = .init(max - min)
         let width: CGFloat = proxy.size.width
-        let value: CGFloat = .init(self.value)
 
         return (value / range) * width
     }

@@ -155,11 +155,13 @@ extension VRangeSlider {
 // MARK:- Drag
 private extension VRangeSlider {
     func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
-        let range: Double = max - min
-        let width: Double = .init(proxy.size.width)
-        let drag: Double = .init(drag.location.x)
+        let rawValue: Double = {
+            let value: Double = .init(drag.location.x)
+            let range: Double = max - min
+            let width: Double = .init(proxy.size.width)
 
-        let rawValue: Double = (drag / width) * range
+            return (value / width) * range + min
+        }()
 
         let valueFixed: Double = {
             switch thumb {
@@ -203,15 +205,14 @@ private extension VRangeSlider {
 // MARK:- Progress
 private extension VRangeSlider {
     func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
-        let range: CGFloat = .init(max - min)
-        let width: CGFloat = proxy.size.width
-
         let value: CGFloat = {
             switch thumb {
-            case .low: return .init(valueLow)
-            case .high: return .init(valueHigh)
+            case .low: return .init(valueLow - min)
+            case .high: return .init(valueHigh - min)
             }
         }()
+        let range: CGFloat = .init(max - min)
+        let width: CGFloat = proxy.size.width
 
         switch thumb {
         case .low: return (value / range) * width
@@ -223,9 +224,9 @@ private extension VRangeSlider {
 // MARK:- Thumb
 private extension VRangeSlider {
     func thumbOffset(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
-        let width: CGFloat = proxy.size.width
         let progressW: CGFloat = progress(in: proxy, thumb: thumb)
         let thumbW: CGFloat = model.layout.thumbDimension
+        let width: CGFloat = proxy.size.width
 
         switch thumb {
         case .low: return progressW - thumbW / 2
