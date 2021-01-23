@@ -84,6 +84,7 @@ extension VSlider {
                 .disabled(state.isDisabled)
         })
             .frame(height: model.layout.height)
+            .padding(.horizontal, model.layout.thumbDimension / 2)
     }
 
     private var track: some View {
