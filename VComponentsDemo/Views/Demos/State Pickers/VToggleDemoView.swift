@@ -13,88 +13,72 @@ struct VToggleDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Toggle"
     
-    private let toggleTitle: String = "Lorem ipsum"
+    @State private var state: VToggleState = .on
+    @State private var contentType: ComponentContentType = .text
+    @State private var contentIsClickable: Bool = VToggleModel.Misc().contentIsClickable
+    @State private var loweredOpacityWhenPressed: Bool = VToggleModel.Colors().content.pressedOpacity != 1
+    @State private var loweredOpacityWhenDisabled: Bool = VToggleModel.Colors().content.disabledOpacity != 1
     
-    private func toggleContent() -> some View { DemoIconContentView() }
-    
-    let nonClickableContentModel: VToggleModel = {
+    private var model: VToggleModel {
         var model: VToggleModel = .init()
-        model.misc.contentIsClickable = false
+        
+        model.colors.content.pressedOpacity = loweredOpacityWhenPressed ? 0.5 : 1
+        model.colors.content.disabledOpacity = loweredOpacityWhenDisabled ? 0.5 : 1
+        
+        model.misc.contentIsClickable = contentIsClickable
+        
         return model
-    }()
-    
-    let noLoweredOpacityWhenPressedModel: VToggleModel = {
-        var model: VToggleModel = .init()
-        model.colors.content.pressedOpacity = 1
-        return model
-    }()
-    
-    let noLoweredOpacityWhenDisabledModel: VToggleModel = {
-        var model: VToggleModel = .init()
-        model.colors.content.disabledOpacity = 1
-        return model
-    }()
-    
-    @State private var toggle1State: VToggleState = .on
-    @State private var toggle2State: VToggleState = .on
-    @State private var toggle3State: VToggleState = .on
-    @State private var toggle4State: VToggleState = .on
-    @State private var toggle5State: VToggleState = .on
-    @State private var toggle6State: VToggleState = .on
+    }
 }
 
 // MARK:- Body
 extension VToggleDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("No Content"), content: {
-                    VToggle(state: $toggle1State)
-                })
-                
-                DemoRowView(type: .titled("Text"), content: {
-                    VToggle(state: $toggle2State, title: toggleTitle)
-                })
-                
-                DemoRowView(type: .titled("Icon"), content: {
-                    VToggle(state: $toggle3State, content: toggleContent)
-                })
-                
-                DemoRowView(type: .titled("Non-clickable Content"), content: {
-                    VToggle(model: nonClickableContentModel, state: $toggle4State, title: toggleTitle)
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                    VToggle(model: noLoweredOpacityWhenPressedModel, state: $toggle5State, title: toggleTitle)
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                    VToggle(model: noLoweredOpacityWhenDisabledModel, state: $toggle6State, title: toggleTitle)
-                })
-            })
+            DemoView(component: component, settingsSections: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: {
-                        [toggle1State, toggle2State, toggle3State, toggle4State, toggle5State, toggle6State]
-                            .contains(.disabled)
-                    },
-                    set: {
-                        toggle1State = $0 ? .disabled : .off
-                        toggle2State = $0 ? .disabled : .off
-                        toggle3State = $0 ? .disabled : .off
-                        toggle4State = $0 ? .disabled : .off
-                        toggle5State = $0 ? .disabled : .off
-                        toggle6State = $0 ? .disabled : .off
-                    }
-                ),
-                title: "Disabled"
-            )
+    @ViewBuilder private func component() -> some View {
+        switch contentType {
+        case .text: VToggle(model: model, state: $state, title: toggleTitle)
+        case .icon: VToggle(model: model, state: $state, content: toggleContent)
+        }
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
         })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $contentType, header: "Content")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $loweredOpacityWhenPressed, title: "Low Pressed Opacity", description: "Content lowers opacity when pressed")
+            
+            ToggleSettingView(isOn: $loweredOpacityWhenDisabled, title: "Low Disabled Opacity", description: "Content lowers opacity when disabled")
+        })
+    }
+    
+    private var toggleTitle: String { "Lorem ipsum" }
+    
+    private func toggleContent() -> some View { DemoIconContentView() }
+}
+
+// MARK:- Helpers
+extension VToggleState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .off: return "Off"
+        case .on: return "On"
+        case .disabled: return "Disabled"
+        }
     }
 }
 

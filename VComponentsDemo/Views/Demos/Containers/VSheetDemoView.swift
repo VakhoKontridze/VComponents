@@ -13,18 +13,13 @@ struct VSheetDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Sheet"
     
-    private func sheetContent() -> some View {
-        VText(
-            title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.",
-            color: ColorBook.primary,
-            font: .body,
-            type: .multiLine(limit: nil, alignment: .center)
-        )
-    }
-    
-    private func model(roundedCorners: VSheetModel.Layout.RoundedCorners) -> VSheetModel {
+    @State private var roundedCorners: VSheetRoundedCornersHelper = VSheetModel.Layout.RoundedCorners.default.helperType
+
+    private var model: VSheetModel {
         var model: VSheetModel = .init()
-        model.layout.roundedCorners = roundedCorners
+        
+        model.layout.roundedCorners = roundedCorners.roundedCorner
+        
         return model
     }
 }
@@ -33,24 +28,64 @@ struct VSheetDemoView: View {
 extension VSheetDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .freeFormFlexible, content: {
-                DemoRowView(type: .titled("Round All"), content: {
-                    VSheet(model: model(roundedCorners: .all), content: sheetContent)
-                })
-                
-                DemoRowView(type: .titled("Round Top"), content: {
-                    VSheet(model: model(roundedCorners: .top), content: sheetContent)
-                })
-                
-                DemoRowView(type: .titled("Round Bottom"), content: {
-                    VSheet(model: model(roundedCorners: .bottom), content: sheetContent)
-                })
-                
-                DemoRowView(type: .titled("Round Custom"), content: {
-                    VSheet(model: model(roundedCorners: .custom([.topLeft, .bottomRight])), content: sheetContent)
-                })
-            })
+            DemoView(hasLayer: false, component: component, settings: settings)
         })
+    }
+    
+    private func component() -> some View {
+        VSheet(model: model, content: {
+            VText(
+                type: .multiLine(limit: nil, alignment: .center),
+                font: .body,
+                color: ColorBook.primary,
+                title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."
+            )
+        })
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VWheelPicker(selection: $roundedCorners, header: "Rounded Corners")
+    }
+}
+
+// MARK:- Helpers
+private enum VSheetRoundedCornersHelper: Int, VPickableTitledItem {
+    case all
+    case top
+    case bottom
+    case custom
+    case none
+    
+    var pickerTitle: String {
+        switch self {
+        case .all: return "All"
+        case .top: return "Top"
+        case .bottom: return "Bottom"
+        case .custom: return "Custom"
+        case .none: return "None"
+        }
+    }
+    
+    var roundedCorner: VSheetModel.Layout.RoundedCorners {
+        switch self {
+        case .all: return .all
+        case .top: return .top
+        case .bottom: return .bottom
+        case .custom: return .custom([.topLeft, .bottomRight])
+        case .none: return .none
+        }
+    }
+}
+
+private extension VSheetModel.Layout.RoundedCorners {
+    var helperType: VSheetRoundedCornersHelper {
+        switch self {
+        case .all: return .all
+        case .top: return .top
+        case .bottom: return .bottom
+        case .custom: return .custom
+        case .none: return .none
+        }
     }
 }
 

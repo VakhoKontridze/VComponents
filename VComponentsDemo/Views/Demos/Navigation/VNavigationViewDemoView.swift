@@ -18,21 +18,23 @@ struct VNavigationViewDemoView: View {
 extension VNavigationViewDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .section, content: {
-                VStack(spacing: 20, content: {
-                    VText(
-                        title: "Navigation View should only ever be used on a root view. Continue?",
-                        color: ColorBook.primary,
-                        font: .body,
-                        type: .multiLine(limit: nil, alignment: .center)
-                    )
-                    
-                    VSecondaryButton(
-                        action: { SceneDelegate.setRootView(to: NavigationDemoView1()) },
-                        title: "Start Demo"
-                    )
-                })
-            })
+            DemoView(component: component)
+        })
+    }
+    
+    private func component() -> some View {
+        VStack(spacing: 20, content: {
+            VText(
+                type: .multiLine(limit: nil, alignment: .center),
+                font: .body,
+                color: ColorBook.primary,
+                title: "Navigation View should only ever be used on a root view. Continue?"
+            )
+            
+            VSecondaryButton(
+                action: { SceneDelegate.setRootView(to: NavigationDemoView1()) },
+                title: "Start Demo"
+            )
         })
     }
 }
@@ -48,7 +50,7 @@ private struct NavigationDemoView1: View {
                         "You are on Home page",
                         "From here you can navigate to Details"
                     ].joined(separator: "\n\n"),
-                    destination: NavigationDemoView2()
+                    destination: NavigationDemoView3()
                 )
             })
         })
@@ -130,10 +132,10 @@ extension NavigationDemoView {
                 .edgesIgnoringSafeArea(.all)
             
             VText(
-                title: instruction,
-                color: ColorBook.primary,
+                type: .multiLine(limit: nil, alignment: .center),
                 font: .system(size: 16, weight: .semibold, design: .default),
-                type: .multiLine(limit: nil, alignment: .center)
+                color: ColorBook.primary,
+                title: instruction
             )
                 .frame(maxHeight: .infinity, alignment: .top)
                 .padding(.top, 50)

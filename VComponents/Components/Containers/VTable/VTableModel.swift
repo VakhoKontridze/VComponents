@@ -23,10 +23,11 @@ extension VTableModel {
         public var cornerRadius: CGFloat = sectionReference.layout.cornerRadius
         public var contentMargin: CGFloat = sectionReference.layout.contentMargin
         
-        public var headerMarginBottom: CGFloat = 10
-        public var itemSpacing: CGFloat = sectionReference.layout.itemSpacing
-        public var footerMarginTop: CGFloat = 10
         public var sectionSpacing: CGFloat = 20
+        public var itemSpacing: CGFloat = sectionReference.layout.itemSpacing
+        
+        public var headerMarginBottom: CGFloat = 10
+        public var footerMarginTop: CGFloat = 10
         
         public var dividerHeight: CGFloat = sectionReference.layout.dividerHeight
         

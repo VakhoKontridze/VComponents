@@ -13,115 +13,130 @@ struct VSquareButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Square Button"
     
-    private let buttonTitle: String = "Lorem"
+    @State private var state: VSquareButtonState = .enabled
+    @State private var contentType: ComponentContentType = .text
+    @State private var shapeType: SquareButtonShapeType = .init(dimension: VSquareButtonModel.Layout().dimension, radius: VSquareButtonModel.Layout().cornerRadius)
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VSquareButtonModel.Layout().hitBoxHor)
+    @State private var borderType: ButtonComponentBorderType = .borderless
     
-    private func buttonContent() -> some View { DemoIconContentView(color: ColorBook.primaryInverted) }
-
-    @State private var buttonState: VSquareButtonState = .enabled
-    
-    private let circularModel: VSquareButtonModel = {
-        var model: VSquareButtonModel = .init()
-        
-        model.layout.cornerRadius = VSquareButtonModel.Layout().dimension / 2
-        
-        return model
-    }()
-
-    private let borderedModel: VSquareButtonModel = {
+    private var model: VSquareButtonModel {
         let defaultModel: VSquareButtonModel = .init()
         
         var model: VSquareButtonModel = .init()
         
-        model.colors.textContent.enabled = defaultModel.colors.background.enabled
-        model.colors.textContent.pressed = defaultModel.colors.background.pressed
-        model.colors.textContent.disabled = defaultModel.colors.background.disabled
+        switch shapeType {
+        case .circular:
+            model.layout.cornerRadius = model.layout.dimension / 2
+            
+        case .rounded:
+            model.layout.cornerRadius = model.layout.cornerRadius == model.layout.dimension/2 ? 16 : model.layout.cornerRadius
+        }
         
-        model.colors.background.enabled = .init("PrimaryButtonBordered.Background.enabled")
-        model.colors.background.pressed = .init("PrimaryButtonBordered.Background.pressed")
-        model.colors.background.disabled = .init("PrimaryButtonBordered.Background.disabled")
-        
-        model.colors.border.enabled = defaultModel.colors.background.enabled
-        model.colors.border.pressed = defaultModel.colors.background.disabled   // It's better this way
-        model.colors.border.disabled = defaultModel.colors.background.disabled
-        
+        switch hitBoxType {
+        case .clipped:
+            model.layout.hitBoxHor = 0
+            model.layout.hitBoxVer = 0
+            
+        case .extended:
+            model.layout.hitBoxHor = defaultModel.layout.hitBoxHor.isZero ? 5 : defaultModel.layout.hitBoxHor
+            model.layout.hitBoxVer = defaultModel.layout.hitBoxVer.isZero ? 5 : defaultModel.layout.hitBoxVer
+        }
+
+        if borderType == .bordered {
+            model.layout.borderWidth = 1
+            
+            model.colors.textContent = .init(
+                enabled: defaultModel.colors.background.enabled,
+                pressed: defaultModel.colors.background.pressed,
+                disabled: defaultModel.colors.background.disabled
+            )
+            
+            model.colors.background = .init(
+                enabled: .init("PrimaryButtonBordered.Background.enabled"),
+                pressed: .init("PrimaryButtonBordered.Background.pressed"),
+                disabled: .init("PrimaryButtonBordered.Background.disabled")
+            )
+            
+            model.colors.border = .init(
+                enabled: defaultModel.colors.background.enabled,
+                pressed: defaultModel.colors.background.disabled,   // It's better this way
+                disabled: defaultModel.colors.background.disabled
+            )
+        }
+
         return model
-    }()
-    
-    
-    private let largerHitBoxButtonModel: VSquareButtonModel = {
-        var model: VSquareButtonModel = .init()
-        
-        model.layout.hitBoxHor = 10
-        model.layout.hitBoxVer = 10
-        
-        return model
-    }()
+    }
 }
 
 // MARK:- Body
 extension VSquareButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Text"), content: {
-                    VSquareButton(state: buttonState, action: action, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Image"), content: {
-                    VSquareButton(state: buttonState, action: action, content: buttonContent)
-                })
-
-                DemoRowView(type: .titled("Image and Text"), content: {
-                    VSquareButton(state: buttonState, action: action, content: {
-                        HStack(spacing: 5, content: {
-                            buttonContent()
-                            
-                            VText(
-                                title: "A",
-                                color: ColorBook.primaryInverted,
-                                font: VSquareButtonModel.Fonts().title,
-                                type: .oneLine
-                            )
-                        })
-                    })
-                })
-                
-                DemoRowView(type: .titled("Cirular"), content: {
-                    VSquareButton(model: circularModel, state: buttonState, action: action, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Bordered"), content: {
-                    VSquareButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Larger Hit Box"), content: {
-                    VSquareButton(model: largerHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
-        })
+    @ViewBuilder private func component() -> some View {
+        switch contentType {
+        case .text: VSquareButton(model: model, state: state, action: {}, title: buttonTitle)
+        case .icon: VSquareButton(model: model, state: state, action: {}, content: buttonContent)
+        }
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $state, header: "State")
+        
+        VSegmentedPicker(selection: $contentType, header: "Content")
+        
+        VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+        
+        VSegmentedPicker(selection: $borderType, header: "Border")
+    }
+    
+    private var buttonTitle: String { "Lorem" }
+
+    private func buttonContent() -> some View {
+        let color: Color = {
+            switch borderType {
+            case .bordered: return VSquareButtonModel().colors.background.enabled
+            case .borderless: return ColorBook.primaryInverted
+            }
+        }()
+        
+        return DemoIconContentView(dimension: 20, color: color)
     }
 }
 
-// MARK:- Action
-private extension VSquareButtonDemoView {
-    func action() {
-        print("Pressed")
+// MARK:- Helpers
+extension VSquareButtonState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
     }
 }
 
-// MARK: Preview
+private enum SquareButtonShapeType: Int, VPickableTitledItem {
+    case rounded
+    case circular
+    
+    var pickerTitle: String {
+        switch self {
+        case .rounded: return "Rounded"
+        case .circular: return "Circular"
+        }
+    }
+    
+    init(dimension: CGFloat, radius: CGFloat) {
+        switch radius {
+        case dimension/2: self = .circular
+        default: self = .rounded
+        }
+    }
+}
+
+// MARK:- Preview
 struct VSquareButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSquareButtonDemoView()

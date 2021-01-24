@@ -107,25 +107,24 @@ extension View {
     {
         let dialog = dialog()
         
-        return ZStack(content: {
-            self
-            
-            if isPresented.wrappedValue {
-                UIKitRepresentable(
-                    isPresented: isPresented,
-                    content:
-                        _VDialog(
-                            model: dialog.model,
-                            isPresented: isPresented,
-                            dialog: dialog.dialogType,
-                            title: dialog.title,
-                            description: dialog.description,
-                            content: dialog.content,
-                            onAppear: dialog.appearAction,
-                            onDisappear: dialog.disappearAction
-                        )
-                )
-            }
-        })
+        return self
+            .overlay(Group(content: {
+                if isPresented.wrappedValue {
+                    UIKitRepresentable(
+                        isPresented: isPresented,
+                        content:
+                            _VDialog(
+                                model: dialog.model,
+                                isPresented: isPresented,
+                                dialog: dialog.dialogType,
+                                title: dialog.title,
+                                description: dialog.description,
+                                content: dialog.content,
+                                onAppear: dialog.appearAction,
+                                onDisappear: dialog.disappearAction
+                            )
+                    )
+                }
+            }))
     }
 }

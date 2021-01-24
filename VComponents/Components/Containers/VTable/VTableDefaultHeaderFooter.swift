@@ -23,10 +23,10 @@ public struct VTableDefaultHeaderFooter: View {
 extension VTableDefaultHeaderFooter {
     public var body: some View {
         VText(
-            title: title,
-            color: VTableModel.Colors.defaultHeaderFooter,
+            type: .oneLine,
             font: VTableModel.Fonts.headerFooter,
-            type: .oneLine
+            color: VTableModel.Colors.defaultHeaderFooter,
+            title: title
         )
             .frame(maxWidth: .infinity, alignment: .leading)
     }

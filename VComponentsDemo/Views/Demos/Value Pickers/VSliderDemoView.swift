@@ -12,126 +12,171 @@ import VComponents
 struct VSliderDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Slider"
-
-    @State private var sliderState: VSliderState = .enabled
-
-    @State private var slider1Value: Double = 0.5
-    @State private var slider2Value: Double = 0.5
-    @State private var slider3Value: Double = 0.5
-    @State private var slider4Value: Double = 0.5
-    @State private var slider5Value: Double = 0.5
     
-    private let thumbBorderModel: VSliderModel = {
-        var model: VSliderModel = .init()
-        
-        model.layout.thumbBorderWidth = 1
-        model.layout.thumbShadowRadius = 0
-        
-        model.colors.thumb.border.enabled = .black
-        model.colors.thumb.border.disabled = .gray
-        
-        model.colors.thumb.shadow.enabled = .clear
-        model.colors.thumb.shadow.disabled = .clear
-        
-        return model
-    }()
-
-    private let plainModel: VSliderModel = {
-        var model: VSliderModel = .init()
-        
-        model.layout.thumbDimension = 0
-        model.layout.thumbCornerRadius = 0
-        model.layout.thumbBorderWidth = 0
-        model.layout.thumbShadowRadius = 0
-        
-        model.colors.thumb.fill.enabled = .clear
-        model.colors.thumb.fill.disabled = .clear
-        
-        model.colors.thumb.border.enabled = .clear
-        model.colors.thumb.border.disabled = .clear
-        
-        model.colors.thumb.shadow.enabled = .clear
-        model.colors.thumb.shadow.disabled = .clear
-        
-        return model
-    }()
+    @State private var value: Double = 0.5
+    @State private var state: VSliderState = .enabled
+    @State private var thumbType: SliderThumbType = .standard
+    @State private var hasStep: Bool = false
+    @State private var stepValue: Double = 0.1
+    @State private var progressAnimation: Bool = VSliderModel.Animations().progress != nil
     
-    private let animationModel: VSliderModel = {
+    private let minStepValue: Double = 0.1
+    private let maxStepValue: Double = 0.25
+    
+    private var model: VSliderModel {
+        let defaultModel: VSliderModel = .init()
+        
         var model: VSliderModel = .init()
         
-        model.animations.progress = .default
+        switch thumbType {
+        case .standard:
+            break
+        
+        case .bordered:
+            model.layout.thumbBorderWidth = 1
+            model.layout.thumbShadowRadius = 0
+
+            model.colors.thumb.border = .init(
+                enabled: .black,
+                disabled: .gray
+            )
+
+            model.colors.thumb.shadow = .init(
+                enabled: .clear,
+                disabled: .clear
+            )
+        
+        case .none:
+            model.layout.thumbDimension = 0
+            model.layout.thumbCornerRadius = 0
+            model.layout.thumbBorderWidth = 0
+            model.layout.thumbShadowRadius = 0
+
+            model.colors.thumb.fill = .init(
+                enabled: .clear,
+                disabled: .clear
+            )
+
+            model.colors.thumb.border = .init(
+                enabled: .clear,
+                disabled: .clear
+            )
+
+            model.colors.thumb.shadow = .init(
+                enabled: .clear,
+                disabled: .clear
+            )
+        }
+        
+        model.animations.progress = progressAnimation ? (defaultModel.animations.progress == nil ? .default : defaultModel.animations.progress) : nil
         
         return model
-    }()
+    }
 }
 
 // MARK:- Body
 extension VSliderDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Default"), content: {
-                    Self.rowView(title: .init(slider1Value), content: {
-                        VSlider(state: sliderState, value: $slider1Value)
-                    })
-                })
-                
-                DemoRowView(type: .titled("Stepped"), content: {
-                    Self.rowView(title: .init(slider2Value), content: {
-                        VSlider(step: 0.15, state: sliderState, value: $slider2Value)
-                    })
-                })
-                
-                DemoRowView(type: .titled("Thumb Border"), content: {
-                    Self.rowView(title: .init(slider3Value), content: {
-                        VSlider(model: thumbBorderModel, state: sliderState, value: $slider3Value)
-                    })
-                })
-                
-                DemoRowView(type: .titled("Plain"), content: {
-                    Self.rowView(title: .init(slider4Value), content: {
-                        VSlider(model: plainModel, state: sliderState, value: $slider4Value)
-                    })
-                })
-                
-                DemoRowView(type: .titled("Animation"), content: {
-                    Self.rowView(title: .init(slider5Value), content: {
-                        VSlider(model: animationModel, state: sliderState, value: $slider5Value)
-                    })
-                })
-            })
+            DemoView(component: component, settingsSections: settings)
         })
     }
     
-    static func rowView<Content>(
+    private func component() -> some View {
+        Self.sliderRowView(title: .init(value), content: {
+            VSlider(
+                model: model,
+                step: hasStep ? stepValue : nil,
+                state: state,
+                value: $value
+            )
+        })
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
+        })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $thumbType, header: "Thumb")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasStep, title: "Step")
+            
+            if hasStep {
+                Self.labeledSliderRowView(title: .init(stepValue), min: minStepValue, max: maxStepValue, content: {
+                    VSlider(range: minStepValue...maxStepValue, step: 0.05, value: $stepValue)
+                })
+            }
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $progressAnimation, title: "Progress Animation")
+        })
+    }
+
+    static func sliderRowView<Content>(
         title: String,
         @ViewBuilder content: @escaping () -> Content
     ) -> some View
         where Content: View
     {
         VStack(spacing: 10, content: {
-            VText(
-                title: title,
-                color: ColorBook.primary,
-                font: .system(size: 14, weight: .regular, design: .monospaced),
-                type: .oneLine
-            )
-                .animation(.none)
-            
             content()
+            sliderText(title)
         })
     }
-
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { sliderState == .disabled },
-                    set: { sliderState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
+    
+    static func labeledSliderRowView<Content>(
+        title: String,
+        min: Double, max: Double,
+        @ViewBuilder content: @escaping () -> Content
+    ) -> some View
+        where Content: View
+    {
+        sliderRowView(title: title, content: {
+            HStack(spacing: 10, content: {
+                sliderText(String(min))
+                content()
+                sliderText(String(max))
+            })
         })
+    }
+    
+    private static func sliderText(_ title: String) -> some View {
+        VText(
+            type: .oneLine,
+            font: .system(size: 14, weight: .regular, design: .monospaced),
+            color: ColorBook.primary,
+            title: title
+        )
+            .animation(.none)
+    }
+}
+
+// MARK:- Helpers
+extension VSliderState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
+}
+
+private enum SliderThumbType: Int, VPickableTitledItem {
+    case standard
+    case bordered
+    case none
+    
+    var pickerTitle: String {
+        switch self {
+        case .standard: return "Standard"
+        case .bordered: return "Bordered"
+        case .none: return "None"
+        }
     }
 }
 

@@ -2,37 +2,33 @@
 //  VBaseTextFieldDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/19/21.
+//  Created by Vakhtang Kontridze on 1/20/21.
 //
 
 import SwiftUI
 import VComponents
 
-// MARK:- V Base TextField Demo View
+// MARK: V Text Field Demo View
 struct VBaseTextFieldDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base TextField"
-    
-    @State private var stateAccordionState: VAccordionState = .expanded
-    @State private var textsAccordionState: VAccordionState = .collapsed
-    @State private var formattingAccordionState: VAccordionState = .collapsed
-    
-    @State private var isSecure: Bool = VBaseTextFieldModel.Misc().isSecureTextEntry
-    @State private var textFieldState: VBaseTextFieldState = .enabled
+
+    @State private var text: String = ""
+    @State private var state: VBaseTextFieldState = .enabled
     @State private var hasPlaceholder: Bool = true
     @State private var numericalKeyboard: Bool = false
     @State private var textAlignment: VBaseTextFieldModel.Layout.TextAlignment = .default
-    @State private var hasAutoCorrect: Bool = VBaseTextFieldModel.Misc().useAutoCorrect
-    @State private var textFieldText: String = ""
+    @State private var spellCheck: UITextSpellCheckingType = VBaseTextFieldModel.Misc().spellCheck
+    @State private var autoCorrect: UITextAutocorrectionType = VBaseTextFieldModel.Misc().autoCorrect
     
-    private var textFieldModel: VBaseTextFieldModel {
+    private var model: VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         
-        model.misc.isSecureTextEntry = isSecure
-        model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
-        model.misc.useAutoCorrect = hasAutoCorrect
-        
         model.layout.textAlignment = textAlignment
+        
+        model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
+        model.misc.spellCheck = spellCheck
+        model.misc.autoCorrect = autoCorrect
         
         return model
     }
@@ -42,43 +38,49 @@ struct VBaseTextFieldDemoView: View {
 extension VBaseTextFieldDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .freeFormFlexible, content: {
-                VStack(spacing: 20, content: {
-                    VAccordion(state: $stateAccordionState, header: { VAccordionDefaultHeader(title: "General") }, content: {
-                        VStack(spacing: 20, content: {
-                            ToggleSettingView(isOn: $isSecure, title: "Secure Field")
-                            
-                            VSegmentedPicker(selection: $textFieldState, title: "State")
-                        })
-                    })
-                    
-                    VAccordion(state: $textsAccordionState, header: { VAccordionDefaultHeader(title: "Texts") }, content: {
-                        VStack(spacing: 20, content: {
-                            ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
-                        })
-                    })
-                    
-                    VAccordion(state: $formattingAccordionState, header: { VAccordionDefaultHeader(title: "Formatting") }, content: {
-                        VStack(spacing: 20, content: {
-                            ToggleSettingView(
-                                isOn: $numericalKeyboard,
-                                title: "Numerical Keyboard",
-                                description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
-                            )
-                            
-                            ToggleSettingView(isOn: $hasAutoCorrect, title: "Autocorrect")
-                            
-                            VSegmentedPicker(selection: $textAlignment, title: "Alignment")
-                        })
-                    })
-                    
-                    VBaseTextField(
-                        model: textFieldModel,
-                        state: $textFieldState,
-                        placeholder: hasPlaceholder ? "Lorem ipsum" : "",
-                        text: $textFieldText
-                    )
-                })
+            DemoView(component: component, settingsSections: settings)
+        })
+    }
+    
+    private func component() -> some View {
+        VBaseTextField(
+            model: model,
+            state: $state,
+            placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
+            text: $text
+        )
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(
+                isOn: .constant(true),
+                title: "Return Button",
+                description: "Default set to \"return\". Other types not shown in this demo, as there are many."
+            )
+        })
+        
+        DemoViewSettingsSection(content: {
+            VStack(spacing: 20, content: {
+                ToggleSettingView(
+                    isOn: $numericalKeyboard,
+                    title: "Numerical Keyboard",
+                    description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
+                )
+                
+                VSegmentedPicker(selection: $spellCheck, header: "Spell Check")
+
+                VSegmentedPicker(selection: $autoCorrect, header: "Autocorrect")
+
+                VSegmentedPicker(selection: $textAlignment, header: "Alignment")
             })
         })
     }
@@ -102,6 +104,32 @@ extension VTextFieldModel.Layout.TextAlignment: VPickableTitledItem {
         case .center: return "Center"
         case .trailing: return "Trailing"
         case .automatic: return "Automatic"
+        }
+    }
+}
+
+extension UITextSpellCheckingType: VPickableTitledItem {
+    public static var allCases: [Self] = [.default, .no, .yes]
+    
+    public var pickerTitle: String {
+        switch self {
+        case .no: return "No"
+        case .yes: return "Yes"
+        case .default: return "Auto"
+        @unknown default: return ""
+        }
+    }
+}
+
+extension UITextAutocorrectionType: VPickableTitledItem {
+    public static var allCases: [Self] = [.default, .no, .yes]
+    
+    public var pickerTitle: String {
+        switch self {
+        case .no: return "No"
+        case .yes: return "Yes"
+        case .default: return "Auto"
+        @unknown default: return ""
         }
     }
 }

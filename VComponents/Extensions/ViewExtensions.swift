@@ -50,6 +50,22 @@ extension View {
             self
         }
     }
+    
+    @ViewBuilder func `ifLet`<IfContent, ElseContent, Condition>(
+        _ value: Condition?,
+        ifTransform: (Self, Condition) -> IfContent,
+        elseTransform: (Self) -> ElseContent
+    ) -> some View
+        where
+            IfContent: View,
+            ElseContent: View
+    {
+        if let value = value {
+            ifTransform(self, value)
+        } else {
+            elseTransform(self)
+        }
+    }
 }
 
 // MARK:- Frame

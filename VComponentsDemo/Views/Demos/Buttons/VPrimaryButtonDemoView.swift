@@ -13,98 +13,113 @@ struct VPrimaryButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Primary Button"
     
-    private let buttonTitle: String = "Lorem ipsum"
+    @State private var state: VPrimaryButtonState = .enabled
+    @State private var contentType: ComponentContentType = .text
+    @State private var borderType: ButtonComponentBorderType = .borderless
     
-    private func buttonContent() -> some View { DemoIconContentView(dimension: 20, color: ColorBook.primaryInverted) }
-    
-    @State private var buttonState: VPrimaryButtonState = .enabled
-    
-    private let borderedModel: VPrimaryButtonModel = {
+    private var model: VPrimaryButtonModel {
         let defaultModel: VPrimaryButtonModel = .init()
         
         var model: VPrimaryButtonModel = .init()
-        
-        model.colors.textContent.enabled = defaultModel.colors.background.enabled
-        model.colors.textContent.pressed = defaultModel.colors.background.pressed
-        model.colors.textContent.disabled = defaultModel.colors.background.disabled
-        model.colors.textContent.loading = defaultModel.colors.background.loading
-        
-        model.colors.background.enabled = .init("PrimaryButtonBordered.Background.enabled")
-        model.colors.background.pressed = .init("PrimaryButtonBordered.Background.pressed")
-        model.colors.background.disabled = .init("PrimaryButtonBordered.Background.disabled")
-        model.colors.background.loading = .init("PrimaryButtonBordered.Background.disabled")
-        
-        model.colors.border.enabled = defaultModel.colors.background.enabled
-        model.colors.border.pressed = defaultModel.colors.background.disabled   // It's better this way
-        model.colors.border.disabled = defaultModel.colors.background.disabled
-        model.colors.border.loading = defaultModel.colors.background.loading
-        
+
+        if borderType == .bordered {
+            model.layout.borderWidth = 1
+            
+            model.colors.textContent = .init(
+                enabled: defaultModel.colors.background.enabled,
+                pressed: defaultModel.colors.background.pressed,
+                disabled: defaultModel.colors.background.disabled,
+                loading: defaultModel.colors.background.loading
+            )
+            
+            model.colors.background = .init(
+                enabled: .init("PrimaryButtonBordered.Background.enabled"),
+                pressed: .init("PrimaryButtonBordered.Background.pressed"),
+                disabled: .init("PrimaryButtonBordered.Background.disabled"),
+                loading: .init("PrimaryButtonBordered.Background.disabled")
+            )
+            
+            model.colors.border = .init(
+                enabled: defaultModel.colors.background.enabled,
+                pressed: defaultModel.colors.background.disabled,   // It's better this way
+                disabled: defaultModel.colors.background.disabled,
+                loading: defaultModel.colors.background.loading
+            )
+        }
+
         return model
-    }()
+    }
 }
 
 // MARK:- Body
 extension VPrimaryButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Text"), content: {
-                    VPrimaryButton(state: buttonState, action: action, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Image"), content: {
-                    VPrimaryButton(state: buttonState, action: action, content: buttonContent)
-                })
+            DemoView(component: component, settings: settings)
+        })
+    }
+    
+    @ViewBuilder private func component() -> some View {
+        switch contentType {
+        case .text: VPrimaryButton(model: model, state: state, action: {}, title: buttonTitle)
+        case .icon: VPrimaryButton(model: model, state: state, action: {}, content: buttonContent)
+        }
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $state, header: "State")
+        
+        VSegmentedPicker(selection: $contentType, header: "Content")
+        
+        VSegmentedPicker(selection: $borderType, header: "Border")
+    }
+    
+    private var buttonTitle: String { "Lorem ipsum" }
 
-                DemoRowView(type: .titled("Image and Text"), content: {
-                    VPrimaryButton(state: buttonState, action: action, content: {
-                        HStack(spacing: 5, content: {
-                            buttonContent()
-                            
-                            VText(
-                                title: buttonTitle,
-                                color: ColorBook.primaryInverted,
-                                font: VPrimaryButtonModel.Fonts().title,
-                                type: .oneLine
-                            )
-                        })
-                    })
-                })
-                
-                DemoRowView(type: .titled("Bordered"), content: {
-                    VPrimaryButton(model: borderedModel, state: buttonState, action: action, title: buttonTitle)
-                })
-            })
-        })
-    }
-    
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            HStack(content: {
-                Spacer()
-                controllerToggle(active: .disabled, title: "Disabled")
-                Spacer()
-                controllerToggle(active: .loading, title: "Loading")
-                Spacer()
-            })
-        })
-    }
-    
-    private func controllerToggle(active state: VPrimaryButtonState, title: String) -> some View {
-        ControllerToggleView(
-            state: .init(
-                get: { buttonState == state },
-                set: { buttonState = $0 ? state : .enabled }
-            ),
-            title: title
-        )
+    private func buttonContent() -> some View {
+        let color: Color = {
+            switch borderType {
+            case .bordered: return VPrimaryButtonModel().colors.background.enabled
+            case .borderless: return ColorBook.primaryInverted
+            }
+        }()
+        
+        return DemoIconContentView(dimension: 20, color: color)
     }
 }
 
-// MARK:- Action
-private extension VPrimaryButtonDemoView {
-    func action() {
-        print("Pressed")
+// MARK:- Helpers
+extension VPrimaryButtonState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        case .loading: return "Loading"
+        }
+    }
+}
+
+enum ComponentContentType: Int, VPickableTitledItem {
+    case text
+    case icon
+    
+    var pickerTitle: String {
+        switch self {
+        case .text: return "Text"
+        case .icon: return "Icon"
+        }
+    }
+}
+
+enum ButtonComponentBorderType: Int, VPickableTitledItem {
+    case borderless
+    case bordered
+    
+    var pickerTitle: String {
+        switch self {
+        case .borderless: return "Borderless"
+        case .bordered: return "Bordered"
+        }
     }
 }
 

@@ -26,7 +26,18 @@ extension VHalfModalModel {
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
         
-        public var contentMargin: ContentMargin = .init()
+        public var dividerHeight: CGFloat = 0
+        var hasDivider: Bool { dividerHeight > 0 }
+        
+        public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
+        public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
+        
+        public var headerMargin: Margins = modalReference.layout.headerMargin
+    
+        public var dividerMargin: Margins = modalReference.layout.dividerMargin
+        
+        public var contentMargin: Margins = modalReference.layout.contentMargin
+        
         public var hasSafeAreaMarginBottom: Bool = true
         var edgesToIgnore: Edge.Set {
             switch hasSafeAreaMarginBottom {
@@ -34,20 +45,13 @@ extension VHalfModalModel {
             case true: return []
             }
         }
-        
-        public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
-        public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
-
-        public var dividerHeight: CGFloat = 0
-        var hasDivider: Bool { dividerHeight > 0 }
 
         public var headerSpacing: CGFloat = modalReference.layout.headerSpacing
-        public var spacing: CGFloat = modalReference.layout.spacing
         
         public var translationBelowMinHeightToDismiss: CGFloat = 100
         
         static let navigationViewCloseButtonMarginTop: CGFloat = (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
-        static let navigationViewHalfModalCloseButtonMarginTrailing: CGFloat = VCloseButtonModel.Layout().dimension + Self().spacing
+        static let navigationViewHalfModalCloseButtonMarginTrailing: CGFloat = VCloseButtonModel.Layout().dimension + Self().headerSpacing
         
         public init() {}
     }
@@ -87,14 +91,7 @@ extension VHalfModalModel.Layout {
         }
     }
     
-    public struct ContentMargin {
-        public var leading: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
-        public var trailing: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
-        public var top: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
-        public var bottom: CGFloat = VHalfModalModel.sheetReference.layout.contentMargin
-        
-        public init() {}
-    }
+    public typealias Margins = VModalModel.Layout.Margins
 }
 
 // MARK:- Colors
@@ -165,7 +162,6 @@ extension Set where Element == VHalfModalModel.Misc.DismissType {
 
 // MARK:- References
 extension VHalfModalModel {
-    public static let sheetReference: VSheetModel = .init()
     public static let modalReference: VModalModel = .init()
 }
 

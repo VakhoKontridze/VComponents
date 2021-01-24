@@ -2,7 +2,7 @@
 //  VNavigationLinkDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/16/21.
+//  Created by Vakhtang Kontridze on 18.12.20.
 //
 
 import SwiftUI
@@ -13,53 +13,41 @@ struct VNavigationLinkDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Navigation Link"
     
-    private let buttonTitle: String = "Lorem ipsum"
-    
-    private func buttonContent() -> some View { DemoIconContentView(dimension: 20, color: ColorBook.accent) }
-
-    @State private var buttonState: VNavigationLinkState = .enabled
+    @State private var state: VNavigationLinkState = .enabled
+    @State private var navigationLinkType: VNavigationLinkTypeHelper = .primary
 }
 
 // MARK:- Body
 extension VNavigationLinkDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Primary"), content: {
-                    VNavigationLink(preset: .primary(), state: buttonState, destination: destination, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Secondary"), content: {
-                    VNavigationLink(preset: .secondary(), state: buttonState, destination: destination, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Square"), content: {
-                    VNavigationLink(preset: .square(), state: buttonState, destination: destination, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Plain"), content: {
-                    VNavigationLink(preset: .plain(), state: buttonState, destination: destination, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Custom"), content: {
-                    VNavigationLink(state: buttonState, destination: destination, label: {
-                        HStack(spacing: 5, content: {
-                            buttonContent()
-                            
-                            VText(
-                                title: buttonTitle,
-                                color: ColorBook.accent,
-                                font: VSecondaryButtonModel.Fonts().title,
-                                type: .oneLine
-                            )
-                        })
-                    })
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
     }
     
-    var destination: some View {
+    @ViewBuilder private func component() -> some View {
+        switch navigationLinkType.preset {
+        case let preset?: VNavigationLink(preset: preset, state: state, destination: destination, title: buttonTitle)
+        case nil: VNavigationLink(state: state, destination: destination, label: buttonContent)
+        }
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $state, header: "State")
+        
+        VWheelPicker(selection: $navigationLinkType, header: "Type")
+    }
+    
+    private var buttonTitle: String {
+        switch navigationLinkType.preset {
+        case .square: return "Lorem"
+        default: return "Lorem ipsum"
+        }
+    }
+    
+    private func buttonContent() -> some View { DemoIconContentView(dimension: 20) }
+    
+    private var destination: some View {
         VBaseView(title: "Destination", content: {
             ZStack(content: {
                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
@@ -68,28 +56,58 @@ extension VNavigationLinkDemoView {
             })
         })
     }
+}
+
+// MARK:- Helpers
+extension VNavigationLinkState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
+}
+
+private enum VNavigationLinkTypeHelper: Int, VPickableTitledItem {
+    case primary
+    case secondary
+    case square
+    case plain
+    case custom
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
-        })
+    var preset: VNavigationLinkPreset? {
+        switch self {
+        case .primary: return .primary()
+        case .secondary: return .secondary()
+        case .square: return .square()
+        case .plain: return .plain()
+        case .custom: return nil
+        }
+    }
+    
+    var pickerTitle: String {
+        switch self {
+        case .primary: return "Primary"
+        case .secondary: return "Secondary"
+        case .square: return "Square"
+        case .plain: return "Plain"
+        case .custom: return "Custom"
+        }
     }
 }
 
-// MARK:- Action
-private extension VNavigationLinkDemoView {
-    func action() {
-        print("Pressed")
+private extension VNavigationLinkPreset {
+    var helperType: VNavigationLinkTypeHelper {
+        switch self {
+        case .primary: return .primary
+        case .secondary: return .secondary
+        case .square: return .square
+        case .plain: return .plain
+        }
     }
 }
 
-// MARK: Preview
+// MARK:- Preview
 struct VNavigationLinkDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VNavigationLinkDemoView()

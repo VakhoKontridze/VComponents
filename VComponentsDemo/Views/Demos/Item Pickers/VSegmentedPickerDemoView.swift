@@ -12,183 +12,137 @@ import VComponents
 struct VSegmentedPickerDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Segmented Picker"
-
-    @State private var segmentedPickerSelection1: Items = .red
-    @State private var segmentedPickerSelection2: Items = .red
-    @State private var segmentedPickerSelection3: Int = 0
-    @State private var segmentedPickerSelection4: Items = .red
-    @State private var segmentedPickerSelection5: Items = .red
-    @State private var segmentedPickerSelection6: Items = .red
-    @State private var segmentedPickerSelection7: Items = .red
-    @State private var segmentedPickerSelection8: Items = .red
-    @State private var segmentedPickerSelection9: Items = .red
-    @State private var segmentedPickerSelection10: Items = .red
-    @State private var segmentedPickerState: VSegmentedPickerState = .enabled
     
-    private enum Items: Int, VPickableTitledItem {
-        case red
-        case green
-        case blue
+    @State private var selection: ComponentRGBItem = .red
+    @State private var state: VSegmentedPickerState = .enabled
+    @State private var contentType: ComponentContentType = .text
+    @State private var hasHeader: Bool = true
+    @State private var hasFooter: Bool = true
+    @State private var hasDisabledRow: Bool = false
+    @State private var selectionAnimation: Bool = VSegmentedPickerModel.Animations().selection != nil
+    @State private var loweredOpacityWhenPressed: Bool = VSegmentedPickerModel.Colors().content.pressedOpacity != 1
+    @State private var resizeIndicatorWhenPressed: Bool = VSegmentedPickerModel.Layout().indicatorPressedScale != 1
+    @State private var loweredOpacityWhenDisabled: Bool = VSegmentedPickerModel.Colors().content.disabledOpacity != 1
+
+    private var model: VSegmentedPickerModel {
+        let defaultModel: VSegmentedPickerModel = .init()
         
-        var pickerTitle: String {
-            switch self {
-            case .red: return "Red"
-            case .green: return "Green"
-            case .blue: return "Blue"
-            }
-        }
+        var model: VSegmentedPickerModel = .init()
         
-        var pickerSymbol: some View {
-            let color: Color = {
-                switch self {
-                case .red: return .red
-                case .green: return .green
-                case .blue: return .blue
-                }
-            }()
-            
-            return DemoIconContentView(color: color)
-        }
+        model.animations.selection = selectionAnimation ? (defaultModel.animations.selection ?? .default) : nil
+        
+        model.colors.content.pressedOpacity = loweredOpacityWhenPressed ? 0.5 : 1
+        
+        model.layout.indicatorPressedScale =
+            resizeIndicatorWhenPressed ?
+            (model.layout.indicatorPressedScale == 1 ? 0.95 : model.layout.indicatorPressedScale) :
+            1
+        
+        model.colors.content.disabledOpacity = loweredOpacityWhenDisabled ? 0.5 : 1
+        
+        return model
     }
-
-    private let noAnimationSegmentedModel: VSegmentedPickerModel = {
-        var model: VSegmentedPickerModel = .init()
-        model.animations.selection = nil
-        return model
-    }()
-    
-    private let noLoweredOpacityWhenPressedModel: VSegmentedPickerModel = {
-        var model: VSegmentedPickerModel = .init()
-        model.colors.content.pressedOpacity = 1
-        return model
-    }()
-    
-    private let noSmallerIndcatorWhenPressedModel: VSegmentedPickerModel = {
-        var model: VSegmentedPickerModel = .init()
-        model.layout.indicatorPressedScale = 1
-        return model
-    }()
-    
-    private let noLoweredOpacityWhenDisabledModel: VSegmentedPickerModel = {
-        var model: VSegmentedPickerModel = .init()
-        model.colors.content.disabledOpacity = 1
-        return model
-    }()
 }
 
 // MARK:- Body
 extension VSegmentedPickerDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Text"), content: {
-                    VSegmentedPicker(
-                        selection: $segmentedPickerSelection1,
-                        state: segmentedPickerState
-                    )
-                })
-                
-                DemoRowView(type: .titled("Image"), content: {
-                    VSegmentedPicker(
-                        selection: $segmentedPickerSelection2,
-                        state: segmentedPickerState,
-                        content: {
-                            $0.pickerSymbol
-                        }
-                    )
-                })
-                
-                DemoRowView(type: .titled("Image and Text"), content: {
-                    VSegmentedPicker(
-                        selectedIndex: $segmentedPickerSelection3,
-                        state: segmentedPickerState,
-                        data: Items.allCases,
-                        content: { item in
-                            HStack(spacing: 5, content: {
-                                item.pickerSymbol
-                                
-                                VText(
-                                    title: item.pickerTitle,
-                                    color: ColorBook.primary,
-                                    font: VSegmentedPickerModel.Fonts().rows,
-                                    type: .oneLine
-                                )
-                            })
-                        }
-                    )
-                })
-                
-                DemoRowView(type: .titled("Title"), content: {
-                    VSegmentedPicker(
-                        selection: $segmentedPickerSelection4,
-                        state: segmentedPickerState,
-                        title: "Lorem ipsum dolor sit amet"
-                    )
-                })
-                
-                DemoRowView(type: .titled("Title and description"), content: {
-                    VSegmentedPicker(
-                        selection: $segmentedPickerSelection5,
-                        state: segmentedPickerState,
-                        title: "Lorem ipsum dolor sit amet",
-                        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus."
-                    )
-                })
-                
-                DemoRowView(type: .titled("Disabled Row"), content: {
-                    VSegmentedPicker(
-                        selection: $segmentedPickerSelection6,
-                        state: segmentedPickerState,
-                        disabledItems: [.green]
-                    )
-                })
-                
-                DemoRowView(type: .titled("No Animation"), content: {
-                    VSegmentedPicker(
-                        model: noAnimationSegmentedModel,
-                        selection: $segmentedPickerSelection7,
-                        state: segmentedPickerState
-                    )
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                    VSegmentedPicker(
-                        model: noLoweredOpacityWhenPressedModel,
-                        selection: $segmentedPickerSelection8,
-                        state: segmentedPickerState
-                    )
-                })
-                
-                DemoRowView(type: .titled("No Smaller Indicator when Pressed"), content: {
-                    VSegmentedPicker(
-                        model: noSmallerIndcatorWhenPressedModel,
-                        selection: $segmentedPickerSelection9,
-                        state: segmentedPickerState
-                    )
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                    VSegmentedPicker(
-                        model: noLoweredOpacityWhenDisabledModel,
-                        selection: $segmentedPickerSelection10,
-                        state: segmentedPickerState,
-                        disabledItems: [.green]
-                    )
-                })
-            })
+            DemoView(component: component, settingsSections: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { segmentedPickerState == .disabled },
-                    set: { segmentedPickerState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
+    @ViewBuilder private func component() -> some View {
+        switch contentType {
+        case .text:
+            VSegmentedPicker(
+                model: model,
+                selection: $selection,
+                state: state,
+                header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+                footer: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+                disabledItems: hasDisabledRow ? [.green] : []
             )
+        
+        case .icon:
+            VSegmentedPicker(
+                model: model,
+                selection: $selection,
+                state: state,
+                header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+                footer: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+                disabledItems: hasDisabledRow ? [.green] : [],
+                content: { $0.pickerSymbol }
+            )
+        }
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
         })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $contentType, header: "Content")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasHeader, title: "Header")
+            
+            ToggleSettingView(isOn: $hasFooter, title: "Footer")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasDisabledRow, title: "Disabled Row")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $selectionAnimation, title: "Selection Animation")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $loweredOpacityWhenPressed, title: "Low Pressed Opacity", description: "Content lowers opacity when pressed")
+            
+            ToggleSettingView(isOn: $resizeIndicatorWhenPressed, title: "Resize Indicator", description: "Selection indicator resizes when pressed")
+
+            ToggleSettingView(isOn: $loweredOpacityWhenDisabled, title: "Low Disabled Opacity", description: "Content lowers opacity when disabled")
+        })
+    }
+}
+
+// MARK:- Helpers
+extension VSegmentedPickerState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
+}
+
+enum ComponentRGBItem: Int, VPickableTitledItem {
+    case red
+    case green
+    case blue
+    
+    var pickerTitle: String {
+        switch self {
+        case .red: return "Red"
+        case .green: return "Green"
+        case .blue: return "Blue"
+        }
+    }
+    
+    var pickerSymbol: some View {
+        let color: Color = {
+            switch self {
+            case .red: return .red
+            case .green: return .green
+            case .blue: return .blue
+            }
+        }()
+        
+        return DemoIconContentView(color: color)
     }
 }
 

@@ -166,9 +166,8 @@ extension VTable {
                 case .flexible: VLazyList(content: { contentView })
                 }
             })
-                .if(!sections.isEmpty, transform: {
-                    $0.padding([.leading, .top, .bottom], model.layout.contentMargin)
-                })
+                .padding([.leading, .top, .bottom], model.layout.contentMargin)
+                .frame(maxWidth: .infinity)
         })
     }
     

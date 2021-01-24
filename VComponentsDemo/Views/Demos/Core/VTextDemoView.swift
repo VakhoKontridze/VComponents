@@ -13,6 +13,8 @@ struct VTextDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base Title"
     
+    @State private var vTextDemoType: VTextDemoType = .center
+    
     private let baseTextTitle: String = "Lorem ipsum dolor sit amet"
     private let baseTextText: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."
     
@@ -25,27 +27,62 @@ struct VTextDemoView: View {
 extension VTextDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, content: {
-                DemoRowView(type: .titled("Leading"), content: {
-                    VText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                })
-                
-                DemoRowView(type: .titled("Centered"), content: {
-                    VText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                })
-                
-                DemoRowView(type: .titled("Trailing"), content: {
-                    VText(title: baseTextTitle, color: titleColor, font: titleFont, type: .oneLine)
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                })
-                
-                DemoRowView(type: .titled("Multi-Line"), content: {
-                    VText(title: baseTextText, color: titleColor, font: textFont, type: .multiLine(limit: 5, alignment: .leading))
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
+    }
+    
+    @ViewBuilder private func component() -> some View {
+        switch vTextDemoType {
+        case .leading:
+            VText(type: .oneLine, font: titleFont, color: titleColor, title: baseTextTitle)
+                .frame(maxWidth: .infinity, alignment: .leading)
+        
+        case .center:
+            VText(type: .oneLine, font: titleFont, color: titleColor, title: baseTextTitle)
+                .frame(maxWidth: .infinity, alignment: .center)
+        
+        case .trailing:
+            VText(type: .oneLine, font: titleFont, color: titleColor, title: baseTextTitle)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        
+        case .multiLineLeading:
+            VText(type: .multiLine(limit: nil, alignment: .leading), font: titleFont, color: titleColor, title: baseTextText)
+            
+        case .multiLineCenter:
+            VText(type: .multiLine(limit: nil, alignment: .center), font: titleFont, color: titleColor, title: baseTextText)
+            
+        case .multiLineTrailing:
+            VText(type: .multiLine(limit: nil, alignment: .trailing), font: titleFont, color: titleColor, title: baseTextText)
+        }
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VWheelPicker(
+            selection: $vTextDemoType,
+            header: "Type",
+            footer: "Not an actual type of the component. Just different configurations listed for demo purposes."
+        )
+    }
+}
+
+// MARK:- Helpers
+private enum VTextDemoType: Int, VPickableTitledItem {
+    case leading
+    case center
+    case trailing
+    case multiLineLeading
+    case multiLineCenter
+    case multiLineTrailing
+    
+    var pickerTitle: String {
+        switch self {
+        case .leading: return "Leading"
+        case .center: return "Center"
+        case .trailing: return "Trailing"
+        case .multiLineLeading: return "Multi-Line Leading"
+        case .multiLineCenter: return "Multi-Line Center"
+        case .multiLineTrailing: return "Multi-Line Trailing"
+        }
     }
 }
 

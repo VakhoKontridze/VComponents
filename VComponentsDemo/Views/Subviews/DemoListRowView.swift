@@ -61,10 +61,10 @@ extension DemoListRowView {
     private var rowView: some View {
         HStack(spacing: 0, content: {
             VText(
-                title: title,
-                color: ColorBook.primary,
+                type: .oneLine,
                 font: .body,
-                type: .oneLine
+                color: ColorBook.primary,
+                title: title
             )
 
             Spacer()

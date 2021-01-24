@@ -2,119 +2,138 @@
 //  VRangeSliderDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/12/21.
+//  Created by Vakhtang Kontridze on 19.12.20.
 //
 
 import SwiftUI
 import VComponents
 
-// MARK:- V Range Slider Demo View
+// MARK:- V RangeSlider Demo View
 struct VRangeSliderDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Range Slider"
-
-    @State private var sliderState: VRangeSliderState = .enabled
-    private let difference: Double = 0.1
-
-    @State private var slider1ValueLow: Double = 0.3
-    @State private var slider1ValueHigh: Double = 0.7
     
-    @State private var slider2ValueLow: Double = 0.3
-    @State private var slider2ValueHigh: Double = 0.7
+    @State private var valueLow: Double = 0.3
+    @State private var valueHigh: Double = 0.7
+    @State private var state: VRangeSliderState = .enabled
+    @State private var thumbType: RangeSliderThumbType = .standard
+    @State private var hasStep: Bool = false
+    @State private var stepValue: Double = 0.1
+    @State private var diffValue: Double = 0.1
+    @State private var progressAnimation: Bool = VRangeSliderModel.Animations().progress != nil
     
-    @State private var slider3ValueLow: Double = 0.3
-    @State private var slider3ValueHigh: Double = 0.7
+    private let minDiffValue: Double = 0.1
+    private let maxDiffValue: Double = 0.25
     
-    @State private var slider4ValueLow: Double = 0.3
-    @State private var slider4ValueHigh: Double = 0.7
+    private let minStepValue: Double = 0.1
+    private let maxStepValue: Double = 0.25
     
-    private let thumbBorderModel: VRangeSliderModel = {
+    private var model: VRangeSliderModel {
+        let defaultModel: VRangeSliderModel = .init()
+        
         var model: VRangeSliderModel = .init()
         
-        model.layout.thumbBorderWidth = 1
-        model.layout.thumbShadowRadius = 0
+        switch thumbType {
+        case .standard:
+            break
         
-        model.colors.thumb.border.enabled = .black
-        model.colors.thumb.border.disabled = .gray
+        case .bordered:
+            model.layout.thumbBorderWidth = 1
+            model.layout.thumbShadowRadius = 0
+
+            model.colors.thumb.border = .init(
+                enabled: .black,
+                disabled: .gray
+            )
+
+            model.colors.thumb.shadow = .init(
+                enabled: .clear,
+                disabled: .clear
+            )
+        }
         
-        model.colors.thumb.shadow.enabled = .clear
-        model.colors.thumb.shadow.disabled = .clear
+        model.animations.progress = progressAnimation ? (defaultModel.animations.progress == nil ? .default : defaultModel.animations.progress) : nil
         
         return model
-    }()
-    
-    private let animationModel: VSliderModel = {
-        var model: VSliderModel = .init()
-        
-        model.animations.progress = .default
-        
-        return model
-    }()
+    }
 }
 
 // MARK:- Body
 extension VRangeSliderDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Default"), content: {
-                    VSliderDemoView.rowView(title: "\(slider1ValueLow) - \(slider1ValueHigh)", content: {
-                        VRangeSlider(
-                            difference: difference,
-                            valueLow: $slider1ValueLow,
-                            valueHigh: $slider1ValueHigh
-                        )
-                    })
-                })
-                
-                DemoRowView(type: .titled("Stepped"), content: {
-                    VSliderDemoView.rowView(title: "\(slider2ValueLow) - \(slider2ValueHigh)", content: {
-                        VRangeSlider(
-                            difference: difference,
-                            step: 0.15,
-                            valueLow: $slider2ValueLow,
-                            valueHigh: $slider2ValueHigh
-                        )
-                    })
-                })
-                
-                DemoRowView(type: .titled("Thumb Border"), content: {
-                    VSliderDemoView.rowView(title: "\(slider3ValueLow) - \(slider3ValueHigh)", content: {
-                        VRangeSlider(
-                            model: thumbBorderModel,
-                            difference: difference,
-                            state: sliderState,
-                            valueLow: $slider3ValueLow,
-                            valueHigh: $slider3ValueHigh
-                        )
-                    })
-                })
-
-                DemoRowView(type: .titled("Animation"), content: {
-                    VSliderDemoView.rowView(title: "\(slider4ValueLow) - \(slider4ValueHigh)", content: {
-                        VRangeSlider(
-                            model: animationModel,
-                            difference: difference,
-                            state: sliderState,
-                            valueLow: $slider4ValueLow,
-                            valueHigh: $slider4ValueHigh
-                        )
-                    })
-                })
-            })
+            DemoView(component: component, settingsSections: settings)
         })
     }
-
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { sliderState == .disabled },
-                    set: { sliderState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
+    
+    private func component() -> some View {
+        VSliderDemoView.sliderRowView(title: "\(valueLow) - \(valueHigh)", content: {
+            VRangeSlider(
+                model: model,
+                difference: diffValue,
+                step: hasStep ? stepValue : nil,
+                state: state,
+                valueLow: $valueLow,
+                valueHigh: $valueHigh
             )
         })
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
+        })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $thumbType, header: "Thumb")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasStep, title: "Step")
+            
+            if hasStep {
+                VSliderDemoView.labeledSliderRowView(title: .init(stepValue), min: minStepValue, max: maxStepValue, content: {
+                    VSlider(range: minStepValue...maxStepValue, step: 0.05, value: $stepValue)
+                })
+            }
+        })
+        
+        DemoViewSettingsSection(content: {
+            VStack(spacing: 5, content: {
+                VText(type: .oneLine, font: .callout, color: ColorBook.primary, title: "Difference")
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.bottom, 5)
+                
+                VSliderDemoView.labeledSliderRowView(title: .init(diffValue), min: minDiffValue, max: maxDiffValue, content: {
+                    VSlider(range: minDiffValue...maxDiffValue, step: 0.05, value: $diffValue)
+                })
+                
+                VText(
+                    type: .multiLine(limit: nil, alignment: .leading),
+                    font: .footnote,
+                    color: ColorBook.secondary,
+                    title: "If this value exceeds difference of max and min during the creation of view, layout would invalidate itself, and refuse to draw"
+                )
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            })
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $progressAnimation, title: "Progress Animation")
+        })
+    }
+}
+
+// MARK:- Helpers
+private enum RangeSliderThumbType: Int, VPickableTitledItem {
+    case standard
+    case bordered
+    
+    var pickerTitle: String {
+        switch self {
+        case .standard: return "Standard"
+        case .bordered: return "Bordered"
+        }
     }
 }
 
@@ -124,4 +143,3 @@ struct VRangeSliderDemoView_Previews: PreviewProvider {
         VRangeSliderDemoView()
     }
 }
-

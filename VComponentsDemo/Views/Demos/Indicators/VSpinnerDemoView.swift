@@ -12,22 +12,49 @@ import VComponents
 struct VSpinnerDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Spinner"
+    
+    @State private var spinnerModel: VSpinnerModelHelper = VSpinnerModel.default.helperModel
 }
 
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, content: {
-                DemoRowView(type: .titled("Continous"), content: {
-                    VSpinner(model: .continous())
-                })
-                
-                DemoRowView(type: .titled("Dashed"), content: {
-                    VSpinner(model: .dashed())
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
+    }
+    
+    @ViewBuilder private func component() -> some View {
+        switch spinnerModel {
+        case .continous: VSpinner(model: .continous())
+        case .dashed: VSpinner(model: .dashed())
+        }
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $spinnerModel, header: "Type")
+    }
+}
+
+// MARK:- Helpers
+private enum VSpinnerModelHelper: Int, VPickableTitledItem {
+    case continous
+    case dashed
+    
+    var pickerTitle: String {
+        switch self {
+        case .continous: return "Continous"
+        case .dashed: return "Dashed"
+        }
+    }
+}
+
+private extension VSpinnerModel {
+    var helperModel: VSpinnerModelHelper {
+        switch self {
+        case .continous: return .continous
+        case .dashed: return .dashed
+        }
     }
 }
 

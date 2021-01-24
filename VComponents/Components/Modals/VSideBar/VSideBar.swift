@@ -66,22 +66,21 @@ extension View {
     {
         let sideBar = sideBar()
         
-        return ZStack(content: {
-            self
-            
-            if isPresented.wrappedValue {
-                UIKitRepresentable(
-                    isPresented: isPresented,
-                    content:
-                        _VSideBar(
-                            model: sideBar.model,
-                            isPresented: isPresented,
-                            content: sideBar.content,
-                            onAppear: sideBar.appearAction,
-                            onDisappear: sideBar.disappearAction
-                        )
-                )
-            }
-        })
+        return self
+            .overlay(Group(content: {
+                if isPresented.wrappedValue {
+                    UIKitRepresentable(
+                        isPresented: isPresented,
+                        content:
+                            _VSideBar(
+                                model: sideBar.model,
+                                isPresented: isPresented,
+                                content: sideBar.content,
+                                onAppear: sideBar.appearAction,
+                                onDisappear: sideBar.disappearAction
+                            )
+                    )
+                }
+            }))
     }
 }

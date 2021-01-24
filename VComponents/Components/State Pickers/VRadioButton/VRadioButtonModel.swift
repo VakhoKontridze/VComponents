@@ -31,6 +31,8 @@ extension VRadioButtonModel {
         public var hitBox: CGFloat = checkBoxReference.layout.hitBox
         
         public var contentMarginLeading: CGFloat = checkBoxReference.layout.contentMarginLeading
+        
+        public init() {}
     }
 }
 

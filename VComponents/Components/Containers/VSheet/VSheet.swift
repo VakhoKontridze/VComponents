@@ -40,7 +40,7 @@ public struct VSheet<Content>: View where Content: View {
     // MARK: Initializers
     public init(
         model: VSheetModel = .init(),
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.content = content

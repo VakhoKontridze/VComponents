@@ -18,26 +18,28 @@ struct VTabNavigationViewDemoView: View {
 extension VTabNavigationViewDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .section, content: {
-                VStack(spacing: 20, content: {
-                    VText(
-                        title: "Tab Navigation View should only ever be used on a root view. Continue?",
-                        color: ColorBook.primary,
-                        font: .body,
-                        type: .multiLine(limit: nil, alignment: .center)
-                    )
-                    
-                    VSecondaryButton(
-                        action: { SceneDelegate.setRootView(to: VTabNavigationViewDemoViewWalkthroughView()) },
-                        title: "Start Demo"
-                    )
-                })
-            })
+            DemoView(component: component)
+        })
+    }
+    
+    private func component() -> some View {
+        VStack(spacing: 20, content: {
+            VText(
+                type: .multiLine(limit: nil, alignment: .center),
+                font: .body,
+                color: ColorBook.primary,
+                title: "Tab Navigation View should only ever be used on a root view. Continue?"
+            )
+            
+            VSecondaryButton(
+                action: { SceneDelegate.setRootView(to: VTabNavigationViewDemoViewWalkthroughView()) },
+                title: "Start Demo"
+            )
         })
     }
 }
 
-// MARK:- V Tab Navigation View Walkthrough View
+// MARK:- Walkthrough
 private struct VTabNavigationViewDemoViewWalkthroughView: View {
     static let navigationBarTitle: String = ""
     @State private var selection: Int = 0
@@ -113,10 +115,10 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
             Image(iconName).renderingMode(.template)
             
             VText(
-                title: title,
-                color: ColorBook.primary,
+                type: .oneLine,
                 font: .body,
-                type: .oneLine
+                color: ColorBook.primary,
+                title: title
             )
         })
     }

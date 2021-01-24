@@ -41,8 +41,8 @@ extension VTextFieldModel {
         
         public var contentSpacing: CGFloat = 10
 
-        public var titleSpacing: CGFloat = segmentedPickerReference.layout.titleSpacing
-        public var titleMarginHor: CGFloat = segmentedPickerReference.layout.titleMarginHor
+        public var headerFooterSpacing: CGFloat = segmentedPickerReference.layout.headerFooterSpacing
+        public var headerFooterMarginHor: CGFloat = segmentedPickerReference.layout.headerFooterMarginHor
         
         public init() {}
     }
@@ -82,40 +82,40 @@ extension VTextFieldModel {
             disabled: .clear
         )
         
-        public var title: StateColorsHighlighted = .init(
-            enabled: segmentedPickerReference.colors.title.enabled,
-            focused: segmentedPickerReference.colors.title.enabled,
+        public var header: StateColorsHighlighted = .init(
+            enabled: segmentedPickerReference.colors.header.enabled,
+            focused: segmentedPickerReference.colors.header.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerReference.colors.title.disabled
+            disabled: segmentedPickerReference.colors.header.disabled
         )
         
-        public var description: StateColorsHighlighted = .init(
-            enabled: segmentedPickerReference.colors.description.enabled,
-            focused: segmentedPickerReference.colors.description.enabled,
+        public var footer: StateColorsHighlighted = .init(
+            enabled: segmentedPickerReference.colors.footer.enabled,
+            focused: segmentedPickerReference.colors.footer.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerReference.colors.description.disabled
+            disabled: segmentedPickerReference.colors.footer.disabled
         )
         
         public var searchIcon: StateColorsHighlighted = .init(
-            enabled: segmentedPickerReference.colors.title.enabled,
-            focused: segmentedPickerReference.colors.title.enabled,
+            enabled: segmentedPickerReference.colors.header.enabled,
+            focused: segmentedPickerReference.colors.header.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerReference.colors.title.disabled
+            disabled: segmentedPickerReference.colors.header.disabled
         )
         
         public var visibilityButtonIcon: ButtonStateColorsAndOpacityHighlighted = .init(
-            enabled: segmentedPickerReference.colors.title.enabled,
-            enabledPressed: segmentedPickerReference.colors.title.enabled,
-            focused: segmentedPickerReference.colors.title.enabled,
-            focusedPressed: segmentedPickerReference.colors.title.enabled,
+            enabled: segmentedPickerReference.colors.header.enabled,
+            enabledPressed: segmentedPickerReference.colors.header.enabled,
+            focused: segmentedPickerReference.colors.header.enabled,
+            focusedPressed: segmentedPickerReference.colors.header.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
             successPressed: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
             errorPressed: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerReference.colors.title.disabled,
+            disabled: segmentedPickerReference.colors.header.disabled,
             pressedOpacity: squareButtonReference.colors.content.pressedOpacity,
             disabledOpacity: squareButtonReference.colors.content.disabledOpacity
         )
@@ -323,9 +323,9 @@ extension VTextFieldModel {
     public struct Fonts {
         public var text: UIFont = baseTextFieldReference.fonts.text
         
-        public var placeholder: Font = segmentedPickerReference.fonts.description
-        public var title: Font = segmentedPickerReference.fonts.title
-        public var description: Font = segmentedPickerReference.fonts.description
+        public var placeholder: Font = segmentedPickerReference.fonts.footer
+        public var header: Font = segmentedPickerReference.fonts.header
+        public var footer: Font = segmentedPickerReference.fonts.footer
         
         public var cancelButton: Font = plainButtonReference.fonts.title
         

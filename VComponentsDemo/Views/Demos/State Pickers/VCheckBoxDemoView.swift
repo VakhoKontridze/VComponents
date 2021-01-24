@@ -2,7 +2,7 @@
 //  VCheckBoxDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/18/21.
+//  Created by Vakhtang Kontridze on 19.12.20.
 //
 
 import SwiftUI
@@ -13,111 +13,90 @@ struct VCheckBoxDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "CheckBox"
     
-    private let checkBoxTitle: String = "Lorem ipsum"
+    @State private var state: VCheckBoxState = .on
+    @State private var contentType: ComponentContentType = .text
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VCheckBoxModel.Layout().hitBox)
+    @State private var contentIsClickable: Bool = VCheckBoxModel.Misc().contentIsClickable
+    @State private var loweredOpacityWhenPressed: Bool = VCheckBoxModel.Colors().content.pressedOpacity != 1
+    @State private var loweredOpacityWhenDisabled: Bool = VCheckBoxModel.Colors().content.disabledOpacity != 1
     
-    private func checkBoxContent() -> some View { DemoIconContentView() }
-    
-    let nonClickableContentModel: VCheckBoxModel = {
+    private var model: VCheckBoxModel {
+        let defaultModel: VCheckBoxModel = .init()
+        
         var model: VCheckBoxModel = .init()
-        model.misc.contentIsClickable = false
+        
+        switch hitBoxType {
+        case .clipped:
+            model.layout.hitBox = 0
+            model.layout.contentMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            
+        case .extended:
+            model.layout.hitBox = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+        }
+        
+        model.colors.content.pressedOpacity = loweredOpacityWhenPressed ? 0.5 : 1
+        
+        model.colors.content.disabledOpacity = loweredOpacityWhenDisabled ? 0.5 : 1
+        
+        model.misc.contentIsClickable = contentIsClickable
+
         return model
-    }()
-    
-    let clippedHitBoxModel: VCheckBoxModel = {
-        var model: VCheckBoxModel = .init()
-        model.layout.contentMarginLeading = model.layout.hitBox
-        model.layout.hitBox = 0
-        return model
-    }()
-    
-    let noLoweredOpacityWhenPressedModel: VCheckBoxModel = {
-        var model: VCheckBoxModel = .init()
-        model.colors.content.pressedOpacity = 1
-        return model
-    }()
-    
-    let noLoweredOpacityWhenDisabledModel: VCheckBoxModel = {
-        var model: VCheckBoxModel = .init()
-        model.colors.content.disabledOpacity = 1
-        return model
-    }()
-    
-    @State private var checkBox1State: VCheckBoxState = .on
-    @State private var checkBox2State: VCheckBoxState = .on
-    @State private var checkBox3State: VCheckBoxState = .on
-    @State private var checkBox4State: VCheckBoxState = .on
-    @State private var checkBox5State: VCheckBoxState = .on
-    @State private var checkBox6State: VCheckBoxState = .on
-    @State private var checkBox7State: VCheckBoxState = .on
+    }
 }
 
 // MARK:- Body
 extension VCheckBoxDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("No Content"), content: {
-                    VCheckBox(state: $checkBox1State)
-                })
-                
-                DemoRowView(type: .titled("Text"), content: {
-                    VCheckBox(state: $checkBox2State, title: checkBoxTitle)
-                })
-                
-                DemoRowView(type: .titled("Icon"), content: {
-                    VCheckBox(state: $checkBox3State, content: checkBoxContent)
-                })
-                
-                DemoRowView(type: .titled("Non-clickable Content"), content: {
-                    VCheckBox(model: nonClickableContentModel, state: $checkBox4State, title: checkBoxTitle)
-                })
-                
-                DemoRowView(type: .titled("Clipped Hitbox"), content: {
-                    VCheckBox(model: clippedHitBoxModel, state: $checkBox5State, title: checkBoxTitle)
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                    VCheckBox(model: noLoweredOpacityWhenPressedModel, state: $checkBox6State, title: checkBoxTitle)
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                    VCheckBox(model: noLoweredOpacityWhenDisabledModel, state: $checkBox7State, title: checkBoxTitle)
-                })
-            })
+            DemoView(component: component, settingsSections: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            HStack(content: {
-                Spacer()
-                controllerToggle(active: .intermediate, title: "Intermediate")
-                Spacer()
-                controllerToggle(active: .disabled, title: "Disabled")
-                Spacer()
-            })
+    @ViewBuilder private func component() -> some View {
+        switch contentType {
+        case .text: VCheckBox(model: model, state: $state, title: CheckBoxTitle)
+        case .icon: VCheckBox(model: model, state: $state, content: CheckBoxContent)
+        }
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
+        })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $contentType, header: "Content")
+        })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $loweredOpacityWhenPressed, title: "Low Pressed Opacity", description: "Content lowers opacity when pressed")
+            
+            ToggleSettingView(isOn: $loweredOpacityWhenDisabled, title: "Low Disabled Opacity", description: "Content lowers opacity when disabled")
         })
     }
     
-    private func controllerToggle(active state: VCheckBoxState, title: String) -> some View {
-        ControllerToggleView(
-            state: .init(
-                get: {
-                    ![checkBox1State, checkBox2State, checkBox3State, checkBox4State, checkBox5State, checkBox6State, checkBox7State]
-                        .contains(where: { $0 != state })
-                },
-                set: {
-                    checkBox1State = $0 ? state : .off
-                    checkBox2State = $0 ? state : .off
-                    checkBox3State = $0 ? state : .off
-                    checkBox4State = $0 ? state : .off
-                    checkBox5State = $0 ? state : .off
-                    checkBox6State = $0 ? state : .off
-                    checkBox7State = $0 ? state : .off
-                }
-            ),
-            title: title
-        )
+    private var CheckBoxTitle: String { "Lorem ipsum" }
+    
+    private func CheckBoxContent() -> some View { DemoIconContentView() }
+}
+
+// MARK:- Helpers
+extension VCheckBoxState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .off: return "Off"
+        case .on: return "On"
+        case .intermediate: return "Interm."
+        case .disabled: return "Disabled"
+        }
     }
 }
 

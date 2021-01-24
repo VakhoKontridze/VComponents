@@ -2,7 +2,7 @@
 //  VCloseButtonDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 12/23/20.
+//  Created by Vakhtang Kontridze on 18.12.20.
 //
 
 import SwiftUI
@@ -12,56 +12,49 @@ import VComponents
 struct VCloseButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Close Button"
-
-    @State private var buttonState: VCloseButtonState = .enabled
     
-    private let largerHitBoxButtonModel: VCloseButtonModel = {
+    @State private var state: VCloseButtonState = .enabled
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VCloseButtonModel.Layout().hitBoxHor)
+    
+    private var model: VCloseButtonModel {
+        let defaultModel: VCloseButtonModel = .init()
+        
         var model: VCloseButtonModel = .init()
         
-        model.layout.hitBoxHor = 10
-        model.layout.hitBoxVer = 10
-        
+        switch hitBoxType {
+        case .clipped:
+            model.layout.hitBoxHor = 0
+            model.layout.hitBoxVer = 0
+            
+        case .extended:
+            model.layout.hitBoxHor = defaultModel.layout.hitBoxHor.isZero ? 5 : defaultModel.layout.hitBoxHor
+            model.layout.hitBoxVer = defaultModel.layout.hitBoxVer.isZero ? 5 : defaultModel.layout.hitBoxVer
+        }
+
         return model
-    }()
+    }
 }
 
 // MARK:- Body
 extension VCloseButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Default"), content: {
-                    VCloseButton(state: buttonState, action: action)
-                })
-
-                DemoRowView(type: .titled("Larger Hit Box"), content: {
-                    VCloseButton(model: largerHitBoxButtonModel, state: buttonState, action: action)
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
-        })
+    private func component() -> some View {
+        VCloseButton(model: model, state: state, action: {})
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $state, header: "State")
+        
+        VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
     }
 }
 
-// MARK:- Action
-private extension VCloseButtonDemoView {
-    func action() {
-        print("Pressed")
-    }
-}
-
-// MARK: Preview
+// MARK:- Preview
 struct VCloseButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VCloseButtonDemoView()

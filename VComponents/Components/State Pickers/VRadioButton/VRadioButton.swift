@@ -88,10 +88,10 @@ public struct VRadioButton<Content>: View where Content: View {
             state: state,
             content: {
                 VText(
-                    title: title,
-                    color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
+                    type: .multiLine(limit: nil, alignment: .leading),
                     font: model.fonts.title,
-                    type: .multiLine(limit: nil, alignment: .leading)
+                    color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
+                    title: title
                 )
             }
         )
@@ -132,10 +132,10 @@ public struct VRadioButton<Content>: View where Content: View {
             state: .init(bool: isOn),
             content: {
                 VText(
-                    title: title,
-                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
+                    type: .multiLine(limit: nil, alignment: .leading),
                     font: model.fonts.title,
-                    type: .multiLine(limit: nil, alignment: .leading)
+                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
+                    title: title
                 )
             }
         )
@@ -187,10 +187,10 @@ public struct VRadioButton<Content>: View where Content: View {
             ),
             content: {
                 VText(
-                    title: selectingValue.pickerTitle,
-                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
+                    type: .multiLine(limit: nil, alignment: .leading),
                     font: model.fonts.title,
-                    type: .multiLine(limit: nil, alignment: .leading)
+                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
+                    title: selectingValue.pickerTitle
                 )
             }
         )

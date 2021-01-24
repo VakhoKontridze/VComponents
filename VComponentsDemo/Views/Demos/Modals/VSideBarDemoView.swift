@@ -19,11 +19,20 @@ struct VSideBarDemoView: View {
 extension VSideBarDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, leadingItem: sidBarIcon, content: {
-            ZStack(content: {
-                ColorBook.canvas.edgesIgnoringSafeArea(.all)
-                
-                VSheet()
-            })
+            DemoView(component: component)
+        })
+    }
+    
+    private func component() -> some View {
+        VStack(spacing: 20, content: {
+            VSecondaryButton(action: { isPresented = true }, title: "Present")
+            
+            VText(
+                type: .multiLine(limit: nil, alignment: .center),
+                font: .callout,
+                color: ColorBook.secondary,
+                title: "Alternately, you can open Side Bar by tapping on a button in the navigation bar"
+            )
         })
             .vSideBar(isPresented: $isPresented, sideBar: {
                 VSideBar(content: { sideBarContent })
@@ -40,10 +49,10 @@ extension VSideBarDemoView {
     private var sideBarContent: some View {
         VLazyList(model: .vertical(), range: 1..<11, content: { num in
             VText(
-                title: "\(num)",
-                color: ColorBook.primaryInverted,
+                type: .oneLine,
                 font: .body,
-                type: .oneLine
+                color: ColorBook.primaryInverted,
+                title: "\(num)"
             )
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)

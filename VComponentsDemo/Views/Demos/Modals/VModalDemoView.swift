@@ -13,12 +13,11 @@ struct VModalDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Modal"
     
-    @State private var hasTitle: Bool = true
-    @State private var dismissType: Set<VModalModel.Misc.DismissType>
-    
     @State private var isPresented: Bool = false
+    @State private var hasTitle: Bool = true
+    @State private var dismissType: Set<VModalModel.Misc.DismissType> = .default
     
-    private var modalModel: VModalModel {
+    private var model: VModalModel {
         var model: VModalModel = .init()
         
         model.misc.dismissType = dismissType
@@ -31,43 +30,24 @@ struct VModalDemoView: View {
         model.animations.selection = nil
         return model
     }
-    
-    // MARK: Initializers
-    init() {
-        self._dismissType = State(initialValue: .default)
-    }
 }
 
 // MARK:- Body
 extension VModalDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .section, content: {
-                VStack(spacing: 20, content: {
-                    ToggleSettingView(isOn: $hasTitle, title: "Title")
-                    
-                    VStack(spacing: 3, content: {
-                        VText(title: "Dismiss Type:", color: ColorBook.primary, font: .callout, type: .oneLine)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                        
-                        HStack(content: {
-                            ForEach(VModalModel.Misc.DismissType.allCases, id: \.rawValue, content: { position in
-                                dimissTypeView(position)
-                            })
-                        })
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    })
-                    
-                    VSecondaryButton(action: { isPresented = true }, title: "Demo Modal")
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
+    }
+    
+    private func component() -> some View {
+        VSecondaryButton(action: { isPresented = true }, title: "Present")
             .if(hasTitle,
                 ifTransform: {
                     $0
                         .vModal(isPresented: $isPresented, modal: {
                             VModal(
-                                model: modalModel,
+                                model: model,
                                 header: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
                                 content: { modalContent }
                             )
@@ -76,12 +56,28 @@ extension VModalDemoView {
                     $0
                         .vModal(isPresented: $isPresented, modal: {
                             VModal(
-                                model: modalModel,
+                                model: model,
                                 content: { modalContent }
                             )
                         })
                 }
             )
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        ToggleSettingView(isOn: $hasTitle, title: "Title")
+        
+        VStack(spacing: 3, content: {
+            VText(type: .oneLine, font: .callout, color: ColorBook.primary, title: "Dismiss Method:")
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            HStack(content: {
+                ForEach(VModalModel.Misc.DismissType.allCases, id: \.rawValue, content: { position in
+                    dimissTypeView(position)
+                })
+            })
+                .frame(maxWidth: .infinity, alignment: .leading)
+        })
     }
     
     private func dimissTypeView(_ position: VModalModel.Misc.DismissType) -> some View {
@@ -106,10 +102,10 @@ extension VModalDemoView {
             if dismissType.isEmpty {
                 VStack(content: {
                     VText(
-                        title: "When close button is \"none\", Modal can only be dismissed programatically",
-                        color: ColorBook.primary,
+                        type: .multiLine(limit: nil, alignment: .center),
                         font: .system(size: 14, weight: .semibold, design: .default),
-                        type: .multiLine(limit: nil, alignment: .center)
+                        color: ColorBook.primary,
+                        title: "When close button is \"none\", Modal can only be dismissed programatically"
                     )
                     
                     VSecondaryButton(action: { isPresented = false }, title: "Dismiss")

@@ -14,31 +14,29 @@ struct VProgressBarDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Progress Bar"
     
-    @State private var useAnimation: Bool = true
-    
     @State private var value: Double = 0.5
     private let timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    
+    @State private var useAnimation: Bool = true
 }
 
 // MARK:- Body
 extension VProgressBarDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Default"), content: {
-                    VSliderDemoView.rowView(title: .init(value), content: {
-                        VProgressBar(value: value)
-                    })
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
             .onReceive(timer, perform: updateValue)
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(state: $useAnimation, title: "Animation")
+    @ViewBuilder private func component() -> some View {
+        VSliderDemoView.sliderRowView(title: .init(value), content: {
+            VProgressBar(value: value)
         })
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        ToggleSettingView(isOn: $useAnimation, title: "Progress Animation")
     }
 }
 

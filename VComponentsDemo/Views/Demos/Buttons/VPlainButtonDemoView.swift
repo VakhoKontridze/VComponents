@@ -2,7 +2,7 @@
 //  VPlainButtonDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 18.12.20.
 //
 
 import SwiftUI
@@ -13,78 +13,68 @@ struct VPlainButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Plain Button"
     
-    private let buttonTitle: String = "Lorem ipsum"
+    @State private var state: VPlainButtonState = .enabled
+    @State private var contentType: ComponentContentType = .text
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VPlainButtonModel.Layout().hitBoxHor)
     
-    private func buttonContent() -> some View { DemoIconContentView() }
-    
-    @State private var buttonState: VPlainButtonState = .enabled
-    
-    let clippedHitBoxButtonModel: VPlainButtonModel = {
+    private var model: VPlainButtonModel {
+        let defaultModel: VPlainButtonModel = .init()
+        
         var model: VPlainButtonModel = .init()
         
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
-        
+        switch hitBoxType {
+        case .clipped:
+            model.layout.hitBoxHor = 0
+            model.layout.hitBoxVer = 0
+            
+        case .extended:
+            model.layout.hitBoxHor = defaultModel.layout.hitBoxHor.isZero ? 5 : defaultModel.layout.hitBoxHor
+            model.layout.hitBoxVer = defaultModel.layout.hitBoxVer.isZero ? 5 : defaultModel.layout.hitBoxVer
+        }
+
         return model
-    }()
+    }
 }
 
 // MARK:- Body
 extension VPlainButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Text"), content: {
-                    VPlainButton(state: buttonState, action: action, title: buttonTitle)
-                })
-                
-                DemoRowView(type: .titled("Image"), content: {
-                    VPlainButton(state: buttonState, action: action, content: buttonContent)
-                })
-                
-                DemoRowView(type: .titled("Image and Text"), content: {
-                    VPlainButton(state: buttonState, action: action, content: {
-                        VStack(spacing: 5, content: {
-                            buttonContent()
-
-                            VText(
-                                title: buttonTitle,
-                                color: ColorBook.accent,
-                                font: VPlainButtonModel.Fonts().title,
-                                type: .oneLine
-                            )
-                        })
-                    })
-                })
-                
-                DemoRowView(type: .titled("Clipped Hit Box"), content: {
-                    VPlainButton(model: clippedHitBoxButtonModel, state: buttonState, action: action, title: buttonTitle)
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
-        })
+    @ViewBuilder private func component() -> some View {
+        switch contentType {
+        case .text: VPlainButton(model: model, state: state, action: {}, title: buttonTitle)
+        case .icon: VPlainButton(model: model, state: state, action: {}, content: buttonContent)
+        }
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $state, header: "State")
+        
+        VSegmentedPicker(selection: $contentType, header: "Content")
+        
+        VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+    }
+    
+    private var buttonTitle: String { "Lorem ipsum" }
+
+    private func buttonContent() -> some View { DemoIconContentView() }
+}
+
+// MARK:- Helpers
+extension VPlainButtonState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
     }
 }
 
-// MARK:- Action
-private extension VPlainButtonDemoView {
-    func action() {
-        print("Pressed")
-    }
-}
-
-// MARK: Preview
+// MARK:- Preview
 struct VPlainButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VPlainButtonDemoView()

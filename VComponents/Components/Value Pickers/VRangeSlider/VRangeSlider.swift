@@ -87,11 +87,14 @@ public struct VRangeSlider: View {
 
 // MARK:- Body
 extension VRangeSlider {
-    @ViewBuilder public var body: some View {
-        switch validLayout {
-        case false: invalidBody
-        case true: validBody
-        }
+    public var body: some View {
+        Group(content: {
+            switch validLayout {
+            case false: invalidBody
+            case true: validBody
+            }
+        })
+            .padding(.horizontal, model.layout.thumbDimension / 2)
     }
     
     private var invalidBody: some View {
@@ -114,7 +117,6 @@ extension VRangeSlider {
                 .disabled(state.isDisabled)
         })
             .frame(height: model.layout.height)
-            .padding(.horizontal, model.layout.thumbDimension / 2)
     }
 
     private var track: some View {

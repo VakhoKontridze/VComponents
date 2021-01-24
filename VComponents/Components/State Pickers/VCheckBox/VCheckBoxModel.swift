@@ -32,6 +32,8 @@ extension VCheckBoxModel {
         public var hitBox: CGFloat = toggleReference.layout.contentMarginLeading
         
         public var contentMarginLeading: CGFloat = 0
+        
+        public init() {}
     }
 }
 

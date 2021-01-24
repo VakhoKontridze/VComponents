@@ -66,12 +66,11 @@ extension _VModal {
         ZStack(content: {
             VSheet(model: model.sheetSubModel)
             
-            VStack(spacing: model.layout.spacing, content: {
+            VStack(spacing: 0, content: {
                 headerView
                 dividerView
-                content()
+                contentView
             })
-                .padding(model.layout.margin)
         })
             .frame(size: model.layout.size)
             .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
@@ -99,6 +98,10 @@ extension _VModal {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             })
+                .padding(.leading, model.layout.headerMargin.leading)
+                .padding(.trailing, model.layout.headerMargin.trailing)
+                .padding(.top, model.layout.headerMargin.top)
+                .padding(.bottom, model.layout.headerMargin.bottom)
         }
     }
     
@@ -106,8 +109,20 @@ extension _VModal {
         if headerExists && model.layout.hasDivider {
             Rectangle()
                 .frame(height: model.layout.dividerHeight)
+                .padding(.leading, model.layout.dividerMargin.leading)
+                .padding(.trailing, model.layout.dividerMargin.trailing)
+                .padding(.top, model.layout.dividerMargin.top)
+                .padding(.bottom, model.layout.dividerMargin.bottom)
                 .foregroundColor(model.colors.divider)
         }
+    }
+    
+    private var contentView: some View {
+        content()
+            .padding(.leading, model.layout.contentMargin.leading)
+            .padding(.trailing, model.layout.contentMargin.trailing)
+            .padding(.top, model.layout.contentMargin.top)
+            .padding(.bottom, model.layout.contentMargin.bottom)
     }
     
     private var closeButton: some View {

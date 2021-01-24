@@ -25,12 +25,6 @@ struct VBaseViewDemoView: View {
         return model
     }
 
-    private var segmentedPickerModel: VSegmentedPickerModel = {
-        var model: VSegmentedPickerModel = .init()
-        model.animations.selection = nil
-        return model
-    }()
-    
     private var plainButtonModel: VPlainButtonModel = {
         var model: VPlainButtonModel = .init()
         
@@ -49,25 +43,22 @@ extension VBaseViewDemoView {
             title: Self.navigationBarTitle,
             leadingItem: leadingItem,
             trailingItem: trailingItem,
-            content: {
-                DemoView(type: .section, content: {
-                    VStack(spacing: 20, content: {
-                        VSegmentedPicker(
-                            model: segmentedPickerModel,
-                            selection: $titlePosition,
-                            title: "Title Position"
-                        )
-                        
-                        ToggleSettingView(isOn: $hasLeadingItem, title: "Leading items")
-                        
-                        ToggleSettingView(isOn: $hasTrailingItem, title: "Trailing items")
-                    })
-                })
-            }
+            content: { DemoView(component: settings) }  // Cannot be contained in VHalfModal, becase chaning title position causes glitches
         )
     }
     
-    @ViewBuilder func leadingItem() -> some View {
+    private func settings() -> some View {
+        VStack(spacing: 15, content: {
+            VSegmentedPicker(selection: $titlePosition, header: "Title Position")
+            
+            ToggleSettingView(isOn: $hasLeadingItem, title: "Leading items")
+            
+            ToggleSettingView(isOn: $hasTrailingItem, title: "Trailing items")
+        })
+            .frame(maxHeight: .infinity, alignment: .top)
+    }
+    
+    @ViewBuilder private func leadingItem() -> some View {
         if hasLeadingItem {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item")
@@ -75,7 +66,7 @@ extension VBaseViewDemoView {
         }
     }
     
-    @ViewBuilder func trailingItem() -> some View {
+    @ViewBuilder private func trailingItem() -> some View {
         if hasTrailingItem {
             HStack(content: {
                 VPlainButton(model: plainButtonModel, action: {}, title: "Item 1")

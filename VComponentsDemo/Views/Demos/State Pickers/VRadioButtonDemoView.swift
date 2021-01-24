@@ -2,7 +2,7 @@
 //  VRadioButtonDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/19/21.
+//  Created by Vakhtang Kontridze on 19.12.20.
 //
 
 import SwiftUI
@@ -13,111 +13,89 @@ struct VRadioButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Radio Button"
     
-    private let radioButtonTitle: String = "Lorem ipsum"
+    @State private var state: VRadioButtonState = .on
+    @State private var contentType: ComponentContentType = .text
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VRadioButtonModel.Layout().hitBox)
+    @State private var contentIsClickable: Bool = VRadioButtonModel.Misc().contentIsClickable
+    @State private var loweredOpacityWhenPressed: Bool = VRadioButtonModel.Colors().content.pressedOpacity != 1
+    @State private var loweredOpacityWhenDisabled: Bool = VRadioButtonModel.Colors().content.disabledOpacity != 1
     
-    private func radioButtonContent() -> some View { DemoIconContentView() }
-    
-    let nonClickableContentModel: VRadioButtonModel = {
+    private var model: VRadioButtonModel {
+        let defaultModel: VRadioButtonModel = .init()
+        
         var model: VRadioButtonModel = .init()
-        model.misc.contentIsClickable = false
+        
+        switch hitBoxType {
+        case .clipped:
+            model.layout.hitBox = 0
+            model.layout.contentMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            
+        case .extended:
+            model.layout.hitBox = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+        }
+        
+        model.colors.content.pressedOpacity = loweredOpacityWhenPressed ? 0.5 : 1
+        
+        model.colors.content.disabledOpacity = loweredOpacityWhenDisabled ? 0.5 : 1
+        
+        model.misc.contentIsClickable = contentIsClickable
+
         return model
-    }()
-    
-    let clippedHitBoxModel: VRadioButtonModel = {
-        var model: VRadioButtonModel = .init()
-        model.layout.contentMarginLeading = model.layout.hitBox
-        model.layout.hitBox = 0
-        return model
-    }()
-    
-    let noLoweredOpacityWhenPressedModel: VRadioButtonModel = {
-        var model: VRadioButtonModel = .init()
-        model.colors.content.pressedOpacity = 1
-        return model
-    }()
-    
-    let noLoweredOpacityWhenDisabledModel: VRadioButtonModel = {
-        var model: VRadioButtonModel = .init()
-        model.colors.content.disabledOpacity = 1
-        return model
-    }()
-    
-    @State private var radioButton1State: VRadioButtonState = .on
-    @State private var radioButton2State: VRadioButtonState = .on
-    @State private var radioButton3State: VRadioButtonState = .on
-    @State private var radioButton4State: VRadioButtonState = .on
-    @State private var radioButton5State: VRadioButtonState = .on
-    @State private var radioButton6State: VRadioButtonState = .on
-    @State private var radioButton7State: VRadioButtonState = .on
+    }
 }
 
 // MARK:- Body
 extension VRadioButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("No Content"), content: {
-                    VRadioButton(state: $radioButton1State)
-                })
-                
-                DemoRowView(type: .titled("Text"), content: {
-                    VRadioButton(state: $radioButton2State, title: radioButtonTitle)
-                })
-                
-                DemoRowView(type: .titled("Icon"), content: {
-                    VRadioButton(state: $radioButton3State, content: radioButtonContent)
-                })
-                
-                DemoRowView(type: .titled("Non-clickable Content"), content: {
-                    VRadioButton(model: nonClickableContentModel, state: $radioButton4State, title: radioButtonTitle)
-                })
-                
-                DemoRowView(type: .titled("Clipped Hitbox"), content: {
-                    VRadioButton(model: clippedHitBoxModel, state: $radioButton5State, title: radioButtonTitle)
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Pressed"), content: {
-                    VRadioButton(model: noLoweredOpacityWhenPressedModel, state: $radioButton6State, title: radioButtonTitle)
-                })
-                
-                DemoRowView(type: .titled("No Lowered Opacity when Disabled"), content: {
-                    VRadioButton(model: noLoweredOpacityWhenDisabledModel, state: $radioButton7State, title: radioButtonTitle)
-                })
-            })
+            DemoView(component: component, settingsSections: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            HStack(content: {
-                Spacer()
-                controllerToggle(active: .off, title: "Off")
-                Spacer()
-                controllerToggle(active: .disabled, title: "Disabled")
-                Spacer()
-            })
+    @ViewBuilder private func component() -> some View {
+        switch contentType {
+        case .text: VRadioButton(model: model, state: $state, title: RadioButtonTitle)
+        case .icon: VRadioButton(model: model, state: $state, content: RadioButtonContent)
+        }
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
+        })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $contentType, header: "Content")
+        })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $loweredOpacityWhenPressed, title: "Low Pressed Opacity", description: "Content lowers opacity when pressed")
+            
+            ToggleSettingView(isOn: $loweredOpacityWhenDisabled, title: "Low Disabled Opacity", description: "Content lowers opacity when disabled")
         })
     }
     
-    private func controllerToggle(active state: VRadioButtonState, title: String) -> some View {
-        ControllerToggleView(
-            state: .init(
-                get: {
-                    ![radioButton1State, radioButton2State, radioButton3State, radioButton4State, radioButton5State, radioButton6State, radioButton7State]
-                        .contains(where: { $0 != state })
-                },
-                set: {
-                    radioButton1State = $0 ? state : .off
-                    radioButton2State = $0 ? state : .off
-                    radioButton3State = $0 ? state : .off
-                    radioButton4State = $0 ? state : .off
-                    radioButton5State = $0 ? state : .off
-                    radioButton6State = $0 ? state : .off
-                    radioButton7State = $0 ? state : .off
-                }
-            ),
-            title: title
-        )
+    private var RadioButtonTitle: String { "Lorem ipsum" }
+    
+    private func RadioButtonContent() -> some View { DemoIconContentView() }
+}
+
+// MARK:- Helpers
+extension VRadioButtonState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .off: return "Off"
+        case .on: return "On"
+        case .disabled: return "Disabled"
+        }
     }
 }
 

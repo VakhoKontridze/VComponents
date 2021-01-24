@@ -74,34 +74,59 @@ extension _VHalfModal {
     }
     
     @ViewBuilder private var modalView: some View {
+//        if validLayout {
+//            ZStack(alignment: .top, content: {
+//                VSheet(model: model.sheetModel)
+//                    .edgesIgnoringSafeArea(.all)
+//
+//                VStack(spacing: 0, content: {
+//                    headerView
+//                    dividerView
+//                    contentView
+//                })
+//                    .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
+//
+//                navigationBarCloseButton
+//                    .edgesIgnoringSafeArea(.all)
+//            })
+//                .frame(height: model.layout.height.max)
+//                .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max)
+//                .onAppear(perform: appearAction)
+//                .onDisappear(perform: disappearAction)
+//                .gesture(
+//                    DragGesture(minimumDistance: VHalfModalModel.Layout.minimumTranslationDistance)
+//                        .onChanged(dragChanged)
+//                        .onEnded(dragEnded)
+//                )
+//        }
         if validLayout {
-            ZStack(content: {
+            ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
                     .edgesIgnoringSafeArea(.all)
+                    .frame(height: model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged(dragChanged)
+                            .onEnded(dragEnded)
+                    )
                 
-                VStack(spacing: model.layout.spacing, content: {
+                VStack(spacing: 0, content: {
                     headerView
                     dividerView
-                    content()
+                    contentView
                 })
-                    .padding(.leading, model.layout.contentMargin.leading)
-                    .padding(.trailing, model.layout.contentMargin.trailing)
-                    .padding(.top, model.layout.contentMargin.top)
-                    .padding(.bottom, model.layout.contentMargin.bottom)
                     .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
+                    .frame(height: model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
                 
                 navigationBarCloseButton
                     .edgesIgnoringSafeArea(.all)
+                    .frame(height: model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
             })
-                .frame(height: model.layout.height.max)
-                .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max)
                 .onAppear(perform: appearAction)
                 .onDisappear(perform: disappearAction)
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged(dragChanged)
-                        .onEnded(dragEnded)
-                )
         }
     }
 
@@ -123,6 +148,10 @@ extension _VHalfModal {
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             })
+                .padding(.leading, model.layout.headerMargin.leading)
+                .padding(.trailing, model.layout.headerMargin.trailing)
+                .padding(.top, model.layout.headerMargin.top)
+                .padding(.bottom, model.layout.headerMargin.bottom)
         }
     }
 
@@ -130,8 +159,20 @@ extension _VHalfModal {
         if headerExists && model.layout.hasDivider {
             Rectangle()
                 .frame(height: model.layout.dividerHeight)
+                .padding(.leading, model.layout.dividerMargin.leading)
+                .padding(.trailing, model.layout.dividerMargin.trailing)
+                .padding(.top, model.layout.dividerMargin.top)
+                .padding(.bottom, model.layout.dividerMargin.bottom)
                 .foregroundColor(model.colors.divider)
         }
+    }
+    
+    private var contentView: some View {
+        content()
+            .padding(.leading, model.layout.contentMargin.leading)
+            .padding(.trailing, model.layout.contentMargin.trailing)
+            .padding(.top, model.layout.contentMargin.top)
+            .padding(.bottom, model.layout.contentMargin.bottom)
     }
 
     private var closeButton: some View {
@@ -142,8 +183,8 @@ extension _VHalfModal {
         if model.misc.dismissType.contains(.navigationViewCloseButton) {
             VCloseButton(model: model.closeButtonSubModel, action: animateOut)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .padding(.trailing, model.layout.contentMargin.trailing)
-                .padding(.top, model.layout.contentMargin.top)
+                .padding(.trailing, model.layout.headerMargin.trailing)
+                .padding(.top, model.layout.headerMargin.top)
                 .padding(.top, VHalfModalModel.Layout.navigationViewCloseButtonMarginTop)
         }
     }

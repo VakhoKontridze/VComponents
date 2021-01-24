@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component ca be initialized with data or free content
 ///
-/// Model, layout, and title can be passed as parameters
+/// Model, layout, and header can be passed as parameters
 ///
 /// There are three posible layouts:
 /// 1. Fixed. Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
@@ -38,7 +38,7 @@ import SwiftUI
 ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
 ///         VSection(
-///             title: "Lorem ipsum dolor sit amet",
+///             header: "Lorem ipsum dolor sit amet",
 ///             data: data,
 ///             rowContent: { row in
 ///                 Text(row.title)
@@ -62,7 +62,7 @@ public struct VSection<Content, Data, ID, RowContent>: View
     
     private let layoutType: VSectionLayoutType
     
-    private let title: String?
+    private let header: String?
     
     private let contentType: ContentType
     private enum ContentType {
@@ -74,7 +74,7 @@ public struct VSection<Content, Data, ID, RowContent>: View
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .default,
-        title: String? = nil,
+        header: String? = nil,
         @ViewBuilder content: @escaping () -> Content
     )
         where
@@ -84,7 +84,7 @@ public struct VSection<Content, Data, ID, RowContent>: View
     {
         self.model = model
         self.layoutType = layoutType
-        self.title = title
+        self.header = header
         self.contentType = .freeForm(
             content: content
         )
@@ -93,7 +93,7 @@ public struct VSection<Content, Data, ID, RowContent>: View
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .default,
-        title: String? = nil,
+        header: String? = nil,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -102,7 +102,7 @@ public struct VSection<Content, Data, ID, RowContent>: View
     {
         self.model = model
         self.layoutType = layoutType
-        self.title = title
+        self.header = header
         self.contentType = .list(
             data: data,
             id: id,
@@ -113,7 +113,7 @@ public struct VSection<Content, Data, ID, RowContent>: View
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .default,
-        title: String? = nil,
+        header: String? = nil,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -125,7 +125,7 @@ public struct VSection<Content, Data, ID, RowContent>: View
         self.init(
             model: model,
             layout: layoutType,
-            title: title,
+            header: header,
             data: data,
             id: \Data.Element.id,
             rowContent: rowContent
@@ -136,20 +136,23 @@ public struct VSection<Content, Data, ID, RowContent>: View
 // MARK:- Body
 extension VSection {
     public var body: some View {
-        VStack(alignment: .leading, spacing: model.layout.titleMarginBottom, content: {
-            if let title = title, !title.isEmpty {
-                VText(
-                    title: title,
-                    color: model.colors.title,
-                    font: model.fonts.title,
-                    type: .oneLine
-                )
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, model.layout.titleMarginHor)
-            }
-            
+        VStack(alignment: .leading, spacing: model.layout.headerSpacing, content: {
+            headerView
             VSheet(model: model.sheetSubModel, content: { contentView })
         })
+    }
+    
+    @ViewBuilder private var headerView: some View {
+        if let header = header, !header.isEmpty {
+            VText(
+                type: .oneLine,
+                font: model.fonts.title,
+                color: model.colors.title,
+                title: header
+            )
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, model.layout.titleMarginHor)
+        }
     }
     
     @ViewBuilder private var contentView: some View {
@@ -167,6 +170,7 @@ extension VSection {
                 content: rowContent
             )
                 .padding([.leading, .top, .bottom], model.layout.contentMargin)
+                .frame(maxWidth: .infinity)
         }
     }
 }
@@ -178,7 +182,7 @@ struct VSection_Previews: PreviewProvider {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
             
-            VSection(title: "Lorem ipsum dolor sit amet", data: VBaseList_Previews.rows, rowContent: { row in
+            VSection(header: "Lorem ipsum dolor sit amet", data: VBaseList_Previews.rows, rowContent: { row in
                 VBaseList_Previews.rowContent(title: row.title, color: row.color)
             })
                 .padding(20)

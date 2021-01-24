@@ -13,82 +13,52 @@ struct VSectionDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Section"
     
-    @State private var rowCount: Int = 5
-    
-    @State private var form: VBaseListDemoView.Form = .default
-    
-    // Copied and modifier from VSection's preview
-    private struct Row: Identifiable {
-        let id: Int
-        let color: Color
-        let title: String
-    }
-    
-    private var rows: [Row] {
-        (0..<rowCount).map { i in
-            .init(
-                id: i,
-                color: [.red, .green, .blue][i % 3],
-                title: spellOut(i + 1)
-            )
-        }
-    }
-    
-    private func spellOut(_ i: Int) -> String {
-        let formatter: NumberFormatter = .init()
-        formatter.numberStyle = .spellOut
-        return formatter.string(from: .init(value: i))?.capitalized ?? ""
-    }
-    
-    private func rowContent(title: String, color: Color) -> some View {
-        HStack(spacing: 10, content: {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundColor(color.opacity(0.8))
-                .frame(dimension: 32)
-
-            VText(
-                title: title,
-                color: ColorBook.primary,
-                font: .body,
-                type: .oneLine
-            )
-        })
-            .frame(maxWidth: .infinity, alignment: .leading)
-    }
+    @State private var layoutType: BaseListLayoutTypeHelper = .default
+    @State private var hasHeader: Bool = true
+    @State private var rowCount: Int = 3
 }
 
 // MARK:- Body
 extension VSectionDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: form.demoViewType, controller: controller, content: {
-                VSection(
-                    layout: form.sectionlayoutType,
-                    title: "Lorem ipsum dolor sit amet",
-                    data: rows,
-                    content: { rowContent(title: $0.title, color: $0.color) }
-                )
-                    .frame(height: form.height)
-            })
+            DemoView(
+                type: layoutType.demoViewComponentContentType,
+                hasLayer: false,
+                component: component,
+                settings: settings
+            )
         })
     }
     
-    private var controller: some View {
-        VStack(spacing: 20, content: {
-            Stepper("Rows", value: $rowCount, in: 0...20)
-            
-            VSegmentedPicker(
-                selection: $form,
-                title: "Section Height",
-                description: form.description
-            )
-                .frame(height: 90, alignment: .top)
-        })
+    private func component() -> some View {
+        VSection(
+            layout: layoutType.sectionlayoutType,
+            header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+            data: VBaseListDemoViewDataSource.rows(count: rowCount),
+            rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+        )
+            .ifLet(layoutType.height, transform: { (view, height) in
+                Group(content: {
+                    view
+                        .frame(height: height)
+                })
+                    .frame(maxHeight: .infinity, alignment: .top)
+            })
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $layoutType, header: "Layout", footer: layoutType.description)
+            .frame(height: 110, alignment: .top)
+        
+        ToggleSettingView(isOn: $hasHeader, title: "Header")
+        
+        Stepper("Rows", value: $rowCount, in: 0...20)
     }
 }
 
 // MARK:- Helpers
-private extension VBaseListDemoView.Form {
+private extension BaseListLayoutTypeHelper {
     var sectionlayoutType: VSectionLayoutType {
         switch self {
         case .fixed: return .fixed

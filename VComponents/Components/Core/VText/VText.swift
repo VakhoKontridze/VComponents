@@ -15,32 +15,32 @@ import SwiftUI
 /// ```
 /// var body: some View {
 ///     VText(
-///         title: "Lorem ipsum dolor sit amet",
-///         color: ColorBook.primary,
-///         font: .body,
 ///         type: .oneLine
+///         font: .body,
+///         color: ColorBook.primary,
+///         title: "Lorem ipsum dolor sit amet"
 ///     )
 /// }
 /// ```
 ///
 public struct VText: View {
     // MARK: Properties
-    private let title: String
-    private let color: Color
-    private let font: Font
     private let titleType: VTextType
+    private let font: Font
+    private let color: Color
+    private let title: String
     
     // MARK: Initializers
     public init(
-        title: String,
-        color: Color,
+        type titleType: VTextType,
         font: Font,
-        type titleType: VTextType
+        color: Color,
+        title: String
     ) {
-        self.title = title
-        self.color = color
-        self.font = font
         self.titleType = titleType
+        self.font = font
+        self.color = color
+        self.title = title
     }
 }
 
@@ -69,6 +69,11 @@ extension VText {
 // MARK:- Preview
 struct VText_Previews: PreviewProvider {
     static var previews: some View {
-        VText(title: "Lorem ipsum dolor sit amet", color: ColorBook.primary, font: .body, type: .oneLine)
+        VText(
+            type: .oneLine,
+            font: .body,
+            color: ColorBook.primary,
+            title: "Lorem ipsum dolor sit amet"
+        )
     }
 }

@@ -22,29 +22,59 @@ extension VAccordionModel {
     public struct Layout {
         public var cornerRadius: CGFloat = sectionReference.layout.cornerRadius
         
-        public var marginLeading: CGFloat = 15
-        public var marginTrailing: CGFloat = 15
-        public var marginTop: CGFloat = 8
-        public var marginBottomCollapsed: CGFloat = 8
-        public var marginBottomExpanded: CGFloat = 15
-        
-        public var headerDividerHeight: CGFloat = 1
-        public var headerDividerMarginTop: CGFloat = 8
-        public var headerDividerMarginBottom: CGFloat = 10
-        
-        public var contentMarginLeading: CGFloat = 5
-        public var contentMarginTrailing: CGFloat = 5
-        public var contentMarginTop: CGFloat = 0
-        public var contentMarginBottom: CGFloat = 5
-        
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        public var dividerHeight: CGFloat = sectionReference.layout.dividerHeight
+        public var dividerHeight: CGFloat = 1
+        var hasDivider: Bool { dividerHeight > 0 }
+        
+        public var rowDividerHeight: CGFloat = sectionReference.layout.dividerHeight
+        
+        public var headerMargin: ExpandableMargins = .init(
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
+            top: 12,
+            bottomCollapsed: 12,
+            bottomExpanded: 12/2
+        )
+        
+        public var dividerMargin: Margins = .init(
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
+            top: 12/2,
+            bottom: 12/2
+        )
+        
+        public var contentMargin: Margins = .init(
+            leading: sheetReference.layout.contentMargin + 5,
+            trailing: sheetReference.layout.contentMargin + 5,
+            top: 12/2,
+            bottom: sheetReference.layout.contentMargin + 5
+        )
         
         public var itemSpacing: CGFloat = sectionReference.layout.itemSpacing
         
         public init() {}
+    }
+}
+
+extension VAccordionModel.Layout {
+    public typealias Margins = VModalModel.Layout.Margins
+    
+    public struct ExpandableMargins {
+        public var leading: CGFloat
+        public var trailing: CGFloat
+        public var top: CGFloat
+        public var bottomCollapsed: CGFloat
+        public var bottomExpanded: CGFloat
+        
+        public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottomCollapsed: CGFloat, bottomExpanded: CGFloat) {
+            self.leading = leading
+            self.trailing = trailing
+            self.top = top
+            self.bottomCollapsed = bottomCollapsed
+            self.bottomExpanded = bottomExpanded
+        }
     }
 }
 
@@ -112,6 +142,7 @@ extension VAccordionModel {
 
 // MARK:- References
 extension VAccordionModel {
+    public static let sheetReference: VSheetModel = .init()
     public static let sectionReference: VSectionModel = .init()
     public static let chevronButtonReference: VChevronButtonModel = .init()
 }
@@ -123,9 +154,9 @@ extension VAccordionModel {
         
         model.misc.showIndicator = misc.showIndicator
         
-        model.layout.marginTrailing = layout.marginTrailing + layout.contentMarginTrailing
+        model.layout.marginTrailing = layout.contentMargin.trailing
         model.layout.itemSpacing = layout.itemSpacing
-        model.layout.dividerHeight = layout.dividerHeight
+        model.layout.dividerHeight = layout.rowDividerHeight
         
         model.colors.divider = colors.divider
         

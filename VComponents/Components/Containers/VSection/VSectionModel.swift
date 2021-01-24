@@ -22,7 +22,7 @@ public struct VSectionModel {
 extension VSectionModel {
     public struct Layout {
         public var titleMarginHor: CGFloat = 0
-        public var titleMarginBottom: CGFloat = 10
+        public var headerSpacing: CGFloat = 10
         
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         public var contentMargin: CGFloat = sheetReference.layout.contentMargin

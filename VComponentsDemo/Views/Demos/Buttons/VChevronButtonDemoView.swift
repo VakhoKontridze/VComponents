@@ -2,7 +2,7 @@
 //  VChevronButtonDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 12/23/20.
+//  Created by Vakhtang Kontridze on 18.12.20.
 //
 
 import SwiftUI
@@ -12,68 +12,64 @@ import VComponents
 struct VChevronButtonDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Chevron Button"
-
-    @State private var buttonState: VChevronButtonState = .enabled
     
-    private let largerHitBoxButtonModel: VChevronButtonModel = {
+    @State private var state: VChevronButtonState = .enabled
+    @State private var direction: VChevronButtonDirection = .left
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VChevronButtonModel.Layout().hitBoxHor)
+    
+    private var model: VChevronButtonModel {
+        let defaultModel: VChevronButtonModel = .init()
+        
         var model: VChevronButtonModel = .init()
         
-        model.layout.hitBoxHor = 10
-        model.layout.hitBoxVer = 10
-        
+        switch hitBoxType {
+        case .clipped:
+            model.layout.hitBoxHor = 0
+            model.layout.hitBoxVer = 0
+            
+        case .extended:
+            model.layout.hitBoxHor = defaultModel.layout.hitBoxHor.isZero ? 5 : defaultModel.layout.hitBoxHor
+            model.layout.hitBoxVer = defaultModel.layout.hitBoxVer.isZero ? 5 : defaultModel.layout.hitBoxVer
+        }
+
         return model
-    }()
+    }
 }
 
 // MARK:- Body
 extension VChevronButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .rowed, controller: controller, content: {
-                DemoRowView(type: .titled("Up"), content: {
-                    VChevronButton(direction: .up, state: buttonState, action: action)
-                })
-                
-                DemoRowView(type: .titled("Right"), content: {
-                    VChevronButton(direction: .right, state: buttonState, action: action)
-                })
-                
-                DemoRowView(type: .titled("Down"), content: {
-                    VChevronButton(direction: .down, state: buttonState, action: action)
-                })
-                
-                DemoRowView(type: .titled("Left"), content: {
-                    VChevronButton(direction: .left, state: buttonState, action: action)
-                })
-                
-                DemoRowView(type: .titled("Larger Hit Box"), content: {
-                    VChevronButton(model: largerHitBoxButtonModel, direction: .right, state: buttonState, action: action)
-                })
-            })
+            DemoView(component: component, settings: settings)
         })
     }
     
-    private var controller: some View {
-        DemoRowView(type: .controller, content: {
-            ControllerToggleView(
-                state: .init(
-                    get: { buttonState == .disabled },
-                    set: { buttonState = $0 ? .disabled : .enabled }
-                ),
-                title: "Disabled"
-            )
-        })
+    private func component() -> some View {
+        VChevronButton(model: model, direction: direction, state: state, action: {})
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $state, header: "State")
+        
+        VSegmentedPicker(selection: $direction, header: "Direction")
+        
+        VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
     }
 }
 
-// MARK:- Action
-private extension VChevronButtonDemoView {
-    func action() {
-        print("Pressed")
+// MARK:- Helpers
+extension VChevronButtonDirection: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .up: return "Up"
+        case .right: return "Right"
+        case .down: return "Down"
+        case .left: return "Left"
+        }
     }
 }
 
-// MARK: Preview
+// MARK:- Preview
 struct VChevronButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VChevronButtonDemoView()

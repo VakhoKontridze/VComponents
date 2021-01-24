@@ -33,8 +33,8 @@ extension VSegmentedPickerModel {
         public var rowContentMargin: CGFloat = 2
         var actualRowContentMargin: CGFloat { indicatorMargin + rowContentMargin }
         
-        public var titleSpacing: CGFloat = 3
-        public var titleMarginHor: CGFloat = 10
+        public var headerFooterSpacing: CGFloat = 3
+        public var headerFooterMarginHor: CGFloat = 10
         
         public var dividerHeight: CGFloat = 17
         
@@ -69,12 +69,12 @@ extension VSegmentedPickerModel {
             disabled: toggleReference.colors.fill.disabled
         )
         
-        public var title: StateColors = .init(
+        public var header: StateColors = .init(
             enabled: .init(componentAsset: "SegmentedPicker.Title"),
             disabled: .init(componentAsset: "SegmentedPicker.Title")
         )
         
-        public var description: StateColors = .init(
+        public var footer: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondary
         )
@@ -124,8 +124,8 @@ extension VSegmentedPickerModel.Colors.StateOpacity {
 // MARK:- Fonts
 extension VSegmentedPickerModel {
     public struct Fonts {
-        public var title: Font = .system(size: 14, weight: .regular, design: .default)
-        public var description: Font = .system(size: 13, weight: .regular, design: .default)
+        public var header: Font = .system(size: 14, weight: .regular, design: .default)
+        public var footer: Font = .system(size: 13, weight: .regular, design: .default)
         
         public var rows: Font = .system(size: 14, weight: .medium, design: .default)    // Only applicable during init with title
         

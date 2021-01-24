@@ -10,8 +10,8 @@ import UIKit
 // MARK:- UIKit Event Recognizer
 final class UIKitEventRecognizer: UITapGestureRecognizer {
     // MARK: Properties
-    private let action: () -> Void
-    private let pressHandler: (Bool) -> Void
+    private var action: () -> Void
+    private var pressHandler: (Bool) -> Void
     
     private let allowedOffset: CGFloat = 20
     
@@ -23,6 +23,17 @@ final class UIKitEventRecognizer: UITapGestureRecognizer {
         self.action = action
         self.pressHandler = pressHandler
         super.init(target: nil, action: nil)
+    }
+}
+
+// MARK:- Updates
+extension UIKitEventRecognizer {
+    func update(
+        action: @escaping () -> Void,
+        pressHandler: @escaping (Bool) -> Void
+    ) {
+        self.action = action
+        self.pressHandler = pressHandler
     }
 }
     

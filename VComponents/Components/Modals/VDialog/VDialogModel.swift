@@ -34,6 +34,8 @@ extension VDialogModel {
         
         public var twoButtonSpacing: CGFloat = 10
         public var manyButtonSpacing: CGFloat = 10
+        
+        static let descriptionLineLimit: Int = 5
 
         public init() {}
     }

@@ -108,10 +108,10 @@ extension _VDialog {
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
             VText(
-                title: title,
-                color: model.colors.title,
+                type: .oneLine,
                 font: model.fonts.title,
-                type: .oneLine
+                color: model.colors.title,
+                title: title
             )
         }
     }
@@ -119,10 +119,10 @@ extension _VDialog {
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
             VText(
-                title: description,
-                color: model.colors.description,
+                type: .multiLine(limit: VDialogModel.Layout.descriptionLineLimit, alignment: .center),
                 font: model.fonts.description,
-                type: .multiLine(limit: 5, alignment: .center)
+                color: model.colors.description,
+                title: description
             )
         }
     }

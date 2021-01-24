@@ -2,113 +2,173 @@
 //  DemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 12/22/20.
+//  Created by Vakhtang Kontridze on 1/24/21.
 //
 
 import SwiftUI
 import VComponents
 
 // MARK:- Demo View Type
-enum DemoViewType {
-    case rowed
-    case section
-    case freeFormFlexible
-    case freeFormFixed
+enum DemoViewType<ComponentContent, SettingsContent>
+    where
+        ComponentContent: View,
+        SettingsContent: View
+{
+    case component(
+        type: DemoViewComponentContentType,
+        content: () -> ComponentContent
+    )
+    
+    case componentAndSettings(
+        type: DemoViewComponentContentType,
+        component: () -> ComponentContent,
+        settings: () -> SettingsContent
+    )
 }
 
-// MARK:- Demo Rowed View
-struct DemoView<Content, ControllerContent>: View
+// MARK:- Demo View Component Content Type
+enum DemoViewComponentContentType {
+    case fixed
+    case flexible
+}
+
+// MARK:- Demo View
+struct DemoView<ComponentContent, SettingsContent>: View
     where
-        Content: View,
-        ControllerContent: View
+        ComponentContent: View,
+        SettingsContent: View
 {
     // MARK: Properties
-    private let viewType: DemoViewType
+    private let demoViewType: DemoViewType<ComponentContent, SettingsContent>
+    private let hasLayer: Bool
     
-    private let controllerContent: ControllerContent?
-    private let content: () -> Content
+    @State private var isPresented: Bool = false
     
-    private let sheetModel: VSheetModel = {
-        var model: VSheetModel = .init()
-        model.layout.contentMargin = 16
+    private let halfModalModel: VHalfModalModel = {
+        var model: VHalfModalModel = .init()
+        model.layout.contentMargin.trailing = 0
         return model
     }()
     
     // MARK: Initializers
     init(
-        type viewType: DemoViewType,
-        controller controllerContent: ControllerContent,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.viewType = viewType
-        self.controllerContent = controllerContent
-        self.content = content
-    }
-
-    init(
-        type viewType: DemoViewType,
-        @ViewBuilder content: @escaping () -> Content
+        type: DemoViewComponentContentType = .fixed,
+        hasLayer: Bool = true,
+        component: @escaping () -> ComponentContent
     )
-        where ControllerContent == Never
+        where SettingsContent == Never
     {
-        self.viewType = viewType
-        self.controllerContent = nil
-        self.content = content
+        self.demoViewType = .component(
+            type: type,
+            content: component
+        )
+        self.hasLayer = hasLayer
+    }
+    
+    init(
+        type: DemoViewComponentContentType = .fixed,
+        hasLayer: Bool = true,
+        component componentContent: @escaping () -> ComponentContent,
+        @DemoViewSettingsSectionBuilder settingsSections settingsContent: @escaping () -> SettingsContent
+    ) {
+        self.demoViewType = .componentAndSettings(
+            type: type,
+            component: componentContent,
+            settings: settingsContent
+        )
+        self.hasLayer = hasLayer
+    }
+    
+    init<SingleSectionSettingsContent>(
+        type: DemoViewComponentContentType = .fixed,
+        hasLayer: Bool = true,
+        component componentContent: @escaping () -> ComponentContent,
+        @ViewBuilder settings settingsContent: @escaping () -> SingleSectionSettingsContent
+    )
+        where
+            SettingsContent == DemoViewSettingsSection<SingleSectionSettingsContent>
+    {
+        self.demoViewType = .componentAndSettings(
+            type: type,
+            component: componentContent,
+            settings: { DemoViewSettingsSection(content: settingsContent) }
+        )
+        self.hasLayer = hasLayer
     }
 }
 
 // MARK:- Body
 extension DemoView {
     var body: some View {
-        ZStack(alignment: .top, content: {
+        ZStack(content: {
             ColorBook.canvas.edgesIgnoringSafeArea(.all)
             
-            VStack(spacing: 20, content: {
-                switch controllerContent {
-                case nil:
-                    EmptyView()
-                
-                case let controllerContent?:
-                    controllerContent
-                        .padding(.trailing, 16)
-                }
-                
-                switch viewType {
-                case .rowed:
-                    ScrollView(content: {
-                        VSheet(model: sheetModel, content: content)
-                            .padding(.trailing, 16)
-                    })
-                    
-                case .section:
-                    VSheet(content: {
-                        content()
-                            .frame(maxWidth: .infinity)
-                    })
-                        .padding(.trailing, 16)
-                        .frame(maxHeight: .infinity, alignment: .top)
-                    
-                case .freeFormFlexible:
-                    ScrollView(content: {
-                        content()
-                            .padding(.trailing, 16)
-                    })
-                    
-                case .freeFormFixed:
-                    content()
-                        .padding(.trailing, 16)
-                }
-            })
-                .padding([.leading, .top, .bottom], 16)
+            if hasLayer { VSheet() }
+
+            switch demoViewType {
+            case .component(let type, let component):
+                componentView(type: type, component: component)
+            
+            case .componentAndSettings(let type, let component, let settings):
+                componentView(type: type, component: component)
+                settingsView(settings: settings)
+            }
         })
+    }
+    
+    private func componentView<Content>(
+        type: DemoViewComponentContentType,
+        @ViewBuilder component: @escaping () -> Content
+    ) -> some View
+        where Content: View
+    {
+        Group(content: {
+            switch type {
+            case .fixed:
+                component()
+                    .padding(.trailing, 15)
+                    .frame(maxWidth: .infinity)
+                
+            case .flexible:
+                ScrollView(content: {
+                    component()
+                        .frame(maxWidth: .infinity)
+                        .padding(.trailing, 15)
+                })
+            }
+        })
+            .padding(.bottom, 15 + 20)    // VPlainButton height
+            .padding([.leading, .top, .bottom], 15)
+    }
+    
+    private func settingsView<Content>(
+        @ViewBuilder settings: @escaping () -> Content
+    )  -> some View
+        where Content: View
+    {
+        Group(content: {
+            VPlainButton(action: { isPresented = true }, title: "Parameters")
+                .vHalfModal(isPresented: $isPresented, halfModal: {
+                    VHalfModal(
+                        model: halfModalModel,
+                        header: { VHalfModalDefaultHeader(title: "Parameters") },
+                        content: {
+                            ScrollView(content: {
+                                settings()
+                                    .padding(.trailing, 15)
+                            })
+                        }
+                    )
+                })
+        })
+            .frame(maxHeight: .infinity, alignment: .bottom)
+            .padding(15)
     }
 }
 
 // MARK:- Preview
 struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
-        DemoView(type: .rowed, content: {
-            VPrimaryButtonDemoView()
-        })
+        VPrimaryButtonDemoView_Previews.previews
     }
 }

@@ -91,23 +91,22 @@ extension View {
     {
         let modal = modal()
         
-        return ZStack(content: {
-            self
-            
-            if isPresented.wrappedValue {
-                UIKitRepresentable(
-                    isPresented: isPresented,
-                    content:
-                        _VModal(
-                            model: modal.model,
-                            isPresented: isPresented,
-                            headerContent: modal.headerContent,
-                            content: modal.content,
-                            appearAction: modal.appearAction,
-                            disappearAction: modal.disappearAction
-                        )
-                )
-            }
-        })
+        return self
+            .overlay(Group(content: {
+                if isPresented.wrappedValue {
+                    UIKitRepresentable(
+                        isPresented: isPresented,
+                        content:
+                            _VModal(
+                                model: modal.model,
+                                isPresented: isPresented,
+                                headerContent: modal.headerContent,
+                                content: modal.content,
+                                appearAction: modal.appearAction,
+                                disappearAction: modal.disappearAction
+                            )
+                    )
+                }
+            }))
     }
 }

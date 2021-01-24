@@ -64,10 +64,10 @@ public struct VSecondaryButton<Content>: View where Content: View {
             action: action,
             content: {
                 VText(
-                    title: title,
-                    color: model.colors.textContent.for(.init(state: state, isPressed: false)),
+                    type: .oneLine,
                     font: model.fonts.title,
-                    type: .oneLine
+                    color: model.colors.textContent.for(.init(state: state, isPressed: false)),
+                    title: title
                 )
             }
         )

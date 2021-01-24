@@ -1,5 +1,5 @@
 //
-//  DemoRowView.swift
+//  DemoRowView3.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -9,7 +9,7 @@ import SwiftUI
 import VComponents
 
 // MARK:- Demo Row View
-struct DemoRowView<Content>: View where Content: View {
+struct DemoRowView3<Content>: View where Content: View {
     // MARK: Properties
     private let rowType: RowType
     enum RowType {
@@ -39,7 +39,7 @@ struct DemoRowView<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension DemoRowView {
+extension DemoRowView3 {
     var body: some View {
         VStack(content: {
             VStack(spacing: 10, content: {
@@ -47,10 +47,10 @@ extension DemoRowView {
                 
                 if case .titled(let title) = rowType {
                     VText(
-                        title: title,
-                        color: ColorBook.secondary,
+                        type: .oneLine,
                         font: .footnote,
-                        type: .oneLine
+                        color: ColorBook.secondary,
+                        title: title
                     )
                 }
             })
@@ -66,7 +66,7 @@ extension DemoRowView {
 // MARK:- Preview
 struct DemoRowView_Previews: PreviewProvider {
     static var previews: some View {
-        DemoRowView(type: .titled("Lorem ipsum dolor sit amet"), content: {
+        DemoRowView3(type: .titled("Lorem ipsum dolor sit amet"), content: {
             Color.pink
                 .frame(width: 100, height: 100)
         })

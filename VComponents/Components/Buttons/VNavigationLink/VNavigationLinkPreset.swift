@@ -45,7 +45,7 @@ public enum VNavigationLinkPreset {
             }
         }()
         
-        return .init(title: title, color: color, font: font, type: .oneLine)
+        return .init(type: .oneLine, font: font, color: color, title: title)
     }
 }
 

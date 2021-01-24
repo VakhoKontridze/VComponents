@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Text Field
 /// Input component that displays an editable text interface
 ///
-/// Model, type, highlight, palceholder, title, subtitle, and event callbacks can be passed as parameters
+/// Model, type, highlight, palceholder, header, footer, and event callbacks can be passed as parameters
 ///
 /// By default, component type is standard.
 /// If secure type is used, visiblity button would replace clear button. When text field is secure, clear and cancel buttons are not visible.
@@ -28,8 +28,8 @@ import SwiftUI
 ///     VTextField(
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         title: "Lorem ipsum dolor sit amet",
-///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         header: "Lorem ipsum dolor sit amet",
+///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text
 ///     )
 ///         .padding()
@@ -56,8 +56,8 @@ import SwiftUI
 ///         model: model,
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         title: "Lorem ipsum dolor sit amet",
-///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         header: "Lorem ipsum dolor sit amet",
+///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text,
 ///         onBegin: { print("Editing Began") },
 ///         onChange: {  print("Editing Changed") },
@@ -80,8 +80,8 @@ import SwiftUI
 ///         type: .secure,
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         title: "Lorem ipsum dolor sit amet",
-///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         header: "Lorem ipsum dolor sit amet",
+///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text
 ///     )
 ///         .padding()
@@ -98,8 +98,8 @@ import SwiftUI
 ///         type: .search,
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         title: "Lorem ipsum dolor sit amet",
-///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         header: "Lorem ipsum dolor sit amet",
+///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text
 ///     )
 ///         .padding()
@@ -114,8 +114,8 @@ public struct VTextField: View {
     private let highlight: VTextFieldHighlight
     
     private let placeholder: String?
-    private let title: String?
-    private let description: String?
+    private let header: String?
+    private let footer: String?
     @Binding private var text: String
                 
     private let beginHandler: (() -> Void)?
@@ -136,8 +136,8 @@ public struct VTextField: View {
         state: Binding<VTextFieldState>,
         highlight: VTextFieldHighlight = .default,
         placeholder: String? = nil,
-        title: String? = nil,
-        description: String? = nil,
+        header: String? = nil,
+        footer: String? = nil,
         text: Binding<String>,
         onBegin beginHandler: (() -> Void)? = nil,
         onChange changeHandler: (() -> Void)? = nil,
@@ -151,8 +151,8 @@ public struct VTextField: View {
         self._state = state
         self.highlight = highlight
         self.placeholder = placeholder
-        self.title = title
-        self.description = description
+        self.header = header
+        self.footer = footer
         self._text = text
         self.beginHandler = beginHandler
         self.changeHandler = changeHandler
@@ -168,24 +168,11 @@ extension VTextField {
     public var body: some View {
         performStateResets()
         
-        return VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
-            titleView
+        return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
+            headerView
             textFieldView
-            descriptionView
+            footerView
         })
-    }
-    
-    @ViewBuilder private var titleView: some View {
-        if let title = title, !title.isEmpty {
-            VText(
-                title: title,
-                color: model.colors.title.for(state, highlight: highlight),
-                font: model.fonts.title,
-                type: .oneLine
-            )
-                .padding(.horizontal, model.layout.titleMarginHor)
-                .opacity(model.colors.content.for(state))
-        }
     }
     
     private var textFieldView: some View {
@@ -203,6 +190,32 @@ extension VTextField {
             cancelButton
         })
             .frame(height: model.layout.height)
+    }
+    
+    @ViewBuilder private var headerView: some View {
+        if let header = header, !header.isEmpty {
+            VText(
+                type: .oneLine,
+                font: model.fonts.header,
+                color: model.colors.header.for(state, highlight: highlight),
+                title: header
+            )
+                .padding(.horizontal, model.layout.headerFooterMarginHor)
+                .opacity(model.colors.content.for(state))
+        }
+    }
+    
+    @ViewBuilder private var footerView: some View {
+        if let footer = footer, !footer.isEmpty {
+            VText(
+                type: .multiLine(limit: nil, alignment: .leading),
+                font: model.fonts.footer,
+                color: model.colors.footer.for(state, highlight: highlight),
+                title: footer
+            )
+                .padding(.horizontal, model.layout.headerFooterMarginHor)
+                .opacity(model.colors.content.for(state))
+        }
     }
     
     @ViewBuilder private var searchIcon: some View {
@@ -274,19 +287,6 @@ extension VTextField {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                 .strokeBorder(model.colors.border.for(state, highlight: highlight), lineWidth: model.layout.borderWidth)
         })
-    }
-    
-    @ViewBuilder private var descriptionView: some View {
-        if let description = description, !description.isEmpty {
-            VText(
-                title: description,
-                color: model.colors.description.for(state, highlight: highlight),
-                font: model.fonts.description,
-                type: .multiLine(limit: nil, alignment: .leading)
-            )
-                .padding(.horizontal, model.layout.titleMarginHor)
-                .opacity(model.colors.content.for(state))
-        }
     }
 }
 
@@ -360,8 +360,8 @@ struct VTextField_Previews: PreviewProvider {
                     type: type,
                     state: $state,
                     placeholder: "Lorem ipsum",
-                    title: "Lorem ipsum dolor sit amet",
-                    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    header: "Lorem ipsum dolor sit amet",
+                    footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     text: $text
                 )
             })

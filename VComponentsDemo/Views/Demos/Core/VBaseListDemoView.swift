@@ -13,66 +13,121 @@ struct VBaseListDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base List"
     
+    @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 5
+}
+
+// MARK:- Body
+extension VBaseListDemoView {
+    var body: some View {
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(
+                type: layoutType.demoViewComponentContentType,
+                hasLayer: false,
+                component: component,
+                settings: settings
+            )
+        })
+    }
     
-    @State private var form: Form = .default
+    private func component() -> some View {
+        VBaseList(
+            layout: layoutType.layoutType,
+            data: VBaseListDemoViewDataSource.rows(count: rowCount),
+            content: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+        )
+            .ifLet(layoutType.height, transform: { (view, height) in
+                Group(content: {
+                    view
+                        .frame(height: height)
+                })
+                    .frame(maxHeight: .infinity, alignment: .top)
+            })
+    }
     
-    enum Form: Int, VPickableTitledItem {
-        case fixed
-        case flexible
-        case constrained
-        
-        static let `default`: Self = .flexible
-        
-        fileprivate var layoutType: VBaseListLayoutType {
-            switch self {
-            case .fixed: return .fixed
-            case .flexible: return .flexible
-            case .constrained: return .flexible
-            }
-        }
-        
-        var demoViewType: DemoViewType {
-            switch self {
-            case .fixed: return .freeFormFlexible
-            case .flexible: return .freeFormFixed
-            case .constrained: return .freeFormFixed
-            }
-        }
-        
-        var pickerTitle: String {
-            switch self {
-            case .fixed: return "Fixed"
-            case .flexible: return "Flexible"
-            case .constrained: return "Constrained"
-            }
-        }
-        
-        var description: String {
-            switch self {
-            case .fixed: return "Component stretches vertically to take required space. Scrolling may be enabled on page."
-            case .flexible: return "Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component."
-            case .constrained: return "\".frame()\" modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component."
-            }
-        }
-        
-        var height: CGFloat? {
-            switch self {
-            case .fixed: return nil
-            case .flexible: return nil
-            case .constrained: return 500
-            }
+    private func settings() -> some View {
+        VStack(spacing: 20, content: {
+            Stepper("Rows", value: $rowCount, in: 0...20)
+            
+            VSegmentedPicker(
+                selection: $layoutType,
+                header: "Layout",
+                footer: layoutType.description
+            )
+                .frame(height: 90, alignment: .top)
+        })
+    }
+}
+
+// MARK:- Helpers
+enum BaseListLayoutTypeHelper: Int, VPickableTitledItem {
+    case fixed
+    case flexible
+    case constrained
+    
+    static let `default`: Self = VBaseListLayoutType.default.helperType
+    
+    fileprivate var layoutType: VBaseListLayoutType {
+        switch self {
+        case .fixed: return .fixed
+        case .flexible: return .flexible
+        case .constrained: return .flexible
         }
     }
     
-    // Copied and modifier from VSection's preview
-    private struct Row: Identifiable {
+    var pickerTitle: String {
+        switch self {
+        case .fixed: return "Fixed"
+        case .flexible: return "Flexible"
+        case .constrained: return "Constrained"
+        }
+    }
+    
+    var description: String {
+        switch self {
+        case .fixed: return "Component stretches vertically to take required space. Scrolling may be enabled on page."
+        case .flexible: return "Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component."
+        case .constrained: return "\".frame()\" modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component."
+        }
+    }
+    
+    var demoViewComponentContentType: DemoViewComponentContentType {
+        switch self {
+        case .fixed: return .flexible
+        case .flexible: return .fixed
+        case .constrained: return .fixed
+        }
+    }
+    
+    var height: CGFloat? {
+        switch self {
+        case .fixed: return nil
+        case .flexible: return nil
+        case .constrained: return 400
+        }
+    }
+}
+
+private extension VBaseListLayoutType {
+    var helperType: BaseListLayoutTypeHelper {
+        switch self {
+        case .fixed: return .fixed
+        case .flexible: return .flexible
+        }
+    }
+}
+
+// Copied and modified from VSection's preview
+struct VBaseListDemoViewDataSource {
+    private init() {}
+    
+    struct Row: Identifiable {
         let id: Int
         let color: Color
         let title: String
     }
-    
-    private var rows: [Row] {
+
+    static func rows(count rowCount: Int) -> [Row] {
         (0..<rowCount).map { i in
             .init(
                 id: i,
@@ -82,55 +137,26 @@ struct VBaseListDemoView: View {
         }
     }
     
-    private func spellOut(_ i: Int) -> String {
-        let formatter: NumberFormatter = .init()
-        formatter.numberStyle = .spellOut
-        return formatter.string(from: .init(value: i))?.capitalized ?? ""
-    }
-    
-    private func rowContent(title: String, color: Color) -> some View {
+    static func rowContent(title: String, color: Color) -> some View {
         HStack(spacing: 10, content: {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(color.opacity(0.8))
                 .frame(dimension: 32)
 
             VText(
-                title: title,
-                color: ColorBook.primary,
+                type: .oneLine,
                 font: .body,
-                type: .oneLine
+                color: ColorBook.primary,
+                title: title
             )
         })
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-}
 
-// MARK:- Body
-extension VBaseListDemoView {
-    var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: form.demoViewType, controller: controller, content: {
-                VBaseList(
-                    layout: form.layoutType,
-                    data: rows,
-                    content: { rowContent(title: $0.title, color: $0.color) }
-                )
-                    .frame(height: form.height)
-            })
-        })
-    }
-    
-    private var controller: some View {
-        VStack(spacing: 20, content: {
-            Stepper("Rows", value: $rowCount, in: 0...20)
-            
-            VSegmentedPicker(
-                selection: $form,
-                title: "Section Height",
-                description: form.description
-            )
-                .frame(height: 90, alignment: .top)
-        })
+    private static func spellOut(_ i: Int) -> String {
+        let formatter: NumberFormatter = .init()
+        formatter.numberStyle = .spellOut
+        return formatter.string(from: .init(value: i))?.capitalized ?? ""
     }
 }
 

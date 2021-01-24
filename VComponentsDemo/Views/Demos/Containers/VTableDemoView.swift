@@ -13,26 +13,119 @@ struct VTableDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Table"
     
+    @State private var layoutType: BaseListLayoutTypeHelper = .default
+    @State private var hasHeaders: Bool = true
+    @State private var hasFooters: Bool = true
     @State private var sectionCount: Int = 2
     @State private var rowCount: Int = 3
+}
+
+// MARK:- Body
+extension VTableDemoView {
+    var body: some View {
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(
+                type: layoutType.demoViewComponentContentType,
+                hasLayer: false,
+                component: component,
+                settings: settings
+            )
+        })
+    }
     
-    @State private var form: VBaseListDemoView.Form = .default
+    private func component() -> some View {
+        Group(content: {
+            switch (hasHeaders, hasFooters) {
+            case (false, false):
+                VTable(
+                    layout: layoutType.tablelayoutType,
+                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                )
+                
+            case (false, true):
+                VTable(
+                    layout: layoutType.tablelayoutType,
+                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    footer: { VTableDefaultHeaderFooter(title: "Footer \($0.title)") },
+                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                )
+                
+            case (true, false):
+                VTable(
+                    layout: layoutType.tablelayoutType,
+                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    header: { VTableDefaultHeaderFooter(title: "Header \($0.title)") },
+                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                )
+                
+            case (true, true):
+                VTable(
+                    layout: layoutType.tablelayoutType,
+                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    header: { VTableDefaultHeaderFooter(title: "Header \($0.title)") },
+                    footer: { VTableDefaultHeaderFooter(title: "Footer \($0.title)") },
+                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                )
+            }
+        })
+            .ifLet(layoutType.height, transform: { (view, height) in
+                Group(content: {
+                    view
+                        .frame(height: height)
+                })
+                    .frame(maxHeight: .infinity, alignment: .top)
+            })
+    }
     
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $layoutType, header: "Frame", footer: layoutType.description)
+                .frame(height: 110, alignment: .top)
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasHeaders, title: "Headers")
+            
+            ToggleSettingView(isOn: $hasFooters, title: "Footers")
+        })
+        
+        DemoViewSettingsSection(content: {
+            Stepper("Sections", value: $sectionCount, in: 0...10)
+
+            Stepper("Rows", value: $rowCount, in: 0...10)
+        })
+    }
+}
+
+// MARK:- Helpers
+private extension BaseListLayoutTypeHelper {
+    var tablelayoutType: VTableLayoutType {
+        switch self {
+        case .fixed: return .fixed
+        case .flexible: return .flexible
+        case .constrained: return .flexible
+        }
+    }
+}
+
+// Copied and modified from VTable's preview
+private struct VTableDemoViewDataSource {
+    private init() {}
     
-    // Copied and modified from VTable's preview
-    private struct Section: VTableSection {
+    struct Section: VTableSection {
         let id: Int
         let title: String
         let rows: [Row]
     }
 
-    private struct Row: VTableRow {
+    struct Row: VTableRow {
         let id: Int
         let color: Color
         let title: String
     }
 
-    private var sections: [Section] {
+    static func sections(rowCount: Int, sectionCount: Int) -> [Section] {
         (0..<sectionCount).map { i in
             .init(
                 id: i,
@@ -51,70 +144,26 @@ struct VTableDemoView: View {
         }
     }
     
-    private func spellOut(_ i: Int) -> String {
-        let formatter: NumberFormatter = .init()
-        formatter.numberStyle = .spellOut
-        return formatter.string(from: .init(value: i))?.capitalized ?? ""
-    }
-    
-    private func rowContent(title: String, color: Color) -> some View {
+    static func rowContent(title: String, color: Color) -> some View {
         HStack(spacing: 10, content: {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(color.opacity(0.8))
                 .frame(dimension: 32)
 
             VText(
-                title: title,
-                color: ColorBook.primary,
+                type: .oneLine,
                 font: .body,
-                type: .oneLine
+                color: ColorBook.primary,
+                title: title
             )
         })
             .frame(maxWidth: .infinity, alignment: .leading)
     }
-}
-
-// MARK:- Body
-extension VTableDemoView {
-    var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: form.demoViewType, controller: controller, content: {
-                VTable(
-                    layout: form.tablelayoutType,
-                    sections: sections,
-                    header: { section in VTableDefaultHeaderFooter(title: "Header \(section.title)") },
-                    footer: { section in VTableDefaultHeaderFooter(title: "Footer \(section.title)") },
-                    content: { row in rowContent(title: row.title, color: row.color) }
-                )
-                    .frame(height: form.height)
-            })
-        })
-    }
     
-    private var controller: some View {
-        VStack(spacing: 20, content: {
-            Stepper("Sections", value: $sectionCount, in: 0...10)
-            
-            Stepper("Rows", value: $rowCount, in: 0...10)
-            
-            VSegmentedPicker(
-                selection: $form,
-                title: "Table Height",
-                description: form.description
-            )
-                .frame(height: 90, alignment: .top)
-        })
-    }
-}
-
-// MARK:- Helpers
-private extension VBaseListDemoView.Form {
-    var tablelayoutType: VTableLayoutType {
-        switch self {
-        case .fixed: return .fixed
-        case .flexible: return .flexible
-        case .constrained: return .flexible
-        }
+    private static func spellOut(_ i: Int) -> String {
+        let formatter: NumberFormatter = .init()
+        formatter.numberStyle = .spellOut
+        return formatter.string(from: .init(value: i))?.capitalized ?? ""
     }
 }
 

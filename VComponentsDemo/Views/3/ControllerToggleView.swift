@@ -28,10 +28,10 @@ extension ControllerToggleView {
             VToggle(state: $isOn)
             
             VText(
-                title: title,
-                color: ColorBook.primary,
+                type: .oneLine,
                 font: .footnote,
-                type: .oneLine
+                color: ColorBook.primary,
+                title: title
             )
         })
     }

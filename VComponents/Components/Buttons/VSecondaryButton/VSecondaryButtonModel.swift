@@ -29,8 +29,8 @@ extension VSecondaryButtonModel {
         public var contentMarginHor: CGFloat = 10
         public var contentMarginVer: CGFloat = 3
         
-        public var hitBoxHor: CGFloat = 10
-        public var hitBoxVer: CGFloat = 10
+        public var hitBoxHor: CGFloat = 0
+        public var hitBoxVer: CGFloat = 0
         
         public init() {}
     }

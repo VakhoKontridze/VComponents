@@ -25,9 +25,16 @@ extension VSideBarModel {
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
         
-        public var contentMargin: ContentMargin = .init()
+        public var contentMargin: Margins = .init(
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
+            top: sheetReference.layout.contentMargin,
+            bottom: sheetReference.layout.contentMargin
+        )
+        
         public var hasSafeAreaMarginTop: Bool = true
         public var hasSafeAreaMarginBottom: Bool = true
+        
         var edgesToIgnore: Edge.Set {
             switch (hasSafeAreaMarginTop, hasSafeAreaMarginBottom) {
             case (false, false): return [.top, .bottom]
@@ -44,7 +51,7 @@ extension VSideBarModel {
 }
 
 extension VSideBarModel.Layout {
-    public typealias ContentMargin = VHalfModalModel.Layout.ContentMargin
+    public typealias Margins = VModalModel.Layout.Margins
 }
 
 // MARK:- Colors
@@ -69,6 +76,7 @@ extension VSideBarModel {
 
 // MARK:- References
 extension VSideBarModel {
+    public static let sheetReference: VSheetModel = .init()
     public static let modalReference: VModalModel = .init()
     public static let halfModalReference: VHalfModalModel = .init()
 }

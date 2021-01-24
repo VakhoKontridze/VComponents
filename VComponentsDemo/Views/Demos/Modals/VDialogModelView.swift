@@ -13,20 +13,81 @@ struct VDialogDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Dialog"
     
+    @State private var isPresented: Bool = false
+    @State private var textFieldState: VTextFieldState = .enabled
+    @State private var text: String = ""
+    
+    @State private var dialogTypeHelper: DialogTypeHelper = .two
+    
     @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var titleTextFieldState: VTextFieldState = .enabled
     
     @State private var descriptionTextFieldState: VTextFieldState = .enabled
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+}
+
+// MARK:- Body
+extension VDialogDemoView {
+    var body: some View {
+        VBaseView(title: Self.navigationBarTitle, content: {
+            DemoView(component: component, settings: settings)
+        })
+    }
     
-    @State private var dialogType: DialogType = .two
+    private func component() -> some View {
+        VSecondaryButton(action: { isPresented = true }, title: "Present")
+            .vDialog(isPresented: $isPresented, dialog: {
+                VDialog(
+                    dialog: dialogTypeHelper.dialogType(text: text),
+                    title: title,
+                    description: description,
+                    content: {
+                        VTextField(
+                            state: $textFieldState,
+                            placeholder: "Name",
+                            text: $text
+                        )
+                    },
+                    onDisappear: { text = "" }
+                )
+            })
+    }
     
-    @State private var isPresented: Bool = false
-    @State private var textFieldState: VTextFieldState = .enabled
-    @State private var text: String = ""
+    @ViewBuilder private func settings() -> some View {
+        VTextField(
+            state: $titleTextFieldState,
+            placeholder: "Title",
+            header: "Title",
+            text: $title
+        )
+        
+        VTextField(
+            state: $descriptionTextFieldState,
+            placeholder: "Description",
+            header: "Description",
+            text: $description
+        )
+        
+        VSegmentedPicker(selection: $dialogTypeHelper, header: "Dialog")
+    }
+}
+
+// MARK:- Helpers
+private enum DialogTypeHelper: Int, VPickableTitledItem {
+    case one
+    case two
+    case many
     
-    private var dialogTypeParam: VComponents.VDialogType {
-        switch dialogType {
+    var pickerTitle: String {
+        switch self {
+        case .one: return "One Button"
+        case .two: return "Two Buttons"
+        case .many: return "Many Buttons"
+        }
+    }
+    
+    func dialogType(text: String) -> VDialogType {
+        switch self {
         case .one:
             return .one(
                 button: .init(model: .primary, isEnabled: !text.isEmpty, title: "Ok", action: {})
@@ -46,63 +107,15 @@ struct VDialogDemoView: View {
             ])
         }
     }
-    
-    private enum DialogType: Int, VPickableTitledItem {
-        case one
-        case two
-        case many
-        
-        var pickerTitle: String {
-            switch self {
-            case .one: return "One Button"
-            case .two: return "Two Buttons"
-            case .many: return "Many Buttons"
-            }
-        }
-    }
 }
 
-// MARK:- Body
-extension VDialogDemoView {
-    var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .section, content: {
-                VStack(spacing: 20, content: {
-                    VTextField(
-                        state: $titleTextFieldState,
-                        placeholder: "Title",
-                        title: "Title",
-                        text: $title
-                    )
-                    
-                    VTextField(
-                        state: $descriptionTextFieldState,
-                        placeholder: "Description",
-                        title: "Description",
-                        text: $description
-                    )
-                    
-                    VSegmentedPicker(selection: $dialogType, title: "Dialog Type")
-                    
-                    VSecondaryButton(action: { isPresented = true }, title: "Demo Dialog")
-                })
-            })
-        })
-            .vDialog(isPresented: $isPresented, dialog: {
-                VDialog(
-                    dialog: dialogTypeParam,
-                    title: title,
-                    description: description,
-                    content: {
-                        VTextField(
-                            state: $textFieldState,
-                            placeholder: "Name",
-                            text: $text
-                        )
-                    },
-                    onDisappear: { text = "" }
-                )
-            })
+private extension VDialogType {
+    var helperType: DialogTypeHelper {
+        switch self {
+        case .one: return .one
+        case .two: return .two
+        case .many: return .many
+        }
     }
 }
 

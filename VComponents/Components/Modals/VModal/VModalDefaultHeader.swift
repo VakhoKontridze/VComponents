@@ -25,10 +25,10 @@ public struct VModalDefaultHeader: View {
 extension VModalDefaultHeader {
     public var body: some View {
         VText(
-            title: title,
-            color: VModalModel.Colors.defaultHeader,
+            type: .oneLine,
             font: VModalModel.Fonts.header,
-            type: .oneLine
+            color: VModalModel.Colors.defaultHeader,
+            title: title
         )
             .frame(maxWidth: .infinity, alignment: .leading)
     }

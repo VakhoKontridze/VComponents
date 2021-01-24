@@ -28,16 +28,35 @@ extension VModalModel {
         
         public var roundedCorners: RoundedCorners = sheetReference.layout.roundedCorners
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
-        public var margin: CGFloat = sheetReference.layout.contentMargin
+        
+        public var dividerHeight: CGFloat = 0
+        var hasDivider: Bool { dividerHeight > 0 }
 
         public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
         public var closeButtonIconDimension: CGFloat = closeButtonReference.layout.iconDimension
         
-        public var dividerHeight: CGFloat = 0
-        var hasDivider: Bool { dividerHeight > 0 }
+        public var headerMargin: Margins = .init(
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
+            top: sheetReference.layout.contentMargin,
+            bottom: sheetReference.layout.contentMargin/2
+        )
+    
+        public var dividerMargin: Margins = .init(
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
+            top: sheetReference.layout.contentMargin/2,
+            bottom: sheetReference.layout.contentMargin/2
+        )
+        
+        public var contentMargin: Margins = .init(
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
+            top: sheetReference.layout.contentMargin/2,
+            bottom: sheetReference.layout.contentMargin
+        )
         
         public var headerSpacing: CGFloat = 10
-        public var spacing: CGFloat = 10
         
         public init() {}
     }
@@ -46,6 +65,20 @@ extension VModalModel {
 extension VModalModel.Layout {
     /// Enum that describes rounded corners, such as all, top, bottom, custom, or none
     public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
+    
+    public struct Margins {
+        public var leading: CGFloat
+        public var trailing: CGFloat
+        public var top: CGFloat
+        public var bottom: CGFloat
+        
+        public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottom: CGFloat) {
+            self.leading = leading
+            self.trailing = trailing
+            self.top = top
+            self.bottom = bottom
+        }
+    }
 }
 
 // MARK:- Colors

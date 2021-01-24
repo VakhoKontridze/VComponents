@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component ca be initialized with data, VPickableItem, or VPickableTitledItem
 ///
-/// Model, state, title, description, and disabled indexes can be passed as parameters
+/// Model, state, header, footer, and disabled indexes can be passed as parameters
 ///
 /// # Usage Example #
 ///
@@ -34,8 +34,8 @@ import SwiftUI
 /// var body: some View {
 ///     VSegmentedPicker(
 ///         selection: $selection,
-///         title: "Lorem ipsum dolor sit amet",
-///         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///         header: "Lorem ipsum dolor sit amet",
+///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 ///     )
 /// }
 /// ```
@@ -58,8 +58,8 @@ public struct VSegmentedPicker<Data, Content>: View
         isPressed: pressedIndex == index
     ) }
     
-    private let title: String?
-    private let description: String?
+    private let header: String?
+    private let footer: String?
     private let disabledIndexes: Set<Int>
     
     private let data: Data
@@ -72,8 +72,8 @@ public struct VSegmentedPicker<Data, Content>: View
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
-        title: String? = nil,
-        description: String? = nil,
+        header: String? = nil,
+        footer: String? = nil,
         disabledIndexes: Set<Int> = .init(),
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -81,8 +81,8 @@ public struct VSegmentedPicker<Data, Content>: View
         self.model = model
         self._selectedIndex = selectedIndex
         self.state = state
-        self.title = title
-        self.description = description
+        self.header = header
+        self.footer = footer
         self.disabledIndexes = disabledIndexes
         self.data = data
         self.content = content
@@ -92,8 +92,8 @@ public struct VSegmentedPicker<Data, Content>: View
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
-        title: String? = nil,
-        description: String? = nil,
+        header: String? = nil,
+        footer: String? = nil,
         disabledIndexes: Set<Int> = .init(),
         titles: [String]
     )
@@ -105,16 +105,16 @@ public struct VSegmentedPicker<Data, Content>: View
             model: model,
             selectedIndex: selectedIndex,
             state: state,
-            title: title,
-            description: description,
+            header: header,
+            footer: footer,
             disabledIndexes: disabledIndexes,
             data: titles,
             content: { title in
                 VText(
-                    title: title,
-                    color: model.colors.textContent.for(state),
+                    type: .oneLine,
                     font: model.fonts.rows,
-                    type: .oneLine
+                    color: model.colors.textContent.for(state),
+                    title: title
                 )
             }
         )
@@ -124,8 +124,8 @@ public struct VSegmentedPicker<Data, Content>: View
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
-        title: String? = nil,
-        description: String? = nil,
+        header: String? = nil,
+        footer: String? = nil,
         disabledItems: Set<Item> = .init(),
         @ViewBuilder content: @escaping (Item) -> Content
     )
@@ -140,8 +140,8 @@ public struct VSegmentedPicker<Data, Content>: View
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
-            title: title,
-            description: description,
+            header: header,
+            footer: footer,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
             content: content
@@ -152,8 +152,8 @@ public struct VSegmentedPicker<Data, Content>: View
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
-        title: String? = nil,
-        description: String? = nil,
+        header: String? = nil,
+        footer: String? = nil,
         disabledItems: Set<Item> = .init()
     )
         where
@@ -168,16 +168,16 @@ public struct VSegmentedPicker<Data, Content>: View
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
-            title: title,
-            description: description,
+            header: header,
+            footer: footer,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
             content: { item in
                 VText(
-                    title: item.pickerTitle,
-                    color: model.colors.textContent.for(state),
+                    type: .oneLine,
                     font: model.fonts.rows,
-                    type: .oneLine
+                    color: model.colors.textContent.for(state),
+                    title: item.pickerTitle
                 )
             }
         )
@@ -187,10 +187,10 @@ public struct VSegmentedPicker<Data, Content>: View
 // MARK:- Body
 extension VSegmentedPicker {
     public var body: some View {
-        VStack(alignment: .leading, spacing: model.layout.titleSpacing, content: {
-            titleView
+        VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
+            headerView
             pickerView
-            descriptionView
+            footerView
         })
     }
     
@@ -205,28 +205,28 @@ extension VSegmentedPicker {
             .cornerRadius(model.layout.cornerRadius)
     }
     
-    @ViewBuilder private var titleView: some View {
-        if let title = title, !title.isEmpty {
+    @ViewBuilder private var headerView: some View {
+        if let header = header, !header.isEmpty {
             VText(
-                title: title,
-                color: model.colors.title.for(state),
-                font: model.fonts.title,
-                type: .oneLine
+                type: .oneLine,
+                font: model.fonts.header,
+                color: model.colors.header.for(state),
+                title: header
             )
-                .padding(.horizontal, model.layout.titleMarginHor)
+                .padding(.horizontal, model.layout.headerFooterMarginHor)
                 .opacity(model.colors.content.for(state))
         }
     }
     
-    @ViewBuilder private var descriptionView: some View {
-        if let description = description, !description.isEmpty {
+    @ViewBuilder private var footerView: some View {
+        if let footer = footer, !footer.isEmpty {
             VText(
-                title: description,
-                color: model.colors.description.for(state),
-                font: model.fonts.description,
-                type: .multiLine(limit: nil, alignment: .leading)
+                type: .multiLine(limit: nil, alignment: .leading),
+                font: model.fonts.footer,
+                color: model.colors.footer.for(state),
+                title: footer
             )
-                .padding(.horizontal, model.layout.titleMarginHor)
+                .padding(.horizontal, model.layout.headerFooterMarginHor)
                 .opacity(model.colors.content.for(state))
         }
     }
@@ -241,6 +241,7 @@ extension VSegmentedPicker {
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale)
             .offset(x: rowWidth * .init(selectedIndex))
+            .animation(model.animations.selection)
             
             .foregroundColor(model.colors.indicator.for(state))
             .shadow(
@@ -255,7 +256,7 @@ extension VSegmentedPicker {
             ForEach(0..<data.count, content: { i in
                 VBaseButton(
                     isEnabled: state.isEnabled && !disabledIndexes.contains(i),
-                    action: { withAnimation(model.animations.selection, { selectedIndex = i }) },
+                    action: { selectedIndex = i },
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {
                         content(data[i])
@@ -328,8 +329,8 @@ struct VSegmentedPicker_Previews: PreviewProvider {
     static var previews: some View {
         VSegmentedPicker(
             selection: $selection,
-            title: "Lorem ipsum dolor sit amet",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            header: "Lorem ipsum dolor sit amet",
+            footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         )
             .padding(20)
     }

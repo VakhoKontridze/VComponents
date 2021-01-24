@@ -20,7 +20,7 @@ public struct VPlainButtonModel {
 // MARK:- Layout
 extension VPlainButtonModel {
     public struct Layout {
-        public var hitBoxHor: CGFloat = 15
+        public var hitBoxHor: CGFloat = 5
         public var hitBoxVer: CGFloat = 5
         
         public init() {}

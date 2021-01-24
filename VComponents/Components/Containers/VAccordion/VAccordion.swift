@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Accordion
 /// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data
 ///
-/// Component ca be initialized with data, VPickableItem, VPickableTitledItem, or free content
+/// Component ca be initialized with data or free content
 ///
 /// Model and layout can be passed as parameters
 ///
@@ -153,18 +153,14 @@ extension VAccordion {
     public var body: some View {
         VSheet(model: model.sheetSubModel, content: {
             VStack(spacing: 0, content: {
-                header
+                headerView
                 divider
                 contentView
             })
-                .padding(.leading, model.layout.marginLeading)
-                //.padding(.trailing, model.layout.marginTrailing)  Only applied to header and divider, as content requries custom logic
-                .padding(.top, model.layout.marginTop)
-                .padding(.bottom, state.isExpanded ? model.layout.marginBottomExpanded : model.layout.marginBottomCollapsed)
         })
     }
     
-    private var header: some View {
+    private var headerView: some View {
         HStack(spacing: 0, content: {
             headerContent()
                 .opacity(model.colors.header.for(state))
@@ -177,46 +173,54 @@ extension VAccordion {
                 state: state.chevronButtonState,
                 action: expandCollapse
             )
-            .allowsHitTesting(!model.misc.expandCollapseOnHeaderTap) // No need for two-layer tap area
+                .allowsHitTesting(!model.misc.expandCollapseOnHeaderTap) // No need for two-layer tap area
         })
-            .padding(.trailing, model.layout.marginTrailing)
+            .padding(.leading, model.layout.headerMargin.leading)
+            .padding(.trailing, model.layout.headerMargin.trailing)
+            .padding(.top, model.layout.headerMargin.top)
+            .padding(.bottom, state.isExpanded ? model.layout.headerMargin.bottomExpanded : model.layout.headerMargin.bottomCollapsed)
             .contentShape(Rectangle())
             .onTapGesture(perform: expandCollapseFromHeaderTap)
     }
     
     @ViewBuilder private var divider: some View {
-        if state.isExpanded {
+        if state.isExpanded, model.layout.hasDivider {
             Rectangle()
-                .frame(height: model.layout.headerDividerHeight)
-                .padding(.top, model.layout.headerDividerMarginTop)
-                .padding(.bottom, model.layout.headerDividerMarginBottom)
-                .padding(.trailing, model.layout.marginTrailing)
+                .frame(height: model.layout.dividerHeight)
+                .padding(.leading, model.layout.dividerMargin.leading)
+                .padding(.trailing, model.layout.dividerMargin.trailing)
+                .padding(.top, model.layout.dividerMargin.top)
+                .padding(.bottom, model.layout.dividerMargin.bottom)
                 .foregroundColor(model.colors.headerDivider)
         }
     }
     
     @ViewBuilder private var contentView: some View {
         if state.isExpanded {
-            switch contentType {
-            case .freeForm(let content):
-                content()
-                    .padding(.leading, model.layout.contentMarginLeading)
-                    .padding(.trailing, model.layout.marginTrailing + model.layout.contentMarginTrailing)
-                    .padding(.top, model.layout.contentMarginTop)
-                    .padding(.bottom, model.layout.contentMarginBottom)
-                
-            case .list(let data, let id, let rowContent):
-                VBaseList(
-                    model: model.baseListSubModel,
-                    layout: layoutType,
-                    data: data,
-                    id: id,
-                    content: rowContent
-                )
-                    .padding(.leading, model.layout.contentMarginLeading)
-                    .padding(.top, model.layout.contentMarginTop)
-                    .padding(.bottom, model.layout.contentMarginBottom)
-            }
+            Group(content: {
+                switch contentType {
+                case .freeForm(let content):
+                    content()
+                        .padding(.leading, model.layout.contentMargin.leading)
+                        .padding(.trailing, model.layout.contentMargin.trailing)
+                        .padding(.top, model.layout.contentMargin.top)
+                        .padding(.bottom, model.layout.contentMargin.bottom)
+                    
+                case .list(let data, let id, let rowContent):
+                    VBaseList(
+                        model: model.baseListSubModel,
+                        layout: layoutType,
+                        data: data,
+                        id: id,
+                        content: rowContent
+                    )
+                        .padding(.leading, model.layout.contentMargin.leading)
+                        //.padding(.trailing, model.layout.contentMargin.trailing)
+                        .padding(.top, model.layout.contentMargin.top)
+                        .padding(.bottom, model.layout.contentMargin.bottom)
+                }
+            })
+                .frame(maxWidth: .infinity)
         }
     }
 }

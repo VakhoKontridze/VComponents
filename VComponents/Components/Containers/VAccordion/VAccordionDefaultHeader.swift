@@ -23,10 +23,10 @@ public struct VAccordionDefaultHeader: View {
 extension VAccordionDefaultHeader {
     public var body: some View {
         VText(
-            title: title,
-            color: VAccordionModel.Colors.defaultHeader,
+            type: .oneLine,
             font: VAccordionModel.Fonts.header,
-            type: .oneLine
+            color: VAccordionModel.Colors.defaultHeader,
+            title: title
         )
             .frame(maxWidth: .infinity, alignment: .leading)
     }

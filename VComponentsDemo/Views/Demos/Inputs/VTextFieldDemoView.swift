@@ -12,33 +12,29 @@ import VComponents
 struct VTextFieldDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "TextField"
-    
-    @State private var stateAccordionState: VAccordionState = .expanded
-    @State private var textsAccordionState: VAccordionState = .collapsed
-    @State private var buttonsAccordionState: VAccordionState = .collapsed
-    @State private var formattingAccordionState: VAccordionState = .collapsed
-    
+
+    @State private var text: String = ""
+    @State private var state: VTextFieldState = .enabled
     @State private var textFieldType: VTextFieldType = .default
-    @State private var textFieldState: VTextFieldState = .enabled
     @State private var textFieldHighlight: VTextFieldHighlight = .default
     @State private var hasPlaceholder: Bool = true
-    @State private var hasTitle: Bool = true
-    @State private var hasDescription: Bool = true
+    @State private var hasHeader: Bool = true
+    @State private var hasFooter: Bool = true
     @State private var numericalKeyboard: Bool = false
     @State private var textAlignment: VTextFieldModel.Layout.TextAlignment = .default
-    @State private var hasAutoCorrect: Bool = VTextFieldModel.Misc().useAutoCorrect
+    @State private var spellCheck: UITextSpellCheckingType = VTextFieldModel.Misc().spellCheck
+    @State private var autoCorrect: UITextAutocorrectionType = VTextFieldModel.Misc().autoCorrect
     @State private var hasClearButton: Bool = VTextFieldModel.Misc().clearButton
     @State private var hasCancelButton: Bool = VTextFieldModel.Misc().cancelButton != nil
-    @State private var textFieldText: String = ""
-    private let textFieldPlaceholder: String = "Lorem ipsum"
     
-    private var textFieldModel: VTextFieldModel {
+    private var model: VTextFieldModel {
         var model: VTextFieldModel = .init()
         
         model.layout.textAlignment = textAlignment
         
         model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
-        model.misc.useAutoCorrect = hasAutoCorrect
+        model.misc.spellCheck = spellCheck
+        model.misc.autoCorrect = autoCorrect
         
         model.misc.clearButton = hasClearButton
         model.misc.cancelButton = hasCancelButton ? "Cancel" : nil
@@ -51,71 +47,75 @@ struct VTextFieldDemoView: View {
 extension VTextFieldDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(type: .freeFormFlexible, content: {
-                VStack(spacing: 20, content: {
-                    VAccordion(state: $stateAccordionState, header: { VAccordionDefaultHeader(title: "General") }, content: {
-                        VStack(spacing: 20, content: {
-                            VSegmentedPicker(selection: $textFieldType, title: "Type")
-                            
-                            VSegmentedPicker(selection: $textFieldState, title: "State")
-                            
-                            VSegmentedPicker(selection: $textFieldHighlight, title: "Highlight")
-                        })
-                    })
-                    
-                    VAccordion(state: $textsAccordionState, header: { VAccordionDefaultHeader(title: "Texts") }, content: {
-                        VStack(spacing: 20, content: {
-                            ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
-                            
-                            ToggleSettingView(isOn: $hasTitle, title: "Title")
-                            
-                            ToggleSettingView(isOn: $hasDescription, title: "Description")
-                        })
-                    })
-                    
-                    VAccordion(state: $buttonsAccordionState, header: { VAccordionDefaultHeader(title: "Buttons") }, content: {
-                        VStack(spacing: 20, content: {
-                            VText(
-                                title: "Return Button can als be set. Not shown here.",
-                                color: ColorBook.primary,
-                                font: .callout,
-                                type: .multiLine(limit: nil, alignment: .leading)
-                            )
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            
-                            ToggleSettingView(isOn: $hasClearButton, title: "Clear Button")
-                            
-                            ToggleSettingView(isOn: $hasCancelButton, title: "Cancel Button")
-                        })
-                    })
-                    
-                    VAccordion(state: $formattingAccordionState, header: { VAccordionDefaultHeader(title: "Formatting") }, content: {
-                        VStack(spacing: 20, content: {
-                            ToggleSettingView(
-                                isOn: $numericalKeyboard,
-                                title: "Numerical Keyboard",
-                                description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
-                            )
-                            
-                            ToggleSettingView(isOn: $hasAutoCorrect, title: "Autocorrect")
-                            
-                            VSegmentedPicker(selection: $textAlignment, title: "Alignment")
-                        })
-                    })
-                    
-                    VSheet(content: {
-                        VTextField(
-                            model: textFieldModel,
-                            type: textFieldType,
-                            state: $textFieldState,
-                            highlight: textFieldHighlight,
-                            placeholder: hasPlaceholder ? textFieldPlaceholder : "",
-                            title: hasTitle ? "Lorem ipsum dolor sit amet" : "",
-                            description: hasDescription ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit" : "",
-                            text: $textFieldText
-                        )
-                    })
-                })
+            DemoView(component: component, settingsSections: settings)
+        })
+    }
+    
+    private func component() -> some View {
+        VTextField(
+            model: model,
+            type: textFieldType,
+            state: $state,
+            highlight: textFieldHighlight,
+            placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
+            header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+            footer: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+            text: $text
+        )
+    }
+    
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $state, header: "State")
+        })
+        
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $textFieldType, header: "Type")
+            
+            VSegmentedPicker(selection: $textFieldHighlight, header: "Highlight")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
+
+            ToggleSettingView(isOn: $hasHeader, title: "Title")
+
+            ToggleSettingView(isOn: $hasFooter, title: "Description")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(
+                isOn: .constant(true),
+                title: "Return Button",
+                description: "Default set to \"return\". Other types not shown in this demo, as there are many."
+            )
+
+            ToggleSettingView(
+                isOn: $hasClearButton,
+                title: "Clear Button",
+                description: "Not supported for secure type"
+            )
+
+            ToggleSettingView(
+                isOn: $hasCancelButton,
+                title: "Cancel Button",
+                description: "Not supported for secure type"
+            )
+        })
+        
+        DemoViewSettingsSection(content: {
+            VStack(spacing: 20, content: {
+                ToggleSettingView(
+                    isOn: $numericalKeyboard,
+                    title: "Numerical Keyboard",
+                    description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
+                )
+                
+                VSegmentedPicker(selection: $spellCheck, header: "Spell Check")
+
+                VSegmentedPicker(selection: $autoCorrect, header: "Autocorrect")
+
+                VSegmentedPicker(selection: $textAlignment, header: "Alignment")
             })
         })
     }

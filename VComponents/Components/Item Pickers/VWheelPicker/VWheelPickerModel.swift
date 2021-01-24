@@ -22,8 +22,8 @@ extension VWheelPickerModel {
     public struct Layout {
         public var cornerRadius: CGFloat = 15
         
-        public var titleSpacing: CGFloat = segmentedPickerReference.layout.titleSpacing
-        public var titleMarginHor: CGFloat = segmentedPickerReference.layout.titleMarginHor
+        public var headerFooterSpacing: CGFloat = segmentedPickerReference.layout.headerFooterSpacing
+        public var headerMarginHor: CGFloat = segmentedPickerReference.layout.headerFooterMarginHor
         
         public init() {}
     }
@@ -43,9 +43,9 @@ extension VWheelPickerModel {
             disabled: ColorBook.layer
         )
 
-        public var title: StateColors = segmentedPickerReference.colors.title
+        public var header: StateColors = segmentedPickerReference.colors.header
         
-        public var description: StateColors = segmentedPickerReference.colors.description
+        public var footer: StateColors = segmentedPickerReference.colors.footer
         
         public init() {}
     }
@@ -82,8 +82,8 @@ extension VWheelPickerModel.Colors.StateColors {
 // MARK:- Fonts
 extension VWheelPickerModel {
     public struct Fonts {
-        public var title: Font = segmentedPickerReference.fonts.title
-        public var description: Font = segmentedPickerReference.fonts.description
+        public var header: Font = segmentedPickerReference.fonts.header
+        public var footer: Font = segmentedPickerReference.fonts.footer
         
         public var rows: Font = segmentedPickerReference.fonts.rows    // Only applicable during init with title
         

@@ -54,7 +54,7 @@ extension DemoListView {
                 
             case .section:
                 VLazyList(model: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
-                    VSection(title: section.title, data: section.rows, content: { row in
+                    VSection(header: section.title, data: section.rows, rowContent: { row in
                         DemoListRowView(title: row.title, destination: row.body)
                     })
                         .padding(.trailing, 16)
