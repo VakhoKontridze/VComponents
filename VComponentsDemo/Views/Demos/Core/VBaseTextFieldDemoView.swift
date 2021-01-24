@@ -76,6 +76,12 @@ extension VBaseTextFieldDemoView {
                     description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
                 )
                 
+                ToggleSettingView(
+                    isOn: .constant(false),
+                    title: "Content Type",
+                    description: "Default set to \"nil\". Other types are not shown in the demo, as there are many."
+                )
+                
                 VSegmentedPicker(selection: $spellCheck, header: "Spell Check")
 
                 VSegmentedPicker(selection: $autoCorrect, header: "Autocorrect")

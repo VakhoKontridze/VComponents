@@ -33,6 +33,7 @@ struct VTextFieldDemoView: View {
         model.layout.textAlignment = textAlignment
         
         model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
+        
         model.misc.spellCheck = spellCheck
         model.misc.autoCorrect = autoCorrect
         
@@ -87,7 +88,7 @@ extension VTextFieldDemoView {
             ToggleSettingView(
                 isOn: .constant(true),
                 title: "Return Button",
-                description: "Default set to \"return\". Other types not shown in this demo, as there are many."
+                description: "Default set to \"return\". Other types are not shown in the demo, as there are many."
             )
 
             ToggleSettingView(
@@ -109,6 +110,12 @@ extension VTextFieldDemoView {
                     isOn: $numericalKeyboard,
                     title: "Numerical Keyboard",
                     description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
+                )
+                
+                ToggleSettingView(
+                    isOn: .constant(false),
+                    title: "Content Type",
+                    description: "Default set to \"nil\". Other types are not shown in the demo, as there are many."
                 )
                 
                 VSegmentedPicker(selection: $spellCheck, header: "Spell Check")

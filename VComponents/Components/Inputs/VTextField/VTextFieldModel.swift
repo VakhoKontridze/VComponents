@@ -346,6 +346,8 @@ extension VTextFieldModel {
 extension VTextFieldModel {
     public struct Misc {
         public var keyboardType: UIKeyboardType = baseTextFieldReference.misc.keyboardType
+        public var textContentType: UITextContentType?
+        
         public var spellCheck: UITextSpellCheckingType = baseTextFieldReference.misc.spellCheck
         public var autoCorrect: UITextAutocorrectionType = baseTextFieldReference.misc.autoCorrect
         
@@ -384,6 +386,8 @@ extension VTextFieldModel {
         model.misc.isSecureTextEntry = isSecureTextEntry
         
         model.misc.keyboardType = misc.keyboardType
+        model.misc.textContentType = misc.textContentType
+        
         model.misc.spellCheck = misc.spellCheck
         model.misc.autoCorrect = misc.autoCorrect
         

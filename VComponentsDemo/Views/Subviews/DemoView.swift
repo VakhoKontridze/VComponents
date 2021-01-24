@@ -135,6 +135,7 @@ extension DemoView {
                         .frame(maxWidth: .infinity)
                         .padding(.trailing, 15)
                 })
+                
             }
         })
             .padding(.bottom, 15 + 20)    // VPlainButton height

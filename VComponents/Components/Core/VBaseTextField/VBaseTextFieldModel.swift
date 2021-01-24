@@ -106,6 +106,8 @@ extension VBaseTextFieldModel {
         public var isSecureTextEntry: Bool = false
         
         public var keyboardType: UIKeyboardType = .default
+        public var textContentType: UITextContentType?
+        
         public var spellCheck: UITextSpellCheckingType = .default
         public var autoCorrect: UITextAutocorrectionType = .default
         
@@ -113,4 +115,8 @@ extension VBaseTextFieldModel {
         
         public init() {}
     }
+}
+
+extension VBaseTextFieldModel {
+    
 }

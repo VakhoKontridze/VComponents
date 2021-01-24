@@ -79,6 +79,10 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
         textField.keyboardType = model.misc.keyboardType
         if keybardTypeChanged { textField.reloadInputViews() }
         
+        let textContentTypeChanged: Bool = textField.textContentType != model.misc.textContentType
+        textField.textContentType = model.misc.textContentType
+        if textContentTypeChanged { textField.reloadInputViews() }
+        
         let spellCheckChanged: Bool = textField.spellCheckingType != model.misc.spellCheck
         textField.spellCheckingType = model.misc.spellCheck
         if spellCheckChanged {
