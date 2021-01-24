@@ -17,7 +17,7 @@ public struct BasicAnimation {
     public var curve: VAnimationCurve
     public var duration: TimeInterval
     
-    public var swiftUIAnimation: Animation {
+    public var asSwiftUIAnimation: Animation {
         switch curve {
         case .linear: return .linear(duration: duration)
         case .easeIn: return .easeIn(duration: duration)

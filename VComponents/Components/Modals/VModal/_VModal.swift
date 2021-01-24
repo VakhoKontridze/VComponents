@@ -133,11 +133,11 @@ extension _VModal {
 // MARK:- Animations
 private extension _VModal {
     func animateIn() {
-        withAnimation(model.animations.appear?.swiftUIAnimation, { isViewPresented = true })
+        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }
     
     func animateOut() {
-        withAnimation(model.animations.disappear?.swiftUIAnimation, { isViewPresented = false })
+        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
     }
 }
