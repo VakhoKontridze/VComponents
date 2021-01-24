@@ -1,6 +1,0 @@
-SF Mono Medium 17pt
-
-X: 1170
-Y: 596
-W: 381
-H: XXX
