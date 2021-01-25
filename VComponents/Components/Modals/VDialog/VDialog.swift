@@ -28,7 +28,7 @@ import SwiftUI
 ///     )
 ///     .vDialog(isPresented: $isPresented, dialog: {
 ///         VDialog(
-///             dialog: .two(
+///             buttons: .two(
 ///                 primary: .init(
 ///                     model: .primary,
 ///                     title: "Confirm",
@@ -50,7 +50,7 @@ import SwiftUI
 public struct VDialog<Content> where Content: View {
     // MARK: Properties
     public var model: VDialogModel = .init()
-    public var dialogType: VDialogType
+    public var dialogButtons: VDialogButtons
     public var title: String?
     public var description: String?
     public var content: (() -> Content)?
@@ -60,7 +60,7 @@ public struct VDialog<Content> where Content: View {
     // MARK: Initializers
     public init(
         model: VDialogModel = .init(),
-        dialog dialogType: VDialogType,
+        buttons dialogButtons: VDialogButtons,
         title: String?,
         description: String?,
         @ViewBuilder content: @escaping () -> Content,
@@ -68,7 +68,7 @@ public struct VDialog<Content> where Content: View {
         onDisappear disappearAction: (() -> Void)? = nil
     ) {
         self.model = model
-        self.dialogType = dialogType
+        self.dialogButtons = dialogButtons
         self.title = title
         self.description = description
         self.content = content
@@ -78,7 +78,7 @@ public struct VDialog<Content> where Content: View {
     
     public init(
         model: VDialogModel = .init(),
-        dialog dialogType: VDialogType,
+        buttons dialogButtons: VDialogButtons,
         title: String?,
         description: String?,
         onAppear appearAction: (() -> Void)? = nil,
@@ -87,7 +87,7 @@ public struct VDialog<Content> where Content: View {
         where Content == Never
     {
         self.model = model
-        self.dialogType = dialogType
+        self.dialogButtons = dialogButtons
         self.title = title
         self.description = description
         self.content = nil
@@ -116,12 +116,12 @@ extension View {
                             _VDialog(
                                 model: dialog.model,
                                 isPresented: isPresented,
-                                dialog: dialog.dialogType,
+                                dialogButtons: dialog.dialogButtons,
                                 title: dialog.title,
                                 description: dialog.description,
                                 content: dialog.content,
-                                onAppear: dialog.appearAction,
-                                onDisappear: dialog.disappearAction
+                                appearAction: dialog.appearAction,
+                                disappearAction: dialog.disappearAction
                             )
                     )
                 }

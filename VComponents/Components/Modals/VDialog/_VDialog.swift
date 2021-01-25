@@ -15,7 +15,7 @@ struct _VDialog<Content>: View where Content: View {
     @Binding private var isHCPresented: Bool
     @State private var isViewPresented: Bool = false
     
-    private let dialogType: VDialogType
+    private let dialogButtons: VDialogButtons
     
     private let title: String?
     private let description: String?
@@ -26,34 +26,18 @@ struct _VDialog<Content>: View where Content: View {
     
     // MARK: Initializers
     init(
-        isPresented: Binding<Bool>,
-        dialog: VDialog<Content>
-    ) {
-        self.init(
-            model: dialog.model,
-            isPresented: isPresented,
-            dialog: dialog.dialogType,
-            title: dialog.title,
-            description: dialog.description,
-            content: dialog.content,
-            onAppear: dialog.appearAction,
-            onDisappear: dialog.disappearAction
-        )
-    }
-    
-    init(
         model: VDialogModel,
         isPresented: Binding<Bool>,
-        dialog dialogType: VDialogType,
+        dialogButtons: VDialogButtons,
         title: String?,
         description: String?,
         content: (() -> Content)?,
-        onAppear appearAction: (() -> Void)?,
-        onDisappear disappearAction: (() -> Void)?
+        appearAction: (() -> Void)?,
+        disappearAction: (() -> Void)?
     ) {
         self.model = model
         self._isHCPresented = isPresented
-        self.dialogType = dialogType
+        self.dialogButtons = dialogButtons
         self.title = title
         self.description = description
         self.content = content
@@ -134,7 +118,7 @@ extension _VDialog {
     }
     
     @ViewBuilder private var dialogView: some View {
-        switch dialogType {
+        switch dialogButtons {
         case .one(let button): oneButtonDialogView(button: button)
         case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
         case .many(let buttons): manyButtonDialogView(buttons: buttons)
@@ -201,15 +185,15 @@ struct VDialog_Previews: PreviewProvider {
         _VDialog(
             model: .init(),
             isPresented: .constant(true),
-            dialog: .two(
+            dialogButtons: .two(
                 primary: .init(model: .primary, title: "OK", action: {}),
                 secondary: .init(model: .secondary, title: "Cancel", action: {})
             ),
             title: "Lorem ipsum dolor sit amet",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
             content: { VTextField(state: .constant(.enabled), text: .constant("Lorem ipsum dolor sit amet")) },
-            onAppear: nil,
-            onDisappear: nil
+            appearAction: nil,
+            disappearAction: nil
         )
     }
 }

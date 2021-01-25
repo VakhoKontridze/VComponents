@@ -30,7 +30,7 @@
 		7A12716825BB2117002B0397 /* VHalfModalNavigationViewCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A12716725BB2117002B0397 /* VHalfModalNavigationViewCloseButton.swift */; };
 		7A184A7925B72DDA009DCD65 /* VBaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A184A7825B72DDA009DCD65 /* VBaseTextField.swift */; };
 		7A259B652597828700A12F8C /* VDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B642597828700A12F8C /* VDialog.swift */; };
-		7A259B6B259783A100A12F8C /* VDialogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6A259783A100A12F8C /* VDialogType.swift */; };
+		7A259B6B259783A100A12F8C /* VDialogButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6A259783A100A12F8C /* VDialogButtons.swift */; };
 		7A259B6E259784CF00A12F8C /* VDialogButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6D259784CF00A12F8C /* VDialogButton.swift */; };
 		7A259B7825979FC000A12F8C /* VDialogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B7725979FC000A12F8C /* VDialogModel.swift */; };
 		7A259B842597B2C600A12F8C /* _VDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B832597B2C600A12F8C /* _VDialog.swift */; };
@@ -244,7 +244,7 @@
 		7A12716725BB2117002B0397 /* VHalfModalNavigationViewCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModalNavigationViewCloseButton.swift; sourceTree = "<group>"; };
 		7A184A7825B72DDA009DCD65 /* VBaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseTextField.swift; sourceTree = "<group>"; };
 		7A259B642597828700A12F8C /* VDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialog.swift; sourceTree = "<group>"; };
-		7A259B6A259783A100A12F8C /* VDialogType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogType.swift; sourceTree = "<group>"; };
+		7A259B6A259783A100A12F8C /* VDialogButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogButtons.swift; sourceTree = "<group>"; };
 		7A259B6D259784CF00A12F8C /* VDialogButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogButton.swift; sourceTree = "<group>"; };
 		7A259B7725979FC000A12F8C /* VDialogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogModel.swift; sourceTree = "<group>"; };
 		7A259B832597B2C600A12F8C /* _VDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VDialog.swift; sourceTree = "<group>"; };
@@ -476,7 +476,7 @@
 				7A259B642597828700A12F8C /* VDialog.swift */,
 				7A259B832597B2C600A12F8C /* _VDialog.swift */,
 				7A259B7725979FC000A12F8C /* VDialogModel.swift */,
-				7A259B6A259783A100A12F8C /* VDialogType.swift */,
+				7A259B6A259783A100A12F8C /* VDialogButtons.swift */,
 				7A259B6D259784CF00A12F8C /* VDialogButton.swift */,
 				7AF3C95E25B04F2B00D56042 /* VDialogButtonModel.swift */,
 			);
@@ -1500,7 +1500,7 @@
 				7A8A7467259118DF001024FB /* VSpinnerModelContinous.swift in Sources */,
 				7A08F84E25972EB40049FB10 /* VTabNavigationViewModel.swift in Sources */,
 				7ACC3ECF25ACB1D900EAD184 /* VTableLayoutType.swift in Sources */,
-				7A259B6B259783A100A12F8C /* VDialogType.swift in Sources */,
+				7A259B6B259783A100A12F8C /* VDialogButtons.swift in Sources */,
 				7A59578725AB6FCC00B5B6E7 /* VTableModel.swift in Sources */,
 				7A007375258E75DF0003F0E9 /* VToggleState.swift in Sources */,
 				7A767CD025B6E8DB0008D2E9 /* VWheelPickerState.swift in Sources */,

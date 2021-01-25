@@ -17,7 +17,7 @@ struct VDialogDemoView: View {
     @State private var textFieldState: VTextFieldState = .enabled
     @State private var text: String = ""
     
-    @State private var dialogTypeHelper: DialogTypeHelper = .two
+    @State private var dialogButtons: VDialogButtonsHelper = .two
     
     @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var titleTextFieldState: VTextFieldState = .enabled
@@ -38,7 +38,7 @@ extension VDialogDemoView {
         VSecondaryButton(action: { isPresented = true }, title: "Present")
             .vDialog(isPresented: $isPresented, dialog: {
                 VDialog(
-                    dialog: dialogTypeHelper.dialogType(text: text),
+                    dialog: dialogButtons.buttons(text: text),
                     title: title,
                     description: description,
                     content: {
@@ -68,12 +68,12 @@ extension VDialogDemoView {
             text: $description
         )
         
-        VSegmentedPicker(selection: $dialogTypeHelper, headerTitle: "Dialog")
+        VSegmentedPicker(selection: $dialogButtons, headerTitle: "BUttons")
     }
 }
 
 // MARK:- Helpers
-private enum DialogTypeHelper: Int, VPickableTitledItem {
+private enum VDialogButtonsHelper: Int, VPickableTitledItem {
     case one
     case two
     case many
@@ -86,7 +86,7 @@ private enum DialogTypeHelper: Int, VPickableTitledItem {
         }
     }
     
-    func dialogType(text: String) -> VDialogType {
+    func buttons(text: String) -> VDialogButtons {
         switch self {
         case .one:
             return .one(
@@ -109,8 +109,8 @@ private enum DialogTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VDialogType {
-    var helperType: DialogTypeHelper {
+private extension VDialogButtons {
+    var helperType: VDialogButtonsHelper {
         switch self {
         case .one: return .one
         case .two: return .two
