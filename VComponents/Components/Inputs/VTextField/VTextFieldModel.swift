@@ -34,7 +34,7 @@ extension VTextFieldModel {
         public var searchIconDimension: CGFloat = 15
         
         public var clearButtonDimension: CGFloat = 22
-        public var clearButtonIconDimension: CGFloat = 10
+        public var clearButtonIconDimension: CGFloat = 8
         
         public var visibilityButtonDimension: CGFloat = 22
         public var visibilityButtonIconDimension: CGFloat = 20
