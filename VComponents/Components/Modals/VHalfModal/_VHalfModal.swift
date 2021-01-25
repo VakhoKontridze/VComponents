@@ -78,7 +78,7 @@ extension _VHalfModal {
             ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
                     .edgesIgnoringSafeArea(.all)
-                    .frame(height: model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .gesture(
                         DragGesture(minimumDistance: 0)
@@ -92,12 +92,12 @@ extension _VHalfModal {
                     contentView
                 })
                     .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
-                    .frame(height: model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
                 
                 navigationBarCloseButton
                     .edgesIgnoringSafeArea(.all)
-                    .frame(height: model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
             })
                 .onAppear(perform: appearAction)
@@ -290,7 +290,7 @@ struct VHalfModal_Previews: PreviewProvider {
             isPresented: .constant(true),
             headerContent: {
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: VHalfModalModel.Fonts().header,
                     color: VHalfModalModel.Colors().headerText,
                     title: "Lorem ipsum dolor sit amet"

@@ -27,10 +27,10 @@ extension VAccordionModel {
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        public var dividerHeight: CGFloat = 1
-        var hasDivider: Bool { dividerHeight > 0 }
+        public var headerDividerHeight: CGFloat = 1
+        var hasHeaderDivider: Bool { headerDividerHeight > 0 }
         
-        public var rowDividerHeight: CGFloat = sectionReference.layout.dividerHeight
+        public var dividerHeight: CGFloat = sectionReference.layout.dividerHeight
         
         public var headerMargin: ExpandableMargins = .init(
             leading: sheetReference.layout.contentMargin,
@@ -169,7 +169,7 @@ extension VAccordionModel {
         
         model.layout.marginTrailing = layout.contentMargin.trailing
         model.layout.itemSpacing = layout.itemSpacing
-        model.layout.dividerHeight = layout.rowDividerHeight
+        model.layout.dividerHeight = layout.dividerHeight
         
         model.colors.divider = colors.divider
         

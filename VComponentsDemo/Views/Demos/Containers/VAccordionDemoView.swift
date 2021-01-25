@@ -17,9 +17,13 @@ struct VAccordionDemoView: View {
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 5
     @State private var expandCollapseOnHeaderTap: Bool = true
+    @State private var hasDivider: Bool = VAccordionModel.Layout().headerDividerHeight > 0
     
     private var model: VAccordionModel {
         var model: VAccordionModel = .init()
+        
+        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
+        model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
         
         model.misc.expandCollapseOnHeaderTap = expandCollapseOnHeaderTap
         
@@ -74,6 +78,8 @@ extension VAccordionDemoView {
         Stepper("Rows", value: $rowCount, in: 0...20)
         
         ToggleSettingView(isOn: $expandCollapseOnHeaderTap, title: "Expand/Collapse on Header Tap")
+        
+        ToggleSettingView(isOn: $hasDivider, title: "Header Divider")
     }
 }
 

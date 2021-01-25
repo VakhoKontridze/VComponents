@@ -21,7 +21,7 @@ struct HomeView: View {
         .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
         .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
-        .init(id: 7, title: "Modals", rows: [.modal, .sideBar, .dialog]),
+        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog]),
 //        .init(id: 8, title: "Messages", rows: []),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar]),
         .init(id: 10, title: "Core", rows: [.baseText, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
@@ -35,7 +35,7 @@ struct HomeView: View {
         case textField /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView
-        case modal, /*,halfModal*/ sideBar, dialog /*, menu*/ /*, actionSheet*/
+        case modal, halfModal, sideBar, dialog /*, menu*/ /*, actionSheet*/
         /*case*/ /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
         case baseText, baseButton, baseTextField, lazyList, baseList, baseView
@@ -71,6 +71,7 @@ struct HomeView: View {
             case .navigationView: return VNavigationViewDemoView.navigationBarTitle
 
             case .modal: return VModalDemoView.navigationBarTitle
+            case .halfModal: return VHalfModalDemoView.navigationBarTitle
             case .sideBar: return VSideBarDemoView.navigationBarTitle
             case .dialog: return VDialogDemoView.navigationBarTitle
 
@@ -117,6 +118,7 @@ struct HomeView: View {
             case .navigationView: VNavigationViewDemoView()
 
             case .modal: VModalDemoView()
+            case .halfModal: VHalfModalDemoView()
             case .sideBar: VSideBarDemoView()
             case .dialog: VDialogDemoView()
 

@@ -120,7 +120,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             state: state,
             headerContent: {
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: headerTitle
@@ -177,7 +177,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             state: state,
             headerContent: {
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: headerTitle
@@ -229,7 +229,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             state: state,
             headerContent: {
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: headerTitle
@@ -278,9 +278,9 @@ extension VAccordion {
     }
     
     @ViewBuilder private var divider: some View {
-        if (animatableState ?? state).isExpanded, model.layout.hasDivider {
+        if (animatableState ?? state).isExpanded, model.layout.hasHeaderDivider {
             Rectangle()
-                .frame(height: model.layout.dividerHeight)
+                .frame(height: model.layout.headerDividerHeight)
                 .padding(.leading, model.layout.dividerMargin.leading)
                 .padding(.trailing, model.layout.dividerMargin.trailing)
                 .padding(.top, model.layout.dividerMargin.top)

@@ -134,6 +134,7 @@
 		7A90266625BA04C100685282 /* UIVIewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A90266525BA04C100685282 /* UIVIewExtensions.swift */; };
 		7A92926425B5B74400BBEA8A /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */; };
 		7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A92926625B5BB8200BBEA8A /* ImageBook.swift */; };
+		7AA25E4A25BF2A8A00ACB323 /* VHalfModalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */; };
 		7AA763D925B738EA0088FC69 /* VTextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763D825B738EA0088FC69 /* VTextFieldState.swift */; };
 		7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */; };
 		7AA763E425B73F2C0088FC69 /* VTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763E325B73F2C0088FC69 /* VTextField.swift */; };
@@ -350,6 +351,7 @@
 		7A90266525BA04C100685282 /* UIVIewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIVIewExtensions.swift; sourceTree = "<group>"; };
 		7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
 		7A92926625B5BB8200BBEA8A /* ImageBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBook.swift; sourceTree = "<group>"; };
+		7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModalDemoView.swift; sourceTree = "<group>"; };
 		7AA763D825B738EA0088FC69 /* VTextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldState.swift; sourceTree = "<group>"; };
 		7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldModel.swift; sourceTree = "<group>"; };
 		7AA763E325B73F2C0088FC69 /* VTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextField.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				7AF3C8F125AF6FB200D56042 /* VModalDemoView.swift */,
+				7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */,
 				7AD809602595073C00DABE49 /* VSideBarDemoView.swift */,
 				7A43A611259CAE130029E3C9 /* VDialogModelView.swift */,
 			);
@@ -1525,6 +1528,7 @@
 				7A8A96FC258DDC7800309886 /* AppDelegate.swift in Sources */,
 				7A4C4344259242B7000207DD /* SceneDelegateExtensions.swift in Sources */,
 				7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */,
+				7AA25E4A25BF2A8A00ACB323 /* VHalfModalDemoView.swift in Sources */,
 				7AF3C8F225AF6FB200D56042 /* VModalDemoView.swift in Sources */,
 				7ACC3EBE25AC893300EAD184 /* DemoableRow.swift in Sources */,
 				7A599581259245660087902B /* DemoView.swift in Sources */,

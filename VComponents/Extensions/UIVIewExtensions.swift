@@ -9,6 +9,14 @@ import UIKit
 
 // MARK:- Constants
 extension UIView {
+    static var topSafeAreaHeight: CGFloat {
+        appSuperView?.safeAreaInsets.top ?? 0
+    }
+
+    static var bottomSafeAreaHeight: CGFloat {
+        appSuperView?.safeAreaInsets.bottom ?? 0
+    }
+    
     static var navigationBarHeight: CGFloat {
         let navigationController: UINavigationController = .init(rootViewController: .init(nibName: nil, bundle: nil))
         return navigationController.navigationBar.frame.size.height

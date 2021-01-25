@@ -85,7 +85,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
             model: model,
             titleContent: {
                 VBaseHeaderFooter(
-                    frameType: .auto,
+                    frameType: .fixed,
                     font: model.fonts.title,
                     color: model.colors.titleText,
                     title: navBarTitleContent
@@ -127,7 +127,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
             model: model,
             titleContent: {
                 VBaseHeaderFooter(
-                    frameType: .auto,
+                    frameType: .fixed,
                     font: model.fonts.title,
                     color: model.colors.titleText,
                     title: navBarTitleContent
@@ -167,7 +167,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
             model: model,
             titleContent: {
                 VBaseHeaderFooter(
-                    frameType: .auto,
+                    frameType: .fixed,
                     font: model.fonts.title,
                     color: model.colors.titleText,
                     title: navBarTitleContent
@@ -209,7 +209,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
             model: model,
             titleContent: {
                 VBaseHeaderFooter(
-                    frameType: .auto,
+                    frameType: .fixed,
                     font: model.fonts.title,
                     color: model.colors.titleText,
                     title: navBarTitleContent

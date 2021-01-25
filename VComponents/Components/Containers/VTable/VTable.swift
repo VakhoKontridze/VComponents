@@ -115,7 +115,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             sections: sections,
             headerContent: { section in
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: headerTitle(section)
@@ -143,7 +143,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             headerContent: headerContent,
             footerContent: { section in
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: footerTitle(section)
@@ -171,7 +171,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             sections: sections,
             headerContent: { section in
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: headerTitle(section)
@@ -179,7 +179,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             },
             footerContent: { section in
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: footerTitle(section)
@@ -224,7 +224,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             sections: sections,
             headerContent: { section in
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: headerTitle(section)
@@ -269,7 +269,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
             sections: sections,
             footerContent: { section in
                 VBaseHeaderFooter(
-                    frameType: .flex(.leading),
+                    frameType: .flexible(.leading),
                     font: model.fonts.header,
                     color: model.colors.headerText,
                     title: footerTitle(section)

@@ -34,8 +34,8 @@ struct VBaseHeaderFooter: View {
 extension VBaseHeaderFooter {
     @ViewBuilder var body: some View {
         switch frameType {
-        case .auto: contentView
-        case .flex(let alignment): contentView.frame(maxWidth: .infinity, alignment: alignment.asAlignment)
+        case .fixed: contentView
+        case .flexible(let alignment): contentView.frame(maxWidth: .infinity, alignment: alignment.asAlignment)
         }
     }
     
