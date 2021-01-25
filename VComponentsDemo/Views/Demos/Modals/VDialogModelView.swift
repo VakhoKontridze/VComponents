@@ -38,7 +38,7 @@ extension VDialogDemoView {
         VSecondaryButton(action: { isPresented = true }, title: "Present")
             .vDialog(isPresented: $isPresented, dialog: {
                 VDialog(
-                    dialog: dialogButtons.buttons(text: text),
+                    buttons: dialogButtons.buttons(text: text),
                     title: title,
                     description: description,
                     content: {
