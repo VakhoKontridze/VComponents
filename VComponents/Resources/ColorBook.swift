@@ -124,24 +124,22 @@ extension Color {
  *100.100.100
  
  TextField.Background.error
- 255.215.215
- *255.100.100
+ 250.205.210
+ 230.60.30
  
  TextField.Background.focused
  215.215.215
  50.50.50
  
  TextField.Background.success
- 210.255.220
- *0.200.130
+ 205.250.210
+ 25.175.90
  
  TextField.Border.error
- *255.100.100
- 220.90.100
+ 200.35.30
  
  TextField.Border.success
- *0.200.130
- 0.160.130
+ 5.145.65
  
  TextField.ClearButton.Background.disabled
  220.220.220
