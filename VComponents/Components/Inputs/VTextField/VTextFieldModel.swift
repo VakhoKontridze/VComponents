@@ -27,7 +27,7 @@ extension VTextFieldModel {
         
         public var textAlignment: TextAlignment = .default
         
-        public var borderWidth: CGFloat = 2
+        public var borderWidth: CGFloat = 1.5
         
         public var contentMarginHorizontal: CGFloat = 15
         
