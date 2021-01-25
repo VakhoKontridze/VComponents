@@ -62,7 +62,7 @@ extension VPrimaryButtonDemoView {
     @ViewBuilder private func component() -> some View {
         switch contentType {
         case .text: VPrimaryButton(model: model, state: state, action: {}, title: buttonTitle)
-        case .icon: VPrimaryButton(model: model, state: state, action: {}, content: buttonContent)
+        case .custom: VPrimaryButton(model: model, state: state, action: {}, content: buttonContent)
         }
     }
     
@@ -101,12 +101,12 @@ extension VPrimaryButtonState: VPickableTitledItem {
 
 enum ComponentContentType: Int, VPickableTitledItem {
     case text
-    case icon
+    case custom
     
     var pickerTitle: String {
         switch self {
         case .text: return "Text"
-        case .icon: return "Icon"
+        case .custom: return "Custom"
         }
     }
 }

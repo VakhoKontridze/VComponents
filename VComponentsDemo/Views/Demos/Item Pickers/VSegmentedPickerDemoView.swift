@@ -64,7 +64,7 @@ extension VSegmentedPickerDemoView {
                 disabledItems: hasDisabledRow ? [.green] : []
             )
         
-        case .icon:
+        case .custom:
             VSegmentedPicker(
                 model: model,
                 selection: $selection,

@@ -79,7 +79,7 @@ extension VSquareButtonDemoView {
     @ViewBuilder private func component() -> some View {
         switch contentType {
         case .text: VSquareButton(model: model, state: state, action: {}, title: buttonTitle)
-        case .icon: VSquareButton(model: model, state: state, action: {}, content: buttonContent)
+        case .custom: VSquareButton(model: model, state: state, action: {}, content: buttonContent)
         }
     }
     

@@ -9,9 +9,9 @@ import SwiftUI
 
 // MARK:- Modifier
 extension View {
-    func setUpBaseViewNavigationBarCenter<LeadingItem, TrailingItem>(
+    func setUpBaseViewNavigationBarCenter<LeadingItem, Title, TrailingItem>(
         model: VBaseViewModel,
-        title: String,
+        @ViewBuilder titleContent: @escaping () -> Title,
         leadingItemContent: (() -> LeadingItem)?,
         trailingItemContent: (() -> TrailingItem)?,
         showBackButton: Bool,
@@ -19,11 +19,12 @@ extension View {
     ) -> some View
         where
             LeadingItem: View,
+            Title: View,
             TrailingItem: View
     {
         modifier(VBaseViewNavigationBarCenter(
             model: model,
-            title: title,
+            titleContent: titleContent,
             leadingItemContent: leadingItemContent,
             trailingItemContent: trailingItemContent,
             showBackButton: showBackButton,
@@ -33,17 +34,18 @@ extension View {
 }
 
 // MARK:- V Base View Navigation Bar Center
-struct VBaseViewNavigationBarCenter<TrailingItem, LeadingItem>: ViewModifier
+struct VBaseViewNavigationBarCenter<TrailingItem, Title, LeadingItem>: ViewModifier
     where
         LeadingItem: View,
+        Title: View,
         TrailingItem: View
 {
     // MARK: Properties
     @Environment(\.vHalfModalNavigationViewCloseButton) private var vHalfModalNavigationViewCloseButton: Bool
     
-    private let title: String
     private let model: VBaseViewModel
     
+    private let titleContent: () -> Title
     private let leadingItemContent: (() -> LeadingItem)?
     private let trailingItemContent: (() -> TrailingItem)?
 
@@ -60,14 +62,14 @@ struct VBaseViewNavigationBarCenter<TrailingItem, LeadingItem>: ViewModifier
     // MARK: Initializers
     init(
         model: VBaseViewModel,
-        title: String,
+        @ViewBuilder titleContent: @escaping () -> Title,
         leadingItemContent: (() -> LeadingItem)?,
         trailingItemContent: (() -> TrailingItem)?,
         showBackButton: Bool,
         onBack backAction: @escaping () -> Void
     ) {
         self.model = model
-        self.title = title
+        self.titleContent = titleContent
         self.leadingItemContent = leadingItemContent
         self.trailingItemContent = trailingItemContent
         self.showBackButton = showBackButton
@@ -96,12 +98,7 @@ extension VBaseViewNavigationBarCenter {
             Spacer()
 
             HStack(spacing: model.layout.spacing, content: {
-                VText(
-                    type: .oneLine,
-                    font: model.fonts.title,
-                    color: model.colors.titleColor,
-                    title: title
-                )
+                titleContent()
             })
 
             Spacer()

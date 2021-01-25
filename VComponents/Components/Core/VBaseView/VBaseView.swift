@@ -38,11 +38,12 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailingItem>: View
+public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrailingItemContent, Content>: View
     where
-        Content: View,
-        NavigationBarLeadingItem: View,
-        NavigationBarTrailingItem: View
+        NavBarLeadingItemContent: View,
+        NavBarTitleContent: View,
+        NavBarTrailingItemContent: View,
+        Content: View
 {
     // MARK: Properties
     @Environment(\.presentationMode) private var presentationMode: Binding<PresentationMode>
@@ -50,74 +51,172 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     
     private let model: VBaseViewModel
     
-    private let navigationBarTitle: String
-    private let navigationBarLeadingItem: (() -> NavigationBarLeadingItem)?
-    private let navigationBarTrailingItem: (() -> NavigationBarTrailingItem)?
+    private let navBarLeadingItemContent: (() -> NavBarLeadingItemContent)?
+    private let navBarTitleContent: () -> NavBarTitleContent
+    private let navBarTrailingItemContent: (() -> NavBarTrailingItemContent)?
     
     private let content: () -> Content
     
     // MARK: Initializers: Leading and Trailing
     public init(
         model: VBaseViewModel = .init(),
-        title navigationBarTitle: String,
-        @ViewBuilder leadingItem navigationBarLeadingItem: @escaping () -> NavigationBarLeadingItem,
-        @ViewBuilder trailingItem navigationBarTrailingItem: @escaping () -> NavigationBarTrailingItem,
+        @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
+        @ViewBuilder leadingItem navBarLeadingItemContent: @escaping () -> NavBarLeadingItemContent,
+        @ViewBuilder trailingItem navBarTrailingItemContent: @escaping () -> NavBarTrailingItemContent,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self.navigationBarTitle = navigationBarTitle
-        self.navigationBarLeadingItem = navigationBarLeadingItem
-        self.navigationBarTrailingItem = navigationBarTrailingItem
+        self.navBarTitleContent = navBarTitleContent
+        self.navBarLeadingItemContent = navBarLeadingItemContent
+        self.navBarTrailingItemContent = navBarTrailingItemContent
         self.content = content
+    }
+    
+    public init(
+        model: VBaseViewModel = .init(),
+        title navBarTitleContent: String,
+        @ViewBuilder leadingItem navBarLeadingItemContent: @escaping () -> NavBarLeadingItemContent,
+        @ViewBuilder trailingItem navBarTrailingItemContent: @escaping () -> NavBarTrailingItemContent,
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where NavBarTitleContent == VBaseHeaderFooter
+    {
+        self.init(
+            model: model,
+            titleContent: {
+                VBaseHeaderFooter(
+                    frameType: .auto,
+                    font: model.fonts.title,
+                    color: model.colors.titleText,
+                    title: navBarTitleContent
+                )
+            },
+            leadingItem: navBarLeadingItemContent,
+            trailingItem: navBarTrailingItemContent,
+            content: content
+        )
     }
 
     // MARK: Initializers: Leading
     public init(
         model: VBaseViewModel = .init(),
-        title navigationBarTitle: String,
-        @ViewBuilder leadingItem navigationBarLeadingItem: @escaping () -> NavigationBarLeadingItem,
+        @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
+        @ViewBuilder leadingItem navBarLeadingItemContent: @escaping () -> NavBarLeadingItemContent,
         @ViewBuilder content: @escaping () -> Content
     )
-        where NavigationBarTrailingItem == Never
+        where NavBarTrailingItemContent == Never
     {
         self.model = model
-        self.navigationBarTitle = navigationBarTitle
-        self.navigationBarLeadingItem = navigationBarLeadingItem
-        self.navigationBarTrailingItem = nil
+        self.navBarTitleContent = navBarTitleContent
+        self.navBarLeadingItemContent = navBarLeadingItemContent
+        self.navBarTrailingItemContent = nil
         self.content = content
     }
-
+    
+    public init(
+        model: VBaseViewModel = .init(),
+        title navBarTitleContent: String,
+        @ViewBuilder leadingItem navBarLeadingItemContent: @escaping () -> NavBarLeadingItemContent,
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where
+            NavBarTitleContent == VBaseHeaderFooter,
+            NavBarTrailingItemContent == Never
+    {
+        self.init(
+            model: model,
+            titleContent: {
+                VBaseHeaderFooter(
+                    frameType: .auto,
+                    font: model.fonts.title,
+                    color: model.colors.titleText,
+                    title: navBarTitleContent
+                )
+            },
+            leadingItem: navBarLeadingItemContent,
+            content: content
+        )
+    }
     // MARK: Initializers: Trailing
     public init(
         model: VBaseViewModel = .init(),
-        title navigationBarTitle: String,
-        @ViewBuilder trailingItem navigationBarTrailingItem: @escaping () -> NavigationBarTrailingItem,
+        @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
+        @ViewBuilder trailingItem navBarTrailingItemContent: @escaping () -> NavBarTrailingItemContent,
         @ViewBuilder content: @escaping () -> Content
     )
-        where NavigationBarLeadingItem == Never
+        where NavBarLeadingItemContent == Never
     {
         self.model = model
-        self.navigationBarTitle = navigationBarTitle
-        self.navigationBarLeadingItem = nil
-        self.navigationBarTrailingItem = navigationBarTrailingItem
+        self.navBarTitleContent = navBarTitleContent
+        self.navBarLeadingItemContent = nil
+        self.navBarTrailingItemContent = navBarTrailingItemContent
         self.content = content
+    }
+    
+    public init(
+        model: VBaseViewModel = .init(),
+        title navBarTitleContent: String,
+        @ViewBuilder trailingItem navBarTrailingItemContent: @escaping () -> NavBarTrailingItemContent,
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where
+            NavBarLeadingItemContent == Never,
+            NavBarTitleContent == VBaseHeaderFooter
+    {
+        self.init(
+            model: model,
+            titleContent: {
+                VBaseHeaderFooter(
+                    frameType: .auto,
+                    font: model.fonts.title,
+                    color: model.colors.titleText,
+                    title: navBarTitleContent
+                )
+            },
+            trailingItem: navBarTrailingItemContent,
+            content: content
+        )
     }
 
     // MARK: Initializers: _
     public init(
         model: VBaseViewModel = .init(),
-        title navigationBarTitle: String,
+        @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
         @ViewBuilder content: @escaping () -> Content
     )
         where
-            NavigationBarLeadingItem == Never,
-            NavigationBarTrailingItem == Never
+            NavBarLeadingItemContent == Never,
+            NavBarTrailingItemContent == Never
     {
         self.model = model
-        self.navigationBarTitle = navigationBarTitle
-        self.navigationBarLeadingItem = nil
-        self.navigationBarTrailingItem = nil
+        self.navBarTitleContent = navBarTitleContent
+        self.navBarLeadingItemContent = nil
+        self.navBarTrailingItemContent = nil
         self.content = content
+    }
+    
+    public init(
+        model: VBaseViewModel = .init(),
+        title navBarTitleContent: String,
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where
+            NavBarLeadingItemContent == Never,
+            NavBarTitleContent == VBaseHeaderFooter,
+            NavBarTrailingItemContent == Never
+    {
+        self.init(
+            model: model,
+            titleContent: {
+                VBaseHeaderFooter(
+                    frameType: .auto,
+                    font: model.fonts.title,
+                    color: model.colors.titleText,
+                    title: navBarTitleContent
+                )
+            },
+            content: content
+        )
     }
 }
 
@@ -129,9 +228,9 @@ extension VBaseView {
             baseViewFrame
                 .setUpBaseViewNavigationBarCenter(
                     model: model,
-                    title: navigationBarTitle,
-                    leadingItemContent: navigationBarLeadingItem,
-                    trailingItemContent: navigationBarTrailingItem,
+                    titleContent: navBarTitleContent,
+                    leadingItemContent: navBarLeadingItemContent,
+                    trailingItemContent: navBarTrailingItemContent,
                     showBackButton: !vNavigationViewBackButtonHidden,
                     onBack: back
                 )
@@ -140,9 +239,9 @@ extension VBaseView {
             baseViewFrame
                 .setUpBaseViewNavigationBarLeading(
                     model: model,
-                    title: navigationBarTitle,
-                    leadingItemContent: navigationBarLeadingItem,
-                    trailingItemContent: navigationBarTrailingItem,
+                    titleContent: navBarTitleContent,
+                    leadingItemContent: navBarLeadingItemContent,
+                    trailingItemContent: navBarTrailingItemContent,
                     showBackButton: !vNavigationViewBackButtonHidden,
                     onBack: back
                 )

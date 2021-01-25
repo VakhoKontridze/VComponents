@@ -55,7 +55,7 @@ extension VRadioButtonDemoView {
     @ViewBuilder private func component() -> some View {
         switch contentType {
         case .text: VRadioButton(model: model, state: $state, title: RadioButtonTitle)
-        case .icon: VRadioButton(model: model, state: $state, content: RadioButtonContent)
+        case .custom: VRadioButton(model: model, state: $state, content: RadioButtonContent)
         }
     }
     

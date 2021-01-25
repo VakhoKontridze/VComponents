@@ -48,7 +48,7 @@ extension VWheelPickerDemoView {
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil
             )
         
-        case .icon:
+        case .custom:
             VWheelPicker(
                 model: model,
                 selection: $selection,

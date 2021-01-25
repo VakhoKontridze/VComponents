@@ -70,7 +70,7 @@ extension VSecondaryButtonDemoView {
     @ViewBuilder private func component() -> some View {
         switch contentType {
         case .text: VSecondaryButton(model: model, state: state, action: {}, title: buttonTitle)
-        case .icon: VSecondaryButton(model: model, state: state, action: {}, content: buttonContent)
+        case .custom: VSecondaryButton(model: model, state: state, action: {}, content: buttonContent)
         }
     }
     

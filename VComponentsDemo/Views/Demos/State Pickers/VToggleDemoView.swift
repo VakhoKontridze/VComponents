@@ -42,7 +42,7 @@ extension VToggleDemoView {
     @ViewBuilder private func component() -> some View {
         switch contentType {
         case .text: VToggle(model: model, state: $state, title: toggleTitle)
-        case .icon: VToggle(model: model, state: $state, content: toggleContent)
+        case .custom: VToggle(model: model, state: $state, content: toggleContent)
         }
     }
     

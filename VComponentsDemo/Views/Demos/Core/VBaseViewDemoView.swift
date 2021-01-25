@@ -13,6 +13,7 @@ struct VBaseViewDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Base View"
     
+    @State private var titleContentType: VBaseViewTitleContentType = .text
     @State private var titlePosition: VBaseViewModel.Layout.TitlePosition = .leading
     @State private var hasLeadingItem: Bool = false
     @State private var hasTrailingItem: Bool = false
@@ -37,18 +38,36 @@ struct VBaseViewDemoView: View {
 
 // MARK:- Body
 extension VBaseViewDemoView {
-    var body: some View {
-        VBaseView(
-            model: baseViewModel,
-            title: Self.navigationBarTitle,
-            leadingItem: leadingItem,
-            trailingItem: trailingItem,
-            content: { DemoView(component: settings) }  // Cannot be contained in VHalfModal, becase chaning title position causes glitches
-        )
+    @ViewBuilder var body: some View {
+        switch titleContentType {
+        case .text:
+            VBaseView(
+                model: baseViewModel,
+                title: viewTitle,
+                leadingItem: leadingItem,
+                trailingItem: trailingItem,
+                content: contentView
+            )
+            
+        case .custom:
+            VBaseView(
+                model: baseViewModel,
+                titleContent: viewContent,
+                leadingItem: leadingItem,
+                trailingItem: trailingItem,
+                content: contentView
+            )
+        }
+    }
+    
+    private func contentView() -> some View {
+        DemoView(component: settings)  // Cannot be contained in VHalfModal, becase chaning title position causes glitches
     }
     
     private func settings() -> some View {
         VStack(spacing: 15, content: {
+            VSegmentedPicker(selection: $titleContentType, headerTitle: "Title Content")
+            
             VSegmentedPicker(selection: $titlePosition, headerTitle: "Title Position")
             
             ToggleSettingView(isOn: $hasLeadingItem, title: "Leading items")
@@ -74,6 +93,21 @@ extension VBaseViewDemoView {
             })
         }
     }
+    
+    private var viewTitle: String { Self.navigationBarTitle }
+
+    private func viewContent() -> some View {
+        HStack(spacing: 5, content: {
+            DemoIconContentView()
+            
+            VText(
+                type: .oneLine,
+                font: VBaseViewModel.Fonts().title,
+                color: VBaseViewModel.Colors().titleText,
+                title: viewTitle
+            )
+        })
+    }
 }
 
 // MARK:- Helpers
@@ -82,6 +116,18 @@ extension VBaseViewModel.Layout.TitlePosition: VPickableTitledItem {
         switch self {
         case .leading: return "Leading"
         case .center: return "Center"
+        }
+    }
+}
+
+private enum VBaseViewTitleContentType: Int, VPickableTitledItem {
+    case text
+    case custom
+    
+    var pickerTitle: String {
+        switch self {
+        case .text: return "Text"
+        case .custom: return "Custom"
         }
     }
 }

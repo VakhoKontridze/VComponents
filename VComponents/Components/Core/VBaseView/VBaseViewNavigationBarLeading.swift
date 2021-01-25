@@ -9,9 +9,9 @@ import SwiftUI
 
 // MARK:- Modifier
 extension View {
-    func setUpBaseViewNavigationBarLeading<LeadingItem, TrailingItem>(
+    func setUpBaseViewNavigationBarLeading<LeadingItem, Title, TrailingItem>(
         model: VBaseViewModel,
-        title: String,
+        @ViewBuilder titleContent: @escaping () -> Title,
         leadingItemContent: (() -> LeadingItem)?,
         trailingItemContent: (() -> TrailingItem)?,
         showBackButton: Bool,
@@ -19,11 +19,12 @@ extension View {
     ) -> some View
         where
             LeadingItem: View,
+            Title: View,
             TrailingItem: View
     {
         modifier(VBaseViewNavigationBarLeading(
             model: model,
-            title: title,
+            titleContent: titleContent,
             leadingItemContent: leadingItemContent,
             trailingItemContent: trailingItemContent,
             showBackButton: showBackButton,
@@ -33,17 +34,18 @@ extension View {
 }
 
 // MARK:- V Base View Navigation Bar Leading
-struct VBaseViewNavigationBarLeading<TrailingItem, LeadingItem>: ViewModifier
+struct VBaseViewNavigationBarLeading<TrailingItem, Title, LeadingItem>: ViewModifier
     where
         LeadingItem: View,
+        Title: View,
         TrailingItem: View
 {
     // MARK: Properties
     @Environment(\.vHalfModalNavigationViewCloseButton) private var vHalfModalNavigationViewCloseButton: Bool
     
-    private let title: String
     private let model: VBaseViewModel
     
+    private let titleContent: () -> Title
     private let leadingItemContent: (() -> LeadingItem)?
     private let trailingItemContent: (() -> TrailingItem)?
     
@@ -53,14 +55,14 @@ struct VBaseViewNavigationBarLeading<TrailingItem, LeadingItem>: ViewModifier
     // MARK: Initializers
     init(
         model: VBaseViewModel,
-        title: String,
+        @ViewBuilder titleContent: @escaping () -> Title,
         leadingItemContent: (() -> LeadingItem)?,
         trailingItemContent: (() -> TrailingItem)?,
         showBackButton: Bool,
         onBack backAction: @escaping () -> Void
     ) {
         self.model = model
-        self.title = title
+        self.titleContent = titleContent
         self.leadingItemContent = leadingItemContent
         self.trailingItemContent = trailingItemContent
         self.showBackButton = showBackButton
@@ -81,15 +83,9 @@ extension VBaseViewNavigationBarLeading {
 
             if showBackButton { VChevronButton(model: model.backButtonSubModel, direction: .left, action: backAction).layoutPriority(1) }
 
-            VText(
-                type: .oneLine,
-                font: model.fonts.title,
-                color: model.colors.titleColor,
-                title: title
-            )
-                .layoutPriority(0)
+            titleContent().layoutPriority(0)
 
-            Spacer()
+            Spacer().layoutPriority(0)
 
             if let trailingItemContent = trailingItemContent { trailingItemContent().layoutPriority(1) }
         })

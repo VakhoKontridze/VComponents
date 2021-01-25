@@ -55,7 +55,7 @@ extension VCheckBoxDemoView {
     @ViewBuilder private func component() -> some View {
         switch contentType {
         case .text: VCheckBox(model: model, state: $state, title: CheckBoxTitle)
-        case .icon: VCheckBox(model: model, state: $state, content: CheckBoxContent)
+        case .custom: VCheckBox(model: model, state: $state, content: CheckBoxContent)
         }
     }
     

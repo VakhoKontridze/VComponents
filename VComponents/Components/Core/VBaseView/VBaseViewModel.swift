@@ -46,7 +46,7 @@ extension VBaseViewModel.Layout {
 // MARK:- Colors
 extension VBaseViewModel {
     public struct Colors {
-        public var titleColor: Color = ColorBook.primary
+        public var titleText: Color = ColorBook.primary // Only applicable during init with title
         
         public var backButtonBackground: StateColors = VBaseViewModel.chevronButtonModel.colors.background
         
@@ -65,7 +65,7 @@ extension VBaseViewModel.Colors {
 // MARK:- Fonts
 extension VBaseViewModel {
     public struct Fonts {
-        public var title: Font = .system(size: 17, weight: .semibold, design: .default)
+        public var title: Font = .system(size: 17, weight: .semibold, design: .default) // Only applicable during init with title
         
         public init() {}
     }

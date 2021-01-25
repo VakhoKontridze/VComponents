@@ -47,7 +47,7 @@ extension VPlainButtonDemoView {
     @ViewBuilder private func component() -> some View {
         switch contentType {
         case .text: VPlainButton(model: model, state: state, action: {}, title: buttonTitle)
-        case .icon: VPlainButton(model: model, state: state, action: {}, content: buttonContent)
+        case .custom: VPlainButton(model: model, state: state, action: {}, content: buttonContent)
         }
     }
     
