@@ -67,7 +67,7 @@ public struct VNavigationLink<Destination, Label>: View
     private let destination: Destination
     private let label: () -> Label
     
-    // MARK: Initializers
+    // MARK: Initializers: Preset and Tap
     public init(
         preset linkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
@@ -78,21 +78,6 @@ public struct VNavigationLink<Destination, Label>: View
         self.linkType = linkPreset.linkType
         self.state = state
         self._isActiveByState = .constant(false)
-        self.destination = destination
-        self.label = label
-    }
-    
-    public init(
-        preset linkPreset: VNavigationLinkPreset,
-        isActive: Binding<Bool>,
-        state: VNavigationLinkState = .enabled,
-        destination: Destination,
-        @ViewBuilder label: @escaping () -> Label
-    ) {
-        self.triggerType = .state
-        self.linkType = linkPreset.linkType
-        self.state = state
-        self._isActiveByState = isActive
         self.destination = destination
         self.label = label
     }
@@ -111,6 +96,22 @@ public struct VNavigationLink<Destination, Label>: View
             destination: destination,
             label: { linkPreset.text(from: title, isEnabled: state.isEnabled) }
         )
+    }
+    
+    // MARK: Initializers: Preset and State
+    public init(
+        preset linkPreset: VNavigationLinkPreset,
+        isActive: Binding<Bool>,
+        state: VNavigationLinkState = .enabled,
+        destination: Destination,
+        @ViewBuilder label: @escaping () -> Label
+    ) {
+        self.triggerType = .state
+        self.linkType = linkPreset.linkType
+        self.state = state
+        self._isActiveByState = isActive
+        self.destination = destination
+        self.label = label
     }
     
     public init(
@@ -131,6 +132,7 @@ public struct VNavigationLink<Destination, Label>: View
         )
     }
     
+    // MARK: Initializers: Custom and Tap
     public init(
         state: VNavigationLinkState = .enabled,
         destination: Destination,
@@ -144,6 +146,7 @@ public struct VNavigationLink<Destination, Label>: View
         self.label = label
     }
     
+    // MARK: Initializers: Custom and State
     public init(
         isActive: Binding<Bool>,
         state: VNavigationLinkState = .enabled,

@@ -36,7 +36,7 @@ public struct VChevronButton: View {
     
     private let action: () -> Void
     
-    // MARK: Direction
+    // MARK: Initializers
     public init(
         model: VChevronButtonModel = .init(),
         direction: VChevronButtonDirection,

@@ -104,7 +104,7 @@ public struct VHalfModal<Content, HeaderContent>
     public var appearAction: (() -> Void)?
     public var disappearAction: (() -> Void)?
     
-    // MARK: Initializers
+    // MARK: Initializers: Header
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder header headerContent: @escaping () -> HeaderContent,
@@ -119,6 +119,7 @@ public struct VHalfModal<Content, HeaderContent>
         self.disappearAction = disappearAction
     }
     
+    // MARK: Initializers: _
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content,

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Wheel Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel
 ///
-/// Component ca be initialized with data, VPickableItem, or VPickableTitledItem
+/// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
 ///
 /// Model, state, header, and footer can be passed as parameters
 ///
@@ -19,7 +19,7 @@ import SwiftUI
 /// ```
 /// @State var selectedIndex: Int = 7
 ///
-/// let titles: [String] = [
+/// let rowTitles: [String] = [
 ///     "January", "February", "March",
 ///     "April", "May", "June",
 ///     "July", "August", "September",
@@ -31,17 +31,17 @@ import SwiftUI
 ///         selectedIndex: $selectedIndex,
 ///         header: "Lorem ipsum dolor sit amet",
 ///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///         titles: titles
+///         rowTitles: rowTitles
 ///     )
 ///         .padding(20)
 /// }
 /// ```
 ///
-public struct VWheelPicker<Data, Content>: View
+public struct VWheelPicker<Data, RowContent>: View
     where
         Data: RandomAccessCollection,
         Data.Index == Int,
-        Content: View
+        RowContent: View
 {
     // MARK: Properties
     private let model: VWheelPickerModel
@@ -53,11 +53,11 @@ public struct VWheelPicker<Data, Content>: View
     private let footer: String?
     
     private let data: Data
-    private let content: (Data.Element) -> Content
+    private let rowContent: (Data.Element) -> RowContent
     
     @State private var rowWidth: CGFloat = .zero
     
-    // MARK: Initializers
+    // MARK: Initializers: View Builder
     public init(
         model: VWheelPickerModel = .init(),
         selectedIndex: Binding<Int>,
@@ -65,7 +65,7 @@ public struct VWheelPicker<Data, Content>: View
         header: String? = nil,
         footer: String? = nil,
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     ) {
         self.model = model
         self._selectedIndex = selectedIndex
@@ -73,20 +73,21 @@ public struct VWheelPicker<Data, Content>: View
         self.header = header
         self.footer = footer
         self.data = data
-        self.content = content
+        self.rowContent = rowContent
     }
 
+    // MARK: Initializes: Row Titles
     public init(
         model: VWheelPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VWheelPickerState = .enabled,
         header: String? = nil,
         footer: String? = nil,
-        titles: [String]
+        rowTitles: [String]
     )
         where
             Data == Array<String>,
-            Content == VText
+            RowContent == VText
     {
         self.init(
             model: model,
@@ -94,8 +95,8 @@ public struct VWheelPicker<Data, Content>: View
             state: state,
             header: header,
             footer: footer,
-            data: titles,
-            content: { title in
+            data: rowTitles,
+            rowContent: { title in
                 VText(
                     type: .oneLine,
                     font: model.fonts.rows,
@@ -106,13 +107,14 @@ public struct VWheelPicker<Data, Content>: View
         )
     }
 
+    // MARK: Initialzers: Pickable Item
     public init<Item>(
         model: VWheelPickerModel = .init(),
         selection: Binding<Item>,
         state: VWheelPickerState = .enabled,
         header: String? = nil,
         footer: String? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder rowContent: @escaping (Item) -> RowContent
     )
         where
             Data == Array<Item>,
@@ -128,10 +130,11 @@ public struct VWheelPicker<Data, Content>: View
             header: header,
             footer: footer,
             data: .init(Item.allCases),
-            content: content
+            rowContent: rowContent
         )
     }
 
+    // MARK: Initialzers: Pickable Titled Item
     public init<Item>(
         model: VWheelPickerModel = .init(),
         selection: Binding<Item>,
@@ -141,7 +144,7 @@ public struct VWheelPicker<Data, Content>: View
     )
         where
             Data == Array<Item>,
-            Content == VText,
+            RowContent == VText,
             Item: VPickableTitledItem
     {
         self.init(
@@ -154,7 +157,7 @@ public struct VWheelPicker<Data, Content>: View
             header: header,
             footer: footer,
             data: .init(Item.allCases),
-            content: { item in
+            rowContent: { item in
                 VText(
                     type: .oneLine,
                     font: model.fonts.rows,
@@ -179,7 +182,7 @@ extension VWheelPicker {
     private var pickerView: some View {
         Picker(selection: $selectedIndex, label: EmptyView(), content: {
             ForEach(0..<data.count, content: { i in
-                content(data[i])
+                rowContent(data[i])
                     .tag(i)
             })
         })
@@ -223,7 +226,7 @@ extension VWheelPicker {
 struct VWheelPicker_Previews: PreviewProvider {
     @State private static var selectedIndex: Int = 7
     
-    private static let titles: [String] = [
+    private static let rowTitles: [String] = [
         "January", "February", "March",
         "April", "May", "June",
         "July", "August", "September",
@@ -235,7 +238,7 @@ struct VWheelPicker_Previews: PreviewProvider {
             selectedIndex: $selectedIndex,
             header: "Lorem ipsum dolor sit amet",
             footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            titles: titles
+            rowTitles: rowTitles
         )
             .padding(20)
     }

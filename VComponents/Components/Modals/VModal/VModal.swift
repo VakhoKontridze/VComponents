@@ -47,7 +47,7 @@ public struct VModal<Content, HeaderContent>
     public var appearAction: (() -> Void)?
     public var disappearAction: (() -> Void)?
     
-    // MARK: Initializers
+    // MARK: Initializers: Header
     public init(
         model: VModalModel = .init(),
         @ViewBuilder header headerContent: @escaping () -> HeaderContent,
@@ -62,6 +62,7 @@ public struct VModal<Content, HeaderContent>
         self.disappearAction = disappearAction
     }
     
+    // MARK: Initializers: _
     public init(
         model: VModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content,

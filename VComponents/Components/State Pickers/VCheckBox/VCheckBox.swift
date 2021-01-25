@@ -38,7 +38,7 @@ public struct VCheckBox<Content>: View where Content: View {
     
     private let content: (() -> Content)?
     
-    // MARK: Initializers
+    // MARK: Initializers: State
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>,
@@ -81,6 +81,7 @@ public struct VCheckBox<Content>: View where Content: View {
         self.content = nil
     }
     
+    // MARK: Initializers: Bool
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,

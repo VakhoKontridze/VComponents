@@ -66,13 +66,13 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
+public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: View
     where
         Section: VTableSection,
         Row == Section.VTableRow,
         HeaderContent: View,
         FooterContent: View,
-        Content: View
+        RowContent: View
 {
     // MARK: Properties
     private let model: VTableModel
@@ -84,31 +84,32 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
     private let headerContent: ((Section) -> HeaderContent)?
     private let footerContent: ((Section) -> FooterContent)?
     
-    private let content: (Row) -> Content
+    private let rowContent: (Row) -> RowContent
     
-    // MARK: Initializers
+    // MARK: Initializers: Header and Footer
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
         @ViewBuilder header headerContent: @escaping (Section) -> HeaderContent,
         @ViewBuilder footer footerContent: @escaping (Section) -> FooterContent,
-        @ViewBuilder content: @escaping (Row) -> Content
+        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
     ) {
         self.model = model
         self.layoutType = layoutType
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = footerContent
-        self.content = content
+        self.rowContent = rowContent
     }
 
+    // MARK: Initializers: Header
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
         @ViewBuilder header headerContent: @escaping (Section) -> HeaderContent,
-        @ViewBuilder content: @escaping (Row) -> Content
+        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
     )
         where FooterContent == Never
     {
@@ -117,15 +118,16 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
         self.sections = sections
         self.headerContent = headerContent
         self.footerContent = nil
-        self.content = content
+        self.rowContent = rowContent
     }
 
+    // MARK: Initializers: Footer
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
         @ViewBuilder footer footerContent: @escaping (Section) -> FooterContent,
-        @ViewBuilder content: @escaping (Row) -> Content
+        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
     )
         where HeaderContent == Never
     {
@@ -134,14 +136,15 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
         self.sections = sections
         self.headerContent = nil
         self.footerContent = footerContent
-        self.content = content
+        self.rowContent = rowContent
     }
 
+    // MARK: Initializers: _
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder content: @escaping (Row) -> Content
+        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
     )
         where
             HeaderContent == Never,
@@ -152,7 +155,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, Content>: View
         self.sections = sections
         self.headerContent = nil
         self.footerContent = nil
-        self.content = content
+        self.rowContent = rowContent
     }
 }
 
@@ -191,7 +194,7 @@ extension VTable {
             model: model.baseListSubModel,
             layout: .fixed,
             data: section.rows,
-            content: content
+            rowContent: rowContent
         )
     }
 
@@ -269,7 +272,7 @@ struct VTable_Previews: PreviewProvider {
                 footer: { section in
                     VTableDefaultHeaderFooter(title: "Footer \(section.title)")
                 },
-                content: { row in
+                row: { row in
                     VBaseList_Previews.rowContent(
                         title: row.title,
                         color: row.color

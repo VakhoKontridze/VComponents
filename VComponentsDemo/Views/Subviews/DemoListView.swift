@@ -42,7 +42,7 @@ extension DemoListView {
             
             switch demoType {
             case .accordion:
-                VLazyList(model: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
+                VLazyList(type: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
                     VAccordion(
                         state: $accordionStates[i],
                         header: { VModalDefaultHeader(title: section.title ?? "") },
@@ -53,7 +53,7 @@ extension DemoListView {
                     .padding(.vertical, 1)  // SwiftUI is bugged
                 
             case .section:
-                VLazyList(model: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
+                VLazyList(type: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
                     VSection(header: section.title, data: section.rows, rowContent: { row in
                         DemoListRowView(title: row.title, destination: row.body)
                     })

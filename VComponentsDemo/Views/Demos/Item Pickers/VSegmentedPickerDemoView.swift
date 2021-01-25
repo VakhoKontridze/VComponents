@@ -72,7 +72,7 @@ extension VSegmentedPickerDemoView {
                 header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footer: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 disabledItems: hasDisabledRow ? [.green] : [],
-                content: { $0.pickerSymbol }
+                rowContent: { $0.pickerSymbol }
             )
         }
     }

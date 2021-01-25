@@ -47,7 +47,7 @@ extension VSideBarDemoView {
     }
     
     private var sideBarContent: some View {
-        VLazyList(model: .vertical(), range: 1..<11, content: { num in
+        VLazyList(type: .vertical(), range: 1..<11, content: { num in
             VText(
                 type: .oneLine,
                 font: .body,

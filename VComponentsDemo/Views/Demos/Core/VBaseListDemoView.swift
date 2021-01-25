@@ -34,7 +34,7 @@ extension VBaseListDemoView {
         VBaseList(
             layout: layoutType.layoutType,
             data: VBaseListDemoViewDataSource.rows(count: rowCount),
-            content: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+            rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
         )
             .ifLet(layoutType.height, transform: { (view, height) in
                 Group(content: {

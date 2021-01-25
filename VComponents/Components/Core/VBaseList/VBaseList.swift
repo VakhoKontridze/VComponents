@@ -35,7 +35,7 @@ import SwiftUI
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VBaseList(data: data, content: { row in
+///         VBaseList(data: data, rowContent: { row in
 ///             Text(row.title)
 ///                 .frame(maxWidth: .infinity, alignment: .leading)
 ///         })
@@ -44,11 +44,11 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VBaseList<Data, ID, Content>: View
+public struct VBaseList<Data, ID, RowContent>: View
     where
         Data: RandomAccessCollection,
         ID: Hashable,
-        Content: View
+        RowContent: View
 {
     // MARK: Properties
     private let model: VBaseListModel
@@ -56,7 +56,7 @@ public struct VBaseList<Data, ID, Content>: View
     private let layoutType: VBaseListLayoutType
     
     private let data: [Element]
-    private let content: (Data.Element) -> Content
+    private let rowContent: (Data.Element) -> RowContent
     
     typealias Element = VBaseListElement<ID, Data.Element>
     
@@ -66,19 +66,19 @@ public struct VBaseList<Data, ID, Content>: View
         layout layoutType: VBaseListLayoutType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     ) {
         self.model = model
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: id], value: $0) }
-        self.content = content
+        self.rowContent = rowContent
     }
     
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .default,
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
         where
             Data.Element: Identifiable,
@@ -87,7 +87,7 @@ public struct VBaseList<Data, ID, Content>: View
         self.model = model
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: \Data.Element.id], value: $0) }
-        self.content = content
+        self.rowContent = rowContent
     }
 }
 
@@ -106,7 +106,7 @@ extension VBaseList {
             
         case .flexible:
             VLazyList(
-                model: .vertical(model.lazyListSubModel),
+                type: .vertical(model.lazyListSubModel),
                 data: data.enumeratedArray(),
                 id: \.element.id,
                 content: { contentView(i: $0, element: $1) }
@@ -116,7 +116,7 @@ extension VBaseList {
     
     private func contentView(i: Int, element: Element) -> some View {
         VStack(spacing: 0, content: {
-            content(element.value)
+            rowContent(element.value)
 
             if showDivider(for: i) {
                 Rectangle()
@@ -175,7 +175,7 @@ struct VBaseList_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VBaseList(data: rows, id: \.id, content: { row in
+        VBaseList(data: rows, id: \.id, rowContent: { row in
             rowContent(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)

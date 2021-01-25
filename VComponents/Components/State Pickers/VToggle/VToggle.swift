@@ -38,7 +38,7 @@ public struct VToggle<Content>: View where Content: View {
     
     private let content: (() -> Content)?
     
-    // MARK: Initializers
+    // MARK: Initializers: State
     public init(
         model: VToggleModel = .init(),
         state: Binding<VToggleState>,
@@ -81,6 +81,7 @@ public struct VToggle<Content>: View where Content: View {
         self.content = nil
     }
     
+    // MARK: Initializers: Bool
     public init(
         model: VToggleModel = .init(),
         isOn: Binding<Bool>,

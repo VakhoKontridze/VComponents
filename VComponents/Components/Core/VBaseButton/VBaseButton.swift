@@ -42,7 +42,7 @@ public struct VBaseButton<Content>: View where Content: View {
     
     private let content: () -> Content
     
-    // MARK: Initializers
+    // MARK: Initializers: State
     public init(
         state: VBaseButtonState,
         action: @escaping () -> Void,
@@ -55,6 +55,7 @@ public struct VBaseButton<Content>: View where Content: View {
         self.content = content
     }
     
+    // MARK: Initializers: Bool
     public init(
         isEnabled: Bool,
         action: @escaping () -> Void,

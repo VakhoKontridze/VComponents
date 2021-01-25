@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
 ///
-/// Component ca be initialized with data, VPickableItem, or VPickableTitledItem
+/// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
 ///
 /// Model, state, header, footer, and disabled indexes can be passed as parameters
 ///
@@ -40,11 +40,11 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VSegmentedPicker<Data, Content>: View
+public struct VSegmentedPicker<Data, RowContent>: View
     where
         Data: RandomAccessCollection,
         Data.Index == Int,
-        Content: View
+        RowContent: View
 {
     // MARK: Properties
     private let model: VSegmentedPickerModel
@@ -63,11 +63,11 @@ public struct VSegmentedPicker<Data, Content>: View
     private let disabledIndexes: Set<Int>
     
     private let data: Data
-    private let content: (Data.Element) -> Content
+    private let rowContent: (Data.Element) -> RowContent
     
     @State private var rowWidth: CGFloat = .zero
     
-    // MARK: Initializers
+    // MARK: Initializers: View Builder
     public init(
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
@@ -76,7 +76,7 @@ public struct VSegmentedPicker<Data, Content>: View
         footer: String? = nil,
         disabledIndexes: Set<Int> = .init(),
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     ) {
         self.model = model
         self._selectedIndex = selectedIndex
@@ -85,9 +85,10 @@ public struct VSegmentedPicker<Data, Content>: View
         self.footer = footer
         self.disabledIndexes = disabledIndexes
         self.data = data
-        self.content = content
+        self.rowContent = rowContent
     }
 
+    // MARK: Initializers: Row Titles
     public init(
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
@@ -95,11 +96,11 @@ public struct VSegmentedPicker<Data, Content>: View
         header: String? = nil,
         footer: String? = nil,
         disabledIndexes: Set<Int> = .init(),
-        titles: [String]
+        rowTitles: [String]
     )
         where
             Data == Array<String>,
-            Content == VText
+            RowContent == VText
     {
         self.init(
             model: model,
@@ -108,8 +109,8 @@ public struct VSegmentedPicker<Data, Content>: View
             header: header,
             footer: footer,
             disabledIndexes: disabledIndexes,
-            data: titles,
-            content: { title in
+            data: rowTitles,
+            rowContent: { title in
                 VText(
                     type: .oneLine,
                     font: model.fonts.rows,
@@ -120,6 +121,7 @@ public struct VSegmentedPicker<Data, Content>: View
         )
     }
 
+    // MARK: Initializers: Pickable Item
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Item>,
@@ -127,7 +129,7 @@ public struct VSegmentedPicker<Data, Content>: View
         header: String? = nil,
         footer: String? = nil,
         disabledItems: Set<Item> = .init(),
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder rowContent: @escaping (Item) -> RowContent
     )
         where
             Data == Array<Item>,
@@ -144,10 +146,11 @@ public struct VSegmentedPicker<Data, Content>: View
             footer: footer,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
-            content: content
+            rowContent: rowContent
         )
     }
 
+    // MARK: Initializers: Pickable Titled Item
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Item>,
@@ -158,7 +161,7 @@ public struct VSegmentedPicker<Data, Content>: View
     )
         where
             Data == Array<Item>,
-            Content == VText,
+            RowContent == VText,
             Item: VPickableTitledItem
     {
         self.init(
@@ -172,7 +175,7 @@ public struct VSegmentedPicker<Data, Content>: View
             footer: footer,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
-            content: { item in
+            rowContent: { item in
                 VText(
                     type: .oneLine,
                     font: model.fonts.rows,
@@ -259,7 +262,7 @@ extension VSegmentedPicker {
                     action: { selectedIndex = i },
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {
-                        content(data[i])
+                        rowContent(data[i])
                             .padding(model.layout.actualRowContentMargin)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
 

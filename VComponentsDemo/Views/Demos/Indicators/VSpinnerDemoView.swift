@@ -13,7 +13,7 @@ struct VSpinnerDemoView: View {
     // MARK: Properties
     static let navigationBarTitle: String = "Spinner"
     
-    @State private var spinnerModel: VSpinnerModelHelper = VSpinnerModel.default.helperModel
+    @State private var spinnerType: VSpinnerTypeHelper = VSpinnerType.default.helpeType
 }
 
 // MARK:- Body
@@ -25,19 +25,19 @@ extension VSpinnerDemoView {
     }
     
     @ViewBuilder private func component() -> some View {
-        switch spinnerModel {
-        case .continous: VSpinner(model: .continous())
-        case .dashed: VSpinner(model: .dashed())
+        switch spinnerType {
+        case .continous: VSpinner(type: .continous())
+        case .dashed: VSpinner(type: .dashed())
         }
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $spinnerModel, header: "Type")
+        VSegmentedPicker(selection: $spinnerType, header: "Type")
     }
 }
 
 // MARK:- Helpers
-private enum VSpinnerModelHelper: Int, VPickableTitledItem {
+private enum VSpinnerTypeHelper: Int, VPickableTitledItem {
     case continous
     case dashed
     
@@ -49,8 +49,8 @@ private enum VSpinnerModelHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VSpinnerModel {
-    var helperModel: VSpinnerModelHelper {
+private extension VSpinnerType {
+    var helpeType: VSpinnerTypeHelper {
         switch self {
         case .continous: return .continous
         case .dashed: return .dashed

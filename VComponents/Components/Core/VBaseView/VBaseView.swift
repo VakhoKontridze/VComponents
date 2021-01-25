@@ -56,7 +56,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
     
     private let content: () -> Content
     
-    // MARK: Initializers
+    // MARK: Initializers: Leading and Trailing
     public init(
         model: VBaseViewModel = .init(),
         title navigationBarTitle: String,
@@ -71,6 +71,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         self.content = content
     }
 
+    // MARK: Initializers: Leading
     public init(
         model: VBaseViewModel = .init(),
         title navigationBarTitle: String,
@@ -86,6 +87,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         self.content = content
     }
 
+    // MARK: Initializers: Trailing
     public init(
         model: VBaseViewModel = .init(),
         title navigationBarTitle: String,
@@ -101,6 +103,7 @@ public struct VBaseView<Content, NavigationBarLeadingItem, NavigationBarTrailing
         self.content = content
     }
 
+    // MARK: Initializers: _
     public init(
         model: VBaseViewModel = .init(),
         title navigationBarTitle: String,

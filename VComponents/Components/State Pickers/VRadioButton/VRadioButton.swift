@@ -10,7 +10,8 @@ import SwiftUI
 // MARK:- V Radio Button
 /// State picker component that toggles between off, on, or disabled states, and displays content
 ///
-/// Component can be initialized with content, title, or without body. Bool can also be passed as state. Component can aslo be placed inside a Radio Group, in which case component is initialized with VPickableItem or VPickableTitledItem.
+/// Component can be initialized with content, title, or without body. Bool can also be passed as state.
+/// Component can aslo be placed inside a Radio Group, in which case component is initialized with VPickableItem or VPickableTitledItem.
 ///
 /// Model can be passed as parameter
 ///
@@ -65,7 +66,7 @@ public struct VRadioButton<Content>: View where Content: View {
     
     private let content: (() -> Content)?
     
-    // MARK: Initializers
+    // MARK: Initializers: State
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>,
@@ -108,6 +109,7 @@ public struct VRadioButton<Content>: View where Content: View {
         self.content = nil
     }
 
+    // MARK: Initializers: Bool
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>,
@@ -152,6 +154,7 @@ public struct VRadioButton<Content>: View where Content: View {
         self.content = nil
     }
     
+    // MARK: Initializers: Pickable Item
     public init<Item>(
         model: VRadioButtonModel = .init(),
         selection: Binding<Item>,
@@ -170,6 +173,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
     
+    // MARK: Initializers: Pickable Titled Item
     public init<Item>(
         model: VRadioButtonModel = .init(),
         selection: Binding<Item>,

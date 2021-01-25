@@ -22,20 +22,20 @@ import SwiftUI
 ///
 public struct VSpinner: View {
     // MARK: Proeprties
-    private let model: VSpinnerModel
+    private let spinnerType: VSpinnerType
     
     // MARK: Initializers
     public init(
-        model: VSpinnerModel = .default
+        type spinnerType: VSpinnerType = .default
     ) {
-        self.model = model
+        self.spinnerType = spinnerType
     }
 }
 
 // MARK:- Body
 extension VSpinner {
     @ViewBuilder public var body: some View {
-        switch model {
+        switch spinnerType {
         case .continous(let model): VSpinnerContinous(model: model)
         case .dashed(let model): VSpinnerDashed(model: model)
         }

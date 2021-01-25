@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Section
 /// Container component that draws a background, and computes views on demad from an underlying collection of identified data
 ///
-/// Component ca be initialized with data or free content
+/// Component can be initialized with data or free content
 ///
 /// Model, layout, and header can be passed as parameters
 ///
@@ -50,12 +50,12 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VSection<Content, Data, ID, RowContent>: View
+public struct VSection<Data, ID, RowContent, Content>: View
     where
-        Content: View,
         Data: RandomAccessCollection,
         ID: Hashable,
-        RowContent: View
+        RowContent: View,
+        Content: View
     {
     // MARK: Properties
     private let model: VSectionModel
@@ -66,30 +66,11 @@ public struct VSection<Content, Data, ID, RowContent>: View
     
     private let contentType: ContentType
     private enum ContentType {
-        case freeForm(content: () -> Content)
         case list(data: Data, id: KeyPath<Data.Element, ID>, rowContent: (Data.Element) -> RowContent)
+        case freeForm(content: () -> Content)
     }
     
-    // MARK: Initializers
-    public init(
-        model: VSectionModel = .init(),
-        layout layoutType: VSectionLayoutType = .default,
-        header: String? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    )
-        where
-            Data == Array<Never>,
-            ID == Never,
-            RowContent == Never
-    {
-        self.model = model
-        self.layoutType = layoutType
-        self.header = header
-        self.contentType = .freeForm(
-            content: content
-        )
-    }
-    
+    // MARK: Initializers: View Builder
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .default,
@@ -131,6 +112,26 @@ public struct VSection<Content, Data, ID, RowContent>: View
             rowContent: rowContent
         )
     }
+    
+    // MARK: Initializers: Free Content
+    public init(
+        model: VSectionModel = .init(),
+        layout layoutType: VSectionLayoutType = .default,
+        header: String? = nil,
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where
+            Data == Array<Never>,
+            ID == Never,
+            RowContent == Never
+    {
+        self.model = model
+        self.layoutType = layoutType
+        self.header = header
+        self.contentType = .freeForm(
+            content: content
+        )
+    }
 }
 
 // MARK:- Body
@@ -157,20 +158,20 @@ extension VSection {
     
     @ViewBuilder private var contentView: some View {
         switch contentType {
-        case .freeForm(let content):
-            content()
-                .padding(model.layout.contentMargin)
-            
         case .list(let data, let id, let rowContent):
             VBaseList(
                 model: model.baseListSubModel,
                 layout: layoutType,
                 data: data,
                 id: id,
-                content: rowContent
+                rowContent: rowContent
             )
                 .padding([.leading, .top, .bottom], model.layout.contentMargin)
                 .frame(maxWidth: .infinity)
+        
+        case .freeForm(let content):
+            content()
+                .padding(model.layout.contentMargin)
         }
     }
 }

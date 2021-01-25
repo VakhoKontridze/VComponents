@@ -40,7 +40,7 @@ extension VTableDemoView {
                 VTable(
                     layout: layoutType.tablelayoutType,
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
-                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (false, true):
@@ -48,7 +48,7 @@ extension VTableDemoView {
                     layout: layoutType.tablelayoutType,
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
                     footer: { VTableDefaultHeaderFooter(title: "Footer \($0.title)") },
-                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (true, false):
@@ -56,7 +56,7 @@ extension VTableDemoView {
                     layout: layoutType.tablelayoutType,
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
                     header: { VTableDefaultHeaderFooter(title: "Header \($0.title)") },
-                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (true, true):
@@ -65,7 +65,7 @@ extension VTableDemoView {
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
                     header: { VTableDefaultHeaderFooter(title: "Header \($0.title)") },
                     footer: { VTableDefaultHeaderFooter(title: "Footer \($0.title)") },
-                    content: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
             }
         })

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Accordion
 /// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data
 ///
-/// Component ca be initialized with data or free content
+/// Component can be initialized with data or free content
 ///
 /// Model and layout can be passed as parameters
 ///
@@ -57,13 +57,13 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
+public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     where
         HeaderContent: View,
-        Content: View,
         Data: RandomAccessCollection,
         ID: Hashable,
-        RowContent: View
+        RowContent: View,
+        Content: View
 {
     // MARK: Properties
     private let model: VAccordionModel
@@ -75,32 +75,11 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
     
     private let contentType: ContentType
     private enum ContentType {
-        case freeForm(content: () -> Content)
         case list(data: Data, id: KeyPath<Data.Element, ID>, rowContent: (Data.Element) -> RowContent)
+        case freeForm(content: () -> Content)
     }
     
-    // MARK: Initializers
-    public init(
-        model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
-        state: Binding<VAccordionState>,
-        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
-        @ViewBuilder content: @escaping () -> Content
-    )
-        where
-            Data == Array<Never>,
-            ID == Never,
-            RowContent == Never
-    {
-        self.model = model
-        self.layoutType = layoutType
-        self._state = state
-        self.headerContent = headerContent
-        self.contentType = .freeForm(
-            content: content
-        )
-    }
-    
+    // MARK: Initializers: View Builder
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -144,6 +123,28 @@ public struct VAccordion<HeaderContent, Content, Data, ID, RowContent>: View
             data: data,
             id: \Data.Element.id,
             content: rowContent
+        )
+    }
+    
+    // MARK: Initializers: Free Content
+    public init(
+        model: VAccordionModel = .init(),
+        layout layoutType: VAccordionLayoutType = .fixed,
+        state: Binding<VAccordionState>,
+        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where
+            Data == Array<Never>,
+            ID == Never,
+            RowContent == Never
+    {
+        self.model = model
+        self.layoutType = layoutType
+        self._state = state
+        self.headerContent = headerContent
+        self.contentType = .freeForm(
+            content: content
         )
     }
 }
@@ -199,23 +200,23 @@ extension VAccordion {
         if state.isExpanded {
             Group(content: {
                 switch contentType {
-                case .freeForm(let content):
-                    content()
-                        .padding(.leading, model.layout.contentMargin.leading)
-                        .padding(.trailing, model.layout.contentMargin.trailing)
-                        .padding(.top, model.layout.contentMargin.top)
-                        .padding(.bottom, model.layout.contentMargin.bottom)
-                    
                 case .list(let data, let id, let rowContent):
                     VBaseList(
                         model: model.baseListSubModel,
                         layout: layoutType,
                         data: data,
                         id: id,
-                        content: rowContent
+                        rowContent: rowContent
                     )
                         .padding(.leading, model.layout.contentMargin.leading)
                         //.padding(.trailing, model.layout.contentMargin.trailing)
+                        .padding(.top, model.layout.contentMargin.top)
+                        .padding(.bottom, model.layout.contentMargin.bottom)
+                    
+                case .freeForm(let content):
+                    content()
+                        .padding(.leading, model.layout.contentMargin.leading)
+                        .padding(.trailing, model.layout.contentMargin.trailing)
                         .padding(.top, model.layout.contentMargin.top)
                         .padding(.bottom, model.layout.contentMargin.bottom)
                 }

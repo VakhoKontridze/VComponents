@@ -10,6 +10,8 @@ import SwiftUI
 // MARK:- V Lazy List
 /// Core component that is used throughout the framework as a lazy structure that either hosts content, or computes views on demad from an underlying collection of identified data
 ///
+/// Component can be initialized with data or free content
+///
 /// Model can be passed as parameter
 ///
 /// Component is a wrapped behind ScrollView and LazyVStack/LazyHStack, and supports lazy initialization
@@ -45,20 +47,12 @@ import SwiftUI
 ///
 public struct VLazyList<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VLazyListModel
+    private let listType: VLazyListType
     private let content: () -> Content
     
-    // MARK: Initializers
-    public init(
-        model: VLazyListModel = .default,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.model = model
-        self.content = content
-    }
-
+    // MARK: Initializers: View Builder
     public init<Data, ID, RowContent>(
-        model: VLazyListModel = .default,
+        type listType: VLazyListType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
@@ -70,7 +64,7 @@ public struct VLazyList<Content>: View where Content: View {
             RowContent: View
     {
         self.init(
-            model: model,
+            type: listType,
             content: {
                 ForEach(data, id: id, content: { element in
                     rowContent(element)
@@ -80,7 +74,7 @@ public struct VLazyList<Content>: View where Content: View {
     }
     
     public init<Data, ID, RowContent>(
-        model: VLazyListModel = .default,
+        type listType: VLazyListType = .default,
         data: Data,
         @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -92,33 +86,43 @@ public struct VLazyList<Content>: View where Content: View {
             RowContent: View
     {
         self.init(
-            model: model,
+            type: listType,
             data: data,
             id: \Data.Element.id,
             content: rowContent
         )
     }
 
+    // MARK: Initializers: Range
     public init <RowContent>(
-        model: VLazyListModel = .default,
+        type listType: VLazyListType = .default,
         range: Range<Int>,
         content rowContent: @escaping (Int) -> RowContent
     )
         where Content == ForEach<Range<Int>, Int, RowContent>
     {
         self.init(
-            model: model,
+            type: listType,
             content: {
                 ForEach(range, content: rowContent)
             }
         )
+    }
+    
+    // MARK: Initializers: Free Content
+    public init(
+        type listType: VLazyListType = .default,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.listType = listType
+        self.content = content
     }
 }
 
 // MARK:- Body
 extension VLazyList {
     @ViewBuilder public var body: some View {
-        switch model {
+        switch listType {
         case .vertical(let model): VLazyListVertical(model: model, content: content)
         case .horizontal(let model): VLazyListHorizontal(model: model, content: content)
         }
@@ -131,11 +135,11 @@ struct VLazyListView_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(content: {
-            VLazyList(model: .vertical(), range: range, content: { number in
+            VLazyList(type: .vertical(), range: range, content: { number in
                 Text(String(number)).padding(5)
             })
 
-            VLazyList(model: .horizontal(), range: range, content: { number in
+            VLazyList(type: .horizontal(), range: range, content: { number in
                 Text(String(number)).padding(5)
             })
         })

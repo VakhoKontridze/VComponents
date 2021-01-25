@@ -31,7 +31,7 @@ extension VLazyListDemoView {
 private struct VLazyListDemoDetailView: View {
     static let navigationBarTitle: String = "Lazy List"
 
-    private let lazyListType: VLazyListModel
+    private let lazyListType: VLazyListType
     
     @State private var initializedRows: Set<Int> = []
     private var initializedRowsDescription: String {
@@ -42,7 +42,7 @@ private struct VLazyListDemoDetailView: View {
     }
     
     init(
-        _ lazyListType: VLazyListModel
+        _ lazyListType: VLazyListType
     ) {
         self.lazyListType = lazyListType
     }
@@ -90,7 +90,7 @@ private extension VLazyListDemoDetailView {
     }
     
     private var vertical: some View {
-        VLazyList(model: .vertical(), range: 1..<101, content: { num in
+        VLazyList(type: .vertical(), range: 1..<101, content: { num in
             VText(
                 type: .oneLine,
                 font: .body,
@@ -107,7 +107,7 @@ private extension VLazyListDemoDetailView {
     }
     
     private var horizontal: some View {
-        VLazyList(model: .horizontal(), range: 1..<101, content: { num in
+        VLazyList(type: .horizontal(), range: 1..<101, content: { num in
             VText(
                 type: .oneLine,
                 font: .body,
