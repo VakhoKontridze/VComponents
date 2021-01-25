@@ -57,7 +57,7 @@ struct _VHalfModal<Content, HeaderContent>: View
 // MARK:- Body
 extension _VHalfModal {
     var body: some View {
-        performStateResets()
+        performStateSets()
         
         return ZStack(alignment: .bottom, content: {
             blinding
@@ -74,31 +74,6 @@ extension _VHalfModal {
     }
     
     @ViewBuilder private var modalView: some View {
-//        if validLayout {
-//            ZStack(alignment: .top, content: {
-//                VSheet(model: model.sheetModel)
-//                    .edgesIgnoringSafeArea(.all)
-//
-//                VStack(spacing: 0, content: {
-//                    headerView
-//                    dividerView
-//                    contentView
-//                })
-//                    .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
-//
-//                navigationBarCloseButton
-//                    .edgesIgnoringSafeArea(.all)
-//            })
-//                .frame(height: model.layout.height.max)
-//                .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max)
-//                .onAppear(perform: appearAction)
-//                .onDisappear(perform: disappearAction)
-//                .gesture(
-//                    DragGesture(minimumDistance: VHalfModalModel.Layout.minimumTranslationDistance)
-//                        .onChanged(dragChanged)
-//                        .onEnded(dragEnded)
-//                )
-//        }
         if validLayout {
             ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
@@ -190,6 +165,19 @@ extension _VHalfModal {
     }
 }
 
+// MARK:- State Sets
+private extension _VHalfModal {
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            resetOffsetIsNil()
+        })
+    }
+    
+    func resetOffsetIsNil() {
+        if offset == nil { offset = model.layout.height.max - model.layout.height.ideal }
+    }
+}
+
 // MARK:- Animation
 private extension _VHalfModal {
     func animateIn() {
@@ -205,19 +193,6 @@ private extension _VHalfModal {
     func animateOutFromDrag() {
         withAnimation(VHalfModalModel.Animations.dragDisappear.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + VHalfModalModel.Animations.dragDisappear.duration, execute: { isHCPresented = false })
-    }
-}
-
-// MARK:- State Resets
-private extension _VHalfModal {
-    func performStateResets() {
-        DispatchQueue.main.async(execute: {
-            resetOffsetIsNil()
-        })
-    }
-    
-    func resetOffsetIsNil() {
-        if offset == nil { offset = model.layout.height.max - model.layout.height.ideal }
     }
 }
 

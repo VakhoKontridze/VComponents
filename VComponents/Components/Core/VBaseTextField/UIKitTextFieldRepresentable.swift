@@ -131,7 +131,7 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
 // MARK:- Focus and Commit
 extension UIKitTextFieldRepresentable {
     func textFieldReturned(_ textField: UITextField) {
-        DispatchQueue.main.async(execute: { self.state.setFocus(from: false) }) // Animation here is glitchy
+        setBindedFocus(to: false)
     }
     
     func commitText(_ text: String?) {
@@ -139,7 +139,7 @@ extension UIKitTextFieldRepresentable {
     }
     
     func setBindedFocus(to state: Bool) {
-        DispatchQueue.main.async(execute: { withAnimation { self.state.setFocus(from: state) } })
+        DispatchQueue.main.async(execute: { self.state.setFocus(from: state) })
     }
 }
 

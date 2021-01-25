@@ -80,7 +80,7 @@ import SwiftUI
 ///                 .padding(.bottom, 200)
 ///         })
 ///             .animation(nil) // Disables root animation
-/// })
+///     })
 /// }
 ///
 /// var destination: some View {

@@ -32,8 +32,9 @@ public struct VCheckBox<Content>: View where Content: View {
     private let model: VCheckBoxModel
     
     @Binding private var state: VCheckBoxState
+    @State private var animatableState: VCheckBoxState?
     @State private var isPressed: Bool = false
-    private var internalState: VCheckBoxInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VCheckBoxInternalState { .init(state: animatableState ?? state, isPressed: isPressed) }
     private var contentIsEnabled: Bool { state.isEnabled && model.misc.contentIsClickable }
     
     private let content: (() -> Content)?
@@ -129,22 +130,26 @@ public struct VCheckBox<Content>: View where Content: View {
 
 // MARK:- Body
 extension VCheckBox {
-    @ViewBuilder public var body: some View {
-        switch content {
-        case nil:
-            checkBox
-            
-        case let content?:
-            HStack(spacing: 0, content: {
+    public var body: some View {
+        performStateSets()
+        
+        return Group(content: {
+            switch content {
+            case nil:
                 checkBox
-                spacerView
-                contentView(content: content)
-            })
-        }
+                
+            case let content?:
+                HStack(spacing: 0, content: {
+                    checkBox
+                    spacerView
+                    contentView(content: content)
+                })
+            }
+        })
     }
     
     private var checkBox: some View {
-        VBaseButton(isEnabled: state.isEnabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: state.isEnabled, action: nextState, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                     .foregroundColor(model.colors.fill.for(internalState))
@@ -165,7 +170,7 @@ extension VCheckBox {
     }
     
     private var spacerView: some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: nextState, onPress: { _ in }, content: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: model.layout.contentMarginLeading)
@@ -176,10 +181,33 @@ extension VCheckBox {
     private func contentView(
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { isPressed = $0 }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: nextState, onPress: { isPressed = $0 }, content: {
             content()
                 .opacity(model.colors.content.for(internalState))
         })
+    }
+}
+
+// MARK:- State Sets
+private extension VCheckBox {
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            setAnimatableState()
+        })
+    }
+}
+
+// MARK:- Actions
+private extension VCheckBox {
+    func nextState() {
+        withAnimation(model.animations.stateChange, { animatableState?.nextState() })
+        state.nextState()
+    }
+    
+    func setAnimatableState() {
+        if animatableState == nil || animatableState != state {
+            withAnimation(model.animations.stateChange, { animatableState = state })
+        }
     }
 }
 
@@ -192,13 +220,6 @@ private extension VCheckBox {
         case .intermediate: return ImageBook.checkBoxInterm
         case .disabled: return nil
         }
-    }
-}
-
-// MARK:- Action
-private extension VCheckBox {
-    func action() {
-        withAnimation(model.animations.stateChange, { state.nextState() })
     }
 }
 

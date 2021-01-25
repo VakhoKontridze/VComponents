@@ -40,6 +40,9 @@ public struct VRangeSlider: View {
 
     @Binding private var valueLow: Double
     @Binding private var valueHigh: Double
+    @State private var animatableValueLow: Double?
+    @State private var animatableValueHigh: Double?
+    
     private let state: VRangeSliderState
     
     private let actionLow: ((Bool) -> Void)?
@@ -88,7 +91,9 @@ public struct VRangeSlider: View {
 // MARK:- Body
 extension VRangeSlider {
     public var body: some View {
-        Group(content: {
+        performStateSets()
+        
+        return Group(content: {
             switch validLayout {
             case false: invalidBody
             case true: validBody
@@ -155,6 +160,15 @@ extension VRangeSlider {
     }
 }
 
+// MARK:- State Sets
+private extension VRangeSlider {
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            setAnimatableValues()
+        })
+    }
+}
+
 // MARK:- Drag
 private extension VRangeSlider {
     func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
@@ -184,12 +198,10 @@ private extension VRangeSlider {
             }
         }()
 
-        withAnimation(model.animations.progress, {
-            switch thumb {
-            case .low: valueLow = valueFixed
-            case .high: valueHigh = valueFixed
-            }
-        })
+        switch thumb {
+        case .low: setValueLow(to: valueFixed)
+        case .high: setValueHigh(to: valueFixed)
+        }
 
         switch thumb {
         case .low: actionLow?(true)
@@ -205,13 +217,36 @@ private extension VRangeSlider {
     }
 }
 
+// MARK:- Actions
+private extension VRangeSlider {
+    func setValueLow(to value: Double) {
+        withAnimation(model.animations.progress, { animatableValueLow = value })
+        self.valueLow = value
+    }
+    
+    func setValueHigh(to value: Double) {
+        withAnimation(model.animations.progress, { animatableValueHigh = value })
+        self.valueHigh = value
+    }
+    
+    func setAnimatableValues() {
+        if animatableValueLow == nil || animatableValueLow != valueLow {
+            withAnimation(model.animations.progress, { animatableValueLow = valueLow })
+        }
+        
+        if animatableValueHigh == nil || animatableValueHigh != valueHigh {
+            withAnimation(model.animations.progress, { animatableValueHigh = valueHigh })
+        }
+    }
+}
+
 // MARK:- Progress
 private extension VRangeSlider {
     func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
-            case .low: return .init(valueLow - min)
-            case .high: return .init(valueHigh - min)
+            case .low: return .init((animatableValueLow ?? valueLow) - min)
+            case .high: return .init((animatableValueHigh ?? valueHigh) - min)
             }
         }()
         let range: CGFloat = .init(max - min)

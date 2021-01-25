@@ -68,6 +68,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     private let layoutType: VAccordionLayoutType
     
     @Binding private var state: VAccordionState
+    @State private var animatableState: VAccordionState?
     
     private let headerContent: () -> HeaderContent
     
@@ -242,7 +243,9 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
 // MARK:- Body
 extension VAccordion {
     public var body: some View {
-        VSheet(model: model.sheetSubModel, content: {
+        performStateSets()
+        
+        return VSheet(model: model.sheetSubModel, content: {
             VStack(spacing: 0, content: {
                 headerView
                 divider
@@ -269,13 +272,13 @@ extension VAccordion {
             .padding(.leading, model.layout.headerMargin.leading)
             .padding(.trailing, model.layout.headerMargin.trailing)
             .padding(.top, model.layout.headerMargin.top)
-            .padding(.bottom, state.isExpanded ? model.layout.headerMargin.bottomExpanded : model.layout.headerMargin.bottomCollapsed)
+            .padding(.bottom, (animatableState ?? state).isExpanded ? model.layout.headerMargin.bottomExpanded : model.layout.headerMargin.bottomCollapsed)
             .contentShape(Rectangle())
             .onTapGesture(perform: expandCollapseFromHeaderTap)
     }
     
     @ViewBuilder private var divider: some View {
-        if state.isExpanded, model.layout.hasDivider {
+        if (animatableState ?? state).isExpanded, model.layout.hasDivider {
             Rectangle()
                 .frame(height: model.layout.dividerHeight)
                 .padding(.leading, model.layout.dividerMargin.leading)
@@ -287,7 +290,7 @@ extension VAccordion {
     }
     
     @ViewBuilder private var contentView: some View {
-        if state.isExpanded {
+        if (animatableState ?? state).isExpanded {
             Group(content: {
                 switch contentType {
                 case .list(let data, let id, let rowContent):
@@ -316,14 +319,31 @@ extension VAccordion {
     }
 }
 
-// MARK:- Expand & Collapse
+// MARK:- State Sets
+private extension VAccordion {
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            setAnimatableState()
+        })
+    }
+}
+
+// MARK:- Actions
 private extension VAccordion {
     func expandCollapse() {
-        withAnimation { state.nextState() }
+        withAnimation(model.animations.expandCollapse, { animatableState?.nextState() })
+        state.nextState()
     }
     
     func expandCollapseFromHeaderTap() {
-        if model.misc.expandCollapseOnHeaderTap { expandCollapse() }
+        guard model.misc.expandCollapseOnHeaderTap else { return }
+        expandCollapse()
+    }
+    
+    func setAnimatableState() {
+        if animatableState == nil || animatableState != state {
+            withAnimation(model.animations.expandCollapse, { animatableState = state })
+        }
     }
 }
 

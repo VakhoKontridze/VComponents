@@ -60,8 +60,9 @@ public struct VRadioButton<Content>: View where Content: View {
     private let model: VRadioButtonModel
     
     @Binding private var state: VRadioButtonState
+    @State private var animatableState: VRadioButtonState?
     @State private var isPressed: Bool = false
-    private var internalState: VRadioButtonInternalState { .init(state: state, isPressed: isPressed) }
+    private var internalState: VRadioButtonInternalState { .init(state: animatableState ?? state, isPressed: isPressed) }
     private var contentIsEnabled: Bool { state.isEnabled && model.misc.contentIsClickable }
     
     private let content: (() -> Content)?
@@ -203,22 +204,26 @@ public struct VRadioButton<Content>: View where Content: View {
 
 // MARK:- Body
 extension VRadioButton {
-    @ViewBuilder public var body: some View {
-        switch content {
-        case nil:
-            RadioButton
-            
-        case let content?:
-            HStack(spacing: 0, content: {
+    public var body: some View {
+        performStateSets()
+        
+        return Group(content: {
+            switch content {
+            case nil:
                 RadioButton
-                spacerView
-                contentView(content: content)
-            })
-        }
+                
+            case let content?:
+                HStack(spacing: 0, content: {
+                    RadioButton
+                    spacerView
+                    contentView(content: content)
+                })
+            }
+        })
     }
     
     private var RadioButton: some View {
-        VBaseButton(isEnabled: state.isEnabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: state.isEnabled, action: nextState, onPress: { _ in }, content: {
             ZStack(content: {
                 Circle()
                     .frame(dimension: model.layout.dimension)
@@ -238,7 +243,7 @@ extension VRadioButton {
     }
     
     private var spacerView: some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: nextState, onPress: { _ in }, content: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: model.layout.contentMarginLeading)
@@ -249,17 +254,33 @@ extension VRadioButton {
     private func contentView(
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: action, onPress: { isPressed = $0 }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: nextState, onPress: { isPressed = $0 }, content: {
             content()
                 .opacity(model.colors.content.for(internalState))
         })
     }
 }
 
-// MARK:- Action
+// MARK:- State Sets
 private extension VRadioButton {
-    func action() {
-        withAnimation(model.animations.stateChange, { state.nextState() })
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            setAnimatableState()
+        })
+    }
+}
+
+// MARK:- Actions
+private extension VRadioButton {
+    func nextState() {
+        withAnimation(model.animations.stateChange, { animatableState?.nextState() })
+        state.nextState()
+    }
+    
+    func setAnimatableState() {
+        if animatableState == nil || animatableState != state {
+            withAnimation(model.animations.stateChange, { animatableState = state })
+        }
     }
 }
 

@@ -259,7 +259,7 @@ extension VBaseView {
 // MARK:- Back
 private extension VBaseView {
     func back() {
-        withAnimation { presentationMode.wrappedValue.dismiss() }
+        presentationMode.wrappedValue.dismiss()
     }
 }
 

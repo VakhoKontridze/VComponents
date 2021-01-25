@@ -166,7 +166,7 @@ public struct VTextField: View {
 // MARK:- Body
 extension VTextField {
     public var body: some View {
-        performStateResets()
+        performStateSets()
         
         return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
             headerView
@@ -290,6 +290,17 @@ extension VTextField {
     }
 }
 
+// MARK:- State Sets
+private extension VTextField {
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            self.nonEmptyText = !text.isEmpty
+            
+            if self.secureFieldIsVisible && !textFieldType.isSecure { self.secureFieldIsVisible = false }
+        })
+    }
+}
+
 // MARK:- Visiblity Icon
 private extension VTextField {
     var visiblityIcon: Image {
@@ -304,15 +315,7 @@ private extension VTextField {
 private extension VTextField {
     func textChanged(_ text: String) {
         let shouldShow: Bool = !text.isEmpty
-
-        let animation: Animation? = {
-            switch shouldShow {
-            case false: return nil
-            case true: return model.animations.buttonsAppearDisAppear
-            }
-        }()
-
-        withAnimation(animation, { nonEmptyText = shouldShow })
+        withAnimation(shouldShow ? model.animations.buttonsAppearDisAppear : nil, { nonEmptyText = shouldShow })
     }
     
     func runClearAction() {
@@ -334,17 +337,6 @@ private extension VTextField {
     func zeroText() {
         text = ""
         withAnimation(model.animations.buttonsAppearDisAppear, { nonEmptyText = false })
-    }
-}
-
-// MARK:- State Resets
-private extension VTextField {
-    func performStateResets() {
-        DispatchQueue.main.async(execute: {
-            self.nonEmptyText = !text.isEmpty
-            
-            if self.secureFieldIsVisible && !textFieldType.isSecure { self.secureFieldIsVisible = false }
-        })
     }
 }
 

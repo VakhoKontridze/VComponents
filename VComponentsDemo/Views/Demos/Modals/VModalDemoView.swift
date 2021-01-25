@@ -19,15 +19,7 @@ struct VModalDemoView: View {
     
     private var model: VModalModel {
         var model: VModalModel = .init()
-        
         model.misc.dismissType = dismissType
-        
-        return model
-    }
-    
-    private var pickerModel: VSegmentedPickerModel {
-        var model: VSegmentedPickerModel = .init()
-        model.animations.selection = nil
         return model
     }
 }

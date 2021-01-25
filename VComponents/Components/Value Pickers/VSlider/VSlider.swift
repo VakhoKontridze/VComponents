@@ -32,6 +32,8 @@ public struct VSlider: View {
     private let step: Double?
     
     @Binding private var value: Double
+    @State private var animatableValue: Double?
+    
     private let state: VSliderState
     
     private let action: ((Bool) -> Void)?
@@ -67,7 +69,9 @@ public struct VSlider: View {
 // MARK:- Body
 extension VSlider {
     public var body: some View {
-        GeometryReader(content: { proxy in
+        performStateSets()
+        
+        return GeometryReader(content: { proxy in
             ZStack(alignment: .leading, content: {
                 track
                 progress(in: proxy)
@@ -119,6 +123,15 @@ extension VSlider {
     }
 }
 
+// MARK:- State Sets
+private extension VSlider {
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            setAnimatableValue()
+        })
+    }
+}
+
 // MARK:- Drag
 private extension VSlider {
     func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
@@ -132,7 +145,7 @@ private extension VSlider {
         
         let valueFixed: Double = rawValue.fixedInRange(min: min, max: max, step: step)
         
-        withAnimation(model.animations.progress, { self.value = valueFixed })
+        setValue(to: valueFixed)
         
         action?(true)
     }
@@ -142,10 +155,24 @@ private extension VSlider {
     }
 }
 
+// MARK:- Actions
+private extension VSlider {
+    func setValue(to value: Double) {
+        withAnimation(model.animations.progress, { animatableValue = value })
+        self.value = value
+    }
+    
+    func setAnimatableValue() {
+        if animatableValue == nil || animatableValue != value {
+            withAnimation(model.animations.progress, { animatableValue = value })
+        }
+    }
+}
+
 // MARK:- Progress
 private extension VSlider {
     func progressWidth(in proxy: GeometryProxy) -> CGFloat {
-        let value: CGFloat = .init(self.value - min)
+        let value: CGFloat = .init((animatableValue ?? self.value) - min)
         let range: CGFloat = .init(max - min)
         let width: CGFloat = proxy.size.width
 

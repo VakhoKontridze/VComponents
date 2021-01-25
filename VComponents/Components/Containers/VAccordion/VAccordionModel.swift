@@ -13,6 +13,7 @@ public struct VAccordionModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
+    public var animations: Animations = .init()
     public var misc: Misc = .init()
     
     public init() {}
@@ -128,6 +129,15 @@ extension VAccordionModel.Colors {
 extension VAccordionModel {
     public struct Fonts {
         public var header: Font = .system(size: 17, weight: .bold, design: .default)    // Only applicable during init with title
+        
+        public init() {}
+    }
+}
+
+// MARK:- Animations
+extension VAccordionModel {
+    public struct Animations {
+        public var expandCollapse: Animation? = .default
         
         public init() {}
     }

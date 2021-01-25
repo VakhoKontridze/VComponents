@@ -50,6 +50,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     private let model: VSegmentedPickerModel
     
     @Binding private var selectedIndex: Int
+    @State private var animatableSelectedIndex: Int?
     
     private let state: VSegmentedPickerState
     @State private var pressedIndex: Int? = nil
@@ -190,7 +191,9 @@ public struct VSegmentedPicker<Data, RowContent>: View
 // MARK:- Body
 extension VSegmentedPicker {
     public var body: some View {
-        VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
+        performStateSets()
+        
+        return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
             headerView
             pickerView
             footerView
@@ -243,9 +246,7 @@ extension VSegmentedPicker {
             .padding(model.layout.indicatorMargin)
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale)
-            .offset(x: rowWidth * .init(selectedIndex))
-            .animation(model.animations.selection)
-            
+            .offset(x: rowWidth * .init(animatableSelectedIndex ?? selectedIndex))
             .foregroundColor(model.colors.indicator.for(state))
             .shadow(
                 color: model.colors.indicatorShadow.for(state),
@@ -259,7 +260,7 @@ extension VSegmentedPicker {
             ForEach(0..<data.count, content: { i in
                 VBaseButton(
                     isEnabled: state.isEnabled && !disabledIndexes.contains(i),
-                    action: { selectedIndex = i },
+                    action: { setSelectedIndex(to: i) },
                     onPress: { pressedIndex = $0 ? i : nil },
                     content: {
                         rowContent(data[i])
@@ -287,6 +288,29 @@ extension VSegmentedPicker {
                 }
             })
         })
+    }
+}
+
+// MARK:- State Sets
+private extension VSegmentedPicker {
+    func performStateSets() {
+        DispatchQueue.main.async(execute: {
+            setAnimatableSelectedIndex()
+        })
+    }
+}
+
+// MARK:- Actions
+private extension VSegmentedPicker {
+    func setSelectedIndex(to index: Int) {
+        withAnimation(model.animations.selection, { animatableSelectedIndex = index })
+        selectedIndex = index
+    }
+    
+    func setAnimatableSelectedIndex() {
+        if animatableSelectedIndex == nil || animatableSelectedIndex != selectedIndex {
+            withAnimation(model.animations.selection, { animatableSelectedIndex = selectedIndex })
+        }
     }
 }
 
