@@ -12,6 +12,7 @@ import SwiftUI
 public struct VHalfModalModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var fonts: Fonts = .init()
     public var animations: Animations = .init()
     public var misc: Misc = .init()
     
@@ -97,9 +98,9 @@ extension VHalfModalModel.Layout {
 // MARK:- Colors
 extension VHalfModalModel {
     public struct Colors {
-        static let defaultHeader: Color = VModalModel.Colors.defaultHeader
-        
         public var background: Color = modalReference.colors.background
+        
+        public var headerText: Color = modalReference.colors.headerText
         
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
         public var closeButtonIcon: StateColorsAndOpacity = modalReference.colors.closeButtonIcon
@@ -116,6 +117,15 @@ extension VHalfModalModel.Colors {
     public typealias StateColors = VCloseButtonModel.Colors.StateColors
     
     public typealias StateColorsAndOpacity = VCloseButtonModel.Colors.StateColorsAndOpacity
+}
+
+// MARK:- Fonts
+extension VHalfModalModel {
+    public struct Fonts {
+        public var header: Font = modalReference.fonts.header    // Only applicable during init with title
+        
+        public init() {}
+    }
 }
 
 // MARK:- Animations

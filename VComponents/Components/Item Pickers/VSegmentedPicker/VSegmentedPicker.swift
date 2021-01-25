@@ -34,8 +34,8 @@ import SwiftUI
 /// var body: some View {
 ///     VSegmentedPicker(
 ///         selection: $selection,
-///         header: "Lorem ipsum dolor sit amet",
-///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///         headerTitle: "Lorem ipsum dolor sit amet",
+///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 ///     )
 /// }
 /// ```
@@ -58,8 +58,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
         isPressed: pressedIndex == index
     ) }
     
-    private let header: String?
-    private let footer: String?
+    private let headerTitle: String?
+    private let footerTitle: String?
     private let disabledIndexes: Set<Int>
     
     private let data: Data
@@ -72,8 +72,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         disabledIndexes: Set<Int> = .init(),
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -81,8 +81,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.model = model
         self._selectedIndex = selectedIndex
         self.state = state
-        self.header = header
-        self.footer = footer
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
         self.data = data
         self.rowContent = rowContent
@@ -93,8 +93,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
         model: VSegmentedPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         disabledIndexes: Set<Int> = .init(),
         rowTitles: [String]
     )
@@ -106,8 +106,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
             model: model,
             selectedIndex: selectedIndex,
             state: state,
-            header: header,
-            footer: footer,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
             disabledIndexes: disabledIndexes,
             data: rowTitles,
             rowContent: { title in
@@ -126,8 +126,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         disabledItems: Set<Item> = .init(),
         @ViewBuilder rowContent: @escaping (Item) -> RowContent
     )
@@ -142,8 +142,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
-            header: header,
-            footer: footer,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
             rowContent: rowContent
@@ -155,8 +155,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
         model: VSegmentedPickerModel = .init(),
         selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         disabledItems: Set<Item> = .init()
     )
         where
@@ -171,8 +171,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
-            header: header,
-            footer: footer,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
             data: .init(Item.allCases),
             rowContent: { item in
@@ -209,12 +209,12 @@ extension VSegmentedPicker {
     }
     
     @ViewBuilder private var headerView: some View {
-        if let header = header, !header.isEmpty {
+        if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
                 type: .oneLine,
                 font: model.fonts.header,
                 color: model.colors.header.for(state),
-                title: header
+                title: headerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHor)
                 .opacity(model.colors.content.for(state))
@@ -222,12 +222,12 @@ extension VSegmentedPicker {
     }
     
     @ViewBuilder private var footerView: some View {
-        if let footer = footer, !footer.isEmpty {
+        if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
                 type: .multiLine(limit: nil, alignment: .leading),
                 font: model.fonts.footer,
                 color: model.colors.footer.for(state),
-                title: footer
+                title: footerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHor)
                 .opacity(model.colors.content.for(state))
@@ -332,8 +332,8 @@ struct VSegmentedPicker_Previews: PreviewProvider {
     static var previews: some View {
         VSegmentedPicker(
             selection: $selection,
-            header: "Lorem ipsum dolor sit amet",
-            footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            headerTitle: "Lorem ipsum dolor sit amet",
+            footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         )
             .padding(20)
     }

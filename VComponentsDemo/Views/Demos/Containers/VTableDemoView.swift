@@ -40,32 +40,32 @@ extension VTableDemoView {
                 VTable(
                     layout: layoutType.tablelayoutType,
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
-                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (false, true):
                 VTable(
                     layout: layoutType.tablelayoutType,
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
-                    footer: { VTableDefaultHeaderFooter(title: "Footer \($0.title)") },
-                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    footerTitle: { "Footer \($0.title)" },
+                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (true, false):
                 VTable(
                     layout: layoutType.tablelayoutType,
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
-                    header: { VTableDefaultHeaderFooter(title: "Header \($0.title)") },
-                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    headerTitle: { "Header \($0.title)" },
+                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (true, true):
                 VTable(
                     layout: layoutType.tablelayoutType,
                     sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
-                    header: { VTableDefaultHeaderFooter(title: "Header \($0.title)") },
-                    footer: { VTableDefaultHeaderFooter(title: "Footer \($0.title)") },
-                    row: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    headerTitle: { "Header \($0.title)" },
+                    footerTitle: { "Footer \($0.title)" },
+                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
             }
         })
@@ -80,7 +80,7 @@ extension VTableDemoView {
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $layoutType, header: "Frame", footer: layoutType.description)
+            VSegmentedPicker(selection: $layoutType, headerTitle: "Frame", footerTitle: layoutType.description)
                 .frame(height: 110, alignment: .top)
         })
         

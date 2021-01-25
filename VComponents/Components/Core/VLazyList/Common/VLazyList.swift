@@ -73,6 +73,7 @@ public struct VLazyList<Content>: View where Content: View {
         )
     }
     
+    // MARK: Initializers: Identified View Builder
     public init<Data, ID, RowContent>(
         type listType: VLazyListType = .default,
         data: Data,

@@ -52,11 +52,11 @@ extension VPlainButtonDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, header: "State")
+        VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VSegmentedPicker(selection: $contentType, header: "Content")
+        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         
-        VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+        VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
     }
     
     private var buttonTitle: String { "Lorem ipsum" }

@@ -59,21 +59,21 @@ extension VTextFieldDemoView {
             state: $state,
             highlight: textFieldHighlight,
             placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
-            header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
-            footer: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+            headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+            footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
             text: $text
         )
     }
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, header: "State")
+            VSegmentedPicker(selection: $state, headerTitle: "State")
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $textFieldType, header: "Type")
+            VSegmentedPicker(selection: $textFieldType, headerTitle: "Type")
             
-            VSegmentedPicker(selection: $textFieldHighlight, header: "Highlight")
+            VSegmentedPicker(selection: $textFieldHighlight, headerTitle: "Highlight")
         })
         
         DemoViewSettingsSection(content: {
@@ -118,11 +118,11 @@ extension VTextFieldDemoView {
                     description: "Default set to \"nil\". Other types are not shown in the demo, as there are many."
                 )
                 
-                VSegmentedPicker(selection: $spellCheck, header: "Spell Check")
+                VSegmentedPicker(selection: $spellCheck, headerTitle: "Spell Check")
 
-                VSegmentedPicker(selection: $autoCorrect, header: "Autocorrect")
+                VSegmentedPicker(selection: $autoCorrect, headerTitle: "Autocorrect")
 
-                VSegmentedPicker(selection: $textAlignment, header: "Alignment")
+                VSegmentedPicker(selection: $textAlignment, headerTitle: "Alignment")
             })
         })
     }

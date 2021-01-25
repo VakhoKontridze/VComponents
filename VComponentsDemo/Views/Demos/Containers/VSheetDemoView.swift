@@ -44,7 +44,7 @@ extension VSheetDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VWheelPicker(selection: $roundedCorners, header: "Rounded Corners")
+        VWheelPicker(selection: $roundedCorners, headerTitle: "Rounded Corners")
     }
 }
 

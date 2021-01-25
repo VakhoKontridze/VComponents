@@ -49,7 +49,7 @@ extension VBaseViewDemoView {
     
     private func settings() -> some View {
         VStack(spacing: 15, content: {
-            VSegmentedPicker(selection: $titlePosition, header: "Title Position")
+            VSegmentedPicker(selection: $titlePosition, headerTitle: "Title Position")
             
             ToggleSettingView(isOn: $hasLeadingItem, title: "Leading items")
             

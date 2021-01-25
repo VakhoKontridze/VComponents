@@ -148,7 +148,14 @@ struct VModal_Previews: PreviewProvider {
         _VModal(
             model: .init(),
             isPresented: .constant(true),
-            headerContent: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+            headerContent: {
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: VModalModel.Fonts().header,
+                    color: VModalModel.Colors().headerText,
+                    title: "Lorem ipsum dolor sit amet"
+                )
+            },
             content: { ColorBook.accent },
             appearAction: nil,
             disappearAction: nil

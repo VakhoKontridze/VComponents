@@ -50,13 +50,9 @@ import SwiftUI
 ///
 ///         VTable(
 ///             sections: sections,
-///             header: { section in
-///                 VTableDefaultHeaderFooter(title: section.title)
-///             },
-///             footer: { section in
-///                 VTableDefaultHeaderFooter(title: section.title)
-///             },
-///             content: { row in
+///             headerTitle: { $0.title },
+///             footerTitle: { $0.title },
+///             rowContent: { row in
 ///                 Text(row.title)
 ///                     .frame(maxWidth: .infinity, alignment: .leading)
 ///             }
@@ -91,9 +87,9 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder header headerContent: @escaping (Section) -> HeaderContent,
-        @ViewBuilder footer footerContent: @escaping (Section) -> FooterContent,
-        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
+        headerContent: @escaping (Section) -> HeaderContent,
+        footerContent: @escaping (Section) -> FooterContent,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
     ) {
         self.model = model
         self.layoutType = layoutType
@@ -102,14 +98,104 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.footerContent = footerContent
         self.rowContent = rowContent
     }
-
+    
+    public init(
+        model: VTableModel = .init(),
+        layout layoutType: VTableLayoutType = .default,
+        sections: [Section],
+        headerTitle: @escaping (Section) -> String,
+        footerContent: @escaping (Section) -> FooterContent,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+    )
+        where HeaderContent == VBaseHeaderFooter
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            sections: sections,
+            headerContent: { section in
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: headerTitle(section)
+                )
+            },
+            footerContent: footerContent,
+            rowContent: rowContent
+        )
+    }
+    
+    public init(
+        model: VTableModel = .init(),
+        layout layoutType: VTableLayoutType = .default,
+        sections: [Section],
+        headerContent: @escaping (Section) -> HeaderContent,
+        footerTitle: @escaping (Section) -> String,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+    )
+        where FooterContent == VBaseHeaderFooter
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            sections: sections,
+            headerContent: headerContent,
+            footerContent: { section in
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: footerTitle(section)
+                )
+            },
+            rowContent: rowContent
+        )
+    }
+    
+    public init(
+        model: VTableModel = .init(),
+        layout layoutType: VTableLayoutType = .default,
+        sections: [Section],
+        headerTitle: @escaping (Section) -> String,
+        footerTitle: @escaping (Section) -> String,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+    )
+        where
+            HeaderContent == VBaseHeaderFooter,
+            FooterContent == VBaseHeaderFooter
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            sections: sections,
+            headerContent: { section in
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: headerTitle(section)
+                )
+            },
+            footerContent: { section in
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: footerTitle(section)
+                )
+            },
+            rowContent: rowContent
+        )
+    }
+    
     // MARK: Initializers: Header
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder header headerContent: @escaping (Section) -> HeaderContent,
-        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
+        headerContent: @escaping (Section) -> HeaderContent,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
     )
         where FooterContent == Never
     {
@@ -120,14 +206,41 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.footerContent = nil
         self.rowContent = rowContent
     }
+    
+    public init(
+        model: VTableModel = .init(),
+        layout layoutType: VTableLayoutType = .default,
+        sections: [Section],
+        headerTitle: @escaping (Section) -> String,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+    )
+        where
+            HeaderContent == VBaseHeaderFooter,
+            FooterContent == Never
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            sections: sections,
+            headerContent: { section in
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: headerTitle(section)
+                )
+            },
+            rowContent: rowContent
+        )
+    }
 
     // MARK: Initializers: Footer
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder footer footerContent: @escaping (Section) -> FooterContent,
-        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
+        footerContent: @escaping (Section) -> FooterContent,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
     )
         where HeaderContent == Never
     {
@@ -138,13 +251,40 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.footerContent = footerContent
         self.rowContent = rowContent
     }
+    
+    public init(
+        model: VTableModel = .init(),
+        layout layoutType: VTableLayoutType = .default,
+        sections: [Section],
+        footerTitle: @escaping (Section) -> String,
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
+    )
+        where
+            HeaderContent == Never,
+            FooterContent == VBaseHeaderFooter
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            sections: sections,
+            footerContent: { section in
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: footerTitle(section)
+                )
+            },
+            rowContent: rowContent
+        )
+    }
 
     // MARK: Initializers: _
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
         sections: [Section],
-        @ViewBuilder row rowContent: @escaping (Row) -> RowContent
+        @ViewBuilder rowContent: @escaping (Row) -> RowContent
     )
         where
             HeaderContent == Never,
@@ -266,13 +406,9 @@ struct VTable_Previews: PreviewProvider {
 
             VTable(
                 sections: sections,
-                header: { section in
-                    VTableDefaultHeaderFooter(title: "Header \(section.title)")
-                },
-                footer: { section in
-                    VTableDefaultHeaderFooter(title: "Footer \(section.title)")
-                },
-                row: { row in
+                headerTitle: { $0.title },
+                footerTitle: { $0.title },
+                rowContent: { row in
                     VBaseList_Previews.rowContent(
                         title: row.title,
                         color: row.color

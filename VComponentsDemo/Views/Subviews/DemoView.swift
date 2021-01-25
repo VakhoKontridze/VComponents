@@ -152,7 +152,7 @@ extension DemoView {
                 .vHalfModal(isPresented: $isPresented, halfModal: {
                     VHalfModal(
                         model: halfModalModel,
-                        header: { VHalfModalDefaultHeader(title: "Parameters") },
+                        headerTitle: "Parameters",
                         content: {
                             ScrollView(content: {
                                 settings()

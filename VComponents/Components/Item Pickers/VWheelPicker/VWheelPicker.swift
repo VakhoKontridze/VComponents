@@ -29,8 +29,8 @@ import SwiftUI
 /// var body: some View {
 ///     VWheelPicker(
 ///         selectedIndex: $selectedIndex,
-///         header: "Lorem ipsum dolor sit amet",
-///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         headerTitle: "Lorem ipsum dolor sit amet",
+///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         rowTitles: rowTitles
 ///     )
 ///         .padding(20)
@@ -49,8 +49,8 @@ public struct VWheelPicker<Data, RowContent>: View
     @Binding private var selectedIndex: Int
     private let state: VWheelPickerState
     
-    private let header: String?
-    private let footer: String?
+    private let headerTitle: String?
+    private let footerTitle: String?
     
     private let data: Data
     private let rowContent: (Data.Element) -> RowContent
@@ -62,16 +62,16 @@ public struct VWheelPicker<Data, RowContent>: View
         model: VWheelPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VWheelPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     ) {
         self.model = model
         self._selectedIndex = selectedIndex
         self.state = state
-        self.header = header
-        self.footer = footer
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
         self.data = data
         self.rowContent = rowContent
     }
@@ -81,8 +81,8 @@ public struct VWheelPicker<Data, RowContent>: View
         model: VWheelPickerModel = .init(),
         selectedIndex: Binding<Int>,
         state: VWheelPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         rowTitles: [String]
     )
         where
@@ -93,8 +93,8 @@ public struct VWheelPicker<Data, RowContent>: View
             model: model,
             selectedIndex: selectedIndex,
             state: state,
-            header: header,
-            footer: footer,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
             data: rowTitles,
             rowContent: { title in
                 VText(
@@ -112,8 +112,8 @@ public struct VWheelPicker<Data, RowContent>: View
         model: VWheelPickerModel = .init(),
         selection: Binding<Item>,
         state: VWheelPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         @ViewBuilder rowContent: @escaping (Item) -> RowContent
     )
         where
@@ -127,8 +127,8 @@ public struct VWheelPicker<Data, RowContent>: View
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
-            header: header,
-            footer: footer,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
             data: .init(Item.allCases),
             rowContent: rowContent
         )
@@ -139,8 +139,8 @@ public struct VWheelPicker<Data, RowContent>: View
         model: VWheelPickerModel = .init(),
         selection: Binding<Item>,
         state: VWheelPickerState = .enabled,
-        header: String? = nil,
-        footer: String? = nil
+        headerTitle: String? = nil,
+        footerTitle: String? = nil
     )
         where
             Data == Array<Item>,
@@ -154,8 +154,8 @@ public struct VWheelPicker<Data, RowContent>: View
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
-            header: header,
-            footer: footer,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
             data: .init(Item.allCases),
             rowContent: { item in
                 VText(
@@ -196,12 +196,12 @@ extension VWheelPicker {
     }
     
     @ViewBuilder private var headerView: some View {
-        if let header = header, !header.isEmpty {
+        if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
                 type: .oneLine,
                 font: model.fonts.header,
                 color: model.colors.header.for(state),
-                title: header
+                title: headerTitle
             )
                 .padding(.horizontal, model.layout.headerMarginHor)
                 .opacity(model.colors.content.for(state))
@@ -209,12 +209,12 @@ extension VWheelPicker {
     }
     
     @ViewBuilder private var footerView: some View {
-        if let footer = footer, !footer.isEmpty {
+        if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
                 type: .multiLine(limit: nil, alignment: .leading),
                 font: model.fonts.footer,
                 color: model.colors.footer.for(state),
-                title: footer
+                title: footerTitle
             )
                 .padding(.horizontal, model.layout.headerMarginHor)
                 .opacity(model.colors.content.for(state))
@@ -236,8 +236,8 @@ struct VWheelPicker_Previews: PreviewProvider {
     static var previews: some View {
         VWheelPicker(
             selectedIndex: $selectedIndex,
-            header: "Lorem ipsum dolor sit amet",
-            footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+            headerTitle: "Lorem ipsum dolor sit amet",
+            footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
             rowTitles: rowTitles
         )
             .padding(20)

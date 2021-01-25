@@ -14,7 +14,6 @@ struct VSectionDemoView: View {
     static let navigationBarTitle: String = "Section"
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
-    @State private var hasHeader: Bool = true
     @State private var rowCount: Int = 3
 }
 
@@ -34,7 +33,6 @@ extension VSectionDemoView {
     private func component() -> some View {
         VSection(
             layout: layoutType.sectionlayoutType,
-            header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
             data: VBaseListDemoViewDataSource.rows(count: rowCount),
             rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
         )
@@ -48,10 +46,8 @@ extension VSectionDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $layoutType, header: "Layout", footer: layoutType.description)
+        VSegmentedPicker(selection: $layoutType, headerTitle: "Layout", footerTitle: layoutType.description)
             .frame(height: 110, alignment: .top)
-        
-        ToggleSettingView(isOn: $hasHeader, title: "Header")
         
         Stepper("Rows", value: $rowCount, in: 0...20)
     }

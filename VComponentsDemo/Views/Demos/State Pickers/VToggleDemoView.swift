@@ -48,11 +48,11 @@ extension VToggleDemoView {
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, header: "State")
+            VSegmentedPicker(selection: $state, headerTitle: "State")
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $contentType, header: "Content")
+            VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         })
         
         DemoViewSettingsSection(content: {

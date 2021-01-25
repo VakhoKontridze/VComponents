@@ -57,18 +57,18 @@ extension VDialogDemoView {
         VTextField(
             state: $titleTextFieldState,
             placeholder: "Title",
-            header: "Title",
+            headerTitle: "Title",
             text: $title
         )
         
         VTextField(
             state: $descriptionTextFieldState,
             placeholder: "Description",
-            header: "Description",
+            headerTitle: "Description",
             text: $description
         )
         
-        VSegmentedPicker(selection: $dialogTypeHelper, header: "Dialog")
+        VSegmentedPicker(selection: $dialogTypeHelper, headerTitle: "Dialog")
     }
 }
 

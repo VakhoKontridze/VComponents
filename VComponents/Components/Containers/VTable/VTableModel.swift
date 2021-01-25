@@ -12,6 +12,7 @@ import SwiftUI
 public struct VTableModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var fonts: Fonts = .init()
     public var misc: Misc = .init()
     
     public init() {}
@@ -38,9 +39,11 @@ extension VTableModel {
 // MARK:- Colors
 extension VTableModel {
     public struct Colors {
-        static let defaultHeaderFooter: Color = ColorBook.secondary
         public var divider: Color = sectionReference.colors.divider
         public var background: Color = sectionReference.colors.background
+        
+        public var headerText: Color = ColorBook.secondary  // Only applicable during init with title
+        public var footerText: Color = ColorBook.secondary  // Only applicable during init with title
         
         public init() {}
     }
@@ -48,8 +51,11 @@ extension VTableModel {
 
 // MARK:- Fonts
 extension VTableModel {
-    struct Fonts {
-        static var headerFooter: Font = .system(size: 13, weight: .regular, design: .default)
+    public struct Fonts {
+        public var header: Font = .system(size: 13, weight: .regular, design: .default)   // Only applicable during init with title
+        public var footer: Font = .system(size: 13, weight: .regular, design: .default)   // Only applicable during init with title
+        
+        public init() {}
     }
 }
 

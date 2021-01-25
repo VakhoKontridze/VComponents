@@ -12,6 +12,7 @@ import SwiftUI
 public struct VAccordionModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var fonts: Fonts = .init()
     public var misc: Misc = .init()
     
     public init() {}
@@ -81,13 +82,13 @@ extension VAccordionModel.Layout {
 // MARK:- Colors
 extension VAccordionModel {
     public struct Colors {
-        static let defaultHeader: Color = ColorBook.primary
-        
         public var background: Color = sectionReference.colors.background
         
         public var header: StateOpacity = .init(
             disabledOpacity: 0.5
         )
+        
+        public var headerText: Color = ColorBook.primary    // Only applicable during init with title
         
         public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
         
@@ -125,8 +126,10 @@ extension VAccordionModel.Colors {
 
 // MARK:- Fonts
 extension VAccordionModel {
-    struct Fonts {
-        static let header: Font = .system(size: 15, weight: .semibold, design: .default)
+    public struct Fonts {
+        public var header: Font = .system(size: 17, weight: .bold, design: .default)    // Only applicable during init with title
+        
+        public init() {}
     }
 }
 

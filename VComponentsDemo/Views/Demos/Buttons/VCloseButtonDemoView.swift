@@ -48,9 +48,9 @@ extension VCloseButtonDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, header: "State")
+        VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+        VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
     }
 }
 

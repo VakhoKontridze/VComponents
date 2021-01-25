@@ -51,8 +51,8 @@ extension VBaseListDemoView {
             
             VSegmentedPicker(
                 selection: $layoutType,
-                header: "Layout",
-                footer: layoutType.description
+                headerTitle: "Layout",
+                footerTitle: layoutType.description
             )
                 .frame(height: 90, alignment: .top)
         })

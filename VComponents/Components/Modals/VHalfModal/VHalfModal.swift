@@ -28,7 +28,7 @@ import SwiftUI
 ///     )
 ///         .vHalfModal(isPresented: $isPresented, halfModal: {
 ///             VHalfModal(
-///                 header: { VHalfModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+///                 headerTitle: "Lorem ipsum dolor sit amet",
 ///                 content: { ColorBook.accent }
 ///             )
 ///         })
@@ -107,7 +107,7 @@ public struct VHalfModal<Content, HeaderContent>
     // MARK: Initializers: Header
     public init(
         model: VHalfModalModel = .init(),
-        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
+        @ViewBuilder headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content,
         onAppear appearAction: (() -> Void)? = nil,
         onDisappear disappearAction: (() -> Void)? = nil
@@ -117,6 +117,31 @@ public struct VHalfModal<Content, HeaderContent>
         self.content = content
         self.appearAction = appearAction
         self.disappearAction = disappearAction
+    }
+    
+    public init(
+        model: VHalfModalModel = .init(),
+        headerTitle: String,
+        @ViewBuilder content: @escaping () -> Content,
+        onAppear appearAction: (() -> Void)? = nil,
+        onDisappear disappearAction: (() -> Void)? = nil
+    )
+        where HeaderContent == VBaseHeaderFooter
+    {
+        self.init(
+            model: model,
+            headerContent: {
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: headerTitle
+                )
+            },
+            content: content,
+            onAppear: appearAction,
+            onDisappear: disappearAction
+        )
     }
     
     // MARK: Initializers: _

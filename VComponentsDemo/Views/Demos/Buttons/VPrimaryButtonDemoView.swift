@@ -67,11 +67,11 @@ extension VPrimaryButtonDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, header: "State")
+        VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VSegmentedPicker(selection: $contentType, header: "Content")
+        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         
-        VSegmentedPicker(selection: $borderType, header: "Border")
+        VSegmentedPicker(selection: $borderType, headerTitle: "Border")
     }
     
     private var buttonTitle: String { "Lorem ipsum" }

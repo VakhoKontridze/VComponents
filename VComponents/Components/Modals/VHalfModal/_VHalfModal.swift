@@ -313,7 +313,14 @@ struct VHalfModal_Previews: PreviewProvider {
         _VHalfModal(
             model: .init(),
             isPresented: .constant(true),
-            headerContent: { VHalfModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+            headerContent: {
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: VHalfModalModel.Fonts().header,
+                    color: VHalfModalModel.Colors().headerText,
+                    title: "Lorem ipsum dolor sit amet"
+                )
+            },
             content: { ColorBook.accent },
             onAppear: nil,
             onDisappear: nil

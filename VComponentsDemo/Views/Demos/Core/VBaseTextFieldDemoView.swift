@@ -53,7 +53,7 @@ extension VBaseTextFieldDemoView {
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, header: "State")
+            VSegmentedPicker(selection: $state, headerTitle: "State")
         })
         
         DemoViewSettingsSection(content: {
@@ -82,11 +82,11 @@ extension VBaseTextFieldDemoView {
                     description: "Default set to \"nil\". Other types are not shown in the demo, as there are many."
                 )
                 
-                VSegmentedPicker(selection: $spellCheck, header: "Spell Check")
+                VSegmentedPicker(selection: $spellCheck, headerTitle: "Spell Check")
 
-                VSegmentedPicker(selection: $autoCorrect, header: "Autocorrect")
+                VSegmentedPicker(selection: $autoCorrect, headerTitle: "Autocorrect")
 
-                VSegmentedPicker(selection: $textAlignment, header: "Alignment")
+                VSegmentedPicker(selection: $textAlignment, headerTitle: "Alignment")
             })
         })
     }
@@ -106,10 +106,10 @@ extension VBaseTextFieldState: VPickableTitledItem {
 extension VTextFieldModel.Layout.TextAlignment: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
-        case .leading: return "Leading"
         case .center: return "Center"
+        case .leading: return "Leading"
         case .trailing: return "Trailing"
-        case .automatic: return "Automatic"
+        case .auto: return "Auto"
         }
     }
 }

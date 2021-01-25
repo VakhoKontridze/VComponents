@@ -60,7 +60,7 @@ public struct VBaseList<Data, ID, RowContent>: View
     
     typealias Element = VBaseListElement<ID, Data.Element>
     
-    // MARK: Initializers
+    // MARK: Initializers: View Builder
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .default,
@@ -74,6 +74,7 @@ public struct VBaseList<Data, ID, RowContent>: View
         self.rowContent = rowContent
     }
     
+    // MARK: Initializers: Identified View Builder
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .default,

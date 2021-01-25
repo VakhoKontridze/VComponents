@@ -25,19 +25,19 @@ import SwiftUI
 ///
 public struct VText: View {
     // MARK: Properties
-    private let titleType: VTextType
+    private let textType: VTextType
     private let font: Font
     private let color: Color
     private let title: String
     
     // MARK: Initializers
     public init(
-        type titleType: VTextType,
+        type textType: VTextType,
         font: Font,
         color: Color,
         title: String
     ) {
-        self.titleType = titleType
+        self.textType = textType
         self.font = font
         self.color = color
         self.title = title
@@ -47,7 +47,7 @@ public struct VText: View {
 // MARK:- Body
 extension VText {
     @ViewBuilder public var body: some View {
-        switch titleType {
+        switch textType {
         case .oneLine:
             Text(title)
                 .lineLimit(1)

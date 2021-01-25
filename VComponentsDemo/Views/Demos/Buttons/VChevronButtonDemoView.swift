@@ -49,11 +49,11 @@ extension VChevronButtonDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, header: "State")
+        VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VSegmentedPicker(selection: $direction, header: "Direction")
+        VSegmentedPicker(selection: $direction, headerTitle: "Direction")
         
-        VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+        VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
     }
 }
 

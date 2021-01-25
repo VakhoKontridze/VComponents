@@ -49,7 +49,7 @@ extension VTextFieldModel {
 }
 
 extension VTextFieldModel.Layout {
-    /// Enum that describes text alignment, such as leading, center, trailing, or automatic
+    /// Enum that describes text alignment, such as leading, center, trailing, or auto
     public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
 }
 

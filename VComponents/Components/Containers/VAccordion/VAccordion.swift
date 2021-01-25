@@ -40,11 +40,9 @@ import SwiftUI
 ///
 ///         VAccordion(
 ///             state: $state,
-///             header: {
-///                 VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet")
-///             },
+///             headerTitle: "Lorem ipsum dolor sit amet",
 ///             data: data,
-///             content: { row in
+///             rowContent: { row in
 ///                 Text(row.title)
 ///                     .frame(
 ///                         maxWidth: .infinity,
@@ -84,10 +82,10 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
-        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
+        @ViewBuilder headerContent: @escaping () -> HeaderContent,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
         where Content == Never
     {
@@ -101,14 +99,46 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             rowContent: rowContent
         )
     }
-
+    
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
-        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
+        headerTitle: String,
         data: Data,
-        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
+        id: KeyPath<Data.Element, ID>,
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+    )
+        where
+            HeaderContent == VBaseHeaderFooter,
+            Content == Never
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            state: state,
+            headerContent: {
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: headerTitle
+                )
+            },
+            data: data,
+            id: id,
+            rowContent: rowContent
+        )
+    }
+
+    // MARK: Initializers: Identified View Builder
+    public init(
+        model: VAccordionModel = .init(),
+        layout layoutType: VAccordionLayoutType = .fixed,
+        state: Binding<VAccordionState>,
+        @ViewBuilder headerContent: @escaping () -> HeaderContent,
+        data: Data,
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
         where
             Content == Never,
@@ -119,10 +149,41 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             model: model,
             layout: layoutType,
             state: state,
-            header: headerContent,
+            headerContent: headerContent,
             data: data,
             id: \Data.Element.id,
-            content: rowContent
+            rowContent: rowContent
+        )
+    }
+    
+    public init(
+        model: VAccordionModel = .init(),
+        layout layoutType: VAccordionLayoutType = .fixed,
+        state: Binding<VAccordionState>,
+        headerTitle: String,
+        data: Data,
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+    )
+        where
+            HeaderContent == VBaseHeaderFooter,
+            Content == Never,
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            state: state,
+            headerContent: {
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: headerTitle
+                )
+            },
+            data: data,
+            rowContent: rowContent
         )
     }
     
@@ -131,7 +192,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
-        @ViewBuilder header headerContent: @escaping () -> HeaderContent,
+        @ViewBuilder headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content
     )
         where
@@ -144,6 +205,35 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         self._state = state
         self.headerContent = headerContent
         self.contentType = .freeForm(
+            content: content
+        )
+    }
+    
+    public init(
+        model: VAccordionModel = .init(),
+        layout layoutType: VAccordionLayoutType = .fixed,
+        state: Binding<VAccordionState>,
+        headerTitle: String,
+        @ViewBuilder content: @escaping () -> Content
+    )
+        where
+            HeaderContent == VBaseHeaderFooter,
+            Data == Array<Never>,
+            ID == Never,
+            RowContent == Never
+    {
+        self.init(
+            model: model,
+            layout: layoutType,
+            state: state,
+            headerContent: {
+                VBaseHeaderFooter(
+                    frameType: .flex(.leading),
+                    font: model.fonts.header,
+                    color: model.colors.headerText,
+                    title: headerTitle
+                )
+            },
             content: content
         )
     }
@@ -247,10 +337,10 @@ struct VAccordion_Previews: PreviewProvider {
             
             VAccordion(
                 state: $accordionState,
-                header: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+                headerTitle: "Lorem ipsum dolor sit amet",
                 data: ["One", "Two", "Three"],
                 id: \.self,
-                content: {
+                rowContent: {
                     Text($0)
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }

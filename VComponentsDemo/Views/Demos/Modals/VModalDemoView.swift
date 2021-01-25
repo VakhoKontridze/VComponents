@@ -48,7 +48,7 @@ extension VModalDemoView {
                         .vModal(isPresented: $isPresented, modal: {
                             VModal(
                                 model: model,
-                                header: { VModalDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+                                headerTitle: "Lorem ipsum dolor sit amet",
                                 content: { modalContent }
                             )
                         })

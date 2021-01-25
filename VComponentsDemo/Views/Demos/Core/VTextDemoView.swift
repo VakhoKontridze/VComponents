@@ -33,23 +33,23 @@ extension VTextDemoView {
     
     @ViewBuilder private func component() -> some View {
         switch vTextDemoType {
-        case .leading:
-            VText(type: .oneLine, font: titleFont, color: titleColor, title: baseTextTitle)
-                .frame(maxWidth: .infinity, alignment: .leading)
-        
         case .center:
             VText(type: .oneLine, font: titleFont, color: titleColor, title: baseTextTitle)
                 .frame(maxWidth: .infinity, alignment: .center)
+        
+        case .leading:
+            VText(type: .oneLine, font: titleFont, color: titleColor, title: baseTextTitle)
+                .frame(maxWidth: .infinity, alignment: .leading)
         
         case .trailing:
             VText(type: .oneLine, font: titleFont, color: titleColor, title: baseTextTitle)
                 .frame(maxWidth: .infinity, alignment: .trailing)
         
-        case .multiLineLeading:
-            VText(type: .multiLine(limit: nil, alignment: .leading), font: titleFont, color: titleColor, title: baseTextText)
-            
         case .multiLineCenter:
             VText(type: .multiLine(limit: nil, alignment: .center), font: titleFont, color: titleColor, title: baseTextText)
+            
+        case .multiLineLeading:
+            VText(type: .multiLine(limit: nil, alignment: .leading), font: titleFont, color: titleColor, title: baseTextText)
             
         case .multiLineTrailing:
             VText(type: .multiLine(limit: nil, alignment: .trailing), font: titleFont, color: titleColor, title: baseTextText)
@@ -59,28 +59,28 @@ extension VTextDemoView {
     @ViewBuilder private func settings() -> some View {
         VWheelPicker(
             selection: $vTextDemoType,
-            header: "Type",
-            footer: "Not an actual type of the component. Just different configurations listed for demo purposes."
+            headerTitle: "Type",
+            footerTitle: "Not an actual type of the component. Just different configurations listed for demo purposes."
         )
     }
 }
 
 // MARK:- Helpers
 private enum VTextDemoType: Int, VPickableTitledItem {
-    case leading
     case center
+    case leading
     case trailing
-    case multiLineLeading
     case multiLineCenter
+    case multiLineLeading
     case multiLineTrailing
     
     var pickerTitle: String {
         switch self {
-        case .leading: return "Leading"
         case .center: return "Center"
+        case .leading: return "Leading"
         case .trailing: return "Trailing"
-        case .multiLineLeading: return "Multi-Line Leading"
         case .multiLineCenter: return "Multi-Line Center"
+        case .multiLineLeading: return "Multi-Line Leading"
         case .multiLineTrailing: return "Multi-Line Trailing"
         }
     }

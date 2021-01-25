@@ -12,6 +12,7 @@ import SwiftUI
 public struct VModalModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var fonts: Fonts = .init()
     public var animations: Animations = .init()
     public var misc: Misc = .init()
     
@@ -84,9 +85,9 @@ extension VModalModel.Layout {
 // MARK:- Colors
 extension VModalModel {
     public struct Colors {
-        static let defaultHeader: Color = ColorBook.primary
-        
         public var background: Color = sheetReference.colors.background
+        
+        public var headerText: Color = ColorBook.primary    // Only applicable during init with title
         
         public var closeButtonBackground: StateColors = closeButtonReference.colors.background
         public var closeButtonIcon: StateColorsAndOpacity = closeButtonReference.colors.content
@@ -107,8 +108,10 @@ extension VModalModel.Colors {
 
 // MARK:- Fonts
 extension VModalModel {
-    struct Fonts {
-        static let header: Font = .system(size: 17, weight: .bold, design: .default)
+    public struct Fonts {
+        public var header: Font = .system(size: 17, weight: .bold, design: .default)    // Only applicable during init with title
+        
+        public init() {}
     }
 }
 

@@ -32,7 +32,7 @@ extension VSpinnerDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $spinnerType, header: "Type")
+        VSegmentedPicker(selection: $spinnerType, headerTitle: "Type")
     }
 }
 

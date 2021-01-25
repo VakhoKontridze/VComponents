@@ -95,11 +95,11 @@ extension VSliderDemoView {
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, header: "State")
+            VSegmentedPicker(selection: $state, headerTitle: "State")
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $thumbType, header: "Thumb")
+            VSegmentedPicker(selection: $thumbType, headerTitle: "Thumb")
         })
         
         DemoViewSettingsSection(content: {

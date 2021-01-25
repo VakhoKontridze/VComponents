@@ -45,9 +45,9 @@ extension VAccordionDemoView {
                 model: model,
                 layout: layoutType.accordionlayoutType,
                 state: $accordionState,
-                header: { VAccordionDefaultHeader(title: "Lorem ipsum dolor sit amet") },
+                headerTitle: "Lorem ipsum dolor sit amet",
                 data: VBaseListDemoViewDataSource.rows(count: rowCount),
-                content: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
             )
             .ifLet(
                 layoutType.height,
@@ -66,9 +66,9 @@ extension VAccordionDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $accordionState, header: "State")
+        VSegmentedPicker(selection: $accordionState, headerTitle: "State")
         
-        VSegmentedPicker(selection: $layoutType, header: "Layout", footer: layoutType.description)
+        VSegmentedPicker(selection: $layoutType, headerTitle: "Layout", footerTitle: layoutType.description)
             .frame(height: 110, alignment: .top)
         
         Stepper("Rows", value: $rowCount, in: 0...20)

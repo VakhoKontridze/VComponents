@@ -24,9 +24,10 @@
 		7A0BB66A25B9CBAD00E7FCA1 /* VHalfModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BB66925B9CBAD00E7FCA1 /* VHalfModal.swift */; };
 		7A0BB67125B9CDAF00E7FCA1 /* _VHalfModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BB67025B9CDAF00E7FCA1 /* _VHalfModal.swift */; };
 		7A0BB67525B9CEF900E7FCA1 /* UIKitPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0BB67425B9CEF900E7FCA1 /* UIKitPresenter.swift */; };
+		7A0CF35425BEDD3A009FE576 /* VBaseHeaderFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CF35325BEDD3A009FE576 /* VBaseHeaderFooterView.swift */; };
+		7A0CF35825BEDD49009FE576 /* VBaseHeaderFooterType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0CF35725BEDD49009FE576 /* VBaseHeaderFooterType.swift */; };
 		7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A12716125BAF911002B0397 /* BasicAnimation.swift */; };
 		7A12716825BB2117002B0397 /* VHalfModalNavigationViewCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A12716725BB2117002B0397 /* VHalfModalNavigationViewCloseButton.swift */; };
-		7A12716B25BB2411002B0397 /* VHalfModalDefaultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A12716A25BB2411002B0397 /* VHalfModalDefaultHeader.swift */; };
 		7A184A7925B72DDA009DCD65 /* VBaseTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A184A7825B72DDA009DCD65 /* VBaseTextField.swift */; };
 		7A259B652597828700A12F8C /* VDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B642597828700A12F8C /* VDialog.swift */; };
 		7A259B6B259783A100A12F8C /* VDialogType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A259B6A259783A100A12F8C /* VDialogType.swift */; };
@@ -90,7 +91,6 @@
 		7A6218302594943F00515688 /* VLazyListModelHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62182F2594943F00515688 /* VLazyListModelHorizontal.swift */; };
 		7A621834259494CB00515688 /* VLazyListVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A621833259494CB00515688 /* VLazyListVertical.swift */; };
 		7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218372594956400515688 /* VLazyListHorizontal.swift */; };
-		7A6C601425AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6C601325AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift */; };
 		7A767C3925B5C70A0008D2E9 /* VCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */; };
 		7A767C3C25B5C7310008D2E9 /* VCheckBoxState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */; };
 		7A767C9D25B5C93F0008D2E9 /* VCheckBoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C9C25B5C93F0008D2E9 /* VCheckBoxModel.swift */; };
@@ -171,7 +171,6 @@
 		7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */; };
 		7ACC3ED825ACC1C600EAD184 /* VAccordionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */; };
 		7ACC3EDB25ACC22E00EAD184 /* VAccordionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */; };
-		7ACC3EDF25ACC50100EAD184 /* VAccordionDefaultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EDE25ACC50100EAD184 /* VAccordionDefaultHeader.swift */; };
 		7ACC3EE225ACC6F100EAD184 /* VAccordionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EE125ACC6F100EAD184 /* VAccordionDemoView.swift */; };
 		7AD809432594FCF000DABE49 /* _VSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809422594FCF000DABE49 /* _VSideBar.swift */; };
 		7AD809472594FD9100DABE49 /* VSideBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD809462594FD9100DABE49 /* VSideBar.swift */; };
@@ -190,7 +189,6 @@
 		7AF3C8E125AF675300D56042 /* VCloseButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8E025AF675300D56042 /* VCloseButtonState.swift */; };
 		7AF3C8E625AF679400D56042 /* VCloseButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8E525AF679400D56042 /* VCloseButtonModel.swift */; };
 		7AF3C8EA25AF684E00D56042 /* VCloseButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8E925AF684E00D56042 /* VCloseButtonDemoView.swift */; };
-		7AF3C8EF25AF694400D56042 /* VModalDefaultHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8EE25AF694400D56042 /* VModalDefaultHeader.swift */; };
 		7AF3C8F225AF6FB200D56042 /* VModalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8F125AF6FB200D56042 /* VModalDemoView.swift */; };
 		7AF3C95F25B04F2B00D56042 /* VDialogButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C95E25B04F2B00D56042 /* VDialogButtonModel.swift */; };
 		7AF3CA8B25B0AD5A00D56042 /* VTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3CA8A25B0AD5A00D56042 /* VTableSection.swift */; };
@@ -240,9 +238,10 @@
 		7A0BB66925B9CBAD00E7FCA1 /* VHalfModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModal.swift; sourceTree = "<group>"; };
 		7A0BB67025B9CDAF00E7FCA1 /* _VHalfModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VHalfModal.swift; sourceTree = "<group>"; };
 		7A0BB67425B9CEF900E7FCA1 /* UIKitPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKitPresenter.swift; sourceTree = "<group>"; };
+		7A0CF35325BEDD3A009FE576 /* VBaseHeaderFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseHeaderFooterView.swift; sourceTree = "<group>"; };
+		7A0CF35725BEDD49009FE576 /* VBaseHeaderFooterType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseHeaderFooterType.swift; sourceTree = "<group>"; };
 		7A12716125BAF911002B0397 /* BasicAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAnimation.swift; sourceTree = "<group>"; };
 		7A12716725BB2117002B0397 /* VHalfModalNavigationViewCloseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModalNavigationViewCloseButton.swift; sourceTree = "<group>"; };
-		7A12716A25BB2411002B0397 /* VHalfModalDefaultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModalDefaultHeader.swift; sourceTree = "<group>"; };
 		7A184A7825B72DDA009DCD65 /* VBaseTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseTextField.swift; sourceTree = "<group>"; };
 		7A259B642597828700A12F8C /* VDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialog.swift; sourceTree = "<group>"; };
 		7A259B6A259783A100A12F8C /* VDialogType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogType.swift; sourceTree = "<group>"; };
@@ -304,7 +303,6 @@
 		7A62182F2594943F00515688 /* VLazyListModelHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListModelHorizontal.swift; sourceTree = "<group>"; };
 		7A621833259494CB00515688 /* VLazyListVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListVertical.swift; sourceTree = "<group>"; };
 		7A6218372594956400515688 /* VLazyListHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListHorizontal.swift; sourceTree = "<group>"; };
-		7A6C601325AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTableDefaultHeaderFooter.swift; sourceTree = "<group>"; };
 		7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBox.swift; sourceTree = "<group>"; };
 		7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBoxState.swift; sourceTree = "<group>"; };
 		7A767C9C25B5C93F0008D2E9 /* VCheckBoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBoxModel.swift; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 		7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionLayoutType.swift; sourceTree = "<group>"; };
 		7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionState.swift; sourceTree = "<group>"; };
 		7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionModel.swift; sourceTree = "<group>"; };
-		7ACC3EDE25ACC50100EAD184 /* VAccordionDefaultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionDefaultHeader.swift; sourceTree = "<group>"; };
 		7ACC3EE125ACC6F100EAD184 /* VAccordionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionDemoView.swift; sourceTree = "<group>"; };
 		7AD809422594FCF000DABE49 /* _VSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = _VSideBar.swift; sourceTree = "<group>"; };
 		7AD809462594FD9100DABE49 /* VSideBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSideBar.swift; sourceTree = "<group>"; };
@@ -408,7 +405,6 @@
 		7AF3C8E025AF675300D56042 /* VCloseButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCloseButtonState.swift; sourceTree = "<group>"; };
 		7AF3C8E525AF679400D56042 /* VCloseButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCloseButtonModel.swift; sourceTree = "<group>"; };
 		7AF3C8E925AF684E00D56042 /* VCloseButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCloseButtonDemoView.swift; sourceTree = "<group>"; };
-		7AF3C8EE25AF694400D56042 /* VModalDefaultHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModalDefaultHeader.swift; sourceTree = "<group>"; };
 		7AF3C8F125AF6FB200D56042 /* VModalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModalDemoView.swift; sourceTree = "<group>"; };
 		7AF3C95E25B04F2B00D56042 /* VDialogButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogButtonModel.swift; sourceTree = "<group>"; };
 		7AF3CA8A25B0AD5A00D56042 /* VTableSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTableSection.swift; sourceTree = "<group>"; };
@@ -452,10 +448,26 @@
 				7A0BB66925B9CBAD00E7FCA1 /* VHalfModal.swift */,
 				7A0BB67025B9CDAF00E7FCA1 /* _VHalfModal.swift */,
 				7A0BB66625B9C7FD00E7FCA1 /* VHalfModalModel.swift */,
-				7A12716A25BB2411002B0397 /* VHalfModalDefaultHeader.swift */,
 				7A12716725BB2117002B0397 /* VHalfModalNavigationViewCloseButton.swift */,
 			);
 			path = VHalfModal;
+			sourceTree = "<group>";
+		};
+		7A0CF35225BEDD28009FE576 /* Core (Internal) */ = {
+			isa = PBXGroup;
+			children = (
+				7A0CF35A25BEDD52009FE576 /* VBaseHeaderFooter */,
+			);
+			path = "Core (Internal)";
+			sourceTree = "<group>";
+		};
+		7A0CF35A25BEDD52009FE576 /* VBaseHeaderFooter */ = {
+			isa = PBXGroup;
+			children = (
+				7A0CF35325BEDD3A009FE576 /* VBaseHeaderFooterView.swift */,
+				7A0CF35725BEDD49009FE576 /* VBaseHeaderFooterType.swift */,
+			);
+			path = VBaseHeaderFooter;
 			sourceTree = "<group>";
 		};
 		7A259B632597827800A12F8C /* VDialog */ = {
@@ -700,7 +712,6 @@
 				7AF3CA8D25B0AD5F00D56042 /* VTableRow.swift */,
 				7ACC3ECE25ACB1D900EAD184 /* VTableLayoutType.swift */,
 				7A59578625AB6FCC00B5B6E7 /* VTableModel.swift */,
-				7A6C601325AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift */,
 			);
 			path = VTable;
 			sourceTree = "<group>";
@@ -1120,6 +1131,7 @@
 				7A2D6F34259751B0005513A7 /* Modals */,
 				7A3B87FD25AD8A6100295A87 /* Indicators */,
 				7A6217E52593D8C900515688 /* Core */,
+				7A0CF35225BEDD28009FE576 /* Core (Internal) */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1199,7 +1211,6 @@
 				7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */,
 				7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */,
 				7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */,
-				7ACC3EDE25ACC50100EAD184 /* VAccordionDefaultHeader.swift */,
 			);
 			path = VAccordion;
 			sourceTree = "<group>";
@@ -1231,7 +1242,6 @@
 				7AF3C8CD25AF4E5C00D56042 /* VModal.swift */,
 				7AF3C8D425AF5C1A00D56042 /* _VModal.swift */,
 				7AF3C8D125AF511800D56042 /* VModalModel.swift */,
-				7AF3C8EE25AF694400D56042 /* VModalDefaultHeader.swift */,
 			);
 			path = VModal;
 			sourceTree = "<group>";
@@ -1374,7 +1384,6 @@
 				7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */,
 				7AF3C8D225AF511800D56042 /* VModalModel.swift in Sources */,
 				7A6218292594938C00515688 /* VLazyListType.swift in Sources */,
-				7A12716B25BB2411002B0397 /* VHalfModalDefaultHeader.swift in Sources */,
 				7A08F85C259731E60049FB10 /* VTabNavigationViewAppearance.swift in Sources */,
 				7A4D0C562594D30A00108575 /* VSquareButtonModel.swift in Sources */,
 				7AF3C8D525AF5C1A00D56042 /* _VModal.swift in Sources */,
@@ -1392,6 +1401,7 @@
 				7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */,
 				7A259B652597828700A12F8C /* VDialog.swift in Sources */,
 				7AC5060125911A0800226656 /* VSpinnerModelDashed.swift in Sources */,
+				7A0CF35825BEDD49009FE576 /* VBaseHeaderFooterType.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */,
 				7A767CB925B6BEC10008D2E9 /* VRadioButtonState.swift in Sources */,
 				7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */,
@@ -1413,13 +1423,13 @@
 				7ACC3ED225ACB22700EAD184 /* VSectionLayoutType.swift in Sources */,
 				7A767CBD25B6D4890008D2E9 /* VRadioButtonModel.swift in Sources */,
 				7ACC3ED825ACC1C600EAD184 /* VAccordionState.swift in Sources */,
+				7A0CF35425BEDD3A009FE576 /* VBaseHeaderFooterView.swift in Sources */,
 				7A62182025948DAB00515688 /* VBaseViewModel.swift in Sources */,
 				7A767CE925B702210008D2E9 /* VBaseTextFieldState.swift in Sources */,
 				7A59959425924FD00087902B /* VSheetModel.swift in Sources */,
 				7AA9F3E425909E230060F210 /* VBaseButton.swift in Sources */,
 				7AD809472594FD9100DABE49 /* VSideBar.swift in Sources */,
 				7A79F8D425B89555009B66D4 /* VTextFieldType.swift in Sources */,
-				7A6C601425AB7B0F0090E756 /* VTableDefaultHeaderFooter.swift in Sources */,
 				7A6218302594943F00515688 /* VLazyListModelHorizontal.swift in Sources */,
 				7A59576925AB492D00B5B6E7 /* CollectionExtensions.swift in Sources */,
 				7A59577325AB509D00B5B6E7 /* VBaseListModel.swift in Sources */,
@@ -1478,7 +1488,6 @@
 				7A4C4304259229B2000207DD /* VBaseViewSwipeGesture.swift in Sources */,
 				7A90266625BA04C100685282 /* UIVIewExtensions.swift in Sources */,
 				7AA763D925B738EA0088FC69 /* VTextFieldState.swift in Sources */,
-				7ACC3EDF25ACC50100EAD184 /* VAccordionDefaultHeader.swift in Sources */,
 				7AACBC1B25A9EBFE0066E754 /* VNavigationLink.swift in Sources */,
 				7ACC3ECC25ACB1AD00EAD184 /* VBaseListLayoutType.swift in Sources */,
 				7AC4E03425AE064D00CE2816 /* VRangeSliderModel.swift in Sources */,
@@ -1500,7 +1509,6 @@
 				7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
 				7A767CE625B700960008D2E9 /* VBaseTextFieldModel.swift in Sources */,
-				7AF3C8EF25AF694400D56042 /* VModalDefaultHeader.swift in Sources */,
 				7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */,
 				7AB41B6A25B8307600F83987 /* VBaseTextFieldActions.swift in Sources */,
 				7A4C42F825922914000207DD /* VBaseView.swift in Sources */,

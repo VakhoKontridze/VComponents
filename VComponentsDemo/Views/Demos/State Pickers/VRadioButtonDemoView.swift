@@ -61,15 +61,15 @@ extension VRadioButtonDemoView {
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, header: "State")
+            VSegmentedPicker(selection: $state, headerTitle: "State")
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $contentType, header: "Content")
+            VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $hitBoxType, header: "Hit Box")
+            VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
         })
         
         DemoViewSettingsSection(content: {

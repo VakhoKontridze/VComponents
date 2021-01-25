@@ -44,8 +44,8 @@ extension VWheelPickerDemoView {
                 model: model,
                 selection: $selection,
                 state: state,
-                header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
-                footer: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil
+                headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+                footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil
             )
         
         case .icon:
@@ -53,8 +53,8 @@ extension VWheelPickerDemoView {
                 model: model,
                 selection: $selection,
                 state: state,
-                header: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
-                footer: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+                headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+                footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 rowContent: { $0.pickerSymbol }
             )
         }
@@ -62,11 +62,11 @@ extension VWheelPickerDemoView {
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, header: "State")
+            VSegmentedPicker(selection: $state, headerTitle: "State")
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $contentType, header: "Content")
+            VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         })
         
         DemoViewSettingsSection(content: {

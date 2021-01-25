@@ -28,21 +28,21 @@ extension VBaseTextFieldModel {
 }
 
 extension VBaseTextFieldModel.Layout {
-    /// Enum that describes text alignment, such as leading, center, trailing, or automatic
+    /// Enum that describes text alignment, such as leading, center, trailing, or auto
     public enum TextAlignment: Int, CaseIterable {
-        case leading
         case center
+        case leading
         case trailing
-        case automatic
+        case auto
         
         public static let `default`: Self = .leading
         
         var nsTextAlignment: NSTextAlignment {
             switch self {
-            case .leading: return .left
             case .center: return .center
+            case .leading: return .left
             case .trailing: return .right
-            case .automatic: return .natural
+            case .auto: return .natural
             }
         }
     }

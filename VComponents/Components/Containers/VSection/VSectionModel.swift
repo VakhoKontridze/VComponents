@@ -12,7 +12,6 @@ import SwiftUI
 public struct VSectionModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
-    public var fonts: Fonts = .init()
     public var misc: Misc = .init()
     
     public init() {}
@@ -22,7 +21,6 @@ public struct VSectionModel {
 extension VSectionModel {
     public struct Layout {
         public var titleMarginHor: CGFloat = 0
-        public var headerSpacing: CGFloat = 10
         
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         public var contentMargin: CGFloat = sheetReference.layout.contentMargin
@@ -39,15 +37,6 @@ extension VSectionModel {
         public var title: Color = ColorBook.primary
         public var divider: Color = baseListReference.colors.divider
         public var background: Color = sheetReference.colors.background
-        
-        public init() {}
-    }
-}
-
-// MARK:- Fonts
-extension VSectionModel {
-    public struct Fonts {
-        public var title: Font = .system(size: 14, weight: .bold, design: .default)
         
         public init() {}
     }

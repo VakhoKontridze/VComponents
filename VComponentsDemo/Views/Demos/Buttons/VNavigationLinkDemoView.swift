@@ -33,9 +33,9 @@ extension VNavigationLinkDemoView {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, header: "State")
+        VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VWheelPicker(selection: $navigationLinkType, header: "Type")
+        VWheelPicker(selection: $navigationLinkType, headerTitle: "Type")
     }
     
     private var buttonTitle: String {

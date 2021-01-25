@@ -28,8 +28,8 @@ import SwiftUI
 ///     VTextField(
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         header: "Lorem ipsum dolor sit amet",
-///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         headerTitle: "Lorem ipsum dolor sit amet",
+///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text
 ///     )
 ///         .padding()
@@ -56,8 +56,8 @@ import SwiftUI
 ///         model: model,
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         header: "Lorem ipsum dolor sit amet",
-///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         headerTitle: "Lorem ipsum dolor sit amet",
+///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text,
 ///         onBegin: { print("Editing Began") },
 ///         onChange: {  print("Editing Changed") },
@@ -80,8 +80,8 @@ import SwiftUI
 ///         type: .secure,
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         header: "Lorem ipsum dolor sit amet",
-///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         headerTitle: "Lorem ipsum dolor sit amet",
+///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text
 ///     )
 ///         .padding()
@@ -98,8 +98,8 @@ import SwiftUI
 ///         type: .search,
 ///         state: $state,
 ///         placeholder: "Lorem ipsum",
-///         header: "Lorem ipsum dolor sit amet",
-///         footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         headerTitle: "Lorem ipsum dolor sit amet",
+///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text
 ///     )
 ///         .padding()
@@ -114,8 +114,8 @@ public struct VTextField: View {
     private let highlight: VTextFieldHighlight
     
     private let placeholder: String?
-    private let header: String?
-    private let footer: String?
+    private let headerTitle: String?
+    private let footerTitle: String?
     @Binding private var text: String
                 
     private let beginHandler: (() -> Void)?
@@ -136,8 +136,8 @@ public struct VTextField: View {
         state: Binding<VTextFieldState>,
         highlight: VTextFieldHighlight = .default,
         placeholder: String? = nil,
-        header: String? = nil,
-        footer: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
         text: Binding<String>,
         onBegin beginHandler: (() -> Void)? = nil,
         onChange changeHandler: (() -> Void)? = nil,
@@ -151,8 +151,8 @@ public struct VTextField: View {
         self._state = state
         self.highlight = highlight
         self.placeholder = placeholder
-        self.header = header
-        self.footer = footer
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
         self._text = text
         self.beginHandler = beginHandler
         self.changeHandler = changeHandler
@@ -193,12 +193,12 @@ extension VTextField {
     }
     
     @ViewBuilder private var headerView: some View {
-        if let header = header, !header.isEmpty {
+        if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
                 type: .oneLine,
                 font: model.fonts.header,
                 color: model.colors.header.for(state, highlight: highlight),
-                title: header
+                title: headerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHor)
                 .opacity(model.colors.content.for(state))
@@ -206,12 +206,12 @@ extension VTextField {
     }
     
     @ViewBuilder private var footerView: some View {
-        if let footer = footer, !footer.isEmpty {
+        if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
                 type: .multiLine(limit: nil, alignment: .leading),
                 font: model.fonts.footer,
                 color: model.colors.footer.for(state, highlight: highlight),
-                title: footer
+                title: footerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHor)
                 .opacity(model.colors.content.for(state))
@@ -360,8 +360,8 @@ struct VTextField_Previews: PreviewProvider {
                     type: type,
                     state: $state,
                     placeholder: "Lorem ipsum",
-                    header: "Lorem ipsum dolor sit amet",
-                    footer: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    headerTitle: "Lorem ipsum dolor sit amet",
+                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     text: $text
                 )
             })
