@@ -56,13 +56,14 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
+public struct VTabNavigationView<C0, C1, C2, C3, C4, C5, ItemContent>: View
     where
         C0: View,
         C1: View,
         C2: View,
         C3: View,
         C4: View,
+        C5: View,
         ItemContent: View
 {
     // MARK: Properties
@@ -75,6 +76,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
     private let pageThree: VTabNavigationViewPage<C2, ItemContent>?
     private let pageFour: VTabNavigationViewPage<C3, ItemContent>?
     private let pageFive: VTabNavigationViewPage<C4, ItemContent>?
+    private let pageSix: VTabNavigationViewPage<C5, ItemContent>?
     
     // MARK: Initializers
     public init(
@@ -85,7 +87,9 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         pageThree: VTabNavigationViewPage<C2, ItemContent>,
         pageFour: VTabNavigationViewPage<C3, ItemContent>,
         pageFive: VTabNavigationViewPage<C4, ItemContent>
-    ) {
+    )
+        where C5 == Never
+    {
         self.model = model
         self._selection = selection
         self.pageOne = pageOne
@@ -93,6 +97,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageThree = pageThree
         self.pageFour = pageFour
         self.pageFive = pageFive
+        self.pageSix = nil
     }
     
     public init(
@@ -103,7 +108,9 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         pageThree: VTabNavigationViewPage<C2, ItemContent>,
         pageFour: VTabNavigationViewPage<C3, ItemContent>
     )
-        where C4 == Never
+        where
+            C4 == Never,
+            C5 == Never
     {
         self.model = model
         self._selection = selection
@@ -112,6 +119,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageThree = pageThree
         self.pageFour = pageFour
         self.pageFive = nil
+        self.pageSix = nil
     }
 
     public init(
@@ -123,7 +131,8 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
     )
         where
             C3 == Never,
-            C4 == Never
+            C4 == Never,
+            C5 == Never
     {
         self.model = model
         self._selection = selection
@@ -132,6 +141,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageThree = pageThree
         self.pageFour = nil
         self.pageFive = nil
+        self.pageSix = nil
     }
 
     public init(
@@ -143,7 +153,8 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         where
             C2 == Never,
             C3 == Never,
-            C4 == Never
+            C4 == Never,
+            C5 == Never
     {
         self.model = model
         self._selection = selection
@@ -152,6 +163,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, ItemContent>: View
         self.pageThree = nil
         self.pageFour = nil
         self.pageFive = nil
+        self.pageSix = nil
     }
 }
 
@@ -164,6 +176,7 @@ extension VTabNavigationView {
             if let page = pageThree { pageContent(page).tag(2) }
             if let page = pageFour { pageContent(page).tag(3) }
             if let page = pageFive { pageContent(page).tag(4) }
+            if let page = pageSix { pageContent(page).tag(5) }
         })
             .setUpTabNavigationViewAppearance(model: model)
     }
@@ -188,7 +201,7 @@ struct VTabNavigationView_Previews: PreviewProvider {
     private static let pageThree = VTabNavigationViewPage(item: Text("Blue"), content: Color.blue)
     
     static var previews: some View {
-        VTabNavigationView<Color, Color, Color, Never, Never, Text>(
+        VTabNavigationView<Color, Color, Color, Never, Never, Never, Text>(
             model: .init(),
             selection: .constant(0),
             pageOne: pageOne,
