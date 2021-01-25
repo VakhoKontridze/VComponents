@@ -1,6 +1,6 @@
 # Vakho's Components (VComponents)
 
-## Table of contents
+## Table of Contents
 - [Description](#description)
 - [Technologies](#technologies)
 - [Components](#components)
