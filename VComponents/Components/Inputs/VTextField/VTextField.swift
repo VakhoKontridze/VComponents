@@ -314,8 +314,7 @@ private extension VTextField {
 // MARK:- Actions
 private extension VTextField {
     func textChanged(_ text: String) {
-        let shouldShow: Bool = !text.isEmpty
-        withAnimation(shouldShow ? model.animations.buttonsAppearDisAppear : nil, { nonEmptyText = shouldShow })
+        withAnimation(model.animations.buttonsAppearDisAppear, { nonEmptyText = !text.isEmpty })
     }
     
     func runClearAction() {
