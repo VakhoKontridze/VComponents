@@ -89,9 +89,10 @@ extension _VHalfModal {
                 VStack(spacing: 0, content: {
                     headerView
                     dividerView
-                    contentView
+                    contentView.frame(maxHeight: .infinity, alignment: .center)
                 })
                     .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
+                    .frame(maxHeight: .infinity, alignment: .top)
                     .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
                 

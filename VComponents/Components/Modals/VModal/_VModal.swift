@@ -69,8 +69,9 @@ extension _VModal {
             VStack(spacing: 0, content: {
                 headerView
                 dividerView
-                contentView
+                contentView.frame(maxHeight: .infinity, alignment: .center)
             })
+                .frame(maxHeight: .infinity, alignment: .top)
         })
             .frame(size: model.layout.size)
             .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
