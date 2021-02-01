@@ -14,7 +14,7 @@ import SwiftUI
 public enum VActionSheetRow {
     case standard(action: () -> Void, title: String)
     case destructive(action: () -> Void, title: String)
-    case cancel(action: (() -> Void)?, title: String)
+    case cancel(action: (() -> Void)? = nil, title: String)
     
     var actionSheetButton: ActionSheet.Button {
         switch self {
