@@ -180,6 +180,7 @@ extension VNavigationLink {
             }())
     }
     
+    // Shared with VMenu
     @ViewBuilder private func labelView(isActive: Binding<Bool>) -> some View {
         switch linkType {
         case .primary(let model):

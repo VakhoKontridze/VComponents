@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Dialog
-/// Message component that presents dialog when condition is true
+/// Modal component that presents dialog when condition is true
 ///
 /// Model, title, description, onAppear and onDisappear callbacks, and content can be passed as parameters
 ///

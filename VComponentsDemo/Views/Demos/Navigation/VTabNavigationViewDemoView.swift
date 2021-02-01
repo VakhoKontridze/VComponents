@@ -52,7 +52,7 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
             pageOne: VTabNavigationViewPage(item: tabItem(iconName: "Artists", title: "Artists"), content: pageOne),
             pageTwo: VTabNavigationViewPage(item: tabItem(iconName: "Albums", title: "Albums"), content: pageTwo),
             pageThree: VTabNavigationViewPage(item: tabItem(iconName: "Songs", title: "Songs"), content: pageThree),
-            pageFour: VTabNavigationViewPage(item: tabItem(iconName: "Favorites.On", title: "Favorites"), content: pageFour)
+            pageFour: VTabNavigationViewPage(item: tabItem(iconName: "Favorites", title: "Favorites"), content: pageFour)
         )
     }
 

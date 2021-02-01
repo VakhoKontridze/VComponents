@@ -68,7 +68,7 @@ extension VDialogDemoView {
             text: $description
         )
         
-        VSegmentedPicker(selection: $dialogButtons, headerTitle: "BUttons")
+        VSegmentedPicker(selection: $dialogButtons, headerTitle: "Buttons")
     }
 }
 

@@ -21,24 +21,24 @@ struct HomeView: View {
         .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
         .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
-        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog]),
+        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu]),
 //        .init(id: 8, title: "Messages", rows: []),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar]),
-        .init(id: 10, title: "Core", rows: [.baseText, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
+        .init(id: 10, title: "Core", rows: [.text, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
     ]
 
     private enum HomeRow: Int, DemoableRow {
         case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink
         case toggle, checkBox, radioButton
-        case segmentedPicker, /*dropDown,*/ wheelPicker /*, tabHeader*/
+        case segmentedPicker, /*dropDown,*/ wheelPicker
         case /*stepper,*/ slider,  rangeSlider
         case textField /*, textView*/
         case sheet, section, table, accordion
         case tabNavigationView, navigationView
-        case modal, halfModal, sideBar, dialog /*, menu*/ /*, actionSheet*/
+        case modal, halfModal, sideBar, dialog, menu /*, actionSheet*/
         /*case*/ /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
-        case baseText, baseButton, baseTextField, lazyList, baseList, baseView
+        case text, baseButton, baseTextField, lazyList, baseList, baseView
 
         var title: String {
             switch self {
@@ -74,11 +74,12 @@ struct HomeView: View {
             case .halfModal: return VHalfModalDemoView.navigationBarTitle
             case .sideBar: return VSideBarDemoView.navigationBarTitle
             case .dialog: return VDialogDemoView.navigationBarTitle
+            case .menu: return VMenuDemoView.navigationBarTitle
 
             case .spinner: return VSpinnerDemoView.navigationBarTitle
             case .progressBar: return VProgressBarDemoView.navigationBarTitle
 
-            case .baseText: return VTextDemoView.navigationBarTitle
+            case .text: return VTextDemoView.navigationBarTitle
             case .baseButton: return VBaseButtonDemoView.navigationBarTitle
             case .baseTextField: return VBaseTextFieldDemoView.navigationBarTitle
             case .lazyList: return VLazyListDemoView.navigationBarTitle
@@ -121,11 +122,12 @@ struct HomeView: View {
             case .halfModal: VHalfModalDemoView()
             case .sideBar: VSideBarDemoView()
             case .dialog: VDialogDemoView()
+            case .menu: VMenuDemoView()
 
             case .spinner: VSpinnerDemoView()
             case .progressBar: VProgressBarDemoView()
 
-            case .baseText: VTextDemoView()
+            case .text: VTextDemoView()
             case .baseButton: VBaseButtonDemoView()
             case .baseTextField: VBaseTextFieldDemoView()
             case .lazyList: VLazyListDemoView()
@@ -134,6 +136,8 @@ struct HomeView: View {
             }
         }
     }
+    
+
 }
 
 // MARK:- Body
