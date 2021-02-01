@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Menu Row
-/// Enum that represens menu row, such has button, or expandable menu
+/// Enum that represens menu row, such ha button, buttons with icons, or expandable menu
 public enum VMenuRow {
     case button(action: () -> Void, title: String)
     case buttonSystemIcon(action: () -> Void, title: String, name: String)

@@ -34,8 +34,8 @@ import SwiftUI
 ///
 /// Full use of overriden action and event callbacks:
 /// ```
-/// @State private var state: VBaseTextFieldState = .enabled
-/// @State private var text: String = "Lorem ipsum"
+/// @State var state: VBaseTextFieldState = .enabled
+/// @State var text: String = "Lorem ipsum"
 ///
 /// var body: some View {
 ///     VBaseTextField(

@@ -48,8 +48,8 @@ import SwiftUI
 ///     return model
 /// }()
 ///
-/// @State private var state: VTextFieldState = .enabled
-/// @State private var text: String = "Lorem ipsum"
+/// @State var state: VTextFieldState = .enabled
+/// @State var text: String = "Lorem ipsum"
 ///
 /// var body: some View {
 ///     VTextField(

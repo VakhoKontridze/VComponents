@@ -21,7 +21,7 @@ struct HomeView: View {
         .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
         .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
-        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu]),
+        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
 //        .init(id: 8, title: "Messages", rows: []),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar]),
         .init(id: 10, title: "Core", rows: [.text, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
@@ -34,8 +34,8 @@ struct HomeView: View {
         case /*stepper,*/ slider,  rangeSlider
         case textField /*, textView*/
         case sheet, section, table, accordion
-        case tabNavigationView, navigationView
-        case modal, halfModal, sideBar, dialog, menu /*, actionSheet*/
+        case tabNavigationView, navigationView /*, pagingView*/
+        case modal, halfModal, sideBar, dialog, menu, actionSheet
         /*case*/ /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
         case text, baseButton, baseTextField, lazyList, baseList, baseView
@@ -75,6 +75,7 @@ struct HomeView: View {
             case .sideBar: return VSideBarDemoView.navigationBarTitle
             case .dialog: return VDialogDemoView.navigationBarTitle
             case .menu: return VMenuDemoView.navigationBarTitle
+            case .actionSheet: return VActionSheetDemoView.navigationBarTitle
 
             case .spinner: return VSpinnerDemoView.navigationBarTitle
             case .progressBar: return VProgressBarDemoView.navigationBarTitle
@@ -123,6 +124,7 @@ struct HomeView: View {
             case .sideBar: VSideBarDemoView()
             case .dialog: VDialogDemoView()
             case .menu: VMenuDemoView()
+            case .actionSheet: VActionSheetDemoView()
 
             case .spinner: VSpinnerDemoView()
             case .progressBar: VProgressBarDemoView()
@@ -136,8 +138,6 @@ struct HomeView: View {
             }
         }
     }
-    
-
 }
 
 // MARK:- Body

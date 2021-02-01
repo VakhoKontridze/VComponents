@@ -26,22 +26,22 @@ import SwiftUI
 ///         action: { isPresented = true },
 ///         title: "Present"
 ///     )
-///     .vDialog(isPresented: $isPresented, dialog: {
-///         VDialog(
-///             buttons: .two(
-///                 primary: .init(
-///                     model: .primary,
-///                     title: "Confirm",
-///                     action: { print("Confirmed") }
+///         .vDialog(isPresented: $isPresented, dialog: {
+///             VDialog(
+///                 buttons: .two(
+///                     primary: .init(
+///                         model: .primary,
+///                         title: "Confirm",
+///                         action: { print("Confirmed") }
+///                     ),
+///                     secondary: .init(
+///                         model: .secondary,
+///                         title: "Cancel",
+///                         action: { print("Cancelled") }
+///                     )
 ///                 ),
-///                 secondary: .init(
-///                     model: .secondary,
-///                     title: "Cancel",
-///                     action: { print("Cancelled") }
-///                 )
-///             ),
-///             title: "Lorem ipsum dolor sit amet",
-///             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///                 title: "Lorem ipsum dolor sit amet",
+///                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 ///         )
 ///     })
 /// }

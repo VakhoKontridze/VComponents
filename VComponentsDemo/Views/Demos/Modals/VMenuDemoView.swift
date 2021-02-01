@@ -43,7 +43,7 @@ extension VMenuDemoView {
                     ])
                 ])
             ],
-            title: "Lorem ipsum"
+            title: "Present"
         )
     }
     
