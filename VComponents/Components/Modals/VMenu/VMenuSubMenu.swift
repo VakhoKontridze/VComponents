@@ -32,10 +32,10 @@ extension VMenuSubMenu {
                     Image(systemName: name)
                 })
             
-            case .buttonAssetIcon(let action, let title, let name):
+            case .buttonAssetIcon(let action, let title, let name, let bundle):
                 Button(action: action, label: {
                     Text(title)
-                    Image(name)
+                    Image(name, bundle: bundle)
                 })
             
             case .menu(let title, let rows):

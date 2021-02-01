@@ -34,7 +34,7 @@ struct HomeView: View {
         case /*stepper,*/ slider,  rangeSlider
         case textField /*, textView*/
         case sheet, section, table, accordion
-        case tabNavigationView, navigationView /*, pagingView*/
+        case tabNavigationView, navigationView
         case modal, halfModal, sideBar, dialog, menu, actionSheet
         /*case*/ /*, banner*/ /*, toast*/
         case spinner, progressBar /*, pagingIndicator*/
