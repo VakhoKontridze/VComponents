@@ -31,15 +31,15 @@ extension VMenuDemoView {
             rows: [
                 .buttonSystemIcon(action: {}, title: "One", name: "swift"),
                 .buttonAssetIcon(action: {}, title: "Two", name: "Favorites"),
-                .button(action: {}, title: "Three"),
-                .button(action: {}, title: "Four"),
+                .standard(action: {}, title: "Three"),
+                .standard(action: {}, title: "Four"),
                 .menu(title: "Five...", rows: [
-                    .button(action: {}, title: "One"),
-                    .button(action: {}, title: "Two"),
-                    .button(action: {}, title: "Three"),
+                    .standard(action: {}, title: "One"),
+                    .standard(action: {}, title: "Two"),
+                    .standard(action: {}, title: "Three"),
                     .menu(title: "Four...", rows: [
-                        .button(action: {}, title: "One"),
-                        .button(action: {}, title: "Two"),
+                        .standard(action: {}, title: "One"),
+                        .standard(action: {}, title: "Two"),
                     ])
                 ])
             ],

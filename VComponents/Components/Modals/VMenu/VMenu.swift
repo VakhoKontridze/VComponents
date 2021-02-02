@@ -18,8 +18,8 @@ import SwiftUI
 /// VMenu(
 ///     preset: .secondary(),
 ///     rows: [
-///         .buttonSystemIcon(action: {}, title: "One", name: "swift"),
-///         .buttonAssetIcon(action: {}, title: "Two", name: "Favorites"),
+///         .withSystemIcon(action: {}, title: "One", name: "swift"),
+///         .withAssetIcon(action: {}, title: "Two", name: "Favorites"),
 ///         .button(action: {}, title: "Three"),
 ///         .button(action: {}, title: "Four"),
 ///         .menu(title: "Five...", rows: [
@@ -143,17 +143,17 @@ struct VMenu_Previews: PreviewProvider {
         VMenu(
             preset: .secondary(),
             rows: [
-                .buttonSystemIcon(action: {}, title: "One", name: "swift"),
-                .buttonAssetIcon(action: {}, title: "Two", name: "Favorites"),
-                .button(action: {}, title: "Three"),
-                .button(action: {}, title: "Four"),
+                .withSystemIcon(action: {}, title: "One", name: "swift"),
+                .withAssetIcon(action: {}, title: "Two", name: "Favorites"),
+                .standard(action: {}, title: "Three"),
+                .standard(action: {}, title: "Four"),
                 .menu(title: "Five...", rows: [
-                    .button(action: {}, title: "One"),
-                    .button(action: {}, title: "Two"),
-                    .button(action: {}, title: "Three"),
+                    .standard(action: {}, title: "One"),
+                    .standard(action: {}, title: "Two"),
+                    .standard(action: {}, title: "Three"),
                     .menu(title: "Four...", rows: [
-                        .button(action: {}, title: "One"),
-                        .button(action: {}, title: "Two"),
+                        .standard(action: {}, title: "One"),
+                        .standard(action: {}, title: "Two"),
                     ])
                 ])
             ],

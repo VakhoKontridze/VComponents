@@ -111,7 +111,7 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
     }
 
     private func tabItem(iconName: String, title: String) -> some View {
-        VStack(content: {
+        VStack(spacing: 0, content: {
             Image(iconName).renderingMode(.template)
             
             VText(

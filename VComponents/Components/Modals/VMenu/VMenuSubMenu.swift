@@ -23,16 +23,16 @@ extension VMenuSubMenu {
     var body: some View {
         ForEach(rows.reversed().enumeratedArray(), id: \.offset, content: { (i, button) in
             switch button {
-            case .button(let action, let title):
+            case .standard(let action, let title):
                 Button(title, action: action)
                 
-            case .buttonSystemIcon(let action, let title, let name):
+            case .withSystemIcon(let action, let title, let name):
                 Button(action: action, label: {
                     Text(title)
                     Image(systemName: name)
                 })
             
-            case .buttonAssetIcon(let action, let title, let name, let bundle):
+            case .withAssetIcon(let action, let title, let name, let bundle):
                 Button(action: action, label: {
                     Text(title)
                     Image(name, bundle: bundle)
