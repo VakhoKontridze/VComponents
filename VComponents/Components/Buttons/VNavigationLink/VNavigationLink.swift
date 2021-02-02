@@ -57,7 +57,7 @@ public struct VNavigationLink<Destination, Label>: View
         case state
     }
     
-    private let linkType: VNavigationLinkType
+    private let linkButtonType: VNavigationLinkType
     
     @State private var isActiveByTap: Bool = false  // Managed internally
     @Binding private var isActiveByState: Bool      // Binds to presenter view
@@ -75,7 +75,7 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.triggerType = .tap
-        self.linkType = linkPreset.linkType
+        self.linkButtonType = linkPreset.buttonType
         self.state = state
         self._isActiveByState = .constant(false)
         self.destination = destination
@@ -107,7 +107,7 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.triggerType = .state
-        self.linkType = linkPreset.linkType
+        self.linkButtonType = linkPreset.buttonType
         self.state = state
         self._isActiveByState = isActive
         self.destination = destination
@@ -139,7 +139,7 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.triggerType = .tap
-        self.linkType = .custom
+        self.linkButtonType = .custom
         self.state = state
         self._isActiveByState = .constant(false)
         self.destination = destination
@@ -154,7 +154,7 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.triggerType = .state
-        self.linkType = .custom
+        self.linkButtonType = .custom
         self.state = state
         self._isActiveByState = isActive
         self.destination = destination
@@ -180,46 +180,13 @@ extension VNavigationLink {
             }())
     }
     
-    // Shared with VMenu
-    @ViewBuilder private func labelView(isActive: Binding<Bool>) -> some View {
-        switch linkType {
-        case .primary(let model):
-            VPrimaryButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: { isActive.wrappedValue = true },
-                content: label
-            )
-            
-        case .secondary(let model):
-            VSecondaryButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: { isActive.wrappedValue = true },
-                content: label
-            )
-            
-        case .square(let model):
-            VSquareButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: { isActive.wrappedValue = true },
-                content: label
-            )
-            
-        case .plain(let model):
-            VPlainButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: { isActive.wrappedValue = true },
-                content: label
-            )
-            
-        case .custom:
-            label()
-                .allowsHitTesting(state.isEnabled)
-                .onTapGesture(perform: { isActive.wrappedValue = true })
-        }
+    private func labelView(isActive: Binding<Bool>) -> some View {
+        VNavigationLinkType.navLinkButton(
+            buttonType: linkButtonType,
+            isEnabled: state.isEnabled,
+            action: { isActive.wrappedValue = true },
+            label: label
+        )
     }
     
     private var destinationView: some View {

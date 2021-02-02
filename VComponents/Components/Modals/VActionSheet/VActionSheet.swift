@@ -26,8 +26,8 @@ import SwiftUI
 ///                 title: "Lorem ipsum dolor sit amet",
 ///                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///                 rows: [
-///                     .standard(action: {}, title: "One"),
-///                     .standard(action: {}, title: "Two"),
+///                     .titled(action: {}, title: "One"),
+///                     .titled(action: {}, title: "Two"),
 ///                     .destructive(action: {}, title: "Three"),
 ///                     .cancel(title: "Cancel")
 ///                 ]

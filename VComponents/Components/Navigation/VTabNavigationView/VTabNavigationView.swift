@@ -184,26 +184,19 @@ extension VTabNavigationView {
                 case .titled(let title):
                     Text(title)
                     
-                case .withSystemIcon(let title, let name):
-                    switch title {
-                    case let title?:
-                        Text(title)
-                        Image(systemName: name).renderingMode(.template)
-                        
-                    case nil:
-                        Image(systemName: name).renderingMode(.template)
-                    }
+                case .systemIcon(let name):
+                    Image(systemName: name).renderingMode(.template)
                 
-                case .withAssetIcon(let title, let name, let bundle):
-                    switch title {
-                    case let title?:
-                        Text(title)
-                        Text(title)
-                        Image(name, bundle: bundle).renderingMode(.template)
-                        
-                    case nil:
-                        Image(name, bundle: bundle).renderingMode(.template)
-                    }
+                case .assetIcon(let name, let bundle):
+                    Image(name, bundle: bundle).renderingMode(.template)
+                    
+                case .titledSystemIcon(let title, let name):
+                    Text(title)
+                    Image(systemName: name).renderingMode(.template)
+                
+                case .titledAssetIcon(let title, let name, let bundle):
+                    Text(title)
+                    Image(name, bundle: bundle).renderingMode(.template)
                 }
             })
     }

@@ -70,15 +70,6 @@ extension VWheelPickerModel.Colors {
     }
 }
 
-//extension VWheelPickerModel.Colors.StateColors {
-//    func `for`(_ state: VWheelPickerState) -> Color {
-//        switch state {
-//        case .enabled: return enabled
-//        case .disabled: return disabled
-//        }
-//    }
-//}
-
 // MARK:- Fonts
 extension VWheelPickerModel {
     public struct Fonts {

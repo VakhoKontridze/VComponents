@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
 ///
-/// Best suited for 5+ items.
+/// Best suited for 5+ items
 ///
 /// Model, state, header, and footer can be passed as parameters
 ///

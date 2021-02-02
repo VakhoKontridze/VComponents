@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Action Sheet Row
-/// Enum that represens action sheet row, such as standard, destructive, or cancel
+/// Enum that represens action sheet row, such as titled, destructive, or cancel
 ///
 /// If two cancel buttons are used, app would crash
 public enum VActionSheetRow {

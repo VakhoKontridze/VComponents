@@ -17,7 +17,7 @@ public enum VNavigationLinkPreset {
     case square(model: VSquareButtonModel = .init())
     case plain(model: VPlainButtonModel = .init())
     
-    var linkType: VNavigationLinkType {
+    var buttonType: VNavigationLinkType {
         switch self {
         case .primary(let model): return .primary(model: model)
         case .secondary(let model): return .secondary(model: model)
@@ -56,4 +56,100 @@ enum VNavigationLinkType {
     case square(model: VSquareButtonModel)
     case plain(model: VPlainButtonModel)
     case custom
+}
+
+// MARK:- V Navigation Link Type Buttons
+extension VNavigationLinkType {
+    @ViewBuilder static func navLinkButton<Label>(
+        buttonType: VNavigationLinkType,
+        isEnabled: Bool,
+        action: @escaping () -> Void,
+        @ViewBuilder label: @escaping () -> Label
+    ) -> some View
+        where Label: View
+    {
+        switch buttonType {
+        case .primary(let model):
+            VPrimaryButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: action,
+                content: label
+            )
+            
+        case .secondary(let model):
+            VSecondaryButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: action,
+                content: label
+            )
+            
+        case .square(let model):
+            VSquareButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: action,
+                content: label
+            )
+            
+        case .plain(let model):
+            VPlainButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: action,
+                content: label
+            )
+            
+        case .custom:
+            label()
+                .allowsHitTesting(isEnabled)
+                .onTapGesture(perform: action)
+        }
+    }
+    
+    @ViewBuilder static func pickerButton<Label>(
+        buttonType: VNavigationLinkType,
+        isEnabled: Bool,
+        @ViewBuilder label: @escaping () -> Label
+    ) -> some View
+        where Label: View
+    {
+        switch buttonType {
+        case .primary(let model):
+            VPrimaryButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: {},
+                content: label
+            )
+            
+        case .secondary(let model):
+            VSecondaryButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: {},
+                content: label
+            )
+            
+        case .square(let model):
+            VSquareButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: {},
+                content: label
+            )
+            
+        case .plain(let model):
+            VPlainButton(
+                model: model,
+                state: isEnabled ? .enabled : .disabled,
+                action: {},
+                content: label
+            )
+            
+        case .custom:
+            label()
+        }
+    }
 }

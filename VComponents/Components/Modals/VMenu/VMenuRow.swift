@@ -8,10 +8,10 @@
 import Foundation
 
 // MARK:- V Menu Row
-/// Enum that represens menu row, such as standard, with icons, or expandable menu
+/// Enum that represens menu row, such as titled, with icons, or expandable menu
 public enum VMenuRow {
-    case standard(action: () -> Void, title: String)
-    case withSystemIcon(action: () -> Void, title: String, name: String)
-    case withAssetIcon(action: () -> Void, title: String, name: String, bundle: Bundle? = nil)
+    case titled(action: () -> Void, title: String)
+    case titledSystemIcon(action: () -> Void, title: String, name: String)
+    case titledAssetIcon(action: () -> Void, title: String, name: String, bundle: Bundle? = nil)
     case menu(title: String, rows: [VMenuRow])
 }

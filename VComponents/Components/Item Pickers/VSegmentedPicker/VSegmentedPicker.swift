@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
 ///
-/// Best suited for 2 – 3 items.
+/// Best suited for 2 – 3 items
 ///
 /// Model, state, header, footer, and disabled indexes can be passed as parameters
 ///
@@ -55,7 +55,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     @State private var animatableSelectedIndex: Int?
     
     private let state: VSegmentedPickerState
-    @State private var pressedIndex: Int? = nil
+    @State private var pressedIndex: Int?
     private func rowState(for index: Int) -> VSegmentedPickerRowState { .init(
         isEnabled: state.isEnabled && !disabledIndexes.contains(index),
         isPressed: pressedIndex == index
@@ -343,7 +343,7 @@ private extension VSegmentedPicker {
 struct VSegmentedPicker_Previews: PreviewProvider {
     @State private static var selection: PickerRow = .red
     
-    private enum PickerRow: Int, VPickableTitledItem {
+    enum PickerRow: Int, VPickableTitledItem {
         case red, green, blue
     
         var pickerTitle: String {

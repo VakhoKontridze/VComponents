@@ -49,10 +49,10 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
     var body: some View {
         VTabNavigationView(
             selection: $selection,
-            pageOne: VTabNavigationViewPage(item: .withAssetIcon(title: "Artists", name: "Artists"), content: pageOne),
-            pageTwo: VTabNavigationViewPage(item: .withAssetIcon(title: "Albums", name: "Albums"), content: pageTwo),
-            pageThree: VTabNavigationViewPage(item: .withAssetIcon(title: "Songs", name: "Songs"), content: pageThree),
-            pageFour: VTabNavigationViewPage(item: .withAssetIcon(title: "Favorites", name: "Favorites"), content: pageFour)
+            pageOne: VTabNavigationViewPage(item: .titledAssetIcon(title: "Artists", name: "Artists"), content: pageOne),
+            pageTwo: VTabNavigationViewPage(item: .titledAssetIcon(title: "Albums", name: "Albums"), content: pageTwo),
+            pageThree: VTabNavigationViewPage(item: .titledAssetIcon(title: "Songs", name: "Songs"), content: pageThree),
+            pageFour: VTabNavigationViewPage(item: .titledAssetIcon(title: "Favorites", name: "Favorites"), content: pageFour)
         )
     }
 

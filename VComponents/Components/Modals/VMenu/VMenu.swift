@@ -18,8 +18,8 @@ import SwiftUI
 /// VMenu(
 ///     preset: .secondary(),
 ///     rows: [
-///         .withSystemIcon(action: {}, title: "One", name: "swift"),
-///         .withAssetIcon(action: {}, title: "Two", name: "Favorites"),
+///         .titledSystemIcon(action: {}, title: "One", name: "swift"),
+///         .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
 ///         .button(action: {}, title: "Three"),
 ///         .button(action: {}, title: "Four"),
 ///         .menu(title: "Five...", rows: [
@@ -38,7 +38,7 @@ import SwiftUI
 ///
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
-    private let menuType: VMenuType
+    private let menuButtonType: VMenuButtonType
     private let state: VNavigationLinkState
     private let rows: [VMenuRow]
     private let label: () -> Label
@@ -50,7 +50,7 @@ public struct VMenu<Label>: View where Label: View {
         rows: [VMenuRow],
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.menuType = menuButtonPreset.linkType
+        self.menuButtonType = menuButtonPreset.buttonType
         self.state = state
         self.rows = rows
         self.label = label
@@ -78,7 +78,7 @@ public struct VMenu<Label>: View where Label: View {
         rows: [VMenuRow],
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.menuType = .custom
+        self.menuButtonType = .custom
         self.state = state
         self.rows = rows
         self.label = label
@@ -89,51 +89,19 @@ public struct VMenu<Label>: View where Label: View {
 extension VMenu {
     public var body: some View {
         Menu(content: contentView, label: labelView)
-            .allowsHitTesting(state.isEnabled)  // Addingthis on label has no effect
+            .allowsHitTesting(state.isEnabled)  // Adding this on label has no effect
     }
     
     private func contentView() -> some View {
         VMenuSubMenu(rows: rows)
     }
     
-    // Shared with VNavigationLink
     @ViewBuilder private func labelView() -> some View {
-        switch menuType {
-        case .primary(let model):
-            VPrimaryButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: {},
-                content: label
-            )
-            
-        case .secondary(let model):
-            VSecondaryButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: {},
-                content: label
-            )
-            
-        case .square(let model):
-            VSquareButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: {},
-                content: label
-            )
-            
-        case .plain(let model):
-            VPlainButton(
-                model: model,
-                state: state.isEnabled ? .enabled : .disabled,
-                action: {},
-                content: label
-            )
-            
-        case .custom:
-            label()
-        }
+        VMenuButtonType.pickerButton(
+            buttonType: menuButtonType,
+            isEnabled: state.isEnabled,
+            label: label
+        )
     }
 }
 
@@ -143,17 +111,17 @@ struct VMenu_Previews: PreviewProvider {
         VMenu(
             preset: .secondary(),
             rows: [
-                .withSystemIcon(action: {}, title: "One", name: "swift"),
-                .withAssetIcon(action: {}, title: "Two", name: "Favorites"),
-                .standard(action: {}, title: "Three"),
-                .standard(action: {}, title: "Four"),
+                .titledSystemIcon(action: {}, title: "One", name: "swift"),
+                .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
+                .titled(action: {}, title: "Three"),
+                .titled(action: {}, title: "Four"),
                 .menu(title: "Five...", rows: [
-                    .standard(action: {}, title: "One"),
-                    .standard(action: {}, title: "Two"),
-                    .standard(action: {}, title: "Three"),
+                    .titled(action: {}, title: "One"),
+                    .titled(action: {}, title: "Two"),
+                    .titled(action: {}, title: "Three"),
                     .menu(title: "Four...", rows: [
-                        .standard(action: {}, title: "One"),
-                        .standard(action: {}, title: "Two"),
+                        .titled(action: {}, title: "One"),
+                        .titled(action: {}, title: "Two"),
                     ])
                 ])
             ],

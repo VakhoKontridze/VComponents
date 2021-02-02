@@ -14,7 +14,7 @@ struct VNavigationLinkDemoView: View {
     static let navigationBarTitle: String = "Navigation Link"
     
     @State private var state: VNavigationLinkState = .enabled
-    @State private var navigationLinkType: VNavigationLinkTypeHelper = .primary
+    @State private var navigationLinkButtonType: VNavigationLinkButtonTypeHelper = .primary
 }
 
 // MARK:- Body
@@ -26,7 +26,7 @@ extension VNavigationLinkDemoView {
     }
     
     @ViewBuilder private func component() -> some View {
-        switch navigationLinkType.preset {
+        switch navigationLinkButtonType.preset {
         case let preset?: VNavigationLink(preset: preset, state: state, destination: destination, title: buttonTitle)
         case nil: VNavigationLink(state: state, destination: destination, label: buttonContent)
         }
@@ -35,11 +35,11 @@ extension VNavigationLinkDemoView {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VWheelPicker(selection: $navigationLinkType, headerTitle: "Type")
+        VWheelPicker(selection: $navigationLinkButtonType, headerTitle: "Preset")
     }
     
     private var buttonTitle: String {
-        switch navigationLinkType.preset {
+        switch navigationLinkButtonType.preset {
         case .square: return "Lorem"
         default: return "Lorem ipsum"
         }
@@ -68,7 +68,7 @@ extension VNavigationLinkState: VPickableTitledItem {
     }
 }
 
-private enum VNavigationLinkTypeHelper: Int, VPickableTitledItem {
+enum VNavigationLinkButtonTypeHelper: Int, VPickableTitledItem {
     case primary
     case secondary
     case square
@@ -96,8 +96,8 @@ private enum VNavigationLinkTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VNavigationLinkPreset {
-    var helperType: VNavigationLinkTypeHelper {
+extension VNavigationLinkPreset {
+    var helperType: VNavigationLinkButtonTypeHelper {
         switch self {
         case .primary: return .primary
         case .secondary: return .secondary

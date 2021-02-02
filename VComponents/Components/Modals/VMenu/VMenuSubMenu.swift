@@ -21,18 +21,18 @@ struct VMenuSubMenu: View {
 // MARK:- Body
 extension VMenuSubMenu {
     var body: some View {
-        ForEach(rows.reversed().enumeratedArray(), id: \.offset, content: { (i, button) in
+        ForEach(rows.enumeratedArray().reversed(), id: \.offset, content: { (_, button) in
             switch button {
-            case .standard(let action, let title):
+            case .titled(let action, let title):
                 Button(title, action: action)
                 
-            case .withSystemIcon(let action, let title, let name):
+            case .titledSystemIcon(let action, let title, let name):
                 Button(action: action, label: {
                     Text(title)
                     Image(systemName: name)
                 })
             
-            case .withAssetIcon(let action, let title, let name, let bundle):
+            case .titledAssetIcon(let action, let title, let name, let bundle):
                 Button(action: action, label: {
                     Text(title)
                     Image(name, bundle: bundle)

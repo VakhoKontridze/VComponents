@@ -14,4 +14,4 @@ import SwiftUI
 public typealias VMenuButtonPreset = VNavigationLinkPreset
 
 // MARK:- V Menu Type
-typealias VMenuType = VNavigationLinkType
+typealias VMenuButtonType = VNavigationLinkType

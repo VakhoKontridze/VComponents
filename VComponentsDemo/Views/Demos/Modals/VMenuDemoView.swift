@@ -14,6 +14,7 @@ struct VMenuDemoView: View {
     static let navigationBarTitle: String = "Menu"
     
     @State private var state: VMenuState = .enabled
+    @State private var menuButtonType: VNavigationLinkButtonTypeHelper = .primary
 }
 
 // MARK:- Body
@@ -24,32 +25,52 @@ extension VMenuDemoView {
         })
     }
     
-    private func component() -> some View {
-        VMenu(
-            preset: .secondary(),
-            state: state,
-            rows: [
-                .withSystemIcon(action: {}, title: "One", name: "swift"),
-                .withAssetIcon(action: {}, title: "Two", name: "Favorites"),
-                .standard(action: {}, title: "Three"),
-                .standard(action: {}, title: "Four"),
-                .menu(title: "Five...", rows: [
-                    .standard(action: {}, title: "One"),
-                    .standard(action: {}, title: "Two"),
-                    .standard(action: {}, title: "Three"),
-                    .menu(title: "Four...", rows: [
-                        .standard(action: {}, title: "One"),
-                        .standard(action: {}, title: "Two"),
-                    ])
-                ])
-            ],
-            title: "Present"
-        )
+    @ViewBuilder private func component() -> some View {
+        switch menuButtonType.preset {
+        case let preset?:
+            VMenu(
+                preset: preset,
+                state: state,
+                rows: rows,
+                title: buttonTitle
+            )
+        
+        case nil:
+            VMenu(
+                state: state,
+                rows: rows,
+                label: buttonContent
+            )
+        }
     }
     
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(selection: $state, headerTitle: "State")
+        
+        VWheelPicker(selection: $menuButtonType, headerTitle: "Preset")
     }
+    
+    private var rows: [VMenuRow] {
+        [
+            .titledSystemIcon(action: {}, title: "One", name: "swift"),
+            .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
+            .titled(action: {}, title: "Three"),
+            .titled(action: {}, title: "Four"),
+            .menu(title: "Five...", rows: [
+                .titled(action: {}, title: "One"),
+                .titled(action: {}, title: "Two"),
+                .titled(action: {}, title: "Three"),
+                .menu(title: "Four...", rows: [
+                    .titled(action: {}, title: "One"),
+                    .titled(action: {}, title: "Two"),
+                ])
+            ])
+        ]
+    }
+    
+    private var buttonTitle: String { "Present" }
+
+    private func buttonContent() -> some View { DemoIconContentView() }
 }
 
 // MARK:- Helpers
