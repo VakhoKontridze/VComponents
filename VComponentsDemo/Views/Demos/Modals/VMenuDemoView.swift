@@ -29,8 +29,8 @@ extension VMenuDemoView {
             preset: .secondary(),
             state: state,
             rows: [
-                .buttonSystemIcon(action: {}, title: "One", name: "swift"),
-                .buttonAssetIcon(action: {}, title: "Two", name: "Favorites"),
+                .withSystemIcon(action: {}, title: "One", name: "swift"),
+                .withAssetIcon(action: {}, title: "Two", name: "Favorites"),
                 .standard(action: {}, title: "Three"),
                 .standard(action: {}, title: "Four"),
                 .menu(title: "Five...", rows: [
