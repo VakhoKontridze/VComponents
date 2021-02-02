@@ -19,74 +19,63 @@ import SwiftUI
 /// ```
 /// @State var selection: Int = 0
 ///
-/// func item(_ title: String) -> some View {
-///     VStack(spacing: 5, content: {
-///         Image(systemName: "swift")
-///             .resizable()
-///             .frame(width: 20, height: 20)
-///
-///         Text(title)
-///     })
-/// }
-///
 /// var body: some View {
 ///     VTabNavigationView(
 ///         selection: $selection,
 ///         pageOne: VTabNavigationViewPage(
-///             item: item("Red"),
+///             item: .withAssetIcon(title: "Red", name: "Red"),
 ///             content: Color.red
 ///         ),
 ///         pageTwo: VTabNavigationViewPage(
-///             item: item("Green"),
+///             item: .withAssetIcon(title: "Green", name: "Green"),
 ///             content: Color.green
 ///         ),
 ///         pageThree: VTabNavigationViewPage(
-///             item: item("Blue"),
+///             item: .withAssetIcon(title: "Blue", name: "Blue"),
 ///             content: Color.blue
 ///         ),
 ///         pageFour: VTabNavigationViewPage(
-///             item: item("Pink"),
+///             item: .withAssetIcon(title: "Pink", name: "Pink"),
 ///             content: Color.pink
 ///         ),
 ///         pageFive: VTabNavigationViewPage(
-///             item: item("Orange"),
+///             item: .withAssetIcon(title: "Orange", name: "Orange"),
 ///             content: Color.orange
 ///         )
 ///     )
 /// }
 /// ```
 ///
-public struct VTabNavigationView<C0, C1, C2, C3, C4, C5, ItemContent>: View
+public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
     where
         C0: View,
         C1: View,
         C2: View,
         C3: View,
         C4: View,
-        C5: View,
-        ItemContent: View
+        C5: View
 {
     // MARK: Properties
     private let model: VTabNavigationViewModel
     
     @Binding private var selection: Int
 
-    private let pageOne: VTabNavigationViewPage<C0, ItemContent>?
-    private let pageTwo: VTabNavigationViewPage<C1, ItemContent>?
-    private let pageThree: VTabNavigationViewPage<C2, ItemContent>?
-    private let pageFour: VTabNavigationViewPage<C3, ItemContent>?
-    private let pageFive: VTabNavigationViewPage<C4, ItemContent>?
-    private let pageSix: VTabNavigationViewPage<C5, ItemContent>?
+    private let pageOne: VTabNavigationViewPage<C0>?
+    private let pageTwo: VTabNavigationViewPage<C1>?
+    private let pageThree: VTabNavigationViewPage<C2>?
+    private let pageFour: VTabNavigationViewPage<C3>?
+    private let pageFive: VTabNavigationViewPage<C4>?
+    private let pageSix: VTabNavigationViewPage<C5>?
     
     // MARK: Initializers
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
-        pageOne: VTabNavigationViewPage<C0, ItemContent>,
-        pageTwo: VTabNavigationViewPage<C1, ItemContent>,
-        pageThree: VTabNavigationViewPage<C2, ItemContent>,
-        pageFour: VTabNavigationViewPage<C3, ItemContent>,
-        pageFive: VTabNavigationViewPage<C4, ItemContent>
+        pageOne: VTabNavigationViewPage<C0>,
+        pageTwo: VTabNavigationViewPage<C1>,
+        pageThree: VTabNavigationViewPage<C2>,
+        pageFour: VTabNavigationViewPage<C3>,
+        pageFive: VTabNavigationViewPage<C4>
     )
         where C5 == Never
     {
@@ -103,10 +92,10 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5, ItemContent>: View
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
-        pageOne: VTabNavigationViewPage<C0, ItemContent>,
-        pageTwo: VTabNavigationViewPage<C1, ItemContent>,
-        pageThree: VTabNavigationViewPage<C2, ItemContent>,
-        pageFour: VTabNavigationViewPage<C3, ItemContent>
+        pageOne: VTabNavigationViewPage<C0>,
+        pageTwo: VTabNavigationViewPage<C1>,
+        pageThree: VTabNavigationViewPage<C2>,
+        pageFour: VTabNavigationViewPage<C3>
     )
         where
             C4 == Never,
@@ -125,9 +114,9 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5, ItemContent>: View
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
-        pageOne: VTabNavigationViewPage<C0, ItemContent>,
-        pageTwo: VTabNavigationViewPage<C1, ItemContent>,
-        pageThree: VTabNavigationViewPage<C2, ItemContent>
+        pageOne: VTabNavigationViewPage<C0>,
+        pageTwo: VTabNavigationViewPage<C1>,
+        pageThree: VTabNavigationViewPage<C2>
     )
         where
             C3 == Never,
@@ -147,8 +136,8 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5, ItemContent>: View
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
-        pageOne: VTabNavigationViewPage<C0, ItemContent>,
-        pageTwo: VTabNavigationViewPage<C1, ItemContent>
+        pageOne: VTabNavigationViewPage<C0>,
+        pageTwo: VTabNavigationViewPage<C1>
     )
         where
             C2 == Never,
@@ -182,7 +171,7 @@ extension VTabNavigationView {
     }
     
     private func pageContent<PageContent>(
-        _ page: VTabNavigationViewPage<PageContent, ItemContent>
+        _ page: VTabNavigationViewPage<PageContent>
     ) -> some View
         where PageContent: View
     {
@@ -190,18 +179,44 @@ extension VTabNavigationView {
         
         return page.content
             .accentColor(originalAccentColor)
-            .tabItem { page.item }
+            .tabItem({
+                switch page.item {
+                case .titled(let title):
+                    Text(title)
+                    
+                case .withSystemIcon(let title, let name):
+                    switch title {
+                    case let title?:
+                        Text(title)
+                        Image(systemName: name).renderingMode(.template)
+                        
+                    case nil:
+                        Image(systemName: name).renderingMode(.template)
+                    }
+                
+                case .withAssetIcon(let title, let name, let bundle):
+                    switch title {
+                    case let title?:
+                        Text(title)
+                        Text(title)
+                        Image(name, bundle: bundle).renderingMode(.template)
+                        
+                    case nil:
+                        Image(name, bundle: bundle).renderingMode(.template)
+                    }
+                }
+            })
     }
 }
 
 // MARK: Preview
 struct VTabNavigationView_Previews: PreviewProvider {
-    private static let pageOne = VTabNavigationViewPage(item: Text("Red"), content: Color.red)
-    private static let pageTwo = VTabNavigationViewPage(item: Text("Green"), content: Color.green)
-    private static let pageThree = VTabNavigationViewPage(item: Text("Blue"), content: Color.blue)
-    
+    private static let pageOne = VTabNavigationViewPage(item: .titled(title: "Red"), content: Color.red)
+    private static let pageTwo = VTabNavigationViewPage(item: .titled(title: "Green"), content: Color.green)
+    private static let pageThree = VTabNavigationViewPage(item: .titled(title: "Blue"), content: Color.blue)
+
     static var previews: some View {
-        VTabNavigationView<Color, Color, Color, Never, Never, Never, Text>(
+        VTabNavigationView<Color, Color, Color, Never, Never, Never>(
             model: .init(),
             selection: .constant(0),
             pageOne: pageOne,

@@ -49,10 +49,10 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
     var body: some View {
         VTabNavigationView(
             selection: $selection,
-            pageOne: VTabNavigationViewPage(item: tabItem(iconName: "Artists", title: "Artists"), content: pageOne),
-            pageTwo: VTabNavigationViewPage(item: tabItem(iconName: "Albums", title: "Albums"), content: pageTwo),
-            pageThree: VTabNavigationViewPage(item: tabItem(iconName: "Songs", title: "Songs"), content: pageThree),
-            pageFour: VTabNavigationViewPage(item: tabItem(iconName: "Favorites", title: "Favorites"), content: pageFour)
+            pageOne: VTabNavigationViewPage(item: .withAssetIcon(title: "Artists", name: "Artists"), content: pageOne),
+            pageTwo: VTabNavigationViewPage(item: .withAssetIcon(title: "Albums", name: "Albums"), content: pageTwo),
+            pageThree: VTabNavigationViewPage(item: .withAssetIcon(title: "Songs", name: "Songs"), content: pageThree),
+            pageFour: VTabNavigationViewPage(item: .withAssetIcon(title: "Favorites", name: "Favorites"), content: pageFour)
         )
     }
 
@@ -108,19 +108,6 @@ private extension VTabNavigationViewDemoViewWalkthroughView {
         )
             .frame(maxHeight: .infinity, alignment: .bottom)
             .padding(.bottom, 25)
-    }
-
-    private func tabItem(iconName: String, title: String) -> some View {
-        VStack(spacing: 0, content: {
-            Image(iconName).renderingMode(.template)
-            
-            VText(
-                type: .oneLine,
-                font: .body,
-                color: ColorBook.primary,
-                title: title
-            )
-        })
     }
 }
 

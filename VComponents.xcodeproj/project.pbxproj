@@ -90,6 +90,7 @@
 		7A5A5FEF25C88743008667F5 /* VActionSheetRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A5FEE25C88743008667F5 /* VActionSheetRow.swift */; };
 		7A5A5FF325C88840008667F5 /* VActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A5FF225C88840008667F5 /* VActionSheet.swift */; };
 		7A5A5FF725C88F70008667F5 /* VActionSheetDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A5FF625C88F70008667F5 /* VActionSheetDemoView.swift */; };
+		7A5A5FFA25C92376008667F5 /* VTabNavigationPageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A5FF925C92376008667F5 /* VTabNavigationPageItem.swift */; };
 		7A62182025948DAB00515688 /* VBaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62181F25948DAB00515688 /* VBaseViewModel.swift */; };
 		7A62182425948DE800515688 /* VBaseViewNavigationBarCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62182325948DE800515688 /* VBaseViewNavigationBarCenter.swift */; };
 		7A6218292594938C00515688 /* VLazyListType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218282594938C00515688 /* VLazyListType.swift */; };
@@ -312,6 +313,7 @@
 		7A5A5FEE25C88743008667F5 /* VActionSheetRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VActionSheetRow.swift; sourceTree = "<group>"; };
 		7A5A5FF225C88840008667F5 /* VActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VActionSheet.swift; sourceTree = "<group>"; };
 		7A5A5FF625C88F70008667F5 /* VActionSheetDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VActionSheetDemoView.swift; sourceTree = "<group>"; };
+		7A5A5FF925C92376008667F5 /* VTabNavigationPageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTabNavigationPageItem.swift; sourceTree = "<group>"; };
 		7A62181F25948DAB00515688 /* VBaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseViewModel.swift; sourceTree = "<group>"; };
 		7A62182325948DE800515688 /* VBaseViewNavigationBarCenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseViewNavigationBarCenter.swift; sourceTree = "<group>"; };
 		7A6218282594938C00515688 /* VLazyListType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListType.swift; sourceTree = "<group>"; };
@@ -455,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				7A08F857259731350049FB10 /* VTabNavigationView.swift */,
+				7A5A5FF925C92376008667F5 /* VTabNavigationPageItem.swift */,
 				7A08F850259730B50049FB10 /* VTabNavigationViewPage.swift */,
 				7A08F84D25972EB40049FB10 /* VTabNavigationViewModel.swift */,
 				7A08F85B259731E60049FB10 /* VTabNavigationViewAppearance.swift */,
@@ -1428,6 +1431,7 @@
 			files = (
 				7AF3CA8E25B0AD5F00D56042 /* VTableRow.swift in Sources */,
 				7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */,
+				7A5A5FFA25C92376008667F5 /* VTabNavigationPageItem.swift in Sources */,
 				7AF3C8D225AF511800D56042 /* VModalModel.swift in Sources */,
 				7A6218292594938C00515688 /* VLazyListType.swift in Sources */,
 				7A08F85C259731E60049FB10 /* VTabNavigationViewAppearance.swift in Sources */,
