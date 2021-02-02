@@ -72,9 +72,9 @@ extension VRangeSliderDemoView {
                 model: model,
                 difference: diffValue,
                 step: hasStep ? stepValue : nil,
-                state: state,
                 valueLow: $valueLow,
-                valueHigh: $valueHigh
+                valueHigh: $valueHigh,
+                state: state
             )
         })
     }

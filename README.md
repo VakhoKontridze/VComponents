@@ -21,7 +21,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 **Item Pickers.** VSegmentedPicker, VDropDown, VWheelPicker
 
-**Value Pickers.** VSlider, VRangeSlider
+**Value Pickers.** VStepper, VSlider, VRangeSlider
 
 **Inputs.** VTextField
 

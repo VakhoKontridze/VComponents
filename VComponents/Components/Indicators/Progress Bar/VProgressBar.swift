@@ -58,8 +58,8 @@ extension VProgressBar {
             model: model.sliderSubModel,
             range: range,
             step: nil,
-            state: .enabled,
             value: .constant(value),
+            state: .enabled,
             onChange: nil
         )
     }

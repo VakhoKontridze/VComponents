@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Slider
-/// Value picker component that selects value from a bounde a bounded linear range of values
+/// Value picker component that selects value from a bounded linear range of values
 ///
 /// Model, range, step, state, and onChange callback can be passed as parameters
 ///
@@ -43,8 +43,8 @@ public struct VSlider: View {
         model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,
         step: V? = nil,
-        state: VSliderState = .enabled,
         value: Binding<V>,
+        state: VSliderState = .enabled,
         onChange action: ((Bool) -> Void)? = nil
     )
         where

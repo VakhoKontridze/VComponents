@@ -87,8 +87,8 @@ extension VSliderDemoView {
             VSlider(
                 model: model,
                 step: hasStep ? stepValue : nil,
-                state: state,
-                value: $value
+                value: $value,
+                state: state
             )
         })
     }
