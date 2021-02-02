@@ -111,15 +111,6 @@ extension VSegmentedPickerDemoView {
 }
 
 // MARK:- Helpers
-extension VSegmentedPickerState: VPickableTitledItem {
-    public var pickerTitle: String {
-        switch self {
-        case .enabled: return "Enabled"
-        case .disabled: return "Disabled"
-        }
-    }
-}
-
 enum ComponentRGBItem: Int, VPickableTitledItem {
     case red
     case green
