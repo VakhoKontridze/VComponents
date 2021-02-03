@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Side Bar
 /// Modal component that draws a from left side with background, hosts content, and is present when condition is true
 ///
-/// Model, and onAppear and onDisappear callbacks can be passed as parameters
+/// Model can be passed as parameter
 ///
 /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
 ///
@@ -35,23 +35,15 @@ import SwiftUI
 public struct VSideBar<Content> where Content: View {
     // MARK: Properties
     public var model: VSideBarModel
-    
     public var content: () -> Content
-    
-    public var appearAction: (() -> Void)?
-    public var disappearAction: (() -> Void)?
     
     // MARK: Initializers
     public init(
         model: VSideBarModel = .init(),
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
 }
 
@@ -75,9 +67,7 @@ extension View {
                             _VSideBar(
                                 model: sideBar.model,
                                 isPresented: isPresented,
-                                content: sideBar.content,
-                                onAppear: sideBar.appearAction,
-                                onDisappear: sideBar.disappearAction
+                                content: sideBar.content
                             )
                     )
                 }

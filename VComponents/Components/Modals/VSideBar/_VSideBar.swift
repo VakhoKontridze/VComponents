@@ -16,23 +16,16 @@ struct _VSideBar<Content>: View where Content: View {
     @State private var isViewPresented: Bool = false
     
     private let content: () -> Content
-    
-    private let appearAction: (() -> Void)?
-    private let disappearAction: (() -> Void)?
 
     // MARK: Initializers
     init(
         model: VSideBarModel,
         isPresented: Binding<Bool>,
-        content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)?,
-        onDisappear disappearAction: (() -> Void)?
+        content: @escaping () -> Content
     ) {
         self.model = model
         self._isHCPresented = isPresented
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
 }
 
@@ -67,8 +60,6 @@ extension _VSideBar {
         })
             .frame(width: model.layout.width)
             .offset(x: isViewPresented ? 0 : -model.layout.width)
-            .onAppear(perform: appearAction)
-            .onDisappear(perform: disappearAction)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged(dragChanged)
@@ -106,9 +97,7 @@ struct VSideBar_Previews: PreviewProvider {
         _VSideBar(
             model: .init(),
             isPresented: .constant(true),
-            content: { ColorBook.accent },
-            onAppear: nil,
-            onDisappear: nil
+            content: { ColorBook.accent }
         )
     }
 }

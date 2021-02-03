@@ -22,9 +22,6 @@ struct _VHalfModal<Content, HeaderContent>: View
     private let headerContent: (() -> HeaderContent)?
     private let content: () -> Content
     
-    private let appearAction: (() -> Void)?
-    private let disappearAction: (() -> Void)?
-    
     @State private var offset: CGFloat?
     @State private var offsetBeforeDrag: CGFloat?
     
@@ -37,16 +34,12 @@ struct _VHalfModal<Content, HeaderContent>: View
         model: VHalfModalModel,
         isPresented: Binding<Bool>,
         headerContent: (() -> HeaderContent)?,
-        content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)?,
-        onDisappear disappearAction: (() -> Void)?
+        content: @escaping () -> Content
     ) {
         self.model = model
         self._isHCPresented = isPresented
         self.headerContent = headerContent
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
         
         self.validLayout =
             model.layout.height.min <= model.layout.height.ideal &&
@@ -101,8 +94,6 @@ extension _VHalfModal {
                     .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
             })
-                .onAppear(perform: appearAction)
-                .onDisappear(perform: disappearAction)
         }
     }
 
@@ -297,9 +288,7 @@ struct VHalfModal_Previews: PreviewProvider {
                     title: "Lorem ipsum dolor sit amet"
                 )
             },
-            content: { ColorBook.accent },
-            onAppear: nil,
-            onDisappear: nil
+            content: { ColorBook.accent }
         )
     }
 }

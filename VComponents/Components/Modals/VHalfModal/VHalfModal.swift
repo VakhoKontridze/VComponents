@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Half Modal
 /// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true
 ///
-/// Model, header, and onAppear and onDisappear callbacks can be passed as parameters
+/// Model and header can be passed as parameters
 ///
 /// If invalid height parameter are passed during init, layout would invalidate itself, and refuse to draw
 ///
@@ -101,30 +101,21 @@ public struct VHalfModal<Content, HeaderContent>
     public var headerContent: (() -> HeaderContent)?
     public var content: () -> Content
     
-    public var appearAction: (() -> Void)?
-    public var disappearAction: (() -> Void)?
-    
     // MARK: Initializers: Header
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.headerContent = headerContent
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
     
     public init(
         model: VHalfModalModel = .init(),
         headerTitle: String,
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     )
         where HeaderContent == VBaseHeaderFooter
     {
@@ -138,26 +129,20 @@ public struct VHalfModal<Content, HeaderContent>
                     title: headerTitle
                 )
             },
-            content: content,
-            onAppear: appearAction,
-            onDisappear: disappearAction
+            content: content
         )
     }
     
     // MARK: Initializers: _
     public init(
         model: VHalfModalModel = .init(),
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     )
         where HeaderContent == Never
     {
         self.model = model
         self.headerContent = nil
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
 }
 
@@ -184,9 +169,7 @@ extension View {
                                 model: halfModal.model,
                                 isPresented: isPresented,
                                 headerContent: halfModal.headerContent,
-                                content: halfModal.content,
-                                onAppear: halfModal.appearAction,
-                                onDisappear: halfModal.disappearAction
+                                content: halfModal.content
                             )
                                 .environment(\.vHalfModalNavigationViewCloseButton, halfModal.model.misc.dismissType.contains(.navigationViewCloseButton))
                     )

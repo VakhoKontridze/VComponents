@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Modal
 /// Modal component that draws a background, hosts content, and is present when condition is true
 ///
-/// Model, header, and onAppear and onDisappear callbacks can be passed as parameters
+/// Model and header can be passed as parameters
 ///
 /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
 ///
@@ -44,30 +44,21 @@ public struct VModal<Content, HeaderContent>
     public var headerContent: (() -> HeaderContent)?
     public var content: () -> Content
     
-    public var appearAction: (() -> Void)?
-    public var disappearAction: (() -> Void)?
-    
     // MARK: Initializers: Header
     public init(
         model: VModalModel = .init(),
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.headerContent = headerContent
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
     
     public init(
         model: VModalModel = .init(),
         headerTitle: String,
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     )
         where HeaderContent == VBaseHeaderFooter
     {
@@ -81,26 +72,20 @@ public struct VModal<Content, HeaderContent>
                     title: headerTitle
                 )
             },
-            content: content,
-            onAppear: appearAction,
-            onDisappear: disappearAction
+            content: content
         )
     }
     
     // MARK: Initializers: _
     public init(
         model: VModalModel = .init(),
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     )
         where HeaderContent == Never
     {
         self.model = model
         self.headerContent = nil
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
 }
 
@@ -127,9 +112,7 @@ extension View {
                                 model: modal.model,
                                 isPresented: isPresented,
                                 headerContent: modal.headerContent,
-                                content: modal.content,
-                                appearAction: modal.appearAction,
-                                disappearAction: modal.disappearAction
+                                content: modal.content
                             )
                     )
                 }

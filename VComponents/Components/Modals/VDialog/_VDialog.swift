@@ -21,9 +21,6 @@ struct _VDialog<Content>: View where Content: View {
     private let description: String?
     private let content: (() -> Content)?
     
-    private let appearAction: (() -> Void)?
-    private let disappearAction: (() -> Void)?
-    
     // MARK: Initializers
     init(
         model: VDialogModel,
@@ -31,9 +28,7 @@ struct _VDialog<Content>: View where Content: View {
         dialogButtons: VDialogButtons,
         title: String?,
         description: String?,
-        content: (() -> Content)?,
-        appearAction: (() -> Void)?,
-        disappearAction: (() -> Void)?
+        content: (() -> Content)?
     ) {
         self.model = model
         self._isHCPresented = isPresented
@@ -41,8 +36,6 @@ struct _VDialog<Content>: View where Content: View {
         self.title = title
         self.description = description
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
 }
 
@@ -80,8 +73,6 @@ extension _VDialog {
             .blur(radius: isViewPresented ? 0 : model.animations.blur)
             .background(background)
             .frame(width: model.layout.width)
-            .onAppear(perform: appearAction)
-            .onDisappear(perform: disappearAction)
     }
     
     private var background: some View {
@@ -191,9 +182,7 @@ struct VDialog_Previews: PreviewProvider {
             ),
             title: "Lorem ipsum dolor sit amet",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            content: { VTextField(state: .constant(.enabled), text: .constant("Lorem ipsum dolor sit amet")) },
-            appearAction: nil,
-            disappearAction: nil
+            content: { VTextField(state: .constant(.enabled), text: .constant("Lorem ipsum dolor sit amet")) }
         )
     }
 }

@@ -22,9 +22,6 @@ struct _VModal<Content, HeaderContent>: View
     private let headerContent: (() -> HeaderContent)?
     private let content: () -> Content
     
-    private let appearAction: (() -> Void)?
-    private let disappearAction: (() -> Void)?
-    
     private var headerExists: Bool { headerContent != nil || model.misc.dismissType.hasButton }
     
     // MARK: Initializers
@@ -32,16 +29,12 @@ struct _VModal<Content, HeaderContent>: View
         model: VModalModel,
         isPresented: Binding<Bool>,
         headerContent: (() -> HeaderContent)?,
-        @ViewBuilder content: @escaping () -> Content,
-        appearAction: (() -> Void)?,
-        disappearAction: (() -> Void)?
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self._isHCPresented = isPresented
         self.headerContent = headerContent
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
 }
 
@@ -77,8 +70,6 @@ extension _VModal {
             .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
             .opacity(isViewPresented ? 1 : model.animations.opacity)
             .blur(radius: isViewPresented ? 0 : model.animations.blur)
-            .onAppear(perform: appearAction)
-            .onDisappear(perform: disappearAction)
     }
     
     @ViewBuilder private var headerView: some View {
@@ -157,9 +148,7 @@ struct VModal_Previews: PreviewProvider {
                     title: "Lorem ipsum dolor sit amet"
                 )
             },
-            content: { ColorBook.accent },
-            appearAction: nil,
-            disappearAction: nil
+            content: { ColorBook.accent }
         )
     }
 }

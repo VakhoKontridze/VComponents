@@ -47,9 +47,11 @@ extension VDialogDemoView {
                             placeholder: "Name",
                             text: $text
                         )
-                    },
-                    onDisappear: { text = "" }
+                    }
                 )
+            })
+            .onChange(of: isPresented, perform: { value in
+                if !value { text = "" }
             })
     }
     

@@ -10,7 +10,7 @@ import SwiftUI
 // MARK:- V Dialog
 /// Modal component that presents dialog when condition is true
 ///
-/// Model, title, description, onAppear and onDisappear callbacks, and content can be passed as parameters
+/// Model, title, description, and content can be passed as parameters
 ///
 /// Dialog can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
 ///
@@ -54,8 +54,6 @@ public struct VDialog<Content> where Content: View {
     public var title: String?
     public var description: String?
     public var content: (() -> Content)?
-    public var appearAction: (() -> Void)?
-    public var disappearAction: (() -> Void)?
     
     // MARK: Initializers
     public init(
@@ -63,26 +61,20 @@ public struct VDialog<Content> where Content: View {
         buttons dialogButtons: VDialogButtons,
         title: String?,
         description: String?,
-        @ViewBuilder content: @escaping () -> Content,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.dialogButtons = dialogButtons
         self.title = title
         self.description = description
         self.content = content
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
     
     public init(
         model: VDialogModel = .init(),
         buttons dialogButtons: VDialogButtons,
         title: String?,
-        description: String?,
-        onAppear appearAction: (() -> Void)? = nil,
-        onDisappear disappearAction: (() -> Void)? = nil
+        description: String?
     )
         where Content == Never
     {
@@ -91,8 +83,6 @@ public struct VDialog<Content> where Content: View {
         self.title = title
         self.description = description
         self.content = nil
-        self.appearAction = appearAction
-        self.disappearAction = disappearAction
     }
 }
 
@@ -119,9 +109,7 @@ extension View {
                                 dialogButtons: dialog.dialogButtons,
                                 title: dialog.title,
                                 description: dialog.description,
-                                content: dialog.content,
-                                appearAction: dialog.appearAction,
-                                disappearAction: dialog.disappearAction
+                                content: dialog.content
                             )
                     )
                 }
