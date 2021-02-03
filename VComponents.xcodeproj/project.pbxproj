@@ -105,6 +105,7 @@
 		7A6218302594943F00515688 /* VLazyListModelHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62182F2594943F00515688 /* VLazyListModelHorizontal.swift */; };
 		7A621834259494CB00515688 /* VLazyListVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A621833259494CB00515688 /* VLazyListVertical.swift */; };
 		7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218372594956400515688 /* VLazyListHorizontal.swift */; };
+		7A6787DA25CB291900734DA6 /* ComponentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6787D925CB291900734DA6 /* ComponentStateManager.swift */; };
 		7A767C3925B5C70A0008D2E9 /* VCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */; };
 		7A767C3C25B5C7310008D2E9 /* VCheckBoxState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */; };
 		7A767C9D25B5C93F0008D2E9 /* VCheckBoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C9C25B5C93F0008D2E9 /* VCheckBoxModel.swift */; };
@@ -336,6 +337,7 @@
 		7A62182F2594943F00515688 /* VLazyListModelHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListModelHorizontal.swift; sourceTree = "<group>"; };
 		7A621833259494CB00515688 /* VLazyListVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListVertical.swift; sourceTree = "<group>"; };
 		7A6218372594956400515688 /* VLazyListHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListHorizontal.swift; sourceTree = "<group>"; };
+		7A6787D925CB291900734DA6 /* ComponentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateManager.swift; sourceTree = "<group>"; };
 		7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBox.swift; sourceTree = "<group>"; };
 		7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBoxState.swift; sourceTree = "<group>"; };
 		7A767C9C25B5C93F0008D2E9 /* VCheckBoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBoxModel.swift; sourceTree = "<group>"; };
@@ -1318,6 +1320,7 @@
 			isa = PBXGroup;
 			children = (
 				7A12716125BAF911002B0397 /* BasicAnimation.swift */,
+				7A6787D925CB291900734DA6 /* ComponentStateManager.swift */,
 				7A0BB67425B9CEF900E7FCA1 /* UIKitPresenter.swift */,
 				7AE5C25D25A8BC2E001B62B2 /* VPickableItems.swift */,
 				7AC4E03E25AE1D2800CE2816 /* SliderHelpers.swift */,
@@ -1610,6 +1613,7 @@
 				7A59957E2592442A0087902B /* VNavigationViewAppearance.swift in Sources */,
 				7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */,
 				7A8A971F258DDD8400309886 /* ViewExtensions.swift in Sources */,
+				7A6787DA25CB291900734DA6 /* ComponentStateManager.swift in Sources */,
 				7A32F88A25C9963900BE8298 /* VStepper.swift in Sources */,
 				7A767CE625B700960008D2E9 /* VBaseTextFieldModel.swift in Sources */,
 				7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */,

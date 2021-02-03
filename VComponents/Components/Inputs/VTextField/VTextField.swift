@@ -21,6 +21,22 @@ import SwiftUI
 /// # Usage Example #
 ///
 /// ```
+/// @State var text: String = "Lorem ipsum"
+///
+/// var body: some View {
+///     VTextField(
+///         placeholder: "Lorem ipsum",
+///         headerTitle: "Lorem ipsum dolor sit amet",
+///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///         text: $text
+///     )
+///         .padding()
+/// }
+/// ```
+///
+/// Textfield can also be focused externally by passing state:
+///
+/// ```
 /// @State var state: VTextFieldState = .focused
 /// @State var text: String = "Lorem ipsum"
 ///
@@ -37,6 +53,7 @@ import SwiftUI
 /// ```
 ///
 /// Full use of overriden actions and event callbacks:
+/// 
 /// ```
 /// let model: VTextFieldModel = {
 ///     var model: VTextFieldModel = .init()
@@ -48,13 +65,11 @@ import SwiftUI
 ///     return model
 /// }()
 ///
-/// @State var state: VTextFieldState = .enabled
 /// @State var text: String = "Lorem ipsum"
 ///
 /// var body: some View {
 ///     VTextField(
 ///         model: model,
-///         state: $state,
 ///         placeholder: "Lorem ipsum",
 ///         headerTitle: "Lorem ipsum dolor sit amet",
 ///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -71,14 +86,13 @@ import SwiftUI
 /// ```
 ///
 /// Secure text field:
+///
 /// ```
-/// @State var state: VTextFieldState = .enabled
 /// @State var text: String = "Lorem ipsum"
 ///
 /// var body: some View {
 ///     VTextField(
 ///         type: .secure,
-///         state: $state,
 ///         placeholder: "Lorem ipsum",
 ///         headerTitle: "Lorem ipsum dolor sit amet",
 ///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -89,14 +103,13 @@ import SwiftUI
 /// ```
 ///
 /// Search text field:
+///
 /// ```
-/// @State var state: VTextFieldState = .enabled
 /// @State var text: String = "Lorem ipsum"
 ///
 /// var body: some View {
 ///     VTextField(
 ///         type: .search,
-///         state: $state,
 ///         placeholder: "Lorem ipsum",
 ///         headerTitle: "Lorem ipsum dolor sit amet",
 ///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
@@ -110,7 +123,26 @@ public struct VTextField: View {
     private let model: VTextFieldModel
     private let textFieldType: VTextFieldType
     
-    @Binding private var state: VTextFieldState
+    @State private var stateInternally: VTextFieldState = .enabled
+    @Binding private var stateExternally: VTextFieldState
+    private let stateManagament: ComponentStateManagement
+    private var state: Binding<VBaseTextFieldState> {
+        .init(
+            get: {
+                switch stateManagament {
+                case .internal: return stateInternally
+                case .external: return stateExternally
+                }
+            },
+            set: { value in
+                switch stateManagament {
+                case .internal: stateInternally = value
+                case .external: stateExternally = value
+                }
+            }
+        )
+    }
+    
     private let highlight: VTextFieldHighlight
     
     private let placeholder: String?
@@ -148,7 +180,40 @@ public struct VTextField: View {
     ) {
         self.model = model
         self.textFieldType = textFieldType
-        self._state = state
+        self._stateExternally = state
+        self.stateManagament = .external
+        self.highlight = highlight
+        self.placeholder = placeholder
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self._text = text
+        self.beginHandler = beginHandler
+        self.changeHandler = changeHandler
+        self.endHandler = endHandler
+        self.returnButtonAction = returnButtonAction
+        self.clearButtonAction = clearButtonAction
+        self.cancelButtonAction = cancelButtonAction
+    }
+    
+    public init(
+        model: VTextFieldModel = .init(),
+        type textFieldType: VTextFieldType = .default,
+        highlight: VTextFieldHighlight = .default,
+        placeholder: String? = nil,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        text: Binding<String>,
+        onBegin beginHandler: (() -> Void)? = nil,
+        onChange changeHandler: (() -> Void)? = nil,
+        onEnd endHandler: (() -> Void)? = nil,
+        onReturn returnButtonAction: VTextFieldReturnButtonAction = .default,
+        onClear clearButtonAction: VTextFieldClearButtonAction = .default,
+        onCancel cancelButtonAction: VTextFieldCancelButtonAction = .default
+    ) {
+        self.model = model
+        self.textFieldType = textFieldType
+        self._stateExternally = .constant(.enabled)
+        self.stateManagament = .internal
         self.highlight = highlight
         self.placeholder = placeholder
         self.headerTitle = headerTitle
@@ -197,11 +262,11 @@ extension VTextField {
             VText(
                 type: .oneLine,
                 font: model.fonts.header,
-                color: model.colors.header.for(state, highlight: highlight),
+                color: model.colors.header.for(state.wrappedValue, highlight: highlight),
                 title: headerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHor)
-                .opacity(model.colors.content.for(state))
+                .opacity(model.colors.content.for(state.wrappedValue))
         }
     }
     
@@ -210,11 +275,11 @@ extension VTextField {
             VText(
                 type: .multiLine(limit: nil, alignment: .leading),
                 font: model.fonts.footer,
-                color: model.colors.footer.for(state, highlight: highlight),
+                color: model.colors.footer.for(state.wrappedValue, highlight: highlight),
                 title: footerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHor)
-                .opacity(model.colors.content.for(state))
+                .opacity(model.colors.content.for(state.wrappedValue))
         }
     }
     
@@ -223,15 +288,15 @@ extension VTextField {
             ImageBook.search
                 .resizable()
                 .frame(dimension: model.layout.searchIconDimension)
-                .foregroundColor(model.colors.searchIcon.for(state, highlight: highlight))
-                .opacity(model.colors.content.for(state))
+                .foregroundColor(model.colors.searchIcon.for(state.wrappedValue, highlight: highlight))
+                .opacity(model.colors.content.for(state.wrappedValue))
         }
     }
     
     private var textFieldContentView: some View {
         UIKitTextFieldRepresentable(
-            model: model.baseTextFieldSubModel(state: state, isSecureTextEntry: textFieldType.isSecure && !secureFieldIsVisible),
-            state: $state,
+            model: model.baseTextFieldSubModel(state: state.wrappedValue, isSecureTextEntry: textFieldType.isSecure && !secureFieldIsVisible),
+            state: state,
             placeholder: placeholder,
             text: $text,
             onBegin: beginHandler,
@@ -245,8 +310,8 @@ extension VTextField {
     @ViewBuilder private var clearButton: some View {
         if !textFieldType.isSecure && nonEmptyText && model.misc.clearButton {
             VCloseButton(
-                model: model.clearSubButtonModel(state: state, highlight: highlight),
-                state: state.clearButtonState,
+                model: model.clearSubButtonModel(state: state.wrappedValue, highlight: highlight),
+                state: state.wrappedValue.clearButtonState,
                 action: runClearAction
             )
         }
@@ -255,24 +320,24 @@ extension VTextField {
     @ViewBuilder private var visibilityButton: some View {
         if textFieldType.isSecure {
             VSquareButton(
-                model: model.visibilityButtonSubModel(state: state, highlight: highlight),
-                state: state.visiblityButtonState,
+                model: model.visibilityButtonSubModel(state: state.wrappedValue, highlight: highlight),
+                state: state.wrappedValue.visiblityButtonState,
                 action: { secureFieldIsVisible.toggle() },
                 content: {
                     visiblityIcon
                         .resizable()
                         .frame(dimension: model.layout.visibilityButtonIconDimension)
-                        .foregroundColor(model.colors.visibilityButtonIcon.for(state, highlight: highlight))
+                        .foregroundColor(model.colors.visibilityButtonIcon.for(state.wrappedValue, highlight: highlight))
                 }
             )
         }
     }
     
     @ViewBuilder private var cancelButton: some View {
-        if !textFieldType.isSecure, nonEmptyText, state.isFocused, let cancelButton = model.misc.cancelButton, !cancelButton.isEmpty {
+        if !textFieldType.isSecure, nonEmptyText, state.wrappedValue.isFocused, let cancelButton = model.misc.cancelButton, !cancelButton.isEmpty {
             VPlainButton(
                 model: model.cancelButtonSubModel,
-                state: state.cancelButtonState,
+                state: state.wrappedValue.cancelButtonState,
                 action: runCancelAction,
                 title: cancelButton
             )
@@ -282,10 +347,10 @@ extension VTextField {
     private var background: some View {
         ZStack(content: {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .foregroundColor(model.colors.background.for(state, highlight: highlight))
+                .foregroundColor(model.colors.background.for(state.wrappedValue, highlight: highlight))
             
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .strokeBorder(model.colors.border.for(state, highlight: highlight), lineWidth: model.layout.borderWidth)
+                .strokeBorder(model.colors.border.for(state.wrappedValue, highlight: highlight), lineWidth: model.layout.borderWidth)
         })
     }
 }

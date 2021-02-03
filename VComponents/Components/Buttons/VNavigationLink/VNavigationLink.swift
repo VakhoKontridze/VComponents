@@ -51,16 +51,27 @@ public struct VNavigationLink<Destination, Label>: View
         Label: View
 {
     // MARK: Properties
-    private let triggerType: TriggerType
-    private enum TriggerType {
-        case tap
-        case state
-    }
-    
     private let linkButtonType: VNavigationLinkType
     
-    @State private var isActiveByTap: Bool = false  // Managed internally
-    @Binding private var isActiveByState: Bool      // Binds to presenter view
+    @State private var isActiveInternally: Bool = false
+    @Binding private var isActiveExternally: Bool
+    private let stateManagament: ComponentStateManagement
+    private var isActive: Binding<Bool> {
+        .init(
+            get: {
+                switch stateManagament {
+                case .internal: return isActiveInternally
+                case .external: return isActiveExternally
+                }
+            },
+            set: { value in
+                switch stateManagament {
+                case .internal: isActiveInternally = value
+                case .external: isActiveExternally = value
+                }
+            }
+        )
+    }
     
     private let state: VNavigationLinkState
     
@@ -74,10 +85,10 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.triggerType = .tap
         self.linkButtonType = linkPreset.buttonType
         self.state = state
-        self._isActiveByState = .constant(false)
+        self._isActiveExternally = .constant(false)
+        self.stateManagament = .internal
         self.destination = destination
         self.label = label
     }
@@ -106,10 +117,10 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.triggerType = .state
         self.linkButtonType = linkPreset.buttonType
         self.state = state
-        self._isActiveByState = isActive
+        self._isActiveExternally = isActive
+        self.stateManagament = .external
         self.destination = destination
         self.label = label
     }
@@ -138,10 +149,10 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.triggerType = .tap
         self.linkButtonType = .custom
         self.state = state
-        self._isActiveByState = .constant(false)
+        self._isActiveExternally = .constant(false)
+        self.stateManagament = .internal
         self.destination = destination
         self.label = label
     }
@@ -153,10 +164,10 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.triggerType = .state
         self.linkButtonType = .custom
         self.state = state
-        self._isActiveByState = isActive
+        self._isActiveExternally = isActive
+        self.stateManagament = .external
         self.destination = destination
         self.label = label
     }
@@ -164,14 +175,7 @@ public struct VNavigationLink<Destination, Label>: View
 
 // MARK:- Body
 extension VNavigationLink {
-    @ViewBuilder public var body: some View {
-        switch triggerType {
-        case .tap: contentView(isActive: $isActiveByTap)
-        case .state: contentView(isActive: $isActiveByState)
-        }
-    }
-    
-    private func contentView(isActive: Binding<Bool>) -> some View {
+    public var body: some View {
         labelView(isActive: isActive)
             .background({
                 NavigationLink(destination: destinationView, isActive: isActive, label: { EmptyView() })

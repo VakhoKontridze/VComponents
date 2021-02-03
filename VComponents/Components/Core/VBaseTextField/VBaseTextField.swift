@@ -10,13 +10,27 @@ import SwiftUI
 // MARK:- V Base Text Field
 /// Core component that is used throughout the framework as text field
 ///
-/// Model, placeholder, event callbacks, and button action can be passed as parameters
+/// Model, state, placeholder, event callbacks, and button action can be passed as parameters
 ///
 /// It is possible to override action of return button by passing it as a parameter
 ///
 /// If two TextField's state is managed by a single property, unpredictable behaviors would occur
 ///
 /// # Usage Example #
+///
+/// ```
+/// @State var text: String = "Lorem ipsum"
+///
+/// var body: some View {
+///     VBaseTextField(
+///         placeholder: "Lorem ipsum",
+///         text: $text
+///     )
+///         .padding()
+/// }
+/// ```
+///
+/// Textfield can also be focused externally by passing state:
 ///
 /// ```
 /// @State var state: VBaseTextFieldState = .focused
@@ -33,13 +47,12 @@ import SwiftUI
 /// ```
 ///
 /// Full use of overriden action and event callbacks:
+///
 /// ```
-/// @State var state: VBaseTextFieldState = .enabled
 /// @State var text: String = "Lorem ipsum"
 ///
 /// var body: some View {
 ///     VBaseTextField(
-///         state: $state,
 ///         placeholder: "Lorem ipsum",
 ///         text: $text,
 ///         onBegin: { print("Editing Began") },
@@ -54,7 +67,25 @@ import SwiftUI
 public struct VBaseTextField: View {
     private let model: VBaseTextFieldModel
     
-    @Binding private var state: VBaseTextFieldState
+    @State private var stateInternally: VBaseTextFieldState = .enabled
+    @Binding private var stateExternally: VBaseTextFieldState
+    private let stateManagament: ComponentStateManagement
+    private var state: Binding<VBaseTextFieldState> {
+        .init(
+            get: {
+                switch stateManagament {
+                case .internal: return stateInternally
+                case .external: return stateExternally
+                }
+            },
+            set: { value in
+                switch stateManagament {
+                case .internal: stateInternally = value
+                case .external: stateExternally = value
+                }
+            }
+        )
+    }
     
     private let placeholder: String?
     @Binding private var text: String
@@ -77,7 +108,28 @@ public struct VBaseTextField: View {
         onReturn returnAction: VBaseTextFieldReturnButtonAction = .default
     ) {
         self.model = model
-        self._state = state
+        self._stateExternally = state
+        self.stateManagament = .external
+        self.placeholder = placeholder
+        self._text = text
+        self.beginHandler = beginHandler
+        self.changeHandler = changeHandler
+        self.endHandler = endHandler
+        self.returnAction = returnAction
+    }
+    
+    public init(
+        model: VBaseTextFieldModel = .init(),
+        placeholder: String? = nil,
+        text: Binding<String>,
+        onBegin beginHandler: (() -> Void)? = nil,
+        onChange changeHandler: (() -> Void)? = nil,
+        onEnd endHandler: (() -> Void)? = nil,
+        onReturn returnAction: VBaseTextFieldReturnButtonAction = .default
+    ) {
+        self.model = model
+        self._stateExternally = .constant(.enabled)
+        self.stateManagament = .internal
         self.placeholder = placeholder
         self._text = text
         self.beginHandler = beginHandler
@@ -92,7 +144,7 @@ extension VBaseTextField {
     public var body: some View {
         UIKitTextFieldRepresentable(
             model: model,
-            state: $state,
+            state: state,
             placeholder: placeholder,
             text: $text,
             onBegin: beginHandler,
