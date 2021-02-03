@@ -1,5 +1,5 @@
 //
-//  VDropDownDemoView.swift
+//  VMenuPickerDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 2/2/21.
@@ -8,19 +8,19 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Drop Down Demo View
-struct VDropDownDemoView: View {
+// MARK:- V Menu Picker Demo View
+struct VMenuPickerDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Drop Down"
+    static let navigationBarTitle: String = "Menu Picker"
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VWheelPickerState = .enabled
-    @State private var dropDownButtonType: VNavigationLinkButtonTypeHelper = .primary
+    @State private var menuPickerButtonType: VNavigationLinkButtonTypeHelper = .primary
     @State private var contentType: ComponentContentType = .text
 }
 
 // MARK:- Body
-extension VDropDownDemoView {
+extension VMenuPickerDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(component: component, settings: settings)
@@ -28,9 +28,9 @@ extension VDropDownDemoView {
     }
     
     @ViewBuilder private func component() -> some View {
-        switch (dropDownButtonType.preset, contentType) {
+        switch (menuPickerButtonType.preset, contentType) {
         case (let preset?, .text):
-            VDropDown(
+            VMenuPicker(
                 preset: preset,
                 selection: $selection,
                 state: state,
@@ -38,7 +38,7 @@ extension VDropDownDemoView {
             )
         
         case (let preset?, .custom):
-            VDropDown(
+            VMenuPicker(
                 preset: preset,
                 selection: $selection,
                 state: state,
@@ -46,7 +46,7 @@ extension VDropDownDemoView {
             )
             
         case (nil, _):
-            VDropDown(
+            VMenuPicker(
                 selection: $selection,
                 state: state,
                 label: buttonContent
@@ -61,23 +61,23 @@ extension VDropDownDemoView {
         
         DemoViewSettingsSection(content: {
             VWheelPicker(
-                selection: $dropDownButtonType,
+                selection: $menuPickerButtonType,
                 headerTitle: "Type"
             )
-                .onChange(of: dropDownButtonType, perform: { type in
+                .onChange(of: menuPickerButtonType, perform: { type in
                     if type == .custom { contentType = .custom }
                 })
             
             VSegmentedPicker(
                 selection: $contentType,
                 headerTitle: "Label Content",
-                disabledItems: dropDownButtonType == .custom ? [.text] : []
+                disabledItems: menuPickerButtonType == .custom ? [.text] : []
             )
         })
     }
     
     private var buttonTitle: String {
-        switch dropDownButtonType.preset {
+        switch menuPickerButtonType.preset {
         case .square: return "Lorem"
         default: return "Lorem ipsum"
         }
@@ -87,8 +87,8 @@ extension VDropDownDemoView {
 }
 
 // MARK:- Preview
-struct VDropDownDemoView_Previews: PreviewProvider {
+struct VMenuPickerDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VDropDownDemoView()
+        VMenuPickerDemoView()
     }
 }

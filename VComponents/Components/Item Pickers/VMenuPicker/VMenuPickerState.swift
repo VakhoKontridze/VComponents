@@ -1,5 +1,5 @@
 //
-//  VDropDownState.swift
+//  VMenuPickerState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/2/21.
@@ -7,6 +7,6 @@
 
 import Foundation
 
-// MARK:- V Drop Down State
+// MARK:- V Menu Picker State
 /// Enum that describes state, such as enabled or disabled
-public typealias VDropDownState = VSegmentedPickerState
+public typealias VMenuPickerState = VSegmentedPickerState

@@ -1,5 +1,5 @@
 //
-//  VDropDown.swift
+//  VMenuPicker.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/2/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Drop Down
+// MARK:- V Menu Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a menu
 ///
 /// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
@@ -34,7 +34,7 @@ import SwiftUI
 /// @State var selection: PickerRow = .red
 ///
 /// var body: some View {
-///     VDropDown(
+///     VMenuPicker(
 ///         preset: .secondary(),
 ///         selection: $selection,
 ///         title: "Lorem ipsum",
@@ -48,33 +48,33 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VDropDown<Label, Data>: View
+public struct VMenuPicker<Label, Data>: View
     where
         Label: View,
         Data: RandomAccessCollection,
         Data.Index == Int
 {
     // MARK: Properties
-    private let dropDownButtonType: VDropDownButtonType
+    private let menuPickerButtonType: VMenuPickerButtonType
     
     @Binding private var selectedIndex: Int
     
-    private let state: VDropDownState
+    private let state: VMenuPickerState
     
     private let label: () -> Label
     private let data: Data
-    private let rowContent: (Data.Element) -> VDropDownRow
+    private let rowContent: (Data.Element) -> VMenuPickerRow
 
     // MARK: Initializers: View Builder and Preset
     public init(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selectedIndex: Binding<Int>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label,
         data: Data,
-        rowContent: @escaping (Data.Element) -> VDropDownRow
+        rowContent: @escaping (Data.Element) -> VMenuPickerRow
     ) {
-        self.dropDownButtonType = dropDownButtonPreset.buttonType
+        self.menuPickerButtonType = menuPickerButtonPreset.buttonType
         self._selectedIndex = selectedIndex
         self.state = state
         self.label = label
@@ -83,20 +83,20 @@ public struct VDropDown<Label, Data>: View
     }
     
     public init(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selectedIndex: Binding<Int>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         title: String,
         data: Data,
-        rowContent: @escaping (Data.Element) -> VDropDownRow
+        rowContent: @escaping (Data.Element) -> VMenuPickerRow
     )
         where Label == VText
     {
         self.init(
-            preset: dropDownButtonPreset,
+            preset: menuPickerButtonPreset,
             selectedIndex: selectedIndex,
             state: state,
-            label: { dropDownButtonPreset.text(from: title, isEnabled: state.isEnabled) },
+            label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             data: data,
             rowContent: rowContent
         )
@@ -105,12 +105,12 @@ public struct VDropDown<Label, Data>: View
     // MARK: Initializers: View Builder and Custom
     public init(
         selectedIndex: Binding<Int>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label,
         data: Data,
-        rowContent: @escaping (Data.Element) -> VDropDownRow
+        rowContent: @escaping (Data.Element) -> VMenuPickerRow
     ) {
-        self.dropDownButtonType = .custom
+        self.menuPickerButtonType = .custom
         self._selectedIndex = selectedIndex
         self.state = state
         self.label = label
@@ -120,15 +120,15 @@ public struct VDropDown<Label, Data>: View
     
     // MARK: Initializers: Row Titles and Preset
     public init(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selectedIndex: Binding<Int>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label,
         rowTitles: [String]
     )
         where Data == Array<String>
     {
-        self.dropDownButtonType = dropDownButtonPreset.buttonType
+        self.menuPickerButtonType = menuPickerButtonPreset.buttonType
         self._selectedIndex = selectedIndex
         self.state = state
         self.label = label
@@ -137,9 +137,9 @@ public struct VDropDown<Label, Data>: View
     }
     
     public init(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selectedIndex: Binding<Int>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         title: String,
         rowTitles: [String]
     )
@@ -148,10 +148,10 @@ public struct VDropDown<Label, Data>: View
             Data == Array<String>
     {
         self.init(
-            preset: dropDownButtonPreset,
+            preset: menuPickerButtonPreset,
             selectedIndex: selectedIndex,
             state: state,
-            label: { dropDownButtonPreset.text(from: title, isEnabled: state.isEnabled) },
+            label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             rowTitles: rowTitles
         )
     }
@@ -159,7 +159,7 @@ public struct VDropDown<Label, Data>: View
     // MARK: Initializers: Row Titles and Custom
     public init(
         selectedIndex: Binding<Int>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label,
         rowTitles: [String]
     )
@@ -176,18 +176,18 @@ public struct VDropDown<Label, Data>: View
     
     // MARK: Initializers: Pickable Item and Preset
     public init<Item>(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selection: Binding<Item>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label,
-        rowContent: @escaping (Item) -> VDropDownRow
+        rowContent: @escaping (Item) -> VMenuPickerRow
     )
         where
             Data == Array<Item>,
             Item: VPickableItem
     {
         self.init(
-            preset: dropDownButtonPreset,
+            preset: menuPickerButtonPreset,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
@@ -200,11 +200,11 @@ public struct VDropDown<Label, Data>: View
     }
     
     public init<Item>(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selection: Binding<Item>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         title: String,
-        rowContent: @escaping (Item) -> VDropDownRow
+        rowContent: @escaping (Item) -> VMenuPickerRow
     )
         where
             Label == VText,
@@ -212,10 +212,10 @@ public struct VDropDown<Label, Data>: View
             Item: VPickableItem
     {
         self.init(
-            preset: dropDownButtonPreset,
+            preset: menuPickerButtonPreset,
             selection: selection,
             state: state,
-            label: { dropDownButtonPreset.text(from: title, isEnabled: state.isEnabled) },
+            label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             rowContent: rowContent
         )
     }
@@ -223,9 +223,9 @@ public struct VDropDown<Label, Data>: View
     // MARK: Initializers: Pickable Item and Custom
     public init<Item>(
         selection: Binding<Item>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label,
-        rowContent: @escaping (Item) -> VDropDownRow
+        rowContent: @escaping (Item) -> VMenuPickerRow
     )
         where
             Data == Array<Item>,
@@ -245,9 +245,9 @@ public struct VDropDown<Label, Data>: View
     
     // MARK: Initializers: Pickable Titled Item and Preset
     public init<Item>(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selection: Binding<Item>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label
     )
         where
@@ -255,7 +255,7 @@ public struct VDropDown<Label, Data>: View
             Item: VPickableTitledItem
     {
         self.init(
-            preset: dropDownButtonPreset,
+            preset: menuPickerButtonPreset,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
@@ -268,9 +268,9 @@ public struct VDropDown<Label, Data>: View
     }
     
     public init<Item>(
-        preset dropDownButtonPreset: VDropDownButtonPreset,
+        preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         selection: Binding<Item>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         title: String
     )
         where
@@ -279,13 +279,13 @@ public struct VDropDown<Label, Data>: View
             Item: VPickableTitledItem
     {
         self.init(
-            preset: dropDownButtonPreset,
+            preset: menuPickerButtonPreset,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
             state: state,
-            label: { dropDownButtonPreset.text(from: title, isEnabled: state.isEnabled) },
+            label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             data: .init(Item.allCases),
             rowContent: { item in .titled(title: item.pickerTitle) }
         )
@@ -294,7 +294,7 @@ public struct VDropDown<Label, Data>: View
     // MARK: Initializers: Pickable Titled Item and Custom
     public init<Item>(
         selection: Binding<Item>,
-        state: VDropDownState = .enabled,
+        state: VMenuPickerState = .enabled,
         @ViewBuilder label: @escaping () -> Label
     )
         where
@@ -315,7 +315,7 @@ public struct VDropDown<Label, Data>: View
 }
 
 // MARK:- Body
-extension VDropDown {
+extension VMenuPicker {
     public var body: some View {
         Picker(selection: $selectedIndex, label: labelView, content: {
             ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, row) in
@@ -328,14 +328,14 @@ extension VDropDown {
     }
     
     private var labelView: some View {
-        VDropDownButtonType.pickerButton(
-            buttonType: dropDownButtonType,
+        VMenuPickerButtonType.pickerButton(
+            buttonType: menuPickerButtonType,
             isEnabled: state.isEnabled,
             label: label
         )
     }
     
-    @ViewBuilder private func rowView(_ row: VDropDownRow) -> some View {
+    @ViewBuilder private func rowView(_ row: VMenuPickerRow) -> some View {
         switch row {
         case .titled(let title):
             Text(title)
@@ -356,11 +356,11 @@ extension VDropDown {
 }
 
 // MARK:- Preview
-struct VDropDown_Previews: PreviewProvider {
+struct VMenuPicker_Previews: PreviewProvider {
     @State private static var selection: VSegmentedPicker_Previews.PickerRow = .red
     
     static var previews: some View {
-        VDropDown(
+        VMenuPicker(
             preset: .secondary(),
             selection: $selection,
             title: "Lorem ipsum"

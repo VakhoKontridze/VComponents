@@ -16,7 +16,7 @@ struct HomeView: View {
     private let sections: [DemoSection<HomeRow>] = [
         .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .squareButton, .plainButton, .chevronButton, .closeButton, .navigationLink]),
         .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
-        .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .dropDown, .wheelPicker]),
+        .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
         .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
@@ -30,7 +30,7 @@ struct HomeView: View {
     private enum HomeRow: Int, DemoableRow {
         case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink
         case toggle, checkBox, radioButton
-        case segmentedPicker, dropDown, wheelPicker
+        case segmentedPicker, menuPicker, wheelPicker
         case stepper, slider,  rangeSlider
         case textField
         case sheet, section, table, accordion
@@ -55,7 +55,7 @@ struct HomeView: View {
             case .radioButton: return VRadioButtonDemoView.navigationBarTitle
 
             case .segmentedPicker: return VSegmentedPickerDemoView.navigationBarTitle
-            case .dropDown: return VDropDownDemoView.navigationBarTitle
+            case .menuPicker: return VMenuPickerDemoView.navigationBarTitle
             case .wheelPicker: return VWheelPickerDemoView.navigationBarTitle
 
             case .stepper: return VStepperDemoView.navigationBarTitle
@@ -106,7 +106,7 @@ struct HomeView: View {
             case .radioButton: VRadioButtonDemoView()
 
             case .segmentedPicker: VSegmentedPickerDemoView()
-            case .dropDown: VDropDownDemoView()
+            case .menuPicker: VMenuPickerDemoView()
             case .wheelPicker: VWheelPickerDemoView()
 
             case .stepper: VStepperDemoView()
