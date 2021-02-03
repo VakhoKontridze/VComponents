@@ -105,6 +105,7 @@ extension _VDialog {
     @ViewBuilder private var freeContentView: some View {
         if let content = content {
             content()
+                .padding(.top, model.layout.freeContentMarginTop)
         }
     }
     

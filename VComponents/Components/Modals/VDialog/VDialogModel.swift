@@ -32,6 +32,8 @@ extension VDialogModel {
         public var contentMarginHor: CGFloat = 0
         public var contentMarginTop: CGFloat = 5
         
+        public var freeContentMarginTop: CGFloat = 10
+        
         public var twoButtonSpacing: CGFloat = 10
         public var manyButtonSpacing: CGFloat = 10
         

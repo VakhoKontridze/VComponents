@@ -14,15 +14,9 @@ struct VDialogDemoView: View {
     static let navigationBarTitle: String = "Dialog"
     
     @State private var isPresented: Bool = false
-    @State private var textFieldState: VTextFieldState = .enabled
     @State private var text: String = ""
-    
     @State private var dialogButtons: VDialogButtonsHelper = .two
-    
     @State private var title: String = "Lorem ipsum dolor sit amet"
-    @State private var titleTextFieldState: VTextFieldState = .enabled
-    
-    @State private var descriptionTextFieldState: VTextFieldState = .enabled
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 }
 
@@ -41,13 +35,7 @@ extension VDialogDemoView {
                     buttons: dialogButtons.buttons(text: text),
                     title: title,
                     description: description,
-                    content: {
-                        VTextField(
-                            state: $textFieldState,
-                            placeholder: "Name",
-                            text: $text
-                        )
-                    }
+                    content: { VTextField(placeholder: "Name", text: $text) }
                 )
             })
             .onChange(of: isPresented, perform: { value in
@@ -57,14 +45,12 @@ extension VDialogDemoView {
     
     @ViewBuilder private func settings() -> some View {
         VTextField(
-            state: $titleTextFieldState,
             placeholder: "Title",
             headerTitle: "Title",
             text: $title
         )
         
         VTextField(
-            state: $descriptionTextFieldState,
             placeholder: "Description",
             headerTitle: "Description",
             text: $description
