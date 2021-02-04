@@ -56,14 +56,14 @@ extension _VDialog {
     }
     
     private var modalView: some View {
-        VStack(spacing: model.layout.spacing, content: {
-            VStack(spacing: model.layout.contentSpacing, content: {
+        VStack(spacing: 0, content: {
+            VStack(spacing: model.layout.titlesAndContentSpacing, content: {
                 titleView
                 descriptionView
                 freeContentView
             })
-                .padding(.horizontal, model.layout.contentMarginHor)
-                .padding(.top, model.layout.contentMarginTop)
+                .padding(.horizontal, model.layout.titlesAndContentMarginHor)
+                .padding(.vertical, model.layout.titlesAndContentMarginVer)
             
             dialogView
         })
@@ -105,7 +105,7 @@ extension _VDialog {
     @ViewBuilder private var freeContentView: some View {
         if let content = content {
             content()
-                .padding(.top, model.layout.freeContentMarginTop)
+                .padding(.vertical, model.layout.contentMarginVer)
         }
     }
     

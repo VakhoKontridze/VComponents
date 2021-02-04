@@ -25,14 +25,10 @@ extension VDialogModel {
         public var cornerRadius: CGFloat = 20
         
         public var margin: CGFloat = 15
-        
-        public var spacing: CGFloat = 20
-        
-        public var contentSpacing: CGFloat = 5
-        public var contentMarginHor: CGFloat = 0
-        public var contentMarginTop: CGFloat = 5
-        
-        public var freeContentMarginTop: CGFloat = 10
+        public var titlesAndContentSpacing: CGFloat = 5
+        public var titlesAndContentMarginHor: CGFloat = 0
+        public var titlesAndContentMarginVer: CGFloat = 5
+        public var contentMarginVer: CGFloat = 15
         
         public var twoButtonSpacing: CGFloat = 10
         public var manyButtonSpacing: CGFloat = 10
