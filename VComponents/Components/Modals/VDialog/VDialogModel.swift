@@ -71,7 +71,7 @@ extension VDialogModel {
 // MARK:- Misc
 extension VDialogModel {
     public struct Misc {
-        public var keyboardIgnoredSafeAreas: Edge.Set = []
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
         public init() {}
     }

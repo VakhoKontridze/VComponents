@@ -146,7 +146,7 @@ extension VHalfModalModel {
 extension VHalfModalModel {
     public struct Misc {
         public var dismissType: Set<DismissType> = .default
-        public var keyboardIgnoredSafeAreas: Edge.Set = []
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
         public init() {}
     }
