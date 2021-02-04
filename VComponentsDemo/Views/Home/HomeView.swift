@@ -142,6 +142,8 @@ struct HomeView: View {
             }
         }
     }
+    
+    @State private var value: Int = 5
 }
 
 // MARK:- Body
@@ -149,7 +151,12 @@ extension HomeView {
     var body: some View {
         VNavigationView(content: {
             VBaseView(title: Self.navigationBarTitle, content: {
-                DemoListView(type: .accordion, sections: sections)
+//                DemoListView(type: .accordion, sections: sections)
+                VStack(content: {
+                    Text(String(value))
+                    
+                    VStepper(range: 1...10, value: $value)
+                })
             })
         })
     }

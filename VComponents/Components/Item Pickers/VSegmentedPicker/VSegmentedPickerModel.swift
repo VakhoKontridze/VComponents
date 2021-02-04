@@ -36,7 +36,7 @@ extension VSegmentedPickerModel {
         public var headerFooterSpacing: CGFloat = 3
         public var headerFooterMarginHor: CGFloat = 10
         
-        public var dividerHeight: CGFloat = 17
+        public var dividerSize: CGSize = .init(width: 1, height: 19)
         
         public init() {}
     }
@@ -65,18 +65,23 @@ extension VSegmentedPickerModel {
         )
         
         public var background: StateColors = .init(
-            enabled: toggleReference.colors.fill.off,
+            enabled: .init(componentAsset: "SegmentedPicker.Background.enabled"),
             disabled: toggleReference.colors.fill.disabled
         )
         
         public var header: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Title"),
-            disabled: .init(componentAsset: "SegmentedPicker.Title")
+            enabled: .init(componentAsset: "SegmentedPicker.Header"),
+            disabled: .init(componentAsset: "SegmentedPicker.Header")
         )
         
         public var footer: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondary
+        )
+        
+        public var divider: StateColors = .init(
+            enabled: .init(componentAsset: "SegmentedPicker.Divider.enabled"),
+            disabled: .init(componentAsset: "SegmentedPicker.Divider.disabled")
         )
         
         public init() {}

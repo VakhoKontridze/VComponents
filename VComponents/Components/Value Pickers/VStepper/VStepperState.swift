@@ -13,10 +13,28 @@ public enum VStepperState: Int, CaseIterable {
     case enabled
     case disabled
     
-    var isDisabled: Bool {
+    var isEnabled: Bool {
         switch self {
-        case .enabled: return false
-        case .disabled: return true
+        case .enabled: return true
+        case .disabled: return false
+        }
+    }
+}
+
+// MARK:- V Stepper Button State
+enum VStepperButtonState {
+    case enabled
+    case pressed
+    case disabled
+    
+    init(isEnabled: Bool, isPressed: Bool) {
+        if isPressed && isEnabled {
+            self = .pressed
+        } else {
+            switch isEnabled {
+            case true: self = .enabled
+            case false: self = .disabled
+            }
         }
     }
 }

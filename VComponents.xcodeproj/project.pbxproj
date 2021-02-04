@@ -106,6 +106,7 @@
 		7A621834259494CB00515688 /* VLazyListVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A621833259494CB00515688 /* VLazyListVertical.swift */; };
 		7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218372594956400515688 /* VLazyListHorizontal.swift */; };
 		7A6787DA25CB291900734DA6 /* ComponentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6787D925CB291900734DA6 /* ComponentStateManager.swift */; };
+		7A67884E25CC0A2300734DA6 /* VStepperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A67884D25CC0A2300734DA6 /* VStepperModel.swift */; };
 		7A767C3925B5C70A0008D2E9 /* VCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */; };
 		7A767C3C25B5C7310008D2E9 /* VCheckBoxState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */; };
 		7A767C9D25B5C93F0008D2E9 /* VCheckBoxModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C9C25B5C93F0008D2E9 /* VCheckBoxModel.swift */; };
@@ -150,6 +151,7 @@
 		7A92926425B5B74400BBEA8A /* ToggleSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */; };
 		7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A92926625B5BB8200BBEA8A /* ImageBook.swift */; };
 		7AA25E4A25BF2A8A00ACB323 /* VHalfModalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */; };
+		7AA39B7D25CC7A9800FA30E5 /* VStepperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */; };
 		7AA763D925B738EA0088FC69 /* VTextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763D825B738EA0088FC69 /* VTextFieldState.swift */; };
 		7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */; };
 		7AA763E425B73F2C0088FC69 /* VTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763E325B73F2C0088FC69 /* VTextField.swift */; };
@@ -338,6 +340,7 @@
 		7A621833259494CB00515688 /* VLazyListVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListVertical.swift; sourceTree = "<group>"; };
 		7A6218372594956400515688 /* VLazyListHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyListHorizontal.swift; sourceTree = "<group>"; };
 		7A6787D925CB291900734DA6 /* ComponentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateManager.swift; sourceTree = "<group>"; };
+		7A67884D25CC0A2300734DA6 /* VStepperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStepperModel.swift; sourceTree = "<group>"; };
 		7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBox.swift; sourceTree = "<group>"; };
 		7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBoxState.swift; sourceTree = "<group>"; };
 		7A767C9C25B5C93F0008D2E9 /* VCheckBoxModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBoxModel.swift; sourceTree = "<group>"; };
@@ -386,6 +389,7 @@
 		7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleSettingView.swift; sourceTree = "<group>"; };
 		7A92926625B5BB8200BBEA8A /* ImageBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBook.swift; sourceTree = "<group>"; };
 		7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModalDemoView.swift; sourceTree = "<group>"; };
+		7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStepperButton.swift; sourceTree = "<group>"; };
 		7AA763D825B738EA0088FC69 /* VTextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldState.swift; sourceTree = "<group>"; };
 		7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldModel.swift; sourceTree = "<group>"; };
 		7AA763E325B73F2C0088FC69 /* VTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextField.swift; sourceTree = "<group>"; };
@@ -541,7 +545,9 @@
 			isa = PBXGroup;
 			children = (
 				7A32F88925C9963900BE8298 /* VStepper.swift */,
+				7A67884D25CC0A2300734DA6 /* VStepperModel.swift */,
 				7A32F88425C9955000BE8298 /* VStepperState.swift */,
+				7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */,
 			);
 			path = VStepper;
 			sourceTree = "<group>";
@@ -1472,6 +1478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A67884E25CC0A2300734DA6 /* VStepperModel.swift in Sources */,
 				7AF3CA8E25B0AD5F00D56042 /* VTableRow.swift in Sources */,
 				7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */,
 				7A5A5FFA25C92376008667F5 /* VTabNavigationPageItem.swift in Sources */,
@@ -1595,6 +1602,7 @@
 				7AA763D925B738EA0088FC69 /* VTextFieldState.swift in Sources */,
 				7AACBC1B25A9EBFE0066E754 /* VNavigationLink.swift in Sources */,
 				7ACC3ECC25ACB1AD00EAD184 /* VBaseListLayoutType.swift in Sources */,
+				7AA39B7D25CC7A9800FA30E5 /* VStepperButton.swift in Sources */,
 				7AC4E03425AE064D00CE2816 /* VRangeSliderModel.swift in Sources */,
 				7AF3CA8B25B0AD5A00D56042 /* VTableSection.swift in Sources */,
 				7AC4E03F25AE1D2800CE2816 /* SliderHelpers.swift in Sources */,

@@ -119,7 +119,7 @@ extension VRangeSlider {
                 .overlay(thumb(in: proxy, thumb: .low))
                 .overlay(thumb(in: proxy, thumb: .high))
 
-                .disabled(state.isDisabled)
+                .disabled(!state.isEnabled)
         })
             .frame(height: model.layout.height)
     }

@@ -27,7 +27,7 @@ extension VCheckBoxModel {
         
         public var borderWith: CGFloat = 1
         
-        public var iconDimension: CGFloat = 10
+        public var iconDimension: CGFloat = 9
         
         public var hitBox: CGFloat = toggleReference.layout.contentMarginLeading
         

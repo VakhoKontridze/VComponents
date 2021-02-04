@@ -85,7 +85,7 @@ extension VSlider {
                         .onChanged({ dragChanged(drag: $0, in: proxy) })
                         .onEnded(dragEnded)
                 )
-                .disabled(state.isDisabled)
+                .disabled(!state.isEnabled)
         })
             .frame(height: model.layout.height)
             .padding(.horizontal, model.layout.thumbDimension / 2)

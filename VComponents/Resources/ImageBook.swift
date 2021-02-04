@@ -19,6 +19,9 @@ extension ImageBook {
     
     static let chevronUp: Image = .init(componentAsset: "Chevron.Up")
     
+    static let minus: Image = .init(componentAsset: "Minus")
+    static let plus: Image = .init(componentAsset: "Plus")
+    
     static let search: Image = .init(componentAsset: "Search")
     
     static let visibilityOff: Image = .init(componentAsset: "Visibility.off")

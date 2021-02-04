@@ -57,11 +57,11 @@ extension Color {
  @140.140.140 @ 50
 
  CheckBox.Border.disabled
- 230.230.230
+ *230.230.230
  *40.40.40
  
  CheckBox.Border.off
- 200.200.200
+ *200.200.200
  *60.60.60
  
  ChevronButton.Background.disabled
@@ -95,6 +95,22 @@ extension Color {
  31.104.182
  36.106.186
  
+ SegmentedPicker.Background.enabled
+ 240.240.240
+ *40.40.40
+ 
+ SegmentedPicker.Divider.disabled
+ *230.230.230
+ *50.50.50
+ 
+ SegmentedPicker.Divider.enabled
+ *215.215.215
+ *70.70.70
+ 
+ SegmentedPicker.Header
+ *60.60.60
+ 210.210.210
+ 
  SegmentedPicker.Indicator.disabled
  *254.254.254
  *60.60.60
@@ -102,10 +118,6 @@ extension Color {
  SegmentedPicker.Indicator.enabled
  *254.254.254
  90.90.90
- 
- SegmentedPicker.Title
- *60.60.60
- 210.210.210
  
  Slider.Thumb.Border.disabled
  192.192.192
@@ -119,6 +131,10 @@ extension Color {
  Slider.Thumb.Shadow.enabled
  *96.96.96 @ 50
  
+ VStepper.Button.Background.pressed
+ *200.200.200
+ *70.70.70
+ 
  TabNavigationView.Item
  190.190.190
  *100.100.100
@@ -129,7 +145,7 @@ extension Color {
  
  TextField.Background.focused
  215.215.215
- 50.50.50
+ *50.50.50
  
  TextField.Background.success
  205.250.210

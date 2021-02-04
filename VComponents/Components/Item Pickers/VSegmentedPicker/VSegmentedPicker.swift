@@ -284,9 +284,10 @@ extension VSegmentedPicker {
                 Spacer()
 
                 if i <= data.count-2 {
-                    Divider()
+                    Rectangle()
+                        .frame(size: model.layout.dividerSize)
+                        .foregroundColor(model.colors.divider.for(state))
                         .opacity(dividerOpacity(for: i))
-                        .frame(height: model.layout.dividerHeight)
                 }
             })
         })
