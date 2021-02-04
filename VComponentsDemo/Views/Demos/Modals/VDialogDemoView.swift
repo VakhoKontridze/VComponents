@@ -18,13 +18,20 @@ struct VDialogDemoView: View {
     @State private var dialogButtons: VDialogButtonsHelper = .two
     @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    @State private var ignoreKeyboardSafeArea: Bool = !VDialogModel.Misc().keyboardIgnoredSafeAreas.isEmpty
+    
+    private var model: VDialogModel {
+        var model: VDialogModel = .init()
+        model.misc.keyboardIgnoredSafeAreas = ignoreKeyboardSafeArea ? .all : []
+        return model
+    }
 }
 
 // MARK:- Body
 extension VDialogDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
-            DemoView(component: component, settings: settings)
+            DemoView(component: component, settingsSections: settings)
         })
     }
     
@@ -32,6 +39,7 @@ extension VDialogDemoView {
         VSecondaryButton(action: { isPresented = true }, title: "Present")
             .vDialog(isPresented: $isPresented, dialog: {
                 VDialog(
+                    model: model,
                     buttons: dialogButtons.buttons(text: text),
                     title: title,
                     description: description,
@@ -43,20 +51,28 @@ extension VDialogDemoView {
             })
     }
     
-    @ViewBuilder private func settings() -> some View {
-        VTextField(
-            placeholder: "Title",
-            headerTitle: "Title",
-            text: $title
-        )
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VTextField(
+                placeholder: "Title",
+                headerTitle: "Title",
+                text: $title
+            )
+            
+            VTextField(
+                placeholder: "Description",
+                headerTitle: "Description",
+                text: $description
+            )
+        })
         
-        VTextField(
-            placeholder: "Description",
-            headerTitle: "Description",
-            text: $description
-        )
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $dialogButtons, headerTitle: "Buttons")
+        })
         
-        VSegmentedPicker(selection: $dialogButtons, headerTitle: "Buttons")
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $ignoreKeyboardSafeArea, title: "Ignore Keyboard Safe Area")
+        })
     }
 }
 

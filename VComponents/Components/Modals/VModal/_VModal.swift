@@ -45,14 +45,15 @@ extension _VModal {
             blinding
             modalView
         })
-            .edgesIgnoringSafeArea(.all)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.keyboard, edges: model.misc.keyboardIgnoredSafeAreas)
             .onAppear(perform: animateIn)
     }
     
     private var blinding: some View {
         model.colors.blinding
-            .onTapGesture(perform: animateOut)
+            .edgesIgnoringSafeArea(.all)
+            .onTapGesture(perform: animateOutFromTap)
     }
     
     private var modalView: some View {
@@ -131,6 +132,10 @@ private extension _VModal {
     func animateOut() {
         withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
+    }
+    
+    func animateOutFromTap() {
+        if model.misc.dismissType.contains(.backTap) { animateOut() }
     }
 }
 

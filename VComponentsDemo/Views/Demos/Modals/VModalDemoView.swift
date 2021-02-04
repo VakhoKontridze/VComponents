@@ -15,8 +15,8 @@ struct VModalDemoView: View {
     
     @State private var isPresented: Bool = false
     @State private var hasTitle: Bool = true
-    @State private var dismissType: Set<VModalModel.Misc.DismissType> = .default
     @State private var hasDivider: Bool = VModalModel.Layout().dividerHeight > 0
+    @State private var dismissType: Set<VModalModel.Misc.DismissType> = .default
     
     private var model: VModalModel {
         var model: VModalModel = .init()

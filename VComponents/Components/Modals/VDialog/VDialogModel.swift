@@ -14,6 +14,7 @@ public struct VDialogModel {
     public var colors: Colors = .init()
     public var fonts: Fonts = .init()
     public var animations: Animations = .init()
+    public var misc: Misc = .init()
 
     public init() {}
 }
@@ -65,6 +66,15 @@ extension VDialogModel {
 // MARK:- Animations
 extension VDialogModel {
     public typealias Animations = VModalModel.Animations
+}
+
+// MARK:- Misc
+extension VDialogModel {
+    public struct Misc {
+        public var keyboardIgnoredSafeAreas: Edge.Set = []
+        
+        public init() {}
+    }
 }
 
 // MARK:- References

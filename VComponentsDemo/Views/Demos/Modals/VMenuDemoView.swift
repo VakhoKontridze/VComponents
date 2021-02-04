@@ -14,7 +14,7 @@ struct VMenuDemoView: View {
     static let navigationBarTitle: String = "Menu"
     
     @State private var state: VMenuState = .enabled
-    @State private var menuButtonType: VNavigationLinkButtonTypeHelper = .primary
+    @State private var menuButtonType: VNavigationLinkButtonTypeHelper = .secondary
 }
 
 // MARK:- Body

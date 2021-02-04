@@ -133,6 +133,7 @@ extension VModalModel {
 extension VModalModel {
     public struct Misc {
         public var dismissType: Set<DismissType> = .default
+        public var keyboardIgnoredSafeAreas: Edge.Set = []
         
         public init() {}
     }

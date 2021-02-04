@@ -46,13 +46,14 @@ extension _VDialog {
             blinding
             modalView
         })
-            .edgesIgnoringSafeArea(.all)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.keyboard, edges: model.misc.keyboardIgnoredSafeAreas)
             .onAppear(perform: animateIn)
     }
     
     private var blinding: some View {
         model.colors.blinding
+            .edgesIgnoringSafeArea(.all)
     }
     
     private var modalView: some View {

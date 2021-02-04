@@ -15,7 +15,7 @@ struct VMenuPickerDemoView: View {
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VWheelPickerState = .enabled
-    @State private var menuPickerButtonType: VNavigationLinkButtonTypeHelper = .primary
+    @State private var menuPickerButtonType: VNavigationLinkButtonTypeHelper = .secondary
     @State private var contentType: ComponentContentType = .text
 }
 

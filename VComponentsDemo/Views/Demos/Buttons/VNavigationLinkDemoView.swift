@@ -14,7 +14,7 @@ struct VNavigationLinkDemoView: View {
     static let navigationBarTitle: String = "Navigation Link"
     
     @State private var state: VNavigationLinkState = .enabled
-    @State private var navigationLinkButtonType: VNavigationLinkButtonTypeHelper = .primary
+    @State private var navigationLinkButtonType: VNavigationLinkButtonTypeHelper = .secondary
 }
 
 // MARK:- Body

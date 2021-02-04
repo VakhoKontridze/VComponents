@@ -57,13 +57,14 @@ extension _VHalfModal {
             modalView
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.keyboard, edges: model.misc.keyboardIgnoredSafeAreas)
             .onAppear(perform: animateIn)
     }
     
     private var blinding: some View {
         model.colors.blinding
             .edgesIgnoringSafeArea(.all)
-            .onTapGesture(perform: animateOut)
+            .onTapGesture(perform: animateOutFromBackTap)
     }
     
     @ViewBuilder private var modalView: some View {
@@ -185,6 +186,10 @@ private extension _VHalfModal {
     func animateOutFromDrag() {
         withAnimation(VHalfModalModel.Animations.dragDisappear.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + VHalfModalModel.Animations.dragDisappear.duration, execute: { isHCPresented = false })
+    }
+    
+    func animateOutFromBackTap() {
+        if model.misc.dismissType.contains(.backTap) { animateOut() }
     }
 }
 
