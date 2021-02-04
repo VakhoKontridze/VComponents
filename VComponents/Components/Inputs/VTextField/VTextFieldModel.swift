@@ -337,6 +337,7 @@ extension VTextFieldModel {
 extension VTextFieldModel {
     public struct Animations {
         public var buttonsAppearDisAppear: Animation? = .easeInOut
+        static let durationDelayToShowButtons: TimeInterval = 0.5   // Must be more than keyboard or modal duration
         
         public init() {}
     }

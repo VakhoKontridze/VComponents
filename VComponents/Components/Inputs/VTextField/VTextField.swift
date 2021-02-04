@@ -358,10 +358,12 @@ extension VTextField {
 // MARK:- State Sets
 private extension VTextField {
     func performStateSets() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + VTextFieldModel.Animations.durationDelayToShowButtons, execute: {
+            nonEmptyText = !text.isEmpty
+        })
+        
         DispatchQueue.main.async(execute: {
-            self.nonEmptyText = !text.isEmpty
-            
-            if self.secureFieldIsVisible && !textFieldType.isSecure { self.secureFieldIsVisible = false }
+            if secureFieldIsVisible && !textFieldType.isSecure { secureFieldIsVisible = false }
         })
     }
 }
