@@ -39,7 +39,7 @@ extension VPrimaryButtonModel {
 // MARK:- Colors
 extension VPrimaryButtonModel {
     public struct Colors {
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -72,47 +72,9 @@ extension VPrimaryButtonModel {
 }
 
 extension VPrimaryButtonModel.Colors {
-    public struct StateColors {
-        public var enabled: Color
-        public var pressed: Color
-        public var disabled: Color
-        public var loading: Color
-        
-        public init(enabled: Color, pressed: Color, disabled: Color, loading: Color) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-            self.loading = loading
-        }
-        
-        func `for`(_ state: VPrimaryButtonInternalState) -> Color {
-            switch state {
-            case .enabled: return enabled
-            case .pressed: return pressed
-            case .disabled: return disabled
-            case .loading: return loading
-            }
-        }
-    }
+    public typealias StateColors = StateColorsEPDL
     
-    public struct StateOpacity {
-        public var pressedOpacity: Double
-        public var disabledOpacity: Double
-        
-        public init(pressedOpacity: Double, disabledOpacity: Double) {
-            self.pressedOpacity = pressedOpacity
-            self.disabledOpacity = disabledOpacity
-        }
-        
-        func `for`(_ state: VPrimaryButtonInternalState) -> Double {
-            switch state {
-            case .enabled: return 1
-            case .pressed: return pressedOpacity
-            case .disabled: return disabledOpacity
-            case .loading: return disabledOpacity
-            }
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesPD
 }
 
 // MARK:- Fonts

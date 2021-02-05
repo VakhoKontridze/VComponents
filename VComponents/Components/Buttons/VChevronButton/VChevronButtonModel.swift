@@ -33,7 +33,7 @@ extension VChevronButtonModel {
 // MARK:- Colors
 extension VChevronButtonModel {
     public struct Colors {
-        public var content: StateColorsAndOpacity = .init(
+        public var content: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
             disabled: ColorBook.primary,
@@ -52,37 +52,7 @@ extension VChevronButtonModel {
 }
 
 extension VChevronButtonModel.Colors {
-    public typealias StateColors = VSecondaryButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public struct StateColorsAndOpacity {
-        public var enabled: Color
-        public var pressed: Color
-        public var disabled: Color
-        public var pressedOpacity: Double
-        public var disabledOpacity: Double
-        
-        public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double, disabledOpacity: Double) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-            self.pressedOpacity = pressedOpacity
-            self.disabledOpacity = disabledOpacity
-        }
-        
-        func `for`(_ state: VChevronButtonInternalState) -> Color {
-            switch state {
-            case .enabled: return enabled
-            case .pressed: return pressed
-            case .disabled: return disabled
-            }
-        }
-        
-        func `for`(_ state: VChevronButtonInternalState) -> Double {
-            switch state {
-            case .enabled: return 1
-            case .pressed: return pressedOpacity
-            case .disabled: return disabledOpacity
-            }
-        }
-    }
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }

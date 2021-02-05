@@ -45,7 +45,7 @@ extension VSegmentedPickerModel {
 // MARK:- Colors
 extension VSegmentedPickerModel {
     public struct Colors {
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -89,41 +89,9 @@ extension VSegmentedPickerModel {
 }
 
 extension VSegmentedPickerModel.Colors {
-    public struct StateColors {
-        public var enabled: Color
-        public var disabled: Color
-        
-        public init(enabled: Color, disabled: Color) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VSegmentedPickerState) -> Color {
-            switch state {
-            case .enabled: return enabled
-            case .disabled: return disabled
-            }
-        }
-    }
+    public typealias StateColors = StateColorsED
     
-    public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
-}
-
-extension VSegmentedPickerModel.Colors.StateOpacity {
-    func `for`(_ state: VSegmentedPickerState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .disabled: return disabledOpacity
-        }
-    }
-    
-    func `for`(_ state: VSegmentedPickerRowState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesPD
 }
 
 // MARK:- Fonts

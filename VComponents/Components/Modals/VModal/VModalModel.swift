@@ -90,7 +90,7 @@ extension VModalModel {
         public var headerText: Color = ColorBook.primary    // Only applicable during init with title
         
         public var closeButtonBackground: StateColors = closeButtonReference.colors.background
-        public var closeButtonIcon: StateColorsAndOpacity = closeButtonReference.colors.content
+        public var closeButtonIcon: StateColorsAndOpacities = closeButtonReference.colors.content
         
         public var divider: Color = .clear
         
@@ -101,9 +101,9 @@ extension VModalModel {
 }
 
 extension VModalModel.Colors {
-    public typealias StateColors = VCloseButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public typealias StateColorsAndOpacity = VCloseButtonModel.Colors.StateColorsAndOpacity
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- Fonts

@@ -85,7 +85,7 @@ extension VAccordionModel {
     public struct Colors {
         public var background: Color = sectionReference.colors.background
         
-        public var header: StateOpacity = .init(
+        public var header: StateOpacities = .init(
             disabledOpacity: 0.5
         )
         
@@ -95,7 +95,7 @@ extension VAccordionModel {
         
         public var chevronButtonBackground: StateColors = chevronButtonReference.colors.background
         
-        public var chevronButtonIcon: StateColorsAndOpacity = chevronButtonReference.colors.content
+        public var chevronButtonIcon: StateColorsAndOpacities = chevronButtonReference.colors.content
         
         public var divider: Color = sectionReference.colors.divider
         
@@ -104,25 +104,11 @@ extension VAccordionModel {
 }
 
 extension VAccordionModel.Colors {
-    public struct StateOpacity {
-        public var disabledOpacity: Double
-        
-        public init(disabledOpacity: Double) {
-            self.disabledOpacity = disabledOpacity
-        }
-        
-        func `for`(_ state: VAccordionState) -> Double {
-            switch state {
-            case .collapsed: return 1
-            case .expanded: return 1
-            case .disabled: return disabledOpacity
-            }
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesD
     
-    public typealias StateColors = VChevronButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- Fonts

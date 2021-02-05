@@ -42,7 +42,7 @@ extension VStepperModel {
             disabled: .clear
         )
         
-        public var buttonIcon: StateColorsAndOpacity = .init(
+        public var buttonIcon: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
             disabled: ColorBook.primary,
@@ -57,56 +57,11 @@ extension VStepperModel {
 }
 
 extension VStepperModel.Colors {
-    public typealias StateColors = VSegmentedPickerModel.Colors.StateColors
+    public typealias StateColors = StateColorsED
     
-    public struct ButtonStateColors {
-        public var enabled: Color
-        public var pressed: Color
-        public var disabled: Color
-        
-        public init(enabled: Color, pressed: Color, disabled: Color) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VStepperButtonState) -> Color {
-            switch state {
-            case .enabled: return enabled
-            case .pressed: return pressed
-            case .disabled: return disabled
-            }
-        }
-    }
+    public typealias ButtonStateColors = StateColorsEPD
     
-    public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
-}
-
-extension VStepperModel.Colors.StateColors {
-    func `for`(_ state: VStepperState) -> Color {
-        switch state {
-        case .enabled: return enabled
-        case .disabled: return disabled
-        }
-    }
-}
-
-extension VStepperModel.Colors.StateColorsAndOpacity {
-    func `for`(_ state: VStepperButtonState) -> Color {
-        switch state {
-        case .enabled: return enabled
-        case .pressed: return pressed
-        case .disabled: return disabled
-        }
-    }
-    
-    func `for`(_ state: VStepperButtonState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
-    }
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- Misc

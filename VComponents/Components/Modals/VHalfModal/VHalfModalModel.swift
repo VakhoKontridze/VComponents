@@ -103,7 +103,7 @@ extension VHalfModalModel {
         public var headerText: Color = modalReference.colors.headerText
         
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
-        public var closeButtonIcon: StateColorsAndOpacity = modalReference.colors.closeButtonIcon
+        public var closeButtonIcon: StateColorsAndOpacities = modalReference.colors.closeButtonIcon
         
         public var divider: Color = modalReference.colors.divider
         
@@ -114,9 +114,9 @@ extension VHalfModalModel {
 }
 
 extension VHalfModalModel.Colors {
-    public typealias StateColors = VCloseButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public typealias StateColorsAndOpacity = VCloseButtonModel.Colors.StateColorsAndOpacity
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- Fonts

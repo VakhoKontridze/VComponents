@@ -89,11 +89,11 @@ extension VDialogButtonModelCustom {
 // MARK:- Colors
 extension VDialogButtonModelCustom {
     public struct Colors {
-        public var content: StateOpacity
+        public var content: StateOpacities
         public var text: StateColors    // Only applicable during init with title
         public var background: StateColors
         
-        public init(foreground: StateOpacity, text: StateColors, background: StateColors) {
+        public init(foreground: StateOpacities, text: StateColors, background: StateColors) {
             self.content = foreground
             self.text = text
             self.background = background
@@ -102,25 +102,9 @@ extension VDialogButtonModelCustom {
 }
 
 extension VDialogButtonModelCustom.Colors {
-    public struct StateColors {
-        public var enabled: Color
-        public var pressed: Color
-        public var disabled: Color
-
-        public init(enabled: Color, pressed: Color, disabled: Color) {
-            self.enabled = enabled
-            self.pressed = pressed
-            self.disabled = disabled
-        }
-    }
+    public typealias StateColors = StateColorsEPD
     
-    public struct StateOpacity {
-        public var pressedOpacity: Double
-
-        public init(pressedOpacity: Double) {
-            self.pressedOpacity = pressedOpacity
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesP
 }
 
 // MARK:- Fonts

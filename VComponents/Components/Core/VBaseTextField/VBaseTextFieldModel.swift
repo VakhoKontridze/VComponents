@@ -51,7 +51,7 @@ extension VBaseTextFieldModel.Layout {
 // MARK:- Colors
 extension VBaseTextFieldModel {
     public struct Colors {
-        public var textContent: StateColorsAndOpacity = .init(
+        public var textContent: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
             disabled: ColorBook.primary,
             disabledOpacity: 0.5
@@ -62,33 +62,7 @@ extension VBaseTextFieldModel {
 }
 
 extension VBaseTextFieldModel.Colors {
-    public struct StateColorsAndOpacity {
-        public var enabled: Color
-        public var disabled: Color
-        public var disabledOpacity: Double
-        
-        public init(enabled: Color, disabled: Color, disabledOpacity: Double) {
-            self.enabled = enabled
-            self.disabled = disabled
-            self.disabledOpacity = disabledOpacity
-        }
-        
-        func `for`(_ state: VBaseTextFieldState) -> Color {
-            switch state {
-            case .enabled: return enabled
-            case .focused: return enabled
-            case .disabled: return disabled
-            }
-        }
-        
-        func `for`(_ state: VBaseTextFieldState) -> Double {
-            switch state {
-            case .enabled: return 1
-            case .focused: return 1
-            case .disabled: return disabledOpacity
-            }
-        }
-    }
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEP_D
 }
 
 // MARK:- Fonts

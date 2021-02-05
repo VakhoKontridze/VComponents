@@ -56,7 +56,7 @@ extension VTextFieldModel.Layout {
 // MARK:- Colors
 extension VTextFieldModel {
     public struct Colors {
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             disabledOpacity: 0.5
         )
         
@@ -106,7 +106,7 @@ extension VTextFieldModel {
             disabled: segmentedPickerReference.colors.header.disabled
         )
         
-        public var visibilityButtonIcon: ButtonStateColorsAndOpacityHighlighted = .init(
+        public var visibilityButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
             enabledPressed: segmentedPickerReference.colors.header.enabled,
             focused: segmentedPickerReference.colors.header.enabled,
@@ -132,7 +132,7 @@ extension VTextFieldModel {
             disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
         )
         
-        public var clearButtonIcon: ButtonStateColorsAndOpacityHighlighted = .init(
+        public var clearButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Icon"),
             enabledPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             focused: .init(componentAsset: "TextField.ClearButton.Icon"),
@@ -146,7 +146,7 @@ extension VTextFieldModel {
             disabledOpacity: closeButtonReference.colors.content.disabledOpacity
         )
         
-        public var cancelButton: StateColorsAndOpacity = .init(
+        public var cancelButton: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
             disabled: ColorBook.primary,
@@ -159,163 +159,17 @@ extension VTextFieldModel {
 }
 
 extension VTextFieldModel.Colors {
-    public struct StateColors {
-        public var enabled: Color
-        public var focused: Color
-        public var disabled: Color
-        
-        public init(enabled: Color, focused: Color, disabled: Color) {
-            self.enabled = enabled
-            self.focused = focused
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VTextFieldState) -> Color {
-            switch state {
-            case .enabled: return enabled
-            case .focused: return focused
-            case .disabled: return disabled
-            }
-        }
-    }
+    public typealias StateColors = StateColorsEFD
     
-    public struct StateColorsHighlighted {
-        public var enabled: Color
-        public var focused: Color
-        public var success: Color
-        public var error: Color
-        public var disabled: Color
-        
-        public init(enabled: Color, focused: Color, success: Color, error: Color, disabled: Color) {
-            self.enabled = enabled
-            self.focused = focused
-            self.success = success
-            self.error = error
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-            switch (highlight, state) {
-            case (_, .disabled): return disabled
-            case (.none, .enabled): return enabled
-            case (.none, .focused): return focused
-            case (.success, .enabled): return success
-            case (.success, .focused): return success
-            case (.error, .enabled): return error
-            case (.error, .focused): return error
-            }
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesD
     
-    public struct StateOpacity {
-        public var disabledOpacity: Double
-        
-        public init(disabledOpacity: Double) {
-            self.disabledOpacity = disabledOpacity
-        }
-        
-        func `for`(_ state: VTextFieldState) -> Double {
-            switch state {
-            case .enabled: return 1
-            case .focused: return 1
-            case .disabled: return disabledOpacity
-            }
-        }
-    }
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
     
-    public struct ButtonStateColorsHighlighted {
-        public var enabled: Color
-        public var enabledPressed: Color
-        public var focused: Color
-        public var focusedPressed: Color
-        public var success: Color
-        public var successPressed: Color
-        public var error: Color
-        public var errorPressed: Color
-        public var disabled: Color
-        
-        public init(enabled: Color, enabledPressed: Color, focused: Color, focusedPressed: Color, success: Color, successPressed: Color, error: Color, errorPressed: Color, disabled: Color) {
-            self.enabled = enabled
-            self.enabledPressed = enabledPressed
-            self.focused = focused
-            self.focusedPressed = focusedPressed
-            self.success = success
-            self.successPressed = successPressed
-            self.error = error
-            self.errorPressed = errorPressed
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-            switch (highlight, state) {
-            case (_, .disabled): return disabled
-            case (.none, .enabled): return enabled
-            case (.none, .focused): return focused
-            case (.success, .enabled): return success
-            case (.success, .focused): return success
-            case (.error, .enabled): return error
-            case (.error, .focused): return error
-            }
-        }
-        
-        fileprivate func `for`(highlight: VTextFieldHighlight) -> Color {
-            switch highlight {
-            case .none: return enabledPressed
-            case .success: return successPressed
-            case .error: return errorPressed
-            }
-        }
-    }
+    public typealias StateColorsHighlighted = StateColorsEFSED
     
-    public struct ButtonStateColorsAndOpacityHighlighted {
-        public var enabled: Color
-        public var enabledPressed: Color
-        public var focused: Color
-        public var focusedPressed: Color
-        public var success: Color
-        public var successPressed: Color
-        public var error: Color
-        public var errorPressed: Color
-        public var disabled: Color
-        public var pressedOpacity: Double
-        public var disabledOpacity: Double
-        
-        public init(enabled: Color, enabledPressed: Color, focused: Color, focusedPressed: Color, success: Color, successPressed: Color, error: Color, errorPressed: Color, disabled: Color, pressedOpacity: Double, disabledOpacity: Double) {
-            self.enabled = enabled
-            self.enabledPressed = enabledPressed
-            self.focused = focused
-            self.focusedPressed = focusedPressed
-            self.success = success
-            self.successPressed = successPressed
-            self.error = error
-            self.errorPressed = errorPressed
-            self.disabled = disabled
-            self.pressedOpacity = pressedOpacity
-            self.disabledOpacity = disabledOpacity
-        }
-        
-        func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
-            switch (highlight, state) {
-            case (_, .disabled): return disabled
-            case (.none, .enabled): return enabled
-            case (.none, .focused): return focused
-            case (.success, .enabled): return success
-            case (.success, .focused): return success
-            case (.error, .enabled): return error
-            case (.error, .focused): return error
-            }
-        }
-        
-        fileprivate func `for`(highlight: VTextFieldHighlight) -> Color {
-            switch highlight {
-            case .none: return enabledPressed
-            case .success: return successPressed
-            case .error: return errorPressed
-            }
-        }
-    }
+    public typealias ButtonStateColorsHighlighted = StateColorsEpFpSpEpD
     
-    public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
+    public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColorsEpFpSpEpD_PD
 }
 
 // MARK:- Fonts

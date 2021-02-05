@@ -33,7 +33,7 @@ extension VCloseButtonModel {
 // MARK:- Colors
 extension VCloseButtonModel {
     public struct Colors {
-        public var content: StateColorsAndOpacity = chevronButtonReference.colors.content
+        public var content: StateColorsAndOpacities = chevronButtonReference.colors.content
         
         public var background: StateColors = chevronButtonReference.colors.background
         
@@ -42,9 +42,9 @@ extension VCloseButtonModel {
 }
 
 extension VCloseButtonModel.Colors {
-    public typealias StateColors = VChevronButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- References

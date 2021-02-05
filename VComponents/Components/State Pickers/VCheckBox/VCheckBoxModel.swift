@@ -61,7 +61,7 @@ extension VCheckBoxModel {
             disabled: .clear
         )
 
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             pressedOpacity: toggleReference.colors.content.pressedOpacity,
             disabledOpacity: toggleReference.colors.content.disabledOpacity
         )
@@ -78,47 +78,9 @@ extension VCheckBoxModel {
 }
 
 extension VCheckBoxModel.Colors {
-    public struct StateColors {
-        public var off: Color
-        public var on: Color
-        public var intermediate: Color
-        public var disabled: Color
+    public typealias StateColors = StateColorsOOID
 
-        public init(off: Color, on: Color, intermediate: Color, disabled: Color) {
-            self.off = off
-            self.on = on
-            self.intermediate = intermediate
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VCheckBoxInternalState) -> Color {
-            switch state {
-            case .off: return off
-            case .pressedOff: return off
-            case .on: return on
-            case .pressedOn: return on
-            case .intermediate: return intermediate
-            case .pressedIntermediate: return intermediate
-            case .disabled: return disabled
-            }
-        }
-    }
-
-    public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
-}
-
-extension VCheckBoxModel.Colors.StateOpacity {
-    func `for`(_ state: VCheckBoxInternalState) -> Double {
-        switch state {
-        case .off: return 1
-        case .pressedOff: return pressedOpacity
-        case .on: return 1
-        case .pressedOn: return pressedOpacity
-        case .intermediate: return 1
-        case .pressedIntermediate: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesPD
 }
 
 // MARK:- Fonts

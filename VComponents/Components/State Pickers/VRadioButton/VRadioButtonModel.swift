@@ -57,7 +57,7 @@ extension VRadioButtonModel {
             disabled: .clear
         )
 
-        public var content: StateOpacity = checkBoxReference.colors.content
+        public var content: StateOpacities = checkBoxReference.colors.content
 
         public var textContent: StateColors = .init(   // Only applicable during init with title
             off: checkBoxReference.colors.textContent.off,
@@ -70,33 +70,9 @@ extension VRadioButtonModel {
 }
 
 extension VRadioButtonModel.Colors {
-    public typealias StateColors = VToggleModel.Colors.StateColors
+    public typealias StateColors = StateColorsOOD
 
-    public typealias StateOpacity = VToggleModel.Colors.StateOpacity
-}
-
-extension VRadioButtonModel.Colors.StateColors {
-    func `for`(_ state: VRadioButtonInternalState) -> Color {
-        switch state {
-        case .off: return off
-        case .pressedOff: return off
-        case .on: return on
-        case .pressedOn: return on
-        case .disabled: return disabled
-        }
-    }
-}
-
-extension VRadioButtonModel.Colors.StateOpacity {
-    func `for`(_ state: VRadioButtonInternalState) -> Double {
-        switch state {
-        case .off: return 1
-        case .pressedOff: return pressedOpacity
-        case .on: return 1
-        case .pressedOn: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesPD
 }
 
 // MARK:- Fonts

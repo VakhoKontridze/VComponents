@@ -32,7 +32,7 @@ extension VWheelPickerModel {
 // MARK:- Colors
 extension VWheelPickerModel {
     public struct Colors {
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             disabledOpacity: segmentedPickerReference.colors.content.disabledOpacity
         )
         
@@ -52,22 +52,9 @@ extension VWheelPickerModel {
 }
 
 extension VWheelPickerModel.Colors {
-    public typealias StateColors = VSegmentedPickerModel.Colors.StateColors
+    public typealias StateColors = StateColorsED
     
-    public struct StateOpacity {
-        public var disabledOpacity: Double
-        
-        public init(disabledOpacity: Double) {
-            self.disabledOpacity = disabledOpacity
-        }
-        
-        func `for`(_ state: VWheelPickerState) -> Double {
-            switch state {
-            case .enabled: return 1
-            case .disabled: return disabledOpacity
-            }
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesD
 }
 
 // MARK:- Fonts

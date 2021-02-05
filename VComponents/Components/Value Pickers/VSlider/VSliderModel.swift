@@ -84,22 +84,7 @@ extension VSliderModel.Colors {
 }
 
 extension VSliderModel.Colors {
-    public struct StateColors {
-        public var enabled: Color
-        public var disabled: Color
-        
-        public init(enabled: Color, disabled: Color) {
-            self.enabled = enabled
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VSliderState) -> Color {
-            switch state {
-            case .enabled: return enabled
-            case .disabled: return disabled
-            }
-        }
-    }
+    public typealias StateColors = StateColorsED
 }
 
 // MARK:- Animations

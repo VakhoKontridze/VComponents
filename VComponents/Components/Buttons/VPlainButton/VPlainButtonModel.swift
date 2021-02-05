@@ -30,7 +30,7 @@ extension VPlainButtonModel {
 // MARK:- Colors
 extension VPlainButtonModel {
     public struct Colors {
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -46,29 +46,9 @@ extension VPlainButtonModel {
 }
 
 extension VPlainButtonModel.Colors {
-    public typealias StateColors = VSecondaryButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public typealias StateOpacity = VSecondaryButtonModel.Colors.StateOpacity
-}
-
-extension VPlainButtonModel.Colors.StateColors {
-    func `for`(_ state: VPlainButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return enabled
-        case .pressed: return pressed
-        case .disabled: return disabled
-        }
-    }
-}
-
-extension VPlainButtonModel.Colors.StateOpacity {
-    func `for`(_ state: VPlainButtonInternalState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesPD
 }
 
 // MARK:- Fonts

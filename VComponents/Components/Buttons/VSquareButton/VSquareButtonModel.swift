@@ -39,7 +39,7 @@ extension VSquareButtonModel {
 // MARK:- Colors
 extension VSquareButtonModel {
     public struct Colors {
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -67,29 +67,9 @@ extension VSquareButtonModel {
 }
 
 extension VSquareButtonModel.Colors {
-    public typealias StateColors = VSecondaryButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public typealias StateOpacity = VSecondaryButtonModel.Colors.StateOpacity
-}
-
-extension VSquareButtonModel.Colors.StateColors {
-    func `for`(_ state: VSquareButtonInternalState) -> Color {
-        switch state {
-        case .enabled: return enabled
-        case .pressed: return pressed
-        case .disabled: return disabled
-        }
-    }
-}
-
-extension VSquareButtonModel.Colors.StateOpacity {
-    func `for`(_ state: VSquareButtonInternalState) -> Double {
-        switch state {
-        case .enabled: return 1
-        case .pressed: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesPD
 }
 
 // MARK:- Fonts

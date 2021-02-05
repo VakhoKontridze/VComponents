@@ -53,7 +53,7 @@ extension VToggleModel {
             disabled: .init(componentAsset: "Toggle.Thumb")
         )
         
-        public var content: StateOpacity = .init(
+        public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
             disabledOpacity: 0.5
         )
@@ -69,41 +69,9 @@ extension VToggleModel {
 }
 
 extension VToggleModel.Colors {
-    public struct StateColors {
-        public var off: Color
-        public var on: Color
-        public var disabled: Color
-        
-        public init(off: Color, on: Color, disabled: Color) {
-            self.off = off
-            self.on = on
-            self.disabled = disabled
-        }
-        
-        func `for`(_ state: VToggleInternalState) -> Color {
-            switch state {
-            case .off: return off
-            case .pressedOff: return off
-            case .on: return on
-            case .pressedOn: return on
-            case .disabled: return disabled
-            }
-        }
-    }
+    public typealias StateColors = StateColorsOOD
 
-    public typealias StateOpacity = VPrimaryButtonModel.Colors.StateOpacity
-}
-
-extension VToggleModel.Colors.StateOpacity {
-    func `for`(_ state: VToggleInternalState) -> Double {
-        switch state {
-        case .off: return 1
-        case .pressedOff: return pressedOpacity
-        case .on: return 1
-        case .pressedOn: return pressedOpacity
-        case .disabled: return disabledOpacity
-        }
-    }
+    public typealias StateOpacities = StateOpacitiesPD
 }
 
 // MARK:- Fonts

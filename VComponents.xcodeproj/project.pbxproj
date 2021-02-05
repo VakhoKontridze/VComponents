@@ -152,6 +152,9 @@
 		7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A92926625B5BB8200BBEA8A /* ImageBook.swift */; };
 		7AA25E4A25BF2A8A00ACB323 /* VHalfModalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */; };
 		7AA39B7D25CC7A9800FA30E5 /* VStepperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */; };
+		7AA39B8125CD50B800FA30E5 /* StateColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8025CD50B800FA30E5 /* StateColors.swift */; };
+		7AA39B8625CD51E500FA30E5 /* StateOpacities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8525CD51E500FA30E5 /* StateOpacities.swift */; };
+		7AA39B8925CD528C00FA30E5 /* StateColorsAndOpacities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities.swift */; };
 		7AA763D925B738EA0088FC69 /* VTextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763D825B738EA0088FC69 /* VTextFieldState.swift */; };
 		7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */; };
 		7AA763E425B73F2C0088FC69 /* VTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763E325B73F2C0088FC69 /* VTextField.swift */; };
@@ -390,6 +393,9 @@
 		7A92926625B5BB8200BBEA8A /* ImageBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBook.swift; sourceTree = "<group>"; };
 		7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModalDemoView.swift; sourceTree = "<group>"; };
 		7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStepperButton.swift; sourceTree = "<group>"; };
+		7AA39B8025CD50B800FA30E5 /* StateColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors.swift; sourceTree = "<group>"; };
+		7AA39B8525CD51E500FA30E5 /* StateOpacities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateOpacities.swift; sourceTree = "<group>"; };
+		7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColorsAndOpacities.swift; sourceTree = "<group>"; };
 		7AA763D825B738EA0088FC69 /* VTextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldState.swift; sourceTree = "<group>"; };
 		7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldModel.swift; sourceTree = "<group>"; };
 		7AA763E325B73F2C0088FC69 /* VTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextField.swift; sourceTree = "<group>"; };
@@ -1093,6 +1099,16 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		7AA39B8325CD51D600FA30E5 /* State Opacities and Colors */ = {
+			isa = PBXGroup;
+			children = (
+				7AA39B8025CD50B800FA30E5 /* StateColors.swift */,
+				7AA39B8525CD51E500FA30E5 /* StateOpacities.swift */,
+				7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities.swift */,
+			);
+			path = "State Opacities and Colors";
+			sourceTree = "<group>";
+		};
 		7AA763D625B738D30088FC69 /* Inputs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1325,6 +1341,7 @@
 		7AE5C25C25A8BC1D001B62B2 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7AA39B8325CD51D600FA30E5 /* State Opacities and Colors */,
 				7A12716125BAF911002B0397 /* BasicAnimation.swift */,
 				7A6787D925CB291900734DA6 /* ComponentStateManager.swift */,
 				7A0BB67425B9CEF900E7FCA1 /* UIKitPresenter.swift */,
@@ -1506,6 +1523,7 @@
 				7A5A5FEF25C88743008667F5 /* VActionSheetRow.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */,
 				7A5A5FE825C84190008667F5 /* VMenuSubMenu.swift in Sources */,
+				7AA39B8125CD50B800FA30E5 /* StateColors.swift in Sources */,
 				7A767CB925B6BEC10008D2E9 /* VRadioButtonState.swift in Sources */,
 				7A6218382594956400515688 /* VLazyListHorizontal.swift in Sources */,
 				7AF3CA9125B0CB6A00D56042 /* VTextType.swift in Sources */,
@@ -1564,6 +1582,7 @@
 				7A3EE37925B2DE0C00303EE7 /* VNavigationLinkState.swift in Sources */,
 				7AB41B5F25B7673D00F83987 /* VTextFieldHighlight.swift in Sources */,
 				7ACC3EDB25ACC22E00EAD184 /* VAccordionModel.swift in Sources */,
+				7AA39B8625CD51E500FA30E5 /* StateOpacities.swift in Sources */,
 				7A259B7825979FC000A12F8C /* VDialogModel.swift in Sources */,
 				7AB41B6725B8303800F83987 /* VTextFieldActions.swift in Sources */,
 				7A767CF925B717280008D2E9 /* VBaseButtonState.swift in Sources */,
@@ -1614,6 +1633,7 @@
 				7A08F84E25972EB40049FB10 /* VTabNavigationViewModel.swift in Sources */,
 				7ACC3ECF25ACB1D900EAD184 /* VTableLayoutType.swift in Sources */,
 				7A259B6B259783A100A12F8C /* VDialogButtons.swift in Sources */,
+				7AA39B8925CD528C00FA30E5 /* StateColorsAndOpacities.swift in Sources */,
 				7A59578725AB6FCC00B5B6E7 /* VTableModel.swift in Sources */,
 				7A007375258E75DF0003F0E9 /* VToggleState.swift in Sources */,
 				7A767CD025B6E8DB0008D2E9 /* VWheelPickerState.swift in Sources */,

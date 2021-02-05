@@ -50,16 +50,16 @@ extension VBaseViewModel {
         
         public var backButtonBackground: StateColors = VBaseViewModel.chevronButtonModel.colors.background
         
-        public var backButtonIcon: StateColorsAndOpacity = VBaseViewModel.chevronButtonModel.colors.content
+        public var backButtonIcon: StateColorsAndOpacities = VBaseViewModel.chevronButtonModel.colors.content
         
         public init() {}
     }
 }
 
 extension VBaseViewModel.Colors {
-    public typealias StateColors = VChevronButtonModel.Colors.StateColors
+    public typealias StateColors = StateColorsEPD
     
-    public typealias StateColorsAndOpacity = VChevronButtonModel.Colors.StateColorsAndOpacity
+    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- Fonts
