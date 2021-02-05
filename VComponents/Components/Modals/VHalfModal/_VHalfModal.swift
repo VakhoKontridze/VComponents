@@ -26,6 +26,10 @@ struct _VHalfModal<Content, HeaderContent>: View
     @State private var offsetBeforeDrag: CGFloat?
     
     private var headerExists: Bool { headerContent != nil || model.misc.dismissType.hasButton }
+    private var hasResizeIndicator: Bool {
+        model.layout.hasResizeIndicator &&
+        (model.misc.dismissType.contains(.pullDown) || model.layout.height.isResizable)
+    }
     
     private let validLayout: Bool
 
@@ -81,6 +85,7 @@ extension _VHalfModal {
                     )
                 
                 VStack(spacing: 0, content: {
+                    resizeIndicator
                     headerView
                     dividerView
                     contentView.frame(maxHeight: .infinity, alignment: .center)
@@ -95,6 +100,16 @@ extension _VHalfModal {
                     .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
             })
+        }
+    }
+    
+    @ViewBuilder private var resizeIndicator: some View {
+        if hasResizeIndicator {
+            RoundedRectangle(cornerRadius: model.layout.resizeIndicatorCornerRadius)
+                .frame(size: model.layout.resizeIndicatorSize)
+                .padding(.top, model.layout.resizeIndicatorMargin.top)
+                .padding(.bottom, model.layout.resizeIndicatorMargin.bottom)
+                .foregroundColor(model.colors.resizeIndicator)
         }
     }
 
@@ -136,11 +151,17 @@ extension _VHalfModal {
     }
     
     private var contentView: some View {
-        content()
-            .padding(.leading, model.layout.contentMargin.leading)
-            .padding(.trailing, model.layout.contentMargin.trailing)
-            .padding(.top, model.layout.contentMargin.top)
-            .padding(.bottom, model.layout.contentMargin.bottom)
+        ZStack(content: {
+            Color.clear // Overrides drag on edge of sheet
+                .contentShape(Rectangle())
+                .gesture(DragGesture(minimumDistance: 0))
+            
+            content()
+                .padding(.leading, model.layout.contentMargin.leading)
+                .padding(.trailing, model.layout.contentMargin.trailing)
+                .padding(.top, model.layout.contentMargin.top)
+                .padding(.bottom, model.layout.contentMargin.bottom)
+        })
     }
 
     private var closeButton: some View {

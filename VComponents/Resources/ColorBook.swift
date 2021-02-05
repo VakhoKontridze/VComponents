@@ -24,7 +24,7 @@ extension ColorBook {
     /// Primary text color
     public static let primary: Color = .init(componentAsset: "Primary")
     
-    /// Primary text color that inverts color schemes
+    /// Primary text color that inverts color scheme
     public static let primaryInverted: Color = .init(componentAsset: "PrimaryInverted")
     
     /// Secondary text color

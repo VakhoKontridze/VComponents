@@ -44,8 +44,8 @@ extension VModalModel {
         )
     
         public var dividerMargin: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
+            leading: 0,
+            trailing: 0,
             top: sheetReference.layout.contentMargin/2,
             bottom: sheetReference.layout.contentMargin/2
         )

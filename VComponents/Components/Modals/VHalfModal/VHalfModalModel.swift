@@ -27,13 +27,27 @@ extension VHalfModalModel {
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         var roundCorners: Bool { cornerRadius > 0 }
         
-        public var dividerHeight: CGFloat = 0
+        public var resizeIndicatorSize: CGSize = .init(width: 50, height: 4)
+        var hasResizeIndicator: Bool { resizeIndicatorSize.height > 0 }
+        public var resizeIndicatorCornerRadius: CGFloat = 2
+        
+        public var dividerHeight: CGFloat = 1
         var hasDivider: Bool { dividerHeight > 0 }
         
         public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
         public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
         
-        public var headerMargin: Margins = modalReference.layout.headerMargin
+        public var resizeIndicatorMargin: VerticalMargins = .init(
+            top: sheetReference.layout.contentMargin,
+            bottom: sheetReference.layout.contentMargin/2
+        )
+        
+        public var headerMargin: Margins = .init(
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
+            top: sheetReference.layout.contentMargin/2,
+            bottom: sheetReference.layout.contentMargin/2
+        )
     
         public var dividerMargin: Margins = modalReference.layout.dividerMargin
         
@@ -90,9 +104,26 @@ extension VHalfModalModel.Layout {
             case .dynamic(_, _, let max): return max
             }
         }
+        
+        var isResizable: Bool {
+            switch self {
+            case .fixed: return false
+            case .dynamic(let min, let ideal, let max): return min != ideal || ideal != max
+            }
+        }
     }
     
     public typealias Margins = VModalModel.Layout.Margins
+    
+    public struct VerticalMargins {
+        public var top: CGFloat
+        public var bottom: CGFloat
+        
+        public init(top: CGFloat, bottom: CGFloat) {
+            self.top = top
+            self.bottom = bottom
+        }
+    }
 }
 
 // MARK:- Colors
@@ -100,12 +131,14 @@ extension VHalfModalModel {
     public struct Colors {
         public var background: Color = modalReference.colors.background
         
+        public var resizeIndicator: Color = closeButtonReference.colors.background.enabled
+        
         public var headerText: Color = modalReference.colors.headerText
         
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
         public var closeButtonIcon: StateColorsAndOpacities = modalReference.colors.closeButtonIcon
         
-        public var divider: Color = modalReference.colors.divider
+        public var divider: Color = accordionReference.colors.headerDivider
         
         public var blinding: Color = modalReference.colors.blinding
         
@@ -173,7 +206,10 @@ extension Set where Element == VHalfModalModel.Misc.DismissType {
 
 // MARK:- References
 extension VHalfModalModel {
+    public static let sheetReference: VSheetModel = .init()
     public static let modalReference: VModalModel = .init()
+    public static let accordionReference: VAccordionModel = .init()
+    public static let closeButtonReference: VCloseButtonModel = .init()
 }
 
 // MARK:- Sub-Models
