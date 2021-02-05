@@ -129,6 +129,7 @@
 		7A767CF925B717280008D2E9 /* VBaseButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767CF825B717280008D2E9 /* VBaseButtonState.swift */; };
 		7A781E2C25B32B58005C44CB /* VNavigationLinkDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A781E2B25B32B58005C44CB /* VNavigationLinkDemoView.swift */; };
 		7A79F8D425B89555009B66D4 /* VTextFieldType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A79F8D325B89555009B66D4 /* VTextFieldType.swift */; };
+		7A7B7E1E25CD747E00BBCA97 /* StepperSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7B7E1D25CD747E00BBCA97 /* StepperSettingView.swift */; };
 		7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */; };
 		7A860D4F2593169600B19A53 /* VChevronButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */; };
 		7A860D5225931B3C00B19A53 /* VChevronButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */; };
@@ -366,6 +367,7 @@
 		7A767CF825B717280008D2E9 /* VBaseButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseButtonState.swift; sourceTree = "<group>"; };
 		7A781E2B25B32B58005C44CB /* VNavigationLinkDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationLinkDemoView.swift; sourceTree = "<group>"; };
 		7A79F8D325B89555009B66D4 /* VTextFieldType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldType.swift; sourceTree = "<group>"; };
+		7A7B7E1D25CD747E00BBCA97 /* StepperSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepperSettingView.swift; sourceTree = "<group>"; };
 		7A860D4B259315C900B19A53 /* VChevronButtonDirection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonDirection.swift; sourceTree = "<group>"; };
 		7A860D4E2593169600B19A53 /* VChevronButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonModel.swift; sourceTree = "<group>"; };
 		7A860D5125931B3C00B19A53 /* VChevronButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VChevronButtonState.swift; sourceTree = "<group>"; };
@@ -739,6 +741,7 @@
 				7A599580259245660087902B /* DemoView.swift */,
 				7ABD007125BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift */,
 				7A92926325B5B74400BBEA8A /* ToggleSettingView.swift */,
+				7A7B7E1D25CD747E00BBCA97 /* StepperSettingView.swift */,
 				7ADCCC7C25B7245300E99E1B /* DemoIconContentView.swift */,
 			);
 			path = Subviews;
@@ -1682,6 +1685,7 @@
 				7A5A601725C970DC008667F5 /* VDropDownDemoView.swift in Sources */,
 				7ABEAA7325934E5100A90B56 /* VNavigationViewDemoView.swift in Sources */,
 				7A781E2C25B32B58005C44CB /* VNavigationLinkDemoView.swift in Sources */,
+				7A7B7E1E25CD747E00BBCA97 /* StepperSettingView.swift in Sources */,
 				7A92926425B5B74400BBEA8A /* ToggleSettingView.swift in Sources */,
 				7ABEAADC2593969E00A90B56 /* VLazyListDemoView.swift in Sources */,
 				7ADCCC7D25B7245300E99E1B /* DemoIconContentView.swift in Sources */,

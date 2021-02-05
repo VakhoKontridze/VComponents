@@ -47,7 +47,7 @@ extension VBaseListDemoView {
     
     private func settings() -> some View {
         VStack(spacing: 20, content: {
-            Stepper("Rows", value: $rowCount, in: 0...20)
+            StepperSettingView(range: 0...20, value: $rowCount, title: "Rows")
             
             VSegmentedPicker(
                 selection: $layoutType,

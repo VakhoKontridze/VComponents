@@ -75,7 +75,7 @@ extension VAccordionDemoView {
         VSegmentedPicker(selection: $layoutType, headerTitle: "Layout", footerTitle: layoutType.description)
             .frame(height: 110, alignment: .top)
         
-        Stepper("Rows", value: $rowCount, in: 0...20)
+        StepperSettingView(range: 0...20, value: $rowCount, title: "Rows")
         
         ToggleSettingView(isOn: $expandCollapseOnHeaderTap, title: "Expand/Collapse on Header Tap")
         

@@ -91,9 +91,9 @@ extension VTableDemoView {
         })
         
         DemoViewSettingsSection(content: {
-            Stepper("Sections", value: $sectionCount, in: 0...10)
-
-            Stepper("Rows", value: $rowCount, in: 0...10)
+            StepperSettingView(range: 0...10, value: $sectionCount, title: "Sections")
+            
+            StepperSettingView(range: 0...10, value: $rowCount, title: "Rows")
         })
     }
 }
