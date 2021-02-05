@@ -82,7 +82,7 @@ extension Color {
  
  Modal.Blinding
  *100.100.100 @ 30
- *20.20.20 @ 30
+ 35.35.35 @ 30
  
  PrimaryButton.Background.enabled
  128.176.240
