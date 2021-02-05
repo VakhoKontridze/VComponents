@@ -188,7 +188,7 @@ private extension VStepper {
         longPressIncrementTimerIncremental = nil
 
         let interval: TimeInterval = {
-            let adjustedStep: Int = .init(pow(.init(model.misc.longPressIncrementCurve.value), longPressIncrementTimeElapsed)) * step
+            let adjustedStep: Int = .init(pow(.init(model.misc.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
             let interval: TimeInterval = 1 / .init(adjustedStep)
             return interval
         }()

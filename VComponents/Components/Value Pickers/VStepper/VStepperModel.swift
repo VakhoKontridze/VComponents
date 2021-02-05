@@ -113,27 +113,9 @@ extension VStepperModel.Colors.StateColorsAndOpacity {
 extension VStepperModel {
     public struct Misc {
         public var intervalToStartLongPressIncrement: TimeInterval = 1
-        public var longPressIncrementCurve: LongPressIncrementCurve = .default
+        public var longPressIncrementExponent: Int = 2
         
         public init() {}
-    }
-}
-
-extension VStepperModel {
-    public enum LongPressIncrementCurve: Int, CaseIterable {
-        case linear
-        case quadratic
-        case cubic
-        
-        public static let `default`: Self = .quadratic
-        
-        var value: Double {
-            switch self {
-            case .linear: return 1
-            case .quadratic: return 2
-            case .cubic: return 3
-            }
-        }
     }
 }
 
