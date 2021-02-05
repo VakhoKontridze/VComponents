@@ -39,14 +39,14 @@ import SwiftUI
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
     private let menuButtonType: VMenuButtonType
-    private let state: VNavigationLinkState
+    private let state: VMenuState
     private let rows: [VMenuRow]
     private let label: () -> Label
     
     // MARK: Initializers: Preset
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
-        state: VNavigationLinkState = .enabled,
+        state: VMenuState = .enabled,
         rows: [VMenuRow],
         @ViewBuilder label: @escaping () -> Label
     ) {
@@ -58,7 +58,7 @@ public struct VMenu<Label>: View where Label: View {
     
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
-        state: VNavigationLinkState = .enabled,
+        state: VMenuState = .enabled,
         rows: [VMenuRow],
         title: String
     )
@@ -74,7 +74,7 @@ public struct VMenu<Label>: View where Label: View {
     
     // MARK: Initializers: Custom
     public init(
-        state: VNavigationLinkState = .enabled,
+        state: VMenuState = .enabled,
         rows: [VMenuRow],
         @ViewBuilder label: @escaping () -> Label
     ) {

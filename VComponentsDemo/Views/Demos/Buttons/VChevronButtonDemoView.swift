@@ -58,6 +58,15 @@ extension VChevronButtonDemoView {
 }
 
 // MARK:- Helpers
+extension VChevronButtonState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
+}
+
 extension VChevronButtonDirection: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {

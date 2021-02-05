@@ -125,6 +125,15 @@ extension VRangeSliderDemoView {
 }
 
 // MARK:- Helpers
+extension VRangeSliderState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
+}
+
 private enum RangeSliderThumbType: Int, VPickableTitledItem {
     case standard
     case bordered

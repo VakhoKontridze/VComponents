@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Base Text Field State
-/// State that describes state, such as enabled or disabled
+/// Enum that describes state, such as enabled or disabled
 public enum VBaseButtonState: Int, CaseIterable {
     case enabled
     case disabled

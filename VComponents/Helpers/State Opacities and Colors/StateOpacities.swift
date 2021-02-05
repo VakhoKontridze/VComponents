@@ -95,6 +95,22 @@ extension StateOpacitiesPD {
         }
     }
     
+    func `for`(_ state: VChevronButtonInternalState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
+        }
+    }
+    
+    func `for`(_ state: VCloseButtonInternalState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
+        }
+    }
+    
     func `for`(_ state: VToggleInternalState) -> Double {
         switch state {
         case .off: return 1

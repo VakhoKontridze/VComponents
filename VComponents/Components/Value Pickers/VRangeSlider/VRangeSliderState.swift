@@ -9,4 +9,14 @@ import Foundation
 
 // MARK:- V Range Slider State
 /// Enum that describes state, such as enabled or disabled
-public typealias VRangeSliderState = VSliderState
+public enum VRangeSliderState: Int, CaseIterable {
+    case enabled
+    case disabled
+    
+    var isEnabled: Bool {
+        switch self {
+        case .enabled: return true
+        case .disabled: return false
+        }
+    }
+}

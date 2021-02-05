@@ -5,14 +5,45 @@
 //  Created by Vakhtang Kontridze on 1/19/21.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK:- V Text Field State
-/// State that describes state, such as enabled, focused, or disabled
-public typealias VTextFieldState = VBaseTextFieldState
+/// Enum that describes state, such as enabled, focused, or disabled
+public enum VTextFieldState: Int, CaseIterable {
+    case enabled
+    case focused
+    case disabled
+    
+    var isFocused: Bool {
+        switch self {
+        case .enabled: return false
+        case .focused: return true
+        case .disabled: return false
+        }
+    }
+}
 
 // MARK:- Helpers
 extension VTextFieldState {
+    static func baseTextFieldState(_ state: Binding<VTextFieldState>) -> Binding<VBaseTextFieldState> {
+        .init(
+            get: {
+                switch state.wrappedValue {
+                case .enabled: return .enabled
+                case .focused: return .focused
+                case .disabled: return .disabled
+                }
+            },
+            set: { baseState in
+                switch baseState {
+                case .enabled: state.wrappedValue = .enabled
+                case .focused: state.wrappedValue = .focused
+                case .disabled: state.wrappedValue = .disabled
+                }
+            }
+        )
+    }
+    
     var clearButtonState: VCloseButtonState {
         switch self {
         case .enabled: return .enabled

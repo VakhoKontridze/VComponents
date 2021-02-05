@@ -54,6 +54,16 @@ extension VCloseButtonDemoView {
     }
 }
 
+// MARK:- Helpers
+extension VCloseButtonState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
+}
+
 // MARK:- Preview
 struct VCloseButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {

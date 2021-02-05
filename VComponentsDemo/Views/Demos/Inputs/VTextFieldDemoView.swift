@@ -129,6 +129,16 @@ extension VTextFieldDemoView {
 }
 
 // MARK:- Helpers
+extension VTextFieldState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .focused: return "Focused"
+        case .disabled: return "Disabled"
+        }
+    }
+}
+
 extension VTextFieldType: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {

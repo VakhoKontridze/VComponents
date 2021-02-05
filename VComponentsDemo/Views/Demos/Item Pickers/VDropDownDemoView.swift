@@ -14,7 +14,7 @@ struct VMenuPickerDemoView: View {
     static let navigationBarTitle: String = "Menu Picker"
     
     @State private var selection: ComponentRGBItem = .red
-    @State private var state: VWheelPickerState = .enabled
+    @State private var state: VMenuPickerState = .enabled
     @State private var menuPickerButtonType: VNavigationLinkButtonTypeHelper = .secondary
     @State private var contentType: ComponentContentType = .text
 }
@@ -84,6 +84,16 @@ extension VMenuPickerDemoView {
     }
 
     private func buttonContent() -> some View { DemoIconContentView() }
+}
+
+// MARK:- Helpers
+extension VMenuPickerState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
 }
 
 // MARK:- Preview

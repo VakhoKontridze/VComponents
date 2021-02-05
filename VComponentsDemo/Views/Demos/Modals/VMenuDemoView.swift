@@ -74,8 +74,14 @@ extension VMenuDemoView {
 }
 
 // MARK:- Helpers
-//extension VMenuState: VPickableTitledItem {
-//}
+extension VMenuState: VPickableTitledItem {
+    public var pickerTitle: String {
+        switch self {
+        case .enabled: return "Enabled"
+        case .disabled: return "Disabled"
+        }
+    }
+}
 
 // MARK:- Preview
 struct VMenuDemoView_Previews: PreviewProvider {

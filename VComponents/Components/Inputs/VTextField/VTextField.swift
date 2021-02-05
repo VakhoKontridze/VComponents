@@ -126,7 +126,7 @@ public struct VTextField: View {
     @State private var stateInternally: VTextFieldState = .enabled
     @Binding private var stateExternally: VTextFieldState
     private let stateManagament: ComponentStateManagement
-    private var state: Binding<VBaseTextFieldState> {
+    private var state: Binding<VTextFieldState> {
         .init(
             get: {
                 switch stateManagament {
@@ -296,7 +296,7 @@ extension VTextField {
     private var textFieldContentView: some View {
         UIKitTextFieldRepresentable(
             model: model.baseTextFieldSubModel(state: state.wrappedValue, isSecureTextEntry: textFieldType.isSecure && !secureFieldIsVisible),
-            state: state,
+            state: VTextFieldState.baseTextFieldState(state),
             placeholder: placeholder,
             text: $text,
             onBegin: beginHandler,

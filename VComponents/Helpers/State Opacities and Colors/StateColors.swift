@@ -26,6 +26,13 @@ extension StateColorsED {
         }
     }
     
+    func `for`(_ state: VSegmentedPickerState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .disabled: return disabled
+        }
+    }
+    
     func `for`(_ state: VWheelPickerState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -34,6 +41,13 @@ extension StateColorsED {
     }
     
     func `for`(_ state: VSliderState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .disabled: return disabled
+        }
+    }
+    
+    func `for`(_ state: VRangeSliderState) -> Color {
         switch state {
         case .enabled: return enabled
         case .disabled: return disabled
@@ -73,6 +87,22 @@ extension StateColorsEPD {
     }
     
     func `for`(_ state: VPlainButtonInternalState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
+        }
+    }
+    
+    func `for`(_ state: VChevronButtonInternalState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
+        }
+    }
+    
+    func `for`(_ state: VCloseButtonInternalState) -> Color {
         switch state {
         case .enabled: return enabled
         case .pressed: return pressed
