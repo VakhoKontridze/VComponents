@@ -42,8 +42,8 @@ extension VWheelPickerDemoView {
         case .text:
             VWheelPicker(
                 model: model,
-                selection: $selection,
                 state: state,
+                selection: $selection,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil
             )
@@ -51,8 +51,8 @@ extension VWheelPickerDemoView {
         case .custom:
             VWheelPicker(
                 model: model,
-                selection: $selection,
                 state: state,
+                selection: $selection,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 rowContent: { $0.pickerSymbol }

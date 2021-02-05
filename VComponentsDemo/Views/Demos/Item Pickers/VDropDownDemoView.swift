@@ -32,23 +32,23 @@ extension VMenuPickerDemoView {
         case (let preset?, .text):
             VMenuPicker(
                 preset: preset,
-                selection: $selection,
                 state: state,
+                selection: $selection,
                 title: buttonTitle
             )
         
         case (let preset?, .custom):
             VMenuPicker(
                 preset: preset,
-                selection: $selection,
                 state: state,
+                selection: $selection,
                 label: buttonContent
             )
             
         case (nil, _):
             VMenuPicker(
-                selection: $selection,
                 state: state,
+                selection: $selection,
                 label: buttonContent
             )
         }

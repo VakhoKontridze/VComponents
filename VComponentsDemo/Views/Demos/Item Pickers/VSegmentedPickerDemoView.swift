@@ -57,8 +57,8 @@ extension VSegmentedPickerDemoView {
         case .text:
             VSegmentedPicker(
                 model: model,
-                selection: $selection,
                 state: state,
+                selection: $selection,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 disabledItems: hasDisabledRow ? [.green] : []
@@ -67,8 +67,8 @@ extension VSegmentedPickerDemoView {
         case .custom:
             VSegmentedPicker(
                 model: model,
-                selection: $selection,
                 state: state,
+                selection: $selection,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 disabledItems: hasDisabledRow ? [.green] : [],

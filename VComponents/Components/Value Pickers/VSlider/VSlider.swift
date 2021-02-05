@@ -31,10 +31,10 @@ public struct VSlider: View {
     private var range: ClosedRange<Double> { min...max }
     private let step: Double?
     
+    private let state: VSliderState
+    
     @Binding private var value: Double
     @State private var animatableValue: Double?
-    
-    private let state: VSliderState
     
     private let action: ((Bool) -> Void)?
     
@@ -43,8 +43,8 @@ public struct VSlider: View {
         model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,
         step: V? = nil,
-        value: Binding<V>,
         state: VSliderState = .enabled,
+        value: Binding<V>,
         onChange action: ((Bool) -> Void)? = nil
     )
         where
@@ -60,8 +60,8 @@ public struct VSlider: View {
             case let step?: return .init(step)
             }
         }()
-        self._value = .init(from: value, range: range, step: step)
         self.state = state
+        self._value = .init(from: value, range: range, step: step)
         self.action = action
     }
 }

@@ -57,9 +57,9 @@ public struct VMenuPicker<Label, Data>: View
     // MARK: Properties
     private let menuPickerButtonType: VMenuPickerButtonType
     
-    @Binding private var selectedIndex: Int
-    
     private let state: VMenuPickerState
+    
+    @Binding private var selectedIndex: Int
     
     private let label: () -> Label
     private let data: Data
@@ -68,15 +68,15 @@ public struct VMenuPicker<Label, Data>: View
     // MARK: Initializers: View Builder and Preset
     public init(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selectedIndex: Binding<Int>,
         state: VMenuPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         @ViewBuilder label: @escaping () -> Label,
         data: Data,
         rowContent: @escaping (Data.Element) -> VMenuPickerRow
     ) {
         self.menuPickerButtonType = menuPickerButtonPreset.buttonType
-        self._selectedIndex = selectedIndex
         self.state = state
+        self._selectedIndex = selectedIndex
         self.label = label
         self.data = data
         self.rowContent = rowContent
@@ -84,8 +84,8 @@ public struct VMenuPicker<Label, Data>: View
     
     public init(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selectedIndex: Binding<Int>,
         state: VMenuPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         title: String,
         data: Data,
         rowContent: @escaping (Data.Element) -> VMenuPickerRow
@@ -94,8 +94,8 @@ public struct VMenuPicker<Label, Data>: View
     {
         self.init(
             preset: menuPickerButtonPreset,
-            selectedIndex: selectedIndex,
             state: state,
+            selectedIndex: selectedIndex,
             label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             data: data,
             rowContent: rowContent
@@ -104,15 +104,15 @@ public struct VMenuPicker<Label, Data>: View
     
     // MARK: Initializers: View Builder and Custom
     public init(
-        selectedIndex: Binding<Int>,
         state: VMenuPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         @ViewBuilder label: @escaping () -> Label,
         data: Data,
         rowContent: @escaping (Data.Element) -> VMenuPickerRow
     ) {
         self.menuPickerButtonType = .custom
-        self._selectedIndex = selectedIndex
         self.state = state
+        self._selectedIndex = selectedIndex
         self.label = label
         self.data = data
         self.rowContent = rowContent
@@ -121,16 +121,16 @@ public struct VMenuPicker<Label, Data>: View
     // MARK: Initializers: Row Titles and Preset
     public init(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selectedIndex: Binding<Int>,
         state: VMenuPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         @ViewBuilder label: @escaping () -> Label,
         rowTitles: [String]
     )
         where Data == Array<String>
     {
         self.menuPickerButtonType = menuPickerButtonPreset.buttonType
-        self._selectedIndex = selectedIndex
         self.state = state
+        self._selectedIndex = selectedIndex
         self.label = label
         self.data = rowTitles
         self.rowContent = { title in .titled(title: title) }
@@ -138,8 +138,8 @@ public struct VMenuPicker<Label, Data>: View
     
     public init(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selectedIndex: Binding<Int>,
         state: VMenuPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         title: String,
         rowTitles: [String]
     )
@@ -149,8 +149,8 @@ public struct VMenuPicker<Label, Data>: View
     {
         self.init(
             preset: menuPickerButtonPreset,
-            selectedIndex: selectedIndex,
             state: state,
+            selectedIndex: selectedIndex,
             label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             rowTitles: rowTitles
         )
@@ -158,16 +158,16 @@ public struct VMenuPicker<Label, Data>: View
     
     // MARK: Initializers: Row Titles and Custom
     public init(
-        selectedIndex: Binding<Int>,
         state: VMenuPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         @ViewBuilder label: @escaping () -> Label,
         rowTitles: [String]
     )
         where Data == Array<String>
     {
         self.init(
-            selectedIndex: selectedIndex,
             state: state,
+            selectedIndex: selectedIndex,
             label: label,
             data: rowTitles,
             rowContent: { title in .titled(title: title) }
@@ -177,8 +177,8 @@ public struct VMenuPicker<Label, Data>: View
     // MARK: Initializers: Pickable Item and Preset
     public init<Item>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selection: Binding<Item>,
         state: VMenuPickerState = .enabled,
+        selection: Binding<Item>,
         @ViewBuilder label: @escaping () -> Label,
         rowContent: @escaping (Item) -> VMenuPickerRow
     )
@@ -188,11 +188,11 @@ public struct VMenuPicker<Label, Data>: View
     {
         self.init(
             preset: menuPickerButtonPreset,
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             label: label,
             data: .init(Item.allCases),
             rowContent: rowContent
@@ -201,8 +201,8 @@ public struct VMenuPicker<Label, Data>: View
     
     public init<Item>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selection: Binding<Item>,
         state: VMenuPickerState = .enabled,
+        selection: Binding<Item>,
         title: String,
         rowContent: @escaping (Item) -> VMenuPickerRow
     )
@@ -213,8 +213,8 @@ public struct VMenuPicker<Label, Data>: View
     {
         self.init(
             preset: menuPickerButtonPreset,
-            selection: selection,
             state: state,
+            selection: selection,
             label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             rowContent: rowContent
         )
@@ -222,8 +222,8 @@ public struct VMenuPicker<Label, Data>: View
     
     // MARK: Initializers: Pickable Item and Custom
     public init<Item>(
-        selection: Binding<Item>,
         state: VMenuPickerState = .enabled,
+        selection: Binding<Item>,
         @ViewBuilder label: @escaping () -> Label,
         rowContent: @escaping (Item) -> VMenuPickerRow
     )
@@ -232,11 +232,11 @@ public struct VMenuPicker<Label, Data>: View
             Item: VPickableItem
     {
         self.init(
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             label: label,
             data: .init(Item.allCases),
             rowContent: rowContent
@@ -246,8 +246,8 @@ public struct VMenuPicker<Label, Data>: View
     // MARK: Initializers: Pickable Titled Item and Preset
     public init<Item>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selection: Binding<Item>,
         state: VMenuPickerState = .enabled,
+        selection: Binding<Item>,
         @ViewBuilder label: @escaping () -> Label
     )
         where
@@ -256,11 +256,11 @@ public struct VMenuPicker<Label, Data>: View
     {
         self.init(
             preset: menuPickerButtonPreset,
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             label: label,
             data: .init(Item.allCases),
             rowContent: { item in .titled(title: item.pickerTitle) }
@@ -269,8 +269,8 @@ public struct VMenuPicker<Label, Data>: View
     
     public init<Item>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
-        selection: Binding<Item>,
         state: VMenuPickerState = .enabled,
+        selection: Binding<Item>,
         title: String
     )
         where
@@ -280,11 +280,11 @@ public struct VMenuPicker<Label, Data>: View
     {
         self.init(
             preset: menuPickerButtonPreset,
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
             data: .init(Item.allCases),
             rowContent: { item in .titled(title: item.pickerTitle) }
@@ -293,8 +293,8 @@ public struct VMenuPicker<Label, Data>: View
     
     // MARK: Initializers: Pickable Titled Item and Custom
     public init<Item>(
-        selection: Binding<Item>,
         state: VMenuPickerState = .enabled,
+        selection: Binding<Item>,
         @ViewBuilder label: @escaping () -> Label
     )
         where
@@ -302,11 +302,11 @@ public struct VMenuPicker<Label, Data>: View
             Item: VPickableTitledItem
     {
         self.init(
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             label: label,
             data: .init(Item.allCases),
             rowContent: { item in .titled(title: item.pickerTitle) }

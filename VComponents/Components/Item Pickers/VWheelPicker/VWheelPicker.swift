@@ -48,8 +48,9 @@ public struct VWheelPicker<Data, RowContent>: View
     // MARK: Properties
     private let model: VWheelPickerModel
     
-    @Binding private var selectedIndex: Int
     private let state: VWheelPickerState
+    
+    @Binding private var selectedIndex: Int
     
     private let headerTitle: String?
     private let footerTitle: String?
@@ -62,16 +63,16 @@ public struct VWheelPicker<Data, RowContent>: View
     // MARK: Initializers: View Builder
     public init(
         model: VWheelPickerModel = .init(),
-        selectedIndex: Binding<Int>,
         state: VWheelPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     ) {
         self.model = model
-        self._selectedIndex = selectedIndex
         self.state = state
+        self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.data = data
@@ -81,8 +82,8 @@ public struct VWheelPicker<Data, RowContent>: View
     // MARK: Initializes: Row Titles
     public init(
         model: VWheelPickerModel = .init(),
-        selectedIndex: Binding<Int>,
         state: VWheelPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         rowTitles: [String]
@@ -93,8 +94,8 @@ public struct VWheelPicker<Data, RowContent>: View
     {
         self.init(
             model: model,
-            selectedIndex: selectedIndex,
             state: state,
+            selectedIndex: selectedIndex,
             headerTitle: headerTitle,
             footerTitle: footerTitle,
             data: rowTitles,
@@ -112,8 +113,8 @@ public struct VWheelPicker<Data, RowContent>: View
     // MARK: Initialzers: Pickable Item
     public init<Item>(
         model: VWheelPickerModel = .init(),
-        selection: Binding<Item>,
         state: VWheelPickerState = .enabled,
+        selection: Binding<Item>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         @ViewBuilder rowContent: @escaping (Item) -> RowContent
@@ -124,11 +125,11 @@ public struct VWheelPicker<Data, RowContent>: View
     {
         self.init(
             model: model,
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             headerTitle: headerTitle,
             footerTitle: footerTitle,
             data: .init(Item.allCases),
@@ -139,8 +140,8 @@ public struct VWheelPicker<Data, RowContent>: View
     // MARK: Initialzers: Pickable Titled Item
     public init<Item>(
         model: VWheelPickerModel = .init(),
-        selection: Binding<Item>,
         state: VWheelPickerState = .enabled,
+        selection: Binding<Item>,
         headerTitle: String? = nil,
         footerTitle: String? = nil
     )
@@ -151,11 +152,11 @@ public struct VWheelPicker<Data, RowContent>: View
     {
         self.init(
             model: model,
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             headerTitle: headerTitle,
             footerTitle: footerTitle,
             data: .init(Item.allCases),

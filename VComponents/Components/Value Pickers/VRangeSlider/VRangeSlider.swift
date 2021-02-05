@@ -37,13 +37,13 @@ public struct VRangeSlider: View {
     private var range: ClosedRange<Double> { min...max }
     private let difference: Double
     private let step: Double?
+    
+    private let state: VRangeSliderState
 
     @Binding private var valueLow: Double
     @Binding private var valueHigh: Double
     @State private var animatableValueLow: Double?
     @State private var animatableValueHigh: Double?
-    
-    private let state: VRangeSliderState
     
     private let actionLow: ((Bool) -> Void)?
     private let actionHigh: ((Bool) -> Void)?
@@ -58,9 +58,9 @@ public struct VRangeSlider: View {
         range: ClosedRange<V> = 0...1,
         difference: V,
         step: V? = nil,
+        state: VRangeSliderState = .enabled,
         valueLow: Binding<V>,
         valueHigh: Binding<V>,
-        state: VRangeSliderState = .enabled,
         onChangeLow actionLow: ((Bool) -> Void)? = nil,
         onChangeHigh actionHigh: ((Bool) -> Void)? = nil
     )
@@ -78,9 +78,9 @@ public struct VRangeSlider: View {
             case let step?: return .init(step)
             }
         }()
+        self.state = state
         self._valueLow = .init(from: valueLow, range: range, step: step)
         self._valueHigh = .init(from: valueHigh, range: range, step: step)
-        self.state = state
         self.actionLow = actionLow
         self.actionHigh = actionHigh
         

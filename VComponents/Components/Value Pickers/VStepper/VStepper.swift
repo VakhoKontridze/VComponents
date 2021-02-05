@@ -30,8 +30,6 @@ public struct VStepper: View {
     private let range: ClosedRange<Int>
     private let step: Int
     
-    @Binding private var value: Int
-    
     private let state: VStepperState
     @State private var pressedButton: VStepperButton?
     private func pressedButtonState(_ button: VStepperButton) -> VStepperButtonState {
@@ -40,6 +38,8 @@ public struct VStepper: View {
             isPressed: pressedButton == button
         )
     }
+    
+    @Binding private var value: Int
     
     @State private var longPressSchedulerTimer: Timer?
     @State private var longPressIncrementTimer: Timer?
@@ -52,14 +52,14 @@ public struct VStepper: View {
         model: VStepperModel = .init(),
         range: ClosedRange<Int>,
         step: Int = 1,
-        value: Binding<Int>,
-        state: VStepperState = .enabled
+        state: VStepperState = .enabled,
+        value: Binding<Int>
     ) {
         self.model = model
         self.range = range
         self.step = step
-        self._value = value
         self.state = state
+        self._value = value
     }
 }
 

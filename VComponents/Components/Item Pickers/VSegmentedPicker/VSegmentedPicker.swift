@@ -51,15 +51,15 @@ public struct VSegmentedPicker<Data, RowContent>: View
     // MARK: Properties
     private let model: VSegmentedPickerModel
     
-    @Binding private var selectedIndex: Int
-    @State private var animatableSelectedIndex: Int?
-    
     private let state: VSegmentedPickerState
     @State private var pressedIndex: Int?
     private func rowState(for index: Int) -> VSegmentedPickerRowState { .init(
         isEnabled: state.isEnabled && !disabledIndexes.contains(index),
         isPressed: pressedIndex == index
     ) }
+    
+    @Binding private var selectedIndex: Int
+    @State private var animatableSelectedIndex: Int?
     
     private let headerTitle: String?
     private let footerTitle: String?
@@ -73,8 +73,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
     // MARK: Initializers: View Builder
     public init(
         model: VSegmentedPickerModel = .init(),
-        selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = .init(),
@@ -82,8 +82,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     ) {
         self.model = model
-        self._selectedIndex = selectedIndex
         self.state = state
+        self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
@@ -94,8 +94,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
     // MARK: Initializers: Row Titles
     public init(
         model: VSegmentedPickerModel = .init(),
-        selectedIndex: Binding<Int>,
         state: VSegmentedPickerState = .enabled,
+        selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = .init(),
@@ -107,8 +107,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
     {
         self.init(
             model: model,
-            selectedIndex: selectedIndex,
             state: state,
+            selectedIndex: selectedIndex,
             headerTitle: headerTitle,
             footerTitle: footerTitle,
             disabledIndexes: disabledIndexes,
@@ -127,8 +127,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
     // MARK: Initializers: Pickable Item
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
-        selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
+        selection: Binding<Item>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledItems: Set<Item> = .init(),
@@ -140,11 +140,11 @@ public struct VSegmentedPicker<Data, RowContent>: View
     {
         self.init(
             model: model,
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             headerTitle: headerTitle,
             footerTitle: footerTitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),
@@ -156,8 +156,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
     // MARK: Initializers: Pickable Titled Item
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
-        selection: Binding<Item>,
         state: VSegmentedPickerState = .enabled,
+        selection: Binding<Item>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledItems: Set<Item> = .init()
@@ -169,11 +169,11 @@ public struct VSegmentedPicker<Data, RowContent>: View
     {
         self.init(
             model: model,
+            state: state,
             selectedIndex: .init(
                 get: { selection.wrappedValue.rawValue },
                 set: { selection.wrappedValue = Item(rawValue: $0)! }
             ),
-            state: state,
             headerTitle: headerTitle,
             footerTitle: footerTitle,
             disabledIndexes: .init(disabledItems.map { $0.rawValue }),

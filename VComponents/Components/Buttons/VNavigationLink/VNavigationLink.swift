@@ -53,6 +53,8 @@ public struct VNavigationLink<Destination, Label>: View
     // MARK: Properties
     private let linkButtonType: VNavigationLinkType
     
+    private let state: VNavigationLinkState
+    
     @State private var isActiveInternally: Bool = false
     @Binding private var isActiveExternally: Bool
     private let stateManagament: ComponentStateManagement
@@ -72,8 +74,6 @@ public struct VNavigationLink<Destination, Label>: View
             }
         )
     }
-    
-    private let state: VNavigationLinkState
     
     private let destination: Destination
     private let label: () -> Label
@@ -112,8 +112,8 @@ public struct VNavigationLink<Destination, Label>: View
     // MARK: Initializers: Preset and State
     public init(
         preset linkPreset: VNavigationLinkPreset,
-        isActive: Binding<Bool>,
         state: VNavigationLinkState = .enabled,
+        isActive: Binding<Bool>,
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
@@ -127,8 +127,8 @@ public struct VNavigationLink<Destination, Label>: View
     
     public init(
         preset linkPreset: VNavigationLinkPreset,
-        isActive: Binding<Bool>,
         state: VNavigationLinkState = .enabled,
+        isActive: Binding<Bool>,
         destination: Destination,
         title: String
     )
@@ -136,8 +136,8 @@ public struct VNavigationLink<Destination, Label>: View
     {
         self.init(
             preset: linkPreset,
-            isActive: isActive,
             state: state,
+            isActive: isActive,
             destination: destination,
             label: { linkPreset.text(from: title, isEnabled: state.isEnabled) }
         )
@@ -159,8 +159,8 @@ public struct VNavigationLink<Destination, Label>: View
     
     // MARK: Initializers: Custom and State
     public init(
-        isActive: Binding<Bool>,
         state: VNavigationLinkState = .enabled,
+        isActive: Binding<Bool>,
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {

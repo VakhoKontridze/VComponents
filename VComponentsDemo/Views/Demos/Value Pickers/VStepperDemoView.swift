@@ -29,8 +29,8 @@ extension VStepperDemoView {
         VSliderDemoView.sliderRowView(title: .init(value), content: {
             VStepper(
                 range: 1...10,
-                value: $value,
-                state: state
+                state: state,
+                value: $value
             )
         })
     }
