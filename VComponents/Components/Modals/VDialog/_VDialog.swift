@@ -95,7 +95,7 @@ extension _VDialog {
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
             VText(
-                type: .multiLine(limit: VDialogModel.Layout.descriptionLineLimit, alignment: .center),
+                type: .multiLine(limit: model.layout.descriptionLineLimit, alignment: .center),
                 font: model.fonts.description,
                 color: model.colors.description,
                 title: description
