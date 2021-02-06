@@ -80,7 +80,7 @@ extension VHalfModalModel.Layout {
         
         public static let `default`: Self = .dynamic(
             min: UIScreen.main.bounds.height * 0.3,
-            ideal: UIScreen.main.bounds.height * 0.67,
+            ideal: UIScreen.main.bounds.height * 0.75,
             max: UIScreen.main.bounds.height * 0.9
         )
         
@@ -131,14 +131,14 @@ extension VHalfModalModel {
     public struct Colors {
         public var background: Color = modalReference.colors.background
         
-        public var resizeIndicator: Color = closeButtonReference.colors.background.enabled
+        public var resizeIndicator: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
         
         public var headerText: Color = modalReference.colors.headerText
         
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
         public var closeButtonIcon: StateColorsAndOpacities = modalReference.colors.closeButtonIcon
         
-        public var divider: Color = accordionReference.colors.headerDivider
+        public var divider: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
         
         public var blinding: Color = modalReference.colors.blinding
         

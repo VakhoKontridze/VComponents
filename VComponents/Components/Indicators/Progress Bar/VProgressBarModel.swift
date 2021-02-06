@@ -12,6 +12,7 @@ import SwiftUI
 public struct VProgressBarModel {
     public var layout: Layout = .init()
     public var colors: Colors = .init()
+    public var animations: Animations = .init()
     
     public init() {}
 }
@@ -31,6 +32,15 @@ extension VProgressBarModel {
     public struct Colors {
         public var track: Color = sliderReference.colors.slider.track.enabled
         public var progress: Color = sliderReference.colors.slider.progress.enabled
+
+        public init() {}
+    }
+}
+
+// MARK:- Animations
+extension VProgressBarModel {
+    public struct Animations {
+        public var progress: Animation? = .default
 
         public init() {}
     }
@@ -59,6 +69,8 @@ extension VProgressBarModel {
             enabled: colors.progress,
             disabled: VProgressBarModel.sliderReference.colors.slider.progress.disabled
         )
+        
+        model.animations.progress = animations.progress
         
         return model
     }

@@ -55,6 +55,10 @@ extension Color {
  
  Accordion.Divider
  @140.140.140 @ 50
+ 
+ BaseList.Divider
+ *120.120.120 @ 15
+ @160.160.160 @ 15
 
  CheckBox.Border.disabled
  *230.230.230
@@ -76,9 +80,9 @@ extension Color {
  225.225.225
  *30.30.30
  
- GenericListContent.Divider
- *120.120.120 @ 15
- @160.160.160 @ 15
+ HalfModal.ResizeIndicator
+ *220.220.220
+ 45.45.45
  
  Modal.Blinding
  *100.100.100 @ 30
@@ -158,7 +162,7 @@ extension Color {
  5.145.65
  
  TextField.ClearButton.Background.disabled
- 220.220.220
+ *220.220.220
  *40.40.40
  
  TextField.ClearButton.Background.enabled

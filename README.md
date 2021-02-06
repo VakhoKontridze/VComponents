@@ -31,7 +31,7 @@ Framework supports iOS 14.0 and up. Project is being developed macOS 11.0 Big Su
 
 **Modals.** VModal, VHalfModal, VSideBar, VDialog, VMenu, VActionSheet
 
-**Indicators.** VSpinner, VProgressBar
+**Indicators.** VSpinner, VProgressBar, VPageIndicator
 
 **Core.** VText, VBaseButton, VBaseTextField, VLazyList, VBaseList, VBaseView
 

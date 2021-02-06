@@ -17,7 +17,15 @@ struct VProgressBarDemoView: View {
     @State private var value: Double = 0.5
     private let timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    @State private var useAnimation: Bool = true
+    @State private var useAnimation: Bool = VProgressBarModel.Animations().progress != nil
+    
+    private var model: VProgressBarModel {
+        let defaultModel: VProgressBarModel = .init()
+        
+        var model: VProgressBarModel = .init()
+        model.animations.progress = useAnimation ? (defaultModel.animations.progress != nil ? defaultModel.animations.progress : .default) : nil
+        return model
+    }
 }
 
 // MARK:- Body
@@ -47,9 +55,7 @@ private extension VProgressBarDemoView {
         var valueToSet: Double = value + increment
         if valueToSet >= 1 + increment { valueToSet = 0 }
         
-        withAnimation(useAnimation ? .default : nil, {
-            value  = valueToSet
-        })
+        value = valueToSet
     }
 }
 

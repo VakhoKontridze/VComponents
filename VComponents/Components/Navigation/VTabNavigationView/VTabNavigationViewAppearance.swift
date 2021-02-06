@@ -35,6 +35,6 @@ struct VTabNavigationViewAppearance: ViewModifier {
 extension VTabNavigationViewAppearance {
     func body(content: Content) -> some View {
         content
-            .accentColor(model.colors.itemSelected)
+            .accentColor(model.colors.selectedItem)
     }
 }

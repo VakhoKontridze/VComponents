@@ -35,7 +35,7 @@ extension VBaseListModel {
 // MARK:- Colors
 extension VBaseListModel {
     public struct Colors {
-        public var divider: Color = .init(componentAsset: "GenericListContent.Divider")
+        public var divider: Color = .init(componentAsset: "BaseList.Divider")
         
         init() {}
     }
