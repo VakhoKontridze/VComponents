@@ -12,18 +12,20 @@
 ## Description
 VComponents is a SwiftUI framework that contains 40+ customizable UI components.
 
-Framework supports iOS 14.0 and up. Project is being developed on macOS 11.0 Big Sur in XCode 12.
+Framework supports iOS 14.0 and up.
+
+Project is being developed on macOS 11.0 Big Sur in XCode 12.
 
 ## Demo
-Project contains demo app, which can be run to showcase all components. Demos for each component contain most important settings that showcase a component.
+Project contains demo app, that can be run to showcase all components.
 
 ![DemoApp](./img/DemoApp.jpg)
 
 ## Installation
 
-### Manual
+Framework doesn't support Swift Package Manager, CocoaPods, or Carthage.
 
-Framework doesn't support Swift Package Manager, CocoaPods, or Carthage, and needs to be installed manually.
+### Manual
 
 1. Download [VComponents](https://github.com/VakhoKontridze/files/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
 
@@ -35,11 +37,11 @@ Make sure "Copy items if needed" is selected and click Finish.
 
 ![ManualInstallation2](./img/ManualInstallation2.jpg)
 
-3. Go to the target settings for your app, under "General" tab, and find "Frameworks, Libraries, and Embedded Content". Set the VComponents.framework to “Embed & Sign”.
+3. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the VComponents.framework to “Embed & Sign”.
 
 ![ManualInstallation3](./img/ManualInstallation3.jpg)
 
-### Building
+### Building Your Own Target
 
 Since VComponents is open-source, you can clone the project and build the framework target yourself.
 
@@ -71,10 +73,11 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 ### Models
 
-Components present in the framework are not meant to be customized similar to native SwiftUI components. Instead, most components take model as a parameter.
+Components are not meant to be customized like you would a native SwiftUI component.
 
+Instead, model can be passed as parameter via initializers. This parameter has default value, and is not required every time you create a view.
 
-You do not have to pass model every time you create a component, as initializers have default values. Models are structs with default values, which usually break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
+Essentially, Models are structs with default values. They usually break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
 For instance, changing foreground color of `VSecondaryButton` can be achieved by passing a custom model.
 
@@ -142,7 +145,7 @@ extension VSecondaryButtonModel {
 
 Some components take type as parameter. Types are represented as enums, as more can be added in the future.
 
-For instance, `VPageIndicator` has three types: `Finite`, `Infinite`, and `Auto`. Most of the enums present throughout the framework have default case.
+For instance, `VPageIndicator` has three types: `Finite`, `Infinite`, and `Auto`. Unlike models, types may be required in some instances. For other enums, a default case is provided.
 
 ```swift
 var body: some View {
@@ -158,7 +161,7 @@ var body: some View {
 
 ### Animations
 
-VComponents approaches animations are bound to components, and not to state. Which means, that to modify a state of component with animaton, you need to pass an animation parameter via model, and not set state using an animation.
+VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animaton, you need to pass a custom model.
 
 **Not Preferred**:
 ```swift
