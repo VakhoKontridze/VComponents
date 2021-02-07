@@ -8,6 +8,31 @@
 import SwiftUI
 
 // MARK:- V Toast
+/// Message component that present text modally
+///
+/// Model can be passed as parameter
+///
+/// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+///
+/// # Usage Example #
+///
+/// ```
+/// @State var isPresented: Bool = false
+///
+/// var body: some View {
+///     VSecondaryButton(
+///         action: { isPresented = true },
+///         title: "Present"
+///     )
+///         .vToast(isPresented: $isPresented, modal: {
+///             VToast(
+///                 type: .oneLine,
+///                 title: "Lorem ipsum dolor sit amet"
+///             )
+///         })
+/// }
+/// ```
+///
 public struct VToast {
     // MARK: Properties
     fileprivate let model: VToastModel
