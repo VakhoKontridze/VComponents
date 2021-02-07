@@ -12,6 +12,10 @@ import SwiftUI
 ///
 /// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
 ///
+/// Component can be initialized with content or title.
+///
+/// Component supports presets or existing button types.
+///
 /// Best suited for 5+ items
 ///
 /// State can be passed as parameter
@@ -328,7 +332,7 @@ extension VMenuPicker {
     }
     
     private var labelView: some View {
-        VMenuPickerButtonType.pickerButton(
+        VMenuPickerButtonType.menuPickerButton(
             buttonType: menuPickerButtonType,
             isEnabled: state.isEnabled,
             label: label

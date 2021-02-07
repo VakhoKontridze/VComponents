@@ -1,24 +1,24 @@
 //
-//  VNavigationLinkDemoView.swift
+//  VLinkDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 18.12.20.
+//  Created by Vakhtang Kontridze on 2/7/21.
 //
 
 import SwiftUI
 import VComponents
 
-// MARK:- V Navigation Link Demo View
-struct VNavigationLinkDemoView: View {
+// MARK:- V  Link Demo View
+struct VLinkDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Navigation Link"
+    static let navigationBarTitle: String = "Link"
     
-    @State private var state: VNavigationLinkState = .enabled
-    @State private var navigationLinkButtonType: VNavigationLinkButtonTypeHelper = .secondary
+    @State private var state: VLinkState = .enabled
+    @State private var linkButtonType: VLinkButtonTypeHelper = .secondary
 }
 
 // MARK:- Body
-extension VNavigationLinkDemoView {
+extension VLinkDemoView {
     var body: some View {
         VBaseView(title: Self.navigationBarTitle, content: {
             DemoView(component: component, settings: settings)
@@ -26,20 +26,20 @@ extension VNavigationLinkDemoView {
     }
     
     @ViewBuilder private func component() -> some View {
-        switch navigationLinkButtonType.preset {
-        case let preset?: VNavigationLink(preset: preset, state: state, destination: destination, title: buttonTitle)
-        case nil: VNavigationLink(state: state, destination: destination, label: buttonContent)
+        switch linkButtonType.preset {
+        case let preset?: VLink(preset: preset, state: state, url: url, title: buttonTitle)
+        case nil: VLink(state: state, url: url, label: buttonContent)
         }
     }
     
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VWheelPicker(selection: $navigationLinkButtonType, headerTitle: "Preset")
+        VWheelPicker(selection: $linkButtonType, headerTitle: "Preset")
     }
     
     private var buttonTitle: String {
-        switch navigationLinkButtonType.preset {
+        switch linkButtonType.preset {
         case .square: return "Lorem"
         default: return "Lorem ipsum"
         }
@@ -47,19 +47,11 @@ extension VNavigationLinkDemoView {
     
     private func buttonContent() -> some View { DemoIconContentView(dimension: 20) }
     
-    private var destination: some View {
-        VBaseView(title: "Destination", content: {
-            ZStack(content: {
-                ColorBook.canvas.edgesIgnoringSafeArea(.all)
-
-                VSheet()
-            })
-        })
-    }
+    private var url: URL? { URL(string: "https://www.apple.com") }
 }
 
 // MARK:- Helpers
-extension VNavigationLinkState: VPickableTitledItem {
+extension VLinkState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
@@ -68,14 +60,14 @@ extension VNavigationLinkState: VPickableTitledItem {
     }
 }
 
-private enum VNavigationLinkButtonTypeHelper: Int, VPickableTitledItem {
+private enum VLinkButtonTypeHelper: Int, VPickableTitledItem {
     case primary
     case secondary
     case square
     case plain
     case custom
     
-    var preset: VNavigationLinkPreset? {
+    var preset: VLinkPreset? {
         switch self {
         case .primary: return .primary()
         case .secondary: return .secondary()
@@ -96,8 +88,8 @@ private enum VNavigationLinkButtonTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VNavigationLinkPreset {
-    var helperType: VNavigationLinkButtonTypeHelper {
+private extension VLinkPreset {
+    var helperType: VLinkButtonTypeHelper {
         switch self {
         case .primary: return .primary
         case .secondary: return .secondary
@@ -108,8 +100,8 @@ private extension VNavigationLinkPreset {
 }
 
 // MARK:- Preview
-struct VNavigationLinkDemoView_Previews: PreviewProvider {
+struct VLinkDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VNavigationLinkDemoView()
+        VLinkDemoView()
     }
 }

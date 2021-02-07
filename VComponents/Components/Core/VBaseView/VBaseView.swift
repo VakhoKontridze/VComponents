@@ -13,6 +13,7 @@ import SwiftUI
 /// Model, and leading and trailing items can be passed as parameters
 ///
 /// # Usage Example #
+/// 
 /// ```
 /// var body: some View {
 ///     VNavigationView(content: {

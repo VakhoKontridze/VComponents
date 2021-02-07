@@ -15,7 +15,7 @@ struct VMenuPickerDemoView: View {
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VMenuPickerState = .enabled
-    @State private var menuPickerButtonType: VNavigationLinkButtonTypeHelper = .secondary
+    @State private var menuPickerButtonType: VMenuPickerButtonTypeHelper = .secondary
     @State private var contentType: ComponentContentType = .text
 }
 
@@ -92,6 +92,45 @@ extension VMenuPickerState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        }
+    }
+}
+
+private enum VMenuPickerButtonTypeHelper: Int, VPickableTitledItem {
+    case primary
+    case secondary
+    case square
+    case plain
+    case custom
+    
+    var preset: VLinkPreset? {
+        switch self {
+        case .primary: return .primary()
+        case .secondary: return .secondary()
+        case .square: return .square()
+        case .plain: return .plain()
+        case .custom: return nil
+        }
+    }
+    
+    var pickerTitle: String {
+        switch self {
+        case .primary: return "Primary"
+        case .secondary: return "Secondary"
+        case .square: return "Square"
+        case .plain: return "Plain"
+        case .custom: return "Custom"
+        }
+    }
+}
+
+private extension VMenuButtonPreset {
+    var helperType: VMenuPickerButtonTypeHelper {
+        switch self {
+        case .primary: return .primary
+        case .secondary: return .secondary
+        case .square: return .square
+        case .plain: return .plain
         }
     }
 }

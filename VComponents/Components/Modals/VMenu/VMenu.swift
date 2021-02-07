@@ -97,7 +97,7 @@ extension VMenu {
     }
     
     @ViewBuilder private func labelView() -> some View {
-        VMenuButtonType.pickerButton(
+        VMenuButtonType.menuButton(
             buttonType: menuButtonType,
             isEnabled: state.isEnabled,
             label: label

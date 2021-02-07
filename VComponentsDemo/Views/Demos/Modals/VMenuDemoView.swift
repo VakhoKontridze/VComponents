@@ -14,7 +14,7 @@ struct VMenuDemoView: View {
     static let navigationBarTitle: String = "Menu"
     
     @State private var state: VMenuState = .enabled
-    @State private var menuButtonType: VNavigationLinkButtonTypeHelper = .secondary
+    @State private var menuButtonType: VMenuButtonTypeHelper = .secondary
 }
 
 // MARK:- Body
@@ -79,6 +79,45 @@ extension VMenuState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        }
+    }
+}
+
+private enum VMenuButtonTypeHelper: Int, VPickableTitledItem {
+    case primary
+    case secondary
+    case square
+    case plain
+    case custom
+    
+    var preset: VLinkPreset? {
+        switch self {
+        case .primary: return .primary()
+        case .secondary: return .secondary()
+        case .square: return .square()
+        case .plain: return .plain()
+        case .custom: return nil
+        }
+    }
+    
+    var pickerTitle: String {
+        switch self {
+        case .primary: return "Primary"
+        case .secondary: return "Secondary"
+        case .square: return "Square"
+        case .plain: return "Plain"
+        case .custom: return "Custom"
+        }
+    }
+}
+
+private extension VMenuButtonPreset {
+    var helperType: VMenuButtonTypeHelper {
+        switch self {
+        case .primary: return .primary
+        case .secondary: return .secondary
+        case .square: return .square
+        case .plain: return .plain
         }
     }
 }

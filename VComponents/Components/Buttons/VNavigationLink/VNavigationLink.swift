@@ -10,11 +10,14 @@ import SwiftUI
 // MARK:- V Navigation Link
 /// Button component that controls a navigation presentation
 ///
-/// Component can be initialized with content or title. Component supports presets or existing button types.
+/// Component can be initialized with content or title.
+///
+/// Component supports presets or existing button types.
 ///
 /// State can be passed as parameter
 ///
 /// # Usage Example #
+/// 
 /// ```
 /// var body: some View {
 ///     VNavigationView(content: {
@@ -51,7 +54,7 @@ public struct VNavigationLink<Destination, Label>: View
         Label: View
 {
     // MARK: Properties
-    private let linkButtonType: VNavigationLinkType
+    private let navLinkButtonType: VNavigationLinkType
     
     private let state: VNavigationLinkState
     
@@ -80,12 +83,12 @@ public struct VNavigationLink<Destination, Label>: View
     
     // MARK: Initializers: Preset and Tap
     public init(
-        preset linkPreset: VNavigationLinkPreset,
+        preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.linkButtonType = linkPreset.buttonType
+        self.navLinkButtonType = navLinkPreset.buttonType
         self.state = state
         self._isActiveExternally = .constant(false)
         self.stateManagament = .internal
@@ -94,7 +97,7 @@ public struct VNavigationLink<Destination, Label>: View
     }
     
     public init(
-        preset linkPreset: VNavigationLinkPreset,
+        preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
         destination: Destination,
         title: String
@@ -102,22 +105,22 @@ public struct VNavigationLink<Destination, Label>: View
         where Label == VText
     {
         self.init(
-            preset: linkPreset,
+            preset: navLinkPreset,
             state: state,
             destination: destination,
-            label: { linkPreset.text(from: title, isEnabled: state.isEnabled) }
+            label: { navLinkPreset.text(from: title, isEnabled: state.isEnabled) }
         )
     }
     
     // MARK: Initializers: Preset and State
     public init(
-        preset linkPreset: VNavigationLinkPreset,
+        preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
         isActive: Binding<Bool>,
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.linkButtonType = linkPreset.buttonType
+        self.navLinkButtonType = navLinkPreset.buttonType
         self.state = state
         self._isActiveExternally = isActive
         self.stateManagament = .external
@@ -126,7 +129,7 @@ public struct VNavigationLink<Destination, Label>: View
     }
     
     public init(
-        preset linkPreset: VNavigationLinkPreset,
+        preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
         isActive: Binding<Bool>,
         destination: Destination,
@@ -135,11 +138,11 @@ public struct VNavigationLink<Destination, Label>: View
         where Label == VText
     {
         self.init(
-            preset: linkPreset,
+            preset: navLinkPreset,
             state: state,
             isActive: isActive,
             destination: destination,
-            label: { linkPreset.text(from: title, isEnabled: state.isEnabled) }
+            label: { navLinkPreset.text(from: title, isEnabled: state.isEnabled) }
         )
     }
     
@@ -149,7 +152,7 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.linkButtonType = .custom
+        self.navLinkButtonType = .custom
         self.state = state
         self._isActiveExternally = .constant(false)
         self.stateManagament = .internal
@@ -164,7 +167,7 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.linkButtonType = .custom
+        self.navLinkButtonType = .custom
         self.state = state
         self._isActiveExternally = isActive
         self.stateManagament = .external
@@ -186,7 +189,7 @@ extension VNavigationLink {
     
     private func labelView(isActive: Binding<Bool>) -> some View {
         VNavigationLinkType.navLinkButton(
-            buttonType: linkButtonType,
+            buttonType: navLinkButtonType,
             isEnabled: state.isEnabled,
             action: { isActive.wrappedValue = true },
             label: label
