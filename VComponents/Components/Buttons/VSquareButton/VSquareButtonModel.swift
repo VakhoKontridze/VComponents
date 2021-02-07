@@ -75,7 +75,7 @@ extension VSquareButtonModel.Colors {
 // MARK:- Fonts
 extension VSquareButtonModel {
     public struct Fonts {
-        public var title: Font = .system(size: 14, weight: .semibold, design: .default)  // Only applicable during init with title
+        public var title: Font = .system(size: 14, weight: .semibold)  // Only applicable during init with title
         
         public init() {}
     }

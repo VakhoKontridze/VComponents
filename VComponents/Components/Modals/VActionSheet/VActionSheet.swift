@@ -38,9 +38,9 @@ import SwiftUI
 ///
 public struct VActionSheet {
     // MARK: Properties
-    public var title: String
-    public var description: String?
-    public var rows: [VActionSheetRow]
+    fileprivate let title: String
+    fileprivate let description: String?
+    fileprivate let rows: [VActionSheetRow]
     
     // MARK: Initializrs
     public init(

@@ -96,10 +96,10 @@ public struct VHalfModal<Content, HeaderContent>
         HeaderContent: View
 {
     // MARK: Properties
-    public var model: VHalfModalModel
+    fileprivate let model: VHalfModalModel
     
-    public var headerContent: (() -> HeaderContent)?
-    public var content: () -> Content
+    fileprivate let headerContent: (() -> HeaderContent)?
+    fileprivate let content: () -> Content
     
     // MARK: Initializers: Header
     public init(

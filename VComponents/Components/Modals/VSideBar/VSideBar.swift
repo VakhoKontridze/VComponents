@@ -34,8 +34,8 @@ import SwiftUI
 ///
 public struct VSideBar<Content> where Content: View {
     // MARK: Properties
-    public var model: VSideBarModel
-    public var content: () -> Content
+    fileprivate let model: VSideBarModel
+    fileprivate let content: () -> Content
     
     // MARK: Initializers
     public init(

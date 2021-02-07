@@ -48,7 +48,7 @@ extension VBaseButtonDemoView {
     private func textView(title: String, color: Color) -> some View {
         VText(
             type: .oneLine,
-            font: .system(size: 16, weight: .semibold, design: .default),
+            font: .system(size: 16, weight: .semibold),
             color: color,
             title: title
         )

@@ -26,7 +26,7 @@ struct HomeView: View {
         .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
         .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
         .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
-//        .init(id: 8, title: "Messages", rows: []),
+        .init(id: 8, title: "Messages", rows: [.toast]),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
         .init(id: 10, title: "Core", rows: [.text, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
     ]
@@ -40,7 +40,7 @@ struct HomeView: View {
         case sheet, section, table, accordion
         case tabNavigationView, navigationView
         case modal, halfModal, sideBar, dialog, menu, actionSheet
-        /*case*/ /*, banner*/ /*, toast*/
+        case toast
         case spinner, progressBar, pageIndicator
         case text, baseButton, baseTextField, lazyList, baseList, baseView
 
@@ -83,6 +83,8 @@ struct HomeView: View {
             case .dialog: return VDialogDemoView.navBarTitle
             case .menu: return VMenuDemoView.navBarTitle
             case .actionSheet: return VActionSheetDemoView.navBarTitle
+                
+            case .toast: return VToastDemoView.navBarTitle
 
             case .spinner: return VSpinnerDemoView.navBarTitle
             case .progressBar: return VProgressBarDemoView.navBarTitle
@@ -136,6 +138,8 @@ struct HomeView: View {
             case .dialog: VDialogDemoView()
             case .menu: VMenuDemoView()
             case .actionSheet: VActionSheetDemoView()
+                
+            case .toast: VToastDemoView()
 
             case .spinner: VSpinnerDemoView()
             case .progressBar: VProgressBarDemoView()

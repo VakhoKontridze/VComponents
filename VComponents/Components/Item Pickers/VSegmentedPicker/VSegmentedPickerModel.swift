@@ -97,10 +97,10 @@ extension VSegmentedPickerModel.Colors {
 // MARK:- Fonts
 extension VSegmentedPickerModel {
     public struct Fonts {
-        public var header: Font = .system(size: 14, weight: .regular, design: .default)
-        public var footer: Font = .system(size: 13, weight: .regular, design: .default)
+        public var header: Font = .system(size: 14)
+        public var footer: Font = .system(size: 13)
         
-        public var rows: Font = .system(size: 14, weight: .medium, design: .default)    // Only applicable during init with title
+        public var rows: Font = .system(size: 14, weight: .medium)    // Only applicable during init with title
         
         public init() {}
     }

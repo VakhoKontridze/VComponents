@@ -19,8 +19,8 @@ struct VTextDemoView: View {
     private let baseTextText: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."
     
     private let titleColor: Color = ColorBook.primary
-    private let titleFont: Font = .system(size: 16, weight: .semibold, design: .default)
-    private let textFont: Font = .system(size: 14, weight: .regular, design: .default)
+    private let titleFont: Font = .system(size: 16, weight: .semibold)
+    private let textFont: Font = .system(size: 14)
 }
 
 // MARK:- Body

@@ -68,7 +68,7 @@ extension VBaseTextFieldModel.Colors {
 // MARK:- Fonts
 extension VBaseTextFieldModel {
     public struct Fonts {
-        public var text: UIFont = .systemFont(ofSize: 16, weight: .regular)
+        public var text: UIFont = .systemFont(ofSize: 16)
         
         public init() {}
     }

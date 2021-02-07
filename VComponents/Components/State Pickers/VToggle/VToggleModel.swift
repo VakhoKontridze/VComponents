@@ -77,7 +77,7 @@ extension VToggleModel.Colors {
 // MARK:- Fonts
 extension VToggleModel {
     public struct Fonts {
-        public var title: Font = .system(size: 15, weight: .regular, design: .default)    // Only applicable during init with title
+        public var title: Font = .system(size: 15)    // Only applicable during init with title
         
         public init() {}
     }

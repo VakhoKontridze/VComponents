@@ -52,8 +52,8 @@ extension VTableModel {
 // MARK:- Fonts
 extension VTableModel {
     public struct Fonts {
-        public var header: Font = .system(size: 13, weight: .regular, design: .default)   // Only applicable during init with title
-        public var footer: Font = .system(size: 13, weight: .regular, design: .default)   // Only applicable during init with title
+        public var header: Font = .system(size: 13)   // Only applicable during init with title
+        public var footer: Font = .system(size: 13)   // Only applicable during init with title
         
         public init() {}
     }

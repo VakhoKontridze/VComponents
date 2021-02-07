@@ -10,11 +10,17 @@ import SwiftUI
 // MARK:- UI Kit Representable
 struct UIKitRepresentable<Content> where Content: View {
     // MARK: Properties
+    private let allowsHitTesting: Bool
     @Binding private var isPresented: Bool
     private let content: Content
 
     // MARK: Initializers
-    init(isPresented: Binding<Bool>, content: Content) {
+    init(
+        allowsHitTesting: Bool = true,
+        isPresented: Binding<Bool>,
+        content: Content
+    ) {
+        self.allowsHitTesting = allowsHitTesting
         self._isPresented = isPresented
         self.content = content
     }
@@ -23,7 +29,7 @@ struct UIKitRepresentable<Content> where Content: View {
 // MARK:- Representabe
 extension UIKitRepresentable: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIKitPresenterVC<Content> {
-        .init(content: content)
+        .init(allowsHitTesting: allowsHitTesting, content: content)
     }
 
     func updateUIViewController(_ uiViewController: UIKitPresenterVC<Content>, context: Context) {
@@ -41,9 +47,15 @@ final class UIKitPresenterVC<Content>: UIViewController where Content: View {
     private var hostingController: UIHostingController<Content>!
 
     // MARK: Initializers
-    init(content: Content) {
+    init(
+        allowsHitTesting: Bool,
+        content: Content
+    ) {
         super.init(nibName: nil, bundle: nil)
-        present(content)
+        present(
+            allowsHitTesting: allowsHitTesting,
+            content: content
+        )
     }
 
     required init?(coder: NSCoder) {
@@ -53,11 +65,15 @@ final class UIKitPresenterVC<Content>: UIViewController where Content: View {
 
 // MARK:- Presenting
 private extension UIKitPresenterVC {
-    func present(_ content: Content) {
+    func present(
+        allowsHitTesting: Bool,
+        content: Content
+    ) {
         hostingController = .init(rootView: content)
         
         let hostedView: UIView = hostingController.view
         hostedView.translatesAutoresizingMaskIntoConstraints = false
+        hostedView.isUserInteractionEnabled = allowsHitTesting
         hostedView.backgroundColor = .clear
         hostedView.tag = hostedViewTag
         

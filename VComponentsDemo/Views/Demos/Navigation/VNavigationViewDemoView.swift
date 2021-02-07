@@ -133,7 +133,7 @@ extension NavigationDemoView {
             
             VText(
                 type: .multiLine(limit: nil, alignment: .center),
-                font: .system(size: 16, weight: .semibold, design: .default),
+                font: .system(size: 16, weight: .semibold),
                 color: ColorBook.primary,
                 title: instruction
             )

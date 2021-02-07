@@ -109,7 +109,7 @@ extension VModalModel.Colors {
 // MARK:- Fonts
 extension VModalModel {
     public struct Fonts {
-        public var header: Font = .system(size: 17, weight: .bold, design: .default)    // Only applicable during init with title
+        public var header: Font = .system(size: 17, weight: .bold)    // Only applicable during init with title
         
         public init() {}
     }

@@ -103,7 +103,7 @@ extension VModalDemoView {
                 VStack(content: {
                     VText(
                         type: .multiLine(limit: nil, alignment: .center),
-                        font: .system(size: 14, weight: .semibold, design: .default),
+                        font: .system(size: 14, weight: .semibold),
                         color: ColorBook.primary,
                         title: "When close button is \"none\", Modal can only be dismissed programatically"
                     )

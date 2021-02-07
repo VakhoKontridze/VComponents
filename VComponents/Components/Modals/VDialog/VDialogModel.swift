@@ -56,8 +56,8 @@ extension VDialogModel {
 // MARK:- Fonts
 extension VDialogModel {
     public struct Fonts {
-        public var title: Font = .system(size: 16, weight: .bold, design: .default)
-        public var description: Font = .system(size: 14, weight: .regular, design: .default)
+        public var title: Font = .system(size: 16, weight: .bold)
+        public var description: Font = .system(size: 14)
         
         public init() {}
     }

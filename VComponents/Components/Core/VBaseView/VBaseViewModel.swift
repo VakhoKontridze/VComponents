@@ -65,7 +65,7 @@ extension VBaseViewModel.Colors {
 // MARK:- Fonts
 extension VBaseViewModel {
     public struct Fonts {
-        public var title: Font = .system(size: 17, weight: .semibold, design: .default) // Only applicable during init with title
+        public var title: Font = .system(size: 17, weight: .semibold) // Only applicable during init with title
         
         public init() {}
     }

@@ -39,10 +39,10 @@ public struct VModal<Content, HeaderContent>
         HeaderContent: View
 {
     // MARK: Properties
-    public var model: VModalModel
+    fileprivate let model: VModalModel
     
-    public var headerContent: (() -> HeaderContent)?
-    public var content: () -> Content
+    fileprivate let headerContent: (() -> HeaderContent)?
+    fileprivate let content: () -> Content
     
     // MARK: Initializers: Header
     public init(

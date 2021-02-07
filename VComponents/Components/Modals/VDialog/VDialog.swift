@@ -49,11 +49,11 @@ import SwiftUI
 ///
 public struct VDialog<Content> where Content: View {
     // MARK: Properties
-    public var model: VDialogModel = .init()
-    public var dialogButtons: VDialogButtons
-    public var title: String?
-    public var description: String?
-    public var content: (() -> Content)?
+    fileprivate let model: VDialogModel
+    fileprivate let dialogButtons: VDialogButtons
+    fileprivate let title: String?
+    fileprivate let description: String?
+    fileprivate let content: (() -> Content)?
     
     // MARK: Initializers
     public init(

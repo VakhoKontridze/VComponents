@@ -14,7 +14,7 @@ struct _VModal<Content, HeaderContent>: View
         HeaderContent: View
 {
     // MARK: Properties
-    public var model: VModalModel
+    private let model: VModalModel
     
     @Binding private var isHCPresented: Bool
     @State private var isViewPresented: Bool = false
