@@ -17,19 +17,19 @@ Framework supports iOS 14.0 and up. Project is being developed on macOS 11.0 Big
 ## Installation
 Framework doesn't support Swift Package Manager, CocoaPods, or Carthage, and needs to be installed manually.
 
-1. [Download VComponents](https://github.com/VakhoKontridze/files/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
+1. Download [VComponents](https://github.com/VakhoKontridze/files/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
 
 2. Drag `VComponents.framework` into your project.
 
-<img src="./img/ManualInstallation1">
+![ManualInstallation1](./img/ManualInstallation1.jpg)
 
 Make sure "Copy items if needed" is selected and click Finish.
 
-<img src="./img/ManualInstallation2">
+![ManualInstallation2](./img/ManualInstallation2.jpg)
 
 3. Go to the target settings for your app, under "General" tab, and find "Frameworks, Libraries, and Embedded Content". Set the VComponents.xcframework to “Embed & Sign”.
 
-<img src="./img/ManualInstallation3">
+![ManualInstallation3](./img/ManualInstallation3.jpg)
 
 ## Components
 
