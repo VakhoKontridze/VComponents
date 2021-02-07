@@ -16,12 +16,11 @@ import Foundation
 /// Dots are scrollable in carousel effect, and have scaling property to indicate more content.
 /// If odd **visible** and **center** are not passed, layout would invalidate itself, and refuse to draw.
 ///
-/// 3. Dynamic. Dynamic type that switches from **finite** to **infinite** after a **threshold**.
-/// **finite** type would be drown until the total number of items exceeds **visible** by 1.
+/// 3. Auto. Switches from **finite** to **infinite** after a **finiteLimit**.
 public enum VPageIndicatorType {
     case finite
     case infinite(visible: Int = 7, center: Int = 3)
-    case dynamic(visible: Int = 7, center: Int = 3, threshold: Int = 10)
+    case auto(visible: Int = 7, center: Int = 3, finiteLimit: Int = 10)
     
-    public static let `default`: Self = .dynamic()
+    public static let `default`: Self = .auto()
 }

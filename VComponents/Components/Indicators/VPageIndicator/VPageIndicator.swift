@@ -14,14 +14,15 @@ import SwiftUI
 ///
 /// There are three possible types:
 ///
+/// Enum that describes page indicator type, such as finite or infinite
+///
 /// 1. Finite. Finite number of dots would be displayed.
 ///
 /// 2. Infinite. Infinite dots are possible, but only dots specified by **visible** will be displayed.
 /// Dots are scrollable in carousel effect, and have scaling property to indicate more content.
 /// If odd **visible** and **center** are not passed, layout would invalidate itself, and refuse to draw.
 ///
-/// 3. Dynamic. Dynamic type that switches from **finite** to **infinite** after a **threshold**.
-/// **finite** type would be drown until the total number of items exceeds **visible** by 1.
+/// 3. Auto. Switches from **finite** to **infinite** after a **finiteLimit**.
 ///
 /// # Usage Example #
 ///
@@ -84,12 +85,12 @@ extension VPageIndicator {
                     selectedIndex: animatableSelectedIndex ?? selectedIndex
                 )
             
-            case .dynamic(let visible, let center, let threshold):
-                VPageIndicatorDynamic(
+            case .auto(let visible, let center, let finiteLimit):
+                VPageIndicatorAuto(
                     model: model,
                     visible: visible,
                     center: center,
-                    threshold: threshold,
+                    finiteLimit: finiteLimit,
                     total: total,
                     selectedIndex: animatableSelectedIndex ?? selectedIndex
                 )
@@ -115,7 +116,7 @@ struct VPageIndicator_Previews: PreviewProvider {
         VStack(content: {
             VPageIndicator(type: .finite, total: 9, selectedIndex: 4)
             VPageIndicator(type: .infinite(), total: 100, selectedIndex: 4)
-            VPageIndicator(type: .dynamic(), total: 100, selectedIndex: 4)
+            VPageIndicator(type: .auto(), total: 100, selectedIndex: 4)
         })
     }
 }

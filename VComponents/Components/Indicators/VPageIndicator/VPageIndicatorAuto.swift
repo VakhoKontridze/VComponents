@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorDynamic.swift
+//  VPageIndicatorAuto.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-// MARK:- V Page Indicator Dynamic
-struct VPageIndicatorDynamic: View {
+// MARK:- V Page Indicator Auto
+struct VPageIndicatorAuto: View {
     // MARK: Properties
     private let model: VPageIndicatorModel
     private let visible: Int
     private let center: Int
-    private let threshold: Int
+    private let finiteLimit: Int
     
     private let total: Int
     private let selectedIndex: Int
@@ -23,24 +23,24 @@ struct VPageIndicatorDynamic: View {
         model: VPageIndicatorModel,
         visible: Int,
         center: Int,
-        threshold: Int,
+        finiteLimit: Int,
         total: Int,
         selectedIndex: Int
     ) {
         self.model = model
         self.visible = visible
         self.center = center
-        self.threshold = threshold
+        self.finiteLimit = finiteLimit
         self.total = total
         self.selectedIndex = selectedIndex
     }
 }
 
 // MARK:- Body
-extension VPageIndicatorDynamic {
+extension VPageIndicatorAuto {
     @ViewBuilder var body: some View {
         switch total {
-        case ...threshold:
+        case ...finiteLimit:
             VPageIndicatorFinite(model: model, total: total, selectedIndex: selectedIndex)
             
         default:
@@ -50,13 +50,13 @@ extension VPageIndicatorDynamic {
 }
 
 // MARK:- Preview
-struct VPageIndicatorDynamic_Previews: PreviewProvider {
+struct VPageIndicatorAuto_Previews: PreviewProvider {
     static var previews: some View {
-        VPageIndicatorDynamic(
+        VPageIndicatorAuto(
             model: .init(),
             visible: 7,
             center: 3,
-            threshold: 10,
+            finiteLimit: 10,
             total: 20,
             selectedIndex: 4
         )

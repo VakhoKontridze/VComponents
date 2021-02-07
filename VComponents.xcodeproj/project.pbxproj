@@ -29,7 +29,7 @@
 		7A0E49DB25CEE5DE006A8142 /* VPageIndicatorType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E49DA25CEE5DE006A8142 /* VPageIndicatorType.swift */; };
 		7A0E49DE25CEE84D006A8142 /* VPageIndicatorFinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E49DD25CEE84D006A8142 /* VPageIndicatorFinite.swift */; };
 		7A0E49E125CEE9CD006A8142 /* VPageIndicatorInfinite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E49E025CEE9CD006A8142 /* VPageIndicatorInfinite.swift */; };
-		7A0E49E525CEEC18006A8142 /* VPageIndicatorDynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E49E425CEEC18006A8142 /* VPageIndicatorDynamic.swift */; };
+		7A0E49E525CEEC18006A8142 /* VPageIndicatorAuto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E49E425CEEC18006A8142 /* VPageIndicatorAuto.swift */; };
 		7A0E49E825CEEE6E006A8142 /* VPageIndicatorModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E49E725CEEE6E006A8142 /* VPageIndicatorModel.swift */; };
 		7A0E49EB25CEF0E6006A8142 /* VPageIndicatorDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A0E49EA25CEF0E6006A8142 /* VPageIndicatorDemoView.swift */; };
 		7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A12716125BAF911002B0397 /* BasicAnimation.swift */; };
@@ -276,7 +276,7 @@
 		7A0E49DA25CEE5DE006A8142 /* VPageIndicatorType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPageIndicatorType.swift; sourceTree = "<group>"; };
 		7A0E49DD25CEE84D006A8142 /* VPageIndicatorFinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPageIndicatorFinite.swift; sourceTree = "<group>"; };
 		7A0E49E025CEE9CD006A8142 /* VPageIndicatorInfinite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPageIndicatorInfinite.swift; sourceTree = "<group>"; };
-		7A0E49E425CEEC18006A8142 /* VPageIndicatorDynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPageIndicatorDynamic.swift; sourceTree = "<group>"; };
+		7A0E49E425CEEC18006A8142 /* VPageIndicatorAuto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPageIndicatorAuto.swift; sourceTree = "<group>"; };
 		7A0E49E725CEEE6E006A8142 /* VPageIndicatorModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPageIndicatorModel.swift; sourceTree = "<group>"; };
 		7A0E49EA25CEF0E6006A8142 /* VPageIndicatorDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPageIndicatorDemoView.swift; sourceTree = "<group>"; };
 		7A12716125BAF911002B0397 /* BasicAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicAnimation.swift; sourceTree = "<group>"; };
@@ -951,7 +951,7 @@
 				7A0E49E725CEEE6E006A8142 /* VPageIndicatorModel.swift */,
 				7A0E49DD25CEE84D006A8142 /* VPageIndicatorFinite.swift */,
 				7A0E49E025CEE9CD006A8142 /* VPageIndicatorInfinite.swift */,
-				7A0E49E425CEEC18006A8142 /* VPageIndicatorDynamic.swift */,
+				7A0E49E425CEEC18006A8142 /* VPageIndicatorAuto.swift */,
 			);
 			path = VPageIndicator;
 			sourceTree = "<group>";
@@ -1629,7 +1629,7 @@
 				7A767CD325B6E8F40008D2E9 /* VWheelPickerModel.swift in Sources */,
 				7A8A744D25910E46001024FB /* VSliderModel.swift in Sources */,
 				7A767CF625B705580008D2E9 /* UIKitEventRecognizer.swift in Sources */,
-				7A0E49E525CEEC18006A8142 /* VPageIndicatorDynamic.swift in Sources */,
+				7A0E49E525CEEC18006A8142 /* VPageIndicatorAuto.swift in Sources */,
 				7A767CE225B700430008D2E9 /* UIKitTextFieldRepresentable.swift in Sources */,
 				7A767CCB25B6E8220008D2E9 /* VWheelPicker.swift in Sources */,
 				7A4C431A259237CA000207DD /* VNavigationViewNavigationBar.swift in Sources */,

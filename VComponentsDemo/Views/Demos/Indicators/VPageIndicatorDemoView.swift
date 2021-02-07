@@ -63,13 +63,13 @@ private extension VPageIndicatorDemoView {
 private enum VPageIndicatorTypeHelper: Int, VPickableTitledItem {
     case finite
     case infinite
-    case dynamic
+    case auto
     
     var pickerTitle: String {
         switch self {
         case .finite: return "Finite"
         case .infinite: return "Infinite"
-        case .dynamic: return "Dynamic"
+        case .auto: return "Auto"
         }
     }
     
@@ -77,7 +77,7 @@ private enum VPageIndicatorTypeHelper: Int, VPickableTitledItem {
         switch self {
         case .finite: return "Finite number of dots would be displayed"
         case .infinite: return "Infinite dots are possible, but limited number are displayed. Scrolling with acrousel effect may become enabled."
-        case .dynamic: return "Type that switches between \"Finite\" and \"Infinite\""
+        case .auto: return "Type that switches between \"Finite\" and \"Infinite\""
         }
     }
     
@@ -85,7 +85,7 @@ private enum VPageIndicatorTypeHelper: Int, VPickableTitledItem {
         switch self {
         case .finite: return .finite
         case .infinite: return .infinite()
-        case .dynamic: return .dynamic()
+        case .auto: return .auto()
         }
     }
 }
@@ -95,7 +95,7 @@ private extension VPageIndicatorType {
         switch self {
         case .finite: return .finite
         case .infinite: return .infinite
-        case .dynamic: return .dynamic
+        case .auto: return .auto
         }
     }
 }
