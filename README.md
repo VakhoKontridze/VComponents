@@ -215,7 +215,7 @@ e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)
 ## Copyright
 MIT License
 
-Copyright (c) 2020 Vakhtang Kontridze
+Copyright (c) 2021 Vakhtang Kontridze
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
