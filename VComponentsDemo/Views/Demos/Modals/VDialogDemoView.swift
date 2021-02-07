@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Dialog Demo View
 struct VDialogDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Dialog"
+    static let navBarTitle: String = "Dialog"
     
     @State private var isPresented: Bool = false
     @State private var text: String = ""
@@ -30,7 +30,7 @@ struct VDialogDemoView: View {
 // MARK:- Body
 extension VDialogDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Segmented Picker Demo View
 struct VSegmentedPickerDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Segmented Picker"
+    static let navBarTitle: String = "Segmented Picker"
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VSegmentedPickerState = .enabled
@@ -47,7 +47,7 @@ struct VSegmentedPickerDemoView: View {
 // MARK:- Body
 extension VSegmentedPickerDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

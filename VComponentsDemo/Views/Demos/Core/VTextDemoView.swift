@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Text Demo View
 struct VTextDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Base Title"
+    static let navBarTitle: String = "Base Title"
     
     @State private var vTextDemoType: VTextDemoType = .center
     
@@ -26,7 +26,7 @@ struct VTextDemoView: View {
 // MARK:- Body
 extension VTextDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

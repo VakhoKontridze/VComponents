@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V RadioButton Demo View
 struct VRadioButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Radio Button"
+    static let navBarTitle: String = "Radio Button"
     
     @State private var state: VRadioButtonState = .on
     @State private var contentType: ComponentContentType = .text
@@ -47,7 +47,7 @@ struct VRadioButtonDemoView: View {
 // MARK:- Body
 extension VRadioButtonDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

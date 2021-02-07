@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Stepper Demo View
 struct VStepperDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Stepper"
+    static let navBarTitle: String = "Stepper"
     
     @State private var value: Int = 5
     @State private var state: VStepperState = .enabled
@@ -20,7 +20,7 @@ struct VStepperDemoView: View {
 // MARK:- Body
 extension VStepperDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

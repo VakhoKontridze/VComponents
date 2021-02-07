@@ -10,7 +10,7 @@ import VComponents
 
 // MARK:- V Side Bar Demo View
 struct VSideBarDemoView: View {
-    static let navigationBarTitle: String = "Side Bar"
+    static let navBarTitle: String = "Side Bar"
     
     @State private var isPresented: Bool = false
 }
@@ -18,7 +18,7 @@ struct VSideBarDemoView: View {
 // MARK:- Body
 extension VSideBarDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, leadingItem: sidBarIcon, content: {
+        VBaseView(title: Self.navBarTitle, leadingItem: sidBarIcon, content: {
             DemoView(component: component)
         })
     }

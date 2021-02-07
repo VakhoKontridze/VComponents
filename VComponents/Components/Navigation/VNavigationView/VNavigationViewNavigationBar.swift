@@ -18,6 +18,6 @@ extension View {
 struct VNaviggationViewNavigationBar: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .navigationBarTitleDisplayMode(.inline)
+            .navBarTitleDisplayMode(.inline)
     }
 }

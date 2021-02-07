@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Menu Demo View
 struct VMenuDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Menu"
+    static let navBarTitle: String = "Menu"
     
     @State private var state: VMenuState = .enabled
     @State private var menuButtonType: VMenuButtonTypeHelper = .secondary
@@ -20,7 +20,7 @@ struct VMenuDemoView: View {
 // MARK:- Body
 extension VMenuDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

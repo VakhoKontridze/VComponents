@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V RangeSlider Demo View
 struct VRangeSliderDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Range Slider"
+    static let navBarTitle: String = "Range Slider"
     
     @State private var valueLow: Double = 0.3
     @State private var valueHigh: Double = 0.7
@@ -61,7 +61,7 @@ struct VRangeSliderDemoView: View {
 // MARK:- Body
 extension VRangeSliderDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

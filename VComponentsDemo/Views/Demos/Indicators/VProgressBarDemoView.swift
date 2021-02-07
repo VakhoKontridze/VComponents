@@ -12,7 +12,7 @@ import VComponents
 // MARK:- V Spinner Demo View
 struct VProgressBarDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Progress Bar"
+    static let navBarTitle: String = "Progress Bar"
     
     @State private var value: Double = 0.5
     private let timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -31,7 +31,7 @@ struct VProgressBarDemoView: View {
 // MARK:- Body
 extension VProgressBarDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
             .onReceive(timer, perform: updateValue)

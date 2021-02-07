@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V CheckBox Demo View
 struct VCheckBoxDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "CheckBox"
+    static let navBarTitle: String = "CheckBox"
     
     @State private var state: VCheckBoxState = .on
     @State private var contentType: ComponentContentType = .text
@@ -47,7 +47,7 @@ struct VCheckBoxDemoView: View {
 // MARK:- Body
 extension VCheckBoxDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

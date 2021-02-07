@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Primary Button Demo View
 struct VPrimaryButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Primary Button"
+    static let navBarTitle: String = "Primary Button"
     
     @State private var state: VPrimaryButtonState = .enabled
     @State private var contentType: ComponentContentType = .text
@@ -54,7 +54,7 @@ struct VPrimaryButtonDemoView: View {
 // MARK:- Body
 extension VPrimaryButtonDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- Home View
 struct HomeView: View {
     // MARK: Properties
-    private static let navigationBarTitle: String = "VComponents Demo"
+    private static let navBarTitle: String = "VComponents Demo"
 
     private let sections: [DemoSection<HomeRow>] = [
         .init(id: 0, title: "Buttons", rows: [
@@ -46,54 +46,54 @@ struct HomeView: View {
 
         var title: String {
             switch self {
-            case .primaryButton: return VPrimaryButtonDemoView.navigationBarTitle
-            case .secondaryButton: return VSecondaryButtonDemoView.navigationBarTitle
-            case .squareButton: return VSquareButtonDemoView.navigationBarTitle
-            case .plainButton: return VPlainButtonDemoView.navigationBarTitle
-            case .chevronButton: return VChevronButtonDemoView.navigationBarTitle
-            case .closeButton: return VCloseButtonDemoView.navigationBarTitle
-            case .navigationLink: return VNavigationLinkDemoView.navigationBarTitle
-            case .link: return VLinkDemoView.navigationBarTitle
+            case .primaryButton: return VPrimaryButtonDemoView.navBarTitle
+            case .secondaryButton: return VSecondaryButtonDemoView.navBarTitle
+            case .squareButton: return VSquareButtonDemoView.navBarTitle
+            case .plainButton: return VPlainButtonDemoView.navBarTitle
+            case .chevronButton: return VChevronButtonDemoView.navBarTitle
+            case .closeButton: return VCloseButtonDemoView.navBarTitle
+            case .navigationLink: return VNavigationLinkDemoView.navBarTitle
+            case .link: return VLinkDemoView.navBarTitle
 
-            case .toggle: return VToggleDemoView.navigationBarTitle
-            case .checkBox: return VCheckBoxDemoView.navigationBarTitle
-            case .radioButton: return VRadioButtonDemoView.navigationBarTitle
+            case .toggle: return VToggleDemoView.navBarTitle
+            case .checkBox: return VCheckBoxDemoView.navBarTitle
+            case .radioButton: return VRadioButtonDemoView.navBarTitle
 
-            case .segmentedPicker: return VSegmentedPickerDemoView.navigationBarTitle
-            case .menuPicker: return VMenuPickerDemoView.navigationBarTitle
-            case .wheelPicker: return VWheelPickerDemoView.navigationBarTitle
+            case .segmentedPicker: return VSegmentedPickerDemoView.navBarTitle
+            case .menuPicker: return VMenuPickerDemoView.navBarTitle
+            case .wheelPicker: return VWheelPickerDemoView.navBarTitle
 
-            case .stepper: return VStepperDemoView.navigationBarTitle
-            case .slider: return VSliderDemoView.navigationBarTitle
-            case .rangeSlider: return VRangeSliderDemoView.navigationBarTitle
+            case .stepper: return VStepperDemoView.navBarTitle
+            case .slider: return VSliderDemoView.navBarTitle
+            case .rangeSlider: return VRangeSliderDemoView.navBarTitle
 
-            case .textField: return VTextFieldDemoView.navigationBarTitle
+            case .textField: return VTextFieldDemoView.navBarTitle
                 
-            case .sheet: return VSheetDemoView.navigationBarTitle
-            case .section: return VSectionDemoView.navigationBarTitle
-            case .table: return VTableDemoView.navigationBarTitle
-            case .accordion: return VAccordionDemoView.navigationBarTitle
+            case .sheet: return VSheetDemoView.navBarTitle
+            case .section: return VSectionDemoView.navBarTitle
+            case .table: return VTableDemoView.navBarTitle
+            case .accordion: return VAccordionDemoView.navBarTitle
 
-            case .tabNavigationView: return VTabNavigationViewDemoView.navigationBarTitle
-            case .navigationView: return VNavigationViewDemoView.navigationBarTitle
+            case .tabNavigationView: return VTabNavigationViewDemoView.navBarTitle
+            case .navigationView: return VNavigationViewDemoView.navBarTitle
 
-            case .modal: return VModalDemoView.navigationBarTitle
-            case .halfModal: return VHalfModalDemoView.navigationBarTitle
-            case .sideBar: return VSideBarDemoView.navigationBarTitle
-            case .dialog: return VDialogDemoView.navigationBarTitle
-            case .menu: return VMenuDemoView.navigationBarTitle
-            case .actionSheet: return VActionSheetDemoView.navigationBarTitle
+            case .modal: return VModalDemoView.navBarTitle
+            case .halfModal: return VHalfModalDemoView.navBarTitle
+            case .sideBar: return VSideBarDemoView.navBarTitle
+            case .dialog: return VDialogDemoView.navBarTitle
+            case .menu: return VMenuDemoView.navBarTitle
+            case .actionSheet: return VActionSheetDemoView.navBarTitle
 
-            case .spinner: return VSpinnerDemoView.navigationBarTitle
-            case .progressBar: return VProgressBarDemoView.navigationBarTitle
-            case .pageIndicator: return VPageIndicatorDemoView.navigationBarTitle
+            case .spinner: return VSpinnerDemoView.navBarTitle
+            case .progressBar: return VProgressBarDemoView.navBarTitle
+            case .pageIndicator: return VPageIndicatorDemoView.navBarTitle
 
-            case .text: return VTextDemoView.navigationBarTitle
-            case .baseButton: return VBaseButtonDemoView.navigationBarTitle
-            case .baseTextField: return VBaseTextFieldDemoView.navigationBarTitle
-            case .lazyList: return VLazyListDemoView.navigationBarTitle
-            case .baseList: return VBaseListDemoView.navigationBarTitle
-            case .baseView: return VBaseViewDemoView.navigationBarTitle
+            case .text: return VTextDemoView.navBarTitle
+            case .baseButton: return VBaseButtonDemoView.navBarTitle
+            case .baseTextField: return VBaseTextFieldDemoView.navBarTitle
+            case .lazyList: return VLazyListDemoView.navBarTitle
+            case .baseList: return VBaseListDemoView.navBarTitle
+            case .baseView: return VBaseViewDemoView.navBarTitle
             }
         }
 
@@ -156,7 +156,7 @@ struct HomeView: View {
 extension HomeView {
     var body: some View {
         VNavigationView(content: {
-            VBaseView(title: Self.navigationBarTitle, content: {
+            VBaseView(title: Self.navBarTitle, content: {
                 DemoListView(type: .accordion, sections: sections)
             })
         })

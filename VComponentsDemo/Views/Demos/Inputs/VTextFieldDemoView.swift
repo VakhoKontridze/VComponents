@@ -11,7 +11,7 @@ import VComponents
 // MARK: V Text Field Demo View
 struct VTextFieldDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "TextField"
+    static let navBarTitle: String = "TextField"
 
     @State private var text: String = ""
     @State private var state: VTextFieldState = .enabled
@@ -47,7 +47,7 @@ struct VTextFieldDemoView: View {
 // MARK:- Body
 extension VTextFieldDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

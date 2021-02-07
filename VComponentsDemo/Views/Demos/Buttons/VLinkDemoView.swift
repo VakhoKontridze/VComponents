@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V  Link Demo View
 struct VLinkDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Link"
+    static let navBarTitle: String = "Link"
     
     @State private var state: VLinkState = .enabled
     @State private var linkButtonType: VLinkButtonTypeHelper = .secondary
@@ -20,7 +20,7 @@ struct VLinkDemoView: View {
 // MARK:- Body
 extension VLinkDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

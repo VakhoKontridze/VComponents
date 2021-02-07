@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Menu Picker Demo View
 struct VMenuPickerDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Menu Picker"
+    static let navBarTitle: String = "Menu Picker"
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VMenuPickerState = .enabled
@@ -22,7 +22,7 @@ struct VMenuPickerDemoView: View {
 // MARK:- Body
 extension VMenuPickerDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

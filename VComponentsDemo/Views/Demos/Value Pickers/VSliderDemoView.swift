@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Slider Demo View
 struct VSliderDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Slider"
+    static let navBarTitle: String = "Slider"
     
     @State private var value: Double = 0.5
     @State private var state: VSliderState = .enabled
@@ -77,7 +77,7 @@ struct VSliderDemoView: View {
 // MARK:- Body
 extension VSliderDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Bas List Demo View
 struct VBaseListDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Base List"
+    static let navBarTitle: String = "Base List"
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 5
@@ -20,7 +20,7 @@ struct VBaseListDemoView: View {
 // MARK:- Body
 extension VBaseListDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(
                 type: layoutType.demoViewComponentContentType,
                 hasLayer: false,

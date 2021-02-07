@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Wheel Picker Demo View
 struct VWheelPickerDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Wheel Picker"
+    static let navBarTitle: String = "Wheel Picker"
     
     @State private var selection: ComponentRGBItem = .green
     @State private var state: VWheelPickerState = .enabled
@@ -32,7 +32,7 @@ struct VWheelPickerDemoView: View {
 // MARK:- Body
 extension VWheelPickerDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

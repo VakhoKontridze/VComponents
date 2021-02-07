@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Close Button Demo View
 struct VCloseButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Close Button"
+    static let navBarTitle: String = "Close Button"
     
     @State private var state: VCloseButtonState = .enabled
     @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VCloseButtonModel.Layout().hitBoxHor)
@@ -38,7 +38,7 @@ struct VCloseButtonDemoView: View {
 // MARK:- Body
 extension VCloseButtonDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

@@ -12,7 +12,7 @@ import VComponents
 // MARK:- V Page Indicator Demo VIew
 struct VPageIndicatorDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Page Indicator"
+    static let navBarTitle: String = "Page Indicator"
     
     private let total: Int = 15
     @State private var selectedIndex: Int = 0
@@ -24,7 +24,7 @@ struct VPageIndicatorDemoView: View {
 // MARK:- Body
 extension VPageIndicatorDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
             .onReceive(timer, perform: updateValue)

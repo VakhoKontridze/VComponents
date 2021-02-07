@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Base View Demo View
 struct VBaseViewDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Base View"
+    static let navBarTitle: String = "Base View"
     
     @State private var titleContentType: VBaseViewTitleContentType = .text
     @State private var titlePosition: VBaseViewModel.Layout.TitlePosition = .leading
@@ -94,7 +94,7 @@ extension VBaseViewDemoView {
         }
     }
     
-    private var viewTitle: String { Self.navigationBarTitle }
+    private var viewTitle: String { Self.navBarTitle }
 
     private func viewContent() -> some View {
         HStack(spacing: 5, content: {

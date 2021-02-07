@@ -11,13 +11,13 @@ import VComponents
 // MARK:- V Tab Navigation View Demo View
 struct VTabNavigationViewDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Tab Navigation View"
+    static let navBarTitle: String = "Tab Navigation View"
 }
 
 // MARK:- Body
 extension VTabNavigationViewDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)
         })
     }
@@ -41,7 +41,7 @@ extension VTabNavigationViewDemoView {
 
 // MARK:- Walkthrough
 private struct VTabNavigationViewDemoViewWalkthroughView: View {
-    static let navigationBarTitle: String = ""
+    static let navBarTitle: String = ""
     @State private var selection: Int = 0
 }
 

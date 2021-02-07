@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Square Button Demo View
 struct VSquareButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Square Button"
+    static let navBarTitle: String = "Square Button"
     
     @State private var state: VSquareButtonState = .enabled
     @State private var contentType: ComponentContentType = .text
@@ -71,7 +71,7 @@ struct VSquareButtonDemoView: View {
 // MARK:- Body
 extension VSquareButtonDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

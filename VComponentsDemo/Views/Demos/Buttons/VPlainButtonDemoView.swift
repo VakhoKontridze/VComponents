@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Plain Button Demo View
 struct VPlainButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Plain Button"
+    static let navBarTitle: String = "Plain Button"
     
     @State private var state: VPlainButtonState = .enabled
     @State private var contentType: ComponentContentType = .text
@@ -39,7 +39,7 @@ struct VPlainButtonDemoView: View {
 // MARK:- Body
 extension VPlainButtonDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Lazy List Demo View
 struct VLazyListDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Lazy List"
+    static let navBarTitle: String = "Lazy List"
     
     private let sections: [DemoSection<VLazyListDemoViewDataSource.LazyListRow>] = [
         .init(id: 0, title: nil, rows: [.vertical, .horizontal])
@@ -21,7 +21,7 @@ struct VLazyListDemoView: View {
 // MARK:- Body
 extension VLazyListDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoListView(type: .section, sections: sections)
         })
     }
@@ -29,7 +29,7 @@ extension VLazyListDemoView {
 
 // MARK:- V Lazy List Demo Detail View
 private struct VLazyListDemoDetailView: View {
-    static let navigationBarTitle: String = "Lazy List"
+    static let navBarTitle: String = "Lazy List"
 
     private let lazyListType: VLazyListType
     
@@ -50,7 +50,7 @@ private struct VLazyListDemoDetailView: View {
 
 private extension VLazyListDemoDetailView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)
         })
     }

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Table Demo View
 struct VTableDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Table"
+    static let navBarTitle: String = "Table"
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var hasHeaders: Bool = true
@@ -23,7 +23,7 @@ struct VTableDemoView: View {
 // MARK:- Body
 extension VTableDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(
                 type: layoutType.demoViewComponentContentType,
                 hasLayer: false,

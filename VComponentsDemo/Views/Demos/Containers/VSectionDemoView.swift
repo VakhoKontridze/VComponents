@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Section Demo View
 struct VSectionDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Section"
+    static let navBarTitle: String = "Section"
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 3
@@ -20,7 +20,7 @@ struct VSectionDemoView: View {
 // MARK:- Body
 extension VSectionDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(
                 type: layoutType.demoViewComponentContentType,
                 hasLayer: false,

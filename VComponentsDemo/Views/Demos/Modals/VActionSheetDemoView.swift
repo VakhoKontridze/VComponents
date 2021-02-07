@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Action Sheet Demo View
 struct VActionSheetDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Action Sheet"
+    static let navBarTitle: String = "Action Sheet"
     
     @State private var isPresented: Bool = false
 }
@@ -19,7 +19,7 @@ struct VActionSheetDemoView: View {
 // MARK:- Body
 extension VActionSheetDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)
         })
     }

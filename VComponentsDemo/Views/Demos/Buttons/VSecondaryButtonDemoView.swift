@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Secondary Button Demo View
 struct VSecondaryButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Secondary Button"
+    static let navBarTitle: String = "Secondary Button"
     
     @State private var state: VSecondaryButtonState = .enabled
     @State private var contentType: ComponentContentType = .text
@@ -62,7 +62,7 @@ struct VSecondaryButtonDemoView: View {
 // MARK:- Body
 extension VSecondaryButtonDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

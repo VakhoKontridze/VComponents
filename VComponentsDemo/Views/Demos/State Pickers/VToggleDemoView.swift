@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Toggle Demo View
 struct VToggleDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Toggle"
+    static let navBarTitle: String = "Toggle"
     
     @State private var state: VToggleState = .on
     @State private var contentType: ComponentContentType = .text
@@ -34,7 +34,7 @@ struct VToggleDemoView: View {
 // MARK:- Body
 extension VToggleDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)
         })
     }

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Modal Demo View
 struct VModalDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Modal"
+    static let navBarTitle: String = "Modal"
     
     @State private var isPresented: Bool = false
     @State private var hasTitle: Bool = true
@@ -33,7 +33,7 @@ struct VModalDemoView: View {
 // MARK:- Body
 extension VModalDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Chevron Button Demo View
 struct VChevronButtonDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Chevron Button"
+    static let navBarTitle: String = "Chevron Button"
     
     @State private var state: VChevronButtonState = .enabled
     @State private var direction: VChevronButtonDirection = .left
@@ -39,7 +39,7 @@ struct VChevronButtonDemoView: View {
 // MARK:- Body
 extension VChevronButtonDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }

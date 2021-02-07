@@ -11,7 +11,7 @@ import VComponents
 // MARK:- V Spinner Demo View
 struct VSpinnerDemoView: View {
     // MARK: Properties
-    static let navigationBarTitle: String = "Spinner"
+    static let navBarTitle: String = "Spinner"
     
     @State private var spinnerType: VSpinnerTypeHelper = VSpinnerType.default.helpeType
 }
@@ -19,7 +19,7 @@ struct VSpinnerDemoView: View {
 // MARK:- Body
 extension VSpinnerDemoView {
     var body: some View {
-        VBaseView(title: Self.navigationBarTitle, content: {
+        VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
         })
     }
