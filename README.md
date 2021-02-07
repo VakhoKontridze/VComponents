@@ -27,7 +27,7 @@ Framework doesn't support Swift Package Manager, CocoaPods, or Carthage.
 
 ### Manual
 
-1. Download [VComponents](https://github.com/VakhoKontridze/files/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
+1. Download [VComponents](https://github.com/VakhoKontridze/Files/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
 
 2. Drag `VComponents.framework` into your project.
 
