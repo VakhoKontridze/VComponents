@@ -2,6 +2,7 @@
 
 ## Table of Contents
 - [Description](#description)
+- [Demo](#demo)
 - [Installation](#installation)
 - [Components](#components)
 - [Contact](#contact)
@@ -10,9 +11,12 @@
 ## Description
 VComponents is a SwiftUI framework that contains 40+ customizable UI components.
 
-Project contains Demo sub-module, which can be run to showcase all components.
-
 Framework supports iOS 14.0 and up. Project is being developed on macOS 11.0 Big Sur in XCode 12.
+
+## Demo
+Project contains demo app, which can be run to showcase all components. Demos for each component contain most important settings that showcase a component.
+
+![DemoApp](./img/DemoApp.jpg)
 
 ## Installation
 Framework doesn't support Swift Package Manager, CocoaPods, or Carthage, and needs to be installed manually.
@@ -27,7 +31,7 @@ Make sure "Copy items if needed" is selected and click Finish.
 
 ![ManualInstallation2](./img/ManualInstallation2.jpg)
 
-3. Go to the target settings for your app, under "General" tab, and find "Frameworks, Libraries, and Embedded Content". Set the VComponents.xcframework to “Embed & Sign”.
+3. Go to the target settings for your app, under "General" tab, and find "Frameworks, Libraries, and Embedded Content". Set the VComponents.framework to “Embed & Sign”.
 
 ![ManualInstallation3](./img/ManualInstallation3.jpg)
 
