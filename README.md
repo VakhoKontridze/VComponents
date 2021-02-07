@@ -5,6 +5,7 @@
 - [Demo](#demo)
 - [Installation](#installation)
 - [Components](#components)
+- [Guidelines](#guidelines)
 - [Contact](#contact)
 - [Copyright](#copyright)
 
@@ -19,6 +20,9 @@ Project contains demo app, which can be run to showcase all components. Demos fo
 ![DemoApp](./img/DemoApp.jpg)
 
 ## Installation
+
+### Manual
+
 Framework doesn't support Swift Package Manager, CocoaPods, or Carthage, and needs to be installed manually.
 
 1. Download [VComponents](https://github.com/VakhoKontridze/files/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
@@ -34,6 +38,10 @@ Make sure "Copy items if needed" is selected and click Finish.
 3. Go to the target settings for your app, under "General" tab, and find "Frameworks, Libraries, and Embedded Content". Set the VComponents.framework to “Embed & Sign”.
 
 ![ManualInstallation3](./img/ManualInstallation3.jpg)
+
+### Building
+
+Since VComponents is open-source, you can clone the project and build the framework target yourself.
 
 ## Components
 
@@ -58,6 +66,139 @@ Make sure "Copy items if needed" is selected and click Finish.
 **Indicators.** VSpinner, VProgressBar, VPageIndicator
 
 **Core.** VText, VBaseButton, VBaseTextField, VLazyList, VBaseList, VBaseView
+
+## Guidelines
+
+### Models
+
+Components present in the framework are not meant to be customized similar to native SwiftUI components. Instead, most components take model as a parameter.
+
+
+You do not have to pass model every time you create a component, as initializers have default values. Models are structs with default values, which usually break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
+
+For instance, changing foreground color of `VSecondaryButton` can be achieved by passing a custom model.
+
+**Not Preferred**:
+```swift
+var body: some View {
+    VSecondaryButton(
+        action: { print("Pressed") },
+        title: "Lorem ipsum"
+    )
+        .foregroundColor(.black)
+}
+```
+
+**Preferred**:
+```swift
+let model: VSecondaryButtonModel = {
+    var model: VSecondaryButtonModel = .init()
+    
+    model.colors.textContent = .init(
+        enabled: .black,
+        pressed: .gray,
+        disabled: .gray
+    )
+    
+    return model
+}()
+
+var body: some View {
+    VSecondaryButton(
+        model: model,
+        action: { print("Pressed") },
+        title: "Lorem ipsum"
+    )
+}
+```
+
+Alternately, you can create static instances of models for reusability.
+
+```swift
+var body: some View {
+    VSecondaryButton(
+        model: .myCustomModel,
+        action: { print("Pressed") },
+        title: "Lorem ipsum"
+    )
+}
+
+extension VSecondaryButtonModel {
+    static let myCustomModel: VSecondaryButtonModel = {
+        var model: VSecondaryButtonModel = .init()
+        
+        model.colors.textContent = .init(
+            enabled: .black,
+            pressed: .gray,
+            disabled: .gray
+        )
+        
+        return model
+    }()
+}
+```
+
+### Types
+
+Some components take type as parameter. Types are represented as enums, as more can be added in the future.
+
+For instance, `VPageIndicator` has three types: `Finite`, `Infinite`, and `Auto`. Most of the enums present throughout the framework have default case.
+
+```swift
+var body: some View {
+    VStack(content: {
+        VPageIndicator(type: .finite, total: 9, selectedIndex: 4)
+        
+        VPageIndicator(type: .infinite(), total: 99, selectedIndex: 4)
+        
+        VPageIndicator(type: .auto(), total: 99, selectedIndex: 4)
+    })
+}
+```
+
+### Animations
+
+VComponents approaches animations are bound to components, and not to state. Which means, that to modify a state of component with animaton, you need to pass an animation parameter via model, and not set state using an animation.
+
+**Not Preferred**:
+```swift
+@State var isOn: Bool = false
+
+var body: some View {
+    VStack(content: {
+        VToggle(isOn: $isOn, title: "Lorem ipsum")
+        
+        VSecondaryButton(
+            action: { withAnimation(nil, { isOn.toggle() }) },
+            title: "Toggle"
+        )
+    })
+}
+```
+
+**Preferred**:
+```swift
+@State var isOn: Bool = false
+
+let model: VToggleModel = {
+    var model: VToggleModel = .init()
+    model.animations.stateChange = nil
+    return model
+}()
+
+var body: some View {
+    VStack(content: {
+        VToggle(model: model, isOn: $isOn, title: "Lorem ipsum")
+        
+        VSecondaryButton(
+            action: { isOn.toggle() },
+            title: "Toggle"
+        )
+    })
+}
+```
+
+First method is not only not preferred, but it will also not work. In first case, `VToggle` would use default animation, despite specifying `nil`. Components manage state parameters passed via initializers internally, and animations used on them externally do not have any effect. Though process behind his design choice was to centralize component animations to model, and also prevent components affecting external data by modifying them with an animation.
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)
