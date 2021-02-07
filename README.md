@@ -201,7 +201,13 @@ var body: some View {
 }
 ```
 
-First method is not only not preferred, but it will also not work. In first case, `VToggle` would use default animation, despite specifying `nil`. Components manage state parameters passed via initializers internally, and animations used on them externally do not have any effect. Though process behind his design choice was to centralize component animations to model, and also prevent components affecting external data by modifying them with an animation.
+First method is not only not preferred, but it will also not work. Despite specifying `nil` to chagne state, `VToggle` would use still use its default animation.
+
+Components manage state parameters internally, and animations used to change them externally do not have any effect.
+
+Thought process behind his design choice was to centralize animations to model.
+
+Components also prevent themselves from modifying external state with an animation.
 
 ## Contact
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)
