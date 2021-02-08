@@ -219,13 +219,23 @@ Components also prevent themselves from modifying external state with an animati
 
 ## Release History
 
-**1.1 (2020 XXX XX)**
+**2.0 (2020 XXX XX)**
 
 XXX
 
 **1.0 (2020 Feb 7)**
 
 Initial release
+
+#### Versioning ####
+
+Major.Minor.Patch.
+
+**Major**. New component or type
+
+**Minor**. Minor changes, such as new properties in models
+
+**Patch**. Bug fixes
 
 ## Contact
 
