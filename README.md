@@ -167,7 +167,7 @@ var body: some View {
 
 ### Animations
 
-VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animaton, you need to pass a custom model.
+VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom model.
 
 **Not Preferred**:
 
@@ -209,7 +209,7 @@ var body: some View {
 }
 ```
 
-First method is not only not preferred, but it will also not work. Despite specifying `nil` to chagne state, `VToggle` would use still use its default animation.
+First method is not only not preferred, but it will also not work. Despite specifying `nil` to change state, `VToggle` would still use its default animation.
 
 Components manage state parameters internally, and animations used to change them externally do not have any effect.
 
