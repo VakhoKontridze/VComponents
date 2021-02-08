@@ -12,9 +12,8 @@ import SwiftUI
 ///
 /// Model can be passed as parameter
 ///
-/// This component, alongside with VBaseView and VNavigationLink can greatly mess up your flow if used alongside with SwiftUI's native NavigatioView and NavigationLink.
-/// To handle back button on details views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via VNavigationLink.
-/// So, mix and matching with native components may cause unintnded effects.
+/// VNavigationView and VNavigationLink can cause unintended effect in your navigation hierarchy if used alongside with SwiftUI's native NavigationView and NavigationLink.
+/// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via VNavigationLink.
 ///
 /// Use this method to set root view on navigation stack. It acts as SwiftUI's version of settings UINavigationController root.
 ///
