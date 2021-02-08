@@ -1,15 +1,18 @@
 # Vakho's Components (VComponents)
 
 ## Table of Contents
+
 - [Description](#description)
 - [Demo](#demo)
 - [Installation](#installation)
 - [Components](#components)
 - [Guidelines](#guidelines)
+- [Release History](#release-history)
 - [Contact](#contact)
 - [Copyright](#copyright)
 
 ## Description
+
 VComponents is a SwiftUI framework that contains 40+ customizable UI components.
 
 Framework supports iOS 14.0 and up.
@@ -17,6 +20,7 @@ Framework supports iOS 14.0 and up.
 Project is being developed on macOS 11.0 Big Sur in XCode 12.
 
 ## Demo
+
 Project contains demo app, that can be run to showcase all components.
 
 ![DemoApp](./img/DemoApp.jpg)
@@ -27,7 +31,7 @@ Framework doesn't support Swift Package Manager, CocoaPods, or Carthage.
 
 ### Manual
 
-1. Download [VComponents](https://github.com/VakhoKontridze/Files/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
+1. Download [VComponents](https://github.com/VakhoKontridze/Files/blob/main/VComponents/VComponents.framework.zip?raw=true) and extract the zip.
 
 2. Drag `VComponents.framework` into your project.
 
@@ -82,6 +86,7 @@ Essentially, Models are structs with default values. They usually break down int
 For instance, changing foreground color of `VSecondaryButton` can be achieved by passing a custom model.
 
 **Not Preferred**:
+
 ```swift
 var body: some View {
     VSecondaryButton(
@@ -93,6 +98,7 @@ var body: some View {
 ```
 
 **Preferred**:
+
 ```swift
 let model: VSecondaryButtonModel = {
     var model: VSecondaryButtonModel = .init()
@@ -164,6 +170,7 @@ var body: some View {
 VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animaton, you need to pass a custom model.
 
 **Not Preferred**:
+
 ```swift
 @State var isOn: Bool = false
 
@@ -180,6 +187,7 @@ var body: some View {
 ```
 
 **Preferred**:
+
 ```swift
 @State var isOn: Bool = false
 
@@ -209,10 +217,22 @@ Thought process behind his design choice was to centralize animations to model.
 
 Components also prevent themselves from modifying external state with an animation.
 
+## Release History
+
+**1.1 (2020 XXX XX)**
+
+XXX
+
+**1.0 (2020 Feb 7)**
+
+Initial release
+
 ## Contact
+
 e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)
 
 ## Copyright
+
 MIT License
 
 Copyright (c) 2021 Vakhtang Kontridze
