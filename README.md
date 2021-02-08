@@ -229,13 +229,11 @@ Initial release
 
 #### Versioning ####
 
-Major.Minor.Patch.
+*Major*. New component or type
 
-**Major**. New component or type
+*Minor*. Minor changes, such as new properties in models
 
-**Minor**. Minor changes, such as new properties in models
-
-**Patch**. Bug fixes
+*Patch*. Bug fixes
 
 ## Contact
 
