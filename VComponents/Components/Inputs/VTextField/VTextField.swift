@@ -162,6 +162,7 @@ public struct VTextField: View {
     @State private var secureFieldIsVisible: Bool = false
 
     // MARK: Initialiers
+    /// Initializes component with state and text
     public init(
         model: VTextFieldModel = .init(),
         type textFieldType: VTextFieldType = .default,
@@ -195,6 +196,7 @@ public struct VTextField: View {
         self.cancelButtonAction = cancelButtonAction
     }
     
+    /// Initializes component with text
     public init(
         model: VTextFieldModel = .init(),
         type textFieldType: VTextFieldType = .default,
@@ -265,7 +267,7 @@ extension VTextField {
                 color: model.colors.header.for(state.wrappedValue, highlight: highlight),
                 title: headerTitle
             )
-                .padding(.horizontal, model.layout.headerFooterMarginHor)
+                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
                 .opacity(model.colors.content.for(state.wrappedValue))
         }
     }
@@ -278,7 +280,7 @@ extension VTextField {
                 color: model.colors.footer.for(state.wrappedValue, highlight: highlight),
                 title: footerTitle
             )
-                .padding(.horizontal, model.layout.headerFooterMarginHor)
+                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
                 .opacity(model.colors.content.for(state.wrappedValue))
         }
     }
@@ -358,7 +360,7 @@ extension VTextField {
 // MARK:- State Sets
 private extension VTextField {
     func performStateSets() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + VTextFieldModel.Animations.durationDelayToShowButtons, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + model.animations.delayToAnimateButtons, execute: {
             nonEmptyText = !text.isEmpty
         })
         
@@ -381,7 +383,7 @@ private extension VTextField {
 // MARK:- Actions
 private extension VTextField {
     func textChanged(_ text: String) {
-        withAnimation(model.animations.buttonsAppearDisAppear, { nonEmptyText = !text.isEmpty })
+        withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = !text.isEmpty })
     }
     
     func runClearAction() {
@@ -402,7 +404,7 @@ private extension VTextField {
     
     func zeroText() {
         text = ""
-        withAnimation(model.animations.buttonsAppearDisAppear, { nonEmptyText = false })
+        withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = false })
     }
 }
 

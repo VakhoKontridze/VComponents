@@ -28,7 +28,7 @@ extension VNavigationLinkDemoView {
     @ViewBuilder private func component() -> some View {
         switch navigationLinkButtonType.preset {
         case let preset?: VNavigationLink(preset: preset, state: state, destination: destination, title: buttonTitle)
-        case nil: VNavigationLink(state: state, destination: destination, label: buttonContent)
+        case nil: VNavigationLink(state: state, destination: destination, content: buttonContent)
         }
     }
     

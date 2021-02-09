@@ -38,6 +38,7 @@ public struct VSheet<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers
+    /// Initializes component with content
     public init(
         model: VSheetModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -46,6 +47,7 @@ public struct VSheet<Content>: View where Content: View {
         self.content = content
     }
     
+    /// Initializes component
     public init(
         model: VSheetModel = .init()
     )

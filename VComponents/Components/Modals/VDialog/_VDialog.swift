@@ -63,8 +63,8 @@ extension _VDialog {
                 descriptionView
                 freeContentView
             })
-                .padding(.horizontal, model.layout.titlesAndContentMarginHor)
-                .padding(.vertical, model.layout.titlesAndContentMarginVer)
+                .padding(.horizontal, model.layout.titlesAndContentMargins.horizontal)
+                .padding(.vertical, model.layout.titlesAndContentMargins.vertical)
             
             dialogView
         })
@@ -106,7 +106,7 @@ extension _VDialog {
     @ViewBuilder private var freeContentView: some View {
         if let content = content {
             content()
-                .padding(.vertical, model.layout.contentMarginVer)
+                .padding(.vertical, model.layout.contentMarginVertical)
         }
     }
     

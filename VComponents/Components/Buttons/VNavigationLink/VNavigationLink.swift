@@ -16,8 +16,8 @@ import SwiftUI
 ///
 /// State can be passed as parameter
 ///
-/// VNavigationView and VNavigationLink can cause unintended effect in your navigation hierarchy if used alongside with SwiftUI's native NavigationView and NavigationLink.
-/// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via VNavigationLink.
+/// `VNavigationView` and `VNavigationLink` can cause unintended effect in your navigation hierarchy if used alongside with SwiftUI's native `NavigationView` and `NavigationLink`.
+/// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.
 ///
 /// # Usage Example #
 /// 
@@ -51,10 +51,10 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VNavigationLink<Destination, Label>: View
+public struct VNavigationLink<Destination, Content>: View
     where
         Destination: View,
-        Label: View
+        Content: View
 {
     // MARK: Properties
     private let navLinkButtonType: VNavigationLinkType
@@ -82,55 +82,59 @@ public struct VNavigationLink<Destination, Label>: View
     }
     
     private let destination: Destination
-    private let label: () -> Label
+    private let content: () -> Content
     
     // MARK: Initializers: Preset and Tap
+    /// Initiales component with preset, destination and content
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
         destination: Destination,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.navLinkButtonType = navLinkPreset.buttonType
         self.state = state
         self._isActiveExternally = .constant(false)
         self.stateManagament = .internal
         self.destination = destination
-        self.label = label
+        self.content = content
     }
     
+    /// Initiales component with preset, destination and title
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
         destination: Destination,
         title: String
     )
-        where Label == VText
+        where Content == VText
     {
         self.init(
             preset: navLinkPreset,
             state: state,
             destination: destination,
-            label: { navLinkPreset.text(from: title, isEnabled: state.isEnabled) }
+            content: { navLinkPreset.text(from: title, isEnabled: state.isEnabled) }
         )
     }
     
     // MARK: Initializers: Preset and State
+    /// Initiales component with preset, active state, destination and content
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
         isActive: Binding<Bool>,
         destination: Destination,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.navLinkButtonType = navLinkPreset.buttonType
         self.state = state
         self._isActiveExternally = isActive
         self.stateManagament = .external
         self.destination = destination
-        self.label = label
+        self.content = content
     }
     
+    /// Initiales component with preset, active state, destination and title
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
@@ -138,51 +142,53 @@ public struct VNavigationLink<Destination, Label>: View
         destination: Destination,
         title: String
     )
-        where Label == VText
+        where Content == VText
     {
         self.init(
             preset: navLinkPreset,
             state: state,
             isActive: isActive,
             destination: destination,
-            label: { navLinkPreset.text(from: title, isEnabled: state.isEnabled) }
+            content: { navLinkPreset.text(from: title, isEnabled: state.isEnabled) }
         )
     }
     
     // MARK: Initializers: Custom and Tap
+    /// Initiales component with destination and content
     public init(
         state: VNavigationLinkState = .enabled,
         destination: Destination,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.navLinkButtonType = .custom
         self.state = state
         self._isActiveExternally = .constant(false)
         self.stateManagament = .internal
         self.destination = destination
-        self.label = label
+        self.content = content
     }
     
     // MARK: Initializers: Custom and State
+    /// Initiales component with destination, active state, and content
     public init(
         state: VNavigationLinkState = .enabled,
         isActive: Binding<Bool>,
         destination: Destination,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.navLinkButtonType = .custom
         self.state = state
         self._isActiveExternally = isActive
         self.stateManagament = .external
         self.destination = destination
-        self.label = label
+        self.content = content
     }
 }
 
 // MARK:- Body
 extension VNavigationLink {
     public var body: some View {
-        labelView(isActive: isActive)
+        contentView(isActive: isActive)
             .background({
                 NavigationLink(destination: destinationView, isActive: isActive, label: { EmptyView() })
                     .allowsHitTesting(false)
@@ -190,12 +196,12 @@ extension VNavigationLink {
             }())
     }
     
-    private func labelView(isActive: Binding<Bool>) -> some View {
+    private func contentView(isActive: Binding<Bool>) -> some View {
         VNavigationLinkType.navLinkButton(
             buttonType: navLinkButtonType,
             isEnabled: state.isEnabled,
             action: { isActive.wrappedValue = true },
-            label: label
+            content: content
         )
     }
     

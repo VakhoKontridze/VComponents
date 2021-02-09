@@ -15,14 +15,14 @@ struct VModalDemoView: View {
     
     @State private var isPresented: Bool = false
     @State private var hasTitle: Bool = true
-    @State private var hasDivider: Bool = VModalModel.Layout().dividerHeight > 0
+    @State private var hasDivider: Bool = VModalModel.Layout().headerDividerHeight > 0
     @State private var dismissType: Set<VModalModel.Misc.DismissType> = .default
     
     private var model: VModalModel {
         var model: VModalModel = .init()
         
-        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
-        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
+        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
+        model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
         
         model.misc.dismissType = dismissType
         

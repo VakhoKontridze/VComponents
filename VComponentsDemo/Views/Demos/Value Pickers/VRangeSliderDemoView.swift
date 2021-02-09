@@ -41,12 +41,12 @@ struct VRangeSliderDemoView: View {
             model.layout.thumbBorderWidth = 1
             model.layout.thumbShadowRadius = 0
 
-            model.colors.thumb.border = .init(
+            model.colors.thumbBorder = .init(
                 enabled: .black,
                 disabled: .gray
             )
 
-            model.colors.thumb.shadow = .init(
+            model.colors.thumbShadow = .init(
                 enabled: .clear,
                 disabled: .clear
             )

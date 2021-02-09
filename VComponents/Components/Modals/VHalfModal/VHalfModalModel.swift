@@ -10,50 +10,79 @@ import SwiftUI
 // MARK:- V Half Modal Model
 /// Model that describes UI
 public struct VHalfModalModel {
+    /// Sub-model containing layout properties
     public var layout: Layout = .init()
+    
+    /// Sub-model containing color properties
     public var colors: Colors = .init()
+    
+    /// Sub-model containing font properties
     public var fonts: Fonts = .init()
+    
+    /// Sub-model containing animation properties
     public var animations: Animations = .init()
+    
+    /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    /// Initializes model with default values
     public init() {}
 }
 
 // MARK:- Layout
 extension VHalfModalModel {
+    /// Sub-model containing layout properties
     public struct Layout {
+        /// Height type. Defaults to `default`.
         public var height: HeightType = .default
         
+        /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
+        
         var roundCorners: Bool { cornerRadius > 0 }
         
+        /// Resize indicaator size. Defaults to `50` width and `4` height.
         public var resizeIndicatorSize: CGSize = .init(width: 50, height: 4)
+        
         var hasResizeIndicator: Bool { resizeIndicatorSize.height > 0 }
+        
+        /// Resize indicator corner radius. Defaults to `2`.
         public var resizeIndicatorCornerRadius: CGFloat = 2
         
-        public var dividerHeight: CGFloat = 1
-        var hasDivider: Bool { dividerHeight > 0 }
+        /// Header divider height. Defaults to `1`.
+        public var headerDividerHeight: CGFloat = 1
         
+        var hasDivider: Bool { headerDividerHeight > 0 }
+        
+        /// Close button dimension. Default to `32`.
         public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
+        
+        /// Close button icon dimension. Default to `11`.
         public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
         
-        public var resizeIndicatorMargin: VerticalMargins = .init(
+        /// Resize indicator margins. Default to `10` top  and `5` bottom.
+        public var resizeIndicatorMargins: VerticalMargins = .init(
             top: sheetReference.layout.contentMargin,
             bottom: sheetReference.layout.contentMargin/2
         )
         
-        public var headerMargin: Margins = .init(
+        /// Header margins. Default to `10` leading, `10` trailing, `5` top, and `5` bottom.
+        public var headerMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
             top: sheetReference.layout.contentMargin/2,
             bottom: sheetReference.layout.contentMargin/2
         )
     
-        public var dividerMargin: Margins = modalReference.layout.dividerMargin
+        /// Header divider margins. Default to `0` leading, `0` trailing, `5` top, and `5` bottom.
+        public var headerDividerMargins: Margins = modalReference.layout.headerDividerMargins
         
-        public var contentMargin: Margins = modalReference.layout.contentMargin
+        /// Content margins. Default to `10` leading, `10` trailing, `5` top, and `5` bottom.
+        public var contentMargins: Margins = modalReference.layout.contentMargins
         
+        /// Indicates if modal has margins for safe area on bottom edge. Defaults to `true`.
         public var hasSafeAreaMarginBottom: Bool = true
+        
         var edgesToIgnore: Edge.Set {
             switch hasSafeAreaMarginBottom {
             case false: return .bottom
@@ -61,13 +90,17 @@ extension VHalfModalModel {
             }
         }
 
+        /// Header item spacing. Defaults to `10`.
         public var headerSpacing: CGFloat = modalReference.layout.headerSpacing
         
+        /// Distance to drag modal downwards to initiate dismiss. Default to `100`.
         public var translationBelowMinHeightToDismiss: CGFloat = 100
         
         static let navigationViewCloseButtonMarginTop: CGFloat = (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
+        
         static let navigationViewHalfModalCloseButtonMarginTrailing: CGFloat = VCloseButtonModel.Layout().dimension + Self().headerSpacing
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
@@ -75,9 +108,13 @@ extension VHalfModalModel {
 extension VHalfModalModel.Layout {
     /// Enum that describes height type, such as fixed or dynamic
     public enum HeightType {
+        /// Fixed height
         case fixed(_ value: CGFloat)
+        
+        /// Dynamic height that changes between `min`, `ideal`, and `max`
         case dynamic(min: CGFloat, ideal: CGFloat, max: CGFloat)
         
+        /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
         public static let `default`: Self = .dynamic(
             min: UIScreen.main.bounds.height * 0.3,
             ideal: UIScreen.main.bounds.height * 0.75,
@@ -113,74 +150,99 @@ extension VHalfModalModel.Layout {
         }
     }
     
-    public typealias Margins = VModalModel.Layout.Margins
+    /// Sub-model containing leading, trailing, top, and bottom margins
+    public typealias Margins = LayoutGroupLTTB
     
-    public struct VerticalMargins {
-        public var top: CGFloat
-        public var bottom: CGFloat
-        
-        public init(top: CGFloat, bottom: CGFloat) {
-            self.top = top
-            self.bottom = bottom
-        }
-    }
+    /// Sub-model containing top and bottom margins
+    public typealias VerticalMargins  = LayoutGroupTB
 }
 
 // MARK:- Colors
 extension VHalfModalModel {
+    /// Sub-model containing color properties
     public struct Colors {
+        /// Background color
         public var background: Color = modalReference.colors.background
         
+        /// Resize indicator color
         public var resizeIndicator: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
         
+        /// Text header color
+        ///
+        /// Only applicable when using init with title
         public var headerText: Color = modalReference.colors.headerText
         
+        /// Close button background colors
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
+        
+        /// Close button icon colors and opacities
         public var closeButtonIcon: StateColorsAndOpacities = modalReference.colors.closeButtonIcon
         
-        public var divider: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
+        /// Header divider color
+        public var headerDivider: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
         
+        /// Blinding color
         public var blinding: Color = modalReference.colors.blinding
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 extension VHalfModalModel.Colors {
+    /// Sub-model containing colors for component states
     public typealias StateColors = StateColorsEPD
     
+    /// Sub-model containing colors and opacities for component states
     public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- Fonts
 extension VHalfModalModel {
+    /// Sub-model containing font properties
     public struct Fonts {
-        public var header: Font = modalReference.fonts.header    // Only applicable during init with title
+        /// Header font
+        ///
+        /// Only applicable when using init with title
+        public var header: Font = modalReference.fonts.header
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 // MARK:- Animations
 extension VHalfModalModel {
+    /// Sub-model containing animation properties
     public struct Animations {
+        /// Appear animation. Defaults to `linear` with duration `0.2`.
         public var appear: BasicAnimation? = .init(curve: .linear, duration: 0.2)
+        
+        /// Disappear animation. Defaults to `linear` with duration `0.2`.
         public var disappear: BasicAnimation? = .init(curve: .linear, duration: 0.2)
         
+        /// Height snapping animation between `min`, `ideal`, and `max` states. Defaults to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
         
-        static let dragDisappear: BasicAnimation = .init(curve: .easeIn, duration: 0.1)
+        /// Dragging disappear animation. Defaults to `linear` with duration `0.1`.
+        static let dragDisappear: BasicAnimation =  .init(curve: .easeIn, duration: 0.1)
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 // MARK:- Misc
 extension VHalfModalModel {
+    /// Sub-model containing misc properties
     public struct Misc {
+        /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: Set<DismissType> = .default
+        
+        /// Edges ignored by keyboard. Defaults to `none`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
@@ -188,15 +250,25 @@ extension VHalfModalModel {
 extension VHalfModalModel.Misc {
     /// Enum that decribes dismiss type, such as leading button, trailing button, backtap, or pull down
     public enum DismissType: Int, CaseIterable {
+        /// Leading
         case leading
+        
+        /// Trailing
         case trailing
+        
+        /// Back tap
         case backTap
+        
+        /// Dragging modal down
         case pullDown
+        
+        /// Close button for when modal contains `VNavigationView` as content
         case navigationViewCloseButton
     }
 }
 
 extension Set where Element == VHalfModalModel.Misc.DismissType {
+    /// Default value. Set to `trailing` and `pullDown`.
     public static let `default`: Self = [.trailing, .pullDown]
     
     var hasButton: Bool {
@@ -206,9 +278,16 @@ extension Set where Element == VHalfModalModel.Misc.DismissType {
 
 // MARK:- References
 extension VHalfModalModel {
+    /// Reference to VSheetModel
     public static let sheetReference: VSheetModel = .init()
+    
+    /// Reference to VModalModel
     public static let modalReference: VModalModel = .init()
+    
+    /// Reference to VAccordionModel
     public static let accordionReference: VAccordionModel = .init()
+    
+    /// Reference to VCloseButtonModel
     public static let closeButtonReference: VCloseButtonModel = .init()
 }
 
@@ -231,8 +310,8 @@ extension VHalfModalModel {
         
         model.layout.dimension = layout.closeButtonDimension
         model.layout.iconDimension = layout.closeButtonIconDimension
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
+        model.layout.hitBox.horizontal = 0
+        model.layout.hitBox.vertical = 0
         
         model.colors.background = colors.closeButtonBackground
         model.colors.content = colors.closeButtonIcon

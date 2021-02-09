@@ -14,7 +14,7 @@ struct VCloseButtonDemoView: View {
     static let navBarTitle: String = "Close Button"
     
     @State private var state: VCloseButtonState = .enabled
-    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VCloseButtonModel.Layout().hitBoxHor)
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VCloseButtonModel.Layout().hitBox.horizontal)
     
     private var model: VCloseButtonModel {
         let defaultModel: VCloseButtonModel = .init()
@@ -23,12 +23,12 @@ struct VCloseButtonDemoView: View {
         
         switch hitBoxType {
         case .clipped:
-            model.layout.hitBoxHor = 0
-            model.layout.hitBoxVer = 0
+            model.layout.hitBox.horizontal = 0
+            model.layout.hitBox.vertical = 0
             
         case .extended:
-            model.layout.hitBoxHor = defaultModel.layout.hitBoxHor.isZero ? 5 : defaultModel.layout.hitBoxHor
-            model.layout.hitBoxVer = defaultModel.layout.hitBoxVer.isZero ? 5 : defaultModel.layout.hitBoxVer
+            model.layout.hitBox.horizontal = defaultModel.layout.hitBox.horizontal.isZero ? 5 : defaultModel.layout.hitBox.vertical
+            model.layout.hitBox.vertical = defaultModel.layout.hitBox.vertical.isZero ? 5 : defaultModel.layout.hitBox.vertical
         }
 
         return model

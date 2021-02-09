@@ -39,6 +39,7 @@ public struct VSlider: View {
     private let action: ((Bool) -> Void)?
     
     // MARK: Initializers
+    /// Initializes component with value
     public init<V>(
         model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,
@@ -93,14 +94,14 @@ extension VSlider {
 
     private var track: some View {
         Rectangle()
-            .foregroundColor(model.colors.slider.track.for(state))
+            .foregroundColor(model.colors.track.for(state))
     }
 
     private func progress(in proxy: GeometryProxy) -> some View {
         Rectangle()
             .frame(width: progressWidth(in: proxy))
 
-            .foregroundColor(model.colors.slider.progress.for(state))
+            .foregroundColor(model.colors.progress.for(state))
     }
     
     @ViewBuilder private func thumb(in proxy: GeometryProxy) -> some View {
@@ -108,11 +109,11 @@ extension VSlider {
             Group(content: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                        .foregroundColor(model.colors.thumb.fill.for(state))
-                        .shadow(color: model.colors.thumb.shadow.for(state), radius: model.layout.thumbShadowRadius)
+                        .foregroundColor(model.colors.thumb.for(state))
+                        .shadow(color: model.colors.thumbShadow.for(state), radius: model.layout.thumbShadowRadius)
                     
                     RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                        .strokeBorder(model.colors.thumb.border.for(state), lineWidth: model.layout.thumbBorderWidth)
+                        .strokeBorder(model.colors.thumbBorder.for(state), lineWidth: model.layout.thumbBorderWidth)
                 })
                     .frame(dimension: model.layout.thumbDimension)
                     .offset(x: thumbOffset(in: proxy))

@@ -13,18 +13,30 @@ public typealias VTextFieldReturnButtonAction = VBaseTextFieldReturnButtonAction
 
 /// Enum that describes action performed when pressing clear button
 public enum VTextFieldClearButtonAction {
+    /// Clear text
     case clear
+    
+    /// Custom action
     case custom(_ action: () -> Void)
+    
+    /// Clear text and custom action
     case clearAndCustom(_ action: () -> Void)
     
+    /// Default value. Set to `clear`.
     public static let `default`: Self = .clear
 }
 
 /// Enum that describes action performed when pressing cancel button
 public enum VTextFieldCancelButtonAction {
+    /// Clear text
     case clear
+    
+    /// Custom action
     case custom(_ action: () -> Void)
+    
+    /// Clear text and custom action
     case clearAndCustom(_ action: () -> Void)
     
+    /// Default value. Set to `clear`.
     public static let `default`: Self = .clear
 }

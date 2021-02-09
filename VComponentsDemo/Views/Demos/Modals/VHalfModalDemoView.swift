@@ -21,14 +21,14 @@ struct VHalfModalDemoView: View {
             .filter { $0 != .navigationViewCloseButton }
             .map { $0.helperType }
     )
-    @State private var hasDivider: Bool = VHalfModalModel.Layout().dividerHeight > 0
+    @State private var hasDivider: Bool = VHalfModalModel.Layout().headerDividerHeight > 0
     
     private var model: VHalfModalModel {
         var model: VHalfModalModel = .init()
         
         model.layout.height = heightType.heightType
-        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
-        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
+        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
+        model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
         
         model.misc.dismissType = .init(dismissType.map { $0.dismissType })
         

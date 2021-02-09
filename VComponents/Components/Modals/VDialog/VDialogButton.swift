@@ -17,6 +17,7 @@ public struct VDialogButton {
     public var action: () -> Void
     
     // MARK: Initializers
+    /// Initializes data source with model, title, and action
     public init(
         model: VDialogButtonModel,
         isEnabled: Bool = true,

@@ -18,19 +18,19 @@ public typealias VLinkPreset = DerivedButtonPreset
 
 // MARK:- Button
 extension VLinkType {
-    @ViewBuilder static func linkButton<Label>(
+    @ViewBuilder static func linkButton<Content>(
         buttonType: VLinkType,
         isEnabled: Bool,
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) -> some View
-        where Label: View
+        where Content: View
     {
         Self.navLinkButton(
             buttonType: buttonType,
             isEnabled: isEnabled,
             action: action,
-            label: label
+            content: content
         )
     }
 }

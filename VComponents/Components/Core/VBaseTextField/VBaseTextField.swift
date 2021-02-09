@@ -97,6 +97,7 @@ public struct VBaseTextField: View {
     private let returnAction: VBaseTextFieldReturnButtonAction
     
     // MARK: Initialiers
+    /// Initializes component with state and text
     public init(
         model: VBaseTextFieldModel = .init(),
         state: Binding<VBaseTextFieldState>,
@@ -118,6 +119,7 @@ public struct VBaseTextField: View {
         self.returnAction = returnAction
     }
     
+    /// Initializes component with text
     public init(
         model: VBaseTextFieldModel = .init(),
         placeholder: String? = nil,

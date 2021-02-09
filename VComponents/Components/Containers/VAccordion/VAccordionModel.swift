@@ -10,66 +10,101 @@ import SwiftUI
 // MARK:- V Accordion Model
 /// Model that describes UI
 public struct VAccordionModel {
+    /// Sub-model containing layout properties
     public var layout: Layout = .init()
+    
+    /// Sub-model containing color properties
     public var colors: Colors = .init()
+    
+    /// Sub-model containing font properties
     public var fonts: Fonts = .init()
+    
+    /// Sub-model containing animation properties
     public var animations: Animations = .init()
+    
+    /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    /// Initializes model with default values
     public init() {}
 }
 
 // MARK:- Layout
 extension VAccordionModel {
+    /// Sub-model containing layout properties
     public struct Layout {
+        /// Accordion corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = sectionReference.layout.cornerRadius
         
+        /// Chevron button dimension. Default to `32`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
+        
+        /// Chevron button icon dimension. Default to `12`.
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
+        /// Header divider height. Defaults to `1`.
         public var headerDividerHeight: CGFloat = 1
+        
         var hasHeaderDivider: Bool { headerDividerHeight > 0 }
         
+        /// Row divider height. Defaults to `1`.
         public var dividerHeight: CGFloat = sectionReference.layout.dividerHeight
         
-        public var headerMargin: ExpandableMargins = .init(
+        /// Header margins. Defaults to `10` leading, `10` trailing, `5` top, `5` bottom when collapsed, and `5` bottom when expanded.
+        public var headerMargins: ExpandableMargins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
-            top: 12,
-            bottomCollapsed: 12,
-            bottomExpanded: 12/2
+            top: 10,
+            bottomCollapsed: 10,
+            bottomExpanded: 5
         )
         
-        public var dividerMargin: Margins = .init(
+        /// Divider margins. Defaults to `10` leading, `10` trailing, `5` top, and `5` bottom.
+        public var dividerMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
-            top: 12/2,
-            bottom: 12/2
+            top: 5,
+            bottom: 5
         )
         
-        public var contentMargin: Margins = .init(
+        /// Divider margins. Defaults to `15` leading, `15` trailing, `5` top, and `15` bottom.
+        public var contentMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin + 5,
             trailing: sheetReference.layout.contentMargin + 5,
-            top: 12/2,
+            top: 5,
             bottom: sheetReference.layout.contentMargin + 5
         )
         
-        public var itemSpacing: CGFloat = sectionReference.layout.itemSpacing
+        /// Row spacing. Defaults to `18`.
+        public var rowSpacing: CGFloat = sectionReference.layout.rowSpacing
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 extension VAccordionModel.Layout {
-    public typealias Margins = VModalModel.Layout.Margins
+    /// Sub-model containing leading, trailing, top and bottom and margins
+    public typealias Margins = LayoutGroupLTTB
     
+    /// Sub-model containing leading, trailing, top and bottom collapsed and bottom expanded margins
     public struct ExpandableMargins {
+        /// Leading margin
         public var leading: CGFloat
+        
+        /// Trailing margin
         public var trailing: CGFloat
+        
+        /// Top margin
         public var top: CGFloat
+        
+        /// Bottom collapsed margin
         public var bottomCollapsed: CGFloat
+        
+        /// Bottom expanded margin
         public var bottomExpanded: CGFloat
         
+        /// Initializes sub-model with margins
         public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottomCollapsed: CGFloat, bottomExpanded: CGFloat) {
             self.leading = leading
             self.trailing = trailing
@@ -82,67 +117,99 @@ extension VAccordionModel.Layout {
 
 // MARK:- Colors
 extension VAccordionModel {
+    /// Sub-model containing color properties
     public struct Colors {
+        /// Background color
         public var background: Color = sectionReference.colors.background
         
+        /// Header state opacities
         public var header: StateOpacities = .init(
             disabledOpacity: 0.5
         )
         
-        public var headerText: Color = ColorBook.primary    // Only applicable during init with title
+        /// Text header color
+        ///
+        /// Only applicable when using init with title
+        public var headerText: Color = ColorBook.primary
         
+        /// Header divider color
         public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
         
+        /// Chevron button background colors
         public var chevronButtonBackground: StateColors = chevronButtonReference.colors.background
         
+        /// Chevron button icon colors and opacities
         public var chevronButtonIcon: StateColorsAndOpacities = chevronButtonReference.colors.content
         
+        /// Row divider color
         public var divider: Color = sectionReference.colors.divider
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 extension VAccordionModel.Colors {
+    /// Sub-model containing opacities for component states
     public typealias StateOpacities = StateOpacitiesD
     
+    /// Sub-model containing colors for component states
     public typealias StateColors = StateColorsEPD
     
+    /// Sub-model containing colors and opacities for component states
     public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
 }
 
 // MARK:- Fonts
 extension VAccordionModel {
+    /// Sub-model containing font properties
     public struct Fonts {
-        public var header: Font = .system(size: 17, weight: .bold)    // Only applicable during init with title
+        /// Header font
+        ///
+        /// Only applicable when using init with title
+        public var header: Font = .system(size: 17, weight: .bold)
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 // MARK:- Animations
 extension VAccordionModel {
+    /// Sub-model containing animation properties
     public struct Animations {
+        /// Expand and collapse animation. Defaults to `default`.
         public var expandCollapse: Animation? = .default
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 // MARK:- Misc
 extension VAccordionModel {
+    /// Sub-model containing misc properties
     public struct Misc {
+        /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
+        
+        /// Indicates if accordion should expand or collapse from tap on header. Default to `true`.
         public var expandCollapseOnHeaderTap: Bool = true
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 // MARK:- References
 extension VAccordionModel {
+    /// Reference to VSheetModel
     public static let sheetReference: VSheetModel = .init()
+    
+    /// Reference to VSectionModel
     public static let sectionReference: VSectionModel = .init()
+    
+    /// Reference to VChevronButtonModel
     public static let chevronButtonReference: VChevronButtonModel = .init()
 }
 
@@ -153,8 +220,8 @@ extension VAccordionModel {
         
         model.misc.showIndicator = misc.showIndicator
         
-        model.layout.marginTrailing = layout.contentMargin.trailing
-        model.layout.itemSpacing = layout.itemSpacing
+        model.layout.marginTrailing = layout.contentMargins.trailing
+        model.layout.rowSpacing = layout.rowSpacing
         model.layout.dividerHeight = layout.dividerHeight
         
         model.colors.divider = colors.divider
@@ -178,8 +245,8 @@ extension VAccordionModel {
         
         model.layout.dimension = layout.chevronButtonDimension
         model.layout.iconDimension = layout.chevronButtonIconDimension
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
+        model.layout.hitBox.horizontal = 0
+        model.layout.hitBox.vertical = 0
         
         model.colors.background = colors.chevronButtonBackground
         model.colors.content = colors.chevronButtonIcon

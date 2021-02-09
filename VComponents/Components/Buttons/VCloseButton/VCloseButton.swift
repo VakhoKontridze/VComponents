@@ -33,6 +33,7 @@ public struct VCloseButton: View {
     private let action: () -> Void
     
     // MARK: Initializers
+    /// Initializes component with action
     public init(
         model: VCloseButtonModel = .init(),
         state: VCloseButtonState = .enabled,
@@ -57,8 +58,8 @@ extension VCloseButton {
     
     private var hitBox: some View {
         buttonView
-            .padding(.horizontal, model.layout.hitBoxHor)
-            .padding(.vertical, model.layout.hitBoxVer)
+            .padding(.horizontal, model.layout.hitBox.horizontal)
+            .padding(.vertical, model.layout.hitBox.vertical)
     }
     
     private var buttonView: some View {

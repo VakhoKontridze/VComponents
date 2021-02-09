@@ -26,7 +26,7 @@ struct VPageIndicatorInfinite: View {
     private let validLayout: Bool
 
     // MARK: Intializers
-    public init(
+    init(
         model: VPageIndicatorModel,
         visible: Int,
         center: Int,

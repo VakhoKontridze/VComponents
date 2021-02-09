@@ -86,7 +86,7 @@ extension VBaseViewNavigationBarCenter {
 
     private var items: some View {
         HStack(spacing: 0, content: {
-            HStack(spacing: model.layout.spacing, content: {
+            HStack(spacing: model.layout.navBarSpacing, content: {
                 if let leadingItemContent = leadingItemContent { leadingItemContent() }
 
                 if showBackButton { VChevronButton(model: model.backButtonSubModel, direction: .left, action: backAction) }
@@ -97,13 +97,13 @@ extension VBaseViewNavigationBarCenter {
 
             Spacer()
 
-            HStack(spacing: model.layout.spacing, content: {
+            HStack(spacing: model.layout.navBarSpacing, content: {
                 titleContent()
             })
 
             Spacer()
 
-            HStack(spacing: model.layout.spacing, content: {
+            HStack(spacing: model.layout.navBarSpacing, content: {
                 if let trailingItemContent = trailingItemContent { trailingItemContent() }
             })
                 .frame(minWidth: leadingTrailingWidth, alignment: .trailing)

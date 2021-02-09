@@ -38,6 +38,7 @@ public struct VSecondaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
+    /// Initializes component with action and content
     public init(
         model: VSecondaryButtonModel = .init(),
         state: VSecondaryButtonState = .enabled,
@@ -50,6 +51,7 @@ public struct VSecondaryButton<Content>: View where Content: View {
         self.content = content
     }
 
+    /// Initializes component with action and title
     public init(
         model: VSecondaryButtonModel = .init(),
         state: VSecondaryButtonState = .enabled,
@@ -87,8 +89,8 @@ extension VSecondaryButton {
     
     private var hitBox: some View {
         buttonView
-            .padding(.horizontal, model.layout.hitBoxHor)
-            .padding(.vertical, model.layout.hitBoxVer)
+            .padding(.horizontal, model.layout.hitBox.horizontal)
+            .padding(.vertical, model.layout.hitBox.vertical)
     }
     
     private var buttonView: some View {
@@ -100,8 +102,8 @@ extension VSecondaryButton {
     
     private var buttonContent: some View {
         content()
-            .padding(.horizontal, model.layout.contentMarginHor)
-            .padding(.vertical, model.layout.contentMarginVer)
+            .padding(.horizontal, model.layout.contentMargins.horizontal)
+            .padding(.vertical, model.layout.contentMargins.vertical)
             .opacity(model.colors.content.for(internalState))
     }
     

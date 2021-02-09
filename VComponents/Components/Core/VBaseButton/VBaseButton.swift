@@ -43,6 +43,7 @@ public struct VBaseButton<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers: State
+    /// Initializes component with state, action, press handler, and content
     public init(
         state: VBaseButtonState,
         action: @escaping () -> Void,
@@ -56,6 +57,7 @@ public struct VBaseButton<Content>: View where Content: View {
     }
     
     // MARK: Initializers: Bool
+    /// Initializes component with bool, action, press handler, and content
     public init(
         isEnabled: Bool,
         action: @escaping () -> Void,

@@ -10,7 +10,10 @@ import Foundation
 // MARK:- V Secondary Button State
 /// Enum that describes state, such as enabled or disabled
 public enum VSecondaryButtonState: Int, CaseIterable {
+    /// Enabled
     case enabled
+    
+    /// Disabled
     case disabled
     
     var isEnabled: Bool {

@@ -11,10 +11,14 @@ import SwiftUI
 /// Data source that creates tab navigation item and content
 public struct VTabNavigationViewPage<Content> where Content: View {
     // MARK: Properties
+    /// Tab page
     public var item: VTabNavigationPageItem
+    
+    /// Tab content
     public var content: Content
     
     // MARK: Initializers
+    /// Initializes data source with item and content
     public init(
         item: VTabNavigationPageItem,
         content: Content

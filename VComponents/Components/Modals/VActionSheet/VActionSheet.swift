@@ -43,6 +43,7 @@ public struct VActionSheet {
     fileprivate let rows: [VActionSheetRow]
     
     // MARK: Initializrs
+    /// Initializes component with title, description, and rows
     public init(
         title: String,
         description: String?,

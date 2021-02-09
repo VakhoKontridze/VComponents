@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- Color Book
-/// Contains basic colors used throughout the framework
+/// Contains fundamental colors used throughout the framework
 public struct ColorBook {
     private init() {}
 }

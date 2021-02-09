@@ -28,7 +28,7 @@ extension VLinkDemoView {
     @ViewBuilder private func component() -> some View {
         switch linkButtonType.preset {
         case let preset?: VLink(preset: preset, state: state, url: url, title: buttonTitle)
-        case nil: VLink(state: state, url: url, label: buttonContent)
+        case nil: VLink(state: state, url: url, content: buttonContent)
         }
     }
     

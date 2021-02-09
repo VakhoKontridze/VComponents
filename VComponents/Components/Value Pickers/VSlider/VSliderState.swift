@@ -10,7 +10,10 @@ import Foundation
 // MARK:- V Slider State
 /// Enum that describes state, such as enabled or disabled
 public enum VSliderState: Int, CaseIterable {
+    /// Enabled
     case enabled
+    
+    /// Disabled
     case disabled
     
     var isEnabled: Bool {

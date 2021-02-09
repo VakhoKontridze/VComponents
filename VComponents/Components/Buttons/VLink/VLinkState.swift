@@ -10,7 +10,10 @@ import Foundation
 // MARK:- V Link State
 /// Enum that describes state, such as enabled or disabled
 public enum VLinkState: Int, CaseIterable {
+    /// Enabled
     case enabled
+    
+    /// Disabled
     case disabled
     
     var isEnabled: Bool {

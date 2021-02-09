@@ -10,7 +10,10 @@ import Foundation
 // MARK:- V Wheel Picker State
 /// Enum that describes state, such as enabled or disabled
 public enum VWheelPickerState: Int, CaseIterable {
+    /// Case enabled
     case enabled
+    
+    /// Case disabled
     case disabled
     
     var isEnabled: Bool {

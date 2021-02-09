@@ -12,8 +12,13 @@ import SwiftUI
 ///
 /// If two cancel buttons are used, app would crash
 public enum VActionSheetRow {
+    /// Standard button with blue tint
     case standard(action: () -> Void, title: String)
+    
+    /// Destructive button with red tint
     case destructive(action: () -> Void, title: String)
+    
+    /// Cancel button
     case cancel(action: (() -> Void)? = nil, title: String)
     
     var actionSheetButton: ActionSheet.Button {

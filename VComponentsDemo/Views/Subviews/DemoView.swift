@@ -46,7 +46,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
     
     private let halfModalModel: VHalfModalModel = {
         var model: VHalfModalModel = .init()
-        model.layout.contentMargin.trailing = 0
+        model.layout.contentMargins.trailing = 0
         return model
     }()
     

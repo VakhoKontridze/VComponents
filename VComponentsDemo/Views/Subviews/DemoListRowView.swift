@@ -53,7 +53,7 @@ struct DemoListRowView<Content>: View where Content: View {
 extension DemoListRowView {
     @ViewBuilder var body: some View {
         switch rowType {
-        case .link(let destination): VNavigationLink(destination: destination, label: { rowView })
+        case .link(let destination): VNavigationLink(destination: destination, content: { rowView })
         case .custom(let action): Button(action: action, label: { rowView })
         }
     }

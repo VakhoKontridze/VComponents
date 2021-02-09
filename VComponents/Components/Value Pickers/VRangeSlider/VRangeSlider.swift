@@ -53,6 +53,7 @@ public struct VRangeSlider: View {
     fileprivate enum Thumb { case low, high }
 
     // MARK: Initializers
+    /// Initializes component with diffrene, and low and high values
     public init<V>(
         model: VRangeSliderModel = .init(),
         range: ClosedRange<V> = 0...1,
@@ -126,7 +127,7 @@ extension VRangeSlider {
 
     private var track: some View {
         Rectangle()
-            .foregroundColor( model.colors.slider.track.for(state))
+            .foregroundColor( model.colors.track.for(state))
     }
 
     private func progress(in proxy: GeometryProxy) -> some View {
@@ -134,18 +135,18 @@ extension VRangeSlider {
             .padding(.leading, progress(in: proxy, thumb: .low))
             .padding(.trailing, progress(in: proxy, thumb: .high))
 
-            .foregroundColor(model.colors.slider.progress.for(state))
+            .foregroundColor(model.colors.progress.for(state))
     }
 
     private func thumb(in proxy: GeometryProxy, thumb: Thumb) -> some View {
         Group(content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .foregroundColor(model.colors.thumb.fill.for(state))
-                    .shadow(color: model.colors.thumb.shadow.for(state), radius: model.layout.thumbShadowRadius)
+                    .foregroundColor(model.colors.thumb.for(state))
+                    .shadow(color: model.colors.thumbShadow.for(state), radius: model.layout.thumbShadowRadius)
 
                 RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .strokeBorder(model.colors.thumb.border.for(state), lineWidth: model.layout.thumbBorderWidth)
+                    .strokeBorder(model.colors.thumbBorder.for(state), lineWidth: model.layout.thumbBorderWidth)
             })
                 .frame(dimension: model.layout.thumbDimension)
                 .offset(x: thumbOffset(in: proxy, thumb: thumb))

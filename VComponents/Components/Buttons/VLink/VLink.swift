@@ -28,54 +28,57 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VLink<Label>: View where Label: View {
+public struct VLink<Content>: View where Content: View {
     // MARK: Properties
     @Environment(\.openURL) private var openURL: OpenURLAction
     
     private let linkButtonType: VLinkType
     private let state: VLinkState
     private let url: URL?
-    private let label: () -> Label
+    private let content: () -> Content
     
     // MARK: Initializers: Preset
+    /// Initializes component with preset, url and content
     public init(
         preset linkPreset: VLinkPreset,
         state: VLinkState = .enabled,
         url: URL?,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.linkButtonType = linkPreset.buttonType
         self.state = state
         self.url = url
-        self.label = label
+        self.content = content
     }
     
+    /// Initializes component with preset, url and title
     public init(
         preset linkPreset: VLinkPreset,
         state: VLinkState = .enabled,
         url: URL?,
         title: String
     )
-        where Label == VText
+        where Content == VText
     {
         self.init(
             preset: linkPreset,
             state: state,
             url: url,
-            label: { linkPreset.text(from: title, isEnabled: state.isEnabled) }
+            content: { linkPreset.text(from: title, isEnabled: state.isEnabled) }
         )
     }
     
     // MARK: Initializers: Custom
+    /// Initializes component with url and content
     public init(
         state: VLinkState = .enabled,
         url: URL?,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.linkButtonType = .custom
         self.state = state
         self.url = url
-        self.label = label
+        self.content = content
     }
 }
 
@@ -86,7 +89,7 @@ extension VLink {
             buttonType: linkButtonType,
             isEnabled: state.isEnabled,
             action: action,
-            label: label
+            content: content
         )
     }
 }

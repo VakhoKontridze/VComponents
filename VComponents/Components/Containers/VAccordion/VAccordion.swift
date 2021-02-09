@@ -16,11 +16,14 @@ import SwiftUI
 ///
 /// There are three posible layouts:
 /// 
-/// 1. Fixed. Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
+/// 1. Fixed.
+/// Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
 ///
-/// 2. Flexible. Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component.
-/// 
-/// 3. Constrained. `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
+/// 2. Flexible.
+/// Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container.Scrolling may be enabled inside component.
+///
+/// 3. Constrained.
+/// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
 /// # Usage Example #
 ///
@@ -82,6 +85,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
     
     // MARK: Initializers: View Builder
+    /// Initializes component with state, header, data, id, and row content
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -104,6 +108,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
     
+    /// Initializes component with state, header title, data, id, and row content
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -136,6 +141,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
 
     // MARK: Initializers: Identified View Builder
+    /// Initializes component with state, header, data, and row content
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -160,6 +166,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
     
+    /// Initializes component with state, header title, data, and row content
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -192,6 +199,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
     
     // MARK: Initializers: Free Content
+    /// Initializes component with state, header, and free content
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -213,6 +221,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
     
+    /// Initializes component with state, header title, and free content
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -272,10 +281,10 @@ extension VAccordion {
             )
                 .allowsHitTesting(!model.misc.expandCollapseOnHeaderTap) // No need for two-layer tap area
         })
-            .padding(.leading, model.layout.headerMargin.leading)
-            .padding(.trailing, model.layout.headerMargin.trailing)
-            .padding(.top, model.layout.headerMargin.top)
-            .padding(.bottom, (animatableState ?? state).isExpanded ? model.layout.headerMargin.bottomExpanded : model.layout.headerMargin.bottomCollapsed)
+            .padding(.leading, model.layout.headerMargins.leading)
+            .padding(.trailing, model.layout.headerMargins.trailing)
+            .padding(.top, model.layout.headerMargins.top)
+            .padding(.bottom, (animatableState ?? state).isExpanded ? model.layout.headerMargins.bottomExpanded : model.layout.headerMargins.bottomCollapsed)
             .contentShape(Rectangle())
             .onTapGesture(perform: expandCollapseFromHeaderTap)
     }
@@ -284,10 +293,10 @@ extension VAccordion {
         if (animatableState ?? state).isExpanded, model.layout.hasHeaderDivider {
             Rectangle()
                 .frame(height: model.layout.headerDividerHeight)
-                .padding(.leading, model.layout.dividerMargin.leading)
-                .padding(.trailing, model.layout.dividerMargin.trailing)
-                .padding(.top, model.layout.dividerMargin.top)
-                .padding(.bottom, model.layout.dividerMargin.bottom)
+                .padding(.leading, model.layout.dividerMargins.leading)
+                .padding(.trailing, model.layout.dividerMargins.trailing)
+                .padding(.top, model.layout.dividerMargins.top)
+                .padding(.bottom, model.layout.dividerMargins.bottom)
                 .foregroundColor(model.colors.headerDivider)
         }
     }
@@ -304,17 +313,17 @@ extension VAccordion {
                         id: id,
                         rowContent: rowContent
                     )
-                        .padding(.leading, model.layout.contentMargin.leading)
+                        .padding(.leading, model.layout.contentMargins.leading)
                         //.padding(.trailing, model.layout.contentMargin.trailing)
-                        .padding(.top, model.layout.contentMargin.top)
-                        .padding(.bottom, model.layout.contentMargin.bottom)
+                        .padding(.top, model.layout.contentMargins.top)
+                        .padding(.bottom, model.layout.contentMargins.bottom)
                     
                 case .freeForm(let content):
                     content()
-                        .padding(.leading, model.layout.contentMargin.leading)
-                        .padding(.trailing, model.layout.contentMargin.trailing)
-                        .padding(.top, model.layout.contentMargin.top)
-                        .padding(.bottom, model.layout.contentMargin.bottom)
+                        .padding(.leading, model.layout.contentMargins.leading)
+                        .padding(.trailing, model.layout.contentMargins.trailing)
+                        .padding(.top, model.layout.contentMargins.top)
+                        .padding(.bottom, model.layout.contentMargins.bottom)
                 }
             })
                 .frame(maxWidth: .infinity)

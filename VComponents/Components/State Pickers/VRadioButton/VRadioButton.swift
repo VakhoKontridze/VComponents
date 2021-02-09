@@ -68,6 +68,7 @@ public struct VRadioButton<Content>: View where Content: View {
     private let content: (() -> Content)?
     
     // MARK: Initializers: State
+    /// Initializes component with state and content
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>,
@@ -78,6 +79,7 @@ public struct VRadioButton<Content>: View where Content: View {
         self.content = content
     }
     
+    /// Initializes component with state and title
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>,
@@ -99,6 +101,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
     
+    /// Initializes component with state
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>
@@ -111,6 +114,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
 
     // MARK: Initializers: Bool
+    /// Initializes component with bool and content
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>,
@@ -123,6 +127,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
 
+    /// Initializes component with bool and title
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>,
@@ -144,6 +149,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
 
+    /// Initializes component with bool
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>
@@ -156,6 +162,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
     
     // MARK: Initializers: Pickable Item
+    /// Initializes component with `VPickableItem` and content
     public init<Item>(
         model: VRadioButtonModel = .init(),
         selection: Binding<Item>,
@@ -174,7 +181,27 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
     
+    /// Initializes component with `VPickableItem`
+    public init<Item>(
+        model: VRadioButtonModel = .init(),
+        selection: Binding<Item>,
+        selects selectingValue: Item
+    )
+        where
+            Content == Never,
+            Item: VPickableItem
+    {
+        self.init(
+            model: model,
+            state: Binding<VRadioButtonState>(
+                get: { selection.wrappedValue == selectingValue ? .on : .off },
+                set: { if $0.isOn { selection.wrappedValue = selectingValue } }
+            )
+        )
+    }
+    
     // MARK: Initializers: Pickable Titled Item
+    /// Initializes component with `VPickableTitledItem` and content
     public init<Item>(
         model: VRadioButtonModel = .init(),
         selection: Binding<Item>,

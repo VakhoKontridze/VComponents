@@ -10,11 +10,21 @@ import SwiftUI
 // MARK:- V Toggle State
 /// Enum that describes state, such as off, on, intermediate, or disabled
 public enum VCheckBoxState: Int, CaseIterable {
+    /// Of
     case off
+    
+    /// On
     case on
+    
+    /// Intermediate
+    ///
+    /// Upon press, component goes to `on` state
     case intermediate
+    
+    /// Disabled
     case disabled
     
+    /// Indicates if state is on
     public var isOn: Bool {
         switch self {
         case .off: return false
@@ -36,6 +46,7 @@ public enum VCheckBoxState: Int, CaseIterable {
 
 // MARK:- Next State
 extension VCheckBoxState {
+    /// Goes to the next state
     public mutating func nextState() {
         switch self {
         case .off: self = .on
@@ -80,6 +91,7 @@ enum VCheckBoxInternalState {
 
 // MARK:- Helpers
 extension Binding where Value == VCheckBoxState {
+    /// Initializes state with bool
     public init(bool: Binding<Bool>) {
         self.init(
             get: { bool.wrappedValue ? .on : .off },

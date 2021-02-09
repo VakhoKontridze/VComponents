@@ -25,6 +25,7 @@ public struct VSpinner: View {
     private let spinnerType: VSpinnerType
     
     // MARK: Initializers
+    /// Initializes component
     public init(
         type spinnerType: VSpinnerType = .default
     ) {

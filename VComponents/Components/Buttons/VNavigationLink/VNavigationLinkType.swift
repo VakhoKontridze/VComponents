@@ -18,13 +18,13 @@ public typealias VNavigationLinkPreset = DerivedButtonPreset
 
 // MARK:- Button
 extension VNavigationLinkType {
-    @ViewBuilder static func navLinkButton<Label>(
+    @ViewBuilder static func navLinkButton<Content>(
         buttonType: VNavigationLinkType,
         isEnabled: Bool,
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder content: @escaping () -> Content
     ) -> some View
-        where Label: View
+        where Content: View
     {
         switch buttonType {
         case .primary(let model):
@@ -32,7 +32,7 @@ extension VNavigationLinkType {
                 model: model,
                 state: isEnabled ? .enabled : .disabled,
                 action: action,
-                content: label
+                content: content
             )
             
         case .secondary(let model):
@@ -40,7 +40,7 @@ extension VNavigationLinkType {
                 model: model,
                 state: isEnabled ? .enabled : .disabled,
                 action: action,
-                content: label
+                content: content
             )
             
         case .square(let model):
@@ -48,7 +48,7 @@ extension VNavigationLinkType {
                 model: model,
                 state: isEnabled ? .enabled : .disabled,
                 action: action,
-                content: label
+                content: content
             )
             
         case .plain(let model):
@@ -56,11 +56,11 @@ extension VNavigationLinkType {
                 model: model,
                 state: isEnabled ? .enabled : .disabled,
                 action: action,
-                content: label
+                content: content
             )
             
         case .custom:
-            label()
+            content()
                 .allowsHitTesting(isEnabled)
                 .onTapGesture(perform: action)
         }

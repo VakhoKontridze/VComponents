@@ -10,8 +10,13 @@ import SwiftUI
 // MARK:- V Dialog Button Model Model
 /// Enum that describes dialog button model, such as primary, secondary, or custom
 public enum VDialogButtonModel {
+    /// Primary button
     case primary
+    
+    /// Secondary button
     case secondary
+    
+    /// Custom button
     case custom(_ model: VDialogButtonModelCustom)
 }
 
@@ -27,7 +32,7 @@ extension VDialogButtonModel {
     
     private static let primaryButtonSubModel: VDialogButtonModelCustom = .init(
         colors: .init(
-            foreground: .init(
+            content: .init(
                 pressedOpacity: 0.5
             ),
             text: .init(
@@ -45,7 +50,7 @@ extension VDialogButtonModel {
     
     private static let secondaryButtonSubModel: VDialogButtonModelCustom = .init(
         colors: .init(
-            foreground: .init(
+            content: .init(
                 pressedOpacity: 0.5
             ),
             text: .init(
@@ -65,10 +70,16 @@ extension VDialogButtonModel {
 // MARK:- V Dialog Button Model Custom
 /// Model that describes UI
 public struct VDialogButtonModelCustom {
+    /// Sub-model containing layout properties
     public var layout: Layout
+    
+    /// Sub-model containing color properties
     public var colors: Colors
+    
+    /// Sub-model containing font properties
     public var fonts: Fonts
     
+    /// Initializes model with colors
     public init(layout: Layout = .init(), colors: Colors, fonts: Fonts = .init()) {
         self.layout = layout
         self.colors = colors
@@ -78,23 +89,37 @@ public struct VDialogButtonModelCustom {
 
 // MARK:- Layout
 extension VDialogButtonModelCustom {
+    /// Sub-model containing layout properties
     public struct Layout {
+        /// Button height. Defaults to `40`.
         public var height: CGFloat = 40
+        
+        /// Button corner radius. Defaults to `20`.
         public var cornerRadius: CGFloat = 10
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 // MARK:- Colors
 extension VDialogButtonModelCustom {
+    /// Sub-model containing color properties
     public struct Colors {
+        /// Conrent opacities
         public var content: StateOpacities
-        public var text: StateColors    // Only applicable during init with title
+        
+        /// Text content colors
+        ///
+        /// Only applicable when using init with title
+        public var text: StateColors
+        
+        /// Background colors
         public var background: StateColors
         
-        public init(foreground: StateOpacities, text: StateColors, background: StateColors) {
-            self.content = foreground
+        /// Initializes sub-model with content, text, and background colors
+        public init(content: StateOpacities, text: StateColors, background: StateColors) {
+            self.content = content
             self.text = text
             self.background = background
         }
@@ -102,22 +127,28 @@ extension VDialogButtonModelCustom {
 }
 
 extension VDialogButtonModelCustom.Colors {
+    /// Sub-model containing colors for component states
     public typealias StateColors = StateColorsEPD
     
+    /// Sub-model containing opacities for component states
     public typealias StateOpacities = StateOpacitiesP
 }
 
 // MARK:- Fonts
 extension VDialogButtonModelCustom {
+    /// Sub-model containing font properties
     public struct Fonts {
+        /// Title font. Defaults to system font of size `16` with `semibold` weight.
         public var title: Font = primaryButtonReference.fonts.title
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 // MARK:- References
 extension VDialogButtonModelCustom {
+    /// Reference to VPrimaryButtonModel
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }
 

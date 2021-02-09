@@ -59,6 +59,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
     private let content: () -> Content
     
     // MARK: Initializers: Leading and Trailing
+    /// Initializes component with title content, leading and trailing items, and content
     public init(
         model: VBaseViewModel = .init(),
         @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
@@ -72,6 +73,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         self.navBarTrailingItemContent = navBarTrailingItemContent
         self.content = content
     }
+    /// Initializes component with title, leading and trailing items, and content
     
     public init(
         model: VBaseViewModel = .init(),
@@ -99,6 +101,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
     }
 
     // MARK: Initializers: Leading
+    /// Initializes component with title content, leading item, and content
     public init(
         model: VBaseViewModel = .init(),
         @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
@@ -114,6 +117,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         self.content = content
     }
     
+    /// Initializes component with title, leading item, and content
     public init(
         model: VBaseViewModel = .init(),
         title navBarTitleContent: String,
@@ -139,6 +143,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         )
     }
     // MARK: Initializers: Trailing
+    /// Initializes component with title content, trailing item, and content
     public init(
         model: VBaseViewModel = .init(),
         @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
@@ -154,6 +159,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         self.content = content
     }
     
+    /// Initializes component with title, trailing item, and content
     public init(
         model: VBaseViewModel = .init(),
         title navBarTitleContent: String,
@@ -180,6 +186,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
     }
 
     // MARK: Initializers: _
+    /// Initializes component with title content and content
     public init(
         model: VBaseViewModel = .init(),
         @ViewBuilder titleContent navBarTitleContent: @escaping () -> NavBarTitleContent,
@@ -196,6 +203,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         self.content = content
     }
     
+    /// Initializes component with title and content
     public init(
         model: VBaseViewModel = .init(),
         title navBarTitleContent: String,
@@ -275,7 +283,7 @@ struct VBaseView_Previews: PreviewProvider {
                     ZStack(content: {
                         Color.pink.edgesIgnoringSafeArea(.bottom)
                         
-                        VNavigationLink(destination: Destination(), label: { Text("Go to Details") })
+                        VNavigationLink(destination: Destination(), content: { Text("Go to Details") })
                     }
                 )
             })

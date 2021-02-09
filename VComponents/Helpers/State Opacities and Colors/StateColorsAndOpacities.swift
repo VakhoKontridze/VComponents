@@ -8,11 +8,18 @@
 import SwiftUI
 
 // MARK:- Enabled, Disabled | Disabled
+/// Color and opacity level group containing values for enabled and disables states
 public struct StateColorsAndOpacitiesEP_D {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Disabled color
     public var disabled: Color
+    
+    /// Disabled opacity level
     public var disabledOpacity: Double
     
+    /// Initializes group with values
     public init(enabled: Color, disabled: Color, disabledOpacity: Double) {
         self.enabled = enabled
         self.disabled = disabled
@@ -55,13 +62,24 @@ extension StateColorsAndOpacitiesEP_D {
 }
 
 // MARK:- Enabled, Pressed, Disabled | Pressed, Disabled
+/// Color and opacity level group containing values for enabled, pressed, and disables states
 public struct StateColorsAndOpacitiesEPD_PD {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Pressed color
     public var pressed: Color
+    
+    /// Disabled color
     public var disabled: Color
+    
+    /// Pressed opacity level
     public var pressedOpacity: Double
+    
+    /// Disabled opacity level
     public var disabledOpacity: Double
     
+    /// Initializes group with values
     public init(enabled: Color, pressed: Color, disabled: Color, pressedOpacity: Double, disabledOpacity: Double) {
         self.enabled = enabled
         self.pressed = pressed
@@ -122,19 +140,42 @@ extension StateColorsAndOpacitiesEPD_PD {
 }
 
 // MARK:- Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled | Pressed, Disabled
+/// Color and opacity level group containing values for enabled (+pressed), focused (+pressed), success (+pressed), error (+pressed), and disables states
 public struct StateColorsEpFpSpEpD_PD {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Enabled pressed color
     public var enabledPressed: Color
+    
+    /// Focused color
     public var focused: Color
+    
+    /// Focused pressed color
     public var focusedPressed: Color
+    
+    /// Success color
     public var success: Color
+    
+    /// Success pressed color
     public var successPressed: Color
+    
+    /// Error color
     public var error: Color
+    
+    /// Error pressed color
     public var errorPressed: Color
+    
+    /// Disabled color
     public var disabled: Color
+    
+    /// Pressed opacity level
     public var pressedOpacity: Double
+    
+    /// Disabled opacity level
     public var disabledOpacity: Double
     
+    /// Initializes group with values
     public init(enabled: Color, enabledPressed: Color, focused: Color, focusedPressed: Color, success: Color, successPressed: Color, error: Color, errorPressed: Color, disabled: Color, pressedOpacity: Double, disabledOpacity: Double) {
         self.enabled = enabled
         self.enabledPressed = enabledPressed

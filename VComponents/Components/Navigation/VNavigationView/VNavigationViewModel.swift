@@ -10,17 +10,24 @@ import SwiftUI
 // MARK:- V Navigation View Model
 /// Model that describes UI
 public struct VNavigationViewModel {
+    /// Sub-model containing color properties
     public var colors: Colors = .init()
     
+    /// Initializes model with default values
     public init() {}
 }
 
 // MARK:- Colors
 extension VNavigationViewModel {
+    /// Sub-model containing color properties
     public struct Colors {
+        /// Background color
         public var background: Color = ColorBook.canvas
+        
+        /// Navigation bar divider color
         public var divider: Color = .clear
         
+        /// Initializes sub-model with default values
         public init() {}
     }
 }
