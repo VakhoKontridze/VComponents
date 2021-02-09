@@ -37,9 +37,9 @@ Add https://github.com/VakhoKontridze/VComponents as a Swift Package Repository 
 
 ### Manual
 
-1. Download [VComponents.framework](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.framework.zip) or [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.xcframework.zip), and extract the zip.
+1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.xcframework.zip) and extract the zip.
 
-2. Drag  `VComponents.framework` or  `VComponents.xcframework` into your project.
+2. Drag  `VComponents.xcframework` into your project.
 
 ![ManualInstallation1](./img/ManualInstallation1.jpg)
 
