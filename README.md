@@ -31,7 +31,7 @@ Framework doesn't support CocoaPods or Carthage.
 
 ### Swift Package Manager
 
-Add https://github.com/VakhoKontridze/VComponents as a Swift Package Repository in Xcode and follow the instructions.
+Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package Repository in Xcode and follow the instructions.
 
 ![SPM1](./img/SPM1.jpg)
 
