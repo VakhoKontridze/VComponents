@@ -27,13 +27,19 @@ Project contains demo app, that can be run to showcase all components.
 
 ## Installation
 
-Framework doesn't support Swift Package Manager, CocoaPods, or Carthage.
+Framework doesn't support CocoaPods or Carthage.
+
+### Swift Package Manager
+
+Add https://github.com/VakhoKontridze/VComponents as a Swift Package Repository in Xcode and follow the instructions.
+
+![SPM1](./img/SPM1.jpg)
 
 ### Manual
 
-1. Download [VComponents](https://github.com/VakhoKontridze/VComponents/blob/main/VComponents.framework.zip?raw=true) and extract the zip.
+1. Download [VComponents.framework](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.framework.zip) or [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.xcframework.zip), and extract the zip.
 
-2. Drag `VComponents.framework` into your project.
+2. Drag  `VComponents.framework` or  `VComponents.xcframework` into your project.
 
 ![ManualInstallation1](./img/ManualInstallation1.jpg)
 
@@ -218,10 +224,6 @@ Thought process behind his design choice was to centralize animations to model.
 Components also prevent themselves from modifying external state with an animation.
 
 ## Release History
-
-**2.0 (2020 XXX XX)**
-
-XXX
 
 **1.0 (2020 Feb 7)**
 
