@@ -31,6 +31,7 @@ public struct VText: View {
     private let title: String
     
     // MARK: Initializers
+    /// Initializes component with type, font, color, and title
     public init(
         type textType: VTextType,
         font: Font,

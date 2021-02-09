@@ -28,7 +28,7 @@ extension VLinkDemoView {
     @ViewBuilder private func component() -> some View {
         switch linkButtonType.preset {
         case let preset?: VLink(preset: preset, state: state, url: url, title: buttonTitle)
-        case nil: VLink(state: state, url: url, label: buttonContent)
+        case nil: VLink(state: state, url: url, content: buttonContent)
         }
     }
     
@@ -56,6 +56,7 @@ extension VLinkState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }
@@ -95,6 +96,7 @@ private extension VLinkPreset {
         case .secondary: return .secondary
         case .square: return .square
         case .plain: return .plain
+        @unknown default: fatalError()
         }
     }
 }

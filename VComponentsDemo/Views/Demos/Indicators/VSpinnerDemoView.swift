@@ -54,6 +54,7 @@ private extension VSpinnerType {
         switch self {
         case .continous: return .continous
         case .dashed: return .dashed
+        @unknown default: fatalError()
         }
     }
 }

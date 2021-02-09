@@ -71,6 +71,7 @@ extension VToastModel.Layout.PresentationEdge: VPickableTitledItem {
         switch self {
         case .top: return "Top"
         case .bottom: return "Bottom"
+        @unknown default: fatalError()
         }
     }
 }
@@ -99,6 +100,7 @@ private extension VToastType {
         switch self {
         case .oneLine: return .oneLine
         case .multiLine: return .multiLine
+        @unknown default: fatalError()
         }
     }
 }

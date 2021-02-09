@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Table Section
-/// Data source that creates table sections
+/// Data source that creates `VTableView` sections
 public protocol VTableSection: Identifiable {
     associatedtype VTableRow: VComponents.VTableRow
     var rows: [VTableRow] { get }

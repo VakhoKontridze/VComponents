@@ -22,7 +22,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     
     private let lazyListModel: VLazyListModelVertical = {
         var model: VLazyListModelVertical = .init()
-        model.layout.spacing = 20
+        model.layout.rowSpacing = 20
         return model
     }()
     

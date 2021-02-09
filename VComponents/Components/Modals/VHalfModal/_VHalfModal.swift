@@ -107,8 +107,8 @@ extension _VHalfModal {
         if hasResizeIndicator {
             RoundedRectangle(cornerRadius: model.layout.resizeIndicatorCornerRadius)
                 .frame(size: model.layout.resizeIndicatorSize)
-                .padding(.top, model.layout.resizeIndicatorMargin.top)
-                .padding(.bottom, model.layout.resizeIndicatorMargin.bottom)
+                .padding(.top, model.layout.resizeIndicatorMargins.top)
+                .padding(.bottom, model.layout.resizeIndicatorMargins.bottom)
                 .foregroundColor(model.colors.resizeIndicator)
         }
     }
@@ -116,7 +116,7 @@ extension _VHalfModal {
     @ViewBuilder private var headerView: some View {
         if headerExists {
             HStack(spacing: model.layout.headerSpacing, content: {
-                if model.misc.dismissType.contains(.leading) {
+                if model.misc.dismissType.contains(.leadingButton) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -126,27 +126,27 @@ extension _VHalfModal {
                         .layoutPriority(1)  // Overrides close button's maxWidth: .infinity. Also, header content is by default maxWidth and leading justified.
                 }
 
-                if model.misc.dismissType.contains(.trailing) {
+                if model.misc.dismissType.contains(.trailingButton) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }
             })
-                .padding(.leading, model.layout.headerMargin.leading)
-                .padding(.trailing, model.layout.headerMargin.trailing)
-                .padding(.top, model.layout.headerMargin.top)
-                .padding(.bottom, model.layout.headerMargin.bottom)
+                .padding(.leading, model.layout.headerMargins.leading)
+                .padding(.trailing, model.layout.headerMargins.trailing)
+                .padding(.top, model.layout.headerMargins.top)
+                .padding(.bottom, model.layout.headerMargins.bottom)
         }
     }
 
     @ViewBuilder private var dividerView: some View {
         if headerExists && model.layout.hasDivider {
             Rectangle()
-                .frame(height: model.layout.dividerHeight)
-                .padding(.leading, model.layout.dividerMargin.leading)
-                .padding(.trailing, model.layout.dividerMargin.trailing)
-                .padding(.top, model.layout.dividerMargin.top)
-                .padding(.bottom, model.layout.dividerMargin.bottom)
-                .foregroundColor(model.colors.divider)
+                .frame(height: model.layout.headerDividerHeight)
+                .padding(.leading, model.layout.headerDividerMargins.leading)
+                .padding(.trailing, model.layout.headerDividerMargins.trailing)
+                .padding(.top, model.layout.headerDividerMargins.top)
+                .padding(.bottom, model.layout.headerDividerMargins.bottom)
+                .foregroundColor(model.colors.headerDivider)
         }
     }
     
@@ -157,10 +157,10 @@ extension _VHalfModal {
                 .gesture(DragGesture(minimumDistance: 0))
             
             content()
-                .padding(.leading, model.layout.contentMargin.leading)
-                .padding(.trailing, model.layout.contentMargin.trailing)
-                .padding(.top, model.layout.contentMargin.top)
-                .padding(.bottom, model.layout.contentMargin.bottom)
+                .padding(.leading, model.layout.contentMargins.leading)
+                .padding(.trailing, model.layout.contentMargins.trailing)
+                .padding(.top, model.layout.contentMargins.top)
+                .padding(.bottom, model.layout.contentMargins.bottom)
         })
     }
 
@@ -172,8 +172,8 @@ extension _VHalfModal {
         if model.misc.dismissType.contains(.navigationViewCloseButton) {
             VCloseButton(model: model.closeButtonSubModel, action: animateOut)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .padding(.trailing, model.layout.headerMargin.trailing)
-                .padding(.top, model.layout.headerMargin.top)
+                .padding(.trailing, model.layout.headerMargins.trailing)
+                .padding(.top, model.layout.headerMargins.top)
                 .padding(.top, VHalfModalModel.Layout.navigationViewCloseButtonMarginTop)
         }
     }

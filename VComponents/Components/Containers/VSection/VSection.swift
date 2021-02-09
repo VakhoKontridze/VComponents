@@ -14,11 +14,14 @@ import SwiftUI
 ///
 /// There are three posible layouts:
 /// 
-/// 1. Fixed. Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
+/// 1. `Fixed`.
+/// Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
 ///
-/// 2. Flexible. Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component.
+/// 2. `Flexible`.
+/// Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container.Scrolling may be enabled inside component.
 /// 
-/// 3. Constrained. `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
+/// 3. `Constrained`.
+/// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
 /// # Usage Example #
 ///
@@ -62,6 +65,7 @@ public struct VSection<Data, ID, RowContent>: View
     private let rowContent: (Data.Element) -> RowContent
     
     // MARK: Initializers: View Builder
+    /// Initializes component with data, id, and row content
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .default,
@@ -77,6 +81,7 @@ public struct VSection<Data, ID, RowContent>: View
     }
     
     // MARK: Initializers: Identified View Builder
+    /// Initializes component with data and row content
     public init(
         model: VSectionModel = .init(),
         layout layoutType: VSectionLayoutType = .default,

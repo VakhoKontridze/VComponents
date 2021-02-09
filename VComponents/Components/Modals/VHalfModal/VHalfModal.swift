@@ -102,6 +102,7 @@ public struct VHalfModal<Content, HeaderContent>
     fileprivate let content: () -> Content
     
     // MARK: Initializers: Header
+    /// Initializes component with header and content
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
@@ -112,6 +113,7 @@ public struct VHalfModal<Content, HeaderContent>
         self.content = content
     }
     
+    /// Initializes component with header title and content
     public init(
         model: VHalfModalModel = .init(),
         headerTitle: String,
@@ -134,6 +136,7 @@ public struct VHalfModal<Content, HeaderContent>
     }
     
     // MARK: Initializers: _
+    /// Initializes component with content
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -148,7 +151,7 @@ public struct VHalfModal<Content, HeaderContent>
 
 // MARK:- Extension
 extension View {
-    /// Presents half modal
+    /// Presents `VHalfModal`
     public func vHalfModal<Content, HeaderContent>(
         isPresented: Binding<Bool>,
         halfModal: @escaping () -> VHalfModal<Content, HeaderContent>

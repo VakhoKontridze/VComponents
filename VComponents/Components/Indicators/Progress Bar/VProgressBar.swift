@@ -31,6 +31,7 @@ public struct VProgressBar: View {
     private let value: Double
     
     // MARK: Initializers
+    /// Initializes component with value
     public init<V>(
         model: VProgressBarModel = .init(),
         total: V = 1,

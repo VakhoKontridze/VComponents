@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Dialog Button
-/// Data source that creates dialog buttons
+/// Data source that creates `VDialog` buttons
 public struct VDialogButton {
     // MARK: Properties
     public var model: VDialogButtonModel
@@ -17,6 +17,7 @@ public struct VDialogButton {
     public var action: () -> Void
     
     // MARK: Initializers
+    /// Initializes data source with model, title, and action
     public init(
         model: VDialogButtonModel,
         isEnabled: Bool = true,

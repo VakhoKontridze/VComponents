@@ -40,6 +40,7 @@ public struct VToast {
     fileprivate let title: String
     
     // MARK: Initializers
+    /// Initializes component with type and title
     public init(
         model: VToastModel = .init(),
         type toastType: VToastType,

@@ -14,11 +14,14 @@ import SwiftUI
 ///
 /// There are three posible layouts:
 /// 
-/// 1. Fixed. Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
+/// 1. `Fixed`.
+/// Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
 ///
-/// 2. Flexible. Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container. Scrolling may be enabled inside component.
-/// 
-/// 3. Constrained. `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
+/// 2. `Flexible`.
+/// Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container.Scrolling may be enabled inside component.
+///
+/// 3. `Constrained`.
+/// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
 /// # Usage Example #
 ///
@@ -86,6 +89,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     private let rowContent: (Row) -> RowContent
     
     // MARK: Initializers: Header and Footer
+    /// Initializes component with sections, header, footer, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -102,6 +106,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.rowContent = rowContent
     }
     
+    /// Initializes component with sections, header title, footer, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -129,6 +134,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         )
     }
     
+    /// Initializes component with sections, header, footer title, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -156,6 +162,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         )
     }
     
+    /// Initializes component with sections, header title, footer title, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -193,6 +200,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     }
     
     // MARK: Initializers: Header
+    /// Initializes component with sections, header, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -210,6 +218,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.rowContent = rowContent
     }
     
+    /// Initializes component with sections, header title, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -238,6 +247,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     }
 
     // MARK: Initializers: Footer
+    /// Initializes component with sections, footer, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -255,6 +265,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
         self.rowContent = rowContent
     }
     
+    /// Initializes component with sections, footer title, and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,
@@ -283,6 +294,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     }
 
     // MARK: Initializers: _
+    /// Initializes component with sections and row content
     public init(
         model: VTableModel = .init(),
         layout layoutType: VTableLayoutType = .default,

@@ -12,8 +12,6 @@ import SwiftUI
 ///
 /// Model can be passed as parameter
 ///
-/// Due to the limitations of TabView, tab items only support `Text` and  `Image`
-///
 /// # Usage Example #
 ///
 /// ```
@@ -68,6 +66,28 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
     private let pageSix: VTabNavigationViewPage<C5>?
     
     // MARK: Initializers
+    /// Initializes component with selected index and six pages
+    public init(
+        model: VTabNavigationViewModel = .init(),
+        selection: Binding<Int>,
+        pageOne: VTabNavigationViewPage<C0>,
+        pageTwo: VTabNavigationViewPage<C1>,
+        pageThree: VTabNavigationViewPage<C2>,
+        pageFour: VTabNavigationViewPage<C3>,
+        pageFive: VTabNavigationViewPage<C4>,
+        pageSix: VTabNavigationViewPage<C5>
+    ) {
+        self.model = model
+        self._selection = selection
+        self.pageOne = pageOne
+        self.pageTwo = pageTwo
+        self.pageThree = pageThree
+        self.pageFour = pageFour
+        self.pageFive = pageFive
+        self.pageSix = pageSix
+    }
+    
+    /// Initializes component with selected index and five pages
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -89,6 +109,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
     
+    /// Initializes component with selected index and four pages
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -111,6 +132,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
 
+    /// Initializes component with selected index and three pages
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -133,6 +155,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
 
+    /// Initializes component with selected index and four pages
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,

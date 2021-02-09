@@ -8,12 +8,27 @@
 import Foundation
 
 // MARK:- V Accordion State
-/// Enum that describes state, such as collapsed, expanded, or disabled
+/// Enum that describes state, such as `collapsed`, `expanded`, or `disabled`
 public enum VAccordionState: Int, CaseIterable {
+    /// Case collapsed
     case collapsed
+    
+    /// Case expanded
     case expanded
+    
+    /// Case disabled
     case disabled
     
+    /// Indicates if state is Enabled
+    public var isEnabled: Bool {
+        switch self {
+        case .collapsed: return true
+        case .expanded: return true
+        case .disabled: return false
+        }
+    }
+    
+    /// Indicates if state is expanded
     public var isExpanded: Bool {
         switch self {
         case .collapsed: return false
@@ -41,6 +56,7 @@ public enum VAccordionState: Int, CaseIterable {
 
 // MARK:- Next State
 extension VAccordionState {
+    /// Goes to the next state
     public mutating func nextState() {
         switch self {
         case .collapsed: self = .expanded

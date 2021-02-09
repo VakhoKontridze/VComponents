@@ -40,6 +40,7 @@ public struct VCheckBox<Content>: View where Content: View {
     private let content: (() -> Content)?
     
     // MARK: Initializers: State
+    /// Initializes component with state and content
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>,
@@ -50,6 +51,7 @@ public struct VCheckBox<Content>: View where Content: View {
         self.content = content
     }
 
+    /// Initializes component with state and title
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>,
@@ -71,6 +73,7 @@ public struct VCheckBox<Content>: View where Content: View {
         )
     }
     
+    /// Initializes component with state
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>
@@ -83,6 +86,7 @@ public struct VCheckBox<Content>: View where Content: View {
     }
     
     // MARK: Initializers: Bool
+    /// Initializes component with bool and content
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,
@@ -95,6 +99,7 @@ public struct VCheckBox<Content>: View where Content: View {
         )
     }
 
+    /// Initializes component with bool and title
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,
@@ -116,6 +121,7 @@ public struct VCheckBox<Content>: View where Content: View {
         )
     }
 
+    /// Initializes component with bool
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>

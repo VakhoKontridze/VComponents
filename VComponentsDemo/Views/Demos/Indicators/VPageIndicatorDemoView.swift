@@ -96,6 +96,7 @@ private extension VPageIndicatorType {
         case .finite: return .finite
         case .infinite: return .infinite
         case .auto: return .auto
+        @unknown default: fatalError()
         }
     }
 }

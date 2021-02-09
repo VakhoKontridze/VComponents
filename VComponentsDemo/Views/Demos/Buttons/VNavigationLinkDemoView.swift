@@ -28,7 +28,7 @@ extension VNavigationLinkDemoView {
     @ViewBuilder private func component() -> some View {
         switch navigationLinkButtonType.preset {
         case let preset?: VNavigationLink(preset: preset, state: state, destination: destination, title: buttonTitle)
-        case nil: VNavigationLink(state: state, destination: destination, label: buttonContent)
+        case nil: VNavigationLink(state: state, destination: destination, content: buttonContent)
         }
     }
     
@@ -64,6 +64,7 @@ extension VNavigationLinkState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }
@@ -103,6 +104,7 @@ private extension VNavigationLinkPreset {
         case .secondary: return .secondary
         case .square: return .square
         case .plain: return .plain
+        @unknown default: fatalError()
         }
     }
 }

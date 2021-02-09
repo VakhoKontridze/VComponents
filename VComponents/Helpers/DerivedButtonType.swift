@@ -17,10 +17,18 @@ enum DerivedButtonType {
 }
 
 // MARK:- Derived Button Preset
+/// Enum that represents button preset, such as `primary`, `secondary`, `square`, or `plain`
 public enum DerivedButtonPreset {
+    /// Primary button
     case primary(model: VPrimaryButtonModel = .init())
+    
+    /// Secondary button
     case secondary(model: VSecondaryButtonModel = .init())
+    
+    /// Square button
     case square(model: VSquareButtonModel = .init())
+    
+    /// Plain button
     case plain(model: VPlainButtonModel = .init())
     
     var buttonType: DerivedButtonType {
