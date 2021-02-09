@@ -15,10 +15,10 @@ public struct ColorBook {
 
 // MARK:- Colors
 extension ColorBook {
-    /// Canvas color that should be used as view background
+    /// Canvas color that can be used for `VBaseView`
     public static let canvas: Color = .init(componentAsset: "Canvas")
     
-    /// Background color for most component
+    /// Layer color for container components
     public static let layer: Color = .init(componentAsset: "Layer")
     
     /// Primary text color
