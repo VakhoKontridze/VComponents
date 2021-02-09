@@ -119,6 +119,7 @@ private extension VDialogButtons {
         case .one: return .one
         case .two: return .two
         case .many: return .many
+        @unknown default: fatalError()
         }
     }
 }

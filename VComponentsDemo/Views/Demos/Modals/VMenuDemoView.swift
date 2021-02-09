@@ -79,6 +79,7 @@ extension VMenuState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }
@@ -118,6 +119,7 @@ private extension VMenuButtonPreset {
         case .secondary: return .secondary
         case .square: return .square
         case .plain: return .plain
+        @unknown default: fatalError()
         }
     }
 }

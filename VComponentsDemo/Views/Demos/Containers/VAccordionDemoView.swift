@@ -90,6 +90,7 @@ extension VAccordionState: VPickableTitledItem {
         case .collapsed: return "Collapsed"
         case .expanded: return "Expanded"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }

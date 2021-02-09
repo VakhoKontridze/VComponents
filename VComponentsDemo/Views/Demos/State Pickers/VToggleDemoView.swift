@@ -78,6 +78,7 @@ extension VToggleState: VPickableTitledItem {
         case .off: return "Off"
         case .on: return "On"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }

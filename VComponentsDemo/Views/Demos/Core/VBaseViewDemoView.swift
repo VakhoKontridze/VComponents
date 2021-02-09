@@ -116,6 +116,7 @@ extension VBaseViewModel.Layout.TitlePosition: VPickableTitledItem {
         switch self {
         case .leading: return "Leading"
         case .center: return "Center"
+        @unknown default: fatalError()
         }
     }
 }

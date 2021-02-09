@@ -63,6 +63,7 @@ extension VChevronButtonState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }
@@ -74,6 +75,7 @@ extension VChevronButtonDirection: VPickableTitledItem {
         case .right: return "Right"
         case .down: return "Down"
         case .left: return "Left"
+        @unknown default: fatalError()
         }
     }
 }

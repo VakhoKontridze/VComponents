@@ -124,6 +124,7 @@ private extension VModalModel.Misc.DismissType {
         case .leading: return "Leading"
         case .trailing: return "Trailing"
         case .backTap: return "Back Tap"
+        @unknown default: fatalError()
         }
     }
 }

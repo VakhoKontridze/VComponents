@@ -95,6 +95,7 @@ extension VPrimaryButtonState: VPickableTitledItem {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
         case .loading: return "Loading"
+        @unknown default: fatalError()
         }
     }
 }

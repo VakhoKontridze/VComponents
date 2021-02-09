@@ -150,6 +150,7 @@ private extension VHalfModalModel.Layout.HeightType {
         switch self {
         case .fixed: return .fixed
         case .dynamic: return .dynamic
+        @unknown default: fatalError()
         }
     }
 }
@@ -187,6 +188,7 @@ private extension VHalfModalModel.Misc.DismissType {
         case .backTap: return .backTap
         case .pullDown: return .pullDown
         case .navigationViewCloseButton: fatalError()
+        @unknown default: fatalError()
         }
     }
 }

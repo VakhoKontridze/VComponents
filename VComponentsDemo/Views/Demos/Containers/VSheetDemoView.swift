@@ -85,6 +85,7 @@ private extension VSheetModel.Layout.RoundedCorners {
         case .bottom: return .bottom
         case .custom: return .custom
         case .none: return .none
+        @unknown default: fatalError()
         }
     }
 }

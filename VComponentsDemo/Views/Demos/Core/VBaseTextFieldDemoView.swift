@@ -99,6 +99,7 @@ extension VBaseTextFieldState: VPickableTitledItem {
         case .enabled: return "Enabled"
         case .focused: return "Focused"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }
@@ -110,6 +111,7 @@ extension VTextFieldModel.Layout.TextAlignment: VPickableTitledItem {
         case .leading: return "Leading"
         case .trailing: return "Trailing"
         case .auto: return "Auto"
+        @unknown default: fatalError()
         }
     }
 }

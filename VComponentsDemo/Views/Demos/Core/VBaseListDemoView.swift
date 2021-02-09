@@ -113,6 +113,7 @@ private extension VBaseListLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible
+        @unknown default: fatalError()
         }
     }
 }
