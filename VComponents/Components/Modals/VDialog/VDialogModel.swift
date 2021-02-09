@@ -69,7 +69,7 @@ extension VDialogModel {
 }
 
 extension VDialogModel {
-    /// Sub-model containing horizontal and vertical margins
+    /// Sub-model containing `horizontal` and `vertical` margins
     public typealias TitleAndContentMargin = LayoutGroupHV
 }
 
@@ -129,6 +129,6 @@ extension VDialogModel {
 
 // MARK:- References
 extension VDialogModel {
-    /// Reference to VModalModel
+    /// Reference to `VModalModel`
     public static let modalReference: VModalModel = .init()
 }

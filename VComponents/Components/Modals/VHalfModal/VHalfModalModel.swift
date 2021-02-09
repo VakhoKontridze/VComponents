@@ -106,7 +106,7 @@ extension VHalfModalModel {
 }
 
 extension VHalfModalModel.Layout {
-    /// Enum that describes height type, such as fixed or dynamic
+    /// Enum that describes height type, such as `fixed` or `dynamic`
     public enum HeightType {
         /// Fixed height
         case fixed(_ value: CGFloat)
@@ -150,10 +150,10 @@ extension VHalfModalModel.Layout {
         }
     }
     
-    /// Sub-model containing leading, trailing, top, and bottom margins
+    /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
     public typealias Margins = LayoutGroupLTTB
     
-    /// Sub-model containing top and bottom margins
+    /// Sub-model containing `top` and `bottom` margins
     public typealias VerticalMargins  = LayoutGroupTB
 }
 
@@ -248,13 +248,13 @@ extension VHalfModalModel {
 }
 
 extension VHalfModalModel.Misc {
-    /// Enum that decribes dismiss type, such as leading button, trailing button, backtap, or pull down
+    /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, `backtap`, or `pullDown`
     public enum DismissType: Int, CaseIterable {
         /// Leading
-        case leading
+        case leadingButton
         
         /// Trailing
-        case trailing
+        case trailingButton
         
         /// Back tap
         case backTap
@@ -268,26 +268,26 @@ extension VHalfModalModel.Misc {
 }
 
 extension Set where Element == VHalfModalModel.Misc.DismissType {
-    /// Default value. Set to `trailing` and `pullDown`.
-    public static let `default`: Self = [.trailing, .pullDown]
+    /// Default value. Set to `trailingButton` and `pullDown`.
+    public static let `default`: Self = [.trailingButton, .pullDown]
     
     var hasButton: Bool {
-        contains(where: { [.leading, .trailing].contains($0) })
+        contains(where: { [.leadingButton, .trailingButton].contains($0) })
     }
 }
 
 // MARK:- References
 extension VHalfModalModel {
-    /// Reference to VSheetModel
+    /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to VModalModel
+    /// Reference to `VModalModel`
     public static let modalReference: VModalModel = .init()
     
-    /// Reference to VAccordionModel
+    /// Reference to `VAccordionModel`
     public static let accordionReference: VAccordionModel = .init()
     
-    /// Reference to VCloseButtonModel
+    /// Reference to `VCloseButtonModel`
     public static let closeButtonReference: VCloseButtonModel = .init()
 }
 

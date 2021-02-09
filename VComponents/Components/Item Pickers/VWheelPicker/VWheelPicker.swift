@@ -10,9 +10,9 @@ import SwiftUI
 // MARK:- V Wheel Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel
 ///
-/// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
+/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
 ///
-/// Best suited for 5+ items
+/// Best suited for `5`+ items
 ///
 /// Model, state, header, and footer can be passed as parameters
 ///

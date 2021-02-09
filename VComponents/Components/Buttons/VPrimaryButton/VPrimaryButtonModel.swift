@@ -57,7 +57,7 @@ extension VPrimaryButtonModel {
 }
 
 extension VPrimaryButtonModel.Layout {
-    /// Sub-model containing horizontal and vertical margins
+    /// Sub-model containing `horizontal` and `vertical` margins
     public typealias ContentMargin = LayoutGroupHV
 }
 

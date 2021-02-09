@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Accordion State
-/// Enum that describes state, such as collapsed, expanded, or disabled
+/// Enum that describes state, such as `collapsed`, `expanded`, or `disabled`
 public enum VAccordionState: Int, CaseIterable {
     /// Case collapsed
     case collapsed

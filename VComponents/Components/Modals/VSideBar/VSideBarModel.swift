@@ -67,7 +67,7 @@ extension VSideBarModel {
 }
 
 extension VSideBarModel.Layout {
-    /// Sub-model containing leading, trailing, top, and bottom margins
+    /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
     public typealias Margins = LayoutGroupLTTB
 }
 
@@ -103,13 +103,13 @@ extension VSideBarModel {
 
 // MARK:- References
 extension VSideBarModel {
-    /// Reference to VSheetModel
+    /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to VModalModel
+    /// Reference to `VModalModel`
     public static let modalReference: VModalModel = .init()
     
-    /// Reference to VHalfModalModel
+    /// Reference to `VHalfModalModel`
     public static let halfModalReference: VHalfModalModel = .init()
 }
 

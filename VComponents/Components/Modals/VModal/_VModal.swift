@@ -76,7 +76,7 @@ extension _VModal {
     @ViewBuilder private var headerView: some View {
         if headerExists {
             HStack(spacing: model.layout.headerSpacing, content: {
-                if model.misc.dismissType.contains(.leading) {
+                if model.misc.dismissType.contains(.leadingButton) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
@@ -86,7 +86,7 @@ extension _VModal {
                         .layoutPriority(1)  // Overrides close button's maxWidth: .infinity. Also, header content is by default maxWidth and leading justified.
                 }
                 
-                if model.misc.dismissType.contains(.trailing) {
+                if model.misc.dismissType.contains(.trailingButton) {
                     closeButton
                         .frame(maxWidth: .infinity, alignment: .trailing)
                 }

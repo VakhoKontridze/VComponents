@@ -90,7 +90,7 @@ public struct VDialog<Content> where Content: View {
 
 // MARK:- Extension
 extension View {
-    /// Presents dialog
+    /// Presents `VDialog`
     public func vDialog<Content>(
         isPresented: Binding<Bool>,
         dialog: @escaping () -> VDialog<Content>

@@ -55,10 +55,10 @@ extension VSecondaryButtonModel {
 }
 
 extension VSecondaryButtonModel.Layout {
-    /// Sub-model containing horizontal and vertical margins
+    /// Sub-model containing `horizontal` and `vertical` margins
     public typealias ContentMargin = LayoutGroupHV
     
-    /// Sub-model containing horizontal and vertical hit boxes
+    /// Sub-model containing `horizontal` and `vertical` hit boxes
     public typealias HitBox = LayoutGroupHV
 }
 
@@ -124,6 +124,6 @@ extension VSecondaryButtonModel {
 
 // MARK:- References
 extension VSecondaryButtonModel {
-    /// Reference to VPrimaryButtonModel
+    /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

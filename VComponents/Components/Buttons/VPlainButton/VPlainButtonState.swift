@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Plain Button State
-/// Enum that describes state, such as enabled or disabled
+/// Enum that describes state, such as `enabled` or `disabled`
 public enum VPlainButtonState: Int, CaseIterable {
     /// Enabled
     case enabled
@@ -16,7 +16,8 @@ public enum VPlainButtonState: Int, CaseIterable {
     /// Disabled
     case disabled
     
-    var isEnabled: Bool {
+    /// Indicates if state is enabled
+    public var isEnabled: Bool {
         switch self {
         case .enabled: return true
         case .disabled: return false

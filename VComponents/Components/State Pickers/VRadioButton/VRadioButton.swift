@@ -11,7 +11,7 @@ import SwiftUI
 /// State picker component that toggles between off, on, or disabled states, and displays content
 ///
 /// Component can be initialized with content, title, or without body. Bool can also be passed as state.
-/// Component can aslo be placed inside a Radio Group, in which case component is initialized with VPickableItem or VPickableTitledItem.
+/// Component can aslo be placed inside a Radio Group, in which case component is initialized with `VPickableItem` or `VPickableTitledItem`.
 ///
 /// Model can be passed as parameter
 ///

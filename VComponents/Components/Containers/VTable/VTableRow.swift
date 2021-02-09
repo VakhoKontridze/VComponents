@@ -8,5 +8,5 @@
 import Foundation
 
 // MARK:- V Table Row
-/// Data source that creates table rows
+/// Data source that creates `VTableView` rows
 public protocol VTableRow: Identifiable {}

@@ -153,6 +153,6 @@ extension VCheckBoxModel {
 
 // MARK:- References
 extension VCheckBoxModel {
-    /// Reference to VToggleModel
+    /// Reference to `VToggleModel`
     public static let toggleReference: VToggleModel = .init()
 }

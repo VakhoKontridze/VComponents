@@ -106,6 +106,6 @@ extension VStepperModel {
 
 // MARK:- References
 extension VStepperModel {
-    /// Reference to VSegmentedPickerModel
+    /// Reference to `VSegmentedPickerModel`
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()
 }

@@ -114,7 +114,7 @@ extension VTableModel {
 
 // MARK:- References
 extension VTableModel {
-    /// Reference to VSectionModel
+    /// Reference to `VSectionModel`
     public static let sectionReference: VSectionModel = .init()
 }
 

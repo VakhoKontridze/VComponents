@@ -39,7 +39,7 @@ extension VCloseButtonModel {
 }
 
 extension VCloseButtonModel.Layout {
-    /// Sub-model containing horizontal and vertical hit boxes
+    /// Sub-model containing `horizontal` and `vertical` hit boxes
     public typealias HitBox = LayoutGroupHV
 }
 
@@ -68,6 +68,6 @@ extension VCloseButtonModel.Colors {
 
 // MARK:- References
 extension VCloseButtonModel {
-    /// Reference to VChevronButtonModel
+    /// Reference to `VChevronButtonModel`
     public static let chevronButtonReference: VChevronButtonModel = .init()
 }

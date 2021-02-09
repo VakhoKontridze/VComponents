@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Tab Navigation Page Item
-/// Enum that represens navigation page item, such as titled, or with icons
+/// Enum that represens navigation page item, such as `titled`, or with icons
 public enum VTabNavigationPageItem {
     /// Item with title
     case titled(title: String)

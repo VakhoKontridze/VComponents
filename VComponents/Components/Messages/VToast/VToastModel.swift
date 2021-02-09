@@ -54,7 +54,7 @@ extension VToastModel {
 }
 
 extension VToastModel.Layout {
-    /// Enum that represents presentation edge, such as top or bottom
+    /// Enum that represents presentation edge, such as `top` or `bottom`
     public enum PresentationEdge: Int, CaseIterable {
         /// Presentation from top
         case top
@@ -66,7 +66,7 @@ extension VToastModel.Layout {
         public static let `default`: Self = .bottom
     }
     
-    /// Enum that represents corner radius, such as rounded or custom
+    /// Enum that represents corner radius, such as `rounded` or `custom`
     public enum CornerRadiusType {
         /// Rounded corner radius
         ///
@@ -80,7 +80,7 @@ extension VToastModel.Layout {
         public static let `default`: Self = .rounded
     }
     
-    /// Sub-model containing horizontal and vertical margins
+    /// Sub-model containing `horizontal` and `vertical` margins
     public typealias Margins = LayoutGroupHV
 }
 
@@ -131,6 +131,6 @@ extension VToastModel {
 
 // MARK:- References
 extension VToastModel {
-    /// Reference to VTextFieldModel
+    /// Reference to `VTextFieldModel`
     public static let textFieldReference: VTextFieldModel = .init()
 }

@@ -24,7 +24,7 @@ public struct VSheetModel {
 extension VSheetModel {
     /// Sub-model containing layout properties
     public struct Layout {
-        /// Rounded corners of sheet. Defaults to to `default`.
+        /// Rounded corners of VSheet. Defaults to to `default`.
         public var roundedCorners: RoundedCorners = .default
         
         /// Corner radius. Defaults to `15`.
@@ -39,7 +39,7 @@ extension VSheetModel {
 }
 
 extension VSheetModel.Layout {
-    /// Enum that describes rounded corners, such as all, top, bottom, custom, or none
+    /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`
     public enum RoundedCorners {
         /// All
         case all
@@ -56,7 +56,7 @@ extension VSheetModel.Layout {
         /// None
         case none
         
-        /// Default case. Set to `all`.
+        /// Default value. Set to `all`.
         public static let `default`: Self = .all
         
         var uiRectCorner: UIRectCorner {

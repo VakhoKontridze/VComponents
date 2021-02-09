@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Menu Row
-/// Enum that represens menu row, such as titled, with icons, or expandable menu
+/// Enum that represens menu row, such as `titled`, with icons, or expandable `menu`
 public enum VMenuRow {
     /// Row with title
     case titled(action: () -> Void, title: String)

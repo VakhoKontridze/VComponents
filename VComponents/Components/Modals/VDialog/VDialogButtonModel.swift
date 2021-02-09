@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Dialog Button Model Model
-/// Enum that describes dialog button model, such as primary, secondary, or custom
+/// Enum that describes `VDialog` button model, such as `primary`, `secondary`, or `custom`
 public enum VDialogButtonModel {
     /// Primary button
     case primary
@@ -148,7 +148,7 @@ extension VDialogButtonModelCustom {
 
 // MARK:- References
 extension VDialogButtonModelCustom {
-    /// Reference to VPrimaryButtonModel
+    /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }
 

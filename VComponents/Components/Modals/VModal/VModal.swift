@@ -94,7 +94,7 @@ public struct VModal<Content, HeaderContent>
 
 // MARK:- Extension
 extension View {
-    /// Presents modal
+    /// Presents `VModal`
     public func vModal<Content, headerContent>(
         isPresented: Binding<Bool>,
         modal: @escaping () -> VModal<Content, headerContent>

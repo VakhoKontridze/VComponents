@@ -151,7 +151,7 @@ public struct VHalfModal<Content, HeaderContent>
 
 // MARK:- Extension
 extension View {
-    /// Presents half modal
+    /// Presents `VHalfModal`
     public func vHalfModal<Content, HeaderContent>(
         isPresented: Binding<Bool>,
         halfModal: @escaping () -> VHalfModal<Content, HeaderContent>

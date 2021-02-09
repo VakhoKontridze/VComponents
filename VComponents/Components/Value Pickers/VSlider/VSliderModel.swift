@@ -109,9 +109,9 @@ extension VSliderModel {
 
 // MARK:- References
 extension VSliderModel {
-    /// Reference to VPrimaryButtonModel
+    /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
     
-    /// Reference to VToggleModel
+    /// Reference to `VToggleModel`
     public static let toggleReference: VToggleModel = .init()
 }

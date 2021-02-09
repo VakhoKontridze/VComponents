@@ -102,6 +102,6 @@ extension VWheelPickerModel {
 
 // MARK:- References
 extension VWheelPickerModel {
-    /// Reference to VSegmentedPickerModel
+    /// Reference to `VSegmentedPickerModel`
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()
 }

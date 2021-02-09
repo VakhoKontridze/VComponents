@@ -39,7 +39,7 @@ extension VPlainButtonModel {
 }
 
 extension VPlainButtonModel.Layout {
-    /// Sub-model containing horizontal and vertical hit boxes
+    /// Sub-model containing `horizontal` and `vertical` hit boxes
     public typealias HitBox = LayoutGroupHV
 }
 
@@ -91,6 +91,6 @@ extension VPlainButtonModel {
 
 // MARK:- References
 extension VPlainButtonModel {
-    /// Reference to VSquareButtonModel
+    /// Reference to `VSquareButtonModel`
     public static let squareButtonReference: VSquareButtonModel = .init()
 }

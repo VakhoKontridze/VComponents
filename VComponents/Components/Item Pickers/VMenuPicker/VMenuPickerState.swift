@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Menu Picker State
-/// Enum that describes state, such as enabled or disabled
+/// Enum that describes state, such as `enabled` or `disabled`
 public enum VMenuPickerState: Int, CaseIterable {
     /// Enabled
     case enabled
@@ -16,7 +16,8 @@ public enum VMenuPickerState: Int, CaseIterable {
     /// Disabled
     case disabled
     
-    var isEnabled: Bool {
+    /// Indicates if state is enabled
+    public var isEnabled: Bool {
         switch self {
         case .enabled: return true
         case .disabled: return false

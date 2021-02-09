@@ -56,10 +56,10 @@ extension VSquareButtonModel {
 }
 
 extension VSquareButtonModel.Layout {
-    /// Sub-model containing horizontal and vertical margins
+    /// Sub-model containing `horizontal` and `vertical` margins
     public typealias ContentMargin = LayoutGroupHV
     
-    /// Sub-model containing horizontal and vertical hit boxes
+    /// Sub-model containing `horizontal` and `vertical` hit boxes
     public typealias HitBox = LayoutGroupHV
 }
 
@@ -125,6 +125,6 @@ extension VSquareButtonModel {
 
 // MARK:- References
 extension VSquareButtonModel {
-    /// Reference to VPrimaryButtonModel
+    /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

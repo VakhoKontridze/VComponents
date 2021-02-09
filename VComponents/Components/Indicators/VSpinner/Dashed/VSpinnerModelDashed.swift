@@ -31,6 +31,6 @@ extension VSpinnerModelDashed {
 
 // MARK:- References
 extension VSpinnerModelDashed {
-    /// Reference to VSpinnerModelContinous
+    /// Reference to `VSpinnerModelContinous`
     public static let spinnerContinousReference: VSpinnerModelContinous = .init()
 }

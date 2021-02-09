@@ -75,9 +75,9 @@ extension VPageIndicatorModel {
 
 // MARK:- References
 extension VPageIndicatorModel {
-    /// Reference to VProgressBarModel
+    /// Reference to `VProgressBarModel`
     public static let progressBarReference: VProgressBarModel = .init()
     
-    /// Reference to VTabNavigationViewModel
+    /// Reference to `VTabNavigationViewModel`
     public static let tabNavigationReference: VTabNavigationViewModel = .init()
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Base Text Field
-/// Core component that is used throughout the framework as text field
+/// Core component that is used throughout the framework as textfield
 ///
 /// Model, state, placeholder, event callbacks, and button action can be passed as parameters
 ///

@@ -57,7 +57,7 @@ public struct VActionSheet {
 
 // MARK:- Extension
 extension View {
-    /// Presents action sheet
+    /// Presents `VActionSheet`
     public func vActionSheet(
         isPresented: Binding<Bool>,
         actionSheet: @escaping () -> VActionSheet

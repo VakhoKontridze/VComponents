@@ -50,7 +50,7 @@ extension VBaseViewModel {
 }
 
 extension VBaseViewModel.Layout {
-    /// Enum that describes title position, such as center or leading
+    /// Enum that describes title position, such as `center` or `leading`
     public enum TitlePosition: Int, CaseIterable {
         /// Center alignment
         case center
@@ -107,7 +107,7 @@ extension VBaseViewModel {
 
 // MARK:- References
 extension VBaseViewModel {
-    /// Reference to VChevronButtonModel
+    /// Reference to `VChevronButtonModel`
     public static let chevronButtonModel: VChevronButtonModel = .init()
 }
 

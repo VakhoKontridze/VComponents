@@ -73,10 +73,10 @@ extension VSectionModel {
 
 // MARK:- References
 extension VSectionModel {
-    /// Reference to VBaseListModel
+    /// Reference to `VBaseListModel`
     public static let baseListReference: VBaseListModel = .init()
     
-    /// Reference to VSheetModel
+    /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
 }
 

@@ -143,9 +143,9 @@ extension VRadioButtonModel {
 
 // MARK:- References
 extension VRadioButtonModel {
-    /// Reference to VToggleModel
+    /// Reference to `VToggleModel`
     public static let toggleRefrence: VToggleModel = .init()
     
-    /// Reference to VCheckBoxModel
+    /// Reference to `VCheckBoxModel`
     public static let checkBoxReference: VCheckBoxModel = .init()
 }

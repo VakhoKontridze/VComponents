@@ -10,9 +10,9 @@ import SwiftUI
 // MARK:- V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
 ///
-/// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
+/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
 ///
-/// Best suited for 2 – 3 items
+/// Best suited for `2` – `3` items
 ///
 /// Model, state, header, footer, and disabled indexes can be passed as parameters
 ///

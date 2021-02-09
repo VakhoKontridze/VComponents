@@ -84,10 +84,10 @@ extension VAccordionModel {
 }
 
 extension VAccordionModel.Layout {
-    /// Sub-model containing leading, trailing, top and bottom and margins
+    /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins
     public typealias Margins = LayoutGroupLTTB
     
-    /// Sub-model containing leading, trailing, top and bottom collapsed and bottom expanded margins
+    /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins
     public struct ExpandableMargins {
         /// Leading margin
         public var leading: CGFloat
@@ -203,13 +203,13 @@ extension VAccordionModel {
 
 // MARK:- References
 extension VAccordionModel {
-    /// Reference to VSheetModel
+    /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to VSectionModel
+    /// Reference to `VSectionModel`
     public static let sectionReference: VSectionModel = .init()
     
-    /// Reference to VChevronButtonModel
+    /// Reference to `VChevronButtonModel`
     public static let chevronButtonReference: VChevronButtonModel = .init()
 }
 

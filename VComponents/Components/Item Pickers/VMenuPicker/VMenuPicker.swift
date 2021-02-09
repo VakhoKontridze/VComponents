@@ -10,13 +10,13 @@ import SwiftUI
 // MARK:- V Menu Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a menu
 ///
-/// Component can be initialized with data, row titles, VPickableItem, or VPickableTitledItem
+/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
 ///
 /// Component can be initialized with content or title.
 ///
 /// Component supports presets or existing button types.
 ///
-/// Best suited for 5+ items
+/// Best suited for `5+` items
 ///
 /// State can be passed as parameter
 ///

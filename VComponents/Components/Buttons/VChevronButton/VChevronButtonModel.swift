@@ -42,7 +42,7 @@ extension VChevronButtonModel {
 }
 
 extension VChevronButtonModel.Layout {
-    /// Sub-model containing horizontal and vertical hit boxes
+    /// Sub-model containing `horizontal` and `vertical` hit boxes
     public typealias HitBox = LayoutGroupHV
 }
 

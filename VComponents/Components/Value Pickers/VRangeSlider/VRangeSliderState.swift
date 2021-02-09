@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Range Slider State
-/// Enum that describes state, such as enabled or disabled
+/// Enum that describes state, such as `enabled` or `disabled`
 public enum VRangeSliderState: Int, CaseIterable {
     /// Enabled
     case enabled
@@ -16,7 +16,8 @@ public enum VRangeSliderState: Int, CaseIterable {
     /// Disabled
     case disabled
     
-    var isEnabled: Bool {
+    /// Indicates if state is enabled
+    public var isEnabled: Bool {
         switch self {
         case .enabled: return true
         case .disabled: return false

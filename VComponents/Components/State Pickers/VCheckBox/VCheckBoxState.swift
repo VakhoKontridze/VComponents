@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Toggle State
-/// Enum that describes state, such as off, on, intermediate, or disabled
+/// Enum that describes state, such as `off`, `on`, `intermediate`, or `disabled`
 public enum VCheckBoxState: Int, CaseIterable {
     /// Of
     case off
@@ -24,21 +24,22 @@ public enum VCheckBoxState: Int, CaseIterable {
     /// Disabled
     case disabled
     
+    /// Indicates if state is enabled
+    public var isEnabled: Bool {
+        switch self {
+        case .off: return true
+        case .on: return true
+        case .intermediate: return true
+        case .disabled: return false
+        }
+    }
+    
     /// Indicates if state is on
     public var isOn: Bool {
         switch self {
         case .off: return false
         case .on: return true
         case .intermediate: return false
-        case .disabled: return false
-        }
-    }
-    
-    var isEnabled: Bool {
-        switch self {
-        case .off: return true
-        case .on: return true
-        case .intermediate: return true
         case .disabled: return false
         }
     }

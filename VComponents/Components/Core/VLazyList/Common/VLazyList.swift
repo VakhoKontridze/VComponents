@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// Model can be passed as parameter
 ///
-/// Component is a wrapped behind ScrollView and LazyVStack/LazyHStack, and supports lazy initialization
+/// Component is a wrapped behind `ScrollView` and `LazyVStack`/`LazyHStack`, and supports lazy initialization
 ///
 /// # Usage Example #
 ///

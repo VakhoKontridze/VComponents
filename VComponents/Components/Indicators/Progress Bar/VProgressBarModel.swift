@@ -67,7 +67,7 @@ extension VProgressBarModel {
 
 // MARK:- References
 extension VProgressBarModel {
-    /// Reference to VSliderModel
+    /// Reference to `VSliderModel`
     public static let sliderReference: VSliderModel = .init()
 }
 

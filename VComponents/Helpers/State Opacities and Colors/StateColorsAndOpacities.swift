@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- Enabled, Disabled | Disabled
-/// Color and opacity level group containing values for enabled and disables states
+/// Color and opacity level group containing values for `enabled` and `disables` states
 public struct StateColorsAndOpacitiesEP_D {
     /// Enabled color
     public var enabled: Color
@@ -62,7 +62,7 @@ extension StateColorsAndOpacitiesEP_D {
 }
 
 // MARK:- Enabled, Pressed, Disabled | Pressed, Disabled
-/// Color and opacity level group containing values for enabled, pressed, and disables states
+/// Color and opacity level group containing values for `enabled`, `pressed`, and `disables` states
 public struct StateColorsAndOpacitiesEPD_PD {
     /// Enabled color
     public var enabled: Color
@@ -140,7 +140,7 @@ extension StateColorsAndOpacitiesEPD_PD {
 }
 
 // MARK:- Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled | Pressed, Disabled
-/// Color and opacity level group containing values for enabled (+pressed), focused (+pressed), success (+pressed), error (+pressed), and disables states
+/// Color and opacity level group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disables` states
 public struct StateColorsEpFpSpEpD_PD {
     /// Enabled color
     public var enabled: Color

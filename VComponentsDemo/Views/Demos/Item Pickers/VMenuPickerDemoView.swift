@@ -70,7 +70,7 @@ extension VMenuPickerDemoView {
             
             VSegmentedPicker(
                 selection: $contentType,
-                headerTitle: "Label Content",
+                headerTitle: "Content",
                 disabledItems: menuPickerButtonType == .custom ? [.text] : []
             )
         })

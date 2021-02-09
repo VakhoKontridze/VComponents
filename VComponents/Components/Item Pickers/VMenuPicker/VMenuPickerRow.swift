@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK:- V Menu Picker Row
-/// Enum that represens menu picker row, such as titled, or with icons
+/// Enum that represens menu picker row, such as `titled`, or with icons
 public enum VMenuPickerRow {
     /// Row with title
     case titled(title: String)

@@ -89,10 +89,10 @@ extension VModalModel {
 }
 
 extension VModalModel.Layout {
-    /// Enum that describes rounded corners, such as all, top, bottom, custom, or none
+    /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`
     public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
     
-    /// Sub-model containing leading, trailing, top, and bottom margins
+    /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
     public typealias Margins = LayoutGroupLTTB
 }
 
@@ -187,13 +187,13 @@ extension VModalModel {
 }
 
 extension VModalModel.Misc {
-    /// Enum that decribes dismiss type, such as leading button, trailing button, or backtap
+    /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, or `backTap`
     public enum DismissType: Int, CaseIterable {
         /// Leading
-        case leading
+        case leadingButton
         
         /// Trailing
-        case trailing
+        case trailingButton
         
         /// Backtap
         case backTap
@@ -201,20 +201,20 @@ extension VModalModel.Misc {
 }
 
 extension Set where Element == VModalModel.Misc.DismissType {
-    /// Default value. Set to `trailing`.
-    public static let `default`: Self = [.trailing]
+    /// Default value. Set to `trailingButton`.
+    public static let `default`: Self = [.trailingButton]
     
     var hasButton: Bool {
-        contains(where: { [.leading, .trailing].contains($0) })
+        contains(where: { [.leadingButton, .trailingButton].contains($0) })
     }
 }
 
 // MARK:- References
 extension VModalModel {
-    /// Reference to VCloseButtonModel
+    /// Reference to `VCloseButtonModel`
     public static let closeButtonReference: VCloseButtonModel = .init()
     
-    /// Reference to VSheetModel
+    /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
 }
 

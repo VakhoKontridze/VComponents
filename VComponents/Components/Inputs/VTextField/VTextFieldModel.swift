@@ -78,7 +78,7 @@ extension VTextFieldModel {
 }
 
 extension VTextFieldModel.Layout {
-    /// Enum that describes text alignment, such as leading, center, trailing, or auto
+    /// Enum that describes text alignment, such as `leading`, `center`, `trailing`, or `auto`
     public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
 }
 
@@ -286,19 +286,19 @@ extension VTextFieldModel {
 
 // MARK:- References
 extension VTextFieldModel {
-    /// Reference to VBaseTextFieldModel
+    /// Reference to `VBaseTextFieldModel`
     public static let baseTextFieldReference: VBaseTextFieldModel = .init()
     
-    /// Reference to VSquareButtonModel
+    /// Reference to `VSquareButtonModel`
     public static let squareButtonReference: VSquareButtonModel = .init()
     
-    /// Reference to VPlainButtonModel
+    /// Reference to `VPlainButtonModel`
     public static let plainButtonReference: VPlainButtonModel = .init()
     
-    /// Reference to VCloseButtonModel
+    /// Reference to `VCloseButtonModel`
     public static let closeButtonReference: VCloseButtonModel = .init()
     
-    /// Reference to VSegmentedPickerModel
+    /// Reference to `VSegmentedPickerModel`
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()
 }
 

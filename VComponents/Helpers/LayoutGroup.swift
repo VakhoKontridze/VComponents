@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// Grop of layout values containing leading, trailing, top and bottom values
+/// Grop of layout values containing `leading`, `trailing`, `top` and `bottom` values
 public struct LayoutGroupLTTB {
     /// Leading values
     public var leading: CGFloat
@@ -30,7 +30,7 @@ public struct LayoutGroupLTTB {
     }
 }
 
-/// Grop of layout values containing horizotal and vertical values
+/// Grop of layout values containing `horizotal` and `vertical` values
 public struct LayoutGroupHV {
     /// Horizontal value
     public var horizontal: CGFloat
@@ -45,7 +45,7 @@ public struct LayoutGroupHV {
     }
 }
 
-/// Grop of layout values containing top and bottom values
+/// Grop of layout values containing `top` and `bottom` values
 public struct LayoutGroupTB {
     /// Top values
     public var top: CGFloat

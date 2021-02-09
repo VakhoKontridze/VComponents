@@ -121,8 +121,8 @@ extension VModalDemoView {
 private extension VModalModel.Misc.DismissType {
     var title: String {
         switch self {
-        case .leading: return "Leading"
-        case .trailing: return "Trailing"
+        case .leadingButton: return "Leading"
+        case .trailingButton: return "Trailing"
         case .backTap: return "Back Tap"
         @unknown default: fatalError()
         }

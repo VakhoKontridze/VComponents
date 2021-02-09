@@ -142,6 +142,6 @@ extension VToggleModel {
 
 // MARK:- References
 extension VToggleModel {
-    /// Reference to VPrimaryButtonModel
+    /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

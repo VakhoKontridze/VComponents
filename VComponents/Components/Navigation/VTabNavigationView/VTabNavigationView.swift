@@ -12,8 +12,6 @@ import SwiftUI
 ///
 /// Model can be passed as parameter
 ///
-/// Due to the limitations of TabView, tab items only support `Text` and  `Image`
-///
 /// # Usage Example #
 ///
 /// ```

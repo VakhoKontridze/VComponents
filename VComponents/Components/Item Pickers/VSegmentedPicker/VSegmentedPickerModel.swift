@@ -169,9 +169,9 @@ extension VSegmentedPickerModel {
 
 // MARK:- References
 extension VSegmentedPickerModel {
-    /// Reference to VToggleModel
+    /// Reference to `VToggleModel`
     public static let toggleReference: VToggleModel = .init()
     
-    /// Reference to VSliderModel
+    /// Reference to `VSliderModel`
     public static let sliderReference: VSliderModel = .init()
 }

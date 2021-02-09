@@ -12,9 +12,9 @@ import SwiftUI
 ///
 /// Model, type, highlight, palceholder, header, footer, and event callbacks can be passed as parameters
 ///
-/// By default, component type is standard.
-/// If secure type is used, visiblity button would replace clear button. When text field is secure, clear and cancel buttons are not visible.
-/// If search type is used, a magnification glass icon would appear on the left.
+/// By default, component type is `standard`.
+/// If `secure` type is used, visiblity button would replace clear button. When textfield is secure, clear and cancel buttons are not visible.
+/// If `search` type is used, a magnification glass icon would appear on the left.
 ///
 /// It is possible to override actions of return, clear, and cancel buttons by passing them as a parameter
 ///
@@ -85,7 +85,7 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// Secure text field:
+/// `Secure` textfield:
 ///
 /// ```
 /// @State var text: String = "Lorem ipsum"
@@ -102,7 +102,7 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// Search text field:
+/// `Search` textfield:
 ///
 /// ```
 /// @State var text: String = "Lorem ipsum"

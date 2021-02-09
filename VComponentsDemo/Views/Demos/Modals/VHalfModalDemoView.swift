@@ -172,8 +172,8 @@ private enum VHalfModalDismissTypeHelper: Int, CaseIterable {
     
     var dismissType: VHalfModalModel.Misc.DismissType {
         switch self {
-        case .leading: return .leading
-        case .trailing: return .trailing
+        case .leading: return .leadingButton
+        case .trailing: return .trailingButton
         case .backTap: return .backTap
         case .pullDown: return .pullDown
         }
@@ -183,8 +183,8 @@ private enum VHalfModalDismissTypeHelper: Int, CaseIterable {
 private extension VHalfModalModel.Misc.DismissType {
     var helperType: VHalfModalDismissTypeHelper {
         switch self {
-        case .leading: return .leading
-        case .trailing: return .trailing
+        case .leadingButton: return .leading
+        case .trailingButton: return .trailing
         case .backTap: return .backTap
         case .pullDown: return .pullDown
         case .navigationViewCloseButton: fatalError()
