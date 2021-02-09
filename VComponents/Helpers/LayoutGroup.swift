@@ -9,19 +9,19 @@ import SwiftUI
 
 /// Grop of layout values containing `leading`, `trailing`, `top` and `bottom` values
 public struct LayoutGroupLTTB {
-    /// Leading values
+    /// Leading value
     public var leading: CGFloat
     
-    /// Trailing values
+    /// Trailing value
     public var trailing: CGFloat
     
-    /// Top values
+    /// Top value
     public var top: CGFloat
     
-    /// Bottom values
+    /// Bottom value
     public var bottom: CGFloat
     
-    /// Initializes group with values
+    /// Initializes group with value
     public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottom: CGFloat) {
         self.leading = leading
         self.trailing = trailing
@@ -47,10 +47,10 @@ public struct LayoutGroupHV {
 
 /// Grop of layout values containing `top` and `bottom` values
 public struct LayoutGroupTB {
-    /// Top values
+    /// Top value
     public var top: CGFloat
     
-    /// Bottom values
+    /// Bottom value
     public var bottom: CGFloat
     
     /// Initializes group with values
