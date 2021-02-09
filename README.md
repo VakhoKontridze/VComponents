@@ -225,7 +225,7 @@ Components also prevent themselves from modifying external state with an animati
 
 ## Release History
 
-**1.0 (2020 Feb 7)**
+**1.0 (2021 Feb 7)**
 
 Initial release
 
