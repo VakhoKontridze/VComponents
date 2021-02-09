@@ -37,7 +37,7 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package Repositor
 
 ### Manual
 
-1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.xcframework.zip).
+1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.0/VComponents.xcframework.zip).
 
 2. Extract the zip.
 
@@ -227,7 +227,11 @@ Components also prevent themselves from modifying external state with an animati
 
 ## Release History
 
-**1.0 (2020 Feb 7)**
+**1.1.0 (2020 Feb 9)**
+
+Added documentation on public declarations, methods, and properties
+
+**1.0.0 (2020 Feb 7)**
 
 Initial release
 
