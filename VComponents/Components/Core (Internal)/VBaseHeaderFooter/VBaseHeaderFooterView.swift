@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Base Header Footer
-struct VBaseHeaderFooter: View {
+public struct VBaseHeaderFooter: View {
     // MARK: Proeprties
     private let frameType: VBaseHeaderFooterFrameType
     private let textType: VTextType = .oneLine
@@ -17,7 +17,7 @@ struct VBaseHeaderFooter: View {
     private let title: String
     
     // MARK: Initializers
-    init(
+    public init(
         frameType: VBaseHeaderFooterFrameType,
         font: Font,
         color: Color,
@@ -32,7 +32,7 @@ struct VBaseHeaderFooter: View {
 
 // MARK:- Body
 extension VBaseHeaderFooter {
-    @ViewBuilder var body: some View {
+    @ViewBuilder public var body: some View {
         switch frameType {
         case .fixed: contentView
         case .flexible(let alignment): contentView.frame(maxWidth: .infinity, alignment: alignment.asAlignment)

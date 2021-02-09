@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Base Header Footer Frame Type
-enum VBaseHeaderFooterFrameType {
+public enum VBaseHeaderFooterFrameType {
     case fixed
     case flexible(_ alignment: HorizontalAlignment)
 }
