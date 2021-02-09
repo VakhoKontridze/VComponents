@@ -78,7 +78,7 @@ extension VBaseViewNavigationBarLeading {
     }
 
     private var items: some View {
-        HStack(spacing: model.layout.spacing, content: {
+        HStack(spacing: model.layout.navBarSpacing, content: {
             if let leadingItemContent = leadingItemContent { leadingItemContent().layoutPriority(1) }
 
             if showBackButton { VChevronButton(model: model.backButtonSubModel, direction: .left, action: backAction).layoutPriority(1) }

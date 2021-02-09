@@ -96,6 +96,7 @@ extension VCheckBoxState: VPickableTitledItem {
         case .on: return "On"
         case .intermediate: return "Interm."
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }

@@ -36,12 +36,12 @@ struct VSliderDemoView: View {
             model.layout.thumbBorderWidth = 1
             model.layout.thumbShadowRadius = 0
 
-            model.colors.thumb.border = .init(
+            model.colors.thumbBorder = .init(
                 enabled: .black,
                 disabled: .gray
             )
 
-            model.colors.thumb.shadow = .init(
+            model.colors.thumbShadow = .init(
                 enabled: .clear,
                 disabled: .clear
             )
@@ -52,17 +52,17 @@ struct VSliderDemoView: View {
             model.layout.thumbBorderWidth = 0
             model.layout.thumbShadowRadius = 0
 
-            model.colors.thumb.fill = .init(
+            model.colors.thumb = .init(
                 enabled: .clear,
                 disabled: .clear
             )
 
-            model.colors.thumb.border = .init(
+            model.colors.thumbBorder = .init(
                 enabled: .clear,
                 disabled: .clear
             )
 
-            model.colors.thumb.shadow = .init(
+            model.colors.thumbShadow = .init(
                 enabled: .clear,
                 disabled: .clear
             )
@@ -162,6 +162,7 @@ extension VSliderState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }

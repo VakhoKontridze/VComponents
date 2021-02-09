@@ -29,8 +29,8 @@ struct VBaseViewDemoView: View {
     private var plainButtonModel: VPlainButtonModel = {
         var model: VPlainButtonModel = .init()
         
-        model.layout.hitBoxHor = 0
-        model.layout.hitBoxVer = 0
+        model.layout.hitBox.horizontal = 0
+        model.layout.hitBox.vertical = 0
         
         return model
     }()
@@ -116,6 +116,7 @@ extension VBaseViewModel.Layout.TitlePosition: VPickableTitledItem {
         switch self {
         case .leading: return "Leading"
         case .center: return "Center"
+        @unknown default: fatalError()
         }
     }
 }

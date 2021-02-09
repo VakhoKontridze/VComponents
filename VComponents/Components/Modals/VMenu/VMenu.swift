@@ -44,6 +44,7 @@ public struct VMenu<Label>: View where Label: View {
     private let label: () -> Label
     
     // MARK: Initializers: Preset
+    /// Initializes component with preset, rows, and label
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
         state: VMenuState = .enabled,
@@ -56,6 +57,7 @@ public struct VMenu<Label>: View where Label: View {
         self.label = label
     }
     
+    /// Initializes component with preset, rows, and title
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
         state: VMenuState = .enabled,
@@ -73,6 +75,7 @@ public struct VMenu<Label>: View where Label: View {
     }
     
     // MARK: Initializers: Custom
+    /// Initializes component with rows and label
     public init(
         state: VMenuState = .enabled,
         rows: [VMenuRow],

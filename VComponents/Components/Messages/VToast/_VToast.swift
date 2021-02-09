@@ -61,8 +61,8 @@ extension _VToast {
             color: model.colors.text,
             title: title
         )
-            .padding(.horizontal, model.layout.contentPaddingHor)
-            .padding(.vertical, model.layout.contentPaddingVer)
+            .padding(.horizontal, model.layout.contentMargins.horizontal)
+            .padding(.vertical, model.layout.contentMargins.vertical)
     }
     
     private var background: some View {

@@ -8,12 +8,16 @@
 import Foundation
 
 // MARK:- V Stepper State
-/// Enum that describes state, such as enabled or disabled
+/// Enum that describes state, such as `enabled` or `disabled`
 public enum VStepperState: Int, CaseIterable {
+    /// Case enabled
     case enabled
+    
+    /// Case disabled
     case disabled
     
-    var isEnabled: Bool {
+    /// Indicates if state is enabled
+    public var isEnabled: Bool {
         switch self {
         case .enabled: return true
         case .disabled: return false

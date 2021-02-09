@@ -15,7 +15,7 @@ struct VPlainButtonDemoView: View {
     
     @State private var state: VPlainButtonState = .enabled
     @State private var contentType: ComponentContentType = .text
-    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VPlainButtonModel.Layout().hitBoxHor)
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VPlainButtonModel.Layout().hitBox.horizontal)
     
     private var model: VPlainButtonModel {
         let defaultModel: VPlainButtonModel = .init()
@@ -24,12 +24,12 @@ struct VPlainButtonDemoView: View {
         
         switch hitBoxType {
         case .clipped:
-            model.layout.hitBoxHor = 0
-            model.layout.hitBoxVer = 0
+            model.layout.hitBox.horizontal = 0
+            model.layout.hitBox.vertical = 0
             
         case .extended:
-            model.layout.hitBoxHor = defaultModel.layout.hitBoxHor.isZero ? 5 : defaultModel.layout.hitBoxHor
-            model.layout.hitBoxVer = defaultModel.layout.hitBoxVer.isZero ? 5 : defaultModel.layout.hitBoxVer
+            model.layout.hitBox.horizontal = defaultModel.layout.hitBox.horizontal.isZero ? 5 : defaultModel.layout.hitBox.horizontal
+            model.layout.hitBox.vertical = defaultModel.layout.hitBox.vertical.isZero ? 5 : defaultModel.layout.hitBox.vertical
         }
 
         return model
@@ -70,6 +70,7 @@ extension VPlainButtonState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }

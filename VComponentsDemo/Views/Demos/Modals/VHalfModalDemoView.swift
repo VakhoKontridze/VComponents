@@ -21,14 +21,14 @@ struct VHalfModalDemoView: View {
             .filter { $0 != .navigationViewCloseButton }
             .map { $0.helperType }
     )
-    @State private var hasDivider: Bool = VHalfModalModel.Layout().dividerHeight > 0
+    @State private var hasDivider: Bool = VHalfModalModel.Layout().headerDividerHeight > 0
     
     private var model: VHalfModalModel {
         var model: VHalfModalModel = .init()
         
         model.layout.height = heightType.heightType
-        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
-        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
+        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
+        model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
         
         model.misc.dismissType = .init(dismissType.map { $0.dismissType })
         
@@ -150,6 +150,7 @@ private extension VHalfModalModel.Layout.HeightType {
         switch self {
         case .fixed: return .fixed
         case .dynamic: return .dynamic
+        @unknown default: fatalError()
         }
     }
 }
@@ -171,8 +172,8 @@ private enum VHalfModalDismissTypeHelper: Int, CaseIterable {
     
     var dismissType: VHalfModalModel.Misc.DismissType {
         switch self {
-        case .leading: return .leading
-        case .trailing: return .trailing
+        case .leading: return .leadingButton
+        case .trailing: return .trailingButton
         case .backTap: return .backTap
         case .pullDown: return .pullDown
         }
@@ -182,11 +183,12 @@ private enum VHalfModalDismissTypeHelper: Int, CaseIterable {
 private extension VHalfModalModel.Misc.DismissType {
     var helperType: VHalfModalDismissTypeHelper {
         switch self {
-        case .leading: return .leading
-        case .trailing: return .trailing
+        case .leadingButton: return .leading
+        case .trailingButton: return .trailing
         case .backTap: return .backTap
         case .pullDown: return .pullDown
         case .navigationViewCloseButton: fatalError()
+        @unknown default: fatalError()
         }
     }
 }

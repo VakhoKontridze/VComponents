@@ -37,17 +37,19 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package Repositor
 
 ### Manual
 
-1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.xcframework.zip) and extract the zip.
+1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.0/VComponents.xcframework.zip).
 
-2. Drag  `VComponents.xcframework` into your project.
+2. Extract the zip.
+
+3. Drag  `VComponents.xcframework` into your project.
 
 ![ManualInstallation1](./img/ManualInstallation1.jpg)
 
-Make sure "Copy items if needed" is selected and click Finish.
+4. Select "Copy items if needed" and click Finish.
 
 ![ManualInstallation2](./img/ManualInstallation2.jpg)
 
-3. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the VComponents.framework to “Embed & Sign”.
+5. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the VComponents.xcframework to “Embed & Sign”.
 
 ![ManualInstallation3](./img/ManualInstallation3.jpg)
 
@@ -225,7 +227,11 @@ Components also prevent themselves from modifying external state with an animati
 
 ## Release History
 
-**1.0 (2021 Feb 7)**
+**1.1.0 (2021 Feb 9)**
+
+Added documentation on public declarations, methods, and properties
+
+**1.0.0 (2021 Feb 7)**
 
 Initial release
 

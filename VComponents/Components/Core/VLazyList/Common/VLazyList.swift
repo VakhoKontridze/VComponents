@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// Model can be passed as parameter
 ///
-/// Component is a wrapped behind ScrollView and LazyVStack/LazyHStack, and supports lazy initialization
+/// Component is a wrapped behind `ScrollView` and `LazyVStack`/`LazyHStack`, and supports lazy initialization
 ///
 /// # Usage Example #
 ///
@@ -51,6 +51,7 @@ public struct VLazyList<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers: View Builder
+    /// Initializes component with data, id, and row content
     public init<Data, ID, RowContent>(
         type listType: VLazyListType = .default,
         data: Data,
@@ -74,6 +75,7 @@ public struct VLazyList<Content>: View where Content: View {
     }
     
     // MARK: Initializers: Identified View Builder
+    /// Initializes component with data and row content
     public init<Data, ID, RowContent>(
         type listType: VLazyListType = .default,
         data: Data,
@@ -95,6 +97,7 @@ public struct VLazyList<Content>: View where Content: View {
     }
 
     // MARK: Initializers: Range
+    /// Initializes component with range and row content
     public init <RowContent>(
         type listType: VLazyListType = .default,
         range: Range<Int>,
@@ -111,6 +114,7 @@ public struct VLazyList<Content>: View where Content: View {
     }
     
     // MARK: Initializers: Free Content
+    /// Initializes component with free content
     public init(
         type listType: VLazyListType = .default,
         @ViewBuilder content: @escaping () -> Content

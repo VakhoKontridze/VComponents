@@ -67,6 +67,7 @@ private extension VLazyListDemoDetailView {
             switch lazyListType {
             case .vertical: vertical
             case .horizontal: horizontal
+            @unknown default: fatalError()
             }
             
             VStack(spacing: 10, content: {

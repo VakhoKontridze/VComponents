@@ -45,6 +45,7 @@ public struct VModal<Content, HeaderContent>
     fileprivate let content: () -> Content
     
     // MARK: Initializers: Header
+    /// Initializes component with header and content
     public init(
         model: VModalModel = .init(),
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
@@ -55,6 +56,7 @@ public struct VModal<Content, HeaderContent>
         self.content = content
     }
     
+    /// Initializes component with header title and content
     public init(
         model: VModalModel = .init(),
         headerTitle: String,
@@ -77,6 +79,7 @@ public struct VModal<Content, HeaderContent>
     }
     
     // MARK: Initializers: _
+    /// Initializes component content
     public init(
         model: VModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -91,7 +94,7 @@ public struct VModal<Content, HeaderContent>
 
 // MARK:- Extension
 extension View {
-    /// Presents modal
+    /// Presents `VModal`
     public func vModal<Content, headerContent>(
         isPresented: Binding<Bool>,
         modal: @escaping () -> VModal<Content, headerContent>

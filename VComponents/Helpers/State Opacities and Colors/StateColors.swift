@@ -8,10 +8,15 @@
 import SwiftUI
 
 // MARK:- Enabled, Disabled
+/// Color group containing values for `enabled` and `disabled` states
 public struct StateColorsED {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Disabled color
     public var disabled: Color
     
+    /// Initializes group with values
     public init(enabled: Color, disabled: Color) {
         self.enabled = enabled
         self.disabled = disabled
@@ -56,11 +61,18 @@ extension StateColorsED {
 }
 
 // MARK:- Enabled, Pressed, Disabled
+/// Color group containing values for `enabled`, `pressed`, and `disabled` states
 public struct StateColorsEPD {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Pressed color
     public var pressed: Color
+    
+    /// Disabled color
     public var disabled: Color
     
+    /// Initializes group with values
     public init(enabled: Color, pressed: Color, disabled: Color) {
         self.enabled = enabled
         self.pressed = pressed
@@ -120,12 +132,21 @@ extension StateColorsEPD {
 }
 
 // MARK:- Enabled, Pressed, Disabled, Loading
+/// Color group containing values for enabled, pressed, disabled, and loading states
 public struct StateColorsEPDL {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Pressed color
     public var pressed: Color
+    
+    /// Disabled color
     public var disabled: Color
+    
+    /// Loading color
     public var loading: Color
     
+    /// Initializes group with values
     public init(enabled: Color, pressed: Color, disabled: Color, loading: Color) {
         self.enabled = enabled
         self.pressed = pressed
@@ -146,11 +167,18 @@ extension StateColorsEPDL {
 }
 
 // MARK:- Off, On, Disabled
+/// Color group containing values for `off`, `on`, and `disabled` states
 public struct StateColorsOOD {
+    /// Off color
     public var off: Color
+    
+    /// On color
     public var on: Color
+    
+    /// Disabled color
     public var disabled: Color
     
+    /// Initializes group with values
     public init(off: Color, on: Color, disabled: Color) {
         self.off = off
         self.on = on
@@ -181,12 +209,21 @@ extension StateColorsOOD {
 }
 
 // MARK:- Off, On, Intermediate, Disabled
+/// Color group containing values for `off`, `on`, `intermediate`, and `disabled` states
 public struct StateColorsOOID {
+    /// Off color
     public var off: Color
+    
+    /// On color
     public var on: Color
+    
+    /// Intermediate color
     public var intermediate: Color
+    
+    /// Disabled color
     public var disabled: Color
 
+    /// Initializes group with values
     public init(off: Color, on: Color, intermediate: Color, disabled: Color) {
         self.off = off
         self.on = on
@@ -210,11 +247,18 @@ extension StateColorsOOID {
 }
 
 // MARK:- Enabled, Focused, Disabled
+/// Color group containing values for `enabled`, `focused`, and `disabled` states
 public struct StateColorsEFD {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Focused color
     public var focused: Color
+    
+    /// Disabled color
     public var disabled: Color
     
+    /// Initializes group with values
     public init(enabled: Color, focused: Color, disabled: Color) {
         self.enabled = enabled
         self.focused = focused
@@ -233,13 +277,24 @@ extension StateColorsEFD {
 }
 
 // MARK:- Enabled, Focused, Success, Error, Disabled
+/// Color group containing values for `enabled`, `focused`, `success`, `error`, and `disabled` states
 public struct StateColorsEFSED {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Focused color
     public var focused: Color
+    
+    /// Success color
     public var success: Color
+    
+    /// Error color
     public var error: Color
+    
+    /// Disabled color
     public var disabled: Color
     
+    /// Initializes group with values
     public init(enabled: Color, focused: Color, success: Color, error: Color, disabled: Color) {
         self.enabled = enabled
         self.focused = focused
@@ -264,17 +319,36 @@ extension StateColorsEFSED {
 }
 
 // MARK:- Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled
+/// Color group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states
 public struct StateColorsEpFpSpEpD {
+    /// Enabled color
     public var enabled: Color
+    
+    /// Enabled pressed color
     public var enabledPressed: Color
+    
+    /// Focused color
     public var focused: Color
+    
+    /// Focused pressed color
     public var focusedPressed: Color
+    
+    /// Success color
     public var success: Color
+    
+    /// Success pressed color
     public var successPressed: Color
+    
+    /// Error color
     public var error: Color
+    
+    /// Error pressed color
     public var errorPressed: Color
+    
+    /// Disabled color
     public var disabled: Color
     
+    /// Initializes group with values
     public init(enabled: Color, enabledPressed: Color, focused: Color, focusedPressed: Color, success: Color, successPressed: Color, error: Color, errorPressed: Color, disabled: Color) {
         self.enabled = enabled
         self.enabledPressed = enabledPressed

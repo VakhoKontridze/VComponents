@@ -135,6 +135,7 @@ extension VTextFieldState: VPickableTitledItem {
         case .enabled: return "Enabled"
         case .focused: return "Focused"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }
@@ -145,6 +146,7 @@ extension VTextFieldType: VPickableTitledItem {
         case .standard: return "Standard"
         case .secure: return "Secure"
         case .search: return "Search"
+        @unknown default: fatalError()
         }
     }
 }
@@ -155,6 +157,7 @@ extension VTextFieldHighlight: VPickableTitledItem {
         case .none: return "None"
         case .success:  return "Success"
         case .error:  return "Error"
+        @unknown default: fatalError()
         }
     }
 }

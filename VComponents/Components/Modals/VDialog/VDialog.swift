@@ -56,6 +56,7 @@ public struct VDialog<Content> where Content: View {
     fileprivate let content: (() -> Content)?
     
     // MARK: Initializers
+    /// Initializes component with buttons, title, description, and content
     public init(
         model: VDialogModel = .init(),
         buttons dialogButtons: VDialogButtons,
@@ -70,6 +71,7 @@ public struct VDialog<Content> where Content: View {
         self.content = content
     }
     
+    /// Initializes component with buttons, title, and description
     public init(
         model: VDialogModel = .init(),
         buttons dialogButtons: VDialogButtons,
@@ -88,7 +90,7 @@ public struct VDialog<Content> where Content: View {
 
 // MARK:- Extension
 extension View {
-    /// Presents dialog
+    /// Presents `VDialog`
     public func vDialog<Content>(
         isPresented: Binding<Bool>,
         dialog: @escaping () -> VDialog<Content>

@@ -15,7 +15,7 @@ struct VChevronButtonDemoView: View {
     
     @State private var state: VChevronButtonState = .enabled
     @State private var direction: VChevronButtonDirection = .left
-    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VChevronButtonModel.Layout().hitBoxHor)
+    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VChevronButtonModel.Layout().hitBox.horizontal)
     
     private var model: VChevronButtonModel {
         let defaultModel: VChevronButtonModel = .init()
@@ -24,12 +24,12 @@ struct VChevronButtonDemoView: View {
         
         switch hitBoxType {
         case .clipped:
-            model.layout.hitBoxHor = 0
-            model.layout.hitBoxVer = 0
+            model.layout.hitBox.horizontal = 0
+            model.layout.hitBox.vertical = 0
             
         case .extended:
-            model.layout.hitBoxHor = defaultModel.layout.hitBoxHor.isZero ? 5 : defaultModel.layout.hitBoxHor
-            model.layout.hitBoxVer = defaultModel.layout.hitBoxVer.isZero ? 5 : defaultModel.layout.hitBoxVer
+            model.layout.hitBox.horizontal = defaultModel.layout.hitBox.horizontal.isZero ? 5 : defaultModel.layout.hitBox.horizontal
+            model.layout.hitBox.vertical = defaultModel.layout.hitBox.vertical.isZero ? 5 : defaultModel.layout.hitBox.vertical
         }
 
         return model
@@ -63,6 +63,7 @@ extension VChevronButtonState: VPickableTitledItem {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
+        @unknown default: fatalError()
         }
     }
 }
@@ -74,6 +75,7 @@ extension VChevronButtonDirection: VPickableTitledItem {
         case .right: return "Right"
         case .down: return "Down"
         case .left: return "Left"
+        @unknown default: fatalError()
         }
     }
 }

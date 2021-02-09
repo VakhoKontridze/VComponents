@@ -38,6 +38,7 @@ public struct VSideBar<Content> where Content: View {
     fileprivate let content: () -> Content
     
     // MARK: Initializers
+    /// Initializes component with content
     public init(
         model: VSideBarModel = .init(),
         @ViewBuilder content: @escaping () -> Content

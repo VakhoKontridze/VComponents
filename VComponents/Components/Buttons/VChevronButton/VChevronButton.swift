@@ -37,6 +37,7 @@ public struct VChevronButton: View {
     private let action: () -> Void
     
     // MARK: Initializers
+    /// Initializes component with direction and action
     public init(
         model: VChevronButtonModel = .init(),
         direction: VChevronButtonDirection,
@@ -63,8 +64,8 @@ extension VChevronButton {
     
     private var hitBox: some View {
         buttonView
-            .padding(.horizontal, model.layout.hitBoxHor)
-            .padding(.vertical, model.layout.hitBoxVer)
+            .padding(.horizontal, model.layout.hitBox.horizontal)
+            .padding(.vertical, model.layout.hitBox.vertical)
     }
     
     private var buttonView: some View {

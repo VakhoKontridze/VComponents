@@ -7,10 +7,25 @@
 
 import SwiftUI
 
+// MARK:- Pressed
+/// Opacity level group containing values for `pressed` state
+public struct StateOpacitiesP {
+    /// Pressed opacity level
+    public var pressedOpacity: Double
+
+    /// Initializes group with values
+    public init(pressedOpacity: Double) {
+        self.pressedOpacity = pressedOpacity
+    }
+}
+
 // MARK:- Disabled
+/// Opacity level group containing values for `disabled` state
 public struct StateOpacitiesD {
+    /// Disabled opacity level
     public var disabledOpacity: Double
     
+    /// Initializes group with values
     public init(disabledOpacity: Double) {
         self.disabledOpacity = disabledOpacity
     }
@@ -41,20 +56,16 @@ extension StateOpacitiesD {
     }
 }
 
-// MARK:- Pressed
-public struct StateOpacitiesP {
-    public var pressedOpacity: Double
-
-    public init(pressedOpacity: Double) {
-        self.pressedOpacity = pressedOpacity
-    }
-}
-
 // MARK:- Pressed, Disabled
+/// Opacity level group containing values for `pressed` and `disabled` states
 public struct StateOpacitiesPD {
+    /// Pressed opacity level
     public var pressedOpacity: Double
+    
+    /// Disabled opacity level
     public var disabledOpacity: Double
     
+    /// Initializes group with values
     public init(pressedOpacity: Double, disabledOpacity: Double) {
         self.pressedOpacity = pressedOpacity
         self.disabledOpacity = disabledOpacity

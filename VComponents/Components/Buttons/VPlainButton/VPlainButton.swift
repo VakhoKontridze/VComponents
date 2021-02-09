@@ -38,6 +38,7 @@ public struct VPlainButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
+    /// Initializes component with action and content
     public init(
         model: VPlainButtonModel = .init(),
         state: VPlainButtonState = .enabled,
@@ -50,6 +51,7 @@ public struct VPlainButton<Content>: View where Content: View {
         self.content = content
     }
 
+    /// Initializes component with action and title
     public init(
         model: VPlainButtonModel = .init(),
         state: VPlainButtonState = .enabled,
@@ -87,8 +89,8 @@ extension VPlainButton {
     
     private var hitBox: some View {
         buttonView
-            .padding(.horizontal, model.layout.hitBoxHor)
-            .padding(.vertical, model.layout.hitBoxVer)
+            .padding(.horizontal, model.layout.hitBox.horizontal)
+            .padding(.vertical, model.layout.hitBox.vertical)
     }
     
     private var buttonView: some View {

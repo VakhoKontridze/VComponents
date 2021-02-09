@@ -8,9 +8,12 @@
 import Foundation
 
 // MARK:- V Menu State
-/// Enum that describes state, such as enabled or disabled
+/// Enum that describes state, such as `enabled` or `disabled`
 public enum VMenuState: Int, CaseIterable {
+    /// Enabled
     case enabled
+    
+    /// Disabled
     case disabled
     
     var isEnabled: Bool {

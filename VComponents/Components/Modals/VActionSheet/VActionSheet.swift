@@ -43,6 +43,7 @@ public struct VActionSheet {
     fileprivate let rows: [VActionSheetRow]
     
     // MARK: Initializrs
+    /// Initializes component with title, description, and rows
     public init(
         title: String,
         description: String?,
@@ -56,7 +57,7 @@ public struct VActionSheet {
 
 // MARK:- Extension
 extension View {
-    /// Presents action sheet
+    /// Presents `VActionSheet`
     public func vActionSheet(
         isPresented: Binding<Bool>,
         actionSheet: @escaping () -> VActionSheet

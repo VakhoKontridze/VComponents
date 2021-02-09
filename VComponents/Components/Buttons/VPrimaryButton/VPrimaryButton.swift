@@ -39,6 +39,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
+    /// Initializes component with action and content
     public init(
         model: VPrimaryButtonModel = .init(),
         state: VPrimaryButtonState = .enabled,
@@ -51,6 +52,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
         self.content = content
     }
 
+    /// Initializes component with action and title
     public init(
         model: VPrimaryButtonModel = .init(),
         state: VPrimaryButtonState = .enabled,
@@ -103,8 +105,8 @@ extension VPrimaryButton {
 
             loaderView
         })
-            .padding(.horizontal, model.layout.contentMarginHor)
-            .padding(.vertical, model.layout.contentMarginVer)
+            .padding(.horizontal, model.layout.contentMargin.horizontal)
+            .padding(.vertical, model.layout.contentMargin.vertical)
     }
     
     @ViewBuilder private var loaderCompensatorView: some View {

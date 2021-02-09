@@ -10,43 +10,64 @@ import SwiftUI
 // MARK:- V Base List Model
 /// Model that describes UI
 public struct VBaseListModel {
+    /// Sub-model containing layout properties
     public var layout: Layout = .init()
+    
+    /// Sub-model containing color properties
     public var colors: Colors = .init()
+    
+    /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    /// Initializes model with default values
     public init() {}
 }
 
 // MARK:- Layout
 extension VBaseListModel {
+    /// Sub-model containing layout properties
     public struct Layout {
+        /// Trailing margin. Defaults to `0`.
+        ///
+        /// Purpose of this property is to create a spacing between rows and scrolling indicator.
         public var marginTrailing: CGFloat = 0
         
-        public var itemSpacing: CGFloat = 18
+        /// Spacing between rows. Defaults to `18`.
+        public var rowSpacing: CGFloat = 18
         
+        /// Row divider height. Defaults to `1`.
         public var dividerHeight: CGFloat = 1
-        public var hasDivider: Bool { dividerHeight > 0 }
-        public var dividerMarginVer: CGFloat { itemSpacing / 2 }
         
-        init() {}
+        var hasDivider: Bool { dividerHeight > 0 }
+        
+        var dividerMarginVertical: CGFloat { rowSpacing / 2 }
+        
+        /// Initializes sub-model with default values
+        public init() {}
     }
 }
 
 // MARK:- Colors
 extension VBaseListModel {
+    /// Sub-model containing color properties
     public struct Colors {
+        /// Divider color
         public var divider: Color = .init(componentAsset: "BaseList.Divider")
         
-        init() {}
+        /// Initializes sub-model with default values
+        public init() {}
     }
 }
 
 // MARK:- Misc
 extension VBaseListModel {
+    /// Sub-model containing misc properties
     public struct Misc {
+        /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
         
-        init() {}
+        /// Initializes sub-model with default values
+        public init() {}
     }
 }
 

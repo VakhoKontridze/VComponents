@@ -19,7 +19,7 @@ struct VPageIndicatorAuto: View {
     private let selectedIndex: Int
 
     // MARK: Intializers
-    public init(
+    init(
         model: VPageIndicatorModel,
         visible: Int,
         center: Int,
