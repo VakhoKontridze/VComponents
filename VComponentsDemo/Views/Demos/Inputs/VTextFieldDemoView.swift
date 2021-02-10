@@ -79,9 +79,9 @@ extension VTextFieldDemoView {
         DemoViewSettingsSection(content: {
             ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
 
-            ToggleSettingView(isOn: $hasHeader, title: "Title")
+            ToggleSettingView(isOn: $hasHeader, title: "Header")
 
-            ToggleSettingView(isOn: $hasFooter, title: "Description")
+            ToggleSettingView(isOn: $hasFooter, title: "Footer")
         })
         
         DemoViewSettingsSection(content: {
