@@ -47,7 +47,7 @@ extension _VDialog {
             modalView
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.keyboard, edges: model.misc.ignoredKeybordSafeAreaEdges)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
     }
     

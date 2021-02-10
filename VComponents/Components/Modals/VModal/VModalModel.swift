@@ -39,6 +39,9 @@ extension VModalModel {
             height: UIScreen.main.bounds.height * 0.6
         )
         
+        /// Edges ignored by keyboard. Defaults to `none`.
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
+        
         /// Rounded corners of modal. Defaults to to `default`.
         public var roundedCorners: RoundedCorners = sheetReference.layout.roundedCorners
         
@@ -177,9 +180,6 @@ extension VModalModel {
     public struct Misc {
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: Set<DismissType> = .default
-        
-        /// Edges ignored by keyboard. Defaults to `none`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
         /// Initializes sub-model with default values
         public init() {}
