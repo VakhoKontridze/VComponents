@@ -21,9 +21,6 @@ public struct VDialogModel {
     
     /// Sub-model containing animation properties
     public var animations: Animations = .init()
-    
-    /// Sub-model containing misc properties
-    public var misc: Misc = .init()
 
     /// Initializes model with default values
     public init() {}
@@ -35,6 +32,9 @@ extension VDialogModel {
     public struct Layout {
         /// Side bar width. Defaults to `0.75` ratio of screen with.
         public var width: CGFloat = UIScreen.main.bounds.width * 0.75
+        
+        /// Edges ignored by keyboard. Defaults to `none`.
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
         /// Corner radius. Defaults to `20`.
         public var cornerRadius: CGFloat = 20
@@ -113,18 +113,6 @@ extension VDialogModel {
 extension VDialogModel {
     /// Sub-model containing animation properties
     public typealias Animations = VModalModel.Animations
-}
-
-// MARK:- Misc
-extension VDialogModel {
-    /// Sub-model containing misc properties
-    public struct Misc {
-        /// Edges ignored by keyboard. Defaults to `none`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
-        
-        /// Initializes sub-model with default values
-        public init() {}
-    }
 }
 
 // MARK:- References

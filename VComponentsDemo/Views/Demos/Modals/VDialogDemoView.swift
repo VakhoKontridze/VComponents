@@ -18,11 +18,11 @@ struct VDialogDemoView: View {
     @State private var dialogButtons: VDialogButtonsHelper = .two
     @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-    @State private var ignoreKeyboardSafeArea: Bool = !VDialogModel.Misc().ignoredKeybordSafeAreaEdges.isEmpty
+    @State private var ignoreKeyboardSafeArea: Bool = !VDialogModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
     
     private var model: VDialogModel {
         var model: VDialogModel = .init()
-        model.misc.ignoredKeybordSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
+        model.layout.ignoredKeybordSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
         return model
     }
 }

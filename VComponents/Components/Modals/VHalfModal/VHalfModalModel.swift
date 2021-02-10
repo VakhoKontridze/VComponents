@@ -36,6 +36,9 @@ extension VHalfModalModel {
         /// Height type. Defaults to `default`.
         public var height: HeightType = .default
         
+        /// Edges ignored by keyboard. Defaults to `none`.
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
+        
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
@@ -238,9 +241,6 @@ extension VHalfModalModel {
     public struct Misc {
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: Set<DismissType> = .default
-        
-        /// Edges ignored by keyboard. Defaults to `none`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
         /// Initializes sub-model with default values
         public init() {}
