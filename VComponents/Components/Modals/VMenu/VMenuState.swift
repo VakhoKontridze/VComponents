@@ -16,7 +16,8 @@ public enum VMenuState: Int, CaseIterable {
     /// Disabled
     case disabled
     
-    var isEnabled: Bool {
+    /// Indicates is state is enabled
+    public var isEnabled: Bool {
         switch self {
         case .enabled: return true
         case .disabled: return false

@@ -19,6 +19,15 @@ public enum VTextFieldState: Int, CaseIterable {
     /// Disabled
     case disabled
     
+    /// Indicates if state is enabled
+    public var isEnabled: Bool {
+        switch self {
+        case .enabled: return true
+        case .focused: return true
+        case .disabled: return false
+        }
+    }
+    
     var isFocused: Bool {
         switch self {
         case .enabled: return false
