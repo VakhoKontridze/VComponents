@@ -228,7 +228,7 @@ Components also prevent themselves from modifying external state with an animati
 
 **1.1.1 (2021 Feb 10)**
 
-Bug fixes and performance improvements
+Bug fixes and improvements
 
 **1.1.0 (2021 Feb 9)**
 
@@ -244,7 +244,7 @@ Initial release
 
 *Minor*. Minor changes, such as new properties in models
 
-*Patch*. Bug fixes and performance improvements
+*Patch*. Bug fixes and improvements
 
 ## Contact
 
