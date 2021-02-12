@@ -1,5 +1,5 @@
 //
-//  VLazyListDemoView.swift
+//  VLazyScrollViewDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -8,18 +8,18 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Lazy List Demo View
-struct VLazyListDemoView: View {
+// MARK:- V Lazy Scroll View Demo View
+struct VLazyScrollViewDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Lazy List"
+    static let navBarTitle: String = "Lazy Scroll View"
     
-    private let sections: [DemoSection<VLazyListDemoViewDataSource.LazyListRow>] = [
+    private let sections: [DemoSection<VLazyScrollViewDemoViewDataSource.LazyScrollViewRow>] = [
         .init(id: 0, title: nil, rows: [.vertical, .horizontal])
     ]
 }
 
 // MARK:- Body
-extension VLazyListDemoView {
+extension VLazyScrollViewDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoListView(type: .section, sections: sections)
@@ -27,11 +27,11 @@ extension VLazyListDemoView {
     }
 }
 
-// MARK:- V Lazy List Demo Detail View
-private struct VLazyListDemoDetailView: View {
-    static let navBarTitle: String = "Lazy List"
+// MARK:- V Lazy Scroll View Demo Detail View
+private struct VLazyScrollViewDemoDetailView: View {
+    static let navBarTitle: String = "Lazy Scroll View"
 
-    private let lazyListType: VLazyListType
+    private let lazyScrollViewType: VLazyScrollViewType
     
     @State private var initializedRows: Set<Int> = []
     private var initializedRowsDescription: String {
@@ -42,13 +42,13 @@ private struct VLazyListDemoDetailView: View {
     }
     
     init(
-        _ lazyListType: VLazyListType
+        _ lazyScrollViewType: VLazyScrollViewType
     ) {
-        self.lazyListType = lazyListType
+        self.lazyScrollViewType = lazyScrollViewType
     }
 }
 
-private extension VLazyListDemoDetailView {
+private extension VLazyScrollViewDemoDetailView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)
@@ -64,7 +64,7 @@ private extension VLazyListDemoDetailView {
                 title: "Scroll rows and see lazy initialization"
             )
 
-            switch lazyListType {
+            switch lazyScrollViewType {
             case .vertical: vertical
             case .horizontal: horizontal
             @unknown default: fatalError()
@@ -91,7 +91,7 @@ private extension VLazyListDemoDetailView {
     }
     
     private var vertical: some View {
-        VLazyList(type: .vertical(), range: 1..<101, content: { num in
+        VLazyScrollView(type: .vertical(), range: 1..<101, content: { num in
             VText(
                 type: .oneLine,
                 font: .body,
@@ -108,7 +108,7 @@ private extension VLazyListDemoDetailView {
     }
     
     private var horizontal: some View {
-        VLazyList(type: .horizontal(), range: 1..<101, content: { num in
+        VLazyScrollView(type: .horizontal(), range: 1..<101, content: { num in
             VText(
                 type: .oneLine,
                 font: .body,
@@ -126,10 +126,10 @@ private extension VLazyListDemoDetailView {
 }
 
 // MARK:- Helpers
-private struct VLazyListDemoViewDataSource {
+private struct VLazyScrollViewDemoViewDataSource {
     private init() {}
     
-    enum LazyListRow: Int, DemoableRow {
+    enum LazyScrollViewRow: Int, DemoableRow {
         case vertical
         case horizontal
         
@@ -142,17 +142,17 @@ private struct VLazyListDemoViewDataSource {
         
         var body: some View {
             switch self {
-            case .vertical: return VLazyListDemoDetailView(.vertical())
-            case .horizontal: return VLazyListDemoDetailView(.horizontal())
+            case .vertical: return VLazyScrollViewDemoDetailView(.vertical())
+            case .horizontal: return VLazyScrollViewDemoDetailView(.horizontal())
             }
         }
     }
 }
 
 // MARK:- Preview
-struct VLazyListDemoView_Previews: PreviewProvider {
+struct VLazyScrollViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
-//        VLazyListDemoView()
-        VLazyListDemoDetailView(.vertical(.init()))
+//        VLazyScrollViewDemoView()
+        VLazyScrollViewDemoDetailView(.vertical(.init()))
     }
 }

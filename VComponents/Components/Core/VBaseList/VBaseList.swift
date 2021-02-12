@@ -114,8 +114,8 @@ extension VBaseList {
             })
             
         case .flexible:
-            VLazyList(
-                type: .vertical(model.lazyListSubModel),
+            VLazyScrollView(
+                type: .vertical(model.lazyScrollViewSubModel),
                 data: data.enumeratedArray(),
                 id: \.element.id,
                 content: { contentView(i: $0, element: $1) }

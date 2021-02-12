@@ -28,7 +28,7 @@ struct HomeView: View {
         .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
         .init(id: 8, title: "Messages", rows: [.toast]),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
-        .init(id: 10, title: "Core", rows: [.text, .baseButton, .baseTextField, .lazyList, .baseList, .baseView])
+        .init(id: 10, title: "Core", rows: [.text, .baseButton, .baseTextField, .lazyScrollView, .baseList, .baseView])
     ]
 
     private enum HomeRow: Int, DemoableRow {
@@ -42,7 +42,7 @@ struct HomeView: View {
         case modal, halfModal, sideBar, dialog, menu, actionSheet
         case toast
         case spinner, progressBar, pageIndicator
-        case text, baseButton, baseTextField, lazyList, baseList, baseView
+        case text, baseButton, baseTextField, lazyScrollView, baseList, baseView
 
         var title: String {
             switch self {
@@ -93,7 +93,7 @@ struct HomeView: View {
             case .text: return VTextDemoView.navBarTitle
             case .baseButton: return VBaseButtonDemoView.navBarTitle
             case .baseTextField: return VBaseTextFieldDemoView.navBarTitle
-            case .lazyList: return VLazyListDemoView.navBarTitle
+            case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
             case .baseList: return VBaseListDemoView.navBarTitle
             case .baseView: return VBaseViewDemoView.navBarTitle
             }
@@ -148,7 +148,7 @@ struct HomeView: View {
             case .text: VTextDemoView()
             case .baseButton: VBaseButtonDemoView()
             case .baseTextField: VBaseTextFieldDemoView()
-            case .lazyList: VLazyListDemoView()
+            case .lazyScrollView: VLazyScrollViewDemoView()
             case .baseList: VBaseListDemoView()
             case .baseView: VBaseViewDemoView()
             }

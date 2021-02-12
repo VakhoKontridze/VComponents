@@ -68,7 +68,7 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 **Inputs.** VTextField
 
-**Containers.** VSheet, VSection, VTable, VAccordion
+**Lists & Containers.** VSheet, VSection, VTable, VAccordion
 
 **Navigation.** VTabNavigationView, VNavigationView
 
@@ -78,7 +78,7 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 **Indicators.** VSpinner, VProgressBar, VPageIndicator
 
-**Core.** VText, VBaseButton, VBaseTextField, VLazyList, VBaseList, VBaseView
+**Core.** VText, VBaseButton, VBaseTextField, VLazyScrollView, VBaseList, VBaseView
 
 ## Guidelines
 
@@ -88,7 +88,7 @@ Components are not meant to be customized like you would a native SwiftUI compon
 
 Instead, model can be passed as parameter via initializers. This parameter has default value, and is not required every time you create a view.
 
-Essentially, Models are structs with default values. They usually break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
+Models are structs with default values. They break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
 For instance, changing foreground color of `VSecondaryButton` can be achieved by passing a custom model.
 
