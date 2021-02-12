@@ -30,7 +30,7 @@ extension VListModel {
         /// List corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         
-        /// Content margin. Defaults to `15`.
+        /// Content margin. Defaults to `10`.
         public var contentMargin: CGFloat = sheetReference.layout.contentMargin
         
         /// Spacing between rows. Defaults to `18`.

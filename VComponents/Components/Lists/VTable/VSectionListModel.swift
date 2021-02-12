@@ -33,7 +33,7 @@ extension VSectionListModel {
         /// Table corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = listReference.layout.cornerRadius
         
-        /// Content margin. Defaults to `15`.
+        /// Content margin. Defaults to `10`.
         public var contentMargin: CGFloat = listReference.layout.contentMargin
         
         /// Spacing between sections. Defaults to `20`.
