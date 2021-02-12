@@ -36,7 +36,7 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode 
 
 ### Manual
 
-1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.1/VComponents.xcframework.zip).
+1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.2.0/VComponents.xcframework.zip).
 
 2. Extract the zip.
 
@@ -225,6 +225,14 @@ Thought process behind his design choice was to centralize animations to model.
 Components also prevent themselves from modifying external state with an animation.
 
 ## Release History
+
+**1.2.0 (2021 Feb 12)**
+
+`VSection` has been renamed to `VList`
+
+`VTable` has been renamed to `VSectionList`
+
+`VLazyList` has been renamed to `VLazyScrollView`
 
 **1.1.1 (2021 Feb 10)**
 
