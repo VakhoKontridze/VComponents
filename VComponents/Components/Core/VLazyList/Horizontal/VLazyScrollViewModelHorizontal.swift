@@ -1,5 +1,5 @@
 //
-//  VLazyListModelHorizontal.swift
+//  VLazyScrollViewModelHorizontal.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -7,9 +7,12 @@
 
 import SwiftUI
 
-// MARK:- V Lazy List Model Horizontal
+@available(*, deprecated, renamed: "VLazyScrollViewModelHorizontal")
+public typealias VLazyListModelHorizontal = VLazyScrollViewModelHorizontal
+
+// MARK:- V Lazy Scroll View Model Horizontal
 /// Model that describes UI
-public struct VLazyListModelHorizontal {
+public struct VLazyScrollViewModelHorizontal {
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -21,7 +24,7 @@ public struct VLazyListModelHorizontal {
 }
 
 // MARK:- Layout
-extension VLazyListModelHorizontal {
+extension VLazyScrollViewModelHorizontal {
     /// Sub-model containing layout properties
     public struct Layout {
         /// Row spacing. Defaults to `0`.
@@ -36,7 +39,7 @@ extension VLazyListModelHorizontal {
 }
 
 // MARK:- Misc
-extension VLazyListModelHorizontal {
+extension VLazyScrollViewModelHorizontal {
     /// Sub-model containing misc properties
     public struct Misc {
         /// Indicates if scrolling indicator is shown. Defaults to `true`.

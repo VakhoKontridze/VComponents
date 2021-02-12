@@ -321,7 +321,7 @@ extension VTable {
             Group(content: {
                 switch layoutType {
                 case .fixed: VStack(spacing: 0, content: { contentView })
-                case .flexible: VLazyList(content: { contentView })
+                case .flexible: VLazyScrollView(content: { contentView })
                 }
             })
                 .padding([.leading, .top, .bottom], model.layout.contentMargin)

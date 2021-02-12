@@ -73,8 +73,8 @@ extension VBaseListModel {
 
 // MARK:- Sub-Models
 extension VBaseListModel {
-    var lazyListSubModel: VLazyListModelVertical {
-        var model: VLazyListModelVertical = .init()
+    var lazyScrollViewSubModel: VLazyScrollViewModelVertical {
+        var model: VLazyScrollViewModelVertical = .init()
         model.misc.showIndicator = misc.showIndicator
         return model
     }

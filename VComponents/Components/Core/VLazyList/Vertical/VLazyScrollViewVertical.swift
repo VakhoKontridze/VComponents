@@ -1,5 +1,5 @@
 //
-//  VLazyListHorizontal.swift
+//  VLazyScrollViewVertical.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-// MARK:- V Lazy List Horizontal
-struct VLazyListHorizontal<Content>: View where Content: View {
+// MARK:- V Lazy Scroll View Vertical
+struct VLazyScrollViewVertical<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VLazyListModelHorizontal
+    private let model: VLazyScrollViewModelVertical
     private let content: () -> Content
     
     // MARK: Initializers
     init(
-        model: VLazyListModelHorizontal,
+        model: VLazyScrollViewModelVertical,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
@@ -24,10 +24,10 @@ struct VLazyListHorizontal<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VLazyListHorizontal {
+extension VLazyScrollViewVertical {
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: model.misc.showIndicator, content: {
-            LazyHStack(alignment: model.layout.alignment, spacing: model.layout.rowSpacing, content: {
+        ScrollView(.vertical, showsIndicators: model.misc.showIndicator, content: {
+            LazyVStack(alignment: model.layout.alignment, spacing: model.layout.rowSpacing, content: {
                 content()
             })
         })
@@ -35,13 +35,12 @@ extension VLazyListHorizontal {
 }
 
 // MARK:- Preview
-struct VLazyListHorizontal_Previews: PreviewProvider {
+struct VLazyScrollViewVertical_Previews: PreviewProvider {
     static var previews: some View {
-        VLazyListHorizontal(model: .init(), content: {
+        VLazyScrollViewVertical(model: .init(), content: {
             ForEach(1..<100, content: { num in
                 Text(String(num))
             })
         })
     }
 }
-

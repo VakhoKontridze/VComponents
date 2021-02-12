@@ -1,5 +1,5 @@
 //
-//  VLazyList.swift
+//  VLazyScrollView.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 29.09.20.
@@ -7,7 +7,10 @@
 
 import SwiftUI
 
-// MARK:- V Lazy List
+@available(*, deprecated, renamed: "VLazyScrollView")
+public typealias VLazyList = VLazyScrollView
+
+// MARK:- V Lazy Scroll View
 /// Core component that is used throughout the framework as a lazy structure that either hosts content, or computes views on demad from an underlying collection of identified data
 ///
 /// Component can be initialized with data or free content
@@ -34,7 +37,7 @@ import SwiftUI
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VLazyList(data: data, content: { row in
+///         VLazyScrollView(data: data, content: { row in
 ///             Text(row.title)
 ///                 .frame(maxWidth: .infinity, alignment: .leading)
 ///         })
@@ -45,15 +48,15 @@ import SwiftUI
 /// 
 /// Component can also be initialized with content
 ///
-public struct VLazyList<Content>: View where Content: View {
+public struct VLazyScrollView<Content>: View where Content: View {
     // MARK: Properties
-    private let listType: VLazyListType
+    private let listType: VLazyScrollViewType
     private let content: () -> Content
     
     // MARK: Initializers: View Builder
     /// Initializes component with data, id, and row content
     public init<Data, ID, RowContent>(
-        type listType: VLazyListType = .default,
+        type listType: VLazyScrollViewType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
@@ -77,7 +80,7 @@ public struct VLazyList<Content>: View where Content: View {
     // MARK: Initializers: Identified View Builder
     /// Initializes component with data and row content
     public init<Data, ID, RowContent>(
-        type listType: VLazyListType = .default,
+        type listType: VLazyScrollViewType = .default,
         data: Data,
         @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -99,7 +102,7 @@ public struct VLazyList<Content>: View where Content: View {
     // MARK: Initializers: Range
     /// Initializes component with range and row content
     public init <RowContent>(
-        type listType: VLazyListType = .default,
+        type listType: VLazyScrollViewType = .default,
         range: Range<Int>,
         content rowContent: @escaping (Int) -> RowContent
     )
@@ -116,7 +119,7 @@ public struct VLazyList<Content>: View where Content: View {
     // MARK: Initializers: Free Content
     /// Initializes component with free content
     public init(
-        type listType: VLazyListType = .default,
+        type listType: VLazyScrollViewType = .default,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.listType = listType
@@ -125,26 +128,26 @@ public struct VLazyList<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VLazyList {
+extension VLazyScrollView {
     @ViewBuilder public var body: some View {
         switch listType {
-        case .vertical(let model): VLazyListVertical(model: model, content: content)
-        case .horizontal(let model): VLazyListHorizontal(model: model, content: content)
+        case .vertical(let model): VLazyScrollViewVertical(model: model, content: content)
+        case .horizontal(let model): VLazyScrollViewHorizontal(model: model, content: content)
         }
     }
 }
 
 // MARK:- Preview
-struct VLazyListView_Previews: PreviewProvider {
+struct VLazyScrollViewView_Previews: PreviewProvider {
     private static let range: Range<Int> = 1..<101
 
     static var previews: some View {
         VStack(content: {
-            VLazyList(type: .vertical(), range: range, content: { number in
+            VLazyScrollView(type: .vertical(), range: range, content: { number in
                 Text(String(number)).padding(5)
             })
 
-            VLazyList(type: .horizontal(), range: range, content: { number in
+            VLazyScrollView(type: .horizontal(), range: range, content: { number in
                 Text(String(number)).padding(5)
             })
         })

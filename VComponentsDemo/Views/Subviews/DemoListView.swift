@@ -20,8 +20,8 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     private let sections: [DemoSection<Row>]
     @State private var accordionStates: [VAccordionState]
     
-    private let lazyListModel: VLazyListModelVertical = {
-        var model: VLazyListModelVertical = .init()
+    private let lazyScrollViewModel: VLazyScrollViewModelVertical = {
+        var model: VLazyScrollViewModelVertical = .init()
         model.layout.rowSpacing = 20
         return model
     }()
@@ -42,7 +42,7 @@ extension DemoListView {
             
             switch demoType {
             case .accordion:
-                VLazyList(type: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
+                VLazyScrollView(type: .vertical(lazyScrollViewModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
                     VAccordion(
                         state: $accordionStates[i],
                         headerTitle: section.title ?? "",
@@ -53,7 +53,7 @@ extension DemoListView {
                     .padding(.vertical, 1)  // SwiftUI is bugged
                 
             case .section:
-                VLazyList(type: .vertical(lazyListModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
+                VLazyScrollView(type: .vertical(lazyScrollViewModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
                     VSection(data: section.rows, rowContent: { row in
                         DemoListRowView(title: row.title, destination: row.body)
                     })
