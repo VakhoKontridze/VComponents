@@ -1,5 +1,5 @@
 //
-//  VTableModel.swift
+//  VSectionListModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK:- V Table Model
+// MARK:- V Section List Model
 /// Model that describes UI
-public struct VTableModel {
+public struct VSectionListModel {
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -27,7 +27,7 @@ public struct VTableModel {
 }
 
 // MARK:- Layout
-extension VTableModel {
+extension VSectionListModel {
     /// Sub-model containing layout properties
     public struct Layout {
         /// Table corner radius. Defaults to `15`.
@@ -57,7 +57,7 @@ extension VTableModel {
 }
 
 // MARK:- Colors
-extension VTableModel {
+extension VSectionListModel {
     /// Sub-model containing color properties
     public struct Colors {
         /// Row divider color
@@ -82,7 +82,7 @@ extension VTableModel {
 }
 
 // MARK:- Fonts
-extension VTableModel {
+extension VSectionListModel {
     /// Sub-model containing font properties
     public struct Fonts {
         /// Header font
@@ -101,7 +101,7 @@ extension VTableModel {
 }
 
 // MARK:- Misc
-extension VTableModel {
+extension VSectionListModel {
     /// Sub-model containing misc properties
     public struct Misc {
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
@@ -113,13 +113,13 @@ extension VTableModel {
 }
 
 // MARK:- References
-extension VTableModel {
+extension VSectionListModel {
     /// Reference to `VListModel`
     public static let listReference: VListModel = .init()
 }
 
 // MARK:- Sub-Models
-extension VTableModel {
+extension VSectionListModel {
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         

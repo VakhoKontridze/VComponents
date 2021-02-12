@@ -68,7 +68,7 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 **Inputs.** VTextField
 
-**Lists & Containers.** VSheet, VSection, VTable, VAccordion
+**Lists & Containers.** VSheet, VList, VSectionList, VAccordion
 
 **Navigation.** VTabNavigationView, VNavigationView
 

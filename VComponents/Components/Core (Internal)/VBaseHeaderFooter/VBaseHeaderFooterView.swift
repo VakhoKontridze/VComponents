@@ -68,6 +68,6 @@ extension VBaseHeaderFooter {
 // MARK:- Preview
 struct VBaseHeaderFooter_Previews: PreviewProvider {
     static var previews: some View {
-        VTable_Previews.previews
+        VSectionList_Previews.previews
     }
 }
