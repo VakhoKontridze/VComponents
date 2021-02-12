@@ -118,7 +118,7 @@ private extension VBaseListLayoutType {
     }
 }
 
-// Copied and modified from VSection's preview
+// Copied and modified from VList's preview
 struct VBaseListDemoViewDataSource {
     private init() {}
     

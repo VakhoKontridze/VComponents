@@ -7,9 +7,6 @@
 
 import Foundation
 
-@available(*, deprecated, renamed: "VLazyScrollViewType")
-public typealias VLazyListType = VLazyScrollViewType
-
 // MARK:- V Lazy Scroll View Type
 /// Enum of types, such as `vertical` or `horizontal`
 public enum VLazyScrollViewType {

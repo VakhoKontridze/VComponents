@@ -1,5 +1,5 @@
 //
-//  VSectionDemoView.swift
+//  VListDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -8,17 +8,17 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Section Demo View
-struct VSectionDemoView: View {
+// MARK:- V List Demo View
+struct VListDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Section"
+    static let navBarTitle: String = "List"
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 3
 }
 
 // MARK:- Body
-extension VSectionDemoView {
+extension VListDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(
@@ -31,7 +31,7 @@ extension VSectionDemoView {
     }
     
     private func component() -> some View {
-        VSection(
+        VList(
             layout: layoutType.sectionlayoutType,
             data: VBaseListDemoViewDataSource.rows(count: rowCount),
             rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
@@ -55,7 +55,7 @@ extension VSectionDemoView {
 
 // MARK:- Helpers
 private extension BaseListLayoutTypeHelper {
-    var sectionlayoutType: VSectionLayoutType {
+    var sectionlayoutType: VListLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible
@@ -65,8 +65,8 @@ private extension BaseListLayoutTypeHelper {
 }
 
 // MARK:- Preview
-struct VSectionDemoView_Previews: PreviewProvider {
+struct VListDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VSectionDemoView()
+        VListDemoView()
     }
 }

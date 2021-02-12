@@ -1,5 +1,5 @@
 //
-//  VSection.swift
+//  VList.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Section
+// MARK:- V List
 /// Container component that draws a background, and computes views on demad from an underlying collection of identified data
 ///
 /// Model and layout can be passed as parameters
@@ -23,15 +23,17 @@ import SwiftUI
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
+/// Unlike `VBaseList`, `VList` has spacing between rows and scrolling indicaator
+///
 /// # Usage Example #
 ///
 /// ```
-/// struct SectionRow: Identifiable {
+/// struct ListRow: Identifiable {
 ///     let id: UUID = .init()
 ///     let title: String
 /// }
 ///
-/// @State var data: [SectionRow] = [
+/// @State var data: [ListRow] = [
 ///     .init(title: "Red"),
 ///     .init(title: "Green"),
 ///     .init(title: "Blue")
@@ -41,7 +43,7 @@ import SwiftUI
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VSection(data: data, rowContent: { row in
+///         VList(data: data, rowContent: { row in
 ///             Text(row.title)
 ///                 .frame(maxWidth: .infinity, alignment: .leading)
 ///         })
@@ -50,15 +52,15 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VSection<Data, ID, RowContent>: View
+public struct VList<Data, ID, RowContent>: View
     where
         Data: RandomAccessCollection,
         ID: Hashable,
         RowContent: View
     {
     // MARK: Properties
-    private let model: VSectionModel
-    private let layoutType: VSectionLayoutType
+    private let model: VListModel
+    private let layoutType: VListLayoutType
     
     private let data: Data
     private let id: KeyPath<Data.Element, ID>
@@ -67,8 +69,8 @@ public struct VSection<Data, ID, RowContent>: View
     // MARK: Initializers: View Builder
     /// Initializes component with data, id, and row content
     public init(
-        model: VSectionModel = .init(),
-        layout layoutType: VSectionLayoutType = .default,
+        model: VListModel = .init(),
+        layout layoutType: VListLayoutType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -83,8 +85,8 @@ public struct VSection<Data, ID, RowContent>: View
     // MARK: Initializers: Identified View Builder
     /// Initializes component with data and row content
     public init(
-        model: VSectionModel = .init(),
-        layout layoutType: VSectionLayoutType = .default,
+        model: VListModel = .init(),
+        layout layoutType: VListLayoutType = .default,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -103,7 +105,7 @@ public struct VSection<Data, ID, RowContent>: View
 }
 
 // MARK:- Body
-extension VSection {
+extension VList {
     public var body: some View {
         VSheet(model: model.sheetSubModel, content: { contentView })
     }
@@ -122,13 +124,13 @@ extension VSection {
 }
 
 // MARK:- Preview
-struct VSection_Previews: PreviewProvider {
+struct VList_Previews: PreviewProvider {
     static var previews: some View {
         ZStack(alignment: .top, content: {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
             
-            VSection(data: VBaseList_Previews.rows, rowContent: { row in
+            VList(data: VBaseList_Previews.rows, rowContent: { row in
                 VBaseList_Previews.rowContent(title: row.title, color: row.color)
             })
                 .padding(20)

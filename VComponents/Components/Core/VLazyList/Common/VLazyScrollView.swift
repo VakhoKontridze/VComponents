@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-@available(*, deprecated, renamed: "VLazyScrollView")
-public typealias VLazyList = VLazyScrollView
-
 // MARK:- V Lazy Scroll View
 /// Core component that is used throughout the framework as a lazy structure that either hosts content, or computes views on demad from an underlying collection of identified data
 ///

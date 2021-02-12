@@ -34,7 +34,7 @@ extension VAccordionModel {
     /// Sub-model containing layout properties
     public struct Layout {
         /// Accordion corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = sectionReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = listReference.layout.cornerRadius
         
         /// Chevron button dimension. Default to `32`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
@@ -48,7 +48,7 @@ extension VAccordionModel {
         var hasHeaderDivider: Bool { headerDividerHeight > 0 }
         
         /// Row divider height. Defaults to `1`.
-        public var dividerHeight: CGFloat = sectionReference.layout.dividerHeight
+        public var dividerHeight: CGFloat = listReference.layout.dividerHeight
         
         /// Header margins. Defaults to `10` leading, `10` trailing, `5` top, `5` bottom when collapsed, and `5` bottom when expanded.
         public var headerMargins: ExpandableMargins = .init(
@@ -76,7 +76,7 @@ extension VAccordionModel {
         )
         
         /// Row spacing. Defaults to `18`.
-        public var rowSpacing: CGFloat = sectionReference.layout.rowSpacing
+        public var rowSpacing: CGFloat = listReference.layout.rowSpacing
         
         /// Initializes sub-model with default values
         public init() {}
@@ -120,7 +120,7 @@ extension VAccordionModel {
     /// Sub-model containing color properties
     public struct Colors {
         /// Background color
-        public var background: Color = sectionReference.colors.background
+        public var background: Color = listReference.colors.background
         
         /// Header state opacities
         public var header: StateOpacities = .init(
@@ -142,7 +142,7 @@ extension VAccordionModel {
         public var chevronButtonIcon: StateColorsAndOpacities = chevronButtonReference.colors.content
         
         /// Row divider color
-        public var divider: Color = sectionReference.colors.divider
+        public var divider: Color = listReference.colors.divider
         
         /// Initializes sub-model with default values
         public init() {}
@@ -206,8 +206,8 @@ extension VAccordionModel {
     /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to `VSectionModel`
-    public static let sectionReference: VSectionModel = .init()
+    /// Reference to `VListModel`
+    public static let listReference: VListModel = .init()
     
     /// Reference to `VChevronButtonModel`
     public static let chevronButtonReference: VChevronButtonModel = .init()
