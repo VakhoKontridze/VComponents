@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-@available(*, deprecated, renamed: "VLazyScrollViewModelVertical")
-public typealias VLazyListModelVertical = VLazyScrollViewModelVertical
-
 // MARK:- V Lazy Scroll View Model Vertical
 /// Model that describes UI
 public struct VLazyScrollViewModelVertical {

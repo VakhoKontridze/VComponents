@@ -23,7 +23,7 @@ struct HomeView: View {
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
         .init(id: 4, title: "Inputs", rows: [.textField]),
-        .init(id: 5, title: "Containers", rows: [.sheet, .section, .table, .accordion]),
+        .init(id: 5, title: "Containers", rows: [.sheet, .list, .table, .accordion]),
         .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
         .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
         .init(id: 8, title: "Messages", rows: [.toast]),
@@ -37,7 +37,7 @@ struct HomeView: View {
         case segmentedPicker, menuPicker, wheelPicker
         case stepper, slider,  rangeSlider
         case textField
-        case sheet, section, table, accordion
+        case sheet, list, table, accordion
         case tabNavigationView, navigationView
         case modal, halfModal, sideBar, dialog, menu, actionSheet
         case toast
@@ -70,7 +70,7 @@ struct HomeView: View {
             case .textField: return VTextFieldDemoView.navBarTitle
                 
             case .sheet: return VSheetDemoView.navBarTitle
-            case .section: return VSectionDemoView.navBarTitle
+            case .list: return VListDemoView.navBarTitle
             case .table: return VTableDemoView.navBarTitle
             case .accordion: return VAccordionDemoView.navBarTitle
 
@@ -126,7 +126,7 @@ struct HomeView: View {
 
             case .sheet: VSheetDemoView()
             case .table: VTableDemoView()
-            case .section: VSectionDemoView()
+            case .list: VListDemoView()
             case .accordion: VAccordionDemoView()
 
             case .tabNavigationView: VTabNavigationViewDemoView()

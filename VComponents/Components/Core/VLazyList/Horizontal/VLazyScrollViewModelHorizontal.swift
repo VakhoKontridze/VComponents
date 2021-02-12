@@ -7,9 +7,6 @@
 
 import SwiftUI
 
-@available(*, deprecated, renamed: "VLazyScrollViewModelHorizontal")
-public typealias VLazyListModelHorizontal = VLazyScrollViewModelHorizontal
-
 // MARK:- V Lazy Scroll View Model Horizontal
 /// Model that describes UI
 public struct VLazyScrollViewModelHorizontal {

@@ -1,5 +1,5 @@
 //
-//  VSectionModel.swift
+//  VListModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK:- V Section Model
+// MARK:- V List Model
 /// Model that describes UI
-public struct VSectionModel {
+public struct VListModel {
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -24,10 +24,10 @@ public struct VSectionModel {
 }
 
 // MARK:- Layout
-extension VSectionModel {
+extension VListModel {
     /// Sub-model containing layout properties
     public struct Layout {
-        /// Section corner radius. Defaults to `15`.
+        /// List corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         
         /// Content margin. Defaults to `15`.
@@ -45,7 +45,7 @@ extension VSectionModel {
 }
 
 // MARK:- Colors
-extension VSectionModel {
+extension VListModel {
     /// Sub-model containing color properties
     public struct Colors {
         /// Row divider color
@@ -60,7 +60,7 @@ extension VSectionModel {
 }
 
 // MARK:- Misc
-extension VSectionModel {
+extension VListModel {
     /// Sub-model containing misc properties
     public struct Misc {
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
@@ -72,7 +72,7 @@ extension VSectionModel {
 }
 
 // MARK:- References
-extension VSectionModel {
+extension VListModel {
     /// Reference to `VBaseListModel`
     public static let baseListReference: VBaseListModel = .init()
     
@@ -81,7 +81,7 @@ extension VSectionModel {
 }
 
 // MARK:- Sub-Models
-extension VSectionModel {
+extension VListModel {
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         

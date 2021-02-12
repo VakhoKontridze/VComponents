@@ -31,16 +31,16 @@ extension VTableModel {
     /// Sub-model containing layout properties
     public struct Layout {
         /// Table corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = sectionReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = listReference.layout.cornerRadius
         
         /// Content margin. Defaults to `15`.
-        public var contentMargin: CGFloat = sectionReference.layout.contentMargin
+        public var contentMargin: CGFloat = listReference.layout.contentMargin
         
         /// Spacing between sections. Defaults to `20`.
         public var sectionSpacing: CGFloat = 20
         
         /// Spacing between rows. Defaults to `18`.
-        public var rowSpacing: CGFloat = sectionReference.layout.rowSpacing
+        public var rowSpacing: CGFloat = listReference.layout.rowSpacing
         
         /// Header bottom margin. Defaults to `10`.
         public var headerMarginBottom: CGFloat = 10
@@ -49,7 +49,7 @@ extension VTableModel {
         public var footerMarginTop: CGFloat = 10
         
         /// Row divider height. Defaults to `1`.
-        public var dividerHeight: CGFloat = sectionReference.layout.dividerHeight
+        public var dividerHeight: CGFloat = listReference.layout.dividerHeight
         
         /// Initializes sub-model with default values
         public init() {}
@@ -61,10 +61,10 @@ extension VTableModel {
     /// Sub-model containing color properties
     public struct Colors {
         /// Row divider color
-        public var divider: Color = sectionReference.colors.divider
+        public var divider: Color = listReference.colors.divider
         
         /// Background color
-        public var background: Color = sectionReference.colors.background
+        public var background: Color = listReference.colors.background
         
         /// Text header color
         ///
@@ -114,8 +114,8 @@ extension VTableModel {
 
 // MARK:- References
 extension VTableModel {
-    /// Reference to `VSectionModel`
-    public static let sectionReference: VSectionModel = .init()
+    /// Reference to `VListModel`
+    public static let listReference: VListModel = .init()
 }
 
 // MARK:- Sub-Models
