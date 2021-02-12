@@ -15,6 +15,7 @@ struct HomeView: View {
 
     private let sections: [DemoSection<HomeRow>] = [
         .init(id: 0, title: "Buttons", rows: [
+            .baseButton,
             .primaryButton, .secondaryButton, .squareButton, .plainButton,
             .chevronButton, .closeButton,
             .navigationLink, .link
@@ -22,30 +23,31 @@ struct HomeView: View {
         .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
-        .init(id: 4, title: "Inputs", rows: [.textField]),
-        .init(id: 5, title: "Containers", rows: [.sheet, .list, .table, .accordion]),
+        .init(id: 4, title: "Inputs", rows: [.baseTextField, .textField]),
+        .init(id: 5, title: "Lists", rows: [.baseList, .list, .sectionList, .accordion]),
         .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
         .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
         .init(id: 8, title: "Messages", rows: [.toast]),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
-        .init(id: 10, title: "Core", rows: [.text, .baseButton, .baseTextField, .lazyScrollView, .baseList, .baseView])
+        .init(id: 10, title: "Misc", rows: [.text, .sheet, .lazyScrollView, .baseView])
     ]
 
     private enum HomeRow: Int, DemoableRow {
-        case primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink, link
+        case baseButton, primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink, link
         case toggle, checkBox, radioButton
         case segmentedPicker, menuPicker, wheelPicker
         case stepper, slider,  rangeSlider
-        case textField
-        case sheet, list, table, accordion
+        case baseTextField, textField
+        case baseList, list, sectionList, accordion
         case tabNavigationView, navigationView
         case modal, halfModal, sideBar, dialog, menu, actionSheet
         case toast
         case spinner, progressBar, pageIndicator
-        case text, baseButton, baseTextField, lazyScrollView, baseList, baseView
+        case text, sheet, lazyScrollView, baseView
 
         var title: String {
             switch self {
+            case .baseButton: return VBaseButtonDemoView.navBarTitle
             case .primaryButton: return VPrimaryButtonDemoView.navBarTitle
             case .secondaryButton: return VSecondaryButtonDemoView.navBarTitle
             case .squareButton: return VSquareButtonDemoView.navBarTitle
@@ -67,11 +69,12 @@ struct HomeView: View {
             case .slider: return VSliderDemoView.navBarTitle
             case .rangeSlider: return VRangeSliderDemoView.navBarTitle
 
+            case .baseTextField: return VBaseTextFieldDemoView.navBarTitle
             case .textField: return VTextFieldDemoView.navBarTitle
                 
-            case .sheet: return VSheetDemoView.navBarTitle
+            case .baseList: return VBaseListDemoView.navBarTitle
             case .list: return VListDemoView.navBarTitle
-            case .table: return VSectionListDemoView.navBarTitle
+            case .sectionList: return VSectionListDemoView.navBarTitle
             case .accordion: return VAccordionDemoView.navBarTitle
 
             case .tabNavigationView: return VTabNavigationViewDemoView.navBarTitle
@@ -91,16 +94,15 @@ struct HomeView: View {
             case .pageIndicator: return VPageIndicatorDemoView.navBarTitle
 
             case .text: return VTextDemoView.navBarTitle
-            case .baseButton: return VBaseButtonDemoView.navBarTitle
-            case .baseTextField: return VBaseTextFieldDemoView.navBarTitle
+            case .sheet: return VSheetDemoView.navBarTitle
             case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
-            case .baseList: return VBaseListDemoView.navBarTitle
             case .baseView: return VBaseViewDemoView.navBarTitle
             }
         }
 
         @ViewBuilder var body: some View {
             switch self {
+            case .baseButton: VBaseButtonDemoView()
             case .primaryButton: VPrimaryButtonDemoView()
             case .secondaryButton: VSecondaryButtonDemoView()
             case .squareButton: VSquareButtonDemoView()
@@ -122,11 +124,12 @@ struct HomeView: View {
             case .slider: VSliderDemoView()
             case .rangeSlider: VRangeSliderDemoView()
                 
+            case .baseTextField: VBaseTextFieldDemoView()
             case .textField: VTextFieldDemoView()
 
-            case .sheet: VSheetDemoView()
-            case .table: VSectionListDemoView()
+            case .baseList: VBaseListDemoView()
             case .list: VListDemoView()
+            case .sectionList: VSectionListDemoView()
             case .accordion: VAccordionDemoView()
 
             case .tabNavigationView: VTabNavigationViewDemoView()
@@ -146,10 +149,8 @@ struct HomeView: View {
             case .pageIndicator: VPageIndicatorDemoView()
 
             case .text: VTextDemoView()
-            case .baseButton: VBaseButtonDemoView()
-            case .baseTextField: VBaseTextFieldDemoView()
+            case .sheet: VSheetDemoView()
             case .lazyScrollView: VLazyScrollViewDemoView()
-            case .baseList: VBaseListDemoView()
             case .baseView: VBaseViewDemoView()
             }
         }
