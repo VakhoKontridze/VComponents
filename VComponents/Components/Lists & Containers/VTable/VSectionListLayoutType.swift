@@ -1,5 +1,5 @@
 //
-//  VTableLayoutType.swift
+//  VSectionListLayoutType.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/11/21.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Table Layout Type
+// MARK:- V Section List Layout Type
 /// Enum that describes layout, such as fixed or flexible
 ///
 /// There are three posible layouts:
@@ -20,4 +20,4 @@ import Foundation
 ///
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
-public typealias VTableLayoutType = VBaseListLayoutType
+public typealias VSectionListLayoutType = VBaseListLayoutType

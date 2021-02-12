@@ -1,5 +1,5 @@
 //
-//  VTable.swift
+//  VSectionList.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Table
+// MARK:- V Section List
 /// Sectioned container component that draws a background, and computes views on demad from an underlying collection of identified data
 ///
 /// Model, layout, and header, and footer can be passed as parameters
@@ -23,23 +23,23 @@ import SwiftUI
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
-/// Unlike `VBaseList`, `VTable` has spacing between rows and scrolling indicaator
+/// Unlike `VBaseList`, `VSectionList` has spacing between rows and scrolling indicaator
 ///
 /// # Usage Example #
 ///
 /// ```
-/// struct TableSection: Identifiable, VTableSection {
+/// struct Section: Identifiable, VSectionListSection {
 ///     let id: UUID = .init()
 ///     let title: String
 ///     let rows: [TableRow]
 /// }
 ///
-/// struct TableRow: VTableRow {
+/// struct Row: VSectionListRow {
 ///     let id: UUID = .init()
 ///     let title: String
 /// }
 ///
-/// @State var sections: [TableSection] = [
+/// @State var sections: [Section] = [
 ///     .init(title: "First", rows: [
 ///         .init(title: "Red"),
 ///         .init(title: "Green"),
@@ -56,7 +56,7 @@ import SwiftUI
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VTable(
+///         VSectionList(
 ///             sections: sections,
 ///             headerTitle: { $0.title },
 ///             footerTitle: { $0.title },
@@ -70,18 +70,18 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: View
+public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowContent>: View
     where
-        Section: VTableSection,
-        Row == Section.VTableRow,
+        Section: VSectionListSection,
+        Row == Section.VSectionListRow,
         HeaderContent: View,
         FooterContent: View,
         RowContent: View
 {
     // MARK: Properties
-    private let model: VTableModel
+    private let model: VSectionListModel
     
-    private let layoutType: VTableLayoutType
+    private let layoutType: VSectionListLayoutType
     
     private let sections: [Section]
     
@@ -93,8 +93,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Initializers: Header and Footer
     /// Initializes component with sections, header, footer, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         headerContent: @escaping (Section) -> HeaderContent,
         footerContent: @escaping (Section) -> FooterContent,
@@ -110,8 +110,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     /// Initializes component with sections, header title, footer, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         headerTitle: @escaping (Section) -> String,
         footerContent: @escaping (Section) -> FooterContent,
@@ -138,8 +138,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     /// Initializes component with sections, header, footer title, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         headerContent: @escaping (Section) -> HeaderContent,
         footerTitle: @escaping (Section) -> String,
@@ -166,8 +166,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     /// Initializes component with sections, header title, footer title, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         headerTitle: @escaping (Section) -> String,
         footerTitle: @escaping (Section) -> String,
@@ -204,8 +204,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Initializers: Header
     /// Initializes component with sections, header, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         headerContent: @escaping (Section) -> HeaderContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -222,8 +222,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     /// Initializes component with sections, header title, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         headerTitle: @escaping (Section) -> String,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -251,8 +251,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Initializers: Footer
     /// Initializes component with sections, footer, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         footerContent: @escaping (Section) -> FooterContent,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -269,8 +269,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     
     /// Initializes component with sections, footer title, and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         footerTitle: @escaping (Section) -> String,
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
@@ -298,8 +298,8 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
     // MARK: Initializers: _
     /// Initializes component with sections and row content
     public init(
-        model: VTableModel = .init(),
-        layout layoutType: VTableLayoutType = .default,
+        model: VSectionListModel = .init(),
+        layout layoutType: VSectionListLayoutType = .default,
         sections: [Section],
         @ViewBuilder rowContent: @escaping (Row) -> RowContent
     )
@@ -317,7 +317,7 @@ public struct VTable<Section, Row, HeaderContent, FooterContent, RowContent>: Vi
 }
 
 // MARK:- Body
-extension VTable {
+extension VSectionList {
     public var body: some View {
         VSheet(model: model.sheetSubModel, content: {
             Group(content: {
@@ -369,15 +369,15 @@ extension VTable {
 }
 
 // MARK:- Helpers
-private extension VTable {
+private extension VSectionList {
     func showSectionSpacing(for i: Int) -> Bool {
         i <= sections.count-2
     }
 }
 
 // MARK:- Preview
-struct VTable_Previews: PreviewProvider {
-    private struct Section: VTableSection {
+struct VSectionList_Previews: PreviewProvider {
+    private struct Section: VSectionListSection {
         let id: Int
         let title: String
         let rows: [Row]
@@ -385,7 +385,7 @@ struct VTable_Previews: PreviewProvider {
         static let count: Int = 2
     }
 
-    private struct Row: VTableRow {
+    private struct Row: VSectionListRow {
         let id: Int
         let color: Color
         let title: String
@@ -421,7 +421,7 @@ struct VTable_Previews: PreviewProvider {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
 
-            VTable(
+            VSectionList(
                 sections: sections,
                 headerTitle: { $0.title },
                 footerTitle: { $0.title },

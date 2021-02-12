@@ -1,5 +1,5 @@
 //
-//  VTableDemoView.swift
+//  VSectionListDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -8,10 +8,10 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Table Demo View
-struct VTableDemoView: View {
+// MARK:- V Section List Demo View
+struct VSectionListDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Table"
+    static let navBarTitle: String = "Section List"
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var hasHeaders: Bool = true
@@ -21,7 +21,7 @@ struct VTableDemoView: View {
 }
 
 // MARK:- Body
-extension VTableDemoView {
+extension VSectionListDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(
@@ -37,35 +37,35 @@ extension VTableDemoView {
         Group(content: {
             switch (hasHeaders, hasFooters) {
             case (false, false):
-                VTable(
+                VSectionList(
                     layout: layoutType.tablelayoutType,
-                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
-                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    sections: VSectionListDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    rowContent: { VSectionListDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (false, true):
-                VTable(
+                VSectionList(
                     layout: layoutType.tablelayoutType,
-                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    sections: VSectionListDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
                     footerTitle: { "Footer \($0.title)" },
-                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    rowContent: { VSectionListDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (true, false):
-                VTable(
+                VSectionList(
                     layout: layoutType.tablelayoutType,
-                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    sections: VSectionListDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
                     headerTitle: { "Header \($0.title)" },
-                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    rowContent: { VSectionListDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
                 
             case (true, true):
-                VTable(
+                VSectionList(
                     layout: layoutType.tablelayoutType,
-                    sections: VTableDemoViewDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
+                    sections: VSectionListDataSource.sections(rowCount: rowCount, sectionCount: sectionCount),
                     headerTitle: { "Header \($0.title)" },
                     footerTitle: { "Footer \($0.title)" },
-                    rowContent: { VTableDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                    rowContent: { VSectionListDataSource.rowContent(title: $0.title, color: $0.color) }
                 )
             }
         })
@@ -100,7 +100,7 @@ extension VTableDemoView {
 
 // MARK:- Helpers
 private extension BaseListLayoutTypeHelper {
-    var tablelayoutType: VTableLayoutType {
+    var tablelayoutType: VSectionListLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible
@@ -109,17 +109,17 @@ private extension BaseListLayoutTypeHelper {
     }
 }
 
-// Copied and modified from VTable's preview
-private struct VTableDemoViewDataSource {
+// Copied and modified from VSectionList's preview
+private struct VSectionListDataSource {
     private init() {}
     
-    struct Section: VTableSection {
+    struct Section: VSectionListSection {
         let id: Int
         let title: String
         let rows: [Row]
     }
 
-    struct Row: VTableRow {
+    struct Row: VSectionListRow {
         let id: Int
         let color: Color
         let title: String
@@ -168,8 +168,8 @@ private struct VTableDemoViewDataSource {
 }
 
 // MARK:- Preview
-struct VTableDemoView_Previews: PreviewProvider {
+struct VSectionListDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VTableDemoView()
+        VSectionListDemoView()
     }
 }

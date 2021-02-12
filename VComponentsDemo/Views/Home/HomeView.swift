@@ -71,7 +71,7 @@ struct HomeView: View {
                 
             case .sheet: return VSheetDemoView.navBarTitle
             case .list: return VListDemoView.navBarTitle
-            case .table: return VTableDemoView.navBarTitle
+            case .table: return VSectionListDemoView.navBarTitle
             case .accordion: return VAccordionDemoView.navBarTitle
 
             case .tabNavigationView: return VTabNavigationViewDemoView.navBarTitle
@@ -125,7 +125,7 @@ struct HomeView: View {
             case .textField: VTextFieldDemoView()
 
             case .sheet: VSheetDemoView()
-            case .table: VTableDemoView()
+            case .table: VSectionListDemoView()
             case .list: VListDemoView()
             case .accordion: VAccordionDemoView()
 

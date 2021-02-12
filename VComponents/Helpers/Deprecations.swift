@@ -17,6 +17,22 @@ public typealias VSectionLayoutType = VListLayoutType
 @available(*, deprecated, renamed: "VListModel")
 public typealias VSectionModel = VListModel
 
+// MARK:- V Section List
+@available(*, deprecated, renamed: "VSectionList")
+public typealias VTable = VSectionList
+
+@available(*, deprecated, renamed: "VSectionListLayoutType")
+public typealias VTableLayoutType = VSectionListLayoutType
+
+@available(*, deprecated, renamed: "VSectionListModel")
+public typealias VTableModel = VSectionListModel
+
+@available(*, deprecated, renamed: "VSectionListSection")
+public typealias VTableSection = VSectionListSection
+
+@available(*, deprecated, renamed: "VSectionListRow")
+public typealias VTableRow = VSectionListRow
+
 // MARK:- V Lazy Scroll View
 @available(*, deprecated, renamed: "VLazyScrollView")
 public typealias VLazyList = VLazyScrollView
