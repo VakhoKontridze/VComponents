@@ -58,7 +58,7 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 ## Components
 
-**Buttons.** VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VChevronButton, VCloseButton, VNavigationLink, VLink
+**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VChevronButton, VCloseButton, VNavigationLink, VLink
 
 **State Pickers.** VToggle, VCheckBox, VRadioButton
 
@@ -66,9 +66,9 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 **Value Pickers.** VStepper, VSlider, VRangeSlider
 
-**Inputs.** VTextField
+**Inputs.** VBaseTextField, VTextField
 
-**Lists & Containers.** VSheet, VList, VSectionList, VAccordion
+**Lists** VBaseList, VList, VSectionList, VAccordion
 
 **Navigation.** VTabNavigationView, VNavigationView
 
@@ -78,7 +78,7 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 **Indicators.** VSpinner, VProgressBar, VPageIndicator
 
-**Core.** VText, VBaseButton, VBaseTextField, VLazyScrollView, VBaseList, VBaseView
+**Misc.** VText, VSheet, VLazyScrollView, VBaseView
 
 ## Guidelines
 

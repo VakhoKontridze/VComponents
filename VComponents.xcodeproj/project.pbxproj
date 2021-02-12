@@ -571,12 +571,12 @@
 			path = VHalfModal;
 			sourceTree = "<group>";
 		};
-		7A0CF35225BEDD28009FE576 /* Core (Internal) */ = {
+		7A0CF35225BEDD28009FE576 /* Core */ = {
 			isa = PBXGroup;
 			children = (
 				7A0CF35A25BEDD52009FE576 /* VBaseHeaderFooter */,
 			);
-			path = "Core (Internal)";
+			path = Core;
 			sourceTree = "<group>";
 		};
 		7A0CF35A25BEDD52009FE576 /* VBaseHeaderFooter */ = {
@@ -907,30 +907,26 @@
 			path = VMenuPicker;
 			sourceTree = "<group>";
 		};
-		7A6217E52593D8C900515688 /* Core */ = {
+		7A6217E52593D8C900515688 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
 				7A3B87EE25AD842900295A87 /* VText */,
-				7A4C42532591EFBE000207DD /* VBaseButton */,
-				7A767CE025B700360008D2E9 /* VBaseTextField */,
-				7AC5060D25911B6000226656 /* VLazyList */,
-				7A59576C25AB502300B5B6E7 /* VBaseList */,
+				7A59958C25924F360087902B /* VSheet */,
+				7AC5060D25911B6000226656 /* VLazyScrollView */,
 				7A4C42F2259228D6000207DD /* VBaseView */,
 			);
-			path = Core;
+			path = Misc;
 			sourceTree = "<group>";
 		};
-		7A6217E72593D8D900515688 /* Core */ = {
+		7A6217E72593D8D900515688 /* Misc */ = {
 			isa = PBXGroup;
 			children = (
 				7A3B880125ADAD2500295A87 /* VTextDemoView.swift */,
-				7ABEAA6D2593493900A90B56 /* VBaseButtonDemoView.swift */,
-				7ADCCC7F25B724AB00E99E1B /* VBaseTextFieldDemoView.swift */,
+				7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */,
 				7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */,
-				7A3B880725ADB4A700295A87 /* VBaseListDemoView.swift */,
 				7ABEAA75259357A200A90B56 /* VBaseViewDemoView.swift */,
 			);
-			path = Core;
+			path = Misc;
 			sourceTree = "<group>";
 		};
 		7A621826259492F200515688 /* Common */ = {
@@ -1181,6 +1177,7 @@
 		7A8A9737258DDEDF00309886 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				7ABEAA6D2593493900A90B56 /* VBaseButtonDemoView.swift */,
 				7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */,
 				7A4D0C4B2594C91400108575 /* VSecondaryButtonDemoView.swift */,
 				7A48FDDD258DE58800AA4D4D /* VSquareButtonDemoView.swift */,
@@ -1206,6 +1203,7 @@
 		7AA763D625B738D30088FC69 /* Inputs */ = {
 			isa = PBXGroup;
 			children = (
+				7A767CE025B700360008D2E9 /* VBaseTextField */,
 				7AA763D725B738DF0088FC69 /* VTextField */,
 			);
 			path = Inputs;
@@ -1227,6 +1225,7 @@
 		7AA9F41E2590B08C0060F210 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				7A4C42532591EFBE000207DD /* VBaseButton */,
 				7AA9F41F2590B09D0060F210 /* VPrimaryButton */,
 				7A4D0C2C2594C05B00108575 /* VSecondaryButton */,
 				7AF4C8CF2590BA3A00275C76 /* VSquareButton */,
@@ -1291,6 +1290,7 @@
 		7AB41B6125B81D8700F83987 /* Inputs */ = {
 			isa = PBXGroup;
 			children = (
+				7ADCCC7F25B724AB00E99E1B /* VBaseTextFieldDemoView.swift */,
 				7AB41B6225B81D8D00F83987 /* VTextFieldDemoView.swift */,
 			);
 			path = Inputs;
@@ -1322,13 +1322,13 @@
 				7A3B87FB25AD8A1F00295A87 /* Item Pickers */,
 				7A3B87FA25AD8A1400295A87 /* Value Pickers */,
 				7AA763D625B738D30088FC69 /* Inputs */,
-				7AC5060C25911B5900226656 /* Lists & Containers */,
+				7AC5060C25911B5900226656 /* Lists */,
 				7ABEAA452593400200A90B56 /* Navigation */,
 				7A2D6F34259751B0005513A7 /* Modals */,
 				7A036B9725CFE28800773302 /* Messages */,
 				7A3B87FD25AD8A6100295A87 /* Indicators */,
-				7A6217E52593D8C900515688 /* Core */,
-				7A0CF35225BEDD28009FE576 /* Core (Internal) */,
+				7A6217E52593D8C900515688 /* Misc */,
+				7A0CF35225BEDD28009FE576 /* Core */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1341,25 +1341,25 @@
 				7A3B87F425AD898700295A87 /* Item Pickers */,
 				7A3B87F325AD897900295A87 /* Value Pickers */,
 				7AB41B6125B81D8700F83987 /* Inputs */,
-				7ABEAA4C2593421500A90B56 /* Lists & Containers */,
+				7ABEAA4C2593421500A90B56 /* Lists */,
 				7ABEA9DF25932A6700A90B56 /* Navigation */,
 				7A3B87F625AD89B400295A87 /* Modals */,
 				7A036BBC25D05CD700773302 /* Messages */,
 				7A3B87F725AD89DE00295A87 /* Indicators */,
-				7A6217E72593D8D900515688 /* Core */,
+				7A6217E72593D8D900515688 /* Misc */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
 		};
-		7ABEAA4C2593421500A90B56 /* Lists & Containers */ = {
+		7ABEAA4C2593421500A90B56 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */,
+				7A3B880725ADB4A700295A87 /* VBaseListDemoView.swift */,
 				7AC670F925AB84AC00D7CA8E /* VListDemoView.swift */,
 				7AC670F625AB7DCC00D7CA8E /* VSectionListDemoView.swift */,
 				7ACC3EE125ACC6F100EAD184 /* VAccordionDemoView.swift */,
 			);
-			path = "Lists & Containers";
+			path = Lists;
 			sourceTree = "<group>";
 		};
 		7AC4E03225AE063F00CE2816 /* VRangeSlider */ = {
@@ -1372,25 +1372,25 @@
 			path = VRangeSlider;
 			sourceTree = "<group>";
 		};
-		7AC5060C25911B5900226656 /* Lists & Containers */ = {
+		7AC5060C25911B5900226656 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				7A59958C25924F360087902B /* VSheet */,
+				7A59576C25AB502300B5B6E7 /* VBaseList */,
 				7A59577525AB546000B5B6E7 /* VSection */,
 				7A59577D25AB5B6000B5B6E7 /* VTable */,
 				7ACC3EC425AC919D00EAD184 /* VAccordion */,
 			);
-			path = "Lists & Containers";
+			path = Lists;
 			sourceTree = "<group>";
 		};
-		7AC5060D25911B6000226656 /* VLazyList */ = {
+		7AC5060D25911B6000226656 /* VLazyScrollView */ = {
 			isa = PBXGroup;
 			children = (
 				7A621826259492F200515688 /* Common */,
 				7A62182B259493CE00515688 /* Vertical */,
 				7A62182E2594942C00515688 /* Horizontal */,
 			);
-			path = VLazyList;
+			path = VLazyScrollView;
 			sourceTree = "<group>";
 		};
 		7AC65FE625C341C0001E96AE /* VMenu */ = {
