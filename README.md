@@ -48,7 +48,7 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode 
 
 ![ManualInstallation2](./img/ManualInstallation2.jpg)
 
-5. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the VComponents.xcframework to “Embed & Sign”.
+5. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the `VComponents.xcframework` to “Embed & Sign”.
 
 ![ManualInstallation3](./img/ManualInstallation3.jpg)
 

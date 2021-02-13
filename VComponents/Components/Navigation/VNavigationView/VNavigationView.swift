@@ -15,7 +15,7 @@ import SwiftUI
 /// `VNavigationView` and `VNavigationLink` can cause unintended effect in your navigation hierarchy if used alongside with `SwiftUI`'s native `NavigationView` and `NavigationLink`.
 /// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.
 ///
-/// Use this method to set root view on navigation stack. It acts as `SwiftUI`'s version of settings `UINavigationController` root.
+/// Use this method to set root view on navigation stack. It acts as `SwiftUI`'s version of setting `UINavigationController` root.
 ///
 /// ```
 /// extension SceneDelegate {
