@@ -172,6 +172,38 @@ var body: some View {
 }
 ```
 
+### State
+
+States in components are represented as enums. State can be passed as parameter to initializer, must most default to `enabled`.
+
+Some components contain a special state `disabled`, which unlike `SwiftUI`'s `.disabled` modifier, renders correct colors in component.
+
+Some state enum can also contain additional states, such as `focused` for `VBaseTextField` and `VTextField`.
+
+**Not Preferred**:
+
+```swift
+var body: some View {
+    VSecondaryButton(
+        action: doSomething,
+        title: "Press"
+    )
+        .disabled(true)
+}
+```
+
+**Preferred**:
+
+```swift
+var body: some View {
+    VSecondaryButton(
+        state: .disabled,
+        action: doSomething,
+        title: "Press"
+    )
+}
+```
+
 ### Animations
 
 VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom model.
