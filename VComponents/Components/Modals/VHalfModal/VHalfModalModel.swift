@@ -99,9 +99,27 @@ extension VHalfModalModel {
         /// Distance to drag modal downwards to initiate dismiss. Default to `100`.
         public var translationBelowMinHeightToDismiss: CGFloat = 100
         
-        static let navigationViewCloseButtonMarginTop: CGFloat = (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
+        /// Navigation bar close button top margin. Defaults to `30`.
+        ///
+        /// If you decide to remove resize indicator or changing vertical margins, it's essential to change this property.
+        public static let navBarCloseButtonMarginTop: CGFloat =
+            Self().resizeIndicatorMargins.top +
+            Self().resizeIndicatorSize.height +
+            Self().headerDividerMargins.top +
+            //Self().headerDividerHeight +
+            Self().headerDividerMargins.bottom +
+            (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
         
-        static let navigationViewHalfModalCloseButtonMarginTrailing: CGFloat = VCloseButtonModel.Layout().dimension + Self().headerSpacing
+        /// Navigation bar close button trailing margin. Defaults to `15`.
+        public static let navBarCloseButtonMarginTrailing: CGFloat =
+            VBaseViewModel.Layout().navBarMarginHorizontal
+        
+        /// Navigation bar trailing item margin trailing. Defaults to `42`.
+        ///
+        /// Since close button is overlayed on modal, it's essential to create spacing between close button and `VBaseView`'s trailing items
+        public static let navBarTrailingItemMarginTrailing: CGFloat =
+            VCloseButtonModel.Layout().dimension +
+            Self().headerSpacing
         
         /// Initializes sub-model with default values
         public init() {}

@@ -38,14 +38,20 @@ import SwiftUI
 /// VNavigationView can also be passes as contant, to create a modal stack of navigatable views.
 ///
 /// Here, it's important that header content is not passed. Header content should be created view VBaseView title.
+///
 /// Also, leading and trailing buttons shouldn't be used as dismiss types, as it's better to pass `navigationViewCloseButton` to model.
+///
+/// If you decide to change spacings in the model, consider checking out static properties—`navBarCloseButtonMarginTop`, `navBarCloseButtonMarginTrailing`, and `navBarTrailingItemMarginTrailing`—in `VHalfModalModel.Layout`.
 ///
 /// ```
 /// var model: VHalfModalModel {
 ///     var model: VHalfModalModel = .init()
 ///
-///     model.misc.dismissType.remove(.leading)
-///     model.misc.dismissType.remove(.trailing)
+///     model.layout.contentMargins.leading = VBaseViewModel.Layout().navBarMarginHorizontal
+///     model.layout.contentMargins.trailing = VBaseViewModel.Layout().navBarMarginHorizontal
+///
+///     model.misc.dismissType.remove(.leadingButton)
+///     model.misc.dismissType.remove(.trailingButton)
 ///     model.misc.dismissType.insert(.navigationViewCloseButton)
 ///
 ///     return model
@@ -80,12 +86,6 @@ import SwiftUI
 ///                 .padding(.bottom, 200)
 ///         })
 ///             .animation(nil) // Disables root animation
-///     })
-/// }
-///
-/// var destination: some View {
-///     VBaseView(title: "Details", content: {
-///         ColorBook.accent
 ///     })
 /// }
 /// ```

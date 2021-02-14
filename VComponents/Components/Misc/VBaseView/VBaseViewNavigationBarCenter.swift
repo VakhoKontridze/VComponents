@@ -111,7 +111,7 @@ extension VBaseViewNavigationBarCenter {
                 .readSize(onChange: { trailingWidth = $0.width })
         })
             .lineLimit(1)
-            .padding(.trailing, vHalfModalNavigationViewCloseButton ? VHalfModalModel.Layout.navigationViewHalfModalCloseButtonMarginTrailing : 0)
+            .padding(.trailing, vHalfModalNavigationViewCloseButton ? VHalfModalModel.Layout.navBarTrailingItemMarginTrailing : 0)
             .frame(width: model.layout.width)
     }
 }
