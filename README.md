@@ -175,7 +175,9 @@ var body: some View {
 ### States
 
 States in components are represented as enums. They can be passed as a parameter to initializers, must most default to `enabled`.
+
 Some enums contain a special state `disabled`, which unlike `SwiftUI`'s `.disabled()` modifier, renders correct colors in component based on a model object.
+
 Some enums also contain additional cases, such as `focused` for `VBaseTextField` and `VTextField`.
 
 **Not Preferred**:
