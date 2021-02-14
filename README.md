@@ -182,8 +182,6 @@ Some components in this framework contain multiple subviews, which require a mor
 For instance, we can customize `VSecondaryButton`'s foreground, background, and border colors separately for `enabled`, `pressed`, and `disabled` states.
 Also keep in mind, that using a native modifier instead of state property may cause unintended side-effects.
 
-Some enums contain additional cases, such as `focused` for `VBaseTextField` and `VTextField`.
-
 **Not Preferred**:
 
 ```swift
@@ -207,6 +205,8 @@ var body: some View {
     )
 }
 ```
+
+Some enums can also contain additional cases, such as `focused` for `VBaseTextField` and `VTextField`.
 
 ### Animations
 
