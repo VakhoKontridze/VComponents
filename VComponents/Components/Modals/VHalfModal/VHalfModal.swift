@@ -88,6 +88,12 @@ import SwiftUI
 ///             .animation(nil) // Disables root animation
 ///     })
 /// }
+///
+/// var destination: some View {
+///     VBaseView(title: "Details", content: {
+///         ColorBook.accent
+///     })
+/// }
 /// ```
 ///
 public struct VHalfModal<Content, HeaderContent>
