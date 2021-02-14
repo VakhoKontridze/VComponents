@@ -178,9 +178,9 @@ States in components are represented as enums. They can be passed as a parameter
 
 Some enums contain case `disabled`, which is preffered over  `SwiftUI`'s `.disabled()` modifier.
 `.disabled()` modifier changes color and opacity of a native `Button`, but this behavior is limited in nature.
-Some of components in this framework contain multiple subviews, which require a more in-depth customization.
+Some components in this framework contain multiple subviews, which require a more in-depth customization.
 For instance, we can customize `VSecondaryButton`'s foreground, background, and border colors separately for `enabled`, `pressed`, and `disabled` states.
-Also, using a native modifier may cause unintended side-effects.
+Also keep in mind, that using a native modifier instead of state property may cause unintended side-effects.
 
 Some enums contain additional cases, such as `focused` for `VBaseTextField` and `VTextField`.
 
