@@ -86,7 +86,7 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 Components are not meant to be customized like you would a native SwiftUI component.
 
-Instead, model can be passed as parameter via initializers. This parameter has default value, and is not required every time you create a view.
+Instead, model can be passed as parameter to initializers. This parameter has default value, and is not required every time you create a view.
 
 Models are structs with default values. They break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
@@ -172,13 +172,11 @@ var body: some View {
 }
 ```
 
-### State
+### States
 
-States in components are represented as enums. State can be passed as parameter to initializer, must most default to `enabled`.
-
-Some components contain a special state `disabled`, which unlike `SwiftUI`'s `.disabled` modifier, renders correct colors in component.
-
-Some state enum can also contain additional states, such as `focused` for `VBaseTextField` and `VTextField`.
+States in components are represented as enums. They can be passed as a parameter to initializers, must most default to `enabled`.
+Some enums contain a special state `disabled`, which unlike `SwiftUI`'s `.disabled()` modifier, renders correct colors in component based on a model object.
+Some enums also contain additional cases, such as `focused` for `VBaseTextField` and `VTextField`.
 
 **Not Preferred**:
 
