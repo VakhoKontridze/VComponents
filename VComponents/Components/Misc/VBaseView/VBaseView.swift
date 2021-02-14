@@ -73,8 +73,8 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         self.navBarTrailingItemContent = navBarTrailingItemContent
         self.content = content
     }
-    /// Initializes component with title, leading and trailing items, and content
     
+    /// Initializes component with title, leading and trailing items, and content
     public init(
         model: VBaseViewModel = .init(),
         title navBarTitleContent: String,

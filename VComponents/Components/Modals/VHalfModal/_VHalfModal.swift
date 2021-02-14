@@ -172,9 +172,8 @@ extension _VHalfModal {
         if model.misc.dismissType.contains(.navigationViewCloseButton) {
             VCloseButton(model: model.closeButtonSubModel, action: animateOut)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .padding(.trailing, model.layout.headerMargins.trailing)
-                .padding(.top, model.layout.headerMargins.top)
-                .padding(.top, VHalfModalModel.Layout.navigationViewCloseButtonMarginTop)
+                .padding(.trailing, VHalfModalModel.Layout.navBarCloseButtonMarginTrailing)
+                .padding(.top, VHalfModalModel.Layout.navBarCloseButtonMarginTop)
         }
     }
 }

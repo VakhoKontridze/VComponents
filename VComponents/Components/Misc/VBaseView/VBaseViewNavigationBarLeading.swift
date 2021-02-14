@@ -90,7 +90,7 @@ extension VBaseViewNavigationBarLeading {
             if let trailingItemContent = trailingItemContent { trailingItemContent().layoutPriority(1) }
         })
             .lineLimit(1)
-            .padding(.trailing, vHalfModalNavigationViewCloseButton ? VHalfModalModel.Layout.navigationViewHalfModalCloseButtonMarginTrailing : 0)
+            .padding(.trailing, vHalfModalNavigationViewCloseButton ? VHalfModalModel.Layout.navBarTrailingItemMarginTrailing : 0)
             .frame(width: model.layout.width)
     }
 }

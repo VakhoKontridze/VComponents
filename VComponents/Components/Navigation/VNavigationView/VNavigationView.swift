@@ -64,6 +64,8 @@ import SwiftUI
 /// }
 /// ```
 ///
+/// If you decide to use `VNavigationView` inside `VHalfModal`, consider checking out static properties—`navBarCloseButtonMarginTop`, `navBarCloseButtonMarginTrailing`, and `navBarTrailingItemMarginTrailing`—in `VHalfModalModel.Layout`.
+///
 public struct VNavigationView<Content>: View where Content: View {
     // MARK: Properties
     private let model: VNavigationViewModel
