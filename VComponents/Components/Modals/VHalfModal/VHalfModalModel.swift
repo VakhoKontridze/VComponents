@@ -105,9 +105,11 @@ extension VHalfModalModel {
         public static let navBarCloseButtonMarginTop: CGFloat =
             Self().resizeIndicatorMargins.top +
             Self().resizeIndicatorSize.height +
-            Self().headerDividerMargins.top +
+            Self().resizeIndicatorMargins.bottom +
+            //Self().headerDividerMargins.top +
             //Self().headerDividerHeight +
-            Self().headerDividerMargins.bottom +
+            //Self().headerDividerMargins.bottom +
+            Self().contentMargins.top +
             (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
         
         /// Navigation bar close button trailing margin. Defaults to `15`.
