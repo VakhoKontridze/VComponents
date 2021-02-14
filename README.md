@@ -7,7 +7,7 @@
 - [Installation](#installation)
 - [Components](#components)
 - [Guidelines](#guidelines)
-- [Release History](#release-history)
+- [Versioning](#versioning)
 - [Contact](#contact)
 
 ## Description
@@ -224,29 +224,7 @@ Thought process behind his design choice was to centralize animations to model.
 
 Components also prevent themselves from modifying external state with an animation.
 
-## Release History
-
-**1.2.0 (2021 Feb 12)**
-
-`VSection` has been renamed to `VList`
-
-`VTable` has been renamed to `VSectionList`
-
-`VLazyList` has been renamed to `VLazyScrollView`
-
-**1.1.1 (2021 Feb 10)**
-
-Bug fixes and improvements
-
-**1.1.0 (2021 Feb 9)**
-
-Added documentation on public declarations, methods, and properties
-
-**1.0.0 (2021 Feb 7)**
-
-Initial release
-
-#### Versioning ####
+## Versioning
 
 *Major*. Major changes, such as new component or type
 
