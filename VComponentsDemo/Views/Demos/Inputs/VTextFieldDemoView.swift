@@ -24,6 +24,7 @@ struct VTextFieldDemoView: View {
     @State private var textAlignment: VTextFieldModel.Layout.TextAlignment = .default
     @State private var spellCheck: UITextSpellCheckingType = VTextFieldModel.Misc().spellCheck
     @State private var autoCorrect: UITextAutocorrectionType = VTextFieldModel.Misc().autoCorrect
+    @State private var autoCapitalizaton: UITextAutocapitalizationType = VTextFieldModel.Misc().autoCapitalization
     @State private var hasClearButton: Bool = VTextFieldModel.Misc().clearButton
     @State private var hasCancelButton: Bool = VTextFieldModel.Misc().cancelButton != nil
     
@@ -36,6 +37,7 @@ struct VTextFieldDemoView: View {
         
         model.misc.spellCheck = spellCheck
         model.misc.autoCorrect = autoCorrect
+        model.misc.autoCapitalization = autoCapitalizaton
         
         model.misc.clearButton = hasClearButton
         model.misc.cancelButton = hasCancelButton ? "Cancel" : nil
@@ -122,6 +124,8 @@ extension VTextFieldDemoView {
 
                 VSegmentedPicker(selection: $autoCorrect, headerTitle: "Autocorrect")
 
+                VSegmentedPicker(selection: $autoCapitalizaton, headerTitle: "Autocapitalizaiton")
+                
                 VSegmentedPicker(selection: $textAlignment, headerTitle: "Alignment")
             })
         })

@@ -95,6 +95,10 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
         textField.autocorrectionType = model.misc.autoCorrect
         if autocorrectChanged { textField.reloadInputViews() }
         
+        let autocapitalizationChanged: Bool = textField.autocapitalizationType != model.misc.autoCapitalization
+        textField.autocapitalizationType = model.misc.autoCapitalization
+        if autocapitalizationChanged { textField.reloadInputViews() }
+        
         textField.textAlignment = model.layout.textAlignment.nsTextAlignment
         
         textField.placeholder = placeholder

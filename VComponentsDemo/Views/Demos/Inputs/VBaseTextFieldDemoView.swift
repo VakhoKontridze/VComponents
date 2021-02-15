@@ -20,7 +20,8 @@ struct VBaseTextFieldDemoView: View {
     @State private var textAlignment: VBaseTextFieldModel.Layout.TextAlignment = .default
     @State private var spellCheck: UITextSpellCheckingType = VBaseTextFieldModel.Misc().spellCheck
     @State private var autoCorrect: UITextAutocorrectionType = VBaseTextFieldModel.Misc().autoCorrect
-    
+    @State private var autoCapitalizaton: UITextAutocapitalizationType = VTextFieldModel.Misc().autoCapitalization
+
     private var model: VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         
@@ -29,6 +30,7 @@ struct VBaseTextFieldDemoView: View {
         model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
         model.misc.spellCheck = spellCheck
         model.misc.autoCorrect = autoCorrect
+        model.misc.autoCapitalization = autoCapitalizaton
         
         return model
     }
@@ -81,10 +83,12 @@ extension VBaseTextFieldDemoView {
                     title: "Content Type",
                     description: "Default set to \"nil\". Other types are not shown in the demo, as there are many."
                 )
-                
+                                
                 VSegmentedPicker(selection: $spellCheck, headerTitle: "Spell Check")
 
                 VSegmentedPicker(selection: $autoCorrect, headerTitle: "Autocorrect")
+                
+                VSegmentedPicker(selection: $autoCapitalizaton, headerTitle: "Autocapitalizaton")
 
                 VSegmentedPicker(selection: $textAlignment, headerTitle: "Alignment")
             })
@@ -137,6 +141,20 @@ extension UITextAutocorrectionType: VPickableTitledItem {
         case .no: return "No"
         case .yes: return "Yes"
         case .default: return "Auto"
+        @unknown default: return ""
+        }
+    }
+}
+
+extension UITextAutocapitalizationType: VPickableTitledItem {
+    public static var allCases: [Self] = [.none, .sentences, .words, .allCharacters]
+    
+    public var pickerTitle: String {
+        switch self {
+        case .none: return "None"
+        case .sentences: return "Sentences"
+        case .words: return "Words"
+        case .allCharacters: return "Caps Lock"
         @unknown default: return ""
         }
     }
