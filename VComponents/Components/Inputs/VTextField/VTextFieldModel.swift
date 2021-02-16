@@ -268,6 +268,9 @@ extension VTextFieldModel {
         /// Auto correct type. Defaults to `default`.
         public var autoCorrect: UITextAutocorrectionType = baseTextFieldReference.misc.autoCorrect
         
+        /// Auto capitalization type. Defaults to `sentence`.
+        public var autoCapitalization: UITextAutocapitalizationType = baseTextFieldReference.misc.autoCapitalization
+        
         /// Default button type. Defaults to `default`.
         public var returnButton: UIReturnKeyType = baseTextFieldReference.misc.returnButton
         
@@ -324,7 +327,8 @@ extension VTextFieldModel {
         
         model.misc.spellCheck = misc.spellCheck
         model.misc.autoCorrect = misc.autoCorrect
-        
+        model.misc.autoCapitalization = misc.autoCapitalization
+
         model.misc.returnButton = misc.returnButton
         
         return model
