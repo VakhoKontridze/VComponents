@@ -119,7 +119,7 @@ extension VBaseTextFieldModel {
         /// Auto correct type. Defaults to `default`.
         public var autoCorrect: UITextAutocorrectionType = .default
         
-        /// Auto capitalization type. Defaults to `sentences`.
+        /// Auto-capitalization type. Defaults to `sentences`.
         public var autoCapitalization: UITextAutocapitalizationType = .sentences
         
         /// Default button type. Defaults to `default`.
