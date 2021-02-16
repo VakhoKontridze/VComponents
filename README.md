@@ -68,7 +68,7 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 **Inputs.** VBaseTextField, VTextField
 
-**Lists** VBaseList, VList, VSectionList, VAccordion
+**Lists.** VBaseList, VList, VSectionList, VAccordion
 
 **Navigation.** VTabNavigationView, VNavigationView
 
@@ -97,7 +97,7 @@ For instance, changing foreground color of `VSecondaryButton` can be achieved by
 ```swift
 var body: some View {
     VSecondaryButton(
-        action: { print("Pressed") },
+        action: doSomething,
         title: "Lorem ipsum"
     )
         .foregroundColor(.black)
@@ -122,7 +122,7 @@ let model: VSecondaryButtonModel = {
 var body: some View {
     VSecondaryButton(
         model: model,
-        action: { print("Pressed") },
+        action: doSomething,
         title: "Lorem ipsum"
     )
 }
@@ -134,7 +134,7 @@ Alternately, you can create static instances of models for reusability.
 var body: some View {
     VSecondaryButton(
         model: .myCustomModel,
-        action: { print("Pressed") },
+        action: doSomething,
         title: "Lorem ipsum"
     )
 }
