@@ -88,7 +88,7 @@ extension VBaseTextFieldDemoView {
 
                 VSegmentedPicker(selection: $autoCorrect, headerTitle: "Autocorrect")
                 
-                VSegmentedPicker(selection: $autoCapitalizaton, headerTitle: "Autocapitalizaton")
+                VSegmentedPicker(selection: $autoCapitalizaton, headerTitle: "Auto-Capitalizaton")
 
                 VSegmentedPicker(selection: $textAlignment, headerTitle: "Alignment")
             })
@@ -128,7 +128,7 @@ extension UITextSpellCheckingType: VPickableTitledItem {
         case .no: return "No"
         case .yes: return "Yes"
         case .default: return "Auto"
-        @unknown default: return ""
+        @unknown default: fatalError()
         }
     }
 }
@@ -141,7 +141,7 @@ extension UITextAutocorrectionType: VPickableTitledItem {
         case .no: return "No"
         case .yes: return "Yes"
         case .default: return "Auto"
-        @unknown default: return ""
+        @unknown default: fatalError()
         }
     }
 }
@@ -154,8 +154,8 @@ extension UITextAutocapitalizationType: VPickableTitledItem {
         case .none: return "None"
         case .sentences: return "Sentences"
         case .words: return "Words"
-        case .allCharacters: return "Caps Lock"
-        @unknown default: return ""
+        case .allCharacters: return "All Chars"
+        @unknown default: fatalError()
         }
     }
 }

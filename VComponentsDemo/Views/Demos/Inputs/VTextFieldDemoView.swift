@@ -124,7 +124,7 @@ extension VTextFieldDemoView {
 
                 VSegmentedPicker(selection: $autoCorrect, headerTitle: "Autocorrect")
 
-                VSegmentedPicker(selection: $autoCapitalizaton, headerTitle: "Autocapitalizaiton")
+                VSegmentedPicker(selection: $autoCapitalizaton, headerTitle: "Auto-Capitalizaiton")
                 
                 VSegmentedPicker(selection: $textAlignment, headerTitle: "Alignment")
             })
