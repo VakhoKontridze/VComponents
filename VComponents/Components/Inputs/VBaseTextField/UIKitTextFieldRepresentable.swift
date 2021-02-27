@@ -139,7 +139,7 @@ extension UIKitTextFieldRepresentable {
     }
     
     func commitText(_ text: String?) {
-        DispatchQueue.main.async(execute: { self.text = text ?? "" })
+        self.text = text ?? ""
     }
     
     func setBindedFocus(to state: Bool) {

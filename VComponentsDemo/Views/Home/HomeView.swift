@@ -155,16 +155,23 @@ struct HomeView: View {
             }
         }
     }
+    
+    @State private var text: String = ""
 }
 
 // MARK:- Body
 extension HomeView {
     var body: some View {
-        VNavigationView(content: {
-            VBaseView(title: Self.navBarTitle, content: {
-                DemoListView(type: .accordion, sections: sections)
-            })
-        })
+        VTextField(
+            text: $text,
+            onChange: { print(text) }
+        )
+        
+//        VNavigationView(content: {
+//            VBaseView(title: Self.navBarTitle, content: {
+//                DemoListView(type: .accordion, sections: sections)
+//            })
+//        })
     }
 }
 

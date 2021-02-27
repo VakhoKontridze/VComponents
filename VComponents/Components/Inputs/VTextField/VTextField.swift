@@ -75,7 +75,7 @@ import SwiftUI
 ///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///         text: $text,
 ///         onBegin: { print("Editing Began") },
-///         onChange: {  print("Editing Changed") },
+///         onChange: { print("Editing Changed") },
 ///         onEnd: { print("Editing Ended") },
 ///         onReturn: .returnAndCustom({ print("Returned and ...") }),
 ///         onClear: .clearAndCustom({ print("Cleared and ...") }),
