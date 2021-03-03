@@ -174,7 +174,7 @@ var body: some View {
 
 ### States
 
-States in components are represented as enums. They can be passed as a parameter to initializers, must most default to `enabled`.
+States in components are represented as enums. They can be passed as a parameter to initializers, but most default to `enabled`.
 
 Some enums contain case `disabled`, which is preffered over  `SwiftUI`'s `.disabled()` modifier.
 `.disabled()` modifier changes color and opacity of a native `Button`, but this behavior is limited in nature.
