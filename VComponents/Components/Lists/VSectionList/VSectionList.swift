@@ -13,7 +13,7 @@ import SwiftUI
 /// Model, layout, and header, and footer can be passed as parameters
 ///
 /// There are three posible layouts:
-/// 
+///
 /// 1. `Fixed`.
 /// Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
 ///
@@ -28,13 +28,13 @@ import SwiftUI
 /// # Usage Example #
 ///
 /// ```
-/// struct Section: Identifiable, VSectionListSection {
+/// struct Section: Identifiable, VSectionListSectionViewModelable {
 ///     let id: UUID = .init()
 ///     let title: String
 ///     let rows: [TableRow]
 /// }
 ///
-/// struct Row: VSectionListRow {
+/// struct Row: VSectionListRowViewModelable {
 ///     let id: UUID = .init()
 ///     let title: String
 /// }
@@ -72,7 +72,7 @@ import SwiftUI
 ///
 public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowContent>: View
     where
-        Section: VSectionListSection,
+        Section: VSectionListSectionViewModelable,
         Row == Section.VSectionListRow,
         HeaderContent: View,
         FooterContent: View,
@@ -377,7 +377,7 @@ private extension VSectionList {
 
 // MARK:- Preview
 struct VSectionList_Previews: PreviewProvider {
-    private struct Section: VSectionListSection {
+    private struct Section: VSectionListSectionViewModelable {
         let id: Int
         let title: String
         let rows: [Row]
@@ -385,7 +385,7 @@ struct VSectionList_Previews: PreviewProvider {
         static let count: Int = 2
     }
 
-    private struct Row: VSectionListRow {
+    private struct Row: VSectionListRowViewModelable {
         let id: Int
         let color: Color
         let title: String

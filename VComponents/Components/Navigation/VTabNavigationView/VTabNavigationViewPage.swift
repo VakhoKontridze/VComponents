@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Tab Navigation View Page
-/// Data source that creates `TabNavigationView` item and content
+/// ViewModel that creates `TabNavigationView` item and content
 public struct VTabNavigationViewPage<Content> where Content: View {
     // MARK: Properties
     /// Tab page

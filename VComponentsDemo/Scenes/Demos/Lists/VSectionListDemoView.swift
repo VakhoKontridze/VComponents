@@ -113,13 +113,13 @@ private extension BaseListLayoutTypeHelper {
 private struct VSectionListDataSource {
     private init() {}
     
-    struct Section: VSectionListSection {
+    struct Section: VSectionListSectionViewModelable {
         let id: Int
         let title: String
         let rows: [Row]
     }
 
-    struct Row: VSectionListRow {
+    struct Row: VSectionListRowViewModelable {
         let id: Int
         let color: Color
         let title: String
