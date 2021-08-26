@@ -1,5 +1,5 @@
 //
-//  VNavigationLinkViewBuilder.swift
+//  VNavigationLinkExtension.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 8/26/21.
@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK:- Extension
 extension View {
-    /// Allows for navigating without the use of an explicit `VNavigationLink`
+    /// Allows for navigation without an explicit `VNavigationLink`
     ///
     /// # Usage Example #
     /// ```
