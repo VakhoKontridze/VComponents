@@ -28,6 +28,16 @@ public struct LayoutGroupLTTB {
         self.top = top
         self.bottom = bottom
     }
+    
+    /// Instance of group with zero values
+    public static var zero: Self {
+        .init(
+            leading: 0,
+            trailing: 0,
+            top: 0,
+            bottom: 0
+        )
+    }
 }
 
 /// Grop of layout values containing `horizotal` and `vertical` values
@@ -42,6 +52,14 @@ public struct LayoutGroupHV {
     public init(horizontal: CGFloat, vertical: CGFloat) {
         self.horizontal = horizontal
         self.vertical = vertical
+    }
+    
+    /// Instance of group with zero values
+    public static var zero: Self {
+        .init(
+            horizontal: 0,
+            vertical: 0
+        )
     }
 }
 
@@ -58,6 +76,14 @@ public struct LayoutGroupTB {
         self.top = top
         self.bottom = bottom
     }
+    
+    /// Instance of group with zero values
+    public static var zero: Self {
+        .init(
+            top: 0,
+            bottom: 0
+        )
+    }
 }
 
 /// Grop of layout values containing `leading` and `trailing` values
@@ -72,5 +98,13 @@ public struct LayoutGroupLT {
     public init(leading: CGFloat, trailing: CGFloat) {
         self.leading = leading
         self.trailing = trailing
+    }
+    
+    /// Instance of group with zero values
+    public static var zero: Self {
+        .init(
+            leading: 0,
+            trailing: 0
+        )
     }
 }

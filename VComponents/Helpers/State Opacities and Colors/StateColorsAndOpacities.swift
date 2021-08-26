@@ -25,6 +25,15 @@ public struct StateColorsAndOpacitiesEP_D {
         self.disabled = disabled
         self.disabledOpacity = disabledOpacity
     }
+    
+    /// Instance of group with clear and transparent values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            disabled: ColorBook.clear,
+            disabledOpacity: 0
+        )
+    }
 }
 
 extension StateColorsAndOpacitiesEP_D {
@@ -86,6 +95,17 @@ public struct StateColorsAndOpacitiesEPD_PD {
         self.disabled = disabled
         self.pressedOpacity = pressedOpacity
         self.disabledOpacity = disabledOpacity
+    }
+    
+    /// Instance of group with clear and transparent values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            pressed: ColorBook.clear,
+            disabled: ColorBook.clear,
+            pressedOpacity: 0,
+            disabledOpacity: 0
+        )
     }
 }
 
@@ -188,6 +208,23 @@ public struct StateColorsEpFpSpEpD_PD {
         self.disabled = disabled
         self.pressedOpacity = pressedOpacity
         self.disabledOpacity = disabledOpacity
+    }
+    
+    /// Instance of group with clear and transparent values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            enabledPressed: ColorBook.clear,
+            focused: ColorBook.clear,
+            focusedPressed: ColorBook.clear,
+            success: ColorBook.clear,
+            successPressed: ColorBook.clear,
+            error: ColorBook.clear,
+            errorPressed: ColorBook.clear,
+            disabled: ColorBook.clear,
+            pressedOpacity: 0,
+            disabledOpacity: 0
+        )
     }
 }
 

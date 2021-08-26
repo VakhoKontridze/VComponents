@@ -21,6 +21,14 @@ public struct StateColorsED {
         self.enabled = enabled
         self.disabled = disabled
     }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            disabled: ColorBook.clear
+        )
+    }
 }
 
 extension StateColorsED {
@@ -77,6 +85,15 @@ public struct StateColorsEPD {
         self.enabled = enabled
         self.pressed = pressed
         self.disabled = disabled
+    }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            pressed: ColorBook.clear,
+            disabled: ColorBook.clear
+        )
     }
 }
 
@@ -153,6 +170,16 @@ public struct StateColorsEPDL {
         self.disabled = disabled
         self.loading = loading
     }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            pressed: ColorBook.clear,
+            disabled: ColorBook.clear,
+            loading: ColorBook.clear
+        )
+    }
 }
 
 extension StateColorsEPDL {
@@ -183,6 +210,15 @@ public struct StateColorsOOD {
         self.off = off
         self.on = on
         self.disabled = disabled
+    }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(
+            off: ColorBook.clear,
+            on: ColorBook.clear,
+            disabled: ColorBook.clear
+        )
     }
 }
 
@@ -230,6 +266,16 @@ public struct StateColorsOOID {
         self.intermediate = intermediate
         self.disabled = disabled
     }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(
+            off: ColorBook.clear,
+            on: ColorBook.clear,
+            intermediate: ColorBook.clear,
+            disabled: ColorBook.clear
+        )
+    }
 }
 
 extension StateColorsOOID {
@@ -263,6 +309,15 @@ public struct StateColorsEFD {
         self.enabled = enabled
         self.focused = focused
         self.disabled = disabled
+    }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            focused: ColorBook.clear,
+            disabled: ColorBook.clear
+        )
     }
 }
 
@@ -301,6 +356,17 @@ public struct StateColorsEFSED {
         self.success = success
         self.error = error
         self.disabled = disabled
+    }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(
+            enabled: ColorBook.clear,
+            focused: ColorBook.clear,
+            success: ColorBook.clear,
+            error: ColorBook.clear,
+            disabled: ColorBook.clear
+        )
     }
 }
 
@@ -359,6 +425,11 @@ public struct StateColorsEpFpSpEpD {
         self.error = error
         self.errorPressed = errorPressed
         self.disabled = disabled
+    }
+    
+    /// Instance of group with clear values
+    public var clear: Self {
+        .init(enabled: ColorBook.clear, enabledPressed: ColorBook.clear, focused: ColorBook.clear, focusedPressed: ColorBook.clear, success: ColorBook.clear, successPressed: ColorBook.clear, error: ColorBook.clear, errorPressed: ColorBook.clear, disabled: ColorBook.clear)
     }
 }
 

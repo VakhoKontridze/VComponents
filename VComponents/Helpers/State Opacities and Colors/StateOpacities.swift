@@ -17,6 +17,20 @@ public struct StateOpacitiesP {
     public init(pressedOpacity: Double) {
         self.pressedOpacity = pressedOpacity
     }
+    
+    /// Instance of group with transparent values
+    public var transparent: Self {
+        .init(
+            pressedOpacity: 0
+        )
+    }
+    
+    /// Instance of group with solid values
+    public var solid: Self {
+        .init(
+            pressedOpacity: 1
+        )
+    }
 }
 
 // MARK:- Disabled
@@ -28,6 +42,20 @@ public struct StateOpacitiesD {
     /// Initializes group with values
     public init(disabledOpacity: Double) {
         self.disabledOpacity = disabledOpacity
+    }
+    
+    /// Instance of group with transparent values
+    public var transparent: Self {
+        .init(
+            disabledOpacity: 0
+        )
+    }
+    
+    /// Instance of group with solid values
+    public var solid: Self {
+        .init(
+            disabledOpacity: 1
+        )
     }
 }
 
@@ -69,6 +97,22 @@ public struct StateOpacitiesPD {
     public init(pressedOpacity: Double, disabledOpacity: Double) {
         self.pressedOpacity = pressedOpacity
         self.disabledOpacity = disabledOpacity
+    }
+    
+    /// Instance of group with transparent values
+    public var transparent: Self {
+        .init(
+            pressedOpacity: 0,
+            disabledOpacity: 0
+        )
+    }
+    
+    /// Instance of group with solid values
+    public var solid: Self {
+        .init(
+            pressedOpacity: 1,
+            disabledOpacity: 1
+        )
     }
 }
 
