@@ -810,7 +810,7 @@
 			path = VBaseView;
 			sourceTree = "<group>";
 		};
-		7A4D0C1325949FDE00108575 /* Subviews */ = {
+		7A4D0C1325949FDE00108575 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				7A871E7825AC78EE007E27E3 /* DemoListView.swift */,
@@ -821,7 +821,7 @@
 				7A7B7E1D25CD747E00BBCA97 /* StepperSettingView.swift */,
 				7ADCCC7C25B7245300E99E1B /* DemoIconContentView.swift */,
 			);
-			path = Subviews;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		7A4D0C2C2594C05B00108575 /* VSecondaryButton */ = {
@@ -1114,7 +1114,8 @@
 			children = (
 				7A8A9717258DDCC700309886 /* App Info */,
 				7AA9F43A2590B1F50060F210 /* App Control */,
-				7A8A9718258DDCD300309886 /* Views */,
+				7A8A9718258DDCD300309886 /* Scenes */,
+				7A4D0C1325949FDE00108575 /* Views */,
 				7ACC3EBC25AC891300EAD184 /* Models */,
 				7A3C1541258DE65700CE1D96 /* Extensions */,
 				7A8A9716258DDCBF00309886 /* Resources */,
@@ -1147,15 +1148,14 @@
 			name = "App Info";
 			sourceTree = "<group>";
 		};
-		7A8A9718258DDCD300309886 /* Views */ = {
+		7A8A9718258DDCD300309886 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				7A8A9733258DDED200309886 /* Launscreen */,
 				7A8A9734258DDED800309886 /* Home */,
 				7ABEAA4A259341DC00A90B56 /* Demos */,
-				7A4D0C1325949FDE00108575 /* Subviews */,
 			);
-			path = Views;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		7A8A9733258DDED200309886 /* Launscreen */ = {
