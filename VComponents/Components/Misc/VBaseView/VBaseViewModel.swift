@@ -43,6 +43,12 @@ extension VBaseViewModel {
         
         /// Back button icon dimension. Default to `12`.
         public var backButtonIconDimension: CGFloat = VBaseViewModel.chevronButtonModel.layout.iconDimension
+        
+        /// Back button icon x offset. Defaults to `0`.
+        ///
+        /// - Positive values shift icon to the right, while negative, to the left
+        /// - Can be used to shift back button to left, when it's background is set to transparent, similar to native back button in iOS.
+        public var backButtonIconOffsetX: CGFloat = 0
 
         /// Initializes sub-model with default values
         public init() {}
@@ -120,6 +126,7 @@ extension VBaseViewModel {
         model.layout.iconDimension = layout.backButtonIconDimension
         model.layout.hitBox.horizontal = 0
         model.layout.hitBox.vertical = 0
+        model.layout.navigationBarBackButtonOffsetX = layout.backButtonIconOffsetX
         
         model.colors.background = colors.backButtonBackground
         model.colors.content = colors.backButtonIcon

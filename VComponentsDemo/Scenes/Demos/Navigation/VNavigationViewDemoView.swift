@@ -50,7 +50,7 @@ private struct NavigationDemoView1: View {
                         "You are on Home page",
                         "From here you can navigate to Details"
                     ].joined(separator: "\n\n"),
-                    destination: NavigationDemoView3()
+                    destination: NavigationDemoView2()
                 )
             })
         })

@@ -81,6 +81,7 @@ extension VChevronButton {
             .foregroundColor(model.colors.content.for(internalState))
             .opacity(model.colors.content.for(internalState))
             .rotationEffect(.init(degrees: direction.angle))
+            .ifLet(model.layout.navigationBarBackButtonOffsetX, transform: { $0.offset(x: $1, y: 0) })
     }
     
     private var backgroundView: some View {

@@ -36,6 +36,8 @@ extension VChevronButtonModel {
             vertical: 0
         )
         
+        var navigationBarBackButtonOffsetX: CGFloat?
+        
         /// Initializes sub-model with default values
         public init() {}
     }
