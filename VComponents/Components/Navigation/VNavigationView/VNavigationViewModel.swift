@@ -25,7 +25,7 @@ extension VNavigationViewModel {
         public var bar: Color = ColorBook.layer
         
         /// Navigation bar divider color
-        public var divider: Color = ColorBook.clear
+        public var divider: Color = .init(componentAsset: "NavigationView.Divider")
         
         /// Initializes sub-model with default values
         public init() {}

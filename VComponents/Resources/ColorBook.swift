@@ -146,6 +146,10 @@ extension Color {
  190.190.190
  *100.100.100
  
+ NavigationView.Divider
+ 0.0.0 @ 30
+ 1.1.1 @ 15
+
  TextField.Background.error
  250.205.210
  230.60.30
