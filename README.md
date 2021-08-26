@@ -3,10 +3,10 @@
 ## Table of Contents
 
 - [Description](#description)
-- [Demo](#demo)
-- [Installation](#installation)
 - [Components](#components)
 - [Guidelines](#guidelines)
+- [Demo](#demo)
+- [Installation](#installation)
 - [Versioning](#versioning)
 - [Contact](#contact)
 
@@ -15,44 +15,6 @@
 VComponents is a SwiftUI framework that contains 40+ customizable UI components.
 
 Framework supports iOS 14.0 and up.
-
-## Demo
-
-Project contains demo app, that can be run to showcase all components.
-
-![DemoApp](./img/DemoApp.jpg)
-
-## Installation
-
-Framework doesn't support CocoaPods or Carthage.
-
-### Swift Package Manager
-
-Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode and follow the instructions.
-
-![SPM1](./img/SPM1.jpg)
-
-### Manual
-
-1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.0/VComponents.xcframework.zip).
-
-2. Extract the zip.
-
-3. Drag  `VComponents.xcframework` into your project.
-
-![ManualInstallation1](./img/ManualInstallation1.jpg)
-
-4. Select "Copy items if needed" and click Finish.
-
-![ManualInstallation2](./img/ManualInstallation2.jpg)
-
-5. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the `VComponents.xcframework` to “Embed & Sign”.
-
-![ManualInstallation3](./img/ManualInstallation3.jpg)
-
-### Building Your Own Target
-
-Since VComponents is open-source, you can clone the project and build the framework target yourself.
 
 ## Components
 
@@ -257,6 +219,44 @@ Components manage state parameters internally, and animations used to change the
 Thought process behind his design choice was to centralize animations to model.
 
 Components also prevent themselves from modifying external state with an animation.
+
+## Demo
+
+Project contains demo app, that can be run to showcase all components.
+
+![DemoApp](./img/DemoApp.jpg)
+
+## Installation
+
+Framework doesn't support CocoaPods or Carthage.
+
+### Swift Package Manager
+
+Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode and follow the instructions.
+
+![SPM1](./img/SPM1.jpg)
+
+### Manual
+
+1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.0/VComponents.xcframework.zip).
+
+2. Extract the zip.
+
+3. Drag  `VComponents.xcframework` into your project.
+
+![ManualInstallation1](./img/ManualInstallation1.jpg)
+
+4. Select "Copy items if needed" and click Finish.
+
+![ManualInstallation2](./img/ManualInstallation2.jpg)
+
+5. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the `VComponents.xcframework` to “Embed & Sign”.
+
+![ManualInstallation3](./img/ManualInstallation3.jpg)
+
+### Building Your Own Target
+
+Since VComponents is open-source, you can clone the project and build the framework target yourself.
 
 ## Versioning
 
