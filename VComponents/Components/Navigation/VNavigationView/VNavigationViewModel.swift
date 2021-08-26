@@ -22,7 +22,7 @@ extension VNavigationViewModel {
     /// Sub-model containing color properties
     public struct Colors {
         /// Background color
-        public var bar: Color = ColorBook.layer
+        public var bar: Color = ColorBook.canvas
         
         /// Navigation bar divider color
         public var divider: Color = .init(componentAsset: "NavigationView.Divider")
