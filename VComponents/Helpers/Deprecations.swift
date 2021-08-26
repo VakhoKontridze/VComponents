@@ -5,7 +5,16 @@
 //  Created by Vakhtang Kontridze on 2/12/21.
 //
 
-import Foundation
+import SwiftUI
+
+// MARK:- V Navigation View
+extension VNavigationViewModel.Colors {
+    @available(*, deprecated, renamed: "bar")
+    public var background: Color {
+        get { bar }
+        set { bar = newValue }
+    }
+}
 
 // MARK:- V List
 @available(*, deprecated, renamed: "VList")

@@ -22,8 +22,8 @@ struct VNavigationViewAppearance: ViewModifier {
         let appearance: UINavigationBarAppearance = {
             let appearance: UINavigationBarAppearance = .init()
 
-            appearance.backgroundColor = .init(model.colors.background)
-            if model.colors.background == ColorBook.clear { appearance.configureWithTransparentBackground() }
+            appearance.backgroundColor = .init(model.colors.bar)
+            if model.colors.bar == ColorBook.clear { appearance.configureWithTransparentBackground() }
             
             appearance.shadowColor = .init(model.colors.divider)
 
