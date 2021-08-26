@@ -34,7 +34,7 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode 
 
 ### Manual
 
-1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.3.1/VComponents.xcframework.zip).
+1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.0/VComponents.xcframework.zip).
 
 2. Extract the zip.
 
