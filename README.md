@@ -16,8 +16,6 @@ VComponents is a SwiftUI framework that contains 40+ customizable UI components.
 
 Framework supports iOS 14.0 and up.
 
-Project is being developed on macOS 11.0 Big Sur in XCode 12.
-
 ## Demo
 
 Project contains demo app, that can be run to showcase all components.
@@ -262,7 +260,7 @@ Components also prevent themselves from modifying external state with an animati
 
 ## Versioning
 
-*Major*. Major changes, such as new component or type
+*Major*. Major changes, such as new components or types
 
 *Minor*. Minor changes, such as new properties in models
 
