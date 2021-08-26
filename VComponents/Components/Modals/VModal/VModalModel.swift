@@ -118,7 +118,7 @@ extension VModalModel {
         public var closeButtonIcon: StateColorsAndOpacities = closeButtonReference.colors.content
         
         /// Header divider color
-        public var headerDivider: Color = .clear
+        public var headerDivider: Color = ColorBook.clear
         
         /// Blinding color
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")

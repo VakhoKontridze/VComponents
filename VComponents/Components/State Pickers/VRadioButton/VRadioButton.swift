@@ -274,7 +274,7 @@ extension VRadioButton {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: model.layout.contentMarginLeading)
-                .foregroundColor(.clear)
+                .foregroundColor(ColorBook.clear)
         })
     }
     

@@ -25,7 +25,7 @@ extension VNavigationViewModel {
         public var background: Color = ColorBook.canvas
         
         /// Navigation bar divider color
-        public var divider: Color = .clear
+        public var divider: Color = ColorBook.clear
         
         /// Initializes sub-model with default values
         public init() {}

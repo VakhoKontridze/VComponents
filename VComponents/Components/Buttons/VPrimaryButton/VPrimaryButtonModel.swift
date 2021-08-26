@@ -91,10 +91,10 @@ extension VPrimaryButtonModel {
         
         /// Border colors
         public var border: StateColors = .init(
-            enabled: .clear,
-            pressed: .clear,
-            disabled: .clear,
-            loading: .clear
+            enabled: ColorBook.clear,
+            pressed: ColorBook.clear,
+            disabled: ColorBook.clear,
+            loading: ColorBook.clear
         )
         
         /// Loader colors

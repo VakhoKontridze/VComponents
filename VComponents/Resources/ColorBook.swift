@@ -15,6 +15,9 @@ public struct ColorBook {
 
 // MARK:- Colors
 extension ColorBook {
+    /// Clear color
+    public static let clear: Color = .clear
+    
     /// Canvas color that can be used for `VBaseView`
     public static let canvas: Color = .init(componentAsset: "Canvas")
     

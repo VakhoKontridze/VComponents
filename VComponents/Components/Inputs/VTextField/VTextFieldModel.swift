@@ -109,11 +109,11 @@ extension VTextFieldModel {
         
         /// Border colors
         public var border: StateColorsHighlighted = .init(
-            enabled: .clear,
-            focused: .clear,
+            enabled: ColorBook.clear,
+            focused: ColorBook.clear,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: .clear
+            disabled: ColorBook.clear
         )
         
         /// Header colors

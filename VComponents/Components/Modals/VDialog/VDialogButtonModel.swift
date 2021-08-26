@@ -59,9 +59,9 @@ extension VDialogButtonModel {
                 disabled: VDialogButtonModelCustom.primaryButtonReference.colors.background.disabled
             ),
             background: .init(
-                enabled: .clear,
-                pressed: .clear,
-                disabled: .clear
+                enabled: ColorBook.clear,
+                pressed: ColorBook.clear,
+                disabled: ColorBook.clear
             )
         )
     )

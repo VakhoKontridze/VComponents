@@ -129,7 +129,7 @@ extension View {
     func readSize(onChange completion: @escaping (CGSize) -> Void) -> some View {
         background(
             GeometryReader(content: { proxy in
-                Color.clear
+                ColorBook.clear
                     .preference(key: SizePreferenceKey.self, value: proxy.size)
             })
         )

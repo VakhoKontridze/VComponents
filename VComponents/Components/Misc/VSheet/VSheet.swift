@@ -54,7 +54,7 @@ public struct VSheet<Content>: View where Content: View {
         where Content == Color
     {
         self.model = model
-        self.content = { Color.clear }
+        self.content = { ColorBook.clear }
     }
 }
 

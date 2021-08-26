@@ -53,9 +53,9 @@ extension VStepperModel {
         
         /// Plus and minus button background colors
         public var buttonBackground: ButtonStateColors = .init(
-            enabled: .clear,
+            enabled: ColorBook.clear,
             pressed: .init(componentAsset: "VStepper.Button.Background.pressed"),
-            disabled: .clear
+            disabled: ColorBook.clear
         )
         
         /// Plus and minus icon colors and opacities

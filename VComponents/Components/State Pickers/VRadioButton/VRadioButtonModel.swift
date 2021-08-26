@@ -73,9 +73,9 @@ extension VRadioButtonModel {
         
         /// Bullet colors
         public var bullet: StateColors = .init(
-            off: .clear,
+            off: ColorBook.clear,
             on: checkBoxReference.colors.fill.on,
-            disabled: .clear
+            disabled: ColorBook.clear
         )
 
         /// Content opacities

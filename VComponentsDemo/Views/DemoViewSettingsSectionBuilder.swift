@@ -34,7 +34,7 @@ private struct DemoViewSettingsSectionModel {
 }
 
 // MARK:- Demo View Settings Section Builder
-@_functionBuilder struct DemoViewSettingsSectionBuilder {
+@resultBuilder struct DemoViewSettingsSectionBuilder {
     private static let spacing: CGFloat = DemoViewSettingsSectionModel.sectionSpacing
 
     static func buildBlock<C0>(

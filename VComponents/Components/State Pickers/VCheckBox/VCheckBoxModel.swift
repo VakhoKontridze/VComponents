@@ -71,17 +71,17 @@ extension VCheckBoxModel {
         /// Border colors
         public var border: StateColors = .init(
             off: .init(componentAsset: "CheckBox.Border.off"),
-            on: .clear,
-            intermediate: .clear,
+            on: ColorBook.clear,
+            intermediate: ColorBook.clear,
             disabled: .init(componentAsset: "CheckBox.Border.disabled")
         )
         
         /// Checkmark icon colors
         public var icon: StateColors = .init(
-            off: .clear,
+            off: ColorBook.clear,
             on: toggleReference.colors.thumb.off,
             intermediate: toggleReference.colors.thumb.on,
-            disabled: .clear
+            disabled: ColorBook.clear
         )
 
         /// Content opacities

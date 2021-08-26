@@ -152,7 +152,7 @@ extension _VHalfModal {
     
     private var contentView: some View {
         ZStack(content: {
-            Color.clear // Overrides drag on edge of sheet
+            ColorBook.clear // Overrides drag on edge of sheet
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0))
             

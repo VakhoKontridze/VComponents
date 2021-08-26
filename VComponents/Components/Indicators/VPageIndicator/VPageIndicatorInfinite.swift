@@ -60,7 +60,7 @@ extension VPageIndicatorInfinite {
     }
     
     private var frame: some View {
-        Color.clear
+        ColorBook.clear
             .frame(size: .init(width: visibleWidth, height: model.layout.dotDimension))
     }
     
