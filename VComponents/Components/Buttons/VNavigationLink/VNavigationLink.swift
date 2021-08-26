@@ -51,6 +51,40 @@ import SwiftUI
 /// }
 /// ```
 ///
+/// Alternate navigation can be completed using `vNavigationLink` `ViewModifier`:
+///
+/// ```
+/// @State var isActive: Bool = false
+///
+/// var body: some View {
+///     VNavigationView(content: {
+///         VBaseView(title: "Home", content: {
+///             ZStack(content: {
+///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///                 VSheet()
+///
+///                 VPlainButton(
+///                     action: { isActive = true },
+///                     title: "Lorem ipsum"
+///                 )
+///             })
+///                 .vNavigationLink(isActive: $isActive, destination: destination)
+///         })
+///     })
+/// }
+///
+/// var destination: some View {
+///     VBaseView(title: "Destination", content: {
+///         ZStack(content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///             VSheet()
+///         })
+///     })
+/// }
+/// ```
+///
 public struct VNavigationLink<Destination, Content>: View
     where
         Destination: View,
