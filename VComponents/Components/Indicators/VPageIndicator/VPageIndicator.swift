@@ -102,8 +102,8 @@ extension VPageIndicator {
 }
 
 // MARK:- State Sets
-private extension VPageIndicator {
-    func performStateSets() {
+extension VPageIndicator {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             withAnimation(model.animations.transition, {
                 animatableSelectedIndex = selectedIndex

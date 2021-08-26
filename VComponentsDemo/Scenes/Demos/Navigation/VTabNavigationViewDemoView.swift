@@ -45,8 +45,8 @@ private struct VTabNavigationViewDemoViewWalkthroughView: View {
     @State private var selection: Int = 0
 }
 
-private extension VTabNavigationViewDemoViewWalkthroughView {
-    var body: some View {
+extension VTabNavigationViewDemoViewWalkthroughView {
+    fileprivate var body: some View {
         VTabNavigationView(
             selection: $selection,
             pageOne: VTabNavigationViewPage(item: .titledAssetIcon(title: "Artists", name: "Artists"), content: pageOne),

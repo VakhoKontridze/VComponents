@@ -108,8 +108,8 @@ enum BaseListLayoutTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VBaseListLayoutType {
-    var helperType: BaseListLayoutTypeHelper {
+extension VBaseListLayoutType {
+    fileprivate var helperType: BaseListLayoutTypeHelper {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible

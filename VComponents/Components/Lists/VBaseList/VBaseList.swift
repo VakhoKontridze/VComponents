@@ -139,8 +139,8 @@ extension VBaseList {
 }
 
 // MARK:- Helpers
-private extension VBaseList {
-    func showDivider(for i: Int) -> Bool {
+extension VBaseList {
+    private func showDivider(for i: Int) -> Bool {
         model.layout.hasDivider &&
         i <= data.count-2
     }

@@ -113,8 +113,8 @@ private enum VDialogButtonsHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VDialogButtons {
-    var helperType: VDialogButtonsHelper {
+extension VDialogButtons {
+    fileprivate var helperType: VDialogButtonsHelper {
         switch self {
         case .one: return .one
         case .two: return .two

@@ -50,8 +50,8 @@ extension VPageIndicatorDemoView {
 }
 
 // MARK:- Timer
-private extension VPageIndicatorDemoView {
-    func updateValue(_ output: Date) {
+extension VPageIndicatorDemoView {
+    fileprivate func updateValue(_ output: Date) {
         var valueToSet: Int = selectedIndex + 1
         if valueToSet > total-1 { valueToSet = 0 }
         
@@ -90,8 +90,8 @@ private enum VPageIndicatorTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VPageIndicatorType {
-    var helperType: VPageIndicatorTypeHelper {
+extension VPageIndicatorType {
+    fileprivate var helperType: VPageIndicatorTypeHelper {
         switch self {
         case .finite: return .finite
         case .infinite: return .infinite

@@ -95,8 +95,8 @@ private enum VToastTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VToastType {
-    var helperType: VToastTypeHelper {
+extension VToastType {
+    fileprivate var helperType: VToastTypeHelper {
         switch self {
         case .oneLine: return .oneLine
         case .multiLine: return .multiLine

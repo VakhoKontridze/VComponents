@@ -125,8 +125,8 @@ extension VSlider {
 }
 
 // MARK:- State Sets
-private extension VSlider {
-    func performStateSets() {
+extension VSlider {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableValue()
         })
@@ -134,8 +134,8 @@ private extension VSlider {
 }
 
 // MARK:- Drag
-private extension VSlider {
-    func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
+extension VSlider {
+    private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
         let rawValue: Double = {
             let value: Double = .init(drag.location.x)
             let range: Double = max - min
@@ -151,19 +151,19 @@ private extension VSlider {
         action?(true)
     }
     
-    func dragEnded(drag: DragGesture.Value) {
+    private func dragEnded(drag: DragGesture.Value) {
         action?(false)
     }
 }
 
 // MARK:- Actions
-private extension VSlider {
-    func setValue(to value: Double) {
+extension VSlider {
+    private func setValue(to value: Double) {
         withAnimation(model.animations.progress, { animatableValue = value })
         self.value = value
     }
     
-    func setAnimatableValue() {
+    private func setAnimatableValue() {
         if animatableValue == nil || animatableValue != value {
             withAnimation(model.animations.progress, { animatableValue = value })
         }
@@ -171,8 +171,8 @@ private extension VSlider {
 }
 
 // MARK:- Progress
-private extension VSlider {
-    func progressWidth(in proxy: GeometryProxy) -> CGFloat {
+extension VSlider {
+    private func progressWidth(in proxy: GeometryProxy) -> CGFloat {
         let value: CGFloat = .init((animatableValue ?? self.value) - min)
         let range: CGFloat = .init(max - min)
         let width: CGFloat = proxy.size.width
@@ -182,8 +182,8 @@ private extension VSlider {
 }
 
 // MARK:- Thumb Offset
-private extension VSlider {
-    func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
+extension VSlider {
+    private func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
         let progressW: CGFloat = progressWidth(in: proxy)
         let thumbW: CGFloat = model.layout.thumbDimension
         let offset: CGFloat = progressW - thumbW / 2

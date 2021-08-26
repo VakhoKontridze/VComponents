@@ -299,8 +299,8 @@ extension VSegmentedPicker {
 }
 
 // MARK:- State Sets
-private extension VSegmentedPicker {
-    func performStateSets() {
+extension VSegmentedPicker {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableSelectedIndex()
         })
@@ -308,13 +308,13 @@ private extension VSegmentedPicker {
 }
 
 // MARK:- Actions
-private extension VSegmentedPicker {
-    func setSelectedIndex(to index: Int) {
+extension VSegmentedPicker {
+    private func setSelectedIndex(to index: Int) {
         withAnimation(model.animations.selection, { animatableSelectedIndex = index })
         selectedIndex = index
     }
     
-    func setAnimatableSelectedIndex() {
+    private func setAnimatableSelectedIndex() {
         if animatableSelectedIndex == nil || animatableSelectedIndex != selectedIndex {
             withAnimation(model.animations.selection, { animatableSelectedIndex = selectedIndex })
         }
@@ -322,19 +322,19 @@ private extension VSegmentedPicker {
 }
 
 // MARK:- State Indication
-private extension VSegmentedPicker {
-    var indicatorScale: CGFloat {
+extension VSegmentedPicker {
+    private var indicatorScale: CGFloat {
         switch selectedIndex {
         case pressedIndex: return model.layout.indicatorPressedScale
         case _: return 1
         }
     }
     
-    func contentOpacity(for index: Int) -> Double {
+    private func contentOpacity(for index: Int) -> Double {
         model.colors.content.for(rowState(for: index))
     }
     
-    func dividerOpacity(for index: Int) -> Double {
+    private func dividerOpacity(for index: Int) -> Double {
         let isBeforeIndicator: Bool = index < selectedIndex
         
         switch isBeforeIndicator {

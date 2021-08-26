@@ -77,8 +77,8 @@ private enum VSheetRoundedCornersHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VSheetModel.Layout.RoundedCorners {
-    var helperType: VSheetRoundedCornersHelper {
+extension VSheetModel.Layout.RoundedCorners {
+    fileprivate var helperType: VSheetRoundedCornersHelper {
         switch self {
         case .all: return .all
         case .top: return .top

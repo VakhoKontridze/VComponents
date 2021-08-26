@@ -160,12 +160,12 @@ extension _VDialog {
 }
 
 // MARK:- Animations
-private extension _VDialog {
-    func animateIn() {
+extension _VDialog {
+    private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }
     
-    func animateOut(and action: @escaping () -> Void) {
+    private func animateOut(and action: @escaping () -> Void) {
         action()
         withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })

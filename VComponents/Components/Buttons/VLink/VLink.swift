@@ -95,8 +95,8 @@ extension VLink {
 }
 
 // MARK:- Actions
-private extension VLink {
-    func action() {
+extension VLink {
+    private func action() {
         guard let url = url else { return }
         openURL(url)
     }

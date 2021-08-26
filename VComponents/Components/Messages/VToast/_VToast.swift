@@ -72,15 +72,15 @@ extension _VToast {
 }
 
 // MARK:- Offsets
-private extension _VToast {
-    var initialOffset: CGFloat {
+extension _VToast {
+    private var initialOffset: CGFloat {
         switch model.layout.presentationEdge {
         case .top: return -height
         case .bottom: return UIScreen.main.bounds.height
         }
     }
     
-    var presentedOffset: CGFloat {
+    private var presentedOffset: CGFloat {
         switch model.layout.presentationEdge {
         case .top:
             return UIView.topSafeAreaHeight + model.layout.presentationOffsetFromSafeEdge
@@ -92,8 +92,8 @@ private extension _VToast {
 }
 
 // MARK:- Corner Radius
-private extension _VToast {
-    var cornerRadius: CGFloat {
+extension _VToast {
+    private var cornerRadius: CGFloat {
         switch model.layout.cornerRadiusType {
         case .rounded: return height / 2
         case .custom(let value): return value
@@ -102,7 +102,7 @@ private extension _VToast {
 }
 
 // MARK:- Animations
-private extension _VToast {
+extension _VToast {
     func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }

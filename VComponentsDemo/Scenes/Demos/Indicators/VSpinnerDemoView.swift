@@ -49,8 +49,8 @@ private enum VSpinnerTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VSpinnerType {
-    var helpeType: VSpinnerTypeHelper {
+extension VSpinnerType {
+    fileprivate var helpeType: VSpinnerTypeHelper {
         switch self {
         case .continous: return .continous
         case .dashed: return .dashed

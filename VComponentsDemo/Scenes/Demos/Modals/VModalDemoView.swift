@@ -118,8 +118,8 @@ extension VModalDemoView {
 }
 
 // MARK:- Helpers
-private extension VModalModel.Misc.DismissType {
-    var title: String {
+extension VModalModel.Misc.DismissType {
+    fileprivate var title: String {
         switch self {
         case .leadingButton: return "Leading"
         case .trailingButton: return "Trailing"

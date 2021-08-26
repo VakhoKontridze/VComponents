@@ -95,8 +95,8 @@ extension VAccordionState: VPickableTitledItem {
     }
 }
 
-private extension BaseListLayoutTypeHelper {
-    var accordionlayoutType: VAccordionLayoutType {
+extension BaseListLayoutTypeHelper {
+    fileprivate var accordionlayoutType: VAccordionLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible

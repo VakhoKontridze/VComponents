@@ -145,8 +145,8 @@ private enum VModalHeightTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VHalfModalModel.Layout.HeightType {
-    var helperType: VModalHeightTypeHelper {
+extension VHalfModalModel.Layout.HeightType {
+    fileprivate var helperType: VModalHeightTypeHelper {
         switch self {
         case .fixed: return .fixed
         case .dynamic: return .dynamic
@@ -180,8 +180,8 @@ private enum VHalfModalDismissTypeHelper: Int, CaseIterable {
     }
 }
 
-private extension VHalfModalModel.Misc.DismissType {
-    var helperType: VHalfModalDismissTypeHelper {
+extension VHalfModalModel.Misc.DismissType {
+    fileprivate var helperType: VHalfModalDismissTypeHelper {
         switch self {
         case .leadingButton: return .leading
         case .trailingButton: return .trailing

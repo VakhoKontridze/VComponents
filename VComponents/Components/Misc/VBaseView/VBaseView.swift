@@ -267,8 +267,8 @@ extension VBaseView {
 }
 
 // MARK:- Back
-private extension VBaseView {
-    func back() {
+extension VBaseView {
+    private func back() {
         presentationMode.wrappedValue.dismiss()
     }
 }

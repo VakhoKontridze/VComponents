@@ -48,8 +48,8 @@ private struct VLazyScrollViewDemoDetailView: View {
     }
 }
 
-private extension VLazyScrollViewDemoDetailView {
-    var body: some View {
+extension VLazyScrollViewDemoDetailView {
+    fileprivate var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)
         })

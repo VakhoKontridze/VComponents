@@ -90,8 +90,8 @@ extension VChevronButton {
 }
 
 // MARK:- Rotation
-private extension VChevronButtonDirection {
-    var angle: Double {
+extension VChevronButtonDirection {
+    fileprivate var angle: Double {
         switch self {
         case .up: return 0
         case .right: return 90

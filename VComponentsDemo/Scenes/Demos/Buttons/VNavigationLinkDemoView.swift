@@ -97,8 +97,8 @@ private enum VNavigationLinkButtonTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VNavigationLinkPreset {
-    var helperType: VNavigationLinkButtonTypeHelper {
+extension VNavigationLinkPreset {
+    fileprivate var helperType: VNavigationLinkButtonTypeHelper {
         switch self {
         case .primary: return .primary
         case .secondary: return .secondary

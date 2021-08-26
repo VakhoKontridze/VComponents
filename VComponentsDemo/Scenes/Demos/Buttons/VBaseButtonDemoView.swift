@@ -57,13 +57,13 @@ extension VBaseButtonDemoView {
 }
 
 // MARK:- Actions
-private extension VBaseButtonDemoView {
-    func action() {
+extension VBaseButtonDemoView {
+    private func action() {
         clickState = .clicked
         DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: { clickState = .prompt })
     }
     
-    func pressAction(isPressed: Bool) {
+    private func pressAction(isPressed: Bool) {
         switch isPressed {
         case false: pressState = .none
         case true: pressState = .pressed

@@ -68,20 +68,20 @@ extension _VSideBar {
 }
 
 // MARK:- Actions
-private extension _VSideBar {
-    func animateIn() {
+extension _VSideBar {
+    private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }
     
-    func animateOut() {
+    private func animateOut() {
         withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
     }
 }
 
 // MARK:- Gestures
-private extension _VSideBar {
-    func dragChanged(drag: DragGesture.Value) {
+extension _VSideBar {
+    private func dragChanged(drag: DragGesture.Value) {
         let isDraggedLeft: Bool = drag.translation.width <= 0
         guard isDraggedLeft else { return }
         

@@ -78,15 +78,15 @@ extension VPageIndicatorInfinite {
 }
 
 // MARK:- Widths
-private extension VPageIndicatorInfinite {
-    var visibleWidth: CGFloat {
+extension VPageIndicatorInfinite {
+    private var visibleWidth: CGFloat {
         let dots: CGFloat = .init(visible) * model.layout.dotDimension
         let spacings: CGFloat = .init(visible - 1) * model.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
     
-    var totalWidth: CGFloat {
+    private var totalWidth: CGFloat {
         let dots: CGFloat = .init(total) * model.layout.dotDimension
         let spacings: CGFloat = .init(total - 1) * model.layout.spacing
         let total: CGFloat = dots + spacings
@@ -95,8 +95,8 @@ private extension VPageIndicatorInfinite {
 }
 
 // MARK:- Animation Offset
-private extension VPageIndicatorInfinite {
-    var offset: CGFloat {
+extension VPageIndicatorInfinite {
+    private var offset: CGFloat {
         let rawOffset: CGFloat = (totalWidth - visibleWidth) / 2
         
         switch region {
@@ -114,8 +114,8 @@ private extension VPageIndicatorInfinite {
 }
 
 // MARK:- Animation Scale
-private extension VPageIndicatorInfinite {
-    func scale(at index: Int) -> CGFloat {
+extension VPageIndicatorInfinite {
+    private func scale(at index: Int) -> CGFloat {
         switch region {
         case .leftEdge:
             guard
@@ -150,14 +150,14 @@ private extension VPageIndicatorInfinite {
     }
     
     // LEFT
-    func leftEdgeVisibleIndex(at index: Int) -> Int? {
+    private func leftEdgeVisibleIndex(at index: Int) -> Int? {
         switch index {
         case 0..<visible: return index
         default: return nil
         }
     }
     
-    func leftEdgeRightSideIndex(at index: Int) -> Int? {
+    private func leftEdgeRightSideIndex(at index: Int) -> Int? {
         // (5 6) -> (0 1)
         switch index {
         case visible-side..<visible: return side + index - visible
@@ -165,14 +165,14 @@ private extension VPageIndicatorInfinite {
         }
     }
     
-    func leftEdgeRightSideScale(at index: Int) -> CGFloat {
+    private func leftEdgeRightSideScale(at index: Int) -> CGFloat {
         let scaleStep: CGFloat = model.layout.infiniteEdgeDotScale / .init(side)
         let incrementalScale: CGFloat = .init(index + 1) * scaleStep
         return 1 - incrementalScale
     }
     
     // CENTER
-    func centerVisibleIndex(at index: Int) -> Int? {
+    private func centerVisibleIndex(at index: Int) -> Int? {
         let offset: Int = selectedIndex - (side+1)
         
         switch index {
@@ -181,7 +181,7 @@ private extension VPageIndicatorInfinite {
         }
     }
     
-    func centerIndexAbsolute(at index: Int) -> Int? {
+    private func centerIndexAbsolute(at index: Int) -> Int? {
         // (0 1 2 3 4 5 6) -> (0 1 _ _ _ 1 0)
         switch index {
         case 0..<side: return index
@@ -190,19 +190,19 @@ private extension VPageIndicatorInfinite {
         }
     }
     
-    func centerScale(at index: Int) -> CGFloat {
+    private func centerScale(at index: Int) -> CGFloat {
         rightEdgeLeftSideScale(at: index)
     }
     
     // RIGHT
-    func rightEdgeVisibleIndex(at index: Int) -> Int? {
+    private func rightEdgeVisibleIndex(at index: Int) -> Int? {
         switch index {
         case total-visible..<total: return visible - total + index
         default: return nil
         }
     }
     
-    func rightEdgeleftSideIndex(at index: Int) -> Int? {
+    private func rightEdgeleftSideIndex(at index: Int) -> Int? {
         // (0 1) -> (0 1)
         switch index {
         case 0..<side: return index
@@ -210,7 +210,7 @@ private extension VPageIndicatorInfinite {
         }
     }
     
-    func rightEdgeLeftSideScale(at index: Int) -> CGFloat {
+    private func rightEdgeLeftSideScale(at index: Int) -> CGFloat {
         let scaleStep: CGFloat = model.layout.infiniteEdgeDotScale / .init(side)
         let incrementalScale: CGFloat = model.layout.infiniteEdgeDotScale + .init(index) * scaleStep
         return incrementalScale
@@ -218,8 +218,8 @@ private extension VPageIndicatorInfinite {
 }
 
 // MARK:- Region
-private extension VPageIndicatorInfinite {
-    enum Region {
+extension VPageIndicatorInfinite {
+    private enum Region {
         case leftEdge
         case center
         case rightEdge
@@ -235,10 +235,10 @@ private extension VPageIndicatorInfinite {
 }
 
 // MARK:- Helpers
-private extension Int {
-    var isEven: Bool { self % 2 == 0 }
+extension Int {
+    fileprivate var isEven: Bool { self % 2 == 0 }
     
-    var isOdd: Bool { !isEven }
+    fileprivate var isOdd: Bool { !isEven }
 }
 
 // MARK:- Preview

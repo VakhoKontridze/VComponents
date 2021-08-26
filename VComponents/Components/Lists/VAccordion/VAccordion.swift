@@ -332,8 +332,8 @@ extension VAccordion {
 }
 
 // MARK:- State Sets
-private extension VAccordion {
-    func performStateSets() {
+extension VAccordion {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
@@ -341,18 +341,18 @@ private extension VAccordion {
 }
 
 // MARK:- Actions
-private extension VAccordion {
-    func expandCollapse() {
+extension VAccordion {
+    private func expandCollapse() {
         withAnimation(model.animations.expandCollapse, { animatableState?.nextState() })
         state.nextState()
     }
     
-    func expandCollapseFromHeaderTap() {
+    private func expandCollapseFromHeaderTap() {
         guard model.misc.expandCollapseOnHeaderTap else { return }
         expandCollapse()
     }
     
-    func setAnimatableState() {
+    private func setAnimatableState() {
         if animatableState == nil || animatableState != state {
             withAnimation(model.animations.expandCollapse, { animatableState = state })
         }

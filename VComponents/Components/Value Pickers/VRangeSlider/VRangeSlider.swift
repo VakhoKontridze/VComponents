@@ -162,8 +162,8 @@ extension VRangeSlider {
 }
 
 // MARK:- State Sets
-private extension VRangeSlider {
-    func performStateSets() {
+extension VRangeSlider {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableValues()
         })
@@ -171,8 +171,8 @@ private extension VRangeSlider {
 }
 
 // MARK:- Drag
-private extension VRangeSlider {
-    func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
+extension VRangeSlider {
+    private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
         let rawValue: Double = {
             let value: Double = .init(drag.location.x)
             let range: Double = max - min
@@ -210,7 +210,7 @@ private extension VRangeSlider {
         }
     }
 
-    func dragEnded(drag: DragGesture.Value, thumb: Thumb) {
+    private func dragEnded(drag: DragGesture.Value, thumb: Thumb) {
         switch thumb {
         case .low: actionLow?(false)
         case .high: actionHigh?(false)
@@ -219,18 +219,18 @@ private extension VRangeSlider {
 }
 
 // MARK:- Actions
-private extension VRangeSlider {
-    func setValueLow(to value: Double) {
+extension VRangeSlider {
+    private func setValueLow(to value: Double) {
         withAnimation(model.animations.progress, { animatableValueLow = value })
         self.valueLow = value
     }
     
-    func setValueHigh(to value: Double) {
+    private func setValueHigh(to value: Double) {
         withAnimation(model.animations.progress, { animatableValueHigh = value })
         self.valueHigh = value
     }
     
-    func setAnimatableValues() {
+    private func setAnimatableValues() {
         if animatableValueLow == nil || animatableValueLow != valueLow {
             withAnimation(model.animations.progress, { animatableValueLow = valueLow })
         }
@@ -242,8 +242,8 @@ private extension VRangeSlider {
 }
 
 // MARK:- Progress
-private extension VRangeSlider {
-    func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
+extension VRangeSlider {
+    private func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
             case .low: return .init((animatableValueLow ?? valueLow) - min)
@@ -261,8 +261,8 @@ private extension VRangeSlider {
 }
 
 // MARK:- Thumb
-private extension VRangeSlider {
-    func thumbOffset(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
+extension VRangeSlider {
+    private func thumbOffset(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let progressW: CGFloat = progress(in: proxy, thumb: thumb)
         let thumbW: CGFloat = model.layout.thumbDimension
         let width: CGFloat = proxy.size.width

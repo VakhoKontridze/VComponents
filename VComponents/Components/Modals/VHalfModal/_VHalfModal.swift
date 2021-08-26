@@ -179,43 +179,43 @@ extension _VHalfModal {
 }
 
 // MARK:- State Sets
-private extension _VHalfModal {
-    func performStateSets() {
+extension _VHalfModal {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             resetOffsetIsNil()
         })
     }
     
-    func resetOffsetIsNil() {
+    private func resetOffsetIsNil() {
         if offset == nil { offset = model.layout.height.max - model.layout.height.ideal }
     }
 }
 
 // MARK:- Animation
-private extension _VHalfModal {
-    func animateIn() {
+extension _VHalfModal {
+    private func animateIn() {
         resetOffsetIsNil()
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }
     
-    func animateOut() {
+    private func animateOut() {
         withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
     }
     
-    func animateOutFromDrag() {
+    private func animateOutFromDrag() {
         withAnimation(VHalfModalModel.Animations.dragDisappear.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + VHalfModalModel.Animations.dragDisappear.duration, execute: { isHCPresented = false })
     }
     
-    func animateOutFromBackTap() {
+    private func animateOutFromBackTap() {
         if model.misc.dismissType.contains(.backTap) { animateOut() }
     }
 }
 
 // MARK:- Gestures
-private extension _VHalfModal {
-    func dragChanged(drag: DragGesture.Value) {
+extension _VHalfModal {
+    private func dragChanged(drag: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
         
         let rawOffset: CGFloat = offsetBeforeDrag! + drag.translation.height
@@ -231,7 +231,7 @@ private extension _VHalfModal {
         }()
     }
     
-    func dragEnded(drag: DragGesture.Value) {
+    private func dragEnded(drag: DragGesture.Value) {
         defer { offsetBeforeDrag = nil }
         guard let offsetBeforeDrag = offsetBeforeDrag else { return }   // Content may cause gesture to skip onChange
         
@@ -285,7 +285,7 @@ private extension _VHalfModal {
         }
     }
     
-    enum Region {
+    private enum Region {
         case idealMax, ideal, minIdeal
         
         init(offset: CGFloat, min: CGFloat, ideal: CGFloat, max: CGFloat) {

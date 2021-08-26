@@ -125,8 +125,8 @@ private enum VMenuPickerButtonTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VMenuButtonPreset {
-    var helperType: VMenuPickerButtonTypeHelper {
+extension VMenuButtonPreset {
+    fileprivate var helperType: VMenuPickerButtonTypeHelper {
         switch self {
         case .primary: return .primary
         case .secondary: return .secondary

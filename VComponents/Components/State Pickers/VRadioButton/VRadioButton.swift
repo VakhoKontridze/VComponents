@@ -289,8 +289,8 @@ extension VRadioButton {
 }
 
 // MARK:- State Sets
-private extension VRadioButton {
-    func performStateSets() {
+extension VRadioButton {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
@@ -298,13 +298,13 @@ private extension VRadioButton {
 }
 
 // MARK:- Actions
-private extension VRadioButton {
-    func nextState() {
+extension VRadioButton {
+    private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
         state.nextState()
     }
     
-    func setAnimatableState() {
+    private func setAnimatableState() {
         if animatableState == nil || animatableState != state {
             withAnimation(model.animations.stateChange, { animatableState = state })
         }

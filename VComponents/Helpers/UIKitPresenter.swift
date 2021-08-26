@@ -64,8 +64,8 @@ final class UIKitPresenterVC<Content>: UIViewController where Content: View {
 }
 
 // MARK:- Presenting
-private extension UIKitPresenterVC {
-    func present(
+extension UIKitPresenterVC {
+    private func present(
         allowsHitTesting: Bool,
         content: Content
     ) {
@@ -93,15 +93,15 @@ private extension UIKitPresenterVC {
 }
 
 // MARK:- Updating
-fileprivate extension UIKitPresenterVC {
-    func update(with content: Content) {
+extension UIKitPresenterVC {
+    fileprivate func update(with content: Content) {
         hostingController?.rootView = content
     }
 }
 
 // MARK:- Dismissing
-private extension UIKitPresenterVC {
-    func dismiss() {
+extension UIKitPresenterVC {
+    fileprivate func dismiss() {
         UIView.appSuperView?.subviews.first(where: { $0.tag == hostedViewTag })?.removeFromSuperview()
     }
 }

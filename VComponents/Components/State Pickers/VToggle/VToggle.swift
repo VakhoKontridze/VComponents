@@ -189,8 +189,8 @@ extension VToggle {
 }
 
 // MARK:- State Sets
-private extension VToggle {
-    func performStateSets() {
+extension VToggle {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
@@ -198,13 +198,13 @@ private extension VToggle {
 }
 
 // MARK:- Actions
-private extension VToggle {
-    func nextState() {
+extension VToggle {
+    private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
         state.nextState()
     }
     
-    func setAnimatableState() {
+    private func setAnimatableState() {
         if animatableState == nil || animatableState != state {
             withAnimation(model.animations.stateChange, { animatableState = state })
         }
@@ -212,8 +212,8 @@ private extension VToggle {
 }
 
 // MARK:- Thumb Position
-private extension VToggle {
-    var thumbOffset: CGFloat {
+extension VToggle {
+    private var thumbOffset: CGFloat {
         let offset: CGFloat = model.layout.animationOffset
         
         switch internalState {

@@ -117,8 +117,8 @@ extension VStepper {
 }
 
 // MARK:- Button State
-private extension VStepper {
-    func saveButtonPressState(_ button: VStepperButton, isPressed: Bool) {
+extension VStepper {
+    private func saveButtonPressState(_ button: VStepperButton, isPressed: Bool) {
         if !isPressed {
             pressedButton = nil
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
@@ -129,7 +129,7 @@ private extension VStepper {
         }
     }
     
-    func buttonState(for button: VStepperButton) -> VBaseButtonState {
+    private func buttonState(for button: VStepperButton) -> VBaseButtonState {
         switch (state, button) {
         case (.disabled, _): return .disabled
         case (.enabled, .minus): return value <= range.lowerBound ? .disabled : .enabled
@@ -139,8 +139,8 @@ private extension VStepper {
 }
 
 // MARK:- Increment
-private extension VStepper {
-    func incrementValue(from button: VStepperButton) {
+extension VStepper {
+    private func incrementValue(from button: VStepperButton) {
         guard !shouldSkipIncrementBecauseOfLongPressIncrementFinish else {
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = false
             return
@@ -163,8 +163,8 @@ private extension VStepper {
 }
 
 // MARK:- Long Press Increment
-private extension VStepper {
-    func scheduleLongPressIncrementSchedulerTimer(for button: VStepperButton) {
+extension VStepper {
+    private func scheduleLongPressIncrementSchedulerTimer(for button: VStepperButton) {
         zeroLongPressTimers()
         
         longPressSchedulerTimer = .scheduledTimer(withTimeInterval: model.misc.intervalToStartLongPressIncrement, repeats: false, block: { _ in
@@ -172,7 +172,7 @@ private extension VStepper {
         })
     }
     
-    func scheduleLongPressIncrementTimer() {
+    private func scheduleLongPressIncrementTimer() {
         zeroLongPressTimers()
         
         longPressIncrementTimer = .scheduledTimer(withTimeInterval: 1, repeats: true, block: { timer in
@@ -184,7 +184,7 @@ private extension VStepper {
         longPressIncrementTimer?.fire()
     }
     
-    func incrementFromLongPress() {
+    private func incrementFromLongPress() {
         longPressIncrementTimerIncremental?.invalidate()
         longPressIncrementTimerIncremental = nil
 
@@ -204,7 +204,7 @@ private extension VStepper {
         longPressIncrementTimerIncremental?.fire()
     }
     
-    func zeroLongPressTimers() {
+    private func zeroLongPressTimers() {
         longPressSchedulerTimer?.invalidate()
         longPressSchedulerTimer = nil
         

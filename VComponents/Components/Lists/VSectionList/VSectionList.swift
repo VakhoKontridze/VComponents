@@ -369,8 +369,8 @@ extension VSectionList {
 }
 
 // MARK:- Helpers
-private extension VSectionList {
-    func showSectionSpacing(for i: Int) -> Bool {
+extension VSectionList {
+    private func showSectionSpacing(for i: Int) -> Bool {
         i <= sections.count-2
     }
 }

@@ -99,8 +99,8 @@ extension VSectionListDemoView {
 }
 
 // MARK:- Helpers
-private extension BaseListLayoutTypeHelper {
-    var tablelayoutType: VSectionListLayoutType {
+extension BaseListLayoutTypeHelper {
+    fileprivate var tablelayoutType: VSectionListLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible

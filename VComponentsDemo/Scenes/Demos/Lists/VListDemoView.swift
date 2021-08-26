@@ -54,8 +54,8 @@ extension VListDemoView {
 }
 
 // MARK:- Helpers
-private extension BaseListLayoutTypeHelper {
-    var sectionlayoutType: VListLayoutType {
+extension BaseListLayoutTypeHelper {
+    fileprivate var sectionlayoutType: VListLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible

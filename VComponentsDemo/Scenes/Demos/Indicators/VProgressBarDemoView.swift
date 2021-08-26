@@ -49,8 +49,8 @@ extension VProgressBarDemoView {
 }
 
 // MARK:- Timer
-private extension VProgressBarDemoView {
-    func updateValue(_ output: Date) {
+extension VProgressBarDemoView {
+    fileprivate func updateValue(_ output: Date) {
         let increment: Double = 0.05
         var valueToSet: Double = value + increment
         if valueToSet >= 1 + increment { valueToSet = 0 }

@@ -74,8 +74,8 @@ extension UIKitEventRecognizer {
 }
 
 // MARK:- Point on Frame
-private extension CGPoint {
-    func isOn(_ frame: CGSize, offset: CGFloat) -> Bool {
+extension CGPoint {
+    fileprivate func isOn(_ frame: CGSize, offset: CGFloat) -> Bool {
         let xIsOnTarget: Bool = {
             let isPositive: Bool = x >= 0
             switch isPositive {

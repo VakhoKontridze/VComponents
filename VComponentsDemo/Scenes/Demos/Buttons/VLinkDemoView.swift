@@ -89,8 +89,8 @@ private enum VLinkButtonTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-private extension VLinkPreset {
-    var helperType: VLinkButtonTypeHelper {
+extension VLinkPreset {
+    fileprivate var helperType: VLinkButtonTypeHelper {
         switch self {
         case .primary: return .primary
         case .secondary: return .secondary

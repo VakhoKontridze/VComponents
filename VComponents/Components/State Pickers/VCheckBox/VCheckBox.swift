@@ -195,8 +195,8 @@ extension VCheckBox {
 }
 
 // MARK:- State Sets
-private extension VCheckBox {
-    func performStateSets() {
+extension VCheckBox {
+    private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
@@ -204,13 +204,13 @@ private extension VCheckBox {
 }
 
 // MARK:- Actions
-private extension VCheckBox {
-    func nextState() {
+extension VCheckBox {
+    private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
         state.nextState()
     }
     
-    func setAnimatableState() {
+    private func setAnimatableState() {
         if animatableState == nil || animatableState != state {
             withAnimation(model.animations.stateChange, { animatableState = state })
         }
@@ -218,8 +218,8 @@ private extension VCheckBox {
 }
 
 // MARK:- Icon
-private extension VCheckBox {
-    var icon: Image? {
+extension VCheckBox {
+    private var icon: Image? {
         switch state {
         case .off: return nil
         case .on: return ImageBook.checkBoxOn

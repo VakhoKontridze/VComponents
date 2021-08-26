@@ -358,8 +358,8 @@ extension VTextField {
 }
 
 // MARK:- State Sets
-private extension VTextField {
-    func performStateSets() {
+extension VTextField {
+    private func performStateSets() {
         DispatchQueue.main.asyncAfter(deadline: .now() + model.animations.delayToAnimateButtons, execute: {
             nonEmptyText = !text.isEmpty
         })
@@ -371,8 +371,8 @@ private extension VTextField {
 }
 
 // MARK:- Visiblity Icon
-private extension VTextField {
-    var visiblityIcon: Image {
+extension VTextField {
+    private var visiblityIcon: Image {
         switch secureFieldIsVisible {
         case false: return ImageBook.visibilityOff
         case true: return ImageBook.visibilityOn
@@ -381,12 +381,12 @@ private extension VTextField {
 }
 
 // MARK:- Actions
-private extension VTextField {
-    func textChanged(_ text: String) {
+extension VTextField {
+    private func textChanged(_ text: String) {
         withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = !text.isEmpty })
     }
     
-    func runClearAction() {
+    private func runClearAction() {
         switch clearButtonAction {
         case .clear: zeroText()
         case .custom(let action): action()
@@ -394,7 +394,7 @@ private extension VTextField {
         }
     }
     
-    func runCancelAction() {
+    private func runCancelAction() {
         switch cancelButtonAction {
         case .clear: zeroText()
         case .custom(let action): action()
@@ -402,7 +402,7 @@ private extension VTextField {
         }
     }
     
-    func zeroText() {
+    private func zeroText() {
         text = ""
         withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = false })
     }
