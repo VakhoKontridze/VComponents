@@ -50,7 +50,7 @@ Instead, model can be passed as parameter to initializers. This parameter has de
 
 Models are structs with default values. They break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
-For instance, changing foreground color of `VSecondaryButton` can be achieved by passing a custom model.
+For instance, changing foreground color of `VSecondaryButton` can be done by passing a model.
 
 **Not Preferred**:
 
@@ -91,14 +91,6 @@ var body: some View {
 Alternately, you can create static instances of models for reusability.
 
 ```swift
-var body: some View {
-    VSecondaryButton(
-        model: .myCustomModel,
-        action: doSomething,
-        title: "Lorem ipsum"
-    )
-}
-
 extension VSecondaryButtonModel {
     static let myCustomModel: VSecondaryButtonModel = {
         var model: VSecondaryButtonModel = .init()
@@ -111,6 +103,14 @@ extension VSecondaryButtonModel {
         
         return model
     }()
+}
+
+var body: some View {
+    VSecondaryButton(
+        model: .myCustomModel,
+        action: doSomething,
+        title: "Lorem ipsum"
+    )
 }
 ```
 
