@@ -58,8 +58,8 @@ extension VBaseViewModel.Layout {
         /// Leading alignment
         case leading
         
-        /// Default value. Set to `leading`.
-        public static let `default`: Self = .leading
+        /// Default value. Set to `center`.
+        public static let `default`: Self = .center
     }
 }
 
