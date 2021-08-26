@@ -13,8 +13,15 @@ import SwiftUI
 /// Model, and leading and trailing items can be passed as parameters
 ///
 /// # Usage Example #
-/// 
+///
 /// ```
+/// var trailingItem: some View {
+///     VPlainButton(
+///         action: { print("Pressed") },
+///         title: "Lorem"
+///     )
+/// }
+///
 /// var body: some View {
 ///     VNavigationView(content: {
 ///         VBaseView(
@@ -31,12 +38,6 @@ import SwiftUI
 ///     })
 /// }
 ///
-/// var trailingItem: some View {
-///     VPlainButton(
-///         action: { print("Pressed") },
-///         title: "Lorem"
-///     )
-/// }
 /// ```
 ///
 public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrailingItemContent, Content>: View

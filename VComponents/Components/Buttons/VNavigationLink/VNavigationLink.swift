@@ -20,8 +20,18 @@ import SwiftUI
 /// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.
 ///
 /// # Usage Example #
-/// 
+///
 /// ```
+/// var destination: some View {
+///     VBaseView(title: "Destination", content: {
+///         ZStack(content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///             VSheet()
+///         })
+///     })
+/// }
+///
 /// var body: some View {
 ///     VNavigationView(content: {
 ///         VBaseView(title: "Home", content: {
@@ -40,6 +50,13 @@ import SwiftUI
 ///     })
 /// }
 ///
+/// ```
+///
+/// Alternate navigation can be completed using `vNavigationLink` `ViewModifier`:
+///
+/// ```
+/// @State var isActive: Bool = false
+///
 /// var destination: some View {
 ///     VBaseView(title: "Destination", content: {
 ///         ZStack(content: {
@@ -49,12 +66,6 @@ import SwiftUI
 ///         })
 ///     })
 /// }
-/// ```
-///
-/// Alternate navigation can be completed using `vNavigationLink` `ViewModifier`:
-///
-/// ```
-/// @State var isActive: Bool = false
 ///
 /// var body: some View {
 ///     VNavigationView(content: {
@@ -74,15 +85,6 @@ import SwiftUI
 ///     })
 /// }
 ///
-/// var destination: some View {
-///     VBaseView(title: "Destination", content: {
-///         ZStack(content: {
-///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-///
-///             VSheet()
-///         })
-///     })
-/// }
 /// ```
 ///
 public struct VNavigationLink<Destination, Content>: View

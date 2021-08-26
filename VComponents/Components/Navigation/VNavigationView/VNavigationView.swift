@@ -35,6 +35,16 @@ import SwiftUI
 /// # Usage Example #
 ///
 /// ```
+/// var destination: some View {
+///     VBaseView(title: "Details", content: {
+///         ZStack(content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///             VSheet()
+///         })
+///     })
+/// }
+///
 /// var body: some View {
 ///     VNavigationView(content: {
 ///         VBaseView(title: "Home", content: {
@@ -53,15 +63,6 @@ import SwiftUI
 ///     })
 /// }
 ///
-/// var destination: some View {
-///     VBaseView(title: "Details", content: {
-///         ZStack(content: {
-///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-///
-///             VSheet()
-///         })
-///     })
-/// }
 /// ```
 ///
 /// If you decide to use `VNavigationView` inside `VHalfModal`, consider checking out static properties—`navBarCloseButtonMarginTop`, `navBarCloseButtonMarginTrailing`, and `navBarTrailingItemMarginTrailing`—in `VHalfModalModel.Layout`.
