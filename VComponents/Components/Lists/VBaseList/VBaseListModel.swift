@@ -38,13 +38,24 @@ extension VBaseListModel {
         /// Row divider height. Defaults to `1`.
         public var dividerHeight: CGFloat = 1
         
-        var hasDivider: Bool { dividerHeight > 0 }
+        /// Divider margins. Defaults to `0` leading and `0` trailing.
+        public var dividerMargins: HorizontalMargins = .init(
+            leading: 0,
+            trailing: 0
+        )
         
         var dividerMarginVertical: CGFloat { rowSpacing / 2 }
+        
+        var hasDivider: Bool { dividerHeight > 0 }
         
         /// Initializes sub-model with default values
         public init() {}
     }
+}
+
+extension VBaseListModel.Layout {
+    /// Sub-model containing `leading` and `trailing` margins
+    public typealias HorizontalMargins = LayoutGroupLT
 }
 
 // MARK:- Colors

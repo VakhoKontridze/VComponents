@@ -53,20 +53,20 @@ extension VAccordionDemoView {
                 data: VBaseListDemoViewDataSource.rows(count: rowCount),
                 rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
             )
-            .ifLet(
-                layoutType.height,
-                ifTransform: { (view, height) in
-                    Group(content: {
+                .ifLet(
+                    layoutType.height,
+                    ifTransform: { (view, height) in
+                        Group(content: {
+                            view
+                                .frame(height: height, alignment: .top)
+                        })
+                            .frame(maxHeight: .infinity, alignment: .top)
+                    },
+                    elseTransform: { view in
                         view
-                            .frame(height: height, alignment: .top)
-                    })
-                        .frame(maxHeight: .infinity, alignment: .top)
-                },
-                elseTransform: { view in
-                    view
-                        .frame(maxHeight: .infinity, alignment: .top)
-                }
-            )
+                            .frame(maxHeight: .infinity, alignment: .top)
+                    }
+                )
     }
     
     @ViewBuilder private func settings() -> some View {

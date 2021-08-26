@@ -47,9 +47,6 @@ extension VAccordionModel {
         
         var hasHeaderDivider: Bool { headerDividerHeight > 0 }
         
-        /// Row divider height. Defaults to `1`.
-        public var dividerHeight: CGFloat = listReference.layout.dividerHeight
-        
         /// Header margins. Defaults to `10` leading, `10` trailing, `5` top, `5` bottom when collapsed, and `5` bottom when expanded.
         public var headerMargins: ExpandableMargins = .init(
             leading: sheetReference.layout.contentMargin,
@@ -60,7 +57,7 @@ extension VAccordionModel {
         )
         
         /// Divider margins. Defaults to `10` leading, `10` trailing, `5` top, and `5` bottom.
-        public var dividerMargins: Margins = .init(
+        public var headerDividerMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
             top: 5,
@@ -78,12 +75,21 @@ extension VAccordionModel {
         /// Row spacing. Defaults to `18`.
         public var rowSpacing: CGFloat = listReference.layout.rowSpacing
         
+        /// Row divider height. Defaults to `1`.
+        public var dividerHeight: CGFloat = listReference.layout.dividerHeight
+        
+        /// Divider margins. Defaults to `0` leading and `0` trailing.
+        public var dividerMargins: HorizontalMargins = listReference.layout.dividerMargins
+        
         /// Initializes sub-model with default values
         public init() {}
     }
 }
 
 extension VAccordionModel.Layout {
+    /// Sub-model containing `leading` and `trailing` margins
+    public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
+    
     /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins
     public typealias Margins = LayoutGroupLTTB
     
@@ -223,6 +229,7 @@ extension VAccordionModel {
         model.layout.marginTrailing = layout.contentMargins.trailing
         model.layout.rowSpacing = layout.rowSpacing
         model.layout.dividerHeight = layout.dividerHeight
+        model.layout.dividerMargins = layout.dividerMargins
         
         model.colors.divider = colors.divider
         

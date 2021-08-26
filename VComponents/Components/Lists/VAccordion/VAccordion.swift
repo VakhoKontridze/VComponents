@@ -15,7 +15,7 @@ import SwiftUI
 /// Model and layout can be passed as parameters
 ///
 /// There are three posible layouts:
-/// 
+///
 /// 1. `Fixed`.
 /// Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
 ///
@@ -293,10 +293,10 @@ extension VAccordion {
         if (animatableState ?? state).isExpanded, model.layout.hasHeaderDivider {
             Rectangle()
                 .frame(height: model.layout.headerDividerHeight)
-                .padding(.leading, model.layout.dividerMargins.leading)
-                .padding(.trailing, model.layout.dividerMargins.trailing)
-                .padding(.top, model.layout.dividerMargins.top)
-                .padding(.bottom, model.layout.dividerMargins.bottom)
+                .padding(.leading, model.layout.headerDividerMargins.leading)
+                .padding(.trailing, model.layout.headerDividerMargins.trailing)
+                .padding(.top, model.layout.headerDividerMargins.top)
+                .padding(.bottom, model.layout.headerDividerMargins.bottom)
                 .foregroundColor(model.colors.headerDivider)
         }
     }

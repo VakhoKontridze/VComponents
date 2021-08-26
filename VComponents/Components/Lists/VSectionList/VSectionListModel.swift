@@ -51,9 +51,17 @@ extension VSectionListModel {
         /// Row divider height. Defaults to `1`.
         public var dividerHeight: CGFloat = listReference.layout.dividerHeight
         
+        /// Divider margins. Defaults to `0` leading and `0` trailing.
+        public var dividerMargins: HorizontalMargins = listReference.layout.dividerMargins
+        
         /// Initializes sub-model with default values
         public init() {}
     }
+}
+
+extension VSectionListModel.Layout {
+    /// Sub-model containing `leading` and `trailing` margins
+    public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
 }
 
 // MARK:- Colors
@@ -127,6 +135,7 @@ extension VSectionListModel {
         
         model.layout.rowSpacing = layout.rowSpacing
         model.layout.dividerHeight = layout.dividerHeight
+        model.layout.dividerMargins = layout.dividerMargins
         
         model.colors.divider = colors.divider
         

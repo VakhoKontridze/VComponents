@@ -119,7 +119,7 @@ extension VHalfModalDemoView {
                     VSecondaryButton(action: { isPresented = false }, title: "Dismiss")
                 })
                     .frame(maxHeight: .infinity, alignment: .bottom)
-                    .padding(16)
+                    .padding(15)
             }
         })
     }

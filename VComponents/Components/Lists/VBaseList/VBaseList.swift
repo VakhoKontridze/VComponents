@@ -13,7 +13,7 @@ import SwiftUI
 /// Model, and layout can be passed as parameters
 ///
 /// There are three posible layouts:
-/// 
+///
 /// 1. `Fixed`.
 /// Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
 ///
@@ -130,6 +130,8 @@ extension VBaseList {
             if showDivider(for: i) {
                 Rectangle()
                     .frame(height: model.layout.dividerHeight)
+                    .padding(.leading, model.layout.dividerMargins.leading)
+                    .padding(.trailing, model.layout.dividerMargins.trailing)
                     .padding(.vertical, model.layout.dividerMarginVertical)
                     .foregroundColor(model.colors.divider)
             }

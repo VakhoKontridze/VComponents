@@ -59,3 +59,18 @@ public struct LayoutGroupTB {
         self.bottom = bottom
     }
 }
+
+/// Grop of layout values containing `leading` and `trailing` values
+public struct LayoutGroupLT {
+    /// Top value
+    public var leading: CGFloat
+    
+    /// Bottom value
+    public var trailing: CGFloat
+    
+    /// Initializes group with values
+    public init(leading: CGFloat, trailing: CGFloat) {
+        self.leading = leading
+        self.trailing = trailing
+    }
+}

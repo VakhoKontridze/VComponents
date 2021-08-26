@@ -51,15 +51,16 @@ extension DemoListView {
                     )
                 })
                     .padding(.vertical, 1)  // SwiftUI is bugged
+                    .padding(.top, 10)
                 
             case .section:
                 VLazyScrollView(type: .vertical(lazyScrollViewModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
                     VList(data: section.rows, rowContent: { row in
                         DemoListRowView(title: row.title, destination: row.body)
                     })
-                        .padding(.trailing, 16)
+                        .padding(.trailing, 15)
                 })
-                    .padding([.leading, .top, .bottom], 16)
+                    .padding([.leading, .top, .bottom], 15)
             }
         })
     }
