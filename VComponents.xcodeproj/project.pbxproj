@@ -845,17 +845,17 @@
 			path = VBaseList;
 			sourceTree = "<group>";
 		};
-		7A59577525AB546000B5B6E7 /* VSection */ = {
+		7A59577525AB546000B5B6E7 /* VList */ = {
 			isa = PBXGroup;
 			children = (
 				7A59577625AB546700B5B6E7 /* VList.swift */,
 				7ACC3ED125ACB22700EAD184 /* VListLayoutType.swift */,
 				7A59577925AB584300B5B6E7 /* VListModel.swift */,
 			);
-			path = VSection;
+			path = VList;
 			sourceTree = "<group>";
 		};
-		7A59577D25AB5B6000B5B6E7 /* VTable */ = {
+		7A59577D25AB5B6000B5B6E7 /* VSectionList */ = {
 			isa = PBXGroup;
 			children = (
 				7A59577E25AB5B7400B5B6E7 /* VSectionList.swift */,
@@ -864,7 +864,7 @@
 				7ACC3ECE25ACB1D900EAD184 /* VSectionListLayoutType.swift */,
 				7A59578625AB6FCC00B5B6E7 /* VSectionListModel.swift */,
 			);
-			path = VTable;
+			path = VSectionList;
 			sourceTree = "<group>";
 		};
 		7A599585259249AC0087902B /* VChevronButton */ = {
@@ -1376,8 +1376,8 @@
 			isa = PBXGroup;
 			children = (
 				7A59576C25AB502300B5B6E7 /* VBaseList */,
-				7A59577525AB546000B5B6E7 /* VSection */,
-				7A59577D25AB5B6000B5B6E7 /* VTable */,
+				7A59577525AB546000B5B6E7 /* VList */,
+				7A59577D25AB5B6000B5B6E7 /* VSectionList */,
 				7ACC3EC425AC919D00EAD184 /* VAccordion */,
 			);
 			path = Lists;
