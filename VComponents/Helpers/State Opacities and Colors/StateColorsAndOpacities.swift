@@ -27,7 +27,7 @@ public struct StateColorsAndOpacitiesEP_D {
     }
     
     /// Instance of group with clear and transparent values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             disabled: ColorBook.clear,
@@ -98,7 +98,7 @@ public struct StateColorsAndOpacitiesEPD_PD {
     }
     
     /// Instance of group with clear and transparent values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             pressed: ColorBook.clear,
@@ -211,7 +211,7 @@ public struct StateColorsEpFpSpEpD_PD {
     }
     
     /// Instance of group with clear and transparent values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             enabledPressed: ColorBook.clear,

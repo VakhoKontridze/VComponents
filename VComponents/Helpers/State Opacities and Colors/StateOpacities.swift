@@ -19,14 +19,14 @@ public struct StateOpacitiesP {
     }
     
     /// Instance of group with transparent values
-    public var transparent: Self {
+    public static var transparent: Self {
         .init(
             pressedOpacity: 0
         )
     }
     
     /// Instance of group with solid values
-    public var solid: Self {
+    public static var solid: Self {
         .init(
             pressedOpacity: 1
         )
@@ -45,14 +45,14 @@ public struct StateOpacitiesD {
     }
     
     /// Instance of group with transparent values
-    public var transparent: Self {
+    public static var transparent: Self {
         .init(
             disabledOpacity: 0
         )
     }
     
     /// Instance of group with solid values
-    public var solid: Self {
+    public static var solid: Self {
         .init(
             disabledOpacity: 1
         )
@@ -100,7 +100,7 @@ public struct StateOpacitiesPD {
     }
     
     /// Instance of group with transparent values
-    public var transparent: Self {
+    public static var transparent: Self {
         .init(
             pressedOpacity: 0,
             disabledOpacity: 0
@@ -108,7 +108,7 @@ public struct StateOpacitiesPD {
     }
     
     /// Instance of group with solid values
-    public var solid: Self {
+    public static var solid: Self {
         .init(
             pressedOpacity: 1,
             disabledOpacity: 1

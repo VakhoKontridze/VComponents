@@ -23,7 +23,7 @@ public struct StateColorsED {
     }
     
     /// Instance of group with clear values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             disabled: ColorBook.clear
@@ -88,7 +88,7 @@ public struct StateColorsEPD {
     }
     
     /// Instance of group with clear values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             pressed: ColorBook.clear,
@@ -172,7 +172,7 @@ public struct StateColorsEPDL {
     }
     
     /// Instance of group with clear values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             pressed: ColorBook.clear,
@@ -213,7 +213,7 @@ public struct StateColorsOOD {
     }
     
     /// Instance of group with clear values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             off: ColorBook.clear,
             on: ColorBook.clear,
@@ -268,7 +268,7 @@ public struct StateColorsOOID {
     }
     
     /// Instance of group with clear values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             off: ColorBook.clear,
             on: ColorBook.clear,
@@ -312,7 +312,7 @@ public struct StateColorsEFD {
     }
     
     /// Instance of group with clear values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             focused: ColorBook.clear,
@@ -359,7 +359,7 @@ public struct StateColorsEFSED {
     }
     
     /// Instance of group with clear values
-    public var clear: Self {
+    public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
             focused: ColorBook.clear,
