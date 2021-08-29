@@ -10,9 +10,9 @@ import SwiftUI
 // MARK:- V Web Link
 /// Button component that controls a navigation presentation to an URL
 ///
-/// Component can be initialized with content or title.
+/// Component can be initialized with content or title
 ///
-/// Component supports presets or existing button types.
+/// Component supports presets or existing button types
 ///
 /// State can be passed as parameter
 ///
@@ -30,7 +30,7 @@ import SwiftUI
 ///
 public struct VWebLink<Content>: View where Content: View {
     // MARK: Properties
-    @Environment(\.openURL) private var openURL: OpenURLAction
+    @Environment(\.openURL) private var openURLAction: OpenURLAction
     
     private let linkButtonType: VWebLinkType
     private let state: VWebLinkState
@@ -88,7 +88,7 @@ extension VWebLink {
         VWebLinkType.linkButton(
             buttonType: linkButtonType,
             isEnabled: state.isEnabled,
-            action: action,
+            action: openURL,
             content: content
         )
     }
@@ -96,9 +96,9 @@ extension VWebLink {
 
 // MARK:- Actions
 extension VWebLink {
-    private func action() {
+    private func openURL() {
         guard let url = url else { return }
-        openURL(url)
+        openURLAction(url)
     }
 }
 
