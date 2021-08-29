@@ -91,7 +91,7 @@ private enum VMenuButtonTypeHelper: Int, VPickableTitledItem {
     case plain
     case custom
     
-    var preset: VLinkPreset? {
+    var preset: VWebLinkPreset? {
         switch self {
         case .primary: return .primary()
         case .secondary: return .secondary()

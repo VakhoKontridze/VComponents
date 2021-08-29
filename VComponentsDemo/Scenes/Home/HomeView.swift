@@ -18,7 +18,7 @@ struct HomeView: View {
             .baseButton,
             .primaryButton, .secondaryButton, .squareButton, .plainButton,
             .chevronButton, .closeButton,
-            .navigationLink, .link
+            .navigationLink, .webLink
         ]),
         .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
@@ -33,7 +33,7 @@ struct HomeView: View {
     ]
 
     private enum HomeRow: Int, DemoableRow {
-        case baseButton, primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink, link
+        case baseButton, primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink, webLink
         case toggle, checkBox, radioButton
         case segmentedPicker, menuPicker, wheelPicker
         case stepper, slider,  rangeSlider
@@ -55,7 +55,7 @@ struct HomeView: View {
             case .chevronButton: return VChevronButtonDemoView.navBarTitle
             case .closeButton: return VCloseButtonDemoView.navBarTitle
             case .navigationLink: return VNavigationLinkDemoView.navBarTitle
-            case .link: return VLinkDemoView.navBarTitle
+            case .webLink: return VWebLinkDemoView.navBarTitle
 
             case .toggle: return VToggleDemoView.navBarTitle
             case .checkBox: return VCheckBoxDemoView.navBarTitle
@@ -110,7 +110,7 @@ struct HomeView: View {
             case .chevronButton: VChevronButtonDemoView()
             case .closeButton: VCloseButtonDemoView()
             case .navigationLink: VNavigationLinkDemoView()
-            case .link: VLinkDemoView()
+            case .webLink: VWebLinkDemoView()
 
             case .toggle: VToggleDemoView()
             case .checkBox: VCheckBoxDemoView()

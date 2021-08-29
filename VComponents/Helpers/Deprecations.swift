@@ -7,6 +7,16 @@
 
 import SwiftUI
 
+// MARK:- V Web Link
+@available(*, deprecated, renamed: "VWebLink")
+public typealias VLink = VWebLink
+
+@available(*, deprecated, renamed: "VWebLinkPreset")
+public typealias VLinkPreset = VWebLinkPreset
+
+@available(*, deprecated, renamed: "VWebLinkState")
+public typealias VLinkState = VWebLinkState
+
 // MARK:- V Navigation View
 extension VNavigationViewModel.Colors {
     @available(*, deprecated, renamed: "bar")

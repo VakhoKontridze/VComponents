@@ -1,5 +1,5 @@
 //
-//  VLinkState.swift
+//  VWebLinkState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/7/21.
@@ -7,9 +7,9 @@
 
 import Foundation
 
-// MARK:- V Link State
+// MARK:- V Web Link State
 /// Enum that describes state, such as `enabled` or `disabled`
-public enum VLinkState: Int, CaseIterable {
+public enum VWebLinkState: Int, CaseIterable {
     /// Enabled
     case enabled
     

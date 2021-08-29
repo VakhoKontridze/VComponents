@@ -202,7 +202,7 @@ extension VTextFieldModel {
 
 extension VTextFieldModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors—EFD
+    public typealias StateColors = StateColors_EFD
     
     /// Sub-model containing opacities for component states
     public typealias StateOpacities = StateOpacities_D

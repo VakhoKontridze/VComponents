@@ -1,5 +1,5 @@
 //
-//  VLinkDemoView.swift
+//  VWebLinkDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 2/7/21.
@@ -8,17 +8,17 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V  Link Demo View
-struct VLinkDemoView: View {
+// MARK:- V Web Link Demo View
+struct VWebLinkDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Link"
+    static let navBarTitle: String = "Web Link"
     
-    @State private var state: VLinkState = .enabled
-    @State private var linkButtonType: VLinkButtonTypeHelper = .secondary
+    @State private var state: VWebLinkState = .enabled
+    @State private var webLinkButtonType: VWebLinkButtonTypeHelper = .secondary
 }
 
 // MARK:- Body
-extension VLinkDemoView {
+extension VWebLinkDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
@@ -26,20 +26,20 @@ extension VLinkDemoView {
     }
     
     @ViewBuilder private func component() -> some View {
-        switch linkButtonType.preset {
-        case let preset?: VLink(preset: preset, state: state, url: url, title: buttonTitle)
-        case nil: VLink(state: state, url: url, content: buttonContent)
+        switch webLinkButtonType.preset {
+        case let preset?: VWebLink(preset: preset, state: state, url: url, title: buttonTitle)
+        case nil: VWebLink(state: state, url: url, content: buttonContent)
         }
     }
     
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(selection: $state, headerTitle: "State")
         
-        VWheelPicker(selection: $linkButtonType, headerTitle: "Preset")
+        VWheelPicker(selection: $webLinkButtonType, headerTitle: "Preset")
     }
     
     private var buttonTitle: String {
-        switch linkButtonType.preset {
+        switch webLinkButtonType.preset {
         case .square: return "Lorem"
         default: return "Lorem ipsum"
         }
@@ -51,7 +51,7 @@ extension VLinkDemoView {
 }
 
 // MARK:- Helpers
-extension VLinkState: VPickableTitledItem {
+extension VWebLinkState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
@@ -61,14 +61,14 @@ extension VLinkState: VPickableTitledItem {
     }
 }
 
-private enum VLinkButtonTypeHelper: Int, VPickableTitledItem {
+private enum VWebLinkButtonTypeHelper: Int, VPickableTitledItem {
     case primary
     case secondary
     case square
     case plain
     case custom
     
-    var preset: VLinkPreset? {
+    var preset: VWebLinkPreset? {
         switch self {
         case .primary: return .primary()
         case .secondary: return .secondary()
@@ -89,8 +89,8 @@ private enum VLinkButtonTypeHelper: Int, VPickableTitledItem {
     }
 }
 
-extension VLinkPreset {
-    fileprivate var helperType: VLinkButtonTypeHelper {
+extension VWebLinkPreset {
+    fileprivate var helperType: VWebLinkButtonTypeHelper {
         switch self {
         case .primary: return .primary
         case .secondary: return .secondary
@@ -102,8 +102,8 @@ extension VLinkPreset {
 }
 
 // MARK:- Preview
-struct VLinkDemoView_Previews: PreviewProvider {
+struct VWebLinkDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VLinkDemoView()
+        VWebLinkDemoView()
     }
 }

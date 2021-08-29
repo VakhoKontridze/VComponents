@@ -18,7 +18,7 @@ Framework supports iOS 14.0 and up.
 
 ## Components
 
-**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VChevronButton, VCloseButton, VNavigationLink, VLink
+**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VChevronButton, VCloseButton, VNavigationLink, VWebLink
 
 **State Pickers.** VToggle, VCheckBox, VRadioButton
 

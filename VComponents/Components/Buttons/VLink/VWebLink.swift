@@ -1,5 +1,5 @@
 //
-//  VLink.swift
+//  VWebLink.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/7/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Link
+// MARK:- V Web Link
 /// Button component that controls a navigation presentation to an URL
 ///
 /// Component can be initialized with content or title.
@@ -20,7 +20,7 @@ import SwiftUI
 ///
 /// ```
 /// var body: some View {
-///     VLink(
+///     VWebLink(
 ///         preset: .secondary(),
 ///         url: URL(string: "https://www.apple.com"),
 ///         title: "Lorem ipsum"
@@ -28,20 +28,20 @@ import SwiftUI
 /// }
 /// ```
 ///
-public struct VLink<Content>: View where Content: View {
+public struct VWebLink<Content>: View where Content: View {
     // MARK: Properties
     @Environment(\.openURL) private var openURL: OpenURLAction
     
-    private let linkButtonType: VLinkType
-    private let state: VLinkState
+    private let linkButtonType: VWebLinkType
+    private let state: VWebLinkState
     private let url: URL?
     private let content: () -> Content
     
     // MARK: Initializers: Preset
     /// Initializes component with preset, url and content
     public init(
-        preset linkPreset: VLinkPreset,
-        state: VLinkState = .enabled,
+        preset linkPreset: VWebLinkPreset,
+        state: VWebLinkState = .enabled,
         url: URL?,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -53,8 +53,8 @@ public struct VLink<Content>: View where Content: View {
     
     /// Initializes component with preset, url and title
     public init(
-        preset linkPreset: VLinkPreset,
-        state: VLinkState = .enabled,
+        preset linkPreset: VWebLinkPreset,
+        state: VWebLinkState = .enabled,
         url: URL?,
         title: String
     )
@@ -71,7 +71,7 @@ public struct VLink<Content>: View where Content: View {
     // MARK: Initializers: Custom
     /// Initializes component with url and content
     public init(
-        state: VLinkState = .enabled,
+        state: VWebLinkState = .enabled,
         url: URL?,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -83,9 +83,9 @@ public struct VLink<Content>: View where Content: View {
 }
 
 // MARK:- Body
-extension VLink {
+extension VWebLink {
     public var body: some View {
-        VLinkType.linkButton(
+        VWebLinkType.linkButton(
             buttonType: linkButtonType,
             isEnabled: state.isEnabled,
             action: action,
@@ -95,7 +95,7 @@ extension VLink {
 }
 
 // MARK:- Actions
-extension VLink {
+extension VWebLink {
     private func action() {
         guard let url = url else { return }
         openURL(url)
@@ -103,9 +103,9 @@ extension VLink {
 }
 
 // MARK:- Preview
-struct VLink_Previews: PreviewProvider {
+struct VWebLink_Previews: PreviewProvider {
     static var previews: some View {
-        VLink(
+        VWebLink(
             preset: .secondary(),
             url: URL(string: "https://www.apple.com"),
             title: "Lorem ipsum"
