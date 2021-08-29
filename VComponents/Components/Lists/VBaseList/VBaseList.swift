@@ -186,7 +186,7 @@ struct VBaseList_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VBaseList(data: rows, id: \.id, rowContent: { row in
+        VBaseList(data: rows, rowContent: { row in
             rowContent(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)
