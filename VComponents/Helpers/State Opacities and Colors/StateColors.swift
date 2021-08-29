@@ -244,8 +244,8 @@ extension StateColors_OOD {
     }
 }
 
-// MARK:- Off, On, Intermediate, Disabled
-/// Color group containing values for `off`, `on`, `intermediate`, and `disabled` states
+// MARK:- Off, On, Indeterminate, Disabled
+/// Color group containing values for `off`, `on`, `indeterminate`, and `disabled` states
 public struct StateColors_OOID {
     /// Off color
     public var off: Color
@@ -253,17 +253,17 @@ public struct StateColors_OOID {
     /// On color
     public var on: Color
     
-    /// Intermediate color
-    public var intermediate: Color
+    /// Indeterminate color
+    public var indeterminate: Color
     
     /// Disabled color
     public var disabled: Color
 
     /// Initializes group with values
-    public init(off: Color, on: Color, intermediate: Color, disabled: Color) {
+    public init(off: Color, on: Color, indeterminate: Color, disabled: Color) {
         self.off = off
         self.on = on
-        self.intermediate = intermediate
+        self.indeterminate = indeterminate
         self.disabled = disabled
     }
     
@@ -272,7 +272,7 @@ public struct StateColors_OOID {
         .init(
             off: ColorBook.clear,
             on: ColorBook.clear,
-            intermediate: ColorBook.clear,
+            indeterminate: ColorBook.clear,
             disabled: ColorBook.clear
         )
     }
@@ -285,8 +285,8 @@ extension StateColors_OOID {
         case .pressedOff: return off
         case .on: return on
         case .pressedOn: return on
-        case .intermediate: return intermediate
-        case .pressedIntermediate: return intermediate
+        case .indeterminate: return indeterminate
+        case .pressedIndeterminate: return indeterminate
         case .disabled: return disabled
         }
     }

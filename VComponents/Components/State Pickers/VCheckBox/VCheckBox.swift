@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK:- V Check Box
-/// State picker component that toggles between off, on, intermediate, or disabled states, and displays content
+/// State picker component that toggles between off, on, indeterminate, or disabled states, and displays content
 ///
 /// Component can be initialized with content, title, or without body. Bool can also be passed as state.
 ///
@@ -223,7 +223,7 @@ extension VCheckBox {
         switch state {
         case .off: return nil
         case .on: return ImageBook.checkBoxOn
-        case .intermediate: return ImageBook.checkBoxInterm
+        case .indeterminate: return ImageBook.checkBoxInterm
         case .disabled: return nil
         }
     }

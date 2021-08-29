@@ -64,7 +64,7 @@ extension VCheckBoxModel {
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
             on: toggleReference.colors.fill.on,
-            intermediate: toggleReference.colors.fill.on,
+            indeterminate: toggleReference.colors.fill.on,
             disabled: ColorBook.primaryInverted
         )
         
@@ -72,7 +72,7 @@ extension VCheckBoxModel {
         public var border: StateColors = .init(
             off: .init(componentAsset: "CheckBox.Border.off"),
             on: ColorBook.clear,
-            intermediate: ColorBook.clear,
+            indeterminate: ColorBook.clear,
             disabled: .init(componentAsset: "CheckBox.Border.disabled")
         )
         
@@ -80,7 +80,7 @@ extension VCheckBoxModel {
         public var icon: StateColors = .init(
             off: ColorBook.clear,
             on: toggleReference.colors.thumb.off,
-            intermediate: toggleReference.colors.thumb.on,
+            indeterminate: toggleReference.colors.thumb.on,
             disabled: ColorBook.clear
         )
 
@@ -96,7 +96,7 @@ extension VCheckBoxModel {
         public var textContent: StateColors = .init(
             off: toggleReference.colors.textContent.off,
             on: toggleReference.colors.textContent.on,
-            intermediate: toggleReference.colors.textContent.on,
+            indeterminate: toggleReference.colors.textContent.on,
             disabled: toggleReference.colors.textContent.disabled
         )
 

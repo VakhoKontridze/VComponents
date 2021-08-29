@@ -7,8 +7,10 @@
 
 import SwiftUI
 
+
+
 // MARK:- V Toggle State
-/// Enum that describes state, such as `off`, `on`, `intermediate`, or `disabled`
+/// Enum that describes state, such as `off`, `on`, `indeterminate`, or `disabled`
 public enum VCheckBoxState: Int, CaseIterable {
     /// Of
     case off
@@ -16,10 +18,10 @@ public enum VCheckBoxState: Int, CaseIterable {
     /// On
     case on
     
-    /// Intermediate
+    /// indeterminate
     ///
     /// Upon press, component goes to `on` state
-    case intermediate
+    case indeterminate
     
     /// Disabled
     case disabled
@@ -29,7 +31,7 @@ public enum VCheckBoxState: Int, CaseIterable {
         switch self {
         case .off: return true
         case .on: return true
-        case .intermediate: return true
+        case .indeterminate: return true
         case .disabled: return false
         }
     }
@@ -39,7 +41,7 @@ public enum VCheckBoxState: Int, CaseIterable {
         switch self {
         case .off: return false
         case .on: return true
-        case .intermediate: return false
+        case .indeterminate: return false
         case .disabled: return false
         }
     }
@@ -52,7 +54,7 @@ extension VCheckBoxState {
         switch self {
         case .off: self = .on
         case .on: self = .off
-        case .intermediate: self = .on
+        case .indeterminate: self = .on
         case .disabled: break
         }
     }
@@ -64,8 +66,8 @@ enum VCheckBoxInternalState {
     case pressedOff
     case on
     case pressedOn
-    case intermediate
-    case pressedIntermediate
+    case indeterminate
+    case pressedIndeterminate
     case disabled
     
     init(state: VCheckBoxState, isPressed: Bool) {
@@ -74,8 +76,8 @@ enum VCheckBoxInternalState {
         case (.off, true): self = .pressedOff
         case (.on, false): self = .on
         case (.on, true): self = .pressedOn
-        case (.intermediate, false): self = .intermediate
-        case (.intermediate, true): self = .pressedIntermediate
+        case (.indeterminate, false): self = .indeterminate
+        case (.indeterminate, true): self = .pressedIndeterminate
         case (.disabled, _): self = .disabled
         }
     }

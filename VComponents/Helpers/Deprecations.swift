@@ -17,6 +17,12 @@ public typealias VLinkPreset = VWebLinkPreset
 @available(*, deprecated, renamed: "VWebLinkState")
 public typealias VLinkState = VWebLinkState
 
+// MARK:- V CheckBox
+extension VCheckBoxState {
+    @available(*, deprecated, renamed: "indeterminate")
+    public static let intermediate: Self = indeterminate
+}
+
 // MARK:- V Navigation View
 extension VNavigationViewModel.Colors {
     @available(*, deprecated, renamed: "bar")
@@ -70,3 +76,20 @@ public typealias VLazyListModelVertical = VLazyScrollViewModelVertical
 
 @available(*, deprecated, renamed: "VLazyScrollViewModelHorizontal")
 public typealias VLazyListModelHorizontal = VLazyScrollViewModelHorizontal
+
+// MARK:- State Colors
+extension StateColors_OOID {
+    @available(*, deprecated, renamed: "indeterminate")
+    public var intermediate: Color {
+        get { indeterminate }
+        set { indeterminate = newValue }
+    }
+    
+    @available(*, deprecated, message: "Use `init(off:_, on:_, intermediate:_, disabled:_)` instead")
+    public init(off: Color, on: Color, intermediate: Color, disabled: Color) {
+        self.off = off
+        self.on = on
+        self.indeterminate = intermediate
+        self.disabled = disabled
+    }
+}

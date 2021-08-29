@@ -182,8 +182,8 @@ extension StateOpacities_PD {
         case .pressedOff: return pressedOpacity
         case .on: return 1
         case .pressedOn: return pressedOpacity
-        case .intermediate: return 1
-        case .pressedIntermediate: return pressedOpacity
+        case .indeterminate: return 1
+        case .pressedIndeterminate: return pressedOpacity
         case .disabled: return disabledOpacity
         }
     }
