@@ -73,7 +73,7 @@ import SwiftUI
 public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowContent>: View
     where
         Section: VSectionListSectionViewModelable,
-        Row == Section.VSectionListRow,
+        Row == Section.VSectionListRowViewModelable,
         HeaderContent: View,
         FooterContent: View,
         RowContent: View
@@ -385,7 +385,7 @@ struct VSectionList_Previews: PreviewProvider {
         static let count: Int = 2
     }
 
-    private struct Row: VSectionListRowViewModelable {
+    private struct Row: Identifiable {
         let id: Int
         let color: Color
         let title: String

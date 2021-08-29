@@ -64,6 +64,14 @@ public typealias VSectionListSection = VSectionListSectionViewModelable
 @available(*, deprecated, renamed: "VSectionListRowViewModelable")
 public typealias VSectionListRow = VSectionListRowViewModelable
 
+extension VSectionListSectionViewModelable {
+    @available(*, deprecated, renamed: "VSectionListRowViewModelable")
+    public typealias VSectionListRow = VSectionListRowViewModelable
+}
+
+@available(*, deprecated, message: "`VSectionListRowViewModelable` has been dropped. Use `Identifiable` instead.")
+public typealias VSectionListRowViewModelable = Identifiable
+
 // MARK:- V Lazy Scroll View
 @available(*, deprecated, renamed: "VLazyScrollView")
 public typealias VLazyList = VLazyScrollView

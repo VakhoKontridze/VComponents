@@ -238,7 +238,6 @@
 		7AF3C8F225AF6FB200D56042 /* VModalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8F125AF6FB200D56042 /* VModalDemoView.swift */; };
 		7AF3C95F25B04F2B00D56042 /* VDialogButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C95E25B04F2B00D56042 /* VDialogButtonModel.swift */; };
 		7AF3CA8B25B0AD5A00D56042 /* VSectionListSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3CA8A25B0AD5A00D56042 /* VSectionListSection.swift */; };
-		7AF3CA8E25B0AD5F00D56042 /* VSectionListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3CA8D25B0AD5F00D56042 /* VSectionListRow.swift */; };
 		7AF3CA9125B0CB6A00D56042 /* VTextType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3CA9025B0CB6A00D56042 /* VTextType.swift */; };
 /* End PBXBuildFile section */
 
@@ -500,7 +499,6 @@
 		7AF3C8F125AF6FB200D56042 /* VModalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModalDemoView.swift; sourceTree = "<group>"; };
 		7AF3C95E25B04F2B00D56042 /* VDialogButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogButtonModel.swift; sourceTree = "<group>"; };
 		7AF3CA8A25B0AD5A00D56042 /* VSectionListSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSectionListSection.swift; sourceTree = "<group>"; };
-		7AF3CA8D25B0AD5F00D56042 /* VSectionListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSectionListRow.swift; sourceTree = "<group>"; };
 		7AF3CA9025B0CB6A00D56042 /* VTextType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -863,7 +861,6 @@
 			children = (
 				7A59577E25AB5B7400B5B6E7 /* VSectionList.swift */,
 				7AF3CA8A25B0AD5A00D56042 /* VSectionListSection.swift */,
-				7AF3CA8D25B0AD5F00D56042 /* VSectionListRow.swift */,
 				7ACC3ECE25ACB1D900EAD184 /* VSectionListLayoutType.swift */,
 				7A59578625AB6FCC00B5B6E7 /* VSectionListModel.swift */,
 			);
@@ -1599,7 +1596,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A67884E25CC0A2300734DA6 /* VStepperModel.swift in Sources */,
-				7AF3CA8E25B0AD5F00D56042 /* VSectionListRow.swift in Sources */,
 				7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */,
 				7A5A5FFA25C92376008667F5 /* VTabNavigationPageItem.swift in Sources */,
 				7AF3C8D225AF511800D56042 /* VModalModel.swift in Sources */,

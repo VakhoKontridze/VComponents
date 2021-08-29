@@ -119,7 +119,7 @@ private struct VSectionListDataSource {
         let rows: [Row]
     }
 
-    struct Row: VSectionListRowViewModelable {
+    struct Row: Identifiable {
         let id: Int
         let color: Color
         let title: String

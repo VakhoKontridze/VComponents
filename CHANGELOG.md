@@ -3,6 +3,7 @@
 #### [1.4.1(9)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.1/VComponents.xcframework.zip) — *2021 08 XX*
 
 - `VLink` has been renamed to `VWebLink`
+- `VSectionListRowViewModelable` has been dropped for `Identifiable`
 - `intermediate` has been renamed to `indeterminate`
 - Layout and color groups used in models can now be initialized as `.zero`, `.clear`, and `.solid`
 
