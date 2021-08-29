@@ -202,22 +202,22 @@ extension VTextFieldModel {
 
 extension VTextFieldModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEFD
+    public typealias StateColors = StateColors—EFD
     
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesD
+    public typealias StateOpacities = StateOpacities_D
     
     /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
+    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     
     /// Sub-model containing colors for component states
-    public typealias StateColorsHighlighted = StateColorsEFSED
+    public typealias StateColorsHighlighted = StateColors_EFSED
     
     /// Sub-model containing colors for component states
-    public typealias ButtonStateColorsHighlighted = StateColorsEpFpSpEpD
+    public typealias ButtonStateColorsHighlighted = StateColors_EpFpSpEpD
     
     /// Sub-model containing colors and opacities for component states
-    public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColorsEpFpSpEpD_PD
+    public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColors_EpFpSpEpD_PD
 }
 
 // MARK:- Fonts

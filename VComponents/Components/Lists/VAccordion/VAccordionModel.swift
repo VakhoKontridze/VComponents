@@ -91,7 +91,7 @@ extension VAccordionModel.Layout {
     public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
     
     /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins
-    public typealias Margins = LayoutGroupLTTB
+    public typealias Margins = LayoutGroup_LTTB
     
     /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins
     public struct ExpandableMargins {
@@ -157,13 +157,13 @@ extension VAccordionModel {
 
 extension VAccordionModel.Colors {
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesD
+    public typealias StateOpacities = StateOpacities_D
     
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEPD
+    public typealias StateColors = StateColors_EPD
     
     /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
+    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
 // MARK:- Fonts

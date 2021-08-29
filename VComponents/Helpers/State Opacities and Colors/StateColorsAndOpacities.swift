@@ -8,8 +8,8 @@
 import SwiftUI
 
 // MARK:- Enabled, Disabled | Disabled
-/// Color and opacity level group containing values for `enabled` and `disables` states
-public struct StateColorsAndOpacitiesEP_D {
+/// Color and opacity level group containing values for `enabled` and `disabled` states
+public struct StateColorsAndOpacities_EP_D {
     /// Enabled color
     public var enabled: Color
     
@@ -26,7 +26,7 @@ public struct StateColorsAndOpacitiesEP_D {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear and transparent values
+    /// Instance of group with clear values
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -36,7 +36,7 @@ public struct StateColorsAndOpacitiesEP_D {
     }
 }
 
-extension StateColorsAndOpacitiesEP_D {
+extension StateColorsAndOpacities_EP_D {
     func `for`(_ state: VTextFieldState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -71,8 +71,8 @@ extension StateColorsAndOpacitiesEP_D {
 }
 
 // MARK:- Enabled, Pressed, Disabled | Pressed, Disabled
-/// Color and opacity level group containing values for `enabled`, `pressed`, and `disables` states
-public struct StateColorsAndOpacitiesEPD_PD {
+/// Color and opacity level group containing values for `enabled`, `pressed`, and `disabled` states
+public struct StateColorsAndOpacities_EPD_PD {
     /// Enabled color
     public var enabled: Color
     
@@ -97,7 +97,7 @@ public struct StateColorsAndOpacitiesEPD_PD {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear and transparent values
+    /// Instance of group with clear values
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -109,7 +109,7 @@ public struct StateColorsAndOpacitiesEPD_PD {
     }
 }
 
-extension StateColorsAndOpacitiesEPD_PD {
+extension StateColorsAndOpacities_EPD_PD {
     func `for`(_ state: VChevronButtonInternalState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -160,8 +160,8 @@ extension StateColorsAndOpacitiesEPD_PD {
 }
 
 // MARK:- Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled | Pressed, Disabled
-/// Color and opacity level group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disables` states
-public struct StateColorsEpFpSpEpD_PD {
+/// Color and opacity level group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states
+public struct StateColors_EpFpSpEpD_PD {
     /// Enabled color
     public var enabled: Color
     
@@ -210,7 +210,7 @@ public struct StateColorsEpFpSpEpD_PD {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear and transparent values
+    /// Instance of group with clear values
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -228,7 +228,7 @@ public struct StateColorsEpFpSpEpD_PD {
     }
 }
 
-extension StateColorsEpFpSpEpD_PD {
+extension StateColors_EpFpSpEpD_PD {
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         switch (highlight, state) {
         case (_, .disabled): return disabled

@@ -57,10 +57,10 @@ extension VSquareButtonModel {
 
 extension VSquareButtonModel.Layout {
     /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias ContentMargin = LayoutGroupHV
+    public typealias ContentMargin = LayoutGroup_HV
     
     /// Sub-model containing `horizontal` and `vertical` hit boxes
-    public typealias HitBox = LayoutGroupHV
+    public typealias HitBox = LayoutGroup_HV
 }
 
 // MARK:- Colors
@@ -103,10 +103,10 @@ extension VSquareButtonModel {
 
 extension VSquareButtonModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEPD
+    public typealias StateColors = StateColors_EPD
     
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesPD
+    public typealias StateOpacities = StateOpacities_PD
 }
 
 // MARK:- Fonts

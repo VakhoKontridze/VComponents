@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK:- Enabled, Disabled
 /// Color group containing values for `enabled` and `disabled` states
-public struct StateColorsED {
+public struct StateColors_ED {
     /// Enabled color
     public var enabled: Color
     
@@ -31,7 +31,7 @@ public struct StateColorsED {
     }
 }
 
-extension StateColorsED {
+extension StateColors_ED {
     func `for`(_ state: VStepperState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -70,7 +70,7 @@ extension StateColorsED {
 
 // MARK:- Enabled, Pressed, Disabled
 /// Color group containing values for `enabled`, `pressed`, and `disabled` states
-public struct StateColorsEPD {
+public struct StateColors_EPD {
     /// Enabled color
     public var enabled: Color
     
@@ -97,7 +97,7 @@ public struct StateColorsEPD {
     }
 }
 
-extension StateColorsEPD {
+extension StateColors_EPD {
     func `for`(_ state: VSecondaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -150,7 +150,7 @@ extension StateColorsEPD {
 
 // MARK:- Enabled, Pressed, Disabled, Loading
 /// Color group containing values for enabled, pressed, disabled, and loading states
-public struct StateColorsEPDL {
+public struct StateColors_EPDL {
     /// Enabled color
     public var enabled: Color
     
@@ -182,7 +182,7 @@ public struct StateColorsEPDL {
     }
 }
 
-extension StateColorsEPDL {
+extension StateColors_EPDL {
     func `for`(_ state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -195,7 +195,7 @@ extension StateColorsEPDL {
 
 // MARK:- Off, On, Disabled
 /// Color group containing values for `off`, `on`, and `disabled` states
-public struct StateColorsOOD {
+public struct StateColors_OOD {
     /// Off color
     public var off: Color
     
@@ -222,7 +222,7 @@ public struct StateColorsOOD {
     }
 }
 
-extension StateColorsOOD {
+extension StateColors_OOD {
     func `for`(_ state: VToggleInternalState) -> Color {
         switch state {
         case .off: return off
@@ -246,7 +246,7 @@ extension StateColorsOOD {
 
 // MARK:- Off, On, Intermediate, Disabled
 /// Color group containing values for `off`, `on`, `intermediate`, and `disabled` states
-public struct StateColorsOOID {
+public struct StateColors_OOID {
     /// Off color
     public var off: Color
     
@@ -278,7 +278,7 @@ public struct StateColorsOOID {
     }
 }
 
-extension StateColorsOOID {
+extension StateColors_OOID {
     func `for`(_ state: VCheckBoxInternalState) -> Color {
         switch state {
         case .off: return off
@@ -294,7 +294,7 @@ extension StateColorsOOID {
 
 // MARK:- Enabled, Focused, Disabled
 /// Color group containing values for `enabled`, `focused`, and `disabled` states
-public struct StateColorsEFD {
+public struct StateColors_EFD {
     /// Enabled color
     public var enabled: Color
     
@@ -321,7 +321,7 @@ public struct StateColorsEFD {
     }
 }
 
-extension StateColorsEFD {
+extension StateColors_EFD {
     func `for`(_ state: VTextFieldState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -333,7 +333,7 @@ extension StateColorsEFD {
 
 // MARK:- Enabled, Focused, Success, Error, Disabled
 /// Color group containing values for `enabled`, `focused`, `success`, `error`, and `disabled` states
-public struct StateColorsEFSED {
+public struct StateColors_EFSED {
     /// Enabled color
     public var enabled: Color
     
@@ -370,7 +370,7 @@ public struct StateColorsEFSED {
     }
 }
 
-extension StateColorsEFSED {
+extension StateColors_EFSED {
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         switch (highlight, state) {
         case (_, .disabled): return disabled
@@ -386,7 +386,7 @@ extension StateColorsEFSED {
 
 // MARK:- Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled
 /// Color group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states
-public struct StateColorsEpFpSpEpD {
+public struct StateColors_EpFpSpEpD {
     /// Enabled color
     public var enabled: Color
     
@@ -433,7 +433,7 @@ public struct StateColorsEpFpSpEpD {
     }
 }
 
-extension StateColorsEpFpSpEpD {
+extension StateColors_EpFpSpEpD {
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         switch (highlight, state) {
         case (_, .disabled): return disabled

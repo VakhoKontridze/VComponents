@@ -70,7 +70,7 @@ extension VDialogModel {
 
 extension VDialogModel {
     /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias TitleAndContentMargin = LayoutGroupHV
+    public typealias TitleAndContentMargin = LayoutGroup_HV
 }
 
 // MARK:- Colors

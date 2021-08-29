@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK:- Pressed
 /// Opacity level group containing values for `pressed` state
-public struct StateOpacitiesP {
+public struct StateOpacities_P {
     /// Pressed opacity level
     public var pressedOpacity: Double
 
@@ -18,8 +18,8 @@ public struct StateOpacitiesP {
         self.pressedOpacity = pressedOpacity
     }
     
-    /// Instance of group with transparent values
-    public static var transparent: Self {
+    /// Instance of group with clear values
+    public static var clear: Self {
         .init(
             pressedOpacity: 0
         )
@@ -35,7 +35,7 @@ public struct StateOpacitiesP {
 
 // MARK:- Disabled
 /// Opacity level group containing values for `disabled` state
-public struct StateOpacitiesD {
+public struct StateOpacities_D {
     /// Disabled opacity level
     public var disabledOpacity: Double
     
@@ -44,8 +44,8 @@ public struct StateOpacitiesD {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with transparent values
-    public static var transparent: Self {
+    /// Instance of group with clear values
+    public static var clear: Self {
         .init(
             disabledOpacity: 0
         )
@@ -59,7 +59,7 @@ public struct StateOpacitiesD {
     }
 }
 
-extension StateOpacitiesD {
+extension StateOpacities_D {
     func `for`(_ state: VWheelPickerState) -> Double {
         switch state {
         case .enabled: return 1
@@ -86,7 +86,7 @@ extension StateOpacitiesD {
 
 // MARK:- Pressed, Disabled
 /// Opacity level group containing values for `pressed` and `disabled` states
-public struct StateOpacitiesPD {
+public struct StateOpacities_PD {
     /// Pressed opacity level
     public var pressedOpacity: Double
     
@@ -99,8 +99,8 @@ public struct StateOpacitiesPD {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with transparent values
-    public static var transparent: Self {
+    /// Instance of group with clear values
+    public static var clear: Self {
         .init(
             pressedOpacity: 0,
             disabledOpacity: 0
@@ -116,7 +116,7 @@ public struct StateOpacitiesPD {
     }
 }
 
-extension StateOpacitiesPD {
+extension StateOpacities_PD {
     func `for`(_ state: VPrimaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1

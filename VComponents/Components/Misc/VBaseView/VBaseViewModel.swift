@@ -91,10 +91,10 @@ extension VBaseViewModel {
 
 extension VBaseViewModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEPD
+    public typealias StateColors = StateColors_EPD
     
     /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
+    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
 // MARK:- Fonts

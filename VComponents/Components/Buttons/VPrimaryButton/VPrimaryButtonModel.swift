@@ -58,7 +58,7 @@ extension VPrimaryButtonModel {
 
 extension VPrimaryButtonModel.Layout {
     /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias ContentMargin = LayoutGroupHV
+    public typealias ContentMargin = LayoutGroup_HV
 }
 
 // MARK:- Colors
@@ -107,10 +107,10 @@ extension VPrimaryButtonModel {
 
 extension VPrimaryButtonModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEPDL
+    public typealias StateColors = StateColors_EPDL
     
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesPD
+    public typealias StateOpacities = StateOpacities_PD
 }
 
 // MARK:- Fonts

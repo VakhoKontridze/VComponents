@@ -96,10 +96,10 @@ extension VToggleModel {
 
 extension VToggleModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsOOD
+    public typealias StateColors = StateColors_OOD
 
     /// Sub-model containing colors and opacities for component states
-    public typealias StateOpacities = StateOpacitiesPD
+    public typealias StateOpacities = StateOpacities_PD
 }
 
 // MARK:- Fonts

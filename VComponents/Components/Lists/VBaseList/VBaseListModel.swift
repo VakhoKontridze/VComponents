@@ -55,7 +55,7 @@ extension VBaseListModel {
 
 extension VBaseListModel.Layout {
     /// Sub-model containing `leading` and `trailing` margins
-    public typealias HorizontalMargins = LayoutGroupLT
+    public typealias HorizontalMargins = LayoutGroup_LT
 }
 
 // MARK:- Colors

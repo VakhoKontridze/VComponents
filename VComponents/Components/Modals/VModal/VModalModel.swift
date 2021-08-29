@@ -96,7 +96,7 @@ extension VModalModel.Layout {
     public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
     
     /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
-    public typealias Margins = LayoutGroupLTTB
+    public typealias Margins = LayoutGroup_LTTB
 }
 
 // MARK:- Colors
@@ -130,10 +130,10 @@ extension VModalModel {
 
 extension VModalModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEPD
+    public typealias StateColors = StateColors_EPD
     
     /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
+    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
 // MARK:- Fonts

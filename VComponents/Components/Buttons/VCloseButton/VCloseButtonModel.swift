@@ -40,7 +40,7 @@ extension VCloseButtonModel {
 
 extension VCloseButtonModel.Layout {
     /// Sub-model containing `horizontal` and `vertical` hit boxes
-    public typealias HitBox = LayoutGroupHV
+    public typealias HitBox = LayoutGroup_HV
 }
 
 // MARK:- Colors
@@ -60,10 +60,10 @@ extension VCloseButtonModel {
 
 extension VCloseButtonModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEPD
+    public typealias StateColors = StateColors_EPD
     
     /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
+    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
 // MARK:- References

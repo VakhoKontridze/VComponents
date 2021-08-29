@@ -92,7 +92,7 @@ extension VSliderModel {
 
 extension VSliderModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsED
+    public typealias StateColors = StateColors_ED
 }
 
 // MARK:- Animations

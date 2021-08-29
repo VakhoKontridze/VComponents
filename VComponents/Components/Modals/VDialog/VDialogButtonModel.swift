@@ -128,10 +128,10 @@ extension VDialogButtonModelCustom {
 
 extension VDialogButtonModelCustom.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsEPD
+    public typealias StateColors = StateColors_EPD
     
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesP
+    public typealias StateOpacities = StateOpacities_P
 }
 
 // MARK:- Fonts

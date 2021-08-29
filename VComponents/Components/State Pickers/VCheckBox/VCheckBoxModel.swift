@@ -107,10 +107,10 @@ extension VCheckBoxModel {
 
 extension VCheckBoxModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsOOID
+    public typealias StateColors = StateColors_OOID
 
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesPD
+    public typealias StateOpacities = StateOpacities_PD
 }
 
 // MARK:- Fonts

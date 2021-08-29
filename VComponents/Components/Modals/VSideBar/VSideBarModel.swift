@@ -68,7 +68,7 @@ extension VSideBarModel {
 
 extension VSideBarModel.Layout {
     /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
-    public typealias Margins = LayoutGroupLTTB
+    public typealias Margins = LayoutGroup_LTTB
 }
 
 // MARK:- Colors

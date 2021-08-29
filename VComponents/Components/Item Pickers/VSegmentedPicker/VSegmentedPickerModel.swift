@@ -129,10 +129,10 @@ extension VSegmentedPickerModel {
 
 extension VSegmentedPickerModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsED
+    public typealias StateColors = StateColors_ED
     
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesPD
+    public typealias StateOpacities = StateOpacities_PD
 }
 
 // MARK:- Fonts

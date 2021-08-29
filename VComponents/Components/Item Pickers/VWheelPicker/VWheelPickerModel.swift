@@ -74,10 +74,10 @@ extension VWheelPickerModel {
 
 extension VWheelPickerModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsED
+    public typealias StateColors = StateColors_ED
     
     /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacitiesD
+    public typealias StateOpacities = StateOpacities_D
 }
 
 // MARK:- Fonts

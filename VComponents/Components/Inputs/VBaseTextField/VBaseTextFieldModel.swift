@@ -85,7 +85,7 @@ extension VBaseTextFieldModel {
 
 extension VBaseTextFieldModel.Colors {
     /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEP_D
+    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EP_D
 }
 
 // MARK:- Fonts

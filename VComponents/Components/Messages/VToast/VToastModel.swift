@@ -81,7 +81,7 @@ extension VToastModel.Layout {
     }
     
     /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias Margins = LayoutGroupHV
+    public typealias Margins = LayoutGroup_HV
 }
 
 // MARK:- Colors

@@ -1,5 +1,9 @@
 ## Change Log
 
+#### [1.4.1(9)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.1/VComponents.xcframework.zip) — *2021 08 XX*
+
+- Layout and color groups used in models can now be initialized as `.zero`, `.clear`, and `.solid`.
+
 #### [1.4.0(8)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.0/VComponents.xcframework.zip) — *2021 08 26*
 
 - Navigation can now occur using `vNavigationLink` extension

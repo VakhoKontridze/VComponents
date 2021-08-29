@@ -77,13 +77,13 @@ extension VStepperModel {
 
 extension VStepperModel.Colors {
     /// Sub-model containing colors for component states
-    public typealias StateColors = StateColorsED
+    public typealias StateColors = StateColors_ED
     
     /// Sub-model containing colors for component states
-    public typealias ButtonStateColors = StateColorsEPD
+    public typealias ButtonStateColors = StateColors_EPD
     
     /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacitiesEPD_PD
+    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
 // MARK:- Misc
