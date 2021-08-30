@@ -10,7 +10,7 @@
 #### [1.4.0(8)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.0/VComponents.xcframework.zip) — *2021 08 26*
 
 - Navigation can now occur using `vNavigationLink` extension
-- Divider margins can no be changed in `VBaseList`, `VList`, `VSectionList`, and `VAccordion` via models
+- Divider margins can now be changed in `VBaseList`, `VList`, `VSectionList`, and `VAccordion` via models
 - Default divider color in `VNavigationView` has changed from `ColorBook.clear` to gray
 - Default title alignment has changed in `VBaseView` from leading to center
 - `VSectionListRow` has been renamed to `VSectionListRowViewModelable`
