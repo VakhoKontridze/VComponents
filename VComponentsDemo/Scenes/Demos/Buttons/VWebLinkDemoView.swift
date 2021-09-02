@@ -47,7 +47,7 @@ extension VWebLinkDemoView {
     
     private func buttonContent() -> some View { DemoIconContentView(dimension: 20) }
     
-    private var url: URL? { URL(string: "https://www.apple.com") }
+    private var url: URL? { .init(string: "https://www.apple.com") }
 }
 
 // MARK:- Helpers

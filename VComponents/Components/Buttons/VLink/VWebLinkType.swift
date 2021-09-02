@@ -18,7 +18,7 @@ public typealias VWebLinkPreset = DerivedButtonPreset
 
 // MARK:- Button
 extension VWebLinkType {
-    @ViewBuilder static func linkButton<Content>(
+    @ViewBuilder static func webLinkButton<Content>(
         buttonType: VWebLinkType,
         isEnabled: Bool,
         action: @escaping () -> Void,

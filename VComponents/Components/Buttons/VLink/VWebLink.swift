@@ -22,7 +22,7 @@ import SwiftUI
 /// var body: some View {
 ///     VWebLink(
 ///         preset: .secondary(),
-///         url: URL(string: "https://www.apple.com"),
+///         url: .init(string: "https://www.apple.com"),
 ///         title: "Lorem ipsum"
 ///     )
 /// }
@@ -85,7 +85,7 @@ public struct VWebLink<Content>: View where Content: View {
 // MARK:- Body
 extension VWebLink {
     public var body: some View {
-        VWebLinkType.linkButton(
+        VWebLinkType.webLinkButton(
             buttonType: linkButtonType,
             isEnabled: state.isEnabled,
             action: openURL,
@@ -107,7 +107,7 @@ struct VWebLink_Previews: PreviewProvider {
     static var previews: some View {
         VWebLink(
             preset: .secondary(),
-            url: URL(string: "https://www.apple.com"),
+            url: .init(string: "https://www.apple.com"),
             title: "Lorem ipsum"
         )
     }
