@@ -32,8 +32,10 @@ extension VSpinnerContinous {
             .frame(width: model.layout.dimension, height: model.layout.dimension)
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
             .onAppear(perform: {
-                withAnimation(model.animations.spinning.repeatForever(autoreverses: false), {
-                    isAnimating.toggle()
+                DispatchQueue.main.async(execute: { // Fixes SwiftUI 3.0 bug with NavigationView
+                    withAnimation(model.animations.spinning.repeatForever(autoreverses: false), {
+                        isAnimating.toggle()
+                    })
                 })
             })
     }
