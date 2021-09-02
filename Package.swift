@@ -19,8 +19,8 @@ let package: Package = .init(
     targets: [
         .binaryTarget(
             name: "VComponents",
-            url: "https://github.com/VakhoKontridze/VComponents/releases/download/1.4.1/VComponents.xcframework.zip",
-            checksum: "7cf5738ea4161ae935fbfdcfc62ed884706f3b91fd46a2408ef027640e45079d"
+            url: "https://github.com/VakhoKontridze/VComponents/releases/download/1.4.2/VComponents.xcframework.zip",
+            checksum: "d47431f91352e3c1f0576dd764aca69848b09513efa0e23f1631202d414d7ecf"
         ),
     ]
 )

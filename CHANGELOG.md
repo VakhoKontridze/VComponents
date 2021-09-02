@@ -1,5 +1,9 @@
 ## Change Log
 
+#### [1.4.2(10)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.2/VComponents.xcframework.zip) — *2021 09 02*
+
+- Fixed `continuous` `VSpinner` breaking in `NavigationView` in SwiftUI 3.0
+
 #### [1.4.1(9)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.1/VComponents.xcframework.zip) — *2021 08 29*
 
 - `VLink` has been renamed to `VWebLink`
