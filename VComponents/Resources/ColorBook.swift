@@ -45,7 +45,7 @@ extension Color {
             let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents"),
             let uiColor = UIColor(named: name, in: bundle, compatibleWith: nil)
         else {
-            preconditionFailure()
+            fatalError()
         }
         
         self.init(uiColor)

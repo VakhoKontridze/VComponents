@@ -60,20 +60,6 @@ extension Binding where Value == Double {
     {
         self.init(
             get: {
-                // NOTE: No more precision fixing on init
-                
-//                let value: Double = .init(value.wrappedValue)
-//                let min: Double = .init(range.lowerBound)
-//                let max: Double = .init(range.upperBound)
-//                let step: Double? = {
-//                    switch step {
-//                    case nil: return nil
-//                    case let step?: return .init(step)
-//                    }
-//                }()
-//
-//                return value.fixedInRange(min: min, max: max, step: step)
-                
                 let value: Double = .init(value.wrappedValue)
                 let min: Double = .init(range.lowerBound)
                 let max: Double = .init(range.upperBound)
@@ -84,6 +70,7 @@ extension Binding where Value == Double {
                 case _: return value
                 }
             },
+            
             set: {
                 value.wrappedValue = .init($0)
             }

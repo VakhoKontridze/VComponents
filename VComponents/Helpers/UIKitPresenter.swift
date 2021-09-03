@@ -47,19 +47,16 @@ final class UIKitPresenterVC<Content>: UIViewController where Content: View {
     private var hostingController: UIHostingController<Content>!
 
     // MARK: Initializers
-    init(
+    convenience init(
         allowsHitTesting: Bool,
         content: Content
     ) {
-        super.init(nibName: nil, bundle: nil)
+        self.init(nibName: nil, bundle: nil)
+        
         present(
             allowsHitTesting: allowsHitTesting,
             content: content
         )
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }
 
@@ -77,7 +74,7 @@ extension UIKitPresenterVC {
         hostedView.backgroundColor = .clear
         hostedView.tag = hostedViewTag
         
-        guard let appSuperView = UIView.appSuperView else { preconditionFailure() }
+        guard let appSuperView = UIView.appSuperView else { fatalError() }
         
         appSuperView.addSubview(hostedView)
         

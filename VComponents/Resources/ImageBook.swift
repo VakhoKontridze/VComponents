@@ -37,7 +37,7 @@ extension Image {
         guard
             let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents")
         else {
-            preconditionFailure()
+            fatalError()
         }
         
         self = Image(name, bundle: bundle)
