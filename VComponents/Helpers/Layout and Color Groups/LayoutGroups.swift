@@ -1,5 +1,5 @@
 //
-//  LayoutGroup.swift
+//  LayoutGroups.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/9/21.
