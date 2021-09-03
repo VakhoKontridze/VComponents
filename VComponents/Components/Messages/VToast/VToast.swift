@@ -64,7 +64,7 @@ extension View {
         return self
             .overlay(Group(content: {
                 if isPresented.wrappedValue {
-                    UIKitRepresentable(
+                    WindowOverlayView(
                         allowsHitTesting: false,
                         isPresented: isPresented,
                         content:

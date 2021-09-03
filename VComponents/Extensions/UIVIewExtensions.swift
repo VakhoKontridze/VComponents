@@ -10,11 +10,11 @@ import UIKit
 // MARK:- Constants
 extension UIView {
     static var topSafeAreaHeight: CGFloat {
-        appSuperView?.safeAreaInsets.top ?? 0
+        windowView?.safeAreaInsets.top ?? 0
     }
 
     static var bottomSafeAreaHeight: CGFloat {
-        appSuperView?.safeAreaInsets.bottom ?? 0
+        windowView?.safeAreaInsets.bottom ?? 0
     }
     
     static var navigationBarHeight: CGFloat {
@@ -23,18 +23,17 @@ extension UIView {
     }
 }
 
-// MARK:- App Super View
+// MARK:- Window View
 extension UIView {
-    static var appSuperView: UIView? {
+    static var windowView: UIView? {
         guard
             let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
             let rootVC = keyWindow.rootViewController,
-            let appSuperView = rootVC.navigationController?.view ?? rootVC.view
+            let windowView = rootVC.navigationController?.view ?? rootVC.view
         else {
             return nil
         }
         
-        return appSuperView
+        return windowView
     }
-
 }

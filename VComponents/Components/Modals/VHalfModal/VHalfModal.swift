@@ -171,7 +171,7 @@ extension View {
         return self
             .overlay(Group(content: {
                 if isPresented.wrappedValue {
-                    UIKitRepresentable(
+                    WindowOverlayView(
                         isPresented: isPresented,
                         content:
                             _VHalfModal(

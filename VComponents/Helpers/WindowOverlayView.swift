@@ -1,5 +1,5 @@
 //
-//  UIKitPresenter.swift
+//  WindowOverlayView.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/21/21.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK:- UI Kit Representable
-struct UIKitRepresentable<Content> where Content: View {
+// MARK:- Window Overlay View
+struct WindowOverlayView<Content> where Content: View {
     // MARK: Properties
     private let allowsHitTesting: Bool
     @Binding private var isPresented: Bool
@@ -27,12 +27,12 @@ struct UIKitRepresentable<Content> where Content: View {
 }
 
 // MARK:- Representabe
-extension UIKitRepresentable: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> UIKitPresenterVC<Content> {
+extension WindowOverlayView: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> WindowOverlayViewController<Content> {
         .init(allowsHitTesting: allowsHitTesting, content: content)
     }
 
-    func updateUIViewController(_ uiViewController: UIKitPresenterVC<Content>, context: Context) {
+    func updateUIViewController(_ uiViewController: WindowOverlayViewController<Content>, context: Context) {
         switch isPresented {
         case false: uiViewController.dismiss()
         case true: uiViewController.update(with: content)
@@ -40,8 +40,8 @@ extension UIKitRepresentable: UIViewControllerRepresentable {
     }
 }
 
-// MARK:- UI Kit Presenter VC
-final class UIKitPresenterVC<Content>: UIViewController where Content: View {
+// MARK:- Window Overlay View Controller
+final class WindowOverlayViewController<Content>: UIViewController where Content: View {
     // MARK: Properties
     private let hostedViewTag: Int = 999_999_999
     private var hostingController: UIHostingController<Content>!
@@ -61,7 +61,7 @@ final class UIKitPresenterVC<Content>: UIViewController where Content: View {
 }
 
 // MARK:- Presenting
-extension UIKitPresenterVC {
+extension WindowOverlayViewController {
     private func present(
         allowsHitTesting: Bool,
         content: Content
@@ -74,7 +74,7 @@ extension UIKitPresenterVC {
         hostedView.backgroundColor = .clear
         hostedView.tag = hostedViewTag
         
-        guard let appSuperView = UIView.appSuperView else { fatalError() }
+        guard let appSuperView = UIView.windowView else { fatalError() }
         
         appSuperView.addSubview(hostedView)
         
@@ -90,15 +90,15 @@ extension UIKitPresenterVC {
 }
 
 // MARK:- Updating
-extension UIKitPresenterVC {
+extension WindowOverlayViewController {
     fileprivate func update(with content: Content) {
         hostingController?.rootView = content
     }
 }
 
 // MARK:- Dismissing
-extension UIKitPresenterVC {
+extension WindowOverlayViewController {
     fileprivate func dismiss() {
-        UIView.appSuperView?.subviews.first(where: { $0.tag == hostedViewTag })?.removeFromSuperview()
+        UIView.windowView?.subviews.first(where: { $0.tag == hostedViewTag })?.removeFromSuperview()
     }
 }
