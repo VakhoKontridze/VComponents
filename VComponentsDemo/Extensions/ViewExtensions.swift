@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Conditional Modifiers
+// MARK: - Conditional Modifiers
 extension View {
     @ViewBuilder func `if`<Content>(
         _ condition: Bool, transform: (Self) -> Content
@@ -67,7 +67,7 @@ extension View {
     }
 }
 
-// MARK:- Frame
+// MARK: - Frame
 extension View {
     func frame(dimension: CGFloat, alignment: Alignment = .center) -> some View {
         frame(

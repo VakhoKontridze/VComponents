@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Lazy Scroll View Vertical
+// MARK: - V Lazy Scroll View Vertical
 struct VLazyScrollViewVertical<Content>: View where Content: View {
     // MARK: Properties
     private let model: VLazyScrollViewModelVertical
@@ -23,7 +23,7 @@ struct VLazyScrollViewVertical<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VLazyScrollViewVertical {
     var body: some View {
         ScrollView(.vertical, showsIndicators: model.misc.showIndicator, content: {
@@ -34,7 +34,7 @@ extension VLazyScrollViewVertical {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VLazyScrollViewVertical_Previews: PreviewProvider {
     static var previews: some View {
         VLazyScrollViewVertical(model: .init(), content: {

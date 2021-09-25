@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Toast Demo View
+// MARK: - V Toast Demo View
 struct VToastDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Toast"
@@ -26,7 +26,7 @@ struct VToastDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VToastDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -65,7 +65,7 @@ extension VToastDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VToastModel.Layout.PresentationEdge: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -105,7 +105,7 @@ extension VToastType {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VToastDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VToastDemoView()

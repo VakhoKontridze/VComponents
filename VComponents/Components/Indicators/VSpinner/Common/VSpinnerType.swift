@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Spinner Type
+// MARK: - V Spinner Type
 /// Enum of types, such as `continous` or `dashed`
 public enum VSpinnerType {
     /// Continos spinner

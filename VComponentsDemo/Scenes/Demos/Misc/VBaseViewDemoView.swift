@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Base View Demo View
+// MARK: - V Base View Demo View
 struct VBaseViewDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Base View"
@@ -36,7 +36,7 @@ struct VBaseViewDemoView: View {
     }()
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseViewDemoView {
     @ViewBuilder var body: some View {
         switch titleContentType {
@@ -110,7 +110,7 @@ extension VBaseViewDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VBaseViewModel.Layout.TitlePosition: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -133,7 +133,7 @@ private enum VBaseViewTitleContentType: Int, VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VBaseViewDemoView()

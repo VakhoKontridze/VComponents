@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Modal Model
+// MARK: - V Modal Model
 /// Model that describes UI
 public struct VModalModel {
     /// Sub-model containing layout properties
@@ -29,7 +29,7 @@ public struct VModalModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VModalModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -99,7 +99,7 @@ extension VModalModel.Layout {
     public typealias Margins = LayoutGroup_LTTB
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VModalModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -136,7 +136,7 @@ extension VModalModel.Colors {
     public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VModalModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -150,7 +150,7 @@ extension VModalModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VModalModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -174,7 +174,7 @@ extension VModalModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VModalModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -209,7 +209,7 @@ extension Set where Element == VModalModel.Misc.DismissType {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VModalModel {
     /// Reference to `VCloseButtonModel`
     public static let closeButtonReference: VCloseButtonModel = .init()
@@ -218,7 +218,7 @@ extension VModalModel {
     public static let sheetReference: VSheetModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VModalModel {
     var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()

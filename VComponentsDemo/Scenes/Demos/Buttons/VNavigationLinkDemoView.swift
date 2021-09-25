@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Navigation Link Demo View
+// MARK: - V Navigation Link Demo View
 struct VNavigationLinkDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Navigation Link"
@@ -17,7 +17,7 @@ struct VNavigationLinkDemoView: View {
     @State private var navigationLinkButtonType: VNavigationLinkButtonTypeHelper = .secondary
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VNavigationLinkDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -58,7 +58,7 @@ extension VNavigationLinkDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VNavigationLinkState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -109,7 +109,7 @@ extension VNavigationLinkPreset {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VNavigationLinkDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VNavigationLinkDemoView()

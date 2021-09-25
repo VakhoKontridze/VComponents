@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base View
+// MARK: - V Base View
 /// Core component that is used throughout the framework as `SwiftUI`'s equivalent of `UIViewController`
 ///
 /// Model, and leading and trailing items can be passed as parameters
@@ -230,7 +230,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseView {
     @ViewBuilder public var body: some View {
         switch model.layout.titlePosition {
@@ -266,14 +266,14 @@ extension VBaseView {
     }
 }
 
-// MARK:- Back
+// MARK: - Back
 extension VBaseView {
     private func back() {
         presentationMode.wrappedValue.dismiss()
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseView_Previews: PreviewProvider {
     static var previews: some View {
         VNavigationView(content: {

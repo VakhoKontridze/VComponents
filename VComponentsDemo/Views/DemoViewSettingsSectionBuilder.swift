@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Demo View Setting Section
+// MARK: - Demo View Setting Section
 struct DemoViewSettingsSection<Content>: View where Content: View {
     // MARK: Properties
     private let content: () -> Content
@@ -18,14 +18,14 @@ struct DemoViewSettingsSection<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension DemoViewSettingsSection {
     var body: some View {
         VStack(spacing: DemoViewSettingsSectionModel.rowSpacing, content: content)
     }
 }
 
-// MARK:- DemoViewSettingsSectionModel
+// MARK: - DemoViewSettingsSectionModel
 private struct DemoViewSettingsSectionModel {
     static let sectionSpacing: CGFloat = 25
     static let rowSpacing: CGFloat = 15
@@ -33,7 +33,7 @@ private struct DemoViewSettingsSectionModel {
     private init() {}
 }
 
-// MARK:- Demo View Settings Section Builder
+// MARK: - Demo View Settings Section Builder
 @resultBuilder struct DemoViewSettingsSectionBuilder {
     private static let spacing: CGFloat = DemoViewSettingsSectionModel.sectionSpacing
 

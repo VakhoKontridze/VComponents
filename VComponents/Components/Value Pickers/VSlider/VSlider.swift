@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Slider
+// MARK: - V Slider
 /// Value picker component that selects value from a bounded linear range of values
 ///
 /// Model, range, step, state, and onChange callback can be passed as parameters
@@ -67,7 +67,7 @@ public struct VSlider: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSlider {
     public var body: some View {
         performStateSets()
@@ -124,7 +124,7 @@ extension VSlider {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VSlider {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -133,7 +133,7 @@ extension VSlider {
     }
 }
 
-// MARK:- Drag
+// MARK: - Drag
 extension VSlider {
     private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
         let rawValue: Double = {
@@ -156,7 +156,7 @@ extension VSlider {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VSlider {
     private func setValue(to value: Double) {
         withAnimation(model.animations.progress, { animatableValue = value })
@@ -170,7 +170,7 @@ extension VSlider {
     }
 }
 
-// MARK:- Progress
+// MARK: - Progress
 extension VSlider {
     private func progressWidth(in proxy: GeometryProxy) -> CGFloat {
         let value: CGFloat = .init((animatableValue ?? self.value) - min)
@@ -181,7 +181,7 @@ extension VSlider {
     }
 }
 
-// MARK:- Thumb Offset
+// MARK: - Thumb Offset
 extension VSlider {
     private func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
         let progressW: CGFloat = progressWidth(in: proxy)
@@ -192,7 +192,7 @@ extension VSlider {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSlider_Previews: PreviewProvider {
     @State private static var value: Double = 0.5
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Base List Element
+// MARK: - V Base List Element
 struct VBaseListElement<ID, Value>: Identifiable where ID: Hashable {
     // MARK: Properties
     let id: ID

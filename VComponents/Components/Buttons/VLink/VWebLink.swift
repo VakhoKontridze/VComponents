@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Web Link
+// MARK: - V Web Link
 /// Button component that controls a navigation presentation to an URL
 ///
 /// Component can be initialized with content or title
@@ -82,7 +82,7 @@ public struct VWebLink<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VWebLink {
     public var body: some View {
         VWebLinkType.webLinkButton(
@@ -94,7 +94,7 @@ extension VWebLink {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VWebLink {
     private func openURL() {
         guard let url = url else { return }
@@ -102,7 +102,7 @@ extension VWebLink {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VWebLink_Previews: PreviewProvider {
     static var previews: some View {
         VWebLink(

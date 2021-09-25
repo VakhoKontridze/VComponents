@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Slider Demo View
+// MARK: - V Slider Demo View
 struct VSliderDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Slider"
@@ -74,7 +74,7 @@ struct VSliderDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSliderDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -156,7 +156,7 @@ extension VSliderDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VSliderState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -181,7 +181,7 @@ private enum SliderThumbType: Int, VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSliderDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSliderDemoView()

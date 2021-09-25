@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Close Button Model
+// MARK: - V Close Button Model
 /// Model that describes UI
 public struct VCloseButtonModel {
     /// Sub-model containing layout properties
@@ -20,7 +20,7 @@ public struct VCloseButtonModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VCloseButtonModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -43,7 +43,7 @@ extension VCloseButtonModel.Layout {
     public typealias HitBox = LayoutGroup_HV
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VCloseButtonModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -66,7 +66,7 @@ extension VCloseButtonModel.Colors {
     public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
-// MARK:- References
+// MARK: - References
 extension VCloseButtonModel {
     /// Reference to `VChevronButtonModel`
     public static let chevronButtonReference: VChevronButtonModel = .init()

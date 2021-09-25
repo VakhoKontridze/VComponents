@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Segmented Picker Demo View
+// MARK: - V Segmented Picker Demo View
 struct VSegmentedPickerDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Segmented Picker"
@@ -44,7 +44,7 @@ struct VSegmentedPickerDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSegmentedPickerDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -110,7 +110,7 @@ extension VSegmentedPickerDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VSegmentedPickerState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -147,7 +147,7 @@ enum ComponentRGBItem: Int, VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSegmentedPickerDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSegmentedPickerDemoView()

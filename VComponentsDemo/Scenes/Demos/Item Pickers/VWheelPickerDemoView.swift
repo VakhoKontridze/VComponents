@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Wheel Picker Demo View
+// MARK: - V Wheel Picker Demo View
 struct VWheelPickerDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Wheel Picker"
@@ -29,7 +29,7 @@ struct VWheelPickerDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VWheelPickerDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -81,7 +81,7 @@ extension VWheelPickerDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VWheelPickerState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -92,7 +92,7 @@ extension VWheelPickerState: VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VWheelPickerDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VWheelPickerDemoView()

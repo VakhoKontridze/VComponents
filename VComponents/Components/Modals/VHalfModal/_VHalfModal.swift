@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- _ V Half Modal
+// MARK: - _ V Half Modal
 struct _VHalfModal<Content, HeaderContent>: View
     where
         Content: View,
@@ -51,7 +51,7 @@ struct _VHalfModal<Content, HeaderContent>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension _VHalfModal {
     var body: some View {
         performStateSets()
@@ -178,7 +178,7 @@ extension _VHalfModal {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension _VHalfModal {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -191,7 +191,7 @@ extension _VHalfModal {
     }
 }
 
-// MARK:- Animation
+// MARK: - Animation
 extension _VHalfModal {
     private func animateIn() {
         resetOffsetIsNil()
@@ -213,7 +213,7 @@ extension _VHalfModal {
     }
 }
 
-// MARK:- Gestures
+// MARK: - Gestures
 extension _VHalfModal {
     private func dragChanged(drag: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
@@ -299,7 +299,7 @@ extension _VHalfModal {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VHalfModal_Previews: PreviewProvider {
     static var previews: some View {
         _VHalfModal(

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Page Indicator Auto
+// MARK: - V Page Indicator Auto
 struct VPageIndicatorAuto: View {
     // MARK: Properties
     private let model: VPageIndicatorModel
@@ -36,7 +36,7 @@ struct VPageIndicatorAuto: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VPageIndicatorAuto {
     @ViewBuilder var body: some View {
         switch total {
@@ -49,7 +49,7 @@ extension VPageIndicatorAuto {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPageIndicatorAuto_Previews: PreviewProvider {
     static var previews: some View {
         VPageIndicatorAuto(

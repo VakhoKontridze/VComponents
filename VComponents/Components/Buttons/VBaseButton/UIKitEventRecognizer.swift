@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK:- UIKit Event Recognizer
+// MARK: - UIKit Event Recognizer
 final class UIKitEventRecognizer: UITapGestureRecognizer {
     // MARK: Properties
     private var action: () -> Void
@@ -26,7 +26,7 @@ final class UIKitEventRecognizer: UITapGestureRecognizer {
     }
 }
 
-// MARK:- Updates
+// MARK: - Updates
 extension UIKitEventRecognizer {
     func update(
         action: @escaping () -> Void,
@@ -37,7 +37,7 @@ extension UIKitEventRecognizer {
     }
 }
     
-// MARK:- Touches
+// MARK: - Touches
 extension UIKitEventRecognizer {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         state = .began
@@ -73,7 +73,7 @@ extension UIKitEventRecognizer {
     }
 }
 
-// MARK:- Point on Frame
+// MARK: - Point on Frame
 extension CGPoint {
     fileprivate func isOn(_ frame: CGSize, offset: CGFloat) -> Bool {
         let xIsOnTarget: Bool = {

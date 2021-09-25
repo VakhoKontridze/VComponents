@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Plain Button
+// MARK: - V Plain Button
 /// Plain button component that performs action when triggered
 ///
 /// Component can be initialized with content or title
@@ -76,7 +76,7 @@ public struct VPlainButton<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VPlainButton {
     public var body: some View {
         VBaseButton(
@@ -99,7 +99,7 @@ extension VPlainButton {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
         VPlainButton(action: {}, title: "Lorem ipsum")

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Square Button State
+// MARK: - V Square Button State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VSquareButtonState: Int, CaseIterable {
     /// Enabled
@@ -25,7 +25,7 @@ public enum VSquareButtonState: Int, CaseIterable {
     }
 }
 
-// MARK:- V Square Button Internal State
+// MARK: - V Square Button Internal State
 enum VSquareButtonInternalState {
     case enabled
     case pressed

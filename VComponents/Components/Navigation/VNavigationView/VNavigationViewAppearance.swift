@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- Modifier
+// MARK: - Modifier
 extension View {
     func setUpNavigationBarAppearance(model: VNavigationViewModel) -> some View {
         modifier(VNavigationViewAppearance(model: model))
     }
 }
 
-// MARK:- V Navigation View Appearance
+// MARK: - V Navigation View Appearance
 struct VNavigationViewAppearance: ViewModifier {
     init(
         model: VNavigationViewModel
@@ -36,7 +36,7 @@ struct VNavigationViewAppearance: ViewModifier {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VNavigationViewAppearance {
     func body(content: Content) -> some View {
         content

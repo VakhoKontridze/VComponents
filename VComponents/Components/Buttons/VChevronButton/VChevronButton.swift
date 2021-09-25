@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Chevron Button
+// MARK: - V Chevron Button
 /// Circular colored chevron button component that performs action when triggered
 ///
 /// Model and state can be passed as parameters
@@ -51,7 +51,7 @@ public struct VChevronButton: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VChevronButton {
     public var body: some View {
         VBaseButton(
@@ -90,7 +90,7 @@ extension VChevronButton {
     }
 }
 
-// MARK:- Rotation
+// MARK: - Rotation
 extension VChevronButtonDirection {
     fileprivate var angle: Double {
         switch self {
@@ -102,7 +102,7 @@ extension VChevronButtonDirection {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VChevronButton_Previews: PreviewProvider {
     static var previews: some View {
         VChevronButton(direction: .right, action: {})

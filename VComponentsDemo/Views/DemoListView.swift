@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Demo List View
+// MARK: - Demo List View
 struct DemoListView<Row>: View where Row: DemoableRow {
     // MARK: Properties
     private let demoType: DemoType
@@ -34,7 +34,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension DemoListView {
     var body: some View {
         ZStack(content: {
@@ -73,7 +73,7 @@ struct DemoListView_Previews: PreviewProvider {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension Collection {
     func enumeratedArray() -> Array<(offset: Int, element: Self.Element)> {
         .init(self.enumerated())

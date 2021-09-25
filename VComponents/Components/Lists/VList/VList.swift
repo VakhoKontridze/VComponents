@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V List
+// MARK: - V List
 /// Container component that draws a background, and computes views on demad from an underlying collection of identified data
 ///
 /// Model and layout can be passed as parameters
@@ -104,7 +104,7 @@ public struct VList<Data, ID, RowContent>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VList {
     public var body: some View {
         VSheet(model: model.sheetSubModel, content: { contentView })
@@ -123,7 +123,7 @@ extension VList {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VList_Previews: PreviewProvider {
     static var previews: some View {
         ZStack(alignment: .top, content: {

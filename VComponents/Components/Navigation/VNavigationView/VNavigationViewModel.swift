@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Navigation View Model
+// MARK: - V Navigation View Model
 /// Model that describes UI
 public struct VNavigationViewModel {
     /// Sub-model containing color properties
@@ -17,7 +17,7 @@ public struct VNavigationViewModel {
     public init() {}
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VNavigationViewModel {
     /// Sub-model containing color properties
     public struct Colors {

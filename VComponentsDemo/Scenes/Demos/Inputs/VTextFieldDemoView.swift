@@ -46,7 +46,7 @@ struct VTextFieldDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VTextFieldDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -132,7 +132,7 @@ extension VTextFieldDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VTextFieldState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -166,7 +166,7 @@ extension VTextFieldHighlight: VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VTextFieldDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VTextFieldDemoView()

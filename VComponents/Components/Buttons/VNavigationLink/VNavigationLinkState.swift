@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Navigation Link State
+// MARK: - V Navigation Link State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VNavigationLinkState: Int, CaseIterable {
     /// Enabled

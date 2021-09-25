@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Half Modal
+// MARK: - V Half Modal
 /// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true
 ///
 /// Model and header can be passed as parameters
@@ -155,7 +155,7 @@ public struct VHalfModal<Content, HeaderContent>
     }
 }
 
-// MARK:- Extension
+// MARK: - Extension
 extension View {
     /// Presents `VHalfModal`
     public func vHalfModal<Content, HeaderContent>(

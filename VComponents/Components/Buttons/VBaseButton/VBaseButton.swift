@@ -8,7 +8,7 @@
 import SwiftUI
 import UIKit
 
-// MARK:- V Base Button
+// MARK: - V Base Button
 /// Core component that is used throughout the framework as button
 ///
 /// Bool can also be passed as state
@@ -71,7 +71,7 @@ public struct VBaseButton<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseButton {
     public var body: some View {
         content()
@@ -79,7 +79,7 @@ extension VBaseButton {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseButton_Previews: PreviewProvider {
     @State private static var state: VBaseButtonState = .enabled
     

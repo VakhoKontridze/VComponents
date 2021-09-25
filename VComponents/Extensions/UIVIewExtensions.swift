@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK:- Constants
+// MARK: - Constants
 extension UIView {
     static var topSafeAreaHeight: CGFloat {
         windowView?.safeAreaInsets.top ?? 0
@@ -23,7 +23,7 @@ extension UIView {
     }
 }
 
-// MARK:- Window View
+// MARK: - Window View
 extension UIView {
     static var windowView: UIView? {
         guard

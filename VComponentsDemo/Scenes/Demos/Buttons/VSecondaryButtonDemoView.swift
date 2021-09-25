@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Secondary Button Demo View
+// MARK: - V Secondary Button Demo View
 struct VSecondaryButtonDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Secondary Button"
@@ -59,7 +59,7 @@ struct VSecondaryButtonDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSecondaryButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -98,7 +98,7 @@ extension VSecondaryButtonDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VSecondaryButtonState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -128,7 +128,7 @@ enum ButtonComponentHitBoxType: Int, VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSecondaryButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSecondaryButtonDemoView()

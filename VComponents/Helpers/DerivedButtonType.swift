@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Derived Button Type
+// MARK: - Derived Button Type
 enum DerivedButtonType {
     case primary(model: VPrimaryButtonModel)
     case secondary(model: VSecondaryButtonModel)
@@ -16,7 +16,7 @@ enum DerivedButtonType {
     case custom
 }
 
-// MARK:- Derived Button Preset
+// MARK: - Derived Button Preset
 /// Enum that represents button preset, such as `primary`, `secondary`, `square`, or `plain`
 public enum DerivedButtonPreset {
     /// Primary button

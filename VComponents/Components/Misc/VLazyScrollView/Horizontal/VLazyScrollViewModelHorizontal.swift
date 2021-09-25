@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Lazy Scroll View Model Horizontal
+// MARK: - V Lazy Scroll View Model Horizontal
 /// Model that describes UI
 public struct VLazyScrollViewModelHorizontal {
     /// Sub-model containing layout properties
@@ -20,7 +20,7 @@ public struct VLazyScrollViewModelHorizontal {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VLazyScrollViewModelHorizontal {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -35,7 +35,7 @@ extension VLazyScrollViewModelHorizontal {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VLazyScrollViewModelHorizontal {
     /// Sub-model containing misc properties
     public struct Misc {

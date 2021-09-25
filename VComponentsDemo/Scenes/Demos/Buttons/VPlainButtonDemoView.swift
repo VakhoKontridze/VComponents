@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Plain Button Demo View
+// MARK: - V Plain Button Demo View
 struct VPlainButtonDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Plain Button"
@@ -36,7 +36,7 @@ struct VPlainButtonDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VPlainButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -64,7 +64,7 @@ extension VPlainButtonDemoView {
     private func buttonContent() -> some View { DemoIconContentView() }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VPlainButtonState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -75,7 +75,7 @@ extension VPlainButtonState: VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPlainButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VPlainButtonDemoView()

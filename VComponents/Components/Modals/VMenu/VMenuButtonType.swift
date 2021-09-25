@@ -7,16 +7,16 @@
 
 import SwiftUI
 
-// MARK:- V Menu  Button Type
+// MARK: - V Menu  Button Type
 typealias VMenuButtonType = DerivedButtonType
 
-// MARK:- V Menu  Button Preset
+// MARK: - V Menu  Button Preset
 /// Enum that describes menu button preset, such as `primary`, `secondary`, `square`, or `plain`
 ///
 /// Custom type can be used via inits that do not take preset as a parameter
 public typealias VMenuButtonPreset = DerivedButtonPreset
 
-// MARK:- Button
+// MARK: - Button
 extension VMenuButtonType {
     @ViewBuilder static func menuButton<Content>(
         buttonType: VMenuButtonType,

@@ -31,7 +31,7 @@ struct StepperSettingView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension StepperSettingView {
     var body: some View {
         HStack(spacing: 0, content: {
@@ -62,7 +62,7 @@ extension StepperSettingView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct StepperSettingView_Previews: PreviewProvider {
     static var previews: some View {
         StepperSettingView(range: 1...10, value: .constant(5), title: "Lorem ipsum dolor sit amet")

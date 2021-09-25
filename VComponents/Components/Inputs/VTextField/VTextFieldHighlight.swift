@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Text Field Highlight
+// MARK: - V Text Field Highlight
 /// State that describes highlight state, such as `none`, `success`, or `error`
 public enum VTextFieldHighlight: Int, CaseIterable {
     /// No highlight

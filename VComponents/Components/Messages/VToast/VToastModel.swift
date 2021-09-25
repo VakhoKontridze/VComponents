@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Toast Model
+// MARK: - V Toast Model
 /// Model that describes UI
 public struct VToastModel {
     /// Sub-model containing layout properties
@@ -26,7 +26,7 @@ public struct VToastModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VToastModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -84,7 +84,7 @@ extension VToastModel.Layout {
     public typealias Margins = LayoutGroup_HV
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VToastModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -99,7 +99,7 @@ extension VToastModel {
     }
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VToastModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -111,7 +111,7 @@ extension VToastModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VToastModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -129,7 +129,7 @@ extension VToastModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VToastModel {
     /// Reference to `VTextFieldModel`
     public static let textFieldReference: VTextFieldModel = .init()

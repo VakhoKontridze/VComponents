@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Side Bar Model
+// MARK: - V Side Bar Model
 /// Model that describes UI
 public struct VSideBarModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VSideBarModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VSideBarModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -71,7 +71,7 @@ extension VSideBarModel.Layout {
     public typealias Margins = LayoutGroup_LTTB
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSideBarModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -86,7 +86,7 @@ extension VSideBarModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VSideBarModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -101,7 +101,7 @@ extension VSideBarModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VSideBarModel {
     /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
@@ -113,7 +113,7 @@ extension VSideBarModel {
     public static let halfModalReference: VHalfModalModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VSideBarModel {
     var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()

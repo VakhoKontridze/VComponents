@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Menu Picker State
+// MARK: - V Menu Picker State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VMenuPickerState: Int, CaseIterable {
     /// Enabled

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- UIKit Touch View
+// MARK: - UIKit Touch View
 struct UIKitTouchView: UIViewRepresentable {
     // MARK: Properties
     private let isEnabled: Bool
@@ -29,7 +29,7 @@ struct UIKitTouchView: UIViewRepresentable {
     }
 }
 
-// MARK:- Representable
+// MARK: - Representable
 extension UIKitTouchView {
     func makeUIView(context: Context) -> UIView {
         let view: UIView = .init(frame: .zero)

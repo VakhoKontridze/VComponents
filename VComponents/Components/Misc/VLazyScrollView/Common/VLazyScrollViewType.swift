@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Lazy Scroll View Type
+// MARK: - V Lazy Scroll View Type
 /// Enum of types, such as `vertical` or `horizontal`
 public enum VLazyScrollViewType {
     /// Vertical layout

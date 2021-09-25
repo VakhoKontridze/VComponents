@@ -45,7 +45,7 @@ struct UIKitTextFieldRepresentable {
     }
 }
 
-// MARK:- Representable
+// MARK: - Representable
 extension UIKitTextFieldRepresentable: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
         .init(representable: self)
@@ -132,7 +132,7 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
     }
 }
 
-// MARK:- Focus and Commit
+// MARK: - Focus and Commit
 extension UIKitTextFieldRepresentable {
     func textFieldReturned(_ textField: UITextField) {
         setBindedFocus(to: false)
@@ -147,7 +147,7 @@ extension UIKitTextFieldRepresentable {
     }
 }
 
-// MARK:- preview
+// MARK: - preview
 struct UIKitTextFieldRepresentable_Previews: PreviewProvider {
     static var previews: some View {
         VBaseTextField_Previews.previews

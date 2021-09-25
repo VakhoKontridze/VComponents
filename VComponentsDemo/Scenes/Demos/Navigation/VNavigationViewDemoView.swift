@@ -8,13 +8,13 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Navigation View and Base View Demo View
+// MARK: - V Navigation View and Base View Demo View
 struct VNavigationViewDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Navigation View"
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VNavigationViewDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -39,7 +39,7 @@ extension VNavigationViewDemoView {
     }
 }
 
-// MARK:- Walkthrough
+// MARK: - Walkthrough
 private struct NavigationDemoView1: View {
     var body: some View {
         VNavigationView(content: {
@@ -87,7 +87,7 @@ private struct NavigationDemoView3: View {
     }
 }
 
-// MARK:- Navigation Demo View
+// MARK: - Navigation Demo View
 private struct NavigationDemoView<Destination>: View where Destination: View {
     // MARK: Properties
     private let color: Color
@@ -151,7 +151,7 @@ extension NavigationDemoView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VNavigationViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VNavigationViewDemoView()

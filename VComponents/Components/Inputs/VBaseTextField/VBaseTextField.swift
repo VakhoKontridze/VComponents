@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base Text Field
+// MARK: - V Base Text Field
 /// Core component that is used throughout the framework as textfield
 ///
 /// Model, state, placeholder, event callbacks, and button action can be passed as parameters
@@ -141,7 +141,7 @@ public struct VBaseTextField: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseTextField {
     public var body: some View {
         UIKitTextFieldRepresentable(
@@ -157,7 +157,7 @@ extension VBaseTextField {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseTextField_Previews: PreviewProvider {
     @State private static var state: VBaseTextFieldState = .enabled
     @State private static var text: String = "Lorem ipsum"

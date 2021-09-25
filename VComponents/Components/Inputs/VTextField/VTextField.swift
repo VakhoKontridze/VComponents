@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Text Field
+// MARK: - V Text Field
 /// Input component that displays an editable text interface
 ///
 /// Model, type, highlight, palceholder, header, footer, and event callbacks can be passed as parameters
@@ -230,7 +230,7 @@ public struct VTextField: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VTextField {
     public var body: some View {
         performStateSets()
@@ -357,7 +357,7 @@ extension VTextField {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VTextField {
     private func performStateSets() {
         DispatchQueue.main.asyncAfter(deadline: .now() + model.animations.delayToAnimateButtons, execute: {
@@ -370,7 +370,7 @@ extension VTextField {
     }
 }
 
-// MARK:- Visiblity Icon
+// MARK: - Visiblity Icon
 extension VTextField {
     private var visiblityIcon: Image {
         switch secureFieldIsVisible {
@@ -380,7 +380,7 @@ extension VTextField {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VTextField {
     private func textChanged(_ text: String) {
         withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = !text.isEmpty })
@@ -408,7 +408,7 @@ extension VTextField {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VTextField_Previews: PreviewProvider {
     @State private static var state: VTextFieldState = .enabled
     @State private static var text: String = "Lorem ipsum"

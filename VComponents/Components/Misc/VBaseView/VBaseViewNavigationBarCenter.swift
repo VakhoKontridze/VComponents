@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Modifier
+// MARK: - Modifier
 extension View {
     func setUpBaseViewNavigationBarCenter<LeadingItem, Title, TrailingItem>(
         model: VBaseViewModel,
@@ -33,7 +33,7 @@ extension View {
     }
 }
 
-// MARK:- V Base View Navigation Bar Center
+// MARK: - V Base View Navigation Bar Center
 struct VBaseViewNavigationBarCenter<TrailingItem, Title, LeadingItem>: ViewModifier
     where
         LeadingItem: View,
@@ -77,7 +77,7 @@ struct VBaseViewNavigationBarCenter<TrailingItem, Title, LeadingItem>: ViewModif
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseViewNavigationBarCenter {
     func body(content: Content) -> some View {
         content

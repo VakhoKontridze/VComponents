@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Spinner Model Dashed
+// MARK: - V Spinner Model Dashed
 /// Model that describes UI
 public struct VSpinnerModelDashed {
     /// Sub-model containing color properties
@@ -17,7 +17,7 @@ public struct VSpinnerModelDashed {
     public init() {}
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSpinnerModelDashed {
     /// Sub-model containing color properties
     public struct Colors {
@@ -29,7 +29,7 @@ extension VSpinnerModelDashed {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VSpinnerModelDashed {
     /// Reference to `VSpinnerModelContinous`
     public static let spinnerContinousReference: VSpinnerModelContinous = .init()

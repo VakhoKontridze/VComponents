@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Page Indicator Model
+// MARK: - V Page Indicator Model
 /// Model that describes UI
 public struct VPageIndicatorModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VPageIndicatorModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VPageIndicatorModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -46,7 +46,7 @@ extension VPageIndicatorModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VPageIndicatorModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -61,7 +61,7 @@ extension VPageIndicatorModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VPageIndicatorModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -73,7 +73,7 @@ extension VPageIndicatorModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VPageIndicatorModel {
     /// Reference to `VProgressBarModel`
     public static let progressBarReference: VProgressBarModel = .init()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Spinner Model Continous
+// MARK: - V Spinner Model Continous
 /// Model that describes UI
 public struct VSpinnerModelContinous {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VSpinnerModelContinous {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VSpinnerModelContinous {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -41,7 +41,7 @@ extension VSpinnerModelContinous {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSpinnerModelContinous {
     /// Sub-model containing color properties
     public struct Colors {
@@ -53,7 +53,7 @@ extension VSpinnerModelContinous {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VSpinnerModelContinous {
     /// Sub-model containing animation properties
     public struct Animations {

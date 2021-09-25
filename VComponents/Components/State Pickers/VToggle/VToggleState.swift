@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Toggle State
+// MARK: - V Toggle State
 /// Enum that describes state, such as `off`, `on`, or `disabled`
 public enum VToggleState: Int, CaseIterable {
     /// Off
@@ -38,7 +38,7 @@ public enum VToggleState: Int, CaseIterable {
     }
 }
 
-// MARK:- Next State
+// MARK: - Next State
 extension VToggleState {
     /// Goes to the next state
     public mutating func nextState() {
@@ -50,7 +50,7 @@ extension VToggleState {
     }
 }
 
-// MARK:- V Toggle Internal State
+// MARK: - V Toggle Internal State
 enum VToggleInternalState {
     case off
     case pressedOff
@@ -78,7 +78,7 @@ enum VToggleInternalState {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension Binding where Value == VToggleState {
     /// Initializes state with bool
     public init(bool: Binding<Bool>) {

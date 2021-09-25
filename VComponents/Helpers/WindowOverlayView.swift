@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Window Overlay View
+// MARK: - Window Overlay View
 struct WindowOverlayView<Content> where Content: View {
     // MARK: Properties
     private let allowsHitTesting: Bool
@@ -26,7 +26,7 @@ struct WindowOverlayView<Content> where Content: View {
     }
 }
 
-// MARK:- Representabe
+// MARK: - Representabe
 extension WindowOverlayView: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> WindowOverlayViewController<Content> {
         .init(allowsHitTesting: allowsHitTesting, content: content)
@@ -40,7 +40,7 @@ extension WindowOverlayView: UIViewControllerRepresentable {
     }
 }
 
-// MARK:- Window Overlay View Controller
+// MARK: - Window Overlay View Controller
 final class WindowOverlayViewController<Content>: UIViewController where Content: View {
     // MARK: Properties
     private let hostedViewTag: Int = 999_999_999
@@ -60,7 +60,7 @@ final class WindowOverlayViewController<Content>: UIViewController where Content
     }
 }
 
-// MARK:- Presenting
+// MARK: - Presenting
 extension WindowOverlayViewController {
     private func present(
         allowsHitTesting: Bool,
@@ -89,14 +89,14 @@ extension WindowOverlayViewController {
     }
 }
 
-// MARK:- Updating
+// MARK: - Updating
 extension WindowOverlayViewController {
     fileprivate func update(with content: Content) {
         hostingController?.rootView = content
     }
 }
 
-// MARK:- Dismissing
+// MARK: - Dismissing
 extension WindowOverlayViewController {
     fileprivate func dismiss() {
         UIView.windowView?.subviews.first(where: { $0.tag == hostedViewTag })?.removeFromSuperview()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Progress Bar
+// MARK: - V Progress Bar
 /// Indicator component that indicates progress towards completion of a task
 ///
 /// Model and total value can be passed as parameters
@@ -52,7 +52,7 @@ public struct VProgressBar: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VProgressBar {
     public var body: some View {
         VSlider(
@@ -66,7 +66,7 @@ extension VProgressBar {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VProgressBar_Previews: PreviewProvider {
     static var previews: some View {
         VProgressBar(value: 0.5)

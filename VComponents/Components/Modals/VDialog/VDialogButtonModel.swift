@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Dialog Button Model Model
+// MARK: - V Dialog Button Model Model
 /// Enum that describes `VDialog` button model, such as `primary`, `secondary`, or `custom`
 public enum VDialogButtonModel {
     /// Primary button
@@ -20,7 +20,7 @@ public enum VDialogButtonModel {
     case custom(_ model: VDialogButtonModelCustom)
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VDialogButtonModel {
     var buttonSubModel: VPrimaryButtonModel {
         switch self {
@@ -67,7 +67,7 @@ extension VDialogButtonModel {
     )
 }
 
-// MARK:- V Dialog Button Model Custom
+// MARK: - V Dialog Button Model Custom
 /// Model that describes UI
 public struct VDialogButtonModelCustom {
     /// Sub-model containing layout properties
@@ -87,7 +87,7 @@ public struct VDialogButtonModelCustom {
     }
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VDialogButtonModelCustom {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -102,7 +102,7 @@ extension VDialogButtonModelCustom {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VDialogButtonModelCustom {
     /// Sub-model containing color properties
     public struct Colors {
@@ -134,7 +134,7 @@ extension VDialogButtonModelCustom.Colors {
     public typealias StateOpacities = StateOpacities_P
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VDialogButtonModelCustom {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -146,13 +146,13 @@ extension VDialogButtonModelCustom {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VDialogButtonModelCustom {
     /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VDialogButtonModelCustom {
     fileprivate var primaryButtonSubModel: VPrimaryButtonModel {
         var model: VPrimaryButtonModel = .init()

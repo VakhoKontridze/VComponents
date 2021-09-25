@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Action Sheet Demo View
+// MARK: - V Action Sheet Demo View
 struct VActionSheetDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Action Sheet"
@@ -16,7 +16,7 @@ struct VActionSheetDemoView: View {
     @State private var isPresented: Bool = false
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VActionSheetDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -41,7 +41,7 @@ extension VActionSheetDemoView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VActionSheetDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VActionSheetDemoView()

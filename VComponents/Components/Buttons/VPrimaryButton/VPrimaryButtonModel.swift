@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button Model
+// MARK: - V Primary Button Model
 /// Model that describes UI
 public struct VPrimaryButtonModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VPrimaryButtonModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VPrimaryButtonModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -61,7 +61,7 @@ extension VPrimaryButtonModel.Layout {
     public typealias ContentMargin = LayoutGroup_HV
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VPrimaryButtonModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -113,7 +113,7 @@ extension VPrimaryButtonModel.Colors {
     public typealias StateOpacities = StateOpacities_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VPrimaryButtonModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -127,7 +127,7 @@ extension VPrimaryButtonModel {
     }
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VPrimaryButtonModel {
     var spinnerSubModel: VSpinnerModelContinous {
         var model: VSpinnerModelContinous = .init()

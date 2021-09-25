@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Web Link Demo View
+// MARK: - V Web Link Demo View
 struct VWebLinkDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Web Link"
@@ -17,7 +17,7 @@ struct VWebLinkDemoView: View {
     @State private var webLinkButtonType: VWebLinkButtonTypeHelper = .secondary
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VWebLinkDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -50,7 +50,7 @@ extension VWebLinkDemoView {
     private var url: URL? { .init(string: "https://www.apple.com") }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VWebLinkState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -101,7 +101,7 @@ extension VWebLinkPreset {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VWebLinkDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VWebLinkDemoView()

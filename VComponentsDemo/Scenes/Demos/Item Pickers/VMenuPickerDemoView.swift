@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Menu Picker Demo View
+// MARK: - V Menu Picker Demo View
 struct VMenuPickerDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Menu Picker"
@@ -19,7 +19,7 @@ struct VMenuPickerDemoView: View {
     @State private var contentType: ComponentContentType = .text
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VMenuPickerDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -86,7 +86,7 @@ extension VMenuPickerDemoView {
     private func buttonContent() -> some View { DemoIconContentView() }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VMenuPickerState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -137,7 +137,7 @@ extension VMenuButtonPreset {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VMenuPickerDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VMenuPickerDemoView()

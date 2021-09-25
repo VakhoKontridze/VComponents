@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Toggle Model
+// MARK: - V Toggle Model
 /// Model that describes UI
 public struct VToggleModel {
     /// Sub-model containing layout properties
@@ -29,7 +29,7 @@ public struct VToggleModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VToggleModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -56,7 +56,7 @@ extension VToggleModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VToggleModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -102,7 +102,7 @@ extension VToggleModel.Colors {
     public typealias StateOpacities = StateOpacities_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VToggleModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -116,7 +116,7 @@ extension VToggleModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VToggleModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -128,7 +128,7 @@ extension VToggleModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VToggleModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -140,7 +140,7 @@ extension VToggleModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VToggleModel {
     /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()

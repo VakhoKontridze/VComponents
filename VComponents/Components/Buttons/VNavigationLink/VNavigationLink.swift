@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Navigation Link
+// MARK: - V Navigation Link
 /// Button component that controls a navigation presentation
 ///
 /// Component can be initialized with content or title.
@@ -221,7 +221,7 @@ public struct VNavigationLink<Destination, Content>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VNavigationLink {
     public var body: some View {
         contentView(isActive: isActive)
@@ -246,7 +246,7 @@ extension VNavigationLink {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VNavigationLink_Previews: PreviewProvider {
     private static var destination: some View {
         VBaseView(title: "Destination", content: {

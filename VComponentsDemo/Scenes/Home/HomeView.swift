@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Home View
+// MARK: - Home View
 struct HomeView: View {
     // MARK: Properties
     private static let navBarTitle: String = "VComponents Demo"
@@ -157,7 +157,7 @@ struct HomeView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension HomeView {
     var body: some View {
         VNavigationView(content: {
@@ -168,7 +168,7 @@ extension HomeView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()

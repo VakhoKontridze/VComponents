@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Menu
+// MARK: - V Menu
 /// Modal component that presents menu of actions
 ///
 /// Preset and state can be passed as parameters
@@ -88,7 +88,7 @@ public struct VMenu<Label>: View where Label: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VMenu {
     public var body: some View {
         Menu(content: contentView, label: labelView)
@@ -108,7 +108,7 @@ extension VMenu {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VMenu_Previews: PreviewProvider {
     static var previews: some View {
         VMenu(

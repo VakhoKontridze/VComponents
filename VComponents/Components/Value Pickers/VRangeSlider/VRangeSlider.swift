@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Range Slider
+// MARK: - V Range Slider
 /// Value picker component that selects values from a bounded linear range of values to represent a range
 ///
 /// Model, range, step, state, and onChange callbacks can be passed as parameters
@@ -89,7 +89,7 @@ public struct VRangeSlider: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VRangeSlider {
     public var body: some View {
         performStateSets()
@@ -161,7 +161,7 @@ extension VRangeSlider {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VRangeSlider {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -170,7 +170,7 @@ extension VRangeSlider {
     }
 }
 
-// MARK:- Drag
+// MARK: - Drag
 extension VRangeSlider {
     private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
         let rawValue: Double = {
@@ -218,7 +218,7 @@ extension VRangeSlider {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VRangeSlider {
     private func setValueLow(to value: Double) {
         withAnimation(model.animations.progress, { animatableValueLow = value })
@@ -241,7 +241,7 @@ extension VRangeSlider {
     }
 }
 
-// MARK:- Progress
+// MARK: - Progress
 extension VRangeSlider {
     private func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
@@ -260,7 +260,7 @@ extension VRangeSlider {
     }
 }
 
-// MARK:- Thumb
+// MARK: - Thumb
 extension VRangeSlider {
     private func thumbOffset(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let progressW: CGFloat = progress(in: proxy, thumb: thumb)
@@ -274,7 +274,7 @@ extension VRangeSlider {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VRangeSlider_Previews: PreviewProvider {
     @State private static var valueLow: Double = 0.1
     @State private static var valueHigh: Double = 0.8

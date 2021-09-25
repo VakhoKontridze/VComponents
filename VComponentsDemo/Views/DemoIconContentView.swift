@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Demo Icon Content View
+// MARK: - Demo Icon Content View
 struct DemoIconContentView: View {
     // MARK: Properties
     private let dimension: CGFloat
@@ -21,7 +21,7 @@ struct DemoIconContentView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension DemoIconContentView {
     var body: some View {
         Image(systemName: "swift")
@@ -31,7 +31,7 @@ extension DemoIconContentView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct DemoIconContentView_Previews: PreviewProvider {
     static var previews: some View {
         DemoIconContentView()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Text Field Model
+// MARK: - V Text Field Model
 /// Model that describes UI
 public struct VTextFieldModel {
     /// Sub-model containing layout properties
@@ -29,7 +29,7 @@ public struct VTextFieldModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VTextFieldModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -82,7 +82,7 @@ extension VTextFieldModel.Layout {
     public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VTextFieldModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -220,7 +220,7 @@ extension VTextFieldModel.Colors {
     public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColors_EpFpSpEpD_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VTextFieldModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -238,7 +238,7 @@ extension VTextFieldModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VTextFieldModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -252,7 +252,7 @@ extension VTextFieldModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VTextFieldModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -287,7 +287,7 @@ extension VTextFieldModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VTextFieldModel {
     /// Reference to `VBaseTextFieldModel`
     public static let baseTextFieldReference: VBaseTextFieldModel = .init()
@@ -305,7 +305,7 @@ extension VTextFieldModel {
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VTextFieldModel {
     func baseTextFieldSubModel(state: VTextFieldState, isSecureTextEntry: Bool) -> VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()

@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V RangeSlider Demo View
+// MARK: - V RangeSlider Demo View
 struct VRangeSliderDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Range Slider"
@@ -58,7 +58,7 @@ struct VRangeSliderDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VRangeSliderDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -124,7 +124,7 @@ extension VRangeSliderDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VRangeSliderState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -147,7 +147,7 @@ private enum RangeSliderThumbType: Int, VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VRangeSliderDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VRangeSliderDemoView()

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Base Text Field Actions
+// MARK: - V Base Text Field Actions
 /// Enum that represents action performed when pressing `return` button
 public enum VBaseTextFieldReturnButtonAction {
     /// Returns and resigns responder

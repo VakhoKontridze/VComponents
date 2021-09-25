@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V HalfModal Demo View
+// MARK: - V HalfModal Demo View
 struct VHalfModalDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Half Modal"
@@ -36,7 +36,7 @@ struct VHalfModalDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VHalfModalDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -125,7 +125,7 @@ extension VHalfModalDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private enum VModalHeightTypeHelper: Int, VPickableTitledItem {
     case fixed
     case dynamic
@@ -193,7 +193,7 @@ extension VHalfModalModel.Misc.DismissType {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VHalfModalDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VHalfModalDemoView()

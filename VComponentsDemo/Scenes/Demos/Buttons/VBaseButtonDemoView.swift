@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Base Button Demo View
+// MARK: - V Base Button Demo View
 struct VBaseButtonDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Base Buton"
@@ -17,7 +17,7 @@ struct VBaseButtonDemoView: View {
     @State private var pressState: PressState = .none
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -56,7 +56,7 @@ extension VBaseButtonDemoView {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VBaseButtonDemoView {
     private func action() {
         clickState = .clicked
@@ -71,7 +71,7 @@ extension VBaseButtonDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private enum ClickState {
     case prompt
     case clicked
@@ -107,7 +107,7 @@ private enum PressState {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VBaseButtonDemoView()

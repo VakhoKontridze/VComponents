@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V CheckBox Demo View
+// MARK: - V CheckBox Demo View
 struct VCheckBoxDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "CheckBox"
@@ -44,7 +44,7 @@ struct VCheckBoxDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VCheckBoxDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -88,7 +88,7 @@ extension VCheckBoxDemoView {
     private func CheckBoxContent() -> some View { DemoIconContentView() }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VCheckBoxState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {

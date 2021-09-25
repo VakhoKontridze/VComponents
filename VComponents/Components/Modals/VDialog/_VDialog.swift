@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- _ V Dialog
+// MARK: - _ V Dialog
 struct _VDialog<Content>: View where Content: View {
     // MARK: Properties
     private let model: VDialogModel
@@ -39,7 +39,7 @@ struct _VDialog<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension _VDialog {
     var body: some View {
         ZStack(content: {
@@ -159,7 +159,7 @@ extension _VDialog {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension _VDialog {
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
@@ -172,7 +172,7 @@ extension _VDialog {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VDialog_Previews: PreviewProvider {
     static var previews: some View {
         _VDialog(

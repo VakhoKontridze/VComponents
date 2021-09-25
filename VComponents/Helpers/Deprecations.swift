@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Web Link
+// MARK: - V Web Link
 @available(*, deprecated, renamed: "VWebLink")
 public typealias VLink = VWebLink
 
@@ -17,13 +17,13 @@ public typealias VLinkPreset = VWebLinkPreset
 @available(*, deprecated, renamed: "VWebLinkState")
 public typealias VLinkState = VWebLinkState
 
-// MARK:- V CheckBox
+// MARK: - V CheckBox
 extension VCheckBoxState {
     @available(*, deprecated, renamed: "indeterminate")
     public static let intermediate: Self = indeterminate
 }
 
-// MARK:- V Navigation View
+// MARK: - V Navigation View
 extension VNavigationViewModel.Colors {
     @available(*, deprecated, renamed: "bar")
     public var background: Color {
@@ -32,7 +32,7 @@ extension VNavigationViewModel.Colors {
     }
 }
 
-// MARK:- V List
+// MARK: - V List
 @available(*, deprecated, renamed: "VList")
 public typealias VSection = VList
 
@@ -42,7 +42,7 @@ public typealias VSectionLayoutType = VListLayoutType
 @available(*, deprecated, renamed: "VListModel")
 public typealias VSectionModel = VListModel
 
-// MARK:- V Section List
+// MARK: - V Section List
 @available(*, deprecated, renamed: "VSectionList")
 public typealias VTable = VSectionList
 
@@ -72,7 +72,7 @@ extension VSectionListSectionViewModelable {
 @available(*, deprecated, message: "`VSectionListRowViewModelable` has been dropped. Use `Identifiable` instead.")
 public typealias VSectionListRowViewModelable = Identifiable
 
-// MARK:- V Lazy Scroll View
+// MARK: - V Lazy Scroll View
 @available(*, deprecated, renamed: "VLazyScrollView")
 public typealias VLazyList = VLazyScrollView
 
@@ -85,7 +85,7 @@ public typealias VLazyListModelVertical = VLazyScrollViewModelVertical
 @available(*, deprecated, renamed: "VLazyScrollViewModelHorizontal")
 public typealias VLazyListModelHorizontal = VLazyScrollViewModelHorizontal
 
-// MARK:- State Colors
+// MARK: - State Colors
 extension StateColors_OOID {
     @available(*, deprecated, renamed: "indeterminate")
     public var intermediate: Color {

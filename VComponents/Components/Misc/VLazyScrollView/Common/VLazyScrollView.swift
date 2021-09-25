@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Lazy Scroll View
+// MARK: - V Lazy Scroll View
 /// Core component that is used throughout the framework as a lazy structure that either hosts content, or computes views on demad from an underlying collection of identified data
 ///
 /// Component can be initialized with data or free content
@@ -124,7 +124,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VLazyScrollView {
     @ViewBuilder public var body: some View {
         switch listType {
@@ -134,7 +134,7 @@ extension VLazyScrollView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VLazyScrollViewView_Previews: PreviewProvider {
     private static let range: Range<Int> = 1..<101
 

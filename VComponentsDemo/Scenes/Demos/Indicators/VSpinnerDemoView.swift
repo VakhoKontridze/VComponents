@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Spinner Demo View
+// MARK: - V Spinner Demo View
 struct VSpinnerDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Spinner"
@@ -16,7 +16,7 @@ struct VSpinnerDemoView: View {
     @State private var spinnerType: VSpinnerTypeHelper = VSpinnerType.default.helpeType
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSpinnerDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -36,7 +36,7 @@ extension VSpinnerDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private enum VSpinnerTypeHelper: Int, VPickableTitledItem {
     case continous
     case dashed

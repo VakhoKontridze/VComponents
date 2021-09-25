@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Modal
+// MARK: - V Modal
 /// Modal component that draws a background, hosts content, and is present when condition is true
 ///
 /// Model and header can be passed as parameters
@@ -92,7 +92,7 @@ public struct VModal<Content, HeaderContent>
     }
 }
 
-// MARK:- Extension
+// MARK: - Extension
 extension View {
     /// Presents `VModal`
     public func vModal<Content, headerContent>(

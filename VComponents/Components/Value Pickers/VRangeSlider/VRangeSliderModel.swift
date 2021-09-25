@@ -7,6 +7,6 @@
 
 import Foundation
 
-// MARK:- V Range Slider Model
+// MARK: - V Range Slider Model
 /// Model that describes UI
 public typealias VRangeSliderModel = VSliderModel

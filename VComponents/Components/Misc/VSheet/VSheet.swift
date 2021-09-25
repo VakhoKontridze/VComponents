@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Sheet
+// MARK: - V Sheet
 /// Container component that draws a background and hosts content
 ///
 /// Model can be passed as parameter
@@ -58,7 +58,7 @@ public struct VSheet<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSheet {
     public var body: some View {
         contentView
@@ -79,7 +79,7 @@ extension VSheet {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSheet_Previews: PreviewProvider {
     static var previews: some View {
         ZStack(content: {

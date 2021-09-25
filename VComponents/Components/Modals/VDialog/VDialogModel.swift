@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Dialog Model
+// MARK: - V Dialog Model
 /// Model that describes UI
 public struct VDialogModel {
     /// Sub-model containing layout properties
@@ -26,7 +26,7 @@ public struct VDialogModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VDialogModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -73,7 +73,7 @@ extension VDialogModel {
     public typealias TitleAndContentMargin = LayoutGroup_HV
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VDialogModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -94,7 +94,7 @@ extension VDialogModel {
     }
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VDialogModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -109,13 +109,13 @@ extension VDialogModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VDialogModel {
     /// Sub-model containing animation properties
     public typealias Animations = VModalModel.Animations
 }
 
-// MARK:- References
+// MARK: - References
 extension VDialogModel {
     /// Reference to `VModalModel`
     public static let modalReference: VModalModel = .init()

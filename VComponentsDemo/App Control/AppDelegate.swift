@@ -7,10 +7,10 @@
 
 import UIKit
 
-// MARK:- App Delegate
+// MARK: - App Delegate
 @main final class AppDelegate: UIResponder {}
 
-// MARK:- App Delegate
+// MARK: - App Delegate
 extension AppDelegate: UIApplicationDelegate {
     func application(
         _ application: UIApplication,
@@ -20,7 +20,7 @@ extension AppDelegate: UIApplicationDelegate {
     }
 }
 
-// MARK:- Scene Delegate
+// MARK: - Scene Delegate
 extension AppDelegate {
     func application(
         _ application: UIApplication,

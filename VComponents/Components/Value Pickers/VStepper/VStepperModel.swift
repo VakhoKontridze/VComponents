@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Stepper Model
+// MARK: - V Stepper Model
 /// Model that describes UI
 public struct VStepperModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VStepperModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VStepperModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -44,7 +44,7 @@ extension VStepperModel {
     }
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VStepperModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -86,7 +86,7 @@ extension VStepperModel.Colors {
     public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VStepperModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -104,7 +104,7 @@ extension VStepperModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VStepperModel {
     /// Reference to `VSegmentedPickerModel`
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()

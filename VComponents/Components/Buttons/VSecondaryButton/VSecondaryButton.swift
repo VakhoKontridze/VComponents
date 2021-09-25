@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Secondary Button
+// MARK: - V Secondary Button
 /// Small colored button component that performs action when triggered
 ///
 /// Component can be initialized with content or title
@@ -76,7 +76,7 @@ public struct VSecondaryButton<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSecondaryButton {
     public var body: some View {
         VBaseButton(
@@ -120,7 +120,7 @@ extension VSecondaryButton {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
         VSecondaryButton(action: {}, title: "Lorem ipsum")

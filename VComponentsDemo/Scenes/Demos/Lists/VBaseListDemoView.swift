@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Bas List Demo View
+// MARK: - V Bas List Demo View
 struct VBaseListDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Base List"
@@ -17,7 +17,7 @@ struct VBaseListDemoView: View {
     @State private var rowCount: Int = 5
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseListDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -59,7 +59,7 @@ extension VBaseListDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 enum BaseListLayoutTypeHelper: Int, VPickableTitledItem {
     case fixed
     case flexible
@@ -161,7 +161,7 @@ struct VBaseListDemoViewDataSource {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseListDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VBaseListDemoView()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base List Model
+// MARK: - V Base List Model
 /// Model that describes UI
 public struct VBaseListModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VBaseListModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VBaseListModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -58,7 +58,7 @@ extension VBaseListModel.Layout {
     public typealias HorizontalMargins = LayoutGroup_LT
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VBaseListModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -70,7 +70,7 @@ extension VBaseListModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VBaseListModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -82,7 +82,7 @@ extension VBaseListModel {
     }
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VBaseListModel {
     var lazyScrollViewSubModel: VLazyScrollViewModelVertical {
         var model: VLazyScrollViewModelVertical = .init()

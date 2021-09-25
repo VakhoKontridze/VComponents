@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Sheet Demo View
+// MARK: - V Sheet Demo View
 struct VSheetDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Sheet"
@@ -24,7 +24,7 @@ struct VSheetDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSheetDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -48,7 +48,7 @@ extension VSheetDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private enum VSheetRoundedCornersHelper: Int, VPickableTitledItem {
     case all
     case top
@@ -90,7 +90,7 @@ extension VSheetModel.Layout.RoundedCorners {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSheetDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSheetDemoView()

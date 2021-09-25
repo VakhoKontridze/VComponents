@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Secondary Button Model
+// MARK: - V Secondary Button Model
 /// Model that describes UI
 public struct VSecondaryButtonModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VSecondaryButtonModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VSecondaryButtonModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -62,7 +62,7 @@ extension VSecondaryButtonModel.Layout {
     public typealias HitBox = LayoutGroup_HV
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSecondaryButtonModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -108,7 +108,7 @@ extension VSecondaryButtonModel.Colors {
     public typealias StateOpacities = StateOpacities_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VSecondaryButtonModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -122,7 +122,7 @@ extension VSecondaryButtonModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VSecondaryButtonModel {
     /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()

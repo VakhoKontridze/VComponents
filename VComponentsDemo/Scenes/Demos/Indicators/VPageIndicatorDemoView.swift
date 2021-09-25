@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import VComponents
 
-// MARK:- V Page Indicator Demo VIew
+// MARK: - V Page Indicator Demo VIew
 struct VPageIndicatorDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Page Indicator"
@@ -21,7 +21,7 @@ struct VPageIndicatorDemoView: View {
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = VPageIndicatorType.default.helperType
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VPageIndicatorDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -49,7 +49,7 @@ extension VPageIndicatorDemoView {
     }
 }
 
-// MARK:- Timer
+// MARK: - Timer
 extension VPageIndicatorDemoView {
     fileprivate func updateValue(_ output: Date) {
         var valueToSet: Int = selectedIndex + 1
@@ -59,7 +59,7 @@ extension VPageIndicatorDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private enum VPageIndicatorTypeHelper: Int, VPickableTitledItem {
     case finite
     case infinite
@@ -101,7 +101,7 @@ extension VPageIndicatorType {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPageIndicatorDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VPageIndicatorDemoView()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Tab Navigation View
+// MARK: - V Tab Navigation View
 /// Navigation component that switches between multiple views using interactive user interface elements
 ///
 /// Model can be passed as parameter
@@ -179,7 +179,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VTabNavigationView {
     public var body: some View {
         TabView(selection: $selection, content: {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- Enumerated Colleciton
+// MARK: - Enumerated Colleciton
 extension Collection {
     func enumeratedArray() -> Array<(offset: Int, element: Self.Element)> {
         .init(self.enumerated())

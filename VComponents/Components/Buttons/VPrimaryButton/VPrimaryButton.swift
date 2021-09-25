@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Primary Button
+// MARK: - V Primary Button
 /// Large colored button component that performs action when triggered
 ///
 /// Component can be initialized with content or title
@@ -77,7 +77,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VPrimaryButton {
     public var body: some View {
         VBaseButton(
@@ -136,7 +136,7 @@ extension VPrimaryButton {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
         VPrimaryButton(action: {}, title: "Lorem ipsum")

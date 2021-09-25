@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Web Link State
+// MARK: - V Web Link State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VWebLinkState: Int, CaseIterable {
     /// Enabled

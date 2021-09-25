@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Close Button
+// MARK: - V Close Button
 /// Circular colored close button component that performs action when triggered
 ///
 /// Model and state can be passed as parameters
@@ -45,7 +45,7 @@ public struct VCloseButton: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VCloseButton {
     public var body: some View {
         VBaseButton(
@@ -82,7 +82,7 @@ extension VCloseButton {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VCloseButton_Previews: PreviewProvider {
     static var previews: some View {
         VCloseButton(action: {})

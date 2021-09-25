@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Segmented Picker State
+// MARK: - V Segmented Picker State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VSegmentedPickerState: Int, CaseIterable {
     /// Enabled
@@ -25,7 +25,7 @@ public enum VSegmentedPickerState: Int, CaseIterable {
     }
 }
 
-// MARK:- V Segmented Picker Row State
+// MARK: - V Segmented Picker Row State
 enum VSegmentedPickerRowState {
     case enabled
     case pressed

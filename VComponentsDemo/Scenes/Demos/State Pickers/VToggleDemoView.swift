@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Toggle Demo View
+// MARK: - V Toggle Demo View
 struct VToggleDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Toggle"
@@ -31,7 +31,7 @@ struct VToggleDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VToggleDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -71,7 +71,7 @@ extension VToggleDemoView {
     private func toggleContent() -> some View { DemoIconContentView() }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VToggleState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {

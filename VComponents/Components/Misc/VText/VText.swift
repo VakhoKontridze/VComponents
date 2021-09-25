@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base Title
+// MARK: - V Base Title
 /// Core component that is used throughout the framework as text
 ///
 /// # Usage Example #
@@ -45,7 +45,7 @@ public struct VText: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VText {
     @ViewBuilder public var body: some View {
         switch textType {
@@ -67,7 +67,7 @@ extension VText {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VText_Previews: PreviewProvider {
     static var previews: some View {
         VText(

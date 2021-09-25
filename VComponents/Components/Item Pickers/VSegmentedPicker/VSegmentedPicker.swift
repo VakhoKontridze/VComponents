@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Segmented Picker
+// MARK: - V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
 ///
 /// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
@@ -194,7 +194,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSegmentedPicker {
     public var body: some View {
         performStateSets()
@@ -298,7 +298,7 @@ extension VSegmentedPicker {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VSegmentedPicker {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -307,7 +307,7 @@ extension VSegmentedPicker {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VSegmentedPicker {
     private func setSelectedIndex(to index: Int) {
         withAnimation(model.animations.selection, { animatableSelectedIndex = index })
@@ -321,7 +321,7 @@ extension VSegmentedPicker {
     }
 }
 
-// MARK:- State Indication
+// MARK: - State Indication
 extension VSegmentedPicker {
     private var indicatorScale: CGFloat {
         switch selectedIndex {
@@ -344,7 +344,7 @@ extension VSegmentedPicker {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSegmentedPicker_Previews: PreviewProvider {
     @State private static var selection: PickerRow = .red
     

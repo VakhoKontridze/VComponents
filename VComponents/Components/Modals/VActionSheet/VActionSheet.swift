@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Action Sheet
+// MARK: - V Action Sheet
 /// Modal component that presents half modal menu of actions
 ///
 /// Description can be passed as parameter
@@ -55,7 +55,7 @@ public struct VActionSheet {
     }
 }
 
-// MARK:- Extension
+// MARK: - Extension
 extension View {
     /// Presents `VActionSheet`
     public func vActionSheet(

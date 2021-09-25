@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Spinner Continous
+// MARK: - V Spinner Continous
 struct VSpinnerContinous: View {
     // MARK: Properties
     private let model: VSpinnerModelContinous
@@ -20,7 +20,7 @@ struct VSpinnerContinous: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSpinnerContinous {
     var body: some View {
         Circle()

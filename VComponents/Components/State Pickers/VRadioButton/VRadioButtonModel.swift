@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Radio Button Model
+// MARK: - V Radio Button Model
 /// Model that describes UI
 public struct VRadioButtonModel {
     /// Sub-model containing layout properties
@@ -29,7 +29,7 @@ public struct VRadioButtonModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VRadioButtonModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -53,7 +53,7 @@ extension VRadioButtonModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VRadioButtonModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -103,7 +103,7 @@ extension VRadioButtonModel.Colors {
     public typealias StateOpacities = StateOpacities_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VRadioButtonModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -117,7 +117,7 @@ extension VRadioButtonModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VRadioButtonModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -129,7 +129,7 @@ extension VRadioButtonModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VRadioButtonModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -141,7 +141,7 @@ extension VRadioButtonModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VRadioButtonModel {
     /// Reference to `VToggleModel`
     public static let toggleRefrence: VToggleModel = .init()

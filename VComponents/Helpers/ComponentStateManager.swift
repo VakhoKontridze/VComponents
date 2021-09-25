@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- Component State Management
+// MARK: - Component State Management
 enum ComponentStateManagement {
     case `internal`
     case external

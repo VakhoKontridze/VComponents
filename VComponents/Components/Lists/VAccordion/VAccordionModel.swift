@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Accordion Model
+// MARK: - V Accordion Model
 /// Model that describes UI
 public struct VAccordionModel {
     /// Sub-model containing layout properties
@@ -29,7 +29,7 @@ public struct VAccordionModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VAccordionModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -121,7 +121,7 @@ extension VAccordionModel.Layout {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VAccordionModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -166,7 +166,7 @@ extension VAccordionModel.Colors {
     public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VAccordionModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -180,7 +180,7 @@ extension VAccordionModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VAccordionModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -192,7 +192,7 @@ extension VAccordionModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VAccordionModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -207,7 +207,7 @@ extension VAccordionModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VAccordionModel {
     /// Reference to `VSheetModel`
     public static let sheetReference: VSheetModel = .init()
@@ -219,7 +219,7 @@ extension VAccordionModel {
     public static let chevronButtonReference: VChevronButtonModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VAccordionModel {
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()

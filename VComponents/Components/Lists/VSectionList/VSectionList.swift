@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Section List
+// MARK: - V Section List
 /// Sectioned container component that draws a background, and computes views on demad from an underlying collection of identified data
 ///
 /// Model, layout, and header, and footer can be passed as parameters
@@ -316,7 +316,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSectionList {
     public var body: some View {
         VSheet(model: model.sheetSubModel, content: {
@@ -368,14 +368,14 @@ extension VSectionList {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VSectionList {
     private func showSectionSpacing(for i: Int) -> Bool {
         i <= sections.count-2
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSectionList_Previews: PreviewProvider {
     private struct Section: VSectionListSectionViewModelable {
         let id: Int

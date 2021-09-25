@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Page Indicator Infinite
+// MARK: - V Page Indicator Infinite
 struct VPageIndicatorInfinite: View {
     // MARK: Properties
     private let model: VPageIndicatorModel
@@ -43,7 +43,7 @@ struct VPageIndicatorInfinite: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VPageIndicatorInfinite {
     @ViewBuilder public var body: some View {
         switch (validLayout, total) {
@@ -77,7 +77,7 @@ extension VPageIndicatorInfinite {
     }
 }
 
-// MARK:- Widths
+// MARK: - Widths
 extension VPageIndicatorInfinite {
     private var visibleWidth: CGFloat {
         let dots: CGFloat = .init(visible) * model.layout.dotDimension
@@ -94,7 +94,7 @@ extension VPageIndicatorInfinite {
     }
 }
 
-// MARK:- Animation Offset
+// MARK: - Animation Offset
 extension VPageIndicatorInfinite {
     private var offset: CGFloat {
         let rawOffset: CGFloat = (totalWidth - visibleWidth) / 2
@@ -113,7 +113,7 @@ extension VPageIndicatorInfinite {
     }
 }
 
-// MARK:- Animation Scale
+// MARK: - Animation Scale
 extension VPageIndicatorInfinite {
     private func scale(at index: Int) -> CGFloat {
         switch region {
@@ -217,7 +217,7 @@ extension VPageIndicatorInfinite {
     }
 }
 
-// MARK:- Region
+// MARK: - Region
 extension VPageIndicatorInfinite {
     private enum Region {
         case leftEdge
@@ -234,14 +234,14 @@ extension VPageIndicatorInfinite {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension Int {
     fileprivate var isEven: Bool { self % 2 == 0 }
     
     fileprivate var isOdd: Bool { !isEven }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPageIndicatorInfinite_Previews: PreviewProvider {
     static var previews: some View {
         VPageIndicatorInfinite(

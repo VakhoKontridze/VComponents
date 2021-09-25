@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Slider Model
+// MARK: - V Slider Model
 /// Model that describes UI
 public struct VSliderModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VSliderModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VSliderModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -52,7 +52,7 @@ extension VSliderModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSliderModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -95,7 +95,7 @@ extension VSliderModel.Colors {
     public typealias StateColors = StateColors_ED
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VSliderModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -107,7 +107,7 @@ extension VSliderModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VSliderModel {
     /// Reference to `VPrimaryButtonModel`
     public static let primaryButtonReference: VPrimaryButtonModel = .init()

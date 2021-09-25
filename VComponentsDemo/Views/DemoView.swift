@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Demo View Type
+// MARK: - Demo View Type
 enum DemoViewType<ComponentContent, SettingsContent>
     where
         ComponentContent: View,
@@ -26,13 +26,13 @@ enum DemoViewType<ComponentContent, SettingsContent>
     )
 }
 
-// MARK:- Demo View Component Content Type
+// MARK: - Demo View Component Content Type
 enum DemoViewComponentContentType {
     case fixed
     case flexible
 }
 
-// MARK:- Demo View
+// MARK: - Demo View
 struct DemoView<ComponentContent, SettingsContent>: View
     where
         ComponentContent: View,
@@ -97,7 +97,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension DemoView {
     var body: some View {
         ZStack(content: {
@@ -167,7 +167,7 @@ extension DemoView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct DemoView_Previews: PreviewProvider {
     static var previews: some View {
         VPrimaryButtonDemoView_Previews.previews

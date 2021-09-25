@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Dialog Demo View
+// MARK: - V Dialog Demo View
 struct VDialogDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Dialog"
@@ -27,7 +27,7 @@ struct VDialogDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VDialogDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -76,7 +76,7 @@ extension VDialogDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private enum VDialogButtonsHelper: Int, VPickableTitledItem {
     case one
     case two
@@ -124,7 +124,7 @@ extension VDialogButtons {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VDialogDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VDialogDemoView()

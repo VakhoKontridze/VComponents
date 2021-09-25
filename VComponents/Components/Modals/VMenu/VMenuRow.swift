@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Menu Row
+// MARK: - V Menu Row
 /// Enum that represens menu row, such as `titled`, with icons, or expandable `menu`
 public enum VMenuRow {
     /// Row with title

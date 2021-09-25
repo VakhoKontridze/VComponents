@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Square Button
+// MARK: - V Square Button
 /// Squared colored button component that performs action when triggered
 ///
 /// Component can be initialized with content or title
@@ -78,7 +78,7 @@ public struct VSquareButton<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSquareButton {
     public var body: some View {
         VBaseButton(
@@ -122,7 +122,7 @@ extension VSquareButton {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSquareButton_Previews: PreviewProvider {
     static var previews: some View {
         VSquareButton(action: {}, content: {

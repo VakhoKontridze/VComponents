@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Section List Model
+// MARK: - V Section List Model
 /// Model that describes UI
 public struct VSectionListModel {
     /// Sub-model containing layout properties
@@ -26,7 +26,7 @@ public struct VSectionListModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VSectionListModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -64,7 +64,7 @@ extension VSectionListModel.Layout {
     public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSectionListModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -89,7 +89,7 @@ extension VSectionListModel {
     }
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VSectionListModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -108,7 +108,7 @@ extension VSectionListModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VSectionListModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -120,13 +120,13 @@ extension VSectionListModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VSectionListModel {
     /// Reference to `VListModel`
     public static let listReference: VListModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VSectionListModel {
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()

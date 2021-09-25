@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- _ V Toast
+// MARK: - _ V Toast
 struct _VToast: View {
     // MARK: Properties
     private let model: VToastModel
@@ -34,7 +34,7 @@ struct _VToast: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension _VToast {
     var body: some View {
         Group(content: {
@@ -71,7 +71,7 @@ extension _VToast {
     }
 }
 
-// MARK:- Offsets
+// MARK: - Offsets
 extension _VToast {
     private var initialOffset: CGFloat {
         switch model.layout.presentationEdge {
@@ -91,7 +91,7 @@ extension _VToast {
     }
 }
 
-// MARK:- Corner Radius
+// MARK: - Corner Radius
 extension _VToast {
     private var cornerRadius: CGFloat {
         switch model.layout.cornerRadiusType {
@@ -101,7 +101,7 @@ extension _VToast {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension _VToast {
     func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
@@ -117,7 +117,7 @@ extension _VToast {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct _VToast_Previews: PreviewProvider {
     static var previews: some View {
         _VToast(

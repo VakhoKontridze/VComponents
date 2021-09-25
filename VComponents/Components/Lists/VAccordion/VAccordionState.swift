@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Accordion State
+// MARK: - V Accordion State
 /// Enum that describes state, such as `collapsed`, `expanded`, or `disabled`
 public enum VAccordionState: Int, CaseIterable {
     /// Case collapsed
@@ -54,7 +54,7 @@ public enum VAccordionState: Int, CaseIterable {
     }
 }
 
-// MARK:- Next State
+// MARK: - Next State
 extension VAccordionState {
     /// Goes to the next state
     public mutating func nextState() {

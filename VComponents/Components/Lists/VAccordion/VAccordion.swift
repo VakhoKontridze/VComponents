@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Accordion
+// MARK: - V Accordion
 /// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data
 ///
 /// Component can be initialized with data or free content
@@ -252,7 +252,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VAccordion {
     public var body: some View {
         performStateSets()
@@ -331,7 +331,7 @@ extension VAccordion {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VAccordion {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -340,7 +340,7 @@ extension VAccordion {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VAccordion {
     private func expandCollapse() {
         withAnimation(model.animations.expandCollapse, { animatableState?.nextState() })
@@ -359,7 +359,7 @@ extension VAccordion {
     }
 }
 
-// MARK:- Previews
+// MARK: - Previews
 struct VAccordion_Previews: PreviewProvider {
     @State private static var accordionState: VAccordionState = .expanded
     

@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- Modifier
+// MARK: - Modifier
 extension View {
     func setUpTabNavigationViewAppearance(model: VTabNavigationViewModel) -> some View {
         modifier(VTabNavigationViewAppearance(model: model))
     }
 }
 
-// MARK:- V Navigation View Appearance
+// MARK: - V Navigation View Appearance
 struct VTabNavigationViewAppearance: ViewModifier {
     // MARK: Properties
     private let model: VTabNavigationViewModel
@@ -31,7 +31,7 @@ struct VTabNavigationViewAppearance: ViewModifier {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VTabNavigationViewAppearance {
     func body(content: Content) -> some View {
         content

@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Page Indicator Type
+// MARK: - V Page Indicator Type
 /// Enum that describes page indicator type, such as `finite` or `infinite`
 ///
 /// 1. `Finite`.

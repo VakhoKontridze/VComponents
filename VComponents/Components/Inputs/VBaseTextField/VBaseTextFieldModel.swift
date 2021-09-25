@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base Text Field Model
+// MARK: - V Base Text Field Model
 /// Model that describes UI
 public struct VBaseTextFieldModel {
     /// Sub-model containing layout properties
@@ -26,7 +26,7 @@ public struct VBaseTextFieldModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VBaseTextFieldModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -67,7 +67,7 @@ extension VBaseTextFieldModel.Layout {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VBaseTextFieldModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -88,7 +88,7 @@ extension VBaseTextFieldModel.Colors {
     public typealias StateColorsAndOpacities = StateColorsAndOpacities_EP_D
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VBaseTextFieldModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -100,7 +100,7 @@ extension VBaseTextFieldModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VBaseTextFieldModel {
     /// Sub-model containing misc properties
     public struct Misc {

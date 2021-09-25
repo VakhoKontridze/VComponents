@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Menu Picker
+// MARK: - V Menu Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a menu
 ///
 /// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
@@ -330,7 +330,7 @@ public struct VMenuPicker<Label, Data>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VMenuPicker {
     public var body: some View {
         Picker(selection: $selectedIndex, label: labelView, content: {
@@ -371,7 +371,7 @@ extension VMenuPicker {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VMenuPicker_Previews: PreviewProvider {
     @State private static var selection: VSegmentedPicker_Previews.PickerRow = .red
     

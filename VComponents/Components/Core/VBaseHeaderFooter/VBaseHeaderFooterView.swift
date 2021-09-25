@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base Header Footer
+// MARK: - V Base Header Footer
 /// Core component that is used throughout the framework
 ///
 /// # Usage Example #
@@ -46,7 +46,7 @@ public struct VBaseHeaderFooter: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseHeaderFooter {
     @ViewBuilder public var body: some View {
         switch frameType {
@@ -65,7 +65,7 @@ extension VBaseHeaderFooter {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseHeaderFooter_Previews: PreviewProvider {
     static var previews: some View {
         VSectionList_Previews.previews

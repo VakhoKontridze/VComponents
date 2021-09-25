@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Modal Demo View
+// MARK: - V Modal Demo View
 struct VModalDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Modal"
@@ -30,7 +30,7 @@ struct VModalDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VModalDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -117,7 +117,7 @@ extension VModalDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VModalModel.Misc.DismissType {
     fileprivate var title: String {
         switch self {
@@ -129,7 +129,7 @@ extension VModalModel.Misc.DismissType {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VModalDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VModalDemoView()

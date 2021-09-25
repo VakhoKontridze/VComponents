@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base List
+// MARK: - V Base List
 /// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data
 ///
 /// Model, and layout can be passed as parameters
@@ -100,7 +100,7 @@ public struct VBaseList<Data, ID, RowContent>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseList {
     @ViewBuilder public var body: some View {
         switch layoutType {
@@ -140,7 +140,7 @@ extension VBaseList {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VBaseList {
     private func showDivider(for i: Int) -> Bool {
         model.layout.hasDivider &&
@@ -148,7 +148,7 @@ extension VBaseList {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseList_Previews: PreviewProvider {
     struct Row: Identifiable {
         let id: Int

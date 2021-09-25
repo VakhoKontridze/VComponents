@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Wheel Picker
+// MARK: - V Wheel Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel
 ///
 /// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
@@ -176,7 +176,7 @@ public struct VWheelPicker<Data, RowContent>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VWheelPicker {
     public var body: some View {
         VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
@@ -229,7 +229,7 @@ extension VWheelPicker {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VWheelPicker_Previews: PreviewProvider {
     @State private static var selectedIndex: Int = 7
     

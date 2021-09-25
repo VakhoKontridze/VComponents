@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Chevron Button State
+// MARK: - V Chevron Button State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VChevronButtonState: Int, CaseIterable {
     /// Enabled
@@ -25,7 +25,7 @@ public enum VChevronButtonState: Int, CaseIterable {
     }
 }
 
-// MARK:- V Chevron Button Internal State
+// MARK: - V Chevron Button Internal State
 enum VChevronButtonInternalState {
     case enabled
     case pressed

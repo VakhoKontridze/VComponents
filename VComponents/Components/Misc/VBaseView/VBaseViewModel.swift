@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Base View Model
+// MARK: - V Base View Model
 /// Model that describes UI
 public struct VBaseViewModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VBaseViewModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VBaseViewModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -69,7 +69,7 @@ extension VBaseViewModel.Layout {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VBaseViewModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -97,7 +97,7 @@ extension VBaseViewModel.Colors {
     public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VBaseViewModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -111,13 +111,13 @@ extension VBaseViewModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VBaseViewModel {
     /// Reference to `VChevronButtonModel`
     public static let chevronButtonModel: VChevronButtonModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VBaseViewModel {
     var backButtonSubModel: VChevronButtonModel {
         var model: VChevronButtonModel = .init()

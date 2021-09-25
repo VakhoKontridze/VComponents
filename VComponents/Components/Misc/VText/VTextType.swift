@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Text Type
+// MARK: - V Text Type
 /// Enum that describes layout, such as `oneLine` or `multiLine`
 public enum VTextType {
     /// One-line

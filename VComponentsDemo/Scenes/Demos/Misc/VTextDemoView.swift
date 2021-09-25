@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Text Demo View
+// MARK: - V Text Demo View
 struct VTextDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Text"
@@ -23,7 +23,7 @@ struct VTextDemoView: View {
     private let textFont: Font = .system(size: 14)
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VTextDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -65,7 +65,7 @@ extension VTextDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private enum VTextDemoType: Int, VPickableTitledItem {
     case center
     case leading
@@ -86,7 +86,7 @@ private enum VTextDemoType: Int, VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VTextDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VTextDemoView()

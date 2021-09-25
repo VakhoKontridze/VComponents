@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Toggle Setting View
+// MARK: - Toggle Setting View
 struct ToggleSettingView: View {
     // MARK: Properties
     @Binding private var isOn: Bool
@@ -28,7 +28,7 @@ struct ToggleSettingView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension ToggleSettingView {
     var body: some View {
         HStack(spacing: 0, content: {
@@ -59,7 +59,7 @@ extension ToggleSettingView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct ToggleSettingView_Previews: PreviewProvider {
     static var previews: some View {
         ToggleSettingView(isOn: .constant(true), title: "Lorem ipsum dolor sit amet")

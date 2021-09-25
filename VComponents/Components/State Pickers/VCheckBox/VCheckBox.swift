@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Check Box
+// MARK: - V Check Box
 /// State picker component that toggles between off, on, indeterminate, or disabled states, and displays content
 ///
 /// Component can be initialized with content, title, or without body. Bool can also be passed as state.
@@ -134,7 +134,7 @@ public struct VCheckBox<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VCheckBox {
     public var body: some View {
         performStateSets()
@@ -194,7 +194,7 @@ extension VCheckBox {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VCheckBox {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -203,7 +203,7 @@ extension VCheckBox {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VCheckBox {
     private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
@@ -217,7 +217,7 @@ extension VCheckBox {
     }
 }
 
-// MARK:- Icon
+// MARK: - Icon
 extension VCheckBox {
     private var icon: Image? {
         switch state {
@@ -229,7 +229,7 @@ extension VCheckBox {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VCheckBox_Previews: PreviewProvider {
     @State private static var state: VCheckBoxState = .on
 

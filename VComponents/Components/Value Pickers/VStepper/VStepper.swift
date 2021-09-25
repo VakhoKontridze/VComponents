@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Stepper
+// MARK: - V Stepper
 /// Value picker component that selects value from a bounded linear range of values
 ///
 /// Model, step, and state can be passed as parameters
@@ -64,7 +64,7 @@ public struct VStepper: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VStepper {
     public var body: some View {
         ZStack(content: {
@@ -116,7 +116,7 @@ extension VStepper {
     }
 }
 
-// MARK:- Button State
+// MARK: - Button State
 extension VStepper {
     private func saveButtonPressState(_ button: VStepperButton, isPressed: Bool) {
         if !isPressed {
@@ -138,7 +138,7 @@ extension VStepper {
     }
 }
 
-// MARK:- Increment
+// MARK: - Increment
 extension VStepper {
     private func incrementValue(from button: VStepperButton) {
         guard !shouldSkipIncrementBecauseOfLongPressIncrementFinish else {
@@ -162,7 +162,7 @@ extension VStepper {
     }
 }
 
-// MARK:- Long Press Increment
+// MARK: - Long Press Increment
 extension VStepper {
     private func scheduleLongPressIncrementSchedulerTimer(for button: VStepperButton) {
         zeroLongPressTimers()
@@ -218,7 +218,7 @@ extension VStepper {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VStepper_Previews: PreviewProvider {
     @State private static var value: Int = 5
     

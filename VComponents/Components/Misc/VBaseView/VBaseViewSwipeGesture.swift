@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK:- Modifier
+// MARK: - Modifier
 extension View {
     func addNavigationBarSwipeGesture(completion: @escaping () -> Void) -> some View {
         modifier(VBaseViewSwipeGesture(completion: completion))
     }
 }
 
-// MARK:- V Base View Swipe Gesture
+// MARK: - V Base View Swipe Gesture
 struct VBaseViewSwipeGesture: ViewModifier {
     // MARK: Properties
     private let completion: () -> Void
@@ -30,7 +30,7 @@ struct VBaseViewSwipeGesture: ViewModifier {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseViewSwipeGesture {
     func body(content: Content) -> some View {
         content

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Menu Sub Menu
+// MARK: - V Menu Sub Menu
 struct VMenuSubMenu: View {
     // MARK: Properties
     private let rows: [VMenuRow]
@@ -18,7 +18,7 @@ struct VMenuSubMenu: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VMenuSubMenu {
     var body: some View {
         ForEach(rows.enumeratedArray().reversed(), id: \.offset, content: { (_, button) in
@@ -48,7 +48,7 @@ extension VMenuSubMenu {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VMenuSubMenu_Previews: PreviewProvider {
     static var previews: some View {
         VMenu_Previews.previews

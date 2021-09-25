@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Wheel Picker Model
+// MARK: - V Wheel Picker Model
 /// Model that describes UI
 public struct VWheelPickerModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VWheelPickerModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VWheelPickerModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -41,7 +41,7 @@ extension VWheelPickerModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VWheelPickerModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -80,7 +80,7 @@ extension VWheelPickerModel.Colors {
     public typealias StateOpacities = StateOpacities_D
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VWheelPickerModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -100,7 +100,7 @@ extension VWheelPickerModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VWheelPickerModel {
     /// Reference to `VSegmentedPickerModel`
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()

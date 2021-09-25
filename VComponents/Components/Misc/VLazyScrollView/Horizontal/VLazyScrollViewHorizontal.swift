@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Lazy Scroll View Horizontal
+// MARK: - V Lazy Scroll View Horizontal
 struct VLazyScrollViewHorizontal<Content>: View where Content: View {
     // MARK: Properties
     private let model: VLazyScrollViewModelHorizontal
@@ -23,7 +23,7 @@ struct VLazyScrollViewHorizontal<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VLazyScrollViewHorizontal {
     var body: some View {
         ScrollView(.horizontal, showsIndicators: model.misc.showIndicator, content: {
@@ -34,7 +34,7 @@ extension VLazyScrollViewHorizontal {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VLazyScrollViewHorizontal_Previews: PreviewProvider {
     static var previews: some View {
         VLazyScrollViewHorizontal(model: .init(), content: {

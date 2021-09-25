@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Close Button Demo View
+// MARK: - V Close Button Demo View
 struct VCloseButtonDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Close Button"
@@ -35,7 +35,7 @@ struct VCloseButtonDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VCloseButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -54,7 +54,7 @@ extension VCloseButtonDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VCloseButtonState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -65,7 +65,7 @@ extension VCloseButtonState: VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VCloseButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VCloseButtonDemoView()

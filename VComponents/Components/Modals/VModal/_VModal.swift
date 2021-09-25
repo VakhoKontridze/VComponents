@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- _ V Modal
+// MARK: - _ V Modal
 struct _VModal<Content, HeaderContent>: View
     where
         Content: View,
@@ -38,7 +38,7 @@ struct _VModal<Content, HeaderContent>: View
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension _VModal {
     var body: some View {
         ZStack(content: {
@@ -123,7 +123,7 @@ extension _VModal {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension _VModal {
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
@@ -139,7 +139,7 @@ extension _VModal {
     }
 }
 
-// MARK:- Previews
+// MARK: - Previews
 struct VModal_Previews: PreviewProvider {
     static var previews: some View {
         _VModal(

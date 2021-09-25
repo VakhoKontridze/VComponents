@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Tab Navigation View Model
+// MARK: - V Tab Navigation View Model
 /// Model that describes UI
 public struct VTabNavigationViewModel {
     /// Sub-model containing color properties
@@ -17,7 +17,7 @@ public struct VTabNavigationViewModel {
     public init() {}
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VTabNavigationViewModel {
     /// Sub-model containing color properties
     public struct Colors {

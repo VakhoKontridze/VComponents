@@ -7,6 +7,6 @@
 
 import Foundation
 
-// MARK:- V Toast Type
+// MARK: - V Toast Type
 /// Enum that describes layout, such as `oneLine` or `multiLine`
 public typealias VToastType = VTextType

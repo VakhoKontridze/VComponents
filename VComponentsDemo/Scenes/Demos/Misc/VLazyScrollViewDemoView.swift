@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Lazy Scroll View Demo View
+// MARK: - V Lazy Scroll View Demo View
 struct VLazyScrollViewDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Lazy Scroll View"
@@ -18,7 +18,7 @@ struct VLazyScrollViewDemoView: View {
     ]
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VLazyScrollViewDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -27,7 +27,7 @@ extension VLazyScrollViewDemoView {
     }
 }
 
-// MARK:- V Lazy Scroll View Demo Detail View
+// MARK: - V Lazy Scroll View Demo Detail View
 private struct VLazyScrollViewDemoDetailView: View {
     static let navBarTitle: String = "Lazy Scroll View"
 
@@ -125,7 +125,7 @@ extension VLazyScrollViewDemoDetailView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 private struct VLazyScrollViewDemoViewDataSource {
     private init() {}
     
@@ -149,7 +149,7 @@ private struct VLazyScrollViewDemoViewDataSource {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VLazyScrollViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
 //        VLazyScrollViewDemoView()

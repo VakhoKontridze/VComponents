@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Segmented Picker Model
+// MARK: - V Segmented Picker Model
 /// Model that describes UI
 public struct VSegmentedPickerModel {
     /// Sub-model containing layout properties
@@ -26,7 +26,7 @@ public struct VSegmentedPickerModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VSegmentedPickerModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -68,7 +68,7 @@ extension VSegmentedPickerModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSegmentedPickerModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -135,7 +135,7 @@ extension VSegmentedPickerModel.Colors {
     public typealias StateOpacities = StateOpacities_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VSegmentedPickerModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -155,7 +155,7 @@ extension VSegmentedPickerModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VSegmentedPickerModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -167,7 +167,7 @@ extension VSegmentedPickerModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VSegmentedPickerModel {
     /// Reference to `VToggleModel`
     public static let toggleReference: VToggleModel = .init()

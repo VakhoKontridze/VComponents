@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Toggle
+// MARK: - V Toggle
 /// State picker component that toggles between off, on, or disabled states, and displays content
 ///
 /// Component can be initialized with content, title, or without body. Bool can also be passed as state.
@@ -134,7 +134,7 @@ public struct VToggle<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VToggle {
     public var body: some View {
         performStateSets()
@@ -188,7 +188,7 @@ extension VToggle {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VToggle {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -197,7 +197,7 @@ extension VToggle {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VToggle {
     private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
@@ -211,7 +211,7 @@ extension VToggle {
     }
 }
 
-// MARK:- Thumb Position
+// MARK: - Thumb Position
 extension VToggle {
     private var thumbOffset: CGFloat {
         let offset: CGFloat = model.layout.animationOffset
@@ -226,7 +226,7 @@ extension VToggle {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VToggle_Previews: PreviewProvider {
     @State private static var state: VToggleState = .on
 

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-// MARK:- Conditional Modifiers
+// MARK: - Conditional Modifiers
 extension View {
     @ViewBuilder func `if`<Content>(
         _ condition: Bool, transform: (Self) -> Content
@@ -68,7 +68,7 @@ extension View {
     }
 }
 
-// MARK:- Frame
+// MARK: - Frame
 extension View {
     func frame(dimension: CGFloat, alignment: Alignment = .center) -> some View {
         frame(
@@ -97,7 +97,7 @@ struct SizeConfiguration {
     let min, ideal, max: CGSize
 }
 
-// MARK:- Round Corners
+// MARK: - Round Corners
 extension View {
     func cornerRadius(radius: CGFloat, corners: UIRectCorner) -> some View {
         ModifiedContent(content: self, modifier: CornerRadiusStyle(radius: radius, corners: corners))
@@ -124,7 +124,7 @@ struct CornerRadiusStyle: ViewModifier {
     }
 }
 
-// MARK:- Reading Size
+// MARK: - Reading Size
 extension View {
     func readSize(onChange completion: @escaping (CGSize) -> Void) -> some View {
         background(

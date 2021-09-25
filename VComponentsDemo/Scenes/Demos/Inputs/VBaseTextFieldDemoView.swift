@@ -36,7 +36,7 @@ struct VBaseTextFieldDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VBaseTextFieldDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -96,7 +96,7 @@ extension VBaseTextFieldDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VBaseTextFieldState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -160,7 +160,7 @@ extension UITextAutocapitalizationType: VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VBaseTextFieldDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VBaseTextFieldDemoView()

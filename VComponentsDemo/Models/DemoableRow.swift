@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Demoable ROw
+// MARK: - Demoable ROw
 protocol DemoableRow: Identifiable, RawRepresentable, CaseIterable where RawValue == Int {
     var title: String { get }
     
@@ -15,7 +15,7 @@ protocol DemoableRow: Identifiable, RawRepresentable, CaseIterable where RawValu
     var body: Content { get }
 }
 
-// MARK:- ID
+// MARK: - ID
 extension DemoableRow {
     var id: Int { rawValue }
 }

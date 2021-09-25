@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Base List Layout Type
+// MARK: - V Base List Layout Type
 /// Enum that describes layout, such as `fixed` or `flexible`
 ///
 /// There are three posible layouts:

@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V RadioButton Demo View
+// MARK: - V RadioButton Demo View
 struct VRadioButtonDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Radio Button"
@@ -44,7 +44,7 @@ struct VRadioButtonDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VRadioButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -88,7 +88,7 @@ extension VRadioButtonDemoView {
     private func RadioButtonContent() -> some View { DemoIconContentView() }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VRadioButtonState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {

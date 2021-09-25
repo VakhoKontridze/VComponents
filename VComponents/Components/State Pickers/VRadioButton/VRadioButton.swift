@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Radio Button
+// MARK: - V Radio Button
 /// State picker component that toggles between off, on, or disabled states, and displays content
 ///
 /// Component can be initialized with content, title, or without body. Bool can also be passed as state.
@@ -229,7 +229,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VRadioButton {
     public var body: some View {
         performStateSets()
@@ -288,7 +288,7 @@ extension VRadioButton {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VRadioButton {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -297,7 +297,7 @@ extension VRadioButton {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension VRadioButton {
     private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
@@ -311,7 +311,7 @@ extension VRadioButton {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VRadioButton_Previews: PreviewProvider {
     @State private static var state: VRadioButtonState = .on
 

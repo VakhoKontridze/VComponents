@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Side Bar
+// MARK: - V Side Bar
 /// Modal component that draws a from left side with background, hosts content, and is present when condition is true
 ///
 /// Model can be passed as parameter
@@ -48,7 +48,7 @@ public struct VSideBar<Content> where Content: View {
     }
 }
 
-// MARK:- Extension
+// MARK: - Extension
 extension View {
     /// Presents side bar
     public func vSideBar<Content>(

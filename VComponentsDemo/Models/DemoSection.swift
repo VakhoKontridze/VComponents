@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- Demo Section
+// MARK: - Demo Section
 struct DemoSection<Row>: Identifiable where Row: DemoableRow {
     let id: Int
     let title: String?

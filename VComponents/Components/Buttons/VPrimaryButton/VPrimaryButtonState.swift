@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Primary Button State
+// MARK: - V Primary Button State
 /// Enum that describes state, such as `enabled`, `disabled`, or `loading`
 public enum VPrimaryButtonState: Int, CaseIterable {
     /// Enabled
@@ -31,7 +31,7 @@ public enum VPrimaryButtonState: Int, CaseIterable {
     }
 }
 
-// MARK:- V Primary Button Internal State
+// MARK: - V Primary Button Internal State
 enum VPrimaryButtonInternalState {
     case enabled
     case pressed

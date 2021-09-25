@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V CheckBox Model
+// MARK: - V CheckBox Model
 /// Model that describes UI
 public struct VCheckBoxModel {
     /// Sub-model containing layout properties
@@ -29,7 +29,7 @@ public struct VCheckBoxModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VCheckBoxModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -56,7 +56,7 @@ extension VCheckBoxModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VCheckBoxModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -113,7 +113,7 @@ extension VCheckBoxModel.Colors {
     public typealias StateOpacities = StateOpacities_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VCheckBoxModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -127,7 +127,7 @@ extension VCheckBoxModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VCheckBoxModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -139,7 +139,7 @@ extension VCheckBoxModel {
     }
 }
 
-// MARK:- Misc
+// MARK: - Misc
 extension VCheckBoxModel {
     /// Sub-model containing misc properties
     public struct Misc {
@@ -151,7 +151,7 @@ extension VCheckBoxModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VCheckBoxModel {
     /// Reference to `VToggleModel`
     public static let toggleReference: VToggleModel = .init()

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Navigation View
+// MARK: - V Navigation View
 /// Navigation component that presents stack of views with a visible path in a navigation hierarchy
 ///
 /// Model can be passed as parameter
@@ -82,7 +82,7 @@ public struct VNavigationView<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VNavigationView {
     public var body: some View {
         NavigationView(content: {
@@ -94,7 +94,7 @@ extension VNavigationView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VNavigationView_Previews: PreviewProvider {
     static var previews: some View {
         VBaseView_Previews.previews

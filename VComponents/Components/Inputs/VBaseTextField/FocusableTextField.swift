@@ -7,7 +7,7 @@
 
 import UIKit
 
-// MARK:- Focusable Text Field
+// MARK: - Focusable Text Field
 final class FocusableTextField: UITextField {
     // MARK: Proeprties
     private let representable: UIKitTextFieldRepresentable
@@ -23,7 +23,7 @@ final class FocusableTextField: UITextField {
     }
 }
 
-// MARK:- Responder
+// MARK: - Responder
 extension FocusableTextField {
     override func becomeFirstResponder() -> Bool {
         representable.setBindedFocus(to: true)

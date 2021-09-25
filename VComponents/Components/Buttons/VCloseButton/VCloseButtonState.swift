@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Close Button State
+// MARK: - V Close Button State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VCloseButtonState: Int, CaseIterable {
     /// Enabled
@@ -25,7 +25,7 @@ public enum VCloseButtonState: Int, CaseIterable {
     }
 }
 
-// MARK:- V Close Button Internal State
+// MARK: - V Close Button Internal State
 enum VCloseButtonInternalState {
     case enabled
     case pressed

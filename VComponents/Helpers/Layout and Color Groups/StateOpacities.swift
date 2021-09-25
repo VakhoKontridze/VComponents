@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Pressed
+// MARK: - Pressed
 /// Opacity level group containing values for `pressed` state
 public struct StateOpacities_P {
     /// Pressed opacity level
@@ -33,7 +33,7 @@ public struct StateOpacities_P {
     }
 }
 
-// MARK:- Disabled
+// MARK: - Disabled
 /// Opacity level group containing values for `disabled` state
 public struct StateOpacities_D {
     /// Disabled opacity level
@@ -84,7 +84,7 @@ extension StateOpacities_D {
     }
 }
 
-// MARK:- Pressed, Disabled
+// MARK: - Pressed, Disabled
 /// Opacity level group containing values for `pressed` and `disabled` states
 public struct StateOpacities_PD {
     /// Pressed opacity level

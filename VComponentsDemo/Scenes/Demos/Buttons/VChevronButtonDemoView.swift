@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Chevron Button Demo View
+// MARK: - V Chevron Button Demo View
 struct VChevronButtonDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Chevron Button"
@@ -36,7 +36,7 @@ struct VChevronButtonDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VChevronButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -57,7 +57,7 @@ extension VChevronButtonDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VChevronButtonState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -80,7 +80,7 @@ extension VChevronButtonDirection: VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VChevronButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VChevronButtonDemoView()

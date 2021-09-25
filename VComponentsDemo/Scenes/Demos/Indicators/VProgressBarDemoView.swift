@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import VComponents
 
-// MARK:- V Spinner Demo View
+// MARK: - V Spinner Demo View
 struct VProgressBarDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Progress Bar"
@@ -28,7 +28,7 @@ struct VProgressBarDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VProgressBarDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -48,7 +48,7 @@ extension VProgressBarDemoView {
     }
 }
 
-// MARK:- Timer
+// MARK: - Timer
 extension VProgressBarDemoView {
     fileprivate func updateValue(_ output: Date) {
         let increment: Double = 0.05

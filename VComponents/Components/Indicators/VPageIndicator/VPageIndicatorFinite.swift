@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Page Indicator Finite
+// MARK: - V Page Indicator Finite
 struct VPageIndicatorFinite: View {
     private let model: VPageIndicatorModel
     
@@ -26,7 +26,7 @@ struct VPageIndicatorFinite: View {
     }
 }
 
-// MARK:- Properties
+// MARK: - Properties
 extension VPageIndicatorFinite {
     var body: some View {
         HStack(spacing: model.layout.spacing, content: {
@@ -40,7 +40,7 @@ extension VPageIndicatorFinite {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPageIndicatorFinite_Previews: PreviewProvider {
     static var previews: some View {
         VPageIndicatorFinite(model: .init(), total: 9, selectedIndex: 4)

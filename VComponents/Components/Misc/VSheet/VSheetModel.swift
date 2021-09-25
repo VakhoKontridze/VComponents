@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Sheet Model
+// MARK: - V Sheet Model
 /// Model that describes UI
 public struct VSheetModel {
     /// Sub-model containing layout properties
@@ -20,7 +20,7 @@ public struct VSheetModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VSheetModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -71,7 +71,7 @@ extension VSheetModel.Layout {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VSheetModel {
     /// Sub-model containing color properties
     public struct Colors {

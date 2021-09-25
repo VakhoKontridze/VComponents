@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- Demo List Row View
+// MARK: - Demo List Row View
 struct DemoListRowView<Content>: View where Content: View {
     // MARK: Properties
     private let rowType: RowType
@@ -49,7 +49,7 @@ struct DemoListRowView<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension DemoListRowView {
     @ViewBuilder var body: some View {
         switch rowType {
@@ -75,7 +75,7 @@ extension DemoListRowView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct DemoListRowView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView_Previews.previews

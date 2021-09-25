@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Chevron Button Model
+// MARK: - V Chevron Button Model
 /// Model that describes UI
 public struct VChevronButtonModel {
     /// Sub-model containing layout properties
@@ -20,7 +20,7 @@ public struct VChevronButtonModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VChevronButtonModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -48,7 +48,7 @@ extension VChevronButtonModel.Layout {
     public typealias HitBox = LayoutGroup_HV
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VChevronButtonModel {
     /// Sub-model containing color properties
     public struct Colors {

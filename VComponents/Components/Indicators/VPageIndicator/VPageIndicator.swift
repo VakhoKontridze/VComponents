@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Page Indicator
+// MARK: - V Page Indicator
 /// Indicator component that indicates selection in page control
 ///
 /// Model and type can be passed as parameters
@@ -64,7 +64,7 @@ public struct VPageIndicator: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VPageIndicator {
     public var body: some View {
         performStateSets()
@@ -101,7 +101,7 @@ extension VPageIndicator {
     }
 }
 
-// MARK:- State Sets
+// MARK: - State Sets
 extension VPageIndicator {
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
@@ -112,7 +112,7 @@ extension VPageIndicator {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VPageIndicator_Previews: PreviewProvider {
     static var previews: some View {
         VStack(content: {

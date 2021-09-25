@@ -8,13 +8,13 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Tab Navigation View Demo View
+// MARK: - V Tab Navigation View Demo View
 struct VTabNavigationViewDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Tab Navigation View"
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VTabNavigationViewDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -39,7 +39,7 @@ extension VTabNavigationViewDemoView {
     }
 }
 
-// MARK:- Walkthrough
+// MARK: - Walkthrough
 private struct VTabNavigationViewDemoViewWalkthroughView: View {
     static let navBarTitle: String = ""
     @State private var selection: Int = 0
@@ -111,7 +111,7 @@ extension VTabNavigationViewDemoViewWalkthroughView {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VTabNavigationViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VTabNavigationViewDemoView()

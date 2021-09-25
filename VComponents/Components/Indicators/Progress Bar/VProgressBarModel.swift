@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Progress Bar Model
+// MARK: - V Progress Bar Model
 /// Model that describes UI
 public struct VProgressBarModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VProgressBarModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VProgressBarModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -38,7 +38,7 @@ extension VProgressBarModel {
     }
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VProgressBarModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -53,7 +53,7 @@ extension VProgressBarModel {
     }
 }
 
-// MARK:- Animations
+// MARK: - Animations
 extension VProgressBarModel {
     /// Sub-model containing animation properties
     public struct Animations {
@@ -65,13 +65,13 @@ extension VProgressBarModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VProgressBarModel {
     /// Reference to `VSliderModel`
     public static let sliderReference: VSliderModel = .init()
 }
 
-// MARK:- Sub-Models
+// MARK: - Sub-Models
 extension VProgressBarModel {
     var sliderSubModel: VSliderModel {
         var model: VSliderModel = .init()

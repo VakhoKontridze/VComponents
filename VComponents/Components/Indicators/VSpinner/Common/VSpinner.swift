@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Spinner
+// MARK: - V Spinner
 /// Indicator component that indicates activity
 ///
 /// Model can be passed as parameter
@@ -33,7 +33,7 @@ public struct VSpinner: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSpinner {
     @ViewBuilder public var body: some View {
         switch spinnerType {
@@ -43,7 +43,7 @@ extension VSpinner {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSpinner_Previews: PreviewProvider {
     static var previews: some View {
         VSpinner()

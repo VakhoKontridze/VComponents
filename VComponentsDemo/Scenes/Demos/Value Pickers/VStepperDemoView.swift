@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Stepper Demo View
+// MARK: - V Stepper Demo View
 struct VStepperDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Stepper"
@@ -17,7 +17,7 @@ struct VStepperDemoView: View {
     @State private var state: VStepperState = .enabled
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VStepperDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -40,7 +40,7 @@ extension VStepperDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VStepperState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -51,7 +51,7 @@ extension VStepperState: VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VStepperDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VStepperDemoView()

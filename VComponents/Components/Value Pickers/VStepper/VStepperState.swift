@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Stepper State
+// MARK: - V Stepper State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VStepperState: Int, CaseIterable {
     /// Case enabled
@@ -25,7 +25,7 @@ public enum VStepperState: Int, CaseIterable {
     }
 }
 
-// MARK:- V Stepper Button State
+// MARK: - V Stepper Button State
 enum VStepperButtonState {
     case enabled
     case pressed

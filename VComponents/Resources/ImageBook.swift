@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK:- Image Book
+// MARK: - Image Book
 struct ImageBook {
     private init() {}
 }
 
-// MARK:- Images
+// MARK: - Images
 extension ImageBook {
     static let checkBoxOn: Image = .init(componentAsset: "CheckBox.On")
     static let checkBoxInterm: Image = .init(componentAsset: "CheckBox.Interm")
@@ -30,7 +30,7 @@ extension ImageBook {
     static let xMark: Image = .init(componentAsset: "XMark")
 }
 
-// MARK:- Helper
+// MARK: - Helper
 extension Image {
     /// Initializes color from framework's local assets folder using a name
     init(componentAsset name: String) {

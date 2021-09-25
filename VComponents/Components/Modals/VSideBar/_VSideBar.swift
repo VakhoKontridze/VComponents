@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- _ V Side Bar
+// MARK: - _ V Side Bar
 struct _VSideBar<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSideBarModel
@@ -29,7 +29,7 @@ struct _VSideBar<Content>: View where Content: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension _VSideBar {
     var body: some View {
         ZStack(alignment: .leading, content: {
@@ -67,7 +67,7 @@ extension _VSideBar {
     }
 }
 
-// MARK:- Actions
+// MARK: - Actions
 extension _VSideBar {
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
@@ -79,7 +79,7 @@ extension _VSideBar {
     }
 }
 
-// MARK:- Gestures
+// MARK: - Gestures
 extension _VSideBar {
     private func dragChanged(drag: DragGesture.Value) {
         let isDraggedLeft: Bool = drag.translation.width <= 0
@@ -91,7 +91,7 @@ extension _VSideBar {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSideBar_Previews: PreviewProvider {
     static var previews: some View {
         _VSideBar(

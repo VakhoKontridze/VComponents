@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Dialog
+// MARK: - V Dialog
 /// Modal component that presents dialog when condition is true
 ///
 /// Model, title, description, and content can be passed as parameters
@@ -88,7 +88,7 @@ public struct VDialog<Content> where Content: View {
     }
 }
 
-// MARK:- Extension
+// MARK: - Extension
 extension View {
     /// Presents `VDialog`
     public func vDialog<Content>(

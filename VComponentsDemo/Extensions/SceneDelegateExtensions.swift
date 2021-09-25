@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Setting Root View
+// MARK: - Setting Root View
 extension SceneDelegate {
     static func setRootView<Content>(to view: Content) where Content: View {
         guard

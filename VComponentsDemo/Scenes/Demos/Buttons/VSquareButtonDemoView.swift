@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Square Button Demo View
+// MARK: - V Square Button Demo View
 struct VSquareButtonDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Square Button"
@@ -68,7 +68,7 @@ struct VSquareButtonDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VSquareButtonDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -107,7 +107,7 @@ extension VSquareButtonDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VSquareButtonState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -137,7 +137,7 @@ private enum SquareButtonShapeType: Int, VPickableTitledItem {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VSquareButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSquareButtonDemoView()

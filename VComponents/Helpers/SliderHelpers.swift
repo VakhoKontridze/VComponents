@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Normalization of Double in Range
+// MARK: - Normalization of Double in Range
 extension Double {
     func fixedInRange(min: Double, max: Double, step: Double?) -> Double {
         switch (self, step) {
@@ -47,7 +47,7 @@ extension Double {
     }
 }
 
-// MARK:- Normalization Binding Double in Range
+// MARK: - Normalization Binding Double in Range
 extension Binding where Value == Double {
     init<V>(
         from value: Binding<V>,

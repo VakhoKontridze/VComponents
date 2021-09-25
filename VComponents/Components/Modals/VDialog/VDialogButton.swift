@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Dialog Button
+// MARK: - V Dialog Button
 /// ViewModel that creates `VDialog` buttons
 public struct VDialogButton {
     // MARK: Properties

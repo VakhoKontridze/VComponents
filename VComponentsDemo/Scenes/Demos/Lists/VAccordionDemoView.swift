@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK:- V Accordion Demo View
+// MARK: - V Accordion Demo View
 struct VAccordionDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Accordion"
@@ -31,7 +31,7 @@ struct VAccordionDemoView: View {
     }
 }
 
-// MARK:- Body
+// MARK: - Body
 extension VAccordionDemoView {
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
@@ -83,7 +83,7 @@ extension VAccordionDemoView {
     }
 }
 
-// MARK:- Helpers
+// MARK: - Helpers
 extension VAccordionState: VPickableTitledItem {
     public var pickerTitle: String {
         switch self {
@@ -105,7 +105,7 @@ extension BaseListLayoutTypeHelper {
     }
 }
 
-// MARK:- Preview
+// MARK: - Preview
 struct VAccordionDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VAccordionDemoView()

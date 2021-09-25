@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-// MARK:- Color Book
+// MARK: - Color Book
 /// Contains fundamental colors used throughout the framework
 public struct ColorBook {
     private init() {}
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension ColorBook {
     /// Clear color
     public static let clear: Color = .clear
@@ -37,7 +37,7 @@ extension ColorBook {
     public static let accent: Color = .init(componentAsset: "Accent")
 }
 
-// MARK:- Helper
+// MARK: - Helper
 extension Color {
     /// Initializes color from framework's local assets folder using a name
     public init(componentAsset name: String) {
@@ -52,7 +52,7 @@ extension Color {
     }
 }
 
-// MARK:- Assets
+// MARK: - Assets
 
 /*
  

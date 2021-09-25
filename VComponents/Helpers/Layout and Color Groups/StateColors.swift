@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Enabled, Disabled
+// MARK: - Enabled, Disabled
 /// Color group containing values for `enabled` and `disabled` states
 public struct StateColors_ED {
     /// Enabled color
@@ -68,7 +68,7 @@ extension StateColors_ED {
     }
 }
 
-// MARK:- Enabled, Pressed, Disabled
+// MARK: - Enabled, Pressed, Disabled
 /// Color group containing values for `enabled`, `pressed`, and `disabled` states
 public struct StateColors_EPD {
     /// Enabled color
@@ -148,7 +148,7 @@ extension StateColors_EPD {
     }
 }
 
-// MARK:- Enabled, Pressed, Disabled, Loading
+// MARK: - Enabled, Pressed, Disabled, Loading
 /// Color group containing values for enabled, pressed, disabled, and loading states
 public struct StateColors_EPDL {
     /// Enabled color
@@ -193,7 +193,7 @@ extension StateColors_EPDL {
     }
 }
 
-// MARK:- Off, On, Disabled
+// MARK: - Off, On, Disabled
 /// Color group containing values for `off`, `on`, and `disabled` states
 public struct StateColors_OOD {
     /// Off color
@@ -244,7 +244,7 @@ extension StateColors_OOD {
     }
 }
 
-// MARK:- Off, On, Indeterminate, Disabled
+// MARK: - Off, On, Indeterminate, Disabled
 /// Color group containing values for `off`, `on`, `indeterminate`, and `disabled` states
 public struct StateColors_OOID {
     /// Off color
@@ -292,7 +292,7 @@ extension StateColors_OOID {
     }
 }
 
-// MARK:- Enabled, Focused, Disabled
+// MARK: - Enabled, Focused, Disabled
 /// Color group containing values for `enabled`, `focused`, and `disabled` states
 public struct StateColors_EFD {
     /// Enabled color
@@ -331,7 +331,7 @@ extension StateColors_EFD {
     }
 }
 
-// MARK:- Enabled, Focused, Success, Error, Disabled
+// MARK: - Enabled, Focused, Success, Error, Disabled
 /// Color group containing values for `enabled`, `focused`, `success`, `error`, and `disabled` states
 public struct StateColors_EFSED {
     /// Enabled color
@@ -384,7 +384,7 @@ extension StateColors_EFSED {
     }
 }
 
-// MARK:- Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled
+// MARK: - Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled
 /// Color group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states
 public struct StateColors_EpFpSpEpD {
     /// Enabled color

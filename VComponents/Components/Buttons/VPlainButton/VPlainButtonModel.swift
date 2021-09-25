@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Plain Model Button
+// MARK: - V Plain Model Button
 /// Model that describes UI
 public struct VPlainButtonModel {
     /// Sub-model containing layout properties
@@ -23,7 +23,7 @@ public struct VPlainButtonModel {
     public init() {}
 }
 
-// MARK:- Layout
+// MARK: - Layout
 extension VPlainButtonModel {
     /// Sub-model containing layout properties
     public struct Layout {
@@ -43,7 +43,7 @@ extension VPlainButtonModel.Layout {
     public typealias HitBox = LayoutGroup_HV
 }
 
-// MARK:- Colors
+// MARK: - Colors
 extension VPlainButtonModel {
     /// Sub-model containing color properties
     public struct Colors {
@@ -75,7 +75,7 @@ extension VPlainButtonModel.Colors {
     public typealias StateOpacities = StateOpacities_PD
 }
 
-// MARK:- Fonts
+// MARK: - Fonts
 extension VPlainButtonModel {
     /// Sub-model containing font properties
     public struct Fonts {
@@ -89,7 +89,7 @@ extension VPlainButtonModel {
     }
 }
 
-// MARK:- References
+// MARK: - References
 extension VPlainButtonModel {
     /// Reference to `VSquareButtonModel`
     public static let squareButtonReference: VSquareButtonModel = .init()

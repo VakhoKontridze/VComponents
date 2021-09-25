@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- UIKit Text Field Coordinator
+// MARK: - UIKit Text Field Coordinator
 extension UIKitTextFieldRepresentable {
     final class Coordinator: NSObject {
         // MARK: Properties
@@ -21,7 +21,7 @@ extension UIKitTextFieldRepresentable {
     }
 }
 
-// MARK:- Text Field Delegate
+// MARK: - Text Field Delegate
 extension UIKitTextFieldRepresentable.Coordinator: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         switch representable.returnAction {

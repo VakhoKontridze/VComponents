@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK:- V Range Slider State
+// MARK: - V Range Slider State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VRangeSliderState: Int, CaseIterable {
     /// Enabled

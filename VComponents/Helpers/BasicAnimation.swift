@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- Basic Animation
+// MARK: - Basic Animation
 /// Wrapper on `SwiftUI`'s animation used throughout the framework
 ///
 /// Purpose of this object was to limit some animations to curve and duration
@@ -31,7 +31,7 @@ public struct BasicAnimation {
     }
 }
 
-// MARK:- Animation Curve
+// MARK: - Animation Curve
 extension BasicAnimation {
     /// Enum that represents animation curve, suh as `linear`, `easeIn`, `easeOut`, or `easeInOut`
     public enum VAnimationCurve {

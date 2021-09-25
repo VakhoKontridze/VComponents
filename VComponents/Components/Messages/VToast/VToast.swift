@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK:- V Toast
+// MARK: - V Toast
 /// Message component that present text modally
 ///
 /// Model can be passed as parameter
@@ -52,7 +52,7 @@ public struct VToast {
     }
 }
 
-// MARK:- Extension
+// MARK: - Extension
 extension View {
     /// Presents toast
     public func vToast(
