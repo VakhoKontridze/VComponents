@@ -195,7 +195,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
 
     // MARK: Body
     public var body: some View {
-        performStateSets()
+        setStatesFromBodyRender()
         
         return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
             headerView
@@ -296,7 +296,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     }
 
     // MARK: State Sets
-    private func performStateSets() {
+    private func setStatesFromBodyRender() {
         DispatchQueue.main.async(execute: {
             setAnimatableSelectedIndex()
         })

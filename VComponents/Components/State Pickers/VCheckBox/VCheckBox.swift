@@ -135,7 +135,7 @@ public struct VCheckBox<Content>: View where Content: View {
 
     // MARK: Body
     public var body: some View {
-        performStateSets()
+        setStatesFromBodyRender()
         
         return Group(content: {
             switch content {
@@ -192,7 +192,7 @@ public struct VCheckBox<Content>: View where Content: View {
     }
 
     // MARK: State Sets
-    private func performStateSets() {
+    private func setStatesFromBodyRender() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })

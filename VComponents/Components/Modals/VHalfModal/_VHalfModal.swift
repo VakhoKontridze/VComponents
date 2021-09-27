@@ -52,7 +52,7 @@ struct _VHalfModal<Content, HeaderContent>: View
 
     // MARK: Body
     var body: some View {
-        performStateSets()
+        setStatesFromBodyRender()
         
         return ZStack(alignment: .bottom, content: {
             blinding
@@ -176,7 +176,7 @@ struct _VHalfModal<Content, HeaderContent>: View
     }
 
     // MARK: State Sets
-    private func performStateSets() {
+    private func setStatesFromBodyRender() {
         DispatchQueue.main.async(execute: {
             resetOffsetIsNil()
         })

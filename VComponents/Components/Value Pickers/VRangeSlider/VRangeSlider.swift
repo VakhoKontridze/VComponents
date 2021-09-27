@@ -88,7 +88,7 @@ public struct VRangeSlider: View {
 
     // MARK: Body
     public var body: some View {
-        performStateSets()
+        setStatesFromBodyRender()
         
         return Group(content: {
             switch validLayout {
@@ -157,7 +157,7 @@ public struct VRangeSlider: View {
     }
 
     // MARK: State Sets
-    private func performStateSets() {
+    private func setStatesFromBodyRender() {
         DispatchQueue.main.async(execute: {
             setAnimatableValues()
         })

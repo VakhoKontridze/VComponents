@@ -68,7 +68,7 @@ public struct VSlider: View {
 
     // MARK: Body
     public var body: some View {
-        performStateSets()
+        setStatesFromBodyRender()
         
         return GeometryReader(content: { proxy in
             ZStack(alignment: .leading, content: {
@@ -122,7 +122,7 @@ public struct VSlider: View {
     }
 
     // MARK: State Sets
-    private func performStateSets() {
+    private func setStatesFromBodyRender() {
         DispatchQueue.main.async(execute: {
             setAnimatableValue()
         })

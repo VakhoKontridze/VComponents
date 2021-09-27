@@ -65,7 +65,7 @@ public struct VPageIndicator: View {
 
     // MARK: Body
     public var body: some View {
-        performStateSets()
+        setStatesFromBodyRender()
         
         return Group(content: {
             switch pageIndicatorType {
@@ -99,7 +99,7 @@ public struct VPageIndicator: View {
     }
 
     // MARK: State Sets
-    private func performStateSets() {
+    private func setStatesFromBodyRender() {
         DispatchQueue.main.async(execute: {
             withAnimation(model.animations.transition, {
                 animatableSelectedIndex = selectedIndex

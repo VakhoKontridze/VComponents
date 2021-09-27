@@ -253,7 +253,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
 
     // MARK: Body
     public var body: some View {
-        performStateSets()
+        setStatesFromBodyRender()
         
         return VSheet(model: model.sheetSubModel, content: {
             VStack(spacing: 0, content: {
@@ -329,7 +329,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
 
     // MARK: State Sets
-    private func performStateSets() {
+    private func setStatesFromBodyRender() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
