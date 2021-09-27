@@ -27,9 +27,9 @@ extension UIView {
 extension UIView {
     static var windowView: UIView? {
         guard
-            let keyWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
-            let rootVC = keyWindow.rootViewController,
-            let windowView = rootVC.navigationController?.view ?? rootVC.view
+            let keyWindow: UIWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+            let rootVC: UIViewController = keyWindow.rootViewController,
+            let windowView: UIView = rootVC.navigationController?.view ?? rootVC.view
         else {
             return nil
         }

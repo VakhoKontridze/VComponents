@@ -111,8 +111,8 @@ struct VPageIndicatorInfinite: View {
         switch region {
         case .leftEdge:
             guard
-                let leftEdgeVisibleIndex = leftEdgeVisibleIndex(at: index),
-                let leftEdgeRightSideIndex = leftEdgeRightSideIndex(at: leftEdgeVisibleIndex)
+                let leftEdgeVisibleIndex: Int = leftEdgeVisibleIndex(at: index),
+                let leftEdgeRightSideIndex: Int = leftEdgeRightSideIndex(at: leftEdgeVisibleIndex)
             else {
                 return 1
             }
@@ -121,8 +121,8 @@ struct VPageIndicatorInfinite: View {
 
         case .center:
             guard
-                let visibleIndex = centerVisibleIndex(at: index),
-                let centerIndexAbsolute = centerIndexAbsolute(at: visibleIndex)
+                let visibleIndex: Int = centerVisibleIndex(at: index),
+                let centerIndexAbsolute: Int = centerIndexAbsolute(at: visibleIndex)
             else {
                 return 1
             }
@@ -131,8 +131,8 @@ struct VPageIndicatorInfinite: View {
 
         case .rightEdge:
             guard
-                let rightEdgeVisibleIndex = rightEdgeVisibleIndex(at: index),
-                let rightEdgeleftSideIndex = rightEdgeleftSideIndex(at: rightEdgeVisibleIndex)
+                let rightEdgeVisibleIndex: Int = rightEdgeVisibleIndex(at: index),
+                let rightEdgeleftSideIndex: Int = rightEdgeleftSideIndex(at: rightEdgeVisibleIndex)
             else {
                 return 1
             }

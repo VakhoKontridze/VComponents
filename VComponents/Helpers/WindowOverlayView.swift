@@ -70,15 +70,15 @@ final class WindowOverlayViewController<Content>: UIViewController where Content
         hostedView.backgroundColor = .clear
         hostedView.tag = hostedViewTag
         
-        guard let appSuperView = UIView.windowView else { fatalError() }
+        guard let windowView: UIView = UIView.windowView else { fatalError() }
         
         appSuperView.addSubview(hostedView)
         
         NSLayoutConstraint.activate([
-            hostedView.leadingAnchor.constraint(equalTo: appSuperView.leadingAnchor),
-            hostedView.trailingAnchor.constraint(equalTo: appSuperView.trailingAnchor),
-            hostedView.topAnchor.constraint(equalTo: appSuperView.topAnchor),
-            hostedView.bottomAnchor.constraint(equalTo: appSuperView.bottomAnchor)
+            hostedView.leadingAnchor.constraint(equalTo: windowView.leadingAnchor),
+            hostedView.trailingAnchor.constraint(equalTo: windowView.trailingAnchor),
+            hostedView.topAnchor.constraint(equalTo: windowView.topAnchor),
+            hostedView.bottomAnchor.constraint(equalTo: windowView.bottomAnchor)
         ])
         
         appSuperView.bringSubviewToFront(hostedView)

@@ -268,7 +268,7 @@ struct _VHalfModal<Content, HeaderContent>: View
                 }
             }()
             
-            guard let newOffset = newOffsetOpt else { return }
+            guard let newOffset: CGFloat = newOffsetOpt else { return }
             
             withAnimation(model.animations.heightSnap, { offset = newOffset })
         

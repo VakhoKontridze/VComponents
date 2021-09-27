@@ -15,7 +15,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // MARK: Window Scene Delegate
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = scene as? UIWindowScene else { return }
+        guard let windowScene: UIWindowScene = scene as? UIWindowScene else { return }
         
         window = .init(windowScene: windowScene)
         let homeView: HomeView = .init()

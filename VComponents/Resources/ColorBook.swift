@@ -41,8 +41,8 @@ extension Color {
     /// Initializes color from framework's local assets library from a name
     public init(componentAsset name: String) {
         guard
-            let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents"),
-            let uiColor = UIColor(named: name, in: bundle, compatibleWith: nil)
+            let bundle: Bundle = .init(identifier: "com.vakhtang-kontridze.VComponents"),
+            let uiColor: UIColor = .init(named: name, in: bundle, compatibleWith: nil)
         else {
             fatalError()
         }

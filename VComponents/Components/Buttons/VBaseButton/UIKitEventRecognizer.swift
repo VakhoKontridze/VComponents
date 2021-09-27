@@ -53,8 +53,8 @@ final class UIKitEventRecognizer: UITapGestureRecognizer {
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         guard
-            let touch = touches.first,
-            let size = view?.frame.size
+            let touch: UITouch = touches.first,
+            let size: CGSize = view?.frame.size
         else {
             return
         }

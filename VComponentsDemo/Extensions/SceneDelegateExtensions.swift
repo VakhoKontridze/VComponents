@@ -11,8 +11,8 @@ import SwiftUI
 extension SceneDelegate {
     static func setRootView<Content>(to view: Content) where Content: View {
         guard
-            let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let windowScenedelegate = scene.delegate as? SceneDelegate
+            let scene: UIWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let windowScenedelegate: SceneDelegate = scene.delegate as? SceneDelegate
         else {
             return
         }

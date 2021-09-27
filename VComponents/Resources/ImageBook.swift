@@ -34,7 +34,7 @@ extension Image {
     /// Initializes color from framework's local assets library from a name
     init(componentAsset name: String) {
         guard
-            let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents")
+            let bundle: Bundle = .init(identifier: "com.vakhtang-kontridze.VComponents")
         else {
             fatalError()
         }
