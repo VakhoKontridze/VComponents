@@ -42,10 +42,8 @@ struct VCheckBoxDemoView: View {
 
         return model
     }
-}
 
-// MARK: - Body
-extension VCheckBoxDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)

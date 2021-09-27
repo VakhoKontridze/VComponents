@@ -101,3 +101,9 @@ extension StateColors_OOID {
         self.disabled = disabled
     }
 }
+
+// MARK: - Basic Animations
+extension BasicAnimation {
+    @available(*, deprecated, renamed: "AnimationCurve")
+    public typealias VAnimationCurve = AnimationCurve
+}

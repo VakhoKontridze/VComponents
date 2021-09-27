@@ -15,10 +15,8 @@ struct VStepperDemoView: View {
     
     @State private var value: Int = 5
     @State private var state: VStepperState = .enabled
-}
 
-// MARK: - Body
-extension VStepperDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)

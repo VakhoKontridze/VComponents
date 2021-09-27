@@ -13,10 +13,8 @@ struct VSideBarDemoView: View {
     static let navBarTitle: String = "Side Bar"
     
     @State private var isPresented: Bool = false
-}
 
-// MARK: - Body
-extension VSideBarDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, leadingItem: sidBarIcon, content: {
             DemoView(component: component)

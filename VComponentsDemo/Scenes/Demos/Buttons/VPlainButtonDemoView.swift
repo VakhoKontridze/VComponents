@@ -34,10 +34,8 @@ struct VPlainButtonDemoView: View {
 
         return model
     }
-}
 
-// MARK: - Body
-extension VPlainButtonDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

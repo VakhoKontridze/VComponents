@@ -27,10 +27,8 @@ struct UIKitTouchView: UIViewRepresentable {
         self.action = action
         self.pressHandler = pressHandler
     }
-}
 
-// MARK: - Representable
-extension UIKitTouchView {
+    // MARK: Representable
     func makeUIView(context: Context) -> UIView {
         let view: UIView = .init(frame: .zero)
         

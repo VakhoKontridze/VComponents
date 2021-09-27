@@ -19,10 +19,8 @@ struct VPageIndicatorDemoView: View {
     private let timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = VPageIndicatorType.default.helperType
-}
 
-// MARK: - Body
-extension VPageIndicatorDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
@@ -47,10 +45,8 @@ extension VPageIndicatorDemoView {
             footerTitle: pageIndicatorType.description
         )
     }
-}
 
-// MARK: - Timer
-extension VPageIndicatorDemoView {
+    // MARK: Timer
     fileprivate func updateValue(_ output: Date) {
         var valueToSet: Int = selectedIndex + 1
         if valueToSet > total-1 { valueToSet = 0 }

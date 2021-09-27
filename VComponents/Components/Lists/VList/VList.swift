@@ -66,7 +66,7 @@ public struct VList<Data, ID, RowContent>: View
     private let id: KeyPath<Data.Element, ID>
     private let rowContent: (Data.Element) -> RowContent
     
-    // MARK: Initializers: View Builder
+    // MARK: Initializers - View Builder
     /// Initializes component with data, id, and row content
     public init(
         model: VListModel = .init(),
@@ -82,7 +82,7 @@ public struct VList<Data, ID, RowContent>: View
         self.rowContent = rowContent
     }
     
-    // MARK: Initializers: Identified View Builder
+    // MARK: Initializers - Identified View Builder
     /// Initializes component with data and row content
     public init(
         model: VListModel = .init(),
@@ -102,10 +102,8 @@ public struct VList<Data, ID, RowContent>: View
             rowContent: rowContent
         )
     }
-}
 
-// MARK: - Body
-extension VList {
+    // MARK: Body
     public var body: some View {
         VSheet(model: model.sheetSubModel, content: { contentView })
     }

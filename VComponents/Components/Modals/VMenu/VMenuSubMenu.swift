@@ -16,10 +16,8 @@ struct VMenuSubMenu: View {
     init(rows: [VMenuRow]) {
         self.rows = rows
     }
-}
 
-// MARK: - Body
-extension VMenuSubMenu {
+    // MARK: Body
     var body: some View {
         ForEach(rows.enumeratedArray().reversed(), id: \.offset, content: { (_, button) in
             switch button {

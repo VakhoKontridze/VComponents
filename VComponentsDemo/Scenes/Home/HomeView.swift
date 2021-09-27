@@ -155,10 +155,8 @@ struct HomeView: View {
             }
         }
     }
-}
 
-// MARK: - Body
-extension HomeView {
+    // MARK: Body
     var body: some View {
         VNavigationView(content: {
             VBaseView(title: Self.navBarTitle, content: {

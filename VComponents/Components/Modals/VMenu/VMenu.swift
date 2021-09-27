@@ -43,7 +43,7 @@ public struct VMenu<Label>: View where Label: View {
     private let rows: [VMenuRow]
     private let label: () -> Label
     
-    // MARK: Initializers: Preset
+    // MARK: Initializers - Preset
     /// Initializes component with preset, rows, and label
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
@@ -74,7 +74,7 @@ public struct VMenu<Label>: View where Label: View {
         )
     }
     
-    // MARK: Initializers: Custom
+    // MARK: Initializers - Custom
     /// Initializes component with rows and label
     public init(
         state: VMenuState = .enabled,
@@ -86,10 +86,8 @@ public struct VMenu<Label>: View where Label: View {
         self.rows = rows
         self.label = label
     }
-}
 
-// MARK: - Body
-extension VMenu {
+    // MARK: Body
     public var body: some View {
         Menu(content: contentView, label: labelView)
             .allowsHitTesting(state.isEnabled)  // Adding this on label has no effect

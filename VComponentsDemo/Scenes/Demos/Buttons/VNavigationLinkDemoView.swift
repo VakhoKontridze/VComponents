@@ -15,10 +15,8 @@ struct VNavigationLinkDemoView: View {
     
     @State private var state: VNavigationLinkState = .enabled
     @State private var navigationLinkButtonType: VNavigationLinkButtonTypeHelper = .secondary
-}
 
-// MARK: - Body
-extension VNavigationLinkDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

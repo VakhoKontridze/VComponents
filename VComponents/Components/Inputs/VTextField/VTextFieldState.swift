@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Text Field State
 /// Enum that describes state, such as `enabled`, `focused`, or `disabled`
 public enum VTextFieldState: Int, CaseIterable {
+    // MARK: Cases
     /// Enabled
     case enabled
     
@@ -19,6 +20,7 @@ public enum VTextFieldState: Int, CaseIterable {
     /// Disabled
     case disabled
     
+    // MARK: Properties
     /// Indicates if state is enabled
     public var isEnabled: Bool {
         switch self {
@@ -35,10 +37,8 @@ public enum VTextFieldState: Int, CaseIterable {
         case .disabled: return false
         }
     }
-}
 
-// MARK: - Helpers
-extension VTextFieldState {
+    // MARK: Helpers
     static func baseTextFieldState(_ state: Binding<VTextFieldState>) -> Binding<VBaseTextFieldState> {
         .init(
             get: {

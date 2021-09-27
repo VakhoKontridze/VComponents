@@ -50,7 +50,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
     private let listType: VLazyScrollViewType
     private let content: () -> Content
     
-    // MARK: Initializers: View Builder
+    // MARK: Initializers - View Builder
     /// Initializes component with data, id, and row content
     public init<Data, ID, RowContent>(
         type listType: VLazyScrollViewType = .default,
@@ -74,7 +74,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
         )
     }
     
-    // MARK: Initializers: Identified View Builder
+    // MARK: Initializers - Identified View Builder
     /// Initializes component with data and row content
     public init<Data, ID, RowContent>(
         type listType: VLazyScrollViewType = .default,
@@ -96,7 +96,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
         )
     }
 
-    // MARK: Initializers: Range
+    // MARK: Initializers - Range
     /// Initializes component with range and row content
     public init <RowContent>(
         type listType: VLazyScrollViewType = .default,
@@ -113,7 +113,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
         )
     }
     
-    // MARK: Initializers: Free Content
+    // MARK: Initializers - Free Content
     /// Initializes component with free content
     public init(
         type listType: VLazyScrollViewType = .default,
@@ -122,10 +122,8 @@ public struct VLazyScrollView<Content>: View where Content: View {
         self.listType = listType
         self.content = content
     }
-}
 
-// MARK: - Body
-extension VLazyScrollView {
+    // MARK: Body
     @ViewBuilder public var body: some View {
         switch listType {
         case .vertical(let model): VLazyScrollViewVertical(model: model, content: content)

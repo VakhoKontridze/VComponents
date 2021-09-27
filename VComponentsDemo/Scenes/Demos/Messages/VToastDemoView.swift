@@ -24,10 +24,8 @@ struct VToastDemoView: View {
         model.layout.presentationEdge = presentationEdge
         return model
     }
-}
 
-// MARK: - Body
-extension VToastDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)

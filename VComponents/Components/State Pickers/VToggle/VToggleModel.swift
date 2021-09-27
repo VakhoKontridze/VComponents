@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - V Toggle Model
 /// Model that describes UI
 public struct VToggleModel {
+    // MARK: Properties
+    /// Reference to `VPrimaryButtonModel`
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -25,14 +29,14 @@ public struct VToggleModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VToggleModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Toggle size. Defaults to `51` width and `32` height, similarly to native toggle.
         public var size: CGSize = .init(width: 51, height: 31)
         
@@ -51,15 +55,15 @@ extension VToggleModel {
             return offset
         }
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Colors
-extension VToggleModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Fill colors
         public var fill: StateColors = .init(
             off: .init(componentAsset: "Toggle.Fill.off"),
@@ -89,59 +93,54 @@ extension VToggleModel {
             disabled: ColorBook.primary
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_OOD
+
+        // MARK: State Opacities
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateOpacities = StateOpacities_PD
     }
-}
 
-extension VToggleModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_OOD
-
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateOpacities = StateOpacities_PD
-}
-
-// MARK: - Fonts
-extension VToggleModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font. Defaults to system font of size `15`.
         ///
         /// Only applicable when using init with title
         public var title: Font = .system(size: 15)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VToggleModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = .easeIn(duration: 0.1)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VToggleModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Indicates if content is clickable. Defaults to `true`.
         public var contentIsClickable: Bool = true
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VToggleModel {
-    /// Reference to `VPrimaryButtonModel`
-    public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

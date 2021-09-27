@@ -56,10 +56,8 @@ struct VRangeSliderDemoView: View {
         
         return model
     }
-}
 
-// MARK: - Body
-extension VRangeSliderDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)

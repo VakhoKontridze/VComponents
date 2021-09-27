@@ -24,10 +24,8 @@ final class UIKitEventRecognizer: UITapGestureRecognizer {
         self.pressHandler = pressHandler
         super.init(target: nil, action: nil)
     }
-}
 
-// MARK: - Updates
-extension UIKitEventRecognizer {
+    // MARK: Updates
     func update(
         action: @escaping () -> Void,
         pressHandler: @escaping (Bool) -> Void
@@ -35,10 +33,8 @@ extension UIKitEventRecognizer {
         self.action = action
         self.pressHandler = pressHandler
     }
-}
-    
-// MARK: - Touches
-extension UIKitEventRecognizer {
+
+    // MARK: Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         state = .began
         pressHandler(true)

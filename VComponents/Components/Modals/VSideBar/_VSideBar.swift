@@ -27,10 +27,8 @@ struct _VSideBar<Content>: View where Content: View {
         self._isHCPresented = isPresented
         self.content = content
     }
-}
 
-// MARK: - Body
-extension _VSideBar {
+    // MARK: Body
     var body: some View {
         ZStack(alignment: .leading, content: {
             blinding
@@ -65,10 +63,8 @@ extension _VSideBar {
                     .onChanged(dragChanged)
             )
     }
-}
 
-// MARK: - Actions
-extension _VSideBar {
+    // MARK: Actions
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }
@@ -77,10 +73,8 @@ extension _VSideBar {
         withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
     }
-}
 
-// MARK: - Gestures
-extension _VSideBar {
+    // MARK: Gestures
     private func dragChanged(drag: DragGesture.Value) {
         let isDraggedLeft: Bool = drag.translation.width <= 0
         guard isDraggedLeft else { return }

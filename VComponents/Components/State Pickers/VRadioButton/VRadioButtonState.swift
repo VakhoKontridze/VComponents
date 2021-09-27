@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Radio Button State
 /// Enum that describes state, such as `off`, `on`, or `disabled`
 public enum VRadioButtonState: Int, CaseIterable {
+    // MARK: Cases
     /// Off
     case off
     
@@ -19,6 +20,7 @@ public enum VRadioButtonState: Int, CaseIterable {
     /// Disabled
     case disabled
     
+    // MARK: Properties
     /// Indicates if state is enabled
     public var isEnabled: Bool {
         switch self {
@@ -36,10 +38,8 @@ public enum VRadioButtonState: Int, CaseIterable {
         case .disabled: return false
         }
     }
-}
 
-// MARK: - Next State
-extension VRadioButtonState {
+    // MARK: Next State
     /// Goes to the next state
     public mutating func nextState() {
         switch self {
@@ -52,12 +52,14 @@ extension VRadioButtonState {
 
 // MARK: - V Radio Button Internal State
 enum VRadioButtonInternalState {
+    // MARK: Cases
     case off
     case pressedOff
     case on
     case pressedOn
     case disabled
     
+    // MARK: Initializers
     init(state: VRadioButtonState, isPressed: Bool) {
         switch (state, isPressed) {
         case (.off, false): self = .off

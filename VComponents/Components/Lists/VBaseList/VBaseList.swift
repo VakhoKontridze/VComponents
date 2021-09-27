@@ -66,7 +66,7 @@ public struct VBaseList<Data, ID, RowContent>: View
     
     typealias Element = VBaseListElement<ID, Data.Element>
     
-    // MARK: Initializers: View Builder
+    // MARK: Initializers - View Builder
     /// Initializes component with data, id, and row content
     public init(
         model: VBaseListModel = .init(),
@@ -81,7 +81,7 @@ public struct VBaseList<Data, ID, RowContent>: View
         self.rowContent = rowContent
     }
     
-    // MARK: Initializers: Identified View Builder
+    // MARK: Initializers - Identified View Builder
     /// Initializes component with data and row content
     public init(
         model: VBaseListModel = .init(),
@@ -98,10 +98,8 @@ public struct VBaseList<Data, ID, RowContent>: View
         self.data = data.map { .init(id: $0[keyPath: \Data.Element.id], value: $0) }
         self.rowContent = rowContent
     }
-}
 
-// MARK: - Body
-extension VBaseList {
+    // MARK: Body
     @ViewBuilder public var body: some View {
         switch layoutType {
         case .fixed:
@@ -138,10 +136,8 @@ extension VBaseList {
         })
             .padding(.trailing, model.layout.marginTrailing)
     }
-}
 
-// MARK: - Helpers
-extension VBaseList {
+    // MARK: Helpers
     private func showDivider(for i: Int) -> Bool {
         model.layout.hasDivider &&
         i <= data.count-2

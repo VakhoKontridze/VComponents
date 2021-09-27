@@ -29,10 +29,8 @@ struct VAccordionDemoView: View {
         
         return model
     }
-}
 
-// MARK: - Body
-extension VAccordionDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(

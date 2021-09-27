@@ -84,7 +84,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         case freeForm(content: () -> Content)
     }
     
-    // MARK: Initializers: View Builder
+    // MARK: Initializers - View Builder
     /// Initializes component with state, header, data, id, and row content
     public init(
         model: VAccordionModel = .init(),
@@ -140,7 +140,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
 
-    // MARK: Initializers: Identified View Builder
+    // MARK: Initializers - Identified View Builder
     /// Initializes component with state, header, data, and row content
     public init(
         model: VAccordionModel = .init(),
@@ -198,7 +198,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
     
-    // MARK: Initializers: Free Content
+    // MARK: Initializers - Free Content
     /// Initializes component with state, header, and free content
     public init(
         model: VAccordionModel = .init(),
@@ -250,10 +250,8 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             content: content
         )
     }
-}
 
-// MARK: - Body
-extension VAccordion {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -329,19 +327,15 @@ extension VAccordion {
                 .frame(maxWidth: .infinity)
         }
     }
-}
 
-// MARK: - State Sets
-extension VAccordion {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
     }
-}
 
-// MARK: - Actions
-extension VAccordion {
+    // MARK: Actions
     private func expandCollapse() {
         withAnimation(model.animations.expandCollapse, { animatableState?.nextState() })
         state.nextState()

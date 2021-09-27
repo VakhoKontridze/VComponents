@@ -59,7 +59,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
     
     private let content: () -> Content
     
-    // MARK: Initializers: Leading and Trailing
+    // MARK: Initializers - Leading and Trailing
     /// Initializes component with title content, leading and trailing items, and content
     public init(
         model: VBaseViewModel = .init(),
@@ -101,7 +101,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         )
     }
 
-    // MARK: Initializers: Leading
+    // MARK: Initializers - Leading
     /// Initializes component with title content, leading item, and content
     public init(
         model: VBaseViewModel = .init(),
@@ -143,7 +143,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
             content: content
         )
     }
-    // MARK: Initializers: Trailing
+    // MARK: Initializers - Trailing
     /// Initializes component with title content, trailing item, and content
     public init(
         model: VBaseViewModel = .init(),
@@ -186,7 +186,7 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
         )
     }
 
-    // MARK: Initializers: _
+    // MARK: Initializers - _
     /// Initializes component with title content and content
     public init(
         model: VBaseViewModel = .init(),
@@ -228,10 +228,8 @@ public struct VBaseView<NavBarLeadingItemContent, NavBarTitleContent, NavBarTrai
             content: content
         )
     }
-}
 
-// MARK: - Body
-extension VBaseView {
+    // MARK: Body
     @ViewBuilder public var body: some View {
         switch model.layout.titlePosition {
         case .center:
@@ -264,10 +262,8 @@ extension VBaseView {
             .environment(\.vNavigationViewBackButtonHidden, true)
             .addNavigationBarSwipeGesture(completion: back)
     }
-}
 
-// MARK: - Back
-extension VBaseView {
+    // MARK: Back
     private func back() {
         presentationMode.wrappedValue.dismiss()
     }

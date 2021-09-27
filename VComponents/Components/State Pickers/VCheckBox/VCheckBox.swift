@@ -39,7 +39,7 @@ public struct VCheckBox<Content>: View where Content: View {
     
     private let content: (() -> Content)?
     
-    // MARK: Initializers: State
+    // MARK: Initializers - State
     /// Initializes component with state and content
     public init(
         model: VCheckBoxModel = .init(),
@@ -85,7 +85,7 @@ public struct VCheckBox<Content>: View where Content: View {
         self.content = nil
     }
     
-    // MARK: Initializers: Bool
+    // MARK: Initializers - Bool
     /// Initializes component with bool and content
     public init(
         model: VCheckBoxModel = .init(),
@@ -132,10 +132,8 @@ public struct VCheckBox<Content>: View where Content: View {
         self._state = .init(bool: isOn)
         self.content = nil
     }
-}
 
-// MARK: - Body
-extension VCheckBox {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -192,19 +190,15 @@ extension VCheckBox {
                 .opacity(model.colors.content.for(internalState))
         })
     }
-}
 
-// MARK: - State Sets
-extension VCheckBox {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
     }
-}
 
-// MARK: - Actions
-extension VCheckBox {
+    // MARK: Actions
     private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
         state.nextState()
@@ -215,10 +209,8 @@ extension VCheckBox {
             withAnimation(model.animations.stateChange, { animatableState = state })
         }
     }
-}
 
-// MARK: - Icon
-extension VCheckBox {
+    // MARK: Icon
     private var icon: Image? {
         switch state {
         case .off: return nil

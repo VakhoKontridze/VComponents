@@ -31,10 +31,8 @@ public struct VSpinner: View {
     ) {
         self.spinnerType = spinnerType
     }
-}
 
-// MARK: - Body
-extension VSpinner {
+    // MARK: Body
     @ViewBuilder public var body: some View {
         switch spinnerType {
         case .continous(let model): VSpinnerContinous(model: model)

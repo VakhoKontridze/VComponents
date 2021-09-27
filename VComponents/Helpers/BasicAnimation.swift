@@ -15,7 +15,7 @@ import SwiftUI
 /// Object contains proeprty `swiftUIAnimation`, which can be used to create object that `SwiftUI` can interpret
 public struct BasicAnimation {
     /// Animation curve
-    public var curve: VAnimationCurve
+    public var curve: AnimationCurve
     
     /// Animation duration
     public var duration: TimeInterval
@@ -29,12 +29,10 @@ public struct BasicAnimation {
         case .easeInOut: return .easeInOut(duration: duration)
         }
     }
-}
 
-// MARK: - Animation Curve
-extension BasicAnimation {
+    // MARK: Animation Curve
     /// Enum that represents animation curve, suh as `linear`, `easeIn`, `easeOut`, or `easeInOut`
-    public enum VAnimationCurve {
+    public enum AnimationCurve {
         /// Linear
         case linear
         

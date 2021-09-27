@@ -28,10 +28,8 @@ struct VModalDemoView: View {
         
         return model
     }
-}
 
-// MARK: - Body
-extension VModalDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

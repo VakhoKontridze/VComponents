@@ -10,6 +10,13 @@ import SwiftUI
 // MARK: - V Page Indicator Model
 /// Model that describes UI
 public struct VPageIndicatorModel {
+    // MARK: Properties
+    /// Reference to `VProgressBarModel`
+    public static let progressBarReference: VProgressBarModel = .init()
+    
+    /// Reference to `VTabNavigationViewModel`
+    public static let tabNavigationReference: VTabNavigationViewModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -19,14 +26,14 @@ public struct VPageIndicatorModel {
     /// Sub-model containing animation properties
     public var animations: Animations = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VPageIndicatorModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Dot dimension. Defaults to `10`.
         public var dotDimension: CGFloat = 10
         
@@ -41,43 +48,35 @@ extension VPageIndicatorModel {
         /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`
         public var infiniteEdgeDotScale: CGFloat = 0.5
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Colors
-extension VPageIndicatorModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Dot color
         public var dot: Color = tabNavigationReference.colors.item
         
         /// Selected dot color
         public var selectedDot: Color = progressBarReference.colors.progress
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VPageIndicatorModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// Transition animation. Defaults to `linear` with duration `0.15`.
         public var transition: Animation = Animation.linear(duration: 0.15)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VPageIndicatorModel {
-    /// Reference to `VProgressBarModel`
-    public static let progressBarReference: VProgressBarModel = .init()
-    
-    /// Reference to `VTabNavigationViewModel`
-    public static let tabNavigationReference: VTabNavigationViewModel = .init()
 }

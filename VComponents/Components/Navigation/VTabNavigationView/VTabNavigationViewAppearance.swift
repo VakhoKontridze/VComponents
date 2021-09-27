@@ -29,10 +29,8 @@ struct VTabNavigationViewAppearance: ViewModifier {
 
         UITabBar.appearance().unselectedItemTintColor = .init(model.colors.item)
     }
-}
 
-// MARK: - Body
-extension VTabNavigationViewAppearance {
+    // MARK: Body
     func body(content: Content) -> some View {
         content
             .accentColor(model.colors.selectedItem)

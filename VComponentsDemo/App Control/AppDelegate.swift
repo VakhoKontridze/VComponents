@@ -8,20 +8,16 @@
 import UIKit
 
 // MARK: - App Delegate
-@main final class AppDelegate: UIResponder {}
-
-// MARK: - App Delegate
-extension AppDelegate: UIApplicationDelegate {
+@main final class AppDelegate: UIResponder, UIApplicationDelegate {
+    // MARK: Application Delegate
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         true
     }
-}
 
-// MARK: - Scene Delegate
-extension AppDelegate {
+    // MARK: Scene Delegate
     func application(
         _ application: UIApplication,
         configurationForConnecting connectingSceneSession: UISceneSession,

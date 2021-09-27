@@ -90,7 +90,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
     
     private let rowContent: (Row) -> RowContent
     
-    // MARK: Initializers: Header and Footer
+    // MARK: Initializers - Header and Footer
     /// Initializes component with sections, header, footer, and row content
     public init(
         model: VSectionListModel = .init(),
@@ -201,7 +201,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         )
     }
     
-    // MARK: Initializers: Header
+    // MARK: Initializers - Header
     /// Initializes component with sections, header, and row content
     public init(
         model: VSectionListModel = .init(),
@@ -248,7 +248,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         )
     }
 
-    // MARK: Initializers: Footer
+    // MARK: Initializers - Footer
     /// Initializes component with sections, footer, and row content
     public init(
         model: VSectionListModel = .init(),
@@ -295,7 +295,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         )
     }
 
-    // MARK: Initializers: _
+    // MARK: Initializers - _
     /// Initializes component with sections and row content
     public init(
         model: VSectionListModel = .init(),
@@ -314,10 +314,8 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         self.footerContent = nil
         self.rowContent = rowContent
     }
-}
 
-// MARK: - Body
-extension VSectionList {
+    // MARK: Body
     public var body: some View {
         VSheet(model: model.sheetSubModel, content: {
             Group(content: {
@@ -366,10 +364,8 @@ extension VSectionList {
                 .frame(height: model.layout.sectionSpacing)
         }
     }
-}
 
-// MARK: - Helpers
-extension VSectionList {
+    // MARK: Helpers
     private func showSectionSpacing(for i: Int) -> Bool {
         i <= sections.count-2
     }

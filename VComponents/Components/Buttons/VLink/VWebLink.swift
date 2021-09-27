@@ -37,7 +37,7 @@ public struct VWebLink<Content>: View where Content: View {
     private let url: URL?
     private let content: () -> Content
     
-    // MARK: Initializers: Preset
+    // MARK: Initializers - Preset
     /// Initializes component with preset, url and content
     public init(
         preset linkPreset: VWebLinkPreset,
@@ -68,7 +68,7 @@ public struct VWebLink<Content>: View where Content: View {
         )
     }
     
-    // MARK: Initializers: Custom
+    // MARK: Initializers - Custom
     /// Initializes component with url and content
     public init(
         state: VWebLinkState = .enabled,
@@ -80,10 +80,8 @@ public struct VWebLink<Content>: View where Content: View {
         self.url = url
         self.content = content
     }
-}
 
-// MARK: - Body
-extension VWebLink {
+    // MARK: Body
     public var body: some View {
         VWebLinkType.webLinkButton(
             buttonType: linkButtonType,
@@ -92,10 +90,8 @@ extension VWebLink {
             content: content
         )
     }
-}
 
-// MARK: - Actions
-extension VWebLink {
+    // MARK: Actions
     private func openURL() {
         guard let url = url else { return }
         openURLAction(url)

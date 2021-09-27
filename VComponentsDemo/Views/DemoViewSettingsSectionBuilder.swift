@@ -16,10 +16,8 @@ struct DemoViewSettingsSection<Content>: View where Content: View {
     init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
     }
-}
 
-// MARK: - Body
-extension DemoViewSettingsSection {
+    // MARK: Body
     var body: some View {
         VStack(spacing: DemoViewSettingsSectionModel.rowSpacing, content: content)
     }

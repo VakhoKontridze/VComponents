@@ -228,10 +228,8 @@ public struct VTextField: View {
         self.clearButtonAction = clearButtonAction
         self.cancelButtonAction = cancelButtonAction
     }
-}
 
-// MARK: - Body
-extension VTextField {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -355,10 +353,8 @@ extension VTextField {
                 .strokeBorder(model.colors.border.for(state.wrappedValue, highlight: highlight), lineWidth: model.layout.borderWidth)
         })
     }
-}
 
-// MARK: - State Sets
-extension VTextField {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.asyncAfter(deadline: .now() + model.animations.delayToAnimateButtons, execute: {
             nonEmptyText = !text.isEmpty
@@ -368,20 +364,16 @@ extension VTextField {
             if secureFieldIsVisible && !textFieldType.isSecure { secureFieldIsVisible = false }
         })
     }
-}
 
-// MARK: - Visiblity Icon
-extension VTextField {
+    // MARK: Visiblity Icon
     private var visiblityIcon: Image {
         switch secureFieldIsVisible {
         case false: return ImageBook.visibilityOff
         case true: return ImageBook.visibilityOn
         }
     }
-}
 
-// MARK: - Actions
-extension VTextField {
+    // MARK: Actions
     private func textChanged(_ text: String) {
         withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = !text.isEmpty })
     }

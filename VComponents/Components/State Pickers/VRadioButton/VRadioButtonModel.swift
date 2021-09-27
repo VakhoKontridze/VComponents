@@ -10,6 +10,13 @@ import SwiftUI
 // MARK: - V Radio Button Model
 /// Model that describes UI
 public struct VRadioButtonModel {
+    // MARK: Properties
+    /// Reference to `VToggleModel`
+    public static let toggleRefrence: VToggleModel = .init()
+    
+    /// Reference to `VCheckBoxModel`
+    public static let checkBoxReference: VCheckBoxModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -25,14 +32,14 @@ public struct VRadioButtonModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
 
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VRadioButtonModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Radio button dimension. Defaults to `16.`
         public var dimension: CGFloat = checkBoxReference.layout.dimension
         
@@ -48,15 +55,15 @@ extension VRadioButtonModel {
         /// Content leading margin. Defaults to `5`
         public var contentMarginLeading: CGFloat = checkBoxReference.layout.contentMarginLeading
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Colors
-extension VRadioButtonModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Fill colors
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
@@ -90,62 +97,54 @@ extension VRadioButtonModel {
             disabled: checkBoxReference.colors.textContent.disabled
         )
 
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_OOD
+
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states
+        public typealias StateOpacities = StateOpacities_PD
     }
-}
 
-extension VRadioButtonModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_OOD
-
-    /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacities_PD
-}
-
-// MARK: - Fonts
-extension VRadioButtonModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font. Defaults to system font of size `15`.
         ///
         /// Only applicable when using init with title
         public var title: Font = toggleRefrence.fonts.title
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VRadioButtonModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = toggleRefrence.animations.stateChange
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VRadioButtonModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Indicates if content is clickable. Defaults to `true`.
         public var contentIsClickable: Bool = toggleRefrence.misc.contentIsClickable
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VRadioButtonModel {
-    /// Reference to `VToggleModel`
-    public static let toggleRefrence: VToggleModel = .init()
-    
-    /// Reference to `VCheckBoxModel`
-    public static let checkBoxReference: VCheckBoxModel = .init()
 }

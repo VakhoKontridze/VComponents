@@ -26,10 +26,8 @@ struct VProgressBarDemoView: View {
         model.animations.progress = useAnimation ? (defaultModel.animations.progress != nil ? defaultModel.animations.progress : .default) : nil
         return model
     }
-}
 
-// MARK: - Body
-extension VProgressBarDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
@@ -46,10 +44,8 @@ extension VProgressBarDemoView {
     @ViewBuilder private func settings() -> some View {
         ToggleSettingView(isOn: $useAnimation, title: "Progress Animation")
     }
-}
 
-// MARK: - Timer
-extension VProgressBarDemoView {
+    // MARK: Timer
     fileprivate func updateValue(_ output: Date) {
         let increment: Double = 0.05
         var valueToSet: Double = value + increment

@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - V Stepper Model
 /// Model that describes UI
 public struct VStepperModel {
+    // MARK: Properties
+    /// Reference to `VSegmentedPickerModel`
+    public static let segmentedPickerReference: VSegmentedPickerModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -19,14 +23,14 @@ public struct VStepperModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VStepperModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Stepper size.Defaults to `94` width and `32` height, similarly to native toggle.
         public var size: CGSize = .init(width: 94, height: 32)
         
@@ -39,15 +43,15 @@ extension VStepperModel {
         /// Plus and minus button divider size. Defaults to width `1` and height `19`.
         public var divider: CGSize = segmentedPickerReference.layout.dividerSize
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Layout
-extension VStepperModel {
+    // MARK: Layout
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Background colors
         public var background: StateColors = segmentedPickerReference.colors.background
         
@@ -70,26 +74,27 @@ extension VStepperModel {
         /// Plus and minus button divider colors
         public var divider: StateColors = segmentedPickerReference.colors.divider
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_ED
+        
+        // MARK: Button State Colors
+        /// Sub-model containing colors for component states
+        public typealias ButtonStateColors = StateColors_EPD
+        
+        // MARK: State Colors and Opacities
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
-}
 
-extension VStepperModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_ED
-    
-    /// Sub-model containing colors for component states
-    public typealias ButtonStateColors = StateColors_EPD
-    
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
-}
-
-// MARK: - Misc
-extension VStepperModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Time interval after which long press incrementation begins. Defaults to `1` second.
         public var intervalToStartLongPressIncrement: TimeInterval = 1
         
@@ -99,13 +104,8 @@ extension VStepperModel {
         /// So, `1`, `2`, `4`, `8` ...
         public var longPressIncrementExponent: Int = 2
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VStepperModel {
-    /// Reference to `VSegmentedPickerModel`
-    public static let segmentedPickerReference: VSegmentedPickerModel = .init()
 }

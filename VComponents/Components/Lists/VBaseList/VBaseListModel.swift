@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Base List Model
 /// Model that describes UI
 public struct VBaseListModel {
+    // MARK: Properties
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -19,14 +20,14 @@ public struct VBaseListModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VBaseListModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Trailing margin. Defaults to `0`.
         ///
         /// Purpose of this property is to create a spacing between rows and scrolling indicator.
@@ -48,42 +49,40 @@ extension VBaseListModel {
         
         var hasDivider: Bool { dividerHeight > 0 }
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Horizontal Margins
+        /// Sub-model containing `leading` and `trailing` margins
+        public typealias HorizontalMargins = LayoutGroup_LT
     }
-}
-
-extension VBaseListModel.Layout {
-    /// Sub-model containing `leading` and `trailing` margins
-    public typealias HorizontalMargins = LayoutGroup_LT
-}
-
-// MARK: - Colors
-extension VBaseListModel {
+    
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Divider color
         public var divider: Color = .init(componentAsset: "BaseList.Divider")
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VBaseListModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Sub-Models
-extension VBaseListModel {
+    // MARK: Sub-Models
     var lazyScrollViewSubModel: VLazyScrollViewModelVertical {
         var model: VLazyScrollViewModelVertical = .init()
         model.misc.showIndicator = misc.showIndicator

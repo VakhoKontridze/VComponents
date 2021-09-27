@@ -25,10 +25,8 @@ struct VDialogDemoView: View {
         model.layout.ignoredKeybordSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
         return model
     }
-}
 
-// MARK: - Body
-extension VDialogDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)

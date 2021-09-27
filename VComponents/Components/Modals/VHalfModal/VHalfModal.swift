@@ -107,7 +107,7 @@ public struct VHalfModal<Content, HeaderContent>
     fileprivate let headerContent: (() -> HeaderContent)?
     fileprivate let content: () -> Content
     
-    // MARK: Initializers: Header
+    // MARK: Initializers - Header
     /// Initializes component with header and content
     public init(
         model: VHalfModalModel = .init(),
@@ -141,7 +141,7 @@ public struct VHalfModal<Content, HeaderContent>
         )
     }
     
-    // MARK: Initializers: _
+    // MARK: Initializers - _
     /// Initializes component with content
     public init(
         model: VHalfModalModel = .init(),

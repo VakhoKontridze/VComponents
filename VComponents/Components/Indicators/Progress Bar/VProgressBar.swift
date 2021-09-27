@@ -50,10 +50,7 @@ public struct VProgressBar: View {
             return value.fixedInRange(min: min, max: max, step: nil)
         }()
     }
-}
 
-// MARK: - Body
-extension VProgressBar {
     public var body: some View {
         VSlider(
             model: model.sliderSubModel,

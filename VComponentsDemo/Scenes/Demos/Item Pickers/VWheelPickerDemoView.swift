@@ -27,10 +27,8 @@ struct VWheelPickerDemoView: View {
         
         return model
     }
-}
 
-// MARK: - Body
-extension VWheelPickerDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settingsSections: settings)

@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Base Text Field Model
 /// Model that describes UI
 public struct VBaseTextFieldModel {
+    // MARK: Properties
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -22,55 +23,54 @@ public struct VBaseTextFieldModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VBaseTextFieldModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Textfield text alignment. Defaults to `default`.
         public var textAlignment: TextAlignment = .default
 
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
-    }
-}
-
-extension VBaseTextFieldModel.Layout {
-    /// Enum that describes text alignment, such as `center`, `leading`, `trailing`, or `auto`
-    public enum TextAlignment: Int, CaseIterable {
-        /// Center alignment
-        case center
         
-        /// Leading alignment
-        case leading
-        
-        /// Trailing alignment
-        case trailing
-        
-        /// Auto alignment based on the current localization of the app
-        case auto
-        
-        /// Default value. Set to `leading`.
-        public static let `default`: Self = .leading
-        
-        var nsTextAlignment: NSTextAlignment {
-            switch self {
-            case .center: return .center
-            case .leading: return .left
-            case .trailing: return .right
-            case .auto: return .natural
+        // MARK: Text Alignment
+        /// Enum that describes text alignment, such as `center`, `leading`, `trailing`, or `auto`
+        public enum TextAlignment: Int, CaseIterable {
+            /// Center alignment
+            case center
+            
+            /// Leading alignment
+            case leading
+            
+            /// Trailing alignment
+            case trailing
+            
+            /// Auto alignment based on the current localization of the app
+            case auto
+            
+            /// Default value. Set to `leading`.
+            public static let `default`: Self = .leading
+            
+            var nsTextAlignment: NSTextAlignment {
+                switch self {
+                case .center: return .center
+                case .leading: return .left
+                case .trailing: return .right
+                case .auto: return .natural
+                }
             }
         }
     }
-}
 
-// MARK: - Colors
-extension VBaseTextFieldModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Text colors and opacities
         public var text: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
@@ -78,32 +78,31 @@ extension VBaseTextFieldModel {
             disabledOpacity: 0.5
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors and Opacities
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EP_D
     }
-}
 
-extension VBaseTextFieldModel.Colors {
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EP_D
-}
-
-// MARK: - Fonts
-extension VBaseTextFieldModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Text font. Defaults to system font of size `16`.
         public var text: UIFont = .systemFont(ofSize: 16)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - Misc
-extension VBaseTextFieldModel {
+    
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Indicates if secure entry is enabled. Defaults to `false`.
         public var isSecureTextEntry: Bool = false
         
@@ -125,6 +124,7 @@ extension VBaseTextFieldModel {
         /// Default button type. Defaults to `default`.
         public var returnButton: UIReturnKeyType = .default
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }

@@ -21,10 +21,8 @@ final class FocusableTextField: UITextField {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-}
 
-// MARK: - Responder
-extension FocusableTextField {
+    // MARK: First Responder
     override func becomeFirstResponder() -> Bool {
         representable.setBindedFocus(to: true)
         return super.becomeFirstResponder()

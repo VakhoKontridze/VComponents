@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - V Base View Model
 /// Model that describes UI
 public struct VBaseViewModel {
+    // MARK: Properties
+    /// Reference to `VChevronButtonModel`
+    public static let chevronButtonModel: VChevronButtonModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -19,14 +23,14 @@ public struct VBaseViewModel {
     /// Sub-model containing font properties
     public var fonts: Fonts = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VBaseViewModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Navigation bar horizontal margin. Defaults to `15`.
         public var navBarMarginHorizontal: CGFloat = 15
         
@@ -50,29 +54,28 @@ extension VBaseViewModel {
         /// - Can be used to shift back button to left, when it's background is set to transparent, similar to native back button in iOS.
         public var backButtonIconOffsetX: CGFloat = 0
 
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
-    }
-}
-
-extension VBaseViewModel.Layout {
-    /// Enum that describes title position, such as `center` or `leading`
-    public enum TitlePosition: Int, CaseIterable {
-        /// Center alignment
-        case center
         
-        /// Leading alignment
-        case leading
-        
-        /// Default value. Set to `center`.
-        public static let `default`: Self = .center
+        // MARK: Title Position
+        /// Enum that describes title position, such as `center` or `leading`
+        public enum TitlePosition: Int, CaseIterable {
+            /// Center alignment
+            case center
+            
+            /// Leading alignment
+            case leading
+            
+            /// Default value. Set to `center`.
+            public static let `default`: Self = .center
+        }
     }
-}
 
-// MARK: - Colors
-extension VBaseViewModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Title color
         ///
         /// Only applicable when using init with title
@@ -84,41 +87,34 @@ extension VBaseViewModel {
         /// Back button background colors and opacities
         public var backButtonIcon: StateColorsAndOpacities = VBaseViewModel.chevronButtonModel.colors.content
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EPD
+        
+        // MARK: State Colors and Opacities
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
-}
 
-extension VBaseViewModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EPD
-    
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
-}
-
-// MARK: - Fonts
-extension VBaseViewModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font
         ///
         /// Only applicable when using init with title
         public var title: Font = .system(size: 17, weight: .semibold)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VBaseViewModel {
-    /// Reference to `VChevronButtonModel`
-    public static let chevronButtonModel: VChevronButtonModel = .init()
-}
-
-// MARK: - Sub-Models
-extension VBaseViewModel {
+    
+    // MARK: Sub-Models
     var backButtonSubModel: VChevronButtonModel {
         var model: VChevronButtonModel = .init()
         

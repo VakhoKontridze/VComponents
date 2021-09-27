@@ -10,6 +10,16 @@ import SwiftUI
 // MARK: - V Accordion Model
 /// Model that describes UI
 public struct VAccordionModel {
+    // MARK: Properties
+    /// Reference to `VSheetModel`
+    public static let sheetReference: VSheetModel = .init()
+    
+    /// Reference to `VListModel`
+    public static let listReference: VListModel = .init()
+    
+    /// Reference to `VChevronButtonModel`
+    public static let chevronButtonReference: VChevronButtonModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -25,14 +35,14 @@ public struct VAccordionModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VAccordionModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Accordion corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = listReference.layout.cornerRadius
         
@@ -81,50 +91,53 @@ extension VAccordionModel {
         /// Divider margins. Defaults to `0` leading and `0` trailing.
         public var dividerMargins: HorizontalMargins = listReference.layout.dividerMargins
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
-    }
-}
-
-extension VAccordionModel.Layout {
-    /// Sub-model containing `leading` and `trailing` margins
-    public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
-    
-    /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins
-    public typealias Margins = LayoutGroup_LTTB
-    
-    /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins
-    public struct ExpandableMargins {
-        /// Leading margin
-        public var leading: CGFloat
         
-        /// Trailing margin
-        public var trailing: CGFloat
+        // MARK: Margins
+        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins
+        public typealias Margins = LayoutGroup_LTTB
         
-        /// Top margin
-        public var top: CGFloat
+        // MARK: Horizontal Margins
+        /// Sub-model containing `leading` and `trailing` margins
+        public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
         
-        /// Bottom collapsed margin
-        public var bottomCollapsed: CGFloat
-        
-        /// Bottom expanded margin
-        public var bottomExpanded: CGFloat
-        
-        /// Initializes sub-model with margins
-        public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottomCollapsed: CGFloat, bottomExpanded: CGFloat) {
-            self.leading = leading
-            self.trailing = trailing
-            self.top = top
-            self.bottomCollapsed = bottomCollapsed
-            self.bottomExpanded = bottomExpanded
+        // MARK: Expandable Margins
+        /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins
+        public struct ExpandableMargins {
+            // MARK: Properties
+            /// Leading margin
+            public var leading: CGFloat
+            
+            /// Trailing margin
+            public var trailing: CGFloat
+            
+            /// Top margin
+            public var top: CGFloat
+            
+            /// Bottom collapsed margin
+            public var bottomCollapsed: CGFloat
+            
+            /// Bottom expanded margin
+            public var bottomExpanded: CGFloat
+            
+            // MARK: Initializers
+            /// Initializes sub-model with margins
+            public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottomCollapsed: CGFloat, bottomExpanded: CGFloat) {
+                self.leading = leading
+                self.trailing = trailing
+                self.top = top
+                self.bottomCollapsed = bottomCollapsed
+                self.bottomExpanded = bottomExpanded
+            }
         }
     }
-}
 
-// MARK: - Colors
-extension VAccordionModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Background color
         public var background: Color = listReference.colors.background
         
@@ -150,77 +163,65 @@ extension VAccordionModel {
         /// Row divider color
         public var divider: Color = listReference.colors.divider
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states
+        public typealias StateOpacities = StateOpacities_D
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EPD
+        
+        // MARK: State Colors And Opacities
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
-}
 
-extension VAccordionModel.Colors {
-    /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacities_D
-    
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EPD
-    
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
-}
-
-// MARK: - Fonts
-extension VAccordionModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Header font
         ///
         /// Only applicable when using init with title
         public var header: Font = .system(size: 17, weight: .bold)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VAccordionModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// Expand and collapse animation. Defaults to `default`.
         public var expandCollapse: Animation? = .default
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VAccordionModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
         
         /// Indicates if accordion should expand or collapse from tap on header. Default to `true`.
         public var expandCollapseOnHeaderTap: Bool = true
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - References
-extension VAccordionModel {
-    /// Reference to `VSheetModel`
-    public static let sheetReference: VSheetModel = .init()
-    
-    /// Reference to `VListModel`
-    public static let listReference: VListModel = .init()
-    
-    /// Reference to `VChevronButtonModel`
-    public static let chevronButtonReference: VChevronButtonModel = .init()
-}
-
-// MARK: - Sub-Models
-extension VAccordionModel {
+    // MARK: Sub-Models
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         

@@ -34,10 +34,8 @@ struct VBaseViewDemoView: View {
         
         return model
     }()
-}
 
-// MARK: - Body
-extension VBaseViewDemoView {
+    // MARK: Body
     @ViewBuilder var body: some View {
         switch titleContentType {
         case .text:

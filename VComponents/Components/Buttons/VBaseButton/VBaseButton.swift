@@ -42,7 +42,7 @@ public struct VBaseButton<Content>: View where Content: View {
     
     private let content: () -> Content
     
-    // MARK: Initializers: State
+    // MARK: Initializers - State
     /// Initializes component with state, action, press handler, and content
     public init(
         state: VBaseButtonState,
@@ -56,7 +56,7 @@ public struct VBaseButton<Content>: View where Content: View {
         self.content = content
     }
     
-    // MARK: Initializers: Bool
+    // MARK: Initializers - Bool
     /// Initializes component with bool, action, press handler, and content
     public init(
         isEnabled: Bool,
@@ -69,10 +69,8 @@ public struct VBaseButton<Content>: View where Content: View {
         self.pressHandler = pressHandler
         self.content = content
     }
-}
 
-// MARK: - Body
-extension VBaseButton {
+    // MARK: Body
     public var body: some View {
         content()
             .overlay(UIKitTouchView(isEnabled: state.isEnabled, action: action, pressHandler: pressHandler))

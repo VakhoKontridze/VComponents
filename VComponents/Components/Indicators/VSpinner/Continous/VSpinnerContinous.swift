@@ -18,10 +18,8 @@ struct VSpinnerContinous: View {
     init(model: VSpinnerModelContinous) {
         self.model = model
     }
-}
 
-// MARK: - Body
-extension VSpinnerContinous {
+    // MARK: Body
     var body: some View {
         Circle()
             .trim(from: 0, to: model.layout.legth)

@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - V Square Button Model
 /// Model that describes UI
 public struct VSquareButtonModel {
+    // MARK: Properties
+    /// Reference to `VPrimaryButtonModel`
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -19,14 +23,14 @@ public struct VSquareButtonModel {
     /// Sub-model containing font properties
     public var fonts: Fonts = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VSquareButtonModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Button dimension. Defaults to `56`.
         public var dimension: CGFloat = 56
         
@@ -50,23 +54,23 @@ extension VSquareButtonModel {
             vertical: 0
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Content Margin
+        /// Sub-model containing `horizontal` and `vertical` margins
+        public typealias ContentMargin = LayoutGroup_HV
+        
+        // MARK: Hit Box
+        /// Sub-model containing `horizontal` and `vertical` hit boxes
+        public typealias HitBox = LayoutGroup_HV
     }
-}
 
-extension VSquareButtonModel.Layout {
-    /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias ContentMargin = LayoutGroup_HV
-    
-    /// Sub-model containing `horizontal` and `vertical` hit boxes
-    public typealias HitBox = LayoutGroup_HV
-}
-
-// MARK: - Colors
-extension VSquareButtonModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Content opacities
         public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
@@ -96,35 +100,30 @@ extension VSquareButtonModel {
             disabled: primaryButtonReference.colors.border.disabled
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EPD
+        
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states
+        public typealias StateOpacities = StateOpacities_PD
     }
-}
 
-extension VSquareButtonModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EPD
-    
-    /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacities_PD
-}
-
-// MARK: - Fonts
-extension VSquareButtonModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font. Defaults to system font of size `14` with `semibold` weight.
         ///
         /// Only applicable when using init with title
         public var title: Font = .system(size: 14, weight: .semibold)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VSquareButtonModel {
-    /// Reference to `VPrimaryButtonModel`
-    public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

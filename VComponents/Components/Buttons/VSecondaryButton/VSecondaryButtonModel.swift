@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - V Secondary Button Model
 /// Model that describes UI
 public struct VSecondaryButtonModel {
+    // MARK: Properties
+    /// Reference to `VPrimaryButtonModel`
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -19,14 +23,14 @@ public struct VSecondaryButtonModel {
     /// Sub-model containing font properties
     public var fonts: Fonts = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VSecondaryButtonModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Button height. Defaults to `32`.
         public var height: CGFloat = 32
         
@@ -49,23 +53,23 @@ extension VSecondaryButtonModel {
             vertical: 0
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Content Margin
+        /// Sub-model containing `horizontal` and `vertical` margins
+        public typealias ContentMargin = LayoutGroup_HV
+        
+        // MARK: Hit Box
+        /// Sub-model containing `horizontal` and `vertical` hit boxes
+        public typealias HitBox = LayoutGroup_HV
     }
-}
 
-extension VSecondaryButtonModel.Layout {
-    /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias ContentMargin = LayoutGroup_HV
-    
-    /// Sub-model containing `horizontal` and `vertical` hit boxes
-    public typealias HitBox = LayoutGroup_HV
-}
-
-// MARK: - Colors
-extension VSecondaryButtonModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Content opacities
         public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
@@ -95,35 +99,30 @@ extension VSecondaryButtonModel {
             disabled: primaryButtonReference.colors.border.disabled
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EPD
+        
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states
+        public typealias StateOpacities = StateOpacities_PD
     }
-}
 
-extension VSecondaryButtonModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EPD
-    
-    /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacities_PD
-}
-
-// MARK: - Fonts
-extension VSecondaryButtonModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font. Defaults to system font of size `16` with `semibold` weight.
         ///
         /// Only applicable when using init with title
         public var title: Font = primaryButtonReference.fonts.title
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VSecondaryButtonModel {
-    /// Reference to `VPrimaryButtonModel`
-    public static let primaryButtonReference: VPrimaryButtonModel = .init()
 }

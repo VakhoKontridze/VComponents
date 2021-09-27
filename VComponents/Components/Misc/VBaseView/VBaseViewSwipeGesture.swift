@@ -28,10 +28,8 @@ struct VBaseViewSwipeGesture: ViewModifier {
     ) {
         self.completion = completion
     }
-}
 
-// MARK: - Body
-extension VBaseViewSwipeGesture {
+    // MARK: Body
     func body(content: Content) -> some View {
         content
             .gesture(DragGesture()

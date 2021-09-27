@@ -87,10 +87,8 @@ public struct VRangeSlider: View {
         
         self.validLayout = valueLow.wrappedValue <= valueHigh.wrappedValue - difference
     }
-}
 
-// MARK: - Body
-extension VRangeSlider {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -159,19 +157,15 @@ extension VRangeSlider {
                     .onEnded({ dragEnded(drag: $0, thumb: thumb) })
             )
     }
-}
 
-// MARK: - State Sets
-extension VRangeSlider {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableValues()
         })
     }
-}
 
-// MARK: - Drag
-extension VRangeSlider {
+    // MARK: Drag
     private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
         let rawValue: Double = {
             let value: Double = .init(drag.location.x)
@@ -216,10 +210,8 @@ extension VRangeSlider {
         case .high: actionHigh?(false)
         }
     }
-}
 
-// MARK: - Actions
-extension VRangeSlider {
+    // MARK: Actions
     private func setValueLow(to value: Double) {
         withAnimation(model.animations.progress, { animatableValueLow = value })
         self.valueLow = value
@@ -239,10 +231,8 @@ extension VRangeSlider {
             withAnimation(model.animations.progress, { animatableValueHigh = valueHigh })
         }
     }
-}
 
-// MARK: - Progress
-extension VRangeSlider {
+    // MARK: Progress
     private func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
@@ -258,10 +248,8 @@ extension VRangeSlider {
         case .high: return ((range - value) / range) * width
         }
     }
-}
 
-// MARK: - Thumb
-extension VRangeSlider {
+    // MARK: Thumb
     private func thumbOffset(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let progressW: CGFloat = progress(in: proxy, thumb: thumb)
         let thumbW: CGFloat = model.layout.thumbDimension

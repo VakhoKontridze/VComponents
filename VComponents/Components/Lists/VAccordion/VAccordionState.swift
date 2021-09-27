@@ -10,6 +10,7 @@ import Foundation
 // MARK: - V Accordion State
 /// Enum that describes state, such as `collapsed`, `expanded`, or `disabled`
 public enum VAccordionState: Int, CaseIterable {
+    // MARK: Cases
     /// Case collapsed
     case collapsed
     
@@ -19,6 +20,7 @@ public enum VAccordionState: Int, CaseIterable {
     /// Case disabled
     case disabled
     
+    // MARK: Properties
     /// Indicates if state is Enabled
     public var isEnabled: Bool {
         switch self {
@@ -52,10 +54,8 @@ public enum VAccordionState: Int, CaseIterable {
         case .disabled: return .down
         }
     }
-}
 
-// MARK: - Next State
-extension VAccordionState {
+    // MARK: Next State
     /// Goes to the next state
     public mutating func nextState() {
         switch self {

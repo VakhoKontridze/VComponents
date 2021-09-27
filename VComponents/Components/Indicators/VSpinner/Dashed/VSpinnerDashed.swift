@@ -16,10 +16,8 @@ struct VSpinnerDashed: View {
     init(model: VSpinnerModelDashed) {
         self.model = model
     }
-}
 
-// MARK: - Body
-extension VSpinnerDashed {
+    // MARK: Body
     var body: some View {
         ProgressView()
             .progressViewStyle(CircularProgressViewStyle(tint: model.colors.spinner))

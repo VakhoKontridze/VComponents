@@ -10,6 +10,13 @@ import SwiftUI
 // MARK: - V Modal Model
 /// Model that describes UI
 public struct VModalModel {
+    // MARK: Properties
+    /// Reference to `VCloseButtonModel`
+    public static let closeButtonReference: VCloseButtonModel = .init()
+    
+    /// Reference to `VSheetModel`
+    public static let sheetReference: VSheetModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -25,14 +32,14 @@ public struct VModalModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VModalModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Modal size. Defaults to `0.9` ratio of screen with and `0.6` ratio of screen height.
         public var size: CGSize = .init(
             width: UIScreen.main.bounds.width * 0.9,
@@ -86,23 +93,23 @@ extension VModalModel {
         /// Header item spacing. Defaults to `10`.
         public var headerSpacing: CGFloat = 10
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Rounded Corners
+        /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`
+        public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
+        
+        // MARK: Margins
+        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
+        public typealias Margins = LayoutGroup_LTTB
     }
-}
 
-extension VModalModel.Layout {
-    /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`
-    public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
-    
-    /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
-    public typealias Margins = LayoutGroup_LTTB
-}
-
-// MARK: - Colors
-extension VModalModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Background color
         public var background: Color = sheetReference.colors.background
         
@@ -123,37 +130,37 @@ extension VModalModel {
         /// Blinding color
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EPD
+        
+        // MARK: State Colors and Opacities
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
-}
 
-extension VModalModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EPD
-    
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
-}
-
-// MARK: - Fonts
-extension VModalModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Header font
         ///
         /// Only applicable when using init with title
         public var header: Font = .system(size: 17, weight: .bold)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VModalModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// Appear animation. Defaults to `linear` with duration `0.05`.
         public var appear: BasicAnimation? = .init(curve: .linear, duration: 0.05)
         
@@ -169,57 +176,37 @@ extension VModalModel {
         /// Blur during appear and disappear. Defaults to `3`.
         public var blur: CGFloat = 3
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VModalModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: Set<DismissType> = .default
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
-    }
-}
-
-extension VModalModel.Misc {
-    /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, or `backTap`
-    public enum DismissType: Int, CaseIterable {
-        /// Leading
-        case leadingButton
         
-        /// Trailing
-        case trailingButton
-        
-        /// Backtap
-        case backTap
+        // MARK: Dismiss Type
+        /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, or `backTap`
+        public enum DismissType: Int, CaseIterable {
+            /// Leading
+            case leadingButton
+            
+            /// Trailing
+            case trailingButton
+            
+            /// Backtap
+            case backTap
+        }
     }
-}
 
-extension Set where Element == VModalModel.Misc.DismissType {
-    /// Default value. Set to `trailingButton`.
-    public static let `default`: Self = [.trailingButton]
-    
-    var hasButton: Bool {
-        contains(where: { [.leadingButton, .trailingButton].contains($0) })
-    }
-}
-
-// MARK: - References
-extension VModalModel {
-    /// Reference to `VCloseButtonModel`
-    public static let closeButtonReference: VCloseButtonModel = .init()
-    
-    /// Reference to `VSheetModel`
-    public static let sheetReference: VSheetModel = .init()
-}
-
-// MARK: - Sub-Models
-extension VModalModel {
+    // MARK: Sub-Models
     var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
         
@@ -243,5 +230,15 @@ extension VModalModel {
         model.colors.content = colors.closeButtonIcon
         
         return model
+    }
+}
+
+// MARK: - Helpers
+extension Set where Element == VModalModel.Misc.DismissType {
+    /// Default value. Set to `trailingButton`.
+    public static let `default`: Self = [.trailingButton]
+    
+    var hasButton: Bool {
+        contains(where: { [.leadingButton, .trailingButton].contains($0) })
     }
 }

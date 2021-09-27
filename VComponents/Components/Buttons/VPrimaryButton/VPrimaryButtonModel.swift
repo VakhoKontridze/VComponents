@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - V Primary Button Model
 /// Model that describes UI
 public struct VPrimaryButtonModel {
+    // MARK: Properties
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -21,12 +22,11 @@ public struct VPrimaryButtonModel {
     
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VPrimaryButtonModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Button height. Defaults to `50`.
         public var height: CGFloat = 50
         
@@ -51,20 +51,19 @@ extension VPrimaryButtonModel {
         
         let loaderWidth: CGFloat = 10
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Content Margin
+        /// Sub-model containing `horizontal` and `vertical` margins
+        public typealias ContentMargin = LayoutGroup_HV
     }
-}
 
-extension VPrimaryButtonModel.Layout {
-    /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias ContentMargin = LayoutGroup_HV
-}
-
-// MARK: - Colors
-extension VPrimaryButtonModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Content opacities
         public var content: StateOpacities = .init(
             pressedOpacity: 0.5,
@@ -100,35 +99,34 @@ extension VPrimaryButtonModel {
         /// Loader colors
         public var loader: Color = ColorBook.primaryInverted
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EPDL
+        
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states
+        public typealias StateOpacities = StateOpacities_PD
     }
-}
 
-extension VPrimaryButtonModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EPDL
-    
-    /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacities_PD
-}
-
-// MARK: - Fonts
-extension VPrimaryButtonModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font. Defaults to system font of size `16` with `semibold` weight.
         ///
         /// Only applicable when using init with title
         public var title: Font = .system(size: 16, weight: .semibold)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - Sub-Models
-extension VPrimaryButtonModel {
+    
+    // MARK: Sub-Models
     var spinnerSubModel: VSpinnerModelContinous {
         var model: VSpinnerModelContinous = .init()
         model.colors.spinner = colors.loader

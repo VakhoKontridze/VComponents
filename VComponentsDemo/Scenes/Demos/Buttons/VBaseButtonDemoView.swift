@@ -15,10 +15,8 @@ struct VBaseButtonDemoView: View {
     
     @State private var clickState: ClickState = .prompt
     @State private var pressState: PressState = .none
-}
 
-// MARK: - Body
-extension VBaseButtonDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)

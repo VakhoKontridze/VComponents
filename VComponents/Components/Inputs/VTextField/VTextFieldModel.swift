@@ -10,6 +10,22 @@ import SwiftUI
 // MARK: - V Text Field Model
 /// Model that describes UI
 public struct VTextFieldModel {
+    // MARK: Properties
+    /// Reference to `VBaseTextFieldModel`
+    public static let baseTextFieldReference: VBaseTextFieldModel = .init()
+    
+    /// Reference to `VSquareButtonModel`
+    public static let squareButtonReference: VSquareButtonModel = .init()
+    
+    /// Reference to `VPlainButtonModel`
+    public static let plainButtonReference: VPlainButtonModel = .init()
+    
+    /// Reference to `VCloseButtonModel`
+    public static let closeButtonReference: VCloseButtonModel = .init()
+    
+    /// Reference to `VSegmentedPickerModel`
+    public static let segmentedPickerReference: VSegmentedPickerModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -27,12 +43,11 @@ public struct VTextFieldModel {
     
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VTextFieldModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Textfield height. Defaults to `50`.
         public var height: CGFloat = 50
         
@@ -72,20 +87,19 @@ extension VTextFieldModel {
         /// Header and footer horizontal margin. Defaults to `10`.
         public var headerFooterMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Text Alignment
+        /// Enum that describes text alignment, such as `leading`, `center`, `trailing`, or `auto`
+        public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
     }
-}
 
-extension VTextFieldModel.Layout {
-    /// Enum that describes text alignment, such as `leading`, `center`, `trailing`, or `auto`
-    public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
-}
-
-// MARK: - Colors
-extension VTextFieldModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Content opacitis
         public var content: StateOpacities = .init(
             disabledOpacity: 0.5
@@ -195,35 +209,39 @@ extension VTextFieldModel {
             disabledOpacity: plainButtonReference.colors.content.disabledOpacity
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EFD
+        
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states
+        public typealias StateOpacities = StateOpacities_D
+        
+        // MARK: State Colors and Opacities
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
+        
+        // MARK: State Colors Highlighted
+        /// Sub-model containing colors for component states
+        public typealias StateColorsHighlighted = StateColors_EFSED
+        
+        // MARK: Button State Colors Highlighted
+        /// Sub-model containing colors for component states
+        public typealias ButtonStateColorsHighlighted = StateColors_EpFpSpEpD
+        
+        // MARK: Button State Colors and Opacities Highlighted
+        /// Sub-model containing colors and opacities for component states
+        public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColors_EpFpSpEpD_PD
     }
-}
 
-extension VTextFieldModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EFD
-    
-    /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacities_D
-    
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
-    
-    /// Sub-model containing colors for component states
-    public typealias StateColorsHighlighted = StateColors_EFSED
-    
-    /// Sub-model containing colors for component states
-    public typealias ButtonStateColorsHighlighted = StateColors_EpFpSpEpD
-    
-    /// Sub-model containing colors and opacities for component states
-    public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColors_EpFpSpEpD_PD
-}
-
-// MARK: - Fonts
-extension VTextFieldModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Text font. Defaults to system font of size `16`.
         public var text: UIFont = baseTextFieldReference.fonts.text
         
@@ -233,29 +251,29 @@ extension VTextFieldModel {
         
         public var cancelButton: Font = plainButtonReference.fonts.title
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VTextFieldModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// Clear, cancel, and visibility button appear and dissapear animation. Defaults to `easeInOut`.
         public var buttonsAppearDisappear: Animation? = .easeInOut
         
         let delayToAnimateButtons: TimeInterval = 0.5   // Must be more than keyboard or modal duration
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VTextFieldModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Keyboard type. Defaults to `default`.
         public var keyboardType: UIKeyboardType = baseTextFieldReference.misc.keyboardType
         
@@ -282,31 +300,12 @@ extension VTextFieldModel {
         /// If property is set to `nil`, button will be hidden.
         public var cancelButton: String? = nil
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VTextFieldModel {
-    /// Reference to `VBaseTextFieldModel`
-    public static let baseTextFieldReference: VBaseTextFieldModel = .init()
     
-    /// Reference to `VSquareButtonModel`
-    public static let squareButtonReference: VSquareButtonModel = .init()
-    
-    /// Reference to `VPlainButtonModel`
-    public static let plainButtonReference: VPlainButtonModel = .init()
-    
-    /// Reference to `VCloseButtonModel`
-    public static let closeButtonReference: VCloseButtonModel = .init()
-    
-    /// Reference to `VSegmentedPickerModel`
-    public static let segmentedPickerReference: VSegmentedPickerModel = .init()
-}
-
-// MARK: - Sub-Models
-extension VTextFieldModel {
+    // MARK: Sub-Models
     func baseTextFieldSubModel(state: VTextFieldState, isSecureTextEntry: Bool) -> VBaseTextFieldModel {
         var model: VBaseTextFieldModel = .init()
         

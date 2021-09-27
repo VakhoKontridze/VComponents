@@ -10,11 +10,15 @@ import SwiftUI
 // MARK: - Pressed
 /// Opacity level group containing values for `pressed` state
 public struct StateOpacities_P {
+    // MARK: Properties
     /// Pressed opacity level
     public var pressedOpacity: Double
 
+    // MARK: Initializers
     /// Initializes group with values
-    public init(pressedOpacity: Double) {
+    public init(
+        pressedOpacity: Double
+    ) {
         self.pressedOpacity = pressedOpacity
     }
     
@@ -36,11 +40,15 @@ public struct StateOpacities_P {
 // MARK: - Disabled
 /// Opacity level group containing values for `disabled` state
 public struct StateOpacities_D {
+    // MARK: Properties
     /// Disabled opacity level
     public var disabledOpacity: Double
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(disabledOpacity: Double) {
+    public init(
+        disabledOpacity: Double
+    ) {
         self.disabledOpacity = disabledOpacity
     }
     
@@ -57,9 +65,8 @@ public struct StateOpacities_D {
             disabledOpacity: 1
         )
     }
-}
-
-extension StateOpacities_D {
+    
+    // MARK: Mapping
     func `for`(_ state: VWheelPickerState) -> Double {
         switch state {
         case .enabled: return 1
@@ -87,14 +94,19 @@ extension StateOpacities_D {
 // MARK: - Pressed, Disabled
 /// Opacity level group containing values for `pressed` and `disabled` states
 public struct StateOpacities_PD {
+    // MARK: Properties
     /// Pressed opacity level
     public var pressedOpacity: Double
     
     /// Disabled opacity level
     public var disabledOpacity: Double
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(pressedOpacity: Double, disabledOpacity: Double) {
+    public init(
+        pressedOpacity: Double,
+        disabledOpacity: Double
+    ) {
         self.pressedOpacity = pressedOpacity
         self.disabledOpacity = disabledOpacity
     }
@@ -114,9 +126,8 @@ public struct StateOpacities_PD {
             disabledOpacity: 1
         )
     }
-}
 
-extension StateOpacities_PD {
+    // MARK: Mapping
     func `for`(_ state: VPrimaryButtonInternalState) -> Double {
         switch state {
         case .enabled: return 1

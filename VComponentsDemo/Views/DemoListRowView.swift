@@ -47,10 +47,8 @@ struct DemoListRowView<Content>: View where Content: View {
         self.title = title
         self.rowType = .custom(action)
     }
-}
 
-// MARK: - Body
-extension DemoListRowView {
+    // MARK: Body
     @ViewBuilder var body: some View {
         switch rowType {
         case .link(let destination): VNavigationLink(destination: destination, content: { rowView })

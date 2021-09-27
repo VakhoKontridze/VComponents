@@ -37,10 +37,8 @@ struct _VDialog<Content>: View where Content: View {
         self.description = description
         self.content = content
     }
-}
 
-// MARK: - Body
-extension _VDialog {
+    // MARK: Body
     var body: some View {
         ZStack(content: {
             blinding
@@ -157,10 +155,8 @@ extension _VDialog {
             })
         })
     }
-}
 
-// MARK: - Animations
-extension _VDialog {
+    // MARK: Animations
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }

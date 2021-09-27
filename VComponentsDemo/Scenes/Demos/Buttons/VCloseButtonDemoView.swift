@@ -33,10 +33,8 @@ struct VCloseButtonDemoView: View {
 
         return model
     }
-}
 
-// MARK: - Body
-extension VCloseButtonDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

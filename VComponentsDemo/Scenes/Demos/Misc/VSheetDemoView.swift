@@ -22,10 +22,8 @@ struct VSheetDemoView: View {
         
         return model
     }
-}
 
-// MARK: - Body
-extension VSheetDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(hasLayer: false, component: component, settings: settings)

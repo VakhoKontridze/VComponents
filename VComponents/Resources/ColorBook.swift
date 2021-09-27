@@ -10,11 +10,7 @@ import SwiftUI
 // MARK: - Color Book
 /// Contains fundamental colors used throughout the framework
 public struct ColorBook {
-    private init() {}
-}
-
-// MARK: - Colors
-extension ColorBook {
+    // MARK: Properties
     /// Clear color
     public static let clear: Color = .clear
     
@@ -35,11 +31,14 @@ extension ColorBook {
     
     /// Blue accent color
     public static let accent: Color = .init(componentAsset: "Accent")
+    
+    // MARK: Initializers
+    private init() {}
 }
 
-// MARK: - Helper
+// MARK: - Helpers
 extension Color {
-    /// Initializes color from framework's local assets folder using a name
+    /// Initializes color from framework's local assets library from a name
     public init(componentAsset name: String) {
         guard
             let bundle = Bundle(identifier: "com.vakhtang-kontridze.VComponents"),

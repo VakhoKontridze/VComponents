@@ -34,10 +34,8 @@ struct VPageIndicatorAuto: View {
         self.total = total
         self.selectedIndex = selectedIndex
     }
-}
 
-// MARK: - Body
-extension VPageIndicatorAuto {
+    // MARK: Body
     @ViewBuilder var body: some View {
         switch total {
         case ...finiteLimit:

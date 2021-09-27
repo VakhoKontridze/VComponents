@@ -14,10 +14,8 @@ struct VActionSheetDemoView: View {
     static let navBarTitle: String = "Action Sheet"
     
     @State private var isPresented: Bool = false
-}
 
-// MARK: - Body
-extension VActionSheetDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)

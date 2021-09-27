@@ -62,10 +62,8 @@ public struct VPageIndicator: View {
         self.total = total
         self.selectedIndex = selectedIndex
     }
-}
 
-// MARK: - Body
-extension VPageIndicator {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -99,10 +97,8 @@ extension VPageIndicator {
             }
         })
     }
-}
 
-// MARK: - State Sets
-extension VPageIndicator {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             withAnimation(model.animations.transition, {

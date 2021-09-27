@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - V CheckBox Model
 /// Model that describes UI
 public struct VCheckBoxModel {
+    // MARK: Properties
+    /// Reference to `VToggleModel`
+    public static let toggleReference: VToggleModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -25,14 +29,14 @@ public struct VCheckBoxModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
 
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VCheckBoxModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Checkbox dimension. Defaults to `16.`
         public var dimension: CGFloat = 16
         
@@ -51,15 +55,15 @@ extension VCheckBoxModel {
         /// Content leading margin. Defaults to `0`.
         public var contentMarginLeading: CGFloat = 0
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Colors
-extension VCheckBoxModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Fill colors
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
@@ -100,59 +104,54 @@ extension VCheckBoxModel {
             disabled: toggleReference.colors.textContent.disabled
         )
 
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_OOID
+
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states
+        public typealias StateOpacities = StateOpacities_PD
     }
-}
 
-extension VCheckBoxModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_OOID
-
-    /// Sub-model containing opacities for component states
-    public typealias StateOpacities = StateOpacities_PD
-}
-
-// MARK: - Fonts
-extension VCheckBoxModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font. Defaults to system font of size `15`.
         ///
         /// Only applicable when using init with title
         public var title: Font = toggleReference.fonts.title
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VCheckBoxModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = toggleReference.animations.stateChange
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VCheckBoxModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Indicates if content is clickable. Defaults to `true`.
         public var contentIsClickable: Bool = toggleReference.misc.contentIsClickable
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VCheckBoxModel {
-    /// Reference to `VToggleModel`
-    public static let toggleReference: VToggleModel = .init()
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: UIKit Text Field Representable
-struct UIKitTextFieldRepresentable {
+struct UIKitTextFieldRepresentable: UIViewRepresentable {
     // MARK: Properties
     private let model: VBaseTextFieldModel
     
@@ -43,10 +43,8 @@ struct UIKitTextFieldRepresentable {
         self.endHandler = endHandler
         self.returnAction = returnAction
     }
-}
 
-// MARK: - Representable
-extension UIKitTextFieldRepresentable: UIViewRepresentable {
+    // MARK: Representable
     func makeCoordinator() -> Coordinator {
         .init(representable: self)
     }
@@ -130,10 +128,8 @@ extension UIKitTextFieldRepresentable: UIViewRepresentable {
             _ = textField.becomeFirstResponder()
         }
     }
-}
 
-// MARK: - Focus and Commit
-extension UIKitTextFieldRepresentable {
+    // MARK: Focus and Commit
     func textFieldReturned(_ textField: UITextField) {
         setBindedFocus(to: false)
     }
@@ -147,7 +143,7 @@ extension UIKitTextFieldRepresentable {
     }
 }
 
-// MARK: - preview
+// MARK: - Preview
 struct UIKitTextFieldRepresentable_Previews: PreviewProvider {
     static var previews: some View {
         VBaseTextField_Previews.previews

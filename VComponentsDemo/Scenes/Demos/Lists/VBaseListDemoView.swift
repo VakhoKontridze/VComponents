@@ -15,10 +15,8 @@ struct VBaseListDemoView: View {
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 5
-}
 
-// MARK: - Body
-extension VBaseListDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(

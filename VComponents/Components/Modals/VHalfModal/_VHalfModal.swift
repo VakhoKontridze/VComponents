@@ -49,10 +49,8 @@ struct _VHalfModal<Content, HeaderContent>: View
             model.layout.height.min <= model.layout.height.ideal &&
             model.layout.height.ideal <= model.layout.height.max
     }
-}
 
-// MARK: - Body
-extension _VHalfModal {
+    // MARK: Body
     var body: some View {
         performStateSets()
         
@@ -176,10 +174,8 @@ extension _VHalfModal {
                 .padding(.top, VHalfModalModel.Layout.navBarCloseButtonMarginTop)
         }
     }
-}
 
-// MARK: - State Sets
-extension _VHalfModal {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             resetOffsetIsNil()
@@ -189,10 +185,8 @@ extension _VHalfModal {
     private func resetOffsetIsNil() {
         if offset == nil { offset = model.layout.height.max - model.layout.height.ideal }
     }
-}
 
-// MARK: - Animation
-extension _VHalfModal {
+    // MARK: Animation
     private func animateIn() {
         resetOffsetIsNil()
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
@@ -211,10 +205,8 @@ extension _VHalfModal {
     private func animateOutFromBackTap() {
         if model.misc.dismissType.contains(.backTap) { animateOut() }
     }
-}
 
-// MARK: - Gestures
-extension _VHalfModal {
+    // MARK: Gestures
     private func dragChanged(drag: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
         

@@ -21,10 +21,8 @@ struct VTextDemoView: View {
     private let titleColor: Color = ColorBook.primary
     private let titleFont: Font = .system(size: 16, weight: .semibold)
     private let textFont: Font = .system(size: 14)
-}
 
-// MARK: - Body
-extension VTextDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

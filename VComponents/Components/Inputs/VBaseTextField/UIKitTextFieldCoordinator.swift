@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - UIKit Text Field Coordinator
 extension UIKitTextFieldRepresentable {
-    final class Coordinator: NSObject {
+    final class Coordinator: NSObject, UITextFieldDelegate {
         // MARK: Properties
         private let representable: UIKitTextFieldRepresentable
         
@@ -18,38 +18,36 @@ extension UIKitTextFieldRepresentable {
             self.representable = representable
             super.init()
         }
-    }
-}
 
-// MARK: - Text Field Delegate
-extension UIKitTextFieldRepresentable.Coordinator: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        switch representable.returnAction {
-        case .return:
-            representable.textFieldReturned(textField)
-            return true
-            
-        case .custom(let action):
-            action()
-            return false
-            
-        case .returnAndCustom(let action):
-            action()
-            representable.textFieldReturned(textField)
-            return true
+        // MARK: Text Field Delegate
+        func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            switch representable.returnAction {
+            case .return:
+                representable.textFieldReturned(textField)
+                return true
+                
+            case .custom(let action):
+                action()
+                return false
+                
+            case .returnAndCustom(let action):
+                action()
+                representable.textFieldReturned(textField)
+                return true
+            }
         }
-    }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        representable.beginHandler?()
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField) {
-        representable.commitText(textField.text ?? "")
-        representable.changeHandler?()
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        representable.endHandler?()
+        
+        func textFieldDidBeginEditing(_ textField: UITextField) {
+            representable.beginHandler?()
+        }
+        
+        @objc func textFieldDidChange(_ textField: UITextField) {
+            representable.commitText(textField.text ?? "")
+            representable.changeHandler?()
+        }
+        
+        func textFieldDidEndEditing(_ textField: UITextField) {
+            representable.endHandler?()
+        }
     }
 }

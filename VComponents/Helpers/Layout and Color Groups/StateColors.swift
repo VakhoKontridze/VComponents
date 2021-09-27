@@ -10,6 +10,7 @@ import SwiftUI
 // MARK: - Enabled, Disabled
 /// Color group containing values for `enabled` and `disabled` states
 public struct StateColors_ED {
+    // MARK: Properties
     /// Enabled color
     public var enabled: Color
     
@@ -17,11 +18,15 @@ public struct StateColors_ED {
     public var disabled: Color
     
     /// Initializes group with values
-    public init(enabled: Color, disabled: Color) {
+    public init(
+        enabled: Color,
+        disabled: Color
+    ) {
         self.enabled = enabled
         self.disabled = disabled
     }
     
+    // MARK: Initializers
     /// Instance of group with clear values
     public static var clear: Self {
         .init(
@@ -29,9 +34,8 @@ public struct StateColors_ED {
             disabled: ColorBook.clear
         )
     }
-}
 
-extension StateColors_ED {
+    // MARK: Mapping
     func `for`(_ state: VStepperState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -71,6 +75,7 @@ extension StateColors_ED {
 // MARK: - Enabled, Pressed, Disabled
 /// Color group containing values for `enabled`, `pressed`, and `disabled` states
 public struct StateColors_EPD {
+    // MARK: Properties
     /// Enabled color
     public var enabled: Color
     
@@ -80,8 +85,13 @@ public struct StateColors_EPD {
     /// Disabled color
     public var disabled: Color
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(enabled: Color, pressed: Color, disabled: Color) {
+    public init(
+        enabled: Color,
+        pressed: Color,
+        disabled: Color
+    ) {
         self.enabled = enabled
         self.pressed = pressed
         self.disabled = disabled
@@ -95,9 +105,8 @@ public struct StateColors_EPD {
             disabled: ColorBook.clear
         )
     }
-}
-
-extension StateColors_EPD {
+    
+    // MARK: Mapping
     func `for`(_ state: VSecondaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -151,6 +160,7 @@ extension StateColors_EPD {
 // MARK: - Enabled, Pressed, Disabled, Loading
 /// Color group containing values for enabled, pressed, disabled, and loading states
 public struct StateColors_EPDL {
+    // MARK: Properties
     /// Enabled color
     public var enabled: Color
     
@@ -163,8 +173,14 @@ public struct StateColors_EPDL {
     /// Loading color
     public var loading: Color
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(enabled: Color, pressed: Color, disabled: Color, loading: Color) {
+    public init(
+        enabled: Color,
+        pressed: Color,
+        disabled: Color,
+        loading: Color
+    ) {
         self.enabled = enabled
         self.pressed = pressed
         self.disabled = disabled
@@ -180,9 +196,8 @@ public struct StateColors_EPDL {
             loading: ColorBook.clear
         )
     }
-}
 
-extension StateColors_EPDL {
+    // MARK: Mapping
     func `for`(_ state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -196,6 +211,7 @@ extension StateColors_EPDL {
 // MARK: - Off, On, Disabled
 /// Color group containing values for `off`, `on`, and `disabled` states
 public struct StateColors_OOD {
+    // MARK: Properties
     /// Off color
     public var off: Color
     
@@ -205,8 +221,13 @@ public struct StateColors_OOD {
     /// Disabled color
     public var disabled: Color
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(off: Color, on: Color, disabled: Color) {
+    public init(
+        off: Color,
+        on: Color,
+        disabled: Color
+    ) {
         self.off = off
         self.on = on
         self.disabled = disabled
@@ -220,9 +241,8 @@ public struct StateColors_OOD {
             disabled: ColorBook.clear
         )
     }
-}
 
-extension StateColors_OOD {
+    // MARK: Mapping
     func `for`(_ state: VToggleInternalState) -> Color {
         switch state {
         case .off: return off
@@ -247,6 +267,7 @@ extension StateColors_OOD {
 // MARK: - Off, On, Indeterminate, Disabled
 /// Color group containing values for `off`, `on`, `indeterminate`, and `disabled` states
 public struct StateColors_OOID {
+    // MARK: Properties
     /// Off color
     public var off: Color
     
@@ -259,8 +280,14 @@ public struct StateColors_OOID {
     /// Disabled color
     public var disabled: Color
 
+    // MARK: Initializers
     /// Initializes group with values
-    public init(off: Color, on: Color, indeterminate: Color, disabled: Color) {
+    public init(
+        off: Color,
+        on: Color,
+        indeterminate: Color,
+        disabled: Color
+    ) {
         self.off = off
         self.on = on
         self.indeterminate = indeterminate
@@ -276,9 +303,8 @@ public struct StateColors_OOID {
             disabled: ColorBook.clear
         )
     }
-}
 
-extension StateColors_OOID {
+    // MARK: Mapping
     func `for`(_ state: VCheckBoxInternalState) -> Color {
         switch state {
         case .off: return off
@@ -295,6 +321,7 @@ extension StateColors_OOID {
 // MARK: - Enabled, Focused, Disabled
 /// Color group containing values for `enabled`, `focused`, and `disabled` states
 public struct StateColors_EFD {
+    // MARK: Properties
     /// Enabled color
     public var enabled: Color
     
@@ -304,8 +331,13 @@ public struct StateColors_EFD {
     /// Disabled color
     public var disabled: Color
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(enabled: Color, focused: Color, disabled: Color) {
+    public init(
+        enabled: Color,
+        focused: Color,
+        disabled: Color
+    ) {
         self.enabled = enabled
         self.focused = focused
         self.disabled = disabled
@@ -319,9 +351,8 @@ public struct StateColors_EFD {
             disabled: ColorBook.clear
         )
     }
-}
 
-extension StateColors_EFD {
+    // MARK: Mapping
     func `for`(_ state: VTextFieldState) -> Color {
         switch state {
         case .enabled: return enabled
@@ -334,6 +365,7 @@ extension StateColors_EFD {
 // MARK: - Enabled, Focused, Success, Error, Disabled
 /// Color group containing values for `enabled`, `focused`, `success`, `error`, and `disabled` states
 public struct StateColors_EFSED {
+    // MARK: Properties
     /// Enabled color
     public var enabled: Color
     
@@ -349,8 +381,15 @@ public struct StateColors_EFSED {
     /// Disabled color
     public var disabled: Color
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(enabled: Color, focused: Color, success: Color, error: Color, disabled: Color) {
+    public init(
+        enabled: Color,
+        focused: Color,
+        success: Color,
+        error: Color,
+        disabled: Color
+    ) {
         self.enabled = enabled
         self.focused = focused
         self.success = success
@@ -368,9 +407,8 @@ public struct StateColors_EFSED {
             disabled: ColorBook.clear
         )
     }
-}
 
-extension StateColors_EFSED {
+    // MARK: Mapping
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         switch (highlight, state) {
         case (_, .disabled): return disabled
@@ -387,6 +425,7 @@ extension StateColors_EFSED {
 // MARK: - Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled
 /// Color group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states
 public struct StateColors_EpFpSpEpD {
+    // MARK: Properties
     /// Enabled color
     public var enabled: Color
     
@@ -414,8 +453,19 @@ public struct StateColors_EpFpSpEpD {
     /// Disabled color
     public var disabled: Color
     
+    // MARK: Initializers
     /// Initializes group with values
-    public init(enabled: Color, enabledPressed: Color, focused: Color, focusedPressed: Color, success: Color, successPressed: Color, error: Color, errorPressed: Color, disabled: Color) {
+    public init(
+        enabled: Color,
+        enabledPressed: Color,
+        focused: Color,
+        focusedPressed: Color,
+        success: Color,
+        successPressed: Color,
+        error: Color,
+        errorPressed: Color,
+        disabled: Color
+    ) {
         self.enabled = enabled
         self.enabledPressed = enabledPressed
         self.focused = focused
@@ -429,11 +479,20 @@ public struct StateColors_EpFpSpEpD {
     
     /// Instance of group with clear values
     public var clear: Self {
-        .init(enabled: ColorBook.clear, enabledPressed: ColorBook.clear, focused: ColorBook.clear, focusedPressed: ColorBook.clear, success: ColorBook.clear, successPressed: ColorBook.clear, error: ColorBook.clear, errorPressed: ColorBook.clear, disabled: ColorBook.clear)
+        .init(
+            enabled: ColorBook.clear,
+            enabledPressed: ColorBook.clear,
+            focused: ColorBook.clear,
+            focusedPressed: ColorBook.clear,
+            success: ColorBook.clear,
+            successPressed: ColorBook.clear,
+            error: ColorBook.clear,
+            errorPressed: ColorBook.clear,
+            disabled: ColorBook.clear
+        )
     }
-}
 
-extension StateColors_EpFpSpEpD {
+    // MARK: Mapping
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
         switch (highlight, state) {
         case (_, .disabled): return disabled

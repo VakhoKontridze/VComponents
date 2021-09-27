@@ -49,10 +49,8 @@ public struct VChevronButton: View {
         self.state = state
         self.action = action
     }
-}
 
-// MARK: - Body
-extension VChevronButton {
+    // MARK: Body
     public var body: some View {
         VBaseButton(
             isEnabled: state.isEnabled,

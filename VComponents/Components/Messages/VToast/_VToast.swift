@@ -32,10 +32,8 @@ struct _VToast: View {
         self._isHCPresented = isPresented
         self.title = title
     }
-}
 
-// MARK: - Body
-extension _VToast {
+    // MARK: Body
     var body: some View {
         Group(content: {
             contentView
@@ -69,10 +67,8 @@ extension _VToast {
         RoundedRectangle(cornerRadius: cornerRadius)
             .foregroundColor(model.colors.background)
     }
-}
 
-// MARK: - Offsets
-extension _VToast {
+    // MARK: Offsets
     private var initialOffset: CGFloat {
         switch model.layout.presentationEdge {
         case .top: return -height
@@ -89,30 +85,26 @@ extension _VToast {
             return UIScreen.main.bounds.height - UIView.bottomSafeAreaHeight - height - model.layout.presentationOffsetFromSafeEdge
         }
     }
-}
 
-// MARK: - Corner Radius
-extension _VToast {
+    // MARK: Corner Radius
     private var cornerRadius: CGFloat {
         switch model.layout.cornerRadiusType {
         case .rounded: return height / 2
         case .custom(let value): return value
         }
     }
-}
 
-// MARK: - Animations
-extension _VToast {
-    func animateIn() {
+    // MARK: Animations
+    private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }
     
-    func animateOut() {
+    private func animateOut() {
         withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
         DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
     }
     
-    func animateOutAfterLifecycle() {
+    private func animateOutAfterLifecycle() {
         DispatchQueue.main.asyncAfter(deadline: .now() + model.animations.duration, execute: animateOut)
     }
 }

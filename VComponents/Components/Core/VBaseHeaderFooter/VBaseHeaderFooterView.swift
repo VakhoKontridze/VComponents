@@ -44,10 +44,8 @@ public struct VBaseHeaderFooter: View {
         self.color = color
         self.title = title
     }
-}
 
-// MARK: - Body
-extension VBaseHeaderFooter {
+    // MARK: Body
     @ViewBuilder public var body: some View {
         switch frameType {
         case .fixed: contentView

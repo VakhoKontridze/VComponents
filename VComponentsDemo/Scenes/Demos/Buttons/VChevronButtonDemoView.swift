@@ -34,10 +34,8 @@ struct VChevronButtonDemoView: View {
 
         return model
     }
-}
 
-// MARK: - Body
-extension VChevronButtonDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

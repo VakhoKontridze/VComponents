@@ -10,6 +10,13 @@ import SwiftUI
 // MARK: - V Slider Model
 /// Model that describes UI
 public struct VSliderModel {
+    // MARK: Properties
+    /// Reference to `VPrimaryButtonModel`
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
+    
+    /// Reference to `VToggleModel`
+    public static let toggleReference: VToggleModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -19,14 +26,14 @@ public struct VSliderModel {
     /// Sub-model containing animation properties
     public var animations: Animations = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VSliderModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Slider height. Defaults to `10`.
         public var height: CGFloat = 10
         
@@ -47,15 +54,15 @@ extension VSliderModel {
         
         var hasThumb: Bool { thumbDimension > 0 }
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Colors
-extension VSliderModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Slider track colors
         public var track: StateColors = .init(
             enabled: VSliderModel.toggleReference.colors.fill.off,
@@ -85,33 +92,24 @@ extension VSliderModel {
             disabled: .init(componentAsset: "Slider.Thumb.Shadow.disabled")
         )
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_ED
     }
-}
 
-extension VSliderModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_ED
-}
-
-// MARK: - Animations
-extension VSliderModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// Progress animation. Defaults to `nil`.
         public var progress: Animation? = nil
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
-
-// MARK: - References
-extension VSliderModel {
-    /// Reference to `VPrimaryButtonModel`
-    public static let primaryButtonReference: VPrimaryButtonModel = .init()
-    
-    /// Reference to `VToggleModel`
-    public static let toggleReference: VToggleModel = .init()
 }

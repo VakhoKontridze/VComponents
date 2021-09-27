@@ -177,10 +177,8 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageFive = nil
         self.pageSix = nil
     }
-}
 
-// MARK: - Body
-extension VTabNavigationView {
+    // MARK: Body
     public var body: some View {
         TabView(selection: $selection, content: {
             if let page = pageOne { pageContent(page).tag(0) }

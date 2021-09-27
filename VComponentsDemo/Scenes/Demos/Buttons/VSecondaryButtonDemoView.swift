@@ -57,10 +57,8 @@ struct VSecondaryButtonDemoView: View {
 
         return model
     }
-}
 
-// MARK: - Body
-extension VSecondaryButtonDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

@@ -75,10 +75,8 @@ public struct VPrimaryButton<Content>: View where Content: View {
             }
         )
     }
-}
 
-// MARK: - Body
-extension VPrimaryButton {
+    // MARK: Body
     public var body: some View {
         VBaseButton(
             isEnabled: state.isEnabled,

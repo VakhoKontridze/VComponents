@@ -17,10 +17,8 @@ struct VMenuPickerDemoView: View {
     @State private var state: VMenuPickerState = .enabled
     @State private var menuPickerButtonType: VMenuPickerButtonTypeHelper = .secondary
     @State private var contentType: ComponentContentType = .text
-}
 
-// MARK: - Body
-extension VMenuPickerDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

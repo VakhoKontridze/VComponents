@@ -43,10 +43,8 @@ public struct VText: View {
         self.color = color
         self.title = title
     }
-}
 
-// MARK: - Body
-extension VText {
+    // MARK: Body
     @ViewBuilder public var body: some View {
         switch textType {
         case .oneLine:

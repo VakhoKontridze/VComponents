@@ -56,10 +56,8 @@ public struct VSheet<Content>: View where Content: View {
         self.model = model
         self.content = { ColorBook.clear }
     }
-}
 
-// MARK: - Body
-extension VSheet {
+    // MARK: Body
     public var body: some View {
         contentView
             .background(sheetView)

@@ -66,10 +66,8 @@ struct VSquareButtonDemoView: View {
 
         return model
     }
-}
 
-// MARK: - Body
-extension VSquareButtonDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

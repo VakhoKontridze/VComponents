@@ -39,7 +39,7 @@ public struct VToggle<Content>: View where Content: View {
     
     private let content: (() -> Content)?
     
-    // MARK: Initializers: State
+    // MARK: Initializers - State
     /// Initializes component with state and content
     public init(
         model: VToggleModel = .init(),
@@ -85,7 +85,7 @@ public struct VToggle<Content>: View where Content: View {
         self.content = nil
     }
     
-    // MARK: Initializers: Bool
+    // MARK: Initializers - Bool
     /// Initializes component with bool and content
     public init(
         model: VToggleModel = .init(),
@@ -132,10 +132,8 @@ public struct VToggle<Content>: View where Content: View {
         self._state = .init(bool: isOn)
         self.content = nil
     }
-}
 
-// MARK: - Body
-extension VToggle {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -186,19 +184,15 @@ extension VToggle {
                 .opacity(model.colors.content.for(internalState))
         })
     }
-}
 
-// MARK: - State Sets
-extension VToggle {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
     }
-}
 
-// MARK: - Actions
-extension VToggle {
+    // MARK: Actions
     private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
         state.nextState()
@@ -209,10 +203,8 @@ extension VToggle {
             withAnimation(model.animations.stateChange, { animatableState = state })
         }
     }
-}
 
-// MARK: - Thumb Position
-extension VToggle {
+    // MARK: Thumb Position
     private var thumbOffset: CGFloat {
         let offset: CGFloat = model.layout.animationOffset
         

@@ -34,10 +34,8 @@ struct VNavigationViewAppearance: ViewModifier {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
     }
-}
 
-// MARK: - Body
-extension VNavigationViewAppearance {
+    // MARK: Body
     func body(content: Content) -> some View {
         content
     }

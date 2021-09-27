@@ -10,6 +10,10 @@ import SwiftUI
 // MARK: - V Dialog Model
 /// Model that describes UI
 public struct VDialogModel {
+    // MARK: Properties
+    /// Reference to `VModalModel`
+    public static let modalReference: VModalModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -22,14 +26,14 @@ public struct VDialogModel {
     /// Sub-model containing animation properties
     public var animations: Animations = .init()
 
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VDialogModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Side bar width. Defaults to `0.75` ratio of screen with.
         public var width: CGFloat = UIScreen.main.bounds.width * 0.75
         
@@ -63,20 +67,19 @@ extension VDialogModel {
         /// Description line limit. Defaults to `5`.
         public var descriptionLineLimit: Int = 5
 
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Title and Content Margin
+        /// Sub-model containing `horizontal` and `vertical` margins
+        public typealias TitleAndContentMargin = LayoutGroup_HV
     }
-}
 
-extension VDialogModel {
-    /// Sub-model containing `horizontal` and `vertical` margins
-    public typealias TitleAndContentMargin = LayoutGroup_HV
-}
-
-// MARK: - Colors
-extension VDialogModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Backgrond color
         public var background: Color = modalReference.colors.background
         
@@ -89,34 +92,27 @@ extension VDialogModel {
         /// Description color
         public var description: Color = ColorBook.primary
 
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Fonts
-extension VDialogModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Title font. Defaults to system font of size `16` and weight `bold`.
         public var title: Font = .system(size: 16, weight: .bold)
         
         /// Description font. Defaults to system font of size `15`.
         public var description: Font = .system(size: 14)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VDialogModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public typealias Animations = VModalModel.Animations
-}
-
-// MARK: - References
-extension VDialogModel {
-    /// Reference to `VModalModel`
-    public static let modalReference: VModalModel = .init()
 }

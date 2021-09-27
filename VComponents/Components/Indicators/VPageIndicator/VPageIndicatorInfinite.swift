@@ -41,10 +41,8 @@ struct VPageIndicatorInfinite: View {
         
         self.validLayout = visible > center && visible.isOdd && center.isOdd
     }
-}
 
-// MARK: - Body
-extension VPageIndicatorInfinite {
+    // MARK: Body
     @ViewBuilder public var body: some View {
         switch (validLayout, total) {
         case (false, _): EmptyView()
@@ -75,10 +73,8 @@ extension VPageIndicatorInfinite {
         })
             .offset(x: offset)
     }
-}
 
-// MARK: - Widths
-extension VPageIndicatorInfinite {
+    // MARK: Widths
     private var visibleWidth: CGFloat {
         let dots: CGFloat = .init(visible) * model.layout.dotDimension
         let spacings: CGFloat = .init(visible - 1) * model.layout.spacing
@@ -92,10 +88,8 @@ extension VPageIndicatorInfinite {
         let total: CGFloat = dots + spacings
         return total
     }
-}
 
-// MARK: - Animation Offset
-extension VPageIndicatorInfinite {
+    // MARK: Animation Offset
     private var offset: CGFloat {
         let rawOffset: CGFloat = (totalWidth - visibleWidth) / 2
         
@@ -111,10 +105,8 @@ extension VPageIndicatorInfinite {
             return -rawOffset
         }
     }
-}
 
-// MARK: - Animation Scale
-extension VPageIndicatorInfinite {
+    // MARK: Animation Scale
     private func scale(at index: Int) -> CGFloat {
         switch region {
         case .leftEdge:
@@ -215,15 +207,15 @@ extension VPageIndicatorInfinite {
         let incrementalScale: CGFloat = model.layout.infiniteEdgeDotScale + .init(index) * scaleStep
         return incrementalScale
     }
-}
 
-// MARK: - Region
-extension VPageIndicatorInfinite {
+    // MARK: Region
     private enum Region {
+        // MARK: Cases
         case leftEdge
         case center
         case rightEdge
         
+        // MARK: Initializers
         init(selectedIndex: Int, total: Int, middle: Int) {
             switch selectedIndex {
             case 0..<middle+1: self = .leftEdge

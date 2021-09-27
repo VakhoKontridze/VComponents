@@ -80,10 +80,8 @@ public struct VNavigationView<Content>: View where Content: View {
         self.model = model
         self.content = content
     }
-}
 
-// MARK: - Body
-extension VNavigationView {
+    // MARK: Body
     public var body: some View {
         NavigationView(content: {
             content()

@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Page Indicator Finite
 struct VPageIndicatorFinite: View {
+    // MARK: Properties
     private let model: VPageIndicatorModel
     
     private let total: Int
@@ -24,10 +25,8 @@ struct VPageIndicatorFinite: View {
         self.total = total
         self.selectedIndex = selectedIndex
     }
-}
 
-// MARK: - Properties
-extension VPageIndicatorFinite {
+    // MARK: Body
     var body: some View {
         HStack(spacing: model.layout.spacing, content: {
             ForEach(0..<total, content: { i in

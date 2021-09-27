@@ -12,10 +12,8 @@ import VComponents
 struct VNavigationViewDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Navigation View"
-}
 
-// MARK: - Body
-extension VNavigationViewDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)

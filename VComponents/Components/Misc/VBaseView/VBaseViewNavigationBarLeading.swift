@@ -68,10 +68,8 @@ struct VBaseViewNavigationBarLeading<TrailingItem, Title, LeadingItem>: ViewModi
         self.showBackButton = showBackButton
         self.backAction = backAction
     }
-}
 
-// MARK: - Body
-extension VBaseViewNavigationBarLeading {
+    // MARK: Body
     func body(content: Content) -> some View {
         content
             .toolbar(content: { ToolbarItem(placement: .principal, content: { items }) })

@@ -139,10 +139,8 @@ public struct VBaseTextField: View {
         self.endHandler = endHandler
         self.returnAction = returnAction
     }
-}
 
-// MARK: - Body
-extension VBaseTextField {
+    // MARK: Body
     public var body: some View {
         UIKitTextFieldRepresentable(
             model: model,

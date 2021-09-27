@@ -60,7 +60,7 @@ public struct VWheelPicker<Data, RowContent>: View
     
     @State private var rowWidth: CGFloat = .zero
     
-    // MARK: Initializers: View Builder
+    // MARK: Initializers - View Builder
     /// Initializes component with selected index, header, footer, data, and row content
     public init(
         model: VWheelPickerModel = .init(),
@@ -174,10 +174,8 @@ public struct VWheelPicker<Data, RowContent>: View
             }
         )
     }
-}
 
-// MARK: - Body
-extension VWheelPicker {
+    // MARK: Body
     public var body: some View {
         VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
             headerView

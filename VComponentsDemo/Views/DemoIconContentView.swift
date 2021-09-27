@@ -19,10 +19,8 @@ struct DemoIconContentView: View {
         self.dimension = dimension
         self.color = color
     }
-}
 
-// MARK: - Body
-extension DemoIconContentView {
+    // MARK: Body
     var body: some View {
         Image(systemName: "swift")
             .resizable()

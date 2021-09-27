@@ -120,7 +120,7 @@ public struct VNavigationLink<Destination, Content>: View
     private let destination: Destination
     private let content: () -> Content
     
-    // MARK: Initializers: Preset and Tap
+    // MARK: Initializers - Preset and Tap
     /// Initiales component with preset, destination and content
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
@@ -153,7 +153,7 @@ public struct VNavigationLink<Destination, Content>: View
         )
     }
     
-    // MARK: Initializers: Preset and State
+    // MARK: Initializers - Preset and State
     /// Initiales component with preset, active state, destination and content
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
@@ -189,7 +189,7 @@ public struct VNavigationLink<Destination, Content>: View
         )
     }
     
-    // MARK: Initializers: Custom and Tap
+    // MARK: Initializers - Custom and Tap
     /// Initiales component with destination and content
     public init(
         state: VNavigationLinkState = .enabled,
@@ -204,7 +204,7 @@ public struct VNavigationLink<Destination, Content>: View
         self.content = content
     }
     
-    // MARK: Initializers: Custom and State
+    // MARK: Initializers - Custom and State
     /// Initiales component with destination, active state, and content
     public init(
         state: VNavigationLinkState = .enabled,
@@ -219,10 +219,8 @@ public struct VNavigationLink<Destination, Content>: View
         self.destination = destination
         self.content = content
     }
-}
 
-// MARK: - Body
-extension VNavigationLink {
+    // MARK: Body
     public var body: some View {
         contentView(isActive: isActive)
             .background({

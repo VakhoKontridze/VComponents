@@ -67,7 +67,7 @@ public struct VRadioButton<Content>: View where Content: View {
     
     private let content: (() -> Content)?
     
-    // MARK: Initializers: State
+    // MARK: Initializers - State
     /// Initializes component with state and content
     public init(
         model: VRadioButtonModel = .init(),
@@ -113,7 +113,7 @@ public struct VRadioButton<Content>: View where Content: View {
         self.content = nil
     }
 
-    // MARK: Initializers: Bool
+    // MARK: Initializers - Bool
     /// Initializes component with bool and content
     public init(
         model: VRadioButtonModel = .init(),
@@ -161,7 +161,7 @@ public struct VRadioButton<Content>: View where Content: View {
         self.content = nil
     }
     
-    // MARK: Initializers: Pickable Item
+    // MARK: Initializers - Pickable Item
     /// Initializes component with `VPickableItem` and content
     public init<Item>(
         model: VRadioButtonModel = .init(),
@@ -200,7 +200,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
     
-    // MARK: Initializers: Pickable Titled Item
+    // MARK: Initializers - Pickable Titled Item
     /// Initializes component with `VPickableTitledItem` and content
     public init<Item>(
         model: VRadioButtonModel = .init(),
@@ -227,10 +227,8 @@ public struct VRadioButton<Content>: View where Content: View {
             }
         )
     }
-}
 
-// MARK: - Body
-extension VRadioButton {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -286,19 +284,15 @@ extension VRadioButton {
                 .opacity(model.colors.content.for(internalState))
         })
     }
-}
 
-// MARK: - State Sets
-extension VRadioButton {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableState()
         })
     }
-}
 
-// MARK: - Actions
-extension VRadioButton {
+    // MARK: Actions
     private func nextState() {
         withAnimation(model.animations.stateChange, { animatableState?.nextState() })
         state.nextState()

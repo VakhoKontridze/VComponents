@@ -69,7 +69,7 @@ public struct VMenuPicker<Label, Data>: View
     private let data: Data
     private let rowContent: (Data.Element) -> VMenuPickerRow
 
-    // MARK: Initializers: View Builder and Preset
+    // MARK: Initializers - View Builder and Preset
     /// Initializes component with preset, selected index, content, data, and row content
     public init(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
@@ -108,7 +108,7 @@ public struct VMenuPicker<Label, Data>: View
         )
     }
     
-    // MARK: Initializers: View Builder and Custom
+    // MARK: Initializers - View Builder and Custom
     /// Initializes component with selected index, content, data, and row content
     public init(
         state: VMenuPickerState = .enabled,
@@ -125,7 +125,7 @@ public struct VMenuPicker<Label, Data>: View
         self.rowContent = rowContent
     }
     
-    // MARK: Initializers: Row Titles and Preset
+    // MARK: Initializers - Row Titles and Preset
     /// Initializes component with preset, selected index, content, and row titles
     public init(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
@@ -165,7 +165,7 @@ public struct VMenuPicker<Label, Data>: View
         )
     }
     
-    // MARK: Initializers: Row Titles and Custom
+    // MARK: Initializers - Row Titles and Custom
     /// Initializes component with selected index, content, and row titles
     public init(
         state: VMenuPickerState = .enabled,
@@ -184,7 +184,7 @@ public struct VMenuPicker<Label, Data>: View
         )
     }
     
-    // MARK: Initializers: Pickable Item and Preset
+    // MARK: Initializers - Pickable Item and Preset
     /// Initializes component with preset, `VPickableItem`, content, and row content
     public init<Item>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
@@ -232,7 +232,7 @@ public struct VMenuPicker<Label, Data>: View
         )
     }
     
-    // MARK: Initializers: Pickable Item and Custom
+    // MARK: Initializers - Pickable Item and Custom
     /// Initializes component with `VPickableItem`, content, and row content
     public init<Item>(
         state: VMenuPickerState = .enabled,
@@ -256,7 +256,7 @@ public struct VMenuPicker<Label, Data>: View
         )
     }
     
-    // MARK: Initializers: Pickable Titled Item and Preset
+    // MARK: Initializers - Pickable Titled Item and Preset
     /// Initializes component with preset, `VPickableTitledItem` and content
     public init<Item>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
@@ -306,7 +306,7 @@ public struct VMenuPicker<Label, Data>: View
         )
     }
     
-    // MARK: Initializers: Pickable Titled Item and Custom
+    // MARK: Initializers - Pickable Titled Item and Custom
     /// Initializes component with `VPickableTitledItem` and content
     public init<Item>(
         state: VMenuPickerState = .enabled,
@@ -328,10 +328,8 @@ public struct VMenuPicker<Label, Data>: View
             rowContent: { item in .titled(title: item.pickerTitle) }
         )
     }
-}
 
-// MARK: - Body
-extension VMenuPicker {
+    // MARK: Body
     public var body: some View {
         Picker(selection: $selectedIndex, label: labelView, content: {
             ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, row) in

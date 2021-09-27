@@ -12,10 +12,8 @@ import VComponents
 struct VTabNavigationViewDemoView: View {
     // MARK: Properties
     static let navBarTitle: String = "Tab Navigation View"
-}
 
-// MARK: - Body
-extension VTabNavigationViewDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component)

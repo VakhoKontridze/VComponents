@@ -75,10 +75,8 @@ struct VBaseViewNavigationBarCenter<TrailingItem, Title, LeadingItem>: ViewModif
         self.showBackButton = showBackButton
         self.backAction = backAction
     }
-}
 
-// MARK: - Body
-extension VBaseViewNavigationBarCenter {
+    // MARK: Body
     func body(content: Content) -> some View {
         content
             .toolbar(content: { ToolbarItem(placement: .principal, content: { items }) })

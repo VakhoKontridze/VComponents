@@ -29,10 +29,8 @@ struct StepperSettingView: View {
         self.title = title
         self.description = description
     }
-}
 
-// MARK: - Body
-extension StepperSettingView {
+    // MARK: Body
     var body: some View {
         HStack(spacing: 0, content: {
             VStack(alignment: .leading, spacing: 3, content: {

@@ -10,6 +10,7 @@ import Foundation
 // MARK: - V Base Text Field State
 /// Enum that describes state, such as `enabled`, `focused`, or `disabled`
 public enum VBaseTextFieldState: Int, CaseIterable {
+    // MARK: Cases
     /// Case enabled
     case enabled
     
@@ -19,6 +20,7 @@ public enum VBaseTextFieldState: Int, CaseIterable {
     /// Case disabled
     case disabled
     
+    // MARK: Properties
     /// Indicates if state is enabled
     public var isEnabled: Bool {
         switch self {
@@ -35,10 +37,8 @@ public enum VBaseTextFieldState: Int, CaseIterable {
         case .disabled: return false
         }
     }
-}
 
-// MARK: - Next State
-extension VBaseTextFieldState {
+    // MARK: Next State
     mutating func setFocus(from state: Bool) {
         switch state {
         case false: self = .enabled

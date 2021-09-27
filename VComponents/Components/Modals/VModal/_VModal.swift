@@ -36,10 +36,8 @@ struct _VModal<Content, HeaderContent>: View
         self.headerContent = headerContent
         self.content = content
     }
-}
 
-// MARK: - Body
-extension _VModal {
+    // MARK: Body
     var body: some View {
         ZStack(content: {
             blinding
@@ -121,10 +119,8 @@ extension _VModal {
     private var closeButton: some View {
         VCloseButton(model: model.closeButtonSubModel, action: animateOut)
     }
-}
 
-// MARK: - Animations
-extension _VModal {
+    // MARK: Animations
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
     }

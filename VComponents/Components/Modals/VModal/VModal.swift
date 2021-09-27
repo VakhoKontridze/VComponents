@@ -44,7 +44,7 @@ public struct VModal<Content, HeaderContent>
     fileprivate let headerContent: (() -> HeaderContent)?
     fileprivate let content: () -> Content
     
-    // MARK: Initializers: Header
+    // MARK: Initializers - Header
     /// Initializes component with header and content
     public init(
         model: VModalModel = .init(),
@@ -78,7 +78,7 @@ public struct VModal<Content, HeaderContent>
         )
     }
     
-    // MARK: Initializers: _
+    // MARK: Initializers - _
     /// Initializes component content
     public init(
         model: VModalModel = .init(),

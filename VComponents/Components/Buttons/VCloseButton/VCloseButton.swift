@@ -43,10 +43,8 @@ public struct VCloseButton: View {
         self.state = state
         self.action = action
     }
-}
 
-// MARK: - Body
-extension VCloseButton {
+    // MARK: Body
     public var body: some View {
         VBaseButton(
             isEnabled: state.isEnabled,

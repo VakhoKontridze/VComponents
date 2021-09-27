@@ -62,10 +62,8 @@ public struct VStepper: View {
         self.state = state
         self._value = value
     }
-}
 
-// MARK: - Body
-extension VStepper {
+    // MARK: Body
     public var body: some View {
         ZStack(content: {
             background
@@ -114,10 +112,8 @@ extension VStepper {
             .frame(size: model.layout.divider)
             .foregroundColor(model.colors.divider.for(state))
     }
-}
 
-// MARK: - Button State
-extension VStepper {
+    // MARK: Button State
     private func saveButtonPressState(_ button: VStepperButton, isPressed: Bool) {
         if !isPressed {
             pressedButton = nil
@@ -136,10 +132,8 @@ extension VStepper {
         case (.enabled, .plus): return value >= range.upperBound ? .disabled : .enabled
         }
     }
-}
 
-// MARK: - Increment
-extension VStepper {
+    // MARK: Increment
     private func incrementValue(from button: VStepperButton) {
         guard !shouldSkipIncrementBecauseOfLongPressIncrementFinish else {
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = false
@@ -160,10 +154,8 @@ extension VStepper {
             }
         }
     }
-}
 
-// MARK: - Long Press Increment
-extension VStepper {
+    // MARK: Long Press Increment
     private func scheduleLongPressIncrementSchedulerTimer(for button: VStepperButton) {
         zeroLongPressTimers()
         

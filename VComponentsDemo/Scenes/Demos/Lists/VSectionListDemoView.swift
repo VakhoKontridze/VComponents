@@ -18,10 +18,8 @@ struct VSectionListDemoView: View {
     @State private var hasFooters: Bool = true
     @State private var sectionCount: Int = 2
     @State private var rowCount: Int = 3
-}
 
-// MARK: - Body
-extension VSectionListDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(

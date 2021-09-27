@@ -95,10 +95,8 @@ struct DemoView<ComponentContent, SettingsContent>: View
         )
         self.hasLayer = hasLayer
     }
-}
 
-// MARK: - Body
-extension DemoView {
+    // MARK: Body
     var body: some View {
         ZStack(content: {
             ColorBook.canvas.edgesIgnoringSafeArea(.all)

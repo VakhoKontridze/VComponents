@@ -70,7 +70,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     
     @State private var rowWidth: CGFloat = .zero
     
-    // MARK: Initializers: View Builder
+    // MARK: Initializers - View Builder
     /// Initializes component with selected index, header, footer, data, and row content
     public init(
         model: VSegmentedPickerModel = .init(),
@@ -92,7 +92,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.rowContent = rowContent
     }
 
-    // MARK: Initializers: Row Titles
+    // MARK: Initializers - Row Titles
     /// Initializes component with selected index, header, footer, and row titles
     public init(
         model: VSegmentedPickerModel = .init(),
@@ -126,7 +126,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         )
     }
 
-    // MARK: Initializers: Pickable Item
+    // MARK: Initializers - Pickable Item
     /// Initializes component with `VPickableItem`, header, footer, and row content
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
@@ -156,7 +156,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         )
     }
 
-    // MARK: Initializers: Pickable Titled Item
+    // MARK: Initializers - Pickable Titled Item
     /// Initializes component with `VPickableTitledItem`, header, and footer
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
@@ -192,10 +192,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
             }
         )
     }
-}
 
-// MARK: - Body
-extension VSegmentedPicker {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -296,19 +294,15 @@ extension VSegmentedPicker {
             })
         })
     }
-}
 
-// MARK: - State Sets
-extension VSegmentedPicker {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableSelectedIndex()
         })
     }
-}
 
-// MARK: - Actions
-extension VSegmentedPicker {
+    // MARK: Actions
     private func setSelectedIndex(to index: Int) {
         withAnimation(model.animations.selection, { animatableSelectedIndex = index })
         selectedIndex = index
@@ -319,10 +313,8 @@ extension VSegmentedPicker {
             withAnimation(model.animations.selection, { animatableSelectedIndex = selectedIndex })
         }
     }
-}
 
-// MARK: - State Indication
-extension VSegmentedPicker {
+    // MARK: State Indication
     private var indicatorScale: CGFloat {
         switch selectedIndex {
         case pressedIndex: return model.layout.indicatorPressedScale

@@ -65,10 +65,8 @@ public struct VSlider: View {
         self._value = .init(from: value, range: range, step: step)
         self.action = action
     }
-}
 
-// MARK: - Body
-extension VSlider {
+    // MARK: Body
     public var body: some View {
         performStateSets()
         
@@ -122,19 +120,15 @@ extension VSlider {
                 .allowsHitTesting(false)
         }
     }
-}
 
-// MARK: - State Sets
-extension VSlider {
+    // MARK: State Sets
     private func performStateSets() {
         DispatchQueue.main.async(execute: {
             setAnimatableValue()
         })
     }
-}
 
-// MARK: - Drag
-extension VSlider {
+    // MARK: Drag
     private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
         let rawValue: Double = {
             let value: Double = .init(drag.location.x)
@@ -154,10 +148,8 @@ extension VSlider {
     private func dragEnded(drag: DragGesture.Value) {
         action?(false)
     }
-}
 
-// MARK: - Actions
-extension VSlider {
+    // MARK: Actions
     private func setValue(to value: Double) {
         withAnimation(model.animations.progress, { animatableValue = value })
         self.value = value
@@ -168,10 +160,8 @@ extension VSlider {
             withAnimation(model.animations.progress, { animatableValue = value })
         }
     }
-}
 
-// MARK: - Progress
-extension VSlider {
+    // MARK: Progress
     private func progressWidth(in proxy: GeometryProxy) -> CGFloat {
         let value: CGFloat = .init((animatableValue ?? self.value) - min)
         let range: CGFloat = .init(max - min)
@@ -179,10 +169,8 @@ extension VSlider {
 
         return (value / range) * width
     }
-}
 
-// MARK: - Thumb Offset
-extension VSlider {
+    // MARK: Thumb Offset
     private func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
         let progressW: CGFloat = progressWidth(in: proxy)
         let thumbW: CGFloat = model.layout.thumbDimension

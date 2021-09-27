@@ -10,6 +10,19 @@ import SwiftUI
 // MARK: - V Half Modal Model
 /// Model that describes UI
 public struct VHalfModalModel {
+    // MARK: Properties
+    /// Reference to `VSheetModel`
+    public static let sheetReference: VSheetModel = .init()
+    
+    /// Reference to `VModalModel`
+    public static let modalReference: VModalModel = .init()
+    
+    /// Reference to `VAccordionModel`
+    public static let accordionReference: VAccordionModel = .init()
+    
+    /// Reference to `VCloseButtonModel`
+    public static let closeButtonReference: VCloseButtonModel = .init()
+    
     /// Sub-model containing layout properties
     public var layout: Layout = .init()
     
@@ -25,14 +38,14 @@ public struct VHalfModalModel {
     /// Sub-model containing misc properties
     public var misc: Misc = .init()
     
+    // MARK: Initializers
     /// Initializes model with default values
     public init() {}
-}
 
-// MARK: - Layout
-extension VHalfModalModel {
+    // MARK: Layout
     /// Sub-model containing layout properties
     public struct Layout {
+        // MARK: Properties
         /// Height type. Defaults to `default`.
         public var height: HeightType = .default
         
@@ -123,67 +136,70 @@ extension VHalfModalModel {
             VCloseButtonModel.Layout().dimension +
             Self().headerSpacing
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Margins
+        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
+        public typealias Margins = LayoutGroup_LTTB
+        
+        // MARK: Vertical Margins
+        /// Sub-model containing `top` and `bottom` margins
+        public typealias VerticalMargins  = LayoutGroup_TB
+        
+        // MARK: Height Type
+        /// Enum that describes height type, such as `fixed` or `dynamic`
+        public enum HeightType {
+            // MARK: Caes
+            /// Fixed height
+            case fixed(_ value: CGFloat)
+            
+            /// Dynamic height that changes between `min`, `ideal`, and `max`
+            case dynamic(min: CGFloat, ideal: CGFloat, max: CGFloat)
+            
+            /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
+            public static let `default`: Self = .dynamic(
+                min: UIScreen.main.bounds.height * 0.3,
+                ideal: UIScreen.main.bounds.height * 0.75,
+                max: UIScreen.main.bounds.height * 0.9
+            )
+            
+            // MARK: Properties
+            var min: CGFloat {
+                switch self {
+                case .fixed(let value): return value
+                case .dynamic(let min, _, _): return min
+                }
+            }
+            
+            var ideal: CGFloat {
+                switch self {
+                case .fixed(let value): return value
+                case .dynamic(_, let ideal, _): return ideal
+                }
+            }
+            
+            var max: CGFloat {
+                switch self {
+                case .fixed(let value): return value
+                case .dynamic(_, _, let max): return max
+                }
+            }
+            
+            var isResizable: Bool {
+                switch self {
+                case .fixed: return false
+                case .dynamic(let min, let ideal, let max): return min != ideal || ideal != max
+                }
+            }
+        }
     }
-}
 
-extension VHalfModalModel.Layout {
-    /// Enum that describes height type, such as `fixed` or `dynamic`
-    public enum HeightType {
-        /// Fixed height
-        case fixed(_ value: CGFloat)
-        
-        /// Dynamic height that changes between `min`, `ideal`, and `max`
-        case dynamic(min: CGFloat, ideal: CGFloat, max: CGFloat)
-        
-        /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
-        public static let `default`: Self = .dynamic(
-            min: UIScreen.main.bounds.height * 0.3,
-            ideal: UIScreen.main.bounds.height * 0.75,
-            max: UIScreen.main.bounds.height * 0.9
-        )
-        
-        var min: CGFloat {
-            switch self {
-            case .fixed(let value): return value
-            case .dynamic(let min, _, _): return min
-            }
-        }
-        
-        var ideal: CGFloat {
-            switch self {
-            case .fixed(let value): return value
-            case .dynamic(_, let ideal, _): return ideal
-            }
-        }
-        
-        var max: CGFloat {
-            switch self {
-            case .fixed(let value): return value
-            case .dynamic(_, _, let max): return max
-            }
-        }
-        
-        var isResizable: Bool {
-            switch self {
-            case .fixed: return false
-            case .dynamic(let min, let ideal, let max): return min != ideal || ideal != max
-            }
-        }
-    }
-    
-    /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
-    public typealias Margins = LayoutGroup_LTTB
-    
-    /// Sub-model containing `top` and `bottom` margins
-    public typealias VerticalMargins  = LayoutGroup_TB
-}
-
-// MARK: - Colors
-extension VHalfModalModel {
+    // MARK: Colors
     /// Sub-model containing color properties
     public struct Colors {
+        // MARK: Properties
         /// Background color
         public var background: Color = modalReference.colors.background
         
@@ -207,37 +223,37 @@ extension VHalfModalModel {
         /// Blinding color
         public var blinding: Color = modalReference.colors.blinding
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states
+        public typealias StateColors = StateColors_EPD
+        
+        // MARK: State Colors and Opaciites
+        /// Sub-model containing colors and opacities for component states
+        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
-}
 
-extension VHalfModalModel.Colors {
-    /// Sub-model containing colors for component states
-    public typealias StateColors = StateColors_EPD
-    
-    /// Sub-model containing colors and opacities for component states
-    public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
-}
-
-// MARK: - Fonts
-extension VHalfModalModel {
+    // MARK: Fonts
     /// Sub-model containing font properties
     public struct Fonts {
+        // MARK: Properties
         /// Header font
         ///
         /// Only applicable when using init with title
         public var header: Font = modalReference.fonts.header
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Animations
-extension VHalfModalModel {
+    // MARK: Animations
     /// Sub-model containing animation properties
     public struct Animations {
+        // MARK: Properties
         /// Appear animation. Defaults to `linear` with duration `0.2`.
         public var appear: BasicAnimation? = .init(curve: .linear, duration: 0.2)
         
@@ -250,69 +266,43 @@ extension VHalfModalModel {
         /// Dragging disappear animation. Defaults to `linear` with duration `0.1`.
         static let dragDisappear: BasicAnimation =  .init(curve: .easeIn, duration: 0.1)
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
     }
-}
 
-// MARK: - Misc
-extension VHalfModalModel {
+    // MARK: Misc
     /// Sub-model containing misc properties
     public struct Misc {
+        // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: Set<DismissType> = .default
         
+        // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+        
+        // MARK: Dismiss Type
+        /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, `backtap`, or `pullDown`
+        public enum DismissType: Int, CaseIterable {
+            /// Leading
+            case leadingButton
+            
+            /// Trailing
+            case trailingButton
+            
+            /// Back tap
+            case backTap
+            
+            /// Dragging modal down
+            case pullDown
+            
+            /// Close button for when modal contains `VNavigationView` as content
+            case navigationViewCloseButton
+        }
     }
-}
-
-extension VHalfModalModel.Misc {
-    /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, `backtap`, or `pullDown`
-    public enum DismissType: Int, CaseIterable {
-        /// Leading
-        case leadingButton
-        
-        /// Trailing
-        case trailingButton
-        
-        /// Back tap
-        case backTap
-        
-        /// Dragging modal down
-        case pullDown
-        
-        /// Close button for when modal contains `VNavigationView` as content
-        case navigationViewCloseButton
-    }
-}
-
-extension Set where Element == VHalfModalModel.Misc.DismissType {
-    /// Default value. Set to `trailingButton` and `pullDown`.
-    public static let `default`: Self = [.trailingButton, .pullDown]
     
-    var hasButton: Bool {
-        contains(where: { [.leadingButton, .trailingButton].contains($0) })
-    }
-}
-
-// MARK: - References
-extension VHalfModalModel {
-    /// Reference to `VSheetModel`
-    public static let sheetReference: VSheetModel = .init()
-    
-    /// Reference to `VModalModel`
-    public static let modalReference: VModalModel = .init()
-    
-    /// Reference to `VAccordionModel`
-    public static let accordionReference: VAccordionModel = .init()
-    
-    /// Reference to `VCloseButtonModel`
-    public static let closeButtonReference: VCloseButtonModel = .init()
-}
-
-// MARK: - Sub-Models
-extension VHalfModalModel {
+    // MARK: Sub-Models
     var sheetModel: VSheetModel {
         var model: VSheetModel = .init()
         
@@ -337,5 +327,15 @@ extension VHalfModalModel {
         model.colors.content = colors.closeButtonIcon
         
         return model
+    }
+}
+
+// MARK: - Helpers
+extension Set where Element == VHalfModalModel.Misc.DismissType {
+    /// Default value. Set to `trailingButton` and `pullDown`.
+    public static let `default`: Self = [.trailingButton, .pullDown]
+    
+    var hasButton: Bool {
+        contains(where: { [.leadingButton, .trailingButton].contains($0) })
     }
 }

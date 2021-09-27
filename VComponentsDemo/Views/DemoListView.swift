@@ -32,10 +32,8 @@ struct DemoListView<Row>: View where Row: DemoableRow {
         self.sections = sections
         self._accordionStates = .init(initialValue: .init(repeating: .collapsed, count: sections.count))
     }
-}
 
-// MARK: - Body
-extension DemoListView {
+    // MARK: Body
     var body: some View {
         ZStack(content: {
             ColorBook.canvas.edgesIgnoringSafeArea(.bottom)

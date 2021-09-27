@@ -14,10 +14,8 @@ struct VSpinnerDemoView: View {
     static let navBarTitle: String = "Spinner"
     
     @State private var spinnerType: VSpinnerTypeHelper = VSpinnerType.default.helpeType
-}
 
-// MARK: - Body
-extension VSpinnerDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)

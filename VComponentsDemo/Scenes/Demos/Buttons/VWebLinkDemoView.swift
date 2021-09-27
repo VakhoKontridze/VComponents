@@ -15,10 +15,8 @@ struct VWebLinkDemoView: View {
     
     @State private var state: VWebLinkState = .enabled
     @State private var webLinkButtonType: VWebLinkButtonTypeHelper = .secondary
-}
 
-// MARK: - Body
-extension VWebLinkDemoView {
+    // MARK: Body
     var body: some View {
         VBaseView(title: Self.navBarTitle, content: {
             DemoView(component: component, settings: settings)
