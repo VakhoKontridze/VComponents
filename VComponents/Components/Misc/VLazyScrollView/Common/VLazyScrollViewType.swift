@@ -17,5 +17,5 @@ public enum VLazyScrollViewType {
     case horizontal(_ model: VLazyScrollViewModelHorizontal = .init())
     
     /// Default value. Set to `vertical`.
-    public static let `default`: Self = .vertical()
+    public static var `default`: Self { .vertical() }
 }

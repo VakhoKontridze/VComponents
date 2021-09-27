@@ -134,7 +134,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
 
 // MARK: - Preview
 struct VLazyScrollViewView_Previews: PreviewProvider {
-    private static let range: Range<Int> = 1..<101
+    private static var range: Range<Int> { 1..<101 }
 
     static var previews: some View {
         VStack(content: {

@@ -25,7 +25,7 @@ public enum VTextFieldType: Int, CaseIterable {
     case search
     
     /// Default value. Set to `standard`.
-    public static let `default`: Self = .standard
+    public static var `default`: Self { .standard }
     
     // MARK: Properties
     var isStandard: Bool {

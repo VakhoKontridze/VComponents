@@ -70,7 +70,7 @@ public struct VToastModel {
             case bottom
             
             /// Default value. Set to `bottom`.
-            public static let `default`: Self = .bottom
+            public static var `default`: Self { .bottom }
         }
         
         // MARK: Corner Radius Type
@@ -85,7 +85,7 @@ public struct VToastModel {
             case custom(_ value: CGFloat)
 
             /// Default value. Set to `rounded`.
-            public static let `default`: Self = .rounded
+            public static var `default`: Self { .rounded }
         }
     }
 

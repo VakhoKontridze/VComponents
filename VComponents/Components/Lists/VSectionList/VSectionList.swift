@@ -378,7 +378,7 @@ struct VSectionList_Previews: PreviewProvider {
         let title: String
         let rows: [Row]
         
-        static let count: Int = 2
+        static var count: Int { 2 }
     }
 
     private struct Row: Identifiable {
@@ -386,24 +386,26 @@ struct VSectionList_Previews: PreviewProvider {
         let color: Color
         let title: String
         
-        static let count: Int = 3
+        static var count: Int { 3 }
     }
 
-    private static let sections: [Section] = (0..<Section.count).map { i in
-        .init(
-            id: i,
-            
-            title: spellOut(i + 1),
-            
-            rows: (0..<Row.count).map { ii in
-                let num: Int = i * Row.count + ii + 1
-                return .init(
-                    id: num,
-                    color: [.red, .green, .blue][ii],
-                    title: spellOut(num)
-                )
-            }
-        )
+    private static var sections: [Section] {
+        (0..<Section.count).map { i in
+            .init(
+                id: i,
+                
+                title: spellOut(i + 1),
+                
+                rows: (0..<Row.count).map { ii in
+                    let num: Int = i * Row.count + ii + 1
+                    return .init(
+                        id: num,
+                        color: [.red, .green, .blue][ii],
+                        title: spellOut(num)
+                    )
+                }
+            )
+        }
     }
     
     private static func spellOut(_ i: Int) -> String {

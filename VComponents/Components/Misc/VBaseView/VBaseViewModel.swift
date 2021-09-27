@@ -68,7 +68,7 @@ public struct VBaseViewModel {
             case leading
             
             /// Default value. Set to `center`.
-            public static let `default`: Self = .center
+            public static var `default`: Self { .center }
         }
     }
 

@@ -20,5 +20,5 @@ public enum VTextFieldHighlight: Int, CaseIterable {
     case error
     
     /// Default value. Set to `none`.
-    public static let `default`: Self = .none
+    public static var `default`: Self { .none }
 }

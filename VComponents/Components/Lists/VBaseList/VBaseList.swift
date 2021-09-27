@@ -151,15 +151,17 @@ struct VBaseList_Previews: PreviewProvider {
         let color: Color
         let title: String
 
-        static let count: Int = 10
+        static var count: Int { 10 }
     }
     
-    static let rows: [Row] = (0..<Row.count).map { i in
-        .init(
-            id: i,
-            color: [.red, .green, .blue][i % 3],
-            title: spellOut(i + 1)
-        )
+    static var rows: [Row] {
+        (0..<Row.count).map { i in
+            .init(
+                id: i,
+                color: [.red, .green, .blue][i % 3],
+                title: spellOut(i + 1)
+            )
+        }
     }
     
     private static func spellOut(_ i: Int) -> String {

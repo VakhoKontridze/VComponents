@@ -23,7 +23,7 @@ public enum VTextFieldClearButtonAction {
     case clearAndCustom(_ action: () -> Void)
     
     /// Default value. Set to `clear`.
-    public static let `default`: Self = .clear
+    public static var `default`: Self { .clear }
 }
 
 /// Enum that describes action performed when pressing `cancel` button
@@ -38,5 +38,5 @@ public enum VTextFieldCancelButtonAction {
     case clearAndCustom(_ action: () -> Void)
     
     /// Default value. Set to `clear`.
-    public static let `default`: Self = .clear
+    public static var `default`: Self { .clear }
 }

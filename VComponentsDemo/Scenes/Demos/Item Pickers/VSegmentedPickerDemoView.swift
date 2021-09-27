@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Segmented Picker Demo View
 struct VSegmentedPickerDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Segmented Picker"
+    static let navBarTitle: String { "Segmented Picker" }
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VSegmentedPickerState = .enabled

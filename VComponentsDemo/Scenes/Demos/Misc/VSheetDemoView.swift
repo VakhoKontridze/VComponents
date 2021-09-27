@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Sheet Demo View
 struct VSheetDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Sheet"
+    static let navBarTitle: String { "Sheet" }
     
     @State private var roundedCorners: VSheetRoundedCornersHelper = VSheetModel.Layout.RoundedCorners.default.helperType
 

@@ -20,7 +20,7 @@ public typealias VLinkState = VWebLinkState
 // MARK: - V CheckBox
 extension VCheckBoxState {
     @available(*, deprecated, renamed: "indeterminate")
-    public static let intermediate: Self = indeterminate
+    public static var intermediate: Self { indeterminate }
 }
 
 // MARK: - V Navigation View

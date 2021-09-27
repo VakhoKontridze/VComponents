@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Plain Button Demo View
 struct VPlainButtonDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Plain Button"
+    static let navBarTitle: String { "Plain Button" }
     
     @State private var state: VPlainButtonState = .enabled
     @State private var contentType: ComponentContentType = .text

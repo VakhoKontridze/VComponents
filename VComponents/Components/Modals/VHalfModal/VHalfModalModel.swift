@@ -115,26 +115,31 @@ public struct VHalfModalModel {
         /// Navigation bar close button top margin. Defaults to `30`.
         ///
         /// If you decide to remove resize indicator or changing vertical margins, it's essential to change this property.
-        public static let navBarCloseButtonMarginTop: CGFloat =
-            Self().resizeIndicatorMargins.top +
-            Self().resizeIndicatorSize.height +
-            Self().resizeIndicatorMargins.bottom +
-            //Self().headerDividerMargins.top +
-            //Self().headerDividerHeight +
-            //Self().headerDividerMargins.bottom +
-            Self().contentMargins.top +
-            (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
+        public static var navBarCloseButtonMarginTop: CGFloat {
+            let instance: Self = .init()
+            
+            return instance.resizeIndicatorMargins.top +
+                instance.resizeIndicatorSize.height +
+                instance.resizeIndicatorMargins.bottom +
+                //instance.headerDividerMargins.top +
+                //instance.headerDividerHeight +
+                //instance.headerDividerMargins.bottom +
+                instance.contentMargins.top +
+                (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
+        }
         
         /// Navigation bar close button trailing margin. Defaults to `15`.
-        public static let navBarCloseButtonMarginTrailing: CGFloat =
+        public static var navBarCloseButtonMarginTrailing: CGFloat {
             VBaseViewModel.Layout().navBarMarginHorizontal
+        }
         
         /// Navigation bar trailing item margin trailing. Defaults to `42`.
         ///
         /// Since close button is overlayed on modal, it's essential to create spacing between close button and `VBaseView`'s trailing items
-        public static let navBarTrailingItemMarginTrailing: CGFloat =
+        public static var navBarTrailingItemMarginTrailing: CGFloat {
             VCloseButtonModel.Layout().dimension +
             Self().headerSpacing
+        }
         
         // MARK: Initializers
         /// Initializes sub-model with default values
@@ -159,11 +164,13 @@ public struct VHalfModalModel {
             case dynamic(min: CGFloat, ideal: CGFloat, max: CGFloat)
             
             /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
-            public static let `default`: Self = .dynamic(
-                min: UIScreen.main.bounds.height * 0.3,
-                ideal: UIScreen.main.bounds.height * 0.75,
-                max: UIScreen.main.bounds.height * 0.9
-            )
+            public static var `default`: Self {
+                .dynamic(
+                    min: UIScreen.main.bounds.height * 0.3,
+                    ideal: UIScreen.main.bounds.height * 0.75,
+                    max: UIScreen.main.bounds.height * 0.9
+                )
+            }
             
             // MARK: Properties
             var min: CGFloat {
@@ -264,7 +271,7 @@ public struct VHalfModalModel {
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
         
         /// Dragging disappear animation. Defaults to `linear` with duration `0.1`.
-        static let dragDisappear: BasicAnimation =  .init(curve: .easeIn, duration: 0.1)
+        static var dragDisappear: BasicAnimation { .init(curve: .easeIn, duration: 0.1) }
         
         // MARK: Initializers
         /// Initializes sub-model with default values
@@ -333,7 +340,7 @@ public struct VHalfModalModel {
 // MARK: - Helpers
 extension Set where Element == VHalfModalModel.Misc.DismissType {
     /// Default value. Set to `trailingButton` and `pullDown`.
-    public static let `default`: Self = [.trailingButton, .pullDown]
+    public static var `default`: Self { [.trailingButton, .pullDown] }
     
     var hasButton: Bool {
         contains(where: { [.leadingButton, .trailingButton].contains($0) })

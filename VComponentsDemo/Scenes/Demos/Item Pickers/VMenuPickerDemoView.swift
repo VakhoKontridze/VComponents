@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Menu Picker Demo View
 struct VMenuPickerDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Menu Picker"
+    static let navBarTitle: String { "Menu Picker" }
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VMenuPickerState = .enabled

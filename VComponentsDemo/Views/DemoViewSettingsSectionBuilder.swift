@@ -25,15 +25,15 @@ struct DemoViewSettingsSection<Content>: View where Content: View {
 
 // MARK: - DemoViewSettingsSectionModel
 private struct DemoViewSettingsSectionModel {
-    static let sectionSpacing: CGFloat = 25
-    static let rowSpacing: CGFloat = 15
+    static var sectionSpacing: CGFloat { 25 }
+    static var rowSpacing: CGFloat { 15 }
     
     private init() {}
 }
 
 // MARK: - Demo View Settings Section Builder
 @resultBuilder struct DemoViewSettingsSectionBuilder {
-    private static let spacing: CGFloat = DemoViewSettingsSectionModel.sectionSpacing
+    private static var spacing: CGFloat { DemoViewSettingsSectionModel.sectionSpacing }
 
     static func buildBlock<C0>(
         _ c0: DemoViewSettingsSection<C0>

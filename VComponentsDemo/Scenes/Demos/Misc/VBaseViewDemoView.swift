@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Base View Demo View
 struct VBaseViewDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Base View"
+    static let navBarTitle: String { "Base View" }
     
     @State private var titleContentType: VBaseViewTitleContentType = .text
     @State private var titlePosition: VBaseViewModel.Layout.TitlePosition = .leading

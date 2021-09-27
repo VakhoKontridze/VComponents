@@ -225,9 +225,9 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
 
 // MARK: Preview
 struct VTabNavigationView_Previews: PreviewProvider {
-    private static let pageOne = VTabNavigationViewPage(item: .titled(title: "Red"), content: Color.red)
-    private static let pageTwo = VTabNavigationViewPage(item: .titled(title: "Green"), content: Color.green)
-    private static let pageThree = VTabNavigationViewPage(item: .titled(title: "Blue"), content: Color.blue)
+    private static var pageOne: VTabNavigationViewPage<Color> { .init(item: .titled(title: "Red"), content: Color.red) }
+    private static var pageTwo: VTabNavigationViewPage<Color> { .init(item: .titled(title: "Green"), content: Color.green) }
+    private static var pageThree: VTabNavigationViewPage<Color> { .init(item: .titled(title: "Blue"), content: Color.blue) }
 
     static var previews: some View {
         VTabNavigationView<Color, Color, Color, Never, Never, Never>(

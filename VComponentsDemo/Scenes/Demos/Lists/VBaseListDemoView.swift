@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Bas List Demo View
 struct VBaseListDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Base List"
+    static let navBarTitle: String { "Base List" }
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 5
@@ -63,7 +63,7 @@ enum BaseListLayoutTypeHelper: Int, VPickableTitledItem {
     case flexible
     case constrained
     
-    static let `default`: Self = VBaseListLayoutType.default.helperType
+    static var `default`: Self { VBaseListLayoutType.default.helperType }
     
     fileprivate var layoutType: VBaseListLayoutType {
         switch self {

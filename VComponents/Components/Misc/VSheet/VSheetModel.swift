@@ -58,7 +58,7 @@ public struct VSheetModel {
             case none
             
             /// Default value. Set to `all`.
-            public static let `default`: Self = .all
+            public static var `default`: Self { .all }
             
             // MARK: Properties
             var uiRectCorner: UIRectCorner {

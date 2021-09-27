@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Menu Demo View
 struct VMenuDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Menu"
+    static let navBarTitle: String { "Menu" }
     
     @State private var state: VMenuState = .enabled
     @State private var menuButtonType: VMenuButtonTypeHelper = .secondary

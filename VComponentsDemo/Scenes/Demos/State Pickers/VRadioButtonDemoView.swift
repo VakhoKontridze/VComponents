@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V RadioButton Demo View
 struct VRadioButtonDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Radio Button"
+    static let navBarTitle: String { "Radio Button" }
     
     @State private var state: VRadioButtonState = .on
     @State private var contentType: ComponentContentType = .text

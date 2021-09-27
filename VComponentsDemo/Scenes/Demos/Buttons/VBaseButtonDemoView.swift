@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Base Button Demo View
 struct VBaseButtonDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Base Buton"
+    static let navBarTitle: String { "Base Buton" }
     
     @State private var clickState: ClickState = .prompt
     @State private var pressState: PressState = .none

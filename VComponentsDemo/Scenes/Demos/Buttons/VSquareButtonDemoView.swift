@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Square Button Demo View
 struct VSquareButtonDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Square Button"
+    static let navBarTitle: String { "Square Button" }
     
     @State private var state: VSquareButtonState = .enabled
     @State private var contentType: ComponentContentType = .text

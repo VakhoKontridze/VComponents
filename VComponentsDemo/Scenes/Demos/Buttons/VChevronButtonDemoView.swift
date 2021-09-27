@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Chevron Button Demo View
 struct VChevronButtonDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Chevron Button"
+    static let navBarTitle: String { "Chevron Button" }
     
     @State private var state: VChevronButtonState = .enabled
     @State private var direction: VChevronButtonDirection = .left

@@ -17,5 +17,5 @@ public enum VSpinnerType {
     case dashed(_ model: VSpinnerModelDashed = .init())
     
     /// Default value. Set to `continous`.
-    public static let `default`: Self = .continous()
+    public static var `default`: Self { .continous() }
 }

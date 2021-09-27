@@ -231,12 +231,14 @@ public struct VWheelPicker<Data, RowContent>: View
 struct VWheelPicker_Previews: PreviewProvider {
     @State private static var selectedIndex: Int = 7
     
-    private static let rowTitles: [String] = [
-        "January", "February", "March",
-        "April", "May", "June",
-        "July", "August", "September",
-        "October", "November", "December"
-    ]
+    private static var rowTitles: [String] {
+        [
+            "January", "February", "March",
+            "April", "May", "June",
+            "July", "August", "September",
+            "October", "November", "December"
+        ]
+    }
 
     static var previews: some View {
         VWheelPicker(

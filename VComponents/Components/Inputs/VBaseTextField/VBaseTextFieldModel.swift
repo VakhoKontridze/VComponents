@@ -55,7 +55,7 @@ public struct VBaseTextFieldModel {
             case auto
             
             /// Default value. Set to `leading`.
-            public static let `default`: Self = .leading
+            public static var `default`: Self { .leading }
             
             // MARK: Properties
             var nsTextAlignment: NSTextAlignment {

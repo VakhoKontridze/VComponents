@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Lazy Scroll View Demo View
 struct VLazyScrollViewDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Lazy Scroll View"
+    static let navBarTitle: String { "Lazy Scroll View" }
     
     private let sections: [DemoSection<VLazyScrollViewDemoViewDataSource.LazyScrollViewRow>] = [
         .init(id: 0, title: nil, rows: [.vertical, .horizontal])
@@ -28,7 +28,7 @@ struct VLazyScrollViewDemoView: View {
 // MARK: - V Lazy Scroll View Demo Detail View
 private struct VLazyScrollViewDemoDetailView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Lazy Scroll View"
+    static let navBarTitle: String { "Lazy Scroll View" }
 
     private let lazyScrollViewType: VLazyScrollViewType
     

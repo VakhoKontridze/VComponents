@@ -10,20 +10,20 @@ import SwiftUI
 // MARK: - Image Book
 struct ImageBook {
     // MARK: Properties
-    static let checkBoxOn: Image = .init(componentAsset: "CheckBox.On")
-    static let checkBoxInterm: Image = .init(componentAsset: "CheckBox.Interm")
+    static var checkBoxOn: Image { .init(componentAsset: "CheckBox.On") }
+    static var checkBoxInterm: Image { .init(componentAsset: "CheckBox.Interm") }
     
-    static let chevronUp: Image = .init(componentAsset: "Chevron.Up")
+    static var chevronUp: Image { .init(componentAsset: "Chevron.Up") }
     
-    static let minus: Image = .init(componentAsset: "Minus")
-    static let plus: Image = .init(componentAsset: "Plus")
+    static var minus: Image { .init(componentAsset: "Minus") }
+    static var plus: Image { .init(componentAsset: "Plus") }
     
-    static let search: Image = .init(componentAsset: "Search")
+    static var search: Image { .init(componentAsset: "Search") }
     
-    static let visibilityOff: Image = .init(componentAsset: "Visibility.off")
-    static let visibilityOn: Image = .init(componentAsset: "Visibility.on")
+    static var visibilityOff: Image { .init(componentAsset: "Visibility.off") }
+    static var visibilityOn: Image { .init(componentAsset: "Visibility.on") }
     
-    static let xMark: Image = .init(componentAsset: "XMark")
+    static var xMark: Image { .init(componentAsset: "XMark") }
     
     // MARK: Initializers
     private init() {}

@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Action Sheet Demo View
 struct VActionSheetDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Action Sheet"
+    static let navBarTitle: String { "Action Sheet" }
     
     @State private var isPresented: Bool = false
 

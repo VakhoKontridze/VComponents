@@ -20,5 +20,5 @@ public enum VBaseTextFieldReturnButtonAction {
     case returnAndCustom(_ action: () -> Void)
     
     /// Default value. Set to `return`.
-    public static let `default`: Self = .return
+    public static var `default`: Self { .return }
 }

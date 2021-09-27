@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V HalfModal Demo View
 struct VHalfModalDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Half Modal"
+    static let navBarTitle: String { "Half Modal" }
     
     @State private var isPresented: Bool = false
     @State private var heightType: VModalHeightTypeHelper = VHalfModalModel.Layout.HeightType.default.helperType

@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Tab Navigation View Demo View
 struct VTabNavigationViewDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Tab Navigation View"
+    static let navBarTitle: String { "Tab Navigation View" }
 
     // MARK: Body
     var body: some View {
@@ -39,7 +39,7 @@ struct VTabNavigationViewDemoView: View {
 
 // MARK: - Walkthrough
 private struct VTabNavigationViewDemoViewWalkthroughView: View {
-    static let navBarTitle: String = ""
+    static let navBarTitle: String { "" }
     @State private var selection: Int = 0
 }
 

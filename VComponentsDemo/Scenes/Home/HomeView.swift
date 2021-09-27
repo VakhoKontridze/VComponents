@@ -11,7 +11,7 @@ import VComponents
 // MARK: - Home View
 struct HomeView: View {
     // MARK: Properties
-    private static let navBarTitle: String = "VComponents Demo"
+    private static var navBarTitle: String { "VComponents Demo" }
 
     private let sections: [DemoSection<HomeRow>] = [
         .init(id: 0, title: "Buttons", rows: [

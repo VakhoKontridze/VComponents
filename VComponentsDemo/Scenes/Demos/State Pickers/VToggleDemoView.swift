@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Toggle Demo View
 struct VToggleDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String = "Toggle"
+    static let navBarTitle: String { "Toggle" }
     
     @State private var state: VToggleState = .on
     @State private var contentType: ComponentContentType = .text
