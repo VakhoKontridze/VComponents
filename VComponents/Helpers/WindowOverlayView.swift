@@ -72,7 +72,7 @@ final class WindowOverlayViewController<Content>: UIViewController where Content
         
         guard let windowView: UIView = UIView.windowView else { fatalError() }
         
-        appSuperView.addSubview(hostedView)
+        windowView.addSubview(hostedView)
         
         NSLayoutConstraint.activate([
             hostedView.leadingAnchor.constraint(equalTo: windowView.leadingAnchor),
@@ -81,7 +81,7 @@ final class WindowOverlayViewController<Content>: UIViewController where Content
             hostedView.bottomAnchor.constraint(equalTo: windowView.bottomAnchor)
         ])
         
-        appSuperView.bringSubviewToFront(hostedView)
+        windowView.bringSubviewToFront(hostedView)
     }
 
     // MARK: Updating
