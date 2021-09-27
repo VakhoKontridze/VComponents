@@ -31,7 +31,7 @@ struct _VHalfModal<Content, HeaderContent>: View
         (model.misc.dismissType.contains(.pullDown) || model.layout.height.isResizable)
     }
     
-    private let validLayout: Bool
+    private let isLayoutValid: Bool
 
     // MARK: Initializers
     init(
@@ -45,7 +45,7 @@ struct _VHalfModal<Content, HeaderContent>: View
         self.headerContent = headerContent
         self.content = content
         
-        self.validLayout =
+        self.isLayoutValid =
             model.layout.height.min <= model.layout.height.ideal &&
             model.layout.height.ideal <= model.layout.height.max
     }
@@ -70,7 +70,7 @@ struct _VHalfModal<Content, HeaderContent>: View
     }
     
     @ViewBuilder private var modalView: some View {
-        if validLayout {
+        if isLayoutValid {
             ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
                     .edgesIgnoringSafeArea(.all)

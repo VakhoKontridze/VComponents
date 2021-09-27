@@ -48,7 +48,7 @@ public struct VRangeSlider: View {
     private let actionLow: ((Bool) -> Void)?
     private let actionHigh: ((Bool) -> Void)?
     
-    private let validLayout: Bool
+    private let isLayoutValid: Bool
 
     // MARK: Initializers
     /// Initializes component with diffrene, and low and high values
@@ -83,7 +83,7 @@ public struct VRangeSlider: View {
         self.actionLow = actionLow
         self.actionHigh = actionHigh
         
-        self.validLayout = valueLow.wrappedValue <= valueHigh.wrappedValue - difference
+        self.isLayoutValid = valueLow.wrappedValue <= valueHigh.wrappedValue - difference
     }
 
     // MARK: Body
@@ -91,7 +91,7 @@ public struct VRangeSlider: View {
         setStatesFromBodyRender()
         
         return Group(content: {
-            switch validLayout {
+            switch isLayoutValid {
             case false: invalidBody
             case true: validBody
             }

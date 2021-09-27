@@ -23,7 +23,7 @@ struct VPageIndicatorInfinite: View {
         .init(selectedIndex: selectedIndex, total: total, middle: middle)
     }
     
-    private let validLayout: Bool
+    private let isLayoutValid: Bool
 
     // MARK: Intializers
     init(
@@ -39,12 +39,12 @@ struct VPageIndicatorInfinite: View {
         self.total = total
         self.selectedIndex = selectedIndex
         
-        self.validLayout = visible > center && visible.isOdd && center.isOdd
+        self.isLayoutValid = visible > center && visible.isOdd && center.isOdd
     }
 
     // MARK: Body
     @ViewBuilder public var body: some View {
-        switch (validLayout, total) {
+        switch (isLayoutValid, total) {
         case (false, _): EmptyView()
         case (true, ...visible): VPageIndicatorFinite(model: model, total: total, selectedIndex: selectedIndex)
         case (true, _): validBody
