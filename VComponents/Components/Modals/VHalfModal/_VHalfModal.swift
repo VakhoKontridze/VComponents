@@ -277,9 +277,12 @@ struct _VHalfModal<Content, HeaderContent>: View
         }
     }
     
+    // MARK: Region
     private enum Region {
+        // MARK: Cases
         case idealMax, ideal, minIdeal
         
+        // MARK: Initializrs
         init(offset: CGFloat, min: CGFloat, ideal: CGFloat, max: CGFloat) {
             // max means offset of max, not maximum allowed offset. Otherwise, the logic would seem nverted
             switch offset {

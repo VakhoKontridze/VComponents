@@ -50,8 +50,6 @@ public struct VRangeSlider: View {
     
     private let validLayout: Bool
 
-    fileprivate enum Thumb { case low, high }
-
     // MARK: Initializers
     /// Initializes component with diffrene, and low and high values
     public init<V>(
@@ -164,6 +162,9 @@ public struct VRangeSlider: View {
             setAnimatableValues()
         })
     }
+    
+    // MARK: Thumb
+    fileprivate enum Thumb { case low, high }
 
     // MARK: Drag
     private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {

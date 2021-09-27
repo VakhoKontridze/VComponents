@@ -10,12 +10,14 @@ import Foundation
 // MARK: - V Base Text Field State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VBaseButtonState: Int, CaseIterable {
+    // MARK: Cases
     /// Case enabled
     case enabled
     
     /// Case disabled
     case disabled
     
+    // MARK: Properties
     /// Indicates if state is enabled
     public var isEnabled: Bool {
         switch self {
@@ -24,6 +26,7 @@ public enum VBaseButtonState: Int, CaseIterable {
         }
     }
     
+    // MARK: Initializers
     init(isEnabled: Bool) {
         switch isEnabled {
         case false: self = .disabled

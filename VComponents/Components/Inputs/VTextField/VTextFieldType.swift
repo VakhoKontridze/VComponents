@@ -10,6 +10,7 @@ import Foundation
 // MARK: - V Text Field Type
 /// Enum that describes type, such as `standard`, `secure`, or `search`
 public enum VTextFieldType: Int, CaseIterable {
+    // MARK: Cases
     /// Standard textfield
     case standard
     
@@ -26,6 +27,7 @@ public enum VTextFieldType: Int, CaseIterable {
     /// Default value. Set to `standard`.
     public static let `default`: Self = .standard
     
+    // MARK: Properties
     var isStandard: Bool {
         switch self {
         case .standard: return true

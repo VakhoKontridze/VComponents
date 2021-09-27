@@ -41,6 +41,7 @@ public struct VBaseTextFieldModel {
         // MARK: Text Alignment
         /// Enum that describes text alignment, such as `center`, `leading`, `trailing`, or `auto`
         public enum TextAlignment: Int, CaseIterable {
+            // MARK: Cases
             /// Center alignment
             case center
             
@@ -56,6 +57,7 @@ public struct VBaseTextFieldModel {
             /// Default value. Set to `leading`.
             public static let `default`: Self = .leading
             
+            // MARK: Properties
             var nsTextAlignment: NSTextAlignment {
                 switch self {
                 case .center: return .center

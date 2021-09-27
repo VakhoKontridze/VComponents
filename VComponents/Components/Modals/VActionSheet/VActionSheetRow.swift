@@ -12,6 +12,7 @@ import SwiftUI
 ///
 /// If two cancel buttons are used, app would crash
 public enum VActionSheetRow {
+    // MARK: Cases
     /// Standard button with blue tint
     case standard(action: () -> Void, title: String)
     
@@ -21,6 +22,7 @@ public enum VActionSheetRow {
     /// Cancel button
     case cancel(action: (() -> Void)? = nil, title: String)
     
+    // MARK: Properties
     var actionSheetButton: ActionSheet.Button {
         switch self {
         case .standard(let action, let title):

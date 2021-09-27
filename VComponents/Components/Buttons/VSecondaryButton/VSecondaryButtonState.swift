@@ -10,12 +10,14 @@ import Foundation
 // MARK: - V Secondary Button State
 /// Enum that describes state, such as `enabled` or `disabled`
 public enum VSecondaryButtonState: Int, CaseIterable {
+    // MARK: Cases
     /// Enabled
     case enabled
     
     /// Disabled
     case disabled
     
+    // MARK: Properties
     /// Indicates if state is enabled
     public var isEnabled: Bool {
         switch self {
@@ -27,10 +29,12 @@ public enum VSecondaryButtonState: Int, CaseIterable {
 
 // MARK: - V Secondary Button Internal State
 enum VSecondaryButtonInternalState {
+    // MARK: Cases
     case enabled
     case pressed
     case disabled
     
+    // MARK: Initializers
     init(state: VSecondaryButtonState, isPressed: Bool) {
         switch (state, isPressed) {
         case (.enabled, false): self = .enabled

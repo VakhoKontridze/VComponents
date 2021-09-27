@@ -151,7 +151,7 @@ public struct VHalfModalModel {
         // MARK: Height Type
         /// Enum that describes height type, such as `fixed` or `dynamic`
         public enum HeightType {
-            // MARK: Caes
+            // MARK: Cases
             /// Fixed height
             case fixed(_ value: CGFloat)
             
