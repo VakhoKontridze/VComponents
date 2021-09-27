@@ -731,19 +731,19 @@
 			isa = PBXGroup;
 			children = (
 				7A8A7462259118B3001024FB /* VSpinner */,
-				7A3B884125ADE71D00295A87 /* Progress Bar */,
+				7A3B884125ADE71D00295A87 /* VProgressBar */,
 				7A7B7E2025CD782C00BBCA97 /* VPageIndicator */,
 			);
 			path = Indicators;
 			sourceTree = "<group>";
 		};
-		7A3B884125ADE71D00295A87 /* Progress Bar */ = {
+		7A3B884125ADE71D00295A87 /* VProgressBar */ = {
 			isa = PBXGroup;
 			children = (
 				7AC4DFFF25ADF65500CE2816 /* VProgressBar.swift */,
 				7AC4E01725ADFB9900CE2816 /* VProgressBarModel.swift */,
 			);
-			path = "Progress Bar";
+			path = VProgressBar;
 			sourceTree = "<group>";
 		};
 		7A3C1541258DE65700CE1D96 /* Extensions */ = {
