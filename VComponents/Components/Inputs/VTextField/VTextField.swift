@@ -148,7 +148,7 @@ public struct VTextField: View {
     private let clearButtonAction: VTextFieldClearButtonAction
     private let cancelButtonAction: VTextFieldCancelButtonAction
     
-    @State private var nonEmptyText: Bool = false
+    @State private var isTextNonEmpty: Bool = false
     @State private var secureFieldIsVisible: Bool = false
 
     // MARK: Initialiers
@@ -298,7 +298,7 @@ public struct VTextField: View {
     }
     
     @ViewBuilder private var clearButton: some View {
-        if !textFieldType.isSecure && nonEmptyText && model.misc.clearButton {
+        if !textFieldType.isSecure && isTextNonEmpty && model.misc.clearButton {
             VCloseButton(
                 model: model.clearSubButtonModel(state: state.wrappedValue, highlight: highlight),
                 state: state.wrappedValue.clearButtonState,
@@ -324,7 +324,7 @@ public struct VTextField: View {
     }
     
     @ViewBuilder private var cancelButton: some View {
-        if !textFieldType.isSecure, nonEmptyText, state.wrappedValue.isFocused, let cancelButton = model.misc.cancelButton, !cancelButton.isEmpty {
+        if !textFieldType.isSecure, isTextNonEmpty, state.wrappedValue.isFocused, let cancelButton = model.misc.cancelButton, !cancelButton.isEmpty {
             VPlainButton(
                 model: model.cancelButtonSubModel,
                 state: state.wrappedValue.cancelButtonState,
@@ -347,7 +347,7 @@ public struct VTextField: View {
     // MARK: State Sets
     private func setStatesFromBodyRender() {
         DispatchQueue.main.asyncAfter(deadline: .now() + model.animations.delayToAnimateButtons, execute: {
-            nonEmptyText = !text.isEmpty
+            isTextNonEmpty = !text.isEmpty
         })
         
         DispatchQueue.main.async(execute: {
@@ -365,7 +365,7 @@ public struct VTextField: View {
 
     // MARK: Actions
     private func textChanged(_ text: String) {
-        withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = !text.isEmpty })
+        withAnimation(model.animations.buttonsAppearDisappear, { isTextNonEmpty = !text.isEmpty })
     }
     
     private func runClearAction() {
@@ -386,7 +386,7 @@ public struct VTextField: View {
     
     private func zeroText() {
         text = ""
-        withAnimation(model.animations.buttonsAppearDisappear, { nonEmptyText = false })
+        withAnimation(model.animations.buttonsAppearDisappear, { isTextNonEmpty = false })
     }
 }
 
