@@ -16,36 +16,34 @@ import SwiftUI
 ///
 /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vDialog(isPresented: $isPresented, dialog: {
-///             VDialog(
-///                 buttons: .two(
-///                     primary: .init(
-///                         model: .primary,
-///                         title: "Confirm",
-///                         action: { print("Confirmed") }
-///                     ),
-///                     secondary: .init(
-///                         model: .secondary,
-///                         title: "Cancel",
-///                         action: { print("Cancelled") }
-///                     )
-///                 ),
-///                 title: "Lorem ipsum dolor sit amet",
-///                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
 ///         )
-///     })
-/// }
-/// ```
+///             .vDialog(isPresented: $isPresented, dialog: {
+///                 VDialog(
+///                     buttons: .two(
+///                         primary: .init(
+///                             model: .primary,
+///                             title: "Confirm",
+///                             action: { print("Confirmed") }
+///                         ),
+///                         secondary: .init(
+///                             model: .secondary,
+///                             title: "Cancel",
+///                             action: { print("Cancelled") }
+///                         )
+///                     ),
+///                     title: "Lorem ipsum dolor sit amet",
+///                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///                 )
+///         })
+///     }
 ///
 public struct VDialog<Content> where Content: View {
     // MARK: Properties

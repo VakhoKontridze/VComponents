@@ -25,19 +25,17 @@ import SwiftUI
 /// 3. `Auto`.
 /// Switches from `finite` to `infinite` after a `finiteLimit`.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// let total: Int = 10
-/// @State var selectedIndex: Int = 4
+///     let total: Int = 10
+///     @State var selectedIndex: Int = 4
 ///
-/// var body: some View {
-///     VPageIndicator(
-///         total: 10,
-///         selectedIndex: selectedIndex
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VPageIndicator(
+///             total: 10,
+///             selectedIndex: selectedIndex
+///         )
+///     }
 ///
 public struct VPageIndicator: View {
     // MARK: Properties

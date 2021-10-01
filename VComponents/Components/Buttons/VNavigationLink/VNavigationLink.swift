@@ -19,73 +19,67 @@ import SwiftUI
 /// `VNavigationView` and `VNavigationLink` can cause unintended effect in your navigation hierarchy if used alongside with `SwiftUI`'s native `NavigationView` and `NavigationLink`.
 /// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var destination: some View {
-///     VBaseView(title: "Destination", content: {
-///         ZStack(content: {
-///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-///
-///             VSheet()
-///         })
-///     })
-/// }
-///
-/// var body: some View {
-///     VNavigationView(content: {
-///         VBaseView(title: "Home", content: {
+///     var destination: some View {
+///         VBaseView(title: "Destination", content: {
 ///             ZStack(content: {
 ///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
 ///                 VSheet()
-///
-///                 VNavigationLink(
-///                     preset: .secondary(),
-///                     destination: destination,
-///                     title: "Lorem ipsum"
-///                 )
 ///             })
 ///         })
-///     })
-/// }
+///     }
 ///
-/// ```
+///     var body: some View {
+///         VNavigationView(content: {
+///             VBaseView(title: "Home", content: {
+///                 ZStack(content: {
+///                     ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///                     VSheet()
+///
+///                     VNavigationLink(
+///                         preset: .secondary(),
+///                         destination: destination,
+///                         title: "Lorem ipsum"
+///                     )
+///                 })
+///             })
+///         })
+///     }
 ///
 /// Alternate navigation can be completed using `vNavigationLink` `ViewModifier`:
 ///
-/// ```
 /// @State var isActive: Bool = false
 ///
-/// var destination: some View {
-///     VBaseView(title: "Destination", content: {
-///         ZStack(content: {
-///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-///
-///             VSheet()
-///         })
-///     })
-/// }
-///
-/// var body: some View {
-///     VNavigationView(content: {
-///         VBaseView(title: "Home", content: {
+///     var destination: some View {
+///         VBaseView(title: "Destination", content: {
 ///             ZStack(content: {
 ///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
 ///                 VSheet()
-///
-///                 VPlainButton(
-///                     action: { isActive = true },
-///                     title: "Lorem ipsum"
-///                 )
 ///             })
-///                 .vNavigationLink(isActive: $isActive, destination: destination)
 ///         })
-///     })
-/// }
+///     }
 ///
-/// ```
+///     var body: some View {
+///         VNavigationView(content: {
+///             VBaseView(title: "Home", content: {
+///                 ZStack(content: {
+///                     ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///                     VSheet()
+///
+///                     VPlainButton(
+///                         action: { isActive = true },
+///                         title: "Lorem ipsum"
+///                     )
+///                 })
+///                     .vNavigationLink(isActive: $isActive, destination: destination)
+///             })
+///         })
+///     }
 ///
 public struct VNavigationLink<Destination, Content>: View
     where

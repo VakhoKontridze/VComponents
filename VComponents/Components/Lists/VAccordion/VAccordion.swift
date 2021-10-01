@@ -25,41 +25,39 @@ import SwiftUI
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// struct AccordionRow: Identifiable {
-///     let id: UUID = .init()
-///     let title: String
-/// }
+///     struct AccordionRow: Identifiable {
+///         let id: UUID = .init()
+///         let title: String
+///     }
 ///
-/// @State var state: VAccordionState = .expanded
-/// @State var data: [AccordionRow] = [
-///     .init(title: "Red"),
-///     .init(title: "Green"),
-///     .init(title: "Blue")
-/// ]
+///     @State var state: VAccordionState = .expanded
+///     @State var data: [AccordionRow] = [
+///         .init(title: "Red"),
+///         .init(title: "Green"),
+///         .init(title: "Blue")
+///     ]
 ///
-/// var body: some View {
-///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///     var body: some View {
+///         ZStack(alignment: .top, content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VAccordion(
-///             state: $state,
-///             headerTitle: "Lorem ipsum dolor sit amet",
-///             data: data,
-///             rowContent: { row in
-///                 Text(row.title)
-///                     .frame(
-///                         maxWidth: .infinity,
-///                         alignment: .leading
-///                     )
-///             }
-///         )
-///             .padding()
-///     })
-/// }
-/// ```
+///             VAccordion(
+///                 state: $state,
+///                 headerTitle: "Lorem ipsum dolor sit amet",
+///                 data: data,
+///                 rowContent: { row in
+///                     Text(row.title)
+///                         .frame(
+///                             maxWidth: .infinity,
+///                             alignment: .leading
+///                         )
+///                 }
+///             )
+///                 .padding()
+///         })
+///     }
 ///
 public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     where

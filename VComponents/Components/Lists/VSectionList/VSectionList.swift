@@ -25,50 +25,48 @@ import SwiftUI
 ///
 /// Unlike `VBaseList`, `VSectionList` has spacing between rows and scrolling indicator.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// struct Section: Identifiable, VSectionListSectionViewModelable {
-///     let id: UUID = .init()
-///     let title: String
-///     let rows: [TableRow]
-/// }
+///     struct Section: Identifiable, VSectionListSectionViewModelable {
+///         let id: UUID = .init()
+///         let title: String
+///         let rows: [Row]
+///     }
 ///
-/// struct Row: VSectionListRowViewModelable {
-///     let id: UUID = .init()
-///     let title: String
-/// }
+///     struct Row: VSectionListRowViewModelable {
+///         let id: UUID = .init()
+///         let title: String
+///     }
 ///
-/// @State var sections: [Section] = [
-///     .init(title: "First", rows: [
-///         .init(title: "Red"),
-///         .init(title: "Green"),
-///         .init(title: "Blue")
-///     ]),
-///     .init(title: "Second", rows: [
-///         .init(title: "Red"),
-///         .init(title: "Green"),
-///         .init(title: "Blue")
-///     ])
-/// ]
+///     @State var sections: [Section] = [
+///         .init(title: "First", rows: [
+///             .init(title: "Red"),
+///             .init(title: "Green"),
+///             .init(title: "Blue")
+///         ]),
+///         .init(title: "Second", rows: [
+///             .init(title: "Red"),
+///             .init(title: "Green"),
+///             .init(title: "Blue")
+///         ])
+///     ]
 ///
-/// var body: some View {
-///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///     var body: some View {
+///         ZStack(alignment: .top, content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VSectionList(
-///             sections: sections,
-///             headerTitle: { $0.title },
-///             footerTitle: { $0.title },
-///             rowContent: { row in
-///                 Text(row.title)
-///                     .frame(maxWidth: .infinity, alignment: .leading)
-///             }
-///         )
-///             .padding()
-///     })
-/// }
-/// ```
+///             VSectionList(
+///                 sections: sections,
+///                 headerTitle: { $0.title },
+///                 footerTitle: { $0.title },
+///                 rowContent: { row in
+///                     Text(row.title)
+///                         .frame(maxWidth: .infinity, alignment: .leading)
+///                 }
+///             )
+///                 .padding()
+///         })
+///     }
 ///
 public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowContent>: View
     where

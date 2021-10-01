@@ -14,20 +14,18 @@ import SwiftUI
 ///
 /// If invalid value parameters are passed during init, layout would invalidate itself, and refuse to draw.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var valueLow: Double = 0.3
-/// @State var valueHigh: Double = 0.8
+///     @State var valueLow: Double = 0.3
+///     @State var valueHigh: Double = 0.8
 ///
-/// var body: some View {
-///     VRangeSlider(
-///         difference: 0.1,
-///         valueLow: $valueLow,
-///         valueHigh: $valueHigh
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VRangeSlider(
+///             difference: 0.1,
+///             valueLow: $valueLow,
+///             valueHigh: $valueHigh
+///         )
+///     }
 ///
 public struct VRangeSlider: View {
     // MARK: Properties

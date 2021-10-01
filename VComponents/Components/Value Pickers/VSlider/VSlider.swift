@@ -12,16 +12,14 @@ import SwiftUI
 ///
 /// Model, range, step, state, and onChange callback can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var value: Double = 0.5
+///     @State var value: Double = 0.5
 ///
-/// var body: some View {
-///     VSlider(value: $value)
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VSlider(value: $value)
+///             .padding()
+///     }
 ///
 public struct VSlider: View {
     // MARK: Properties

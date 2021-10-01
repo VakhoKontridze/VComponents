@@ -15,58 +15,52 @@ import SwiftUI
 /// `VNavigationView` and `VNavigationLink` can cause unintended effect in your navigation hierarchy if used alongside with `SwiftUI`'s native `NavigationView` and `NavigationLink`.
 /// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.
 ///
-/// Use this method to set root view on navigation stack. It acts as `SwiftUI`'s version of setting `UINavigationController` root.
+/// Use this method to set root view on navigation stack. It acts as `SwiftUI`'s version of setting `UINavigationController` root:
 ///
-/// ```
-/// extension SceneDelegate {
-///    static func setRootView<Content>(to view: Content) where Content: View {
-///        guard
-///            let scene: UIWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-///            let windowScenedelegate: SceneDelegate = scene.delegate as? SceneDelegate
-///        else {
-///            return
-///        }
+///     extension SceneDelegate {
+///         static func setRootView<Content>(to view: Content) where Content: View {
+///             guard
+///                 let scene: UIWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+///                 let windowScenedelegate: SceneDelegate = scene.delegate as? SceneDelegate
+///             else {
+///                 return
+///             }
 ///
-///        windowScenedelegate.window?.rootViewController = UIHostingController(rootView: view)
+///             windowScenedelegate.window?.rootViewController = UIHostingController(rootView: view)
+///         }
 ///     }
-/// }
-/// ```
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var destination: some View {
-///     VBaseView(title: "Details", content: {
-///         ZStack(content: {
-///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-///
-///             VSheet()
-///         })
-///     })
-/// }
-///
-/// var body: some View {
-///     VNavigationView(content: {
-///         VBaseView(title: "Home", content: {
+///     var destination: some View {
+///         VBaseView(title: "Details", content: {
 ///             ZStack(content: {
 ///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
 ///                 VSheet()
-///
-///                 VNavigationLink(
-///                     preset: .secondary(),
-///                     destination: destination,
-///                     title: "Navigate to Details"
-///                 )
 ///             })
 ///         })
-///     })
-/// }
+///     }
 ///
-/// ```
+///     var body: some View {
+///         VNavigationView(content: {
+///             VBaseView(title: "Home", content: {
+///                 ZStack(content: {
+///                     ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///
+///                     VSheet()
+///
+///                     VNavigationLink(
+///                         preset: .secondary(),
+///                         destination: destination,
+///                         title: "Navigate to Details"
+///                     )
+///                 })
+///             })
+///         })
+///     }
 ///
 /// If you decide to use `VNavigationView` inside `VHalfModal`, consider checking out static properties—`navBarCloseButtonMarginTop`, `navBarCloseButtonMarginTrailing`, and `navBarTrailingItemMarginTrailing`—in `VHalfModalModel.Layout`.
-///
 public struct VNavigationView<Content>: View where Content: View {
     // MARK: Properties
     private let model: VNavigationViewModel

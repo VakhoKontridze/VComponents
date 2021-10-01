@@ -16,28 +16,26 @@ import SwiftUI
 ///
 /// Model, state, header, and footer can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var selectedIndex: Int = 7
+///     @State var selectedIndex: Int = 7
 ///
-/// let rowTitles: [String] = [
-///     "January", "February", "March",
-///     "April", "May", "June",
-///     "July", "August", "September",
-///     "October", "November", "December"
-/// ]
+///     let rowTitles: [String] = [
+///         "January", "February", "March",
+///         "April", "May", "June",
+///         "July", "August", "September",
+///         "October", "November", "December"
+///     ]
 ///
-/// var body: some View {
-///     VWheelPicker(
-///         selectedIndex: $selectedIndex,
-///         headerTitle: "Lorem ipsum dolor sit amet",
-///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///         rowTitles: rowTitles
-///     )
-///         .padding(20)
-/// }
-/// ```
+///     var body: some View {
+///         VWheelPicker(
+///             selectedIndex: $selectedIndex,
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             rowTitles: rowTitles
+///         )
+///             .padding(20)
+///     }
 ///
 public struct VWheelPicker<Data, RowContent>: View
     where

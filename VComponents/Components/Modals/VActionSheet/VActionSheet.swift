@@ -14,27 +14,25 @@ import SwiftUI
 ///
 /// `vActionSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(action: { isPresented = true }, title: "Present")
-///         .vActionSheet(isPresented: $isPresented, actionSheet: {
-///             VActionSheet(
-///                 title: "Lorem ipsum dolor sit amet",
-///                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///                 rows: [
-///                     .titled(action: {}, title: "One"),
-///                     .titled(action: {}, title: "Two"),
-///                     .destructive(action: {}, title: "Three"),
-///                     .cancel(title: "Cancel")
-///                 ]
-///             )
-///         })
-/// }
-/// ```
+///     var body: some View {
+///         VSecondaryButton(action: { isPresented = true }, title: "Present")
+///             .vActionSheet(isPresented: $isPresented, actionSheet: {
+///                 VActionSheet(
+///                     title: "Lorem ipsum dolor sit amet",
+///                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///                     rows: [
+///                         .titled(action: {}, title: "One"),
+///                         .titled(action: {}, title: "Two"),
+///                         .destructive(action: {}, title: "Three"),
+///                         .cancel(title: "Cancel")
+///                     ]
+///                 )
+///             })
+///     }
 ///
 public struct VActionSheet {
     // MARK: Properties

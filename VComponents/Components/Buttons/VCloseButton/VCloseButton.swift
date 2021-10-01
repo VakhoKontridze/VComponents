@@ -12,16 +12,14 @@ import SwiftUI
 ///
 /// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VCloseButton(action: {
-///         print("Pressed")
-///     })
-/// }
-/// ```
-///
+///     var body: some View {
+///         VCloseButton(action: {
+///             print("Pressed")
+///         })
+///     }
+///     
 public struct VCloseButton: View {
     // MARK: Properties
     private let model: VCloseButtonModel

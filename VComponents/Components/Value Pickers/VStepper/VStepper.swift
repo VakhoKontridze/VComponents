@@ -12,16 +12,14 @@ import SwiftUI
 ///
 /// Model, step, and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var value: Double = 0.5
+///     @State var value: Double = 0.5
 ///
-/// var body: some View {
-///     VStepper(range: 1...10, value: $value)
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VStepper(range: 1...10, value: $value)
+///             .padding()
+///     }
 ///
 public struct VStepper: View {
     // MARK: Properties

@@ -14,18 +14,16 @@ import SwiftUI
 ///
 /// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VPrimaryButton(
-///         action: { print("Pressed") },
-///         title: "Lorem ipsum"
-///     )
-///         .padding()
-/// }
-/// ```
-///
+///     var body: some View {
+///         VPrimaryButton(
+///             action: { print("Pressed") },
+///             title: "Lorem ipsum"
+///         )
+///             .padding()
+///     }
+///     
 public struct VPrimaryButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VPrimaryButtonModel

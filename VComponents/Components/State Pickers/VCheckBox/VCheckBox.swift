@@ -14,18 +14,16 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var state: VCheckBoxState = .on
+///     @State var state: VCheckBoxState = .on
 ///
-/// var body: some View {
-///     VCheckBox(
-///         state: $state,
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VCheckBox(
+///             state: $state,
+///             title: "Lorem ipsum"
+///         )
+///     }
 ///
 public struct VCheckBox<Content>: View where Content: View {
     // MARK: Properties

@@ -16,31 +16,29 @@ import SwiftUI
 ///
 /// Model, state, header, footer, and disabled indexes can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// enum PickerRow: Int, VPickableTitledItem {
-///     case red, green, blue
+///     enum PickerRow: Int, VPickableTitledItem {
+///         case red, green, blue
 ///
-///     var pickerTitle: String {
-///         switch self {
-///         case .red: return "Red"
-///         case .green: return "Green"
-///         case .blue: return "Blue"
+///         var pickerTitle: String {
+///             switch self {
+///             case .red: return "Red"
+///             case .green: return "Green"
+///             case .blue: return "Blue"
+///             }
 ///         }
 ///     }
-/// }
 ///
-/// @State var selection: PickerRow = .red
+///     @State var selection: PickerRow = .red
 ///
-/// var body: some View {
-///     VSegmentedPicker(
-///         selection: $selection,
-///         headerTitle: "Lorem ipsum dolor sit amet",
-///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VSegmentedPicker(
+///             selection: $selection,
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///         )
+///     }
 ///
 public struct VSegmentedPicker<Data, RowContent>: View
     where

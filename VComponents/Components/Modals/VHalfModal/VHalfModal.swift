@@ -16,24 +16,22 @@ import SwiftUI
 ///
 /// `vHalfModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vHalfModal(isPresented: $isPresented, halfModal: {
-///             VHalfModal(
-///                 headerTitle: "Lorem ipsum dolor sit amet",
-///                 content: { ColorBook.accent }
-///             )
-///         })
-/// }
-/// ```
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vHalfModal(isPresented: $isPresented, halfModal: {
+///                 VHalfModal(
+///                     headerTitle: "Lorem ipsum dolor sit amet",
+///                     content: { ColorBook.accent }
+///                 )
+///             })
+///     }
 ///
 /// VNavigationView can also be passes as contant, to create a modal stack of navigatable views.
 ///
@@ -43,58 +41,56 @@ import SwiftUI
 ///
 /// If you decide to change spacings in the model, consider checking out static properties—`navBarCloseButtonMarginTop`, `navBarCloseButtonMarginTrailing`, and `navBarTrailingItemMarginTrailing`—in `VHalfModalModel.Layout`.
 ///
-/// ```
-/// var model: VHalfModalModel {
-///     var model: VHalfModalModel = .init()
+///     var model: VHalfModalModel {
+///         var model: VHalfModalModel = .init()
 ///
-///     model.layout.contentMargins.leading = VBaseViewModel.Layout().navBarMarginHorizontal
-///     model.layout.contentMargins.trailing = VBaseViewModel.Layout().navBarMarginHorizontal
+///         model.layout.contentMargins.leading = VBaseViewModel.Layout().navBarMarginHorizontal
+///         model.layout.contentMargins.trailing = VBaseViewModel.Layout().navBarMarginHorizontal
 ///
-///     model.misc.dismissType.remove(.leadingButton)
-///     model.misc.dismissType.remove(.trailingButton)
-///     model.misc.dismissType.insert(.navigationViewCloseButton)
+///         model.misc.dismissType.remove(.leadingButton)
+///         model.misc.dismissType.remove(.trailingButton)
+///         model.misc.dismissType.insert(.navigationViewCloseButton)
 ///
-///     return model
-/// }
+///         return model
+///     }
 ///
-/// var navigationViewModel: VNavigationViewModel {
-///     var model: VNavigationViewModel = .init()
-///     model.colors.background = ColorBook.layer
-///     return model
-/// }
+///     var navigationViewModel: VNavigationViewModel {
+///         var model: VNavigationViewModel = .init()
+///         model.colors.background = ColorBook.layer
+///         return model
+///     }
 ///
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vHalfModal(isPresented: $isPresented, halfModal: {
-///             VHalfModal(model: model, content: { root })
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vHalfModal(isPresented: $isPresented, halfModal: {
+///                 VHalfModal(model: model, content: { root })
+///             })
+///     }
+///
+///     var root: some View {
+///         VNavigationView(model: navigationViewModel, content: {
+///             VBaseView(title: "Home", content: {
+///                 VNavigationLink(
+///                     preset: .secondary(),
+///                     destination: destination,
+///                     title: "Navigate to Details"
+///                 )
+///                     .padding(.bottom, 200)
+///             })
+///                 .animation(nil) // Disables root animation
 ///         })
-/// }
+///     }
 ///
-/// var root: some View {
-///     VNavigationView(model: navigationViewModel, content: {
-///         VBaseView(title: "Home", content: {
-///             VNavigationLink(
-///                 preset: .secondary(),
-///                 destination: destination,
-///                 title: "Navigate to Details"
-///             )
-///                 .padding(.bottom, 200)
+///     var destination: some View {
+///         VBaseView(title: "Details", content: {
+///             ColorBook.accent
 ///         })
-///             .animation(nil) // Disables root animation
-///     })
-/// }
-///
-/// var destination: some View {
-///     VBaseView(title: "Details", content: {
-///         ColorBook.accent
-///     })
-/// }
-/// ```
+///     }
 ///
 public struct VHalfModal<Content, HeaderContent>
     where

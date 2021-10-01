@@ -18,106 +18,96 @@ import SwiftUI
 ///
 /// It is possible to override actions of return, clear, and cancel buttons by passing them as a parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var text: String = "Lorem ipsum"
+///     @State var text: String = "Lorem ipsum"
 ///
-/// var body: some View {
-///     VTextField(
-///         placeholder: "Lorem ipsum",
-///         headerTitle: "Lorem ipsum dolor sit amet",
-///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///         text: $text
-///     )
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VTextField(
+///             placeholder: "Lorem ipsum",
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             text: $text
+///         )
+///             .padding()
+///     }
 ///
 /// Textfield can also be focused externally by passing state:
 ///
-/// ```
-/// @State var state: VTextFieldState = .focused
-/// @State var text: String = "Lorem ipsum"
+///     @State var state: VTextFieldState = .focused
+///     @State var text: String = "Lorem ipsum"
 ///
-/// var body: some View {
-///     VTextField(
-///         state: $state,
-///         placeholder: "Lorem ipsum",
-///         headerTitle: "Lorem ipsum dolor sit amet",
-///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///         text: $text
-///     )
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VTextField(
+///             state: $state,
+///             placeholder: "Lorem ipsum",
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             text: $text
+///         )
+///             .padding()
+///     }
 ///
 /// Full use of overriden actions and event callbacks:
-/// 
-/// ```
-/// let model: VTextFieldModel = {
-///     var model: VTextFieldModel = .init()
 ///
-///     model.misc.returnButton = .default
-///     model.misc.clearButton = true
-///     model.misc.cancelButton = "Cancel"
+///     let model: VTextFieldModel = {
+///         var model: VTextFieldModel = .init()
 ///
-///     return model
-/// }()
+///         model.misc.returnButton = .default
+///         model.misc.clearButton = true
+///         model.misc.cancelButton = "Cancel"
 ///
-/// @State var text: String = "Lorem ipsum"
+///         return model
+///     }()
 ///
-/// var body: some View {
-///     VTextField(
-///         model: model,
-///         placeholder: "Lorem ipsum",
-///         headerTitle: "Lorem ipsum dolor sit amet",
-///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///         text: $text,
-///         onBegin: { print("Editing Began") },
-///         onChange: { print("Editing Changed") },
-///         onEnd: { print("Editing Ended") },
-///         onReturn: .returnAndCustom({ print("Returned and ...") }),
-///         onClear: .clearAndCustom({ print("Cleared and ...") }),
-///         onCancel: .clearAndCustom({ print("Cancelled and ...") })
-///     )
-///         .padding()
-/// }
-/// ```
+///     @State var text: String = "Lorem ipsum"
+///
+///     var body: some View {
+///         VTextField(
+///             model: model,
+///             placeholder: "Lorem ipsum",
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             text: $text,
+///             onBegin: { print("Editing Began") },
+///             onChange: { print("Editing Changed") },
+///             onEnd: { print("Editing Ended") },
+///             onReturn: .returnAndCustom({ print("Returned and ...") }),
+///             onClear: .clearAndCustom({ print("Cleared and ...") }),
+///             onCancel: .clearAndCustom({ print("Cancelled and ...") })
+///         )
+///             .padding()
+///     }
 ///
 /// `Secure` textfield:
 ///
-/// ```
-/// @State var text: String = "Lorem ipsum"
+///     @State var text: String = "Lorem ipsum"
 ///
-/// var body: some View {
-///     VTextField(
-///         type: .secure,
-///         placeholder: "Lorem ipsum",
-///         headerTitle: "Lorem ipsum dolor sit amet",
-///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///         text: $text
-///     )
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VTextField(
+///             type: .secure,
+///             placeholder: "Lorem ipsum",
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             text: $text
+///         )
+///             .padding()
+///     }
 ///
 /// `Search` textfield:
 ///
-/// ```
-/// @State var text: String = "Lorem ipsum"
+///     @State var text: String = "Lorem ipsum"
 ///
-/// var body: some View {
-///     VTextField(
-///         type: .search,
-///         placeholder: "Lorem ipsum",
-///         headerTitle: "Lorem ipsum dolor sit amet",
-///         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///         text: $text
-///     )
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VTextField(
+///             type: .search,
+///             placeholder: "Lorem ipsum",
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             text: $text
+///         )
+///             .padding()
+///     }
 ///
 public struct VTextField: View {
     private let model: VTextFieldModel

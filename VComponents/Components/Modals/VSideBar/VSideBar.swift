@@ -14,23 +14,21 @@ import SwiftUI
 ///
 /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vSideBar(isPresented: $isPresented, sideBar: {
-///             VSideBar(content: {
-///                 ColorBook.accent
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vSideBar(isPresented: $isPresented, sideBar: {
+///                 VSideBar(content: {
+///                     ColorBook.accent
+///                 })
 ///             })
-///         })
-/// }
-/// ```
+///     }
 ///
 public struct VSideBar<Content> where Content: View {
     // MARK: Properties

@@ -13,26 +13,24 @@ import UIKit
 ///
 /// Bool can also be passed as state.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var state: VBaseButtonState = .enabled
+///     @State var state: VBaseButtonState = .enabled
 ///
-/// var body: some View {
-///     VBaseButton(
-///         state: state,
-///         action: { print("Pressed") },
-///         onPress: { isPressed in
-///             switch isPressed {
-///             case false: print("Press ended")
-///             case true: print("Press began")
-///             }
-///         },
-///         content: { Text("Lorem ipsum") }
-///     )
-/// }
-/// ```
-///
+///     var body: some View {
+///         VBaseButton(
+///             state: state,
+///             action: { print("Pressed") },
+///             onPress: { isPressed in
+///                 switch isPressed {
+///                 case false: print("Press ended")
+///                 case true: print("Press began")
+///                 }
+///             },
+///             content: { Text("Lorem ipsum") }
+///         )
+///     }
+///     
 public struct VBaseButton<Content>: View where Content: View {
     // MARK: Properties
     private let state: VBaseButtonState

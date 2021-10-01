@@ -12,18 +12,16 @@ import SwiftUI
 ///
 /// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var direction: VChevronButtonDirection = .left
+///     @State var direction: VChevronButtonDirection = .left
 ///
-/// var body: some View {
-///     VChevronButton(direction: direction, action: {
-///         print("Pressed")
-///     })
-/// }
-/// ```
-///
+///     var body: some View {
+///         VChevronButton(direction: direction, action: {
+///             print("Pressed")
+///         })
+///     }
+///     
 public struct VChevronButton: View {
     // MARK: Properties
     private let model: VChevronButtonModel

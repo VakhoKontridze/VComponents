@@ -12,13 +12,11 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VSpinner()
-/// }
-/// ```
+///     var body: some View {
+///         VSpinner()
+///     }
 ///
 public struct VSpinner: View {
     // MARK: Proeprties

@@ -16,17 +16,15 @@ import SwiftUI
 ///
 /// State can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VWebLink(
-///         preset: .secondary(),
-///         url: .init(string: "https://www.apple.com"),
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VWebLink(
+///             preset: .secondary(),
+///             url: .init(string: "https://www.apple.com"),
+///             title: "Lorem ipsum"
+///         )
+///     }
 ///
 public struct VWebLink<Content>: View where Content: View {
     // MARK: Properties

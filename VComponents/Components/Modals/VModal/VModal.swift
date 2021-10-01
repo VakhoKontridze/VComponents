@@ -14,24 +14,22 @@ import SwiftUI
 ///
 /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vModal(isPresented: $isPresented, modal: {
-///             VModal(
-///                 headerTitle: "Lorem ipsum dolor sit amet",
-///                 content: { ColorBook.accent }
-///             )
-///         })
-/// }
-/// ```
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vModal(isPresented: $isPresented, modal: {
+///                 VModal(
+///                     headerTitle: "Lorem ipsum dolor sit amet",
+///                     content: { ColorBook.accent }
+///                 )
+///             })
+///     }
 ///
 public struct VModal<Content, HeaderContent>
     where

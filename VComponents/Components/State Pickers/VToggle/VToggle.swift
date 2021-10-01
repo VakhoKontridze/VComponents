@@ -14,18 +14,16 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var state: VToggleState = .on
+///     @State var state: VToggleState = .on
 ///
-/// var body: some View {
-///     VToggle(
-///         state: $state,
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VToggle(
+///             state: $state,
+///             title: "Lorem ipsum"
+///         )
+///     }
 ///
 public struct VToggle<Content>: View where Content: View {
     // MARK: Properties

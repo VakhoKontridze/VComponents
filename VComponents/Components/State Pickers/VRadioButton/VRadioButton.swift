@@ -15,46 +15,43 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var state: VRadioButtonState = .on
+///     @State var state: VRadioButtonState = .on
 ///
-/// var body: some View {
-///     VRadioButton(
-///         state: $state,
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VRadioButton(
+///             state: $state,
+///             title: "Lorem ipsum"
+///         )
+///     }
 ///
-/// Component places inside a Radio Group:
+/// Component placed inside a Radio Group:
 ///
-/// ```
-/// enum Gender: Int, Identifiable, VPickableTitledItem {
-///     case male, female, other
+///     enum Gender: Int, Identifiable, VPickableTitledItem {
+///         case male, female, other
 ///
-///     var id: Int { rawValue }
+///         var id: Int { rawValue }
 ///
-///     var pickerTitle: String {
-///         switch self {
-///         case .male: return "Male"
-///         case .female: return "Female"
-///         case .other: return "Other"
+///         var pickerTitle: String {
+///             switch self {
+///             case .male: return "Male"
+///             case .female: return "Female"
+///             case .other: return "Other"
+///             }
 ///         }
 ///     }
-/// }
 ///
-/// @State var selection: Gender = .male
+///     @State var selection: Gender = .male
 ///
-/// var body: some View {
-///     VStack(alignment: .leading, content: {
-///         ForEach(Gender.allCases, content: { gender in
-///             VRadioButton(selection: $selection, selects: gender)
+///     var body: some View {
+///         VStack(alignment: .leading, content: {
+///             ForEach(Gender.allCases, content: { gender in
+///                 VRadioButton(selection: $selection, selects: gender)
+///             })
 ///         })
-///     })
-/// }
-/// ```
+///     }
+///     
 public struct VRadioButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VRadioButtonModel

@@ -16,35 +16,32 @@ import SwiftUI
 ///
 /// Component is a wrapped behind `ScrollView` and `LazyVStack`/`LazyHStack`, and supports lazy initialization.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// struct ListRow: Identifiable {
-///     let id: UUID = .init()
-///     let title: String
-/// }
+///     struct ListRow: Identifiable {
+///         let id: UUID = .init()
+///         let title: String
+///     }
 ///
-/// @State var data: [ListRow] = [
-///     .init(title: "Red"),
-///     .init(title: "Green"),
-///     .init(title: "Blue")
-/// ]
+///     @State var data: [ListRow] = [
+///         .init(title: "Red"),
+///         .init(title: "Green"),
+///         .init(title: "Blue")
+///     ]
 ///
-/// var body: some View {
-///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///     var body: some View {
+///         ZStack(alignment: .top, content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VLazyScrollView(data: data, content: { row in
-///             Text(row.title)
-///                 .frame(maxWidth: .infinity, alignment: .leading)
+///             VLazyScrollView(data: data, content: { row in
+///                 Text(row.title)
+///                     .frame(maxWidth: .infinity, alignment: .leading)
+///             })
+///                 .padding()
 ///         })
-///             .padding()
-///     })
-/// }
-/// ```
+///     }
 /// 
 /// Component can also be initialized with content.
-///
 public struct VLazyScrollView<Content>: View where Content: View {
     // MARK: Properties
     private let listType: VLazyScrollViewType

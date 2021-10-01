@@ -14,19 +14,17 @@ import SwiftUI
 ///
 /// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VSquareButton(action: { print("Pressed") }, content: {
-///         Image(systemName: "swift")
-///             .resizable()
-///             .frame(width: 20, height: 20)
-///             .foregroundColor(.white)
-///     })
-/// }
-/// ```
-///
+///     var body: some View {
+///         VSquareButton(action: { print("Pressed") }, content: {
+///             Image(systemName: "swift")
+///                 .resizable()
+///                 .frame(width: 20, height: 20)
+///                 .foregroundColor(.white)
+///         })
+///     }
+///     
 public struct VSquareButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSquareButtonModel

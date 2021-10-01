@@ -12,16 +12,14 @@ import SwiftUI
 ///
 /// Model and total value can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var progress: Double = 0.5
+///     @State var progress: Double = 0.5
 ///
-/// var body: some View {
-///     VProgressBar(value: progress)
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VProgressBar(value: progress)
+///             .padding()
+///     }
 ///
 public struct VProgressBar: View {
     // MARK: Properties

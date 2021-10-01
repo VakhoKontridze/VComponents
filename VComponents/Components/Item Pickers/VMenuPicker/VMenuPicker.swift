@@ -20,37 +20,37 @@ import SwiftUI
 ///
 /// State can be passed as parameter.
 ///
-/// ```
-/// enum PickerRow: Int, VPickableItem {
-///     case red, green, blue
+/// Usage Example:
 ///
-///     var pickerTitle: String {
-///         switch self {
-///         case .red: return "Red"
-///         case .green: return "Green"
-///         case .blue: return "Blue"
+///     enum PickerRow: Int, VPickableItem {
+///         case red, green, blue
+///
+///         var pickerTitle: String {
+///             switch self {
+///             case .red: return "Red"
+///             case .green: return "Green"
+///             case .blue: return "Blue"
+///             }
 ///         }
+///
+///         var pickerIcon: String { "swift" }
 ///     }
 ///
-///     var pickerIcon: String { "swift" }
-/// }
+///     @State var selection: PickerRow = .red
 ///
-/// @State var selection: PickerRow = .red
-///
-/// var body: some View {
-///     VMenuPicker(
-///         preset: .secondary(),
-///         selection: $selection,
-///         title: "Lorem ipsum",
-///         rowContent: { row in
-///             .titledSystemIcon(
-///                 title: row.pickerTitle,
-///                 name: "swift"
-///             )
-///         }
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VMenuPicker(
+///             preset: .secondary(),
+///             selection: $selection,
+///             title: "Lorem ipsum",
+///             rowContent: { row in
+///                 .titledSystemIcon(
+///                     title: row.pickerTitle,
+///                     name: "swift"
+///                 )
+///             }
+///         )
+///     }
 ///
 public struct VMenuPicker<Label, Data>: View
     where

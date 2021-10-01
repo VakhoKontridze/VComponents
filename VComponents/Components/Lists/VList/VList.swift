@@ -25,32 +25,30 @@ import SwiftUI
 ///
 /// Unlike `VBaseList`, `VList` has spacing between rows and scrolling indicaator.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// struct ListRow: Identifiable {
-///     let id: UUID = .init()
-///     let title: String
-/// }
+///     struct ListRow: Identifiable {
+///         let id: UUID = .init()
+///         let title: String
+///     }
 ///
-/// @State var data: [ListRow] = [
-///     .init(title: "Red"),
-///     .init(title: "Green"),
-///     .init(title: "Blue")
-/// ]
+///     @State var data: [ListRow] = [
+///         .init(title: "Red"),
+///         .init(title: "Green"),
+///         .init(title: "Blue")
+///     ]
 ///
-/// var body: some View {
-///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///     var body: some View {
+///         ZStack(alignment: .top, content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VList(data: data, rowContent: { row in
-///             Text(row.title)
-///                 .frame(maxWidth: .infinity, alignment: .leading)
+///             VList(data: data, rowContent: { row in
+///                 Text(row.title)
+///                     .frame(maxWidth: .infinity, alignment: .leading)
+///             })
+///                 .padding()
 ///         })
-///             .padding()
-///     })
-/// }
-/// ```
+///     }
 ///
 public struct VList<Data, ID, RowContent>: View
     where

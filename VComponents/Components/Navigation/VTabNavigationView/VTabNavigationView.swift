@@ -12,37 +12,35 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var selection: Int = 0
+///     @State var selection: Int = 0
 ///
-/// var body: some View {
-///     VTabNavigationView(
-///         selection: $selection,
-///         pageOne: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Red", name: "Red"),
-///             content: Color.red
-///         ),
-///         pageTwo: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Green", name: "Green"),
-///             content: Color.green
-///         ),
-///         pageThree: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Blue", name: "Blue"),
-///             content: Color.blue
-///         ),
-///         pageFour: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Pink", name: "Pink"),
-///             content: Color.pink
-///         ),
-///         pageFive: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Orange", name: "Orange"),
-///             content: Color.orange
+///     var body: some View {
+///         VTabNavigationView(
+///             selection: $selection,
+///             pageOne: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Red", name: "Red"),
+///                 content: Color.red
+///             ),
+///             pageTwo: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Green", name: "Green"),
+///                 content: Color.green
+///             ),
+///             pageThree: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Blue", name: "Blue"),
+///                 content: Color.blue
+///             ),
+///             pageFour: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Pink", name: "Pink"),
+///                 content: Color.pink
+///             ),
+///             pageFive: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Orange", name: "Orange"),
+///                 content: Color.orange
+///             )
 ///         )
-///     )
-/// }
-/// ```
+///     }
 ///
 public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
     where

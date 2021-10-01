@@ -12,29 +12,27 @@ import SwiftUI
 ///
 /// Preset and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// VMenu(
-///     preset: .secondary(),
-///     rows: [
-///         .titledSystemIcon(action: {}, title: "One", name: "swift"),
-///         .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
-///         .button(action: {}, title: "Three"),
-///         .button(action: {}, title: "Four"),
-///         .menu(title: "Five...", rows: [
-///             .button(action: {}, title: "One"),
-///             .button(action: {}, title: "Two"),
+///     VMenu(
+///         preset: .secondary(),
+///         rows: [
+///             .titledSystemIcon(action: {}, title: "One", name: "swift"),
+///             .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
 ///             .button(action: {}, title: "Three"),
-///             .menu(title: "Four...", rows: [
+///             .button(action: {}, title: "Four"),
+///             .menu(title: "Five...", rows: [
 ///                 .button(action: {}, title: "One"),
 ///                 .button(action: {}, title: "Two"),
+///                 .button(action: {}, title: "Three"),
+///                 .menu(title: "Four...", rows: [
+///                     .button(action: {}, title: "One"),
+///                     .button(action: {}, title: "Two"),
+///                 ])
 ///             ])
-///         ])
-///     ],
-///     title: "Lorem ipsum"
-/// )
-/// ```
+///         ],
+///         title: "Lorem ipsum"
+///     )
 ///
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
