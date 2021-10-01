@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Menu
-/// Modal component that presents menu of actions
+/// Modal component that presents menu of actions.
 ///
-/// Preset and state can be passed as parameters
+/// Preset and state can be passed as parameters.
 ///
 /// # Usage Example #
 ///
@@ -44,7 +44,7 @@ public struct VMenu<Label>: View where Label: View {
     private let label: () -> Label
     
     // MARK: Initializers - Preset
-    /// Initializes component with preset, rows, and label
+    /// Initializes component with preset, rows, and label.
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
         state: VMenuState = .enabled,
@@ -57,7 +57,7 @@ public struct VMenu<Label>: View where Label: View {
         self.label = label
     }
     
-    /// Initializes component with preset, rows, and title
+    /// Initializes component with preset, rows, and title.
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
         state: VMenuState = .enabled,
@@ -75,7 +75,7 @@ public struct VMenu<Label>: View where Label: View {
     }
     
     // MARK: Initializers - Custom
-    /// Initializes component with rows and label
+    /// Initializes component with rows and label.
     public init(
         state: VMenuState = .enabled,
         rows: [VMenuRow],

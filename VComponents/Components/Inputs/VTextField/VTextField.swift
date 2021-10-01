@@ -8,15 +8,15 @@
 import SwiftUI
 
 // MARK: - V Text Field
-/// Input component that displays an editable text interface
+/// Input component that displays an editable text interface.
 ///
-/// Model, type, highlight, palceholder, header, footer, and event callbacks can be passed as parameters
+/// Model, type, highlight, palceholder, header, footer, and event callbacks can be passed as parameters.
 ///
 /// By default, component type is `standard`.
 /// If `secure` type is used, visiblity button would replace clear button. When textfield is secure, clear and cancel buttons are not visible.
 /// If `search` type is used, a magnification glass icon would appear on the left.
 ///
-/// It is possible to override actions of return, clear, and cancel buttons by passing them as a parameter
+/// It is possible to override actions of return, clear, and cancel buttons by passing them as a parameter.
 ///
 /// # Usage Example #
 ///
@@ -162,7 +162,7 @@ public struct VTextField: View {
     @State private var secureFieldIsVisible: Bool = false
 
     // MARK: Initialiers
-    /// Initializes component with state and text
+    /// Initializes component with state and text.
     public init(
         model: VTextFieldModel = .init(),
         type textFieldType: VTextFieldType = .default,
@@ -196,7 +196,7 @@ public struct VTextField: View {
         self.cancelButtonAction = cancelButtonAction
     }
     
-    /// Initializes component with text
+    /// Initializes component with text.
     public init(
         model: VTextFieldModel = .init(),
         type textFieldType: VTextFieldType = .default,

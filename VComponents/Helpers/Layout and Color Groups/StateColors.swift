@@ -8,16 +8,16 @@
 import SwiftUI
 
 // MARK: - Enabled, Disabled
-/// Color group containing values for `enabled` and `disabled` states
+/// Color group containing values for `enabled` and `disabled` states.
 public struct StateColors_ED {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         disabled: Color
@@ -27,7 +27,7 @@ public struct StateColors_ED {
     }
     
     // MARK: Initializers
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -73,20 +73,20 @@ public struct StateColors_ED {
 }
 
 // MARK: - Enabled, Pressed, Disabled
-/// Color group containing values for `enabled`, `pressed`, and `disabled` states
+/// Color group containing values for `enabled`, `pressed`, and `disabled` states.
 public struct StateColors_EPD {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Pressed color
+    /// Pressed color.
     public var pressed: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         pressed: Color,
@@ -97,7 +97,7 @@ public struct StateColors_EPD {
         self.disabled = disabled
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -158,23 +158,23 @@ public struct StateColors_EPD {
 }
 
 // MARK: - Enabled, Pressed, Disabled, Loading
-/// Color group containing values for enabled, pressed, disabled, and loading states
+/// Color group containing values for enabled, pressed, disabled, and loading states.
 public struct StateColors_EPDL {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Pressed color
+    /// Pressed color.
     public var pressed: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
-    /// Loading color
+    /// Loading color.
     public var loading: Color
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         pressed: Color,
@@ -187,7 +187,7 @@ public struct StateColors_EPDL {
         self.loading = loading
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -209,20 +209,20 @@ public struct StateColors_EPDL {
 }
 
 // MARK: - Off, On, Disabled
-/// Color group containing values for `off`, `on`, and `disabled` states
+/// Color group containing values for `off`, `on`, and `disabled` states.
 public struct StateColors_OOD {
     // MARK: Properties
-    /// Off color
+    /// Off color.
     public var off: Color
     
-    /// On color
+    /// On color.
     public var on: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         off: Color,
         on: Color,
@@ -233,7 +233,7 @@ public struct StateColors_OOD {
         self.disabled = disabled
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             off: ColorBook.clear,
@@ -265,23 +265,23 @@ public struct StateColors_OOD {
 }
 
 // MARK: - Off, On, Indeterminate, Disabled
-/// Color group containing values for `off`, `on`, `indeterminate`, and `disabled` states
+/// Color group containing values for `off`, `on`, `indeterminate`, and `disabled` states.
 public struct StateColors_OOID {
     // MARK: Properties
-    /// Off color
+    /// Off color.
     public var off: Color
     
-    /// On color
+    /// On color.
     public var on: Color
     
-    /// Indeterminate color
+    /// Indeterminate color.
     public var indeterminate: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
 
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         off: Color,
         on: Color,
@@ -294,7 +294,7 @@ public struct StateColors_OOID {
         self.disabled = disabled
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             off: ColorBook.clear,
@@ -319,20 +319,20 @@ public struct StateColors_OOID {
 }
 
 // MARK: - Enabled, Focused, Disabled
-/// Color group containing values for `enabled`, `focused`, and `disabled` states
+/// Color group containing values for `enabled`, `focused`, and `disabled` states.
 public struct StateColors_EFD {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Focused color
+    /// Focused color.
     public var focused: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         focused: Color,
@@ -343,7 +343,7 @@ public struct StateColors_EFD {
         self.disabled = disabled
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -363,26 +363,26 @@ public struct StateColors_EFD {
 }
 
 // MARK: - Enabled, Focused, Success, Error, Disabled
-/// Color group containing values for `enabled`, `focused`, `success`, `error`, and `disabled` states
+/// Color group containing values for `enabled`, `focused`, `success`, `error`, and `disabled` states.
 public struct StateColors_EFSED {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Focused color
+    /// Focused color.
     public var focused: Color
     
-    /// Success color
+    /// Success color.
     public var success: Color
     
-    /// Error color
+    /// Error color.
     public var error: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         focused: Color,
@@ -397,7 +397,7 @@ public struct StateColors_EFSED {
         self.disabled = disabled
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -423,38 +423,38 @@ public struct StateColors_EFSED {
 }
 
 // MARK: - Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled
-/// Color group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states
+/// Color group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states.
 public struct StateColors_EpFpSpEpD {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Enabled pressed color
+    /// Enabled pressed color.
     public var enabledPressed: Color
     
-    /// Focused color
+    /// Focused color.
     public var focused: Color
     
-    /// Focused pressed color
+    /// Focused pressed color.
     public var focusedPressed: Color
     
-    /// Success color
+    /// Success color.
     public var success: Color
     
-    /// Success pressed color
+    /// Success pressed color.
     public var successPressed: Color
     
-    /// Error color
+    /// Error color.
     public var error: Color
     
-    /// Error pressed color
+    /// Error pressed color.
     public var errorPressed: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         enabledPressed: Color,
@@ -477,7 +477,7 @@ public struct StateColors_EpFpSpEpD {
         self.disabled = disabled
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public var clear: Self {
         .init(
             enabled: ColorBook.clear,

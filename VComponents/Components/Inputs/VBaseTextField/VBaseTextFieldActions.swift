@@ -8,15 +8,15 @@
 import Foundation
 
 // MARK: - V Base Text Field Actions
-/// Enum that represents action performed when pressing `return` button
+/// Enum that represents action performed when pressing `return` button.
 public enum VBaseTextFieldReturnButtonAction {
-    /// Returns and resigns responder
+    /// Returns and resigns responder.
     case `return`
     
-    /// Custom action
+    /// Custom action.
     case custom(_ action: () -> Void)
     
-    /// Returns and resigns responder, and custom action
+    /// Returns and resigns responder, and custom action.
     case returnAndCustom(_ action: () -> Void)
     
     /// Default value. Set to `return`.

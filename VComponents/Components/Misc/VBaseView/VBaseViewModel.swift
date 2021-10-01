@@ -8,27 +8,27 @@
 import SwiftUI
 
 // MARK: - V Base View Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VBaseViewModel {
     // MARK: Properties
-    /// Reference to `VChevronButtonModel`
+    /// Reference to `VChevronButtonModel`.
     public static let chevronButtonModel: VChevronButtonModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Navigation bar horizontal margin. Defaults to `15`.
@@ -50,21 +50,21 @@ public struct VBaseViewModel {
         
         /// Back button icon x offset. Defaults to `0`.
         ///
-        /// - Positive values shift icon to the right, while negative, to the left
+        /// - Positive values shift icon to the right, while negative, to the left.
         /// - Can be used to shift back button to left, when it's background is set to transparent, similar to native back button in iOS.
         public var backButtonIconOffsetX: CGFloat = 0
 
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Title Position
-        /// Enum that describes title position, such as `center` or `leading`
+        /// Enum that describes title position, such as `center` or `leading`.
         public enum TitlePosition: Int, CaseIterable {
-            /// Center alignment
+            /// Center alignment.
             case center
             
-            /// Leading alignment
+            /// Leading alignment.
             case leading
             
             /// Default value. Set to `center`.
@@ -73,44 +73,44 @@ public struct VBaseViewModel {
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Title color
+        /// Title color.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var titleText: Color = ColorBook.primary
         
-        /// Back button background colors
+        /// Back button background colors.
         public var backButtonBackground: StateColors = VBaseViewModel.chevronButtonModel.colors.background
         
-        /// Back button background colors and opacities
+        /// Back button background colors and opacities.
         public var backButtonIcon: StateColorsAndOpacities = VBaseViewModel.chevronButtonModel.colors.content
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_EPD
         
         // MARK: State Colors and Opacities
-        /// Sub-model containing colors and opacities for component states
+        /// Sub-model containing colors and opacities for component states.
         public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font
+        /// Title font.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var title: Font = .system(size: 17, weight: .semibold)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
     

@@ -8,11 +8,11 @@
 import SwiftUI
 
 // MARK: - V Toast
-/// Message component that present text modally
+/// Message component that present text modally.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
-/// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+/// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
 /// # Usage Example #
 ///
@@ -40,7 +40,7 @@ public struct VToast {
     fileprivate let title: String
     
     // MARK: Initializers
-    /// Initializes component with type and title
+    /// Initializes component with type and title.
     public init(
         model: VToastModel = .init(),
         type toastType: VToastType,
@@ -54,7 +54,7 @@ public struct VToast {
 
 // MARK: - Extension
 extension View {
-    /// Presents toast
+    /// Presents toast.
     public func vToast(
         isPresented: Binding<Bool>,
         toast: @escaping () -> VToast

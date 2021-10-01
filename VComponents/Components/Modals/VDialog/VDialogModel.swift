@@ -8,30 +8,30 @@
 import SwiftUI
 
 // MARK: - V Dialog Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VDialogModel {
     // MARK: Properties
-    /// Reference to `VModalModel`
+    /// Reference to `VModalModel`.
     public static let modalReference: VModalModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
 
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Side bar width. Defaults to `0.75` ratio of screen with.
@@ -68,37 +68,37 @@ public struct VDialogModel {
         public var descriptionLineLimit: Int = 5
 
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Title and Content Margin
-        /// Sub-model containing `horizontal` and `vertical` margins
+        /// Sub-model containing `horizontal` and `vertical` margins.
         public typealias TitleAndContentMargin = LayoutGroup_HV
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Backgrond color
+        /// Backgrond color.
         public var background: Color = modalReference.colors.background
         
-        /// Blinding color
+        /// Blinding color.
         public var blinding: Color = modalReference.colors.blinding
         
-        /// Title color
+        /// Title color.
         public var title: Color = ColorBook.primary
         
-        /// Description color
+        /// Description color.
         public var description: Color = ColorBook.primary
 
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
         /// Title font. Defaults to system font of size `16` and weight `bold`.
@@ -108,11 +108,11 @@ public struct VDialogModel {
         public var description: Font = .system(size: 14)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public typealias Animations = VModalModel.Animations
 }

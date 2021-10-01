@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Base List
-/// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data
+/// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
-/// Model, and layout can be passed as parameters
+/// Model, and layout can be passed as parameters.
 ///
 /// There are three posible layouts:
 ///
@@ -67,7 +67,7 @@ public struct VBaseList<Data, ID, RowContent>: View
     typealias Element = VBaseListElement<ID, Data.Element>
     
     // MARK: Initializers - View Builder
-    /// Initializes component with data, id, and row content
+    /// Initializes component with data, id, and row content.
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .default,
@@ -82,7 +82,7 @@ public struct VBaseList<Data, ID, RowContent>: View
     }
     
     // MARK: Initializers - Identified View Builder
-    /// Initializes component with data and row content
+    /// Initializes component with data and row content.
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .default,

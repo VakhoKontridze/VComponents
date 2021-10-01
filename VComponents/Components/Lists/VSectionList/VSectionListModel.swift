@@ -8,30 +8,30 @@
 import SwiftUI
 
 // MARK: - V Section List Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VSectionListModel {
     // MARK: Properties
-    /// Reference to `VListModel`
+    /// Reference to `VListModel`.
     public static let listReference: VListModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Table corner radius. Defaults to `15`.
@@ -59,67 +59,67 @@ public struct VSectionListModel {
         public var dividerMargins: HorizontalMargins = listReference.layout.dividerMargins
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Horizontal Margins
-        /// Sub-model containing `leading` and `trailing` margins
+        /// Sub-model containing `leading` and `trailing` margins.
         public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Row divider color
+        /// Row divider color.
         public var divider: Color = listReference.colors.divider
         
-        /// Background color
+        /// Background color.
         public var background: Color = listReference.colors.background
         
-        /// Text header color
+        /// Text header color.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var headerText: Color = ColorBook.secondary
         
-        /// Text footer color
+        /// Text footer color.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var footerText: Color = ColorBook.secondary
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font
+        /// Header font.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var header: Font = .system(size: 13)
         
-        /// Footer font
+        /// Footer font.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var footer: Font = .system(size: 13)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 

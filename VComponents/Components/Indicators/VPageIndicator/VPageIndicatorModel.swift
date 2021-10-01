@@ -8,30 +8,30 @@
 import SwiftUI
 
 // MARK: - V Page Indicator Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VPageIndicatorModel {
     // MARK: Properties
-    /// Reference to `VProgressBarModel`
+    /// Reference to `VProgressBarModel`.
     public static let progressBarReference: VProgressBarModel = .init()
     
-    /// Reference to `VTabNavigationViewModel`
+    /// Reference to `VTabNavigationViewModel`.
     public static let tabNavigationReference: VTabNavigationViewModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Dot dimension. Defaults to `10`.
@@ -45,38 +45,38 @@ public struct VPageIndicatorModel {
         
         /// Edge dot scale during infinite type. Defaults to `0.5`.
         ///
-        /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`
+        /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
         public var infiniteEdgeDotScale: CGFloat = 0.5
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Dot color
+        /// Dot color.
         public var dot: Color = tabNavigationReference.colors.item
         
-        /// Selected dot color
+        /// Selected dot color.
         public var selectedDot: Color = progressBarReference.colors.progress
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
         /// Transition animation. Defaults to `linear` with duration `0.15`.
         public var transition: Animation = Animation.linear(duration: 0.15)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 }

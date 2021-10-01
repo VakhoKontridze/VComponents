@@ -8,13 +8,13 @@
 import SwiftUI
 
 // MARK: - V Navigation Link
-/// Button component that controls a navigation presentation
+/// Button component that controls a navigation presentation.
 ///
 /// Component can be initialized with content or title.
 ///
 /// Component supports presets or existing button types.
 ///
-/// State can be passed as parameter
+/// State can be passed as parameter.
 ///
 /// `VNavigationView` and `VNavigationLink` can cause unintended effect in your navigation hierarchy if used alongside with `SwiftUI`'s native `NavigationView` and `NavigationLink`.
 /// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.
@@ -121,7 +121,7 @@ public struct VNavigationLink<Destination, Content>: View
     private let content: () -> Content
     
     // MARK: Initializers - Preset and Tap
-    /// Initiales component with preset, destination and content
+    /// Initiales component with preset, destination and content.
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
@@ -136,7 +136,7 @@ public struct VNavigationLink<Destination, Content>: View
         self.content = content
     }
     
-    /// Initiales component with preset, destination and title
+    /// Initiales component with preset, destination and title.
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
@@ -154,7 +154,7 @@ public struct VNavigationLink<Destination, Content>: View
     }
     
     // MARK: Initializers - Preset and State
-    /// Initiales component with preset, active state, destination and content
+    /// Initiales component with preset, active state, destination and content.
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
@@ -170,7 +170,7 @@ public struct VNavigationLink<Destination, Content>: View
         self.content = content
     }
     
-    /// Initiales component with preset, active state, destination and title
+    /// Initiales component with preset, active state, destination and title.
     public init(
         preset navLinkPreset: VNavigationLinkPreset,
         state: VNavigationLinkState = .enabled,
@@ -190,7 +190,7 @@ public struct VNavigationLink<Destination, Content>: View
     }
     
     // MARK: Initializers - Custom and Tap
-    /// Initiales component with destination and content
+    /// Initiales component with destination and content.
     public init(
         state: VNavigationLinkState = .enabled,
         destination: Destination,
@@ -205,7 +205,7 @@ public struct VNavigationLink<Destination, Content>: View
     }
     
     // MARK: Initializers - Custom and State
-    /// Initiales component with destination, active state, and content
+    /// Initiales component with destination, active state, and content.
     public init(
         state: VNavigationLinkState = .enabled,
         isActive: Binding<Bool>,

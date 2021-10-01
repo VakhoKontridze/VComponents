@@ -8,17 +8,17 @@
 import Foundation
 
 // MARK: - V Square Button State
-/// Enum that describes state, such as `enabled` or `disabled`
+/// Enum that describes state, such as `enabled` or `disabled`.
 public enum VSquareButtonState: Int, CaseIterable {
     // MARK: Cases
-    /// Enabled
+    /// Enabled.
     case enabled
     
-    /// Disabled
+    /// Disabled.
     case disabled
     
     // MARK: Properties
-    /// Indicates if state is enabled
+    /// Indicates if state is enabled.
     public var isEnabled: Bool {
         switch self {
         case .enabled: return true

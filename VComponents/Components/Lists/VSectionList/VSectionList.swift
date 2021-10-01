@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Section List
-/// Sectioned container component that draws a background, and computes views on demad from an underlying collection of identified data
+/// Sectioned container component that draws a background, and computes views on demad from an underlying collection of identified data.
 ///
-/// Model, layout, and header, and footer can be passed as parameters
+/// Model, layout, and header, and footer can be passed as parameters.
 ///
 /// There are three posible layouts:
 ///
@@ -23,7 +23,7 @@ import SwiftUI
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
-/// Unlike `VBaseList`, `VSectionList` has spacing between rows and scrolling indicaator
+/// Unlike `VBaseList`, `VSectionList` has spacing between rows and scrolling indicator.
 ///
 /// # Usage Example #
 ///
@@ -91,7 +91,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
     private let rowContent: (Row) -> RowContent
     
     // MARK: Initializers - Header and Footer
-    /// Initializes component with sections, header, footer, and row content
+    /// Initializes component with sections, header, footer, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -108,7 +108,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         self.rowContent = rowContent
     }
     
-    /// Initializes component with sections, header title, footer, and row content
+    /// Initializes component with sections, header title, footer, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -136,7 +136,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         )
     }
     
-    /// Initializes component with sections, header, footer title, and row content
+    /// Initializes component with sections, header, footer title, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -164,7 +164,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         )
     }
     
-    /// Initializes component with sections, header title, footer title, and row content
+    /// Initializes component with sections, header title, footer title, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -202,7 +202,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
     }
     
     // MARK: Initializers - Header
-    /// Initializes component with sections, header, and row content
+    /// Initializes component with sections, header, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -220,7 +220,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         self.rowContent = rowContent
     }
     
-    /// Initializes component with sections, header title, and row content
+    /// Initializes component with sections, header title, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -249,7 +249,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
     }
 
     // MARK: Initializers - Footer
-    /// Initializes component with sections, footer, and row content
+    /// Initializes component with sections, footer, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -267,7 +267,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
         self.rowContent = rowContent
     }
     
-    /// Initializes component with sections, footer title, and row content
+    /// Initializes component with sections, footer title, and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,
@@ -296,7 +296,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
     }
 
     // MARK: Initializers - _
-    /// Initializes component with sections and row content
+    /// Initializes component with sections and row content.
     public init(
         model: VSectionListModel = .init(),
         layout layoutType: VSectionListLayoutType = .default,

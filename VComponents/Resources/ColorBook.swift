@@ -8,28 +8,28 @@
 import SwiftUI
 
 // MARK: - Color Book
-/// Contains fundamental colors used throughout the framework
+/// Contains fundamental colors used throughout the framework.
 public struct ColorBook {
     // MARK: Properties
-    /// Clear color
+    /// Clear color.
     public static let clear: Color = .clear
     
-    /// Canvas color that can be used for `VBaseView`
+    /// Canvas color that can be used for `VBaseView`.
     public static let canvas: Color = .init(componentAsset: "Canvas")
     
-    /// Layer color for container components
+    /// Layer color for container components.
     public static let layer: Color = .init(componentAsset: "Layer")
     
-    /// Primary text color
+    /// Primary text color.
     public static let primary: Color = .init(componentAsset: "Primary")
     
-    /// Primary text color that inverts color scheme
+    /// Primary text color that inverts color scheme.
     public static let primaryInverted: Color = .init(componentAsset: "PrimaryInverted")
     
-    /// Secondary text color
+    /// Secondary text color.
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
-    /// Blue accent color
+    /// Blue accent color.
     public static let accent: Color = .init(componentAsset: "Accent")
     
     // MARK: Initializers
@@ -38,7 +38,7 @@ public struct ColorBook {
 
 // MARK: - Helpers
 extension Color {
-    /// Initializes color from framework's local assets library from a name
+    /// Initializes color from framework's local assets library from a name.
     public init(componentAsset name: String) {
         guard
             let bundle: Bundle = .init(identifier: "com.vakhtang-kontridze.VComponents"),

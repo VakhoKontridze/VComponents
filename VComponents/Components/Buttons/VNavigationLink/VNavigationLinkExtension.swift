@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Extension
 extension View {
-    /// Allows for navigation without an explicit `VNavigationLink`
+    /// Allows for navigation without an explicit `VNavigationLink`.
     ///
     /// # Usage Example #
     /// ```

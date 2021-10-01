@@ -8,13 +8,13 @@
 import SwiftUI
 
 // MARK: - V Wheel Picker
-/// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel
+/// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel.
 ///
-/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
+/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`.
 ///
-/// Best suited for `5`+ items
+/// Best suited for `5`+ items.
 ///
-/// Model, state, header, and footer can be passed as parameters
+/// Model, state, header, and footer can be passed as parameters.
 ///
 /// # Usage Example #
 ///
@@ -61,7 +61,7 @@ public struct VWheelPicker<Data, RowContent>: View
     @State private var rowWidth: CGFloat = .zero
     
     // MARK: Initializers - View Builder
-    /// Initializes component with selected index, header, footer, data, and row content
+    /// Initializes component with selected index, header, footer, data, and row content.
     public init(
         model: VWheelPickerModel = .init(),
         state: VWheelPickerState = .enabled,
@@ -81,7 +81,7 @@ public struct VWheelPicker<Data, RowContent>: View
     }
 
     // MARK: Initializes: Row Titles
-    /// Initializes component with selected index, header, footer, and row titles
+    /// Initializes component with selected index, header, footer, and row titles.
     public init(
         model: VWheelPickerModel = .init(),
         state: VWheelPickerState = .enabled,
@@ -113,7 +113,7 @@ public struct VWheelPicker<Data, RowContent>: View
     }
 
     // MARK: Initialzers: Pickable Item
-    /// Initializes component with `VPickableItem`, header, footer, and row content
+    /// Initializes component with `VPickableItem`, header, footer, and row content.
     public init<Item>(
         model: VWheelPickerModel = .init(),
         state: VWheelPickerState = .enabled,
@@ -141,7 +141,7 @@ public struct VWheelPicker<Data, RowContent>: View
     }
 
     // MARK: Initialzers: Pickable Titled Item
-    /// Initializes component with `VPickableTitledItem`, header, and footer
+    /// Initializes component with `VPickableTitledItem`, header, and footer.
     public init<Item>(
         model: VWheelPickerModel = .init(),
         state: VWheelPickerState = .enabled,

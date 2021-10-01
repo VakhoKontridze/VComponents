@@ -8,13 +8,13 @@
 import SwiftUI
 
 // MARK: - V Base Text Field
-/// Core component that is used throughout the framework as textfield
+/// Core component that is used throughout the framework as textfield.
 ///
-/// Model, state, placeholder, event callbacks, and button action can be passed as parameters
+/// Model, state, placeholder, event callbacks, and button action can be passed as parameters.
 ///
-/// It is possible to override action of return button by passing it as a parameter
+/// It is possible to override action of return button by passing it as a parameter.
 ///
-/// If two TextField's state is managed by a single property, unpredictable behaviors would occur
+/// If two TextField's state is managed by a single property, unpredictable behaviors would occur.
 ///
 /// # Usage Example #
 ///
@@ -97,7 +97,7 @@ public struct VBaseTextField: View {
     private let returnAction: VBaseTextFieldReturnButtonAction
     
     // MARK: Initialiers
-    /// Initializes component with state and text
+    /// Initializes component with state and text.
     public init(
         model: VBaseTextFieldModel = .init(),
         state: Binding<VBaseTextFieldState>,
@@ -119,7 +119,7 @@ public struct VBaseTextField: View {
         self.returnAction = returnAction
     }
     
-    /// Initializes component with text
+    /// Initializes component with text.
     public init(
         model: VBaseTextFieldModel = .init(),
         placeholder: String? = nil,

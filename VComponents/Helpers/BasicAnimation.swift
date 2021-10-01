@@ -8,20 +8,20 @@
 import SwiftUI
 
 // MARK: - Basic Animation
-/// Wrapper on `SwiftUI`'s animation used throughout the framework
+/// Wrapper on `SwiftUI`'s animation used throughout the framework.
 ///
-/// Purpose of this object was to limit some animations to curve and duration
+/// Purpose of this object was to limit some animations to curve and duration.
 ///
-/// Object contains proeprty `swiftUIAnimation`, which can be used to create object that `SwiftUI` can interpret
+/// Object contains proeprty `swiftUIAnimation`, which can be used to create object that `SwiftUI` can interpret.
 public struct BasicAnimation {
     // MARK: Properties
-    /// Animation curve
+    /// Animation curve.
     public var curve: AnimationCurve
     
-    /// Animation duration
+    /// Animation duration.
     public var duration: TimeInterval
     
-    /// Creates `SwiftUI` `Animation`
+    /// Creates `SwiftUI` `Animation`.
     public var asSwiftUIAnimation: Animation {
         switch curve {
         case .linear: return .linear(duration: duration)
@@ -32,19 +32,19 @@ public struct BasicAnimation {
     }
 
     // MARK: Animation Curve
-    /// Enum that represents animation curve, suh as `linear`, `easeIn`, `easeOut`, or `easeInOut`
+    /// Enum that represents animation curve, suh as `linear`, `easeIn`, `easeOut`, or `easeInOut`.
     public enum AnimationCurve {
         // MARK: Cases
-        /// Linear
+        /// Linear.
         case linear
         
-        /// Ease in
+        /// Ease in.
         case easeIn
         
-        /// Ease out
+        /// Ease out.
         case easeOut
         
-        /// Ease in and out
+        /// Ease in and out.
         case easeInOut
     }
 }

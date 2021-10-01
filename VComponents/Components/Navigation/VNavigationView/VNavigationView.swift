@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Navigation View
-/// Navigation component that presents stack of views with a visible path in a navigation hierarchy
+/// Navigation component that presents stack of views with a visible path in a navigation hierarchy.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
 /// `VNavigationView` and `VNavigationLink` can cause unintended effect in your navigation hierarchy if used alongside with `SwiftUI`'s native `NavigationView` and `NavigationLink`.
 /// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.

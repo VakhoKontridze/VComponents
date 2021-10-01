@@ -8,12 +8,12 @@
 import SwiftUI
 
 // MARK: - V Base Header Footer Frame Type
-/// Enum that represents `VBaseHeaderFooter` frame type, such as `fixed` or `flexible`
+/// Enum that represents `VBaseHeaderFooter` frame type, such as `fixed` or `flexible`.
 public enum VBaseHeaderFooterFrameType {
-    /// Fixed frame
+    /// Fixed frame.
     case fixed
     
-    /// Flexible frame
+    /// Flexible frame.
     case flexible(_ alignment: HorizontalAlignment)
 }
 

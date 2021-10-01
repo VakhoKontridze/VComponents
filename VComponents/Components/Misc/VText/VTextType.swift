@@ -8,11 +8,11 @@
 import SwiftUI
 
 // MARK: - V Text Type
-/// Enum that describes layout, such as `oneLine` or `multiLine`
+/// Enum that describes layout, such as `oneLine` or `multiLine`.
 public enum VTextType {
-    /// One-line
+    /// One-line.
     case oneLine
     
-    /// Multi-line
+    /// Multi-line.
     case multiLine(limit: Int?, alignment: TextAlignment)
 }

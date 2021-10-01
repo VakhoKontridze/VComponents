@@ -8,27 +8,27 @@
 import SwiftUI
 
 // MARK: - V Stepper Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VStepperModel {
     // MARK: Properties
-    /// Reference to `VSegmentedPickerModel`
+    /// Reference to `VSegmentedPickerModel`.
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Stepper size.Defaults to `94` width and `32` height, similarly to native toggle.
@@ -44,25 +44,25 @@ public struct VStepperModel {
         public var divider: CGSize = segmentedPickerReference.layout.dividerSize
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Layout
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Background colors
+        /// Background colors.
         public var background: StateColors = segmentedPickerReference.colors.background
         
-        /// Plus and minus button background colors
+        /// Plus and minus button background colors.
         public var buttonBackground: ButtonStateColors = .init(
             enabled: ColorBook.clear,
             pressed: .init(componentAsset: "VStepper.Button.Background.pressed"),
             disabled: ColorBook.clear
         )
         
-        /// Plus and minus icon colors and opacities
+        /// Plus and minus icon colors and opacities.
         public var buttonIcon: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
@@ -71,28 +71,28 @@ public struct VStepperModel {
             disabledOpacity: 0.5
         )
         
-        /// Plus and minus button divider colors
+        /// Plus and minus button divider colors.
         public var divider: StateColors = segmentedPickerReference.colors.divider
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_ED
         
         // MARK: Button State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias ButtonStateColors = StateColors_EPD
         
         // MARK: State Colors and Opacities
-        /// Sub-model containing colors and opacities for component states
+        /// Sub-model containing colors and opacities for component states.
         public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Time interval after which long press incrementation begins. Defaults to `1` second.
@@ -101,11 +101,11 @@ public struct VStepperModel {
         /// Exponend by which long press incrementation happens. Defaults to `2`.
         ///
         /// For instance, if exponent is set to `2`, increment would increase by a factor of `2` every second.
-        /// So, `1`, `2`, `4`, `8` ...
+        /// So, `1`, `2`, `4`, `8` ... .
         public var longPressIncrementExponent: Int = 2
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 }

@@ -8,13 +8,13 @@
 import SwiftUI
 
 // MARK: - V Segmented Picker
-/// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally
+/// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally.
 ///
-/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`
+/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`.
 ///
-/// Best suited for `2` – `3` items
+/// Best suited for `2` – `3` items.
 ///
-/// Model, state, header, footer, and disabled indexes can be passed as parameters
+/// Model, state, header, footer, and disabled indexes can be passed as parameters.
 ///
 /// # Usage Example #
 ///
@@ -71,7 +71,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     @State private var rowWidth: CGFloat = .zero
     
     // MARK: Initializers - View Builder
-    /// Initializes component with selected index, header, footer, data, and row content
+    /// Initializes component with selected index, header, footer, data, and row content.
     public init(
         model: VSegmentedPickerModel = .init(),
         state: VSegmentedPickerState = .enabled,
@@ -93,7 +93,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     }
 
     // MARK: Initializers - Row Titles
-    /// Initializes component with selected index, header, footer, and row titles
+    /// Initializes component with selected index, header, footer, and row titles.
     public init(
         model: VSegmentedPickerModel = .init(),
         state: VSegmentedPickerState = .enabled,
@@ -127,7 +127,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     }
 
     // MARK: Initializers - Pickable Item
-    /// Initializes component with `VPickableItem`, header, footer, and row content
+    /// Initializes component with `VPickableItem`, header, footer, and row content.
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
         state: VSegmentedPickerState = .enabled,
@@ -157,7 +157,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     }
 
     // MARK: Initializers - Pickable Titled Item
-    /// Initializes component with `VPickableTitledItem`, header, and footer
+    /// Initializes component with `VPickableTitledItem`, header, and footer.
     public init<Item>(
         model: VSegmentedPickerModel = .init(),
         state: VSegmentedPickerState = .enabled,

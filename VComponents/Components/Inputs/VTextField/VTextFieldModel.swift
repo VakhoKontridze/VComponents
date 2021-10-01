@@ -8,44 +8,44 @@
 import SwiftUI
 
 // MARK: - V Text Field Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VTextFieldModel {
     // MARK: Properties
-    /// Reference to `VBaseTextFieldModel`
+    /// Reference to `VBaseTextFieldModel`.
     public static let baseTextFieldReference: VBaseTextFieldModel = .init()
     
-    /// Reference to `VSquareButtonModel`
+    /// Reference to `VSquareButtonModel`.
     public static let squareButtonReference: VSquareButtonModel = .init()
     
-    /// Reference to `VPlainButtonModel`
+    /// Reference to `VPlainButtonModel`.
     public static let plainButtonReference: VPlainButtonModel = .init()
     
-    /// Reference to `VCloseButtonModel`
+    /// Reference to `VCloseButtonModel`.
     public static let closeButtonReference: VCloseButtonModel = .init()
     
-    /// Reference to `VSegmentedPickerModel`
+    /// Reference to `VSegmentedPickerModel`.
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Textfield height. Defaults to `50`.
@@ -88,31 +88,31 @@ public struct VTextFieldModel {
         public var headerFooterMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Text Alignment
-        /// Enum that describes text alignment, such as `leading`, `center`, `trailing`, or `auto`
+        /// Enum that describes text alignment, such as `leading`, `center`, `trailing`, or `auto`.
         public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacitis
+        /// Content opacitis.
         public var content: StateOpacities = .init(
             disabledOpacity: 0.5
         )
         
-        /// Text content colors
+        /// Text content colors.
         public var textContent: StateColors = .init(
             enabled: ColorBook.primary,
             focused: ColorBook.primary,
             disabled: ColorBook.primary
         )
         
-        /// Background colors
+        /// Background colors.
         public var background: StateColorsHighlighted = .init(
             enabled: segmentedPickerReference.colors.background.enabled,
             focused: .init(componentAsset: "TextField.Background.focused"),
@@ -121,7 +121,7 @@ public struct VTextFieldModel {
             disabled: segmentedPickerReference.colors.background.disabled
         )
         
-        /// Border colors
+        /// Border colors.
         public var border: StateColorsHighlighted = .init(
             enabled: ColorBook.clear,
             focused: ColorBook.clear,
@@ -130,7 +130,7 @@ public struct VTextFieldModel {
             disabled: ColorBook.clear
         )
         
-        /// Header colors
+        /// Header colors.
         public var header: StateColorsHighlighted = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
             focused: segmentedPickerReference.colors.header.enabled,
@@ -139,7 +139,7 @@ public struct VTextFieldModel {
             disabled: segmentedPickerReference.colors.header.disabled
         )
         
-        /// Footer colors
+        /// Footer colors.
         public var footer: StateColorsHighlighted = .init(
             enabled: segmentedPickerReference.colors.footer.enabled,
             focused: segmentedPickerReference.colors.footer.enabled,
@@ -148,7 +148,7 @@ public struct VTextFieldModel {
             disabled: segmentedPickerReference.colors.footer.disabled
         )
         
-        /// Search icon colors
+        /// Search icon colors.
         public var searchIcon: StateColorsHighlighted = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
             focused: segmentedPickerReference.colors.header.enabled,
@@ -157,7 +157,7 @@ public struct VTextFieldModel {
             disabled: segmentedPickerReference.colors.header.disabled
         )
         
-        /// Visiblity button icon colors
+        /// Visiblity button icon colors.
         public var visibilityButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
             enabledPressed: segmentedPickerReference.colors.header.enabled,
@@ -172,7 +172,7 @@ public struct VTextFieldModel {
             disabledOpacity: squareButtonReference.colors.content.disabledOpacity
         )
         
-        /// Clear button background colors
+        /// Clear button background colors.
         public var clearButtonBackground: ButtonStateColorsHighlighted = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
             enabledPressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
@@ -185,7 +185,7 @@ public struct VTextFieldModel {
             disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
         )
         
-        /// Clear button icon colors
+        /// Clear button icon colors.
         public var clearButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Icon"),
             enabledPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
@@ -200,7 +200,7 @@ public struct VTextFieldModel {
             disabledOpacity: closeButtonReference.colors.content.disabledOpacity
         )
         
-        /// Cancel button colors and opacities
+        /// Cancel button colors and opacities.
         public var cancelButton: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
@@ -210,54 +210,60 @@ public struct VTextFieldModel {
         )
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_EFD
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states
+        /// Sub-model containing opacities for component states.
         public typealias StateOpacities = StateOpacities_D
         
         // MARK: State Colors and Opacities
-        /// Sub-model containing colors and opacities for component states
+        /// Sub-model containing colors and opacities for component states.
         public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
         
         // MARK: State Colors Highlighted
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColorsHighlighted = StateColors_EFSED
         
         // MARK: Button State Colors Highlighted
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias ButtonStateColorsHighlighted = StateColors_EpFpSpEpD
         
         // MARK: Button State Colors and Opacities Highlighted
-        /// Sub-model containing colors and opacities for component states
+        /// Sub-model containing colors and opacities for component states.
         public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColors_EpFpSpEpD_PD
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
         /// Text font. Defaults to system font of size `16`.
         public var text: UIFont = baseTextFieldReference.fonts.text
         
+        /// Placeholder font. Defaults to system font of size `13`.
         public var placeholder: Font = segmentedPickerReference.fonts.footer
+        
+        /// Header font. Defaults to system font of size `14`.
         public var header: Font = segmentedPickerReference.fonts.header
+        
+        /// Footer font. Defaults to system font of size `13`.
         public var footer: Font = segmentedPickerReference.fonts.footer
         
+        /// Cancel button font. Defaults to system font of size `14` with `semibold` weight.
         public var cancelButton: Font = plainButtonReference.fonts.title
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
         /// Clear, cancel, and visibility button appear and dissapear animation. Defaults to `easeInOut`.
@@ -266,12 +272,12 @@ public struct VTextFieldModel {
         let delayToAnimateButtons: TimeInterval = 0.5   // Must be more than keyboard or modal duration
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Keyboard type. Defaults to `default`.
@@ -301,7 +307,7 @@ public struct VTextFieldModel {
         public var cancelButton: String? = nil
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
     

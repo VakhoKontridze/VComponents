@@ -8,12 +8,12 @@
 import SwiftUI
 
 // MARK: - V Radio Button
-/// State picker component that toggles between off, on, or disabled states, and displays content
+/// State picker component that toggles between off, on, or disabled states, and displays content.
 ///
 /// Component can be initialized with content, title, or without body. Bool can also be passed as state.
 /// Component can aslo be placed inside a Radio Group, in which case component is initialized with `VPickableItem` or `VPickableTitledItem`.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
 /// # Usage Example #
 ///
@@ -68,7 +68,7 @@ public struct VRadioButton<Content>: View where Content: View {
     private let content: (() -> Content)?
     
     // MARK: Initializers - State
-    /// Initializes component with state and content
+    /// Initializes component with state and content.
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>,
@@ -79,7 +79,7 @@ public struct VRadioButton<Content>: View where Content: View {
         self.content = content
     }
     
-    /// Initializes component with state and title
+    /// Initializes component with state and title.
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>,
@@ -101,7 +101,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
     
-    /// Initializes component with state
+    /// Initializes component with state.
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>
@@ -114,7 +114,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
 
     // MARK: Initializers - Bool
-    /// Initializes component with bool and content
+    /// Initializes component with bool and content.
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>,
@@ -127,7 +127,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
 
-    /// Initializes component with bool and title
+    /// Initializes component with bool and title.
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>,
@@ -149,7 +149,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
 
-    /// Initializes component with bool
+    /// Initializes component with bool.
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>
@@ -162,7 +162,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
     
     // MARK: Initializers - Pickable Item
-    /// Initializes component with `VPickableItem` and content
+    /// Initializes component with `VPickableItem` and content.
     public init<Item>(
         model: VRadioButtonModel = .init(),
         selection: Binding<Item>,
@@ -181,7 +181,7 @@ public struct VRadioButton<Content>: View where Content: View {
         )
     }
     
-    /// Initializes component with `VPickableItem`
+    /// Initializes component with `VPickableItem`.
     public init<Item>(
         model: VRadioButtonModel = .init(),
         selection: Binding<Item>,
@@ -201,7 +201,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
     
     // MARK: Initializers - Pickable Titled Item
-    /// Initializes component with `VPickableTitledItem` and content
+    /// Initializes component with `VPickableTitledItem` and content.
     public init<Item>(
         model: VRadioButtonModel = .init(),
         selection: Binding<Item>,

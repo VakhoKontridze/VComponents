@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Sheet
-/// Container component that draws a background and hosts content
+/// Container component that draws a background and hosts content.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
 /// If content is passed during init, `VSheet` would resize according to the size of the content. If content is not passed, `VSheet` would expand to occupy maximum space.
 ///
@@ -38,7 +38,7 @@ public struct VSheet<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with content
+    /// Initializes component with content.
     public init(
         model: VSheetModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -47,7 +47,7 @@ public struct VSheet<Content>: View where Content: View {
         self.content = content
     }
     
-    /// Initializes component
+    /// Initializes component.
     public init(
         model: VSheetModel = .init()
     )

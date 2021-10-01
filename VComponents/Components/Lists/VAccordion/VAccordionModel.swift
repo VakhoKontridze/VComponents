@@ -8,39 +8,39 @@
 import SwiftUI
 
 // MARK: - V Accordion Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VAccordionModel {
     // MARK: Properties
-    /// Reference to `VSheetModel`
+    /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to `VListModel`
+    /// Reference to `VListModel`.
     public static let listReference: VListModel = .init()
     
-    /// Reference to `VChevronButtonModel`
+    /// Reference to `VChevronButtonModel`.
     public static let chevronButtonReference: VChevronButtonModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Accordion corner radius. Defaults to `15`.
@@ -92,38 +92,38 @@ public struct VAccordionModel {
         public var dividerMargins: HorizontalMargins = listReference.layout.dividerMargins
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins
+        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = LayoutGroup_LTTB
         
         // MARK: Horizontal Margins
-        /// Sub-model containing `leading` and `trailing` margins
+        /// Sub-model containing `leading` and `trailing` margins.
         public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
         
         // MARK: Expandable Margins
-        /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins
+        /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins.
         public struct ExpandableMargins {
             // MARK: Properties
-            /// Leading margin
+            /// Leading margin.
             public var leading: CGFloat
             
-            /// Trailing margin
+            /// Trailing margin.
             public var trailing: CGFloat
             
-            /// Top margin
+            /// Top margin.
             public var top: CGFloat
             
-            /// Bottom collapsed margin
+            /// Bottom collapsed margin.
             public var bottomCollapsed: CGFloat
             
-            /// Bottom expanded margin
+            /// Bottom expanded margin.
             public var bottomExpanded: CGFloat
             
             // MARK: Initializers
-            /// Initializes sub-model with margins
+            /// Initializes sub-model with margins.
             public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottomCollapsed: CGFloat, bottomExpanded: CGFloat) {
                 self.leading = leading
                 self.trailing = trailing
@@ -135,79 +135,79 @@ public struct VAccordionModel {
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Background color
+        /// Background color.
         public var background: Color = listReference.colors.background
         
-        /// Header state opacities
+        /// Header state opacities.
         public var header: StateOpacities = .init(
             disabledOpacity: 0.5
         )
         
-        /// Text header color
+        /// Text header color.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var headerText: Color = ColorBook.primary
         
-        /// Header divider color
+        /// Header divider color.
         public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
         
-        /// Chevron button background colors
+        /// Chevron button background colors.
         public var chevronButtonBackground: StateColors = chevronButtonReference.colors.background
         
-        /// Chevron button icon colors and opacities
+        /// Chevron button icon colors and opacities.
         public var chevronButtonIcon: StateColorsAndOpacities = chevronButtonReference.colors.content
         
-        /// Row divider color
+        /// Row divider color.
         public var divider: Color = listReference.colors.divider
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states
+        /// Sub-model containing opacities for component states.
         public typealias StateOpacities = StateOpacities_D
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_EPD
         
         // MARK: State Colors And Opacities
-        /// Sub-model containing colors and opacities for component states
+        /// Sub-model containing colors and opacities for component states.
         public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font
+        /// Header font.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var header: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
         /// Expand and collapse animation. Defaults to `default`.
         public var expandCollapse: Animation? = .default
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
@@ -217,7 +217,7 @@ public struct VAccordionModel {
         public var expandCollapseOnHeaderTap: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 

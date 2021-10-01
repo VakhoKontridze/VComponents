@@ -8,16 +8,16 @@
 import SwiftUI
 
 // MARK: - V Dialog Button Model Model
-/// Enum that describes `VDialog` button model, such as `primary`, `secondary`, or `custom`
+/// Enum that describes `VDialog` button model, such as `primary`, `secondary`, or `custom`.
 public enum VDialogButtonModel {
     // MARK: Cases
-    /// Primary button
+    /// Primary button.
     case primary
     
-    /// Secondary button
+    /// Secondary button.
     case secondary
     
-    /// Custom button
+    /// Custom button.
     case custom(_ model: VDialogButtonModelCustom)
 
     // MARK: Sub-Models
@@ -67,23 +67,23 @@ public enum VDialogButtonModel {
 }
 
 // MARK: - V Dialog Button Model Custom
-/// Model that describes UI
+/// Model that describes UI.
 public struct VDialogButtonModelCustom {
     // MARK: Properties
-    /// Reference to `VPrimaryButtonModel`
+    /// Reference to `VPrimaryButtonModel`.
     public static let primaryButtonReference: VPrimaryButtonModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts
     
     // MARK: Initializers
-    /// Initializes model with colors
+    /// Initializes model with colors.
     public init(layout: Layout = .init(), colors: Colors, fonts: Fonts = .init()) {
         self.layout = layout
         self.colors = colors
@@ -91,7 +91,7 @@ public struct VDialogButtonModelCustom {
     }
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Button height. Defaults to `40`.
@@ -101,27 +101,27 @@ public struct VDialogButtonModelCustom {
         public var cornerRadius: CGFloat = 10
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Conrent opacities
+        /// Conrent opacities.
         public var content: StateOpacities
         
-        /// Text content colors
+        /// Text content colors.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var text: StateColors
         
-        /// Background colors
+        /// Background colors.
         public var background: StateColors
         
         // MARK: Initializers
-        /// Initializes sub-model with content, text, and background colors
+        /// Initializes sub-model with content, text, and background colors.
         public init(content: StateOpacities, text: StateColors, background: StateColors) {
             self.content = content
             self.text = text
@@ -129,23 +129,23 @@ public struct VDialogButtonModelCustom {
         }
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_EPD
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states
+        /// Sub-model containing opacities for component states.
         public typealias StateOpacities = StateOpacities_P
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
         /// Title font. Defaults to system font of size `16` with `semibold` weight.
         public var title: Font = primaryButtonReference.fonts.title
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
     

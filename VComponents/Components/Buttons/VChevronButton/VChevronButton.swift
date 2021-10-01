@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Chevron Button
-/// Circular colored chevron button component that performs action when triggered
+/// Circular colored chevron button component that performs action when triggered.
 ///
-/// Model and state can be passed as parameters
+/// Model and state can be passed as parameters.
 ///
 /// # Usage Example #
 ///
@@ -37,7 +37,7 @@ public struct VChevronButton: View {
     private let action: () -> Void
     
     // MARK: Initializers
-    /// Initializes component with direction and action
+    /// Initializes component with direction and action.
     public init(
         model: VChevronButtonModel = .init(),
         direction: VChevronButtonDirection,

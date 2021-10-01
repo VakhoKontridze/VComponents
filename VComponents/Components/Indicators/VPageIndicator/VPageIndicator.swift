@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Page Indicator
-/// Indicator component that indicates selection in page control
+/// Indicator component that indicates selection in page control.
 ///
-/// Model and type can be passed as parameters
+/// Model and type can be passed as parameters.
 ///
 /// There are three possible types:
 ///
@@ -50,7 +50,7 @@ public struct VPageIndicator: View {
     @State private var animatableSelectedIndex: Int?
 
     // MARK: Intializers
-    /// Initializes component with total and selected index
+    /// Initializes component with total and selected index.
     public init(
         model: VPageIndicatorModel = .init(),
         type pageIndicatorType: VPageIndicatorType = .default,

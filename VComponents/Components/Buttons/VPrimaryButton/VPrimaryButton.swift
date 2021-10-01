@@ -8,11 +8,11 @@
 import SwiftUI
 
 // MARK: - V Primary Button
-/// Large colored button component that performs action when triggered
+/// Large colored button component that performs action when triggered.
 ///
-/// Component can be initialized with content or title
+/// Component can be initialized with content or title.
 ///
-/// Model and state can be passed as parameters
+/// Model and state can be passed as parameters.
 ///
 /// # Usage Example #
 ///
@@ -39,7 +39,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    /// Initializes component with action and content
+    /// Initializes component with action and content.
     public init(
         model: VPrimaryButtonModel = .init(),
         state: VPrimaryButtonState = .enabled,
@@ -52,7 +52,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
         self.content = content
     }
 
-    /// Initializes component with action and title
+    /// Initializes component with action and title.
     public init(
         model: VPrimaryButtonModel = .init(),
         state: VPrimaryButtonState = .enabled,

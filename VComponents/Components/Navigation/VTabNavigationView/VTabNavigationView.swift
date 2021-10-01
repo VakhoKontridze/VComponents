@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Tab Navigation View
-/// Navigation component that switches between multiple views using interactive user interface elements
+/// Navigation component that switches between multiple views using interactive user interface elements.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
 /// # Usage Example #
 ///
@@ -66,7 +66,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
     private let pageSix: VTabNavigationViewPage<C5>?
     
     // MARK: Initializers
-    /// Initializes component with selected index and six pages
+    /// Initializes component with selected index and six pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -87,7 +87,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = pageSix
     }
     
-    /// Initializes component with selected index and five pages
+    /// Initializes component with selected index and five pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -109,7 +109,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
     
-    /// Initializes component with selected index and four pages
+    /// Initializes component with selected index and four pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -132,7 +132,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
 
-    /// Initializes component with selected index and three pages
+    /// Initializes component with selected index and three pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -155,7 +155,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
 
-    /// Initializes component with selected index and four pages
+    /// Initializes component with selected index and four pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,

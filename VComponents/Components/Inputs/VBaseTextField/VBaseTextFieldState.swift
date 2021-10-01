@@ -8,20 +8,20 @@
 import Foundation
 
 // MARK: - V Base Text Field State
-/// Enum that describes state, such as `enabled`, `focused`, or `disabled`
+/// Enum that describes state, such as `enabled`, `focused`, or `disabled`.
 public enum VBaseTextFieldState: Int, CaseIterable {
     // MARK: Cases
-    /// Case enabled
+    /// Case enabled.
     case enabled
     
-    /// Case focused
+    /// Case focused.
     case focused
     
-    /// Case disabled
+    /// Case disabled.
     case disabled
     
     // MARK: Properties
-    /// Indicates if state is enabled
+    /// Indicates if state is enabled.
     public var isEnabled: Bool {
         switch self {
         case .enabled: return true

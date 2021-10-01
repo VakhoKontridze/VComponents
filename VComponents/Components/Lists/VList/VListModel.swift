@@ -8,30 +8,30 @@
 import SwiftUI
 
 // MARK: - V List Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VListModel {
     // MARK: Properties
-    /// Reference to `VBaseListModel`
+    /// Reference to `VBaseListModel`.
     public static let baseListReference: VBaseListModel = .init()
     
-    /// Reference to `VSheetModel`
+    /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// List corner radius. Defaults to `15`.
@@ -50,38 +50,38 @@ public struct VListModel {
         public var dividerMargins: HorizontalMargins = baseListReference.layout.dividerMargins
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Horizontal Margins
-        /// Sub-model containing `leading` and `trailing` margins
+        /// Sub-model containing `leading` and `trailing` margins.
         public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
     }
     
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Row divider color
+        /// Row divider color.
         public var divider: Color = baseListReference.colors.divider
         
-        /// Background color
+        /// Background color.
         public var background: Color = sheetReference.colors.background
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 

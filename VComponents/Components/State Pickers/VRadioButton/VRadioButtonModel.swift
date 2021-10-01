@@ -8,36 +8,36 @@
 import SwiftUI
 
 // MARK: - V Radio Button Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VRadioButtonModel {
     // MARK: Properties
-    /// Reference to `VToggleModel`
+    /// Reference to `VToggleModel`.
     public static let toggleRefrence: VToggleModel = .init()
     
-    /// Reference to `VCheckBoxModel`
+    /// Reference to `VCheckBoxModel`.
     public static let checkBoxReference: VCheckBoxModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
 
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Radio button dimension. Defaults to `16.`
@@ -52,45 +52,45 @@ public struct VRadioButtonModel {
         /// Hit box. Defaults to `5`.
         public var hitBox: CGFloat = checkBoxReference.layout.hitBox
         
-        /// Content leading margin. Defaults to `5`
+        /// Content leading margin. Defaults to `5`.
         public var contentMarginLeading: CGFloat = checkBoxReference.layout.contentMarginLeading
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Fill colors
+        /// Fill colors.
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
             on: ColorBook.primaryInverted,
             disabled: ColorBook.primaryInverted
         )
         
-        /// Border colors
+        /// Border colors.
         public var border: StateColors = .init(
             off: checkBoxReference.colors.border.off,
             on: checkBoxReference.colors.fill.on,
             disabled: checkBoxReference.colors.border.disabled
         )
         
-        /// Bullet colors
+        /// Bullet colors.
         public var bullet: StateColors = .init(
             off: ColorBook.clear,
             on: checkBoxReference.colors.fill.on,
             disabled: ColorBook.clear
         )
 
-        /// Content opacities
+        /// Content opacities.
         public var content: StateOpacities = checkBoxReference.colors.content
 
-        /// Text content colors
+        /// Text content colors.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var textContent: StateColors = .init(
             off: checkBoxReference.colors.textContent.off,
             on: checkBoxReference.colors.textContent.on,
@@ -98,53 +98,53 @@ public struct VRadioButtonModel {
         )
 
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_OOD
 
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states
+        /// Sub-model containing opacities for component states.
         public typealias StateOpacities = StateOpacities_PD
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
         /// Title font. Defaults to system font of size `15`.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var title: Font = toggleRefrence.fonts.title
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = toggleRefrence.animations.stateChange
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if content is clickable. Defaults to `true`.
         public var contentIsClickable: Bool = toggleRefrence.misc.contentIsClickable
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 }

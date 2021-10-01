@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-/// Grop of layout values containing `leading`, `trailing`, `top` and `bottom` values
+/// Grop of layout values containing `leading`, `trailing`, `top` and `bottom` values.
 public struct LayoutGroup_LTTB {
-    /// Leading value
+    /// Leading value.
     public var leading: CGFloat
     
-    /// Trailing value
+    /// Trailing value.
     public var trailing: CGFloat
     
-    /// Top value
+    /// Top value.
     public var top: CGFloat
     
-    /// Bottom value
+    /// Bottom value.
     public var bottom: CGFloat
     
-    /// Initializes group with value
+    /// Initializes group with value.
     public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottom: CGFloat) {
         self.leading = leading
         self.trailing = trailing
@@ -29,7 +29,7 @@ public struct LayoutGroup_LTTB {
         self.bottom = bottom
     }
     
-    /// Instance of group with zero values
+    /// Instance of group with zero values.
     public static var zero: Self {
         .init(
             leading: 0,
@@ -40,21 +40,21 @@ public struct LayoutGroup_LTTB {
     }
 }
 
-/// Grop of layout values containing `horizotal` and `vertical` values
+/// Grop of layout values containing `horizotal` and `vertical` values.
 public struct LayoutGroup_HV {
-    /// Horizontal value
+    /// Horizontal value.
     public var horizontal: CGFloat
     
-    /// Vertical value
+    /// Vertical value.
     public var vertical: CGFloat
     
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(horizontal: CGFloat, vertical: CGFloat) {
         self.horizontal = horizontal
         self.vertical = vertical
     }
     
-    /// Instance of group with zero values
+    /// Instance of group with zero values.
     public static var zero: Self {
         .init(
             horizontal: 0,
@@ -63,21 +63,21 @@ public struct LayoutGroup_HV {
     }
 }
 
-/// Grop of layout values containing `top` and `bottom` values
+/// Grop of layout values containing `top` and `bottom` values.
 public struct LayoutGroup_TB {
-    /// Top value
+    /// Top value.
     public var top: CGFloat
     
-    /// Bottom value
+    /// Bottom value.
     public var bottom: CGFloat
     
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(top: CGFloat, bottom: CGFloat) {
         self.top = top
         self.bottom = bottom
     }
     
-    /// Instance of group with zero values
+    /// Instance of group with zero values.
     public static var zero: Self {
         .init(
             top: 0,
@@ -86,21 +86,21 @@ public struct LayoutGroup_TB {
     }
 }
 
-/// Grop of layout values containing `leading` and `trailing` values
+/// Grop of layout values containing `leading` and `trailing` values.
 public struct LayoutGroup_LT {
-    /// Top value
+    /// Top value.
     public var leading: CGFloat
     
-    /// Bottom value
+    /// Bottom value.
     public var trailing: CGFloat
     
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(leading: CGFloat, trailing: CGFloat) {
         self.leading = leading
         self.trailing = trailing
     }
     
-    /// Instance of group with zero values
+    /// Instance of group with zero values.
     public static var zero: Self {
         .init(
             leading: 0,

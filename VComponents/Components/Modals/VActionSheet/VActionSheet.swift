@@ -8,11 +8,11 @@
 import SwiftUI
 
 // MARK: - V Action Sheet
-/// Modal component that presents half modal menu of actions
+/// Modal component that presents half modal menu of actions.
 ///
-/// Description can be passed as parameter
+/// Description can be passed as parameter.
 ///
-/// `vActionSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+/// `vActionSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
 /// # Usage Example #
 ///
@@ -43,7 +43,7 @@ public struct VActionSheet {
     fileprivate let rows: [VActionSheetRow]
     
     // MARK: Initializrs
-    /// Initializes component with title, description, and rows
+    /// Initializes component with title, description, and rows.
     public init(
         title: String,
         description: String?,
@@ -57,7 +57,7 @@ public struct VActionSheet {
 
 // MARK: - Extension
 extension View {
-    /// Presents `VActionSheet`
+    /// Presents `VActionSheet`.
     public func vActionSheet(
         isPresented: Binding<Bool>,
         actionSheet: @escaping () -> VActionSheet

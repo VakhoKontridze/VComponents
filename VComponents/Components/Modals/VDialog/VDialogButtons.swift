@@ -8,18 +8,18 @@
 import Foundation
 
 // MARK: - V Dialog Buttons
-/// Enum that describes `VDialog` buttons, such as `one`, `two`, or `many`
+/// Enum that describes `VDialog` buttons, such as `one`, `two`, or `many`.
 public enum VDialogButtons {
-    /// One button
+    /// One button.
     case one(button: VDialogButton)
     
-    /// Two buttons
+    /// Two buttons.
     ///
-    /// Buttons are stacked horizontally
+    /// Buttons are stacked horizontally.
     case two(primary: VDialogButton, secondary: VDialogButton)
     
-    /// Many buttons
+    /// Many buttons.
     ///
-    /// Buttons are stacked vertically
+    /// Buttons are stacked vertically.
     case many(_ buttons: [VDialogButton])
 }

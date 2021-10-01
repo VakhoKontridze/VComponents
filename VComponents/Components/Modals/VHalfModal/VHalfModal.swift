@@ -8,13 +8,13 @@
 import SwiftUI
 
 // MARK: - V Half Modal
-/// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true
+/// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true.
 ///
-/// Model and header can be passed as parameters
+/// Model and header can be passed as parameters.
 ///
-/// If invalid height parameter are passed during init, layout would invalidate itself, and refuse to draw
+/// If invalid height parameter are passed during init, layout would invalidate itself, and refuse to draw.
 ///
-/// `vHalfModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+/// `vHalfModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
 /// # Usage Example #
 ///
@@ -108,7 +108,7 @@ public struct VHalfModal<Content, HeaderContent>
     fileprivate let content: () -> Content
     
     // MARK: Initializers - Header
-    /// Initializes component with header and content
+    /// Initializes component with header and content.
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
@@ -119,7 +119,7 @@ public struct VHalfModal<Content, HeaderContent>
         self.content = content
     }
     
-    /// Initializes component with header title and content
+    /// Initializes component with header title and content.
     public init(
         model: VHalfModalModel = .init(),
         headerTitle: String,
@@ -142,7 +142,7 @@ public struct VHalfModal<Content, HeaderContent>
     }
     
     // MARK: Initializers - _
-    /// Initializes component with content
+    /// Initializes component with content.
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -157,7 +157,7 @@ public struct VHalfModal<Content, HeaderContent>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VHalfModal`
+    /// Presents `VHalfModal`.
     public func vHalfModal<Content, HeaderContent>(
         isPresented: Binding<Bool>,
         halfModal: @escaping () -> VHalfModal<Content, HeaderContent>

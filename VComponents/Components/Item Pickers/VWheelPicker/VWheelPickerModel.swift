@@ -8,27 +8,27 @@
 import SwiftUI
 
 // MARK: - V Wheel Picker Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VWheelPickerModel {
     // MARK: Properties
-    /// Reference to `VSegmentedPickerModel`
+    /// Reference to `VSegmentedPickerModel`.
     public static let segmentedPickerReference: VSegmentedPickerModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Picker corner radius. Defaults to `15`.
@@ -41,51 +41,51 @@ public struct VWheelPickerModel {
         public var headerMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacities
+        /// Content opacities.
         public var content: StateOpacities = .init(
             disabledOpacity: segmentedPickerReference.colors.content.disabledOpacity
         )
         
-        /// Text content colors
+        /// Text content colors.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var textContent: StateColors = segmentedPickerReference.colors.textContent
         
-        /// Background colors
+        /// Background colors.
         public var background: StateColors = .init(
             enabled: ColorBook.layer,
             disabled: ColorBook.layer
         )
 
-        /// Header colors
+        /// Header colors.
         public var header: StateColors = segmentedPickerReference.colors.header
         
-        /// Footer colors
+        /// Footer colors.
         public var footer: StateColors = segmentedPickerReference.colors.footer
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_ED
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states
+        /// Sub-model containing opacities for component states.
         public typealias StateOpacities = StateOpacities_D
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
         /// Header font. Defaults to system font of size `14`.
@@ -96,11 +96,11 @@ public struct VWheelPickerModel {
         
         /// Row font
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var rows: Font = segmentedPickerReference.fonts.rows
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 }
