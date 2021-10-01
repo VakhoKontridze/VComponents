@@ -73,7 +73,7 @@ public struct VPageIndicatorModel {
     public struct Animations {
         // MARK: Properties
         /// Transition animation. Defaults to `linear` with duration `0.15`.
-        public var transition: Animation = Animation.linear(duration: 0.15)
+        public var transition: Animation = .linear(duration: 0.15)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
