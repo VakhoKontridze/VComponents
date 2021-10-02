@@ -8,32 +8,30 @@
 import SwiftUI
 
 // MARK: - V Half Modal
-/// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true
+/// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true.
 ///
-/// Model and header can be passed as parameters
+/// Model and header can be passed as parameters.
 ///
-/// If invalid height parameter are passed during init, layout would invalidate itself, and refuse to draw
+/// If invalid height parameter are passed during init, layout would invalidate itself, and refuse to draw.
 ///
-/// `vHalfModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+/// `vHalfModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vHalfModal(isPresented: $isPresented, halfModal: {
-///             VHalfModal(
-///                 headerTitle: "Lorem ipsum dolor sit amet",
-///                 content: { ColorBook.accent }
-///             )
-///         })
-/// }
-/// ```
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vHalfModal(isPresented: $isPresented, halfModal: {
+///                 VHalfModal(
+///                     headerTitle: "Lorem ipsum dolor sit amet",
+///                     content: { ColorBook.accent }
+///                 )
+///             })
+///     }
 ///
 /// VNavigationView can also be passes as contant, to create a modal stack of navigatable views.
 ///
@@ -43,58 +41,56 @@ import SwiftUI
 ///
 /// If you decide to change spacings in the model, consider checking out static properties—`navBarCloseButtonMarginTop`, `navBarCloseButtonMarginTrailing`, and `navBarTrailingItemMarginTrailing`—in `VHalfModalModel.Layout`.
 ///
-/// ```
-/// var model: VHalfModalModel {
-///     var model: VHalfModalModel = .init()
+///     var model: VHalfModalModel {
+///         var model: VHalfModalModel = .init()
 ///
-///     model.layout.contentMargins.leading = VBaseViewModel.Layout().navBarMarginHorizontal
-///     model.layout.contentMargins.trailing = VBaseViewModel.Layout().navBarMarginHorizontal
+///         model.layout.contentMargins.leading = VBaseViewModel.Layout().navBarMarginHorizontal
+///         model.layout.contentMargins.trailing = VBaseViewModel.Layout().navBarMarginHorizontal
 ///
-///     model.misc.dismissType.remove(.leadingButton)
-///     model.misc.dismissType.remove(.trailingButton)
-///     model.misc.dismissType.insert(.navigationViewCloseButton)
+///         model.misc.dismissType.remove(.leadingButton)
+///         model.misc.dismissType.remove(.trailingButton)
+///         model.misc.dismissType.insert(.navigationViewCloseButton)
 ///
-///     return model
-/// }
+///         return model
+///     }
 ///
-/// var navigationViewModel: VNavigationViewModel {
-///     var model: VNavigationViewModel = .init()
-///     model.colors.background = ColorBook.layer
-///     return model
-/// }
+///     var navigationViewModel: VNavigationViewModel {
+///         var model: VNavigationViewModel = .init()
+///         model.colors.background = ColorBook.layer
+///         return model
+///     }
 ///
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vHalfModal(isPresented: $isPresented, halfModal: {
-///             VHalfModal(model: model, content: { root })
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vHalfModal(isPresented: $isPresented, halfModal: {
+///                 VHalfModal(model: model, content: { root })
+///             })
+///     }
+///
+///     var root: some View {
+///         VNavigationView(model: navigationViewModel, content: {
+///             VBaseView(title: "Home", content: {
+///                 VNavigationLink(
+///                     preset: .secondary(),
+///                     destination: destination,
+///                     title: "Navigate to Details"
+///                 )
+///                     .padding(.bottom, 200)
+///             })
+///                 .animation(nil) // Disables root animation
 ///         })
-/// }
+///     }
 ///
-/// var root: some View {
-///     VNavigationView(model: navigationViewModel, content: {
-///         VBaseView(title: "Home", content: {
-///             VNavigationLink(
-///                 preset: .secondary(),
-///                 destination: destination,
-///                 title: "Navigate to Details"
-///             )
-///                 .padding(.bottom, 200)
+///     var destination: some View {
+///         VBaseView(title: "Details", content: {
+///             ColorBook.accent
 ///         })
-///             .animation(nil) // Disables root animation
-///     })
-/// }
-///
-/// var destination: some View {
-///     VBaseView(title: "Details", content: {
-///         ColorBook.accent
-///     })
-/// }
-/// ```
+///     }
 ///
 public struct VHalfModal<Content, HeaderContent>
     where
@@ -108,7 +104,7 @@ public struct VHalfModal<Content, HeaderContent>
     fileprivate let content: () -> Content
     
     // MARK: Initializers - Header
-    /// Initializes component with header and content
+    /// Initializes component with header and content.
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
@@ -119,7 +115,7 @@ public struct VHalfModal<Content, HeaderContent>
         self.content = content
     }
     
-    /// Initializes component with header title and content
+    /// Initializes component with header title and content.
     public init(
         model: VHalfModalModel = .init(),
         headerTitle: String,
@@ -142,7 +138,7 @@ public struct VHalfModal<Content, HeaderContent>
     }
     
     // MARK: Initializers - _
-    /// Initializes component with content
+    /// Initializes component with content.
     public init(
         model: VHalfModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -157,7 +153,7 @@ public struct VHalfModal<Content, HeaderContent>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VHalfModal`
+    /// Presents `VHalfModal`.
     public func vHalfModal<Content, HeaderContent>(
         isPresented: Binding<Bool>,
         halfModal: @escaping () -> VHalfModal<Content, HeaderContent>

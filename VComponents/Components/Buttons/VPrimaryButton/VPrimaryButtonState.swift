@@ -8,22 +8,22 @@
 import Foundation
 
 // MARK: - V Primary Button State
-/// Enum that describes state, such as `enabled`, `disabled`, or `loading`
+/// Enum that describes state, such as `enabled`, `disabled`, or `loading`.
 public enum VPrimaryButtonState: Int, CaseIterable {
     // MARK: Cases
-    /// Enabled
+    /// Enabled.
     case enabled
     
-    /// Disabled
+    /// Disabled.
     case disabled
     
-    /// Loading
+    /// Loading.
     ///
-    /// Unique state during which spinner appears
+    /// Unique state during which spinner appears.
     case loading
 
     // MARK: Properties
-    /// Indicates if state is enabled
+    /// Indicates if state is enabled.
     public var isEnabled: Bool {
         switch self {
         case .enabled: return true

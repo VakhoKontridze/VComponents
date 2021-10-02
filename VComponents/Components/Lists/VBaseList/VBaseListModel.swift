@@ -8,24 +8,24 @@
 import SwiftUI
 
 // MARK: - V Base List Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VBaseListModel {
     // MARK: Properties
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Trailing margin. Defaults to `0`.
@@ -50,35 +50,35 @@ public struct VBaseListModel {
         var hasDivider: Bool { dividerHeight > 0 }
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Horizontal Margins
-        /// Sub-model containing `leading` and `trailing` margins
+        /// Sub-model containing `leading` and `trailing` margins.
         public typealias HorizontalMargins = LayoutGroup_LT
     }
     
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Divider color
+        /// Divider color.
         public var divider: Color = .init(componentAsset: "BaseList.Divider")
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 

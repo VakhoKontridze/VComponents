@@ -8,24 +8,22 @@
 import SwiftUI
 
 // MARK: - V Check Box
-/// State picker component that toggles between off, on, indeterminate, or disabled states, and displays content
+/// State picker component that toggles between off, on, indeterminate, or disabled states, and displays content.
 ///
 /// Component can be initialized with content, title, or without body. Bool can also be passed as state.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var state: VCheckBoxState = .on
+///     @State var state: VCheckBoxState = .on
 ///
-/// var body: some View {
-///     VCheckBox(
-///         state: $state,
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VCheckBox(
+///             state: $state,
+///             title: "Lorem ipsum"
+///         )
+///     }
 ///
 public struct VCheckBox<Content>: View where Content: View {
     // MARK: Properties
@@ -40,7 +38,7 @@ public struct VCheckBox<Content>: View where Content: View {
     private let content: (() -> Content)?
     
     // MARK: Initializers - State
-    /// Initializes component with state and content
+    /// Initializes component with state and content.
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>,
@@ -51,7 +49,7 @@ public struct VCheckBox<Content>: View where Content: View {
         self.content = content
     }
 
-    /// Initializes component with state and title
+    /// Initializes component with state and title.
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>,
@@ -73,7 +71,7 @@ public struct VCheckBox<Content>: View where Content: View {
         )
     }
     
-    /// Initializes component with state
+    /// Initializes component with state.
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>
@@ -86,7 +84,7 @@ public struct VCheckBox<Content>: View where Content: View {
     }
     
     // MARK: Initializers - Bool
-    /// Initializes component with bool and content
+    /// Initializes component with bool and content.
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,
@@ -99,7 +97,7 @@ public struct VCheckBox<Content>: View where Content: View {
         )
     }
 
-    /// Initializes component with bool and title
+    /// Initializes component with bool and title.
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,
@@ -121,7 +119,7 @@ public struct VCheckBox<Content>: View where Content: View {
         )
     }
 
-    /// Initializes component with bool
+    /// Initializes component with bool.
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>

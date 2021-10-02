@@ -8,25 +8,23 @@
 import SwiftUI
 
 // MARK: - V Web Link
-/// Button component that controls a navigation presentation to an URL
+/// Button component that controls a navigation presentation to an URL.
 ///
-/// Component can be initialized with content or title
+/// Component can be initialized with content or title.
 ///
-/// Component supports presets or existing button types
+/// Component supports presets or existing button types.
 ///
-/// State can be passed as parameter
+/// State can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VWebLink(
-///         preset: .secondary(),
-///         url: .init(string: "https://www.apple.com"),
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VWebLink(
+///             preset: .secondary(),
+///             url: .init(string: "https://www.apple.com"),
+///             title: "Lorem ipsum"
+///         )
+///     }
 ///
 public struct VWebLink<Content>: View where Content: View {
     // MARK: Properties
@@ -38,7 +36,7 @@ public struct VWebLink<Content>: View where Content: View {
     private let content: () -> Content
     
     // MARK: Initializers - Preset
-    /// Initializes component with preset, url and content
+    /// Initializes component with preset, url and content.
     public init(
         preset linkPreset: VWebLinkPreset,
         state: VWebLinkState = .enabled,
@@ -51,7 +49,7 @@ public struct VWebLink<Content>: View where Content: View {
         self.content = content
     }
     
-    /// Initializes component with preset, url and title
+    /// Initializes component with preset, url and title.
     public init(
         preset linkPreset: VWebLinkPreset,
         state: VWebLinkState = .enabled,
@@ -69,7 +67,7 @@ public struct VWebLink<Content>: View where Content: View {
     }
     
     // MARK: Initializers - Custom
-    /// Initializes component with url and content
+    /// Initializes component with url and content.
     public init(
         state: VWebLinkState = .enabled,
         url: URL?,

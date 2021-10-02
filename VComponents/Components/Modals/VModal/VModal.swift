@@ -8,30 +8,28 @@
 import SwiftUI
 
 // MARK: - V Modal
-/// Modal component that draws a background, hosts content, and is present when condition is true
+/// Modal component that draws a background, hosts content, and is present when condition is true.
 ///
-/// Model and header can be passed as parameters
+/// Model and header can be passed as parameters.
 ///
-/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vModal(isPresented: $isPresented, modal: {
-///             VModal(
-///                 headerTitle: "Lorem ipsum dolor sit amet",
-///                 content: { ColorBook.accent }
-///             )
-///         })
-/// }
-/// ```
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vModal(isPresented: $isPresented, modal: {
+///                 VModal(
+///                     headerTitle: "Lorem ipsum dolor sit amet",
+///                     content: { ColorBook.accent }
+///                 )
+///             })
+///     }
 ///
 public struct VModal<Content, HeaderContent>
     where
@@ -45,7 +43,7 @@ public struct VModal<Content, HeaderContent>
     fileprivate let content: () -> Content
     
     // MARK: Initializers - Header
-    /// Initializes component with header and content
+    /// Initializes component with header and content.
     public init(
         model: VModalModel = .init(),
         @ViewBuilder headerContent: @escaping () -> HeaderContent,
@@ -56,7 +54,7 @@ public struct VModal<Content, HeaderContent>
         self.content = content
     }
     
-    /// Initializes component with header title and content
+    /// Initializes component with header title and content.
     public init(
         model: VModalModel = .init(),
         headerTitle: String,
@@ -79,7 +77,7 @@ public struct VModal<Content, HeaderContent>
     }
     
     // MARK: Initializers - _
-    /// Initializes component content
+    /// Initializes component content.
     public init(
         model: VModalModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -94,7 +92,7 @@ public struct VModal<Content, HeaderContent>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VModal`
+    /// Presents `VModal`.
     public func vModal<Content, headerContent>(
         isPresented: Binding<Bool>,
         modal: @escaping () -> VModal<Content, headerContent>

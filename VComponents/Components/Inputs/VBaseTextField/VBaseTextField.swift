@@ -8,61 +8,55 @@
 import SwiftUI
 
 // MARK: - V Base Text Field
-/// Core component that is used throughout the framework as textfield
+/// Core component that is used throughout the framework as textfield.
 ///
-/// Model, state, placeholder, event callbacks, and button action can be passed as parameters
+/// Model, state, placeholder, event callbacks, and button action can be passed as parameters.
 ///
-/// It is possible to override action of return button by passing it as a parameter
+/// It is possible to override action of return button by passing it as a parameter.
 ///
-/// If two TextField's state is managed by a single property, unpredictable behaviors would occur
+/// If two TextField's state is managed by a single property, unpredictable behaviors would occur.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var text: String = "Lorem ipsum"
+///     @State var text: String = "Lorem ipsum"
 ///
-/// var body: some View {
-///     VBaseTextField(
-///         placeholder: "Lorem ipsum",
-///         text: $text
-///     )
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VBaseTextField(
+///             placeholder: "Lorem ipsum",
+///             text: $text
+///         )
+///             .padding()
+///     }
 ///
 /// Textfield can also be focused externally by passing state:
 ///
-/// ```
-/// @State var state: VBaseTextFieldState = .focused
-/// @State var text: String = "Lorem ipsum"
+///     @State var state: VBaseTextFieldState = .focused
+///     @State var text: String = "Lorem ipsum"
 ///
-/// var body: some View {
-///     VBaseTextField(
-///         state: $state,
-///         placeholder: "Lorem ipsum",
-///         text: $text
-///     )
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VBaseTextField(
+///             state: $state,
+///             placeholder: "Lorem ipsum",
+///             text: $text
+///         )
+///             .padding()
+///     }
 ///
 /// Full use of overriden action and event callbacks:
 ///
-/// ```
-/// @State var text: String = "Lorem ipsum"
+///     @State var text: String = "Lorem ipsum"
 ///
-/// var body: some View {
-///     VBaseTextField(
-///         placeholder: "Lorem ipsum",
-///         text: $text,
-///         onBegin: { print("Editing Began") },
-///         onChange: {  print("Editing Changed") },
-///         onEnd: { print("Editing Ended") },
-///         onReturn: .returnAndCustom({ print("Returned and ...") })
-///     )
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VBaseTextField(
+///             placeholder: "Lorem ipsum",
+///             text: $text,
+///             onBegin: { print("Editing Began") },
+///             onChange: {  print("Editing Changed") },
+///             onEnd: { print("Editing Ended") },
+///             onReturn: .returnAndCustom({ print("Returned and ...") })
+///         )
+///             .padding()
+///     }
 ///
 public struct VBaseTextField: View {
     private let model: VBaseTextFieldModel
@@ -97,7 +91,7 @@ public struct VBaseTextField: View {
     private let returnAction: VBaseTextFieldReturnButtonAction
     
     // MARK: Initialiers
-    /// Initializes component with state and text
+    /// Initializes component with state and text.
     public init(
         model: VBaseTextFieldModel = .init(),
         state: Binding<VBaseTextFieldState>,
@@ -119,7 +113,7 @@ public struct VBaseTextField: View {
         self.returnAction = returnAction
     }
     
-    /// Initializes component with text
+    /// Initializes component with text.
     public init(
         model: VBaseTextFieldModel = .init(),
         placeholder: String? = nil,

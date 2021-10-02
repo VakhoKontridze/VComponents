@@ -8,33 +8,33 @@
 import SwiftUI
 
 // MARK: - V Segmented Picker Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VSegmentedPickerModel {
     // MARK: Properties
-    /// Reference to `VToggleModel`
+    /// Reference to `VToggleModel`.
     public static let toggleReference: VToggleModel = .init()
     
-    /// Reference to `VSliderModel`
+    /// Reference to `VSliderModel`.
     public static let sliderReference: VSliderModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Picker height. Defaults to `31`, similarly to native picker.
@@ -71,12 +71,12 @@ public struct VSegmentedPickerModel {
         public var dividerSize: CGSize = .init(width: 1, height: 19)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
         /// Content opacities
@@ -85,65 +85,65 @@ public struct VSegmentedPickerModel {
             disabledOpacity: 0.5
         )
         
-        /// Text content colors
+        /// Text content colors.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var textContent: StateColors = .init(
             enabled: ColorBook.primary,
             disabled: ColorBook.primary
         )
         
-        /// Selection indicator colors
+        /// Selection indicator colors.
         public var indicator: StateColors = .init(
             enabled: .init(componentAsset: "SegmentedPicker.Indicator.enabled"),
             disabled: .init(componentAsset: "SegmentedPicker.Indicator.disabled")
         )
         
-        /// Selection indicator shadow colors
+        /// Selection indicator shadow colors.
         public var indicatorShadow: StateColors = .init(
             enabled: sliderReference.colors.thumbShadow.enabled,
             disabled: sliderReference.colors.thumbShadow.disabled
         )
         
-        /// Background colors
+        /// Background colors.
         public var background: StateColors = .init(
             enabled: .init(componentAsset: "SegmentedPicker.Background.enabled"),
             disabled: toggleReference.colors.fill.disabled
         )
         
-        /// Header colors
+        /// Header colors.
         public var header: StateColors = .init(
             enabled: .init(componentAsset: "SegmentedPicker.Header"),
             disabled: .init(componentAsset: "SegmentedPicker.Header")
         )
         
-        /// Footer colors
+        /// Footer colors.
         public var footer: StateColors = .init(
             enabled: ColorBook.secondary,
             disabled: ColorBook.secondary
         )
         
-        /// Row divider colors
+        /// Row divider colors.
         public var divider: StateColors = .init(
             enabled: .init(componentAsset: "SegmentedPicker.Divider.enabled"),
             disabled: .init(componentAsset: "SegmentedPicker.Divider.disabled")
         )
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_ED
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states
+        /// Sub-model containing opacities for component states.
         public typealias StateOpacities = StateOpacities_PD
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
         /// Header font. Defaults to system font of size `14`.
@@ -154,23 +154,23 @@ public struct VSegmentedPickerModel {
         
         /// Row font. Defaults to system font of size `14` with `medium` weight.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var rows: Font = .system(size: 14, weight: .medium)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeInOut` with duration `0.2`.
         public var selection: Animation? = .easeInOut(duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 }

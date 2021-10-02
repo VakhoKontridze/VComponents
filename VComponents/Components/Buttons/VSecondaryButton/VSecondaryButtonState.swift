@@ -8,13 +8,13 @@
 import Foundation
 
 // MARK: - V Secondary Button State
-/// Enum that describes state, such as `enabled` or `disabled`
+/// Enum that describes state, such as `enabled` or `disabled`.
 public enum VSecondaryButtonState: Int, CaseIterable {
     // MARK: Cases
-    /// Enabled
+    /// Enabled.
     case enabled
     
-    /// Disabled
+    /// Disabled.
     case disabled
     
     // MARK: Properties

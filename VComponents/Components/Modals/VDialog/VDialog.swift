@@ -8,44 +8,42 @@
 import SwiftUI
 
 // MARK: - V Dialog
-/// Modal component that presents dialog when condition is true
+/// Modal component that presents dialog when condition is true.
 ///
-/// Model, title, description, and content can be passed as parameters
+/// Model, title, description, and content can be passed as parameters.
 ///
 /// Dialog can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
 ///
-/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vDialog(isPresented: $isPresented, dialog: {
-///             VDialog(
-///                 buttons: .two(
-///                     primary: .init(
-///                         model: .primary,
-///                         title: "Confirm",
-///                         action: { print("Confirmed") }
-///                     ),
-///                     secondary: .init(
-///                         model: .secondary,
-///                         title: "Cancel",
-///                         action: { print("Cancelled") }
-///                     )
-///                 ),
-///                 title: "Lorem ipsum dolor sit amet",
-///                 description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
 ///         )
-///     })
-/// }
-/// ```
+///             .vDialog(isPresented: $isPresented, dialog: {
+///                 VDialog(
+///                     buttons: .two(
+///                         primary: .init(
+///                             model: .primary,
+///                             title: "Confirm",
+///                             action: { print("Confirmed") }
+///                         ),
+///                         secondary: .init(
+///                             model: .secondary,
+///                             title: "Cancel",
+///                             action: { print("Cancelled") }
+///                         )
+///                     ),
+///                     title: "Lorem ipsum dolor sit amet",
+///                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///                 )
+///         })
+///     }
 ///
 public struct VDialog<Content> where Content: View {
     // MARK: Properties
@@ -56,7 +54,7 @@ public struct VDialog<Content> where Content: View {
     fileprivate let content: (() -> Content)?
     
     // MARK: Initializers
-    /// Initializes component with buttons, title, description, and content
+    /// Initializes component with buttons, title, description, and content.
     public init(
         model: VDialogModel = .init(),
         buttons dialogButtons: VDialogButtons,
@@ -71,7 +69,7 @@ public struct VDialog<Content> where Content: View {
         self.content = content
     }
     
-    /// Initializes component with buttons, title, and description
+    /// Initializes component with buttons, title, and description.
     public init(
         model: VDialogModel = .init(),
         buttons dialogButtons: VDialogButtons,
@@ -90,7 +88,7 @@ public struct VDialog<Content> where Content: View {
 
 // MARK: - Extension
 extension View {
-    /// Presents `VDialog`
+    /// Presents `VDialog`.
     public func vDialog<Content>(
         isPresented: Binding<Bool>,
         dialog: @escaping () -> VDialog<Content>

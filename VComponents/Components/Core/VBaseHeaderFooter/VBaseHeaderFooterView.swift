@@ -8,20 +8,18 @@
 import SwiftUI
 
 // MARK: - V Base Header Footer
-/// Core component that is used throughout the framework
+/// Core component that is used throughout the framework.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VBaseHeaderFooter(
-///         frameType: .fixed
-///         font: .body,
-///         color: ColorBook.primary,
-///         title: "Lorem ipsum dolor sit amet"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VBaseHeaderFooter(
+///             frameType: .fixed
+///             font: .body,
+///             color: ColorBook.primary,
+///             title: "Lorem ipsum dolor sit amet"
+///         )
+///     }
 ///
 public struct VBaseHeaderFooter: View {
     // MARK: Proeprties
@@ -32,7 +30,7 @@ public struct VBaseHeaderFooter: View {
     private let title: String
     
     // MARK: Initializers
-    /// Initializes component with frame type, font, color, and title
+    /// Initializes component with frame type, font, color, and title.
     public init(
         frameType: VBaseHeaderFooterFrameType,
         font: Font,

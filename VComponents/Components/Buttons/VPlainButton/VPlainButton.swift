@@ -8,23 +8,21 @@
 import SwiftUI
 
 // MARK: - V Plain Button
-/// Plain button component that performs action when triggered
+/// Plain button component that performs action when triggered.
 ///
-/// Component can be initialized with content or title
+/// Component can be initialized with content or title.
 ///
-/// Model and state can be passed as parameters
+/// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VPlainButton(
-///         action: { print("Pressed") },
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
-///
+///     var body: some View {
+///         VPlainButton(
+///             action: { print("Pressed") },
+///             title: "Lorem ipsum"
+///         )
+///     }
+///     
 public struct VPlainButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VPlainButtonModel
@@ -38,7 +36,7 @@ public struct VPlainButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    /// Initializes component with action and content
+    /// Initializes component with action and content.
     public init(
         model: VPlainButtonModel = .init(),
         state: VPlainButtonState = .enabled,
@@ -51,7 +49,7 @@ public struct VPlainButton<Content>: View where Content: View {
         self.content = content
     }
 
-    /// Initializes component with action and title
+    /// Initializes component with action and title.
     public init(
         model: VPlainButtonModel = .init(),
         state: VPlainButtonState = .enabled,

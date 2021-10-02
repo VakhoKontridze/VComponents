@@ -8,20 +8,18 @@
 import SwiftUI
 
 // MARK: - V Close Button
-/// Circular colored close button component that performs action when triggered
+/// Circular colored close button component that performs action when triggered.
 ///
-/// Model and state can be passed as parameters
+/// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VCloseButton(action: {
-///         print("Pressed")
-///     })
-/// }
-/// ```
-///
+///     var body: some View {
+///         VCloseButton(action: {
+///             print("Pressed")
+///         })
+///     }
+///     
 public struct VCloseButton: View {
     // MARK: Properties
     private let model: VCloseButtonModel
@@ -33,7 +31,7 @@ public struct VCloseButton: View {
     private let action: () -> Void
     
     // MARK: Initializers
-    /// Initializes component with action
+    /// Initializes component with action.
     public init(
         model: VCloseButtonModel = .init(),
         state: VCloseButtonState = .enabled,

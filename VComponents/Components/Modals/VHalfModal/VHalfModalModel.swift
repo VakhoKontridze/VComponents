@@ -8,42 +8,42 @@
 import SwiftUI
 
 // MARK: - V Half Modal Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VHalfModalModel {
     // MARK: Properties
-    /// Reference to `VSheetModel`
+    /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to `VModalModel`
+    /// Reference to `VModalModel`.
     public static let modalReference: VModalModel = .init()
     
-    /// Reference to `VAccordionModel`
+    /// Reference to `VAccordionModel`.
     public static let accordionReference: VAccordionModel = .init()
     
-    /// Reference to `VCloseButtonModel`
+    /// Reference to `VCloseButtonModel`.
     public static let closeButtonReference: VCloseButtonModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Height type. Defaults to `default`.
@@ -135,32 +135,32 @@ public struct VHalfModalModel {
         
         /// Navigation bar trailing item margin trailing. Defaults to `42`.
         ///
-        /// Since close button is overlayed on modal, it's essential to create spacing between close button and `VBaseView`'s trailing items
+        /// Since close button is overlayed on modal, it's essential to create spacing between close button and `VBaseView`'s trailing items.
         public static var navBarTrailingItemMarginTrailing: CGFloat {
             VCloseButtonModel.Layout().dimension +
             Self().headerSpacing
         }
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
+        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = LayoutGroup_LTTB
         
         // MARK: Vertical Margins
-        /// Sub-model containing `top` and `bottom` margins
+        /// Sub-model containing `top` and `bottom` margins.
         public typealias VerticalMargins  = LayoutGroup_TB
         
         // MARK: Height Type
-        /// Enum that describes height type, such as `fixed` or `dynamic`
+        /// Enum that describes height type, such as `fixed` or `dynamic`.
         public enum HeightType {
             // MARK: Cases
-            /// Fixed height
+            /// Fixed height.
             case fixed(_ value: CGFloat)
             
-            /// Dynamic height that changes between `min`, `ideal`, and `max`
+            /// Dynamic height that changes between `min`, `ideal`, and `max`.
             case dynamic(min: CGFloat, ideal: CGFloat, max: CGFloat)
             
             /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
@@ -204,61 +204,61 @@ public struct VHalfModalModel {
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Background color
+        /// Background color.
         public var background: Color = modalReference.colors.background
         
-        /// Resize indicator color
+        /// Resize indicator color.
         public var resizeIndicator: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
         
-        /// Text header color
+        /// Text header color.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var headerText: Color = modalReference.colors.headerText
         
-        /// Close button background colors
+        /// Close button background colors.
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
         
-        /// Close button icon colors and opacities
+        /// Close button icon colors and opacities.
         public var closeButtonIcon: StateColorsAndOpacities = modalReference.colors.closeButtonIcon
         
-        /// Header divider color
+        /// Header divider color.
         public var headerDivider: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
         
-        /// Blinding color
+        /// Blinding color.
         public var blinding: Color = modalReference.colors.blinding
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states
+        /// Sub-model containing colors for component states.
         public typealias StateColors = StateColors_EPD
         
         // MARK: State Colors and Opaciites
-        /// Sub-model containing colors and opacities for component states
+        /// Sub-model containing colors and opacities for component states.
         public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font
+        /// Header font.
         ///
-        /// Only applicable when using init with title
+        /// Only applicable when using init with title.
         public var header: Font = modalReference.fonts.header
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Defaults to `linear` with duration `0.2`.
@@ -274,37 +274,37 @@ public struct VHalfModalModel {
         static var dragDisappear: BasicAnimation { .init(curve: .easeIn, duration: 0.1) }
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: Set<DismissType> = .default
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Dismiss Type
-        /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, `backtap`, or `pullDown`
+        /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, `backtap`, or `pullDown`.
         public enum DismissType: Int, CaseIterable {
-            /// Leading
+            /// Leading.
             case leadingButton
             
-            /// Trailing
+            /// Trailing.
             case trailingButton
             
-            /// Back tap
+            /// Back tap.
             case backTap
             
-            /// Dragging modal down
+            /// Dragging modal down.
             case pullDown
             
-            /// Close button for when modal contains `VNavigationView` as content
+            /// Close button for when modal contains `VNavigationView` as content.
             case navigationViewCloseButton
         }
     }

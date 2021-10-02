@@ -8,24 +8,22 @@
 import SwiftUI
 
 // MARK: - V Spinner
-/// Indicator component that indicates activity
+/// Indicator component that indicates activity.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VSpinner()
-/// }
-/// ```
+///     var body: some View {
+///         VSpinner()
+///     }
 ///
 public struct VSpinner: View {
     // MARK: Proeprties
     private let spinnerType: VSpinnerType
     
     // MARK: Initializers
-    /// Initializes component
+    /// Initializes component.
     public init(
         type spinnerType: VSpinnerType = .default
     ) {

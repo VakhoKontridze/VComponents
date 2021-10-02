@@ -8,50 +8,50 @@
 import SwiftUI
 
 // MARK: - V Base Text Field Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VBaseTextFieldModel {
     // MARK: Properties
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Textfield text alignment. Defaults to `default`.
         public var textAlignment: TextAlignment = .default
 
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Text Alignment
-        /// Enum that describes text alignment, such as `center`, `leading`, `trailing`, or `auto`
+        /// Enum that describes text alignment, such as `center`, `leading`, `trailing`, or `auto`.
         public enum TextAlignment: Int, CaseIterable {
             // MARK: Cases
-            /// Center alignment
+            /// Center alignment.
             case center
             
-            /// Leading alignment
+            /// Leading alignment.
             case leading
             
-            /// Trailing alignment
+            /// Trailing alignment.
             case trailing
             
-            /// Auto alignment based on the current localization of the app
+            /// Auto alignment based on the current localization of the app.
             case auto
             
             /// Default value. Set to `leading`.
@@ -70,10 +70,10 @@ public struct VBaseTextFieldModel {
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Text colors and opacities
+        /// Text colors and opacities.
         public var text: StateColorsAndOpacities = .init(
             enabled: ColorBook.primary,
             disabled: ColorBook.primary,
@@ -81,28 +81,28 @@ public struct VBaseTextFieldModel {
         )
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors and Opacities
-        /// Sub-model containing colors and opacities for component states
+        /// Sub-model containing colors and opacities for component states.
         public typealias StateColorsAndOpacities = StateColorsAndOpacities_EP_D
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties
+    /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
         /// Text font. Defaults to system font of size `16`.
         public var text: UIFont = .systemFont(ofSize: 16)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
     
     // MARK: Misc
-    /// Sub-model containing misc properties
+    /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if secure entry is enabled. Defaults to `false`.
@@ -127,7 +127,7 @@ public struct VBaseTextFieldModel {
         public var returnButton: UIReturnKeyType = .default
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 }

@@ -8,26 +8,24 @@
 import SwiftUI
 
 // MARK: - V Range Slider
-/// Value picker component that selects values from a bounded linear range of values to represent a range
+/// Value picker component that selects values from a bounded linear range of values to represent a range.
 ///
-/// Model, range, step, state, and onChange callbacks can be passed as parameters
+/// Model, range, step, state, and onChange callbacks can be passed as parameters.
 ///
-/// If invalid value parameters are passed during init, layout would invalidate itself, and refuse to draw
+/// If invalid value parameters are passed during init, layout would invalidate itself, and refuse to draw.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var valueLow: Double = 0.3
-/// @State var valueHigh: Double = 0.8
+///     @State var valueLow: Double = 0.3
+///     @State var valueHigh: Double = 0.8
 ///
-/// var body: some View {
-///     VRangeSlider(
-///         difference: 0.1,
-///         valueLow: $valueLow,
-///         valueHigh: $valueHigh
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VRangeSlider(
+///             difference: 0.1,
+///             valueLow: $valueLow,
+///             valueHigh: $valueHigh
+///         )
+///     }
 ///
 public struct VRangeSlider: View {
     // MARK: Properties
@@ -51,7 +49,7 @@ public struct VRangeSlider: View {
     private let isLayoutValid: Bool
 
     // MARK: Initializers
-    /// Initializes component with diffrene, and low and high values
+    /// Initializes component with diffrene, and low and high values.
     public init<V>(
         model: VRangeSliderModel = .init(),
         range: ClosedRange<V> = 0...1,

@@ -8,29 +8,27 @@
 import SwiftUI
 
 // MARK: - V Side Bar
-/// Modal component that draws a from left side with background, hosts content, and is present when condition is true
+/// Modal component that draws a from left side with background, hosts content, and is present when condition is true.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
-/// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen
+/// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var isPresented: Bool = false
+///     @State var isPresented: Bool = false
 ///
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { isPresented = true },
-///         title: "Present"
-///     )
-///         .vSideBar(isPresented: $isPresented, sideBar: {
-///             VSideBar(content: {
-///                 ColorBook.accent
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vSideBar(isPresented: $isPresented, sideBar: {
+///                 VSideBar(content: {
+///                     ColorBook.accent
+///                 })
 ///             })
-///         })
-/// }
-/// ```
+///     }
 ///
 public struct VSideBar<Content> where Content: View {
     // MARK: Properties
@@ -38,7 +36,7 @@ public struct VSideBar<Content> where Content: View {
     fileprivate let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with content
+    /// Initializes component with content.
     public init(
         model: VSideBarModel = .init(),
         @ViewBuilder content: @escaping () -> Content
@@ -50,7 +48,7 @@ public struct VSideBar<Content> where Content: View {
 
 // MARK: - Extension
 extension View {
-    /// Presents side bar
+    /// Presents `VSideBar`.
     public func vSideBar<Content>(
         isPresented: Binding<Bool>,
         sideBar: @escaping () -> VSideBar<Content>

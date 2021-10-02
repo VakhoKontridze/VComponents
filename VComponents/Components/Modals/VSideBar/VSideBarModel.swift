@@ -8,33 +8,33 @@
 import SwiftUI
 
 // MARK: - V Side Bar Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VSideBarModel {
     // MARK: Properties
-    /// Reference to `VSheetModel`
+    /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to `VModalModel`
+    /// Reference to `VModalModel`.
     public static let modalReference: VModalModel = .init()
     
-    /// Reference to `VHalfModalModel`
+    /// Reference to `VHalfModalModel`.
     public static let halfModalReference: VHalfModalModel = .init()
     
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Side bar width. Defaults to `0.67` ratio of screen with.
@@ -72,31 +72,31 @@ public struct VSideBarModel {
         public var translationToDismiss: CGFloat = 100
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins
+        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = LayoutGroup_LTTB
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Background color
+        /// Background color.
         public var background: Color = modalReference.colors.background
         
-        /// Blinding color
+        /// Blinding color.
         public var blinding: Color = modalReference.colors.blinding
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties
+    /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Defaults to `linear` with duration `0.2`.

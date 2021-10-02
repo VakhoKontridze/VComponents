@@ -8,33 +8,31 @@
 import SwiftUI
 
 // MARK: - V Menu
-/// Modal component that presents menu of actions
+/// Modal component that presents menu of actions.
 ///
-/// Preset and state can be passed as parameters
+/// Preset and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// VMenu(
-///     preset: .secondary(),
-///     rows: [
-///         .titledSystemIcon(action: {}, title: "One", name: "swift"),
-///         .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
-///         .button(action: {}, title: "Three"),
-///         .button(action: {}, title: "Four"),
-///         .menu(title: "Five...", rows: [
-///             .button(action: {}, title: "One"),
-///             .button(action: {}, title: "Two"),
+///     VMenu(
+///         preset: .secondary(),
+///         rows: [
+///             .titledSystemIcon(action: {}, title: "One", name: "swift"),
+///             .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
 ///             .button(action: {}, title: "Three"),
-///             .menu(title: "Four...", rows: [
+///             .button(action: {}, title: "Four"),
+///             .menu(title: "Five...", rows: [
 ///                 .button(action: {}, title: "One"),
 ///                 .button(action: {}, title: "Two"),
+///                 .button(action: {}, title: "Three"),
+///                 .menu(title: "Four...", rows: [
+///                     .button(action: {}, title: "One"),
+///                     .button(action: {}, title: "Two"),
+///                 ])
 ///             ])
-///         ])
-///     ],
-///     title: "Lorem ipsum"
-/// )
-/// ```
+///         ],
+///         title: "Lorem ipsum"
+///     )
 ///
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
@@ -44,7 +42,7 @@ public struct VMenu<Label>: View where Label: View {
     private let label: () -> Label
     
     // MARK: Initializers - Preset
-    /// Initializes component with preset, rows, and label
+    /// Initializes component with preset, rows, and label.
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
         state: VMenuState = .enabled,
@@ -57,7 +55,7 @@ public struct VMenu<Label>: View where Label: View {
         self.label = label
     }
     
-    /// Initializes component with preset, rows, and title
+    /// Initializes component with preset, rows, and title.
     public init(
         preset menuButtonPreset: VMenuButtonPreset,
         state: VMenuState = .enabled,
@@ -75,7 +73,7 @@ public struct VMenu<Label>: View where Label: View {
     }
     
     // MARK: Initializers - Custom
-    /// Initializes component with rows and label
+    /// Initializes component with rows and label.
     public init(
         state: VMenuState = .enabled,
         rows: [VMenuRow],

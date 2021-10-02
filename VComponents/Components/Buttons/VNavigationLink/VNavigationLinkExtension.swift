@@ -9,40 +9,39 @@ import SwiftUI
 
 // MARK: - Extension
 extension View {
-    /// Allows for navigation without an explicit `VNavigationLink`
+    /// Allows for navigation without an explicit `VNavigationLink`.
     ///
-    /// # Usage Example #
-    /// ```
-    /// @State var isActive: Bool = false
+    /// Usage Example:
     ///
-    /// var body: some View {
-    ///     VNavigationView(content: {
-    ///         VBaseView(title: "Home", content: {
+    ///     @State var isActive: Bool = false
+    ///
+    ///     var body: some View {
+    ///         VNavigationView(content: {
+    ///             VBaseView(title: "Home", content: {
+    ///                 ZStack(content: {
+    ///                     ColorBook.canvas.edgesIgnoringSafeArea(.all)
+    ///
+    ///                     VSheet()
+    ///
+    ///                     VPlainButton(
+    ///                         action: { isActive = true },
+    ///                         title: "Lorem ipsum"
+    ///                     )
+    ///                 })
+    ///                     .vNavigationLink(isActive: $isActive, destination: destination)
+    ///             })
+    ///         })
+    ///     }
+    ///
+    ///     var destination: some View {
+    ///         VBaseView(title: "Destination", content: {
     ///             ZStack(content: {
     ///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
     ///
     ///                 VSheet()
-    ///
-    ///                 VPlainButton(
-    ///                     action: { isActive = true },
-    ///                     title: "Lorem ipsum"
-    ///                 )
     ///             })
-    ///                 .vNavigationLink(isActive: $isActive, destination: destination)
     ///         })
-    ///     })
-    /// }
-    ///
-    /// var destination: some View {
-    ///     VBaseView(title: "Destination", content: {
-    ///         ZStack(content: {
-    ///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-    ///
-    ///             VSheet()
-    ///         })
-    ///     })
-    /// }
-    /// ```
+    ///     }
     ///
     @ViewBuilder public func vNavigationLink<Destination>(
         isActive: Binding<Bool>,

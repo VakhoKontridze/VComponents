@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Base List
-/// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data
+/// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
-/// Model, and layout can be passed as parameters
+/// Model, and layout can be passed as parameters.
 ///
 /// There are three posible layouts:
 ///
@@ -23,32 +23,30 @@ import SwiftUI
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// struct ListRow: Identifiable {
-///     let id: UUID = .init()
-///     let title: String
-/// }
+///     struct ListRow: Identifiable {
+///         let id: UUID = .init()
+///         let title: String
+///     }
 ///
-/// @State var data: [ListRow] = [
-///     .init(title: "Red"),
-///     .init(title: "Green"),
-///     .init(title: "Blue")
-/// ]
+///     @State var data: [ListRow] = [
+///         .init(title: "Red"),
+///         .init(title: "Green"),
+///         init(title: "Blue")
+///     ]
 ///
-/// var body: some View {
-///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///     var body: some View {
+///         ZStack(alignment: .top, content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VBaseList(data: data, rowContent: { row in
-///             Text(row.title)
-///                 .frame(maxWidth: .infinity, alignment: .leading)
+///             VBaseList(data: data, rowContent: { row in
+///                 Text(row.title)
+///                     .frame(maxWidth: .infinity, alignment: .leading)
+///             })
+///                 .padding()
 ///         })
-///             .padding()
-///     })
-/// }
-/// ```
+///     }
 ///
 public struct VBaseList<Data, ID, RowContent>: View
     where
@@ -67,7 +65,7 @@ public struct VBaseList<Data, ID, RowContent>: View
     typealias Element = VBaseListElement<ID, Data.Element>
     
     // MARK: Initializers - View Builder
-    /// Initializes component with data, id, and row content
+    /// Initializes component with data, id, and row content.
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .default,
@@ -82,7 +80,7 @@ public struct VBaseList<Data, ID, RowContent>: View
     }
     
     // MARK: Initializers - Identified View Builder
-    /// Initializes component with data and row content
+    /// Initializes component with data and row content.
     public init(
         model: VBaseListModel = .init(),
         layout layoutType: VBaseListLayoutType = .default,

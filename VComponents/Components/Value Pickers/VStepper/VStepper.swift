@@ -8,20 +8,18 @@
 import SwiftUI
 
 // MARK: - V Stepper
-/// Value picker component that selects value from a bounded linear range of values
+/// Value picker component that selects value from a bounded linear range of values.
 ///
-/// Model, step, and state can be passed as parameters
+/// Model, step, and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var value: Double = 0.5
+///     @State var value: Double = 0.5
 ///
-/// var body: some View {
-///     VStepper(range: 1...10, value: $value)
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VStepper(range: 1...10, value: $value)
+///             .padding()
+///     }
 ///
 public struct VStepper: View {
     // MARK: Properties
@@ -48,7 +46,7 @@ public struct VStepper: View {
     @State private var shouldSkipIncrementBecauseOfLongPressIncrementFinish: Bool = false
     
     // MARK: Initializers
-    /// Initializes component with range and value
+    /// Initializes component with range and value.
     public init(
         model: VStepperModel = .init(),
         range: ClosedRange<Int>,

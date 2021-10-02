@@ -8,11 +8,11 @@
 import SwiftUI
 
 // MARK: - V Accordion
-/// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data
+/// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
-/// Component can be initialized with data or free content
+/// Component can be initialized with data or free content.
 ///
-/// Model and layout can be passed as parameters
+/// Model and layout can be passed as parameters.
 ///
 /// There are three posible layouts:
 ///
@@ -25,41 +25,39 @@ import SwiftUI
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// struct AccordionRow: Identifiable {
-///     let id: UUID = .init()
-///     let title: String
-/// }
+///     struct AccordionRow: Identifiable {
+///         let id: UUID = .init()
+///         let title: String
+///     }
 ///
-/// @State var state: VAccordionState = .expanded
-/// @State var data: [AccordionRow] = [
-///     .init(title: "Red"),
-///     .init(title: "Green"),
-///     .init(title: "Blue")
-/// ]
+///     @State var state: VAccordionState = .expanded
+///     @State var data: [AccordionRow] = [
+///         .init(title: "Red"),
+///         .init(title: "Green"),
+///         .init(title: "Blue")
+///     ]
 ///
-/// var body: some View {
-///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///     var body: some View {
+///         ZStack(alignment: .top, content: {
+///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///         VAccordion(
-///             state: $state,
-///             headerTitle: "Lorem ipsum dolor sit amet",
-///             data: data,
-///             rowContent: { row in
-///                 Text(row.title)
-///                     .frame(
-///                         maxWidth: .infinity,
-///                         alignment: .leading
-///                     )
-///             }
-///         )
-///             .padding()
-///     })
-/// }
-/// ```
+///             VAccordion(
+///                 state: $state,
+///                 headerTitle: "Lorem ipsum dolor sit amet",
+///                 data: data,
+///                 rowContent: { row in
+///                     Text(row.title)
+///                         .frame(
+///                             maxWidth: .infinity,
+///                             alignment: .leading
+///                         )
+///                 }
+///             )
+///                 .padding()
+///         })
+///     }
 ///
 public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     where
@@ -85,7 +83,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
     
     // MARK: Initializers - View Builder
-    /// Initializes component with state, header, data, id, and row content
+    /// Initializes component with state, header, data, id, and row content.
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -108,7 +106,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
     
-    /// Initializes component with state, header title, data, id, and row content
+    /// Initializes component with state, header title, data, id, and row content.
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -141,7 +139,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
 
     // MARK: Initializers - Identified View Builder
-    /// Initializes component with state, header, data, and row content
+    /// Initializes component with state, header, data, and row content.
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -166,7 +164,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
     
-    /// Initializes component with state, header title, data, and row content
+    /// Initializes component with state, header title, data, and row content.
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -199,7 +197,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
     
     // MARK: Initializers - Free Content
-    /// Initializes component with state, header, and free content
+    /// Initializes component with state, header, and free content.
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,
@@ -221,7 +219,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         )
     }
     
-    /// Initializes component with state, header title, and free content
+    /// Initializes component with state, header title, and free content.
     public init(
         model: VAccordionModel = .init(),
         layout layoutType: VAccordionLayoutType = .fixed,

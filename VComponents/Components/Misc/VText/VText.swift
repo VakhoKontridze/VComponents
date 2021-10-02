@@ -8,20 +8,18 @@
 import SwiftUI
 
 // MARK: - V Base Title
-/// Core component that is used throughout the framework as text
+/// Core component that is used throughout the framework as text.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VText(
-///         type: .oneLine
-///         font: .body,
-///         color: ColorBook.primary,
-///         title: "Lorem ipsum dolor sit amet"
-///     )
-/// }
-/// ```
+///     var body: some View {
+///         VText(
+///             type: .oneLine
+///             font: .body,
+///             color: ColorBook.primary,
+///             title: "Lorem ipsum dolor sit amet"
+///         )
+///     }
 ///
 public struct VText: View {
     // MARK: Properties
@@ -31,7 +29,7 @@ public struct VText: View {
     private let title: String
     
     // MARK: Initializers
-    /// Initializes component with type, font, color, and title
+    /// Initializes component with type, font, color, and title.
     public init(
         type textType: VTextType,
         font: Font,

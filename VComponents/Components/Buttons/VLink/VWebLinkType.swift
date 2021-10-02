@@ -11,9 +11,9 @@ import SwiftUI
 typealias VWebLinkType = DerivedButtonType
 
 // MARK: - V Web Link Preset
-/// Enum that describes link preset, such as `primary`, `secondary`, `square`, or `plain`
+/// Enum that describes link preset, such as `primary`, `secondary`, `square`, or `plain`.
 ///
-/// Custom type can be used via inits that do not take preset as a parameter
+/// Custom type can be used via inits that do not take preset as a parameter.
 public typealias VWebLinkPreset = DerivedButtonPreset
 
 // MARK: - Button

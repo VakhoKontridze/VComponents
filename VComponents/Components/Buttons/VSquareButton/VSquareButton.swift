@@ -8,25 +8,23 @@
 import SwiftUI
 
 // MARK: - V Square Button
-/// Squared colored button component that performs action when triggered
+/// Squared colored button component that performs action when triggered.
 ///
-/// Component can be initialized with content or title
+/// Component can be initialized with content or title.
 ///
-/// Model and state can be passed as parameters
+/// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VSquareButton(action: { print("Pressed") }, content: {
-///         Image(systemName: "swift")
-///             .resizable()
-///             .frame(width: 20, height: 20)
-///             .foregroundColor(.white)
-///     })
-/// }
-/// ```
-///
+///     var body: some View {
+///         VSquareButton(action: { print("Pressed") }, content: {
+///             Image(systemName: "swift")
+///                 .resizable()
+///                 .frame(width: 20, height: 20)
+///                 .foregroundColor(.white)
+///         })
+///     }
+///     
 public struct VSquareButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSquareButtonModel
@@ -40,7 +38,7 @@ public struct VSquareButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    /// Initializes component with action and content
+    /// Initializes component with action and content.
     public init(
         model: VSquareButtonModel = .init(),
         state: VSquareButtonState = .enabled,
@@ -53,7 +51,7 @@ public struct VSquareButton<Content>: View where Content: View {
         self.content = content
     }
 
-    /// Initializes component with action and title
+    /// Initializes component with action and title.
     public init(
         model: VSquareButtonModel = .init(),
         state: VSquareButtonState = .enabled,

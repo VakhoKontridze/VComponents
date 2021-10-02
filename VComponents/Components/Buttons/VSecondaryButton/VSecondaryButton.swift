@@ -8,23 +8,21 @@
 import SwiftUI
 
 // MARK: - V Secondary Button
-/// Small colored button component that performs action when triggered
+/// Small colored button component that performs action when triggered.
 ///
-/// Component can be initialized with content or title
+/// Component can be initialized with content or title.
 ///
-/// Model and state can be passed as parameters
+/// Model and state can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// var body: some View {
-///     VSecondaryButton(
-///         action: { print("Pressed") },
-///         title: "Lorem ipsum"
-///     )
-/// }
-/// ```
-///
+///     var body: some View {
+///         VSecondaryButton(
+///             action: { print("Pressed") },
+///             title: "Lorem ipsum"
+///         )
+///     }
+///     
 public struct VSecondaryButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSecondaryButtonModel
@@ -38,7 +36,7 @@ public struct VSecondaryButton<Content>: View where Content: View {
     private let content: () -> Content
 
     // MARK: Initializers
-    /// Initializes component with action and content
+    /// Initializes component with action and content.
     public init(
         model: VSecondaryButtonModel = .init(),
         state: VSecondaryButtonState = .enabled,
@@ -51,7 +49,7 @@ public struct VSecondaryButton<Content>: View where Content: View {
         self.content = content
     }
 
-    /// Initializes component with action and title
+    /// Initializes component with action and title.
     public init(
         model: VSecondaryButtonModel = .init(),
         state: VSecondaryButtonState = .enabled,

@@ -8,20 +8,18 @@
 import SwiftUI
 
 // MARK: - V Slider
-/// Value picker component that selects value from a bounded linear range of values
+/// Value picker component that selects value from a bounded linear range of values.
 ///
-/// Model, range, step, state, and onChange callback can be passed as parameters
+/// Model, range, step, state, and onChange callback can be passed as parameters.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var value: Double = 0.5
+///     @State var value: Double = 0.5
 ///
-/// var body: some View {
-///     VSlider(value: $value)
-///         .padding()
-/// }
-/// ```
+///     var body: some View {
+///         VSlider(value: $value)
+///             .padding()
+///     }
 ///
 public struct VSlider: View {
     // MARK: Properties
@@ -39,7 +37,7 @@ public struct VSlider: View {
     private let action: ((Bool) -> Void)?
     
     // MARK: Initializers
-    /// Initializes component with value
+    /// Initializes component with value.
     public init<V>(
         model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,

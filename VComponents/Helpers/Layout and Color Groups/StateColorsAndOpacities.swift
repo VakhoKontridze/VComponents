@@ -8,20 +8,20 @@
 import SwiftUI
 
 // MARK: - Enabled, Disabled | Disabled
-/// Color and opacity level group containing values for `enabled` and `disabled` states
+/// Color and opacity level group containing values for `enabled` and `disabled` states.
 public struct StateColorsAndOpacities_EP_D {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
-    /// Disabled opacity level
+    /// Disabled opacity level.
     public var disabledOpacity: Double
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         disabled: Color,
@@ -32,7 +32,7 @@ public struct StateColorsAndOpacities_EP_D {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -76,26 +76,26 @@ public struct StateColorsAndOpacities_EP_D {
 }
 
 // MARK: - Enabled, Pressed, Disabled | Pressed, Disabled
-/// Color and opacity level group containing values for `enabled`, `pressed`, and `disabled` states
+/// Color and opacity level group containing values for `enabled`, `pressed`, and `disabled` states.
 public struct StateColorsAndOpacities_EPD_PD {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Pressed color
+    /// Pressed color.
     public var pressed: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
-    /// Pressed opacity level
+    /// Pressed opacity level.
     public var pressedOpacity: Double
     
-    /// Disabled opacity level
+    /// Disabled opacity level.
     public var disabledOpacity: Double
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         pressed: Color,
@@ -110,7 +110,7 @@ public struct StateColorsAndOpacities_EPD_PD {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,
@@ -172,44 +172,44 @@ public struct StateColorsAndOpacities_EPD_PD {
 }
 
 // MARK: - Enabled, +Pressed, Focused, +Pressed, Success, +Pressed, Error, +Pressed, Disabled | Pressed, Disabled
-/// Color and opacity level group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states
+/// Color and opacity level group containing values for `enabled` (+`pressed`), `focused` (+`pressed`), `success` (+`pressed`), `error` (+`pressed`), and `disabled` states.
 public struct StateColors_EpFpSpEpD_PD {
     // MARK: Properties
-    /// Enabled color
+    /// Enabled color.
     public var enabled: Color
     
-    /// Enabled pressed color
+    /// Enabled pressed color.
     public var enabledPressed: Color
     
-    /// Focused color
+    /// Focused color.
     public var focused: Color
     
-    /// Focused pressed color
+    /// Focused pressed color.
     public var focusedPressed: Color
     
-    /// Success color
+    /// Success color.
     public var success: Color
     
-    /// Success pressed color
+    /// Success pressed color.
     public var successPressed: Color
     
-    /// Error color
+    /// Error color.
     public var error: Color
     
-    /// Error pressed color
+    /// Error pressed color.
     public var errorPressed: Color
     
-    /// Disabled color
+    /// Disabled color.
     public var disabled: Color
     
-    /// Pressed opacity level
+    /// Pressed opacity level.
     public var pressedOpacity: Double
     
-    /// Disabled opacity level
+    /// Disabled opacity level.
     public var disabledOpacity: Double
     
     // MARK: Initializers
-    /// Initializes group with values
+    /// Initializes group with values.
     public init(
         enabled: Color,
         enabledPressed: Color,
@@ -236,7 +236,7 @@ public struct StateColors_EpFpSpEpD_PD {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear values
+    /// Instance of group with clear values.
     public static var clear: Self {
         .init(
             enabled: ColorBook.clear,

@@ -8,21 +8,21 @@
 import SwiftUI
 
 // MARK: - V Sheet Model
-/// Model that describes UI
+/// Model that describes UI.
 public struct VSheetModel {
     // MARK: Properties
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values
+    /// Initializes model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties
+    /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
         /// Rounded corners of VSheet. Defaults to to `default`.
@@ -35,26 +35,26 @@ public struct VSheetModel {
         public var contentMargin: CGFloat = 10
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Rounded Corners
-        /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`
+        /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`.
         public enum RoundedCorners {
             // MARK: Cases
-            /// All
+            /// All.
             case all
             
-            /// Top
+            /// Top.
             case top
             
-            /// Bottom
+            /// Bottom.
             case bottom
             
-            /// Custom
+            /// Custom.
             case custom(_ corners: UIRectCorner)
             
-            /// None
+            /// None.
             case none
             
             /// Default value. Set to `all`.
@@ -74,14 +74,14 @@ public struct VSheetModel {
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties
+    /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Background color
+        /// Background color.
         public var background: Color = ColorBook.layer
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes sub-model with default values.
         public init() {}
     }
 }

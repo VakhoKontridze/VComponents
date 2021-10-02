@@ -8,41 +8,39 @@
 import SwiftUI
 
 // MARK: - V Tab Navigation View
-/// Navigation component that switches between multiple views using interactive user interface elements
+/// Navigation component that switches between multiple views using interactive user interface elements.
 ///
-/// Model can be passed as parameter
+/// Model can be passed as parameter.
 ///
-/// # Usage Example #
+/// Usage Example:
 ///
-/// ```
-/// @State var selection: Int = 0
+///     @State var selection: Int = 0
 ///
-/// var body: some View {
-///     VTabNavigationView(
-///         selection: $selection,
-///         pageOne: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Red", name: "Red"),
-///             content: Color.red
-///         ),
-///         pageTwo: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Green", name: "Green"),
-///             content: Color.green
-///         ),
-///         pageThree: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Blue", name: "Blue"),
-///             content: Color.blue
-///         ),
-///         pageFour: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Pink", name: "Pink"),
-///             content: Color.pink
-///         ),
-///         pageFive: VTabNavigationViewPage(
-///             item: .withAssetIcon(title: "Orange", name: "Orange"),
-///             content: Color.orange
+///     var body: some View {
+///         VTabNavigationView(
+///             selection: $selection,
+///             pageOne: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Red", name: "Red"),
+///                 content: Color.red
+///             ),
+///             pageTwo: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Green", name: "Green"),
+///                 content: Color.green
+///             ),
+///             pageThree: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Blue", name: "Blue"),
+///                 content: Color.blue
+///             ),
+///             pageFour: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Pink", name: "Pink"),
+///                 content: Color.pink
+///             ),
+///             pageFive: VTabNavigationViewPage(
+///                 item: .withAssetIcon(title: "Orange", name: "Orange"),
+///                 content: Color.orange
+///             )
 ///         )
-///     )
-/// }
-/// ```
+///     }
 ///
 public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
     where
@@ -66,7 +64,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
     private let pageSix: VTabNavigationViewPage<C5>?
     
     // MARK: Initializers
-    /// Initializes component with selected index and six pages
+    /// Initializes component with selected index and six pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -87,7 +85,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = pageSix
     }
     
-    /// Initializes component with selected index and five pages
+    /// Initializes component with selected index and five pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -109,7 +107,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
     
-    /// Initializes component with selected index and four pages
+    /// Initializes component with selected index and four pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -132,7 +130,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
 
-    /// Initializes component with selected index and three pages
+    /// Initializes component with selected index and three pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
@@ -155,7 +153,7 @@ public struct VTabNavigationView<C0, C1, C2, C3, C4, C5>: View
         self.pageSix = nil
     }
 
-    /// Initializes component with selected index and four pages
+    /// Initializes component with selected index and four pages.
     public init(
         model: VTabNavigationViewModel = .init(),
         selection: Binding<Int>,
