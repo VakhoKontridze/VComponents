@@ -30,7 +30,7 @@ import SwiftUI
 ///         }
 ///     }
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     var destination: some View {
 ///         VBaseView(title: "Details", content: {

@@ -25,7 +25,7 @@ import SwiftUI
 ///
 /// Unlike `VBaseList`, `VSectionList` has spacing between rows and scrolling indicator.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     struct Section: Identifiable, VSectionListSectionViewModelable {
 ///         let id: UUID = .init()

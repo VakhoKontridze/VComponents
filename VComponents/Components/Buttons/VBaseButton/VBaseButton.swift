@@ -13,7 +13,7 @@ import UIKit
 ///
 /// Bool can also be passed as state.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var state: VBaseButtonState = .enabled
 ///

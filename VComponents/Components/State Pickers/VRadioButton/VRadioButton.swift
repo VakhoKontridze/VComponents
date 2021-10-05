@@ -15,7 +15,7 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var state: VRadioButtonState = .on
 ///

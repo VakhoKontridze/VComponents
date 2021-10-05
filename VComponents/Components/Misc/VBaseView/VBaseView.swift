@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Model, and leading and trailing items can be passed as parameters.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     var trailingItem: some View {
 ///         VPlainButton(

@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Model, range, step, state, and onChange callback can be passed as parameters.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var value: Double = 0.5
 ///

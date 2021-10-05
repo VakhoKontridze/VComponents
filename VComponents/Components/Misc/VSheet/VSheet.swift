@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// If content is passed during init, `VSheet` would resize according to the size of the content. If content is not passed, `VSheet` would expand to occupy maximum space.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     var body: some View {
 ///         ZStack(alignment: .top, content: {

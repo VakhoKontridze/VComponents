@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// If invalid value parameters are passed during init, layout would invalidate itself, and refuse to draw.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var valueLow: Double = 0.3
 ///     @State var valueHigh: Double = 0.8

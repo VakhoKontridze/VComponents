@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// Model, state, header, and footer can be passed as parameters.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var selectedIndex: Int = 7
 ///

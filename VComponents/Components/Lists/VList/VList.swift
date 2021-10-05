@@ -25,7 +25,7 @@ import SwiftUI
 ///
 /// Unlike `VBaseList`, `VList` has spacing between rows and scrolling indicaator.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     struct ListRow: Identifiable {
 ///         let id: UUID = .init()

@@ -18,7 +18,7 @@ import SwiftUI
 ///
 /// It is possible to override actions of return, clear, and cancel buttons by passing them as a parameter.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var text: String = "Lorem ipsum"
 ///

@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Model and state can be passed as parameters.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var direction: VChevronButtonDirection = .left
 ///

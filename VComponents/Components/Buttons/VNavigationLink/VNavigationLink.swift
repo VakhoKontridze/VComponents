@@ -19,7 +19,7 @@ import SwiftUI
 /// `VNavigationView` and `VNavigationLink` can cause unintended effect in your navigation hierarchy if used alongside with `SwiftUI`'s native `NavigationView` and `NavigationLink`.
 /// To handle back button on detail views automatically, default back buttons are hidden, and custom ones are added as long as navigation happens via `VNavigationLink`.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     var destination: some View {
 ///         VBaseView(title: "Destination", content: {

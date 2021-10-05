@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// If two TextField's state is managed by a single property, unpredictable behaviors would occur.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var text: String = "Lorem ipsum"
 ///

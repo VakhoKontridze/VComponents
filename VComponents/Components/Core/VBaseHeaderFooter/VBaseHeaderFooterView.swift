@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Base Header Footer
 /// Core component that is used throughout the framework.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     var body: some View {
 ///         VBaseHeaderFooter(

@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var isPresented: Bool = false
 ///

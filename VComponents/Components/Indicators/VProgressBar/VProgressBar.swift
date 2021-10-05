@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Model and total value can be passed as parameters.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     @State var progress: Double = 0.5
 ///

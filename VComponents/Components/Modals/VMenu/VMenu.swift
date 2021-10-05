@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Preset and state can be passed as parameters.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     VMenu(
 ///         preset: .secondary(),

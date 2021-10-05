@@ -20,7 +20,7 @@ import SwiftUI
 ///
 /// State can be passed as parameter.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     enum PickerRow: Int, VPickableItem {
 ///         case red, green, blue

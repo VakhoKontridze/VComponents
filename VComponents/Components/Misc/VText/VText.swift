@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Base Title
 /// Core component that is used throughout the framework as text.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     var body: some View {
 ///         VText(

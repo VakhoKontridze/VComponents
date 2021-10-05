@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// State can be passed as parameter.
 ///
-/// Usage Example:
+/// Usage example:
 ///
 ///     var body: some View {
 ///         VWebLink(
