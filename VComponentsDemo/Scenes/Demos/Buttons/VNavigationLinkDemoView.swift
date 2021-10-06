@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Navigation Link Demo View
 struct VNavigationLinkDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Navigation Link" }
+    static var navBarTitle: String { "Navigation Link" }
     
     @State private var state: VNavigationLinkState = .enabled
     @State private var navigationLinkButtonType: VNavigationLinkButtonTypeHelper = .secondary

@@ -10,7 +10,7 @@ import VComponents
 
 // MARK: - V Side Bar Demo View
 struct VSideBarDemoView: View {
-    static let navBarTitle: String { "Side Bar" }
+    static var navBarTitle: String { "Side Bar" }
     
     @State private var isPresented: Bool = false
 

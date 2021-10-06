@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Toast Demo View
 struct VToastDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Toast" }
+    static var navBarTitle: String { "Toast" }
     
     @State private var isPresented: Bool = false
     

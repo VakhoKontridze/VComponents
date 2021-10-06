@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Text Demo View
 struct VTextDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Text" }
+    static var navBarTitle: String { "Text" }
     
     @State private var vTextDemoType: VTextDemoType = .center
     

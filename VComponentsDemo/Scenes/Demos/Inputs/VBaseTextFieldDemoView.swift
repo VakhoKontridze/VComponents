@@ -11,7 +11,7 @@ import VComponents
 // MARK: V Text Field Demo View
 struct VBaseTextFieldDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Base TextField" }
+    static var navBarTitle: String { "Base TextField" }
 
     @State private var text: String = ""
     @State private var state: VBaseTextFieldState = .enabled

@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Accordion Demo View
 struct VAccordionDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Accordion" }
+    static var navBarTitle: String { "Accordion" }
     
     @State private var accordionState: VAccordionState = .expanded
     @State private var layoutType: BaseListLayoutTypeHelper = .default

@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Navigation View and Base View Demo View
 struct VNavigationViewDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Navigation View" }
+    static var navBarTitle: String { "Navigation View" }
 
     // MARK: Body
     var body: some View {

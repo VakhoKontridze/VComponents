@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Dialog Demo View
 struct VDialogDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Dialog" }
+    static var navBarTitle: String { "Dialog" }
     
     @State private var isPresented: Bool = false
     @State private var text: String = ""

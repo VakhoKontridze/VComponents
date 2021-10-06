@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Modal Demo View
 struct VModalDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Modal" }
+    static var navBarTitle: String { "Modal" }
     
     @State private var isPresented: Bool = false
     @State private var hasTitle: Bool = true

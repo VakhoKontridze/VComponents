@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Web Link Demo View
 struct VWebLinkDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Web Link" }
+    static var navBarTitle: String { "Web Link" }
     
     @State private var state: VWebLinkState = .enabled
     @State private var webLinkButtonType: VWebLinkButtonTypeHelper = .secondary

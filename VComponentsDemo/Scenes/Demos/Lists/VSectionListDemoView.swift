@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Section List Demo View
 struct VSectionListDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Section List" }
+    static var navBarTitle: String { "Section List" }
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var hasHeaders: Bool = true

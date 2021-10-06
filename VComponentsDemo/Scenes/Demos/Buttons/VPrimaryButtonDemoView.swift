@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Primary Button Demo View
 struct VPrimaryButtonDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Primary Button" }
+    static var navBarTitle: String { "Primary Button" }
     
     @State private var state: VPrimaryButtonState = .enabled
     @State private var contentType: ComponentContentType = .text

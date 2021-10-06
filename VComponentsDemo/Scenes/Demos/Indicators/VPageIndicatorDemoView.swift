@@ -12,7 +12,7 @@ import VComponents
 // MARK: - V Page Indicator Demo VIew
 struct VPageIndicatorDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Page Indicator" }
+    static var navBarTitle: String { "Page Indicator" }
     
     private let total: Int = 15
     @State private var selectedIndex: Int = 0

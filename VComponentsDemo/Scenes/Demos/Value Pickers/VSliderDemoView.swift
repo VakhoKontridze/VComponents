@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Slider Demo View
 struct VSliderDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Slider" }
+    static var navBarTitle: String { "Slider" }
     
     @State private var value: Double = 0.5
     @State private var state: VSliderState = .enabled

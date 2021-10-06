@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Stepper Demo View
 struct VStepperDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Stepper" }
+    static var navBarTitle: String { "Stepper" }
     
     @State private var value: Int = 5
     @State private var state: VStepperState = .enabled

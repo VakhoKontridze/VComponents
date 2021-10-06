@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Bas List Demo View
 struct VBaseListDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Base List" }
+    static var navBarTitle: String { "Base List" }
     
     @State private var layoutType: BaseListLayoutTypeHelper = .default
     @State private var rowCount: Int = 5

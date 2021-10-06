@@ -11,7 +11,7 @@ import VComponents
 // MARK: - V Spinner Demo View
 struct VSpinnerDemoView: View {
     // MARK: Properties
-    static let navBarTitle: String { "Spinner" }
+    static var navBarTitle: String { "Spinner" }
     
     @State private var spinnerType: VSpinnerTypeHelper = VSpinnerType.default.helpeType
 
