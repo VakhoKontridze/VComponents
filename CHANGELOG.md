@@ -1,5 +1,9 @@
 ## Change Log
 
+#### [1.4.3(11)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.3/VComponents.xcframework.zip) — *2021 10 11*
+
+- Bug fixes and improvements
+
 #### [1.4.2(10)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.2/VComponents.xcframework.zip) — *2021 09 02*
 
 - Fixed `continuous` `VSpinner` breaking in `NavigationView` in SwiftUI 3.0
