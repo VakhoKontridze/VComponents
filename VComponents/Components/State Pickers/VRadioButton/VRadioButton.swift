@@ -60,7 +60,7 @@ public struct VRadioButton<Content>: View where Content: View {
     @State private var animatableState: VRadioButtonState?
     @State private var isPressed: Bool = false
     private var internalState: VRadioButtonInternalState { .init(state: animatableState ?? state, isPressed: isPressed) }
-    private var contentIsEnabled: Bool { state.isEnabled && model.misc.contentIsClickable }
+    private var contentIsEnabled: Bool { internalState.isEnabled && model.misc.contentIsClickable }
     
     private let content: (() -> Content)?
     
@@ -245,7 +245,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
     
     private var RadioButton: some View {
-        VBaseButton(isEnabled: state.isEnabled, action: nextState, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: internalState.isEnabled, action: nextState, onPress: { _ in }, content: {
             ZStack(content: {
                 Circle()
                     .frame(dimension: model.layout.dimension)

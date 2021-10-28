@@ -42,6 +42,15 @@ enum VPrimaryButtonInternalState {
     case loading
     
     // MARK: Properties
+    var isEnabled: Bool {
+        switch self {
+        case .enabled: return true
+        case .pressed: return true
+        case .disabled: return false
+        case .loading: return false
+        }
+    }
+    
     var isLoading: Bool {
         switch self {
         case .enabled: return false

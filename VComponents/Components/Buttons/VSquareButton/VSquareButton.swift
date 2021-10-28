@@ -78,7 +78,7 @@ public struct VSquareButton<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         VBaseButton(
-            isEnabled: state.isEnabled,
+            isEnabled: internalState.isEnabled,
             action: action,
             onPress: { isPressed = $0 },
             content: { hitBox }

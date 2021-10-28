@@ -33,7 +33,7 @@ public struct VCheckBox<Content>: View where Content: View {
     @State private var animatableState: VCheckBoxState?
     @State private var isPressed: Bool = false
     private var internalState: VCheckBoxInternalState { .init(state: animatableState ?? state, isPressed: isPressed) }
-    private var contentIsEnabled: Bool { state.isEnabled && model.misc.contentIsClickable }
+    private var contentIsEnabled: Bool { internalState.isEnabled && model.misc.contentIsClickable }
     
     private let content: (() -> Content)?
     
@@ -151,7 +151,7 @@ public struct VCheckBox<Content>: View where Content: View {
     }
     
     private var checkBox: some View {
-        VBaseButton(isEnabled: state.isEnabled, action: nextState, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: internalState.isEnabled, action: nextState, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                     .foregroundColor(model.colors.fill.for(internalState))

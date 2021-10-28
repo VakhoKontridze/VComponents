@@ -34,6 +34,15 @@ enum VPlainButtonInternalState {
     case pressed
     case disabled
     
+    // MARK: Properties
+    var isEnabled: Bool {
+        switch self {
+        case .enabled: return true
+        case .pressed: return true
+        case .disabled: return false
+        }
+    }
+    
     // MARK: Initializers
     init(state: VPlainButtonState, isPressed: Bool) {
         switch (state, isPressed) {

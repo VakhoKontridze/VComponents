@@ -71,6 +71,19 @@ enum VCheckBoxInternalState {
     case pressedIndeterminate
     case disabled
     
+    // MARK: Properties
+    var isEnabled: Bool {
+        switch self {
+        case .off: return true
+        case .pressedOff: return true
+        case .on: return true
+        case .pressedOn: return true
+        case .indeterminate: return true
+        case .pressedIndeterminate: return true
+        case .disabled: return false
+        }
+    }
+    
     // MARK: Initializers
     init(state: VCheckBoxState, isPressed: Bool) {
         switch (state, isPressed) {

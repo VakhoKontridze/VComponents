@@ -59,6 +59,17 @@ enum VToggleInternalState {
     case pressedOn
     case disabled
     
+    // MARK: Properties
+    var isEnabled: Bool {
+        switch self {
+        case .off: return true
+        case .pressedOff: return true
+        case .on: return true
+        case .pressedOn: return true
+        case .disabled: return false
+        }
+    }
+    
     // MARK: Initializers
     init(state: VToggleState, isPressed: Bool) {
         switch (state, isPressed) {
