@@ -52,7 +52,7 @@ public struct VToast {
 
 // MARK: - Extension
 extension View {
-    /// Presents toast.
+    /// Presents `VToast`.
     public func vToast(
         isPresented: Binding<Bool>,
         toast: @escaping () -> VToast

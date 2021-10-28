@@ -11,7 +11,7 @@ import UIKit
 // MARK: - V Base Button
 /// Core component that is used throughout the framework as button.
 ///
-/// Bool can also be passed as state.
+/// `Bool` can also be passed as state.
 ///
 /// Usage example:
 ///
