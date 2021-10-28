@@ -2,6 +2,7 @@
 
 #### [1.4.4(12)]
 
+- `Resize Indicator` in `VHalfModal` has been renamed to `Grabber`
 - Bug fixes and improvements
 
 #### [1.4.3(11)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.3/VComponents.xcframework.zip) — *2021 10 11*

@@ -23,15 +23,6 @@ extension VCheckBoxState {
     public static var intermediate: Self { indeterminate }
 }
 
-// MARK: - V Navigation View
-extension VNavigationViewModel.Colors {
-    @available(*, deprecated, renamed: "bar")
-    public var background: Color {
-        get { bar }
-        set { bar = newValue }
-    }
-}
-
 // MARK: - V List
 @available(*, deprecated, renamed: "VList")
 public typealias VSection = VList
@@ -71,6 +62,44 @@ extension VSectionListSectionViewModelable {
 
 @available(*, deprecated, message: "`VSectionListRowViewModelable` has been dropped. Use `Identifiable` instead.")
 public typealias VSectionListRowViewModelable = Identifiable
+
+// MARK: - Half Modal
+extension VHalfModalModel.Layout {
+    @available(*, deprecated, renamed: "grabberSize")
+    public var resizeIndicatorSize: CGSize {
+        get { grabberSize }
+        set { grabberSize = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "grabberCornerRadius")
+    public var resizeIndicatorCornerRadius: CGFloat {
+        get { grabberCornerRadius }
+        set { grabberCornerRadius = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "grabberMargins")
+    public var resizeIndicatorMargins: VerticalMargins {
+        get { grabberMargins }
+        set { grabberMargins = newValue }
+    }
+}
+
+extension VHalfModalModel.Colors {
+    @available(*, deprecated, renamed: "grabber")
+    public var resizeIndicator: Color {
+        get { grabber }
+        set { grabber = newValue }
+    }
+}
+
+// MARK: - V Navigation View
+extension VNavigationViewModel.Colors {
+    @available(*, deprecated, renamed: "bar")
+    public var background: Color {
+        get { bar }
+        set { bar = newValue }
+    }
+}
 
 // MARK: - V Lazy Scroll View
 @available(*, deprecated, renamed: "VLazyScrollView")

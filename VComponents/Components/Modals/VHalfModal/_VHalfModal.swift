@@ -26,8 +26,8 @@ struct _VHalfModal<Content, HeaderContent>: View
     @State private var offsetBeforeDrag: CGFloat?
     
     private var headerExists: Bool { headerContent != nil || model.misc.dismissType.hasButton }
-    private var hasResizeIndicator: Bool {
-        model.layout.hasResizeIndicator &&
+    private var hasGrabber: Bool {
+        model.layout.hasGrabber &&
         (model.misc.dismissType.contains(.pullDown) || model.layout.height.isResizable)
     }
     
@@ -83,7 +83,7 @@ struct _VHalfModal<Content, HeaderContent>: View
                     )
                 
                 VStack(spacing: 0, content: {
-                    resizeIndicator
+                    grabberView
                     headerView
                     dividerView
                     contentView.frame(maxHeight: .infinity, alignment: .center)
@@ -101,13 +101,13 @@ struct _VHalfModal<Content, HeaderContent>: View
         }
     }
     
-    @ViewBuilder private var resizeIndicator: some View {
-        if hasResizeIndicator {
-            RoundedRectangle(cornerRadius: model.layout.resizeIndicatorCornerRadius)
-                .frame(size: model.layout.resizeIndicatorSize)
-                .padding(.top, model.layout.resizeIndicatorMargins.top)
-                .padding(.bottom, model.layout.resizeIndicatorMargins.bottom)
-                .foregroundColor(model.colors.resizeIndicator)
+    @ViewBuilder private var grabberView: some View {
+        if hasGrabber {
+            RoundedRectangle(cornerRadius: model.layout.grabberCornerRadius)
+                .frame(size: model.layout.grabberSize)
+                .padding(.top, model.layout.grabberMargins.top)
+                .padding(.bottom, model.layout.grabberMargins.bottom)
+                .foregroundColor(model.colors.grabber)
         }
     }
 

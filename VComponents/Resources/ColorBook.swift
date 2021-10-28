@@ -82,7 +82,7 @@ extension Color {
  225.225.225
  *30.30.30
  
- HalfModal.ResizeIndicator
+ HalfModal.Grabber
  *220.220.220
  45.45.45
  

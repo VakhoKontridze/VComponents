@@ -57,13 +57,13 @@ public struct VHalfModalModel {
         
         var roundCorners: Bool { cornerRadius > 0 }
         
-        /// Resize indicaator size. Defaults to `50` width and `4` height.
-        public var resizeIndicatorSize: CGSize = .init(width: 50, height: 4)
+        /// Grabber indicaator size. Defaults to `50` width and `4` height.
+        public var grabberSize: CGSize = .init(width: 50, height: 4)
         
-        var hasResizeIndicator: Bool { resizeIndicatorSize.height > 0 }
+        var hasGrabber: Bool { grabberSize.height > 0 }
         
-        /// Resize indicator corner radius. Defaults to `2`.
-        public var resizeIndicatorCornerRadius: CGFloat = 2
+        /// Grabber corner radius. Defaults to `2`.
+        public var grabberCornerRadius: CGFloat = 2
         
         /// Header divider height. Defaults to `1`.
         public var headerDividerHeight: CGFloat = 1
@@ -76,8 +76,8 @@ public struct VHalfModalModel {
         /// Close button icon dimension. Default to `11`.
         public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
         
-        /// Resize indicator margins. Default to `10` top  and `5` bottom.
-        public var resizeIndicatorMargins: VerticalMargins = .init(
+        /// Grabber margins. Default to `10` top  and `5` bottom.
+        public var grabberMargins: VerticalMargins = .init(
             top: sheetReference.layout.contentMargin,
             bottom: sheetReference.layout.contentMargin/2
         )
@@ -114,13 +114,13 @@ public struct VHalfModalModel {
         
         /// Navigation bar close button top margin. Defaults to `30`.
         ///
-        /// If you decide to remove resize indicator or changing vertical margins, it's essential to change this property.
+        /// If you decide to remove grabber or change vertical margins, it's essential to change this property.
         public static var navBarCloseButtonMarginTop: CGFloat {
             let instance: Self = .init()
             
-            return instance.resizeIndicatorMargins.top +
-                instance.resizeIndicatorSize.height +
-                instance.resizeIndicatorMargins.bottom +
+            return instance.grabberMargins.top +
+                instance.grabberSize.height +
+                instance.grabberMargins.bottom +
                 //instance.headerDividerMargins.top +
                 //instance.headerDividerHeight +
                 //instance.headerDividerMargins.bottom +
@@ -151,7 +151,7 @@ public struct VHalfModalModel {
         
         // MARK: Vertical Margins
         /// Sub-model containing `top` and `bottom` margins.
-        public typealias VerticalMargins  = LayoutGroup_TB
+        public typealias VerticalMargins = LayoutGroup_TB
         
         // MARK: Height Type
         /// Enum that describes height type, such as `fixed` or `dynamic`.
@@ -210,8 +210,8 @@ public struct VHalfModalModel {
         /// Background color.
         public var background: Color = modalReference.colors.background
         
-        /// Resize indicator color.
-        public var resizeIndicator: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
+        /// Grabber color.
+        public var grabber: Color = .init(componentAsset: "HalfModal.Grabber")
         
         /// Text header color.
         ///
@@ -225,7 +225,7 @@ public struct VHalfModalModel {
         public var closeButtonIcon: StateColorsAndOpacities = modalReference.colors.closeButtonIcon
         
         /// Header divider color.
-        public var headerDivider: Color = .init(componentAsset: "HalfModal.ResizeIndicator")
+        public var headerDivider: Color = .init(componentAsset: "HalfModal.Grabber")
         
         /// Blinding color.
         public var blinding: Color = modalReference.colors.blinding
