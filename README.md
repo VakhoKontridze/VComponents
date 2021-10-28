@@ -1,4 +1,4 @@
-# Vakho's Components (VComponents)
+# VComponents
 
 ## Table of Contents
 
