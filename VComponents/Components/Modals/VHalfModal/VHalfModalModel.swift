@@ -125,7 +125,7 @@ public struct VHalfModalModel {
                 //instance.headerDividerHeight +
                 //instance.headerDividerMargins.bottom +
                 instance.contentMargins.top +
-                (UIView.navigationBarHeight - VCloseButtonModel.Layout().dimension) / 2
+                (UINavigationBar.height - VCloseButtonModel.Layout().dimension) / 2
         }
         
         /// Navigation bar close button trailing margin. Defaults to `15`.

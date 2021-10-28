@@ -70,7 +70,7 @@ final class WindowOverlayViewController<Content>: UIViewController where Content
         hostedView.backgroundColor = .clear
         hostedView.tag = hostedViewTag
         
-        guard let windowView: UIView = UIView.windowView else { fatalError() }
+        guard let windowView: UIView = UIView.appRootView else { fatalError() }
         
         windowView.addSubview(hostedView)
         
@@ -91,6 +91,21 @@ final class WindowOverlayViewController<Content>: UIViewController where Content
 
     // MARK: Dismissing
     fileprivate func dismiss() {
-        UIView.windowView?.subviews.first(where: { $0.tag == hostedViewTag })?.removeFromSuperview()
+        UIView.appRootView?.subviews.first(where: { $0.tag == hostedViewTag })?.removeFromSuperview()
+    }
+}
+
+// MARK: - Helpers
+extension UIView {
+    fileprivate static var appRootView: UIView? {
+        guard
+            let window: UIWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+            let viewController: UIViewController = window.rootViewController,
+            let view: UIView = viewController.view
+        else {
+            return nil
+        }
+        
+        return view
     }
 }

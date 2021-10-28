@@ -30,7 +30,7 @@ struct VNavigationViewDemoView: View {
             )
             
             VSecondaryButton(
-                action: { SceneDelegate.setRootView(to: NavigationDemoView1()) },
+                action: { SceneDelegate.setRoot(to: NavigationDemoView1()) },
                 title: "Start Demo"
             )
         })
@@ -79,7 +79,7 @@ private struct NavigationDemoView3: View {
                     "You are on Additional Details page",
                     "From here you can navigate back, or jump to new the navigation stack"
                 ].joined(separator: "\n\n"),
-                action: { SceneDelegate.setRootView(to: HomeView()) }
+                action: { SceneDelegate.setRoot(to: HomeView()) }
             )
         })
     }

@@ -30,7 +30,7 @@ struct VTabNavigationViewDemoView: View {
             )
             
             VSecondaryButton(
-                action: { SceneDelegate.setRootView(to: VTabNavigationViewDemoViewWalkthroughView()) },
+                action: { SceneDelegate.setRoot(to: VTabNavigationViewDemoViewWalkthroughView()) },
                 title: "Start Demo"
             )
         })
@@ -101,7 +101,7 @@ extension VTabNavigationViewDemoViewWalkthroughView {
     
     private var goBackButton: some View {
         VSecondaryButton(
-            action: { SceneDelegate.setRootView(to: HomeView())  },
+            action: { SceneDelegate.setRoot(to: HomeView()) },
             title: "Go Back"
         )
             .frame(maxHeight: .infinity, alignment: .bottom)

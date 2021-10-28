@@ -18,15 +18,19 @@ import SwiftUI
 /// Use this method to set root view on navigation stack. It acts as `SwiftUI`'s version of setting `UINavigationController` root:
 ///
 ///     extension SceneDelegate {
-///         static func setRootView<Content>(to view: Content) where Content: View {
+///         static func setRoot(to viewController: UIViewController) {
 ///             guard
-///                 let scene: UIWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-///                 let windowScenedelegate: SceneDelegate = scene.delegate as? SceneDelegate
+///                 let windowScene: UIWindowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+///                 let sceneDelegate: SceneDelegate = windowScene.delegate as? SceneDelegate
 ///             else {
 ///                 return
 ///             }
 ///
-///             windowScenedelegate.window?.rootViewController = UIHostingController(rootView: view)
+///             sceneDelegate.window?.rootViewController = viewController
+///         }
+///
+///         static func setRoot<Content>(to view: Content) where Content: View {
+///             setRoot(to: UIHostingController(rootView: view))
 ///         }
 ///     }
 ///
