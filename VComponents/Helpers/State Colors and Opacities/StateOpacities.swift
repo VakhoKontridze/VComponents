@@ -8,8 +8,8 @@
 import SwiftUI
 
 // MARK: - Pressed
-/// Opacity level group containing values for `pressed` state.
-public struct StateOpacities_P {
+/// Opacity level group containing `pressed` values.
+public struct StateOpacities_P: Equatable {
     // MARK: Properties
     /// Pressed opacity level.
     public var pressedOpacity: Double
@@ -22,14 +22,14 @@ public struct StateOpacities_P {
         self.pressedOpacity = pressedOpacity
     }
     
-    /// Instance of group with clear values.
+    /// Initializes group with clear values.
     public static var clear: Self {
         .init(
             pressedOpacity: 0
         )
     }
     
-    /// Instance of group with solid values.
+    /// Initializes group with solid values.
     public static var solid: Self {
         .init(
             pressedOpacity: 1
@@ -38,8 +38,8 @@ public struct StateOpacities_P {
 }
 
 // MARK: - Disabled
-/// Opacity level group containing values for `disabled` state.
-public struct StateOpacities_D {
+/// Opacity level group containing `disabled` values.
+public struct StateOpacities_D: Equatable {
     // MARK: Properties
     /// Disabled opacity level.
     public var disabledOpacity: Double
@@ -52,14 +52,14 @@ public struct StateOpacities_D {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear values.
+    /// Initializes group with clear values.
     public static var clear: Self {
         .init(
             disabledOpacity: 0
         )
     }
     
-    /// Instance of group with solid values.
+    /// Initializes group with solid values.
     public static var solid: Self {
         .init(
             disabledOpacity: 1
@@ -92,8 +92,8 @@ public struct StateOpacities_D {
 }
 
 // MARK: - Pressed, Disabled
-/// Opacity level group containing values for `pressed` and `disabled` states.
-public struct StateOpacities_PD {
+/// Opacity level group containing `pressed` and `disabled` values.
+public struct StateOpacities_PD: Equatable {
     // MARK: Properties
     /// Pressed opacity level.
     public var pressedOpacity: Double
@@ -111,7 +111,7 @@ public struct StateOpacities_PD {
         self.disabledOpacity = disabledOpacity
     }
     
-    /// Instance of group with clear values.
+    /// Initializes group with clear values.
     public static var clear: Self {
         .init(
             pressedOpacity: 0,
@@ -119,7 +119,7 @@ public struct StateOpacities_PD {
         )
     }
     
-    /// Instance of group with solid values.
+    /// Initializes group with solid values.
     public static var solid: Self {
         .init(
             pressedOpacity: 1,

@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-/// Grop of layout values containing `leading`, `trailing`, `top` and `bottom` values.
-public struct LayoutGroup_LTTB {
+// MARK: - Leading, Trailing, Top, Bottom
+/// Group of layout values containing `leading`, `trailing`, `top` and `bottom` values.
+public struct LayoutGroup_LTTB: Equatable {
     /// Leading value.
     public var leading: CGFloat
     
@@ -21,7 +22,7 @@ public struct LayoutGroup_LTTB {
     /// Bottom value.
     public var bottom: CGFloat
     
-    /// Initializes group with value.
+    /// Initializes group with values.
     public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottom: CGFloat) {
         self.leading = leading
         self.trailing = trailing
@@ -29,7 +30,7 @@ public struct LayoutGroup_LTTB {
         self.bottom = bottom
     }
     
-    /// Instance of group with zero values.
+    /// Initializes group with zero values.
     public static var zero: Self {
         .init(
             leading: 0,
@@ -40,8 +41,9 @@ public struct LayoutGroup_LTTB {
     }
 }
 
-/// Grop of layout values containing `horizotal` and `vertical` values.
-public struct LayoutGroup_HV {
+// MARK: - Horiontal, Vertical
+/// Group of layout values containing `horizotal` and `vertical` values.
+public struct LayoutGroup_HV: Equatable {
     /// Horizontal value.
     public var horizontal: CGFloat
     
@@ -54,7 +56,7 @@ public struct LayoutGroup_HV {
         self.vertical = vertical
     }
     
-    /// Instance of group with zero values.
+    /// Initializes group with zero values.
     public static var zero: Self {
         .init(
             horizontal: 0,
@@ -63,8 +65,9 @@ public struct LayoutGroup_HV {
     }
 }
 
-/// Grop of layout values containing `top` and `bottom` values.
-public struct LayoutGroup_TB {
+// MARK: - Top, Bottom
+/// Group of layout values containing `top` and `bottom` values.
+public struct LayoutGroup_TB: Equatable {
     /// Top value.
     public var top: CGFloat
     
@@ -77,7 +80,7 @@ public struct LayoutGroup_TB {
         self.bottom = bottom
     }
     
-    /// Instance of group with zero values.
+    /// Initializes group with zero values.
     public static var zero: Self {
         .init(
             top: 0,
@@ -86,8 +89,9 @@ public struct LayoutGroup_TB {
     }
 }
 
-/// Grop of layout values containing `leading` and `trailing` values.
-public struct LayoutGroup_LT {
+// MARK: - Leading, Trailing
+/// Group of layout values containing `leading` and `trailing` values.
+public struct LayoutGroup_LT: Equatable {
     /// Top value.
     public var leading: CGFloat
     
@@ -100,7 +104,7 @@ public struct LayoutGroup_LT {
         self.trailing = trailing
     }
     
-    /// Instance of group with zero values.
+    /// Initializes group with zero values.
     public static var zero: Self {
         .init(
             leading: 0,
