@@ -24,9 +24,6 @@ public enum VTextFieldType: Int, CaseIterable {
     /// Magnification icon is present.
     case search
     
-    /// Default value. Set to `standard`.
-    public static var `default`: Self { .standard }
-    
     // MARK: Properties
     var isStandard: Bool {
         switch self {
@@ -51,4 +48,8 @@ public enum VTextFieldType: Int, CaseIterable {
         case .search: return true
         }
     }
+    
+    // MARK: Initailizers
+    /// Default value. Set to `standard`.
+    public static var `default`: Self { .standard }
 }

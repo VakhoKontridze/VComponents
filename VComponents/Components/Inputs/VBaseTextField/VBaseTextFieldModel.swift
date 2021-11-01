@@ -54,9 +54,6 @@ public struct VBaseTextFieldModel {
             /// Auto alignment based on the current localization of the app.
             case auto
             
-            /// Default value. Set to `leading`.
-            public static var `default`: Self { .leading }
-            
             // MARK: Properties
             var nsTextAlignment: NSTextAlignment {
                 switch self {
@@ -66,6 +63,10 @@ public struct VBaseTextFieldModel {
                 case .auto: return .natural
                 }
             }
+            
+            // MARK: Initailizers
+            /// Default value. Set to `leading`.
+            public static var `default`: Self { .leading }
         }
     }
 

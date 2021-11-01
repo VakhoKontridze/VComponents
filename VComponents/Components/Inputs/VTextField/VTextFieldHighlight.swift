@@ -10,6 +10,7 @@ import Foundation
 // MARK: - V Text Field Highlight
 /// State that describes highlight state, such as `none`, `success`, or `error`.
 public enum VTextFieldHighlight: Int, CaseIterable {
+    // MARK: Cases
     /// No highlight.
     case none
     
@@ -19,6 +20,7 @@ public enum VTextFieldHighlight: Int, CaseIterable {
     /// Error highlight with red accent.
     case error
     
+    // MARK: Initailizers
     /// Default value. Set to `none`.
     public static var `default`: Self { .none }
 }

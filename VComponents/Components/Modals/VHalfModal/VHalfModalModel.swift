@@ -163,15 +163,6 @@ public struct VHalfModalModel {
             /// Dynamic height that changes between `min`, `ideal`, and `max`.
             case dynamic(min: CGFloat, ideal: CGFloat, max: CGFloat)
             
-            /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
-            public static var `default`: Self {
-                .dynamic(
-                    min: UIScreen.main.bounds.height * 0.3,
-                    ideal: UIScreen.main.bounds.height * 0.75,
-                    max: UIScreen.main.bounds.height * 0.9
-                )
-            }
-            
             // MARK: Properties
             var min: CGFloat {
                 switch self {
@@ -199,6 +190,16 @@ public struct VHalfModalModel {
                 case .fixed: return false
                 case .dynamic(let min, let ideal, let max): return min != ideal || ideal != max
                 }
+            }
+            
+            // MARK: Initailizers
+            /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
+            public static var `default`: Self {
+                .dynamic(
+                    min: UIScreen.main.bounds.height * 0.3,
+                    ideal: UIScreen.main.bounds.height * 0.75,
+                    max: UIScreen.main.bounds.height * 0.9
+                )
             }
         }
     }

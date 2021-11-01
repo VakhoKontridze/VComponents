@@ -63,12 +63,14 @@ public struct VToastModel {
         // MARK: Presentation Edge
         /// Enum that represents presentation edge, such as `top` or `bottom`.
         public enum PresentationEdge: Int, CaseIterable {
+            // MARK: Cases
             /// Presentation from top.
             case top
             
             /// Presentation from bottom.
             case bottom
             
+            // MARK: Initailizers
             /// Default value. Set to `bottom`.
             public static var `default`: Self { .bottom }
         }
@@ -76,6 +78,7 @@ public struct VToastModel {
         // MARK: Corner Radius Type
         /// Enum that represents corner radius, such as `rounded` or `custom`.
         public enum CornerRadiusType {
+            // MARK: Cases
             /// Rounded corner radius.
             ///
             /// This case automatically calculates height and takes half of its value.
@@ -84,6 +87,7 @@ public struct VToastModel {
             /// Custom.
             case custom(_ value: CGFloat)
 
+            // MARK: Initailizers
             /// Default value. Set to `rounded`.
             public static var `default`: Self { .rounded }
         }

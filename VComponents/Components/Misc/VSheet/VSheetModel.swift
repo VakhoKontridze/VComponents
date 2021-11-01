@@ -57,9 +57,6 @@ public struct VSheetModel {
             /// None.
             case none
             
-            /// Default value. Set to `all`.
-            public static var `default`: Self { .all }
-            
             // MARK: Properties
             var uiRectCorner: UIRectCorner {
                 switch self {
@@ -70,6 +67,10 @@ public struct VSheetModel {
                 case .none: return []
                 }
             }
+            
+            // MARK: Initailizers
+            /// Default value. Set to `all`.
+            public static var `default`: Self { .all }
         }
     }
 

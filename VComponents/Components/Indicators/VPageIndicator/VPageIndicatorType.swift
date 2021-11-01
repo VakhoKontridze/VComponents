@@ -21,6 +21,7 @@ import Foundation
 /// 3. `Auto`.
 /// Switches from `finite` to `infinite` after a `finiteLimit`.
 public enum VPageIndicatorType {
+    // MARK: Cases
     /// Finite type.
     ///
     /// Finite number of dots would be displayed.
@@ -38,6 +39,7 @@ public enum VPageIndicatorType {
     /// Switches from `finite` to `infinite` after a `finiteLimit`.
     case auto(visible: Int = 7, center: Int = 3, finiteLimit: Int = 10)
     
+    // MARK: Initailizers
     /// Default value. Set to `auto`.
     public static var `default`: Self { .auto() }
 }

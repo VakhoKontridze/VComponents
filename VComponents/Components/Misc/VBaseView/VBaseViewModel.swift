@@ -61,12 +61,14 @@ public struct VBaseViewModel {
         // MARK: Title Position
         /// Enum that describes title position, such as `center` or `leading`.
         public enum TitlePosition: Int, CaseIterable {
+            // MARK: Cases
             /// Center alignment.
             case center
             
             /// Leading alignment.
             case leading
             
+            // MARK: Initailizers
             /// Default value. Set to `center`.
             public static var `default`: Self { .center }
         }
