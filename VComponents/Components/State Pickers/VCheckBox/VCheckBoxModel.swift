@@ -75,17 +75,17 @@ public struct VCheckBoxModel {
         /// Border colors.
         public var border: StateColors = .init(
             off: .init(componentAsset: "CheckBox.Border.off"),
-            on: ColorBook.clear,
-            indeterminate: ColorBook.clear,
+            on: .clear,
+            indeterminate: .clear,
             disabled: .init(componentAsset: "CheckBox.Border.disabled")
         )
         
         /// Checkmark icon colors.
         public var icon: StateColors = .init(
-            off: ColorBook.clear,
+            off: .clear,
             on: toggleReference.colors.thumb.off,
             indeterminate: toggleReference.colors.thumb.on,
-            disabled: ColorBook.clear
+            disabled: .clear
         )
 
         /// Content opacities.

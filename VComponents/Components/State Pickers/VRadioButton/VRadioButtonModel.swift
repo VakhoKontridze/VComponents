@@ -80,9 +80,9 @@ public struct VRadioButtonModel {
         
         /// Bullet colors.
         public var bullet: StateColors = .init(
-            off: ColorBook.clear,
+            off: .clear,
             on: checkBoxReference.colors.fill.on,
-            disabled: ColorBook.clear
+            disabled: .clear
         )
 
         /// Content opacities.

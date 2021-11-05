@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/12/21.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Range Slider State
 /// Enum that describes state, such as `enabled` or `disabled`.
@@ -23,6 +23,16 @@ public enum VRangeSliderState: Int, CaseIterable {
         switch self {
         case .enabled: return true
         case .disabled: return false
+        }
+    }
+}
+
+// MARK: - Mapping
+extension StateColors_ED {
+    func `for`(_ state: VRangeSliderState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .disabled: return disabled
         }
     }
 }

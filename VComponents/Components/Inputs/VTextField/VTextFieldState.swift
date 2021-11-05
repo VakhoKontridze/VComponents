@@ -82,3 +82,70 @@ public enum VTextFieldState: Int, CaseIterable {
         }
     }
 }
+
+// MARK: - Mapping
+extension StateColors_EFD {
+    func `for`(_ state: VTextFieldState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .focused: return focused
+        case .disabled: return disabled
+        }
+    }
+}
+
+extension StateColors_EFSED {
+    func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
+        switch (highlight, state) {
+        case (_, .disabled): return disabled
+        case (.none, .enabled): return enabled
+        case (.none, .focused): return focused
+        case (.success, .enabled): return success
+        case (.success, .focused): return success
+        case (.error, .enabled): return error
+        case (.error, .focused): return error
+        }
+    }
+}
+
+extension StateColors_EFSEPD {
+    func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
+        switch (highlight, state) {
+        case (_, .disabled): return disabled
+        case (.none, .enabled): return enabled
+        case (.none, .focused): return focused
+        case (.success, .enabled): return success
+        case (.success, .focused): return success
+        case (.error, .enabled): return error
+        case (.error, .focused): return error
+        }
+    }
+}
+
+extension StateOpacities_D {
+    func `for`(_ state: VTextFieldState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .focused: return 1
+        case .disabled: return disabledOpacity
+        }
+    }
+}
+
+extension StateColorsAndOpacities_EP_D {
+    func `for`(_ state: VTextFieldState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .focused: return enabled
+        case .disabled: return disabled
+        }
+    }
+    
+    func `for`(_ state: VTextFieldState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .focused: return 1
+        case .disabled: return disabledOpacity
+        }
+    }
+}

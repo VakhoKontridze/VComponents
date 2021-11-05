@@ -150,7 +150,7 @@ struct _VHalfModal<Content, HeaderContent>: View
     
     private var contentView: some View {
         ZStack(content: {
-            ColorBook.clear // Overrides drag on edge of sheet
+            Color.clear // Overrides drag on edge of sheet
                 .contentShape(Rectangle())
                 .gesture(DragGesture(minimumDistance: 0))
             

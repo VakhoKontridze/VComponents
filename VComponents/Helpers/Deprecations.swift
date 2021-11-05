@@ -152,6 +152,120 @@ extension StateColors_OOID {
     }
 }
 
+@available(*, deprecated, renamed: "StateColors_EFSEPD")
+public typealias StateColors_EpFpSpEpD = StateColors_EFSEPD
+
+extension StateColors_EFSEPD {
+    @available(*, deprecated, renamed: "pressedEnabled")
+    public var enabledPressed: Color {
+        get { pressedEnabled }
+        set { pressedEnabled = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "pressedFocused")
+    public var focusedPressed: Color {
+        get { pressedFocused }
+        set { pressedFocused = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "pressedSuccess")
+    public var successPressed: Color {
+        get { pressedSuccess }
+        set { pressedSuccess = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "pressedError")
+    public var errorPressed: Color {
+        get { pressedError }
+        set { pressedError = newValue }
+    }
+    
+    @available(*, deprecated, message: "Use init with parameters of different labels")
+    public init(
+        enabled: Color,
+        enabledPressed: Color,
+        focused: Color,
+        focusedPressed: Color,
+        success: Color,
+        successPressed: Color,
+        error: Color,
+        errorPressed: Color,
+        disabled: Color
+    ) {
+        self.enabled = enabled
+        self.focused = focused
+        self.success = success
+        self.error = error
+        self.pressedEnabled = enabledPressed
+        self.pressedFocused = focusedPressed
+        self.pressedSuccess = successPressed
+        self.pressedError = errorPressed
+        self.disabled = disabled
+    }
+}
+
+@available(*, deprecated, renamed: "StateColorsAndOpacities_EFSEPD_PD")
+public typealias StateColors_EpFpSpEpD_PD = StateColorsAndOpacities_EFSEPD_PD
+
+extension StateColorsAndOpacities_EFSEPD_PD {
+    @available(*, deprecated, renamed: "pressedEnabled")
+    public var enabledPressed: Color {
+        get { pressedEnabled }
+        set { pressedEnabled = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "pressedFocused")
+    public var focusedPressed: Color {
+        get { pressedFocused }
+        set { pressedFocused = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "pressedSuccess")
+    public var successPressed: Color {
+        get { pressedSuccess }
+        set { pressedSuccess = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "pressedError")
+    public var errorPressed: Color {
+        get { pressedError }
+        set { pressedError = newValue }
+    }
+    
+    @available(*, deprecated, message: "Use init with parameters of different labels")
+    public init(
+        enabled: Color,
+        enabledPressed: Color,
+        focused: Color,
+        focusedPressed: Color,
+        success: Color,
+        successPressed: Color,
+        error: Color,
+        errorPressed: Color,
+        disabled: Color,
+        pressedOpacity: CGFloat,
+        disabledOpacity: CGFloat
+    ) {
+        self.enabled = enabled
+        self.focused = focused
+        self.success = success
+        self.error = error
+        self.pressedEnabled = enabledPressed
+        self.pressedFocused = focusedPressed
+        self.pressedSuccess = successPressed
+        self.pressedError = errorPressed
+        self.disabled = disabled
+        self.pressedOpacity = pressedOpacity
+        self.disabledOpacity = disabledOpacity
+    }
+}
+
+// MARK: - Colors
+extension ColorBook {
+    @available(*, deprecated, message: "Use SwiftUI's Color.clear")
+    public static let clear: Color = .clear
+}
+
 // MARK: - Basic Animations
 extension BasicAnimation {
     @available(*, deprecated, renamed: "AnimationCurve")

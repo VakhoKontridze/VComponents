@@ -58,7 +58,7 @@ struct VPageIndicatorInfinite: View {
     }
     
     private var frame: some View {
-        ColorBook.clear
+        Color.clear
             .frame(size: .init(width: visibleWidth, height: model.layout.dotDimension))
     }
     

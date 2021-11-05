@@ -107,6 +107,35 @@ enum VCheckBoxInternalState {
     }
 }
 
+// MARK: - Mapping
+extension StateColors_OOID {
+    func `for`(_ state: VCheckBoxInternalState) -> Color {
+        switch state {
+        case .off: return off
+        case .on: return on
+        case .indeterminate: return indeterminate
+        case .pressedOff: return off
+        case .pressedOn: return on
+        case .pressedIndeterminate: return indeterminate
+        case .disabled: return disabled
+        }
+    }
+}
+
+extension StateOpacities_PD {
+    func `for`(_ state: VCheckBoxInternalState) -> Double {
+        switch state {
+        case .off: return 1
+        case .on: return 1
+        case .indeterminate: return 1
+        case .pressedOff: return pressedOpacity
+        case .pressedOn: return pressedOpacity
+        case .pressedIndeterminate: return pressedOpacity
+        case .disabled: return disabledOpacity
+        }
+    }
+}
+
 // MARK: - Helpers
 extension Binding where Value == VCheckBoxState {
     /// Initializes state with bool.

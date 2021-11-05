@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 2/2/21.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Stepper State
 /// Enum that describes state, such as `enabled` or `disabled`.
@@ -43,6 +43,44 @@ enum VStepperButtonState {
             case true: self = .enabled
             case false: self = .disabled
             }
+        }
+    }
+}
+
+// MARK: - Mapping
+extension StateColors_ED {
+    func `for`(_ state: VStepperState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .disabled: return disabled
+        }
+    }
+}
+
+extension StateColors_EPD {
+    func `for`(_ state: VStepperButtonState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
+        }
+    }
+}
+
+extension StateColorsAndOpacities_EPD_PD {
+    func `for`(_ state: VStepperButtonState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
+        }
+    }
+    
+    func `for`(_ state: VStepperButtonState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }

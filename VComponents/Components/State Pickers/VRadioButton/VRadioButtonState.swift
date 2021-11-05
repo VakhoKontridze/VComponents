@@ -91,6 +91,31 @@ enum VRadioButtonInternalState {
     }
 }
 
+// MARK: - Mapping
+extension StateColors_OOD {
+    func `for`(_ state: VRadioButtonInternalState) -> Color {
+        switch state {
+        case .off: return off
+        case .on: return on
+        case .pressedOff: return off
+        case .pressedOn: return on
+        case .disabled: return disabled
+        }
+    }
+}
+
+extension StateOpacities_PD {
+    func `for`(_ state: VRadioButtonInternalState) -> Double {
+        switch state {
+        case .off: return 1
+        case .on: return 1
+        case .pressedOff: return pressedOpacity
+        case .pressedOn: return pressedOpacity
+        case .disabled: return disabledOpacity
+        }
+    }
+}
+
 // MARK: - Helpers
 extension Binding where Value == VRadioButtonState {
     /// Initializes state with bool.

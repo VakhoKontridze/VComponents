@@ -12,6 +12,20 @@
 		173C1FD6272A808500DF634F /* UINavigationBar.NavigationBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */; };
 		173C1FDB272A810A00DF634F /* View.ReadSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FDA272A810A00DF634F /* View.ReadSize.swift */; };
 		173C1FDD272A890100DF634F /* Optional.LetBlockTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FDC272A890100DF634F /* Optional.LetBlockTransformation.swift */; };
+		17B23E7E27355AD300914FEB /* StateColors_EPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7D27355AD300914FEB /* StateColors_EPD.swift */; };
+		17B23E8027355AE700914FEB /* StateColors_EPDL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7F27355AE700914FEB /* StateColors_EPDL.swift */; };
+		17B23E8227355AFA00914FEB /* StateColors_OOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8127355AFA00914FEB /* StateColors_OOD.swift */; };
+		17B23E8427355B1D00914FEB /* StateColors_OOID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8327355B1D00914FEB /* StateColors_OOID.swift */; };
+		17B23E8627355B2F00914FEB /* StateColors_EFD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8527355B2F00914FEB /* StateColors_EFD.swift */; };
+		17B23E8827355B4A00914FEB /* StateColors_EFSED.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8727355B4A00914FEB /* StateColors_EFSED.swift */; };
+		17B23E8A27355B6900914FEB /* StateColors_EFSEPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8927355B6900914FEB /* StateColors_EFSEPD.swift */; };
+		17B23E8C27355C1B00914FEB /* StateOpacities_D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8B27355C1B00914FEB /* StateOpacities_D.swift */; };
+		17B23E8E27355CE100914FEB /* StateOpacities_PD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8D27355CE100914FEB /* StateOpacities_PD.swift */; };
+		17B23E90273560C700914FEB /* StateColorsAndOpacities_EPD_PD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8F273560C700914FEB /* StateColorsAndOpacities_EPD_PD.swift */; };
+		17B23E94273562DF00914FEB /* StateColorsAndOpacities_EFSEPD_PD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E93273562DF00914FEB /* StateColorsAndOpacities_EFSEPD_PD.swift */; };
+		17B23E96273563B400914FEB /* LayoutGroup_HV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E95273563B400914FEB /* LayoutGroup_HV.swift */; };
+		17B23E98273563C900914FEB /* LayoutGroup_TB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E97273563C900914FEB /* LayoutGroup_TB.swift */; };
+		17B23E9A273563D500914FEB /* LayoutGroup_LT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E99273563D500914FEB /* LayoutGroup_LT.swift */; };
 		7A00731B258E27490003F0E9 /* VPlainButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00731A258E27490003F0E9 /* VPlainButton.swift */; };
 		7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */; };
 		7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A007322258E27C40003F0E9 /* VPlainButtonModel.swift */; };
@@ -175,11 +189,11 @@
 		7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A92926625B5BB8200BBEA8A /* ImageBook.swift */; };
 		7A9C337426D7FB6A00A75A3D /* VNavigationLinkExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9C337326D7FB6A00A75A3D /* VNavigationLinkExtension.swift */; };
 		7AA25E4A25BF2A8A00ACB323 /* VHalfModalDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */; };
-		7AA2B5FC25D2D5A70035E3F7 /* LayoutGroups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2B5FB25D2D5A70035E3F7 /* LayoutGroups.swift */; };
+		7AA2B5FC25D2D5A70035E3F7 /* LayoutGroup_LTTB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA2B5FB25D2D5A70035E3F7 /* LayoutGroup_LTTB.swift */; };
 		7AA39B7D25CC7A9800FA30E5 /* VStepperButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */; };
-		7AA39B8125CD50B800FA30E5 /* StateColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8025CD50B800FA30E5 /* StateColors.swift */; };
-		7AA39B8625CD51E500FA30E5 /* StateOpacities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8525CD51E500FA30E5 /* StateOpacities.swift */; };
-		7AA39B8925CD528C00FA30E5 /* StateColorsAndOpacities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities.swift */; };
+		7AA39B8125CD50B800FA30E5 /* StateColors_ED.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8025CD50B800FA30E5 /* StateColors_ED.swift */; };
+		7AA39B8625CD51E500FA30E5 /* StateOpacities_P.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8525CD51E500FA30E5 /* StateOpacities_P.swift */; };
+		7AA39B8925CD528C00FA30E5 /* StateColorsAndOpacities_EP_D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities_EP_D.swift */; };
 		7AA763D925B738EA0088FC69 /* VTextFieldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763D825B738EA0088FC69 /* VTextFieldState.swift */; };
 		7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */; };
 		7AA763E425B73F2C0088FC69 /* VTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA763E325B73F2C0088FC69 /* VTextField.swift */; };
@@ -275,6 +289,20 @@
 		173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.NavigationBarHeight.swift; sourceTree = "<group>"; };
 		173C1FDA272A810A00DF634F /* View.ReadSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.ReadSize.swift; sourceTree = "<group>"; };
 		173C1FDC272A890100DF634F /* Optional.LetBlockTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.LetBlockTransformation.swift; sourceTree = "<group>"; };
+		17B23E7D27355AD300914FEB /* StateColors_EPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPD.swift; sourceTree = "<group>"; };
+		17B23E7F27355AE700914FEB /* StateColors_EPDL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPDL.swift; sourceTree = "<group>"; };
+		17B23E8127355AFA00914FEB /* StateColors_OOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_OOD.swift; sourceTree = "<group>"; };
+		17B23E8327355B1D00914FEB /* StateColors_OOID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_OOID.swift; sourceTree = "<group>"; };
+		17B23E8527355B2F00914FEB /* StateColors_EFD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EFD.swift; sourceTree = "<group>"; };
+		17B23E8727355B4A00914FEB /* StateColors_EFSED.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EFSED.swift; sourceTree = "<group>"; };
+		17B23E8927355B6900914FEB /* StateColors_EFSEPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EFSEPD.swift; sourceTree = "<group>"; };
+		17B23E8B27355C1B00914FEB /* StateOpacities_D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateOpacities_D.swift; sourceTree = "<group>"; };
+		17B23E8D27355CE100914FEB /* StateOpacities_PD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateOpacities_PD.swift; sourceTree = "<group>"; };
+		17B23E8F273560C700914FEB /* StateColorsAndOpacities_EPD_PD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColorsAndOpacities_EPD_PD.swift; sourceTree = "<group>"; };
+		17B23E93273562DF00914FEB /* StateColorsAndOpacities_EFSEPD_PD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColorsAndOpacities_EFSEPD_PD.swift; sourceTree = "<group>"; };
+		17B23E95273563B400914FEB /* LayoutGroup_HV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGroup_HV.swift; sourceTree = "<group>"; };
+		17B23E97273563C900914FEB /* LayoutGroup_TB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGroup_TB.swift; sourceTree = "<group>"; };
+		17B23E99273563D500914FEB /* LayoutGroup_LT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGroup_LT.swift; sourceTree = "<group>"; };
 		7A00731A258E27490003F0E9 /* VPlainButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButton.swift; sourceTree = "<group>"; };
 		7A00731E258E278F0003F0E9 /* VPlainButtonState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonState.swift; sourceTree = "<group>"; };
 		7A007322258E27C40003F0E9 /* VPlainButtonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPlainButtonModel.swift; sourceTree = "<group>"; };
@@ -440,11 +468,11 @@
 		7A92926625B5BB8200BBEA8A /* ImageBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageBook.swift; sourceTree = "<group>"; };
 		7A9C337326D7FB6A00A75A3D /* VNavigationLinkExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VNavigationLinkExtension.swift; sourceTree = "<group>"; };
 		7AA25E4925BF2A8A00ACB323 /* VHalfModalDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VHalfModalDemoView.swift; sourceTree = "<group>"; };
-		7AA2B5FB25D2D5A70035E3F7 /* LayoutGroups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGroups.swift; sourceTree = "<group>"; };
+		7AA2B5FB25D2D5A70035E3F7 /* LayoutGroup_LTTB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutGroup_LTTB.swift; sourceTree = "<group>"; };
 		7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStepperButton.swift; sourceTree = "<group>"; };
-		7AA39B8025CD50B800FA30E5 /* StateColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors.swift; sourceTree = "<group>"; };
-		7AA39B8525CD51E500FA30E5 /* StateOpacities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateOpacities.swift; sourceTree = "<group>"; };
-		7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColorsAndOpacities.swift; sourceTree = "<group>"; };
+		7AA39B8025CD50B800FA30E5 /* StateColors_ED.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_ED.swift; sourceTree = "<group>"; };
+		7AA39B8525CD51E500FA30E5 /* StateOpacities_P.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateOpacities_P.swift; sourceTree = "<group>"; };
+		7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities_EP_D.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColorsAndOpacities_EP_D.swift; sourceTree = "<group>"; };
 		7AA763D825B738EA0088FC69 /* VTextFieldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldState.swift; sourceTree = "<group>"; };
 		7AA763DC25B7393E0088FC69 /* VTextFieldModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldModel.swift; sourceTree = "<group>"; };
 		7AA763E325B73F2C0088FC69 /* VTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextField.swift; sourceTree = "<group>"; };
@@ -561,7 +589,10 @@
 		1787182927306C1900C2B74C /* Edge Insets */ = {
 			isa = PBXGroup;
 			children = (
-				7AA2B5FB25D2D5A70035E3F7 /* LayoutGroups.swift */,
+				7AA2B5FB25D2D5A70035E3F7 /* LayoutGroup_LTTB.swift */,
+				17B23E95273563B400914FEB /* LayoutGroup_HV.swift */,
+				17B23E97273563C900914FEB /* LayoutGroup_TB.swift */,
+				17B23E99273563D500914FEB /* LayoutGroup_LT.swift */,
 			);
 			path = "Edge Insets";
 			sourceTree = "<group>";
@@ -1237,9 +1268,20 @@
 		7AA39B8325CD51D600FA30E5 /* State Colors and Opacities */ = {
 			isa = PBXGroup;
 			children = (
-				7AA39B8025CD50B800FA30E5 /* StateColors.swift */,
-				7AA39B8525CD51E500FA30E5 /* StateOpacities.swift */,
-				7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities.swift */,
+				7AA39B8025CD50B800FA30E5 /* StateColors_ED.swift */,
+				17B23E7D27355AD300914FEB /* StateColors_EPD.swift */,
+				17B23E7F27355AE700914FEB /* StateColors_EPDL.swift */,
+				17B23E8127355AFA00914FEB /* StateColors_OOD.swift */,
+				17B23E8327355B1D00914FEB /* StateColors_OOID.swift */,
+				17B23E8527355B2F00914FEB /* StateColors_EFD.swift */,
+				17B23E8727355B4A00914FEB /* StateColors_EFSED.swift */,
+				17B23E8927355B6900914FEB /* StateColors_EFSEPD.swift */,
+				7AA39B8525CD51E500FA30E5 /* StateOpacities_P.swift */,
+				17B23E8B27355C1B00914FEB /* StateOpacities_D.swift */,
+				17B23E8D27355CE100914FEB /* StateOpacities_PD.swift */,
+				7AA39B8825CD528C00FA30E5 /* StateColorsAndOpacities_EP_D.swift */,
+				17B23E8F273560C700914FEB /* StateColorsAndOpacities_EPD_PD.swift */,
+				17B23E93273562DF00914FEB /* StateColorsAndOpacities_EFSEPD_PD.swift */,
 			);
 			path = "State Colors and Opacities";
 			sourceTree = "<group>";
@@ -1640,6 +1682,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A67884E25CC0A2300734DA6 /* VStepperModel.swift in Sources */,
+				17B23E90273560C700914FEB /* StateColorsAndOpacities_EPD_PD.swift in Sources */,
 				7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */,
 				7A5A5FFA25C92376008667F5 /* VTabNavigationPageItem.swift in Sources */,
 				7AF3C8D225AF511800D56042 /* VModalModel.swift in Sources */,
@@ -1650,6 +1693,7 @@
 				7AF3C8D525AF5C1A00D56042 /* _VModal.swift in Sources */,
 				7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */,
 				7A259B6E259784CF00A12F8C /* VDialogButton.swift in Sources */,
+				17B23E8A27355B6900914FEB /* StateColors_EFSEPD.swift in Sources */,
 				7A621834259494CB00515688 /* VLazyScrollViewVertical.swift in Sources */,
 				7AD8095A2594FF3D00DABE49 /* VSideBarModel.swift in Sources */,
 				7A2F830F25CFD5EF0099BA69 /* VWebLink.swift in Sources */,
@@ -1663,13 +1707,14 @@
 				7AF3C8E125AF675300D56042 /* VCloseButtonState.swift in Sources */,
 				7A2F831225CFD60D0099BA69 /* VWebLinkType.swift in Sources */,
 				7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */,
+				17B23E8027355AE700914FEB /* StateColors_EPDL.swift in Sources */,
 				7A259B652597828700A12F8C /* VDialog.swift in Sources */,
 				7AC5060125911A0800226656 /* VSpinnerModelDashed.swift in Sources */,
 				7A0CF35825BEDD49009FE576 /* VBaseHeaderFooterType.swift in Sources */,
 				7A5A5FEF25C88743008667F5 /* VActionSheetRow.swift in Sources */,
 				7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */,
 				7A5A5FE825C84190008667F5 /* VMenuSubMenu.swift in Sources */,
-				7AA39B8125CD50B800FA30E5 /* StateColors.swift in Sources */,
+				7AA39B8125CD50B800FA30E5 /* StateColors_ED.swift in Sources */,
 				7A767CB925B6BEC10008D2E9 /* VRadioButtonState.swift in Sources */,
 				7A6218382594956400515688 /* VLazyScrollViewHorizontal.swift in Sources */,
 				7AF3CA9125B0CB6A00D56042 /* VTextType.swift in Sources */,
@@ -1683,13 +1728,15 @@
 				7A5A600525C92996008667F5 /* VMenuPickerState.swift in Sources */,
 				7A3EE37C25B2F27500303EE7 /* VNavigationLinkType.swift in Sources */,
 				7A8A73872590BFFA001024FB /* VToggleModel.swift in Sources */,
+				17B23E8827355B4A00914FEB /* StateColors_EFSED.swift in Sources */,
 				7A8A9729258DDDA800309886 /* VPrimaryButton.swift in Sources */,
 				7A9C337426D7FB6A00A75A3D /* VNavigationLinkExtension.swift in Sources */,
 				173C1FD6272A808500DF634F /* UINavigationBar.NavigationBarHeight.swift in Sources */,
 				7A767CF025B704450008D2E9 /* FocusableTextField.swift in Sources */,
+				17B23E8627355B2F00914FEB /* StateColors_EFD.swift in Sources */,
 				7A3C159B258E0A3D00CE1D96 /* VLazyScrollViewModelVertical.swift in Sources */,
 				7A62182425948DE800515688 /* VBaseViewNavigationBarCenter.swift in Sources */,
-				7AA2B5FC25D2D5A70035E3F7 /* LayoutGroups.swift in Sources */,
+				7AA2B5FC25D2D5A70035E3F7 /* LayoutGroup_LTTB.swift in Sources */,
 				7AF3C8DD25AF673300D56042 /* VCloseButton.swift in Sources */,
 				7A0E49DE25CEE84D006A8142 /* VPageIndicatorFinite.swift in Sources */,
 				7ACC3ED225ACB22700EAD184 /* VListLayoutType.swift in Sources */,
@@ -1697,6 +1744,7 @@
 				7A5A600125C92924008667F5 /* VMenuPicker.swift in Sources */,
 				7ACC3ED825ACC1C600EAD184 /* VAccordionState.swift in Sources */,
 				7A036BA225CFEB7600773302 /* VToastModel.swift in Sources */,
+				17B23E8C27355C1B00914FEB /* StateOpacities_D.swift in Sources */,
 				7A0CF35425BEDD3A009FE576 /* VBaseHeaderFooterView.swift in Sources */,
 				7A62182025948DAB00515688 /* VBaseViewModel.swift in Sources */,
 				7A767CE925B702210008D2E9 /* VBaseTextFieldState.swift in Sources */,
@@ -1713,6 +1761,7 @@
 				7A0BB66725B9C7FD00E7FCA1 /* VHalfModalModel.swift in Sources */,
 				7A4D0C372594C0CE00108575 /* VSecondaryButtonState.swift in Sources */,
 				7A59577725AB546700B5B6E7 /* VList.swift in Sources */,
+				17B23E94273562DF00914FEB /* StateColorsAndOpacities_EFSEPD_PD.swift in Sources */,
 				7AC65FE825C341CC001E96AE /* VMenu.swift in Sources */,
 				7A08F858259731350049FB10 /* VTabNavigationView.swift in Sources */,
 				7A4C43012592297F000207DD /* VBaseViewNavigationBarLeading.swift in Sources */,
@@ -1723,11 +1772,15 @@
 				7A59577A25AB584300B5B6E7 /* VListModel.swift in Sources */,
 				7A2B60B725D6DA4B00DD56BA /* Deprecations.swift in Sources */,
 				7A4C42F4259228E8000207DD /* VNavigationView.swift in Sources */,
+				17B23E96273563B400914FEB /* LayoutGroup_HV.swift in Sources */,
 				7AC65FEE25C34303001E96AE /* VMenuState.swift in Sources */,
 				7A767CEC25B703E10008D2E9 /* UIKitTextFieldCoordinator.swift in Sources */,
+				17B23E7E27355AD300914FEB /* StateColors_EPD.swift in Sources */,
 				7A767CF325B705350008D2E9 /* UIKitTouchView.swift in Sources */,
 				7AC65FEB25C3423B001E96AE /* VMenuButtonType.swift in Sources */,
 				7AC6600625C347D5001E96AE /* VMenuRow.swift in Sources */,
+				17B23E8227355AFA00914FEB /* StateColors_OOD.swift in Sources */,
+				17B23E9A273563D500914FEB /* LayoutGroup_LT.swift in Sources */,
 				7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */,
 				7A259B842597B2C600A12F8C /* _VDialog.swift in Sources */,
 				7A4D0C2E2594C06A00108575 /* VSecondaryButton.swift in Sources */,
@@ -1736,7 +1789,7 @@
 				7A3EE37925B2DE0C00303EE7 /* VNavigationLinkState.swift in Sources */,
 				7AB41B5F25B7673D00F83987 /* VTextFieldHighlight.swift in Sources */,
 				7ACC3EDB25ACC22E00EAD184 /* VAccordionModel.swift in Sources */,
-				7AA39B8625CD51E500FA30E5 /* StateOpacities.swift in Sources */,
+				7AA39B8625CD51E500FA30E5 /* StateOpacities_P.swift in Sources */,
 				7A259B7825979FC000A12F8C /* VDialogModel.swift in Sources */,
 				7AB41B6725B8303800F83987 /* VTextFieldActions.swift in Sources */,
 				7A767CF925B717280008D2E9 /* VBaseButtonState.swift in Sources */,
@@ -1772,6 +1825,7 @@
 				7A860D4C259315C900B19A53 /* VChevronButtonDirection.swift in Sources */,
 				7AC4E01825ADFB9900CE2816 /* VProgressBarModel.swift in Sources */,
 				7AC4E00025ADF65500CE2816 /* VProgressBar.swift in Sources */,
+				17B23E8E27355CE100914FEB /* StateOpacities_PD.swift in Sources */,
 				173C1FD2272A7FD600DF634F /* View.CustomViewFrames.swift in Sources */,
 				7A3C1584258DFF5A00CE1D96 /* VLazyScrollView.swift in Sources */,
 				7A036B9D25CFE9E800773302 /* VToastType.swift in Sources */,
@@ -1780,6 +1834,7 @@
 				7A860D5225931B3C00B19A53 /* VChevronButtonState.swift in Sources */,
 				173C1FDD272A890100DF634F /* Optional.LetBlockTransformation.swift in Sources */,
 				7A4C4304259229B2000207DD /* VBaseViewSwipeGesture.swift in Sources */,
+				17B23E98273563C900914FEB /* LayoutGroup_TB.swift in Sources */,
 				7A90266625BA04C100685282 /* UIVIew.SafeAreas.swift in Sources */,
 				7AA763D925B738EA0088FC69 /* VTextFieldState.swift in Sources */,
 				7AACBC1B25A9EBFE0066E754 /* VNavigationLink.swift in Sources */,
@@ -1796,8 +1851,9 @@
 				7A08F84E25972EB40049FB10 /* VTabNavigationViewModel.swift in Sources */,
 				7ACC3ECF25ACB1D900EAD184 /* VSectionListLayoutType.swift in Sources */,
 				7A259B6B259783A100A12F8C /* VDialogButtons.swift in Sources */,
-				7AA39B8925CD528C00FA30E5 /* StateColorsAndOpacities.swift in Sources */,
+				7AA39B8925CD528C00FA30E5 /* StateColorsAndOpacities_EP_D.swift in Sources */,
 				7A59578725AB6FCC00B5B6E7 /* VSectionListModel.swift in Sources */,
+				17B23E8427355B1D00914FEB /* StateColors_OOID.swift in Sources */,
 				7A007375258E75DF0003F0E9 /* VToggleState.swift in Sources */,
 				7A767CD025B6E8DB0008D2E9 /* VWheelPickerState.swift in Sources */,
 				173C1FD4272A7FFF00DF634F /* View.CornerRadius.swift in Sources */,

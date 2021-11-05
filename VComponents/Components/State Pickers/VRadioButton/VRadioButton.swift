@@ -269,7 +269,7 @@ public struct VRadioButton<Content>: View where Content: View {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: model.layout.contentMarginLeading)
-                .foregroundColor(ColorBook.clear)
+                .foregroundColor(.clear)
         })
     }
     

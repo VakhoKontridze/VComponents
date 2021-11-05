@@ -65,3 +65,14 @@ public enum VAccordionState: Int, CaseIterable {
         }
     }
 }
+
+// MARK: - Mapping
+extension StateOpacities_D {
+    func `for`(_ state: VAccordionState) -> Double {
+        switch state {
+        case .collapsed: return 1
+        case .expanded: return 1
+        case .disabled: return disabledOpacity
+        }
+    }
+}

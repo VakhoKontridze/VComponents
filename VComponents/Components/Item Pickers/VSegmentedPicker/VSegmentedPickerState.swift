@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/7/21.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Segmented Picker State
 /// Enum that describes state, such as `enabled` or `disabled`.
@@ -43,6 +43,35 @@ enum VSegmentedPickerRowState {
             case true: self = .enabled
             case false: self = .disabled
             }
+        }
+    }
+}
+
+// MARK: - Mapping
+extension StateColors_ED {
+    func `for`(_ state: VSegmentedPickerState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .disabled: return disabled
+        }
+    }
+}
+
+extension StateOpacities_PD {
+    func `for`(_ state: VSegmentedPickerState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .disabled: return disabledOpacity
+        }
+    }
+}
+
+extension StateOpacities_PD {
+    func `for`(_ state: VSegmentedPickerRowState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }

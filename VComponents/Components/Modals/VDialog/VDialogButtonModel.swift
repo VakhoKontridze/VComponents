@@ -58,9 +58,9 @@ public enum VDialogButtonModel {
                 disabled: VDialogButtonModelCustom.primaryButtonReference.colors.background.disabled
             ),
             background: .init(
-                enabled: ColorBook.clear,
-                pressed: ColorBook.clear,
-                disabled: ColorBook.clear
+                enabled: .clear,
+                pressed: .clear,
+                disabled: .clear
             )
         )
     )

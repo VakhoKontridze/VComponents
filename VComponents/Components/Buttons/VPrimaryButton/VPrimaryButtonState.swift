@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Primary Button State
 /// Enum that describes state, such as `enabled`, `disabled`, or `loading`.
@@ -67,6 +67,29 @@ enum VPrimaryButtonInternalState {
         case (.enabled, true): self = .pressed
         case (.disabled, _): self = .disabled
         case (.loading, _): self = .loading
+        }
+    }
+}
+
+// MARK: - Mapping
+extension StateColors_EPDL {
+    func `for`(_ state: VPrimaryButtonInternalState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
+        case .loading: return loading
+        }
+    }
+}
+
+extension StateOpacities_PD {
+    func `for`(_ state: VPrimaryButtonInternalState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
+        case .loading: return disabledOpacity
         }
     }
 }

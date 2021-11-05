@@ -11,9 +11,6 @@ import SwiftUI
 /// Contains fundamental colors used throughout the library.
 public struct ColorBook {
     // MARK: Properties
-    /// Clear color.
-    public static let clear: Color = .clear
-    
     /// Canvas color that can be used for `VBaseView`.
     public static let canvas: Color = .init(componentAsset: "Canvas")
     

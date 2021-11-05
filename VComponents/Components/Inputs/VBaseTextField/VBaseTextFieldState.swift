@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/19/21.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Base Text Field State
 /// Enum that describes state, such as `enabled`, `focused`, or `disabled`.
@@ -43,6 +43,25 @@ public enum VBaseTextFieldState: Int, CaseIterable {
         switch state {
         case false: self = .enabled
         case true: self = .focused
+        }
+    }
+}
+
+// MARK: - Mapping
+extension StateColorsAndOpacities_EP_D {
+    func `for`(_ state: VBaseTextFieldState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .focused: return enabled
+        case .disabled: return disabled
+        }
+    }
+    
+    func `for`(_ state: VBaseTextFieldState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .focused: return 1
+        case .disabled: return disabledOpacity
         }
     }
 }

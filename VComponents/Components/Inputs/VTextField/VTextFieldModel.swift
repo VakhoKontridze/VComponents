@@ -123,11 +123,11 @@ public struct VTextFieldModel {
         
         /// Border colors.
         public var border: StateColorsHighlighted = .init(
-            enabled: ColorBook.clear,
-            focused: ColorBook.clear,
+            enabled: .clear,
+            focused: .clear,
             success: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            disabled: ColorBook.clear
+            disabled: .clear
         )
         
         /// Header colors.
@@ -160,13 +160,13 @@ public struct VTextFieldModel {
         /// Visiblity button icon colors.
         public var visibilityButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
-            enabledPressed: segmentedPickerReference.colors.header.enabled,
             focused: segmentedPickerReference.colors.header.enabled,
-            focusedPressed: segmentedPickerReference.colors.header.enabled,
             success: .init(componentAsset: "TextField.Border.success"),
-            successPressed: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            errorPressed: .init(componentAsset: "TextField.Border.error"),
+            pressedEnabled: segmentedPickerReference.colors.header.enabled,
+            pressedFocused: segmentedPickerReference.colors.header.enabled,
+            pressedSuccess: .init(componentAsset: "TextField.Border.success"),
+            pressedError: .init(componentAsset: "TextField.Border.error"),
             disabled: segmentedPickerReference.colors.header.disabled,
             pressedOpacity: squareButtonReference.colors.content.pressedOpacity,
             disabledOpacity: squareButtonReference.colors.content.disabledOpacity
@@ -175,26 +175,26 @@ public struct VTextFieldModel {
         /// Clear button background colors.
         public var clearButtonBackground: ButtonStateColorsHighlighted = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
-            enabledPressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
             focused: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
-            focusedPressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
             success: .init(componentAsset: "TextField.Border.success"),
-            successPressed: .init(componentAsset: "TextField.Border.success"),
             error: .init(componentAsset: "TextField.Border.error"),
-            errorPressed: .init(componentAsset: "TextField.Border.error"),
+            pressedEnabled: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
+            pressedFocused: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
+            pressedSuccess: .init(componentAsset: "TextField.Border.success"),
+            pressedError: .init(componentAsset: "TextField.Border.error"),
             disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
         )
         
         /// Clear button icon colors.
         public var clearButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            enabledPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             focused: .init(componentAsset: "TextField.ClearButton.Icon"),
-            focusedPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             success: .init(componentAsset: "TextField.ClearButton.Icon"),
-            successPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             error: .init(componentAsset: "TextField.ClearButton.Icon"),
-            errorPressed: .init(componentAsset: "TextField.ClearButton.Icon"),
+            pressedEnabled: .init(componentAsset: "TextField.ClearButton.Icon"),
+            pressedFocused: .init(componentAsset: "TextField.ClearButton.Icon"),
+            pressedSuccess: .init(componentAsset: "TextField.ClearButton.Icon"),
+            pressedError: .init(componentAsset: "TextField.ClearButton.Icon"),
             disabled: .init(componentAsset: "TextField.ClearButton.Icon"),
             pressedOpacity: closeButtonReference.colors.content.pressedOpacity,
             disabledOpacity: closeButtonReference.colors.content.disabledOpacity
@@ -231,11 +231,11 @@ public struct VTextFieldModel {
         
         // MARK: Button State Colors Highlighted
         /// Sub-model containing colors for component states.
-        public typealias ButtonStateColorsHighlighted = StateColors_EpFpSpEpD
+        public typealias ButtonStateColorsHighlighted = StateColors_EFSEPD
         
         // MARK: Button State Colors and Opacities Highlighted
         /// Sub-model containing colors and opacities for component states.
-        public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColors_EpFpSpEpD_PD
+        public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColorsAndOpacities_EFSEPD_PD
     }
 
     // MARK: Fonts

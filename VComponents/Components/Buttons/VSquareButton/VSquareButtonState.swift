@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Square Button State
 /// Enum that describes state, such as `enabled` or `disabled`.
@@ -49,6 +49,27 @@ enum VSquareButtonInternalState {
         case (.enabled, false): self = .enabled
         case (.enabled, true): self = .pressed
         case (.disabled, _): self = .disabled
+        }
+    }
+}
+
+// MARK: - Mapping
+extension StateColors_EPD {
+    func `for`(_ state: VSquareButtonInternalState) -> Color {
+        switch state {
+        case .enabled: return enabled
+        case .pressed: return pressed
+        case .disabled: return disabled
+        }
+    }
+}
+
+extension StateOpacities_PD {
+    func `for`(_ state: VSquareButtonInternalState) -> Double {
+        switch state {
+        case .enabled: return 1
+        case .pressed: return pressedOpacity
+        case .disabled: return disabledOpacity
         }
     }
 }
