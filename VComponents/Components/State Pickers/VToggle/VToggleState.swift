@@ -54,8 +54,8 @@ public enum VToggleState: Int, CaseIterable {
 enum VToggleInternalState {
     // MARK: Cases
     case off
-    case pressedOff
     case on
+    case pressedOff
     case pressedOn
     case disabled
     
@@ -63,8 +63,8 @@ enum VToggleInternalState {
     var isEnabled: Bool {
         switch self {
         case .off: return true
-        case .pressedOff: return true
         case .on: return true
+        case .pressedOff: return true
         case .pressedOn: return true
         case .disabled: return false
         }

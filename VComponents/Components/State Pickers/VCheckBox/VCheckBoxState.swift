@@ -64,10 +64,10 @@ public enum VCheckBoxState: Int, CaseIterable {
 enum VCheckBoxInternalState {
     // MARK: Cases
     case off
-    case pressedOff
     case on
-    case pressedOn
     case indeterminate
+    case pressedOff
+    case pressedOn
     case pressedIndeterminate
     case disabled
     
@@ -75,10 +75,10 @@ enum VCheckBoxInternalState {
     var isEnabled: Bool {
         switch self {
         case .off: return true
-        case .pressedOff: return true
         case .on: return true
-        case .pressedOn: return true
         case .indeterminate: return true
+        case .pressedOff: return true
+        case .pressedOn: return true
         case .pressedIndeterminate: return true
         case .disabled: return false
         }

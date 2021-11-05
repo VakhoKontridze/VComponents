@@ -246,8 +246,8 @@ public struct StateColors_OOD: Equatable {
     func `for`(_ state: VToggleInternalState) -> Color {
         switch state {
         case .off: return off
-        case .pressedOff: return off
         case .on: return on
+        case .pressedOff: return off
         case .pressedOn: return on
         case .disabled: return disabled
         }
@@ -256,8 +256,8 @@ public struct StateColors_OOD: Equatable {
     func `for`(_ state: VRadioButtonInternalState) -> Color {
         switch state {
         case .off: return off
-        case .pressedOff: return off
         case .on: return on
+        case .pressedOff: return off
         case .pressedOn: return on
         case .disabled: return disabled
         }
@@ -308,10 +308,10 @@ public struct StateColors_OOID: Equatable {
     func `for`(_ state: VCheckBoxInternalState) -> Color {
         switch state {
         case .off: return off
-        case .pressedOff: return off
         case .on: return on
-        case .pressedOn: return on
         case .indeterminate: return indeterminate
+        case .pressedOff: return off
+        case .pressedOn: return on
         case .pressedIndeterminate: return indeterminate
         case .disabled: return disabled
         }

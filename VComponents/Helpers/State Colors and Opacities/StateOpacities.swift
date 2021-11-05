@@ -180,8 +180,8 @@ public struct StateOpacities_PD: Equatable {
     func `for`(_ state: VToggleInternalState) -> Double {
         switch state {
         case .off: return 1
-        case .pressedOff: return pressedOpacity
         case .on: return 1
+        case .pressedOff: return pressedOpacity
         case .pressedOn: return pressedOpacity
         case .disabled: return disabledOpacity
         }
@@ -190,10 +190,10 @@ public struct StateOpacities_PD: Equatable {
     func `for`(_ state: VCheckBoxInternalState) -> Double {
         switch state {
         case .off: return 1
-        case .pressedOff: return pressedOpacity
         case .on: return 1
-        case .pressedOn: return pressedOpacity
         case .indeterminate: return 1
+        case .pressedOff: return pressedOpacity
+        case .pressedOn: return pressedOpacity
         case .pressedIndeterminate: return pressedOpacity
         case .disabled: return disabledOpacity
         }
@@ -202,8 +202,8 @@ public struct StateOpacities_PD: Equatable {
     func `for`(_ state: VRadioButtonInternalState) -> Double {
         switch state {
         case .off: return 1
-        case .pressedOff: return pressedOpacity
         case .on: return 1
+        case .pressedOff: return pressedOpacity
         case .pressedOn: return pressedOpacity
         case .disabled: return disabledOpacity
         }
