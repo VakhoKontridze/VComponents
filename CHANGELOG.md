@@ -3,6 +3,7 @@
 #### [1.4.4(13)](???) — *???*
 
 - `nextState` has been renamed to `setNextState` in component state enums
+- Several color group objects and initializers have been renamed
 
 #### [1.4.4(12)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.4/VComponents.xcframework.zip) — *2021 10 28*
 
