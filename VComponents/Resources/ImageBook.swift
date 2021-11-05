@@ -31,10 +31,10 @@ struct ImageBook {
 
 // MARK: - Helpers
 extension Image {
-    /// Initializes color from framework's local assets library from a name.
+    /// Initializes color from library's local assets library from a name.
     init(componentAsset name: String) {
         guard
-            let bundle: Bundle = .init(identifier: "com.vakhtang-kontridze.VComponents")
+            let bundle: Bundle = .init(identifier: "com.vakhtang-kontridze.vcomponents")
         else {
             fatalError()
         }

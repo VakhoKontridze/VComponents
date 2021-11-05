@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Base Header Footer
-/// Core component that is used throughout the framework.
+/// Core component that is used throughout the library.
 ///
 /// Usage example:
 ///

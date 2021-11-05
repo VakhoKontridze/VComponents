@@ -9,7 +9,7 @@ import SwiftUI
 import UIKit
 
 // MARK: - V Base Button
-/// Core component that is used throughout the framework as button.
+/// Core component that is used throughout the library as button.
 ///
 /// `Bool` can also be passed as state.
 ///

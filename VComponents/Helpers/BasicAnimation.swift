@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Basic Animation
-/// Wrapper on `SwiftUI`'s animation used throughout the framework.
+/// Wrapper on `SwiftUI`'s animation used throughout the library.
 ///
 /// Purpose of this object was to limit some animations to curve and duration.
 ///

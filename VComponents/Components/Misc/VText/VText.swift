@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Base Title
-/// Core component that is used throughout the framework as text.
+/// Core component that is used throughout the library as text.
 ///
 /// Usage example:
 ///

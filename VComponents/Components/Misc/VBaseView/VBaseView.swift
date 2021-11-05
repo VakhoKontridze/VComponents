@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Base View
-/// Core component that is used throughout the framework as `SwiftUI`'s equivalent of `UIViewController`.
+/// Core component that is used throughout the library as `SwiftUI`'s equivalent of `UIViewController`.
 ///
 /// Model, and leading and trailing items can be passed as parameters.
 ///

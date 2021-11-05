@@ -12,9 +12,9 @@
 
 ## Description
 
-VComponents is a SwiftUI framework that contains 40+ customizable UI components.
+VComponents is a SwiftUI library that contains 40+ customizable UI components.
 
-Framework supports iOS 14.0 and up.
+Library supports iOS 14.0 and up.
 
 ## Components
 
@@ -138,7 +138,7 @@ States in components are represented as enums. They can be passed as a parameter
 
 Some enums contain case `disabled`, which is preffered over  `SwiftUI`'s `.disabled()` modifier.
 `.disabled()` modifier changes color and opacity of a native `Button`, but this behavior is limited in nature.
-Some components in this framework contain multiple subviews, which require a more in-depth customization.
+Some components in this library contain multiple subviews, which require a more in-depth customization.
 For instance, we can customize `VSecondaryButton`'s foreground, background, and border colors separately for `enabled`, `pressed`, and `disabled` states.
 Also keep in mind, that using a native modifier instead of state property may cause unintended side-effects.
 
@@ -228,7 +228,7 @@ Project contains demo app, that can be run to showcase all components.
 
 ## Installation
 
-Framework doesn't support CocoaPods or Carthage.
+Library doesn't support CocoaPods or Carthage.
 
 ### Swift Package Manager
 

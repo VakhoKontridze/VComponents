@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Base List
-/// Core component that is used throughout the framework as a structure that either hosts content, or computes views on demad from an underlying collection of identified data.
+/// Core component that is used throughout the library as a structure that either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
 /// Model, and layout can be passed as parameters.
 ///

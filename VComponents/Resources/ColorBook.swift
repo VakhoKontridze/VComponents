@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Color Book
-/// Contains fundamental colors used throughout the framework.
+/// Contains fundamental colors used throughout the library.
 public struct ColorBook {
     // MARK: Properties
     /// Clear color.
@@ -38,10 +38,10 @@ public struct ColorBook {
 
 // MARK: - Helpers
 extension Color {
-    /// Initializes color from framework's local assets library from a name.
+    /// Initializes color from library's local assets library from a name.
     public init(componentAsset name: String) {
         guard
-            let bundle: Bundle = .init(identifier: "com.vakhtang-kontridze.VComponents"),
+            let bundle: Bundle = .init(identifier: "com.vakhtang-kontridze.vcomponents"),
             let uiColor: UIColor = .init(named: name, in: bundle, compatibleWith: nil)
         else {
             fatalError()

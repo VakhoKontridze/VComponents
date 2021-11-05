@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Lazy Scroll View
-/// Core component that is used throughout the framework as a lazy structure that either hosts content, or computes views on demad from an underlying collection of identified data.
+/// Core component that is used throughout the library as a lazy structure that either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
 /// Component can be initialized with data or free content.
 ///
