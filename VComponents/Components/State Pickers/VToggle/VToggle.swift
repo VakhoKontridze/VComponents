@@ -151,7 +151,7 @@ public struct VToggle<Content>: View where Content: View {
     }
     
     private var toggle: some View {
-        VBaseButton(isEnabled: internalState.isEnabled, action: nextState, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: internalState.isEnabled, action: setNextState, onPress: { _ in }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                     .foregroundColor(model.colors.fill.for(internalState))
@@ -166,7 +166,7 @@ public struct VToggle<Content>: View where Content: View {
     }
     
     private var spacerView: some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: nextState, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: setNextState, onPress: { _ in }, content: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: model.layout.contentMarginLeading)
@@ -177,7 +177,7 @@ public struct VToggle<Content>: View where Content: View {
     private func contentView(
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: nextState, onPress: { isPressed = $0 }, content: {
+        VBaseButton(isEnabled: contentIsEnabled, action: setNextState, onPress: { isPressed = $0 }, content: {
             content()
                 .opacity(model.colors.content.for(internalState))
         })
@@ -191,9 +191,9 @@ public struct VToggle<Content>: View where Content: View {
     }
 
     // MARK: Actions
-    private func nextState() {
-        withAnimation(model.animations.stateChange, { animatableState?.nextState() })
-        state.nextState()
+    private func setNextState() {
+        withAnimation(model.animations.stateChange, { animatableState?.setNextState() })
+        state.setNextState()
     }
     
     private func setAnimatableState() {

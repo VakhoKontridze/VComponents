@@ -57,7 +57,7 @@ public enum VAccordionState: Int, CaseIterable {
 
     // MARK: Next State
     /// Goes to the next state.
-    public mutating func nextState() {
+    public mutating func setNextState() {
         switch self {
         case .collapsed: self = .expanded
         case .expanded: self = .collapsed

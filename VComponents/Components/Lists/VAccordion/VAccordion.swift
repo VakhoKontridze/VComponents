@@ -335,8 +335,8 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
 
     // MARK: Actions
     private func expandCollapse() {
-        withAnimation(model.animations.expandCollapse, { animatableState?.nextState() })
-        state.nextState()
+        withAnimation(model.animations.expandCollapse, { animatableState?.setNextState() })
+        state.setNextState()
     }
     
     private func expandCollapseFromHeaderTap() {

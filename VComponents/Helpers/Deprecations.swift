@@ -17,10 +17,25 @@ public typealias VLinkPreset = VWebLinkPreset
 @available(*, deprecated, renamed: "VWebLinkState")
 public typealias VLinkState = VWebLinkState
 
+// MARK: - V Toggle
+extension VToggleState {
+    @available(*, deprecated, renamed: "setNextState")
+    mutating func nextState() { setNextState() }
+}
+
 // MARK: - V CheckBox
 extension VCheckBoxState {
     @available(*, deprecated, renamed: "indeterminate")
     public static var intermediate: Self { indeterminate }
+    
+    @available(*, deprecated, renamed: "setNextState")
+    public mutating func nextState() { setNextState() }
+}
+
+// MARK: - V Radio Button
+extension VRadioButtonState {
+    @available(*, deprecated, renamed: "setNextState")
+    public mutating func nextState() { setNextState() }
 }
 
 // MARK: - V List
@@ -62,6 +77,12 @@ extension VSectionListSectionViewModelable {
 
 @available(*, deprecated, message: "`VSectionListRowViewModelable` has been dropped. Use `Identifiable` instead.")
 public typealias VSectionListRowViewModelable = Identifiable
+
+// MARK: - V Accordion
+extension VAccordionState {
+    @available(*, deprecated, renamed: "setNextState")
+    public mutating func nextState() { setNextState() }
+}
 
 // MARK: - Half Modal
 extension VHalfModalModel.Layout {

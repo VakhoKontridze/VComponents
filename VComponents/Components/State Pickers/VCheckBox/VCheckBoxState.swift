@@ -50,7 +50,7 @@ public enum VCheckBoxState: Int, CaseIterable {
 
     // MARK: Next State
     /// Goes to the next state.
-    public mutating func nextState() {
+    public mutating func setNextState() {
         switch self {
         case .off: self = .on
         case .on: self = .off
