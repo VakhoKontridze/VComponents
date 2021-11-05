@@ -17,6 +17,7 @@ public struct StateColors_ED: Equatable {
     /// Disabled color.
     public var disabled: Color
     
+    // MARK: Initializers
     /// Initializes group with values.
     public init(
         enabled: Color,
@@ -26,14 +27,14 @@ public struct StateColors_ED: Equatable {
         self.disabled = disabled
     }
     
-    // MARK: Initializers
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            disabled: ColorBook.clear
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.disabled = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VStepperState) -> Color {
@@ -97,14 +98,16 @@ public struct StateColors_EPD: Equatable {
         self.disabled = disabled
     }
     
+    
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            pressed: ColorBook.clear,
-            disabled: ColorBook.clear
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.pressed = ColorBook.clear
+        self.disabled = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
     
     // MARK: Mapping
     func `for`(_ state: VSecondaryButtonInternalState) -> Color {
@@ -188,14 +191,15 @@ public struct StateColors_EPDL: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            pressed: ColorBook.clear,
-            disabled: ColorBook.clear,
-            loading: ColorBook.clear
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.pressed = ColorBook.clear
+        self.disabled = ColorBook.clear
+        self.loading = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VPrimaryButtonInternalState) -> Color {
@@ -234,13 +238,14 @@ public struct StateColors_OOD: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            off: ColorBook.clear,
-            on: ColorBook.clear,
-            disabled: ColorBook.clear
-        )
+    public init() {
+        self.off = ColorBook.clear
+        self.on = ColorBook.clear
+        self.disabled = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VToggleInternalState) -> Color {
@@ -295,14 +300,15 @@ public struct StateColors_OOID: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            off: ColorBook.clear,
-            on: ColorBook.clear,
-            indeterminate: ColorBook.clear,
-            disabled: ColorBook.clear
-        )
+    public init() {
+        self.off = ColorBook.clear
+        self.on = ColorBook.clear
+        self.indeterminate = ColorBook.clear
+        self.disabled = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VCheckBoxInternalState) -> Color {
@@ -344,13 +350,14 @@ public struct StateColors_EFD: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            focused: ColorBook.clear,
-            disabled: ColorBook.clear
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.focused = ColorBook.clear
+        self.disabled = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init()  }
 
     // MARK: Mapping
     func `for`(_ state: VTextFieldState) -> Color {
@@ -398,15 +405,16 @@ public struct StateColors_EFSED: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            focused: ColorBook.clear,
-            success: ColorBook.clear,
-            error: ColorBook.clear,
-            disabled: ColorBook.clear
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.focused = ColorBook.clear
+        self.success = ColorBook.clear
+        self.error = ColorBook.clear
+        self.disabled = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
@@ -478,19 +486,20 @@ public struct StateColors_EpFpSpEpD: Equatable {
     }
     
     /// Initializes group with clear values.
-    public var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            enabledPressed: ColorBook.clear,
-            focused: ColorBook.clear,
-            focusedPressed: ColorBook.clear,
-            success: ColorBook.clear,
-            successPressed: ColorBook.clear,
-            error: ColorBook.clear,
-            errorPressed: ColorBook.clear,
-            disabled: ColorBook.clear
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.enabledPressed = ColorBook.clear
+        self.focused = ColorBook.clear
+        self.focusedPressed = ColorBook.clear
+        self.success = ColorBook.clear
+        self.successPressed = ColorBook.clear
+        self.error = ColorBook.clear
+        self.errorPressed = ColorBook.clear
+        self.disabled = ColorBook.clear
     }
+    
+    /// Initializes group with clear values.
+    public var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {

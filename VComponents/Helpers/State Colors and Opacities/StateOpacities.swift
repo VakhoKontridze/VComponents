@@ -23,11 +23,12 @@ public struct StateOpacities_P: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            pressedOpacity: 0
-        )
+    public init() {
+        self.pressedOpacity = 0
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
     
     /// Initializes group with solid values.
     public static var solid: Self {
@@ -53,11 +54,12 @@ public struct StateOpacities_D: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            disabledOpacity: 0
-        )
+    public init() {
+        self.disabledOpacity = 0
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
     
     /// Initializes group with solid values.
     public static var solid: Self {
@@ -112,12 +114,13 @@ public struct StateOpacities_PD: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            pressedOpacity: 0,
-            disabledOpacity: 0
-        )
+    public init() {
+        self.pressedOpacity = 0
+        self.disabledOpacity = 0
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
     
     /// Initializes group with solid values.
     public static var solid: Self {

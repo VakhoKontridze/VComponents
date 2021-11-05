@@ -33,13 +33,14 @@ public struct StateColorsAndOpacities_EP_D: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            disabled: ColorBook.clear,
-            disabledOpacity: 0
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.disabled = ColorBook.clear
+        self.disabledOpacity = 0
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VTextFieldState) -> Color {
@@ -111,15 +112,16 @@ public struct StateColorsAndOpacities_EPD_PD: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            pressed: ColorBook.clear,
-            disabled: ColorBook.clear,
-            pressedOpacity: 0,
-            disabledOpacity: 0
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.pressed = ColorBook.clear
+        self.disabled = ColorBook.clear
+        self.pressedOpacity = 0
+        self.disabledOpacity = 0
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VChevronButtonInternalState) -> Color {
@@ -237,21 +239,22 @@ public struct StateColors_EpFpSpEpD_PD: Equatable {
     }
     
     /// Initializes group with clear values.
-    public static var clear: Self {
-        .init(
-            enabled: ColorBook.clear,
-            enabledPressed: ColorBook.clear,
-            focused: ColorBook.clear,
-            focusedPressed: ColorBook.clear,
-            success: ColorBook.clear,
-            successPressed: ColorBook.clear,
-            error: ColorBook.clear,
-            errorPressed: ColorBook.clear,
-            disabled: ColorBook.clear,
-            pressedOpacity: 0,
-            disabledOpacity: 0
-        )
+    public init() {
+        self.enabled = ColorBook.clear
+        self.enabledPressed = ColorBook.clear
+        self.focused = ColorBook.clear
+        self.focusedPressed = ColorBook.clear
+        self.success = ColorBook.clear
+        self.successPressed = ColorBook.clear
+        self.error = ColorBook.clear
+        self.errorPressed = ColorBook.clear
+        self.disabled = ColorBook.clear
+        self.pressedOpacity = 0
+        self.disabledOpacity = 0
     }
+    
+    /// Initializes group with clear values.
+    public static var clear: Self { .init() }
 
     // MARK: Mapping
     func `for`(_ state: VTextFieldState, highlight: VTextFieldHighlight) -> Color {
