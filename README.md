@@ -268,4 +268,4 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 ## Contact
 
-e-mail: [vakho.kontridze@gmail.com](mailto:vakho.kontridze@gmail.com)
+e-mail: vakho.kontridze@gmail.com
