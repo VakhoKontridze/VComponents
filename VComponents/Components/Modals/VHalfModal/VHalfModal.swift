@@ -33,7 +33,7 @@ import SwiftUI
 ///             })
 ///     }
 ///
-/// VNavigationView can also be passes as contant, to create a modal stack of navigatable views.
+/// VNavigationView can also be passes as contant, to create a modal stack of navigable views.
 ///
 /// Here, it's important that header content is not passed. Header content should be created view VBaseView title.
 ///
