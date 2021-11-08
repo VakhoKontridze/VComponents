@@ -59,10 +59,7 @@ final class UIKitEventRecognizer: UITapGestureRecognizer {
             return
         }
         
-        let location: CGPoint = touch.location(in: view)
-        let isOn: Bool = location.isOn(size, offset: allowedOffset)
-        
-        if !isOn {
+        if !touch.location(in: view).isOn(size, offset: allowedOffset) {
             state = .ended
             pressHandler(false)
         }

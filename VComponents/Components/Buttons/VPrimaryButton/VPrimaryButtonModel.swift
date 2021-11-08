@@ -27,8 +27,8 @@ public struct VPrimaryButtonModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button height. Defaults to `50`.
-        public var height: CGFloat = 50
+        /// Button height. Defaults to `56`.
+        public var height: CGFloat = 56
         
         /// Button corner radius. Defaults to `20`.
         public var cornerRadius: CGFloat = 20
