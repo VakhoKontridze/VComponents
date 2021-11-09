@@ -2,7 +2,7 @@
 
 #### [1.4.5(14)]
 
-- `VPrimaryButton` height has changed from `50` to `56`
+- `VPrimaryButton` height has been changed to `56`
 
 #### [1.4.4(13)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.5/VComponents.xcframework.zip) — *2021 11 05*
 
