@@ -13,7 +13,7 @@ final class UIKitEventRecognizer: UITapGestureRecognizer {
     private var action: () -> Void
     private var pressHandler: (Bool) -> Void
     
-    private let allowedOffset: CGFloat = 20
+    private let maxOutOfBoundsOffsetToRegisterTap: CGFloat = 20
     
     // MARK: Initializers
     init(
@@ -59,7 +59,7 @@ final class UIKitEventRecognizer: UITapGestureRecognizer {
             return
         }
         
-        if !touch.location(in: view).isOn(size, offset: allowedOffset) {
+        if !touch.location(in: view).isOn(size, offset: maxOutOfBoundsOffsetToRegisterTap) {
             state = .ended
             pressHandler(false)
         }
