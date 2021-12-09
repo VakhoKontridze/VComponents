@@ -84,6 +84,15 @@ extension VAccordionState {
     public mutating func nextState() { setNextState() }
 }
 
+// MARK: - V Navigation View
+extension VNavigationViewModel.Colors {
+    @available(*, deprecated, renamed: "bar")
+    public var background: Color {
+        get { bar }
+        set { bar = newValue }
+    }
+}
+
 // MARK: - Half Modal
 extension VHalfModalModel.Layout {
     @available(*, deprecated, renamed: "grabberSize")
@@ -113,12 +122,12 @@ extension VHalfModalModel.Colors {
     }
 }
 
-// MARK: - V Navigation View
-extension VNavigationViewModel.Colors {
-    @available(*, deprecated, renamed: "bar")
-    public var background: Color {
-        get { bar }
-        set { bar = newValue }
+// MARK: - Dialog
+extension VDialogModel.Layout {
+    @available(*, unavailable, message: "Property has been moved to `Misc`")
+    public var descriptionLineLimit: Int {
+        get { fatalError() }
+        set { fatalError() }
     }
 }
 

@@ -93,7 +93,7 @@ struct _VDialog<Content>: View where Content: View {
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
             VText(
-                type: .multiLine(limit: model.layout.descriptionLineLimit, alignment: .center),
+                type: .multiLine(limit: model.misc.descriptionLineLimit, alignment: .center),
                 font: model.fonts.description,
                 color: model.colors.description,
                 title: description

@@ -166,7 +166,7 @@ public struct VRangeSlider: View {
             let range: Double = max - min
             let width: Double = .init(proxy.size.width)
 
-            return (value / width) * range + min
+            return min + (value / width) * range
         }()
 
         let valueFixed: Double = {
@@ -264,5 +264,22 @@ struct VRangeSlider_Previews: PreviewProvider {
     static var previews: some View {
         VRangeSlider(difference: 0.1, valueLow: $valueLow, valueHigh: $valueHigh)
             .padding()
+    }
+}
+
+// MARK: - Helpers
+extension Double {
+    fileprivate func roundedUpWithStep(
+        _ step: Double?
+    ) -> Double {
+        guard let step = step else { return self }
+        return ceil(self / step) * step
+    }
+    
+    fileprivate func roundedDownWithStep(
+        _ step: Double?
+    ) -> Double {
+        guard let step = step else { return self }
+        return floor(self / step) * step
     }
 }

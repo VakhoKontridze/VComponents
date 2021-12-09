@@ -7,9 +7,13 @@
 
 import SwiftUI
 
-// MARK: - Normalization of Double in Range
+// MARK: - Number Fixed in Range
 extension Double {
-    func fixedInRange(min: Double, max: Double, step: Double?) -> Double {
+    func fixedInRange(
+        min: Double,
+        max: Double,
+        step: Double?
+    ) -> Double {
         switch (self, step) {
         case (...min, _): return min
         case (max..., _): return max
@@ -18,17 +22,11 @@ extension Double {
         }
     }
     
-    func roundedUpWithStep(_ step: Double?) -> Double {
-        guard let step = step else { return self }
-        return ceil(self / step) * step
-    }
-    
-    func roundedDownWithStep(_ step: Double?) -> Double {
-        guard let step = step else { return self }
-        return floor(self / step) * step
-    }
-
-    private func roundWithStep(min: Double, max: Double, step: Double) -> Double {
+    private func roundWithStep(
+        min: Double,
+        max: Double,
+        step: Double
+    ) -> Double {
         let rawValue: Double = {
             let low: Double = floor(self / step) * step
             let high: Double = ceil(self / step) * step
