@@ -1149,7 +1149,6 @@
 			isa = PBXGroup;
 			children = (
 				7A8A96E7258DDA9200309886 /* VComponents */,
-				7A2B60B625D6DA4B00DD56BA /* Deprecations.swift */,
 				7A8A96FA258DDC7800309886 /* VComponentsDemo */,
 				7A8A96E6258DDA9200309886 /* Products */,
 			);
@@ -1172,6 +1171,7 @@
 				7AE5C25C25A8BC1D001B62B2 /* Helpers */,
 				7AA9F42F2590B18D0060F210 /* Extensions */,
 				7AA9F4342590B1C00060F210 /* Resources */,
+				7A2B60B625D6DA4B00DD56BA /* Deprecations.swift */,
 			);
 			path = VComponents;
 			sourceTree = "<group>";
