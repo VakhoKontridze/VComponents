@@ -1149,6 +1149,7 @@
 			isa = PBXGroup;
 			children = (
 				7A8A96E7258DDA9200309886 /* VComponents */,
+				7A2B60B625D6DA4B00DD56BA /* Deprecations.swift */,
 				7A8A96FA258DDC7800309886 /* VComponentsDemo */,
 				7A8A96E6258DDA9200309886 /* Products */,
 			);
@@ -1532,7 +1533,6 @@
 				7AE5C25D25A8BC2E001B62B2 /* VPickableItems.swift */,
 				7A2F831425CFD63E0099BA69 /* DerivedButtonType.swift */,
 				7AC4E03E25AE1D2800CE2816 /* SliderHelpers.swift */,
-				7A2B60B625D6DA4B00DD56BA /* Deprecations.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
