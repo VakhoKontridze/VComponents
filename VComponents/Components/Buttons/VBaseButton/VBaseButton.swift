@@ -71,7 +71,11 @@ public struct VBaseButton<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         content()
-            .overlay(UIKitTouchView(isEnabled: state.isEnabled, action: action, pressHandler: pressHandler))
+            .overlay(VBaseButtonViewRepresentable(
+                isEnabled: state.isEnabled,
+                onPress: pressHandler,
+                action: action
+            ))
     }
 }
 

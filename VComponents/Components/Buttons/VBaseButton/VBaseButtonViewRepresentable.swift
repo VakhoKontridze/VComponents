@@ -7,21 +7,21 @@
 
 import SwiftUI
 
-// MARK: - UIKit Touch View
+// MARK: - V Base Button View Representable
 struct VBaseButtonViewRepresentable: UIViewRepresentable {
     // MARK: Properties
     private let isEnabled: Bool
     
-    private let action: () -> Void
     private let pressHandler: (Bool) -> Void
+    private let action: () -> Void
     
-    @State private var gesture: VBaseButtonTapGestureRecognizer?
+    @State private var gestureRecognizer: VBaseButtonTapGestureRecognizer?
     
     // MARK: Initializers
     init(
         isEnabled: Bool,
-        action: @escaping () -> Void,
-        pressHandler: @escaping (Bool) -> Void
+        onPress pressHandler: @escaping (Bool) -> Void,
+        action: @escaping () -> Void
     ) {
         self.isEnabled = isEnabled
         self.action = action
@@ -33,8 +33,13 @@ struct VBaseButtonViewRepresentable: UIViewRepresentable {
         let view: UIView = .init(frame: .zero)
         
         DispatchQueue.main.async(execute: {
-            gesture = VBaseButtonTapGestureRecognizer(action: action, pressHandler: pressHandler)
-            view.addGestureRecognizer(gesture!)
+            let gestureRecognizer: VBaseButtonTapGestureRecognizer = .init(
+                onPress: pressHandler,
+                action: action
+            )
+            
+            self.gestureRecognizer = gestureRecognizer
+            view.addGestureRecognizer(gestureRecognizer)
         })
         
         //setBindedValues(view, context: context)
@@ -49,6 +54,9 @@ struct VBaseButtonViewRepresentable: UIViewRepresentable {
     private func setBindedValues(_ view: UIView, context: Context) {
         view.isUserInteractionEnabled = isEnabled
         
-        gesture?.update(action: action, pressHandler: pressHandler)
+        gestureRecognizer?.update(
+            onPress: pressHandler,
+            action: action
+        )
     }
 }
