@@ -1,5 +1,5 @@
 //
-//  UIKitEventRecognizer.swift
+//  VBaseButtonTapGestureRecognizer.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/19/21.
@@ -8,7 +8,7 @@
 import UIKit
 
 // MARK: - UIKit Event Recognizer
-final class UIKitEventRecognizer: UITapGestureRecognizer {
+final class VBaseButtonTapGestureRecognizer: UITapGestureRecognizer {
     // MARK: Properties
     private var action: () -> Void
     private var pressHandler: (Bool) -> Void

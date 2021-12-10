@@ -1,5 +1,5 @@
 //
-//  UIKitTouchView.swift
+//  VBaseButtonViewRepresentable.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/19/21.
@@ -8,14 +8,14 @@
 import SwiftUI
 
 // MARK: - UIKit Touch View
-struct UIKitTouchView: UIViewRepresentable {
+struct VBaseButtonViewRepresentable: UIViewRepresentable {
     // MARK: Properties
     private let isEnabled: Bool
     
     private let action: () -> Void
     private let pressHandler: (Bool) -> Void
     
-    @State private var gesture: UIKitEventRecognizer?
+    @State private var gesture: VBaseButtonTapGestureRecognizer?
     
     // MARK: Initializers
     init(
@@ -33,7 +33,7 @@ struct UIKitTouchView: UIViewRepresentable {
         let view: UIView = .init(frame: .zero)
         
         DispatchQueue.main.async(execute: {
-            gesture = UIKitEventRecognizer(action: action, pressHandler: pressHandler)
+            gesture = VBaseButtonTapGestureRecognizer(action: action, pressHandler: pressHandler)
             view.addGestureRecognizer(gesture!)
         })
         
