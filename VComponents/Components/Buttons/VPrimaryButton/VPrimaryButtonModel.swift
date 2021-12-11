@@ -76,24 +76,24 @@ public struct VPrimaryButtonModel {
         public var textContent: StateColors = .init(
             enabled: ColorBook.primaryInverted,
             pressed: ColorBook.primaryInverted,
-            disabled: ColorBook.primaryInverted,
-            loading: ColorBook.primaryInverted
+            loading: ColorBook.primaryInverted,
+            disabled: ColorBook.primaryInverted
         )
         
         /// Background colors.
         public var background: StateColors = .init(
             enabled: .init(componentAsset: "PrimaryButton.Background.enabled"),
             pressed: .init(componentAsset: "PrimaryButton.Background.pressed"),
-            disabled: .init(componentAsset: "PrimaryButton.Background.disabled"),
-            loading: .init(componentAsset: "PrimaryButton.Background.disabled")
+            loading: .init(componentAsset: "PrimaryButton.Background.disabled"),
+            disabled: .init(componentAsset: "PrimaryButton.Background.disabled")
         )
         
         /// Border colors.
         public var border: StateColors = .init(
             enabled: .clear,
             pressed: .clear,
-            disabled: .clear,
-            loading: .clear
+            loading: .clear,
+            disabled: .clear
         )
         
         /// Loader colors.
