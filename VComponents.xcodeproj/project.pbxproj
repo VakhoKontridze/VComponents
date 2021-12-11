@@ -13,7 +13,7 @@
 		173C1FDB272A810A00DF634F /* View.ReadSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FDA272A810A00DF634F /* View.ReadSize.swift */; };
 		173C1FDD272A890100DF634F /* Optional.LetBlockTransformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FDC272A890100DF634F /* Optional.LetBlockTransformation.swift */; };
 		17B23E7E27355AD300914FEB /* StateColors_EPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7D27355AD300914FEB /* StateColors_EPD.swift */; };
-		17B23E8027355AE700914FEB /* StateColors_EPDL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7F27355AE700914FEB /* StateColors_EPDL.swift */; };
+		17B23E8027355AE700914FEB /* StateColors_EPLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7F27355AE700914FEB /* StateColors_EPLD.swift */; };
 		17B23E8227355AFA00914FEB /* StateColors_OOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8127355AFA00914FEB /* StateColors_OOD.swift */; };
 		17B23E8427355B1D00914FEB /* StateColors_OOID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8327355B1D00914FEB /* StateColors_OOID.swift */; };
 		17B23E8627355B2F00914FEB /* StateColors_EFD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8527355B2F00914FEB /* StateColors_EFD.swift */; };
@@ -290,7 +290,7 @@
 		173C1FDA272A810A00DF634F /* View.ReadSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.ReadSize.swift; sourceTree = "<group>"; };
 		173C1FDC272A890100DF634F /* Optional.LetBlockTransformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.LetBlockTransformation.swift; sourceTree = "<group>"; };
 		17B23E7D27355AD300914FEB /* StateColors_EPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPD.swift; sourceTree = "<group>"; };
-		17B23E7F27355AE700914FEB /* StateColors_EPDL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPDL.swift; sourceTree = "<group>"; };
+		17B23E7F27355AE700914FEB /* StateColors_EPLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPLD.swift; sourceTree = "<group>"; };
 		17B23E8127355AFA00914FEB /* StateColors_OOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_OOD.swift; sourceTree = "<group>"; };
 		17B23E8327355B1D00914FEB /* StateColors_OOID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_OOID.swift; sourceTree = "<group>"; };
 		17B23E8527355B2F00914FEB /* StateColors_EFD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EFD.swift; sourceTree = "<group>"; };
@@ -1271,7 +1271,7 @@
 			children = (
 				7AA39B8025CD50B800FA30E5 /* StateColors_ED.swift */,
 				17B23E7D27355AD300914FEB /* StateColors_EPD.swift */,
-				17B23E7F27355AE700914FEB /* StateColors_EPDL.swift */,
+				17B23E7F27355AE700914FEB /* StateColors_EPLD.swift */,
 				17B23E8127355AFA00914FEB /* StateColors_OOD.swift */,
 				17B23E8327355B1D00914FEB /* StateColors_OOID.swift */,
 				17B23E8527355B2F00914FEB /* StateColors_EFD.swift */,
@@ -1707,7 +1707,7 @@
 				7AF3C8E125AF675300D56042 /* VCloseButtonState.swift in Sources */,
 				7A2F831225CFD60D0099BA69 /* VWebLinkType.swift in Sources */,
 				7A007323258E27C40003F0E9 /* VPlainButtonModel.swift in Sources */,
-				17B23E8027355AE700914FEB /* StateColors_EPDL.swift in Sources */,
+				17B23E8027355AE700914FEB /* StateColors_EPLD.swift in Sources */,
 				7A259B652597828700A12F8C /* VDialog.swift in Sources */,
 				7AC5060125911A0800226656 /* VSpinnerModelDashed.swift in Sources */,
 				7A0CF35825BEDD49009FE576 /* VBaseHeaderFooterType.swift in Sources */,

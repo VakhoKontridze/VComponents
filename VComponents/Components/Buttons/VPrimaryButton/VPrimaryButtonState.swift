@@ -72,7 +72,7 @@ enum VPrimaryButtonInternalState {
 }
 
 // MARK: - Mapping
-extension StateColors_EPDL {
+extension StateColors_EPLD {
     func `for`(_ state: VPrimaryButtonInternalState) -> Color {
         switch state {
         case .enabled: return enabled

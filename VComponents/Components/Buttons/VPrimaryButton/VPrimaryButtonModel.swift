@@ -105,7 +105,7 @@ public struct VPrimaryButtonModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EPDL
+        public typealias StateColors = StateColors_EPLD
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.

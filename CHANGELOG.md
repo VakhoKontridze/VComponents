@@ -1,5 +1,8 @@
 ## Change Log
 
+#### [1.4.6(15)]
+- `StateColors_EPDL` has been renamed to `StateColors_EPLD`
+
 #### [1.4.5(14)]
 
 - Fixed VBaseButton click overriding scroll gesture

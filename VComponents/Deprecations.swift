@@ -145,6 +145,23 @@ public typealias VLazyListModelVertical = VLazyScrollViewModelVertical
 public typealias VLazyListModelHorizontal = VLazyScrollViewModelHorizontal
 
 // MARK: - State Colors
+@available(*, deprecated, renamed: "StateColors_EPLD")
+public typealias StateColors_EPDL = StateColors_EPLD
+
+extension StateColors_EPLD {
+    public init(
+        enabled: Color,
+        pressed: Color,
+        disabled: Color,
+        loading: Color
+    ) {
+        self.enabled = enabled
+        self.pressed = pressed
+        self.disabled = disabled
+        self.loading = loading
+    }
+}
+
 extension StateColors_OOID {
     @available(*, deprecated, renamed: "indeterminate")
     public var intermediate: Color {
