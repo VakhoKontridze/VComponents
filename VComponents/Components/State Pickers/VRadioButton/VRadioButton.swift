@@ -232,11 +232,11 @@ public struct VRadioButton<Content>: View where Content: View {
         return Group(content: {
             switch content {
             case nil:
-                RadioButton
+                radioButton
                 
             case let content?:
                 HStack(spacing: 0, content: {
-                    RadioButton
+                    radioButton
                     spacerView
                     contentView(content: content)
                 })
@@ -244,8 +244,8 @@ public struct VRadioButton<Content>: View where Content: View {
         })
     }
     
-    private var RadioButton: some View {
-        VBaseButton(isEnabled: internalState.isEnabled, action: setNextState, onPress: { _ in }, content: {
+    private var radioButton: some View {
+        VBaseButton(isEnabled: internalState.isEnabled, action: setNextState, onPress: { isPressed = $0 }, content: {
             ZStack(content: {
                 Circle()
                     .frame(dimension: model.layout.dimension)

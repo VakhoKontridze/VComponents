@@ -151,7 +151,7 @@ public struct VToggle<Content>: View where Content: View {
     }
     
     private var toggle: some View {
-        VBaseButton(isEnabled: internalState.isEnabled, action: setNextState, onPress: { _ in }, content: {
+        VBaseButton(isEnabled: internalState.isEnabled, action: setNextState, onPress: { isPressed = $0 }, content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                     .foregroundColor(model.colors.fill.for(internalState))
