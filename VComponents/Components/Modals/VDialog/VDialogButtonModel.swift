@@ -164,15 +164,15 @@ public struct VDialogButtonModelCustom {
         model.colors.textContent = .init(
             enabled: colors.text.enabled,
             pressed: colors.text.pressed,
-            disabled: colors.text.disabled,
-            loading: VDialogButtonModelCustom.primaryButtonReference.colors.textContent.loading
+            loading: VDialogButtonModelCustom.primaryButtonReference.colors.textContent.loading,
+            disabled: colors.text.disabled
         )
         
         model.colors.background = .init(
             enabled: colors.background.enabled,
             pressed: colors.background.pressed,
-            disabled: colors.background.disabled,
-            loading: VDialogButtonModelCustom.primaryButtonReference.colors.background.loading
+            loading: VDialogButtonModelCustom.primaryButtonReference.colors.background.loading,
+            disabled: colors.background.disabled
         )
 
         model.fonts.title = fonts.title
