@@ -1,6 +1,6 @@
 ## Change Log
 
-#### [1.5.0(15)]
+#### [1.5.0(15)](https://github.com/VakhoKontridze/VComponents/releases/download/1.5.0/VComponents.xcframework.zip) — *2021 12 24*
 
 - `VBaseButton` API has been updated by implementing `VBaseButtonGestureState`
 - Implementation of state-bound components have been updated
