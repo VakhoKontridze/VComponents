@@ -193,7 +193,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
 
     // MARK: Body
     public var body: some View {
-        setStatesFromBodyRender()
+        syncInternalStateWithState()
         
         return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
             headerView
@@ -262,8 +262,10 @@ public struct VSegmentedPicker<Data, RowContent>: View
             ForEach(0..<data.count, content: { i in
                 VBaseButton(
                     isEnabled: state.isEnabled && !disabledIndexes.contains(i),
-                    action: { setSelectedIndex(to: i) },
-                    onPress: { pressedIndex = $0 ? i : nil },
+                    gesture: { gestureState in
+                        pressedIndex = gestureState.isPressed ? i : nil
+                        if gestureState.isClicked { setSelectedIndex(to: i) }
+                    },
                     content: {
                         rowContent(data[i])
                             .padding(model.layout.actualRowContentMargin)
@@ -293,10 +295,12 @@ public struct VSegmentedPicker<Data, RowContent>: View
         })
     }
 
-    // MARK: State Sets
-    private func setStatesFromBodyRender() {
+    // MARK: State Syncs
+    private func syncInternalStateWithState() {
         DispatchQueue.main.async(execute: {
-            setAnimatableSelectedIndex()
+            if animatableSelectedIndex == nil || animatableSelectedIndex != selectedIndex {
+                withAnimation(model.animations.selection, { animatableSelectedIndex = selectedIndex })
+            }
         })
     }
 
@@ -304,12 +308,6 @@ public struct VSegmentedPicker<Data, RowContent>: View
     private func setSelectedIndex(to index: Int) {
         withAnimation(model.animations.selection, { animatableSelectedIndex = index })
         selectedIndex = index
-    }
-    
-    private func setAnimatableSelectedIndex() {
-        if animatableSelectedIndex == nil || animatableSelectedIndex != selectedIndex {
-            withAnimation(model.animations.selection, { animatableSelectedIndex = selectedIndex })
-        }
     }
 
     // MARK: State Indication

@@ -38,6 +38,15 @@ public enum VToggleState: Int, CaseIterable {
         case .disabled: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VToggleInternalState) {
+        switch internalState {
+        case .off, .pressedOff: self = .off
+        case .on, .pressedOn: self = .on
+        case .disabled: self = .disabled
+        }
+    }
 
     // MARK: Next State
     /// Goes to the next state.
@@ -89,6 +98,19 @@ enum VToggleInternalState {
         case (true, true): self = .pressedOn
         }
     }
+    
+    static func `default`(state: VToggleState) -> Self {
+        .init(state: state, isPressed: false)
+    }
+    
+    // MARK: Next State
+    mutating func setNextState() {
+        switch self {
+        case .off, .pressedOff: self = .on
+        case .on, .pressedOn: self = .off
+        case .disabled: break
+        }
+    }
 }
 
 // MARK: Mapping
@@ -97,8 +119,8 @@ extension StateColors_OOD {
         switch state {
         case .off: return off
         case .on: return on
-        case .pressedOff: return off
-        case .pressedOn: return on
+        case .pressedOff: return pressedOff
+        case .pressedOn: return pressedOn
         case .disabled: return disabled
         }
     }

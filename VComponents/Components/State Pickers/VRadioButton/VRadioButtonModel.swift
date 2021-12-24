@@ -68,33 +68,41 @@ public struct VRadioButtonModel {
         public var fill: StateColors = .init(
             off: ColorBook.primaryInverted,
             on: ColorBook.primaryInverted,
+            pressedOff: ColorBook.primaryInverted,
+            pressedOn: ColorBook.primaryInverted,
             disabled: ColorBook.primaryInverted
         )
         
         /// Border colors.
         public var border: StateColors = .init(
-            off: checkBoxReference.colors.border.off,
-            on: checkBoxReference.colors.fill.on,
-            disabled: checkBoxReference.colors.border.disabled
+            off: toggleRefrence.colors.fill.off,
+            on: toggleRefrence.colors.fill.on,
+            pressedOff: toggleRefrence.colors.fill.pressedOff,
+            pressedOn: toggleRefrence.colors.fill.pressedOn,
+            disabled: toggleRefrence.colors.fill.disabled
         )
         
         /// Bullet colors.
         public var bullet: StateColors = .init(
             off: .clear,
-            on: checkBoxReference.colors.fill.on,
+            on: toggleRefrence.colors.fill.on,
+            pressedOff: toggleRefrence.colors.fill.pressedOff,
+            pressedOn: toggleRefrence.colors.fill.pressedOn,
             disabled: .clear
         )
 
         /// Content opacities.
-        public var content: StateOpacities = checkBoxReference.colors.content
+        public var content: StateOpacities = toggleRefrence.colors.content
 
         /// Text content colors.
         ///
         /// Only applicable when using init with title.
         public var textContent: StateColors = .init(
-            off: checkBoxReference.colors.textContent.off,
-            on: checkBoxReference.colors.textContent.on,
-            disabled: checkBoxReference.colors.textContent.disabled
+            off: toggleRefrence.colors.textContent.off,
+            on: toggleRefrence.colors.textContent.on,
+            pressedOff: toggleRefrence.colors.textContent.pressedOff,
+            pressedOn: toggleRefrence.colors.textContent.pressedOn,
+            disabled: toggleRefrence.colors.textContent.disabled
         )
 
         // MARK: Initializers

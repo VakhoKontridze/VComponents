@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		170829322765E4C40001DF39 /* VBaseButtonGestureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170829312765E4C40001DF39 /* VBaseButtonGestureState.swift */; };
 		173C1FD2272A7FD600DF634F /* View.CustomViewFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */; };
 		173C1FD4272A7FFF00DF634F /* View.CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */; };
 		173C1FD6272A808500DF634F /* UINavigationBar.NavigationBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */; };
@@ -284,6 +285,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		170829312765E4C40001DF39 /* VBaseButtonGestureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseButtonGestureState.swift; sourceTree = "<group>"; };
 		173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CustomViewFrames.swift; sourceTree = "<group>"; };
 		173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CornerRadius.swift; sourceTree = "<group>"; };
 		173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.NavigationBarHeight.swift; sourceTree = "<group>"; };
@@ -857,6 +859,7 @@
 			children = (
 				7AA9F3E325909E230060F210 /* VBaseButton.swift */,
 				7A767CF825B717280008D2E9 /* VBaseButtonState.swift */,
+				170829312765E4C40001DF39 /* VBaseButtonGestureState.swift */,
 				7A767CF225B705350008D2E9 /* VBaseButtonViewRepresentable.swift */,
 				7A767CF525B705580008D2E9 /* VBaseButtonTapGestureRecognizer.swift */,
 			);
@@ -1784,6 +1787,7 @@
 				7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */,
 				7A259B842597B2C600A12F8C /* _VDialog.swift in Sources */,
 				7A4D0C2E2594C06A00108575 /* VSecondaryButton.swift in Sources */,
+				170829322765E4C40001DF39 /* VBaseButtonGestureState.swift in Sources */,
 				7A767C3C25B5C7310008D2E9 /* VCheckBoxState.swift in Sources */,
 				7A599587259249BC0087902B /* VChevronButton.swift in Sources */,
 				7A3EE37925B2DE0C00303EE7 /* VNavigationLinkState.swift in Sources */,

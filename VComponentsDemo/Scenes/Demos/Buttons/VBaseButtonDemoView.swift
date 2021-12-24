@@ -32,11 +32,18 @@ struct VBaseButtonDemoView: View {
             VStack(spacing: 20, content: {
                 textView(title: clickState.description, color: ColorBook.secondary)
                 
-                VBaseButton(isEnabled: true, action: action, onPress: pressAction, content: {
-                    Circle()
-                        .frame(dimension: 200)
-                        .foregroundColor(Color.pink.opacity(pressState.buttonOpacity))
-                })
+                VBaseButton(
+                    isEnabled: true,
+                    gesture: { gestureState in
+                        pressAction(isPressed: gestureState.isPressed)
+                        if gestureState.isClicked { action() }
+                    },
+                    content: {
+                        Circle()
+                            .frame(dimension: 200)
+                            .foregroundColor(Color.pink.opacity(pressState.buttonOpacity))
+                    }
+                )
                 
                 textView(title: pressState.description, color: ColorBook.secondary)
             })

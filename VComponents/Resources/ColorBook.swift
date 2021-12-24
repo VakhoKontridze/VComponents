@@ -67,9 +67,13 @@ extension Color {
  *200.200.200
  *60.60.60
  
+ CheckBox.Border.pressedOff
+ 180.180.180
+ *80.80.80
+ 
  ChevronButton.Background.disabled
  250.250.250
- 80.80.80
+ *80.80.80
  
  ChevronButton.Background.enabled
  235.235.235
@@ -186,6 +190,10 @@ extension Color {
  Toggle.Fill.off
  233.233.233
  *40.40.40
+ 
+ Toggle.Fill.pressedOff
+ *220.220.220
+ *50.50.50
  
  Toggle.Thumb
  *254.254.254

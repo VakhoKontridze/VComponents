@@ -20,6 +20,15 @@ public struct StateColors_OOID: Equatable {
     /// Indeterminate color.
     public var indeterminate: Color
     
+    /// Off pressed color.
+    public var pressedOff: Color
+    
+    /// On pressed color.
+    public var pressedOn: Color
+    
+    /// Indeterminate pressed color.
+    public var pressedIndeterminate: Color
+    
     /// Disabled color.
     public var disabled: Color
 
@@ -29,11 +38,17 @@ public struct StateColors_OOID: Equatable {
         off: Color,
         on: Color,
         indeterminate: Color,
+        pressedOff: Color,
+        pressedOn: Color,
+        pressedIndeterminate: Color,
         disabled: Color
     ) {
         self.off = off
         self.on = on
         self.indeterminate = indeterminate
+        self.pressedOff = pressedOff
+        self.pressedOn = pressedOn
+        self.pressedIndeterminate = pressedIndeterminate
         self.disabled = disabled
     }
     
@@ -42,6 +57,9 @@ public struct StateColors_OOID: Equatable {
         self.off = .clear
         self.on = .clear
         self.indeterminate = .clear
+        self.pressedOff = .clear
+        self.pressedOn = .clear
+        self.pressedIndeterminate = .clear
         self.disabled = .clear
     }
     

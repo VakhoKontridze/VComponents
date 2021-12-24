@@ -25,6 +25,15 @@ public enum VSquareButtonState: Int, CaseIterable {
         case .disabled: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VSquareButtonInternalState) {
+        switch internalState {
+        case .enabled: self = .enabled
+        case .pressed: self = .enabled
+        case .disabled: self = .disabled
+        }
+    }
 }
 
 // MARK: - V Square Button Internal State
@@ -50,6 +59,10 @@ enum VSquareButtonInternalState {
         case (.enabled, true): self = .pressed
         case (.disabled, _): self = .disabled
         }
+    }
+    
+    static func `default`(state: VSquareButtonState) -> Self {
+        .init(state: state, isPressed: false)
     }
 }
 

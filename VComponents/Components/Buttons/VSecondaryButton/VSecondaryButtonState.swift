@@ -25,6 +25,15 @@ public enum VSecondaryButtonState: Int, CaseIterable {
         case .disabled: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VSecondaryButtonInternalState) {
+        switch internalState {
+        case .enabled: self = .enabled
+        case .pressed: self = .enabled
+        case .disabled: self = .disabled
+        }
+    }
 }
 
 // MARK: - V Secondary Button Internal State
@@ -50,6 +59,10 @@ enum VSecondaryButtonInternalState {
         case (.enabled, true): self = .pressed
         case (.disabled, _): self = .disabled
         }
+    }
+    
+    static func `default`(state: VSecondaryButtonState) -> Self {
+        .init(state: state, isPressed: false)
     }
 }
 

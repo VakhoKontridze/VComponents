@@ -47,6 +47,16 @@ public enum VCheckBoxState: Int, CaseIterable {
         case .disabled: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VCheckBoxInternalState) {
+        switch internalState {
+        case .off, .pressedOff: self = .off
+        case .on, .pressedOn: self = .on
+        case .indeterminate, .pressedIndeterminate: self = .indeterminate
+        case .disabled: self = .disabled
+        }
+    }
 
     // MARK: Next State
     /// Goes to the next state.
@@ -105,6 +115,20 @@ enum VCheckBoxInternalState {
         case (true, true): self = .pressedOn
         }
     }
+    
+    static func `default`(state: VCheckBoxState) -> Self {
+        .init(state: state, isPressed: false)
+    }
+    
+    // MARK: Next State
+    mutating func setNextState() {
+        switch self {
+        case .off, .pressedOff: self = .on
+        case .on, .pressedOn: self = .off
+        case .indeterminate, .pressedIndeterminate: self = .on
+        case .disabled: break
+        }
+    }
 }
 
 // MARK: - Mapping
@@ -114,9 +138,9 @@ extension StateColors_OOID {
         case .off: return off
         case .on: return on
         case .indeterminate: return indeterminate
-        case .pressedOff: return off
-        case .pressedOn: return on
-        case .pressedIndeterminate: return indeterminate
+        case .pressedOff: return pressedOff
+        case .pressedOn: return pressedOn
+        case .pressedIndeterminate: return pressedIndeterminate
         case .disabled: return disabled
         }
     }

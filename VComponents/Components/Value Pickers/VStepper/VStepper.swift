@@ -87,8 +87,10 @@ public struct VStepper: View {
     private func button(_ button: VStepperButton) -> some View {
         VBaseButton(
             state: buttonState(for: button),
-            action: { incrementValue(from: button) },
-            onPress: { saveButtonPressState(button, isPressed: $0) },
+            gesture: { gestureState in
+                saveButtonPressState(button, isPressed: gestureState.isPressed)
+                if gestureState.isClicked { incrementValue(from: button) }
+            },
             content: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: model.layout.cornerRadius)

@@ -17,6 +17,12 @@ public struct StateColors_OOD: Equatable {
     /// On color.
     public var on: Color
     
+    /// Off pressed color.
+    public var pressedOff: Color
+    
+    /// On pressed color.
+    public var pressedOn: Color
+    
     /// Disabled color.
     public var disabled: Color
     
@@ -25,10 +31,14 @@ public struct StateColors_OOD: Equatable {
     public init(
         off: Color,
         on: Color,
+        pressedOff: Color,
+        pressedOn: Color,
         disabled: Color
     ) {
         self.off = off
         self.on = on
+        self.pressedOff = pressedOff
+        self.pressedOn = pressedOn
         self.disabled = disabled
     }
     
@@ -36,6 +46,8 @@ public struct StateColors_OOD: Equatable {
     public init() {
         self.off = .clear
         self.on = .clear
+        self.pressedOff = .clear
+        self.pressedOn = .clear
         self.disabled = .clear
     }
 }

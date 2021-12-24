@@ -20,51 +20,78 @@ import UIKit
 ///     var body: some View {
 ///         VBaseButton(
 ///             state: state,
-///             action: { print("Pressed") },
-///             onPress: { isPressed in
-///                 switch isPressed {
-///                 case false: print("Press ended")
-///                 case true: print("Press began")
+///             gesture: { gestureState in
+///                 switch gestureState {
+///                 case .none: print("-")
+///                 case .press: print("Pressing")
+///                 case .click: print("Clicked")
 ///                 }
 ///             },
 ///             content: { Text("Lorem ipsum") }
 ///         )
 ///     }
-///     
+///
+/// If observing pressed state is not desired, API can be simplified:
+///
+///     var body: some View {
+///         VBaseButton(
+///             state: state,
+///             action: { print("Clicked") },
+///             content: { Text("Lorem ipsum") }
+///         )
+///     }
+///
 public struct VBaseButton<Content>: View where Content: View {
     // MARK: Properties
     private let state: VBaseButtonState
     
-    private let action: () -> Void
-    private let pressHandler: (Bool) -> Void
+    private var gestureHandler: (VBaseButtonGestureState) -> Void
     
     private let content: () -> Content
     
     // MARK: Initializers - State
-    /// Initializes component with state, action, press handler, and content.
+    /// Initializes component with state, gesture handler, and content.
     public init(
         state: VBaseButtonState,
-        action: @escaping () -> Void,
-        onPress pressHandler: @escaping (Bool) -> Void,
+        gesture gestureHandler: @escaping (VBaseButtonGestureState) -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.state = state
-        self.action = action
-        self.pressHandler = pressHandler
+        self.gestureHandler = gestureHandler
+        self.content = content
+    }
+    
+    /// Initializes component with state, action, and content.
+    public init(
+        state: VBaseButtonState,
+        action: @escaping () -> Void,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.state = state
+        self.gestureHandler = { gestureState in if gestureState.isClicked { action() } }
         self.content = content
     }
     
     // MARK: Initializers - Bool
-    /// Initializes component with bool, action, press handler, and content.
+    /// Initializes component with bool, gesture handler, and content.
     public init(
         isEnabled: Bool,
-        action: @escaping () -> Void,
-        onPress pressHandler: @escaping (Bool) -> Void,
+        gesture gestureHandler: @escaping (VBaseButtonGestureState) -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.state = .init(isEnabled: isEnabled)
-        self.action = action
-        self.pressHandler = pressHandler
+        self.gestureHandler = gestureHandler
+        self.content = content
+    }
+    
+    /// Initializes component with bool, action, and content.
+    public init(
+        isEnabled: Bool,
+        action: @escaping () -> Void,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.state = .init(isEnabled: isEnabled)
+        self.gestureHandler = { gestureState in if gestureState.isClicked { action() } }
         self.content = content
     }
 
@@ -73,8 +100,7 @@ public struct VBaseButton<Content>: View where Content: View {
         content()
             .overlay(VBaseButtonViewRepresentable(
                 isEnabled: state.isEnabled,
-                onPress: pressHandler,
-                action: action
+                gesture: gestureHandler
             ))
     }
 }
@@ -86,11 +112,11 @@ struct VBaseButton_Previews: PreviewProvider {
     static var previews: some View {
         VBaseButton(
             state: state,
-            action: { print("Pressed") },
-            onPress: { isPressed in
-                switch isPressed {
-                case false: print("Press ended")
-                case true: print("Press began")
+            gesture: { gestureState in
+                switch gestureState {
+                case .none: print("-")
+                case .press: print("Pressing")
+                case .click: print("Clicked")
                 }
             },
             content: { Text("Lorem ipsum") }

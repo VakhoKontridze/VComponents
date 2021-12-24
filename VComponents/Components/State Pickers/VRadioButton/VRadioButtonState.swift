@@ -38,13 +38,22 @@ public enum VRadioButtonState: Int, CaseIterable {
         case .disabled: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VRadioButtonInternalState) {
+        switch internalState {
+        case .off, .pressedOff: self = .off
+        case .on, .pressedOn: self = .on
+        case .disabled: self = .disabled
+        }
+    }
 
     // MARK: Next State
     /// Goes to the next state.
     public mutating func setNextState() {
         switch self {
         case .off: self = .on
-        case .on: break
+        case .on: self = .on
         case .disabled: break
         }
     }
@@ -89,6 +98,19 @@ enum VRadioButtonInternalState {
         case (true, true): self = .pressedOn
         }
     }
+    
+    static func `default`(state: VRadioButtonState) -> Self {
+        .init(state: state, isPressed: false)
+    }
+    
+    // MARK: Next State
+    mutating func setNextState() {
+        switch self {
+        case .off, .pressedOff: self = .on
+        case .on, .pressedOn: self = .on
+        case .disabled: break
+        }
+    }
 }
 
 // MARK: - Mapping
@@ -97,8 +119,8 @@ extension StateColors_OOD {
         switch state {
         case .off: return off
         case .on: return on
-        case .pressedOff: return off
-        case .pressedOn: return on
+        case .pressedOff: return pressedOff
+        case .pressedOn: return pressedOn
         case .disabled: return disabled
         }
     }

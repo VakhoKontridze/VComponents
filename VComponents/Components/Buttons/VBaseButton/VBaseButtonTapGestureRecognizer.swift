@@ -10,8 +10,7 @@ import UIKit
 // MARK: - V Base Button Tap Gesture Recognizer
 final class VBaseButtonTapGestureRecognizer: UITapGestureRecognizer, UIGestureRecognizerDelegate {
     // MARK: Properties
-    private var pressHandler: (Bool) -> Void
-    private var action: () -> Void
+    private var gestureHandler: (VBaseButtonGestureState) -> Void
     
     private let maxOutOfBoundsOffsetToRegisterTap: CGFloat = 10
     
@@ -20,11 +19,9 @@ final class VBaseButtonTapGestureRecognizer: UITapGestureRecognizer, UIGestureRe
     
     // MARK: Initializers
     init(
-        onPress pressHandler: @escaping (Bool) -> Void,
-        action: @escaping () -> Void
+        gesture gestureHandler: @escaping (VBaseButtonGestureState) -> Void
     ) {
-        self.pressHandler = pressHandler
-        self.action = action
+        self.gestureHandler = gestureHandler
         super.init(target: nil, action: nil)
         setUp()
     }
@@ -36,18 +33,16 @@ final class VBaseButtonTapGestureRecognizer: UITapGestureRecognizer, UIGestureRe
     
     // MARK: Updates
     func update(
-        onPress pressHandler: @escaping (Bool) -> Void,
-        action: @escaping () -> Void
+        gesture gestureHandler: @escaping (VBaseButtonGestureState) -> Void
     ) {
-        self.pressHandler = pressHandler
-        self.action = action
+        self.gestureHandler = gestureHandler
     }
 
     // MARK: Touches
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent) {
         state = .began
         initialTouchViewCenterLocationOnSuperView = view?.centerLocationOnSuperView
-        pressHandler(true)
+        gestureHandler(.press)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
@@ -57,21 +52,31 @@ final class VBaseButtonTapGestureRecognizer: UITapGestureRecognizer, UIGestureRe
         {
             state = .ended
             initialTouchViewCenterLocationOnSuperView = nil
-            pressHandler(false)
+            gestureHandler(.none)
         }
     }
 
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent) {
-        state = .ended
-        pressHandler(false)
-        defer { initialTouchViewCenterLocationOnSuperView = nil }
-        if gestureViewLocationIsUnchanged == true { action() }
+        switch gestureViewLocationIsUnchanged {
+        case nil:
+            break
+            
+        case true?:
+            state = .ended
+            initialTouchViewCenterLocationOnSuperView = nil
+            gestureHandler(.click)
+            
+        case false?:
+            state = .ended
+            initialTouchViewCenterLocationOnSuperView = nil
+            gestureHandler(.none)
+        }
     }
 
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent) {
         state = .ended
         initialTouchViewCenterLocationOnSuperView = nil
-        pressHandler(false)
+        gestureHandler(.none)
     }
     
     // MARK: Gesture Recognizer Delegate

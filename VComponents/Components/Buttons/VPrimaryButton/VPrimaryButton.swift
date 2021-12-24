@@ -29,8 +29,8 @@ public struct VPrimaryButton<Content>: View where Content: View {
     private let model: VPrimaryButtonModel
     
     private let state: VPrimaryButtonState
-    @State private var isPressed: Bool = false
-    private var internalState: VPrimaryButtonInternalState { .init(state: state, isPressed: isPressed) }
+    @State private var internalStateRaw: VPrimaryButtonInternalState?
+    private var internalState: VPrimaryButtonInternalState { internalStateRaw ?? .default(state: state) }
     
     private let action: () -> Void
     
@@ -67,7 +67,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
                 VText(
                     type: .oneLine,
                     font: model.fonts.title,
-                    color: model.colors.textContent.for(.init(state: state, isPressed: false)),
+                    color: model.colors.textContent.for(.default(state: state)),
                     title: title
                 )
             }
@@ -76,10 +76,11 @@ public struct VPrimaryButton<Content>: View where Content: View {
 
     // MARK: Body
     public var body: some View {
-        VBaseButton(
+        syncInternalStateWithState()
+        
+        return VBaseButton(
             isEnabled: internalState.isEnabled,
-            action: action,
-            onPress: { isPressed = $0 },
+            gesture: gestureHandler,
             content: { buttonView }
         )
     }
@@ -129,6 +130,24 @@ public struct VPrimaryButton<Content>: View where Content: View {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                 .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWidth)
         }
+    }
+    
+    // MARK: State Syncs
+    private func syncInternalStateWithState() {
+        DispatchQueue.main.async(execute: {
+            if
+                internalStateRaw == nil ||
+                .init(internalState: internalState) != state
+            {
+                internalStateRaw = .default(state: state)
+            }
+        })
+    }
+    
+    // MARK: Actions
+    private func gestureHandler(gestureState: VBaseButtonGestureState) {
+        internalStateRaw = .init(state: state, isPressed: gestureState.isPressed)
+        if gestureState.isClicked { action() }
     }
 }
 

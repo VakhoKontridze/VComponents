@@ -68,6 +68,8 @@ public struct VToggleModel {
         public var fill: StateColors = .init(
             off: .init(componentAsset: "Toggle.Fill.off"),
             on: primaryButtonReference.colors.background.enabled,
+            pressedOff: .init(componentAsset: "Toggle.Fill.pressedOff"),
+            pressedOn: primaryButtonReference.colors.background.pressed,
             disabled: .init(componentAsset: "Toggle.Fill.disabled")
         )
         
@@ -75,6 +77,8 @@ public struct VToggleModel {
         public var thumb: StateColors = .init(
             off: .init(componentAsset: "Toggle.Thumb"),
             on: .init(componentAsset: "Toggle.Thumb"),
+            pressedOff: .init(componentAsset: "Toggle.Thumb"),
+            pressedOn: .init(componentAsset: "Toggle.Thumb"),
             disabled: .init(componentAsset: "Toggle.Thumb")
         )
         
@@ -90,6 +94,8 @@ public struct VToggleModel {
         public var textContent: StateColors = .init(
             off: ColorBook.primary,
             on: ColorBook.primary,
+            pressedOff: ColorBook.secondary,
+            pressedOn: ColorBook.secondary,
             disabled: ColorBook.primary
         )
         

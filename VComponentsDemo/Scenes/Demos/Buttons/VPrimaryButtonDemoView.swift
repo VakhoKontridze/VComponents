@@ -28,22 +28,22 @@ struct VPrimaryButtonDemoView: View {
             model.colors.textContent = .init(
                 enabled: defaultModel.colors.background.enabled,
                 pressed: defaultModel.colors.background.pressed,
-                disabled: defaultModel.colors.background.disabled,
-                loading: defaultModel.colors.background.loading
+                loading: defaultModel.colors.background.loading,
+                disabled: defaultModel.colors.background.disabled
             )
             
             model.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
-                disabled: .init("PrimaryButtonBordered.Background.disabled"),
-                loading: .init("PrimaryButtonBordered.Background.disabled")
+                loading: .init("PrimaryButtonBordered.Background.disabled"),
+                disabled: .init("PrimaryButtonBordered.Background.disabled")
             )
             
             model.colors.border = .init(
                 enabled: defaultModel.colors.background.enabled,
                 pressed: defaultModel.colors.background.disabled,   // It's better this way
-                disabled: defaultModel.colors.background.disabled,
-                loading: defaultModel.colors.background.loading
+                loading: defaultModel.colors.background.loading,
+                disabled: defaultModel.colors.background.disabled
             )
         }
 

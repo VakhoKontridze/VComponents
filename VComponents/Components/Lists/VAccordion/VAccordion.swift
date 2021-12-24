@@ -251,7 +251,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
 
     // MARK: Body
     public var body: some View {
-        setStatesFromBodyRender()
+        syncInternalStateWithState()
         
         return VSheet(model: model.sheetSubModel, content: {
             VStack(spacing: 0, content: {
@@ -326,10 +326,12 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
         }
     }
 
-    // MARK: State Sets
-    private func setStatesFromBodyRender() {
+    // MARK: State Syncs
+    private func syncInternalStateWithState() {
         DispatchQueue.main.async(execute: {
-            setAnimatableState()
+            if animatableState == nil || animatableState != state {
+                withAnimation(model.animations.expandCollapse, { animatableState = state })
+            }
         })
     }
 
@@ -342,12 +344,6 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     private func expandCollapseFromHeaderTap() {
         guard model.misc.expandCollapseOnHeaderTap else { return }
         expandCollapse()
-    }
-    
-    private func setAnimatableState() {
-        if animatableState == nil || animatableState != state {
-            withAnimation(model.animations.expandCollapse, { animatableState = state })
-        }
     }
 }
 

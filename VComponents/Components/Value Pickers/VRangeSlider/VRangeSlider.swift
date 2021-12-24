@@ -81,7 +81,7 @@ public struct VRangeSlider: View {
 
     // MARK: Body
     public var body: some View {
-        setStatesFromBodyRender()
+        syncInternalStateWithState()
         
         return Group(content: {
             switch isLayoutValid {
@@ -149,10 +149,16 @@ public struct VRangeSlider: View {
             )
     }
 
-    // MARK: State Sets
-    private func setStatesFromBodyRender() {
+    // MARK: State Syncs
+    private func syncInternalStateWithState() {
         DispatchQueue.main.async(execute: {
-            setAnimatableValues()
+            if animatableValueLow == nil || animatableValueLow != valueLow {
+                withAnimation(model.animations.progress, { animatableValueLow = valueLow })
+            }
+            
+            if animatableValueHigh == nil || animatableValueHigh != valueHigh {
+                withAnimation(model.animations.progress, { animatableValueHigh = valueHigh })
+            }
         })
     }
     
@@ -214,16 +220,6 @@ public struct VRangeSlider: View {
     private func setValueHigh(to value: Double) {
         withAnimation(model.animations.progress, { animatableValueHigh = value })
         self.valueHigh = value
-    }
-    
-    private func setAnimatableValues() {
-        if animatableValueLow == nil || animatableValueLow != valueLow {
-            withAnimation(model.animations.progress, { animatableValueLow = valueLow })
-        }
-        
-        if animatableValueHigh == nil || animatableValueHigh != valueHigh {
-            withAnimation(model.animations.progress, { animatableValueHigh = valueHigh })
-        }
     }
 
     // MARK: Progress

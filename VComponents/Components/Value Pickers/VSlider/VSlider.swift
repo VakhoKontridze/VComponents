@@ -61,7 +61,7 @@ public struct VSlider: View {
 
     // MARK: Body
     public var body: some View {
-        setStatesFromBodyRender()
+        syncInternalStateWithState()
         
         return GeometryReader(content: { proxy in
             ZStack(alignment: .leading, content: {
@@ -114,10 +114,12 @@ public struct VSlider: View {
         }
     }
 
-    // MARK: State Sets
-    private func setStatesFromBodyRender() {
+    // MARK: State Syncs
+    private func syncInternalStateWithState() {
         DispatchQueue.main.async(execute: {
-            setAnimatableValue()
+            if animatableValue == nil || animatableValue != value {
+                withAnimation(model.animations.progress, { animatableValue = value })
+            }
         })
     }
 
@@ -146,12 +148,6 @@ public struct VSlider: View {
     private func setValue(to value: Double) {
         withAnimation(model.animations.progress, { animatableValue = value })
         self.value = value
-    }
-    
-    private func setAnimatableValue() {
-        if animatableValue == nil || animatableValue != value {
-            withAnimation(model.animations.progress, { animatableValue = value })
-        }
     }
 
     // MARK: Progress

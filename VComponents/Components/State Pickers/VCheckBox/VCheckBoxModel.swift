@@ -69,6 +69,9 @@ public struct VCheckBoxModel {
             off: ColorBook.primaryInverted,
             on: toggleReference.colors.fill.on,
             indeterminate: toggleReference.colors.fill.on,
+            pressedOff: ColorBook.primaryInverted,
+            pressedOn: toggleReference.colors.fill.pressedOn,
+            pressedIndeterminate: toggleReference.colors.fill.pressedOn,
             disabled: ColorBook.primaryInverted
         )
         
@@ -77,6 +80,9 @@ public struct VCheckBoxModel {
             off: .init(componentAsset: "CheckBox.Border.off"),
             on: .clear,
             indeterminate: .clear,
+            pressedOff: .init(componentAsset: "CheckBox.Border.pressedOff"),
+            pressedOn: .clear,
+            pressedIndeterminate: .clear,
             disabled: .init(componentAsset: "CheckBox.Border.disabled")
         )
         
@@ -85,6 +91,9 @@ public struct VCheckBoxModel {
             off: .clear,
             on: toggleReference.colors.thumb.off,
             indeterminate: toggleReference.colors.thumb.on,
+            pressedOff: .clear,
+            pressedOn: toggleReference.colors.thumb.pressedOn,
+            pressedIndeterminate: toggleReference.colors.thumb.pressedOn,
             disabled: .clear
         )
 
@@ -101,6 +110,9 @@ public struct VCheckBoxModel {
             off: toggleReference.colors.textContent.off,
             on: toggleReference.colors.textContent.on,
             indeterminate: toggleReference.colors.textContent.on,
+            pressedOff: toggleReference.colors.textContent.pressedOff,
+            pressedOn: toggleReference.colors.textContent.pressedOn,
+            pressedIndeterminate: toggleReference.colors.textContent.pressedOn,
             disabled: toggleReference.colors.textContent.disabled
         )
 

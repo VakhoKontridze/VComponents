@@ -25,6 +25,15 @@ public enum VPlainButtonState: Int, CaseIterable {
         case .disabled: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VPlainButtonInternalState) {
+        switch internalState {
+        case .enabled: self = .enabled
+        case .pressed: self = .enabled
+        case .disabled: self = .disabled
+        }
+    }
 }
 
 // MARK: - V Plain Button Internal State
@@ -50,6 +59,10 @@ enum VPlainButtonInternalState {
         case (.enabled, true): self = .pressed
         case (.disabled, _): self = .disabled
         }
+    }
+    
+    static func `default`(state: VPlainButtonState) -> Self {
+        .init(state: state, isPressed: false)
     }
 }
 

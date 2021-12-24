@@ -221,7 +221,7 @@ public struct VTextField: View {
 
     // MARK: Body
     public var body: some View {
-        setStatesFromBodyRender()
+        syncInternalStateWithState()
         
         return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
             headerView
@@ -344,8 +344,8 @@ public struct VTextField: View {
         })
     }
 
-    // MARK: State Sets
-    private func setStatesFromBodyRender() {
+    // MARK: State Syncs
+    private func syncInternalStateWithState() {
         DispatchQueue.main.asyncAfter(deadline: .now() + model.animations.delayToAnimateButtons, execute: {
             isTextNonEmpty = !text.isEmpty
         })

@@ -31,6 +31,16 @@ public enum VPrimaryButtonState: Int, CaseIterable {
         case .loading: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VPrimaryButtonInternalState) {
+        switch internalState {
+        case .enabled: self = .enabled
+        case .pressed: self = .enabled
+        case .disabled: self = .disabled
+        case .loading: self = .loading
+        }
+    }
 }
 
 // MARK: - V Primary Button Internal State
@@ -68,6 +78,10 @@ enum VPrimaryButtonInternalState {
         case (.disabled, _): self = .disabled
         case (.loading, _): self = .loading
         }
+    }
+    
+    static func `default`(state: VPrimaryButtonState) -> Self {
+        .init(state: state, isPressed: false)
     }
 }
 

@@ -7,6 +7,43 @@
 
 import SwiftUI
 
+// MARK: - V Base Button
+extension VBaseButton {
+    @available(*, deprecated, message: "Use `init` with `gestureState` parameter")
+    public init(
+        state: VBaseButtonState,
+        action: @escaping () -> Void,
+        onPress pressHandler: @escaping (Bool) -> Void,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.init(
+            state: state,
+            gesture: { gestureState in
+                pressHandler(gestureState.isPressed)
+                if gestureState.isClicked { action() }
+            },
+            content: content
+        )
+    }
+    
+    @available(*, deprecated, message: "Use `init` with `gestureState` parameter")
+    public init(
+        isEnabled: Bool,
+        action: @escaping () -> Void,
+        onPress pressHandler: @escaping (Bool) -> Void,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.init(
+            isEnabled: isEnabled,
+            gesture: { gestureState in
+                pressHandler(gestureState.isPressed)
+                if gestureState.isClicked { action() }
+            },
+            content: content
+        )
+    }
+}
+
 // MARK: - V Web Link
 @available(*, deprecated, renamed: "VWebLink")
 public typealias VLink = VWebLink
@@ -162,6 +199,21 @@ extension StateColors_EPLD {
     }
 }
 
+extension StateColors_OOD {
+    @available(*, deprecated, message: "Use `init` with pressed parameters instead")
+    public init(
+        off: Color,
+        on: Color,
+        disabled: Color
+    ) {
+        self.off = off
+        self.on = on
+        self.pressedOff = off
+        self.pressedOn = on
+        self.disabled = disabled
+    }
+}
+
 extension StateColors_OOID {
     @available(*, deprecated, renamed: "indeterminate")
     public var intermediate: Color {
@@ -174,6 +226,23 @@ extension StateColors_OOID {
         self.off = off
         self.on = on
         self.indeterminate = intermediate
+        self.pressedOff = off
+        self.pressedOn = on
+        self.pressedIndeterminate = indeterminate
+        self.disabled = disabled
+    }
+}
+
+
+extension StateColors_OOID {
+    @available(*, deprecated, message: "Use `init` with pressed parameters instead")
+    public init(off: Color, on: Color, indeterminate: Color, disabled: Color) {
+        self.off = off
+        self.on = on
+        self.indeterminate = indeterminate
+        self.pressedOff = off
+        self.pressedOn = on
+        self.pressedIndeterminate = indeterminate
         self.disabled = disabled
     }
 }

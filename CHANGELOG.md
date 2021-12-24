@@ -1,14 +1,18 @@
 ## Change Log
 
-#### [1.4.6(15)]
+#### [1.5.0(15)]
+
+- `VBaseButton` API has been updated by implementing `VBaseButtonGestureState`
+- Implementation of state-bound components have been updated
+- `VCheckBox`, `VRadioButton`, and `VToggle` now support colors for pressed states
 - `StateColors_EPDL` has been renamed to `StateColors_EPLD`
 
-#### [1.4.5(14)]
+#### [1.4.6(14)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.6/VComponents.xcframework.zip) — *2021 12 10*
 
 - Fixed VBaseButton click overriding scroll gesture
 - `VPrimaryButton` height has been changed to `56`
 
-#### [1.4.4(13)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.5/VComponents.xcframework.zip) — *2021 11 05*
+#### [1.4.5(13)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.5/VComponents.xcframework.zip) — *2021 11 05*
 
 - `nextState` has been renamed to `setNextState` in component state enums
 - Several color group objects and initializers have been renamed

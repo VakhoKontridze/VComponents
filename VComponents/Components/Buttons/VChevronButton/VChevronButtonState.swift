@@ -25,6 +25,15 @@ public enum VChevronButtonState: Int, CaseIterable {
         case .disabled: return false
         }
     }
+    
+    // MARK: Initializers
+    init(internalState: VChevronButtonInternalState) {
+        switch internalState {
+        case .enabled: self = .enabled
+        case .pressed: self = .enabled
+        case .disabled: self = .disabled
+        }
+    }
 }
 
 // MARK: - V Chevron Button Internal State
@@ -50,6 +59,10 @@ enum VChevronButtonInternalState {
         case (.enabled, true): self = .pressed
         case (.disabled, _): self = .disabled
         }
+    }
+    
+    static func `default`(state: VChevronButtonState) -> Self {
+        .init(state: state, isPressed: false)
     }
 }
 

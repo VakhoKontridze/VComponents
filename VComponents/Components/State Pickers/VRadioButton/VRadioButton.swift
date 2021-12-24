@@ -57,12 +57,12 @@ public struct VRadioButton<Content>: View where Content: View {
     private let model: VRadioButtonModel
     
     @Binding private var state: VRadioButtonState
-    @State private var animatableState: VRadioButtonState?
-    @State private var isPressed: Bool = false
-    private var internalState: VRadioButtonInternalState { .init(state: animatableState ?? state, isPressed: isPressed) }
-    private var contentIsEnabled: Bool { internalState.isEnabled && model.misc.contentIsClickable }
+    @State private var internalStateRaw: VRadioButtonInternalState?
+    private var internalState: VRadioButtonInternalState { internalStateRaw ?? .default(state: state) }
     
     private let content: (() -> Content)?
+    
+    private var contentIsEnabled: Bool { internalState.isEnabled && model.misc.contentIsClickable }
     
     // MARK: Initializers - State
     /// Initializes component with state and content.
@@ -227,7 +227,7 @@ public struct VRadioButton<Content>: View where Content: View {
 
     // MARK: Body
     public var body: some View {
-        setStatesFromBodyRender()
+        syncInternalStateWithState()
         
         return Group(content: {
             switch content {
@@ -245,59 +245,76 @@ public struct VRadioButton<Content>: View where Content: View {
     }
     
     private var radioButton: some View {
-        VBaseButton(isEnabled: internalState.isEnabled, action: setNextState, onPress: { isPressed = $0 }, content: {
-            ZStack(content: {
-                Circle()
+        VBaseButton(
+            isEnabled: internalState.isEnabled,
+            gesture: gestureHandler,
+            content: {
+                ZStack(content: {
+                    Circle()
+                        .frame(dimension: model.layout.dimension)
+                        .foregroundColor(model.colors.fill.for(internalState))
+                    
+                    Circle()
+                        .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
+                        .frame(dimension: model.layout.dimension)
+                    
+                    Circle()
+                        .frame(dimension: model.layout.bulletDimension)
+                        .foregroundColor(model.colors.bullet.for(internalState))
+                })
                     .frame(dimension: model.layout.dimension)
-                    .foregroundColor(model.colors.fill.for(internalState))
-                
-                Circle()
-                    .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
-                    .frame(dimension: model.layout.dimension)
-                
-                Circle()
-                    .frame(dimension: model.layout.bulletDimension)
-                    .foregroundColor(model.colors.bullet.for(internalState))
-            })
-                .frame(dimension: model.layout.dimension)
-                .padding(model.layout.hitBox)
-        })
+                    .padding(model.layout.hitBox)
+            }
+        )
     }
     
     private var spacerView: some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: setNextState, onPress: { _ in }, content: {
-            Rectangle()
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.contentMarginLeading)
-                .foregroundColor(.clear)
-        })
+        VBaseButton(
+            isEnabled: contentIsEnabled,
+            gesture: gestureHandler,
+            content: {
+                Rectangle()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: model.layout.contentMarginLeading)
+                    .foregroundColor(.clear)
+            }
+        )
     }
     
     private func contentView(
         @ViewBuilder content: @escaping () -> Content
     ) -> some View {
-        VBaseButton(isEnabled: contentIsEnabled, action: setNextState, onPress: { isPressed = $0 }, content: {
-            content()
-                .opacity(model.colors.content.for(internalState))
-        })
+        VBaseButton(
+            isEnabled: contentIsEnabled,
+            gesture: gestureHandler,
+            content: {
+                content()
+                    .opacity(model.colors.content.for(internalState))
+            }
+        )
     }
 
-    // MARK: State Sets
-    private func setStatesFromBodyRender() {
+    // MARK: State Syncs
+    private func syncInternalStateWithState() {
         DispatchQueue.main.async(execute: {
-            setAnimatableState()
+            if
+                internalStateRaw == nil ||
+                .init(internalState: internalState) != state
+            {
+                withAnimation(model.animations.stateChange, { internalStateRaw = .default(state: state) })
+            }
         })
     }
 
     // MARK: Actions
-    private func setNextState() {
-        withAnimation(model.animations.stateChange, { animatableState?.setNextState() })
-        state.setNextState()
-    }
-    
-    private func setAnimatableState() {
-        if animatableState == nil || animatableState != state {
-            withAnimation(model.animations.stateChange, { animatableState = state })
+    private func gestureHandler(gestureState: VBaseButtonGestureState) {
+        switch gestureState.isClicked {
+        case false:
+            internalStateRaw = .init(state: state, isPressed: gestureState.isPressed)
+
+        case true:
+            state.setNextState()
+            withAnimation(model.animations.stateChange, { internalStateRaw?.setNextState() })
         }
     }
 }
