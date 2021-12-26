@@ -9,10 +9,19 @@ import Foundation
 
 // MARK: - V Base Button Gesture State
 /// Enum that describes state, such as `none`, `press`, or `click`.
-@frozen public enum VBaseButtonGestureState {
+@frozen public enum VBaseButtonGestureState: Int, CaseIterable {
     // MARK: Cases
+    /// None.
     case none
+    
+    /// Press.
+    ///
+    /// Indicates if button is being pressed.
     case press
+    
+    /// Click.
+    ///
+    /// Indicates if successfull click occured.
     case click
     
     // MARK: Propertes

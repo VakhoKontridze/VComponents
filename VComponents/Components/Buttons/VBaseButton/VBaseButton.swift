@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UIKit
 
 // MARK: - V Base Button
 /// Core component that is used throughout the library as button.
