@@ -92,7 +92,7 @@ Alternately, you can create static instances of models for reusability.
 
 ```swift
 extension VSecondaryButtonModel {
-    static let myCustomModel: VSecondaryButtonModel = {
+    static let someModel: VSecondaryButtonModel = {
         var model: VSecondaryButtonModel = .init()
         
         model.colors.textContent = .init(
@@ -107,7 +107,7 @@ extension VSecondaryButtonModel {
 
 var body: some View {
     VSecondaryButton(
-        model: .myCustomModel,
+        model: .someModel,
         action: doSomething,
         title: "Lorem ipsum"
     )
