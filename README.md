@@ -260,9 +260,9 @@ Since VComponents is open-source, you can clone the project and build the framew
 
 ## Versioning
 
-***Major***. Major changes, such as new components or types
+***Major***. Major changes, such as big overhauls
 
-***Minor***. Minor changes, such as new properties in models
+***Minor***. Minor changes, such as new component, types, or properties in models
 
 ***Patch***. Bug fixes and improvements
 
