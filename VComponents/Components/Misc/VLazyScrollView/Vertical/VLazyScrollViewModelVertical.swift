@@ -14,9 +14,6 @@ public struct VLazyScrollViewModelVertical {
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing misc properties.
-    public var misc: Misc = .init()
-    
     // MARK: Initializers
     /// Initializes model with default values.
     public init() {}
@@ -31,15 +28,6 @@ public struct VLazyScrollViewModelVertical {
         /// Row alignment. Defaults to .`center`.
         public var alignment: HorizontalAlignment = .center
         
-        // MARK: Initializers
-        /// Initializes sub-model with default values.
-        public init() {}
-    }
-
-    // MARK: Misc
-    /// Sub-model containing misc properties.
-    public struct Misc {
-        // MARK: Properties
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
         

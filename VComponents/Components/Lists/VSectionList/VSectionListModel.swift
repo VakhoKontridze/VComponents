@@ -23,9 +23,6 @@ public struct VSectionListModel {
     /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing misc properties.
-    public var misc: Misc = .init()
-    
     // MARK: Initializers
     /// Initializes model with default values.
     public init() {}
@@ -57,6 +54,9 @@ public struct VSectionListModel {
         
         /// Divider margins. Defaults to `0` leading and `0` trailing.
         public var dividerMargins: HorizontalMargins = listReference.layout.dividerMargins
+        
+        /// Indicates if scrolling indicator is shown. Defaults to `true`.
+        public var showIndicator: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -111,23 +111,11 @@ public struct VSectionListModel {
         public init() {}
     }
 
-    // MARK: Misc
-    /// Sub-model containing misc properties.
-    public struct Misc {
-        // MARK: Properties
-        /// Indicates if scrolling indicator is shown. Defaults to `true`.
-        public var showIndicator: Bool = true
-        
-        // MARK: Initializers
-        /// Initializes sub-model with default values.
-        public init() {}
-    }
-
     // MARK: Sub-Models
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
-        model.misc.showIndicator = misc.showIndicator
+        model.layout.showIndicator = layout.showIndicator
         
         model.layout.rowSpacing = layout.rowSpacing
         model.layout.dividerHeight = layout.dividerHeight

@@ -17,9 +17,6 @@ public struct VBaseListModel {
     /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing misc properties.
-    public var misc: Misc = .init()
-    
     // MARK: Initializers
     /// Initializes model with default values.
     public init() {}
@@ -49,6 +46,9 @@ public struct VBaseListModel {
         
         var hasDivider: Bool { dividerHeight > 0 }
         
+        /// Indicates if scrolling indicator is shown. Defaults to `true`.
+        public var showIndicator: Bool = true
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
@@ -70,22 +70,10 @@ public struct VBaseListModel {
         public init() {}
     }
 
-    // MARK: Misc
-    /// Sub-model containing misc properties.
-    public struct Misc {
-        // MARK: Properties
-        /// Indicates if scrolling indicator is shown. Defaults to `true`.
-        public var showIndicator: Bool = true
-        
-        // MARK: Initializers
-        /// Initializes sub-model with default values.
-        public init() {}
-    }
-
     // MARK: Sub-Models
     var lazyScrollViewSubModel: VLazyScrollViewModelVertical {
         var model: VLazyScrollViewModelVertical = .init()
-        model.misc.showIndicator = misc.showIndicator
+        model.layout.showIndicator = layout.showIndicator
         return model
     }
 }

@@ -24,7 +24,7 @@ struct VLazyScrollViewVertical<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        ScrollView(.vertical, showsIndicators: model.misc.showIndicator, content: {
+        ScrollView(.vertical, showsIndicators: model.layout.showIndicator, content: {
             LazyVStack(alignment: model.layout.alignment, spacing: model.layout.rowSpacing, content: {
                 content()
             })

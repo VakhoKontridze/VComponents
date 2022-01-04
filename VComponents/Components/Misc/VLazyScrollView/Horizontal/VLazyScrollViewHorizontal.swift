@@ -24,7 +24,7 @@ struct VLazyScrollViewHorizontal<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: model.misc.showIndicator, content: {
+        ScrollView(.horizontal, showsIndicators: model.layout.showIndicator, content: {
             LazyHStack(alignment: model.layout.alignment, spacing: model.layout.rowSpacing, content: {
                 content()
             })

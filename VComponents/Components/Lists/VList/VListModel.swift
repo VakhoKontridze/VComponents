@@ -23,9 +23,6 @@ public struct VListModel {
     /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing misc properties.
-    public var misc: Misc = .init()
-    
     // MARK: Initializers
     /// Initializes model with default values.
     public init() {}
@@ -48,6 +45,9 @@ public struct VListModel {
         
         /// Divider margins. Defaults to `0` leading and `0` trailing.
         public var dividerMargins: HorizontalMargins = baseListReference.layout.dividerMargins
+        
+        /// Indicates if scrolling indicator is shown. Defaults to `true`.
+        public var showIndicator: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -73,23 +73,11 @@ public struct VListModel {
         public init() {}
     }
 
-    // MARK: Misc
-    /// Sub-model containing misc properties.
-    public struct Misc {
-        // MARK: Properties
-        /// Indicates if scrolling indicator is shown. Defaults to `true`.
-        public var showIndicator: Bool = true
-        
-        // MARK: Initializers
-        /// Initializes sub-model with default values.
-        public init() {}
-    }
-
     // MARK: Sub-Models
     var baseListSubModel: VBaseListModel {
         var model: VBaseListModel = .init()
         
-        model.misc.showIndicator = misc.showIndicator
+        model.layout.showIndicator = layout.showIndicator
         
         model.layout.marginTrailing = layout.contentMargin
         model.layout.rowSpacing = layout.rowSpacing

@@ -75,6 +75,25 @@ extension VRadioButtonState {
     public mutating func nextState() { setNextState() }
 }
 
+// MARK: - V Base List
+extension VBaseListModel {
+    @available(*, unavailable)
+    public var misc: Misc {
+        get { fatalError() }
+        set { fatalError() }
+    }
+    
+    public struct Misc {
+        @available(*, unavailable, message: "Property has been moved to `Layout`")
+        public var showIndicator: Bool {
+            get { fatalError() }
+            set { fatalError() }
+        }
+        
+        public init() {}
+    }
+}
+
 // MARK: - V List
 @available(*, deprecated, renamed: "VList")
 public typealias VSection = VList
@@ -84,6 +103,24 @@ public typealias VSectionLayoutType = VListLayoutType
 
 @available(*, deprecated, renamed: "VListModel")
 public typealias VSectionModel = VListModel
+
+extension VListModel {
+    @available(*, unavailable)
+    public var misc: Misc {
+        get { fatalError() }
+        set { fatalError() }
+    }
+    
+    public struct Misc {
+        @available(*, unavailable, message: "Property has been moved to `Layout`")
+        public var showIndicator: Bool {
+            get { fatalError() }
+            set { fatalError() }
+        }
+        
+        public init() {}
+    }
+}
 
 // MARK: - V Section List
 @available(*, deprecated, renamed: "VSectionList")
@@ -115,10 +152,36 @@ extension VSectionListSectionViewModelable {
 @available(*, deprecated, message: "`VSectionListRowViewModelable` has been dropped. Use `Identifiable` instead.")
 public typealias VSectionListRowViewModelable = Identifiable
 
+extension VSectionListModel {
+    @available(*, unavailable)
+    public var misc: Misc {
+        get { fatalError() }
+        set { fatalError() }
+    }
+    
+    public struct Misc {
+        @available(*, unavailable, message: "Property has been moved to `Layout`")
+        public var showIndicator: Bool {
+            get { fatalError() }
+            set { fatalError() }
+        }
+        
+        public init() {}
+    }
+}
+
 // MARK: - V Accordion
 extension VAccordionState {
     @available(*, deprecated, renamed: "setNextState")
     public mutating func nextState() { setNextState() }
+}
+
+extension VAccordionModel.Misc {
+    @available(*, unavailable, message: "Property has been moved to `Layout`")
+    public var showIndicator: Bool {
+        get { fatalError() }
+        set { fatalError() }
+    }
 }
 
 // MARK: - V Navigation View
@@ -190,6 +253,42 @@ public typealias VLazyListModelVertical = VLazyScrollViewModelVertical
 
 @available(*, deprecated, renamed: "VLazyScrollViewModelHorizontal")
 public typealias VLazyListModelHorizontal = VLazyScrollViewModelHorizontal
+
+extension VLazyScrollViewModelVertical {
+    @available(*, unavailable)
+    public var misc: Misc {
+        get { fatalError() }
+        set { fatalError() }
+    }
+    
+    public struct Misc {
+        @available(*, unavailable, message: "Property has been moved to `Layout`")
+        public var showIndicator: Bool {
+            get { fatalError() }
+            set { fatalError() }
+        }
+        
+        public init() {}
+    }
+}
+
+extension VLazyScrollViewModelHorizontal {
+    @available(*, unavailable)
+    public var misc: Misc {
+        get { fatalError() }
+        set { fatalError() }
+    }
+    
+    public struct Misc {
+        @available(*, unavailable, message: "Property has been moved to `Layout`")
+        public var showIndicator: Bool {
+            get { fatalError() }
+            set { fatalError() }
+        }
+        
+        public init() {}
+    }
+}
 
 // MARK: - V Text
 extension VText {
