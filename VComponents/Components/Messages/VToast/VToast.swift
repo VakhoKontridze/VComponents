@@ -24,10 +24,7 @@ import SwiftUI
 ///             title: "Present"
 ///         )
 ///             .vToast(isPresented: $isPresented, modal: {
-///                 VToast(
-///                     type: .oneLine,
-///                     title: "Lorem ipsum dolor sit amet"
-///                 )
+///                 VToast(title: "Lorem ipsum dolor sit amet")
 ///             })
 ///     }
 ///
@@ -41,7 +38,7 @@ public struct VToast {
     /// Initializes component with type and title.
     public init(
         model: VToastModel = .init(),
-        type toastType: VToastType,
+        type toastType: VToastType = .oneLine,
         title: String
     ) {
         self.model = model

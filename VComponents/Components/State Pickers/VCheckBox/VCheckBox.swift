@@ -62,9 +62,9 @@ public struct VCheckBox<Content>: View where Content: View {
             state: state,
             content: {
                 VText(
-                    type: .multiLine(limit: nil, alignment: .leading),
-                    font: model.fonts.title,
+                    type: .multiLine(alignment: .leading, limit: nil),
                     color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
+                    font: model.fonts.title,
                     title: title
                 )
             }
@@ -110,9 +110,9 @@ public struct VCheckBox<Content>: View where Content: View {
             state: .init(bool: isOn),
             content: {
                 VText(
-                    type: .multiLine(limit: nil, alignment: .leading),
-                    font: model.fonts.title,
+                    type: .multiLine(alignment: .leading, limit: nil),
                     color: model.colors.textContent.for(.init(bool: isOn.wrappedValue, isPressed: false)),
+                    font: model.fonts.title,
                     title: title
                 )
             }

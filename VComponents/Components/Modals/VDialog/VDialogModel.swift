@@ -25,9 +25,6 @@ public struct VDialogModel {
     
     /// Sub-model containing animation properties.
     public var animations: Animations = .init()
-    
-    /// Sub-model containing misc properties.
-    public var misc: Misc = .init()
 
     // MARK: Initializers
     /// Initializes model with default values.
@@ -60,6 +57,9 @@ public struct VDialogModel {
         
         /// Additional content vertical margin. Defaults to `15`.
         public var contentMarginVertical: CGFloat = 15
+        
+        /// Description line limit. Defaults to `5`.
+        public var descriptionLineLimit: Int = 5
         
         /// Spacing between buttons during two-button type. Defaults to `10`.
         public var twoButtonSpacing: CGFloat = 10
@@ -106,17 +106,6 @@ public struct VDialogModel {
         
         /// Description font. Defaults to system font of size `15`.
         public var description: Font = .system(size: 14)
-        
-        // MARK: Initializers
-        /// Initializes sub-model with default values.
-        public init() {}
-    }
-    
-    // MARK: Misc
-    /// Sub-model containing misc properties.
-    public struct Misc {
-        /// Description line limit. Defaults to `5`.
-        public var descriptionLineLimit: Int = 5
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

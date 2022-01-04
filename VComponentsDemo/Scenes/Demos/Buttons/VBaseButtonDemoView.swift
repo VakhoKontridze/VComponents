@@ -52,9 +52,8 @@ struct VBaseButtonDemoView: View {
     
     private func textView(title: String, color: Color) -> some View {
         VText(
-            type: .oneLine,
-            font: .system(size: 16, weight: .semibold),
             color: color,
+            font: .system(size: 16, weight: .semibold),
             title: title
         )
             .frame(height: 20)

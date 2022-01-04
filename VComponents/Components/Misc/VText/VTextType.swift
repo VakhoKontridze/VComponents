@@ -14,5 +14,5 @@ public enum VTextType {
     case oneLine
     
     /// Multi-line.
-    case multiLine(limit: Int?, alignment: TextAlignment)
+    case multiLine(alignment: TextAlignment, limit: Int?)
 }

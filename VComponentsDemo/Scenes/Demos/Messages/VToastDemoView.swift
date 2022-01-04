@@ -88,7 +88,7 @@ private enum VToastTypeHelper: Int, VPickableTitledItem {
     var toastType: VToastType {
         switch self {
         case .oneLine: return .oneLine
-        case .multiLine: return .multiLine(limit: 5, alignment: .leading)
+        case .multiLine: return .multiLine(alignment: .leading, limit: 5)
         }
     }
 }

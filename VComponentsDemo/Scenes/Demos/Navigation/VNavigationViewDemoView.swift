@@ -23,9 +23,9 @@ struct VNavigationViewDemoView: View {
     private func component() -> some View {
         VStack(spacing: 20, content: {
             VText(
-                type: .multiLine(limit: nil, alignment: .center),
-                font: .body,
+                type: .multiLine(alignment: .center, limit: nil),
                 color: ColorBook.primary,
+                font: .body,
                 title: "Navigation View should only ever be used on a root view. Continue?"
             )
             
@@ -130,9 +130,9 @@ extension NavigationDemoView {
                 .edgesIgnoringSafeArea(.all)
             
             VText(
-                type: .multiLine(limit: nil, alignment: .center),
-                font: .system(size: 16, weight: .semibold),
+                type: .multiLine(alignment: .center, limit: nil),
                 color: ColorBook.primary,
+                font: .system(size: 16, weight: .semibold),
                 title: instruction
             )
                 .frame(maxHeight: .infinity, alignment: .top)

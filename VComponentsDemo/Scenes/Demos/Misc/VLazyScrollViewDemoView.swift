@@ -57,9 +57,8 @@ private struct VLazyScrollViewDemoDetailView: View {
     private func component() -> some View {
         VStack(spacing: 25, content: {
             VText(
-                type: .oneLine,
-                font: .callout,
                 color: ColorBook.primary,
+                font: .callout,
                 title: "Scroll rows and see lazy initialization"
             )
 
@@ -71,16 +70,15 @@ private struct VLazyScrollViewDemoDetailView: View {
             
             VStack(spacing: 10, content: {
                 VText(
-                    type: .oneLine,
-                    font: .callout,
                     color: ColorBook.primary,
+                    font: .callout,
                     title: "Initialized Rows"
                 )
                 
                 VText(
-                    type: .multiLine(limit: nil, alignment: .leading),
-                    font: .footnote,
+                    type: .multiLine(alignment: .leading, limit: nil),
                     color: ColorBook.primary,
+                    font: .footnote,
                     title: initializedRowsDescription
                 )
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -92,9 +90,8 @@ private struct VLazyScrollViewDemoDetailView: View {
     private var vertical: some View {
         VLazyScrollView(type: .vertical(), range: 1..<101, content: { num in
             VText(
-                type: .oneLine,
-                font: .body,
                 color: ColorBook.primary,
+                font: .body,
                 title: "\(num)"
             )
                 .frame(height: 30)
@@ -109,9 +106,8 @@ private struct VLazyScrollViewDemoDetailView: View {
     private var horizontal: some View {
         VLazyScrollView(type: .horizontal(), range: 1..<101, content: { num in
             VText(
-                type: .oneLine,
-                font: .body,
                 color: ColorBook.primary,
+                font: .body,
                 title: "\(num)"
             )
                 .frame(width: 30)

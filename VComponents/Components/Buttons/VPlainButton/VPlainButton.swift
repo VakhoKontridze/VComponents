@@ -64,9 +64,8 @@ public struct VPlainButton<Content>: View where Content: View {
             action: action,
             content: {
                 VText(
-                    type: .oneLine,
-                    font: model.fonts.title,
                     color: model.colors.textContent.for(.default(state: state)),
+                    font: model.fonts.title,
                     title: title
                 )
             }

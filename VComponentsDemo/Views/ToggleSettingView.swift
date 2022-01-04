@@ -33,18 +33,17 @@ struct ToggleSettingView: View {
             VStack(alignment: .leading, spacing: 3, content: {
                 if !title.isEmpty {
                     VText(
-                        type: .oneLine,
-                        font: .callout,
                         color: ColorBook.primary,
+                        font: .callout,
                         title: title
                     )
                 }
                 
                 if let description = description, !description.isEmpty {
                     VText(
-                        type: .multiLine(limit: nil, alignment: .leading),
-                        font: .footnote,
+                        type: .multiLine(alignment: .leading, limit: nil),
                         color: ColorBook.secondary,
+                        font: .footnote,
                         title: description
                     )
                 }

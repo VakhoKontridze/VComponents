@@ -55,8 +55,8 @@ struct _VToast: View {
     private var textView: some View {
         VText(
             type: toastType,
-            font: model.fonts.text,
             color: model.colors.text,
+            font: model.fonts.text,
             title: title
         )
             .padding(.horizontal, model.layout.contentMargins.horizontal)

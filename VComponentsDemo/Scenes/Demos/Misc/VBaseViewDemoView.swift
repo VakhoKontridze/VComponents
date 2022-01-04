@@ -99,9 +99,8 @@ struct VBaseViewDemoView: View {
             DemoIconContentView()
             
             VText(
-                type: .oneLine,
-                font: VBaseViewModel.Fonts().title,
                 color: VBaseViewModel.Colors().titleText,
+                font: VBaseViewModel.Fonts().title,
                 title: viewTitle
             )
         })

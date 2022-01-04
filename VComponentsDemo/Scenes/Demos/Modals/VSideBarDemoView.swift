@@ -26,9 +26,9 @@ struct VSideBarDemoView: View {
             VSecondaryButton(action: { isPresented = true }, title: "Present")
             
             VText(
-                type: .multiLine(limit: nil, alignment: .center),
-                font: .callout,
+                type: .multiLine(alignment: .center, limit: nil),
                 color: ColorBook.secondary,
+                font: .callout,
                 title: "Alternately, you can open Side Bar by tapping on a button in the navigation bar"
             )
         })
@@ -47,9 +47,8 @@ struct VSideBarDemoView: View {
     private var sideBarContent: some View {
         VLazyScrollView(type: .vertical(), range: 1..<11, content: { num in
             VText(
-                type: .oneLine,
-                font: .body,
                 color: ColorBook.primaryInverted,
+                font: .body,
                 title: "\(num)"
             )
                 .frame(height: 30)

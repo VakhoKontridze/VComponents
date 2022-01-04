@@ -149,9 +149,8 @@ private struct VSectionListDataSource {
                 .frame(dimension: 32)
 
             VText(
-                type: .oneLine,
-                font: .body,
                 color: ColorBook.primary,
+                font: .body,
                 title: title
             )
         })

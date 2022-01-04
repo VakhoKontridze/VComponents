@@ -1,5 +1,11 @@
 ## Change Log
 
+#### [1.X.X(16)]
+
+- `truncatingMode` has been added to `VText`
+- `oneLine` is now a default parameter in `VText`
+- `oneLine` is now a default parameter in `VToast`
+
 #### [1.5.0(15)](https://github.com/VakhoKontridze/VComponents/releases/download/1.5.0/VComponents.xcframework.zip) — *2021 12 24*
 
 - `VBaseButton` API has been updated by implementing `VBaseButtonGestureState`

@@ -160,11 +160,21 @@ extension VHalfModalModel.Colors {
 }
 
 // MARK: - Dialog
-extension VDialogModel.Layout {
-    @available(*, unavailable, message: "Property has been moved to `Misc`")
-    public var descriptionLineLimit: Int {
+extension VDialogModel {
+    @available(*, unavailable)
+    public var misc: Misc {
         get { fatalError() }
         set { fatalError() }
+    }
+    
+    public struct Misc {
+        @available(*, unavailable, message: "Property has been moved to `Layout`")
+        public var descriptionLineLimit: Int {
+            get { fatalError() }
+            set { fatalError() }
+        }
+        
+        public init() {}
     }
 }
 
@@ -180,6 +190,31 @@ public typealias VLazyListModelVertical = VLazyScrollViewModelVertical
 
 @available(*, deprecated, renamed: "VLazyScrollViewModelHorizontal")
 public typealias VLazyListModelHorizontal = VLazyScrollViewModelHorizontal
+
+// MARK: - V Text
+extension VText {
+    @available(*, deprecated, message: "Use `init` with different parameter order")
+    public init(
+        type textType: VTextType,
+        font: Font,
+        color: Color,
+        title: String
+    ) {
+        self.init(
+            type: textType,
+            color: color,
+            font: font,
+            title: title
+        )
+    }
+}
+
+extension VTextType {
+    @available(*, deprecated, message: "Use case with different parameter order")
+    public static func multiLine(limit: Int?, alignment: TextAlignment) -> Self {
+        .multiLine(alignment: alignment, limit: limit)
+    }
+}
 
 // MARK: - State Colors
 @available(*, deprecated, renamed: "StateColors_EPLD")

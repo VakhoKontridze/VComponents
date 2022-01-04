@@ -145,12 +145,11 @@ struct VSliderDemoView: View {
     
     private static func sliderText(_ title: String) -> some View {
         VText(
-            type: .oneLine,
-            font: .system(size: 14, weight: .regular, design: .monospaced),
             color: ColorBook.primary,
+            font: .system(size: 14, weight: .regular, design: .monospaced),
             title: title
         )
-            .animation(.none)
+            .animation(nil)
     }
 }
 

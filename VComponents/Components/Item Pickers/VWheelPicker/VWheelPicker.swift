@@ -101,9 +101,8 @@ public struct VWheelPicker<Data, RowContent>: View
             data: rowTitles,
             rowContent: { title in
                 VText(
-                    type: .oneLine,
-                    font: model.fonts.rows,
                     color: model.colors.textContent.for(state),
+                    font: model.fonts.rows,
                     title: title
                 )
             }
@@ -164,9 +163,8 @@ public struct VWheelPicker<Data, RowContent>: View
             data: .init(Item.allCases),
             rowContent: { item in
                 VText(
-                    type: .oneLine,
-                    font: model.fonts.rows,
                     color: model.colors.textContent.for(state),
+                    font: model.fonts.rows,
                     title: item.pickerTitle
                 )
             }
@@ -201,9 +199,8 @@ public struct VWheelPicker<Data, RowContent>: View
     @ViewBuilder private var headerView: some View {
         if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .oneLine,
-                font: model.fonts.header,
                 color: model.colors.header.for(state),
+                font: model.fonts.header,
                 title: headerTitle
             )
                 .padding(.horizontal, model.layout.headerMarginHorizontal)
@@ -214,9 +211,9 @@ public struct VWheelPicker<Data, RowContent>: View
     @ViewBuilder private var footerView: some View {
         if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(limit: nil, alignment: .leading),
-                font: model.fonts.footer,
+                type: .multiLine(alignment: .leading, limit: nil),
                 color: model.colors.footer.for(state),
+                font: model.fonts.footer,
                 title: footerTitle
             )
                 .padding(.horizontal, model.layout.headerMarginHorizontal)

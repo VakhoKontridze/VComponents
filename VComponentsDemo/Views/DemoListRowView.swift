@@ -59,9 +59,8 @@ struct DemoListRowView<Content>: View where Content: View {
     private var rowView: some View {
         HStack(spacing: 0, content: {
             VText(
-                type: .oneLine,
-                font: .body,
                 color: ColorBook.primary,
+                font: .body,
                 title: title
             )
 

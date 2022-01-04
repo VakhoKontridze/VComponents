@@ -54,8 +54,8 @@ public struct VBaseHeaderFooter: View {
     private var contentView: some View {
         VText(
             type: textType,
-            font: font,
             color: color,
+            font: font,
             title: title
         )
     }

@@ -64,7 +64,7 @@ struct VModalDemoView: View {
         ToggleSettingView(isOn: $hasTitle, title: "Title")
         
         VStack(spacing: 3, content: {
-            VText(type: .oneLine, font: .callout, color: ColorBook.primary, title: "Dismiss Method:")
+            VText(color: ColorBook.primary, font: .callout, title: "Dismiss Method:")
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack(content: {
@@ -100,9 +100,9 @@ struct VModalDemoView: View {
             if dismissType.isEmpty {
                 VStack(content: {
                     VText(
-                        type: .multiLine(limit: nil, alignment: .center),
-                        font: .system(size: 14, weight: .semibold),
+                        type: .multiLine(alignment: .center, limit: nil),
                         color: ColorBook.primary,
+                        font: .system(size: 14, weight: .semibold),
                         title: "When close button is \"none\", Modal can only be dismissed programatically"
                     )
                     

@@ -61,6 +61,6 @@ public enum DerivedButtonPreset {
             }
         }()
         
-        return .init(type: .oneLine, font: font, color: color, title: title)
+        return .init(color: color, font: font, title: title)
     }
 }

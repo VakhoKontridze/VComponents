@@ -82,9 +82,8 @@ struct _VDialog<Content>: View where Content: View {
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
             VText(
-                type: .oneLine,
-                font: model.fonts.title,
                 color: model.colors.title,
+                font: model.fonts.title,
                 title: title
             )
         }
@@ -93,9 +92,9 @@ struct _VDialog<Content>: View where Content: View {
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
             VText(
-                type: .multiLine(limit: model.misc.descriptionLineLimit, alignment: .center),
-                font: model.fonts.description,
+                type: .multiLine(alignment: .center, limit: model.layout.descriptionLineLimit),
                 color: model.colors.description,
+                font: model.fonts.description,
                 title: description
             )
         }

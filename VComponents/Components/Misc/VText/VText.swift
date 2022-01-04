@@ -14,9 +14,8 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VText(
-///             type: .oneLine
-///             font: .body,
 ///             color: ColorBook.primary,
+///             font: .body,
 ///             title: "Lorem ipsum dolor sit amet"
 ///         )
 ///     }
@@ -24,21 +23,24 @@ import SwiftUI
 public struct VText: View {
     // MARK: Properties
     private let textType: VTextType
+    private let truncatingMode: Text.TruncationMode
     private let font: Font
     private let color: Color
     private let title: String
     
     // MARK: Initializers
-    /// Initializes component with type, font, color, and title.
+    /// Initializes component with type, color, fon, and title.
     public init(
-        type textType: VTextType,
-        font: Font,
+        type textType: VTextType = .oneLine,
+        truncatingMode: Text.TruncationMode = .tail,
         color: Color,
+        font: Font,
         title: String
     ) {
         self.textType = textType
-        self.font = font
+        self.truncatingMode = truncatingMode
         self.color = color
+        self.font = font
         self.title = title
     }
 
@@ -47,16 +49,16 @@ public struct VText: View {
         switch textType {
         case .oneLine:
             Text(title)
+                .truncationMode(truncatingMode)
                 .lineLimit(1)
-                .truncationMode(.tail)
                 .foregroundColor(color)
                 .font(font)
             
-        case .multiLine(let limit, let alignment):
+        case .multiLine(let alignment, let limit):
             Text(title)
-                .lineLimit(limit)
                 .multilineTextAlignment(alignment)
-                .truncationMode(.tail)
+                .truncationMode(truncatingMode)
+                .lineLimit(limit)
                 .foregroundColor(color)
                 .font(font)
         }
@@ -67,9 +69,8 @@ public struct VText: View {
 struct VText_Previews: PreviewProvider {
     static var previews: some View {
         VText(
-            type: .oneLine,
-            font: .body,
             color: ColorBook.primary,
+            font: .body,
             title: "Lorem ipsum dolor sit amet"
         )
     }
