@@ -24,8 +24,9 @@ public struct VText: View {
     // MARK: Properties
     private let textType: VTextType
     private let truncatingMode: Text.TruncationMode
-    private let font: Font
+    private let minimumScaleFactor: CGFloat
     private let color: Color
+    private let font: Font
     private let title: String
     
     // MARK: Initializers
@@ -33,12 +34,14 @@ public struct VText: View {
     public init(
         type textType: VTextType = .oneLine,
         truncatingMode: Text.TruncationMode = .tail,
+        minimumScaleFactor: CGFloat = 0,
         color: Color,
         font: Font,
         title: String
     ) {
         self.textType = textType
         self.truncatingMode = truncatingMode
+        self.minimumScaleFactor = minimumScaleFactor
         self.color = color
         self.font = font
         self.title = title
@@ -51,6 +54,7 @@ public struct VText: View {
             Text(title)
                 .truncationMode(truncatingMode)
                 .lineLimit(1)
+                .minimumScaleFactor(minimumScaleFactor)
                 .foregroundColor(color)
                 .font(font)
             
@@ -59,6 +63,7 @@ public struct VText: View {
                 .multilineTextAlignment(alignment)
                 .truncationMode(truncatingMode)
                 .lineLimit(limit)
+                .minimumScaleFactor(minimumScaleFactor)
                 .foregroundColor(color)
                 .font(font)
         }

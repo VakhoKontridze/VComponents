@@ -2,7 +2,8 @@
 
 #### [1.X.X(16)]
 
-- `truncatingMode` has been added to `VText`
+- `truncatingMode` property has been added to `VText`
+- `minimumScaleFactor` property has been added to `VText`
 - `showIndicator` properties have been moved from `Misc` to `Layout` in models, and empty `Misc` object have been deprecated
 - `oneLine` is now a default parameter in `VText`
 - `oneLine` is now a default parameter in `VToast`
