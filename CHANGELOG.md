@@ -1,6 +1,6 @@
 ## Change Log
 
-#### [1.X.X(16)]
+#### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/download/1.6.0/VComponents.xcframework.zip) — *2022 01 07*
 
 - Issues with conditional `View` function `if` have been fixed
 - `truncatingMode` property has been added to `VText`
