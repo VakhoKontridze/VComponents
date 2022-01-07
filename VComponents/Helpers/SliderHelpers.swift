@@ -27,21 +27,7 @@ extension Double {
         max: Double,
         step: Double
     ) -> Double {
-        let rawValue: Double = {
-            let low: Double = floor(self / step) * step
-            let high: Double = ceil(self / step) * step
-            
-            let lowDiff: Double = abs(self - low)
-            let highDiff: Double = abs(self - high)
-            
-            return highDiff > lowDiff ? low : high
-        }()
-        
-        switch rawValue {
-        case ...min: return min
-        case max...: return max
-        case _: return rawValue
-        }
+        min + ((self - min) / step).rounded() * step
     }
 }
 
