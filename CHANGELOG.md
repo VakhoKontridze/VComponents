@@ -2,6 +2,7 @@
 
 #### [1.X.X(16)]
 
+- Issues with conditional `View` function `if` have been fixed
 - `truncatingMode` property has been added to `VText`
 - `minimumScaleFactor` property has been added to `VText`
 - `showIndicator` properties have been moved from `Misc` to `Layout` in models, and empty `Misc` object have been deprecated

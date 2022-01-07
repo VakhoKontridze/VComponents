@@ -33,8 +33,8 @@ extension View {
             ElseContent: View
     {
         switch condition {
-        case false: ifTransform(self)
-        case true: elseTransform(self)
+        case false: elseTransform(self)
+        case true: ifTransform(self)
         }
     }
     
