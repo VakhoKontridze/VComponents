@@ -18,11 +18,11 @@ extension Double {
         case (...min, _): return min
         case (max..., _): return max
         case (_, nil): return self
-        case (_, let step?): return self.roundWithStep(min: min, max: max, step: step)
+        case (_, let step?): return self.roundedWithStep(min: min, max: max, step: step)
         }
     }
     
-    private func roundWithStep(
+    private func roundedWithStep(
         min: Double,
         max: Double,
         step: Double
