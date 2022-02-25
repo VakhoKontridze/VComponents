@@ -53,7 +53,7 @@ public struct VSlider: View {
         self.model = model
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
-        self.step = step.let { .init($0) }
+        self.step = step.map { .init($0) }
         self.state = state
         self._value = .init(from: value, range: range, step: step)
         self.action = action

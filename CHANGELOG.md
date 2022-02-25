@@ -1,5 +1,9 @@
 ## Change Log
 
+#### [2.0.0(17)]
+
+- `LayoutGroup`'s have been renamed to `EdgeInsets`'s
+
 #### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/download/1.6.0/VComponents.xcframework.zip) — *2022 01 07*
 
 - Issues with conditional `View` function `if` have been fixed

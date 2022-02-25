@@ -64,7 +64,7 @@ public struct VSheet<Content>: View where Content: View {
     private var sheetView: some View {
         model.colors.background
             .cornerRadius(
-                radius: model.layout.cornerRadius,
+                model.layout.cornerRadius,
                 corners: model.layout.roundedCorners.uiRectCorner
             )
     }

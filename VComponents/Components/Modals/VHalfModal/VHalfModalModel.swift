@@ -147,11 +147,11 @@ public struct VHalfModalModel {
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
-        public typealias Margins = LayoutGroup_LTTB
+        public typealias Margins = EdgeInsets_LTTB
         
         // MARK: Vertical Margins
         /// Sub-model containing `top` and `bottom` margins.
-        public typealias VerticalMargins = LayoutGroup_TB
+        public typealias VerticalMargins = EdgeInsets_TB
         
         // MARK: Height Type
         /// Enum that describes height type, such as `fixed` or `dynamic`.

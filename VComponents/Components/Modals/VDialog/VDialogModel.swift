@@ -73,7 +73,7 @@ public struct VDialogModel {
         
         // MARK: Title and Content Margin
         /// Sub-model containing `horizontal` and `vertical` margins.
-        public typealias TitleAndContentMargin = LayoutGroup_HV
+        public typealias TitleAndContentMargin = EdgeInsets_HV
     }
 
     // MARK: Colors

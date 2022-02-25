@@ -59,11 +59,11 @@ public struct VSecondaryButtonModel {
         
         // MARK: Content Margin
         /// Sub-model containing `horizontal` and `vertical` margins.
-        public typealias ContentMargin = LayoutGroup_HV
+        public typealias ContentMargin = EdgeInsets_HV
         
         // MARK: Hit Box
         /// Sub-model containing `horizontal` and `vertical` hit boxes.
-        public typealias HitBox = LayoutGroup_HV
+        public typealias HitBox = EdgeInsets_HV
     }
 
     // MARK: Colors

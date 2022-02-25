@@ -55,7 +55,7 @@ public struct VBaseListModel {
         
         // MARK: Horizontal Margins
         /// Sub-model containing `leading` and `trailing` margins.
-        public typealias HorizontalMargins = LayoutGroup_LT
+        public typealias HorizontalMargins = EdgeInsets_LT
     }
     
     // MARK: Colors

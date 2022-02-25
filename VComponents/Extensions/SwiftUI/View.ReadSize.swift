@@ -10,6 +10,18 @@ import SwiftUI
 // MARK: - Read Size
 extension View {
     /// Reads `View` size and calls an on-change block.
+    ///
+    /// Usage Example:
+    ///
+    ///     @State private var size: CGSize = .zero
+    ///
+    ///     var body: some View {
+    ///         VStack(content: {
+    ///             Color.accentColor
+    ///                 .readSize(onChange: { size = $0 })
+    ///         })
+    ///     }
+    ///
     public func readSize(
         onChange completion: @escaping (CGSize) -> Void
     ) -> some View {

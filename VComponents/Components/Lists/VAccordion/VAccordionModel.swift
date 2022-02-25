@@ -100,7 +100,7 @@ public struct VAccordionModel {
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
-        public typealias Margins = LayoutGroup_LTTB
+        public typealias Margins = EdgeInsets_LTTB
         
         // MARK: Horizontal Margins
         /// Sub-model containing `leading` and `trailing` margins.
