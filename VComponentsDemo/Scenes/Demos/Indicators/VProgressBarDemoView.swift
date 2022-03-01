@@ -29,9 +29,8 @@ struct VProgressBarDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settings: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
             .onReceive(timer, perform: updateValue)
     }
     

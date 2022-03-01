@@ -10,116 +10,148 @@ import SwiftUI
 // MARK: - V Primary Button
 /// Large colored button component that performs action when triggered.
 ///
-/// Component can be initialized with content or title.
+/// Component can be initialized with title, icon and title, and content.
 ///
-/// Model and state can be passed as parameters.
+/// Model can be passed as parameter.
+///
+/// `isLoading` can be passed as paremter.
 ///
 /// Usage example:
 ///
 ///     var body: some View {
 ///         VPrimaryButton(
-///             action: { print("Pressed") },
-///             title: "Lorem ipsum"
+///             action: { print("Clicked") },
+///             title: "Lorem Ipsum"
 ///         )
 ///             .padding()
 ///     }
-///     
+///
 public struct VPrimaryButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VPrimaryButtonModel
     
-    private let state: VPrimaryButtonState
-    @State private var internalStateRaw: VPrimaryButtonInternalState?
-    private var internalState: VPrimaryButtonInternalState { internalStateRaw ?? .default(state: state) }
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @State private var isPressed: Bool = false
+    private let isLoading: Bool
+    private var internalState: VPrimaryButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed, isLoading: isLoading) }
     
     private let action: () -> Void
     
-    private let content: () -> Content
-
+    private let content: VPrimaryButtonContent<Content>
+    
     // MARK: Initializers
+    /// Initializes component with action and title.
+    public init(
+        model: VPrimaryButtonModel = .init(),
+        isLoading: Bool = false,
+        action: @escaping () -> Void,
+        title: String
+    )
+        where Content == Never
+    {
+        self.model = model
+        self.isLoading = isLoading
+        self.action = action
+        self.content = .title(title: title)
+    }
+    
+    /// Initializes component with action, icon, and title.
+    public init(
+        model: VPrimaryButtonModel = .init(),
+        isLoading: Bool = false,
+        action: @escaping () -> Void,
+        icon: Image,
+        title: String
+    )
+        where Content == Never
+    {
+        self.model = model
+        self.isLoading = isLoading
+        self.action = action
+        self.content = .iconTitle(icon: icon, title: title)
+    }
+    
     /// Initializes component with action and content.
     public init(
         model: VPrimaryButtonModel = .init(),
-        state: VPrimaryButtonState = .enabled,
+        isLoading: Bool = false,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self.state = state
+        self.isLoading = isLoading
         self.action = action
-        self.content = content
-    }
-
-    /// Initializes component with action and title.
-    public init(
-        model: VPrimaryButtonModel = .init(),
-        state: VPrimaryButtonState = .enabled,
-        action: @escaping () -> Void,
-        title: String
-    )
-        where Content == VText
-    {
-        self.init(
-            model: model,
-            state: state,
-            action: action,
-            content: {
-                VText(
-                    color: model.colors.textContent.for(.default(state: state)),
-                    font: model.fonts.title,
-                    title: title
-                )
-            }
-        )
-    }
-
-    // MARK: Body
-    public var body: some View {
-        syncInternalStateWithState()
-        
-        return VBaseButton(
-            isEnabled: internalState.isEnabled,
-            gesture: gestureHandler,
-            content: { buttonView }
-        )
+        self.content = .content(content: content)
     }
     
-    private var buttonView: some View {
-        buttonContent
-            .frame(height: model.layout.height)
-            .background(backgroundView)
-            .overlay(border)
+    // MARK: Body
+    public var body: some View {
+        VBaseButton(gesture: gestureHandler, content: {
+            buttonContent
+                .frame(height: model.layout.height)
+                .background(background)
+                .overlay(border)
+        })
+            .disabled(!internalState.isEnabled)
     }
     
     private var buttonContent: some View {
-        HStack(alignment: .center, spacing: model.layout.loaderSpacing, content: {
-            loaderCompensatorView
+        HStack(spacing: model.layout.loaderSpacing, content: {
+            loaderCompensator
 
-            content()
+            Group(content: {
+                switch content {
+                case .title(let title):
+                    VText(
+                        color: model.colors.title.for(internalState),
+                        font: model.fonts.title,
+                        title: title
+                    )
+                    
+                case .iconTitle(let icon, let title):
+                    HStack(spacing: model.layout.iconTitleSpacing, content: {
+                        icon
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(size: model.layout.iconSize)
+                            .foregroundColor(model.colors.icon.for(internalState))
+                            .opacity(model.colors.iconOpacities.for(internalState))
+                        
+                        VText(
+                            color: model.colors.title.for(internalState),
+                            font: model.fonts.title,
+                            title: title
+                        )
+                    })
+                    
+                case .content(let content):
+                    content()
+                        .opacity(model.colors.customContentOpacities.for(internalState))
+                }
+            })
                 .frame(maxWidth: .infinity)
-                .opacity(model.colors.content.for(internalState))
 
-            loaderView
+            loader
         })
-            .padding(.horizontal, model.layout.contentMargin.horizontal)
-            .padding(.vertical, model.layout.contentMargin.vertical)
+            .padding(.horizontal, model.layout.contentMargins.horizontal)
+            .padding(.vertical, model.layout.contentMargins.vertical)
     }
     
-    @ViewBuilder private var loaderCompensatorView: some View {
+    @ViewBuilder private var loaderCompensator: some View {
         if internalState.isLoading {
             Spacer()
                 .frame(width: model.layout.loaderWidth, alignment: .leading)
         }
     }
     
-    @ViewBuilder private var loaderView: some View {
+    @ViewBuilder private var loader: some View {
         if internalState.isLoading {
             VSpinner(type: .continous(model.spinnerSubModel))
                 .frame(width: model.layout.loaderWidth, alignment: .trailing)
         }
     }
     
-    private var backgroundView: some View {
+    private var background: some View {
         RoundedRectangle(cornerRadius: model.layout.cornerRadius)
             .foregroundColor(model.colors.background.for(internalState))
     }
@@ -131,21 +163,9 @@ public struct VPrimaryButton<Content>: View where Content: View {
         }
     }
     
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if
-                internalStateRaw == nil ||
-                .init(internalState: internalState) != state
-            {
-                internalStateRaw = .default(state: state)
-            }
-        })
-    }
-    
     // MARK: Actions
     private func gestureHandler(gestureState: VBaseButtonGestureState) {
-        internalStateRaw = .init(state: state, isPressed: gestureState.isPressed)
+        isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }
 }
@@ -153,7 +173,10 @@ public struct VPrimaryButton<Content>: View where Content: View {
 // MARK: - Preview
 struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPrimaryButton(action: {}, title: "Lorem ipsum")
+        VPrimaryButton(
+            action: {},
+            title: "Lorem Ipsum"
+        )
             .padding()
     }
 }

@@ -23,6 +23,12 @@ public struct ColorBook {
     /// Primary text color that inverts color scheme.
     public static let primaryInverted: Color = .init(componentAsset: "PrimaryInverted")
     
+    /// Primary white text color.
+    public static let primaryWhite: Color = .init(componentAsset: "PrimaryWhite")
+    
+    /// Primary black text color that inverts.
+    public static let primaryBlack: Color = .init(componentAsset: "PrimaryBlack")
+    
     /// Secondary text color.
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
@@ -49,6 +55,41 @@ extension Color {
 }
 
 // MARK: - Assets
+/*
+ 
+ Accent
+ *0.122.255
+ *10.132.255
+ 
+ Canvas
+ 247.247.247
+ 22.22.22
+ 
+ Layer
+ *254.254.254
+ 18.18.18
+ 
+ Primary
+ *0.0.0
+ *255.255.255
+ 
+ PrimaryBlack
+ *0.0.0
+ *0.0.0
+ 
+ PrimaryInverted
+ *255.255.255
+ *0.0.0
+ 
+ PrimaryWhite
+ *255.255.255
+ *255.255.255
+ 
+ Secondary
+ *120.120.120
+ 140.140.140
+ 
+*/
 
 /*
  
@@ -91,12 +132,23 @@ extension Color {
  *100.100.100 @ 30
  35.35.35 @ 30
  
- PrimaryButton.Background.enabled
- 128.176.240
+ PageIndicator.Dot
+ 190.190.190
+ *100.100.100
+ 
+ PlainButton.Text.enabled
+ *0.122.255
+ *10.132.255
  
  PrimaryButton.Background.disabled
+ 128.176.240
+ 
+ PrimaryButton.Background.enabled
  24.126.240
  25.131.255
+ 
+ PrimaryButton.Background.loading
+ 128.176.240
  
  PrimaryButton.Background.pressed
  31.104.182
@@ -138,17 +190,9 @@ extension Color {
  Slider.Thumb.Shadow.enabled
  *96.96.96 @ 50
  
- VStepper.Button.Background.pressed
+ Stepper.Button.Background.pressed
  *200.200.200
  *70.70.70
- 
- TabNavigationView.Item
- 190.190.190
- *100.100.100
- 
- NavigationView.Divider
- 0.0.0 @ 30
- 1.1.1 @ 15
 
  TextField.Background.error
  250.205.210
@@ -197,29 +241,5 @@ extension Color {
  
  Toggle.Thumb
  *254.254.254
- 
- Accent
- 0.122.255
- 10.132.255
- 
- Canvas
- 247.247.247
- 22.22.22
- 
- Layer
- *254.254.254
- 18.18.18
- 
- Primary
- *20.20.20
- *254.254.254
- 
- PrimaryInverted
- *254.254.254
- *20.20.20
- 
- Secondary
- *120.120.120
- 140.140.140
  
 */

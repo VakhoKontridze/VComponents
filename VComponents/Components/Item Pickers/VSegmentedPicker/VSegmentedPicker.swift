@@ -258,7 +258,6 @@ public struct VSegmentedPicker<Data, RowContent>: View
         HStack(spacing: 0, content: {
             ForEach(0..<data.count, content: { i in
                 VBaseButton(
-                    isEnabled: state.isEnabled && !disabledIndexes.contains(i),
                     gesture: { gestureState in
                         pressedIndex = gestureState.isPressed ? i : nil
                         if gestureState.isClicked { setSelectedIndex(to: i) }
@@ -273,6 +272,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
                             .readSize(onChange: { rowWidth = $0.width })
                     }
                 )
+                    .disabled(!state.isEnabled || disabledIndexes.contains(i))
             })
         })
     }

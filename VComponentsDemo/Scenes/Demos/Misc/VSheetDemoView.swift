@@ -25,9 +25,8 @@ struct VSheetDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(hasLayer: false, component: component, settings: settings)
-        })
+        DemoView(hasLayer: false, component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     private func component() -> some View {

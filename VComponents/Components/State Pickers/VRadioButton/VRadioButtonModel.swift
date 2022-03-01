@@ -86,24 +86,18 @@ public struct VRadioButtonModel {
         public var bullet: StateColors = .init(
             off: .clear,
             on: toggleRefrence.colors.fill.on,
-            pressedOff: toggleRefrence.colors.fill.pressedOff,
+            pressedOff: .clear,
             pressedOn: toggleRefrence.colors.fill.pressedOn,
             disabled: .clear
         )
 
-        /// Content opacities.
-        public var content: StateOpacities = toggleRefrence.colors.content
-
-        /// Text content colors.
+        /// Title colors.
+        public var title: StateColors = toggleRefrence.colors.title
+        
+        /// Custom content opacities.
         ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .init(
-            off: toggleRefrence.colors.textContent.off,
-            on: toggleRefrence.colors.textContent.on,
-            pressedOff: toggleRefrence.colors.textContent.pressedOff,
-            pressedOn: toggleRefrence.colors.textContent.pressedOn,
-            disabled: toggleRefrence.colors.textContent.disabled
-        )
+        /// Applicable only when init with content is used.
+        public var customContentOpacities: StateOpacities = toggleRefrence.colors.customContentOpacities
 
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -111,11 +105,11 @@ public struct VRadioButtonModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_OOD
+        public typealias StateColors = GenericStateModel_OOPD<Color>
 
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_PD
+        public typealias StateOpacities = GenericStateModel_OOPD<CGFloat>
     }
 
     // MARK: Fonts

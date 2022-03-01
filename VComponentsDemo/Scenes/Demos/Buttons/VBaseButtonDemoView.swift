@@ -18,9 +18,8 @@ struct VBaseButtonDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component)
-        })
+        DemoView(component: component)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     private func component() -> some View {
@@ -33,7 +32,6 @@ struct VBaseButtonDemoView: View {
                 textView(title: clickState.description, color: ColorBook.secondary)
                 
                 VBaseButton(
-                    isEnabled: true,
                     gesture: { gestureState in
                         pressAction(isPressed: gestureState.isPressed)
                         if gestureState.isClicked { action() }

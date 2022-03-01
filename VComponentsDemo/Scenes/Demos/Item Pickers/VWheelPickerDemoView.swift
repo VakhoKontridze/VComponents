@@ -15,7 +15,7 @@ struct VWheelPickerDemoView: View {
     
     @State private var selection: ComponentRGBItem = .green
     @State private var state: VWheelPickerState = .enabled
-    @State private var contentType: ComponentContentType = .text
+    @State private var contentType: VSegmentedPickerContent = .title
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var loweredOpacityWhenDisabled: Bool = VWheelPickerModel.Colors().content.disabledOpacity != 1
@@ -30,14 +30,13 @@ struct VWheelPickerDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settingsSections: settings)
-        })
+        DemoView(component: component, settingsSections: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     @ViewBuilder private func component() -> some View {
         switch contentType {
-        case .text:
+        case .title:
             VWheelPicker(
                 model: model,
                 state: state,

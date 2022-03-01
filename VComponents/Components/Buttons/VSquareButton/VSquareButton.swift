@@ -10,102 +10,110 @@ import SwiftUI
 // MARK: - V Square Button
 /// Squared colored button component that performs action when triggered.
 ///
-/// Component can be initialized with content or title.
+/// Component can be initialized with title, icon, and content.
 ///
-/// Model and state can be passed as parameters.
+/// Model can be passed as parameter.
 ///
 /// Usage example:
 ///
 ///     var body: some View {
-///         VSquareButton(action: { print("Pressed") }, content: {
-///             Image(systemName: "swift")
-///                 .resizable()
-///                 .frame(width: 20, height: 20)
-///                 .foregroundColor(.white)
-///         })
+///         VSquareButton(
+///             action: { print("Clicked") },
+///             icon: .init(systemName: "swift")
+///         )
 ///     }
 ///     
 public struct VSquareButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSquareButtonModel
     
-    private let state: VSquareButtonState
-    @State private var internalStateRaw: VSquareButtonInternalState?
-    private var internalState: VSquareButtonInternalState { internalStateRaw ?? .default(state: state) }
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @State private var isPressed: Bool = false
+    private var internalState: VSquareButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
     
     private let action: () -> Void
     
-    private let content: () -> Content
+    private let content: VSquareButtonContent<Content>
 
     // MARK: Initializers
+    /// Initializes component with action and title.
+    public init(
+        model: VSquareButtonModel = .init(),
+        action: @escaping () -> Void,
+        title: String
+    )
+        where Content == Never
+    {
+        self.model = model
+        self.action = action
+        self.content = .title(title: title)
+    }
+    
+    /// Initializes component with action and icon.
+    public init(
+        model: VSquareButtonModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image
+    )
+        where Content == Never
+    {
+        self.model = model
+        self.action = action
+        self.content = .icon(icon: icon)
+    }
+    
     /// Initializes component with action and content.
     public init(
         model: VSquareButtonModel = .init(),
-        state: VSquareButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self.state = state
         self.action = action
-        self.content = content
-    }
-
-    /// Initializes component with action and title.
-    public init(
-        model: VSquareButtonModel = .init(),
-        state: VSquareButtonState = .enabled,
-        action: @escaping () -> Void,
-        title: String
-    )
-        where Content == VText
-    {
-        self.init(
-            model: model,
-            state: state,
-            action: action,
-            content: {
-                VText(
-                    color: model.colors.textContent.for(.default(state: state)),
-                    font: model.fonts.title,
-                    title: title
-                )
-            }
-        )
+        self.content = .content(content: content)
     }
 
     // MARK: Body
     public var body: some View {
-        syncInternalStateWithState()
-        
-        return VBaseButton(
-            isEnabled: internalState.isEnabled,
-            gesture: gestureHandler,
-            content: { hitBoxButtonView }
-        )
-    }
-    
-    private var hitBoxButtonView: some View {
-        buttonView
-            .padding(.horizontal, model.layout.hitBox.horizontal)
-            .padding(.vertical, model.layout.hitBox.vertical)
-    }
-    
-    private var buttonView: some View {
-        buttonContent
-            .frame(dimension: model.layout.dimension)
-            .background(backgroundView)
-            .overlay(border)
+        VBaseButton(gesture: gestureHandler, content: {
+            buttonContent
+                .frame(dimension: model.layout.dimension)
+                .background(background)
+                .overlay(border)
+                .padding(.horizontal, model.layout.hitBox.horizontal)
+                .padding(.vertical, model.layout.hitBox.vertical)
+        })
+            .disabled(!internalState.isEnabled)
     }
     
     private var buttonContent: some View {
-        content()
+        Group(content: {
+            switch content {
+            case .title(let title):
+                VText(
+                    color: model.colors.title.for(internalState),
+                    font: model.fonts.title,
+                    title: title
+                )
+                
+            case .icon(let icon):
+                icon
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(size: model.layout.iconSize)
+                    .foregroundColor(model.colors.icon.for(internalState))
+                    .opacity(model.colors.iconOpacities.for(internalState))
+                
+            case .content(let content):
+                content()
+                    .opacity(model.colors.customContentOpacities.for(internalState))
+            }
+        })
             .padding(.horizontal, model.layout.contentMargins.horizontal)
             .padding(.vertical, model.layout.contentMargins.vertical)
-            .opacity(model.colors.content.for(internalState))
     }
-    
-    private var backgroundView: some View {
+
+    private var background: some View {
         RoundedRectangle(cornerRadius: model.layout.cornerRadius)
             .foregroundColor(model.colors.background.for(internalState))
     }
@@ -117,21 +125,9 @@ public struct VSquareButton<Content>: View where Content: View {
         }
     }
     
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if
-                internalStateRaw == nil ||
-                .init(internalState: internalState) != state
-            {
-                internalStateRaw = .default(state: state)
-            }
-        })
-    }
-    
     // MARK: Actions
     private func gestureHandler(gestureState: VBaseButtonGestureState) {
-        internalStateRaw = .init(state: state, isPressed: gestureState.isPressed)
+        isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }
 }
@@ -139,11 +135,9 @@ public struct VSquareButton<Content>: View where Content: View {
 // MARK: - Preview
 struct VSquareButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSquareButton(action: {}, content: {
-            Image(systemName: "swift")
-                .resizable()
-                .frame(width: 20, height: 20)
-                .foregroundColor(.white)
-        })
+        VSquareButton(
+            action: {},
+            icon: .init(systemName: "swift")
+        )
     }
 }

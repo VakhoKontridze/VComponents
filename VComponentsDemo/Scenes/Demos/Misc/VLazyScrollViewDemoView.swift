@@ -19,9 +19,8 @@ struct VLazyScrollViewDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoListView(type: .section, sections: sections)
-        })
+        DemoListView(type: .section, sections: sections)
+            .standardNavigationTitle(Self.navBarTitle)
     }
 }
 
@@ -49,9 +48,8 @@ private struct VLazyScrollViewDemoDetailView: View {
 
     // MARK: Body
     fileprivate var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component)
-        })
+        DemoView(component: component)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     private func component() -> some View {

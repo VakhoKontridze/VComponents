@@ -39,11 +39,11 @@ public enum VAccordionState: Int, CaseIterable {
         }
     }
     
-    var chevronButtonState: VChevronButtonState {
+    var chevronButtonIsEnabled: Bool {
         switch self {
-        case .collapsed: return .enabled
-        case .expanded: return .enabled
-        case .disabled: return .disabled
+        case .collapsed: return true
+        case .expanded: return true
+        case .disabled: return false
         }
     }
     

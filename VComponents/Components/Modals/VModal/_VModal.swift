@@ -61,7 +61,7 @@ struct _VModal<Content, HeaderContent>: View
             VStack(spacing: 0, content: {
                 headerView
                 dividerView
-                contentView.frame(maxHeight: .infinity, alignment: .center)
+                contentView.frame(maxHeight: .infinity)
             })
                 .frame(maxHeight: .infinity, alignment: .top)
         })
@@ -117,7 +117,10 @@ struct _VModal<Content, HeaderContent>: View
     }
     
     private var closeButton: some View {
-        VCloseButton(model: model.closeButtonSubModel, action: animateOut)
+        VSquareButton.close(
+            model: model.closeButtonSubModel,
+            action: animateOut
+        )
     }
 
     // MARK: Animations

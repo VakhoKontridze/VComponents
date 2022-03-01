@@ -30,7 +30,7 @@ import SwiftUI
 ///         })
 ///     }
 ///
-public struct VSheet<Content>: View where Content: View {
+public struct VSheet<Content>: View where Content: View { // FIXME: Remove
     // MARK: Properties
     private let model: VSheetModel
     private let content: () -> Content

@@ -16,40 +16,40 @@ struct VMenuPickerDemoView: View {
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VMenuPickerState = .enabled
     @State private var menuPickerButtonType: VMenuPickerButtonTypeHelper = .secondary
-    @State private var contentType: ComponentContentType = .text
+    @State private var contentType: VSegmentedPickerContent = .title
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settings: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     @ViewBuilder private func component() -> some View {
-        switch (menuPickerButtonType.preset, contentType) {
-        case (let preset?, .text):
-            VMenuPicker(
-                preset: preset,
-                state: state,
-                selection: $selection,
-                title: buttonTitle
-            )
-        
-        case (let preset?, .custom):
-            VMenuPicker(
-                preset: preset,
-                state: state,
-                selection: $selection,
-                label: buttonContent
-            )
-            
-        case (nil, _):
-            VMenuPicker(
-                state: state,
-                selection: $selection,
-                label: buttonContent
-            )
-        }
+        fatalError() // FIXME: Resolve
+//        switch (menuPickerButtonType.preset, contentType) {
+//        case (let preset?, .title):
+//            VMenuPicker(
+//                preset: preset,
+//                state: state,
+//                selection: $selection,
+//                title: buttonTitle
+//            )
+//
+//        case (let preset?, .custom):
+//            VMenuPicker(
+//                preset: preset,
+//                state: state,
+//                selection: $selection,
+//                label: buttonContent
+//            )
+//
+//        case (nil, _):
+//            VMenuPicker(
+//                state: state,
+//                selection: $selection,
+//                label: buttonContent
+//            )
+//        }
     }
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
@@ -69,16 +69,18 @@ struct VMenuPickerDemoView: View {
             VSegmentedPicker(
                 selection: $contentType,
                 headerTitle: "Content",
-                disabledItems: menuPickerButtonType == .custom ? [.text] : []
+                disabledItems: menuPickerButtonType == .custom ? [.title] : []
             )
         })
     }
     
     private var buttonTitle: String {
-        switch menuPickerButtonType.preset {
-        case .square: return "Lorem"
-        default: return "Lorem ipsum"
-        }
+        fatalError() // FIXME: Resolve
+        
+//        switch menuPickerButtonType.preset {
+//        case .square: return "Lorem"
+//        default: return "Lorem Ipsum"
+//        }
     }
 
     private func buttonContent() -> some View { DemoIconContentView() }
@@ -102,15 +104,15 @@ private enum VMenuPickerButtonTypeHelper: Int, VPickableTitledItem {
     case plain
     case custom
     
-    var preset: VWebLinkPreset? {
-        switch self {
-        case .primary: return .primary()
-        case .secondary: return .secondary()
-        case .square: return .square()
-        case .plain: return .plain()
-        case .custom: return nil
-        }
-    }
+//    var preset: VWebLinkPreset? {
+//        switch self {
+//        case .primary: return .primary()
+//        case .secondary: return .secondary()
+//        case .square: return .square()
+//        case .plain: return .plain()
+//        case .custom: return nil
+//        }
+//    }
     
     var pickerTitle: String {
         switch self {

@@ -13,17 +13,13 @@ struct VToggleDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Toggle" }
     
-    @State private var state: VToggleState = .on
-    @State private var contentType: ComponentContentType = .text
+    @State private var isEnabled: Bool = true
+    @State private var state: VToggleState = .off
+    @State private var contentType: VToggleContent = .title
     @State private var contentIsClickable: Bool = VToggleModel.Misc().contentIsClickable
-    @State private var loweredOpacityWhenPressed: Bool = VToggleModel.Colors().content.pressedOpacity != 1
-    @State private var loweredOpacityWhenDisabled: Bool = VToggleModel.Colors().content.disabledOpacity != 1
     
     private var model: VToggleModel {
         var model: VToggleModel = .init()
-        
-        model.colors.content.pressedOpacity = loweredOpacityWhenPressed ? 0.5 : 1
-        model.colors.content.disabledOpacity = loweredOpacityWhenDisabled ? 0.5 : 1
         
         model.misc.contentIsClickable = contentIsClickable
         
@@ -32,51 +28,85 @@ struct VToggleDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settingsSections: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
-    @ViewBuilder private func component() -> some View {
-        switch contentType {
-        case .text: VToggle(model: model, state: $state, title: toggleTitle)
-        case .custom: VToggle(model: model, state: $state, content: toggleContent)
-        }
+    private func component() -> some View {
+        Group(content: {
+            switch contentType {
+            case .empty: VToggle(model: model, state: $state)
+            case .title: VToggle(model: model, state: $state, title: toggleTitle)
+            case .custom: VToggle(model: model, state: $state, content: { toggleIcon })
+            }
+        })
+            .disabled(!isEnabled)
     }
     
-    @DemoViewSettingsSectionBuilder private func settings() -> some View {
-        DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, headerTitle: "State")
-        })
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(
+            selection: .init(
+                get: { _VToggleState(isEnabled: isEnabled, state: state) },
+                set: { state in
+                    isEnabled = state != .disabled
+                    self.state = state.state
+                }
+            ),
+            headerTitle: "State"
+        )
         
-        DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $contentType, headerTitle: "Content")
-        })
+        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         
-        DemoViewSettingsSection(content: {
-            ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
-        })
-        
-        DemoViewSettingsSection(content: {
-            ToggleSettingView(isOn: $loweredOpacityWhenPressed, title: "Low Pressed Opacity", description: "Content lowers opacity when pressed")
-            
-            ToggleSettingView(isOn: $loweredOpacityWhenDisabled, title: "Low Disabled Opacity", description: "Content lowers opacity when disabled")
-        })
+        ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
     }
     
-    private var toggleTitle: String { "Lorem ipsum" }
+    private var toggleIcon: Image { .init(systemName: "swift") }
     
-    private func toggleContent() -> some View { DemoIconContentView() }
+    private var toggleTitle: String { "Lorem Ipsum" }
 }
 
 // MARK: - Helpers
-extension VToggleState: VPickableTitledItem {
-    public var pickerTitle: String {
+private enum _VToggleState: Int, VPickableTitledItem {
+    case off
+    case on
+    case disabled
+    
+    var pickerTitle: String {
         switch self {
         case .off: return "Off"
         case .on: return "On"
         case .disabled: return "Disabled"
+        }
+    }
+    
+    var state: VToggleState {
+        switch self {
+        case .off: return .off
+        case .on: return .on
+        case .disabled: return .off // Doesn't matter
+        }
+    }
+    
+    init(isEnabled: Bool, state: VToggleState) {
+        switch (isEnabled, state) {
+        case (false, _): self = .disabled
+        case (true, .off): self = .off
+        case (true, .on): self = .on
         @unknown default: fatalError()
+        }
+    }
+}
+
+enum VToggleContent: Int, VPickableTitledItem {
+    case empty
+    case title
+    case custom
+    
+    var pickerTitle: String {
+        switch self {
+        case .empty: return "None"
+        case .title: return "Title"
+        case .custom: return "Custom"
         }
     }
 }

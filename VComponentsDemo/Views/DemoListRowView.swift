@@ -19,20 +19,6 @@ struct DemoListRowView<Content>: View where Content: View {
 
     private let title: String
 
-    private let chevronButtonModel: VChevronButtonModel = {
-        var model: VChevronButtonModel = .init()
-
-        model.colors.content.enabled = .init("ChevronButtonPlain.Foreground.enabled")
-        model.colors.content.pressed = .init("ChevronButtonPlain.Foreground.enabled")
-        model.colors.content.disabled = .init("ChevronButtonPlain.Foreground.enabled")
-
-        model.colors.background.enabled = .clear
-        model.colors.background.pressed = .clear
-        model.colors.background.disabled = .clear
-
-        return model
-    }()
-
     // MARK: Initalizers
     init(title: String, destination: Content) {
         self.title = title
@@ -51,7 +37,7 @@ struct DemoListRowView<Content>: View where Content: View {
     // MARK: Body
     @ViewBuilder var body: some View {
         switch rowType {
-        case .link(let destination): VNavigationLink(destination: destination, content: { rowView })
+        case .link(let destination): VNavigationLink(destination: { destination }, content: { rowView })
         case .custom(let action): Button(action: action, label: { rowView })
         }
     }
@@ -66,9 +52,15 @@ struct DemoListRowView<Content>: View where Content: View {
 
             Spacer()
 
-            VChevronButton(model: chevronButtonModel, direction: .right, action: {})
+            Image("Chevron.Up", bundle: nil)
+                .renderingMode(.template)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(dimension: 14)
+                .rotationEffect(.degrees(90))
         })
             .contentShape(Rectangle())
+            .padding(.vertical, 5)
     }
 }
 

@@ -45,10 +45,10 @@ public enum DerivedButtonPreset {
     func text(from title: String, isEnabled: Bool) -> VText {
         let color: Color = {
             switch self {
-            case .primary(let model): return model.colors.textContent.for(isEnabled ? VPrimaryButtonInternalState.enabled : .disabled)
-            case .secondary(let model): return model.colors.textContent.for(isEnabled ? VSecondaryButtonInternalState.enabled : .disabled)
-            case .square(let model): return model.colors.textContent.for(isEnabled ? VSquareButtonInternalState.enabled : .disabled)
-            case .plain(let model): return model.colors.textContent.for(isEnabled ? VPlainButtonInternalState.enabled : .disabled)
+            case .primary(let model): return model.colors.title.for(isEnabled ? VPrimaryButtonInternalState.enabled : .disabled)
+            case .secondary(let model): return model.colors.title.for(isEnabled ? VSecondaryButtonInternalState.enabled : .disabled)
+            case .square(let model): return model.colors.title.for(isEnabled ? VSquareButtonInternalState.enabled : .disabled)
+            case .plain(let model): return model.colors.title.for(isEnabled ? VPlainButtonInternalState.enabled : .disabled)
             }
         }()
         

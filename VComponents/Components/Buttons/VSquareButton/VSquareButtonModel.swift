@@ -48,6 +48,9 @@ public struct VSquareButtonModel {
             vertical: 3
         )
         
+        /// Icon size. Defaults to `20` by `20`.
+        public var iconSize: CGSize = primaryButtonReference.layout.iconSize
+        
         /// Hit box. Defaults to `0` horizontally and `0` vertically.
         public var hitBox: HitBox = .init(
             horizontal: 0,
@@ -71,34 +74,29 @@ public struct VSquareButtonModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacities.
-        public var content: StateOpacities = .init(
-            pressedOpacity: 0.5,
-            disabledOpacity: 0.5
-        )
-        
-        /// Text content colors.
-        ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .init(
-            enabled: primaryButtonReference.colors.textContent.enabled,
-            pressed: primaryButtonReference.colors.textContent.pressed,
-            disabled: primaryButtonReference.colors.textContent.disabled
-        )
-        
         /// Background colors.
-        public var background: StateColors = .init(
-            enabled: primaryButtonReference.colors.background.enabled,
-            pressed: primaryButtonReference.colors.background.pressed,
-            disabled: primaryButtonReference.colors.background.disabled
-        )
+        public var background: StateColors = .init(primaryButtonReference.colors.background)
         
         /// Border colors.
-        public var border: StateColors = .init(
-            enabled: primaryButtonReference.colors.border.enabled,
-            pressed: primaryButtonReference.colors.border.pressed,
-            disabled: primaryButtonReference.colors.border.disabled
-        )
+        public var border: StateColors = .init(primaryButtonReference.colors.border)
+        
+        /// Title colors.
+        public var title: StateColors = .init(primaryButtonReference.colors.title)
+        
+        /// Icon opacities.
+        ///
+        /// Can be used for vector images.
+        public var icon: StateColors = .init(primaryButtonReference.colors.icon)
+        
+        /// Icon opacities.
+        ///
+        /// Can be used for bitmap images. Defaults to `1`'s.
+        public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
+        
+        /// Custom content opacities.
+        ///
+        /// Applicable only when init with content is used.
+        public var customContentOpacities: StateOpacities = .init(primaryButtonReference.colors.customContentOpacities)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -106,21 +104,21 @@ public struct VSquareButtonModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EPD
+        public typealias StateColors = GenericStateModel_EPD<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_PD
+        public typealias StateOpacities = GenericStateModel_EPD<CGFloat>
     }
 
     // MARK: Fonts
     /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `14` with `semibold` weight.
+        /// Title font. Defaults to system font of size `15` with `semibold` weight.
         ///
         /// Only applicable when using init with title.
-        public var title: Font = .system(size: 14, weight: .semibold)
+        public var title: Font = .system(size: 15, weight: .semibold)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

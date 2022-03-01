@@ -21,14 +21,13 @@ struct VSectionListDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(
-                type: layoutType.demoViewComponentContentType,
-                hasLayer: false,
-                component: component,
-                settings: settings
-            )
-        })
+        DemoView(
+            type: layoutType.demoViewComponentContentType,
+            hasLayer: false,
+            component: component,
+            settings: settings
+        )
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     private func component() -> some View {

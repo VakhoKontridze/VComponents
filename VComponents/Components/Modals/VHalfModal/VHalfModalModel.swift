@@ -112,35 +112,6 @@ public struct VHalfModalModel {
         /// Distance to drag modal downwards to initiate dismiss. Default to `100`.
         public var translationBelowMinHeightToDismiss: CGFloat = 100
         
-        /// Navigation bar close button top margin. Defaults to `30`.
-        ///
-        /// If you decide to remove grabber or change vertical margins, it's essential to change this property.
-        public static var navBarCloseButtonMarginTop: CGFloat {
-            let instance: Self = .init()
-            
-            return instance.grabberMargins.top +
-                instance.grabberSize.height +
-                instance.grabberMargins.bottom +
-                //instance.headerDividerMargins.top +
-                //instance.headerDividerHeight +
-                //instance.headerDividerMargins.bottom +
-                instance.contentMargins.top +
-                (UINavigationBar.height - VCloseButtonModel.Layout().dimension) / 2
-        }
-        
-        /// Navigation bar close button trailing margin. Defaults to `15`.
-        public static var navBarCloseButtonMarginTrailing: CGFloat {
-            VBaseViewModel.Layout().navBarMarginHorizontal
-        }
-        
-        /// Navigation bar trailing item margin trailing. Defaults to `42`.
-        ///
-        /// Since close button is overlayed on modal, it's essential to create spacing between close button and `VBaseView`'s trailing items.
-        public static var navBarTrailingItemMarginTrailing: CGFloat {
-            VCloseButtonModel.Layout().dimension +
-            Self().headerSpacing
-        }
-        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
@@ -223,7 +194,7 @@ public struct VHalfModalModel {
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
         
         /// Close button icon colors and opacities.
-        public var closeButtonIcon: StateColorsAndOpacities = modalReference.colors.closeButtonIcon
+        public var closeButtonIcon: StateColors = modalReference.colors.closeButtonIcon
         
         /// Header divider color.
         public var headerDivider: Color = .init(componentAsset: "HalfModal.Grabber")
@@ -237,7 +208,10 @@ public struct VHalfModalModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EPD
+        public typealias StateColors = GenericStateModel_EPD<Color>
+        
+        /// Sub-model containing colors for component states.
+        public typealias StateColors_OLD = StateColors_EPD
         
         // MARK: State Colors and Opaciites
         /// Sub-model containing colors and opacities for component states.
@@ -332,7 +306,7 @@ public struct VHalfModalModel {
         model.layout.hitBox.vertical = 0
         
         model.colors.background = colors.closeButtonBackground
-        model.colors.content = colors.closeButtonIcon
+        model.colors.icon = colors.closeButtonIcon
         
         return model
     }

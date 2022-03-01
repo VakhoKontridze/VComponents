@@ -87,7 +87,7 @@ public struct VCheckBoxModel {
         )
         
         /// Checkmark icon colors.
-        public var icon: StateColors = .init(
+        public var checkmark: StateColors = .init(
             off: .clear,
             on: toggleReference.colors.thumb.off,
             indeterminate: toggleReference.colors.thumb.on,
@@ -97,23 +97,28 @@ public struct VCheckBoxModel {
             disabled: .clear
         )
 
-        /// Content opacities.
-        public var content: StateOpacities = .init(
-            pressedOpacity: toggleReference.colors.content.pressedOpacity,
-            disabledOpacity: toggleReference.colors.content.disabledOpacity
+        /// Title colors.
+        public var title: StateColors = .init(
+            off: ColorBook.primary,
+            on: ColorBook.primary,
+            indeterminate: ColorBook.primary,
+            pressedOff: ColorBook.primary,
+            pressedOn: ColorBook.primary,
+            pressedIndeterminate: ColorBook.primary,
+            disabled: ColorBook.secondary
         )
-
-        /// Text content colors.
+        
+        /// Custom content opacities.
         ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .init(
-            off: toggleReference.colors.textContent.off,
-            on: toggleReference.colors.textContent.on,
-            indeterminate: toggleReference.colors.textContent.on,
-            pressedOff: toggleReference.colors.textContent.pressedOff,
-            pressedOn: toggleReference.colors.textContent.pressedOn,
-            pressedIndeterminate: toggleReference.colors.textContent.pressedOn,
-            disabled: toggleReference.colors.textContent.disabled
+        /// Applicable only when init with content is used.
+        public var customContentOpacities: StateOpacities = .init(
+            off: 1,
+            on: 1,
+            indeterminate: 1,
+            pressedOff: 1,
+            pressedOn: 1,
+            pressedIndeterminate: 1,
+            disabled: 0.5
         )
 
         // MARK: Initializers
@@ -122,11 +127,11 @@ public struct VCheckBoxModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_OOID
+        public typealias StateColors = GenericStateModel_OOIPD<Color>
 
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_PD
+        public typealias StateOpacities = GenericStateModel_OOIPD<CGFloat>
     }
 
     // MARK: Fonts

@@ -58,27 +58,27 @@ public enum VTextFieldState: Int, CaseIterable {
         )
     }
     
-    var clearButtonState: VCloseButtonState {
+    var clearButtonIsEnabled: Bool {
         switch self {
-        case .enabled: return .enabled
-        case .focused: return .enabled
-        case .disabled: return .disabled
+        case .enabled: return true
+        case .focused: return true
+        case .disabled: return false
         }
     }
     
-    var visiblityButtonState: VSquareButtonState {
+    var visiblityButtonIsEnabled: Bool {
         switch self {
-        case .enabled: return .enabled
-        case .focused: return .enabled
-        case .disabled: return .disabled
+        case .enabled: return true
+        case .focused: return true
+        case .disabled: return false
         }
     }
     
-    var cancelButtonState: VPlainButtonState {
+    var cancelButtonIsEnabled: Bool {
         switch self {
-        case .enabled: return .enabled
-        case .focused: return .enabled
-        case .disabled: return .disabled
+        case .enabled: return true
+        case .focused: return true
+        case .disabled: return false
         }
     }
 }

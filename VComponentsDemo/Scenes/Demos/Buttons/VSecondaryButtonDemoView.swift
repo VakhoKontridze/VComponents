@@ -13,46 +13,38 @@ struct VSecondaryButtonDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Secondary Button" }
     
-    @State private var state: VSecondaryButtonState = .enabled
-    @State private var contentType: ComponentContentType = .text
-    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VSecondaryButtonModel.Layout().hitBox.horizontal)
-    @State private var borderType: ButtonComponentBorderType = .borderless
+    @State private var isEnabled: Bool = true
+    @State private var contentType: VSecondaryButtonContent = .title
+    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VSecondaryButtonModel.Layout().hitBox.horizontal)
+    @State private var borderType: VPrimaryButtonBorder = .borderless
     
     private var model: VSecondaryButtonModel {
         let defaultModel: VSecondaryButtonModel = .init()
         
         var model: VSecondaryButtonModel = .init()
         
-        switch hitBoxType {
-        case .clipped:
-            model.layout.hitBox.horizontal = 0
-            model.layout.hitBox.vertical = 0
-            
-        case .extended:
-            model.layout.hitBox.horizontal = defaultModel.layout.hitBox.horizontal.isZero ? 5 : defaultModel.layout.hitBox.horizontal
-            model.layout.hitBox.vertical = defaultModel.layout.hitBox.vertical.isZero ? 5 : defaultModel.layout.hitBox.vertical
-        }
+        model.layout.hitBox.horizontal = {
+            switch hitBoxType {
+            case .clipped: return 0
+            case .extended: return defaultModel.layout.hitBox.horizontal == 0 ? 5 : defaultModel.layout.hitBox.horizontal
+            }
+        }()
+        model.layout.hitBox.vertical = model.layout.hitBox.horizontal
 
         if borderType == .bordered {
-            model.layout.borderWidth = 1
-            
-            model.colors.textContent = .init(
-                enabled: defaultModel.colors.background.enabled,
-                pressed: defaultModel.colors.background.pressed,
-                disabled: defaultModel.colors.background.disabled
-            )
-            
+            model.layout.borderWidth = 1.5
+
             model.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
                 disabled: .init("PrimaryButtonBordered.Background.disabled")
             )
+
+            model.colors.border = defaultModel.colors.background
             
-            model.colors.border = .init(
-                enabled: defaultModel.colors.background.enabled,
-                pressed: defaultModel.colors.background.disabled,   // It's better this way
-                disabled: defaultModel.colors.background.disabled
-            )
+            model.colors.title = model.colors.icon
+            
+            model.colors.icon = defaultModel.colors.background
         }
 
         return model
@@ -60,20 +52,29 @@ struct VSecondaryButtonDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settings: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
-    @ViewBuilder private func component() -> some View {
-        switch contentType {
-        case .text: VSecondaryButton(model: model, state: state, action: {}, title: buttonTitle)
-        case .custom: VSecondaryButton(model: model, state: state, action: {}, content: buttonContent)
-        }
+    private func component() -> some View {
+        Group(content: {
+            switch contentType {
+            case .title: VSecondaryButton(model: model, action: {}, title: buttonTitle)
+            case .iconTitle: VSecondaryButton(model: model, action: {}, icon: buttonIcon, title: buttonTitle)
+            case .custom: VSecondaryButton(model: model, action: {}, content: { buttonIcon })
+            }
+        })
+            .disabled(!isEnabled)
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, headerTitle: "State")
+        VSegmentedPicker(
+            selection: .init(
+                get: { VSecondaryButtonState(isEnabled: isEnabled) },
+                set: { isEnabled = $0 == .enabled }
+            ),
+            headerTitle: "State"
+        )
         
         VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         
@@ -82,32 +83,34 @@ struct VSecondaryButtonDemoView: View {
         VSegmentedPicker(selection: $borderType, headerTitle: "Border")
     }
     
-    private var buttonTitle: String { "Lorem ipsum" }
-
-    private func buttonContent() -> some View {
-        let color: Color = {
-            switch borderType {
-            case .bordered: return VSecondaryButtonModel().colors.background.enabled
-            case .borderless: return ColorBook.primaryInverted
-            }
-        }()
-        
-        return DemoIconContentView(color: color)
-    }
+    private var buttonIcon: Image { .init(systemName: "swift") }
+    
+    private var buttonTitle: String { "Lorem Ipsum" }
 }
 
 // MARK: - Helpers
-extension VSecondaryButtonState: VPickableTitledItem {
-    public var pickerTitle: String {
+enum VSecondaryButtonState: Int, VPickableTitledItem {
+    case enabled
+    case disabled
+    
+    var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
-        @unknown default: fatalError()
+        }
+    }
+    
+    init(isEnabled: Bool) {
+        switch isEnabled {
+        case false: self = .disabled
+        case true: self = .enabled
         }
     }
 }
 
-enum ButtonComponentHitBoxType: Int, VPickableTitledItem {
+private typealias VSecondaryButtonContent = VPrimaryButtonContent
+
+enum VSecondaryButtonHitBox: Int, VPickableTitledItem {
     case clipped
     case extended
     

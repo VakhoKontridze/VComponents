@@ -16,9 +16,8 @@ struct VSideBarDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, leadingItem: sidBarIcon, content: {
-            DemoView(component: component)
-        })
+        DemoView(component: component)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     private func component() -> some View {

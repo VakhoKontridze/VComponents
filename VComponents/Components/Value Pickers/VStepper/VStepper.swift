@@ -32,7 +32,7 @@ public struct VStepper: View {
     @State private var pressedButton: VStepperButton?
     private func pressedButtonState(_ button: VStepperButton) -> VStepperButtonState {
         .init(
-            isEnabled: buttonState(for: button).isEnabled,
+            isEnabled: buttonIsEnabled(for: button),
             isPressed: pressedButton == button
         )
     }
@@ -86,7 +86,6 @@ public struct VStepper: View {
     
     private func button(_ button: VStepperButton) -> some View {
         VBaseButton(
-            state: buttonState(for: button),
             gesture: { gestureState in
                 saveButtonPressState(button, isPressed: gestureState.isPressed)
                 if gestureState.isClicked { incrementValue(from: button) }
@@ -105,6 +104,7 @@ public struct VStepper: View {
                     .frame(maxWidth: .infinity)
             }
         )
+            .disabled(!buttonIsEnabled(for: button))
     }
     
     private var divider: some View {
@@ -125,11 +125,11 @@ public struct VStepper: View {
         }
     }
     
-    private func buttonState(for button: VStepperButton) -> VBaseButtonState {
+    private func buttonIsEnabled(for button: VStepperButton) -> Bool {
         switch (state, button) {
-        case (.disabled, _): return .disabled
-        case (.enabled, .minus): return value <= range.lowerBound ? .disabled : .enabled
-        case (.enabled, .plus): return value >= range.upperBound ? .disabled : .enabled
+        case (.disabled, _): return false
+        case (.enabled, .minus): return !(value <= range.lowerBound)
+        case (.enabled, .plus): return !(value >= range.upperBound)
         }
     }
 

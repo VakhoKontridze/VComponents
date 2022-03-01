@@ -168,8 +168,8 @@ public struct VTextFieldModel {
             pressedSuccess: .init(componentAsset: "TextField.Border.success"),
             pressedError: .init(componentAsset: "TextField.Border.error"),
             disabled: segmentedPickerReference.colors.header.disabled,
-            pressedOpacity: squareButtonReference.colors.content.pressedOpacity,
-            disabledOpacity: squareButtonReference.colors.content.disabledOpacity
+            pressedOpacity: squareButtonReference.colors.customContentOpacities.pressed, // FIXME: No longer that???
+            disabledOpacity: squareButtonReference.colors.customContentOpacities.disabled // FIXME: No longer that???
         )
         
         /// Clear button background colors.
@@ -196,8 +196,8 @@ public struct VTextFieldModel {
             pressedSuccess: .init(componentAsset: "TextField.ClearButton.Icon"),
             pressedError: .init(componentAsset: "TextField.ClearButton.Icon"),
             disabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressedOpacity: closeButtonReference.colors.content.pressedOpacity,
-            disabledOpacity: closeButtonReference.colors.content.disabledOpacity
+            pressedOpacity: 0.5, // FIXME
+            disabledOpacity: 0.5 // FIXME
         )
         
         /// Cancel button colors and opacities.
@@ -205,8 +205,8 @@ public struct VTextFieldModel {
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
             disabled: ColorBook.primary,
-            pressedOpacity: plainButtonReference.colors.content.pressedOpacity,
-            disabledOpacity: plainButtonReference.colors.content.disabledOpacity
+            pressedOpacity: plainButtonReference.colors.customContentOpacities.pressed, // FIXME
+            disabledOpacity: plainButtonReference.colors.customContentOpacities.disabled // FIXME
         )
         
         // MARK: Initializers
@@ -353,12 +353,12 @@ public struct VTextFieldModel {
             disabled: colors.clearButtonBackground.disabled
         )
         
-        model.colors.content = .init(
+        model.colors.icon = .init(
             enabled: colors.clearButtonIcon.for(state, highlight: highlight),       // .disabled wouldn't matter
             pressed: colors.clearButtonIcon.for(highlight: highlight),
-            disabled: colors.clearButtonIcon.disabled,
-            pressedOpacity: colors.clearButtonIcon.pressedOpacity,
-            disabledOpacity: colors.clearButtonIcon.disabledOpacity
+            disabled: colors.clearButtonIcon.disabled // FIXME: Opacities were removed here
+//            pressedOpacity: colors.clearButtonIcon.pressedOpacity,
+//            disabledOpacity: colors.clearButtonIcon.disabledOpacity
         )
         
         return model
@@ -380,9 +380,10 @@ public struct VTextFieldModel {
             disabled: .clear
         )
         
-        model.colors.content = .init(
-            pressedOpacity: colors.visibilityButtonIcon.pressedOpacity,
-            disabledOpacity: colors.visibilityButtonIcon.disabledOpacity
+        model.colors.customContentOpacities = .init(
+            enabled: 1,
+            pressed: colors.visibilityButtonIcon.pressedOpacity,
+            disabled: colors.visibilityButtonIcon.disabledOpacity
         )
         
         return model
@@ -394,16 +395,17 @@ public struct VTextFieldModel {
         model.layout.hitBox.horizontal = 0
         model.layout.hitBox.vertical = 0
         
-        model.colors.content = .init(
-            pressedOpacity: colors.cancelButton.pressedOpacity,
-            disabledOpacity: colors.cancelButton.disabledOpacity
+        model.colors.customContentOpacities = .init(
+            enabled: 1, // FIXME
+            pressed: colors.cancelButton.pressedOpacity,
+            disabled: colors.cancelButton.disabledOpacity
         )
         
-        model.colors.textContent = .init(
-            enabled: colors.cancelButton.enabled,
-            pressed: colors.cancelButton.pressed,
-            disabled: colors.cancelButton.disabled
-        )
+//        model.colors.textContent = .init( // FIXME: Resolve
+//            enabled: colors.cancelButton.enabled,
+//            pressed: colors.cancelButton.pressed,
+//            disabled: colors.cancelButton.disabled
+//        )
         
         model.fonts.title = fonts.cancelButton
         

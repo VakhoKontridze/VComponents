@@ -82,21 +82,24 @@ public struct VToggleModel {
             disabled: .init(componentAsset: "Toggle.Thumb")
         )
         
-        /// Content opacities.
-        public var content: StateOpacities = .init(
-            pressedOpacity: 0.5,
-            disabledOpacity: 0.5
-        )
-        
-        /// Text content colors.
-        ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .init(
+        /// Title colors.
+        public var title: StateColors = .init(
             off: ColorBook.primary,
             on: ColorBook.primary,
-            pressedOff: ColorBook.secondary,
-            pressedOn: ColorBook.secondary,
-            disabled: ColorBook.primary
+            pressedOff: ColorBook.primary,
+            pressedOn: ColorBook.primary,
+            disabled: ColorBook.secondary
+        )
+        
+        /// Custom content opacities.
+        ///
+        /// Applicable only when init with content is used.
+        public var customContentOpacities: StateOpacities = .init(
+            off: 1,
+            on: 1,
+            pressedOff: 1,
+            pressedOn: 1,
+            disabled: 0.5
         )
         
         // MARK: Initializers
@@ -105,11 +108,11 @@ public struct VToggleModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_OOD
+        public typealias StateColors = GenericStateModel_OOPD<Color>
 
         // MARK: State Opacities
-        /// Sub-model containing colors and opacities for component states.
-        public typealias StateOpacities = StateOpacities_PD
+        /// Sub-model containing opacities for component states.
+        public typealias StateOpacities = GenericStateModel_OOPD<CGFloat>
     }
 
     // MARK: Fonts

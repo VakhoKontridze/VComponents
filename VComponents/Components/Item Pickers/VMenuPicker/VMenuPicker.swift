@@ -42,7 +42,7 @@ import SwiftUI
 ///         VMenuPicker(
 ///             preset: .secondary(),
 ///             selection: $selection,
-///             title: "Lorem ipsum",
+///             title: "Lorem Ipsum",
 ///             rowContent: { row in
 ///                 .titledSystemIcon(
 ///                     title: row.pickerTitle,
@@ -377,7 +377,7 @@ struct VMenuPicker_Previews: PreviewProvider {
         VMenuPicker(
             preset: .secondary(),
             selection: $selection,
-            title: "Lorem ipsum"
+            title: "Lorem Ipsum"
         )
     }
 }

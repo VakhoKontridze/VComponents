@@ -58,7 +58,7 @@ public struct VStepperModel {
         /// Plus and minus button background colors.
         public var buttonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(componentAsset: "VStepper.Button.Background.pressed"),
+            pressed: .init(componentAsset: "Stepper.Button.Background.pressed"),
             disabled: .clear
         )
         

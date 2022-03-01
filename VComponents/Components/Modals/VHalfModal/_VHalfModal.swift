@@ -86,7 +86,7 @@ struct _VHalfModal<Content, HeaderContent>: View
                     grabberView
                     headerView
                     dividerView
-                    contentView.frame(maxHeight: .infinity, alignment: .center)
+                    contentView.frame(maxHeight: .infinity)
                 })
                     .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
                     .frame(maxHeight: .infinity, alignment: .top)
@@ -163,15 +163,19 @@ struct _VHalfModal<Content, HeaderContent>: View
     }
 
     private var closeButton: some View {
-        VCloseButton(model: model.closeButtonSubModel, action: animateOut)
+        VSquareButton.close(
+            model: model.closeButtonSubModel,
+            action: animateOut
+        )
     }
     
     @ViewBuilder private var navigationBarCloseButton: some View {
         if model.misc.dismissType.contains(.navigationViewCloseButton) {
-            VCloseButton(model: model.closeButtonSubModel, action: animateOut)
+            VSquareButton.close(
+                model: model.closeButtonSubModel,
+                action: animateOut
+            )
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-                .padding(.trailing, VHalfModalModel.Layout.navBarCloseButtonMarginTrailing)
-                .padding(.top, VHalfModalModel.Layout.navBarCloseButtonMarginTop)
         }
     }
 

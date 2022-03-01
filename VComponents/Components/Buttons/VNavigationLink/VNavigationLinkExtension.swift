@@ -9,52 +9,46 @@ import SwiftUI
 
 // MARK: - Extension
 extension View {
-    /// Allows for navigation without an explicit `VNavigationLink`.
+    /// Allows for navigation without an explicit `NavigationLink`.
     ///
     /// Usage example:
     ///
     ///     @State var isActive: Bool = false
     ///
     ///     var body: some View {
-    ///         VNavigationView(content: {
-    ///             VBaseView(title: "Home", content: {
-    ///                 ZStack(content: {
-    ///                     ColorBook.canvas.edgesIgnoringSafeArea(.all)
+    ///         NavigationView(content: {
+    ///             ZStack(content: {
+    ///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
     ///
-    ///                     VSheet()
-    ///
-    ///                     VPlainButton(
-    ///                         action: { isActive = true },
-    ///                         title: "Lorem ipsum"
-    ///                     )
-    ///                 })
-    ///                     .vNavigationLink(isActive: $isActive, destination: destination)
+    ///                 VPlainButton(
+    ///                     action: { isActive = true },
+    ///                     title: "Lorem Ipsum"
+    ///                 )
     ///             })
+    ///                 .navigationTitle("Home")
+    ///                 .navigationBarTitleDisplayMode(.inline)
+    ///                 .vNavigationLink(isActive: $isActive, destination: { destination })
     ///         })
     ///     }
     ///
     ///     var destination: some View {
-    ///         VBaseView(title: "Destination", content: {
-    ///             ZStack(content: {
-    ///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
-    ///
-    ///                 VSheet()
-    ///             })
-    ///         })
+    ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+    ///            .navigationTitle("Destination")
+    ///            .navigationBarTitleDisplayMode(.inline)
     ///     }
     ///
     @ViewBuilder public func vNavigationLink<Destination>(
         isActive: Binding<Bool>,
-        destination: Destination
+        @ViewBuilder destination: @escaping () -> Destination
     ) -> some View
         where Destination: View
     {
         self
             .background(
-                VNavigationLink(
+                NavigationLink(
                     isActive: isActive,
                     destination: destination,
-                    content: { EmptyView() }
+                    label: { EmptyView() }
                 )
                     .allowsHitTesting(false)
                     .opacity(0)

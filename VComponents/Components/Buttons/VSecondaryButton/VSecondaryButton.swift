@@ -10,16 +10,16 @@ import SwiftUI
 // MARK: - V Secondary Button
 /// Small colored button component that performs action when triggered.
 ///
-/// Component can be initialized with content or title.
+/// Component can be initialized with title, icon and title, and content.
 ///
-/// Model and state can be passed as parameters.
+/// Model can be passed as parameter.
 ///
 /// Usage example:
 ///
 ///     var body: some View {
 ///         VSecondaryButton(
-///             action: { print("Pressed") },
-///             title: "Lorem ipsum"
+///             action: { print("Clicked") },
+///             title: "Lorem Ipsum"
 ///         )
 ///     }
 ///     
@@ -27,83 +27,102 @@ public struct VSecondaryButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSecondaryButtonModel
     
-    private let state: VSecondaryButtonState
-    @State private var internalStateRaw: VSecondaryButtonInternalState?
-    private var internalState: VSecondaryButtonInternalState { internalStateRaw ?? .default(state: state) }
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @State private var isPressed: Bool = false
+    private var internalState: VSecondaryButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
     
     private let action: () -> Void
     
-    private let content: () -> Content
+    private let content: VSecondaryButtonContent<Content>
 
     // MARK: Initializers
+    /// Initializes component with action and title.
+    public init(
+        model: VSecondaryButtonModel = .init(),
+        action: @escaping () -> Void,
+        title: String
+    )
+        where Content == Never
+    {
+        self.model = model
+        self.action = action
+        self.content = .title(title: title)
+    }
+    
+    /// Initializes component with action, icon, and title.
+    public init(
+        model: VSecondaryButtonModel = .init(),
+        action: @escaping () -> Void,
+        icon: Image,
+        title: String
+    )
+        where Content == Never
+    {
+        self.model = model
+        self.action = action
+        self.content = .iconTitle(icon: icon, title: title)
+    }
+    
     /// Initializes component with action and content.
     public init(
         model: VSecondaryButtonModel = .init(),
-        state: VSecondaryButtonState = .enabled,
         action: @escaping () -> Void,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self.state = state
         self.action = action
-        self.content = content
-    }
-
-    /// Initializes component with action and title.
-    public init(
-        model: VSecondaryButtonModel = .init(),
-        state: VSecondaryButtonState = .enabled,
-        action: @escaping () -> Void,
-        title: String
-    )
-        where Content == VText
-    {
-        self.init(
-            model: model,
-            state: state,
-            action: action,
-            content: {
-                VText(
-                    color: model.colors.textContent.for(.default(state: state)),
-                    font: model.fonts.title,
-                    title: title
-                )
-            }
-        )
+        self.content = .content(content: content)
     }
 
     // MARK: Body
     public var body: some View {
-        syncInternalStateWithState()
-        
-        return VBaseButton(
-            isEnabled: internalState.isEnabled,
-            gesture: gestureHandler,
-            content: { hitBoxButtonView }
-        )
-    }
-    
-    private var hitBoxButtonView: some View {
-        buttonView
-            .padding(.horizontal, model.layout.hitBox.horizontal)
-            .padding(.vertical, model.layout.hitBox.vertical)
-    }
-    
-    private var buttonView: some View {
-        buttonContent
-            .frame(height: model.layout.height)
-            .background(backgroundView)
-            .overlay(border)
+        VBaseButton(gesture: gestureHandler, content: {
+            buttonContent
+                .frame(height: model.layout.height)
+                .background(background)
+                .overlay(border)
+                .padding(.horizontal, model.layout.hitBox.horizontal)
+                .padding(.vertical, model.layout.hitBox.vertical)
+        })
+            .disabled(!internalState.isEnabled)
     }
     
     private var buttonContent: some View {
-        content()
+        Group(content: {
+            switch content {
+            case .title(let title):
+                VText(
+                    color: model.colors.title.for(internalState),
+                    font: model.fonts.title,
+                    title: title
+                )
+                
+            case .iconTitle(let icon, let title):
+                HStack(spacing: model.layout.iconTitleSpacing, content: {
+                    icon
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(size: model.layout.iconSize)
+                        .foregroundColor(model.colors.icon.for(internalState))
+                        .opacity(model.colors.iconOpacities.for(internalState))
+                    
+                    VText(
+                        color: model.colors.title.for(internalState),
+                        font: model.fonts.title,
+                        title: title
+                    )
+                })
+                
+            case .content(let content):
+                content()
+                    .opacity(model.colors.customContentOpacities.for(internalState))
+            }
+        })
             .padding(.horizontal, model.layout.contentMargins.horizontal)
             .padding(.vertical, model.layout.contentMargins.vertical)
-            .opacity(model.colors.content.for(internalState))
     }
     
-    private var backgroundView: some View {
+    private var background: some View {
         RoundedRectangle(cornerRadius: model.layout.cornerRadius)
             .foregroundColor(model.colors.background.for(internalState))
     }
@@ -114,22 +133,10 @@ public struct VSecondaryButton<Content>: View where Content: View {
                 .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWidth)
         }
     }
-    
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if
-                internalStateRaw == nil ||
-                .init(internalState: internalState) != state
-            {
-                internalStateRaw = .default(state: state)
-            }
-        })
-    }
-    
+
     // MARK: Actions
     private func gestureHandler(gestureState: VBaseButtonGestureState) {
-        internalStateRaw = .init(state: state, isPressed: gestureState.isPressed)
+        isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }
 }
@@ -137,7 +144,10 @@ public struct VSecondaryButton<Content>: View where Content: View {
 // MARK: - Preview
 struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSecondaryButton(action: {}, title: "Lorem ipsum")
+        VSecondaryButton(
+            action: {},
+            title: "Lorem Ipsum"
+        )
             .padding()
     }
 }

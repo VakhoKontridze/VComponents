@@ -160,8 +160,8 @@ public struct VAccordionModel {
         /// Chevron button background colors.
         public var chevronButtonBackground: StateColors = chevronButtonReference.colors.background
         
-        /// Chevron button icon colors and opacities.
-        public var chevronButtonIcon: StateColorsAndOpacities = chevronButtonReference.colors.content
+        /// Chevron button icon colors.
+        public var chevronButtonIcon: StateColors = chevronButtonReference.colors.icon
         
         /// Row divider color.
         public var divider: Color = listReference.colors.divider
@@ -176,7 +176,10 @@ public struct VAccordionModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EPD
+        public typealias StateColors = GenericStateModel_EPD
+        
+        /// Sub-model containing colors for component states.
+        public typealias StateColors_OLD = StateColors_EPD
         
         // MARK: State Colors And Opacities
         /// Sub-model containing colors and opacities for component states.
@@ -257,7 +260,7 @@ public struct VAccordionModel {
         model.layout.hitBox.vertical = 0
         
         model.colors.background = colors.chevronButtonBackground
-        model.colors.content = colors.chevronButtonIcon
+        model.colors.icon = colors.chevronButtonIcon
         
         return model
     }

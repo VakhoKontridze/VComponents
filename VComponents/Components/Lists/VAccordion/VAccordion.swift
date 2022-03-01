@@ -269,12 +269,12 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             
             Spacer()
             
-            VChevronButton(
+            VSquareButton.chevron(
                 model: model.chevronButonSubModel,
                 direction: state.chevronButtonDirection,
-                state: state.chevronButtonState,
                 action: expandCollapse
             )
+                .disabled(!state.chevronButtonIsEnabled)
                 .allowsHitTesting(!model.misc.expandCollapseOnHeaderTap) // No need for two-layer tap area
         })
             .padding(.leading, model.layout.headerMargins.leading)

@@ -298,11 +298,11 @@ public struct VTextField: View {
     
     @ViewBuilder private var clearButton: some View {
         if !textFieldType.isSecure && isTextNonEmpty && model.misc.clearButton {
-            VCloseButton(
+            VSquareButton.close(
                 model: model.clearSubButtonModel(state: state.wrappedValue, highlight: highlight),
-                state: state.wrappedValue.clearButtonState,
                 action: runClearAction
             )
+                .disabled(!state.wrappedValue.clearButtonIsEnabled)
         }
     }
     
@@ -310,7 +310,6 @@ public struct VTextField: View {
         if textFieldType.isSecure {
             VSquareButton(
                 model: model.visibilityButtonSubModel(state: state.wrappedValue, highlight: highlight),
-                state: state.wrappedValue.visiblityButtonState,
                 action: { secureFieldIsVisible.toggle() },
                 content: {
                     visiblityIcon
@@ -319,6 +318,7 @@ public struct VTextField: View {
                         .foregroundColor(model.colors.visibilityButtonIcon.for(state.wrappedValue, highlight: highlight))
                 }
             )
+                .disabled(!state.wrappedValue.visiblityButtonIsEnabled)
         }
     }
     
@@ -326,10 +326,10 @@ public struct VTextField: View {
         if !textFieldType.isSecure, isTextNonEmpty, state.wrappedValue.isFocused, let cancelButton = model.misc.cancelButton, !cancelButton.isEmpty {
             VPlainButton(
                 model: model.cancelButtonSubModel,
-                state: state.wrappedValue.cancelButtonState,
                 action: runCancelAction,
                 title: cancelButton
             )
+                .disabled(!state.wrappedValue.cancelButtonIsEnabled)
         }
     }
     

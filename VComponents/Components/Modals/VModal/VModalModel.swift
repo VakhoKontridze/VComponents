@@ -122,7 +122,7 @@ public struct VModalModel {
         public var closeButtonBackground: StateColors = closeButtonReference.colors.background
         
         /// Close button icon colors and opacities.
-        public var closeButtonIcon: StateColorsAndOpacities = closeButtonReference.colors.content
+        public var closeButtonIcon: StateColors = closeButtonReference.colors.icon
         
         /// Header divider color.
         public var headerDivider: Color = .clear
@@ -136,7 +136,10 @@ public struct VModalModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EPD
+        public typealias StateColors = GenericStateModel_EPD<Color>
+        
+        /// Sub-model containing colors for component states.
+        public typealias StateColors_OLD = StateColors_EPD
         
         // MARK: State Colors and Opacities
         /// Sub-model containing colors and opacities for component states.
@@ -227,7 +230,7 @@ public struct VModalModel {
         model.layout.hitBox.vertical = 0
         
         model.colors.background = colors.closeButtonBackground
-        model.colors.content = colors.closeButtonIcon
+        model.colors.icon = colors.closeButtonIcon
         
         return model
     }

@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonModelBordered.swift
+//  VPrimaryButtonModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -39,10 +39,18 @@ public struct VPrimaryButtonModel {
         var hasBorder: Bool { borderWidth > 0 }
         
         /// Content margin. Defaults to `15` horizontally and `3` vertically.
-        public var contentMargin: ContentMargin = .init(
+        public var contentMargins: ContentMargin = .init(
             horizontal: 15,
             vertical: 3
         )
+        
+        /// Icon size. Defaults to `20` by `20`.
+        public var iconSize: CGSize = .init(dimension: 20)
+        
+        /// Spacing between icon and title. Defaults to `10`.
+        ///
+        /// Applicable only if icon init with icon and title is used.
+        public var iconTitleSpacing: CGFloat = 10
         
         /// Spacing between content and spinner. Defaults to `20`.
         ///
@@ -64,40 +72,62 @@ public struct VPrimaryButtonModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacities.
-        public var content: StateOpacities = .init(
-            pressedOpacity: 0.5,
-            disabledOpacity: 0.5
-        )
-        
-        /// Text content colors.
-        ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .init(
-            enabled: ColorBook.primaryInverted,
-            pressed: ColorBook.primaryInverted,
-            loading: ColorBook.primaryInverted,
-            disabled: ColorBook.primaryInverted
-        )
-        
         /// Background colors.
         public var background: StateColors = .init(
             enabled: .init(componentAsset: "PrimaryButton.Background.enabled"),
             pressed: .init(componentAsset: "PrimaryButton.Background.pressed"),
-            loading: .init(componentAsset: "PrimaryButton.Background.disabled"),
-            disabled: .init(componentAsset: "PrimaryButton.Background.disabled")
+            disabled: .init(componentAsset: "PrimaryButton.Background.loading"),
+            loading: .init(componentAsset: "PrimaryButton.Background.disabled")
         )
         
         /// Border colors.
         public var border: StateColors = .init(
             enabled: .clear,
             pressed: .clear,
-            loading: .clear,
-            disabled: .clear
+            disabled: .clear,
+            loading: .clear
         )
         
-        /// Loader colors.
-        public var loader: Color = ColorBook.primaryInverted
+        /// Title colors.
+        public var title: StateColors = .init(
+            enabled: ColorBook.primaryWhite,
+            pressed: ColorBook.primaryWhite,
+            disabled: ColorBook.primaryWhite,
+            loading: ColorBook.primaryWhite
+        )
+        
+        /// Icon colors.
+        ///
+        /// Can be used for vector images.
+        public var icon: StateColors = .init(
+            enabled: ColorBook.primaryWhite,
+            pressed: ColorBook.primaryWhite,
+            disabled: ColorBook.primaryWhite,
+            loading: ColorBook.primaryWhite
+        )
+        
+        /// Icon opacities.
+        ///
+        /// Can be used for bitmap images. Defaults to `1`'s.
+        public var iconOpacities: StateOpacities = .init(
+            enabled: 1,
+            pressed: 1,
+            disabled: 1,
+            loading: 1
+        )
+        
+        /// Custom content opacities.
+        ///
+        /// Applicable only when init with content is used.
+        public var customContentOpacities: StateOpacities = .init(
+            enabled: 1,
+            pressed: 0.75,
+            disabled: 0.75,
+            loading: 0.75
+        )
+        
+        /// Loader color.
+        public var loader: Color = ColorBook.primaryWhite
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -105,11 +135,11 @@ public struct VPrimaryButtonModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EPLD
+        public typealias StateColors = GenericStateModel_EPDL<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_PD
+        public typealias StateOpacities = GenericStateModel_EPDL<CGFloat>
     }
 
     // MARK: Fonts

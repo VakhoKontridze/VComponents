@@ -47,9 +47,8 @@ struct VTextFieldDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settingsSections: settings)
-        })
+        DemoView(component: component, settingsSections: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     private func component() -> some View {

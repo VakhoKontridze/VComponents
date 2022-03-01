@@ -10,10 +10,11 @@ import SwiftUI
 // MARK: - V Radio Button
 /// State picker component that toggles between off, on, or disabled states, and displays content.
 ///
-/// Component can be initialized with content, title, or without body. `Bool` can also be passed as state.
-/// Component can aslo be placed inside a Radio Group, in which case component is initialized with `VPickableItem` or `VPickableTitledItem`.
+/// Component can be initialized with without content, title, or content.
 ///
 /// Model can be passed as parameter.
+///
+/// `Bool` can also be passed as state.
 ///
 /// Usage example:
 ///
@@ -22,82 +23,24 @@ import SwiftUI
 ///     var body: some View {
 ///         VRadioButton(
 ///             state: $state,
-///             title: "Lorem ipsum"
+///             title: "Lorem Ipsum"
 ///         )
-///     }
-///
-/// Component placed inside a Radio Group:
-///
-///     enum Gender: Int, Identifiable, VPickableTitledItem {
-///         case male, female, other
-///
-///         var id: Int { rawValue }
-///
-///         var pickerTitle: String {
-///             switch self {
-///             case .male: return "Male"
-///             case .female: return "Female"
-///             case .other: return "Other"
-///             }
-///         }
-///     }
-///
-///     @State var selection: Gender = .male
-///
-///     var body: some View {
-///         VStack(alignment: .leading, content: {
-///             ForEach(Gender.allCases, content: { gender in
-///                 VRadioButton(selection: $selection, selects: gender)
-///             })
-///         })
 ///     }
 ///     
 public struct VRadioButton<Content>: View where Content: View {
     // MARK: Properties
     private let model: VRadioButtonModel
     
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    @State private var isPressed: Bool = false
     @Binding private var state: VRadioButtonState
-    @State private var internalStateRaw: VRadioButtonInternalState?
-    private var internalState: VRadioButtonInternalState { internalStateRaw ?? .default(state: state) }
+    private var internalState: VRadioButtonInternalState { .init(isEnabled: isEnabled, state: state, isPressed: isPressed) }
     
-    private let content: (() -> Content)?
+    private let content: VRadioButtonContent<Content>
     
-    private var contentIsEnabled: Bool { internalState.isEnabled && model.misc.contentIsClickable }
+    private var contentIsEnabled: Bool { model.misc.contentIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
-    /// Initializes component with state and content.
-    public init(
-        model: VRadioButtonModel = .init(),
-        state: Binding<VRadioButtonState>,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.model = model
-        self._state = state
-        self.content = content
-    }
-    
-    /// Initializes component with state and title.
-    public init(
-        model: VRadioButtonModel = .init(),
-        state: Binding<VRadioButtonState>,
-        title: String
-    )
-        where Content == VText
-    {
-        self.init(
-            model: model,
-            state: state,
-            content: {
-                VText(
-                    type: .multiLine(alignment: .leading, limit: nil),
-                    color: model.colors.textContent.for(.init(state: state.wrappedValue, isPressed: false)),
-                    font: model.fonts.title,
-                    title: title
-                )
-            }
-        )
-    }
-    
     /// Initializes component with state.
     public init(
         model: VRadioButtonModel = .init(),
@@ -107,46 +50,35 @@ public struct VRadioButton<Content>: View where Content: View {
     {
         self.model = model
         self._state = state
-        self.content = nil
+        self.content = .empty
     }
-
-    // MARK: Initializers - Bool
-    /// Initializes component with bool and content.
+    
+    /// Initializes component with state and title.
     public init(
         model: VRadioButtonModel = .init(),
-        isOn: Binding<Bool>,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.init(
-            model: model,
-            state: Binding<VRadioButtonState>(bool: isOn),
-            content: content
-        )
-    }
-
-    /// Initializes component with bool and title.
-    public init(
-        model: VRadioButtonModel = .init(),
-        isOn: Binding<Bool>,
+        state: Binding<VRadioButtonState>,
         title: String
     )
-        where Content == VText
+        where Content == Never
     {
-        self.init(
-            model: model,
-            state: .init(bool: isOn),
-            content: {
-                VText(
-                    type: .multiLine(alignment: .leading, limit: nil),
-                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: isOn.wrappedValue, isPressed: false)),
-                    font: model.fonts.title,
-                    title: title
-                )
-            }
-        )
+        self.model = model
+        self._state = state
+        self.content = .title(title: title)
     }
-
-    /// Initializes component with bool.
+    
+    /// Initializes component with state and content.
+    public init(
+        model: VRadioButtonModel = .init(),
+        state: Binding<VRadioButtonState>,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.model = model
+        self._state = state
+        self.content = .content(content: content)
+    }
+    
+    // MARK: Initializers - Bool
+    /// Initializes component with `Bool`.
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>
@@ -155,167 +87,108 @@ public struct VRadioButton<Content>: View where Content: View {
     {
         self.model = model
         self._state = .init(bool: isOn)
-        self.content = nil
+        self.content = .empty
     }
     
-    // MARK: Initializers - Pickable Item
-    /// Initializes component with `VPickableItem` and content.
-    public init<Item>(
+    /// Initializes component with `Bool` and title.
+    public init(
         model: VRadioButtonModel = .init(),
-        selection: Binding<Item>,
-        selects selectingValue: Item,
+        isOn: Binding<Bool>,
+        title: String
+    )
+        where Content == Never
+    {
+        self.model = model
+        self._state = .init(bool: isOn)
+        self.content = .title(title: title)
+    }
+    
+    /// Initializes component with `Bool` and content.
+    public init(
+        model: VRadioButtonModel = .init(),
+        isOn: Binding<Bool>,
         @ViewBuilder content: @escaping () -> Content
-    )
-        where Item: VPickableItem
-    {
-        self.init(
-            model: model,
-            state: Binding<VRadioButtonState>(
-                get: { selection.wrappedValue == selectingValue ? .on : .off },
-                set: { if $0.isOn { selection.wrappedValue = selectingValue } }
-            ),
-            content: content
-        )
-    }
-    
-    /// Initializes component with `VPickableItem`.
-    public init<Item>(
-        model: VRadioButtonModel = .init(),
-        selection: Binding<Item>,
-        selects selectingValue: Item
-    )
-        where
-            Content == Never,
-            Item: VPickableItem
-    {
-        self.init(
-            model: model,
-            state: Binding<VRadioButtonState>(
-                get: { selection.wrappedValue == selectingValue ? .on : .off },
-                set: { if $0.isOn { selection.wrappedValue = selectingValue } }
-            )
-        )
-    }
-    
-    // MARK: Initializers - Pickable Titled Item
-    /// Initializes component with `VPickableTitledItem` and content.
-    public init<Item>(
-        model: VRadioButtonModel = .init(),
-        selection: Binding<Item>,
-        selects selectingValue: Item
-    )
-        where
-            Content == VText,
-            Item: VPickableTitledItem
-    {
-        self.init(
-            model: model,
-            state: Binding<VRadioButtonState>(
-                get: { selection.wrappedValue == selectingValue ? .on : .off },
-                set: { if $0.isOn { selection.wrappedValue = selectingValue } }
-            ),
-            content: {
-                VText(
-                    type: .multiLine(alignment: .leading, limit: nil),
-                    color: model.colors.textContent.for(VRadioButtonInternalState(bool: selection.wrappedValue == selectingValue, isPressed: false)),
-                    font: model.fonts.title,
-                    title: selectingValue.pickerTitle
-                )
-            }
-        )
+    ) {
+        self.model = model
+        self._state = .init(bool: isOn)
+        self.content = .content(content: content)
     }
 
     // MARK: Body
-    public var body: some View {
-        syncInternalStateWithState()
-        
-        return Group(content: {
-            switch content {
-            case nil:
+    @ViewBuilder public var body: some View {
+        switch content {
+        case .empty:
+            radioButton
+            
+        case .title(let title):
+            HStack(spacing: 0, content: {
                 radioButton
                 
-            case let content?:
-                HStack(spacing: 0, content: {
-                    radioButton
-                    spacerView
-                    contentView(content: content)
+                spacer
+
+                VBaseButton(gesture: gestureHandler, content: {
+                    VText(
+                        type: .multiLine(alignment: .leading, limit: nil),
+                        color: model.colors.title.for(internalState),
+                        font: model.fonts.title,
+                        title: title
+                    )
                 })
-            }
-        })
+                    .disabled(!contentIsEnabled)
+            })
+            
+        case .content(let content):
+            HStack(spacing: 0, content: {
+                radioButton
+                
+                spacer
+                
+                VBaseButton(gesture: gestureHandler, content: {
+                    content()
+                        .opacity(model.colors.customContentOpacities.for(internalState))
+                })
+                    .disabled(!contentIsEnabled)
+            })
+        }
     }
     
     private var radioButton: some View {
-        VBaseButton(
-            isEnabled: internalState.isEnabled,
-            gesture: gestureHandler,
-            content: {
-                ZStack(content: {
-                    Circle()
-                        .frame(dimension: model.layout.dimension)
-                        .foregroundColor(model.colors.fill.for(internalState))
-                    
-                    Circle()
-                        .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
-                        .frame(dimension: model.layout.dimension)
-                    
-                    Circle()
-                        .frame(dimension: model.layout.bulletDimension)
-                        .foregroundColor(model.colors.bullet.for(internalState))
-                })
+        VBaseButton(gesture: gestureHandler, content: {
+            ZStack(content: {
+                Circle()
                     .frame(dimension: model.layout.dimension)
-                    .padding(model.layout.hitBox)
-            }
-        )
-    }
-    
-    private var spacerView: some View {
-        VBaseButton(
-            isEnabled: contentIsEnabled,
-            gesture: gestureHandler,
-            content: {
-                Rectangle()
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(width: model.layout.contentMarginLeading)
-                    .foregroundColor(.clear)
-            }
-        )
-    }
-    
-    private func contentView(
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View {
-        VBaseButton(
-            isEnabled: contentIsEnabled,
-            gesture: gestureHandler,
-            content: {
-                content()
-                    .opacity(model.colors.content.for(internalState))
-            }
-        )
-    }
-
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if
-                internalStateRaw == nil ||
-                .init(internalState: internalState) != state
-            {
-                withAnimation(model.animations.stateChange, { internalStateRaw = .default(state: state) })
-            }
+                    .foregroundColor(model.colors.fill.for(internalState))
+                
+                Circle()
+                    .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
+                    .frame(dimension: model.layout.dimension)
+                
+                Circle()
+                    .frame(dimension: model.layout.bulletDimension)
+                    .foregroundColor(model.colors.bullet.for(internalState))
+            })
+                .frame(dimension: model.layout.dimension)
+                .padding(model.layout.hitBox)
         })
+            .disabled(!internalState.isEnabled)
+    }
+    
+    private var spacer: some View {
+        VBaseButton(gesture: gestureHandler, content: {
+            Rectangle()
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(width: model.layout.contentMarginLeading)
+                .foregroundColor(.clear)
+        })
+            .disabled(!contentIsEnabled)
     }
 
     // MARK: Actions
     private func gestureHandler(gestureState: VBaseButtonGestureState) {
-        switch gestureState.isClicked {
-        case false:
-            internalStateRaw = .init(state: state, isPressed: gestureState.isPressed)
-
-        case true:
-            state.setNextState()
-            withAnimation(model.animations.stateChange, { internalStateRaw?.setNextState() })
-        }
+        withAnimation(model.animations.stateChange, {
+            isPressed = gestureState.isPressed
+            if gestureState.isClicked { state.setNextState() }
+        })
     }
 }
 
@@ -324,6 +197,9 @@ struct VRadioButton_Previews: PreviewProvider {
     @State private static var state: VRadioButtonState = .on
 
     static var previews: some View {
-        VRadioButton(state: $state, title: "Lorem ipsum")
+        VRadioButton(
+            state: $state,
+            title: "Lorem Ipsum"
+        )
     }
 }

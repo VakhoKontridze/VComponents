@@ -7,11 +7,13 @@
 
 import UIKit
 
-// MARK: - Safe Areas
+// MARK: - View Safe Areas
 extension UIView {
-    static let topSafeAreaHeight: CGFloat =
+    static var topSafeAreaHeight: CGFloat {
         UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets.top ?? 0
+    }
 
-    static let bottomSafeAreaHeight: CGFloat =
+    static var bottomSafeAreaHeight: CGFloat {
         UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.safeAreaInsets.bottom ?? 0
+    }
 }

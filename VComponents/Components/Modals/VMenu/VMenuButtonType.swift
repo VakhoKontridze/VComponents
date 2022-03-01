@@ -29,34 +29,34 @@ extension VMenuButtonType {
         case .primary(let model):
             VPrimaryButton(
                 model: model,
-                state: isEnabled ? .enabled : .disabled,
                 action: {},
                 content: label
             )
+                .disabled(!isEnabled)
             
         case .secondary(let model):
             VSecondaryButton(
                 model: model,
-                state: isEnabled ? .enabled : .disabled,
                 action: {},
                 content: label
             )
+                .disabled(!isEnabled)
             
         case .square(let model):
             VSquareButton(
                 model: model,
-                state: isEnabled ? .enabled : .disabled,
                 action: {},
                 content: label
             )
+                .disabled(!isEnabled)
             
         case .plain(let model):
             VPlainButton(
                 model: model,
-                state: isEnabled ? .enabled : .disabled,
                 action: {},
                 content: label
             )
+                .disabled(!isEnabled)
             
         case .custom:
             label()

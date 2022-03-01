@@ -13,9 +13,10 @@ struct VPrimaryButtonDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Primary Button" }
     
-    @State private var state: VPrimaryButtonState = .enabled
-    @State private var contentType: ComponentContentType = .text
-    @State private var borderType: ButtonComponentBorderType = .borderless
+    @State private var isEnabled: Bool = true
+    @State private var isLoading: Bool = false
+    @State private var contentType: VPrimaryButtonContent = .title
+    @State private var borderType: VPrimaryButtonBorder = .borderless
     
     private var model: VPrimaryButtonModel {
         let defaultModel: VPrimaryButtonModel = .init()
@@ -23,28 +24,22 @@ struct VPrimaryButtonDemoView: View {
         var model: VPrimaryButtonModel = .init()
 
         if borderType == .bordered {
-            model.layout.borderWidth = 1
-            
-            model.colors.textContent = .init(
-                enabled: defaultModel.colors.background.enabled,
-                pressed: defaultModel.colors.background.pressed,
-                loading: defaultModel.colors.background.loading,
-                disabled: defaultModel.colors.background.disabled
-            )
-            
+            model.layout.borderWidth = 2
+
             model.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
-                loading: .init("PrimaryButtonBordered.Background.disabled"),
-                disabled: .init("PrimaryButtonBordered.Background.disabled")
+                disabled: .init("PrimaryButtonBordered.Background.disabled"),
+                loading: .init("PrimaryButtonBordered.Background.disabled")
             )
+
+            model.colors.border = defaultModel.colors.background
             
-            model.colors.border = .init(
-                enabled: defaultModel.colors.background.enabled,
-                pressed: defaultModel.colors.background.disabled,   // It's better this way
-                loading: defaultModel.colors.background.loading,
-                disabled: defaultModel.colors.background.disabled
-            )
+            model.colors.title = model.colors.icon
+            
+            model.colors.icon = defaultModel.colors.background
+            
+            model.colors.loader = model.colors.icon.disabled
         }
 
         return model
@@ -52,65 +47,81 @@ struct VPrimaryButtonDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settings: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
-    @ViewBuilder private func component() -> some View {
-        switch contentType {
-        case .text: VPrimaryButton(model: model, state: state, action: {}, title: buttonTitle)
-        case .custom: VPrimaryButton(model: model, state: state, action: {}, content: buttonContent)
-        }
+    private func component() -> some View {
+        Group(content: {
+            switch contentType {
+            case .title: VPrimaryButton(model: model, isLoading: isLoading, action: {}, title: buttonTitle)
+            case .iconTitle: VPrimaryButton(model: model, isLoading: isLoading, action: {}, icon: buttonIcon, title: buttonTitle)
+            case .custom: VPrimaryButton(model: model, isLoading: isLoading, action: {}, content: { buttonIcon })
+            }
+        })
+            .disabled(!isEnabled)
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, headerTitle: "State")
+        VSegmentedPicker(
+            selection: .init(
+                get: { VPrimaryButtonState(isEnabled: isEnabled, isLoading: isLoading) },
+                set: { state in
+                    isEnabled = state != .disabled // Loading is also type of disabled
+                    isLoading = state == .loading
+                }
+            ),
+            headerTitle: "State"
+        )
         
         VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         
         VSegmentedPicker(selection: $borderType, headerTitle: "Border")
     }
     
-    private var buttonTitle: String { "Lorem ipsum" }
-
-    private func buttonContent() -> some View {
-        let color: Color = {
-            switch borderType {
-            case .bordered: return VPrimaryButtonModel().colors.background.enabled
-            case .borderless: return ColorBook.primaryInverted
-            }
-        }()
-        
-        return DemoIconContentView(dimension: 20, color: color)
-    }
+    private var buttonIcon: Image { .init(systemName: "swift") }
+    
+    private var buttonTitle: String { "Lorem Ipsum" }
 }
 
 // MARK: - Helpers
-extension VPrimaryButtonState: VPickableTitledItem {
-    public var pickerTitle: String {
+private enum VPrimaryButtonState: Int, VPickableTitledItem {
+    case enabled
+    case disabled
+    case loading
+    
+    var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
         case .loading: return "Loading"
-        @unknown default: fatalError()
+        }
+    }
+    
+    init(isEnabled: Bool, isLoading: Bool) {
+        switch (isEnabled, isLoading) {
+        case (false, false): self = .disabled
+        case (_, true): self = .loading
+        case (true, false): self = .enabled
         }
     }
 }
 
-enum ComponentContentType: Int, VPickableTitledItem {
-    case text
+enum VPrimaryButtonContent: Int, VPickableTitledItem {
+    case title
+    case iconTitle
     case custom
     
     var pickerTitle: String {
         switch self {
-        case .text: return "Text"
+        case .title: return "Title"
+        case .iconTitle: return "Icon & Title"
         case .custom: return "Custom"
         }
     }
 }
 
-enum ButtonComponentBorderType: Int, VPickableTitledItem {
+enum VPrimaryButtonBorder: Int, VPickableTitledItem {
     case borderless
     case bordered
     

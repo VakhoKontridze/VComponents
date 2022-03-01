@@ -17,33 +17,30 @@ struct HomeView: View {
         .init(id: 0, title: "Buttons", rows: [
             .baseButton,
             .primaryButton, .secondaryButton, .squareButton, .plainButton,
-            .chevronButton, .closeButton,
-            .navigationLink, .webLink
+            .navigationLink, .link
         ]),
         .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
         .init(id: 4, title: "Inputs", rows: [.baseTextField, .textField]),
         .init(id: 5, title: "Lists", rows: [.baseList, .list, .sectionList, .accordion]),
-        .init(id: 6, title: "Navigation", rows: [.tabNavigationView, .navigationView]),
-        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
-        .init(id: 8, title: "Messages", rows: [.toast]),
-        .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
-        .init(id: 10, title: "Misc", rows: [.text, .sheet, .lazyScrollView, .baseView])
+        .init(id: 6, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
+        .init(id: 7, title: "Messages", rows: [.toast]),
+        .init(id: 8, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
+        .init(id: 9, title: "Misc", rows: [.text, .sheet, .lazyScrollView])
     ]
 
     private enum HomeRow: Int, DemoableRow {
-        case baseButton, primaryButton, secondaryButton, squareButton, plainButton, chevronButton, closeButton, navigationLink, webLink
+        case baseButton, primaryButton, secondaryButton, squareButton, plainButton, navigationLink, link
         case toggle, checkBox, radioButton
         case segmentedPicker, menuPicker, wheelPicker
         case stepper, slider,  rangeSlider
         case baseTextField, textField
         case baseList, list, sectionList, accordion
-        case tabNavigationView, navigationView
         case modal, halfModal, sideBar, dialog, menu, actionSheet
         case toast
         case spinner, progressBar, pageIndicator
-        case text, sheet, lazyScrollView, baseView
+        case text, sheet, lazyScrollView
 
         var title: String {
             switch self {
@@ -52,10 +49,8 @@ struct HomeView: View {
             case .secondaryButton: return VSecondaryButtonDemoView.navBarTitle
             case .squareButton: return VSquareButtonDemoView.navBarTitle
             case .plainButton: return VPlainButtonDemoView.navBarTitle
-            case .chevronButton: return VChevronButtonDemoView.navBarTitle
-            case .closeButton: return VCloseButtonDemoView.navBarTitle
             case .navigationLink: return VNavigationLinkDemoView.navBarTitle
-            case .webLink: return VWebLinkDemoView.navBarTitle
+            case .link: return VLinkDemoView.navBarTitle
 
             case .toggle: return VToggleDemoView.navBarTitle
             case .checkBox: return VCheckBoxDemoView.navBarTitle
@@ -77,9 +72,6 @@ struct HomeView: View {
             case .sectionList: return VSectionListDemoView.navBarTitle
             case .accordion: return VAccordionDemoView.navBarTitle
 
-            case .tabNavigationView: return VTabNavigationViewDemoView.navBarTitle
-            case .navigationView: return VNavigationViewDemoView.navBarTitle
-
             case .modal: return VModalDemoView.navBarTitle
             case .halfModal: return VHalfModalDemoView.navBarTitle
             case .sideBar: return VSideBarDemoView.navBarTitle
@@ -96,7 +88,6 @@ struct HomeView: View {
             case .text: return VTextDemoView.navBarTitle
             case .sheet: return VSheetDemoView.navBarTitle
             case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
-            case .baseView: return VBaseViewDemoView.navBarTitle
             }
         }
 
@@ -107,10 +98,8 @@ struct HomeView: View {
             case .secondaryButton: VSecondaryButtonDemoView()
             case .squareButton: VSquareButtonDemoView()
             case .plainButton: VPlainButtonDemoView()
-            case .chevronButton: VChevronButtonDemoView()
-            case .closeButton: VCloseButtonDemoView()
             case .navigationLink: VNavigationLinkDemoView()
-            case .webLink: VWebLinkDemoView()
+            case .link: VLinkDemoView()
 
             case .toggle: VToggleDemoView()
             case .checkBox: VCheckBoxDemoView()
@@ -132,9 +121,6 @@ struct HomeView: View {
             case .sectionList: VSectionListDemoView()
             case .accordion: VAccordionDemoView()
 
-            case .tabNavigationView: VTabNavigationViewDemoView()
-            case .navigationView: VNavigationViewDemoView()
-
             case .modal: VModalDemoView()
             case .halfModal: VHalfModalDemoView()
             case .sideBar: VSideBarDemoView()
@@ -151,18 +137,17 @@ struct HomeView: View {
             case .text: VTextDemoView()
             case .sheet: VSheetDemoView()
             case .lazyScrollView: VLazyScrollViewDemoView()
-            case .baseView: VBaseViewDemoView()
             }
         }
     }
 
     // MARK: Body
     var body: some View {
-        VNavigationView(content: {
-            VBaseView(title: Self.navBarTitle, content: {
-                DemoListView(type: .accordion, sections: sections)
-            })
+        NavigationView(content: {
+            DemoListView(type: .accordion, sections: sections)
+                .standardNavigationTitle(Self.navBarTitle)
         })
+            .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

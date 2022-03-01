@@ -17,9 +17,8 @@ struct VSpinnerDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settings: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     @ViewBuilder private func component() -> some View {

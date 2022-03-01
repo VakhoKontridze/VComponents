@@ -18,28 +18,28 @@ struct VMenuDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settings: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     @ViewBuilder private func component() -> some View {
-        switch menuButtonType.preset {
-        case let preset?:
-            VMenu(
-                preset: preset,
-                state: state,
-                rows: rows,
-                title: buttonTitle
-            )
-        
-        case nil:
-            VMenu(
-                state: state,
-                rows: rows,
-                label: buttonContent
-            )
-        }
+        fatalError() // FIXME: Resolve
+//        switch menuButtonType.preset {
+//        case let preset?:
+//            VMenu(
+//                preset: preset,
+//                state: state,
+//                rows: rows,
+//                title: buttonTitle
+//            )
+//
+//        case nil:
+//            VMenu(
+//                state: state,
+//                rows: rows,
+//                label: buttonContent
+//            )
+//        }
     }
     
     @ViewBuilder private func settings() -> some View {
@@ -89,15 +89,15 @@ private enum VMenuButtonTypeHelper: Int, VPickableTitledItem {
     case plain
     case custom
     
-    var preset: VWebLinkPreset? {
-        switch self {
-        case .primary: return .primary()
-        case .secondary: return .secondary()
-        case .square: return .square()
-        case .plain: return .plain()
-        case .custom: return nil
-        }
-    }
+//    var preset: VWebLinkPreset? { // FIXME: Resolve
+//        switch self {
+//        case .primary: return .primary()
+//        case .secondary: return .secondary()
+//        case .square: return .square()
+//        case .plain: return .plain()
+//        case .custom: return nil
+//        }
+//    }
     
     var pickerTitle: String {
         switch self {

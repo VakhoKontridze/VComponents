@@ -7,10 +7,16 @@
 
 import SwiftUI
 
-// MARK: - V Plain Model Button
+// MARK: - V Plain Button Model
 /// Model that describes UI.
 public struct VPlainButtonModel {
     // MARK: Properties
+    /// Reference to `VPrimaryButtonModel`.
+    public static let primaryButtonReference: VPrimaryButtonModel = .init()
+    
+    /// Reference to `VSecondaryButtonModel`.
+    public static let secondaryButtonReference: VSecondaryButtonModel = .init()
+    
     /// Reference to `VSquareButtonModel`.
     public static let squareButtonReference: VSquareButtonModel = .init()
     
@@ -31,6 +37,15 @@ public struct VPlainButtonModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Icon size. Defaults to `20` by `20`.
+        public var iconSize: CGSize = squareButtonReference.layout.iconSize
+        
+        /// Spacing between icon and title. Defaults to `8`.
+        ///
+        /// Applicable only if icon init with icon and title is used.
+        public var iconTitleSpacing: CGFloat = secondaryButtonReference.layout.iconTitleSpacing
+        
+        
         /// Hit box. Defaults to `5` horizontally and `5` vertically.
         public var hitBox: HitBox = .init(
             horizontal: 5,
@@ -50,20 +65,31 @@ public struct VPlainButtonModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacities.
-        public var content: StateOpacities = .init(
-            pressedOpacity: 0.5,
-            disabledOpacity: 0.5
+        /// Title colors.
+        public var title: StateColors = .init(
+            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
+            pressed: primaryButtonReference.colors.background.pressed,
+            disabled: primaryButtonReference.colors.background.disabled
         )
         
-        /// Text content colors.
+        /// Icon opacities.
         ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .init(
-            enabled: ColorBook.accent,
-            pressed: ColorBook.accent,
-            disabled: ColorBook.accent
+        /// Can be used for vector images.
+        public var icon: StateColors = .init(
+            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
+            pressed: primaryButtonReference.colors.background.pressed,
+            disabled: primaryButtonReference.colors.background.disabled
         )
+        
+        /// Icon opacities.
+        ///
+        /// Can be used for bitmap images. Defaults to `1`'s.
+        public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
+        
+        /// Custom content opacities.
+        ///
+        /// Applicable only when init with content is used.
+        public var customContentOpacities: StateOpacities = .init(primaryButtonReference.colors.customContentOpacities)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -71,21 +97,21 @@ public struct VPlainButtonModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EPD
+        public typealias StateColors = GenericStateModel_EPD<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_PD
+        public typealias StateOpacities = GenericStateModel_EPD<CGFloat>
     }
 
     // MARK: Fonts
     /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `14` with `semibold` weight.
+        /// Title font. Defaults to system font of size `15` with `medium` weight.
         ///
         /// Only applicable when using init with title.
-        public var title: Font = squareButtonReference.fonts.title
+        public var title: Font = .system(size: 15, weight: .medium)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

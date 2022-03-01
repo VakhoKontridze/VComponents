@@ -14,9 +14,6 @@ public struct VPageIndicatorModel {
     /// Reference to `VProgressBarModel`.
     public static let progressBarReference: VProgressBarModel = .init()
     
-    /// Reference to `VTabNavigationViewModel`.
-    public static let tabNavigationReference: VTabNavigationViewModel = .init()
-    
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
@@ -58,7 +55,7 @@ public struct VPageIndicatorModel {
     public struct Colors {
         // MARK: Properties
         /// Dot color.
-        public var dot: Color = tabNavigationReference.colors.item
+        public var dot: Color = .init(componentAsset: "PageIndicator.Dot")
         
         /// Selected dot color.
         public var selectedDot: Color = progressBarReference.colors.progress

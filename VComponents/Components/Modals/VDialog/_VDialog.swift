@@ -118,27 +118,27 @@ struct _VDialog<Content>: View where Content: View {
     private func oneButtonDialogView(button: VDialogButton) -> some View {
         VPrimaryButton(
             model: button.model.buttonSubModel,
-            state: button.isEnabled ? .enabled : .disabled,
             action: { animateOut(and: button.action) },
             title: button.title
         )
+            .disabled(!button.isEnabled)
     }
     
     private func twoButtonDialogView(primary: VDialogButton, secondary: VDialogButton) -> some View {
         HStack(spacing: model.layout.twoButtonSpacing, content: {
             VPrimaryButton(
                 model: secondary.model.buttonSubModel,
-                state: secondary.isEnabled ? .enabled : .disabled,
                 action: { animateOut(and: secondary.action) },
                 title: secondary.title
             )
+                .disabled(!secondary.isEnabled)
             
             VPrimaryButton(
                 model: primary.model.buttonSubModel,
-                state: primary.isEnabled ? .enabled : .disabled,
                 action: { animateOut(and: primary.action) },
                 title: primary.title
             )
+                .disabled(!primary.isEnabled)
         })
     }
     
@@ -147,10 +147,10 @@ struct _VDialog<Content>: View where Content: View {
             ForEach(0..<buttons.count, content: { i in
                 VPrimaryButton(
                     model: buttons[i].model.buttonSubModel,
-                    state: buttons[i].isEnabled ? .enabled : .disabled,
                     action: { animateOut(and: buttons[i].action) },
                     title: buttons[i].title
                 )
+                    .disabled(!buttons[i].isEnabled)
             })
         })
     }

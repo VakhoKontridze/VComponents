@@ -15,7 +15,7 @@ struct VSegmentedPickerDemoView: View {
     
     @State private var selection: ComponentRGBItem = .red
     @State private var state: VSegmentedPickerState = .enabled
-    @State private var contentType: ComponentContentType = .text
+    @State private var contentType: VSegmentedPickerContent = .title
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var hasDisabledRow: Bool = false
@@ -45,14 +45,13 @@ struct VSegmentedPickerDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settingsSections: settings)
-        })
+        DemoView(component: component, settingsSections: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
     @ViewBuilder private func component() -> some View {
         switch contentType {
-        case .text:
+        case .title:
             VSegmentedPicker(
                 model: model,
                 state: state,
@@ -142,6 +141,18 @@ enum ComponentRGBItem: Int, VPickableTitledItem {
         }()
         
         return DemoIconContentView(color: color)
+    }
+}
+
+enum VSegmentedPickerContent: Int, VPickableTitledItem { // FIXME: Duplicate per file
+    case title
+    case custom
+    
+    var pickerTitle: String {
+        switch self {
+        case .title: return "Title"
+        case .custom: return "Custom"
+        }
     }
 }
 

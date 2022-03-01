@@ -2,6 +2,16 @@
 
 #### [2.0.0(17)]
 
+- Buttons have been reworked
+- `VChevronButton` has been removed
+- `VCloseButton` has been removed
+- `VTabNavigationView` has been removed
+- `VNavigationView` has been removed
+- `VBaseView` has been removed
+- `VSquareButton` font has been changed to FIXME
+- `VPlainButton` font has been changed to FIXME
+- `StateColors`'s and `StateOpacities`'s have been removed in favor of `GenericStateModel`'s
+- `VWebLink` has been renamed to `VLink`
 - `LayoutGroup`'s have been renamed to `EdgeInsets`'s
 
 #### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/download/1.6.0/VComponents.xcframework.zip) — *2022 01 07*

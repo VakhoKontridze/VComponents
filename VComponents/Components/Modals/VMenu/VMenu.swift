@@ -31,7 +31,7 @@ import SwiftUI
 ///                 ])
 ///             ])
 ///         ],
-///         title: "Lorem ipsum"
+///         title: "Lorem Ipsum"
 ///     )
 ///
 public struct VMenu<Label>: View where Label: View {
@@ -124,7 +124,7 @@ struct VMenu_Previews: PreviewProvider {
                     ])
                 ])
             ],
-            title: "Lorem ipsum"
+            title: "Lorem Ipsum"
         )
     }
 }

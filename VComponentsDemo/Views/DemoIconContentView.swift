@@ -9,7 +9,7 @@ import SwiftUI
 import VComponents
 
 // MARK: - Demo Icon Content View
-struct DemoIconContentView: View {
+struct DemoIconContentView: View { // FIXME: Remove
     // MARK: Properties
     private let dimension: CGFloat
     private let color: Color

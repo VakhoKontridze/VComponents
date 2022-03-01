@@ -13,55 +13,46 @@ struct VSquareButtonDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Square Button" }
     
-    @State private var state: VSquareButtonState = .enabled
-    @State private var contentType: ComponentContentType = .text
-    @State private var shapeType: SquareButtonShapeType = .init(dimension: VSquareButtonModel.Layout().dimension, radius: VSquareButtonModel.Layout().cornerRadius)
-    @State private var hitBoxType: ButtonComponentHitBoxType = .init(value: VSquareButtonModel.Layout().hitBox.horizontal)
-    @State private var borderType: ButtonComponentBorderType = .borderless
+    @State private var isEnabled: Bool = true
+    @State private var contentType: VSquareButtonContent = .title
+    @State private var shapeType: VSquareButtonShape = .init(dimension: VSquareButtonModel.Layout().dimension, radius: VSquareButtonModel.Layout().cornerRadius)
+    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VSquareButtonModel.Layout().hitBox.horizontal)
+    @State private var borderType: VPrimaryButtonBorder = .borderless
     
     private var model: VSquareButtonModel {
         let defaultModel: VSquareButtonModel = .init()
         
         var model: VSquareButtonModel = .init()
         
-        switch shapeType {
-        case .circular:
-            model.layout.cornerRadius = model.layout.dimension / 2
-            
-        case .rounded:
-            model.layout.cornerRadius = model.layout.cornerRadius == model.layout.dimension/2 ? 16 : model.layout.cornerRadius
-        }
+        model.layout.cornerRadius = {
+            switch shapeType {
+            case .circular: return model.layout.dimension / 2
+            case .rounded: return model.layout.cornerRadius == model.layout.dimension/2 ? 16 : model.layout.cornerRadius
+            }
+        }()
         
-        switch hitBoxType {
-        case .clipped:
-            model.layout.hitBox.horizontal = 0
-            model.layout.hitBox.vertical = 0
-            
-        case .extended:
-            model.layout.hitBox.horizontal = defaultModel.layout.hitBox.horizontal.isZero ? 5 : defaultModel.layout.hitBox.horizontal
-            model.layout.hitBox.vertical = defaultModel.layout.hitBox.vertical.isZero ? 5 : defaultModel.layout.hitBox.vertical
-        }
+        model.layout.hitBox.horizontal = {
+            switch hitBoxType {
+            case .clipped: return 0
+            case .extended: return defaultModel.layout.hitBox.horizontal == 0 ? 5 : defaultModel.layout.hitBox.horizontal
+            }
+        }()
+        model.layout.hitBox.vertical = model.layout.hitBox.horizontal
 
         if borderType == .bordered {
-            model.layout.borderWidth = 1
-            
-            model.colors.textContent = .init(
-                enabled: defaultModel.colors.background.enabled,
-                pressed: defaultModel.colors.background.pressed,
-                disabled: defaultModel.colors.background.disabled
-            )
+            model.layout.borderWidth = 2
             
             model.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
                 disabled: .init("PrimaryButtonBordered.Background.disabled")
             )
+
+            model.colors.border = defaultModel.colors.background
             
-            model.colors.border = .init(
-                enabled: defaultModel.colors.background.enabled,
-                pressed: defaultModel.colors.background.disabled,   // It's better this way
-                disabled: defaultModel.colors.background.disabled
-            )
+            model.colors.title = model.colors.icon
+            
+            model.colors.icon = defaultModel.colors.background
         }
 
         return model
@@ -69,20 +60,29 @@ struct VSquareButtonDemoView: View {
 
     // MARK: Body
     var body: some View {
-        VBaseView(title: Self.navBarTitle, content: {
-            DemoView(component: component, settings: settings)
-        })
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
     }
     
-    @ViewBuilder private func component() -> some View {
-        switch contentType {
-        case .text: VSquareButton(model: model, state: state, action: {}, title: buttonTitle)
-        case .custom: VSquareButton(model: model, state: state, action: {}, content: buttonContent)
-        }
+    private func component() -> some View {
+        Group(content: {
+            switch contentType {
+            case .title: VSquareButton(model: model, action: {}, title: buttonTitle)
+            case .icon: VSquareButton(model: model, action: {}, icon: buttonIcon)
+            case .custom: VSquareButton(model: model, action: {}, content: { buttonIcon })
+            }
+        })
+            .disabled(!isEnabled)
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, headerTitle: "State")
+        VSegmentedPicker(
+            selection: .init(
+                get: { VSquareButtonState(isEnabled: isEnabled) },
+                set: { isEnabled = $0 == .enabled }
+            ),
+            headerTitle: "State"
+        )
         
         VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         
@@ -91,32 +91,29 @@ struct VSquareButtonDemoView: View {
         VSegmentedPicker(selection: $borderType, headerTitle: "Border")
     }
     
+    private var buttonIcon: Image { .init(systemName: "swift") }
+    
     private var buttonTitle: String { "Lorem" }
-
-    private func buttonContent() -> some View {
-        let color: Color = {
-            switch borderType {
-            case .bordered: return VSquareButtonModel().colors.background.enabled
-            case .borderless: return ColorBook.primaryInverted
-            }
-        }()
-        
-        return DemoIconContentView(dimension: 20, color: color)
-    }
 }
 
 // MARK: - Helpers
-extension VSquareButtonState: VPickableTitledItem {
-    public var pickerTitle: String {
+private typealias VSquareButtonState = VSecondaryButtonState
+
+enum VSquareButtonContent: Int, VPickableTitledItem {
+    case title
+    case icon
+    case custom
+    
+    var pickerTitle: String {
         switch self {
-        case .enabled: return "Enabled"
-        case .disabled: return "Disabled"
-        @unknown default: fatalError()
+        case .title: return "Title"
+        case .icon: return "Icon"
+        case .custom: return "Custom"
         }
     }
 }
 
-private enum SquareButtonShapeType: Int, VPickableTitledItem {
+private enum VSquareButtonShape: Int, VPickableTitledItem {
     case rounded
     case circular
     
