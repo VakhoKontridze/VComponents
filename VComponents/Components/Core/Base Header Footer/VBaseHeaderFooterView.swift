@@ -21,7 +21,7 @@ import SwiftUI
 ///         )
 ///     }
 ///
-public struct VBaseHeaderFooter: View {
+public struct VBaseHeaderFooter: View { // FIXME: Remove
     // MARK: Proeprties
     private let frameType: VBaseHeaderFooterFrameType
     private let textType: VTextType = .oneLine
