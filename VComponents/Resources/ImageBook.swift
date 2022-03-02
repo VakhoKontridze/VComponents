@@ -15,7 +15,7 @@ struct ImageBook {
     
     static var chevronUp: Image { .init(componentAsset: "Chevron.Up").renderingMode(.template) }
     
-    static var minus: Image { .init(componentAsset: "Minus".renderingMode(.template)) }
+    static var minus: Image { .init(componentAsset: "Minus").renderingMode(.template) }
     static var plus: Image { .init(componentAsset: "Plus").renderingMode(.template) }
     
     static var search: Image { .init(componentAsset: "Search").renderingMode(.template) }
