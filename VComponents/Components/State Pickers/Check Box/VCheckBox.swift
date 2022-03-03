@@ -113,41 +113,44 @@ public struct VCheckBox<Content>: View where Content: View {
     }
 
     // MARK: Body
-    @ViewBuilder public var body: some View {
-        switch content {
-        case .empty:
-            checkBox
-            
-        case .title(let title):
-            HStack(spacing: 0, content: {
+    public var body: some View {
+        Group(content: {
+            switch content {
+            case .empty:
                 checkBox
                 
-                spacer
+            case .title(let title):
+                HStack(spacing: 0, content: {
+                    checkBox
+                    
+                    spacer
 
-                VBaseButton(gesture: gestureHandler, content: {
-                    VText(
-                        type: .multiLine(alignment: .leading, limit: nil),
-                        color: model.colors.title.for(internalState),
-                        font: model.fonts.title,
-                        title: title
-                    )
+                    VBaseButton(gesture: gestureHandler, content: {
+                        VText(
+                            type: .multiLine(alignment: .leading, limit: nil),
+                            color: model.colors.title.for(internalState),
+                            font: model.fonts.title,
+                            title: title
+                        )
+                    })
+                        .disabled(!contentIsEnabled)
                 })
-                    .disabled(!contentIsEnabled)
-            })
-            
-        case .content(let content):
-            HStack(spacing: 0, content: {
-                checkBox
                 
-                spacer
-                
-                VBaseButton(gesture: gestureHandler, content: {
-                    content()
-                        .opacity(model.colors.customContentOpacities.for(internalState))
+            case .content(let content):
+                HStack(spacing: 0, content: {
+                    checkBox
+                    
+                    spacer
+                    
+                    VBaseButton(gesture: gestureHandler, content: {
+                        content()
+                            .opacity(model.colors.customContentOpacities.for(internalState))
+                    })
+                        .disabled(!contentIsEnabled)
                 })
-                    .disabled(!contentIsEnabled)
-            })
-        }
+            }
+        })
+            .animation(model.animations.stateChange, value: internalState)
     }
     
     private var checkBox: some View {
@@ -184,10 +187,8 @@ public struct VCheckBox<Content>: View where Content: View {
 
     // MARK: Actions
     private func gestureHandler(gestureState: VBaseButtonGestureState) {
-        withAnimation(model.animations.stateChange, {
-            isPressed = gestureState.isPressed
-            if gestureState.isClicked { state.setNextState() }
-        })
+        isPressed = gestureState.isPressed
+        if gestureState.isClicked { state.setNextState() }
     }
 
     // MARK: Icon

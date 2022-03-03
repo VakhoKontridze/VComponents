@@ -115,41 +115,44 @@ public struct VToggle<Content>: View where Content: View {
     }
 
     // MARK: Body
-    @ViewBuilder public var body: some View {
-        switch content {
-        case .empty:
-            toggle
-            
-        case .title(let title):
-            HStack(spacing: 0, content: {
+    public var body: some View {
+        Group(content: {
+            switch content {
+            case .empty:
                 toggle
                 
-                spacer
+            case .title(let title):
+                HStack(spacing: 0, content: {
+                    toggle
+                    
+                    spacer
 
-                VBaseButton(gesture: gestureHandler, content: {
-                    VText(
-                        type: .multiLine(alignment: .leading, limit: nil),
-                        color: model.colors.title.for(internalState),
-                        font: model.fonts.title,
-                        title: title
-                    )
+                    VBaseButton(gesture: gestureHandler, content: {
+                        VText(
+                            type: .multiLine(alignment: .leading, limit: nil),
+                            color: model.colors.title.for(internalState),
+                            font: model.fonts.title,
+                            title: title
+                        )
+                    })
+                        .disabled(!contentIsEnabled)
                 })
-                    .disabled(!contentIsEnabled)
-            })
-            
-        case .content(let content):
-            HStack(spacing: 0, content: {
-                toggle
                 
-                spacer
-                
-                VBaseButton(gesture: gestureHandler, content: {
-                    content()
-                        .opacity(model.colors.customContentOpacities.for(internalState))
+            case .content(let content):
+                HStack(spacing: 0, content: {
+                    toggle
+                    
+                    spacer
+                    
+                    VBaseButton(gesture: gestureHandler, content: {
+                        content()
+                            .opacity(model.colors.customContentOpacities.for(internalState))
+                    })
+                        .disabled(!contentIsEnabled)
                 })
-                    .disabled(!contentIsEnabled)
-            })
-        }
+            }
+        })
+            .animation(model.animations.stateChange, value: state)
     }
     
     private var toggle: some View {
@@ -180,10 +183,8 @@ public struct VToggle<Content>: View where Content: View {
 
     // MARK: Actions
     private func gestureHandler(gestureState: VBaseButtonGestureState) {
-        withAnimation(model.animations.stateChange, {
-            isPressed = gestureState.isPressed
-            if gestureState.isClicked { state.setNextState() }
-        })
+        isPressed = gestureState.isPressed
+        if gestureState.isClicked { state.setNextState() }
     }
 
     // MARK: Thumb Position
