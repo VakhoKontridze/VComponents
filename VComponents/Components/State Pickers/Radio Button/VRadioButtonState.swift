@@ -40,7 +40,7 @@ public enum VRadioButtonState: Int, CaseIterable {
     public mutating func setNextState() {
         switch self {
         case .off: self = .on
-        case .on: self = .off
+        case .on: break
         }
     }
 }
