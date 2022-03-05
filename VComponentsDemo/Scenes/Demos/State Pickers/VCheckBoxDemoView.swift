@@ -81,7 +81,7 @@ struct VCheckBoxDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VCheckBoxState: Int, VPickableTitledItem {
+private enum _VCheckBoxState: Int, PickableTitledEnumeration {
     case off
     case on
     case indeterminate

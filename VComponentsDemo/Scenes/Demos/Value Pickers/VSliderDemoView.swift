@@ -153,7 +153,7 @@ struct VSliderDemoView: View {
 }
 
 // MARK: - Helpers
-extension VSliderState: VPickableTitledItem {
+extension VSliderState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
@@ -163,7 +163,7 @@ extension VSliderState: VPickableTitledItem {
     }
 }
 
-private enum SliderThumbType: Int, VPickableTitledItem {
+private enum SliderThumbType: Int, PickableTitledEnumeration {
     case standard
     case bordered
     case none

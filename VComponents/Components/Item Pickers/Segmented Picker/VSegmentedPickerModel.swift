@@ -79,18 +79,10 @@ public struct VSegmentedPickerModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacities
-        public var content: StateOpacities = .init(
-            pressedOpacity: 0.5,
-            disabledOpacity: 0.5
-        )
-        
-        /// Text content colors.
-        ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .init(
-            enabled: ColorBook.primary,
-            disabled: ColorBook.primary
+        /// Background colors.
+        public var background: StateColors = .init(
+            enabled: .init(componentAsset: "SegmentedPicker.Background.enabled"),
+            disabled: toggleReference.colors.fill.disabled
         )
         
         /// Selection indicator colors.
@@ -105,10 +97,28 @@ public struct VSegmentedPickerModel {
             disabled: sliderReference.colors.thumbShadow.disabled
         )
         
-        /// Background colors.
-        public var background: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Background.enabled"),
-            disabled: toggleReference.colors.fill.disabled
+        /// Title colors.
+        ///
+        /// Only applicable when using init with title.
+        public var title: RowStateColors = .init(
+            enabled: ColorBook.primary,
+            pressed: ColorBook.secondary,
+            disabled: ColorBook.secondary
+        )
+        
+        /// Custom content opacities.
+        ///
+        /// Applicable only when init with content is used.
+        public var customContentOpacities: RowStateOpacities = .init(
+            enabled: 1,
+            pressed: 0.5,
+            disabled: 0.5
+        )
+        
+        /// Row divider colors.
+        public var divider: StateColors = .init(
+            enabled: .init(componentAsset: "SegmentedPicker.Divider.enabled"),
+            disabled: .init(componentAsset: "SegmentedPicker.Divider.disabled")
         )
         
         /// Header colors.
@@ -123,23 +133,20 @@ public struct VSegmentedPickerModel {
             disabled: ColorBook.secondary
         )
         
-        /// Row divider colors.
-        public var divider: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Divider.enabled"),
-            disabled: .init(componentAsset: "SegmentedPicker.Divider.disabled")
-        )
-        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_ED
+        public typealias StateColors = GenericStateModel_ED<Color>
+        
+        /// Sub-model containing colors for component states.
+        public typealias RowStateColors = GenericStateModel_EPD<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_PD
+        public typealias RowStateOpacities = GenericStateModel_EPD<CGFloat>
     }
 
     // MARK: Fonts

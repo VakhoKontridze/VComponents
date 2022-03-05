@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Menu Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a menu.
 ///
-/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`.
+/// Component can be initialized with data, row titles, `PickableEnumeration`, or `PickableTitledItem`.
 ///
 /// Component can be initialized with content or title.
 ///
@@ -22,7 +22,7 @@ import SwiftUI
 ///
 /// Usage example:
 ///
-///     enum PickerRow: Int, VPickableItem {
+///     enum PickerRow: Int, PickableEnumeration {
 ///         case red, green, blue
 ///
 ///         var pickerTitle: String {
@@ -185,43 +185,43 @@ public struct VMenuPicker<Label, Data>: View
     }
     
     // MARK: Initializers - Pickable Item and Preset
-    /// Initializes component with preset, `VPickableItem`, content, and row content.
-    public init<Item>(
+    /// Initializes component with preset, `PickableEnumeration`, content, and row content.
+    public init<PickableItem>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         state: VMenuPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         @ViewBuilder label: @escaping () -> Label,
-        rowContent: @escaping (Item) -> VMenuPickerRow
+        rowContent: @escaping (PickableItem) -> VMenuPickerRow
     )
         where
-            Data == Array<Item>,
-            Item: VPickableItem
+            Data == Array<PickableItem>,
+            PickableItem: PickableEnumeration
     {
         self.init(
             preset: menuPickerButtonPreset,
             state: state,
             selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
+                get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+                set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
             ),
             label: label,
-            data: .init(Item.allCases),
+            data: .init(PickableItem.allCases),
             rowContent: rowContent
         )
     }
     
-    /// Initializes component with preset, `VPickableItem`, title, and row content.
-    public init<Item>(
+    /// Initializes component with preset, `PickableEnumeration`, title, and row content.
+    public init<PickableItem>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         state: VMenuPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         title: String,
-        rowContent: @escaping (Item) -> VMenuPickerRow
+        rowContent: @escaping (PickableItem) -> VMenuPickerRow
     )
         where
             Label == VText,
-            Data == Array<Item>,
-            Item: VPickableItem
+            Data == Array<PickableItem>,
+            PickableItem: PickableEnumeration
     {
         self.init(
             preset: menuPickerButtonPreset,
@@ -233,98 +233,98 @@ public struct VMenuPicker<Label, Data>: View
     }
     
     // MARK: Initializers - Pickable Item and Custom
-    /// Initializes component with `VPickableItem`, content, and row content.
-    public init<Item>(
+    /// Initializes component with `PickableEnumeration`, content, and row content.
+    public init<PickableItem>(
         state: VMenuPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         @ViewBuilder label: @escaping () -> Label,
-        rowContent: @escaping (Item) -> VMenuPickerRow
+        rowContent: @escaping (PickableItem) -> VMenuPickerRow
     )
         where
-            Data == Array<Item>,
-            Item: VPickableItem
+            Data == Array<PickableItem>,
+            PickableItem: PickableEnumeration
     {
         self.init(
             state: state,
             selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
+                get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+                set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
             ),
             label: label,
-            data: .init(Item.allCases),
+            data: .init(PickableItem.allCases),
             rowContent: rowContent
         )
     }
     
     // MARK: Initializers - Pickable Titled Item and Preset
-    /// Initializes component with preset, `VPickableTitledItem` and content.
-    public init<Item>(
+    /// Initializes component with preset, `PickableTitledItem` and content.
+    public init<PickableItem>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         state: VMenuPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         @ViewBuilder label: @escaping () -> Label
     )
         where
-            Data == Array<Item>,
-            Item: VPickableTitledItem
+            Data == Array<PickableItem>,
+            PickableItem: PickableTitledEnumeration
     {
         self.init(
             preset: menuPickerButtonPreset,
             state: state,
             selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
+                get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+                set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
             ),
             label: label,
-            data: .init(Item.allCases),
+            data: .init(PickableItem.allCases),
             rowContent: { item in .titled(title: item.pickerTitle) }
         )
     }
     
-    /// Initializes component with preset, `VPickableTitledItem` and title.
-    public init<Item>(
+    /// Initializes component with preset, `PickableTitledItem` and title.
+    public init<PickableItem>(
         preset menuPickerButtonPreset: VMenuPickerButtonPreset,
         state: VMenuPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         title: String
     )
         where
             Label == VText,
-            Data == Array<Item>,
-            Item: VPickableTitledItem
+            Data == Array<PickableItem>,
+            PickableItem: PickableTitledEnumeration
     {
         self.init(
             preset: menuPickerButtonPreset,
             state: state,
             selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
+                get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+                set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
             ),
             label: { menuPickerButtonPreset.text(from: title, isEnabled: state.isEnabled) },
-            data: .init(Item.allCases),
+            data: .init(PickableItem.allCases),
             rowContent: { item in .titled(title: item.pickerTitle) }
         )
     }
     
     // MARK: Initializers - Pickable Titled Item and Custom
-    /// Initializes component with `VPickableTitledItem` and content.
-    public init<Item>(
+    /// Initializes component with `PickableTitledItem` and content.
+    public init<PickableItem>(
         state: VMenuPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         @ViewBuilder label: @escaping () -> Label
     )
         where
-            Data == Array<Item>,
-            Item: VPickableTitledItem
+            Data == Array<PickableItem>,
+            PickableItem: PickableTitledEnumeration
     {
         self.init(
             state: state,
             selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
+                get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+                set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
             ),
             label: label,
-            data: .init(Item.allCases),
+            data: .init(PickableItem.allCases),
             rowContent: { item in .titled(title: item.pickerTitle) }
         )
     }
@@ -370,14 +370,14 @@ public struct VMenuPicker<Label, Data>: View
 }
 
 // MARK: - Preview
-struct VMenuPicker_Previews: PreviewProvider {
-    @State private static var selection: VSegmentedPicker_Previews.PickerRow = .red
-    
-    static var previews: some View {
-        VMenuPicker(
-            preset: .secondary(),
-            selection: $selection,
-            title: "Lorem Ipsum"
-        )
-    }
-}
+//struct VMenuPicker_Previews: PreviewProvider { // FIXME: Resolve
+//    @State private static var selection: VSegmentedPicker_Previews.PickerRow = .red
+//
+//    static var previews: some View {
+//        VMenuPicker(
+//            preset: .secondary(),
+//            selection: $selection,
+//            title: "Lorem Ipsum"
+//        )
+//    }
+//}

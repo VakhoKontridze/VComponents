@@ -38,7 +38,7 @@ struct VStepperDemoView: View {
 }
 
 // MARK: - Helpers
-extension VStepperState: VPickableTitledItem {
+extension VStepperState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"

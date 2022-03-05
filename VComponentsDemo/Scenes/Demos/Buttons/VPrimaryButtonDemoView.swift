@@ -85,7 +85,7 @@ struct VPrimaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPrimaryButtonState: Int, VPickableTitledItem {
+private enum VPrimaryButtonState: Int, PickableTitledEnumeration {
     case enabled
     case disabled
     case loading
@@ -107,7 +107,7 @@ private enum VPrimaryButtonState: Int, VPickableTitledItem {
     }
 }
 
-enum VPrimaryButtonContent: Int, VPickableTitledItem {
+enum VPrimaryButtonContent: Int, PickableTitledEnumeration {
     case title
     case iconTitle
     case custom
@@ -121,7 +121,7 @@ enum VPrimaryButtonContent: Int, VPickableTitledItem {
     }
 }
 
-enum VPrimaryButtonBorder: Int, VPickableTitledItem {
+enum VPrimaryButtonBorder: Int, PickableTitledEnumeration {
     case borderless
     case bordered
     

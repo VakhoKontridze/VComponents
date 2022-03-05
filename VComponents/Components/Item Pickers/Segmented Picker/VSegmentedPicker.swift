@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally.
 ///
-/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`.
+/// Component can be initialized with data or row titles.
 ///
 /// Best suited for `2` – `3` items.
 ///
@@ -18,7 +18,7 @@ import SwiftUI
 ///
 /// Usage example:
 ///
-///     enum PickerRow: Int, VPickableTitledItem {
+///     enum PickerRow: Int, PickableTitledEnumeration {
 ///         case red, green, blue
 ///
 ///         var pickerTitle: String {
@@ -49,160 +49,202 @@ public struct VSegmentedPicker<Data, RowContent>: View
     // MARK: Properties
     private let model: VSegmentedPickerModel
     
-    private let state: VSegmentedPickerState
+    @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var pressedIndex: Int?
-    private func rowState(for index: Int) -> VSegmentedPickerRowState { .init(
-        isEnabled: state.isEnabled && !disabledIndexes.contains(index),
-        isPressed: pressedIndex == index
-    ) }
+    private var internalState: VSegmentedPickerInternalState { .init(isEnabled: isEnabled) }
+    private func rowState(for index: Int) -> VSegmentedPickerRowInternalState {
+        .init(
+            isEnabled: internalState.isEnabled && !disabledIndexes.contains(index),
+            isPressed: pressedIndex == index
+        )
+    }
     
     @Binding private var selectedIndex: Int
-    @State private var animatableSelectedIndex: Int?
     
     private let headerTitle: String?
     private let footerTitle: String?
     private let disabledIndexes: Set<Int>
     
-    private let data: Data
-    private let rowContent: (Data.Element) -> RowContent
+    private let content: VSegmentedPickerContent<Data, RowContent>
     
     @State private var rowWidth: CGFloat = .zero
     
-    // MARK: Initializers - View Builder
-    /// Initializes component with selected index, header, footer, data, and row content.
+    // MARK: Initializers - Index
+    /// Initializes component with selected index, data, and row content.
     public init(
         model: VSegmentedPickerModel = .init(),
-        state: VSegmentedPickerState = .enabled,
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        disabledIndexes: Set<Int> = .init(),
+        disabledIndexes: Set<Int> = [],
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     ) {
         self.model = model
-        self.state = state
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.data = data
-        self.rowContent = rowContent
+        self.content = .contents(data: data, rowContent: rowContent)
     }
 
-    // MARK: Initializers - Row Titles
-    /// Initializes component with selected index, header, footer, and row titles.
+    /// Initializes component with selected index and row titles.
     public init(
         model: VSegmentedPickerModel = .init(),
-        state: VSegmentedPickerState = .enabled,
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        disabledIndexes: Set<Int> = .init(),
+        disabledIndexes: Set<Int> = [],
         rowTitles: [String]
     )
         where
-            Data == Array<String>,
-            RowContent == VText
+            Data == [Never],
+            RowContent == Never
     {
-        self.init(
-            model: model,
-            state: state,
-            selectedIndex: selectedIndex,
-            headerTitle: headerTitle,
-            footerTitle: footerTitle,
-            disabledIndexes: disabledIndexes,
-            data: rowTitles,
-            rowContent: { title in
-                VText(
-                    color: model.colors.textContent.for(state),
-                    font: model.fonts.rows,
-                    title: title
-                )
-            }
-        )
-    }
-
-    // MARK: Initializers - Pickable Item
-    /// Initializes component with `VPickableItem`, header, footer, and row content.
-    public init<Item>(
-        model: VSegmentedPickerModel = .init(),
-        state: VSegmentedPickerState = .enabled,
-        selection: Binding<Item>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        disabledItems: Set<Item> = .init(),
-        @ViewBuilder rowContent: @escaping (Item) -> RowContent
-    )
-        where
-            Data == Array<Item>,
-            Item: VPickableItem
-    {
-        self.init(
-            model: model,
-            state: state,
-            selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
-            ),
-            headerTitle: headerTitle,
-            footerTitle: footerTitle,
-            disabledIndexes: .init(disabledItems.map { $0.rawValue }),
-            data: .init(Item.allCases),
-            rowContent: rowContent
-        )
-    }
-
-    // MARK: Initializers - Pickable Titled Item
-    /// Initializes component with `VPickableTitledItem`, header, and footer.
-    public init<Item>(
-        model: VSegmentedPickerModel = .init(),
-        state: VSegmentedPickerState = .enabled,
-        selection: Binding<Item>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        disabledItems: Set<Item> = .init()
-    )
-        where
-            Data == Array<Item>,
-            RowContent == VText,
-            Item: VPickableTitledItem
-    {
-        self.init(
-            model: model,
-            state: state,
-            selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
-            ),
-            headerTitle: headerTitle,
-            footerTitle: footerTitle,
-            disabledIndexes: .init(disabledItems.map { $0.rawValue }),
-            data: .init(Item.allCases),
-            rowContent: { item in
-                VText(
-                    color: model.colors.textContent.for(state),
-                    font: model.fonts.rows,
-                    title: item.pickerTitle
-                )
-            }
-        )
-    }
-
-    // MARK: Body
-    public var body: some View {
-        syncInternalStateWithState()
-        
-        return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
-            headerView
-            pickerView
-            footerView
-        })
+        self.model = model
+        self._selectedIndex = selectedIndex
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.disabledIndexes = disabledIndexes
+        self.content = .titles(titles: rowTitles)
     }
     
-    private var pickerView: some View {
+    // MARK: Initializers - Hashable
+    /// Initializes component with selection value, data, and row content.
+    public init<SelectionValue>(
+        model: VSegmentedPickerModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledIndexes: Set<Int> = [],
+        data: Data,
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+    )
+        where
+            Data == [SelectionValue],
+            SelectionValue: Hashable
+    {
+        self.model = model
+        self._selectedIndex = .init(
+            get: { data.firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = data[$0] }
+        )
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.disabledIndexes = disabledIndexes
+        self.content = .contents(data: data, rowContent: rowContent)
+    }
+    
+    /// Initializes component with selection value and row titles.
+    public init(
+        model: VSegmentedPickerModel = .init(),
+        selection: Binding<String>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledIndexes: Set<Int> = [],
+        rowTitles: [String]
+    )
+        where
+            Data == [Never],
+            RowContent == Never
+    {
+        self.model = model
+        self._selectedIndex = .init(
+            get: { rowTitles.firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = rowTitles[$0] }
+        )
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.disabledIndexes = disabledIndexes
+        self.content = .titles(titles: rowTitles)
+    }
+    
+    // MARK: Initializers - Pickable Enumeration & Pickable Titled Enumeration
+    /// Initializes component with `PickableEnumeration` and row content.
+    public init<PickableItem>(
+        model: VSegmentedPickerModel = .init(),
+        selection: Binding<PickableItem>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledIndexes: Set<Int> = [],
+        @ViewBuilder rowContent: @escaping (PickableItem) -> RowContent
+    )
+        where
+            Data == [PickableItem],
+            PickableItem: PickableEnumeration
+    {
+        self.model = model
+        self._selectedIndex = .init(
+            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+        )
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.disabledIndexes = disabledIndexes
+        self.content = .contents(data: Array(PickableItem.allCases), rowContent: rowContent)
+    }
+    
+    /// Initializes component with `PickableTitledEnumeration`.
+    public init<PickableItem>(
+        model: VSegmentedPickerModel = .init(),
+        selection: Binding<PickableItem>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledIndexes: Set<Int> = []
+    )
+        where
+            Data == [Never],
+            RowContent == Never,
+            PickableItem: PickableTitledEnumeration
+    {
+        self.model = model
+        self._selectedIndex = .init(
+            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+        )
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.disabledIndexes = disabledIndexes
+        self.content = .titles(titles: Array(PickableItem.allCases).map { $0.pickerTitle })
+    }
+    
+    // MARK: Body
+    public var body: some View {
+        VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
+            header
+            picker
+            footer
+        })
+            .animation(model.animations.selection, value: internalState)
+            .animation(model.animations.selection, value: selectedIndex)
+    }
+    
+    @ViewBuilder private var header: some View {
+        if let headerTitle = headerTitle, !headerTitle.isEmpty {
+            VText(
+                color: model.colors.header.for(internalState),
+                font: model.fonts.header,
+                title: headerTitle
+            )
+                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
+        }
+    }
+    
+    @ViewBuilder private var footer: some View {
+        if let footerTitle = footerTitle, !footerTitle.isEmpty {
+            VText(
+                type: .multiLine(alignment: .leading, limit: nil),
+                color: model.colors.footer.for(internalState),
+                font: model.fonts.footer,
+                title: footerTitle
+            )
+                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
+        }
+    }
+    
+    private var picker: some View {
         ZStack(alignment: .leading, content: {
-            background
+            pickerBackground
             indicator
             rows
             dividers
@@ -211,33 +253,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
             .cornerRadius(model.layout.cornerRadius)
     }
     
-    @ViewBuilder private var headerView: some View {
-        if let headerTitle = headerTitle, !headerTitle.isEmpty {
-            VText(
-                color: model.colors.header.for(state),
-                font: model.fonts.header,
-                title: headerTitle
-            )
-                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
-                .opacity(model.colors.content.for(state))
-        }
-    }
-    
-    @ViewBuilder private var footerView: some View {
-        if let footerTitle = footerTitle, !footerTitle.isEmpty {
-            VText(
-                type: .multiLine(alignment: .leading, limit: nil),
-                color: model.colors.footer.for(state),
-                font: model.fonts.footer,
-                title: footerTitle
-            )
-                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
-                .opacity(model.colors.content.for(state))
-        }
-    }
-    
-    private var background: some View {
-        model.colors.background.for(state)
+    private var pickerBackground: some View {
+        model.colors.background.for(internalState)
     }
     
     private var indicator: some View {
@@ -245,66 +262,80 @@ public struct VSegmentedPicker<Data, RowContent>: View
             .padding(model.layout.indicatorMargin)
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale)
-            .offset(x: rowWidth * .init(animatableSelectedIndex ?? selectedIndex))
-            .foregroundColor(model.colors.indicator.for(state))
+            .offset(x: rowWidth * .init(selectedIndex))
+            .foregroundColor(model.colors.indicator.for(internalState))
             .shadow(
-                color: model.colors.indicatorShadow.for(state),
+                color: model.colors.indicatorShadow.for(internalState),
                 radius: model.layout.indicatorShadowRadius,
                 y: model.layout.indicatorShadowOffsetY
             )
     }
     
-    private var rows: some View {
-        HStack(spacing: 0, content: {
-            ForEach(0..<data.count, content: { i in
-                VBaseButton(
-                    gesture: { gestureState in
-                        pressedIndex = gestureState.isPressed ? i : nil
-                        if gestureState.isClicked { setSelectedIndex(to: i) }
-                    },
-                    content: {
-                        rowContent(data[i])
-                            .padding(model.layout.actualRowContentMargin)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+    @ViewBuilder private var rows: some View {
+        switch content {
+        case .titles(let titles):
+            HStack(spacing: 0, content: {
+                ForEach(0..<titles.count, content: { i in
+                    VBaseButton(
+                        gesture: { gestureHandler(i: i, gestureState: $0) },
+                        content: {
+                            VText(
+                                color: model.colors.title.for(rowState(for: i)),
+                                font: model.fonts.rows,
+                                title: titles[i]
+                            )
+                                .padding(model.layout.actualRowContentMargin)
+                                .frame(maxWidth: .infinity)
 
-                            .opacity(contentOpacity(for: i))
+                                .opacity(model.colors.customContentOpacities.for(rowState(for: i)))
 
-                            .readSize(onChange: { rowWidth = $0.width })
-                    }
-                )
-                    .disabled(!state.isEnabled || disabledIndexes.contains(i))
+                                .readSize(onChange: { rowWidth = $0.width })
+                        }
+                    )
+                        .disabled(!internalState.isEnabled || disabledIndexes.contains(i))
+                })
             })
-        })
+            
+        case .contents(let data, let rowContent):
+            HStack(spacing: 0, content: {
+                ForEach(0..<data.count, content: { i in
+                    VBaseButton(
+                        gesture: { gestureHandler(i: i, gestureState: $0) },
+                        content: {
+                            rowContent(data[i])
+                                .padding(model.layout.actualRowContentMargin)
+                                .frame(maxWidth: .infinity)
+
+                                .opacity(model.colors.customContentOpacities.for(rowState(for: i)))
+
+                                .readSize(onChange: { rowWidth = $0.width })
+                        }
+                    )
+                        .disabled(!internalState.isEnabled || disabledIndexes.contains(i))
+                })
+            })
+        }
     }
     
     private var dividers: some View {
         HStack(spacing: 0, content: {
-            ForEach(0..<data.count, content: { i in
+            ForEach(0..<content.count, content: { i in
                 Spacer()
 
-                if i <= data.count-2 {
+                if i <= content.count-2 {
                     Rectangle()
                         .frame(size: model.layout.dividerSize)
-                        .foregroundColor(model.colors.divider.for(state))
+                        .foregroundColor(model.colors.divider.for(internalState))
                         .opacity(dividerOpacity(for: i))
                 }
             })
         })
     }
-
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if animatableSelectedIndex == nil || animatableSelectedIndex != selectedIndex {
-                withAnimation(model.animations.selection, { animatableSelectedIndex = selectedIndex })
-            }
-        })
-    }
-
+    
     // MARK: Actions
-    private func setSelectedIndex(to index: Int) {
-        withAnimation(model.animations.selection, { animatableSelectedIndex = index })
-        selectedIndex = index
+    private func gestureHandler(i: Int, gestureState: VBaseButtonGestureState) {
+        pressedIndex = gestureState.isPressed ? i : nil
+        if gestureState.isClicked { selectedIndex = i }
     }
 
     // MARK: State Indication
@@ -313,10 +344,6 @@ public struct VSegmentedPicker<Data, RowContent>: View
         case pressedIndex: return model.layout.indicatorPressedScale
         case _: return 1
         }
-    }
-    
-    private func contentOpacity(for index: Int) -> Double {
-        model.colors.content.for(rowState(for: index))
     }
     
     private func dividerOpacity(for index: Int) -> Double {
@@ -333,7 +360,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
 struct VSegmentedPicker_Previews: PreviewProvider {
     @State private static var selection: PickerRow = .red
     
-    enum PickerRow: Int, VPickableTitledItem {
+    enum PickerRow: Int, PickableTitledEnumeration {
         case red, green, blue
     
         var pickerTitle: String {

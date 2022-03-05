@@ -72,7 +72,7 @@ struct VMenuDemoView: View {
 }
 
 // MARK: - Helpers
-extension VMenuState: VPickableTitledItem {
+extension VMenuState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
@@ -82,7 +82,7 @@ extension VMenuState: VPickableTitledItem {
     }
 }
 
-private enum VMenuButtonTypeHelper: Int, VPickableTitledItem {
+private enum VMenuButtonTypeHelper: Int, PickableTitledEnumeration {
     case primary
     case secondary
     case square

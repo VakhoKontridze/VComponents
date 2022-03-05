@@ -13,7 +13,7 @@ struct VWheelPickerDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Wheel Picker" }
     
-    @State private var selection: ComponentRGBItem = .green
+    @State private var selection: VSegmentedPickerDataSource = .green
     @State private var state: VWheelPickerState = .enabled
     @State private var contentType: VSegmentedPickerContent = .title
     @State private var hasHeader: Bool = true
@@ -79,7 +79,7 @@ struct VWheelPickerDemoView: View {
 }
 
 // MARK: - Helpers
-extension VWheelPickerState: VPickableTitledItem {
+extension VWheelPickerState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"

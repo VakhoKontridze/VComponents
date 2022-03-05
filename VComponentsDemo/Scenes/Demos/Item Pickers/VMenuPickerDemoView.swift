@@ -13,7 +13,7 @@ struct VMenuPickerDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Menu Picker" }
     
-    @State private var selection: ComponentRGBItem = .red
+    @State private var selection: VSegmentedPickerDataSource = .red
     @State private var state: VMenuPickerState = .enabled
     @State private var menuPickerButtonType: VMenuPickerButtonTypeHelper = .secondary
     @State private var contentType: VSegmentedPickerContent = .title
@@ -56,7 +56,7 @@ struct VMenuPickerDemoView: View {
         DemoViewSettingsSection(content: {
             VSegmentedPicker(selection: $state, headerTitle: "State")
         })
-        
+
         DemoViewSettingsSection(content: {
             VWheelPicker(
                 selection: $menuPickerButtonType,
@@ -65,12 +65,12 @@ struct VMenuPickerDemoView: View {
                 .onChange(of: menuPickerButtonType, perform: { type in
                     if type == .custom { contentType = .custom }
                 })
-            
-            VSegmentedPicker(
-                selection: $contentType,
-                headerTitle: "Content",
-                disabledItems: menuPickerButtonType == .custom ? [.title] : []
-            )
+
+//            VSegmentedPicker( // FIXME: Resolve
+//                selection: $contentType,
+//                headerTitle: "Content",
+//                disabledItems: menuPickerButtonType == .custom ? [.title] : []
+//            )
         })
     }
     
@@ -87,7 +87,7 @@ struct VMenuPickerDemoView: View {
 }
 
 // MARK: - Helpers
-extension VMenuPickerState: VPickableTitledItem {
+extension VMenuPickerState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
@@ -97,7 +97,7 @@ extension VMenuPickerState: VPickableTitledItem {
     }
 }
 
-private enum VMenuPickerButtonTypeHelper: Int, VPickableTitledItem {
+private enum VMenuPickerButtonTypeHelper: Int, PickableTitledEnumeration {
     case primary
     case secondary
     case square

@@ -94,7 +94,7 @@ struct VBaseTextFieldDemoView: View {
 }
 
 // MARK: - Helpers
-extension VBaseTextFieldState: VPickableTitledItem {
+extension VBaseTextFieldState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
@@ -105,7 +105,7 @@ extension VBaseTextFieldState: VPickableTitledItem {
     }
 }
 
-extension VTextFieldModel.Layout.TextAlignment: VPickableTitledItem {
+extension VTextFieldModel.Layout.TextAlignment: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .center: return "Center"
@@ -117,7 +117,7 @@ extension VTextFieldModel.Layout.TextAlignment: VPickableTitledItem {
     }
 }
 
-extension UITextSpellCheckingType: VPickableTitledItem {
+extension UITextSpellCheckingType: PickableTitledEnumeration {
     public static var allCases: [Self] = [.default, .no, .yes]
     
     public var pickerTitle: String {
@@ -130,7 +130,7 @@ extension UITextSpellCheckingType: VPickableTitledItem {
     }
 }
 
-extension UITextAutocorrectionType: VPickableTitledItem {
+extension UITextAutocorrectionType: PickableTitledEnumeration {
     public static var allCases: [Self] = [.default, .no, .yes]
     
     public var pickerTitle: String {
@@ -143,7 +143,7 @@ extension UITextAutocorrectionType: VPickableTitledItem {
     }
 }
 
-extension UITextAutocapitalizationType: VPickableTitledItem {
+extension UITextAutocapitalizationType: PickableTitledEnumeration {
     public static var allCases: [Self] = [.none, .sentences, .words, .allCharacters]
     
     public var pickerTitle: String {

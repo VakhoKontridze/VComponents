@@ -63,7 +63,7 @@ struct VToastDemoView: View {
 }
 
 // MARK: - Helpers
-extension VToastModel.Layout.PresentationEdge: VPickableTitledItem {
+extension VToastModel.Layout.PresentationEdge: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .top: return "Top"
@@ -73,7 +73,7 @@ extension VToastModel.Layout.PresentationEdge: VPickableTitledItem {
     }
 }
 
-private enum VToastTypeHelper: Int, VPickableTitledItem {
+private enum VToastTypeHelper: Int, PickableTitledEnumeration {
     case oneLine
     case multiLine
     

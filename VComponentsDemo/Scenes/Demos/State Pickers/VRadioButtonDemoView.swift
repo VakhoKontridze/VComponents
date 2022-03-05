@@ -79,7 +79,7 @@ struct VRadioButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VRadioButtonState: Int, VPickableTitledItem {
+private enum _VRadioButtonState: Int, PickableTitledEnumeration {
     case off
     case on
     case disabled

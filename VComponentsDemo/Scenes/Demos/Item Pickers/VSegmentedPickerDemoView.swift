@@ -13,16 +13,14 @@ struct VSegmentedPickerDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Segmented Picker" }
     
-    @State private var selection: ComponentRGBItem = .red
-    @State private var state: VSegmentedPickerState = .enabled
+    @State private var selection: VSegmentedPickerDataSource = .red
+    @State private var isEnabled: Bool = true
     @State private var contentType: VSegmentedPickerContent = .title
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var hasDisabledRow: Bool = false
     @State private var selectionAnimation: Bool = VSegmentedPickerModel.Animations().selection != nil
-    @State private var loweredOpacityWhenPressed: Bool = VSegmentedPickerModel.Colors().content.pressedOpacity != 1
     @State private var resizeIndicatorWhenPressed: Bool = VSegmentedPickerModel.Layout().indicatorPressedScale != 1
-    @State private var loweredOpacityWhenDisabled: Bool = VSegmentedPickerModel.Colors().content.disabledOpacity != 1
 
     private var model: VSegmentedPickerModel {
         let defaultModel: VSegmentedPickerModel = .init()
@@ -31,14 +29,10 @@ struct VSegmentedPickerDemoView: View {
         
         model.animations.selection = selectionAnimation ? (defaultModel.animations.selection ?? .default) : nil
         
-        model.colors.content.pressedOpacity = loweredOpacityWhenPressed ? 0.5 : 1
-        
         model.layout.indicatorPressedScale =
             resizeIndicatorWhenPressed ?
             (model.layout.indicatorPressedScale == 1 ? 0.95 : model.layout.indicatorPressedScale) :
             1
-        
-        model.colors.content.disabledOpacity = loweredOpacityWhenDisabled ? 0.5 : 1
         
         return model
     }
@@ -49,34 +43,41 @@ struct VSegmentedPickerDemoView: View {
             .standardNavigationTitle(Self.navBarTitle)
     }
     
-    @ViewBuilder private func component() -> some View {
-        switch contentType {
-        case .title:
-            VSegmentedPicker(
-                model: model,
-                state: state,
-                selection: $selection,
-                headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
-                footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
-                disabledItems: hasDisabledRow ? [.green] : []
-            )
-        
-        case .custom:
-            VSegmentedPicker(
-                model: model,
-                state: state,
-                selection: $selection,
-                headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
-                footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
-                disabledItems: hasDisabledRow ? [.green] : [],
-                rowContent: { $0.pickerSymbol }
-            )
-        }
+    private func component() -> some View {
+        Group(content: {
+            switch contentType {
+            case .title:
+                VSegmentedPicker(
+                    model: model,
+                    selection: $selection,
+                    headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+                    footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+                    disabledIndexes: hasDisabledRow ? [1] : []
+                )
+            
+            case .custom:
+                VSegmentedPicker(
+                    model: model,
+                    selection: $selection,
+                    headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+                    footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+                    disabledIndexes: hasDisabledRow ? [1] : [],
+                    rowContent: { $0.pickerSymbol }
+                )
+            }
+        })
+            .disabled(!isEnabled)
     }
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, headerTitle: "State")
+            VSegmentedPicker(
+                selection: .init(
+                    get: { VSegmentedPickerState(isEnabled: isEnabled) },
+                    set: { isEnabled = $0 == .enabled }
+                ),
+                headerTitle: "State"
+            )
         })
         
         DemoViewSettingsSection(content: {
@@ -98,27 +99,27 @@ struct VSegmentedPickerDemoView: View {
         })
         
         DemoViewSettingsSection(content: {
-            ToggleSettingView(isOn: $loweredOpacityWhenPressed, title: "Low Pressed Opacity", description: "Content lowers opacity when pressed")
-            
             ToggleSettingView(isOn: $resizeIndicatorWhenPressed, title: "Resize Indicator", description: "Selection indicator resizes when pressed")
-
-            ToggleSettingView(isOn: $loweredOpacityWhenDisabled, title: "Low Disabled Opacity", description: "Content lowers opacity when disabled")
         })
     }
 }
 
 // MARK: - Helpers
-extension VSegmentedPickerState: VPickableTitledItem {
-    public var pickerTitle: String {
+private typealias VSegmentedPickerState = VSecondaryButtonState
+
+enum VSegmentedPickerContent: Int, PickableTitledEnumeration {
+    case title
+    case custom
+    
+    var pickerTitle: String {
         switch self {
-        case .enabled: return "Enabled"
-        case .disabled: return "Disabled"
-        @unknown default: fatalError()
+        case .title: return "Title"
+        case .custom: return "Custom"
         }
     }
 }
 
-enum ComponentRGBItem: Int, VPickableTitledItem {
+enum VSegmentedPickerDataSource: Int, PickableTitledEnumeration {
     case red
     case green
     case blue
@@ -141,18 +142,6 @@ enum ComponentRGBItem: Int, VPickableTitledItem {
         }()
         
         return DemoIconContentView(color: color)
-    }
-}
-
-enum VSegmentedPickerContent: Int, VPickableTitledItem { // FIXME: Duplicate per file
-    case title
-    case custom
-    
-    var pickerTitle: String {
-        switch self {
-        case .title: return "Title"
-        case .custom: return "Custom"
-        }
     }
 }
 

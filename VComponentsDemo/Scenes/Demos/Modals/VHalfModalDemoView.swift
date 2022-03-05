@@ -123,7 +123,7 @@ struct VHalfModalDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VModalHeightTypeHelper: Int, VPickableTitledItem {
+private enum VModalHeightTypeHelper: Int, PickableTitledEnumeration {
     case fixed
     case dynamic
     

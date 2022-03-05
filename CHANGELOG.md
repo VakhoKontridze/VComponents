@@ -3,15 +3,14 @@
 #### [2.0.0(17)]
 
 - Buttons have been reworked
-- `VChevronButton` has been removed
-- `VCloseButton` has been removed
-- `VTabNavigationView` has been removed
-- `VNavigationView` has been removed
+- Buttons—`VChevronButton` and `VCloseButton`—have been removed
+- Navigation components—`VTabNavigationView` and `VNavigationView`—have been removed
 - `VBaseView` has been removed
-- `VSquareButton` font has been changed to FIXME
-- `VPlainButton` font has been changed to FIXME
-- `StateColors`'s and `StateOpacities`'s have been removed in favor of `GenericStateModel`'s
+- `StateColors`'s and `StateOpacities`'s have been replaced with`GenericStateModel`'s
+- `VSquareButton` font has been changed to system bold size 15
+- `VPlainButton` font has been changed to system medium size 15
 - `VWebLink` has been renamed to `VLink`
+- `VPickableItem` has been renamed to `PickableEnumeration`
 - `LayoutGroup`'s have been renamed to `EdgeInsets`'s
 
 #### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/download/1.6.0/VComponents.xcframework.zip) — *2022 01 07*

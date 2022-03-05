@@ -12,6 +12,9 @@
 		173C1FD4272A7FFF00DF634F /* View.CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */; };
 		173C1FD6272A808500DF634F /* UINavigationBar.NavigationBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */; };
 		173C1FDB272A810A00DF634F /* View.ReadSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FDA272A810A00DF634F /* View.ReadSize.swift */; };
+		173D02E327D1050800F6A87D /* GenericStateAndModel_ED.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173D02E227D1050800F6A87D /* GenericStateAndModel_ED.swift */; };
+		173D02E527D1080600F6A87D /* VSegmentedPickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173D02E427D1080600F6A87D /* VSegmentedPickerState.swift */; };
+		173D02E727D10D0900F6A87D /* VSegmentedPickerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173D02E627D10D0900F6A87D /* VSegmentedPickerContent.swift */; };
 		17B23E7E27355AD300914FEB /* StateColors_EPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7D27355AD300914FEB /* StateColors_EPD.swift */; };
 		17B23E8027355AE700914FEB /* StateColors_EPLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7F27355AE700914FEB /* StateColors_EPLD.swift */; };
 		17B23E8227355AFA00914FEB /* StateColors_OOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8127355AFA00914FEB /* StateColors_OOD.swift */; };
@@ -97,7 +100,6 @@
 		7A3C159B258E0A3D00CE1D96 /* VLazyScrollViewModelVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C159A258E0A3D00CE1D96 /* VLazyScrollViewModelVertical.swift */; };
 		7A41A49225A73E6D000A6F80 /* VSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */; };
 		7A41A49525A759BD000A6F80 /* VSegmentedPickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */; };
-		7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */; };
 		7A41A49B25A76932000A6F80 /* VText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A41A49A25A76932000A6F80 /* VText.swift */; };
 		7A43A612259CAE130029E3C9 /* VDialogDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A43A611259CAE130029E3C9 /* VDialogDemoView.swift */; };
 		7A48FDC8258DE48E00AA4D4D /* VSquareButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */; };
@@ -232,7 +234,7 @@
 		7ADCCC7D25B7245300E99E1B /* DemoIconContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCCC7C25B7245300E99E1B /* DemoIconContentView.swift */; };
 		7ADCCC8025B724AB00E99E1B /* VBaseTextFieldDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ADCCC7F25B724AB00E99E1B /* VBaseTextFieldDemoView.swift */; };
 		7AE5C25825A893A5001B62B2 /* VSegmentedPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5C25725A893A5001B62B2 /* VSegmentedPickerDemoView.swift */; };
-		7AE5C25E25A8BC2E001B62B2 /* VPickableItems.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5C25D25A8BC2E001B62B2 /* VPickableItems.swift */; };
+		7AE5C25E25A8BC2E001B62B2 /* PickableEnumeration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5C25D25A8BC2E001B62B2 /* PickableEnumeration.swift */; };
 		7AE6078325926994009CDB28 /* DemoListRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6078225926994009CDB28 /* DemoListRowView.swift */; };
 		7AEE70AD25AB471C00239969 /* VBaseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE70AC25AB471C00239969 /* VBaseList.swift */; };
 		7AF3C8CE25AF4E5C00D56042 /* VModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF3C8CD25AF4E5C00D56042 /* VModal.swift */; };
@@ -274,6 +276,9 @@
 		173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CornerRadius.swift; sourceTree = "<group>"; };
 		173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.NavigationBarHeight.swift; sourceTree = "<group>"; };
 		173C1FDA272A810A00DF634F /* View.ReadSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.ReadSize.swift; sourceTree = "<group>"; };
+		173D02E227D1050800F6A87D /* GenericStateAndModel_ED.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_ED.swift; sourceTree = "<group>"; };
+		173D02E427D1080600F6A87D /* VSegmentedPickerState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerState.swift; sourceTree = "<group>"; };
+		173D02E627D10D0900F6A87D /* VSegmentedPickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerContent.swift; sourceTree = "<group>"; };
 		17B23E7D27355AD300914FEB /* StateColors_EPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPD.swift; sourceTree = "<group>"; };
 		17B23E7F27355AE700914FEB /* StateColors_EPLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPLD.swift; sourceTree = "<group>"; };
 		17B23E8127355AFA00914FEB /* StateColors_OOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_OOD.swift; sourceTree = "<group>"; };
@@ -360,7 +365,6 @@
 		7A3C159A258E0A3D00CE1D96 /* VLazyScrollViewModelVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyScrollViewModelVertical.swift; sourceTree = "<group>"; };
 		7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPicker.swift; sourceTree = "<group>"; };
 		7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerModel.swift; sourceTree = "<group>"; };
-		7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerState.swift; sourceTree = "<group>"; };
 		7A41A49A25A76932000A6F80 /* VText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VText.swift; sourceTree = "<group>"; };
 		7A43A611259CAE130029E3C9 /* VDialogDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VDialogDemoView.swift; sourceTree = "<group>"; };
 		7A48FDC4258DE48E00AA4D4D /* VSquareButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSquareButton.swift; sourceTree = "<group>"; };
@@ -497,7 +501,7 @@
 		7ADCCC7C25B7245300E99E1B /* DemoIconContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoIconContentView.swift; sourceTree = "<group>"; };
 		7ADCCC7F25B724AB00E99E1B /* VBaseTextFieldDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseTextFieldDemoView.swift; sourceTree = "<group>"; };
 		7AE5C25725A893A5001B62B2 /* VSegmentedPickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerDemoView.swift; sourceTree = "<group>"; };
-		7AE5C25D25A8BC2E001B62B2 /* VPickableItems.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VPickableItems.swift; sourceTree = "<group>"; };
+		7AE5C25D25A8BC2E001B62B2 /* PickableEnumeration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickableEnumeration.swift; sourceTree = "<group>"; };
 		7AE6078225926994009CDB28 /* DemoListRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoListRowView.swift; sourceTree = "<group>"; };
 		7AEE70AC25AB471C00239969 /* VBaseList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseList.swift; sourceTree = "<group>"; };
 		7AF3C8CD25AF4E5C00D56042 /* VModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModal.swift; sourceTree = "<group>"; };
@@ -572,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				7AA39B8325CD51D600FA30E5 /* State Colors and Opacities */,
+				173D02E227D1050800F6A87D /* GenericStateAndModel_ED.swift */,
 				17BE45E327CBAC8E00D69C3A /* GenericStateAndModel_EPD.swift */,
 				17BE45DF27CA85E200D69C3A /* GenericStateAndModel_EPDL.swift */,
 				17F5DF8127CE28AB00D75986 /* GenericStateAndModel_OOPD.swift */,
@@ -841,7 +846,8 @@
 			isa = PBXGroup;
 			children = (
 				7A41A49125A73E6D000A6F80 /* VSegmentedPicker.swift */,
-				7A41A49725A760A0000A6F80 /* VSegmentedPickerState.swift */,
+				173D02E427D1080600F6A87D /* VSegmentedPickerState.swift */,
+				173D02E627D10D0900F6A87D /* VSegmentedPickerContent.swift */,
 				7A41A49425A759BD000A6F80 /* VSegmentedPickerModel.swift */,
 			);
 			path = "Segmented Picker";
@@ -1472,7 +1478,7 @@
 				7A12716125BAF911002B0397 /* BasicAnimation.swift */,
 				7A6787D925CB291900734DA6 /* ComponentStateManager.swift */,
 				7A0BB67425B9CEF900E7FCA1 /* WindowOverlayView.swift */,
-				7AE5C25D25A8BC2E001B62B2 /* VPickableItems.swift */,
+				7AE5C25D25A8BC2E001B62B2 /* PickableEnumeration.swift */,
 				7A2F831425CFD63E0099BA69 /* DerivedButtonType.swift */,
 				7AC4E03E25AE1D2800CE2816 /* SliderHelpers.swift */,
 			);
@@ -1625,13 +1631,14 @@
 				7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */,
 				7A259B6E259784CF00A12F8C /* VDialogButton.swift in Sources */,
 				17B23E8A27355B6900914FEB /* StateColors_EFSEPD.swift in Sources */,
+				173D02E527D1080600F6A87D /* VSegmentedPickerState.swift in Sources */,
 				7A621834259494CB00515688 /* VLazyScrollViewVertical.swift in Sources */,
 				7AD8095A2594FF3D00DABE49 /* VSideBarModel.swift in Sources */,
 				7A2F830F25CFD5EF0099BA69 /* VLink.swift in Sources */,
 				7A036BA525D0442C00773302 /* _VToast.swift in Sources */,
 				7AC4E03B25AE067500CE2816 /* VRangeSlider.swift in Sources */,
 				7A00733F258E2F000003F0E9 /* VSliderState.swift in Sources */,
-				7AE5C25E25A8BC2E001B62B2 /* VPickableItems.swift in Sources */,
+				7AE5C25E25A8BC2E001B62B2 /* PickableEnumeration.swift in Sources */,
 				7A3C1555258DE7B900CE1D96 /* VSpinnerType.swift in Sources */,
 				7A0BB66A25B9CBAD00E7FCA1 /* VHalfModal.swift in Sources */,
 				7A8A972C258DDDA800309886 /* VPrimaryButtonState.swift in Sources */,
@@ -1689,6 +1696,7 @@
 				7A59577325AB509D00B5B6E7 /* VBaseListModel.swift in Sources */,
 				7ACC3EC625AC91A700EAD184 /* VAccordion.swift in Sources */,
 				7A0BB66725B9C7FD00E7FCA1 /* VHalfModalModel.swift in Sources */,
+				173D02E327D1050800F6A87D /* GenericStateAndModel_ED.swift in Sources */,
 				7A4D0C372594C0CE00108575 /* VSecondaryButtonState.swift in Sources */,
 				17BE45F227CBC64F00D69C3A /* VChevronButtonModel.swift in Sources */,
 				7A59577725AB546700B5B6E7 /* VList.swift in Sources */,
@@ -1770,7 +1778,7 @@
 				7AF3C8CE25AF4E5C00D56042 /* VModal.swift in Sources */,
 				17BE45E227CA8A6A00D69C3A /* CGSize.InitWithDimension.swift in Sources */,
 				7A0BB67525B9CEF900E7FCA1 /* WindowOverlayView.swift in Sources */,
-				7A41A49825A760A0000A6F80 /* VSegmentedPickerState.swift in Sources */,
+				173D02E727D10D0900F6A87D /* VSegmentedPickerContent.swift in Sources */,
 				7AC4E03825AE065F00CE2816 /* VRangeSliderState.swift in Sources */,
 				7A8A7467259118DF001024FB /* VSpinnerModelContinous.swift in Sources */,
 				7ACC3ECF25ACB1D900EAD184 /* VSectionListLayoutType.swift in Sources */,

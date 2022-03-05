@@ -55,7 +55,7 @@ struct VPageIndicatorDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPageIndicatorTypeHelper: Int, VPickableTitledItem {
+private enum VPageIndicatorTypeHelper: Int, PickableTitledEnumeration {
     case finite
     case infinite
     case auto

@@ -74,7 +74,7 @@ struct VDialogDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VDialogButtonsHelper: Int, VPickableTitledItem {
+private enum VDialogButtonsHelper: Int, PickableTitledEnumeration {
     case one
     case two
     case many

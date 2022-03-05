@@ -81,7 +81,7 @@ struct VAccordionDemoView: View {
 }
 
 // MARK: - Helpers
-extension VAccordionState: VPickableTitledItem {
+extension VAccordionState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .collapsed: return "Collapsed"

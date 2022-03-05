@@ -53,7 +53,7 @@ public struct VStepperModel {
     public struct Colors {
         // MARK: Properties
         /// Background colors.
-        public var background: StateColors = segmentedPickerReference.colors.background
+        public var background: StateColors = .clear // FIXME: Resolve //segmentedPickerReference.colors.background
         
         /// Plus and minus button background colors.
         public var buttonBackground: ButtonStateColors = .init(
@@ -72,7 +72,7 @@ public struct VStepperModel {
         )
         
         /// Plus and minus button divider colors.
-        public var divider: StateColors = segmentedPickerReference.colors.divider
+        public var divider: StateColors = .clear // FIXME: Resolve // = segmentedPickerReference.colors.divider
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

@@ -130,7 +130,7 @@ struct VTextFieldDemoView: View {
 }
 
 // MARK: - Helpers
-extension VTextFieldState: VPickableTitledItem {
+extension VTextFieldState: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
@@ -141,7 +141,7 @@ extension VTextFieldState: VPickableTitledItem {
     }
 }
 
-extension VTextFieldType: VPickableTitledItem {
+extension VTextFieldType: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .standard: return "Standard"
@@ -152,7 +152,7 @@ extension VTextFieldType: VPickableTitledItem {
     }
 }
 
-extension VTextFieldHighlight: VPickableTitledItem {
+extension VTextFieldHighlight: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .none: return "None"

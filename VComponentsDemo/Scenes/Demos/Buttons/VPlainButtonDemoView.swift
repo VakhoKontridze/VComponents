@@ -73,7 +73,7 @@ struct VPlainButtonDemoView: View {
 // MARK: - Helpers
 private typealias VPlainButtonState = VSecondaryButtonState
 
-private enum VPlainButtonContent: Int, VPickableTitledItem {
+private enum VPlainButtonContent: Int, PickableTitledEnumeration {
     case title
     case icon
     case iconTitle

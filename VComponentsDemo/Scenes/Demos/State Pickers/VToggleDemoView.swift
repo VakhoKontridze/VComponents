@@ -66,7 +66,7 @@ struct VToggleDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VToggleState: Int, VPickableTitledItem {
+private enum _VToggleState: Int, PickableTitledEnumeration {
     case off
     case on
     case disabled
@@ -97,7 +97,7 @@ private enum _VToggleState: Int, VPickableTitledItem {
     }
 }
 
-enum VToggleContent: Int, VPickableTitledItem {
+enum VToggleContent: Int, PickableTitledEnumeration {
     case empty
     case title
     case custom

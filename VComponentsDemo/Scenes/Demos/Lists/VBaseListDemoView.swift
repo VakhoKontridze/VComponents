@@ -57,7 +57,7 @@ struct VBaseListDemoView: View {
 }
 
 // MARK: - Helpers
-enum BaseListLayoutTypeHelper: Int, VPickableTitledItem {
+enum BaseListLayoutTypeHelper: Int, PickableTitledEnumeration {
     case fixed
     case flexible
     case constrained

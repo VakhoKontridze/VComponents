@@ -89,7 +89,7 @@ struct VSecondaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-enum VSecondaryButtonState: Int, VPickableTitledItem {
+enum VSecondaryButtonState: Int, PickableTitledEnumeration {
     case enabled
     case disabled
     
@@ -110,7 +110,7 @@ enum VSecondaryButtonState: Int, VPickableTitledItem {
 
 private typealias VSecondaryButtonContent = VPrimaryButtonContent
 
-enum VSecondaryButtonHitBox: Int, VPickableTitledItem {
+enum VSecondaryButtonHitBox: Int, PickableTitledEnumeration {
     case clipped
     case extended
     

@@ -46,7 +46,7 @@ struct VSheetDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VSheetRoundedCornersHelper: Int, VPickableTitledItem {
+private enum VSheetRoundedCornersHelper: Int, PickableTitledEnumeration {
     case all
     case top
     case bottom

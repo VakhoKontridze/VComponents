@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Wheel Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel.
 ///
-/// Component can be initialized with data, row titles, `VPickableItem`, or `VPickableTitledItem`.
+/// Component can be initialized with data, row titles, `PickableEnumeration`, or `PickableTitledItem`.
 ///
 /// Best suited for `5`+ items.
 ///
@@ -110,57 +110,57 @@ public struct VWheelPicker<Data, RowContent>: View
     }
 
     // MARK: Initialzers: Pickable Item
-    /// Initializes component with `VPickableItem`, header, footer, and row content.
-    public init<Item>(
+    /// Initializes component with `PickableEnumeration`, header, footer, and row content.
+    public init<PickableItem>(
         model: VWheelPickerModel = .init(),
         state: VWheelPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        @ViewBuilder rowContent: @escaping (Item) -> RowContent
+        @ViewBuilder rowContent: @escaping (PickableItem) -> RowContent
     )
         where
-            Data == Array<Item>,
-            Item: VPickableItem
+            Data == Array<PickableItem>,
+            PickableItem: PickableEnumeration
     {
         self.init(
             model: model,
             state: state,
             selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
+                get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+                set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
             ),
             headerTitle: headerTitle,
             footerTitle: footerTitle,
-            data: .init(Item.allCases),
+            data: .init(PickableItem.allCases),
             rowContent: rowContent
         )
     }
 
     // MARK: Initialzers: Pickable Titled Item
-    /// Initializes component with `VPickableTitledItem`, header, and footer.
-    public init<Item>(
+    /// Initializes component with `PickableTitledItem`, header, and footer.
+    public init<PickableItem>(
         model: VWheelPickerModel = .init(),
         state: VWheelPickerState = .enabled,
-        selection: Binding<Item>,
+        selection: Binding<PickableItem>,
         headerTitle: String? = nil,
         footerTitle: String? = nil
     )
         where
-            Data == Array<Item>,
+            Data == Array<PickableItem>,
             RowContent == VText,
-            Item: VPickableTitledItem
+            PickableItem: PickableTitledEnumeration
     {
         self.init(
             model: model,
             state: state,
             selectedIndex: .init(
-                get: { selection.wrappedValue.rawValue },
-                set: { selection.wrappedValue = Item(rawValue: $0)! }
+                get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+                set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
             ),
             headerTitle: headerTitle,
             footerTitle: footerTitle,
-            data: .init(Item.allCases),
+            data: .init(PickableItem.allCases),
             rowContent: { item in
                 VText(
                     color: model.colors.textContent.for(state),

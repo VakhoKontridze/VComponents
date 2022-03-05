@@ -63,7 +63,7 @@ struct VTextDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VTextDemoType: Int, VPickableTitledItem {
+private enum VTextDemoType: Int, PickableTitledEnumeration {
     case center
     case leading
     case trailing

@@ -50,14 +50,14 @@ public struct VWheelPickerModel {
     public struct Colors {
         // MARK: Properties
         /// Content opacities.
-        public var content: StateOpacities = .init(
-            disabledOpacity: segmentedPickerReference.colors.content.disabledOpacity
-        )
+        public var content: StateOpacities = .clear // FIXME: Replace //.init(
+//            disabledOpacity: segmentedPickerReference.colors.content.disabledOpacity
+//        )
         
         /// Text content colors.
         ///
         /// Only applicable when using init with title.
-        public var textContent: StateColors = segmentedPickerReference.colors.textContent
+        public var textContent: StateColors = .clear // FIXME: Replace // = segmentedPickerReference.colors.textContent
         
         /// Background colors.
         public var background: StateColors = .init(
@@ -66,10 +66,10 @@ public struct VWheelPickerModel {
         )
 
         /// Header colors.
-        public var header: StateColors = segmentedPickerReference.colors.header
+        public var header: StateColors = .clear // FIXME: Replace // = segmentedPickerReference.colors.header
         
         /// Footer colors.
-        public var footer: StateColors = segmentedPickerReference.colors.footer
+        public var footer: StateColors = .clear // FIXME: Replace //segmentedPickerReference.colors.footer
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

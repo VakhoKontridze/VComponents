@@ -99,7 +99,7 @@ struct VSquareButtonDemoView: View {
 // MARK: - Helpers
 private typealias VSquareButtonState = VSecondaryButtonState
 
-enum VSquareButtonContent: Int, VPickableTitledItem {
+enum VSquareButtonContent: Int, PickableTitledEnumeration {
     case title
     case icon
     case custom
@@ -113,7 +113,7 @@ enum VSquareButtonContent: Int, VPickableTitledItem {
     }
 }
 
-private enum VSquareButtonShape: Int, VPickableTitledItem {
+private enum VSquareButtonShape: Int, PickableTitledEnumeration {
     case rounded
     case circular
     

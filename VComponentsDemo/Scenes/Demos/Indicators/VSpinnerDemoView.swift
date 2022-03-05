@@ -34,7 +34,7 @@ struct VSpinnerDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VSpinnerTypeHelper: Int, VPickableTitledItem {
+private enum VSpinnerTypeHelper: Int, PickableTitledEnumeration {
     case continous
     case dashed
     
