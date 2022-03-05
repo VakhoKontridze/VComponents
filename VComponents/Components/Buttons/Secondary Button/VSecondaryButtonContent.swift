@@ -7,5 +7,5 @@
 
 import Foundation
 
-// MARK: - V Primary Button Content
+// MARK: - V Secondary Button Content
 typealias VSecondaryButtonContent = VPrimaryButtonContent
