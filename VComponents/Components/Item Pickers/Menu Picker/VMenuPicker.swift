@@ -331,13 +331,22 @@ public struct VMenuPicker<Label, Data>: View
 
     // MARK: Body
     public var body: some View {
-        Picker(selection: $selectedIndex, label: labelView, content: {
-            ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, row) in
-                rowView(rowContent(row))
-                    .tag(i)
-            })
-        })
-            .pickerStyle(MenuPickerStyle())
+        Menu(
+            content: {
+                Picker(
+                    selection: $selectedIndex,
+                    content: {
+                        ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, row) in
+                            rowView(rowContent(row))
+                                .tag(i)
+                        })
+                    },
+                    label: { EmptyView() }
+                )
+                    .pickerStyle(.inline)
+            },
+            label: { labelView }
+        )
             .disabled(!state.isEnabled) // Luckily, doesn't affect colors
     }
     

@@ -187,7 +187,7 @@ public struct VWheelPicker<Data, RowContent>: View
                     .tag(i)
             })
         })
-            .pickerStyle(WheelPickerStyle())
+            .pickerStyle(.wheel)
             .labelsHidden()
             
             .disabled(!state.isEnabled) // Luckily, doesn't affect colors
