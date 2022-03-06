@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Window Overlay View
-struct WindowOverlayView<Content>: UIViewControllerRepresentable where Content: View {
+struct WindowOverlayView<Content>: UIViewControllerRepresentable where Content: View { // FIXME: Remove
     // MARK: Properties
     private let allowsHitTesting: Bool
     @Binding private var isPresented: Bool

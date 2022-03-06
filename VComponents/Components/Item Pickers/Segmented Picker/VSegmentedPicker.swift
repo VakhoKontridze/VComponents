@@ -98,7 +98,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         rowTitles: [String]
     )
         where
-            Data == [Never],
+            Data == Array<Never>,
             RowContent == Never
     {
         self.model = model
@@ -121,7 +121,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
         where
-            Data == [SelectionValue],
+            Data == Array<SelectionValue>,
             SelectionValue: Hashable
     {
         self.model = model
@@ -145,7 +145,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         rowTitles: [String]
     )
         where
-            Data == [Never],
+            Data == Array<Never>,
             RowContent == Never
     {
         self.model = model
@@ -170,7 +170,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         @ViewBuilder rowContent: @escaping (PickableItem) -> RowContent
     )
         where
-            Data == [PickableItem],
+            Data == Array<PickableItem>,
             PickableItem: PickableEnumeration
     {
         self.model = model
@@ -193,7 +193,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         disabledIndexes: Set<Int> = []
     )
         where
-            Data == [Never],
+            Data == Array<Never>,
             RowContent == Never,
             PickableItem: PickableTitledEnumeration
     {
@@ -358,8 +358,6 @@ public struct VSegmentedPicker<Data, RowContent>: View
 
 // MARK: - Preview
 struct VSegmentedPicker_Previews: PreviewProvider {
-    @State private static var selection: PickerRow = .red
-    
     enum PickerRow: Int, PickableTitledEnumeration {
         case red, green, blue
     
@@ -371,6 +369,8 @@ struct VSegmentedPicker_Previews: PreviewProvider {
             }
         }
     }
+    
+    @State private static var selection: PickerRow = .red
 
     static var previews: some View {
         VSegmentedPicker(

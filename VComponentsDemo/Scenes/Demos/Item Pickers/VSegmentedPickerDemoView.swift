@@ -141,7 +141,10 @@ enum VSegmentedPickerDataSource: Int, PickableTitledEnumeration {
             }
         }()
         
-        return DemoIconContentView(color: color)
+        return Image(systemName: "swift")
+            .resizable()
+            .frame(dimension: 15)
+            .foregroundColor(color)
     }
 }
 

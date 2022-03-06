@@ -131,14 +131,13 @@
 		7A5A5FF725C88F70008667F5 /* VActionSheetDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A5FF625C88F70008667F5 /* VActionSheetDemoView.swift */; };
 		7A5A600125C92924008667F5 /* VMenuPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A600025C92924008667F5 /* VMenuPicker.swift */; };
 		7A5A600525C92996008667F5 /* VMenuPickerState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A600425C92996008667F5 /* VMenuPickerState.swift */; };
-		7A5A600C25C929E4008667F5 /* VMenuPickerButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A600B25C929E4008667F5 /* VMenuPickerButtonType.swift */; };
-		7A5A600F25C92E50008667F5 /* VMenuPickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A600E25C92E50008667F5 /* VMenuPickerRow.swift */; };
+		7A5A600F25C92E50008667F5 /* VMenuPickerRowContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A600E25C92E50008667F5 /* VMenuPickerRowContent.swift */; };
 		7A5A601725C970DC008667F5 /* VMenuPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5A601625C970DC008667F5 /* VMenuPickerDemoView.swift */; };
 		7A6218292594938C00515688 /* VLazyScrollViewType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218282594938C00515688 /* VLazyScrollViewType.swift */; };
 		7A6218302594943F00515688 /* VLazyScrollViewModelHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A62182F2594943F00515688 /* VLazyScrollViewModelHorizontal.swift */; };
 		7A621834259494CB00515688 /* VLazyScrollViewVertical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A621833259494CB00515688 /* VLazyScrollViewVertical.swift */; };
 		7A6218382594956400515688 /* VLazyScrollViewHorizontal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6218372594956400515688 /* VLazyScrollViewHorizontal.swift */; };
-		7A6787DA25CB291900734DA6 /* ComponentStateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6787D925CB291900734DA6 /* ComponentStateManager.swift */; };
+		7A6787DA25CB291900734DA6 /* ComponentStateManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A6787D925CB291900734DA6 /* ComponentStateManagement.swift */; };
 		7A67884E25CC0A2300734DA6 /* VStepperModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A67884D25CC0A2300734DA6 /* VStepperModel.swift */; };
 		7A767C3925B5C70A0008D2E9 /* VCheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */; };
 		7A767C3C25B5C7310008D2E9 /* VCheckBoxState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */; };
@@ -394,14 +393,13 @@
 		7A5A5FF625C88F70008667F5 /* VActionSheetDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VActionSheetDemoView.swift; sourceTree = "<group>"; };
 		7A5A600025C92924008667F5 /* VMenuPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMenuPicker.swift; sourceTree = "<group>"; };
 		7A5A600425C92996008667F5 /* VMenuPickerState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMenuPickerState.swift; sourceTree = "<group>"; };
-		7A5A600B25C929E4008667F5 /* VMenuPickerButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMenuPickerButtonType.swift; sourceTree = "<group>"; };
-		7A5A600E25C92E50008667F5 /* VMenuPickerRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMenuPickerRow.swift; sourceTree = "<group>"; };
+		7A5A600E25C92E50008667F5 /* VMenuPickerRowContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMenuPickerRowContent.swift; sourceTree = "<group>"; };
 		7A5A601625C970DC008667F5 /* VMenuPickerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMenuPickerDemoView.swift; sourceTree = "<group>"; };
 		7A6218282594938C00515688 /* VLazyScrollViewType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyScrollViewType.swift; sourceTree = "<group>"; };
 		7A62182F2594943F00515688 /* VLazyScrollViewModelHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyScrollViewModelHorizontal.swift; sourceTree = "<group>"; };
 		7A621833259494CB00515688 /* VLazyScrollViewVertical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyScrollViewVertical.swift; sourceTree = "<group>"; };
 		7A6218372594956400515688 /* VLazyScrollViewHorizontal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyScrollViewHorizontal.swift; sourceTree = "<group>"; };
-		7A6787D925CB291900734DA6 /* ComponentStateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateManager.swift; sourceTree = "<group>"; };
+		7A6787D925CB291900734DA6 /* ComponentStateManagement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComponentStateManagement.swift; sourceTree = "<group>"; };
 		7A67884D25CC0A2300734DA6 /* VStepperModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStepperModel.swift; sourceTree = "<group>"; };
 		7A767C3825B5C70A0008D2E9 /* VCheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBox.swift; sourceTree = "<group>"; };
 		7A767C3B25B5C7310008D2E9 /* VCheckBoxState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VCheckBoxState.swift; sourceTree = "<group>"; };
@@ -943,9 +941,8 @@
 			isa = PBXGroup;
 			children = (
 				7A5A600025C92924008667F5 /* VMenuPicker.swift */,
-				7A5A600B25C929E4008667F5 /* VMenuPickerButtonType.swift */,
 				7A5A600425C92996008667F5 /* VMenuPickerState.swift */,
-				7A5A600E25C92E50008667F5 /* VMenuPickerRow.swift */,
+				7A5A600E25C92E50008667F5 /* VMenuPickerRowContent.swift */,
 			);
 			path = "Menu Picker";
 			sourceTree = "<group>";
@@ -1476,7 +1473,7 @@
 				1787182927306C1900C2B74C /* Edge Insets */,
 				17BE45DE27CA85D100D69C3A /* Generic States and Models */,
 				7A12716125BAF911002B0397 /* BasicAnimation.swift */,
-				7A6787D925CB291900734DA6 /* ComponentStateManager.swift */,
+				7A6787D925CB291900734DA6 /* ComponentStateManagement.swift */,
 				7A0BB67425B9CEF900E7FCA1 /* WindowOverlayView.swift */,
 				7AE5C25D25A8BC2E001B62B2 /* PickableEnumeration.swift */,
 				7A2F831425CFD63E0099BA69 /* DerivedButtonType.swift */,
@@ -1625,7 +1622,6 @@
 				7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */,
 				7AF3C8D225AF511800D56042 /* VModalModel.swift in Sources */,
 				7A6218292594938C00515688 /* VLazyScrollViewType.swift in Sources */,
-				7A5A600C25C929E4008667F5 /* VMenuPickerButtonType.swift in Sources */,
 				7A4D0C562594D30A00108575 /* VSquareButtonModel.swift in Sources */,
 				7AF3C8D525AF5C1A00D56042 /* _VModal.swift in Sources */,
 				7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */,
@@ -1731,7 +1727,7 @@
 				7AA39B8625CD51E500FA30E5 /* StateOpacities_P.swift in Sources */,
 				7A259B7825979FC000A12F8C /* VDialogModel.swift in Sources */,
 				7AB41B6725B8303800F83987 /* VTextFieldActions.swift in Sources */,
-				7A5A600F25C92E50008667F5 /* VMenuPickerRow.swift in Sources */,
+				7A5A600F25C92E50008667F5 /* VMenuPickerRowContent.swift in Sources */,
 				7A0E49E125CEE9CD006A8142 /* VPageIndicatorInfinite.swift in Sources */,
 				7AA763E425B73F2C0088FC69 /* VTextField.swift in Sources */,
 				7A184A7925B72DDA009DCD65 /* VBaseTextField.swift in Sources */,
@@ -1791,7 +1787,7 @@
 				173C1FD4272A7FFF00DF634F /* View.CornerRadius.swift in Sources */,
 				7A92926725B5BB8200BBEA8A /* ImageBook.swift in Sources */,
 				7A8A971F258DDD8400309886 /* View.ConditionalViewModifiers.swift in Sources */,
-				7A6787DA25CB291900734DA6 /* ComponentStateManager.swift in Sources */,
+				7A6787DA25CB291900734DA6 /* ComponentStateManagement.swift in Sources */,
 				17BE45DC27CA6ACC00D69C3A /* VPrimaryButtonContent.swift in Sources */,
 				7A32F88A25C9963900BE8298 /* VStepper.swift in Sources */,
 				7A767CE625B700960008D2E9 /* VBaseTextFieldModel.swift in Sources */,

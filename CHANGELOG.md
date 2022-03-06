@@ -7,6 +7,7 @@
 - Navigation components—`VTabNavigationView` and `VNavigationView`—have been removed
 - `VBaseView` has been removed
 - `StateColors`'s and `StateOpacities`'s have been replaced with`GenericStateModel`'s
+- `VMenuPicker`/`Menu` label issue with iOS `15` has been fixed
 - `VSquareButton` font has been changed to system bold size 15
 - `VPlainButton` font has been changed to system medium size 15
 - `VWebLink` has been renamed to `VLink`

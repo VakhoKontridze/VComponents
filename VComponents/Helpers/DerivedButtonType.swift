@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Derived Button Type
-enum DerivedButtonType {
+enum DerivedButtonType { // FIXME: Remove
     case primary(model: VPrimaryButtonModel)
     case secondary(model: VSecondaryButtonModel)
     case square(model: VSquareButtonModel)

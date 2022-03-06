@@ -89,6 +89,8 @@ public struct VPlainButtonModel {
         /// Custom content opacities.
         ///
         /// Applicable only when init with content is used.
+        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// so instead, a general opacity is being applied.
         public var customContentOpacities: StateOpacities = .init(primaryButtonReference.colors.customContentOpacities)
         
         // MARK: Initializers
