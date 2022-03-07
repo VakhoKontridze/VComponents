@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: V Stepper Button
+// MARK: - V Stepper Button
 enum VStepperButton {
     // MARK: Cases
     case minus

@@ -13,8 +13,8 @@ struct VStepperDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Stepper" }
     
+    @State private var isEnabled: Bool = true
     @State private var value: Int = 5
-    @State private var state: VStepperState = .enabled
 
     // MARK: Body
     var body: some View {
@@ -25,28 +25,26 @@ struct VStepperDemoView: View {
     private func component() -> some View {
         VSliderDemoView.sliderRowView(title: .init(value), content: {
             VStepper(
-                range: 1...10,
-                state: state,
+                range: 1...25,
                 value: $value
             )
+                .disabled(!isEnabled)
         })
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $state, headerTitle: "State")
+        VSegmentedPicker(
+            selection: .init(
+                get: { VStepperState(isEnabled: isEnabled) },
+                set: { isEnabled = $0 == .enabled }
+            ),
+            headerTitle: "State"
+        )
     }
 }
 
 // MARK: - Helpers
-extension VStepperState: PickableTitledEnumeration {
-    public var pickerTitle: String {
-        switch self {
-        case .enabled: return "Enabled"
-        case .disabled: return "Disabled"
-        @unknown default: fatalError()
-        }
-    }
-}
+private typealias VStepperState = VSecondaryButtonState
 
 // MARK: - Preview
 struct VStepperDemoView_Previews: PreviewProvider {

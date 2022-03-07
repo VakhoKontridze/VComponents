@@ -706,8 +706,8 @@
 			isa = PBXGroup;
 			children = (
 				7A32F88925C9963900BE8298 /* VStepper.swift */,
-				7A67884D25CC0A2300734DA6 /* VStepperModel.swift */,
 				7A32F88425C9955000BE8298 /* VStepperState.swift */,
+				7A67884D25CC0A2300734DA6 /* VStepperModel.swift */,
 				7AA39B7C25CC7A9800FA30E5 /* VStepperButton.swift */,
 			);
 			path = Stepper;

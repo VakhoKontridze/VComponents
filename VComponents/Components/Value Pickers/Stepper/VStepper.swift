@@ -17,7 +17,10 @@ import SwiftUI
 ///     @State var value: Double = 0.5
 ///
 ///     var body: some View {
-///         VStepper(range: 1...10, value: $value)
+///         VStepper(
+///             range: 1...10,
+///             value: $value
+///         )
 ///             .padding()
 ///     }
 ///
@@ -25,17 +28,18 @@ public struct VStepper: View {
     // MARK: Properties
     private let model: VStepperModel
     
-    private let range: ClosedRange<Int>
-    private let step: Int
-    
-    private let state: VStepperState
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    private var internalState: VStepperInternalState { .init(isEnabled: isEnabled) }
     @State private var pressedButton: VStepperButton?
-    private func pressedButtonState(_ button: VStepperButton) -> VStepperButtonState {
+    private func buttonInternalState(_ button: VStepperButton) -> VStepperButtonInternalState {
         .init(
             isEnabled: buttonIsEnabled(for: button),
             isPressed: pressedButton == button
         )
     }
+    
+    private let range: ClosedRange<Int>
+    private let step: Int
     
     @Binding private var value: Int
     
@@ -51,13 +55,11 @@ public struct VStepper: View {
         model: VStepperModel = .init(),
         range: ClosedRange<Int>,
         step: Int = 1,
-        state: VStepperState = .enabled,
         value: Binding<Int>
     ) {
         self.model = model
         self.range = range
         self.step = step
-        self.state = state
         self._value = value
     }
 
@@ -72,7 +74,7 @@ public struct VStepper: View {
     
     private var background: some View {
         RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-            .foregroundColor(model.colors.background.for(state))
+            .foregroundColor(model.colors.background.for(internalState))
     }
     
     private var buttons: some View {
@@ -86,20 +88,16 @@ public struct VStepper: View {
     
     private func button(_ button: VStepperButton) -> some View {
         VBaseButton(
-            gesture: { gestureState in
-                saveButtonPressState(button, isPressed: gestureState.isPressed)
-                if gestureState.isClicked { incrementValue(from: button) }
-            },
+            gesture: { gestureHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                        .foregroundColor(model.colors.buttonBackground.for(pressedButtonState(button)))
+                        .foregroundColor(model.colors.buttonBackground.for(buttonInternalState(button)))
                     
                     button.icon
                         .resizable()
                         .frame(dimension: model.layout.iconDimension)
-                        .foregroundColor(model.colors.buttonIcon.for(pressedButtonState(button)))
-                        .opacity(model.colors.buttonIcon.for(pressedButtonState(button)))
+                        .foregroundColor(model.colors.buttonIcon.for(buttonInternalState(button)))
                 })
                     .frame(maxWidth: .infinity)
             }
@@ -110,31 +108,16 @@ public struct VStepper: View {
     private var divider: some View {
         Rectangle()
             .frame(size: model.layout.divider)
-            .foregroundColor(model.colors.divider.for(state))
-    }
-
-    // MARK: Button State
-    private func saveButtonPressState(_ button: VStepperButton, isPressed: Bool) {
-        if !isPressed {
-            pressedButton = nil
-            shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
-            zeroLongPressTimers()
-        } else if pressedButton != button {
-            pressedButton = button
-            scheduleLongPressIncrementSchedulerTimer(for: button)
-        }
+            .foregroundColor(model.colors.divider.for(internalState))
     }
     
-    private func buttonIsEnabled(for button: VStepperButton) -> Bool {
-        switch (state, button) {
-        case (.disabled, _): return false
-        case (.enabled, .minus): return !(value <= range.lowerBound)
-        case (.enabled, .plus): return !(value >= range.upperBound)
-        }
+    // MARK: Actions
+    private func gestureHandler(button: VStepperButton, gestureState: VBaseButtonGestureState) {
+        pressGestureHandler(button, isPressed: gestureState.isPressed)
+        if gestureState.isClicked { clickGestureHandler(button) }
     }
 
-    // MARK: Increment
-    private func incrementValue(from button: VStepperButton) {
+    private func clickGestureHandler(_ button: VStepperButton) {
         guard !shouldSkipIncrementBecauseOfLongPressIncrementFinish else {
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = false
             return
@@ -152,6 +135,18 @@ public struct VStepper: View {
             case false: value += step
             case true: zeroLongPressTimers()
             }
+        }
+    }
+    
+    private func pressGestureHandler(_ button: VStepperButton, isPressed: Bool) {
+        if !isPressed {
+            pressedButton = nil
+            shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
+            zeroLongPressTimers()
+            
+        } else if pressedButton != button {
+            pressedButton = button
+            scheduleLongPressIncrementSchedulerTimer(for: button)
         }
     }
 
@@ -189,7 +184,7 @@ public struct VStepper: View {
         longPressIncrementTimerIncremental = .scheduledTimer(withTimeInterval: interval, repeats: true, block: { timer in
             switch pressedButton {
             case nil: zeroLongPressTimers()
-            case let button?: incrementValue(from: button)
+            case let button?: clickGestureHandler(button)
             }
         })
         
@@ -208,6 +203,15 @@ public struct VStepper: View {
         
         longPressIncrementTimeElapsed = 0
     }
+    
+    // MARK: Helpers
+    private func buttonIsEnabled(for button: VStepperButton) -> Bool {
+        switch (internalState, button) {
+        case (.disabled, _): return false
+        case (.enabled, .minus): return !(value <= range.lowerBound)
+        case (.enabled, .plus): return !(value >= range.upperBound)
+        }
+    }
 }
 
 // MARK: - Preview
@@ -215,6 +219,9 @@ struct VStepper_Previews: PreviewProvider {
     @State private static var value: Int = 5
     
     static var previews: some View {
-        VStepper(range: 1...10, value: $value)
+        VStepper(
+            range: 1...10,
+            value: $value
+        )
     }
 }

@@ -53,7 +53,7 @@ public struct VStepperModel {
     public struct Colors {
         // MARK: Properties
         /// Background colors.
-        public var background: StateColors = .clear // FIXME: Resolve //segmentedPickerReference.colors.background
+        public var background: StateColors = segmentedPickerReference.colors.background
         
         /// Plus and minus button background colors.
         public var buttonBackground: ButtonStateColors = .init(
@@ -63,16 +63,14 @@ public struct VStepperModel {
         )
         
         /// Plus and minus icon colors and opacities.
-        public var buttonIcon: StateColorsAndOpacities = .init(
+        public var buttonIcon: ButtonStateColors = .init(
             enabled: ColorBook.primary,
-            pressed: ColorBook.primary,
-            disabled: ColorBook.primary,
-            pressedOpacity: 0.5,
-            disabledOpacity: 0.5
+            pressed: ColorBook.secondary,
+            disabled: ColorBook.secondary
         )
         
         /// Plus and minus button divider colors.
-        public var divider: StateColors = .clear // FIXME: Resolve // = segmentedPickerReference.colors.divider
+        public var divider: StateColors = segmentedPickerReference.colors.divider
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -80,15 +78,11 @@ public struct VStepperModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_ED
+        public typealias StateColors = GenericStateModel_ED<Color>
         
         // MARK: Button State Colors
         /// Sub-model containing colors for component states.
-        public typealias ButtonStateColors = StateColors_EPD
-        
-        // MARK: State Colors and Opacities
-        /// Sub-model containing colors and opacities for component states.
-        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
+        public typealias ButtonStateColors = GenericStateModel_EPD<Color>
     }
 
     // MARK: Misc
