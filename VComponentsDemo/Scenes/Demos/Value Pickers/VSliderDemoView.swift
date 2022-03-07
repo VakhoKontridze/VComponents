@@ -14,7 +14,7 @@ struct VSliderDemoView: View {
     static var navBarTitle: String { "Slider" }
     
     @State private var value: Double = 0.5
-    @State private var state: VSliderState = .enabled
+    @State private var isEnabled: Bool = true
     @State private var thumbType: SliderThumbType = .standard
     @State private var hasStep: Bool = false
     @State private var stepValue: Double = 0.1
@@ -84,15 +84,21 @@ struct VSliderDemoView: View {
             VSlider(
                 model: model,
                 step: hasStep ? stepValue : nil,
-                state: state,
                 value: $value
             )
         })
+            .disabled(!isEnabled)
     }
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, headerTitle: "State")
+            VSegmentedPicker(
+                selection: .init(
+                    get: { VSliderState(isEnabled: isEnabled) },
+                    set: { isEnabled = $0 == .enabled }
+                ),
+                headerTitle: "State"
+            )
         })
         
         DemoViewSettingsSection(content: {
@@ -153,15 +159,7 @@ struct VSliderDemoView: View {
 }
 
 // MARK: - Helpers
-extension VSliderState: PickableTitledEnumeration {
-    public var pickerTitle: String {
-        switch self {
-        case .enabled: return "Enabled"
-        case .disabled: return "Disabled"
-        @unknown default: fatalError()
-        }
-    }
-}
+private typealias VSliderState = VSecondaryButtonState
 
 private enum SliderThumbType: Int, PickableTitledEnumeration {
     case standard

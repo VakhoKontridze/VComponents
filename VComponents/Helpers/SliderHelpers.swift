@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - Number Fixed in Range
+// MARK: - Double Bound
 extension Double {
-    func fixedInRange(
+    func bound(
         min: Double,
         max: Double,
         step: Double?
@@ -31,7 +31,7 @@ extension Double {
     }
 }
 
-// MARK: - Normalization Binding Double in Range
+// MARK: - Normalization of Binding Double in Range
 extension Binding where Value == Double {
     init<V>(
         from value: Binding<V>,

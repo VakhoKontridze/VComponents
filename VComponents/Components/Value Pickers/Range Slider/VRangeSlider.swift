@@ -36,12 +36,11 @@ public struct VRangeSlider: View {
     private let difference: Double
     private let step: Double?
     
-    private let state: VRangeSliderState
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    private var internalState: VRangeSliderInternalState { .init(isEnabled: isEnabled) }
 
     @Binding private var valueLow: Double
     @Binding private var valueHigh: Double
-    @State private var animatableValueLow: Double?
-    @State private var animatableValueHigh: Double?
     
     private let actionLow: ((Bool) -> Void)?
     private let actionHigh: ((Bool) -> Void)?
@@ -55,7 +54,6 @@ public struct VRangeSlider: View {
         range: ClosedRange<V> = 0...1,
         difference: V,
         step: V? = nil,
-        state: VRangeSliderState = .enabled,
         valueLow: Binding<V>,
         valueHigh: Binding<V>,
         onChangeLow actionLow: ((Bool) -> Void)? = nil,
@@ -70,26 +68,27 @@ public struct VRangeSlider: View {
         self.max = .init(range.upperBound)
         self.difference = .init(difference)
         self.step = step.map { .init($0) }
-        self.state = state
         self._valueLow = .init(from: valueLow, range: range, step: step)
         self._valueHigh = .init(from: valueHigh, range: range, step: step)
         self.actionLow = actionLow
         self.actionHigh = actionHigh
         
-        self.isLayoutValid = valueLow.wrappedValue <= valueHigh.wrappedValue - difference
+        self.isLayoutValid =
+            valueLow.wrappedValue <=
+            valueHigh.wrappedValue - difference
     }
 
     // MARK: Body
     public var body: some View {
-        syncInternalStateWithState()
-        
-        return Group(content: {
+        Group(content: {
             switch isLayoutValid {
             case false: invalidBody
             case true: validBody
             }
         })
             .padding(.horizontal, model.layout.thumbDimension / 2)
+            .animation(model.animations.progress, value: valueLow)
+            .animation(model.animations.progress, value: valueHigh)
     }
     
     private var invalidBody: some View {
@@ -109,14 +108,14 @@ public struct VRangeSlider: View {
                 .overlay(thumb(in: proxy, thumb: .low))
                 .overlay(thumb(in: proxy, thumb: .high))
 
-                .disabled(!state.isEnabled)
+                .disabled(!internalState.isEnabled)
         })
             .frame(height: model.layout.height)
     }
 
     private var track: some View {
         Rectangle()
-            .foregroundColor( model.colors.track.for(state))
+            .foregroundColor( model.colors.track.for(internalState))
     }
 
     private func progress(in proxy: GeometryProxy) -> some View {
@@ -124,18 +123,18 @@ public struct VRangeSlider: View {
             .padding(.leading, progress(in: proxy, thumb: .low))
             .padding(.trailing, progress(in: proxy, thumb: .high))
 
-            .foregroundColor(model.colors.progress.for(state))
+            .foregroundColor(model.colors.progress.for(internalState))
     }
 
     private func thumb(in proxy: GeometryProxy, thumb: Thumb) -> some View {
         Group(content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .foregroundColor(model.colors.thumb.for(state))
-                    .shadow(color: model.colors.thumbShadow.for(state), radius: model.layout.thumbShadowRadius)
+                    .foregroundColor(model.colors.thumb.for(internalState))
+                    .shadow(color: model.colors.thumbShadow.for(internalState), radius: model.layout.thumbShadowRadius)
 
                 RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .strokeBorder(model.colors.thumbBorder.for(state), lineWidth: model.layout.thumbBorderWidth)
+                    .strokeBorder(model.colors.thumbBorder.for(internalState), lineWidth: model.layout.thumbBorderWidth)
             })
                 .frame(dimension: model.layout.thumbDimension)
                 .offset(x: thumbOffset(in: proxy, thumb: thumb))
@@ -147,19 +146,6 @@ public struct VRangeSlider: View {
                     .onChanged({ dragChanged(drag: $0, in: proxy, thumb: thumb) })
                     .onEnded({ dragEnded(drag: $0, thumb: thumb) })
             )
-    }
-
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if animatableValueLow == nil || animatableValueLow != valueLow {
-                withAnimation(model.animations.progress, { animatableValueLow = valueLow })
-            }
-            
-            if animatableValueHigh == nil || animatableValueHigh != valueHigh {
-                withAnimation(model.animations.progress, { animatableValueHigh = valueHigh })
-            }
-        })
     }
     
     // MARK: Thumb
@@ -178,14 +164,14 @@ public struct VRangeSlider: View {
         let valueFixed: Double = {
             switch thumb {
             case .low:
-                return rawValue.fixedInRange(
+                return rawValue.bound(
                     min: min,
                     max: Swift.min((valueHigh - difference).roundedDownWithStep(step), max),
                     step: step
                 )
 
             case .high:
-                return rawValue.fixedInRange(
+                return rawValue.bound(
                     min: Swift.max((valueLow + difference).roundedUpWithStep(step), min),
                     max: max,
                     step: step
@@ -213,12 +199,10 @@ public struct VRangeSlider: View {
 
     // MARK: Actions
     private func setValueLow(to value: Double) {
-        withAnimation(model.animations.progress, { animatableValueLow = value })
         self.valueLow = value
     }
     
     private func setValueHigh(to value: Double) {
-        withAnimation(model.animations.progress, { animatableValueHigh = value })
         self.valueHigh = value
     }
 
@@ -226,8 +210,8 @@ public struct VRangeSlider: View {
     private func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
-            case .low: return .init((animatableValueLow ?? valueLow) - min)
-            case .high: return .init((animatableValueHigh ?? valueHigh) - min)
+            case .low: return .init(valueLow - min)
+            case .high: return .init(valueHigh - min)
             }
         }()
         let range: CGFloat = .init(max - min)

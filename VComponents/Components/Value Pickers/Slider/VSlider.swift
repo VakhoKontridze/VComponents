@@ -29,10 +29,10 @@ public struct VSlider: View {
     private var range: ClosedRange<Double> { min...max }
     private let step: Double?
     
-    private let state: VSliderState
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    private var internalState: VSliderInternalState { .init(isEnabled: isEnabled) }
     
     @Binding private var value: Double
-    @State private var animatableValue: Double?
     
     private let action: ((Bool) -> Void)?
     
@@ -42,7 +42,6 @@ public struct VSlider: View {
         model: VSliderModel = .init(),
         range: ClosedRange<V> = 0...1,
         step: V? = nil,
-        state: VSliderState = .enabled,
         value: Binding<V>,
         onChange action: ((Bool) -> Void)? = nil
     )
@@ -54,16 +53,13 @@ public struct VSlider: View {
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
         self.step = step.map { .init($0) }
-        self.state = state
         self._value = .init(from: value, range: range, step: step)
         self.action = action
     }
 
     // MARK: Body
     public var body: some View {
-        syncInternalStateWithState()
-        
-        return GeometryReader(content: { proxy in
+        GeometryReader(content: { proxy in
             ZStack(alignment: .leading, content: {
                 track
                 progress(in: proxy)
@@ -77,22 +73,23 @@ public struct VSlider: View {
                         .onChanged({ dragChanged(drag: $0, in: proxy) })
                         .onEnded(dragEnded)
                 )
-                .disabled(!state.isEnabled)
+                .disabled(!internalState.isEnabled)
         })
             .frame(height: model.layout.height)
             .padding(.horizontal, model.layout.thumbDimension / 2)
+            .animation(model.animations.progress, value: value)
     }
 
     private var track: some View {
         Rectangle()
-            .foregroundColor(model.colors.track.for(state))
+            .foregroundColor(model.colors.track.for(internalState))
     }
 
     private func progress(in proxy: GeometryProxy) -> some View {
         Rectangle()
             .frame(width: progressWidth(in: proxy))
 
-            .foregroundColor(model.colors.progress.for(state))
+            .foregroundColor(model.colors.progress.for(internalState))
     }
     
     @ViewBuilder private func thumb(in proxy: GeometryProxy) -> some View {
@@ -100,11 +97,11 @@ public struct VSlider: View {
             Group(content: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                        .foregroundColor(model.colors.thumb.for(state))
-                        .shadow(color: model.colors.thumbShadow.for(state), radius: model.layout.thumbShadowRadius)
+                        .foregroundColor(model.colors.thumb.for(internalState))
+                        .shadow(color: model.colors.thumbShadow.for(internalState), radius: model.layout.thumbShadowRadius)
                     
                     RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                        .strokeBorder(model.colors.thumbBorder.for(state), lineWidth: model.layout.thumbBorderWidth)
+                        .strokeBorder(model.colors.thumbBorder.for(internalState), lineWidth: model.layout.thumbBorderWidth)
                 })
                     .frame(dimension: model.layout.thumbDimension)
                     .offset(x: thumbOffset(in: proxy))
@@ -112,15 +109,6 @@ public struct VSlider: View {
                 .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
                 .allowsHitTesting(false)
         }
-    }
-
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if animatableValue == nil || animatableValue != value {
-                withAnimation(model.animations.progress, { animatableValue = value })
-            }
-        })
     }
 
     // MARK: Drag
@@ -133,7 +121,7 @@ public struct VSlider: View {
             return (value / width) * range + min
         }()
         
-        let valueFixed: Double = rawValue.fixedInRange(min: min, max: max, step: step)
+        let valueFixed: Double = rawValue.bound(min: min, max: max, step: step)
         
         setValue(to: valueFixed)
         
@@ -146,13 +134,12 @@ public struct VSlider: View {
 
     // MARK: Actions
     private func setValue(to value: Double) {
-        withAnimation(model.animations.progress, { animatableValue = value })
         self.value = value
     }
 
     // MARK: Progress
     private func progressWidth(in proxy: GeometryProxy) -> CGFloat {
-        let value: CGFloat = .init((animatableValue ?? self.value) - min)
+        let value: CGFloat = .init(value - min)
         let range: CGFloat = .init(max - min)
         let width: CGFloat = proxy.size.width
 

@@ -99,7 +99,7 @@ public struct VSliderModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_ED
+        public typealias StateColors = GenericStateModel_ED<Color>
     }
 
     // MARK: Animations

@@ -45,7 +45,7 @@ public struct VProgressBar: View {
             let min: Double = 0
             let max: Double = .init(total)
             
-            return value.fixedInRange(min: min, max: max, step: nil)
+            return value.bound(min: min, max: max, step: nil)
         }()
     }
 
@@ -54,7 +54,6 @@ public struct VProgressBar: View {
             model: model.sliderSubModel,
             range: range,
             step: nil,
-            state: .enabled,
             value: .constant(value),
             onChange: nil
         )
