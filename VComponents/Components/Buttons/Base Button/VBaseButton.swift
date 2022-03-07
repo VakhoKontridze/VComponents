@@ -23,7 +23,7 @@ import SwiftUI
 ///                 case .click: print("Clicked")
 ///                 }
 ///             },
-///             content: { Text("Lorem Ipsum") }
+///             label: { Text("Lorem Ipsum") }
 ///         )
 ///     }
 ///
@@ -32,40 +32,40 @@ import SwiftUI
 ///     var body: some View {
 ///         VBaseButton(
 ///             action: { print("Clicked") },
-///             content: { Text("Lorem Ipsum") }
+///             label: { Text("Lorem Ipsum") }
 ///         )
 ///     }
 ///
-public struct VBaseButton<Content>: View where Content: View {
+public struct VBaseButton<Label>: View where Label: View {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool
     
     private var gestureHandler: (VBaseButtonGestureState) -> Void
     
-    private let content: () -> Content
+    private let label: () -> Label
     
     // MARK: Initializers
-    /// Initializes component with gesture handler and content.
+    /// Initializes component with gesture handler and label.
     public init(
         gesture gestureHandler: @escaping (VBaseButtonGestureState) -> Void,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.gestureHandler = gestureHandler
-        self.content = content
+        self.label = label
     }
     
-    /// Initializes component with action and content.
+    /// Initializes component with action and label.
     public init(
         action: @escaping () -> Void,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.gestureHandler = { gestureState in if gestureState.isClicked { action() } }
-        self.content = content
+        self.label = label
     }
 
     // MARK: Body
     public var body: some View {
-        content()
+        label()
             .overlay(VBaseButtonViewRepresentable(
                 isEnabled: isEnabled,
                 gesture: gestureHandler
@@ -84,7 +84,7 @@ struct VBaseButton_Previews: PreviewProvider {
                 case .click: print("Clicked")
                 }
             },
-            content: { Text("Lorem Ipsum") }
+            label: { Text("Lorem Ipsum") }
         )
     }
 }

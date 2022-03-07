@@ -38,8 +38,8 @@ public struct VPrimaryButtonModel {
         
         var hasBorder: Bool { borderWidth > 0 }
         
-        /// Content margin. Defaults to `15` horizontally and `3` vertically.
-        public var contentMargins: ContentMargin = .init(
+        /// Label margins. Defaults to `15` horizontally and `3` vertically.
+        public var labelMargins: LabelMargins = .init(
             horizontal: 15,
             vertical: 3
         )
@@ -52,7 +52,7 @@ public struct VPrimaryButtonModel {
         /// Applicable only if icon init with icon and title is used.
         public var iconTitleSpacing: CGFloat = 10
         
-        /// Spacing between content and spinner. Defaults to `20`.
+        /// Spacing between label and spinner. Defaults to `20`.
         ///
         /// Only visible when state is set to `loading`.
         public var loaderSpacing: CGFloat = 20
@@ -63,9 +63,9 @@ public struct VPrimaryButtonModel {
         /// Initializes sub-model with default values.
         public init() {}
         
-        // MARK: Content Margin
+        // MARK: Label Margin
         /// Sub-model containing `horizontal` and `vertical` margins.
-        public typealias ContentMargin = EdgeInsets_HV
+        public typealias LabelMargins = EdgeInsets_HV
     }
 
     // MARK: Colors
@@ -116,12 +116,12 @@ public struct VPrimaryButtonModel {
             loading: 1
         )
         
-        /// Custom content opacities.
+        /// Custom label opacities.
         ///
-        /// Applicable only when init with content is used.
-        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// Applicable only when init with label is used.
+        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = .init(
+        public var customLabelOpacities: StateOpacities = .init(
             enabled: 1,
             pressed: 0.75,
             disabled: 0.75,

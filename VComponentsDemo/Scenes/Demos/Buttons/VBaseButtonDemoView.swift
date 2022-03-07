@@ -36,7 +36,7 @@ struct VBaseButtonDemoView: View {
                         pressAction(isPressed: gestureState.isPressed)
                         if gestureState.isClicked { action() }
                     },
-                    content: {
+                    label: {
                         Circle()
                             .frame(dimension: 200)
                             .foregroundColor(Color.pink.opacity(pressState.buttonOpacity))

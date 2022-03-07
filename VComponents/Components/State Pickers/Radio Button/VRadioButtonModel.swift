@@ -52,8 +52,8 @@ public struct VRadioButtonModel {
         /// Hit box. Defaults to `5`.
         public var hitBox: CGFloat = checkBoxReference.layout.hitBox
         
-        /// Content leading margin. Defaults to `5`.
-        public var contentMarginLeading: CGFloat = checkBoxReference.layout.contentMarginLeading
+        /// Label leading margin. Defaults to `5`.
+        public var labelMarginLeading: CGFloat = checkBoxReference.layout.labelMarginLeading
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -94,12 +94,12 @@ public struct VRadioButtonModel {
         /// Title colors.
         public var title: StateColors = toggleRefrence.colors.title
         
-        /// Custom content opacities.
+        /// Custom label opacities.
         ///
-        /// Applicable only when init with content is used.
-        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// Applicable only when init with label is used.
+        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = toggleRefrence.colors.customContentOpacities
+        public var customLabelOpacities: StateOpacities = toggleRefrence.colors.customLabelOpacities
 
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -144,8 +144,8 @@ public struct VRadioButtonModel {
     /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if content is clickable. Defaults to `true`.
-        public var contentIsClickable: Bool = toggleRefrence.misc.contentIsClickable
+        /// Indicates if label is clickable. Defaults to `true`.
+        public var labelIsClickable: Bool = toggleRefrence.misc.labelIsClickable
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

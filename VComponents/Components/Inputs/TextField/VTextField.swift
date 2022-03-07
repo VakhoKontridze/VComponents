@@ -311,7 +311,7 @@ public struct VTextField: View {
             VSquareButton(
                 model: model.visibilityButtonSubModel(state: state.wrappedValue, highlight: highlight),
                 action: { secureFieldIsVisible.toggle() },
-                content: {
+                label: {
                     visiblityIcon
                         .resizable()
                         .frame(dimension: model.layout.visibilityButtonIconDimension)

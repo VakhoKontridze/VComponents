@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Check Box
-/// State picker component that toggles between off, on, indeterminate, or disabled states, and displays content.
+/// State picker component that toggles between off, on, indeterminate, or disabled states, and displays label.
 ///
-/// Component can be initialized with without content, title, or content.
+/// Component can be initialized without label, with title, or label.
 ///
 /// Model can be passed as parameter.
 ///
@@ -25,7 +25,7 @@ import SwiftUI
 ///         )
 ///     }
 ///
-public struct VCheckBox<Content>: View where Content: View {
+public struct VCheckBox<Label>: View where Label: View {
     // MARK: Properties
     private let model: VCheckBoxModel
     
@@ -34,9 +34,9 @@ public struct VCheckBox<Content>: View where Content: View {
     @Binding private var state: VCheckBoxState
     private var internalState: VCheckBoxInternalState { .init(isEnabled: isEnabled, state: state, isPressed: isPressed) }
     
-    private let content: VCheckBoxContent<Content>
+    private let label: VCheckBoxLabel<Label>
     
-    private var contentIsEnabled: Bool { model.misc.contentIsClickable && internalState.isEnabled }
+    private var labelIsEnabled: Bool { model.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
     /// Initializes component with state.
@@ -44,11 +44,11 @@ public struct VCheckBox<Content>: View where Content: View {
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = state
-        self.content = .empty
+        self.label = .empty
     }
     
     /// Initializes component with state and title.
@@ -57,22 +57,22 @@ public struct VCheckBox<Content>: View where Content: View {
         state: Binding<VCheckBoxState>,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = state
-        self.content = .title(title: title)
+        self.label = .title(title: title)
     }
     
-    /// Initializes component with state and content.
+    /// Initializes component with state and label.
     public init(
         model: VCheckBoxModel = .init(),
         state: Binding<VCheckBoxState>,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.model = model
         self._state = state
-        self.content = .content(content: content)
+        self.label = .custom(label: label)
     }
     
     // MARK: Initializers - Bool
@@ -81,11 +81,11 @@ public struct VCheckBox<Content>: View where Content: View {
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = .init(bool: isOn)
-        self.content = .empty
+        self.label = .empty
     }
     
     /// Initializes component with `Bool` and title.
@@ -94,28 +94,28 @@ public struct VCheckBox<Content>: View where Content: View {
         isOn: Binding<Bool>,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = .init(bool: isOn)
-        self.content = .title(title: title)
+        self.label = .title(title: title)
     }
     
-    /// Initializes component with `Bool` and content.
+    /// Initializes component with `Bool` and label.
     public init(
         model: VCheckBoxModel = .init(),
         isOn: Binding<Bool>,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.model = model
         self._state = .init(bool: isOn)
-        self.content = .content(content: content)
+        self.label = .custom(label: label)
     }
 
     // MARK: Body
     public var body: some View {
         Group(content: {
-            switch content {
+            switch label {
             case .empty:
                 checkBox
                 
@@ -125,7 +125,7 @@ public struct VCheckBox<Content>: View where Content: View {
                     
                     spacer
 
-                    VBaseButton(gesture: gestureHandler, content: {
+                    VBaseButton(gesture: gestureHandler, label: {
                         VText(
                             type: .multiLine(alignment: .leading, limit: nil),
                             color: model.colors.title.for(internalState),
@@ -133,20 +133,20 @@ public struct VCheckBox<Content>: View where Content: View {
                             title: title
                         )
                     })
-                        .disabled(!contentIsEnabled)
+                        .disabled(!labelIsEnabled)
                 })
                 
-            case .content(let content):
+            case .custom(let label):
                 HStack(spacing: 0, content: {
                     checkBox
                     
                     spacer
                     
-                    VBaseButton(gesture: gestureHandler, content: {
-                        content()
-                            .opacity(model.colors.customContentOpacities.for(internalState))
+                    VBaseButton(gesture: gestureHandler, label: {
+                        label()
+                            .opacity(model.colors.customLabelOpacities.for(internalState))
                     })
-                        .disabled(!contentIsEnabled)
+                        .disabled(!labelIsEnabled)
                 })
             }
         })
@@ -154,7 +154,7 @@ public struct VCheckBox<Content>: View where Content: View {
     }
     
     private var checkBox: some View {
-        VBaseButton(gesture: gestureHandler, content: {
+        VBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                     .foregroundColor(model.colors.fill.for(internalState))
@@ -176,13 +176,13 @@ public struct VCheckBox<Content>: View where Content: View {
     }
     
     private var spacer: some View {
-        VBaseButton(gesture: gestureHandler, content: {
+        VBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.contentMarginLeading)
+                .frame(width: model.layout.labelMarginLeading)
                 .foregroundColor(.clear)
         })
-            .disabled(!contentIsEnabled)
+            .disabled(!labelIsEnabled)
     }
 
     // MARK: Actions

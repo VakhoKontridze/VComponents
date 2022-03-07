@@ -18,7 +18,7 @@ import SwiftUI
 ///
 ///     VLink(
 ///         url: .init(string: "https://www.apple.com")!,
-///         content: {
+///         label: {
 ///             VSecondaryButton(
 ///                 action: {},
 ///                 title: "Lorem Ipsum"
@@ -26,28 +26,28 @@ import SwiftUI
 ///         }
 ///     )
 ///
-public struct VLink<Content>: View where Content: View {
+public struct VLink<Label>: View where Label: View {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool
     
     private let url: URL
-    private let content: () -> Content
+    private let label: () -> Label
 
     // MARK: Initializers
-    /// Initializes component with url and content.
+    /// Initializes component with url and label.
     public init(
         url: URL,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.url = url
-        self.content = content
+        self.label = label
     }
 
     // MARK: Body
     public var body: some View {
         Link(
             destination: url,
-            label: content
+            label: label
         )
             .buttonStyle(.plain) // Cancels styling
             .disabled(!isEnabled)
@@ -59,7 +59,7 @@ struct VLink_Previews: PreviewProvider {
     static var previews: some View {
         VLink(
             url: .init(string: "https://www.apple.com")!,
-            content: {
+            label: {
                 VSecondaryButton(
                     action: {},
                     title: "Lorem Ipsum"

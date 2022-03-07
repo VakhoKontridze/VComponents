@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Plain Button
 /// Plain button component that performs action when triggered.
 ///
-/// Component can be initialized with title, icon, icon and title, and content.
+/// Component can be initialized with title, icon, icon and title, and label.
 ///
 /// Model can be passed as parameter.
 ///
@@ -23,7 +23,7 @@ import SwiftUI
 ///         )
 ///     }
 ///     
-public struct VPlainButton<Content>: View where Content: View {
+public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
     private let model: VPlainButtonModel
     
@@ -33,7 +33,7 @@ public struct VPlainButton<Content>: View where Content: View {
     
     private let action: () -> Void
     
-    private let content: VPlainButtonContent<Content>
+    private let label: VPlainButtonLabel<Label>
 
     // MARK: Initializers
     /// Initializes component with action and title.
@@ -42,11 +42,11 @@ public struct VPlainButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self.action = action
-        self.content = .title(title: title)
+        self.label = .title(title: title)
     }
     
     /// Initializes component with action and icon.
@@ -55,11 +55,11 @@ public struct VPlainButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         icon: Image
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self.action = action
-        self.content = .icon(icon: icon)
+        self.label = .icon(icon: icon)
     }
     
     /// Initializes component with action, icon, and title.
@@ -69,36 +69,36 @@ public struct VPlainButton<Content>: View where Content: View {
         icon: Image,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self.action = action
-        self.content = .iconTitle(icon: icon, text: title)
+        self.label = .iconTitle(icon: icon, text: title)
     }
     
-    /// Initializes component with action and content.
+    /// Initializes component with action and label.
     public init(
         model: VPlainButtonModel = .init(),
         action: @escaping () -> Void,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.model = model
         self.action = action
-        self.content = .content(content: content)
+        self.label = .custom(label: label)
     }
 
     // MARK: Body
     public var body: some View {
-        VBaseButton(gesture: gestureHandler, content: {
-            buttonContent
+        VBaseButton(gesture: gestureHandler, label: {
+            buttonLabel
                 .padding(.horizontal, model.layout.hitBox.horizontal)
                 .padding(.vertical, model.layout.hitBox.vertical)
         })
             .disabled(!internalState.isEnabled)
     }
     
-    @ViewBuilder private var buttonContent: some View {
-        switch content {
+    @ViewBuilder private var buttonLabel: some View {
+        switch label {
         case .title(let title):
             VText(
                 color: model.colors.title.for(internalState),
@@ -130,9 +130,9 @@ public struct VPlainButton<Content>: View where Content: View {
                 )
             })
             
-        case .content(let content):
-            content()
-                .opacity(model.colors.customContentOpacities.for(internalState))
+        case .custom(let label):
+            label()
+                .opacity(model.colors.customLabelOpacities.for(internalState))
         }
     }
 

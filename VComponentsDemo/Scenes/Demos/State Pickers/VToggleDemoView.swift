@@ -15,13 +15,13 @@ struct VToggleDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var state: VToggleState = .off
-    @State private var contentType: VToggleContent = .title
-    @State private var contentIsClickable: Bool = VToggleModel.Misc().contentIsClickable
+    @State private var labelType: VToggleLabel = .title
+    @State private var labelIsClickable: Bool = VToggleModel.Misc().labelIsClickable
     
     private var model: VToggleModel {
         var model: VToggleModel = .init()
         
-        model.misc.contentIsClickable = contentIsClickable
+        model.misc.labelIsClickable = labelIsClickable
         
         return model
     }
@@ -34,10 +34,10 @@ struct VToggleDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch contentType {
+            switch labelType {
             case .empty: VToggle(model: model, state: $state)
             case .title: VToggle(model: model, state: $state, title: toggleTitle)
-            case .custom: VToggle(model: model, state: $state, content: { toggleIcon })
+            case .custom: VToggle(model: model, state: $state, label: { toggleIcon })
             }
         })
             .disabled(!isEnabled)
@@ -55,9 +55,9 @@ struct VToggleDemoView: View {
             headerTitle: "State"
         )
         
-        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
         
-        ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
+        ToggleSettingView(isOn: $labelIsClickable, title: "Clickable Label")
     }
     
     private var toggleIcon: Image { .init(systemName: "swift") }
@@ -97,7 +97,7 @@ private enum _VToggleState: Int, PickableTitledEnumeration {
     }
 }
 
-enum VToggleContent: Int, PickableTitledEnumeration {
+enum VToggleLabel: Int, PickableTitledEnumeration {
     case empty
     case title
     case custom

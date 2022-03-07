@@ -16,13 +16,13 @@ enum VSegmentedPickerContent<Data, CustomRowContent>
 {
     // MARK: Properties
     case titles(titles: [String])
-    case contents(data: Data, rowContent: (Data.Element) -> CustomRowContent)
+    case custom(data: Data, rowContent: (Data.Element) -> CustomRowContent)
     
     // MARK: Properties
     var count: Int {
         switch self {
         case .titles(let titles): return titles.count
-        case .contents(let data, _): return data.count
+        case .custom(let data, _): return data.count
         }
     }
 }

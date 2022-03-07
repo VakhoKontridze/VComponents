@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Primary Button
 /// Large colored button component that performs action when triggered.
 ///
-/// Component can be initialized with title, icon and title, and content.
+/// Component can be initialized with title, icon and title, and label.
 ///
 /// Model can be passed as parameter.
 ///
@@ -26,7 +26,7 @@ import SwiftUI
 ///             .padding()
 ///     }
 ///
-public struct VPrimaryButton<Content>: View where Content: View {
+public struct VPrimaryButton<Label>: View where Label: View {
     // MARK: Properties
     private let model: VPrimaryButtonModel
     
@@ -37,7 +37,7 @@ public struct VPrimaryButton<Content>: View where Content: View {
     
     private let action: () -> Void
     
-    private let content: VPrimaryButtonContent<Content>
+    private let label: VPrimaryButtonLabel<Label>
     
     // MARK: Initializers
     /// Initializes component with action and title.
@@ -47,12 +47,12 @@ public struct VPrimaryButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self.isLoading = isLoading
         self.action = action
-        self.content = .title(title: title)
+        self.label = .title(title: title)
     }
     
     /// Initializes component with action, icon, and title.
@@ -63,31 +63,31 @@ public struct VPrimaryButton<Content>: View where Content: View {
         icon: Image,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self.isLoading = isLoading
         self.action = action
-        self.content = .iconTitle(icon: icon, title: title)
+        self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes component with action and content.
+    /// Initializes component with action and label.
     public init(
         model: VPrimaryButtonModel = .init(),
         isLoading: Bool = false,
         action: @escaping () -> Void,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.model = model
         self.isLoading = isLoading
         self.action = action
-        self.content = .content(content: content)
+        self.label = .custom(label: label)
     }
     
     // MARK: Body
     public var body: some View {
-        VBaseButton(gesture: gestureHandler, content: {
-            buttonContent
+        VBaseButton(gesture: gestureHandler, label: {
+            buttonLabel
                 .frame(height: model.layout.height)
                 .background(background)
                 .overlay(border)
@@ -95,12 +95,12 @@ public struct VPrimaryButton<Content>: View where Content: View {
             .disabled(!internalState.isEnabled)
     }
     
-    private var buttonContent: some View {
+    private var buttonLabel: some View {
         HStack(spacing: model.layout.loaderSpacing, content: {
             loaderCompensator
 
             Group(content: {
-                switch content {
+                switch label {
                 case .title(let title):
                     VText(
                         color: model.colors.title.for(internalState),
@@ -124,17 +124,17 @@ public struct VPrimaryButton<Content>: View where Content: View {
                         )
                     })
                     
-                case .content(let content):
-                    content()
-                        .opacity(model.colors.customContentOpacities.for(internalState))
+                case .custom(let label):
+                    label()
+                        .opacity(model.colors.customLabelOpacities.for(internalState))
                 }
             })
                 .frame(maxWidth: .infinity)
 
             loader
         })
-            .padding(.horizontal, model.layout.contentMargins.horizontal)
-            .padding(.vertical, model.layout.contentMargins.vertical)
+            .padding(.horizontal, model.layout.labelMargins.horizontal)
+            .padding(.vertical, model.layout.labelMargins.vertical)
     }
     
     @ViewBuilder private var loaderCompensator: some View {

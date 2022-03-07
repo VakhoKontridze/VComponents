@@ -30,7 +30,7 @@ extension VMenuButtonType {
             VPrimaryButton(
                 model: model,
                 action: {},
-                content: label
+                label: label
             )
                 .disabled(!isEnabled)
             
@@ -38,7 +38,7 @@ extension VMenuButtonType {
             VSecondaryButton(
                 model: model,
                 action: {},
-                content: label
+                label: label
             )
                 .disabled(!isEnabled)
             
@@ -46,7 +46,7 @@ extension VMenuButtonType {
             VSquareButton(
                 model: model,
                 action: {},
-                content: label
+                label: label
             )
                 .disabled(!isEnabled)
             
@@ -54,7 +54,7 @@ extension VMenuButtonType {
             VPlainButton(
                 model: model,
                 action: {},
-                content: label
+                label: label
             )
                 .disabled(!isEnabled)
             

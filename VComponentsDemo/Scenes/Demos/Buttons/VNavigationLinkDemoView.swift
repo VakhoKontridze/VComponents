@@ -22,7 +22,7 @@ struct VNavigationLinkDemoView: View {
     }
     
     private func component() -> some View {
-        VNavigationLink(destination: destination, content: {
+        VNavigationLink(destination: destination, label: {
             VSecondaryButton(
                 action: {},
                 title: buttonTitle

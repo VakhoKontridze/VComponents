@@ -14,7 +14,7 @@ struct VSquareButtonDemoView: View {
     static var navBarTitle: String { "Square Button" }
     
     @State private var isEnabled: Bool = true
-    @State private var contentType: VSquareButtonContent = .title
+    @State private var labelType: VSquareButtonLabel = .title
     @State private var shapeType: VSquareButtonShape = .init(dimension: VSquareButtonModel.Layout().dimension, radius: VSquareButtonModel.Layout().cornerRadius)
     @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VSquareButtonModel.Layout().hitBox.horizontal)
     @State private var borderType: VPrimaryButtonBorder = .borderless
@@ -66,10 +66,10 @@ struct VSquareButtonDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch contentType {
+            switch labelType {
             case .title: VSquareButton(model: model, action: {}, title: buttonTitle)
             case .icon: VSquareButton(model: model, action: {}, icon: buttonIcon)
-            case .custom: VSquareButton(model: model, action: {}, content: { buttonIcon })
+            case .custom: VSquareButton(model: model, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)
@@ -84,7 +84,7 @@ struct VSquareButtonDemoView: View {
             headerTitle: "State"
         )
         
-        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
         
         VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
         
@@ -99,7 +99,7 @@ struct VSquareButtonDemoView: View {
 // MARK: - Helpers
 private typealias VSquareButtonState = VSecondaryButtonState
 
-enum VSquareButtonContent: Int, PickableTitledEnumeration {
+enum VSquareButtonLabel: Int, PickableTitledEnumeration {
     case title
     case icon
     case custom

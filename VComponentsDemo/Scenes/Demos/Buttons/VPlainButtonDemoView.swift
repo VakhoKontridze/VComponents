@@ -14,7 +14,7 @@ struct VPlainButtonDemoView: View {
     static var navBarTitle: String { "Plain Button" }
     
     @State private var isEnabled: Bool = true
-    @State private var contentType: VPlainButtonContent = .title
+    @State private var labelType: VPlainButtonLabel = .title
     @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VPlainButtonModel.Layout().hitBox.horizontal)
     
     private var model: VPlainButtonModel {
@@ -41,11 +41,11 @@ struct VPlainButtonDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch contentType {
+            switch labelType {
             case .title: VPlainButton(model: model, action: {}, title: buttonTitle)
             case .icon: VPlainButton(model: model, action: {}, icon: buttonIcon)
             case .iconTitle: VPlainButton(model: model, action: {}, icon: buttonIcon, title: buttonTitle)
-            case .custom: VPlainButton(model: model, action: {}, content: { buttonIcon })
+            case .custom: VPlainButton(model: model, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)
@@ -60,7 +60,7 @@ struct VPlainButtonDemoView: View {
             headerTitle: "State"
         )
         
-        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
         
         VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
     }
@@ -73,7 +73,7 @@ struct VPlainButtonDemoView: View {
 // MARK: - Helpers
 private typealias VPlainButtonState = VSecondaryButtonState
 
-private enum VPlainButtonContent: Int, PickableTitledEnumeration {
+private enum VPlainButtonLabel: Int, PickableTitledEnumeration {
     case title
     case icon
     case iconTitle

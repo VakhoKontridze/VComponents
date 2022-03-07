@@ -22,7 +22,7 @@ struct VLinkDemoView: View {
     }
     
     @ViewBuilder private func component() -> some View {
-        VLink(url: url, content: {
+        VLink(url: url, label: {
             VSecondaryButton(
                 action: {},
                 title: buttonTitle

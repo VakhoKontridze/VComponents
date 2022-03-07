@@ -42,8 +42,8 @@ public struct VSquareButtonModel {
         
         var hasBorder: Bool { borderWidth > 0 }
         
-        /// Content margin. Defaults to `3` horizontally and `3` vertically.
-        public var contentMargins: ContentMargin = .init(
+        /// Label margins. Defaults to `3` horizontally and `3` vertically.
+        public var labelMargins: LabelMargins = .init(
             horizontal: 3,
             vertical: 3
         )
@@ -61,9 +61,9 @@ public struct VSquareButtonModel {
         /// Initializes sub-model with default values.
         public init() {}
         
-        // MARK: Content Margin
+        // MARK: Label Margins
         /// Sub-model containing `horizontal` and `vertical` margins.
-        public typealias ContentMargin = EdgeInsets_HV
+        public typealias LabelMargins = EdgeInsets_HV
         
         // MARK: Hit Box
         /// Sub-model containing `horizontal` and `vertical` hit boxes.
@@ -93,12 +93,12 @@ public struct VSquareButtonModel {
         /// Can be used for bitmap images. Defaults to `1`'s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
-        /// Custom content opacities.
+        /// Custom label opacities.
         ///
-        /// Applicable only when init with content is used.
-        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// Applicable only when init with label is used.
+        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = .init(primaryButtonReference.colors.customContentOpacities)
+        public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

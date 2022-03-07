@@ -15,9 +15,9 @@ struct VCheckBoxDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var state: VCheckBoxState = .off
-    @State private var contentType: VCheckBoxContent = .title
+    @State private var labelType: VCheckBoxLabel = .title
     @State private var hitBoxType: VCheckBoxHitBox = .init(value: VCheckBoxModel.Layout().hitBox)
-    @State private var contentIsClickable: Bool = VCheckBoxModel.Misc().contentIsClickable
+    @State private var labelIsClickable: Bool = VCheckBoxModel.Misc().labelIsClickable
     
     private var model: VCheckBoxModel {
         let defaultModel: VCheckBoxModel = .init()
@@ -31,10 +31,10 @@ struct VCheckBoxDemoView: View {
             }
         }()
         if hitBoxType == .clipped {
-            model.layout.contentMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            model.layout.labelMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
         }
         
-        model.misc.contentIsClickable = contentIsClickable
+        model.misc.labelIsClickable = labelIsClickable
         
         return model
     }
@@ -47,10 +47,10 @@ struct VCheckBoxDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch contentType {
+            switch labelType {
             case .empty: VCheckBox(model: model, state: $state)
             case .title: VCheckBox(model: model, state: $state, title: checkBoxTitle)
-            case .custom: VCheckBox(model: model, state: $state, content: { checkBoxIcon })
+            case .custom: VCheckBox(model: model, state: $state, label: { checkBoxIcon })
             }
         })
             .disabled(!isEnabled)
@@ -68,11 +68,11 @@ struct VCheckBoxDemoView: View {
             headerTitle: "State"
         )
         
-        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
         
         VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
         
-        ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
+        ToggleSettingView(isOn: $labelIsClickable, title: "Clickable Label")
     }
     
     private var checkBoxIcon: Image { .init(systemName: "swift") }
@@ -116,7 +116,7 @@ private enum _VCheckBoxState: Int, PickableTitledEnumeration {
     }
 }
 
-private typealias VCheckBoxContent = VToggleContent
+private typealias VCheckBoxLabel = VToggleLabel
 
 private typealias VCheckBoxHitBox = VSecondaryButtonHitBox
 

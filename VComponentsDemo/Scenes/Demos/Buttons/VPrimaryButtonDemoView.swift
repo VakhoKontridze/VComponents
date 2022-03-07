@@ -15,7 +15,7 @@ struct VPrimaryButtonDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var isLoading: Bool = false
-    @State private var contentType: VPrimaryButtonContent = .title
+    @State private var labelType: VPrimaryButtonLabel = .title
     @State private var borderType: VPrimaryButtonBorder = .borderless
     
     private var model: VPrimaryButtonModel {
@@ -53,10 +53,10 @@ struct VPrimaryButtonDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch contentType {
+            switch labelType {
             case .title: VPrimaryButton(model: model, isLoading: isLoading, action: {}, title: buttonTitle)
             case .iconTitle: VPrimaryButton(model: model, isLoading: isLoading, action: {}, icon: buttonIcon, title: buttonTitle)
-            case .custom: VPrimaryButton(model: model, isLoading: isLoading, action: {}, content: { buttonIcon })
+            case .custom: VPrimaryButton(model: model, isLoading: isLoading, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)
@@ -74,7 +74,7 @@ struct VPrimaryButtonDemoView: View {
             headerTitle: "State"
         )
         
-        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
         
         VSegmentedPicker(selection: $borderType, headerTitle: "Border")
     }
@@ -107,7 +107,7 @@ private enum VPrimaryButtonState: Int, PickableTitledEnumeration {
     }
 }
 
-enum VPrimaryButtonContent: Int, PickableTitledEnumeration {
+enum VPrimaryButtonLabel: Int, PickableTitledEnumeration {
     case title
     case iconTitle
     case custom

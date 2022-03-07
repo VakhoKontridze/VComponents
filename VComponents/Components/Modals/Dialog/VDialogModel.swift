@@ -50,7 +50,7 @@ public struct VDialogModel {
         public var titlesAndContentSpacing: CGFloat = 5
         
         /// Additional title, description, and content margins. Defaults to `0` horizontal, and `5` vertical.
-        public var titlesAndContentMargins: TitleAndContentMargin = .init(
+        public var titlesAndContentMargins: TitleAndContentMargins = .init(
             horizontal: 0,
             vertical: 5
         )
@@ -71,9 +71,9 @@ public struct VDialogModel {
         /// Initializes sub-model with default values.
         public init() {}
         
-        // MARK: Title and Content Margin
+        // MARK: Title and Content Margins
         /// Sub-model containing `horizontal` and `vertical` margins.
-        public typealias TitleAndContentMargin = EdgeInsets_HV
+        public typealias TitleAndContentMargins = EdgeInsets_HV
     }
 
     // MARK: Colors

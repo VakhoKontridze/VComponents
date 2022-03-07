@@ -1,5 +1,5 @@
 //
-//  VToggleRightContentModel.swift
+//  VToggleModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -45,8 +45,8 @@ public struct VToggleModel {
         /// Thumb dimension. Defaults to `27`, similarly to native toggle.
         public var thumbDimension: CGFloat = 27
         
-        /// Content leading margin. Defaults to `5`.
-        public var contentMarginLeading: CGFloat = 5
+        /// Label leading margin. Defaults to `5`.
+        public var labelMarginLeading: CGFloat = 5
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2
@@ -91,12 +91,12 @@ public struct VToggleModel {
             disabled: ColorBook.secondary
         )
         
-        /// Custom content opacities.
+        /// Custom label opacities.
         ///
-        /// Applicable only when init with content is used.
-        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// Applicable only when init with label is used.
+        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = .init(
+        public var customLabelOpacities: StateOpacities = .init(
             off: 1,
             on: 1,
             pressedOff: 1,
@@ -147,8 +147,8 @@ public struct VToggleModel {
     /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if content is clickable. Defaults to `true`.
-        public var contentIsClickable: Bool = true
+        /// Indicates if label is clickable. Defaults to `true`.
+        public var labelIsClickable: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

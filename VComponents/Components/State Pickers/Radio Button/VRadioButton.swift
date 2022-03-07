@@ -8,9 +8,9 @@
 import SwiftUI
 
 // MARK: - V Radio Button
-/// State picker component that toggles between off, on, or disabled states, and displays content.
+/// State picker component that toggles between off, on, or disabled states, and displays label.
 ///
-/// Component can be initialized with without content, title, or content.
+/// Component can be initialized without label, with title, or label.
 ///
 /// Model can be passed as parameter.
 ///
@@ -27,7 +27,7 @@ import SwiftUI
 ///         )
 ///     }
 ///     
-public struct VRadioButton<Content>: View where Content: View {
+public struct VRadioButton<Label>: View where Label: View {
     // MARK: Properties
     private let model: VRadioButtonModel
     
@@ -36,9 +36,9 @@ public struct VRadioButton<Content>: View where Content: View {
     @Binding private var state: VRadioButtonState
     private var internalState: VRadioButtonInternalState { .init(isEnabled: isEnabled, state: state, isPressed: isPressed) }
     
-    private let content: VRadioButtonContent<Content>
+    private let label: VRadioButtonLabel<Label>
     
-    private var contentIsEnabled: Bool { model.misc.contentIsClickable && internalState.isEnabled }
+    private var labelIsEnabled: Bool { model.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
     /// Initializes component with state.
@@ -46,11 +46,11 @@ public struct VRadioButton<Content>: View where Content: View {
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = state
-        self.content = .empty
+        self.label = .empty
     }
     
     /// Initializes component with state and title.
@@ -59,22 +59,22 @@ public struct VRadioButton<Content>: View where Content: View {
         state: Binding<VRadioButtonState>,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = state
-        self.content = .title(title: title)
+        self.label = .title(title: title)
     }
     
-    /// Initializes component with state and content.
+    /// Initializes component with state and label.
     public init(
         model: VRadioButtonModel = .init(),
         state: Binding<VRadioButtonState>,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.model = model
         self._state = state
-        self.content = .content(content: content)
+        self.label = .custom(label: label)
     }
     
     // MARK: Initializers - Bool
@@ -83,11 +83,11 @@ public struct VRadioButton<Content>: View where Content: View {
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = .init(bool: isOn)
-        self.content = .empty
+        self.label = .empty
     }
     
     /// Initializes component with `Bool` and title.
@@ -96,28 +96,28 @@ public struct VRadioButton<Content>: View where Content: View {
         isOn: Binding<Bool>,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self._state = .init(bool: isOn)
-        self.content = .title(title: title)
+        self.label = .title(title: title)
     }
     
-    /// Initializes component with `Bool` and content.
+    /// Initializes component with `Bool` and label.
     public init(
         model: VRadioButtonModel = .init(),
         isOn: Binding<Bool>,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.model = model
         self._state = .init(bool: isOn)
-        self.content = .content(content: content)
+        self.label = .custom(label: label)
     }
 
     // MARK: Body
     public var body: some View {
         Group(content: {
-            switch content {
+            switch label {
             case .empty:
                 radioButton
                 
@@ -127,7 +127,7 @@ public struct VRadioButton<Content>: View where Content: View {
                     
                     spacer
 
-                    VBaseButton(gesture: gestureHandler, content: {
+                    VBaseButton(gesture: gestureHandler, label: {
                         VText(
                             type: .multiLine(alignment: .leading, limit: nil),
                             color: model.colors.title.for(internalState),
@@ -135,20 +135,20 @@ public struct VRadioButton<Content>: View where Content: View {
                             title: title
                         )
                     })
-                        .disabled(!contentIsEnabled)
+                        .disabled(!labelIsEnabled)
                 })
                 
-            case .content(let content):
+            case .custom(let label):
                 HStack(spacing: 0, content: {
                     radioButton
                     
                     spacer
                     
-                    VBaseButton(gesture: gestureHandler, content: {
-                        content()
-                            .opacity(model.colors.customContentOpacities.for(internalState))
+                    VBaseButton(gesture: gestureHandler, label: {
+                        label()
+                            .opacity(model.colors.customLabelOpacities.for(internalState))
                     })
-                        .disabled(!contentIsEnabled)
+                        .disabled(!labelIsEnabled)
                 })
             }
         })
@@ -156,7 +156,7 @@ public struct VRadioButton<Content>: View where Content: View {
     }
     
     private var radioButton: some View {
-        VBaseButton(gesture: gestureHandler, content: {
+        VBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
                 Circle()
                     .frame(dimension: model.layout.dimension)
@@ -177,13 +177,13 @@ public struct VRadioButton<Content>: View where Content: View {
     }
     
     private var spacer: some View {
-        VBaseButton(gesture: gestureHandler, content: {
+        VBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.contentMarginLeading)
+                .frame(width: model.layout.labelMarginLeading)
                 .foregroundColor(.clear)
         })
-            .disabled(!contentIsEnabled)
+            .disabled(!labelIsEnabled)
     }
 
     // MARK: Actions

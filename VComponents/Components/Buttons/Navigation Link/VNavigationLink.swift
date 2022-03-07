@@ -25,7 +25,7 @@ import SwiftUI
 ///
 ///                 VNavigationLink(
 ///                     destination: { destination },
-///                     content: {
+///                     label: {
 ///                         VSecondaryButton(
 ///                             action: {},
 ///                             title: "Lorem Ipsum"
@@ -46,10 +46,10 @@ import SwiftUI
 ///
 ///
 /// Alternatively, navigation can occur via `vNavigationLink` modifier.
-public struct VNavigationLink<Destination, Content>: View
+public struct VNavigationLink<Destination, Label>: View
     where
         Destination: View,
-        Content: View
+        Label: View
 {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -75,30 +75,30 @@ public struct VNavigationLink<Destination, Content>: View
     }
     
     private let destination: () -> Destination
-    private let content: () -> Content
+    private let label: () -> Label
     
     // MARK: Initializers
-    /// Initializes component with destination and content.
+    /// Initializes component with destination and label.
     public init(
         @ViewBuilder destination: @escaping () -> Destination,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self._isActiveExternally = .constant(false)
         self.stateManagament = .internal
         self.destination = destination
-        self.content = content
+        self.label = label
     }
     
-    /// Initializes component with active state, destination and content.
+    /// Initializes component with active state, destination and label.
     public init(
         isActive: Binding<Bool>,
         @ViewBuilder destination: @escaping () -> Destination,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self._isActiveExternally = isActive
         self.stateManagament = .external
         self.destination = destination
-        self.content = content
+        self.label = label
     }
 
     // MARK: Body
@@ -106,7 +106,7 @@ public struct VNavigationLink<Destination, Content>: View
         NavigationLink(
             isActive: isActive,
             destination: destination,
-            label: content
+            label: label
         )
             .buttonStyle(.plain) // Cancels styling
             .disabled(!isEnabled)
@@ -128,7 +128,7 @@ struct VNavigationLink_Previews: PreviewProvider {
 
                 VNavigationLink(
                     destination: { destination },
-                    content: {
+                    label: {
                         VSecondaryButton(
                             action: {},
                             title: "Lorem Ipsum"

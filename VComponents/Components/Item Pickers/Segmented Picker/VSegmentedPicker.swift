@@ -85,7 +85,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .contents(data: data, rowContent: rowContent)
+        self.content = .custom(data: data, rowContent: rowContent)
     }
 
     /// Initializes component with selected index and row titles.
@@ -132,7 +132,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .contents(data: data, rowContent: rowContent)
+        self.content = .custom(data: data, rowContent: rowContent)
     }
     
     /// Initializes component with selection value and row titles.
@@ -181,7 +181,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .contents(data: Array(PickableItem.allCases), rowContent: rowContent)
+        self.content = .custom(data: Array(PickableItem.allCases), rowContent: rowContent)
     }
     
     /// Initializes component with `PickableTitledEnumeration`.
@@ -278,7 +278,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
                 ForEach(0..<titles.count, content: { i in
                     VBaseButton(
                         gesture: { gestureHandler(i: i, gestureState: $0) },
-                        content: {
+                        label: {
                             VText(
                                 color: model.colors.title.for(rowState(for: i)),
                                 font: model.fonts.rows,
@@ -296,12 +296,12 @@ public struct VSegmentedPicker<Data, RowContent>: View
                 })
             })
             
-        case .contents(let data, let rowContent):
+        case .custom(let data, let rowContent):
             HStack(spacing: 0, content: {
                 ForEach(0..<data.count, content: { i in
                     VBaseButton(
                         gesture: { gestureHandler(i: i, gestureState: $0) },
-                        content: {
+                        label: {
                             rowContent(data[i])
                                 .padding(model.layout.actualRowContentMargin)
                                 .frame(maxWidth: .infinity)

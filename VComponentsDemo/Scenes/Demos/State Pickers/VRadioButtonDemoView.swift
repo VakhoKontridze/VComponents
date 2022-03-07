@@ -15,9 +15,9 @@ struct VRadioButtonDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var state: VRadioButtonState = .off
-    @State private var contentType: VRadioButtonContent = .title
+    @State private var labelType: VRadioButtonLabel = .title
     @State private var hitBoxType: VRadioButtonHitBox = .init(value: VRadioButtonModel.Layout().hitBox)
-    @State private var contentIsClickable: Bool = VRadioButtonModel.Misc().contentIsClickable
+    @State private var labelIsClickable: Bool = VRadioButtonModel.Misc().labelIsClickable
     
     private var model: VRadioButtonModel {
         let defaultModel: VRadioButtonModel = .init()
@@ -31,10 +31,10 @@ struct VRadioButtonDemoView: View {
             }
         }()
         if hitBoxType == .clipped {
-            model.layout.contentMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            model.layout.labelMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
         }
         
-        model.misc.contentIsClickable = contentIsClickable
+        model.misc.labelIsClickable = labelIsClickable
         
         return model
     }
@@ -47,10 +47,10 @@ struct VRadioButtonDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch contentType {
+            switch labelType {
             case .empty: VRadioButton(model: model, state: $state)
             case .title: VRadioButton(model: model, state: $state, title: radioButtonTitle)
-            case .custom: VRadioButton(model: model, state: $state, content: { radioButtonIcon })
+            case .custom: VRadioButton(model: model, state: $state, label: { radioButtonIcon })
             }
         })
             .disabled(!isEnabled)
@@ -68,9 +68,9 @@ struct VRadioButtonDemoView: View {
             headerTitle: "State"
         )
         
-        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
         
-        ToggleSettingView(isOn: $contentIsClickable, title: "Clickable Content")
+        ToggleSettingView(isOn: $labelIsClickable, title: "Clickable Label")
     }
     
     private var radioButtonIcon: Image { .init(systemName: "swift") }
@@ -110,7 +110,7 @@ private enum _VRadioButtonState: Int, PickableTitledEnumeration {
     }
 }
 
-private typealias VRadioButtonContent = VToggleContent
+private typealias VRadioButtonLabel = VToggleLabel
 
 private typealias VRadioButtonHitBox = VSecondaryButtonHitBox
 

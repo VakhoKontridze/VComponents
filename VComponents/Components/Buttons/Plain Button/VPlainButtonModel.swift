@@ -86,12 +86,12 @@ public struct VPlainButtonModel {
         /// Can be used for bitmap images. Defaults to `1`'s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
-        /// Custom content opacities.
+        /// Custom label opacities.
         ///
-        /// Applicable only when init with content is used.
-        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// Applicable only when init with label is used.
+        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = .init(primaryButtonReference.colors.customContentOpacities)
+        public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

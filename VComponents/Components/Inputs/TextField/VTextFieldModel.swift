@@ -168,8 +168,8 @@ public struct VTextFieldModel {
             pressedSuccess: .init(componentAsset: "TextField.Border.success"),
             pressedError: .init(componentAsset: "TextField.Border.error"),
             disabled: segmentedPickerReference.colors.header.disabled,
-            pressedOpacity: squareButtonReference.colors.customContentOpacities.pressed, // FIXME: No longer that???
-            disabledOpacity: squareButtonReference.colors.customContentOpacities.disabled // FIXME: No longer that???
+            pressedOpacity: squareButtonReference.colors.customLabelOpacities.pressed, // FIXME: No longer that???
+            disabledOpacity: squareButtonReference.colors.customLabelOpacities.disabled // FIXME: No longer that???
         )
         
         /// Clear button background colors.
@@ -205,8 +205,8 @@ public struct VTextFieldModel {
             enabled: ColorBook.primary,
             pressed: ColorBook.primary,
             disabled: ColorBook.primary,
-            pressedOpacity: plainButtonReference.colors.customContentOpacities.pressed, // FIXME
-            disabledOpacity: plainButtonReference.colors.customContentOpacities.disabled // FIXME
+            pressedOpacity: plainButtonReference.colors.customLabelOpacities.pressed, // FIXME
+            disabledOpacity: plainButtonReference.colors.customLabelOpacities.disabled // FIXME
         )
         
         // MARK: Initializers
@@ -369,8 +369,8 @@ public struct VTextFieldModel {
         
         model.layout.dimension = layout.visibilityButtonDimension
         model.layout.cornerRadius = layout.visibilityButtonDimension / 2
-        model.layout.contentMargins.horizontal = 0
-        model.layout.contentMargins.vertical = 0
+        model.layout.labelMargins.horizontal = 0
+        model.layout.labelMargins.vertical = 0
         model.layout.hitBox.horizontal = 0
         model.layout.hitBox.vertical = 0
         
@@ -380,7 +380,7 @@ public struct VTextFieldModel {
             disabled: .clear
         )
         
-        model.colors.customContentOpacities = .init(
+        model.colors.customLabelOpacities = .init(
             enabled: 1,
             pressed: colors.visibilityButtonIcon.pressedOpacity,
             disabled: colors.visibilityButtonIcon.disabledOpacity
@@ -395,7 +395,7 @@ public struct VTextFieldModel {
         model.layout.hitBox.horizontal = 0
         model.layout.hitBox.vertical = 0
         
-        model.colors.customContentOpacities = .init(
+        model.colors.customLabelOpacities = .init(
             enabled: 1, // FIXME
             pressed: colors.cancelButton.pressedOpacity,
             disabled: colors.cancelButton.disabledOpacity

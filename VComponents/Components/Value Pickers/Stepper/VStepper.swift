@@ -90,7 +90,7 @@ public struct VStepper: View {
                 saveButtonPressState(button, isPressed: gestureState.isPressed)
                 if gestureState.isClicked { incrementValue(from: button) }
             },
-            content: {
+            label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                         .foregroundColor(model.colors.buttonBackground.for(pressedButtonState(button)))

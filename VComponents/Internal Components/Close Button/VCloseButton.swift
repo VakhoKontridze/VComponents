@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Chevron Button
-extension VSquareButton where Content == Never {
+extension VSquareButton where Label == Never {
     static func close(
         model: VCloseButtonModel = .init(),
         action: @escaping () -> Void

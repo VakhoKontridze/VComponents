@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Square Button
 /// Squared colored button component that performs action when triggered.
 ///
-/// Component can be initialized with title, icon, and content.
+/// Component can be initialized with title, icon, and label.
 ///
 /// Model can be passed as parameter.
 ///
@@ -23,7 +23,7 @@ import SwiftUI
 ///         )
 ///     }
 ///     
-public struct VSquareButton<Content>: View where Content: View {
+public struct VSquareButton<Label>: View where Label: View {
     // MARK: Properties
     private let model: VSquareButtonModel
     
@@ -33,7 +33,7 @@ public struct VSquareButton<Content>: View where Content: View {
     
     private let action: () -> Void
     
-    private let content: VSquareButtonContent<Content>
+    private let label: VSquareButtonLabel<Label>
 
     // MARK: Initializers
     /// Initializes component with action and title.
@@ -42,11 +42,11 @@ public struct VSquareButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         title: String
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self.action = action
-        self.content = .title(title: title)
+        self.label = .title(title: title)
     }
     
     /// Initializes component with action and icon.
@@ -55,28 +55,28 @@ public struct VSquareButton<Content>: View where Content: View {
         action: @escaping () -> Void,
         icon: Image
     )
-        where Content == Never
+        where Label == Never
     {
         self.model = model
         self.action = action
-        self.content = .icon(icon: icon)
+        self.label = .icon(icon: icon)
     }
     
-    /// Initializes component with action and content.
+    /// Initializes component with action and label.
     public init(
         model: VSquareButtonModel = .init(),
         action: @escaping () -> Void,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder label: @escaping () -> Label
     ) {
         self.model = model
         self.action = action
-        self.content = .content(content: content)
+        self.label = .custom(label: label)
     }
 
     // MARK: Body
     public var body: some View {
-        VBaseButton(gesture: gestureHandler, content: {
-            buttonContent
+        VBaseButton(gesture: gestureHandler, label: {
+            buttonLabel
                 .frame(dimension: model.layout.dimension)
                 .background(background)
                 .overlay(border)
@@ -86,9 +86,9 @@ public struct VSquareButton<Content>: View where Content: View {
             .disabled(!internalState.isEnabled)
     }
     
-    private var buttonContent: some View {
+    private var buttonLabel: some View {
         Group(content: {
-            switch content {
+            switch label {
             case .title(let title):
                 VText(
                     color: model.colors.title.for(internalState),
@@ -104,13 +104,13 @@ public struct VSquareButton<Content>: View where Content: View {
                     .foregroundColor(model.colors.icon.for(internalState))
                     .opacity(model.colors.iconOpacities.for(internalState))
                 
-            case .content(let content):
-                content()
-                    .opacity(model.colors.customContentOpacities.for(internalState))
+            case .custom(let label):
+                label()
+                    .opacity(model.colors.customLabelOpacities.for(internalState))
             }
         })
-            .padding(.horizontal, model.layout.contentMargins.horizontal)
-            .padding(.vertical, model.layout.contentMargins.vertical)
+            .padding(.horizontal, model.layout.labelMargins.horizontal)
+            .padding(.vertical, model.layout.labelMargins.vertical)
     }
 
     private var background: some View {

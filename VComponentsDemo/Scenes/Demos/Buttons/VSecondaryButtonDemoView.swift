@@ -14,7 +14,7 @@ struct VSecondaryButtonDemoView: View {
     static var navBarTitle: String { "Secondary Button" }
     
     @State private var isEnabled: Bool = true
-    @State private var contentType: VSecondaryButtonContent = .title
+    @State private var labelType: VSecondaryButtonLabel = .title
     @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VSecondaryButtonModel.Layout().hitBox.horizontal)
     @State private var borderType: VPrimaryButtonBorder = .borderless
     
@@ -58,10 +58,10 @@ struct VSecondaryButtonDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch contentType {
+            switch labelType {
             case .title: VSecondaryButton(model: model, action: {}, title: buttonTitle)
             case .iconTitle: VSecondaryButton(model: model, action: {}, icon: buttonIcon, title: buttonTitle)
-            case .custom: VSecondaryButton(model: model, action: {}, content: { buttonIcon })
+            case .custom: VSecondaryButton(model: model, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)
@@ -76,7 +76,7 @@ struct VSecondaryButtonDemoView: View {
             headerTitle: "State"
         )
         
-        VSegmentedPicker(selection: $contentType, headerTitle: "Content")
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
         
         VSegmentedPicker(selection: $hitBoxType, headerTitle: "Hit Box")
         
@@ -108,7 +108,7 @@ enum VSecondaryButtonState: Int, PickableTitledEnumeration {
     }
 }
 
-private typealias VSecondaryButtonContent = VPrimaryButtonContent
+private typealias VSecondaryButtonLabel = VPrimaryButtonLabel
 
 enum VSecondaryButtonHitBox: Int, PickableTitledEnumeration {
     case clipped

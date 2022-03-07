@@ -50,10 +50,10 @@ public struct VCheckBoxModel {
         public var iconDimension: CGFloat = 9
         
         /// Hit box. Defaults to `5`.
-        public var hitBox: CGFloat = toggleReference.layout.contentMarginLeading
+        public var hitBox: CGFloat = toggleReference.layout.labelMarginLeading
         
-        /// Content leading margin. Defaults to `0`.
-        public var contentMarginLeading: CGFloat = 0
+        /// Label leading margin. Defaults to `0`.
+        public var labelMarginLeading: CGFloat = 0
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -108,12 +108,12 @@ public struct VCheckBoxModel {
             disabled: ColorBook.secondary
         )
         
-        /// Custom content opacities.
+        /// Custom label opacities.
         ///
-        /// Applicable only when init with content is used.
-        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// Applicable only when init with label is used.
+        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = .init(
+        public var customLabelOpacities: StateOpacities = .init(
             off: 1,
             on: 1,
             indeterminate: 1,
@@ -166,8 +166,8 @@ public struct VCheckBoxModel {
     /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if content is clickable. Defaults to `true`.
-        public var contentIsClickable: Bool = toggleReference.misc.contentIsClickable
+        /// Indicates if label is clickable. Defaults to `true`.
+        public var labelIsClickable: Bool = toggleReference.misc.labelIsClickable
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
