@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		170829322765E4C40001DF39 /* VBaseButtonGestureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170829312765E4C40001DF39 /* VBaseButtonGestureState.swift */; };
+		171DB1C327D61A6E0073B5A2 /* VWheelPickerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DB1C227D61A6E0073B5A2 /* VWheelPickerContent.swift */; };
 		173C1FD2272A7FD600DF634F /* View.CustomViewFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */; };
 		173C1FD4272A7FFF00DF634F /* View.CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */; };
 		173C1FD6272A808500DF634F /* UINavigationBar.NavigationBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */; };
@@ -271,6 +272,7 @@
 
 /* Begin PBXFileReference section */
 		170829312765E4C40001DF39 /* VBaseButtonGestureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseButtonGestureState.swift; sourceTree = "<group>"; };
+		171DB1C227D61A6E0073B5A2 /* VWheelPickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWheelPickerContent.swift; sourceTree = "<group>"; };
 		173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CustomViewFrames.swift; sourceTree = "<group>"; };
 		173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CornerRadius.swift; sourceTree = "<group>"; };
 		173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.NavigationBarHeight.swift; sourceTree = "<group>"; };
@@ -1021,6 +1023,7 @@
 			children = (
 				7A767CCA25B6E8220008D2E9 /* VWheelPicker.swift */,
 				7A767CCF25B6E8DB0008D2E9 /* VWheelPickerState.swift */,
+				171DB1C227D61A6E0073B5A2 /* VWheelPickerContent.swift */,
 				7A767CD225B6E8F40008D2E9 /* VWheelPickerModel.swift */,
 			);
 			path = "Wheel Picker";
@@ -1708,6 +1711,7 @@
 				17B23E96273563B400914FEB /* EdgeInsets_HV.swift in Sources */,
 				7AC65FEE25C34303001E96AE /* VMenuState.swift in Sources */,
 				7A767CEC25B703E10008D2E9 /* UIKitTextFieldCoordinator.swift in Sources */,
+				171DB1C327D61A6E0073B5A2 /* VWheelPickerContent.swift in Sources */,
 				17BE45FF27CBC91700D69C3A /* VCloseButton.swift in Sources */,
 				17B23E7E27355AD300914FEB /* StateColors_EPD.swift in Sources */,
 				7A767CF325B705350008D2E9 /* VBaseButtonViewRepresentable.swift in Sources */,

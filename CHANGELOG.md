@@ -2,7 +2,8 @@
 
 #### [2.0.0(17)]
 
-- Buttons have been reworked
+- Buttons, state pickers, and item pickers have been reworked
+- For most components, `State`'s have been removed. Use `disabled` modifier instead.
 - Buttons—`VChevronButton` and `VCloseButton`—have been removed
 - Navigation components—`VTabNavigationView` and `VNavigationView`—have been removed
 - `VBaseView` has been removed

@@ -49,27 +49,29 @@ public struct VWheelPickerModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacities.
-        public var content: StateOpacities = .clear // FIXME: Replace //.init(
-//            disabledOpacity: segmentedPickerReference.colors.content.disabledOpacity
-//        )
-        
-        /// Text content colors.
-        ///
-        /// Only applicable when using init with title.
-        public var textContent: StateColors = .clear // FIXME: Replace // = segmentedPickerReference.colors.textContent
-        
         /// Background colors.
         public var background: StateColors = .init(
             enabled: ColorBook.layer,
             disabled: ColorBook.layer
         )
-
+        
+        /// Text content colors.
+        ///
+        /// Only applicable when using init with title.
+        public var title: StateColors = .init(segmentedPickerReference.colors.title)
+        
+        /// Custom content opacities.
+        ///
+        /// Applicable only when init with content is used.
+        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// so instead, a general opacity is being applied.
+        public var customContentOpacities: StateOpacities = .init(segmentedPickerReference.colors.customContentOpacities)
+        
         /// Header colors.
-        public var header: StateColors = .clear // FIXME: Replace // = segmentedPickerReference.colors.header
+        public var header: StateColors = segmentedPickerReference.colors.header
         
         /// Footer colors.
-        public var footer: StateColors = .clear // FIXME: Replace //segmentedPickerReference.colors.footer
+        public var footer: StateColors = segmentedPickerReference.colors.footer
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -77,11 +79,11 @@ public struct VWheelPickerModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_ED
+        public typealias StateColors = GenericStateModel_ED<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_D
+        public typealias StateOpacities = GenericStateModel_ED<CGFloat>
     }
 
     // MARK: Fonts

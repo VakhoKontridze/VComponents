@@ -15,7 +15,7 @@ struct VSegmentedPickerDemoView: View {
     
     @State private var selection: VSegmentedPickerDataSource = .red
     @State private var isEnabled: Bool = true
-    @State private var labelType: VSegmentedPickerContent = .title
+    @State private var contentType: VSegmentedPickerContent = .title
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var hasDisabledRow: Bool = false
@@ -45,7 +45,7 @@ struct VSegmentedPickerDemoView: View {
     
     private func component() -> some View {
         Group(content: {
-            switch labelType {
+            switch contentType {
             case .title:
                 VSegmentedPicker(
                     model: model,
@@ -81,7 +81,7 @@ struct VSegmentedPickerDemoView: View {
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $labelType, headerTitle: "Content")
+            VSegmentedPicker(selection: $contentType, headerTitle: "Content")
         })
         
         DemoViewSettingsSection(content: {

@@ -49,6 +49,11 @@ public struct GenericStateModel_ED<Value> {
         self.enabled = enabled
         self.disabled = disabled
     }
+    
+    init(_ model: GenericStateModel_EPD<Value>) {
+        self.enabled = model.enabled
+        self.disabled = model.disabled
+    }
 }
 
 extension GenericStateModel_ED: Equatable where Value: Equatable {}

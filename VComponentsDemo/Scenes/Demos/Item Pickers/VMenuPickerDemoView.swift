@@ -15,7 +15,7 @@ struct VMenuPickerDemoView: View {
     
     @State private var selection: VMenuPickerDataSource = .red
     @State private var isEnabled: Bool = true
-    @State private var labelType: VMenuPickerContent = .title
+    @State private var contentType: VMenuPickerContent = .title
 
     // MARK: Body
     var body: some View {
@@ -25,7 +25,7 @@ struct VMenuPickerDemoView: View {
     
     @ViewBuilder private func component() -> some View {
         Group(content: {
-            switch labelType {
+            switch contentType {
             case .title:
                 VMenuPicker(
                     selection: $selection,
@@ -63,7 +63,7 @@ struct VMenuPickerDemoView: View {
         )
 
         VSegmentedPicker(
-            selection: $labelType,
+            selection: $contentType,
             headerTitle: "Content"
         )
     }
