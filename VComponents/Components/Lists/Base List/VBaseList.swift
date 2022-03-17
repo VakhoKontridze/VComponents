@@ -30,7 +30,7 @@ import SwiftUI
 ///         let title: String
 ///     }
 ///
-///     @State var data: [ListRow] = [
+///     let data: [ListRow] = [
 ///         .init(title: "Red"),
 ///         .init(title: "Green"),
 ///         init(title: "Blue")

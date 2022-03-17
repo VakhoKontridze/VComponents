@@ -55,7 +55,7 @@ public struct VWheelPickerModel {
             disabled: ColorBook.layer
         )
         
-        /// Text content colors.
+        /// Title content colors.
         ///
         /// Only applicable when using init with title.
         public var title: StateColors = .init(segmentedPickerReference.colors.title)

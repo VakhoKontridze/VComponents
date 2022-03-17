@@ -62,7 +62,7 @@ public struct GenericStateModel_EPDL<Value> {
     public var loading: Value
     
     // MARK: Initializers
-    /// Initializes group with values.
+    /// Initializes model with values.
     public init(
         enabled: Value,
         pressed: Value,
@@ -73,6 +73,16 @@ public struct GenericStateModel_EPDL<Value> {
         self.pressed = pressed
         self.disabled = disabled
         self.loading = loading
+    }
+    
+    /// Initializes model with clear `Color` values.
+    public static var clear: GenericStateModel_EPDL<Color> {
+        .init(
+            enabled: .clear,
+            pressed: .clear,
+            disabled: .clear,
+            loading: .clear
+        )
     }
 }
 

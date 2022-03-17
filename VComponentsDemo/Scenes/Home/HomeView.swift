@@ -22,7 +22,7 @@ struct HomeView: View {
         .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
-        .init(id: 4, title: "Inputs", rows: [.baseTextField, .textField]),
+        .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Lists", rows: [.baseList, .list, .sectionList, .accordion]),
         .init(id: 6, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
         .init(id: 7, title: "Messages", rows: [.toast]),
@@ -35,7 +35,7 @@ struct HomeView: View {
         case toggle, checkBox, radioButton
         case segmentedPicker, menuPicker, wheelPicker
         case stepper, slider,  rangeSlider
-        case baseTextField, textField
+        case textField
         case baseList, list, sectionList, accordion
         case modal, halfModal, sideBar, dialog, menu, actionSheet
         case toast
@@ -64,7 +64,6 @@ struct HomeView: View {
             case .slider: return VSliderDemoView.navBarTitle
             case .rangeSlider: return VRangeSliderDemoView.navBarTitle
 
-            case .baseTextField: return VBaseTextFieldDemoView.navBarTitle
             case .textField: return VTextFieldDemoView.navBarTitle
                 
             case .baseList: return VBaseListDemoView.navBarTitle
@@ -113,7 +112,6 @@ struct HomeView: View {
             case .slider: VSliderDemoView()
             case .rangeSlider: VRangeSliderDemoView()
                 
-            case .baseTextField: VBaseTextFieldDemoView()
             case .textField: VTextFieldDemoView()
 
             case .baseList: VBaseListDemoView()
@@ -147,7 +145,7 @@ struct HomeView: View {
             DemoListView(type: .accordion, sections: sections)
                 .standardNavigationTitle(Self.navBarTitle)
         })
-            .navigationViewStyle(StackNavigationViewStyle())
+            .navigationViewStyle(.stack)
     }
 }
 

@@ -112,10 +112,10 @@ public struct VDialogButtonModelCustom {
         /// Conrent opacities.
         public var content: StateOpacities
         
-        /// Text content colors.
+        /// Title colors.
         ///
         /// Only applicable when using init with title.
-        public var text: StateColors
+        public var title: StateColors
         
         /// Background colors.
         public var background: StateColors
@@ -124,7 +124,7 @@ public struct VDialogButtonModelCustom {
         /// Initializes sub-model with content, text, and background colors.
         public init(content: StateOpacities, text: StateColors, background: StateColors) {
             self.content = content
-            self.text = text
+            self.title = text
             self.background = background
         }
         

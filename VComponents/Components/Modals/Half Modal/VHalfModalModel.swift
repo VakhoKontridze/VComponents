@@ -185,10 +185,10 @@ public struct VHalfModalModel {
         /// Grabber color.
         public var grabber: Color = .init(componentAsset: "HalfModal.Grabber")
         
-        /// Text header color.
+        /// Title header color.
         ///
         /// Only applicable when using init with title.
-        public var headerText: Color = modalReference.colors.headerText
+        public var header: Color = modalReference.colors.headerTitle
         
         /// Close button background colors.
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
@@ -209,9 +209,6 @@ public struct VHalfModalModel {
         // MARK: State Colors
         /// Sub-model containing colors for component states.
         public typealias StateColors = GenericStateModel_EPD<Color>
-        
-        /// Sub-model containing colors for component states.
-        public typealias StateColors_OLD = StateColors_EPD
         
         // MARK: State Colors and Opaciites
         /// Sub-model containing colors and opacities for component states.

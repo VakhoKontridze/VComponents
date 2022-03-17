@@ -179,7 +179,7 @@ struct VDialog_Previews: PreviewProvider {
             ),
             title: "Lorem ipsum dolor sit amet",
             description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            content: { VTextField(state: .constant(.enabled), text: .constant("Lorem ipsum dolor sit amet")) }
+            content: { VTextField(text: .constant("Lorem ipsum dolor sit amet")) }
         )
     }
 }

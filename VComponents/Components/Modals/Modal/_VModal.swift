@@ -148,7 +148,7 @@ struct VModal_Previews: PreviewProvider {
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: VModalModel.Fonts().header,
-                    color: VModalModel.Colors().headerText,
+                    color: VModalModel.Colors().headerTitle,
                     title: "Lorem ipsum dolor sit amet"
                 )
             },

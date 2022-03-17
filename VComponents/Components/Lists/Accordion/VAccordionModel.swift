@@ -145,14 +145,14 @@ public struct VAccordionModel {
         public var background: Color = listReference.colors.background
         
         /// Header state opacities.
-        public var header: StateOpacities = .init(
+        public var header_: StateOpacities = .init(
             disabledOpacity: 0.5
         )
         
-        /// Text header color.
+        /// Title header color.
         ///
         /// Only applicable when using init with title.
-        public var headerText: Color = ColorBook.primary
+        public var header: Color = ColorBook.primary
         
         /// Header divider color.
         public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")

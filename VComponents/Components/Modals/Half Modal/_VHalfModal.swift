@@ -308,7 +308,7 @@ struct VHalfModal_Previews: PreviewProvider {
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: VHalfModalModel.Fonts().header,
-                    color: VHalfModalModel.Colors().headerText,
+                    color: VHalfModalModel.Colors().header,
                     title: "Lorem ipsum dolor sit amet"
                 )
             },

@@ -14,33 +14,39 @@ struct VTextFieldDemoView: View {
     static var navBarTitle: String { "TextField" }
 
     @State private var text: String = ""
-    @State private var state: VTextFieldState = .enabled
+    @State private var isEnabled: Bool = true
+    @FocusState private var isFocused: Bool
     @State private var textFieldType: VTextFieldType = .default
-    @State private var textFieldHighlight: VTextFieldHighlight = .default
+    @State private var textFieldHighlight: VTextFieldHighlight = .none
     @State private var hasPlaceholder: Bool = true
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var numericalKeyboard: Bool = false
-    @State private var textAlignment: VTextFieldModel.Layout.TextAlignment = .default
-    @State private var spellCheck: UITextSpellCheckingType = VTextFieldModel.Misc().spellCheck
-    @State private var autoCorrect: UITextAutocorrectionType = VTextFieldModel.Misc().autoCorrect
-    @State private var autoCapitalizaton: UITextAutocapitalizationType = VTextFieldModel.Misc().autoCapitalization
+    @State private var textAlignment: TextAlignment = VTextFieldModel.Layout().textAlignment
+    @State private var autocapitalizaton: Bool = false
+    @State private var autocorrection: Bool = false
     @State private var hasClearButton: Bool = VTextFieldModel.Misc().clearButton
-    @State private var hasCancelButton: Bool = VTextFieldModel.Misc().cancelButton != nil
     
     private var model: VTextFieldModel {
         var model: VTextFieldModel = .init()
         
         model.layout.textAlignment = textAlignment
         
+        model.colors = {
+            switch textFieldHighlight {
+            case .none: return .init()
+            case .success: return .success
+            case .warning: return .warning
+            case .error: return .error
+            }
+        }()
+        
         model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
         
-        model.misc.spellCheck = spellCheck
-        model.misc.autoCorrect = autoCorrect
-        model.misc.autoCapitalization = autoCapitalizaton
+        model.misc.autocorrection = autocorrection
+        model.misc.autocapitalization = autocapitalizaton ? .words : nil
         
         model.misc.clearButton = hasClearButton
-        model.misc.cancelButton = hasCancelButton ? "Cancel" : nil
         
         return model
     }
@@ -55,26 +61,35 @@ struct VTextFieldDemoView: View {
         VTextField(
             model: model,
             type: textFieldType,
-            state: $state,
-            highlight: textFieldHighlight,
             placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
             headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
             footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
             text: $text
         )
+            .disabled(!isEnabled)
+            .focused($isFocused)
     }
-    
+
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $state, headerTitle: "State")
+            VSegmentedPicker(
+                selection: .init(
+                    get: { _VTextFieldState(isEnabled: isEnabled, isFocused: isFocused) },
+                    set: { state in
+                        isEnabled = state != .disabled
+                        isFocused = state == .focused
+                    }
+                ),
+                headerTitle: "State"
+            )
         })
-        
+
         DemoViewSettingsSection(content: {
             VSegmentedPicker(selection: $textFieldType, headerTitle: "Type")
-            
+
             VSegmentedPicker(selection: $textFieldHighlight, headerTitle: "Highlight")
         })
-        
+
         DemoViewSettingsSection(content: {
             ToggleSettingView(isOn: $hasPlaceholder, title: "Placeholder")
 
@@ -82,11 +97,11 @@ struct VTextFieldDemoView: View {
 
             ToggleSettingView(isOn: $hasFooter, title: "Footer")
         })
-        
+
         DemoViewSettingsSection(content: {
             ToggleSettingView(
                 isOn: .constant(true),
-                title: "Return Button",
+                title: "Submit Button",
                 description: "Default set to \"return\". Other types are not shown in the demo, as there are many."
             )
 
@@ -95,14 +110,8 @@ struct VTextFieldDemoView: View {
                 title: "Clear Button",
                 description: "Not supported for secure type"
             )
-
-            ToggleSettingView(
-                isOn: $hasCancelButton,
-                title: "Cancel Button",
-                description: "Not supported for secure type"
-            )
         })
-        
+
         DemoViewSettingsSection(content: {
             VStack(spacing: 20, content: {
                 ToggleSettingView(
@@ -110,19 +119,24 @@ struct VTextFieldDemoView: View {
                     title: "Numerical Keyboard",
                     description: "Many keyboard types are supported. ASCII and numerical are shown for demo."
                 )
-                
+
                 ToggleSettingView(
                     isOn: .constant(false),
                     title: "Content Type",
                     description: "Default set to \"nil\". Other types are not shown in the demo, as there are many."
                 )
-                
-                VSegmentedPicker(selection: $spellCheck, headerTitle: "Spell Check")
 
-                VSegmentedPicker(selection: $autoCorrect, headerTitle: "Autocorrect")
-
-                VSegmentedPicker(selection: $autoCapitalizaton, headerTitle: "Auto-Capitalizaiton")
+                ToggleSettingView(
+                    isOn: $autocorrection,
+                    title: "Autocorrection"
+                )
                 
+                ToggleSettingView(
+                    isOn: $autocapitalizaton,
+                    title: "Autocapitalizaton",
+                    description: "Other types are not shown in the demo, as there are many."
+                )
+
                 VSegmentedPicker(selection: $textAlignment, headerTitle: "Alignment")
             })
         })
@@ -130,13 +144,24 @@ struct VTextFieldDemoView: View {
 }
 
 // MARK: - Helpers
-extension VTextFieldState: PickableTitledEnumeration {
-    public var pickerTitle: String {
+private enum _VTextFieldState: PickableTitledEnumeration {
+    case enabled
+    case focused
+    case disabled
+    
+    init(isEnabled: Bool, isFocused: Bool) {
+        switch (isEnabled, isFocused) {
+        case (false, _): self = .disabled
+        case (true, false): self = .enabled
+        case (true, true): self = .focused
+        }
+    }
+    
+    var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
         case .focused: return "Focused"
         case .disabled: return "Disabled"
-        @unknown default: fatalError()
         }
     }
 }
@@ -152,13 +177,28 @@ extension VTextFieldType: PickableTitledEnumeration {
     }
 }
 
-extension VTextFieldHighlight: PickableTitledEnumeration {
+extension TextAlignment: PickableTitledEnumeration {
     public var pickerTitle: String {
+        switch self {
+        case .leading: return "Leading"
+        case .center: return "Center"
+        case .trailing: return "Traiiling"
+        }
+    }
+}
+
+private enum VTextFieldHighlight: PickableTitledEnumeration {
+    case `none`
+    case success
+    case warning
+    case error
+    
+    var pickerTitle: String {
         switch self {
         case .none: return "None"
         case .success:  return "Success"
+        case .warning:  return "Warning"
         case .error:  return "Error"
-        @unknown default: fatalError()
         }
     }
 }

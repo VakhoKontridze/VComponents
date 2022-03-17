@@ -113,10 +113,10 @@ public struct VModalModel {
         /// Background color.
         public var background: Color = sheetReference.colors.background
         
-        /// Text header color.
+        /// Title header color.
         ///
         /// Only applicable when using init with title.
-        public var headerText: Color = ColorBook.primary
+        public var headerTitle: Color = ColorBook.primary
         
         /// Close button background colors.
         public var closeButtonBackground: StateColors = closeButtonReference.colors.background

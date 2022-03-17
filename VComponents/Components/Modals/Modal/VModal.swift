@@ -68,7 +68,7 @@ public struct VModal<Content, HeaderContent>
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.headerTitle,
                     title: headerTitle
                 )
             },

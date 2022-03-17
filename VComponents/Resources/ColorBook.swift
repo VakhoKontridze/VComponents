@@ -11,7 +11,7 @@ import SwiftUI
 /// Contains fundamental colors used throughout the library.
 public struct ColorBook {
     // MARK: Properties
-    /// Canvas color that can be used for `VBaseView`.
+    /// Canvas color that can be used as background.
     public static let canvas: Color = .init(componentAsset: "Canvas")
     
     /// Layer color for container components.
@@ -31,6 +31,16 @@ public struct ColorBook {
     
     /// Secondary text color.
     public static let secondary: Color = .init(componentAsset: "Secondary")
+    
+    static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
+    
+    static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
+    
+    static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
+    
+    static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
+    
+    static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
     
     /// Blue accent color.
     public static let accent: Color = .init(componentAsset: "Accent")
@@ -166,7 +176,7 @@ extension Color {
  *215.215.215
  *70.70.70
  
- SegmentedPicker.Header
+ SegmentedPicker.Header.enabled
  *60.60.60
  210.210.210
  
@@ -193,24 +203,10 @@ extension Color {
  Stepper.Button.Background.pressed
  *200.200.200
  *70.70.70
-
- TextField.Background.error
- 250.205.210
- 230.60.30
  
  TextField.Background.focused
  215.215.215
  *50.50.50
- 
- TextField.Background.success
- 205.250.210
- 25.175.90
- 
- TextField.Border.error
- 200.35.30
- 
- TextField.Border.success
- 5.145.65
  
  TextField.ClearButton.Background.disabled
  *220.220.220
@@ -225,7 +221,38 @@ extension Color {
  *20.20.20
  
  TextField.ClearButton.Icon
- *254.254.254
+ *255.255.255
+ *230.230.230
+ 
+ TextField.Error.Background.enabled
+ 250.205.210
+ 230.60.50
+ 
+ TextField.Error.Foreground.enabled
+ 200.35.30
+ 
+ TextField.Error.Foreground.pressed
+ 230.90.100
+ 
+ TextField.Success.Background.enabled
+ 205.250.210
+ 25.175.90
+ 
+ TextField.Success.Foreground.enabled
+ 5.145.65
+ 
+ TextField.Success.Foreground.pressed
+ 120.190.130
+ 
+ TextField.Warning.Background.enabled
+ 245.210.160
+ 245.150.90
+ 
+ TextField.Warning.Foreground.enabled
+ 245.130.30
+ 
+ TextField.Warning.Foreground.pressed
+ 245.170.80
  
  Toggle.Fill.disabled
  244.244.244

@@ -125,7 +125,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: headerTitle(section)
                 )
             },
@@ -154,7 +154,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: footerTitle(section)
                 )
             },
@@ -183,7 +183,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: headerTitle(section)
                 )
             },
@@ -191,7 +191,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: footerTitle(section)
                 )
             },
@@ -238,7 +238,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: headerTitle(section)
                 )
             },
@@ -285,7 +285,7 @@ public struct VSectionList<Section, Row, HeaderContent, FooterContent, RowConten
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: footerTitle(section)
                 )
             },

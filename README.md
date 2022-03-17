@@ -12,13 +12,13 @@
 
 ## Description
 
-VComponents is a SwiftUI library that contains 40+ customizable UI components.
+VComponents is a SwiftUI library that contains 30+ customizable UI components.
 
-Library supports iOS 14.0 and up.
+Library supports iOS 15 and up.
 
 ## Components
 
-**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VChevronButton, VCloseButton, VNavigationLink, VWebLink
+**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VNavigationLink, VWebLink
 
 **State Pickers.** VToggle, VCheckBox, VRadioButton
 
@@ -26,11 +26,9 @@ Library supports iOS 14.0 and up.
 
 **Value Pickers.** VStepper, VSlider, VRangeSlider
 
-**Inputs.** VBaseTextField, VTextField
+**Inputs.** VTextField
 
 **Lists.** VBaseList, VList, VSectionList, VAccordion
-
-**Navigation.** VTabNavigationView, VNavigationView
 
 **Modals.** VModal, VHalfModal, VSideBar, VDialog, VMenu, VActionSheet
 
@@ -38,7 +36,7 @@ Library supports iOS 14.0 and up.
 
 **Indicators.** VSpinner, VProgressBar, VPageIndicator
 
-**Misc.** VText, VSheet, VLazyScrollView, VBaseView
+**Misc.** VText, VSheet, VLazyScrollView
 
 ## Guidelines
 

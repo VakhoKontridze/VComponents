@@ -102,8 +102,8 @@ public struct VSegmentedPickerModel {
         /// Only applicable when using init with title.
         public var title: RowStateColors = .init(
             enabled: ColorBook.primary,
-            pressed: ColorBook.secondary,
-            disabled: ColorBook.secondary
+            pressed: ColorBook.primaryPressedDisabled,
+            disabled: ColorBook.primaryPressedDisabled
         )
         
         /// Custom content opacities.
@@ -125,14 +125,14 @@ public struct VSegmentedPickerModel {
         
         /// Header colors.
         public var header: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Header"),
-            disabled: .init(componentAsset: "SegmentedPicker.Header")
+            enabled: .init(componentAsset: "SegmentedPicker.Header.enabled"),
+            disabled: ColorBook.primaryPressedDisabled
         )
         
         /// Footer colors.
         public var footer: StateColors = .init(
             enabled: ColorBook.secondary,
-            disabled: ColorBook.secondary
+            disabled: ColorBook.secondaryPressedDisabled
         )
         
         // MARK: Initializers

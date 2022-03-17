@@ -81,12 +81,7 @@ public struct VPrimaryButtonModel {
         )
         
         /// Border colors.
-        public var border: StateColors = .init(
-            enabled: .clear,
-            pressed: .clear,
-            disabled: .clear,
-            loading: .clear
-        )
+        public var border: StateColors = .clear
         
         /// Title colors.
         public var title: StateColors = .init(

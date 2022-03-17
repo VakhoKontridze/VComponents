@@ -81,7 +81,7 @@ public struct GenericStateModel_OOIPD<Value> {
     public var disabled: Value
     
     // MARK: Initializers
-    /// Initializes group with values.
+    /// Initializes model with values.
     public init(
         off: Value,
         on: Value,
@@ -98,6 +98,19 @@ public struct GenericStateModel_OOIPD<Value> {
         self.pressedOn = pressedOn
         self.pressedIndeterminate = pressedIndeterminate
         self.disabled = disabled
+    }
+    
+    /// Initializes model with clear `Color` values.
+    public static var clear: GenericStateModel_OOIPD<Color> {
+        .init(
+            off: .clear,
+            on: .clear,
+            indeterminate: .clear,
+            pressedOff: .clear,
+            pressedOn: .clear,
+            pressedIndeterminate: .clear,
+            disabled: .clear
+        )
     }
 }
 

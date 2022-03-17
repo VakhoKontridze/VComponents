@@ -128,7 +128,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: headerTitle
                 )
             },
@@ -187,7 +187,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: headerTitle
                 )
             },
@@ -241,7 +241,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: headerTitle
                 )
             },
@@ -265,7 +265,7 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     private var headerView: some View {
         HStack(spacing: 0, content: {
             headerContent()
-                .opacity(model.colors.header.for(state))
+                .opacity(model.colors.header_.for(state))
             
             Spacer()
             

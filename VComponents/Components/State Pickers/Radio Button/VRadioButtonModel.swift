@@ -74,13 +74,7 @@ public struct VRadioButtonModel {
         )
         
         /// Border colors.
-        public var border: StateColors = .init(
-            off: toggleRefrence.colors.fill.off,
-            on: toggleRefrence.colors.fill.on,
-            pressedOff: toggleRefrence.colors.fill.pressedOff,
-            pressedOn: toggleRefrence.colors.fill.pressedOn,
-            disabled: toggleRefrence.colors.fill.disabled
-        )
+        public var border: StateColors = toggleRefrence.colors.fill
         
         /// Bullet colors.
         public var bullet: StateColors = .init(

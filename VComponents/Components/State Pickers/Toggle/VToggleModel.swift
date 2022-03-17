@@ -88,7 +88,7 @@ public struct VToggleModel {
             on: ColorBook.primary,
             pressedOff: ColorBook.primary,
             pressedOn: ColorBook.primary,
-            disabled: ColorBook.secondary
+            disabled: ColorBook.primaryPressedDisabled
         )
         
         /// Custom label opacities.

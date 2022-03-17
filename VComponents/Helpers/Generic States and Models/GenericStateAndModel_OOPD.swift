@@ -78,7 +78,7 @@ public struct GenericStateModel_OOPD<Value> {
     public var disabled: Value
     
     // MARK: Initializers
-    /// Initializes group with values.
+    /// Initializes model with values.
     public init(
         off: Value,
         on: Value,
@@ -91,6 +91,17 @@ public struct GenericStateModel_OOPD<Value> {
         self.pressedOff = pressedOff
         self.pressedOn = pressedOn
         self.disabled = disabled
+    }
+    
+    /// Initializes model with clear `Color` values.
+    public static var clear: GenericStateModel_OOPD<Color> {
+        .init(
+            off: .clear,
+            on: .clear,
+            pressedOff: .clear,
+            pressedOn: .clear,
+            disabled: .clear
+        )
     }
 }
 

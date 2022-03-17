@@ -11,9 +11,6 @@ import SwiftUI
 /// Model that describes UI.
 public struct VTextFieldModel {
     // MARK: Properties
-    /// Reference to `VBaseTextFieldModel`.
-    public static let baseTextFieldReference: VBaseTextFieldModel = .init()
-    
     /// Reference to `VSquareButtonModel`.
     public static let squareButtonReference: VSquareButtonModel = .init()
     
@@ -55,7 +52,7 @@ public struct VTextFieldModel {
         public var cornerRadius: CGFloat = 10
         
         /// Textfield text alignment. Defaults to `default`.
-        public var textAlignment: TextAlignment = .default
+        public var textAlignment: TextAlignment = .leading
         
         /// Textfield border width. Defaults to `1.5`.
         public var borderWidth: CGFloat = 1.5
@@ -90,123 +87,72 @@ public struct VTextFieldModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
-        
-        // MARK: Text Alignment
-        /// Enum that describes text alignment, such as `leading`, `center`, `trailing`, or `auto`.
-        public typealias TextAlignment = VBaseTextFieldModel.Layout.TextAlignment
     }
 
     // MARK: Colors
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Content opacitis.
-        public var content: StateOpacities = .init(
-            disabledOpacity: 0.5
-        )
-        
-        /// Text content colors.
-        public var textContent: StateColors = .init(
-            enabled: ColorBook.primary,
-            focused: ColorBook.primary,
-            disabled: ColorBook.primary
-        )
-        
         /// Background colors.
-        public var background: StateColorsHighlighted = .init(
+        public var background: StateColors = .init(
             enabled: segmentedPickerReference.colors.background.enabled,
-            focused: .init(componentAsset: "TextField.Background.focused"),
-            success: .init(componentAsset: "TextField.Background.success"),
-            error: .init(componentAsset: "TextField.Background.error"),
-            disabled: segmentedPickerReference.colors.background.disabled
+            disabled: segmentedPickerReference.colors.background.disabled,
+            focused: .init(componentAsset: "TextField.Background.focused")
         )
         
         /// Border colors.
-        public var border: StateColorsHighlighted = .init(
-            enabled: .clear,
-            focused: .clear,
-            success: .init(componentAsset: "TextField.Border.success"),
-            error: .init(componentAsset: "TextField.Border.error"),
-            disabled: .clear
+        public var border: StateColors = .clear
+        
+        /// Text colors.
+        public var text: StateColors = .init(
+            enabled: ColorBook.primary,
+            disabled: ColorBook.primaryPressedDisabled,
+            focused: ColorBook.primary
         )
         
         /// Header colors.
-        public var header: StateColorsHighlighted = .init(
+        public var header: StateColors = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
-            focused: segmentedPickerReference.colors.header.enabled,
-            success: .init(componentAsset: "TextField.Border.success"),
-            error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerReference.colors.header.disabled
-        )
-        
-        /// Footer colors.
-        public var footer: StateColorsHighlighted = .init(
-            enabled: segmentedPickerReference.colors.footer.enabled,
-            focused: segmentedPickerReference.colors.footer.enabled,
-            success: .init(componentAsset: "TextField.Border.success"),
-            error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerReference.colors.footer.disabled
-        )
-        
-        /// Search icon colors.
-        public var searchIcon: StateColorsHighlighted = .init(
-            enabled: segmentedPickerReference.colors.header.enabled,
-            focused: segmentedPickerReference.colors.header.enabled,
-            success: .init(componentAsset: "TextField.Border.success"),
-            error: .init(componentAsset: "TextField.Border.error"),
-            disabled: segmentedPickerReference.colors.header.disabled
-        )
-        
-        /// Visiblity button icon colors.
-        public var visibilityButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
-            enabled: segmentedPickerReference.colors.header.enabled,
-            focused: segmentedPickerReference.colors.header.enabled,
-            success: .init(componentAsset: "TextField.Border.success"),
-            error: .init(componentAsset: "TextField.Border.error"),
-            pressedEnabled: segmentedPickerReference.colors.header.enabled,
-            pressedFocused: segmentedPickerReference.colors.header.enabled,
-            pressedSuccess: .init(componentAsset: "TextField.Border.success"),
-            pressedError: .init(componentAsset: "TextField.Border.error"),
             disabled: segmentedPickerReference.colors.header.disabled,
-            pressedOpacity: squareButtonReference.colors.customLabelOpacities.pressed, // FIXME: No longer that???
-            disabledOpacity: squareButtonReference.colors.customLabelOpacities.disabled // FIXME: No longer that???
+            focused: segmentedPickerReference.colors.header.enabled
         )
-        
+
+        /// Footer colors.
+        public var footer: StateColors = .init(
+            enabled: segmentedPickerReference.colors.footer.enabled,
+            disabled: segmentedPickerReference.colors.footer.disabled,
+            focused: segmentedPickerReference.colors.footer.enabled
+        )
+
+        /// Search icon colors.
+        public var searchIcon: StateColors = .init(
+            enabled: segmentedPickerReference.colors.header.enabled,
+            disabled: segmentedPickerReference.colors.header.disabled,
+            focused: segmentedPickerReference.colors.header.enabled
+        )
+
+        /// Visiblity button icon colors.
+        public var visibilityButtonIcon: ButtonStateColors = .init(
+            enabled: segmentedPickerReference.colors.header.enabled,
+            pressed: ColorBook.primaryPressedDisabled,
+            disabled: segmentedPickerReference.colors.header.disabled,
+            focused: segmentedPickerReference.colors.header.enabled
+        )
+
         /// Clear button background colors.
-        public var clearButtonBackground: ButtonStateColorsHighlighted = .init(
+        public var clearButtonBackground: ButtonStateColors = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
-            focused: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
-            success: .init(componentAsset: "TextField.Border.success"),
-            error: .init(componentAsset: "TextField.Border.error"),
-            pressedEnabled: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
-            pressedFocused: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
-            pressedSuccess: .init(componentAsset: "TextField.Border.success"),
-            pressedError: .init(componentAsset: "TextField.Border.error"),
-            disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
+            pressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
+            disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled"),
+            focused: .init(componentAsset: "TextField.ClearButton.Background.enabled")
         )
-        
+
         /// Clear button icon colors.
-        public var clearButtonIcon: ButtonStateColorsAndOpacitiesHighlighted = .init(
+        public var clearButtonIcon: ButtonStateColors = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            focused: .init(componentAsset: "TextField.ClearButton.Icon"),
-            success: .init(componentAsset: "TextField.ClearButton.Icon"),
-            error: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressedEnabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressedFocused: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressedSuccess: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressedError: .init(componentAsset: "TextField.ClearButton.Icon"),
+            pressed: .init(componentAsset: "TextField.ClearButton.Icon"),
             disabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressedOpacity: 0.5, // FIXME
-            disabledOpacity: 0.5 // FIXME
-        )
-        
-        /// Cancel button colors and opacities.
-        public var cancelButton: StateColorsAndOpacities = .init(
-            enabled: ColorBook.primary,
-            pressed: ColorBook.primary,
-            disabled: ColorBook.primary,
-            pressedOpacity: plainButtonReference.colors.customLabelOpacities.pressed, // FIXME
-            disabledOpacity: plainButtonReference.colors.customLabelOpacities.disabled // FIXME
+            focused: .init(componentAsset: "TextField.ClearButton.Icon")
         )
         
         // MARK: Initializers
@@ -215,27 +161,11 @@ public struct VTextFieldModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = StateColors_EFD
+        public typealias StateColors = GenericStateModel_EDF<Color>
         
-        // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_D
-        
-        // MARK: State Colors and Opacities
-        /// Sub-model containing colors and opacities for component states.
-        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
-        
-        // MARK: State Colors Highlighted
+        // MARK: Button State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColorsHighlighted = StateColors_EFSED
-        
-        // MARK: Button State Colors Highlighted
-        /// Sub-model containing colors for component states.
-        public typealias ButtonStateColorsHighlighted = StateColors_EFSEPD
-        
-        // MARK: Button State Colors and Opacities Highlighted
-        /// Sub-model containing colors and opacities for component states.
-        public typealias ButtonStateColorsAndOpacitiesHighlighted = StateColorsAndOpacities_EFSEPD_PD
+        public typealias ButtonStateColors = GenericStateModel_EPDF<Color>
     }
 
     // MARK: Fonts
@@ -243,7 +173,7 @@ public struct VTextFieldModel {
     public struct Fonts {
         // MARK: Properties
         /// Text font. Defaults to system font of size `16`.
-        public var text: UIFont = baseTextFieldReference.fonts.text
+        public var text: Font = .system(size: 16)
         
         /// Placeholder font. Defaults to system font of size `13`.
         public var placeholder: Font = segmentedPickerReference.fonts.footer
@@ -254,9 +184,6 @@ public struct VTextFieldModel {
         /// Footer font. Defaults to system font of size `13`.
         public var footer: Font = segmentedPickerReference.fonts.footer
         
-        /// Cancel button font. Defaults to system font of size `14` with `semibold` weight.
-        public var cancelButton: Font = plainButtonReference.fonts.title
-        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
@@ -266,10 +193,8 @@ public struct VTextFieldModel {
     /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Clear, cancel, and visibility button appear and dissapear animation. Defaults to `easeInOut`.
-        public var buttonsAppearDisappear: Animation? = .easeInOut
-        
-        let delayToAnimateButtons: TimeInterval = 0.5   // Must be more than keyboard or modal duration
+        /// Clear button appear and dissapear animation. Defaults to `easeInOut` with duration `0.2`.
+        public var clearButton: Animation? = .easeInOut(duration: 0.2)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -281,30 +206,22 @@ public struct VTextFieldModel {
     public struct Misc {
         // MARK: Properties
         /// Keyboard type. Defaults to `default`.
-        public var keyboardType: UIKeyboardType = baseTextFieldReference.misc.keyboardType
+        public var keyboardType: UIKeyboardType = .default
         
         /// Text content type. Defaults to `nil`.
-        public var textContentType: UITextContentType?
+        public var textContentType: UITextContentType? = nil
+
+        /// Auto correct type. Defaults to `nil`.
+        public var autocorrection: Bool? = nil
         
-        /// Spell check type. Defaults to `default`.
-        public var spellCheck: UITextSpellCheckingType = baseTextFieldReference.misc.spellCheck
+        /// Auto capitalization type. Defaults to `nik`.
+        public var autocapitalization: TextInputAutocapitalization? = nil
         
-        /// Auto correct type. Defaults to `default`.
-        public var autoCorrect: UITextAutocorrectionType = baseTextFieldReference.misc.autoCorrect
-        
-        /// Auto-capitalization type. Defaults to `sentences`.
-        public var autoCapitalization: UITextAutocapitalizationType = baseTextFieldReference.misc.autoCapitalization
-        
-        /// Default button type. Defaults to `default`.
-        public var returnButton: UIReturnKeyType = baseTextFieldReference.misc.returnButton
+        /// Submit button type. Defaults to `return`.
+        public var submitButton: SubmitLabel = .return
         
         /// Indicates if clear button is present. Defaults to `true`.
         public var clearButton: Bool = true
-        
-        /// Cancel button title. Defaults to `nil`.
-        ///
-        /// If property is set to `nil`, button will be hidden.
-        public var cancelButton: String? = nil
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -312,34 +229,7 @@ public struct VTextFieldModel {
     }
     
     // MARK: Sub-Models
-    func baseTextFieldSubModel(state: VTextFieldState, isSecureTextEntry: Bool) -> VBaseTextFieldModel {
-        var model: VBaseTextFieldModel = .init()
-        
-        model.layout.textAlignment = layout.textAlignment
-        
-        model.colors.text = .init(
-            enabled: colors.textContent.for(state),    // .disabled wouldn't matter
-            disabled: colors.textContent.disabled,
-            disabledOpacity: colors.content.disabledOpacity
-        )
-        
-        model.fonts.text = fonts.text
-        
-        model.misc.isSecureTextEntry = isSecureTextEntry
-        
-        model.misc.keyboardType = misc.keyboardType
-        model.misc.textContentType = misc.textContentType
-        
-        model.misc.spellCheck = misc.spellCheck
-        model.misc.autoCorrect = misc.autoCorrect
-        model.misc.autoCapitalization = misc.autoCapitalization
-
-        model.misc.returnButton = misc.returnButton
-        
-        return model
-    }
-    
-    func clearSubButtonModel(state: VTextFieldState, highlight: VTextFieldHighlight) -> VCloseButtonModel {
+    var clearButtonSubModel: VCloseButtonModel {
         var model: VCloseButtonModel = .init()
         
         model.layout.dimension = layout.clearButtonDimension
@@ -347,24 +237,13 @@ public struct VTextFieldModel {
         model.layout.hitBox.horizontal = 0
         model.layout.hitBox.vertical = 0
         
-        model.colors.background = .init(
-            enabled: colors.clearButtonBackground.for(state, highlight: highlight),  // .disabled wouldn't matter
-            pressed: colors.clearButtonBackground.for(highlight: highlight),
-            disabled: colors.clearButtonBackground.disabled
-        )
-        
-        model.colors.icon = .init(
-            enabled: colors.clearButtonIcon.for(state, highlight: highlight),       // .disabled wouldn't matter
-            pressed: colors.clearButtonIcon.for(highlight: highlight),
-            disabled: colors.clearButtonIcon.disabled // FIXME: Opacities were removed here
-//            pressedOpacity: colors.clearButtonIcon.pressedOpacity,
-//            disabledOpacity: colors.clearButtonIcon.disabledOpacity
-        )
+        model.colors.background = .init(colors.clearButtonBackground)
+        model.colors.icon = .init(colors.clearButtonIcon)
         
         return model
     }
     
-    func visibilityButtonSubModel(state: VTextFieldState, highlight: VTextFieldHighlight) -> VSquareButtonModel {
+    var visibilityButtonSubModel: VSquareButtonModel {
         var model: VSquareButtonModel = .init()
         
         model.layout.dimension = layout.visibilityButtonDimension
@@ -374,41 +253,99 @@ public struct VTextFieldModel {
         model.layout.hitBox.horizontal = 0
         model.layout.hitBox.vertical = 0
         
-        model.colors.background = .init(
-            enabled: .clear,
-            pressed: .clear,
-            disabled: .clear
-        )
-        
-        model.colors.customLabelOpacities = .init(
-            enabled: 1,
-            pressed: colors.visibilityButtonIcon.pressedOpacity,
-            disabled: colors.visibilityButtonIcon.disabledOpacity
-        )
+        model.colors.background = .clear
+        model.colors.icon = .init(colors.visibilityButtonIcon)
         
         return model
     }
+}
+
+// MARK: - Highlights
+extension VTextFieldModel.Colors {
+    /// Model that applies green color scheme.
+    public static let success: VTextFieldModel.Colors = .createHighlightedColors(
+        backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
+        backgroundFocused: .init(componentAsset: "TextField.Success.Background.enabled"),
+        enabled: .init(componentAsset: "TextField.Success.Foreground.enabled"),
+        pressed: .init(componentAsset: "TextField.Success.Foreground.pressed"),
+        focused: .init(componentAsset: "TextField.Success.Foreground.enabled")
+    )
+
+    /// Model that applies yellow color scheme.
+    public static let warning: VTextFieldModel.Colors = .createHighlightedColors(
+        backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
+        backgroundFocused: .init(componentAsset: "TextField.Warning.Background.enabled"),
+        enabled: .init(componentAsset: "TextField.Warning.Foreground.enabled"),
+        pressed: .init(componentAsset: "TextField.Warning.Foreground.pressed"),
+        focused: .init(componentAsset: "TextField.Warning.Foreground.enabled")
+    )
+
+    /// Model that applies error color scheme.
+    public static let error: VTextFieldModel.Colors = .createHighlightedColors(
+        backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
+        backgroundFocused: .init(componentAsset: "TextField.Error.Background.enabled"),
+        enabled: .init(componentAsset: "TextField.Error.Foreground.enabled"),
+        pressed: .init(componentAsset: "TextField.Error.Foreground.pressed"),
+        focused: .init(componentAsset: "TextField.Error.Foreground.enabled")
+    )
     
-    var cancelButtonSubModel: VPlainButtonModel {
-        var model: VPlainButtonModel = .init()
+    private static func createHighlightedColors(
+        backgroundEnabled: Color,
+        backgroundFocused: Color,
+        enabled: Color,
+        pressed: Color,
+        focused: Color
+    ) -> VTextFieldModel.Colors {
+        var colors: VTextFieldModel.Colors = .init()
         
-        model.layout.hitBox.horizontal = 0
-        model.layout.hitBox.vertical = 0
+        colors.background.enabled = backgroundEnabled
+        colors.background.focused = backgroundFocused
         
-        model.colors.customLabelOpacities = .init(
-            enabled: 1, // FIXME
-            pressed: colors.cancelButton.pressedOpacity,
-            disabled: colors.cancelButton.disabledOpacity
-        )
+        colors.border.enabled = enabled
+        colors.border.focused = focused
         
-//        model.colors.textContent = .init( // FIXME: Resolve
-//            enabled: colors.cancelButton.enabled,
-//            pressed: colors.cancelButton.pressed,
-//            disabled: colors.cancelButton.disabled
-//        )
+        //colors.text
         
-        model.fonts.title = fonts.cancelButton
+        colors.header.enabled = enabled
+        colors.header.focused = focused
         
+        colors.footer.enabled = enabled
+        colors.footer.focused = focused
+        
+        colors.searchIcon.enabled = enabled
+        colors.searchIcon.focused = focused
+        
+        colors.visibilityButtonIcon.enabled = enabled
+        colors.visibilityButtonIcon.pressed = pressed
+        
+        colors.clearButtonBackground.enabled = enabled
+        colors.clearButtonBackground.pressed = pressed
+        
+        //colors.clearButtonIcon
+        
+        return colors
+    }
+}
+
+extension VTextFieldModel {
+    /// Model that applies green color scheme.
+    public static var success: VTextFieldModel {
+        var model: VTextFieldModel = .init()
+        model.colors = .success
+        return model
+    }
+
+    /// Model that applies yellow color scheme.
+    public static var warning: VTextFieldModel {
+        var model: VTextFieldModel = .init()
+        model.colors = .warning
+        return model
+    }
+
+    /// Model that applies error color scheme.
+    public static var error: VTextFieldModel {
+        var model: VTextFieldModel = .init()
+        model.colors = .error
         return model
     }
 }

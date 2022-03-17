@@ -77,15 +77,15 @@ public struct VSectionListModel {
         /// Background color.
         public var background: Color = listReference.colors.background
         
-        /// Text header color.
+        /// Title header color.
         ///
         /// Only applicable when using init with title.
-        public var headerText: Color = ColorBook.secondary
+        public var header: Color = ColorBook.secondary
         
-        /// Text footer color.
+        /// Title footer color.
         ///
         /// Only applicable when using init with title.
-        public var footerText: Color = ColorBook.secondary
+        public var footer: Color = ColorBook.secondary
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

@@ -99,7 +99,7 @@ final class WindowOverlayViewController<Content>: UIViewController where Content
 extension UIView {
     fileprivate static var appRootView: UIView? {
         guard
-            let window: UIWindow = UIApplication.shared.windows.first(where: { $0.isKeyWindow }),
+            let window: UIWindow = UIApplication.keyWindow,
             let viewController: UIViewController = window.rootViewController,
             let view: UIView = viewController.view
         else {
@@ -107,5 +107,17 @@ extension UIView {
         }
         
         return view
+    }
+}
+
+extension UIApplication {
+    fileprivate static var keyWindow: UIWindow? {
+        UIApplication.shared
+            .connectedScenes
+            .filter { $0.activationState == .foregroundActive }
+            .first { $0 is UIWindowScene }
+            .flatMap { $0 as? UIWindowScene }?
+            .windows
+            .first(where: \.isKeyWindow)
     }
 }

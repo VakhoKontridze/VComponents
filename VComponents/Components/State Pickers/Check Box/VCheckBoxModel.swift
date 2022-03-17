@@ -105,7 +105,7 @@ public struct VCheckBoxModel {
             pressedOff: ColorBook.primary,
             pressedOn: ColorBook.primary,
             pressedIndeterminate: ColorBook.primary,
-            disabled: ColorBook.secondary
+            disabled: ColorBook.primaryPressedDisabled
         )
         
         /// Custom label opacities.

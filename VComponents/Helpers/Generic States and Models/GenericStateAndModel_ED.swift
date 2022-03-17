@@ -41,13 +41,21 @@ public struct GenericStateModel_ED<Value> {
     public var disabled: Value
     
     // MARK: Initializers
-    /// Initializes group with values.
+    /// Initializes model with values.
     public init(
         enabled: Value,
         disabled: Value
     ) {
         self.enabled = enabled
         self.disabled = disabled
+    }
+    
+    /// Initializes model with clear `Color` values.
+    public static var clear: GenericStateModel_ED<Color> {
+        .init(
+            enabled: .clear,
+            disabled: .clear
+        )
     }
     
     init(_ model: GenericStateModel_EPD<Value>) {

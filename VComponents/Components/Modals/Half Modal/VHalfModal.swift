@@ -129,7 +129,7 @@ public struct VHalfModal<Content, HeaderContent>
                 VBaseHeaderFooter(
                     frameType: .flexible(.leading),
                     font: model.fonts.header,
-                    color: model.colors.headerText,
+                    color: model.colors.header,
                     title: headerTitle
                 )
             },

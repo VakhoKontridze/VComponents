@@ -97,8 +97,8 @@ public struct VToastModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Text color.
-        public var text: Color = ColorBook.primary
+        /// Title color.
+        public var title: Color = ColorBook.primary
         
         /// Background color.
         public var background: Color = textFieldReference.colors.background.enabled
@@ -112,8 +112,8 @@ public struct VToastModel {
     /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Text font. Defaults to system font of size `16` and weight `semibold`.
-        public var text: Font = .system(size: 16, weight: .semibold)
+        /// Title font. Defaults to system font of size `16` and weight `semibold`.
+        public var title: Font = .system(size: 16, weight: .semibold)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

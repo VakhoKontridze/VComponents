@@ -47,7 +47,7 @@ public struct GenericStateModel_EPD<Value> {
     public var disabled: Value
     
     // MARK: Initializers
-    /// Initializes group with values.
+    /// Initializes model with values.
     public init(
         enabled: Value,
         pressed: Value,
@@ -58,7 +58,22 @@ public struct GenericStateModel_EPD<Value> {
         self.disabled = disabled
     }
     
+    /// Initializes model with clear `Color` values.
+    public static var clear: GenericStateModel_EPD<Color> {
+        .init(
+            enabled: .clear,
+            pressed: .clear,
+            disabled: .clear
+        )
+    }
+    
     init(_ model: GenericStateModel_EPDL<Value>) {
+        self.enabled = model.enabled
+        self.pressed = model.pressed
+        self.disabled = model.disabled
+    }
+    
+    init(_ model: GenericStateModel_EPDF<Value>) {
         self.enabled = model.enabled
         self.pressed = model.pressed
         self.disabled = model.disabled

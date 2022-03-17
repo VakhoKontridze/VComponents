@@ -4,7 +4,11 @@
 
 - Buttons, state pickers, and item pickers have been reworked
 - For most components, `State`'s have been removed. Use `disabled` modifier instead.
+- `VTextField` now support native `focusable()` API
+- `VTextFieldHighlight` has been removed in favor of custom `VTextFieldModels`'s
+- `warning` highlight has been added to `VTextFieldModel`
 - Buttons—`VChevronButton` and `VCloseButton`—have been removed
+- `VBaseTextField` has been removed, as it's obsoleted by native `TextField` since SwiftUI `3.0`
 - Navigation components—`VTabNavigationView` and `VNavigationView`—have been removed
 - `VBaseView` has been removed
 - `StateColors`'s and `StateOpacities`'s have been replaced with`GenericStateModel`'s
