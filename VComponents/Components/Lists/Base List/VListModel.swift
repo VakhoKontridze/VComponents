@@ -1,5 +1,5 @@
 //
-//  VGenericListContent.swift
+//  VListModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - V Base List Model
 /// Model that describes UI.
-public struct VBaseListModel {
+public struct VListModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -37,14 +37,14 @@ public struct VBaseListModel {
         public var dividerHeight: CGFloat = 1
         
         /// Divider margins. Defaults to `0` leading and `0` trailing.
-        public var dividerMargins: HorizontalMargins = .init(
-            leading: 0,
-            trailing: 0
-        )
+        public var dividerMargins: HorizontalMargins = .zero
         
         var dividerMarginVertical: CGFloat { rowSpacing / 2 }
         
         var hasDivider: Bool { dividerHeight > 0 }
+        
+        /// Indicates if last row has divider. Defaults to `false`.
+        public var lastRowHasDivider: Bool = false
         
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
@@ -63,7 +63,7 @@ public struct VBaseListModel {
     public struct Colors {
         // MARK: Properties
         /// Divider color.
-        public var divider: Color = .init(componentAsset: "BaseList.Divider")
+        public var divider: Color = .init(componentAsset: "List.Divider")
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

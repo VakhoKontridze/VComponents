@@ -20,10 +20,7 @@ public struct VChevronButtonModel {
         
         public var iconDimension: CGFloat = 12
         
-        public var hitBox: HitBox = .init(
-            horizontal: 0,
-            vertical: 0
-        )
+        public var hitBox: HitBox = .zero
         
         // MARK: Hit Box
         public typealias HitBox = EdgeInsets_HV

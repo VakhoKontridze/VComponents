@@ -1,5 +1,5 @@
 //
-//  VBaseListDemoView.swift
+//  VListDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 1/12/21.
@@ -8,12 +8,12 @@
 import SwiftUI
 import VComponents
 
-// MARK: - V Bas List Demo View
-struct VBaseListDemoView: View {
+// MARK: - V List Demo View
+struct VListDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Base List" }
+    static var navBarTitle: String { "List" }
     
-    @State private var layoutType: BaseListLayoutTypeHelper = .default
+    @State private var layoutType: _VListLayoutType = .default
     @State private var rowCount: Int = 5
 
     // MARK: Body
@@ -28,10 +28,10 @@ struct VBaseListDemoView: View {
     }
     
     private func component() -> some View {
-        VBaseList(
+        VList(
             layout: layoutType.layoutType,
-            data: VBaseListDemoViewDataSource.rows(count: rowCount),
-            rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+            data: VListDemoViewDataSource.rows(count: rowCount),
+            rowContent: { VListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
         )
             .ifLet(layoutType.height, transform: { (view, height) in
                 Group(content: {
@@ -57,14 +57,14 @@ struct VBaseListDemoView: View {
 }
 
 // MARK: - Helpers
-enum BaseListLayoutTypeHelper: Int, PickableTitledEnumeration {
+enum _VListLayoutType: Int, PickableTitledEnumeration {
     case fixed
     case flexible
     case constrained
     
-    static var `default`: Self { VBaseListLayoutType.default.helperType }
+    static var `default`: Self { VListLayoutType.default.helperType }
     
-    fileprivate var layoutType: VBaseListLayoutType {
+    fileprivate var layoutType: VListLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible
@@ -105,8 +105,8 @@ enum BaseListLayoutTypeHelper: Int, PickableTitledEnumeration {
     }
 }
 
-extension VBaseListLayoutType {
-    fileprivate var helperType: BaseListLayoutTypeHelper {
+extension VListLayoutType {
+    fileprivate var helperType: _VListLayoutType {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible
@@ -116,7 +116,7 @@ extension VBaseListLayoutType {
 }
 
 // Copied and modified from VList's preview
-struct VBaseListDemoViewDataSource {
+struct VListDemoViewDataSource {
     private init() {}
     
     struct Row: Identifiable {
@@ -158,8 +158,8 @@ struct VBaseListDemoViewDataSource {
 }
 
 // MARK: - Preview
-struct VBaseListDemoView_Previews: PreviewProvider {
+struct VListDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VBaseListDemoView()
+        VListDemoView()
     }
 }

@@ -14,8 +14,8 @@ public struct VAccordionModel {
     /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to `VBaseListModel`.
-    public static let baseListReference: VBaseListModel = .init()
+    /// Reference to `VListModel`.
+    public static let listReference: VListModel = .init()
     
     /// Reference to `VChevronButtonModel`.
     public static let chevronButtonReference: VChevronButtonModel = .init()
@@ -104,7 +104,7 @@ public struct VAccordionModel {
         
         // MARK: Horizontal Margins
         /// Sub-model containing `leading` and `trailing` margins.
-        public typealias HorizontalMargins = VBaseListModel.Layout.HorizontalMargins
+        public typealias HorizontalMargins = VListModel.Layout.HorizontalMargins
         
         // MARK: Expandable Margins
         /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins.
@@ -164,7 +164,7 @@ public struct VAccordionModel {
         public var chevronButtonIcon: StateColors = chevronButtonReference.colors.icon
         
         /// Row divider color.
-        public var divider: Color = baseListReference.colors.divider
+        public var divider: Color = listReference.colors.divider
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -225,8 +225,8 @@ public struct VAccordionModel {
     }
 
     // MARK: Sub-Models
-    var baseListSubModel: VBaseListModel {
-        var model: VBaseListModel = .init()
+    var listSubModel: VListModel {
+        var model: VListModel = .init()
         
         model.layout.showIndicator = layout.showIndicator
         

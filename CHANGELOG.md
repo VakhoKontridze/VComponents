@@ -17,6 +17,7 @@
 - `VSquareButton` font has been changed to system bold size 15
 - `VPlainButton` font has been changed to system medium size 15
 - `VWebLink` has been renamed to `VLink`
+- `VBaseList` has been renamed to `VList`
 - Generic type `Content` has been renamed to `Label` in button and state pickers as per SwiftUI's guidelines 
 - `VPickableItem` has been renamed to `PickableEnumeration`
 - `LayoutGroup`'s have been renamed to `EdgeInsets`'s

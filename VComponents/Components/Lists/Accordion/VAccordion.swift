@@ -302,8 +302,8 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
             Group(content: {
                 switch contentType {
                 case .list(let data, let id, let rowContent):
-                    VBaseList(
-                        model: model.baseListSubModel,
+                    VList(
+                        model: model.listSubModel,
                         layout: layoutType,
                         data: data,
                         id: id,

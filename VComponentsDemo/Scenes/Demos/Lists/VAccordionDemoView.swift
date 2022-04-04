@@ -14,7 +14,7 @@ struct VAccordionDemoView: View {
     static var navBarTitle: String { "Accordion" }
     
     @State private var accordionState: VAccordionState = .expanded
-    @State private var layoutType: BaseListLayoutTypeHelper = .default
+    @State private var layoutType: _VListLayoutType = .default
     @State private var rowCount: Int = 5
     @State private var expandCollapseOnHeaderTap: Bool = true
     @State private var hasDivider: Bool = VAccordionModel.Layout().headerDividerHeight > 0
@@ -47,8 +47,8 @@ struct VAccordionDemoView: View {
                 layout: layoutType.accordionlayoutType,
                 state: $accordionState,
                 headerTitle: "Lorem ipsum dolor sit amet",
-                data: VBaseListDemoViewDataSource.rows(count: rowCount),
-                rowContent: { VBaseListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                data: VListDemoViewDataSource.rows(count: rowCount),
+                rowContent: { VListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
             )
                 .ifLet(
                     layoutType.height,
@@ -92,7 +92,7 @@ extension VAccordionState: PickableTitledEnumeration {
     }
 }
 
-extension BaseListLayoutTypeHelper {
+extension _VListLayoutType {
     fileprivate var accordionlayoutType: VAccordionLayoutType {
         switch self {
         case .fixed: return .fixed

@@ -1,5 +1,5 @@
 //
-//  VBaseList.swift
+//  VList.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - V Base List
+// MARK: - V List
 /// Core component that is used throughout the library as a structure that either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
 /// Model, and layout can be passed as parameters.
@@ -40,7 +40,7 @@ import SwiftUI
 ///         ZStack(alignment: .top, content: {
 ///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///             VBaseList(data: data, rowContent: { row in
+///             VList(data: data, rowContent: { row in
 ///                 Text(row.title)
 ///                     .frame(maxWidth: .infinity, alignment: .leading)
 ///             })
@@ -48,16 +48,16 @@ import SwiftUI
 ///         })
 ///     }
 ///
-public struct VBaseList<Data, ID, RowContent>: View
+public struct VList<Data, ID, RowContent>: View
     where
         Data: RandomAccessCollection,
         ID: Hashable,
         RowContent: View
 {
     // MARK: Properties
-    private let model: VBaseListModel
+    private let model: VListModel
     
-    private let layoutType: VBaseListLayoutType
+    private let layoutType: VListLayoutType
     
     private let data: [IdentifiableElement<ID, Data.Element>]
     private let rowContent: (Data.Element) -> RowContent
@@ -65,8 +65,8 @@ public struct VBaseList<Data, ID, RowContent>: View
     // MARK: Initializers
     /// Initializes component with data, id, and row content.
     public init(
-        model: VBaseListModel = .init(),
-        layout layoutType: VBaseListLayoutType = .default,
+        model: VListModel = .init(),
+        layout layoutType: VListLayoutType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
@@ -79,8 +79,8 @@ public struct VBaseList<Data, ID, RowContent>: View
     
     /// Initializes component with data and row content.
     public init(
-        model: VBaseListModel = .init(),
-        layout layoutType: VBaseListLayoutType = .default,
+        model: VListModel = .init(),
+        layout layoutType: VListLayoutType = .default,
         data: Data,
         @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
     )
@@ -134,13 +134,19 @@ public struct VBaseList<Data, ID, RowContent>: View
 
     // MARK: Helpers
     private func showDivider(for i: Int) -> Bool {
-        model.layout.hasDivider &&
-        i <= data.count-2
+        guard model.layout.hasDivider else { return false }
+        
+        switch model.layout.lastRowHasDivider {
+        case false: guard i <= data.count-2 else { return false }
+        case true: guard i <= data.count-1 else { return false }
+        }
+        
+        return true
     }
 }
 
 // MARK: - Preview
-struct VBaseList_Previews: PreviewProvider {
+struct VList_Previews: PreviewProvider {
     private struct Row: Identifiable {
         let id: Int
         let color: Color
@@ -179,7 +185,7 @@ struct VBaseList_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VBaseList(data: rows, rowContent: { row in
+        VList(data: rows, rowContent: { row in
             rowContent(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)

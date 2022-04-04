@@ -105,10 +105,6 @@ extension Color {
  
  Accordion.Divider
  @140.140.140 @ 50
- 
- BaseList.Divider
- *120.120.120 @ 15
- @160.160.160 @ 15
 
  CheckBox.Border.disabled
  *230.230.230
@@ -137,6 +133,10 @@ extension Color {
  HalfModal.Grabber
  *220.220.220
  45.45.45
+ 
+ List.Divider
+ *120.120.120 @ 15
+ @160.160.160 @ 15
  
  Modal.Blinding
  *100.100.100 @ 30

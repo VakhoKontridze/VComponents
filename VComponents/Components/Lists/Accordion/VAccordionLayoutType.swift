@@ -20,4 +20,4 @@ import Foundation
 ///
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
-public typealias VAccordionLayoutType = VBaseListLayoutType
+public typealias VAccordionLayoutType = VListLayoutType
