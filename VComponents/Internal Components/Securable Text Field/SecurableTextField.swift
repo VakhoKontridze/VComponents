@@ -11,18 +11,18 @@ import SwiftUI
 struct SecurableTextField: View {
     // MARK: Properties
     private let isSecure: Bool
-    @Binding private var text: String
     private let placeholder: String?
+    @Binding private var text: String
     
     // MARK: Initializers
     init(
         isSecure: Bool,
-        text: Binding<String>,
-        placeholder: String?
+        placeholder: String?,
+        text: Binding<String>
     ) {
         self.isSecure = isSecure
-        self._text = text
         self.placeholder = placeholder
+        self._text = text
     }
     
     // MARK: Body

@@ -9,6 +9,7 @@
 - `warning` highlight has been added to `VTextFieldModel`
 - Buttons—`VChevronButton` and `VCloseButton`—have been removed
 - `VBaseTextField` has been removed, as it's obsoleted by native `TextField` since SwiftUI `3.0`
+- `VList` and `VSectionList` have been removed
 - Navigation components—`VTabNavigationView` and `VNavigationView`—have been removed
 - `VBaseView` has been removed
 - `StateColors`'s and `StateOpacities`'s have been replaced with`GenericStateModel`'s

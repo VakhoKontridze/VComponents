@@ -33,7 +33,7 @@ import SwiftUI
 ///     let data: [ListRow] = [
 ///         .init(title: "Red"),
 ///         .init(title: "Green"),
-///         init(title: "Blue")
+///         .init(title: "Blue")
 ///     ]
 ///
 ///     var body: some View {
@@ -59,12 +59,10 @@ public struct VBaseList<Data, ID, RowContent>: View
     
     private let layoutType: VBaseListLayoutType
     
-    private let data: [Element]
+    private let data: [IdentifiableElement<ID, Data.Element>]
     private let rowContent: (Data.Element) -> RowContent
     
-    typealias Element = VBaseListElement<ID, Data.Element>
-    
-    // MARK: Initializers - View Builder
+    // MARK: Initializers
     /// Initializes component with data, id, and row content.
     public init(
         model: VBaseListModel = .init(),
@@ -79,7 +77,6 @@ public struct VBaseList<Data, ID, RowContent>: View
         self.rowContent = rowContent
     }
     
-    // MARK: Initializers - Identified View Builder
     /// Initializes component with data and row content.
     public init(
         model: VBaseListModel = .init(),
@@ -119,7 +116,7 @@ public struct VBaseList<Data, ID, RowContent>: View
         }
     }
     
-    private func contentView(i: Int, element: Element) -> some View {
+    private func contentView(i: Int, element: IdentifiableElement<ID, Data.Element>) -> some View {
         VStack(spacing: 0, content: {
             rowContent(element.value)
 
@@ -144,7 +141,7 @@ public struct VBaseList<Data, ID, RowContent>: View
 
 // MARK: - Preview
 struct VBaseList_Previews: PreviewProvider {
-    struct Row: Identifiable {
+    private struct Row: Identifiable {
         let id: Int
         let color: Color
         let title: String
@@ -152,7 +149,7 @@ struct VBaseList_Previews: PreviewProvider {
         static var count: Int { 10 }
     }
     
-    static var rows: [Row] {
+    private static var rows: [Row] {
         (0..<Row.count).map { i in
             .init(
                 id: i,
@@ -168,7 +165,7 @@ struct VBaseList_Previews: PreviewProvider {
         return formatter.string(from: .init(value: i))?.capitalized ?? ""
     }
     
-    static func rowContent(title: String, color: Color) -> some View {
+    private static func rowContent(title: String, color: Color) -> some View {
         HStack(spacing: 10, content: {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(color.opacity(0.8))

@@ -14,8 +14,8 @@ public struct VAccordionModel {
     /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to `VListModel`.
-    public static let listReference: VListModel = .init()
+    /// Reference to `VBaseListModel`.
+    public static let baseListReference: VBaseListModel = .init()
     
     /// Reference to `VChevronButtonModel`.
     public static let chevronButtonReference: VChevronButtonModel = .init()
@@ -44,7 +44,7 @@ public struct VAccordionModel {
     public struct Layout {
         // MARK: Properties
         /// Accordion corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = listReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = 15
         
         /// Chevron button dimension. Default to `32`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
@@ -83,13 +83,13 @@ public struct VAccordionModel {
         )
         
         /// Row spacing. Defaults to `18`.
-        public var rowSpacing: CGFloat = listReference.layout.rowSpacing
+        public var rowSpacing: CGFloat = 18
         
         /// Row divider height. Defaults to `1`.
-        public var dividerHeight: CGFloat = listReference.layout.dividerHeight
+        public var dividerHeight: CGFloat = 1
         
         /// Divider margins. Defaults to `0` leading and `0` trailing.
-        public var dividerMargins: HorizontalMargins = listReference.layout.dividerMargins
+        public var dividerMargins: HorizontalMargins = .zero
         
         /// Indicates if scrolling indicator is shown. Defaults to `true`.
         public var showIndicator: Bool = true
@@ -142,7 +142,7 @@ public struct VAccordionModel {
     public struct Colors {
         // MARK: Properties
         /// Background color.
-        public var background: Color = listReference.colors.background
+        public var background: Color = sheetReference.colors.background
         
         /// Header state opacities.
         public var header_: StateOpacities = .init(
@@ -164,7 +164,7 @@ public struct VAccordionModel {
         public var chevronButtonIcon: StateColors = chevronButtonReference.colors.icon
         
         /// Row divider color.
-        public var divider: Color = listReference.colors.divider
+        public var divider: Color = baseListReference.colors.divider
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

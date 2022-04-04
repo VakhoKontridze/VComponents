@@ -232,8 +232,8 @@ public struct VTextField: View {
     private var textField: some View {
         SecurableTextField(
             isSecure: textFieldType.isSecure && !secureFieldIsVisible,
-            text: $text,
-            placeholder: placeholder
+            placeholder: placeholder,
+            text: $text
         )
             .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
         
