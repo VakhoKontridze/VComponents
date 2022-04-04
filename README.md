@@ -35,7 +35,7 @@ VComponents is a SwiftUI library that contains 30+ customizable UI components.
 
 **Inputs.** VTextField
 
-**Lists.** VBaseList, VList, VSectionList, VAccordion
+**Lists.** VList, VAccordion
 
 **Modals.** VModal, VHalfModal, VSideBar, VDialog, VMenu, VActionSheet
 
@@ -134,40 +134,6 @@ var body: some View {
         
         VPageIndicator(type: .auto(), total: 99, selectedIndex: 4)
     })
-}
-```
-
-### States
-
-States in components are represented as enums. They can be passed as a parameter to initializers, but most default to `enabled`.
-
-Some enums contain case `disabled`, which is preffered over  `SwiftUI`'s `.disabled()` modifier.
-`.disabled()` modifier changes color and opacity of a native `Button`, but this behavior is limited in nature.
-Some components in this library contain multiple subviews, which require a more in-depth customization.
-For instance, we can customize `VSecondaryButton`'s foreground, background, and border colors separately for `enabled`, `pressed`, and `disabled` states.
-Also keep in mind, that using a native modifier instead of state property may cause unintended side-effects.
-
-**Not Preferred**:
-
-```swift
-var body: some View {
-    VSecondaryButton(
-        action: doSomething,
-        title: "Press"
-    )
-        .disabled(true)
-}
-```
-
-**Preferred**:
-
-```swift
-var body: some View {
-    VSecondaryButton(
-        state: .disabled,
-        action: doSomething,
-        title: "Press"
-    )
 }
 ```
 
