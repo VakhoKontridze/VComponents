@@ -23,11 +23,12 @@ struct HomeView: View {
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
         .init(id: 4, title: "Inputs", rows: [.textField]),
-        .init(id: 5, title: "Lists", rows: [.list, .accordion]),
-        .init(id: 6, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
-        .init(id: 7, title: "Messages", rows: [.toast]),
-        .init(id: 8, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
-        .init(id: 9, title: "Misc", rows: [.text, .sheet, .lazyScrollView])
+        .init(id: 5, title: "Containers", rows: [.sheet, .accordion]),
+        .init(id: 6, title: "Lists", rows: [.lazyScrollView, .list]),
+        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
+        .init(id: 8, title: "Messages", rows: [.toast]),
+        .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
+        .init(id: 10, title: "Misc", rows: [.text])
     ]
 
     private enum HomeRow: Int, DemoableRow {
@@ -66,8 +67,11 @@ struct HomeView: View {
 
             case .textField: return VTextFieldDemoView.navBarTitle
                 
-            case .list: return VListDemoView.navBarTitle
+            case .sheet: return VSheetDemoView.navBarTitle
             case .accordion: return VAccordionDemoView.navBarTitle
+                
+            case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
+            case .list: return VListDemoView.navBarTitle
 
             case .modal: return VModalDemoView.navBarTitle
             case .halfModal: return VHalfModalDemoView.navBarTitle
@@ -83,8 +87,6 @@ struct HomeView: View {
             case .pageIndicator: return VPageIndicatorDemoView.navBarTitle
 
             case .text: return VTextDemoView.navBarTitle
-            case .sheet: return VSheetDemoView.navBarTitle
-            case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
             }
         }
 
@@ -112,8 +114,11 @@ struct HomeView: View {
                 
             case .textField: VTextFieldDemoView()
 
-            case .list: VListDemoView()
+            case .sheet: VSheetDemoView()
             case .accordion: VAccordionDemoView()
+                
+            case .lazyScrollView: VLazyScrollViewDemoView()
+            case .list: VListDemoView()
 
             case .modal: VModalDemoView()
             case .halfModal: VHalfModalDemoView()
@@ -129,8 +134,6 @@ struct HomeView: View {
             case .pageIndicator: VPageIndicatorDemoView()
 
             case .text: VTextDemoView()
-            case .sheet: VSheetDemoView()
-            case .lazyScrollView: VLazyScrollViewDemoView()
             }
         }
     }

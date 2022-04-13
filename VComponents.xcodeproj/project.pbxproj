@@ -595,6 +595,24 @@
 			path = "Close Button";
 			sourceTree = "<group>";
 		};
+		17DB70992806D5E200285D08 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				7A59958C25924F360087902B /* Sheet */,
+				7ACC3EC425AC919D00EAD184 /* Accordion */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
+		17DB709A2806D60100285D08 /* Containers */ = {
+			isa = PBXGroup;
+			children = (
+				7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */,
+				7ACC3EE125ACC6F100EAD184 /* VAccordionDemoView.swift */,
+			);
+			path = Containers;
+			sourceTree = "<group>";
+		};
 		7A036B9725CFE28800773302 /* Messages */ = {
 			isa = PBXGroup;
 			children = (
@@ -914,8 +932,6 @@
 			isa = PBXGroup;
 			children = (
 				7A3B87EE25AD842900295A87 /* Text */,
-				7A59958C25924F360087902B /* Sheet */,
-				7AC5060D25911B6000226656 /* Lazy Scroll View */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -924,8 +940,6 @@
 			isa = PBXGroup;
 			children = (
 				7A3B880125ADAD2500295A87 /* VTextDemoView.swift */,
-				7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */,
-				7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */,
 			);
 			path = Misc;
 			sourceTree = "<group>";
@@ -1302,6 +1316,7 @@
 				7A3B87FB25AD8A1F00295A87 /* Item Pickers */,
 				7A3B87FA25AD8A1400295A87 /* Value Pickers */,
 				7AA763D625B738D30088FC69 /* Inputs */,
+				17DB70992806D5E200285D08 /* Containers */,
 				7AC5060C25911B5900226656 /* Lists */,
 				7A2D6F34259751B0005513A7 /* Modals */,
 				7A036B9725CFE28800773302 /* Messages */,
@@ -1320,6 +1335,7 @@
 				7A3B87F425AD898700295A87 /* Item Pickers */,
 				7A3B87F325AD897900295A87 /* Value Pickers */,
 				7AB41B6125B81D8700F83987 /* Inputs */,
+				17DB709A2806D60100285D08 /* Containers */,
 				7ABEAA4C2593421500A90B56 /* Lists */,
 				7A3B87F625AD89B400295A87 /* Modals */,
 				7A036BBC25D05CD700773302 /* Messages */,
@@ -1332,8 +1348,8 @@
 		7ABEAA4C2593421500A90B56 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
+				7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */,
 				7A3B880725ADB4A700295A87 /* VListDemoView.swift */,
-				7ACC3EE125ACC6F100EAD184 /* VAccordionDemoView.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -1352,7 +1368,7 @@
 			isa = PBXGroup;
 			children = (
 				7A59576C25AB502300B5B6E7 /* List */,
-				7ACC3EC425AC919D00EAD184 /* Accordion */,
+				7AC5060D25911B6000226656 /* Lazy Scroll View */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
