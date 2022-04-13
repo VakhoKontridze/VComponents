@@ -14,331 +14,186 @@ import SwiftUI
 ///
 /// Model and layout can be passed as parameters.
 ///
-/// There are three posible layouts:
-///
-/// 1. `Fixed`.
-/// Passed as parameter. Component stretches vertically to take required space. Scrolling may be enabled on page.
-///
-/// 2. `Flexible`.
-/// Passed as parameter. Component stretches vertically to occupy maximum space, but is constrainted in space given by container.Scrolling may be enabled inside component.
-///
-/// 3. `Constrained`.
-/// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
-///
 /// Usage example:
 ///
-///     struct AccordionRow: Identifiable {
-///         let id: UUID = .init()
-///         let title: String
-///     }
+///     ZStack(alignment: .top, content: {
+///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
-///     @State var state: VAccordionState = .expanded
-///     @State var data: [AccordionRow] = [
-///         .init(title: "Red"),
-///         .init(title: "Green"),
-///         .init(title: "Blue")
-///     ]
+///     VAccordion(
+///             isExpanded: $isExpanded,
+///             headerTitle: "Lorem Ipsum",
+///             content: {
+///                 VList(
+///                     layout: .fixed,
+///                     data: 1..<10,
+///                     id: \.self,
+///                     rowContent: { num in
+///                         Text(String(num))
+///                             .padding(.vertical, 2)
+///                             .frame(maxWidth: .infinity, alignment: .leading)
+///                     }
+///                 )
+///             }
+///         )
+///             .padding()
+///     })
 ///
-///     var body: some View {
-///         ZStack(alignment: .top, content: {
-///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-///
-///             VAccordion(
-///                 state: $state,
-///                 headerTitle: "Lorem ipsum dolor sit amet",
-///                 data: data,
-///                 rowContent: { row in
-///                     Text(row.title)
-///                         .frame(
-///                             maxWidth: .infinity,
-///                             alignment: .leading
-///                         )
-///                 }
-///             )
-///                 .padding()
-///         })
-///     }
-///
-public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
+public struct VAccordion<HeaderLabel, Content>: View
     where
-        HeaderContent: View,
-        Data: RandomAccessCollection,
-        ID: Hashable,
-        RowContent: View,
+        HeaderLabel: View,
         Content: View
 {
     // MARK: Properties
     private let model: VAccordionModel
-    private let layoutType: VAccordionLayoutType
     
+    @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding private var state: VAccordionState
-    @State private var animatableState: VAccordionState?
+    private var internalState: VAccordionInternalState { .init(isEnabled: isEnabled, state: state) }
     
-    private let headerContent: () -> HeaderContent
+    private let headerLabel: VAccordionHeaderLabel<HeaderLabel>
     
-    private let contentType: ContentType
-    private enum ContentType {
-        case list(data: Data, id: KeyPath<Data.Element, ID>, rowContent: (Data.Element) -> RowContent)
-        case freeForm(content: () -> Content)
-    }
+    private let content: () -> Content
     
-    // MARK: Initializers - View Builder
-    /// Initializes component with state, header, data, id, and row content.
-    public init(
-        model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
-        state: Binding<VAccordionState>,
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
-        data: Data,
-        id: KeyPath<Data.Element, ID>,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
-    )
-        where Content == Never
-    {
-        self.model = model
-        self.layoutType = layoutType
-        self._state = state
-        self.headerContent = headerContent
-        self.contentType = .list(
-            data: data,
-            id: id,
-            rowContent: rowContent
-        )
-    }
-    
-    /// Initializes component with state, header title, data, id, and row content.
-    public init(
-        model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
-        state: Binding<VAccordionState>,
-        headerTitle: String,
-        data: Data,
-        id: KeyPath<Data.Element, ID>,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
-    )
-        where
-            HeaderContent == VBaseHeaderFooter,
-            Content == Never
-    {
-        self.init(
-            model: model,
-            layout: layoutType,
-            state: state,
-            headerContent: {
-                VBaseHeaderFooter(
-                    frameType: .flexible(.leading),
-                    font: model.fonts.header,
-                    color: model.colors.header,
-                    title: headerTitle
-                )
-            },
-            data: data,
-            id: id,
-            rowContent: rowContent
-        )
-    }
+    @State private var headerHeight: CGFloat = 0
+    @State private var accordionHeight: CGFloat = 0
 
-    // MARK: Initializers - Identified View Builder
-    /// Initializes component with state, header, data, and row content.
+    // MARK: Initializers - State
+    /// Initializes component with header title and content.
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
-        state: Binding<VAccordionState>,
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
-        data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
-    )
-        where
-            Content == Never,
-            Data.Element: Identifiable,
-            ID == Data.Element.ID
-    {
-        self.init(
-            model: model,
-            layout: layoutType,
-            state: state,
-            headerContent: headerContent,
-            data: data,
-            id: \Data.Element.id,
-            rowContent: rowContent
-        )
-    }
-    
-    /// Initializes component with state, header title, data, and row content.
-    public init(
-        model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
         headerTitle: String,
-        data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
-    )
-        where
-            HeaderContent == VBaseHeaderFooter,
-            Content == Never,
-            Data.Element: Identifiable,
-            ID == Data.Element.ID
-    {
-        self.init(
-            model: model,
-            layout: layoutType,
-            state: state,
-            headerContent: {
-                VBaseHeaderFooter(
-                    frameType: .flexible(.leading),
-                    font: model.fonts.header,
-                    color: model.colors.header,
-                    title: headerTitle
-                )
-            },
-            data: data,
-            rowContent: rowContent
-        )
-    }
-    
-    // MARK: Initializers - Free Content
-    /// Initializes component with state, header, and free content.
-    public init(
-        model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
-        state: Binding<VAccordionState>,
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content
     )
-        where
-            Data == Array<Never>,
-            ID == Never,
-            RowContent == Never
+        where HeaderLabel == Never
     {
         self.model = model
-        self.layoutType = layoutType
         self._state = state
-        self.headerContent = headerContent
-        self.contentType = .freeForm(
-            content: content
-        )
+        self.headerLabel = .title(title: headerTitle)
+        self.content = content
     }
     
-    /// Initializes component with state, header title, and free content.
+    /// Initializes component with header and content.
     public init(
         model: VAccordionModel = .init(),
-        layout layoutType: VAccordionLayoutType = .fixed,
         state: Binding<VAccordionState>,
+        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.model = model
+        self._state = state
+        self.headerLabel = .custom(label: headerLabel)
+        self.content = content
+    }
+    
+    // MARK: Initializers - Bool
+    /// Initializes component with header title and content.
+    public init(
+        model: VAccordionModel = .init(),
+        isExpanded: Binding<Bool>,
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
-        where
-            HeaderContent == VBaseHeaderFooter,
-            Data == Array<Never>,
-            ID == Never,
-            RowContent == Never
+        where HeaderLabel == Never
     {
-        self.init(
-            model: model,
-            layout: layoutType,
-            state: state,
-            headerContent: {
-                VBaseHeaderFooter(
-                    frameType: .flexible(.leading),
-                    font: model.fonts.header,
-                    color: model.colors.header,
-                    title: headerTitle
-                )
-            },
-            content: content
-        )
+        self.model = model
+        self._state = .init(bool: isExpanded)
+        self.headerLabel = .title(title: headerTitle)
+        self.content = content
+    }
+    
+    /// Initializes component with header and content.
+    public init(
+        model: VAccordionModel = .init(),
+        isExpanded: Binding<Bool>,
+        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.model = model
+        self._state = .init(bool: isExpanded)
+        self.headerLabel = .custom(label: headerLabel)
+        self.content = content
     }
 
     // MARK: Body
     public var body: some View {
-        syncInternalStateWithState()
-        
-        return VSheet(model: model.sheetSubModel, content: {
-            VStack(spacing: 0, content: {
-                headerView
-                divider
-                contentView
-            })
+        VStack(spacing: 0, content: {
+            headerView
+            divider
+            contentView
         })
+            .readSize(onChange: { accordionHeight = $0.height })
+            .frame(height: internalState.isExpanded ? accordionHeight : headerHeight, alignment: .top)
+            .clipped()
+            .transition(.move(edge: .bottom))
+            .background(VSheet(model: model.sheetSubModel))
+            .animation(model.animations.expandCollapse, value: isEnabled)
+            .animation(model.animations.expandCollapse, value: state) // +withAnimation
     }
     
     private var headerView: some View {
-        HStack(spacing: 0, content: {
-            headerContent()
-                .opacity(model.colors.header_.for(state))
+        ZStack(content: {
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture(perform: expandCollapseFromHeaderTap)
             
-            Spacer()
-            
-            VSquareButton.chevron(
-                model: model.chevronButonSubModel,
-                direction: state.chevronButtonDirection,
-                action: expandCollapse
-            )
-                .disabled(!state.chevronButtonIsEnabled)
-                .allowsHitTesting(!model.misc.expandCollapseOnHeaderTap) // No need for two-layer tap area
+            HStack(spacing: 0, content: {
+                Group(content: {
+                    switch headerLabel {
+                    case .title(let title):
+                        VText(
+                            color: model.colors.headerTitle.for(internalState),
+                            font: model.fonts.headerTitle,
+                            title: title
+                        )
+                        
+                    case .custom(let label):
+                        label()
+                            .opacity(model.colors.customHeaderLabelOpacities.for(internalState))
+                    }
+                })
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Spacer()
+                
+                VSquareButton.chevron(
+                    model: model.chevronButonSubModel,
+                    direction: internalState.chevronButtonDirection,
+                    action: expandCollapse
+                )
+                    .disabled(!internalState.isEnabled)
+            })
         })
             .padding(.leading, model.layout.headerMargins.leading)
             .padding(.trailing, model.layout.headerMargins.trailing)
             .padding(.top, model.layout.headerMargins.top)
-            .padding(.bottom, (animatableState ?? state).isExpanded ? model.layout.headerMargins.bottomExpanded : model.layout.headerMargins.bottomCollapsed)
+            .padding(.bottom, model.layout.headerMargins.bottom)
             .contentShape(Rectangle())
-            .onTapGesture(perform: expandCollapseFromHeaderTap)
+            .readSize(onChange: { headerHeight = $0.height })
     }
     
-    @ViewBuilder private var divider: some View {
-        if (animatableState ?? state).isExpanded, model.layout.hasHeaderDivider {
-            Rectangle()
-                .frame(height: model.layout.headerDividerHeight)
-                .padding(.leading, model.layout.headerDividerMargins.leading)
-                .padding(.trailing, model.layout.headerDividerMargins.trailing)
-                .padding(.top, model.layout.headerDividerMargins.top)
-                .padding(.bottom, model.layout.headerDividerMargins.bottom)
-                .foregroundColor(model.colors.headerDivider)
-        }
+    private var divider: some View {
+        Rectangle()
+            .frame(height: model.layout.headerDividerHeight)
+            .padding(.leading, model.layout.headerDividerMargins.leading)
+            .padding(.trailing, model.layout.headerDividerMargins.trailing)
+            .padding(.top, model.layout.headerDividerMargins.top)
+            .padding(.bottom, model.layout.headerDividerMargins.bottom)
+            .foregroundColor(model.colors.headerDivider)
     }
     
-    @ViewBuilder private var contentView: some View {
-        if (animatableState ?? state).isExpanded {
-            Group(content: {
-                switch contentType {
-                case .list(let data, let id, let rowContent):
-                    VList(
-                        model: model.listSubModel,
-                        layout: layoutType,
-                        data: data,
-                        id: id,
-                        rowContent: rowContent
-                    )
-                        .padding(.leading, model.layout.contentMargins.leading)
-                        //.padding(.trailing, model.layout.contentMargin.trailing)
-                        .padding(.top, model.layout.contentMargins.top)
-                        .padding(.bottom, model.layout.contentMargins.bottom)
-                    
-                case .freeForm(let content):
-                    content()
-                        .padding(.leading, model.layout.contentMargins.leading)
-                        .padding(.trailing, model.layout.contentMargins.trailing)
-                        .padding(.top, model.layout.contentMargins.top)
-                        .padding(.bottom, model.layout.contentMargins.bottom)
-                }
-            })
-                .frame(maxWidth: .infinity)
-        }
-    }
-
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            if animatableState == nil || animatableState != state {
-                withAnimation(model.animations.expandCollapse, { animatableState = state })
-            }
-        })
+    private var contentView: some View {
+        content()
+            .padding(.leading, model.layout.contentMargins.leading)
+            .padding(.trailing, model.layout.contentMargins.trailing)
+            .padding(.top, model.layout.contentMargins.top)
+            .padding(.bottom, model.layout.contentMargins.bottom)
+            .frame(maxWidth: .infinity)
     }
 
     // MARK: Actions
     private func expandCollapse() {
-        withAnimation(model.animations.expandCollapse, { animatableState?.setNextState() })
-        state.setNextState()
+        withAnimation(model.animations.expandCollapse, { state.setNextState() })
     }
     
     private func expandCollapseFromHeaderTap() {
@@ -347,25 +202,42 @@ public struct VAccordion<HeaderContent, Data, ID, RowContent, Content>: View
     }
 }
 
+// MARK: - Helpers
+extension VAccordionInternalState {
+    fileprivate var chevronButtonDirection: VChevronButtonDirection {
+        switch self {
+        case .collapsed: return .down
+        case .expanded: return .up
+        case .disabled: return .down
+        }
+    }
+}
+
 // MARK: - Previews
 struct VAccordion_Previews: PreviewProvider {
-    @State private static var accordionState: VAccordionState = .expanded
+    @State private static var isExpanded: Bool = true
     
     static var previews: some View {
-        ZStack(alignment:. top, content: {
+        ZStack(alignment: .top, content: {
             ColorBook.canvas.edgesIgnoringSafeArea(.all)
-            
+
             VAccordion(
-                state: $accordionState,
-                headerTitle: "Lorem ipsum dolor sit amet",
-                data: ["One", "Two", "Three"],
-                id: \.self,
-                rowContent: {
-                    Text($0)
-                        .frame(maxWidth: .infinity, alignment: .leading)
+                isExpanded: $isExpanded,
+                headerTitle: "Lorem Ipsum",
+                content: {
+                    VList(
+                        layout: .fixed,
+                        data: 1..<10,
+                        id: \.self,
+                        rowContent: { num in
+                            Text(String(num))
+                                .padding(.vertical, 2)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
                 }
             )
-                .padding(16)
+                .padding()
         })
     }
 }

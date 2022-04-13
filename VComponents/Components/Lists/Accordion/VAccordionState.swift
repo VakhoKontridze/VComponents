@@ -5,10 +5,10 @@
 //  Created by Vakhtang Kontridze on 1/11/21.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Accordion State
-/// Enum that describes state, such as `collapsed`, `expanded`, or `disabled`.
+/// Enum that describes state, such as `collapsed` or `expanded`.
 public enum VAccordionState: Int, CaseIterable {
     // MARK: Cases
     /// Case collapsed.
@@ -17,41 +17,21 @@ public enum VAccordionState: Int, CaseIterable {
     /// Case expanded.
     case expanded
     
-    /// Case disabled.
-    case disabled
-    
     // MARK: Properties
-    /// Indicates if state is Enabled.
-    public var isEnabled: Bool {
-        switch self {
-        case .collapsed: return true
-        case .expanded: return true
-        case .disabled: return false
-        }
-    }
-    
     /// Indicates if state is expanded.
     public var isExpanded: Bool {
         switch self {
         case .collapsed: return false
         case .expanded: return true
-        case .disabled: return false
         }
     }
     
-    var chevronButtonIsEnabled: Bool {
-        switch self {
-        case .collapsed: return true
-        case .expanded: return true
-        case .disabled: return false
-        }
-    }
-    
-    var chevronButtonDirection: VChevronButtonDirection {
-        switch self {
-        case .collapsed: return .down
-        case .expanded: return .up
-        case .disabled: return .down
+    // MARK: Initializers
+    /// Initializes state with `Bool`.
+    public init(isExpanded: Bool) {
+        switch isExpanded {
+        case false: self = .collapsed
+        case true: self = .expanded
         }
     }
 
@@ -61,18 +41,19 @@ public enum VAccordionState: Int, CaseIterable {
         switch self {
         case .collapsed: self = .expanded
         case .expanded: self = .collapsed
-        case .disabled: break
         }
     }
 }
 
-// MARK: - Mapping
-extension StateOpacities_D {
-    func `for`(_ state: VAccordionState) -> Double {
-        switch state {
-        case .collapsed: return 1
-        case .expanded: return 1
-        case .disabled: return disabledOpacity
-        }
+extension Binding where Value == VAccordionState {
+    /// Initializes state with `Bool`.
+    public init(bool: Binding<Bool>) {
+        self.init(
+            get: { .init(isExpanded: bool.wrappedValue) },
+            set: { bool.wrappedValue = $0.isExpanded }
+        )
     }
 }
+
+// MARK: - V Accordion Internal State
+typealias VAccordionInternalState = GenericState_CED

@@ -14,9 +14,6 @@ public struct VAccordionModel {
     /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
-    /// Reference to `VListModel`.
-    public static let listReference: VListModel = .init()
-    
     /// Reference to `VChevronButtonModel`.
     public static let chevronButtonReference: VChevronButtonModel = .init()
     
@@ -57,42 +54,29 @@ public struct VAccordionModel {
         
         var hasHeaderDivider: Bool { headerDividerHeight > 0 }
         
-        /// Header margins. Defaults to `10` leading, `10` trailing, `5` top, `5` bottom when collapsed, and `5` bottom when expanded.
-        public var headerMargins: ExpandableMargins = .init(
+        /// Header margins. Defaults to `10` leading, `10` trailing, `10` top, `10` bottom.
+        public var headerMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
             top: 10,
-            bottomCollapsed: 10,
-            bottomExpanded: 5
+            bottom: 10
         )
         
-        /// Divider margins. Defaults to `10` leading, `10` trailing, `5` top, and `5` bottom.
+        /// Divider margins. Defaults to `10` leading, `10` trailing, `0` top, and `5` bottom.
         public var headerDividerMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
-            top: 5,
+            top: 0,
             bottom: 5
         )
         
-        /// Divider margins. Defaults to `15` leading, `15` trailing, `5` top, and `15` bottom.
+        /// Content margins. Defaults to `15` leading, `15` trailing, `5` top, and `15` bottom.
         public var contentMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin + 5,
             trailing: sheetReference.layout.contentMargin + 5,
             top: 5,
             bottom: sheetReference.layout.contentMargin + 5
         )
-        
-        /// Row spacing. Defaults to `18`.
-        public var rowSpacing: CGFloat = 18
-        
-        /// Row divider height. Defaults to `1`.
-        public var dividerHeight: CGFloat = 1
-        
-        /// Divider margins. Defaults to `0` leading and `0` trailing.
-        public var dividerMargins: HorizontalMargins = .zero
-        
-        /// Indicates if scrolling indicator is shown. Defaults to `true`.
-        public var showIndicator: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -105,36 +89,6 @@ public struct VAccordionModel {
         // MARK: Horizontal Margins
         /// Sub-model containing `leading` and `trailing` margins.
         public typealias HorizontalMargins = VListModel.Layout.HorizontalMargins
-        
-        // MARK: Expandable Margins
-        /// Sub-model containing `leading`, `trailing`, `top` and `bottom collapsed` and `bottom expanded` margins.
-        public struct ExpandableMargins {
-            // MARK: Properties
-            /// Leading margin.
-            public var leading: CGFloat
-            
-            /// Trailing margin.
-            public var trailing: CGFloat
-            
-            /// Top margin.
-            public var top: CGFloat
-            
-            /// Bottom collapsed margin.
-            public var bottomCollapsed: CGFloat
-            
-            /// Bottom expanded margin.
-            public var bottomExpanded: CGFloat
-            
-            // MARK: Initializers
-            /// Initializes sub-model with margins.
-            public init(leading: CGFloat, trailing: CGFloat, top: CGFloat, bottomCollapsed: CGFloat, bottomExpanded: CGFloat) {
-                self.leading = leading
-                self.trailing = trailing
-                self.top = top
-                self.bottomCollapsed = bottomCollapsed
-                self.bottomExpanded = bottomExpanded
-            }
-        }
     }
 
     // MARK: Colors
@@ -144,56 +98,60 @@ public struct VAccordionModel {
         /// Background color.
         public var background: Color = sheetReference.colors.background
         
-        /// Header state opacities.
-        public var header_: StateOpacities = .init(
-            disabledOpacity: 0.5
-        )
-        
-        /// Title header color.
+        /// Header title colors.
         ///
         /// Only applicable when using init with title.
-        public var header: Color = ColorBook.primary
+        public var headerTitle: StateColors = .init(
+            collapsed: ColorBook.primary,
+            expanded: ColorBook.primary,
+            disabled: ColorBook.primaryPressedDisabled
+        )
+        
+        /// Custom header label opacities.
+        ///
+        /// Applicable only when init with header label is used.
+        /// When using a custom header label, it's subviews cannot be configured with indivudual colors,
+        /// so instead, a general opacity is being applied.
+        public var customHeaderLabelOpacities: StateOpacities = .init(
+            collapsed: 1,
+            expanded: 1,
+            disabled: 0.5
+        )
         
         /// Header divider color.
         public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
         
         /// Chevron button background colors.
-        public var chevronButtonBackground: StateColors = chevronButtonReference.colors.background
+        public var chevronButtonBackground: ButtonStateColors = chevronButtonReference.colors.background
         
         /// Chevron button icon colors.
-        public var chevronButtonIcon: StateColors = chevronButtonReference.colors.icon
-        
-        /// Row divider color.
-        public var divider: Color = listReference.colors.divider
+        public var chevronButtonIcon: ButtonStateColors = chevronButtonReference.colors.icon
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
         
-        // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = StateOpacities_D
-        
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPD
+        public typealias StateColors = GenericStateModel_CED<Color>
         
+        // MARK: State Opacities
+        /// Sub-model containing opacities for component states.
+        public typealias StateOpacities = GenericStateModel_CED<CGFloat>
+        
+        // MARK: Button State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors_OLD = StateColors_EPD
-        
-        // MARK: State Colors And Opacities
-        /// Sub-model containing colors and opacities for component states.
-        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
+        public typealias ButtonStateColors = GenericStateModel_EPD<Color>
     }
 
     // MARK: Fonts
     /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font.
+        /// Header title font.
         ///
-        /// Only applicable when using init with title.
-        public var header: Font = .system(size: 17, weight: .bold)
+        /// Only applicable when using init with header.
+        public var headerTitle: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -225,21 +183,6 @@ public struct VAccordionModel {
     }
 
     // MARK: Sub-Models
-    var listSubModel: VListModel {
-        var model: VListModel = .init()
-        
-        model.layout.showIndicator = layout.showIndicator
-        
-        model.layout.marginTrailing = layout.contentMargins.trailing
-        model.layout.rowSpacing = layout.rowSpacing
-        model.layout.dividerHeight = layout.dividerHeight
-        model.layout.dividerMargins = layout.dividerMargins
-        
-        model.colors.divider = colors.divider
-        
-        return model
-    }
-    
     var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
         

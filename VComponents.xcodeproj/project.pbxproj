@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		170829322765E4C40001DF39 /* VBaseButtonGestureState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170829312765E4C40001DF39 /* VBaseButtonGestureState.swift */; };
 		171DB1C327D61A6E0073B5A2 /* VWheelPickerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 171DB1C227D61A6E0073B5A2 /* VWheelPickerContent.swift */; };
+		172EDFCB27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EDFCA27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift */; };
+		172EDFCD27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EDFCC27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift */; };
 		173C1FD2272A7FD600DF634F /* View.CustomViewFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */; };
 		173C1FD4272A7FFF00DF634F /* View.CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */; };
 		173C1FD6272A808500DF634F /* UINavigationBar.NavigationBarHeight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */; };
@@ -209,7 +211,6 @@
 		7ACC3EC225AC895000EAD184 /* DemoSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EC125AC895000EAD184 /* DemoSection.swift */; };
 		7ACC3EC625AC91A700EAD184 /* VAccordion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EC525AC91A700EAD184 /* VAccordion.swift */; };
 		7ACC3ECC25ACB1AD00EAD184 /* VListLayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ECB25ACB1AD00EAD184 /* VListLayoutType.swift */; };
-		7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */; };
 		7ACC3ED825ACC1C600EAD184 /* VAccordionState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */; };
 		7ACC3EDB25ACC22E00EAD184 /* VAccordionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */; };
 		7ACC3EE225ACC6F100EAD184 /* VAccordionDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EE125ACC6F100EAD184 /* VAccordionDemoView.swift */; };
@@ -257,6 +258,8 @@
 /* Begin PBXFileReference section */
 		170829312765E4C40001DF39 /* VBaseButtonGestureState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseButtonGestureState.swift; sourceTree = "<group>"; };
 		171DB1C227D61A6E0073B5A2 /* VWheelPickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VWheelPickerContent.swift; sourceTree = "<group>"; };
+		172EDFCA27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionHeaderLabel.swift; sourceTree = "<group>"; };
+		172EDFCC27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_CED.swift; sourceTree = "<group>"; };
 		173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CustomViewFrames.swift; sourceTree = "<group>"; };
 		173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CornerRadius.swift; sourceTree = "<group>"; };
 		173C1FD5272A808400DF634F /* UINavigationBar.NavigationBarHeight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.NavigationBarHeight.swift; sourceTree = "<group>"; };
@@ -460,7 +463,6 @@
 		7ACC3EC125AC895000EAD184 /* DemoSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoSection.swift; sourceTree = "<group>"; };
 		7ACC3EC525AC91A700EAD184 /* VAccordion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordion.swift; sourceTree = "<group>"; };
 		7ACC3ECB25ACB1AD00EAD184 /* VListLayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VListLayoutType.swift; sourceTree = "<group>"; };
-		7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionLayoutType.swift; sourceTree = "<group>"; };
 		7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionState.swift; sourceTree = "<group>"; };
 		7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionModel.swift; sourceTree = "<group>"; };
 		7ACC3EE125ACC6F100EAD184 /* VAccordionDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionDemoView.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				17A1B9DD27D9F81600E76F2F /* GenericStateAndModel_EPDF.swift */,
 				17F5DF8127CE28AB00D75986 /* GenericStateAndModel_OOPD.swift */,
 				17F5DF8527CE7B4D00D75986 /* GenericStateAndModel_OOIPD.swift */,
+				172EDFCC27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift */,
 			);
 			path = "Generic States and Models";
 			sourceTree = "<group>";
@@ -868,7 +871,7 @@
 			path = "Secondary Button";
 			sourceTree = "<group>";
 		};
-		7A59576C25AB502300B5B6E7 /* Base List */ = {
+		7A59576C25AB502300B5B6E7 /* List */ = {
 			isa = PBXGroup;
 			children = (
 				7AEE70AC25AB471C00239969 /* VList.swift */,
@@ -876,7 +879,7 @@
 				7A59577225AB509D00B5B6E7 /* VListModel.swift */,
 				7A59576E25AB503E00B5B6E7 /* IdentifiableElement.swift */,
 			);
-			path = "Base List";
+			path = List;
 			sourceTree = "<group>";
 		};
 		7A59958C25924F360087902B /* Sheet */ = {
@@ -1348,7 +1351,7 @@
 		7AC5060C25911B5900226656 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				7A59576C25AB502300B5B6E7 /* Base List */,
+				7A59576C25AB502300B5B6E7 /* List */,
 				7ACC3EC425AC919D00EAD184 /* Accordion */,
 			);
 			path = Lists;
@@ -1390,8 +1393,8 @@
 			children = (
 				7ACC3EC525AC91A700EAD184 /* VAccordion.swift */,
 				7ACC3ED725ACC1C600EAD184 /* VAccordionState.swift */,
+				172EDFCA27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift */,
 				7ACC3EDA25ACC22E00EAD184 /* VAccordionModel.swift */,
-				7ACC3ED425ACB9DD00EAD184 /* VAccordionLayoutType.swift */,
 			);
 			path = Accordion;
 			sourceTree = "<group>";
@@ -1592,6 +1595,7 @@
 				7A6218382594956400515688 /* VLazyScrollViewHorizontal.swift in Sources */,
 				7AF3CA9125B0CB6A00D56042 /* VTextType.swift in Sources */,
 				7A3C1556258DE7B900CE1D96 /* VSpinner.swift in Sources */,
+				172EDFCD27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift in Sources */,
 				7A59576F25AB503E00B5B6E7 /* IdentifiableElement.swift in Sources */,
 				7A00731F258E278F0003F0E9 /* VPlainButtonState.swift in Sources */,
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
@@ -1719,7 +1723,7 @@
 				7A6787DA25CB291900734DA6 /* ComponentStateManagement.swift in Sources */,
 				17BE45DC27CA6ACC00D69C3A /* VPrimaryButtonLabel.swift in Sources */,
 				7A32F88A25C9963900BE8298 /* VStepper.swift in Sources */,
-				7ACC3ED525ACB9DD00EAD184 /* VAccordionLayoutType.swift in Sources */,
+				172EDFCB27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift in Sources */,
 				7A41A49225A73E6D000A6F80 /* VSegmentedPicker.swift in Sources */,
 				17BE45E027CA85E200D69C3A /* GenericStateAndModel_EPDL.swift in Sources */,
 				7A7B7E2225CD783A00BBCA97 /* VPageIndicator.swift in Sources */,

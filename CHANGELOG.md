@@ -78,15 +78,15 @@
 
 #### [1.3.1(7)](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.1/VComponents.xcframework.zip) — *2021 02 27*
 
-- Resolved issue with `VBaseTextField` and `VTextField` calling onChange handler one keystroke behind
+- Issue with `VBaseTextField` and `VTextField` calling onChange handler one keystroke behind has been fixed
 
 #### [1.3.0(6)](https://github.com/VakhoKontridze/VComponents/releases/download/1.3.0/VComponents.xcframework.zip) — *2021 02 16*
 
-- Add autocapitalization to input components
+- Autocapitalization has been added to input components
 
 #### [1.2.1(5)](https://github.com/VakhoKontridze/VComponents/releases/download/1.2.1/VComponents.xcframework.zip) — *2021 02 14*
 
-- Fixed `VHalfModal` navigation bar close button layout
+- `VHalfModal` navigation bar close button layout has been fixed
 
 #### [1.2.0(4)](https://github.com/VakhoKontridze/VComponents/releases/download/1.2.0/VComponents.xcframework.zip) — *2021 02 12*
 
@@ -100,7 +100,7 @@
 
 #### [1.1.0(2)](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.0/VComponents.xcframework.zip) — *2021 02 09*
 
-- Added documentation on public declarations, methods, and properties
+- Documentation on public declarations, methods, and properties have been added
 
 #### [1.0.0(1)](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.xcframework.zip) — *2021 02 07*
 

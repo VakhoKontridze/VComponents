@@ -13,9 +13,8 @@ struct VAccordionDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Accordion" }
     
-    @State private var accordionState: VAccordionState = .expanded
-    @State private var layoutType: _VListLayoutType = .default
-    @State private var rowCount: Int = 5
+    @State private var isEnabled: Bool = true
+    @State private var isExpanded: Bool = true
     @State private var expandCollapseOnHeaderTap: Bool = true
     @State private var hasDivider: Bool = VAccordionModel.Layout().headerDividerHeight > 0
     
@@ -33,7 +32,6 @@ struct VAccordionDemoView: View {
     // MARK: Body
     var body: some View {
         DemoView(
-            type: layoutType.demoViewComponentContentType,
             hasLayer: false,
             component: component,
             settings: settings
@@ -42,37 +40,41 @@ struct VAccordionDemoView: View {
     }
     
     private func component() -> some View {
+        ZStack(alignment: .top, content: {
+            ColorBook.canvas.edgesIgnoringSafeArea(.all)
+
             VAccordion(
                 model: model,
-                layout: layoutType.accordionlayoutType,
-                state: $accordionState,
-                headerTitle: "Lorem ipsum dolor sit amet",
-                data: VListDemoViewDataSource.rows(count: rowCount),
-                rowContent: { VListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+                isExpanded: $isExpanded,
+                headerTitle: "Lorem Ipsum",
+                content: {
+                    VList(
+                        layout: .fixed,
+                        data: 1..<10,
+                        id: \.self,
+                        rowContent: { num in
+                            Text(String(num))
+                                .padding(.vertical, 2)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
+                }
             )
-                .ifLet(
-                    layoutType.height,
-                    ifTransform: { (view, height) in
-                        Group(content: {
-                            view
-                                .frame(height: height, alignment: .top)
-                        })
-                            .frame(maxHeight: .infinity, alignment: .top)
-                    },
-                    elseTransform: { view in
-                        view
-                            .frame(maxHeight: .infinity, alignment: .top)
-                    }
-                )
+                .disabled(!isEnabled)
+        })
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $accordionState, headerTitle: "State")
-        
-        VSegmentedPicker(selection: $layoutType, headerTitle: "Layout", footerTitle: layoutType.description)
-            .frame(height: 110, alignment: .top)
-        
-        StepperSettingView(range: 0...20, value: $rowCount, title: "Rows")
+        VSegmentedPicker(
+            selection: .init(
+                get: { _VAccordionState(isEnabled: isEnabled, isExpanded: isExpanded) },
+                set: { state in
+                    isEnabled = state != .disabled
+                    isExpanded = state == .expanded
+                }
+            ),
+            headerTitle: "State"
+        )
         
         ToggleSettingView(isOn: $expandCollapseOnHeaderTap, title: "Expand/Collapse on Header Tap")
         
@@ -81,23 +83,24 @@ struct VAccordionDemoView: View {
 }
 
 // MARK: - Helpers
-extension VAccordionState: PickableTitledEnumeration {
-    public var pickerTitle: String {
+private enum _VAccordionState: PickableTitledEnumeration {
+    case collapsed
+    case expanded
+    case disabled
+    
+    init(isEnabled: Bool, isExpanded: Bool) {
+        switch (isEnabled, isExpanded) {
+        case (false, _): self = .disabled
+        case (true, false): self = .collapsed
+        case (true, true): self = .expanded
+        }
+    }
+    
+    var pickerTitle: String {
         switch self {
         case .collapsed: return "Collapsed"
         case .expanded: return "Expanded"
         case .disabled: return "Disabled"
-        @unknown default: fatalError()
-        }
-    }
-}
-
-extension _VListLayoutType {
-    fileprivate var accordionlayoutType: VAccordionLayoutType {
-        switch self {
-        case .fixed: return .fixed
-        case .flexible: return .flexible
-        case .constrained: return .flexible
         }
     }
 }

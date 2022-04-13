@@ -44,8 +44,13 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                     VAccordion(
                         state: $accordionStates[i],
                         headerTitle: section.title ?? "",
-                        data: section.rows,
-                        rowContent: { row in DemoListRowView(title: row.title, destination: row.body) }
+                        content: {
+                            VList(
+                                layout: .fixed,
+                                data: section.rows,
+                                rowContent: { row in DemoListRowView(title: row.title, destination: row.body) }
+                            )
+                        }
                     )
                 })
                     .padding(.vertical, 1)  // SwiftUI is bugged

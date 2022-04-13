@@ -28,7 +28,7 @@ extension View {
         background(
             GeometryReader(content: { proxy in
                 Color.clear
-                    .preference(key: SizePreferenceKey.self, value: proxy.size)
+                    .preference(key: SizePreferenceKey.self, value: proxy.frame(in: .local).size)
             })
         )
             .onPreferenceChange(SizePreferenceKey.self, perform: completion)

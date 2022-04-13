@@ -36,9 +36,9 @@ public struct VChevronButtonModel {
         )
         
         public var icon: StateColors = .init(
-            enabled: ColorBook.primary, // FIXME
-            pressed: ColorBook.primary, // FIXME
-            disabled: ColorBook.primary // FIXME
+            enabled: ColorBook.primary,
+            pressed: ColorBook.primary, // Looks better without `primaryPressedDisabled`
+            disabled: ColorBook.primaryPressedDisabled
         )
         
         // MARK: State Colors
