@@ -44,7 +44,7 @@ struct VSideBarDemoView: View {
     }
     
     private var sideBarContent: some View {
-        VLazyScrollView(type: .vertical(), range: 1..<11, content: { num in
+        VLazyScrollView(type: .vertical(), data: 1..<11, content: { num in
             VText(
                 color: ColorBook.primaryInverted,
                 font: .body,

@@ -275,7 +275,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         switch content {
         case .titles(let titles):
             HStack(spacing: 0, content: {
-                ForEach(0..<titles.count, content: { i in
+                ForEach(0..<titles.count, id: \.self, content: { i in
                     VBaseButton(
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
@@ -296,7 +296,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             
         case .custom(let data, let rowContent):
             HStack(spacing: 0, content: {
-                ForEach(0..<data.count, content: { i in
+                ForEach(0..<data.count, id: \.self, content: { i in
                     VBaseButton(
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
@@ -317,7 +317,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     
     private var dividers: some View {
         HStack(spacing: 0, content: {
-            ForEach(0..<content.count, content: { i in
+            ForEach(0..<content.count, id: \.self, content: { i in
                 Spacer()
 
                 if i <= content.count-2 {

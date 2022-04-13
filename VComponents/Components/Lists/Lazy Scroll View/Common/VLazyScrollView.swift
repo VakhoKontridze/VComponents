@@ -47,7 +47,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
     private let listType: VLazyScrollViewType
     private let content: () -> Content
     
-    // MARK: Initializers - View Builder
+    // MARK: Initializers
     /// Initializes component with data, id, and row content.
     public init<Data, ID, RowContent>(
         type listType: VLazyScrollViewType = .default,
@@ -61,17 +61,16 @@ public struct VLazyScrollView<Content>: View where Content: View {
             ID: Hashable,
             RowContent: View
     {
-        self.init(
-            type: listType,
-            content: {
-                ForEach(data, id: id, content: { element in
-                    rowContent(element)
-                })
-            }
-        )
+        self.listType = listType
+        self.content = {
+            ForEach(
+                data,
+                id: id,
+                content: { element in rowContent(element) }
+            )
+        }
     }
     
-    // MARK: Initializers - Identified View Builder
     /// Initializes component with data and row content.
     public init<Data, ID, RowContent>(
         type listType: VLazyScrollViewType = .default,
@@ -85,32 +84,35 @@ public struct VLazyScrollView<Content>: View where Content: View {
             ID == Data.Element.ID,
             RowContent: View
     {
-        self.init(
-            type: listType,
-            data: data,
-            id: \Data.Element.id,
-            content: rowContent
-        )
+        self.listType = listType
+        self.content = {
+            ForEach(
+                data,
+                id: \.id,
+                content: { element in rowContent(element) }
+            )
+        }
     }
 
-    // MARK: Initializers - Range
-    /// Initializes component with range and row content.
+    /// Initializes component with constant range and row content.
     public init <RowContent>(
         type listType: VLazyScrollViewType = .default,
-        range: Range<Int>,
+        data: Range<Int>,
         content rowContent: @escaping (Int) -> RowContent
     )
-        where Content == ForEach<Range<Int>, Int, RowContent>
+        where
+            Content == ForEach<Range<Int>, Int, RowContent>
     {
-        self.init(
-            type: listType,
-            content: {
-                ForEach(range, content: rowContent)
-            }
-        )
+        self.listType = listType
+        self.content = {
+            ForEach(
+                data,
+                id: \.self,
+                content: { element in rowContent(element) }
+            )
+        }
     }
     
-    // MARK: Initializers - Free Content
     /// Initializes component with free content.
     public init(
         type listType: VLazyScrollViewType = .default,
@@ -135,11 +137,11 @@ struct VLazyScrollViewView_Previews: PreviewProvider {
 
     static var previews: some View {
         VStack(content: {
-            VLazyScrollView(type: .vertical(), range: range, content: { number in
+            VLazyScrollView(type: .vertical(), data: range, content: { number in
                 Text(String(number)).padding(5)
             })
 
-            VLazyScrollView(type: .horizontal(), range: range, content: { number in
+            VLazyScrollView(type: .horizontal(), data: range, content: { number in
                 Text(String(number)).padding(5)
             })
         })

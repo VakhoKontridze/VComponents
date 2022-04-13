@@ -64,7 +64,7 @@ struct VPageIndicatorInfinite: View {
     
     private var dots: some View {
         HStack(spacing: model.layout.spacing, content: {
-            ForEach(0..<total, content: { i in
+            ForEach(0..<total, id: \.self, content: { i in
                 Circle()
                     .foregroundColor(selectedIndex == i ? model.colors.selectedDot : model.colors.dot)
                     .frame(dimension: model.layout.dotDimension)

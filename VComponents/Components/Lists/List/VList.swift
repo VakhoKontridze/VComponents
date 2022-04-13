@@ -86,7 +86,7 @@ public struct VList<Data, ID, RowContent>: View
     {
         self.model = model
         self.layoutType = layoutType
-        self.data = data.map { .init(id: $0[keyPath: \Data.Element.id], value: $0) }
+        self.data = data.map { .init(id: $0[keyPath: \.id], value: $0) }
         self.rowContent = rowContent
     }
     
@@ -103,7 +103,7 @@ public struct VList<Data, ID, RowContent>: View
     {
         self.model = model
         self.layoutType = layoutType
-        self.data = data.map { .init(id: $0[keyPath: \Data.Element], value: $0) }
+        self.data = data.map { .init(id: $0[keyPath: \.self], value: $0) }
         self.rowContent = rowContent
     }
 
