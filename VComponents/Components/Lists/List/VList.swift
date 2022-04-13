@@ -89,6 +89,23 @@ public struct VList<Data, ID, RowContent>: View
         self.data = data.map { .init(id: $0[keyPath: \Data.Element.id], value: $0) }
         self.rowContent = rowContent
     }
+    
+    /// Initializes component with constant range and row content.
+    public init(
+        model: VListModel = .init(),
+        layout layoutType: VListLayoutType = .default,
+        data: Data,
+        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+    )
+        where
+            Data == Range<Int>,
+            ID == Int
+    {
+        self.model = model
+        self.layoutType = layoutType
+        self.data = data.map { .init(id: $0[keyPath: \Data.Element], value: $0) }
+        self.rowContent = rowContent
+    }
 
     // MARK: Body
     @ViewBuilder public var body: some View {

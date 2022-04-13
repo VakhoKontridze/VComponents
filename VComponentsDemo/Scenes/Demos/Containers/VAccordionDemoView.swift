@@ -51,7 +51,6 @@ struct VAccordionDemoView: View {
                     VList(
                         layout: .fixed,
                         data: 1..<10,
-                        id: \.self,
                         rowContent: { num in
                             Text(String(num))
                                 .padding(.vertical, 2)

@@ -26,7 +26,6 @@ import SwiftUI
 ///                 VList(
 ///                     layout: .fixed,
 ///                     data: 1..<10,
-///                     id: \.self,
 ///                     rowContent: { num in
 ///                         Text(String(num))
 ///                             .padding(.vertical, 2)
@@ -228,7 +227,6 @@ struct VAccordion_Previews: PreviewProvider {
                     VList(
                         layout: .fixed,
                         data: 1..<10,
-                        id: \.self,
                         rowContent: { num in
                             Text(String(num))
                                 .padding(.vertical, 2)
