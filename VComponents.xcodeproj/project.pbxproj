@@ -48,6 +48,7 @@
 		17BE45FF27CBC91700D69C3A /* VCloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE45FB27CBC91700D69C3A /* VCloseButton.swift */; };
 		17BE460027CBC91700D69C3A /* VCloseButtonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE45FC27CBC91700D69C3A /* VCloseButtonModel.swift */; };
 		17BE460227CBD0AC00D69C3A /* View.StandardNavigationTitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BE460127CBD0AC00D69C3A /* View.StandardNavigationTitle.swift */; };
+		17DB709C2806D74000285D08 /* VSheetContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17DB709B2806D74000285D08 /* VSheetContent.swift */; };
 		17F5DF8227CE28AB00D75986 /* GenericStateAndModel_OOPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DF8127CE28AB00D75986 /* GenericStateAndModel_OOPD.swift */; };
 		17F5DF8427CE2CA600D75986 /* VToggleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DF8327CE2CA600D75986 /* VToggleLabel.swift */; };
 		17F5DF8627CE7B4D00D75986 /* GenericStateAndModel_OOIPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17F5DF8527CE7B4D00D75986 /* GenericStateAndModel_OOIPD.swift */; };
@@ -297,6 +298,7 @@
 		17BE45FB27CBC91700D69C3A /* VCloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCloseButton.swift; sourceTree = "<group>"; };
 		17BE45FC27CBC91700D69C3A /* VCloseButtonModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCloseButtonModel.swift; sourceTree = "<group>"; };
 		17BE460127CBD0AC00D69C3A /* View.StandardNavigationTitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.StandardNavigationTitle.swift; sourceTree = "<group>"; };
+		17DB709B2806D74000285D08 /* VSheetContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetContent.swift; sourceTree = "<group>"; };
 		17F5DF8127CE28AB00D75986 /* GenericStateAndModel_OOPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_OOPD.swift; sourceTree = "<group>"; };
 		17F5DF8327CE2CA600D75986 /* VToggleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VToggleLabel.swift; sourceTree = "<group>"; };
 		17F5DF8527CE7B4D00D75986 /* GenericStateAndModel_OOIPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_OOIPD.swift; sourceTree = "<group>"; };
@@ -904,6 +906,7 @@
 			isa = PBXGroup;
 			children = (
 				7A59958D25924F420087902B /* VSheet.swift */,
+				17DB709B2806D74000285D08 /* VSheetContent.swift */,
 				7A59959325924FD00087902B /* VSheetModel.swift */,
 			);
 			path = Sheet;
@@ -1367,8 +1370,8 @@
 		7AC5060C25911B5900226656 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				7A59576C25AB502300B5B6E7 /* List */,
 				7AC5060D25911B6000226656 /* Lazy Scroll View */,
+				7A59576C25AB502300B5B6E7 /* List */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -1617,6 +1620,7 @@
 				7A007358258E38E90003F0E9 /* ColorBook.swift in Sources */,
 				7AF3C95F25B04F2B00D56042 /* VDialogButtonModel.swift in Sources */,
 				7A4D0C442594C71D00108575 /* VSecondaryButtonModel.swift in Sources */,
+				17DB709C2806D74000285D08 /* VSheetContent.swift in Sources */,
 				7A767C3925B5C70A0008D2E9 /* VCheckBox.swift in Sources */,
 				7A5A600525C92996008667F5 /* VMenuPickerState.swift in Sources */,
 				7A8A73872590BFFA001024FB /* VToggleModel.swift in Sources */,

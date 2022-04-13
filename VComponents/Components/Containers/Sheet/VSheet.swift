@@ -21,19 +21,25 @@ import SwiftUI
 ///             ColorBook.canvas.edgesIgnoringSafeArea(.all)
 ///
 ///             VSheet(content: {
-///                 Image(systemName: "swift")
-///                     .resizable()
-///                     .frame(width: 200, height: 200)
-///                     .foregroundColor(.accentColor)
+///                 VList(
+///                     layout: .fixed,
+///                     data: 1..<10,
+///                     id: \.self,
+///                     rowContent: { num in
+///                         Text(String(num))
+///                             .padding(.vertical, 2)
+///                             .frame(maxWidth: .infinity, alignment: .leading)
+///                     }
+///                 )
 ///             })
 ///                 .padding()
 ///         })
 ///     }
 ///
-public struct VSheet<Content>: View where Content: View { // FIXME: Remove
+public struct VSheet<Content>: View where Content: View {
     // MARK: Properties
     private let model: VSheetModel
-    private let content: () -> Content
+    private let content: VSheetContent<Content>
     
     // MARK: Initializers
     /// Initializes component with content.
@@ -42,17 +48,17 @@ public struct VSheet<Content>: View where Content: View { // FIXME: Remove
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self.content = content
+        self.content = .content(content: content)
     }
     
     /// Initializes component.
     public init(
         model: VSheetModel = .init()
     )
-        where Content == Color
+        where Content == Never
     {
         self.model = model
-        self.content = { .clear }
+        self.content = .empty
     }
 
     // MARK: Body
@@ -70,7 +76,15 @@ public struct VSheet<Content>: View where Content: View { // FIXME: Remove
     }
     
     private var contentView: some View {
-        content()
+        Group(content: {
+            switch content {
+            case .empty:
+                Color.clear
+                
+            case .content(let content):
+                content()
+            }
+        })
             .padding(model.layout.contentMargin)
     }
 }
@@ -78,15 +92,21 @@ public struct VSheet<Content>: View where Content: View { // FIXME: Remove
 // MARK: - Preview
 struct VSheet_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack(content: {
+        ZStack(alignment: .top, content: {
             ColorBook.canvas
                 .edgesIgnoringSafeArea(.all)
             
             VSheet(content: {
-                VLazyScrollView(range: 1..<100, content: { num in
-                    Text(String(num))
-                        .padding(.vertical, 10)
-                })
+                VList(
+                    layout: .fixed,
+                    data: 1..<10,
+                    id: \.self,
+                    rowContent: { num in
+                        Text(String(num))
+                            .padding(.vertical, 2)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                )
             })
                 .padding()
                 .background(ColorBook.canvas)
