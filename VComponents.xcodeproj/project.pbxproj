@@ -19,7 +19,7 @@
 		173D02E727D10D0900F6A87D /* VSegmentedPickerContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173D02E627D10D0900F6A87D /* VSegmentedPickerContent.swift */; };
 		178BF2A62808090F00862606 /* UIApplication.AppKeyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178BF2A52808090F00862606 /* UIApplication.AppKeyWindow.swift */; };
 		178BF2A82808094100862606 /* PresentationHostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178BF2A72808094100862606 /* PresentationHostViewController.swift */; };
-		178BF2AA2808096A00862606 /* PresentationHostExternalDismiss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178BF2A92808096A00862606 /* PresentationHostExternalDismiss.swift */; };
+		178BF2AA2808096A00862606 /* PresentationHostPresentationMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178BF2A92808096A00862606 /* PresentationHostPresentationMode.swift */; };
 		178BF2AC2808099E00862606 /* PresentationHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 178BF2AB2808099E00862606 /* PresentationHost.swift */; };
 		179A32F227E25A3500909490 /* SecurableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179A32F127E25A3500909490 /* SecurableTextField.swift */; };
 		17A1B9DC27D9F67000E76F2F /* GenericStateAndModel_EDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A1B9DB27D9F67000E76F2F /* GenericStateAndModel_EDF.swift */; };
@@ -272,7 +272,7 @@
 		173D02E627D10D0900F6A87D /* VSegmentedPickerContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerContent.swift; sourceTree = "<group>"; };
 		178BF2A52808090F00862606 /* UIApplication.AppKeyWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIApplication.AppKeyWindow.swift; sourceTree = "<group>"; };
 		178BF2A72808094100862606 /* PresentationHostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationHostViewController.swift; sourceTree = "<group>"; };
-		178BF2A92808096A00862606 /* PresentationHostExternalDismiss.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationHostExternalDismiss.swift; sourceTree = "<group>"; };
+		178BF2A92808096A00862606 /* PresentationHostPresentationMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationHostPresentationMode.swift; sourceTree = "<group>"; };
 		178BF2AB2808099E00862606 /* PresentationHost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationHost.swift; sourceTree = "<group>"; };
 		179A32F127E25A3500909490 /* SecurableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurableTextField.swift; sourceTree = "<group>"; };
 		17A1B9DB27D9F67000E76F2F /* GenericStateAndModel_EDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_EDF.swift; sourceTree = "<group>"; };
@@ -555,7 +555,7 @@
 			children = (
 				178BF2AB2808099E00862606 /* PresentationHost.swift */,
 				178BF2A72808094100862606 /* PresentationHostViewController.swift */,
-				178BF2A92808096A00862606 /* PresentationHostExternalDismiss.swift */,
+				178BF2A92808096A00862606 /* PresentationHostPresentationMode.swift */,
 			);
 			path = "Presentation Host";
 			sourceTree = "<group>";
@@ -1600,7 +1600,7 @@
 				7A12716225BAF911002B0397 /* BasicAnimation.swift in Sources */,
 				7AF3C8D225AF511800D56042 /* VModalModel.swift in Sources */,
 				7A6218292594938C00515688 /* VLazyScrollViewType.swift in Sources */,
-				178BF2AA2808096A00862606 /* PresentationHostExternalDismiss.swift in Sources */,
+				178BF2AA2808096A00862606 /* PresentationHostPresentationMode.swift in Sources */,
 				7A4D0C562594D30A00108575 /* VSquareButtonModel.swift in Sources */,
 				7AF3C8D525AF5C1A00D56042 /* _VModal.swift in Sources */,
 				7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */,

@@ -18,9 +18,9 @@ import SwiftUI
 ///
 /// When `dismiss` is called from presented modal after dismiss animations have finished, `PresentationHost` will remove content from view hierarchy.
 ///
-/// When `isPresented` is set to `false` from code, `PresentationHost` triggers external dismiss via `PresentationHostExternalDismiss`.
+/// When `isPresented` is set to `false` from code, `PresentationHost` triggers external dismiss via `PresentationHostPresentationMode`.
 /// This allows content to perform dismiss animations before being removed from view hierarchy.
-/// For additional documentation, refer to `PresentationHostExternalDismiss`.
+/// For additional documentation, refer to `PresentationHostPresentationMode`.
 ///
 /// Usage Example:
 ///
@@ -49,8 +49,8 @@ import SwiftUI
 ///     }
 ///
 ///     struct _SomeModal<Content>: View where Content: View {
-///         @Environment(\.presentationHostExternalDismiss)
-///         private var presentationHostExternalDismiss: PresentationHostExternalDismiss
+///         @Environment(\.presentationHostPresentationMode)
+///         private var presentationHostPresentationMode: PresentationHostPresentationMode
 ///         private let content: () -> Content
 ///
 ///         init(content: @escaping () -> Content) {
@@ -63,7 +63,7 @@ import SwiftUI
 ///                 .onAppear(perform: animateIn)
 ///                 .onTapGesture(perform: animateOut)
 ///                 .onChange(
-///                     of: presentationHostExternalDismiss.isExternallyDismissed,
+///                     of: presentationHostPresentationMode.isExternallyDismissed,
 ///                     perform: { if $0 { animateOutFromExternalDismiss() } }
 ///                  )
 ///         }
@@ -77,7 +77,7 @@ import SwiftUI
 ///
 ///             DispatchQueue.main.asyncAfter(
 ///                 deadline: .now() + 0.5,
-///                 execute: presentationHostExternalDismiss.dismiss
+///                 execute: presentationHostPresentationMode.dismiss
 ///             )
 ///         }
 ///
@@ -86,7 +86,7 @@ import SwiftUI
 ///
 ///             DispatchQueue.main.asyncAfter(
 ///                 deadline: .now() + 0.5,
-///                 execute: presentationHostExternalDismiss.externalDismissCompletion
+///                 execute: presentationHostPresentationMode.externalDismissCompletion
 ///             )
 ///         }
 ///     }
@@ -119,7 +119,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     public func updateUIViewController(_ uiViewController: PresentationHostViewControllerType, context: Context) {
         let content: AnyView = .init(
             content()
-                .presentationHostExternalDismiss(.init(
+                .presentationHostPresentationMode(.init(
                     dismiss: {
                         wasInternallyDismissed = true
                         

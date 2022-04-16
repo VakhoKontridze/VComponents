@@ -1,5 +1,5 @@
 //
-//  PresentationHostExternalDismiss.swift
+//  PresentationHostPresentationMode.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 4/14/22.
@@ -9,15 +9,15 @@ import SwiftUI
 
 // MARK: - Extension
 extension View {
-    func presentationHostExternalDismiss(
-        _ presentationHostExternalDismiss: PresentationHostExternalDismiss
+    func presentationHostPresentationMode(
+        _ presentationHostExternalDismiss: PresentationHostPresentationMode
     ) -> some View {
         self
-            .environment(\.presentationHostExternalDismiss, presentationHostExternalDismiss)
+            .environment(\.presentationHostPresentationMode, presentationHostExternalDismiss)
     }
 }
 
-// MARK: - Presentation Host External Dismiss
+// MARK: - Presentation Host Presentation Mode
 /// Object embeded in environemnt of modals presented via `PresentationHost`.
 ///
 /// Contains `dismiss` handler that can be called after frame-based dismissal to remove content from view hierarchy.
@@ -25,7 +25,7 @@ extension View {
 /// Also contains `isExternallyDismissed` that indicates if dismiss has been triggered via code,
 /// i.e., setting `isPresented` to `false`. When this change is triggered, frame-based dismiss animation can occur.
 /// After which `externalDismissCompletion` handler must be called to remove content from view hierarchy.
-public struct PresentationHostExternalDismiss {
+public struct PresentationHostPresentationMode {
     // MARK: Properties
     /// Dismisses modal.
     public let dismiss: () -> Void
@@ -39,7 +39,7 @@ public struct PresentationHostExternalDismiss {
     public let externalDismissCompletion: () -> Void
     
     // MARK: Initializers
-    /// Initializes `PresentationHostExternalDismiss` with bool and completion handlers.
+    /// Initializes `PresentationHostPresentationMode` with bool and completion handlers.
     public init(
         dismiss: @escaping () -> Void,
         isExternallyDismissed: Bool,
@@ -59,15 +59,15 @@ public struct PresentationHostExternalDismiss {
     }
 }
 
-// MARK: - Presentation Host External Dismiss Environment Value
+// MARK: - Presentation Host Presentation Mode Environment Value
 extension EnvironmentValues {
-    /// `PresentationHostExternalDismiss` placed in view hierarchy via `PresentationHost`.
-    public var presentationHostExternalDismiss: PresentationHostExternalDismiss {
-        get { self[PresentationHostExternalDismissKey.self] }
-        set { self[PresentationHostExternalDismissKey.self] = newValue }
+    /// `PresentationHost` presentation mode of the view associated with the environment.
+    public var presentationHostPresentationMode: PresentationHostPresentationMode {
+        get { self[PresentationHostPresenationModeKey.self] }
+        set { self[PresentationHostPresenationModeKey.self] = newValue }
     }
 }
 
-struct PresentationHostExternalDismissKey: EnvironmentKey {
-    static let defaultValue: PresentationHostExternalDismiss = .init()
+struct PresentationHostPresenationModeKey: EnvironmentKey {
+    static let defaultValue: PresentationHostPresentationMode = .init()
 }
