@@ -16,7 +16,7 @@ import SwiftUI
 /// When `isPresented` is set to `true` from code, and content is not yet presented, `PresentationHost` passes content to view hierarchy.
 /// After this appear animations can occur.
 ///
-/// When `dismiss` is called from presented modal after dismiss animations have finished, `PresentationHost` will remove content from view hierarchy.
+/// When `dismiss` must be called from presented modal after dismiss animations have finished, `PresentationHost` will remove content from view hierarchy.
 ///
 /// When `isPresented` is set to `false` from code, `PresentationHost` triggers external dismiss via `PresentationHostPresentationMode`.
 /// This allows content to perform dismiss animations before being removed from view hierarchy.
@@ -49,8 +49,7 @@ import SwiftUI
 ///     }
 ///
 ///     struct _SomeModal<Content>: View where Content: View {
-///         @Environment(\.presentationHostPresentationMode)
-///         private var presentationHostPresentationMode: PresentationHostPresentationMode
+///         @Environment(\.presentationHostPresentationMode) private var presentationHostPresentationMode
 ///         private let content: () -> Content
 ///
 ///         init(content: @escaping () -> Content) {
@@ -130,6 +129,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
                     },
                     
                     isExternallyDismissed:
+                        uiViewController.presentedViewController is PresentationHostViewControllerType.HostingViewControllerType &&
                         !isPresented.wrappedValue &&
                         !wasInternallyDismissed
                     ,
@@ -138,7 +138,12 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
                 ))
         )
         
-        if isPresented.wrappedValue { uiViewController.presentHostedView(content) }
+        if
+            isPresented.wrappedValue,
+            uiViewController.presentedViewController == nil
+        {
+            uiViewController.presentHostedView(content)
+        }
         
         uiViewController.updateHostedView(with: content)
     }

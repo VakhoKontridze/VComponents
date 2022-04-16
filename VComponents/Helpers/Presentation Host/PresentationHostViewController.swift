@@ -36,8 +36,6 @@ public final class PresentationHostViewController<Content>: UIViewController whe
     
     // MARK: Presentation
     func presentHostedView(_ content: Content) {
-        guard presentedViewController == nil else { return }
-        
         hostingController = .init(rootView: content)
         guard let hostingController = hostingController else { return }
         
