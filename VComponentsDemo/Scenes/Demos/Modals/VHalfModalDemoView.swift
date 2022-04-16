@@ -18,7 +18,6 @@ struct VHalfModalDemoView: View {
     @State private var hasTitle: Bool = true
     @State private var dismissType: Set<VHalfModalDismissTypeHelper> = .init(
         Set<VHalfModalModel.Misc.DismissType>.default
-            .filter { $0 != .navigationViewCloseButton }
             .map { $0.helperType }
     )
     @State private var hasDivider: Bool = VHalfModalModel.Layout().headerDividerHeight > 0
@@ -184,7 +183,6 @@ extension VHalfModalModel.Misc.DismissType {
         case .trailingButton: return .trailing
         case .backTap: return .backTap
         case .pullDown: return .pullDown
-        case .navigationViewCloseButton: fatalError()
         @unknown default: fatalError()
         }
     }

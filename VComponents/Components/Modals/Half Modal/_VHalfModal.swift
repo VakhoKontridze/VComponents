@@ -92,11 +92,6 @@ struct _VHalfModal<Content, HeaderContent>: View
                     .frame(maxHeight: .infinity, alignment: .top)
                     .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
-                
-                navigationBarCloseButton
-                    .edgesIgnoringSafeArea(.all)
-                    .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom) // NOTE: Duplicated on all views in ZStack due to DragGesture
-                    .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
             })
         }
     }
@@ -167,16 +162,6 @@ struct _VHalfModal<Content, HeaderContent>: View
             model: model.closeButtonSubModel,
             action: animateOut
         )
-    }
-    
-    @ViewBuilder private var navigationBarCloseButton: some View {
-        if model.misc.dismissType.contains(.navigationViewCloseButton) {
-            VSquareButton.close(
-                model: model.closeButtonSubModel,
-                action: animateOut
-            )
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
-        }
     }
 
     // MARK: State Syncs

@@ -33,65 +33,6 @@ import SwiftUI
 ///             })
 ///     }
 ///
-/// VNavigationView can also be passes as contant, to create a modal stack of navigable views.
-///
-/// Here, it's important that header content is not passed. Header content should be created view VBaseView title.
-///
-/// Also, leading and trailing buttons shouldn't be used as dismiss types, as it's better to pass `navigationViewCloseButton` to model.
-///
-/// If you decide to change spacings in the model, consider checking out static properties—`navBarCloseButtonMarginTop`, `navBarCloseButtonMarginTrailing`, and `navBarTrailingItemMarginTrailing`—in `VHalfModalModel.Layout`.
-///
-///     var model: VHalfModalModel {
-///         var model: VHalfModalModel = .init()
-///
-///         model.layout.contentMargins.leading = VBaseViewModel.Layout().navBarMarginHorizontal
-///         model.layout.contentMargins.trailing = VBaseViewModel.Layout().navBarMarginHorizontal
-///
-///         model.misc.dismissType.remove(.leadingButton)
-///         model.misc.dismissType.remove(.trailingButton)
-///         model.misc.dismissType.insert(.navigationViewCloseButton)
-///
-///         return model
-///     }
-///
-///     var navigationViewModel: VNavigationViewModel {
-///         var model: VNavigationViewModel = .init()
-///         model.colors.background = ColorBook.layer
-///         return model
-///     }
-///
-///     @State var isPresented: Bool = false
-///
-///     var body: some View {
-///         VPlainButton(
-///             action: { isPresented = true },
-///             title: "Present"
-///         )
-///             .vHalfModal(isPresented: $isPresented, halfModal: {
-///                 VHalfModal(model: model, content: { root })
-///             })
-///     }
-///
-///     var root: some View {
-///         VNavigationView(model: navigationViewModel, content: {
-///             VBaseView(title: "Home", content: {
-///                 VNavigationLink(
-///                     preset: .secondary(),
-///                     destination: destination,
-///                     title: "Navigate to Details"
-///                 )
-///                     .padding(.bottom, 200)
-///             })
-///                 .animation(nil) // Disables root animation
-///         })
-///     }
-///
-///     var destination: some View {
-///         VBaseView(title: "Details", content: {
-///             ColorBook.accent
-///         })
-///     }
-///
 public struct VHalfModal<Content, HeaderContent>
     where
         Content: View,
@@ -176,7 +117,6 @@ extension View {
                                 headerContent: halfModal.headerContent,
                                 content: halfModal.content
                             )
-                                .environment(\.vHalfModalNavigationViewCloseButton, halfModal.model.misc.dismissType.contains(.navigationViewCloseButton))
                     )
                 }
             }))

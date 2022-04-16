@@ -275,9 +275,6 @@ public struct VHalfModalModel {
             
             /// Dragging modal down.
             case pullDown
-            
-            /// Close button for when modal contains `VNavigationView` as content.
-            case navigationViewCloseButton
         }
     }
     
