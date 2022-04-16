@@ -22,7 +22,7 @@ struct VSideBarDemoView: View {
     
     private func component() -> some View {
         VStack(spacing: 20, content: {
-            VSecondaryButton(action: { isPresented = true }, title: "Present")
+            VPlainButton(action: { isPresented = true }, title: "Present")
             
             VText(
                 type: .multiLine(alignment: .center, limit: nil),

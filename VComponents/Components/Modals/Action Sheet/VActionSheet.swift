@@ -19,7 +19,7 @@ import SwiftUI
 ///     @State var isPresented: Bool = false
 ///
 ///     var body: some View {
-///         VSecondaryButton(action: { isPresented = true }, title: "Present")
+///         VPlainButton(action: { isPresented = true }, title: "Present")
 ///             .vActionSheet(isPresented: $isPresented, actionSheet: {
 ///                 VActionSheet(
 ///                     title: "Lorem ipsum dolor sit amet",

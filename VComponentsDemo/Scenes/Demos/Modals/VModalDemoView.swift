@@ -36,7 +36,7 @@ struct VModalDemoView: View {
     }
     
     private func component() -> some View {
-        VSecondaryButton(action: { isPresented = true }, title: "Present")
+        VPlainButton(action: { isPresented = true }, title: "Present")
             .if(hasTitle,
                 ifTransform: {
                     $0
@@ -105,7 +105,7 @@ struct VModalDemoView: View {
                         title: "When close button is \"none\", Modal can only be dismissed programatically"
                     )
                     
-                    VSecondaryButton(action: { isPresented = false }, title: "Dismiss")
+                    VPlainButton(action: { isPresented = false }, title: "Dismiss")
                 })
                     .frame(maxHeight: .infinity, alignment: .bottom)
                     .padding(15)

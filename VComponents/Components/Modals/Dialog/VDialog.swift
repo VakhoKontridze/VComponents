@@ -21,7 +21,7 @@ import SwiftUI
 ///     @State var isPresented: Bool = false
 ///
 ///     var body: some View {
-///         VSecondaryButton(
+///         VPlainButton(
 ///             action: { isPresented = true },
 ///             title: "Present"
 ///         )

@@ -33,7 +33,7 @@ struct VDialogDemoView: View {
     }
     
     private func component() -> some View {
-        VSecondaryButton(action: { isPresented = true }, title: "Present")
+        VPlainButton(action: { isPresented = true }, title: "Present")
             .vDialog(isPresented: $isPresented, dialog: {
                 VDialog(
                     model: model,
