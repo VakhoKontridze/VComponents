@@ -9,7 +9,31 @@ import Foundation
 
 // MARK: - Enumerated Array
 extension Collection {
-    func enumeratedArray() -> Array<(offset: Int, element: Self.Element)> {
+    /// Enumerated a `Collection` as a tuple of offset and element.
+    ///
+    /// Element can be used as id in `ForEach` without use of an explicit identifier.
+    ///
+    /// Usage Example:
+    ///
+    ///     struct EnumeratedArrayView<Data, Content>: View
+    ///         where
+    ///             Data: RandomAccessCollection,
+    ///             Data.Index == Int,
+    ///             Content: View
+    ///     {
+    ///         let data: Data
+    ///         let rowContent: (Data.Element) -> Content
+    ///
+    ///         var body: some View {
+    ///             ForEach(
+    ///                 data.enumeratedArray(),
+    ///                 id: \.offset,
+    ///                 content: { (i, row) in rowContent(row) }
+    ///             )
+    ///         }
+    ///     }
+    ///
+    public func enumeratedArray() -> Array<(offset: Int, element: Self.Element)> {
         .init(self.enumerated())
     }
 }

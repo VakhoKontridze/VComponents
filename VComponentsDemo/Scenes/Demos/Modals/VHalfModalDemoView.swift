@@ -76,7 +76,7 @@ struct VHalfModalDemoView: View {
             
             HStack(content: {
                 ForEach(VHalfModalDismissTypeHelper.allCases, id: \.rawValue, content: { position in
-                    dimissTypeView(position)
+                    dismissTypeView(position)
                 })
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -85,7 +85,7 @@ struct VHalfModalDemoView: View {
         ToggleSettingView(isOn: $hasDivider, title: "Divider")
     }
     
-    private func dimissTypeView(_ position: VHalfModalDismissTypeHelper) -> some View {
+    private func dismissTypeView(_ position: VHalfModalDismissTypeHelper) -> some View {
         VCheckBox(
             isOn: .init(
                 get: { dismissType.contains(position) },

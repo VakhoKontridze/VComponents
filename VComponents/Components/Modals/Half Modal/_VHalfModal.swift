@@ -74,7 +74,7 @@ struct _VHalfModal<Content, HeaderContent>: View
             ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
                     .edgesIgnoringSafeArea(.all)
-                    .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .gesture(
                         DragGesture(minimumDistance: 0)
@@ -90,12 +90,12 @@ struct _VHalfModal<Content, HeaderContent>: View
                 })
                     .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
                     .frame(maxHeight: .infinity, alignment: .top)
-                    .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
                 
                 navigationBarCloseButton
                     .edgesIgnoringSafeArea(.all)
-                    .frame(height: model.layout.height.max - UIView.bottomSafeAreaHeight) // NOTE: Duplicated on all views in ZStack due to DragGesture
+                    .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom) // NOTE: Duplicated on all views in ZStack due to DragGesture
                     .offset(y: isViewPresented ? (offset ?? .zero) : model.layout.height.max) // NOTE: Duplicated on all views in ZStack due to DragGesture
             })
         }

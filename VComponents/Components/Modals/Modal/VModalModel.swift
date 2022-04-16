@@ -189,7 +189,7 @@ public struct VModalModel {
     public struct Misc {
         // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
-        public var dismissType: Set<DismissType> = .default
+        public var dismissType: Set<DismissType> = .default // FIXME: OptionSet
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
