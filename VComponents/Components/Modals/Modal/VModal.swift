@@ -31,26 +31,27 @@ import SwiftUI
 ///             })
 ///     }
 ///
-public struct VModal<Content, HeaderContent>
+public struct VModal<HeaderLabel, Content>
     where
-        Content: View,
-        HeaderContent: View
+        HeaderLabel: View,
+        Content: View
 {
     // MARK: Properties
     fileprivate let model: VModalModel
     
-    fileprivate let headerContent: (() -> HeaderContent)?
+    fileprivate let headerLabel: VModalHeaderLabel<HeaderLabel>
     fileprivate let content: () -> Content
     
-    // MARK: Initializers - Header
-    /// Initializes component with header and content.
+    // MARK: Initializers
+    /// Initializes component content.
     public init(
         model: VModalModel = .init(),
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content
-    ) {
+    )
+        where HeaderLabel == Never
+    {
         self.model = model
-        self.headerContent = headerContent
+        self.headerLabel = .empty
         self.content = content
     }
     
@@ -60,63 +61,78 @@ public struct VModal<Content, HeaderContent>
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
-        where HeaderContent == VBaseHeaderFooter
-    {
-        self.init(
-            model: model,
-            headerContent: {
-                VBaseHeaderFooter(
-                    frameType: .flexible(.leading),
-                    font: model.fonts.header,
-                    color: model.colors.headerTitle,
-                    title: headerTitle
-                )
-            },
-            content: content
-        )
-    }
-    
-    // MARK: Initializers - _
-    /// Initializes component content.
-    public init(
-        model: VModalModel = .init(),
-        @ViewBuilder content: @escaping () -> Content
-    )
-        where HeaderContent == Never
+        where HeaderLabel == Never
     {
         self.model = model
-        self.headerContent = nil
+        self.headerLabel = .title(title: headerTitle)
+        self.content = content
+    }
+    
+    /// Initializes component with header and content.
+    public init(
+        model: VModalModel = .init(),
+        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.model = model
+        self.headerLabel = .custom(label: headerLabel)
         self.content = content
     }
 }
 
 // MARK: - Extension
 extension View {
-    /// Presents `VModal`.
-    public func vModal<Content, headerContent>(
+    /// Presents `VModal` when boolean is true.
+    public func vModal<HeaderLabel, Content>(
         isPresented: Binding<Bool>,
-        modal: @escaping () -> VModal<Content, headerContent>
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        modal: @escaping () -> VModal<HeaderLabel, Content>
     ) -> some View
         where
-            Content: View,
-            headerContent: View
+            HeaderLabel: View,
+            Content: View
     {
         let modal = modal()
         
         return self
-            .overlay(Group(content: {
-                if isPresented.wrappedValue {
-                    WindowOverlayView(
-                        isPresented: isPresented,
-                        content:
-                            _VModal(
-                                model: modal.model,
-                                isPresented: isPresented,
-                                headerContent: modal.headerContent,
-                                content: modal.content
-                            )
+            .background(PresentationHost(
+                isPresented: isPresented,
+                content: {
+                    _VModal(
+                        model: modal.model,
+                        onDismiss: dismissHandler,
+                        headerLabel: modal.headerLabel,
+                        content: modal.content
                     )
                 }
-            }))
+            ))
+    }
+    
+    /// Presents `VModal` using the item as data source for content.
+    @ViewBuilder public func vModal<Item, HeaderLabel, Content>(
+        item: Binding<Item?>,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        modal: @escaping (Item) -> VModal<HeaderLabel, Content>
+    ) -> some View
+        where
+            Item: Identifiable,
+            HeaderLabel: View,
+            Content: View
+    {
+        switch item.wrappedValue {
+        case nil:
+            self
+            
+        case let _item?:
+            self
+                .vModal(
+                    isPresented: .init(
+                        get: { true },
+                        set: { _ in item.wrappedValue = nil }
+                    ),
+                    onDismiss: dismissHandler,
+                    modal: { modal(_item) }
+                )
+        }
     }
 }

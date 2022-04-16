@@ -40,10 +40,23 @@ public struct VModalModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
+        var size: CGSize {
+            switch UIDevice.current.orientation.isLandscape {
+            case false: return sizePortrait
+            case true: return sizeLandscape
+            }
+        }
+        
         /// Modal size. Defaults to `0.9` ratio of screen with and `0.6` ratio of screen height.
-        public var size: CGSize = .init(
+        public var sizePortrait: CGSize = .init(
             width: UIScreen.main.bounds.width * 0.9,
             height: UIScreen.main.bounds.height * 0.6
+        )
+        
+        /// Modal size in landscape.
+        public var sizeLandscape: CGSize = .init(
+            width: UIScreen.main.bounds.height * 0.6,
+            height: UIScreen.main.bounds.width * 0.9
         )
         
         /// Edges ignored by keyboard. Defaults to `none`.
@@ -82,7 +95,9 @@ public struct VModalModel {
             bottom: sheetReference.layout.contentMargin/2
         )
         
-        /// Content margins. Default to `10` leading, `10` trailing, `5` top, and `5` bottom.
+        /// Content margins. Default to `10` leading, `10` trailing, `5` top, and `10` bottom.
+        ///
+        /// If header doesn't exist, additional `5` margin is added to the top.
         public var contentMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
@@ -125,7 +140,7 @@ public struct VModalModel {
         public var closeButtonIcon: StateColors = closeButtonReference.colors.icon
         
         /// Header divider color.
-        public var headerDivider: Color = .clear
+        public var headerDivider: Color = ColorBook.secondary
         
         /// Blinding color.
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")
@@ -137,13 +152,6 @@ public struct VModalModel {
         // MARK: State Colors
         /// Sub-model containing colors for component states.
         public typealias StateColors = GenericStateModel_EPD<Color>
-        
-        /// Sub-model containing colors for component states.
-        public typealias StateColors_OLD = StateColors_EPD
-        
-        // MARK: State Colors and Opacities
-        /// Sub-model containing colors and opacities for component states.
-        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
 
     // MARK: Fonts
@@ -189,23 +197,41 @@ public struct VModalModel {
     public struct Misc {
         // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
-        public var dismissType: Set<DismissType> = .default // FIXME: OptionSet
+        public var dismissType: DismissType = .default
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Dismiss Type
-        /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, or `backTap`.
-        public enum DismissType: Int, CaseIterable {
+        /// Dismiss type, such as `leadingButton`, `trailingButton`, or `backTap`.
+        public struct DismissType: OptionSet {
+            // MARK: Properties
+            public let rawValue: Int
+            
             /// Leading.
-            case leadingButton
+            public static var leadingButton: DismissType { .init(rawValue: 1 << 0) }
             
             /// Trailing.
-            case trailingButton
+            public static var trailingButton: DismissType { .init(rawValue: 1 << 1) }
             
             /// Backtap.
-            case backTap
+            public static var backTap: DismissType { .init(rawValue: 1 << 2) }
+            
+            /// All.
+            public static var all: DismissType { [.leadingButton, .trailingButton, .backTap] }
+            
+            /// Default value. Set to `trailingButton`.
+            public static var `default`: DismissType { .trailingButton }
+            
+            var hasButton: Bool {
+                [.leadingButton, .trailingButton].contains(where: { contains($0) })
+            }
+            
+            // MARK: Initializers
+            public init(rawValue: Int) {
+                self.rawValue = rawValue
+            }
         }
     }
 
@@ -233,15 +259,5 @@ public struct VModalModel {
         model.colors.icon = colors.closeButtonIcon
         
         return model
-    }
-}
-
-// MARK: - Helpers
-extension Set where Element == VModalModel.Misc.DismissType {
-    /// Default value. Set to `trailingButton`.
-    public static let `default`: Self = [.trailingButton]
-    
-    var hasButton: Bool {
-        contains(where: { [.leadingButton, .trailingButton].contains($0) })
     }
 }

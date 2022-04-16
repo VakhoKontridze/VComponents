@@ -8,32 +8,37 @@
 import SwiftUI
 
 // MARK: - _ V Modal
-struct _VModal<Content, HeaderContent>: View
+struct _VModal<HeaderLabel, Content>: View
     where
-        Content: View,
-        HeaderContent: View
+        HeaderLabel: View,
+        Content: View
 {
     // MARK: Properties
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass: UserInterfaceSizeClass? // Detects orientation changes
+    @Environment(\.verticalSizeClass) private var verticalSizeClass: UserInterfaceSizeClass? // Detects orientation changes
+    
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    
     private let model: VModalModel
     
-    @Binding private var isHCPresented: Bool
-    @State private var isViewPresented: Bool = false
+    private let dismissHandler: (() -> Void?)?
     
-    private let headerContent: (() -> HeaderContent)?
+    private let headerLabel: VModalHeaderLabel<HeaderLabel>
     private let content: () -> Content
-    
-    private var headerExists: Bool { headerContent != nil || model.misc.dismissType.hasButton }
+
+    @State private var isAnimatingIn: Bool = false // Used for scale and blur effects
+    private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
     
     // MARK: Initializers
     init(
         model: VModalModel,
-        isPresented: Binding<Bool>,
-        headerContent: (() -> HeaderContent)?,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        headerLabel: VModalHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
-        self._isHCPresented = isPresented
-        self.headerContent = headerContent
+        self.dismissHandler = dismissHandler
+        self.headerLabel = headerLabel
         self.content = content
     }
 
@@ -41,53 +46,80 @@ struct _VModal<Content, HeaderContent>: View
     var body: some View {
         ZStack(content: {
             blinding
-            modalView
+            modal
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
+            .onChange(
+                of: presentationMode.isExternallyDismissed,
+                perform: { if $0 { animateOutFromExternalDismiss() } }
+            )
     }
     
     private var blinding: some View {
         model.colors.blinding
             .edgesIgnoringSafeArea(.all)
-            .onTapGesture(perform: animateOutFromTap)
+            .onTapGesture(perform: {
+                if model.misc.dismissType.contains(.backTap) { animateOut() }
+            })
     }
-    
-    private var modalView: some View {
+
+    private var modal: some View {
         ZStack(content: {
             VSheet(model: model.sheetSubModel)
-            
+
             VStack(spacing: 0, content: {
-                headerView
-                dividerView
+                header
+                divider
                 contentView.frame(maxHeight: .infinity)
             })
                 .frame(maxHeight: .infinity, alignment: .top)
         })
             .frame(size: model.layout.size)
-            .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
-            .opacity(isViewPresented ? 1 : model.animations.opacity)
-            .blur(radius: isViewPresented ? 0 : model.animations.blur)
+            .scaleEffect(isAnimatingIn ? 1 : model.animations.scaleEffect)
+            .opacity(isAnimatingIn ? 1 : model.animations.opacity)
+            .blur(radius: isAnimatingIn ? 0 : model.animations.blur)
     }
-    
-    @ViewBuilder private var headerView: some View {
-        if headerExists {
+
+    @ViewBuilder private var header: some View {
+        if hasHeader {
             HStack(spacing: model.layout.headerSpacing, content: {
-                if model.misc.dismissType.contains(.leadingButton) {
-                    closeButton
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-                
-                if let headerContent = headerContent {
-                    headerContent()
-                        .layoutPriority(1)  // Overrides close button's maxWidth: .infinity. Also, header content is by default maxWidth and leading justified.
-                }
-                
-                if model.misc.dismissType.contains(.trailingButton) {
-                    closeButton
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                }
+                Group(content: {
+                    if model.misc.dismissType.contains(.leadingButton) {
+                        closeButton
+                    } else if model.misc.dismissType.contains(.trailingButton) {
+                        closeButtonCompensator
+                    }
+                })
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                Group(content: {
+                    switch headerLabel {
+                    case .empty:
+                        EmptyView()
+                        
+                    case .title(let title):
+                        VText(
+                            color: model.colors.headerTitle,
+                            font: model.fonts.header,
+                            title: title
+                        )
+                        
+                    case .custom(let label):
+                        label()
+                    }
+                })
+                    .layoutPriority(1)
+
+                Group(content: {
+                    if model.misc.dismissType.contains(.trailingButton) {
+                        closeButton
+                    } else if model.misc.dismissType.contains(.leadingButton) {
+                        closeButtonCompensator
+                    }
+                })
+                    .frame(maxWidth: .infinity, alignment: .trailing)
             })
                 .padding(.leading, model.layout.headerMargins.leading)
                 .padding(.trailing, model.layout.headerMargins.trailing)
@@ -95,9 +127,9 @@ struct _VModal<Content, HeaderContent>: View
                 .padding(.bottom, model.layout.headerMargins.bottom)
         }
     }
-    
-    @ViewBuilder private var dividerView: some View {
-        if headerExists && model.layout.hasDivider {
+
+    @ViewBuilder private var divider: some View {
+        if hasHeader && model.layout.hasDivider {
             Rectangle()
                 .frame(height: model.layout.headerDividerHeight)
                 .padding(.leading, model.layout.headerDividerMargins.leading)
@@ -107,52 +139,72 @@ struct _VModal<Content, HeaderContent>: View
                 .foregroundColor(model.colors.headerDivider)
         }
     }
-    
+
     private var contentView: some View {
         content()
             .padding(.leading, model.layout.contentMargins.leading)
             .padding(.trailing, model.layout.contentMargins.trailing)
             .padding(.top, model.layout.contentMargins.top)
+            .if(!hasHeader, transform: { $0.padding(.top, model.layout.headerMargins.bottom) })
             .padding(.bottom, model.layout.contentMargins.bottom)
     }
-    
+
     private var closeButton: some View {
         VSquareButton.close(
             model: model.closeButtonSubModel,
             action: animateOut
         )
     }
+    
+    private var closeButtonCompensator: some View {
+        Spacer()
+            .frame(width: model.layout.closeButtonDimension)
+    }
 
     // MARK: Animations
     private func animateIn() {
-        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
+        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isAnimatingIn = true })
     }
-    
+
     private func animateOut() {
-        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
-        DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
+        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isAnimatingIn = false })
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + (model.animations.disappear?.duration ?? 0),
+            execute: {
+                presentationMode.dismiss()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
     }
-    
-    private func animateOutFromTap() {
-        if model.misc.dismissType.contains(.backTap) { animateOut() }
+
+    private func animateOutFromExternalDismiss() {
+        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isAnimatingIn = false })
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + (model.animations.disappear?.duration ?? 0),
+            execute: {
+                presentationMode.externalDismissCompletion()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
     }
 }
 
 // MARK: - Previews
 struct VModal_Previews: PreviewProvider {
+    @State static var isPresented: Bool = true
+
     static var previews: some View {
-        _VModal(
-            model: .init(),
-            isPresented: .constant(true),
-            headerContent: {
-                VBaseHeaderFooter(
-                    frameType: .flexible(.leading),
-                    font: VModalModel.Fonts().header,
-                    color: VModalModel.Colors().headerTitle,
-                    title: "Lorem ipsum dolor sit amet"
-                )
-            },
-            content: { ColorBook.accent }
+        VPlainButton(
+            action: { /*isPresented = true*/ },
+            title: "Present"
         )
+            .vModal(isPresented: $isPresented, modal: {
+                VModal(
+                    headerTitle: "Lorem ipsum",
+                    content: { ColorBook.accent }
+                )
+            })
     }
 }

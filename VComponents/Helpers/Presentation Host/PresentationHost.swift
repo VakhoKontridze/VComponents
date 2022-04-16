@@ -49,7 +49,7 @@ import SwiftUI
 ///     }
 ///
 ///     struct _SomeModal<Content>: View where Content: View {
-///         @Environment(\.presentationHostPresentationMode) private var presentationHostPresentationMode
+///         @Environment(\.presentationHostPresentationMode) private var presentationMode
 ///         private let content: () -> Content
 ///
 ///         init(content: @escaping () -> Content) {
@@ -62,7 +62,7 @@ import SwiftUI
 ///                 .onAppear(perform: animateIn)
 ///                 .onTapGesture(perform: animateOut)
 ///                 .onChange(
-///                     of: presentationHostPresentationMode.isExternallyDismissed,
+///                     of: presentationMode.isExternallyDismissed,
 ///                     perform: { if $0 { animateOutFromExternalDismiss() } }
 ///                  )
 ///         }
@@ -76,7 +76,7 @@ import SwiftUI
 ///
 ///             DispatchQueue.main.asyncAfter(
 ///                 deadline: .now() + 0.5,
-///                 execute: presentationHostPresentationMode.dismiss
+///                 execute: presentationMode.dismiss
 ///             )
 ///         }
 ///
@@ -85,7 +85,7 @@ import SwiftUI
 ///
 ///             DispatchQueue.main.asyncAfter(
 ///                 deadline: .now() + 0.5,
-///                 execute: presentationHostPresentationMode.externalDismissCompletion
+///                 execute: presentationMode.externalDismissCompletion
 ///             )
 ///         }
 ///     }

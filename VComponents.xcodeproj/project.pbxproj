@@ -24,6 +24,7 @@
 		179A32F227E25A3500909490 /* SecurableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 179A32F127E25A3500909490 /* SecurableTextField.swift */; };
 		17A1B9DC27D9F67000E76F2F /* GenericStateAndModel_EDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A1B9DB27D9F67000E76F2F /* GenericStateAndModel_EDF.swift */; };
 		17A1B9DE27D9F81600E76F2F /* GenericStateAndModel_EPDF.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A1B9DD27D9F81600E76F2F /* GenericStateAndModel_EPDF.swift */; };
+		17A8D101280AD82200BCD80F /* VModalHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17A8D100280AD82200BCD80F /* VModalHeaderLabel.swift */; };
 		17B23E7E27355AD300914FEB /* StateColors_EPD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7D27355AD300914FEB /* StateColors_EPD.swift */; };
 		17B23E8027355AE700914FEB /* StateColors_EPLD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E7F27355AE700914FEB /* StateColors_EPLD.swift */; };
 		17B23E8227355AFA00914FEB /* StateColors_OOD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17B23E8127355AFA00914FEB /* StateColors_OOD.swift */; };
@@ -277,6 +278,7 @@
 		179A32F127E25A3500909490 /* SecurableTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurableTextField.swift; sourceTree = "<group>"; };
 		17A1B9DB27D9F67000E76F2F /* GenericStateAndModel_EDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_EDF.swift; sourceTree = "<group>"; };
 		17A1B9DD27D9F81600E76F2F /* GenericStateAndModel_EPDF.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_EPDF.swift; sourceTree = "<group>"; };
+		17A8D100280AD82200BCD80F /* VModalHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VModalHeaderLabel.swift; sourceTree = "<group>"; };
 		17B23E7D27355AD300914FEB /* StateColors_EPD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPD.swift; sourceTree = "<group>"; };
 		17B23E7F27355AE700914FEB /* StateColors_EPLD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_EPLD.swift; sourceTree = "<group>"; };
 		17B23E8127355AFA00914FEB /* StateColors_OOD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateColors_OOD.swift; sourceTree = "<group>"; };
@@ -1465,6 +1467,7 @@
 			children = (
 				7AF3C8CD25AF4E5C00D56042 /* VModal.swift */,
 				7AF3C8D425AF5C1A00D56042 /* _VModal.swift */,
+				17A8D100280AD82200BCD80F /* VModalHeaderLabel.swift */,
 				7AF3C8D125AF511800D56042 /* VModalModel.swift */,
 			);
 			path = Modal;
@@ -1693,6 +1696,7 @@
 				17B23E8227355AFA00914FEB /* StateColors_OOD.swift in Sources */,
 				17B23E9A273563D500914FEB /* EdgeInsets_LT.swift in Sources */,
 				7A3C1565258DECF400CE1D96 /* VSlider.swift in Sources */,
+				17A8D101280AD82200BCD80F /* VModalHeaderLabel.swift in Sources */,
 				7A259B842597B2C600A12F8C /* _VDialog.swift in Sources */,
 				7A4D0C2E2594C06A00108575 /* VSecondaryButton.swift in Sources */,
 				170829322765E4C40001DF39 /* VBaseButtonGestureState.swift in Sources */,
