@@ -54,7 +54,7 @@ struct _VSideBar<Content>: View where Content: View {
                 .padding(.trailing, model.layout.contentMargins.trailing)
                 .padding(.top, model.layout.contentMargins.top)
                 .padding(.bottom, model.layout.contentMargins.bottom)
-                .edgesIgnoringSafeArea(model.layout.edgesToIgnore)
+                .edgesIgnoringSafeArea(edgesToIgnore)
         })
             .frame(width: model.layout.width)
             .offset(x: isViewPresented ? 0 : -model.layout.width)
@@ -82,6 +82,16 @@ struct _VSideBar<Content>: View where Content: View {
         guard abs(drag.translation.width) >= model.layout.translationToDismiss else { return }
         
         animateOut()
+    }
+    
+    // MARK: Helpers
+    private var edgesToIgnore: Edge.Set {
+        switch (model.layout.hasSafeAreaMarginTop, model.layout.hasSafeAreaMarginBottom) {
+        case (false, false): return [.top, .bottom]
+        case (false, true): return .top
+        case (true, false): return .bottom
+        case (true, true): return []
+        }
     }
 }
 

@@ -24,7 +24,7 @@ struct VAccordionDemoView: View {
         model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
         model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
         
-        model.misc.expandCollapseOnHeaderTap = expandCollapseOnHeaderTap
+        model.misc.expandsAndCollapsesOnHeaderTap = expandCollapseOnHeaderTap
         
         return model
     }

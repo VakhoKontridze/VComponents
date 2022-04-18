@@ -167,7 +167,7 @@ public struct VTextField: View {
     public var body: some View {
         syncInternalStateWithState()
 
-        return VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
+        return VStack(alignment: .leading, spacing: model.layout.headerTextFieldFooterSpacing, content: {
             header
             input
             footer
@@ -255,7 +255,7 @@ public struct VTextField: View {
     }
 
     @ViewBuilder private var clearButton: some View {
-        if !textFieldType.isSecure && clearButtonIsVisible && model.misc.clearButton {
+        if !textFieldType.isSecure && clearButtonIsVisible && model.misc.hasClearButton {
             VSquareButton.close(
                 model: model.clearButtonSubModel,
                 action: didTapClearButton

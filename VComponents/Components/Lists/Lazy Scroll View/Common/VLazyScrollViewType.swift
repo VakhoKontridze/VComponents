@@ -12,10 +12,10 @@ import Foundation
 public enum VLazyScrollViewType {
     // MARK: Cases
     /// Vertical layout.
-    case vertical(_ model: VLazyScrollViewModelVertical = .init())
+    case vertical(_ model: VLazyScrollViewVerticalModel = .init())
     
     /// Horizontal layout.
-    case horizontal(_ model: VLazyScrollViewModelHorizontal = .init())
+    case horizontal(_ model: VLazyScrollViewHorizontalModel = .init())
     
     // MARK: Initailizers
     /// Default value. Set to `vertical`.

@@ -25,9 +25,11 @@ struct _VModal<HeaderLabel, Content>: View
     
     private let headerLabel: VModalHeaderLabel<HeaderLabel>
     private let content: () -> Content
-
-    @State private var isAnimatingIn: Bool = false // Used for scale and blur effects
+    
     private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
+    private var hasHeaderDivider: Bool { hasHeader && model.layout.headerDividerHeight > 0 }
+    
+    @State private var isAnimatingIn: Bool = false // Used for scale and blur effects
     
     // MARK: Initializers
     init(
@@ -69,10 +71,10 @@ struct _VModal<HeaderLabel, Content>: View
         ZStack(content: {
             VSheet(model: model.sheetSubModel)
 
-            VStack(spacing: 0, content: {
+            VStack(spacing: model.layout.headerHeaderDividerContentSpacing, content: {
                 header
                 divider
-                contentView.frame(maxHeight: .infinity)
+                contentView
             })
                 .frame(maxHeight: .infinity, alignment: .top)
         })
@@ -129,7 +131,7 @@ struct _VModal<HeaderLabel, Content>: View
     }
 
     @ViewBuilder private var divider: some View {
-        if hasHeader && model.layout.hasDivider {
+        if hasHeaderDivider {
             Rectangle()
                 .frame(height: model.layout.headerDividerHeight)
                 .padding(.leading, model.layout.headerDividerMargins.leading)
@@ -145,8 +147,9 @@ struct _VModal<HeaderLabel, Content>: View
             .padding(.leading, model.layout.contentMargins.leading)
             .padding(.trailing, model.layout.contentMargins.trailing)
             .padding(.top, model.layout.contentMargins.top)
-            .if(!hasHeader, transform: { $0.padding(.top, model.layout.headerMargins.bottom) })
+//            .if(!hasHeader, transform: { $0.padding(.top, model.layout.headerMargins.bottom) })
             .padding(.bottom, model.layout.contentMargins.bottom)
+            .frame(maxHeight: .infinity)
     }
 
     private var closeButton: some View {

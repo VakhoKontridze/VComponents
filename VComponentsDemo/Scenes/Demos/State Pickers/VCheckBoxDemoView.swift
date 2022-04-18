@@ -31,7 +31,7 @@ struct VCheckBoxDemoView: View {
             }
         }()
         if hitBoxType == .clipped {
-            model.layout.labelMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            model.layout.checkBoxLabelSpacing = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
         }
         
         model.misc.labelIsClickable = labelIsClickable

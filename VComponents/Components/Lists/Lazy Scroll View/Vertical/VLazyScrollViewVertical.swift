@@ -10,12 +10,12 @@ import SwiftUI
 // MARK: - V Lazy Scroll View Vertical
 struct VLazyScrollViewVertical<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VLazyScrollViewModelVertical
+    private let model: VLazyScrollViewVerticalModel
     private let content: () -> Content
     
     // MARK: Initializers
     init(
-        model: VLazyScrollViewModelVertical,
+        model: VLazyScrollViewVerticalModel,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
@@ -24,7 +24,7 @@ struct VLazyScrollViewVertical<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        ScrollView(.vertical, showsIndicators: model.layout.showIndicator, content: {
+        ScrollView(.vertical, showsIndicators: model.layout.showsIndicator, content: {
             LazyVStack(alignment: model.layout.alignment, spacing: model.layout.rowSpacing, content: {
                 content()
             })

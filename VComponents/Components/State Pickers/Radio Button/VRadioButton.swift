@@ -180,7 +180,7 @@ public struct VRadioButton<Label>: View where Label: View {
         VBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.labelMarginLeading)
+                .frame(width: model.layout.radioLabelSpacing)
                 .foregroundColor(.clear)
         })
             .disabled(!labelIsEnabled)

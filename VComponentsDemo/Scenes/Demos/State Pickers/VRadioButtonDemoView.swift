@@ -31,7 +31,7 @@ struct VRadioButtonDemoView: View {
             }
         }()
         if hitBoxType == .clipped {
-            model.layout.labelMarginLeading = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            model.layout.radioLabelSpacing = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
         }
         
         model.misc.labelIsClickable = labelIsClickable

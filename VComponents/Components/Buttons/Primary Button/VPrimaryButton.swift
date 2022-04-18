@@ -39,6 +39,8 @@ public struct VPrimaryButton<Label>: View where Label: View {
     
     private let label: VPrimaryButtonLabel<Label>
     
+    private var hasBorder: Bool { model.layout.borderWidth > 0 }
+    
     // MARK: Initializers
     /// Initializes component with action and title.
     public init(
@@ -96,7 +98,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
     }
     
     private var buttonLabel: some View {
-        HStack(spacing: model.layout.loaderSpacing, content: {
+        HStack(spacing: model.layout.labelLoaderSpacing, content: {
             loaderCompensator
 
             Group(content: {
@@ -140,14 +142,13 @@ public struct VPrimaryButton<Label>: View where Label: View {
     @ViewBuilder private var loaderCompensator: some View {
         if internalState.isLoading {
             Spacer()
-                .frame(width: model.layout.loaderWidth, alignment: .leading)
+                .frame(width: model.layout.loaderDimension)
         }
     }
     
     @ViewBuilder private var loader: some View {
         if internalState.isLoading {
             VSpinner(type: .continous(model.spinnerSubModel))
-                .frame(width: model.layout.loaderWidth, alignment: .trailing)
         }
     }
     
@@ -157,7 +158,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
     }
     
     @ViewBuilder private var border: some View {
-        if model.layout.hasBorder {
+        if hasBorder {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                 .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWidth)
         }

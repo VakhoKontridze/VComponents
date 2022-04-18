@@ -45,8 +45,8 @@ public struct VToggleModel {
         /// Thumb dimension. Defaults to `27`, similarly to native toggle.
         public var thumbDimension: CGFloat = 27
         
-        /// Label leading margin. Defaults to `5`.
-        public var labelMarginLeading: CGFloat = 5
+        /// Spacing between toggle and label. Defaults to `5`.
+        public var toggleLabelSpacing: CGFloat = 5
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2

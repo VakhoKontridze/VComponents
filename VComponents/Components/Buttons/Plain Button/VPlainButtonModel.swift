@@ -45,7 +45,6 @@ public struct VPlainButtonModel {
         /// Applicable only if icon init with icon and title is used.
         public var iconTitleSpacing: CGFloat = secondaryButtonReference.layout.iconTitleSpacing
         
-        
         /// Hit box. Defaults to `5` horizontally and `5` vertically.
         public var hitBox: HitBox = .init(
             horizontal: 5,

@@ -36,18 +36,16 @@ public struct VListModel {
         /// Row divider height. Defaults to `1`.
         public var dividerHeight: CGFloat = 1
         
-        /// Divider margins. Defaults to `0` leading and `0` trailing.
+        /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: HorizontalMargins = .zero
         
         var dividerMarginVertical: CGFloat { rowSpacing / 2 }
         
-        var hasDivider: Bool { dividerHeight > 0 }
-        
         /// Indicates if last row has divider. Defaults to `false`.
         public var lastRowHasDivider: Bool = false
         
-        /// Indicates if scrolling indicator is shown. Defaults to `true`.
-        public var showIndicator: Bool = true
+        /// Indicates if scroll view has scroll indicator. Defaults to `true`.
+        public var showsIndicator: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -71,9 +69,9 @@ public struct VListModel {
     }
 
     // MARK: Sub-Models
-    var lazyScrollViewSubModel: VLazyScrollViewModelVertical {
-        var model: VLazyScrollViewModelVertical = .init()
-        model.layout.showIndicator = layout.showIndicator
+    var lazyScrollViewSubModel: VLazyScrollViewVerticalModel {
+        var model: VLazyScrollViewVerticalModel = .init()
+        model.layout.showsIndicator = layout.showsIndicator
         return model
     }
 }

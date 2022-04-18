@@ -43,7 +43,11 @@ public final class PresentationHostViewController<Content>: UIViewController whe
         hostingController.modalTransitionStyle = .crossDissolve
         hostingController.view.backgroundColor = .clear
         
-        present(hostingController, animated: false, completion: nil)
+        DispatchQueue.main.async(execute: { [weak self] in
+            guard let self = self else { return }
+            
+            self.present(hostingController, animated: false, completion: nil)
+        })
     }
     
     func updateHostedView(with content: Content) {

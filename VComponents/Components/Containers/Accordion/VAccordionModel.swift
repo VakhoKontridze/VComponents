@@ -43,38 +43,34 @@ public struct VAccordionModel {
         /// Accordion corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
+        /// Spacing between header, header divider, and content. Defaults to `0`.
+        public var headerHeaderDividerContentSpacing: CGFloat = 0
+        
         /// Chevron button dimension. Default to `32`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
         
         /// Chevron button icon dimension. Default to `12`.
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        /// Header divider height. Defaults to `1`.
-        public var headerDividerHeight: CGFloat = 1
-        
-        var hasHeaderDivider: Bool { headerDividerHeight > 0 }
+        /// Header divider height. Defaults to `0.5`.
+        public var headerDividerHeight: CGFloat = 0.5
         
         /// Header margins. Defaults to `10` leading, `10` trailing, `10` top, `10` bottom.
-        public var headerMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
-            top: 10,
-            bottom: 10
-        )
+        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
         
-        /// Divider margins. Defaults to `10` leading, `10` trailing, `0` top, and `5` bottom.
+        /// Header divider margins. Defaults to `10` leading, `10` trailing, `0` top, `0` bottom.
         public var headerDividerMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
             trailing: sheetReference.layout.contentMargin,
             top: 0,
-            bottom: 5
+            bottom: 0
         )
         
-        /// Content margins. Defaults to `15` leading, `15` trailing, `5` top, and `15` bottom.
+        /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
         public var contentMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin + 5,
             trailing: sheetReference.layout.contentMargin + 5,
-            top: 5,
+            top: sheetReference.layout.contentMargin + 5,
             bottom: sheetReference.layout.contentMargin + 5
         )
         
@@ -85,10 +81,6 @@ public struct VAccordionModel {
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = EdgeInsets_LTTB
-        
-        // MARK: Horizontal Margins
-        /// Sub-model containing `leading` and `trailing` margins.
-        public typealias HorizontalMargins = VListModel.Layout.HorizontalMargins
     }
 
     // MARK: Colors
@@ -174,8 +166,8 @@ public struct VAccordionModel {
     /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if accordion should expand or collapse from tap on header. Default to `true`.
-        public var expandCollapseOnHeaderTap: Bool = true
+        /// Indicates if accordion expands and collapses from header tap. Default to `true`.
+        public var expandsAndCollapsesOnHeaderTap: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

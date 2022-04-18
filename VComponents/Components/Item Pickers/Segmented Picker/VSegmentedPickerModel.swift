@@ -52,17 +52,20 @@ public struct VSegmentedPickerModel {
         /// Scale by which selection indicator changes on press. Defaults to `0.95`.
         public var indicatorPressedScale: CGFloat = 0.95
         
-        let indicatorShadowRadius: CGFloat = 1
+        /// Indicator shadow radius. Defautls to `1`.
+        public var indicatorShadowRadius: CGFloat = 1
         
-        let indicatorShadowOffsetY: CGFloat = 1
+        /// Indicator shadow X offset. Defautls to `0`.
+        public var indicatorShadowOffsetX: CGFloat = 0
+        
+        /// Indicator shadow Y offset. Defautls to `1`.
+        public var indicatorShadowOffsetY: CGFloat = 1
         
         /// Row content margin. Defaults to `2`.
         public var rowContentMargin: CGFloat = 2
         
-        var actualRowContentMargin: CGFloat { indicatorMargin + rowContentMargin }
-        
-        /// Spacing between header and picker, and picker and footer. Defaults to `3`.
-        public var headerFooterSpacing: CGFloat = 3
+        /// Spacing between header, picker, and footer. Defaults to `3`.
+        public var headerPickerFooterSpacing: CGFloat = 3
         
         /// Header and footer horizontal margin. Defaults to `10`.
         public var headerFooterMarginHorizontal: CGFloat = 10

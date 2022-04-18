@@ -53,6 +53,8 @@ public struct VAccordion<HeaderLabel, Content>: View
     
     private let content: () -> Content
     
+    private var hasHeaderDivider: Bool { model.layout.headerDividerHeight > 0 }
+    
     @State private var headerHeight: CGFloat = 0
     @State private var accordionHeight: CGFloat = 0
 
@@ -116,8 +118,8 @@ public struct VAccordion<HeaderLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        VStack(spacing: 0, content: {
-            headerView
+        VStack(spacing: model.layout.headerHeaderDividerContentSpacing, content: {
+            header
             divider
             contentView
         })
@@ -130,7 +132,7 @@ public struct VAccordion<HeaderLabel, Content>: View
             .animation(model.animations.expandCollapse, value: state) // +withAnimation
     }
     
-    private var headerView: some View {
+    private var header: some View {
         ZStack(content: {
             Color.clear
                 .contentShape(Rectangle())
@@ -171,14 +173,16 @@ public struct VAccordion<HeaderLabel, Content>: View
             .readSize(onChange: { headerHeight = $0.height })
     }
     
-    private var divider: some View {
-        Rectangle()
-            .frame(height: model.layout.headerDividerHeight)
-            .padding(.leading, model.layout.headerDividerMargins.leading)
-            .padding(.trailing, model.layout.headerDividerMargins.trailing)
-            .padding(.top, model.layout.headerDividerMargins.top)
-            .padding(.bottom, model.layout.headerDividerMargins.bottom)
-            .foregroundColor(model.colors.headerDivider)
+    @ViewBuilder private var divider: some View {
+        if hasHeaderDivider {
+            Rectangle()
+                .frame(height: model.layout.headerDividerHeight)
+                .padding(.leading, model.layout.headerDividerMargins.leading)
+                .padding(.trailing, model.layout.headerDividerMargins.trailing)
+                .padding(.top, model.layout.headerDividerMargins.top)
+                .padding(.bottom, model.layout.headerDividerMargins.bottom)
+                .foregroundColor(model.colors.headerDivider)
+        }
     }
     
     private var contentView: some View {
@@ -196,7 +200,7 @@ public struct VAccordion<HeaderLabel, Content>: View
     }
     
     private func expandCollapseFromHeaderTap() {
-        guard model.misc.expandCollapseOnHeaderTap else { return }
+        guard model.misc.expandsAndCollapsesOnHeaderTap else { return }
         expandCollapse()
     }
 }

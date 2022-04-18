@@ -21,7 +21,12 @@ struct VModalDemoView: View {
     private var model: VModalModel {
         var model: VModalModel = .init()
         
-        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1/3 : model.layout.headerDividerHeight) : 0
+        if !hasDivider && (hasTitle || dismissType.hasButton) {
+            model.layout.headerMargins.bottom /= 2
+            model.layout.contentMargins.top /= 2
+        }
+        
+        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
         model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
         
         model.misc.dismissType = dismissType
@@ -70,7 +75,7 @@ struct VModalDemoView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             HStack(content: {
-                ForEach(VModalModel.Misc.DismissType.all.elements(), id: \.rawValue, content: { position in
+                ForEach(VModalModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
                     dismissTypeView(position)
                 })
             })
@@ -105,7 +110,7 @@ struct VModalDemoView: View {
                         type: .multiLine(alignment: .center, limit: nil),
                         color: ColorBook.primaryWhite,
                         font: .system(size: 14, weight: .semibold),
-                        title: "When close button is \"none\", Modal can only be dismissed programatically"
+                        title: "When there are no dismiss types, Modal can only be dismissed programatically"
                     )
 
                     VPlainButton(
@@ -145,30 +150,5 @@ extension VModalModel.Misc.DismissType {
 struct VModalDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VModalDemoView()
-    }
-}
-
-
-
-public extension OptionSet where RawValue: FixedWidthInteger { // ???
-    func _elements() -> AnySequence<Self> {
-        var remainingBits = rawValue
-        var bitMask: RawValue = 1
-        return AnySequence {
-            return AnyIterator {
-                while remainingBits != 0 {
-                    defer { bitMask = bitMask &* 2 }
-                    if remainingBits & bitMask != 0 {
-                        remainingBits = remainingBits & ~bitMask
-                        return Self(rawValue: bitMask)
-                    }
-                }
-                return nil
-            }
-        }
-    }
-    
-    func elements() -> [Self] {
-        .init(_elements())
     }
 }

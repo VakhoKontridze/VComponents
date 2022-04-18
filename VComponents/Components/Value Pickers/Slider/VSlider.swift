@@ -36,6 +36,8 @@ public struct VSlider: View {
     
     private let action: ((Bool) -> Void)?
     
+    private var hasThumb: Bool { model.layout.thumbDimension > 0 }
+    
     // MARK: Initializers
     /// Initializes component with value.
     public init<V>(
@@ -93,7 +95,7 @@ public struct VSlider: View {
     }
     
     @ViewBuilder private func thumb(in proxy: GeometryProxy) -> some View {
-        if model.layout.hasThumb {
+        if hasThumb {
             Group(content: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)

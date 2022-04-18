@@ -34,6 +34,8 @@ public struct VSecondaryButton<Label>: View where Label: View {
     private let action: () -> Void
     
     private let label: VSecondaryButtonLabel<Label>
+    
+    private var hasBorder: Bool { model.layout.borderWidth > 0 }
 
     // MARK: Initializers
     /// Initializes component with action and title.
@@ -128,7 +130,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
     }
     
     @ViewBuilder private var border: some View {
-        if model.layout.hasBorder {
+        if hasBorder {
             RoundedRectangle(cornerRadius: model.layout.cornerRadius)
                 .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWidth)
         }

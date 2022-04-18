@@ -25,7 +25,7 @@ struct VTextFieldDemoView: View {
     @State private var textAlignment: TextAlignment = VTextFieldModel.Layout().textAlignment
     @State private var autocapitalizaton: Bool = false
     @State private var autocorrection: Bool = false
-    @State private var hasClearButton: Bool = VTextFieldModel.Misc().clearButton
+    @State private var hasClearButton: Bool = VTextFieldModel.Misc().hasClearButton
     
     private var model: VTextFieldModel {
         var model: VTextFieldModel = .init()
@@ -46,7 +46,7 @@ struct VTextFieldDemoView: View {
         model.misc.autocorrection = autocorrection
         model.misc.autocapitalization = autocapitalizaton ? .words : nil
         
-        model.misc.clearButton = hasClearButton
+        model.misc.hasClearButton = hasClearButton
         
         return model
     }

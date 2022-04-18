@@ -39,8 +39,6 @@ public struct VSecondaryButtonModel {
         /// Button border width. Defaults to `0`.
         public var borderWidth: CGFloat = 0
         
-        var hasBorder: Bool { borderWidth > 0 }
-        
         /// Label margins. Defaults to `10` horizontally and `3` vertically.
         public var labelMargins: LabelMargins = .init(
             horizontal: 10,
@@ -55,7 +53,7 @@ public struct VSecondaryButtonModel {
         /// Applicable only if icon init with icon and title is used.
         public var iconTitleSpacing: CGFloat = 8
         
-        /// Hit box. Defaults to `0` horizontally and `0` vertically.
+        /// Hit box. Defaults to `.zero`.
         public var hitBox: HitBox = .zero
         
         // MARK: Initializers

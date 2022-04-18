@@ -49,26 +49,20 @@ public struct VHalfModalModel {
         /// Height type. Defaults to `default`.
         public var height: HeightType = .default
         
-        /// Edges ignored by keyboard. Defaults to `none`.
+        /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
-        var roundCorners: Bool { cornerRadius > 0 }
-        
         /// Grabber indicaator size. Defaults to `50` width and `4` height.
         public var grabberSize: CGSize = .init(width: 50, height: 4)
-        
-        var hasGrabber: Bool { grabberSize.height > 0 }
         
         /// Grabber corner radius. Defaults to `2`.
         public var grabberCornerRadius: CGFloat = 2
         
         /// Header divider height. Defaults to `1`.
-        public var headerDividerHeight: CGFloat = 1
-        
-        var hasDivider: Bool { headerDividerHeight > 0 }
+        public var headerDividerHeight: CGFloat = modalReference.layout.headerDividerHeight
         
         /// Close button dimension. Default to `32`.
         public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
@@ -77,7 +71,7 @@ public struct VHalfModalModel {
         public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
         
         /// Grabber margins. Default to `10` top  and `5` bottom.
-        public var grabberMargins: VerticalMargins = .init(
+        public var grabberMargins: VerticalMargins = .init( // FIXME: ???
             top: sheetReference.layout.contentMargin,
             bottom: sheetReference.layout.contentMargin/2
         )
@@ -99,7 +93,7 @@ public struct VHalfModalModel {
         /// Indicates if modal has margins for safe area on bottom edge. Defaults to `true`.
         public var hasSafeAreaMarginBottom: Bool = true
         
-        var edgesToIgnore: Edge.Set {
+        var edgesToIgnore: Edge.Set { // FIXME: ???
             switch hasSafeAreaMarginBottom {
             case false: return .bottom
             case true: return []
@@ -197,7 +191,7 @@ public struct VHalfModalModel {
         public var closeButtonIcon: StateColors = modalReference.colors.closeButtonIcon
         
         /// Header divider color.
-        public var headerDivider: Color = .init(componentAsset: "HalfModal.Grabber")
+        public var headerDivider: Color = modalReference.colors.headerDivider
         
         /// Blinding color.
         public var blinding: Color = modalReference.colors.blinding
@@ -282,7 +276,7 @@ public struct VHalfModalModel {
     var sheetModel: VSheetModel {
         var model: VSheetModel = .init()
         
-        model.layout.roundedCorners = layout.roundCorners ? .custom([.topLeft, .topRight]) : .none
+        model.layout.roundedCorners = [.topLeft, .topRight]
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.contentMargin = 0
         

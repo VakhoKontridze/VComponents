@@ -109,7 +109,7 @@ struct VHalfModalDemoView: View {
                         type: .multiLine(alignment: .center, limit: nil),
                         color: ColorBook.primary,
                         font: .system(size: 14, weight: .semibold),
-                        title: "When close button is \"none\", Half Modal can only be dismissed programatically"
+                        title: "When there are no dismiss types, Modal can only be dismissed programatically"
                     )
                     
                     VPlainButton(action: { isPresented = false }, title: "Dismiss")

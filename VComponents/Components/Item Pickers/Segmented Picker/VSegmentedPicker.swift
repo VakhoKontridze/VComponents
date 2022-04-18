@@ -67,7 +67,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     
     private let content: VSegmentedPickerContent<Data, RowContent>
     
-    @State private var rowWidth: CGFloat = .zero
+    @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers - Index
     /// Initializes component with selected index, data, and row content.
@@ -210,7 +210,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: model.layout.headerFooterSpacing, content: {
+        VStack(alignment: .leading, spacing: model.layout.headerPickerFooterSpacing, content: {
             header
             picker
             footer
@@ -267,6 +267,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
             .shadow(
                 color: model.colors.indicatorShadow.for(internalState),
                 radius: model.layout.indicatorShadowRadius,
+                x: model.layout.indicatorShadowOffsetX,
                 y: model.layout.indicatorShadowOffsetY
             )
     }
@@ -284,7 +285,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
                                 font: model.fonts.rows,
                                 title: titles[i]
                             )
-                                .padding(model.layout.actualRowContentMargin)
+                                .padding(model.layout.indicatorMargin)
+                                .padding(model.layout.rowContentMargin)
                                 .frame(maxWidth: .infinity)
 
                                 .readSize(onChange: { rowWidth = $0.width })
@@ -301,7 +303,8 @@ public struct VSegmentedPicker<Data, RowContent>: View
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             rowContent(data[i])
-                                .padding(model.layout.actualRowContentMargin)
+                                .padding(model.layout.indicatorMargin)
+                                .padding(model.layout.rowContentMargin)
                                 .frame(maxWidth: .infinity)
 
                                 .opacity(model.colors.customContentOpacities.for(rowState(for: i)))

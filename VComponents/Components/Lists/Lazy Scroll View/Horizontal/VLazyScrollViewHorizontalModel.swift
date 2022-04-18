@@ -1,15 +1,15 @@
 //
-//  VLazyScrollViewModelVertical.swift
+//  VLazyScrollViewHorizontalModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 12/24/20.
 //
 
 import SwiftUI
 
-// MARK: - V Lazy Scroll View Model Vertical
+// MARK: - V Lazy Scroll View Horizontal Model
 /// Model that describes UI.
-public struct VLazyScrollViewModelVertical {
+public struct VLazyScrollViewHorizontalModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -26,10 +26,10 @@ public struct VLazyScrollViewModelVertical {
         public var rowSpacing: CGFloat = 0
         
         /// Row alignment. Defaults to .`center`.
-        public var alignment: HorizontalAlignment = .center
+        public var alignment: VerticalAlignment = .center
         
-        /// Indicates if scrolling indicator is shown. Defaults to `true`.
-        public var showIndicator: Bool = true
+        /// Indicates if scroll view has scroll indicator. Defaults to `true`.
+        public var showsIndicator: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

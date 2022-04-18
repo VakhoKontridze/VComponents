@@ -10,12 +10,12 @@ import SwiftUI
 // MARK: - V Lazy Scroll View Horizontal
 struct VLazyScrollViewHorizontal<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VLazyScrollViewModelHorizontal
+    private let model: VLazyScrollViewHorizontalModel
     private let content: () -> Content
     
     // MARK: Initializers
     init(
-        model: VLazyScrollViewModelHorizontal,
+        model: VLazyScrollViewHorizontalModel,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
@@ -24,7 +24,7 @@ struct VLazyScrollViewHorizontal<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: model.layout.showIndicator, content: {
+        ScrollView(.horizontal, showsIndicators: model.layout.showsIndicator, content: {
             LazyHStack(alignment: model.layout.alignment, spacing: model.layout.rowSpacing, content: {
                 content()
             })

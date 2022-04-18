@@ -25,8 +25,8 @@ public struct VSheetModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Rounded corners of VSheet. Defaults to to `default`.
-        public var roundedCorners: RoundedCorners = .default
+        /// Rounded corners. Defaults to to `allCorners`.
+        public var roundedCorners: UIRectCorner = .allCorners
         
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
@@ -37,41 +37,6 @@ public struct VSheetModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
-        
-        // MARK: Rounded Corners
-        /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`.
-        public enum RoundedCorners {
-            // MARK: Cases
-            /// All.
-            case all
-            
-            /// Top.
-            case top
-            
-            /// Bottom.
-            case bottom
-            
-            /// Custom.
-            case custom(_ corners: UIRectCorner)
-            
-            /// None.
-            case none
-            
-            // MARK: Properties
-            var uiRectCorner: UIRectCorner {
-                switch self {
-                case .all: return .allCorners
-                case .top: return [.topLeft, .topRight]
-                case .bottom: return [.bottomLeft, .bottomRight]
-                case .custom(let customCorners): return customCorners
-                case .none: return []
-                }
-            }
-            
-            // MARK: Initailizers
-            /// Default value. Set to `all`.
-            public static var `default`: Self { .all }
-        }
     }
 
     // MARK: Colors

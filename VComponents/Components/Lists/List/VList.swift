@@ -58,6 +58,8 @@ public struct VList<Data, ID, RowContent>: View
     private let data: [IdentifiableElement<ID, Data.Element>]
     private let rowContent: (Data.Element) -> RowContent
     
+    private var hasDivider: Bool { model.layout.dividerHeight > 0 }
+    
     // MARK: Initializers
     /// Initializes component with data, id, and row content.
     public init(
@@ -147,7 +149,7 @@ public struct VList<Data, ID, RowContent>: View
 
     // MARK: Helpers
     private func showDivider(for i: Int) -> Bool {
-        guard model.layout.hasDivider else { return false }
+        guard hasDivider else { return false }
         
         switch model.layout.lastRowHasDivider {
         case false: guard i <= data.count-2 else { return false }

@@ -40,8 +40,6 @@ public struct VSquareButtonModel {
         /// Button border width. Defaults to `0`.
         public var borderWidth: CGFloat = 0
         
-        var hasBorder: Bool { borderWidth > 0 }
-        
         /// Label margins. Defaults to `3` horizontally and `3` vertically.
         public var labelMargins: LabelMargins = .init(
             horizontal: 3,
@@ -51,7 +49,7 @@ public struct VSquareButtonModel {
         /// Icon size. Defaults to `20` by `20`.
         public var iconSize: CGSize = primaryButtonReference.layout.iconSize
         
-        /// Hit box. Defaults to `0` horizontally and `0` vertically.
+        /// Hit box. Defaults to `.zero`.
         public var hitBox: HitBox = .zero
         
         // MARK: Initializers

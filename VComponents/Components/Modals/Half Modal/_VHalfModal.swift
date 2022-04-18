@@ -25,9 +25,10 @@ struct _VHalfModal<Content, HeaderContent>: View
     @State private var offset: CGFloat?
     @State private var offsetBeforeDrag: CGFloat?
     
-    private var headerExists: Bool { headerContent != nil || model.misc.dismissType.hasButton }
+    private var hasHeader: Bool { headerContent != nil || model.misc.dismissType.hasButton }
+    private var hasHeaderDivider: Bool { hasHeader && model.layout.headerDividerHeight > 0 }
     private var hasGrabber: Bool {
-        model.layout.hasGrabber &&
+        model.layout.grabberSize.height > 0 &&
         (model.misc.dismissType.contains(.pullDown) || model.layout.height.isResizable)
     }
     
@@ -107,7 +108,7 @@ struct _VHalfModal<Content, HeaderContent>: View
     }
 
     @ViewBuilder private var headerView: some View {
-        if headerExists {
+        if hasHeader {
             HStack(spacing: model.layout.headerSpacing, content: {
                 if model.misc.dismissType.contains(.leadingButton) {
                     closeButton
@@ -132,7 +133,7 @@ struct _VHalfModal<Content, HeaderContent>: View
     }
 
     @ViewBuilder private var dividerView: some View {
-        if headerExists && model.layout.hasDivider {
+        if hasHeaderDivider {
             Rectangle()
                 .frame(height: model.layout.headerDividerHeight)
                 .padding(.leading, model.layout.headerDividerMargins.leading)

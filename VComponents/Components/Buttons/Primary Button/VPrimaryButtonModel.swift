@@ -36,8 +36,6 @@ public struct VPrimaryButtonModel {
         /// Button border width. Defaults to `0`.
         public var borderWidth: CGFloat = 0
         
-        var hasBorder: Bool { borderWidth > 0 }
-        
         /// Label margins. Defaults to `15` horizontally and `3` vertically.
         public var labelMargins: LabelMargins = .init(
             horizontal: 15,
@@ -52,12 +50,13 @@ public struct VPrimaryButtonModel {
         /// Applicable only if icon init with icon and title is used.
         public var iconTitleSpacing: CGFloat = 10
         
+        /// Loader dimension. Defaults to `10`.
+        public var loaderDimension: CGFloat = 10
+        
         /// Spacing between label and spinner. Defaults to `20`.
         ///
         /// Only visible when state is set to `loading`.
-        public var loaderSpacing: CGFloat = 20
-        
-        let loaderWidth: CGFloat = 10
+        public var labelLoaderSpacing: CGFloat = 20
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -156,6 +155,7 @@ public struct VPrimaryButtonModel {
     // MARK: Sub-Models
     var spinnerSubModel: VSpinnerModelContinous {
         var model: VSpinnerModelContinous = .init()
+        model.layout.dimension = layout.loaderDimension
         model.colors.spinner = colors.loader
         return model
     }

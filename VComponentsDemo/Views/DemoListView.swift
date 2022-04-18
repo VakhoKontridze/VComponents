@@ -20,8 +20,8 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     private let sections: [DemoSection<Row>]
     @State private var accordionStates: [VAccordionState]
     
-    private let lazyScrollViewModel: VLazyScrollViewModelVertical = {
-        var model: VLazyScrollViewModelVertical = .init()
+    private let lazyScrollViewModel: VLazyScrollViewVerticalModel = {
+        var model: VLazyScrollViewVerticalModel = .init()
         model.layout.rowSpacing = 20
         return model
     }()

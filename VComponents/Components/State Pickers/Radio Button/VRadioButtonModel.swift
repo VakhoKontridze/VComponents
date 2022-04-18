@@ -52,8 +52,8 @@ public struct VRadioButtonModel {
         /// Hit box. Defaults to `5`.
         public var hitBox: CGFloat = checkBoxReference.layout.hitBox
         
-        /// Label leading margin. Defaults to `5`.
-        public var labelMarginLeading: CGFloat = checkBoxReference.layout.labelMarginLeading
+        /// Spacing between radio and label. Defaults to `5`.
+        public var radioLabelSpacing: CGFloat = checkBoxReference.layout.checkBoxLabelSpacing
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

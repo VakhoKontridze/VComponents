@@ -1,5 +1,5 @@
 //
-//  VSideBarModelStandard.swift
+//  VSideBarModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -43,8 +43,6 @@ public struct VSideBarModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
-        var roundCorners: Bool { cornerRadius > 0 }
-        
         /// Content margins. Defaults to `10` leading, `10` trailing, `10` top, and `10` bottom.
         public var contentMargins: Margins = .init(
             leading: sheetReference.layout.contentMargin,
@@ -58,15 +56,6 @@ public struct VSideBarModel {
         
         /// Indicates if side bar has margins for safe area on bottom edge. Defaults to `true`.
         public var hasSafeAreaMarginBottom: Bool = true
-        
-        var edgesToIgnore: Edge.Set {
-            switch (hasSafeAreaMarginTop, hasSafeAreaMarginBottom) {
-            case (false, false): return [.top, .bottom]
-            case (false, true): return .top
-            case (true, false): return .bottom
-            case (true, true): return []
-            }
-        }
         
         /// Distance to drag side bar left to initiate dismiss. Default to `100`.
         public var translationToDismiss: CGFloat = 100
@@ -114,7 +103,7 @@ public struct VSideBarModel {
     var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
         
-        model.layout.roundedCorners = layout.roundCorners ? .custom([.topRight, .bottomRight]) : .none
+        model.layout.roundedCorners = [.topRight, .bottomRight]
         model.layout.cornerRadius = layout.cornerRadius
         model.layout.contentMargin = 0
         

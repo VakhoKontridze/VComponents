@@ -78,8 +78,8 @@ public struct VTextFieldModel {
         /// Spacing between text and buttons. Defaults to `10`.
         public var contentSpacing: CGFloat = 10
 
-        /// Spacing between header and picker, and picker and footer. Defaults to `3`.
-        public var headerFooterSpacing: CGFloat = segmentedPickerReference.layout.headerFooterSpacing
+        /// Spacing between header, textfield, and footer. Defaults to `3`.
+        public var headerTextFieldFooterSpacing: CGFloat = segmentedPickerReference.layout.headerPickerFooterSpacing
         
         /// Header and footer horizontal margin. Defaults to `10`.
         public var headerFooterMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
@@ -220,8 +220,8 @@ public struct VTextFieldModel {
         /// Submit button type. Defaults to `return`.
         public var submitButton: SubmitLabel = .return
         
-        /// Indicates if clear button is present. Defaults to `true`.
-        public var clearButton: Bool = true
+        /// Indicates if text field has clear button. Defaults to `true`.
+        public var hasClearButton: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

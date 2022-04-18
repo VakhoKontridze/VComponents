@@ -179,7 +179,7 @@ public struct VCheckBox<Label>: View where Label: View {
         VBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.labelMarginLeading)
+                .frame(width: model.layout.checkBoxLabelSpacing)
                 .foregroundColor(.clear)
         })
             .disabled(!labelIsEnabled)

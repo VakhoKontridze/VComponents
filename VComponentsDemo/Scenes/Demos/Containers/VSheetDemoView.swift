@@ -13,7 +13,7 @@ struct VSheetDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Sheet" }
     
-    @State private var roundedCorners: _VSheetRoundedCorners = VSheetModel.Layout.RoundedCorners.default.helperType
+    @State private var roundedCorners: _VSheetRoundedCorners = VSheetModel.Layout().roundedCorners.helperType
 
     private var model: VSheetModel {
         var model: VSheetModel = .init()
@@ -63,26 +63,26 @@ private enum _VSheetRoundedCorners: Int, PickableTitledEnumeration {
         }
     }
     
-    var roundedCorner: VSheetModel.Layout.RoundedCorners {
+    var roundedCorner: UIRectCorner {
         switch self {
-        case .all: return .all
-        case .top: return .top
-        case .bottom: return .bottom
-        case .custom: return .custom([.topLeft, .bottomRight])
-        case .none: return .none
+        case .all: return .allCorners
+        case .top: return [.topLeft, .topRight]
+        case .bottom: return [.bottomLeft, .bottomRight]
+        case .custom: return [.topLeft, .bottomRight]
+        case .none: return []
         }
     }
 }
 
-extension VSheetModel.Layout.RoundedCorners {
+extension UIRectCorner {
     fileprivate var helperType: _VSheetRoundedCorners {
         switch self {
-        case .all: return .all
-        case .top: return .top
-        case .bottom: return .bottom
-        case .custom: return .custom
-        case .none: return .none
-        @unknown default: fatalError()
+        case .allCorners: return .all
+        case [.topLeft, .topRight]: return .top
+        case [.bottomLeft, .bottomRight]: return .bottom
+        case [.topLeft, .bottomRight]: return .custom
+        case []: return .none
+        default: fatalError()
         }
     }
 }

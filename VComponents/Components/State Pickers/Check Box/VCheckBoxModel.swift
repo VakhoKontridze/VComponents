@@ -50,10 +50,10 @@ public struct VCheckBoxModel {
         public var iconDimension: CGFloat = 9
         
         /// Hit box. Defaults to `5`.
-        public var hitBox: CGFloat = toggleReference.layout.labelMarginLeading
+        public var hitBox: CGFloat = toggleReference.layout.toggleLabelSpacing
         
-        /// Label leading margin. Defaults to `0`.
-        public var labelMarginLeading: CGFloat = 0
+        /// Spacing between checkbox and label. Defaults to `0`.
+        public var checkBoxLabelSpacing: CGFloat = 0
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

@@ -18,7 +18,7 @@ struct _VToast: View {
     
     private let title: String
     
-    @State private var height: CGFloat = .zero
+    @State private var height: CGFloat = 0
     
     // MARK: Initializers
     init(

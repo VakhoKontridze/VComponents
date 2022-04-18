@@ -34,8 +34,8 @@ public struct VSpinnerModelContinous {
         /// Length of colored part of spinner. Defaults to `0.75`.
         public var legth: CGFloat = 0.75
         
-        /// Spinner thickness. Defaults to `2`.
-        public var thickness: CGFloat = 2
+        /// Border width. Defaults to `2`.
+        public var borderWidth: CGFloat = 2
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

@@ -52,8 +52,6 @@ public struct VSliderModel {
         /// Thumb shadow radius. Defaults to `2`.
         public var thumbShadowRadius: CGFloat = 2
         
-        var hasThumb: Bool { thumbDimension > 0 }
-        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}

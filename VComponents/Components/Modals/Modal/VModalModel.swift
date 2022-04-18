@@ -17,6 +17,9 @@ public struct VModalModel {
     /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
     
+    /// Reference to `VAccordionModel`.
+    public static let accordionReference: VAccordionModel = .init()
+    
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
@@ -59,19 +62,20 @@ public struct VModalModel {
             height: UIScreen.main.bounds.width * 0.9
         )
         
-        /// Edges ignored by keyboard. Defaults to `none`.
+        /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
-        /// Rounded corners of modal. Defaults to to `default`.
-        public var roundedCorners: RoundedCorners = sheetReference.layout.roundedCorners
+        /// Spacing between header, header divider, and content. Defaults to `0`.
+        public var headerHeaderDividerContentSpacing: CGFloat = 0
+        
+        /// Rounded corners. Defaults to to `allCorners`.
+        public var roundedCorners: UIRectCorner = .allCorners
         
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         
-        /// Header divider height. Defaults to `0`.
-        public var headerDividerHeight: CGFloat = 0
-        
-        var hasDivider: Bool { headerDividerHeight > 0 }
+        /// Header divider height. Defaults to `1`.
+        public var headerDividerHeight: CGFloat = 1
 
         /// Close button dimension. Default to `32`.
         public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
@@ -79,31 +83,14 @@ public struct VModalModel {
         /// Close button icon dimension. Default to `11`.
         public var closeButtonIconDimension: CGFloat = closeButtonReference.layout.iconDimension
         
-        /// Header margins. Default to `10` leading, `10` trailing, `10` top, and `5` bottom.
-        public var headerMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
-            top: sheetReference.layout.contentMargin,
-            bottom: sheetReference.layout.contentMargin/2
-        )
+        /// Header margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
+        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
     
-        /// Header divider margins. Default to `0` leading, `0` trailing, `5` top, and `5` bottom.
-        public var headerDividerMargins: Margins = .init(
-            leading: 0,
-            trailing: 0,
-            top: sheetReference.layout.contentMargin/2,
-            bottom: sheetReference.layout.contentMargin/2
-        )
+        /// Header divider margins. Default to `.zero`.
+        public var headerDividerMargins: Margins = .zero
         
-        /// Content margins. Default to `10` leading, `10` trailing, `5` top, and `10` bottom.
-        ///
-        /// If header doesn't exist, additional `5` margin is added to the top.
-        public var contentMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
-            top: sheetReference.layout.contentMargin/2,
-            bottom: sheetReference.layout.contentMargin
-        )
+        /// Content margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
+        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
         /// Header item spacing. Defaults to `10`.
         public var headerSpacing: CGFloat = 10
@@ -111,10 +98,6 @@ public struct VModalModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
-        
-        // MARK: Rounded Corners
-        /// Enum that describes rounded corners, such as all, `top`, `bottom`, `custom`, or `none`.
-        public typealias RoundedCorners = VSheetModel.Layout.RoundedCorners
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
@@ -140,7 +123,7 @@ public struct VModalModel {
         public var closeButtonIcon: StateColors = closeButtonReference.colors.icon
         
         /// Header divider color.
-        public var headerDivider: Color = ColorBook.secondary
+        public var headerDivider: Color = accordionReference.colors.headerDivider
         
         /// Blinding color.
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")
@@ -224,7 +207,8 @@ public struct VModalModel {
             /// Default value. Set to `trailingButton`.
             public static var `default`: DismissType { .trailingButton }
             
-            var hasButton: Bool {
+            /// Indicates if dismiss type inclues a button.
+            public var hasButton: Bool {
                 [.leadingButton, .trailingButton].contains(where: { contains($0) })
             }
             

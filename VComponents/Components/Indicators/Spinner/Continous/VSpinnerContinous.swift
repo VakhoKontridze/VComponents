@@ -25,7 +25,7 @@ struct VSpinnerContinous: View {
             .trim(from: 0, to: model.layout.legth)
             .stroke(
                 model.colors.spinner,
-                style: .init(lineWidth: model.layout.thickness, lineCap: .round)
+                style: .init(lineWidth: model.layout.borderWidth, lineCap: .round)
             )
             .frame(width: model.layout.dimension, height: model.layout.dimension)
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
