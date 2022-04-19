@@ -272,7 +272,7 @@ struct _VHalfModal<HeaderLabel, Content>: View
             
             case maxAllowedOffset...:
                 switch model.misc.dismissType.contains(.pullDown) {
-                case false: return minAllowedOffset
+                case false: return maxAllowedOffset
                 case true: return newOffset
                 }
             
