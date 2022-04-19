@@ -1,5 +1,5 @@
 //
-//  _VHalfModal.swift
+//  _VBottomSheet.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/21/21.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK: - _ V Half Modal
-struct _VHalfModal<HeaderLabel, Content>: View
+// MARK: - _ V Bottom Sheet
+struct _VBottomSheet<HeaderLabel, Content>: View
     where
         HeaderLabel: View,
         Content: View
@@ -19,11 +19,11 @@ struct _VHalfModal<HeaderLabel, Content>: View
     
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     
-    private let model: VHalfModalModel
+    private let model: VBottomSheetModel
     
     private let dismissHandler: (() -> Void?)?
     
-    private let headerLabel: VHalfModalHeaderLabel<HeaderLabel>
+    private let headerLabel: VBottomSheetHeaderLabel<HeaderLabel>
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
@@ -39,9 +39,9 @@ struct _VHalfModal<HeaderLabel, Content>: View
 
     // MARK: Initializers
     init(
-        model: VHalfModalModel,
+        model: VBottomSheetModel,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        headerLabel: VHalfModalHeaderLabel<HeaderLabel>,
+        headerLabel: VBottomSheetHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
@@ -56,7 +56,7 @@ struct _VHalfModal<HeaderLabel, Content>: View
     var body: some View {
         ZStack(alignment: .bottom, content: {
             blinding
-            halfModal
+            bottomSheet
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
@@ -75,7 +75,7 @@ struct _VHalfModal<HeaderLabel, Content>: View
             })
     }
     
-    @ViewBuilder private var halfModal: some View {
+    @ViewBuilder private var bottomSheet: some View {
         if model.layout.height.isLayoutValid {
             ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
@@ -286,7 +286,7 @@ struct _VHalfModal<HeaderLabel, Content>: View
         defer { offsetBeforeDrag = nil }
         guard let offsetBeforeDrag = offsetBeforeDrag else { return }
         
-        switch VHalfModalSnapAction(
+        switch VBottomSheetSnapAction(
             min: model.layout.height.min,
             ideal: model.layout.height.ideal,
             max: model.layout.height.max,
@@ -311,7 +311,7 @@ struct _VHalfModal<HeaderLabel, Content>: View
 }
 
 // MARK: - Preview
-struct VHalfModal_Previews: PreviewProvider {
+struct VBottomSheet_Previews: PreviewProvider {
     @State static var isPresented: Bool = true
 
     static var previews: some View {
@@ -319,8 +319,8 @@ struct VHalfModal_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vHalfModal(isPresented: $isPresented, halfModal: {
-                VHalfModal(
+            .vBottomSheet(isPresented: $isPresented, bottomSheet: {
+                VBottomSheet(
                     headerTitle: "Lorem ipsum",
                     content: { ColorBook.accent }
                 )

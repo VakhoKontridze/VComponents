@@ -25,7 +25,7 @@ struct HomeView: View {
         .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Containers", rows: [.sheet, .accordion]),
         .init(id: 6, title: "Lists", rows: [.lazyScrollView, .list]),
-        .init(id: 7, title: "Modals", rows: [.modal, .halfModal, .sideBar, .dialog, .menu, .actionSheet]),
+        .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .dialog, .menu, .actionSheet]),
         .init(id: 8, title: "Messages", rows: [.toast]),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
         .init(id: 10, title: "Misc", rows: [.text])
@@ -38,7 +38,7 @@ struct HomeView: View {
         case stepper, slider,  rangeSlider
         case textField
         case list, accordion
-        case modal, halfModal, sideBar, dialog, menu, actionSheet
+        case modal, bottomSheet, sideBar, dialog, menu, actionSheet
         case toast
         case spinner, progressBar, pageIndicator
         case text, sheet, lazyScrollView
@@ -74,7 +74,7 @@ struct HomeView: View {
             case .list: return VListDemoView.navBarTitle
 
             case .modal: return VModalDemoView.navBarTitle
-            case .halfModal: return VHalfModalDemoView.navBarTitle
+            case .bottomSheet: return VBottomSheetDemoView.navBarTitle
             case .sideBar: return VSideBarDemoView.navBarTitle
             case .dialog: return VDialogDemoView.navBarTitle
             case .menu: return VMenuDemoView.navBarTitle
@@ -121,7 +121,7 @@ struct HomeView: View {
             case .list: VListDemoView()
 
             case .modal: VModalDemoView()
-            case .halfModal: VHalfModalDemoView()
+            case .bottomSheet: VBottomSheetDemoView()
             case .sideBar: VSideBarDemoView()
             case .dialog: VDialogDemoView()
             case .menu: VMenuDemoView()

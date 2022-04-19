@@ -39,7 +39,7 @@ VComponents is a SwiftUI library that contains 30+ customizable UI components.
 
 **Lists.** VLazyScrollView, VList
 
-**Modals.** VModal, VHalfModal, VSideBar, VDialog, VMenu, VActionSheet
+**Modals.** VModal, VBottomSheet, VSideBar, VDialog, VMenu, VActionSheet
 
 **Messages.** VToast
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Action Sheet
-/// Modal component that presents half modal menu of actions.
+/// Modal component that presents bottom sheet menu of actions.
 ///
 /// Description can be passed as parameter.
 ///

@@ -44,8 +44,8 @@ struct DemoView<ComponentContent, SettingsContent>: View
     
     @State private var isPresented: Bool = false
     
-    private let halfModalModel: VHalfModalModel = {
-        var model: VHalfModalModel = .init()
+    private let bottomSheetModel: VBottomSheetModel = {
+        var model: VBottomSheetModel = .init()
         model.layout.contentMargins.trailing = 0
         model.misc.dismissType.insert(.backTap)
         return model
@@ -148,9 +148,9 @@ struct DemoView<ComponentContent, SettingsContent>: View
     {
         Group(content: {
             VPlainButton(action: { isPresented = true }, title: "Parameters")
-                .vHalfModal(isPresented: $isPresented, halfModal: {
-                    VHalfModal(
-                        model: halfModalModel,
+                .vBottomSheet(isPresented: $isPresented, bottomSheet: {
+                    VBottomSheet(
+                        model: bottomSheetModel,
                         headerTitle: "Parameters",
                         content: {
                             ScrollView(content: {

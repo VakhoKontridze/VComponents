@@ -17,8 +17,8 @@ public struct VSideBarModel {
     /// Reference to `VModalModel`.
     public static let modalReference: VModalModel = .init()
     
-    /// Reference to `VHalfModalModel`.
-    public static let halfModalReference: VHalfModalModel = .init()
+    /// Reference to `VBottomSheetModel`.
+    public static let bottomSheetReference: VBottomSheetModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -89,10 +89,10 @@ public struct VSideBarModel {
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Defaults to `linear` with duration `0.2`.
-        public var appear: BasicAnimation? = halfModalReference.animations.appear
+        public var appear: BasicAnimation? = bottomSheetReference.animations.appear
         
         /// Disappear animation. Defaults to `linear` with duration `0.2`.
-        public var disappear: BasicAnimation? = halfModalReference.animations.disappear
+        public var disappear: BasicAnimation? = bottomSheetReference.animations.disappear
         
         // MARK: Initializers
         /// Initializes sub-model with default values

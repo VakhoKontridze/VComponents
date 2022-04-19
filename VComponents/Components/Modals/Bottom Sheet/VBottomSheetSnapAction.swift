@@ -1,5 +1,5 @@
 //
-//  VHalfModalSnapAction.swift
+//  VBottomSheetSnapAction.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 4/19/22.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK: - V Half Modal Snap Action
-enum VHalfModalSnapAction {
+// MARK: - V Bottom Sheet Snap Action
+enum VBottomSheetSnapAction {
     // MARK: Cases
     case dismiss
     case snap(CGFloat)
@@ -45,7 +45,7 @@ enum VHalfModalSnapAction {
             let idealOffset: CGFloat = max - ideal
             let maxOffset: CGFloat = max - max
 
-            switch VHalfModalRegion(
+            switch VBottomSheetRegion(
                 offset: offset,
                 minOffset: minOffset,
                 idealOffset: idealOffset,
@@ -75,8 +75,8 @@ enum VHalfModalSnapAction {
     }
 }
 
-// MARK: - V Half Modal Region
-private enum VHalfModalRegion {
+// MARK: - V Bottom Sheet Region
+private enum VBottomSheetRegion {
     // MARK: Cases
     case idealToMax
     case minToIdeal

@@ -1,5 +1,5 @@
 //
-//  VHalfModal.swift
+//  VBottomSheet.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/21/21.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK: - V Half Modal
+// MARK: - V Bottom Sheet
 /// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true.
 ///
 /// Model and header can be passed as parameters.
 ///
 /// If invalid height parameter are passed during init, layout would invalidate itself, and refuse to draw.
 ///
-/// `vHalfModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
+/// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
 ///
 /// Usage example:
 ///
@@ -25,29 +25,29 @@ import SwiftUI
 ///             action: { isPresented = true },
 ///             title: "Present"
 ///         )
-///             .vHalfModal(isPresented: $isPresented, halfModal: {
-///                 VHalfModal(
+///             .vBottomSheet(isPresented: $isPresented, bottomSheet: {
+///                 VBottomSheet(
 ///                     headerTitle: "Lorem ipsum dolor sit amet",
 ///                     content: { ColorBook.accent }
 ///                 )
 ///             })
 ///     }
 ///
-public struct VHalfModal<HeaderLabel, Content>
+public struct VBottomSheet<HeaderLabel, Content>
     where
         HeaderLabel: View,
         Content: View
 {
     // MARK: Properties
-    fileprivate let model: VHalfModalModel
+    fileprivate let model: VBottomSheetModel
     
-    fileprivate let headerLabel: VHalfModalHeaderLabel<HeaderLabel>
+    fileprivate let headerLabel: VBottomSheetHeaderLabel<HeaderLabel>
     fileprivate let content: () -> Content
     
     // MARK: Initializers
     /// Initializes component content.
     public init(
-        model: VHalfModalModel = .init(),
+        model: VBottomSheetModel = .init(),
         @ViewBuilder content: @escaping () -> Content
     )
         where HeaderLabel == Never
@@ -59,7 +59,7 @@ public struct VHalfModal<HeaderLabel, Content>
     
     /// Initializes component with header title and content.
     public init(
-        model: VHalfModalModel = .init(),
+        model: VBottomSheetModel = .init(),
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
@@ -72,7 +72,7 @@ public struct VHalfModal<HeaderLabel, Content>
     
     /// Initializes component with header and content.
     public init(
-        model: VHalfModalModel = .init(),
+        model: VBottomSheetModel = .init(),
         @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -84,37 +84,37 @@ public struct VHalfModal<HeaderLabel, Content>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VHalfModal` when boolean is true.
-    public func vHalfModal<HeaderLabel, Content>(
+    /// Presents `VBottomSheet` when boolean is true.
+    public func vBottomSheet<HeaderLabel, Content>(
         isPresented: Binding<Bool>,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        halfModal: @escaping () -> VHalfModal<HeaderLabel, Content>
+        bottomSheet: @escaping () -> VBottomSheet<HeaderLabel, Content>
     ) -> some View
         where
             HeaderLabel: View,
             Content: View
     {
-        let halfModal = halfModal()
+        let bottomSheet = bottomSheet()
         
         return self
             .background(PresentationHost(
                 isPresented: isPresented,
                 content: {
-                    _VHalfModal(
-                        model: halfModal.model,
+                    _VBottomSheet(
+                        model: bottomSheet.model,
                         onDismiss: dismissHandler,
-                        headerLabel: halfModal.headerLabel,
-                        content: halfModal.content
+                        headerLabel: bottomSheet.headerLabel,
+                        content: bottomSheet.content
                     )
                 }
             ))
     }
     
-    /// Presents `VHalfModal` using the item as data source for content.
-    @ViewBuilder public func vHalfModal<Item, HeaderLabel, Content>(
+    /// Presents `VBottomSheet` using the item as data source for content.
+    @ViewBuilder public func vBottomSheet<Item, HeaderLabel, Content>(
         item: Binding<Item?>,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        halfModal: @escaping (Item) -> VHalfModal<HeaderLabel, Content>
+        bottomSheet: @escaping (Item) -> VBottomSheet<HeaderLabel, Content>
     ) -> some View
         where
             Item: Identifiable,
@@ -127,13 +127,13 @@ extension View {
             
         case let _item?:
             self
-                .vHalfModal(
+                .vBottomSheet(
                     isPresented: .init(
                         get: { true },
                         set: { _ in item.wrappedValue = nil }
                     ),
                     onDismiss: dismissHandler,
-                    halfModal: { halfModal(_item) }
+                    bottomSheet: { bottomSheet(_item) }
                 )
         }
     }

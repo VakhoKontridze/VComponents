@@ -1,5 +1,5 @@
 //
-//  VHalfModalDemoView.swift
+//  VBottomSheetDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 12/30/20.
@@ -8,21 +8,21 @@
 import SwiftUI
 import VComponents
 
-// MARK: - V HalfModal Demo View
-struct VHalfModalDemoView: View {
+// MARK: - V Bottom Sheet Demo View
+struct VBottomSheetDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Half Modal" }
+    static var navBarTitle: String { "Bottom Sheet" }
     
     @State private var isPresented: Bool = false
-    @State private var heightType: VModalHeightType = VHalfModalModel.Layout.Height.default.helperType
-    @State private var dismissType: VHalfModalModel.Misc.DismissType = .default
-    @State private var hasGrabber: Bool = VHalfModalModel.Layout().grabberSize.height > 0
+    @State private var heightType: VModalHeightType = VBottomSheetModel.Layout.Height.default.helperType
+    @State private var dismissType: VBottomSheetModel.Misc.DismissType = .default
+    @State private var hasGrabber: Bool = VBottomSheetModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
-    @State private var hasDivider: Bool = VHalfModalModel.Layout().headerDividerHeight > 0
-    @State private var isContentDraggable: Bool = VHalfModalModel.Misc().isContentDraggable
+    @State private var hasDivider: Bool = VBottomSheetModel.Layout().headerDividerHeight > 0
+    @State private var isContentDraggable: Bool = VBottomSheetModel.Misc().isContentDraggable
     
-    private var model: VHalfModalModel {
-        var model: VHalfModalModel = .init()
+    private var model: VBottomSheetModel {
+        var model: VBottomSheetModel = .init()
         
         if !hasDivider && (hasGrabber || hasTitle || dismissType.hasButton) {
             model.layout.headerMargins.bottom /= 2
@@ -52,19 +52,19 @@ struct VHalfModalDemoView: View {
             .if(hasTitle,
                 ifTransform: {
                     $0
-                        .vHalfModal(isPresented: $isPresented, halfModal: {
-                            VHalfModal(
+                        .vBottomSheet(isPresented: $isPresented, bottomSheet: {
+                            VBottomSheet(
                                 model: model,
                                 headerTitle: "Lorem ipsum dolor sit amet",
-                                content: { halfModalContent }
+                                content: { bottomSheetContent }
                             )
                         })
                 }, elseTransform: {
                     $0
-                        .vHalfModal(isPresented: $isPresented, halfModal: {
-                            VHalfModal(
+                        .vBottomSheet(isPresented: $isPresented, bottomSheet: {
+                            VBottomSheet(
                                 model: model,
-                                content: { halfModalContent }
+                                content: { bottomSheetContent }
                             )
                         })
                 }
@@ -79,7 +79,7 @@ struct VHalfModalDemoView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
 
             HStack(content: {
-                ForEach(VHalfModalModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
+                ForEach(VBottomSheetModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
                     dismissTypeView(position)
                 })
             })
@@ -95,7 +95,7 @@ struct VHalfModalDemoView: View {
         ToggleSettingView(isOn: $isContentDraggable, title: "Draggable Content")
     }
     
-    private func dismissTypeView(_ position: VHalfModalModel.Misc.DismissType) -> some View {
+    private func dismissTypeView(_ position: VBottomSheetModel.Misc.DismissType) -> some View {
         VCheckBox(
             isOn: .init(
                 get: { dismissType.contains(position) },
@@ -110,7 +110,7 @@ struct VHalfModalDemoView: View {
         )
     }
 
-    private var halfModalContent: some View {
+    private var bottomSheetContent: some View {
         ZStack(content: {
             ColorBook.accent
 
@@ -156,7 +156,7 @@ private enum VModalHeightType: Int, PickableTitledEnumeration {
         }
     }
 
-    var height: VHalfModalModel.Layout.Height {
+    var height: VBottomSheetModel.Layout.Height {
         switch self {
         case .fixed: return .fixed(500)
         case .dynamic: return .default
@@ -164,7 +164,7 @@ private enum VModalHeightType: Int, PickableTitledEnumeration {
     }
 }
 
-extension VHalfModalModel.Layout.Height {
+extension VBottomSheetModel.Layout.Height {
     fileprivate var helperType: VModalHeightType {
         if isResizable {
             return .dynamic
@@ -174,7 +174,7 @@ extension VHalfModalModel.Layout.Height {
     }
 }
 
-extension VHalfModalModel.Misc.DismissType {
+extension VBottomSheetModel.Misc.DismissType {
     fileprivate var title: String {
         switch self {
         case .leadingButton: return "Leading"
@@ -187,8 +187,8 @@ extension VHalfModalModel.Misc.DismissType {
 }
 
 // MARK: - Preview
-struct VHalfModalDemoView_Previews: PreviewProvider {
+struct VBottomSheetDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VHalfModalDemoView()
+        VBottomSheetDemoView()
     }
 }

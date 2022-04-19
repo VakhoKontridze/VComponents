@@ -1,5 +1,5 @@
 //
-//  VHalfModalModel.swift
+//  VBottomSheetModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/21/21.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - V Half Modal Model
+// MARK: - V Bottom Sheet Model
 /// Model that describes UI.
-public struct VHalfModalModel {
+public struct VBottomSheetModel {
     // MARK: Properties
     /// Reference to `VSheetModel`.
     public static let sheetReference: VSheetModel = .init()
@@ -169,7 +169,7 @@ public struct VHalfModalModel {
         public var background: Color = modalReference.colors.background
         
         /// Grabber color.
-        public var grabber: Color = .init(componentAsset: "HalfModal.Grabber")
+        public var grabber: Color = .init(componentAsset: "BottomSheet.Grabber")
         
         /// Title header color.
         ///
