@@ -262,21 +262,23 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         let maxAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.min
         let minAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.max
 
-        offset = {
-            switch newOffset {
-            case ...minAllowedOffset:
-                return minAllowedOffset
-            
-            case maxAllowedOffset...:
-                switch model.misc.dismissType.contains(.pullDown) {
-                case false: return maxAllowedOffset
-                case true: return newOffset
+        withAnimation(.linear(duration: 0.1), { // Get's rid of stuttering
+            offset = {
+                switch newOffset {
+                case ...minAllowedOffset:
+                    return minAllowedOffset
+                
+                case maxAllowedOffset...:
+                    switch model.misc.dismissType.contains(.pullDown) {
+                    case false: return maxAllowedOffset
+                    case true: return newOffset
+                    }
+                
+                default:
+                    return newOffset
                 }
-            
-            default:
-                return newOffset
-            }
-        }()
+            }()
+        })
     }
 
     private func dragEnded(drag: DragGesture.Value) {
