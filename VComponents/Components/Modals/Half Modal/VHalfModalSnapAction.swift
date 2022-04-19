@@ -14,7 +14,7 @@ enum VHalfModalSnapAction {
     case snap(CGFloat)
     
     // MARK: Initializers
-    init?(
+    init(
         min: CGFloat,
         ideal: CGFloat,
         max: CGFloat,
@@ -51,17 +51,17 @@ enum VHalfModalSnapAction {
                 idealOffset: idealOffset,
                 maxOffset: maxOffset
             ) {
-            case .idealMax:
+            case .idealToMax:
                 let idealDiff: CGFloat = abs(idealOffset - offset)
                 let maxDiff: CGFloat = abs(maxOffset - offset)
                 let newOffset: CGFloat = idealDiff < maxDiff ? idealOffset : maxOffset
                 
                 self = .snap(newOffset)
 
-            case .ideal:
-                return nil
-
-            case .minIdeal:
+            case .pullDownToMin, .minToIdeal:
+                // If `pullDown` is disabled, code won't get here.
+                // So, modal should snap to min height.
+                
                 let minDiff: CGFloat = abs(minOffset - offset)
                 let idealDiff: CGFloat = abs(idealOffset - offset)
                 let newOffset: CGFloat = minDiff < idealDiff ? minOffset : idealOffset
@@ -78,9 +78,9 @@ enum VHalfModalSnapAction {
 // MARK: - V Half Modal Region
 private enum VHalfModalRegion {
     // MARK: Cases
-    case idealMax
-    case ideal
-    case minIdeal
+    case idealToMax
+    case minToIdeal
+    case pullDownToMin
 
     // MARK: Initializrs
     init(
@@ -89,10 +89,14 @@ private enum VHalfModalRegion {
         idealOffset: CGFloat,
         maxOffset: CGFloat
     ) {
-        switch offset {
-        case idealOffset: self = .ideal
-        case (maxOffset..<idealOffset): self = .idealMax
-        default: self = .minIdeal   // Min isn't used to allow registering area between dismiss point and min
+        if offset >= maxOffset && offset < idealOffset {
+            self = .idealToMax
+        } else if offset >= idealOffset && offset < minOffset {
+            self = .minToIdeal
+        } else if offset >= minOffset {
+            self = .pullDownToMin
+        } else {
+            fatalError()
         }
     }
 }

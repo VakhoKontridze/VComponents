@@ -296,7 +296,6 @@ struct _VHalfModal<HeaderLabel, Content>: View
             offsetBeforeDrag: offsetBeforeDrag,
             translation: drag.translation.height
         ) {
-        case nil: break
         case .dismiss: animateOutFromDrag()
         case .snap(let newOffset): withAnimation(model.animations.heightSnap, { self.offset = newOffset })
         }
