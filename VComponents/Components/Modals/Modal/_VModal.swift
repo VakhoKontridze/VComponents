@@ -71,7 +71,7 @@ struct _VModal<HeaderLabel, Content>: View
         ZStack(content: {
             VSheet(model: model.sheetSubModel)
 
-            VStack(spacing: model.layout.headerHeaderDividerContentSpacing, content: {
+            VStack(spacing: 0, content: {
                 header
                 divider
                 contentView

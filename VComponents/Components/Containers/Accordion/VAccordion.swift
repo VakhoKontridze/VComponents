@@ -118,7 +118,7 @@ public struct VAccordion<HeaderLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        VStack(spacing: model.layout.headerHeaderDividerContentSpacing, content: {
+        VStack(spacing: 0, content: {
             header
             divider
             contentView

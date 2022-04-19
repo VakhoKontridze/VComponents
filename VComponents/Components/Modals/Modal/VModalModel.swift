@@ -65,9 +65,6 @@ public struct VModalModel {
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
-        /// Spacing between header, header divider, and content. Defaults to `0`.
-        public var headerHeaderDividerContentSpacing: CGFloat = 0
-        
         /// Rounded corners. Defaults to to `allCorners`.
         public var roundedCorners: UIRectCorner = .allCorners
         

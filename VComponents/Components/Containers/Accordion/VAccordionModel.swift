@@ -43,9 +43,6 @@ public struct VAccordionModel {
         /// Accordion corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
-        /// Spacing between header, header divider, and content. Defaults to `0`.
-        public var headerHeaderDividerContentSpacing: CGFloat = 0
-        
         /// Chevron button dimension. Default to `32`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
         
