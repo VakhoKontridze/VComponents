@@ -158,7 +158,7 @@ private enum VModalHeightType: Int, PickableTitledEnumeration {
 
     var height: VBottomSheetModel.Layout.Height {
         switch self {
-        case .fixed: return .fixed(500)
+        case .fixed: return .fixed(VBottomSheetModel.Layout.Height.default.ideal)
         case .dynamic: return .default
         }
     }

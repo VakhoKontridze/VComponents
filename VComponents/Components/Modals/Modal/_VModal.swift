@@ -14,9 +14,6 @@ struct _VModal<HeaderLabel, Content>: View
         Content: View
 {
     // MARK: Properties
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass: UserInterfaceSizeClass? // Detects orientation changes
-    @Environment(\.verticalSizeClass) private var verticalSizeClass: UserInterfaceSizeClass? // Detects orientation changes
-    
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     
     private let model: VModalModel

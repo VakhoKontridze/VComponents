@@ -14,9 +14,6 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         Content: View
 {
     // MARK: Properties
-    @Environment(\.horizontalSizeClass) private var horizontalSizeClass: UserInterfaceSizeClass? // Detects orientation changes
-    @Environment(\.verticalSizeClass) private var verticalSizeClass: UserInterfaceSizeClass? // Detects orientation changes
-    
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     
     private let model: VBottomSheetModel
@@ -307,6 +304,11 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         case false: return .bottom
         case true: return []
         }
+    }
+    
+    private func deviceOrientationChanged() {
+        withAnimation(model.animations.heightSnap, { offset = model.layout.height.max - model.layout.height.ideal })
+        offsetBeforeDrag = nil
     }
 }
 

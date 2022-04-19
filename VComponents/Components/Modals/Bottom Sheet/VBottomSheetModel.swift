@@ -151,7 +151,7 @@ public struct VBottomSheetModel {
             }
             
             /// Default value. Set to `0.6` ratio of screen height as min, `0.6`as ideal, and `0.9` as max.
-            public static var `default`: Self { // FIXME: Orientation
+            public static var `default`: Self {
                 .init(
                     min: UIScreen.main.bounds.height * 0.6,
                     ideal: UIScreen.main.bounds.height * 0.6,

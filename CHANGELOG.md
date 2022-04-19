@@ -63,20 +63,11 @@ VNavigationView
 
 - NavigationView is removed
 
-VModal
-
-- Modal how supports landscape sizes
-
 VHalfModal
 
 - `VHalfModal` is renamed to `VBottomSheet`
 - Modal height has changed to `0.6`, `0.6`, and `0.9` ratios of screen height as min, ideal, and max heights 
-- Modal how supports landscape sizes
 - Issue with modal snapping to max height if dragged to min when `pullDown` dismiss type is not enabled is fixed
-
-VDialog
-
-- Modal how supports landscape sizes
 
 VMenu
 

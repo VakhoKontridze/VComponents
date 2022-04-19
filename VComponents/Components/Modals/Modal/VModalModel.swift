@@ -43,29 +43,10 @@ public struct VModalModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        var size: CGSize {
-            switch UIDevice.current.orientation.isLandscape {
-            case false: return sizePortrait
-            case true: return sizeLandscape
-            }
-        }
-        
         /// Modal size. Defaults to `0.9` ratio of screen with and `0.6` ratio of screen height.
-        ///
-        /// If model is created the moment app launches, screen orientation may not be determined yet.
-        /// In case of `UIDeviceOrientation.unknown`, ambiguity may arise.
-        public var sizePortrait: CGSize = .init(
+        public var size: CGSize = .init(
             width: UIScreen.main.bounds.width * 0.9,
             height: UIScreen.main.bounds.height * 0.6
-        )
-        
-        /// Modal size in landscape. Defaults to `0.9` ratio of screen with as height and `0.6` ratio of screen height as width.
-        ///
-        /// If model is created the moment app launches, screen orientation may not be determined yet.
-        /// In case of `UIDeviceOrientation.unknown`, ambiguity may arise.
-        public var sizeLandscape: CGSize = .init(
-            width: UIScreen.main.bounds.height * 0.6,
-            height: UIScreen.main.bounds.width * 0.9
         )
         
         /// Edges ignored by keyboard. Defaults to `[]`.
