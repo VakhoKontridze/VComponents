@@ -139,19 +139,12 @@ struct HomeView: View {
     }
 
     // MARK: Body
-    @State var isPresented: Bool = false
-
     var body: some View {
-        VPlainButton(
-            action: { isPresented = true },
-            title: "Present"
-        )
-            .vBottomSheet(isPresented: $isPresented, bottomSheet: {
-                VBottomSheet(
-                    headerTitle: "Lorem ipsum dolor sit amet",
-                    content: { ColorBook.accent }
-                )
-            })
+        NavigationView(content: {
+            DemoListView(type: .accordion, sections: sections)
+                .standardNavigationTitle(Self.navBarTitle)
+        })
+            .navigationViewStyle(.stack)
     }
 }
 
