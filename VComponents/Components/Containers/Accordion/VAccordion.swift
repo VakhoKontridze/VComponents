@@ -25,10 +25,9 @@ import SwiftUI
 ///             content: {
 ///                 VList(
 ///                     layout: .fixed,
-///                     data: 1..<10,
+///                     data: 1..<20,
 ///                     rowContent: { num in
 ///                         Text(String(num))
-///                             .padding(.vertical, 2)
 ///                             .frame(maxWidth: .infinity, alignment: .leading)
 ///                     }
 ///                 )
@@ -55,7 +54,7 @@ public struct VAccordion<HeaderLabel, Content>: View
     
     private var hasHeaderDivider: Bool { model.layout.headerDividerHeight > 0 }
     
-    @State private var headerHeight: CGFloat = 0
+    @State private var grabberHeaderDividerHeight: CGFloat = 0
     @State private var accordionHeight: CGFloat = 0
 
     // MARK: Initializers - State
@@ -124,7 +123,7 @@ public struct VAccordion<HeaderLabel, Content>: View
             contentView
         })
             .readSize(onChange: { accordionHeight = $0.height })
-            .frame(height: internalState.isExpanded ? accordionHeight : headerHeight, alignment: .top)
+            .frame(height: internalState.isExpanded ? accordionHeight : grabberHeaderDividerHeight, alignment: .top)
             .clipped()
             .transition(.move(edge: .bottom))
             .background(VSheet(model: model.sheetSubModel))
@@ -170,7 +169,7 @@ public struct VAccordion<HeaderLabel, Content>: View
             .padding(.top, model.layout.headerMargins.top)
             .padding(.bottom, model.layout.headerMargins.bottom)
             .contentShape(Rectangle())
-            .readSize(onChange: { headerHeight = $0.height })
+            .readSize(onChange: { grabberHeaderDividerHeight = $0.height })
     }
     
     @ViewBuilder private var divider: some View {

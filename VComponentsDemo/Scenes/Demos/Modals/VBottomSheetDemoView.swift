@@ -20,6 +20,7 @@ struct VBottomSheetDemoView: View {
     @State private var hasTitle: Bool = true
     @State private var hasDivider: Bool = VBottomSheetModel.Layout().headerDividerHeight > 0
     @State private var isContentDraggable: Bool = VBottomSheetModel.Misc().isContentDraggable
+    @State private var autoresizesContent: Bool = VBottomSheetModel.Layout().autoresizesContent
     
     private var model: VBottomSheetModel {
         var model: VBottomSheetModel = .init()
@@ -32,6 +33,7 @@ struct VBottomSheetDemoView: View {
         model.layout.grabberSize.height = hasGrabber ? (model.layout.grabberSize.height == 0 ? 4 : model.layout.grabberSize.height) : 0
         model.layout.height = heightType.height
         model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
+        model.layout.autoresizesContent = autoresizesContent
         
         model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
 
@@ -43,7 +45,7 @@ struct VBottomSheetDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(component: component, settings: settings)
+        DemoView(component: component, settingsSections: settingsSections)
             .standardNavigationTitle(Self.navBarTitle)
     }
     
@@ -71,28 +73,38 @@ struct VBottomSheetDemoView: View {
             )
     }
     
-    @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $heightType, headerTitle: "Height")
-
-        VStack(spacing: 3, content: {
-            VText(color: ColorBook.primary, font: .callout, title: "Dismiss Method:")
-                .frame(maxWidth: .infinity, alignment: .leading)
-
-            HStack(content: {
-                ForEach(VBottomSheetModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
-                    dismissTypeView(position)
-                })
-            })
-                .frame(maxWidth: .infinity, alignment: .leading)
+    @DemoViewSettingsSectionBuilder private func settingsSections() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $heightType, headerTitle: "Height")
         })
         
-        ToggleSettingView(isOn: $hasGrabber, title: "Grabber")
-        
-        ToggleSettingView(isOn: $hasTitle, title: "Title")
+        DemoViewSettingsSection(content: {
+            VStack(spacing: 3, content: {
+                VText(color: ColorBook.primary, font: .callout, title: "Dismiss Method:")
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
-        ToggleSettingView(isOn: $hasDivider, title: "Divider")
+                HStack(content: {
+                    ForEach(VBottomSheetModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
+                        dismissTypeView(position)
+                    })
+                })
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            })
+        })
         
-        ToggleSettingView(isOn: $isContentDraggable, title: "Draggable Content")
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $hasGrabber, title: "Grabber")
+            
+            ToggleSettingView(isOn: $hasTitle, title: "Title")
+
+            ToggleSettingView(isOn: $hasDivider, title: "Divider")
+        })
+        
+        DemoViewSettingsSection(content: {
+            ToggleSettingView(isOn: $isContentDraggable, title: "Draggable Content")
+            
+            ToggleSettingView(isOn: $autoresizesContent, title: "Autoresizes Content")
+        })
     }
     
     private func dismissTypeView(_ position: VBottomSheetModel.Misc.DismissType) -> some View {
@@ -112,7 +124,24 @@ struct VBottomSheetDemoView: View {
 
     private var bottomSheetContent: some View {
         ZStack(content: {
-            ColorBook.accent
+            switch autoresizesContent {
+            case false:
+                ColorBook.accent
+                    .padding(.bottom, UIWindow.safeAreaInsetBottom)
+                
+            case true:
+                ScrollView(content: {
+                    VStack(content: {
+                        ForEach(1..<20, content: { num in
+                            Text(String(num))
+                                .padding(.vertical, 10)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        })
+                        
+                        Spacer().frame(height: UIWindow.safeAreaInsetBottom)
+                    })
+                })
+            }
 
             if dismissType.isEmpty {
                 VStack(content: {

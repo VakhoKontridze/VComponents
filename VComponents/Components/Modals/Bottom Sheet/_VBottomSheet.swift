@@ -32,8 +32,8 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     
     @State private var isInternallyPresented: Bool = false
     
+    @State private var grabberHeaderDividerHeight: CGFloat = 0
     @State private var offset: CGFloat
-    
     @State private var offsetBeforeDrag: CGFloat? // Used for adding to translation
     @State private var lastDragValue: DragGesture.Value? // Used for calculation velocity
 
@@ -59,6 +59,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             bottomSheet
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.container, edges: .all)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
             .onChange(
@@ -69,7 +70,6 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     
     private var blinding: some View {
         model.colors.blinding
-            .edgesIgnoringSafeArea(.all)
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })
@@ -79,10 +79,9 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         if model.layout.height.isLayoutValid {
             ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
-                    .edgesIgnoringSafeArea(.all)
                     .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                         $0
-                            .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom)
+                            .frame(height: model.layout.height.max)
                             .offset(y: isInternallyPresented ? offset : model.layout.height.max)
                             .gesture(
                                 DragGesture(minimumDistance: 0)
@@ -92,22 +91,25 @@ struct _VBottomSheet<HeaderLabel, Content>: View
                     })
 
                 VStack(spacing: 0, content: {
-                    grabber
-                    header
-                    divider
+                    VStack(spacing: 0, content: {
+                        grabber
+                        header
+                        divider
+                    })
+                        .readSize(onChange: { grabberHeaderDividerHeight = $0.height })
+                    
                     contentView
                 })
-                    .edgesIgnoringSafeArea(edgesToIgnore)
                     .frame(maxHeight: .infinity, alignment: .top)
                     .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                         $0
-                            .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom)
+                            .frame(height: model.layout.height.max)
                             .offset(y: isInternallyPresented ? offset : model.layout.height.max)
                     })
             })
                 .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
                     $0
-                        .frame(height: model.layout.height.max - UIWindow.safeAreaInsetBottom)
+                        .frame(height: model.layout.height.max)
                         .offset(y: isInternallyPresented ? offset : model.layout.height.max)
                         .gesture(
                             DragGesture(minimumDistance: 0)
@@ -187,11 +189,10 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     }
 
     private var contentView: some View {
-        ZStack(content: {
+        ZStack(alignment: .top, content: {
             if !model.misc.isContentDraggable {
                 Color.clear
                     .contentShape(Rectangle())
-                    .edgesIgnoringSafeArea(.all)
             }
             
             content()
@@ -199,8 +200,20 @@ struct _VBottomSheet<HeaderLabel, Content>: View
                 .padding(.trailing, model.layout.contentMargins.trailing)
                 .padding(.top, model.layout.contentMargins.top)
                 .padding(.bottom, model.layout.contentMargins.bottom)
-                .frame(maxHeight: .infinity)
+                .padding(.bottom, 0.01) // Fixes bug with scrollable contents
         })
+            .if(model.layout.hasSafeAreaMarginBottom, transform: {
+                $0
+                    .safeAreaInset(edge: .bottom, content: {
+                        Spacer()
+                            .frame(height: UIWindow.safeAreaInsetBottom)
+                    })
+            })
+            .if(
+                model.layout.autoresizesContent,
+                ifTransform: { $0.frame(height: model.layout.height.max - offset - grabberHeaderDividerHeight) },
+                elseTransform: { $0.frame(maxHeight: .infinity) }
+            )
     }
 
     private var closeButton: some View {
@@ -329,19 +342,6 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         case .dismiss: animateOutFromDrag()
         case .snap(let newOffset): withAnimation(model.animations.heightSnap, { offset = newOffset })
         }
-    }
-
-    // MARK: Helpers
-    private var edgesToIgnore: Edge.Set {
-        switch model.layout.hasSafeAreaMarginBottom {
-        case false: return .bottom
-        case true: return []
-        }
-    }
-    
-    private func deviceOrientationChanged() {
-        withAnimation(model.animations.heightSnap, { offset = model.layout.height.max - model.layout.height.ideal })
-        offsetBeforeDrag = nil
     }
 }
 

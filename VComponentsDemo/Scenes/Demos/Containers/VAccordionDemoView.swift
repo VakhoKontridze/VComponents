@@ -53,7 +53,6 @@ struct VAccordionDemoView: View {
                         data: 1..<10,
                         rowContent: { num in
                             Text(String(num))
-                                .padding(.vertical, 2)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     )

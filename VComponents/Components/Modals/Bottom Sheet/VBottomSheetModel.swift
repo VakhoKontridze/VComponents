@@ -88,13 +88,18 @@ public struct VBottomSheetModel {
         /// Content margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
         public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
-        /// Indicates if modal has margins for safe area on bottom edge. Defaults to `true`.
-        public var hasSafeAreaMarginBottom: Bool = true
+        /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.
+        ///
+        /// Can be used for scrollable content.
+        public var autoresizesContent: Bool = false
         
-        /// Velocity at which bottom sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `1_000` points/s.
+        /// Indicates if sheet has margins for safe area on bottom edge. Defaults to `false`.
+        public var hasSafeAreaMarginBottom: Bool = false
+        
+        /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `1_000` points/s.
         public var velocityToSnapToNextHeight: CGFloat = 1_000
         
-        /// Distance to drag modal downwards to initiate dismiss. Default to `0.1` ratio of min height.
+        /// Distance to drag sheet downwards to initiate dismiss. Default to `0.1` ratio of min height.
         public var pullDownDismissDistance: CGFloat = Height.default.min * 0.1
         
         // MARK: Initializers
@@ -251,7 +256,7 @@ public struct VBottomSheetModel {
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: DismissType = .default
         
-        /// Indicates if modal can be resized by dragging outside the header. Defaults to `false`.
+        /// Indicates if sheet can be resized by dragging outside the header. Defaults to `false`.
         ///
         /// Setting to `true` may cause issues with scrollable views.
         public var isContentDraggable: Bool = false
