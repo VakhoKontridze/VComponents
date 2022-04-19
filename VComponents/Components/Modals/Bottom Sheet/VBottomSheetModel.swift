@@ -133,6 +133,11 @@ public struct VBottomSheetModel {
                 ideal <= max
             }
             
+            // Offsets start from 0 at the top
+            var minOffset: CGFloat { max - min }
+            var idealOffset: CGFloat { max - ideal }
+            var maxOffset: CGFloat { max - max }
+            
             // MARK: Initializers
             /// Initializes `Height`.
             public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {

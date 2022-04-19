@@ -283,10 +283,8 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         defer { offsetBeforeDrag = nil }
         guard let offsetBeforeDrag = offsetBeforeDrag else { return }
         
-        switch VBottomSheetSnapAction(
-            min: model.layout.height.min,
-            ideal: model.layout.height.ideal,
-            max: model.layout.height.max,
+        switch VBottomSheetSnapAction.dragEndedSnapAction(
+            height: model.layout.height,
             canPullDownToDismiss: model.misc.dismissType.contains(.pullDown),
             pullDownDismissDistance: model.layout.pullDownDismissDistance,
             offset: offset,
