@@ -29,7 +29,7 @@ struct _VModal<HeaderLabel, Content>: View
     private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
     private var hasHeaderDivider: Bool { hasHeader && model.layout.headerDividerHeight > 0 }
     
-    @State private var isAnimatingIn: Bool = false // Used for scale and blur effects
+    @State private var isInternallyPresented: Bool = false
     
     // MARK: Initializers
     init(
@@ -79,14 +79,14 @@ struct _VModal<HeaderLabel, Content>: View
                 .frame(maxHeight: .infinity, alignment: .top)
         })
             .frame(size: model.layout.size)
-            .scaleEffect(isAnimatingIn ? 1 : model.animations.scaleEffect)
-            .opacity(isAnimatingIn ? 1 : model.animations.opacity)
-            .blur(radius: isAnimatingIn ? 0 : model.animations.blur)
+            .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
+            .opacity(isInternallyPresented ? 1 : model.animations.opacity)
+            .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
     }
 
     @ViewBuilder private var header: some View {
         if hasHeader {
-            HStack(spacing: model.layout.headerSpacing, content: {
+            HStack(spacing: model.layout.labelCloseButtonSpacing, content: {
                 Group(content: {
                     if model.misc.dismissType.contains(.leadingButton) {
                         closeButton
@@ -147,7 +147,6 @@ struct _VModal<HeaderLabel, Content>: View
             .padding(.leading, model.layout.contentMargins.leading)
             .padding(.trailing, model.layout.contentMargins.trailing)
             .padding(.top, model.layout.contentMargins.top)
-//            .if(!hasHeader, transform: { $0.padding(.top, model.layout.headerMargins.bottom) })
             .padding(.bottom, model.layout.contentMargins.bottom)
             .frame(maxHeight: .infinity)
     }
@@ -166,11 +165,11 @@ struct _VModal<HeaderLabel, Content>: View
 
     // MARK: Animations
     private func animateIn() {
-        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isAnimatingIn = true })
+        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isInternallyPresented = true })
     }
 
     private func animateOut() {
-        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isAnimatingIn = false })
+        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isInternallyPresented = false })
         
         DispatchQueue.main.asyncAfter(
             deadline: .now() + (model.animations.disappear?.duration ?? 0),
@@ -182,7 +181,7 @@ struct _VModal<HeaderLabel, Content>: View
     }
 
     private func animateOutFromExternalDismiss() {
-        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isAnimatingIn = false })
+        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isInternallyPresented = false })
         
         DispatchQueue.main.asyncAfter(
             deadline: .now() + (model.animations.disappear?.duration ?? 0),

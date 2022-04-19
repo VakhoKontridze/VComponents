@@ -51,12 +51,18 @@ public struct VModalModel {
         }
         
         /// Modal size. Defaults to `0.9` ratio of screen with and `0.6` ratio of screen height.
+        ///
+        /// If model is created the moment app launches, screen orientation may not be determined yet.
+        /// In case of `UIDeviceOrientation.unknown`, ambiguity may arise.
         public var sizePortrait: CGSize = .init(
             width: UIScreen.main.bounds.width * 0.9,
             height: UIScreen.main.bounds.height * 0.6
         )
         
-        /// Modal size in landscape.
+        /// Modal size in landscape. Defaults to `0.9` ratio of screen with as height and `0.6` ratio of screen height as width.
+        ///
+        /// If model is created the moment app launches, screen orientation may not be determined yet.
+        /// In case of `UIDeviceOrientation.unknown`, ambiguity may arise.
         public var sizeLandscape: CGSize = .init(
             width: UIScreen.main.bounds.height * 0.6,
             height: UIScreen.main.bounds.width * 0.9
@@ -71,26 +77,26 @@ public struct VModalModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         
-        /// Header divider height. Defaults to `1`.
-        public var headerDividerHeight: CGFloat = 1
-
+        /// Header margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
+        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
+        
         /// Close button dimension. Default to `32`.
         public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
         
         /// Close button icon dimension. Default to `11`.
         public var closeButtonIconDimension: CGFloat = closeButtonReference.layout.iconDimension
         
-        /// Header margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
-        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
+        /// Spacing between label and close button. Defaults to `10`.
+        public var labelCloseButtonSpacing: CGFloat = 10
+        
+        /// Header divider height. Defaults to `1`.
+        public var headerDividerHeight: CGFloat = 1
     
         /// Header divider margins. Default to `.zero`.
         public var headerDividerMargins: Margins = .zero
         
         /// Content margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
         public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
-        
-        /// Header item spacing. Defaults to `10`.
-        public var headerSpacing: CGFloat = 10
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

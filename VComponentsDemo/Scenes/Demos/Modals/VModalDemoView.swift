@@ -14,9 +14,9 @@ struct VModalDemoView: View {
     static var navBarTitle: String { "Modal" }
     
     @State private var isPresented: Bool = false
+    @State private var dismissType: VModalModel.Misc.DismissType = .default
     @State private var hasTitle: Bool = true
     @State private var hasDivider: Bool = VModalModel.Layout().headerDividerHeight > 0
-    @State private var dismissType: VModalModel.Misc.DismissType = .default
     
     private var model: VModalModel {
         var model: VModalModel = .init()

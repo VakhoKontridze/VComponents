@@ -46,8 +46,8 @@ public struct VHalfModalModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Height type. Defaults to `default`.
-        public var height: HeightType = .default
+        /// Height. Defaults to `default`.
+        public var height: Height = .default
         
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
@@ -61,8 +61,14 @@ public struct VHalfModalModel {
         /// Grabber corner radius. Defaults to `2`.
         public var grabberCornerRadius: CGFloat = 2
         
-        /// Header divider height. Defaults to `1`.
-        public var headerDividerHeight: CGFloat = modalReference.layout.headerDividerHeight
+        /// Grabber margins. Default to `10` top  and `0` bottom.
+        public var grabberMargins: VerticalMargins = .init(
+            top: sheetReference.layout.contentMargin,
+            bottom: 0
+        )
+        
+        /// Header margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
+        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
         
         /// Close button dimension. Default to `32`.
         public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
@@ -70,38 +76,20 @@ public struct VHalfModalModel {
         /// Close button icon dimension. Default to `11`.
         public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
         
-        /// Grabber margins. Default to `10` top  and `5` bottom.
-        public var grabberMargins: VerticalMargins = .init( // FIXME: ???
-            top: sheetReference.layout.contentMargin,
-            bottom: sheetReference.layout.contentMargin/2
-        )
+        /// Spacing between label and close button. Defaults to `10`.
+        public var labelCloseButtonSpacing: CGFloat = modalReference.layout.labelCloseButtonSpacing
         
-        /// Header margins. Default to `10` leading, `10` trailing, `5` top, and `5` bottom.
-        public var headerMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
-            top: sheetReference.layout.contentMargin/2,
-            bottom: sheetReference.layout.contentMargin/2
-        )
+        /// Header divider height. Defaults to `1`.
+        public var headerDividerHeight: CGFloat = modalReference.layout.headerDividerHeight
     
-        /// Header divider margins. Default to `0` leading, `0` trailing, `5` top, and `5` bottom.
-        public var headerDividerMargins: Margins = modalReference.layout.headerDividerMargins
+        /// Header divider margins. Default to `.zero`.
+        public var headerDividerMargins: Margins = .zero
         
-        /// Content margins. Default to `10` leading, `10` trailing, `5` top, and `5` bottom.
-        public var contentMargins: Margins = modalReference.layout.contentMargins
+        /// Content margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
+        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
         /// Indicates if modal has margins for safe area on bottom edge. Defaults to `true`.
         public var hasSafeAreaMarginBottom: Bool = true
-        
-        var edgesToIgnore: Edge.Set { // FIXME: ???
-            switch hasSafeAreaMarginBottom {
-            case false: return .bottom
-            case true: return []
-            }
-        }
-
-        /// Header item spacing. Defaults to `10`.
-        public var headerSpacing: CGFloat = modalReference.layout.headerSpacing
         
         /// Distance to drag modal downwards to initiate dismiss. Default to `100`.
         public var translationBelowMinHeightToDismiss: CGFloat = 100
@@ -118,49 +106,53 @@ public struct VHalfModalModel {
         /// Sub-model containing `top` and `bottom` margins.
         public typealias VerticalMargins = EdgeInsets_TB
         
-        // MARK: Height Type
-        /// Enum that describes height type, such as `fixed` or `dynamic`.
-        public enum HeightType {
-            // MARK: Cases
-            /// Fixed height.
-            case fixed(_ value: CGFloat)
-            
-            /// Dynamic height that changes between `min`, `ideal`, and `max`.
-            case dynamic(min: CGFloat, ideal: CGFloat, max: CGFloat)
-            
+        // MARK: Height
+        /// Models that describes heights.
+        public struct Height {
             // MARK: Properties
-            var min: CGFloat {
-                switch self {
-                case .fixed(let value): return value
-                case .dynamic(let min, _, _): return min
-                }
+            /// Minimum height.
+            public var min: CGFloat
+            
+            /// Ideal height.
+            public var ideal: CGFloat
+            
+            /// Maximum height.
+            public var max: CGFloat
+            
+            /// Indicates if model allows resizing.
+            public var isResizable: Bool {
+                min != ideal ||
+                ideal != max
             }
             
-            var ideal: CGFloat {
-                switch self {
-                case .fixed(let value): return value
-                case .dynamic(_, let ideal, _): return ideal
-                }
+            /// Indicates if values support a valid layout.
+            ///
+            /// If not, layout would invalidate itself, and refuse to draw.
+            public var isLayoutValid: Bool {
+                min <= ideal &&
+                ideal <= max
             }
             
-            var max: CGFloat {
-                switch self {
-                case .fixed(let value): return value
-                case .dynamic(_, _, let max): return max
-                }
+            // MARK: Initializers
+            /// Initializes `Height`.
+            public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
+                self.min = min
+                self.ideal = ideal
+                self.max = max
             }
             
-            var isResizable: Bool {
-                switch self {
-                case .fixed: return false
-                case .dynamic(let min, let ideal, let max): return min != ideal || ideal != max
-                }
+            /// Initializes `Height` with fixed values.
+            public static func fixed(_ value: CGFloat) -> Self {
+                .init(
+                    min: value,
+                    ideal: value,
+                    max: value
+                )
             }
             
-            // MARK: Initailizers
             /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
-            public static var `default`: Self {
-                .dynamic(
+            public static var `default`: Self { // FIXME: Orientation
+                .init(
                     min: UIScreen.main.bounds.height * 0.3,
                     ideal: UIScreen.main.bounds.height * 0.75,
                     max: UIScreen.main.bounds.height * 0.9
@@ -182,7 +174,7 @@ public struct VHalfModalModel {
         /// Title header color.
         ///
         /// Only applicable when using init with title.
-        public var header: Color = modalReference.colors.headerTitle
+        public var headerTitle: Color = modalReference.colors.headerTitle
         
         /// Close button background colors.
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
@@ -233,11 +225,11 @@ public struct VHalfModalModel {
         /// Disappear animation. Defaults to `linear` with duration `0.2`.
         public var disappear: BasicAnimation? = .init(curve: .linear, duration: 0.2)
         
+        /// Pull-down disappear animation. Defaults to `linear` with duration `0.1`.
+        public var pullDownDisappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.1)
+        
         /// Height snapping animation between `min`, `ideal`, and `max` states. Defaults to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
-        
-        /// Dragging disappear animation. Defaults to `linear` with duration `0.1`.
-        static var dragDisappear: BasicAnimation { .init(curve: .easeIn, duration: 0.1) }
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -249,26 +241,50 @@ public struct VHalfModalModel {
     public struct Misc {
         // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
-        public var dismissType: Set<DismissType> = .default // FIXME: OptionSet
+        public var dismissType: DismissType = .default
+        
+        /// Indicates if modal can be resized by dragging outside the header. Defaults to `false`.
+        ///
+        /// Setting to `true` may cause issues with scrollable views.
+        public var isContentDraggable: Bool = false
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Dismiss Type
-        /// Enum that decribes dismiss type, such as `leadingButton`, `trailingButton`, `backtap`, or `pullDown`.
-        public enum DismissType: Int, CaseIterable {
+        /// Dismiss type, such as `leadingButton`, `trailingButton`, `backTap`, or `pullDown`.
+        public struct DismissType: OptionSet {
+            // MARK: Properties
+            public let rawValue: Int
+            
             /// Leading.
-            case leadingButton
+            public static var leadingButton: DismissType { .init(rawValue: 1 << 0) }
             
             /// Trailing.
-            case trailingButton
+            public static var trailingButton: DismissType { .init(rawValue: 1 << 1) }
             
-            /// Back tap.
-            case backTap
+            /// Backtap.
+            public static var backTap: DismissType { .init(rawValue: 1 << 2) }
             
-            /// Dragging modal down.
-            case pullDown
+            /// Pull down.
+            public static var pullDown: DismissType { .init(rawValue: 1 << 3) }
+            
+            /// All.
+            public static var all: DismissType { [.leadingButton, .trailingButton, .backTap, .pullDown] }
+            
+            /// Default value. Set to `trailingButton` and `.pullDown`.
+            public static var `default`: DismissType { [.trailingButton, .pullDown] }
+            
+            /// Indicates if dismiss type inclues a button.
+            public var hasButton: Bool {
+                [.leadingButton, .trailingButton].contains(where: { contains($0) })
+            }
+            
+            // MARK: Initializers
+            public init(rawValue: Int) {
+                self.rawValue = rawValue
+            }
         }
     }
     
@@ -297,15 +313,5 @@ public struct VHalfModalModel {
         model.colors.icon = colors.closeButtonIcon
         
         return model
-    }
-}
-
-// MARK: - Helpers
-extension Set where Element == VHalfModalModel.Misc.DismissType {
-    /// Default value. Set to `trailingButton` and `pullDown`.
-    public static var `default`: Self { [.trailingButton, .pullDown] }
-    
-    var hasButton: Bool {
-        contains(where: { [.leadingButton, .trailingButton].contains($0) })
     }
 }

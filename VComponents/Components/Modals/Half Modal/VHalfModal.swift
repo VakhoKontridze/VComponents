@@ -33,26 +33,27 @@ import SwiftUI
 ///             })
 ///     }
 ///
-public struct VHalfModal<Content, HeaderContent>
+public struct VHalfModal<HeaderLabel, Content>
     where
-        Content: View,
-        HeaderContent: View
+        HeaderLabel: View,
+        Content: View
 {
     // MARK: Properties
     fileprivate let model: VHalfModalModel
     
-    fileprivate let headerContent: (() -> HeaderContent)?
+    fileprivate let headerLabel: VHalfModalHeaderLabel<HeaderLabel>
     fileprivate let content: () -> Content
     
-    // MARK: Initializers - Header
-    /// Initializes component with header and content.
+    // MARK: Initializers
+    /// Initializes component content.
     public init(
         model: VHalfModalModel = .init(),
-        @ViewBuilder headerContent: @escaping () -> HeaderContent,
         @ViewBuilder content: @escaping () -> Content
-    ) {
+    )
+        where HeaderLabel == Never
+    {
         self.model = model
-        self.headerContent = headerContent
+        self.headerLabel = .empty
         self.content = content
     }
     
@@ -62,63 +63,78 @@ public struct VHalfModal<Content, HeaderContent>
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
-        where HeaderContent == VBaseHeaderFooter
-    {
-        self.init(
-            model: model,
-            headerContent: {
-                VBaseHeaderFooter(
-                    frameType: .flexible(.leading),
-                    font: model.fonts.header,
-                    color: model.colors.header,
-                    title: headerTitle
-                )
-            },
-            content: content
-        )
-    }
-    
-    // MARK: Initializers - _
-    /// Initializes component with content.
-    public init(
-        model: VHalfModalModel = .init(),
-        @ViewBuilder content: @escaping () -> Content
-    )
-        where HeaderContent == Never
+        where HeaderLabel == Never
     {
         self.model = model
-        self.headerContent = nil
+        self.headerLabel = .title(title: headerTitle)
+        self.content = content
+    }
+    
+    /// Initializes component with header and content.
+    public init(
+        model: VHalfModalModel = .init(),
+        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.model = model
+        self.headerLabel = .custom(label: headerLabel)
         self.content = content
     }
 }
 
 // MARK: - Extension
 extension View {
-    /// Presents `VHalfModal`.
-    public func vHalfModal<Content, HeaderContent>(
+    /// Presents `VHalfModal` when boolean is true.
+    public func vHalfModal<HeaderLabel, Content>(
         isPresented: Binding<Bool>,
-        halfModal: @escaping () -> VHalfModal<Content, HeaderContent>
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        halfModal: @escaping () -> VHalfModal<HeaderLabel, Content>
     ) -> some View
         where
-            Content: View,
-            HeaderContent: View
+            HeaderLabel: View,
+            Content: View
     {
         let halfModal = halfModal()
         
         return self
-            .overlay(Group(content: {
-                if isPresented.wrappedValue {
-                    WindowOverlayView(
-                        isPresented: isPresented,
-                        content:
-                            _VHalfModal(
-                                model: halfModal.model,
-                                isPresented: isPresented,
-                                headerContent: halfModal.headerContent,
-                                content: halfModal.content
-                            )
+            .background(PresentationHost(
+                isPresented: isPresented,
+                content: {
+                    _VHalfModal(
+                        model: halfModal.model,
+                        onDismiss: dismissHandler,
+                        headerLabel: halfModal.headerLabel,
+                        content: halfModal.content
                     )
                 }
-            }))
+            ))
+    }
+    
+    /// Presents `VHalfModal` using the item as data source for content.
+    @ViewBuilder public func vHalfModal<Item, HeaderLabel, Content>(
+        item: Binding<Item?>,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        halfModal: @escaping (Item) -> VHalfModal<HeaderLabel, Content>
+    ) -> some View
+        where
+            Item: Identifiable,
+            HeaderLabel: View,
+            Content: View
+    {
+        switch item.wrappedValue {
+        case nil:
+            self
+            
+        case let _item?:
+            self
+                .vHalfModal(
+                    isPresented: .init(
+                        get: { true },
+                        set: { _ in item.wrappedValue = nil }
+                    ),
+                    onDismiss: dismissHandler,
+                    halfModal: { halfModal(_item) }
+                )
+        }
     }
 }
