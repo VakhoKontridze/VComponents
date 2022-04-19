@@ -72,7 +72,7 @@ public struct VSlider: View {
             
                 .gesture(
                     DragGesture(minimumDistance: 0)
-                        .onChanged({ dragChanged(drag: $0, in: proxy) })
+                        .onChanged({ dragChanged(dragValue: $0, in: proxy) })
                         .onEnded(dragEnded)
                 )
                 .disabled(!internalState.isEnabled)
@@ -114,9 +114,9 @@ public struct VSlider: View {
     }
 
     // MARK: Drag
-    private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy) {
+    private func dragChanged(dragValue: DragGesture.Value, in proxy: GeometryProxy) {
         let rawValue: Double = {
-            let value: Double = .init(drag.location.x)
+            let value: Double = .init(dragValue.location.x)
             let range: Double = max - min
             let width: Double = .init(proxy.size.width)
 
@@ -130,7 +130,7 @@ public struct VSlider: View {
         action?(true)
     }
     
-    private func dragEnded(drag: DragGesture.Value) {
+    private func dragEnded(dragValue: DragGesture.Value) {
         action?(false)
     }
 

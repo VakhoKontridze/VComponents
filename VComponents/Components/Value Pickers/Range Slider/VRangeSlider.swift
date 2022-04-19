@@ -143,8 +143,8 @@ public struct VRangeSlider: View {
 
             .gesture(
                 DragGesture(minimumDistance: 0)
-                    .onChanged({ dragChanged(drag: $0, in: proxy, thumb: thumb) })
-                    .onEnded({ dragEnded(drag: $0, thumb: thumb) })
+                    .onChanged({ dragChanged(dragValue: $0, in: proxy, thumb: thumb) })
+                    .onEnded({ dragEnded(dragValue: $0, thumb: thumb) })
             )
     }
     
@@ -152,9 +152,9 @@ public struct VRangeSlider: View {
     fileprivate enum Thumb { case low, high }
 
     // MARK: Drag
-    private func dragChanged(drag: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
+    private func dragChanged(dragValue: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
         let rawValue: Double = {
-            let value: Double = .init(drag.location.x)
+            let value: Double = .init(dragValue.location.x)
             let range: Double = max - min
             let width: Double = .init(proxy.size.width)
 
@@ -190,7 +190,7 @@ public struct VRangeSlider: View {
         }
     }
 
-    private func dragEnded(drag: DragGesture.Value, thumb: Thumb) {
+    private func dragEnded(dragValue: DragGesture.Value, thumb: Thumb) {
         switch thumb {
         case .low: actionLow?(false)
         case .high: actionHigh?(false)

@@ -75,11 +75,11 @@ struct _VSideBar<Content>: View where Content: View {
     }
 
     // MARK: Gestures
-    private func dragChanged(drag: DragGesture.Value) {
-        let isDraggedLeft: Bool = drag.translation.width <= 0
+    private func dragChanged(dragValue: DragGesture.Value) {
+        let isDraggedLeft: Bool = dragValue.translation.width <= 0
         guard isDraggedLeft else { return }
         
-        guard abs(drag.translation.width) >= model.layout.translationToDismiss else { return }
+        guard abs(dragValue.translation.width) >= model.layout.translationToDismiss else { return }
         
         animateOut()
     }

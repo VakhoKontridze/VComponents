@@ -257,20 +257,20 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     }
 
     // MARK: Gestures
-    private func dragChanged(drag: DragGesture.Value) {
+    private func dragChanged(dragValue: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
-        if lastDragValue == nil { lastDragValue = drag }
+        if lastDragValue == nil { lastDragValue = dragValue }
         guard let offsetBeforeDrag = offsetBeforeDrag else { fatalError() }
         
-        defer { lastDragValue = drag }
+        defer { lastDragValue = dragValue }
         
         let velocityExceedsNextAreaSnapThreshold: Bool =
-            abs(drag.velocity(inRelationTo: lastDragValue).height) >=
+            abs(dragValue.velocity(inRelationTo: lastDragValue).height) >=
             abs(model.layout.velocityToSnapToNextHeight)
         
         switch velocityExceedsNextAreaSnapThreshold {
         case false:
-            let newOffset: CGFloat = offsetBeforeDrag + drag.translation.height
+            let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
             let maxAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.min
             let minAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.max
             
@@ -301,12 +301,12 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             animateOffsetOrPullDismissFromSnapAction(.dragChangedVelocitySnapAction(
                 height: model.layout.height,
                 offset: offset,
-                velocity: drag.velocity(inRelationTo: lastDragValue).height
+                velocity: dragValue.velocity(inRelationTo: lastDragValue).height
             ))
         }
     }
 
-    private func dragEnded(drag: DragGesture.Value) {
+    private func dragEnded(dragValue: DragGesture.Value) {
         defer {
             offsetBeforeDrag = nil
             lastDragValue = nil
@@ -320,7 +320,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             pullDownDismissDistance: model.layout.pullDownDismissDistance,
             offset: offset,
             offsetBeforeDrag: offsetBeforeDrag,
-            translation: drag.translation.height
+            translation: dragValue.translation.height
         ))
     }
     
