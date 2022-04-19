@@ -91,8 +91,8 @@ public struct VHalfModalModel {
         /// Indicates if modal has margins for safe area on bottom edge. Defaults to `true`.
         public var hasSafeAreaMarginBottom: Bool = true
         
-        /// Distance to drag modal downwards to initiate dismiss. Default to `100`.
-        public var pullDownDismissDistance: CGFloat = 100
+        /// Distance to drag modal downwards to initiate dismiss. Default to `0.1` ratio of min height.
+        public var pullDownDismissDistance: CGFloat = Height.default.min * 0.1
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
