@@ -14,6 +14,25 @@ enum VBottomSheetSnapAction {
     case snap(CGFloat)
     
     // MARK: Initializers
+    // Velocity is always non-zero, and excees the threshold.
+    static func dragChangedVelocitySnapAction(
+        height: VBottomSheetModel.Layout.Height,
+        offset: CGFloat,
+        velocity: CGFloat
+    ) -> VBottomSheetSnapAction {
+        let region: VBottomSheetRegion = .init(height: height, offset: offset)
+        let isGoingDown: Bool = velocity > 0
+        
+        switch (region, isGoingDown) {
+        case (.idealToMax, false): return .snap(height.max - height.max)
+        case (.idealToMax, true): return .snap(height.max - height.ideal)
+        case (.minToIdeal, false): return .snap(height.max - height.ideal)
+        case (.minToIdeal, true): return .snap(height.max - height.min)
+        case (.pullDownToMin, false): return .snap(height.max - height.min)
+        case (.pullDownToMin, true): return .dismiss
+        }
+    }
+    
     static func dragEndedSnapAction(
         height: VBottomSheetModel.Layout.Height,
         canPullDownToDismiss: Bool,

@@ -10,11 +10,11 @@ General
 
 VSquareButton
 
-- Button font is changed to system bold size 15
+- Button font is changed to `system bold` size `15`
 
 VPlainButton
 
-- Button font is changed to system medium size 15
+- Button font is changed to `system medium` size `15`
 
 VChevronButton
 
@@ -66,7 +66,8 @@ VNavigationView
 VHalfModal
 
 - `VHalfModal` is renamed to `VBottomSheet`
-- Modal height has changed to `0.6`, `0.6`, and `0.9` ratios of screen height as min, ideal, and max heights 
+- BottomSheet can now be snapped to height by dragging it at high velocities
+- BottomSheet height has changed to `0.6`, `0.6`, and `0.9` ratios of screen height as min, ideal, and max heights 
 - Issue with modal snapping to max height if dragged to min when `pullDown` dismiss type is not enabled is fixed
 
 VMenu

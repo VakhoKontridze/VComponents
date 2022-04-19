@@ -13,6 +13,7 @@
 		17254835280ED5FA000BE2F3 /* VBottomSheetSnapAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17254834280ED5FA000BE2F3 /* VBottomSheetSnapAction.swift */; };
 		172EDFCB27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EDFCA27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift */; };
 		172EDFCD27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift in Sources */ = {isa = PBXBuildFile; fileRef = 172EDFCC27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift */; };
+		17399D42280F1EDB00A38271 /* DragGesture.Value.Velocity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17399D41280F1EDB00A38271 /* DragGesture.Value.Velocity.swift */; };
 		173C1FD2272A7FD600DF634F /* View.CustomViewFrames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */; };
 		173C1FD4272A7FFF00DF634F /* View.CornerRadius.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */; };
 		173C1FDB272A810A00DF634F /* View.ReadSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 173C1FDA272A810A00DF634F /* View.ReadSize.swift */; };
@@ -268,6 +269,7 @@
 		17254834280ED5FA000BE2F3 /* VBottomSheetSnapAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBottomSheetSnapAction.swift; sourceTree = "<group>"; };
 		172EDFCA27FDEF3600EF4D68 /* VAccordionHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAccordionHeaderLabel.swift; sourceTree = "<group>"; };
 		172EDFCC27FDF3D500EF4D68 /* GenericStateAndModel_CED.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericStateAndModel_CED.swift; sourceTree = "<group>"; };
+		17399D41280F1EDB00A38271 /* DragGesture.Value.Velocity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DragGesture.Value.Velocity.swift; sourceTree = "<group>"; };
 		173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CustomViewFrames.swift; sourceTree = "<group>"; };
 		173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.CornerRadius.swift; sourceTree = "<group>"; };
 		173C1FDA272A810A00DF634F /* View.ReadSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.ReadSize.swift; sourceTree = "<group>"; };
@@ -522,6 +524,7 @@
 				173C1FD1272A7FD600DF634F /* View.CustomViewFrames.swift */,
 				173C1FD3272A7FFF00DF634F /* View.CornerRadius.swift */,
 				173C1FDA272A810A00DF634F /* View.ReadSize.swift */,
+				17399D41280F1EDB00A38271 /* DragGesture.Value.Velocity.swift */,
 			);
 			path = SwiftUI;
 			sourceTree = "<group>";
@@ -1609,6 +1612,7 @@
 				7A6218292594938C00515688 /* VLazyScrollViewType.swift in Sources */,
 				178BF2AA2808096A00862606 /* PresentationHostPresentationMode.swift in Sources */,
 				7A4D0C562594D30A00108575 /* VSquareButtonModel.swift in Sources */,
+				17399D42280F1EDB00A38271 /* DragGesture.Value.Velocity.swift in Sources */,
 				7AF3C8D525AF5C1A00D56042 /* _VModal.swift in Sources */,
 				7AA763DD25B7393E0088FC69 /* VTextFieldModel.swift in Sources */,
 				7A259B6E259784CF00A12F8C /* VDialogButton.swift in Sources */,
