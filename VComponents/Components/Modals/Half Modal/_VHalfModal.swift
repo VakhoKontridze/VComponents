@@ -291,7 +291,7 @@ struct _VHalfModal<HeaderLabel, Content>: View
             ideal: model.layout.height.ideal,
             max: model.layout.height.max,
             canPullDownToDismiss: model.misc.dismissType.contains(.pullDown),
-            translationBelowMinHeightToDismiss: model.layout.translationBelowMinHeightToDismiss,
+            pullDownDismissDistance: model.layout.pullDownDismissDistance,
             offset: offset,
             offsetBeforeDrag: offsetBeforeDrag,
             translation: drag.translation.height

@@ -40,7 +40,7 @@ public struct VToastModel {
         /// Distance from presented edge. Defaults to `20`.
         public var presentationOffsetFromSafeEdge: CGFloat = 20
         
-        /// Max width. Defaults to `0.9` ration of screen width.
+        /// Max width. Defaults to `0.9` ratio of screen width.
         public var maxWidth: CGFloat = UIScreen.main.bounds.width * 0.9
         
         /// Corner radius type. Defaults to `default`.

@@ -20,7 +20,7 @@ enum VHalfModalSnapAction {
         max: CGFloat,
         
         canPullDownToDismiss: Bool,
-        translationBelowMinHeightToDismiss: CGFloat,
+        pullDownDismissDistance: CGFloat,
         
         offset: CGFloat,
         offsetBeforeDrag: CGFloat,
@@ -34,7 +34,7 @@ enum VHalfModalSnapAction {
 
             let newOffset: CGFloat = offsetBeforeDrag + translation
             let maxAllowedOffset: CGFloat = max - min
-            guard newOffset - maxAllowedOffset >= abs(translationBelowMinHeightToDismiss) else { return false }
+            guard newOffset - maxAllowedOffset >= abs(pullDownDismissDistance) else { return false }
 
             return true
         }()

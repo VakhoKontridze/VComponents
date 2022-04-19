@@ -92,7 +92,7 @@ public struct VHalfModalModel {
         public var hasSafeAreaMarginBottom: Bool = true
         
         /// Distance to drag modal downwards to initiate dismiss. Default to `100`.
-        public var translationBelowMinHeightToDismiss: CGFloat = 100
+        public var pullDownDismissDistance: CGFloat = 100
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -150,11 +150,11 @@ public struct VHalfModalModel {
                 )
             }
             
-            /// Default value. Set to `0.3` ration of screen height as min, `0.75`as ideal, and `0.9` as max.
+            /// Default value. Set to `0.6` ratio of screen height as min, `0.6`as ideal, and `0.9` as max.
             public static var `default`: Self { // FIXME: Orientation
                 .init(
-                    min: UIScreen.main.bounds.height * 0.3,
-                    ideal: UIScreen.main.bounds.height * 0.75,
+                    min: UIScreen.main.bounds.height * 0.6,
+                    ideal: UIScreen.main.bounds.height * 0.6,
                     max: UIScreen.main.bounds.height * 0.9
                 )
             }
