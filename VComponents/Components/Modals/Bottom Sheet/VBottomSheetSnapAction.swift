@@ -14,8 +14,8 @@ enum VBottomSheetSnapAction {
     case snap(CGFloat)
     
     // MARK: Initializers
-    // Velocity is always non-zero, and excees the threshold.
-    static func dragChangedVelocitySnapAction(
+    // Velocity is always non-zero, and exceeds the threshold.
+    static func dragEndedHighVelocitySnapAction(
         height: VBottomSheetModel.Layout.Height,
         offset: CGFloat,
         velocity: CGFloat

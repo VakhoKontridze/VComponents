@@ -96,8 +96,8 @@ public struct VBottomSheetModel {
         /// Indicates if sheet has margins for safe area on bottom edge. Defaults to `false`.
         public var hasSafeAreaMarginBottom: Bool = false
         
-        /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `1_000` points/s.
-        public var velocityToSnapToNextHeight: CGFloat = 1_000
+        /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `600` points/s.
+        public var velocityToSnapToNextHeight: CGFloat = 600
         
         /// Distance to drag sheet downwards to initiate dismiss. Default to `0.1` ratio of min height.
         public var pullDownDismissDistance: CGFloat = Height.default.min * 0.1

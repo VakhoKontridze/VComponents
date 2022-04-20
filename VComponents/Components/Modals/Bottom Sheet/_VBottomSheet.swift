@@ -35,7 +35,8 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     @State private var grabberHeaderDividerHeight: CGFloat = 0
     @State private var offset: CGFloat
     @State private var offsetBeforeDrag: CGFloat? // Used for adding to translation
-    @State private var lastDragValue: DragGesture.Value? // Used for calculation velocity
+    @State private var currentDragValue: DragGesture.Value? // Used for storing "last" value for writing in `previousDragValue`. Equals to `dragValue` in methods.
+    @State private var previousDragValue: DragGesture.Value? // Used for calculating velocity
 
     // MARK: Initializers
     init(
@@ -272,69 +273,65 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
-        if lastDragValue == nil { lastDragValue = dragValue }
         guard let offsetBeforeDrag = offsetBeforeDrag else { fatalError() }
         
-        defer { lastDragValue = dragValue }
+        previousDragValue = currentDragValue
+        currentDragValue = dragValue
         
-        let velocityExceedsNextAreaSnapThreshold: Bool =
-            abs(dragValue.velocity(inRelationTo: lastDragValue).height) >=
-            abs(model.layout.velocityToSnapToNextHeight)
+        let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
+        let maxAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.min
+        let minAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.max
         
-        switch velocityExceedsNextAreaSnapThreshold {
-        case false:
-            let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
-            let maxAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.min
-            let minAllowedOffset: CGFloat = model.layout.height.max - model.layout.height.max
-            
-            withAnimation(.linear(duration: 0.1), { // Get's rid of stuttering
-                offset = {
-                    switch newOffset {
-                    case ...minAllowedOffset:
-                        return minAllowedOffset
-                        
-                    case maxAllowedOffset...:
-                        switch model.misc.dismissType.contains(.pullDown) {
-                        case false: return maxAllowedOffset
-                        case true: return newOffset
-                        }
-                        
-                    default:
-                        return newOffset
+        withAnimation(.linear(duration: 0.1), { // Get's rid of stuttering
+            offset = {
+                switch newOffset {
+                case ...minAllowedOffset:
+                    return minAllowedOffset
+                    
+                case maxAllowedOffset...:
+                    switch model.misc.dismissType.contains(.pullDown) {
+                    case false: return maxAllowedOffset
+                    case true: return newOffset
                     }
-                }()
-            })
-            
-        case true:
-            defer {
-                self.offsetBeforeDrag = nil
-                lastDragValue = nil
-            }
-            
-            animateOffsetOrPullDismissFromSnapAction(.dragChangedVelocitySnapAction(
-                height: model.layout.height,
-                offset: offset,
-                velocity: dragValue.velocity(inRelationTo: lastDragValue).height
-            ))
-        }
+                    
+                default:
+                    return newOffset
+                }
+            }()
+        })
     }
 
     private func dragEnded(dragValue: DragGesture.Value) {
         defer {
             offsetBeforeDrag = nil
-            lastDragValue = nil
+            previousDragValue = nil
+            currentDragValue = nil
         }
         
-        guard let offsetBeforeDrag = offsetBeforeDrag else { return }
+        let velocityExceedsNextAreaSnapThreshold: Bool =
+            abs(dragValue.velocity(inRelationTo: previousDragValue).height) >=
+            abs(model.layout.velocityToSnapToNextHeight)
         
-        animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
-            height: model.layout.height,
-            canPullDownToDismiss: model.misc.dismissType.contains(.pullDown),
-            pullDownDismissDistance: model.layout.pullDownDismissDistance,
-            offset: offset,
-            offsetBeforeDrag: offsetBeforeDrag,
-            translation: dragValue.translation.height
-        ))
+        switch velocityExceedsNextAreaSnapThreshold {
+        case false:
+            guard let offsetBeforeDrag = offsetBeforeDrag else { return }
+            
+            animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
+                height: model.layout.height,
+                canPullDownToDismiss: model.misc.dismissType.contains(.pullDown),
+                pullDownDismissDistance: model.layout.pullDownDismissDistance,
+                offset: offset,
+                offsetBeforeDrag: offsetBeforeDrag,
+                translation: dragValue.translation.height
+            ))
+            
+        case true:
+            animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
+                height: model.layout.height,
+                offset: offset,
+                velocity: dragValue.velocity(inRelationTo: previousDragValue).height
+            ))
+        }
     }
     
     private func animateOffsetOrPullDismissFromSnapAction(_ snapAction: VBottomSheetSnapAction) {
