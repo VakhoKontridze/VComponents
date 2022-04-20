@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Model and header can be passed as parameters.
 ///
-/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
+/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
 ///
 /// Usage example:
 ///

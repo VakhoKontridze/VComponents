@@ -93,7 +93,7 @@ public struct VToggleModel {
         
         /// Custom label opacities.
         ///
-        /// Applicable only when init with label is used.
+        /// Applicable only when `init`with label is used.
         /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
@@ -123,7 +123,7 @@ public struct VToggleModel {
         // MARK: Properties
         /// Title font. Defaults to system font of size `15`.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var title: Font = .system(size: 15)
         
         // MARK: Initializers

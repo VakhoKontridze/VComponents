@@ -95,7 +95,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
     }
 
     /// Initializes component with constant range and row content.
-    public init <RowContent>(
+    public init<RowContent>(
         type listType: VLazyScrollViewType = .default,
         data: Range<Int>,
         content rowContent: @escaping (Int) -> RowContent

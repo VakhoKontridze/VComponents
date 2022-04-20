@@ -97,7 +97,7 @@ public struct VModalModel {
         
         /// Title header color.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var headerTitle: Color = ColorBook.primary
         
         /// Close button background colors.
@@ -127,7 +127,7 @@ public struct VModalModel {
         // MARK: Properties
         /// Header font.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var header: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers

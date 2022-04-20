@@ -114,7 +114,7 @@ public struct VDialogButtonModelCustom {
         
         /// Title colors.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var title: StateColors
         
         /// Background colors.

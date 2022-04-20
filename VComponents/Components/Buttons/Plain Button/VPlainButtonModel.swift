@@ -42,7 +42,7 @@ public struct VPlainButtonModel {
         
         /// Spacing between icon and title. Defaults to `8`.
         ///
-        /// Applicable only if icon init with icon and title is used.
+        /// Applicable only if icon `init`with icon and title is used.
         public var iconTitleSpacing: CGFloat = secondaryButtonReference.layout.iconTitleSpacing
         
         /// Hit box. Defaults to `5` horizontally and `5` vertically.
@@ -87,7 +87,7 @@ public struct VPlainButtonModel {
         
         /// Custom label opacities.
         ///
-        /// Applicable only when init with label is used.
+        /// Applicable only when `init`with label is used.
         /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
@@ -111,7 +111,7 @@ public struct VPlainButtonModel {
         // MARK: Properties
         /// Title font. Defaults to system font of size `15` with `medium` weight.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var title: Font = .system(size: 15, weight: .medium)
         
         // MARK: Initializers

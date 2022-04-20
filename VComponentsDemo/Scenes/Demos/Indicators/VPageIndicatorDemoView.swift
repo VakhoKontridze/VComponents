@@ -71,7 +71,7 @@ private enum VPageIndicatorTypeHelper: Int, PickableTitledEnumeration {
     var description: String {
         switch self {
         case .finite: return "Finite number of dots would be displayed"
-        case .infinite: return "Infinite dots are possible, but limited number are displayed. Scrolling with acrousel effect may become enabled."
+        case .infinite: return "Infinite dots are possible, but limited numbers are displayed. Scrolling with acrousel effect may become enabled."
         case .auto: return "Type that switches between \"Finite\" and \"Infinite\""
         }
     }

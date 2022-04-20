@@ -12,9 +12,9 @@ import SwiftUI
 ///
 /// Model and header can be passed as parameters.
 ///
-/// If invalid height parameter are passed during init, layout would invalidate itself, and refuse to draw.
+/// If invalid height parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
 ///
-/// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be centered on the screen.
+/// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
 ///
 /// Usage example:
 ///
@@ -28,7 +28,41 @@ import SwiftUI
 ///             .vBottomSheet(isPresented: $isPresented, bottomSheet: {
 ///                 VBottomSheet(
 ///                     headerTitle: "Lorem ipsum dolor sit amet",
-///                     content: { ColorBook.accent }
+///                     content: {
+///                         ColorBook.accent
+///                             .padding(.bottom, 20)
+///                     }
+///                 )
+///             })
+///     }
+///
+/// BottomSheet also support srollable content:
+///
+///     @State var isPresented: Bool = false
+///
+///     var body: some View {
+///         VPlainButton(
+///             action: { isPresented = true },
+///             title: "Present"
+///         )
+///             .vBottomSheet(isPresented: $isPresented, bottomSheet: {
+///                 VBottomSheet(
+///                     model: {
+///                         var model: VBottomSheetModel = .init()
+///                         model.layout.autoresizesContent = true
+///                         model.layout.hasSafeAreaMarginBottom = true
+///                         return model
+///                     }(),
+///                     headerTitle: "Lorem ipsum dolor sit amet",
+///                     content: {
+///                         VList(
+///                             data: 1..<20,
+///                             rowContent: { num in
+///                                 Text(String(num))
+///                                     .frame(maxWidth: .infinity, alignment: .leading)
+///                             }
+///                         )
+///                     }
 ///                 )
 ///             })
 ///     }

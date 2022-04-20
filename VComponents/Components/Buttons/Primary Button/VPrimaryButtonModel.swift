@@ -47,7 +47,7 @@ public struct VPrimaryButtonModel {
         
         /// Spacing between icon and title. Defaults to `10`.
         ///
-        /// Applicable only if icon init with icon and title is used.
+        /// Applicable only if icon `init`with icon and title is used.
         public var iconTitleSpacing: CGFloat = 10
         
         /// Loader dimension. Defaults to `10`.
@@ -112,7 +112,7 @@ public struct VPrimaryButtonModel {
         
         /// Custom label opacities.
         ///
-        /// Applicable only when init with label is used.
+        /// Applicable only when `init`with label is used.
         /// When using a custom label, it's subviews cannot be configured with indivudual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
@@ -144,7 +144,7 @@ public struct VPrimaryButtonModel {
         // MARK: Properties
         /// Title font. Defaults to system font of size `16` with `semibold` weight.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var title: Font = .system(size: 16, weight: .semibold)
         
         // MARK: Initializers

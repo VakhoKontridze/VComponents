@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Model, range, step, state, and onChange callbacks can be passed as parameters.
 ///
-/// If invalid value parameters are passed during init, layout would invalidate itself, and refuse to draw.
+/// If invalid value parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
 ///
 /// Usage example:
 ///

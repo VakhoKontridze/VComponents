@@ -186,7 +186,7 @@ public struct VBottomSheetModel {
         
         /// Title header color.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var headerTitle: Color = modalReference.colors.headerTitle
         
         /// Close button background colors.
@@ -220,7 +220,7 @@ public struct VBottomSheetModel {
         // MARK: Properties
         /// Header font.
         ///
-        /// Only applicable when using init with title.
+        /// Only applicable when using `init`with title.
         public var header: Font = modalReference.fonts.header
         
         // MARK: Initializers
