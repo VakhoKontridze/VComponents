@@ -27,6 +27,14 @@ public struct EdgeInsets_HV: Equatable {
         self.vertical = vertical
     }
     
+    /// Initializes insets with value.
+    public init(
+        _ value: CGFloat
+    ) {
+        self.horizontal = value
+        self.vertical = value
+    }
+    
     /// Initializes insets with zero values.
     public init() {
         self.horizontal = 0

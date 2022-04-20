@@ -41,10 +41,7 @@ public struct VSquareButtonModel {
         public var borderWidth: CGFloat = 0
         
         /// Label margins. Defaults to `3` horizontally and `3` vertically.
-        public var labelMargins: LabelMargins = .init(
-            horizontal: 3,
-            vertical: 3
-        )
+        public var labelMargins: LabelMargins = .init(3)
         
         /// Icon size. Defaults to `20` by `20`.
         public var iconSize: CGSize = primaryButtonReference.layout.iconSize

@@ -49,7 +49,7 @@ public struct VToastModel {
         /// Content margins. Defaults to `20` horizontal and `10` vertical.
         public var contentMargins: Margins = .init(
             horizontal: 20,
-            vertical: 20
+            vertical: 10
         )
         
         // MARK: Initializers

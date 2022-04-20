@@ -24,6 +24,14 @@ public struct EdgeInsets_LT: Equatable {
         self.trailing = trailing
     }
     
+    /// Initializes insets with value.
+    public init(
+        _ value: CGFloat
+    ) {
+        self.leading = value
+        self.trailing = value
+    }
+    
     /// Initializes insets with zero values.
     public init() {
         self.leading = 0
