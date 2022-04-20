@@ -86,7 +86,7 @@ private struct VLazyScrollViewDemoDetailView: View {
     }
     
     private var vertical: some View {
-        VLazyScrollView(type: .vertical(), data: 1..<101, content: { num in
+        VLazyScrollView(type: .vertical(), data: 0..<100, content: { num in
             VText(
                 color: ColorBook.primary,
                 font: .body,
@@ -102,7 +102,7 @@ private struct VLazyScrollViewDemoDetailView: View {
     }
     
     private var horizontal: some View {
-        VLazyScrollView(type: .horizontal(), data: 1..<101, content: { num in
+        VLazyScrollView(type: .horizontal(), data: 0..<100, content: { num in
             VText(
                 color: ColorBook.primary,
                 font: .body,

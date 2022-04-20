@@ -101,7 +101,12 @@ struct VSideBar_Previews: PreviewProvider {
         _VSideBar(
             model: .init(),
             isPresented: .constant(true),
-            content: { ColorBook.accent }
+            content: {
+                VList(data: 0..<20, rowContent: { num in
+                    Text(String(num))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                })
+            }
         )
     }
 }

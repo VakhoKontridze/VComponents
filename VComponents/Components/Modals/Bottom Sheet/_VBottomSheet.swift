@@ -353,8 +353,19 @@ struct VBottomSheet_Previews: PreviewProvider {
         )
             .vBottomSheet(isPresented: $isPresented, bottomSheet: {
                 VBottomSheet(
-                    headerTitle: "Lorem ipsum",
-                    content: { ColorBook.accent }
+                    model: {
+                        var model: VBottomSheetModel = .init()
+                        model.layout.autoresizesContent = true
+                        model.layout.hasSafeAreaMarginBottom = true
+                        return model
+                    }(),
+                    headerTitle: "Lorem ipsum dolor sit amet",
+                    content: {
+                        VList(data: 0..<20, rowContent: { num in
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        })
+                    }
                 )
             })
     }

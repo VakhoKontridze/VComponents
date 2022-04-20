@@ -127,18 +127,18 @@ struct VBottomSheetDemoView: View {
             switch autoresizesContent {
             case false:
                 ColorBook.accent
-                    .padding(.bottom, UIWindow.safeAreaInsetBottom)
+                    .padding(.bottom, 10)
                 
             case true:
                 ScrollView(content: {
                     VStack(content: {
-                        ForEach(1..<20, content: { num in
+                        ForEach(0..<20, content: { num in
                             Text(String(num))
-                                .padding(.vertical, 10)
+                                .padding(.vertical, 7)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         })
                         
-                        Spacer().frame(height: UIWindow.safeAreaInsetBottom)
+                        Spacer().frame(height: 10)
                     })
                 })
             }
@@ -166,8 +166,9 @@ struct VBottomSheetDemoView: View {
                         title: "Dismiss"
                     )
                 })
-                    .frame(maxHeight: .infinity, alignment: .bottom)
                     .padding(15)
+                    .background(Color.black.opacity(0.75))
+                    .cornerRadius(10)
             }
         })
     }

@@ -23,14 +23,10 @@ import SwiftUI
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
-///                 VList(
-///                     layout: .fixed,
-///                     data: 1..<20,
-///                     rowContent: { num in
-///                         Text(String(num))
-///                             .frame(maxWidth: .infinity, alignment: .leading)
-///                     }
-///                 )
+///                 VList(data: 0..<20, rowContent: { num in
+///                     Text(String(num))
+///                         .frame(maxWidth: .infinity, alignment: .leading)
+///                 })
 ///             }
 ///         )
 ///             .padding()
@@ -227,15 +223,11 @@ struct VAccordion_Previews: PreviewProvider {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(
-                        layout: .fixed,
-                        data: 1..<10,
-                        rowContent: { num in
-                            Text(String(num))
-                                .padding(.vertical, 2)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
+                    VList(data: 0..<20, rowContent: { num in
+                        Text(String(num))
+                            .padding(.vertical, 2)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    })
                 }
             )
                 .padding()

@@ -55,13 +55,10 @@ import SwiftUI
 ///                     }(),
 ///                     headerTitle: "Lorem ipsum dolor sit amet",
 ///                     content: {
-///                         VList(
-///                             data: 1..<20,
-///                             rowContent: { num in
-///                                 Text(String(num))
-///                                     .frame(maxWidth: .infinity, alignment: .leading)
-///                             }
-///                         )
+///                         VList(data: 0..<20, rowContent: { num in
+///                             Text(String(num))
+///                                 .frame(maxWidth: .infinity, alignment: .leading)
+///                         })
 ///                     }
 ///                 )
 ///             })

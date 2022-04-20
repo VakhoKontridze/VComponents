@@ -102,7 +102,10 @@ struct VModalDemoView: View {
     
     private var modalContent: some View {
         ZStack(content: {
-            ColorBook.accent
+            VList(data: 0..<20, rowContent: { num in
+                Text(String(num))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            })
 
             if dismissType.isEmpty {
                 VStack(content: {
@@ -127,8 +130,9 @@ struct VModalDemoView: View {
                         title: "Dismiss"
                     )
                 })
-                    .frame(maxHeight: .infinity, alignment: .bottom)
                     .padding(15)
+                    .background(Color.black.opacity(0.75))
+                    .cornerRadius(10)
             }
         })
     }

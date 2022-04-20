@@ -133,7 +133,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
 
 // MARK: - Preview
 struct VLazyScrollViewView_Previews: PreviewProvider {
-    private static var range: Range<Int> { 1..<101 }
+    private static var range: Range<Int> { 0..<100 }
 
     static var previews: some View {
         VStack(content: {

@@ -36,10 +36,9 @@ struct VLazyScrollViewHorizontal<Content>: View where Content: View {
 struct VLazyScrollViewHorizontal_Previews: PreviewProvider {
     static var previews: some View {
         VLazyScrollViewHorizontal(model: .init(), content: {
-            ForEach(1..<100, content: { num in
+            ForEach(0..<100, content: { num in
                 Text(String(num))
             })
         })
     }
 }
-

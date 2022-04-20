@@ -44,17 +44,9 @@ struct VSideBarDemoView: View {
     }
     
     private var sideBarContent: some View {
-        VLazyScrollView(type: .vertical(), data: 1..<11, content: { num in
-            VText(
-                color: ColorBook.primaryInverted,
-                font: .body,
-                title: "\(num)"
-            )
-                .frame(height: 30)
-                .frame(maxWidth: .infinity)
-                .background(ColorBook.accent.opacity(0.75))
-                .cornerRadius(5)
-                .padding(.vertical, 3)
+        VList(data: 0..<40, rowContent: { num in
+            Text(String(num)) // FIXME: Scrolling is broken
+                .frame(maxWidth: .infinity, alignment: .leading)
         })
     }
 }

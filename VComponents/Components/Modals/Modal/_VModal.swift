@@ -202,7 +202,12 @@ struct VModal_Previews: PreviewProvider {
             .vModal(isPresented: $isPresented, modal: {
                 VModal(
                     headerTitle: "Lorem ipsum",
-                    content: { ColorBook.accent }
+                    content: {
+                        VList(data: 0..<20, rowContent: { num in
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        })
+                    }
                 )
             })
     }

@@ -36,7 +36,7 @@ struct VLazyScrollViewVertical<Content>: View where Content: View {
 struct VLazyScrollViewVertical_Previews: PreviewProvider {
     static var previews: some View {
         VLazyScrollViewVertical(model: .init(), content: {
-            ForEach(1..<100, content: { num in
+            ForEach(0..<100, content: { num in
                 Text(String(num))
             })
         })
