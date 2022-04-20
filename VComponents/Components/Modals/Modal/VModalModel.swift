@@ -58,8 +58,8 @@ public struct VModalModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         
-        /// Header margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
-        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
+        /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
+        public var headerMargins: Margins = accordionReference.layout.headerMargins
         
         /// Close button dimension. Default to `32`.
         public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
@@ -76,8 +76,8 @@ public struct VModalModel {
         /// Header divider margins. Default to `.zero`.
         public var headerDividerMargins: Margins = .zero
         
-        /// Content margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
-        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
+        /// Content margins. Default to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        public var contentMargins: Margins = accordionReference.layout.contentMargins
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

@@ -43,6 +43,12 @@ public struct VAccordionModel {
         /// Accordion corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
+        /// Header margins. Defaults to `15` leading, `15` trailing, `10` top, `10` bottom.
+        public var headerMargins: Margins = .init(
+            horizontal: sheetReference.layout.contentMargin,
+            vertical: 10
+        )
+        
         /// Chevron button dimension. Default to `32`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
         
@@ -52,24 +58,14 @@ public struct VAccordionModel {
         /// Header divider height. Defaults to `0.5`.
         public var headerDividerHeight: CGFloat = 0.5
         
-        /// Header margins. Defaults to `10` leading, `10` trailing, `10` top, `10` bottom.
-        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
-        
         /// Header divider margins. Defaults to `10` leading, `10` trailing, `0` top, `0` bottom.
         public var headerDividerMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
-            top: 0,
-            bottom: 0
+            horizontal: 10,
+            vertical: 0
         )
         
         /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
-        public var contentMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin + 5,
-            trailing: sheetReference.layout.contentMargin + 5,
-            top: sheetReference.layout.contentMargin + 5,
-            bottom: sheetReference.layout.contentMargin + 5
-        )
+        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

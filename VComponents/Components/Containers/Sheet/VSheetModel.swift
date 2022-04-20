@@ -31,8 +31,8 @@ public struct VSheetModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
-        /// Content margin. Defaults to `10`.
-        public var contentMargin: CGFloat = 10
+        /// Content margin. Defaults to `15`.
+        public var contentMargin: CGFloat = 15
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

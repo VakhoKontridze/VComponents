@@ -30,7 +30,7 @@ import SwiftUI
 ///                     headerTitle: "Lorem ipsum dolor sit amet",
 ///                     content: {
 ///                         ColorBook.accent
-///                             .padding(.bottom, 20)
+///                             .padding(.bottom, 10)
 ///                     }
 ///                 )
 ///             })

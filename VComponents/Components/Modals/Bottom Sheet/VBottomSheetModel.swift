@@ -17,9 +17,6 @@ public struct VBottomSheetModel {
     /// Reference to `VModalModel`.
     public static let modalReference: VModalModel = .init()
     
-    /// Reference to `VAccordionModel`.
-    public static let accordionReference: VAccordionModel = .init()
-    
     /// Reference to `VCloseButtonModel`.
     public static let closeButtonReference: VCloseButtonModel = .init()
     
@@ -67,8 +64,8 @@ public struct VBottomSheetModel {
             bottom: 0
         )
         
-        /// Header margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
-        public var headerMargins: Margins = .init(sheetReference.layout.contentMargin)
+        /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
+        public var headerMargins: Margins = modalReference.layout.headerMargins
         
         /// Close button dimension. Default to `32`.
         public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
@@ -83,10 +80,10 @@ public struct VBottomSheetModel {
         public var headerDividerHeight: CGFloat = modalReference.layout.headerDividerHeight
     
         /// Header divider margins. Default to `.zero`.
-        public var headerDividerMargins: Margins = .zero
+        public var headerDividerMargins: Margins = modalReference.layout.headerDividerMargins
         
-        /// Content margins. Default to `10` leading, `10` trailing, `10` top, and `10` bottom.
-        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
+        /// Content margins. Default to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        public var contentMargins: Margins = modalReference.layout.contentMargins
         
         /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.
         ///

@@ -4,6 +4,7 @@
 
 General
 
+- Components are reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines 
 - Several internal properties are now exposed to public in models
@@ -42,6 +43,14 @@ VTextField
 - `VTextFieldHighlight` is removed in favor of custom `VTextFieldModels`'s
 - `warning` highlight is added to `VTextFieldModel`
 
+VSheet
+
+- Sheet margins are changed from `10` to `15`
+
+VAccordion
+
+- Accordion margins are changed from `10` to `15`
+
 VBaseList
 
 - `VBaseList` is renamed to `VList`
@@ -63,13 +72,22 @@ VNavigationView
 
 - NavigationView is removed
 
+VModal
+
+- Modal margins are changed from `10` to `15`
+
 VHalfModal
 
 - `VHalfModal` is renamed to `VBottomSheet`
 - BottomSheet can now be snapped to height by dragging it at high velocities
 - BottomSheet now supports content autoresizing
-- BottomSheet height has changed to `0.6`, `0.6`, and `0.9` ratios of screen height as min, ideal, and max heights 
+- BottomSheet height has changed to `0.6`, `0.6`, and `0.9` ratios of screen height as min, ideal, and max heights
+- BottomSheet margins are changed from `10` to `15` 
 - Issue with modal snapping to max height if dragged to min when `pullDown` dismiss type is not enabled is fixed
+
+VSideBar
+
+- SideBar margins are changed from `10` to `15`
 
 VMenu
 

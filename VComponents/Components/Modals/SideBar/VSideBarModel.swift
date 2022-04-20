@@ -43,13 +43,8 @@ public struct VSideBarModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
-        /// Content margins. Defaults to `10` leading, `10` trailing, `10` top, and `10` bottom.
-        public var contentMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
-            top: sheetReference.layout.contentMargin,
-            bottom: sheetReference.layout.contentMargin
-        )
+        /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
         /// Indicates if side bar has margins for safe area on top edge. Defaults to `true`.
         public var hasSafeAreaMarginTop: Bool = true
