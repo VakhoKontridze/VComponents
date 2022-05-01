@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [Description](#description)
+- [Compatibility](#compatibility)
 - [Components](#components)
 - [Guidelines](#guidelines)
 - [Demo](#demo)
@@ -13,8 +14,6 @@
 ## Description
 
 VComponents is a SwiftUI library that contains 30+ customizable UI components.
-
-<!--Library supports iOS 15 and up.-->
 
 ## Compatibility
 
