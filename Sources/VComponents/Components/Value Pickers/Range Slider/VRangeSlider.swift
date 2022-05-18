@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Range Slider
 /// Value picker component that selects values from a bounded linear range of values to represent a range.
@@ -164,14 +165,14 @@ public struct VRangeSlider: View {
         let valueFixed: Double = {
             switch thumb {
             case .low:
-                return rawValue.bound(
+                return rawValue.clamped(
                     min: min,
                     max: Swift.min((valueHigh - difference).roundedDownWithStep(step), max),
                     step: step
                 )
 
             case .high:
-                return rawValue.bound(
+                return rawValue.clamped(
                     min: Swift.max((valueLow + difference).roundedUpWithStep(step), min),
                     max: max,
                     step: step

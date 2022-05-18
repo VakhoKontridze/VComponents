@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Sheet
 /// Container component that draws a background and hosts content.

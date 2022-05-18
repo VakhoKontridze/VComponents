@@ -7,30 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Double Bound
-extension Double {
-    func bound(
-        min: Double,
-        max: Double,
-        step: Double?
-    ) -> Double {
-        switch (self, step) {
-        case (...min, _): return min
-        case (max..., _): return max
-        case (_, nil): return self
-        case (_, let step?): return self.roundedWithStep(min: min, max: max, step: step)
-        }
-    }
-    
-    private func roundedWithStep(
-        min: Double,
-        max: Double,
-        step: Double
-    ) -> Double {
-        min + ((self - min) / step).rounded() * step
-    }
-}
-
 // MARK: - Normalization of Binding Double in Range
 extension Binding where Value == Double {
     init<V>(

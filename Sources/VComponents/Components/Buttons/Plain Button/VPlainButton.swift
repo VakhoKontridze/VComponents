@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Plain Button
 /// Plain button component that performs action when triggered.

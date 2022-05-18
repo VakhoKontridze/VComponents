@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Slider
 /// Value picker component that selects value from a bounded linear range of values.
@@ -123,7 +124,7 @@ public struct VSlider: View {
             return (value / width) * range + min
         }()
         
-        let valueFixed: Double = rawValue.bound(min: min, max: max, step: step)
+        let valueFixed: Double = rawValue.clamped(min: min, max: max, step: step)
         
         setValue(to: valueFixed)
         

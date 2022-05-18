@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "vcore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/VakhoKontridze/VCore",
+      "state" : {
+        "branch" : "dev",
+        "revision" : "1b2525dd30af501e64a4318bf26378f037ab479f"
+      }
+    }
+  ],
+  "version" : 2
+}

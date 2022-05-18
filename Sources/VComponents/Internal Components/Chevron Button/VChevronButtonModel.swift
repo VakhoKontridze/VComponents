@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Chevron Button Model
 public struct VChevronButtonModel {

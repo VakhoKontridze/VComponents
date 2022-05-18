@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - _ V Toast
 struct _VToast: View {
@@ -79,10 +80,10 @@ struct _VToast: View {
     private var presentedOffset: CGFloat {
         switch model.layout.presentationEdge {
         case .top:
-            return UIWindow.safeAreaInsetTop + model.layout.presentationOffsetFromSafeEdge
+            return UIDevice.safeAreaInsetTop + model.layout.presentationOffsetFromSafeEdge
         
         case .bottom:
-            return UIScreen.main.bounds.height - UIWindow.safeAreaInsetBottom - height - model.layout.presentationOffsetFromSafeEdge
+            return UIScreen.main.bounds.height - UIDevice.safeAreaInsetBottom - height - model.layout.presentationOffsetFromSafeEdge
         }
     }
 

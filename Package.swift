@@ -16,10 +16,17 @@ let package: Package = .init(
         )
     ],
     
+    dependencies: [
+        //.package(url: "https://github.com/VakhoKontridze/VCore", "3.0.0"..<"4.0.0")
+        .package(url: "https://github.com/VakhoKontridze/VCore", branch: "dev")
+    ],
+    
     targets: [
         .target(
             name: "VComponents",
-            dependencies: [],
+            dependencies: [
+                "VCore"
+            ],
             resources: [
                 .process("Resources")
             ]

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Progress Bar
 /// Indicator component that indicates progress towards completion of a task.
@@ -45,7 +46,7 @@ public struct VProgressBar: View {
             let min: Double = 0
             let max: Double = .init(total)
             
-            return value.bound(min: min, max: max, step: nil)
+            return value.clamped(min: min, max: max)
         }()
     }
 

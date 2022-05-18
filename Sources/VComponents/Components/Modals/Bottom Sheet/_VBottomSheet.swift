@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - _ V Bottom Sheet
 struct _VBottomSheet<HeaderLabel, Content>: View
@@ -207,7 +208,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
                 $0
                     .safeAreaInset(edge: .bottom, content: {
                         Spacer()
-                            .frame(height: UIWindow.safeAreaInsetBottom)
+                            .frame(height: UIDevice.safeAreaInsetBottom)
                     })
             })
             .if(
