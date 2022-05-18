@@ -13,14 +13,14 @@
 
 ## Description
 
-VComponents is a SwiftUI library that contains 30+ customizable UI components.
+VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 ## Compatibility
 
-| VComponents | iOS    |
-| ---         | ---    |
-| 2.x.x       | 15.x.x |
-| 1.x.x       | 14.x.x |
+| VComponents | Release    | iOS    |
+| ---         | ---        | ---    |
+| 2.x.x       | 2022 XX XX | 15.x.x |
+| 1.x.x       | 2021 02 07 | 14.x.x |
 
 ## Components
 
@@ -200,35 +200,9 @@ Project contains demo app, that can be run to showcase all components.
 
 ## Installation
 
-Library doesn't support CocoaPods or Carthage.
-
-### Swift Package Manager
+#### Swift Package Manager
 
 Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode and follow the instructions.
-
-![SPM1](./img/SPM1.jpg)
-
-### Manual
-
-1. Download [VComponents.xcframework](https://github.com/VakhoKontridze/VComponents/releases/download/1.6.0/VComponents.xcframework.zip).
-
-2. Extract the zip.
-
-3. Drag  `VComponents.xcframework` into your project.
-
-![ManualInstallation1](./img/ManualInstallation1.jpg)
-
-4. Select "Copy items if needed" and click Finish.
-
-![ManualInstallation2](./img/ManualInstallation2.jpg)
-
-5. Go to the target settings for your app, under "General" tab, find "Frameworks, Libraries, and Embedded Content". Set the `VComponents.xcframework` to “Embed & Sign”.
-
-![ManualInstallation3](./img/ManualInstallation3.jpg)
-
-### Building Your Own Target
-
-Since VComponents is open-source, you can clone the project and build the framework target yourself.
 
 ## Versioning
 

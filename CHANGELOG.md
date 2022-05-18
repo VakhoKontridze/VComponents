@@ -4,6 +4,8 @@
 
 General
 
+- Project is migrated from `XCFramework` to `Swift Package`
+- Project now partially supports `macOS`, `tvOS`, and `watchOS`
 - Components are reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines 
@@ -103,7 +105,7 @@ Other
 - `LayoutGroup`'s is renamed to `EdgeInsets`'s
 - `VPickableItem` is renamed to `PickableEnumeration`
 
-#### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/download/1.6.0/VComponents.xcframework.zip) — *2022 01 07*
+#### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.6.0) — *2022 01 07*
 
 General
 
@@ -123,7 +125,7 @@ Extensions
 
 - Issues with conditional `View` function `if` are fixed
 
-#### [1.5.0(15)](https://github.com/VakhoKontridze/VComponents/releases/download/1.5.0/VComponents.xcframework.zip) — *2021 12 24*
+#### [1.5.0(15)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.5.0) — *2021 12 24*
 
 VBaseButton
 
@@ -146,7 +148,7 @@ Other
 
 - `StateColors_EPDL` is renamed to `StateColors_EPLD`
 
-#### [1.4.6(14)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.6/VComponents.xcframework.zip) — *2021 12 10*
+#### [1.4.6(14)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.6) — *2021 12 10*
 
 VBaseButton
 
@@ -156,7 +158,7 @@ VPrimaryButton
 
 - Button height is changed to `56`
 
-#### [1.4.5(13)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.5/VComponents.xcframework.zip) — *2021 11 05*
+#### [1.4.5(13)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.5) — *2021 11 05*
 
 General
 
@@ -166,23 +168,23 @@ Other
 
 - Several color group objects and their parameters are renamed
 
-#### [1.4.4(12)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.4/VComponents.xcframework.zip) — *2021 10 28*
+#### [1.4.4(12)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.4) — *2021 10 28*
 
 VHalfModal
 
 - `Resize Indicator` is renamed to `Grabber`
 
-#### [1.4.3(11)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.3/VComponents.xcframework.zip) — *2021 10 11*
+#### [1.4.3(11)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.3) — *2021 10 11*
 
 Bug fixes and improvements
 
-#### [1.4.2(10)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.2/VComponents.xcframework.zip) — *2021 09 02*
+#### [1.4.2(10)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.2) — *2021 09 02*
 
 VSpinner
 
 - Issue with `continuous` spinner breaking in `NavigationView` in `SwiftUI` `3.0` is fixed
 
-#### [1.4.1(9)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.1/VComponents.xcframework.zip) — *2021 08 29*
+#### [1.4.1(9)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.1) — *2021 08 29*
 
 VCheckBox
 
@@ -199,7 +201,7 @@ Other
 
 - Layout and color groups used in models can now be initialized as `.zero`, `.clear`, and `.solid`
 
-#### [1.4.0(8)](https://github.com/VakhoKontridze/VComponents/releases/download/1.4.0/VComponents.xcframework.zip) — *2021 08 26*
+#### [1.4.0(8)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.4.0) — *2021 08 26*
 
 VNavigationLink
 
@@ -231,7 +233,7 @@ VBaseView
 
 - Default title alignment is changed from `leading` to `center`
 
-#### [1.3.1(7)](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.1/VComponents.xcframework.zip) — *2021 02 27*
+#### [1.3.1(7)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.1) — *2021 02 27*
 
 VBaseTextField
 
@@ -241,7 +243,7 @@ VTextField
 
 - TextField calling `onChange` handler one keystroke behind is fixed
 
-#### [1.3.0(6)](https://github.com/VakhoKontridze/VComponents/releases/download/1.3.0/VComponents.xcframework.zip) — *2021 02 16*
+#### [1.3.0(6)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.3.0) — *2021 02 16*
 
 VBaseTextField
 
@@ -251,13 +253,13 @@ VTextField
 
 - `autocapitalization` is added to `VTextFieldModel`
 
-#### [1.2.1(5)](https://github.com/VakhoKontridze/VComponents/releases/download/1.2.1/VComponents.xcframework.zip) — *2021 02 14*
+#### [1.2.1(5)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.2.1) — *2021 02 14*
 
 VHalfModal
 
 - Close button layout when embedded inside `VNavigationView` is fixed
 
-#### [1.2.0(4)](https://github.com/VakhoKontridze/VComponents/releases/download/1.2.0/VComponents.xcframework.zip) — *2021 02 12*
+#### [1.2.0(4)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.2.0) — *2021 02 12*
 
 VSection
 
@@ -271,14 +273,14 @@ VLazyList
 
 - `VLazyList` is renamed to `VLazyScrollView`
 
-#### [1.1.1(3)](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.1/VComponents.xcframework.zip) — *2021 02 10*
+#### [1.1.1(3)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.1) — *2021 02 10*
 
 Bug fixes and improvements
 
-#### [1.1.0(2)](https://github.com/VakhoKontridze/VComponents/releases/download/1.1.0/VComponents.xcframework.zip) — *2021 02 09*
+#### [1.1.0(2)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.0) — *2021 02 09*
 
 Documentation on public declarations, methods, and properties are added
 
-#### [1.0.0(1)](https://github.com/VakhoKontridze/VComponents/releases/download/1.0.0/VComponents.xcframework.zip) — *2021 02 07*
+#### [1.0.0(1)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.0.0) — *2021 02 07*
 
 Initial release
