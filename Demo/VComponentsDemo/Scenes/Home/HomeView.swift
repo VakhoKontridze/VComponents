@@ -31,6 +31,16 @@ struct HomeView: View {
         .init(id: 10, title: "Misc", rows: [.text])
     ]
 
+    // MARK: Body
+    var body: some View {
+        NavigationView(content: {
+            DemoListView(type: .accordion, sections: sections)
+                .standardNavigationTitle(Self.navBarTitle)
+        })
+            .navigationViewStyle(.stack)
+    }
+    
+    // MARK: Home Row
     private enum HomeRow: Int, DemoableRow {
         case baseButton, primaryButton, secondaryButton, squareButton, plainButton, navigationLink, link
         case toggle, checkBox, radioButton
@@ -136,15 +146,6 @@ struct HomeView: View {
             case .text: VTextDemoView()
             }
         }
-    }
-
-    // MARK: Body
-    var body: some View {
-        NavigationView(content: {
-            DemoListView(type: .accordion, sections: sections)
-                .standardNavigationTitle(Self.navBarTitle)
-        })
-            .navigationViewStyle(.stack)
     }
 }
 
