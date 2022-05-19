@@ -126,8 +126,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         if hasGrabber {
             RoundedRectangle(cornerRadius: model.layout.grabberCornerRadius)
                 .frame(size: model.layout.grabberSize)
-                .padding(.top, model.layout.grabberMargins.top)
-                .padding(.bottom, model.layout.grabberMargins.bottom)
+                .padding(model.layout.grabberMargins)
                 .foregroundColor(model.colors.grabber)
         }
     }
@@ -171,10 +170,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
                 })
                     .frame(maxWidth: .infinity, alignment: .trailing)
             })
-                .padding(.leading, model.layout.headerMargins.leading)
-                .padding(.trailing, model.layout.headerMargins.trailing)
-                .padding(.top, model.layout.headerMargins.top)
-                .padding(.bottom, model.layout.headerMargins.bottom)
+                .padding(model.layout.headerMargins)
         }
     }
 
@@ -182,10 +178,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         if hasHeaderDivider {
             Rectangle()
                 .frame(height: model.layout.headerDividerHeight)
-                .padding(.leading, model.layout.headerDividerMargins.leading)
-                .padding(.trailing, model.layout.headerDividerMargins.trailing)
-                .padding(.top, model.layout.headerDividerMargins.top)
-                .padding(.bottom, model.layout.headerDividerMargins.bottom)
+                .padding(model.layout.headerDividerMargins)
                 .foregroundColor(model.colors.headerDivider)
         }
     }
@@ -198,10 +191,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             }
             
             content()
-                .padding(.leading, model.layout.contentMargins.leading)
-                .padding(.trailing, model.layout.contentMargins.trailing)
-                .padding(.top, model.layout.contentMargins.top)
-                .padding(.bottom, model.layout.contentMargins.bottom)
+                .padding(model.layout.contentMargins)
                 .padding(.bottom, 0.01) // Fixes bug with scrollable contents
         })
             .if(model.layout.hasSafeAreaMarginBottom, transform: {

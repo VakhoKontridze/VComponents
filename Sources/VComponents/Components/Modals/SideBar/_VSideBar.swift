@@ -50,10 +50,7 @@ struct _VSideBar<Content>: View where Content: View {
                 .edgesIgnoringSafeArea(.all)
 
             content()
-                .padding(.leading, model.layout.contentMargins.leading)
-                .padding(.trailing, model.layout.contentMargins.trailing)
-                .padding(.top, model.layout.contentMargins.top)
-                .padding(.bottom, model.layout.contentMargins.bottom)
+                .padding(model.layout.contentMargins)
                 .edgesIgnoringSafeArea(edgesToIgnore)
         })
             .frame(width: model.layout.width)

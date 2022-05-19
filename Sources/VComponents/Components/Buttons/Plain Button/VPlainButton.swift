@@ -92,8 +92,7 @@ public struct VPlainButton<Label>: View where Label: View {
     public var body: some View {
         VBaseButton(gesture: gestureHandler, label: {
             buttonLabel
-                .padding(.horizontal, model.layout.hitBox.horizontal)
-                .padding(.vertical, model.layout.hitBox.vertical)
+                .padding(model.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)
     }

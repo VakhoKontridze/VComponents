@@ -61,8 +61,7 @@ struct _VDialog<Content>: View where Content: View {
                 descriptionView
                 freeContentView
             })
-                .padding(.horizontal, model.layout.titlesAndContentMargins.horizontal)
-                .padding(.vertical, model.layout.titlesAndContentMargins.vertical)
+                .padding(model.layout.titlesAndContentMargins)
             
             dialogView
         })

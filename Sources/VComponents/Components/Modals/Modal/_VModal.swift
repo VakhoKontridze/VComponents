@@ -120,10 +120,7 @@ struct _VModal<HeaderLabel, Content>: View
                 })
                     .frame(maxWidth: .infinity, alignment: .trailing)
             })
-                .padding(.leading, model.layout.headerMargins.leading)
-                .padding(.trailing, model.layout.headerMargins.trailing)
-                .padding(.top, model.layout.headerMargins.top)
-                .padding(.bottom, model.layout.headerMargins.bottom)
+                .padding(model.layout.headerMargins)
         }
     }
 
@@ -131,20 +128,14 @@ struct _VModal<HeaderLabel, Content>: View
         if hasHeaderDivider {
             Rectangle()
                 .frame(height: model.layout.headerDividerHeight)
-                .padding(.leading, model.layout.headerDividerMargins.leading)
-                .padding(.trailing, model.layout.headerDividerMargins.trailing)
-                .padding(.top, model.layout.headerDividerMargins.top)
-                .padding(.bottom, model.layout.headerDividerMargins.bottom)
+                .padding(model.layout.headerDividerMargins)
                 .foregroundColor(model.colors.headerDivider)
         }
     }
 
     private var contentView: some View {
         content()
-            .padding(.leading, model.layout.contentMargins.leading)
-            .padding(.trailing, model.layout.contentMargins.trailing)
-            .padding(.top, model.layout.contentMargins.top)
-            .padding(.bottom, model.layout.contentMargins.bottom)
+            .padding(model.layout.contentMargins)
             .frame(maxHeight: .infinity)
     }
 

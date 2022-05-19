@@ -60,8 +60,7 @@ struct _VToast: View {
             font: model.fonts.title,
             title: title
         )
-            .padding(.horizontal, model.layout.contentMargins.horizontal)
-            .padding(.vertical, model.layout.contentMargins.vertical)
+            .padding(model.layout.contentMargins)
     }
     
     private var background: some View {

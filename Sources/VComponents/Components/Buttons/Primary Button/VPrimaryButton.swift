@@ -135,8 +135,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
 
             loader
         })
-            .padding(.horizontal, model.layout.labelMargins.horizontal)
-            .padding(.vertical, model.layout.labelMargins.vertical)
+            .padding(model.layout.labelMargins)
     }
     
     @ViewBuilder private var loaderCompensator: some View {

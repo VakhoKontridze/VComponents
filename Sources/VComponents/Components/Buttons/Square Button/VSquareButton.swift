@@ -82,8 +82,7 @@ public struct VSquareButton<Label>: View where Label: View {
                 .frame(dimension: model.layout.dimension)
                 .background(background)
                 .overlay(border)
-                .padding(.horizontal, model.layout.hitBox.horizontal)
-                .padding(.vertical, model.layout.hitBox.vertical)
+                .padding(model.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)
     }
@@ -111,8 +110,7 @@ public struct VSquareButton<Label>: View where Label: View {
                     .opacity(model.colors.customLabelOpacities.for(internalState))
             }
         })
-            .padding(.horizontal, model.layout.labelMargins.horizontal)
-            .padding(.vertical, model.layout.labelMargins.vertical)
+            .padding(model.layout.labelMargins)
     }
 
     private var background: some View {
