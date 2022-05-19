@@ -31,6 +31,18 @@ VWebLink
 
 - `VWebLink` is renamed to `VLink`
 
+VToggle
+
+- `titleLabelLineLimit` is added to `VToggleModel`
+
+VCHeckBox
+
+- `titleLabelLineLimit` is added to `VCHeckBoxModel`
+
+VRadioButton
+
+- `titleLabelLineLimit` is added to `VRadioButtonModel`
+
 VMenuPicker
 
 - Label issue with `iOS` `15` is fixed
