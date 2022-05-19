@@ -61,7 +61,7 @@ public struct VBottomSheetModel {
         
         /// Grabber margins. Default to `10` top  and `0` bottom.
         public var grabberMargins: VerticalMargins = .init(
-            top: sheetReference.layout.contentMargin,
+            top: 10,
             bottom: 0
         )
         
