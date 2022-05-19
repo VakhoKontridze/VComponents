@@ -192,7 +192,6 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             
             content()
                 .padding(model.layout.contentMargins)
-                .padding(.bottom, 0.01) // Fixes bug with scrollable contents
         })
             .if(model.layout.hasSafeAreaMarginBottom, transform: {
                 $0

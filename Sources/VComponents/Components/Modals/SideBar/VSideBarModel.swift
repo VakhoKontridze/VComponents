@@ -51,6 +51,8 @@ public struct VSideBarModel {
         public var hasSafeAreaMarginTop: Bool = true
         
         /// Indicates if side bar has margins for safe area on bottom edge. Defaults to `true`.
+        ///
+        /// `autoresizesContent` must be set to `true`.
         public var hasSafeAreaMarginBottom: Bool = true
         
         /// Distance to drag side bar left to initiate dismiss. Default to `100`.

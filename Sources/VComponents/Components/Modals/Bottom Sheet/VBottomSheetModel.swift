@@ -92,7 +92,9 @@ public struct VBottomSheetModel {
         public var autoresizesContent: Bool = false
         
         /// Indicates if sheet has margins for safe area on bottom edge. Defaults to `false`.
-        public var hasSafeAreaMarginBottom: Bool = false
+        ///
+        /// `autoresizesContent` must be set to `true`.
+        public var hasSafeAreaMarginBottom: Bool = true
         
         /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `600` points/s.
         public var velocityToSnapToNextHeight: CGFloat = 600
