@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Accordion
 /// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data.
@@ -49,9 +50,6 @@ public struct VAccordion<HeaderLabel, Content>: View
     private let content: () -> Content
     
     private var hasHeaderDivider: Bool { model.layout.headerDividerHeight > 0 }
-    
-    @State private var grabberHeaderDividerHeight: CGFloat = 0
-    @State private var accordionHeight: CGFloat = 0
 
     // MARK: Initializers - State
     /// Initializes component with header title and content.
@@ -113,59 +111,57 @@ public struct VAccordion<HeaderLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        VStack(spacing: 0, content: {
-            header
-            divider
-            contentView
-        })
-            .readSize(onChange: { accordionHeight = $0.height })
-            .frame(height: internalState.isExpanded ? accordionHeight : grabberHeaderDividerHeight, alignment: .top)
-            .clipped()
-            .transition(.move(edge: .bottom))
+        PlainDiclosureGroup(
+            backgroundColor: model.colors.background,
+            isExpanded: .init(
+                get: { internalState.isExpanded },
+                set: { expandCollapseFromHeaderTap($0) }
+            ),
+            label: { header },
+            content: {
+                VStack(spacing: 0, content: {
+                    divider
+                    contentView
+                })
+            }
+        )
             .background(VSheet(model: model.sheetSubModel))
+            .cornerRadius(model.layout.cornerRadius)
             .animation(model.animations.expandCollapse, value: isEnabled)
             .animation(model.animations.expandCollapse, value: state) // +withAnimation
     }
     
     private var header: some View {
-        ZStack(content: {
-            Color.clear
-                .contentShape(Rectangle())
-                .onTapGesture(perform: expandCollapseFromHeaderTap)
-            
-            HStack(spacing: 0, content: {
-                Group(content: {
-                    switch headerLabel {
-                    case .title(let title):
-                        VText(
-                            color: model.colors.headerTitle.for(internalState),
-                            font: model.fonts.headerTitle,
-                            title: title
-                        )
-                        
-                    case .custom(let label):
-                        label()
-                            .opacity(model.colors.customHeaderLabelOpacities.for(internalState))
-                    }
-                })
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Spacer()
-                
-                VSquareButton.chevron(
-                    model: model.chevronButonSubModel,
-                    direction: internalState.chevronButtonDirection,
-                    action: expandCollapse
-                )
-                    .disabled(!internalState.isEnabled)
+        HStack(spacing: 0, content: {
+            Group(content: {
+                switch headerLabel {
+                case .title(let title):
+                    VText(
+                        color: model.colors.headerTitle.for(internalState),
+                        font: model.fonts.headerTitle,
+                        title: title
+                    )
+                    
+                case .custom(let label):
+                    label()
+                        .opacity(model.colors.customHeaderLabelOpacities.for(internalState))
+                }
             })
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Spacer()
+            
+            VSquareButton.chevron(
+                model: model.chevronButonSubModel,
+                direction: internalState.chevronButtonDirection,
+                action: expandCollapse
+            )
+                .disabled(!internalState.isEnabled)
         })
             .padding(.leading, model.layout.headerMargins.leading)
             .padding(.trailing, model.layout.headerMargins.trailing)
             .padding(.top, model.layout.headerMargins.top)
             .padding(.bottom, model.layout.headerMargins.bottom)
-            .contentShape(Rectangle())
-            .readSize(onChange: { grabberHeaderDividerHeight = $0.height })
     }
     
     @ViewBuilder private var divider: some View {
@@ -194,8 +190,14 @@ public struct VAccordion<HeaderLabel, Content>: View
         withAnimation(model.animations.expandCollapse, { state.setNextState() })
     }
     
-    private func expandCollapseFromHeaderTap() {
-        guard model.misc.expandsAndCollapsesOnHeaderTap else { return }
+    private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
+        guard
+            model.misc.expandsAndCollapsesOnHeaderTap,
+            isExpanded ^^ internalState.isExpanded
+        else {
+            return
+        }
+        
         expandCollapse()
     }
 }
@@ -223,7 +225,7 @@ struct VAccordion_Previews: PreviewProvider {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(data: 0..<20, rowContent: { num in
+                    VList(data: 0..<10, rowContent: { num in
                         Text(String(num))
                             .padding(.vertical, 2)
                             .frame(maxWidth: .infinity, alignment: .leading)

@@ -172,7 +172,7 @@ public struct VAccordionModel {
     var sheetSubModel: VSheetModel {
         var model: VSheetModel = .init()
         
-        model.layout.cornerRadius = layout.cornerRadius
+        model.layout.cornerRadius = 0
         model.layout.contentMargin = 0
         
         model.colors.background = colors.background

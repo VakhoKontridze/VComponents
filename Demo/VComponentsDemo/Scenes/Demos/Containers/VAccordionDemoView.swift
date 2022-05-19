@@ -48,7 +48,7 @@ struct VAccordionDemoView: View {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(data: 0..<20, rowContent: { num in
+                    VList(data: 0..<10, rowContent: { num in
                         Text(String(num))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     })
