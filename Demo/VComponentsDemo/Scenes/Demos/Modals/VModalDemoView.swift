@@ -74,9 +74,11 @@ struct VModalDemoView: View {
             VText(color: ColorBook.primary, font: .callout, title: "Dismiss Method:")
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack(content: {
-                ForEach(VModalModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
-                    dismissTypeView(position)
+            ScrollView(.horizontal, showsIndicators: false, content: {
+                HStack(content: {
+                    ForEach(VModalModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
+                        dismissTypeView(position)
+                    })
                 })
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -87,6 +89,11 @@ struct VModalDemoView: View {
     
     private func dismissTypeView(_ position: VModalModel.Misc.DismissType) -> some View {
         VCheckBox(
+            model: {
+                var model: VCheckBoxModel = .init()
+                model.layout.titleLabelLineLimit = 1
+                return model
+            }(),
             isOn: .init(
                 get: { dismissType.contains(position) },
                 set: { isOn in

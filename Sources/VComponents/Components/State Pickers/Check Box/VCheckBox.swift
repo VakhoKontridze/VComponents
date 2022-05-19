@@ -127,7 +127,7 @@ public struct VCheckBox<Label>: View where Label: View {
 
                     VBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: .multiLine(alignment: .leading, limit: nil),
+                            type: .multiLine(alignment: .leading, limit: model.layout.titleLabelLineLimit),
                             color: model.colors.title.for(internalState),
                             font: model.fonts.title,
                             title: title

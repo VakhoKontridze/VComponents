@@ -83,9 +83,11 @@ struct VBottomSheetDemoView: View {
                 VText(color: ColorBook.primary, font: .callout, title: "Dismiss Method:")
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                HStack(content: {
-                    ForEach(VBottomSheetModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
-                        dismissTypeView(position)
+                ScrollView(.horizontal, showsIndicators: false, content: {
+                    HStack(content: {
+                        ForEach(VBottomSheetModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
+                            dismissTypeView(position)
+                        })
                     })
                 })
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -123,6 +125,11 @@ struct VBottomSheetDemoView: View {
     
     private func dismissTypeView(_ position: VBottomSheetModel.Misc.DismissType) -> some View {
         VCheckBox(
+            model: {
+                var model: VCheckBoxModel = .init()
+                model.layout.titleLabelLineLimit = 1
+                return model
+            }(),
             isOn: .init(
                 get: { dismissType.contains(position) },
                 set: { isOn in

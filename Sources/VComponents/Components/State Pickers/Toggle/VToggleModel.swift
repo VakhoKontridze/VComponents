@@ -48,6 +48,9 @@ public struct VToggleModel {
         /// Spacing between toggle and label. Defaults to `5`.
         public var toggleLabelSpacing: CGFloat = 5
         
+        /// Title label line limit. Defaults to `nil`.
+        public var titleLabelLineLimit: Int? = nil
+        
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2
             let thumnStartPoint: CGFloat = (size.width - thumbDimension)/2
