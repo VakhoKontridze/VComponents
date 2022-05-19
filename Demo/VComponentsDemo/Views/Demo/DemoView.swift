@@ -110,7 +110,11 @@ struct DemoView<ComponentContent, SettingsContent>: View
             
             case .componentAndSettings(let type, let component, let settings):
                 componentView(type: type, component: component)
-                settingsView(settings: settings)
+                    .toolbar(content: {
+                        ToolbarItemGroup(placement: .navigationBarTrailing, content: {
+                            settingsView(settings: settings)
+                        })
+                    })
             }
         })
     }
@@ -146,23 +150,22 @@ struct DemoView<ComponentContent, SettingsContent>: View
     )  -> some View
         where Content: View
     {
-        Group(content: {
-            VPlainButton(action: { isPresented = true }, title: "Parameters")
-                .vBottomSheet(isPresented: $isPresented, bottomSheet: {
-                    VBottomSheet(
-                        model: bottomSheetModel,
-                        headerTitle: "Parameters",
-                        content: {
-                            ScrollView(content: {
-                                settings()
-                                    .padding(.trailing, 15)
-                            })
-                        }
-                    )
-                })
-        })
-            .frame(maxHeight: .infinity, alignment: .bottom)
-            .padding(15)
+        VPlainButton(
+            action: { isPresented = true },
+            icon: .init(systemName: "gearshape")
+        )
+            .vBottomSheet(isPresented: $isPresented, bottomSheet: {
+                VBottomSheet(
+                    model: bottomSheetModel,
+                    headerTitle: "Parameters",
+                    content: {
+                        ScrollView(content: {
+                            settings()
+                                .padding(.trailing, 15)
+                        })
+                    }
+                )
+            })
     }
 }
 

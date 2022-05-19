@@ -68,7 +68,12 @@ struct VMenuDemoView: View {
     
     private var buttonTitle: String { "Present" }
 
-    private func buttonContent() -> some View { DemoIconContentView() }
+    private func buttonContent() -> some View {
+        Image(systemName: "swift")
+            .resizable()
+            .frame(dimension: 15)
+            .foregroundColor(ColorBook.accent)
+    }
 }
 
 // MARK: - Helpers
