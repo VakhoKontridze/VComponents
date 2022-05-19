@@ -101,9 +101,23 @@ struct VBottomSheetDemoView: View {
         })
         
         DemoViewSettingsSection(content: {
-            ToggleSettingView(isOn: $isContentDraggable, title: "Draggable Content")
+            ToggleSettingView(
+                isOn: $isContentDraggable,
+                title: "Draggable Content",
+                description: "Content dragging is disabled if autoresizing is enabled"
+            )
+                .disabled(autoresizesContent)
             
-            ToggleSettingView(isOn: $autoresizesContent, title: "Autoresizes Content")
+            ToggleSettingView(
+                isOn: .init(
+                    get: { autoresizesContent },
+                    set: { newValue in
+                        self.autoresizesContent = newValue
+                        if newValue { isContentDraggable = false }
+                    }
+                ),
+                title: "Autoresizes Content"
+            )
         })
     }
     

@@ -11,6 +11,8 @@ import VComponents
 // MARK: - Toggle Setting View
 struct ToggleSettingView: View {
     // MARK: Properties
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    
     @Binding private var isOn: Bool
     
     private let title: String
@@ -33,7 +35,7 @@ struct ToggleSettingView: View {
             VStack(alignment: .leading, spacing: 3, content: {
                 if !title.isEmpty {
                     VText(
-                        color: ColorBook.primary,
+                        color: isEnabled ? ColorBook.primary : .init(componentAsset: "Primary.presseddisabled"), // Not exposing API
                         font: .callout,
                         title: title
                     )
@@ -42,7 +44,7 @@ struct ToggleSettingView: View {
                 if let description = description, !description.isEmpty {
                     VText(
                         type: .multiLine(alignment: .leading, limit: nil),
-                        color: ColorBook.secondary,
+                        color: isEnabled ? ColorBook.secondary : .init(componentAsset: "Secondary.presseddisabled"), // Not exposing API
                         font: .footnote,
                         title: description
                     )

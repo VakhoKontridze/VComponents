@@ -11,6 +11,8 @@ import VComponents
 // MARK: Stepepr Setting View
 struct StepperSettingView: View {
     // MARK: Properties
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    
     private let range: ClosedRange<Int>
     @Binding private var value: Int
     
@@ -36,7 +38,7 @@ struct StepperSettingView: View {
             VStack(alignment: .leading, spacing: 3, content: {
                 if !title.isEmpty {
                     VText(
-                        color: ColorBook.primary,
+                        color: isEnabled ? ColorBook.primary : .init(componentAsset: "Primary.presseddisabled"), // Not exposing API
                         font: .callout,
                         title: title
                     )
@@ -45,7 +47,7 @@ struct StepperSettingView: View {
                 if let description = description, !description.isEmpty {
                     VText(
                         type: .multiLine(alignment: .leading, limit: nil),
-                        color: ColorBook.secondary,
+                        color: isEnabled ? ColorBook.secondary : .init(componentAsset: "Secondary.presseddisabled"), // Not exposing API
                         font: .footnote,
                         title: description
                     )
