@@ -11,6 +11,10 @@ General
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines 
 - Several internal properties are now exposed to public in models
 
+VPrimaryButton
+
+- Button loader size is changed from `10` to `15`
+
 VSquareButton
 
 - Button font is changed to `system bold` size `15`

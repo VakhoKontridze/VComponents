@@ -51,8 +51,8 @@ public struct VPrimaryButtonModel {
         /// Applicable only if icon `init`with icon and title is used.
         public var iconTitleSpacing: CGFloat = 10
         
-        /// Loader dimension. Defaults to `10`.
-        public var loaderDimension: CGFloat = 10
+        /// Loader dimension. Defaults to `15`.
+        public var loaderDimension: CGFloat = 15
         
         /// Spacing between label and spinner. Defaults to `20`.
         ///
