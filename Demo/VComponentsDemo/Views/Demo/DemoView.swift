@@ -125,24 +125,28 @@ struct DemoView<ComponentContent, SettingsContent>: View
     ) -> some View
         where Content: View
     {
-        Group(content: {
-            switch type {
-            case .fixed:
-                component()
-                    .padding(.trailing, 15)
-                    .frame(maxWidth: .infinity)
-                
-            case .flexible:
-                ScrollView(content: {
+        // Component view is embedded in VStack, as some demo's contain swift case in Groups.
+        // Since Group is a pseudo-view, it may cause multiple VBottomSheets to appear.
+        VStack(content: {
+            Group(content: {
+                switch type {
+                case .fixed:
                     component()
-                        .frame(maxWidth: .infinity)
                         .padding(.trailing, 15)
-                })
-                
-            }
+                        .frame(maxWidth: .infinity)
+                    
+                case .flexible:
+                    ScrollView(content: {
+                        component()
+                            .frame(maxWidth: .infinity)
+                            .padding(.trailing, 15)
+                    })
+                    
+                }
+            })
+                .padding(.bottom, 15 + 20)    // VPlainButton height
+                .padding([.leading, .top, .bottom], 15)
         })
-            .padding(.bottom, 15 + 20)    // VPlainButton height
-            .padding([.leading, .top, .bottom], 15)
     }
     
     private func settingsView<Content>(
