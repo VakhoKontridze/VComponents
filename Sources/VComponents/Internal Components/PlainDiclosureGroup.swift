@@ -44,9 +44,9 @@ struct PlainDiclosureGroup<Label, Content>: View
             DisclosureGroup(
                 isExpanded: $isExpanded,
                 content: content,
-                label: { Color.clear.frame(height: max(0, labelHeight - 10)) }
+                label: { Color.clear.frame(height: max(0, labelHeight - 10)) } // Default padding in `DisclosureGroup`
             )
-                .buttonStyle(.plain).accentColor(.clear) // !!!
+                .buttonStyle(.plain).accentColor(.clear) // Hides chevron button
         })
     }
     
