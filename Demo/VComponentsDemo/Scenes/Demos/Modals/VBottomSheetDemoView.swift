@@ -152,17 +152,11 @@ struct VBottomSheetDemoView: View {
                     .padding(.bottom, 10)
                 
             case true:
-                ScrollView(content: {
-                    VStack(content: {
-                        ForEach(0..<20, content: { num in
-                            Text(String(num))
-                                .padding(.vertical, 7)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        })
-                        
-                        Spacer().frame(height: 10)
-                    })
+                VList(data: 0..<20, rowContent: { num in
+                    Text(String(num))
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 })
+                    .padding(.bottom, 10)
             }
 
             if dismissType.isEmpty {
