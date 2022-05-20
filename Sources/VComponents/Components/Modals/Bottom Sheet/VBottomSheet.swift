@@ -118,6 +118,7 @@ extension View {
     /// Presents `VBottomSheet` when boolean is true.
     public func vBottomSheet<HeaderLabel, Content>(
         isPresented: Binding<Bool>,
+        onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         bottomSheet: @escaping () -> VBottomSheet<HeaderLabel, Content>
     ) -> some View
@@ -133,6 +134,7 @@ extension View {
                 content: {
                     _VBottomSheet(
                         model: bottomSheet.model,
+                        onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: bottomSheet.headerLabel,
                         content: bottomSheet.content
@@ -144,6 +146,7 @@ extension View {
     /// Presents `VBottomSheet` using the item as data source for content.
     @ViewBuilder public func vBottomSheet<Item, HeaderLabel, Content>(
         item: Binding<Item?>,
+        onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         bottomSheet: @escaping (Item) -> VBottomSheet<HeaderLabel, Content>
     ) -> some View
@@ -163,6 +166,7 @@ extension View {
                         get: { true },
                         set: { _ in item.wrappedValue = nil }
                     ),
+                    onPresent: presentHandler,
                     onDismiss: dismissHandler,
                     bottomSheet: { bottomSheet(_item) }
                 )

@@ -19,7 +19,8 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     
     private let model: VBottomSheetModel
     
-    private let dismissHandler: (() -> Void?)?
+    private let presentHandler: (() -> Void)?
+    private let dismissHandler: (() -> Void)?
     
     private let headerLabel: VBottomSheetHeaderLabel<HeaderLabel>
     private let content: () -> Content
@@ -42,11 +43,13 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     // MARK: Initializers
     init(
         model: VBottomSheetModel,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent presentHandler: (() -> Void)?,
+        onDismiss dismissHandler: (() -> Void)?,
         headerLabel: VBottomSheetHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
+        self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.headerLabel = headerLabel
         self.content = content
@@ -222,6 +225,13 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     // MARK: Animation
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isInternallyPresented = true })
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + (model.animations.appear?.duration ?? 0),
+            execute: {
+                DispatchQueue.main.async(execute: { presentHandler?() })
+            }
+        )
     }
 
     private func animateOut() {

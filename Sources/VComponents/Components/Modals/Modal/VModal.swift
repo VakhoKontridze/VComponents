@@ -90,6 +90,7 @@ extension View {
     /// Presents `VModal` when boolean is true.
     public func vModal<HeaderLabel, Content>(
         isPresented: Binding<Bool>,
+        onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         modal: @escaping () -> VModal<HeaderLabel, Content>
     ) -> some View
@@ -105,6 +106,7 @@ extension View {
                 content: {
                     _VModal(
                         model: modal.model,
+                        onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: modal.headerLabel,
                         content: modal.content
@@ -116,6 +118,7 @@ extension View {
     /// Presents `VModal` using the item as data source for content.
     @ViewBuilder public func vModal<Item, HeaderLabel, Content>(
         item: Binding<Item?>,
+        onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         modal: @escaping (Item) -> VModal<HeaderLabel, Content>
     ) -> some View
@@ -135,6 +138,7 @@ extension View {
                         get: { true },
                         set: { _ in item.wrappedValue = nil }
                     ),
+                    onPresent: presentHandler,
                     onDismiss: dismissHandler,
                     modal: { modal(_item) }
                 )

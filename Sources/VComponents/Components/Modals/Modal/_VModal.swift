@@ -18,7 +18,8 @@ struct _VModal<HeaderLabel, Content>: View
     
     private let model: VModalModel
     
-    private let dismissHandler: (() -> Void?)?
+    private let presentHandler: (() -> Void)?
+    private let dismissHandler: (() -> Void)?
     
     private let headerLabel: VModalHeaderLabel<HeaderLabel>
     private let content: () -> Content
@@ -31,11 +32,13 @@ struct _VModal<HeaderLabel, Content>: View
     // MARK: Initializers
     init(
         model: VModalModel,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+        onPresent presentHandler: (() -> Void)?,
+        onDismiss dismissHandler: (() -> Void)?,
         headerLabel: VModalHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
+        self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.headerLabel = headerLabel
         self.content = content
@@ -154,6 +157,13 @@ struct _VModal<HeaderLabel, Content>: View
     // MARK: Animations
     private func animateIn() {
         withAnimation(model.animations.appear?.asSwiftUIAnimation, { isInternallyPresented = true })
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + (model.animations.appear?.duration ?? 0),
+            execute: {
+                DispatchQueue.main.async(execute: { presentHandler?() })
+            }
+        )
     }
 
     private func animateOut() {
