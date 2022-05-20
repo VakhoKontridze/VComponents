@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V RadioButton Demo View
 struct VRadioButtonDemoView: View {
@@ -43,6 +44,7 @@ struct VRadioButtonDemoView: View {
     var body: some View {
         DemoView(component: component, settings: settings)
             .standardNavigationTitle(Self.navBarTitle)
+            .bindToModalContext(state)
     }
     
     private func component() -> some View {

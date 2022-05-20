@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Bottom Sheet Demo View
 struct VBottomSheetDemoView: View {

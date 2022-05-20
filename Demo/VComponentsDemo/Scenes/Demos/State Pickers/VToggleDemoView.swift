@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Toggle Demo View
 struct VToggleDemoView: View {
@@ -30,6 +31,7 @@ struct VToggleDemoView: View {
     var body: some View {
         DemoView(component: component, settings: settings)
             .standardNavigationTitle(Self.navBarTitle)
+            .bindToModalContext(state)
     }
     
     private func component() -> some View {
