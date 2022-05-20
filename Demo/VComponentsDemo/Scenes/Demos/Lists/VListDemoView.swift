@@ -20,7 +20,6 @@ struct VListDemoView: View {
     var body: some View {
         DemoView(
             type: layoutType.demoViewComponentContentType,
-            hasLayer: false,
             component: component,
             settings: settings
         )

@@ -36,7 +36,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     // MARK: Body
     var body: some View {
         ZStack(content: {
-            ColorBook.canvas.edgesIgnoringSafeArea(.bottom)
+            ColorBook.canvas.edgesIgnoringSafeArea(.all)
             
             switch demoType {
             case .accordion:
@@ -57,6 +57,8 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                     .padding(.top, 10)
                 
             case .section:
+                VSheet()
+                
                 VLazyScrollView(type: .vertical(lazyScrollViewModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
                     VList(data: section.rows, rowContent: { row in
                         DemoListRowView(title: row.title, destination: row.body)
