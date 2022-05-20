@@ -34,11 +34,11 @@ public struct ColorBook {
     
     static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
     
-    //static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
+    static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
     
-    //static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
+    static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
     
-    //static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
+    static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
     
     static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
     

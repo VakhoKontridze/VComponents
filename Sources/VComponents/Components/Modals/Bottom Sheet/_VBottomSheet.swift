@@ -26,10 +26,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
-    private var hasGrabber: Bool {
-        model.layout.grabberSize.height > 0 &&
-        (model.misc.dismissType.contains(.pullDown) || model.layout.height.isResizable)
-    }
+    private var hasGrabber: Bool { model.misc.dismissType.contains(.pullDown) || model.layout.height.isResizable }
     private var hasHeaderDivider: Bool { hasHeader && model.layout.headerDividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false

@@ -178,8 +178,8 @@ struct VBottomSheetDemoView: View {
                             var model: VPlainButtonModel = .init()
                             model.colors.title = .init(
                                 enabled: ColorBook.primaryWhite,
-                                pressed: ColorBook.primaryWhite,
-                                disabled: ColorBook.primaryWhite
+                                pressed: .init(componentAsset: "PrimaryWhite.presseddisabled"), // Not exposing API
+                                disabled: .init(componentAsset: "PrimaryWhite.presseddisabled") // Not exposing API
                             )
                             return model
                         }(),
@@ -190,6 +190,7 @@ struct VBottomSheetDemoView: View {
                     .padding(15)
                     .background(Color.black.opacity(0.75))
                     .cornerRadius(10)
+                    .padding(15)
             }
         })
     }
