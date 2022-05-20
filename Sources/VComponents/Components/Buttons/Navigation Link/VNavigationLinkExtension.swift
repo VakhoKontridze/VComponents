@@ -18,7 +18,7 @@ extension View {
     ///     var body: some View {
     ///         NavigationView(content: {
     ///             ZStack(content: {
-    ///                 ColorBook.canvas.edgesIgnoringSafeArea(.all)
+    ///                 ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
     ///
     ///                 VPlainButton(
     ///                     action: { isActive = true },
@@ -32,7 +32,7 @@ extension View {
     ///     }
     ///
     ///     var destination: some View {
-    ///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+    ///         ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
     ///            .navigationTitle("Destination")
     ///            .navigationBarTitleDisplayMode(.inline)
     ///     }

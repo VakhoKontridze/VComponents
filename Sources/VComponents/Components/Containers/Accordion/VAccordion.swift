@@ -18,7 +18,7 @@ import VCore
 /// Usage example:
 ///
 ///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.edgesIgnoringSafeArea(.all)
+///         ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
 ///
 ///     VAccordion(
 ///             isExpanded: $isExpanded,
@@ -210,7 +210,7 @@ struct VAccordion_Previews: PreviewProvider {
     
     static var previews: some View {
         ZStack(alignment: .top, content: {
-            ColorBook.canvas.edgesIgnoringSafeArea(.all)
+            ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
 
             VAccordion(
                 isExpanded: $isExpanded,

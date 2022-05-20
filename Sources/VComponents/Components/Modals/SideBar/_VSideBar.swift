@@ -40,18 +40,18 @@ struct _VSideBar<Content>: View where Content: View {
     
     private var blinding: some View {
         model.colors.blinding
-            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea(.all, edges: .all)
             .onTapGesture(perform: animateOut)
     }
     
     private var sideBarView: some View {
         ZStack(content: {
             VSheet(model: model.sheetSubModel)
-                .edgesIgnoringSafeArea(.all)
+                .ignoresSafeArea(.all, edges: .all)
 
             content()
                 .padding(model.layout.contentMargins)
-                .edgesIgnoringSafeArea(edgesToIgnore)
+                .ignoresSafeArea(.all, edges: edgesToIgnore) // FIXME: + KEYBOARD
         })
             .frame(width: model.layout.width)
             .offset(x: isViewPresented ? 0 : -model.layout.width)

@@ -41,7 +41,7 @@ struct VAccordionDemoView: View {
     
     private func component() -> some View {
         ZStack(alignment: .top, content: {
-            ColorBook.canvas.edgesIgnoringSafeArea(.all)
+            ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
 
             VAccordion(
                 model: model,

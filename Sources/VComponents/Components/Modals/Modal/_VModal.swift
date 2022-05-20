@@ -61,7 +61,7 @@ struct _VModal<HeaderLabel, Content>: View
     
     private var blinding: some View {
         model.colors.blinding
-            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea(.all, edges: .all)
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })

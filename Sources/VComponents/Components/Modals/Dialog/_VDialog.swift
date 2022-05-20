@@ -51,7 +51,7 @@ struct _VDialog<Content>: View where Content: View {
     
     private var blinding: some View {
         model.colors.blinding
-            .edgesIgnoringSafeArea(.all)
+            .ignoresSafeArea(.all, edges: .all)
     }
     
     private var modalView: some View {
