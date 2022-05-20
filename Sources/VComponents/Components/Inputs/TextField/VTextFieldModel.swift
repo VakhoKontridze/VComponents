@@ -54,8 +54,8 @@ public struct VTextFieldModel {
         /// Textfield text alignment. Defaults to `default`.
         public var textAlignment: TextAlignment = .leading
         
-        /// Textfield border width. Defaults to `1.5`.
-        public var borderWidth: CGFloat = 1.5
+        /// Textfield border width. Defaults to `1`.
+        public var borderWidth: CGFloat = 1
         
         /// Content horizontal margin. Defaults to `15`.
         public var contentMarginHorizontal: CGFloat = 15
@@ -126,17 +126,17 @@ public struct VTextFieldModel {
 
         /// Search icon colors.
         public var searchIcon: StateColors = .init(
-            enabled: segmentedPickerReference.colors.header.enabled,
-            disabled: segmentedPickerReference.colors.header.disabled,
-            focused: segmentedPickerReference.colors.header.enabled
+            enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
+            disabled: ColorBook.primaryPressedDisabled,
+            focused: .init(componentAsset: "TextField.PlainButton.enabled")
         )
 
         /// Visiblity button icon colors.
         public var visibilityButtonIcon: ButtonStateColors = .init(
-            enabled: segmentedPickerReference.colors.header.enabled,
+            enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
             pressed: ColorBook.primaryPressedDisabled,
-            disabled: segmentedPickerReference.colors.header.disabled,
-            focused: segmentedPickerReference.colors.header.enabled
+            disabled: ColorBook.primaryPressedDisabled,
+            focused: .init(componentAsset: "TextField.PlainButton.enabled")
         )
 
         /// Clear button background colors.
@@ -267,7 +267,6 @@ extension VTextFieldModel.Colors {
         backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
         backgroundFocused: .init(componentAsset: "TextField.Success.Background.enabled"),
         enabled: .init(componentAsset: "TextField.Success.Foreground.enabled"),
-        pressed: .init(componentAsset: "TextField.Success.Foreground.pressed"),
         focused: .init(componentAsset: "TextField.Success.Foreground.enabled")
     )
 
@@ -276,7 +275,6 @@ extension VTextFieldModel.Colors {
         backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
         backgroundFocused: .init(componentAsset: "TextField.Warning.Background.enabled"),
         enabled: .init(componentAsset: "TextField.Warning.Foreground.enabled"),
-        pressed: .init(componentAsset: "TextField.Warning.Foreground.pressed"),
         focused: .init(componentAsset: "TextField.Warning.Foreground.enabled")
     )
 
@@ -285,7 +283,6 @@ extension VTextFieldModel.Colors {
         backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
         backgroundFocused: .init(componentAsset: "TextField.Error.Background.enabled"),
         enabled: .init(componentAsset: "TextField.Error.Foreground.enabled"),
-        pressed: .init(componentAsset: "TextField.Error.Foreground.pressed"),
         focused: .init(componentAsset: "TextField.Error.Foreground.enabled")
     )
     
@@ -293,7 +290,6 @@ extension VTextFieldModel.Colors {
         backgroundEnabled: Color,
         backgroundFocused: Color,
         enabled: Color,
-        pressed: Color,
         focused: Color
     ) -> VTextFieldModel.Colors {
         var colors: VTextFieldModel.Colors = .init()
@@ -312,15 +308,11 @@ extension VTextFieldModel.Colors {
         colors.footer.enabled = enabled
         colors.footer.focused = focused
         
-        colors.searchIcon.enabled = enabled
-        colors.searchIcon.focused = focused
+        //colors.searchIcon
         
-        colors.visibilityButtonIcon.enabled = enabled
-        colors.visibilityButtonIcon.pressed = pressed
+        //colors.visibilityButtonIcon
         
-        colors.clearButtonBackground.enabled = enabled
-        colors.clearButtonBackground.pressed = pressed
-        
+        //colors.clearButtonBackground
         //colors.clearButtonIcon
         
         return colors

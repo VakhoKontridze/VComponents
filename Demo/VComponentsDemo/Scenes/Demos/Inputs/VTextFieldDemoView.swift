@@ -58,16 +58,23 @@ struct VTextFieldDemoView: View {
     }
     
     private func component() -> some View {
-        VTextField(
-            model: model,
-            type: textFieldType,
-            placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
-            headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
-            footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
-            text: $text
-        )
-            .disabled(!isEnabled)
-            .focused($isFocused)
+        ZStack(content: {
+            Color.clear
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .contentShape(Rectangle())
+                .onTapGesture(perform: { isFocused = false })
+            
+            VTextField(
+                model: model,
+                type: textFieldType,
+                placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
+                headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
+                footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
+                text: $text
+            )
+                .disabled(!isEnabled)
+                .focused($isFocused)
+        })
     }
 
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
