@@ -86,10 +86,10 @@ public struct VSideBarModel {
     /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Appear animation. Defaults to `linear` with duration `0.2`.
+        /// Appear animation.  Defaults to `easeInOut` with duration `0.3`.
         public var appear: BasicAnimation? = bottomSheetReference.animations.appear
         
-        /// Disappear animation. Defaults to `linear` with duration `0.2`.
+        /// Disappear animation.  Defaults to `easeInOut` with duration `0.3`.
         public var disappear: BasicAnimation? = bottomSheetReference.animations.disappear
         
         // MARK: Initializers

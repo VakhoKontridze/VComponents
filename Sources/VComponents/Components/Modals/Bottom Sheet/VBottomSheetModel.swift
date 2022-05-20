@@ -232,14 +232,14 @@ public struct VBottomSheetModel {
     /// Sub-model containing animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Appear animation. Defaults to `linear` with duration `0.2`.
-        public var appear: BasicAnimation? = .init(curve: .linear, duration: 0.2)
+        /// Appear animation. Defaults to `easeInOut` with duration `0.3`.
+        public var appear: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
         
-        /// Disappear animation. Defaults to `linear` with duration `0.2`.
-        public var disappear: BasicAnimation? = .init(curve: .linear, duration: 0.2)
+        /// Disappear animation. Defaults to `easeInOut` with duration `0.3`.
+        public var disappear: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
         
-        /// Pull-down disappear animation. Defaults to `linear` with duration `0.1`.
-        public var pullDownDisappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.1)
+        /// Pull-down disappear animation. Defaults to `easeInOut` with duration `0.1`.
+        public var pullDownDisappear: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
         
         /// Height snapping animation between `min`, `ideal`, and `max` states. Defaults to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
