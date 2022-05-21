@@ -15,7 +15,7 @@ struct VBottomSheetDemoView: View {
     static var navBarTitle: String { "Bottom Sheet" }
     
     @State private var isPresented: Bool = false
-    @State private var heightType: VModalHeightType = VBottomSheetModel.Layout.Height.default.helperType
+    @State private var heightType: VModalHeightType = VBottomSheetModel.Layout.Sizes.default.current.size.heights.helperType
     @State private var dismissType: VBottomSheetModel.Misc.DismissType = .default
     @State private var hasGrabber: Bool = VBottomSheetModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
@@ -26,13 +26,26 @@ struct VBottomSheetDemoView: View {
     private var model: VBottomSheetModel {
         var model: VBottomSheetModel = .init()
         
+        if heightType == .fixed {
+            model.layout.sizes = .init( // Assumes that relative is default
+                portrait: .relative(.init(
+                    width: model.layout.sizes.portrait.size.width,
+                    heights: .fixed(model.layout.sizes.portrait.size.heights.ideal)
+                )),
+                landscape: .relative(.init(
+                    width: model.layout.sizes.landscape.size.width,
+                    heights: .fixed(model.layout.sizes.landscape.size.heights.ideal)
+                ))
+            )
+        }
+        
         if !hasDivider && (hasGrabber || hasTitle || dismissType.hasButton) {
             model.layout.headerMargins.bottom /= 2
             model.layout.contentMargins.top /= 2
         }
         
         model.layout.grabberSize.height = hasGrabber ? (model.layout.grabberSize.height == 0 ? 4 : model.layout.grabberSize.height) : 0
-        model.layout.height = heightType.height
+        
         model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
         model.layout.autoresizesContent = autoresizesContent
         
@@ -202,16 +215,9 @@ private enum VModalHeightType: Int, PickableTitledEnumeration {
         case .dynamic: return "Dynamic"
         }
     }
-
-    var height: VBottomSheetModel.Layout.Height {
-        switch self {
-        case .fixed: return .fixed(VBottomSheetModel.Layout.Height.default.ideal)
-        case .dynamic: return .default
-        }
-    }
 }
 
-extension VBottomSheetModel.Layout.Height {
+extension VBottomSheetModel.Layout.Sizes.BottomSheetHeights {
     fileprivate var helperType: VModalHeightType {
         if isResizable {
             return .dynamic

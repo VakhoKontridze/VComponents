@@ -42,7 +42,7 @@ public struct VToastModel {
         public var presentationOffsetFromSafeEdge: CGFloat = 20
         
         /// Max width. Defaults to `0.9` ratio of screen width.
-        public var maxWidth: CGFloat = UIScreen.main.bounds.width * 0.9
+        public var maxWidth: CGFloat = UIScreen.main.bounds.width * 0.9 // FIXME: Add landscape
         
         /// Corner radius type. Defaults to `default`.
         public var cornerRadiusType: CornerRadiusType = .default

@@ -16,25 +16,25 @@ enum VBottomSheetSnapAction {
     // MARK: Initializers
     // Velocity is always non-zero, and exceeds the threshold.
     static func dragEndedHighVelocitySnapAction(
-        height: VBottomSheetModel.Layout.Height,
+        heights: VBottomSheetModel.Layout.Sizes.BottomSheetHeights,
         offset: CGFloat,
         velocity: CGFloat
     ) -> VBottomSheetSnapAction {
-        let region: VBottomSheetRegion = .init(height: height, offset: offset)
+        let region: VBottomSheetRegion = .init(heights: heights, offset: offset)
         let isGoingDown: Bool = velocity > 0
         
         switch (region, isGoingDown) {
-        case (.idealToMax, false): return .snap(height.max - height.max)
-        case (.idealToMax, true): return .snap(height.max - height.ideal)
-        case (.minToIdeal, false): return .snap(height.max - height.ideal)
-        case (.minToIdeal, true): return .snap(height.max - height.min)
-        case (.pullDownToMin, false): return .snap(height.max - height.min)
+        case (.idealToMax, false): return .snap(heights.max - heights.max)
+        case (.idealToMax, true): return .snap(heights.max - heights.ideal)
+        case (.minToIdeal, false): return .snap(heights.max - heights.ideal)
+        case (.minToIdeal, true): return .snap(heights.max - heights.min)
+        case (.pullDownToMin, false): return .snap(heights.max - heights.min)
         case (.pullDownToMin, true): return .dismiss
         }
     }
     
     static func dragEndedSnapAction(
-        height: VBottomSheetModel.Layout.Height,
+        heights: VBottomSheetModel.Layout.Sizes.BottomSheetHeights,
         canPullDownToDismiss: Bool,
         pullDownDismissDistance: CGFloat,
         
@@ -49,7 +49,7 @@ enum VBottomSheetSnapAction {
             guard isDraggedDown else { return false }
 
             let newOffset: CGFloat = offsetBeforeDrag + translation
-            let maxAllowedOffset: CGFloat = height.max - height.min
+            let maxAllowedOffset: CGFloat = heights.max - heights.min
             guard newOffset - maxAllowedOffset >= abs(pullDownDismissDistance) else { return false }
 
             return true
@@ -57,21 +57,21 @@ enum VBottomSheetSnapAction {
     
         switch shouldDismiss {
         case false:
-            switch VBottomSheetRegion(height: height, offset: offset) {
+            switch VBottomSheetRegion(heights: heights, offset: offset) {
             case .idealToMax:
-                let idealDiff: CGFloat = abs(height.idealOffset - offset)
-                let maxDiff: CGFloat = abs(height.maxOffset - offset)
-                let newOffset: CGFloat = idealDiff < maxDiff ? height.idealOffset : height.maxOffset
+                let idealDiff: CGFloat = abs(heights.idealOffset - offset)
+                let maxDiff: CGFloat = abs(heights.maxOffset - offset)
+                let newOffset: CGFloat = idealDiff < maxDiff ? heights.idealOffset : heights.maxOffset
                 
                 return .snap(newOffset)
 
             case .pullDownToMin, .minToIdeal:
                 // If `pullDown` is disabled, code won't get here.
-                // So, modal should snap to min height.
+                // So, modal should snap to min heights.
                 
-                let minDiff: CGFloat = abs(height.minOffset - offset)
-                let idealDiff: CGFloat = abs(height.idealOffset - offset)
-                let newOffset: CGFloat = minDiff < idealDiff ? height.minOffset : height.idealOffset
+                let minDiff: CGFloat = abs(heights.minOffset - offset)
+                let idealDiff: CGFloat = abs(heights.idealOffset - offset)
+                let newOffset: CGFloat = minDiff < idealDiff ? heights.minOffset : heights.idealOffset
                 
                 return .snap(newOffset)
             }
@@ -91,14 +91,14 @@ private enum VBottomSheetRegion {
 
     // MARK: Initializrs
     init(
-        height: VBottomSheetModel.Layout.Height,
+        heights: VBottomSheetModel.Layout.Sizes.BottomSheetHeights,
         offset: CGFloat
     ) {
-        if offset >= height.maxOffset && offset <= height.idealOffset {
+        if offset >= heights.maxOffset && offset <= heights.idealOffset {
             self = .idealToMax
-        } else if offset > height.idealOffset && offset <= height.minOffset {
+        } else if offset > heights.idealOffset && offset <= heights.minOffset {
             self = .minToIdeal
-        } else if offset > height.minOffset {
+        } else if offset > heights.minOffset {
             self = .pullDownToMin
         } else {
             fatalError()

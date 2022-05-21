@@ -35,8 +35,8 @@ public struct VDialogModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Side bar width. Defaults to `0.75` ratio of screen with.
-        public var width: CGFloat = UIScreen.main.bounds.width * 0.75
+        /// Side bar width. Defaults to `0.75` ratio of screen width.
+        public var width: CGFloat = UIScreen.main.bounds.width * 0.75 // FIXME: Add landscape
         
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
@@ -51,7 +51,7 @@ public struct VDialogModel {
         public var titlesAndContentSpacing: CGFloat = 5
         
         /// Additional title, description, and content margins. Defaults to `0` horizontal, and `5` vertical.
-        public var titlesAndContentMargins: TitleAndContentMargins = .init( // FIXME: ???
+        public var titlesAndContentMargins: TitleAndContentMargins = .init( // FIXME: ...
             horizontal: 0,
             vertical: 5
         )

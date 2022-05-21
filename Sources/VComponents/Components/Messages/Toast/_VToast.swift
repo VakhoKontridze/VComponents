@@ -72,7 +72,7 @@ struct _VToast: View {
     private var initialOffset: CGFloat {
         switch model.layout.presentationEdge {
         case .top: return -height
-        case .bottom: return UIScreen.main.bounds.height
+        case .bottom: return UIScreen.main.bounds.height // FIXME: Add landscape
         }
     }
     
@@ -82,7 +82,7 @@ struct _VToast: View {
             return UIDevice.safeAreaInsetTop + model.layout.presentationOffsetFromSafeEdge
         
         case .bottom:
-            return UIScreen.main.bounds.height - UIDevice.safeAreaInsetBottom - height - model.layout.presentationOffsetFromSafeEdge
+            return UIScreen.main.bounds.height - UIDevice.safeAreaInsetBottom - height - model.layout.presentationOffsetFromSafeEdge // FIXME: Add landscape
         }
     }
 

@@ -15,6 +15,7 @@ struct _VModal<HeaderLabel, Content>: View
 {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
     private let model: VModalModel
     
@@ -57,6 +58,7 @@ struct _VModal<HeaderLabel, Content>: View
                 of: presentationMode.isExternallyDismissed,
                 perform: { if $0 { animateOutFromExternalDismiss() } }
             )
+            .onChange(of: interfaceOrientationChangeObserver.orientation, perform: { print(">>", $0!) })
     }
     
     private var blinding: some View {
@@ -78,7 +80,7 @@ struct _VModal<HeaderLabel, Content>: View
             })
                 .frame(maxHeight: .infinity, alignment: .top)
         })
-            .frame(size: model.layout.size)
+            .frame(size: model.layout.sizes.current.size)
             .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : model.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
@@ -211,5 +213,6 @@ struct VModal_Previews: PreviewProvider {
                     }
                 )
             })
+            .previewInterfaceOrientation(.portrait)
     }
 }

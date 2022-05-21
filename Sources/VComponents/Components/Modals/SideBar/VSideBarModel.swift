@@ -38,8 +38,8 @@ public struct VSideBarModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Side bar width. Defaults to `0.67` ratio of screen with.
-        public var width: CGFloat = UIScreen.main.bounds.width * 0.67
+        /// Side bar width. Defaults to `0.67` ratio of screen width.
+        public var width: CGFloat = UIScreen.main.bounds.width * 0.67 // FIXME: Add landscape
         
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius

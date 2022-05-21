@@ -92,11 +92,13 @@ VNavigationView
 
 VModal
 
+- Modal now supports landscape mode
 - Modal margins are changed from `10` to `15`
 
 VHalfModal
 
 - `VHalfModal` is renamed to `VBottomSheet`
+- BottomSheet now supports landscape mode
 - BottomSheet can now be snapped to height by dragging it at high velocities
 - BottomSheet now supports content autoresizing
 - BottomSheet height has changed to `0.6`, `0.6`, and `0.9` ratios of screen height as min, ideal, and max heights
@@ -105,7 +107,12 @@ VHalfModal
 
 VSideBar
 
+- SideBar now supports landscape mode
 - SideBar margins are changed from `10` to `15`
+
+VDialog
+
+- Dialog now supports landscape mode
 
 VMenu
 

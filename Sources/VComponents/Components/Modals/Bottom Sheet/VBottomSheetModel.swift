@@ -44,8 +44,8 @@ public struct VBottomSheetModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Height. Defaults to `default`.
-        public var height: Height = .default
+        /// Bottom sheet sizes. Defaults to `default`.
+        public var sizes: Sizes = .default
         
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
@@ -99,12 +99,158 @@ public struct VBottomSheetModel {
         /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `600` points/s.
         public var velocityToSnapToNextHeight: CGFloat = 600
         
-        /// Distance to drag sheet downwards to initiate dismiss. Default to `0.1` ratio of min height.
-        public var pullDownDismissDistance: CGFloat = Height.default.min * 0.1
+        /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Default to `0.1`.
+        public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
+        
+        var pullDownDismissDistance: CGFloat { pullDownDismissDistanceMinHeightRatio * sizes.current.size.heights.min }
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        // MARK: Sizes
+        /// Model that describes bottom sheet sizes.
+        public struct Sizes {
+            // MARK: Properties
+            /// Portrait size configuration.
+            public let portrait: SizeConfiguration
+            
+            /// Landscape size configuration.
+            public let landscape: SizeConfiguration
+            
+            /// Current size configuration based on interface orientation.
+            public var current: SizeConfiguration {
+                switch _IntefaceOrientation() {
+                case nil: return portrait
+                case .portrait: return portrait
+                case .landscape: return landscape
+                }
+            }
+            
+            // MARK: Initializers
+            /// Initializes `Sizes` with size configurations.
+            public init(portrait: SizeConfiguration, landscape: SizeConfiguration) {
+                self.portrait = portrait
+                self.landscape = landscape
+            }
+            
+            /// Default value. Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait, and `0.7` ratio of screen width and `0.9` ratio of screen height in landscape.
+            public static var `default`: Sizes {
+                .init(
+                    portrait: .relative(.init(
+                        width: 1,
+                        heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
+                    )),
+                    landscape: .relative(.init(
+                        width: 0.7,
+                        heights: .fixed(0.95)
+                    ))
+                )
+            }
+            
+            // MARK: Single Size Configuration
+            /// Enum that describes state, either `point` or `relative`.
+            public enum SizeConfiguration {
+                // MARK: Cases
+                /// Size configuration with fixed sizes represented in points.
+                case point(BottomSheetSize)
+                
+                /// Size configuration with ratios relative to screen sizes.
+                case relative(BottomSheetSize)
+                
+                // MARK: Properties
+                /// Size configuration represented in points.
+                ///
+                /// `point` configuration is returned directly,
+                /// while `relative` configurations are multiplied by the screen size.
+                public var size: BottomSheetSize {
+                    switch self {
+                    case .point(let size):
+                        return size
+                    
+                    case .relative(let size):
+                        return .init(
+                            width: UIScreen.main.bounds.size.width * size.width,
+                            heights: .init(
+                                min: UIScreen.main.bounds.size.height * size.heights.min,
+                                ideal: UIScreen.main.bounds.size.height * size.heights.ideal,
+                                max: UIScreen.main.bounds.size.height * size.heights.max
+                            )
+                        )
+                    }
+                }
+            }
+            
+            // MARK: Bottom Sheet Size
+            /// Bottom sheet size.
+            public struct BottomSheetSize {
+                // MARK: Properties
+                /// Width.
+                public var width: CGFloat
+                
+                /// Heights.
+                public var heights: BottomSheetHeights
+                
+                // MARK: Initializers
+                /// Initializes `BottomSheetSize`.
+                public init(
+                    width: CGFloat,
+                    heights: BottomSheetHeights
+                ) {
+                    self.width = width
+                    self.heights = heights
+                }
+            }
+            
+            // MARK: Bottom Sheet Heights
+            /// Bottom Sheet Heights
+            public struct BottomSheetHeights {
+                // MARK: Properties
+                /// Minimum height.
+                public var min: CGFloat
+                
+                /// Ideal height.
+                public var ideal: CGFloat
+                
+                /// Maximum height.
+                public var max: CGFloat
+                
+                /// Indicates if model allows resizing.
+                public var isResizable: Bool {
+                    min != ideal ||
+                    ideal != max
+                }
+                
+                /// Indicates if values support a valid layout.
+                ///
+                /// If not, layout would invalidate itself, and refuse to draw.
+                public var isLayoutValid: Bool {
+                    min <= ideal &&
+                    ideal <= max
+                }
+                
+                var minOffset: CGFloat { max - min } // Offsets start from 0 at the top
+                var idealOffset: CGFloat { max - ideal } // Offsets start from 0 at the top
+                var maxOffset: CGFloat { max - max } // Offsets start from 0 at the top
+                
+                // MARK: Initializers
+                /// Initializes `Height`.
+                public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
+                    self.min = min
+                    self.ideal = ideal
+                    self.max = max
+                }
+                
+                /// Initializes `Height` with fixed values.
+                public static func fixed(_ value: CGFloat) -> Self {
+                    .init(
+                        min: value,
+                        ideal: value,
+                        max: value
+                    )
+                }
+            }
+        }
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
@@ -113,65 +259,6 @@ public struct VBottomSheetModel {
         // MARK: Vertical Margins
         /// Sub-model containing `top` and `bottom` margins.
         public typealias VerticalMargins = EdgeInsets_TB
-        
-        // MARK: Height
-        /// Models that describes heights.
-        public struct Height {
-            // MARK: Properties
-            /// Minimum height.
-            public var min: CGFloat
-            
-            /// Ideal height.
-            public var ideal: CGFloat
-            
-            /// Maximum height.
-            public var max: CGFloat
-            
-            /// Indicates if model allows resizing.
-            public var isResizable: Bool {
-                min != ideal ||
-                ideal != max
-            }
-            
-            /// Indicates if values support a valid layout.
-            ///
-            /// If not, layout would invalidate itself, and refuse to draw.
-            public var isLayoutValid: Bool {
-                min <= ideal &&
-                ideal <= max
-            }
-            
-            // Offsets start from 0 at the top
-            var minOffset: CGFloat { max - min }
-            var idealOffset: CGFloat { max - ideal }
-            var maxOffset: CGFloat { max - max }
-            
-            // MARK: Initializers
-            /// Initializes `Height`.
-            public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
-                self.min = min
-                self.ideal = ideal
-                self.max = max
-            }
-            
-            /// Initializes `Height` with fixed values.
-            public static func fixed(_ value: CGFloat) -> Self {
-                .init(
-                    min: value,
-                    ideal: value,
-                    max: value
-                )
-            }
-            
-            /// Default value. Set to `0.6` ratio of screen height as min, `0.6`as ideal, and `0.9` as max.
-            public static var `default`: Self {
-                .init(
-                    min: UIScreen.main.bounds.height * 0.6,
-                    ideal: UIScreen.main.bounds.height * 0.6,
-                    max: UIScreen.main.bounds.height * 0.9
-                )
-            }
-        }
     }
 
     // MARK: Colors
