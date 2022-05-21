@@ -17,10 +17,10 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 ## Compatibility
 
-| VComponents | Release    | iOS    |
-| ---         | ---        | ---    |
-| 2.x.x       | 2022 XX XX | 15.x.x |
-| 1.x.x       | 2021 02 07 | 14.x.x |
+| VComponents | Release    | iOS  |
+| ---         | ---        | ---  |
+| 2.0.0       | 2022 XX XX | 15.0 |
+| 1.0.0       | 2021 02 07 | 14.0 |
 
 ## Components
 
