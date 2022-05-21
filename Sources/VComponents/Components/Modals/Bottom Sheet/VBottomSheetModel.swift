@@ -288,6 +288,15 @@ public struct VBottomSheetModel {
         /// Blinding color.
         public var blinding: Color = modalReference.colors.blinding
         
+        /// Shadow color.
+        public var shadow: Color = modalReference.colors.shadow
+        
+        /// Shadow radius. Defaults to `0`.
+        public var shadowRadius: CGFloat = modalReference.colors.shadowRadius
+        
+        /// Shadow offset. Defaults to `zero`.
+        public var shadowOffset: CGSize = modalReference.colors.shadowOffset
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}

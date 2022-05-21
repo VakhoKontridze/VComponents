@@ -174,6 +174,15 @@ public struct VModalModel {
         /// Blinding color.
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")
         
+        /// Shadow color.
+        public var shadow: Color = .clear
+        
+        /// Shadow radius. Defaults to `0`.
+        public var shadowRadius: CGFloat = 0
+        
+        /// Shadow offset. Defaults to `zero`.
+        public var shadowOffset: CGSize = .zero
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}

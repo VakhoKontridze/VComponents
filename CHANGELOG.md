@@ -94,6 +94,7 @@ VModal
 
 - Modal now supports landscape mode
 - Modal margins are changed from `10` to `15`
+- Modal now has option for adding shadow
 
 VHalfModal
 
@@ -103,16 +104,19 @@ VHalfModal
 - BottomSheet now supports content autoresizing
 - BottomSheet height has changed to `0.6`, `0.6`, and `0.9` ratios of screen height as min, ideal, and max heights
 - BottomSheet margins are changed from `10` to `15` 
+- BottomSheet now has option for adding shadow
 - Issue with modal snapping to max height if dragged to min when `pullDown` dismiss type is not enabled is fixed
 
 VSideBar
 
 - SideBar now supports landscape mode
 - SideBar margins are changed from `10` to `15`
+- SideBar now has option for adding shadow
 
 VDialog
 
 - Dialog now supports landscape mode
+- Dialog now has option for adding shadow
 
 VMenu
 

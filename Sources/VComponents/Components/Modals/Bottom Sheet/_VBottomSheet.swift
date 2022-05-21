@@ -83,6 +83,12 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         if model.layout.sizes.current.size.heights.isLayoutValid {
             ZStack(alignment: .top, content: {
                 VSheet(model: model.sheetModel)
+                    .shadow(
+                        color: model.colors.shadow,
+                        radius: model.colors.shadowRadius,
+                        x: model.colors.shadowOffset.width,
+                        y: model.colors.shadowOffset.height
+                    )
                     .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                         $0
                             .frame(height: model.layout.sizes.current.size.heights.max)
@@ -283,7 +289,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         let maxAllowedOffset: CGFloat = model.layout.sizes.current.size.heights.max - model.layout.sizes.current.size.heights.min
         let minAllowedOffset: CGFloat = model.layout.sizes.current.size.heights.max - model.layout.sizes.current.size.heights.max
         
-        withAnimation(.linear(duration: 0.1), { // Get's rid of stuttering
+        withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             offset = {
                 switch newOffset {
                 case ...minAllowedOffset:

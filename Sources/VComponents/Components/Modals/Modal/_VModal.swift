@@ -72,6 +72,12 @@ struct _VModal<HeaderLabel, Content>: View
     private var modal: some View {
         ZStack(content: {
             VSheet(model: model.sheetSubModel)
+                .shadow(
+                    color: model.colors.shadow,
+                    radius: model.colors.shadowRadius,
+                    x: model.colors.shadowOffset.width,
+                    y: model.colors.shadowOffset.height
+                )
 
             VStack(spacing: 0, content: {
                 header

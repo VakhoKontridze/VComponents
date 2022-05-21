@@ -82,7 +82,7 @@ struct _VSideBar<Content>: View where Content: View {
     }
     
     // MARK: Helpers
-    private var edgesToIgnore: Edge.Set {
+    private var edgesToIgnore: Edge.Set { // FIXME: Refactor logic
         switch (model.layout.hasSafeAreaMarginTop, model.layout.hasSafeAreaMarginBottom) {
         case (false, false): return [.top, .bottom]
         case (false, true): return .top
