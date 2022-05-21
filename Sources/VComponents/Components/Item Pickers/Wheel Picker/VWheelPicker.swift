@@ -231,7 +231,7 @@ public struct VWheelPicker<Data, RowContent>: View
     @ViewBuilder private func rows() -> some View {
         switch content {
         case .titles(let titles):
-            ForEach(0..<titles.count, id: \.self, content: { i in
+            ForEach(titles.indices, id: \.self, content: { i in
                 VText(
                     color: model.colors.title.for(internalState),
                     font: model.fonts.rows,
@@ -241,7 +241,7 @@ public struct VWheelPicker<Data, RowContent>: View
             })
             
         case .custom(let data, let rowContent):
-            ForEach(0..<data.count, id: \.self, content: { i in
+            ForEach(data.indices, id: \.self, content: { i in
                 rowContent(data[i])
                     .opacity(model.colors.customContentOpacities.for(internalState))
                     .tag(i)

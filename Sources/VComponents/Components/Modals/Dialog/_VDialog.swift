@@ -143,7 +143,7 @@ struct _VDialog<Content>: View where Content: View {
     
     private func manyButtonDialogView(buttons: [VDialogButton]) -> some View {
         VStack(spacing: model.layout.manyButtonSpacing, content: {
-            ForEach(0..<buttons.count, id: \.self, content: { i in
+            ForEach(buttons.indices, id: \.self, content: { i in
                 VPrimaryButton(
                     model: buttons[i].model.buttonSubModel,
                     action: { animateOut(and: buttons[i].action) },
