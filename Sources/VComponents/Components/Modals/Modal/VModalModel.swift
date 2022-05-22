@@ -54,13 +54,13 @@ public struct VModalModel {
         /// Header alignment. Defaults to `center`.
         public var headerAlignment: VerticalAlignment = .center
         
-        /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
+        /// Header margins. Defaults to `15` leading, `15` trailing, `10` top, and `10` bottom.
         public var headerMargins: Margins = accordionReference.layout.headerMargins
         
-        /// Close button dimension. Default to `30`.
+        /// Close button dimension. Defaults to `30`.
         public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
         
-        /// Close button icon dimension. Default to `12`.
+        /// Close button icon dimension. Defaults to `12`.
         public var closeButtonIconDimension: CGFloat = closeButtonReference.layout.iconDimension
         
         /// Spacing between label and close button. Defaults to `10`.
@@ -69,10 +69,10 @@ public struct VModalModel {
         /// Header divider height. Defaults to `2/3`.
         public var headerDividerHeight: CGFloat = accordionReference.layout.headerDividerHeight
     
-        /// Header divider margins. Default to `.zero`.
+        /// Header divider margins. Defaults to `.zero`.
         public var headerDividerMargins: Margins = .zero
         
-        /// Content margins. Default to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
         public var contentMargins: Margins = accordionReference.layout.contentMargins
         
         // MARK: Initializers
@@ -105,7 +105,9 @@ public struct VModalModel {
                 self.landscape = landscape
             }
             
-            /// Default value. Set to `0.9` ratio of screen width and `0.6` ratio of screen height in portrait, and reverse in landscape.
+            /// Default value.
+            /// Set to `0.9` ratio of screen width and `0.6` ratio of screen height in portrait.
+            /// Set to reverse in landscape.
             public static var `default`: Sizes {
                 .init(
                     portrait: .relative(.init(width: 0.9, height: 0.6)),

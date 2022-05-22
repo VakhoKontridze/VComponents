@@ -48,6 +48,7 @@ struct VBottomSheetDemoView: View {
         
         model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
         model.layout.autoresizesContent = autoresizesContent
+        if autoresizesContent { model.layout.contentSafeAreaEdges.insert(.bottom) }
         
         model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
 
@@ -64,7 +65,10 @@ struct VBottomSheetDemoView: View {
     }
     
     private func component() -> some View {
-        VPlainButton(action: { isPresented = true }, title: "Present")
+        VPlainButton(
+            action: { isPresented = true },
+            title: "Present"
+        )
             .if(hasTitle,
                 ifTransform: {
                     $0
@@ -173,32 +177,7 @@ struct VBottomSheetDemoView: View {
             }
 
             if dismissType.isEmpty {
-                VStack(content: {
-                    VText(
-                        type: .multiLine(alignment: .center, limit: nil),
-                        color: ColorBook.primaryWhite,
-                        font: .system(size: 14, weight: .semibold),
-                        title: "When there are no dismiss types, Modal can only be dismissed programatically"
-                    )
-
-                    VPlainButton(
-                        model: {
-                            var model: VPlainButtonModel = .init()
-                            model.colors.title = .init(
-                                enabled: ColorBook.primaryWhite,
-                                pressed: .init(componentAsset: "PrimaryWhite.presseddisabled"), // Not exposing API
-                                disabled: .init(componentAsset: "PrimaryWhite.presseddisabled") // Not exposing API
-                            )
-                            return model
-                        }(),
-                        action: { isPresented = false },
-                        title: "Dismiss"
-                    )
-                })
-                    .padding(15)
-                    .background(Color.black.opacity(0.75))
-                    .cornerRadius(10)
-                    .padding(15)
+                NoDismissTypeWarningView(onDismiss: { isPresented = false })
             }
         })
     }

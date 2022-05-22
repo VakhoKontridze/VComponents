@@ -42,9 +42,6 @@ public struct VBottomSheetModel {
         /// Bottom sheet sizes. Defaults to `default`.
         public var sizes: Sizes = .default
         
-        /// Edges ignored by keyboard. Defaults to `[]`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
-        
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
@@ -54,7 +51,7 @@ public struct VBottomSheetModel {
         /// Grabber corner radius. Defaults to `2`.
         public var grabberCornerRadius: CGFloat = 2
         
-        /// Grabber margins. Default to `10` top  and `0` bottom.
+        /// Grabber margins. Defaults to `10` top  and `0` bottom.
         public var grabberMargins: VerticalMargins = .init(
             top: 10,
             bottom: 0
@@ -63,13 +60,13 @@ public struct VBottomSheetModel {
         /// Header alignment. Defaults to `center`.
         public var headerAlignment: VerticalAlignment = modalReference.layout.headerAlignment
         
-        /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
+        /// Header margins. Defaults to `15` leading, `15` trailing, `10` top, and `10` bottom.
         public var headerMargins: Margins = modalReference.layout.headerMargins
         
-        /// Close button dimension. Default to `30`.
+        /// Close button dimension. Defaults to `30`.
         public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
         
-        /// Close button icon dimension. Default to `12`.
+        /// Close button icon dimension. Defaults to `12`.
         public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
         
         /// Spacing between label and close button. Defaults to `10`.
@@ -78,26 +75,30 @@ public struct VBottomSheetModel {
         /// Header divider height. Defaults to `2/3`.
         public var headerDividerHeight: CGFloat = modalReference.layout.headerDividerHeight
     
-        /// Header divider margins. Default to `.zero`.
+        /// Header divider margins. Defaults to `.zero`.
         public var headerDividerMargins: Margins = modalReference.layout.headerDividerMargins
         
-        /// Content margins. Default to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
         public var contentMargins: Margins = modalReference.layout.contentMargins
         
         /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.
         ///
         /// Can be used for scrollable content.
+        /// Optionally, add `bottom` to `contentSafeAreaEdges` to ensure that scrollable content always has bottom safe area inset.
         public var autoresizesContent: Bool = false
         
-        /// Indicates if sheet has margins for safe area on bottom edge. Defaults to `false`.
+        /// Edges on which content has safe area edges. Defaults to `[]`.
         ///
-        /// `autoresizesContent` must be set to `true`.
-        public var hasSafeAreaMarginBottom: Bool = true
+        /// `autoresizesContent` must be set to `true` for scrollable content to always have bottom safe area inset.
+        public var contentSafeAreaEdges: Edge.Set = []
+        
+        /// Edges ignored by keyboard. Defaults to `[]`.
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
         /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `600` points/s.
         public var velocityToSnapToNextHeight: CGFloat = 600
         
-        /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Default to `0.1`.
+        /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Defaults to `0.1`.
         public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
         
         var pullDownDismissDistance: CGFloat { pullDownDismissDistanceMinHeightRatio * sizes.current.size.heights.min }
@@ -132,7 +133,9 @@ public struct VBottomSheetModel {
                 self.landscape = landscape
             }
             
-            /// Default value. Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait, and `0.7` ratio of screen width and `0.9` ratio of screen height in landscape.
+            /// Default value.
+            /// Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait.
+            /// Set to `0.7` ratio of screen width and `0.9` ratio of screen height in landscape.
             public static var `default`: Sizes {
                 .init(
                     portrait: .relative(.init(

@@ -22,7 +22,10 @@ struct VActionSheetDemoView: View {
     }
     
     private func component() -> some View {
-        VPlainButton(action: { isPresented = true }, title: "Present")
+        VPlainButton(
+            action: { isPresented = true },
+            title: "Present"
+        )
             .vActionSheet(isPresented: $isPresented, actionSheet: {
                 VActionSheet(
                     title: "Lorem ipsum dolor sit amet",

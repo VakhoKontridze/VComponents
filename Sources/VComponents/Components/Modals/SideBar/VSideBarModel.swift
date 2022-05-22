@@ -25,6 +25,9 @@ public struct VSideBarModel {
     /// Sub-model containing animation properties.
     public var animations: Animations = .init()
     
+    /// Sub-model containing misc properties.
+    public var misc: Misc = .init()
+    
     // MARK: Initializers
     /// Initializes model with default values.
     public init() {}
@@ -33,8 +36,8 @@ public struct VSideBarModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Side bar width. Defaults to `0.67` ratio of screen width.
-        public var width: CGFloat = UIScreen.main.bounds.width * 0.67 // FIXME: Add landscape
+        /// Side bar sizes. Defaults to `default`.
+        public var sizes: Sizes = .default
         
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
@@ -42,20 +45,61 @@ public struct VSideBarModel {
         /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
         public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
-        /// Indicates if side bar has margins for safe area on top edge. Defaults to `true`.
-        public var hasSafeAreaMarginTop: Bool = true
+        /// Edges on which content has safe area edges. Defaults to `all`.
+        public var contentSafeAreaEdges: Edge.Set = .all
         
-        /// Indicates if side bar has margins for safe area on bottom edge. Defaults to `true`.
-        ///
-        /// `autoresizesContent` must be set to `true`.
-        public var hasSafeAreaMarginBottom: Bool = true
+        /// Edges ignored by keyboard. Defaults to `[]`.
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
         
-        /// Distance to drag side bar left to initiate dismiss. Default to `100`.
-        public var translationToDismiss: CGFloat = 100
+        /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Defaults to `0.1`.
+        public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
+        
+        var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes.current.size.width }
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        // MARK: Sizes
+        /// Model that describes side bar sizes.
+        public struct Sizes {
+            // MARK: Properties
+            /// Portrait size configuration.
+            public let portrait: SizeConfiguration
+            
+            /// Landscape size configuration.
+            public let landscape: SizeConfiguration
+            
+            /// Current size configuration based on interface orientation.
+            public var current: SizeConfiguration {
+                switch _IntefaceOrientation() {
+                case nil: return portrait
+                case .portrait: return portrait
+                case .landscape: return landscape
+                }
+            }
+            
+            // MARK: Initializers
+            /// Initializes `Sizes` with size configurations.
+            public init(portrait: SizeConfiguration, landscape: SizeConfiguration) {
+                self.portrait = portrait
+                self.landscape = landscape
+            }
+            
+            /// Default value.
+            /// Set to `0.75` ratio of screen width and `1` ratio of screen height in portrait.
+            /// Set to`0.5` ratio of screen width and `1` ratio of screen height in landscape.
+            public static var `default`: Sizes {
+                .init(
+                    portrait: .relative(.init(width: 0.75, height: 1)),
+                    landscape: .relative(.init(width: 0.5, height: 1))
+                )
+            }
+            
+            // MARK: Single Size Configuration
+            /// Enum that describes state, either `point` or `relative`.
+            public typealias SizeConfiguration = VModalModel.Layout.Sizes.SizeConfiguration
+        }
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
@@ -72,6 +116,15 @@ public struct VSideBarModel {
         /// Blinding color.
         public var blinding: Color = modalReference.colors.blinding
         
+        /// Shadow color.
+        public var shadow: Color = modalReference.colors.shadow
+        
+        /// Shadow radius. Defaults to `0`.
+        public var shadowRadius: CGFloat = modalReference.colors.shadowRadius
+        
+        /// Shadow offset. Defaults to `zero`.
+        public var shadowOffset: CGSize = modalReference.colors.shadowOffset
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
@@ -87,9 +140,48 @@ public struct VSideBarModel {
         /// Disappear animation.  Defaults to `easeInOut` with duration `0.3`.
         public var disappear: BasicAnimation? = bottomSheetReference.animations.disappear
         
+        /// Drag-back dissapear animation. Defaults to `easeInOut` with duration `0.1`.
+        public var dragBackDissapear: BasicAnimation? = bottomSheetReference.animations.pullDownDisappear
+        
         // MARK: Initializers
         /// Initializes sub-model with default values
         public init() {}
+    }
+    
+    // MARK: Misc
+    /// Sub-model containing misc properties.
+    public struct Misc {
+        // MARK: Properties
+        /// Method of dismissing side bar. Defaults to `default`.
+        public var dismissType: DismissType = .default
+        
+        // MARK: Initializers
+        /// Initializes sub-model with default values.
+        public init() {}
+        
+        // MARK: Dismiss Type
+        /// Dismiss type, such as  `backTap, or `dragBack`.
+        public struct DismissType: OptionSet {
+            // MARK: Properties
+            public let rawValue: Int
+            
+            /// Back tap.
+            public static var backTap: DismissType { .init(rawValue: 1 << 0) }
+            
+            /// Drag-back.
+            public static var dragBack: DismissType { .init(rawValue: 1 << 1) }
+            
+            /// All.
+            public static var all: DismissType { [.backTap, .dragBack] }
+            
+            /// Default value. Set to `all.`
+            public static var `default`: DismissType { .all }
+            
+            // MARK: Initializers
+            public init(rawValue: Int) {
+                self.rawValue = rawValue
+            }
+        }
     }
     
     // MARK: Sub-Models

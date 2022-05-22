@@ -48,9 +48,11 @@ public struct VSideBar<Content> where Content: View {
 
 // MARK: - Extension
 extension View {
-    /// Presents `VSideBar`.
+    /// Presents `VSideBar` when boolean is true.
     public func vSideBar<Content>(
         isPresented: Binding<Bool>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
         sideBar: @escaping () -> VSideBar<Content>
     ) -> some View
         where Content: View
@@ -58,18 +60,45 @@ extension View {
         let sideBar = sideBar()
         
         return self
-            .overlay(Group(content: {
-                if isPresented.wrappedValue {
-                    WindowOverlayView(
-                        isPresented: isPresented,
-                        content:
-                            _VSideBar(
-                                model: sideBar.model,
-                                isPresented: isPresented,
-                                content: sideBar.content
-                            )
+            .background(PresentationHost(
+                isPresented: isPresented,
+                content: {
+                    _VSideBar(
+                        model: sideBar.model,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: sideBar.content
                     )
                 }
-            }))
+            ))
+    }
+    
+    /// Presents `VSideBar` using the item as data source for content.
+    @ViewBuilder public func vSideBar<Item, Content>(
+        item: Binding<Item?>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        sideBar: @escaping (Item) -> VSideBar<Content>
+    ) -> some View
+        where
+            Item: Identifiable,
+            Content: View
+    {
+        switch item.wrappedValue {
+        case nil:
+            self
+            
+        case let _item?:
+            self
+                .vSideBar(
+                    isPresented: .init(
+                        get: { true },
+                        set: { _ in item.wrappedValue = nil }
+                    ),
+                    onPresent: presentHandler,
+                    onDismiss: dismissHandler,
+                    sideBar: { sideBar(_item) }
+                )
+        }
     }
 }

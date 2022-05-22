@@ -52,18 +52,17 @@ struct _VModal<HeaderLabel, Content>: View
             modal
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.container, edges: .all)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,
                 perform: { if $0 { animateOutFromExternalDismiss() } }
             )
-            .onChange(of: interfaceOrientationChangeObserver.orientation, perform: { print(">>", $0!) })
     }
     
     private var blinding: some View {
         model.colors.blinding
-            .ignoresSafeArea(.all, edges: .all)
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })
@@ -219,6 +218,5 @@ struct VModal_Previews: PreviewProvider {
                     }
                 )
             })
-            .previewInterfaceOrientation(.portrait)
     }
 }

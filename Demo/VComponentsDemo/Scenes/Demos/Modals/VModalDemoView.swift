@@ -116,32 +116,7 @@ struct VModalDemoView: View {
             })
 
             if dismissType.isEmpty {
-                VStack(content: {
-                    VText(
-                        type: .multiLine(alignment: .center, limit: nil),
-                        color: ColorBook.primaryWhite,
-                        font: .system(size: 14, weight: .semibold),
-                        title: "When there are no dismiss types, Modal can only be dismissed programatically"
-                    )
-
-                    VPlainButton(
-                        model: {
-                            var model: VPlainButtonModel = .init()
-                            model.colors.title = .init(
-                                enabled: ColorBook.primaryWhite,
-                                pressed: .init(componentAsset: "PrimaryWhite.presseddisabled"), // Not exposing API
-                                disabled: .init(componentAsset: "PrimaryWhite.presseddisabled") // Not exposing API
-                            )
-                            return model
-                        }(),
-                        action: { isPresented = false },
-                        title: "Dismiss"
-                    )
-                })
-                    .padding(15)
-                    .background(Color.black.opacity(0.75))
-                    .cornerRadius(10)
-                    .padding(15)
+                NoDismissTypeWarningView(onDismiss: { isPresented = false })
             }
         })
     }

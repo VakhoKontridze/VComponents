@@ -202,13 +202,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             content()
                 .padding(model.layout.contentMargins)
         })
-            .if(model.layout.hasSafeAreaMarginBottom, transform: {
-                $0
-                    .safeAreaInset(edge: .bottom, content: {
-                        Spacer()
-                            .frame(height: UIDevice.safeAreaInsetBottom)
-                    })
-            })
+            .safeAreaMarginInsets(edges: model.layout.contentSafeAreaEdges)
             .frame(maxWidth: .infinity)
             .if(
                 model.layout.autoresizesContent,
@@ -368,7 +362,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                     model: {
                         var model: VBottomSheetModel = .init()
                         model.layout.autoresizesContent = true
-                        model.layout.hasSafeAreaMarginBottom = true
+                        model.layout.contentSafeAreaEdges.insert(.bottom)
                         return model
                     }(),
                     headerTitle: "Lorem ipsum dolor sit amet",
@@ -380,6 +374,5 @@ struct VBottomSheet_Previews: PreviewProvider {
                     }
                 )
             })
-            .previewInterfaceOrientation(.portrait)
     }
 }

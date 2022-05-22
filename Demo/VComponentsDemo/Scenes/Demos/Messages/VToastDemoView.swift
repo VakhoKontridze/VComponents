@@ -32,7 +32,10 @@ struct VToastDemoView: View {
     }
     
     private func component() -> some View {
-        VPlainButton(action: { isPresented = true }, title: "Present")
+        VPlainButton(
+            action: { isPresented = true },
+            title: "Present"
+        )
             .vToast(isPresented: $isPresented, toast: {
                 VToast(
                     model: model,

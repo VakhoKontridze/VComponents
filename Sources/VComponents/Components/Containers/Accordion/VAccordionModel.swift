@@ -48,10 +48,10 @@ public struct VAccordionModel {
             vertical: 10
         )
         
-        /// Chevron button dimension. Default to `30`.
+        /// Chevron button dimension. Defaults to `30`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
         
-        /// Chevron button icon dimension. Default to `12`.
+        /// Chevron button icon dimension. Defaults to `12`.
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
         /// Header divider height. Defaults to `2/3`.
@@ -158,7 +158,7 @@ public struct VAccordionModel {
     /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if accordion expands and collapses from header tap. Default to `true`.
+        /// Indicates if accordion expands and collapses from header tap. Defaults to `true`.
         public var expandsAndCollapsesOnHeaderTap: Bool = true
         
         // MARK: Initializers

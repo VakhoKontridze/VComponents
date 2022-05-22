@@ -50,7 +50,7 @@ import SwiftUI
 ///                     model: {
 ///                         var model: VBottomSheetModel = .init()
 ///                         model.layout.autoresizesContent = true
-///                         model.layout.hasSafeAreaMarginBottom = true
+///                         model.layout.contentSafeAreaEdges.insert(.bottom)
 ///                         return model
 ///                     }(),
 ///                     headerTitle: "Lorem ipsum dolor sit amet",

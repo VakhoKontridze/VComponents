@@ -146,7 +146,10 @@ public struct VPlainButton<Label>: View where Label: View {
 // MARK: - Preview
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButton(action: {}, title: "Lorem Ipsum")
+        VPlainButton(
+            action: {},
+            title: "Lorem Ipsum"
+        )
             .padding()
     }
 }
