@@ -11,8 +11,7 @@ import SwiftUI
 /// Model that describes UI.
 public struct VProgressBarModel {
     // MARK: Properties
-    /// Reference to `VSliderModel`
-    public static let sliderReference: VSliderModel = .init()
+    fileprivate static let sliderReference: VSliderModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

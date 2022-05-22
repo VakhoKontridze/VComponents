@@ -11,11 +11,8 @@ import SwiftUI
 /// Model that describes UI.
 public struct VSegmentedPickerModel {
     // MARK: Properties
-    /// Reference to `VToggleModel`.
-    public static let toggleReference: VToggleModel = .init()
-    
-    /// Reference to `VSliderModel`.
-    public static let sliderReference: VSliderModel = .init()
+    fileprivate static let toggleReference: VToggleModel = .init()
+    fileprivate static let sliderReference: VSliderModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

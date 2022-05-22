@@ -11,17 +11,10 @@ import SwiftUI
 /// Model that describes UI.
 public struct VTextFieldModel {
     // MARK: Properties
-    /// Reference to `VSquareButtonModel`.
-    public static let squareButtonReference: VSquareButtonModel = .init()
-    
-    /// Reference to `VPlainButtonModel`.
-    public static let plainButtonReference: VPlainButtonModel = .init()
-    
-    /// Reference to `VCloseButtonModel`.
-    public static let closeButtonReference: VCloseButtonModel = .init()
-    
-    /// Reference to `VSegmentedPickerModel`.
-    public static let segmentedPickerReference: VSegmentedPickerModel = .init()
+    fileprivate static let squareButtonReference: VSquareButtonModel = .init()
+    fileprivate static let plainButtonReference: VPlainButtonModel = .init()
+    fileprivate static let closeButtonReference: VCloseButtonModel = .init()
+    fileprivate static let segmentedPickerReference: VSegmentedPickerModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

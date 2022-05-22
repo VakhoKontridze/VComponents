@@ -12,8 +12,7 @@ import VCore
 /// Model that describes UI.
 public struct VToastModel {
     // MARK: Properties
-    /// Reference to `VTextFieldModel`.
-    public static let textFieldReference: VTextFieldModel = .init()
+    fileprivate static let textFieldReference: VTextFieldModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

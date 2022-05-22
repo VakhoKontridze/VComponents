@@ -12,14 +12,9 @@ import VCore
 /// Model that describes UI.
 public struct VAccordionModel {
     // MARK: Properties
-    /// Reference to `VSheetModel`.
-    public static let sheetReference: VSheetModel = .init()
-    
-    /// Reference to `VChevronButtonModel`.
-    public static let chevronButtonReference: VChevronButtonModel = .init()
-    
-    /// Reference to `VListModel`.
-    public static let listReference: VListModel = .init()
+    fileprivate static let sheetReference: VSheetModel = .init()
+    fileprivate static let chevronButtonReference: VChevronButtonModel = .init()
+    fileprivate static let listReference: VListModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

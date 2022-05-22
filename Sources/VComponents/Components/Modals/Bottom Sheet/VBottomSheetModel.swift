@@ -12,14 +12,9 @@ import VCore
 /// Model that describes UI.
 public struct VBottomSheetModel {
     // MARK: Properties
-    /// Reference to `VSheetModel`.
-    public static let sheetReference: VSheetModel = .init()
-    
-    /// Reference to `VModalModel`.
-    public static let modalReference: VModalModel = .init()
-    
-    /// Reference to `VCloseButtonModel`.
-    public static let closeButtonReference: VCloseButtonModel = .init()
+    fileprivate static let sheetReference: VSheetModel = .init()
+    fileprivate static let modalReference: VModalModel = .init()
+    fileprivate static let closeButtonReference: VCloseButtonModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

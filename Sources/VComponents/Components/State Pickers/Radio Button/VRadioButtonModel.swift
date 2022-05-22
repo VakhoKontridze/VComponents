@@ -11,11 +11,8 @@ import SwiftUI
 /// Model that describes UI.
 public struct VRadioButtonModel {
     // MARK: Properties
-    /// Reference to `VToggleModel`.
-    public static let toggleRefrence: VToggleModel = .init()
-    
-    /// Reference to `VCheckBoxModel`.
-    public static let checkBoxReference: VCheckBoxModel = .init()
+    fileprivate static let toggleRefrence: VToggleModel = .init()
+    fileprivate static let checkBoxReference: VCheckBoxModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

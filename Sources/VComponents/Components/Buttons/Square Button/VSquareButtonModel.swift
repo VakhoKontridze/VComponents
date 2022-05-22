@@ -12,8 +12,7 @@ import VCore
 /// Model that describes UI.
 public struct VSquareButtonModel {
     // MARK: Properties
-    /// Reference to `VPrimaryButtonModel`.
-    public static let primaryButtonReference: VPrimaryButtonModel = .init()
+    fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

@@ -12,8 +12,7 @@ import VCore
 /// Model that describes UI.
 public struct VDialogModel {
     // MARK: Properties
-    /// Reference to `VModalModel`.
-    public static let modalReference: VModalModel = .init()
+    fileprivate static let modalReference: VModalModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

@@ -12,14 +12,9 @@ import VCore
 /// Model that describes UI.
 public struct VModalModel {
     // MARK: Properties
-    /// Reference to `VCloseButtonModel`.
-    public static let closeButtonReference: VCloseButtonModel = .init()
-    
-    /// Reference to `VSheetModel`.
-    public static let sheetReference: VSheetModel = .init()
-    
-    /// Reference to `VAccordionModel`.
-    public static let accordionReference: VAccordionModel = .init()
+    fileprivate static let closeButtonReference: VCloseButtonModel = .init()
+    fileprivate static let sheetReference: VSheetModel = .init()
+    fileprivate static let accordionReference: VAccordionModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

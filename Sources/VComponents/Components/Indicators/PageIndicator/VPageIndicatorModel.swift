@@ -11,8 +11,7 @@ import SwiftUI
 /// Model that describes UI.
 public struct VPageIndicatorModel {
     // MARK: Properties
-    /// Reference to `VProgressBarModel`.
-    public static let progressBarReference: VProgressBarModel = .init()
+    fileprivate static let progressBarReference: VProgressBarModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

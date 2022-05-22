@@ -11,11 +11,8 @@ import SwiftUI
 /// Model that describes UI.
 public struct VSliderModel {
     // MARK: Properties
-    /// Reference to `VPrimaryButtonModel`.
-    public static let primaryButtonReference: VPrimaryButtonModel = .init()
-    
-    /// Reference to `VToggleModel`.
-    public static let toggleReference: VToggleModel = .init()
+    fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
+    fileprivate static let toggleReference: VToggleModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

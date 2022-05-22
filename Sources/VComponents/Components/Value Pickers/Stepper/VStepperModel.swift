@@ -11,8 +11,7 @@ import SwiftUI
 /// Model that describes UI.
 public struct VStepperModel {
     // MARK: Properties
-    /// Reference to `VSegmentedPickerModel`.
-    public static let segmentedPickerReference: VSegmentedPickerModel = .init()
+    fileprivate static let segmentedPickerReference: VSegmentedPickerModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
