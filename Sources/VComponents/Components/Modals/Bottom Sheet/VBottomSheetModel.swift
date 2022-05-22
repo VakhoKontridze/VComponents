@@ -65,6 +65,9 @@ public struct VBottomSheetModel {
             bottom: 0
         )
         
+        /// Header alignment. Defaults to `center`.
+        public var headerAlignment: VerticalAlignment = modalReference.layout.headerAlignment
+        
         /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
         public var headerMargins: Margins = modalReference.layout.headerMargins
         

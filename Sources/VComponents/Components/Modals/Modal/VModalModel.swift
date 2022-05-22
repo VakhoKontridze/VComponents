@@ -56,6 +56,9 @@ public struct VModalModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
         
+        /// Header alignment. Defaults to `center`.
+        public var headerAlignment: VerticalAlignment = .center
+        
         /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
         public var headerMargins: Margins = accordionReference.layout.headerMargins
         

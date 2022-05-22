@@ -94,7 +94,7 @@ struct _VModal<HeaderLabel, Content>: View
 
     @ViewBuilder private var header: some View {
         if hasHeader {
-            HStack(spacing: model.layout.labelCloseButtonSpacing, content: {
+            HStack(alignment: model.layout.headerAlignment, spacing: model.layout.labelCloseButtonSpacing, content: {
                 Group(content: {
                     if model.misc.dismissType.contains(.leadingButton) {
                         closeButton
