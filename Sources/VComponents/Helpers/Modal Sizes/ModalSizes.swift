@@ -21,7 +21,7 @@ public struct ModalSizes<ModalSizeMeasurement>
     
     /// Current size configuration based on interface orientation.
     public var current: SizeConfiguration? {
-        switch _IntefaceOrientation() {
+        switch DeviceInterfaceOrientation() {
         case nil: return nil
         case .portrait: return portrait
         case .landscape: return landscape

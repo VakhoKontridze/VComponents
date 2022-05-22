@@ -11,7 +11,7 @@ import Combine
 // MARK: - Interface Orientation Change Observer
 final class InterfaceOrientationChangeObserver: ObservableObject {
     // MARK: Properties
-    @Published var orientation: _IntefaceOrientation?
+    @Published var orientation: DeviceInterfaceOrientation?
     private var listener: AnyCancellable?
     
     // MARK: Initializers
@@ -20,7 +20,7 @@ final class InterfaceOrientationChangeObserver: ObservableObject {
         
         listener = NotificationCenter.default
             .publisher(for: UIDevice.orientationDidChangeNotification)
-            .compactMap { _ in _IntefaceOrientation() }
+            .compactMap { _ in DeviceInterfaceOrientation() }
             .assign(to: \.orientation, on: self)
     }
     
@@ -29,8 +29,8 @@ final class InterfaceOrientationChangeObserver: ObservableObject {
     }
 }
 
-// MARK: _ Inteface Orientation
-enum _IntefaceOrientation {
+// MARK: - Device Inteface Orientation
+enum DeviceInterfaceOrientation {
     case portrait
     case landscape
     
