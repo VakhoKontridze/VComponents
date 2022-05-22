@@ -47,7 +47,7 @@ public struct VSquareButtonModel {
         /// Icon size. Defaults to `20` by `20`.
         public var iconSize: CGSize = primaryButtonReference.layout.iconSize
         
-        /// Hit box. Defaults to `.zero`.
+        /// Hit box. Defaults to `zero`.
         public var hitBox: HitBox = .zero
         
         // MARK: Initializers

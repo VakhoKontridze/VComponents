@@ -54,7 +54,7 @@ public struct VSecondaryButtonModel {
         /// Applicable only if icon `init`with icon and title is used.
         public var iconTitleSpacing: CGFloat = 8
         
-        /// Hit box. Defaults to `.zero`.
+        /// Hit box. Defaults to `zero`.
         public var hitBox: HitBox = .zero
         
         // MARK: Initializers
