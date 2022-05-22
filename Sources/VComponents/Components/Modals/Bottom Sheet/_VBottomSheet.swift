@@ -81,7 +81,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     
     @ViewBuilder private var bottomSheet: some View {
         if model.layout.sizes.current.size.heights.isLayoutValid {
-            ZStack(alignment: .top, content: {
+            ZStack(content: {
                 VSheet(model: model.sheetModel)
                     .shadow(
                         color: model.colors.shadow,
