@@ -50,7 +50,6 @@ struct VListDemoView: View {
                 headerTitle: "Layout",
                 footerTitle: layoutType.description
             )
-                .frame(height: 90, alignment: .top)
         })
     }
 }
