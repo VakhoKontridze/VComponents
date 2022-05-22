@@ -15,7 +15,7 @@ struct VBottomSheetDemoView: View {
     static var navBarTitle: String { "Bottom Sheet" }
     
     @State private var isPresented: Bool = false
-    @State private var heightType: VModalHeightType = VBottomSheetModel.Layout.Sizes.default.current.size.heights.helperType
+    @State private var heightType: VModalHeightType = VBottomSheetModel.Layout().sizes.current!.size.heights.helperType
     @State private var dismissType: VBottomSheetModel.Misc.DismissType = .default
     @State private var hasGrabber: Bool = VBottomSheetModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
@@ -196,7 +196,7 @@ private enum VModalHeightType: Int, PickableTitledEnumeration {
     }
 }
 
-extension VBottomSheetModel.Layout.Sizes.BottomSheetHeights {
+extension VBottomSheetModel.Layout.BottomSheetHeights {
     fileprivate var helperType: VModalHeightType {
         if isResizable {
             return .dynamic

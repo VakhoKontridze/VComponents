@@ -27,7 +27,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
-    private var hasGrabber: Bool { model.misc.dismissType.contains(.pullDown) || model.layout.sizes.current.size.heights.isResizable }
+    private var hasGrabber: Bool { model.misc.dismissType.contains(.pullDown) || model.layout.sizes._current.size.heights.isResizable }
     private var hasHeaderDivider: Bool { hasHeader && model.layout.headerDividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
@@ -52,7 +52,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         self.headerLabel = headerLabel
         self.content = content
         
-        _offset = .init(initialValue: model.layout.sizes.current.size.heights.max - model.layout.sizes.current.size.heights.ideal)
+        _offset = .init(initialValue: model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.ideal)
     }
 
     // MARK: Body
@@ -80,7 +80,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     }
     
     @ViewBuilder private var bottomSheet: some View {
-        if model.layout.sizes.current.size.heights.isLayoutValid {
+        if model.layout.sizes._current.size.heights.isLayoutValid {
             ZStack(content: {
                 VSheet(model: model.sheetModel)
                     .shadow(
@@ -91,8 +91,8 @@ struct _VBottomSheet<HeaderLabel, Content>: View
                     )
                     .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                         $0
-                            .frame(height: model.layout.sizes.current.size.heights.max)
-                            .offset(y: isInternallyPresented ? offset : model.layout.sizes.current.size.heights.max)
+                            .frame(height: model.layout.sizes._current.size.heights.max)
+                            .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
                             .gesture(
                                 DragGesture(minimumDistance: 0)
                                     .onChanged(dragChanged)
@@ -113,15 +113,15 @@ struct _VBottomSheet<HeaderLabel, Content>: View
                     .frame(maxHeight: .infinity, alignment: .top)
                     .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                         $0
-                            .frame(height: model.layout.sizes.current.size.heights.max)
-                            .offset(y: isInternallyPresented ? offset : model.layout.sizes.current.size.heights.max)
+                            .frame(height: model.layout.sizes._current.size.heights.max)
+                            .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
                     })
             })
-                .frame(width: model.layout.sizes.current.size.width)
+                .frame(width: model.layout.sizes._current.size.width)
                 .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
                     $0
-                        .frame(height: model.layout.sizes.current.size.heights.max)
-                        .offset(y: isInternallyPresented ? offset : model.layout.sizes.current.size.heights.max)
+                        .frame(height: model.layout.sizes._current.size.heights.max)
+                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -206,7 +206,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             .frame(maxWidth: .infinity)
             .if(
                 model.layout.autoresizesContent,
-                ifTransform: { $0.frame(height: model.layout.sizes.current.size.heights.max - offset - grabberHeaderDividerHeight) },
+                ifTransform: { $0.frame(height: model.layout.sizes._current.size.heights.max - offset - grabberHeaderDividerHeight) },
                 elseTransform: { $0.frame(maxHeight: .infinity) }
             )
     }
@@ -280,8 +280,8 @@ struct _VBottomSheet<HeaderLabel, Content>: View
         currentDragValue = dragValue
         
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
-        let maxAllowedOffset: CGFloat = model.layout.sizes.current.size.heights.max - model.layout.sizes.current.size.heights.min
-        let minAllowedOffset: CGFloat = model.layout.sizes.current.size.heights.max - model.layout.sizes.current.size.heights.max
+        let maxAllowedOffset: CGFloat = model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.min
+        let minAllowedOffset: CGFloat = model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.max
         
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             offset = {
@@ -318,7 +318,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             guard let offsetBeforeDrag = offsetBeforeDrag else { return }
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
-                heights: model.layout.sizes.current.size.heights,
+                heights: model.layout.sizes._current.size.heights,
                 canPullDownToDismiss: model.misc.dismissType.contains(.pullDown),
                 pullDownDismissDistance: model.layout.pullDownDismissDistance,
                 offset: offset,
@@ -328,7 +328,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             
         case true:
             animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
-                heights: model.layout.sizes.current.size.heights,
+                heights: model.layout.sizes._current.size.heights,
                 offset: offset,
                 velocity: dragValue.velocity(inRelationTo: previousDragValue).height
             ))
@@ -344,7 +344,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     
     // MARK: Orientation
     private func resetHeightFromOrientationChange() {
-        offset = model.layout.sizes.current.size.heights.max - model.layout.sizes.current.size.heights.ideal
+        offset = model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.ideal
     }
 }
 

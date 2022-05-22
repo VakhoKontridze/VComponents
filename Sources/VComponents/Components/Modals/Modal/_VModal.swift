@@ -85,7 +85,7 @@ struct _VModal<HeaderLabel, Content>: View
             })
                 .frame(maxHeight: .infinity, alignment: .top)
         })
-            .frame(size: model.layout.sizes.current.size)
+            .frame(size: model.layout.sizes._current.size)
             .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : model.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : model.animations.blur)

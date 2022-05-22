@@ -39,8 +39,13 @@ public struct VModalModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Modal sizes. Defaults to `default`.
-        public var sizes: Sizes = .default
+        /// Modal sizes.
+        /// Set to `0.9` ratio of screen width and `0.6` ratio of screen height in portrait.
+        /// Set to reverse in landscape.
+        public var sizes: Sizes = .init(
+            portrait: .relative(.init(width: 0.9, height: 0.6)),
+            landscape: .relative(.init(width: 0.6, height: 0.9))
+        )
         
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
@@ -81,70 +86,8 @@ public struct VModalModel {
         
         // MARK: Sizes
         /// Model that describes modal sizes.
-        public struct Sizes {
-            // MARK: Properties
-            /// Portrait size configuration.
-            public let portrait: SizeConfiguration
-            
-            /// Landscape size configuration.
-            public let landscape: SizeConfiguration
-            
-            /// Current size configuration based on interface orientation.
-            public var current: SizeConfiguration {
-                switch _IntefaceOrientation() {
-                case nil: return portrait
-                case .portrait: return portrait
-                case .landscape: return landscape
-                }
-            }
-            
-            // MARK: Initializers
-            /// Initializes `Sizes` with size configurations.
-            public init(portrait: SizeConfiguration, landscape: SizeConfiguration) {
-                self.portrait = portrait
-                self.landscape = landscape
-            }
-            
-            /// Default value.
-            /// Set to `0.9` ratio of screen width and `0.6` ratio of screen height in portrait.
-            /// Set to reverse in landscape.
-            public static var `default`: Sizes {
-                .init(
-                    portrait: .relative(.init(width: 0.9, height: 0.6)),
-                    landscape: .relative(.init(width: 0.6, height: 0.9))
-                )
-            }
-            
-            // MARK: Single Size Configuration
-            /// Enum that describes state, either `point` or `relative`.
-            public enum SizeConfiguration {
-                // MARK: Cases
-                /// Size configuration with fixed sizes represented in points.
-                case point(CGSize)
-                
-                /// Size configuration with ratios relative to screen sizes.
-                case relative(CGSize)
-                
-                // MARK: Properties
-                /// Size configuration represented in points.
-                ///
-                /// `point` configuration is returned directly,
-                /// while `relative` configurations are multiplied by the screen size.
-                public var size: CGSize {
-                    switch self {
-                    case .point(let size):
-                        return size
-                    
-                    case .relative(let size):
-                        return .init(
-                            width: UIScreen.main.bounds.size.width * size.width,
-                            height: UIScreen.main.bounds.size.height * size.height
-                        )
-                    }
-                }
-            }
-        }
-        
+        public typealias Sizes = ModalSizes<CGSize>
+
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = EdgeInsets_LTTB

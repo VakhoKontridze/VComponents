@@ -72,8 +72,8 @@ struct _VSideBar<Content>: View where Content: View {
                 .padding(model.layout.contentMargins)
                 .safeAreaMarginInsets(edges: model.layout.contentSafeAreaEdges)
         })
-            .frame(size: model.layout.sizes.current.size)
-            .offset(x: isInternallyPresented ? 0 : -model.layout.sizes.current.size.width)
+            .frame(size: model.layout.sizes._current.size)
+            .offset(x: isInternallyPresented ? 0 : -model.layout.sizes._current.size.width)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged(dragChanged)

@@ -37,7 +37,12 @@ public struct VSideBarModel {
     public struct Layout {
         // MARK: Properties
         /// Side bar sizes. Defaults to `default`.
-        public var sizes: Sizes = .default
+        /// Set to `0.75` ratio of screen width and `1` ratio of screen height in portrait.
+        /// Set to`0.5` ratio of screen width and `1` ratio of screen height in landscape.
+        public var sizes: Sizes = .init(
+            portrait: .relative(.init(width: 0.75, height: 1)),
+            landscape: .relative(.init(width: 0.5, height: 1))
+        )
         
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
@@ -54,52 +59,15 @@ public struct VSideBarModel {
         /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Defaults to `0.1`.
         public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
         
-        var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes.current.size.width }
+        var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes._current.size.width }
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
         
         // MARK: Sizes
-        /// Model that describes side bar sizes.
-        public struct Sizes {
-            // MARK: Properties
-            /// Portrait size configuration.
-            public let portrait: SizeConfiguration
-            
-            /// Landscape size configuration.
-            public let landscape: SizeConfiguration
-            
-            /// Current size configuration based on interface orientation.
-            public var current: SizeConfiguration {
-                switch _IntefaceOrientation() {
-                case nil: return portrait
-                case .portrait: return portrait
-                case .landscape: return landscape
-                }
-            }
-            
-            // MARK: Initializers
-            /// Initializes `Sizes` with size configurations.
-            public init(portrait: SizeConfiguration, landscape: SizeConfiguration) {
-                self.portrait = portrait
-                self.landscape = landscape
-            }
-            
-            /// Default value.
-            /// Set to `0.75` ratio of screen width and `1` ratio of screen height in portrait.
-            /// Set to`0.5` ratio of screen width and `1` ratio of screen height in landscape.
-            public static var `default`: Sizes {
-                .init(
-                    portrait: .relative(.init(width: 0.75, height: 1)),
-                    landscape: .relative(.init(width: 0.5, height: 1))
-                )
-            }
-            
-            // MARK: Single Size Configuration
-            /// Enum that describes state, either `point` or `relative`.
-            public typealias SizeConfiguration = VModalModel.Layout.Sizes.SizeConfiguration
-        }
+        /// Model that describes modal sizes.
+        public typealias Sizes = ModalSizes<CGSize>
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
