@@ -34,6 +34,12 @@ public struct VWheelPickerModel {
         /// Picker corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
+        /// Header line limit. Defaults to `1`.
+        public var headerLineLimit: Int? = segmentedPickerReference.layout.headerLineLimit
+        
+        /// Footer line limit. Defaults to `5`.
+        public var footerLineLimit: Int? = segmentedPickerReference.layout.footerLineLimit
+        
         /// Spacing between header, picker, and footer. Defaults to `3`.
         public var headerPickerFooterSpacing: CGFloat = segmentedPickerReference.layout.headerPickerFooterSpacing
         

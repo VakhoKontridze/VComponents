@@ -64,6 +64,12 @@ public struct VSegmentedPickerModel {
         /// Row content margin. Defaults to `2`.
         public var rowContentMargin: CGFloat = 2
         
+        /// Header line limit. Defaults to `1`.
+        public var headerLineLimit: Int? = 1
+        
+        /// Footer line limit. Defaults to `5`.
+        public var footerLineLimit: Int? = 5
+        
         /// Spacing between header, picker, and footer. Defaults to `3`.
         public var headerPickerFooterSpacing: CGFloat = 3
         

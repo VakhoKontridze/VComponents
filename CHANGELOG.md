@@ -40,7 +40,7 @@ VToggle
 
 - `titleLabelLineLimit` is added to `VToggleModel`
 
-VCHeckBox
+VCheckBox
 
 - `titleLabelLineLimit` is added to `VCHeckBoxModel`
 
@@ -48,9 +48,17 @@ VRadioButton
 
 - `titleLabelLineLimit` is added to `VRadioButtonModel`
 
+VSegmentedPicker
+
+- `headerLineLimit` and `footerLineLimit` are added to `VSegmentedPickerModel`
+
 VMenuPicker
 
 - Label issue with `iOS` `15` is fixed
+
+VWheelPicker
+
+- `headerLineLimit` and `footerLineLimit` are added to `VWheelPicker`
 
 VBaseTextField
 
@@ -59,8 +67,9 @@ VBaseTextField
 VTextField
 
 - TextField now support native `focusable()` API
-- `VTextFieldHighlight` is removed in favor of custom `VTextFieldModels`'s
+- `VTextFieldHighlight` is removed in favor of custom `VTextFieldModel`'s
 - `warning` highlight is added to `VTextFieldModel`
+- `headerLineLimit` and `footerLineLimit` are added to `VTextFieldModel`
 
 VSheet
 

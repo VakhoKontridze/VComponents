@@ -77,6 +77,12 @@ public struct VTextFieldModel {
         
         /// Spacing between text and buttons. Defaults to `10`.
         public var contentSpacing: CGFloat = 10
+        
+        /// Header line limit. Defaults to `1`.
+        public var headerLineLimit: Int? = 1
+        
+        /// Footer line limit. Defaults to `5`.
+        public var footerLineLimit: Int? = 5
 
         /// Spacing between header, textfield, and footer. Defaults to `3`.
         public var headerTextFieldFooterSpacing: CGFloat = segmentedPickerReference.layout.headerPickerFooterSpacing
