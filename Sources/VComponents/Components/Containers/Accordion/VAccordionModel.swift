@@ -53,7 +53,7 @@ public struct VAccordionModel {
             vertical: 10
         )
         
-        /// Chevron button dimension. Default to `32`.
+        /// Chevron button dimension. Default to `30`.
         public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
         
         /// Chevron button icon dimension. Default to `12`.

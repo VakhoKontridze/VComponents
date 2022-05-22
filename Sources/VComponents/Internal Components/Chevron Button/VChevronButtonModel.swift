@@ -17,7 +17,7 @@ public struct VChevronButtonModel {
     // MARK: Layout
     public struct Layout {
         // MARK: Properties
-        public var dimension: CGFloat = 32
+        public var dimension: CGFloat = 30
         
         public var iconDimension: CGFloat = 12
         
@@ -39,7 +39,7 @@ public struct VChevronButtonModel {
         public var icon: StateColors = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary, // Looks better without `primaryPressedDisabled`
-            disabled: ColorBook.primaryPressedDisabled
+            disabled: ColorBook.primaryBlackPressedDisabled
         )
         
         // MARK: State Colors

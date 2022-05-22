@@ -68,10 +68,10 @@ public struct VBottomSheetModel {
         /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
         public var headerMargins: Margins = modalReference.layout.headerMargins
         
-        /// Close button dimension. Default to `32`.
+        /// Close button dimension. Default to `30`.
         public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
         
-        /// Close button icon dimension. Default to `11`.
+        /// Close button icon dimension. Default to `12`.
         public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
         
         /// Spacing between label and close button. Defaults to `10`.

@@ -67,35 +67,35 @@ extension Color {
 /*
  
  Accent
- *0.122.255
- *10.132.255
+ 0.122.255
+ 10.132.255
  
  Canvas
  247.247.247
- 22.22.22
+ 0.0.0
  
  Layer
- *254.254.254
- 18.18.18
+ 254.254.254
+ 20.20.20
  
  Primary
- *0.0.0
- *255.255.255
+ 0.0.0
+ 255.255.255
  
  PrimaryBlack
- *0.0.0
- *0.0.0
+ 0.0.0
+ 0.0.0
  
  PrimaryInverted
- *255.255.255
- *0.0.0
+ 255.255.255
+ 0.0.0
  
  PrimaryWhite
- *255.255.255
- *255.255.255
+ 255.255.255
+ 255.255.255
  
  Secondary
- *120.120.120
+ 120.120.120
  140.140.140
  
 */
@@ -103,48 +103,52 @@ extension Color {
 /*
 
  CheckBox.Border.disabled
- *230.230.230
- *40.40.40
+ 230.230.230
+ 40.40.40
  
  CheckBox.Border.off
- *200.200.200
- *60.60.60
+ 200.200.200
+ 80.80.80
  
  CheckBox.Border.pressedOff
  180.180.180
- *80.80.80
+ 60.60.60
  
  ChevronButton.Background.disabled
  250.250.250
- *80.80.80
+ 80.80.80
  
  ChevronButton.Background.enabled
  235.235.235
- *40.40.40
+ 55.55.55
  
  ChevronButton.Background.pressed
- *225.225.225
- *30.30.30
- 
- BottomSheet.Grabber
- *220.220.220
+ 210.210.210
  45.45.45
  
+ BottomSheet.Grabber
+ 230.230.230
+ 100.100.100
+ 
  List.Divider
- *60.60.60 @ 30
+ 60.60.60 @ 30
  85.85.85 @ 60
  
  Modal.Blinding
- *100.100.100 @ 30
- 35.35.35 @ 30
+ 100.100.100 @ 30
+ 0.0.0 @ 60
+ 
+ Modal.CloseButton.Icon.enabled
+ 100.100.100
+ 160.160.160
  
  PageIndicator.Dot
  190.190.190
- *100.100.100
+ 120.120.120
  
  PlainButton.Text.enabled
- *0.122.255
- *10.132.255
+ 0.122.255
+ 10.132.255
  
  PrimaryButton.Background.disabled
  128.176.240
@@ -162,63 +166,63 @@ extension Color {
  
  SegmentedPicker.Background.enabled
  240.240.240
- *40.40.40
+ 40.40.40
  
  SegmentedPicker.Divider.disabled
- *230.230.230
- *50.50.50
+ 230.230.230
+ 50.50.50
  
  SegmentedPicker.Divider.enabled
- *215.215.215
- *70.70.70
+ 215.215.215
+ 70.70.70
  
  SegmentedPicker.Header.enabled
- *60.60.60
+ 60.60.60
  210.210.210
  
  SegmentedPicker.Indicator.disabled
- *254.254.254
- *60.60.60
+ 254.254.254
+ 60.60.60
  
  SegmentedPicker.Indicator.enabled
- *254.254.254
+ 254.254.254
  90.90.90
  
  Slider.Thumb.Border.disabled
  192.192.192
  
  Slider.Thumb.Border.enabled
- *96.96.96
+ 96.96.96
  
  Slider.Thumb.Shadow.disabled
- *96.96.96 @ 20
+ 96.96.96 @ 20
  
  Slider.Thumb.Shadow.enabled
- *96.96.96 @ 50
+ 96.96.96 @ 50
  
  Stepper.Button.Background.pressed
- *200.200.200
- *70.70.70
+ 200.200.200
+ 70.70.70
  
  TextField.Background.focused
- *225.225.225
- *50.50.50
+ 225.225.225
+ 50.50.50
  
  TextField.ClearButton.Background.disabled
- *220.220.220
- *40.40.40
+ 220.220.220
+ 40.40.40
  
  TextField.ClearButton.Background.enabled
  170.170.170
- *30.30.30
+ 30.30.30
  
  TextField.ClearButton.Background.pressed
  150.150.150
- *20.20.20
+ 20.20.20
  
  TextField.ClearButton.Icon
- *255.255.255
- *230.230.230
+ 255.255.255
+ 230.230.230
  
  TextField.Error.Background.enabled
  250.240.240
@@ -228,7 +232,7 @@ extension Color {
  235.110.105
  
  TextField.PlainButton.enabled
- *30.30.30
+ 30.30.30
  240.200.100
  
  TextField.Success.Background.enabled
@@ -247,17 +251,17 @@ extension Color {
  
  Toggle.Fill.disabled
  244.244.244
- *30.30.30
+ 40.40.40
  
  Toggle.Fill.off
  233.233.233
- *40.40.40
+ 55.55.55
  
  Toggle.Fill.pressedOff
- *220.220.220
- *50.50.50
+ 220.220.220
+ 50.50.50
  
  Toggle.Thumb
- *254.254.254
+ 254.254.254
  
 */

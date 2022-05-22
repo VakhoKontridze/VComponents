@@ -69,13 +69,13 @@ public struct VCheckBoxModel {
         // MARK: Properties
         /// Fill colors.
         public var fill: StateColors = .init(
-            off: ColorBook.primaryInverted,
+            off: ColorBook.layer,
             on: toggleReference.colors.fill.on,
             indeterminate: toggleReference.colors.fill.on,
-            pressedOff: ColorBook.primaryInverted,
+            pressedOff: ColorBook.layer,
             pressedOn: toggleReference.colors.fill.pressedOn,
             pressedIndeterminate: toggleReference.colors.fill.pressedOn,
-            disabled: ColorBook.primaryInverted
+            disabled: ColorBook.layer
         )
         
         /// Border colors.

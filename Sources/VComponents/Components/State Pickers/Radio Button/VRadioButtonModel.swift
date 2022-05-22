@@ -69,15 +69,21 @@ public struct VRadioButtonModel {
         // MARK: Properties
         /// Fill colors.
         public var fill: StateColors = .init(
-            off: ColorBook.primaryInverted,
-            on: ColorBook.primaryInverted,
-            pressedOff: ColorBook.primaryInverted,
-            pressedOn: ColorBook.primaryInverted,
-            disabled: ColorBook.primaryInverted
+            off: ColorBook.layer,
+            on: ColorBook.layer,
+            pressedOff: ColorBook.layer,
+            pressedOn: ColorBook.layer,
+            disabled: ColorBook.layer
         )
         
         /// Border colors.
-        public var border: StateColors = toggleRefrence.colors.fill
+        public var border: StateColors = .init(
+            off: checkBoxReference.colors.border.off,
+            on: toggleRefrence.colors.fill.on,
+            pressedOff: checkBoxReference.colors.border.pressedOff,
+            pressedOn: toggleRefrence.colors.fill.pressedOn,
+            disabled: checkBoxReference.colors.border.disabled
+        )
         
         /// Bullet colors.
         public var bullet: StateColors = .init(

@@ -7,6 +7,7 @@ General
 - Project is migrated from `XCFramework` to `Swift Package`
 - Project now partially supports `macOS`, `tvOS`, and `watchOS`
 - Components are reworked
+- Colors have been reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines 
 - Several internal properties are now exposed to public in models

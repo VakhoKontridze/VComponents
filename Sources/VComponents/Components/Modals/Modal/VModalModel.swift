@@ -59,10 +59,10 @@ public struct VModalModel {
         /// Header margins. Default to `15` leading, `15` trailing, `10` top, and `10` bottom.
         public var headerMargins: Margins = accordionReference.layout.headerMargins
         
-        /// Close button dimension. Default to `32`.
+        /// Close button dimension. Default to `30`.
         public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
         
-        /// Close button icon dimension. Default to `11`.
+        /// Close button icon dimension. Default to `12`.
         public var closeButtonIconDimension: CGFloat = closeButtonReference.layout.iconDimension
         
         /// Spacing between label and close button. Defaults to `10`.
@@ -166,7 +166,11 @@ public struct VModalModel {
         public var closeButtonBackground: StateColors = closeButtonReference.colors.background
         
         /// Close button icon colors and opacities.
-        public var closeButtonIcon: StateColors = closeButtonReference.colors.icon
+        public var closeButtonIcon: StateColors = .init(
+            enabled: .init(componentAsset: "Modal.CloseButton.Icon.enabled"),
+            pressed: .init(componentAsset: "Modal.CloseButton.Icon.enabled"),
+            disabled: closeButtonReference.colors.icon.disabled
+        )
         
         /// Header divider color.
         public var headerDivider: Color = accordionReference.colors.headerDivider
