@@ -68,8 +68,8 @@ public struct VModalModel {
         /// Spacing between label and close button. Defaults to `10`.
         public var labelCloseButtonSpacing: CGFloat = 10
         
-        /// Header divider height. Defaults to `1`.
-        public var headerDividerHeight: CGFloat = 1
+        /// Header divider height. Defaults to `2/3`.
+        public var headerDividerHeight: CGFloat = accordionReference.layout.headerDividerHeight
     
         /// Header divider margins. Default to `.zero`.
         public var headerDividerMargins: Margins = .zero

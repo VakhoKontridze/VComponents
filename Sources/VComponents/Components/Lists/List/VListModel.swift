@@ -34,8 +34,8 @@ public struct VListModel {
         /// Spacing between rows. Defaults to `18`.
         public var rowSpacing: CGFloat = 18
         
-        /// Row divider height. Defaults to `1`.
-        public var dividerHeight: CGFloat = 1
+        /// Row divider height. Defaults to `1/3`.
+        public var dividerHeight: CGFloat = 1/3
         
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: HorizontalMargins = .zero

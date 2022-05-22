@@ -101,9 +101,6 @@ extension Color {
 */
 
 /*
- 
- Accordion.Divider
- @140.140.140 @ 50
 
  CheckBox.Border.disabled
  *230.230.230
@@ -134,8 +131,8 @@ extension Color {
  45.45.45
  
  List.Divider
- *120.120.120 @ 15
- @160.160.160 @ 15
+ *60.60.60 @ 30
+ 85.85.85 @ 60
  
  Modal.Blinding
  *100.100.100 @ 30

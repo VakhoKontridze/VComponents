@@ -18,6 +18,9 @@ public struct VAccordionModel {
     /// Reference to `VChevronButtonModel`.
     public static let chevronButtonReference: VChevronButtonModel = .init()
     
+    /// Reference to `VListModel`.
+    public static let listReference: VListModel = .init()
+    
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
@@ -56,8 +59,8 @@ public struct VAccordionModel {
         /// Chevron button icon dimension. Default to `12`.
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        /// Header divider height. Defaults to `0.5`.
-        public var headerDividerHeight: CGFloat = 0.5
+        /// Header divider height. Defaults to `2/3`.
+        public var headerDividerHeight: CGFloat = 2/3
         
         /// Header divider margins. Defaults to `10` leading, `10` trailing, `0` top, `0` bottom.
         public var headerDividerMargins: Margins = .init(
@@ -105,7 +108,7 @@ public struct VAccordionModel {
         )
         
         /// Header divider color.
-        public var headerDivider: Color = .init(componentAsset: "Accordion.Divider")
+        public var headerDivider: Color = listReference.colors.divider
         
         /// Chevron button background colors.
         public var chevronButtonBackground: ButtonStateColors = chevronButtonReference.colors.background
