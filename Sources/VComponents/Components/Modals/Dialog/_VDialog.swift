@@ -92,6 +92,7 @@ struct _VDialog<Content>: View
                 descriptionView
                 contentView
             })
+                .padding(model.layout.titleDescriptionContentMargins)
                 .readSize(onChange: { titleDescriptionContentHeight = $0.height })
             
             buttonsScrollView

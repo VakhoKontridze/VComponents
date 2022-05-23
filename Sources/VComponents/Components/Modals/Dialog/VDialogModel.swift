@@ -79,18 +79,24 @@ public struct VDialogModel {
             vertical: 5
         )
         
+        /// Additional margisn applied to title, descirption, and content as a whole. Defaults to `0` leading, `0` trailing,`0` top, and `10` bottom.
+        public var titleDescriptionContentMargins: Margins = .init(
+            leading: 0,
+            trailing: 0,
+            top: 0,
+            bottom: 10
+        )
+        
         /// Button height. Defaults to  `40`.
         public var buttonHeight: CGFloat = 40
         
         /// Button corner radius. Defaults to `10`.
         public var buttonCornerRadius: CGFloat = 10
         
-        /// Button margins. Defaults to `0` leading, `0` trailing,`15` top, and `5` bottom.
+        /// Button margins. Defaults to `0` horizontally and `5` vertically.
         public var buttonMargins: Margins = .init(
-            leading: 0,
-            trailing: 0,
-            top: 15,
-            bottom: 5
+            horizontal: 0,
+            vertical: 5
         )
         
         /// Spacing between horizontal buttons.  Defaults to `10`.

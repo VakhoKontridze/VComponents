@@ -139,4 +139,24 @@ extension View {
                 )
         }
     }
+    
+    /// Presents `VDialog` when boolean is true with an `Error`.
+    public func vDialog<E, Content>(
+        isPresented: Binding<Bool>,
+        error: E?,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        dialog: @escaping (E?) -> VDialog<Content>
+    ) -> some View
+        where
+            E: Error,
+            Content: View
+    {
+        vDialog(
+            isPresented: isPresented,
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            dialog: { dialog(error) }
+        )
+    }
 }

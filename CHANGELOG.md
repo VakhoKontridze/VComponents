@@ -129,6 +129,7 @@ VSideBar
 VDialog
 
 - Dialog now supports landscape mode
+- Dialog can now be created with `Error`
 - Dialog now has option for adding shadow
 
 VMenu
