@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// Dialog can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
 ///
-/// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
+/// `vDialog` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
 ///
 /// Usage example:
 ///
@@ -27,70 +27,67 @@ import SwiftUI
 ///         )
 ///             .vDialog(isPresented: $isPresented, dialog: {
 ///                 VDialog(
-///                     buttons: .two(
-///                         primary: .init(
-///                             model: .primary,
-///                             title: "Confirm",
-///                             action: { print("Confirmed") }
-///                         ),
-///                         secondary: .init(
-///                             model: .secondary,
-///                             title: "Cancel",
-///                             action: { print("Cancelled") }
-///                         )
-///                     ),
-///                     title: "Lorem ipsum dolor sit amet",
-///                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///                     title: "Lorem ipsum",
+///                     description: "Lorem ipsum dolor sit amet",
+///                     actions: [
+///                         .primary(action: { print("Confirmed") }, title: "Confirm"),
+///                         .cancel(action: { print("Cancelled") })
+///                     ]
 ///                 )
 ///         })
 ///     }
 ///
-public struct VDialog<Content> where Content: View {
+public struct VDialog<Content>
+    where Content: View
+{
     // MARK: Properties
     fileprivate let model: VDialogModel
-    fileprivate let dialogButtons: VDialogButtons
+    
     fileprivate let title: String?
     fileprivate let description: String?
     fileprivate let content: (() -> Content)?
+    fileprivate let buttons: [VDialogButton]
     
     // MARK: Initializers
     /// Initializes component with buttons, title, description, and content.
     public init(
         model: VDialogModel = .init(),
-        buttons dialogButtons: VDialogButtons,
         title: String?,
         description: String?,
-        @ViewBuilder content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content,
+        actions buttons: [VDialogButton]
     ) {
         self.model = model
-        self.dialogButtons = dialogButtons
         self.title = title
         self.description = description
         self.content = content
+        self.buttons = buttons
     }
     
     /// Initializes component with buttons, title, and description.
     public init(
         model: VDialogModel = .init(),
-        buttons dialogButtons: VDialogButtons,
         title: String?,
-        description: String?
+        description: String?,
+        actions buttons: [VDialogButton]
     )
         where Content == Never
     {
         self.model = model
-        self.dialogButtons = dialogButtons
         self.title = title
         self.description = description
         self.content = nil
+        self.buttons = buttons
     }
 }
 
 // MARK: - Extension
 extension View {
-    /// Presents `VDialog`.
+    /// Presents `VDialog` when boolean is true.
     public func vDialog<Content>(
         isPresented: Binding<Bool>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
         dialog: @escaping () -> VDialog<Content>
     ) -> some View
         where Content: View
@@ -98,21 +95,48 @@ extension View {
         let dialog = dialog()
         
         return self
-            .overlay(Group(content: {
-                if isPresented.wrappedValue {
-                    WindowOverlayView(
-                        isPresented: isPresented,
-                        content:
-                            _VDialog(
-                                model: dialog.model,
-                                isPresented: isPresented,
-                                dialogButtons: dialog.dialogButtons,
-                                title: dialog.title,
-                                description: dialog.description,
-                                content: dialog.content
-                            )
+            .background(PresentationHost(
+                isPresented: isPresented,
+                content: {
+                    _VDialog(
+                        model: dialog.model,
+                        presentHandler: presentHandler,
+                        dismissHandler: dismissHandler,
+                        title: dialog.title,
+                        description: dialog.description,
+                        content: dialog.content,
+                        buttons: dialog.buttons
                     )
                 }
-            }))
+            ))
+    }
+    
+    /// Presents `VDialog` using the item as data source for content.
+    @ViewBuilder public func vDialog<Item, Content>(
+        item: Binding<Item?>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        dialog: @escaping (Item) -> VDialog<Content>
+    ) -> some View
+        where
+            Item: Identifiable,
+            Content: View
+    {
+        switch item.wrappedValue {
+        case nil:
+            self
+            
+        case let _item?:
+            self
+                .vDialog(
+                    isPresented: .init(
+                        get: { true },
+                        set: { _ in item.wrappedValue = nil }
+                    ),
+                    onPresent: presentHandler,
+                    onDismiss: dismissHandler,
+                    dialog: { dialog(_item) }
+                )
+        }
     }
 }

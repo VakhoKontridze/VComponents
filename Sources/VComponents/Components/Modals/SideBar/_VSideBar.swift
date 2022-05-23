@@ -47,7 +47,7 @@ struct _VSideBar<Content>: View where Content: View {
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,
-                perform: { if $0 { animateOutFromExternalDismiss() } }
+                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
             )
     }
     

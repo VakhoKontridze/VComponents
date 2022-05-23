@@ -47,9 +47,6 @@ public struct VModalModel {
             landscape: .relative(.init(width: 0.6, height: 0.9))
         )
         
-        /// Edges ignored by keyboard. Defaults to `[]`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
-        
         /// Rounded corners. Defaults to to `allCorners`.
         public var roundedCorners: UIRectCorner = .allCorners
         
@@ -80,6 +77,9 @@ public struct VModalModel {
         /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
         public var contentMargins: Margins = accordionReference.layout.contentMargins
         
+        /// Edges ignored by keyboard. Defaults to `[]`.
+        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
@@ -99,6 +99,15 @@ public struct VModalModel {
         // MARK: Properties
         /// Background color.
         public var background: Color = sheetReference.colors.background
+        
+        /// Shadow color.
+        public var shadow: Color = .clear
+        
+        /// Shadow radius. Defaults to `0`.
+        public var shadowRadius: CGFloat = 0
+        
+        /// Shadow offset. Defaults to `zero`.
+        public var shadowOffset: CGSize = .zero
         
         /// Title header color.
         ///
@@ -120,15 +129,6 @@ public struct VModalModel {
         
         /// Blinding color.
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")
-        
-        /// Shadow color.
-        public var shadow: Color = .clear
-        
-        /// Shadow radius. Defaults to `0`.
-        public var shadowRadius: CGFloat = 0
-        
-        /// Shadow offset. Defaults to `zero`.
-        public var shadowOffset: CGSize = .zero
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

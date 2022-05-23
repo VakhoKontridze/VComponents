@@ -76,7 +76,7 @@ public struct VPrimaryButtonModel {
         public var background: StateColors = .init(
             enabled: .init(componentAsset: "PrimaryButton.Background.enabled"),
             pressed: .init(componentAsset: "PrimaryButton.Background.pressed"),
-            disabled: .init(componentAsset: "PrimaryButton.Background.loading"),
+            disabled: .init(componentAsset: "PrimaryButton.Background.disabled"),
             loading: .init(componentAsset: "PrimaryButton.Background.disabled")
         )
         

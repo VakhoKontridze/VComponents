@@ -81,9 +81,6 @@ public struct VSideBarModel {
         /// Background color.
         public var background: Color = modalReference.colors.background
         
-        /// Blinding color.
-        public var blinding: Color = modalReference.colors.blinding
-        
         /// Shadow color.
         public var shadow: Color = modalReference.colors.shadow
         
@@ -92,6 +89,9 @@ public struct VSideBarModel {
         
         /// Shadow offset. Defaults to `zero`.
         public var shadowOffset: CGSize = modalReference.colors.shadowOffset
+        
+        /// Blinding color.
+        public var blinding: Color = modalReference.colors.blinding
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

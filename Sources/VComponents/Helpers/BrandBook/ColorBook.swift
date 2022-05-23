@@ -67,8 +67,8 @@ extension Color {
 /*
  
  Accent
- 0.122.255
- 10.132.255
+ 0.122.255 // Apple
+ 10.132.255 // Apple
  
  Canvas
  247.247.247
@@ -125,6 +125,17 @@ extension Color {
  ChevronButton.Background.pressed
  210.210.210
  45.45.45
+
+ Dialog.DestructiveButton.Background.disabled
+ 255.140.140
+ 
+ Dialog.DestructiveButton.Background.enabled
+ 255.59.48 // Apple
+ 255.69.68 // Apple
+ 
+ Dialog.SecondaryButton.Background.pressed
+ 235.235.235
+ 70.70.70
  
  BottomSheet.Grabber
  230.230.230
@@ -156,9 +167,6 @@ extension Color {
  PrimaryButton.Background.enabled
  24.126.240
  25.131.255
- 
- PrimaryButton.Background.loading
- 128.176.240
  
  PrimaryButton.Background.pressed
  31.104.182

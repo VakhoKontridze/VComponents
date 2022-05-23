@@ -26,7 +26,18 @@ extension CGSize: ScreenRelativeSizeMeasurement {
     }
 }
 
-// MARK: - Bottom Sheet Size
+// MARK: - V Dialog Size
+extension VDialogModel.Layout.DialogSize: ScreenRelativeSizeMeasurement {
+    public static func relativeMeasurementToPoints(
+        _ measurement: VDialogModel.Layout.DialogSize
+    ) -> VDialogModel.Layout.DialogSize {
+        .init(
+            width: UIScreen.main.bounds.size.width * measurement.width
+        )
+    }
+}
+
+// MARK: - V Bottom Sheet Size
 extension VBottomSheetModel.Layout.BottomSheetSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
         _ measurement: VBottomSheetModel.Layout.BottomSheetSize

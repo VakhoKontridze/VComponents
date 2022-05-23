@@ -8,25 +8,117 @@
 import Foundation
 
 // MARK: - V Dialog Button
-/// ViewModel that creates `VDialog` buttons.
+/// Model that describes `VDialog` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
 public struct VDialogButton {
     // MARK: Properties
-    public var model: VDialogButtonModel
-    public var isEnabled: Bool
-    public var title: String
-    public var action: () -> Void
+    let buttonType: _VDialogButton
+    let isEnabled: Bool
+    let action: (() -> Void)?
+    let title: String
     
     // MARK: Initializers
-    /// Initializes data source with model, title, and action.
-    public init(
-        model: VDialogButtonModel,
-        isEnabled: Bool = true,
-        title: String,
-        action: @escaping () -> Void
+    private init(
+        buttonType: _VDialogButton,
+        isEnabled: Bool,
+        action: (() -> Void)?,
+        title: String
     ) {
-        self.model = model
+        self.buttonType = buttonType
         self.isEnabled = isEnabled
-        self.title = title
         self.action = action
+        self.title = title
     }
+    
+    /// Primary button.
+    public static func primary(
+        isEnabled: Bool = true,
+        action: @escaping () -> Void,
+        title: String
+    ) -> Self {
+        self.init(
+            buttonType: .primary,
+            isEnabled: isEnabled,
+            action: action,
+            title: title
+        )
+    }
+    
+    /// Secondary button.
+    public static func secondary(
+        isEnabled: Bool = true,
+        action: @escaping () -> Void,
+        title: String
+    ) -> Self {
+        self.init(
+            buttonType: .secondary,
+            isEnabled: isEnabled,
+            action: action,
+            title: title
+        )
+    }
+    
+    /// Destructive button.
+    public static func destructive(
+        isEnabled: Bool = true,
+        action: @escaping () -> Void,
+        title: String
+    ) -> Self {
+        self.init(
+            buttonType: .destructive,
+            isEnabled: isEnabled,
+            action: action,
+            title: title
+        )
+    }
+    
+    /// Cancel button.
+    public static func cancel(
+        isEnabled: Bool = true,
+        action: (() -> Void)? = nil,
+        title: String = "Cancel"
+    ) -> Self {
+        self.init(
+            buttonType: .cancel,
+            isEnabled: isEnabled,
+            action: action,
+            title: title
+        )
+    }
+    
+    static func ok() -> Self {
+        self.init(
+            buttonType: .ok,
+            isEnabled: true,
+            action: nil,
+            title: "Ok"
+        )
+    }
+    
+    // MARK: Reorder
+    static func reorder(_ buttons: [Self]) -> [Self] {
+        var result: [VDialogButton] = .init()
+        
+        for button in buttons {
+            if button.buttonType == .cancel { result.removeAll(where: { $0.buttonType == .cancel }) }
+            result.append(button)
+        }
+        if let cancelButtonIndex: Int = result.firstIndex(where: { $0.buttonType == .cancel }) {
+            result.append(result.remove(at: cancelButtonIndex))
+        }
+        
+        if result.isEmpty {
+            result.append(.ok())
+        }
+        
+        return result
+    }
+}
+
+// MARK: - _ V Dialog Button
+enum _VDialogButton {
+    case primary
+    case secondary
+    case destructive
+    case cancel
+    case ok // Not accessible from outside
 }

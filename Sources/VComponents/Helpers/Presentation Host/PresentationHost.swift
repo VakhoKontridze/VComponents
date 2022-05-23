@@ -52,6 +52,8 @@ import SwiftUI
 ///         @Environment(\.presentationHostPresentationMode) private var presentationMode
 ///         private let content: () -> Content
 ///
+///         @State private var isInternallyPresented: Bool = false
+///
 ///         init(content: @escaping () -> Content) {
 ///             self.content = content
 ///         }
@@ -63,16 +65,16 @@ import SwiftUI
 ///                 .onTapGesture(perform: animateOut)
 ///                 .onChange(
 ///                     of: presentationMode.isExternallyDismissed,
-///                     perform: { if $0 { animateOutFromExternalDismiss() } }
+///                     perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
 ///                  )
 ///         }
 ///
 ///         private func animateIn() {
-///             // Animate UI in with 0.5s duration...
+///             // Animate UI in with 0.5s duration and set `isInternallyPresented` to `true` ...
 ///         }
 ///
 ///         private func animateOut() {
-///             // Animate UI out with 0.5s duration...
+///             // Animate UI out with 0.5s duration and set `isInternallyPresented` to `false` ...
 ///
 ///             DispatchQueue.main.asyncAfter(
 ///                 deadline: .now() + 0.5,
@@ -81,7 +83,7 @@ import SwiftUI
 ///         }
 ///
 ///         private func animateOutFromExternalDismiss() {
-///             // Animate UI out with 0.5s duration...
+///             // Animate UI out with 0.5s duration and set `isInternallyPresented` to `false` ...
 ///
 ///             DispatchQueue.main.asyncAfter(
 ///                 deadline: .now() + 0.5,

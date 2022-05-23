@@ -15,9 +15,9 @@ struct VDialogDemoView: View {
     
     @State private var isPresented: Bool = false
     @State private var text: String = ""
-    @State private var dialogButtons: VDialogButtonsHelper = .two
     @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    @State private var dialogButtons: VDialogButtonsHelper = .two
     @State private var ignoreKeyboardSafeArea: Bool = !VDialogModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
     
     private var model: VDialogModel {
@@ -40,10 +40,10 @@ struct VDialogDemoView: View {
             .vDialog(isPresented: $isPresented, dialog: {
                 VDialog(
                     model: model,
-                    buttons: dialogButtons.buttons(text: text),
                     title: title,
                     description: description,
-                    content: { VTextField(placeholder: "Name", text: $text) }
+                    content: { VTextField(placeholder: "Name", text: $text) },
+                    actions: dialogButtons.actions(text: text)
                 )
             })
             .onChange(of: isPresented, perform: { value in
@@ -67,7 +67,7 @@ struct VDialogDemoView: View {
         })
         
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $dialogButtons, headerTitle: "Buttons")
+            VWheelPicker(selection: $dialogButtons, headerTitle: "Buttons")
         })
         
         DemoViewSettingsSection(content: {
@@ -78,47 +78,43 @@ struct VDialogDemoView: View {
 
 // MARK: - Helpers
 private enum VDialogButtonsHelper: Int, PickableTitledEnumeration {
+    case `none`
     case one
     case two
     case many
     
     var pickerTitle: String {
         switch self {
+        case .none: return "No Buttons"
         case .one: return "One Button"
         case .two: return "Two Buttons"
         case .many: return "Many Buttons"
         }
     }
     
-    func buttons(text: String) -> VDialogButtons {
+    func actions(text: String) -> [VDialogButton] {
         switch self {
+        case .none:
+            return []
+            
         case .one:
-            return .one(
-                button: .init(model: .primary, isEnabled: !text.isEmpty, title: "Ok", action: {})
-            )
+            return [
+                .primary(isEnabled: !text.isEmpty, action: {}, title: "Option A"),
+            ]
         
         case .two:
-            return .two(
-                primary: .init(model: .primary, isEnabled: !text.isEmpty, title: "Confirm", action: {}),
-                secondary: .init(model: .secondary, title: "Cancel", action: {})
-            )
+            return [
+                .primary(isEnabled: !text.isEmpty, action: {}, title: "Option A"),
+                .cancel()
+            ]
             
         case .many:
-            return .many([
-                .init(model: .primary, isEnabled: !text.isEmpty, title: "Option A", action: {}),
-                .init(model: .primary, isEnabled: !text.isEmpty, title: "Option B", action: {}),
-                .init(model: .secondary, title: "Cancel", action: {})
-            ])
-        }
-    }
-}
-
-extension VDialogButtons {
-    fileprivate var helperType: VDialogButtonsHelper {
-        switch self {
-        case .one: return .one
-        case .two: return .two
-        case .many: return .many
+            return [
+                .primary(isEnabled: !text.isEmpty, action: {}, title: "Option A"),
+                .secondary(isEnabled: !text.isEmpty, action: {}, title: "Option B"),
+                .destructive(isEnabled: !text.isEmpty, action: {}, title: "Delete"),
+                .cancel()
+            ]
         }
     }
 }

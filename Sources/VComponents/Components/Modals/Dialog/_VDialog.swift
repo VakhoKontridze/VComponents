@@ -6,88 +6,126 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - _ V Dialog
-struct _VDialog<Content>: View where Content: View {
+struct _VDialog<Content>: View
+    where Content: View
+{
     // MARK: Properties
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
+    
     private let model: VDialogModel
     
-    @Binding private var isHCPresented: Bool
-    @State private var isViewPresented: Bool = false
-    
-    private let dialogButtons: VDialogButtons
+    private let presentHandler: (() -> Void)?
+    private let dismissHandler: (() -> Void)?
     
     private let title: String?
     private let description: String?
     private let content: (() -> Content)?
+    private let buttons: [VDialogButton]
+    
+    @State private var isInternallyPresented: Bool = false
+    
+    @State private var titleDescriptionContentHeight: CGFloat = 0
+    @State private var buttonsStackHeight: CGFloat = 0
+    private var buttonsStackShouldScroll: Bool {
+        let safeAreaHeight: CGFloat =
+            UIScreen.main.bounds.height
+            - UIDevice.safeAreaInsetTop
+            - UIDevice.safeAreaInsetBottom
+        
+        let dialogHeight: CGFloat =
+            model.layout.margins.top
+            + titleDescriptionContentHeight
+            + buttonsStackHeight
+            + model.layout.margins.bottom
+        
+        return dialogHeight > safeAreaHeight
+    }
     
     // MARK: Initializers
     init(
         model: VDialogModel,
-        isPresented: Binding<Bool>,
-        dialogButtons: VDialogButtons,
+        presentHandler: (() -> Void)?,
+        dismissHandler: (() -> Void)?,
         title: String?,
         description: String?,
-        content: (() -> Content)?
+        content: (() -> Content)?,
+        buttons: [VDialogButton]
     ) {
         self.model = model
-        self._isHCPresented = isPresented
-        self.dialogButtons = dialogButtons
+        self.presentHandler = presentHandler
+        self.dismissHandler = dismissHandler
         self.title = title
         self.description = description
         self.content = content
+        self.buttons = VDialogButton.reorder(buttons)
     }
 
     // MARK: Body
     var body: some View {
         ZStack(content: {
             blinding
-            modalView
+            dialog
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.container, edges: .horizontal)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
+            .onChange(
+                of: presentationMode.isExternallyDismissed,
+                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+            )
     }
     
     private var blinding: some View {
         model.colors.blinding
-            .ignoresSafeArea(.all, edges: .all)
+            .ignoresSafeArea(.container, edges: .vertical)
     }
     
-    private var modalView: some View {
+    private var dialog: some View {
         VStack(spacing: 0, content: {
-            VStack(spacing: model.layout.titlesAndContentSpacing, content: {
+            VStack(spacing: 0, content: {
                 titleView
                 descriptionView
-                freeContentView
+                contentView
             })
-                .padding(model.layout.titlesAndContentMargins)
+                .readSize(onChange: { titleDescriptionContentHeight = $0.height })
             
-            dialogView
+            buttonsScrollView
         })
-            .padding(model.layout.margin)
-            .scaleEffect(isViewPresented ? 1 : model.animations.scaleEffect)
-            .opacity(isViewPresented ? 1 : model.animations.opacity)
-            .blur(radius: isViewPresented ? 0 : model.animations.blur)
+            .padding(model.layout.margins)
+            .frame(width: model.layout.sizes._current.size.width)
             .background(background)
-            .frame(width: model.layout.width)
+            .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
+            .opacity(isInternallyPresented ? 1 : model.animations.opacity)
+            .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
     }
     
     private var background: some View {
-        model.colors.background
-            .cornerRadius(model.layout.cornerRadius)
+        VSheet(model: model.sheetSubModel)
+            .shadow(
+                color: model.colors.shadow,
+                radius: model.colors.shadowRadius,
+                x: model.colors.shadowOffset.width,
+                y: model.colors.shadowOffset.height
+            )
     }
-    
+
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
             VText(
+                type: .multiLine(alignment: .center, limit: model.layout.titleLineLimit),
                 color: model.colors.title,
                 font: model.fonts.title,
                 title: title
             )
+                .padding(model.layout.titleMargins)
         }
     }
-    
+
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
             VText(
@@ -96,89 +134,164 @@ struct _VDialog<Content>: View where Content: View {
                 font: model.fonts.description,
                 title: description
             )
+                .padding(model.layout.descirptionMargins)
         }
     }
-    
-    @ViewBuilder private var freeContentView: some View {
+
+    @ViewBuilder private var contentView: some View {
         if let content = content {
             content()
-                .padding(.vertical, model.layout.contentMarginVertical)
+                .padding(model.layout.contentMargins)
         }
     }
     
-    @ViewBuilder private var dialogView: some View {
-        switch dialogButtons {
-        case .one(let button): oneButtonDialogView(button: button)
-        case .two(let primary, let secondary): twoButtonDialogView(primary: primary, secondary: secondary)
-        case .many(let buttons): manyButtonDialogView(buttons: buttons)
+    @ViewBuilder private var buttonsScrollView: some View {
+        if buttonsStackShouldScroll {
+            ScrollView(content: { buttonsStack })
+        } else {
+            buttonsStack
         }
     }
     
-    private func oneButtonDialogView(button: VDialogButton) -> some View {
-        VPrimaryButton(
-            model: button.model.buttonSubModel,
-            action: { animateOut(and: button.action) },
-            title: button.title
-        )
+    private var buttonsStack: some View {
+        Group(content: {
+            switch buttons.count {
+            case 1:
+                buttonsContent()
+            
+            case 2:
+                HStack(  // Cancel button is last
+                    spacing: model.layout.horizontalButtonSpacing,
+                    content: { buttonsContent(reverseOrder: true) }
+                )
+            
+            case 3...:
+                VStack(
+                    spacing: model.layout.verticallButtonSpacing,
+                    content: { buttonsContent() }
+                )
+            
+            default:
+                fatalError()
+            }
+        })
+            .padding(model.layout.buttonMargins)
+            .readSize(onChange: { buttonsStackHeight = $0.height })
+    }
+    
+    private func buttonsContent(reverseOrder: Bool = false) -> some View {
+        let buttons: [VDialogButton] = {
+            switch reverseOrder {
+            case false: return self.buttons
+            case true: return self.buttons.reversed()
+            }
+        }()
+        
+        return ForEach(buttons.indices, id: \.self, content: { i in
+            buttonView(buttons[i])
+        })
+    }
+    
+    private func buttonView(_ button: VDialogButton) -> some View {
+        Group(content: {
+            switch button.buttonType {
+            case .primary:
+                VDialogPrimaryButton(
+                    model: model.primaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+                
+            case .secondary:
+                VDialogSecondaryButton(
+                    model: model.secondaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+                
+            case .destructive:
+                VDialogSecondaryButton(
+                    model: model.destructiveButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+            
+            case .cancel:
+                VDialogSecondaryButton(
+                    model: model.secondaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+                
+            case .ok:
+                VDialogSecondaryButton(
+                    model: model.secondaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+            }
+        })
             .disabled(!button.isEnabled)
     }
     
-    private func twoButtonDialogView(primary: VDialogButton, secondary: VDialogButton) -> some View {
-        HStack(spacing: model.layout.twoButtonSpacing, content: {
-            VPrimaryButton(
-                model: secondary.model.buttonSubModel,
-                action: { animateOut(and: secondary.action) },
-                title: secondary.title
-            )
-                .disabled(!secondary.isEnabled)
-            
-            VPrimaryButton(
-                model: primary.model.buttonSubModel,
-                action: { animateOut(and: primary.action) },
-                title: primary.title
-            )
-                .disabled(!primary.isEnabled)
-        })
-    }
-    
-    private func manyButtonDialogView(buttons: [VDialogButton]) -> some View {
-        VStack(spacing: model.layout.manyButtonSpacing, content: {
-            ForEach(buttons.indices, id: \.self, content: { i in
-                VPrimaryButton(
-                    model: buttons[i].model.buttonSubModel,
-                    action: { animateOut(and: buttons[i].action) },
-                    title: buttons[i].title
-                )
-                    .disabled(!buttons[i].isEnabled)
-            })
-        })
-    }
-
     // MARK: Animations
     private func animateIn() {
-        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isViewPresented = true })
+        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isInternallyPresented = true })
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + (model.animations.appear?.duration ?? 0),
+            execute: {
+                DispatchQueue.main.async(execute: { presentHandler?() })
+            }
+        )
     }
-    
-    private func animateOut(and action: @escaping () -> Void) {
-        action()
-        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isViewPresented = false })
-        DispatchQueue.main.asyncAfter(deadline: .now() + (model.animations.disappear?.duration ?? 0), execute: { isHCPresented = false })
+
+    private func animateOut(completion: (() -> Void)?) {
+        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isInternallyPresented = false })
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + (model.animations.disappear?.duration ?? 0),
+            execute: {
+                presentationMode.dismiss()
+                DispatchQueue.main.async(execute: { dismissHandler?(); completion?() })
+            }
+        )
+    }
+
+    private func animateOutFromExternalDismiss() {
+        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isInternallyPresented = false })
+        
+        DispatchQueue.main.asyncAfter(
+            deadline: .now() + (model.animations.disappear?.duration ?? 0),
+            execute: {
+                presentationMode.externalDismissCompletion()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
     }
 }
 
 // MARK: - Preview
 struct VDialog_Previews: PreviewProvider {
+    @State static var isPresented: Bool = true
+
     static var previews: some View {
-        _VDialog(
-            model: .init(),
-            isPresented: .constant(true),
-            dialogButtons: .two(
-                primary: .init(model: .primary, title: "OK", action: {}),
-                secondary: .init(model: .secondary, title: "Cancel", action: {})
-            ),
-            title: "Lorem ipsum dolor sit amet",
-            description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            content: { VTextField(text: .constant("Lorem ipsum dolor sit amet")) }
+        VPlainButton(
+            action: { /*isPresented = true*/ },
+            title: "Present"
         )
+            .vDialog(isPresented: $isPresented, dialog: {
+                VDialog(
+                    title: "Lorem ipsum",
+                    description: "Lorem ipsum dolor sit amet",
+                    content: {
+                        VTextField(text: .constant("Lorem ipsum dolor sit amet"))
+                    },
+                    actions: [
+                        .primary(action: { print("Confirmed") }, title: "Confirm"),
+                        .cancel(action: { print("Cancelled") })
+                    ]
+                )
+            })
     }
 }
