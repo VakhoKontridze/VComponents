@@ -138,6 +138,10 @@ VDialog
 - Alert can now be created with `Error`
 - Alert now has option for adding shadow
 
+VActionSheet
+
+- `VActionSheet` is renamed to `VConfirmationDialog`
+
 VMenu
 
 - Label issue with `iOS` `15` is fixed

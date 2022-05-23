@@ -1,5 +1,5 @@
 //
-//  VActionSheetDemoView.swift
+//  VConfirmationDialogDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 2/1/21.
@@ -8,10 +8,10 @@
 import SwiftUI
 import VComponents
 
-// MARK: - V Action Sheet Demo View
-struct VActionSheetDemoView: View {
+// MARK: - V Confirmation Dialog Demo View
+struct VConfirmationDialogDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Action Sheet" }
+    static var navBarTitle: String { "Confirmation Dialog" }
     
     @State private var isPresented: Bool = false
 
@@ -26,8 +26,8 @@ struct VActionSheetDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .vActionSheet(isPresented: $isPresented, actionSheet: {
-                VActionSheet(
+            .vConfirmationDialog(isPresented: $isPresented, confirmationDialog: {
+                VConfirmationDialog(
                     title: "Lorem ipsum dolor sit amet",
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     actions: [
@@ -42,8 +42,8 @@ struct VActionSheetDemoView: View {
 }
 
 // MARK: - Preview
-struct VActionSheetDemoView_Previews: PreviewProvider {
+struct VConfirmationDialogDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VActionSheetDemoView()
+        VConfirmationDialogDemoView()
     }
 }

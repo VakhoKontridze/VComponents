@@ -1,5 +1,5 @@
 //
-//  VActionSheetButton.swift
+//  VConfirmationDialogButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/1/21.
@@ -7,27 +7,27 @@
 
 import SwiftUI
 
-// MARK: - V Action Sheet Button
-/// Model that describes `VActionSheet` button, such as `standard`, `secondary`, `destructive`, or `cancel`.
+// MARK: - V Confirmation Dialog Button
+/// Model that describes `VConfirmationDialog` button, such as `standard`, `secondary`, `destructive`, or `cancel`.
 ///
 /// `cancel` will be moved to the end of the stack.
 /// If there are multiple `cancel` buttons, only the last one will be kept.
 /// If thete are no buttons, an `ok` button will be added.
-public struct VActionSheetButton {
+public struct VConfirmationDialogButton {
     // MARK: Properties
-    let _actionSheetButton: _VActionSheetButton
+    let _confirmationDialogButton: _VConfirmationDialogButton
     let isEnabled: Bool
     let action: (() -> Void)?
     let title: String
     
     // MARK: Initializers
     private init(
-        actionSheetButton: _VActionSheetButton,
+        confirmationDialogButton: _VConfirmationDialogButton,
         isEnabled: Bool,
         action: (() -> Void)?,
         title: String
     ) {
-        self._actionSheetButton = actionSheetButton
+        self._confirmationDialogButton = confirmationDialogButton
         self.isEnabled = isEnabled
         self.action = action
         self.title = title
@@ -40,7 +40,7 @@ public struct VActionSheetButton {
         title: String
     ) -> Self {
         .init(
-            actionSheetButton: .standard,
+            confirmationDialogButton: .standard,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -54,7 +54,7 @@ public struct VActionSheetButton {
         title: String
     ) -> Self {
         .init(
-            actionSheetButton: .destructive,
+            confirmationDialogButton: .destructive,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -68,34 +68,34 @@ public struct VActionSheetButton {
         title: String? = nil
     ) -> Self {
         .init(
-            actionSheetButton: .cancel,
+            confirmationDialogButton: .cancel,
             isEnabled: isEnabled,
             action: action,
-            title: title ?? VComponentsLocalizationService.shared.localizationProvider.vActionSheetCancelButtonTitle
+            title: title ?? VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogCancelButtonTitle
         )
     }
     
     private static func ok() -> Self {
         .init(
-            actionSheetButton: .ok,
+            confirmationDialogButton: .ok,
             isEnabled: true,
             action: nil,
-            title: VComponentsLocalizationService.shared.localizationProvider.vActionSheetOKButtonTitle
+            title: VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogOKButtonTitle
         )
     }
     
     // MARK: Processing
     static func process(_ buttons: [Self]) -> [Self] {
         // `.confirmationDialog()` filters out disabled buttons
-        var buttons: [Self] = buttons.filter { $0.isEnabled }
+        let buttons: [Self] = buttons.filter { $0.isEnabled }
         
-        var result: [VActionSheetButton] = .init()
+        var result: [VConfirmationDialogButton] = .init()
         
         for button in buttons {
-            if button._actionSheetButton == .cancel { result.removeAll(where: { $0._actionSheetButton == .cancel }) }
+            if button._confirmationDialogButton == .cancel { result.removeAll(where: { $0._confirmationDialogButton == .cancel }) }
             result.append(button)
         }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { $0._actionSheetButton == .cancel }) {
+        if let cancelButtonIndex: Int = result.firstIndex(where: { $0._confirmationDialogButton == .cancel }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
         
@@ -108,7 +108,7 @@ public struct VActionSheetButton {
     
     // MARK: Button
     var swiftUIButton: Button<Text> {
-        switch _actionSheetButton {
+        switch _confirmationDialogButton {
         case .standard:
             return Button(
                 title,
@@ -140,8 +140,8 @@ public struct VActionSheetButton {
     }
 }
 
-// MARK: - _ V Action Sheet
-enum _VActionSheetButton {
+// MARK: - _ V Confirmation Dialog Button
+enum _VConfirmationDialogButton {
     case standard
     case destructive
     case cancel

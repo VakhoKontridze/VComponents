@@ -1,5 +1,5 @@
 //
-//  VActionSheet.swift
+//  VConfirmationDialog.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/1/21.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK: - V Action Sheet
+// MARK: - V Confirmation Dialog Sheet
 /// Modal component that presents bottom sheet menu of actions.
 ///
 /// Description can be passed as parameter.
 ///
-/// `vActionSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
+/// `vConfirmationDialog` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
 ///
 /// Usage example:
 ///
@@ -23,32 +23,31 @@ import SwiftUI
 ///             action: { isPresented = true },
 ///             title: "Present"
 ///         )
-///             .vActionSheet(isPresented: $isPresented, actionSheet: {
-///                 VActionSheet(
+///             .vConfirmationDialog(isPresented: $isPresented, confirmationDialog: {
+///                 VConfirmationDialog(
 ///                     title: "Lorem ipsum dolor sit amet",
 ///                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///                     rows: [
-///                         .titled(action: {}, title: "One"),
-///                         .titled(action: {}, title: "Two"),
-///                         .destructive(action: {}, title: "Three"),
+///                     actions: [
+///                         .standard(action: {}, title: "Option A"),
+///                         .standard(action: {}, title: "Option B"),
+///                         .destructive(action: {}, title: "Delete"),
 ///                         .cancel(title: "Cancel")
 ///                     ]
 ///                 )
 ///             })
-///     }
 ///
-public struct VActionSheet {
+public struct VConfirmationDialog {
     // MARK: Properties
     fileprivate let title: String?
     fileprivate let description: String?
-    fileprivate let actions: [VActionSheetButton]
+    fileprivate let actions: [VConfirmationDialogButton]
     
     // MARK: Initializrs
     /// Initializes component with title, description, and rows.
     public init(
         title: String?,
         description: String?,
-        actions: [VActionSheetButton]
+        actions: [VConfirmationDialogButton]
     ) {
         self.title = title
         self.description = description
@@ -58,20 +57,20 @@ public struct VActionSheet {
 
 // MARK: - Extension
 extension View {
-    /// Presents `VActionSheet` when boolean is `true`.
-    public func vActionSheet(
+    /// Presents `VConfirmationDialog` when boolean is `true`.
+    public func vConfirmationDialog(
         isPresented: Binding<Bool>,
-        actionSheet: @escaping () -> VActionSheet
+        confirmationDialog: @escaping () -> VConfirmationDialog
     ) -> some View {
-        let actionSheet = actionSheet()
-        let actions: [VActionSheetButton] = VActionSheetButton.process(actionSheet.actions)
+        let confirmationDialog = confirmationDialog()
+        let actions: [VConfirmationDialogButton] = VConfirmationDialogButton.process(confirmationDialog.actions)
 
         return self
             .confirmationDialog(
-                actionSheet.title ?? "",
+                confirmationDialog.title ?? "",
                 isPresented: isPresented,
                 titleVisibility: {
-                    switch (actionSheet.title, actionSheet.description) {
+                    switch (confirmationDialog.title, confirmationDialog.description) {
                     case (nil, nil): return .hidden
                     case (nil, _?): return .visible
                     case (_?, nil): return .visible
@@ -84,7 +83,7 @@ extension View {
                     })
                 },
                 message: {
-                    if let description = actionSheet.description {
+                    if let description = confirmationDialog.description {
                         Text(description)
                     }
                 }

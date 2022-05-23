@@ -32,11 +32,11 @@ public protocol VComponentsLocalizationProvider {
     /// Localzied value for `ok` `VAlertButton`.
     var vAlertOKButtonTitle: String { get }
     
-    /// Localzied value for `cancel` `VActionSheetButton`.
-    var vActionSheetCancelButtonTitle: String { get }
+    /// Localzied value for `cancel` `VConfirmationDialogButton`.
+    var vConfirmationDialogCancelButtonTitle: String { get }
     
-    /// Localzied value for `ok` `VActionSheetButton`.
-    var vActionSheetOKButtonTitle: String { get }
+    /// Localzied value for `ok` `VConfirmationDialogButton`.
+    var vConfirmationDialogOKButtonTitle: String { get }
 }
 
 // MARK: - Default VComponents Localization Provider
@@ -45,6 +45,6 @@ public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationPro
     public var vAlertCancelButtonTitle: String { "Cancel" }
     public var vAlertOKButtonTitle: String { "Ok" }
     
-    public var vActionSheetCancelButtonTitle: String { "Cancel" }
-    public var vActionSheetOKButtonTitle: String { "Ok" }
+    public var vConfirmationDialogCancelButtonTitle: String { "Cancel" }
+    public var vConfirmationDialogOKButtonTitle: String { "Ok" }
 }

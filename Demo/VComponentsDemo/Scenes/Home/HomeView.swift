@@ -25,7 +25,7 @@ struct HomeView: View {
         .init(id: 4, title: "Inputs", rows: [.textField]),
         .init(id: 5, title: "Containers", rows: [.sheet, .disclosureGroup]),
         .init(id: 6, title: "Lists", rows: [.lazyScrollView, .list]),
-        .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .menu, .actionSheet]),
+        .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .confirmationDialog, .menu]),
         .init(id: 8, title: "Messages", rows: [.toast]),
         .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
         .init(id: 10, title: "Misc", rows: [.text])
@@ -48,7 +48,7 @@ struct HomeView: View {
         case stepper, slider,  rangeSlider
         case textField
         case list, disclosureGroup
-        case modal, bottomSheet, sideBar, alert, menu, actionSheet
+        case modal, bottomSheet, sideBar, alert, confirmationDialog, menu
         case toast
         case spinner, progressBar, pageIndicator
         case text, sheet, lazyScrollView
@@ -87,8 +87,8 @@ struct HomeView: View {
             case .bottomSheet: return VBottomSheetDemoView.navBarTitle
             case .sideBar: return VSideBarDemoView.navBarTitle
             case .alert: return VAlertDemoView.navBarTitle
+            case .confirmationDialog: return VConfirmationDialogDemoView.navBarTitle
             case .menu: return VMenuDemoView.navBarTitle
-            case .actionSheet: return VActionSheetDemoView.navBarTitle
                 
             case .toast: return VToastDemoView.navBarTitle
 
@@ -134,8 +134,8 @@ struct HomeView: View {
             case .bottomSheet: VBottomSheetDemoView()
             case .sideBar: VSideBarDemoView()
             case .alert: VAlertDemoView()
+            case .confirmationDialog: VConfirmationDialogDemoView()
             case .menu: VMenuDemoView()
-            case .actionSheet: VActionSheetDemoView()
                 
             case .toast: VToastDemoView()
 
