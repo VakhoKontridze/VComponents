@@ -135,6 +135,7 @@ VDialog
 
 - Dialog now supports landscape mode
 - Dialog can now be created with `Error`
+- `VDialog` is renamed to `VAlert`
 - Dialog now has option for adding shadow
 
 VMenu

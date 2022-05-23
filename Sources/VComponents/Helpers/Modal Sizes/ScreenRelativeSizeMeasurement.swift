@@ -26,11 +26,11 @@ extension CGSize: ScreenRelativeSizeMeasurement {
     }
 }
 
-// MARK: - V Dialog Size
-extension VDialogModel.Layout.DialogSize: ScreenRelativeSizeMeasurement {
+// MARK: - V Alert Size
+extension VAlertModel.Layout.AlertSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
-        _ measurement: VDialogModel.Layout.DialogSize
-    ) -> VDialogModel.Layout.DialogSize {
+        _ measurement: VAlertModel.Layout.AlertSize
+    ) -> VAlertModel.Layout.AlertSize {
         .init(
             width: UIScreen.main.bounds.size.width * measurement.width
         )

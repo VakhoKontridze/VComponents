@@ -1,5 +1,5 @@
 //
-//  VDialogPrimaryButton.swift
+//  VAlertPrimaryButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK: - V Dialog Primary Button
-struct VDialogPrimaryButton: View {
+// MARK: - V Alert Primary Button
+struct VAlertPrimaryButton: View {
     // MARK: Properties
     private let model: VPrimaryButtonModel
     private let action: () -> Void
@@ -37,10 +37,10 @@ struct VDialogPrimaryButton: View {
 }
 
 // MARK: - Preview
-struct VDialogPrimaryButton_Previews: PreviewProvider {
+struct VAlertPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VDialogPrimaryButton(
-            model: VDialogModel().primaryButtonSubModel,
+        VAlertPrimaryButton(
+            model: VAlertModel().primaryButtonSubModel,
             action: {},
             title: "Lorem Ipsum"
         )

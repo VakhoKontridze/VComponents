@@ -126,14 +126,14 @@ extension Color {
  210.210.210
  45.45.45
 
- Dialog.DestructiveButton.Background.disabled
+ Alert.DestructiveButton.Background.disabled
  255.140.140
  
- Dialog.DestructiveButton.Background.enabled
+ Alert.DestructiveButton.Background.enabled
  255.59.48 // Apple
  255.69.68 // Apple
  
- Dialog.SecondaryButton.Background.pressed
+ Alert.SecondaryButton.Background.pressed
  235.235.235
  70.70.70
  

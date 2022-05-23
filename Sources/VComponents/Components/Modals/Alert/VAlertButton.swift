@@ -1,5 +1,5 @@
 //
-//  VDialogButton.swift
+//  VAlertButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -7,27 +7,27 @@
 
 import Foundation
 
-// MARK: - V Dialog Button
-/// Model that describes `VDialog` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
+// MARK: - V Alert Button
+/// Model that describes `VAlert` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
 ///
 /// `Cancel` will be moved to the end of the stack.
 /// If there are multiple `cancel` buttons, only the last one will be kept.
 /// If thete are no buttons, an `ok` button will be added.
-public struct VDialogButton {
+public struct VAlertButton {
     // MARK: Properties
-    let _dialogButton: _VDialogButton
+    let _alertButton: _VAlertButton
     let isEnabled: Bool
     let action: (() -> Void)?
     let title: String
     
     // MARK: Initializers
     private init(
-        dialogButton: _VDialogButton,
+        alertButton: _VAlertButton,
         isEnabled: Bool,
         action: (() -> Void)?,
         title: String
     ) {
-        self._dialogButton = dialogButton
+        self._alertButton = alertButton
         self.isEnabled = isEnabled
         self.action = action
         self.title = title
@@ -40,7 +40,7 @@ public struct VDialogButton {
         title: String
     ) -> Self {
         .init(
-            dialogButton: .primary,
+            alertButton: .primary,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -54,7 +54,7 @@ public struct VDialogButton {
         title: String
     ) -> Self {
         .init(
-            dialogButton: .secondary,
+            alertButton: .secondary,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -68,7 +68,7 @@ public struct VDialogButton {
         title: String
     ) -> Self {
         .init(
-            dialogButton: .destructive,
+            alertButton: .destructive,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -82,31 +82,31 @@ public struct VDialogButton {
         title: String? = nil
     ) -> Self {
         .init(
-            dialogButton: .cancel,
+            alertButton: .cancel,
             isEnabled: isEnabled,
             action: action,
-            title: title ?? VComponentsLocalizationService.shared.localizationProvider.vDialogCancelButtonTitle
+            title: title ?? VComponentsLocalizationService.shared.localizationProvider.vAlertCancelButtonTitle
         )
     }
     
     private static func ok() -> Self {
         .init(
-            dialogButton: .ok,
+            alertButton: .ok,
             isEnabled: true,
             action: nil,
-            title: VComponentsLocalizationService.shared.localizationProvider.vDialogOKButtonTitle
+            title: VComponentsLocalizationService.shared.localizationProvider.vAlertOKButtonTitle
         )
     }
     
     // MARK: Processing
     static func process(_ buttons: [Self]) -> [Self] {
-        var result: [VDialogButton] = .init()
+        var result: [VAlertButton] = .init()
         
         for button in buttons {
-            if button._dialogButton == .cancel { result.removeAll(where: { $0._dialogButton == .cancel }) }
+            if button._alertButton == .cancel { result.removeAll(where: { $0._alertButton == .cancel }) }
             result.append(button)
         }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { $0._dialogButton == .cancel }) {
+        if let cancelButtonIndex: Int = result.firstIndex(where: { $0._alertButton == .cancel }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
         
@@ -118,8 +118,8 @@ public struct VDialogButton {
     }
 }
 
-// MARK: - _ V Dialog Button
-enum _VDialogButton {
+// MARK: - _ V Alert Button
+enum _VAlertButton {
     case primary
     case secondary
     case destructive

@@ -1,5 +1,5 @@
 //
-//  VDialogDemoView.swift
+//  VAlertDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 12/30/20.
@@ -8,20 +8,20 @@
 import SwiftUI
 import VComponents
 
-// MARK: - V Dialog Demo View
-struct VDialogDemoView: View {
+// MARK: - V Alert Demo View
+struct VAlertDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Dialog" }
+    static var navBarTitle: String { "Alert" }
     
     @State private var isPresented: Bool = false
     @State private var text: String = ""
     @State private var title: String = "Lorem ipsum dolor sit amet"
     @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-    @State private var dialogButtons: VDialogButtonsHelper = .two
-    @State private var ignoreKeyboardSafeArea: Bool = !VDialogModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
+    @State private var alertButtons: VAlertButtonsHelper = .two
+    @State private var ignoreKeyboardSafeArea: Bool = !VAlertModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
     
-    private var model: VDialogModel {
-        var model: VDialogModel = .init()
+    private var model: VAlertModel {
+        var model: VAlertModel = .init()
         model.layout.ignoredKeybordSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
         return model
     }
@@ -37,13 +37,13 @@ struct VDialogDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .vDialog(isPresented: $isPresented, dialog: {
-                VDialog(
+            .vAlert(isPresented: $isPresented, alert: {
+                VAlert(
                     model: model,
                     title: title,
                     description: description,
                     content: { VTextField(placeholder: "Name", text: $text) },
-                    actions: dialogButtons.actions(text: text)
+                    actions: alertButtons.actions(text: text)
                 )
             })
             .onChange(of: isPresented, perform: { value in
@@ -67,7 +67,7 @@ struct VDialogDemoView: View {
         })
         
         DemoViewSettingsSection(content: {
-            VWheelPicker(selection: $dialogButtons, headerTitle: "Buttons")
+            VWheelPicker(selection: $alertButtons, headerTitle: "Buttons")
         })
         
         DemoViewSettingsSection(content: {
@@ -77,7 +77,7 @@ struct VDialogDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VDialogButtonsHelper: Int, PickableTitledEnumeration {
+private enum VAlertButtonsHelper: Int, PickableTitledEnumeration {
     case `none`
     case one
     case two
@@ -92,7 +92,7 @@ private enum VDialogButtonsHelper: Int, PickableTitledEnumeration {
         }
     }
     
-    func actions(text: String) -> [VDialogButton] {
+    func actions(text: String) -> [VAlertButton] {
         switch self {
         case .none:
             return []
@@ -120,8 +120,8 @@ private enum VDialogButtonsHelper: Int, PickableTitledEnumeration {
 }
 
 // MARK: - Preview
-struct VDialogDemoView_Previews: PreviewProvider {
+struct VAlertDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VDialogDemoView()
+        VAlertDemoView()
     }
 }

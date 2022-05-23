@@ -1,5 +1,5 @@
 //
-//  VDialog.swift
+//  VAlert.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK: - V Dialog
-/// Modal component that presents dialog when condition is true.
+// MARK: - V Alert
+/// Modal component that presents alert when condition is true.
 ///
 /// Model, title, description, and content can be passed as parameters.
 ///
-/// Dialog can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
+/// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
 ///
-/// `vDialog` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
+/// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
 ///
 /// Usage example:
 ///
@@ -25,8 +25,8 @@ import SwiftUI
 ///             action: { isPresented = true },
 ///             title: "Present"
 ///         )
-///             .vDialog(isPresented: $isPresented, dialog: {
-///                 VDialog(
+///             .vAlert(isPresented: $isPresented, alert: {
+///                 VAlert(
 ///                     title: "Lorem ipsum",
 ///                     description: "Lorem ipsum dolor sit amet",
 ///                     actions: [
@@ -37,25 +37,25 @@ import SwiftUI
 ///         })
 ///     }
 ///
-public struct VDialog<Content>
+public struct VAlert<Content>
     where Content: View
 {
     // MARK: Properties
-    fileprivate let model: VDialogModel
+    fileprivate let model: VAlertModel
     
     fileprivate let title: String?
     fileprivate let description: String?
     fileprivate let content: (() -> Content)?
-    fileprivate let buttons: [VDialogButton]
+    fileprivate let buttons: [VAlertButton]
     
     // MARK: Initializers
     /// Initializes component with buttons, title, description, and content.
     public init(
-        model: VDialogModel = .init(),
+        model: VAlertModel = .init(),
         title: String?,
         description: String?,
         @ViewBuilder content: @escaping () -> Content,
-        actions buttons: [VDialogButton]
+        actions buttons: [VAlertButton]
     ) {
         self.model = model
         self.title = title
@@ -66,10 +66,10 @@ public struct VDialog<Content>
     
     /// Initializes component with buttons, title, and description.
     public init(
-        model: VDialogModel = .init(),
+        model: VAlertModel = .init(),
         title: String?,
         description: String?,
-        actions buttons: [VDialogButton]
+        actions buttons: [VAlertButton]
     )
         where Content == Never
     {
@@ -83,40 +83,40 @@ public struct VDialog<Content>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VDialog` when boolean is true.
-    public func vDialog<Content>(
+    /// Presents `VAlert` when boolean is true.
+    public func vAlert<Content>(
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        dialog: @escaping () -> VDialog<Content>
+        alert: @escaping () -> VAlert<Content>
     ) -> some View
         where Content: View
     {
-        let dialog = dialog()
+        let alert = alert()
         
         return self
             .background(PresentationHost(
                 isPresented: isPresented,
                 content: {
-                    _VDialog(
-                        model: dialog.model,
+                    _VAlert(
+                        model: alert.model,
                         presentHandler: presentHandler,
                         dismissHandler: dismissHandler,
-                        title: dialog.title,
-                        description: dialog.description,
-                        content: dialog.content,
-                        buttons: dialog.buttons
+                        title: alert.title,
+                        description: alert.description,
+                        content: alert.content,
+                        buttons: alert.buttons
                     )
                 }
             ))
     }
     
-    /// Presents `VDialog` using the item as data source for content.
-    @ViewBuilder public func vDialog<Item, Content>(
+    /// Presents `VAlert` using the item as data source for content.
+    @ViewBuilder public func vAlert<Item, Content>(
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        dialog: @escaping (Item) -> VDialog<Content>
+        alert: @escaping (Item) -> VAlert<Content>
     ) -> some View
         where
             Item: Identifiable,
@@ -128,35 +128,35 @@ extension View {
             
         case let _item?:
             self
-                .vDialog(
+                .vAlert(
                     isPresented: .init(
                         get: { true },
                         set: { _ in item.wrappedValue = nil }
                     ),
                     onPresent: presentHandler,
                     onDismiss: dismissHandler,
-                    dialog: { dialog(_item) }
+                    alert: { alert(_item) }
                 )
         }
     }
     
-    /// Presents `VDialog` when boolean is true with an `Error`.
-    public func vDialog<E, Content>(
+    /// Presents `VAlert` when boolean is true with an `Error`.
+    public func vAlert<E, Content>(
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        dialog: @escaping (E?) -> VDialog<Content>
+        alert: @escaping (E?) -> VAlert<Content>
     ) -> some View
         where
             E: Error,
             Content: View
     {
-        vDialog(
+        vAlert(
             isPresented: isPresented,
             onPresent: presentHandler,
             onDismiss: dismissHandler,
-            dialog: { dialog(error) }
+            alert: { alert(error) }
         )
     }
 }

@@ -1,5 +1,5 @@
 //
-//  _VDialog.swift
+//  _VAlert.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -8,15 +8,15 @@
 import SwiftUI
 import VCore
 
-// MARK: - _ V Dialog
-struct _VDialog<Content>: View
+// MARK: - _ V Alert
+struct _VAlert<Content>: View
     where Content: View
 {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
-    private let model: VDialogModel
+    private let model: VAlertModel
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -24,7 +24,7 @@ struct _VDialog<Content>: View
     private let title: String?
     private let description: String?
     private let content: (() -> Content)?
-    private let buttons: [VDialogButton]
+    private let buttons: [VAlertButton]
     
     @State private var isInternallyPresented: Bool = false
     
@@ -36,24 +36,24 @@ struct _VDialog<Content>: View
             UIDevice.safeAreaInsetTop -
             UIDevice.safeAreaInsetBottom
         
-        let dialogHeight: CGFloat =
+        let alertHeight: CGFloat =
             model.layout.margins.top +
             titleDescriptionContentHeight +
             buttonsStackHeight +
             model.layout.margins.bottom
         
-        return dialogHeight > safeAreaHeight
+        return alertHeight > safeAreaHeight
     }
     
     // MARK: Initializers
     init(
-        model: VDialogModel,
+        model: VAlertModel,
         presentHandler: (() -> Void)?,
         dismissHandler: (() -> Void)?,
         title: String?,
         description: String?,
         content: (() -> Content)?,
-        buttons: [VDialogButton]
+        buttons: [VAlertButton]
     ) {
         self.model = model
         self.presentHandler = presentHandler
@@ -61,14 +61,14 @@ struct _VDialog<Content>: View
         self.title = title
         self.description = description
         self.content = content
-        self.buttons = VDialogButton.process(buttons)
+        self.buttons = VAlertButton.process(buttons)
     }
 
     // MARK: Body
     var body: some View {
         ZStack(content: {
             blinding
-            dialog
+            alert
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: .horizontal)
@@ -85,7 +85,7 @@ struct _VDialog<Content>: View
             .ignoresSafeArea(.container, edges: .vertical)
     }
     
-    private var dialog: some View {
+    private var alert: some View {
         VStack(spacing: 0, content: {
             VStack(spacing: 0, content: {
                 titleView
@@ -181,7 +181,7 @@ struct _VDialog<Content>: View
     }
     
     private func buttonsContent(reverseOrder: Bool = false) -> some View {
-        let buttons: [VDialogButton] = {
+        let buttons: [VAlertButton] = {
             switch reverseOrder {
             case false: return self.buttons
             case true: return self.buttons.reversed()
@@ -193,39 +193,39 @@ struct _VDialog<Content>: View
         })
     }
     
-    private func buttonView(_ button: VDialogButton) -> some View {
+    private func buttonView(_ button: VAlertButton) -> some View {
         Group(content: {
-            switch button._dialogButton {
+            switch button._alertButton {
             case .primary:
-                VDialogPrimaryButton(
+                VAlertPrimaryButton(
                     model: model.primaryButtonSubModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
                 
             case .secondary:
-                VDialogSecondaryButton(
+                VAlertSecondaryButton(
                     model: model.secondaryButtonSubModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
                 
             case .destructive:
-                VDialogSecondaryButton(
+                VAlertSecondaryButton(
                     model: model.destructiveButtonSubModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
             
             case .cancel:
-                VDialogSecondaryButton(
+                VAlertSecondaryButton(
                     model: model.secondaryButtonSubModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
                 
             case .ok:
-                VDialogSecondaryButton(
+                VAlertSecondaryButton(
                     model: model.secondaryButtonSubModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
@@ -270,7 +270,7 @@ struct _VDialog<Content>: View
 }
 
 // MARK: - Preview
-struct VDialog_Previews: PreviewProvider {
+struct VAlert_Previews: PreviewProvider {
     @State static var isPresented: Bool = true
 
     static var previews: some View {
@@ -278,8 +278,8 @@ struct VDialog_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vDialog(isPresented: $isPresented, dialog: {
-                VDialog(
+            .vAlert(isPresented: $isPresented, alert: {
+                VAlert(
                     title: "Lorem ipsum",
                     description: "Lorem ipsum dolor sit amet",
                     content: {

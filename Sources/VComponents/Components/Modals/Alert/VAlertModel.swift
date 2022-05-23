@@ -1,5 +1,5 @@
 //
-//  VDialogModel.swift
+//  VAlertModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -8,9 +8,9 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Dialog Model
+// MARK: - V Alert Model
 /// Model that describes UI.
-public struct VDialogModel {
+public struct VAlertModel {
     // MARK: Properties
     fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
     fileprivate static let modalReference: VModalModel = .init()
@@ -35,7 +35,7 @@ public struct VDialogModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Dialog sizes.
+        /// Alert sizes.
         /// Set to `0.75` ratio of screen width in portrait.
         /// Set to `0.5` ratio of screen width in landscape.
         public var sizes: Sizes = .init(
@@ -73,10 +73,10 @@ public struct VDialogModel {
             vertical: 5
         )
         
-        /// Content margins. Defaults to `0` horizontal and `5` vertical.
+        /// Content margins. Defaults to `0` horizontal and `10` vertical.
         public var contentMargins: Margins = .init(
             horizontal: 0,
-            vertical: 5
+            vertical: 10
         )
         
         /// Additional margisn applied to title, descirption, and content as a whole. Defaults to `0` leading, `0` trailing,`0` top, and `10` bottom.
@@ -114,11 +114,11 @@ public struct VDialogModel {
         
         // MARK: Sizes
         /// Model that describes modal sizes.
-        public typealias Sizes = ModalSizes<DialogSize>
+        public typealias Sizes = ModalSizes<AlertSize>
         
-        // MARK: Dialog Size
-        /// Dialog size.
-        public struct DialogSize {
+        // MARK: Alert Size
+        /// Alert size.
+        public struct AlertSize {
             // MARK: Properties
             /// Width.
             public var width: CGFloat
@@ -171,7 +171,7 @@ public struct VDialogModel {
         /// Secondary button background colors.
         public var secondaryButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(componentAsset: "Dialog.SecondaryButton.Background.pressed"),
+            pressed: .init(componentAsset: "Alert.SecondaryButton.Background.pressed"),
             disabled: .clear
         )
         
@@ -185,15 +185,15 @@ public struct VDialogModel {
         /// Destructive button background colors.
         public var destructiveButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(componentAsset: "Dialog.SecondaryButton.Background.pressed"),
+            pressed: .init(componentAsset: "Alert.SecondaryButton.Background.pressed"),
             disabled: .clear
         )
         
         /// Destructive button title colors.
         public var destructiveButtonTitle: ButtonStateColors = .init(
-            enabled: .init(componentAsset: "Dialog.DesctructiveButton.Title.enabled"),
-            pressed: .init(componentAsset: "Dialog.DesctructiveButton.Title.enabled"),
-            disabled: .init(componentAsset: "Dialog.DesctructiveButton.Title.disabled")
+            enabled: .init(componentAsset: "Alert.DesctructiveButton.Title.enabled"),
+            pressed: .init(componentAsset: "Alert.DesctructiveButton.Title.enabled"),
+            disabled: .init(componentAsset: "Alert.DesctructiveButton.Title.disabled")
         )
 
         // MARK: Initializers
@@ -241,8 +241,8 @@ public struct VDialogModel {
         model.layout.height = layout.buttonHeight
         model.layout.cornerRadius = layout.buttonCornerRadius
         
-        model.colors.background = .dialogButton(colors.primaryButtonBackground)
-        model.colors.title = .dialogButton(colors.primaryButtonTitle)
+        model.colors.background = .alertButton(colors.primaryButtonBackground)
+        model.colors.title = .alertButton(colors.primaryButtonTitle)
 
         return model
     }
@@ -253,8 +253,8 @@ public struct VDialogModel {
         model.layout.height = layout.buttonHeight
         model.layout.cornerRadius = layout.buttonCornerRadius
         
-        model.colors.background = .dialogButton(colors.secondaryButtonBackground)
-        model.colors.title = .dialogButton(colors.secondaryButtonTitle)
+        model.colors.background = .alertButton(colors.secondaryButtonBackground)
+        model.colors.title = .alertButton(colors.secondaryButtonTitle)
 
         return model
     }
@@ -265,8 +265,8 @@ public struct VDialogModel {
         model.layout.height = layout.buttonHeight
         model.layout.cornerRadius = layout.buttonCornerRadius
         
-        model.colors.background = .dialogButton(colors.destructiveButtonBackground)
-        model.colors.title = .dialogButton(colors.destructiveButtonTitle)
+        model.colors.background = .alertButton(colors.destructiveButtonBackground)
+        model.colors.title = .alertButton(colors.destructiveButtonTitle)
 
         return model
     }
@@ -274,7 +274,7 @@ public struct VDialogModel {
 
 // MARK: - Helpers
 extension GenericStateModel_EPDL where Value == Color {
-    fileprivate static func dialogButton(_ model: GenericStateModel_EPD<Color>) -> Self {
+    fileprivate static func alertButton(_ model: GenericStateModel_EPD<Color>) -> Self {
         self.init(
             enabled: model.enabled,
             pressed: model.pressed,

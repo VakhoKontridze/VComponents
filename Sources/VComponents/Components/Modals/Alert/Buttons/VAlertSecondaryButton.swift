@@ -1,5 +1,5 @@
 //
-//  VDialogSecondaryButton.swift
+//  VAlertSecondaryButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/14/21.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK: - V Dialog Secondary Button
-struct VDialogSecondaryButton: View {
+// MARK: - V Alert Secondary Button
+struct VAlertSecondaryButton: View {
     // MARK: Properties
     private let model: VPrimaryButtonModel
     private let action: () -> Void
@@ -37,10 +37,10 @@ struct VDialogSecondaryButton: View {
 }
 
 // MARK: - Preview
-struct VDialogSecondaryButton_Previews: PreviewProvider {
+struct VAlertSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VDialogSecondaryButton(
-            model: VDialogModel().secondaryButtonSubModel,
+        VAlertSecondaryButton(
+            model: VAlertModel().secondaryButtonSubModel,
             action: {},
             title: "Lorem Ipsum"
         )
