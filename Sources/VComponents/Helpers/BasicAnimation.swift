@@ -48,3 +48,24 @@ public struct BasicAnimation {
         case easeInOut
     }
 }
+
+// MARK: - Extension
+/// Returns the result of recomputing the view's body with the provided `BasicAnimation`,
+/// and optionally calls a completion handler.
+///
+/// Comletion handler is called using `asyncAfter`,
+/// scheduling with a deadline of `.now()` `+` animation duration.
+public func withBasicAnimation<Result>(
+    _ animation: BasicAnimation?,
+    body: () throws -> Result,
+    completion: (() -> Void)?
+) rethrows -> Result {
+    let result: Result = try withAnimation(animation?.asSwiftUIAnimation, body)
+    
+    DispatchQueue.main.asyncAfter(
+        deadline: .now() + (animation?.duration ?? 0),
+        execute: { completion?() }
+    )
+    
+    return result
+}

@@ -236,22 +236,20 @@ struct _VDialog<Content>: View
     
     // MARK: Animations
     private func animateIn() {
-        withAnimation(model.animations.appear?.asSwiftUIAnimation, { isInternallyPresented = true })
-        
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + (model.animations.appear?.duration ?? 0),
-            execute: {
+        withBasicAnimation(
+            model.animations.appear,
+            body: { isInternallyPresented = true },
+            completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
             }
         )
     }
 
     private func animateOut(completion: (() -> Void)?) {
-        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isInternallyPresented = false })
-        
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + (model.animations.disappear?.duration ?? 0),
-            execute: {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
                 presentationMode.dismiss()
                 DispatchQueue.main.async(execute: { dismissHandler?(); completion?() })
             }
@@ -259,11 +257,10 @@ struct _VDialog<Content>: View
     }
 
     private func animateOutFromExternalDismiss() {
-        withAnimation(model.animations.disappear?.asSwiftUIAnimation, { isInternallyPresented = false })
-        
-        DispatchQueue.main.asyncAfter(
-            deadline: .now() + (model.animations.disappear?.duration ?? 0),
-            execute: {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
                 presentationMode.externalDismissCompletion()
                 DispatchQueue.main.async(execute: { dismissHandler?() })
             }

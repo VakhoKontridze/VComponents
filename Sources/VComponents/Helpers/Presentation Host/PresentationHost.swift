@@ -36,7 +36,6 @@ import SwiftUI
 ///                     isPresented: isPresented,
 ///                     content: {
 ///                         _SomeModal(
-///                             isPresented: isPresented,
 ///                             content: someModal().content
 ///                         )
 ///                     }
@@ -52,14 +51,14 @@ import SwiftUI
 ///         @Environment(\.presentationHostPresentationMode) private var presentationMode
 ///         private let content: () -> Content
 ///
-///         @State private var isInternallyPresented: Bool = false
+///         @State private var isInternallyPresented: Bool = false // Cane be used for animations
 ///
 ///         init(content: @escaping () -> Content) {
 ///             self.content = content
 ///         }
 ///
 ///         var body: some View {
-///             content() // UI, customization, and frame-based animations go here...
+///             content() // UI, customization, and animations go here...
 ///
 ///                 .onAppear(perform: animateIn)
 ///                 .onTapGesture(perform: animateOut)
@@ -70,24 +69,26 @@ import SwiftUI
 ///         }
 ///
 ///         private func animateIn() {
-///             // Animate UI in with 0.5s duration and set `isInternallyPresented` to `true` ...
+///             withBasicAnimation(
+///                 .init(curve: .easeInOut, duration: 0.3),
+///                 body: { isInternallyPresented = true },
+///                 completion: nil
+///             )
 ///         }
 ///
 ///         private func animateOut() {
-///             // Animate UI out with 0.5s duration and set `isInternallyPresented` to `false` ...
-///
-///             DispatchQueue.main.asyncAfter(
-///                 deadline: .now() + 0.5,
-///                 execute: presentationMode.dismiss
+///             withBasicAnimation(
+///                 .init(curve: .easeInOut, duration: 0.3),
+///                 body: { isInternallyPresented = false },
+///                 completion: presentationMode.dismiss
 ///             )
 ///         }
 ///
 ///         private func animateOutFromExternalDismiss() {
-///             // Animate UI out with 0.5s duration and set `isInternallyPresented` to `false` ...
-///
-///             DispatchQueue.main.asyncAfter(
-///                 deadline: .now() + 0.5,
-///                 execute: presentationMode.externalDismissCompletion
+///             withBasicAnimation(
+///                 .init(curve: .easeInOut, duration: 0.3),
+///                 body: { isInternallyPresented = false },
+///                 completion: presentationMode.externalDismissCompletion
 ///             )
 ///         }
 ///     }
