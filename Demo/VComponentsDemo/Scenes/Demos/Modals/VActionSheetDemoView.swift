@@ -30,10 +30,10 @@ struct VActionSheetDemoView: View {
                 VActionSheet(
                     title: "Lorem ipsum dolor sit amet",
                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                    rows: [
-                        .standard(action: {}, title: "One"),
-                        .standard(action: {}, title: "Two"),
-                        .destructive(action: {}, title: "Three"),
+                    actions: [
+                        .standard(action: {}, title: "Option A"),
+                        .standard(action: {}, title: "Option B"),
+                        .destructive(action: {}, title: "Delete"),
                         .cancel(title: "Cancel")
                     ]
                 )

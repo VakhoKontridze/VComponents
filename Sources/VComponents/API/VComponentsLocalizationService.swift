@@ -31,12 +31,20 @@ public protocol VComponentsLocalizationProvider {
     
     /// Localzied value for `ok` `VAlertButton`.
     var vAlertOKButtonTitle: String { get }
+    
+    /// Localzied value for `cancel` `VActionSheetButton`.
+    var vActionSheetCancelButtonTitle: String { get }
+    
+    /// Localzied value for `ok` `VActionSheetButton`.
+    var vActionSheetOKButtonTitle: String { get }
 }
 
 // MARK: - Default VComponents Localization Provider
 /// Defaults VComponents localization provider.
 public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider {
     public var vAlertCancelButtonTitle: String { "Cancel" }
-    
     public var vAlertOKButtonTitle: String { "Ok" }
+    
+    public var vActionSheetCancelButtonTitle: String { "Cancel" }
+    public var vActionSheetOKButtonTitle: String { "Ok" }
 }

@@ -39,45 +39,55 @@ import SwiftUI
 ///
 public struct VActionSheet {
     // MARK: Properties
-    fileprivate let title: String
+    fileprivate let title: String?
     fileprivate let description: String?
-    fileprivate let rows: [VActionSheetRow]
+    fileprivate let actions: [VActionSheetButton]
     
     // MARK: Initializrs
     /// Initializes component with title, description, and rows.
     public init(
-        title: String,
+        title: String?,
         description: String?,
-        rows: [VActionSheetRow]
+        actions: [VActionSheetButton]
     ) {
         self.title = title
         self.description = description
-        self.rows = rows
+        self.actions = actions
     }
 }
 
 // MARK: - Extension
 extension View {
-    /// Presents `VActionSheet`.
+    /// Presents `VActionSheet` when boolean is `true`.
     public func vActionSheet(
         isPresented: Binding<Bool>,
         actionSheet: @escaping () -> VActionSheet
     ) -> some View {
         let actionSheet = actionSheet()
-        
+        let actions: [VActionSheetButton] = VActionSheetButton.process(actionSheet.actions)
+
         return self
-            .actionSheet(isPresented: isPresented, content: {
-                ActionSheet(
-                    title: Text(actionSheet.title),
-                    message: {
-                        if let description = actionSheet.description {
-                            return Text(description)
-                        } else {
-                            return nil
-                        }
-                    }(),
-                    buttons: actionSheet.rows.map { $0.actionSheetButton }
-                )
-            })
+            .confirmationDialog(
+                actionSheet.title ?? "",
+                isPresented: isPresented,
+                titleVisibility: {
+                    switch (actionSheet.title, actionSheet.description) {
+                    case (nil, nil): return .hidden
+                    case (nil, _?): return .visible
+                    case (_?, nil): return .visible
+                    case (_?, _?): return .visible
+                    }
+                }(),
+                actions: {
+                    ForEach(actions.indices, id: \.self, content: { i in
+                        actions[i].swiftUIButton
+                    })
+                },
+                message: {
+                    if let description = actionSheet.description {
+                        Text(description)
+                    }
+                }
+            )
     }
 }

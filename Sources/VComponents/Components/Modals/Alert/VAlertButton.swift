@@ -10,7 +10,7 @@ import Foundation
 // MARK: - V Alert Button
 /// Model that describes `VAlert` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
 ///
-/// `Cancel` will be moved to the end of the stack.
+/// `cancel` will be moved to the end of the stack.
 /// If there are multiple `cancel` buttons, only the last one will be kept.
 /// If thete are no buttons, an `ok` button will be added.
 public struct VAlertButton {
