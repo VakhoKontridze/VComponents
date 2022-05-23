@@ -105,7 +105,7 @@ struct _VSideBar<Content>: View where Content: View {
 
     private func animateOutFromDrag() {
         withBasicAnimation(
-            model.animations.dragBackDissapear,
+            model.animations.dragBackDismiss,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()

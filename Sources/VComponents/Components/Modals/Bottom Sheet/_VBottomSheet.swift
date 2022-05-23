@@ -247,7 +247,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
 
     private func animateOutFromDrag() {
         withBasicAnimation(
-            model.animations.pullDownDisappear,
+            model.animations.pullDownDismiss,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()

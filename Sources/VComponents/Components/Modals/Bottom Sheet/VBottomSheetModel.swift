@@ -274,8 +274,8 @@ public struct VBottomSheetModel {
         /// Disappear animation. Defaults to `easeInOut` with duration `0.3`.
         public var disappear: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
         
-        /// Pull-down disappear animation. Defaults to `easeInOut` with duration `0.1`.
-        public var pullDownDisappear: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
+        /// Pull-down dismiss animation. Defaults to `easeInOut` with duration `0.1`.
+        public var pullDownDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
         
         /// Height snapping animation between `min`, `ideal`, and `max` states. Defaults to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
