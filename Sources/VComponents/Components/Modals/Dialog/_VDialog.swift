@@ -32,15 +32,15 @@ struct _VDialog<Content>: View
     @State private var buttonsStackHeight: CGFloat = 0
     private var buttonsStackShouldScroll: Bool {
         let safeAreaHeight: CGFloat =
-            UIScreen.main.bounds.height
-            - UIDevice.safeAreaInsetTop
-            - UIDevice.safeAreaInsetBottom
+            UIScreen.main.bounds.height -
+            UIDevice.safeAreaInsetTop -
+            UIDevice.safeAreaInsetBottom
         
         let dialogHeight: CGFloat =
-            model.layout.margins.top
-            + titleDescriptionContentHeight
-            + buttonsStackHeight
-            + model.layout.margins.bottom
+            model.layout.margins.top +
+            titleDescriptionContentHeight +
+            buttonsStackHeight +
+            model.layout.margins.bottom
         
         return dialogHeight > safeAreaHeight
     }
