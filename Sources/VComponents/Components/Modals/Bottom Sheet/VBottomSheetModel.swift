@@ -244,10 +244,6 @@ public struct VBottomSheetModel {
         // MARK: State Colors
         /// Sub-model containing colors for component states.
         public typealias StateColors = GenericStateModel_EPD<Color>
-        
-        // MARK: State Colors and Opaciites
-        /// Sub-model containing colors and opacities for component states.
-        public typealias StateColorsAndOpacities = StateColorsAndOpacities_EPD_PD
     }
 
     // MARK: Fonts
