@@ -18,7 +18,7 @@ struct VPageIndicatorDemoView: View {
     @State private var selectedIndex: Int = 0
     private let timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
-    @State private var pageIndicatorType: VPageIndicatorTypeHelper = VPageIndicatorType.default.helperType
+    @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
 
     // MARK: Body
     var body: some View {
@@ -58,13 +58,13 @@ struct VPageIndicatorDemoView: View {
 private enum VPageIndicatorTypeHelper: Int, PickableTitledEnumeration {
     case finite
     case infinite
-    case auto
+    case automatic
     
     var pickerTitle: String {
         switch self {
         case .finite: return "Finite"
         case .infinite: return "Infinite"
-        case .auto: return "Auto"
+        case .automatic: return "Automatic"
         }
     }
     
@@ -72,7 +72,7 @@ private enum VPageIndicatorTypeHelper: Int, PickableTitledEnumeration {
         switch self {
         case .finite: return "Finite number of dots would be displayed"
         case .infinite: return "Infinite dots are possible, but limited numbers are displayed. Scrolling with acrousel effect may become enabled."
-        case .auto: return "Type that switches between \"Finite\" and \"Infinite\""
+        case .automatic: return "Type that switches between \"Finite\" and \"Infinite\""
         }
     }
     
@@ -80,17 +80,7 @@ private enum VPageIndicatorTypeHelper: Int, PickableTitledEnumeration {
         switch self {
         case .finite: return .finite
         case .infinite: return .infinite()
-        case .auto: return .auto()
-        }
-    }
-}
-
-extension VPageIndicatorType {
-    fileprivate var helperType: VPageIndicatorTypeHelper {
-        switch self {
-        case .finite: return .finite
-        case .infinite: return .infinite
-        case .auto: return .auto
+        case .automatic: return .automatic()
         }
     }
 }

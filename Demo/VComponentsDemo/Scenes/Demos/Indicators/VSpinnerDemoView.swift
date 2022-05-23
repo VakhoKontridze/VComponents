@@ -13,7 +13,7 @@ struct VSpinnerDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Spinner" }
     
-    @State private var spinnerType: VSpinnerTypeHelper = VSpinnerType.default.helpeType
+    @State private var spinnerType: VSpinnerTypeHelper = .continous
 
     // MARK: Body
     var body: some View {
@@ -42,15 +42,6 @@ private enum VSpinnerTypeHelper: Int, PickableTitledEnumeration {
         switch self {
         case .continous: return "Continous"
         case .dashed: return "Dashed"
-        }
-    }
-}
-
-extension VSpinnerType {
-    fileprivate var helpeType: VSpinnerTypeHelper {
-        switch self {
-        case .continous: return .continous
-        case .dashed: return .dashed
         }
     }
 }

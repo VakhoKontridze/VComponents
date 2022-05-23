@@ -66,7 +66,7 @@ public struct VPageIndicator: View {
         syncInternalStateWithState()
         
         return Group(content: {
-            switch pageIndicatorType {
+            switch pageIndicatorType._pageIndicatorType {
             case .finite:
                 VPageIndicatorFinite(
                     model: model,
@@ -83,7 +83,7 @@ public struct VPageIndicator: View {
                     selectedIndex: animatableSelectedIndex ?? selectedIndex
                 )
             
-            case .auto(let visible, let center, let finiteLimit):
+            case .automatic(let visible, let center, let finiteLimit):
                 VPageIndicatorAuto(
                     model: model,
                     visible: visible,
@@ -112,7 +112,7 @@ struct VPageIndicator_Previews: PreviewProvider {
         VStack(content: {
             VPageIndicator(type: .finite, total: 9, selectedIndex: 4)
             VPageIndicator(type: .infinite(), total: 100, selectedIndex: 4)
-            VPageIndicator(type: .auto(), total: 100, selectedIndex: 4)
+            VPageIndicator(type: .automatic(), total: 100, selectedIndex: 4)
         })
     }
 }

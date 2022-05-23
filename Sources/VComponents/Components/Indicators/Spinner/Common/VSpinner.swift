@@ -32,7 +32,7 @@ public struct VSpinner: View {
 
     // MARK: Body
     @ViewBuilder public var body: some View {
-        switch spinnerType {
+        switch spinnerType._spinnerType {
         case .continous(let model): VSpinnerContinous(model: model)
         case .dashed(let model): VSpinnerDashed(model: model)
         }

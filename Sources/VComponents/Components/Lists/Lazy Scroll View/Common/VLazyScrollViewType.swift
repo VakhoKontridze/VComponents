@@ -8,16 +8,42 @@
 import Foundation
 
 // MARK: - V Lazy Scroll View Type
-/// Enum of types, such as `vertical` or `horizontal`.
-public enum VLazyScrollViewType {
-    // MARK: Cases
+/// Model that describes `VLazyScrollView `type, such as `vertical` or `horizontal`.
+public struct VLazyScrollViewType {
+    // MARK: Properties
+    let _lazyScrollViewType: _VLazyScrollViewType
+    
+    // MARK: Initializers
+    private init(
+        lazyScrollViewType: _VLazyScrollViewType
+    ) {
+        self._lazyScrollViewType = lazyScrollViewType
+    }
+    
     /// Vertical layout.
-    case vertical(_ model: VLazyScrollViewVerticalModel = .init())
+    public static func vertical(
+        model: VLazyScrollViewVerticalModel = .init()
+    ) -> Self {
+        .init(lazyScrollViewType: .vertical(
+            model: model
+        ))
+    }
     
     /// Horizontal layout.
-    case horizontal(_ model: VLazyScrollViewHorizontalModel = .init())
+    public static func horizontal(
+        model: VLazyScrollViewHorizontalModel = .init()
+    ) -> Self {
+        .init(lazyScrollViewType: .horizontal(
+            model: model
+        ))
+    }
     
-    // MARK: Initailizers
     /// Default value. Set to `vertical`.
     public static var `default`: Self { .vertical() }
+}
+
+// MARK: - V Lazy Scroll View Type
+enum _VLazyScrollViewType {
+    case vertical(model: VLazyScrollViewVerticalModel)
+    case horizontal(model: VLazyScrollViewHorizontalModel)
 }

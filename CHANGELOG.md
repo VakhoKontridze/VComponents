@@ -135,9 +135,17 @@ VMenu
 
 - Label issue with `iOS` `15` is fixed
 
+VToast
+
+- `VToastType` `oneLine` is renamed to `singleLine`
+
 VBaseView
 
 - View is removed as it offers no additional customization
+
+VText
+
+- `VTextType` `oneLine` is renamed to `singleLine`
 
 Other
 

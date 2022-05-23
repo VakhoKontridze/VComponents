@@ -32,7 +32,7 @@ struct NoDismissTypeWarningView: View {
     var body: some View {
         VStack(content: {
             VText(
-                type: .multiLine(alignment: .center, limit: nil),
+                type: .multiLine(alignment: .center, lineLimit: nil),
                 color: ColorBook.primaryWhite,
                 font: .system(size: 14, weight: .semibold),
                 title: "When there are no dismiss types, Modal can only be dismissed programatically"

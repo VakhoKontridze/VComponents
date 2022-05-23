@@ -8,11 +8,37 @@
 import SwiftUI
 
 // MARK: - V Text Type
-/// Enum that describes layout, such as `oneLine` or `multiLine`.
-public enum VTextType {
-    /// One-line.
-    case oneLine
+/// Model that describes text layout, such as `singleLine` or `multiLine`.
+public struct VTextType {
+    // MARK: Properties
+    let _textType: _VTextType
+    
+    // MARK: Initializers
+    private init(
+        textType: _VTextType
+    ) {
+        self._textType = textType
+    }
+    
+    /// Single-line.
+    public static var singleLine: Self {
+        .init(textType: .singleLine)
+    }
     
     /// Multi-line.
-    case multiLine(alignment: TextAlignment, limit: Int?)
+    public static func multiLine(
+        alignment: TextAlignment,
+        lineLimit: Int?
+    ) -> Self {
+        .init(textType: .multiLine(
+            alignment: alignment,
+            lineLimit: lineLimit
+        ))
+    }
+}
+
+// MARK: - _ V Text Type
+enum _VTextType {
+    case singleLine
+    case multiLine(alignment: TextAlignment, lineLimit: Int?)
 }

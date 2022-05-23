@@ -123,7 +123,7 @@ public struct VList<Data, ID, RowContent>: View
             
         case .flexible:
             VLazyScrollView(
-                type: .vertical(model.lazyScrollViewSubModel),
+                type: .vertical(model: model.lazyScrollViewSubModel),
                 data: data.enumeratedArray(),
                 id: \.element.id,
                 content: { contentView(i: $0, element: $1) }

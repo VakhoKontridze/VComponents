@@ -15,19 +15,19 @@ import Foundation
 /// If thete are no buttons, an `ok` button will be added.
 public struct VDialogButton {
     // MARK: Properties
-    let buttonType: _VDialogButton
+    let _dialogButton: _VDialogButton
     let isEnabled: Bool
     let action: (() -> Void)?
     let title: String
     
     // MARK: Initializers
     private init(
-        buttonType: _VDialogButton,
+        dialogButton: _VDialogButton,
         isEnabled: Bool,
         action: (() -> Void)?,
         title: String
     ) {
-        self.buttonType = buttonType
+        self._dialogButton = dialogButton
         self.isEnabled = isEnabled
         self.action = action
         self.title = title
@@ -39,8 +39,8 @@ public struct VDialogButton {
         action: @escaping () -> Void,
         title: String
     ) -> Self {
-        self.init(
-            buttonType: .primary,
+        .init(
+            dialogButton: .primary,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -53,8 +53,8 @@ public struct VDialogButton {
         action: @escaping () -> Void,
         title: String
     ) -> Self {
-        self.init(
-            buttonType: .secondary,
+        .init(
+            dialogButton: .secondary,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -67,8 +67,8 @@ public struct VDialogButton {
         action: @escaping () -> Void,
         title: String
     ) -> Self {
-        self.init(
-            buttonType: .destructive,
+        .init(
+            dialogButton: .destructive,
             isEnabled: isEnabled,
             action: action,
             title: title
@@ -81,17 +81,17 @@ public struct VDialogButton {
         action: (() -> Void)? = nil,
         title: String? = nil
     ) -> Self {
-        self.init(
-            buttonType: .cancel,
+        .init(
+            dialogButton: .cancel,
             isEnabled: isEnabled,
             action: action,
             title: title ?? VComponentsLocalizationService.shared.localizationProvider.vDialogCancelButtonTitle
         )
     }
     
-    static func ok() -> Self {
-        self.init(
-            buttonType: .ok,
+    private static func ok() -> Self {
+        .init(
+            dialogButton: .ok,
             isEnabled: true,
             action: nil,
             title: VComponentsLocalizationService.shared.localizationProvider.vDialogOKButtonTitle
@@ -103,10 +103,10 @@ public struct VDialogButton {
         var result: [VDialogButton] = .init()
         
         for button in buttons {
-            if button.buttonType == .cancel { result.removeAll(where: { $0.buttonType == .cancel }) }
+            if button._dialogButton == .cancel { result.removeAll(where: { $0._dialogButton == .cancel }) }
             result.append(button)
         }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { $0.buttonType == .cancel }) {
+        if let cancelButtonIndex: Int = result.firstIndex(where: { $0._dialogButton == .cancel }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
         

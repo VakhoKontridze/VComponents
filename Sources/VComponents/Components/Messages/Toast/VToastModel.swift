@@ -77,7 +77,7 @@ public struct VToastModel {
         
         // MARK: Corner Radius Type
         /// Enum that represents corner radius, such as `rounded` or `custom`.
-        public enum CornerRadiusType {
+        public enum CornerRadiusType { // FIXME: Convert to struct?
             // MARK: Cases
             /// Rounded corner radius.
             ///

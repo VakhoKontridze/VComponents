@@ -40,31 +40,41 @@ struct DemoListView<Row>: View where Row: DemoableRow {
             
             switch demoType {
             case .accordion:
-                VLazyScrollView(type: .vertical(lazyScrollViewModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
-                    VAccordion(
-                        state: $accordionStates[i],
-                        headerTitle: section.title ?? "",
-                        content: {
-                            VList(
-                                layout: .fixed,
-                                data: section.rows,
-                                rowContent: { row in DemoListRowView(title: row.title, destination: row.body) }
-                            )
-                        }
-                    )
-                })
+                VLazyScrollView(
+                    type: .vertical(model: lazyScrollViewModel),
+                    data: sections.enumeratedArray(),
+                    id: \.element.id,
+                    content: { (i, section) in
+                        VAccordion(
+                            state: $accordionStates[i],
+                            headerTitle: section.title ?? "",
+                            content: {
+                                VList(
+                                    layout: .fixed,
+                                    data: section.rows,
+                                    rowContent: { row in DemoListRowView(title: row.title, destination: row.body) }
+                                )
+                            }
+                        )
+                    }
+                )
                     .padding(.bottom, 1)  // SwiftUI is bugged
                     .padding(.top, 10)
                 
             case .section:
                 VSheet()
                 
-                VLazyScrollView(type: .vertical(lazyScrollViewModel), data: sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
-                    VList(data: section.rows, rowContent: { row in
-                        DemoListRowView(title: row.title, destination: row.body)
-                    })
-                        .padding(.trailing, 15)
-                })
+                VLazyScrollView(
+                    type: .vertical(model: lazyScrollViewModel),
+                    data: sections.enumeratedArray(),
+                    id: \.element.id,
+                    content: { (i, section) in
+                        VList(data: section.rows, rowContent: { row in
+                            DemoListRowView(title: row.title, destination: row.body)
+                        })
+                            .padding(.trailing, 15)
+                    }
+                )
                     .padding([.leading, .top, .bottom], 15)
             }
         })

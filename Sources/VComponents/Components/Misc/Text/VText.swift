@@ -32,7 +32,7 @@ public struct VText: View {
     // MARK: Initializers
     /// Initializes component with type, color, fon, and title.
     public init(
-        type textType: VTextType = .oneLine,
+        type textType: VTextType = .singleLine,
         truncatingMode: Text.TruncationMode = .tail,
         minimumScaleFactor: CGFloat = 0,
         color: Color,
@@ -49,8 +49,8 @@ public struct VText: View {
 
     // MARK: Body
     @ViewBuilder public var body: some View {
-        switch textType {
-        case .oneLine:
+        switch textType._textType {
+        case .singleLine:
             Text(title)
                 .truncationMode(truncatingMode)
                 .lineLimit(1)
@@ -58,11 +58,11 @@ public struct VText: View {
                 .foregroundColor(color)
                 .font(font)
             
-        case .multiLine(let alignment, let limit):
+        case .multiLine(let alignment, let lineLimit):
             Text(title)
                 .multilineTextAlignment(alignment)
                 .truncationMode(truncatingMode)
-                .lineLimit(limit)
+                .lineLimit(lineLimit)
                 .minimumScaleFactor(minimumScaleFactor)
                 .foregroundColor(color)
                 .font(font)

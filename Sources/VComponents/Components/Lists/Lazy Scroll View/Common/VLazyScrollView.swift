@@ -124,7 +124,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
 
     // MARK: Body
     @ViewBuilder public var body: some View {
-        switch listType {
+        switch listType._lazyScrollViewType {
         case .vertical(let model): VLazyScrollViewVertical(model: model, content: content)
         case .horizontal(let model): VLazyScrollViewHorizontal(model: model, content: content)
         }

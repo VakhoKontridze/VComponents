@@ -112,7 +112,7 @@ struct VRangeSliderDemoView: View {
                 })
                 
                 VText(
-                    type: .multiLine(alignment: .leading, limit: nil),
+                    type: .multiLine(alignment: .leading, lineLimit: nil),
                     color: ColorBook.secondary,
                     font: .footnote,
                     title: "If this value exceeds difference of max and min during the creation of view, layout would invalidate itself, and refuse to draw"

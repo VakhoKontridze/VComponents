@@ -110,17 +110,18 @@ struct VMenu_Previews: PreviewProvider {
         VMenu(
             preset: .secondary(),
             rows: [
-                .titledSystemIcon(action: {}, title: "One", name: "swift"),
-                .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
-                .titled(action: {}, title: "Three"),
-                .titled(action: {}, title: "Four"),
+                //.titleIcon(action: {}, title: "One", assetIcon: ""),
+                .titleIcon(action: {}, title: "One", icon: Image(systemName: "swift")),
+                .titleIcon(action: {}, title: "Two", systemIcon: "swift"),
+                .title(action: {}, title: "Three"),
+                .title(action: {}, title: "Four"),
                 .menu(title: "Five...", rows: [
-                    .titled(action: {}, title: "One"),
-                    .titled(action: {}, title: "Two"),
-                    .titled(action: {}, title: "Three"),
+                    .title(action: {}, title: "One"),
+                    .title(action: {}, title: "Two"),
+                    .title(action: {}, title: "Three"),
                     .menu(title: "Four...", rows: [
-                        .titled(action: {}, title: "One"),
-                        .titled(action: {}, title: "Two"),
+                        .title(action: {}, title: "One"),
+                        .title(action: {}, title: "Two"),
                     ])
                 ])
             ],

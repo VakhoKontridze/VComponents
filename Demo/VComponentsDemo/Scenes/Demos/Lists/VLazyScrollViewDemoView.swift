@@ -29,14 +29,14 @@ private struct VLazyScrollViewDemoDetailView: View {
     // MARK: Properties
     static var navBarTitle: String { "Lazy Scroll View" }
 
-    private let lazyScrollViewType: VLazyScrollViewType
+    private let lazyScrollViewType: VLazyScrollViewTypeHelper
     
     @State private var initializedRows: Set<Int> = []
     @State private var visibleRows: Set<Int> = []
     
     // MARK: Initializers
     init(
-        _ lazyScrollViewType: VLazyScrollViewType
+        _ lazyScrollViewType: VLazyScrollViewTypeHelper
     ) {
         self.lazyScrollViewType = lazyScrollViewType
     }
@@ -113,6 +113,11 @@ private struct VLazyScrollViewDemoDetailView: View {
 }
 
 // MARK: - Helpers
+private enum VLazyScrollViewTypeHelper {
+    case vertical
+    case horizontal
+}
+
 private struct VLazyScrollViewDemoViewDataSource {
     private init() {}
     
@@ -129,8 +134,8 @@ private struct VLazyScrollViewDemoViewDataSource {
         
         var body: some View {
             switch self {
-            case .vertical: return VLazyScrollViewDemoDetailView(.vertical())
-            case .horizontal: return VLazyScrollViewDemoDetailView(.horizontal())
+            case .vertical: return VLazyScrollViewDemoDetailView(.vertical)
+            case .horizontal: return VLazyScrollViewDemoDetailView(.horizontal)
             }
         }
     }
@@ -140,7 +145,7 @@ private struct VLazyScrollViewDemoViewDataSource {
 struct VLazyScrollViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
 //        VLazyScrollViewDemoView()
-        VLazyScrollViewDemoDetailView(.vertical(.init()))
+        VLazyScrollViewDemoDetailView(.vertical)
     }
 }
 

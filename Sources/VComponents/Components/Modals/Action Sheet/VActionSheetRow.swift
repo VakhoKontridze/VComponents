@@ -8,10 +8,10 @@
 import SwiftUI
 
 // MARK: - V Action Sheet Row
-/// Enum that represens `VActionSheet` row, such as `titled`, `destructive`, or `cancel`.
+/// Enum that describes `VActionSheet` row, such as `titled`, `destructive`, or `cancel`.
 ///
 /// If two cancel buttons are used, app would crash.
-public enum VActionSheetRow {
+public enum VActionSheetRow { // FIXME: Convert to struct?
     // MARK: Cases
     /// Standard button with blue tint.
     case standard(action: () -> Void, title: String)

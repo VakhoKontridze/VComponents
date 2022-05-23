@@ -147,7 +147,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
     
     @ViewBuilder private var loader: some View {
         if internalState.isLoading {
-            VSpinner(type: .continous(model.spinnerSubModel))
+            VSpinner(type: .continous(model: model.spinnerSubModel))
         }
     }
     

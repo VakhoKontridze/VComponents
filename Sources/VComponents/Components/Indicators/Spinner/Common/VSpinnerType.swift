@@ -8,16 +8,42 @@
 import Foundation
 
 // MARK: - V Spinner Type
-/// Enum of types, such as `continous` or `dashed`
-public enum VSpinnerType {
-    // MARK: Cases
+/// Enum that describes `VSpinner` type, such as `continous` or `dashed`
+public struct VSpinnerType {
+    // MARK: Properties
+    let _spinnerType: _VSpinnerType
+    
+    // MARK: Initializers
+    private init(
+        spinnerType: _VSpinnerType
+    ) {
+        self._spinnerType = spinnerType
+    }
+    
     /// Continos spinner.
-    case continous(_ model: VSpinnerModelContinous = .init())
+    public static func continous(
+        model: VSpinnerModelContinous = .init()
+    ) -> Self {
+        .init(spinnerType: .continous(
+            model: model
+        ))
+    }
     
     /// Dashed spinner.
-    case dashed(_ model: VSpinnerModelDashed = .init())
+    public static func dashed(
+        model: VSpinnerModelDashed = .init()
+    ) -> Self {
+        .init(spinnerType: .dashed(
+            model: model
+        ))
+    }
     
-    // MARK: Initailizers
     /// Default value. Set to `continous`.
     public static var `default`: Self { .continous() }
+}
+
+// MARK: - _ V Spinner Type
+enum _VSpinnerType {
+    case continous(model: VSpinnerModelContinous)
+    case dashed(model: VSpinnerModelDashed)
 }

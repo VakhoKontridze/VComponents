@@ -81,24 +81,15 @@ private enum VToastTypeHelper: Int, PickableTitledEnumeration {
     
     var pickerTitle: String {
         switch self {
-        case .oneLine: return "One Line"
-        case .multiLine: return "Multi Line"
+        case .oneLine: return "Single-line"
+        case .multiLine: return "Multi-line"
         }
     }
     
     var toastType: VToastType {
         switch self {
-        case .oneLine: return .oneLine
-        case .multiLine: return .multiLine(alignment: .leading, limit: 5)
-        }
-    }
-}
-
-extension VToastType {
-    fileprivate var helperType: VToastTypeHelper {
-        switch self {
-        case .oneLine: return .oneLine
-        case .multiLine: return .multiLine
+        case .oneLine: return .singleLine
+        case .multiLine: return .multiLine(alignment: .leading, lineLimit: 5)
         }
     }
 }

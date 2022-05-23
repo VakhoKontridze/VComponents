@@ -38,7 +38,7 @@ public struct VToast {
     /// Initializes component with type and title.
     public init(
         model: VToastModel = .init(),
-        type toastType: VToastType = .oneLine,
+        type toastType: VToastType = .singleLine,
         title: String
     ) {
         self.model = model

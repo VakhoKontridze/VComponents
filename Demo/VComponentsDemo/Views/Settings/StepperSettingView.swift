@@ -46,7 +46,7 @@ struct StepperSettingView: View {
                 
                 if let description = description, !description.isEmpty {
                     VText(
-                        type: .multiLine(alignment: .leading, limit: nil),
+                        type: .multiLine(alignment: .leading, lineLimit: nil),
                         color: isEnabled ? ColorBook.secondary : .init(componentAsset: "Secondary.presseddisabled"), // Not exposing API
                         font: .footnote,
                         title: description

@@ -32,7 +32,7 @@ struct VSheetDemoView: View {
     private func component() -> some View {
         VSheet(model: model, content: {
             VText(
-                type: .multiLine(alignment: .center, limit: nil),
+                type: .multiLine(alignment: .center, lineLimit: nil),
                 color: ColorBook.primary,
                 font: .body,
                 title: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."

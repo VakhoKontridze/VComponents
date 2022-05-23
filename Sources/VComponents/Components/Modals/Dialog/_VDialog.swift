@@ -117,7 +117,7 @@ struct _VDialog<Content>: View
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
             VText(
-                type: .multiLine(alignment: .center, limit: model.layout.titleLineLimit),
+                type: .multiLine(alignment: .center, lineLimit: model.layout.titleLineLimit),
                 color: model.colors.title,
                 font: model.fonts.title,
                 title: title
@@ -129,7 +129,7 @@ struct _VDialog<Content>: View
     @ViewBuilder private var descriptionView: some View {
         if let description = description, !description.isEmpty {
             VText(
-                type: .multiLine(alignment: .center, limit: model.layout.descriptionLineLimit),
+                type: .multiLine(alignment: .center, lineLimit: model.layout.descriptionLineLimit),
                 color: model.colors.description,
                 font: model.fonts.description,
                 title: description
@@ -194,7 +194,7 @@ struct _VDialog<Content>: View
     
     private func buttonView(_ button: VDialogButton) -> some View {
         Group(content: {
-            switch button.buttonType {
+            switch button._dialogButton {
             case .primary:
                 VDialogPrimaryButton(
                     model: model.primaryButtonSubModel,

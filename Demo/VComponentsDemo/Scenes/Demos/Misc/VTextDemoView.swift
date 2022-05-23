@@ -43,13 +43,13 @@ struct VTextDemoView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
         
         case .multiLineCenter:
-            VText(type: .multiLine(alignment: .center, limit: nil), color: titleColor, font: titleFont, title: baseTextText)
+            VText(type: .multiLine(alignment: .center, lineLimit: nil), color: titleColor, font: titleFont, title: baseTextText)
             
         case .multiLineLeading:
-            VText(type: .multiLine(alignment: .leading, limit: nil), color: titleColor, font: titleFont, title: baseTextText)
+            VText(type: .multiLine(alignment: .leading, lineLimit: nil), color: titleColor, font: titleFont, title: baseTextText)
             
         case .multiLineTrailing:
-            VText(type: .multiLine(alignment: .trailing, limit: nil), color: titleColor, font: titleFont, title: baseTextText)
+            VText(type: .multiLine(alignment: .trailing, lineLimit: nil), color: titleColor, font: titleFont, title: baseTextText)
         }
     }
     

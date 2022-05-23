@@ -177,7 +177,7 @@ public struct VTextField: View {
     @ViewBuilder private var header: some View {
         if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, limit: model.layout.headerLineLimit),
+                type: .multiLine(alignment: .leading, lineLimit: model.layout.headerLineLimit),
                 color: model.colors.header.for(internalState),
                 font: model.fonts.header,
                 title: headerTitle
@@ -189,7 +189,7 @@ public struct VTextField: View {
     @ViewBuilder private var footer: some View {
         if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, limit: model.layout.footerLineLimit),
+                type: .multiLine(alignment: .leading, lineLimit: model.layout.footerLineLimit),
                 color: model.colors.footer.for(internalState),
                 font: model.fonts.footer,
                 title: footerTitle

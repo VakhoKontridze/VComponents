@@ -153,20 +153,20 @@ public struct VMenuPicker<Label, Data>: View
     }
     
     @ViewBuilder private func rowView(_ row: VMenuPickerRowContent) -> some View {
-        switch row {
+        switch row._menuPickerRowContent {
         case .title(let title):
             Text(title)
-            
-        case .titleIcon(let title, let icon):
-            HStack(content: {
-                Text(title)
-                icon
-            })
             
         case .titleAssetIcon(let title, let icon, let bundle):
             HStack(content: {
                 Text(title)
                 Image(icon, bundle: bundle)
+            })
+            
+        case .titleIcon(let title, let icon):
+            HStack(content: {
+                Text(title)
+                icon
             })
             
         case .titleSystemIcon(let title, let icon):

@@ -50,19 +50,19 @@ struct VMenuDemoView: View {
     
     private var rows: [VMenuRow] {
         [
-            .titledSystemIcon(action: {}, title: "One", name: "swift"),
-            .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
-            .titled(action: {}, title: "Three"),
-            .titled(action: {}, title: "Four"),
-            .menu(title: "Five...", rows: [
-                .titled(action: {}, title: "One"),
-                .titled(action: {}, title: "Two"),
-                .titled(action: {}, title: "Three"),
-                .menu(title: "Four...", rows: [
-                    .titled(action: {}, title: "One"),
-                    .titled(action: {}, title: "Two"),
-                ])
-            ])
+//            .titledSystemIcon(action: {}, title: "One", name: "swift"),
+//            .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
+//            .titled(action: {}, title: "Three"),
+//            .titled(action: {}, title: "Four"),
+//            .menu(title: "Five...", rows: [
+//                .titled(action: {}, title: "One"),
+//                .titled(action: {}, title: "Two"),
+//                .titled(action: {}, title: "Three"),
+//                .menu(title: "Four...", rows: [
+//                    .titled(action: {}, title: "One"),
+//                    .titled(action: {}, title: "Two"),
+//                ])
+//            ])
         ]
     }
     

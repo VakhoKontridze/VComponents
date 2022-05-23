@@ -114,7 +114,7 @@ struct _VToast_Previews: PreviewProvider {
     static var previews: some View {
         _VToast(
             model: .init(),
-            toastType: .oneLine,
+            toastType: .singleLine,
             isPresented: .constant(true),
             title: "Lorem ipsum"
         )
