@@ -69,8 +69,14 @@ public struct VRangeSlider: View {
         self.max = .init(range.upperBound)
         self.difference = .init(difference)
         self.step = step.map { .init($0) }
-        self._valueLow = .init(from: valueLow, range: range, step: step)
-        self._valueHigh = .init(from: valueHigh, range: range, step: step)
+        self._valueLow = .init(
+            get: { .init(valueLow.wrappedValue.clamped(to: range, step: step)) },
+            set: { valueLow.wrappedValue = .init($0) }
+        )
+        self._valueHigh = .init(
+            get: { .init(valueHigh.wrappedValue.clamped(to: range, step: step)) },
+            set: { valueHigh.wrappedValue = .init($0) }
+        )
         self.actionLow = actionLow
         self.actionHigh = actionHigh
         
