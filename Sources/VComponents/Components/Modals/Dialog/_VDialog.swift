@@ -61,7 +61,7 @@ struct _VDialog<Content>: View
         self.title = title
         self.description = description
         self.content = content
-        self.buttons = VDialogButton.reorder(buttons)
+        self.buttons = VDialogButton.process(buttons)
     }
 
     // MARK: Body

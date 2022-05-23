@@ -9,6 +9,10 @@ import Foundation
 
 // MARK: - V Dialog Button
 /// Model that describes `VDialog` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
+///
+/// `Cancel` will be moved to the end of the stack.
+/// If there are multiple `cancel` buttons, only the last one will be kept.
+/// If thete are no buttons, an `ok` button will be added.
 public struct VDialogButton {
     // MARK: Properties
     let buttonType: _VDialogButton
@@ -94,8 +98,8 @@ public struct VDialogButton {
         )
     }
     
-    // MARK: Reorder
-    static func reorder(_ buttons: [Self]) -> [Self] {
+    // MARK: Processing
+    static func process(_ buttons: [Self]) -> [Self] {
         var result: [VDialogButton] = .init()
         
         for button in buttons {
