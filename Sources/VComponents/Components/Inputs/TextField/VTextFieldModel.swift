@@ -38,11 +38,11 @@ public struct VTextFieldModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Textfield height. Defaults to `50`.
-        public var height: CGFloat = 50
+        /// Textfield height. Defaults to `45`.
+        public var height: CGFloat = 45
         
-        /// Textfield corner radius. Defaults to `10`.
-        public var cornerRadius: CGFloat = 10
+        /// Textfield corner radius. Defaults to `12`.
+        public var cornerRadius: CGFloat = 12
         
         /// Textfield text alignment. Defaults to `default`.
         public var textAlignment: TextAlignment = .leading
@@ -174,8 +174,8 @@ public struct VTextFieldModel {
         /// Text font. Defaults to system font of size `16`.
         public var text: Font = .system(size: 16)
         
-        /// Placeholder font. Defaults to system font of size `13`.
-        public var placeholder: Font = segmentedPickerReference.fonts.footer
+        /// Placeholder font. Defaults to system font of size `16`.
+        public var placeholder: Font = .system(size: 16)
         
         /// Header font. Defaults to system font of size `14`.
         public var header: Font = segmentedPickerReference.fonts.header

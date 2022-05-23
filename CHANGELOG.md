@@ -69,6 +69,9 @@ VTextField
 
 - TextField now support native `focusable()` API
 - `VTextFieldHighlight` is removed in favor of custom `VTextFieldModel`'s
+- TextField Height is changed from `50` to `45`
+- TextField corner radius is changed from `10` to `12`
+- Placeholder font is changed to `system` size `16`
 - `warning` highlight is added to `VTextFieldModel`
 - `headerLineLimit` and `footerLineLimit` are added to `VTextFieldModel`
 
