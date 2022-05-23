@@ -7,5 +7,5 @@
 
 import Foundation
 
-// MARK: - V Menu Picker State
+// MARK: - V Menu Picker Internal State
 typealias VMenuPickerInternalState = GenericState_ED

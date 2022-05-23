@@ -10,97 +10,58 @@ import SwiftUI
 // MARK: - V Menu
 /// Modal component that presents menu of actions.
 ///
-/// Preset and state can be passed as parameters.
-///
 /// Usage example:
 ///
 ///     VMenu(
-///         preset: .secondary(),
 ///         rows: [
-///             .titledSystemIcon(action: {}, title: "One", name: "swift"),
-///             .titledAssetIcon(action: {}, title: "Two", name: "Favorites"),
-///             .button(action: {}, title: "Three"),
-///             .button(action: {}, title: "Four"),
+///             .titleIcon(action: {}, title: "One", assetIcon: "SomeIcon"),
+///             .titleIcon(action: {}, title: "Two", icon: someIcon),
+///             .titleIcon(action: {}, title: "Three", systemIcon: "swift"),
+///             .title(action: {}, title: "Four"),
+///             .title(action: {}, title: "Five"),
 ///             .menu(title: "Five...", rows: [
-///                 .button(action: {}, title: "One"),
-///                 .button(action: {}, title: "Two"),
-///                 .button(action: {}, title: "Three"),
+///                 .title(action: {}, title: "One"),
+///                 .title(action: {}, title: "Two"),
+///                 .title(action: {}, title: "Three"),
 ///                 .menu(title: "Four...", rows: [
-///                     .button(action: {}, title: "One"),
-///                     .button(action: {}, title: "Two"),
+///                     .title(action: {}, title: "One"),
+///                     .title(action: {}, title: "Two")
 ///                 ])
 ///             ])
 ///         ],
-///         title: "Lorem Ipsum"
+///         label: {
+///             VPlainButton(
+///                 action: {},
+///                 title: "Lorem Ipsum"
+///             )
+///         }
 ///     )
 ///
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
-    private let menuButtonType: VMenuButtonType
-    private let state: VMenuState
+    @Environment(\.isEnabled) private var isEnabled: Bool
+    private var internalState: VMenuPickerInternalState { .init(isEnabled: isEnabled) }
+    
     private let rows: [VMenuRow]
     private let label: () -> Label
     
-    // MARK: Initializers - Preset
-    /// Initializes component with preset, rows, and label.
-    public init(
-        preset menuButtonPreset: VMenuButtonPreset,
-        state: VMenuState = .enabled,
-        rows: [VMenuRow],
-        @ViewBuilder label: @escaping () -> Label
-    ) {
-        self.menuButtonType = menuButtonPreset.buttonType
-        self.state = state
-        self.rows = rows
-        self.label = label
-    }
-    
-    /// Initializes component with preset, rows, and title.
-    public init(
-        preset menuButtonPreset: VMenuButtonPreset,
-        state: VMenuState = .enabled,
-        rows: [VMenuRow],
-        title: String
-    )
-        where Label == VText
-    {
-        self.init(
-            preset: menuButtonPreset,
-            state: state,
-            rows: rows,
-            label: { menuButtonPreset.text(from: title, isEnabled: state.isEnabled) }
-        )
-    }
-    
-    // MARK: Initializers - Custom
+    // MARK: Initializers
     /// Initializes component with rows and label.
     public init(
-        state: VMenuState = .enabled,
         rows: [VMenuRow],
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.menuButtonType = .custom
-        self.state = state
         self.rows = rows
         self.label = label
     }
 
     // MARK: Body
     public var body: some View {
-        Menu(content: contentView, label: labelView)
-            .allowsHitTesting(state.isEnabled)  // Adding this on label has no effect
-    }
-    
-    private func contentView() -> some View {
-        VMenuSubMenu(rows: rows)
-    }
-    
-    @ViewBuilder private func labelView() -> some View {
-        VMenuButtonType.menuButton(
-            buttonType: menuButtonType,
-            isEnabled: state.isEnabled,
-            label: label
+        Menu(
+            content: { VMenuContentView(rows: rows) },
+            label: { label() }
         )
+            .disabled(!internalState.isEnabled)
     }
 }
 
@@ -108,24 +69,28 @@ public struct VMenu<Label>: View where Label: View {
 struct VMenu_Previews: PreviewProvider {
     static var previews: some View {
         VMenu(
-            preset: .secondary(),
             rows: [
-                //.titleIcon(action: {}, title: "One", assetIcon: ""),
-                .titleIcon(action: {}, title: "One", icon: Image(systemName: "swift")),
-                .titleIcon(action: {}, title: "Two", systemIcon: "swift"),
-                .title(action: {}, title: "Three"),
+                .titleIcon(action: {}, title: "One", assetIcon: "XMark", bundle: .module),
+                .titleIcon(action: {}, title: "Two", icon: .init(systemName: "swift")),
+                .titleIcon(action: {}, title: "Three", systemIcon: "swift"),
                 .title(action: {}, title: "Four"),
+                .title(action: {}, title: "Five"),
                 .menu(title: "Five...", rows: [
                     .title(action: {}, title: "One"),
                     .title(action: {}, title: "Two"),
                     .title(action: {}, title: "Three"),
                     .menu(title: "Four...", rows: [
                         .title(action: {}, title: "One"),
-                        .title(action: {}, title: "Two"),
+                        .title(action: {}, title: "Two")
                     ])
                 ])
             ],
-            title: "Lorem Ipsum"
+            label: {
+                VPlainButton(
+                    action: {},
+                    title: "Lorem Ipsum"
+                )
+            }
         )
     }
 }

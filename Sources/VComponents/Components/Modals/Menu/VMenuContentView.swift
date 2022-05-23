@@ -1,5 +1,5 @@
 //
-//  VMenuSubMenu.swift
+//  VMenuContentView.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/1/21.
@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-// MARK: - V Menu Sub Menu
-struct VMenuSubMenu: View {
+// MARK: - V Menu Content View
+struct VMenuContentView: View {
     // MARK: Properties
     private let rows: [VMenuRow]
     
@@ -44,7 +44,7 @@ struct VMenuSubMenu: View {
             
             case .menu(let title, let rows):
                 Menu(
-                    content: { VMenuSubMenu(rows: rows) },
+                    content: { VMenuContentView(rows: rows) },
                     label: { Text(title) }
                 )
             }
@@ -53,7 +53,7 @@ struct VMenuSubMenu: View {
 }
 
 // MARK: - Preview
-struct VMenuSubMenu_Previews: PreviewProvider {
+struct VMenuContentView_Previews: PreviewProvider {
     static var previews: some View {
         VMenu_Previews.previews
     }
