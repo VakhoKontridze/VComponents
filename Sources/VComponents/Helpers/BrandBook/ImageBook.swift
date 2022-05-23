@@ -8,22 +8,37 @@
 import SwiftUI
 
 // MARK: - Image Book
-struct ImageBook {
+/// Contains icons used throughout the library.
+///
+/// Properties can be re-set.
+public struct ImageBook {
     // MARK: Properties
-    static var checkBoxOn: Image { .init(templateComponentAsset: "CheckBox.On") }
-    static var checkBoxInterm: Image { .init(templateComponentAsset: "CheckBox.Interm") }
+    /// Checkmark for `on` state in `VCheckBox`.
+    public static var checkBoxCheckMarkOn: Image = .init(templateComponentAsset: "CheckMark.on")
     
-    static var chevronUp: Image { .init(templateComponentAsset: "Chevron.Up") }
+    /// Checkmark for `indeterminate` state in `VCheckBox`.
+    public static var checkBoxCheckMarkIndeterminate: Image = .init(templateComponentAsset: "CheckMark.indeterminate")
     
-    static var minus: Image { .init(templateComponentAsset: "Minus") }
-    static var plus: Image { .init(templateComponentAsset: "Plus") }
+    /// Decrement icon for `VStepper`.
+    public static var stepperDecrement: Image = .init(templateComponentAsset: "Minus")
     
-    static var search: Image { .init(templateComponentAsset: "Search") }
+    /// Increment icon for `VStepper`.
+    public static var stepperIncrement: Image = .init(templateComponentAsset: "Plus")
     
-    static var visibilityOff: Image { .init(templateComponentAsset: "Visibility.off") }
-    static var visibilityOn: Image { .init(templateComponentAsset: "Visibility.on") }
+    /// Search icon for `VTextField`.
+    public static var textFieldSearch: Image = .init(templateComponentAsset: "Search")
     
-    static var xMark: Image { .init(templateComponentAsset: "XMark") }
+    /// Visibility off icon for `VTextField`.
+    public static var textFieldVisibilityOff: Image = .init(templateComponentAsset: "Visibility.off")
+    
+    /// Visibility on icon for `VTextField`
+    public static var textFieldVisibilityOn: Image = .init(templateComponentAsset: "Visibility.on")
+    
+    /// General close or clear button x-mark icon.
+    public static var xMark: Image = .init(templateComponentAsset: "XMark")
+    
+    /// General chevron icon.
+    public static var chevronUp: Image = .init(templateComponentAsset: "Chevron.up")
     
     // MARK: Initializers
     private init() {}

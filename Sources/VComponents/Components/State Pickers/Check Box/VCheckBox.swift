@@ -195,8 +195,8 @@ public struct VCheckBox<Label>: View where Label: View {
     private var checkMarkIcon: Image? {
         switch internalState {
         case .off, .pressedOff: return nil
-        case .on, .pressedOn: return ImageBook.checkBoxOn
-        case .indeterminate, .pressedIndeterminate: return ImageBook.checkBoxInterm
+        case .on, .pressedOn: return ImageBook.checkBoxCheckMarkOn
+        case .indeterminate, .pressedIndeterminate: return ImageBook.checkBoxCheckMarkIndeterminate
         case .disabled: return nil
         }
     }

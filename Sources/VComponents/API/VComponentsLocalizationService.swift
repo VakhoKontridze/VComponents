@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - V Components Localization Service
-/// Localization Service that can be used to localize the package.
+// MARK: - VComponents Localization Service
+/// Localization service that can be used to localize the package.
 ///
 /// `localizationProvider` in `shared` instance can be set to override the localized values.
 public final class VComponentsLocalizationService {
@@ -34,7 +34,7 @@ public protocol VComponentsLocalizationProvider {
 }
 
 // MARK: - Default VComponents Localization Provider
-/// Defaults VComponents Localization Provider.
+/// Defaults VComponents localization provider.
 public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider {
     public var vDialogCancelButtonTitle: String { "Cancel" }
     

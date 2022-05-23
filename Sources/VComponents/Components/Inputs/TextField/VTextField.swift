@@ -223,7 +223,7 @@ public struct VTextField: View {
 
     @ViewBuilder private var searchIcon: some View {
         if textFieldType.isSearch {
-            ImageBook.search
+            ImageBook.textFieldSearch
                 .resizable()
                 .frame(dimension: model.layout.searchIconDimension)
                 .foregroundColor(model.colors.searchIcon.for(internalState))
@@ -290,8 +290,8 @@ public struct VTextField: View {
     // MARK: Visiblity Icon
     private var visiblityIcon: Image {
         switch secureFieldIsVisible {
-        case false: return ImageBook.visibilityOff
-        case true: return ImageBook.visibilityOn
+        case false: return ImageBook.textFieldVisibilityOff
+        case true: return ImageBook.textFieldVisibilityOn
         }
     }
 
