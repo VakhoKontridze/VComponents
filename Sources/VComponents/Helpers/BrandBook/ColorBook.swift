@@ -240,8 +240,8 @@ extension Color {
  235.110.105
  
  TextField.PlainButton.enabled
- 30.30.30
- 240.200.100
+ 70.70.70
+ 240.240.240
  
  TextField.Success.Background.enabled
  235.250.240
