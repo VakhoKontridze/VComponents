@@ -39,7 +39,7 @@ public struct VSecondaryButtonModel {
         /// Button border width. Defaults to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Label margins. Defaults to `10` horizontally and `3` vertically.
+        /// Label margins. Defaults to `10` horizontal and `3` vertical.
         public var labelMargins: LabelMargins = .init(
             horizontal: 10,
             vertical: 3

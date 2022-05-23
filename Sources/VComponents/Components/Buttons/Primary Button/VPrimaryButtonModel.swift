@@ -37,7 +37,7 @@ public struct VPrimaryButtonModel {
         /// Button border width. Defaults to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Label margins. Defaults to `15` horizontally and `3` vertically.
+        /// Label margins. Defaults to `15` horizontal and `3` vertical.
         public var labelMargins: LabelMargins = .init(
             horizontal: 15,
             vertical: 3

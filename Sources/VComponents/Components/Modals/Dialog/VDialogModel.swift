@@ -58,7 +58,7 @@ public struct VDialogModel {
         /// Title line limit. Defaults to `1`.
         public var titleLineLimit: Int? = 1
         
-        /// Title margins. Defaults to `0` horizontally and `5` vertically.
+        /// Title margins. Defaults to `0` horizontal and `5` vertical.
         public var titleMargins: Margins = .init(
             horizontal: 0,
             vertical: 5
@@ -67,13 +67,13 @@ public struct VDialogModel {
         /// Description line limit. Defaults to `5`.
         public var descriptionLineLimit: Int? = 5
         
-        /// Title margins. Defaults to `0` horizontally and `5` vertically.
+        /// Title margins. Defaults to `0` horizontal and `5` vertical.
         public var descirptionMargins: Margins = .init(
             horizontal: 0,
             vertical: 5
         )
         
-        /// Content margins. Defaults to `0` horizontally and `5` vertically.
+        /// Content margins. Defaults to `0` horizontal and `5` vertical.
         public var contentMargins: Margins = .init(
             horizontal: 0,
             vertical: 5
@@ -93,7 +93,7 @@ public struct VDialogModel {
         /// Button corner radius. Defaults to `10`.
         public var buttonCornerRadius: CGFloat = 10
         
-        /// Button margins. Defaults to `0` horizontally and `5` vertically.
+        /// Button margins. Defaults to `0` horizontal and `5` vertical.
         public var buttonMargins: Margins = .init(
             horizontal: 0,
             vertical: 5

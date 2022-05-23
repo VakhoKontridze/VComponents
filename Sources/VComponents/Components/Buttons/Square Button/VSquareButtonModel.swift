@@ -40,7 +40,7 @@ public struct VSquareButtonModel {
         /// Button border width. Defaults to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Label margins. Defaults to `3` horizontally and `3` vertically.
+        /// Label margins. Defaults to `3` horizontal and `3` vertical.
         public var labelMargins: LabelMargins = .init(3)
         
         /// Icon size. Defaults to `20` by `20`.
