@@ -1,5 +1,5 @@
 //
-//  VAccordionDemoView.swift
+//  VDisclosureGroupDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 1/11/21.
@@ -8,18 +8,18 @@
 import SwiftUI
 import VComponents
 
-// MARK: - V Accordion Demo View
-struct VAccordionDemoView: View {
+// MARK: - V Disclosure Group Demo View
+struct VDisclosureGroupDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Accordion" }
+    static var navBarTitle: String { "Disclosure Group" }
     
     @State private var isEnabled: Bool = true
     @State private var isExpanded: Bool = true
     @State private var expandCollapseOnHeaderTap: Bool = true
-    @State private var hasDivider: Bool = VAccordionModel.Layout().headerDividerHeight > 0
+    @State private var hasDivider: Bool = VDisclosureGroupModel.Layout().headerDividerHeight > 0
     
-    private var model: VAccordionModel {
-        var model: VAccordionModel = .init()
+    private var model: VDisclosureGroupModel {
+        var model: VDisclosureGroupModel = .init()
         
         model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
         model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
@@ -43,7 +43,7 @@ struct VAccordionDemoView: View {
         ZStack(alignment: .top, content: {
             ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
 
-            VAccordion(
+            VDisclosureGroup(
                 model: model,
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
@@ -61,7 +61,7 @@ struct VAccordionDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { _VAccordionState(isEnabled: isEnabled, isExpanded: isExpanded) },
+                get: { _VDisclosureGroupState(isEnabled: isEnabled, isExpanded: isExpanded) },
                 set: { state in
                     isEnabled = state != .disabled
                     isExpanded = state == .expanded
@@ -77,7 +77,7 @@ struct VAccordionDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VAccordionState: PickableTitledEnumeration {
+private enum _VDisclosureGroupState: PickableTitledEnumeration {
     case collapsed
     case expanded
     case disabled
@@ -100,8 +100,8 @@ private enum _VAccordionState: PickableTitledEnumeration {
 }
 
 // MARK: - Preview
-struct VAccordionDemoView_Previews: PreviewProvider {
+struct VDisclosureGroupDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VAccordionDemoView()
+        VDisclosureGroupDemoView()
     }
 }

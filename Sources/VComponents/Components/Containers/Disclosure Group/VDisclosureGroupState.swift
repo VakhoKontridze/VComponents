@@ -1,5 +1,5 @@
 //
-//  VAccordionState.swift
+//  VDisclosureGroupState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/11/21.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - V Accordion State
+// MARK: - V Disclosure Group State
 /// Enum that describes state, such as `collapsed` or `expanded`.
-public enum VAccordionState: Int, CaseIterable {
+public enum VDisclosureGroupState: Int, CaseIterable {
     // MARK: Cases
     /// Case collapsed.
     case collapsed
@@ -45,7 +45,7 @@ public enum VAccordionState: Int, CaseIterable {
     }
 }
 
-extension Binding where Value == VAccordionState {
+extension Binding where Value == VDisclosureGroupState {
     /// Initializes state with `Bool`.
     public init(bool: Binding<Bool>) {
         self.init(
@@ -55,5 +55,5 @@ extension Binding where Value == VAccordionState {
     }
 }
 
-// MARK: - V Accordion Internal State
-typealias VAccordionInternalState = GenericState_CED
+// MARK: - V Disclosur eGroup Internal State
+typealias VDisclosureGroupInternalState = GenericState_CED

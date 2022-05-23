@@ -34,7 +34,7 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 **Inputs.** VTextField
 
-**Containers**. VSheet, VAccordion
+**Containers**. VSheet, VDisclosureGroup
 
 **Lists.** VLazyScrollView, VList
 

@@ -13,12 +13,12 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     // MARK: Properties
     private let demoType: DemoType
     enum DemoType {
-        case accordion
+        case disclosureGroup
         case section
     }
     
     private let sections: [DemoSection<Row>]
-    @State private var accordionStates: [VAccordionState]
+    @State private var disclosureGroupStates: [VDisclosureGroupState]
     
     private let lazyScrollViewModel: VLazyScrollViewVerticalModel = {
         var model: VLazyScrollViewVerticalModel = .init()
@@ -30,7 +30,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     init(type demoType: DemoType, sections: [DemoSection<Row>]) {
         self.demoType = demoType
         self.sections = sections
-        self._accordionStates = .init(initialValue: .init(repeating: .collapsed, count: sections.count))
+        self._disclosureGroupStates = .init(initialValue: .init(repeating: .collapsed, count: sections.count))
     }
 
     // MARK: Body
@@ -39,14 +39,14 @@ struct DemoListView<Row>: View where Row: DemoableRow {
             ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
             
             switch demoType {
-            case .accordion:
+            case .disclosureGroup:
                 VLazyScrollView(
                     type: .vertical(model: lazyScrollViewModel),
                     data: sections.enumeratedArray(),
                     id: \.element.id,
                     content: { (i, section) in
-                        VAccordion(
-                            state: $accordionStates[i],
+                        VDisclosureGroup(
+                            state: $disclosureGroupStates[i],
                             headerTitle: section.title ?? "",
                             content: {
                                 VList(

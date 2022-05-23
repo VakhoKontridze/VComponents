@@ -14,7 +14,7 @@ public struct VModalModel {
     // MARK: Properties
     fileprivate static let closeButtonReference: VCloseButtonModel = .init()
     fileprivate static let sheetReference: VSheetModel = .init()
-    fileprivate static let accordionReference: VAccordionModel = .init()
+    fileprivate static let disclosureGroupReference: VDisclosureGroupModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -57,7 +57,7 @@ public struct VModalModel {
         public var headerAlignment: VerticalAlignment = .center
         
         /// Header margins. Defaults to `15` leading, `15` trailing, `10` top, and `10` bottom.
-        public var headerMargins: Margins = accordionReference.layout.headerMargins
+        public var headerMargins: Margins = disclosureGroupReference.layout.headerMargins
         
         /// Close button dimension. Defaults to `30`.
         public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
@@ -69,13 +69,13 @@ public struct VModalModel {
         public var labelCloseButtonSpacing: CGFloat = 10
         
         /// Header divider height. Defaults to `2/3`.
-        public var headerDividerHeight: CGFloat = accordionReference.layout.headerDividerHeight
+        public var headerDividerHeight: CGFloat = disclosureGroupReference.layout.headerDividerHeight
     
         /// Header divider margins. Defaults to `.zero`.
         public var headerDividerMargins: Margins = .zero
         
         /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
-        public var contentMargins: Margins = accordionReference.layout.contentMargins
+        public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
         
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeybordSafeAreaEdges: Edge.Set = []
@@ -125,7 +125,7 @@ public struct VModalModel {
         )
         
         /// Header divider color.
-        public var headerDivider: Color = accordionReference.colors.headerDivider
+        public var headerDivider: Color = disclosureGroupReference.colors.headerDivider
         
         /// Blinding color.
         public var blinding: Color = .init(componentAsset: "Modal.Blinding")

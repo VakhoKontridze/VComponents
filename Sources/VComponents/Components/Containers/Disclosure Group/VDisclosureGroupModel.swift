@@ -1,5 +1,5 @@
 //
-//  VAccordionModel.swift
+//  VDisclosureGroupModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/11/21.
@@ -8,9 +8,9 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Accordion Model
+// MARK: - V Disclosure Group Model
 /// Model that describes UI.
-public struct VAccordionModel {
+public struct VDisclosureGroupModel {
     // MARK: Properties
     fileprivate static let sheetReference: VSheetModel = .init()
     fileprivate static let chevronButtonReference: VChevronButtonModel = .init()
@@ -39,7 +39,7 @@ public struct VAccordionModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Accordion corner radius. Defaults to `15`.
+        /// Disclosure group corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
         /// Header margins. Defaults to `15` leading, `15` trailing, `10` top, `10` bottom.
@@ -158,7 +158,7 @@ public struct VAccordionModel {
     /// Sub-model containing misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if accordion expands and collapses from header tap. Defaults to `true`.
+        /// Indicates if disclosure group expands and collapses from header tap. Defaults to `true`.
         public var expandsAndCollapsesOnHeaderTap: Bool = true
         
         // MARK: Initializers

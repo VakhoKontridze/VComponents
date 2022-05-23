@@ -82,6 +82,7 @@ VSheet
 
 VAccordion
 
+- `VAccordion` is renamed to `VDisclosureGroup`
 - Accordion margins are changed from `10` to `15`
 
 VBaseList

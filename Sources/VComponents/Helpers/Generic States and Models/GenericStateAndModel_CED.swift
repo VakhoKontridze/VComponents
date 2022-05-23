@@ -42,7 +42,7 @@ enum GenericState_CED {
 }
 
 extension GenericState_CED {
-    init(isEnabled: Bool, state: VAccordionState) {
+    init(isEnabled: Bool, state: VDisclosureGroupState) {
         self.init(isEnabled: isEnabled, isExpanded: state.isExpanded)
     }
 }

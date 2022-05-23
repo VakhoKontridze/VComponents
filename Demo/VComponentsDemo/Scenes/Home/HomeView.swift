@@ -23,7 +23,7 @@ struct HomeView: View {
         .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
         .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
         .init(id: 4, title: "Inputs", rows: [.textField]),
-        .init(id: 5, title: "Containers", rows: [.sheet, .accordion]),
+        .init(id: 5, title: "Containers", rows: [.sheet, .disclosureGroup]),
         .init(id: 6, title: "Lists", rows: [.lazyScrollView, .list]),
         .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .dialog, .menu, .actionSheet]),
         .init(id: 8, title: "Messages", rows: [.toast]),
@@ -34,7 +34,7 @@ struct HomeView: View {
     // MARK: Body
     var body: some View {
         NavigationView(content: {
-            DemoListView(type: .accordion, sections: sections)
+            DemoListView(type: .disclosureGroup, sections: sections)
                 .standardNavigationTitle(Self.navBarTitle)
         })
             .navigationViewStyle(.stack)
@@ -47,7 +47,7 @@ struct HomeView: View {
         case segmentedPicker, menuPicker, wheelPicker
         case stepper, slider,  rangeSlider
         case textField
-        case list, accordion
+        case list, disclosureGroup
         case modal, bottomSheet, sideBar, dialog, menu, actionSheet
         case toast
         case spinner, progressBar, pageIndicator
@@ -78,7 +78,7 @@ struct HomeView: View {
             case .textField: return VTextFieldDemoView.navBarTitle
                 
             case .sheet: return VSheetDemoView.navBarTitle
-            case .accordion: return VAccordionDemoView.navBarTitle
+            case .disclosureGroup: return VDisclosureGroupDemoView.navBarTitle
                 
             case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
             case .list: return VListDemoView.navBarTitle
@@ -125,7 +125,7 @@ struct HomeView: View {
             case .textField: VTextFieldDemoView()
 
             case .sheet: VSheetDemoView()
-            case .accordion: VAccordionDemoView()
+            case .disclosureGroup: VDisclosureGroupDemoView()
                 
             case .lazyScrollView: VLazyScrollViewDemoView()
             case .list: VListDemoView()

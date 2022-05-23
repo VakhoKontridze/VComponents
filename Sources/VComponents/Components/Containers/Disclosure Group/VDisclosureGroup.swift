@@ -1,5 +1,5 @@
 //
-//  VAccordion.swift
+//  VDisclosureGroup.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/11/21.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Accordion
+// MARK: - V Disclosure Group
 /// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
 /// Component can be initialized with data or free content.
@@ -20,7 +20,7 @@ import VCore
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
 ///
-///     VAccordion(
+///         VDisclosureGroup(
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
@@ -33,19 +33,19 @@ import VCore
 ///             .padding()
 ///     })
 ///
-public struct VAccordion<HeaderLabel, Content>: View
+public struct VDisclosureGroup<HeaderLabel, Content>: View
     where
         HeaderLabel: View,
         Content: View
 {
     // MARK: Properties
-    private let model: VAccordionModel
+    private let model: VDisclosureGroupModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @Binding private var state: VAccordionState
-    private var internalState: VAccordionInternalState { .init(isEnabled: isEnabled, state: state) }
+    @Binding private var state: VDisclosureGroupState
+    private var internalState: VDisclosureGroupInternalState { .init(isEnabled: isEnabled, state: state) }
     
-    private let headerLabel: VAccordionHeaderLabel<HeaderLabel>
+    private let headerLabel: VDisclosureGroupLabel<HeaderLabel>
     
     private let content: () -> Content
     
@@ -54,8 +54,8 @@ public struct VAccordion<HeaderLabel, Content>: View
     // MARK: Initializers - State
     /// Initializes component with header title and content.
     public init(
-        model: VAccordionModel = .init(),
-        state: Binding<VAccordionState>,
+        model: VDisclosureGroupModel = .init(),
+        state: Binding<VDisclosureGroupState>,
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
@@ -69,8 +69,8 @@ public struct VAccordion<HeaderLabel, Content>: View
     
     /// Initializes component with header and content.
     public init(
-        model: VAccordionModel = .init(),
-        state: Binding<VAccordionState>,
+        model: VDisclosureGroupModel = .init(),
+        state: Binding<VDisclosureGroupState>,
         @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -83,7 +83,7 @@ public struct VAccordion<HeaderLabel, Content>: View
     // MARK: Initializers - Bool
     /// Initializes component with header title and content.
     public init(
-        model: VAccordionModel = .init(),
+        model: VDisclosureGroupModel = .init(),
         isExpanded: Binding<Bool>,
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
@@ -98,7 +98,7 @@ public struct VAccordion<HeaderLabel, Content>: View
     
     /// Initializes component with header and content.
     public init(
-        model: VAccordionModel = .init(),
+        model: VDisclosureGroupModel = .init(),
         isExpanded: Binding<Bool>,
         @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
         @ViewBuilder content: @escaping () -> Content
@@ -194,7 +194,7 @@ public struct VAccordion<HeaderLabel, Content>: View
 }
 
 // MARK: - Helpers
-extension VAccordionInternalState {
+extension VDisclosureGroupInternalState {
     fileprivate var chevronButtonDirection: VChevronButtonDirection {
         switch self {
         case .collapsed: return .down
@@ -205,14 +205,14 @@ extension VAccordionInternalState {
 }
 
 // MARK: - Previews
-struct VAccordion_Previews: PreviewProvider {
+struct VDisclosureGroup_Previews: PreviewProvider {
     @State private static var isExpanded: Bool = true
     
     static var previews: some View {
         ZStack(alignment: .top, content: {
             ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
 
-            VAccordion(
+            VDisclosureGroup(
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
