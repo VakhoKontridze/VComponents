@@ -9,7 +9,8 @@ General
 - Components are reworked
 - Colors have been reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
-- Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines 
+- Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines
+- `VComponentsLocalizationService` is added, that supports localization within the package 
 - Several internal properties are now exposed to public in models
 
 VPrimaryButton

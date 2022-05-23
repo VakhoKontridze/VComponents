@@ -79,13 +79,13 @@ public struct VDialogButton {
     public static func cancel(
         isEnabled: Bool = true,
         action: (() -> Void)? = nil,
-        title: String = "Cancel"
+        title: String? = nil
     ) -> Self {
         self.init(
             buttonType: .cancel,
             isEnabled: isEnabled,
             action: action,
-            title: title
+            title: title ?? VComponentsLocalizationService.shared.localizationProvider.vDialogCancelButtonTitle
         )
     }
     
@@ -94,7 +94,7 @@ public struct VDialogButton {
             buttonType: .ok,
             isEnabled: true,
             action: nil,
-            title: "Ok"
+            title: VComponentsLocalizationService.shared.localizationProvider.vDialogOKButtonTitle
         )
     }
     
