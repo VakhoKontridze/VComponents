@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Alert
-/// Modal component that presents alert when condition is true.
+/// Modal component that presents alert when condition is `true`.
 ///
 /// Model, title, description, and content can be passed as parameters.
 ///
@@ -83,7 +83,7 @@ public struct VAlert<Content>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VAlert` when boolean is true.
+    /// Presents `VAlert` when boolean is `true`.
     public func vAlert<Content>(
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -140,7 +140,7 @@ extension View {
         }
     }
     
-    /// Presents `VAlert` when boolean is true with an `Error`.
+    /// Presents `VAlert` when boolean is `true` with an `Error`.
     public func vAlert<E, Content>(
         isPresented: Binding<Bool>,
         error: E?,

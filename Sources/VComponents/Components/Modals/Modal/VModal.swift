@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Modal
-/// Modal component that draws a background, hosts content, and is present when condition is true.
+/// Modal component that draws a background, hosts content, and is present when condition is `true`.
 ///
 /// Model and header can be passed as parameters.
 ///
@@ -87,7 +87,7 @@ public struct VModal<HeaderLabel, Content>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VModal` when boolean is true.
+    /// Presents `VModal` when boolean is `true`.
     public func vModal<HeaderLabel, Content>(
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Side Bar
-/// Modal component that draws a from left side with background, hosts content, and is present when condition is true.
+/// Modal component that draws a from left side with background, hosts content, and is present when condition is `true`.
 ///
 /// Model can be passed as parameter.
 ///
@@ -48,7 +48,7 @@ public struct VSideBar<Content> where Content: View {
 
 // MARK: - Extension
 extension View {
-    /// Presents `VSideBar` when boolean is true.
+    /// Presents `VSideBar` when boolean is `true`.
     public func vSideBar<Content>(
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,

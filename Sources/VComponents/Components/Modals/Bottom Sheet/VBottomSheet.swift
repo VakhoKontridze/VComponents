@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Bottom Sheet
-/// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is true.
+/// Modal component that draws a background, hosts pull-up content on the bottom of the screen, and is present when condition is `true`.
 ///
 /// Model and header can be passed as parameters.
 ///
@@ -115,7 +115,7 @@ public struct VBottomSheet<HeaderLabel, Content>
 
 // MARK: - Extension
 extension View {
-    /// Presents `VBottomSheet` when boolean is true.
+    /// Presents `VBottomSheet` when boolean is `true`.
     public func vBottomSheet<HeaderLabel, Content>(
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,

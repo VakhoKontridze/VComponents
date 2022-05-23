@@ -83,7 +83,7 @@ VSheet
 VAccordion
 
 - `VAccordion` is renamed to `VDisclosureGroup`
-- Accordion margins are changed from `10` to `15`
+- DisclosureGroup margins are changed from `10` to `15`
 
 VBaseList
 
@@ -133,10 +133,10 @@ VSideBar
 
 VDialog
 
-- Dialog now supports landscape mode
-- Dialog can now be created with `Error`
 - `VDialog` is renamed to `VAlert`
-- Dialog now has option for adding shadow
+- Alert now supports landscape mode
+- Alert can now be created with `Error`
+- Alert now has option for adding shadow
 
 VMenu
 
