@@ -48,7 +48,7 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 ## Guidelines
 
-### Models
+#### Models
 
 Components are not meant to be customized like you would a native SwiftUI component.
 
@@ -120,7 +120,7 @@ var body: some View {
 }
 ```
 
-### Types
+#### Types
 
 Some components take type as parameter. Types are represented as enums, as more can be added in the future.
 
@@ -140,7 +140,7 @@ var body: some View {
 
 Some enums can also contain additional cases, such as `focused` for `VBaseTextField` and `VTextField`.
 
-### Animations
+#### Animations
 
 VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom model.
 
@@ -200,7 +200,7 @@ Project contains demo app, that can be run to showcase all components.
 
 ## Installation
 
-#### Swift Package Manager
+##### Swift Package Manager
 
 Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode and follow the instructions.
 
