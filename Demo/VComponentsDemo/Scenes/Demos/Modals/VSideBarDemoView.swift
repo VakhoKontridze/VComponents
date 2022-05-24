@@ -64,7 +64,7 @@ struct VSideBarDemoView: View {
         VCheckBox(
             model: {
                 var model: VCheckBoxModel = .init()
-                model.layout.titleLabelLineLimit = 1
+                model.layout.titleLineLimit = 1
                 return model
             }(),
             isOn: .init(

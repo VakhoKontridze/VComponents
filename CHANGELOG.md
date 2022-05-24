@@ -41,15 +41,15 @@ VWebLink
 
 VToggle
 
-- `titleLabelLineLimit` is added to `VToggleModel`
+- `titleLineLimit` is added to `VToggleModel`
 
 VCheckBox
 
-- `titleLabelLineLimit` is added to `VCHeckBoxModel`
+- `titleLineLimit` is added to `VCHeckBoxModel`
 
 VRadioButton
 
-- `titleLabelLineLimit` is added to `VRadioButtonModel`
+- `titleLineLimit` is added to `VRadioButtonModel`
 
 VSegmentedPicker
 

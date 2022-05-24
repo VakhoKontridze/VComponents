@@ -53,7 +53,7 @@ public struct VRadioButtonModel {
         public var radioLabelSpacing: CGFloat = checkBoxReference.layout.checkBoxLabelSpacing
         
         /// Title label line limit. Defaults to `nil`.
-        public var titleLabelLineLimit: Int? = checkBoxReference.layout.titleLabelLineLimit
+        public var titleLineLimit: Int? = checkBoxReference.layout.titleLineLimit
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

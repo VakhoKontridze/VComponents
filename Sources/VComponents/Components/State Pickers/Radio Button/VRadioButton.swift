@@ -129,7 +129,7 @@ public struct VRadioButton<Label>: View where Label: View {
 
                     VBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: .multiLine(alignment: .leading, lineLimit: model.layout.titleLabelLineLimit),
+                            type: .multiLine(alignment: .leading, lineLimit: model.layout.titleLineLimit),
                             color: model.colors.title.for(internalState),
                             font: model.fonts.title,
                             title: title

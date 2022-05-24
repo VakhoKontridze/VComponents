@@ -55,7 +55,7 @@ public struct VCheckBoxModel {
         public var checkBoxLabelSpacing: CGFloat = 0
         
         /// Title label line limit. Defaults to `nil`.
-        public var titleLabelLineLimit: Int? = toggleReference.layout.titleLabelLineLimit
+        public var titleLineLimit: Int? = toggleReference.layout.titleLineLimit
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

@@ -223,7 +223,7 @@ public struct VBottomSheetModel {
         /// Grabber color.
         public var grabber: Color = .init(componentAsset: "BottomSheet.Grabber")
         
-        /// Title header color.
+        /// Header title color.
         ///
         /// Only applicable when using `init`with title.
         public var headerTitle: Color = modalReference.colors.headerTitle

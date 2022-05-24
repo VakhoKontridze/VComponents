@@ -109,7 +109,7 @@ public struct VModalModel {
         /// Shadow offset. Defaults to `zero`.
         public var shadowOffset: CGSize = .zero
         
-        /// Title header color.
+        /// Header title color.
         ///
         /// Only applicable when using `init`with title.
         public var headerTitle: Color = ColorBook.primary
