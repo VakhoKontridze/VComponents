@@ -24,6 +24,7 @@ struct VProgressBarDemoView: View {
         
         var model: VProgressBarModel = .init()
         model.animations.progress = useAnimation ? (defaultModel.animations.progress != nil ? defaultModel.animations.progress : .default) : nil
+        
         return model
     }
 
