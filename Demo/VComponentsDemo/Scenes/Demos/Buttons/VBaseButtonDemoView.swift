@@ -39,7 +39,7 @@ struct VBaseButtonDemoView: View {
                     label: {
                         Circle()
                             .frame(dimension: 200)
-                            .foregroundColor(Color.pink.opacity(pressState.buttonOpacity))
+                            .foregroundColor(ColorBook.accent.opacity(pressState.buttonOpacity))
                     }
                 )
                 

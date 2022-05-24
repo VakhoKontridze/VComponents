@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Base Button
 /// Core component that is used throughout the library as button.
@@ -36,42 +37,7 @@ import SwiftUI
 ///         )
 ///     }
 ///
-public struct VBaseButton<Label>: View where Label: View {
-    // MARK: Properties
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    
-    private var gestureHandler: (VBaseButtonGestureState) -> Void
-    
-    private let label: () -> Label
-    
-    // MARK: Initializers
-    /// Initializes component with gesture handler and label.
-    public init(
-        gesture gestureHandler: @escaping (VBaseButtonGestureState) -> Void,
-        @ViewBuilder label: @escaping () -> Label
-    ) {
-        self.gestureHandler = gestureHandler
-        self.label = label
-    }
-    
-    /// Initializes component with action and label.
-    public init(
-        action: @escaping () -> Void,
-        @ViewBuilder label: @escaping () -> Label
-    ) {
-        self.gestureHandler = { gestureState in if gestureState.isClicked { action() } }
-        self.label = label
-    }
-
-    // MARK: Body
-    public var body: some View {
-        label()
-            .overlay(VBaseButtonViewRepresentable(
-                isEnabled: isEnabled,
-                gesture: gestureHandler
-            ))
-    }
-}
+public typealias VBaseButton = VCore.SwiftUIBaseButton
 
 // MARK: - Preview
 struct VBaseButton_Previews: PreviewProvider {
