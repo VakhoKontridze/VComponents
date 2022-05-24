@@ -10,10 +10,10 @@ import SwiftUI
 // MARK: - V Spinner Dashed
 struct VSpinnerDashed: View {
     // MARK: Properties
-    private let model: VSpinnerModelDashed
+    private let model: VSpinnerDashedModel
     
     // MARK: Initializers
-    init(model: VSpinnerModelDashed) {
+    init(model: VSpinnerDashedModel) {
         self.model = model
     }
 

@@ -10,12 +10,12 @@ import SwiftUI
 // MARK: - V Spinner Continous
 struct VSpinnerContinous: View {
     // MARK: Properties
-    private let model: VSpinnerModelContinous
+    private let model: VSpinnerContinousModel
     
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers
-    init(model: VSpinnerModelContinous) {
+    init(model: VSpinnerContinousModel) {
         self.model = model
     }
 
@@ -30,7 +30,7 @@ struct VSpinnerContinous: View {
             .frame(width: model.layout.dimension, height: model.layout.dimension)
             .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
             .onAppear(perform: {
-                DispatchQueue.main.async(execute: { // Fixes SwiftUI 3.0 bug with NavigationView
+                DispatchQueue.main.async(execute: {
                     withAnimation(model.animations.spinning.repeatForever(autoreverses: false), {
                         isAnimating.toggle()
                     })

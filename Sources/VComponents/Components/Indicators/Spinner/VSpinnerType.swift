@@ -22,7 +22,7 @@ public struct VSpinnerType {
     
     /// Continos spinner.
     public static func continous(
-        model: VSpinnerModelContinous = .init()
+        model: VSpinnerContinousModel = .init()
     ) -> Self {
         .init(spinnerType: .continous(
             model: model
@@ -31,7 +31,7 @@ public struct VSpinnerType {
     
     /// Dashed spinner.
     public static func dashed(
-        model: VSpinnerModelDashed = .init()
+        model: VSpinnerDashedModel = .init()
     ) -> Self {
         .init(spinnerType: .dashed(
             model: model
@@ -44,6 +44,6 @@ public struct VSpinnerType {
 
 // MARK: - _ V Spinner Type
 enum _VSpinnerType {
-    case continous(model: VSpinnerModelContinous)
-    case dashed(model: VSpinnerModelDashed)
+    case continous(model: VSpinnerContinousModel)
+    case dashed(model: VSpinnerDashedModel)
 }

@@ -23,7 +23,7 @@ import SwiftUI
 ///             action: { isPresented = true },
 ///             title: "Present"
 ///         )
-///             .vToast(isPresented: $isPresented, modal: {
+///             .vToast(isPresented: $isPresented, toast: {
 ///                 VToast(title: "Lorem ipsum dolor sit amet")
 ///             })
 ///     }

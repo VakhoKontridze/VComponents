@@ -1,5 +1,5 @@
 //
-//  VSpinnerModelContinous.swift
+//  VSpinnerContinousModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - V Spinner Model Continous
+// MARK: - V Spinner Continous Model
 /// Model that describes UI.
-public struct VSpinnerModelContinous {
+public struct VSpinnerContinousModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()

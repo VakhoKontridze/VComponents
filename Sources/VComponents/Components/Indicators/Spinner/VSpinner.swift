@@ -23,7 +23,7 @@ public struct VSpinner: View {
     private let spinnerType: VSpinnerType
     
     // MARK: Initializers
-    /// Initializes component.
+    /// Initializes component with type.
     public init(
         type spinnerType: VSpinnerType = .default
     ) {

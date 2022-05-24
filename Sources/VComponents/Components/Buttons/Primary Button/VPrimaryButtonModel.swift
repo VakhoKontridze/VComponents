@@ -154,8 +154,8 @@ public struct VPrimaryButtonModel {
     }
     
     // MARK: Sub-Models
-    var spinnerSubModel: VSpinnerModelContinous {
-        var model: VSpinnerModelContinous = .init()
+    var spinnerSubModel: VSpinnerContinousModel {
+        var model: VSpinnerContinousModel = .init()
         model.layout.dimension = layout.loaderDimension
         model.colors.spinner = colors.loader
         return model
