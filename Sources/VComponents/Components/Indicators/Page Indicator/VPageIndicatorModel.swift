@@ -28,7 +28,7 @@ public struct VPageIndicatorModel {
 
     // MARK: Layout
     /// Sub-model containing layout properties.
-    public struct Layout { // FIXME: Namings
+    public struct Layout {
         // MARK: Properties
         /// Dot dimension. Defaults to `10`.
         public var dotDimension: CGFloat = 10

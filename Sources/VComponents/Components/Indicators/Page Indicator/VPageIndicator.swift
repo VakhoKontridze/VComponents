@@ -45,7 +45,6 @@ public struct VPageIndicator: View {
     private let total: Int
     
     private let selectedIndex: Int
-    @State private var animatableSelectedIndex: Int?
 
     // MARK: Intializers
     /// Initializes component with total and selected index.
@@ -63,15 +62,13 @@ public struct VPageIndicator: View {
 
     // MARK: Body
     public var body: some View {
-        syncInternalStateWithState()
-        
-        return Group(content: {
+        Group(content: {
             switch pageIndicatorType._pageIndicatorType {
             case .finite:
                 VPageIndicatorFinite(
                     model: model,
                     total: total,
-                    selectedIndex: animatableSelectedIndex ?? selectedIndex
+                    selectedIndex: selectedIndex
                 )
             
             case .infinite(let visible, let center):
@@ -80,7 +77,7 @@ public struct VPageIndicator: View {
                     visible: visible,
                     center: center,
                     total: total,
-                    selectedIndex: animatableSelectedIndex ?? selectedIndex
+                    selectedIndex: selectedIndex
                 )
             
             case .automatic(let visible, let center, let finiteLimit):
@@ -90,19 +87,11 @@ public struct VPageIndicator: View {
                     center: center,
                     finiteLimit: finiteLimit,
                     total: total,
-                    selectedIndex: animatableSelectedIndex ?? selectedIndex
+                    selectedIndex: selectedIndex
                 )
             }
         })
-    }
-
-    // MARK: State Syncs
-    private func syncInternalStateWithState() {
-        DispatchQueue.main.async(execute: {
-            withAnimation(model.animations.transition, {
-                animatableSelectedIndex = selectedIndex
-            })
-        })
+            .animation(model.animations.transition, value: selectedIndex)
     }
 }
 
