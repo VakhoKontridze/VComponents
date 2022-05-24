@@ -168,7 +168,7 @@ Other
 
 General
 
-- `showIndicator` property is moved from `Misc` to `Layout` in the models, and empty `Misc` object is deprecated
+- `showIndicator` property is moved from `Misc` to `Layout` in the models, and empty `Misc` objects are deprecated
 
 VToast
 
@@ -338,7 +338,9 @@ Bug fixes and improvements
 
 #### [1.1.0(2)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.1.0) — *2021 02 09*
 
-Documentation on public declarations, methods, and properties are added
+General
+
+- Documentation on public declarations, methods, and properties are added
 
 #### [1.0.0(1)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.0.0) — *2021 02 07*
 
