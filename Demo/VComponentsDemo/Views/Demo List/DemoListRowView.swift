@@ -37,12 +37,12 @@ struct DemoListRowView<Content>: View where Content: View {
     // MARK: Body
     @ViewBuilder var body: some View {
         switch rowType {
-        case .link(let destination): VNavigationLink(destination: { destination }, label: { rowView })
-        case .custom(let action): Button(action: action, label: { rowView })
+        case .link(let destination): VNavigationLink(destination: { destination }, label: { row })
+        case .custom(let action): Button(action: action, label: { row })
         }
     }
 
-    private var rowView: some View {
+    private var row: some View {
         HStack(spacing: 0, content: {
             VText(
                 color: ColorBook.primary,

@@ -59,10 +59,10 @@ public struct VSheet<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         contentView
-            .background(sheetView)
+            .background(sheet)
     }
     
-    private var sheetView: some View {
+    private var sheet: some View {
         model.colors.background
             .cornerRadius(
                 model.layout.cornerRadius,
