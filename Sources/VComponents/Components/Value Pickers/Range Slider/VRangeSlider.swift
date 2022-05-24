@@ -47,6 +47,8 @@ public struct VRangeSlider: View {
     private let actionHigh: ((Bool) -> Void)?
     
     private let isLayoutValid: Bool
+    
+    @State private var sliderWidth: CGFloat = 0
 
     // MARK: Initializers
     /// Initializes component with diffrene, and low and high values.
@@ -105,19 +107,16 @@ public struct VRangeSlider: View {
     }
     
     private var validBody: some View {
-        GeometryReader(content: { proxy in
-            ZStack(alignment: .leading, content: {
-                track
-                progress(in: proxy)
-            })
-                .mask(RoundedRectangle(cornerRadius: model.layout.cornerRadius))
-
-                .overlay(thumb(in: proxy, thumb: .low))
-                .overlay(thumb(in: proxy, thumb: .high))
-
-                .disabled(!internalState.isEnabled)
+        ZStack(alignment: .leading, content: {
+            track
+            progress
         })
+            .mask(RoundedRectangle(cornerRadius: model.layout.cornerRadius))
+            .overlay(thumb(.low))
+            .overlay(thumb(.high))
             .frame(height: model.layout.height)
+            .readSize(onChange: { sliderWidth = $0.width })
+            .disabled(!internalState.isEnabled)
     }
 
     private var track: some View {
@@ -125,15 +124,15 @@ public struct VRangeSlider: View {
             .foregroundColor( model.colors.track.for(internalState))
     }
 
-    private func progress(in proxy: GeometryProxy) -> some View {
+    private var progress: some View {
         Rectangle()
-            .padding(.leading, progress(in: proxy, thumb: .low))
-            .padding(.trailing, progress(in: proxy, thumb: .high))
+            .padding(.leading, progress(.low))
+            .padding(.trailing, progress(.high))
 
             .foregroundColor(model.colors.progress.for(internalState))
     }
 
-    private func thumb(in proxy: GeometryProxy, thumb: Thumb) -> some View {
+    private func thumb(_ thumb: Thumb) -> some View {
         Group(content: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
@@ -144,13 +143,13 @@ public struct VRangeSlider: View {
                     .strokeBorder(model.colors.thumbBorder.for(internalState), lineWidth: model.layout.thumbBorderWidth)
             })
                 .frame(dimension: model.layout.thumbDimension)
-                .offset(x: thumbOffset(in: proxy, thumb: thumb))
+                .offset(x: thumbOffset(thumb))
         })
             .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
 
             .gesture(
                 DragGesture(minimumDistance: 0)
-                    .onChanged({ dragChanged(dragValue: $0, in: proxy, thumb: thumb) })
+                    .onChanged({ dragChanged(dragValue: $0, thumb: thumb) })
                     .onEnded({ dragEnded(dragValue: $0, thumb: thumb) })
             )
     }
@@ -159,11 +158,11 @@ public struct VRangeSlider: View {
     fileprivate enum Thumb { case low, high }
 
     // MARK: Drag
-    private func dragChanged(dragValue: DragGesture.Value, in proxy: GeometryProxy, thumb: Thumb) {
+    private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
         let rawValue: Double = {
             let value: Double = .init(dragValue.location.x)
             let range: Double = max - min
-            let width: Double = .init(proxy.size.width)
+            let width: Double = .init(sliderWidth)
 
             return min + (value / width) * range
         }()
@@ -214,7 +213,7 @@ public struct VRangeSlider: View {
     }
 
     // MARK: Progress
-    private func progress(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
+    private func progress(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
             case .low: return .init(valueLow - min)
@@ -222,7 +221,7 @@ public struct VRangeSlider: View {
             }
         }()
         let range: CGFloat = .init(max - min)
-        let width: CGFloat = proxy.size.width
+        let width: CGFloat = sliderWidth
 
         switch thumb {
         case .low: return (value / range) * width
@@ -231,10 +230,10 @@ public struct VRangeSlider: View {
     }
 
     // MARK: Thumb
-    private func thumbOffset(in proxy: GeometryProxy, thumb: Thumb) -> CGFloat {
-        let progressW: CGFloat = progress(in: proxy, thumb: thumb)
+    private func thumbOffset(_ thumb: Thumb) -> CGFloat {
+        let progressW: CGFloat = progress(thumb)
         let thumbW: CGFloat = model.layout.thumbDimension
-        let width: CGFloat = proxy.size.width
+        let width: CGFloat = sliderWidth
 
         switch thumb {
         case .low: return progressW - thumbW / 2

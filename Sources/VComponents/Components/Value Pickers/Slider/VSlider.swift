@@ -37,6 +37,8 @@ public struct VSlider: View {
     
     private let action: ((Bool) -> Void)?
     
+    @State private var sliderWidth: CGFloat = 0
+    
     private var hasThumb: Bool { model.layout.thumbDimension > 0 }
     
     // MARK: Initializers
@@ -65,25 +67,22 @@ public struct VSlider: View {
 
     // MARK: Body
     public var body: some View {
-        GeometryReader(content: { proxy in
-            ZStack(alignment: .leading, content: {
-                track
-                progress(in: proxy)
-            })
-                .mask(RoundedRectangle(cornerRadius: model.layout.cornerRadius))
-            
-                .overlay(thumb(in: proxy))
-            
-                .gesture(
-                    DragGesture(minimumDistance: 0)
-                        .onChanged({ dragChanged(dragValue: $0, in: proxy) })
-                        .onEnded(dragEnded)
-                )
-                .disabled(!internalState.isEnabled)
+        ZStack(alignment: .leading, content: {
+            track
+            progress
         })
+            .mask(RoundedRectangle(cornerRadius: model.layout.cornerRadius))
+            .overlay(thumb)
             .frame(height: model.layout.height)
+            .readSize(onChange: { sliderWidth = $0.width })
             .padding(.horizontal, model.layout.thumbDimension / 2)
             .animation(model.animations.progress, value: value)
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged(dragChanged)
+                    .onEnded(dragEnded)
+            )
+            .disabled(!internalState.isEnabled)
     }
 
     private var track: some View {
@@ -91,14 +90,14 @@ public struct VSlider: View {
             .foregroundColor(model.colors.track.for(internalState))
     }
 
-    private func progress(in proxy: GeometryProxy) -> some View {
+    private var progress: some View {
         Rectangle()
-            .frame(width: progressWidth(in: proxy))
+            .frame(width: progressWidth)
 
             .foregroundColor(model.colors.progress.for(internalState))
     }
     
-    @ViewBuilder private func thumb(in proxy: GeometryProxy) -> some View {
+    @ViewBuilder private var thumb: some View {
         if hasThumb {
             Group(content: {
                 ZStack(content: {
@@ -110,7 +109,7 @@ public struct VSlider: View {
                         .strokeBorder(model.colors.thumbBorder.for(internalState), lineWidth: model.layout.thumbBorderWidth)
                 })
                     .frame(dimension: model.layout.thumbDimension)
-                    .offset(x: thumbOffset(in: proxy))
+                    .offset(x: thumbOffset)
             })
                 .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
                 .allowsHitTesting(false)
@@ -118,11 +117,11 @@ public struct VSlider: View {
     }
 
     // MARK: Drag
-    private func dragChanged(dragValue: DragGesture.Value, in proxy: GeometryProxy) {
+    private func dragChanged(dragValue: DragGesture.Value) {
         let rawValue: Double = {
             let value: Double = .init(dragValue.location.x)
             let range: Double = max - min
-            let width: Double = .init(proxy.size.width)
+            let width: Double = .init(sliderWidth)
 
             return (value / width) * range + min
         }()
@@ -144,17 +143,17 @@ public struct VSlider: View {
     }
 
     // MARK: Progress
-    private func progressWidth(in proxy: GeometryProxy) -> CGFloat {
+    private var progressWidth: CGFloat {
         let value: CGFloat = .init(value - min)
         let range: CGFloat = .init(max - min)
-        let width: CGFloat = proxy.size.width
+        let width: CGFloat = sliderWidth
 
         return (value / range) * width
     }
 
     // MARK: Thumb Offset
-    private func thumbOffset(in proxy: GeometryProxy) -> CGFloat {
-        let progressW: CGFloat = progressWidth(in: proxy)
+    private var thumbOffset: CGFloat {
+        let progressW: CGFloat = progressWidth
         let thumbW: CGFloat = model.layout.thumbDimension
         let offset: CGFloat = progressW - thumbW / 2
         
