@@ -13,7 +13,7 @@ struct VSheetDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Sheet" }
     
-    @State private var roundedCorners: _VSheetRoundedCorners = VSheetModel.Layout().roundedCorners.helperType
+    @State private var roundedCorners: VSheetRoundedCorners = VSheetModel.Layout().roundedCorners.sheetRoundedCorners
 
     private var model: VSheetModel {
         var model: VSheetModel = .init()
@@ -46,7 +46,7 @@ struct VSheetDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VSheetRoundedCorners: Int, PickableTitledEnumeration {
+private enum VSheetRoundedCorners: Int, PickableTitledEnumeration {
     case all
     case top
     case bottom
@@ -75,7 +75,7 @@ private enum _VSheetRoundedCorners: Int, PickableTitledEnumeration {
 }
 
 extension UIRectCorner {
-    fileprivate var helperType: _VSheetRoundedCorners {
+    fileprivate var sheetRoundedCorners: VSheetRoundedCorners {
         switch self {
         case .allCorners: return .all
         case [.topLeft, .topRight]: return .top

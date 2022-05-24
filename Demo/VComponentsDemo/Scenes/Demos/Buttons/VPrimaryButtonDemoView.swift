@@ -65,7 +65,7 @@ struct VPrimaryButtonDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { VPrimaryButtonState(isEnabled: isEnabled, isLoading: isLoading) },
+                get: { VPrimaryButtonInternalState(isEnabled: isEnabled, isLoading: isLoading) },
                 set: { state in
                     isEnabled = state != .disabled // Loading is also type of disabled
                     isLoading = state == .loading
@@ -85,7 +85,7 @@ struct VPrimaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPrimaryButtonState: Int, PickableTitledEnumeration {
+private enum VPrimaryButtonInternalState: Int, PickableTitledEnumeration {
     case enabled
     case disabled
     case loading

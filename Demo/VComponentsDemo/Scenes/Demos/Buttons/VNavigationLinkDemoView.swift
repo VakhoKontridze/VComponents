@@ -34,7 +34,7 @@ struct VNavigationLinkDemoView: View {
     private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { VNavigationLinkButtonState(isEnabled: isEnabled) },
+                get: { VNavigationLinkButtonInternalState(isEnabled: isEnabled) },
                 set: { isEnabled = $0 == .enabled }
             ),
             headerTitle: "State"
@@ -50,7 +50,7 @@ struct VNavigationLinkDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VNavigationLinkButtonState = VSecondaryButtonState
+private typealias VNavigationLinkButtonInternalState = VSecondaryButtonInternalState
 
 // MARK: - Preview
 struct VNavigationLinkDemoView_Previews: PreviewProvider {

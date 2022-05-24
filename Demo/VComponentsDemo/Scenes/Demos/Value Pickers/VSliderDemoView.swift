@@ -159,7 +159,7 @@ struct VSliderDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VSliderState = VSecondaryButtonState
+private typealias VSliderState = VSecondaryButtonInternalState
 
 private enum SliderThumbType: Int, PickableTitledEnumeration {
     case standard

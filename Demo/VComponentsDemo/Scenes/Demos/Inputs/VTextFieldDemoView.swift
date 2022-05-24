@@ -81,7 +81,7 @@ struct VTextFieldDemoView: View {
         DemoViewSettingsSection(content: {
             VSegmentedPicker(
                 selection: .init(
-                    get: { _VTextFieldState(isEnabled: isEnabled, isFocused: isFocused) },
+                    get: { VTextFieldInternalState(isEnabled: isEnabled, isFocused: isFocused) },
                     set: { state in
                         isEnabled = state != .disabled
                         isFocused = state == .focused
@@ -151,7 +151,7 @@ struct VTextFieldDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VTextFieldState: PickableTitledEnumeration {
+private enum VTextFieldInternalState: PickableTitledEnumeration {
     case enabled
     case focused
     case disabled

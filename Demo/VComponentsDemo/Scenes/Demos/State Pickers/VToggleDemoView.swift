@@ -48,7 +48,7 @@ struct VToggleDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { _VToggleState(isEnabled: isEnabled, state: state) },
+                get: { VToggleInternalState(isEnabled: isEnabled, state: state) },
                 set: { state in
                     isEnabled = state != .disabled
                     self.state = state.state
@@ -68,7 +68,7 @@ struct VToggleDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VToggleState: Int, PickableTitledEnumeration {
+private enum VToggleInternalState: Int, PickableTitledEnumeration {
     case off
     case on
     case disabled

@@ -105,7 +105,7 @@ struct VSegmentedPickerDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VSegmentedPickerState = VSecondaryButtonState
+private typealias VSegmentedPickerState = VSecondaryButtonInternalState
 
 enum VSegmentedPickerContent: Int, PickableTitledEnumeration {
     case title

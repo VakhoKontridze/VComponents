@@ -61,7 +61,7 @@ struct VCheckBoxDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { _VCheckBoxState(isEnabled: isEnabled, state: state) },
+                get: { VCheckBoxInternalState(isEnabled: isEnabled, state: state) },
                 set: { state in
                     isEnabled = state != .disabled
                     self.state = state.state
@@ -83,7 +83,7 @@ struct VCheckBoxDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VCheckBoxState: Int, PickableTitledEnumeration {
+private enum VCheckBoxInternalState: Int, PickableTitledEnumeration {
     case off
     case on
     case indeterminate

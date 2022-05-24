@@ -47,7 +47,7 @@ struct VLinkDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VLinkState = VSecondaryButtonState
+private typealias VLinkState = VSecondaryButtonInternalState
 
 // MARK: - Preview
 struct VWebLinkDemoView_Previews: PreviewProvider {

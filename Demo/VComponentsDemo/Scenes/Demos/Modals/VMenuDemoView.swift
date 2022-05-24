@@ -63,7 +63,7 @@ struct VMenuDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VMenuState = VSecondaryButtonState
+private typealias VMenuState = VSecondaryButtonInternalState
 
 // MARK: - Preview
 struct VMenuDemoView_Previews: PreviewProvider {

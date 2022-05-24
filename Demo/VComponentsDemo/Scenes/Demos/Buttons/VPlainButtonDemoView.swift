@@ -54,7 +54,7 @@ struct VPlainButtonDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { VPlainButtonState(isEnabled: isEnabled) },
+                get: { VPlainButtonInternalState(isEnabled: isEnabled) },
                 set: { isEnabled = $0 == .enabled }
             ),
             headerTitle: "State"
@@ -71,7 +71,7 @@ struct VPlainButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VPlainButtonState = VSecondaryButtonState
+private typealias VPlainButtonInternalState = VSecondaryButtonInternalState
 
 private enum VPlainButtonLabel: Int, PickableTitledEnumeration {
     case title

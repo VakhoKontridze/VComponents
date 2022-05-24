@@ -61,7 +61,7 @@ struct VRadioButtonDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { _VRadioButtonState(isEnabled: isEnabled, state: state) },
+                get: { VRadioButtonInternalState(isEnabled: isEnabled, state: state) },
                 set: { state in
                     isEnabled = state != .disabled
                     self.state = state.state
@@ -81,7 +81,7 @@ struct VRadioButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VRadioButtonState: Int, PickableTitledEnumeration {
+private enum VRadioButtonInternalState: Int, PickableTitledEnumeration {
     case off
     case on
     case disabled

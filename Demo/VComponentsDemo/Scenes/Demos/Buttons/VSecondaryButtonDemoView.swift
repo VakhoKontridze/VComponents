@@ -70,7 +70,7 @@ struct VSecondaryButtonDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { VSecondaryButtonState(isEnabled: isEnabled) },
+                get: { VSecondaryButtonInternalState(isEnabled: isEnabled) },
                 set: { isEnabled = $0 == .enabled }
             ),
             headerTitle: "State"
@@ -89,7 +89,7 @@ struct VSecondaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-enum VSecondaryButtonState: Int, PickableTitledEnumeration {
+enum VSecondaryButtonInternalState: Int, PickableTitledEnumeration {
     case enabled
     case disabled
     

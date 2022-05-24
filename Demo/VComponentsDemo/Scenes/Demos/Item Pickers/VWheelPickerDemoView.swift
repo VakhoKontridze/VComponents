@@ -71,7 +71,7 @@ struct VWheelPickerDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VWheelPickerState = VSecondaryButtonState
+private typealias VWheelPickerState = VSecondaryButtonInternalState
 
 private typealias VWheelPickerContent = VSegmentedPickerContent
 

@@ -44,7 +44,7 @@ struct VStepperDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VStepperState = VSecondaryButtonState
+private typealias VStepperState = VSecondaryButtonInternalState
 
 // MARK: - Preview
 struct VStepperDemoView_Previews: PreviewProvider {

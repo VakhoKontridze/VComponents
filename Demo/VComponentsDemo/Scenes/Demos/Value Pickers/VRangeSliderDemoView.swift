@@ -128,7 +128,7 @@ struct VRangeSliderDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VRangeSliderState =  VSecondaryButtonState
+private typealias VRangeSliderState =  VSecondaryButtonInternalState
 
 private enum RangeSliderThumbType: Int, PickableTitledEnumeration {
     case standard

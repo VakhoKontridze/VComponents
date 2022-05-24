@@ -70,7 +70,7 @@ struct VMenuPickerDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VMenuPickerState = VSecondaryButtonState
+private typealias VMenuPickerState = VSecondaryButtonInternalState
 
 private typealias VMenuPickerContent = VSegmentedPickerContent
 

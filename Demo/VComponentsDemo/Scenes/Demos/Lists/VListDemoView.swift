@@ -13,7 +13,7 @@ struct VListDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "List" }
     
-    @State private var layoutType: _VListLayoutType = .default
+    @State private var layoutType: VListLayoutTypeHelper = .default
     @State private var rowCount: Int = 5
 
     // MARK: Body
@@ -55,7 +55,7 @@ struct VListDemoView: View {
 }
 
 // MARK: - Helpers
-enum _VListLayoutType: Int, PickableTitledEnumeration {
+enum VListLayoutTypeHelper: Int, PickableTitledEnumeration {
     case fixed
     case flexible
     case constrained
@@ -104,7 +104,7 @@ enum _VListLayoutType: Int, PickableTitledEnumeration {
 }
 
 extension VListLayoutType {
-    fileprivate var helperType: _VListLayoutType {
+    fileprivate var helperType: VListLayoutTypeHelper {
         switch self {
         case .fixed: return .fixed
         case .flexible: return .flexible

@@ -61,7 +61,7 @@ struct VDisclosureGroupDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { _VDisclosureGroupState(isEnabled: isEnabled, isExpanded: isExpanded) },
+                get: { VDisclosureGroupInternalState(isEnabled: isEnabled, isExpanded: isExpanded) },
                 set: { state in
                     isEnabled = state != .disabled
                     isExpanded = state == .expanded
@@ -77,7 +77,7 @@ struct VDisclosureGroupDemoView: View {
 }
 
 // MARK: - Helpers
-private enum _VDisclosureGroupState: PickableTitledEnumeration {
+private enum VDisclosureGroupInternalState: PickableTitledEnumeration {
     case collapsed
     case expanded
     case disabled
