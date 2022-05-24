@@ -29,7 +29,7 @@ struct _VToast: View {
     // MARK: Initializers
     init(
         model: VToastModel,
-        toastType: VToastType,
+        type toastType: VToastType,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         title: String

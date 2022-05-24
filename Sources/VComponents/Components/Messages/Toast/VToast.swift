@@ -65,7 +65,7 @@ extension View {
                 content: {
                     _VToast(
                         model: toast.model,
-                        toastType: toast.toastType,
+                        type: toast.toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: toast.title
