@@ -153,8 +153,8 @@ public struct VAlertModel {
         /// Shadow offset. Defaults to `zero`.
         public var shadowOffset: CGSize = .zero
         
-        /// Blinding color.
-        public var blinding: Color = modalReference.colors.blinding
+        /// Dimming view color.
+        public var dimmingView: Color = modalReference.colors.dimmingView
         
         /// Title color.
         public var title: Color = ColorBook.primary

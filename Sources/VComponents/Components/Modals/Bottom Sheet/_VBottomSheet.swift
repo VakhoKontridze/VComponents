@@ -58,7 +58,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     // MARK: Body
     var body: some View {
         ZStack(alignment: .bottom, content: {
-            blinding
+            dimmingView
             bottomSheet
         })
             .ignoresSafeArea(.container, edges: .all)
@@ -71,8 +71,8 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             .onChange(of: interfaceOrientationChangeObserver.orientation, perform: { _ in resetHeightFromOrientationChange() })
     }
     
-    private var blinding: some View {
-        model.colors.blinding
+    private var dimmingView: some View {
+        model.colors.dimmingView
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })

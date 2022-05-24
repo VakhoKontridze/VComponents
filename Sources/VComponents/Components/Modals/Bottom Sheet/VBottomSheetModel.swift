@@ -217,8 +217,8 @@ public struct VBottomSheetModel {
         /// Shadow offset. Defaults to `zero`.
         public var shadowOffset: CGSize = modalReference.colors.shadowOffset
         
-        /// Blinding color.
-        public var blinding: Color = modalReference.colors.blinding
+        /// Dimming view color.
+        public var dimmingView: Color = modalReference.colors.dimmingView
         
         /// Grabber color.
         public var grabber: Color = .init(componentAsset: "BottomSheet.Grabber")

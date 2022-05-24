@@ -145,7 +145,7 @@ extension Color {
  60.60.60 @ 30
  85.85.85 @ 60
  
- Modal.Blinding
+ Modal.DimmingView
  100.100.100 @ 30
  0.0.0 @ 60
  

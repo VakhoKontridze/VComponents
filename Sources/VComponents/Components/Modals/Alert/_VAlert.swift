@@ -67,7 +67,7 @@ struct _VAlert<Content>: View
     // MARK: Body
     var body: some View {
         ZStack(content: {
-            blinding
+            dimmingView
             alert
         })
             .ignoresSafeArea(.container, edges: .horizontal)
@@ -79,8 +79,8 @@ struct _VAlert<Content>: View
             )
     }
     
-    private var blinding: some View {
-        model.colors.blinding
+    private var dimmingView: some View {
+        model.colors.dimmingView
             .ignoresSafeArea(.container, edges: .vertical)
     }
     

@@ -48,7 +48,7 @@ struct _VModal<HeaderLabel, Content>: View
     // MARK: Body
     var body: some View {
         ZStack(content: {
-            blinding
+            dimmingView
             modal
         })
             .ignoresSafeArea(.container, edges: .all)
@@ -60,8 +60,8 @@ struct _VModal<HeaderLabel, Content>: View
             )
     }
     
-    private var blinding: some View {
-        model.colors.blinding
+    private var dimmingView: some View {
+        model.colors.dimmingView
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })

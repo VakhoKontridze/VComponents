@@ -38,7 +38,7 @@ struct _VSideBar<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         ZStack(alignment: .leading, content: {
-            blinding
+            dimmingView
             sideBar
         })
             .ignoresSafeArea(.container, edges: .all)
@@ -50,8 +50,8 @@ struct _VSideBar<Content>: View where Content: View {
             )
     }
     
-    private var blinding: some View {
-        model.colors.blinding
+    private var dimmingView: some View {
+        model.colors.dimmingView
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })

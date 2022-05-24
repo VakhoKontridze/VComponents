@@ -127,8 +127,8 @@ public struct VModalModel {
         /// Header divider color.
         public var headerDivider: Color = disclosureGroupReference.colors.headerDivider
         
-        /// Blinding color.
-        public var blinding: Color = .init(componentAsset: "Modal.Blinding")
+        /// Dimming view color.
+        public var dimmingView: Color = .init(componentAsset: "Modal.DimmingView")
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
