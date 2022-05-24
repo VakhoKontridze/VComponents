@@ -160,16 +160,15 @@ extension View {
             self
             
         case let _item?:
-            self
-                .vBottomSheet(
-                    isPresented: .init(
-                        get: { true },
-                        set: { _ in item.wrappedValue = nil }
-                    ),
-                    onPresent: presentHandler,
-                    onDismiss: dismissHandler,
-                    bottomSheet: { bottomSheet(_item) }
-                )
+            vBottomSheet(
+                isPresented: .init(
+                    get: { true },
+                    set: { _ in item.wrappedValue = nil }
+                ),
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
+                bottomSheet: { bottomSheet(_item) }
+            )
         }
     }
 }

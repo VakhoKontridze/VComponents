@@ -127,16 +127,15 @@ extension View {
             self
             
         case let _item?:
-            self
-                .vAlert(
-                    isPresented: .init(
-                        get: { true },
-                        set: { _ in item.wrappedValue = nil }
-                    ),
-                    onPresent: presentHandler,
-                    onDismiss: dismissHandler,
-                    alert: { alert(_item) }
-                )
+            vAlert(
+                isPresented: .init(
+                    get: { true },
+                    set: { _ in item.wrappedValue = nil }
+                ),
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
+                alert: { alert(_item) }
+            )
         }
     }
     

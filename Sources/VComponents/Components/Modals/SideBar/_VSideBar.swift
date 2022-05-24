@@ -41,7 +41,6 @@ struct _VSideBar<Content>: View where Content: View {
             blinding
             sideBar
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: .all)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)

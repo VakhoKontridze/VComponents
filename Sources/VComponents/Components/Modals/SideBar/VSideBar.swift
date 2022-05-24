@@ -89,16 +89,15 @@ extension View {
             self
             
         case let _item?:
-            self
-                .vSideBar(
-                    isPresented: .init(
-                        get: { true },
-                        set: { _ in item.wrappedValue = nil }
-                    ),
-                    onPresent: presentHandler,
-                    onDismiss: dismissHandler,
-                    sideBar: { sideBar(_item) }
-                )
+            vSideBar(
+                isPresented: .init(
+                    get: { true },
+                    set: { _ in item.wrappedValue = nil }
+                ),
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
+                sideBar: { sideBar(_item) }
+            )
         }
     }
 }

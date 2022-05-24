@@ -96,29 +96,29 @@ import SwiftUI
 public struct PresentationHost<Content>: UIViewControllerRepresentable where Content: View {
     // MARK: Properties
     private let isPresented: Binding<Bool>
+    private let allowsHitTests: Bool
     private let content: () -> Content
     
     @State private var wasInternallyDismissed: Bool = false
-    
-    /// Type of represented `UIViewController`.
-    public typealias PresentationHostViewControllerType = PresentationHostViewController<AnyView>
     
     // MARK: Initializers
     /// Initializes `PresentationHost` with condition and content.
     public init(
         isPresented: Binding<Bool>,
+        allowsHitTests: Bool = true,
         content: @escaping () -> Content
     ) {
         self.isPresented = isPresented
+        self.allowsHitTests = allowsHitTests
         self.content = content
     }
     
     // MARK: Representable
-    public func makeUIViewController(context: Context) -> PresentationHostViewControllerType {
-        .init()
+    public func makeUIViewController(context: Context) -> PresentationHostViewController {
+        .init(allowsHitTests: allowsHitTests)
     }
 
-    public func updateUIViewController(_ uiViewController: PresentationHostViewControllerType, context: Context) {
+    public func updateUIViewController(_ uiViewController: PresentationHostViewController, context: Context) {
         let content: AnyView = .init(
             content()
                 .presentationHostPresentationMode(.init(
@@ -132,7 +132,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
                     },
                     
                     isExternallyDismissed:
-                        uiViewController.presentedViewController is PresentationHostViewControllerType.HostingViewControllerType &&
+                        uiViewController.presentedViewController is PresentationHostViewController.HostingViewControllerType &&
                         !isPresented.wrappedValue &&
                         !wasInternallyDismissed
                     ,

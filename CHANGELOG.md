@@ -148,6 +148,8 @@ VMenu
 
 VToast
 
+- `rounded` `VToast.Layot.CornerRadiusType` is renamed to `capsule`
+- `custom` `VToast.Layot.CornerRadiusType` is renamed to `rounded`
 - `VToastType` `oneLine` is renamed to `singleLine`
 
 VBaseView

@@ -49,29 +49,54 @@ public struct VToast {
 
 // MARK: - Extension
 extension View {
-    /// Presents `VToast`.
+    /// Presents `VToast` when boolean is `true`.
     public func vToast(
         isPresented: Binding<Bool>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
         toast: @escaping () -> VToast
     ) -> some View {
         let toast = toast()
         
         return self
-            .overlay(Group(content: {
-                if isPresented.wrappedValue {
-                    WindowOverlayView(
-                        allowsHitTesting: false,
-                        isPresented: isPresented,
-                        content:
-                            _VToast(
-                                model: toast.model,
-                                toastType: toast.toastType,
-                                isPresented: isPresented,
-                                title: toast.title
-                            )
+            .background(PresentationHost(
+                isPresented: isPresented,
+                allowsHitTests: false,
+                content: {
+                    _VToast(
+                        model: toast.model,
+                        toastType: toast.toastType,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        title: toast.title
                     )
-                        .allowsHitTesting(false)
                 }
-            }))
+            ))
+    }
+    
+    /// Presents `VToast` using the item as data source for content.
+    @ViewBuilder public func vToast<Item>(
+        item: Binding<Item?>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        toast: @escaping (Item) -> VToast
+    ) -> some View
+        where Item: Identifiable
+    {
+        switch item.wrappedValue {
+        case nil:
+            self
+            
+        case let _item?:
+            vToast(
+                isPresented: .init(
+                    get: { true },
+                    set: { _ in item.wrappedValue = nil }
+                ),
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
+                toast: { toast(_item) }
+            )
+        }
     }
 }

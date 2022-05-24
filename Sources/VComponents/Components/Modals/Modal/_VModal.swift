@@ -51,7 +51,6 @@ struct _VModal<HeaderLabel, Content>: View
             blinding
             modal
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: .all)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)

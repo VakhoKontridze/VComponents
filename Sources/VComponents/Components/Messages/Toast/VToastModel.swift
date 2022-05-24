@@ -34,27 +34,52 @@ public struct VToastModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Edge from which toast appears, and to which it disappears. Defaults to `default`.
-        public var presentationEdge: PresentationEdge = .default
-        
-        /// Distance from presented edge. Defaults to `20`.
-        public var presentationOffsetFromSafeEdge: CGFloat = 20
-        
-        /// Max width. Defaults to `0.9` ratio of screen width.
-        public var maxWidth: CGFloat = UIScreen.main.bounds.width * 0.9 // FIXME: Add landscape
+        /// Toast sizes.
+        /// Set to `0.8` ratio of screen width in portrait.
+        /// Set to `0.8` ratio of screen width in landscape.
+        public var sizes: Sizes = .init(
+            portrait: .relative(.init(width: 0.8)),
+            landscape: .relative(.init(width: 0.8))
+        )
         
         /// Corner radius type. Defaults to `default`.
         public var cornerRadiusType: CornerRadiusType = .default
         
-        /// Content margins. Defaults to `20` horizontal and `10` vertical.
-        public var contentMargins: Margins = .init(
+        /// TItle margins. Defaults to `20` horizontal and `10` vertical.
+        public var titleMargins: Margins = .init(
             horizontal: 20,
             vertical: 10
         )
         
+        /// Edge from which toast appears, and to which it disappears. Defaults to `default`.
+        public var presentationEdge: PresentationEdge = .default
+        
+        /// Safe area inset from presented edge. Defaults to `20`.
+        public var presentationEdgeSafeAreaInset: CGFloat = 20
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        // MARK: Sizes
+        /// Model that describes toast sizes.
+        public typealias Sizes = ModalSizes<ToastSize>
+        
+        // MARK: Toast Size
+        /// Toast size.
+        public struct ToastSize {
+            // MARK: Properties
+            /// Width.
+            public var width: CGFloat
+            
+            // MARK: Initializers
+            /// Initializes `ToastSize`.
+            public init(
+                width: CGFloat
+            ) {
+                self.width = width
+            }
+        }
         
         // MARK: Margins
         /// Sub-model containing `horizontal` and `vertical` margins.
@@ -76,20 +101,20 @@ public struct VToastModel {
         }
         
         // MARK: Corner Radius Type
-        /// Enum that represents corner radius, such as `rounded` or `custom`.
-        public enum CornerRadiusType { // FIXME: Convert to struct?
+        /// Enum that represents corner radius, such as `capsule` or `rounded`.
+        public enum CornerRadiusType {
             // MARK: Cases
-            /// Rounded corner radius.
+            /// Capsule.
             ///
             /// This case automatically calculates height and takes half of its value.
-            case rounded
+            case capsule
             
-            /// Custom.
-            case custom(_ value: CGFloat)
+            /// Rounded.
+            case rounded(cornerRadius: CGFloat)
 
             // MARK: Initailizers
             /// Default value. Set to `rounded`.
-            public static var `default`: Self { .rounded }
+            public static var `default`: Self { .capsule }
         }
     }
 

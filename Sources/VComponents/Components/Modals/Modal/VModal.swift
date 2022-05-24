@@ -132,16 +132,15 @@ extension View {
             self
             
         case let _item?:
-            self
-                .vModal(
-                    isPresented: .init(
-                        get: { true },
-                        set: { _ in item.wrappedValue = nil }
-                    ),
-                    onPresent: presentHandler,
-                    onDismiss: dismissHandler,
-                    modal: { modal(_item) }
-                )
+            vModal(
+                isPresented: .init(
+                    get: { true },
+                    set: { _ in item.wrappedValue = nil }
+                ),
+                onPresent: presentHandler,
+                onDismiss: dismissHandler,
+                modal: { modal(_item) }
+            )
         }
     }
 }

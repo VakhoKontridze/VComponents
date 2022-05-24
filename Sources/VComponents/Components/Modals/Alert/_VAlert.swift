@@ -70,7 +70,6 @@ struct _VAlert<Content>: View
             blinding
             alert
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: .horizontal)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)

@@ -61,7 +61,6 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             blinding
             bottomSheet
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .ignoresSafeArea(.container, edges: .all)
             .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
