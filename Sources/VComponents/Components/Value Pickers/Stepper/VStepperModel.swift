@@ -61,7 +61,7 @@ public struct VStepperModel {
             disabled: .clear
         )
         
-        /// Plus and minus icon colors and opacities.
+        /// Plus and minus icon colors.
         public var buttonIcon: ButtonStateColors = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primary, // Looks better this way

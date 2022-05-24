@@ -117,7 +117,7 @@ public struct VModalModel {
         /// Close button background colors.
         public var closeButtonBackground: StateColors = closeButtonReference.colors.background
         
-        /// Close button icon colors and opacities.
+        /// Close button icon colors.
         public var closeButtonIcon: StateColors = .init(
             enabled: .init(componentAsset: "Modal.CloseButton.Icon.enabled"),
             pressed: .init(componentAsset: "Modal.CloseButton.Icon.enabled"),

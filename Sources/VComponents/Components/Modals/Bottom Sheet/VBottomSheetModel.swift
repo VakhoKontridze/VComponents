@@ -231,7 +231,7 @@ public struct VBottomSheetModel {
         /// Close button background colors.
         public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
         
-        /// Close button icon colors and opacities.
+        /// Close button icon colors.
         public var closeButtonIcon: StateColors = modalReference.colors.closeButtonIcon
         
         /// Divider color.
