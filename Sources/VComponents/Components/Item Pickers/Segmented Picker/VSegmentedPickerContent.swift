@@ -8,15 +8,15 @@
 import SwiftUI
 
 // MARK: - V Segmented Picker Content
-enum VSegmentedPickerContent<Data, CustomRowContent>
+enum VSegmentedPickerContent<Data, CustomContent>
     where
         Data: RandomAccessCollection,
         Data.Index == Int,
-        CustomRowContent: View
+        CustomContent: View
 {
     // MARK: Properties
     case titles(titles: [String])
-    case custom(data: Data, rowContent: (Data.Element) -> CustomRowContent)
+    case custom(data: Data, content: (Data.Element) -> CustomContent)
     
     // MARK: Properties
     var count: Int {

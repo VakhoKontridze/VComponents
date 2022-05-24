@@ -40,7 +40,7 @@ struct VWheelPickerDemoView: View {
                     selection: $selection,
                     headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                     footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
-                    rowContent: { $0.pickerSymbol }
+                    content: { $0.pickerSymbol }
                 )
             }
         })

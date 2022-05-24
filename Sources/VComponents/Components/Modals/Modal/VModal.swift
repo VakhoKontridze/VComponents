@@ -27,7 +27,7 @@ import SwiftUI
 ///                 VModal(
 ///                     headerTitle: "Lorem ipsum dolor sit amet",
 ///                     content: {
-///                         VList(data: 0..<20, rowContent: { num in
+///                         VList(data: 0..<20, content: { num in
 ///                             Text(String(num))
 ///                                 .frame(maxWidth: .infinity, alignment: .leading)
 ///                         })

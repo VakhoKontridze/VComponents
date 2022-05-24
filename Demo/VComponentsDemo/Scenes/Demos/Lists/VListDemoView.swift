@@ -30,7 +30,7 @@ struct VListDemoView: View {
         VList(
             layout: layoutType.layoutType,
             data: VListDemoViewDataSource.rows(count: rowCount),
-            rowContent: { VListDemoViewDataSource.rowContent(title: $0.title, color: $0.color) }
+            content: { VListDemoViewDataSource.content(title: $0.title, color: $0.color) }
         )
             .ifLet(layoutType.height, transform: { (view, height) in
                 Group(content: {
@@ -132,7 +132,7 @@ struct VListDemoViewDataSource {
         }
     }
     
-    static func rowContent(title: String, color: Color) -> some View {
+    static func content(title: String, color: Color) -> some View {
         HStack(spacing: 10, content: {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(color.opacity(0.8))

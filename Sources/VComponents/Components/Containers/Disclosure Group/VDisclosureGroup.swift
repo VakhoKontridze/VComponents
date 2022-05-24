@@ -24,7 +24,7 @@ import VCore
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
-///                 VList(data: 0..<20, rowContent: { num in
+///                 VList(data: 0..<20, content: { num in
 ///                     Text(String(num))
 ///                         .frame(maxWidth: .infinity, alignment: .leading)
 ///                 })
@@ -216,7 +216,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(data: 0..<10, rowContent: { num in
+                    VList(data: 0..<10, content: { num in
                         Text(String(num))
                             .padding(.vertical, 2)
                             .frame(maxWidth: .infinity, alignment: .leading)

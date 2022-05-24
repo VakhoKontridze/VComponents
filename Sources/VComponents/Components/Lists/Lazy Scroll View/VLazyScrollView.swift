@@ -53,7 +53,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
         type listType: VLazyScrollViewType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> RowContent
     )
         where
             Content == ForEach<Data, ID, RowContent>,
@@ -66,7 +66,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
             ForEach(
                 data,
                 id: id,
-                content: { element in rowContent(element) }
+                content: { element in content(element) }
             )
         }
     }
@@ -75,7 +75,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
     public init<Data, ID, RowContent>(
         type listType: VLazyScrollViewType = .default,
         data: Data,
-        @ViewBuilder content rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> RowContent
     )
         where
             Content == ForEach<Data, ID, RowContent>,
@@ -89,7 +89,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
             ForEach(
                 data,
                 id: \.id,
-                content: { element in rowContent(element) }
+                content: { element in content(element) }
             )
         }
     }
@@ -98,7 +98,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
     public init<RowContent>(
         type listType: VLazyScrollViewType = .default,
         data: Range<Int>,
-        content rowContent: @escaping (Int) -> RowContent
+        content: @escaping (Int) -> RowContent
     )
         where
             Content == ForEach<Range<Int>, Int, RowContent>
@@ -108,7 +108,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
             ForEach(
                 data,
                 id: \.self,
-                content: { element in rowContent(element) }
+                content: { element in content(element) }
             )
         }
     }

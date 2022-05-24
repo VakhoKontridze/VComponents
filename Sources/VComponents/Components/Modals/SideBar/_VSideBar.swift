@@ -148,7 +148,7 @@ struct VSideBar_Previews: PreviewProvider {
         )
             .vSideBar(isPresented: $isPresented, sideBar: {
                 VSideBar(content: {
-                    VList(data: 0..<20, rowContent: { num in
+                    VList(data: 0..<20, content: { num in
                         Text(String(num))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     })

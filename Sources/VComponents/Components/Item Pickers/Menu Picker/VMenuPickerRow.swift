@@ -1,5 +1,5 @@
 //
-//  VMenuPickerRowContent.swift
+//  VMenuPickerRow.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/2/21.
@@ -7,24 +7,24 @@
 
 import SwiftUI
 
-// MARK: - V Menu Picker Row Content
+// MARK: - V Menu Picker Row
 /// Model that describes `VMenuPicker` row, such as title, or title with various icon configurations.
-public struct VMenuPickerRowContent {
+public struct VMenuPickerRow {
     // MARK: Properties
-    let _menuPickerRowContent: _VMenuPickerRowContent
+    let _menuPickerRow: _VMenuPickerRow
     
     // MARK: Initializers
     private init(
-        menuPickerRowContent: _VMenuPickerRowContent
+        menuPickerRow: _VMenuPickerRow
     ) {
-        self._menuPickerRowContent = menuPickerRowContent
+        self._menuPickerRow = menuPickerRow
     }
     
     /// Row with title.
     public static func title(
         title: String
     ) -> Self {
-        .init(menuPickerRowContent: .title(
+        .init(menuPickerRow: .title(
             title: title
         ))
     }
@@ -35,7 +35,7 @@ public struct VMenuPickerRowContent {
         assetIcon: String,
         bundle: Bundle? = nil
     ) -> Self {
-        .init(menuPickerRowContent: .titleAssetIcon(
+        .init(menuPickerRow: .titleAssetIcon(
             title: title,
             icon: assetIcon,
             bundle: bundle
@@ -47,7 +47,7 @@ public struct VMenuPickerRowContent {
         title: String,
         icon: Image
     ) -> Self {
-        .init(menuPickerRowContent: .titleIcon(
+        .init(menuPickerRow: .titleIcon(
             title: title,
             icon: icon
         ))
@@ -58,15 +58,15 @@ public struct VMenuPickerRowContent {
         title: String,
         systemIcon: String
     ) -> Self {
-        .init(menuPickerRowContent: .titleSystemIcon(
+        .init(menuPickerRow: .titleSystemIcon(
             title: title,
             icon: systemIcon
         ))
     }
 }
 
-// MARK: - _ V Menu Picker Row Content
-enum _VMenuPickerRowContent {
+// MARK: - _ V Menu Picker Row
+enum _VMenuPickerRow {
     case title(title: String)
     case titleAssetIcon(title: String, icon: String, bundle: Bundle?)
     case titleIcon(title: String, icon: Image)

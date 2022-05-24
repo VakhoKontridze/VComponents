@@ -60,7 +60,7 @@ public struct VMenuPicker<Label, Data>: View
     
     private let label: () -> Label
     private let data: Data
-    private let rowContent: (Data.Element) -> VMenuPickerRowContent
+    private let content: (Data.Element) -> VMenuPickerRow
 
     // MARK: Initializers - View Builder
     /// Initializes component with selected index, label, data, and row content.
@@ -68,12 +68,12 @@ public struct VMenuPicker<Label, Data>: View
         selectedIndex: Binding<Int>,
         @ViewBuilder label: @escaping () -> Label,
         data: Data,
-        rowContent: @escaping (Data.Element) -> VMenuPickerRowContent
+        content: @escaping (Data.Element) -> VMenuPickerRow
     ) {
         self._selectedIndex = selectedIndex
         self.label = label
         self.data = data
-        self.rowContent = rowContent
+        self.content = content
     }
 
     // MARK: Initializers - Row Titles
@@ -88,7 +88,7 @@ public struct VMenuPicker<Label, Data>: View
         self._selectedIndex = selectedIndex
         self.label = label
         self.data = rowTitles
-        self.rowContent = { .title(title: $0) }
+        self.content = { .title(title: $0) }
     }
     
     // MARK: Initializers - Pickable Enumeration & Pickable Titled Enumeration
@@ -96,7 +96,7 @@ public struct VMenuPicker<Label, Data>: View
     public init<PickableItem>(
         selection: Binding<PickableItem>,
         @ViewBuilder label: @escaping () -> Label,
-        rowContent: @escaping (PickableItem) -> VMenuPickerRowContent
+        content: @escaping (PickableItem) -> VMenuPickerRow
     )
         where
             Data == Array<PickableItem>,
@@ -108,7 +108,7 @@ public struct VMenuPicker<Label, Data>: View
         )
         self.label = label
         self.data = .init(PickableItem.allCases)
-        self.rowContent = rowContent
+        self.content = content
     }
 
     /// Initializes component with `PickableTitledItem` and label.
@@ -126,7 +126,7 @@ public struct VMenuPicker<Label, Data>: View
         )
         self.label = label
         self.data = .init(PickableItem.allCases)
-        self.rowContent = { .title(title: $0.pickerTitle) }
+        self.content = { .title(title: $0.pickerTitle) }
     }
 
     // MARK: Body
@@ -143,7 +143,7 @@ public struct VMenuPicker<Label, Data>: View
             selection: $selectedIndex,
             content: {
                 ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, row) in
-                    rowView(rowContent(row))
+                    rowView(content(row))
                         .tag(i)
                 })
             },
@@ -152,8 +152,8 @@ public struct VMenuPicker<Label, Data>: View
             .pickerStyle(.inline)
     }
     
-    @ViewBuilder private func rowView(_ row: VMenuPickerRowContent) -> some View {
-        switch row._menuPickerRowContent {
+    @ViewBuilder private func rowView(_ row: VMenuPickerRow) -> some View {
+        switch row._menuPickerRow {
         case .title(let title):
             Text(title)
             

@@ -48,7 +48,7 @@ struct VDisclosureGroupDemoView: View {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(data: 0..<10, rowContent: { num in
+                    VList(data: 0..<10, content: { num in
                         Text(String(num))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     })

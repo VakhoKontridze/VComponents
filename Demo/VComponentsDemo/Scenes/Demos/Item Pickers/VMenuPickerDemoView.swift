@@ -46,7 +46,7 @@ struct VMenuPickerDemoView: View {
                             title: "Lorem Ipsum"
                         )
                     },
-                    rowContent: { .titleIcon(title: $0.pickerTitle, icon: .init(systemName: "swift")) }
+                    content: { .titleIcon(title: $0.pickerTitle, icon: .init(systemName: "swift")) }
                 )
             }
         })

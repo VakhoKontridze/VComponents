@@ -22,7 +22,7 @@ import VCore
 ///             ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
 ///
 ///             VSheet(content: {
-///                 VList(data: 0..<20, rowContent: { num in
+///                 VList(data: 0..<20, content: { num in
 ///                     Text(String(num))
 ///                         .frame(maxWidth: .infinity, alignment: .leading)
 ///                 })
@@ -91,7 +91,7 @@ struct VSheet_Previews: PreviewProvider {
             ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
             
             VSheet(content: {
-                VList(data: 0..<20, rowContent: { num in
+                VList(data: 0..<20, content: { num in
                     Text(String(num))
                         .padding(.vertical, 2)
                         .frame(maxWidth: .infinity, alignment: .leading)

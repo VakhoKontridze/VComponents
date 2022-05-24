@@ -37,11 +37,11 @@ import SwiftUI
 ///             .padding(20)
 ///     }
 ///
-public struct VWheelPicker<Data, RowContent>: View
+public struct VWheelPicker<Data, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Index == Int,
-        RowContent: View
+        Content: View
 {
     // MARK: Properties
     private let model: VWheelPickerModel
@@ -54,7 +54,7 @@ public struct VWheelPicker<Data, RowContent>: View
     private let headerTitle: String?
     private let footerTitle: String?
     
-    private let content: VWheelPickerContent<Data, RowContent>
+    private let content: VWheelPickerContent<Data, Content>
     
     @State private var rowWidth: CGFloat = 0
     
@@ -66,13 +66,13 @@ public struct VWheelPicker<Data, RowContent>: View
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.model = model
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .custom(data: data, rowContent: rowContent)
+        self.content = .custom(data: data, content: content)
     }
 
     /// Initializes component with selected index and row titles.
@@ -85,7 +85,7 @@ public struct VWheelPicker<Data, RowContent>: View
     )
         where
             Data == Array<Never>,
-            RowContent == Never
+            Content == Never
     {
         self.model = model
         self._selectedIndex = selectedIndex
@@ -102,7 +102,7 @@ public struct VWheelPicker<Data, RowContent>: View
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     )
         where
             Data == Array<SelectionValue>,
@@ -115,7 +115,7 @@ public struct VWheelPicker<Data, RowContent>: View
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .custom(data: data, rowContent: rowContent)
+        self.content = .custom(data: data, content: content)
     }
     
     /// Initializes component with selection value and row titles.
@@ -128,7 +128,7 @@ public struct VWheelPicker<Data, RowContent>: View
     )
         where
             Data == Array<Never>,
-            RowContent == Never
+            Content == Never
     {
         self.model = model
         self._selectedIndex = .init(
@@ -147,7 +147,7 @@ public struct VWheelPicker<Data, RowContent>: View
         selection: Binding<PickableItem>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        @ViewBuilder rowContent: @escaping (PickableItem) -> RowContent
+        @ViewBuilder content: @escaping (PickableItem) -> Content
     )
         where
             Data == Array<PickableItem>,
@@ -160,7 +160,7 @@ public struct VWheelPicker<Data, RowContent>: View
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .custom(data: Array(PickableItem.allCases), rowContent: rowContent)
+        self.content = .custom(data: Array(PickableItem.allCases), content: content)
     }
     
     /// Initializes component with `PickableTitledEnumeration`.
@@ -172,7 +172,7 @@ public struct VWheelPicker<Data, RowContent>: View
     )
         where
             Data == Array<Never>,
-            RowContent == Never,
+            Content == Never,
             PickableItem: PickableTitledEnumeration
     {
         self.model = model
@@ -241,9 +241,9 @@ public struct VWheelPicker<Data, RowContent>: View
                     .tag(i)
             })
             
-        case .custom(let data, let rowContent):
+        case .custom(let data, let content):
             ForEach(data.indices, id: \.self, content: { i in
-                rowContent(data[i])
+                content(data[i])
                     .opacity(model.colors.customContentOpacities.for(internalState))
                     .tag(i)
             })

@@ -169,7 +169,7 @@ struct VBottomSheetDemoView: View {
                     .padding(.bottom, 10)
                 
             case true:
-                VList(data: 0..<20, rowContent: { num in
+                VList(data: 0..<20, content: { num in
                     Text(String(num))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 })

@@ -37,18 +37,18 @@ import SwiftUI
 ///     ]
 ///
 ///     var body: some View {
-///         VList(data: data, rowContent: { row in
+///         VList(data: data, content: { row in
 ///             Text(row.title)
 ///                 .frame(maxWidth: .infinity, alignment: .leading)
 ///         })
 ///             .padding()
 ///     }
 ///
-public struct VList<Data, ID, RowContent>: View
+public struct VList<Data, ID, Content>: View
     where
         Data: RandomAccessCollection,
         ID: Hashable,
-        RowContent: View
+        Content: View
 {
     // MARK: Properties
     private let model: VListModel
@@ -56,7 +56,7 @@ public struct VList<Data, ID, RowContent>: View
     private let layoutType: VListLayoutType
     
     private let data: [IdentifiableElement<ID, Data.Element>]
-    private let rowContent: (Data.Element) -> RowContent
+    private let content: (Data.Element) -> Content
     
     private var hasDivider: Bool { model.layout.dividerHeight > 0 }
     
@@ -67,12 +67,12 @@ public struct VList<Data, ID, RowContent>: View
         layout layoutType: VListLayoutType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.model = model
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: id], value: $0) }
-        self.rowContent = rowContent
+        self.content = content
     }
     
     /// Initializes component with data and row content.
@@ -80,7 +80,7 @@ public struct VList<Data, ID, RowContent>: View
         model: VListModel = .init(),
         layout layoutType: VListLayoutType = .default,
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     )
         where
             Data.Element: Identifiable,
@@ -89,7 +89,7 @@ public struct VList<Data, ID, RowContent>: View
         self.model = model
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: \.id], value: $0) }
-        self.rowContent = rowContent
+        self.content = content
     }
     
     /// Initializes component with constant range and row content.
@@ -97,7 +97,7 @@ public struct VList<Data, ID, RowContent>: View
         model: VListModel = .init(),
         layout layoutType: VListLayoutType = .default,
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     )
         where
             Data == Range<Int>,
@@ -106,7 +106,7 @@ public struct VList<Data, ID, RowContent>: View
         self.model = model
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: \.self], value: $0) }
-        self.rowContent = rowContent
+        self.content = content
     }
 
     // MARK: Body
@@ -133,7 +133,7 @@ public struct VList<Data, ID, RowContent>: View
     
     private func contentView(i: Int, element: IdentifiableElement<ID, Data.Element>) -> some View {
         VStack(spacing: 0, content: {
-            rowContent(element.value)
+            content(element.value)
 
             if showDivider(for: i) {
                 Rectangle()
@@ -186,7 +186,7 @@ struct VList_Previews: PreviewProvider {
         return formatter.string(from: .init(value: i))?.capitalized ?? ""
     }
     
-    private static func rowContent(title: String, color: Color) -> some View {
+    private static func content(title: String, color: Color) -> some View {
         HStack(spacing: 10, content: {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundColor(color.opacity(0.8))
@@ -200,8 +200,8 @@ struct VList_Previews: PreviewProvider {
     }
     
     static var previews: some View {
-        VList(data: rows, rowContent: { row in
-            rowContent(title: row.title, color: row.color)
+        VList(data: rows, content: { row in
+            content(title: row.title, color: row.color)
         })
             .frame(maxHeight: .infinity, alignment: .top)
             .padding(20)

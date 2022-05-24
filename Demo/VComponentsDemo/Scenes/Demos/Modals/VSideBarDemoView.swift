@@ -82,7 +82,7 @@ struct VSideBarDemoView: View {
 
     private var sideBarContent: some View {
         ZStack(content: {
-            VList(data: 0..<40, rowContent: { num in
+            VList(data: 0..<40, content: { num in
                 Text(String(num))
                     .frame(maxWidth: .infinity, alignment: .leading)
             })

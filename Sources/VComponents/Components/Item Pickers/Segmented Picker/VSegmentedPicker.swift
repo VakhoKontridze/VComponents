@@ -40,11 +40,11 @@ import SwiftUI
 ///         )
 ///     }
 ///
-public struct VSegmentedPicker<Data, RowContent>: View
+public struct VSegmentedPicker<Data, Content>: View
     where
         Data: RandomAccessCollection,
         Data.Index == Int,
-        RowContent: View
+        Content: View
 {
     // MARK: Properties
     private let model: VSegmentedPickerModel
@@ -65,7 +65,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     private let footerTitle: String?
     private let disabledIndexes: Set<Int>
     
-    private let content: VSegmentedPickerContent<Data, RowContent>
+    private let content: VSegmentedPickerContent<Data, Content>
     
     @State private var rowWidth: CGFloat = 0
     
@@ -78,14 +78,14 @@ public struct VSegmentedPicker<Data, RowContent>: View
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
         self.model = model
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: data, rowContent: rowContent)
+        self.content = .custom(data: data, content: content)
     }
 
     /// Initializes component with selected index and row titles.
@@ -99,7 +99,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Never>,
-            RowContent == Never
+            Content == Never
     {
         self.model = model
         self._selectedIndex = selectedIndex
@@ -118,7 +118,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
         data: Data,
-        @ViewBuilder rowContent: @escaping (Data.Element) -> RowContent
+        @ViewBuilder content: @escaping (Data.Element) -> Content
     )
         where
             Data == Array<SelectionValue>,
@@ -132,7 +132,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: data, rowContent: rowContent)
+        self.content = .custom(data: data, content: content)
     }
     
     /// Initializes component with selection value and row titles.
@@ -146,7 +146,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Never>,
-            RowContent == Never
+            Content == Never
     {
         self.model = model
         self._selectedIndex = .init(
@@ -167,7 +167,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
-        @ViewBuilder rowContent: @escaping (PickableItem) -> RowContent
+        @ViewBuilder content: @escaping (PickableItem) -> Content
     )
         where
             Data == Array<PickableItem>,
@@ -181,7 +181,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: Array(PickableItem.allCases), rowContent: rowContent)
+        self.content = .custom(data: Array(PickableItem.allCases), content: content)
     }
     
     /// Initializes component with `PickableTitledEnumeration`.
@@ -194,7 +194,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
     )
         where
             Data == Array<Never>,
-            RowContent == Never,
+            Content == Never,
             PickableItem: PickableTitledEnumeration
     {
         self.model = model
@@ -287,7 +287,7 @@ public struct VSegmentedPicker<Data, RowContent>: View
                                 title: titles[i]
                             )
                                 .padding(model.layout.indicatorMargin)
-                                .padding(model.layout.rowContentMargin)
+                                .padding(model.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
 
                                 .readSize(onChange: { rowWidth = $0.width })
@@ -297,15 +297,15 @@ public struct VSegmentedPicker<Data, RowContent>: View
                 })
             })
             
-        case .custom(let data, let rowContent):
+        case .custom(let data, let content):
             HStack(spacing: 0, content: {
                 ForEach(data.indices, id: \.self, content: { i in
                     VBaseButton(
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
-                            rowContent(data[i])
+                            content(data[i])
                                 .padding(model.layout.indicatorMargin)
-                                .padding(model.layout.rowContentMargin)
+                                .padding(model.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
 
                                 .opacity(model.colors.customContentOpacities.for(rowState(for: i)))

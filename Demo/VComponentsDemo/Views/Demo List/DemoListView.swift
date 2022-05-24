@@ -52,7 +52,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                                 VList(
                                     layout: .fixed,
                                     data: section.rows,
-                                    rowContent: { row in DemoListRowView(title: row.title, destination: row.body) }
+                                    content: { row in DemoListRowView(title: row.title, destination: row.body) }
                                 )
                             }
                         )
@@ -69,7 +69,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                     data: sections.enumeratedArray(),
                     id: \.element.id,
                     content: { (i, section) in
-                        VList(data: section.rows, rowContent: { row in
+                        VList(data: section.rows, content: { row in
                             DemoListRowView(title: row.title, destination: row.body)
                         })
                             .padding(.trailing, 15)

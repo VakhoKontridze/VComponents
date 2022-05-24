@@ -59,7 +59,7 @@ public struct VSegmentedPickerModel {
         public var indicatorShadowOffsetY: CGFloat = 1
         
         /// Row content margin. Defaults to `2`.
-        public var rowContentMargin: CGFloat = 2
+        public var contentMargin: CGFloat = 2
         
         /// Header line limit. Defaults to `1`.
         public var headerLineLimit: Int? = 1

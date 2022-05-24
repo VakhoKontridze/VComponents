@@ -110,7 +110,7 @@ struct VModalDemoView: View {
     
     private var modalContent: some View {
         ZStack(content: {
-            VList(data: 0..<20, rowContent: { num in
+            VList(data: 0..<20, content: { num in
                 Text(String(num))
                     .frame(maxWidth: .infinity, alignment: .leading)
             })
