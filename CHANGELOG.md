@@ -13,6 +13,7 @@ General
 - `ImageBook` is made public, and asset icons in library can no be re-set
 - `VComponentsLocalizationService` is added, that supports localization within the package
 - Several internal properties are now exposed to public in models
+- `blinder` is renamed to `dimmingView`
 
 VPrimaryButton
 
