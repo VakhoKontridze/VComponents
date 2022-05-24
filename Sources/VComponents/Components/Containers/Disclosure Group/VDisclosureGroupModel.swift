@@ -54,11 +54,11 @@ public struct VDisclosureGroupModel {
         /// Chevron button icon dimension. Defaults to `12`.
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        /// Header divider height. Defaults to `2/3`.
-        public var headerDividerHeight: CGFloat = 2/3
+        /// Divider height. Defaults to `2/3`.
+        public var dividerHeight: CGFloat = 2/3
         
-        /// Header divider margins. Defaults to `10` leading, `10` trailing, `0` top, `0` bottom.
-        public var headerDividerMargins: Margins = .init(
+        /// Divider margins. Defaults to `10` leading, `10` trailing, `0` top, `0` bottom.
+        public var dividerMargins: Margins = .init(
             horizontal: 10,
             vertical: 0
         )
@@ -102,8 +102,8 @@ public struct VDisclosureGroupModel {
             disabled: 0.5
         )
         
-        /// Header divider color.
-        public var headerDivider: Color = listReference.colors.divider
+        /// Divider color.
+        public var divider: Color = listReference.colors.divider
         
         /// Chevron button background colors.
         public var chevronButtonBackground: ButtonStateColors = chevronButtonReference.colors.background

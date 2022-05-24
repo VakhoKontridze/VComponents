@@ -26,7 +26,7 @@ struct _VModal<HeaderLabel, Content>: View
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
-    private var hasHeaderDivider: Bool { hasHeader && model.layout.headerDividerHeight > 0 }
+    private var hasDivider: Bool { hasHeader && model.layout.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
     
@@ -134,11 +134,11 @@ struct _VModal<HeaderLabel, Content>: View
     }
 
     @ViewBuilder private var divider: some View {
-        if hasHeaderDivider {
+        if hasDivider {
             Rectangle()
-                .frame(height: model.layout.headerDividerHeight)
-                .padding(model.layout.headerDividerMargins)
-                .foregroundColor(model.colors.headerDivider)
+                .frame(height: model.layout.dividerHeight)
+                .padding(model.layout.dividerMargins)
+                .foregroundColor(model.colors.divider)
         }
     }
 

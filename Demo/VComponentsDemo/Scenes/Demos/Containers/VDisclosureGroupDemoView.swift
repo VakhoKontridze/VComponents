@@ -16,13 +16,13 @@ struct VDisclosureGroupDemoView: View {
     @State private var isEnabled: Bool = true
     @State private var isExpanded: Bool = true
     @State private var expandCollapseOnHeaderTap: Bool = true
-    @State private var hasDivider: Bool = VDisclosureGroupModel.Layout().headerDividerHeight > 0
+    @State private var hasDivider: Bool = VDisclosureGroupModel.Layout().dividerHeight > 0
     
     private var model: VDisclosureGroupModel {
         var model: VDisclosureGroupModel = .init()
         
-        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
-        model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
+        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
+        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
         
         model.misc.expandsAndCollapsesOnHeaderTap = expandCollapseOnHeaderTap
         
@@ -72,7 +72,7 @@ struct VDisclosureGroupDemoView: View {
         
         ToggleSettingView(isOn: $expandCollapseOnHeaderTap, title: "Expand/Collapse on Header Tap")
         
-        ToggleSettingView(isOn: $hasDivider, title: "Header Divider")
+        ToggleSettingView(isOn: $hasDivider, title: "Divider")
     }
 }
 

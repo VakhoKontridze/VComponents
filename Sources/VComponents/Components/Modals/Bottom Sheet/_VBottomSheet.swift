@@ -28,11 +28,11 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     
     private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
     private var hasGrabber: Bool { model.misc.dismissType.contains(.pullDown) || model.layout.sizes._current.size.heights.isResizable }
-    private var hasHeaderDivider: Bool { hasHeader && model.layout.headerDividerHeight > 0 }
+    private var hasDivider: Bool { hasHeader && model.layout.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
     
-    @State private var grabberHeaderDividerHeight: CGFloat = 0
+    @State private var grabberDividerHeight: CGFloat = 0
     @State private var offset: CGFloat
     @State private var offsetBeforeDrag: CGFloat? // Used for adding to translation
     @State private var currentDragValue: DragGesture.Value? // Used for storing "last" value for writing in `previousDragValue`. Equals to `dragValue` in methods.
@@ -105,7 +105,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
                         header
                         divider
                     })
-                        .readSize(onChange: { grabberHeaderDividerHeight = $0.height })
+                        .readSize(onChange: { grabberDividerHeight = $0.height })
                     
                     contentView
                 })
@@ -183,11 +183,11 @@ struct _VBottomSheet<HeaderLabel, Content>: View
     }
 
     @ViewBuilder private var divider: some View {
-        if hasHeaderDivider {
+        if hasDivider {
             Rectangle()
-                .frame(height: model.layout.headerDividerHeight)
-                .padding(model.layout.headerDividerMargins)
-                .foregroundColor(model.colors.headerDivider)
+                .frame(height: model.layout.dividerHeight)
+                .padding(model.layout.dividerMargins)
+                .foregroundColor(model.colors.divider)
         }
     }
 
@@ -205,7 +205,7 @@ struct _VBottomSheet<HeaderLabel, Content>: View
             .frame(maxWidth: .infinity)
             .if(
                 model.layout.autoresizesContent,
-                ifTransform: { $0.frame(height: model.layout.sizes._current.size.heights.max - offset - grabberHeaderDividerHeight) },
+                ifTransform: { $0.frame(height: model.layout.sizes._current.size.heights.max - offset - grabberDividerHeight) },
                 elseTransform: { $0.frame(maxHeight: .infinity) }
             )
     }

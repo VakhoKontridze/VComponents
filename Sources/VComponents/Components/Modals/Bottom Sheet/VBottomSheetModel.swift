@@ -83,11 +83,11 @@ public struct VBottomSheetModel {
         /// Spacing between label and close button. Defaults to `10`.
         public var labelCloseButtonSpacing: CGFloat = modalReference.layout.labelCloseButtonSpacing
         
-        /// Header divider height. Defaults to `2/3`.
-        public var headerDividerHeight: CGFloat = modalReference.layout.headerDividerHeight
+        /// Divider height. Defaults to `2/3`.
+        public var dividerHeight: CGFloat = modalReference.layout.dividerHeight
     
-        /// Header divider margins. Defaults to `.zero`.
-        public var headerDividerMargins: Margins = modalReference.layout.headerDividerMargins
+        /// Divider margins. Defaults to `.zero`.
+        public var dividerMargins: Margins = modalReference.layout.dividerMargins
         
         /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
         public var contentMargins: Margins = modalReference.layout.contentMargins
@@ -234,8 +234,8 @@ public struct VBottomSheetModel {
         /// Close button icon colors and opacities.
         public var closeButtonIcon: StateColors = modalReference.colors.closeButtonIcon
         
-        /// Header divider color.
-        public var headerDivider: Color = modalReference.colors.headerDivider
+        /// Divider color.
+        public var divider: Color = modalReference.colors.divider
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

@@ -19,7 +19,7 @@ struct VBottomSheetDemoView: View {
     @State private var dismissType: VBottomSheetModel.Misc.DismissType = .default
     @State private var hasGrabber: Bool = VBottomSheetModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
-    @State private var hasDivider: Bool = VBottomSheetModel.Layout().headerDividerHeight > 0
+    @State private var hasDivider: Bool = VBottomSheetModel.Layout().dividerHeight > 0
     @State private var isContentDraggable: Bool = VBottomSheetModel.Misc().isContentDraggable
     @State private var autoresizesContent: Bool = VBottomSheetModel.Layout().autoresizesContent
     
@@ -46,11 +46,11 @@ struct VBottomSheetDemoView: View {
         
         model.layout.grabberSize.height = hasGrabber ? (model.layout.grabberSize.height == 0 ? 4 : model.layout.grabberSize.height) : 0
         
-        model.layout.headerDividerHeight = hasDivider ? (model.layout.headerDividerHeight == 0 ? 1 : model.layout.headerDividerHeight) : 0
+        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
         model.layout.autoresizesContent = autoresizesContent
         if autoresizesContent { model.layout.contentSafeAreaEdges.insert(.bottom) }
         
-        model.colors.headerDivider = hasDivider ? (model.colors.headerDivider == .clear ? .gray : model.colors.headerDivider) : .clear
+        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
 
         model.misc.dismissType = dismissType
         model.misc.isContentDraggable = isContentDraggable

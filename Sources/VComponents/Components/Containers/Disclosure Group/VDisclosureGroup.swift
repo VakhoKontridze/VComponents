@@ -49,7 +49,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     private let content: () -> Content
     
-    private var hasHeaderDivider: Bool { model.layout.headerDividerHeight > 0 }
+    private var hasDivider: Bool { model.layout.dividerHeight > 0 }
 
     // MARK: Initializers - State
     /// Initializes component with header title and content.
@@ -162,11 +162,11 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     }
     
     @ViewBuilder private var divider: some View {
-        if hasHeaderDivider {
+        if hasDivider {
             Rectangle()
-                .frame(height: model.layout.headerDividerHeight)
-                .padding(model.layout.headerDividerMargins)
-                .foregroundColor(model.colors.headerDivider)
+                .frame(height: model.layout.dividerHeight)
+                .padding(model.layout.dividerMargins)
+                .foregroundColor(model.colors.divider)
         }
     }
     

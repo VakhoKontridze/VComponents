@@ -68,11 +68,11 @@ public struct VModalModel {
         /// Spacing between label and close button. Defaults to `10`.
         public var labelCloseButtonSpacing: CGFloat = 10
         
-        /// Header divider height. Defaults to `2/3`.
-        public var headerDividerHeight: CGFloat = disclosureGroupReference.layout.headerDividerHeight
+        /// Divider height. Defaults to `2/3`.
+        public var dividerHeight: CGFloat = disclosureGroupReference.layout.dividerHeight
     
-        /// Header divider margins. Defaults to `.zero`.
-        public var headerDividerMargins: Margins = .zero
+        /// Divider margins. Defaults to `.zero`.
+        public var dividerMargins: Margins = .zero
         
         /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
         public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
@@ -124,8 +124,8 @@ public struct VModalModel {
             disabled: closeButtonReference.colors.icon.disabled
         )
         
-        /// Header divider color.
-        public var headerDivider: Color = disclosureGroupReference.colors.headerDivider
+        /// Divider color.
+        public var divider: Color = disclosureGroupReference.colors.divider
         
         /// Dimming view color.
         public var dimmingView: Color = .init(componentAsset: "Modal.DimmingView")
