@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Confirmation Dialog Sheet
 /// Modal component that presents bottom sheet menu of actions.
 ///
-/// Description can be passed as parameter.
+/// Message can be passed as parameter.
 ///
 /// `vConfirmationDialog` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
 ///
@@ -26,7 +26,7 @@ import SwiftUI
 ///             .vConfirmationDialog(isPresented: $isPresented, confirmationDialog: {
 ///                 VConfirmationDialog(
 ///                     title: "Lorem ipsum dolor sit amet",
-///                     description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///                     message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///                     actions: [
 ///                         .standard(action: {}, title: "Option A"),
 ///                         .standard(action: {}, title: "Option B"),
@@ -39,18 +39,18 @@ import SwiftUI
 public struct VConfirmationDialog {
     // MARK: Properties
     fileprivate let title: String?
-    fileprivate let description: String?
+    fileprivate let message: String?
     fileprivate let actions: [VConfirmationDialogButton]
     
     // MARK: Initializrs
-    /// Initializes component with title, description, and rows.
+    /// Initializes component with title, message, and rows.
     public init(
         title: String?,
-        description: String?,
+        message: String?,
         actions: [VConfirmationDialogButton]
     ) {
         self.title = title
-        self.description = description
+        self.message = message
         self.actions = actions
     }
 }
@@ -70,7 +70,7 @@ extension View {
                 confirmationDialog.title ?? "",
                 isPresented: isPresented,
                 titleVisibility: {
-                    switch (confirmationDialog.title, confirmationDialog.description) {
+                    switch (confirmationDialog.title, confirmationDialog.message) {
                     case (nil, nil): return .hidden
                     case (nil, _?): return .visible
                     case (_?, nil): return .visible
@@ -83,8 +83,8 @@ extension View {
                     })
                 },
                 message: {
-                    if let description = confirmationDialog.description {
-                        Text(description)
+                    if let message = confirmationDialog.message {
+                        Text(message)
                     }
                 }
             )

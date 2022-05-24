@@ -64,8 +64,8 @@ public struct VAlertModel {
             vertical: 5
         )
         
-        /// Description line limit. Defaults to `5`.
-        public var descriptionLineLimit: Int? = 5
+        /// Message line limit. Defaults to `5`.
+        public var messageLineLimit: Int? = 5
         
         /// Title margins. Defaults to `0` horizontal and `5` vertical.
         public var descirptionMargins: Margins = .init(
@@ -80,7 +80,7 @@ public struct VAlertModel {
         )
         
         /// Additional margisn applied to title, descirption, and content as a whole. Defaults to `0` leading, `0` trailing,`0` top, and `10` bottom.
-        public var titleDescriptionContentMargins: Margins = .init(
+        public var titleMessageContentMargins: Margins = .init(
             leading: 0,
             trailing: 0,
             top: 0,
@@ -159,8 +159,8 @@ public struct VAlertModel {
         /// Title color.
         public var title: Color = ColorBook.primary
         
-        /// Description color.
-        public var description: Color = ColorBook.primary
+        /// Message color.
+        public var message: Color = ColorBook.primary
         
         /// Primary button background colors.
         public var primaryButtonBackground: ButtonStateColors = .init(primaryButtonReference.colors.background)
@@ -211,8 +211,8 @@ public struct VAlertModel {
         /// Title font. Defaults to system font of size `16` and weight `bold`.
         public var title: Font = .system(size: 16, weight: .bold)
         
-        /// Description font. Defaults to system font of size `15`.
-        public var description: Font = .system(size: 14)
+        /// Message font. Defaults to system font of size `15`.
+        public var message: Font = .system(size: 14)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

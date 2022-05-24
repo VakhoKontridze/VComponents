@@ -41,7 +41,7 @@ struct VAlertDemoView: View {
                 VAlert(
                     model: model,
                     title: title,
-                    description: description,
+                                        message: description,
                     content: { VTextField(placeholder: "Name", text: $text) },
                     actions: alertButtons.actions(text: text)
                 )

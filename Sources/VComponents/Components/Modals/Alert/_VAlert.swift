@@ -22,13 +22,13 @@ struct _VAlert<Content>: View
     private let dismissHandler: (() -> Void)?
     
     private let title: String?
-    private let description: String?
+    private let message: String?
     private let content: (() -> Content)?
     private let buttons: [VAlertButton]
     
     @State private var isInternallyPresented: Bool = false
     
-    @State private var titleDescriptionContentHeight: CGFloat = 0
+    @State private var titleMessageContentHeight: CGFloat = 0
     @State private var buttonsStackHeight: CGFloat = 0
     private var buttonsStackShouldScroll: Bool {
         let safeAreaHeight: CGFloat =
@@ -38,7 +38,7 @@ struct _VAlert<Content>: View
         
         let alertHeight: CGFloat =
             model.layout.margins.top +
-            titleDescriptionContentHeight +
+            titleMessageContentHeight +
             buttonsStackHeight +
             model.layout.margins.bottom
         
@@ -51,7 +51,7 @@ struct _VAlert<Content>: View
         presentHandler: (() -> Void)?,
         dismissHandler: (() -> Void)?,
         title: String?,
-        description: String?,
+        message: String?,
         content: (() -> Content)?,
         buttons: [VAlertButton]
     ) {
@@ -59,7 +59,7 @@ struct _VAlert<Content>: View
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.title = title
-        self.description = description
+        self.message = message
         self.content = content
         self.buttons = VAlertButton.process(buttons)
     }
@@ -88,11 +88,11 @@ struct _VAlert<Content>: View
         VStack(spacing: 0, content: {
             VStack(spacing: 0, content: {
                 titleView
-                descriptionView
+                messageView
                 contentView
             })
-                .padding(model.layout.titleDescriptionContentMargins)
-                .readSize(onChange: { titleDescriptionContentHeight = $0.height })
+                .padding(model.layout.titleMessageContentMargins)
+                .readSize(onChange: { titleMessageContentHeight = $0.height })
             
             buttonsScrollView
         })
@@ -126,13 +126,13 @@ struct _VAlert<Content>: View
         }
     }
 
-    @ViewBuilder private var descriptionView: some View {
-        if let description = description, !description.isEmpty {
+    @ViewBuilder private var messageView: some View {
+        if let message = message, !message.isEmpty {
             VText(
-                type: .multiLine(alignment: .center, lineLimit: model.layout.descriptionLineLimit),
-                color: model.colors.description,
-                font: model.fonts.description,
-                title: description
+                type: .multiLine(alignment: .center, lineLimit: model.layout.messageLineLimit),
+                color: model.colors.message,
+                font: model.fonts.message,
+                title: message
             )
                 .padding(model.layout.descirptionMargins)
         }
@@ -280,7 +280,7 @@ struct VAlert_Previews: PreviewProvider {
             .vAlert(isPresented: $isPresented, alert: {
                 VAlert(
                     title: "Lorem ipsum",
-                    description: "Lorem ipsum dolor sit amet",
+                    message: "Lorem ipsum dolor sit amet",
                     content: {
                         VTextField(text: .constant("Lorem ipsum dolor sit amet"))
                     },

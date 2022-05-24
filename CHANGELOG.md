@@ -137,10 +137,12 @@ VDialog
 - Alert now supports landscape mode
 - Alert can now be created with `Error`
 - Alert now has option for adding shadow
+- `description` is renamed to `message`
 
 VActionSheet
 
 - `VActionSheet` is renamed to `VConfirmationDialog`
+- `description` is renamed to `message`
 
 VMenu
 

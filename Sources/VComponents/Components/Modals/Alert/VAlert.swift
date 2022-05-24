@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Alert
 /// Modal component that presents alert when condition is `true`.
 ///
-/// Model, title, description, and content can be passed as parameters.
+/// Model, title, message, and content can be passed as parameters.
 ///
 /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while many buttons are stacked vertically.
 ///
@@ -28,7 +28,7 @@ import SwiftUI
 ///             .vAlert(isPresented: $isPresented, alert: {
 ///                 VAlert(
 ///                     title: "Lorem ipsum",
-///                     description: "Lorem ipsum dolor sit amet",
+///                     message: "Lorem ipsum dolor sit amet",
 ///                     actions: [
 ///                         .primary(action: { print("Confirmed") }, title: "Confirm"),
 ///                         .cancel(action: { print("Cancelled") })
@@ -44,38 +44,38 @@ public struct VAlert<Content>
     fileprivate let model: VAlertModel
     
     fileprivate let title: String?
-    fileprivate let description: String?
+    fileprivate let message: String?
     fileprivate let content: (() -> Content)?
     fileprivate let buttons: [VAlertButton]
     
     // MARK: Initializers
-    /// Initializes component with buttons, title, description, and content.
+    /// Initializes component with buttons, title, message, and content.
     public init(
         model: VAlertModel = .init(),
         title: String?,
-        description: String?,
+        message: String?,
         @ViewBuilder content: @escaping () -> Content,
         actions buttons: [VAlertButton]
     ) {
         self.model = model
         self.title = title
-        self.description = description
+        self.message = message
         self.content = content
         self.buttons = buttons
     }
     
-    /// Initializes component with buttons, title, and description.
+    /// Initializes component with buttons, title, and message.
     public init(
         model: VAlertModel = .init(),
         title: String?,
-        description: String?,
+        message: String?,
         actions buttons: [VAlertButton]
     )
         where Content == Never
     {
         self.model = model
         self.title = title
-        self.description = description
+        self.message = message
         self.content = nil
         self.buttons = buttons
     }
@@ -103,7 +103,7 @@ extension View {
                         presentHandler: presentHandler,
                         dismissHandler: dismissHandler,
                         title: alert.title,
-                        description: alert.description,
+                        message: alert.message,
                         content: alert.content,
                         buttons: alert.buttons
                     )
