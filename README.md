@@ -58,7 +58,7 @@ Models are structs with default values. They break down into 5 sub-structs: `Lay
 
 For instance, changing foreground color of `VSecondaryButton` can be done by passing a model.
 
-**Not Preferred**:
+Not Preferred:
 
 ```swift
 var body: some View {
@@ -70,7 +70,7 @@ var body: some View {
 }
 ```
 
-**Preferred**:
+Preferred:
 
 ```swift
 let model: VSecondaryButtonModel = {
@@ -144,7 +144,7 @@ Some enums can also contain additional cases, such as `focused` for `VBaseTextFi
 
 VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom model.
 
-**Not Preferred**:
+Not Preferred:
 
 ```swift
 @State var isOn: Bool = false
@@ -161,7 +161,7 @@ var body: some View {
 }
 ```
 
-**Preferred**:
+Preferred:
 
 ```swift
 @State var isOn: Bool = false
@@ -200,7 +200,7 @@ Project contains demo app, that can be run to showcase all components.
 
 ## Installation
 
-##### Swift Package Manager
+#### Swift Package Manager
 
 Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode and follow the instructions.
 
