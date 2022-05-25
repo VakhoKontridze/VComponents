@@ -71,7 +71,7 @@ public struct VBottomSheetModel {
         /// Header alignment. Defaults to `center`.
         public var headerAlignment: VerticalAlignment = modalReference.layout.headerAlignment
         
-        /// Header margins. Defaults to `15` leading, `15` trailing, `10` top, and `10` bottom.
+        /// Header margins. Defaults to `15` horizontal, `10` vertical.
         public var headerMargins: Margins = modalReference.layout.headerMargins
         
         /// Close button dimension. Defaults to `30`.
@@ -89,7 +89,7 @@ public struct VBottomSheetModel {
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: Margins = modalReference.layout.dividerMargins
         
-        /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        /// Content margins. Defaults to `15`'s.
         public var contentMargins: Margins = modalReference.layout.contentMargins
         
         /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.

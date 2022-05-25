@@ -56,7 +56,7 @@ public struct VModalModel {
         /// Header alignment. Defaults to `center`.
         public var headerAlignment: VerticalAlignment = .center
         
-        /// Header margins. Defaults to `15` leading, `15` trailing, `10` top, and `10` bottom.
+        /// Header margins. Defaults to `15` horizontal, `10` vertical.
         public var headerMargins: Margins = disclosureGroupReference.layout.headerMargins
         
         /// Close button dimension. Defaults to `30`.
@@ -74,7 +74,7 @@ public struct VModalModel {
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: Margins = .zero
         
-        /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        /// Content margins. Defaults to `15`'s.
         public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
         
         /// Edges ignored by keyboard. Defaults to `[]`.

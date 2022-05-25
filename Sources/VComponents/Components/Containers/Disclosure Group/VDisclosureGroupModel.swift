@@ -42,7 +42,7 @@ public struct VDisclosureGroupModel {
         /// Disclosure group corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
-        /// Header margins. Defaults to `15` horizontal and  `0` vertical.
+        /// Header margins. Defaults to `15` horizontal and  `10` vertical.
         public var headerMargins: Margins = .init(
             horizontal: sheetReference.layout.contentMargin,
             vertical: 10
@@ -63,7 +63,7 @@ public struct VDisclosureGroupModel {
             vertical: 0
         )
         
-        /// Content margins. Defaults to `15` leading, `15` trailing, `15` top, and `15` bottom.
+        /// Content margins. Defaults to `15`'s.
         public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
         // MARK: Initializers
