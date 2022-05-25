@@ -31,7 +31,7 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         ZStack(alignment: .top, content: {
-///             ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+///             ColorBook.canvas.ignoresSafeArea()
 ///
 ///             VLazyScrollView(data: data, content: { row in
 ///                 Text(row.title)

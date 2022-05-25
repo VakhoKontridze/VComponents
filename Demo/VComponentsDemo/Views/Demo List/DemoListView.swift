@@ -36,7 +36,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     // MARK: Body
     var body: some View {
         ZStack(content: {
-            ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+            ColorBook.canvas.ignoresSafeArea()
             
             switch demoType {
             case .disclosureGroup:

@@ -100,7 +100,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
     // MARK: Body
     var body: some View {
         ZStack(content: {
-            ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+            ColorBook.canvas.ignoresSafeArea()
             
             if hasLayer { VSheet() }
 

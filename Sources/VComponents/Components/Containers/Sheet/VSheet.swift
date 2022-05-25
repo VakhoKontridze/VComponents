@@ -19,7 +19,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         ZStack(alignment: .top, content: {
-///             ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+///             ColorBook.canvas.ignoresSafeArea()
 ///
 ///             VSheet(content: {
 ///                 VList(data: 0..<20, content: { num in
@@ -88,7 +88,7 @@ public struct VSheet<Content>: View where Content: View {
 struct VSheet_Previews: PreviewProvider {
     static var previews: some View {
         ZStack(alignment: .top, content: {
-            ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+            ColorBook.canvas.ignoresSafeArea()
             
             VSheet(content: {
                 VList(data: 0..<20, content: { num in

@@ -21,7 +21,7 @@ import SwiftUI
 ///     var body: some View {
 ///         NavigationView(content: {
 ///             ZStack(content: {
-///                 ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+///                 ColorBook.canvas.ignoresSafeArea()
 ///
 ///                 VNavigationLink(
 ///                     destination: { destination },
@@ -39,7 +39,7 @@ import SwiftUI
 ///     }
 ///
 ///     var destination: some View {
-///         ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+///         ColorBook.canvas.ignoresSafeArea()
 ///            .navigationTitle("Destination")
 ///            .navigationBarTitleDisplayMode(.inline)
 ///     }
@@ -116,7 +116,7 @@ public struct VNavigationLink<Destination, Label>: View
 // MARK: - Preview
 struct VNavigationLink_Previews: PreviewProvider {
     private static var destination: some View {
-        ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+        ColorBook.canvas.ignoresSafeArea()
            .navigationTitle("Destination")
            .navigationBarTitleDisplayMode(.inline)
     }
@@ -124,7 +124,7 @@ struct VNavigationLink_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView(content: {
             ZStack(content: {
-                ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+                ColorBook.canvas.ignoresSafeArea()
 
                 VNavigationLink(
                     destination: { destination },

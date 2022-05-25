@@ -44,7 +44,7 @@ struct VNavigationLinkDemoView: View {
     private var buttonTitle: String { "Lorem Ipsum" }
     
     private func destination() -> some View {
-        ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+        ColorBook.canvas.ignoresSafeArea()
             .standardNavigationTitle("Destination")
     }
 }

@@ -47,7 +47,7 @@ struct _VToast: View {
             contentView
         })
             .frame(maxHeight: .infinity, alignment: .top)
-            .ignoresSafeArea(.all, edges: .all)
+            .ignoresSafeArea()
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
             .onChange(

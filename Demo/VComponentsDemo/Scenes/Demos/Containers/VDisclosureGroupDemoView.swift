@@ -41,7 +41,7 @@ struct VDisclosureGroupDemoView: View {
     
     private func component() -> some View {
         ZStack(alignment: .top, content: {
-            ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+            ColorBook.canvas.ignoresSafeArea()
 
             VDisclosureGroup(
                 model: model,

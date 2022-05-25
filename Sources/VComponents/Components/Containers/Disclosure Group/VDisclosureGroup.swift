@@ -18,7 +18,7 @@ import VCore
 /// Usage example:
 ///
 ///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+///         ColorBook.canvas.ignoresSafeArea()
 ///
 ///         VDisclosureGroup(
 ///             isExpanded: $isExpanded,
@@ -210,7 +210,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
     
     static var previews: some View {
         ZStack(alignment: .top, content: {
-            ColorBook.canvas.ignoresSafeArea(.all, edges: .all)
+            ColorBook.canvas.ignoresSafeArea()
 
             VDisclosureGroup(
                 isExpanded: $isExpanded,
