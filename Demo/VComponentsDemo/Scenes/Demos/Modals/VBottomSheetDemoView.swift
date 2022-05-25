@@ -75,6 +75,7 @@ struct VBottomSheetDemoView: View {
                         .vBottomSheet(
                             model: model,
                             isPresented: $isPresented,
+                            headerTitle: "Lorem Ipsum Dolor Sit Amet",
                             content: { bottomSheetContent }
                         )
                 }, elseTransform: {
