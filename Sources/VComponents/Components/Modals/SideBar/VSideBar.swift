@@ -41,6 +41,8 @@ struct VSideBar<Content>: View where Content: View {
             dimmingView
             sideBar
         })
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.container, edges: .all)
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,

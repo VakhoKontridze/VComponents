@@ -28,11 +28,11 @@ struct VBottomSheetDemoView: View {
         
         if heightType == .fixed {
             model.layout.sizes = .init( // Assumes that relative is default
-                portrait: .relative(.init(
+                portrait: .point(.init(
                     width: model.layout.sizes.portrait.size.width,
                     heights: .fixed(model.layout.sizes.portrait.size.heights.ideal)
                 )),
-                landscape: .relative(.init(
+                landscape: .point(.init(
                     width: model.layout.sizes.landscape.size.width,
                     heights: .fixed(model.layout.sizes.landscape.size.heights.ideal)
                 ))

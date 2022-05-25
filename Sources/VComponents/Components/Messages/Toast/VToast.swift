@@ -43,11 +43,15 @@ struct VToast: View {
 
     // MARK: Body
     var body: some View {
-        Group(content: {
-            contentView
+        ZStack(content: {
+            Group(content: {
+                contentView
+            })
+                .frame(maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea()
         })
-            .frame(maxHeight: .infinity, alignment: .top)
-            .ignoresSafeArea()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.container, edges: .all)
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
             .onChange(

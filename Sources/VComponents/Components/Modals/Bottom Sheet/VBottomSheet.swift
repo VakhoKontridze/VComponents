@@ -52,15 +52,17 @@ struct VBottomSheet<HeaderLabel, Content>: View
         self.headerLabel = headerLabel
         self.content = content
         
-        _offset = .init(initialValue: model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.ideal)
+        _offset = .init(initialValue: model.layout.sizes._current.size.heights.idealOffset)
     }
 
     // MARK: Body
     var body: some View {
-        ZStack(alignment: .bottom, content: {
+        ZStack(content: {
             dimmingView
             bottomSheet
         })
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .ignoresSafeArea(.container, edges: .all)
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,
@@ -96,7 +98,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
                                 .onEnded(dragEnded)
                         )
                 })
-
+                    
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
                     grabber
@@ -104,7 +106,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
                     divider
                 })
                     .readSize(onChange: { grabberDividerHeight = $0.height })
-                
+
                 contentView
             })
                 .frame(maxHeight: .infinity, alignment: .top)
@@ -115,8 +117,6 @@ struct VBottomSheet<HeaderLabel, Content>: View
                 })
         })
             .frame(width: model.layout.sizes._current.size.width)
-            .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
                 $0
                     .frame(height: model.layout.sizes._current.size.heights.max)
@@ -127,6 +127,8 @@ struct VBottomSheet<HeaderLabel, Content>: View
                             .onEnded(dragEnded)
                     )
             })
+            .ignoresSafeArea(.container, edges: .all)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
     }
 
     @ViewBuilder private var grabber: some View {
@@ -274,18 +276,16 @@ struct VBottomSheet<HeaderLabel, Content>: View
         currentDragValue = dragValue
         
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
-        let maxAllowedOffset: CGFloat = model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.min
-        let minAllowedOffset: CGFloat = model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.max
-        
+
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             offset = {
                 switch newOffset {
-                case ...minAllowedOffset:
-                    return minAllowedOffset
+                case ...model.layout.sizes._current.size.heights.maxOffset:
+                    return model.layout.sizes._current.size.heights.maxOffset
                     
-                case maxAllowedOffset...:
+                case model.layout.sizes._current.size.heights.minOffset...:
                     switch model.misc.dismissType.contains(.pullDown) {
-                    case false: return maxAllowedOffset
+                    case false: return model.layout.sizes._current.size.heights.minOffset
                     case true: return newOffset
                     }
                     
@@ -338,7 +338,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     
     // MARK: Orientation
     private func resetHeightFromOrientationChange() {
-        offset = model.layout.sizes._current.size.heights.max - model.layout.sizes._current.size.heights.ideal
+        offset = model.layout.sizes._current.size.heights.idealOffset
     }
 }
 

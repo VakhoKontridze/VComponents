@@ -24,11 +24,11 @@ enum VBottomSheetSnapAction {
         let isGoingDown: Bool = velocity > 0
         
         switch (region, isGoingDown) {
-        case (.idealToMax, false): return .snap(heights.max - heights.max)
-        case (.idealToMax, true): return .snap(heights.max - heights.ideal)
-        case (.minToIdeal, false): return .snap(heights.max - heights.ideal)
-        case (.minToIdeal, true): return .snap(heights.max - heights.min)
-        case (.pullDownToMin, false): return .snap(heights.max - heights.min)
+        case (.idealToMax, false): return .snap(heights.maxOffset)
+        case (.idealToMax, true): return .snap(heights.idealOffset)
+        case (.minToIdeal, false): return .snap(heights.idealOffset)
+        case (.minToIdeal, true): return .snap(heights.minOffset)
+        case (.pullDownToMin, false): return .snap(heights.minOffset)
         case (.pullDownToMin, true): return .dismiss
         }
     }
@@ -49,8 +49,7 @@ enum VBottomSheetSnapAction {
             guard isDraggedDown else { return false }
 
             let newOffset: CGFloat = offsetBeforeDrag + translation
-            let maxAllowedOffset: CGFloat = heights.max - heights.min
-            guard newOffset - maxAllowedOffset >= abs(pullDownDismissDistance) else { return false }
+            guard newOffset - heights.minOffset >= abs(pullDownDismissDistance) else { return false }
 
             return true
         }()

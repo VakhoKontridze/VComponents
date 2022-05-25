@@ -43,6 +43,7 @@ extension View {
         self
             .background(PresentationHost(
                 isPresented: isPresented,
+                allowsHitTests: false,
                 content: {
                     VToast(
                         model: model,
@@ -101,6 +102,7 @@ extension View {
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
+                allowsHitTests: false,
                 content: { () -> VToast in
                     let item = item.wrappedValue! // fatalError
                     
@@ -165,6 +167,7 @@ extension View {
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
+                allowsHitTests: false,
                 content: { () -> VToast in
                     let data = data! // fatalError
                     
@@ -229,6 +232,7 @@ extension View {
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
+                allowsHitTests: false,
                 content: { () -> VToast in
                     let error = error! // fatalError
                     

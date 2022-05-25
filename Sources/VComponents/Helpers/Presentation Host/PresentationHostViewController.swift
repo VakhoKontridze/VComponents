@@ -57,9 +57,7 @@ public final class PresentationHostViewController: UIViewController {
             return
         }
         
-        hostingController = .init(rootView: .init(
-            content.frame(maxWidth: .infinity, maxHeight: .infinity)
-        ))
+        hostingController = .init(rootView: .init(content))
         guard let hostingController = hostingController else { fatalError() }
         
         let id: Int = Self.idGenerator.value
@@ -85,9 +83,7 @@ public final class PresentationHostViewController: UIViewController {
     }
     
     func updateHostedView<Content>(with content: Content) where Content: View {
-        hostingController?.rootView = .init(
-            content.frame(maxWidth: .infinity, maxHeight: .infinity)
-        )
+        hostingController?.rootView = .init(content)
     }
     
     func dismissHostedView() {

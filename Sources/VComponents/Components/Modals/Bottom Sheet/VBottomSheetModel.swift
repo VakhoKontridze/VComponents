@@ -49,7 +49,7 @@ public struct VBottomSheetModel {
             )),
             landscape: .relative(.init(
                 width: 0.7,
-                heights: .fixed(0.95)
+                heights: .fixed(0.9)
             ))
         )
         
@@ -162,9 +162,26 @@ public struct VBottomSheetModel {
                 ideal != max
             }
             
-            var minOffset: CGFloat { max - min } // Offsets start from 0 at the top
-            var idealOffset: CGFloat { max - ideal } // Offsets start from 0 at the top
-            var maxOffset: CGFloat { max - max } // Offsets start from 0 at the top
+            var minOffset: CGFloat {
+                switch isResizable {
+                case false: return (UIScreen.main.bounds.height - min) / 2
+                case true: return UIScreen.main.bounds.height - min
+                }
+            }
+            
+            var idealOffset: CGFloat {
+                switch isResizable {
+                case false: return (UIScreen.main.bounds.height - ideal) / 2
+                case true: return UIScreen.main.bounds.height - ideal
+                }
+            }
+            
+            var maxOffset: CGFloat {
+                switch isResizable {
+                case false: return (UIScreen.main.bounds.height - max) / 2
+                case true: return UIScreen.main.bounds.height - max
+                }
+            }
             
             // MARK: Initializers
             /// Initializes `Height`.
