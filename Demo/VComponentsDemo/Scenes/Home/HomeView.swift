@@ -37,7 +37,6 @@ struct HomeView: View {
             DemoListView(type: .disclosureGroup, sections: sections)
                 .standardNavigationTitle(Self.navBarTitle)
         })
-            .navigationViewStyle(.stack)
     }
     
     // MARK: Home Row

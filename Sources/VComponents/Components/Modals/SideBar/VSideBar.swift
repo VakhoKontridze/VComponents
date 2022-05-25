@@ -57,13 +57,13 @@ extension View {
     ) -> some View
         where Content: View
     {
-        let sideBar = sideBar()
-        
-        return self
+        self
             .background(PresentationHost(
                 isPresented: isPresented,
-                content: {
-                    _VSideBar(
+                content: { () -> _VSideBar<Content> in
+                    let sideBar = sideBar()
+                    
+                    return _VSideBar(
                         model: sideBar.model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -74,7 +74,7 @@ extension View {
     }
     
     /// Presents `VSideBar` using the item as data source for content.
-    @ViewBuilder public func vSideBar<Item, Content>(
+    public func vSideBar<Item, Content>(
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -84,20 +84,14 @@ extension View {
             Item: Identifiable,
             Content: View
     {
-        switch item.wrappedValue {
-        case nil:
-            self
-            
-        case let _item?:
-            vSideBar(
-                isPresented: .init(
-                    get: { true },
-                    set: { _ in item.wrappedValue = nil }
-                ),
-                onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                sideBar: { sideBar(_item) }
-            )
-        }
+        vSideBar(
+            isPresented: .init(
+                get: { item.wrappedValue != nil },
+                set: { _ in item.wrappedValue = nil }
+            ),
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            sideBar: { sideBar(item.wrappedValue!) } // fatalError
+        )
     }
 }

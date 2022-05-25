@@ -98,13 +98,13 @@ extension View {
             HeaderLabel: View,
             Content: View
     {
-        let modal = modal()
-        
-        return self
+        self
             .background(PresentationHost(
                 isPresented: isPresented,
-                content: {
-                    _VModal(
+                content: { () -> _VModal<HeaderLabel, Content> in
+                    let modal = modal()
+                    
+                    return _VModal(
                         model: modal.model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -116,7 +116,7 @@ extension View {
     }
     
     /// Presents `VModal` using the item as data source for content.
-    @ViewBuilder public func vModal<Item, HeaderLabel, Content>(
+    public func vModal<Item, HeaderLabel, Content>(
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -127,20 +127,14 @@ extension View {
             HeaderLabel: View,
             Content: View
     {
-        switch item.wrappedValue {
-        case nil:
-            self
-            
-        case let _item?:
-            vModal(
-                isPresented: .init(
-                    get: { true },
-                    set: { _ in item.wrappedValue = nil }
-                ),
-                onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                modal: { modal(_item) }
-            )
-        }
+        vModal(
+            isPresented: .init(
+                get: { item.wrappedValue != nil },
+                set: { _ in item.wrappedValue = nil }
+            ),
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            modal: { modal(item.wrappedValue!) } // fatalError
+        )
     }
 }

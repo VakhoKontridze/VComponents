@@ -56,14 +56,14 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         toast: @escaping () -> VToast
     ) -> some View {
-        let toast = toast()
-        
-        return self
+        self
             .background(PresentationHost(
                 isPresented: isPresented,
                 allowsHitTests: false,
-                content: {
-                    _VToast(
+                content: { () -> _VToast in 
+                    let toast = toast()
+                    
+                    return _VToast(
                         model: toast.model,
                         type: toast.toastType,
                         onPresent: presentHandler,
@@ -75,7 +75,7 @@ extension View {
     }
     
     /// Presents `VToast` using the item as data source for content.
-    @ViewBuilder public func vToast<Item>(
+    public func vToast<Item>(
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -83,20 +83,14 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        switch item.wrappedValue {
-        case nil:
-            self
-            
-        case let _item?:
-            vToast(
-                isPresented: .init(
-                    get: { true },
-                    set: { _ in item.wrappedValue = nil }
-                ),
-                onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                toast: { toast(_item) }
-            )
-        }
+        vToast(
+            isPresented: .init(
+                get: { item.wrappedValue != nil },
+                set: { _ in item.wrappedValue = nil }
+            ),
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            toast: { toast(item.wrappedValue!) } // fatalError
+        )
     }
 }

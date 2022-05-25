@@ -92,13 +92,13 @@ extension View {
     ) -> some View
         where Content: View
     {
-        let alert = alert()
-        
-        return self
+        self
             .background(PresentationHost(
                 isPresented: isPresented,
-                content: {
-                    _VAlert(
+                content: { () -> _VAlert<Content> in 
+                    let alert = alert()
+                    
+                    return _VAlert(
                         model: alert.model,
                         presentHandler: presentHandler,
                         dismissHandler: dismissHandler,
@@ -112,7 +112,7 @@ extension View {
     }
     
     /// Presents `VAlert` using the item as data source for content.
-    @ViewBuilder public func vAlert<Item, Content>(
+    public func vAlert<Item, Content>(
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -122,21 +122,15 @@ extension View {
             Item: Identifiable,
             Content: View
     {
-        switch item.wrappedValue {
-        case nil:
-            self
-            
-        case let _item?:
-            vAlert(
-                isPresented: .init(
-                    get: { true },
-                    set: { _ in item.wrappedValue = nil }
-                ),
-                onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                alert: { alert(_item) }
-            )
-        }
+        vAlert(
+            isPresented: .init(
+                get: { item.wrappedValue != nil },
+                set: { _ in item.wrappedValue = nil }
+            ),
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            alert: { alert(item.wrappedValue!) } // fatalError
+        )
     }
     
     /// Presents `VAlert` when boolean is `true` with an `Error`.

@@ -25,6 +25,7 @@ public final class PresentationHostViewController: UIViewController {
     // MARK: Properties
     private var hostingController: HostingViewControllerType?
     typealias HostingViewControllerType = UIHostingController<AnyView>
+    var isPresentingView: Bool { hostingController != nil }
     
     private let allowsHitTests: Bool
     
@@ -59,7 +60,7 @@ public final class PresentationHostViewController: UIViewController {
         hostingController = .init(rootView: .init(
             content.frame(maxWidth: .infinity, maxHeight: .infinity)
         ))
-        guard let hostingController = hostingController else { return }
+        guard let hostingController = hostingController else { fatalError() }
         
         let id: Int = Self.idGenerator.value
         self.id = id
@@ -93,6 +94,7 @@ public final class PresentationHostViewController: UIViewController {
         guard let windowView = windowView else { return }
         
         windowView.subviews.first(where: { $0.tag == id })?.removeFromSuperview()
+        hostingController = nil
         id = nil
     }
 }

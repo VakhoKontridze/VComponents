@@ -126,13 +126,13 @@ extension View {
             HeaderLabel: View,
             Content: View
     {
-        let bottomSheet = bottomSheet()
-        
-        return self
+        self
             .background(PresentationHost(
                 isPresented: isPresented,
-                content: {
-                    _VBottomSheet(
+                content: { () -> _VBottomSheet<HeaderLabel, Content> in 
+                    let bottomSheet = bottomSheet()
+                    
+                    return _VBottomSheet(
                         model: bottomSheet.model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -144,7 +144,7 @@ extension View {
     }
     
     /// Presents `VBottomSheet` using the item as data source for content.
-    @ViewBuilder public func vBottomSheet<Item, HeaderLabel, Content>(
+    public func vBottomSheet<Item, HeaderLabel, Content>(
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -155,20 +155,14 @@ extension View {
             HeaderLabel: View,
             Content: View
     {
-        switch item.wrappedValue {
-        case nil:
-            self
-            
-        case let _item?:
-            vBottomSheet(
-                isPresented: .init(
-                    get: { true },
-                    set: { _ in item.wrappedValue = nil }
-                ),
-                onPresent: presentHandler,
-                onDismiss: dismissHandler,
-                bottomSheet: { bottomSheet(_item) }
-            )
-        }
+        vBottomSheet(
+            isPresented: .init(
+                get: { item.wrappedValue != nil },
+                set: { _ in item.wrappedValue = nil }
+            ),
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            bottomSheet: { bottomSheet(item.wrappedValue!) } // fatalError
+        )
     }
 }
