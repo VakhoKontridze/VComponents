@@ -6,568 +6,285 @@
 //
 
 import SwiftUI
+import VCore
 
-// MARK: - Bool
-extension View {
-    /// Presents `VAlert` when boolean is `true`.
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 isPresented: $isPresented,
-    ///                 title: "Lorem ipsum",
-    ///                 message: "Lorem ipsum dolor sit amet",
-    ///                 actions: [
-    ///                     .primary(action: { print("Confirmed") }, title: "Confirm"),
-    ///                     .cancel(action: { print("Cancelled") })
-    ///                 ]
-    ///             )
-    ///     }
-    ///
-    public func vAlert(
-        model: VAlertModel = .init(),
-        isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
+// MARK: - V Alert
+struct VAlert<Content>: View
+    where Content: View
+{
+    // MARK: Properties
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
+    
+    private let model: VAlertModel
+    
+    private let presentHandler: (() -> Void)?
+    private let dismissHandler: (() -> Void)?
+    
+    private let title: String?
+    private let message: String?
+    private let content: (() -> Content)?
+    private let buttons: [VAlertButton]
+    
+    @State private var isInternallyPresented: Bool = false
+    
+    @State private var titleMessageContentHeight: CGFloat = 0
+    @State private var buttonsStackHeight: CGFloat = 0
+    private var buttonsStackShouldScroll: Bool {
+        let safeAreaHeight: CGFloat =
+            UIScreen.main.bounds.height -
+            UIDevice.safeAreaInsetTop -
+            UIDevice.safeAreaInsetBottom
+        
+        let alertHeight: CGFloat =
+            titleMessageContentHeight +
+            buttonsStackHeight
+        
+        return alertHeight > safeAreaHeight
+    }
+    
+    // MARK: Initializers
+    init(
+        model: VAlertModel,
+        onPresent presentHandler: (() -> Void)?,
+        onDismiss dismissHandler: (() -> Void)?,
         title: String?,
         message: String?,
-        actions buttons: [VAlertButton]
-    ) -> some View {
-        self
-            .background(PresentationHost(
-                isPresented: isPresented,
+        content: (() -> Content)?,
+        buttons: [VAlertButton]
+    ) {
+        self.model = model
+        self.presentHandler = presentHandler
+        self.dismissHandler = dismissHandler
+        self.title = title
+        self.message = message
+        self.content = content
+        self.buttons = VAlertButton.process(buttons)
+    }
+
+    // MARK: Body
+    var body: some View {
+        ZStack(content: {
+            dimmingView
+            alert
+        })
+            .ignoresSafeArea(.container, edges: .horizontal)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
+            .onAppear(perform: animateIn)
+            .onChange(
+                of: presentationMode.isExternallyDismissed,
+                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+            )
+    }
+    
+    private var dimmingView: some View {
+        model.colors.dimmingView
+            .ignoresSafeArea(.container, edges: .vertical)
+    }
+    
+    private var alert: some View {
+        VStack(spacing: 0, content: {
+            VStack(spacing: 0, content: {
+                titleView
+                messageView
+                contentView
+            })
+                .padding(model.layout.titleMessageContentMargins)
+                .readSize(onChange: { titleMessageContentHeight = $0.height })
+            
+            buttonsScrollView
+        })
+            .frame(width: model.layout.sizes._current.size.width)
+            .background(background)
+            .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
+            .opacity(isInternallyPresented ? 1 : model.animations.opacity)
+            .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
+    }
+    
+    private var background: some View {
+        VSheet(model: model.sheetSubModel)
+            .shadow(
+                color: model.colors.shadow,
+                radius: model.colors.shadowRadius,
+                x: model.colors.shadowOffset.width,
+                y: model.colors.shadowOffset.height
+            )
+    }
+
+    @ViewBuilder private var titleView: some View {
+        if let title = title, !title.isEmpty {
+            VText(
+                type: .multiLine(alignment: .center, lineLimit: model.layout.titleLineLimit),
+                color: model.colors.title,
+                font: model.fonts.title,
+                text: title
+            )
+                .padding(model.layout.titleMargins)
+        }
+    }
+
+    @ViewBuilder private var messageView: some View {
+        if let message = message, !message.isEmpty {
+            VText(
+                type: .multiLine(alignment: .center, lineLimit: model.layout.messageLineLimit),
+                color: model.colors.message,
+                font: model.fonts.message,
+                text: message
+            )
+                .padding(model.layout.messageMargins)
+        }
+    }
+
+    @ViewBuilder private var contentView: some View {
+        if let content = content {
+            content()
+                .padding(model.layout.contentMargins)
+        }
+    }
+    
+    @ViewBuilder private var buttonsScrollView: some View {
+        if buttonsStackShouldScroll {
+            ScrollView(content: { buttonsStack }).padding(.bottom, 0.1) // Fixes SwiftUI `ScrollView` safe area bug
+        } else {
+            buttonsStack
+        }
+    }
+    
+    private var buttonsStack: some View {
+        Group(content: {
+            switch buttons.count {
+            case 1:
+                buttonsContent()
+            
+            case 2:
+                HStack(  // Cancel button is last
+                    spacing: model.layout.horizontalButtonSpacing,
+                    content: { buttonsContent(reverseOrder: true) }
+                )
+            
+            case 3...:
+                VStack(
+                    spacing: model.layout.verticallButtonSpacing,
+                    content: { buttonsContent() }
+                )
+            
+            default:
+                fatalError()
+            }
+        })
+            .padding(model.layout.buttonMargins)
+            .readSize(onChange: { buttonsStackHeight = $0.height })
+    }
+    
+    private func buttonsContent(reverseOrder: Bool = false) -> some View {
+        let buttons: [VAlertButton] = {
+            switch reverseOrder {
+            case false: return self.buttons
+            case true: return self.buttons.reversed()
+            }
+        }()
+        
+        return ForEach(buttons.indices, id: \.self, content: { i in
+            buttonView(buttons[i])
+        })
+    }
+    
+    private func buttonView(_ button: VAlertButton) -> some View {
+        Group(content: {
+            switch button._alertButton {
+            case .primary:
+                VAlertPrimaryButton(
+                    model: model.primaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+                
+            case .secondary:
+                VAlertSecondaryButton(
+                    model: model.secondaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+                
+            case .destructive:
+                VAlertSecondaryButton(
+                    model: model.destructiveButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+            
+            case .cancel:
+                VAlertSecondaryButton(
+                    model: model.secondaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+                
+            case .ok:
+                VAlertSecondaryButton(
+                    model: model.secondaryButtonSubModel,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                )
+            }
+        })
+            .disabled(!button.isEnabled)
+    }
+    
+    // MARK: Animations
+    private func animateIn() {
+        withBasicAnimation(
+            model.animations.appear,
+            body: { isInternallyPresented = true },
+            completion: {
+                DispatchQueue.main.async(execute: { presentHandler?() })
+            }
+        )
+    }
+
+    private func animateOut(completion: (() -> Void)?) {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
+                presentationMode.dismiss()
+                DispatchQueue.main.async(execute: { dismissHandler?(); completion?() })
+            }
+        )
+    }
+
+    private func animateOutFromExternalDismiss() {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
+                presentationMode.externalDismissCompletion()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
+    }
+}
+
+// MARK: - Preview
+struct VAlert_Previews: PreviewProvider {
+    @State static var isPresented: Bool = true
+
+    static var previews: some View {
+        VPlainButton(
+            action: { /*isPresented = true*/ },
+            title: "Present"
+        )
+            .vAlert(
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
                 content: {
-                    _VAlert<Never>(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title,
-                        message: message,
-                        content: nil,
-                        buttons: buttons
-                    )
-                }
-            ))
-    }
-    
-    /// Presents `VAlert` when boolean is `true`.
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     @State var text: String = ""
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 isPresented: $isPresented,
-    ///                 title: "Lorem ipsum",
-    ///                 message: "Lorem ipsum dolor sit amet",
-    ///                 content: { VTextField(text: $text) },
-    ///                 actions: [
-    ///                     .primary(isEnabled: !text.isEmpty, action: { print("Confirmed") }, title: "Confirm"),
-    ///                     .cancel(action: { print("Cancelled") })
-    ///                 ]
-    ///             )
-    ///     }
-    ///
-    public func vAlert<Content>(
-        model: VAlertModel = .init(),
-        isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: String?,
-        message: String?,
-        @ViewBuilder content: @escaping () -> Content,
-        actions buttons: [VAlertButton]
-    ) -> some View
-        where Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: isPresented,
-                content: {
-                    _VAlert(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title,
-                        message: message,
-                        content: content,
-                        buttons: buttons
-                    )
-                }
-            ))
-    }
-}
-
-// MARK: - Item
-extension View {
-    /// Presents `VAlert` using the item as data source for content.
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct AlertItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State var alertItem: AlertItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { alertItem = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 item: $alertItem,
-    ///                 title: { item in "Lorem Ipsum" },
-    ///                 message: { item in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { item in
-    ///                     [
-    ///                         .primary(action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vAlert<Item>(
-        model: VAlertModel = .init(),
-        item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (Item) -> String?,
-        message: @escaping (Item) -> String?,
-        actions buttons: @escaping (Item) -> [VAlertButton]
-    ) -> some View
-        where Item: Identifiable
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
-                content: { () -> _VAlert<Never> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title(item),
-                        message: message(item),
-                        content: nil,
-                        buttons: buttons(item)
-                    )
-                }
-            ))
-    }
-    
-    /// Presents `VAlert` using the item as data source for content.
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct AlertItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State var alertItem: AlertItem?
-    ///
-    ///     @State var text: String = ""
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { alertItem = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 item: $alertItem,
-    ///                 title: { item in "Lorem Ipsum" },
-    ///                 message: { item in "Lorem ipsum dolor sit amet" },
-    ///                 content: { item in VTextField(text: $text) },
-    ///                 actions: { item in
-    ///                     [
-    ///                         .primary(isEnabled: !text.isEmpty, action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vAlert<Item, Content>(
-        model: VAlertModel = .init(),
-        item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (Item) -> String?,
-        message: @escaping (Item) -> String?,
-        @ViewBuilder content: @escaping (Item) -> Content,
-        actions buttons: @escaping (Item) -> [VAlertButton]
-    ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
-                content: { () -> _VAlert<Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title(item),
-                        message: message(item),
-                        content: { content(item) },
-                        buttons: buttons(item)
-                    )
-                }
-            ))
-    }
-}
-
-// MARK: - Presenting Data
-extension View {
-    /// Presents `VAlert` when boolean is `true` using data to produce content.
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `data` must not be nil.
-    /// The `data` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct AlertData {}
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     @State var alertData: AlertData?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true; alertData = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertData,
-    ///                 title: { data in "Lorem Ipsum" },
-    ///                 message: { data in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { data in
-    ///                     [
-    ///                         .primary(action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vAlert<T>(
-        model: VAlertModel = .init(),
-        isPresented: Binding<Bool>,
-        presenting data: T?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (T) -> String?,
-        message: @escaping (T) -> String?,
-        actions buttons: @escaping (T) -> [VAlertButton]
-    ) -> some View {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && data != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
-                content: { () -> _VAlert<Never> in
-                    let data = data! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title(data),
-                        message: message(data),
-                        content: nil,
-                        buttons: buttons(data)
-                    )
-                }
-            ))
-    }
-    
-    /// Presents `VAlert` when boolean is `true` using data to produce content.
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `data` must not be nil.
-    /// The `data` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct AlertData {}
-    ///
-    ///     @State var isPresented: Bool = false
-    ///     @State var alertData: AlertData?
-    ///
-    ///     @State var text: String = ""
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true; alertData = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertData,
-    ///                 title: { data in "Lorem Ipsum" },
-    ///                 message: { data in "Lorem ipsum dolor sit amet" },
-    ///                 content: { data in VTextField(text: $text) },
-    ///                 actions: { data in
-    ///                     [
-    ///                         .primary(isEnabled: !text.isEmpty, action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vAlert<T, Content>(
-        model: VAlertModel = .init(),
-        isPresented: Binding<Bool>,
-        presenting data: T?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (T) -> String?,
-        message: @escaping (T) -> String?,
-        @ViewBuilder content: @escaping (T) -> Content,
-        actions buttons: @escaping (T) -> [VAlertButton]
-    ) -> some View
-        where Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && data != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
-                content: { () -> _VAlert<Content> in
-                    let data = data! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title(data),
-                        message: message(data),
-                        content: { content(data) },
-                        buttons: buttons(data)
-                    )
-                }
-            ))
-    }
-}
-
-// MARK: - Error
-extension View {
-    /// Presents `VAlert` when boolean is `true` using `Error`
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `error` must not be nil.
-    /// The `error` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     @State var alertError: Error?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true; alertError = SomeError() },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertError,
-    ///                 title: { error in "Lorem Ipsum" },
-    ///                 message: { error in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { error in [] }
-    ///             )
-    ///     }
-    ///
-    public func vAlert<E>(
-        model: VAlertModel = .init(),
-        isPresented: Binding<Bool>,
-        error: E?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (E) -> String?,
-        message: @escaping (E) -> String?,
-        actions buttons: @escaping (E) -> [VAlertButton]
-    ) -> some View
-        where E: Error
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && error != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
-                content: { () -> _VAlert<Never> in
-                    let error = error! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title(error),
-                        message: message(error),
-                        content: nil,
-                        buttons: buttons(error)
-                    )
-                }
-            ))
-    }
-    
-    /// Presents `VAlert` when boolean is `true` using `Error`
-    ///
-    /// Modal component that presents alert, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
-    ///
-    /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// For the alert to appear, both `isPresented` must be true and `error` must not be nil.
-    /// The `error` should not change after the presentation occurs.
-    /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     @State var alertError: Error?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true; alertError = SomeError() },
-    ///             title: "Present"
-    ///         )
-    ///             .vAlert(
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertError,
-    ///                 title: { error in "Lorem Ipsum" },
-    ///                 message: { error in "Lorem ipsum dolor sit amet" },
-    ///                 content: { error in Image("Error") },
-    ///                 actions: { error in [] }
-    ///             )
-    ///     }
-    ///
-    public func vAlert<E, Content>(
-        model: VAlertModel = .init(),
-        isPresented: Binding<Bool>,
-        error: E?,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (E) -> String?,
-        message: @escaping (E) -> String?,
-        @ViewBuilder content: @escaping (E) -> Content,
-        actions buttons: @escaping (E) -> [VAlertButton]
-    ) -> some View
-        where
-            E: Error,
-            Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && error != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
-                content: { () -> _VAlert<Content> in
-                    let error = error! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        title: title(error),
-                        message: message(error),
-                        content: { content(error) },
-                        buttons: buttons(error)
-                    )
-                }
-            ))
+                    VTextField(text: .constant("Lorem ipsum dolor sit amet"))
+                },
+                actions: [
+                    .primary(action: { print("Confirmed") }, title: "Confirm"),
+                    .cancel(action: { print("Cancelled") })
+                ]
+            )
     }
 }

@@ -7,121 +7,153 @@
 
 import SwiftUI
 
-// MARK: - Bool
-extension View {
-    /// Presents `VSideBar` when boolean is `true`.
-    ///
-    /// Side bar component that draws a from left side with background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///             .vSideBar(
-    ///                 isPresented: $isPresented,
-    ///                 content: {
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vSideBar<Content>(
-        model: VSideBarModel = .init(),
-        isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: isPresented,
-                content: {
-                    _VSideBar(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        content: content
-                    )
-                }
-            ))
+// MARK: - V Side Bar
+struct VSideBar<Content>: View where Content: View {
+    // MARK: Properties
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
+    
+    private let model: VSideBarModel
+    
+    private let presentHandler: (() -> Void)?
+    private let dismissHandler: (() -> Void)?
+    
+    private let content: () -> Content
+    
+    @State private var isInternallyPresented: Bool = false
+
+    // MARK: Initializers
+    init(
+        model: VSideBarModel,
+        onPresent presentHandler: (() -> Void)?,
+        onDismiss dismissHandler: (() -> Void)?,
+        content: @escaping () -> Content
+    ) {
+        self.model = model
+        self.presentHandler = presentHandler
+        self.dismissHandler = dismissHandler
+        self.content = content
+    }
+
+    // MARK: Body
+    var body: some View {
+        ZStack(alignment: .leading, content: {
+            dimmingView
+            sideBar
+        })
+            .ignoresSafeArea(.container, edges: .all)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
+            .onAppear(perform: animateIn)
+            .onChange(
+                of: presentationMode.isExternallyDismissed,
+                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+            )
+    }
+    
+    private var dimmingView: some View {
+        model.colors.dimmingView
+            .onTapGesture(perform: {
+                if model.misc.dismissType.contains(.backTap) { animateOut() }
+            })
+    }
+
+    private var sideBar: some View {
+        ZStack(content: {
+            VSheet(model: model.sheetSubModel)
+                .shadow(
+                    color: model.colors.shadow,
+                    radius: model.colors.shadowRadius,
+                    x: model.colors.shadowOffset.width,
+                    y: model.colors.shadowOffset.height
+                )
+
+            content()
+                .padding(model.layout.contentMargins)
+                .safeAreaMarginInsets(edges: model.layout.contentSafeAreaEdges)
+        })
+            .frame(size: model.layout.sizes._current.size)
+            .offset(x: isInternallyPresented ? 0 : -model.layout.sizes._current.size.width)
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged(dragChanged)
+                
+            ).delayTouches()
+    }
+
+    // MARK: Actions
+    private func animateIn() {
+        withBasicAnimation(
+            model.animations.appear,
+            body: { isInternallyPresented = true },
+            completion: {
+                DispatchQueue.main.async(execute: { presentHandler?() })
+            }
+        )
+    }
+
+    private func animateOut() {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
+                presentationMode.dismiss()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
+    }
+
+    private func animateOutFromDrag() {
+        withBasicAnimation(
+            model.animations.dragBackDismiss,
+            body: { isInternallyPresented = false },
+            completion: {
+                presentationMode.dismiss()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
+    }
+    
+    private func animateOutFromExternalDismiss() {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
+                presentationMode.externalDismissCompletion()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
+    }
+
+    // MARK: Gestures
+    private func dragChanged(dragValue: DragGesture.Value) {
+        guard model.misc.dismissType.contains(.dragBack) else { return }
+        
+        let isDraggedLeft: Bool = dragValue.translation.width <= 0
+        guard isDraggedLeft else { return }
+
+        guard abs(dragValue.translation.width) >= model.layout.dragBackDismissDistance else { return }
+
+        animateOutFromDrag()
     }
 }
 
-// MARK: - Item
-extension View {
-    /// Presents `VSideBar` using the item as data source for content.
-    ///
-    /// Side bar component that draws a from left side with background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct SideBarItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State var sideBarItem: SideBarItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { sideBarItem = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vSideBar(
-    ///                 item: $sideBarItem,
-    ///                 content: { item in
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vSideBar<Item, Content>(
-        model: VSideBarModel = .init(),
-        item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
-    ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
-                content: { () -> _VSideBar<Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        content: { content(item) }
-                    )
+// MARK: - Preview
+struct VSideBar_Previews: PreviewProvider {
+    @State static var isPresented: Bool = true
+
+    static var previews: some View {
+        VPlainButton(
+            action: { /*isPresented = true*/ },
+            title: "Present"
+        )
+            .vSideBar(
+                isPresented: $isPresented,
+                content: {
+                    VList(data: 0..<20, content: { num in
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    })
                 }
-            ))
+            )
     }
 }

@@ -7,386 +7,207 @@
 
 import SwiftUI
 
-// MARK: - Bool
-extension View {
-    /// Presents `VModal` when boolean is `true`.
-    ///
-    /// Modal component that draws a background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///             .vModal(
-    ///                 model: {
-    ///                     var model: VModalModel = .init()
-    ///                     model.misc.dismissType.remove(.leadingButton)
-    ///                     model.misc.dismissType.remove(.trailingButton)
-    ///                     return model
-    ///                 }(),
-    ///                 isPresented: $isPresented,
-    ///                 content: {
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vModal<Content>(
-        model: VModalModel = .init(),
-        isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: isPresented,
-                content: {
-                    _VModal<Never, _>(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .empty,
-                        content: content
-                    )
-                }
-            ))
+// MARK: - V Modal
+struct VModal<HeaderLabel, Content>: View
+    where
+        HeaderLabel: View,
+        Content: View
+{
+    // MARK: Properties
+    @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
+    @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
+    
+    private let model: VModalModel
+    
+    private let presentHandler: (() -> Void)?
+    private let dismissHandler: (() -> Void)?
+    
+    private let headerLabel: VModalHeaderLabel<HeaderLabel>
+    private let content: () -> Content
+    
+    private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
+    private var hasDivider: Bool { hasHeader && model.layout.dividerHeight > 0 }
+    
+    @State private var isInternallyPresented: Bool = false
+    
+    // MARK: Initializers
+    init(
+        model: VModalModel,
+        onPresent presentHandler: (() -> Void)?,
+        onDismiss dismissHandler: (() -> Void)?,
+        headerLabel: VModalHeaderLabel<HeaderLabel>,
+        content: @escaping () -> Content
+    ) {
+        self.model = model
+        self.presentHandler = presentHandler
+        self.dismissHandler = dismissHandler
+        self.headerLabel = headerLabel
+        self.content = content
+    }
+
+    // MARK: Body
+    var body: some View {
+        ZStack(content: {
+            dimmingView
+            modal
+        })
+            .ignoresSafeArea(.container, edges: .all)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
+            .onAppear(perform: animateIn)
+            .onChange(
+                of: presentationMode.isExternallyDismissed,
+                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+            )
     }
     
-    /// Presents `VModal` when boolean is `true`.
-    ///
-    /// Modal component that draws a background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///             .vModal(
-    ///                 isPresented: $isPresented,
-    ///                 headerTitle: "Lorem Ipsum Dolor Sit Amet",
-    ///                 content: {
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vModal<Content>(
-        model: VModalModel = .init(),
-        isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        headerTitle: String,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: isPresented,
-                content: {
-                    _VModal<Never, _>(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .title(title: headerTitle),
-                        content: content
-                    )
-                }
-            ))
+    private var dimmingView: some View {
+        model.colors.dimmingView
+            .onTapGesture(perform: {
+                if model.misc.dismissType.contains(.backTap) { animateOut() }
+            })
+    }
+
+    private var modal: some View {
+        ZStack(content: {
+            VSheet(model: model.sheetSubModel)
+                .shadow(
+                    color: model.colors.shadow,
+                    radius: model.colors.shadowRadius,
+                    x: model.colors.shadowOffset.width,
+                    y: model.colors.shadowOffset.height
+                )
+
+            VStack(spacing: 0, content: {
+                header
+                divider
+                contentView
+            })
+                .frame(maxHeight: .infinity, alignment: .top)
+        })
+            .frame(size: model.layout.sizes._current.size)
+            .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
+            .opacity(isInternallyPresented ? 1 : model.animations.opacity)
+            .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
+    }
+
+    @ViewBuilder private var header: some View {
+        if hasHeader {
+            HStack(alignment: model.layout.headerAlignment, spacing: model.layout.labelCloseButtonSpacing, content: {
+                Group(content: {
+                    if model.misc.dismissType.contains(.leadingButton) {
+                        closeButton
+                    } else if model.misc.dismissType.contains(.trailingButton) {
+                        closeButtonCompensator
+                    }
+                })
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                Group(content: {
+                    switch headerLabel {
+                    case .empty:
+                        EmptyView()
+                        
+                    case .title(let title):
+                        VText(
+                            color: model.colors.headerTitle,
+                            font: model.fonts.header,
+                            text: title
+                        )
+                        
+                    case .custom(let label):
+                        label()
+                    }
+                })
+                    .layoutPriority(1)
+
+                Group(content: {
+                    if model.misc.dismissType.contains(.trailingButton) {
+                        closeButton
+                    } else if model.misc.dismissType.contains(.leadingButton) {
+                        closeButtonCompensator
+                    }
+                })
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            })
+                .padding(model.layout.headerMargins)
+        }
+    }
+
+    @ViewBuilder private var divider: some View {
+        if hasDivider {
+            Rectangle()
+                .frame(height: model.layout.dividerHeight)
+                .padding(model.layout.dividerMargins)
+                .foregroundColor(model.colors.divider)
+        }
+    }
+
+    private var contentView: some View {
+        content()
+            .padding(model.layout.contentMargins)
+            .frame(maxHeight: .infinity)
+    }
+
+    private var closeButton: some View {
+        VSquareButton.close(
+            model: model.closeButtonSubModel,
+            action: animateOut
+        )
     }
     
-    /// Presents `VModal` when boolean is `true`.
-    ///
-    /// Modal component that draws a background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     @State var isPresented: Bool = false
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { isPresented = true },
-    ///             title: "Present"
-    ///         )
-    ///             .vModal(
-    ///                 isPresented: $isPresented,
-    ///                 headerLabel: {
-    ///                     HStack(content: {
-    ///                         Image(systemName: "swift")
-    ///                         Text("Lorem Ipsum Dolor Sit Amet")
-    ///                     })
-    ///                 },
-    ///                 content: {
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vModal<HeaderLabel, Content>(
-        model: VModalModel = .init(),
-        isPresented: Binding<Bool>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where
-            HeaderLabel: View,
-            Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: isPresented,
-                content: {
-                    _VModal(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .custom(label: headerLabel),
-                        content: content
-                    )
-                }
-            ))
+    private var closeButtonCompensator: some View {
+        Spacer()
+            .frame(width: model.layout.closeButtonDimension)
+    }
+
+    // MARK: Animations
+    private func animateIn() {
+        withBasicAnimation(
+            model.animations.appear,
+            body: { isInternallyPresented = true },
+            completion: {
+                DispatchQueue.main.async(execute: { presentHandler?() })
+            }
+        )
+    }
+
+    private func animateOut() {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
+                presentationMode.dismiss()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
+    }
+
+    private func animateOutFromExternalDismiss() {
+        withBasicAnimation(
+            model.animations.disappear,
+            body: { isInternallyPresented = false },
+            completion: {
+                presentationMode.externalDismissCompletion()
+                DispatchQueue.main.async(execute: { dismissHandler?() })
+            }
+        )
     }
 }
 
-// MARK: - Item
-extension View {
-    /// Presents `VModal` using the item as data source for content.
-    ///
-    /// Modal component that draws a background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct ModalItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State var modalItem: ModalItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { modalItem = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vModal(
-    ///                 model: {
-    ///                     var model: VModalModel = .init()
-    ///                     model.misc.dismissType.remove(.leadingButton)
-    ///                     model.misc.dismissType.remove(.trailingButton)
-    ///                     return model
-    ///                 }(),
-    ///                 item: $modalItem,
-    ///                 content: { item in
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vModal<Item, Content>(
-        model: VModalModel = .init(),
-        item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
-    ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
-                content: { () -> _VModal<Never, Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .empty,
-                        content: { content(item) }
-                    )
-                }
-            ))
-    }
-    
-    /// Presents `VModal` using the item as data source for content.
-    ///
-    /// Modal component that draws a background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct ModalItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State var modalItem: ModalItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { modalItem = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vModal(
-    ///                 item: $modalItem,
-    ///                 headerTitle: { item in "Lorem Ipsum Dolor Sit Amet" },
-    ///                 content: { item in
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vModal<Item, Content>(
-        model: VModalModel = .init(),
-        item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        headerTitle: @escaping (Item) -> String,
-        @ViewBuilder content: @escaping (Item) -> Content
-    ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
-                content: { () -> _VModal<Never, Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .title(title: headerTitle(item)),
-                        content: { content(item) }
-                    )
-                }
-            ))
-    }
-    
-    /// Presents `VModal` using the item as data source for content.
-    ///
-    /// Modal component that draws a background, and hosts content.
-    ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
-    ///
-    ///     struct ModalItem: Identifiable {
-    ///         let id: UUID = .init()
-    ///     }
-    ///
-    ///     @State var modalItem: ModalItem?
-    ///
-    ///     var body: some View {
-    ///         VPlainButton(
-    ///             action: { modalItem = .init() },
-    ///             title: "Present"
-    ///         )
-    ///             .vModal(
-    ///                 item: $modalItem,
-    ///                 headerLabel: { item in
-    ///                     HStack(content: {
-    ///                         Image(systemName: "swift")
-    ///                         Text("Lorem Ipsum Dolor Sit Amet")
-    ///                     })
-    ///                 },
-    ///                 content: { item in
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
-    ///                 }
-    ///             )
-    ///     }
-    ///
-    public func vModal<Item, HeaderLabel, Content>(
-        model: VModalModel = .init(),
-        item: Binding<Item?>,
-        onPresent presentHandler: (() -> Void)? = nil,
-        onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping (Item) -> HeaderLabel,
-        @ViewBuilder content: @escaping (Item) -> Content
-    ) -> some View
-        where
-            Item: Identifiable,
-            HeaderLabel: View,
-            Content: View
-    {
-        self
-            .background(PresentationHost(
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
-                content: { () -> _VModal<HeaderLabel, Content> in
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .custom(label: { headerLabel(item) }),
-                        content: { content(item) }
-                    )
-                }
-            ))
+// MARK: - Previews
+struct VModal_Previews: PreviewProvider {
+    @State static var isPresented: Bool = true
+
+    static var previews: some View {
+        VPlainButton(
+            action: { /*isPresented = true*/ },
+            title: "Present"
+        )
+            .vModal(isPresented: $isPresented, headerTitle: "Lorem Ipsum", content: {
+                VList(data: 0..<20, content: { num in
+                    Text(String(num))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                })
+            })
     }
 }
