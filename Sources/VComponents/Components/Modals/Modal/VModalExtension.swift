@@ -143,7 +143,7 @@ extension View {
     ///                 headerLabel: {
     ///                     HStack(content: {
     ///                         Image(systemName: "swift")
-    ///                         Text("Lorem Ipsum Dolor Sit Amet")
+    ///                         Text("Lorem Ipsum Dolor Sit Amet").lineLimit(1)
     ///                     })
     ///                 },
     ///                 content: {
@@ -345,7 +345,7 @@ extension View {
     ///                 headerLabel: { item in
     ///                     HStack(content: {
     ///                         Image(systemName: "swift")
-    ///                         Text("Lorem Ipsum Dolor Sit Amet")
+    ///                         Text("Lorem Ipsum Dolor Sit Amet").lineLimit(1)
     ///                     })
     ///                 },
     ///                 content: { item in
