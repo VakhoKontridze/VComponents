@@ -225,7 +225,7 @@ public struct VSegmentedPicker<Data, Content>: View
                 type: .multiLine(alignment: .leading, lineLimit: model.layout.headerLineLimit),
                 color: model.colors.header.for(internalState),
                 font: model.fonts.header,
-                title: headerTitle
+                text: headerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
         }
@@ -237,7 +237,7 @@ public struct VSegmentedPicker<Data, Content>: View
                 type: .multiLine(alignment: .leading, lineLimit: model.layout.footerLineLimit),
                 color: model.colors.footer.for(internalState),
                 font: model.fonts.footer,
-                title: footerTitle
+                text: footerTitle
             )
                 .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
         }
@@ -284,7 +284,7 @@ public struct VSegmentedPicker<Data, Content>: View
                             VText(
                                 color: model.colors.title.for(rowState(for: i)),
                                 font: model.fonts.rows,
-                                title: titles[i]
+                                text: titles[i]
                             )
                                 .padding(model.layout.indicatorMargin)
                                 .padding(model.layout.contentMargin)

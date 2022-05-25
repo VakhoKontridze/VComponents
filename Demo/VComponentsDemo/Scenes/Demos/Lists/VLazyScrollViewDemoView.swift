@@ -52,7 +52,7 @@ private struct VLazyScrollViewDemoDetailView: View {
             VText(
                 color: ColorBook.primary,
                 font: .callout,
-                title: "Scroll rows and see lazy initialization"
+                text: "Scroll rows and see lazy initialization"
             )
 
             switch lazyScrollViewType {
@@ -64,13 +64,13 @@ private struct VLazyScrollViewDemoDetailView: View {
                 VText(
                     color: ColorBook.primary,
                     font: .footnote,
-                    title: "Initialized: \(Array(initializedRows).rangesPrettyForamtted)"
+                    text: "Initialized: \(Array(initializedRows).rangesPrettyForamtted)"
                 )
                 
                 VText(
                     color: ColorBook.primary,
                     font: .footnote,
-                    title: "Visible: \(Array(visibleRows).rangesPrettyForamtted)"
+                    text: "Visible: \(Array(visibleRows).rangesPrettyForamtted)"
                 )
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -82,7 +82,7 @@ private struct VLazyScrollViewDemoDetailView: View {
             VText(
                 color: ColorBook.primary,
                 font: .body,
-                title: "\(num)"
+                text: "\(num)"
             )
                 .frame(height: 30)
                 .frame(maxWidth: .infinity)
@@ -99,7 +99,7 @@ private struct VLazyScrollViewDemoDetailView: View {
             VText(
                 color: ColorBook.primary,
                 font: .body,
-                title: "\(num)"
+                text: "\(num)"
             )
                 .frame(width: 30)
                 .frame(maxHeight: .infinity)

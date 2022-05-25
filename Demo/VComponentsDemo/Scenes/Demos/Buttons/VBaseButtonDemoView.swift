@@ -52,7 +52,7 @@ struct VBaseButtonDemoView: View {
         VText(
             color: color,
             font: .system(size: 16, weight: .semibold),
-            title: title
+            text: title
         )
             .frame(height: 20)
     }

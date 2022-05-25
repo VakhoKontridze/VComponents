@@ -94,7 +94,7 @@ public struct VSquareButton<Label>: View where Label: View {
                 VText(
                     color: model.colors.title.for(internalState),
                     font: model.fonts.title,
-                    title: title
+                    text: title
                 )
                 
             case .icon(let icon):

@@ -152,7 +152,7 @@ struct VSliderDemoView: View {
         VText(
             color: ColorBook.primary,
             font: .system(size: 14, weight: .regular, design: .monospaced),
-            title: title
+            text: title
         )
             .animation(nil)
     }

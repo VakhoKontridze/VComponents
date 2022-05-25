@@ -141,7 +141,7 @@ struct VListDemoViewDataSource {
             VText(
                 color: ColorBook.primary,
                 font: .body,
-                title: title
+                text: title
             )
         })
             .frame(maxWidth: .infinity, alignment: .leading)

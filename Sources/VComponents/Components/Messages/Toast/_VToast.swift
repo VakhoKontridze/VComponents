@@ -61,7 +61,7 @@ struct _VToast: View {
             type: toastType,
             color: model.colors.title,
             font: model.fonts.title,
-            title: title
+            text: title
         )
             .padding(model.layout.titleMargins)
             .background(background)

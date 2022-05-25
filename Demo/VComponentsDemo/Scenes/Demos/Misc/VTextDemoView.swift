@@ -31,25 +31,25 @@ struct VTextDemoView: View {
     @ViewBuilder private func component() -> some View {
         switch vTextDemoType {
         case .center:
-            VText(color: titleColor, font: titleFont, title: singleLineText)
+            VText(color: titleColor, font: titleFont, text: singleLineText)
                 .frame(maxWidth: .infinity, alignment: .center)
         
         case .leading:
-            VText(color: titleColor, font: titleFont, title: singleLineText)
+            VText(color: titleColor, font: titleFont, text: singleLineText)
                 .frame(maxWidth: .infinity, alignment: .leading)
         
         case .trailing:
-            VText(color: titleColor, font: titleFont, title: singleLineText)
+            VText(color: titleColor, font: titleFont, text: singleLineText)
                 .frame(maxWidth: .infinity, alignment: .trailing)
         
         case .multiLineCenter:
-            VText(type: .multiLine(alignment: .center, lineLimit: nil), color: titleColor, font: titleFont, title: multiLineText)
+            VText(type: .multiLine(alignment: .center, lineLimit: nil), color: titleColor, font: titleFont, text: multiLineText)
             
         case .multiLineLeading:
-            VText(type: .multiLine(alignment: .leading, lineLimit: nil), color: titleColor, font: titleFont, title: multiLineText)
+            VText(type: .multiLine(alignment: .leading, lineLimit: nil), color: titleColor, font: titleFont, text: multiLineText)
             
         case .multiLineTrailing:
-            VText(type: .multiLine(alignment: .trailing, lineLimit: nil), color: titleColor, font: titleFont, title: multiLineText)
+            VText(type: .multiLine(alignment: .trailing, lineLimit: nil), color: titleColor, font: titleFont, text: multiLineText)
         }
     }
     

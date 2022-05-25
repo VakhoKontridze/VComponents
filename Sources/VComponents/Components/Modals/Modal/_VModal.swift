@@ -111,7 +111,7 @@ struct _VModal<HeaderLabel, Content>: View
                         VText(
                             color: model.colors.headerTitle,
                             font: model.fonts.header,
-                            title: title
+                            text: title
                         )
                         
                     case .custom(let label):

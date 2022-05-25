@@ -200,7 +200,7 @@ public struct VWheelPicker<Data, Content>: View
                 type: .multiLine(alignment: .leading, lineLimit: model.layout.headerLineLimit),
                 color: model.colors.header.for(internalState),
                 font: model.fonts.header,
-                title: headerTitle
+                text: headerTitle
             )
                 .padding(.horizontal, model.layout.headerMarginHorizontal)
         }
@@ -212,7 +212,7 @@ public struct VWheelPicker<Data, Content>: View
                 type: .multiLine(alignment: .leading, lineLimit: model.layout.footerLineLimit),
                 color: model.colors.footer.for(internalState),
                 font: model.fonts.footer,
-                title: footerTitle
+                text: footerTitle
             )
                 .padding(.horizontal, model.layout.headerMarginHorizontal)
         }
@@ -236,7 +236,7 @@ public struct VWheelPicker<Data, Content>: View
                 VText(
                     color: model.colors.title.for(internalState),
                     font: model.fonts.rows,
-                    title: titles[i]
+                    text: titles[i]
                 )
                     .tag(i)
             })

@@ -45,7 +45,7 @@ struct VSideBarDemoView: View {
     private func settings() -> some View {
         DemoViewSettingsSection(content: {
             VStack(spacing: 3, content: {
-                VText(color: ColorBook.primary, font: .callout, title: "Dismiss Method:")
+                VText(color: ColorBook.primary, font: .callout, text: "Dismiss Method:")
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 ScrollView(.horizontal, showsIndicators: false, content: {

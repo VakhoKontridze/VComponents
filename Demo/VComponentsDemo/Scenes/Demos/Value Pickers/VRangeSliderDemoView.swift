@@ -103,7 +103,7 @@ struct VRangeSliderDemoView: View {
         
         DemoViewSettingsSection(content: {
             VStack(spacing: 5, content: {
-                VText(color: ColorBook.primary,font: .callout,  title: "Difference")
+                VText(color: ColorBook.primary,font: .callout,  text: "Difference")
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 5)
                 
@@ -115,7 +115,7 @@ struct VRangeSliderDemoView: View {
                     type: .multiLine(alignment: .leading, lineLimit: nil),
                     color: ColorBook.secondary,
                     font: .footnote,
-                    title: "If this value exceeds difference of max and min during the creation of view, layout would invalidate itself, and refuse to draw"
+                    text: "If this value exceeds difference of max and min during the creation of view, layout would invalidate itself, and refuse to draw"
                 )
                     .frame(maxWidth: .infinity, alignment: .leading)
             })

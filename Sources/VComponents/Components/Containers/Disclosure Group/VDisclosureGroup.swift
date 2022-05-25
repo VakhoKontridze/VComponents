@@ -139,7 +139,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                     VText(
                         color: model.colors.headerTitle.for(internalState),
                         font: model.fonts.headerTitle,
-                        title: title
+                        text: title
                     )
                     
                 case .custom(let label):

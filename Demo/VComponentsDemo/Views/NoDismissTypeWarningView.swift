@@ -35,7 +35,7 @@ struct NoDismissTypeWarningView: View {
                 type: .multiLine(alignment: .center, lineLimit: nil),
                 color: ColorBook.primaryWhite,
                 font: .system(size: 14, weight: .semibold),
-                title: "When there are no dismiss types, Modal can only be dismissed programatically"
+                text: "When there are no dismiss types, Modal can only be dismissed programatically"
             )
 
             VPlainButton(

@@ -132,7 +132,7 @@ public struct VToggle<Label>: View where Label: View {
                             type: .multiLine(alignment: .leading, lineLimit: model.layout.titleLineLimit),
                             color: model.colors.title.for(internalState),
                             font: model.fonts.title,
-                            title: title
+                            text: title
                         )
                     })
                         .disabled(!labelIsEnabled)

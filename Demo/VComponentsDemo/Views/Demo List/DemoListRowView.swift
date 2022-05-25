@@ -47,7 +47,7 @@ struct DemoListRowView<Content>: View where Content: View {
             VText(
                 color: ColorBook.primary,
                 font: .body,
-                title: title
+                text: title
             )
 
             Spacer()

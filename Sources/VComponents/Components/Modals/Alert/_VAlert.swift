@@ -120,7 +120,7 @@ struct _VAlert<Content>: View
                 type: .multiLine(alignment: .center, lineLimit: model.layout.titleLineLimit),
                 color: model.colors.title,
                 font: model.fonts.title,
-                title: title
+                text: title
             )
                 .padding(model.layout.titleMargins)
         }
@@ -132,7 +132,7 @@ struct _VAlert<Content>: View
                 type: .multiLine(alignment: .center, lineLimit: model.layout.messageLineLimit),
                 color: model.colors.message,
                 font: model.fonts.message,
-                title: message
+                text: message
             )
                 .padding(model.layout.descirptionMargins)
         }

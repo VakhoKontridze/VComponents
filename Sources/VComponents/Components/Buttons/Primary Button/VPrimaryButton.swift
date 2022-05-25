@@ -107,7 +107,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
                     VText(
                         color: model.colors.title.for(internalState),
                         font: model.fonts.title,
-                        title: title
+                        text: title
                     )
                     
                 case .iconTitle(let icon, let title):
@@ -122,7 +122,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
                         VText(
                             color: model.colors.title.for(internalState),
                             font: model.fonts.title,
-                            title: title
+                            text: title
                         )
                     })
                     

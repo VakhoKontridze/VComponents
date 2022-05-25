@@ -37,7 +37,7 @@ struct ToggleSettingView: View {
                     VText(
                         color: isEnabled ? ColorBook.primary : .init(componentAsset: "Primary.presseddisabled"), // Not exposing API
                         font: .callout,
-                        title: title
+                        text: title
                     )
                 }
                 
@@ -46,7 +46,7 @@ struct ToggleSettingView: View {
                         type: .multiLine(alignment: .leading, lineLimit: nil),
                         color: isEnabled ? ColorBook.secondary : .init(componentAsset: "Secondary.presseddisabled"), // Not exposing API
                         font: .footnote,
-                        title: description
+                        text: description
                     )
                 }
             })

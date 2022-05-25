@@ -16,7 +16,7 @@ import SwiftUI
 ///         VText(
 ///             color: ColorBook.primary,
 ///             font: .body,
-///             title: "Lorem ipsum dolor sit amet"
+///             text: "Lorem ipsum dolor sit amet"
 ///         )
 ///     }
 ///
@@ -27,31 +27,31 @@ public struct VText: View {
     private let minimumScaleFactor: CGFloat
     private let color: Color
     private let font: Font
-    private let title: String
+    private let text: String
     
     // MARK: Initializers
-    /// Initializes component with type, color, fon, and title.
+    /// Initializes component with type, color, fon, and text.
     public init(
         type textType: VTextType = .singleLine,
         truncatingMode: Text.TruncationMode = .tail,
         minimumScaleFactor: CGFloat = 0,
         color: Color,
         font: Font,
-        title: String
+        text: String
     ) {
         self.textType = textType
         self.truncatingMode = truncatingMode
         self.minimumScaleFactor = minimumScaleFactor
         self.color = color
         self.font = font
-        self.title = title
+        self.text = text
     }
 
     // MARK: Body
     @ViewBuilder public var body: some View {
         switch textType._textType {
         case .singleLine:
-            Text(title)
+            Text(text)
                 .truncationMode(truncatingMode)
                 .lineLimit(1)
                 .minimumScaleFactor(minimumScaleFactor)
@@ -59,7 +59,7 @@ public struct VText: View {
                 .font(font)
             
         case .multiLine(let alignment, let lineLimit):
-            Text(title)
+            Text(text)
                 .multilineTextAlignment(alignment)
                 .truncationMode(truncatingMode)
                 .lineLimit(lineLimit)
@@ -76,7 +76,7 @@ struct VText_Previews: PreviewProvider {
         VText(
             color: ColorBook.primary,
             font: .body,
-            title: "Lorem ipsum dolor sit amet"
+            text: "Lorem ipsum dolor sit amet"
         )
     }
 }
