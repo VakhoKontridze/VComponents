@@ -62,7 +62,6 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                         }
                     }
                 )
-                    .padding(.bottom, 1)  // SwiftUI is bugged
                     .padding(.top, 10)
                 
             case .section:

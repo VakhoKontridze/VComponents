@@ -37,10 +37,8 @@ struct _VAlert<Content>: View
             UIDevice.safeAreaInsetBottom
         
         let alertHeight: CGFloat =
-            model.layout.margins.top +
             titleMessageContentHeight +
-            buttonsStackHeight +
-            model.layout.margins.bottom
+            buttonsStackHeight
         
         return alertHeight > safeAreaHeight
     }
@@ -96,7 +94,6 @@ struct _VAlert<Content>: View
             
             buttonsScrollView
         })
-            .padding(model.layout.margins)
             .frame(width: model.layout.sizes._current.size.width)
             .background(background)
             .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
@@ -147,7 +144,7 @@ struct _VAlert<Content>: View
     
     @ViewBuilder private var buttonsScrollView: some View {
         if buttonsStackShouldScroll {
-            ScrollView(content: { buttonsStack })
+            ScrollView(content: { buttonsStack }).padding(.bottom, 0.1) // Fixes SwiftUI `ScrollView` safe area bug
         } else {
             buttonsStack
         }

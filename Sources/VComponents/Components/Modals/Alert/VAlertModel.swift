@@ -49,10 +49,12 @@ public struct VAlertModel {
         /// Corner radius. Defaults to `20`.
         public var cornerRadius: CGFloat = 20
         
-        /// Margins. Defaults to `15`.
-        public var margins: Margins = .init(
-            horizontal: modalReference.layout.contentMargins.horizontal / 2,
-            vertical: 10
+        /// Additional margisn applied to title, descirption, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
+        public var titleMessageContentMargins: Margins = .init(
+            leading: modalReference.layout.contentMargins.horizontal / 2,
+            trailing: modalReference.layout.contentMargins.horizontal / 2,
+            top: 20,
+            bottom: 10
         )
         
         /// Title line limit. Defaults to `1`.
@@ -73,18 +75,10 @@ public struct VAlertModel {
             vertical: 5
         )
         
-        /// Content margins. Defaults to `0` horizontal and `10` vertical.
+        /// Content margins. Defaults to `0` horizontal and `5` vertical.
         public var contentMargins: Margins = .init(
             horizontal: 0,
-            vertical: 10
-        )
-        
-        /// Additional margisn applied to title, descirption, and content as a whole. Defaults to `0` leading, `0` trailing,`0` top, and `10` bottom.
-        public var titleMessageContentMargins: Margins = .init(
-            leading: 0,
-            trailing: 0,
-            top: 0,
-            bottom: 10
+            vertical: 5
         )
         
         /// Button height. Defaults to  `40`.
@@ -93,10 +87,12 @@ public struct VAlertModel {
         /// Button corner radius. Defaults to `10`.
         public var buttonCornerRadius: CGFloat = 10
         
-        /// Button margins. Defaults to `0` horizontal and `5` vertical.
+        /// Button margins. Defaults to `15` leading, `15` trailing, `15` top, and `20` bottom.
         public var buttonMargins: Margins = .init(
-            horizontal: 0,
-            vertical: 5
+            leading: modalReference.layout.contentMargins.leading,
+            trailing: modalReference.layout.contentMargins.trailing,
+            top: 10,
+            bottom: 20
         )
         
         /// Spacing between horizontal buttons.  Defaults to `10`.
