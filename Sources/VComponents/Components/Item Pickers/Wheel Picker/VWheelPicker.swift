@@ -16,8 +16,6 @@ import SwiftUI
 ///
 /// Model, header, and footer can be passed as parameters.
 ///
-/// Usage example:
-///
 ///     @State var selection: String = "January"
 ///
 ///     let rowTitles: [String] = [

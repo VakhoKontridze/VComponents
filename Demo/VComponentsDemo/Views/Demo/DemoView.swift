@@ -158,18 +158,17 @@ struct DemoView<ComponentContent, SettingsContent>: View
             action: { isPresented = true },
             icon: .init(systemName: "gearshape")
         )
-            .vBottomSheet(isPresented: $isPresented, bottomSheet: {
-                VBottomSheet(
-                    model: bottomSheetModel,
-                    headerTitle: "Parameters",
-                    content: {
-                        ScrollView(content: {
-                            settings()
-                                .padding(.trailing, 15)
-                        })
-                    }
-                )
-            })
+            .vBottomSheet(
+                model: bottomSheetModel,
+                isPresented: $isPresented,
+                headerTitle: "Parameters",
+                content: {
+                    ScrollView(content: {
+                        settings()
+                            .padding(.trailing, 15)
+                    })
+                }
+            )
     }
 }
 

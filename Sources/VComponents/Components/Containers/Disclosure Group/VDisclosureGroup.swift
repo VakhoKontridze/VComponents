@@ -15,8 +15,6 @@ import VCore
 ///
 /// Model and layout can be passed as parameters.
 ///
-/// Usage example:
-///
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.ignoresSafeArea()
 ///

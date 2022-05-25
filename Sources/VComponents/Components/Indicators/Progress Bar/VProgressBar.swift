@@ -13,8 +13,6 @@ import VCore
 ///
 /// Model and total value can be passed as parameters.
 ///
-/// Usage example:
-///
 ///     @State var progress: Double = 0.5
 ///
 ///     var body: some View {

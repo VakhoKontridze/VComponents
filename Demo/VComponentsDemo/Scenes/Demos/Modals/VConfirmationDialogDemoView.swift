@@ -26,18 +26,17 @@ struct VConfirmationDialogDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .vConfirmationDialog(isPresented: $isPresented, confirmationDialog: {
-                VConfirmationDialog(
-                    title: "Lorem Ipsum Dolor Sit Amet",
-                    message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                    actions: [
-                        .standard(action: {}, title: "Option A"),
-                        .standard(action: {}, title: "Option B"),
-                        .destructive(action: {}, title: "Delete"),
-                        .cancel(title: "Cancel")
-                    ]
-                )
-            })
+            .vConfirmationDialog(
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                actions: [
+                    .standard(action: {}, title: "Option A"),
+                    .standard(action: {}, title: "Option B"),
+                    .destructive(action: {}, title: "Delete"),
+                    .cancel(title: "Cancel")
+                ]
+            )
     }
 }
 

@@ -16,8 +16,6 @@ import SwiftUI
 ///
 /// `isLoading` can be passed as paremter.
 ///
-/// Usage example:
-///
 ///     var body: some View {
 ///         VPrimaryButton(
 ///             action: { print("Clicked") },

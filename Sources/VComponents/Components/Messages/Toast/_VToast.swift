@@ -157,8 +157,9 @@ struct _VToast_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vToast(isPresented: $isPresented, toast: {
-                VToast(title: "Lorem ipsum")
-            })
+            .vToast(
+                isPresented: $isPresented,
+                title: "Lorem ipsum dolor sit amet"
+            )
     }
 }

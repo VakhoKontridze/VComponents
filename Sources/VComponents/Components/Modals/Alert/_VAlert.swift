@@ -46,8 +46,8 @@ struct _VAlert<Content>: View
     // MARK: Initializers
     init(
         model: VAlertModel,
-        presentHandler: (() -> Void)?,
-        dismissHandler: (() -> Void)?,
+        onPresent presentHandler: (() -> Void)?,
+        onDismiss dismissHandler: (() -> Void)?,
         title: String?,
         message: String?,
         content: (() -> Content)?,
@@ -131,7 +131,7 @@ struct _VAlert<Content>: View
                 font: model.fonts.message,
                 text: message
             )
-                .padding(model.layout.descirptionMargins)
+                .padding(model.layout.messageMargins)
         }
     }
 
@@ -274,18 +274,17 @@ struct VAlert_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vAlert(isPresented: $isPresented, alert: {
-                VAlert(
-                    title: "Lorem ipsum",
-                    message: "Lorem ipsum dolor sit amet",
-                    content: {
-                        VTextField(text: .constant("Lorem ipsum dolor sit amet"))
-                    },
-                    actions: [
-                        .primary(action: { print("Confirmed") }, title: "Confirm"),
-                        .cancel(action: { print("Cancelled") })
-                    ]
-                )
-            })
+            .vAlert(
+                isPresented: $isPresented,
+                title: "Lorem Ipsum Dolor Sit Amet",
+                message: "Lorem ipsum dolor sit amet",
+                content: {
+                    VTextField(text: .constant("Lorem ipsum dolor sit amet"))
+                },
+                actions: [
+                    .primary(action: { print("Confirmed") }, title: "Confirm"),
+                    .cancel(action: { print("Cancelled") })
+                ]
+            )
     }
 }

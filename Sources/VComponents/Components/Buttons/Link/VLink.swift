@@ -14,17 +14,17 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// Usage example:
-///
-///     VLink(
-///         url: .init(string: "https://www.apple.com")!,
-///         label: {
-///             VSecondaryButton(
+///     var body: some View {
+///         VLink(
+///             url: .init(string: "https://www.apple.com")!,
+///             label: {
+///                 VSecondaryButton(
 ///                 action: {},
 ///                 title: "Lorem Ipsum"
-///             )
-///         }
-///     )
+///                 )
+///             }
+///         )
+///     }
 ///
 public struct VLink<Label>: View where Label: View {
     // MARK: Properties

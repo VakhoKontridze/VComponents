@@ -146,13 +146,14 @@ struct VSideBar_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vSideBar(isPresented: $isPresented, sideBar: {
-                VSideBar(content: {
+            .vSideBar(
+                isPresented: $isPresented,
+                content: {
                     VList(data: 0..<20, content: { num in
                         Text(String(num))
                             .frame(maxWidth: .infinity, alignment: .leading)
                     })
-                })
-            })
+                }
+            )
     }
 }

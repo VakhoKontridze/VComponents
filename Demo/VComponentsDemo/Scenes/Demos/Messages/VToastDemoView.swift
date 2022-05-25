@@ -36,13 +36,12 @@ struct VToastDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .vToast(isPresented: $isPresented, toast: {
-                VToast(
-                    model: model,
-                    type: toastType.toastType,
-                    title: title
-                )
-            })
+            .vToast(
+                model: model,
+                type: toastType.toastType,
+                isPresented: $isPresented,
+                title: title
+            )
     }
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {

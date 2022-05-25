@@ -13,8 +13,6 @@ import VCore
 ///
 /// `Bool` can also be passed as state.
 ///
-/// Usage example:
-///
 ///     var body: some View {
 ///         VBaseButton(
 ///             gesture: { gestureState in

@@ -352,22 +352,21 @@ struct VBottomSheet_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vBottomSheet(isPresented: $isPresented, bottomSheet: {
-                VBottomSheet(
-                    model: {
-                        var model: VBottomSheetModel = .init()
-                        model.layout.autoresizesContent = true
-                        model.layout.contentSafeAreaEdges.insert(.bottom)
-                        return model
-                    }(),
-                    headerTitle: "Lorem ipsum dolor sit amet",
-                    content: {
-                        VList(data: 0..<20, content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        })
-                    }
-                )
-            })
+            .vBottomSheet(
+                model: {
+                    var model: VBottomSheetModel = .init()
+                    model.layout.autoresizesContent = true
+                    model.layout.contentSafeAreaEdges.insert(.bottom)
+                    return model
+                }(),
+                isPresented: $isPresented,
+                headerTitle: "Lorem Ipsum Dolor Sit Amet",
+                content: {
+                    VList(data: 0..<20, content: { num in
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    })
+                }
+            )
     }
 }

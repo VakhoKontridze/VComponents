@@ -10,32 +10,32 @@ import SwiftUI
 // MARK: - V Menu
 /// Modal component that presents menu of actions.
 ///
-/// Usage example:
-///
-///     VMenu(
-///         rows: [
-///             .titleIcon(action: {}, title: "One", assetIcon: "SomeIcon"),
-///             .titleIcon(action: {}, title: "Two", icon: someIcon),
-///             .titleIcon(action: {}, title: "Three", systemIcon: "swift"),
-///             .title(action: {}, title: "Four"),
-///             .title(action: {}, title: "Five"),
-///             .menu(title: "Five...", rows: [
-///                 .title(action: {}, title: "One"),
-///                 .title(action: {}, title: "Two"),
-///                 .title(action: {}, title: "Three"),
-///                 .menu(title: "Four...", rows: [
+///     var body: some View {
+///         VMenu(
+///             rows: [
+///                 .titleIcon(action: {}, title: "One", assetIcon: "SomeIcon"),
+///                 .titleIcon(action: {}, title: "Two", icon: someIcon),
+///                 .titleIcon(action: {}, title: "Three", systemIcon: "swift"),
+///                 .title(action: {}, title: "Four"),
+///                 .title(action: {}, title: "Five"),
+///                 .menu(title: "Five...", rows: [
 ///                     .title(action: {}, title: "One"),
-///                     .title(action: {}, title: "Two")
+///                     .title(action: {}, title: "Two"),
+///                     .title(action: {}, title: "Three"),
+///                     .menu(title: "Four...", rows: [
+///                         .title(action: {}, title: "One"),
+///                         .title(action: {}, title: "Two")
+///                     ])
 ///                 ])
-///             ])
-///         ],
-///         label: {
-///             VPlainButton(
-///                 action: {},
-///                 title: "Lorem Ipsum"
-///             )
-///         }
-///     )
+///             ],
+///             label: {
+///                 VPlainButton(
+///                     action: {},
+///                     title: "Lorem Ipsum"
+///                 )
+///             }
+///         )
+///     }
 ///
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties

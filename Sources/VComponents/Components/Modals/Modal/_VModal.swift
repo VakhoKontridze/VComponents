@@ -203,16 +203,11 @@ struct VModal_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vModal(isPresented: $isPresented, modal: {
-                VModal(
-                    headerTitle: "Lorem ipsum",
-                    content: {
-                        VList(data: 0..<20, content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        })
-                    }
-                )
+            .vModal(isPresented: $isPresented, headerTitle: "Lorem Ipsum", content: {
+                VList(data: 0..<20, content: { num in
+                    Text(String(num))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                })
             })
     }
 }

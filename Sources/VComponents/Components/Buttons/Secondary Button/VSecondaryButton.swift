@@ -14,8 +14,6 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// Usage example:
-///
 ///     var body: some View {
 ///         VSecondaryButton(
 ///             action: { print("Clicked") },

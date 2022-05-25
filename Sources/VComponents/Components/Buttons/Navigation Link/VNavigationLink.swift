@@ -16,8 +16,6 @@ import SwiftUI
 ///
 /// `isActive` can be passed as parameter.
 ///
-/// Usage example:
-///
 ///     var body: some View {
 ///         NavigationView(content: {
 ///             ZStack(content: {

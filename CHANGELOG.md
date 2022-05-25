@@ -109,6 +109,7 @@ VNavigationView
 
 VModal
 
+- Modal is migrated to new `SwiftUI` `3.0` API
 - Modal now supports landscape mode
 - `headerAlignment` is added to `VModalModel`
 - Modal margins are changed from `10` to `15`
@@ -116,7 +117,8 @@ VModal
 
 VHalfModal
 
-- `VHalfModal` is renamed to `VBottomSheet`
+- `VHalfModal` is renamed to `VBottomSheet
+- BottomSheet is migrated to new `SwiftUI` `3.0` API`
 - BottomSheet now supports landscape mode
 - `headerAlignment` is added to `VBottomSheetModel`
 - BottomSheet can now be snapped to height by dragging it at high velocities
@@ -128,6 +130,7 @@ VHalfModal
 
 VSideBar
 
+- SideBar is migrated to new `SwiftUI` `3.0` API`
 - SideBar now supports landscape mode
 - SideBar margins are changed from `10` to `15`
 - SideBar now has option for adding shadow
@@ -135,6 +138,7 @@ VSideBar
 VDialog
 
 - `VDialog` is renamed to `VAlert`
+- Alert is migrated to new `SwiftUI` `3.0` API`
 - Alert now supports landscape mode
 - Alert can now be created with `Error`
 - Alert now has option for adding shadow
@@ -143,6 +147,7 @@ VDialog
 VActionSheet
 
 - `VActionSheet` is renamed to `VConfirmationDialog`
+- ConfirmationDialog is migrated to new `SwiftUI` `3.0` API`
 - `description` is renamed to `message`
 
 VMenu
@@ -151,6 +156,7 @@ VMenu
 
 VToast
 
+- Toast is migrated to new `SwiftUI` `3.0` API`
 - `rounded` `VToast.Layot.CornerRadiusType` is renamed to `capsule`
 - `custom` `VToast.Layot.CornerRadiusType` is renamed to `rounded`
 - `VToastType` `oneLine` is renamed to `singleLine`

@@ -13,8 +13,6 @@ import VCore
 ///
 /// Model, range, step, state, and onChange callback can be passed as parameters.
 ///
-/// Usage example:
-///
 ///     @State var value: Double = 0.5
 ///
 ///     var body: some View {

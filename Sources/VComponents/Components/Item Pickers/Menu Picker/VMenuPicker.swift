@@ -18,8 +18,6 @@ import SwiftUI
 ///
 /// Model can be passed as parameter.
 ///
-/// Usage example:
-///
 ///     enum PickerRow: Int, PickableTitledEnumeration {
 ///         case red, green, blue
 ///

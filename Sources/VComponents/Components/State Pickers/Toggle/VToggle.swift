@@ -16,8 +16,6 @@ import SwiftUI
 ///
 /// `Bool` can also be passed as state.
 ///
-/// Usage example:
-///
 ///     @State var state: VToggleState = .on
 ///
 ///     var body: some View {

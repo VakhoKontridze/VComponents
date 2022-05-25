@@ -16,8 +16,6 @@ import SwiftUI
 ///
 /// Component is a wrapped behind `ScrollView` and `LazyVStack`/`LazyHStack`, and supports lazy initialization.
 ///
-/// Usage example:
-///
 ///     struct ListRow: Identifiable {
 ///         let id: UUID = .init()
 ///         let title: String

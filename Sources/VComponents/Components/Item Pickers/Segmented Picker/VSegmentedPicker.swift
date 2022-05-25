@@ -16,8 +16,6 @@ import SwiftUI
 ///
 /// Model, header, footer, and disabled indexes can be passed as parameters.
 ///
-/// Usage example:
-///
 ///     enum PickerRow: Int, PickableTitledEnumeration {
 ///         case red, green, blue
 ///

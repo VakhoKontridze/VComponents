@@ -11,7 +11,7 @@ import SwiftUI
 extension View {
     /// Allows for navigation without an explicit `NavigationLink`.
     ///
-    /// Usage example:
+    /// Usage Example:
     ///
     ///     @State var isActive: Bool = false
     ///
@@ -37,7 +37,7 @@ extension View {
     ///            .navigationBarTitleDisplayMode(.inline)
     ///     }
     ///
-    @ViewBuilder public func vNavigationLink<Destination>(
+    public func vNavigationLink<Destination>(
         isActive: Binding<Bool>,
         @ViewBuilder destination: @escaping () -> Destination
     ) -> some View

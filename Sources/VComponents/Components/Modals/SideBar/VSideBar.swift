@@ -7,91 +7,121 @@
 
 import SwiftUI
 
-// MARK: - V Side Bar
-/// Modal component that draws a from left side with background, hosts content, and is present when condition is `true`.
-///
-/// Model can be passed as parameter.
-///
-/// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-///
-/// Usage example:
-///
-///     @State var isPresented: Bool = false
-///
-///     var body: some View {
-///         VPlainButton(
-///             action: { isPresented = true },
-///             title: "Present"
-///         )
-///             .vSideBar(isPresented: $isPresented, sideBar: {
-///                 VSideBar(content: {
-///                     ColorBook.accent
-///                 })
-///             })
-///     }
-///
-public struct VSideBar<Content> where Content: View {
-    // MARK: Properties
-    fileprivate let model: VSideBarModel
-    fileprivate let content: () -> Content
-    
-    // MARK: Initializers
-    /// Initializes component with content.
-    public init(
-        model: VSideBarModel = .init(),
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.model = model
-        self.content = content
-    }
-}
-
-// MARK: - Extension
+// MARK: - Bool
 extension View {
     /// Presents `VSideBar` when boolean is `true`.
+    ///
+    /// Side bar component that draws a from left side with background, and hosts content.
+    ///
+    /// Model, and present and dismiss handlers can be passed as parameters.
+    ///
+    /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
+    ///
+    /// Usage Example:
+    ///
+    ///     @State var isPresented: Bool = false
+    ///
+    ///     var body: some View {
+    ///         VPlainButton(
+    ///             action: { isPresented = true },
+    ///             title: "Present"
+    ///         )
+    ///             .vSideBar(
+    ///                 isPresented: $isPresented,
+    ///                 content: {
+    ///                     VList(data: 0..<20, content: { num in
+    ///                         Text(String(num))
+    ///                             .frame(maxWidth: .infinity, alignment: .leading)
+    ///                     })
+    ///                 }
+    ///             )
+    ///     }
+    ///
     public func vSideBar<Content>(
+        model: VSideBarModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        sideBar: @escaping () -> VSideBar<Content>
+        @ViewBuilder content: @escaping () -> Content
     ) -> some View
         where Content: View
     {
         self
             .background(PresentationHost(
                 isPresented: isPresented,
-                content: { () -> _VSideBar<Content> in
-                    let sideBar = sideBar()
-                    
-                    return _VSideBar(
-                        model: sideBar.model,
+                content: {
+                    _VSideBar(
+                        model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        content: sideBar.content
+                        content: content
                     )
                 }
             ))
     }
-    
+}
+
+// MARK: - Item
+extension View {
     /// Presents `VSideBar` using the item as data source for content.
+    ///
+    /// Side bar component that draws a from left side with background, and hosts content.
+    ///
+    /// Model, and present and dismiss handlers can be passed as parameters.
+    ///
+    /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
+    ///
+    /// Usage Example:
+    ///
+    ///     struct SideBarItem: Identifiable {
+    ///         let id: UUID = .init()
+    ///     }
+    ///
+    ///     @State var sideBarItem: SideBarItem?
+    ///
+    ///     var body: some View {
+    ///         VPlainButton(
+    ///             action: { sideBarItem = .init() },
+    ///             title: "Present"
+    ///         )
+    ///             .vSideBar(
+    ///                 item: $sideBarItem,
+    ///                 content: { item in
+    ///                     VList(data: 0..<20, content: { num in
+    ///                         Text(String(num))
+    ///                             .frame(maxWidth: .infinity, alignment: .leading)
+    ///                     })
+    ///                 }
+    ///             )
+    ///     }
+    ///
     public func vSideBar<Item, Content>(
+        model: VSideBarModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        sideBar: @escaping (Item) -> VSideBar<Content>
+        @ViewBuilder content: @escaping (Item) -> Content
     ) -> some View
         where
             Item: Identifiable,
             Content: View
     {
-        vSideBar(
-            isPresented: .init(
-                get: { item.wrappedValue != nil },
-                set: { _ in item.wrappedValue = nil }
-            ),
-            onPresent: presentHandler,
-            onDismiss: dismissHandler,
-            sideBar: { sideBar(item.wrappedValue!) } // fatalError
-        )
+        self
+            .background(PresentationHost(
+                isPresented: .init(
+                    get: { item.wrappedValue != nil },
+                    set: { if !$0 { item.wrappedValue = nil } }
+                ),
+                content: { () -> _VSideBar<Content> in 
+                    let item = item.wrappedValue! // fatalError
+                    
+                    return .init(
+                        model: model,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        content: { content(item) }
+                    )
+                }
+            ))
     }
 }

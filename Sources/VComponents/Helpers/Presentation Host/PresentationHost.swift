@@ -22,8 +22,6 @@ import SwiftUI
 /// This allows content to perform dismiss animations before being removed from view hierarchy.
 /// For additional documentation, refer to `PresentationHostPresentationMode`.
 ///
-/// Usage Example:
-///
 ///     extension View {
 ///         public func someModal<Content>(
 ///             isPresented: Binding<Bool>,

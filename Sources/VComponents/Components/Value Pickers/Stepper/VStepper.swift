@@ -12,8 +12,6 @@ import SwiftUI
 ///
 /// Model, step, and state can be passed as parameters.
 ///
-/// Usage example:
-///
 ///     @State var value: Double = 0.5
 ///
 ///     var body: some View {

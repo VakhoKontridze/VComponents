@@ -49,7 +49,7 @@ public struct VAlertModel {
         /// Corner radius. Defaults to `20`.
         public var cornerRadius: CGFloat = 20
         
-        /// Additional margisn applied to title, descirption, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
+        /// Additional margisn applied to title, message, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
         public var titleMessageContentMargins: Margins = .init(
             leading: modalReference.layout.contentMargins.horizontal / 2,
             trailing: modalReference.layout.contentMargins.horizontal / 2,
@@ -70,15 +70,17 @@ public struct VAlertModel {
         public var messageLineLimit: Int? = 5
         
         /// Title margins. Defaults to `0` horizontal and `5` vertical.
-        public var descirptionMargins: Margins = .init(
+        public var messageMargins: Margins = .init(
             horizontal: 0,
             vertical: 5
         )
         
-        /// Content margins. Defaults to `0` horizontal and `5` vertical.
+        /// Content margins  Defaults to `0` leading, `0` trailing, `10` top, and `0` bottom.
         public var contentMargins: Margins = .init(
-            horizontal: 0,
-            vertical: 5
+            leading: 0,
+            trailing: 0,
+            top: 10,
+            bottom: 0
         )
         
         /// Button height. Defaults to  `40`.

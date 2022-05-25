@@ -25,8 +25,6 @@ import SwiftUI
 /// 3. `Auto`.
 /// Switches from `finite` to `infinite` after a `finiteLimit`.
 ///
-/// Usage example:
-///
 ///     let total: Int = 10
 ///     @State var selectedIndex: Int = 4
 ///

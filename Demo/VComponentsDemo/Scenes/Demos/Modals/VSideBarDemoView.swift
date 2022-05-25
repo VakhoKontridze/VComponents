@@ -34,12 +34,11 @@ struct VSideBarDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .vSideBar(isPresented: $isPresented, sideBar: {
-                VSideBar(
-                    model: model,
-                    content: { sideBarContent }
-                )
-            })
+            .vSideBar(
+                model: model,
+                isPresented: $isPresented,
+                content: { sideBarContent }
+            )
     }
     
     private func settings() -> some View {

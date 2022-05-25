@@ -49,21 +49,19 @@ struct VModalDemoView: View {
             .if(hasTitle,
                 ifTransform: {
                     $0
-                        .vModal(isPresented: $isPresented, modal: {
-                            VModal(
-                                model: model,
-                                headerTitle: "Lorem Ipsum Dolor Sit Amet",
-                                content: { modalContent }
-                            )
-                        })
+                        .vModal(
+                            model: model,
+                            isPresented: $isPresented,
+                            headerTitle: "Lorem Ipsum Dolor Sit Amet",
+                            content: { modalContent }
+                        )
                 }, elseTransform: {
                     $0
-                        .vModal(isPresented: $isPresented, modal: {
-                            VModal(
-                                model: model,
-                                content: { modalContent }
-                            )
-                        })
+                        .vModal(
+                            model: model,
+                            isPresented: $isPresented,
+                            content: { modalContent }
+                        )
                 }
             )
     }

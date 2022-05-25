@@ -37,15 +37,14 @@ struct VAlertDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .vAlert(isPresented: $isPresented, alert: {
-                VAlert(
-                    model: model,
-                    title: title,
-                    message: message,
-                    content: { VTextField(placeholder: "Name", text: $text) },
-                    actions: alertButtons.actions(text: text)
-                )
-            })
+            .vAlert(
+                model: model,
+                isPresented: $isPresented,
+                title: title,
+                message: message,
+                content: { VTextField(placeholder: "Name", text: $text) },
+                actions: alertButtons.actions(text: text)
+            )
             .onChange(of: isPresented, perform: { value in
                 if !value { text = "" }
             })
