@@ -22,8 +22,6 @@ struct VPageIndicatorInfinite: View {
     private var region: Region {
         .init(selectedIndex: selectedIndex, total: total, middle: middle)
     }
-    
-    private let isLayoutValid: Bool
 
     // MARK: Intializers
     init(
@@ -33,25 +31,26 @@ struct VPageIndicatorInfinite: View {
         total: Int,
         selectedIndex: Int
     ) {
+        assert(visible.isOdd, "`VPageIndicator`'s `visible` count must be odd")
+        assert(center.isOdd, "`VPageIndicator`'s `center` count must be odd")
+        assert(visible > center, "`VPageIndicator`'s `visible` must be greater than `center`")
+        
         self.model = model
         self.visible = visible
         self.center = center
         self.total = total
         self.selectedIndex = selectedIndex
-        
-        self.isLayoutValid = visible > center && visible.isOdd && center.isOdd
     }
 
     // MARK: Body
     @ViewBuilder public var body: some View {
-        switch (isLayoutValid, total) {
-        case (false, _): EmptyView()
-        case (true, ...visible): VPageIndicatorFinite(model: model, total: total, selectedIndex: selectedIndex)
-        case (true, _): validBody
+        switch total {
+        case ...visible: VPageIndicatorFinite(model: model, total: total, selectedIndex: selectedIndex)
+        case _: infiniteBody
         }
     }
     
-    private var validBody: some View {
+    private var infiniteBody: some View {
         frame
             .overlay(dots)
             .clipped()

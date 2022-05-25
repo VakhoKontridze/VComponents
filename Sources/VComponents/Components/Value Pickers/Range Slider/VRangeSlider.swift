@@ -13,8 +13,6 @@ import VCore
 ///
 /// Model, range, step, state, and onChange callbacks can be passed as parameters.
 ///
-/// If invalid value parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
-///
 ///     @State var valueLow: Double = 0.3
 ///     @State var valueHigh: Double = 0.8
 ///
@@ -44,8 +42,6 @@ public struct VRangeSlider: View {
     private let actionLow: ((Bool) -> Void)?
     private let actionHigh: ((Bool) -> Void)?
     
-    private let isLayoutValid: Bool
-    
     @State private var sliderWidth: CGFloat = 0
 
     // MARK: Initializers
@@ -64,6 +60,11 @@ public struct VRangeSlider: View {
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {
+        assert(
+            (valueHigh.wrappedValue - valueLow.wrappedValue).isNearlyGreaterThanOrEqual(to: difference),
+            "Difference between `VRangeSlider`'s `valueLow` and `valueHeight` must be greater than or equal to `difference`"
+        )
+        
         self.model = model
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
@@ -79,32 +80,10 @@ public struct VRangeSlider: View {
         )
         self.actionLow = actionLow
         self.actionHigh = actionHigh
-        
-        self.isLayoutValid =
-            valueLow.wrappedValue <=
-            valueHigh.wrappedValue - difference
     }
 
     // MARK: Body
     public var body: some View {
-        Group(content: {
-            switch isLayoutValid {
-            case false: invalidBody
-            case true: validBody
-            }
-        })
-            .padding(.horizontal, model.layout.thumbDimension / 2)
-            .animation(model.animations.progress, value: valueLow)
-            .animation(model.animations.progress, value: valueHigh)
-    }
-    
-    private var invalidBody: some View {
-        track
-            .mask(RoundedRectangle(cornerRadius: model.layout.cornerRadius))
-            .frame(height: model.layout.height)
-    }
-    
-    private var validBody: some View {
         ZStack(alignment: .leading, content: {
             track
             progress
@@ -114,7 +93,10 @@ public struct VRangeSlider: View {
             .overlay(thumb(.high))
             .frame(height: model.layout.height)
             .readSize(onChange: { sliderWidth = $0.width })
+            .padding(.horizontal, model.layout.thumbDimension / 2)
             .disabled(!internalState.isEnabled)
+            .animation(model.animations.progress, value: valueLow)
+            .animation(model.animations.progress, value: valueHigh)
     }
 
     private var track: some View {
@@ -265,5 +247,17 @@ extension Double {
     ) -> Double {
         guard let step = step else { return self }
         return floor(self / step) * step
+    }
+}
+
+
+// MARK: - Helpers
+extension FloatingPoint {
+    fileprivate func isNearlyGreaterThanOrEqual(to value: Self) -> Bool {
+        (self - value) >= -.ulpOfOne
+    }
+    
+    private func isNearlyEqual(to value: Self) -> Bool {
+        abs(self - value) <= .ulpOfOne
     }
 }

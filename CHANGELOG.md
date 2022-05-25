@@ -63,6 +63,10 @@ VWheelPicker
 
 - `headerLineLimit` and `footerLineLimit` are added to `VWheelPicker`
 
+VRangeSlider
+
+- RangeSlider would now crash if invalid height parameters are used
+
 VBaseTextField
 
 - TextField is obsoleted by native `TextField` since SwiftUI `3.0`, and is removed
@@ -127,6 +131,7 @@ VHalfModal
 - BottomSheet margins are changed from `10` to `15` 
 - BottomSheet now has option for adding shadow
 - Issue with modal snapping to max height if dragged to min when `pullDown` dismiss type is not enabled is fixed
+- BottomSheet would now crash if invalid height parameters are used
 
 VSideBar
 
@@ -160,6 +165,10 @@ VToast
 - `rounded` `VToast.Layot.CornerRadiusType` is renamed to `capsule`
 - `custom` `VToast.Layot.CornerRadiusType` is renamed to `rounded`
 - `VToastType` `oneLine` is renamed to `singleLine`
+
+VPageIndicator
+
+- PageIndicator would now crash if invalid height parameters are used
 
 VBaseView
 

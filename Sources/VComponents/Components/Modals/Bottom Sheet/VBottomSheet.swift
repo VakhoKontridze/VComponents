@@ -77,48 +77,16 @@ struct VBottomSheet<HeaderLabel, Content>: View
             })
     }
     
-    @ViewBuilder private var bottomSheet: some View {
-        if model.layout.sizes._current.size.heights.isLayoutValid {
-            ZStack(content: {
-                VSheet(model: model.sheetModel)
-                    .shadow(
-                        color: model.colors.shadow,
-                        radius: model.colors.shadowRadius,
-                        x: model.colors.shadowOffset.width,
-                        y: model.colors.shadowOffset.height
-                    )
-                    .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
-                        $0
-                            .frame(height: model.layout.sizes._current.size.heights.max)
-                            .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
-                            .gesture(
-                                DragGesture(minimumDistance: 0)
-                                    .onChanged(dragChanged)
-                                    .onEnded(dragEnded)
-                            )
-                    })
-
-                VStack(spacing: 0, content: {
-                    VStack(spacing: 0, content: {
-                        grabber
-                        header
-                        divider
-                    })
-                        .readSize(onChange: { grabberDividerHeight = $0.height })
-                    
-                    contentView
-                })
-                    .frame(maxHeight: .infinity, alignment: .top)
-                    .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
-                        $0
-                            .frame(height: model.layout.sizes._current.size.heights.max)
-                            .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
-                    })
-            })
-                .frame(width: model.layout.sizes._current.size.width)
-                .ignoresSafeArea(.container, edges: .all)
-                .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
-                .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
+    private var bottomSheet: some View {
+        ZStack(content: {
+            VSheet(model: model.sheetModel)
+                .shadow(
+                    color: model.colors.shadow,
+                    radius: model.colors.shadowRadius,
+                    x: model.colors.shadowOffset.width,
+                    y: model.colors.shadowOffset.height
+                )
+                .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                     $0
                         .frame(height: model.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
@@ -128,7 +96,37 @@ struct VBottomSheet<HeaderLabel, Content>: View
                                 .onEnded(dragEnded)
                         )
                 })
-        }
+
+            VStack(spacing: 0, content: {
+                VStack(spacing: 0, content: {
+                    grabber
+                    header
+                    divider
+                })
+                    .readSize(onChange: { grabberDividerHeight = $0.height })
+                
+                contentView
+            })
+                .frame(maxHeight: .infinity, alignment: .top)
+                .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
+                    $0
+                        .frame(height: model.layout.sizes._current.size.heights.max)
+                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
+                })
+        })
+            .frame(width: model.layout.sizes._current.size.width)
+            .ignoresSafeArea(.container, edges: .all)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
+            .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
+                $0
+                    .frame(height: model.layout.sizes._current.size.heights.max)
+                    .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged(dragChanged)
+                            .onEnded(dragEnded)
+                    )
+            })
     }
 
     @ViewBuilder private var grabber: some View {

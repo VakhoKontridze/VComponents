@@ -162,14 +162,6 @@ public struct VBottomSheetModel {
                 ideal != max
             }
             
-            /// Indicates if values support a valid layout.
-            ///
-            /// If not, layout would invalidate itself, and refuse to draw.
-            public var isLayoutValid: Bool {
-                min <= ideal &&
-                ideal <= max
-            }
-            
             var minOffset: CGFloat { max - min } // Offsets start from 0 at the top
             var idealOffset: CGFloat { max - ideal } // Offsets start from 0 at the top
             var maxOffset: CGFloat { max - max } // Offsets start from 0 at the top
@@ -177,6 +169,9 @@ public struct VBottomSheetModel {
             // MARK: Initializers
             /// Initializes `Height`.
             public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
+                assert(min <= ideal, "`VBottomSheet`'s `min` height must be less than or equal to `ideal` height")
+                assert(ideal <= max, "`VBottomSheet`'s `ideal` height must be less than or equal to `max` height")
+                
                 self.min = min
                 self.ideal = ideal
                 self.max = max

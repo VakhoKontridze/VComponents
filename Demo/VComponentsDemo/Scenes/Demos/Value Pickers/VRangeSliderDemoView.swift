@@ -109,13 +109,13 @@ struct VRangeSliderDemoView: View {
                 
                 VSliderDemoView.labeledSliderRowView(title: .init(diffValue), min: minDiffValue, max: maxDiffValue, content: {
                     VSlider(range: minDiffValue...maxDiffValue, step: 0.05, value: $diffValue)
-                })
+                }).disabled(true)
                 
                 VText(
                     type: .multiLine(alignment: .leading, lineLimit: nil),
                     color: ColorBook.secondary,
                     font: .footnote,
-                    text: "If this value exceeds difference of max and min during the creation of view, layout would invalidate itself, and refuse to draw"
+                    text: "Disabled for demo"
                 )
                     .frame(maxWidth: .infinity, alignment: .leading)
             })

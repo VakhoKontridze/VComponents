@@ -23,6 +23,8 @@ import SwiftUI
 /// 3. `Constrained`.
 /// `.frame()` modifier can be applied to view. Content would be limitd in vertical space. Scrolling may be enabled inside component.
 ///
+/// Usage Example:
+///
 ///     struct ListRow: Identifiable {
 ///         let id: UUID = .init()
 ///         let title: String

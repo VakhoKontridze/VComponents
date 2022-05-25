@@ -20,7 +20,7 @@ import SwiftUI
 /// 2. `Infinite`.
 /// Infinite dots are possible, but only dots specified by `visible` will be displayed.
 /// Dots are scrollable in carousel effect, and have scaling property to indicate more content.
-/// If odd `visible` and `center` are not passed, layout would invalidate itself, and refuse to draw.
+/// `visible` and `center` dots must be odd.
 ///
 /// 3. `Auto`.
 /// Switches from `finite` to `infinite` after a `finiteLimit`.

@@ -15,8 +15,6 @@ extension View {
     ///
     /// Model, and present and dismiss handlers can be passed as parameters.
     ///
-    /// If invalid height parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
-    ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// Usage Example:
@@ -77,8 +75,6 @@ extension View {
     ///
     /// Model, and present and dismiss handlers can be passed as parameters.
     ///
-    /// If invalid height parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
-    ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// Usage Example:
@@ -138,8 +134,6 @@ extension View {
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
     /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// If invalid height parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -211,8 +205,6 @@ extension View {
     ///
     /// Model, and present and dismiss handlers can be passed as parameters.
     ///
-    /// If invalid height parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
-    ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// Usage Example:
@@ -284,8 +276,6 @@ extension View {
     ///
     /// Model, and present and dismiss handlers can be passed as parameters.
     ///
-    /// If invalid height parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
-    ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
     /// Usage Example:
@@ -356,8 +346,6 @@ extension View {
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
     /// Model, and present and dismiss handlers can be passed as parameters.
-    ///
-    /// If invalid height parameters are passed during `init`, layout would invalidate itself, and refuse to draw.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
