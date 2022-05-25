@@ -41,8 +41,6 @@ struct VSideBar<Content>: View where Content: View {
             dimmingView
             sideBar
         })
-            .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,
@@ -52,6 +50,7 @@ struct VSideBar<Content>: View where Content: View {
     
     private var dimmingView: some View {
         model.colors.dimmingView
+            .ignoresSafeArea()
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })
@@ -72,6 +71,8 @@ struct VSideBar<Content>: View where Content: View {
                 .safeAreaMarginInsets(edges: model.layout.contentSafeAreaEdges)
         })
             .frame(size: model.layout.sizes._current.size)
+            .ignoresSafeArea(.container, edges: .all)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .offset(x: isInternallyPresented ? 0 : -model.layout.sizes._current.size.width)
             .gesture(
                 DragGesture(minimumDistance: 0)

@@ -68,8 +68,6 @@ struct VAlert<Content>: View
             dimmingView
             alert
         })
-            .ignoresSafeArea(.container, edges: .horizontal)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,
@@ -79,7 +77,7 @@ struct VAlert<Content>: View
     
     private var dimmingView: some View {
         model.colors.dimmingView
-            .ignoresSafeArea(.container, edges: .vertical)
+            .ignoresSafeArea()
     }
     
     private var alert: some View {
@@ -95,6 +93,8 @@ struct VAlert<Content>: View
             buttonsScrollView
         })
             .frame(width: model.layout.sizes._current.size.width)
+            .ignoresSafeArea(.container, edges: .horizontal)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .background(background)
             .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : model.animations.opacity)

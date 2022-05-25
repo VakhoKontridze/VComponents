@@ -61,8 +61,6 @@ struct VBottomSheet<HeaderLabel, Content>: View
             dimmingView
             bottomSheet
         })
-            .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,
@@ -73,6 +71,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     
     private var dimmingView: some View {
         model.colors.dimmingView
+            .ignoresSafeArea()
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })
@@ -117,6 +116,8 @@ struct VBottomSheet<HeaderLabel, Content>: View
                     })
             })
                 .frame(width: model.layout.sizes._current.size.width)
+                .ignoresSafeArea(.container, edges: .all)
+                .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
                 .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
                     $0
                         .frame(height: model.layout.sizes._current.size.heights.max)

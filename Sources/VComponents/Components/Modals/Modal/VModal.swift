@@ -51,8 +51,6 @@ struct VModal<HeaderLabel, Content>: View
             dimmingView
             modal
         })
-            .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .onAppear(perform: animateIn)
             .onChange(
                 of: presentationMode.isExternallyDismissed,
@@ -62,6 +60,7 @@ struct VModal<HeaderLabel, Content>: View
     
     private var dimmingView: some View {
         model.colors.dimmingView
+            .ignoresSafeArea()
             .onTapGesture(perform: {
                 if model.misc.dismissType.contains(.backTap) { animateOut() }
             })
@@ -85,6 +84,8 @@ struct VModal<HeaderLabel, Content>: View
                 .frame(maxHeight: .infinity, alignment: .top)
         })
             .frame(size: model.layout.sizes._current.size)
+            .ignoresSafeArea(.container, edges: .all)
+            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
             .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : model.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
