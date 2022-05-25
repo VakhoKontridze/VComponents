@@ -154,7 +154,6 @@ struct VSliderDemoView: View {
             font: .system(size: 14, weight: .regular, design: .monospaced),
             text: title
         )
-            .animation(nil)
     }
 }
 
