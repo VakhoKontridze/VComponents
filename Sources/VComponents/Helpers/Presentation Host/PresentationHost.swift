@@ -117,40 +117,35 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     }
 
     public func updateUIViewController(_ uiViewController: PresentationHostViewController, context: Context) {
-        switch isPresented.wrappedValue {
-        case false:
-            if uiViewController.isPresentingView {
-                uiViewController.dismissHostedView()
-            }
-            
-        case true:
-            let content: AnyView = .init(
-                content()
-                    .presentationHostPresentationMode(.init(
-                        dismiss: {
-                            wasInternallyDismissed = true
-                            
-                            isPresented.wrappedValue = false
-                            uiViewController.dismissHostedView()
-                            
-                            DispatchQueue.main.async(execute: { wasInternallyDismissed = false })
-                        },
+        let content: AnyView = .init(
+            content()
+                .presentationHostPresentationMode(.init(
+                    dismiss: {
+                        wasInternallyDismissed = true
                         
-                        isExternallyDismissed:
-                            uiViewController.isPresentingView &&
-                            !isPresented.wrappedValue &&
-                            !wasInternallyDismissed
-                        ,
+                        isPresented.wrappedValue = false
+                        uiViewController.dismissHostedView()
                         
-                        externalDismissCompletion: uiViewController.dismissHostedView
-                    ))
-            )
-            
-            if !uiViewController.isPresentingView {
-                uiViewController.presentHostedView(content)
-            }
-            
-            uiViewController.updateHostedView(with: content)
+                        DispatchQueue.main.async(execute: { wasInternallyDismissed = false })
+                    },
+                    
+                    isExternallyDismissed:
+                        uiViewController.isPresentingView &&
+                        !isPresented.wrappedValue &&
+                        !wasInternallyDismissed
+                    ,
+                    
+                    externalDismissCompletion: uiViewController.dismissHostedView
+                ))
+        )
+        
+        if
+            isPresented.wrappedValue,
+            !uiViewController.isPresentingView
+        {
+            uiViewController.presentHostedView(content)
         }
+        
+        uiViewController.updateHostedView(with: content)
     }
 }
