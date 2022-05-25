@@ -28,7 +28,7 @@ struct VConfirmationDialogDemoView: View {
         )
             .vConfirmationDialog(isPresented: $isPresented, confirmationDialog: {
                 VConfirmationDialog(
-                    title: "Lorem ipsum dolor sit amet",
+                    title: "Lorem Ipsum Dolor Sit Amet",
                     message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                     actions: [
                         .standard(action: {}, title: "Option A"),

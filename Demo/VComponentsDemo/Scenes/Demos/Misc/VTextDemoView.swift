@@ -15,8 +15,8 @@ struct VTextDemoView: View {
     
     @State private var vTextDemoType: VTextDemoType = .center
     
-    private let baseTextTitle: String = "Lorem ipsum dolor sit amet"
-    private let baseTextText: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."
+    private let singleLineText: String = "Lorem ipsum dolor sit amet"
+    private let multiLineText: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."
     
     private let titleColor: Color = ColorBook.primary
     private let titleFont: Font = .system(size: 16, weight: .semibold)
@@ -31,25 +31,25 @@ struct VTextDemoView: View {
     @ViewBuilder private func component() -> some View {
         switch vTextDemoType {
         case .center:
-            VText(color: titleColor, font: titleFont, title: baseTextTitle)
+            VText(color: titleColor, font: titleFont, title: singleLineText)
                 .frame(maxWidth: .infinity, alignment: .center)
         
         case .leading:
-            VText(color: titleColor, font: titleFont, title: baseTextTitle)
+            VText(color: titleColor, font: titleFont, title: singleLineText)
                 .frame(maxWidth: .infinity, alignment: .leading)
         
         case .trailing:
-            VText(color: titleColor, font: titleFont, title: baseTextTitle)
+            VText(color: titleColor, font: titleFont, title: singleLineText)
                 .frame(maxWidth: .infinity, alignment: .trailing)
         
         case .multiLineCenter:
-            VText(type: .multiLine(alignment: .center, lineLimit: nil), color: titleColor, font: titleFont, title: baseTextText)
+            VText(type: .multiLine(alignment: .center, lineLimit: nil), color: titleColor, font: titleFont, title: multiLineText)
             
         case .multiLineLeading:
-            VText(type: .multiLine(alignment: .leading, lineLimit: nil), color: titleColor, font: titleFont, title: baseTextText)
+            VText(type: .multiLine(alignment: .leading, lineLimit: nil), color: titleColor, font: titleFont, title: multiLineText)
             
         case .multiLineTrailing:
-            VText(type: .multiLine(alignment: .trailing, lineLimit: nil), color: titleColor, font: titleFont, title: baseTextText)
+            VText(type: .multiLine(alignment: .trailing, lineLimit: nil), color: titleColor, font: titleFont, title: multiLineText)
         }
     }
     

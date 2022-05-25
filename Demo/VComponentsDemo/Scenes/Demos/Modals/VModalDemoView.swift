@@ -52,7 +52,7 @@ struct VModalDemoView: View {
                         .vModal(isPresented: $isPresented, modal: {
                             VModal(
                                 model: model,
-                                headerTitle: "Lorem ipsum dolor sit amet",
+                                headerTitle: "Lorem Ipsum Dolor Sit Amet",
                                 content: { modalContent }
                             )
                         })

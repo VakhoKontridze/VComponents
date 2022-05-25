@@ -15,8 +15,8 @@ struct VAlertDemoView: View {
     
     @State private var isPresented: Bool = false
     @State private var text: String = ""
-    @State private var title: String = "Lorem ipsum dolor sit amet"
-    @State private var description: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    @State private var title: String = "Lorem Ipsum Dolor Sit Amet"
+    @State private var message: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     @State private var alertButtons: VAlertButtonsHelper = .two
     @State private var ignoreKeyboardSafeArea: Bool = !VAlertModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
     
@@ -41,7 +41,7 @@ struct VAlertDemoView: View {
                 VAlert(
                     model: model,
                     title: title,
-                                        message: description,
+                    message: message,
                     content: { VTextField(placeholder: "Name", text: $text) },
                     actions: alertButtons.actions(text: text)
                 )
@@ -62,7 +62,7 @@ struct VAlertDemoView: View {
             VTextField(
                 placeholder: "Description",
                 headerTitle: "Description",
-                text: $description
+                text: $message
             )
         })
         
