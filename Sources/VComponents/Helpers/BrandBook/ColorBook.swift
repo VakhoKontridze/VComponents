@@ -267,7 +267,7 @@ extension Color {
  
  Toggle.Fill.pressedOff
  220.220.220
- 50.50.50
+ 70.70.70
  
  Toggle.Thumb
  254.254.254
