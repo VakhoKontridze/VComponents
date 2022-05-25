@@ -56,6 +56,10 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                                 )
                             }
                         )
+                        
+                        if i == sections.enumeratedArray().count - 1 {
+                            bottomSpacer
+                        }
                     }
                 )
                     .padding(.bottom, 1)  // SwiftUI is bugged
@@ -71,6 +75,10 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                     content: { (i, section) in
                         VList(data: section.rows, content: { row in
                             DemoListRowView(title: row.title, destination: row.body)
+                            
+                            if i == sections.enumeratedArray().count - 1 {
+                                bottomSpacer
+                            }
                         })
                             .padding(.trailing, 15)
                     }
@@ -78,6 +86,12 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                     .padding([.leading, .top, .bottom], 15)
             }
         })
+            .ignoresSafeArea(.container, edges: .bottom)
+    }
+    
+    private var bottomSpacer: some View {
+        Spacer()
+            .frame(height: 10 + UIDevice.safeAreaInsetBottom)
     }
 }
 
