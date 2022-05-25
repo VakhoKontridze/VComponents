@@ -131,7 +131,7 @@ public struct VSegmentedPickerModel {
         
         /// Header colors.
         public var header: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Header.enabled"),
+            enabled: ColorBook.secondary,
             disabled: ColorBook.primaryPressedDisabled
         )
         

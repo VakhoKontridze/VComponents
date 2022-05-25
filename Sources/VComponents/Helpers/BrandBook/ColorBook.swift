@@ -32,15 +32,20 @@ public struct ColorBook {
     /// Secondary text color.
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
-    static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
+    /// `Primary` text color used for pressed or disabled states.
+    public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
     
-    static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
+    /// `PrimaryInverted` text color used for pressed or disabled states.
+    public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
     
-    static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
+    /// `PrimaryBlack` text color used for pressed or disabled states.
+    public static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
     
-    static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
+    /// `PrimaryBlack` text color used for pressed or disabled states.
+    public static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
     
-    static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
+    /// `Secondary` text color used for pressed or disabled states.
+    public static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
     
     /// Blue accent color.
     public static let accent: Color = .init(componentAsset: "Accent")
@@ -51,8 +56,7 @@ public struct ColorBook {
 
 // MARK: - Helpers
 extension Color {
-    /// Initializes color from library's local assets library from a name.
-    public init(componentAsset name: String) {
+    init(componentAsset name: String) {
         guard
             let uiColor: UIColor = .init(named: name, in: .module, compatibleWith: nil)
         else {
@@ -95,8 +99,8 @@ extension Color {
  255.255.255
  
  Secondary
- 120.120.120
- 140.140.140
+ 60.60.67 @ 60 // Apple
+ 235.235.245 @ 60 // Apple
  
 */
 
@@ -183,10 +187,6 @@ extension Color {
  SegmentedPicker.Divider.enabled
  215.215.215
  70.70.70
- 
- SegmentedPicker.Header.enabled
- 60.60.60
- 210.210.210
  
  SegmentedPicker.Indicator.disabled
  254.254.254

@@ -35,7 +35,7 @@ struct ToggleSettingView: View {
             VStack(alignment: .leading, spacing: 3, content: {
                 if !title.isEmpty {
                     VText(
-                        color: isEnabled ? ColorBook.primary : .init(componentAsset: "Primary.presseddisabled"), // Not exposing API
+                        color: isEnabled ? ColorBook.primary : ColorBook.primaryPressedDisabled,
                         font: .callout,
                         text: title
                     )
@@ -44,7 +44,7 @@ struct ToggleSettingView: View {
                 if let description = description, !description.isEmpty {
                     VText(
                         type: .multiLine(alignment: .leading, lineLimit: nil),
-                        color: isEnabled ? ColorBook.secondary : .init(componentAsset: "Secondary.presseddisabled"), // Not exposing API
+                        color: isEnabled ? ColorBook.secondary : ColorBook.secondaryPressedDisabled,
                         font: .footnote,
                         text: description
                     )

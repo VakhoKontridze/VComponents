@@ -15,8 +15,8 @@ struct NoDismissTypeWarningView: View {
         var model: VPlainButtonModel = .init()
         model.colors.title = .init(
             enabled: ColorBook.primaryWhite,
-            pressed: .init(componentAsset: "PrimaryWhite.presseddisabled"), // Not exposing API
-            disabled: .init(componentAsset: "PrimaryWhite.presseddisabled") // Not exposing API
+            pressed: ColorBook.primaryWhitePressedDisabled,
+            disabled: ColorBook.primaryWhitePressedDisabled
         )
         return model
     }()
