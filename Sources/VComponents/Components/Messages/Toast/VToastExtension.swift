@@ -22,11 +22,11 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true },
-    ///             title: "Present"
+    ///             text: "Present"
     ///         )
     ///             .vToast(
     ///                 isPresented: $isPresented,
-    ///                 title: "Lorem ipsum dolor sit amet"
+    ///                 text: "Lorem ipsum dolor sit amet"
     ///             )
     ///     }
     ///
@@ -36,7 +36,7 @@ extension View {
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        title: String
+        text: String
     ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
@@ -51,7 +51,7 @@ extension View {
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title
+                        text: text
                     )
                 }
             ))
@@ -77,11 +77,11 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { toastItem = .init() },
-    ///             title: "Present"
+    ///             text: "Present"
     ///         )
     ///             .vToast(
     ///                 item: $toastItem,
-    ///                 title: { item in "Lorem ipsum dolor sit amet" }
+    ///                 text: { item in "Lorem ipsum dolor sit amet" }
     ///             )
     ///     }
     ///
@@ -91,7 +91,7 @@ extension View {
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (Item) -> String
+        text: @escaping (Item) -> String
     ) -> some View
         where Item: Identifiable
     {
@@ -113,9 +113,9 @@ extension View {
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: {
+                        text: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
-                                return title(item)
+                                return text(item)
                             } else {
                                 return ""
                             }
@@ -149,12 +149,12 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true; toastData = .init() },
-    ///             title: "Present"
+    ///             text: "Present"
     ///         )
     ///             .vToast(
     ///                 isPresented: $isPresented,
     ///                 presenting: toastData,
-    ///                 title: { data in "Lorem ipsum dolor sit amet" }
+    ///                 text: { data in "Lorem ipsum dolor sit amet" }
     ///             )
     ///     }
     ///
@@ -165,7 +165,7 @@ extension View {
         presenting data: T?,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (T) -> String
+        text: @escaping (T) -> String
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -185,9 +185,9 @@ extension View {
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: {
+                        text: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
-                                return title(data)
+                                return text(data)
                             } else {
                                 return ""
                             }
@@ -219,12 +219,12 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true; toastError = SomeError() },
-    ///             title: "Present"
+    ///             text: "Present"
     ///         )
     ///             .vToast(
     ///                 isPresented: $isPresented,
     ///                 error: toastError,
-    ///                 title: { error in "Lorem ipsum dolor sit amet" }
+    ///                 text: { error in "Lorem ipsum dolor sit amet" }
     ///             )
     ///     }
     ///
@@ -235,7 +235,7 @@ extension View {
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        title: @escaping (E) -> String
+        text: @escaping (E) -> String
     ) -> some View
         where E: Error
     {
@@ -257,9 +257,9 @@ extension View {
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: {
+                        text: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
-                                return title(error)
+                                return text(error)
                             } else {
                                 return ""
                             }

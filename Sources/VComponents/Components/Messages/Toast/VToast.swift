@@ -20,7 +20,7 @@ struct VToast: View {
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    private let title: String
+    private let text: String
     
     @State private var isInternallyPresented: Bool = false
     
@@ -32,13 +32,13 @@ struct VToast: View {
         type toastType: VToastType,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
-        title: String
+        text: String
     ) {
         self.model = model
         self.toastType = toastType
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
-        self.title = title
+        self.text = text
     }
 
     // MARK: Body
@@ -63,7 +63,7 @@ struct VToast: View {
             type: toastType,
             color: model.colors.title,
             font: model.fonts.title,
-            text: title
+            text: text
         )
             .padding(model.layout.titleMargins)
             .background(background)
@@ -182,7 +182,7 @@ struct _VToast_Previews: PreviewProvider {
         )
             .vToast(
                 isPresented: $isPresented,
-                title: "Lorem ipsum dolor sit amet"
+                text: "Lorem ipsum dolor sit amet"
             )
     }
 }

@@ -17,7 +17,7 @@ struct VToastDemoView: View {
     
     @State private var presentationEdge: VToastModel.Layout.PresentationEdge = .default
     @State private var toastType: VToastTypeHelper = .oneLine
-    @State private var title: String = "Lorem ipsum dolor sit amet"
+    @State private var text: String = "Lorem ipsum dolor sit amet"
     
     private var model: VToastModel {
         var model: VToastModel = .init()
@@ -40,7 +40,7 @@ struct VToastDemoView: View {
                 model: model,
                 type: toastType.toastType,
                 isPresented: $isPresented,
-                title: title
+                text: text
             )
     }
     
@@ -59,7 +59,7 @@ struct VToastDemoView: View {
                 footerTitle: "In multi-line type, line limit and alignment can be set. For demo purposes, they are set to 5 and leading."
             )
             
-            VTextField(text: $title)
+            VTextField(text: $text)
         })
     }
 }
