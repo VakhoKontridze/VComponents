@@ -29,16 +29,16 @@ public struct ImageBook {
     public static var textFieldSearch: Image = .init(templateComponentAsset: "Search")
     
     /// Visibility off icon for `VTextField`.
-    public static var textFieldVisibilityOff: Image = .init(templateComponentAsset: "Visibility.off")
+    public static var textFieldVisibilityOff: Image = .init(templateComponentAsset: "Visibility.Off")
     
     /// Visibility on icon for `VTextField`
-    public static var textFieldVisibilityOn: Image = .init(templateComponentAsset: "Visibility.on")
+    public static var textFieldVisibilityOn: Image = .init(templateComponentAsset: "Visibility.On")
     
     /// General close or clear button x-mark icon.
     public static var xMark: Image = .init(templateComponentAsset: "XMark")
     
     /// General chevron icon.
-    public static var chevronUp: Image = .init(templateComponentAsset: "Chevron.up")
+    public static var chevronUp: Image = .init(templateComponentAsset: "Chevron.Up")
     
     // MARK: Initializers
     private init() {}
