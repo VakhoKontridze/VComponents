@@ -122,9 +122,9 @@ struct VBottomSheetDemoView: View {
             ToggleSettingView(
                 isOn: $isContentDraggable,
                 title: "Draggable Content",
-                description: "Content dragging is disabled if autoresizing is enabled"
+                description: "Content dragging is disabled if height is fixed or autoresizing is enabled"
             )
-                .disabled(autoresizesContent)
+                .disabled(heightType == .fixed || autoresizesContent)
             
             ToggleSettingView(
                 isOn: .init(

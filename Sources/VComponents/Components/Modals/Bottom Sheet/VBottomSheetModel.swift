@@ -96,6 +96,8 @@ public struct VBottomSheetModel {
         ///
         /// Can be used for scrollable content.
         /// Optionally, add `bottom` to `contentSafeAreaEdges` to ensure that scrollable content always has bottom safe area inset.
+        ///
+        /// Has no effect on fixed bottom sheet.
         public var autoresizesContent: Bool = false
         
         /// Edges on which content has safe area edges. Defaults to `[]`.
@@ -310,6 +312,8 @@ public struct VBottomSheetModel {
         /// Indicates if sheet can be resized by dragging outside the header. Defaults to `false`.
         ///
         /// Setting to `true` may cause issues with scrollable views.
+        ///
+        /// Has no effect on fixed bottom sheet.
         public var isContentDraggable: Bool = false
         
         // MARK: Initializers
