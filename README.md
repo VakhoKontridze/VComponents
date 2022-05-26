@@ -49,39 +49,37 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 ## Brand Book
 
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540189-72cef8ef-4f80-4306-b778-3092f8ad4acc.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540197-785e93c8-7026-4b5c-a356-b9506b280989.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540202-a201d445-6b59-4d43-be18-d204f38321e9.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540203-0c92e02b-c61b-4ec3-acce-df7f8cc75ac8.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540207-0954e5ee-31df-430d-888e-33b0a731b49d.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540210-eb3a4b27-6c70-4bff-9648-74f48f195158.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540213-8aaf0819-17ca-4d10-859d-be6b4aa0d1a9.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540215-45b97351-df18-4e14-b8c9-00bac8c36cfb.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540217-9e16f5e3-b21f-4206-b470-ec6d6a125278.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540219-f5fb31af-0ac2-40ef-bc04-d1df526dab4f.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540220-d02a82f9-1cd6-4f5b-ae8b-f56857e9d109.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540222-9a1c058d-657f-4c12-9e99-05e145ea5d27.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540225-8a0991f1-c367-43b3-9146-c0ab21d3808c.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540229-a2e791fb-2123-435d-a2a9-3934d19c0843.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540231-415ac837-8c47-4969-96de-303dbc99c7e9.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540233-46ffdcec-4489-4ace-98c1-670ec2ae8f7e.png">
-
-<img width="250" src="https://user-images.githubusercontent.com/57289621/170540237-5ba7e55f-56f7-4a3e-83e1-576c995636bb.png">
+<table>
+   <tr>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540189-72cef8ef-4f80-4306-b778-3092f8ad4acc.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540197-785e93c8-7026-4b5c-a356-b9506b280989.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540202-a201d445-6b59-4d43-be18-d204f38321e9.png"></td>
+   </tr>
+   <tr>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540203-0c92e02b-c61b-4ec3-acce-df7f8cc75ac8.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540207-0954e5ee-31df-430d-888e-33b0a731b49d.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540210-eb3a4b27-6c70-4bff-9648-74f48f195158.png"></td>
+   </tr>
+   <tr>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540213-8aaf0819-17ca-4d10-859d-be6b4aa0d1a9.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540215-45b97351-df18-4e14-b8c9-00bac8c36cfb.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540217-9e16f5e3-b21f-4206-b470-ec6d6a125278.png"></td>
+   </tr>
+   <tr>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540219-f5fb31af-0ac2-40ef-bc04-d1df526dab4f.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540220-d02a82f9-1cd6-4f5b-ae8b-f56857e9d109.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540222-9a1c058d-657f-4c12-9e99-05e145ea5d27.png"></td>
+   </tr>
+   <tr>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540225-8a0991f1-c367-43b3-9146-c0ab21d3808c.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540229-a2e791fb-2123-435d-a2a9-3934d19c0843.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540231-415ac837-8c47-4969-96de-303dbc99c7e9.png"></td>
+   </tr>
+   <tr>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540233-46ffdcec-4489-4ace-98c1-670ec2ae8f7e.png"></td>
+      <td><img src="https://user-images.githubusercontent.com/57289621/170540237-5ba7e55f-56f7-4a3e-83e1-576c995636bb.png"></td>
+   </tr>
+</table>
 
 ## Guidelines
 
@@ -233,7 +231,7 @@ Components also prevent themselves from modifying external state with an animati
 
 Project contains demo app, that can be run to showcase all components.
 
-<img width="800" src="https://user-images.githubusercontent.com/57289621/170541609-a6773104-f17d-4397-ac21-6593f858f90e.jpg">
+<img width="700" src="https://user-images.githubusercontent.com/57289621/170541609-a6773104-f17d-4397-ac21-6593f858f90e.jpg">
 
 ## Installation
 
