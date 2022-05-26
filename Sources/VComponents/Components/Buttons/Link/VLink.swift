@@ -58,7 +58,7 @@ public struct VLink<Label>: View where Label: View {
 struct VLink_Previews: PreviewProvider {
     static var previews: some View {
         VLink(
-            url: .init(string: "https://www.apple.com")!,
+            url: .init(string: "https://www.apple.com")!, // fatalError
             label: {
                 VSecondaryButton(
                     action: {},

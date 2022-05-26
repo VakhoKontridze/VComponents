@@ -15,7 +15,7 @@ struct VBottomSheetDemoView: View {
     static var navBarTitle: String { "Bottom Sheet" }
     
     @State private var isPresented: Bool = false
-    @State private var heightType: VBottomSheetSizeHelper = VBottomSheetModel.Layout().sizes.current!.size.heights.helperType
+    @State private var heightType: VBottomSheetSizeHelper = VBottomSheetModel.Layout().sizes.current!.size.heights.helperType // fatalError
     @State private var dismissType: VBottomSheetModel.Misc.DismissType = .default
     @State private var hasGrabber: Bool = VBottomSheetModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
