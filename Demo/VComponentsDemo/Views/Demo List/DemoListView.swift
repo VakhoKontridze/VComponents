@@ -58,7 +58,8 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                         )
                         
                         if i == sections.enumeratedArray().count - 1 {
-                            bottomSpacer
+                            Spacer()
+                                .frame(height: UIDevice.safeAreaInsetBottom + 10)
                         }
                     }
                 )
@@ -66,6 +67,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                 
             case .section:
                 VSheet()
+                    .padding(.bottom, UIDevice.safeAreaInsetBottom)
                 
                 VLazyScrollView(
                     type: .vertical(model: lazyScrollViewModel),
@@ -74,23 +76,15 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                     content: { (i, section) in
                         VList(data: section.rows, content: { row in
                             DemoListRowView(title: row.title, destination: row.body)
-                            
-                            if i == sections.enumeratedArray().count - 1 {
-                                bottomSpacer
-                            }
                         })
                             .padding(.trailing, 15)
                     }
                 )
                     .padding([.leading, .top, .bottom], 15)
+                    .padding(.bottom, UIDevice.safeAreaInsetBottom + 10)
             }
         })
             .ignoresSafeArea(.container, edges: .bottom)
-    }
-    
-    private var bottomSpacer: some View {
-        Spacer()
-            .frame(height: 10 + UIDevice.safeAreaInsetBottom)
     }
 }
 
