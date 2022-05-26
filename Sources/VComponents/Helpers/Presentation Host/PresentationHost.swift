@@ -145,7 +145,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
         let content: AnyView = .init(
             content()
                 .presentationHostPresentationMode(.init(
-                    id: uiViewController.instanceID,
+                    instanceID: uiViewController.instanceID,
                     dismiss: dismissHandler,
                     isExternallyDismissed: isExternallyDismissed,
                     externalDismissCompletion: uiViewController.dismissHostedView
