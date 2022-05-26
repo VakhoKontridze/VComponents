@@ -205,7 +205,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
             .safeAreaMarginInsets(edges: model.layout.contentSafeAreaEdges)
             .frame(maxWidth: .infinity)
             .if(
-                model.layout.autoresizesContent,
+                model.layout.autoresizesContent && model.layout.sizes._current.size.heights.isResizable,
                 ifTransform: { $0.frame(height: UIScreen.main.bounds.height - offset - headerDividerHeight) },
                 elseTransform: { $0.frame(maxHeight: .infinity) }
             )
