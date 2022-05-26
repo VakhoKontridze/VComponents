@@ -196,7 +196,7 @@ Components also prevent themselves from modifying external state with an animati
 
 Project contains demo app, that can be run to showcase all components.
 
-![DemoApp](https://user-images.githubusercontent.com/57289621/170530114-afea5222-b824-47f9-98d2-13e70bb6afc7.jpg)
+<img src="https://user-images.githubusercontent.com/57289621/170530114-afea5222-b824-47f9-98d2-13e70bb6afc7.jpg" width="500">
 
 ## Installation
 
