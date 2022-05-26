@@ -117,35 +117,35 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     }
 
     public func updateUIViewController(_ uiViewController: PresentationHostViewController, context: Context) {
+        let isExternallyDismissed: Bool =
+            uiViewController.isPresentingView &&
+            !isPresented.wrappedValue &&
+            !wasInternallyDismissed
+
+        let dismissHandler: () -> Void = {
+            wasInternallyDismissed = true
+            defer { DispatchQueue.main.async(execute: { wasInternallyDismissed = false }) }
+
+            isPresented.wrappedValue = false
+            uiViewController.dismissHostedView()
+        }
+
         let content: AnyView = .init(
             content()
                 .presentationHostPresentationMode(.init(
-                    dismiss: {
-                        wasInternallyDismissed = true
-                        
-                        isPresented.wrappedValue = false
-                        uiViewController.dismissHostedView()
-                        
-                        DispatchQueue.main.async(execute: { wasInternallyDismissed = false })
-                    },
-                    
-                    isExternallyDismissed:
-                        uiViewController.isPresentingView &&
-                        !isPresented.wrappedValue &&
-                        !wasInternallyDismissed
-                    ,
-                    
+                    dismiss: dismissHandler,
+                    isExternallyDismissed: isExternallyDismissed,
                     externalDismissCompletion: uiViewController.dismissHostedView
                 ))
         )
-        
+
         if
             isPresented.wrappedValue,
             !uiViewController.isPresentingView
         {
             uiViewController.presentHostedView(content)
         }
-        
+
         uiViewController.updateHostedView(with: content)
     }
 }

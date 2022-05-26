@@ -26,6 +26,8 @@ struct VToast: View {
     
     @State private var height: CGFloat = 0
     
+    private let toastSessionID: Int = VToastSessionManager.shared.generateID()
+    
     // MARK: Initializers
     init(
         model: VToastModel,
@@ -44,9 +46,7 @@ struct VToast: View {
     // MARK: Body
     var body: some View {
         ZStack(content: {
-            Group(content: {
-                contentView
-            })
+            contentView
                 .frame(maxHeight: .infinity, alignment: .top)
                 .ignoresSafeArea()
         })
@@ -113,6 +113,9 @@ struct VToast: View {
     
     // MARK: Animations
     private func animateIn() {
+        guard !VToastSessionManager.shared.isVisible(toastSessionID) else { return }
+        VToastSessionManager.shared.didAppear(toastSessionID)
+
         withBasicAnimation(
             model.animations.appear,
             body: { isInternallyPresented = true },
@@ -129,6 +132,8 @@ struct VToast: View {
             completion: {
                 presentationMode.dismiss()
                 DispatchQueue.main.async(execute: { dismissHandler?() })
+                
+                VToastSessionManager.shared.didDisappear(toastSessionID)
             }
         )
     }
@@ -136,7 +141,10 @@ struct VToast: View {
     private func animateOutAfterLifecycle() {
         DispatchQueue.main.asyncAfter(
             deadline: .now() + model.animations.duration,
-            execute: animateOut
+            execute: {
+                guard VToastSessionManager.shared.isVisible(toastSessionID) else { return }
+                animateOut()
+            }
         )
     }
 
@@ -147,6 +155,8 @@ struct VToast: View {
             completion: {
                 presentationMode.externalDismissCompletion()
                 DispatchQueue.main.async(execute: { dismissHandler?() })
+                
+                VToastSessionManager.shared.didDisappear(toastSessionID)
             }
         )
     }
