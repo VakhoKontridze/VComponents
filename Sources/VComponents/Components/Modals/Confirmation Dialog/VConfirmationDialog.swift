@@ -17,8 +17,6 @@ extension View {
     ///
     /// `vConfirmationDialog` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    /// Usage Example:
-    ///
     ///     @State var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -75,8 +73,6 @@ extension View {
     /// Confirmation dialog can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
     /// `vConfirmationDialog` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
     ///
     ///     struct ConfirmationDialogItem: Identifiable {
     ///         let id: UUID = .init()
@@ -147,8 +143,6 @@ extension View {
     /// For the dialog to appear, both `isPresented` must be true and `data` must not be nil.
     /// The `data` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    /// Usage Example:
     ///
     ///     struct ConfirmationDialogData {}
     ///

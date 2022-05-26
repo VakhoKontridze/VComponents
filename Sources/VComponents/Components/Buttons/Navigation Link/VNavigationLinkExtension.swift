@@ -11,8 +11,6 @@ import SwiftUI
 extension View {
     /// Allows for navigation without an explicit `NavigationLink`.
     ///
-    /// Usage Example:
-    ///
     ///     @State var isActive: Bool = false
     ///
     ///     var body: some View {

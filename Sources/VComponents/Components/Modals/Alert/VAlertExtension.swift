@@ -19,8 +19,6 @@ extension View {
     ///
     /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    /// Usage Example:
-    ///
     ///     @State var isPresented: Bool = false
     ///
     ///     var body: some View {
@@ -76,8 +74,6 @@ extension View {
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
     /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
     ///
     ///     @State var isPresented: Bool = false
     ///
@@ -143,8 +139,6 @@ extension View {
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
     /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
     ///
     ///     struct AlertItem: Identifiable {
     ///         let id: UUID = .init()
@@ -232,8 +226,6 @@ extension View {
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
     /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
-    ///
-    /// Usage Example:
     ///
     ///     struct AlertItem: Identifiable {
     ///         let id: UUID = .init()
@@ -341,8 +333,6 @@ extension View {
     /// The `data` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
     ///
-    /// Usage Example:
-    ///
     ///     struct AlertData {}
     ///
     ///     @State var isPresented: Bool = false
@@ -433,8 +423,6 @@ extension View {
     /// For the alert to appear, both `isPresented` must be true and `data` must not be nil.
     /// The `data` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    /// Usage Example:
     ///
     ///     struct AlertData {}
     ///
@@ -541,8 +529,6 @@ extension View {
     /// The `error` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
     ///
-    /// Usage Example:
-    ///
     ///     @State var isPresented: Bool = false
     ///
     ///     @State var alertError: Error?
@@ -628,8 +614,6 @@ extension View {
     /// For the alert to appear, both `isPresented` must be true and `error` must not be nil.
     /// The `error` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
-    ///
-    /// Usage Example:
     ///
     ///     @State var isPresented: Bool = false
     ///
