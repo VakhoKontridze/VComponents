@@ -33,6 +33,7 @@ import SwiftUI
 ///
 ///             VLazyScrollView(data: data, content: { row in
 ///                 Text(row.title)
+///                     .padding(.vertical, 3)
 ///                     .frame(maxWidth: .infinity, alignment: .leading)
 ///             })
 ///                 .padding()
