@@ -22,8 +22,8 @@ final class VToastSessionManager {
     
     func generateID() -> Int { idGen.value }
     
-    func didAppear(_ id: Int) { appearedToasts.insert(id); print(appearedToasts) }
-    func didDisappear(_ id: Int) { appearedToasts.remove(id); print(appearedToasts) }
+    func didAppear(_ id: Int) { appearedToasts.insert(id) }
+    func didDisappear(_ id: Int) { appearedToasts.remove(id) }
     
     func isVisible(_ id: Int) -> Bool { appearedToasts.contains(id) }
 }
