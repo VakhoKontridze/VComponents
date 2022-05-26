@@ -24,7 +24,7 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 ## Components
 
-**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VNavigationLink, VWebLink
+**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VNavigationLink, VLink
 
 **State Pickers.** VToggle, VCheckBox, VRadioButton
 
@@ -196,7 +196,7 @@ Components also prevent themselves from modifying external state with an animati
 
 Project contains demo app, that can be run to showcase all components.
 
-<img src="https://user-images.githubusercontent.com/57289621/170530114-afea5222-b824-47f9-98d2-13e70bb6afc7.jpg" width="500">
+<img width="600" src="https://user-images.githubusercontent.com/57289621/170530114-afea5222-b824-47f9-98d2-13e70bb6afc7.jpg">
 
 ## Installation
 
