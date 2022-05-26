@@ -91,7 +91,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
                 .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                     $0
                         .frame(height: model.layout.sizes._current.size.heights.max)
-                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
+                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.hiddenOffset)
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -113,14 +113,14 @@ struct VBottomSheet<HeaderLabel, Content>: View
                 .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                     $0
                         .frame(height: model.layout.sizes._current.size.heights.max)
-                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
+                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.hiddenOffset)
                 })
         })
             .frame(width: model.layout.sizes._current.size.width)
             .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
                 $0
                     .frame(height: model.layout.sizes._current.size.heights.max)
-                    .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.max)
+                    .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.hiddenOffset)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged(dragChanged)

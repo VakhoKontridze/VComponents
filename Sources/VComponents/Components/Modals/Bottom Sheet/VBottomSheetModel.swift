@@ -183,6 +183,13 @@ public struct VBottomSheetModel {
                 }
             }
             
+            var hiddenOffset: CGFloat {
+                switch isResizable {
+                case false: return UIScreen.main.bounds.height - maxOffset
+                case true: return UIScreen.main.bounds.height
+                }
+            }
+            
             // MARK: Initializers
             /// Initializes `Height`.
             public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
