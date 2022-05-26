@@ -50,7 +50,7 @@ struct VLinkDemoView: View {
 private typealias VLinkState = VSecondaryButtonInternalState
 
 // MARK: - Preview
-struct VWebLinkDemoView_Previews: PreviewProvider {
+struct VLinkDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VLinkDemoView()
     }
