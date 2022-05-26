@@ -17,7 +17,7 @@ struct VToastDemoView: View {
     
     @State private var presentationEdge: VToastModel.Layout.PresentationEdge = .default
     @State private var toastType: VToastTypeHelper = .oneLine
-    @State private var title: String = "Lorem ipsum dolor sit ame"
+    @State private var title: String = "Lorem ipsum dolor sit amet"
     
     private var model: VToastModel {
         var model: VToastModel = .init()

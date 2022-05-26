@@ -53,7 +53,9 @@ extension View {
         where Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: isPresented,
                 content: {
                     VModal<Never, _>(
@@ -107,7 +109,9 @@ extension View {
         where Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: isPresented,
                 content: {
                     VModal<Never, _>(
@@ -168,7 +172,9 @@ extension View {
             Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: isPresented,
                 content: {
                     VModal(
@@ -235,7 +241,9 @@ extension View {
             Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -300,7 +308,9 @@ extension View {
             Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -371,7 +381,9 @@ extension View {
             Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }

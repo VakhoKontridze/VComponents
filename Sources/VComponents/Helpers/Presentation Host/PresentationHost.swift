@@ -22,6 +22,8 @@ import SwiftUI
 /// This allows content to perform dismiss animations before being removed from view hierarchy.
 /// For additional documentation, refer to `PresentationHostPresentationMode`.
 ///
+/// `PresentationHost.forceDismiss(in:)` must be called when `self` disapears.
+///
 ///     extension View {
 ///         public func someModal<Content>(
 ///             isPresented: Binding<Bool>,
@@ -30,7 +32,9 @@ import SwiftUI
 ///             where Content: View
 ///         {
 ///             self
+///                 .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
 ///                 .background(PresentationHost(
+///                     in: self,
 ///                     isPresented: isPresented,
 ///                     content: {
 ///                         _SomeModal(
@@ -93,6 +97,7 @@ import SwiftUI
 ///
 public struct PresentationHost<Content>: UIViewControllerRepresentable where Content: View {
     // MARK: Properties
+    private let presentingViewType: String
     private let isPresented: Binding<Bool>
     private let allowsHitTests: Bool
     private let content: () -> Content
@@ -101,11 +106,15 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     
     // MARK: Initializers
     /// Initializes `PresentationHost` with condition and content.
-    public init(
+    public init<PresentingView>(
+        in presentingView: PresentingView,
         isPresented: Binding<Bool>,
         allowsHitTests: Bool = true,
         content: @escaping () -> Content
-    ) {
+    )
+        where PresentingView: View
+    {
+        self.presentingViewType = PresentationHostViewController.presentingViewType(from: presentingView)
         self.isPresented = isPresented
         self.allowsHitTests = allowsHitTests
         self.content = content
@@ -113,7 +122,10 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     
     // MARK: Representable
     public func makeUIViewController(context: Context) -> PresentationHostViewController {
-        .init(allowsHitTests: allowsHitTests)
+        .init(
+            presentingViewType: presentingViewType,
+            allowsHitTests: allowsHitTests
+        )
     }
 
     public func updateUIViewController(_ uiViewController: PresentationHostViewController, context: Context) {
@@ -147,5 +159,17 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
         }
 
         uiViewController.updateHostedView(with: content)
+    }
+    
+    // MARK: Force Dismiss
+    /// Forcefully dismisses presented view from presenter.
+    public static func forceDismiss<PresentingView>(
+        in presentingView: PresentingView
+    )
+        where
+            Content == Never,
+            PresentingView: View
+    {
+        PresentationHostViewController.forceDismiss(in: presentingView)
     }
 }

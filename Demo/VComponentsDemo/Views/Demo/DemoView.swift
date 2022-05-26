@@ -126,7 +126,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
         where Content: View
     {
         // Component view is embedded in VStack, as some demo's contain swift case in Groups.
-        // Since Group is a pseudo-view, it may cause multiple VBottomSheets to appear.
+        // Since Group is a pseudo-view, it may cause `VBottomSheets` flicker.
         VStack(content: {
             Group(content: {
                 switch type {

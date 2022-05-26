@@ -41,7 +41,9 @@ extension View {
         title: String
     ) -> some View {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: isPresented,
                 allowsHitTests: false,
                 content: {
@@ -97,7 +99,9 @@ extension View {
         where Item: Identifiable
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -162,7 +166,9 @@ extension View {
         title: @escaping (T) -> String
     ) -> some View {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -227,7 +233,9 @@ extension View {
         where E: Error
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }

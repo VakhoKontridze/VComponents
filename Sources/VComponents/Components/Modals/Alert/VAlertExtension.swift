@@ -49,7 +49,9 @@ extension View {
         actions buttons: [VAlertButton]
     ) -> some View {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: isPresented,
                 content: {
                     VAlert<Never>(
@@ -111,7 +113,9 @@ extension View {
         where Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: isPresented,
                 content: {
                     VAlert(
@@ -178,7 +182,9 @@ extension View {
         where Item: Identifiable
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -253,7 +259,9 @@ extension View {
             Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -329,7 +337,9 @@ extension View {
         actions buttons: @escaping (T) -> [VAlertButton]
     ) -> some View {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -407,7 +417,9 @@ extension View {
         where Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -478,7 +490,9 @@ extension View {
         where E: Error
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -550,7 +564,9 @@ extension View {
             Content: View
     {
         self
+            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
+                in: self,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }

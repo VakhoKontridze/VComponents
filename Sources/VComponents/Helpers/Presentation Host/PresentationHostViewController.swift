@@ -23,23 +23,24 @@ import VCore
 /// For additional documetation, refer to `PresentationHost`.
 public final class PresentationHostViewController: UIViewController {
     // MARK: Properties
+    private let presentingViewType: String
+    private let allowsHitTests: Bool
+    
     private var hostingController: HostingViewControllerType?
     typealias HostingViewControllerType = UIHostingController<AnyView>
     var isPresentingView: Bool { hostingController != nil }
     
-    private let allowsHitTests: Bool
-    
-    private var windowView: UIView? { UIApplication.shared.activeView }
-    
-    private static let idGenerator: AtomicInteger = .init(initialValue: 1_000_000)
-    private var id: Int?
+    private static var activePresentingViews: Set<String> = []
     
     // MARK: Initializers
     /// Initializes `PresentationHostViewController`.
     public init(
+        presentingViewType: String,
         allowsHitTests: Bool
     ) {
+        self.presentingViewType = presentingViewType
         self.allowsHitTests = allowsHitTests
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,19 +51,13 @@ public final class PresentationHostViewController: UIViewController {
     
     // MARK: Presentation
     func presentHostedView<Content>(_ content: Content) where Content: View {
-        guard
-            id == nil,
-            let windowView = windowView
-        else {
-            return
-        }
+        guard let windowView: UIView = UIApplication.shared.activeView else { return }
         
         hostingController = .init(rootView: .init(content))
         guard let hostingController = hostingController else { fatalError() }
         
-        let id: Int = Self.idGenerator.value
-        self.id = id
-        hostingController.view.tag = id
+        Self.activePresentingViews.insert(presentingViewType)
+        hostingController.view.tag = presentingViewType.hashValue
         
         hostingController.modalPresentationStyle = .overFullScreen
         hostingController.modalTransitionStyle = .crossDissolve
@@ -87,10 +82,31 @@ public final class PresentationHostViewController: UIViewController {
     }
     
     func dismissHostedView() {
-        guard let windowView = windowView else { return }
+        guard let windowView: UIView = UIApplication.shared.activeView else { return }
         
-        windowView.subviews.first(where: { $0.tag == id })?.removeFromSuperview()
+        windowView.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()
         hostingController = nil
-        id = nil
+        Self.activePresentingViews.remove(presentingViewType)
+    }
+    
+    // MARK: Froce Dismiss
+    static func forceDismiss<PresentingView>(
+        in presentingView: PresentingView
+    )
+        where PresentingView: View
+    {
+        let presentingViewType: String = Self.presentingViewType(from: presentingView)
+        
+        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()
+        Self.activePresentingViews.remove(presentingViewType)
+    }
+    
+    // MARK: Helpers
+    static func presentingViewType<PresentingView>(
+        from presentingView: PresentingView
+    ) -> String
+        where PresentingView: View
+    {
+        String(describing: type(of: presentingView.body))
     }
 }
