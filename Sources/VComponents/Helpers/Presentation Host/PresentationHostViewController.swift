@@ -82,10 +82,9 @@ public final class PresentationHostViewController: UIViewController {
     }
     
     func dismissHostedView() {
-        guard let windowView: UIView = UIApplication.shared.activeView else { return }
-        
-        windowView.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()
+        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()
         hostingController = nil
+        
         Self.activePresentingViews.remove(presentingViewType)
     }
     
@@ -95,18 +94,10 @@ public final class PresentationHostViewController: UIViewController {
     )
         where PresentingView: View
     {
-        let presentingViewType: String = Self.presentingViewType(from: presentingView)
+        let presentingViewType: String = SwiftUIViewTypeDescriber.describe(presentingView)
         
         UIApplication.shared.activeView?.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()
+        
         Self.activePresentingViews.remove(presentingViewType)
-    }
-    
-    // MARK: Helpers
-    static func presentingViewType<PresentingView>(
-        from presentingView: PresentingView
-    ) -> String
-        where PresentingView: View
-    {
-        String(describing: type(of: presentingView.body))
     }
 }

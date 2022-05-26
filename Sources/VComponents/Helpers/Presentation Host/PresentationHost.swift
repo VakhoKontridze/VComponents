@@ -114,7 +114,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     )
         where PresentingView: View
     {
-        self.presentingViewType = PresentationHostViewController.presentingViewType(from: presentingView)
+        self.presentingViewType = SwiftUIViewTypeDescriber.describe(presentingView)
         self.isPresented = isPresented
         self.allowsHitTests = allowsHitTests
         self.content = content
