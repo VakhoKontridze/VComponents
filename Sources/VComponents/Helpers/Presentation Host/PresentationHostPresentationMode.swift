@@ -27,6 +27,9 @@ extension View {
 /// After which `externalDismissCompletion` handler must be called to remove content from view hierarchy.
 public struct PresentationHostPresentationMode {
     // MARK: Properties
+    /// Instance ID.
+    public let id: Int?
+    
     /// Dismisses modal.
     public let dismiss: () -> Void
     
@@ -39,12 +42,14 @@ public struct PresentationHostPresentationMode {
     public let externalDismissCompletion: () -> Void
     
     // MARK: Initializers
-    /// Initializes `PresentationHostPresentationMode` with bool and completion handlers.
+    /// Initializes `PresentationHostPresentationMode` with id, external dismiss condition, and completion handlers.
     public init(
+        id: Int?,
         dismiss: @escaping () -> Void,
         isExternallyDismissed: Bool,
         externalDismissCompletion: @escaping () -> Void
     ) {
+        self.id = id
         self.dismiss = dismiss
         self.isExternallyDismissed = isExternallyDismissed
         self.externalDismissCompletion = externalDismissCompletion
@@ -52,6 +57,7 @@ public struct PresentationHostPresentationMode {
     
     init() {
         self.init(
+            id: nil,
             dismiss: {},
             isExternallyDismissed: false,
             externalDismissCompletion: {}

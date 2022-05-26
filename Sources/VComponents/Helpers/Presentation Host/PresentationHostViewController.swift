@@ -32,6 +32,9 @@ public final class PresentationHostViewController: UIViewController {
     
     private static var activePresentingViews: Set<String> = []
     
+    private static let instanceIDGenerator: AtomicInteger = .init(initialValue: 1_000_000)
+    let instanceID: Int
+    
     // MARK: Initializers
     /// Initializes `PresentationHostViewController`.
     public init(
@@ -40,6 +43,7 @@ public final class PresentationHostViewController: UIViewController {
     ) {
         self.presentingViewType = presentingViewType
         self.allowsHitTests = allowsHitTests
+        self.instanceID = Self.instanceIDGenerator.value
         
         super.init(nibName: nil, bundle: nil)
     }
