@@ -52,14 +52,3 @@ extension VBottomSheetModel.Layout.BottomSheetSize: ScreenRelativeSizeMeasuremen
         )
     }
 }
-
-// MARK: - V Toast Size
-extension VToastModel.Layout.ToastSize: ScreenRelativeSizeMeasurement {
-    public static func relativeMeasurementToPoints(
-        _ measurement: VToastModel.Layout.ToastSize
-    ) -> VToastModel.Layout.ToastSize {
-        .init(
-            width: UIScreen.main.bounds.size.width * measurement.width
-        )
-    }
-}

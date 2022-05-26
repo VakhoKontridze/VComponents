@@ -34,21 +34,16 @@ public struct VToastModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Toast sizes.
-        /// Set to `0.8` ratio of screen width in portrait.
-        /// Set to `0.8` ratio of screen width in landscape.
-        public var sizes: Sizes = .init(
-            portrait: .relative(.init(width: 0.8)),
-            landscape: .relative(.init(width: 0.8))
-        )
+        /// Toast horizontal margin. Defaults to `20`.
+        public var toastHorizontalMargin: CGFloat = 20
         
         /// Corner radius type. Defaults to `default`.
         public var cornerRadiusType: CornerRadiusType = .default
         
-        /// Text margins. Defaults to `20` horizontal and `10` vertical.
+        /// Text margins. Defaults to `20` horizontal and `12` vertical.
         public var textMargins: Margins = .init(
             horizontal: 20,
-            vertical: 10
+            vertical: 12
         )
         
         /// Edge from which toast appears, and to which it disappears. Defaults to `default`.
@@ -60,26 +55,6 @@ public struct VToastModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
-        
-        // MARK: Sizes
-        /// Model that describes toast sizes.
-        public typealias Sizes = ModalSizes<ToastSize>
-        
-        // MARK: Toast Size
-        /// Toast size.
-        public struct ToastSize {
-            // MARK: Properties
-            /// Width.
-            public var width: CGFloat
-            
-            // MARK: Initializers
-            /// Initializes `ToastSize`.
-            public init(
-                width: CGFloat
-            ) {
-                self.width = width
-            }
-        }
         
         // MARK: Margins
         /// Sub-model containing `horizontal` and `vertical` margins.
@@ -138,8 +113,10 @@ public struct VToastModel {
     public struct Fonts {
         // MARK: Properties
         /// Text font. Defaults to system font of size `16` and weight `semibold`.
-        public var text: Font = .system(size: 16, weight: .semibold)
-        
+        ///
+        /// Font is of type `UIFont`, as height must be calculated.
+        public var text: UIFont = .systemFont(ofSize: 16, weight: .semibold)
+            
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
@@ -153,7 +130,7 @@ public struct VToastModel {
         public var duration: TimeInterval = 3
         
         /// Appear animation. Defaults to `easeOut` with duration `0.2`.
-        public var appear: BasicAnimation? = .init(curve: .easeOut, duration: 10.2)
+        public var appear: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
         
         /// Disappear animation. Defaults to `easeIn` with duration `0.2`.
         public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)

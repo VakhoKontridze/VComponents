@@ -45,11 +45,12 @@ struct VToast: View {
     var body: some View {
         ZStack(content: {
             contentView
-                .frame(maxHeight: .infinity, alignment: .top)
-                .ignoresSafeArea()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.container, edges: .all)
+            .padding(.horizontal, model.layout.toastHorizontalMargin) // Must be applied here
+            .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
             .onChange(
@@ -62,12 +63,11 @@ struct VToast: View {
         VText(
             type: toastType,
             color: model.colors.text,
-            font: model.fonts.text,
+            font: .init(model.fonts.text),
             text: text
         )
             .padding(model.layout.textMargins)
             .background(background)
-            .frame(maxWidth: model.layout.sizes._current.size.width)
             .readSize(onChange: { height = $0.height })
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
@@ -79,9 +79,32 @@ struct VToast: View {
 
     // MARK: Offsets
     private var initialOffset: CGFloat {
+        let initialHeight: CGFloat = {
+            switch toastType._textType {
+            case .singleLine:
+                let label: UILabel = .init()
+                label.font = model.fonts.text
+                
+                return label.singleLineHeight + 2 * model.layout.textMargins.vertical
+                
+            case .multiLine(let alignment, let lineLimit):
+                let label: UILabel = .init()
+                label.textAlignment = alignment.asNSTextAlignmnet
+                lineLimit.map { label.numberOfLines = $0 }
+                label.font = model.fonts.text
+                
+                return
+                    label.multiLineHeight(
+                        width: UIScreen.main.bounds.width,  // width can't be calculated
+                        text: text
+                    ) +
+                    2 * model.layout.textMargins.vertical
+            }
+        }()
+        
         switch model.layout.presentationEdge {
-        case .top: return -height
-        case .bottom: return UIScreen.main.bounds.height
+        case .top: return -initialHeight
+        case .bottom: return UIScreen.main.bounds.height + initialHeight
         }
     }
 
@@ -184,5 +207,16 @@ struct _VToast_Previews: PreviewProvider {
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )
+    }
+}
+
+// MARK: - Helpers
+extension TextAlignment {
+    fileprivate var asNSTextAlignmnet: NSTextAlignment {
+        switch self {
+        case .leading: return .left
+        case .center: return .center
+        case .trailing: return .right
+        }
     }
 }
