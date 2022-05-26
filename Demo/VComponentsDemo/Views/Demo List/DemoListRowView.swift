@@ -52,7 +52,7 @@ struct DemoListRowView<Content>: View where Content: View {
 
             Spacer()
 
-            Image("Chevron.Up", bundle: nil)
+            ImageBook.chevronUp
                 .renderingMode(.template)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
