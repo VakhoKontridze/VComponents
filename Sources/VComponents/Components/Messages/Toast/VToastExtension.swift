@@ -40,6 +40,7 @@ extension View {
     ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
             .background(PresentationHost(
                 in: self,
                 isPresented: isPresented,
@@ -98,6 +99,7 @@ extension View {
 
         return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
             .background(PresentationHost(
                 in: self,
                 isPresented: .init(
@@ -169,6 +171,7 @@ extension View {
 
         return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
             .background(PresentationHost(
                 in: self,
                 isPresented: .init(
@@ -240,6 +243,7 @@ extension View {
 
         return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
             .background(PresentationHost(
                 in: self,
                 isPresented: .init(
