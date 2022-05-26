@@ -240,7 +240,9 @@ extension View {
             Item: Identifiable,
             Content: View
     {
-        self
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -248,15 +250,17 @@ extension View {
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                content: { () -> VModal<Never, Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
+                content: {
+                    VModal<Never, _>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .empty,
-                        content: { content(item) }
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                content(item)
+                            }
+                        }
                     )
                 }
             ))
@@ -307,7 +311,9 @@ extension View {
             Item: Identifiable,
             Content: View
     {
-        self
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -315,15 +321,23 @@ extension View {
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                content: { () -> VModal<Never, Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .title(title: headerTitle(item)),
-                        content: { content(item) }
+                content: {
+                    VModal<Never, _>(
+                       model: model,
+                       onPresent: presentHandler,
+                       onDismiss: dismissHandler,
+                       headerLabel: {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                               return .title(title: headerTitle(item))
+                           } else {
+                               return .empty
+                           }
+                       }(),
+                       content: {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                               content(item)
+                           }
+                       }
                     )
                 }
             ))
@@ -380,7 +394,9 @@ extension View {
             HeaderLabel: View,
             Content: View
     {
-        self
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -388,15 +404,23 @@ extension View {
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                content: { () -> VModal<HeaderLabel, Content> in
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
-                        model: model,
-                        onPresent: presentHandler,
-                        onDismiss: dismissHandler,
-                        headerLabel: .custom(label: { headerLabel(item) }),
-                        content: { content(item) }
+                content: {
+                    VModal<HeaderLabel, _>(
+                       model: model,
+                       onPresent: presentHandler,
+                       onDismiss: dismissHandler,
+                       headerLabel: {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                               return .custom(label: { headerLabel(item) })
+                           } else {
+                               return .empty
+                           }
+                       }(),
+                       content: {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                               content(item)
+                           }
+                       }
                     )
                 }
             ))

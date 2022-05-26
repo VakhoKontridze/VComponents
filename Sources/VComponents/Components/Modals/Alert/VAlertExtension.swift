@@ -60,7 +60,7 @@ extension View {
                         onDismiss: dismissHandler,
                         title: title,
                         message: message,
-                        content: nil,
+                        content: .empty,
                         buttons: buttons
                     )
                 }
@@ -124,7 +124,7 @@ extension View {
                         onDismiss: dismissHandler,
                         title: title,
                         message: message,
-                        content: content,
+                        content: .custom(content: content),
                         buttons: buttons
                     )
                 }
@@ -181,7 +181,9 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        self
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -189,17 +191,33 @@ extension View {
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                content: { () -> VAlert<Never> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
+                content: {
+                    VAlert<Never>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(item),
-                        message: message(item),
-                        content: nil,
-                        buttons: buttons(item)
+                        title: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return title(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return message(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: .empty,
+                        buttons: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return buttons(item)
+                            } else {
+                                return []
+                            }
+                        }()
                     )
                 }
             ))
@@ -258,7 +276,9 @@ extension View {
             Item: Identifiable,
             Content: View
     {
-        self
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -266,17 +286,39 @@ extension View {
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                content: { () -> VAlert<Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
+                content: {
+                    VAlert<Content>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(item),
-                        message: message(item),
-                        content: { content(item) },
-                        buttons: buttons(item)
+                        title: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return title(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return message(item)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return .custom(content: { content(item) })
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        buttons: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return buttons(item)
+                            } else {
+                                return []
+                            }
+                        }()
                     )
                 }
             ))
@@ -336,7 +378,9 @@ extension View {
         message: @escaping (T) -> String?,
         actions buttons: @escaping (T) -> [VAlertButton]
     ) -> some View {
-        self
+        data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -344,17 +388,33 @@ extension View {
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
-                content: { () -> VAlert<Never> in
-                    let data = data! // fatalError
-                    
-                    return .init(
+                content: {
+                    VAlert<Never>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(data),
-                        message: message(data),
-                        content: nil,
-                        buttons: buttons(data)
+                        title: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return title(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return message(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: .empty,
+                        buttons: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return buttons(data)
+                            } else {
+                                return []
+                            }
+                        }()
                     )
                 }
             ))
@@ -416,7 +476,9 @@ extension View {
     ) -> some View
         where Content: View
     {
-        self
+        data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -424,17 +486,39 @@ extension View {
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
-                content: { () -> VAlert<Content> in
-                    let data = data! // fatalError
-                    
-                    return .init(
+                content: {
+                    VAlert<Content>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(data),
-                        message: message(data),
-                        content: { content(data) },
-                        buttons: buttons(data)
+                        title: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return title(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return message(data)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return .custom(content: { content(data) })
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        buttons: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return buttons(data)
+                            } else {
+                                return []
+                            }
+                        }()
                     )
                 }
             ))
@@ -489,7 +573,9 @@ extension View {
     ) -> some View
         where E: Error
     {
-        self
+        error.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -497,17 +583,33 @@ extension View {
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
-                content: { () -> VAlert<Never> in
-                    let error = error! // fatalError
-                    
-                    return .init(
+                content: {
+                    VAlert<Never>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(error),
-                        message: message(error),
-                        content: nil,
-                        buttons: buttons(error)
+                        title: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return title(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return message(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: .empty,
+                        buttons: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return buttons(error)
+                            } else {
+                                return []
+                            }
+                        }()
                     )
                 }
             ))
@@ -563,7 +665,9 @@ extension View {
             E: Error,
             Content: View
     {
-        self
+        error.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -571,17 +675,39 @@ extension View {
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
-                content: { () -> VAlert<Content> in
-                    let error = error! // fatalError
-                    
-                    return .init(
+                content: {
+                    VAlert<Content>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(error),
-                        message: message(error),
-                        content: { content(error) },
-                        buttons: buttons(error)
+                        title: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return title(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        message: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return message(error)
+                            } else {
+                                return ""
+                            }
+                        }(),
+                        content: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return .custom(content: { content(error) })
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        buttons: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return buttons(error)
+                            } else {
+                                return []
+                            }
+                        }()
                     )
                 }
             ))

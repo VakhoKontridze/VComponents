@@ -27,7 +27,7 @@ struct VSideBar<Content>: View where Content: View {
         model: VSideBarModel,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.presentHandler = presentHandler

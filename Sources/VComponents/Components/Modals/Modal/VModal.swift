@@ -36,7 +36,7 @@ struct VModal<HeaderLabel, Content>: View
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         headerLabel: VModalHeaderLabel<HeaderLabel>,
-        content: @escaping () -> Content
+        @ViewBuilder content: @escaping () -> Content
     ) {
         self.model = model
         self.presentHandler = presentHandler

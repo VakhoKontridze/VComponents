@@ -108,7 +108,9 @@ extension View {
             Item: Identifiable,
             Content: View
     {
-        self
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -116,14 +118,16 @@ extension View {
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                content: { () -> VSideBar<Content> in 
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
+                content: {
+                    VSideBar(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        content: { content(item) }
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                content(item)
+                            }
+                        }
                     )
                 }
             ))

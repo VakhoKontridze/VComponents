@@ -23,7 +23,7 @@ struct VAlert<Content>: View
     
     private let title: String?
     private let message: String?
-    private let content: (() -> Content)?
+    private let content: VAlertContent<Content>
     private let buttons: [VAlertButton]
     
     @State private var isInternallyPresented: Bool = false
@@ -50,7 +50,7 @@ struct VAlert<Content>: View
         onDismiss dismissHandler: (() -> Void)?,
         title: String?,
         message: String?,
-        content: (() -> Content)?,
+        content: VAlertContent<Content>,
         buttons: [VAlertButton]
     ) {
         self.model = model
@@ -137,11 +137,17 @@ struct VAlert<Content>: View
         }
     }
 
-    @ViewBuilder private var contentView: some View {
-        if let content = content {
-            content()
-                .padding(model.layout.contentMargins)
-        }
+    private var contentView: some View {
+        Group(content: {
+            switch content {
+            case .empty:
+                EmptyView()
+                
+            case .custom(let content):
+                content()
+                    .padding(model.layout.contentMargins)
+            }
+        })
     }
     
     @ViewBuilder private var buttonsScrollView: some View {

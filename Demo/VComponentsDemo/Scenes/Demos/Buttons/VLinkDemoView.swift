@@ -43,7 +43,7 @@ struct VLinkDemoView: View {
     
     private var buttonTitle: String { "Lorem Ipsum" }
     
-    private var url: URL { .init(string: "https://www.apple.com")! }
+    private var url: URL { .init(string: "https://www.apple.com")! } // fatalError
 }
 
 // MARK: - Helpers

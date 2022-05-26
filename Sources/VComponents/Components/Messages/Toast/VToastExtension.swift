@@ -98,7 +98,9 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        self
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -107,15 +109,19 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 allowsHitTests: false,
-                content: { () -> VToast in
-                    let item = item.wrappedValue! // fatalError
-                    
-                    return .init(
+                content: {
+                    VToast(
                         model: model,
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(item)
+                        title: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return title(item)
+                            } else {
+                                return ""
+                            }
+                        }()
                     )
                 }
             ))
@@ -165,7 +171,9 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (T) -> String
     ) -> some View {
-        self
+        data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -174,15 +182,19 @@ extension View {
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
                 allowsHitTests: false,
-                content: { () -> VToast in
-                    let data = data! // fatalError
-                    
-                    return .init(
+                content: {
+                    VToast(
                         model: model,
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(data)
+                        title: {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                                return title(data)
+                            } else {
+                                return ""
+                            }
+                        }()
                     )
                 }
             ))
@@ -232,7 +244,9 @@ extension View {
     ) -> some View
         where E: Error
     {
-        self
+        error.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+
+        return self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
                 in: self,
@@ -241,15 +255,19 @@ extension View {
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
                 allowsHitTests: false,
-                content: { () -> VToast in
-                    let error = error! // fatalError
-                    
-                    return .init(
+                content: {
+                    VToast(
                         model: model,
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
-                        title: title(error)
+                        title: {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                                return title(error)
+                            } else {
+                                return ""
+                            }
+                        }()
                     )
                 }
             ))
