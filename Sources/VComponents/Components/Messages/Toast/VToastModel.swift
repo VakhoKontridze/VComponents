@@ -45,8 +45,8 @@ public struct VToastModel {
         /// Corner radius type. Defaults to `default`.
         public var cornerRadiusType: CornerRadiusType = .default
         
-        /// TItle margins. Defaults to `20` horizontal and `10` vertical.
-        public var titleMargins: Margins = .init(
+        /// Text margins. Defaults to `20` horizontal and `10` vertical.
+        public var textMargins: Margins = .init(
             horizontal: 20,
             vertical: 10
         )
@@ -122,8 +122,8 @@ public struct VToastModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Title color.
-        public var title: Color = ColorBook.primary
+        /// Text color.
+        public var text: Color = ColorBook.primary
         
         /// Background color.
         public var background: Color = textFieldReference.colors.background.enabled
@@ -137,8 +137,8 @@ public struct VToastModel {
     /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `16` and weight `semibold`.
-        public var title: Font = .system(size: 16, weight: .semibold)
+        /// Text font. Defaults to system font of size `16` and weight `semibold`.
+        public var text: Font = .system(size: 16, weight: .semibold)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -153,7 +153,7 @@ public struct VToastModel {
         public var duration: TimeInterval = 3
         
         /// Appear animation. Defaults to `easeOut` with duration `0.2`.
-        public var appear: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
+        public var appear: BasicAnimation? = .init(curve: .easeOut, duration: 10.2)
         
         /// Disappear animation. Defaults to `easeIn` with duration `0.2`.
         public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)

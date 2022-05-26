@@ -61,11 +61,11 @@ struct VToast: View {
     private var contentView: some View {
         VText(
             type: toastType,
-            color: model.colors.title,
-            font: model.fonts.title,
+            color: model.colors.text,
+            font: model.fonts.text,
             text: text
         )
-            .padding(model.layout.titleMargins)
+            .padding(model.layout.textMargins)
             .background(background)
             .frame(maxWidth: model.layout.sizes._current.size.width)
             .readSize(onChange: { height = $0.height })
