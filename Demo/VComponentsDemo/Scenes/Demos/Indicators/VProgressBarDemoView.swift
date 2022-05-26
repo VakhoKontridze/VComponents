@@ -36,9 +36,10 @@ struct VProgressBarDemoView: View {
     }
     
     @ViewBuilder private func component() -> some View {
-        VSliderDemoView.sliderRowView(title: .init(value), content: {
-            VProgressBar(value: value)
-        })
+        DemoTitledSettingView(
+            value: value,
+            content: { VProgressBar(value: value) }
+        )
     }
     
     @ViewBuilder private func settings() -> some View {

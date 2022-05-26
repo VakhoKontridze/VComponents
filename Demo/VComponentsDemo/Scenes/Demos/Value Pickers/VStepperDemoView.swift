@@ -23,13 +23,16 @@ struct VStepperDemoView: View {
     }
     
     private func component() -> some View {
-        VSliderDemoView.sliderRowView(title: .init(value), content: {
-            VStepper(
-                range: 1...25,
-                value: $value
-            )
-                .disabled(!isEnabled)
-        })
+        DemoTitledSettingView(
+            title: "\(value)",
+                content: {
+                VStepper(
+                    range: 1...25,
+                    value: $value
+                )
+                    .disabled(!isEnabled)
+            }
+        )
     }
     
     @ViewBuilder private func settings() -> some View {

@@ -28,13 +28,16 @@ struct VPageIndicatorDemoView: View {
     }
     
     @ViewBuilder private func component() -> some View {
-        VSliderDemoView.sliderRowView(title: "\(selectedIndex+1)/\(total)", content: {
-            VPageIndicator(
-                type: pageIndicatorType.indicatorType,
-                total: total,
-                selectedIndex: selectedIndex
-            )
-        })
+        DemoTitledSettingView(
+            title: "\(selectedIndex+1)/\(total)",
+            content: {
+                VPageIndicator(
+                    type: pageIndicatorType.indicatorType,
+                    total: total,
+                    selectedIndex: selectedIndex
+                )
+            }
+        )
     }
     
     @ViewBuilder private func settings() -> some View {

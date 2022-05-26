@@ -64,15 +64,18 @@ struct VRangeSliderDemoView: View {
     }
     
     private func component() -> some View {
-        VSliderDemoView.sliderRowView(title: "\(valueLow) - \(valueHigh)", content: {
-            VRangeSlider(
-                model: model,
-                difference: diffValue,
-                step: hasStep ? stepValue : nil,
-                valueLow: $valueLow,
-                valueHigh: $valueHigh
-            )
-        })
+        DemoTitledSettingView(
+            title: "\(String(format: "%.2f", valueLow)) - \(String(format: "%.2f", valueHigh))",
+            content: {
+                VRangeSlider(
+                    model: model,
+                    difference: diffValue,
+                    step: hasStep ? stepValue : nil,
+                    valueLow: $valueLow,
+                    valueHigh: $valueHigh
+                )
+            }
+        )
             .disabled(!isEnabled)
     }
     
@@ -95,9 +98,12 @@ struct VRangeSliderDemoView: View {
             ToggleSettingView(isOn: $hasStep, title: "Step")
             
             if hasStep {
-                VSliderDemoView.labeledSliderRowView(title: .init(stepValue), min: minStepValue, max: maxStepValue, content: {
-                    VSlider(range: minStepValue...maxStepValue, step: 0.05, value: $stepValue)
-                })
+                HorizontallyLabeledDemoTitledSettingView(
+                    value: stepValue,
+                    min: minStepValue,
+                    max: maxStepValue,
+                    content: { VSlider(range: minStepValue...maxStepValue, step: 0.05, value: $stepValue) }
+                )
             }
         })
         
@@ -107,9 +113,12 @@ struct VRangeSliderDemoView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 5)
                 
-                VSliderDemoView.labeledSliderRowView(title: .init(diffValue), min: minDiffValue, max: maxDiffValue, content: {
-                    VSlider(range: minDiffValue...maxDiffValue, step: 0.05, value: $diffValue)
-                }).disabled(true)
+                HorizontallyLabeledDemoTitledSettingView(
+                    value: diffValue,
+                    min: minDiffValue,
+                    max: maxDiffValue,
+                    content: { VSlider(range: minDiffValue...maxDiffValue, step: 0.05, value: $diffValue) }
+                ).disabled(true)
                 
                 VText(
                     type: .multiLine(alignment: .leading, lineLimit: nil),
