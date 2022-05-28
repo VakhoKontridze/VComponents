@@ -42,7 +42,7 @@ public struct PresentationHostPresentationMode {
     
     // MARK: Initializers
     init(
-        instanceID: Int?,
+        instanceID: Int,
         dismiss: @escaping () -> Void,
         isExternallyDismissed: Bool,
         externalDismissCompletion: @escaping () -> Void
@@ -54,12 +54,10 @@ public struct PresentationHostPresentationMode {
     }
     
     init() {
-        self.init(
-            instanceID: nil,
-            dismiss: {},
-            isExternallyDismissed: false,
-            externalDismissCompletion: {}
-        )
+        self.instanceID = nil
+        self.dismiss = {}
+        self.isExternallyDismissed = false
+        self.externalDismissCompletion = {}
     }
 }
 

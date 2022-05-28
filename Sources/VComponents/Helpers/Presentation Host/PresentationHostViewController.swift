@@ -32,7 +32,7 @@ public final class PresentationHostViewController: UIViewController {
     
     private static var activePresentingViews: Set<String> = []
     
-    private static let instanceIDGenerator: AtomicInteger = .init(initialValue: 1_000_000)
+    private static let instanceIDGenerator: AtomicInteger = .init()
     let instanceID: Int
     
     // MARK: Initializers
