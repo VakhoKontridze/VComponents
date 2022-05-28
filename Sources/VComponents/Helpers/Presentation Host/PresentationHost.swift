@@ -22,7 +22,9 @@ import SwiftUI
 /// This allows content to perform dismiss animations before being removed from view hierarchy.
 /// For additional documentation, refer to `PresentationHostPresentationMode`.
 ///
-/// `PresentationHost.forceDismiss(in:)` must be called when `self` disapears.
+/// If presenting view dissapears, either by navigation, or by `ViewBuilder` render (such as `if` block evaluating to `false`),
+/// modal must be removed from view hierarchy. To ensure proper removal, call `PresentationHost.forceDismiss(in:)`.
+/// Currently, `PresentationHost` uses type of presenting view as an identifier for removing expired models.
 ///
 ///     extension View {
 ///         public func someModal<Content>(
