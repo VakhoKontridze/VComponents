@@ -91,7 +91,7 @@ public final class PresentationHostViewController: UIViewController {
         
         Self.activePresentingViews.remove(presentingViewType)
         
-        PresentationHostDataSourceCache.shared.erase(key: presentingViewType)
+        PresentationHostDataSourceCache.shared.remove(key: presentingViewType)
     }
     
     // MARK: Froce Dismiss
@@ -106,6 +106,6 @@ public final class PresentationHostViewController: UIViewController {
         
         Self.activePresentingViews.remove(presentingViewType)
         
-        PresentationHostDataSourceCache.shared.erase(key: presentingViewType)
+        PresentationHostDataSourceCache.shared.remove(key: presentingViewType)
     }
 }
