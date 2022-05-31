@@ -9,8 +9,10 @@ import SwiftUI
 
 // MARK: - Swift UI Type Describer
 struct SwiftUIViewTypeDescriber {
+    // MARK: Initializers
     private init() {}
     
+    // MARK: Describe
     static func describe<Content>(
         _ content: Content
     ) -> String
