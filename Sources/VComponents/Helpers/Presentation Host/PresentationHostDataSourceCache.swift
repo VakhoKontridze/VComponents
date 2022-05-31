@@ -52,8 +52,8 @@ final class PresentationHostDataSourceCache {
         storage[presentingViewType] = value
     }
     
-    // MARK: Erase
-    func erase(key presentingViewType: String) {
+    // MARK: Remove
+    func remove(key presentingViewType: String) {
         for key in storage.keys {
             if key.hasPrefix(presentingViewType) {
                 storage[key] = nil
