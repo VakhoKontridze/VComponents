@@ -6,3 +6,9 @@
 //
 
 import SwiftUI
+
+// MARK: - Basic Animation
+extension BasicAnimation {
+    @available(*, deprecated, renamed: "toSwiftUIAnimation")
+    public var asSwiftUIAnimation: Animation { toSwiftUIAnimation }
+}
