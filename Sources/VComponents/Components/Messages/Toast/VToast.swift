@@ -89,7 +89,7 @@ struct VToast: View {
                 
             case .multiLine(let alignment, let lineLimit):
                 let label: UILabel = .init()
-                label.textAlignment = alignment.asNSTextAlignmnet
+                label.textAlignment = alignment.toNSTextAlignmnet
                 lineLimit.map { label.numberOfLines = $0 }
                 label.font = model.fonts.text
                 
@@ -212,7 +212,7 @@ struct _VToast_Previews: PreviewProvider {
 
 // MARK: - Helpers
 extension TextAlignment {
-    fileprivate var asNSTextAlignmnet: NSTextAlignment {
+    fileprivate var toNSTextAlignmnet: NSTextAlignment {
         switch self {
         case .leading: return .left
         case .center: return .center

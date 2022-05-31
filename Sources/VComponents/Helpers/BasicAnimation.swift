@@ -21,8 +21,8 @@ public struct BasicAnimation {
     /// Animation duration.
     public var duration: TimeInterval
     
-    /// Creates `SwiftUI` `Animation`.
-    public var asSwiftUIAnimation: Animation {
+    /// Converts `BasicAnimation` to `SwiftUI.Animation`.
+    public var toSwiftUIAnimation: Animation {
         switch curve {
         case .linear: return .linear(duration: duration)
         case .easeIn: return .easeIn(duration: duration)
@@ -60,7 +60,7 @@ public func withBasicAnimation<Result>(
     body: () throws -> Result,
     completion: (() -> Void)?
 ) rethrows -> Result {
-    let result: Result = try withAnimation(animation?.asSwiftUIAnimation, body)
+    let result: Result = try withAnimation(animation?.toSwiftUIAnimation, body)
     
     DispatchQueue.main.asyncAfter(
         deadline: .now() + (animation?.duration ?? 0),

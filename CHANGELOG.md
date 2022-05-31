@@ -1,5 +1,11 @@
 # Change Log
 
+#### [2.0.1(18)]
+
+Other
+
+- `asSwiftUIAnimation` is renamed to `toSwiftUIAnimation` in `BasicAnimation`
+
 #### [2.0.0(17)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.0.0) — *2022 05 26*
 
 General
