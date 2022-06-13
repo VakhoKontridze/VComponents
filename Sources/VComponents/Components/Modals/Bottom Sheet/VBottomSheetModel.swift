@@ -43,11 +43,11 @@ public struct VBottomSheetModel {
         /// Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait.
         /// Set to `0.7` ratio of screen width and `0.9` ratio of screen height in landscape.
         public var sizes: Sizes = .init(
-            portrait: .relative(.init(
+            portrait: .fraction(.init(
                 width: 1,
                 heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
             )),
-            landscape: .relative(.init(
+            landscape: .fraction(.init(
                 width: 0.7,
                 heights: .fixed(0.9)
             ))
@@ -126,7 +126,7 @@ public struct VBottomSheetModel {
         
         // MARK: Bottom Sheet Size
         /// Bottom sheet size.
-        public struct BottomSheetSize {
+        public struct BottomSheetSize: Equatable {
             // MARK: Properties
             /// Width.
             public var width: CGFloat
@@ -147,7 +147,7 @@ public struct VBottomSheetModel {
         
         // MARK: Bottom Sheet Heights
         /// Bottom Sheet Heights
-        public struct BottomSheetHeights {
+        public struct BottomSheetHeights: Equatable {
             // MARK: Properties
             /// Minimum height.
             public var min: CGFloat

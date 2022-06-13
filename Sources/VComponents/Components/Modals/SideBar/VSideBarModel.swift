@@ -40,8 +40,8 @@ public struct VSideBarModel {
         /// Set to `0.75` ratio of screen width and `1` ratio of screen height in portrait.
         /// Set to`0.5` ratio of screen width and `1` ratio of screen height in landscape.
         public var sizes: Sizes = .init(
-            portrait: .relative(.init(width: 0.75, height: 1)),
-            landscape: .relative(.init(width: 0.5, height: 1))
+            portrait: .fraction(.init(width: 0.75, height: 1)),
+            landscape: .fraction(.init(width: 0.5, height: 1))
         )
         
         /// Corner radius. Defaults to `15`.

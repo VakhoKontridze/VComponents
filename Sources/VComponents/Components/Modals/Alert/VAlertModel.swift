@@ -39,8 +39,8 @@ public struct VAlertModel {
         /// Set to `0.75` ratio of screen width in portrait.
         /// Set to `0.5` ratio of screen width in landscape.
         public var sizes: Sizes = .init(
-            portrait: .relative(.init(width: 0.75)),
-            landscape: .relative(.init(width: 0.5))
+            portrait: .fraction(.init(width: 0.75)),
+            landscape: .fraction(.init(width: 0.5))
         )
         
         /// Rounded corners. Defaults to to `allCorners`.
@@ -116,7 +116,7 @@ public struct VAlertModel {
         
         // MARK: Alert Size
         /// Alert size.
-        public struct AlertSize {
+        public struct AlertSize: Equatable {
             // MARK: Properties
             /// Width.
             public var width: CGFloat
