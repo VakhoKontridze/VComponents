@@ -43,8 +43,8 @@ public struct VModalModel {
         /// Set to `0.9` ratio of screen width and `0.6` ratio of screen height in portrait.
         /// Set to reverse in landscape.
         public var sizes: Sizes = .init(
-            portrait: .relative(.init(width: 0.9, height: 0.6)),
-            landscape: .relative(.init(width: 0.6, height: 0.9))
+            portrait: .fraction(.init(width: 0.9, height: 0.6)),
+            landscape: .fraction(.init(width: 0.6, height: 0.9))
         )
         
         /// Rounded corners. Defaults to to `allCorners`.
