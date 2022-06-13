@@ -37,8 +37,8 @@ public struct VSliderModel {
         /// Slider corner radius. Defaults to `5`.
         public var cornerRadius: CGFloat = 5
         
-        /// Indicates if slider rounds progress view right-edge. Defaults to `false`.
-        public var roundsProgressViewRightEdge: Bool = false
+        /// Indicates if slider rounds progress view right-edge. Defaults to `true`.
+        public var roundsProgressViewRightEdge: Bool = true
         
         var progressViewRoundedCorners: UIRectCorner {
             if roundsProgressViewRightEdge {
