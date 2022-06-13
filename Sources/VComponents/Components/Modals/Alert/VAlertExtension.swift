@@ -28,7 +28,7 @@ extension View {
     ///         )
     ///             .vAlert(
     ///                 isPresented: $isPresented,
-    ///                 title: "Lorem ipsum",
+    ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
     ///                 actions: [
     ///                     .primary(action: { print("Confirmed") }, title: "Confirm"),
@@ -86,7 +86,7 @@ extension View {
     ///         )
     ///             .vAlert(
     ///                 isPresented: $isPresented,
-    ///                 title: "Lorem ipsum",
+    ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
     ///                 content: { VTextField(text: $text) },
     ///                 actions: [
