@@ -41,9 +41,9 @@ extension View {
         isPresented: Binding<Bool>,
         title: String?,
         message: String?,
-        actions: [VConfirmationDialogButton]
+        actions buttons: [VConfirmationDialogButton]
     ) -> some View {
-        let actions: [VConfirmationDialogButton] = VConfirmationDialogButton.process(actions)
+        let buttons: [VConfirmationDialogButton] = VConfirmationDialogButton.process(buttons)
         
         return self
             .confirmationDialog(
@@ -51,8 +51,8 @@ extension View {
                 isPresented: isPresented,
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: {
-                    ForEach(actions.indices, id: \.self, content: { i in
-                        actions[i].swiftUIButton
+                    ForEach(buttons.indices, id: \.self, content: { i in
+                        buttons[i].swiftUIButton
                     })
                 },
                 message: {
@@ -102,11 +102,11 @@ extension View {
         item: Binding<Item?>,
         title: String?,
         message: String?,
-        actions: [VConfirmationDialogButton]
+        actions buttons: [VConfirmationDialogButton]
     ) -> some View
         where Item: Identifiable
     {
-        let actions: [VConfirmationDialogButton] = VConfirmationDialogButton.process(actions)
+        let buttons: [VConfirmationDialogButton] = VConfirmationDialogButton.process(buttons)
         
         return self
             .confirmationDialog(
@@ -117,8 +117,8 @@ extension View {
                 ),
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: {
-                    ForEach(actions.indices, id: \.self, content: { i in
-                        actions[i].swiftUIButton
+                    ForEach(buttons.indices, id: \.self, content: { i in
+                        buttons[i].swiftUIButton
                     })
                 },
                 message: {
@@ -174,9 +174,9 @@ extension View {
         presenting data: T?,
         title: String?,
         message: String?,
-        actions: [VConfirmationDialogButton]
+        actions buttons: [VConfirmationDialogButton]
     ) -> some View {
-        let actions: [VConfirmationDialogButton] = VConfirmationDialogButton.process(actions)
+        let buttons: [VConfirmationDialogButton] = VConfirmationDialogButton.process(buttons)
         
         return self
             .confirmationDialog(
@@ -187,8 +187,8 @@ extension View {
                 ),
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: {
-                    ForEach(actions.indices, id: \.self, content: { i in
-                        actions[i].swiftUIButton
+                    ForEach(buttons.indices, id: \.self, content: { i in
+                        buttons[i].swiftUIButton
                     })
                 },
                 message: {
