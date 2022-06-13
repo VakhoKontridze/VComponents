@@ -36,6 +36,9 @@ public struct VProgressBarModel {
         /// Slider corner radius. Defaults to `5`.
         public var cornerRadius: CGFloat = sliderReference.layout.cornerRadius
         
+        /// Indicates if progress bar rounds progress view right-edge. Defaults to `true`.
+        public var roundsProgressViewRightEdge: Bool = true
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
@@ -74,6 +77,7 @@ public struct VProgressBarModel {
         
         model.layout.height = layout.height
         model.layout.cornerRadius = layout.cornerRadius
+        model.layout.roundsProgressViewRightEdge = layout.roundsProgressViewRightEdge
         model.layout.thumbDimension = 0
         
         model.colors.track.enabled = colors.track

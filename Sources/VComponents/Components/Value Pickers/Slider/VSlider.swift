@@ -91,7 +91,7 @@ public struct VSlider: View {
     private var progress: some View {
         Rectangle()
             .frame(width: progressWidth)
-
+            .cornerRadius(model.layout.cornerRadius, corners: model.layout.progressViewRoundedCorners)
             .foregroundColor(model.colors.progress.for(internalState))
     }
     

@@ -1,6 +1,15 @@
 # Change Log
 
-#### [2.0.1(18)]
+#### [2.1.0(18)]
+
+VSlider
+
+- `roundsProgressViewRightEdge` is added to `VSliderModel` to round progress view
+
+VProgressBar
+
+- `roundsProgressViewRightEdge` is added to `VProgressBar` to round progress view
+- Progress view is rounded by default
 
 Other
 

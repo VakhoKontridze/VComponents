@@ -108,7 +108,6 @@ public struct VRangeSlider: View {
         Rectangle()
             .padding(.leading, progress(.low))
             .padding(.trailing, progress(.high))
-
             .foregroundColor(model.colors.progress.for(internalState))
     }
 

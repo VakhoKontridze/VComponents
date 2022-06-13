@@ -37,6 +37,17 @@ public struct VSliderModel {
         /// Slider corner radius. Defaults to `5`.
         public var cornerRadius: CGFloat = 5
         
+        /// Indicates if slider rounds progress view right-edge. Defaults to `false`.
+        public var roundsProgressViewRightEdge: Bool = false
+        
+        var progressViewRoundedCorners: UIRectCorner {
+            if roundsProgressViewRightEdge {
+                return .allCorners
+            } else {
+                return []
+            }
+        }
+        
         /// Thumb dimension. Defaults to `20`.
         public var thumbDimension: CGFloat = 20
         
