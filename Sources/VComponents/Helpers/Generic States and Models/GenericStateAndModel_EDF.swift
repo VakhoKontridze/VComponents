@@ -68,7 +68,16 @@ public struct GenericStateModel_EDF<Value> {
     }
 }
 
+// MARK: - Hashable, Equatable, Comparable
+extension GenericStateModel_EDF: Hashable where Value: Hashable {}
+
 extension GenericStateModel_EDF: Equatable where Value: Equatable {}
+
+extension GenericStateModel_EDF: Comparable where Value: Comparable {
+    public static func < (lhs: GenericStateModel_EDF<Value>, rhs: GenericStateModel_EDF<Value>) -> Bool {
+        (lhs.enabled, lhs.disabled, lhs.focused) < (rhs.enabled, rhs.disabled, rhs.focused)
+    }
+}
 
 // MARK: - Mapping
 extension GenericStateModel_EDF {

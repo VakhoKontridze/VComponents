@@ -80,7 +80,16 @@ public struct GenericStateModel_EPD<Value> {
     }
 }
 
+// MARK: - Hashable, Equatable, Comparable
+extension GenericStateModel_EPD: Hashable where Value: Hashable {}
+
 extension GenericStateModel_EPD: Equatable where Value: Equatable {}
+
+extension GenericStateModel_EPD: Comparable where Value: Comparable {
+    public static func < (lhs: GenericStateModel_EPD<Value>, rhs: GenericStateModel_EPD<Value>) -> Bool {
+        (lhs.enabled, lhs.pressed, lhs.disabled) < (rhs.enabled, rhs.pressed, rhs.disabled)
+    }
+}
 
 // MARK: - Mapping
 extension GenericStateModel_EPD {

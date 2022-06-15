@@ -86,7 +86,16 @@ public struct GenericStateModel_EPDF<Value> {
     }
 }
 
+// MARK: - Hashable, Equatable, Comparable
+extension GenericStateModel_EPDF: Hashable where Value: Hashable {}
+
 extension GenericStateModel_EPDF: Equatable where Value: Equatable {}
+
+extension GenericStateModel_EPDF: Comparable where Value: Comparable {
+    public static func < (lhs: GenericStateModel_EPDF<Value>, rhs: GenericStateModel_EPDF<Value>) -> Bool {
+        (lhs.enabled, lhs.pressed, lhs.disabled, lhs.focused) < (rhs.enabled, rhs.pressed, rhs.disabled, rhs.focused)
+    }
+}
 
 // MARK: - Mapping
 extension GenericStateModel_EPDF {

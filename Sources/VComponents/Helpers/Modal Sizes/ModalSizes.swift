@@ -38,10 +38,12 @@ public struct ModalSizes<ModalSizeMeasurement>
         self.portrait = portrait
         self.landscape = landscape
     }
-    
-    // MARK: Single Size Configuration
+}
+
+// MARK: - Size Configuration
+extension ModalSizes {
     /// Enum that describes state, either `point` or `relative`.
-    public enum SizeConfiguration: Equatable {
+    public enum SizeConfiguration {
         // MARK: Cases
         /// Size configuration with fixed sizes represented in points.
         case point(ModalSizeMeasurement)
@@ -60,15 +62,31 @@ public struct ModalSizes<ModalSizeMeasurement>
             case .fraction(let size): return ModalSizeMeasurement.relativeMeasurementToPoints(size)
             }
         }
-        
-        // MARK: Equatable
-        public static func == (lhs: SizeConfiguration, rhs: SizeConfiguration) -> Bool {
-            switch (lhs, rhs) {
-            case (.point(let lhs), .point(let rhs)): return lhs == rhs
-            case (.point(let lhs), .fraction(let rhs)): return lhs == ModalSizeMeasurement.relativeMeasurementToPoints(rhs)
-            case (.fraction(let lhs), .point(let rhs)): return ModalSizeMeasurement.relativeMeasurementToPoints(lhs) == rhs
-            case (.fraction(let lhs), .fraction(let rhs)): return lhs == rhs
-            }
+    }
+}
+
+// MARK: - Hashable, Equatable, Comparable
+extension ModalSizes: Hashable where ModalSizeMeasurement: Hashable {}
+
+extension ModalSizes: Equatable {}
+
+extension ModalSizes: Comparable where ModalSizeMeasurement: Comparable {
+    public static func < (lhs: ModalSizes<ModalSizeMeasurement>, rhs: ModalSizes<ModalSizeMeasurement>) -> Bool {
+        (lhs.portrait, lhs.landscape) < (rhs.portrait, lhs.landscape)
+    }
+}
+
+extension ModalSizes.SizeConfiguration: Hashable where ModalSizeMeasurement: Hashable {}
+
+extension ModalSizes.SizeConfiguration: Equatable {
+    public static func == (lhs: ModalSizes.SizeConfiguration, rhs: ModalSizes.SizeConfiguration) -> Bool {
+        switch (lhs, rhs) {
+        case (.point(let lhs), .point(let rhs)): return lhs == rhs
+        case (.point(let lhs), .fraction(let rhs)): return lhs == ModalSizeMeasurement.relativeMeasurementToPoints(rhs)
+        case (.fraction(let lhs), .point(let rhs)): return ModalSizeMeasurement.relativeMeasurementToPoints(lhs) == rhs
+        case (.fraction(let lhs), .fraction(let rhs)): return lhs == rhs
         }
     }
 }
+
+extension ModalSizes.SizeConfiguration: Comparable where ModalSizeMeasurement: Comparable {}
