@@ -35,7 +35,7 @@ import SwiftUI
 ///     extension View {
 ///         public func someModal<Content>(
 ///             isPresented: Binding<Bool>,
-///             someModal: @escaping () -> SomeModal<Content>
+///             @ViewBuilder content: @escaping () -> Content
 ///         ) -> some View
 ///             where Content: View
 ///         {
@@ -45,19 +45,15 @@ import SwiftUI
 ///                     in: self,
 ///                     isPresented: isPresented,
 ///                     content: {
-///                         _SomeModal(
-///                             content: someModal().content
+///                         SomeModal(
+///                             content: content
 ///                         )
 ///                     }
 ///                 ))
 ///         }
 ///     }
 ///
-///     public struct SomeModal<Content> where Content: View {
-///         public let content: () -> Content
-///     }
-///
-///     struct _SomeModal<Content>: View where Content: View {
+///     struct SomeModal<Content>: View where Content: View {
 ///         @Environment(\.presentationHostPresentationMode) private var presentationMode
 ///         private let content: () -> Content
 ///
