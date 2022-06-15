@@ -393,7 +393,7 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                    VModal(
+                    VModal<HeaderLabel, _>(
                        model: model,
                        onPresent: presentHandler,
                        onDismiss: dismissHandler,
