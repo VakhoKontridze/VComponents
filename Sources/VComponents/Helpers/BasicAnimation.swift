@@ -14,7 +14,6 @@ import SwiftUI
 ///
 /// Object contains proeprty `swiftUIAnimation`, which can be used to create object that `SwiftUI` can interpret.
 public struct BasicAnimation {
-    // MARK: Properties
     /// Animation curve.
     public var curve: AnimationCurve
     
@@ -33,7 +32,7 @@ public struct BasicAnimation {
 
     // MARK: Animation Curve
     /// Enum that represents animation curve, suh as `linear`, `easeIn`, `easeOut`, or `easeInOut`.
-    public enum AnimationCurve {
+    public enum AnimationCurve: Hashable, Equatable {
         // MARK: Cases
         /// Linear.
         case linear

@@ -82,7 +82,16 @@ public struct GenericStateModel_CED<Value> {
     }
 }
 
+// MARK: - Hashable, Equatable, Comparable
+extension GenericStateModel_CED: Hashable where Value: Hashable {}
+
 extension GenericStateModel_CED: Equatable where Value: Equatable {}
+
+extension GenericStateModel_CED: Comparable where Value: Comparable {
+    public static func < (lhs: GenericStateModel_CED<Value>, rhs: GenericStateModel_CED<Value>) -> Bool {
+        (lhs.collapsed, lhs.expanded, lhs.disabled) < (rhs.collapsed, rhs.expanded, rhs.disabled)
+    }
+}
 
 // MARK: - Mapping
 extension GenericStateModel_CED {
