@@ -15,7 +15,7 @@ struct VProgressBarDemoView: View {
     static var navBarTitle: String { "Progress Bar" }
     
     @State private var value: Double = 0.5
-    private let timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let timer: AnyPublisher<Date, Never> = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher()
     
     @State private var useAnimation: Bool = VProgressBarModel.Animations().progress != nil
     
