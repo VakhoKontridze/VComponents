@@ -94,10 +94,3 @@ struct DemoListView_Previews: PreviewProvider {
         HomeView_Previews.previews
     }
 }
-
-// MARK: - Helpers
-extension Collection {
-    func enumeratedArray() -> Array<(offset: Int, element: Self.Element)> {
-        .init(self.enumerated())
-    }
-}
