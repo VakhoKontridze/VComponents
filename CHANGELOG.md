@@ -1,6 +1,6 @@
 # Change Log
 
-#### 2.1.0(18)
+#### [2.1.0(18)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.0) — *2022 06 15*
 
 VSlider
 
