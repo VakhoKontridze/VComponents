@@ -26,6 +26,10 @@ import SwiftUI
 /// modal must be removed from view hierarchy. To ensure proper removal, call `PresentationHost.forceDismiss(in:)`.
 /// Currently, `PresentationHost` uses type of presenting view as an identifier for removing expired models.
 ///
+/// Presentation Host caches data when `item: Binding<Item?>`, `presenting data: T?`, and `error: E?` extensions are used.
+/// Yype of presenting `View` is used as a key in a cache . This however, has one limitation.
+/// If two modals are active at the same time, who are launched from the same `View` type (such as `SwiftUI.Button`), caching will fail.
+///
 ///     extension View {
 ///         public func someModal<Content>(
 ///             isPresented: Binding<Bool>,
