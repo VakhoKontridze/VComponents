@@ -42,6 +42,11 @@ public protocol VComponentsLocalizationProvider {
 // MARK: - Default VComponents Localization Provider
 /// Defaults VComponents localization provider.
 public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationProvider {
+    // MARK: Initializers
+    /// Initializes `VComponentsLocalizationProvider`.
+    public init() {}
+    
+    // MARK: VComponents Localization Provider
     public var vAlertCancelButtonTitle: String { "Cancel" }
     public var vAlertOKButtonTitle: String { "Ok" }
     
