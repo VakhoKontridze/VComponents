@@ -70,7 +70,7 @@ extension GenericStateModel_ED: Hashable where Value: Hashable {}
 extension GenericStateModel_ED: Equatable where Value: Equatable {}
 
 extension GenericStateModel_ED: Comparable where Value: Comparable {
-    public static func < (lhs: GenericStateModel_ED<Value>, rhs: GenericStateModel_ED<Value>) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         (lhs.enabled, lhs.disabled) < (rhs.enabled, rhs.disabled)
     }
 }

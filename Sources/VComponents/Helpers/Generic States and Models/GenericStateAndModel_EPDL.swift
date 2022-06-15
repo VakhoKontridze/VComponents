@@ -92,7 +92,7 @@ extension GenericStateModel_EPDL: Hashable where Value: Hashable {}
 extension GenericStateModel_EPDL: Equatable where Value: Equatable {}
 
 extension GenericStateModel_EPDL: Comparable where Value: Comparable {
-    public static func < (lhs: GenericStateModel_EPDL, rhs: GenericStateModel_EPDL) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         (lhs.enabled, lhs.pressed, lhs.disabled, lhs.loading) < (rhs.enabled, rhs.pressed, rhs.disabled, rhs.loading)
     }
 }

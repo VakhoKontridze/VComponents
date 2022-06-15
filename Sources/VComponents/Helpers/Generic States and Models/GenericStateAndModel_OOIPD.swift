@@ -120,7 +120,7 @@ extension GenericStateModel_OOIPD: Hashable where Value: Hashable {}
 extension GenericStateModel_OOIPD: Equatable where Value: Equatable {}
 
 extension GenericStateModel_OOIPD: Comparable where Value: Comparable {
-    public static func < (lhs: GenericStateModel_OOIPD<Value>, rhs: GenericStateModel_OOIPD<Value>) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         if lhs.off != rhs.off { return lhs.off < rhs.off }
         else if lhs.on != rhs.on { return lhs.on < rhs.on }
         else if lhs.indeterminate != rhs.indeterminate { return lhs.indeterminate < rhs.indeterminate }

@@ -111,7 +111,7 @@ extension GenericStateModel_OOPD: Hashable where Value: Hashable {}
 extension GenericStateModel_OOPD: Equatable where Value: Equatable {}
 
 extension GenericStateModel_OOPD: Comparable where Value: Comparable {
-    public static func < (lhs: GenericStateModel_OOPD<Value>, rhs: GenericStateModel_OOPD<Value>) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         (lhs.off, lhs.on, lhs.pressedOff, lhs.pressedOn, lhs.disabled) <
         (rhs.off, rhs.on, rhs.pressedOff, rhs.pressedOn, rhs.disabled)
     }
