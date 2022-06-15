@@ -17,7 +17,7 @@ public final class VComponentsLocalizationService {
     public static let shared: VComponentsLocalizationService = .init()
     
     /// Localization provider. Defaults to `DefaultVComponentsLocalizationProvider`.
-    public var localizationProvider: VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()
+    public var localizationProvider: any VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()
     
     // MARK: Initializers
     private init() {}
