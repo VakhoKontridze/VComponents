@@ -99,8 +99,7 @@ public struct VLazyScrollView<Content>: View where Content: View {
         data: Range<Int>,
         content: @escaping (Int) -> RowContent
     )
-        where
-            Content == ForEach<Range<Int>, Int, RowContent>
+        where Content == ForEach<Range<Int>, Int, RowContent>
     {
         self.listType = listType
         self.content = {
