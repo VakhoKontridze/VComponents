@@ -92,7 +92,7 @@ extension GenericStateModel_EPDF: Hashable where Value: Hashable {}
 extension GenericStateModel_EPDF: Equatable where Value: Equatable {}
 
 extension GenericStateModel_EPDF: Comparable where Value: Comparable {
-    public static func < (lhs: GenericStateModel_EPDF<Value>, rhs: GenericStateModel_EPDF<Value>) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         (lhs.enabled, lhs.pressed, lhs.disabled, lhs.focused) < (rhs.enabled, rhs.pressed, rhs.disabled, rhs.focused)
     }
 }

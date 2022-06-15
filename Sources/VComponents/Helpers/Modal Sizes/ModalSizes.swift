@@ -71,7 +71,7 @@ extension ModalSizes: Hashable where ModalSizeMeasurement: Hashable {}
 extension ModalSizes: Equatable {}
 
 extension ModalSizes: Comparable where ModalSizeMeasurement: Comparable {
-    public static func < (lhs: ModalSizes<ModalSizeMeasurement>, rhs: ModalSizes<ModalSizeMeasurement>) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         (lhs.portrait, lhs.landscape) < (rhs.portrait, lhs.landscape)
     }
 }
@@ -79,7 +79,7 @@ extension ModalSizes: Comparable where ModalSizeMeasurement: Comparable {
 extension ModalSizes.SizeConfiguration: Hashable where ModalSizeMeasurement: Hashable {}
 
 extension ModalSizes.SizeConfiguration: Equatable {
-    public static func == (lhs: ModalSizes.SizeConfiguration, rhs: ModalSizes.SizeConfiguration) -> Bool {
+    public static func == (lhs: Self, rhs: Self) -> Bool {
         switch (lhs, rhs) {
         case (.point(let lhs), .point(let rhs)): return lhs == rhs
         case (.point(let lhs), .fraction(let rhs)): return lhs == ModalSizeMeasurement.relativeMeasurementToPoints(rhs)

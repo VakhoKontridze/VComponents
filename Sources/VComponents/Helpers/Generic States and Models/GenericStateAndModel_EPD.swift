@@ -86,7 +86,7 @@ extension GenericStateModel_EPD: Hashable where Value: Hashable {}
 extension GenericStateModel_EPD: Equatable where Value: Equatable {}
 
 extension GenericStateModel_EPD: Comparable where Value: Comparable {
-    public static func < (lhs: GenericStateModel_EPD<Value>, rhs: GenericStateModel_EPD<Value>) -> Bool {
+    public static func < (lhs: Self, rhs: Self) -> Bool {
         (lhs.enabled, lhs.pressed, lhs.disabled) < (rhs.enabled, rhs.pressed, rhs.disabled)
     }
 }
