@@ -15,7 +15,6 @@ protocol DemoableRow: Identifiable, RawRepresentable, CaseIterable where RawValu
     var body: Content { get }
 }
 
-// MARK: - Default Values
 extension DemoableRow {
     var id: Int { rawValue }
 }
