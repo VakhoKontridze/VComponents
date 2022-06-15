@@ -259,7 +259,7 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                     VBottomSheet<Never, _>(
+                    VBottomSheet<Never, _>(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -421,7 +421,7 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                    VBottomSheet<HeaderLabel, _>(
+                    VBottomSheet(
                        model: model,
                        onPresent: presentHandler,
                        onDismiss: dismissHandler,

@@ -279,7 +279,7 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                    VAlert<Content>(
+                    VAlert(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -475,7 +475,7 @@ extension View {
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
                 content: {
-                    VAlert<Content>(
+                    VAlert(
                         model: model,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
