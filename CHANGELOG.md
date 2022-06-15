@@ -5,12 +5,12 @@
 VSlider
 
 - `roundsProgressViewRightEdge` is added to `VSliderModel` to round progress view
-- Progress view is rounded by default
+- Progress view is now rounded by default
 
 VProgressBar
 
 - `roundsProgressViewRightEdge` is added to `VProgressBar` to round progress view
-- Progress view is rounded by default
+- Progress view is now rounded by default
 
 Other
 
