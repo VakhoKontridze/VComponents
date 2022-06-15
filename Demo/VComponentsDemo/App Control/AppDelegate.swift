@@ -17,7 +17,6 @@ import UIKit
         true
     }
 
-    // MARK: Scene Delegate
     func application(
         _ application: UIApplication,
         configurationForConnecting connectingSceneSession: UISceneSession,
