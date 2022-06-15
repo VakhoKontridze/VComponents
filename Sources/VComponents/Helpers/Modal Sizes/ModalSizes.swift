@@ -68,7 +68,7 @@ extension ModalSizes {
 // MARK: - Hashable, Equatable, Comparable
 extension ModalSizes: Hashable where ModalSizeMeasurement: Hashable {}
 
-extension ModalSizes: Equatable {}
+extension ModalSizes: Equatable where ModalSizeMeasurement: Equatable {}
 
 extension ModalSizes: Comparable where ModalSizeMeasurement: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
@@ -78,7 +78,7 @@ extension ModalSizes: Comparable where ModalSizeMeasurement: Comparable {
 
 extension ModalSizes.SizeConfiguration: Hashable where ModalSizeMeasurement: Hashable {}
 
-extension ModalSizes.SizeConfiguration: Equatable {
+extension ModalSizes.SizeConfiguration: Equatable where ModalSizeMeasurement: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
         switch (lhs, rhs) {
         case (.point(let lhs), .point(let rhs)): return lhs == rhs

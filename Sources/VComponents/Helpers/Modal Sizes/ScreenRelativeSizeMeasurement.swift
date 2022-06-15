@@ -9,7 +9,7 @@ import SwiftUI
  
 // MARK: - Screen Relative Size Measurement
 /// Measurement that allows screen relative sizes to be converted to points.
-public protocol ScreenRelativeSizeMeasurement: Equatable {
+public protocol ScreenRelativeSizeMeasurement {
     /// Converts screen relative measurement to points.
     static func relativeMeasurementToPoints(_ measurement: Self) -> Self
 }
