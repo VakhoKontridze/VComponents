@@ -25,6 +25,8 @@ import SwiftUI
 /// If presenting view dissapears, either by navigation, or by `ViewBuilder` render (such as `if` block evaluating to `false`),
 /// modal must be removed from view hierarchy. To ensure proper removal, call `PresentationHost.forceDismiss(in:)`.
 /// Currently, `PresentationHost` uses type of presenting view as an identifier for removing expired models.
+/// `forceDismiss` ignores the animations of modal, and force removes `View` from the hierarchy.
+/// Since presenting `View` may have disspeared, state of the modal can no longer be updated, and animations cannot occur.
 ///
 /// Presentation Host caches data when `item: Binding<Item?>`, `presenting data: T?`, and `error: E?` extensions are used.
 /// Yype of presenting `View` is used as a key in a cache . This however, has one limitation.
