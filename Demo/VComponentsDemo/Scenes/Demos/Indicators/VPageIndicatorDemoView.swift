@@ -16,7 +16,7 @@ struct VPageIndicatorDemoView: View {
     
     private let total: Int = 15
     @State private var selectedIndex: Int = 0
-    private let timer: Publishers.Autoconnect<Timer.TimerPublisher> = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+    private let timer: AnyPublisher<Date, Never> = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher()
     
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
 
