@@ -86,8 +86,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
         component componentContent: @escaping () -> ComponentContent,
         @ViewBuilder settings settingsContent: @escaping () -> SingleSectionSettingsContent
     )
-        where
-            SettingsContent == DemoViewSettingsSection<SingleSectionSettingsContent>
+        where SettingsContent == DemoViewSettingsSection<SingleSectionSettingsContent>
     {
         self.demoViewType = .componentAndSettings(
             type: type,
