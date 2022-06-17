@@ -1,6 +1,6 @@
 # Change Log
 
-### 2.1.1(19)
+#### [2.1.1(19)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.1) — *2022 06 17*
 
 Other
 
