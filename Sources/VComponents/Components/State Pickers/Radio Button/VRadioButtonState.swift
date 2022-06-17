@@ -45,6 +45,7 @@ public enum VRadioButtonState: Int, CaseIterable {
     }
 }
 
+// MARK: Binding Init
 extension Binding where Value == VRadioButtonState {
     /// Initializes state with `Bool`.
     public init(bool: Binding<Bool>) {

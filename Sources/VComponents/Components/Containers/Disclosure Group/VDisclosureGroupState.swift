@@ -45,6 +45,7 @@ public enum VDisclosureGroupState: Int, CaseIterable {
     }
 }
 
+// MARK: Binding Init
 extension Binding where Value == VDisclosureGroupState {
     /// Initializes state with `Bool`.
     public init(bool: Binding<Bool>) {

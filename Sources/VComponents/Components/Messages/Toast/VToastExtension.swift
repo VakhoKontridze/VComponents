@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Bool
 extension View {
-    /// Presents `VToast` when boolean is `true`.
+    /// Presents `VToast` when `Bool` is `true`.
     ///
     /// Modal component that presents toast, and hosts content.
     ///
@@ -128,7 +128,7 @@ extension View {
 
 // MARK: - Presenting Data
 extension View {
-    /// Presents `VToast` when boolean is `true` using data to produce content.
+    /// Presents `VToast` when `Bool` is `true` using data to produce content.
     ///
     /// Modal component that presents toast, and hosts content.
     ///
@@ -200,7 +200,7 @@ extension View {
 
 // MARK: - Error
 extension View {
-    /// Presents `VToast` when boolean is `true` using `Error`
+    /// Presents `VToast` when `Bool` is `true` using `Error`
     ///
     /// Modal component that presents toast, and hosts content.
     ///

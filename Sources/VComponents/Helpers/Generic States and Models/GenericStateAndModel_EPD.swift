@@ -80,7 +80,7 @@ public struct GenericStateModel_EPD<Value> {
     }
 }
 
-// MARK: - Hashable, Equatable, Comparable
+// MARK: Hashable, Equatable, Comparable
 extension GenericStateModel_EPD: Hashable where Value: Hashable {}
 
 extension GenericStateModel_EPD: Equatable where Value: Equatable {}

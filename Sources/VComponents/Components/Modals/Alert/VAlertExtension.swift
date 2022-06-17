@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Bool
 extension View {
-    /// Presents `VAlert` when boolean is `true`.
+    /// Presents `VAlert` when `Bool` is `true`.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -65,7 +65,7 @@ extension View {
             ))
     }
     
-    /// Presents `VAlert` when boolean is `true`.
+    /// Presents `VAlert` when `Bool` is `true`.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -319,7 +319,7 @@ extension View {
 
 // MARK: - Presenting Data
 extension View {
-    /// Presents `VAlert` when boolean is `true` using data to produce content.
+    /// Presents `VAlert` when `Bool` is `true` using data to produce content.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -410,7 +410,7 @@ extension View {
             ))
     }
     
-    /// Presents `VAlert` when boolean is `true` using data to produce content.
+    /// Presents `VAlert` when `Bool` is `true` using data to produce content.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -515,7 +515,7 @@ extension View {
 
 // MARK: - Error
 extension View {
-    /// Presents `VAlert` when boolean is `true` using `Error`
+    /// Presents `VAlert` when `Bool` is `true` using `Error`
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -601,7 +601,7 @@ extension View {
             ))
     }
     
-    /// Presents `VAlert` when boolean is `true` using `Error`
+    /// Presents `VAlert` when `Bool` is `true` using `Error`
     ///
     /// Modal component that presents alert, and hosts content.
     ///

@@ -45,6 +45,7 @@ public enum VToggleState: Int, CaseIterable {
     }
 }
 
+// MARK: Binding Init
 extension Binding where Value == VToggleState {
     /// Initializes state with `Bool`.
     public init(bool: Binding<Bool>) {

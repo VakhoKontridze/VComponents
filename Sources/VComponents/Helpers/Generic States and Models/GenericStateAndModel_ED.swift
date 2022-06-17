@@ -64,7 +64,7 @@ public struct GenericStateModel_ED<Value> {
     }
 }
 
-// MARK: - Hashable, Equatable, Comparable
+// MARK: Hashable, Equatable, Comparable
 extension GenericStateModel_ED: Hashable where Value: Hashable {}
 
 extension GenericStateModel_ED: Equatable where Value: Equatable {}

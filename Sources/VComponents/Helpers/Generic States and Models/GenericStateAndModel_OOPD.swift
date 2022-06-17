@@ -48,6 +48,7 @@ enum GenericState_OOPD {
     }
 }
 
+// MARK: Helper Inits
 extension GenericState_OOPD {
     init(isEnabled: Bool, state: VToggleState, isPressed: Bool) {
         self.init(isEnabled: isEnabled, isOn: state.isOn, isPressed: isPressed)
@@ -105,7 +106,7 @@ public struct GenericStateModel_OOPD<Value> {
     }
 }
 
-// MARK: - Hashable, Equatable, Comparable
+// MARK: Hashable, Equatable, Comparable
 extension GenericStateModel_OOPD: Hashable where Value: Hashable {}
 
 extension GenericStateModel_OOPD: Equatable where Value: Equatable {}

@@ -41,6 +41,7 @@ enum GenericState_CED {
     }
 }
 
+// MARK: Helper Inits
 extension GenericState_CED {
     init(isEnabled: Bool, state: VDisclosureGroupState) {
         self.init(isEnabled: isEnabled, isExpanded: state.isExpanded)
@@ -82,7 +83,7 @@ public struct GenericStateModel_CED<Value> {
     }
 }
 
-// MARK: - Hashable, Equatable, Comparable
+// MARK: Hashable, Equatable, Comparable
 extension GenericStateModel_CED: Hashable where Value: Hashable {}
 
 extension GenericStateModel_CED: Equatable where Value: Equatable {}

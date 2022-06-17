@@ -86,7 +86,7 @@ public struct GenericStateModel_EPDL<Value> {
     }
 }
 
-// MARK: - Hashable, Equatable, Comparable
+// MARK: Hashable, Equatable, Comparable
 extension GenericStateModel_EPDL: Hashable where Value: Hashable {}
 
 extension GenericStateModel_EPDL: Equatable where Value: Equatable {}

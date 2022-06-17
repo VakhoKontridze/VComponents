@@ -52,6 +52,7 @@ public enum VCheckBoxState: Int, CaseIterable {
     }
 }
 
+// MARK: Binding Init
 extension Binding where Value == VCheckBoxState {
     /// Initializes state with `Bool`.
     public init(bool: Binding<Bool>) {

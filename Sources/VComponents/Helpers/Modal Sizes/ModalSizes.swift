@@ -65,7 +65,7 @@ extension ModalSizes {
     }
 }
 
-// MARK: - Hashable, Equatable, Comparable
+// MARK: Hashable, Equatable, Comparable
 extension ModalSizes: Hashable where ModalSizeMeasurement: Hashable {}
 
 extension ModalSizes: Equatable where ModalSizeMeasurement: Equatable {}

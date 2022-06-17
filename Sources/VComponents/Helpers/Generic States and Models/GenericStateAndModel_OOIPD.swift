@@ -114,7 +114,7 @@ public struct GenericStateModel_OOIPD<Value> {
     }
 }
 
-// MARK: - Hashable, Equatable, Comparable
+// MARK: Hashable, Equatable, Comparable
 extension GenericStateModel_OOIPD: Hashable where Value: Hashable {}
 
 extension GenericStateModel_OOIPD: Equatable where Value: Equatable {}
@@ -126,8 +126,7 @@ extension GenericStateModel_OOIPD: Comparable where Value: Comparable {
         else if lhs.indeterminate != rhs.indeterminate { return lhs.indeterminate < rhs.indeterminate }
         else if lhs.pressedOn != rhs.pressedOn { return lhs.pressedOn < rhs.pressedOn }
         else if lhs.pressedIndeterminate != rhs.pressedIndeterminate { return lhs.pressedIndeterminate < rhs.pressedIndeterminate }
-        else if lhs.disabled != rhs.disabled { return lhs.disabled < rhs.disabled }
-        else { return false }
+        else /*if lhs.disabled != rhs.disabled*/ { return lhs.disabled < rhs.disabled }
     }
 }
 
