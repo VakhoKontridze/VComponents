@@ -13,7 +13,7 @@ extension View {
     ///
     /// Side bar component that draws a from left side with background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -36,7 +36,7 @@ extension View {
     ///     }
     ///
     public func vSideBar<Content>(
-        model: VSideBarModel = .init(),
+        uiModel: VSideBarUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -51,7 +51,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VSideBar(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         content: content
@@ -67,7 +67,7 @@ extension View {
     ///
     /// Side bar component that draws a from left side with background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vSideBar` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -94,7 +94,7 @@ extension View {
     ///     }
     ///
     public func vSideBar<Item, Content>(
-        model: VSideBarModel = .init(),
+        uiModel: VSideBarUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -116,7 +116,7 @@ extension View {
                 ),
                 content: {
                     VSideBar(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         content: {

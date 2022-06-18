@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Range Slider
 /// Value picker component that selects values from a bounded linear range of values to represent a range.
 ///
-/// Model, range, step, state, and onChange callbacks can be passed as parameters.
+/// UI Model, range, step, state, and onChange callbacks can be passed as parameters.
 ///
 ///     @State var valueLow: Double = 0.3
 ///     @State var valueHigh: Double = 0.8
@@ -26,7 +26,7 @@ import VCore
 ///
 public struct VRangeSlider: View {
     // MARK: Properties
-    private let model: VRangeSliderModel
+    private let uiModel: VRangeSliderUIModel
 
     private let min, max: Double
     private var range: ClosedRange<Double> { min...max }
@@ -47,7 +47,7 @@ public struct VRangeSlider: View {
     // MARK: Initializers
     /// Initializes component with diffrene, and low and high values.
     public init<V>(
-        model: VRangeSliderModel = .init(),
+        uiModel: VRangeSliderUIModel = .init(),
         range: ClosedRange<V> = 0...1,
         difference: V,
         step: V? = nil,
@@ -65,7 +65,7 @@ public struct VRangeSlider: View {
             "Difference between `VRangeSlider`'s `valueLow` and `valueHeight` must be greater than or equal to `difference`"
         )
         
-        self.model = model
+        self.uiModel = uiModel
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
         self.difference = .init(difference)
@@ -88,40 +88,40 @@ public struct VRangeSlider: View {
             track
             progress
         })
-            .mask(RoundedRectangle(cornerRadius: model.layout.cornerRadius))
+            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
             .overlay(thumb(.low))
             .overlay(thumb(.high))
-            .frame(height: model.layout.height)
+            .frame(height: uiModel.layout.height)
             .readSize(onChange: { sliderWidth = $0.width })
-            .padding(.horizontal, model.layout.thumbDimension / 2)
+            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
             .disabled(!internalState.isEnabled)
-            .animation(model.animations.progress, value: valueLow)
-            .animation(model.animations.progress, value: valueHigh)
+            .animation(uiModel.animations.progress, value: valueLow)
+            .animation(uiModel.animations.progress, value: valueHigh)
     }
 
     private var track: some View {
         Rectangle()
-            .foregroundColor( model.colors.track.for(internalState))
+            .foregroundColor( uiModel.colors.track.for(internalState))
     }
 
     private var progress: some View {
         Rectangle()
             .padding(.leading, progress(.low))
             .padding(.trailing, progress(.high))
-            .foregroundColor(model.colors.progress.for(internalState))
+            .foregroundColor(uiModel.colors.progress.for(internalState))
     }
 
     private func thumb(_ thumb: Thumb) -> some View {
         Group(content: {
             ZStack(content: {
-                RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .foregroundColor(model.colors.thumb.for(internalState))
-                    .shadow(color: model.colors.thumbShadow.for(internalState), radius: model.layout.thumbShadowRadius)
+                RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
+                    .foregroundColor(uiModel.colors.thumb.for(internalState))
+                    .shadow(color: uiModel.colors.thumbShadow.for(internalState), radius: uiModel.layout.thumbShadowRadius)
 
-                RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                    .strokeBorder(model.colors.thumbBorder.for(internalState), lineWidth: model.layout.thumbBorderWidth)
+                RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
+                    .strokeBorder(uiModel.colors.thumbBorder.for(internalState), lineWidth: uiModel.layout.thumbBorderWidth)
             })
-                .frame(dimension: model.layout.thumbDimension)
+                .frame(dimension: uiModel.layout.thumbDimension)
                 .offset(x: thumbOffset(thumb))
         })
             .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
@@ -211,7 +211,7 @@ public struct VRangeSlider: View {
     // MARK: Thumb
     private func thumbOffset(_ thumb: Thumb) -> CGFloat {
         let progressW: CGFloat = progress(thumb)
-        let thumbW: CGFloat = model.layout.thumbDimension
+        let thumbW: CGFloat = uiModel.layout.thumbDimension
         let width: CGFloat = sliderWidth
 
         switch thumb {

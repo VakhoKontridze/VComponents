@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Spinner
 /// Indicator component that indicates activity.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 ///     var body: some View {
 ///         VSpinner()
@@ -31,8 +31,8 @@ public struct VSpinner: View {
     // MARK: Body
     @ViewBuilder public var body: some View {
         switch spinnerType._spinnerType {
-        case .continous(let model): VSpinnerContinous(model: model)
-        case .dashed(let model): VSpinnerDashed(model: model)
+        case .continous(let uiModel): VSpinnerContinous(uiModel: uiModel)
+        case .dashed(let uiModel): VSpinnerDashed(uiModel: uiModel)
         }
     }
 }

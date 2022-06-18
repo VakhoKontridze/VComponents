@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component can be initialized without label, with label, or label.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 /// `Bool` can also be passed as state.
 ///
@@ -27,7 +27,7 @@ import SwiftUI
 ///
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties
-    private let model: VToggleModel
+    private let uiModel: VToggleUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
@@ -36,41 +36,41 @@ public struct VToggle<Label>: View where Label: View {
     
     private let label: VToggleLabel<Label>
     
-    private var labelIsEnabled: Bool { model.misc.labelIsClickable && internalState.isEnabled }
+    private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
     /// Initializes component with state.
     public init(
-        model: VToggleModel = .init(),
+        uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .empty
     }
     
     /// Initializes component with state and title.
     public init(
-        model: VToggleModel = .init(),
+        uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .title(title: title)
     }
     
     /// Initializes component with state and label.
     public init(
-        model: VToggleModel = .init(),
+        uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .custom(label: label)
     }
@@ -78,36 +78,36 @@ public struct VToggle<Label>: View where Label: View {
     // MARK: Initializers - Bool
     /// Initializes component with `Bool`.
     public init(
-        model: VToggleModel = .init(),
+        uiModel: VToggleUIModel = .init(),
         isOn: Binding<Bool>
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .empty
     }
     
     /// Initializes component with `Bool` and title.
     public init(
-        model: VToggleModel = .init(),
+        uiModel: VToggleUIModel = .init(),
         isOn: Binding<Bool>,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .title(title: title)
     }
     
     /// Initializes component with `Bool` and label.
     public init(
-        model: VToggleModel = .init(),
+        uiModel: VToggleUIModel = .init(),
         isOn: Binding<Bool>,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .custom(label: label)
     }
@@ -127,9 +127,9 @@ public struct VToggle<Label>: View where Label: View {
 
                     VBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: .multiLine(alignment: .leading, lineLimit: model.layout.titleLineLimit),
-                            color: model.colors.title.for(internalState),
-                            font: model.fonts.title,
+                            type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
+                            color: uiModel.colors.title.for(internalState),
+                            font: uiModel.fonts.title,
                             text: title
                         )
                     })
@@ -144,27 +144,27 @@ public struct VToggle<Label>: View where Label: View {
                     
                     VBaseButton(gesture: gestureHandler, label: {
                         label()
-                            .opacity(model.colors.customLabelOpacities.for(internalState))
+                            .opacity(uiModel.colors.customLabelOpacities.for(internalState))
                     })
                         .disabled(!labelIsEnabled)
                 })
             }
         })
-            .animation(model.animations.stateChange, value: state)
+            .animation(uiModel.animations.stateChange, value: state)
     }
     
     private var toggle: some View {
         VBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
-                RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                    .foregroundColor(model.colors.fill.for(internalState))
+                RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                    .foregroundColor(uiModel.colors.fill.for(internalState))
 
                 Circle()
-                    .frame(dimension: model.layout.thumbDimension)
-                    .foregroundColor(model.colors.thumb.for(internalState))
+                    .frame(dimension: uiModel.layout.thumbDimension)
+                    .foregroundColor(uiModel.colors.thumb.for(internalState))
                     .offset(x: thumbOffset)
             })
-                .frame(size: model.layout.size)
+                .frame(size: uiModel.layout.size)
         })
             .disabled(!internalState.isEnabled)
     }
@@ -173,7 +173,7 @@ public struct VToggle<Label>: View where Label: View {
         VBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.toggleLabelSpacing)
+                .frame(width: uiModel.layout.toggleLabelSpacing)
                 .foregroundColor(.clear)
         })
             .disabled(!labelIsEnabled)
@@ -187,7 +187,7 @@ public struct VToggle<Label>: View where Label: View {
 
     // MARK: Thumb Position
     private var thumbOffset: CGFloat {
-        let offset: CGFloat = model.layout.animationOffset
+        let offset: CGFloat = uiModel.layout.animationOffset
         
         switch internalState {
         case .off: return -offset

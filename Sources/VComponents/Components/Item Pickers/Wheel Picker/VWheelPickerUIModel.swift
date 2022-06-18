@@ -1,5 +1,5 @@
 //
-//  VWheelPickerModel.swift
+//  VWheelPickerUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/19/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V Wheel Picker Model
+// MARK: - V Wheel Picker UI Model
 /// Model that describes UI.
-public struct VWheelPickerModel {
+public struct VWheelPickerUIModel {
     // MARK: Properties
-    fileprivate static let segmentedPickerReference: VSegmentedPickerModel = .init()
+    fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -23,7 +23,7 @@ public struct VWheelPickerModel {
     public var fonts: Fonts = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

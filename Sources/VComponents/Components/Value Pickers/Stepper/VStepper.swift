@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Stepper
 /// Value picker component that selects value from a bounded linear range of values.
 ///
-/// Model, step, and state can be passed as parameters.
+/// UI Model, step, and state can be passed as parameters.
 ///
 ///     @State var value: Double = 0.5
 ///
@@ -24,7 +24,7 @@ import SwiftUI
 ///
 public struct VStepper: View {
     // MARK: Properties
-    private let model: VStepperModel
+    private let uiModel: VStepperUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VStepperInternalState { .init(isEnabled: isEnabled) }
@@ -50,12 +50,12 @@ public struct VStepper: View {
     // MARK: Initializers
     /// Initializes component with range and value.
     public init(
-        model: VStepperModel = .init(),
+        uiModel: VStepperUIModel = .init(),
         range: ClosedRange<Int>,
         step: Int = 1,
         value: Binding<Int>
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.range = range
         self.step = step
         self._value = value
@@ -67,12 +67,12 @@ public struct VStepper: View {
             background
             buttons
         })
-            .frame(size: model.layout.size)
+            .frame(size: uiModel.layout.size)
     }
     
     private var background: some View {
-        RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-            .foregroundColor(model.colors.background.for(internalState))
+        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+            .foregroundColor(uiModel.colors.background.for(internalState))
     }
     
     private var buttons: some View {
@@ -89,13 +89,13 @@ public struct VStepper: View {
             gesture: { gestureHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
-                    RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                        .foregroundColor(model.colors.buttonBackground.for(buttonInternalState(button)))
+                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                        .foregroundColor(uiModel.colors.buttonBackground.for(buttonInternalState(button)))
                     
                     button.icon
                         .resizable()
-                        .frame(dimension: model.layout.iconDimension)
-                        .foregroundColor(model.colors.buttonIcon.for(buttonInternalState(button)))
+                        .frame(dimension: uiModel.layout.iconDimension)
+                        .foregroundColor(uiModel.colors.buttonIcon.for(buttonInternalState(button)))
                 })
                     .frame(maxWidth: .infinity)
             }
@@ -105,8 +105,8 @@ public struct VStepper: View {
     
     private var divider: some View {
         Rectangle()
-            .frame(size: model.layout.divider)
-            .foregroundColor(model.colors.divider.for(internalState))
+            .frame(size: uiModel.layout.divider)
+            .foregroundColor(uiModel.colors.divider.for(internalState))
     }
     
     // MARK: Actions
@@ -152,7 +152,7 @@ public struct VStepper: View {
     private func scheduleLongPressIncrementSchedulerTimer(for button: VStepperButton) {
         zeroLongPressTimers()
         
-        longPressSchedulerTimer = .scheduledTimer(withTimeInterval: model.misc.intervalToStartLongPressIncrement, repeats: false, block: { _ in
+        longPressSchedulerTimer = .scheduledTimer(withTimeInterval: uiModel.misc.intervalToStartLongPressIncrement, repeats: false, block: { _ in
             scheduleLongPressIncrementTimer()
         })
     }
@@ -174,7 +174,7 @@ public struct VStepper: View {
         longPressIncrementTimerIncremental = nil
 
         let interval: TimeInterval = {
-            let adjustedStep: Int = .init(pow(.init(model.misc.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
+            let adjustedStep: Int = .init(pow(.init(uiModel.misc.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
             let interval: TimeInterval = 1 / .init(adjustedStep)
             return interval
         }()

@@ -1,5 +1,5 @@
 //
-//  VModalModel.swift
+//  VModalUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/13/21.
@@ -8,13 +8,13 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Modal Model
+// MARK: - V Modal UI Model
 /// Model that describes UI.
-public struct VModalModel {
+public struct VModalUIModel {
     // MARK: Properties
-    fileprivate static let closeButtonReference: VCloseButtonModel = .init()
-    fileprivate static let sheetReference: VSheetModel = .init()
-    fileprivate static let disclosureGroupReference: VDisclosureGroupModel = .init()
+    fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
+    fileprivate static let sheetReference: VSheetUIModel = .init()
+    fileprivate static let disclosureGroupReference: VDisclosureGroupUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -32,7 +32,7 @@ public struct VModalModel {
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -222,28 +222,28 @@ public struct VModalModel {
     }
 
     // MARK: Sub-Models
-    var sheetSubModel: VSheetModel {
-        var model: VSheetModel = .init()
+    var sheetSubUIModel: VSheetUIModel {
+        var uiModel: VSheetUIModel = .init()
         
-        model.layout.roundedCorners = layout.roundedCorners
-        model.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.roundedCorners = layout.roundedCorners
+        uiModel.layout.cornerRadius = layout.cornerRadius
         
-        model.colors.background = colors.background
+        uiModel.colors.background = colors.background
         
-        return model
+        return uiModel
     }
     
-    var closeButtonSubModel: VCloseButtonModel {
-        var model: VCloseButtonModel = .init()
+    var closeButtonSubUIModel: VCloseButtonUIModel {
+        var uiModel: VCloseButtonUIModel = .init()
         
-        model.layout.dimension = layout.closeButtonDimension
-        model.layout.iconDimension = layout.closeButtonIconDimension
-        model.layout.hitBox.horizontal = 0
-        model.layout.hitBox.vertical = 0
+        uiModel.layout.dimension = layout.closeButtonDimension
+        uiModel.layout.iconDimension = layout.closeButtonIconDimension
+        uiModel.layout.hitBox.horizontal = 0
+        uiModel.layout.hitBox.vertical = 0
         
-        model.colors.background = colors.closeButtonBackground
-        model.colors.icon = colors.closeButtonIcon
+        uiModel.colors.background = colors.closeButtonBackground
+        uiModel.colors.icon = colors.closeButtonIcon
         
-        return model
+        return uiModel
     }
 }

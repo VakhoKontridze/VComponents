@@ -13,14 +13,14 @@ struct VSheetDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Sheet" }
     
-    @State private var roundedCorners: VSheetRoundedCorners = VSheetModel.Layout().roundedCorners.sheetRoundedCorners
+    @State private var roundedCorners: VSheetRoundedCorners = VSheetUIModel.Layout().roundedCorners.sheetRoundedCorners
 
-    private var model: VSheetModel {
-        var model: VSheetModel = .init()
+    private var uiModel: VSheetUIModel {
+        var uiModel: VSheetUIModel = .init()
         
-        model.layout.roundedCorners = roundedCorners.roundedCorner
+        uiModel.layout.roundedCorners = roundedCorners.roundedCorner
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -30,7 +30,7 @@ struct VSheetDemoView: View {
     }
     
     private func component() -> some View {
-        VSheet(model: model, content: {
+        VSheet(uiModel: uiModel, content: {
             VText(
                 type: .multiLine(alignment: .center, lineLimit: nil),
                 color: ColorBook.primary,

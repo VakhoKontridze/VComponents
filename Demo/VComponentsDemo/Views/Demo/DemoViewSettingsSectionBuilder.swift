@@ -19,12 +19,12 @@ struct DemoViewSettingsSection<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        VStack(spacing: DemoViewSettingsSectionModel.rowSpacing, content: content)
+        VStack(spacing: DemoViewSettingsSectionUIModel.rowSpacing, content: content)
     }
 }
 
-// MARK: - DemoViewSettingsSectionModel
-private struct DemoViewSettingsSectionModel {
+// MARK: - Demo View Settings Section UI Model
+private struct DemoViewSettingsSectionUIModel {
     static var sectionSpacing: CGFloat { 25 }
     static var rowSpacing: CGFloat { 15 }
     
@@ -33,7 +33,7 @@ private struct DemoViewSettingsSectionModel {
 
 // MARK: - Demo View Settings Section Builder
 @resultBuilder struct DemoViewSettingsSectionBuilder {
-    private static var spacing: CGFloat { DemoViewSettingsSectionModel.sectionSpacing }
+    private static var spacing: CGFloat { DemoViewSettingsSectionUIModel.sectionSpacing }
 
     static func buildBlock<C0>(
         _ c0: DemoViewSettingsSection<C0>

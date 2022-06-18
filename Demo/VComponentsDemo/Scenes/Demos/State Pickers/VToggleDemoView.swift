@@ -17,14 +17,14 @@ struct VToggleDemoView: View {
     @State private var isEnabled: Bool = true
     @State private var state: VToggleState = .off
     @State private var labelType: VToggleLabel = .title
-    @State private var labelIsClickable: Bool = VToggleModel.Misc().labelIsClickable
+    @State private var labelIsClickable: Bool = VToggleUIModel.Misc().labelIsClickable
     
-    private var model: VToggleModel {
-        var model: VToggleModel = .init()
+    private var uiModel: VToggleUIModel {
+        var uiModel: VToggleUIModel = .init()
         
-        model.misc.labelIsClickable = labelIsClickable
+        uiModel.misc.labelIsClickable = labelIsClickable
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -37,9 +37,9 @@ struct VToggleDemoView: View {
     private func component() -> some View {
         Group(content: {
             switch labelType {
-            case .empty: VToggle(model: model, state: $state)
-            case .title: VToggle(model: model, state: $state, title: toggleTitle)
-            case .custom: VToggle(model: model, state: $state, label: { toggleIcon })
+            case .empty: VToggle(uiModel: uiModel, state: $state)
+            case .title: VToggle(uiModel: uiModel, state: $state, title: toggleTitle)
+            case .custom: VToggle(uiModel: uiModel, state: $state, label: { toggleIcon })
             }
         })
             .disabled(!isEnabled)

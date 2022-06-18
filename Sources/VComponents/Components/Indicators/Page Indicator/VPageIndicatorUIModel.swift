@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorModel.swift
+//  VPageIndicatorUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V Page Indicator Model
+// MARK: - V Page Indicator UI Model
 /// Model that describes UI.
-public struct VPageIndicatorModel {
+public struct VPageIndicatorUIModel {
     // MARK: Properties
-    fileprivate static let progressBarReference: VProgressBarModel = .init()
+    fileprivate static let progressBarReference: VProgressBarUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -23,7 +23,7 @@ public struct VPageIndicatorModel {
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

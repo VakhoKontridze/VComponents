@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Slider
 /// Value picker component that selects value from a bounded linear range of values.
 ///
-/// Model, range, step, state, and onChange callback can be passed as parameters.
+/// UI Model, range, step, state, and onChange callback can be passed as parameters.
 ///
 ///     @State var value: Double = 0.5
 ///
@@ -22,7 +22,7 @@ import VCore
 ///
 public struct VSlider: View {
     // MARK: Properties
-    private let model: VSliderModel
+    private let uiModel: VSliderUIModel
     
     private let min, max: Double
     private var range: ClosedRange<Double> { min...max }
@@ -37,12 +37,12 @@ public struct VSlider: View {
     
     @State private var sliderWidth: CGFloat = 0
     
-    private var hasThumb: Bool { model.layout.thumbDimension > 0 }
+    private var hasThumb: Bool { uiModel.layout.thumbDimension > 0 }
     
     // MARK: Initializers
     /// Initializes component with value.
     public init<V>(
-        model: VSliderModel = .init(),
+        uiModel: VSliderUIModel = .init(),
         range: ClosedRange<V> = 0...1,
         step: V? = nil,
         value: Binding<V>,
@@ -52,7 +52,7 @@ public struct VSlider: View {
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {
-        self.model = model
+        self.uiModel = uiModel
         self.min = .init(range.lowerBound)
         self.max = .init(range.upperBound)
         self.step = step.map { .init($0) }
@@ -69,12 +69,12 @@ public struct VSlider: View {
             track
             progress
         })
-            .mask(RoundedRectangle(cornerRadius: model.layout.cornerRadius))
+            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
             .overlay(thumb)
-            .frame(height: model.layout.height)
+            .frame(height: uiModel.layout.height)
             .readSize(onChange: { sliderWidth = $0.width })
-            .padding(.horizontal, model.layout.thumbDimension / 2)
-            .animation(model.animations.progress, value: value)
+            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
+            .animation(uiModel.animations.progress, value: value)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged(dragChanged)
@@ -85,28 +85,28 @@ public struct VSlider: View {
 
     private var track: some View {
         Rectangle()
-            .foregroundColor(model.colors.track.for(internalState))
+            .foregroundColor(uiModel.colors.track.for(internalState))
     }
 
     private var progress: some View {
         Rectangle()
             .frame(width: progressWidth)
-            .cornerRadius(model.layout.cornerRadius, corners: model.layout.progressViewRoundedCorners)
-            .foregroundColor(model.colors.progress.for(internalState))
+            .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
+            .foregroundColor(uiModel.colors.progress.for(internalState))
     }
     
     @ViewBuilder private var thumb: some View {
         if hasThumb {
             Group(content: {
                 ZStack(content: {
-                    RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                        .foregroundColor(model.colors.thumb.for(internalState))
-                        .shadow(color: model.colors.thumbShadow.for(internalState), radius: model.layout.thumbShadowRadius)
+                    RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
+                        .foregroundColor(uiModel.colors.thumb.for(internalState))
+                        .shadow(color: uiModel.colors.thumbShadow.for(internalState), radius: uiModel.layout.thumbShadowRadius)
                     
-                    RoundedRectangle(cornerRadius: model.layout.thumbCornerRadius)
-                        .strokeBorder(model.colors.thumbBorder.for(internalState), lineWidth: model.layout.thumbBorderWidth)
+                    RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
+                        .strokeBorder(uiModel.colors.thumbBorder.for(internalState), lineWidth: uiModel.layout.thumbBorderWidth)
                 })
-                    .frame(dimension: model.layout.thumbDimension)
+                    .frame(dimension: uiModel.layout.thumbDimension)
                     .offset(x: thumbOffset)
             })
                 .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
@@ -152,7 +152,7 @@ public struct VSlider: View {
     // MARK: Thumb Offset
     private var thumbOffset: CGFloat {
         let progressW: CGFloat = progressWidth
-        let thumbW: CGFloat = model.layout.thumbDimension
+        let thumbW: CGFloat = uiModel.layout.thumbDimension
         let offset: CGFloat = progressW - thumbW / 2
         
         return offset

@@ -1,5 +1,5 @@
 //
-//  VTextFieldModel.swift
+//  VTextFieldUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/19/21.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-// MARK: - V Text Field Model
+// MARK: - V Text Field UI Model
 /// Model that describes UI.
-public struct VTextFieldModel {
+public struct VTextFieldUIModel {
     // MARK: Properties
-    fileprivate static let squareButtonReference: VSquareButtonModel = .init()
-    fileprivate static let plainButtonReference: VPlainButtonModel = .init()
-    fileprivate static let closeButtonReference: VCloseButtonModel = .init()
-    fileprivate static let segmentedPickerReference: VSegmentedPickerModel = .init()
+    fileprivate static let squareButtonReference: VSquareButtonUIModel = .init()
+    fileprivate static let plainButtonReference: VPlainButtonUIModel = .init()
+    fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
+    fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -31,7 +31,7 @@ public struct VTextFieldModel {
     /// Sub-model containing misc properties.
     public var misc: Misc = .init()
     
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -228,33 +228,33 @@ public struct VTextFieldModel {
     }
     
     // MARK: Sub-Models
-    var clearButtonSubModel: VCloseButtonModel {
-        var model: VCloseButtonModel = .init()
+    var clearButtonSubUIModel: VCloseButtonUIModel {
+        var uiModel: VCloseButtonUIModel = .init()
         
-        model.layout.dimension = layout.clearButtonDimension
-        model.layout.iconDimension = layout.clearButtonIconDimension
-        model.layout.hitBox.horizontal = 0
-        model.layout.hitBox.vertical = 0
+        uiModel.layout.dimension = layout.clearButtonDimension
+        uiModel.layout.iconDimension = layout.clearButtonIconDimension
+        uiModel.layout.hitBox.horizontal = 0
+        uiModel.layout.hitBox.vertical = 0
         
-        model.colors.background = .init(colors.clearButtonBackground)
-        model.colors.icon = .init(colors.clearButtonIcon)
+        uiModel.colors.background = .init(colors.clearButtonBackground)
+        uiModel.colors.icon = .init(colors.clearButtonIcon)
         
-        return model
+        return uiModel
     }
     
-    var visibilityButtonSubModel: VSquareButtonModel {
-        var model: VSquareButtonModel = .init()
+    var visibilityButtonSubUIModel: VSquareButtonUIModel {
+        var uiModel: VSquareButtonUIModel = .init()
         
-        model.layout.dimension = layout.visibilityButtonDimension
-        model.layout.cornerRadius = layout.visibilityButtonDimension / 2
-        model.layout.labelMargins.horizontal = 0
-        model.layout.labelMargins.vertical = 0
-        model.layout.hitBox.horizontal = 0
-        model.layout.hitBox.vertical = 0
+        uiModel.layout.dimension = layout.visibilityButtonDimension
+        uiModel.layout.cornerRadius = layout.visibilityButtonDimension / 2
+        uiModel.layout.labelMargins.horizontal = 0
+        uiModel.layout.labelMargins.vertical = 0
+        uiModel.layout.hitBox.horizontal = 0
+        uiModel.layout.hitBox.vertical = 0
         
-        model.colors.background = .clear
-        model.colors.icon = .init(colors.visibilityButtonIcon)
+        uiModel.colors.background = .clear
+        uiModel.colors.icon = .init(colors.visibilityButtonIcon)
         
-        return model
+        return uiModel
     }
 }

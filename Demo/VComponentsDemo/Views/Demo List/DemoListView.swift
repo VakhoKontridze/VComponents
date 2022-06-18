@@ -20,10 +20,10 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     private let sections: [DemoSection<Row>]
     @State private var disclosureGroupStates: [VDisclosureGroupState]
     
-    private let lazyScrollViewModel: VLazyScrollViewVerticalModel = {
-        var model: VLazyScrollViewVerticalModel = .init()
-        model.layout.rowSpacing = 20
-        return model
+    private let lazyScrollViewModel: VLazyScrollViewVerticalUIModel = {
+        var uiModel: VLazyScrollViewVerticalUIModel = .init()
+        uiModel.layout.rowSpacing = 20
+        return uiModel
     }()
     
     // MARK: Initializers
@@ -41,7 +41,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
             switch demoType {
             case .disclosureGroup:
                 VLazyScrollView(
-                    type: .vertical(model: lazyScrollViewModel),
+                    type: .vertical(uiModel: lazyScrollViewModel),
                     data: sections.enumeratedArray(),
                     id: \.element.id,
                     content: { (i, section) in
@@ -70,7 +70,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                     .padding(.bottom, UIDevice.safeAreaInsetBottom)
                 
                 VLazyScrollView(
-                    type: .vertical(model: lazyScrollViewModel),
+                    type: .vertical(uiModel: lazyScrollViewModel),
                     data: sections.enumeratedArray(),
                     id: \.element.id,
                     content: { (i, section) in

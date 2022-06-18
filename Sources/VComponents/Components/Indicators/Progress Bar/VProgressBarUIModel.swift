@@ -1,5 +1,5 @@
 //
-//  VProgressBarModel.swift
+//  VProgressBarUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/12/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V Progress Bar Model
+// MARK: - V Progress Bar UI Model
 /// Model that describes UI.
-public struct VProgressBarModel {
+public struct VProgressBarUIModel {
     // MARK: Properties
-    fileprivate static let sliderReference: VSliderModel = .init()
+    fileprivate static let sliderReference: VSliderUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -23,7 +23,7 @@ public struct VProgressBarModel {
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -72,19 +72,19 @@ public struct VProgressBarModel {
     }
     
     // MARK: Sub-Models
-    var sliderSubModel: VSliderModel {
-        var model: VSliderModel = .init()
+    var sliderSubUIModel: VSliderUIModel {
+        var uiModel: VSliderUIModel = .init()
         
-        model.layout.height = layout.height
-        model.layout.cornerRadius = layout.cornerRadius
-        model.layout.roundsProgressViewRightEdge = layout.roundsProgressViewRightEdge
-        model.layout.thumbDimension = 0
+        uiModel.layout.height = layout.height
+        uiModel.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.roundsProgressViewRightEdge = layout.roundsProgressViewRightEdge
+        uiModel.layout.thumbDimension = 0
         
-        model.colors.track.enabled = colors.track
-        model.colors.progress.enabled = colors.progress
+        uiModel.colors.track.enabled = colors.track
+        uiModel.colors.progress.enabled = colors.progress
         
-        model.animations.progress = animations.progress
+        uiModel.animations.progress = animations.progress
         
-        return model
+        return uiModel
     }
 }

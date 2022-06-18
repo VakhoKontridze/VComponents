@@ -13,7 +13,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -38,7 +38,7 @@ extension View {
     ///     }
     ///
     public func vAlert(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -53,7 +53,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VAlert<Never>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: title,
@@ -69,7 +69,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -97,7 +97,7 @@ extension View {
     ///     }
     ///
     public func vAlert<Content>(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -115,7 +115,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VAlert(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: title,
@@ -134,7 +134,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -165,7 +165,7 @@ extension View {
     ///     }
     ///
     public func vAlert<Item>(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -187,7 +187,7 @@ extension View {
                 ),
                 content: {
                     VAlert<Never>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
@@ -221,7 +221,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -255,7 +255,7 @@ extension View {
     ///     }
     ///
     public func vAlert<Item, Content>(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -280,7 +280,7 @@ extension View {
                 ),
                 content: {
                     VAlert<Content>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
@@ -323,7 +323,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -359,7 +359,7 @@ extension View {
     ///     }
     ///
     public func vAlert<T>(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         presenting data: T?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -380,7 +380,7 @@ extension View {
                 ),
                 content: {
                     VAlert<Never>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
@@ -414,7 +414,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -452,7 +452,7 @@ extension View {
     ///     }
     ///
     public func vAlert<T, Content>(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         presenting data: T?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -476,7 +476,7 @@ extension View {
                 ),
                 content: {
                     VAlert<Content>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
@@ -519,7 +519,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -548,7 +548,7 @@ extension View {
     ///     }
     ///
     public func vAlert<E>(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -571,7 +571,7 @@ extension View {
                 ),
                 content: {
                     VAlert<Never>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
@@ -605,7 +605,7 @@ extension View {
     ///
     /// Modal component that presents alert, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// Alert can have one, two, or many buttons. Two buttons are stacked horizontally, while more are stacked vertically.
     ///
@@ -635,7 +635,7 @@ extension View {
     ///     }
     ///
     public func vAlert<E, Content>(
-        model: VAlertModel = .init(),
+        uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -661,7 +661,7 @@ extension View {
                 ),
                 content: {
                     VAlert<Content>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {

@@ -13,7 +13,7 @@ import VCore
 ///
 /// Component can be initialized with title, icon, icon and title, and label.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 ///     var body: some View {
 ///         VPlain(
@@ -24,7 +24,7 @@ import VCore
 ///     
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
-    private let model: VPlainButtonModel
+    private let uiModel: VPlainButtonUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
@@ -37,51 +37,51 @@ public struct VPlainButton<Label>: View where Label: View {
     // MARK: Initializers
     /// Initializes component with action and title.
     public init(
-        model: VPlainButtonModel = .init(),
+        uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.label = .title(title: title)
     }
     
     /// Initializes component with action and icon.
     public init(
-        model: VPlainButtonModel = .init(),
+        uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.label = .icon(icon: icon)
     }
     
     /// Initializes component with action, icon, and title.
     public init(
-        model: VPlainButtonModel = .init(),
+        uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.label = .iconTitle(icon: icon, text: title)
     }
     
     /// Initializes component with action and label.
     public init(
-        model: VPlainButtonModel = .init(),
+        uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.label = .custom(label: label)
     }
@@ -90,7 +90,7 @@ public struct VPlainButton<Label>: View where Label: View {
     public var body: some View {
         VBaseButton(gesture: gestureHandler, label: {
             buttonLabel
-                .padding(model.layout.hitBox)
+                .padding(uiModel.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)
     }
@@ -99,8 +99,8 @@ public struct VPlainButton<Label>: View where Label: View {
         switch label {
         case .title(let title):
             VText(
-                color: model.colors.title.for(internalState),
-                font: model.fonts.title,
+                color: uiModel.colors.title.for(internalState),
+                font: uiModel.fonts.title,
                 text: title
             )
             
@@ -108,29 +108,29 @@ public struct VPlainButton<Label>: View where Label: View {
             icon
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(size: model.layout.iconSize)
-                .foregroundColor(model.colors.icon.for(internalState))
-                .opacity(model.colors.iconOpacities.for(internalState))
+                .frame(size: uiModel.layout.iconSize)
+                .foregroundColor(uiModel.colors.icon.for(internalState))
+                .opacity(uiModel.colors.iconOpacities.for(internalState))
             
         case .iconTitle(let icon, let title):
-            HStack(spacing: model.layout.iconTitleSpacing, content: {
+            HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
                 icon
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-                    .frame(size: model.layout.iconSize)
-                    .foregroundColor(model.colors.icon.for(internalState))
-                    .opacity(model.colors.iconOpacities.for(internalState))
+                    .frame(size: uiModel.layout.iconSize)
+                    .foregroundColor(uiModel.colors.icon.for(internalState))
+                    .opacity(uiModel.colors.iconOpacities.for(internalState))
                 
                 VText(
-                    color: model.colors.title.for(internalState),
-                    font: model.fonts.title,
+                    color: uiModel.colors.title.for(internalState),
+                    font: uiModel.fonts.title,
                     text: title
                 )
             })
             
         case .custom(let label):
             label()
-                .opacity(model.colors.customLabelOpacities.for(internalState))
+                .opacity(uiModel.colors.customLabelOpacities.for(internalState))
         }
     }
 

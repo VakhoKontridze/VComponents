@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Page Indicator Infinite
 struct VPageIndicatorInfinite: View {
     // MARK: Properties
-    private let model: VPageIndicatorModel
+    private let uiModel: VPageIndicatorUIModel
     private let visible: Int
     private let center: Int
     private var side: Int { (visible - center) / 2 }
@@ -25,7 +25,7 @@ struct VPageIndicatorInfinite: View {
 
     // MARK: Intializers
     init(
-        model: VPageIndicatorModel,
+        uiModel: VPageIndicatorUIModel,
         visible: Int,
         center: Int,
         total: Int,
@@ -35,7 +35,7 @@ struct VPageIndicatorInfinite: View {
         assert(center.isOdd, "`VPageIndicator`'s `center` count must be odd")
         assert(visible > center, "`VPageIndicator`'s `visible` must be greater than `center`")
         
-        self.model = model
+        self.uiModel = uiModel
         self.visible = visible
         self.center = center
         self.total = total
@@ -45,7 +45,7 @@ struct VPageIndicatorInfinite: View {
     // MARK: Body
     @ViewBuilder public var body: some View {
         switch total {
-        case ...visible: VPageIndicatorFinite(model: model, total: total, selectedIndex: selectedIndex)
+        case ...visible: VPageIndicatorFinite(uiModel: uiModel, total: total, selectedIndex: selectedIndex)
         case _: infiniteBody
         }
     }
@@ -58,15 +58,15 @@ struct VPageIndicatorInfinite: View {
     
     private var frame: some View {
         Color.clear
-            .frame(size: .init(width: visibleWidth, height: model.layout.dotDimension))
+            .frame(size: .init(width: visibleWidth, height: uiModel.layout.dotDimension))
     }
     
     private var dots: some View {
-        HStack(spacing: model.layout.spacing, content: {
+        HStack(spacing: uiModel.layout.spacing, content: {
             ForEach(0..<total, id: \.self, content: { i in
                 Circle()
-                    .foregroundColor(selectedIndex == i ? model.colors.selectedDot : model.colors.dot)
-                    .frame(dimension: model.layout.dotDimension)
+                    .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                    .frame(dimension: uiModel.layout.dotDimension)
                     .scaleEffect(scale(at: i), anchor: .center)
             })
         })
@@ -75,15 +75,15 @@ struct VPageIndicatorInfinite: View {
 
     // MARK: Widths
     private var visibleWidth: CGFloat {
-        let dots: CGFloat = .init(visible) * model.layout.dotDimension
-        let spacings: CGFloat = .init(visible - 1) * model.layout.spacing
+        let dots: CGFloat = .init(visible) * uiModel.layout.dotDimension
+        let spacings: CGFloat = .init(visible - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
     
     private var totalWidth: CGFloat {
-        let dots: CGFloat = .init(total) * model.layout.dotDimension
-        let spacings: CGFloat = .init(total - 1) * model.layout.spacing
+        let dots: CGFloat = .init(total) * uiModel.layout.dotDimension
+        let spacings: CGFloat = .init(total - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
@@ -97,7 +97,7 @@ struct VPageIndicatorInfinite: View {
             return rawOffset
         
         case .center:
-            let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (model.layout.dotDimension + model.layout.spacing)
+            let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (uiModel.layout.dotDimension + uiModel.layout.spacing)
             return rawOffset + incrementalOffset
         
         case .rightEdge:
@@ -157,7 +157,7 @@ struct VPageIndicatorInfinite: View {
     }
     
     private func leftEdgeRightSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = model.layout.infiniteEdgeDotScale / .init(side)
+        let scaleStep: CGFloat = uiModel.layout.infiniteEdgeDotScale / .init(side)
         let incrementalScale: CGFloat = .init(index + 1) * scaleStep
         return 1 - incrementalScale
     }
@@ -202,8 +202,8 @@ struct VPageIndicatorInfinite: View {
     }
     
     private func rightEdgeLeftSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = model.layout.infiniteEdgeDotScale / .init(side)
-        let incrementalScale: CGFloat = model.layout.infiniteEdgeDotScale + .init(index) * scaleStep
+        let scaleStep: CGFloat = uiModel.layout.infiniteEdgeDotScale / .init(side)
+        let incrementalScale: CGFloat = uiModel.layout.infiniteEdgeDotScale + .init(index) * scaleStep
         return incrementalScale
     }
 
@@ -236,7 +236,7 @@ extension Int {
 struct VPageIndicatorInfinite_Previews: PreviewProvider {
     static var previews: some View {
         VPageIndicatorInfinite(
-            model: .init(),
+            uiModel: .init(),
             visible: 7,
             center: 3,
             total: 20,

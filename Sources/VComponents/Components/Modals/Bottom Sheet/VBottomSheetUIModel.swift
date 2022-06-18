@@ -1,5 +1,5 @@
 //
-//  VBottomSheetModel.swift
+//  VBottomSheetUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/21/21.
@@ -8,13 +8,13 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Bottom Sheet Model
+// MARK: - V Bottom Sheet UI Model
 /// Model that describes UI.
-public struct VBottomSheetModel {
+public struct VBottomSheetUIModel {
     // MARK: Properties
-    fileprivate static let sheetReference: VSheetModel = .init()
-    fileprivate static let modalReference: VModalModel = .init()
-    fileprivate static let closeButtonReference: VCloseButtonModel = .init()
+    fileprivate static let sheetReference: VSheetUIModel = .init()
+    fileprivate static let modalReference: VModalUIModel = .init()
+    fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -32,7 +32,7 @@ public struct VBottomSheetModel {
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -357,29 +357,29 @@ public struct VBottomSheetModel {
     }
     
     // MARK: Sub-Models
-    var sheetModel: VSheetModel {
-        var model: VSheetModel = .init()
+    var sheetModel: VSheetUIModel {
+        var uiModel: VSheetUIModel = .init()
         
-        model.layout.roundedCorners = [.topLeft, .topRight]
-        model.layout.cornerRadius = layout.cornerRadius
-        model.layout.contentMargin = 0
+        uiModel.layout.roundedCorners = [.topLeft, .topRight]
+        uiModel.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.contentMargin = 0
         
-        model.colors.background = colors.background
+        uiModel.colors.background = colors.background
         
-        return model
+        return uiModel
     }
     
-    var closeButtonSubModel: VCloseButtonModel {
-        var model: VCloseButtonModel = .init()
+    var closeButtonSubUIModel: VCloseButtonUIModel {
+        var uiModel: VCloseButtonUIModel = .init()
         
-        model.layout.dimension = layout.closeButtonDimension
-        model.layout.iconDimension = layout.closeButtonIconDimension
-        model.layout.hitBox.horizontal = 0
-        model.layout.hitBox.vertical = 0
+        uiModel.layout.dimension = layout.closeButtonDimension
+        uiModel.layout.iconDimension = layout.closeButtonIconDimension
+        uiModel.layout.hitBox.horizontal = 0
+        uiModel.layout.hitBox.vertical = 0
         
-        model.colors.background = colors.closeButtonBackground
-        model.colors.icon = colors.closeButtonIcon
+        uiModel.colors.background = colors.closeButtonBackground
+        uiModel.colors.icon = colors.closeButtonIcon
         
-        return model
+        return uiModel
     }
 }

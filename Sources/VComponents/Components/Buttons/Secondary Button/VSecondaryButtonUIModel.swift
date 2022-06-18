@@ -1,5 +1,5 @@
 //
-//  VSecondaryButtonModel.swift
+//  VSecondaryButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Secondary Button Model
+// MARK: - V Secondary Button UI Model
 /// Model that describes UI.
-public struct VSecondaryButtonModel {
+public struct VSecondaryButtonUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
+    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -24,7 +24,7 @@ public struct VSecondaryButtonModel {
     public var fonts: Fonts = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

@@ -8,32 +8,32 @@
 import SwiftUI
 
 // MARK: - V TextField Hightlight
-extension VTextFieldModel {
+extension VTextFieldUIModel {
     /// Model that applies green color scheme.
-    public static var success: VTextFieldModel {
-        var model: VTextFieldModel = .init()
-        model.colors = .success
-        return model
+    public static var success: VTextFieldUIModel {
+        var uiModel: VTextFieldUIModel = .init()
+        uiModel.colors = .success
+        return uiModel
     }
 
     /// Model that applies yellow color scheme.
-    public static var warning: VTextFieldModel {
-        var model: VTextFieldModel = .init()
-        model.colors = .warning
-        return model
+    public static var warning: VTextFieldUIModel {
+        var uiModel: VTextFieldUIModel = .init()
+        uiModel.colors = .warning
+        return uiModel
     }
 
     /// Model that applies error color scheme.
-    public static var error: VTextFieldModel {
-        var model: VTextFieldModel = .init()
-        model.colors = .error
-        return model
+    public static var error: VTextFieldUIModel {
+        var uiModel: VTextFieldUIModel = .init()
+        uiModel.colors = .error
+        return uiModel
     }
 }
 
-extension VTextFieldModel.Colors {
+extension VTextFieldUIModel.Colors {
     /// Model that applies green color scheme.
-    public static let success: VTextFieldModel.Colors = .createHighlightedColors(
+    public static let success: VTextFieldUIModel.Colors = .createHighlightedColors(
         backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
         backgroundFocused: .init(componentAsset: "TextField.Success.Background.enabled"),
         enabled: .init(componentAsset: "TextField.Success.Foreground.enabled"),
@@ -41,7 +41,7 @@ extension VTextFieldModel.Colors {
     )
 
     /// Model that applies yellow color scheme.
-    public static let warning: VTextFieldModel.Colors = .createHighlightedColors(
+    public static let warning: VTextFieldUIModel.Colors = .createHighlightedColors(
         backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
         backgroundFocused: .init(componentAsset: "TextField.Warning.Background.enabled"),
         enabled: .init(componentAsset: "TextField.Warning.Foreground.enabled"),
@@ -49,7 +49,7 @@ extension VTextFieldModel.Colors {
     )
 
     /// Model that applies error color scheme.
-    public static let error: VTextFieldModel.Colors = .createHighlightedColors(
+    public static let error: VTextFieldUIModel.Colors = .createHighlightedColors(
         backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
         backgroundFocused: .init(componentAsset: "TextField.Error.Background.enabled"),
         enabled: .init(componentAsset: "TextField.Error.Foreground.enabled"),
@@ -61,8 +61,8 @@ extension VTextFieldModel.Colors {
         backgroundFocused: Color,
         enabled: Color,
         focused: Color
-    ) -> VTextFieldModel.Colors {
-        var colors: VTextFieldModel.Colors = .init()
+    ) -> VTextFieldUIModel.Colors {
+        var colors: VTextFieldUIModel.Colors = .init()
         
         colors.background.enabled = backgroundEnabled
         colors.background.focused = backgroundFocused

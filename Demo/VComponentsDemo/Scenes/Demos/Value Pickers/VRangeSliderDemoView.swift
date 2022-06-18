@@ -20,7 +20,7 @@ struct VRangeSliderDemoView: View {
     @State private var hasStep: Bool = false
     @State private var stepValue: Double = 0.1
     @State private var diffValue: Double = 0.1
-    @State private var progressAnimation: Bool = VRangeSliderModel.Animations().progress != nil
+    @State private var progressAnimation: Bool = VRangeSliderUIModel.Animations().progress != nil
     
     private let minDiffValue: Double = 0.1
     private let maxDiffValue: Double = 0.25
@@ -28,33 +28,33 @@ struct VRangeSliderDemoView: View {
     private let minStepValue: Double = 0.1
     private let maxStepValue: Double = 0.25
     
-    private var model: VRangeSliderModel {
-        let defaultModel: VRangeSliderModel = .init()
+    private var uiModel: VRangeSliderUIModel {
+        let defaultUIModel: VRangeSliderUIModel = .init()
         
-        var model: VRangeSliderModel = .init()
+        var uiModel: VRangeSliderUIModel = .init()
         
         switch thumbType {
         case .standard:
             break
         
         case .bordered:
-            model.layout.thumbBorderWidth = 1
-            model.layout.thumbShadowRadius = 0
+            uiModel.layout.thumbBorderWidth = 1
+            uiModel.layout.thumbShadowRadius = 0
 
-            model.colors.thumbBorder = .init(
+            uiModel.colors.thumbBorder = .init(
                 enabled: .black,
                 disabled: .gray
             )
 
-            model.colors.thumbShadow = .init(
+            uiModel.colors.thumbShadow = .init(
                 enabled: .clear,
                 disabled: .clear
             )
         }
         
-        model.animations.progress = progressAnimation ? (defaultModel.animations.progress == nil ? .default : defaultModel.animations.progress) : nil
+        uiModel.animations.progress = progressAnimation ? (defaultUIModel.animations.progress == nil ? .default : defaultUIModel.animations.progress) : nil
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -68,7 +68,7 @@ struct VRangeSliderDemoView: View {
             title: "\(String(format: "%.2f", valueLow)) - \(String(format: "%.2f", valueHigh))",
             content: {
                 VRangeSlider(
-                    model: model,
+                    uiModel: uiModel,
                     difference: diffValue,
                     step: hasStep ? stepValue : nil,
                     valueLow: $valueLow,

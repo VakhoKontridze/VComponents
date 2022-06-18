@@ -1,5 +1,5 @@
 //
-//  VRadioButtonModel.swift
+//  VRadioButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/19/21.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK: - V Radio Button Model
+// MARK: - V Radio Button UI Model
 /// Model that describes UI.
-public struct VRadioButtonModel {
+public struct VRadioButtonUIModel {
     // MARK: Properties
-    fileprivate static let toggleRefrence: VToggleModel = .init()
-    fileprivate static let checkBoxReference: VCheckBoxModel = .init()
+    fileprivate static let toggleRefrence: VToggleUIModel = .init()
+    fileprivate static let checkBoxReference: VCheckBoxUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -30,7 +30,7 @@ public struct VRadioButtonModel {
     public var misc: Misc = .init()
 
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

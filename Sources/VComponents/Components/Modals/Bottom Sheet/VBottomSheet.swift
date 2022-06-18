@@ -18,7 +18,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
-    private let model: VBottomSheetModel
+    private let uiModel: VBottomSheetUIModel
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -26,9 +26,9 @@ struct VBottomSheet<HeaderLabel, Content>: View
     private let headerLabel: VBottomSheetHeaderLabel<HeaderLabel>
     private let content: () -> Content
     
-    private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
-    private var hasGrabber: Bool { model.misc.dismissType.contains(.pullDown) || model.layout.sizes._current.size.heights.isResizable }
-    private var hasDivider: Bool { hasHeader && model.layout.dividerHeight > 0 }
+    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
+    private var hasGrabber: Bool { uiModel.misc.dismissType.contains(.pullDown) || uiModel.layout.sizes._current.size.heights.isResizable }
+    private var hasDivider: Bool { hasHeader && uiModel.layout.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
     
@@ -40,19 +40,19 @@ struct VBottomSheet<HeaderLabel, Content>: View
 
     // MARK: Initializers
     init(
-        model: VBottomSheetModel,
+        uiModel: VBottomSheetUIModel,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         headerLabel: VBottomSheetHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.headerLabel = headerLabel
         self.content = content
         
-        _offset = .init(initialValue: model.layout.sizes._current.size.heights.idealOffset)
+        _offset = .init(initialValue: uiModel.layout.sizes._current.size.heights.idealOffset)
     }
 
     // MARK: Body
@@ -72,26 +72,26 @@ struct VBottomSheet<HeaderLabel, Content>: View
     }
     
     private var dimmingView: some View {
-        model.colors.dimmingView
+        uiModel.colors.dimmingView
             .ignoresSafeArea()
             .onTapGesture(perform: {
-                if model.misc.dismissType.contains(.backTap) { animateOut() }
+                if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
             })
     }
     
     private var bottomSheet: some View {
         ZStack(content: {
-            VSheet(model: model.sheetModel)
+            VSheet(uiModel: uiModel.sheetModel)
                 .shadow(
-                    color: model.colors.shadow,
-                    radius: model.colors.shadowRadius,
-                    x: model.colors.shadowOffset.width,
-                    y: model.colors.shadowOffset.height
+                    color: uiModel.colors.shadow,
+                    radius: uiModel.colors.shadowRadius,
+                    x: uiModel.colors.shadowOffset.width,
+                    y: uiModel.colors.shadowOffset.height
                 )
-                .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
+                .if(!uiModel.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                     $0
-                        .frame(height: model.layout.sizes._current.size.heights.max)
-                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.hiddenOffset)
+                        .frame(height: uiModel.layout.sizes._current.size.heights.max)
+                        .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
                         .gesture(
                             DragGesture(minimumDistance: 0)
                                 .onChanged(dragChanged)
@@ -110,17 +110,17 @@ struct VBottomSheet<HeaderLabel, Content>: View
                 contentView
             })
                 .frame(maxHeight: .infinity, alignment: .top)
-                .if(!model.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
+                .if(!uiModel.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
                     $0
-                        .frame(height: model.layout.sizes._current.size.heights.max)
-                        .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.hiddenOffset)
+                        .frame(height: uiModel.layout.sizes._current.size.heights.max)
+                        .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
                 })
         })
-            .frame(width: model.layout.sizes._current.size.width)
-            .if(model.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
+            .frame(width: uiModel.layout.sizes._current.size.width)
+            .if(uiModel.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
                 $0
-                    .frame(height: model.layout.sizes._current.size.heights.max)
-                    .offset(y: isInternallyPresented ? offset : model.layout.sizes._current.size.heights.hiddenOffset)
+                    .frame(height: uiModel.layout.sizes._current.size.heights.max)
+                    .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged(dragChanged)
@@ -128,25 +128,25 @@ struct VBottomSheet<HeaderLabel, Content>: View
                     )
             })
             .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
     }
 
     @ViewBuilder private var grabber: some View {
         if hasGrabber {
-            RoundedRectangle(cornerRadius: model.layout.grabberCornerRadius)
-                .frame(size: model.layout.grabberSize)
-                .padding(model.layout.grabberMargins)
-                .foregroundColor(model.colors.grabber)
+            RoundedRectangle(cornerRadius: uiModel.layout.grabberCornerRadius)
+                .frame(size: uiModel.layout.grabberSize)
+                .padding(uiModel.layout.grabberMargins)
+                .foregroundColor(uiModel.colors.grabber)
         }
     }
 
     @ViewBuilder private var header: some View {
         if hasHeader {
-            HStack(alignment: model.layout.headerAlignment, spacing: model.layout.labelCloseButtonSpacing, content: {
+            HStack(alignment: uiModel.layout.headerAlignment, spacing: uiModel.layout.labelCloseButtonSpacing, content: {
                 Group(content: {
-                    if model.misc.dismissType.contains(.leadingButton) {
+                    if uiModel.misc.dismissType.contains(.leadingButton) {
                         closeButton
-                    } else if model.misc.dismissType.contains(.trailingButton) {
+                    } else if uiModel.misc.dismissType.contains(.trailingButton) {
                         closeButtonCompensator
                     }
                 })
@@ -159,8 +159,8 @@ struct VBottomSheet<HeaderLabel, Content>: View
                         
                     case .title(let title):
                         VText(
-                            color: model.colors.headerTitle,
-                            font: model.fonts.header,
+                            color: uiModel.colors.headerTitle,
+                            font: uiModel.fonts.header,
                             text: title
                         )
                         
@@ -171,41 +171,41 @@ struct VBottomSheet<HeaderLabel, Content>: View
                     .layoutPriority(1)
 
                 Group(content: {
-                    if model.misc.dismissType.contains(.trailingButton) {
+                    if uiModel.misc.dismissType.contains(.trailingButton) {
                         closeButton
-                    } else if model.misc.dismissType.contains(.leadingButton) {
+                    } else if uiModel.misc.dismissType.contains(.leadingButton) {
                         closeButtonCompensator
                     }
                 })
                     .frame(maxWidth: .infinity, alignment: .trailing)
             })
-                .padding(model.layout.headerMargins)
+                .padding(uiModel.layout.headerMargins)
         }
     }
 
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
-                .frame(height: model.layout.dividerHeight)
-                .padding(model.layout.dividerMargins)
-                .foregroundColor(model.colors.divider)
+                .frame(height: uiModel.layout.dividerHeight)
+                .padding(uiModel.layout.dividerMargins)
+                .foregroundColor(uiModel.colors.divider)
         }
     }
 
     private var contentView: some View {
         ZStack(content: {
-            if !model.misc.isContentDraggable {
+            if !uiModel.misc.isContentDraggable {
                 Color.clear
                     .contentShape(Rectangle())
             }
             
             content()
-                .padding(model.layout.contentMargins)
+                .padding(uiModel.layout.contentMargins)
         })
-            .safeAreaMarginInsets(edges: model.layout.contentSafeAreaEdges)
+            .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
             .frame(maxWidth: .infinity)
             .if(
-                model.layout.autoresizesContent && model.layout.sizes._current.size.heights.isResizable,
+                uiModel.layout.autoresizesContent && uiModel.layout.sizes._current.size.heights.isResizable,
                 ifTransform: { $0.frame(height: UIScreen.main.bounds.height - offset - headerDividerHeight) },
                 elseTransform: { $0.frame(maxHeight: .infinity) }
             )
@@ -213,20 +213,20 @@ struct VBottomSheet<HeaderLabel, Content>: View
 
     private var closeButton: some View {
         VSquareButton.close(
-            model: model.closeButtonSubModel,
+            uiModel: uiModel.closeButtonSubUIModel,
             action: animateOut
         )
     }
     
     private var closeButtonCompensator: some View {
         Spacer()
-            .frame(width: model.layout.closeButtonDimension)
+            .frame(width: uiModel.layout.closeButtonDimension)
     }
 
     // MARK: Animation
     private func animateIn() {
         withBasicAnimation(
-            model.animations.appear,
+            uiModel.animations.appear,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -236,7 +236,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
 
     private func animateOut() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -247,7 +247,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
 
     private func animateOutFromDrag() {
         withBasicAnimation(
-            model.animations.pullDownDismiss,
+            uiModel.animations.pullDownDismiss,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -258,7 +258,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()
@@ -280,12 +280,12 @@ struct VBottomSheet<HeaderLabel, Content>: View
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             offset = {
                 switch newOffset {
-                case ...model.layout.sizes._current.size.heights.maxOffset:
-                    return model.layout.sizes._current.size.heights.maxOffset
+                case ...uiModel.layout.sizes._current.size.heights.maxOffset:
+                    return uiModel.layout.sizes._current.size.heights.maxOffset
                     
-                case model.layout.sizes._current.size.heights.minOffset...:
-                    switch model.misc.dismissType.contains(.pullDown) {
-                    case false: return model.layout.sizes._current.size.heights.minOffset
+                case uiModel.layout.sizes._current.size.heights.minOffset...:
+                    switch uiModel.misc.dismissType.contains(.pullDown) {
+                    case false: return uiModel.layout.sizes._current.size.heights.minOffset
                     case true: return newOffset
                     }
                     
@@ -305,16 +305,16 @@ struct VBottomSheet<HeaderLabel, Content>: View
         
         let velocityExceedsNextAreaSnapThreshold: Bool =
             abs(dragValue.velocity(inRelationTo: previousDragValue).height) >=
-            abs(model.layout.velocityToSnapToNextHeight)
+            abs(uiModel.layout.velocityToSnapToNextHeight)
         
         switch velocityExceedsNextAreaSnapThreshold {
         case false:
             guard let offsetBeforeDrag = offsetBeforeDrag else { return }
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
-                heights: model.layout.sizes._current.size.heights,
-                canPullDownToDismiss: model.misc.dismissType.contains(.pullDown),
-                pullDownDismissDistance: model.layout.pullDownDismissDistance,
+                heights: uiModel.layout.sizes._current.size.heights,
+                canPullDownToDismiss: uiModel.misc.dismissType.contains(.pullDown),
+                pullDownDismissDistance: uiModel.layout.pullDownDismissDistance,
                 offset: offset,
                 offsetBeforeDrag: offsetBeforeDrag,
                 translation: dragValue.translation.height
@@ -322,7 +322,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
             
         case true:
             animateOffsetOrPullDismissFromSnapAction(.dragEndedHighVelocitySnapAction(
-                heights: model.layout.sizes._current.size.heights,
+                heights: uiModel.layout.sizes._current.size.heights,
                 offset: offset,
                 velocity: dragValue.velocity(inRelationTo: previousDragValue).height
             ))
@@ -332,13 +332,13 @@ struct VBottomSheet<HeaderLabel, Content>: View
     private func animateOffsetOrPullDismissFromSnapAction(_ snapAction: VBottomSheetSnapAction) {
         switch snapAction {
         case .dismiss: animateOutFromDrag()
-        case .snap(let newOffset): withAnimation(model.animations.heightSnap, { offset = newOffset })
+        case .snap(let newOffset): withAnimation(uiModel.animations.heightSnap, { offset = newOffset })
         }
     }
     
     // MARK: Orientation
     private func resetHeightFromOrientationChange() {
-        offset = model.layout.sizes._current.size.heights.idealOffset
+        offset = uiModel.layout.sizes._current.size.heights.idealOffset
     }
 }
 
@@ -352,11 +352,11 @@ struct VBottomSheet_Previews: PreviewProvider {
             title: "Present"
         )
             .vBottomSheet(
-                model: {
-                    var model: VBottomSheetModel = .init()
-                    model.layout.autoresizesContent = true
-                    model.layout.contentSafeAreaEdges.insert(.bottom)
-                    return model
+                uiModel: {
+                    var uiModel: VBottomSheetUIModel = .init()
+                    uiModel.layout.autoresizesContent = true
+                    uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+                    return uiModel
                 }(),
                 isPresented: $isPresented,
                 headerTitle: "Lorem Ipsum Dolor Sit Amet",

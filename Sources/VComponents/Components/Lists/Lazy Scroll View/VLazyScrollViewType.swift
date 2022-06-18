@@ -22,19 +22,19 @@ public struct VLazyScrollViewType {
     
     /// Vertical layout.
     public static func vertical(
-        model: VLazyScrollViewVerticalModel = .init()
+        uiModel: VLazyScrollViewVerticalUIModel = .init()
     ) -> Self {
         .init(lazyScrollViewType: .vertical(
-            model: model
+            uiModel: uiModel
         ))
     }
     
     /// Horizontal layout.
     public static func horizontal(
-        model: VLazyScrollViewHorizontalModel = .init()
+        uiModel: VLazyScrollViewHorizontalUIModel = .init()
     ) -> Self {
         .init(lazyScrollViewType: .horizontal(
-            model: model
+            uiModel: uiModel
         ))
     }
     
@@ -44,6 +44,6 @@ public struct VLazyScrollViewType {
 
 // MARK: - V Lazy Scroll View Type
 enum _VLazyScrollViewType {
-    case vertical(model: VLazyScrollViewVerticalModel)
-    case horizontal(model: VLazyScrollViewHorizontalModel)
+    case vertical(uiModel: VLazyScrollViewVerticalUIModel)
+    case horizontal(uiModel: VLazyScrollViewHorizontalUIModel)
 }

@@ -15,24 +15,24 @@ struct VModalDemoView: View {
     static var navBarTitle: String { "Modal" }
     
     @State private var isPresented: Bool = false
-    @State private var dismissType: VModalModel.Misc.DismissType = .default
+    @State private var dismissType: VModalUIModel.Misc.DismissType = .default
     @State private var hasTitle: Bool = true
-    @State private var hasDivider: Bool = VModalModel.Layout().dividerHeight > 0
+    @State private var hasDivider: Bool = VModalUIModel.Layout().dividerHeight > 0
     
-    private var model: VModalModel {
-        var model: VModalModel = .init()
+    private var uiModel: VModalUIModel {
+        var uiModel: VModalUIModel = .init()
         
         if !hasDivider && (hasTitle || dismissType.hasButton) {
-            model.layout.headerMargins.bottom /= 2
-            model.layout.contentMargins.top /= 2
+            uiModel.layout.headerMargins.bottom /= 2
+            uiModel.layout.contentMargins.top /= 2
         }
         
-        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
-        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
+        uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
+        uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
         
-        model.misc.dismissType = dismissType
+        uiModel.misc.dismissType = dismissType
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -50,7 +50,7 @@ struct VModalDemoView: View {
                 ifTransform: {
                     $0
                         .vModal(
-                            model: model,
+                            uiModel: uiModel,
                             isPresented: $isPresented,
                             headerTitle: "Lorem Ipsum Dolor Sit Amet",
                             content: { modalContent }
@@ -58,7 +58,7 @@ struct VModalDemoView: View {
                 }, elseTransform: {
                     $0
                         .vModal(
-                            model: model,
+                            uiModel: uiModel,
                             isPresented: $isPresented,
                             content: { modalContent }
                         )
@@ -75,7 +75,7 @@ struct VModalDemoView: View {
             
             ScrollView(.horizontal, showsIndicators: false, content: {
                 HStack(content: {
-                    ForEach(VModalModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
+                    ForEach(VModalUIModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
                         dismissTypeView(position)
                     })
                 })
@@ -86,12 +86,12 @@ struct VModalDemoView: View {
         ToggleSettingView(isOn: $hasDivider, title: "Divider")
     }
     
-    private func dismissTypeView(_ position: VModalModel.Misc.DismissType) -> some View {
+    private func dismissTypeView(_ position: VModalUIModel.Misc.DismissType) -> some View {
         VCheckBox(
-            model: {
-                var model: VCheckBoxModel = .init()
-                model.layout.titleLineLimit = 1
-                return model
+            uiModel: {
+                var uiModel: VCheckBoxUIModel = .init()
+                uiModel.layout.titleLineLimit = 1
+                return uiModel
             }(),
             isOn: .init(
                 get: { dismissType.contains(position) },
@@ -121,7 +121,7 @@ struct VModalDemoView: View {
 }
 
 // MARK: - Helpers
-extension VModalModel.Misc.DismissType {
+extension VModalUIModel.Misc.DismissType {
     fileprivate var title: String {
         switch self {
         case .leadingButton: return "Leading"

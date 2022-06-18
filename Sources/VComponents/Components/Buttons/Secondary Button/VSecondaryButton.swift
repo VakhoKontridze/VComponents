@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component can be initialized with title, icon and title, and label.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 ///     var body: some View {
 ///         VSecondaryButton(
@@ -23,7 +23,7 @@ import SwiftUI
 ///     
 public struct VSecondaryButton<Label>: View where Label: View {
     // MARK: Properties
-    private let model: VSecondaryButtonModel
+    private let uiModel: VSecondaryButtonUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
@@ -33,43 +33,43 @@ public struct VSecondaryButton<Label>: View where Label: View {
     
     private let label: VSecondaryButtonLabel<Label>
     
-    private var hasBorder: Bool { model.layout.borderWidth > 0 }
+    private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
 
     // MARK: Initializers
     /// Initializes component with action and title.
     public init(
-        model: VSecondaryButtonModel = .init(),
+        uiModel: VSecondaryButtonUIModel = .init(),
         action: @escaping () -> Void,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.label = .title(title: title)
     }
     
     /// Initializes component with action, icon, and title.
     public init(
-        model: VSecondaryButtonModel = .init(),
+        uiModel: VSecondaryButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.label = .iconTitle(icon: icon, title: title)
     }
     
     /// Initializes component with action and label.
     public init(
-        model: VSecondaryButtonModel = .init(),
+        uiModel: VSecondaryButtonUIModel = .init(),
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.label = .custom(label: label)
     }
@@ -78,10 +78,10 @@ public struct VSecondaryButton<Label>: View where Label: View {
     public var body: some View {
         VBaseButton(gesture: gestureHandler, label: {
             buttonLabel
-                .frame(height: model.layout.height)
+                .frame(height: uiModel.layout.height)
                 .background(background)
                 .overlay(border)
-                .padding(model.layout.hitBox)
+                .padding(uiModel.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)
     }
@@ -91,44 +91,44 @@ public struct VSecondaryButton<Label>: View where Label: View {
             switch label {
             case .title(let title):
                 VText(
-                    color: model.colors.title.for(internalState),
-                    font: model.fonts.title,
+                    color: uiModel.colors.title.for(internalState),
+                    font: uiModel.fonts.title,
                     text: title
                 )
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: model.layout.iconTitleSpacing, content: {
+                HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
                     icon
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(size: model.layout.iconSize)
-                        .foregroundColor(model.colors.icon.for(internalState))
-                        .opacity(model.colors.iconOpacities.for(internalState))
+                        .frame(size: uiModel.layout.iconSize)
+                        .foregroundColor(uiModel.colors.icon.for(internalState))
+                        .opacity(uiModel.colors.iconOpacities.for(internalState))
                     
                     VText(
-                        color: model.colors.title.for(internalState),
-                        font: model.fonts.title,
+                        color: uiModel.colors.title.for(internalState),
+                        font: uiModel.fonts.title,
                         text: title
                     )
                 })
                 
             case .custom(let label):
                 label()
-                    .opacity(model.colors.customLabelOpacities.for(internalState))
+                    .opacity(uiModel.colors.customLabelOpacities.for(internalState))
             }
         })
-            .padding(model.layout.labelMargins)
+            .padding(uiModel.layout.labelMargins)
     }
     
     private var background: some View {
-        RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-            .foregroundColor(model.colors.background.for(internalState))
+        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+            .foregroundColor(uiModel.colors.background.for(internalState))
     }
     
     @ViewBuilder private var border: some View {
         if hasBorder {
-            RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWidth)
+            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWidth)
         }
     }
 

@@ -15,47 +15,47 @@ struct VBottomSheetDemoView: View {
     static var navBarTitle: String { "Bottom Sheet" }
     
     @State private var isPresented: Bool = false
-    @State private var heightType: VBottomSheetSizeHelper = VBottomSheetModel.Layout().sizes.current!.size.heights.helperType // fatalError
-    @State private var dismissType: VBottomSheetModel.Misc.DismissType = .default
-    @State private var hasGrabber: Bool = VBottomSheetModel.Layout().grabberSize.height > 0
+    @State private var heightType: VBottomSheetSizeHelper = VBottomSheetUIModel.Layout().sizes.current!.size.heights.helperType // fatalError
+    @State private var dismissType: VBottomSheetUIModel.Misc.DismissType = .default
+    @State private var hasGrabber: Bool = VBottomSheetUIModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
-    @State private var hasDivider: Bool = VBottomSheetModel.Layout().dividerHeight > 0
-    @State private var isContentDraggable: Bool = VBottomSheetModel.Misc().isContentDraggable
-    @State private var autoresizesContent: Bool = VBottomSheetModel.Layout().autoresizesContent
+    @State private var hasDivider: Bool = VBottomSheetUIModel.Layout().dividerHeight > 0
+    @State private var isContentDraggable: Bool = VBottomSheetUIModel.Misc().isContentDraggable
+    @State private var autoresizesContent: Bool = VBottomSheetUIModel.Layout().autoresizesContent
     
-    private var model: VBottomSheetModel {
-        var model: VBottomSheetModel = .init()
+    private var uiModel: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
         
         if heightType == .fixed {
-            model.layout.sizes = .init( // Assumes that relative is default
+            uiModel.layout.sizes = .init( // Assumes that relative is default
                 portrait: .point(.init(
-                    width: model.layout.sizes.portrait.size.width,
-                    heights: .fixed(model.layout.sizes.portrait.size.heights.ideal)
+                    width: uiModel.layout.sizes.portrait.size.width,
+                    heights: .fixed(uiModel.layout.sizes.portrait.size.heights.ideal)
                 )),
                 landscape: .point(.init(
-                    width: model.layout.sizes.landscape.size.width,
-                    heights: .fixed(model.layout.sizes.landscape.size.heights.ideal)
+                    width: uiModel.layout.sizes.landscape.size.width,
+                    heights: .fixed(uiModel.layout.sizes.landscape.size.heights.ideal)
                 ))
             )
         }
         
         if !hasDivider && (hasGrabber || hasTitle || dismissType.hasButton) {
-            model.layout.headerMargins.bottom /= 2
-            model.layout.contentMargins.top /= 2
+            uiModel.layout.headerMargins.bottom /= 2
+            uiModel.layout.contentMargins.top /= 2
         }
         
-        model.layout.grabberSize.height = hasGrabber ? (model.layout.grabberSize.height == 0 ? 4 : model.layout.grabberSize.height) : 0
+        uiModel.layout.grabberSize.height = hasGrabber ? (uiModel.layout.grabberSize.height == 0 ? 4 : uiModel.layout.grabberSize.height) : 0
         
-        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
-        model.layout.autoresizesContent = autoresizesContent
-        if autoresizesContent { model.layout.contentSafeAreaEdges.insert(.bottom) }
+        uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
+        uiModel.layout.autoresizesContent = autoresizesContent
+        if autoresizesContent { uiModel.layout.contentSafeAreaEdges.insert(.bottom) }
         
-        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
+        uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
 
-        model.misc.dismissType = dismissType
-        model.misc.isContentDraggable = isContentDraggable
+        uiModel.misc.dismissType = dismissType
+        uiModel.misc.isContentDraggable = isContentDraggable
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -73,7 +73,7 @@ struct VBottomSheetDemoView: View {
                 ifTransform: {
                     $0
                         .vBottomSheet(
-                            model: model,
+                            uiModel: uiModel,
                             isPresented: $isPresented,
                             headerTitle: "Lorem Ipsum Dolor Sit Amet",
                             content: { bottomSheetContent }
@@ -81,7 +81,7 @@ struct VBottomSheetDemoView: View {
                 }, elseTransform: {
                     $0
                         .vBottomSheet(
-                            model: model,
+                            uiModel: uiModel,
                             isPresented: $isPresented,
                             content: { bottomSheetContent }
                         )
@@ -101,7 +101,7 @@ struct VBottomSheetDemoView: View {
 
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     HStack(content: {
-                        ForEach(VBottomSheetModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
+                        ForEach(VBottomSheetUIModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
                             dismissTypeView(position)
                         })
                     })
@@ -139,12 +139,12 @@ struct VBottomSheetDemoView: View {
         })
     }
     
-    private func dismissTypeView(_ position: VBottomSheetModel.Misc.DismissType) -> some View {
+    private func dismissTypeView(_ position: VBottomSheetUIModel.Misc.DismissType) -> some View {
         VCheckBox(
-            model: {
-                var model: VCheckBoxModel = .init()
-                model.layout.titleLineLimit = 1
-                return model
+            uiModel: {
+                var uiModel: VCheckBoxUIModel = .init()
+                uiModel.layout.titleLineLimit = 1
+                return uiModel
             }(),
             isOn: .init(
                 get: { dismissType.contains(position) },
@@ -194,7 +194,7 @@ private enum VBottomSheetSizeHelper: Int, PickableTitledEnumeration {
     }
 }
 
-extension VBottomSheetModel.Layout.BottomSheetHeights {
+extension VBottomSheetUIModel.Layout.BottomSheetHeights {
     fileprivate var helperType: VBottomSheetSizeHelper {
         if isResizable {
             return .dynamic
@@ -204,7 +204,7 @@ extension VBottomSheetModel.Layout.BottomSheetHeights {
     }
 }
 
-extension VBottomSheetModel.Misc.DismissType {
+extension VBottomSheetUIModel.Misc.DismissType {
     fileprivate var title: String {
         switch self {
         case .leadingButton: return "Leading"

@@ -1,5 +1,5 @@
 //
-//  VToastModel.swift
+//  VToastUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/7/21.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Toast Model
+// MARK: - V Toast UI Model
 /// Model that describes UI.
-public struct VToastModel {
+public struct VToastUIModel {
     // MARK: Properties
-    fileprivate static let textFieldReference: VTextFieldModel = .init()
+    fileprivate static let textFieldReference: VTextFieldUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -27,7 +27,7 @@ public struct VToastModel {
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

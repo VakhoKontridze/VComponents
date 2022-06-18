@@ -15,22 +15,22 @@ struct VPlainButtonDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var labelType: VPlainButtonLabel = .title
-    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VPlainButtonModel.Layout().hitBox.horizontal)
+    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VPlainButtonUIModel.Layout().hitBox.horizontal)
     
-    private var model: VPlainButtonModel {
-        let defaultModel: VPlainButtonModel = .init()
+    private var uiModel: VPlainButtonUIModel {
+        let defaultUIModel: VPlainButtonUIModel = .init()
         
-        var model: VPlainButtonModel = .init()
+        var uiModel: VPlainButtonUIModel = .init()
         
-        model.layout.hitBox.horizontal = {
+        uiModel.layout.hitBox.horizontal = {
             switch hitBoxType {
             case .clipped: return 0
-            case .extended: return defaultModel.layout.hitBox.horizontal == 0 ? 5 : defaultModel.layout.hitBox.horizontal
+            case .extended: return defaultUIModel.layout.hitBox.horizontal == 0 ? 5 : defaultUIModel.layout.hitBox.horizontal
             }
         }()
-        model.layout.hitBox.vertical = model.layout.hitBox.horizontal
+        uiModel.layout.hitBox.vertical = uiModel.layout.hitBox.horizontal
 
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -42,10 +42,10 @@ struct VPlainButtonDemoView: View {
     private func component() -> some View {
         Group(content: {
             switch labelType {
-            case .title: VPlainButton(model: model, action: {}, title: buttonTitle)
-            case .icon: VPlainButton(model: model, action: {}, icon: buttonIcon)
-            case .iconTitle: VPlainButton(model: model, action: {}, icon: buttonIcon, title: buttonTitle)
-            case .custom: VPlainButton(model: model, action: {}, label: { buttonIcon })
+            case .title: VPlainButton(uiModel: uiModel, action: {}, title: buttonTitle)
+            case .icon: VPlainButton(uiModel: uiModel, action: {}, icon: buttonIcon)
+            case .iconTitle: VPlainButton(uiModel: uiModel, action: {}, icon: buttonIcon, title: buttonTitle)
+            case .custom: VPlainButton(uiModel: uiModel, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)

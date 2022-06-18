@@ -1,5 +1,5 @@
 //
-//  VCheckBoxModel.swift
+//  VCheckBoxUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/18/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V CheckBox Model
+// MARK: - V CheckBox UI Model
 /// Model that describes UI.
-public struct VCheckBoxModel {
+public struct VCheckBoxUIModel {
     // MARK: Properties
-    fileprivate static let toggleReference: VToggleModel = .init()
+    fileprivate static let toggleReference: VToggleUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -29,7 +29,7 @@ public struct VCheckBoxModel {
     public var misc: Misc = .init()
 
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

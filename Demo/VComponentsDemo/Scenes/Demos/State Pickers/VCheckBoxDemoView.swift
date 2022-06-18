@@ -17,27 +17,27 @@ struct VCheckBoxDemoView: View {
     @State private var isEnabled: Bool = true
     @State private var state: VCheckBoxState = .off
     @State private var labelType: VCheckBoxLabel = .title
-    @State private var hitBoxType: VCheckBoxHitBox = .init(value: VCheckBoxModel.Layout().hitBox)
-    @State private var labelIsClickable: Bool = VCheckBoxModel.Misc().labelIsClickable
+    @State private var hitBoxType: VCheckBoxHitBox = .init(value: VCheckBoxUIModel.Layout().hitBox)
+    @State private var labelIsClickable: Bool = VCheckBoxUIModel.Misc().labelIsClickable
     
-    private var model: VCheckBoxModel {
-        let defaultModel: VCheckBoxModel = .init()
+    private var uiModel: VCheckBoxUIModel {
+        let defaultUIModel: VCheckBoxUIModel = .init()
         
-        var model: VCheckBoxModel = .init()
+        var uiModel: VCheckBoxUIModel = .init()
         
-        model.layout.hitBox = {
+        uiModel.layout.hitBox = {
             switch hitBoxType {
             case .clipped: return 0
-            case .extended: return defaultModel.layout.hitBox == 0 ? 5 : defaultModel.layout.hitBox
+            case .extended: return defaultUIModel.layout.hitBox == 0 ? 5 : defaultUIModel.layout.hitBox
             }
         }()
         if hitBoxType == .clipped {
-            model.layout.checkBoxLabelSpacing = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            uiModel.layout.checkBoxLabelSpacing = defaultUIModel.layout.hitBox.isZero ? 5 : defaultUIModel.layout.hitBox
         }
         
-        model.misc.labelIsClickable = labelIsClickable
+        uiModel.misc.labelIsClickable = labelIsClickable
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -50,9 +50,9 @@ struct VCheckBoxDemoView: View {
     private func component() -> some View {
         Group(content: {
             switch labelType {
-            case .empty: VCheckBox(model: model, state: $state)
-            case .title: VCheckBox(model: model, state: $state, title: checkBoxTitle)
-            case .custom: VCheckBox(model: model, state: $state, label: { checkBoxIcon })
+            case .empty: VCheckBox(uiModel: uiModel, state: $state)
+            case .title: VCheckBox(uiModel: uiModel, state: $state, title: checkBoxTitle)
+            case .custom: VCheckBox(uiModel: uiModel, state: $state, label: { checkBoxIcon })
             }
         })
             .disabled(!isEnabled)

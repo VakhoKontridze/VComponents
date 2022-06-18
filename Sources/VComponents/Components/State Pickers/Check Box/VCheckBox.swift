@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component can be initialized without label, with title, or label.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 /// `Bool` can also be passed as state.
 ///
@@ -27,7 +27,7 @@ import SwiftUI
 ///
 public struct VCheckBox<Label>: View where Label: View {
     // MARK: Properties
-    private let model: VCheckBoxModel
+    private let uiModel: VCheckBoxUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
@@ -36,41 +36,41 @@ public struct VCheckBox<Label>: View where Label: View {
     
     private let label: VCheckBoxLabel<Label>
     
-    private var labelIsEnabled: Bool { model.misc.labelIsClickable && internalState.isEnabled }
+    private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
     /// Initializes component with state.
     public init(
-        model: VCheckBoxModel = .init(),
+        uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .empty
     }
     
     /// Initializes component with state and title.
     public init(
-        model: VCheckBoxModel = .init(),
+        uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .title(title: title)
     }
     
     /// Initializes component with state and label.
     public init(
-        model: VCheckBoxModel = .init(),
+        uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .custom(label: label)
     }
@@ -78,36 +78,36 @@ public struct VCheckBox<Label>: View where Label: View {
     // MARK: Initializers - Bool
     /// Initializes component with `Bool`.
     public init(
-        model: VCheckBoxModel = .init(),
+        uiModel: VCheckBoxUIModel = .init(),
         isOn: Binding<Bool>
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .empty
     }
     
     /// Initializes component with `Bool` and title.
     public init(
-        model: VCheckBoxModel = .init(),
+        uiModel: VCheckBoxUIModel = .init(),
         isOn: Binding<Bool>,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .title(title: title)
     }
     
     /// Initializes component with `Bool` and label.
     public init(
-        model: VCheckBoxModel = .init(),
+        uiModel: VCheckBoxUIModel = .init(),
         isOn: Binding<Bool>,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .custom(label: label)
     }
@@ -127,9 +127,9 @@ public struct VCheckBox<Label>: View where Label: View {
 
                     VBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: .multiLine(alignment: .leading, lineLimit: model.layout.titleLineLimit),
-                            color: model.colors.title.for(internalState),
-                            font: model.fonts.title,
+                            type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
+                            color: uiModel.colors.title.for(internalState),
+                            font: uiModel.fonts.title,
                             text: title
                         )
                     })
@@ -144,33 +144,33 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     VBaseButton(gesture: gestureHandler, label: {
                         label()
-                            .opacity(model.colors.customLabelOpacities.for(internalState))
+                            .opacity(uiModel.colors.customLabelOpacities.for(internalState))
                     })
                         .disabled(!labelIsEnabled)
                 })
             }
         })
-            .animation(model.animations.stateChange, value: internalState)
+            .animation(uiModel.animations.stateChange, value: internalState)
     }
     
     private var checkBox: some View {
         VBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
-                RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                    .foregroundColor(model.colors.fill.for(internalState))
+                RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                    .foregroundColor(uiModel.colors.fill.for(internalState))
                 
-                RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                    .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
+                RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                    .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWith)
 
                 if let checkMarkIcon = checkMarkIcon {
                     checkMarkIcon
                         .resizable()
-                        .frame(dimension: model.layout.iconDimension)
-                        .foregroundColor(model.colors.checkmark.for(internalState))
+                        .frame(dimension: uiModel.layout.iconDimension)
+                        .foregroundColor(uiModel.colors.checkmark.for(internalState))
                 }
             })
-                .frame(dimension: model.layout.dimension)
-                .padding(model.layout.hitBox)
+                .frame(dimension: uiModel.layout.dimension)
+                .padding(uiModel.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)
     }
@@ -179,7 +179,7 @@ public struct VCheckBox<Label>: View where Label: View {
         VBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.checkBoxLabelSpacing)
+                .frame(width: uiModel.layout.checkBoxLabelSpacing)
                 .foregroundColor(.clear)
         })
             .disabled(!labelIsEnabled)

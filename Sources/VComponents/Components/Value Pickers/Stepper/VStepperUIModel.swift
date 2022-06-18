@@ -1,5 +1,5 @@
 //
-//  VStepperModel.swift
+//  VStepperUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/4/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V Stepper Model
+// MARK: - V Stepper UI Model
 /// Model that describes UI.
-public struct VStepperModel {
+public struct VStepperUIModel {
     // MARK: Properties
-    fileprivate static let segmentedPickerReference: VSegmentedPickerModel = .init()
+    fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -23,7 +23,7 @@ public struct VStepperModel {
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

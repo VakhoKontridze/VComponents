@@ -17,15 +17,15 @@ struct VProgressBarDemoView: View {
     @State private var value: Double = 0.5
     private let timer: AnyPublisher<Date, Never> = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher()
     
-    @State private var useAnimation: Bool = VProgressBarModel.Animations().progress != nil
+    @State private var useAnimation: Bool = VProgressBarUIModel.Animations().progress != nil
     
-    private var model: VProgressBarModel {
-        let defaultModel: VProgressBarModel = .init()
+    private var uiModel: VProgressBarUIModel {
+        let defaultUIModel: VProgressBarUIModel = .init()
         
-        var model: VProgressBarModel = .init()
-        model.animations.progress = useAnimation ? (defaultModel.animations.progress != nil ? defaultModel.animations.progress : .default) : nil
+        var uiModel: VProgressBarUIModel = .init()
+        uiModel.animations.progress = useAnimation ? (defaultUIModel.animations.progress != nil ? defaultUIModel.animations.progress : .default) : nil
         
-        return model
+        return uiModel
     }
 
     // MARK: Body

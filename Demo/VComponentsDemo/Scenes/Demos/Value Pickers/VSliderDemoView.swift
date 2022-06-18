@@ -18,59 +18,59 @@ struct VSliderDemoView: View {
     @State private var thumbType: SliderThumbType = .standard
     @State private var hasStep: Bool = false
     @State private var stepValue: Double = 0.1
-    @State private var progressAnimation: Bool = VSliderModel.Animations().progress != nil
+    @State private var progressAnimation: Bool = VSliderUIModel.Animations().progress != nil
     
     private let minStepValue: Double = 0.1
     private let maxStepValue: Double = 0.25
     
-    private var model: VSliderModel {
-        let defaultModel: VSliderModel = .init()
+    private var uiModel: VSliderUIModel {
+        let defaultUIModel: VSliderUIModel = .init()
         
-        var model: VSliderModel = .init()
+        var uiModel: VSliderUIModel = .init()
         
         switch thumbType {
         case .standard:
             break
         
         case .bordered:
-            model.layout.thumbBorderWidth = 1
-            model.layout.thumbShadowRadius = 0
+            uiModel.layout.thumbBorderWidth = 1
+            uiModel.layout.thumbShadowRadius = 0
 
-            model.colors.thumbBorder = .init(
+            uiModel.colors.thumbBorder = .init(
                 enabled: .black,
                 disabled: .gray
             )
 
-            model.colors.thumbShadow = .init(
+            uiModel.colors.thumbShadow = .init(
                 enabled: .clear,
                 disabled: .clear
             )
         
         case .none:
-            model.layout.thumbDimension = 0
-            model.layout.thumbCornerRadius = 0
-            model.layout.thumbBorderWidth = 0
-            model.layout.thumbShadowRadius = 0
+            uiModel.layout.thumbDimension = 0
+            uiModel.layout.thumbCornerRadius = 0
+            uiModel.layout.thumbBorderWidth = 0
+            uiModel.layout.thumbShadowRadius = 0
 
-            model.colors.thumb = .init(
+            uiModel.colors.thumb = .init(
                 enabled: .clear,
                 disabled: .clear
             )
 
-            model.colors.thumbBorder = .init(
+            uiModel.colors.thumbBorder = .init(
                 enabled: .clear,
                 disabled: .clear
             )
 
-            model.colors.thumbShadow = .init(
+            uiModel.colors.thumbShadow = .init(
                 enabled: .clear,
                 disabled: .clear
             )
         }
         
-        model.animations.progress = progressAnimation ? (defaultModel.animations.progress == nil ? .default : defaultModel.animations.progress) : nil
+        uiModel.animations.progress = progressAnimation ? (defaultUIModel.animations.progress == nil ? .default : defaultUIModel.animations.progress) : nil
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -84,7 +84,7 @@ struct VSliderDemoView: View {
             value: value,
             content: {
                 VSlider(
-                    model: model,
+                    uiModel: uiModel,
                     step: hasStep ? stepValue : nil,
                     value: $value
                 )

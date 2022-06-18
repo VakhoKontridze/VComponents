@@ -1,5 +1,5 @@
 //
-//  VPlainButtonModel.swift
+//  VSquareButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -8,13 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Plain Button Model
+// MARK: - V Square Button UI Model
 /// Model that describes UI.
-public struct VPlainButtonModel {
+public struct VSquareButtonUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
-    fileprivate static let secondaryButtonReference: VSecondaryButtonModel = .init()
-    fileprivate static let squareButtonReference: VSquareButtonModel = .init()
+    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -26,27 +24,38 @@ public struct VPlainButtonModel {
     public var fonts: Fonts = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Button dimension. Defaults to `56`.
+        public var dimension: CGFloat = 56
+        
+        /// Button corner radius. Defaults to `16`.
+        public var cornerRadius: CGFloat = 16
+        
+        /// Button border width. Defaults to `0`.
+        public var borderWidth: CGFloat = 0
+        
+        /// Label margins. Defaults to `3`'s.
+        public var labelMargins: LabelMargins = .init(3)
+        
         /// Icon size. Defaults to `20` by `20`.
-        public var iconSize: CGSize = squareButtonReference.layout.iconSize
+        public var iconSize: CGSize = primaryButtonReference.layout.iconSize
         
-        /// Spacing between icon and title. Defaults to `8`.
-        ///
-        /// Applicable only if icon `init`with icon and title is used.
-        public var iconTitleSpacing: CGFloat = secondaryButtonReference.layout.iconTitleSpacing
-        
-        /// Hit box. Defaults to `5`'s.
-        public var hitBox: HitBox = .init(5)
+        /// Hit box. Defaults to `zero`.
+        public var hitBox: HitBox = .zero
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        // MARK: Label Margins
+        /// Sub-model containing `horizontal` and `vertical` margins.
+        public typealias LabelMargins = EdgeInsets_HV
         
         // MARK: Hit Box
         /// Sub-model containing `horizontal` and `vertical` hit boxes.
@@ -57,21 +66,19 @@ public struct VPlainButtonModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
+        /// Background colors.
+        public var background: StateColors = .init(primaryButtonReference.colors.background)
+        
+        /// Border colors.
+        public var border: StateColors = .init(primaryButtonReference.colors.border)
+        
         /// Title colors.
-        public var title: StateColors = .init(
-            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
-            pressed: primaryButtonReference.colors.background.pressed,
-            disabled: primaryButtonReference.colors.background.disabled
-        )
+        public var title: StateColors = .init(primaryButtonReference.colors.title)
         
         /// Icon opacities.
         ///
         /// Can be used for vector images.
-        public var icon: StateColors = .init(
-            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
-            pressed: primaryButtonReference.colors.background.pressed,
-            disabled: primaryButtonReference.colors.background.disabled
-        )
+        public var icon: StateColors = .init(primaryButtonReference.colors.icon)
         
         /// Icon opacities.
         ///
@@ -102,10 +109,10 @@ public struct VPlainButtonModel {
     /// Sub-model containing font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `15` with `medium` weight.
+        /// Title font. Defaults to system font of size `15` with `semibold` weight.
         ///
         /// Only applicable when using `init`with title.
-        public var title: Font = .system(size: 15, weight: .medium)
+        public var title: Font = .system(size: 15, weight: .semibold)
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

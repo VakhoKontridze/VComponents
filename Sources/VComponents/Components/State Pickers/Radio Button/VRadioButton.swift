@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component can be initialized without label, with title, or label.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 /// `Bool` can also be passed as state.
 ///
@@ -27,7 +27,7 @@ import SwiftUI
 ///     
 public struct VRadioButton<Label>: View where Label: View {
     // MARK: Properties
-    private let model: VRadioButtonModel
+    private let uiModel: VRadioButtonUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
@@ -36,41 +36,41 @@ public struct VRadioButton<Label>: View where Label: View {
     
     private let label: VRadioButtonLabel<Label>
     
-    private var labelIsEnabled: Bool { model.misc.labelIsClickable && internalState.isEnabled }
+    private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
     /// Initializes component with state.
     public init(
-        model: VRadioButtonModel = .init(),
+        uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .empty
     }
     
     /// Initializes component with state and title.
     public init(
-        model: VRadioButtonModel = .init(),
+        uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .title(title: title)
     }
     
     /// Initializes component with state and label.
     public init(
-        model: VRadioButtonModel = .init(),
+        uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.label = .custom(label: label)
     }
@@ -78,36 +78,36 @@ public struct VRadioButton<Label>: View where Label: View {
     // MARK: Initializers - Bool
     /// Initializes component with `Bool`.
     public init(
-        model: VRadioButtonModel = .init(),
+        uiModel: VRadioButtonUIModel = .init(),
         isOn: Binding<Bool>
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .empty
     }
     
     /// Initializes component with `Bool` and title.
     public init(
-        model: VRadioButtonModel = .init(),
+        uiModel: VRadioButtonUIModel = .init(),
         isOn: Binding<Bool>,
         title: String
     )
         where Label == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .title(title: title)
     }
     
     /// Initializes component with `Bool` and label.
     public init(
-        model: VRadioButtonModel = .init(),
+        uiModel: VRadioButtonUIModel = .init(),
         isOn: Binding<Bool>,
         @ViewBuilder label: @escaping () -> Label
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isOn)
         self.label = .custom(label: label)
     }
@@ -127,9 +127,9 @@ public struct VRadioButton<Label>: View where Label: View {
 
                     VBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: .multiLine(alignment: .leading, lineLimit: model.layout.titleLineLimit),
-                            color: model.colors.title.for(internalState),
-                            font: model.fonts.title,
+                            type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
+                            color: uiModel.colors.title.for(internalState),
+                            font: uiModel.fonts.title,
                             text: title
                         )
                     })
@@ -144,32 +144,32 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     VBaseButton(gesture: gestureHandler, label: {
                         label()
-                            .opacity(model.colors.customLabelOpacities.for(internalState))
+                            .opacity(uiModel.colors.customLabelOpacities.for(internalState))
                     })
                         .disabled(!labelIsEnabled)
                 })
             }
         })
-            .animation(model.animations.stateChange, value: internalState)
+            .animation(uiModel.animations.stateChange, value: internalState)
     }
     
     private var radioButton: some View {
         VBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
                 Circle()
-                    .frame(dimension: model.layout.dimension)
-                    .foregroundColor(model.colors.fill.for(internalState))
+                    .frame(dimension: uiModel.layout.dimension)
+                    .foregroundColor(uiModel.colors.fill.for(internalState))
                 
                 Circle()
-                    .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWith)
-                    .frame(dimension: model.layout.dimension)
+                    .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWith)
+                    .frame(dimension: uiModel.layout.dimension)
                 
                 Circle()
-                    .frame(dimension: model.layout.bulletDimension)
-                    .foregroundColor(model.colors.bullet.for(internalState))
+                    .frame(dimension: uiModel.layout.bulletDimension)
+                    .foregroundColor(uiModel.colors.bullet.for(internalState))
             })
-                .frame(dimension: model.layout.dimension)
-                .padding(model.layout.hitBox)
+                .frame(dimension: uiModel.layout.dimension)
+                .padding(uiModel.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)
     }
@@ -178,7 +178,7 @@ public struct VRadioButton<Label>: View where Label: View {
         VBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
-                .frame(width: model.layout.radioLabelSpacing)
+                .frame(width: uiModel.layout.radioLabelSpacing)
                 .foregroundColor(.clear)
         })
             .disabled(!labelIsEnabled)

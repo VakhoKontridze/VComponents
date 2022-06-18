@@ -13,14 +13,14 @@ struct VSideBarDemoView: View {
     static var navBarTitle: String { "Side Bar" }
     
     @State private var isPresented: Bool = false
-    @State private var dismissType: VSideBarModel.Misc.DismissType = .default
+    @State private var dismissType: VSideBarUIModel.Misc.DismissType = .default
     
-    private var model: VSideBarModel {
-        var model: VSideBarModel = .init()
+    private var uiModel: VSideBarUIModel {
+        var uiModel: VSideBarUIModel = .init()
         
-        model.misc.dismissType = dismissType
+        uiModel.misc.dismissType = dismissType
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -35,7 +35,7 @@ struct VSideBarDemoView: View {
             title: "Present"
         )
             .vSideBar(
-                model: model,
+                uiModel: uiModel,
                 isPresented: $isPresented,
                 content: { sideBarContent }
             )
@@ -49,7 +49,7 @@ struct VSideBarDemoView: View {
 
                 ScrollView(.horizontal, showsIndicators: false, content: {
                     HStack(content: {
-                        ForEach(VSideBarModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
+                        ForEach(VSideBarUIModel.Misc.DismissType.all.elements, id: \.rawValue, content: { position in
                             dismissTypeView(position)
                         })
                     })
@@ -59,12 +59,12 @@ struct VSideBarDemoView: View {
         })
     }
     
-    private func dismissTypeView(_ position: VSideBarModel.Misc.DismissType) -> some View {
+    private func dismissTypeView(_ position: VSideBarUIModel.Misc.DismissType) -> some View {
         VCheckBox(
-            model: {
-                var model: VCheckBoxModel = .init()
-                model.layout.titleLineLimit = 1
-                return model
+            uiModel: {
+                var uiModel: VCheckBoxUIModel = .init()
+                uiModel.layout.titleLineLimit = 1
+                return uiModel
             }(),
             isOn: .init(
                 get: { dismissType.contains(position) },
@@ -94,7 +94,7 @@ struct VSideBarDemoView: View {
 }
 
 // MARK: - Helpers
-extension VSideBarModel.Misc.DismissType {
+extension VSideBarUIModel.Misc.DismissType {
     fileprivate var title: String {
         switch self {
         case .backTap: return "Back tap"

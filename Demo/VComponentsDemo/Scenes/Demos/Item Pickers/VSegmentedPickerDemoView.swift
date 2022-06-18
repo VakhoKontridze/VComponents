@@ -19,22 +19,22 @@ struct VSegmentedPickerDemoView: View {
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var hasDisabledRow: Bool = false
-    @State private var selectionAnimation: Bool = VSegmentedPickerModel.Animations().selection != nil
-    @State private var resizeIndicatorWhenPressed: Bool = VSegmentedPickerModel.Layout().indicatorPressedScale != 1
+    @State private var selectionAnimation: Bool = VSegmentedPickerUIModel.Animations().selection != nil
+    @State private var resizeIndicatorWhenPressed: Bool = VSegmentedPickerUIModel.Layout().indicatorPressedScale != 1
 
-    private var model: VSegmentedPickerModel {
-        let defaultModel: VSegmentedPickerModel = .init()
+    private var uiModel: VSegmentedPickerUIModel {
+        let defaultUIModel: VSegmentedPickerUIModel = .init()
         
-        var model: VSegmentedPickerModel = .init()
+        var uiModel: VSegmentedPickerUIModel = .init()
         
-        model.animations.selection = selectionAnimation ? (defaultModel.animations.selection ?? .default) : nil
+        uiModel.animations.selection = selectionAnimation ? (defaultUIModel.animations.selection ?? .default) : nil
         
-        model.layout.indicatorPressedScale =
+        uiModel.layout.indicatorPressedScale =
             resizeIndicatorWhenPressed ?
-            (model.layout.indicatorPressedScale == 1 ? 0.95 : model.layout.indicatorPressedScale) :
+            (uiModel.layout.indicatorPressedScale == 1 ? 0.95 : uiModel.layout.indicatorPressedScale) :
             1
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -48,7 +48,7 @@ struct VSegmentedPickerDemoView: View {
             switch contentType {
             case .title:
                 VSegmentedPicker(
-                    model: model,
+                    uiModel: uiModel,
                     selection: $selection,
                     headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                     footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
@@ -57,7 +57,7 @@ struct VSegmentedPickerDemoView: View {
             
             case .custom:
                 VSegmentedPicker(
-                    model: model,
+                    uiModel: uiModel,
                     selection: $selection,
                     headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                     footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,

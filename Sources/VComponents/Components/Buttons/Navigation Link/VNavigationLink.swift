@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Button is meant to be used with button components from the library.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 /// `isActive` can be passed as parameter.
 ///

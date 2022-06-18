@@ -13,7 +13,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -25,13 +25,13 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 model: {
-    ///                     var model: VBottomSheetModel = .init()
-    ///                     model.layout.autoresizesContent = true
-    ///                     model.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     model.misc.dismissType.remove(.leadingButton)
-    ///                     model.misc.dismissType.remove(.trailingButton)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                     uiModel.layout.autoresizesContent = true
+    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+    ///                     uiModel.misc.dismissType.remove(.leadingButton)
+    ///                     uiModel.misc.dismissType.remove(.trailingButton)
+    ///                     return uiModel
     ///                 }(),
     ///                 isPresented: $isPresented,
     ///                 content: {
@@ -44,7 +44,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Content>(
-        model: VBottomSheetModel = .init(),
+        uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -59,7 +59,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VBottomSheet<Never, _>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .empty,
@@ -73,7 +73,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -85,11 +85,11 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 model: {
-    ///                     var model: VBottomSheetModel = .init()
-    ///                     model.layout.autoresizesContent = true
-    ///                     model.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                     uiModel.layout.autoresizesContent = true
+    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+    ///                     return uiModel
     ///                 }(),
     ///                 isPresented: $isPresented,
     ///                 headerTitle: "Lorem Ipsum Dolor Sit Amet",
@@ -103,7 +103,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Content>(
-        model: VBottomSheetModel = .init(),
+        uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -119,7 +119,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VBottomSheet<Never, _>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .title(title: headerTitle),
@@ -133,7 +133,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -145,11 +145,11 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 model: {
-    ///                     var model: VBottomSheetModel = .init()
-    ///                     model.layout.autoresizesContent = true
-    ///                     model.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                     uiModel.layout.autoresizesContent = true
+    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+    ///                     return uiModel
     ///                 }(),
     ///                 isPresented: $isPresented,
     ///                 headerLabel: {
@@ -168,7 +168,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<HeaderLabel, Content>(
-        model: VBottomSheetModel = .init(),
+        uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -186,7 +186,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VBottomSheet(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .custom(label: headerLabel),
@@ -203,7 +203,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -219,13 +219,13 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 model: {
-    ///                     var model: VBottomSheetModel = .init()
-    ///                     model.layout.autoresizesContent = true
-    ///                     model.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     model.misc.dismissType.remove(.leadingButton)
-    ///                     model.misc.dismissType.remove(.trailingButton)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                     uiModel.layout.autoresizesContent = true
+    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+    ///                     uiModel.misc.dismissType.remove(.leadingButton)
+    ///                     uiModel.misc.dismissType.remove(.trailingButton)
+    ///                     return uiModel
     ///                 }(),
     ///                 item: $bottomSheetItem,
     ///                 content: { item in
@@ -238,7 +238,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Item, Content>(
-        model: VBottomSheetModel = .init(),
+        uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -260,7 +260,7 @@ extension View {
                 ),
                 content: {
                     VBottomSheet<Never, _>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .empty,
@@ -278,7 +278,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -294,11 +294,11 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 model: {
-    ///                     var model: VBottomSheetModel = .init()
-    ///                     model.layout.autoresizesContent = true
-    ///                     model.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                     uiModel.layout.autoresizesContent = true
+    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+    ///                     return uiModel
     ///                 }(),
     ///                 item: $bottomSheetItem,
     ///                 headerTitle: { item in "Lorem Ipsum Dolor Sit Amet" },
@@ -312,7 +312,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Item, Content>(
-        model: VBottomSheetModel = .init(),
+        uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -335,21 +335,21 @@ extension View {
                 ),
                 content: {
                     VBottomSheet<Never, _>(
-                       model: model,
-                       onPresent: presentHandler,
-                       onDismiss: dismissHandler,
-                       headerLabel: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
-                               return .title(title: headerTitle(item))
-                           } else {
-                               return .empty
-                           }
-                       }(),
-                       content: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
-                               content(item)
-                           }
-                       }
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        headerLabel: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return .title(title: headerTitle(item))
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                content(item)
+                            }
+                        }
                     )
                 }
             ))
@@ -359,7 +359,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -375,11 +375,11 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 model: {
-    ///                     var model: VBottomSheetModel = .init()
-    ///                     model.layout.autoresizesContent = true
-    ///                     model.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VBottomSheetUIModel = .init()
+    ///                     uiModel.layout.autoresizesContent = true
+    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+    ///                     return uiModel
     ///                 }(),
     ///                 item: $bottomSheetItem,
     ///                 headerLabel: { item in
@@ -398,7 +398,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Item, HeaderLabel, Content>(
-        model: VBottomSheetModel = .init(),
+        uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -422,7 +422,7 @@ extension View {
                 ),
                 content: {
                     VBottomSheet<HeaderLabel, _>(
-                       model: model,
+                        uiModel: uiModel,
                        onPresent: presentHandler,
                        onDismiss: dismissHandler,
                        headerLabel: {

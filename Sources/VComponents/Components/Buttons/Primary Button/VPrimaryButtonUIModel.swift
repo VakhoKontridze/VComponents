@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonModel.swift
+//  VPrimaryButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,9 +8,9 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Primary Button Model
+// MARK: - V Primary Button UI Model
 /// Model that describes UI.
-public struct VPrimaryButtonModel {
+public struct VPrimaryButtonUIModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -21,7 +21,7 @@ public struct VPrimaryButtonModel {
     /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -154,10 +154,10 @@ public struct VPrimaryButtonModel {
     }
     
     // MARK: Sub-Models
-    var spinnerSubModel: VSpinnerContinousModel {
-        var model: VSpinnerContinousModel = .init()
-        model.layout.dimension = layout.loaderDimension
-        model.colors.spinner = colors.loader
-        return model
+    var spinnerSubUIModel: VSpinnerContinousUIModel {
+        var uiModel: VSpinnerContinousUIModel = .init()
+        uiModel.layout.dimension = layout.loaderDimension
+        uiModel.colors.spinner = colors.loader
+        return uiModel
     }
 }

@@ -71,15 +71,15 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 ## Guidelines
 
-#### Models
+#### UI Models
 
 Components are not meant to be customized like you would a native SwiftUI component.
 
-Instead, model can be passed as parameter to initializers. This parameter has default value, and is not required every time you create a view.
+Instead, UI model can be passed as parameter to initializers. This parameter has default value, and is not required every time you create a view.
 
-Models are structs with default values. They break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
+UI Models are structs with default values. They break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
-For instance, changing foreground color of `VSecondaryButton` can be done by passing a model.
+For instance, changing foreground color of `VSecondaryButton` can be done by passing an IU model.
 
 Not Preferred:
 
@@ -96,47 +96,47 @@ var body: some View {
 Preferred:
 
 ```swift
-let model: VSecondaryButtonModel = {
-    var model: VSecondaryButtonModel = .init()
+let uiModel: VSecondaryButtonUIModel = {
+    var UIModel: VSecondaryButtonUIModel = .init()
     
-    model.colors.textContent = .init(
+    uiModel.colors.textContent = .init(
         enabled: .black,
         pressed: .gray,
         disabled: .gray
     )
     
-    return model
+    return uiModel
 }()
 
 var body: some View {
     VSecondaryButton(
-        model: model,
+        uiModel: uiModel,
         action: doSomething,
         title: "Lorem ipsum"
     )
 }
 ```
 
-Alternately, you can create static instances of models for reusability.
+Alternately, you can create static instances of UI models for reusability.
 
 ```swift
-extension VSecondaryButtonModel {
-    static let someModel: VSecondaryButtonModel = {
-        var model: VSecondaryButtonModel = .init()
+extension VSecondaryButtonUIModel {
+    static let someUIModel: VSecondaryButtonUIModel = {
+        var uiModel: VSecondaryButtonModel = .init()
         
-        model.colors.textContent = .init(
+        uiModel.colors.textContent = .init(
             enabled: .black,
             pressed: .gray,
             disabled: .gray
         )
         
-        return model
+        return uiMmodel
     }()
 }
 
 var body: some View {
     VSecondaryButton(
-        model: .someModel,
+        uiModel: .someUIModel,
         action: doSomething,
         title: "Lorem ipsum"
     )
@@ -147,7 +147,7 @@ var body: some View {
 
 Some components take type as parameter. Types are represented as enums, as more can be added in the future.
 
-For instance, `VPageIndicator` has three types: `Finite`, `Infinite`, and `Auto`. Unlike models, types may be required in some instances. For other enums, a default case is provided.
+For instance, `VPageIndicator` has three types: `Finite`, `Infinite`, and `Auto`. Unlike UI models, types may be required in some instances. For other enums, a default case is provided.
 
 ```swift
 var body: some View {
@@ -165,7 +165,7 @@ Some enums can also contain additional cases, such as `focused` for `VBaseTextFi
 
 #### Animations
 
-VComponents approaches animations as bound to components and their models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom model.
+VComponents approaches animations as bound to components and their UI models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom UI model.
 
 Not Preferred:
 
@@ -189,15 +189,15 @@ Preferred:
 ```swift
 @State var isOn: Bool = false
 
-let model: VToggleModel = {
-    var model: VToggleModel = .init()
-    model.animations.stateChange = nil
-    return model
+let model: VToggleUIModel = {
+    var uiModel: VToggleUIModel = .init()
+    uiModel.animations.stateChange = nil
+    return uiModel
 }()
 
 var body: some View {
     VStack(content: {
-        VToggle(model: model, isOn: $isOn, title: "Lorem ipsum")
+        VToggle(uiModel: uiModel, isOn: $isOn, title: "Lorem ipsum")
         
         VSecondaryButton(
             action: { isOn.toggle() },
@@ -211,7 +211,7 @@ First method is not only not preferred, but it will also not work. Despite speci
 
 Components manage state parameters internally, and animations used to change them externally do not have any effect.
 
-Thought process behind his design choice was to centralize animations to model.
+Thought process behind his design choice was to centralize animations to UI model.
 
 Components also prevent themselves from modifying external state with an animation.
 
@@ -231,7 +231,7 @@ Add `https://github.com/VakhoKontridze/VComponents` as a Swift Package in Xcode 
 
 ***Major***. Major changes, such as big overhauls
 
-***Minor***. Minor changes, such as new component, types, or properties in models
+***Minor***. Minor changes, such as new component, types, or properties in UI models
 
 ***Patch***. Bug fixes and improvements
 

@@ -10,11 +10,11 @@ import SwiftUI
 // MARK: - V Chevron Button
 extension VSquareButton where Label == Never {
     static func close(
-        model: VCloseButtonModel = .init(),
+        uiModel: VCloseButtonUIModel = .init(),
         action: @escaping () -> Void
     ) -> some View {
         VSquareButton(
-            model: model.squareButtonSubModel,
+            uiModel: uiModel.squareButtonSubUIModel,
             action: action,
             icon: ImageBook.xMark
         )

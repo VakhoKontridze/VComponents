@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// Best suited for `5`+ items.
 ///
-/// Model, header, and footer can be passed as parameters.
+/// UI Model, header, and footer can be passed as parameters.
 ///
 ///     @State var selection: String = "January"
 ///
@@ -42,7 +42,7 @@ public struct VWheelPicker<Data, Content>: View
         Content: View
 {
     // MARK: Properties
-    private let model: VWheelPickerModel
+    private let uiModel: VWheelPickerUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VWheelPickerInternalState { .init(isEnabled: isEnabled) }
@@ -59,14 +59,14 @@ public struct VWheelPicker<Data, Content>: View
     // MARK: Initializers - Index
     /// Initializes component with selected index, data, and row content.
     public init(
-        model: VWheelPickerModel = .init(),
+        uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
@@ -75,7 +75,7 @@ public struct VWheelPicker<Data, Content>: View
 
     /// Initializes component with selected index and row titles.
     public init(
-        model: VWheelPickerModel = .init(),
+        uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -85,7 +85,7 @@ public struct VWheelPicker<Data, Content>: View
             Data == Array<Never>,
             Content == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
@@ -95,7 +95,7 @@ public struct VWheelPicker<Data, Content>: View
     // MARK: Initializers - Hashable
     /// Initializes component with selection value, data, and row content.
     public init<SelectionValue>(
-        model: VWheelPickerModel = .init(),
+        uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -106,7 +106,7 @@ public struct VWheelPicker<Data, Content>: View
             Data == Array<SelectionValue>,
             SelectionValue: Hashable
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { data.firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = data[$0] }
@@ -118,7 +118,7 @@ public struct VWheelPicker<Data, Content>: View
     
     /// Initializes component with selection value and row titles.
     public init(
-        model: VWheelPickerModel = .init(),
+        uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<String>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -128,7 +128,7 @@ public struct VWheelPicker<Data, Content>: View
             Data == Array<Never>,
             Content == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { rowTitles.firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = rowTitles[$0] }
@@ -141,7 +141,7 @@ public struct VWheelPicker<Data, Content>: View
     // MARK: Initializers - Pickable Enumeration & Pickable Titled Enumeration
     /// Initializes component with `PickableEnumeration` and row content.
     public init<PickableItem>(
-        model: VWheelPickerModel = .init(),
+        uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<PickableItem>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -151,7 +151,7 @@ public struct VWheelPicker<Data, Content>: View
             Data == Array<PickableItem>,
             PickableItem: PickableEnumeration
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
@@ -163,7 +163,7 @@ public struct VWheelPicker<Data, Content>: View
     
     /// Initializes component with `PickableTitledEnumeration`.
     public init<PickableItem>(
-        model: VWheelPickerModel = .init(),
+        uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<PickableItem>,
         headerTitle: String? = nil,
         footerTitle: String? = nil
@@ -173,7 +173,7 @@ public struct VWheelPicker<Data, Content>: View
             Content == Never,
             PickableItem: PickableTitledEnumeration
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
@@ -185,7 +185,7 @@ public struct VWheelPicker<Data, Content>: View
 
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: model.layout.headerPickerFooterSpacing, content: {
+        VStack(alignment: .leading, spacing: uiModel.layout.headerPickerFooterSpacing, content: {
             header
             picker
             footer
@@ -195,24 +195,24 @@ public struct VWheelPicker<Data, Content>: View
     @ViewBuilder private var header: some View {
         if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: model.layout.headerLineLimit),
-                color: model.colors.header.for(internalState),
-                font: model.fonts.header,
+                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
+                color: uiModel.colors.header.for(internalState),
+                font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, model.layout.headerMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerMarginHorizontal)
         }
     }
     
     @ViewBuilder private var footer: some View {
         if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: model.layout.footerLineLimit),
-                color: model.colors.footer.for(internalState),
-                font: model.fonts.footer,
+                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
+                color: uiModel.colors.footer.for(internalState),
+                font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, model.layout.headerMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerMarginHorizontal)
         }
     }
     
@@ -224,7 +224,7 @@ public struct VWheelPicker<Data, Content>: View
         )
             .pickerStyle(.wheel)
             .disabled(!internalState.isEnabled) // Luckily, doesn't affect colors
-            .background(model.colors.background.for(internalState).cornerRadius(model.layout.cornerRadius))
+            .background(uiModel.colors.background.for(internalState).cornerRadius(uiModel.layout.cornerRadius))
     }
     
     @ViewBuilder private func rows() -> some View {
@@ -232,8 +232,8 @@ public struct VWheelPicker<Data, Content>: View
         case .titles(let titles):
             ForEach(titles.indices, id: \.self, content: { i in
                 VText(
-                    color: model.colors.title.for(internalState),
-                    font: model.fonts.rows,
+                    color: uiModel.colors.title.for(internalState),
+                    font: uiModel.fonts.rows,
                     text: titles[i]
                 )
                     .tag(i)
@@ -242,7 +242,7 @@ public struct VWheelPicker<Data, Content>: View
         case .custom(let data, let content):
             ForEach(data.indices, id: \.self, content: { i in
                 content(data[i])
-                    .opacity(model.colors.customContentOpacities.for(internalState))
+                    .opacity(uiModel.colors.customContentOpacities.for(internalState))
                     .tag(i)
             })
         }

@@ -17,27 +17,27 @@ struct VRadioButtonDemoView: View {
     @State private var isEnabled: Bool = true
     @State private var state: VRadioButtonState = .off
     @State private var labelType: VRadioButtonLabel = .title
-    @State private var hitBoxType: VRadioButtonHitBox = .init(value: VRadioButtonModel.Layout().hitBox)
-    @State private var labelIsClickable: Bool = VRadioButtonModel.Misc().labelIsClickable
+    @State private var hitBoxType: VRadioButtonHitBox = .init(value: VRadioButtonUIModel.Layout().hitBox)
+    @State private var labelIsClickable: Bool = VRadioButtonUIModel.Misc().labelIsClickable
     
-    private var model: VRadioButtonModel {
-        let defaultModel: VRadioButtonModel = .init()
+    private var uiModel: VRadioButtonUIModel {
+        let defaultUIModel: VRadioButtonUIModel = .init()
         
-        var model: VRadioButtonModel = .init()
+        var uiModel: VRadioButtonUIModel = .init()
         
-        model.layout.hitBox = {
+        uiModel.layout.hitBox = {
             switch hitBoxType {
             case .clipped: return 0
-            case .extended: return defaultModel.layout.hitBox == 0 ? 5 : defaultModel.layout.hitBox
+            case .extended: return defaultUIModel.layout.hitBox == 0 ? 5 : defaultUIModel.layout.hitBox
             }
         }()
         if hitBoxType == .clipped {
-            model.layout.radioLabelSpacing = defaultModel.layout.hitBox.isZero ? 5 : defaultModel.layout.hitBox
+            uiModel.layout.radioLabelSpacing = defaultUIModel.layout.hitBox.isZero ? 5 : defaultUIModel.layout.hitBox
         }
         
-        model.misc.labelIsClickable = labelIsClickable
+        uiModel.misc.labelIsClickable = labelIsClickable
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -50,9 +50,9 @@ struct VRadioButtonDemoView: View {
     private func component() -> some View {
         Group(content: {
             switch labelType {
-            case .empty: VRadioButton(model: model, state: $state)
-            case .title: VRadioButton(model: model, state: $state, title: radioButtonTitle)
-            case .custom: VRadioButton(model: model, state: $state, label: { radioButtonIcon })
+            case .empty: VRadioButton(uiModel: uiModel, state: $state)
+            case .title: VRadioButton(uiModel: uiModel, state: $state, title: radioButtonTitle)
+            case .custom: VRadioButton(uiModel: uiModel, state: $state, label: { radioButtonIcon })
             }
         })
             .disabled(!isEnabled)

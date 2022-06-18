@@ -1,5 +1,5 @@
 //
-//  VToggleModel.swift
+//  VToggleUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V Toggle Model
+// MARK: - V Toggle UI Model
 /// Model that describes UI.
-public struct VToggleModel {
+public struct VToggleUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
+    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -29,7 +29,7 @@ public struct VToggleModel {
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

@@ -1,5 +1,5 @@
 //
-//  VSheetModel.swift
+//  VSheetUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/22/20.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - V Sheet Model
+// MARK: - V Sheet UI Model
 /// Model that describes UI.
-public struct VSheetModel {
+public struct VSheetUIModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -18,7 +18,7 @@ public struct VSheetModel {
     public var colors: Colors = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

@@ -16,7 +16,7 @@ struct VAlert<Content>: View
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
-    private let model: VAlertModel
+    private let uiModel: VAlertUIModel
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -45,7 +45,7 @@ struct VAlert<Content>: View
     
     // MARK: Initializers
     init(
-        model: VAlertModel,
+        uiModel: VAlertUIModel,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         title: String?,
@@ -53,7 +53,7 @@ struct VAlert<Content>: View
         content: VAlertContent<Content>,
         buttons: [VAlertButton]
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.title = title
@@ -78,7 +78,7 @@ struct VAlert<Content>: View
     }
     
     private var dimmingView: some View {
-        model.colors.dimmingView
+        uiModel.colors.dimmingView
             .ignoresSafeArea()
     }
     
@@ -89,51 +89,51 @@ struct VAlert<Content>: View
                 messageView
                 contentView
             })
-                .padding(model.layout.titleMessageContentMargins)
+                .padding(uiModel.layout.titleMessageContentMargins)
                 .readSize(onChange: { titleMessageContentHeight = $0.height })
             
             buttonsScrollView
         })
-            .frame(width: model.layout.sizes._current.size.width)
+            .frame(width: uiModel.layout.sizes._current.size.width)
             .ignoresSafeArea(.container, edges: .horizontal)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
             .background(background)
-            .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
-            .opacity(isInternallyPresented ? 1 : model.animations.opacity)
-            .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
+            .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
+            .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
+            .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
     }
     
     private var background: some View {
-        VSheet(model: model.sheetSubModel)
+        VSheet(uiModel: uiModel.sheetSubUIModel)
             .shadow(
-                color: model.colors.shadow,
-                radius: model.colors.shadowRadius,
-                x: model.colors.shadowOffset.width,
-                y: model.colors.shadowOffset.height
+                color: uiModel.colors.shadow,
+                radius: uiModel.colors.shadowRadius,
+                x: uiModel.colors.shadowOffset.width,
+                y: uiModel.colors.shadowOffset.height
             )
     }
 
     @ViewBuilder private var titleView: some View {
         if let title = title, !title.isEmpty {
             VText(
-                type: .multiLine(alignment: .center, lineLimit: model.layout.titleLineLimit),
-                color: model.colors.title,
-                font: model.fonts.title,
+                type: .multiLine(alignment: .center, lineLimit: uiModel.layout.titleLineLimit),
+                color: uiModel.colors.title,
+                font: uiModel.fonts.title,
                 text: title
             )
-                .padding(model.layout.titleMargins)
+                .padding(uiModel.layout.titleMargins)
         }
     }
 
     @ViewBuilder private var messageView: some View {
         if let message = message, !message.isEmpty {
             VText(
-                type: .multiLine(alignment: .center, lineLimit: model.layout.messageLineLimit),
-                color: model.colors.message,
-                font: model.fonts.message,
+                type: .multiLine(alignment: .center, lineLimit: uiModel.layout.messageLineLimit),
+                color: uiModel.colors.message,
+                font: uiModel.fonts.message,
                 text: message
             )
-                .padding(model.layout.messageMargins)
+                .padding(uiModel.layout.messageMargins)
         }
     }
 
@@ -145,7 +145,7 @@ struct VAlert<Content>: View
                 
             case .custom(let content):
                 content()
-                    .padding(model.layout.contentMargins)
+                    .padding(uiModel.layout.contentMargins)
             }
         })
     }
@@ -166,13 +166,13 @@ struct VAlert<Content>: View
             
             case 2:
                 HStack(  // Cancel button is last
-                    spacing: model.layout.horizontalButtonSpacing,
+                    spacing: uiModel.layout.horizontalButtonSpacing,
                     content: { buttonsContent(reverseOrder: true) }
                 )
             
             case 3...:
                 VStack(
-                    spacing: model.layout.verticallButtonSpacing,
+                    spacing: uiModel.layout.verticallButtonSpacing,
                     content: { buttonsContent() }
                 )
             
@@ -180,7 +180,7 @@ struct VAlert<Content>: View
                 fatalError()
             }
         })
-            .padding(model.layout.buttonMargins)
+            .padding(uiModel.layout.buttonMargins)
             .readSize(onChange: { buttonsStackHeight = $0.height })
     }
     
@@ -202,35 +202,35 @@ struct VAlert<Content>: View
             switch button._alertButton {
             case .primary:
                 VAlertPrimaryButton(
-                    model: model.primaryButtonSubModel,
+                    uiModel: uiModel.primaryButtonSubUIModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
                 
             case .secondary:
                 VAlertSecondaryButton(
-                    model: model.secondaryButtonSubModel,
+                    uiModel: uiModel.secondaryButtonSubUIModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
                 
             case .destructive:
                 VAlertSecondaryButton(
-                    model: model.destructiveButtonSubModel,
+                    uiModel: uiModel.destructiveButtonSubUIModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
             
             case .cancel:
                 VAlertSecondaryButton(
-                    model: model.secondaryButtonSubModel,
+                    uiModel: uiModel.secondaryButtonSubUIModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
                 
             case .ok:
                 VAlertSecondaryButton(
-                    model: model.secondaryButtonSubModel,
+                    uiModel: uiModel.secondaryButtonSubUIModel,
                     action: { animateOut(completion: button.action) },
                     title: button.title
                 )
@@ -242,7 +242,7 @@ struct VAlert<Content>: View
     // MARK: Animations
     private func animateIn() {
         withBasicAnimation(
-            model.animations.appear,
+            uiModel.animations.appear,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -252,7 +252,7 @@ struct VAlert<Content>: View
 
     private func animateOut(completion: (() -> Void)?) {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -263,7 +263,7 @@ struct VAlert<Content>: View
 
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()

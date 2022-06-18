@@ -16,7 +16,7 @@ import SwiftUI
 ///
 /// Best suited for `5+` items.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 ///     enum PickerRow: Int, PickableTitledEnumeration {
 ///         case red, green, blue

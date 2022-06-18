@@ -11,14 +11,14 @@ import VComponents
 // MARK: - No Dismiss Type Warning View
 struct NoDismissTypeWarningView: View {
     // MARK: Properties
-    private let buttonModel: VPlainButtonModel = {
-        var model: VPlainButtonModel = .init()
-        model.colors.title = .init(
+    private let buttonUIModel: VPlainButtonUIModel = {
+        var uiModel: VPlainButtonUIModel = .init()
+        uiModel.colors.title = .init(
             enabled: ColorBook.primaryWhite,
             pressed: ColorBook.primaryWhitePressedDisabled,
             disabled: ColorBook.primaryWhitePressedDisabled
         )
-        return model
+        return uiModel
     }()
     
     private let dismissHandler: () -> Void
@@ -39,7 +39,7 @@ struct NoDismissTypeWarningView: View {
             )
 
             VPlainButton(
-                model: buttonModel,
+                uiModel: buttonUIModel,
                 action: dismissHandler,
                 title: "Dismiss"
             )

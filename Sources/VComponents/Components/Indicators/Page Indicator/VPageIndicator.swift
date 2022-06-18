@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Page Indicator
 /// Indicator component that indicates selection in page control.
 ///
-/// Model and type can be passed as parameters.
+/// UI Model and type can be passed as parameters.
 ///
 /// There are three possible types:
 ///
@@ -37,7 +37,7 @@ import SwiftUI
 ///
 public struct VPageIndicator: View {
     // MARK: Properties
-    private let model: VPageIndicatorModel
+    private let uiModel: VPageIndicatorUIModel
     private let pageIndicatorType: VPageIndicatorType
     
     private let total: Int
@@ -47,12 +47,12 @@ public struct VPageIndicator: View {
     // MARK: Intializers
     /// Initializes component with total and selected index.
     public init(
-        model: VPageIndicatorModel = .init(),
+        uiModel: VPageIndicatorUIModel = .init(),
         type pageIndicatorType: VPageIndicatorType = .default,
         total: Int,
         selectedIndex: Int
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.pageIndicatorType = pageIndicatorType
         self.total = total
         self.selectedIndex = selectedIndex
@@ -64,14 +64,14 @@ public struct VPageIndicator: View {
             switch pageIndicatorType._pageIndicatorType {
             case .finite:
                 VPageIndicatorFinite(
-                    model: model,
+                    uiModel: uiModel,
                     total: total,
                     selectedIndex: selectedIndex
                 )
             
             case .infinite(let visible, let center):
                 VPageIndicatorInfinite(
-                    model: model,
+                    uiModel: uiModel,
                     visible: visible,
                     center: center,
                     total: total,
@@ -80,7 +80,7 @@ public struct VPageIndicator: View {
             
             case .automatic(let visible, let center, let finiteLimit):
                 VPageIndicatorAuto(
-                    model: model,
+                    uiModel: uiModel,
                     visible: visible,
                     center: center,
                     finiteLimit: finiteLimit,
@@ -89,7 +89,7 @@ public struct VPageIndicator: View {
                 )
             }
         })
-            .animation(model.animations.transition, value: selectedIndex)
+            .animation(uiModel.animations.transition, value: selectedIndex)
     }
 }
 

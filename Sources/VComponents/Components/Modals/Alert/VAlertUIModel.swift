@@ -1,5 +1,5 @@
 //
-//  VAlertModel.swift
+//  VAlertUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/26/20.
@@ -8,12 +8,12 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Alert Model
+// MARK: - V Alert UI Model
 /// Model that describes UI.
-public struct VAlertModel {
+public struct VAlertUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
-    fileprivate static let modalReference: VModalModel = .init()
+    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
+    fileprivate static let modalReference: VModalUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -28,7 +28,7 @@ public struct VAlertModel {
     public var animations: Animations = .init()
 
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -219,54 +219,54 @@ public struct VAlertModel {
 
     // MARK: Animations
     /// Sub-model containing animation properties.
-    public typealias Animations = VModalModel.Animations
+    public typealias Animations = VModalUIModel.Animations
     
     // MARK: Sub-Models
-    var sheetSubModel: VSheetModel {
-        var model: VSheetModel = .init()
+    var sheetSubUIModel: VSheetUIModel {
+        var uiModel: VSheetUIModel = .init()
         
-        model.layout.roundedCorners = layout.roundedCorners
-        model.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.roundedCorners = layout.roundedCorners
+        uiModel.layout.cornerRadius = layout.cornerRadius
         
-        model.colors.background = colors.background
+        uiModel.colors.background = colors.background
         
-        return model
+        return uiModel
     }
     
-    var primaryButtonSubModel: VPrimaryButtonModel {
-        var model: VPrimaryButtonModel = .init()
+    var primaryButtonSubUIModel: VPrimaryButtonUIModel {
+        var uiModel: VPrimaryButtonUIModel = .init()
         
-        model.layout.height = layout.buttonHeight
-        model.layout.cornerRadius = layout.buttonCornerRadius
+        uiModel.layout.height = layout.buttonHeight
+        uiModel.layout.cornerRadius = layout.buttonCornerRadius
         
-        model.colors.background = .alertButton(colors.primaryButtonBackground)
-        model.colors.title = .alertButton(colors.primaryButtonTitle)
+        uiModel.colors.background = .alertButton(colors.primaryButtonBackground)
+        uiModel.colors.title = .alertButton(colors.primaryButtonTitle)
 
-        return model
+        return uiModel
     }
     
-    var secondaryButtonSubModel: VPrimaryButtonModel {
-        var model: VPrimaryButtonModel = .init()
+    var secondaryButtonSubUIModel: VPrimaryButtonUIModel {
+        var uiModel: VPrimaryButtonUIModel = .init()
         
-        model.layout.height = layout.buttonHeight
-        model.layout.cornerRadius = layout.buttonCornerRadius
+        uiModel.layout.height = layout.buttonHeight
+        uiModel.layout.cornerRadius = layout.buttonCornerRadius
         
-        model.colors.background = .alertButton(colors.secondaryButtonBackground)
-        model.colors.title = .alertButton(colors.secondaryButtonTitle)
+        uiModel.colors.background = .alertButton(colors.secondaryButtonBackground)
+        uiModel.colors.title = .alertButton(colors.secondaryButtonTitle)
 
-        return model
+        return uiModel
     }
     
-    var destructiveButtonSubModel: VPrimaryButtonModel {
-        var model: VPrimaryButtonModel = .init()
+    var destructiveButtonSubUIModel: VPrimaryButtonUIModel {
+        var uiModel: VPrimaryButtonUIModel = .init()
         
-        model.layout.height = layout.buttonHeight
-        model.layout.cornerRadius = layout.buttonCornerRadius
+        uiModel.layout.height = layout.buttonHeight
+        uiModel.layout.cornerRadius = layout.buttonCornerRadius
         
-        model.colors.background = .alertButton(colors.destructiveButtonBackground)
-        model.colors.title = .alertButton(colors.destructiveButtonTitle)
+        uiModel.colors.background = .alertButton(colors.destructiveButtonBackground)
+        uiModel.colors.title = .alertButton(colors.destructiveButtonTitle)
 
-        return model
+        return uiModel
     }
 }
 

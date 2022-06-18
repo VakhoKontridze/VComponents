@@ -13,7 +13,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -31,7 +31,7 @@ extension View {
     ///     }
     ///
     public func vToast(
-        model: VToastModel = .init(),
+        uiModel: VToastUIModel = .init(),
         type toastType: VToastType = .singleLine,
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -47,7 +47,7 @@ extension View {
                 allowsHitTests: false,
                 content: {
                     VToast(
-                        model: model,
+                        uiModel: uiModel,
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -64,7 +64,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -86,7 +86,7 @@ extension View {
     ///     }
     ///
     public func vToast<Item>(
-        model: VToastModel = .init(),
+        uiModel: VToastUIModel = .init(),
         type toastType: VToastType = .singleLine,
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -109,7 +109,7 @@ extension View {
                 allowsHitTests: false,
                 content: {
                     VToast(
-                        model: model,
+                        uiModel: uiModel,
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -132,7 +132,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -159,7 +159,7 @@ extension View {
     ///     }
     ///
     public func vToast<T>(
-        model: VToastModel = .init(),
+        uiModel: VToastUIModel = .init(),
         type toastType: VToastType = .singleLine,
         isPresented: Binding<Bool>,
         presenting data: T?,
@@ -181,7 +181,7 @@ extension View {
                 allowsHitTests: false,
                 content: {
                     VToast(
-                        model: model,
+                        uiModel: uiModel,
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -204,7 +204,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -229,7 +229,7 @@ extension View {
     ///     }
     ///
     public func vToast<E>(
-        model: VToastModel = .init(),
+        uiModel: VToastUIModel = .init(),
         type toastType: VToastType = .singleLine,
         isPresented: Binding<Bool>,
         error: E?,
@@ -253,7 +253,7 @@ extension View {
                 allowsHitTests: false,
                 content: {
                     VToast(
-                        model: model,
+                        uiModel: uiModel,
                         type: toastType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,

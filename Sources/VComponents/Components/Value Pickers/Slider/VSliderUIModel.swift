@@ -1,5 +1,5 @@
 //
-//  VSliderModel.swift
+//  VSliderUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK: - V Slider Model
+// MARK: - V Slider UI Model
 /// Model that describes UI.
-public struct VSliderModel {
+public struct VSliderUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonModel = .init()
-    fileprivate static let toggleReference: VToggleModel = .init()
+    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
+    fileprivate static let toggleReference: VToggleUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -24,7 +24,7 @@ public struct VSliderModel {
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -71,20 +71,20 @@ public struct VSliderModel {
         // MARK: Properties
         /// Slider track colors.
         public var track: StateColors = .init(
-            enabled: VSliderModel.toggleReference.colors.fill.off,
-            disabled: VSliderModel.toggleReference.colors.fill.disabled
+            enabled: toggleReference.colors.fill.off,
+            disabled: toggleReference.colors.fill.disabled
         )
         
         /// Slider progress colors.
         public var progress: StateColors = .init(
-            enabled: VSliderModel.toggleReference.colors.fill.on,
-            disabled: VSliderModel.primaryButtonReference.colors.background.disabled
+            enabled: toggleReference.colors.fill.on,
+            disabled: primaryButtonReference.colors.background.disabled
         )
         
         /// Thumb colors.
         public var thumb: StateColors = .init(
-            enabled: VSliderModel.toggleReference.colors.thumb.on,
-            disabled: VSliderModel.toggleReference.colors.thumb.on
+            enabled: toggleReference.colors.thumb.on,
+            disabled: toggleReference.colors.thumb.on
         )
         
         /// Thumb border colors.

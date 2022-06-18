@@ -1,5 +1,5 @@
 //
-//  VSideBarModel.swift
+//  VSideBarUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,13 +8,13 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Side Bar Model
+// MARK: - V Side Bar UI Model
 /// Model that describes UI.
-public struct VSideBarModel {
+public struct VSideBarUIModel {
     // MARK: Properties
-    fileprivate static let sheetReference: VSheetModel = .init()
-    fileprivate static let modalReference: VModalModel = .init()
-    fileprivate static let bottomSheetReference: VBottomSheetModel = .init()
+    fileprivate static let sheetReference: VSheetUIModel = .init()
+    fileprivate static let modalReference: VModalUIModel = .init()
+    fileprivate static let bottomSheetReference: VBottomSheetUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -29,7 +29,7 @@ public struct VSideBarModel {
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -153,15 +153,15 @@ public struct VSideBarModel {
     }
     
     // MARK: Sub-Models
-    var sheetSubModel: VSheetModel {
-        var model: VSheetModel = .init()
+    var sheetSubUIModel: VSheetUIModel {
+        var uiModel: VSheetUIModel = .init()
         
-        model.layout.roundedCorners = [.topRight, .bottomRight]
-        model.layout.cornerRadius = layout.cornerRadius
-        model.layout.contentMargin = 0
+        uiModel.layout.roundedCorners = [.topRight, .bottomRight]
+        uiModel.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.contentMargin = 0
         
-        model.colors.background = colors.background
+        uiModel.colors.background = colors.background
         
-        return model
+        return uiModel
     }
 }

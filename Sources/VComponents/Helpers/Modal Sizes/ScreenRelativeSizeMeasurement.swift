@@ -27,10 +27,10 @@ extension CGSize: ScreenRelativeSizeMeasurement {
 }
 
 // MARK: - V Alert Size
-extension VAlertModel.Layout.AlertSize: ScreenRelativeSizeMeasurement {
+extension VAlertUIModel.Layout.AlertSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
-        _ measurement: VAlertModel.Layout.AlertSize
-    ) -> VAlertModel.Layout.AlertSize {
+        _ measurement: VAlertUIModel.Layout.AlertSize
+    ) -> VAlertUIModel.Layout.AlertSize {
         .init(
             width: UIScreen.main.bounds.size.width * measurement.width
         )
@@ -38,10 +38,10 @@ extension VAlertModel.Layout.AlertSize: ScreenRelativeSizeMeasurement {
 }
 
 // MARK: - V Bottom Sheet Size
-extension VBottomSheetModel.Layout.BottomSheetSize: ScreenRelativeSizeMeasurement {
+extension VBottomSheetUIModel.Layout.BottomSheetSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
-        _ measurement: VBottomSheetModel.Layout.BottomSheetSize
-    ) -> VBottomSheetModel.Layout.BottomSheetSize {
+        _ measurement: VBottomSheetUIModel.Layout.BottomSheetSize
+    ) -> VBottomSheetUIModel.Layout.BottomSheetSize {
         .init(
             width: UIScreen.main.bounds.size.width * measurement.width,
             heights: .init(

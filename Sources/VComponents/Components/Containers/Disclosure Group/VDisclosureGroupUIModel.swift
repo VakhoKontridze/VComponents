@@ -1,5 +1,5 @@
 //
-//  VDisclosureGroupModel.swift
+//  VDisclosureGroupUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/11/21.
@@ -8,13 +8,13 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Disclosure Group Model
+// MARK: - V Disclosure Group UI Model
 /// Model that describes UI.
-public struct VDisclosureGroupModel {
+public struct VDisclosureGroupUIModel {
     // MARK: Properties
-    fileprivate static let sheetReference: VSheetModel = .init()
-    fileprivate static let chevronButtonReference: VChevronButtonModel = .init()
-    fileprivate static let listReference: VListModel = .init()
+    fileprivate static let sheetReference: VSheetUIModel = .init()
+    fileprivate static let chevronButtonReference: VChevronButtonUIModel = .init()
+    fileprivate static let listReference: VListUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -32,7 +32,7 @@ public struct VDisclosureGroupModel {
     public var misc: Misc = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -167,28 +167,28 @@ public struct VDisclosureGroupModel {
     }
 
     // MARK: Sub-Models
-    var sheetSubModel: VSheetModel {
-        var model: VSheetModel = .init()
+    var sheetSubUIModel: VSheetUIModel {
+        var uiModel: VSheetUIModel = .init()
         
-        model.layout.cornerRadius = 0
-        model.layout.contentMargin = 0
+        uiModel.layout.cornerRadius = 0
+        uiModel.layout.contentMargin = 0
         
-        model.colors.background = colors.background
+        uiModel.colors.background = colors.background
         
-        return model
+        return uiModel
     }
     
-    var chevronButonSubModel: VChevronButtonModel {
-        var model: VChevronButtonModel = .init()
+    var chevronButonSubUIModel: VChevronButtonUIModel {
+        var uiModel: VChevronButtonUIModel = .init()
         
-        model.layout.dimension = layout.chevronButtonDimension
-        model.layout.iconDimension = layout.chevronButtonIconDimension
-        model.layout.hitBox.horizontal = 0
-        model.layout.hitBox.vertical = 0
+        uiModel.layout.dimension = layout.chevronButtonDimension
+        uiModel.layout.iconDimension = layout.chevronButtonIconDimension
+        uiModel.layout.hitBox.horizontal = 0
+        uiModel.layout.hitBox.vertical = 0
         
-        model.colors.background = colors.chevronButtonBackground
-        model.colors.icon = colors.chevronButtonIcon
+        uiModel.colors.background = colors.chevronButtonBackground
+        uiModel.colors.icon = colors.chevronButtonIcon
         
-        return model
+        return uiModel
     }
 }

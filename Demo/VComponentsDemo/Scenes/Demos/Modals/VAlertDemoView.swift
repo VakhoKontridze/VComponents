@@ -18,12 +18,12 @@ struct VAlertDemoView: View {
     @State private var title: String = "Lorem Ipsum Dolor Sit Amet"
     @State private var message: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     @State private var alertButtons: VAlertButtonsHelper = .two
-    @State private var ignoreKeyboardSafeArea: Bool = !VAlertModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
+    @State private var ignoreKeyboardSafeArea: Bool = !VAlertUIModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
     
-    private var model: VAlertModel {
-        var model: VAlertModel = .init()
-        model.layout.ignoredKeybordSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
-        return model
+    private var uiModel: VAlertUIModel {
+        var uiModel: VAlertUIModel = .init()
+        uiModel.layout.ignoredKeybordSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
+        return uiModel
     }
 
     // MARK: Body
@@ -38,7 +38,7 @@ struct VAlertDemoView: View {
             title: "Present"
         )
             .vAlert(
-                model: model,
+                uiModel: uiModel,
                 isPresented: $isPresented,
                 title: title,
                 message: message,

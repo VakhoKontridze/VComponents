@@ -14,7 +14,7 @@ struct VToast: View {
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
-    private let model: VToastModel
+    private let uiModel: VToastUIModel
     private let toastType: VToastType
     
     private let presentHandler: (() -> Void)?
@@ -28,13 +28,13 @@ struct VToast: View {
     
     // MARK: Initializers
     init(
-        model: VToastModel,
+        uiModel: VToastUIModel,
         type toastType: VToastType,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         text: String
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.toastType = toastType
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
@@ -49,7 +49,7 @@ struct VToast: View {
                 .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.horizontal, model.layout.toastHorizontalMargin) // Must be applied here
+            .padding(.horizontal, uiModel.layout.toastHorizontalMargin) // Must be applied here
             .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
@@ -62,11 +62,11 @@ struct VToast: View {
     private var contentView: some View {
         VText(
             type: toastType,
-            color: model.colors.text,
-            font: .init(model.fonts.text),
+            color: uiModel.colors.text,
+            font: .init(uiModel.fonts.text),
             text: text
         )
-            .padding(model.layout.textMargins)
+            .padding(uiModel.layout.textMargins)
             .background(background)
             .readSize(onChange: { height = $0.height })
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
@@ -74,7 +74,7 @@ struct VToast: View {
     
     private var background: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
-            .foregroundColor(model.colors.background)
+            .foregroundColor(uiModel.colors.background)
     }
 
     // MARK: Offsets
@@ -83,50 +83,50 @@ struct VToast: View {
             switch toastType._textType {
             case .singleLine:
                 let label: UILabel = .init()
-                label.font = model.fonts.text
+                label.font = uiModel.fonts.text
                 
-                return label.singleLineHeight + 2 * model.layout.textMargins.vertical
+                return label.singleLineHeight + 2 * uiModel.layout.textMargins.vertical
                 
             case .multiLine(let alignment, let lineLimit):
                 let label: UILabel = .init()
                 label.textAlignment = alignment.toNSTextAlignmnet
                 lineLimit.map { label.numberOfLines = $0 }
-                label.font = model.fonts.text
+                label.font = uiModel.fonts.text
                 
                 return
                     label.multiLineHeight(
                         width: UIScreen.main.bounds.width,  // width can't be calculated
                         text: text
                     ) +
-                    2 * model.layout.textMargins.vertical
+                    2 * uiModel.layout.textMargins.vertical
             }
         }()
         
-        switch model.layout.presentationEdge {
+        switch uiModel.layout.presentationEdge {
         case .top: return -initialHeight
         case .bottom: return UIScreen.main.bounds.height + initialHeight
         }
     }
 
     private var presentedOffset: CGFloat {
-        switch model.layout.presentationEdge {
+        switch uiModel.layout.presentationEdge {
         case .top:
             return
                 UIDevice.safeAreaInsetTop +
-                model.layout.presentationEdgeSafeAreaInset
+                uiModel.layout.presentationEdgeSafeAreaInset
 
         case .bottom:
             return
                 UIScreen.main.bounds.height -
                 UIDevice.safeAreaInsetBottom -
                 height -
-                model.layout.presentationEdgeSafeAreaInset
+                uiModel.layout.presentationEdgeSafeAreaInset
         }
     }
 
     // MARK: Corner Radius
     private var cornerRadius: CGFloat {
-        switch model.layout.cornerRadiusType {
+        switch uiModel.layout.cornerRadiusType {
         case .capsule: return height / 2
         case .rounded(let cornerRadius): return cornerRadius
         }
@@ -143,7 +143,7 @@ struct VToast: View {
         VToastSessionManager.shared.didAppear(instanceID)
 
         withBasicAnimation(
-            model.animations.appear,
+            uiModel.animations.appear,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -153,7 +153,7 @@ struct VToast: View {
     
     private func animateOut() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -166,7 +166,7 @@ struct VToast: View {
 
     private func animateOutAfterLifecycle() {
         DispatchQueue.main.asyncAfter(
-            deadline: .now() + model.animations.duration,
+            deadline: .now() + uiModel.animations.duration,
             execute: {
                 guard
                     let instanceID: Int = presentationMode.instanceID,
@@ -182,7 +182,7 @@ struct VToast: View {
 
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()

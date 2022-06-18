@@ -17,7 +17,7 @@ struct VModal<HeaderLabel, Content>: View
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
-    private let model: VModalModel
+    private let uiModel: VModalUIModel
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -25,20 +25,20 @@ struct VModal<HeaderLabel, Content>: View
     private let headerLabel: VModalHeaderLabel<HeaderLabel>
     private let content: () -> Content
     
-    private var hasHeader: Bool { headerLabel.hasLabel || model.misc.dismissType.hasButton }
-    private var hasDivider: Bool { hasHeader && model.layout.dividerHeight > 0 }
+    private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
+    private var hasDivider: Bool { hasHeader && uiModel.layout.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
     
     // MARK: Initializers
     init(
-        model: VModalModel,
+        uiModel: VModalUIModel,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         headerLabel: VModalHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.headerLabel = headerLabel
@@ -61,21 +61,21 @@ struct VModal<HeaderLabel, Content>: View
     }
     
     private var dimmingView: some View {
-        model.colors.dimmingView
+        uiModel.colors.dimmingView
             .ignoresSafeArea()
             .onTapGesture(perform: {
-                if model.misc.dismissType.contains(.backTap) { animateOut() }
+                if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
             })
     }
 
     private var modal: some View {
         ZStack(content: {
-            VSheet(model: model.sheetSubModel)
+            VSheet(uiModel: uiModel.sheetSubUIModel)
                 .shadow(
-                    color: model.colors.shadow,
-                    radius: model.colors.shadowRadius,
-                    x: model.colors.shadowOffset.width,
-                    y: model.colors.shadowOffset.height
+                    color: uiModel.colors.shadow,
+                    radius: uiModel.colors.shadowRadius,
+                    x: uiModel.colors.shadowOffset.width,
+                    y: uiModel.colors.shadowOffset.height
                 )
 
             VStack(spacing: 0, content: {
@@ -85,21 +85,21 @@ struct VModal<HeaderLabel, Content>: View
             })
                 .frame(maxHeight: .infinity, alignment: .top)
         })
-            .frame(size: model.layout.sizes._current.size)
+            .frame(size: uiModel.layout.sizes._current.size)
             .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
-            .scaleEffect(isInternallyPresented ? 1 : model.animations.scaleEffect)
-            .opacity(isInternallyPresented ? 1 : model.animations.opacity)
-            .blur(radius: isInternallyPresented ? 0 : model.animations.blur)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
+            .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
+            .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
+            .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
     }
 
     @ViewBuilder private var header: some View {
         if hasHeader {
-            HStack(alignment: model.layout.headerAlignment, spacing: model.layout.labelCloseButtonSpacing, content: {
+            HStack(alignment: uiModel.layout.headerAlignment, spacing: uiModel.layout.labelCloseButtonSpacing, content: {
                 Group(content: {
-                    if model.misc.dismissType.contains(.leadingButton) {
+                    if uiModel.misc.dismissType.contains(.leadingButton) {
                         closeButton
-                    } else if model.misc.dismissType.contains(.trailingButton) {
+                    } else if uiModel.misc.dismissType.contains(.trailingButton) {
                         closeButtonCompensator
                     }
                 })
@@ -112,8 +112,8 @@ struct VModal<HeaderLabel, Content>: View
                         
                     case .title(let title):
                         VText(
-                            color: model.colors.headerTitle,
-                            font: model.fonts.header,
+                            color: uiModel.colors.headerTitle,
+                            font: uiModel.fonts.header,
                             text: title
                         )
                         
@@ -124,49 +124,49 @@ struct VModal<HeaderLabel, Content>: View
                     .layoutPriority(1)
 
                 Group(content: {
-                    if model.misc.dismissType.contains(.trailingButton) {
+                    if uiModel.misc.dismissType.contains(.trailingButton) {
                         closeButton
-                    } else if model.misc.dismissType.contains(.leadingButton) {
+                    } else if uiModel.misc.dismissType.contains(.leadingButton) {
                         closeButtonCompensator
                     }
                 })
                     .frame(maxWidth: .infinity, alignment: .trailing)
             })
-                .padding(model.layout.headerMargins)
+                .padding(uiModel.layout.headerMargins)
         }
     }
 
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
-                .frame(height: model.layout.dividerHeight)
-                .padding(model.layout.dividerMargins)
-                .foregroundColor(model.colors.divider)
+                .frame(height: uiModel.layout.dividerHeight)
+                .padding(uiModel.layout.dividerMargins)
+                .foregroundColor(uiModel.colors.divider)
         }
     }
 
     private var contentView: some View {
         content()
-            .padding(model.layout.contentMargins)
+            .padding(uiModel.layout.contentMargins)
             .frame(maxHeight: .infinity)
     }
 
     private var closeButton: some View {
         VSquareButton.close(
-            model: model.closeButtonSubModel,
+            uiModel: uiModel.closeButtonSubUIModel,
             action: animateOut
         )
     }
     
     private var closeButtonCompensator: some View {
         Spacer()
-            .frame(width: model.layout.closeButtonDimension)
+            .frame(width: uiModel.layout.closeButtonDimension)
     }
 
     // MARK: Animations
     private func animateIn() {
         withBasicAnimation(
-            model.animations.appear,
+            uiModel.animations.appear,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -176,7 +176,7 @@ struct VModal<HeaderLabel, Content>: View
 
     private func animateOut() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -187,7 +187,7 @@ struct VModal<HeaderLabel, Content>: View
 
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()

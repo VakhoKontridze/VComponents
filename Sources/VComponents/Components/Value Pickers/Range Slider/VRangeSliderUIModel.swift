@@ -1,5 +1,5 @@
 //
-//  VRangeSliderModel.swift
+//  VRangeSliderUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/12/21.
@@ -7,11 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V Range Slider Model
+// MARK: - V Range Slider UI Model
 /// Model that describes UI.
-public struct VRangeSliderModel {
+public struct VRangeSliderUIModel {
     // MARK: Properties
-    fileprivate static let sliderReference: VSliderModel = .init()
+    fileprivate static let sliderReference: VSliderUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -23,7 +23,7 @@ public struct VRangeSliderModel {
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
     
     // MARK: Layout
@@ -55,9 +55,9 @@ public struct VRangeSliderModel {
     
     // MARK: Colors
     /// Sub-model containing color properties.
-    public typealias Colors = VSliderModel.Colors
+    public typealias Colors = VSliderUIModel.Colors
     
     // MARK: Animations
     /// Sub-model containing animation properties.
-    public typealias Animations = VSliderModel.Animations
+    public typealias Animations = VSliderUIModel.Animations
 }

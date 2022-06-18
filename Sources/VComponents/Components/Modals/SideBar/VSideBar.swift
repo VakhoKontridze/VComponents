@@ -13,7 +13,7 @@ struct VSideBar<Content>: View where Content: View {
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
-    private let model: VSideBarModel
+    private let uiModel: VSideBarUIModel
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -24,12 +24,12 @@ struct VSideBar<Content>: View where Content: View {
 
     // MARK: Initializers
     init(
-        model: VSideBarModel,
+        uiModel: VSideBarUIModel,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.content = content
@@ -51,31 +51,31 @@ struct VSideBar<Content>: View where Content: View {
     }
     
     private var dimmingView: some View {
-        model.colors.dimmingView
+        uiModel.colors.dimmingView
             .ignoresSafeArea()
             .onTapGesture(perform: {
-                if model.misc.dismissType.contains(.backTap) { animateOut() }
+                if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
             })
     }
 
     private var sideBar: some View {
         ZStack(content: {
-            VSheet(model: model.sheetSubModel)
+            VSheet(uiModel: uiModel.sheetSubUIModel)
                 .shadow(
-                    color: model.colors.shadow,
-                    radius: model.colors.shadowRadius,
-                    x: model.colors.shadowOffset.width,
-                    y: model.colors.shadowOffset.height
+                    color: uiModel.colors.shadow,
+                    radius: uiModel.colors.shadowRadius,
+                    x: uiModel.colors.shadowOffset.width,
+                    y: uiModel.colors.shadowOffset.height
                 )
 
             content()
-                .padding(model.layout.contentMargins)
-                .safeAreaMarginInsets(edges: model.layout.contentSafeAreaEdges)
+                .padding(uiModel.layout.contentMargins)
+                .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
         })
-            .frame(size: model.layout.sizes._current.size)
+            .frame(size: uiModel.layout.sizes._current.size)
             .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: model.layout.ignoredKeybordSafeAreaEdges)
-            .offset(x: isInternallyPresented ? 0 : -model.layout.sizes._current.size.width)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
+            .offset(x: isInternallyPresented ? 0 : -uiModel.layout.sizes._current.size.width)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged(dragChanged)
@@ -86,7 +86,7 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Actions
     private func animateIn() {
         withBasicAnimation(
-            model.animations.appear,
+            uiModel.animations.appear,
             body: { isInternallyPresented = true },
             completion: {
                 DispatchQueue.main.async(execute: { presentHandler?() })
@@ -96,7 +96,7 @@ struct VSideBar<Content>: View where Content: View {
 
     private func animateOut() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -107,7 +107,7 @@ struct VSideBar<Content>: View where Content: View {
 
     private func animateOutFromDrag() {
         withBasicAnimation(
-            model.animations.dragBackDismiss,
+            uiModel.animations.dragBackDismiss,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.dismiss()
@@ -118,7 +118,7 @@ struct VSideBar<Content>: View where Content: View {
     
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
-            model.animations.disappear,
+            uiModel.animations.disappear,
             body: { isInternallyPresented = false },
             completion: {
                 presentationMode.externalDismissCompletion()
@@ -129,12 +129,12 @@ struct VSideBar<Content>: View where Content: View {
 
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
-        guard model.misc.dismissType.contains(.dragBack) else { return }
+        guard uiModel.misc.dismissType.contains(.dragBack) else { return }
         
         let isDraggedLeft: Bool = dragValue.translation.width <= 0
         guard isDraggedLeft else { return }
 
-        guard abs(dragValue.translation.width) >= model.layout.dragBackDismissDistance else { return }
+        guard abs(dragValue.translation.width) >= uiModel.layout.dragBackDismissDistance else { return }
 
         animateOutFromDrag()
     }

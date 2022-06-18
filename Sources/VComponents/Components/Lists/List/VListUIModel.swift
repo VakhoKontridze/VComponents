@@ -1,5 +1,5 @@
 //
-//  VListModel.swift
+//  VListUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/10/21.
@@ -8,9 +8,9 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Base List Model
+// MARK: - V Base List UI Model
 /// Model that describes UI.
-public struct VListModel {
+public struct VListUIModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -19,7 +19,7 @@ public struct VListModel {
     public var colors: Colors = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
@@ -70,9 +70,9 @@ public struct VListModel {
     }
 
     // MARK: Sub-Models
-    var lazyScrollViewSubModel: VLazyScrollViewVerticalModel {
-        var model: VLazyScrollViewVerticalModel = .init()
-        model.layout.showsIndicator = layout.showsIndicator
-        return model
+    var lazyScrollViewSubUIModel: VLazyScrollViewVerticalUIModel {
+        var uiModel: VLazyScrollViewVerticalUIModel = .init()
+        uiModel.layout.showsIndicator = layout.showsIndicator
+        return uiModel
     }
 }

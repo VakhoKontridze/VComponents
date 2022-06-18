@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Progress Bar
 /// Indicator component that indicates progress towards completion of a task.
 ///
-/// Model and total value can be passed as parameters.
+/// UI Model and total value can be passed as parameters.
 ///
 ///     @State var progress: Double = 0.5
 ///
@@ -22,7 +22,7 @@ import VCore
 ///
 public struct VProgressBar: View {
     // MARK: Properties
-    private let model: VProgressBarModel
+    private let uiModel: VProgressBarUIModel
     
     private let range: ClosedRange<Double>
     private let value: Double
@@ -30,14 +30,14 @@ public struct VProgressBar: View {
     // MARK: Initializers
     /// Initializes component with value.
     public init<V>(
-        model: VProgressBarModel = .init(),
+        uiModel: VProgressBarUIModel = .init(),
         total: V = 1,
         value: V
     )
         where
             V: BinaryFloatingPoint
     {
-        self.model = model
+        self.uiModel = uiModel
         self.range = 0...Double(total)
         self.value = {
             let value: Double = .init(value)
@@ -50,7 +50,7 @@ public struct VProgressBar: View {
 
     public var body: some View {
         VSlider(
-            model: model.sliderSubModel,
+            uiModel: uiModel.sliderSubUIModel,
             range: range,
             step: nil,
             value: .constant(value),

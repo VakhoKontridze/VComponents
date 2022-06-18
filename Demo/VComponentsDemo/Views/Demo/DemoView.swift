@@ -44,11 +44,11 @@ struct DemoView<ComponentContent, SettingsContent>: View
     
     @State private var isPresented: Bool = false
     
-    private let bottomSheetModel: VBottomSheetModel = {
-        var model: VBottomSheetModel = .init()
-        model.layout.contentMargins.trailing = 0
-        model.misc.dismissType.insert(.backTap)
-        return model
+    private let bottomSheetUIModel: VBottomSheetUIModel = {
+        var uiModel: VBottomSheetUIModel = .init()
+        uiModel.layout.contentMargins.trailing = 0
+        uiModel.misc.dismissType.insert(.backTap)
+        return uiModel
     }()
     
     // MARK: Initializers
@@ -158,7 +158,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
             icon: .init(systemName: "gearshape")
         )
             .vBottomSheet(
-                model: bottomSheetModel,
+                uiModel: bottomSheetUIModel,
                 isPresented: $isPresented,
                 headerTitle: "Parameters",
                 content: {

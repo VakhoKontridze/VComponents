@@ -15,39 +15,39 @@ struct VSecondaryButtonDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var labelType: VSecondaryButtonLabel = .title
-    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VSecondaryButtonModel.Layout().hitBox.horizontal)
+    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VSecondaryButtonUIModel.Layout().hitBox.horizontal)
     @State private var borderType: VPrimaryButtonBorder = .borderless
     
-    private var model: VSecondaryButtonModel {
-        let defaultModel: VSecondaryButtonModel = .init()
+    private var uiModel: VSecondaryButtonUIModel {
+        let defaultUIModel: VSecondaryButtonUIModel = .init()
         
-        var model: VSecondaryButtonModel = .init()
+        var uiModel: VSecondaryButtonUIModel = .init()
         
-        model.layout.hitBox.horizontal = {
+        uiModel.layout.hitBox.horizontal = {
             switch hitBoxType {
             case .clipped: return 0
-            case .extended: return defaultModel.layout.hitBox.horizontal == 0 ? 5 : defaultModel.layout.hitBox.horizontal
+            case .extended: return defaultUIModel.layout.hitBox.horizontal == 0 ? 5 : defaultUIModel.layout.hitBox.horizontal
             }
         }()
-        model.layout.hitBox.vertical = model.layout.hitBox.horizontal
+        uiModel.layout.hitBox.vertical = uiModel.layout.hitBox.horizontal
 
         if borderType == .bordered {
-            model.layout.borderWidth = 1.5
+            uiModel.layout.borderWidth = 1.5
 
-            model.colors.background = .init(
+            uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
                 disabled: .init("PrimaryButtonBordered.Background.disabled")
             )
 
-            model.colors.border = defaultModel.colors.background
+            uiModel.colors.border = defaultUIModel.colors.background
             
-            model.colors.title = model.colors.icon
+            uiModel.colors.title = uiModel.colors.icon
             
-            model.colors.icon = defaultModel.colors.background
+            uiModel.colors.icon = defaultUIModel.colors.background
         }
 
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -59,9 +59,9 @@ struct VSecondaryButtonDemoView: View {
     private func component() -> some View {
         Group(content: {
             switch labelType {
-            case .title: VSecondaryButton(model: model, action: {}, title: buttonTitle)
-            case .iconTitle: VSecondaryButton(model: model, action: {}, icon: buttonIcon, title: buttonTitle)
-            case .custom: VSecondaryButton(model: model, action: {}, label: { buttonIcon })
+            case .title: VSecondaryButton(uiModel: uiModel, action: {}, title: buttonTitle)
+            case .iconTitle: VSecondaryButton(uiModel: uiModel, action: {}, icon: buttonIcon, title: buttonTitle)
+            case .custom: VSecondaryButton(uiModel: uiModel, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)

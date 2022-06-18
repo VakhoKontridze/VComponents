@@ -1,5 +1,5 @@
 //
-//  VChevronButtonModel.swift
+//  VChevronButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -8,8 +8,8 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Chevron Button Model
-public struct VChevronButtonModel {
+// MARK: - V Chevron Button UI Model
+public struct VChevronButtonUIModel {
     // MARK: Properties
     var layout: Layout = .init()
     var colors: Colors = .init()
@@ -43,20 +43,20 @@ public struct VChevronButtonModel {
         )
         
         // MARK: State Colors
-        public typealias StateColors = VSquareButtonModel.Colors.StateColors
+        public typealias StateColors = VSquareButtonUIModel.Colors.StateColors
     }
     
     // MARK: Sub-Models
-    var squareButtonSubModel: VSquareButtonModel {
-        var model: VSquareButtonModel = .init()
+    var squareButtonSubUIModel: VSquareButtonUIModel {
+        var uiModel: VSquareButtonUIModel = .init()
 
-        model.layout.dimension = layout.dimension
-        model.layout.iconSize = .init(dimension: layout.iconDimension)
-        model.layout.hitBox = layout.hitBox
+        uiModel.layout.dimension = layout.dimension
+        uiModel.layout.iconSize = .init(dimension: layout.iconDimension)
+        uiModel.layout.hitBox = layout.hitBox
 
-        model.colors.background = colors.background
-        model.colors.icon = colors.icon
+        uiModel.colors.background = colors.background
+        uiModel.colors.icon = colors.icon
 
-        return model
+        return uiModel
     }
 }

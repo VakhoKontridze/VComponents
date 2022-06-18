@@ -1,5 +1,5 @@
 //
-//  VSegmentedPickerModel.swift
+//  VSegmentedPickerUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 1/7/21.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK: - V Segmented Picker Model
+// MARK: - V Segmented Picker UI Model
 /// Model that describes UI.
-public struct VSegmentedPickerModel {
+public struct VSegmentedPickerUIModel {
     // MARK: Properties
-    fileprivate static let toggleReference: VToggleModel = .init()
-    fileprivate static let sliderReference: VSliderModel = .init()
+    fileprivate static let toggleReference: VToggleUIModel = .init()
+    fileprivate static let sliderReference: VSliderUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -27,7 +27,7 @@ public struct VSegmentedPickerModel {
     public var animations: Animations = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout

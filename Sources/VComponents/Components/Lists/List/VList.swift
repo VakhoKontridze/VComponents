@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V List
 /// Core component that is used throughout the library as a structure that either hosts content, or computes views on demad from an underlying collection of identified data.
 ///
-/// Model, and layout can be passed as parameters.
+/// UI Model, and layout can be passed as parameters.
 ///
 /// There are three posible layouts:
 ///
@@ -51,25 +51,25 @@ public struct VList<Data, ID, Content>: View
         Content: View
 {
     // MARK: Properties
-    private let model: VListModel
+    private let uiModel: VListUIModel
     
     private let layoutType: VListLayoutType
     
     private let data: [IdentifiableElement<ID, Data.Element>]
     private let content: (Data.Element) -> Content
     
-    private var hasDivider: Bool { model.layout.dividerHeight > 0 }
+    private var hasDivider: Bool { uiModel.layout.dividerHeight > 0 }
     
     // MARK: Initializers
     /// Initializes component with data, id, and row content.
     public init(
-        model: VListModel = .init(),
+        uiModel: VListUIModel = .init(),
         layout layoutType: VListLayoutType = .default,
         data: Data,
         id: KeyPath<Data.Element, ID>,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: id], value: $0) }
         self.content = content
@@ -77,7 +77,7 @@ public struct VList<Data, ID, Content>: View
     
     /// Initializes component with data and row content.
     public init(
-        model: VListModel = .init(),
+        uiModel: VListUIModel = .init(),
         layout layoutType: VListLayoutType = .default,
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -86,7 +86,7 @@ public struct VList<Data, ID, Content>: View
             Data.Element: Identifiable,
             ID == Data.Element.ID
     {
-        self.model = model
+        self.uiModel = uiModel
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: \.id], value: $0) }
         self.content = content
@@ -94,7 +94,7 @@ public struct VList<Data, ID, Content>: View
     
     /// Initializes component with constant range and row content.
     public init(
-        model: VListModel = .init(),
+        uiModel: VListUIModel = .init(),
         layout layoutType: VListLayoutType = .default,
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
@@ -103,7 +103,7 @@ public struct VList<Data, ID, Content>: View
             Data == Range<Int>,
             ID == Int
     {
-        self.model = model
+        self.uiModel = uiModel
         self.layoutType = layoutType
         self.data = data.map { .init(id: $0[keyPath: \.self], value: $0) }
         self.content = content
@@ -123,7 +123,7 @@ public struct VList<Data, ID, Content>: View
             
         case .flexible:
             VLazyScrollView(
-                type: .vertical(model: model.lazyScrollViewSubModel),
+                type: .vertical(uiModel: uiModel.lazyScrollViewSubUIModel),
                 data: data.enumeratedArray(),
                 id: \.element.id,
                 content: { contentView(i: $0, element: $1) }
@@ -137,21 +137,21 @@ public struct VList<Data, ID, Content>: View
 
             if showDivider(for: i) {
                 Rectangle()
-                    .frame(height: model.layout.dividerHeight)
-                    .padding(.leading, model.layout.dividerMargins.leading)
-                    .padding(.trailing, model.layout.dividerMargins.trailing)
-                    .padding(.vertical, model.layout.dividerMarginVertical)
-                    .foregroundColor(model.colors.divider)
+                    .frame(height: uiModel.layout.dividerHeight)
+                    .padding(.leading, uiModel.layout.dividerMargins.leading)
+                    .padding(.trailing, uiModel.layout.dividerMargins.trailing)
+                    .padding(.vertical, uiModel.layout.dividerMarginVertical)
+                    .foregroundColor(uiModel.colors.divider)
             }
         })
-            .padding(.trailing, model.layout.marginTrailing)
+            .padding(.trailing, uiModel.layout.marginTrailing)
     }
 
     // MARK: Helpers
     private func showDivider(for i: Int) -> Bool {
         guard hasDivider else { return false }
         
-        switch model.layout.lastRowHasDivider {
+        switch uiModel.layout.lastRowHasDivider {
         case false: guard i <= data.count-2 else { return false }
         case true: guard i <= data.count-1 else { return false }
         }

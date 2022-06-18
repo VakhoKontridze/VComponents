@@ -1,5 +1,5 @@
 //
-//  VSpinnerDashedModel.swift
+//  VSpinnerDashedUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-// MARK: - V Spinner Dashed Model
+// MARK: - V Spinner Dashed UI Model
 /// Model that describes UI.
-public struct VSpinnerDashedModel {
+public struct VSpinnerDashedUIModel {
     // MARK: Properties
-    fileprivate static let spinnerContinousReference: VSpinnerContinousModel = .init()
+    fileprivate static let spinnerContinousReference: VSpinnerContinousUIModel = .init()
     
     /// Sub-model containing color properties.
     public var colors: Colors = .init()
     
     // MARK: Initializers
-    /// Initializes model with default values.
+    /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Colors

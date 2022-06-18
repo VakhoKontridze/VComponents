@@ -15,14 +15,14 @@ struct VToastDemoView: View {
     
     @State private var isPresented: Bool = false
     
-    @State private var presentationEdge: VToastModel.Layout.PresentationEdge = .default
+    @State private var presentationEdge: VToastUIModel.Layout.PresentationEdge = .default
     @State private var toastType: VToastTypeHelper = .oneLine
     @State private var text: String = "Lorem ipsum dolor sit amet"
     
-    private var model: VToastModel {
-        var model: VToastModel = .init()
-        model.layout.presentationEdge = presentationEdge
-        return model
+    private var uiModel: VToastUIModel {
+        var uiModel: VToastUIModel = .init()
+        uiModel.layout.presentationEdge = presentationEdge
+        return uiModel
     }
 
     // MARK: Body
@@ -37,7 +37,7 @@ struct VToastDemoView: View {
             title: "Present"
         )
             .vToast(
-                model: model,
+                uiModel: uiModel,
                 type: toastType.toastType,
                 isPresented: $isPresented,
                 text: text
@@ -65,7 +65,7 @@ struct VToastDemoView: View {
 }
 
 // MARK: - Helpers
-extension VToastModel.Layout.PresentationEdge: PickableTitledEnumeration {
+extension VToastUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
     public var pickerTitle: String {
         switch self {
         case .top: return "Top"

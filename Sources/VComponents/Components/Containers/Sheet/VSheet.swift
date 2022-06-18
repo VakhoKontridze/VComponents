@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Sheet
 /// Container component that draws a background and hosts content.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 /// If content is passed during `init`, `VSheet` would resize according to the size of the content. If content is not passed, `VSheet` would expand to occupy maximum space.
 ///
@@ -31,26 +31,26 @@ import VCore
 ///
 public struct VSheet<Content>: View where Content: View {
     // MARK: Properties
-    private let model: VSheetModel
+    private let uiModel: VSheetUIModel
     private let content: VSheetContent<Content>
     
     // MARK: Initializers
     /// Initializes component with content.
     public init(
-        model: VSheetModel = .init(),
+        uiModel: VSheetUIModel = .init(),
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.content = .content(content: content)
     }
     
     /// Initializes component.
     public init(
-        model: VSheetModel = .init()
+        uiModel: VSheetUIModel = .init()
     )
         where Content == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self.content = .empty
     }
 
@@ -61,10 +61,10 @@ public struct VSheet<Content>: View where Content: View {
     }
     
     private var sheet: some View {
-        model.colors.background
+        uiModel.colors.background
             .cornerRadius(
-                model.layout.cornerRadius,
-                corners: model.layout.roundedCorners
+                uiModel.layout.cornerRadius,
+                corners: uiModel.layout.roundedCorners
             )
     }
     
@@ -78,7 +78,7 @@ public struct VSheet<Content>: View where Content: View {
                 content()
             }
         })
-            .padding(model.layout.contentMargin)
+            .padding(uiModel.layout.contentMargin)
     }
 }
 

@@ -13,7 +13,7 @@ import VCore
 ///
 /// Component can be initialized with data or free content.
 ///
-/// Model and layout can be passed as parameters.
+/// UI Model and layout can be passed as parameters.
 ///
 ///     ZStack(alignment: .top, content: {
 ///         ColorBook.canvas.ignoresSafeArea()
@@ -37,7 +37,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         Content: View
 {
     // MARK: Properties
-    private let model: VDisclosureGroupModel
+    private let uiModel: VDisclosureGroupUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding private var state: VDisclosureGroupState
@@ -47,19 +47,19 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     private let content: () -> Content
     
-    private var hasDivider: Bool { model.layout.dividerHeight > 0 }
+    private var hasDivider: Bool { uiModel.layout.dividerHeight > 0 }
 
     // MARK: Initializers - State
     /// Initializes component with header title and content.
     public init(
-        model: VDisclosureGroupModel = .init(),
+        uiModel: VDisclosureGroupUIModel = .init(),
         state: Binding<VDisclosureGroupState>,
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
         where HeaderLabel == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.headerLabel = .title(title: headerTitle)
         self.content = content
@@ -67,12 +67,12 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     /// Initializes component with header and content.
     public init(
-        model: VDisclosureGroupModel = .init(),
+        uiModel: VDisclosureGroupUIModel = .init(),
         state: Binding<VDisclosureGroupState>,
         @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = state
         self.headerLabel = .custom(label: headerLabel)
         self.content = content
@@ -81,14 +81,14 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     // MARK: Initializers - Bool
     /// Initializes component with header title and content.
     public init(
-        model: VDisclosureGroupModel = .init(),
+        uiModel: VDisclosureGroupUIModel = .init(),
         isExpanded: Binding<Bool>,
         headerTitle: String,
         @ViewBuilder content: @escaping () -> Content
     )
         where HeaderLabel == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isExpanded)
         self.headerLabel = .title(title: headerTitle)
         self.content = content
@@ -96,12 +96,12 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     /// Initializes component with header and content.
     public init(
-        model: VDisclosureGroupModel = .init(),
+        uiModel: VDisclosureGroupUIModel = .init(),
         isExpanded: Binding<Bool>,
         @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._state = .init(bool: isExpanded)
         self.headerLabel = .custom(label: headerLabel)
         self.content = content
@@ -110,7 +110,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     // MARK: Body
     public var body: some View {
         PlainDiclosureGroup(
-            backgroundColor: model.colors.background,
+            backgroundColor: uiModel.colors.background,
             isExpanded: .init(
                 get: { internalState.isExpanded },
                 set: { expandCollapseFromHeaderTap($0) }
@@ -123,10 +123,10 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 })
             }
         )
-            .background(VSheet(model: model.sheetSubModel))
-            .cornerRadius(model.layout.cornerRadius)
-            .animation(model.animations.expandCollapse, value: isEnabled)
-            .animation(model.animations.expandCollapse, value: state) // +withAnimation
+            .background(VSheet(uiModel: uiModel.sheetSubUIModel))
+            .cornerRadius(uiModel.layout.cornerRadius)
+            .animation(uiModel.animations.expandCollapse, value: isEnabled)
+            .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
     }
     
     private var header: some View {
@@ -135,14 +135,14 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 switch headerLabel {
                 case .title(let title):
                     VText(
-                        color: model.colors.headerTitle.for(internalState),
-                        font: model.fonts.headerTitle,
+                        color: uiModel.colors.headerTitle.for(internalState),
+                        font: uiModel.fonts.headerTitle,
                         text: title
                     )
                     
                 case .custom(let label):
                     label()
-                        .opacity(model.colors.customHeaderLabelOpacities.for(internalState))
+                        .opacity(uiModel.colors.customHeaderLabelOpacities.for(internalState))
                 }
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -150,38 +150,38 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             Spacer()
             
             VSquareButton.chevron(
-                model: model.chevronButonSubModel,
+                uiModel: uiModel.chevronButonSubUIModel,
                 direction: internalState.chevronButtonDirection,
                 action: expandCollapse
             )
                 .disabled(!internalState.isEnabled)
         })
-            .padding(model.layout.headerMargins)
+            .padding(uiModel.layout.headerMargins)
     }
     
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
-                .frame(height: model.layout.dividerHeight)
-                .padding(model.layout.dividerMargins)
-                .foregroundColor(model.colors.divider)
+                .frame(height: uiModel.layout.dividerHeight)
+                .padding(uiModel.layout.dividerMargins)
+                .foregroundColor(uiModel.colors.divider)
         }
     }
     
     private var contentView: some View {
         content()
-            .padding(model.layout.contentMargins)
+            .padding(uiModel.layout.contentMargins)
             .frame(maxWidth: .infinity)
     }
 
     // MARK: Actions
     private func expandCollapse() {
-        withAnimation(model.animations.expandCollapse, { state.setNextState() })
+        withAnimation(uiModel.animations.expandCollapse, { state.setNextState() })
     }
     
     private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
         guard
-            model.misc.expandsAndCollapsesOnHeaderTap,
+            uiModel.misc.expandsAndCollapsesOnHeaderTap,
             isExpanded ^^ internalState.isExpanded
         else {
             return

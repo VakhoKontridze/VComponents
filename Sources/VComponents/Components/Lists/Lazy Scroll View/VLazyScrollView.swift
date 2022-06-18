@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Component can be initialized with data or free content.
 ///
-/// Model can be passed as parameter.
+/// UI Model can be passed as parameter.
 ///
 /// Component is a wrapped behind `ScrollView` and `LazyVStack`/`LazyHStack`, and supports lazy initialization.
 ///
@@ -123,8 +123,8 @@ public struct VLazyScrollView<Content>: View where Content: View {
     // MARK: Body
     @ViewBuilder public var body: some View {
         switch listType._lazyScrollViewType {
-        case .vertical(let model): VLazyScrollViewVertical(model: model, content: content)
-        case .horizontal(let model): VLazyScrollViewHorizontal(model: model, content: content)
+        case .vertical(let uiModel): VLazyScrollViewVertical(uiModel: uiModel, content: content)
+        case .horizontal(let uiModel): VLazyScrollViewHorizontal(uiModel: uiModel, content: content)
         }
     }
 }

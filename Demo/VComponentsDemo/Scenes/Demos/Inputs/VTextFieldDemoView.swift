@@ -22,17 +22,17 @@ struct VTextFieldDemoView: View {
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var numericalKeyboard: Bool = false
-    @State private var textAlignment: TextAlignment = VTextFieldModel.Layout().textAlignment
+    @State private var textAlignment: TextAlignment = VTextFieldUIModel.Layout().textAlignment
     @State private var autocapitalizaton: Bool = false
     @State private var autocorrection: Bool = false
-    @State private var hasClearButton: Bool = VTextFieldModel.Misc().hasClearButton
+    @State private var hasClearButton: Bool = VTextFieldUIModel.Misc().hasClearButton
     
-    private var model: VTextFieldModel {
-        var model: VTextFieldModel = .init()
+    private var uiModel: VTextFieldUIModel {
+        var uiModel: VTextFieldUIModel = .init()
         
-        model.layout.textAlignment = textAlignment
+        uiModel.layout.textAlignment = textAlignment
         
-        model.colors = {
+        uiModel.colors = {
             switch textFieldHighlight {
             case .none: return .init()
             case .success: return .success
@@ -41,14 +41,14 @@ struct VTextFieldDemoView: View {
             }
         }()
         
-        model.misc.keyboardType = numericalKeyboard ? .numberPad : .default
+        uiModel.misc.keyboardType = numericalKeyboard ? .numberPad : .default
         
-        model.misc.autocorrection = autocorrection
-        model.misc.autocapitalization = autocapitalizaton ? .words : nil
+        uiModel.misc.autocorrection = autocorrection
+        uiModel.misc.autocapitalization = autocapitalizaton ? .words : nil
         
-        model.misc.hasClearButton = hasClearButton
+        uiModel.misc.hasClearButton = hasClearButton
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -65,7 +65,7 @@ struct VTextFieldDemoView: View {
                 .onTapGesture(perform: { isFocused = false })
             
             VTextField(
-                model: model,
+                uiModel: uiModel,
                 type: textFieldType,
                 placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,

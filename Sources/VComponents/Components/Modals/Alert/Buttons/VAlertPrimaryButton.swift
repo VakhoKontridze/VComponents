@@ -10,17 +10,17 @@ import SwiftUI
 // MARK: - V Alert Primary Button
 struct VAlertPrimaryButton: View {
     // MARK: Properties
-    private let model: VPrimaryButtonModel
+    private let uiModel: VPrimaryButtonUIModel
     private let action: () -> Void
     private let title: String
     
     // MARK: Initializers
     init(
-        model: VPrimaryButtonModel,
+        uiModel: VPrimaryButtonUIModel,
         action: @escaping () -> Void,
         title: String
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.action = action
         self.title = title
     }
@@ -28,7 +28,7 @@ struct VAlertPrimaryButton: View {
     // MARK: Body
     public var body: some View {
         VPrimaryButton(
-            model: model,
+            uiModel: uiModel,
             isLoading: false,
             action: action,
             title: title
@@ -40,7 +40,7 @@ struct VAlertPrimaryButton: View {
 struct VAlertPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
         VAlertPrimaryButton(
-            model: VAlertModel().primaryButtonSubModel,
+            uiModel: VAlertUIModel().primaryButtonSubUIModel,
             action: {},
             title: "Lorem Ipsum"
         )

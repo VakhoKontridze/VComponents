@@ -18,31 +18,31 @@ struct VPrimaryButtonDemoView: View {
     @State private var labelType: VPrimaryButtonLabel = .title
     @State private var borderType: VPrimaryButtonBorder = .borderless
     
-    private var model: VPrimaryButtonModel {
-        let defaultModel: VPrimaryButtonModel = .init()
+    private var uiModel: VPrimaryButtonUIModel {
+        let defaultUIModel: VPrimaryButtonUIModel = .init()
         
-        var model: VPrimaryButtonModel = .init()
+        var uiModel: VPrimaryButtonUIModel = .init()
 
         if borderType == .bordered {
-            model.layout.borderWidth = 2
+            uiModel.layout.borderWidth = 2
 
-            model.colors.background = .init(
+            uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
                 disabled: .init("PrimaryButtonBordered.Background.disabled"),
                 loading: .init("PrimaryButtonBordered.Background.disabled")
             )
 
-            model.colors.border = defaultModel.colors.background
+            uiModel.colors.border = defaultUIModel.colors.background
             
-            model.colors.title = model.colors.icon
+            uiModel.colors.title = uiModel.colors.icon
             
-            model.colors.icon = defaultModel.colors.background
+            uiModel.colors.icon = defaultUIModel.colors.background
             
-            model.colors.loader = model.colors.icon.disabled
+            uiModel.colors.loader = uiModel.colors.icon.disabled
         }
 
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -54,9 +54,9 @@ struct VPrimaryButtonDemoView: View {
     private func component() -> some View {
         Group(content: {
             switch labelType {
-            case .title: VPrimaryButton(model: model, isLoading: isLoading, action: {}, title: buttonTitle)
-            case .iconTitle: VPrimaryButton(model: model, isLoading: isLoading, action: {}, icon: buttonIcon, title: buttonTitle)
-            case .custom: VPrimaryButton(model: model, isLoading: isLoading, action: {}, label: { buttonIcon })
+            case .title: VPrimaryButton(uiModel: uiModel, isLoading: isLoading, action: {}, title: buttonTitle)
+            case .iconTitle: VPrimaryButton(uiModel: uiModel, isLoading: isLoading, action: {}, icon: buttonIcon, title: buttonTitle)
+            case .custom: VPrimaryButton(uiModel: uiModel, isLoading: isLoading, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)

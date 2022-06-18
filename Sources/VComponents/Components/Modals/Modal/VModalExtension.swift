@@ -13,7 +13,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -25,11 +25,11 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vModal(
-    ///                 model: {
-    ///                     var model: VModalModel = .init()
-    ///                     model.misc.dismissType.remove(.leadingButton)
-    ///                     model.misc.dismissType.remove(.trailingButton)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VModalUIModel = .init()
+    ///                     uiModel.misc.dismissType.remove(.leadingButton)
+    ///                     uiModel.misc.dismissType.remove(.trailingButton)
+    ///                     return uiModel
     ///                 }(),
     ///                 isPresented: $isPresented,
     ///                 content: {
@@ -42,7 +42,7 @@ extension View {
     ///     }
     ///
     public func vModal<Content>(
-        model: VModalModel = .init(),
+        uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -57,7 +57,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VModal<Never, _>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .empty,
@@ -71,7 +71,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -95,7 +95,7 @@ extension View {
     ///     }
     ///
     public func vModal<Content>(
-        model: VModalModel = .init(),
+        uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -111,7 +111,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VModal<Never, _>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .title(title: headerTitle),
@@ -125,7 +125,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -154,7 +154,7 @@ extension View {
     ///     }
     ///
     public func vModal<HeaderLabel, Content>(
-        model: VModalModel = .init(),
+        uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -172,7 +172,7 @@ extension View {
                 isPresented: isPresented,
                 content: {
                     VModal(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .custom(label: headerLabel),
@@ -189,7 +189,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -205,11 +205,11 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vModal(
-    ///                 model: {
-    ///                     var model: VModalModel = .init()
-    ///                     model.misc.dismissType.remove(.leadingButton)
-    ///                     model.misc.dismissType.remove(.trailingButton)
-    ///                     return model
+    ///                 uiModel: {
+    ///                     var uiModel: VModalUIModel = .init()
+    ///                     uiModel.misc.dismissType.remove(.leadingButton)
+    ///                     uiModel.misc.dismissType.remove(.trailingButton)
+    ///                     return uiModel
     ///                 }(),
     ///                 item: $modalItem,
     ///                 content: { item in
@@ -222,7 +222,7 @@ extension View {
     ///     }
     ///
     public func vModal<Item, Content>(
-        model: VModalModel = .init(),
+        uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -244,7 +244,7 @@ extension View {
                 ),
                 content: {
                     VModal<Never, _>(
-                        model: model,
+                        uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: .empty,
@@ -262,7 +262,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -290,7 +290,7 @@ extension View {
     ///     }
     ///
     public func vModal<Item, Content>(
-        model: VModalModel = .init(),
+        uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -313,21 +313,21 @@ extension View {
                 ),
                 content: {
                     VModal<Never, _>(
-                       model: model,
-                       onPresent: presentHandler,
-                       onDismiss: dismissHandler,
-                       headerLabel: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
-                               return .title(title: headerTitle(item))
-                           } else {
-                               return .empty
-                           }
-                       }(),
-                       content: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
-                               content(item)
-                           }
-                       }
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        headerLabel: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return .title(title: headerTitle(item))
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                content(item)
+                            }
+                        }
                     )
                 }
             ))
@@ -337,7 +337,7 @@ extension View {
     ///
     /// Modal component that draws a background, and hosts content.
     ///
-    /// Model, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -370,7 +370,7 @@ extension View {
     ///     }
     ///
     public func vModal<Item, HeaderLabel, Content>(
-        model: VModalModel = .init(),
+        uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -394,21 +394,21 @@ extension View {
                 ),
                 content: {
                     VModal<HeaderLabel, _>(
-                       model: model,
-                       onPresent: presentHandler,
-                       onDismiss: dismissHandler,
-                       headerLabel: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
-                               return .custom(label: { headerLabel(item) })
-                           } else {
-                               return .empty
-                           }
-                       }(),
-                       content: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
-                               content(item)
-                           }
-                       }
+                        uiModel: uiModel,
+                        onPresent: presentHandler,
+                        onDismiss: dismissHandler,
+                        headerLabel: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                return .custom(label: { headerLabel(item) })
+                            } else {
+                                return .empty
+                            }
+                        }(),
+                        content: {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                                content(item)
+                            }
+                        }
                     )
                 }
             ))

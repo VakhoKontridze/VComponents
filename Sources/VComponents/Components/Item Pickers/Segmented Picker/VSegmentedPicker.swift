@@ -14,7 +14,7 @@ import SwiftUI
 ///
 /// Best suited for `2` – `3` items.
 ///
-/// Model, header, footer, and disabled indexes can be passed as parameters.
+/// UI Model, header, footer, and disabled indexes can be passed as parameters.
 ///
 ///     enum PickerRow: Int, PickableTitledEnumeration {
 ///         case red, green, blue
@@ -45,7 +45,7 @@ public struct VSegmentedPicker<Data, Content>: View
         Content: View
 {
     // MARK: Properties
-    private let model: VSegmentedPickerModel
+    private let uiModel: VSegmentedPickerUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var pressedIndex: Int?
@@ -70,7 +70,7 @@ public struct VSegmentedPicker<Data, Content>: View
     // MARK: Initializers - Index
     /// Initializes component with selected index, data, and row content.
     public init(
-        model: VSegmentedPickerModel = .init(),
+        uiModel: VSegmentedPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -78,7 +78,7 @@ public struct VSegmentedPicker<Data, Content>: View
         data: Data,
         @ViewBuilder content: @escaping (Data.Element) -> Content
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
@@ -88,7 +88,7 @@ public struct VSegmentedPicker<Data, Content>: View
 
     /// Initializes component with selected index and row titles.
     public init(
-        model: VSegmentedPickerModel = .init(),
+        uiModel: VSegmentedPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -99,7 +99,7 @@ public struct VSegmentedPicker<Data, Content>: View
             Data == Array<Never>,
             Content == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
@@ -110,7 +110,7 @@ public struct VSegmentedPicker<Data, Content>: View
     // MARK: Initializers - Hashable
     /// Initializes component with selection value, data, and row content.
     public init<SelectionValue>(
-        model: VSegmentedPickerModel = .init(),
+        uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -122,7 +122,7 @@ public struct VSegmentedPicker<Data, Content>: View
             Data == Array<SelectionValue>,
             SelectionValue: Hashable
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { data.firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = data[$0] }
@@ -135,7 +135,7 @@ public struct VSegmentedPicker<Data, Content>: View
     
     /// Initializes component with selection value and row titles.
     public init(
-        model: VSegmentedPickerModel = .init(),
+        uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<String>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -146,7 +146,7 @@ public struct VSegmentedPicker<Data, Content>: View
             Data == Array<Never>,
             Content == Never
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { rowTitles.firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = rowTitles[$0] }
@@ -160,7 +160,7 @@ public struct VSegmentedPicker<Data, Content>: View
     // MARK: Initializers - Pickable Enumeration & Pickable Titled Enumeration
     /// Initializes component with `PickableEnumeration` and row content.
     public init<PickableItem>(
-        model: VSegmentedPickerModel = .init(),
+        uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<PickableItem>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -171,7 +171,7 @@ public struct VSegmentedPicker<Data, Content>: View
             Data == Array<PickableItem>,
             PickableItem: PickableEnumeration
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
@@ -184,7 +184,7 @@ public struct VSegmentedPicker<Data, Content>: View
     
     /// Initializes component with `PickableTitledEnumeration`.
     public init<PickableItem>(
-        model: VSegmentedPickerModel = .init(),
+        uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<PickableItem>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
@@ -195,7 +195,7 @@ public struct VSegmentedPicker<Data, Content>: View
             Content == Never,
             PickableItem: PickableTitledEnumeration
     {
-        self.model = model
+        self.uiModel = uiModel
         self._selectedIndex = .init(
             get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
             set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
@@ -208,36 +208,36 @@ public struct VSegmentedPicker<Data, Content>: View
     
     // MARK: Body
     public var body: some View {
-        VStack(alignment: .leading, spacing: model.layout.headerPickerFooterSpacing, content: {
+        VStack(alignment: .leading, spacing: uiModel.layout.headerPickerFooterSpacing, content: {
             header
             picker
             footer
         })
-            .animation(model.animations.selection, value: internalState)
-            .animation(model.animations.selection, value: selectedIndex)
+            .animation(uiModel.animations.selection, value: internalState)
+            .animation(uiModel.animations.selection, value: selectedIndex)
     }
     
     @ViewBuilder private var header: some View {
         if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: model.layout.headerLineLimit),
-                color: model.colors.header.for(internalState),
-                font: model.fonts.header,
+                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
+                color: uiModel.colors.header.for(internalState),
+                font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
     @ViewBuilder private var footer: some View {
         if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: model.layout.footerLineLimit),
-                color: model.colors.footer.for(internalState),
-                font: model.fonts.footer,
+                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
+                color: uiModel.colors.footer.for(internalState),
+                font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -248,26 +248,26 @@ public struct VSegmentedPicker<Data, Content>: View
             rows
             dividers
         })
-            .frame(height: model.layout.height)
-            .cornerRadius(model.layout.cornerRadius)
+            .frame(height: uiModel.layout.height)
+            .cornerRadius(uiModel.layout.cornerRadius)
     }
     
     private var pickerBackground: some View {
-        model.colors.background.for(internalState)
+        uiModel.colors.background.for(internalState)
     }
     
     private var indicator: some View {
-        RoundedRectangle(cornerRadius: model.layout.indicatorCornerRadius)
-            .padding(model.layout.indicatorMargin)
+        RoundedRectangle(cornerRadius: uiModel.layout.indicatorCornerRadius)
+            .padding(uiModel.layout.indicatorMargin)
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale)
             .offset(x: rowWidth * .init(selectedIndex))
-            .foregroundColor(model.colors.indicator.for(internalState))
+            .foregroundColor(uiModel.colors.indicator.for(internalState))
             .shadow(
-                color: model.colors.indicatorShadow.for(internalState),
-                radius: model.layout.indicatorShadowRadius,
-                x: model.layout.indicatorShadowOffsetX,
-                y: model.layout.indicatorShadowOffsetY
+                color: uiModel.colors.indicatorShadow.for(internalState),
+                radius: uiModel.layout.indicatorShadowRadius,
+                x: uiModel.layout.indicatorShadowOffsetX,
+                y: uiModel.layout.indicatorShadowOffsetY
             )
     }
     
@@ -280,12 +280,12 @@ public struct VSegmentedPicker<Data, Content>: View
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
-                                color: model.colors.title.for(rowState(for: i)),
-                                font: model.fonts.rows,
+                                color: uiModel.colors.title.for(rowState(for: i)),
+                                font: uiModel.fonts.rows,
                                 text: titles[i]
                             )
-                                .padding(model.layout.indicatorMargin)
-                                .padding(model.layout.contentMargin)
+                                .padding(uiModel.layout.indicatorMargin)
+                                .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
 
                                 .readSize(onChange: { rowWidth = $0.width })
@@ -302,11 +302,11 @@ public struct VSegmentedPicker<Data, Content>: View
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             content(data[i])
-                                .padding(model.layout.indicatorMargin)
-                                .padding(model.layout.contentMargin)
+                                .padding(uiModel.layout.indicatorMargin)
+                                .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
 
-                                .opacity(model.colors.customContentOpacities.for(rowState(for: i)))
+                                .opacity(uiModel.colors.customContentOpacities.for(rowState(for: i)))
 
                                 .readSize(onChange: { rowWidth = $0.width })
                         }
@@ -324,8 +324,8 @@ public struct VSegmentedPicker<Data, Content>: View
 
                 if i <= content.count-2 {
                     Rectangle()
-                        .frame(size: model.layout.dividerSize)
-                        .foregroundColor(model.colors.divider.for(internalState))
+                        .frame(size: uiModel.layout.dividerSize)
+                        .foregroundColor(uiModel.colors.divider.for(internalState))
                         .opacity(dividerOpacity(for: i))
                 }
             })
@@ -341,7 +341,7 @@ public struct VSegmentedPicker<Data, Content>: View
     // MARK: State Indication
     private var indicatorScale: CGFloat {
         switch selectedIndex {
-        case pressedIndex: return model.layout.indicatorPressedScale
+        case pressedIndex: return uiModel.layout.indicatorPressedScale
         case _: return 1
         }
     }

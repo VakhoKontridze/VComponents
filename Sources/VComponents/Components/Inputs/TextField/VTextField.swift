@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Text Field
 /// Input component that displays an editable text interface.
 ///
-/// Model, type, palceholder, header, and footer can be passed as parameters.
+/// UI Model, type, palceholder, header, and footer can be passed as parameters.
 ///
 /// By default, component type is `standard`.
 /// If `secure` type is used, visiblity button would replace clear button. When textfield is secure and text is empty, and buttons are not visible.
@@ -95,7 +95,7 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VTextField(
-///             model: .success,
+///             uiModel: .success,
 ///             text: $text
 ///         )
 ///             .padding()
@@ -107,7 +107,7 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VTextField(
-///             model: .warning,
+///             uiModel: .warning,
 ///             text: $text
 ///         )
 ///             .padding()
@@ -119,7 +119,7 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VTextField(
-///             model: .error,
+///             uiModel: .error,
 ///             text: $text
 ///         )
 ///             .padding()
@@ -127,7 +127,7 @@ import SwiftUI
 ///
 public struct VTextField: View {
     // MARK: Properties
-    private let model: VTextFieldModel
+    private let uiModel: VTextFieldUIModel
     private let textFieldType: VTextFieldType
 
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -146,14 +146,14 @@ public struct VTextField: View {
     // MARK: Initialiers
     /// Initializes component with title.
     public init(
-        model: VTextFieldModel = .init(),
+        uiModel: VTextFieldUIModel = .init(),
         type textFieldType: VTextFieldType = .default,
         placeholder: String? = nil,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         text: Binding<String>
     ) {
-        self.model = model
+        self.uiModel = uiModel
         self.textFieldType = textFieldType
         self.placeholder = placeholder
         self.headerTitle = headerTitle
@@ -165,7 +165,7 @@ public struct VTextField: View {
     public var body: some View {
         syncInternalStateWithState()
 
-        return VStack(alignment: .leading, spacing: model.layout.headerTextFieldFooterSpacing, content: {
+        return VStack(alignment: .leading, spacing: uiModel.layout.headerTextFieldFooterSpacing, content: {
             header
             input
             footer
@@ -175,47 +175,47 @@ public struct VTextField: View {
     @ViewBuilder private var header: some View {
         if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: model.layout.headerLineLimit),
-                color: model.colors.header.for(internalState),
-                font: model.fonts.header,
+                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
+                color: uiModel.colors.header.for(internalState),
+                font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
 
     @ViewBuilder private var footer: some View {
         if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: model.layout.footerLineLimit),
-                color: model.colors.footer.for(internalState),
-                font: model.fonts.footer,
+                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
+                color: uiModel.colors.footer.for(internalState),
+                font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, model.layout.headerFooterMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
     private var input: some View {
-        HStack(spacing: model.layout.contentSpacing, content: {
+        HStack(spacing: uiModel.layout.contentSpacing, content: {
             searchIcon // Only for search field
             textField
             clearButton
             visibilityButton // Only for secure field
         })
-            .padding(.horizontal, model.layout.contentMarginHorizontal)
-            .frame(height: model.layout.height)
+            .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
+            .frame(height: uiModel.layout.height)
             .background(background)
-            .frame(height: model.layout.height)
+            .frame(height: uiModel.layout.height)
     }
     
     private var background: some View {
         ZStack(content: {
-            RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .foregroundColor(model.colors.background.for(internalState))
+            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                .foregroundColor(uiModel.colors.background.for(internalState))
 
-            RoundedRectangle(cornerRadius: model.layout.cornerRadius)
-                .strokeBorder(model.colors.border.for(internalState), lineWidth: model.layout.borderWidth)
+            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWidth)
         })
     }
 
@@ -223,8 +223,8 @@ public struct VTextField: View {
         if textFieldType.isSearch {
             ImageBook.textFieldSearch
                 .resizable()
-                .frame(dimension: model.layout.searchIconDimension)
-                .foregroundColor(model.colors.searchIcon.for(internalState))
+                .frame(dimension: uiModel.layout.searchIconDimension)
+                .foregroundColor(uiModel.colors.searchIcon.for(internalState))
         }
     }
 
@@ -238,25 +238,25 @@ public struct VTextField: View {
         
             .onChange(of: text, perform: textChanged)
         
-            .multilineTextAlignment(model.layout.textAlignment)
-            .foregroundColor(model.colors.text.for(internalState))
+            .multilineTextAlignment(uiModel.layout.textAlignment)
+            .foregroundColor(uiModel.colors.text.for(internalState))
             .font({
                 switch text.isEmpty {
-                case false: return model.fonts.text
-                case true: return model.fonts.placeholder
+                case false: return uiModel.fonts.text
+                case true: return uiModel.fonts.placeholder
                 }
             }())
-            .keyboardType(model.misc.keyboardType)
-            .textContentType(model.misc.textContentType)
-            .disableAutocorrection(model.misc.autocorrection.map { !$0 })
-            .textInputAutocapitalization(model.misc.autocapitalization)
-            .submitLabel(model.misc.submitButton)
+            .keyboardType(uiModel.misc.keyboardType)
+            .textContentType(uiModel.misc.textContentType)
+            .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
+            .textInputAutocapitalization(uiModel.misc.autocapitalization)
+            .submitLabel(uiModel.misc.submitButton)
     }
 
     @ViewBuilder private var clearButton: some View {
-        if !textFieldType.isSecure && clearButtonIsVisible && model.misc.hasClearButton {
+        if !textFieldType.isSecure && clearButtonIsVisible && uiModel.misc.hasClearButton {
             VSquareButton.close(
-                model: model.clearButtonSubModel,
+                uiModel: uiModel.clearButtonSubUIModel,
                 action: didTapClearButton
             )
                 .disabled(!internalState.isEnabled)
@@ -266,7 +266,7 @@ public struct VTextField: View {
     @ViewBuilder private var visibilityButton: some View {
         if textFieldType.isSecure {
             VSquareButton(
-                model: model.visibilityButtonSubModel,
+                uiModel: uiModel.visibilityButtonSubUIModel,
                 action: { secureFieldIsVisible.toggle() },
                 icon: visiblityIcon
             )
@@ -295,12 +295,12 @@ public struct VTextField: View {
 
     // MARK: Actions
     private func textChanged(_ text: String) {
-        withAnimation(model.animations.clearButton, { clearButtonIsVisible = !text.isEmpty })
+        withAnimation(uiModel.animations.clearButton, { clearButtonIsVisible = !text.isEmpty })
     }
 
     private func didTapClearButton() {
         text = ""
-        withAnimation(model.animations.clearButton, { clearButtonIsVisible = false })
+        withAnimation(uiModel.animations.clearButton, { clearButtonIsVisible = false })
     }
 }
 

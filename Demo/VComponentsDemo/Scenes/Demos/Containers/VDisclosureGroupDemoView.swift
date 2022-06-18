@@ -16,17 +16,17 @@ struct VDisclosureGroupDemoView: View {
     @State private var isEnabled: Bool = true
     @State private var isExpanded: Bool = true
     @State private var expandCollapseOnHeaderTap: Bool = true
-    @State private var hasDivider: Bool = VDisclosureGroupModel.Layout().dividerHeight > 0
+    @State private var hasDivider: Bool = VDisclosureGroupUIModel.Layout().dividerHeight > 0
     
-    private var model: VDisclosureGroupModel {
-        var model: VDisclosureGroupModel = .init()
+    private var uiModel: VDisclosureGroupUIModel {
+        var uiModel: VDisclosureGroupUIModel = .init()
         
-        model.layout.dividerHeight = hasDivider ? (model.layout.dividerHeight == 0 ? 1 : model.layout.dividerHeight) : 0
-        model.colors.divider = hasDivider ? (model.colors.divider == .clear ? .gray : model.colors.divider) : .clear
+        uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
+        uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
         
-        model.misc.expandsAndCollapsesOnHeaderTap = expandCollapseOnHeaderTap
+        uiModel.misc.expandsAndCollapsesOnHeaderTap = expandCollapseOnHeaderTap
         
-        return model
+        return uiModel
     }
 
     // MARK: Body
@@ -44,7 +44,7 @@ struct VDisclosureGroupDemoView: View {
             ColorBook.canvas.ignoresSafeArea()
 
             VDisclosureGroup(
-                model: model,
+                uiModel: uiModel,
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
