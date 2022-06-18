@@ -189,7 +189,7 @@ Preferred:
 ```swift
 @State var isOn: Bool = false
 
-let model: VToggleUIModel = {
+let uiModel: VToggleUIModel = {
     var uiModel: VToggleUIModel = .init()
     uiModel.animations.stateChange = nil
     return uiModel
