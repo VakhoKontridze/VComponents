@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Generic State (Collapsed, Expanded, Disabled)
 enum GenericState_CED {
@@ -90,7 +91,7 @@ extension GenericStateModel_CED: Equatable where Value: Equatable {}
 
 extension GenericStateModel_CED: Comparable where Value: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        (lhs.collapsed, lhs.expanded, lhs.disabled) < (rhs.collapsed, rhs.expanded, rhs.disabled)
+        isLess(lhs, than: rhs, by: \.collapsed, \.expanded, \.disabled)
     }
 }
 

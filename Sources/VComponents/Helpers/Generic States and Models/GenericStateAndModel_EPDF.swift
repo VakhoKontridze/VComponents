@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Generic State (Enabled, Pressed, Disabled, Focused)
 enum GenericState_EPDF {
@@ -93,7 +94,7 @@ extension GenericStateModel_EPDF: Equatable where Value: Equatable {}
 
 extension GenericStateModel_EPDF: Comparable where Value: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        (lhs.enabled, lhs.pressed, lhs.disabled, lhs.focused) < (rhs.enabled, rhs.pressed, rhs.disabled, rhs.focused)
+        isLess(lhs, than: rhs, by: \.enabled, \.pressed, \.disabled, \.focused)
     }
 }
 

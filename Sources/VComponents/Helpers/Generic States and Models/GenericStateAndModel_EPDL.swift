@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Generic State (Enabled, Pressed, Disabled, Loading)
 enum GenericState_EPDL {
@@ -93,7 +94,7 @@ extension GenericStateModel_EPDL: Equatable where Value: Equatable {}
 
 extension GenericStateModel_EPDL: Comparable where Value: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        (lhs.enabled, lhs.pressed, lhs.disabled, lhs.loading) < (rhs.enabled, rhs.pressed, rhs.disabled, rhs.loading)
+        isLess(lhs, than: rhs, by: \.enabled, \.pressed, \.disabled, \.loading)
     }
 }
 

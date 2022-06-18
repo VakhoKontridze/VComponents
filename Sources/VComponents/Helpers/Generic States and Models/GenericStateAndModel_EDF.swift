@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Generic State (Enabled, Disabled, Focused)
 enum GenericState_EDF {
@@ -75,7 +76,7 @@ extension GenericStateModel_EDF: Equatable where Value: Equatable {}
 
 extension GenericStateModel_EDF: Comparable where Value: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        (lhs.enabled, lhs.disabled, lhs.focused) < (rhs.enabled, rhs.disabled, rhs.focused)
+        isLess(lhs, than: rhs, by: \.enabled, \.disabled, \.focused)
     }
 }
 

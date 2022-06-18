@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import VCore
 
 // MARK: Modal Sizes
 /// Model that describes modal sizes.
@@ -72,7 +73,7 @@ extension ModalSizes: Equatable where ModalSizeMeasurement: Equatable {}
 
 extension ModalSizes: Comparable where ModalSizeMeasurement: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        (lhs.portrait, lhs.landscape) < (rhs.portrait, lhs.landscape)
+        isLess(lhs, than: rhs, by: \.portrait, \.landscape)
     }
 }
 

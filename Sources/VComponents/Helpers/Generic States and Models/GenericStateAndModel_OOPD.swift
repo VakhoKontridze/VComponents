@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Generic State (Off, On, Pressed, Disabled)
 enum GenericState_OOPD {
@@ -113,8 +114,7 @@ extension GenericStateModel_OOPD: Equatable where Value: Equatable {}
 
 extension GenericStateModel_OOPD: Comparable where Value: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        (lhs.off, lhs.on, lhs.pressedOff, lhs.pressedOn, lhs.disabled) <
-        (rhs.off, rhs.on, rhs.pressedOff, rhs.pressedOn, rhs.disabled)
+        isLess(lhs, than: rhs, by: \.off, \.on, \.pressedOff, \.pressedOn, \.disabled)
     }
 }
 
