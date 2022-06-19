@@ -22,7 +22,7 @@ enum HomeRow: Int, DemoableRow {
     case text, sheet, lazyScrollView
 
     // MARK: Properties
-    static var sections: [DemoSection<HomeRow>] {
+    static var sections: [DemoSection<Self>] {
         [
             .init(id: 0, title: "Buttons", rows: [
                 .baseButton,

@@ -43,15 +43,13 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Content>(
+    public func vBottomSheet(
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -102,16 +100,14 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Content>(
+    public func vBottomSheet(
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         headerTitle: String,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -167,18 +163,14 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vBottomSheet<HeaderLabel, Content>(
+    public func vBottomSheet(
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where
-            HeaderLabel: View,
-            Content: View
-    {
+        @ViewBuilder headerLabel: @escaping () -> some View,
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -237,16 +229,14 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Item, Content>(
+    public func vBottomSheet<Item>(
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -311,17 +301,15 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Item, Content>(
+    public func vBottomSheet<Item>(
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         headerTitle: @escaping (Item) -> String,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -397,18 +385,15 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Item, HeaderLabel, Content>(
+    public func vBottomSheet<Item>(
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping (Item) -> HeaderLabel,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder headerLabel: @escaping (Item) -> some View,
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            HeaderLabel: View,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -421,8 +406,8 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                    VBottomSheet<HeaderLabel, _>(
-                        uiModel: uiModel,
+                    VBottomSheet(
+                       uiModel: uiModel,
                        onPresent: presentHandler,
                        onDismiss: dismissHandler,
                        headerLabel: {

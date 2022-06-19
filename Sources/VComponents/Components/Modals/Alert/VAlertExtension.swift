@@ -96,18 +96,16 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vAlert<Content>(
+    public func vAlert(
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: String?,
         message: String?,
-        @ViewBuilder content: @escaping () -> Content,
+        @ViewBuilder content: @escaping () -> some View,
         actions buttons: [VAlertButton]
-    ) -> some View
-        where Content: View
-    {
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -254,19 +252,17 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vAlert<Item, Content>(
+    public func vAlert<Item>(
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
-        @ViewBuilder content: @escaping (Item) -> Content,
+        @ViewBuilder content: @escaping (Item) -> some View,
         actions buttons: @escaping (Item) -> [VAlertButton]
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -279,7 +275,7 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                    VAlert<Content>(
+                    VAlert(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -451,7 +447,7 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vAlert<T, Content>(
+    public func vAlert<T>(
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         presenting data: T?,
@@ -459,11 +455,9 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
-        @ViewBuilder content: @escaping (T) -> Content,
+        @ViewBuilder content: @escaping (T) -> some View,
         actions buttons: @escaping (T) -> [VAlertButton]
-    ) -> some View
-        where Content: View
-    {
+    ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
         return self
@@ -475,7 +469,7 @@ extension View {
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
                 content: {
-                    VAlert<Content>(
+                    VAlert(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
@@ -634,7 +628,7 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vAlert<E, Content>(
+    public func vAlert<E>(
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
@@ -642,12 +636,10 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
-        @ViewBuilder content: @escaping (E) -> Content,
+        @ViewBuilder content: @escaping (E) -> some View,
         actions buttons: @escaping (E) -> [VAlertButton]
     ) -> some View
-        where
-            E: Error,
-            Content: View
+        where E: Error
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -660,7 +652,7 @@ extension View {
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
                 content: {
-                    VAlert<Content>(
+                    VAlert(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,

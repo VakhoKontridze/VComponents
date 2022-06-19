@@ -33,12 +33,10 @@ import SwiftUI
 /// If two modals are active at the same time, who are launched from the same `View` type (such as `SwiftUI.Button`), caching will fail.
 ///
 ///     extension View {
-///         public func someModal<Content>(
+///         public func someModal(
 ///             isPresented: Binding<Bool>,
-///             @ViewBuilder content: @escaping () -> Content
-///         ) -> some View
-///             where Content: View
-///         {
+///             @ViewBuilder content: @escaping () -> some View
+///         ) -> some View {
 ///             self
 ///                 .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
 ///                 .background(PresentationHost(
@@ -110,14 +108,12 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     
     // MARK: Initializers
     /// Initializes `PresentationHost` with condition and content.
-    public init<PresentingView>(
-        in presentingView: PresentingView,
+    public init(
+        in presentingView: some View,
         isPresented: Binding<Bool>,
         allowsHitTests: Bool = true,
         content: @escaping () -> Content
-    )
-        where PresentingView: View
-    {
+    ) {
         self.presentingViewType = SwiftUIViewTypeDescriber.describe(presentingView)
         self.isPresented = isPresented
         self.allowsHitTests = allowsHitTests
@@ -168,12 +164,10 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     
     // MARK: Force Dismiss
     /// Forcefully dismisses presented view from presenter.
-    public static func forceDismiss<PresentingView>(
-        in presentingView: PresentingView
+    public static func forceDismiss(
+        in presentingView: some View
     )
-        where
-            Content == Never,
-            PresentingView: View
+        where Content == Never
     {
         PresentationHostViewController.forceDismiss(in: presentingView)
     }

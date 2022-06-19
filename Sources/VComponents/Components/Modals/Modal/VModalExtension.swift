@@ -41,15 +41,13 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vModal<Content>(
+    public func vModal(
         uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -94,16 +92,14 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vModal<Content>(
+    public func vModal(
         uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         headerTitle: String,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -153,18 +149,14 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vModal<HeaderLabel, Content>(
+    public func vModal(
         uiModel: VModalUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where
-            HeaderLabel: View,
-            Content: View
-    {
+        @ViewBuilder headerLabel: @escaping () -> some View,
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -221,16 +213,14 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vModal<Item, Content>(
+    public func vModal<Item>(
         uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -289,17 +279,15 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vModal<Item, Content>(
+    public func vModal<Item>(
         uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         headerTitle: @escaping (Item) -> String,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
         
@@ -369,18 +357,15 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vModal<Item, HeaderLabel, Content>(
+    public func vModal<Item>(
         uiModel: VModalUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping (Item) -> HeaderLabel,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder headerLabel: @escaping (Item) -> some View,
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            HeaderLabel: View,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -393,7 +378,7 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                    VModal<HeaderLabel, _>(
+                    VModal(
                         uiModel: uiModel,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,

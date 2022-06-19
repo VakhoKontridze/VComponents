@@ -18,11 +18,9 @@ final class PresentationHostDataSourceCache {
     private init() {}
     
     // MARK: Get
-    func get<PresentingView>(
-        key presentingView: PresentingView
-    ) -> Any?
-        where PresentingView: View
-    {
+    func get(
+        key presentingView: some View
+    ) -> Any? {
         get(key: SwiftUIViewTypeDescriber.describe(presentingView))
     }
         
@@ -33,12 +31,10 @@ final class PresentationHostDataSourceCache {
     }
     
     // MARK: Set
-    func set<PresentingView>(
-        key presentingView: PresentingView,
+    func set(
+        key presentingView: some View,
         value: Any
-    )
-        where PresentingView: View
-    {
+    ) {
         set(
             key: SwiftUIViewTypeDescriber.describe(presentingView),
             value: value

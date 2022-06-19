@@ -18,7 +18,7 @@ let package: Package = .init(
     
     dependencies: [
         //.package(url: "https://github.com/VakhoKontridze/VCore", "3.6.0"..<"4.0.0")
-        .package(url: "https://github.com/VakhoKontridze/VCore", branch: "dev")
+        .package(url: "https://github.com/VakhoKontridze/VCore", branch: "feature-swift-5.7")
     ],
     
     targets: [

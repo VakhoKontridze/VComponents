@@ -36,12 +36,10 @@ extension View {
     ///            .navigationBarTitleDisplayMode(.inline)
     ///     }
     ///
-    public func vNavigationLink<Destination>(
+    public func vNavigationLink(
         isActive: Binding<Bool>,
-        @ViewBuilder destination: @escaping () -> Destination
-    ) -> some View
-        where Destination: View
-    {
+        @ViewBuilder destination: @escaping () -> some View
+    ) -> some View {
         navigationLink(
             isActive: isActive,
             destination: destination

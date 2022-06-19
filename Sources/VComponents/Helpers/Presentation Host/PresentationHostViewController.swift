@@ -54,7 +54,7 @@ public final class PresentationHostViewController: UIViewController {
     }
     
     // MARK: Presentation
-    func presentHostedView<Content>(_ content: Content) where Content: View {
+    func presentHostedView(_ content: some View) {
         guard let windowView: UIView = UIApplication.shared.activeView else { return }
         
         hostingController = .init(rootView: .init(content))
@@ -81,7 +81,7 @@ public final class PresentationHostViewController: UIViewController {
         ])
     }
     
-    func updateHostedView<Content>(with content: Content) where Content: View {
+    func updateHostedView(with content: some View) {
         hostingController?.rootView = .init(content)
     }
     
@@ -95,11 +95,7 @@ public final class PresentationHostViewController: UIViewController {
     }
     
     // MARK: Froce Dismiss
-    static func forceDismiss<PresentingView>(
-        in presentingView: PresentingView
-    )
-        where PresentingView: View
-    {
+    static func forceDismiss(in presentingView: some View) {
         let presentingViewType: String = SwiftUIViewTypeDescriber.describe(presentingView)
         
         UIApplication.shared.activeView?.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()

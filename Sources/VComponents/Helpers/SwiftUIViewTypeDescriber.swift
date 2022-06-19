@@ -13,12 +13,8 @@ struct SwiftUIViewTypeDescriber {
     private init() {}
     
     // MARK: Describe
-    static func describe<Content>(
-        _ content: Content
-    ) -> String
-        where Content: View
-    {
-        if Content.Body.self == Never.self {
+    static func describe(_ content: some View) -> String {
+        if type(of: content).Body.self == Never.self {
             return .init(describing: type(of: content))
         } else {
             return .init(describing: type(of: content.body))

@@ -35,15 +35,13 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vSideBar<Content>(
+    public func vSideBar(
         uiModel: VSideBarUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
             .background(PresentationHost(
@@ -93,16 +91,14 @@ extension View {
     ///             )
     ///     }
     ///
-    public func vSideBar<Item, Content>(
+    public func vSideBar<Item>(
         uiModel: VSideBarUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 

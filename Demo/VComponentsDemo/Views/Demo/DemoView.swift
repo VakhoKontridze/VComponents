@@ -118,12 +118,10 @@ struct DemoView<ComponentContent, SettingsContent>: View
         })
     }
     
-    private func componentView<Content>(
+    private func componentView(
         type: DemoViewComponentContentType,
-        @ViewBuilder component: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder component: @escaping () -> some View
+    ) -> some View {
         // Component view is embedded in VStack, as some demo's contain swift case in Groups.
         // Since Group is a pseudo-view, it may cause `VBottomSheets` flicker.
         VStack(content: {
@@ -148,11 +146,9 @@ struct DemoView<ComponentContent, SettingsContent>: View
         })
     }
     
-    private func settingsView<Content>(
-        @ViewBuilder settings: @escaping () -> Content
-    )  -> some View
-        where Content: View
-    {
+    private func settingsView(
+        @ViewBuilder settings: @escaping () -> some View
+    )  -> some View {
         VPlainButton(
             action: { isPresented = true },
             icon: .init(systemName: "gearshape")
