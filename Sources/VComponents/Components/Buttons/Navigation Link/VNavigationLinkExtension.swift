@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Extension
 extension View {
@@ -41,15 +42,9 @@ extension View {
     ) -> some View
         where Destination: View
     {
-        self
-            .background(
-                NavigationLink(
-                    isActive: isActive,
-                    destination: destination,
-                    label: { EmptyView() }
-                )
-                    .allowsHitTesting(false)
-                    .opacity(0)
-            )
+        navigationLink(
+            isActive: isActive,
+            destination: destination
+        )
     }
 }
