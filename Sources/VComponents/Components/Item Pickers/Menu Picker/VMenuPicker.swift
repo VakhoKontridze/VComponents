@@ -131,7 +131,7 @@ public struct VMenuPicker<Label, Data>: View
     public var body: some View {
         Menu(
             content: { menuContent },
-            label: { label() }
+            label: label
         )
             .disabled(!internalState.isEnabled)
     }
@@ -145,7 +145,7 @@ public struct VMenuPicker<Label, Data>: View
                         .tag(i)
                 })
             },
-            label: { EmptyView() }
+            label: EmptyView.init
         )
             .pickerStyle(.inline)
     }

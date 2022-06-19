@@ -32,7 +32,7 @@ struct SecurableTextField: View {
             TextField(
                 text: $text,
                 prompt: placeholder.map { .init($0) },
-                label: { EmptyView() }
+                label: EmptyView.init
             )
                 .labelsHidden()
             
@@ -40,7 +40,7 @@ struct SecurableTextField: View {
             SecureField(
                 text: $text,
                 prompt: placeholder.map { .init($0) },
-                label: { EmptyView() }
+                label: EmptyView.init
             )
                 .labelsHidden()
         }

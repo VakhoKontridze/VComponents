@@ -220,7 +220,7 @@ public struct VWheelPicker<Data, Content>: View
         Picker(
             selection: $selectedIndex,
             content: rows,
-            label: { EmptyView() }
+            label: EmptyView.init
         )
             .pickerStyle(.wheel)
             .disabled(!internalState.isEnabled) // Luckily, doesn't affect colors

@@ -180,9 +180,10 @@ public struct VStepper: View {
         }()
         
         longPressIncrementTimerIncremental = .scheduledTimer(withTimeInterval: interval, repeats: true, block: { timer in
-            switch pressedButton {
-            case nil: zeroLongPressTimers()
-            case let button?: clickGestureHandler(button)
+            if let pressedButton = pressedButton {
+                clickGestureHandler(pressedButton)
+            } else {
+                zeroLongPressTimers()
             }
         })
         

@@ -59,7 +59,7 @@ public struct VMenu<Label>: View where Label: View {
     public var body: some View {
         Menu(
             content: { VMenuContentView(rows: rows) },
-            label: { label() }
+            label: label
         )
             .disabled(!internalState.isEnabled)
     }
