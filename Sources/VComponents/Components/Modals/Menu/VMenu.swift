@@ -10,6 +10,8 @@ import SwiftUI
 // MARK: - V Menu
 /// Modal component that presents menu of actions.
 ///
+/// Unlike native menu, this components doesn't take reverse row order.
+///
 ///     var body: some View {
 ///         VMenu(
 ///             rows: [

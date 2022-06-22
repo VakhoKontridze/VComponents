@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Bool
 extension View {
-    /// Presents `VModal` when boolean is `true`.
+    /// Presents modal when boolean is `true`.
     ///
     /// Modal component that draws a background, and hosts content.
     ///
@@ -67,7 +67,7 @@ extension View {
             ))
     }
     
-    /// Presents `VModal` when boolean is `true`.
+    /// Presents modal when boolean is `true`.
     ///
     /// Modal component that draws a background, and hosts content.
     ///
@@ -121,7 +121,7 @@ extension View {
             ))
     }
     
-    /// Presents `VModal` when boolean is `true`.
+    /// Presents modal when boolean is `true`.
     ///
     /// Modal component that draws a background, and hosts content.
     ///
@@ -185,7 +185,7 @@ extension View {
 
 // MARK: - Item
 extension View {
-    /// Presents `VModal` using the item as data source for content.
+    /// Presents modal using the item as data source for content.
     ///
     /// Modal component that draws a background, and hosts content.
     ///
@@ -258,7 +258,7 @@ extension View {
             ))
     }
     
-    /// Presents `VModal` using the item as data source for content.
+    /// Presents modal using the item as data source for content.
     ///
     /// Modal component that draws a background, and hosts content.
     ///
@@ -333,7 +333,7 @@ extension View {
             ))
     }
     
-    /// Presents `VModal` using the item as data source for content.
+    /// Presents modal using the item as data source for content.
     ///
     /// Modal component that draws a background, and hosts content.
     ///
