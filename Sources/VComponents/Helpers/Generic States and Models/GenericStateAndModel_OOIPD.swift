@@ -122,13 +122,7 @@ extension GenericStateModel_OOIPD: Equatable where Value: Equatable {}
 
 extension GenericStateModel_OOIPD: Comparable where Value: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
-        if lhs.off != rhs.off { return lhs.off < rhs.off }
-        else if lhs.on != rhs.on { return lhs.on < rhs.on }
-        else if lhs.indeterminate != rhs.indeterminate { return lhs.indeterminate < rhs.indeterminate }
-        else if lhs.pressedOff != rhs.pressedOff { return lhs.pressedOff < rhs.pressedOff }
-        else if lhs.pressedOn != rhs.pressedOn { return lhs.pressedOn < rhs.pressedOn }
-        else if lhs.pressedIndeterminate != rhs.pressedIndeterminate { return lhs.pressedIndeterminate < rhs.pressedIndeterminate }
-        else /*if lhs.disabled != rhs.disabled*/ { return lhs.disabled < rhs.disabled }
+        isLess(lhs, than: rhs, by: \.off, \.on, \.indeterminate, \.pressedOff, \.pressedOn, \.pressedIndeterminate, \.disabled)
     }
 }
 
