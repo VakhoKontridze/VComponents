@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Text Field
 /// Input component that displays an editable text interface.

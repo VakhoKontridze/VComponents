@@ -167,6 +167,16 @@ public struct VDisclosureGroupUIModel {
     }
 
     // MARK: Sub-Models
+    var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
+        var uiModel: PlainDisclosureGroupUIModel = .init()
+        
+        uiModel.colors.background = colors.background
+        
+        uiModel.animations.expandCollapse = animations.expandCollapse
+        
+        return uiModel
+    }
+    
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         

@@ -9,9 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Disclosure Group
-/// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data.
-///
-/// Component can be initialized with data or free content.
+/// Expandable container component that draws a background, and hosts content.
 ///
 /// UI Model and layout can be passed as parameters.
 ///
@@ -109,8 +107,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        PlainDiclosureGroup(
-            backgroundColor: uiModel.colors.background,
+        PlainDisclosureGroup(
+            uiModel: uiModel.plainDisclosureGroupSubUIModel,
             isExpanded: .init(
                 get: { internalState.isExpanded },
                 set: { expandCollapseFromHeaderTap($0) }
