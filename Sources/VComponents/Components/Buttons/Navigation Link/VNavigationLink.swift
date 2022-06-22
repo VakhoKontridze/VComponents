@@ -109,6 +109,12 @@ public struct VNavigationLink<Destination, Label>: View
             .buttonStyle(.plain) // Cancels styling
             .disabled(!isEnabled)
     }
+    
+    // MARK: State Management
+    enum StateManagement {
+        case `internal`
+        case external
+    }
 }
 
 // MARK: - Preview
