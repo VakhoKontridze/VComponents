@@ -19,8 +19,8 @@ struct VMenuContentView: View {
 
     // MARK: Body
     var body: some View {
-        ForEach(rows.enumeratedArray().reversed(), id: \.offset, content: { (_, button) in
-            switch button._menuRow {
+        ForEach(rows.enumeratedArray().reversed(), id: \.offset, content: { (_, row) in
+            switch row._menuRow {
             case .title(let action, let title):
                 Button(title, action: action)
                 
