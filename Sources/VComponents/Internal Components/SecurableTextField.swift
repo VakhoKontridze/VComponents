@@ -11,8 +11,12 @@ import SwiftUI
 struct SecurableTextField: View {
     // MARK: Properties
     private let isSecure: Bool
+    
     private let placeholder: String?
     @Binding private var text: String
+    
+    @FocusState private var isTextFieldFocused
+    @FocusState private var isSecureFieldFocused
     
     // MARK: Initializers
     init(
@@ -27,22 +31,22 @@ struct SecurableTextField: View {
     
     // MARK: Body
     var body: some View {
-        switch isSecure {
-        case false:
+        ZStack(content: {
             TextField(
                 text: $text,
                 prompt: placeholder.map { .init($0) },
                 label: EmptyView.init
             )
-                .labelsHidden()
+                .focused($isTextFieldFocused)
+                .opacity(isSecure ? 0 : 1)
             
-        case true:
             SecureField(
                 text: $text,
                 prompt: placeholder.map { .init($0) },
                 label: EmptyView.init
             )
-                .labelsHidden()
-        }
+                .focused($isSecureFieldFocused)
+                .opacity(isSecure ? 1 : 0)
+        })
     }
 }
