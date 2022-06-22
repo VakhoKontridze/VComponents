@@ -54,7 +54,7 @@ public struct VNavigationLink<Destination, Label>: View
     
     @State private var isActiveInternally: Bool = false
     @Binding private var isActiveExternally: Bool
-    private let stateManagament: ComponentStateManagement
+    private let stateManagament: StateManagement
     private var isActive: Binding<Bool> {
         .init(
             get: {
@@ -111,7 +111,7 @@ public struct VNavigationLink<Destination, Label>: View
     }
     
     // MARK: State Management
-    enum StateManagement {
+    private enum StateManagement {
         case `internal`
         case external
     }
