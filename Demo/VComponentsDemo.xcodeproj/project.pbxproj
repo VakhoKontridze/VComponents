@@ -57,6 +57,7 @@
 		876B5A66284000B50081590D /* DemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A65284000B50081590D /* DemoTitledSettingView.swift */; };
 		876B5A68284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */; };
 		876B5A6A284015BE0081590D /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A69284015BE0081590D /* HomeRow.swift */; };
+		87AF46C628635B2C005222A1 /* VContextMenuDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */; };
 		87B17B69283A765100122DE5 /* NoDismissTypeWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */; };
 /* End PBXBuildFile section */
 
@@ -126,6 +127,7 @@
 		876B5A65284000B50081590D /* DemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyLabeledDemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A69284015BE0081590D /* HomeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
+		87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VContextMenuDemoView.swift; sourceTree = "<group>"; };
 		87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDismissTypeWarningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +199,7 @@
 				7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */,
 				7A5A5FF625C88F70008667F5 /* VConfirmationDialogDemoView.swift */,
 				7A5A5FEA25C844D0008667F5 /* VMenuDemoView.swift */,
+				87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */,
 				7A32F88E25C999EC00BE8298 /* VStepperDemoView.swift in Sources */,
 				7A871E7925AC78EE007E27E3 /* DemoListView.swift in Sources */,
+				87AF46C628635B2C005222A1 /* VContextMenuDemoView.swift in Sources */,
 				7A5A601725C970DC008667F5 /* VMenuPickerDemoView.swift in Sources */,
 				7A2F832025CFDC620099BA69 /* VLinkDemoView.swift in Sources */,
 				876B5A68284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */,

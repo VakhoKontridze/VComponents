@@ -1,10 +1,14 @@
 # Change Log
 
-#### 2.1.3(21)
+#### 2.2.0(21)
 
 VTextField
 
 - Issue with keyboard dismissing after changing the secure status is fixed
+
+VContextMenu
+
+- ContextMenu component is added
 
 #### [2.1.2(20)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.2) — *2022 06 20*
 
