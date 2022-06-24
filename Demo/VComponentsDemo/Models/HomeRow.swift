@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Home Row
 enum HomeRow: Int, DemoableRow {
     // MARK: Cases
-    case baseButton, primaryButton, secondaryButton, squareButton, plainButton, navigationLink, link
+    case primaryButton, secondaryButton, squareButton, plainButton, navigationLink, link
     case toggle, checkBox, radioButton
     case segmentedPicker, menuPicker, wheelPicker
     case stepper, slider,  rangeSlider
@@ -25,7 +25,6 @@ enum HomeRow: Int, DemoableRow {
     static var sections: [DemoSection<HomeRow>] {
         [
             .init(id: 0, title: "Buttons", rows: [
-                .baseButton,
                 .primaryButton, .secondaryButton, .squareButton, .plainButton,
                 .navigationLink, .link
             ]),
@@ -44,7 +43,6 @@ enum HomeRow: Int, DemoableRow {
     
     var title: String {
         switch self {
-        case .baseButton: return VBaseButtonDemoView.navBarTitle
         case .primaryButton: return VPrimaryButtonDemoView.navBarTitle
         case .secondaryButton: return VSecondaryButtonDemoView.navBarTitle
         case .squareButton: return VSquareButtonDemoView.navBarTitle
@@ -92,7 +90,6 @@ enum HomeRow: Int, DemoableRow {
 
     @ViewBuilder var body: some View {
         switch self {
-        case .baseButton: VBaseButtonDemoView()
         case .primaryButton: VPrimaryButtonDemoView()
         case .secondaryButton: VSecondaryButtonDemoView()
         case .squareButton: VSquareButtonDemoView()

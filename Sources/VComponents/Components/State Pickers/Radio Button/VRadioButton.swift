@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Radio Button
 /// State picker component that toggles between off, on, or disabled states, and displays label.
@@ -125,7 +126,7 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     spacer
 
-                    VBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
                             type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
                             color: uiModel.colors.title.for(internalState),
@@ -142,7 +143,7 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     spacer
                     
-                    VBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(gesture: gestureHandler, label: {
                         label()
                             .opacity(uiModel.colors.customLabelOpacities.for(internalState))
                     })
@@ -154,7 +155,7 @@ public struct VRadioButton<Label>: View where Label: View {
     }
     
     private var radioButton: some View {
-        VBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
                 Circle()
                     .frame(dimension: uiModel.layout.dimension)
@@ -175,7 +176,7 @@ public struct VRadioButton<Label>: View where Label: View {
     }
     
     private var spacer: some View {
-        VBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: uiModel.layout.radioLabelSpacing)
@@ -185,7 +186,7 @@ public struct VRadioButton<Label>: View where Label: View {
     }
 
     // MARK: Actions
-    private func gestureHandler(gestureState: VBaseButtonGestureState) {
+    private func gestureHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { state.setNextState() }
     }

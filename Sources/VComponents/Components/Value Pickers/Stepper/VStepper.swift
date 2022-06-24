@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Stepper
 /// Value picker component that selects value from a bounded linear range of values.
@@ -85,7 +86,7 @@ public struct VStepper: View {
     }
     
     private func button(_ button: VStepperButton) -> some View {
-        VBaseButton(
+        SwiftUIBaseButton(
             gesture: { gestureHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
@@ -110,7 +111,7 @@ public struct VStepper: View {
     }
     
     // MARK: Actions
-    private func gestureHandler(button: VStepperButton, gestureState: VBaseButtonGestureState) {
+    private func gestureHandler(button: VStepperButton, gestureState: BaseButtonGestureState) {
         pressGestureHandler(button, isPressed: gestureState.isPressed)
         if gestureState.isClicked { clickGestureHandler(button) }
     }

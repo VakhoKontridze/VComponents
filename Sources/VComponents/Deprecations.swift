@@ -6,6 +6,14 @@
 //
 
 import SwiftUI
+import VCore
+
+// MARK: - Base Button
+@available(*, deprecated, message: "Use `SwiftUIBaseButton` from `VCore`")
+public typealias VBaseButton = VCore.SwiftUIBaseButton
+
+@available(*, deprecated, message: "Use `BaseButtonGestureState` from `VCore`")
+public typealias VBaseButtonGestureState = VCore.BaseButtonGestureState
 
 // MARK: - *Model
 @available(*, deprecated, renamed: "VPrimaryButtonUIModel")

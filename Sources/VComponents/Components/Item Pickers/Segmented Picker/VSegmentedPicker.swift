@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally.
@@ -276,7 +277,7 @@ public struct VSegmentedPicker<Data, Content>: View
         case .titles(let titles):
             HStack(spacing: 0, content: {
                 ForEach(titles.indices, id: \.self, content: { i in
-                    VBaseButton(
+                    SwiftUIBaseButton(
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
@@ -298,7 +299,7 @@ public struct VSegmentedPicker<Data, Content>: View
         case .custom(let data, let content):
             HStack(spacing: 0, content: {
                 ForEach(data.indices, id: \.self, content: { i in
-                    VBaseButton(
+                    SwiftUIBaseButton(
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             content(data[i])
@@ -333,7 +334,7 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     // MARK: Actions
-    private func gestureHandler(i: Int, gestureState: VBaseButtonGestureState) {
+    private func gestureHandler(i: Int, gestureState: BaseButtonGestureState) {
         pressedIndex = gestureState.isPressed ? i : nil
         if gestureState.isClicked { selectedIndex = i }
     }

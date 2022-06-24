@@ -2,6 +2,10 @@
 
 #### 2.2.0(21)
 
+VBaseButton
+
+- Button is deprecated, use `SwiftUIBaseButton` from `VCore`
+
 VTextField
 
 - Issue with keyboard dismissing after changing the secure status is fixed
