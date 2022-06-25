@@ -77,7 +77,7 @@ struct VAlertDemoView: View {
 
 // MARK: - Helpers
 private enum VAlertButtonsHelper: Int, PickableTitledEnumeration {
-    case `none`
+    case none
     case one
     case two
     case many
