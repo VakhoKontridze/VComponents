@@ -15,6 +15,87 @@ public typealias VBaseButton = VCore.SwiftUIBaseButton
 @available(*, deprecated, message: "Use `BaseButtonGestureState` from `VCore`")
 public typealias VBaseButtonGestureState = VCore.BaseButtonGestureState
 
+// MARK: - List
+extension VList {
+    @available(*, unavailable, message: "`VListLayoutType` is deprecated. Use `VList` for dyamic list, or use `VStaticList` for fixed list.")
+    public init(
+        uiModel: VListUIModel = .init(),
+        layout layoutType: VListLayoutType,
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        @ViewBuilder content: @escaping (Data.Element) -> Content
+    ) {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "`VListLayoutType` is deprecated. Use `VList` for dyamic list, or use `VStaticList` for fixed list.")
+    public init(
+        uiModel: VListUIModel = .init(),
+        layout layoutType: VListLayoutType,
+        data: Data,
+        @ViewBuilder content: @escaping (Data.Element) -> Content
+    )
+        where
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
+    {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "`VListLayoutType` is deprecated. Use `VList` for dyamic list, or use `VStaticList` for fixed list.")
+    public init(
+        uiModel: VListUIModel = .init(),
+        layout layoutType: VListLayoutType,
+        data: Data,
+        @ViewBuilder content: @escaping (Data.Element) -> Content
+    )
+        where
+            Data == Range<Int>,
+            ID == Int
+    {
+        fatalError()
+    }
+}
+
+@available(*, unavailable, message: "`VListLayoutType` is deprecated. Use `VList` for dyamic list, or use `VStaticList` for fixed list.")
+public enum VListLayoutType: Int, CaseIterable {
+    case fixed
+    case flexible
+
+    public static var `default`: Self { .flexible }
+}
+
+extension VListUIModel.Layout {
+    @available(*, unavailable, message: "Use normal margins within UI model")
+    public var marginTrailing: CGFloat { fatalError() }
+    
+    @available(*, deprecated, renamed: "separatorHeight")
+    public var dividerHeight: CGFloat {
+        get { separatorHeight }
+        set { separatorHeight = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "separatorMargins")
+    public var dividerMargins: HorizontalMargins {
+        get { separatorMargins }
+        set { separatorMargins = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "showsLastSeparator")
+    public var lastRowHasDivider: Bool {
+        get { showsLastSeparator }
+        set { showsLastSeparator = newValue }
+    }
+}
+
+extension VListUIModel.Colors {
+    @available(*, deprecated, renamed: "separator")
+    public var divider: Color {
+        get { separator }
+        set { separator = newValue }
+    }
+}
+
 // MARK: - *Model
 @available(*, deprecated, renamed: "VPrimaryButtonUIModel")
 public typealias VPrimaryButtonModel = VPrimaryButtonUIModel

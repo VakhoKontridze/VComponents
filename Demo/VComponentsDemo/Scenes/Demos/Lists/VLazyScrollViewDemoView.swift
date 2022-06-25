@@ -12,39 +12,20 @@ import VComponents
 struct VLazyScrollViewDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Lazy Scroll View" }
-    
-    private let sections: [DemoSection<VLazyScrollViewDemoViewDataSource.LazyScrollViewRow>] = [
-        .init(id: 0, title: nil, rows: [.vertical, .horizontal])
-    ]
 
-    // MARK: Body
-    var body: some View {
-        DemoListView(type: .section, sections: sections)
-            .standardNavigationTitle(Self.navBarTitle)
-    }
-}
-
-// MARK: - V Lazy Scroll View Demo Detail View
-private struct VLazyScrollViewDemoDetailView: View {
-    // MARK: Properties
-    static var navBarTitle: String { "Lazy Scroll View" }
-
-    private let lazyScrollViewType: VLazyScrollViewTypeHelper
+    @State private var lazyScrollViewType: VLazyScrollViewTypeHelper = .vertical
     
     @State private var initializedRows: Set<Int> = []
     @State private var visibleRows: Set<Int> = []
-    
-    // MARK: Initializers
-    init(
-        _ lazyScrollViewType: VLazyScrollViewTypeHelper
-    ) {
-        self.lazyScrollViewType = lazyScrollViewType
-    }
 
     // MARK: Body
-    fileprivate var body: some View {
-        DemoView(component: component)
+    var body: some View {
+        DemoView(component: component, settings: settings)
             .standardNavigationTitle(Self.navBarTitle)
+            .onChange(of: lazyScrollViewType, perform: { _ in
+                initializedRows = []
+                visibleRows = []
+            })
     }
     
     private func component() -> some View {
@@ -75,6 +56,10 @@ private struct VLazyScrollViewDemoDetailView: View {
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
         })
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(selection: $lazyScrollViewType, headerTitle: "Type")
     }
     
     private var vertical: some View {
@@ -113,30 +98,14 @@ private struct VLazyScrollViewDemoDetailView: View {
 }
 
 // MARK: - Helpers
-private enum VLazyScrollViewTypeHelper {
+private enum VLazyScrollViewTypeHelper: PickableTitledEnumeration {
     case vertical
     case horizontal
-}
-
-private struct VLazyScrollViewDemoViewDataSource {
-    private init() {}
     
-    enum LazyScrollViewRow: Int, DemoableRow {
-        case vertical
-        case horizontal
-        
-        var title: String {
-            switch self {
-            case .vertical: return "Vertical"
-            case .horizontal: return "Horizontal"
-            }
-        }
-        
-        var body: some View {
-            switch self {
-            case .vertical: return VLazyScrollViewDemoDetailView(.vertical)
-            case .horizontal: return VLazyScrollViewDemoDetailView(.horizontal)
-            }
+    var pickerTitle: String {
+        switch self {
+        case .vertical: return "Vertical"
+        case .horizontal: return "Horizontal"
         }
     }
 }
@@ -144,8 +113,7 @@ private struct VLazyScrollViewDemoViewDataSource {
 // MARK: - Preview
 struct VLazyScrollViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
-//        VLazyScrollViewDemoView()
-        VLazyScrollViewDemoDetailView(.vertical)
+        VLazyScrollViewDemoView()
     }
 }
 

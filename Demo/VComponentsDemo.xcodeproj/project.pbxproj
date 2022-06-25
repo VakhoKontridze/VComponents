@@ -56,6 +56,7 @@
 		876B5A66284000B50081590D /* DemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A65284000B50081590D /* DemoTitledSettingView.swift */; };
 		876B5A68284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */; };
 		876B5A6A284015BE0081590D /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A69284015BE0081590D /* HomeRow.swift */; };
+		8789E2942865ED93007A117B /* VStaticListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789E2932865ED93007A117B /* VStaticListDemoView.swift */; };
 		87AF46C628635B2C005222A1 /* VContextMenuDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */; };
 		87B17B69283A765100122DE5 /* NoDismissTypeWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */; };
 /* End PBXBuildFile section */
@@ -125,6 +126,7 @@
 		876B5A65284000B50081590D /* DemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyLabeledDemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A69284015BE0081590D /* HomeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
+		8789E2932865ED93007A117B /* VStaticListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStaticListDemoView.swift; sourceTree = "<group>"; };
 		87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VContextMenuDemoView.swift; sourceTree = "<group>"; };
 		87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDismissTypeWarningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -366,6 +368,7 @@
 			children = (
 				7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */,
 				7A3B880725ADB4A700295A87 /* VListDemoView.swift */,
+				8789E2932865ED93007A117B /* VStaticListDemoView.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				7A3B880825ADB4A700295A87 /* VListDemoView.swift in Sources */,
 				7A767CC425B6D87D0008D2E9 /* VRadioButtonDemoView.swift in Sources */,
 				7AC4E04225AE1DD900CE2816 /* VRangeSliderDemoView.swift in Sources */,
+				8789E2942865ED93007A117B /* VStaticListDemoView.swift in Sources */,
 				7A48FDDE258DE58800AA4D4D /* VSquareButtonDemoView.swift in Sources */,
 				7ACC3EC225AC895000EAD184 /* DemoSection.swift in Sources */,
 				7A43A612259CAE130029E3C9 /* VAlertDemoView.swift in Sources */,

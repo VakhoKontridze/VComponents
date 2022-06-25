@@ -25,9 +25,12 @@ struct VLazyScrollViewVertical<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         ScrollView(.vertical, showsIndicators: uiModel.layout.showsIndicator, content: {
-            LazyVStack(alignment: uiModel.layout.alignment, spacing: uiModel.layout.rowSpacing, content: {
-                content()
-            })
+            LazyVStack(
+                alignment: uiModel.layout.alignment,
+                spacing: uiModel.layout.rowSpacing,
+                pinnedViews: [],
+                content: content
+            )
         })
     }
 }

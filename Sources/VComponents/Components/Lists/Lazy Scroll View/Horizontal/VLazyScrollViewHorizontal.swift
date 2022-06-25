@@ -25,9 +25,12 @@ struct VLazyScrollViewHorizontal<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         ScrollView(.horizontal, showsIndicators: uiModel.layout.showsIndicator, content: {
-            LazyHStack(alignment: uiModel.layout.alignment, spacing: uiModel.layout.rowSpacing, content: {
-                content()
-            })
+            LazyHStack(
+                alignment: uiModel.layout.alignment,
+                spacing: uiModel.layout.rowSpacing,
+                pinnedViews: [],
+                content: content
+            )
         })
     }
 }

@@ -35,6 +35,8 @@ public struct VPrimaryButtonUIModel {
         public var cornerRadius: CGFloat = 20
         
         /// Button border width. Defaults to `0`.
+        ///
+        /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
         
         /// Label margins. Defaults to `15` horizontal and `3` vertical.

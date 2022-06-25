@@ -17,13 +17,28 @@ import VCore
 ///         ColorBook.canvas.ignoresSafeArea()
 ///
 ///         VDisclosureGroup(
+///             uiModel: {
+///                 var uiModel: VDisclosureGroupUIModel = .init()
+///                 uiModel.layout.contentMargins.top = 5
+///                 uiModel.layout.contentMargins.bottom = 5
+///                 return uiModel
+///             }(),
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
-///                 VList(data: 0..<20, content: { num in
-///                     Text(String(num))
-///                         .frame(maxWidth: .infinity, alignment: .leading)
-///                 })
+///                 VStaticList(
+///                     uiModel: {
+///                         var uiModel: VStaticListUIModel = .init()
+///                         uiModel.layout.showsFirstSeparator = false
+///                         uiModel.layout.showsLastSeparator = false
+///                         return uiModel
+///                     }(),
+///                     data: 0..<10,
+///                     content: { num in
+///                         Text(String(num))
+///                             .frame(maxWidth: .infinity, alignment: .leading)
+///                     }
+///                 )
 ///             }
 ///         )
 ///             .padding()
@@ -209,14 +224,28 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             ColorBook.canvas.ignoresSafeArea()
 
             VDisclosureGroup(
+                uiModel: {
+                    var uiModel: VDisclosureGroupUIModel = .init()
+                    uiModel.layout.contentMargins.top = 5
+                    uiModel.layout.contentMargins.bottom = 5
+                    return uiModel
+                }(),
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(data: 0..<10, content: { num in
-                        Text(String(num))
-                            .padding(.vertical, 2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    })
+                    VStaticList(
+                        uiModel: {
+                            var uiModel: VStaticListUIModel = .init()
+                            uiModel.layout.showsFirstSeparator = false
+                            uiModel.layout.showsLastSeparator = false
+                            return uiModel
+                        }(),
+                        data: 0..<10,
+                        content: { num in
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
                 }
             )
                 .padding()

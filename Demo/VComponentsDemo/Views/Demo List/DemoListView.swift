@@ -11,24 +11,11 @@ import VComponents
 // MARK: - Demo List View
 struct DemoListView<Row>: View where Row: DemoableRow {
     // MARK: Properties
-    private let demoType: DemoType
-    enum DemoType {
-        case disclosureGroup
-        case section
-    }
-    
     private let sections: [DemoSection<Row>]
     @State private var disclosureGroupStates: [VDisclosureGroupState]
     
-    private let lazyScrollViewModel: VLazyScrollViewVerticalUIModel = {
-        var uiModel: VLazyScrollViewVerticalUIModel = .init()
-        uiModel.layout.rowSpacing = 20
-        return uiModel
-    }()
-    
     // MARK: Initializers
-    init(type demoType: DemoType, sections: [DemoSection<Row>]) {
-        self.demoType = demoType
+    init(sections: [DemoSection<Row>]) {
         self.sections = sections
         self._disclosureGroupStates = .init(initialValue: .init(repeating: .collapsed, count: sections.count))
     }
@@ -38,51 +25,45 @@ struct DemoListView<Row>: View where Row: DemoableRow {
         ZStack(content: {
             ColorBook.canvas.ignoresSafeArea()
             
-            switch demoType {
-            case .disclosureGroup:
-                VLazyScrollView(
-                    type: .vertical(uiModel: lazyScrollViewModel),
-                    data: sections.enumeratedArray(),
-                    id: \.element.id,
-                    content: { (i, section) in
-                        VDisclosureGroup(
-                            state: $disclosureGroupStates[i],
-                            headerTitle: section.title ?? "",
-                            content: {
-                                VList(
-                                    layout: .fixed,
-                                    data: section.rows,
-                                    content: { row in DemoListRowView(title: row.title, destination: row.body) }
-                                )
-                            }
-                        )
-                        
-                        if i == sections.enumeratedArray().count - 1 {
-                            Spacer()
-                                .frame(height: UIDevice.safeAreaInsetBottom + 10)
+            VLazyScrollView(
+                type: .vertical(uiModel: {
+                    var uiModel: VLazyScrollViewVerticalUIModel = .init()
+                    uiModel.layout.rowSpacing = 20
+                    return uiModel
+                }()),
+                data: sections.enumeratedArray(),
+                id: \.element.id,
+                content: { (i, section) in
+                    VDisclosureGroup(
+                        uiModel: {
+                            var uiModel: VDisclosureGroupUIModel = .init()
+                            uiModel.layout.contentMargins.top = 5
+                            uiModel.layout.contentMargins.bottom = 5
+                            return uiModel
+                        }(),
+                        state: $disclosureGroupStates[i],
+                        headerTitle: section.title ?? "",
+                        content: {
+                            VStaticList(
+                                uiModel: {
+                                    var model: VStaticListUIModel = .init()
+                                    model.layout.showsFirstSeparator = false
+                                    model.layout.showsLastSeparator = false
+                                    return model
+                                }(),
+                                data: section.rows,
+                                content: { row in DemoListRowView(title: row.title, destination: row.body) }
+                            )
                         }
+                    )
+                    
+                    if i == sections.enumeratedArray().count - 1 {
+                        Spacer()
+                            .frame(height: UIDevice.safeAreaInsetBottom + 10)
                     }
-                )
-                    .padding(.top, 10)
-                
-            case .section:
-                VSheet()
-                    .padding(.bottom, UIDevice.safeAreaInsetBottom)
-                
-                VLazyScrollView(
-                    type: .vertical(uiModel: lazyScrollViewModel),
-                    data: sections.enumeratedArray(),
-                    id: \.element.id,
-                    content: { (i, section) in
-                        VList(data: section.rows, content: { row in
-                            DemoListRowView(title: row.title, destination: row.body)
-                        })
-                            .padding(.trailing, 15)
-                    }
-                )
-                    .padding([.leading, .top, .bottom], 15)
-                    .padding(.bottom, UIDevice.safeAreaInsetBottom + 10)
-            }
+                }
+            )
+                .padding(.top, 10)
         })
             .ignoresSafeArea(.container, edges: .bottom)
     }

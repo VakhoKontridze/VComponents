@@ -10,6 +10,16 @@ VTextField
 
 - Issue with keyboard dismissing after changing the secure status is fixed
 
+VList
+
+- `VListLayoutType` is deprecated. Old `VList` now supports flexible layout, and new `VStaticList` is added for fixed layout.
+- Last separator is now visible by default
+- Separator has been added before the first row, which is visible by default
+
+VStaticList
+
+- New list component is added that has a fixed layout
+
 VContextMenu
 
 - ContextMenu component is added

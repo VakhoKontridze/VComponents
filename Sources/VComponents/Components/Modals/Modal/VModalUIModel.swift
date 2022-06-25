@@ -68,7 +68,9 @@ public struct VModalUIModel {
         /// Spacing between label and close button. Defaults to `10`.
         public var labelCloseButtonSpacing: CGFloat = 10
         
-        /// Divider height. Defaults to `2/3`.
+        /// Divider height. Defaults to `0.67`.
+        ///
+        /// To hide divider, set to `0`.
         public var dividerHeight: CGFloat = disclosureGroupReference.layout.dividerHeight
     
         /// Divider margins. Defaults to `.zero`.

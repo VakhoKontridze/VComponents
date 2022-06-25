@@ -38,6 +38,8 @@ public struct VSquareButtonUIModel {
         public var cornerRadius: CGFloat = 16
         
         /// Button border width. Defaults to `0`.
+        ///
+        /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
         
         /// Label margins. Defaults to `3`'s.

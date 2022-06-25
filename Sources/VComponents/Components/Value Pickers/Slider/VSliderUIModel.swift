@@ -49,6 +49,8 @@ public struct VSliderUIModel {
         }
         
         /// Thumb dimension. Defaults to `20`.
+        ///
+        /// To hide thumb, set to `0`.
         public var thumbDimension: CGFloat = 20
         
         /// Thumb corner radius. Defaults to `10`.

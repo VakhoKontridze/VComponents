@@ -145,7 +145,7 @@ extension Color {
  230.230.230
  100.100.100
  
- List.Divider
+ List.Separator
  60.60.60 @ 30
  85.85.85 @ 60
  
