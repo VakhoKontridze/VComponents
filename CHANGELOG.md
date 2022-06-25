@@ -1,6 +1,6 @@
 # Change Log
 
-#### 2.2.0(21)
+#### [2.2.0(21)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.2.0) — *2022 06 25*
 
 VBaseButton
 
