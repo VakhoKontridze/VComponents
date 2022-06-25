@@ -25,7 +25,7 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 ## Components
 
-**Buttons.** VBaseButton, VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VNavigationLink, VLink
+**Buttons.** VPrimaryButton, VSecondaryButton, VSquareButton, VPlainButton, VNavigationLink, VLink
 
 **State Pickers.** VToggle, VCheckBox, VRadioButton
 
@@ -37,9 +37,9 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 **Containers**. VSheet, VDisclosureGroup
 
-**Lists.** VLazyScrollView, VList
+**Lists.** VLazyScrollView, VList, VStaticList
 
-**Modals.** VModal, VBottomSheet, VSideBar, VAlert, VConfirmationDialog, VMenu
+**Modals.** VModal, VBottomSheet, VSideBar, VAlert, VConfirmationDialog, VMenu, VContextMenu
 
 **Messages.** VToast
 
@@ -50,20 +50,21 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 ## Brand Book
 
 <p>
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/171150698-2eaec4b9-6a69-4e42-a8e2-2a8e5c315d4f.png">
+    <img width="300" src="https://user-images.githubusercontent.com/57289621/175477100-0f79fc5b-71e3-4553-ac06-9a7ce73531dd.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540197-785e93c8-7026-4b5c-a356-b9506b280989.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540202-a201d445-6b59-4d43-be18-d204f38321e9.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540203-0c92e02b-c61b-4ec3-acce-df7f8cc75ac8.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540207-0954e5ee-31df-430d-888e-33b0a731b49d.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540210-eb3a4b27-6c70-4bff-9648-74f48f195158.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540213-8aaf0819-17ca-4d10-859d-be6b4aa0d1a9.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/170540215-45b97351-df18-4e14-b8c9-00bac8c36cfb.png">
+    <img width="300" src="https://user-images.githubusercontent.com/57289621/175763516-b136418c-b5a9-49ba-ab85-01d903552aa0.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540217-9e16f5e3-b21f-4206-b470-ec6d6a125278.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540219-f5fb31af-0ac2-40ef-bc04-d1df526dab4f.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540220-d02a82f9-1cd6-4f5b-ae8b-f56857e9d109.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540222-9a1c058d-657f-4c12-9e99-05e145ea5d27.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540225-8a0991f1-c367-43b3-9146-c0ab21d3808c.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540229-a2e791fb-2123-435d-a2a9-3934d19c0843.png">
+    <img width="300" src="https://user-images.githubusercontent.com/57289621/175052648-b83bec65-4a23-4143-8522-9dcc91cbdc7a.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540231-415ac837-8c47-4969-96de-303dbc99c7e9.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/173796372-2027c2b6-2de5-4d6c-bf25-5f2a3c455db4.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540237-5ba7e55f-56f7-4a3e-83e1-576c995636bb.png">

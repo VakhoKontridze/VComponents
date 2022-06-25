@@ -54,8 +54,10 @@ public struct VDisclosureGroupUIModel {
         /// Chevron button icon dimension. Defaults to `12`.
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        /// Divider height. Defaults to `2/3`.
-        public var dividerHeight: CGFloat = 2/3
+        /// Divider height. Defaults to `0.67`.
+        ///
+        /// To hide divider, set to `0`.
+        public var dividerHeight: CGFloat = 0.67
         
         /// Divider margins .Defaults to `15` horizontal and  `0` vertical.
         public var dividerMargins: Margins = .init(
@@ -103,7 +105,7 @@ public struct VDisclosureGroupUIModel {
         )
         
         /// Divider color.
-        public var divider: Color = listReference.colors.divider
+        public var divider: Color = listReference.colors.separator
         
         /// Chevron button background colors.
         public var chevronButtonBackground: ButtonStateColors = chevronButtonReference.colors.background
@@ -167,6 +169,16 @@ public struct VDisclosureGroupUIModel {
     }
 
     // MARK: Sub-Models
+    var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
+        var uiModel: PlainDisclosureGroupUIModel = .init()
+        
+        uiModel.colors.background = colors.background
+        
+        uiModel.animations.expandCollapse = animations.expandCollapse
+        
+        return uiModel
+    }
+    
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         

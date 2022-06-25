@@ -1,5 +1,29 @@
 # Change Log
 
+#### [2.2.0(21)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.2.0) — *2022 06 25*
+
+VBaseButton
+
+- Button is deprecated, use `SwiftUIBaseButton` from `VCore`
+
+VTextField
+
+- Issue with keyboard dismissing after changing the secure status is fixed
+
+VList
+
+- `VListLayoutType` is deprecated. Old `VList` now supports flexible layout, and new `VStaticList` is added for fixed layout.
+- Last separator is now visible by default
+- Separator has been added before the first row, which is visible by default
+
+VStaticList
+
+- New list component is added that has a fixed layout
+
+VContextMenu
+
+- ContextMenu component is added
+
 #### [2.1.2(20)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.2) — *2022 06 20*
 
 General

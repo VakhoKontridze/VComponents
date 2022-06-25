@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Bool
 extension View {
-    /// Presents `VBottomSheet` when `Bool` is `true`.
+    /// Presents bottom sheet when `Bool` is `true`.
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
@@ -67,7 +67,7 @@ extension View {
             ))
     }
     
-    /// Presents `VBottomSheet` when `Bool` is `true`.
+    /// Presents bottom sheet when `Bool` is `true`.
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
@@ -125,7 +125,7 @@ extension View {
             ))
     }
     
-    /// Presents `VBottomSheet` when `Bool` is `true`.
+    /// Presents bottom sheet when `Bool` is `true`.
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
@@ -191,7 +191,7 @@ extension View {
 
 // MARK: - Item
 extension View {
-    /// Presents `VBottomSheet` when `Bool` is `true`.
+    /// Presents bottom sheet when `Bool` is `true`.
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
@@ -264,7 +264,7 @@ extension View {
             ))
     }
     
-    /// Presents `VBottomSheet` when `Bool` is `true`.
+    /// Presents bottom sheet when `Bool` is `true`.
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///
@@ -343,7 +343,7 @@ extension View {
             ))
     }
     
-    /// Presents `VBottomSheet` when `Bool` is `true`.
+    /// Presents bottom sheet when `Bool` is `true`.
     ///
     /// Modal component that draws a background, and hosts pull-up content on the bottom of the screen.
     ///

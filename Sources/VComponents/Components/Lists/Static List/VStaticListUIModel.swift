@@ -1,16 +1,16 @@
 //
-//  VListUIModel.swift
+//  VStaticListUIModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 1/10/21.
+//  Created by Vakhtang Kontridze on 24.06.22.
 //
 
 import SwiftUI
 import VCore
 
-// MARK: - V Base List UI Model
+// MARK: - V Static List Model
 /// Model that describes UI.
-public struct VListUIModel {
+public struct VStaticListUIModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -26,6 +26,9 @@ public struct VListUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Alignment. Defaults to `center`.
+        public var alignment: HorizontalAlignment = .center
+        
         /// Spacing between rows. Defaults to `18`.
         public var rowSpacing: CGFloat = 18
         
@@ -36,7 +39,7 @@ public struct VListUIModel {
         /// To hide separator, set to `0`.
         public var separatorHeight: CGFloat = 0.34
         
-        /// Separator margins. Defaults to `zero`.
+        /// Row separator margins. Defaults to `zero`.
         public var separatorMargins: HorizontalMargins = .zero
         
         /// Indicates if the first row has separator before it. Defaults to `true`.
@@ -44,9 +47,6 @@ public struct VListUIModel {
         
         /// Indicates if the last row has separator after it. Defaults to `true`.
         public var showsLastSeparator: Bool = true
-        
-        /// Indicates if scroll view has scroll indicator. Defaults to `true`.
-        public var showsIndicator: Bool = true
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

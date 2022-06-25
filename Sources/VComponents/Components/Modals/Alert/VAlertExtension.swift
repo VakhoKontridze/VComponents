@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Bool
 extension View {
-    /// Presents `VAlert` when `Bool` is `true`.
+    /// Presents alert when `Bool` is `true`.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -65,7 +65,7 @@ extension View {
             ))
     }
     
-    /// Presents `VAlert` when `Bool` is `true`.
+    /// Presents alert when `Bool` is `true`.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -128,7 +128,7 @@ extension View {
 
 // MARK: - Item
 extension View {
-    /// Presents `VAlert` using the item as data source for content.
+    /// Presents alert using the item as data source for content.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -215,7 +215,7 @@ extension View {
             ))
     }
     
-    /// Presents `VAlert` using the item as data source for content.
+    /// Presents alert using the item as data source for content.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -315,7 +315,7 @@ extension View {
 
 // MARK: - Presenting Data
 extension View {
-    /// Presents `VAlert` when `Bool` is `true` using data to produce content.
+    /// Presents alert when `Bool` is `true` using data to produce content.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -406,7 +406,7 @@ extension View {
             ))
     }
     
-    /// Presents `VAlert` when `Bool` is `true` using data to produce content.
+    /// Presents alert when `Bool` is `true` using data to produce content.
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -509,7 +509,7 @@ extension View {
 
 // MARK: - Error
 extension View {
-    /// Presents `VAlert` when `Bool` is `true` using `Error`
+    /// Presents alert when `Bool` is `true` using `Error`
     ///
     /// Modal component that presents alert, and hosts content.
     ///
@@ -595,7 +595,7 @@ extension View {
             ))
     }
     
-    /// Presents `VAlert` when `Bool` is `true` using `Error`
+    /// Presents alert when `Bool` is `true` using `Error`
     ///
     /// Modal component that presents alert, and hosts content.
     ///

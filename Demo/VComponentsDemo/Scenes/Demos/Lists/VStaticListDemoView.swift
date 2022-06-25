@@ -1,24 +1,24 @@
 //
-//  VListDemoView.swift
+//  VStaticStaticListDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/12/21.
+//  Created by Vakhtang Kontridze on 24.06.22.
 //
 
 import SwiftUI
 import VComponents
 
-// MARK: - V List Demo View
-struct VListDemoView: View {
+// MARK: - V Static List Demo View
+struct VStaticListDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "List" }
+    static var navBarTitle: String { "Static List" }
     
     @State private var rowCount: Int = 5
-    @State private var showsFirstSeparator: Bool = VListUIModel.Layout().showsFirstSeparator
-    @State private var showsLastSeparator: Bool = VListUIModel.Layout().showsLastSeparator
+    @State private var showsFirstSeparator: Bool = VStaticListUIModel.Layout().showsFirstSeparator
+    @State private var showsLastSeparator: Bool = VStaticListUIModel.Layout().showsLastSeparator
     
-    private var uiModel: VListUIModel {
-        var uiModel: VListUIModel = .init()
+    private var uiModel: VStaticListUIModel {
+        var uiModel: VStaticListUIModel = .init()
         
         uiModel.layout.showsFirstSeparator = showsFirstSeparator
         uiModel.layout.showsLastSeparator = showsLastSeparator
@@ -33,7 +33,7 @@ struct VListDemoView: View {
     }
     
     private func component() -> some View {
-        VList(
+        VStaticList(
             uiModel: uiModel,
             data: 0..<rowCount,
             id: \.self,
@@ -42,6 +42,8 @@ struct VListDemoView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
         )
+            .frame(maxHeight: UIScreen.main.bounds.height - 200)
+            .clipped()
     }
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
@@ -64,8 +66,8 @@ struct VListDemoView: View {
 }
 
 // MARK: - Preview
-struct VListDemoView_Previews: PreviewProvider {
+struct VStaticListDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VListDemoView()
+        VStaticListDemoView()
     }
 }

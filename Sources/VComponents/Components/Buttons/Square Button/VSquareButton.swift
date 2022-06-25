@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Square Button
 /// Squared colored button component that performs action when triggered.
@@ -75,7 +76,7 @@ public struct VSquareButton<Label>: View where Label: View {
 
     // MARK: Body
     public var body: some View {
-        VBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(gesture: gestureHandler, label: {
             buttonLabel
                 .frame(dimension: uiModel.layout.dimension)
                 .background(background)
@@ -124,7 +125,7 @@ public struct VSquareButton<Label>: View where Label: View {
     }
     
     // MARK: Actions
-    private func gestureHandler(gestureState: VBaseButtonGestureState) {
+    private func gestureHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }

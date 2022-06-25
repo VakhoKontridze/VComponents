@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Bool
 extension View {
-    /// Presents `VConfirmationDialog` when boolean is `true`.
+    /// Presents confirmation dialog when boolean is `true`.
     ///
     /// Modal component that presents bottom sheet menu of actions.
     ///
@@ -66,7 +66,7 @@ extension View {
 
 // MARK: - Item
 extension View {
-    /// Presents `VConfirmationDialog` using the item as data source for content.
+    /// Presents confirmation dialog using the item as data source for content.
     ///
     /// Modal component that presents bottom sheet menu of actions.
     ///
@@ -132,7 +132,7 @@ extension View {
 
 // MARK: - Presenting Data
 extension View {
-    /// Presents `VConfirmationDialog` when boolean is `true` using data to produce content.
+    /// Presents confirmation dialog when boolean is `true` using data to produce content.
     ///
     /// Modal component that presents bottom sheet menu of actions.
     ///

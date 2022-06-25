@@ -1,23 +1,23 @@
 //
-//  VMenuRow.swift
+//  VContextMenuRow.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 1/28/21.
+//  Created by Vakhtang Kontridze on 22.06.22.
 //
 
 import SwiftUI
 
-// MARK: - V Menu Row
-/// Model that describes menu row, such as title, title with icons, or sub-menu.
-public struct VMenuRow {
+// MARK: - V Context Menu Row
+/// Model that describes context menu row, such as title, title with icons, or sub-menu.
+public struct VContextMenuRow {
     // MARK: Properties
-    let _menuRow: _VMenuRow
+    let _contextMenuRow: _VContextMenuRow
     
     // MARK: Initializers
     private init(
-        menuRow: _VMenuRow
+        contextMenuRow: _VContextMenuRow
     ) {
-        self._menuRow = menuRow
+        self._contextMenuRow = contextMenuRow
     }
     
     /// Row with title.
@@ -25,7 +25,7 @@ public struct VMenuRow {
         action: @escaping () -> Void,
         title: String
     ) -> Self {
-        .init(menuRow: .title(
+        .init(contextMenuRow: .title(
             action: action,
             title: title
         ))
@@ -38,7 +38,7 @@ public struct VMenuRow {
         assetIcon: String,
         bundle: Bundle? = nil
     ) -> Self {
-        .init(menuRow: .titleAssetIcon(
+        .init(contextMenuRow: .titleAssetIcon(
             action: action,
             title: title,
             icon: assetIcon,
@@ -52,7 +52,7 @@ public struct VMenuRow {
         title: String,
         icon: Image
     ) -> Self {
-        .init(menuRow: .titleIcon(
+        .init(contextMenuRow: .titleIcon(
             action: action,
             title: title,
             icon: icon
@@ -65,7 +65,7 @@ public struct VMenuRow {
         title: String,
         systemIcon: String
     ) -> Self {
-        .init(menuRow: .titleSystemIcon(
+        .init(contextMenuRow: .titleSystemIcon(
             action: action,
             title: title,
             icon: systemIcon
@@ -75,20 +75,20 @@ public struct VMenuRow {
     /// Row that expands to sub-menu.
     public static func menu(
         title: String,
-        rows: [VMenuRow]
+        rows: [VContextMenuRow]
     ) -> Self {
-        .init(menuRow: .menu(
+        .init(contextMenuRow: .menu(
             title: title,
             rows: rows
         ))
     }
 }
 
-// MARK: - _ V Menu Row
-enum _VMenuRow {
+// MARK: - _ V Context Menu Row
+enum _VContextMenuRow {
     case title(action: () -> Void, title: String)
     case titleAssetIcon(action: () -> Void, title: String, icon: String, bundle: Bundle?)
     case titleIcon(action: () -> Void, title: String, icon: Image)
     case titleSystemIcon(action: () -> Void, title: String, icon: String)
-    case menu(title: String, rows: [VMenuRow])
+    case menu(title: String, rows: [VContextMenuRow])
 }

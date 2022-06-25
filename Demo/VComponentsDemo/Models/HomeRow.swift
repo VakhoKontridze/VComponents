@@ -10,22 +10,22 @@ import SwiftUI
 // MARK: - Home Row
 enum HomeRow: Int, DemoableRow {
     // MARK: Cases
-    case baseButton, primaryButton, secondaryButton, squareButton, plainButton, navigationLink, link
+    case primaryButton, secondaryButton, squareButton, plainButton, navigationLink, link
     case toggle, checkBox, radioButton
     case segmentedPicker, menuPicker, wheelPicker
     case stepper, slider,  rangeSlider
     case textField
-    case list, disclosureGroup
-    case modal, bottomSheet, sideBar, alert, confirmationDialog, menu
+    case sheet, disclosureGroup
+    case lazyScrollView, list, staticList
+    case modal, bottomSheet, sideBar, alert, confirmationDialog, menu, contextMenu
     case toast
     case spinner, progressBar, pageIndicator
-    case text, sheet, lazyScrollView
+    case text
 
     // MARK: Properties
     static var sections: [DemoSection<Self>] {
         [
             .init(id: 0, title: "Buttons", rows: [
-                .baseButton,
                 .primaryButton, .secondaryButton, .squareButton, .plainButton,
                 .navigationLink, .link
             ]),
@@ -34,8 +34,8 @@ enum HomeRow: Int, DemoableRow {
             .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
             .init(id: 4, title: "Inputs", rows: [.textField]),
             .init(id: 5, title: "Containers", rows: [.sheet, .disclosureGroup]),
-            .init(id: 6, title: "Lists", rows: [.lazyScrollView, .list]),
-            .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .confirmationDialog, .menu]),
+            .init(id: 6, title: "Lists", rows: [.lazyScrollView, .list, .staticList]),
+            .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .confirmationDialog, .menu, .contextMenu]),
             .init(id: 8, title: "Messages", rows: [.toast]),
             .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
             .init(id: 10, title: "Misc", rows: [.text])
@@ -44,7 +44,6 @@ enum HomeRow: Int, DemoableRow {
     
     var title: String {
         switch self {
-        case .baseButton: return VBaseButtonDemoView.navBarTitle
         case .primaryButton: return VPrimaryButtonDemoView.navBarTitle
         case .secondaryButton: return VSecondaryButtonDemoView.navBarTitle
         case .squareButton: return VSquareButtonDemoView.navBarTitle
@@ -71,6 +70,7 @@ enum HomeRow: Int, DemoableRow {
             
         case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
         case .list: return VListDemoView.navBarTitle
+        case .staticList: return VStaticListDemoView.navBarTitle
 
         case .modal: return VModalDemoView.navBarTitle
         case .bottomSheet: return VBottomSheetDemoView.navBarTitle
@@ -78,6 +78,7 @@ enum HomeRow: Int, DemoableRow {
         case .alert: return VAlertDemoView.navBarTitle
         case .confirmationDialog: return VConfirmationDialogDemoView.navBarTitle
         case .menu: return VMenuDemoView.navBarTitle
+        case .contextMenu: return VContextMenuDemoView.navBarTitle
             
         case .toast: return VToastDemoView.navBarTitle
 
@@ -91,7 +92,6 @@ enum HomeRow: Int, DemoableRow {
 
     @ViewBuilder var body: some View {
         switch self {
-        case .baseButton: VBaseButtonDemoView()
         case .primaryButton: VPrimaryButtonDemoView()
         case .secondaryButton: VSecondaryButtonDemoView()
         case .squareButton: VSquareButtonDemoView()
@@ -118,6 +118,7 @@ enum HomeRow: Int, DemoableRow {
             
         case .lazyScrollView: VLazyScrollViewDemoView()
         case .list: VListDemoView()
+        case .staticList: VStaticListDemoView()
 
         case .modal: VModalDemoView()
         case .bottomSheet: VBottomSheetDemoView()
@@ -125,6 +126,7 @@ enum HomeRow: Int, DemoableRow {
         case .alert: VAlertDemoView()
         case .confirmationDialog: VConfirmationDialogDemoView()
         case .menu: VMenuDemoView()
+        case .contextMenu: VContextMenuDemoView()
             
         case .toast: VToastDemoView()
 

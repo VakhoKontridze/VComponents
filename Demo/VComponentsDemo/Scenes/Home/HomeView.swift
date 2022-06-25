@@ -17,7 +17,7 @@ struct HomeView: View {
     // MARK: Body
     var body: some View {
         NavigationView(content: {
-            DemoListView(type: .disclosureGroup, sections: HomeRow.sections)
+            DemoListView(sections: HomeRow.sections)
                 .standardNavigationTitle(Self.navBarTitle)
         })
             .navigationViewStyle(.stack)

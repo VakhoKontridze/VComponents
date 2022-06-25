@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Toggle
 /// State picker component that toggles between off, on, or disabled states, and displays label.
@@ -125,7 +126,7 @@ public struct VToggle<Label>: View where Label: View {
                     
                     spacer
 
-                    VBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
                             type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
                             color: uiModel.colors.title.for(internalState),
@@ -142,7 +143,7 @@ public struct VToggle<Label>: View where Label: View {
                     
                     spacer
                     
-                    VBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(gesture: gestureHandler, label: {
                         label()
                             .opacity(uiModel.colors.customLabelOpacities.for(internalState))
                     })
@@ -154,7 +155,7 @@ public struct VToggle<Label>: View where Label: View {
     }
     
     private var toggle: some View {
-        VBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                     .foregroundColor(uiModel.colors.fill.for(internalState))
@@ -170,7 +171,7 @@ public struct VToggle<Label>: View where Label: View {
     }
     
     private var spacer: some View {
-        VBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(gesture: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: uiModel.layout.toggleLabelSpacing)
@@ -180,7 +181,7 @@ public struct VToggle<Label>: View where Label: View {
     }
 
     // MARK: Actions
-    private func gestureHandler(gestureState: VBaseButtonGestureState) {
+    private func gestureHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { state.setNextState() }
     }

@@ -9,9 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Disclosure Group
-/// Expandable container component that draws a background, and either hosts content, or computes views on demad from an underlying collection of identified data.
-///
-/// Component can be initialized with data or free content.
+/// Expandable container component that draws a background, and hosts content.
 ///
 /// UI Model and layout can be passed as parameters.
 ///
@@ -19,13 +17,28 @@ import VCore
 ///         ColorBook.canvas.ignoresSafeArea()
 ///
 ///         VDisclosureGroup(
+///             uiModel: {
+///                 var uiModel: VDisclosureGroupUIModel = .init()
+///                 uiModel.layout.contentMargins.top = 5
+///                 uiModel.layout.contentMargins.bottom = 5
+///                 return uiModel
+///             }(),
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
-///                 VList(data: 0..<20, content: { num in
-///                     Text(String(num))
-///                         .frame(maxWidth: .infinity, alignment: .leading)
-///                 })
+///                 VStaticList(
+///                     uiModel: {
+///                         var uiModel: VStaticListUIModel = .init()
+///                         uiModel.layout.showsFirstSeparator = false
+///                         uiModel.layout.showsLastSeparator = false
+///                         return uiModel
+///                     }(),
+///                     data: 0..<10,
+///                     content: { num in
+///                         Text(String(num))
+///                             .frame(maxWidth: .infinity, alignment: .leading)
+///                     }
+///                 )
 ///             }
 ///         )
 ///             .padding()
@@ -109,8 +122,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        PlainDiclosureGroup(
-            backgroundColor: uiModel.colors.background,
+        PlainDisclosureGroup(
+            uiModel: uiModel.plainDisclosureGroupSubUIModel,
             isExpanded: .init(
                 get: { internalState.isExpanded },
                 set: { expandCollapseFromHeaderTap($0) }
@@ -211,14 +224,28 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             ColorBook.canvas.ignoresSafeArea()
 
             VDisclosureGroup(
+                uiModel: {
+                    var uiModel: VDisclosureGroupUIModel = .init()
+                    uiModel.layout.contentMargins.top = 5
+                    uiModel.layout.contentMargins.bottom = 5
+                    return uiModel
+                }(),
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(data: 0..<10, content: { num in
-                        Text(String(num))
-                            .padding(.vertical, 2)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    })
+                    VStaticList(
+                        uiModel: {
+                            var uiModel: VStaticListUIModel = .init()
+                            uiModel.layout.showsFirstSeparator = false
+                            uiModel.layout.showsLastSeparator = false
+                            return uiModel
+                        }(),
+                        data: 0..<10,
+                        content: { num in
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
                 }
             )
                 .padding()

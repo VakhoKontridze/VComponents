@@ -140,8 +140,8 @@ public struct VMenuPicker<Label, Data>: View
         Picker(
             selection: $selectedIndex,
             content: {
-                ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, row) in
-                    rowView(content(row))
+                ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, element) in
+                    rowView(content(element))
                         .tag(i)
                 })
             },

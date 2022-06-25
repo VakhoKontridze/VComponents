@@ -194,7 +194,7 @@ extension TextAlignment: PickableTitledEnumeration {
 }
 
 private enum VTextFieldHighlight: PickableTitledEnumeration {
-    case `none`
+    case none
     case success
     case warning
     case error

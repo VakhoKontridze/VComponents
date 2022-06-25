@@ -46,7 +46,6 @@ struct DemoView<ComponentContent, SettingsContent>: View
     
     private let bottomSheetUIModel: VBottomSheetUIModel = {
         var uiModel: VBottomSheetUIModel = .init()
-        uiModel.layout.contentMargins.trailing = 0
         uiModel.misc.dismissType.insert(.backTap)
         return uiModel
     }()
@@ -129,20 +128,17 @@ struct DemoView<ComponentContent, SettingsContent>: View
                 switch type {
                 case .fixed:
                     component()
-                        .padding(.trailing, 15)
                         .frame(maxWidth: .infinity)
                     
                 case .flexible:
                     ScrollView(content: {
                         component()
                             .frame(maxWidth: .infinity)
-                            .padding(.trailing, 15)
                     })
                     
                 }
             })
-                .padding(.bottom, 15 + 20)    // VPlainButton height
-                .padding([.leading, .top, .bottom], 15)
+                .padding(20)
         })
     }
     
@@ -157,12 +153,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
                 uiModel: bottomSheetUIModel,
                 isPresented: $isPresented,
                 headerTitle: "Parameters",
-                content: {
-                    ScrollView(content: {
-                        settings()
-                            .padding(.trailing, 15)
-                    })
-                }
+                content: { ScrollView(content: settings) }
             )
     }
 }

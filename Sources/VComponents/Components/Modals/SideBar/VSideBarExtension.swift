@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - Bool
 extension View {
-    /// Presents `VSideBar` when boolean is `true`.
+    /// Presents side bar when boolean is `true`.
     ///
     /// Side bar component that draws a from left side with background, and hosts content.
     ///
@@ -61,7 +61,7 @@ extension View {
 
 // MARK: - Item
 extension View {
-    /// Presents `VSideBar` using the item as data source for content.
+    /// Presents side bar using the item as data source for content.
     ///
     /// Side bar component that draws a from left side with background, and hosts content.
     ///

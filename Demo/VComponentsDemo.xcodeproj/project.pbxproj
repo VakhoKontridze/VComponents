@@ -42,7 +42,6 @@
 		7AB41B6325B81D8D00F83987 /* VTextFieldDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB41B6225B81D8D00F83987 /* VTextFieldDemoView.swift */; };
 		7ABD007225BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD007125BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift */; };
 		7ABEAA4F2593423400A90B56 /* VSheetDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */; };
-		7ABEAA6E2593493900A90B56 /* VBaseButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEAA6D2593493900A90B56 /* VBaseButtonDemoView.swift */; };
 		7ABEAADC2593969E00A90B56 /* VLazyScrollViewDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */; };
 		7AC4E03025ADFDBF00CE2816 /* VProgressBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4E02F25ADFDBF00CE2816 /* VProgressBarDemoView.swift */; };
 		7AC4E04225AE1DD900CE2816 /* VRangeSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4E04125AE1DD900CE2816 /* VRangeSliderDemoView.swift */; };
@@ -57,6 +56,8 @@
 		876B5A66284000B50081590D /* DemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A65284000B50081590D /* DemoTitledSettingView.swift */; };
 		876B5A68284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */; };
 		876B5A6A284015BE0081590D /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A69284015BE0081590D /* HomeRow.swift */; };
+		8789E2942865ED93007A117B /* VStaticListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789E2932865ED93007A117B /* VStaticListDemoView.swift */; };
+		87AF46C628635B2C005222A1 /* VContextMenuDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */; };
 		87B17B69283A765100122DE5 /* NoDismissTypeWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,7 +112,6 @@
 		7AB41B6225B81D8D00F83987 /* VTextFieldDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldDemoView.swift; sourceTree = "<group>"; };
 		7ABD007125BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewSettingsSectionBuilder.swift; sourceTree = "<group>"; };
 		7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetDemoView.swift; sourceTree = "<group>"; };
-		7ABEAA6D2593493900A90B56 /* VBaseButtonDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VBaseButtonDemoView.swift; sourceTree = "<group>"; };
 		7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyScrollViewDemoView.swift; sourceTree = "<group>"; };
 		7AC4E02F25ADFDBF00CE2816 /* VProgressBarDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VProgressBarDemoView.swift; sourceTree = "<group>"; };
 		7AC4E04125AE1DD900CE2816 /* VRangeSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VRangeSliderDemoView.swift; sourceTree = "<group>"; };
@@ -126,6 +126,8 @@
 		876B5A65284000B50081590D /* DemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyLabeledDemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A69284015BE0081590D /* HomeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
+		8789E2932865ED93007A117B /* VStaticListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStaticListDemoView.swift; sourceTree = "<group>"; };
+		87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VContextMenuDemoView.swift; sourceTree = "<group>"; };
 		87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDismissTypeWarningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +199,7 @@
 				7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */,
 				7A5A5FF625C88F70008667F5 /* VConfirmationDialogDemoView.swift */,
 				7A5A5FEA25C844D0008667F5 /* VMenuDemoView.swift */,
+				87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */,
 			);
 			path = Modals;
 			sourceTree = "<group>";
@@ -315,7 +318,6 @@
 		7A8A9737258DDEDF00309886 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				7ABEAA6D2593493900A90B56 /* VBaseButtonDemoView.swift */,
 				7A8A9738258DDEEE00309886 /* VPrimaryButtonDemoView.swift */,
 				7A4D0C4B2594C91400108575 /* VSecondaryButtonDemoView.swift */,
 				7A48FDDD258DE58800AA4D4D /* VSquareButtonDemoView.swift */,
@@ -366,6 +368,7 @@
 			children = (
 				7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */,
 				7A3B880725ADB4A700295A87 /* VListDemoView.swift */,
+				8789E2932865ED93007A117B /* VStaticListDemoView.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -512,6 +515,7 @@
 				7A3B880825ADB4A700295A87 /* VListDemoView.swift in Sources */,
 				7A767CC425B6D87D0008D2E9 /* VRadioButtonDemoView.swift in Sources */,
 				7AC4E04225AE1DD900CE2816 /* VRangeSliderDemoView.swift in Sources */,
+				8789E2942865ED93007A117B /* VStaticListDemoView.swift in Sources */,
 				7A48FDDE258DE58800AA4D4D /* VSquareButtonDemoView.swift in Sources */,
 				7ACC3EC225AC895000EAD184 /* DemoSection.swift in Sources */,
 				7A43A612259CAE130029E3C9 /* VAlertDemoView.swift in Sources */,
@@ -519,6 +523,7 @@
 				7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */,
 				7A32F88E25C999EC00BE8298 /* VStepperDemoView.swift in Sources */,
 				7A871E7925AC78EE007E27E3 /* DemoListView.swift in Sources */,
+				87AF46C628635B2C005222A1 /* VContextMenuDemoView.swift in Sources */,
 				7A5A601725C970DC008667F5 /* VMenuPickerDemoView.swift in Sources */,
 				7A2F832025CFDC620099BA69 /* VLinkDemoView.swift in Sources */,
 				876B5A68284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */,
@@ -543,7 +548,6 @@
 				7A767CA025B5DBC40008D2E9 /* VCheckBoxDemoView.swift in Sources */,
 				7ACC3EE225ACC6F100EAD184 /* VDisclosureGroupDemoView.swift in Sources */,
 				7ABD007225BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift in Sources */,
-				7ABEAA6E2593493900A90B56 /* VBaseButtonDemoView.swift in Sources */,
 				7AE6078325926994009CDB28 /* DemoListRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

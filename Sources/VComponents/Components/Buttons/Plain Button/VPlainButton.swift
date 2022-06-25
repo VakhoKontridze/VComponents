@@ -88,7 +88,7 @@ public struct VPlainButton<Label>: View where Label: View {
 
     // MARK: Body
     public var body: some View {
-        VBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(gesture: gestureHandler, label: {
             buttonLabel
                 .padding(uiModel.layout.hitBox)
         })
@@ -135,7 +135,7 @@ public struct VPlainButton<Label>: View where Label: View {
     }
 
     // MARK: Actions
-    private func gestureHandler(gestureState: VBaseButtonGestureState) {
+    private func gestureHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }

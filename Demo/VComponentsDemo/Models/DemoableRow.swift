@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Demoable Row
-protocol DemoableRow: Identifiable, RawRepresentable, CaseIterable where RawValue == Int {
+protocol DemoableRow: Hashable, Identifiable, RawRepresentable, CaseIterable where RawValue == Int {
     var title: String { get }
     
     associatedtype Content: View

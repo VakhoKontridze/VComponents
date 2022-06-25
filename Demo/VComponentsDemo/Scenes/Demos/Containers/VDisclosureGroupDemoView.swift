@@ -21,6 +21,9 @@ struct VDisclosureGroupDemoView: View {
     private var uiModel: VDisclosureGroupUIModel {
         var uiModel: VDisclosureGroupUIModel = .init()
         
+        uiModel.layout.contentMargins.top = 5 // Better for VStaticList
+        uiModel.layout.contentMargins.bottom = 5 // Better for VStaticList
+        
         uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
         uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
         
@@ -48,10 +51,19 @@ struct VDisclosureGroupDemoView: View {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(data: 0..<10, content: { num in
-                        Text(String(num))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    })
+                    VStaticList(
+                        uiModel: {
+                            var uiModel: VStaticListUIModel = .init()
+                            uiModel.layout.showsFirstSeparator = false
+                            uiModel.layout.showsLastSeparator = false
+                            return uiModel
+                        }(),
+                        data: 0..<10,
+                        content: { num in
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
                 }
             )
                 .disabled(!isEnabled)
