@@ -1,5 +1,11 @@
 # Change Log
 
+### 2.3.0(22)
+
+VSideBar
+
+- SideBar now supports presentation from all four edges
+
 ### [2.2.0(21)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.2.0) — *2022 06 25*
 
 VBaseButton
