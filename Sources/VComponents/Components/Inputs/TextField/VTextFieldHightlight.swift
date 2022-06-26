@@ -33,7 +33,7 @@ extension VTextFieldUIModel {
 
 extension VTextFieldUIModel.Colors {
     /// Model that applies green color scheme.
-    public static var success: VTextFieldUIModel.Colors = {
+    public static var success: VTextFieldUIModel.Colors {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
             backgroundFocused: .init(componentAsset: "TextField.Success.Background.enabled"),
@@ -43,7 +43,7 @@ extension VTextFieldUIModel.Colors {
     }
 
     /// Model that applies yellow color scheme.
-    public static var warning: VTextFieldUIModel.Colors = {
+    public static var warning: VTextFieldUIModel.Colors {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
             backgroundFocused: .init(componentAsset: "TextField.Warning.Background.enabled"),
@@ -53,7 +53,7 @@ extension VTextFieldUIModel.Colors {
     }
 
     /// Model that applies error color scheme.
-    public static var error: VTextFieldUIModel.Colors = {
+    public static var error: VTextFieldUIModel.Colors {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
             backgroundFocused: .init(componentAsset: "TextField.Error.Background.enabled"),
