@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - V Lazy Scroll View Type
-/// Model that describes `VLazyScrollView `type, such as `vertical` or `horizontal`.
+/// Model that represents `VLazyScrollView `type, such as `vertical` or `horizontal`.
 public struct VLazyScrollViewType {
     // MARK: Properties
     let _lazyScrollViewType: _VLazyScrollViewType

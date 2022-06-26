@@ -66,7 +66,7 @@ public struct VSideBarUIModel {
         public init() {}
         
         // MARK: Sizes
-        /// Model that describes modal sizes.
+        /// Model that represents modal sizes.
         public typealias Sizes = ModalSizes<CGSize>
         
         // MARK: Margins

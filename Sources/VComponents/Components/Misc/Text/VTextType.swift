@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Text Type
-/// Model that describes text layout, such as `singleLine` or `multiLine`.
+/// Model that represents text layout, such as `singleLine` or `multiLine`.
 public struct VTextType {
     // MARK: Properties
     let _textType: _VTextType

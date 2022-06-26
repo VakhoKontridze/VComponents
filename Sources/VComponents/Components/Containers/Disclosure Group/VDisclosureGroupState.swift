@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Disclosure Group State
-/// Enum that describes state, such as `collapsed` or `expanded`.
+/// Enum that represents state, such as `collapsed` or `expanded`.
 public enum VDisclosureGroupState: Int, CaseIterable {
     // MARK: Cases
     /// Case collapsed.

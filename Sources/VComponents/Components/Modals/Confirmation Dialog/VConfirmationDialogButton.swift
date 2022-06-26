@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Confirmation Dialog Button
-/// Model that describes `VConfirmationDialog` button, such as `standard`, `secondary`, `destructive`, or `cancel`.
+/// Model that represents `VConfirmationDialog` button, such as `standard`, `secondary`, `destructive`, or `cancel`.
 ///
 /// `cancel` will be moved to the end of the stack.
 /// If there are multiple `cancel` buttons, only the last one will be kept.

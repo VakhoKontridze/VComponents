@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Menu Row
-/// Model that describes menu row, such as title, title with icons, or sub-menu.
+/// Model that represents menu row, such as title, title with icons, or sub-menu.
 public struct VMenuRow {
     // MARK: Properties
     let _menuRow: _VMenuRow

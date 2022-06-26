@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - V Alert Button
-/// Model that describes `VAlert` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
+/// Model that represents `VAlert` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
 ///
 /// `cancel` will be moved to the end of the stack.
 /// If there are multiple `cancel` buttons, only the last one will be kept.
