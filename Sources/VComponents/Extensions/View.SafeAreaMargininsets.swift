@@ -1,5 +1,5 @@
 //
-//  View.SafeAreaMargininsets.swift
+//  View.SafeAreaMarginInsets.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 22.05.22.
