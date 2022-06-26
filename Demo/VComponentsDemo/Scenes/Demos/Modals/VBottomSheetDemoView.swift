@@ -60,7 +60,7 @@ struct VBottomSheetDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(component: component, settingsSections: settingsSections)
+        DemoView(component: component, settingsSections: settings)
             .standardNavigationTitle(Self.navBarTitle)
     }
     
@@ -89,7 +89,7 @@ struct VBottomSheetDemoView: View {
             )
     }
     
-    @DemoViewSettingsSectionBuilder private func settingsSections() -> some View {
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
             VSegmentedPicker(selection: $heightType, headerTitle: "Height")
         })
