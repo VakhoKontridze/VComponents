@@ -31,7 +31,7 @@ public struct BasicAnimation {
     }
 
     // MARK: Animation Curve
-    /// Enum that represents animation curve, suh as `linear`, `easeIn`, `easeOut`, or `easeInOut`.
+    /// Model that represents animation curve, suh as `linear`, `easeIn`, `easeOut`, or `easeInOut`.
     public enum AnimationCurve: Hashable, Equatable {
         // MARK: Cases
         /// Linear.

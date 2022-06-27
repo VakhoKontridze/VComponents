@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - V Spinner Type
-/// Enum that describes `VSpinner` type, such as `continous` or `dashed`
+/// Enum that represents `VSpinner` type, such as `continous` or `dashed`
 public struct VSpinnerType {
     // MARK: Properties
     let _spinnerType: _VSpinnerType

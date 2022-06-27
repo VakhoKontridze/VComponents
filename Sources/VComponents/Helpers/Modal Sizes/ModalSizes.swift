@@ -9,7 +9,7 @@ import Foundation
 import VCore
 
 // MARK: Modal Sizes
-/// Model that describes modal sizes.
+/// Model that represents modal sizes.
 public struct ModalSizes<ModalSizeMeasurement>
     where ModalSizeMeasurement: ScreenRelativeSizeMeasurement
 {
@@ -43,7 +43,7 @@ public struct ModalSizes<ModalSizeMeasurement>
 
 // MARK: - Size Configuration
 extension ModalSizes {
-    /// Enum that describes state, either `point` or `relative`.
+    /// Model that represents state, either `point` or `relative`.
     public enum SizeConfiguration {
         // MARK: Cases
         /// Size configuration with fixed sizes represented in points.

@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - V Page Indicator Type
-/// Model that describes `VPageIndicator type`, such as `finite` or `infinite`.
+/// Model that represents `VPageIndicator` type, such as `finite` or `infinite`.
 ///
 /// 1. `Finite`.
 /// Finite number of dots would be displayed.

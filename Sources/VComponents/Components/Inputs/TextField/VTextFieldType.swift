@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - V Text Field Type
-/// Enum that describes `VTextField` type, such as `standard`, `secure`, or `search`.
+/// Enum that represents `VTextField` type, such as `standard`, `secure`, or `search`.
 public enum VTextFieldType: Int, CaseIterable {
     // MARK: Cases
     /// Standard textfield.

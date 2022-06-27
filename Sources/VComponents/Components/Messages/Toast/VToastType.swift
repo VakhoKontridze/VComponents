@@ -8,5 +8,5 @@
 import Foundation
 
 // MARK: - V Toast Type
-/// Enum that describes type, such as `singleLine` or `multiLine`.
+/// Model that represents type, such as `singleLine` or `multiLine`.
 public typealias VToastType = VTextType

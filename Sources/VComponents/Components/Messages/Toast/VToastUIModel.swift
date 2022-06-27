@@ -61,7 +61,7 @@ public struct VToastUIModel {
         public typealias Margins = EdgeInsets_HV
         
         // MARK: Presentation Edge
-        /// Enum that represents presentation edge, such as `top` or `bottom`.
+        /// Model that represents presentation edge, such as `top` or `bottom`.
         public enum PresentationEdge: Int, CaseIterable {
             // MARK: Cases
             /// Presentation from top.
@@ -76,7 +76,7 @@ public struct VToastUIModel {
         }
         
         // MARK: Corner Radius Type
-        /// Enum that represents corner radius, such as `capsule` or `rounded`.
+        /// Model that represents corner radius, such as `capsule` or `rounded`.
         public enum CornerRadiusType {
             // MARK: Cases
             /// Capsule.

@@ -36,6 +36,12 @@ public struct VSideBarUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Edge from which side bar appears, and to which it disappears. Defaults to `default`.
+        ///
+        /// Changing this property in model alone doesn't guarantee proper sizes and rounding.
+        /// Consider using `left`, `right`, `top`, and `bottom` instances of `VSideBarUIModel`.
+        public var presentationEdge: PresentationEdge = .default
+        
         /// Side bar sizes. Defaults to `default`.
         /// Set to `0.75` ratio of screen width and `1` ratio of screen height in portrait.
         /// Set to`0.5` ratio of screen width and `1` ratio of screen height in landscape.
@@ -43,6 +49,9 @@ public struct VSideBarUIModel {
             portrait: .fraction(.init(width: 0.75, height: 1)),
             landscape: .fraction(.init(width: 0.5, height: 1))
         )
+        
+        /// Rounded corners. Defaults to `rightCorners`.
+        public var roundedCorners: UIRectCorner = .rightCorners
         
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
@@ -65,8 +74,29 @@ public struct VSideBarUIModel {
         /// Initializes sub-model with default values.
         public init() {}
         
+        // MARK: Presentation Edge
+        /// Model that represents presentation edge, such as `left`, `right`, `top`, or `bottom`.
+        public enum PresentationEdge: Int, CaseIterable {
+            // MARK: Cases
+            /// Presentation form left.
+            case left
+            
+            /// Presentation form right.
+            case right
+            
+            /// Presentation form top.
+            case top
+            
+            /// Presentation form bottom.
+            case bottom
+            
+            // MARK: Initializers
+            /// Default value. Set to `left`.
+            public static var `default`: Self { .left }
+        }
+        
         // MARK: Sizes
-        /// Model that describes modal sizes.
+        /// Model that represents modal sizes.
         public typealias Sizes = ModalSizes<CGSize>
         
         // MARK: Margins
@@ -156,7 +186,7 @@ public struct VSideBarUIModel {
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         
-        uiModel.layout.roundedCorners = [.topRight, .bottomRight]
+        uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.cornerRadius = layout.cornerRadius
         uiModel.layout.contentMargin = 0
         

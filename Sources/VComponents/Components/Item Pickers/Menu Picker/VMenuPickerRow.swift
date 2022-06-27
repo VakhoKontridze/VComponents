@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Menu Picker Row
-/// Model that describes `VMenuPicker` row, such as title, or title with various icon configurations.
+/// Model that represents `VMenuPicker` row, such as title, or title with various icon configurations.
 public struct VMenuPickerRow {
     // MARK: Properties
     let _menuPickerRow: _VMenuPickerRow

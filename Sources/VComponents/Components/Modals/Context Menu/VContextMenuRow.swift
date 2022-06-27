@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Context Menu Row
-/// Model that describes context menu row, such as title, title with icons, or sub-menu.
+/// Model that represents context menu row, such as title, title with icons, or sub-menu.
 public struct VContextMenuRow {
     // MARK: Properties
     let _contextMenuRow: _VContextMenuRow

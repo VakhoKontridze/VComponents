@@ -37,7 +37,7 @@ struct VSideBar<Content>: View where Content: View {
 
     // MARK: Body
     var body: some View {
-        ZStack(alignment: .leading, content: {
+        ZStack(content: {
             dimmingView
             sideBar
         })
@@ -75,12 +75,11 @@ struct VSideBar<Content>: View where Content: View {
             .frame(size: uiModel.layout.sizes._current.size)
             .ignoresSafeArea(.container, edges: .all)
             .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
-            .offset(x: isInternallyPresented ? 0 : -uiModel.layout.sizes._current.size.width)
+            .offset(isInternallyPresented ? presentedOffset : initialOffset)
             .gesture(
-                DragGesture(minimumDistance: 0)
+                DragGesture(minimumDistance: 20)
                     .onChanged(dragChanged)
-                
-            ).delayTouches()
+            )
     }
 
     // MARK: Actions
@@ -129,14 +128,84 @@ struct VSideBar<Content>: View where Content: View {
 
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
-        guard uiModel.misc.dismissType.contains(.dragBack) else { return }
+        guard
+            uiModel.misc.dismissType.contains(.dragBack),
+            isDraggedInCorrectDirection(dragValue),
+            didExceedDragBackDismissDistance(dragValue)
+        else {
+            return
+        }
         
-        let isDraggedLeft: Bool = dragValue.translation.width <= 0
-        guard isDraggedLeft else { return }
-
-        guard abs(dragValue.translation.width) >= uiModel.layout.dragBackDismissDistance else { return }
-
         animateOutFromDrag()
+    }
+    
+    // MARK: Presentation Edge Offsets
+    private var sheetScreenMargins: CGSize {
+        .init(
+            width: (UIScreen.main.bounds.size.width - uiModel.layout.sizes._current.size.width) / 2,
+            height: (UIScreen.main.bounds.size.height - uiModel.layout.sizes._current.size.height) / 2
+        )
+    }
+    
+    private var initialOffset: CGSize {
+        let x: CGFloat = {
+            switch uiModel.layout.presentationEdge {
+            case .left: return -uiModel.layout.sizes._current.size.width - sheetScreenMargins.width
+            case .right: return UIScreen.main.bounds.size.width - sheetScreenMargins.width
+            case .top: return 0
+            case .bottom: return 0
+            }
+        }()
+        
+        let y: CGFloat = {
+            switch uiModel.layout.presentationEdge {
+            case .left: return 0
+            case .right: return 0
+            case .top: return -uiModel.layout.sizes._current.size.height - sheetScreenMargins.height
+            case .bottom: return UIScreen.main.bounds.size.height - sheetScreenMargins.height
+            }
+        }()
+        
+        return .init(width: x, height: y)
+    }
+    
+    private var presentedOffset: CGSize {
+        let x: CGFloat = {
+            switch uiModel.layout.presentationEdge {
+            case .left: return -sheetScreenMargins.width
+            case .right: return sheetScreenMargins.width
+            case .top: return 0
+            case .bottom: return 0
+            }
+        }()
+        
+        let y: CGFloat = {
+            switch uiModel.layout.presentationEdge {
+            case .left: return 0
+            case .right: return 0
+            case .top: return -sheetScreenMargins.height
+            case .bottom: return sheetScreenMargins.height
+            }
+        }()
+        
+        return .init(width: x, height: y)
+    }
+    
+    // MARK: Presentation Edge Dismiss
+    private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
+        switch uiModel.layout.presentationEdge {
+        case .left: return dragValue.translation.width <= 0
+        case .right: return dragValue.translation.width >= 0
+        case .top: return dragValue.translation.height <= 0
+        case .bottom: return dragValue.translation.height >= 0
+        }
+    }
+    
+    private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
+        switch uiModel.layout.presentationEdge {
+        case .left, .right: return abs(dragValue.translation.width) >= uiModel.layout.dragBackDismissDistance
+        case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.layout.dragBackDismissDistance
+        }
     }
 }
 

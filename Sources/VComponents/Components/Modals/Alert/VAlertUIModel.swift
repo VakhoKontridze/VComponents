@@ -111,7 +111,7 @@ public struct VAlertUIModel {
         public init() {}
         
         // MARK: Sizes
-        /// Model that describes modal sizes.
+        /// Model that represents modal sizes.
         public typealias Sizes = ModalSizes<AlertSize>
         
         // MARK: Alert Size

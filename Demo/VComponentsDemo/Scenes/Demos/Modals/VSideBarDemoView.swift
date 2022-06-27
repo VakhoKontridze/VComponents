@@ -13,10 +13,11 @@ struct VSideBarDemoView: View {
     static var navBarTitle: String { "Side Bar" }
     
     @State private var isPresented: Bool = false
+    @State private var presentationEdge: VSideBarUIModel.Layout.PresentationEdge = .default
     @State private var dismissType: VSideBarUIModel.Misc.DismissType = .default
     
     private var uiModel: VSideBarUIModel {
-        var uiModel: VSideBarUIModel = .init()
+        var uiModel: VSideBarUIModel = presentationEdge.uiModel
         
         uiModel.misc.dismissType = dismissType
         
@@ -25,7 +26,7 @@ struct VSideBarDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(component: component, settings: settings)
+        DemoView(component: component, settingsSections: settings)
             .standardNavigationTitle(Self.navBarTitle)
     }
     
@@ -41,7 +42,11 @@ struct VSideBarDemoView: View {
             )
     }
     
-    private func settings() -> some View {
+    @DemoViewSettingsSectionBuilder private func settings() -> some View {
+        DemoViewSettingsSection(content: {
+            VSegmentedPicker(selection: $presentationEdge, headerTitle: "Presentation Edge")
+        })
+        
         DemoViewSettingsSection(content: {
             VStack(spacing: 3, content: {
                 VText(color: ColorBook.primary, font: .callout, text: "Dismiss Method:")
@@ -94,6 +99,17 @@ struct VSideBarDemoView: View {
 }
 
 // MARK: - Helpers
+extension VSideBarUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
+    public var pickerTitle: String {
+        switch self {
+        case .left: return "Left"
+        case .right: return "Right"
+        case .top: return "Top"
+        case .bottom: return "Bottom"
+        }
+    }
+}
+
 extension VSideBarUIModel.Misc.DismissType {
     fileprivate var title: String {
         switch self {
