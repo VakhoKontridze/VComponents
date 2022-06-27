@@ -1,6 +1,6 @@
 # Change Log
 
-### 2.3.0(22)
+### [2.3.0(22)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.0) — *2022 06 27*
 
 VSideBar
 
