@@ -34,10 +34,10 @@ public struct VStaticListUIModel {
         
         var rowPaddingVertical: CGFloat { (rowSpacing - separatorHeight) / 2 }
         
-        /// Row separator height. Defaults to `0.34`.
+        /// Row separator height. Defaults to `1` scaled to screen.
         ///
         /// To hide separator, set to `0`.
-        public var separatorHeight: CGFloat = 0.34
+        public var separatorHeight: CGFloat = CGFloat(1) / UIScreen.main.scale
         
         /// Row separator margins. Defaults to `zero`.
         public var separatorMargins: HorizontalMargins = .zero

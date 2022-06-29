@@ -54,10 +54,10 @@ public struct VDisclosureGroupUIModel {
         /// Chevron button icon dimension. Defaults to `12`.
         public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
         
-        /// Divider height. Defaults to `0.67`.
+        /// Divider height. Defaults to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`.
-        public var dividerHeight: CGFloat = 0.67
+        public var dividerHeight: CGFloat = CGFloat(2) / UIScreen.main.scale
         
         /// Divider margins .Defaults to `15` horizontal and  `0` vertical.
         public var dividerMargins: Margins = .init(
