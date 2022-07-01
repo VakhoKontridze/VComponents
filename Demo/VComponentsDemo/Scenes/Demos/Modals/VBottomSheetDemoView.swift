@@ -72,6 +72,7 @@ struct VBottomSheetDemoView: View {
             .if(hasTitle,
                 ifTransform: {
                     $0
+                        .tag(0) // Uniquely identifies host
                         .vBottomSheet(
                             uiModel: uiModel,
                             isPresented: $isPresented,
@@ -80,6 +81,7 @@ struct VBottomSheetDemoView: View {
                         )
                 }, elseTransform: {
                     $0
+                        .tag("0") // Uniquely identifies host
                         .vBottomSheet(
                             uiModel: uiModel,
                             isPresented: $isPresented,
