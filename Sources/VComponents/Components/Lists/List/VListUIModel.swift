@@ -26,18 +26,19 @@ public struct VListUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Spacing between rows. Defaults to `18`.
-        public var rowSpacing: CGFloat = 18
-        
-        var rowPaddingVertical: CGFloat { (rowSpacing - separatorHeight) / 2 }
+        /// Row margins. Defaults to `15` horizontal, `9` vertical.
+        public var rowMargins: Margins = .init(
+            horizontal: 15,
+            vertical: 9
+        )
         
         /// Row separator height. Defaults to `1` scaled to screen.
         ///
         /// To hide separator, set to `0`.
         public var separatorHeight: CGFloat = 0.9999 / UIScreen.main.scale
         
-        /// Separator margins. Defaults to `zero`.
-        public var separatorMargins: HorizontalMargins = .zero
+        /// Separator margins. Defaults to `15`s.
+        public var separatorMargins: HorizontalMargins = .init(15)
         
         /// Indicates if the first row has separator before it. Defaults to `true`.
         public var showsFirstSeparator: Bool = true
@@ -51,6 +52,10 @@ public struct VListUIModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        // MARK: Margins
+        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
+        public typealias Margins = EdgeInsets_LTTB
         
         // MARK: Horizontal Margins
         /// Sub-model containing `leading` and `trailing` margins.

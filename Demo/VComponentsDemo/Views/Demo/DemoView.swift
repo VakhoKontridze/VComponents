@@ -41,19 +41,15 @@ struct DemoView<ComponentContent, SettingsContent>: View
     // MARK: Properties
     private let demoViewType: DemoViewType<ComponentContent, SettingsContent>
     private let hasLayer: Bool
+    private let paddedEdges: Edge.Set
     
     @State private var isPresented: Bool = false
-    
-    private let bottomSheetUIModel: VBottomSheetUIModel = {
-        var uiModel: VBottomSheetUIModel = .init()
-        uiModel.misc.dismissType.insert(.backTap)
-        return uiModel
-    }()
-    
+
     // MARK: Initializers
     init(
         type: DemoViewComponentContentType = .fixed,
         hasLayer: Bool = true,
+        paddedEdges: Edge.Set = .all,
         component: @escaping () -> ComponentContent
     )
         where SettingsContent == Never
@@ -63,11 +59,13 @@ struct DemoView<ComponentContent, SettingsContent>: View
             content: component
         )
         self.hasLayer = hasLayer
+        self.paddedEdges = paddedEdges
     }
     
     init(
         type: DemoViewComponentContentType = .fixed,
         hasLayer: Bool = true,
+        paddedEdges: Edge.Set = .all,
         component componentContent: @escaping () -> ComponentContent,
         @DemoViewSettingsSectionBuilder settingsSections settingsContent: @escaping () -> SettingsContent
     ) {
@@ -77,11 +75,13 @@ struct DemoView<ComponentContent, SettingsContent>: View
             settings: settingsContent
         )
         self.hasLayer = hasLayer
+        self.paddedEdges = paddedEdges
     }
     
     init<SingleSectionSettingsContent>(
         type: DemoViewComponentContentType = .fixed,
         hasLayer: Bool = true,
+        paddedEdges: Edge.Set = .all,
         component componentContent: @escaping () -> ComponentContent,
         @ViewBuilder settings settingsContent: @escaping () -> SingleSectionSettingsContent
     )
@@ -93,6 +93,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
             settings: { DemoViewSettingsSection(content: settingsContent) }
         )
         self.hasLayer = hasLayer
+        self.paddedEdges = paddedEdges
     }
 
     // MARK: Body
@@ -138,7 +139,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
                     
                 }
             })
-                .padding(20)
+                .padding(paddedEdges, 20)
         })
     }
     
@@ -150,7 +151,12 @@ struct DemoView<ComponentContent, SettingsContent>: View
             icon: .init(systemName: "gearshape")
         )
             .vBottomSheet(
-                uiModel: bottomSheetUIModel,
+                uiModel: {
+                    var uiModel: VBottomSheetUIModel = .init()
+                    uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+                    uiModel.misc.dismissType.insert(.backTap)
+                    return uiModel
+                }(),
                 isPresented: $isPresented,
                 headerTitle: "Parameters",
                 content: { ScrollView(content: settings) }

@@ -99,6 +99,7 @@ struct VSideBarDemoView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             )
+                .padding(.vertical, 1) // Fixes SwiftUI `ScrollView` safe area bug
             
             if dismissType.isEmpty {
                 NoDismissTypeWarningView(onDismiss: { isPresented = false })

@@ -14,7 +14,7 @@ import VCore
 ///     ScrollView(.vertical, showsIndicators: true, content: {
 ///         Text("First")
 ///             .frame(maxWidth: .infinity, alignment: .leading)
-///             .padding(.top, 20)
+///             .padding(.all.subtracting(.bottom), 20)
 ///
 ///         VStaticList(data: 0..<5, id: \.self, content: {
 ///             Text(String($0))
@@ -23,14 +23,13 @@ import VCore
 ///
 ///         Text("Second")
 ///             .frame(maxWidth: .infinity, alignment: .leading)
-///             .padding(.top, 20)
+///             .padding(.all.subtracting(.bottom), 20)
 ///
 ///         VStaticList(data: 0..<5, id: \.self, content: {
 ///             Text(String($0))
 ///                 .frame(maxWidth: .infinity, alignment: .leading)
 ///         })
 ///     })
-///         .padding()
 ///
 public struct VStaticList<Data, ID, Content>: View
     where
@@ -113,7 +112,7 @@ public struct VStaticList<Data, ID, Content>: View
                         }
 
                         content(element)
-                            .padding(.vertical, uiModel.layout.rowPaddingVertical)
+                            .padding(uiModel.layout.rowMargins)
 
                         if index == data.index(before: data.endIndex) {
                             if uiModel.layout.showsLastSeparator {
@@ -152,7 +151,7 @@ struct VStaticList_Previews: PreviewProvider {
         ScrollView(.vertical, showsIndicators: true, content: {
             Text("First")
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 20)
+                .padding(.all.subtracting(.bottom), 20)
             
             VStaticList(data: 0..<5, id: \.self, content: {
                 Text(String($0))
@@ -161,13 +160,12 @@ struct VStaticList_Previews: PreviewProvider {
             
             Text("Second")
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.top, 20)
+                .padding(.all.subtracting(.bottom), 20)
             
             VStaticList(data: 0..<5, id: \.self, content: {
                 Text(String($0))
                     .frame(maxWidth: .infinity, alignment: .leading)
             })
         })
-            .padding()
     }
 }

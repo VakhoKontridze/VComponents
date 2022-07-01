@@ -39,9 +39,8 @@ struct VBottomSheetDemoView: View {
             )
         }
         
-        if !hasDivider && (hasGrabber || hasTitle || dismissType.hasButton) {
-            uiModel.layout.headerMargins.bottom /= 2
-            uiModel.layout.contentMargins.top /= 2
+        if !autoresizesContent { // No list
+            uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
         }
         
         uiModel.layout.grabberSize.height = hasGrabber ? (uiModel.layout.grabberSize.height == 0 ? 4 : uiModel.layout.grabberSize.height) : 0

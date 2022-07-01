@@ -13,6 +13,7 @@ import VCore
 public struct VAlertUIModel {
     // MARK: Properties
     fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
+    fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let modalReference: VModalUIModel = .init()
     
     /// Sub-model containing layout properties.
@@ -49,10 +50,10 @@ public struct VAlertUIModel {
         /// Corner radius. Defaults to `20`.
         public var cornerRadius: CGFloat = 20
         
-        /// Additional margisn applied to title, message, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
+        /// Additional margins applied to title, message, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
         public var titleMessageContentMargins: Margins = .init(
-            leading: modalReference.layout.contentMargins.horizontal / 2,
-            trailing: modalReference.layout.contentMargins.horizontal / 2,
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
             top: 20,
             bottom: 10
         )
@@ -91,8 +92,8 @@ public struct VAlertUIModel {
         
         /// Button margins. Defaults to `15` leading, `15` trailing, `15` top, and `20` bottom.
         public var buttonMargins: Margins = .init(
-            leading: modalReference.layout.contentMargins.leading,
-            trailing: modalReference.layout.contentMargins.trailing,
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
             top: 10,
             bottom: 20
         )

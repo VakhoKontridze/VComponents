@@ -35,12 +35,6 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                 id: \.element.id,
                 content: { (i, section) in
                     VDisclosureGroup(
-                        uiModel: {
-                            var uiModel: VDisclosureGroupUIModel = .init()
-                            uiModel.layout.contentMargins.top = 5
-                            uiModel.layout.contentMargins.bottom = 5
-                            return uiModel
-                        }(),
                         state: $disclosureGroupStates[i],
                         headerTitle: section.title ?? "",
                         content: {

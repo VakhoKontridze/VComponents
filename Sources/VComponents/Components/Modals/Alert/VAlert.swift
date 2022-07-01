@@ -152,7 +152,7 @@ struct VAlert<Content>: View
     
     @ViewBuilder private var buttonsScrollView: some View {
         if buttonsStackShouldScroll {
-            ScrollView(content: { buttonsStack }).padding(.bottom, 0.1) // Fixes SwiftUI `ScrollView` safe area bug
+            ScrollView(content: { buttonsStack }).padding(.bottom, 1) // Fixes SwiftUI `ScrollView` safe area bug
         } else {
             buttonsStack
         }

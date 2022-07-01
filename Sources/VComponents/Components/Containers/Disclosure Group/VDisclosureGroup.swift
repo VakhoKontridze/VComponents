@@ -17,12 +17,6 @@ import VCore
 ///         ColorBook.canvas.ignoresSafeArea()
 ///
 ///         VDisclosureGroup(
-///             uiModel: {
-///                 var uiModel: VDisclosureGroupUIModel = .init()
-///                 uiModel.layout.contentMargins.top = 5
-///                 uiModel.layout.contentMargins.bottom = 5
-///                 return uiModel
-///             }(),
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
@@ -224,12 +218,6 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             ColorBook.canvas.ignoresSafeArea()
 
             VDisclosureGroup(
-                uiModel: {
-                    var uiModel: VDisclosureGroupUIModel = .init()
-                    uiModel.layout.contentMargins.top = 5
-                    uiModel.layout.contentMargins.bottom = 5
-                    return uiModel
-                }(),
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {

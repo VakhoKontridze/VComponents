@@ -21,9 +21,6 @@ struct VDisclosureGroupDemoView: View {
     private var uiModel: VDisclosureGroupUIModel {
         var uiModel: VDisclosureGroupUIModel = .init()
         
-        uiModel.layout.contentMargins.top = 5 // Better for VStaticList
-        uiModel.layout.contentMargins.bottom = 5 // Better for VStaticList
-        
         uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
         uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
         

@@ -6,6 +6,22 @@ VMenuPicker
 
 - MenuPicker is deprecated. Use `VMenu` with `VMenuPickerSection`.
 
+VDisclosureGroup
+
+- `contentMargins` are changed from `15`'s to `zero` in `VDisclosureGroupUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+
+VModal
+
+- `contentMargins` are changed from `15`'s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+
+VBottomSheet
+
+- `contentMargins` are changed from `15`'s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+
+VSideBar
+
+- `contentMargins` are changed from `15`'s to `zero` in `VSideBarUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+
 VMenu
 
 - Menu now support multiple section

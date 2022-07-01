@@ -22,11 +22,6 @@ struct VModalDemoView: View {
     private var uiModel: VModalUIModel {
         var uiModel: VModalUIModel = .init()
         
-        if !hasDivider && (hasTitle || dismissType.hasButton) {
-            uiModel.layout.headerMargins.bottom /= 2
-            uiModel.layout.contentMargins.top /= 2
-        }
-        
         uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
         uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
         

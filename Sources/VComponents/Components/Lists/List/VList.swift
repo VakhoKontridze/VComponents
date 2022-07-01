@@ -19,7 +19,6 @@ import VCore
 ///         Text(String($0))
 ///             .frame(maxWidth: .infinity, alignment: .leading)
 ///     })
-///         .padding()
 ///
 public struct VList<Data, ID, Content>: View
     where
@@ -98,7 +97,7 @@ public struct VList<Data, ID, Content>: View
                     }
 
                     content(element)
-                        .padding(.vertical, uiModel.layout.rowPaddingVertical)
+                        .padding(uiModel.layout.rowMargins)
 
                     if index == data.index(before: data.endIndex) {
                         if uiModel.layout.showsLastSeparator {
@@ -141,6 +140,5 @@ struct VList_Previews: PreviewProvider {
             Text(String($0))
                 .frame(maxWidth: .infinity, alignment: .leading)
         })
-            .padding()
     }
 }

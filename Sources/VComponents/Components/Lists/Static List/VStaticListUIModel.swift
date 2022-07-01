@@ -31,17 +31,15 @@ public struct VStaticListUIModel {
         /// Alignment. Defaults to `center`.
         public var alignment: HorizontalAlignment = .center
         
-        /// Spacing between rows. Defaults to `18`.
-        public var rowSpacing: CGFloat = listReference.layout.rowSpacing
-        
-        var rowPaddingVertical: CGFloat { listReference.layout.rowPaddingVertical }
+        /// Row margins. Defaults to `15` horizontal, `9` vertical.
+        public var rowMargins: Margins = listReference.layout.rowMargins
         
         /// Row separator height. Defaults to `1` scaled to screen.
         ///
         /// To hide separator, set to `0`.
         public var separatorHeight: CGFloat = 1 / UIScreen.main.scale
         
-        /// Row separator margins. Defaults to `zero`.
+        /// Separator margins. Defaults to `15`s.
         public var separatorMargins: HorizontalMargins = listReference.layout.separatorMargins
         
         /// Indicates if the first row has separator before it. Defaults to `true`.
@@ -55,6 +53,9 @@ public struct VStaticListUIModel {
         public init() {}
         
         // MARK: Horizontal Margins
+        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
+        public typealias Margins = EdgeInsets_LTTB
+        
         /// Sub-model containing `leading` and `trailing` margins.
         public typealias HorizontalMargins = EdgeInsets_LT
     }
