@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK: - V Secondary Button Label
-typealias VSecondaryButtonLabel = VPrimaryButtonLabel
+typealias VSecondaryButtonLabel = GenericLabel_TitleIconTitleCustom

@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK: - V Check Box Label
-typealias VCheckBoxLabel = VToggleLabel
+typealias VCheckBoxLabel = GenericLabel_EmptyTitleCustom

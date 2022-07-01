@@ -8,8 +8,4 @@
 import SwiftUI
 
 // MARK: - V Toggle Label
-enum VToggleLabel<CustomLabel> where CustomLabel: View {
-    case empty
-    case title(title: String)
-    case custom(label: () -> CustomLabel)
-}
+typealias VToggleLabel = GenericLabel_EmptyTitleCustom

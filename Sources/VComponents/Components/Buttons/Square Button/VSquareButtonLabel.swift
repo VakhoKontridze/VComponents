@@ -8,8 +8,4 @@
 import SwiftUI
 
 // MARK: - V Square Button Label
-enum VSquareButtonLabel<CustomLabel> where CustomLabel: View {
-    case title(title: String)
-    case icon(icon: Image)
-    case custom(label: () -> CustomLabel)
-}
+typealias VSquareButtonLabel = GenericLabel_TitleIconCustom
