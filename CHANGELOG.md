@@ -1,5 +1,11 @@
 # Change Log
 
+### 3.0.0(??)
+
+VMenuPicker
+
+- MenuPicker is deprecated. Use `VMenu` with `VMenuPickerSection`.
+
 ### 2.3.1(23)
 
 General

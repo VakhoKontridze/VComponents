@@ -29,7 +29,7 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 
 **State Pickers.** VToggle, VCheckBox, VRadioButton
 
-**Item Pickers.** VSegmentedPicker, VMenuPicker, VWheelPicker
+**Item Pickers.** VSegmentedPicker, VWheelPicker
 
 **Value Pickers.** VStepper, VSlider, VRangeSlider
 

@@ -12,7 +12,7 @@ enum HomeRow: Int, DemoableRow {
     // MARK: Cases
     case primaryButton, secondaryButton, squareButton, plainButton, navigationLink, link
     case toggle, checkBox, radioButton
-    case segmentedPicker, menuPicker, wheelPicker
+    case segmentedPicker, wheelPicker
     case stepper, slider,  rangeSlider
     case textField
     case sheet, disclosureGroup
@@ -30,7 +30,7 @@ enum HomeRow: Int, DemoableRow {
                 .navigationLink, .link
             ]),
             .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
-            .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .menuPicker, .wheelPicker]),
+            .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .wheelPicker]),
             .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
             .init(id: 4, title: "Inputs", rows: [.textField]),
             .init(id: 5, title: "Containers", rows: [.sheet, .disclosureGroup]),
@@ -56,7 +56,6 @@ enum HomeRow: Int, DemoableRow {
         case .radioButton: return VRadioButtonDemoView.navBarTitle
 
         case .segmentedPicker: return VSegmentedPickerDemoView.navBarTitle
-        case .menuPicker: return VMenuPickerDemoView.navBarTitle
         case .wheelPicker: return VWheelPickerDemoView.navBarTitle
 
         case .stepper: return VStepperDemoView.navBarTitle
@@ -104,7 +103,6 @@ enum HomeRow: Int, DemoableRow {
         case .radioButton: VRadioButtonDemoView()
 
         case .segmentedPicker: VSegmentedPickerDemoView()
-        case .menuPicker: VMenuPickerDemoView()
         case .wheelPicker: VWheelPickerDemoView()
 
         case .stepper: VStepperDemoView()
