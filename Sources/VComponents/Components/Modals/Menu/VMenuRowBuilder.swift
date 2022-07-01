@@ -25,7 +25,7 @@ extension Array: VMenuRowConvertible where Element == VMenuRow {
     public typealias Component = any VMenuRowConvertible
     public typealias Return = [any VMenuRow]
     
-    // MARK: Blocks
+    // MARK: Build Blocks
     public static func buildBlock() -> Return {
         []
     }

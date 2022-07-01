@@ -25,7 +25,7 @@ extension Array: VMenuSectionConvertible where Element == VMenuSection {
     public typealias Component = any VMenuSectionConvertible
     public typealias Return = [any VMenuSection]
     
-    // MARK: Blocks
+    // MARK: Build Blocks
     public static func buildBlock() -> Return {
         []
     }
