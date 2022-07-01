@@ -14,7 +14,7 @@ struct VMenuDemoView: View {
     static var navBarTitle: String { "Menu" }
     
     @State private var isEnabled: Bool = true
-    @State private var selection: PickerRow = .red
+    @State private var selection: _PickerRow = .red
 
     // MARK: Body
     var body: some View {
@@ -55,13 +55,15 @@ struct VMenuDemoView: View {
                 })
             })
         })
+        
+        VMenuPickerSection(selection: $selection)
     }
 }
 
 // MARK: - Helpers
 private typealias VMenuState = VSecondaryButtonInternalState
 
-private enum PickerRow: Int, PickableTitledEnumeration {
+private enum _PickerRow: Int, PickableTitledEnumeration {
     case red, green, blue
 
     var pickerTitle: String {

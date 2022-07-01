@@ -45,6 +45,8 @@ import SwiftUI
 ///                     })
 ///                 })
 ///             })
+///
+///             VMenuPickerSection(selection: $selection)
 ///         })
 ///     }
 ///
@@ -173,6 +175,8 @@ struct VMenu_Previews: PreviewProvider {
                     })
                 })
             })
+            
+            VMenuPickerSection(selection: $selection)
         })
     }
 }
