@@ -12,6 +12,8 @@ import VCore
 /// Model that describes UI.
 public struct VStaticListUIModel {
     // MARK: Properties
+    fileprivate static let listReference: VListUIModel = .init()
+    
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
     
@@ -30,23 +32,23 @@ public struct VStaticListUIModel {
         public var alignment: HorizontalAlignment = .center
         
         /// Spacing between rows. Defaults to `18`.
-        public var rowSpacing: CGFloat = 18
+        public var rowSpacing: CGFloat = listReference.layout.rowSpacing
         
-        var rowPaddingVertical: CGFloat { (rowSpacing - separatorHeight) / 2 }
+        var rowPaddingVertical: CGFloat { listReference.layout.rowPaddingVertical }
         
         /// Row separator height. Defaults to `1` scaled to screen.
         ///
         /// To hide separator, set to `0`.
-        public var separatorHeight: CGFloat = CGFloat(0.99) / UIScreen.main.scale
+        public var separatorHeight: CGFloat = 0.9999 / UIScreen.main.scale
         
         /// Row separator margins. Defaults to `zero`.
-        public var separatorMargins: HorizontalMargins = .zero
+        public var separatorMargins: HorizontalMargins = listReference.layout.separatorMargins
         
         /// Indicates if the first row has separator before it. Defaults to `true`.
-        public var showsFirstSeparator: Bool = true
+        public var showsFirstSeparator: Bool = listReference.layout.showsFirstSeparator
         
         /// Indicates if the last row has separator after it. Defaults to `true`.
-        public var showsLastSeparator: Bool = true
+        public var showsLastSeparator: Bool = listReference.layout.showsLastSeparator
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -59,16 +61,5 @@ public struct VStaticListUIModel {
     
     // MARK: Colors
     /// Sub-model containing color properties.
-    public struct Colors {
-        // MARK: Properties
-        /// Row background color.
-        public var rowBackground: Color = ColorBook.layer
-        
-        /// Separator color.
-        public var separator: Color = .init(componentAsset: "List.Separator")
-        
-        // MARK: Initializers
-        /// Initializes sub-model with default values.
-        public init() {}
-    }
+    public typealias Colors = VListUIModel.Colors
 }

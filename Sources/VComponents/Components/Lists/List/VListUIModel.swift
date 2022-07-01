@@ -34,7 +34,7 @@ public struct VListUIModel {
         /// Row separator height. Defaults to `1` scaled to screen.
         ///
         /// To hide separator, set to `0`.
-        public var separatorHeight: CGFloat = CGFloat(0.99) / UIScreen.main.scale
+        public var separatorHeight: CGFloat = 0.9999 / UIScreen.main.scale
         
         /// Separator margins. Defaults to `zero`.
         public var separatorMargins: HorizontalMargins = .zero
