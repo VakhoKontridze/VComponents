@@ -28,7 +28,7 @@ extension VMenuSection {
 /// Grouped container view that you can use to add hierarchy to `VMenuRow`'s.
 public struct VMenuGroupSection: VMenuSection {
     // MARK: Properties
-    let rows: () -> [any VMenuRow]
+    private let rows: () -> [any VMenuRow]
     
     // MARK: Initializers
     /// Initializes `VMenuGroupSection` with rows.
@@ -60,10 +60,10 @@ public struct VMenuPickerSection<Data>: VMenuSection
         Data.Index == Int
 {
     // MARK: Properties
-    @Binding var selectedIndex: Int
+    private let data: Data
+    private let content: (Data.Element) -> VMenuRow
     
-    let data: Data
-    let content: (Data.Element) -> VMenuRow
+    @Binding private var selectedIndex: Int
     
     // MARK: Initializers
     /// Initializes `VMenuPickerSection` with selected index, data, and content.
