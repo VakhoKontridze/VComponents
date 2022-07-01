@@ -25,23 +25,26 @@ extension VMenuRow {
 /// SIngle row in `VMenu` with title.
 public struct VMenuTitleRow: VMenuRow {
     // MARK: Properties
-    let action: () -> Void
-    let title: String
+    private let action: () -> Void
+    private let role: ButtonRole?
+    private let title: String
     
     // MARK: Initializers
     /// Initializes `VMenuTitleRow` with action and title.
     public init(
         action: @escaping () -> Void,
+        role: ButtonRole? = nil,
         title: String
     ) {
         self.action = action
+        self.role = role
         self.title = title
     }
     
     // MARK: Row Section
     public var body: AnyView {
         .init(
-            Button(title, action: action)
+            Button(title, role: role, action: action)
         )
     }
 }
@@ -50,18 +53,21 @@ public struct VMenuTitleRow: VMenuRow {
 /// SIngle row in `VMenu` with title and icon.
 public struct VMenuTitleIconRow: VMenuRow {
     // MARK: Properties
-    let action: () -> Void
-    let title: String
-    let icon: Image
+    private let action: () -> Void
+    private let role: ButtonRole?
+    private let title: String
+    private let icon: Image
     
     // MARK: Initializers
     /// Initializes `VMenuTitleIconRow` with action, title, and icon.
     public init(
         action: @escaping () -> Void,
+        role: ButtonRole? = nil,
         title: String,
         icon: Image
     ) {
         self.action = action
+        self.role = role
         self.title = title
         self.icon = icon
     }
@@ -69,11 +75,13 @@ public struct VMenuTitleIconRow: VMenuRow {
     /// Initializes `VMenuTitleIconRow` with action, title, and asset icon name.
     public init(
         action: @escaping () -> Void,
+        role: ButtonRole? = nil,
         title: String,
         assetIcon: String,
         bundle: Bundle? = nil
     ) {
         self.action = action
+        self.role = role
         self.title = title
         self.icon = .init(assetIcon, bundle: bundle)
     }
@@ -81,10 +89,12 @@ public struct VMenuTitleIconRow: VMenuRow {
     /// Initializes `VMenuTitleIconRow` with action, title, and system icon name.
     public init(
         action: @escaping () -> Void,
+        role: ButtonRole? = nil,
         title: String,
         systemIcon: String
     ) {
         self.action = action
+        self.role = role
         self.title = title
         self.icon = .init(systemName: systemIcon)
     }
@@ -92,7 +102,7 @@ public struct VMenuTitleIconRow: VMenuRow {
     // MARK: Row Section
     public var body: AnyView {
         .init(
-            Button(action: action, label: {
+            Button(role: role, action: action, label: {
                 Text(title)
                 icon
             })
