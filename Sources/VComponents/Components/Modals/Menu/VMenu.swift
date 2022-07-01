@@ -42,7 +42,7 @@ import SwiftUI
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool
-    private var internalState: VMenuPickerInternalState { .init(isEnabled: isEnabled) }
+    private var internalState: VMenuInternalState { .init(isEnabled: isEnabled) }
     
     private let rows: [VMenuRow]
     private let label: () -> Label
