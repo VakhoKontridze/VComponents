@@ -84,6 +84,7 @@ struct VModal<HeaderLabel, Content>: View
                 contentView
             })
                 .frame(maxHeight: .infinity, alignment: .top)
+                .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.roundedCorners) // Fixes clipping when `contentMargin` is zero
         })
             .frame(size: uiModel.layout.sizes._current.size)
             .ignoresSafeArea(.container, edges: .all)
