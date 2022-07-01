@@ -18,6 +18,10 @@ General
 
 - Divider and separators are now scaled to screen sizes
 
+VModal
+
+- Issue with content clipping outside border, when margins are zero, is fixed
+
 ### [2.3.0(22)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.0) — *2022 06 27*
 
 VSideBar

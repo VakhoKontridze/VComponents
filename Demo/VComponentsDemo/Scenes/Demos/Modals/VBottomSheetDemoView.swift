@@ -72,6 +72,7 @@ struct VBottomSheetDemoView: View {
             .if(hasTitle,
                 ifTransform: {
                     $0
+                        .tag(0) // Uniquely identifies host
                         .vBottomSheet(
                             uiModel: uiModel,
                             isPresented: $isPresented,
@@ -80,6 +81,7 @@ struct VBottomSheetDemoView: View {
                         )
                 }, elseTransform: {
                     $0
+                        .tag("0") // Uniquely identifies host
                         .vBottomSheet(
                             uiModel: uiModel,
                             isPresented: $isPresented,
@@ -167,10 +169,19 @@ struct VBottomSheetDemoView: View {
                     .padding(.bottom, 10)
                 
             case true:
-                VList(data: 0..<20, content: { num in
-                    Text(String(num))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                })
+                VList(
+                    uiModel: {
+                        var uiModel: VListUIModel = .init()
+                        uiModel.layout.showsFirstSeparator = false
+                        uiModel.layout.showsLastSeparator = false
+                        return uiModel
+                    }(),
+                    data: 0..<20,
+                    content: { num in
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                )
                     .padding(.bottom, 10)
             }
 
