@@ -14,6 +14,7 @@ struct VMenuDemoView: View {
     static var navBarTitle: String { "Menu" }
     
     @State private var isEnabled: Bool = true
+    @State private var selection: PickerRow = .red
 
     // MARK: Body
     var body: some View {
@@ -22,15 +23,8 @@ struct VMenuDemoView: View {
     }
     
     private func component() -> some View {
-        VMenu(
-            rows: rows,
-            label: {
-                VPlainButton(
-                    action: {},
-                    title: "Present"
-                )
-            }
-        )
+        VMenu(title: "Present", sections: sections)
+            .disabled(!isEnabled)
     }
     
     @ViewBuilder private func settings() -> some View {
@@ -43,27 +37,41 @@ struct VMenuDemoView: View {
         )
     }
     
-    private var rows: [VMenuRow] {
-        [
-            .titleIcon(action: {}, title: "One", icon: .init(systemName: "swift")),
-            .titleIcon(action: {}, title: "Two", systemIcon: "swift"),
-            .title(action: {}, title: "Three"),
-            .title(action: {}, title: "Four"),
-            .menu(title: "Five...", rows: [
-                .title(action: {}, title: "One"),
-                .title(action: {}, title: "Two"),
-                .title(action: {}, title: "Three"),
-                .menu(title: "Four...", rows: [
-                    .title(action: {}, title: "One"),
-                    .title(action: {}, title: "Two")
-                ])
-            ])
-        ]
+    @VMenuSectionBuilder private func sections() -> [any VMenuSection] {
+        VMenuGroupSection(title: "Section 1", rows: {
+            VMenuTitleRow(action: {}, title: "One")
+            VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+        })
+        
+        VMenuGroupSection(title: "Section 2", rows: {
+            VMenuTitleRow(action: {}, title: "One")
+            
+            VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+            
+            VMenuSubMenuRow(title: "Three...", sections: {
+                VMenuGroupSection(rows: {
+                    VMenuTitleRow(action: {}, title: "One")
+                    VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+                })
+            })
+        })
     }
 }
 
 // MARK: - Helpers
 private typealias VMenuState = VSecondaryButtonInternalState
+
+private enum PickerRow: Int, PickableTitledEnumeration {
+    case red, green, blue
+
+    var pickerTitle: String {
+        switch self {
+        case .red: return "Red"
+        case .green: return "Green"
+        case .blue: return "Blue"
+        }
+    }
+}
 
 // MARK: - Preview
 struct VMenuDemoView_Previews: PreviewProvider {

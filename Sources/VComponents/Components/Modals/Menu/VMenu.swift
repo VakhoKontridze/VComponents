@@ -12,31 +12,40 @@ import SwiftUI
 ///
 /// Unlike native menu, this components doesn't take reverse row order.
 ///
-///     var body: some View {
-///         VMenu(
-///             rows: [
-///                 .titleIcon(action: {}, title: "One", assetIcon: "SomeIcon"),
-///                 .titleIcon(action: {}, title: "Two", icon: someIcon),
-///                 .titleIcon(action: {}, title: "Three", systemIcon: "swift"),
-///                 .title(action: {}, title: "Four"),
-///                 .title(action: {}, title: "Five"),
-///                 .menu(title: "Five...", rows: [
-///                     .title(action: {}, title: "One"),
-///                     .title(action: {}, title: "Two"),
-///                     .title(action: {}, title: "Three"),
-///                     .menu(title: "Four...", rows: [
-///                         .title(action: {}, title: "One"),
-///                         .title(action: {}, title: "Two")
-///                     ])
-///                 ])
-///             ],
-///             label: {
-///                 VPlainButton(
-///                     action: {},
-///                     title: "Lorem Ipsum"
-///                 )
+///     enum PickerRow: Int, PickableTitledEnumeration {
+///         case red, green, blue
+///
+///         var pickerTitle: String {
+///             switch self {
+///             case .red: return "Red"
+///             case .green: return "Green"
+///             case .blue: return "Blue"
 ///             }
-///         )
+///         }
+///     }
+///
+///     @State var selection: PickerRow = .red
+///
+///     var body: some View {
+///         VMenu(title: "Lorem Ipsum", sections: {
+///             VMenuGroupSection(title: "Section 1", rows: {
+///                 VMenuTitleRow(action: {}, title: "One")
+///                 VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+///             })
+///
+///             VMenuGroupSection(title: "Section 2", rows: {
+///                 VMenuTitleRow(action: {}, title: "One")
+///
+///                 VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+///
+///                 VMenuSubMenuRow(title: "Three...", sections: {
+///                     VMenuGroupSection(rows: {
+///                         VMenuTitleRow(action: {}, title: "One")
+///                         VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+///                     })
+///                 })
+///             })
+///         })
 ///     }
 ///
 public struct VMenu<Label>: View where Label: View {
@@ -44,55 +53,126 @@ public struct VMenu<Label>: View where Label: View {
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VMenuInternalState { .init(isEnabled: isEnabled) }
     
-    private let rows: [VMenuRow]
-    private let label: () -> Label
+    private let sections: () -> [any VMenuSection]
+    private let primaryAction: (() -> Void)?
+    private let label: VMenuLabel<Label>
     
-    // MARK: Initializers
-    /// Initializes component with rows and label.
+    // MARK: Initializers - Sections
+    /// Initializes component with label and sections.
     public init(
-        rows: [VMenuRow],
-        @ViewBuilder label: @escaping () -> Label
+        primaryAction: (() -> Void)? = nil,
+        @ViewBuilder label: @escaping () -> Label,
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSection]
     ) {
-        self.rows = rows
-        self.label = label
+        self.sections = sections
+        self.primaryAction = primaryAction
+        self.label = .custom(label: label)
+    }
+    
+    /// Initializes component with title and sections.
+    public init(
+        primaryAction: (() -> Void)? = nil,
+        title: String,
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSection]
+    )
+        where Label == Never
+    {
+        self.sections = sections
+        self.primaryAction = primaryAction
+        self.label = .title(title: title)
+    }
+    
+    // MARK: Initializers - Rows
+    /// Initializes component with label and rows.
+    public init(
+        primaryAction: (() -> Void)? = nil,
+        @ViewBuilder label: @escaping () -> Label,
+        @VMenuRowBuilder rows: @escaping () -> [any VMenuRow]
+    ) {
+        self.sections = { [VMenuGroupSection(rows: rows)] }
+        self.primaryAction = primaryAction
+        self.label = .custom(label: label)
+    }
+    
+    /// Initializes component with title and rows.
+    public init(
+        primaryAction: (() -> Void)? = nil,
+        title: String,
+        @VMenuRowBuilder rows: @escaping () -> [any VMenuRow]
+    )
+        where Label == Never
+    {
+        self.sections = { [VMenuGroupSection(rows: rows)] }
+        self.primaryAction = primaryAction
+        self.label = .title(title: title)
     }
 
     // MARK: Body
     public var body: some View {
         Menu(
-            content: { VMenuContentView(rows: rows) },
-            label: label
+            content: contentView,
+            label: labelView,
+            primaryAction: { primaryAction?() }
         )
             .disabled(!internalState.isEnabled)
+    }
+    
+    private func contentView() -> some View {
+        ForEach(sections().enumeratedArray().reversed(), id: \.offset, content: { (_, section) in
+            if let title: String = section.title {
+                Section(title, content: { section.body })
+            } else {
+                Section(content: { section.body })
+            }
+        })
+    }
+    
+    @ViewBuilder private func labelView() -> some View {
+        switch label {
+        case .title(let title):
+            VPlainButton(action: {}, title: title)
+            
+        case .custom(let label):
+            label()
+        }
     }
 }
 
 // MARK: - Preview
 struct VMenu_Previews: PreviewProvider {
-    static var previews: some View {
-        VMenu(
-            rows: [
-                .titleIcon(action: {}, title: "One", assetIcon: "XMark", bundle: .module),
-                .titleIcon(action: {}, title: "Two", icon: .init(systemName: "swift")),
-                .titleIcon(action: {}, title: "Three", systemIcon: "swift"),
-                .title(action: {}, title: "Four"),
-                .title(action: {}, title: "Five"),
-                .menu(title: "Five...", rows: [
-                    .title(action: {}, title: "One"),
-                    .title(action: {}, title: "Two"),
-                    .title(action: {}, title: "Three"),
-                    .menu(title: "Four...", rows: [
-                        .title(action: {}, title: "One"),
-                        .title(action: {}, title: "Two")
-                    ])
-                ])
-            ],
-            label: {
-                VPlainButton(
-                    action: {},
-                    title: "Lorem Ipsum"
-                )
+    private enum PickerRow: Int, PickableTitledEnumeration {
+        case red, green, blue
+
+        var pickerTitle: String {
+            switch self {
+            case .red: return "Red"
+            case .green: return "Green"
+            case .blue: return "Blue"
             }
-        )
+        }
+    }
+
+    @State private static var selection: PickerRow = .red
+    
+    static var previews: some View {
+        VMenu(title: "Lorem Ipsum", sections: {
+            VMenuGroupSection(title: "Section 1", rows: {
+                VMenuTitleRow(action: {}, title: "One")
+                VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+            })
+            
+            VMenuGroupSection(title: "Section 2", rows: {
+                VMenuTitleRow(action: {}, title: "One")
+                
+                VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+                
+                VMenuSubMenuRow(title: "Three...", sections: {
+                    VMenuGroupSection(rows: {
+                        VMenuTitleRow(action: {}, title: "One")
+                        VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+                    })
+                })
+            })
+        })
     }
 }

@@ -6,6 +6,12 @@ VMenuPicker
 
 - MenuPicker is deprecated. Use `VMenu` with `VMenuPickerSection`.
 
+VMenu
+
+- Menu now support multiple section
+- Menu now builds sections and rows using `resultBuilder`'s
+- Menu now supports picker section, transferred from `VMenuPicker`
+
 ### 2.3.1(23)
 
 General
