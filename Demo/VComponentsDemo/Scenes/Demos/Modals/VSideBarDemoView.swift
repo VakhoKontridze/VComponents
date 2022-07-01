@@ -86,10 +86,19 @@ struct VSideBarDemoView: View {
 
     private var sideBarContent: some View {
         ZStack(content: {
-            VList(data: 0..<40, content: { num in
-                Text(String(num))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            })
+            VList(
+                uiModel: {
+                    var uiModel: VListUIModel = .init()
+                    uiModel.layout.showsFirstSeparator = false
+                    uiModel.layout.showsLastSeparator = false
+                    return uiModel
+                }(),
+                data: 0..<40,
+                content: { num in
+                    Text(String(num))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            )
             
             if dismissType.isEmpty {
                 NoDismissTypeWarningView(onDismiss: { isPresented = false })

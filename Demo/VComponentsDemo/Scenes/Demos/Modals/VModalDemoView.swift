@@ -108,10 +108,19 @@ struct VModalDemoView: View {
     
     private var modalContent: some View {
         ZStack(content: {
-            VList(data: 0..<20, content: { num in
-                Text(String(num))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            })
+            VList(
+                uiModel: {
+                    var uiModel: VListUIModel = .init()
+                    uiModel.layout.showsFirstSeparator = false
+                    uiModel.layout.showsLastSeparator = false
+                    return uiModel
+                }(),
+                data: 0..<20,
+                content: { num in
+                    Text(String(num))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+            )
 
             if dismissType.isEmpty {
                 NoDismissTypeWarningView(onDismiss: { isPresented = false })

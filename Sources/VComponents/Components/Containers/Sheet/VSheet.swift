@@ -20,10 +20,20 @@ import VCore
 ///             ColorBook.canvas.ignoresSafeArea()
 ///
 ///             VSheet(content: {
-///                 VList(data: 0..<20, content: { num in
-///                     Text(String(num))
-///                         .frame(maxWidth: .infinity, alignment: .leading)
-///                 })
+///                 VList(
+///                     uiModel: {
+///                         var uiModel: VListUIModel = .init()
+///                         uiModel.layout.showsFirstSeparator = false
+///                         uiModel.layout.showsLastSeparator = false
+///                         return uiModel
+///                     }(),
+///                     data: 0..<20,
+///                     content: { num in
+///                         Text(String(num))
+///                             .frame(maxWidth: .infinity, alignment: .leading)
+///                     }
+///                 )
+///
 ///             })
 ///                 .padding()
 ///         })
@@ -89,14 +99,22 @@ struct VSheet_Previews: PreviewProvider {
             ColorBook.canvas.ignoresSafeArea()
             
             VSheet(content: {
-                VList(data: 0..<20, content: { num in
-                    Text(String(num))
-                        .padding(.vertical, 2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                })
+                VList(
+                    uiModel: {
+                        var uiModel: VListUIModel = .init()
+                        uiModel.layout.showsFirstSeparator = false
+                        uiModel.layout.showsLastSeparator = false
+                        return uiModel
+                    }(),
+                    data: 0..<20,
+                    content: { num in
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                )
+
             })
                 .padding()
-                .background(ColorBook.canvas)
         })
     }
 }

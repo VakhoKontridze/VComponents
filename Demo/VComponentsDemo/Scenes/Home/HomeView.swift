@@ -16,11 +16,32 @@ struct HomeView: View {
 
     // MARK: Body
     var body: some View {
-        NavigationView(content: {
-            DemoListView(sections: HomeRow.sections)
-                .standardNavigationTitle(Self.navBarTitle)
+//        NavigationView(content: {
+//            DemoListView(sections: HomeRow.sections)
+//                .standardNavigationTitle(Self.navBarTitle)
+//        })
+//            .navigationViewStyle(.stack)
+        ZStack(alignment: .top, content: {
+            ColorBook.canvas.ignoresSafeArea()
+            
+            VSheet(content: {
+                VList(
+                    uiModel: {
+                        var uiModel: VListUIModel = .init()
+                        uiModel.layout.showsFirstSeparator = false
+                        uiModel.layout.showsLastSeparator = false
+                        return uiModel
+                    }(),
+                    data: 0..<5,
+                    content: { num in
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                )
+
+            })
+                .padding()
         })
-            .navigationViewStyle(.stack)
     }
 }
 

@@ -207,11 +207,24 @@ struct VModal_Previews: PreviewProvider {
             action: { /*isPresented = true*/ },
             title: "Present"
         )
-            .vModal(isPresented: $isPresented, headerTitle: "Lorem Ipsum", content: {
-                VList(data: 0..<20, content: { num in
-                    Text(String(num))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                })
-            })
+            .vModal(
+                isPresented: $isPresented,
+                headerTitle: "Lorem Ipsum",
+                content: {
+                    VList(
+                        uiModel: {
+                            var uiModel: VListUIModel = .init()
+                            uiModel.layout.showsFirstSeparator = false
+                            uiModel.layout.showsLastSeparator = false
+                            return uiModel
+                        }(),
+                        data: 0..<20,
+                        content: { num in
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
+                }
+            )
     }
 }

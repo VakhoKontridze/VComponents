@@ -33,10 +33,19 @@ extension View {
     ///                 }(),
     ///                 isPresented: $isPresented,
     ///                 content: {
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
+    ///                     VList(
+    ///                         uiModel: {
+    ///                             var uiModel: VListUIModel = .init()
+    ///                             uiModel.layout.showsFirstSeparator = false
+    ///                             uiModel.layout.showsLastSeparator = false
+    ///                             return uiModel
+    ///                         }(),
+    ///                         data: 0..<20,
+    ///                         content: { num in
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                         }
+    ///                     )
     ///                 }
     ///             )
     ///     }
@@ -86,10 +95,19 @@ extension View {
     ///                 isPresented: $isPresented,
     ///                 headerTitle: "Lorem Ipsum Dolor Sit Amet",
     ///                 content: {
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
+    ///                     VList(
+    ///                         uiModel: {
+    ///                             var uiModel: VListUIModel = .init()
+    ///                             uiModel.layout.showsFirstSeparator = false
+    ///                             uiModel.layout.showsLastSeparator = false
+    ///                             return uiModel
+    ///                         }(),
+    ///                         data: 0..<20,
+    ///                         content: { num in
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                         }
+    ///                     )
     ///                 }
     ///             )
     ///     }
@@ -145,10 +163,19 @@ extension View {
     ///                     })
     ///                 },
     ///                 content: {
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
+    ///                     VList(
+    ///                         uiModel: {
+    ///                             var uiModel: VListUIModel = .init()
+    ///                             uiModel.layout.showsFirstSeparator = false
+    ///                             uiModel.layout.showsLastSeparator = false
+    ///                             return uiModel
+    ///                         }(),
+    ///                         data: 0..<20,
+    ///                         content: { num in
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                         }
+    ///                     )
     ///                 }
     ///             )
     ///     }
@@ -213,10 +240,19 @@ extension View {
     ///                 }(),
     ///                 item: $modalItem,
     ///                 content: { item in
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
+    ///                     VList(
+    ///                         uiModel: {
+    ///                             var uiModel: VListUIModel = .init()
+    ///                             uiModel.layout.showsFirstSeparator = false
+    ///                             uiModel.layout.showsLastSeparator = false
+    ///                             return uiModel
+    ///                         }(),
+    ///                         data: 0..<20,
+    ///                         content: { num in
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                         }
+    ///                     )
     ///                 }
     ///             )
     ///     }
@@ -281,10 +317,19 @@ extension View {
     ///                 item: $modalItem,
     ///                 headerTitle: { item in "Lorem Ipsum Dolor Sit Amet" },
     ///                 content: { item in
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
+    ///                     VList(
+    ///                         uiModel: {
+    ///                             var uiModel: VListUIModel = .init()
+    ///                             uiModel.layout.showsFirstSeparator = false
+    ///                             uiModel.layout.showsLastSeparator = false
+    ///                             return uiModel
+    ///                         }(),
+    ///                         data: 0..<20,
+    ///                         content: { num in
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                         }
+    ///                     )
     ///                 }
     ///             )
     ///     }
@@ -361,10 +406,19 @@ extension View {
     ///                     })
     ///                 },
     ///                 content: { item in
-    ///                     VList(data: 0..<20, content: { num in
-    ///                         Text(String(num))
-    ///                             .frame(maxWidth: .infinity, alignment: .leading)
-    ///                     })
+    ///                     VList(
+    ///                         uiModel: {
+    ///                             var uiModel: VListUIModel = .init()
+    ///                             uiModel.layout.showsFirstSeparator = false
+    ///                             uiModel.layout.showsLastSeparator = false
+    ///                             return uiModel
+    ///                         }(),
+    ///                         data: 0..<20,
+    ///                         content: { num in
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
+    ///                         }
+    ///                     )
     ///                 }
     ///             )
     ///     }
