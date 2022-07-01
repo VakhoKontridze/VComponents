@@ -39,7 +39,7 @@ public struct VStaticListUIModel {
         /// Row separator height. Defaults to `1` scaled to screen.
         ///
         /// To hide separator, set to `0`.
-        public var separatorHeight: CGFloat = 0.9999 / UIScreen.main.scale
+        public var separatorHeight: CGFloat = 1 / UIScreen.main.scale
         
         /// Row separator margins. Defaults to `zero`.
         public var separatorMargins: HorizontalMargins = listReference.layout.separatorMargins
