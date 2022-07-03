@@ -19,48 +19,46 @@ extension Array: VMenuSectionConvertible where Element == VMenuSection {
 }
 
 // MARK: - V Menu Section Builder
-/// A custom parameter attribute that constructs views from closures.
+/// Custom parameter attribute that constructs views from closures.
 @resultBuilder public struct VMenuSectionBuilder {
     // MARK: Properties
     public typealias Component = any VMenuSectionConvertible
-    public typealias Return = [any VMenuSection]
+    public typealias Result = [any VMenuSection]
     
     // MARK: Build Blocks
-    public static func buildBlock() -> Return {
+    public static func buildBlock() -> Result {
         []
     }
     
-    public static func buildBlock(_ components: Component...) -> Return {
+    public static func buildBlock(_ components: Component...) -> Result {
         components.flatMap { $0.toSections() }
     }
     
-    public static func buildOptional(_ component: Component?) -> Return {
+    public static func buildOptional(_ component: Component?) -> Result {
         component?.toSections() ?? []
     }
     
-    public static func buldIf(_ component: Component?) -> Return {
+    public static func buldIf(_ component: Component?) -> Result {
         component?.toSections() ?? []
     }
 
-    public static func buildEither(first component: Component) -> Return {
+    public static func buildEither(first component: Component) -> Result {
         component.toSections()
     }
 
-    public static func buildEither(second component: Component) -> Return {
+    public static func buildEither(second component: Component) -> Result {
         component.toSections()
     }
     
-    public static func buildArray(_ components: [Component]) -> Return {
+    public static func buildArray(_ components: [Component]) -> Result {
         components.flatMap { $0.toSections() }
     }
     
-    public static func buildLimitedAvailability(_ component: Component) -> Return {
+    public static func buildLimitedAvailability(_ component: Component) -> Result {
         component.toSections()
     }
 
-    public static func buildFinalResult(_ component: Component) -> Return {
+    public static func buildFinalResult(_ component: Component) -> Result {
         component.toSections()
     }
-
-    //public static func buildExpression(_ expression: Expression) -> Return {}
 }

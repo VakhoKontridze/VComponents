@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - V Menu Section
+// MARK: - V Menu Row
 /// Single row in `VMenu`.
 public protocol VMenuRow: VMenuRowConvertible {
     /// Row body type.
@@ -44,7 +44,11 @@ public struct VMenuTitleRow: VMenuRow {
     // MARK: Row Section
     public var body: AnyView {
         .init(
-            Button(title, role: role, action: action)
+            Button(
+                title,
+                role: role,
+                action: action
+            )
         )
     }
 }
@@ -102,20 +106,24 @@ public struct VMenuTitleIconRow: VMenuRow {
     // MARK: Row Section
     public var body: AnyView {
         .init(
-            Button(role: role, action: action, label: {
-                Text(title)
-                icon
-            })
+            Button(
+                role: role,
+                action: action,
+                label: {
+                    Text(title)
+                    icon
+                }
+            )
         )
     }
 }
 
 // MARK: - V Menu Sub Menu Row
-/// SIngle row in `VMenu` with submenu.
+/// Single row in `VMenu` with submenu.
 public struct VMenuSubMenuRow: VMenuRow {
     // MARK: Properties
-    let title: String
-    let primaryAction: (() -> Void)?
+    private let title: String
+    private let primaryAction: (() -> Void)?
     private let sections: () -> [any VMenuSection]
     
     // MARK: Initializers

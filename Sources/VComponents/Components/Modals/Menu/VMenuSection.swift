@@ -46,9 +46,11 @@ public struct VMenuGroupSection: VMenuSection {
     
     public var body: AnyView {
         .init(
-            ForEach(rows().enumeratedArray().reversed(), id: \.offset, content: { (_, row) in
-                row.body
-            })
+            ForEach(
+                rows().enumeratedArray().reversed(),
+                id: \.offset,
+                content: { (_, row) in row.body }
+            )
         )
     }
 }
@@ -139,10 +141,14 @@ public struct VMenuPickerSection<Data>: VMenuSection
             Picker(
                 selection: $selectedIndex,
                 content: {
-                    ForEach(data.enumeratedArray().reversed(), id: \.offset, content: { (i, element) in
-                        content(element).body
-                            .tag(i)
-                    })
+                    ForEach(
+                        data.enumeratedArray().reversed(),
+                        id: \.offset,
+                        content: { (i, element) in
+                            content(element).body
+                                .tag(i)
+                        }
+                    )
                 },
                 label: EmptyView.init
             )

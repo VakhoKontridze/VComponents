@@ -121,13 +121,17 @@ public struct VMenu<Label>: View where Label: View {
     }
     
     private func contentView() -> some View {
-        ForEach(sections().enumeratedArray().reversed(), id: \.offset, content: { (_, section) in
-            if let title: String = section.title {
-                Section(title, content: { section.body })
-            } else {
-                Section(content: { section.body })
+        ForEach(
+            sections().enumeratedArray().reversed(),
+            id: \.offset,
+            content: { (_, section) in
+                if let title: String = section.title {
+                    Section(title, content: { section.body })
+                } else {
+                    Section(content: { section.body })
+                }
             }
-        })
+        )
     }
     
     @ViewBuilder private func labelView() -> some View {

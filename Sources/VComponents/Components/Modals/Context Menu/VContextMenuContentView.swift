@@ -19,36 +19,40 @@ struct VContextMenuContentView: View {
 
     // MARK: Body
     var body: some View {
-        ForEach(rows.enumeratedArray(), id: \.offset, content: { (_, row) in
-            switch row._contextMenuRow {
-            case .title(let action, let title):
-                Button(title, action: action)
+        ForEach(
+            rows.enumeratedArray(),
+            id: \.offset,
+            content: { (_, row) in
+                switch row._contextMenuRow {
+                case .title(let action, let title):
+                    Button(title, action: action)
+                    
+                case .titleAssetIcon(let action, let title, let name, let bundle):
+                    Button(action: action, label: {
+                        Text(title)
+                        Image(name, bundle: bundle)
+                    })
+                    
+                case .titleIcon(let action, let title, let icon):
+                    Button(action: action, label: {
+                        Text(title)
+                        icon
+                    })
+                    
+                case .titleSystemIcon(let action, let title, let name):
+                    Button(action: action, label: {
+                        Text(title)
+                        Image(systemName: name)
+                    })
                 
-            case .titleAssetIcon(let action, let title, let name, let bundle):
-                Button(action: action, label: {
-                    Text(title)
-                    Image(name, bundle: bundle)
-                })
-                
-            case .titleIcon(let action, let title, let icon):
-                Button(action: action, label: {
-                    Text(title)
-                    icon
-                })
-                
-            case .titleSystemIcon(let action, let title, let name):
-                Button(action: action, label: {
-                    Text(title)
-                    Image(systemName: name)
-                })
-            
-            case .menu(let title, let rows):
-                Menu(
-                    content: { VContextMenuContentView(rows: rows) },
-                    label: { Text(title) }
-                )
+                case .menu(let title, let rows):
+                    Menu(
+                        content: { VContextMenuContentView(rows: rows) },
+                        label: { Text(title) }
+                    )
+                }
             }
-        })
+        )
     }
 }
 
