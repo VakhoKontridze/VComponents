@@ -38,10 +38,6 @@ extension Array: VMenuRowConvertible where Element == VMenuRow {
         component?.toRows() ?? []
     }
     
-    public static func buldIf(_ component: Component?) -> Result {
-        component?.toRows() ?? []
-    }
-
     public static func buildEither(first component: Component) -> Result {
         component.toRows()
     }

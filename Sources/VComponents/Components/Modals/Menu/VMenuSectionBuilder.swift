@@ -37,10 +37,6 @@ extension Array: VMenuSectionConvertible where Element == VMenuSection {
     public static func buildOptional(_ component: Component?) -> Result {
         component?.toSections() ?? []
     }
-    
-    public static func buldIf(_ component: Component?) -> Result {
-        component?.toSections() ?? []
-    }
 
     public static func buildEither(first component: Component) -> Result {
         component.toSections()
