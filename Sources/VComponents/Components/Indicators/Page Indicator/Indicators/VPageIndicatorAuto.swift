@@ -18,7 +18,7 @@ struct VPageIndicatorAuto: View {
     private let total: Int
     private let selectedIndex: Int
 
-    // MARK: Intializers
+    // MARK: Initializers
     init(
         uiModel: VPageIndicatorUIModel,
         visible: Int,

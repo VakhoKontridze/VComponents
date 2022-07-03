@@ -29,7 +29,7 @@ final class InterfaceOrientationChangeObserver: ObservableObject {
     }
 }
 
-// MARK: - Device Inteface Orientation
+// MARK: - Device Interface Orientation
 enum DeviceInterfaceOrientation {
     case portrait
     case landscape

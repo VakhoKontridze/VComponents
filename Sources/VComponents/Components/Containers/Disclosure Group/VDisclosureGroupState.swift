@@ -56,5 +56,5 @@ extension Binding where Value == VDisclosureGroupState {
     }
 }
 
-// MARK: - V Disclosur eGroup Internal State
+// MARK: - V Disclosure Group Internal State
 typealias VDisclosureGroupInternalState = GenericState_CED

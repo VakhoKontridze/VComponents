@@ -17,7 +17,7 @@ import SwiftUI
 ///     }
 ///
 public struct VSpinner: View {
-    // MARK: Proeprties
+    // MARK: Properties
     private let spinnerType: VSpinnerType
     
     // MARK: Initializers
@@ -31,7 +31,7 @@ public struct VSpinner: View {
     // MARK: Body
     @ViewBuilder public var body: some View {
         switch spinnerType._spinnerType {
-        case .continous(let uiModel): VSpinnerContinous(uiModel: uiModel)
+        case .continuous(let uiModel): VSpinnerContinuous(uiModel: uiModel)
         case .dashed(let uiModel): VSpinnerDashed(uiModel: uiModel)
         }
     }

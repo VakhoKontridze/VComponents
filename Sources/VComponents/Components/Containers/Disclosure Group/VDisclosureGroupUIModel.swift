@@ -96,7 +96,7 @@ public struct VDisclosureGroupUIModel {
         /// Custom header label opacities.
         ///
         /// Applicable only when `init`with header label is used.
-        /// When using a custom header label, it's subviews cannot be configured with indivudual colors,
+        /// When using a custom header label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customHeaderLabelOpacities: StateOpacities = .init(
             collapsed: 1,
@@ -190,7 +190,7 @@ public struct VDisclosureGroupUIModel {
         return uiModel
     }
     
-    var chevronButonSubUIModel: VChevronButtonUIModel {
+    var chevronButtonSubUIModel: VChevronButtonUIModel {
         var uiModel: VChevronButtonUIModel = .init()
         
         uiModel.layout.dimension = layout.chevronButtonDimension

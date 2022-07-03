@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: - V Spinner Type
-/// Enum that represents `VSpinner` type, such as `continous` or `dashed`
+/// Enum that represents `VSpinner` type, such as `continuous` or `dashed`
 public struct VSpinnerType {
     // MARK: Properties
     let _spinnerType: _VSpinnerType
@@ -20,11 +20,11 @@ public struct VSpinnerType {
         self._spinnerType = spinnerType
     }
     
-    /// Continos spinner.
-    public static func continous(
-        uiModel: VSpinnerContinousUIModel = .init()
+    /// Continuos spinner.
+    public static func continuous(
+        uiModel: VSpinnerContinuousUIModel = .init()
     ) -> Self {
-        .init(spinnerType: .continous(
+        .init(spinnerType: .continuous(
             uiModel: uiModel
         ))
     }
@@ -38,12 +38,12 @@ public struct VSpinnerType {
         ))
     }
     
-    /// Default value. Set to `continous`.
-    public static var `default`: Self { .continous() }
+    /// Default value. Set to `continuous`.
+    public static var `default`: Self { .continuous() }
 }
 
 // MARK: - _ V Spinner Type
 enum _VSpinnerType {
-    case continous(uiModel: VSpinnerContinousUIModel)
+    case continuous(uiModel: VSpinnerContinuousUIModel)
     case dashed(uiModel: VSpinnerDashedUIModel)
 }

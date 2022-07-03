@@ -15,7 +15,7 @@ import VCore
 ///
 /// UI Model can be passed as parameter.
 ///
-/// `isLoading` can be passed as paremter.
+/// `isLoading` can be passed as parameter.
 ///
 ///     var body: some View {
 ///         VPrimaryButton(
@@ -146,7 +146,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
     
     @ViewBuilder private var loader: some View {
         if internalState.isLoading {
-            VSpinner(type: .continous(uiModel: uiModel.spinnerSubUIModel))
+            VSpinner(type: .continuous(uiModel: uiModel.spinnerSubUIModel))
         }
     }
     

@@ -33,7 +33,7 @@ public struct VStepperUIModel {
         /// Stepper size.Defaults to `94` width and `32` height, similarly to native toggle.
         public var size: CGSize = .init(width: 94, height: 32)
         
-        /// Stepper corner radius. Defauts to `7`, similarly to native toggle.
+        /// Stepper corner radius. Defaults to `7`, similarly to native toggle.
         public var cornerRadius: CGFloat = 7
         
         /// Plus and minus icon dimensions. Defaults to `15`.
@@ -91,7 +91,7 @@ public struct VStepperUIModel {
         /// Time interval after which long press incrementation begins. Defaults to `1` second.
         public var intervalToStartLongPressIncrement: TimeInterval = 1
         
-        /// Exponend by which long press incrementation happens. Defaults to `2`.
+        /// Exponent by which long press incrementation happens. Defaults to `2`.
         ///
         /// For instance, if exponent is set to `2`, increment would increase by a factor of `2` every second.
         /// So, `1`, `2`, `4`, `8` ... .

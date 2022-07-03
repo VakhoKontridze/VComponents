@@ -1,5 +1,5 @@
 //
-//  Vswift
+//  VConfirmationDialogExtension.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/1/21.

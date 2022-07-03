@@ -63,7 +63,7 @@ public struct VSideBarUIModel {
         public var contentSafeAreaEdges: Edge.Set = .all
         
         /// Edges ignored by keyboard. Defaults to `[]`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
+        public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
         /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Defaults to `0.1`.
         public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1

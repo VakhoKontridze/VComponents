@@ -20,7 +20,7 @@ import VCore
 ///
 ///  Clicks behind the modal do not go through.
 ///
-/// For additional documetation, refer to `PresentationHost`.
+/// For additional documentation, refer to `PresentationHost`.
 public final class PresentationHostViewController: UIViewController {
     // MARK: Properties
     private let presentingViewType: String
@@ -94,7 +94,7 @@ public final class PresentationHostViewController: UIViewController {
         PresentationHostDataSourceCache.shared.remove(key: presentingViewType)
     }
     
-    // MARK: Froce Dismiss
+    // MARK: Force Dismiss
     static func forceDismiss<PresentingView>(
         in presentingView: PresentingView
     )

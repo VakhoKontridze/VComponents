@@ -88,7 +88,7 @@ private enum VBottomSheetRegion {
     case minToIdeal
     case pullDownToMin
 
-    // MARK: Initializrs
+    // MARK: Initializers
     init(
         heights: VBottomSheetUIModel.Layout.BottomSheetHeights,
         offset: CGFloat

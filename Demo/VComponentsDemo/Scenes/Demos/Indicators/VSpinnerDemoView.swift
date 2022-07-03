@@ -13,7 +13,7 @@ struct VSpinnerDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Spinner" }
     
-    @State private var spinnerType: VSpinnerTypeHelper = .continous
+    @State private var spinnerType: VSpinnerTypeHelper = .continuous
 
     // MARK: Body
     var body: some View {
@@ -23,7 +23,7 @@ struct VSpinnerDemoView: View {
     
     @ViewBuilder private func component() -> some View {
         switch spinnerType {
-        case .continous: VSpinner(type: .continous())
+        case .continuous: VSpinner(type: .continuous())
         case .dashed: VSpinner(type: .dashed())
         }
     }
@@ -35,12 +35,12 @@ struct VSpinnerDemoView: View {
 
 // MARK: - Helpers
 private enum VSpinnerTypeHelper: Int, PickableTitledEnumeration {
-    case continous
+    case continuous
     case dashed
     
     var pickerTitle: String {
         switch self {
-        case .continous: return "Continous"
+        case .continuous: return "Continuous"
         case .dashed: return "Dashed"
         }
     }

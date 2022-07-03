@@ -18,7 +18,7 @@ extension View {
 }
 
 // MARK: - Presentation Host Presentation Mode
-/// Object embeded in environemnt of modals presented via `PresentationHost`.
+/// Object embedded in environment of modals presented via `PresentationHost`.
 ///
 /// Contains `dismiss` handler that can be called after frame-based dismissal to remove content from view hierarchy.
 ///
@@ -65,11 +65,11 @@ public struct PresentationHostPresentationMode {
 extension EnvironmentValues {
     /// `PresentationHost` presentation mode of the view associated with the environment.
     public var presentationHostPresentationMode: PresentationHostPresentationMode {
-        get { self[PresentationHostPresenationModeKey.self] }
-        set { self[PresentationHostPresenationModeKey.self] = newValue }
+        get { self[PresentationHostPresentationModeKey.self] }
+        set { self[PresentationHostPresentationModeKey.self] = newValue }
     }
 }
 
-struct PresentationHostPresenationModeKey: EnvironmentKey {
+struct PresentationHostPresentationModeKey: EnvironmentKey {
     static let defaultValue: PresentationHostPresentationMode = .init()
 }

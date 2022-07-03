@@ -113,7 +113,7 @@ public struct VCheckBoxUIModel {
         /// Custom label opacities.
         ///
         /// Applicable only when `init`with label is used.
-        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
+        /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
             off: 1,

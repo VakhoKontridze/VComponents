@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import VComponents
 
-// MARK: - V Page Indicator Demo VIew
+// MARK: - V Page Indicator Demo View
 struct VPageIndicatorDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Page Indicator" }
@@ -74,7 +74,7 @@ private enum VPageIndicatorTypeHelper: Int, PickableTitledEnumeration {
     var description: String {
         switch self {
         case .finite: return "Finite number of dots would be displayed"
-        case .infinite: return "Infinite dots are possible, but limited numbers are displayed. Scrolling with acrousel effect may become enabled."
+        case .infinite: return "Infinite dots are possible, but limited numbers are displayed. Scrolling with carousel effect may become enabled."
         case .automatic: return "Type that switches between \"Finite\" and \"Infinite\""
         }
     }

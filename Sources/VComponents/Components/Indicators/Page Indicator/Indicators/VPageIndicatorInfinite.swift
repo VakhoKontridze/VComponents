@@ -1,5 +1,5 @@
 //
-//  VPageIndicaatorInfinite.swift
+//  VPageIndicatorInfinite.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -23,7 +23,7 @@ struct VPageIndicatorInfinite: View {
         .init(selectedIndex: selectedIndex, total: total, middle: middle)
     }
 
-    // MARK: Intializers
+    // MARK: Initializers
     init(
         uiModel: VPageIndicatorUIModel,
         visible: Int,
@@ -131,12 +131,12 @@ struct VPageIndicatorInfinite: View {
         case .rightEdge:
             guard
                 let rightEdgeVisibleIndex: Int = rightEdgeVisibleIndex(at: index),
-                let rightEdgeleftSideIndex: Int = rightEdgeleftSideIndex(at: rightEdgeVisibleIndex)
+                let rightEdgeLeftSideIndex: Int = rightEdgeLeftSideIndex(at: rightEdgeVisibleIndex)
             else {
                 return 1
             }
 
-            return rightEdgeLeftSideScale(at: rightEdgeleftSideIndex)
+            return rightEdgeLeftSideScale(at: rightEdgeLeftSideIndex)
         }
     }
     
@@ -193,7 +193,7 @@ struct VPageIndicatorInfinite: View {
         }
     }
     
-    private func rightEdgeleftSideIndex(at index: Int) -> Int? {
+    private func rightEdgeLeftSideIndex(at index: Int) -> Int? {
         // (0 1) -> (0 1)
         switch index {
         case 0..<side: return index

@@ -8,7 +8,7 @@
 import SwiftUI
 import VComponents
 
-// MARK: Stepepr Setting View
+// MARK: - Stepper Setting View
 struct StepperSettingView: View {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -19,7 +19,7 @@ struct StepperSettingView: View {
     private let title: String
     private let description: String?
     
-    // MARK: Initailizers
+    // MARK: Initializers
     init(
         range: ClosedRange<Int>,
         value: Binding<Int>,

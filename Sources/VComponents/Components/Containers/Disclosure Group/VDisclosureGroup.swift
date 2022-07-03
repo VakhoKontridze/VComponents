@@ -163,7 +163,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             Spacer()
             
             VSquareButton.chevron(
-                uiModel: uiModel.chevronButonSubUIModel,
+                uiModel: uiModel.chevronButtonSubUIModel,
                 direction: internalState.chevronButtonDirection,
                 action: expandCollapse
             )

@@ -96,6 +96,69 @@ extension VListUIModel.Colors {
     }
 }
 
+// MARK: - Modal
+extension VModalUIModel.Layout {
+    @available(*, deprecated, renamed: "ignoredKeyboardSafeAreaEdges")
+    public var ignoredKeybordSafeAreaEdges: Edge.Set {
+        get { ignoredKeyboardSafeAreaEdges }
+        set { ignoredKeyboardSafeAreaEdges = newValue }
+    }
+}
+
+// MARK: - Bottom Sheet
+extension VBottomSheetUIModel.Layout {
+    @available(*, deprecated, renamed: "ignoredKeyboardSafeAreaEdges")
+    public var ignoredKeybordSafeAreaEdges: Edge.Set {
+        get { ignoredKeyboardSafeAreaEdges }
+        set { ignoredKeyboardSafeAreaEdges = newValue }
+    }
+}
+
+// MARK: - Side Bar
+extension VSideBarUIModel.Layout {
+    @available(*, deprecated, renamed: "ignoredKeyboardSafeAreaEdges")
+    public var ignoredKeybordSafeAreaEdges: Edge.Set {
+        get { ignoredKeyboardSafeAreaEdges }
+        set { ignoredKeyboardSafeAreaEdges = newValue }
+    }
+}
+
+// MARK: - Alert
+extension VAlertUIModel.Layout {
+    @available(*, deprecated, renamed: "ignoredKeyboardSafeAreaEdges")
+    public var ignoredKeybordSafeAreaEdges: Edge.Set {
+        get { ignoredKeyboardSafeAreaEdges }
+        set { ignoredKeyboardSafeAreaEdges = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "verticalButtonSpacing")
+    public var verticallButtonSpacing: CGFloat {
+        get { verticalButtonSpacing }
+        set { verticalButtonSpacing = newValue }
+    }
+}
+
+// MARK: - Spinner
+extension VSpinnerType {
+    @available(*, deprecated, message: "renamed to `continuous`")
+    public static func continous(
+        uiModel: VSpinnerContinousUIModel = .init()
+    ) -> Self {
+        continuous(uiModel: uiModel)
+    }
+}
+
+@available(*, deprecated, renamed: "VSpinnerContiniousUIModel")
+public typealias VSpinnerContinousUIModel = VSpinnerContinuousUIModel
+
+extension VSpinnerContinuousUIModel.Layout {
+    @available(*, deprecated, renamed: "length")
+    public var legth: CGFloat {
+        get { length }
+        set { length = newValue }
+    }
+}
+
 // MARK: - *Model
 @available(*, deprecated, renamed: "VPrimaryButtonUIModel")
 public typealias VPrimaryButtonModel = VPrimaryButtonUIModel

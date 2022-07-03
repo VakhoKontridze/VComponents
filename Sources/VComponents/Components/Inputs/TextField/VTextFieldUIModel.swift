@@ -130,7 +130,7 @@ public struct VTextFieldUIModel {
             focused: .init(componentAsset: "TextField.PlainButton.enabled")
         )
 
-        /// Visiblity button icon colors.
+        /// Visibility button icon colors.
         public var visibilityButtonIcon: ButtonStateColors = .init(
             enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
             pressed: ColorBook.primaryPressedDisabled,
@@ -215,7 +215,7 @@ public struct VTextFieldUIModel {
         
         /// Auto capitalization type. Defaults to `nik`.
         public var autocapitalization: TextInputAutocapitalization? = nil
-        
+         
         /// Submit button type. Defaults to `return`.
         public var submitButton: SubmitLabel = .return
         

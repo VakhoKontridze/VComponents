@@ -1,5 +1,5 @@
 //
-//  VSpinnerContinousUIModel.swift
+//  VSpinnerContinuousUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/21/20.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - V Spinner Continous UI Model
+// MARK: - V Spinner Continuous UI Model
 /// Model that describes UI.
-public struct VSpinnerContinousUIModel {
+public struct VSpinnerContinuousUIModel {
     // MARK: Properties
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -32,7 +32,7 @@ public struct VSpinnerContinousUIModel {
         public var dimension: CGFloat = 15
         
         /// Length of colored part of spinner. Defaults to `0.75`.
-        public var legth: CGFloat = 0.75
+        public var length: CGFloat = 0.75
         
         /// Border width. Defaults to `2`.
         public var borderWidth: CGFloat = 2

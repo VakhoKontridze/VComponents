@@ -80,7 +80,7 @@ public struct VModalUIModel {
         public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
         
         /// Edges ignored by keyboard. Defaults to `[]`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
+        public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -202,7 +202,7 @@ public struct VModalUIModel {
             /// Trailing.
             public static var trailingButton: DismissType { .init(rawValue: 1 << 1) }
             
-            /// Backtap.
+            /// Back-tap.
             public static var backTap: DismissType { .init(rawValue: 1 << 2) }
             
             /// All.
@@ -211,7 +211,7 @@ public struct VModalUIModel {
             /// Default value. Set to `trailingButton`.
             public static var `default`: DismissType { .trailingButton }
             
-            /// Indicates if dismiss type inclues a button.
+            /// Indicates if dismiss type includes a button.
             public var hasButton: Bool {
                 [.leadingButton, .trailingButton].contains(where: { contains($0) })
             }

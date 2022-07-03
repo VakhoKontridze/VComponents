@@ -59,7 +59,7 @@ public struct VContextMenuRow {
         ))
     }
     
-    /// Row with title and sytem icon.
+    /// Row with title and system icon.
     public static func titleIcon(
         action: @escaping () -> Void,
         title: String,
