@@ -49,7 +49,7 @@ public enum VTextFieldType: Int, CaseIterable {
         }
     }
     
-    // MARK: Initailizers
+    // MARK: Initializers
     /// Default value. Set to `standard`.
     public static var `default`: Self { .standard }
 }

@@ -19,11 +19,11 @@ struct VAlertDemoView: View {
     @State private var title: String = "Lorem Ipsum Dolor Sit Amet"
     @State private var message: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
     @State private var alertButtons: VAlertButtonsHelper = .two
-    @State private var ignoreKeyboardSafeArea: Bool = !VAlertUIModel.Layout().ignoredKeybordSafeAreaEdges.isEmpty
+    @State private var ignoreKeyboardSafeArea: Bool = !VAlertUIModel.Layout().ignoredKeyboardSafeAreaEdges.isEmpty
     
     private var uiModel: VAlertUIModel {
         var uiModel: VAlertUIModel = .init()
-        uiModel.layout.ignoredKeybordSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
+        uiModel.layout.ignoredKeyboardSafeAreaEdges = ignoreKeyboardSafeArea ? .all : []
         return uiModel
     }
 

@@ -70,7 +70,7 @@ public struct VToastUIModel {
             /// Presentation from bottom.
             case bottom
             
-            // MARK: Initailizers
+            // MARK: Initializers
             /// Default value. Set to `bottom`.
             public static var `default`: Self { .bottom }
         }
@@ -87,7 +87,7 @@ public struct VToastUIModel {
             /// Rounded.
             case rounded(cornerRadius: CGFloat)
 
-            // MARK: Initailizers
+            // MARK: Initializers
             /// Default value. Set to `rounded`.
             public static var `default`: Self { .capsule }
         }

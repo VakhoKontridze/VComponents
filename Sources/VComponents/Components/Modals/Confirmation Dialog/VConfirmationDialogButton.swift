@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// `cancel` will be moved to the end of the stack.
 /// If there are multiple `cancel` buttons, only the last one will be kept.
-/// If thete are no buttons, an `ok` button will be added.
+/// If there are no buttons, an `ok` button will be added.
 public struct VConfirmationDialogButton {
     // MARK: Properties
     let _confirmationDialogButton: _VConfirmationDialogButton

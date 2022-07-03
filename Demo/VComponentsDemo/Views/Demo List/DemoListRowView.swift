@@ -19,7 +19,7 @@ struct DemoListRowView<Content>: View where Content: View {
 
     private let title: String
 
-    // MARK: Initalizers
+    // MARK: Initializers
     init(title: String, destination: Content) {
         self.title = title
         self.rowType = .link(destination)

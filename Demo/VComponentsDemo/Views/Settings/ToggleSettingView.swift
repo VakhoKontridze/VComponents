@@ -18,7 +18,7 @@ struct ToggleSettingView: View {
     private let title: String
     private let description: String?
     
-    // MARK: Initailizers
+    // MARK: Initializers
     init(
         isOn: Binding<Bool>,
         title: String,

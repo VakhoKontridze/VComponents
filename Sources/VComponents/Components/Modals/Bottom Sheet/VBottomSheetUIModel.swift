@@ -56,7 +56,7 @@ public struct VBottomSheetUIModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
-        /// Grabber indicaator size. Defaults to `50` width and `4` height.
+        /// Grabber indicator size. Defaults to `50` width and `4` height.
         public var grabberSize: CGSize = .init(width: 50, height: 4)
         
         /// Grabber corner radius. Defaults to `2`.
@@ -108,7 +108,7 @@ public struct VBottomSheetUIModel {
         public var contentSafeAreaEdges: Edge.Set = []
         
         /// Edges ignored by keyboard. Defaults to `[]`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
+        public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
         /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `600` points/s.
         public var velocityToSnapToNextHeight: CGFloat = 600
@@ -334,7 +334,7 @@ public struct VBottomSheetUIModel {
             /// Trailing.
             public static var trailingButton: DismissType { .init(rawValue: 1 << 1) }
             
-            /// Backtap.
+            /// Back-tap.
             public static var backTap: DismissType { .init(rawValue: 1 << 2) }
             
             /// Pull down.

@@ -96,7 +96,7 @@ struct VAlert<Content>: View
         })
             .frame(width: uiModel.layout.sizes._current.size.width)
             .ignoresSafeArea(.container, edges: .horizontal)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
             .background(background)
             .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
@@ -172,7 +172,7 @@ struct VAlert<Content>: View
             
             case 3...:
                 VStack(
-                    spacing: uiModel.layout.verticallButtonSpacing,
+                    spacing: uiModel.layout.verticalButtonSpacing,
                     content: { buttonsContent() }
                 )
             

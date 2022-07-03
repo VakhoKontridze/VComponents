@@ -10,7 +10,7 @@ import SwiftUI
 
 // MARK: - Scene Delegate
 final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    // MARK: Propeties
+    // MARK: Properties
     var window: UIWindow?
 
     // MARK: Window Scene Delegate

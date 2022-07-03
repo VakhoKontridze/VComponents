@@ -11,7 +11,7 @@ import SwiftUI
 /// Model that describes UI.
 public struct VSpinnerDashedUIModel {
     // MARK: Properties
-    fileprivate static let spinnerContinousReference: VSpinnerContinousUIModel = .init()
+    fileprivate static let spinnerContinuousReference: VSpinnerContinuousUIModel = .init()
     
     /// Sub-model containing color properties.
     public var colors: Colors = .init()
@@ -25,7 +25,7 @@ public struct VSpinnerDashedUIModel {
     public struct Colors {
         // MARK: Properties
         /// Spinner color.
-        public var spinner: Color = spinnerContinousReference.colors.spinner
+        public var spinner: Color = spinnerContinuousReference.colors.spinner
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

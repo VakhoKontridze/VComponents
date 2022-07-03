@@ -1,5 +1,5 @@
 //
-//  VSpinnerContinous.swift
+//  VSpinnerContinuous.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-// MARK: - V Spinner Continous
-struct VSpinnerContinous: View {
+// MARK: - V Spinner Continuous
+struct VSpinnerContinuous: View {
     // MARK: Properties
-    private let uiModel: VSpinnerContinousUIModel
+    private let uiModel: VSpinnerContinuousUIModel
     
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers
-    init(uiModel: VSpinnerContinousUIModel) {
+    init(uiModel: VSpinnerContinuousUIModel) {
         self.uiModel = uiModel
     }
 
     // MARK: Body
     var body: some View {
         Circle()
-            .trim(from: 0, to: uiModel.layout.legth)
+            .trim(from: 0, to: uiModel.layout.length)
             .stroke(
                 uiModel.colors.spinner,
                 style: .init(lineWidth: uiModel.layout.borderWidth, lineCap: .round)
@@ -39,8 +39,8 @@ struct VSpinnerContinous: View {
     }
 }
 
-struct VSpinnerContinous_Previews: PreviewProvider {
+struct VSpinnerContinuous_Previews: PreviewProvider {
     static var previews: some View {
-        VSpinnerContinous(uiModel: .init())
+        VSpinnerContinuous(uiModel: .init())
     }
 }

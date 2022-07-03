@@ -128,7 +128,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
                     )
             })
             .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
     }
 
     @ViewBuilder private var grabber: some View {

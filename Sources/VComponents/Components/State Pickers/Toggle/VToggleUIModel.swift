@@ -53,8 +53,8 @@ public struct VToggleUIModel {
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2
-            let thumnStartPoint: CGFloat = (size.width - thumbDimension)/2
-            let offset: CGFloat = thumnStartPoint - spacing
+            let thumbStartPoint: CGFloat = (size.width - thumbDimension)/2
+            let offset: CGFloat = thumbStartPoint - spacing
             return offset
         }
         
@@ -97,7 +97,7 @@ public struct VToggleUIModel {
         /// Custom label opacities.
         ///
         /// Applicable only when `init`with label is used.
-        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
+        /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
             off: 1,

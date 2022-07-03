@@ -11,10 +11,10 @@ import VCore
 // MARK: - V Text Field
 /// Input component that displays an editable text interface.
 ///
-/// UI Model, type, palceholder, header, and footer can be passed as parameters.
+/// UI Model, type, placeholder, header, and footer can be passed as parameters.
 ///
 /// By default, component type is `standard`.
-/// If `secure` type is used, visiblity button would replace clear button. When textfield is secure and text is empty, and buttons are not visible.
+/// If `secure` type is used, visibility button would replace clear button. When textfield is secure and text is empty, and buttons are not visible.
 /// If `search` type is used, a magnification glass icon would appear on the left.
 ///
 ///     @State var text: String = ""
@@ -56,11 +56,11 @@ import VCore
 ///             .padding()
 ///
 ///             .focused($isFocused)
-///             .onChange(of: text, perform: { _ in print("Ediging Changed") })
+///             .onChange(of: text, perform: { _ in print("Editing Changed") })
 ///             .onChange(of: isFocused, perform: {
 ///                 switch $0 {
-///                 case false: print("Ediging Ended")
-///                 case true: print("Ediging Began")
+///                 case false: print("Editing Ended")
+///                 case true: print("Editing Began")
 ///                 }
 ///             })
 ///             .onSubmit({ print("Submitted") })
@@ -72,7 +72,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VTextField(
-///             type: .securem
+///             type: .secure,
 ///             text: $text
 ///         )
 ///             .padding()
@@ -144,7 +144,7 @@ public struct VTextField: View {
     @State private var clearButtonIsVisible: Bool = false
     @State private var secureFieldIsVisible: Bool = false
 
-    // MARK: Initialiers
+    // MARK: Initializers
     /// Initializes component with title.
     public init(
         uiModel: VTextFieldUIModel = .init(),
@@ -269,7 +269,7 @@ public struct VTextField: View {
             VSquareButton(
                 uiModel: uiModel.visibilityButtonSubUIModel,
                 action: { secureFieldIsVisible.toggle() },
-                icon: visiblityIcon
+                icon: visibilityIcon
             )
                 .disabled(!internalState.isEnabled)
         }
@@ -286,8 +286,8 @@ public struct VTextField: View {
         })
     }
 
-    // MARK: Visiblity Icon
-    private var visiblityIcon: Image {
+    // MARK: Visibility Icon
+    private var visibilityIcon: Image {
         switch secureFieldIsVisible {
         case false: return ImageBook.textFieldVisibilityOff
         case true: return ImageBook.textFieldVisibilityOn

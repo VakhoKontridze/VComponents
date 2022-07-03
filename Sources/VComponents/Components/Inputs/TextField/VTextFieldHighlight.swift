@@ -1,5 +1,5 @@
 //
-//  VTextFieldHightlight.swift
+//  VTextFieldHighlight.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 23.05.22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - V TextField Hightlight
+// MARK: - V TextField Highlight
 extension VTextFieldUIModel {
     /// Model that applies green color scheme.
     public static var success: VTextFieldUIModel {

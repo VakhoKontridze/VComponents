@@ -44,7 +44,7 @@ public struct VPageIndicator: View {
     
     private let selectedIndex: Int
 
-    // MARK: Intializers
+    // MARK: Initializers
     /// Initializes component with total and selected index.
     public init(
         uiModel: VPageIndicatorUIModel = .init(),

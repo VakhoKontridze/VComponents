@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 public struct VRadioButtonUIModel {
     // MARK: Properties
-    fileprivate static let toggleRefrence: VToggleUIModel = .init()
+    fileprivate static let toggleReference: VToggleUIModel = .init()
     fileprivate static let checkBoxReference: VCheckBoxUIModel = .init()
     
     /// Sub-model containing layout properties.
@@ -77,30 +77,30 @@ public struct VRadioButtonUIModel {
         /// Border colors.
         public var border: StateColors = .init(
             off: checkBoxReference.colors.border.off,
-            on: toggleRefrence.colors.fill.on,
+            on: toggleReference.colors.fill.on,
             pressedOff: checkBoxReference.colors.border.pressedOff,
-            pressedOn: toggleRefrence.colors.fill.pressedOn,
+            pressedOn: toggleReference.colors.fill.pressedOn,
             disabled: checkBoxReference.colors.border.disabled
         )
         
         /// Bullet colors.
         public var bullet: StateColors = .init(
             off: .clear,
-            on: toggleRefrence.colors.fill.on,
+            on: toggleReference.colors.fill.on,
             pressedOff: .clear,
-            pressedOn: toggleRefrence.colors.fill.pressedOn,
+            pressedOn: toggleReference.colors.fill.pressedOn,
             disabled: .clear
         )
 
         /// Title colors.
-        public var title: StateColors = toggleRefrence.colors.title
+        public var title: StateColors = toggleReference.colors.title
         
         /// Custom label opacities.
         ///
         /// Applicable only when `init`with label is used.
-        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
+        /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
-        public var customLabelOpacities: StateOpacities = toggleRefrence.colors.customLabelOpacities
+        public var customLabelOpacities: StateOpacities = toggleReference.colors.customLabelOpacities
 
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -122,7 +122,7 @@ public struct VRadioButtonUIModel {
         /// Title font. Defaults to system font of size `15`.
         ///
         /// Only applicable when using `init`with title.
-        public var title: Font = toggleRefrence.fonts.title
+        public var title: Font = toggleReference.fonts.title
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -134,7 +134,7 @@ public struct VRadioButtonUIModel {
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
-        public var stateChange: Animation? = toggleRefrence.animations.stateChange
+        public var stateChange: Animation? = toggleReference.animations.stateChange
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -146,7 +146,7 @@ public struct VRadioButtonUIModel {
     public struct Misc {
         // MARK: Properties
         /// Indicates if label is clickable. Defaults to `true`.
-        public var labelIsClickable: Bool = toggleRefrence.misc.labelIsClickable
+        public var labelIsClickable: Bool = toggleReference.misc.labelIsClickable
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

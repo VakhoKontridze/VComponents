@@ -102,10 +102,10 @@ public struct VAlertUIModel {
         public var horizontalButtonSpacing: CGFloat = 10
         
         /// Spacing between vertical buttons.  Defaults to `5`.
-        public var verticallButtonSpacing: CGFloat = 5
+        public var verticalButtonSpacing: CGFloat = 5
         
         /// Edges ignored by keyboard. Defaults to `[]`.
-        public var ignoredKeybordSafeAreaEdges: Edge.Set = []
+        public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
 
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -140,7 +140,7 @@ public struct VAlertUIModel {
     /// Sub-model containing color properties.
     public struct Colors {
         // MARK: Properties
-        /// Backgrond color.
+        /// Background color.
         public var background: Color = modalReference.colors.background
         
         /// Shadow color.

@@ -24,7 +24,7 @@ struct VTextFieldDemoView: View {
     @State private var hasFooter: Bool = true
     @State private var numericalKeyboard: Bool = false
     @State private var textAlignment: TextAlignment = VTextFieldUIModel.Layout().textAlignment
-    @State private var autocapitalizaton: Bool = false
+    @State private var autocapitalization: Bool = false
     @State private var autocorrection: Bool = false
     @State private var hasClearButton: Bool = VTextFieldUIModel.Misc().hasClearButton
     
@@ -45,7 +45,7 @@ struct VTextFieldDemoView: View {
         uiModel.misc.keyboardType = numericalKeyboard ? .numberPad : .default
         
         uiModel.misc.autocorrection = autocorrection
-        uiModel.misc.autocapitalization = autocapitalizaton ? .words : nil
+        uiModel.misc.autocapitalization = autocapitalization ? .words : nil
         
         uiModel.misc.hasClearButton = hasClearButton
         
@@ -140,8 +140,8 @@ struct VTextFieldDemoView: View {
                 )
                 
                 ToggleSettingView(
-                    isOn: $autocapitalizaton,
-                    title: "Autocapitalizaton",
+                    isOn: $autocapitalization,
+                    title: "Autocapitalization",
                     description: "Other types are not shown in the demo, as there are many."
                 )
 

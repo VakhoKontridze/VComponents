@@ -44,19 +44,19 @@ public struct VSegmentedPickerUIModel {
         /// Selection indicator corner radius.  Defaults to `6`, similarly to native picker.
         public var indicatorCornerRadius: CGFloat = 6
         
-        /// Selection inticator margin. Defaults to `2`.
+        /// Selection indicator margin. Defaults to `2`.
         public var indicatorMargin: CGFloat = 2
         
         /// Scale by which selection indicator changes on press. Defaults to `0.95`.
         public var indicatorPressedScale: CGFloat = 0.95
         
-        /// Indicator shadow radius. Defautls to `1`.
+        /// Indicator shadow radius. Defaults to `1`.
         public var indicatorShadowRadius: CGFloat = 1
         
-        /// Indicator shadow X offset. Defautls to `0`.
+        /// Indicator shadow X offset. Defaults to `0`.
         public var indicatorShadowOffsetX: CGFloat = 0
         
-        /// Indicator shadow Y offset. Defautls to `1`.
+        /// Indicator shadow Y offset. Defaults to `1`.
         public var indicatorShadowOffsetY: CGFloat = 1
         
         /// Row content margin. Defaults to `2`.
@@ -116,7 +116,7 @@ public struct VSegmentedPickerUIModel {
         /// Custom content opacities.
         ///
         /// Applicable only when `init`with content is used.
-        /// When using a custom content, it's subviews cannot be configured with indivudual colors,
+        /// When using a custom content, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customContentOpacities: RowStateOpacities = .init(
             enabled: 1,

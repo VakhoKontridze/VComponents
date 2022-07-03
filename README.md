@@ -131,7 +131,7 @@ extension VSecondaryButtonUIModel {
             disabled: .gray
         )
         
-        return uiMmodel
+        return uiModel
     }()
 }
 

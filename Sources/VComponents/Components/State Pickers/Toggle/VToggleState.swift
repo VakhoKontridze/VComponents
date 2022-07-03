@@ -1,5 +1,5 @@
 //
-//  VTogglState.swift
+//  VToggleState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.

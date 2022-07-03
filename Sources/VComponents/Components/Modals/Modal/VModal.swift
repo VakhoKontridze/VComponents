@@ -89,7 +89,7 @@ struct VModal<HeaderLabel, Content>: View
         })
             .frame(size: uiModel.layout.sizes._current.size)
             .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeybordSafeAreaEdges)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
             .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)

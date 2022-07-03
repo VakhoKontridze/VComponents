@@ -46,13 +46,13 @@ struct VLazyScrollViewDemoView: View {
                 VText(
                     color: ColorBook.primary,
                     font: .footnote,
-                    text: "Initialized: \(Array(initializedRows).rangesPrettyForamtted)"
+                    text: "Initialized: \(Array(initializedRows).rangesPrettyFormatted)"
                 )
                 
                 VText(
                     color: ColorBook.primary,
                     font: .footnote,
-                    text: "Visible: \(Array(visibleRows).rangesPrettyForamtted)"
+                    text: "Visible: \(Array(visibleRows).rangesPrettyFormatted)"
                 )
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -120,7 +120,7 @@ struct VLazyScrollViewDemoView_Previews: PreviewProvider {
 
 // MARK: - Helpers
 extension Array where Element == Int {
-    fileprivate var rangesPrettyForamtted: String {
+    fileprivate var rangesPrettyFormatted: String {
         self
             .ranges
             .map { range in

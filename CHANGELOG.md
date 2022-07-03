@@ -276,8 +276,8 @@ VMenu
 VToast
 
 - Toast is migrated to new `SwiftUI` `3.0` API`
-- `rounded` `VToast.Layot.CornerRadiusType` is renamed to `capsule`
-- `custom` `VToast.Layot.CornerRadiusType` is renamed to `rounded`
+- `rounded` `VToast.Layout.CornerRadiusType` is renamed to `capsule`
+- `custom` `VToast.Layout.CornerRadiusType` is renamed to `rounded`
 - `VToastType` `oneLine` is renamed to `singleLine`
 
 VPageIndicator
@@ -331,7 +331,7 @@ VCheckBox
 
 VRadioButton
 
-- Component now supports colors for pressed state in `VRadioButtonModl`
+- Component now supports colors for pressed state in `VRadioButtonModel`
 
 VToggle
 

@@ -101,7 +101,7 @@ public struct VPrimaryButtonUIModel {
         /// Custom label opacities.
         ///
         /// Applicable only when `init`with label is used.
-        /// When using a custom label, it's subviews cannot be configured with indivudual colors,
+        /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
             enabled: 1,
@@ -141,8 +141,8 @@ public struct VPrimaryButtonUIModel {
     }
     
     // MARK: Sub-Models
-    var spinnerSubUIModel: VSpinnerContinousUIModel {
-        var uiModel: VSpinnerContinousUIModel = .init()
+    var spinnerSubUIModel: VSpinnerContinuousUIModel {
+        var uiModel: VSpinnerContinuousUIModel = .init()
         uiModel.layout.dimension = layout.loaderDimension
         uiModel.colors.spinner = colors.loader
         return uiModel
