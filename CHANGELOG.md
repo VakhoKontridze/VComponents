@@ -2,6 +2,14 @@
 
 ### 3.0.0(?)
 
+VNavigationLink
+
+- Button can now be initialized with title
+
+VLink
+
+- Button can now be initialized with title
+
 VMenuPicker
 
 - MenuPicker is deprecated. Use `VMenu` with `VMenuPickerSection`.

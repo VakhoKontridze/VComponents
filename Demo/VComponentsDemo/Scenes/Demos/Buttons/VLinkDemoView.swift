@@ -22,12 +22,10 @@ struct VLinkDemoView: View {
     }
     
     @ViewBuilder private func component() -> some View {
-        VLink(url: url, label: {
-            VSecondaryButton(
-                action: {},
-                title: buttonTitle
-            )
-        })
+        VLink(
+            url: url,
+            title: buttonTitle
+        )
             .disabled(!isEnabled)
     }
     

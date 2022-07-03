@@ -23,12 +23,7 @@ import SwiftUI
 ///
 ///                 VNavigationLink(
 ///                     destination: { destination },
-///                     label: {
-///                         VSecondaryButton(
-///                             action: {},
-///                             title: "Lorem Ipsum"
-///                         )
-///                     }
+///                     title: "Lorem Ipsum"
 ///                 )
 ///             })
 ///                 .navigationTitle("Home")
@@ -73,10 +68,23 @@ public struct VNavigationLink<Destination, Label>: View
     }
     
     private let destination: () -> Destination
-    private let label: () -> Label
+    private let label: VNavigationLinkLabel<Label>
     
     // MARK: Initializers
     /// Initializes component with destination and label.
+    public init(
+        @ViewBuilder destination: @escaping () -> Destination,
+        title: String
+    )
+        where Label == VPlainButton<Never> // ???
+    {
+        self._isActiveExternally = .constant(false)
+        self.stateManagament = .internal
+        self.destination = destination
+        self.label = .title(title: title)
+    }
+    
+    /// Initializes component with destination and title.
     public init(
         @ViewBuilder destination: @escaping () -> Destination,
         @ViewBuilder label: @escaping () -> Label
@@ -84,10 +92,25 @@ public struct VNavigationLink<Destination, Label>: View
         self._isActiveExternally = .constant(false)
         self.stateManagament = .internal
         self.destination = destination
-        self.label = label
+        self.label = .custom(label: label)
+    }
+
+    // MARK: Initializers - Bool
+    /// Initializes component with active state, destination and label.
+    public init(
+        isActive: Binding<Bool>,
+        @ViewBuilder destination: @escaping () -> Destination,
+        title: String
+    )
+        where Label == VPlainButton<Never> // ???
+    {
+        self._isActiveExternally = isActive
+        self.stateManagament = .external
+        self.destination = destination
+        self.label = .title(title: title)
     }
     
-    /// Initializes component with active state, destination and label.
+    /// Initializes component with active state, destination and title.
     public init(
         isActive: Binding<Bool>,
         @ViewBuilder destination: @escaping () -> Destination,
@@ -96,7 +119,7 @@ public struct VNavigationLink<Destination, Label>: View
         self._isActiveExternally = isActive
         self.stateManagament = .external
         self.destination = destination
-        self.label = label
+        self.label = .custom(label: label)
     }
 
     // MARK: Body
@@ -104,10 +127,20 @@ public struct VNavigationLink<Destination, Label>: View
         NavigationLink(
             isActive: isActive,
             destination: destination,
-            label: label
+            label: buttonLabel
         )
             .buttonStyle(.plain) // Cancels styling
             .disabled(!isEnabled)
+    }
+    
+    @ViewBuilder private func buttonLabel() -> some View {
+        switch label {
+        case .title(let title):
+            VPlainButton(action: {}, title: title)
+            
+        case .custom(let label):
+            label()
+        }
     }
     
     // MARK: State Management
@@ -132,12 +165,7 @@ struct VNavigationLink_Previews: PreviewProvider {
 
                 VNavigationLink(
                     destination: { destination },
-                    label: {
-                        VSecondaryButton(
-                            action: {},
-                            title: "Lorem Ipsum"
-                        )
-                    }
+                    title: "Lorem Ipsum"
                 )
             })
                 .navigationTitle("Home")

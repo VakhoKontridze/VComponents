@@ -114,7 +114,7 @@ public struct VMenu<Label>: View where Label: View {
     public var body: some View {
         Menu(
             content: contentView,
-            label: labelView,
+            label: menuLabel,
             primaryAction: { primaryAction?() }
         )
             .disabled(!internalState.isEnabled)
@@ -134,7 +134,7 @@ public struct VMenu<Label>: View where Label: View {
         )
     }
     
-    @ViewBuilder private func labelView() -> some View {
+    @ViewBuilder private func menuLabel() -> some View {
         switch label {
         case .title(let title):
             VPlainButton(action: {}, title: title)

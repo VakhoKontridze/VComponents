@@ -22,12 +22,10 @@ struct VNavigationLinkDemoView: View {
     }
     
     private func component() -> some View {
-        VNavigationLink(destination: destination, label: {
-            VSecondaryButton(
-                action: {},
-                title: buttonTitle
-            )
-        })
+        VNavigationLink(
+            destination: destination,
+            title: buttonTitle
+        )
             .disabled(!isEnabled)
     }
     
