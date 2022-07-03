@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Text Demo View
 struct VTextDemoView: View {
@@ -63,7 +64,7 @@ struct VTextDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VTextDemoType: Int, PickableTitledEnumeration {
+private enum VTextDemoType: Int, StringRepresentableHashableEnumeration {
     case center
     case leading
     case trailing
@@ -71,7 +72,7 @@ private enum VTextDemoType: Int, PickableTitledEnumeration {
     case multiLineLeading
     case multiLineTrailing
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .center: return "Center"
         case .leading: return "Leading"

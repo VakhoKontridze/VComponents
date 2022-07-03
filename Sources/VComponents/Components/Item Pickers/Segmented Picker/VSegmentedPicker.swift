@@ -11,16 +11,16 @@ import VCore
 // MARK: - V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally.
 ///
-/// Component can be initialized with data, row titles, or `PickableEnumeration`/`PickableTitledEnumeration`.
+/// Component can be initialized with data, row titles, or `HashableEnumeration`/`StringRepresentableHashableEnumeration`.
 ///
 /// Best suited for `2` – `3` items.
 ///
 /// UI Model, header, footer, and disabled indexes can be passed as parameters.
 ///
-///     enum PickerRow: Int, PickableTitledEnumeration {
+///     enum PickerRow: Int, StringRepresentableHashableEnumeration {
 ///         case red, green, blue
 ///
-///         var pickerTitle: String {
+///         var stringRepresentation: String {
 ///             switch self {
 ///             case .red: return "Red"
 ///             case .green: return "Green"
@@ -158,35 +158,35 @@ public struct VSegmentedPicker<Data, Content>: View
         self.content = .titles(titles: rowTitles)
     }
     
-    // MARK: Initializers - Pickable Enumeration & Pickable Titled Enumeration
-    /// Initializes component with `PickableEnumeration` and row content.
-    public init<PickableItem>(
+    // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
+    /// Initializes component with `HashableEnumeration` and row content.
+    public init<T>(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<PickableItem>,
+        selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
-        @ViewBuilder content: @escaping (PickableItem) -> Content
+        @ViewBuilder content: @escaping (T) -> Content
     )
         where
-            Data == Array<PickableItem>,
-            PickableItem: PickableEnumeration
+            Data == Array<T>,
+            T: HashableEnumeration
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
-            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: Array(PickableItem.allCases), content: content)
+        self.content = .custom(data: Array(T.allCases), content: content)
     }
     
-    /// Initializes component with `PickableTitledEnumeration`.
-    public init<PickableItem>(
+    /// Initializes component with `StringRepresentableHashableEnumeration`.
+    public init<T>(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<PickableItem>,
+        selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = []
@@ -194,17 +194,17 @@ public struct VSegmentedPicker<Data, Content>: View
         where
             Data == Array<Never>,
             Content == Never,
-            PickableItem: PickableTitledEnumeration
+            T: StringRepresentableHashableEnumeration
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
-            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .titles(titles: Array(PickableItem.allCases).map { $0.pickerTitle })
+        self.content = .titles(titles: Array(T.allCases).map { $0.stringRepresentation })
     }
     
     // MARK: Body
@@ -359,10 +359,10 @@ public struct VSegmentedPicker<Data, Content>: View
 
 // MARK: - Preview
 struct VSegmentedPicker_Previews: PreviewProvider {
-    enum PickerRow: Int, PickableTitledEnumeration {
+    enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
     
-        var pickerTitle: String {
+        var stringRepresentation: String {
             switch self {
             case .red: return "Red"
             case .green: return "Green"

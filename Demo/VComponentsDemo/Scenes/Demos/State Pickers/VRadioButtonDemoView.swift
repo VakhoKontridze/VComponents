@@ -81,12 +81,12 @@ struct VRadioButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VRadioButtonInternalState: Int, PickableTitledEnumeration {
+private enum VRadioButtonInternalState: Int, StringRepresentableHashableEnumeration {
     case off
     case on
     case disabled
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .off: return "Off"
         case .on: return "On"

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Lazy Scroll View Demo View
 struct VLazyScrollViewDemoView: View {
@@ -98,11 +99,11 @@ struct VLazyScrollViewDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VLazyScrollViewTypeHelper: PickableTitledEnumeration {
+private enum VLazyScrollViewTypeHelper: StringRepresentableHashableEnumeration {
     case vertical
     case horizontal
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .vertical: return "Vertical"
         case .horizontal: return "Horizontal"

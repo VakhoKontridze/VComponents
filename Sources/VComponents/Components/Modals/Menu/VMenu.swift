@@ -6,16 +6,17 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Menu
 /// Modal component that presents menu of actions.
 ///
 /// Unlike native menu, this components doesn't take reverse row order.
 ///
-///     enum PickerRow: Int, PickableTitledEnumeration {
+///     enum PickerRow: Int, StringRepresentableHashableEnumeration {
 ///         case red, green, blue
 ///
-///         var pickerTitle: String {
+///         var stringRepresentation: String {
 ///             switch self {
 ///             case .red: return "Red"
 ///             case .green: return "Green"
@@ -142,10 +143,10 @@ public struct VMenu<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VMenu_Previews: PreviewProvider {
-    private enum PickerRow: Int, PickableTitledEnumeration {
+    private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
 
-        var pickerTitle: String {
+        var stringRepresentation: String {
             switch self {
             case .red: return "Red"
             case .green: return "Green"

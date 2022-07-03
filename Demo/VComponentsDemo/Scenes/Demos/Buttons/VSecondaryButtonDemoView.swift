@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Secondary Button Demo View
 struct VSecondaryButtonDemoView: View {
@@ -89,11 +90,11 @@ struct VSecondaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-enum VSecondaryButtonInternalState: Int, PickableTitledEnumeration {
+enum VSecondaryButtonInternalState: Int, StringRepresentableHashableEnumeration {
     case enabled
     case disabled
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
@@ -110,11 +111,11 @@ enum VSecondaryButtonInternalState: Int, PickableTitledEnumeration {
 
 private typealias VSecondaryButtonLabel = VPrimaryButtonLabel
 
-enum VSecondaryButtonHitBox: Int, PickableTitledEnumeration {
+enum VSecondaryButtonHitBox: Int, StringRepresentableHashableEnumeration {
     case clipped
     case extended
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .clipped: return "Clipped"
         case .extended: return "Extended"

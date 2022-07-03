@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Side Bar Demo View
 struct VSideBarDemoView: View {
@@ -109,8 +110,8 @@ struct VSideBarDemoView: View {
 }
 
 // MARK: - Helpers
-extension VSideBarUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
-    public var pickerTitle: String {
+extension VSideBarUIModel.Layout.PresentationEdge: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
         switch self {
         case .left: return "Left"
         case .right: return "Right"

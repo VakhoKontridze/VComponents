@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Square Button Demo View
 struct VSquareButtonDemoView: View {
@@ -99,12 +100,12 @@ struct VSquareButtonDemoView: View {
 // MARK: - Helpers
 private typealias VSquareButtonInternalState = VSecondaryButtonInternalState
 
-enum VSquareButtonLabel: Int, PickableTitledEnumeration {
+enum VSquareButtonLabel: Int, StringRepresentableHashableEnumeration {
     case title
     case icon
     case custom
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .title: return "Title"
         case .icon: return "Icon"
@@ -113,11 +114,11 @@ enum VSquareButtonLabel: Int, PickableTitledEnumeration {
     }
 }
 
-private enum VSquareButtonShape: Int, PickableTitledEnumeration {
+private enum VSquareButtonShape: Int, StringRepresentableHashableEnumeration {
     case rounded
     case circular
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .rounded: return "Rounded"
         case .circular: return "Circular"

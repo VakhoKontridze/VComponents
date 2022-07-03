@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Primary Button Demo View
 struct VPrimaryButtonDemoView: View {
@@ -85,12 +86,12 @@ struct VPrimaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPrimaryButtonInternalState: Int, PickableTitledEnumeration {
+private enum VPrimaryButtonInternalState: Int, StringRepresentableHashableEnumeration {
     case enabled
     case loading
     case disabled
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .enabled: return "Enabled"
         case .loading: return "Loading"
@@ -107,12 +108,12 @@ private enum VPrimaryButtonInternalState: Int, PickableTitledEnumeration {
     }
 }
 
-enum VPrimaryButtonLabel: Int, PickableTitledEnumeration {
+enum VPrimaryButtonLabel: Int, StringRepresentableHashableEnumeration {
     case title
     case iconTitle
     case custom
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .title: return "Title"
         case .iconTitle: return "Icon & Title"
@@ -121,11 +122,11 @@ enum VPrimaryButtonLabel: Int, PickableTitledEnumeration {
     }
 }
 
-enum VPrimaryButtonBorder: Int, PickableTitledEnumeration {
+enum VPrimaryButtonBorder: Int, StringRepresentableHashableEnumeration {
     case borderless
     case bordered
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .borderless: return "Borderless"
         case .bordered: return "Bordered"

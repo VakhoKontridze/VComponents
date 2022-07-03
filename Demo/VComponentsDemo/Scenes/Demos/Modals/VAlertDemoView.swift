@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Alert Demo View
 struct VAlertDemoView: View {
@@ -76,13 +77,13 @@ struct VAlertDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VAlertButtonsHelper: Int, PickableTitledEnumeration {
+private enum VAlertButtonsHelper: Int, StringRepresentableHashableEnumeration {
     case none
     case one
     case two
     case many
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .none: return "No Buttons"
         case .one: return "One Button"

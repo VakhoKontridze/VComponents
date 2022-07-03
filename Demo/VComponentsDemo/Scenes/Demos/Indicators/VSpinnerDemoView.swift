@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Spinner Demo View
 struct VSpinnerDemoView: View {
@@ -34,11 +35,11 @@ struct VSpinnerDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VSpinnerTypeHelper: Int, PickableTitledEnumeration {
+private enum VSpinnerTypeHelper: Int, StringRepresentableHashableEnumeration {
     case continous
     case dashed
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .continous: return "Continous"
         case .dashed: return "Dashed"

@@ -83,13 +83,13 @@ struct VCheckBoxDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VCheckBoxInternalState: Int, PickableTitledEnumeration {
+private enum VCheckBoxInternalState: Int, StringRepresentableHashableEnumeration {
     case off
     case on
     case indeterminate
     case disabled
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .off: return "Off"
         case .on: return "On"

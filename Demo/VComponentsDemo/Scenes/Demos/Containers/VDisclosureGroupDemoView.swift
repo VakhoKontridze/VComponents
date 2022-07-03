@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Disclosure Group Demo View
 struct VDisclosureGroupDemoView: View {
@@ -86,7 +87,7 @@ struct VDisclosureGroupDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VDisclosureGroupInternalState: PickableTitledEnumeration {
+private enum VDisclosureGroupInternalState: StringRepresentableHashableEnumeration {
     case collapsed
     case expanded
     case disabled
@@ -99,7 +100,7 @@ private enum VDisclosureGroupInternalState: PickableTitledEnumeration {
         }
     }
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .collapsed: return "Collapsed"
         case .expanded: return "Expanded"

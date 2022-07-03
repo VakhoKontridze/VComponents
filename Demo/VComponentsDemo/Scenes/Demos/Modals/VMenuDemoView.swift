@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Menu Demo View
 struct VMenuDemoView: View {
@@ -63,10 +64,10 @@ struct VMenuDemoView: View {
 // MARK: - Helpers
 private typealias VMenuState = VSecondaryButtonInternalState
 
-private enum _PickerRow: Int, PickableTitledEnumeration {
+private enum _PickerRow: Int, StringRepresentableHashableEnumeration {
     case red, green, blue
 
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .red: return "Red"
         case .green: return "Green"

@@ -192,11 +192,11 @@ struct VBottomSheetDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VBottomSheetSizeHelper: Int, PickableTitledEnumeration {
+private enum VBottomSheetSizeHelper: Int, StringRepresentableHashableEnumeration {
     case fixed
     case dynamic
 
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .fixed: return "Fixed"
         case .dynamic: return "Dynamic"

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Modal
 struct VModal<HeaderLabel, Content>: View

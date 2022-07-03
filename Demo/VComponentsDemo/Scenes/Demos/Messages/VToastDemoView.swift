@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Toast Demo View
 struct VToastDemoView: View {
@@ -65,8 +66,8 @@ struct VToastDemoView: View {
 }
 
 // MARK: - Helpers
-extension VToastUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
-    public var pickerTitle: String {
+extension VToastUIModel.Layout.PresentationEdge: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
         switch self {
         case .top: return "Top"
         case .bottom: return "Bottom"
@@ -74,11 +75,11 @@ extension VToastUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
     }
 }
 
-private enum VToastTypeHelper: Int, PickableTitledEnumeration {
+private enum VToastTypeHelper: Int, StringRepresentableHashableEnumeration {
     case oneLine
     case multiLine
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .oneLine: return "Single-line"
         case .multiLine: return "Multi-line"

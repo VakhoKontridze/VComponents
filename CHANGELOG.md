@@ -28,6 +28,14 @@ VMenu
 - Menu now builds sections and rows using `resultBuilder`'s
 - Menu now supports picker section, transferred from `VMenuPicker`
 
+Other
+
+- `PickableEnumeration` is renamed to `HashableEnumeration`
+- `PickableTitledEnumeration` is renamed to `CustomStringConvertibleHashableEnumeration`
+- `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to `VCore`
+- `GenericState`'s and `GenericStateModels`'s are moved to `VCore`
+- `BasicAnimation` is moved to `VCore`
+
 ### 2.3.1(23)
 
 General

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Sheet Demo View
 struct VSheetDemoView: View {
@@ -46,14 +47,14 @@ struct VSheetDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VSheetRoundedCorners: Int, PickableTitledEnumeration {
+private enum VSheetRoundedCorners: Int, StringRepresentableHashableEnumeration {
     case all
     case top
     case bottom
     case custom
     case none
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .all: return "All"
         case .top: return "Top"

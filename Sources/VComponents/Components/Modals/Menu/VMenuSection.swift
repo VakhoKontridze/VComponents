@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Menu Section
 /// Container view that you can use to add hierarchy to `VMenuRow`'s.
@@ -93,41 +94,41 @@ public struct VMenuPickerSection<Data>: VMenuSection
         self.content = { VMenuTitleRow(action: {}, title: $0) }
     }
     
-    /// Initializes `VMenuPickerSection` with `PickableEnumeration` and content.
-    public init<PickableItem>(
+    /// Initializes `VMenuPickerSection` with `HashableEnumeration` and content.
+    public init<T>(
         title: String? = nil,
-        selection: Binding<PickableItem>,
-        content: @escaping (PickableItem) -> VMenuRow
+        selection: Binding<T>,
+        content: @escaping (T) -> VMenuRow
     )
         where
-            PickableItem: PickableEnumeration,
-            Data == Array<PickableItem>
+            T: HashableEnumeration,
+            Data == Array<T>
     {
         self.title = title
         self._selectedIndex = .init(
-            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
-            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
-        self.data = Array(PickableItem.allCases)
+        self.data = Array(T.allCases)
         self.content = content
     }
     
-    /// Initializes `VMenuPickerSection` with `PickableTitledEnumeration`.
-    public init<PickableItem>(
+    /// Initializes `VMenuPickerSection` with `StringRepresentableHashableEnumeration`.
+    public init<T>(
         title: String? = nil,
-        selection: Binding<PickableItem>
+        selection: Binding<T>
     )
         where
-            PickableItem: PickableTitledEnumeration,
-            Data == Array<PickableItem>
+            T: StringRepresentableHashableEnumeration,
+            Data == Array<T>
     {
         self.title = title
         self._selectedIndex = .init(
-            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
-            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
-        self.data = Array(PickableItem.allCases)
-        self.content = { VMenuTitleRow(action: {}, title: $0.pickerTitle) }
+        self.data = Array(T.allCases)
+        self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
     }
     
     // MARK: Menu Section

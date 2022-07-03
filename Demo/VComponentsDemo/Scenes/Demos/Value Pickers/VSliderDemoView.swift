@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Slider Demo View
 struct VSliderDemoView: View {
@@ -130,12 +131,12 @@ struct VSliderDemoView: View {
 // MARK: - Helpers
 private typealias VSliderState = VSecondaryButtonInternalState
 
-private enum SliderThumbType: Int, PickableTitledEnumeration {
+private enum SliderThumbType: Int, StringRepresentableHashableEnumeration {
     case standard
     case bordered
     case none
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .standard: return "Standard"
         case .bordered: return "Bordered"

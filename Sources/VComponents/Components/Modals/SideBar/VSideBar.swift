@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Side Bar
 struct VSideBar<Content>: View where Content: View {

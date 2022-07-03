@@ -68,12 +68,12 @@ struct VToggleDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VToggleInternalState: Int, PickableTitledEnumeration {
+private enum VToggleInternalState: Int, StringRepresentableHashableEnumeration {
     case off
     case on
     case disabled
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .off: return "Off"
         case .on: return "On"
@@ -98,12 +98,12 @@ private enum VToggleInternalState: Int, PickableTitledEnumeration {
     }
 }
 
-enum VToggleLabel: Int, PickableTitledEnumeration {
+enum VToggleLabel: Int, StringRepresentableHashableEnumeration {
     case empty
     case title
     case custom
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .empty: return "None"
         case .title: return "Title"
