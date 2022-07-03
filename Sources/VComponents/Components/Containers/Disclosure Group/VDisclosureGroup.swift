@@ -48,7 +48,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding private var state: VDisclosureGroupState
-    private var internalState: VDisclosureGroupInternalState { .init(isEnabled: isEnabled, state: state) }
+    private var internalState: VDisclosureGroupInternalState { .init(isEnabled: isEnabled, isExpanded: state == .expanded) }
     
     private let headerLabel: VDisclosureGroupLabel<HeaderLabel>
     
@@ -96,7 +96,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         where HeaderLabel == Never
     {
         self.uiModel = uiModel
-        self._state = .init(bool: isExpanded)
+        self._state = .init(isExpanded: isExpanded)
         self.headerLabel = .title(title: headerTitle)
         self.content = content
     }
@@ -109,7 +109,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
-        self._state = .init(bool: isExpanded)
+        self._state = .init(isExpanded: isExpanded)
         self.headerLabel = .custom(label: headerLabel)
         self.content = content
     }
@@ -119,7 +119,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         PlainDisclosureGroup(
             uiModel: uiModel.plainDisclosureGroupSubUIModel,
             isExpanded: .init(
-                get: { internalState.isExpanded },
+                get: { internalState == .expanded },
                 set: { expandCollapseFromHeaderTap($0) }
             ),
             label: { header },
@@ -142,14 +142,14 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 switch headerLabel {
                 case .title(let title):
                     VText(
-                        color: uiModel.colors.headerTitle.for(internalState),
+                        color: uiModel.colors.headerTitle.value(for: internalState),
                         font: uiModel.fonts.headerTitle,
                         text: title
                     )
                     
                 case .custom(let label):
                     label()
-                        .opacity(uiModel.colors.customHeaderLabelOpacities.for(internalState))
+                        .opacity(uiModel.colors.customHeaderLabelOpacities.value(for: internalState))
                 }
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -189,7 +189,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
         guard
             uiModel.misc.expandsAndCollapsesOnHeaderTap,
-            isExpanded ^^ internalState.isExpanded
+            isExpanded ^^ (internalState == .expanded)
         else {
             return
         }

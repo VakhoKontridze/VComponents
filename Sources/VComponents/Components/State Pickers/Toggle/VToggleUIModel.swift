@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Toggle UI Model
 /// Model that describes UI.

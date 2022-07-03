@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Wheel Picker UI Model
 /// Model that describes UI.
@@ -55,10 +56,7 @@ public struct VWheelPickerUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background colors.
-        public var background: StateColors = .init(
-            enabled: ColorBook.layer,
-            disabled: ColorBook.layer
-        )
+        public var background: StateColors = .init(ColorBook.layer)
         
         /// Title content colors.
         ///

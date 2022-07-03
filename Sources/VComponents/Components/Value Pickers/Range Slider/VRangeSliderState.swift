@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Range Slider Internal State
 typealias VRangeSliderInternalState = GenericState_ED

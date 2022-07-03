@@ -196,7 +196,7 @@ public struct VWheelPicker<Data, Content>: View
         if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
                 type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
-                color: uiModel.colors.header.for(internalState),
+                color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
@@ -208,7 +208,7 @@ public struct VWheelPicker<Data, Content>: View
         if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
                 type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
-                color: uiModel.colors.footer.for(internalState),
+                color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
@@ -224,7 +224,7 @@ public struct VWheelPicker<Data, Content>: View
         )
             .pickerStyle(.wheel)
             .disabled(!internalState.isEnabled) // Luckily, doesn't affect colors
-            .background(uiModel.colors.background.for(internalState).cornerRadius(uiModel.layout.cornerRadius))
+            .background(uiModel.colors.background.value(for: internalState).cornerRadius(uiModel.layout.cornerRadius))
     }
     
     @ViewBuilder private func rows() -> some View {
@@ -232,7 +232,7 @@ public struct VWheelPicker<Data, Content>: View
         case .titles(let titles):
             ForEach(titles.indices, id: \.self, content: { i in
                 VText(
-                    color: uiModel.colors.title.for(internalState),
+                    color: uiModel.colors.title.value(for: internalState),
                     font: uiModel.fonts.rows,
                     text: titles[i]
                 )
@@ -242,7 +242,7 @@ public struct VWheelPicker<Data, Content>: View
         case .custom(let data, let content):
             ForEach(data.indices, id: \.self, content: { i in
                 content(data[i])
-                    .opacity(uiModel.colors.customContentOpacities.for(internalState))
+                    .opacity(uiModel.colors.customContentOpacities.value(for: internalState))
                     .tag(i)
             })
         }

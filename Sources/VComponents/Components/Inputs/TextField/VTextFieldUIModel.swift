@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Text Field UI Model
 /// Model that describes UI.
@@ -95,63 +96,63 @@ public struct VTextFieldUIModel {
         /// Background colors.
         public var background: StateColors = .init(
             enabled: segmentedPickerReference.colors.background.enabled,
-            disabled: segmentedPickerReference.colors.background.disabled,
-            focused: .init(componentAsset: "TextField.Background.focused")
+            focused: .init(componentAsset: "TextField.Background.focused"),
+            disabled: segmentedPickerReference.colors.background.disabled
         )
         
         /// Border colors.
-        public var border: StateColors = .clear
+        public var border: StateColors = .clearColors
         
         /// Text colors.
         public var text: StateColors = .init(
             enabled: ColorBook.primary,
-            disabled: ColorBook.primaryPressedDisabled,
-            focused: ColorBook.primary
+            focused: ColorBook.primary,
+            disabled: ColorBook.primaryPressedDisabled
         )
         
         /// Header colors.
         public var header: StateColors = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
-            disabled: segmentedPickerReference.colors.header.disabled,
-            focused: segmentedPickerReference.colors.header.enabled
+            focused: segmentedPickerReference.colors.header.enabled,
+            disabled: segmentedPickerReference.colors.header.disabled
         )
 
         /// Footer colors.
         public var footer: StateColors = .init(
             enabled: segmentedPickerReference.colors.footer.enabled,
-            disabled: segmentedPickerReference.colors.footer.disabled,
-            focused: segmentedPickerReference.colors.footer.enabled
+            focused: segmentedPickerReference.colors.footer.enabled,
+            disabled: segmentedPickerReference.colors.footer.disabled
         )
 
         /// Search icon colors.
         public var searchIcon: StateColors = .init(
             enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
-            disabled: ColorBook.primaryPressedDisabled,
-            focused: .init(componentAsset: "TextField.PlainButton.enabled")
+            focused: .init(componentAsset: "TextField.PlainButton.enabled"),
+            disabled: ColorBook.primaryPressedDisabled
         )
 
         /// Visiblity button icon colors.
         public var visibilityButtonIcon: ButtonStateColors = .init(
             enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
             pressed: ColorBook.primaryPressedDisabled,
-            disabled: ColorBook.primaryPressedDisabled,
-            focused: .init(componentAsset: "TextField.PlainButton.enabled")
+            focused: .init(componentAsset: "TextField.PlainButton.enabled"),
+            disabled: ColorBook.primaryPressedDisabled
         )
 
         /// Clear button background colors.
         public var clearButtonBackground: ButtonStateColors = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
             pressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
-            disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled"),
-            focused: .init(componentAsset: "TextField.ClearButton.Background.enabled")
+            focused: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
+            disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
         )
 
         /// Clear button icon colors.
         public var clearButtonIcon: ButtonStateColors = .init(
             enabled: .init(componentAsset: "TextField.ClearButton.Icon"),
             pressed: .init(componentAsset: "TextField.ClearButton.Icon"),
-            disabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            focused: .init(componentAsset: "TextField.ClearButton.Icon")
+            focused: .init(componentAsset: "TextField.ClearButton.Icon"),
+            disabled: .init(componentAsset: "TextField.ClearButton.Icon")
         )
         
         // MARK: Initializers
@@ -160,11 +161,11 @@ public struct VTextFieldUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EDF<Color>
+        public typealias StateColors = GenericStateModel_EFD<Color>
         
         // MARK: Button State Colors
         /// Sub-model containing colors for component states.
-        public typealias ButtonStateColors = GenericStateModel_EPDF<Color>
+        public typealias ButtonStateColors = GenericStateModel_EPFD<Color>
     }
 
     // MARK: Fonts
@@ -252,7 +253,7 @@ public struct VTextFieldUIModel {
         uiModel.layout.hitBox.horizontal = 0
         uiModel.layout.hitBox.vertical = 0
         
-        uiModel.colors.background = .clear
+        uiModel.colors.background = .clearColors
         uiModel.colors.icon = .init(colors.visibilityButtonIcon)
         
         return uiModel

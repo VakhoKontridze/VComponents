@@ -78,40 +78,25 @@ public struct VPrimaryButtonUIModel {
         public var background: StateColors = .init(
             enabled: .init(componentAsset: "PrimaryButton.Background.enabled"),
             pressed: .init(componentAsset: "PrimaryButton.Background.pressed"),
-            disabled: .init(componentAsset: "PrimaryButton.Background.disabled"),
-            loading: .init(componentAsset: "PrimaryButton.Background.disabled")
+            loading: .init(componentAsset: "PrimaryButton.Background.disabled"),
+            disabled: .init(componentAsset: "PrimaryButton.Background.disabled")
         )
         
         /// Border colors.
-        public var border: StateColors = .clear
+        public var border: StateColors = .clearColors
         
         /// Title colors.
-        public var title: StateColors = .init(
-            enabled: ColorBook.primaryWhite,
-            pressed: ColorBook.primaryWhite,
-            disabled: ColorBook.primaryWhite,
-            loading: ColorBook.primaryWhite
-        )
+        public var title: StateColors = .init(ColorBook.primaryWhite)
         
         /// Icon colors.
         ///
         /// Can be used for vector images.
-        public var icon: StateColors = .init(
-            enabled: ColorBook.primaryWhite,
-            pressed: ColorBook.primaryWhite,
-            disabled: ColorBook.primaryWhite,
-            loading: ColorBook.primaryWhite
-        )
+        public var icon: StateColors = .init(ColorBook.primaryWhite)
         
         /// Icon opacities.
         ///
         /// Can be used for bitmap images. Defaults to `1`'s.
-        public var iconOpacities: StateOpacities = .init(
-            enabled: 1,
-            pressed: 1,
-            disabled: 1,
-            loading: 1
-        )
+        public var iconOpacities: StateOpacities = .init(1)
         
         /// Custom label opacities.
         ///
@@ -121,8 +106,8 @@ public struct VPrimaryButtonUIModel {
         public var customLabelOpacities: StateOpacities = .init(
             enabled: 1,
             pressed: 0.75,
-            disabled: 0.75,
-            loading: 0.75
+            loading: 0.75,
+            disabled: 0.75
         )
         
         /// Loader color.
@@ -134,11 +119,11 @@ public struct VPrimaryButtonUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPDL<Color>
+        public typealias StateColors = GenericStateModel_EPLD<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_EPDL<CGFloat>
+        public typealias StateOpacities = GenericStateModel_EPLD<CGFloat>
     }
 
     // MARK: Fonts

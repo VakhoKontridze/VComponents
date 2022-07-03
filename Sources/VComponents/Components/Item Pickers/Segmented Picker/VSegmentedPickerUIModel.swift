@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Segmented Picker UI Model
 /// Model that describes UI.

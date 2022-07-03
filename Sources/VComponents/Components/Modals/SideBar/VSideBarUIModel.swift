@@ -75,7 +75,7 @@ public struct VSideBarUIModel {
         public init() {}
         
         // MARK: Presentation Edge
-        /// Model that represents presentation edge, such as `left`, `right`, `top`, or `bottom`.
+        /// Enumeration that represents presentation edge, such as `left`, `right`, `top`, or `bottom`.
         public enum PresentationEdge: Int, CaseIterable {
             // MARK: Cases
             /// Presentation form left.

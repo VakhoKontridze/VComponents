@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/VakhoKontridze/VCore",
       "state" : {
-        "branch" : "feature-swift-5.7",
-        "revision" : "0f8c8e6c4249bbf408affb0de3dd25b95692e0cc"
+        "branch" : "v4.0.0-beta",
+        "revision" : "80a3f762b67bc24e02fa7a29edfb77905c771698"
       }
     }
   ],

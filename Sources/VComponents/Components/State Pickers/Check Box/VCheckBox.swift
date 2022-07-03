@@ -85,7 +85,7 @@ public struct VCheckBox<Label>: View where Label: View {
         where Label == Never
     {
         self.uiModel = uiModel
-        self._state = .init(bool: isOn)
+        self._state = .init(isOn: isOn)
         self.label = .empty
     }
     
@@ -98,7 +98,7 @@ public struct VCheckBox<Label>: View where Label: View {
         where Label == Never
     {
         self.uiModel = uiModel
-        self._state = .init(bool: isOn)
+        self._state = .init(isOn: isOn)
         self.label = .title(title: title)
     }
     
@@ -109,7 +109,7 @@ public struct VCheckBox<Label>: View where Label: View {
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.uiModel = uiModel
-        self._state = .init(bool: isOn)
+        self._state = .init(isOn: isOn)
         self.label = .custom(label: label)
     }
 
@@ -129,7 +129,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
                             type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
-                            color: uiModel.colors.title.for(internalState),
+                            color: uiModel.colors.title.value(for: internalState),
                             font: uiModel.fonts.title,
                             text: title
                         )
@@ -145,7 +145,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         label()
-                            .opacity(uiModel.colors.customLabelOpacities.for(internalState))
+                            .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
                     })
                         .disabled(!labelIsEnabled)
                 })
@@ -158,16 +158,16 @@ public struct VCheckBox<Label>: View where Label: View {
         SwiftUIBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                    .foregroundColor(uiModel.colors.fill.for(internalState))
+                    .foregroundColor(uiModel.colors.fill.value(for: internalState))
                 
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                    .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWith)
+                    .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWith)
 
                 if let checkMarkIcon = checkMarkIcon {
                     checkMarkIcon
                         .resizable()
                         .frame(dimension: uiModel.layout.iconDimension)
-                        .foregroundColor(uiModel.colors.checkmark.for(internalState))
+                        .foregroundColor(uiModel.colors.checkmark.value(for: internalState))
                 }
             })
                 .frame(dimension: uiModel.layout.dimension)

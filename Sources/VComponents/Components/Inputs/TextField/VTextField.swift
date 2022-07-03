@@ -177,7 +177,7 @@ public struct VTextField: View {
         if let headerTitle = headerTitle, !headerTitle.isEmpty {
             VText(
                 type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
-                color: uiModel.colors.header.for(internalState),
+                color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
@@ -189,7 +189,7 @@ public struct VTextField: View {
         if let footerTitle = footerTitle, !footerTitle.isEmpty {
             VText(
                 type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
-                color: uiModel.colors.footer.for(internalState),
+                color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
@@ -213,10 +213,10 @@ public struct VTextField: View {
     private var background: some View {
         ZStack(content: {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .foregroundColor(uiModel.colors.background.for(internalState))
+                .foregroundColor(uiModel.colors.background.value(for: internalState))
 
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWidth)
+                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         })
     }
 
@@ -225,7 +225,7 @@ public struct VTextField: View {
             ImageBook.textFieldSearch
                 .resizable()
                 .frame(dimension: uiModel.layout.searchIconDimension)
-                .foregroundColor(uiModel.colors.searchIcon.for(internalState))
+                .foregroundColor(uiModel.colors.searchIcon.value(for: internalState))
         }
     }
 
@@ -240,7 +240,7 @@ public struct VTextField: View {
             .onChange(of: text, perform: textChanged)
         
             .multilineTextAlignment(uiModel.layout.textAlignment)
-            .foregroundColor(uiModel.colors.text.for(internalState))
+            .foregroundColor(uiModel.colors.text.value(for: internalState))
             .font({
                 switch text.isEmpty {
                 case false: return uiModel.fonts.text

@@ -29,8 +29,8 @@ struct VPrimaryButtonDemoView: View {
             uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
-                disabled: .init("PrimaryButtonBordered.Background.disabled"),
-                loading: .init("PrimaryButtonBordered.Background.disabled")
+                loading: .init("PrimaryButtonBordered.Background.disabled"),
+                disabled: .init("PrimaryButtonBordered.Background.disabled")
             )
 
             uiModel.colors.border = defaultUIModel.colors.background
@@ -87,14 +87,14 @@ struct VPrimaryButtonDemoView: View {
 // MARK: - Helpers
 private enum VPrimaryButtonInternalState: Int, PickableTitledEnumeration {
     case enabled
-    case disabled
     case loading
+    case disabled
     
     var pickerTitle: String {
         switch self {
         case .enabled: return "Enabled"
-        case .disabled: return "Disabled"
         case .loading: return "Loading"
+        case .disabled: return "Disabled"
         }
     }
     

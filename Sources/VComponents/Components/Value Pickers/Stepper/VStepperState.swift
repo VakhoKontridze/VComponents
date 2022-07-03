@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Stepper Internal State
 typealias VStepperInternalState = GenericState_ED

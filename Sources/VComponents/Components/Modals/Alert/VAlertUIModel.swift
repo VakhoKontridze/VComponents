@@ -272,13 +272,13 @@ public struct VAlertUIModel {
 }
 
 // MARK: - Helpers
-extension GenericStateModel_EPDL where Value == Color {
+extension GenericStateModel_EPLD where Value == Color {
     fileprivate static func alertButton(_ model: GenericStateModel_EPD<Color>) -> Self {
         self.init(
             enabled: model.enabled,
             pressed: model.pressed,
-            disabled: model.disabled,
-            loading: .clear // Doesn't matter
+            loading: .clear, // Doesn't matter
+            disabled: model.disabled
         )
     }
 }

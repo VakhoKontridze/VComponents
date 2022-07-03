@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Segmented Picker State
 typealias VSegmentedPickerInternalState = GenericState_ED
