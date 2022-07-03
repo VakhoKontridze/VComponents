@@ -44,7 +44,7 @@ Other
 - `GenericState`'s and `GenericStateModels`'s are moved to `VCore`
 - `BasicAnimation` is moved to `VCore`
 
-### 2.3.1(23)
+### [2.3.1(23)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.1) — *2022 07 04*
 
 General
 

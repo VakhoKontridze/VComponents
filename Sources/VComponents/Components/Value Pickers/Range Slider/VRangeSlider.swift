@@ -45,7 +45,7 @@ public struct VRangeSlider: View {
     @State private var sliderWidth: CGFloat = 0
 
     // MARK: Initializers
-    /// Initializes component with differene, and low and high values.
+    /// Initializes component with difference, and low and high values.
     public init<V>(
         uiModel: VRangeSliderUIModel = .init(),
         range: ClosedRange<V> = 0...1,
@@ -61,7 +61,7 @@ public struct VRangeSlider: View {
             V.Stride: BinaryFloatingPoint
     {
         assert(
-            (valueHigh.wrappedValue - valueLow.wrappedValue).isNearlyGreaterThanOrEqual(to: difference),
+            valueHigh.wrappedValue - valueLow.wrappedValue >= difference - .ulpOfOne,
             "Difference between `VRangeSlider`'s `valueLow` and `valueHeight` must be greater than or equal to `difference`"
         )
         
@@ -246,17 +246,5 @@ extension Double {
     ) -> Double {
         guard let step = step else { return self }
         return floor(self / step) * step
-    }
-}
-
-
-// MARK: - Helpers
-extension FloatingPoint {
-    fileprivate func isNearlyGreaterThanOrEqual(to value: Self) -> Bool {
-        (self - value) >= -.ulpOfOne
-    }
-    
-    private func isNearlyEqual(to value: Self) -> Bool {
-        abs(self - value) <= .ulpOfOne
     }
 }
