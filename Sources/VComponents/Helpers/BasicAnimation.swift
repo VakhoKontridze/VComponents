@@ -12,7 +12,7 @@ import SwiftUI
 ///
 /// Purpose of this object was to limit some animations to curve and duration.
 ///
-/// Object contains proeprty `swiftUIAnimation`, which can be used to create object that `SwiftUI` can interpret.
+/// Object contains property `swiftUIAnimation`, which can be used to create object that `SwiftUI` can interpret.
 public struct BasicAnimation {
     /// Animation curve.
     public var curve: AnimationCurve
