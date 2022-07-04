@@ -1,6 +1,6 @@
 # Change Log
 
-### 2.3.4(26)
+### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*
 
 General
 
