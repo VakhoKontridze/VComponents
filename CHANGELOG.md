@@ -16,24 +16,24 @@ VMenuPicker
 
 VDisclosureGroup
 
-- `contentMargins` are changed from `15`'s to `zero` in `VDisclosureGroupUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `contentMargins` are changed from `15`s to `zero` in `VDisclosureGroupUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 
 VModal
 
-- `contentMargins` are changed from `15`'s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `contentMargins` are changed from `15`s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 
 VBottomSheet
 
-- `contentMargins` are changed from `15`'s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `contentMargins` are changed from `15`s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 
 VSideBar
 
-- `contentMargins` are changed from `15`'s to `zero` in `VSideBarUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `contentMargins` are changed from `15`s to `zero` in `VSideBarUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 
 VMenu
 
 - Menu now support multiple section
-- Menu now builds sections and rows using `resultBuilder`'s
+- Menu now builds sections and rows using `resultBuilder`s
 - Menu now supports picker section, transferred from `VMenuPicker`
 
 Other
@@ -41,7 +41,7 @@ Other
 - `PickableEnumeration` is renamed to `HashableEnumeration`
 - `PickableTitledEnumeration` is renamed to `CustomStringConvertibleHashableEnumeration`
 - `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to `VCore`
-- `GenericState`'s and `GenericStateModels`'s are moved to `VCore`
+- `GenericState`s and `GenericStateModels`s are moved to `VCore`
 - `BasicAnimation` is moved to `VCore`
 
 ### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*

@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Menu Section
-/// Container view that you can use to add hierarchy to `VMenuRow`'s.
+/// Container view that you can use to add hierarchy to `VMenuRow`s.
 public protocol VMenuSection: VMenuSectionConvertible {
     /// Section body type.
     typealias Body = AnyView
@@ -26,7 +26,7 @@ extension VMenuSection {
 }
 
 // MARK: - V Menu Group Section
-/// Grouped container view that you can use to add hierarchy to `VMenuRow`'s.
+/// Grouped container view that you can use to add hierarchy to `VMenuRow`s.
 public struct VMenuGroupSection: VMenuSection {
     // MARK: Properties
     private let rows: () -> [any VMenuRow]
@@ -56,7 +56,7 @@ public struct VMenuGroupSection: VMenuSection {
 }
 
 // MARK: - V Menu Picker Section
-/// Container view with picker that you can use to add hierarchy to `VMenuRow`'s.
+/// Container view with picker that you can use to add hierarchy to `VMenuRow`s.
 public struct VMenuPickerSection<Data>: VMenuSection
     where
         Data: RandomAccessCollection,
