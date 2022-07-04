@@ -41,7 +41,7 @@ public struct VPlainButtonUIModel {
         /// Applicable only if icon `init`with icon and title is used.
         public var iconTitleSpacing: CGFloat = secondaryButtonReference.layout.iconTitleSpacing
         
-        /// Hit box. Defaults to `5`'s.
+        /// Hit box. Defaults to `5`s.
         public var hitBox: HitBox = .init(5)
         
         // MARK: Initializers
@@ -75,7 +75,7 @@ public struct VPlainButtonUIModel {
         
         /// Icon opacities.
         ///
-        /// Can be used for bitmap images. Defaults to `1`'s.
+        /// Can be used for bitmap images. Defaults to `1`s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
         /// Custom label opacities.

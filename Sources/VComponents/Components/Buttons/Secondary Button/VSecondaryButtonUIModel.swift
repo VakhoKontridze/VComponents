@@ -91,7 +91,7 @@ public struct VSecondaryButtonUIModel {
         
         /// Icon opacities.
         ///
-        /// Can be used for bitmap images. Defaults to `1`'s.
+        /// Can be used for bitmap images. Defaults to `1`s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
         /// Custom label opacities.

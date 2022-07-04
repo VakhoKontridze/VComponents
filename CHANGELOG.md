@@ -54,7 +54,7 @@ General
 
 Models
 
-- `EdgeInsets`'s are renamed to full names from `VCore`
+- `EdgeInsets`s are renamed to full names from `VCore`
 
 ### [2.3.2(24)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.2) — *2022 07 04*
 
@@ -107,7 +107,7 @@ VContextMenu
 
 General
 
-- `Model` objects are renamed to `UIModel`'s
+- `Model` objects are renamed to `UIModel`s
 
 ### [2.1.1(19)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.1.1) — *2022 06 17*
 
@@ -206,7 +206,7 @@ VBaseTextField
 VTextField
 
 - TextField now support native `focusable()` API
-- `VTextFieldHighlight` is removed in favor of custom `VTextFieldModel`'s
+- `VTextFieldHighlight` is removed in favor of custom `VTextFieldModel`s
 - TextField Height is changed from `50` to `45`
 - TextField corner radius is changed from `10` to `12`
 - Placeholder font is changed to `system` size `16`
@@ -312,8 +312,8 @@ VText
 
 Other
 
-- `StateColors`'s and `StateOpacities`'s are replaced with`GenericStateModel`'s
-- `LayoutGroup`'s is renamed to `EdgeInsets`'s
+- `StateColors`s and `StateOpacities`s are replaced with`GenericStateModel`s
+- `LayoutGroup`s are renamed to `EdgeInsets`s
 - `VPickableItem` is renamed to `PickableEnumeration`
 
 ### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.6.0) — *2022 01 07*

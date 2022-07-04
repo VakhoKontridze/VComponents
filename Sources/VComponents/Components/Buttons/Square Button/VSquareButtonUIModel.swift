@@ -42,7 +42,7 @@ public struct VSquareButtonUIModel {
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Label margins. Defaults to `3`'s.
+        /// Label margins. Defaults to `3`s.
         public var labelMargins: LabelMargins = .init(3)
         
         /// Icon size. Defaults to `20` by `20`.
@@ -84,7 +84,7 @@ public struct VSquareButtonUIModel {
         
         /// Icon opacities.
         ///
-        /// Can be used for bitmap images. Defaults to `1`'s.
+        /// Can be used for bitmap images. Defaults to `1`s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
         /// Custom label opacities.
