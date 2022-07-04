@@ -65,7 +65,7 @@ public struct VDisclosureGroupUIModel {
             vertical: 0
         )
         
-        /// Content margins. Defaults to `15`'s.
+        /// Content margins. Defaults to `15`s.
         public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
         
         // MARK: Initializers

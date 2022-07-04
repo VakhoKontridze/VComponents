@@ -76,7 +76,7 @@ public struct VModalUIModel {
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: Margins = .zero
         
-        /// Content margins. Defaults to `15`'s.
+        /// Content margins. Defaults to `15`s.
         public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
         
         /// Edges ignored by keyboard. Defaults to `[]`.

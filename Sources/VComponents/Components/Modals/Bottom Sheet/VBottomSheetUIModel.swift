@@ -91,7 +91,7 @@ public struct VBottomSheetUIModel {
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: Margins = modalReference.layout.dividerMargins
         
-        /// Content margins. Defaults to `15`'s.
+        /// Content margins. Defaults to `15`s.
         public var contentMargins: Margins = modalReference.layout.contentMargins
         
         /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.
