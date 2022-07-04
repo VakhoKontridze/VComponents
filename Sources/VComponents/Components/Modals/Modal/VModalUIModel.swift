@@ -92,7 +92,7 @@ public struct VModalUIModel {
 
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
-        public typealias Margins = EdgeInsets_LTTB
+        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
     // MARK: Colors

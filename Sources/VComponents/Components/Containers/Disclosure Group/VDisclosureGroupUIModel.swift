@@ -74,7 +74,7 @@ public struct VDisclosureGroupUIModel {
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
-        public typealias Margins = EdgeInsets_LTTB
+        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
     // MARK: Colors

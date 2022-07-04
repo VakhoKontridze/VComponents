@@ -67,7 +67,7 @@ public struct VPrimaryButtonUIModel {
         
         // MARK: Label Margin
         /// Sub-model containing `horizontal` and `vertical` margins.
-        public typealias LabelMargins = EdgeInsets_HV
+        public typealias LabelMargins = EdgeInsets_HorizontalVertical
     }
 
     // MARK: Colors

@@ -1,5 +1,11 @@
 # Change Log
 
+### 2.3.3(25)
+
+Models
+
+- `EdgeInsets`'s are renamed to full names from `VCore`
+
 ### [2.3.2(24)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.2) — *2022 07 04*
 
 Other

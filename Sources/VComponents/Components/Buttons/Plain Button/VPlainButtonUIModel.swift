@@ -50,7 +50,7 @@ public struct VPlainButtonUIModel {
         
         // MARK: Hit Box
         /// Sub-model containing `horizontal` and `vertical` hit boxes.
-        public typealias HitBox = EdgeInsets_HV
+        public typealias HitBox = EdgeInsets_HorizontalVertical
     }
 
     // MARK: Colors
