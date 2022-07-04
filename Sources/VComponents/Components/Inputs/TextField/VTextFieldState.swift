@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Text Field Internal State
-typealias VTextFieldInternalState = GenericState_EFD
+typealias VTextFieldInternalState = GenericState_EnabledFocusedDisabled
 
 // MARK: - V Text Field Button Internal State
-typealias VTextFieldButtonInternalState = GenericState_EPFD
+typealias VTextFieldButtonInternalState = GenericState_EnabledPressedFocusedDisabled

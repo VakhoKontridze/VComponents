@@ -113,11 +113,11 @@ public struct VToggleUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_OOPD<Color>
+        public typealias StateColors = GenericStateModel_OffOnPressedDisabled<Color>
 
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_OOPD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_OffOnPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

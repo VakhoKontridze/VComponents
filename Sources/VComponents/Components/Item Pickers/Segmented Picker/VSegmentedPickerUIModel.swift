@@ -148,14 +148,14 @@ public struct VSegmentedPickerUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_ED<Color>
+        public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
         /// Sub-model containing colors for component states.
-        public typealias RowStateColors = GenericStateModel_EPD<Color>
+        public typealias RowStateColors = GenericStateModel_EnabledPressedDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias RowStateOpacities = GenericStateModel_EPD<CGFloat>
+        public typealias RowStateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

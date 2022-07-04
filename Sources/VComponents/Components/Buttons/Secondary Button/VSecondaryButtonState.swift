@@ -9,4 +9,4 @@ import SwiftUI
 import VCore
 
 // MARK: - V Secondary Button Internal State
-typealias VSecondaryButtonInternalState = GenericState_EPD
+typealias VSecondaryButtonInternalState = GenericState_EnabledPressedDisabled

@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Disclosure Group State
 /// Enumeration that represents state, such as `collapsed` or `expanded`.
-public typealias VDisclosureGroupState = GenericState_CE
+public typealias VDisclosureGroupState = GenericState_CollapsedExpanded
 
 // MARK: - V Disclosure Group Internal State
-typealias VDisclosureGroupInternalState = GenericState_CED
+typealias VDisclosureGroupInternalState = GenericState_CollapsedExpandedDisabled

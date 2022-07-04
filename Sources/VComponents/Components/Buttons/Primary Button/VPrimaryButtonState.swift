@@ -9,4 +9,4 @@ import SwiftUI
 import VCore
 
 // MARK: - V Primary Button Internal State
-typealias VPrimaryButtonInternalState = GenericState_EPLD
+typealias VPrimaryButtonInternalState = GenericState_EnabledPressedLoadingDisabled

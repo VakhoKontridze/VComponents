@@ -82,11 +82,11 @@ public struct VWheelPickerUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_ED<Color>
+        public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_ED<CGFloat>
+        public typealias StateOpacities = GenericStateModel_EnabledDisabled<CGFloat>
     }
 
     // MARK: Fonts

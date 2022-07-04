@@ -132,11 +132,11 @@ public struct VCheckBoxUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_OOIPD<Color>
+        public typealias StateColors = GenericStateModel_OffOnIndeterminatePressedDisabled<Color>
 
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_OOIPD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_OffOnIndeterminatePressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

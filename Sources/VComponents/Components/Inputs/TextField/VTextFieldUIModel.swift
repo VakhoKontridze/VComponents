@@ -161,11 +161,11 @@ public struct VTextFieldUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EFD<Color>
+        public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
         
         // MARK: Button State Colors
         /// Sub-model containing colors for component states.
-        public typealias ButtonStateColors = GenericStateModel_EPFD<Color>
+        public typealias ButtonStateColors = GenericStateModel_EnabledPressedFocusedDisabled<Color>
     }
 
     // MARK: Fonts

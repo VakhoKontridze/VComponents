@@ -200,7 +200,7 @@ public struct VAlertUIModel {
         public init() {}
         
         /// Sub-model containing colors for button states.
-        public typealias ButtonStateColors = GenericStateModel_EPD<Color>
+        public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -272,8 +272,8 @@ public struct VAlertUIModel {
 }
 
 // MARK: - Helpers
-extension GenericStateModel_EPLD where Value == Color {
-    fileprivate static func alertButton(_ model: GenericStateModel_EPD<Color>) -> Self {
+extension GenericStateModel_EnabledPressedLoadingDisabled where Value == Color {
+    fileprivate static func alertButton(_ model: GenericStateModel_EnabledPressedDisabled<Color>) -> Self {
         self.init(
             enabled: model.enabled,
             pressed: model.pressed,

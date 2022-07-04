@@ -119,11 +119,11 @@ public struct VPrimaryButtonUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPLD<Color>
+        public typealias StateColors = GenericStateModel_EnabledPressedLoadingDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_EPLD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_EnabledPressedLoadingDisabled<CGFloat>
     }
 
     // MARK: Fonts

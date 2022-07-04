@@ -9,4 +9,4 @@ import Foundation
 import VCore
 
 // MARK: - V Menu Internal State
-typealias VMenuInternalState = GenericState_ED
+typealias VMenuInternalState = GenericState_EnabledDisabled

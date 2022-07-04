@@ -55,7 +55,7 @@ public struct VListUIModel {
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
-        public typealias Margins = EdgeInsets_LTTB
+        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
         
         // MARK: Horizontal Margins
         /// Sub-model containing `leading` and `trailing` margins.

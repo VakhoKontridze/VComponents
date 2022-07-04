@@ -119,15 +119,15 @@ public struct VDisclosureGroupUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_CED<Color>
+        public typealias StateColors = GenericStateModel_CollapsedExpandedDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_CED<CGFloat>
+        public typealias StateOpacities = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
         
         // MARK: Button State Colors
         /// Sub-model containing colors for component states.
-        public typealias ButtonStateColors = GenericStateModel_EPD<Color>
+        public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts

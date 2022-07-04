@@ -266,7 +266,7 @@ public struct VBottomSheetUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPD<Color>
+        public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts

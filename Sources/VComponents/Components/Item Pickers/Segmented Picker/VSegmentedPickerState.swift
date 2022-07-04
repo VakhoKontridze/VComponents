@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Segmented Picker State
-typealias VSegmentedPickerInternalState = GenericState_ED
+typealias VSegmentedPickerInternalState = GenericState_EnabledDisabled
 
 // MARK: - V Segmented Picker Row State
-typealias VSegmentedPickerRowInternalState = GenericState_EPD
+typealias VSegmentedPickerRowInternalState = GenericState_EnabledPressedDisabled

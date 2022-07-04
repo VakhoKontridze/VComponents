@@ -9,4 +9,4 @@ import SwiftUI
 import VCore
 
 // MARK: - V Plain Button Internal State
-typealias VPlainButtonInternalState = GenericState_EPD
+typealias VPlainButtonInternalState = GenericState_EnabledPressedDisabled
