@@ -1,5 +1,11 @@
 # Change Log
 
+### 2.3.4(26)
+
+General
+
+- Bug fixes and improvements
+
 ### [2.3.3(25)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.3) — *2022 07 04*
 
 Models
