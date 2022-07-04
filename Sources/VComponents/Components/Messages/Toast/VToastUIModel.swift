@@ -58,7 +58,7 @@ public struct VToastUIModel {
         
         // MARK: Margins
         /// Sub-model containing `horizontal` and `vertical` margins.
-        public typealias Margins = EdgeInsets_HV
+        public typealias Margins = EdgeInsets_HorizontalVertical
         
         // MARK: Presentation Edge
         /// Enumeration that represents presentation edge, such as `top` or `bottom`.

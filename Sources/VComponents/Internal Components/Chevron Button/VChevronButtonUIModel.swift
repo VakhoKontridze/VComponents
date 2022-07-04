@@ -24,7 +24,7 @@ public struct VChevronButtonUIModel {
         public var hitBox: HitBox = .zero
         
         // MARK: Hit Box
-        public typealias HitBox = EdgeInsets_HV
+        public typealias HitBox = EdgeInsets_HorizontalVertical
     }
 
     // MARK: Colors

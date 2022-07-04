@@ -217,11 +217,11 @@ public struct VBottomSheetUIModel {
         
         // MARK: Margins
         /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
-        public typealias Margins = EdgeInsets_LTTB
+        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
         
         // MARK: Vertical Margins
         /// Sub-model containing `top` and `bottom` margins.
-        public typealias VerticalMargins = EdgeInsets_TB
+        public typealias VerticalMargins = EdgeInsets_TopBottom
     }
 
     // MARK: Colors

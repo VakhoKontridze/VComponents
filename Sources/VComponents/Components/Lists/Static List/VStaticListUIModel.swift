@@ -57,7 +57,7 @@ public struct VStaticListUIModel {
         public typealias Margins = EdgeInsets_LTTB
         
         /// Sub-model containing `leading` and `trailing` margins.
-        public typealias HorizontalMargins = EdgeInsets_LT
+        public typealias HorizontalMargins = EdgeInsets_LeadingTrailing
     }
     
     // MARK: Colors
