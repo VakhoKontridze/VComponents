@@ -74,10 +74,10 @@ public final class PresentationHostViewController: UIViewController {
         windowView.bringSubviewToFront(hostingController.view)
         
         NSLayoutConstraint.activate([
-            hostingController.view.leadingAnchor.constraint(equalTo: windowView.leadingAnchor),
-            hostingController.view.trailingAnchor.constraint(equalTo: windowView.trailingAnchor),
-            hostingController.view.topAnchor.constraint(equalTo: windowView.topAnchor),
-            hostingController.view.bottomAnchor.constraint(equalTo: windowView.bottomAnchor)
+            hostingController.view.constraintLeading(to: windowView),
+            hostingController.view.constraintTrailing(to: windowView),
+            hostingController.view.constraintTop(to: windowView),
+            hostingController.view.constraintBottom(to: windowView)
         ])
     }
     
