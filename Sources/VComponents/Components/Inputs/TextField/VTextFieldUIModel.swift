@@ -214,7 +214,7 @@ public struct VTextFieldUIModel {
         /// Auto correct type. Defaults to `nil`.
         public var autocorrection: Bool? = nil
         
-        /// Auto capitalization type. Defaults to `nik`.
+        /// Auto capitalization type. Defaults to `nil`.
         public var autocapitalization: TextInputAutocapitalization? = nil
          
         /// Submit button type. Defaults to `return`.
