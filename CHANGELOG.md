@@ -30,6 +30,10 @@ VSideBar
 
 - `contentMargins` are changed from `15`s to `zero` in `VSideBarUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 
+VAlert
+
+- Alert now builds actions using `resultBuilder`
+
 VConfirmationDialog
 
 - ConfirmationDialog now builds actions using `resultBuilder`

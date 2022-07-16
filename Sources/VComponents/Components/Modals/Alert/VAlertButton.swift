@@ -5,124 +5,145 @@
 //  Created by Vakhtang Kontridze on 12/26/20.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Alert Button
-/// Model that represents `VAlert` button, such as `primary`, `secondary`, `destructive`, or `cancel`.
-///
-/// `cancel` will be moved to the end of the stack.
-/// If there are multiple `cancel` buttons, only the last one will be kept.
-/// If there are no buttons, an `ok` button will be added.
-public struct VAlertButton {
+/// `VAlert` button.
+public protocol VAlertButton: VAlertButtonConvertible {}
+
+extension VAlertButton {
+    public func toButtons() -> [any VAlertButton] { [self] }
+}
+
+// MARK: - V Alert Primary Button
+/// Primary `VAlert` button.
+public struct VAlertPrimaryButton: VAlertButton {
     // MARK: Properties
-    let _alertButton: _VAlertButton
-    let isEnabled: Bool
-    let action: (() -> Void)?
+    private(set) var isEnabled: Bool = true
+    let action: () -> Void
     let title: String
     
     // MARK: Initializers
-    private init(
-        alertButton: _VAlertButton,
-        isEnabled: Bool,
-        action: (() -> Void)?,
+    /// Initializes `VConfirmationDialog` with action and title.
+    public init(
+        action: @escaping () -> Void,
         title: String
     ) {
-        self._alertButton = alertButton
-        self.isEnabled = isEnabled
         self.action = action
         self.title = title
     }
     
-    /// Primary button.
-    public static func primary(
-        isEnabled: Bool = true,
-        action: @escaping () -> Void,
-        title: String
-    ) -> Self {
-        .init(
-            alertButton: .primary,
-            isEnabled: isEnabled,
-            action: action,
-            title: title
-        )
-    }
-    
-    /// Secondary button.
-    public static func secondary(
-        isEnabled: Bool = true,
-        action: @escaping () -> Void,
-        title: String
-    ) -> Self {
-        .init(
-            alertButton: .secondary,
-            isEnabled: isEnabled,
-            action: action,
-            title: title
-        )
-    }
-    
-    /// Destructive button.
-    public static func destructive(
-        isEnabled: Bool = true,
-        action: @escaping () -> Void,
-        title: String
-    ) -> Self {
-        .init(
-            alertButton: .destructive,
-            isEnabled: isEnabled,
-            action: action,
-            title: title
-        )
-    }
-    
-    /// Cancel button.
-    public static func cancel(
-        isEnabled: Bool = true,
-        action: (() -> Void)? = nil,
-        title: String? = nil
-    ) -> Self {
-        .init(
-            alertButton: .cancel,
-            isEnabled: isEnabled,
-            action: action,
-            title: title ?? VComponentsLocalizationService.shared.localizationProvider.vAlertCancelButtonTitle
-        )
-    }
-    
-    private static func ok() -> Self {
-        .init(
-            alertButton: .ok,
-            isEnabled: true,
-            action: nil,
-            title: VComponentsLocalizationService.shared.localizationProvider.vAlertOKButtonTitle
-        )
-    }
-    
-    // MARK: Processing
-    static func process(_ buttons: [Self]) -> [Self] {
-        var result: [VAlertButton] = .init()
-        
-        for button in buttons {
-            if button._alertButton == .cancel { result.removeAll(where: { $0._alertButton == .cancel }) }
-            result.append(button)
-        }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { $0._alertButton == .cancel }) {
-            result.append(result.remove(at: cancelButtonIndex))
-        }
-        
-        if result.isEmpty {
-            result.append(.ok())
-        }
-        
-        return result
+    // MARK: Alert Button
+    /// Adds a condition that controls whether users can interact with this view.
+    public func disabled(_ disabled: Bool) -> VAlertPrimaryButton {
+        var button = self
+        button.isEnabled = !disabled
+        return button
     }
 }
 
-// MARK: - _ V Alert Button
-enum _VAlertButton {
-    case primary
-    case secondary
-    case destructive
-    case cancel
-    case ok // Not accessible from outside
+// MARK: - V Alert Secondary Button
+/// Secondary `VAlert` button.
+public struct VAlertSecondaryButton: VAlertButton {
+    // MARK: Properties
+    private(set) var isEnabled: Bool = true
+    let action: () -> Void
+    let title: String
+    
+    // MARK: Initializers
+    /// Initializes `VAlertSecondaryButton` with action and title.
+    public init(
+        action: @escaping () -> Void,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+    
+    // MARK: Alert Button
+    /// Adds a condition that controls whether users can interact with this view.
+    public func disabled(_ disabled: Bool) -> VAlertSecondaryButton {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+// MARK: - V Alert Destructive Button
+/// Destructive `VAlert` button.
+public struct VAlertDestructiveButton: VAlertButton {
+    // MARK: Properties
+    private(set) var isEnabled: Bool = true
+    let action: () -> Void
+    let title: String
+    
+    // MARK: Initializers
+    /// Initializes `VAlertDestructiveButton` with action and title.
+    public init(
+        action: @escaping () -> Void,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+    
+    // MARK: Alert Button
+    /// Adds a condition that controls whether users can interact with this view.
+    public func disabled(_ disabled: Bool) -> VAlertDestructiveButton {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+// MARK: - V Alert OK Button
+/// "Ok" `VAlert` button.
+public struct VAlertOKButton: VAlertButton {
+    // MARK: Properties
+    private(set) var isEnabled: Bool = true
+    let action: () -> Void
+    let title: String
+    
+    // MARK: Initializers
+    /// Initializes `VAlertOKButton` with action.
+    public init(
+        action: @escaping () -> Void
+    ) {
+        self.action = action
+        self.title = VComponentsLocalizationService.shared.localizationProvider.vAlertOKButtonTitle
+    }
+    
+    // MARK: Alert Button
+    /// Adds a condition that controls whether users can interact with this view.
+    public func disabled(_ disabled: Bool) -> VAlertOKButton {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+// MARK: - V Alert Cancel Button
+/// Cancel `VAlert` button.
+public struct VAlertCancelButton: VAlertButton {
+    // MARK: Properties
+    private(set) var isEnabled: Bool = true
+    let action: () -> Void
+    let title: String
+    
+    // MARK: Initializers
+    /// Initializes `VAlertCancelButton` with action.
+    public init(
+        action: @escaping () -> Void
+    ) {
+        self.action = action
+        self.title = VComponentsLocalizationService.shared.localizationProvider.vAlertCancelButtonTitle
+    }
+    
+    // MARK: Alert Button
+    /// Adds a condition that controls whether users can interact with this view.
+    public func disabled(_ disabled: Bool) -> VAlertCancelButton {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
 }

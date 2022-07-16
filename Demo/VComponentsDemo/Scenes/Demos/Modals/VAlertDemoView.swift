@@ -44,7 +44,7 @@ struct VAlertDemoView: View {
                 title: title,
                 message: message,
                 content: { VTextField(placeholder: "Name", text: $text) },
-                actions: alertButtons.actions(text: text)
+                actions: { alertButtons.actions(text: text) }
             )
             .onChange(of: isPresented, perform: { value in
                 if !value { text = "" }
@@ -92,29 +92,23 @@ private enum VAlertButtonsHelper: Int, StringRepresentableHashableEnumeration {
         }
     }
     
-    func actions(text: String) -> [VAlertButton] {
+    @VAlertButtonBuilder func actions(text: String) -> [any VAlertButton] {
         switch self {
         case .none:
-            return []
+            [any VAlertButton]()
             
         case .one:
-            return [
-                .primary(isEnabled: !text.isEmpty, action: {}, title: "Option A"),
-            ]
+            VAlertPrimaryButton(action: {}, title: "Option A").disabled(text.isEmpty)
         
         case .two:
-            return [
-                .primary(isEnabled: !text.isEmpty, action: {}, title: "Option A"),
-                .cancel()
-            ]
+            VAlertPrimaryButton(action: {}, title: "Option A").disabled(text.isEmpty)
+            VAlertCancelButton(action: {})
             
         case .many:
-            return [
-                .primary(isEnabled: !text.isEmpty, action: {}, title: "Option A"),
-                .secondary(isEnabled: !text.isEmpty, action: {}, title: "Option B"),
-                .destructive(isEnabled: !text.isEmpty, action: {}, title: "Delete"),
-                .cancel()
-            ]
+            VAlertPrimaryButton(action: {}, title: "Option A").disabled(text.isEmpty)
+            VAlertSecondaryButton(action: {}, title: "Option B").disabled(text.isEmpty)
+            VAlertDestructiveButton(action: {}, title: "Delete").disabled(text.isEmpty)
+            VAlertCancelButton(action: {})
         }
     }
 }

@@ -44,7 +44,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: String?,
         message: String?,
-        actions buttons: [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButton]
     ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
@@ -59,7 +59,7 @@ extension View {
                         title: title,
                         message: message,
                         content: .empty,
-                        buttons: buttons
+                        buttons: buttons()
                     )
                 }
             ))
@@ -104,7 +104,7 @@ extension View {
         title: String?,
         message: String?,
         @ViewBuilder content: @escaping () -> some View,
-        actions buttons: [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButton]
     ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
@@ -119,7 +119,7 @@ extension View {
                         title: title,
                         message: message,
                         content: .custom(content: content),
-                        buttons: buttons
+                        buttons: buttons()
                     )
                 }
             ))
@@ -169,7 +169,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
-        actions buttons: @escaping (Item) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButton]
     ) -> some View
         where Item: Identifiable
     {
@@ -260,7 +260,7 @@ extension View {
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
         @ViewBuilder content: @escaping (Item) -> some View,
-        actions buttons: @escaping (Item) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButton]
     ) -> some View
         where Item: Identifiable
     {
@@ -362,7 +362,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
-        actions buttons: @escaping (T) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButton]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -456,7 +456,7 @@ extension View {
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
         @ViewBuilder content: @escaping (T) -> some View,
-        actions buttons: @escaping (T) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButton]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -549,7 +549,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
-        actions buttons: @escaping (E) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButton]
     ) -> some View
         where E: Error
     {
@@ -637,7 +637,7 @@ extension View {
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
         @ViewBuilder content: @escaping (E) -> some View,
-        actions buttons: @escaping (E) -> [VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButton]
     ) -> some View
         where E: Error
     {

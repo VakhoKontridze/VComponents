@@ -59,7 +59,7 @@ struct VAlert<Content>: View
         self.title = title
         self.message = message
         self.content = content
-        self.buttons = VAlertButton.process(buttons)
+        self.buttons = VAlertButtonBuilder.process(buttons)
     }
 
     // MARK: Body
@@ -199,44 +199,51 @@ struct VAlert<Content>: View
     
     private func buttonView(_ button: VAlertButton) -> some View {
         Group(content: {
-            switch button._alertButton {
-            case .primary:
-                VAlertPrimaryButton(
+            switch button {
+            case let button as VAlertPrimaryButton:
+                VPrimaryButton(
                     uiModel: uiModel.primaryButtonSubUIModel,
+                    isLoading: false,
                     action: { animateOut(completion: button.action) },
                     title: button.title
-                )
+                ).disabled(!button.isEnabled)
                 
-            case .secondary:
-                VAlertSecondaryButton(
+            case let button as VAlertSecondaryButton:
+                VPrimaryButton(
                     uiModel: uiModel.secondaryButtonSubUIModel,
+                    isLoading: false,
                     action: { animateOut(completion: button.action) },
                     title: button.title
-                )
+                ).disabled(!button.isEnabled)
                 
-            case .destructive:
-                VAlertSecondaryButton(
+            case let button as VAlertDestructiveButton:
+                VPrimaryButton(
                     uiModel: uiModel.destructiveButtonSubUIModel,
+                    isLoading: false,
                     action: { animateOut(completion: button.action) },
                     title: button.title
-                )
-            
-            case .cancel:
-                VAlertSecondaryButton(
-                    uiModel: uiModel.secondaryButtonSubUIModel,
-                    action: { animateOut(completion: button.action) },
-                    title: button.title
-                )
+                ).disabled(!button.isEnabled)
                 
-            case .ok:
-                VAlertSecondaryButton(
+            case let button as VAlertOKButton:
+                VPrimaryButton(
                     uiModel: uiModel.secondaryButtonSubUIModel,
+                    isLoading: false,
                     action: { animateOut(completion: button.action) },
                     title: button.title
-                )
+                ).disabled(!button.isEnabled)
+                
+            case let button as VAlertCancelButton:
+                VPrimaryButton(
+                    uiModel: uiModel.secondaryButtonSubUIModel,
+                    isLoading: false,
+                    action: { animateOut(completion: button.action) },
+                    title: button.title
+                ).disabled(!button.isEnabled)
+                
+            default:
+                fatalError()
             }
         })
-            .disabled(!button.isEnabled)
     }
     
     // MARK: Animations
@@ -289,10 +296,10 @@ struct VAlert_Previews: PreviewProvider {
                 content: {
                     VTextField(text: .constant("Lorem ipsum dolor sit amet"))
                 },
-                actions: [
-                    .primary(action: { print("Confirmed") }, title: "Confirm"),
-                    .cancel(action: { print("Cancelled") })
-                ]
+                actions: {
+                    VAlertPrimaryButton(action: {}, title: "Confirm")
+                    VAlertCancelButton(action: {})
+                }
             )
     }
 }
