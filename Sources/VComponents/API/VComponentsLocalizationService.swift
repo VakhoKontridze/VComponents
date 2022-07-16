@@ -26,17 +26,17 @@ public final class VComponentsLocalizationService {
 // MARK: - VComponents Localization Provider
 /// Localization provider in package.
 public protocol VComponentsLocalizationProvider {
-    /// Localized value for `cancel` `VAlertButton`.
-    var vAlertCancelButtonTitle: String { get }
-    
     /// Localized value for `ok` `VAlertButton`.
     var vAlertOKButtonTitle: String { get }
     
-    /// Localized value for `cancel` `VConfirmationDialogButton`.
-    var vConfirmationDialogCancelButtonTitle: String { get }
+    /// Localized value for `cancel` `VAlertButton`.
+    var vAlertCancelButtonTitle: String { get }
     
     /// Localized value for `ok` `VConfirmationDialogButton`.
     var vConfirmationDialogOKButtonTitle: String { get }
+    
+    /// Localized value for `cancel` `VConfirmationDialogButton`.
+    var vConfirmationDialogCancelButtonTitle: String { get }
 }
 
 // MARK: - Default VComponents Localization Provider
@@ -47,9 +47,9 @@ public struct DefaultVComponentsLocalizationProvider: VComponentsLocalizationPro
     public init() {}
     
     // MARK: VComponents Localization Provider
-    public var vAlertCancelButtonTitle: String { "Cancel" }
     public var vAlertOKButtonTitle: String { "Ok" }
+    public var vAlertCancelButtonTitle: String { "Cancel" }
     
-    public var vConfirmationDialogCancelButtonTitle: String { "Cancel" }
     public var vConfirmationDialogOKButtonTitle: String { "Ok" }
+    public var vConfirmationDialogCancelButtonTitle: String { "Cancel" }
 }
