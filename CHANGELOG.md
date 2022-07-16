@@ -30,10 +30,14 @@ VSideBar
 
 - `contentMargins` are changed from `15`s to `zero` in `VSideBarUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 
+VConfirmationDialog
+
+- ConfirmationDialog now builds actions using `resultBuilder`
+
 VMenu
 
 - Menu now support multiple section
-- Menu now builds sections and rows using `resultBuilder`s
+- Menu now builds sections and rows using `resultBuilder`
 - Menu now supports picker section, transferred from `VMenuPicker`
 
 Other

@@ -28,12 +28,12 @@ extension View {
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///                 actions: [
-    ///                     .standard(action: {}, title: "Option A"),
-    ///                     .standard(action: {}, title: "Option B"),
-    ///                     .destructive(action: {}, title: "Delete"),
-    ///                     .cancel(title: "Cancel")
-    ///                 ]
+    ///                 actions: {
+    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
+    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
+    ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
+    ///                     VConfirmationDialogOKButton()
+    ///                 }
     ///             )
     ///     }
     ///
@@ -41,9 +41,9 @@ extension View {
         isPresented: Binding<Bool>,
         title: String?,
         message: String?,
-        actions buttons: [VConfirmationDialogButton]
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButton]
     ) -> some View {
-        let buttons: [VConfirmationDialogButton] = VConfirmationDialogButton.process(buttons)
+        let buttons: [any VConfirmationDialogButton] = buttons()
         
         return self
             .confirmationDialog(
@@ -52,7 +52,7 @@ extension View {
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: {
                     ForEach(buttons.indices, id: \.self, content: { i in
-                        buttons[i].swiftUIButton
+                        buttons[i].body
                     })
                 },
                 message: {
@@ -89,12 +89,12 @@ extension View {
     ///                 item: $confirmationDialogItem,
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///                 actions: [
-    ///                     .standard(action: {}, title: "Option A"),
-    ///                     .standard(action: {}, title: "Option B"),
-    ///                     .destructive(action: {}, title: "Delete"),
-    ///                     .cancel(title: "Cancel")
-    ///                 ]
+    ///                 actions: {
+    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
+    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
+    ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
+    ///                     VConfirmationDialogOKButton()
+    ///                 }
     ///             )
     ///     }
     ///
@@ -102,11 +102,11 @@ extension View {
         item: Binding<Item?>,
         title: String?,
         message: String?,
-        actions buttons: [VConfirmationDialogButton]
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButton]
     ) -> some View
         where Item: Identifiable
     {
-        let buttons: [VConfirmationDialogButton] = VConfirmationDialogButton.process(buttons)
+        let buttons: [any VConfirmationDialogButton] = buttons()
         
         return self
             .confirmationDialog(
@@ -118,7 +118,7 @@ extension View {
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: {
                     ForEach(buttons.indices, id: \.self, content: { i in
-                        buttons[i].swiftUIButton
+                        buttons[i].body
                     })
                 },
                 message: {
@@ -160,12 +160,12 @@ extension View {
     ///                 presenting: confirmationDialogData,
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///                 actions: [
-    ///                     .standard(action: {}, title: "Option A"),
-    ///                     .standard(action: {}, title: "Option B"),
-    ///                     .destructive(action: {}, title: "Delete"),
-    ///                     .cancel(title: "Cancel")
-    ///                 ]
+    ///                 actions: {
+    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
+    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
+    ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
+    ///                     VConfirmationDialogOKButton()
+    ///                 }
     ///             )
     ///     }
     ///
@@ -174,9 +174,9 @@ extension View {
         presenting data: T?,
         title: String?,
         message: String?,
-        actions buttons: [VConfirmationDialogButton]
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButton]
     ) -> some View {
-        let buttons: [VConfirmationDialogButton] = VConfirmationDialogButton.process(buttons)
+        let buttons: [any VConfirmationDialogButton] = buttons()
         
         return self
             .confirmationDialog(
@@ -188,7 +188,7 @@ extension View {
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: {
                     ForEach(buttons.indices, id: \.self, content: { i in
-                        buttons[i].swiftUIButton
+                        buttons[i].body
                     })
                 },
                 message: {
