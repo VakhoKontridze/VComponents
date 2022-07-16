@@ -67,3 +67,59 @@ public struct VConfirmationDialogTitleButton: VConfirmationDialogButton {
         )
     }
 }
+
+// MARK: - V Confirmation Dialog OK Button
+/// `VConfirmationDialog` button with "ok" title.
+public struct VConfirmationDialogOKButton: VConfirmationDialogButton {
+    // MARK: Properties
+    public var isEnabled: Bool = true
+    private let action: () -> Void
+    
+    // MARK: Initializers
+    /// Initializes `VConfirmationDialog` with action.
+    public init(
+        action: @escaping () -> Void
+    ) {
+        self.action = action
+    }
+    
+    // MARK: Row Section
+    public var body: AnyView {
+        .init(
+            Button(
+                VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogOKButtonTitle,
+                role: nil,
+                action: action
+            )
+                .disabled(!isEnabled)
+        )
+    }
+}
+
+// MARK: - V Confirmation Dialog Cancel Button
+/// `VConfirmationDialog` button with "cancel" title.
+public struct VConfirmationDialogCancelButton: VConfirmationDialogButton {
+    // MARK: Properties
+    public var isEnabled: Bool = true
+    private let action: () -> Void
+    
+    // MARK: Initializers
+    /// Initializes `VConfirmationDialog` with action.
+    public init(
+        action: @escaping () -> Void
+    ) {
+        self.action = action
+    }
+    
+    // MARK: Row Section
+    public var body: AnyView {
+        .init(
+            Button(
+                VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogCancelButtonTitle,
+                role: .cancel,
+                action: action
+            )
+                .disabled(!isEnabled)
+        )
+    }
+}

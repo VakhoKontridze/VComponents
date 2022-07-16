@@ -34,7 +34,7 @@ struct VConfirmationDialogDemoView: View {
                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
-                    VConfirmationDialogTitleButton(action: {}, title: "Ok")
+                    VConfirmationDialogCancelButton(action: {})
                 }
             )
     }

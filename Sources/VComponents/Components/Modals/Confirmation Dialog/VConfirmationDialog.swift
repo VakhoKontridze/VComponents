@@ -32,7 +32,7 @@ extension View {
     ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
     ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
     ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
-    ///                     VConfirmationDialogOKButton()
+    ///                     VConfirmationDialogCancelButton(action: {})
     ///                 }
     ///             )
     ///     }
@@ -93,7 +93,7 @@ extension View {
     ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
     ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
     ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
-    ///                     VConfirmationDialogOKButton()
+    ///                     VConfirmationDialogCancelButton(action: {})
     ///                 }
     ///             )
     ///     }
@@ -164,7 +164,7 @@ extension View {
     ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
     ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
     ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
-    ///                     VConfirmationDialogOKButton()
+    ///                     VConfirmationDialogCancelButton(action: {})
     ///                 }
     ///             )
     ///     }
