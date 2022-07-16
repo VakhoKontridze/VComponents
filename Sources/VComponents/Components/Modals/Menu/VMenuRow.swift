@@ -8,12 +8,12 @@
 import SwiftUI
 
 // MARK: - V Menu Row
-/// Single row in `VMenu`.
+/// `VMenu` row.
 public protocol VMenuRow: VMenuRowConvertible {
-    /// Row body type.
+    /// Body type.
     typealias Body = AnyView
     
-    /// Row body.
+    /// Body.
     var body: Body { get }
 }
 
@@ -22,7 +22,7 @@ extension VMenuRow {
 }
 
 // MARK: - V Menu Title Row
-/// SIngle row in `VMenu` with title.
+/// `VMenu` row with title.
 public struct VMenuTitleRow: VMenuRow {
     // MARK: Properties
     private let action: () -> Void
@@ -54,7 +54,7 @@ public struct VMenuTitleRow: VMenuRow {
 }
 
 // MARK: - V Menu Title Icon Row
-/// SIngle row in `VMenu` with title and icon.
+/// `VMenu` row with title and icon.
 public struct VMenuTitleIconRow: VMenuRow {
     // MARK: Properties
     private let action: () -> Void
@@ -119,7 +119,7 @@ public struct VMenuTitleIconRow: VMenuRow {
 }
 
 // MARK: - V Menu Sub Menu Row
-/// Single row in `VMenu` with submenu.
+/// `VMenu` row with submenu.
 public struct VMenuSubMenuRow: VMenuRow {
     // MARK: Properties
     private let title: String
