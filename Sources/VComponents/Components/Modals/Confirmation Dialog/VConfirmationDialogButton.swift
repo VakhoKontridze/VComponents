@@ -52,7 +52,7 @@ public struct VConfirmationDialogButton: VConfirmationDialogButtonProtocol {
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var row = self
         row.isEnabled = !disabled
@@ -81,7 +81,7 @@ public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var row = self
         row.isEnabled = !disabled
@@ -132,7 +132,7 @@ public struct VConfirmationDialogDestructiveButton: VConfirmationDialogButtonPro
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var row = self
         row.isEnabled = !disabled
@@ -173,7 +173,7 @@ public struct VConfirmationDialogCancelButton: VConfirmationDialogButtonProtocol
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var row = self
         row.isEnabled = !disabled

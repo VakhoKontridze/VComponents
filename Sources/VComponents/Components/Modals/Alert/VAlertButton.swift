@@ -59,7 +59,7 @@ public struct VAlertPrimaryButton: VAlertButtonProtocol {
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
@@ -102,7 +102,7 @@ public struct VAlertSecondaryButton: VAlertButtonProtocol {
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
@@ -147,7 +147,7 @@ public struct VAlertOKButton: VAlertButtonProtocol {
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
@@ -190,7 +190,7 @@ public struct VAlertDestructiveButton: VAlertButtonProtocol {
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
@@ -235,7 +235,7 @@ public struct VAlertCancelButton: VAlertButtonProtocol {
     }
     
     // MARK: Modifiers
-    /// Adds a condition that controls whether users can interact with this view.
+    /// Adds a condition that controls whether users can interact with the button.
     public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
