@@ -165,9 +165,9 @@ struct VAlert<Content>: View
                 buttonsContent()
             
             case 2:
-                HStack(  // Cancel button is last
+                HStack(
                     spacing: uiModel.layout.horizontalButtonSpacing,
-                    content: { buttonsContent(reverseOrder: true) }
+                    content: { buttonsContent(reverseOrder: true) } // Cancel button is last
                 )
             
             case 3...:
@@ -185,12 +185,7 @@ struct VAlert<Content>: View
     }
     
     private func buttonsContent(reverseOrder: Bool = false) -> some View {
-        let buttons: [any VAlertButtonProtocol] = {
-            switch reverseOrder {
-            case false: return self.buttons
-            case true: return self.buttons.reversed()
-            }
-        }()
+        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reverseOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
             buttons[i].body(
@@ -255,5 +250,16 @@ struct VAlert_Previews: PreviewProvider {
                     VAlertCancelButton(action: nil)
                 }
             )
+    }
+}
+
+// MARK: - Helpers
+extension Array {
+    fileprivate func reversed(if condition: Bool) -> [Element] {
+        if condition {
+            return self.reversed()
+        } else {
+            return self
+        }
     }
 }
