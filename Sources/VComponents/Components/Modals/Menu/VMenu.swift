@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import VCore
 
 // MARK: - V Menu
 /// Modal component that presents menu of actions.
@@ -112,17 +111,20 @@ public struct VMenu<Label>: View where Label: View {
 
     // MARK: Body
     public var body: some View {
-        Menu(
-            content: contentView,
-            label: menuLabel,
-            primaryAction: { primaryAction?() }
-        )
-            .disabled(!internalState.isEnabled)
+        if #available(iOS 16.0, *) { // FIXME: Remove availability check
+            Menu(
+                content: contentView,
+                label: menuLabel,
+                primaryAction: { primaryAction?() }
+            )
+                .disabled(!internalState.isEnabled)
+                .menuOrder(.fixed)
+        }
     }
     
     private func contentView() -> some View {
         ForEach(
-            sections().enumeratedArray().reversed(),
+            sections().enumeratedArray(),
             id: \.offset,
             content: { (_, section) in
                 TitledSection(
@@ -145,6 +147,8 @@ public struct VMenu<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+import VCore
+
 struct VMenu_Previews: PreviewProvider {
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue

@@ -47,7 +47,7 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
     public var body: AnyView {
         .init(
             ForEach(
-                rows().enumeratedArray().reversed(),
+                rows().enumeratedArray(),
                 id: \.offset,
                 content: { (_, row) in row.body }
             )
@@ -93,7 +93,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.title = title
         self._selectedIndex = selectedIndex
         self.data = rowTitles
-        self.content = { VMenuTitleRow(action: {}, title: $0) } // FIXME: ???
+        self.content = { VMenuTitleRow(action: {}, title: $0) }
     }
     
     /// Initializes `VMenuPickerSection` with `HashableEnumeration` and content.
@@ -130,7 +130,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.data = Array(T.allCases)
-        self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) } // FIXME: ???
+        self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
     }
     
     // MARK: Body
@@ -142,7 +142,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
                 selection: $selectedIndex,
                 content: {
                     ForEach(
-                        data.enumeratedArray().reversed(),
+                        data.enumeratedArray(),
                         id: \.offset,
                         content: { (i, element) in
                             content(element).body

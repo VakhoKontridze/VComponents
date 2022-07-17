@@ -44,6 +44,12 @@ VMenu
 - Menu now builds sections and rows using `resultBuilder`
 - Menu now supports picker section, transferred from `VMenuPicker`
 
+VContextMenu
+
+- ContextMenu now support multiple section
+- ContextMenu now builds sections and rows using `resultBuilder`
+- ContextMenu now supports picker section, transferred from `VMenuPicker`
+
 Other
 
 - `PickableEnumeration` is renamed to `HashableEnumeration`
