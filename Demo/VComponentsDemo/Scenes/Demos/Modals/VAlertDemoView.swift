@@ -92,10 +92,10 @@ private enum VAlertButtonsHelper: Int, StringRepresentableHashableEnumeration {
         }
     }
     
-    @VAlertButtonBuilder func actions(text: String) -> [any VAlertButton] {
+    @VAlertButtonBuilder func actions(text: String) -> [any VAlertButtonProtocol] {
         switch self {
         case .none:
-            [any VAlertButton]()
+            [any VAlertButtonProtocol]()
             
         case .one:
             VAlertPrimaryButton(action: {}, title: "Option A").disabled(text.isEmpty)

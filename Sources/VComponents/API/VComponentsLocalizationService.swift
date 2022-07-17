@@ -26,16 +26,16 @@ public final class VComponentsLocalizationService {
 // MARK: - VComponents Localization Provider
 /// Localization provider in package.
 public protocol VComponentsLocalizationProvider {
-    /// Localized value for `ok` `VAlertButton`.
+    /// Localized value for `VAlertOKButton`.
     var vAlertOKButtonTitle: String { get }
     
-    /// Localized value for `cancel` `VAlertButton`.
+    /// Localized value for `VAlertCancelButton`.
     var vAlertCancelButtonTitle: String { get }
     
-    /// Localized value for `ok` `VConfirmationDialogButton`.
+    /// Localized value for `VConfirmationDialogOKButton`.
     var vConfirmationDialogOKButtonTitle: String { get }
     
-    /// Localized value for `cancel` `VConfirmationDialogButton`.
+    /// Localized value for `VConfirmationDialogCancelButton`.
     var vConfirmationDialogCancelButtonTitle: String { get }
 }
 

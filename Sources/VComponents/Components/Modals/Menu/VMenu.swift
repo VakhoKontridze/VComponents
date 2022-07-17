@@ -30,19 +30,19 @@ import VCore
 ///     var body: some View {
 ///         VMenu(title: "Lorem Ipsum", sections: {
 ///             VMenuGroupSection(title: "Section 1", rows: {
-///                 VMenuTitleRow(action: {}, title: "One")
-///                 VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+///                 VMenuTitleRow(action: { print("1.1") }, title: "One")
+///                 VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
 ///             })
 ///
 ///             VMenuGroupSection(title: "Section 2", rows: {
-///                 VMenuTitleRow(action: {}, title: "One")
+///                 VMenuTitleRow(action: { print("2.1") }, title: "One")
 ///
-///                 VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+///                 VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
 ///
 ///                 VMenuSubMenuRow(title: "Three...", sections: {
 ///                     VMenuGroupSection(rows: {
-///                         VMenuTitleRow(action: {}, title: "One")
-///                         VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+///                         VMenuTitleRow(action: { print("2.3.1") }, title: "One")
+///                         VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
 ///                     })
 ///                 })
 ///             })
@@ -56,7 +56,7 @@ public struct VMenu<Label>: View where Label: View {
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VMenuInternalState { .init(isEnabled: isEnabled) }
     
-    private let sections: () -> [any VMenuSection]
+    private let sections: () -> [any VMenuSectionProtocol]
     private let primaryAction: (() -> Void)?
     private let label: VMenuLabel<Label>
     
@@ -65,7 +65,7 @@ public struct VMenu<Label>: View where Label: View {
     public init(
         primaryAction: (() -> Void)? = nil,
         @ViewBuilder label: @escaping () -> Label,
-        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSection]
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
     ) {
         self.sections = sections
         self.primaryAction = primaryAction
@@ -76,7 +76,7 @@ public struct VMenu<Label>: View where Label: View {
     public init(
         primaryAction: (() -> Void)? = nil,
         title: String,
-        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSection]
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
     )
         where Label == Never
     {
@@ -90,7 +90,7 @@ public struct VMenu<Label>: View where Label: View {
     public init(
         primaryAction: (() -> Void)? = nil,
         @ViewBuilder label: @escaping () -> Label,
-        @VMenuRowBuilder rows: @escaping () -> [any VMenuRow]
+        @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
     ) {
         self.sections = { [VMenuGroupSection(rows: rows)] }
         self.primaryAction = primaryAction
@@ -101,7 +101,7 @@ public struct VMenu<Label>: View where Label: View {
     public init(
         primaryAction: (() -> Void)? = nil,
         title: String,
-        @VMenuRowBuilder rows: @escaping () -> [any VMenuRow]
+        @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
     )
         where Label == Never
     {
@@ -125,11 +125,10 @@ public struct VMenu<Label>: View where Label: View {
             sections().enumeratedArray().reversed(),
             id: \.offset,
             content: { (_, section) in
-                if let title: String = section.title {
-                    Section(title, content: { section.body })
-                } else {
-                    Section(content: { section.body })
-                }
+                TitledSection(
+                    title: section.title,
+                    content: { section.body }
+                )
             }
         )
     }
@@ -164,19 +163,19 @@ struct VMenu_Previews: PreviewProvider {
     static var previews: some View {
         VMenu(title: "Lorem Ipsum", sections: {
             VMenuGroupSection(title: "Section 1", rows: {
-                VMenuTitleRow(action: {}, title: "One")
-                VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+                VMenuTitleRow(action: { print("1.1") }, title: "One")
+                VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
             })
             
             VMenuGroupSection(title: "Section 2", rows: {
-                VMenuTitleRow(action: {}, title: "One")
+                VMenuTitleRow(action: { print("2.1") }, title: "One")
                 
-                VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+                VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
                 
                 VMenuSubMenuRow(title: "Three...", sections: {
                     VMenuGroupSection(rows: {
-                        VMenuTitleRow(action: {}, title: "One")
-                        VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+                        VMenuTitleRow(action: { print("2.3.1") }, title: "One")
+                        VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
                     })
                 })
             })

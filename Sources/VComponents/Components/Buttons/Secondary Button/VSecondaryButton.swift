@@ -144,7 +144,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
 struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
         VSecondaryButton(
-            action: {},
+            action: { print("Clicked") },
             title: "Lorem Ipsum"
         )
             .padding()

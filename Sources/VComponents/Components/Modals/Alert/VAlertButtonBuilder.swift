@@ -8,14 +8,14 @@
 import Foundation
 
 // MARK: - V Alert Button Convertible
-/// Type that allows for conversion to `VAlertButton`.
+/// Type that allows for conversion to `VAlertButtonProtocol`.
 public protocol VAlertButtonConvertible {
-    /// Converts `VAlertButtonConvertible` to `VAlertButton` `Array`.
-    func toButtons() -> [any VAlertButton]
+    /// Converts `VAlertButtonConvertible` to `VAlertButtonProtocol` `Array`.
+    func toButtons() -> [any VAlertButtonProtocol]
 }
 
-extension Array: VAlertButtonConvertible where Element == VAlertButton {
-    public func toButtons() -> [any VAlertButton] { self }
+extension Array: VAlertButtonConvertible where Element == VAlertButtonProtocol {
+    public func toButtons() -> [any VAlertButtonProtocol] { self }
 }
 
 // MARK: - V Alert Button Builder
@@ -23,7 +23,7 @@ extension Array: VAlertButtonConvertible where Element == VAlertButton {
 @resultBuilder public struct VAlertButtonBuilder {
     // MARK: Properties
     public typealias Component = any VAlertButtonConvertible
-    public typealias Result = [any VAlertButton]
+    public typealias Result = [any VAlertButtonProtocol]
     
     // MARK: Build Blocks
     public static func buildBlock() -> Result {
@@ -59,11 +59,11 @@ extension Array: VAlertButtonConvertible where Element == VAlertButton {
     }
     
     // MARK: Processing
-    // `VAlertCancelButton` will be moved to the end of the stack.
     // If there are multiple `VAlertCancelButton`s, only the last one will be kept.
-    // If there are no buttons, an `VAlertOKButton` will be added.
-    static func process(_ buttons: [any VAlertButton]) -> [any VAlertButton] {
-        var result: [VAlertButton] = .init()
+    // `VAlertCancelButton` will be moved to the end of the stack.
+    // If there are no buttons, `VAlertOKButton` will be added.
+    static func process(_ buttons: [any VAlertButtonProtocol]) -> [any VAlertButtonProtocol] {
+        var result: [any VAlertButtonProtocol] = []
 
         for button in buttons {
             if button is VAlertCancelButton { result.removeAll(where: { $0 is VAlertCancelButton }) }
@@ -74,7 +74,7 @@ extension Array: VAlertButtonConvertible where Element == VAlertButton {
         }
 
         if result.isEmpty {
-            result.append(VAlertOKButton(action: {}))
+            result.append(VAlertOKButton(action: nil))
         }
 
         return result

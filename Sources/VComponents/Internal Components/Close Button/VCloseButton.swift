@@ -25,7 +25,7 @@ extension VSquareButton where Label == Never {
 struct VCloseButton_Previews: PreviewProvider {
     static var previews: some View {
         VSquareButton.close(
-            action: {}
+            action: { print("Clicked") }
         )
     }
 }

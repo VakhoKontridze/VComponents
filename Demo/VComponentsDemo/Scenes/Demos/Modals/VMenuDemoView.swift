@@ -38,7 +38,7 @@ struct VMenuDemoView: View {
         )
     }
     
-    @VMenuSectionBuilder private func sections() -> [any VMenuSection] {
+    @VMenuSectionBuilder private func sections() -> [any VMenuSectionProtocol] {
         VMenuGroupSection(title: "Section 1", rows: {
             VMenuTitleRow(action: {}, title: "One")
             VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")

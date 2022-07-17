@@ -30,10 +30,10 @@ extension View {
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
-    ///                 actions: [
-    ///                     .primary(action: { print("Confirmed") }, title: "Confirm"),
-    ///                     .cancel(action: { print("Cancelled") })
-    ///                 ]
+    ///                 actions: {
+    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                     VAlertCancelButton(action: { print("Cancelled") })
+    ///                 }
     ///             )
     ///     }
     ///
@@ -44,7 +44,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: String?,
         message: String?,
-        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
@@ -89,10 +89,12 @@ extension View {
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
     ///                 content: { VTextField(text: $text) },
-    ///                 actions: [
-    ///                     .primary(isEnabled: !text.isEmpty, action: { print("Confirmed") }, title: "Confirm"),
-    ///                     .cancel(action: { print("Cancelled") })
-    ///                 ]
+    ///                 actions: {
+    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                         .disabled(text.isEmpty)
+    ///
+    ///                     VAlertCancelButton(action: { print("Cancelled") })
+    ///                 }
     ///             )
     ///     }
     ///
@@ -104,7 +106,7 @@ extension View {
         title: String?,
         message: String?,
         @ViewBuilder content: @escaping () -> some View,
-        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
             .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
@@ -154,10 +156,8 @@ extension View {
     ///                 title: { item in "Lorem Ipsum" },
     ///                 message: { item in "Lorem ipsum dolor sit amet" },
     ///                 actions: { item in
-    ///                     [
-    ///                         .primary(action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
+    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                     VAlertCancelButton(action: { print("Cancelled") })
     ///                 }
     ///             )
     ///     }
@@ -169,7 +169,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
-        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View
         where Item: Identifiable
     {
@@ -244,10 +244,10 @@ extension View {
     ///                 message: { item in "Lorem ipsum dolor sit amet" },
     ///                 content: { item in VTextField(text: $text) },
     ///                 actions: { item in
-    ///                     [
-    ///                         .primary(isEnabled: !text.isEmpty, action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
+    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                         .disabled(text.isEmpty)
+    ///
+    ///                     VAlertCancelButton(action: { print("Cancelled") })
     ///                 }
     ///             )
     ///     }
@@ -260,7 +260,7 @@ extension View {
         title: @escaping (Item) -> String?,
         message: @escaping (Item) -> String?,
         @ViewBuilder content: @escaping (Item) -> some View,
-        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (Item) -> [any VAlertButtonProtocol]
     ) -> some View
         where Item: Identifiable
     {
@@ -346,10 +346,8 @@ extension View {
     ///                 title: { data in "Lorem Ipsum" },
     ///                 message: { data in "Lorem ipsum dolor sit amet" },
     ///                 actions: { data in
-    ///                     [
-    ///                         .primary(action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
+    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                     VAlertCancelButton(action: { print("Cancelled") })
     ///                 }
     ///             )
     ///     }
@@ -362,7 +360,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
-        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -439,10 +437,10 @@ extension View {
     ///                 message: { data in "Lorem ipsum dolor sit amet" },
     ///                 content: { data in VTextField(text: $text) },
     ///                 actions: { data in
-    ///                     [
-    ///                         .primary(isEnabled: !text.isEmpty, action: { print("Confirmed") }, title: "Confirm"),
-    ///                         .cancel(action: { print("Cancelled") })
-    ///                     ]
+    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                         .disabled(text.isEmpty)
+    ///
+    ///                     VAlertCancelButton(action: { print("Cancelled") })
     ///                 }
     ///             )
     ///     }
@@ -456,7 +454,7 @@ extension View {
         title: @escaping (T) -> String?,
         message: @escaping (T) -> String?,
         @ViewBuilder content: @escaping (T) -> some View,
-        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
 
@@ -537,7 +535,7 @@ extension View {
     ///                 presenting: $alertError,
     ///                 title: { error in "Lorem Ipsum" },
     ///                 message: { error in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { error in [] }
+    ///                 actions: { error in }
     ///             )
     ///     }
     ///
@@ -549,7 +547,7 @@ extension View {
         onDismiss dismissHandler: (() -> Void)? = nil,
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
-        @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButtonProtocol]
     ) -> some View
         where E: Error
     {
@@ -624,7 +622,7 @@ extension View {
     ///                 title: { error in "Lorem Ipsum" },
     ///                 message: { error in "Lorem ipsum dolor sit amet" },
     ///                 content: { error in Image("Error") },
-    ///                 actions: { error in [] }
+    ///                 actions: { error in }
     ///             )
     ///     }
     ///
@@ -637,7 +635,7 @@ extension View {
         title: @escaping (E) -> String?,
         message: @escaping (E) -> String?,
         @ViewBuilder content: @escaping (E) -> some View,
-        @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButton]
+        @VAlertButtonBuilder actions buttons: @escaping (E) -> [any VAlertButtonProtocol]
     ) -> some View
         where E: Error
     {

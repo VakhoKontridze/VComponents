@@ -173,7 +173,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
 struct VPrimaryButton_Previews: PreviewProvider {
     static var previews: some View {
         VPrimaryButton(
-            action: {},
+            action: { print("Clicked") },
             title: "Lorem Ipsum"
         )
             .padding()

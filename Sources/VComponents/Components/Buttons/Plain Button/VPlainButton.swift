@@ -145,7 +145,7 @@ public struct VPlainButton<Label>: View where Label: View {
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
         VPlainButton(
-            action: {},
+            action: { print("Clicked") },
             title: "Lorem Ipsum"
         )
             .padding()

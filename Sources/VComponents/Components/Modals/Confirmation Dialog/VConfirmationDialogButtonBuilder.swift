@@ -8,14 +8,14 @@
 import Foundation
 
 // MARK: - V Confirmation Dialog Button Convertible
-/// Type that allows for conversion to `VConfirmationDialogButton`.
+/// Type that allows for conversion to `VConfirmationDialogButtonProtocol`.
 public protocol VConfirmationDialogButtonConvertible {
     /// Converts `VConfirmationDialogButtonConvertible` to `VConfirmationDialogButton` `Array`.
-    func toButtons() -> [any VConfirmationDialogButton]
+    func toButtons() -> [any VConfirmationDialogButtonProtocol]
 }
 
-extension Array: VConfirmationDialogButtonConvertible where Element == VConfirmationDialogButton {
-    public func toButtons() -> [any VConfirmationDialogButton] { self }
+extension Array: VConfirmationDialogButtonConvertible where Element == VConfirmationDialogButtonProtocol {
+    public func toButtons() -> [any VConfirmationDialogButtonProtocol] { self }
 }
 
 // MARK: - V Confirmation Dialog Button Builder
@@ -23,7 +23,7 @@ extension Array: VConfirmationDialogButtonConvertible where Element == VConfirma
 @resultBuilder public struct VConfirmationDialogButtonBuilder {
     // MARK: Properties
     public typealias Component = any VConfirmationDialogButtonConvertible
-    public typealias Result = [any VConfirmationDialogButton]
+    public typealias Result = [any VConfirmationDialogButtonProtocol]
     
     // MARK: Build Blocks
     public static func buildBlock() -> Result {
@@ -56,5 +56,30 @@ extension Array: VConfirmationDialogButtonConvertible where Element == VConfirma
 
     public static func buildFinalResult(_ component: Component) -> Result {
         component.toButtons()
+    }
+    
+    // MARK: Processing
+    // If there are multiple `VConfirmationDialogCancelButton`s, only the last one will be kept.
+    // `VConfirmationDialogCancelButton` will be moved to the end of the stack.
+    // If there are no buttons, custom `VConfirmationDialogOKButton` will be added.
+    static func process(_ buttons: [any VConfirmationDialogButtonProtocol]) -> [any VConfirmationDialogButtonProtocol] {
+        var result: [any VConfirmationDialogButtonProtocol] = []
+
+        for button in buttons {
+            if button is VConfirmationDialogCancelButton { result.removeAll(where: { $0 is VConfirmationDialogCancelButton }) }
+            result.append(button)
+        }
+        if let cancelButtonIndex: Int = result.firstIndex(where: { $0 is VConfirmationDialogCancelButton }) {
+            result.append(result.remove(at: cancelButtonIndex))
+        }
+
+        if result.isEmpty {
+            result.append(VConfirmationDialogCancelButton(
+                action: nil,
+                title: VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogOKButtonTitle
+            ))
+        }
+
+        return result
     }
 }

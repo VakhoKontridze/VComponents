@@ -31,9 +31,9 @@ struct VConfirmationDialogDemoView: View {
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                 actions: {
-                    VConfirmationDialogTitleButton(action: {}, title: "Option A")
-                    VConfirmationDialogTitleButton(action: {}, title: "Option B")
-                    VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
+                    VConfirmationDialogButton(action: {}, title: "Option A")
+                    VConfirmationDialogButton(action: {}, title: "Option B")
+                    VConfirmationDialogDestructiveButton(action: {}, title: "Delete")
                     VConfirmationDialogCancelButton(action: {})
                 }
             )

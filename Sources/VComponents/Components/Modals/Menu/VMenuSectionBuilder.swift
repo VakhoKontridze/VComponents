@@ -8,14 +8,14 @@
 import SwiftUI
 
 // MARK: - V Menu Section Convertible
-/// Type that allows for conversion to `VMenuSection`.
+/// Type that allows for conversion to `VMenuSectionProtocol`.
 public protocol VMenuSectionConvertible {
-    /// Converts `VMenuSectionConvertible` to `VMenuSection` `Array`.
-    func toSections() -> [any VMenuSection]
+    /// Converts `VMenuSectionConvertible` to `VMenuSectionProtocol` `Array`.
+    func toSections() -> [any VMenuSectionProtocol]
 }
 
-extension Array: VMenuSectionConvertible where Element == VMenuSection {
-    public func toSections() -> [any VMenuSection] { self }
+extension Array: VMenuSectionConvertible where Element == VMenuSectionProtocol {
+    public func toSections() -> [any VMenuSectionProtocol] { self }
 }
 
 // MARK: - V Menu Section Builder
@@ -23,7 +23,7 @@ extension Array: VMenuSectionConvertible where Element == VMenuSection {
 @resultBuilder public struct VMenuSectionBuilder {
     // MARK: Properties
     public typealias Component = any VMenuSectionConvertible
-    public typealias Result = [any VMenuSection]
+    public typealias Result = [any VMenuSectionProtocol]
     
     // MARK: Build Blocks
     public static func buildBlock() -> Result {

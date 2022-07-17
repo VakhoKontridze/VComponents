@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - V Menu Row
+// MARK: - V Menu Row Protocol
 /// `VMenu` row.
-public protocol VMenuRow: VMenuRowConvertible {
+public protocol VMenuRowProtocol: VMenuRowConvertible {
     /// Body type.
     typealias Body = AnyView
     
@@ -17,13 +17,13 @@ public protocol VMenuRow: VMenuRowConvertible {
     var body: Body { get }
 }
 
-extension VMenuRow {
-    public func toRows() -> [any VMenuRow] { [self] }
+extension VMenuRowProtocol {
+    public func toRows() -> [any VMenuRowProtocol] { [self] }
 }
 
 // MARK: - V Menu Title Row
 /// `VMenu` row with title.
-public struct VMenuTitleRow: VMenuRow {
+public struct VMenuTitleRow: VMenuRowProtocol {
     // MARK: Properties
     private let action: () -> Void
     private let role: ButtonRole?
@@ -41,7 +41,7 @@ public struct VMenuTitleRow: VMenuRow {
         self.title = title
     }
     
-    // MARK: Row Section
+    // MARK: Body
     public var body: AnyView {
         .init(
             Button(
@@ -55,7 +55,7 @@ public struct VMenuTitleRow: VMenuRow {
 
 // MARK: - V Menu Title Icon Row
 /// `VMenu` row with title and icon.
-public struct VMenuTitleIconRow: VMenuRow {
+public struct VMenuTitleIconRow: VMenuRowProtocol {
     // MARK: Properties
     private let action: () -> Void
     private let role: ButtonRole?
@@ -103,7 +103,7 @@ public struct VMenuTitleIconRow: VMenuRow {
         self.icon = .init(systemName: systemIcon)
     }
     
-    // MARK: Row Section
+    // MARK: Body
     public var body: AnyView {
         .init(
             Button(
@@ -120,25 +120,25 @@ public struct VMenuTitleIconRow: VMenuRow {
 
 // MARK: - V Menu Sub Menu Row
 /// `VMenu` row with submenu.
-public struct VMenuSubMenuRow: VMenuRow {
+public struct VMenuSubMenuRow: VMenuRowProtocol {
     // MARK: Properties
     private let title: String
     private let primaryAction: (() -> Void)?
-    private let sections: () -> [any VMenuSection]
+    private let sections: () -> [any VMenuSectionProtocol]
     
     // MARK: Initializers
     /// Initializes `VMenuPickerSection` title with sections.
     public init(
         title: String,
         primaryAction: (() -> Void)? = nil,
-        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSection]
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
     ) {
         self.title = title
         self.primaryAction = primaryAction
         self.sections = sections
     }
     
-    // MARK: Row Section
+    // MARK: Body
     public var body: AnyView {
         .init(
             VMenu(

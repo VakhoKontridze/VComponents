@@ -7,35 +7,60 @@
 
 import SwiftUI
 
-// MARK: - V Alert Button
-/// `VAlert` button.
-public protocol VAlertButton: VAlertButtonConvertible {}
+// MARK: - V Alert Button Protocol
+/// `VAlert` button protocol.
+public protocol VAlertButtonProtocol: VAlertButtonConvertible {
+    /// Body type.
+    typealias Body = AnyView
+    
+    /// Body.
+    func body(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> Body
+}
 
-extension VAlertButton {
-    public func toButtons() -> [any VAlertButton] { [self] }
+extension VAlertButtonProtocol {
+    public func toButtons() -> [any VAlertButtonProtocol] { [self] }
 }
 
 // MARK: - V Alert Primary Button
 /// Primary `VAlert` button.
-public struct VAlertPrimaryButton: VAlertButton {
+public struct VAlertPrimaryButton: VAlertButtonProtocol {
     // MARK: Properties
-    private(set) var isEnabled: Bool = true
-    let action: () -> Void
-    let title: String
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
     
     // MARK: Initializers
     /// Initializes `VConfirmationDialog` with action and title.
     public init(
-        action: @escaping () -> Void,
+        action: (() -> Void)?,
         title: String
     ) {
         self.action = action
         self.title = title
     }
     
-    // MARK: Alert Button
+    // MARK: Body
+    public func body(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VPrimaryButton(
+                uiModel: uiModel.primaryButtonSubUIModel,
+                isLoading: false,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+                .disabled(!isEnabled)
+        )
+    }
+    
+    // MARK: Modifiers
     /// Adds a condition that controls whether users can interact with this view.
-    public func disabled(_ disabled: Bool) -> VAlertPrimaryButton {
+    public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
         return button
@@ -44,52 +69,41 @@ public struct VAlertPrimaryButton: VAlertButton {
 
 // MARK: - V Alert Secondary Button
 /// Secondary `VAlert` button.
-public struct VAlertSecondaryButton: VAlertButton {
+public struct VAlertSecondaryButton: VAlertButtonProtocol {
     // MARK: Properties
-    private(set) var isEnabled: Bool = true
-    let action: () -> Void
-    let title: String
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
     
     // MARK: Initializers
     /// Initializes `VAlertSecondaryButton` with action and title.
     public init(
-        action: @escaping () -> Void,
+        action: (() -> Void)?,
         title: String
     ) {
         self.action = action
         self.title = title
     }
     
-    // MARK: Alert Button
-    /// Adds a condition that controls whether users can interact with this view.
-    public func disabled(_ disabled: Bool) -> VAlertSecondaryButton {
-        var button = self
-        button.isEnabled = !disabled
-        return button
-    }
-}
-
-// MARK: - V Alert Destructive Button
-/// Destructive `VAlert` button.
-public struct VAlertDestructiveButton: VAlertButton {
-    // MARK: Properties
-    private(set) var isEnabled: Bool = true
-    let action: () -> Void
-    let title: String
-    
-    // MARK: Initializers
-    /// Initializes `VAlertDestructiveButton` with action and title.
-    public init(
-        action: @escaping () -> Void,
-        title: String
-    ) {
-        self.action = action
-        self.title = title
+    // MARK: Body
+    public func body(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VPrimaryButton(
+                uiModel: uiModel.secondaryButtonSubUIModel,
+                isLoading: false,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+                .disabled(!isEnabled)
+        )
     }
     
-    // MARK: Alert Button
+    // MARK: Modifiers
     /// Adds a condition that controls whether users can interact with this view.
-    public func disabled(_ disabled: Bool) -> VAlertDestructiveButton {
+    public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
         return button
@@ -98,24 +112,86 @@ public struct VAlertDestructiveButton: VAlertButton {
 
 // MARK: - V Alert OK Button
 /// "Ok" `VAlert` button.
-public struct VAlertOKButton: VAlertButton {
+public struct VAlertOKButton: VAlertButtonProtocol {
     // MARK: Properties
-    private(set) var isEnabled: Bool = true
-    let action: () -> Void
-    let title: String
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
     
     // MARK: Initializers
     /// Initializes `VAlertOKButton` with action.
+    ///
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
     public init(
-        action: @escaping () -> Void
+        action: (() -> Void)?,
+        title: String? = nil
     ) {
         self.action = action
-        self.title = VComponentsLocalizationService.shared.localizationProvider.vAlertOKButtonTitle
+        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vAlertOKButtonTitle
     }
     
-    // MARK: Alert Button
+    // MARK: Body
+    public func body(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VPrimaryButton(
+                uiModel: uiModel.secondaryButtonSubUIModel,
+                isLoading: false,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+                .disabled(!isEnabled)
+        )
+    }
+    
+    // MARK: Modifiers
     /// Adds a condition that controls whether users can interact with this view.
-    public func disabled(_ disabled: Bool) -> VAlertOKButton {
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
+    }
+}
+
+// MARK: - V Alert Destructive Button
+/// Destructive `VAlert` button.
+public struct VAlertDestructiveButton: VAlertButtonProtocol {
+    // MARK: Properties
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+    
+    // MARK: Initializers
+    /// Initializes `VAlertDestructiveButton` with action and title.
+    public init(
+        action: (() -> Void)?,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+    
+    // MARK: Body
+    public func body(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VPrimaryButton(
+                uiModel: uiModel.destructiveButtonSubUIModel,
+                isLoading: false,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+                .disabled(!isEnabled)
+        )
+    }
+    
+    // MARK: Modifiers
+    /// Adds a condition that controls whether users can interact with this view.
+    public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
         return button
@@ -124,24 +200,43 @@ public struct VAlertOKButton: VAlertButton {
 
 // MARK: - V Alert Cancel Button
 /// Cancel `VAlert` button.
-public struct VAlertCancelButton: VAlertButton {
+public struct VAlertCancelButton: VAlertButtonProtocol {
     // MARK: Properties
-    private(set) var isEnabled: Bool = true
-    let action: () -> Void
-    let title: String
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
     
     // MARK: Initializers
     /// Initializes `VAlertCancelButton` with action.
+    ///
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
     public init(
-        action: @escaping () -> Void
+        action: (() -> Void)?,
+        title: String? = nil
     ) {
         self.action = action
-        self.title = VComponentsLocalizationService.shared.localizationProvider.vAlertCancelButtonTitle
+        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vAlertCancelButtonTitle
     }
     
-    // MARK: Alert Button
+    // MARK: Body
+    public func body(
+        uiModel: VAlertUIModel,
+        animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
+    ) -> AnyView {
+        .init(
+            VPrimaryButton(
+                uiModel: uiModel.secondaryButtonSubUIModel,
+                isLoading: false,
+                action: { animateOut(/*completion: */action) },
+                title: title
+            )
+                .disabled(!isEnabled)
+        )
+    }
+    
+    // MARK: Modifiers
     /// Adds a condition that controls whether users can interact with this view.
-    public func disabled(_ disabled: Bool) -> VAlertCancelButton {
+    public func disabled(_ disabled: Bool) -> Self {
         var button = self
         button.isEnabled = !disabled
         return button

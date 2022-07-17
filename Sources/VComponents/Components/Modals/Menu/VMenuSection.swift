@@ -8,40 +8,40 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Menu Section
-/// Container view that you can use to add hierarchy to `VMenuRow`s.
-public protocol VMenuSection: VMenuSectionConvertible {
-    /// Section body type.
-    typealias Body = AnyView
-    
+// MARK: - V Menu Section Protocol
+/// Container view that you can use to add hierarchy to `VMenuRowProtocol`s.
+public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     /// Section title.
     var title: String? { get }
+    
+    /// Section body type.
+    typealias Body = AnyView
     
     /// Section body.
     var body: Body { get }
 }
 
-extension VMenuSection {
-    public func toSections() -> [any VMenuSection] { [self] }
+extension VMenuSectionProtocol {
+    public func toSections() -> [any VMenuSectionProtocol] { [self] }
 }
 
 // MARK: - V Menu Group Section
-/// Grouped container view that you can use to add hierarchy to `VMenuRow`s.
-public struct VMenuGroupSection: VMenuSection {
+/// Grouped container view that you can use to add hierarchy to `VMenuRowProtocol`s.
+public struct VMenuGroupSection: VMenuSectionProtocol {
     // MARK: Properties
-    private let rows: () -> [any VMenuRow]
+    private let rows: () -> [any VMenuRowProtocol]
     
     // MARK: Initializers
     /// Initializes `VMenuGroupSection` with rows.
     public init(
         title: String? = nil,
-        @VMenuRowBuilder rows: @escaping () -> [any VMenuRow]
+        @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
     ) {
         self.title = title
         self.rows = rows
     }
     
-    // MARK: Menu Section
+    // MARK: Body
     public var title: String?
     
     public var body: AnyView {
@@ -56,15 +56,15 @@ public struct VMenuGroupSection: VMenuSection {
 }
 
 // MARK: - V Menu Picker Section
-/// Container view with picker that you can use to add hierarchy to `VMenuRow`s.
-public struct VMenuPickerSection<Data>: VMenuSection
+/// Container view with picker that you can use to add hierarchy to `VMenuRowProtocol`s.
+public struct VMenuPickerSection<Data>: VMenuSectionProtocol
     where
         Data: RandomAccessCollection,
         Data.Index == Int
 {
     // MARK: Properties
     private let data: Data
-    private let content: (Data.Element) -> VMenuRow
+    private let content: (Data.Element) -> VMenuRowProtocol
     
     @Binding private var selectedIndex: Int
     
@@ -74,7 +74,7 @@ public struct VMenuPickerSection<Data>: VMenuSection
         title: String? = nil,
         selectedIndex: Binding<Int>,
         data: Data,
-        content: @escaping (Data.Element) -> VMenuRow
+        content: @escaping (Data.Element) -> VMenuRowProtocol
     ) {
         self.title = title
         self._selectedIndex = selectedIndex
@@ -93,14 +93,14 @@ public struct VMenuPickerSection<Data>: VMenuSection
         self.title = title
         self._selectedIndex = selectedIndex
         self.data = rowTitles
-        self.content = { VMenuTitleRow(action: {}, title: $0) }
+        self.content = { VMenuTitleRow(action: {}, title: $0) } // FIXME: ???
     }
     
     /// Initializes `VMenuPickerSection` with `HashableEnumeration` and content.
     public init<T>(
         title: String? = nil,
         selection: Binding<T>,
-        content: @escaping (T) -> VMenuRow
+        content: @escaping (T) -> VMenuRowProtocol
     )
         where
             T: HashableEnumeration,
@@ -130,10 +130,10 @@ public struct VMenuPickerSection<Data>: VMenuSection
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.data = Array(T.allCases)
-        self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
+        self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) } // FIXME: ???
     }
     
-    // MARK: Menu Section
+    // MARK: Body
     public var title: String?
     
     public var body: AnyView {

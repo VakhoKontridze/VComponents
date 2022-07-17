@@ -135,7 +135,7 @@ public struct VSquareButton<Label>: View where Label: View {
 struct VSquareButton_Previews: PreviewProvider {
     static var previews: some View {
         VSquareButton(
-            action: {},
+            action: { print("Clicked") },
             icon: .init(systemName: "swift")
         )
     }

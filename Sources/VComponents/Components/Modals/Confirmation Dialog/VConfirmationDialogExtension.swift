@@ -29,10 +29,10 @@ extension View {
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     ///                 actions: {
-    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
-    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
-    ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
-    ///                     VConfirmationDialogCancelButton(action: {})
+    ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
+    ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
+    ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
+    ///                     VConfirmationDialogCancelButton(action: nil)
     ///                 }
     ///             )
     ///     }
@@ -41,20 +41,16 @@ extension View {
         isPresented: Binding<Bool>,
         title: String?,
         message: String?,
-        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButton]
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
     ) -> some View {
-        let buttons: [any VConfirmationDialogButton] = buttons()
+        let buttons: [any VConfirmationDialogButtonProtocol] = buttons()
         
         return self
             .confirmationDialog(
                 title ?? "",
                 isPresented: isPresented,
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
-                actions: {
-                    ForEach(buttons.indices, id: \.self, content: { i in
-                        buttons[i].body
-                    })
-                },
+                actions: { VConfirmationDialogContentView(button: buttons) },
                 message: {
                     if let message = message {
                         Text(message)
@@ -90,10 +86,10 @@ extension View {
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     ///                 actions: {
-    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
-    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
-    ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
-    ///                     VConfirmationDialogCancelButton(action: {})
+    ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
+    ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
+    ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
+    ///                     VConfirmationDialogCancelButton(action: nil)
     ///                 }
     ///             )
     ///     }
@@ -102,11 +98,11 @@ extension View {
         item: Binding<Item?>,
         title: String?,
         message: String?,
-        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButton]
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
     ) -> some View
         where Item: Identifiable
     {
-        let buttons: [any VConfirmationDialogButton] = buttons()
+        let buttons: [any VConfirmationDialogButtonProtocol] = buttons()
         
         return self
             .confirmationDialog(
@@ -116,11 +112,7 @@ extension View {
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
-                actions: {
-                    ForEach(buttons.indices, id: \.self, content: { i in
-                        buttons[i].body
-                    })
-                },
+                actions: { VConfirmationDialogContentView(button: buttons) },
                 message: {
                     if let message = message {
                         Text(message)
@@ -161,10 +153,10 @@ extension View {
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
     ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
     ///                 actions: {
-    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option A")
-    ///                     VConfirmationDialogTitleButton(action: {}, title: "Option B")
-    ///                     VConfirmationDialogTitleButton(action: {}, role: .destructive, title: "Delete")
-    ///                     VConfirmationDialogCancelButton(action: {})
+    ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
+    ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
+    ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
+    ///                     VConfirmationDialogCancelButton(action: nil)
     ///                 }
     ///             )
     ///     }
@@ -174,9 +166,9 @@ extension View {
         presenting data: T?,
         title: String?,
         message: String?,
-        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButton]
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
     ) -> some View {
-        let buttons: [any VConfirmationDialogButton] = buttons()
+        let buttons: [any VConfirmationDialogButtonProtocol] = buttons()
         
         return self
             .confirmationDialog(
@@ -186,11 +178,7 @@ extension View {
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
-                actions: {
-                    ForEach(buttons.indices, id: \.self, content: { i in
-                        buttons[i].body
-                    })
-                },
+                actions: { VConfirmationDialogContentView(button: buttons) },
                 message: {
                     if let message = message {
                         Text(message)

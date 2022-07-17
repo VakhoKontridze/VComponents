@@ -28,7 +28,7 @@ struct VChevronButton_Previews: PreviewProvider {
     static var previews: some View {
         VSquareButton.chevron(
             direction: .right,
-            action: {}
+            action: { print("Clicked") }
         )
     }
 }
