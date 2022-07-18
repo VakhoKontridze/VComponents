@@ -29,11 +29,10 @@ struct VContextMenuDemoView: View {
                 sections: sections,
                 preview: {
                     ZStack(content: {
-                        Color.blue
+                        ColorBook.canvas
                             .frame(width: UIScreen.main.bounds.width * 0.9, height: 100)
                         
                         Text("Selection: \(selection.stringRepresentation)")
-                            .foregroundColor(.white)
                     })
                 }
             )

@@ -102,13 +102,13 @@ private enum VAlertButtonsHelper: Int, StringRepresentableHashableEnumeration {
         
         case .two:
             VAlertPrimaryButton(action: {}, title: "Option A").disabled(text.isEmpty)
-            VAlertCancelButton(action: {})
+            VAlertCancelButton(action: nil)
             
         case .many:
             VAlertPrimaryButton(action: {}, title: "Option A").disabled(text.isEmpty)
             VAlertSecondaryButton(action: {}, title: "Option B").disabled(text.isEmpty)
             VAlertDestructiveButton(action: {}, title: "Delete").disabled(text.isEmpty)
-            VAlertCancelButton(action: {})
+            VAlertCancelButton(action: nil)
         }
     }
 }
