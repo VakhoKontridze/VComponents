@@ -51,7 +51,7 @@ VComponents is a SwiftUI package that contains 30+ customizable UI components.
 ## Brand Book
 
 <p>
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/175477100-0f79fc5b-71e3-4553-ac06-9a7ce73531dd.png">
+    <img width="300" src="https://user-images.githubusercontent.com/57289621/180597074-55adf233-a660-4a43-a966-a6fea05508d6.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540197-785e93c8-7026-4b5c-a356-b9506b280989.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/176880284-c70c7348-d4a0-4ceb-8f69-0723d2246390.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/170540203-0c92e02b-c61b-4ec3-acce-df7f8cc75ac8.png">
