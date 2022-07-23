@@ -4,7 +4,7 @@
 
 VPrimaryButton
 
-- Corner radius is changed from `20` to `15`.
+- Corner radius is changed from `20` to `16`.
 
 VNavigationLink
 
