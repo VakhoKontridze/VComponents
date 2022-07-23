@@ -2,6 +2,10 @@
 
 ### 3.0.0(?)
 
+VPrimaryButton
+
+- Corner radius is changed from `20` to `15`.
+
 VNavigationLink
 
 - Button can now be initialized with title

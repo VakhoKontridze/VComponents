@@ -31,8 +31,8 @@ public struct VPrimaryButtonUIModel {
         /// Button height. Defaults to `56`.
         public var height: CGFloat = 56
         
-        /// Button corner radius. Defaults to `20`.
-        public var cornerRadius: CGFloat = 20
+        /// Button corner radius. Defaults to `15`.
+        public var cornerRadius: CGFloat = 15
         
         /// Button border width. Defaults to `0`.
         ///
