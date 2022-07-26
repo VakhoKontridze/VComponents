@@ -57,7 +57,7 @@ VContextMenu
 Other
 
 - `PickableEnumeration` is renamed to `HashableEnumeration`
-- `PickableTitledEnumeration` is renamed to `CustomStringConvertibleHashableEnumeration`
+- `PickableTitledEnumeration` is renamed to `StringRepresentableHashableEnumeration`
 - `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to `VCore`
 - `GenericState`s and `GenericStateModels`s are moved to `VCore`
 - `BasicAnimation` is moved to `VCore`
