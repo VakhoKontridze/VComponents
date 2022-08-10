@@ -270,7 +270,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
-        guard let offsetBeforeDrag = offsetBeforeDrag else { fatalError() }
+        guard let offsetBeforeDrag else { fatalError() }
         
         previousDragValue = currentDragValue
         currentDragValue = dragValue
@@ -309,7 +309,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
         
         switch velocityExceedsNextAreaSnapThreshold {
         case false:
-            guard let offsetBeforeDrag = offsetBeforeDrag else { return }
+            guard let offsetBeforeDrag else { return }
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
                 heights: uiModel.layout.sizes._current.size.heights,

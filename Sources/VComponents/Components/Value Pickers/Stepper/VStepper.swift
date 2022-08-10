@@ -181,7 +181,7 @@ public struct VStepper: View {
         }()
         
         longPressIncrementTimerIncremental = .scheduledTimer(withTimeInterval: interval, repeats: true, block: { timer in
-            if let pressedButton = pressedButton {
+            if let pressedButton {
                 clickGestureHandler(pressedButton)
             } else {
                 zeroLongPressTimers()

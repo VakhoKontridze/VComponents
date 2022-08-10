@@ -41,7 +41,7 @@ struct ToggleSettingView: View {
                     )
                 }
                 
-                if let description = description, !description.isEmpty {
+                if let description, !description.isEmpty {
                     VText(
                         type: .multiLine(alignment: .leading, lineLimit: nil),
                         color: isEnabled ? ColorBook.secondary : ColorBook.secondaryPressedDisabled,

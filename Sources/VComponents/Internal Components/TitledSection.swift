@@ -24,7 +24,7 @@ struct TitledSection<Content>: View where Content: View {
     
     // MARK: Body
     var body: some View {
-        if let title = title {
+        if let title {
             Section(title, content: content)
         } else {
             Section(content: content)

@@ -163,7 +163,7 @@ public struct VCheckBox<Label>: View where Label: View {
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                     .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWith)
 
-                if let checkMarkIcon = checkMarkIcon {
+                if let checkMarkIcon {
                     checkMarkIcon
                         .resizable()
                         .frame(dimension: uiModel.layout.iconDimension)

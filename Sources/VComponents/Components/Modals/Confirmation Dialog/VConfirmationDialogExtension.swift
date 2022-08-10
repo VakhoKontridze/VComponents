@@ -52,7 +52,7 @@ extension View {
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: { VConfirmationDialogContentView(button: buttons) },
                 message: {
-                    if let message = message {
+                    if let message {
                         Text(message)
                     }
                 }
@@ -114,7 +114,7 @@ extension View {
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: { VConfirmationDialogContentView(button: buttons) },
                 message: {
-                    if let message = message {
+                    if let message {
                         Text(message)
                     }
                 }
@@ -180,7 +180,7 @@ extension View {
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
                 actions: { VConfirmationDialogContentView(button: buttons) },
                 message: {
-                    if let message = message {
+                    if let message {
                         Text(message)
                     }
                 }

@@ -237,14 +237,14 @@ extension Double {
     fileprivate func roundedUpWithStep(
         _ step: Double?
     ) -> Double {
-        guard let step = step else { return self }
+        guard let step else { return self }
         return ceil(self / step) * step
     }
     
     fileprivate func roundedDownWithStep(
         _ step: Double?
     ) -> Double {
-        guard let step = step else { return self }
+        guard let step else { return self }
         return floor(self / step) * step
     }
 }

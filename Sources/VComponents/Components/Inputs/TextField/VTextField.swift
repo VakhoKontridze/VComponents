@@ -174,7 +174,7 @@ public struct VTextField: View {
     }
     
     @ViewBuilder private var header: some View {
-        if let headerTitle = headerTitle, !headerTitle.isEmpty {
+        if let headerTitle, !headerTitle.isEmpty {
             VText(
                 type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
                 color: uiModel.colors.header.value(for: internalState),
@@ -186,7 +186,7 @@ public struct VTextField: View {
     }
 
     @ViewBuilder private var footer: some View {
-        if let footerTitle = footerTitle, !footerTitle.isEmpty {
+        if let footerTitle, !footerTitle.isEmpty {
             VText(
                 type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
                 color: uiModel.colors.footer.value(for: internalState),

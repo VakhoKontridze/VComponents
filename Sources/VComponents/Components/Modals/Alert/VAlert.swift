@@ -114,7 +114,7 @@ struct VAlert<Content>: View
     }
 
     @ViewBuilder private var titleView: some View {
-        if let title = title, !title.isEmpty {
+        if let title, !title.isEmpty {
             VText(
                 type: .multiLine(alignment: .center, lineLimit: uiModel.layout.titleLineLimit),
                 color: uiModel.colors.title,
@@ -126,7 +126,7 @@ struct VAlert<Content>: View
     }
 
     @ViewBuilder private var messageView: some View {
-        if let message = message, !message.isEmpty {
+        if let message, !message.isEmpty {
             VText(
                 type: .multiLine(alignment: .center, lineLimit: uiModel.layout.messageLineLimit),
                 color: uiModel.colors.message,
