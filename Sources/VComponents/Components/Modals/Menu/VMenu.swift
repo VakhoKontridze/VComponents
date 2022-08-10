@@ -114,8 +114,8 @@ public struct VMenu<Label>: View where Label: View {
         if #available(iOS 16.0, *) { // FIXME: Remove availability check
             Menu(
                 content: contentView,
-                label: menuLabel,
-                primaryAction: { primaryAction?() }
+                label: menuLabel
+                //primaryAction: { primaryAction?() }  FIXME: Causes issue, research
             )
                 .disabled(!internalState.isEnabled)
                 .menuOrder(.fixed)
