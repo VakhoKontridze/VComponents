@@ -105,3 +105,24 @@ public final class PresentationHostViewController: UIViewController {
         PresentationHostDataSourceCache.shared.remove(key: presentingViewType)
     }
 }
+
+// MARK: - Atomic Integer
+private final class AtomicInteger {
+    private let dispatchSemaphore: DispatchSemaphore = .init(value: 1)
+    
+    private var _value: Int
+    
+    var value: Int {
+        dispatchSemaphore.wait()
+        defer { dispatchSemaphore.signal() }
+        
+        let value = _value
+        _value += 1
+        return value
+    }
+    
+    // MARK: Initializers
+    init(value: Int = 0) {
+        self._value = value
+    }
+}
