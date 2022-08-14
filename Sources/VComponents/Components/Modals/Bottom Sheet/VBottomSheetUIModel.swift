@@ -385,3 +385,39 @@ public struct VBottomSheetUIModel {
         return uiModel
     }
 }
+
+// MARK: - Factory
+extension VBottomSheetUIModel {
+    /// `VBottomSheetUIModel` that can be used for scrollable content.
+    public static var scrollableContent: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.layout.autoresizesContent = true
+        uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+        
+        return uiModel
+    }
+    
+    /// `VBottomSheetUIModel` that can be used when modal has no header.
+    public static var noHeaderLabel: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.misc.dismissType.remove(.leadingButton)
+        uiModel.misc.dismissType.remove(.trailingButton)
+        
+        return uiModel
+    }
+    
+    /// `VBottomSheetUIModel` that can be used for scrollable content.
+    public static var scrollableContentNoHeaderLabel: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.layout.autoresizesContent = true
+        uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+        
+        uiModel.misc.dismissType.remove(.leadingButton)
+        uiModel.misc.dismissType.remove(.trailingButton)
+        
+        return uiModel
+    }
+}

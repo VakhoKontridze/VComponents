@@ -26,14 +26,7 @@ extension View {
     ///         )
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     uiModel.misc.dismissType.remove(.leadingButton)
-    ///                     uiModel.misc.dismissType.remove(.trailingButton)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .scrollableContentNoHeaderLabel,
     ///                 isPresented: $isPresented,
     ///                 content: {
     ///                     VList(
@@ -95,12 +88,7 @@ extension View {
     ///         )
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .scrollableContent,
     ///                 isPresented: $isPresented,
     ///                 headerTitle: "Lorem Ipsum Dolor Sit Amet",
     ///                 content: {
@@ -164,12 +152,7 @@ extension View {
     ///         )
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .scrollableContent,
     ///                 isPresented: $isPresented,
     ///                 headerLabel: {
     ///                     HStack(content: {
@@ -245,14 +228,7 @@ extension View {
     ///         )
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     uiModel.misc.dismissType.remove(.leadingButton)
-    ///                     uiModel.misc.dismissType.remove(.trailingButton)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .scrollableContentNoHeaderLabel,
     ///                 item: $bottomSheetItem,
     ///                 content: { item in
     ///                     VList(
@@ -329,12 +305,7 @@ extension View {
     ///         )
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .scrollableContent,
     ///                 item: $bottomSheetItem,
     ///                 headerTitle: { item in "Lorem Ipsum Dolor Sit Amet" },
     ///                 content: { item in
@@ -419,12 +390,7 @@ extension View {
     ///         )
     ///             .vBottomSheet(
     ///                 id: "some_bottom_sheet",
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .scrollableContent,
     ///                 item: $bottomSheetItem,
     ///                 headerLabel: { item in
     ///                     HStack(content: {

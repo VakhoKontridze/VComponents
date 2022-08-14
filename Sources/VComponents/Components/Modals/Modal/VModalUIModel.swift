@@ -249,3 +249,16 @@ public struct VModalUIModel {
         return uiModel
     }
 }
+
+// MARK: - Factory
+extension VModalUIModel {
+    /// `VModalUIModel` that can be used when modal has no header.
+    public static var noHeaderLabel: VModalUIModel {
+        var uiModel: VModalUIModel = .init()
+        
+        uiModel.misc.dismissType.remove(.leadingButton)
+        uiModel.misc.dismissType.remove(.trailingButton)
+        
+        return uiModel
+    }
+}

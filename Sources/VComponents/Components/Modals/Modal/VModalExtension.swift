@@ -26,12 +26,7 @@ extension View {
     ///         )
     ///             .vModal(
     ///                 id: "some_modal",
-    ///                 uiModel: {
-    ///                     var uiModel: VModalUIModel = .init()
-    ///                     uiModel.misc.dismissType.remove(.leadingButton)
-    ///                     uiModel.misc.dismissType.remove(.trailingButton)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .noHeaderLabel,
     ///                 isPresented: $isPresented,
     ///                 content: {
     ///                     VList(
@@ -231,12 +226,7 @@ extension View {
     ///         )
     ///             .vModal(
     ///                 id: "some_modal",
-    ///                 uiModel: {
-    ///                     var uiModel: VModalUIModel = .init()
-    ///                     uiModel.misc.dismissType.remove(.leadingButton)
-    ///                     uiModel.misc.dismissType.remove(.trailingButton)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 uiModel: .noHeaderLabel,
     ///                 item: $modalItem,
     ///                 content: { item in
     ///                     VList(

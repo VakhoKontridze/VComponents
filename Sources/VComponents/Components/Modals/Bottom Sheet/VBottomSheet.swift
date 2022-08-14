@@ -353,12 +353,7 @@ struct VBottomSheet_Previews: PreviewProvider {
         )
             .vBottomSheet(
                 id: "bottom_sheet_preview",
-                uiModel: {
-                    var uiModel: VBottomSheetUIModel = .init()
-                    uiModel.layout.autoresizesContent = true
-                    uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-                    return uiModel
-                }(),
+                uiModel: .scrollableContent,
                 isPresented: $isPresented,
                 headerTitle: "Lorem Ipsum Dolor Sit Amet",
                 content: {
