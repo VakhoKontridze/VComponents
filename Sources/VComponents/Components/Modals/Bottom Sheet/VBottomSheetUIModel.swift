@@ -102,6 +102,11 @@ public struct VBottomSheetUIModel {
         /// Has no effect on fixed bottom sheet.
         public var autoresizesContent: Bool = false
         
+        /// Edges on which header has safe area edges. Defaults to `[]`.
+        ///
+        /// Can be used for full-sized modal, to prevent header from leaving safe area.
+        public var headerSafeAreaEdges: Edge.Set = []
+        
         /// Edges on which content has safe area edges. Defaults to `[]`.
         ///
         /// `autoresizesContent` must be set to `true` for scrollable content to always have bottom safe area inset.
@@ -362,7 +367,7 @@ public struct VBottomSheetUIModel {
     var sheetModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         
-        uiModel.layout.roundedCorners = [.topLeft, .topRight]
+        uiModel.layout.roundedCorners = .topCorners
         uiModel.layout.cornerRadius = layout.cornerRadius
         uiModel.layout.contentMargin = 0
         

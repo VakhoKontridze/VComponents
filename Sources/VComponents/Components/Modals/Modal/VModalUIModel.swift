@@ -79,6 +79,11 @@ public struct VModalUIModel {
         /// Content margins. Defaults to `zero`.
         public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
         
+        /// Edges on which header has safe area edges. Defaults to `[]`.
+        ///
+        /// Can be used for full-sized modal, to prevent header from leaving safe area.
+        public var headerSafeAreaEdges: Edge.Set = []
+        
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         

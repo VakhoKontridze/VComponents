@@ -31,11 +31,13 @@ VModal
 
 - `contentMargins` are changed from `15`s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 - `VModalUIModel.noHeaderLabel` is added
+- `headerSafeAreaEdges` is added to `VModalUIModel` that can be used for full-sized modal
 
 VBottomSheet
 
 - `contentMargins` are changed from `15`s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 - `VBottomSheetUIModel.scrollableContent`, `VBottomSheetUIModel.noHeaderLabel`, and `VBottomSheetUIModel.scrollableContentNoHeaderLabel` are added
+- `headerSafeAreaEdges` is added to `VBottomSheetUIModel` that can be used for full-sized modal
 
 VSideBar
 
