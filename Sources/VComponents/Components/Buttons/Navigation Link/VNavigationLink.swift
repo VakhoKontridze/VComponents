@@ -49,17 +49,17 @@ public struct VNavigationLink<Destination, Label>: View
     
     @State private var isActiveInternally: Bool = false
     @Binding private var isActiveExternally: Bool
-    private let stateManagament: StateManagement
+    private let stateManagement: StateManagement
     private var isActive: Binding<Bool> {
         .init(
             get: {
-                switch stateManagament {
+                switch stateManagement {
                 case .internal: return isActiveInternally
                 case .external: return isActiveExternally
                 }
             },
             set: { value in
-                switch stateManagament {
+                switch stateManagement {
                 case .internal: isActiveInternally = value
                 case .external: isActiveExternally = value
                 }
@@ -76,10 +76,10 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder destination: @escaping () -> Destination,
         title: String
     )
-        where Label == VPlainButton<Never> // ???
+        where Label == VPlainButton<Never>
     {
         self._isActiveExternally = .constant(false)
-        self.stateManagament = .internal
+        self.stateManagement = .internal
         self.destination = destination
         self.label = .title(title: title)
     }
@@ -90,7 +90,7 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder label: @escaping () -> Label
     ) {
         self._isActiveExternally = .constant(false)
-        self.stateManagament = .internal
+        self.stateManagement = .internal
         self.destination = destination
         self.label = .custom(label: label)
     }
@@ -102,10 +102,10 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder destination: @escaping () -> Destination,
         title: String
     )
-        where Label == VPlainButton<Never> // ???
+        where Label == VPlainButton<Never>
     {
         self._isActiveExternally = isActive
-        self.stateManagament = .external
+        self.stateManagement = .external
         self.destination = destination
         self.label = .title(title: title)
     }
@@ -117,7 +117,7 @@ public struct VNavigationLink<Destination, Label>: View
         @ViewBuilder label: @escaping () -> Label
     ) {
         self._isActiveExternally = isActive
-        self.stateManagament = .external
+        self.stateManagement = .external
         self.destination = destination
         self.label = .custom(label: label)
     }
