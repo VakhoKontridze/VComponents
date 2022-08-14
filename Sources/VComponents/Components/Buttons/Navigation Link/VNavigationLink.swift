@@ -17,7 +17,7 @@ import SwiftUI
 /// `isActive` can be passed as parameter.
 ///
 ///     var body: some View {
-///         NavigationView(content: {
+///         NavigationStack(root: {
 ///             ZStack(content: {
 ///                 ColorBook.canvas.ignoresSafeArea()
 ///
@@ -159,17 +159,19 @@ struct VNavigationLink_Previews: PreviewProvider {
     }
 
     static var previews: some View {
-        NavigationView(content: {
-            ZStack(content: {
-                ColorBook.canvas.ignoresSafeArea()
-
-                VNavigationLink(
-                    destination: { destination },
-                    title: "Lorem Ipsum"
-                )
-            })
+        if #available(iOS 16.0, *) { // FIXME: Remove
+            NavigationStack(root: {
+                ZStack(content: {
+                    ColorBook.canvas.ignoresSafeArea()
+                    
+                    VNavigationLink(
+                        destination: { destination },
+                        title: "Lorem Ipsum"
+                    )
+                })
                 .navigationTitle("Home")
                 .navigationBarTitleDisplayMode(.inline)
-        })
+            })
+        }
     }
 }

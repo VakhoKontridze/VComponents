@@ -15,7 +15,7 @@ extension View {
     ///     @State var isActive: Bool = false
     ///
     ///     var body: some View {
-    ///         NavigationView(content: {
+    ///         NavigationStack(root: {
     ///             ZStack(content: {
     ///                 ColorBook.canvas.ignoresSafeArea()
     ///
