@@ -112,11 +112,20 @@ public struct VMenu<Label>: View where Label: View {
     // MARK: Body
     public var body: some View {
         if #available(iOS 16.0, *) { // FIXME: Remove availability check
-            Menu(
-                content: contentView,
-                label: menuLabel
-                //primaryAction: { primaryAction?() }  FIXME: Causes issue, research
-            )
+            Group(content: {
+                if let primaryAction {
+                    Menu(
+                        content: contentView,
+                        label: menuLabel,
+                        primaryAction: primaryAction
+                    )
+                } else {
+                    Menu(
+                        content: contentView,
+                        label: menuLabel
+                    )
+                }
+            })
                 .disabled(!internalState.isEnabled)
                 .menuOrder(.fixed)
         }
