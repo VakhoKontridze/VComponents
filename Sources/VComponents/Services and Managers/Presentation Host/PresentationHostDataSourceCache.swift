@@ -17,43 +17,16 @@ final class PresentationHostDataSourceCache {
     // MARK: Initializers
     private init() {}
     
-    // MARK: Get
-    func get(
-        key presentingView: some View
-    ) -> Any? {
-        get(key: SwiftUIViewTypeDescriber.describe(presentingView))
-    }
-        
-    func get(
-        key presentingViewType: String
-    ) -> Any? {
-        storage[presentingViewType]
+    // MARK: Get and Set
+    func get(key: String) -> Any? {
+        storage[key]
     }
     
-    // MARK: Set
-    func set(
-        key presentingView: some View,
-        value: Any
-    ) {
-        set(
-            key: SwiftUIViewTypeDescriber.describe(presentingView),
-            value: value
-        )
+    func set(key: String, value: Any) {
+        storage[key] = value
     }
     
-    func set(
-        key presentingViewType: String,
-        value: Any
-    ) {
-        storage[presentingViewType] = value
-    }
-    
-    // MARK: Remove
-    func remove(key presentingViewType: String) {
-        for key in storage.keys {
-            if key.hasPrefix(presentingViewType) {
-                storage[key] = nil
-            }
-        }
+    func remove(key: String) {
+        storage[key] = nil
     }
 }

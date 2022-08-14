@@ -37,6 +37,7 @@ struct VSideBarDemoView: View {
             title: "Present"
         )
             .vSideBar(
+                id: "side_bar_demo",
                 uiModel: uiModel,
                 isPresented: $isPresented,
                 content: { sideBarContent }

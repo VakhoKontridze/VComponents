@@ -25,6 +25,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
+    ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///                     uiModel.layout.autoresizesContent = true
@@ -53,6 +54,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -60,9 +62,9 @@ extension View {
         @ViewBuilder content: @escaping () -> some View
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VBottomSheet<Never, _>(
@@ -92,6 +94,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
+    ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///                     uiModel.layout.autoresizesContent = true
@@ -119,6 +122,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -127,9 +131,9 @@ extension View {
         @ViewBuilder content: @escaping () -> some View
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VBottomSheet<Never, _>(
@@ -159,6 +163,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
+    ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///                     uiModel.layout.autoresizesContent = true
@@ -191,6 +196,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -199,9 +205,9 @@ extension View {
         @ViewBuilder content: @escaping () -> some View
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VBottomSheet(
@@ -238,6 +244,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
+    ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///                     uiModel.layout.autoresizesContent = true
@@ -266,6 +273,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Item>(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -274,12 +282,12 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -291,7 +299,7 @@ extension View {
                         onDismiss: dismissHandler,
                         headerLabel: .empty,
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 content(item)
                             }
                         }
@@ -320,6 +328,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
+    ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///                     uiModel.layout.autoresizesContent = true
@@ -347,6 +356,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Item>(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -356,12 +366,12 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -372,14 +382,14 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return .title(title: headerTitle(item))
                             } else {
                                 return .empty
                             }
                         }(),
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 content(item)
                             }
                         }
@@ -408,6 +418,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
+    ///                 id: "some_bottom_sheet",
     ///                 uiModel: {
     ///                     var uiModel: VBottomSheetUIModel = .init()
     ///                     uiModel.layout.autoresizesContent = true
@@ -440,6 +451,7 @@ extension View {
     ///     }
     ///
     public func vBottomSheet<Item>(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -449,12 +461,12 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -465,14 +477,14 @@ extension View {
                        onPresent: presentHandler,
                        onDismiss: dismissHandler,
                        headerLabel: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                return .custom(label: { headerLabel(item) })
                            } else {
                                return .empty
                            }
                        }(),
                        content: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                content(item)
                            }
                        }

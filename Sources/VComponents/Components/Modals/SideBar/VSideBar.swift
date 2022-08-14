@@ -220,6 +220,7 @@ struct VSideBar_Previews: PreviewProvider {
             title: "Present"
         )
             .vSideBar(
+                id: "side_bar_preview",
                 isPresented: $isPresented,
                 content: {
                     VList(

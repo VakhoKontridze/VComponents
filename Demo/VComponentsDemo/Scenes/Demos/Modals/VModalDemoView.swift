@@ -44,8 +44,8 @@ struct VModalDemoView: View {
             .if(hasTitle,
                 ifTransform: {
                     $0
-                        .tag(0) // Uniquely identifies host
                         .vModal(
+                            id: "modal_demo_1",
                             uiModel: uiModel,
                             isPresented: $isPresented,
                             headerTitle: "Lorem Ipsum Dolor Sit Amet",
@@ -53,8 +53,8 @@ struct VModalDemoView: View {
                         )
                 }, elseTransform: {
                     $0
-                        .tag("0") // Uniquely identifies host
                         .vModal(
+                            id: "modal_demo_2",
                             uiModel: uiModel,
                             isPresented: $isPresented,
                             content: { modalContent }

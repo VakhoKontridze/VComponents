@@ -209,6 +209,7 @@ struct VModal_Previews: PreviewProvider {
             title: "Present"
         )
             .vModal(
+                id: "modal_preview",
                 isPresented: $isPresented,
                 headerTitle: "Lorem Ipsum",
                 content: {

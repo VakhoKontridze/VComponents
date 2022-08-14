@@ -38,6 +38,7 @@ struct VToastDemoView: View {
             title: "Present"
         )
             .vToast(
+                id: "toast_demo",
                 uiModel: uiModel,
                 type: toastType.toastType,
                 isPresented: $isPresented,

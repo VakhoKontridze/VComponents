@@ -27,6 +27,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
@@ -38,6 +39,7 @@ extension View {
     ///     }
     ///
     public func vAlert(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -47,9 +49,9 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VAlert<Never>(
@@ -85,6 +87,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum",
     ///                 message: "Lorem ipsum dolor sit amet",
@@ -99,6 +102,7 @@ extension View {
     ///     }
     ///
     public func vAlert(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -109,9 +113,9 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VAlert(
@@ -152,6 +156,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 item: $alertItem,
     ///                 title: { item in "Lorem Ipsum" },
     ///                 message: { item in "Lorem ipsum dolor sit amet" },
@@ -163,6 +168,7 @@ extension View {
     ///     }
     ///
     public func vAlert<Item>(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -173,12 +179,12 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -189,14 +195,14 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return title(item)
                             } else {
                                 return ""
                             }
                         }(),
                         message: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return message(item)
                             } else {
                                 return ""
@@ -204,7 +210,7 @@ extension View {
                         }(),
                         content: .empty,
                         buttons: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return buttons(item)
                             } else {
                                 return []
@@ -239,6 +245,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 item: $alertItem,
     ///                 title: { item in "Lorem Ipsum" },
     ///                 message: { item in "Lorem ipsum dolor sit amet" },
@@ -253,6 +260,7 @@ extension View {
     ///     }
     ///
     public func vAlert<Item>(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -264,12 +272,12 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -280,28 +288,28 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return title(item)
                             } else {
                                 return ""
                             }
                         }(),
                         message: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return message(item)
                             } else {
                                 return ""
                             }
                         }(),
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return .custom(content: { content(item) })
                             } else {
                                 return .empty
                             }
                         }(),
                         buttons: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return buttons(item)
                             } else {
                                 return []
@@ -341,6 +349,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 isPresented: $isPresented,
     ///                 presenting: $alertData,
     ///                 title: { data in "Lorem Ipsum" },
@@ -353,6 +362,7 @@ extension View {
     ///     }
     ///
     public func vAlert<T>(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         presenting data: T?,
@@ -362,12 +372,12 @@ extension View {
         message: @escaping (T) -> String?,
         @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
-        data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -378,14 +388,14 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return title(data)
                             } else {
                                 return ""
                             }
                         }(),
                         message: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return message(data)
                             } else {
                                 return ""
@@ -393,7 +403,7 @@ extension View {
                         }(),
                         content: .empty,
                         buttons: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return buttons(data)
                             } else {
                                 return []
@@ -431,6 +441,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 isPresented: $isPresented,
     ///                 presenting: $alertData,
     ///                 title: { data in "Lorem Ipsum" },
@@ -446,6 +457,7 @@ extension View {
     ///     }
     ///
     public func vAlert<T>(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         presenting data: T?,
@@ -456,12 +468,12 @@ extension View {
         @ViewBuilder content: @escaping (T) -> some View,
         @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
-        data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -472,28 +484,28 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return title(data)
                             } else {
                                 return ""
                             }
                         }(),
                         message: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return message(data)
                             } else {
                                 return ""
                             }
                         }(),
                         content: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return .custom(content: { content(data) })
                             } else {
                                 return .empty
                             }
                         }(),
                         buttons: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return buttons(data)
                             } else {
                                 return []
@@ -531,6 +543,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 isPresented: $isPresented,
     ///                 presenting: $alertError,
     ///                 title: { error in "Lorem Ipsum" },
@@ -540,6 +553,7 @@ extension View {
     ///     }
     ///
     public func vAlert<E>(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
@@ -551,12 +565,12 @@ extension View {
     ) -> some View
         where E: Error
     {
-        error.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -567,14 +581,14 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return title(error)
                             } else {
                                 return ""
                             }
                         }(),
                         message: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return message(error)
                             } else {
                                 return ""
@@ -582,7 +596,7 @@ extension View {
                         }(),
                         content: .empty,
                         buttons: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return buttons(error)
                             } else {
                                 return []
@@ -617,6 +631,7 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vAlert(
+    ///                 id: "some_alert",
     ///                 isPresented: $isPresented,
     ///                 presenting: $alertError,
     ///                 title: { error in "Lorem Ipsum" },
@@ -627,6 +642,7 @@ extension View {
     ///     }
     ///
     public func vAlert<E>(
+        id: String,
         uiModel: VAlertUIModel = .init(),
         isPresented: Binding<Bool>,
         error: E?,
@@ -639,12 +655,12 @@ extension View {
     ) -> some View
         where E: Error
     {
-        error.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
@@ -655,28 +671,28 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         title: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return title(error)
                             } else {
                                 return ""
                             }
                         }(),
                         message: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return message(error)
                             } else {
                                 return ""
                             }
                         }(),
                         content: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return .custom(content: { content(error) })
                             } else {
                                 return .empty
                             }
                         }(),
                         buttons: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return buttons(error)
                             } else {
                                 return []

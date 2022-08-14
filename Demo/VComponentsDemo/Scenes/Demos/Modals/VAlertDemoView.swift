@@ -39,6 +39,7 @@ struct VAlertDemoView: View {
             title: "Present"
         )
             .vAlert(
+                id: "alert_demo",
                 uiModel: uiModel,
                 isPresented: $isPresented,
                 title: title,

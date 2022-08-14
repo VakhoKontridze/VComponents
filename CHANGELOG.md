@@ -2,6 +2,11 @@
 
 ### 3.0.0(?)
 
+General
+
+- `PresentationHost` API is updated, and all modals now have id-based `View` extension methods
+- `PresentationHostViewController` is no longer `public`
+
 VPrimaryButton
 
 - Corner radius is changed from `20` to `16`.

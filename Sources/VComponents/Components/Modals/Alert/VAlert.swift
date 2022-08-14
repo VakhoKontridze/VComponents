@@ -239,6 +239,7 @@ struct VAlert_Previews: PreviewProvider {
             title: "Present"
         )
             .vAlert(
+                id: "alert_preview",
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",

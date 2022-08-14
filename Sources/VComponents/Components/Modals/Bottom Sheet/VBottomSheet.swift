@@ -352,6 +352,7 @@ struct VBottomSheet_Previews: PreviewProvider {
             title: "Present"
         )
             .vBottomSheet(
+                id: "bottom_sheet_preview",
                 uiModel: {
                     var uiModel: VBottomSheetUIModel = .init()
                     uiModel.layout.autoresizesContent = true

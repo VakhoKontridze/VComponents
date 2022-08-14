@@ -9,47 +9,29 @@ import SwiftUI
 import VCore
 
 // MARK: - Presentation Host View Controller
-/// Presentation Host ViewController that's wrapped to `SwiftUI` `View` by `PresentationHost`.
-///
-/// Hosts an `UIHostingController` with content from modal.
-///
-/// `UIHostingController` is configured with:
-///  - `overFullScreen` `modalPresentationStyle`
-///  - `crossDissolve` `modalTransitionStyle`
-///  - `clear` `backgroundColor`
-///
-///  Clicks behind the modal do not go through.
-///
-/// For additional documentation, refer to `PresentationHost`.
-public final class PresentationHostViewController: UIViewController {
+final class PresentationHostViewController: UIViewController {
     // MARK: Properties
-    private let presentingViewType: String
+    private let id: String
+    
     private let allowsHitTests: Bool
     
-    private var hostingController: HostingViewControllerType?
     typealias HostingViewControllerType = UIHostingController<AnyView>
+    private var hostingController: HostingViewControllerType?
+    
     var isPresentingView: Bool { hostingController != nil }
     
-    private static var activePresentingViews: Set<String> = []
-    
-    private static let instanceIDGenerator: AtomicInteger = .init()
-    let instanceID: Int
-    
     // MARK: Initializers
-    /// Initializes `PresentationHostViewController`.
-    public init(
-        presentingViewType: String,
+    init(
+        id: String,
         allowsHitTests: Bool
     ) {
-        self.presentingViewType = presentingViewType
+        self.id = id
         self.allowsHitTests = allowsHitTests
-        self.instanceID = Self.instanceIDGenerator.value
         
         super.init(nibName: nil, bundle: nil)
     }
     
-    /// Initializes `PresentationHostViewController`.
-    public required init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         fatalError()
     }
     
@@ -60,8 +42,7 @@ public final class PresentationHostViewController: UIViewController {
         hostingController = .init(rootView: .init(content))
         guard let hostingController = hostingController else { fatalError() }
         
-        Self.activePresentingViews.insert(presentingViewType)
-        hostingController.view.tag = presentingViewType.hashValue
+        hostingController.view.tag = id.hashValue
         
         hostingController.modalPresentationStyle = .overFullScreen
         hostingController.modalTransitionStyle = .crossDissolve
@@ -86,43 +67,16 @@ public final class PresentationHostViewController: UIViewController {
     }
     
     func dismissHostedView() {
-        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()
+        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.hashValue })?.removeFromSuperview()
         hostingController = nil
         
-        Self.activePresentingViews.remove(presentingViewType)
-        
-        PresentationHostDataSourceCache.shared.remove(key: presentingViewType)
+        PresentationHostDataSourceCache.shared.remove(key: id)
     }
     
     // MARK: Force Dismiss
-    static func forceDismiss(in presentingView: some View) {
-        let presentingViewType: String = SwiftUIViewTypeDescriber.describe(presentingView)
-        
-        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == presentingViewType.hashValue })?.removeFromSuperview()
-        
-        Self.activePresentingViews.remove(presentingViewType)
-        
-        PresentationHostDataSourceCache.shared.remove(key: presentingViewType)
-    }
-}
+    static func forceDismiss(id: String) {
+        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.hashValue })?.removeFromSuperview()
 
-// MARK: - Atomic Integer
-private final class AtomicInteger {
-    private let dispatchSemaphore: DispatchSemaphore = .init(value: 1)
-    
-    private var _value: Int
-    
-    var value: Int {
-        dispatchSemaphore.wait()
-        defer { dispatchSemaphore.signal() }
-        
-        let value = _value
-        _value += 1
-        return value
-    }
-    
-    // MARK: Initializers
-    init(value: Int = 0) {
-        self._value = value
+        PresentationHostDataSourceCache.shared.remove(key: id)
     }
 }

@@ -151,6 +151,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
             icon: .init(systemName: "gearshape")
         )
             .vBottomSheet(
+                id: "demo_settings",
                 uiModel: {
                     var uiModel: VBottomSheetUIModel = .init()
                     uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)

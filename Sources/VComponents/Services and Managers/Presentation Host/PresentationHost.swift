@@ -11,7 +11,7 @@ import SwiftUI
 /// Presentation Host that allows `SwiftUI` `View` to present another `View` modally in `UIKit` style.
 ///
 /// `View` works by inserting an `UIViewController` in view hierarchy and using it as a presentation host.
-/// `PresentationHost` presents content via `UIHostingController` embedded inside `PresentationHostViewController`.
+/// `PresentationHost` presents content via `UIHostingController` embedded inside an `UIViewController`.
 ///
 /// When `isPresented` is set to `true` from code, and content is not yet presented, `PresentationHost` passes content to view hierarchy.
 /// After this appear animations can occur.
@@ -24,23 +24,23 @@ import SwiftUI
 ///
 /// If presenting view disappears, either by navigation, or by `ViewBuilder` render (such as `if` block evaluating to `false`),
 /// modal must be removed from view hierarchy. To ensure proper removal, call `PresentationHost.forceDismiss(in:)`.
-/// Currently, `PresentationHost` uses type of presenting view as an identifier for removing expired models.
+/// `id` passed to extension is used for removing expired models.
 /// `forceDismiss` ignores the animations of modal, and force removes `View` from the hierarchy.
 /// Since presenting `View` may have disappeared, state of the modal can no longer be updated, and animations cannot occur.
 ///
 /// Presentation Host caches data when `item: Binding<Item?>`, `presenting data: T?`, and `error: E?` extensions are used.
-/// Type of presenting `View` is used as a key in a cache . This however, has one limitation.
-/// If two modals are active at the same time, who are launched from the same `View` type (such as `SwiftUI.Button`), caching will fail.
+/// `id` passed to extension is used to identify data.
 ///
 ///     extension View {
 ///         public func someModal(
+///             id: String,
 ///             isPresented: Binding<Bool>,
 ///             @ViewBuilder content: @escaping () -> some View
 ///         ) -> some View {
 ///             self
-///                 .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+///                 .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
 ///                 .background(PresentationHost(
-///                     in: self,
+///                     id: id,
 ///                     isPresented: isPresented,
 ///                     content: {
 ///                         SomeModal(
@@ -99,9 +99,9 @@ import SwiftUI
 ///
 public struct PresentationHost<Content>: UIViewControllerRepresentable where Content: View {
     // MARK: Properties
-    private let presentingViewType: String
-    private let isPresented: Binding<Bool>
+    private let id: String
     private let allowsHitTests: Bool
+    private let isPresented: Binding<Bool>
     private let content: () -> Content
     
     @State private var wasInternallyDismissed: Bool = false
@@ -109,26 +109,28 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     // MARK: Initializers
     /// Initializes `PresentationHost` with condition and content.
     public init(
-        in presentingView: some View,
-        isPresented: Binding<Bool>,
+        id: String,
         allowsHitTests: Bool = true,
+        isPresented: Binding<Bool>,
         content: @escaping () -> Content
     ) {
-        self.presentingViewType = SwiftUIViewTypeDescriber.describe(presentingView)
-        self.isPresented = isPresented
+        self.id = id
         self.allowsHitTests = allowsHitTests
+        self.isPresented = isPresented
         self.content = content
     }
     
     // MARK: Representable
-    public func makeUIViewController(context: Context) -> PresentationHostViewController {
-        .init(
-            presentingViewType: presentingViewType,
+    public func makeUIViewController(context: Context) -> UIViewController {
+        PresentationHostViewController(
+            id: id,
             allowsHitTests: allowsHitTests
         )
     }
 
-    public func updateUIViewController(_ uiViewController: PresentationHostViewController, context: Context) {
+    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+        guard let uiViewController = uiViewController as? PresentationHostViewController else { fatalError() }
+        
         let isExternallyDismissed: Bool =
             uiViewController.isPresentingView &&
             !isPresented.wrappedValue &&
@@ -145,7 +147,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
         let content: AnyView = .init(
             content()
                 .presentationHostPresentationMode(.init(
-                    instanceID: uiViewController.instanceID,
+                    id: id,
                     dismiss: dismissHandler,
                     isExternallyDismissed: isExternallyDismissed,
                     externalDismissCompletion: uiViewController.dismissHostedView
@@ -163,12 +165,10 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     }
     
     // MARK: Force Dismiss
-    /// Forcefully dismisses presented view from presenter.
-    public static func forceDismiss(
-        in presentingView: some View
-    )
+    /// Forcefully dismisses presented `View` from presenting `View`.
+    public static func forceDismiss(id: String)
         where Content == Never
     {
-        PresentationHostViewController.forceDismiss(in: presentingView)
+        PresentationHostViewController.forceDismiss(id: id)
     }
 }
