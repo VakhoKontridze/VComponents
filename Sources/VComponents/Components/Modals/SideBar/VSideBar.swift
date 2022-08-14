@@ -78,7 +78,7 @@ struct VSideBar<Content>: View where Content: View {
             .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
             .offset(isInternallyPresented ? presentedOffset : initialOffset)
             .gesture(
-                DragGesture(minimumDistance: 20)
+                DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
                     .onChanged(dragChanged)
             )
     }
