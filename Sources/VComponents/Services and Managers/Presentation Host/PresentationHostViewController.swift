@@ -42,7 +42,7 @@ final class PresentationHostViewController: UIViewController {
         hostingController = .init(rootView: .init(content))
         guard let hostingController = hostingController else { fatalError() }
         
-        hostingController.view.tag = id.hashValue
+        hostingController.view.tag = id.asViewTag
         
         hostingController.modalPresentationStyle = .overFullScreen
         hostingController.modalTransitionStyle = .crossDissolve
@@ -67,7 +67,7 @@ final class PresentationHostViewController: UIViewController {
     }
     
     func dismissHostedView() {
-        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.hashValue })?.removeFromSuperview()
+        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.asViewTag })?.removeFromSuperview()
         hostingController = nil
         
         PresentationHostDataSourceCache.shared.remove(key: id)
@@ -75,8 +75,15 @@ final class PresentationHostViewController: UIViewController {
     
     // MARK: Force Dismiss
     static func forceDismiss(id: String) {
-        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.hashValue })?.removeFromSuperview()
+        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.asViewTag })?.removeFromSuperview()
 
         PresentationHostDataSourceCache.shared.remove(key: id)
+    }
+}
+
+// MARK: - Helpers
+extension String {
+    fileprivate var asViewTag: Int {
+        hashValue
     }
 }
