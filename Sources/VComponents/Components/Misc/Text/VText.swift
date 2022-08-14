@@ -46,25 +46,14 @@ public struct VText: View {
     }
 
     // MARK: Body
-    @ViewBuilder public var body: some View {
-        switch textType._textType {
-        case .singleLine:
-            Text(text)
-                .truncationMode(truncatingMode)
-                .lineLimit(1)
-                .minimumScaleFactor(minimumScaleFactor)
-                .foregroundColor(color)
-                .font(font)
-            
-        case .multiLine(let alignment, let lineLimit):
-            Text(text)
-                .multilineTextAlignment(alignment)
-                .truncationMode(truncatingMode)
-                .lineLimit(lineLimit)
-                .minimumScaleFactor(minimumScaleFactor)
-                .foregroundColor(color)
-                .font(font)
-        }
+    public var body: some View {
+        Text(text)
+            .ifLet(textType._textType.textAlignment, transform: { $0.multilineTextAlignment($1) })
+            .lineLimit(type: textType._textType.textLineLimitType)
+            .truncationMode(truncatingMode)
+            .minimumScaleFactor(minimumScaleFactor)
+            .foregroundColor(color)
+            .font(font)
     }
 }
 

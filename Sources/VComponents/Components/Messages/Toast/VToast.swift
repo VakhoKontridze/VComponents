@@ -61,7 +61,7 @@ struct VToast: View {
     
     private var contentView: some View {
         VText(
-            type: toastType,
+            type: toastType._toastType.toTextType,
             color: uiModel.colors.text,
             font: .init(uiModel.fonts.text),
             text: text
@@ -80,7 +80,7 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         let initialHeight: CGFloat = {
-            switch toastType._textType {
+            switch toastType._toastType {
             case .singleLine:
                 let label: UILabel = .init()
                 label.font = uiModel.fonts.text
