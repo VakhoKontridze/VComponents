@@ -182,7 +182,7 @@ public struct VDisclosureGroupUIModel {
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         
-        uiModel.layout.cornerRadius = 0
+        uiModel.layout.cornerRadius = uiModel.layout.cornerRadius
         uiModel.layout.contentMargin = 0
         
         uiModel.colors.background = colors.background

@@ -83,28 +83,25 @@ struct VAlert<Content>: View
     }
     
     private var alert: some View {
-        VStack(spacing: 0, content: {
+        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
             VStack(spacing: 0, content: {
-                titleView
-                messageView
-                contentView
+                VStack(spacing: 0, content: {
+                    titleView
+                    messageView
+                    contentView
+                })
+                    .padding(uiModel.layout.titleMessageContentMargins)
+                    .readSize(onChange: { titleMessageContentHeight = $0.height })
+
+                buttonsScrollView
             })
-                .padding(uiModel.layout.titleMessageContentMargins)
-                .readSize(onChange: { titleMessageContentHeight = $0.height })
-            
-            buttonsScrollView
         })
             .frame(width: uiModel.layout.sizes._current.size.width)
             .ignoresSafeArea(.container, edges: .horizontal)
             .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
-            .background(background)
             .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
-    }
-    
-    private var background: some View {
-        VSheet(uiModel: uiModel.sheetSubUIModel)
             .shadow(
                 color: uiModel.colors.shadow,
                 radius: uiModel.colors.shadowRadius,

@@ -234,6 +234,7 @@ public struct VModalUIModel {
         
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.contentMargin = 0
         
         uiModel.colors.background = colors.background
         

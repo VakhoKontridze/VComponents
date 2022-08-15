@@ -364,7 +364,7 @@ public struct VBottomSheetUIModel {
     }
     
     // MARK: Sub-Models
-    var sheetModel: VSheetUIModel {
+    var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         
         uiModel.layout.roundedCorners = .topCorners

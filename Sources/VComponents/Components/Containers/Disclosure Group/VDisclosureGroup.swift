@@ -116,22 +116,22 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 
     // MARK: Body
     public var body: some View {
-        PlainDisclosureGroup(
-            uiModel: uiModel.plainDisclosureGroupSubUIModel,
-            isExpanded: .init(
-                get: { internalState == .expanded },
-                set: { expandCollapseFromHeaderTap($0) }
-            ),
-            label: { header },
-            content: {
-                VStack(spacing: 0, content: {
-                    divider
-                    contentView
-                })
-            }
-        )
-            .background(VSheet(uiModel: uiModel.sheetSubUIModel))
-            .cornerRadius(uiModel.layout.cornerRadius)
+        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
+            PlainDisclosureGroup(
+                uiModel: uiModel.plainDisclosureGroupSubUIModel,
+                isExpanded: .init(
+                    get: { internalState == .expanded },
+                    set: { expandCollapseFromHeaderTap($0) }
+                ),
+                label: { header },
+                content: {
+                    VStack(spacing: 0, content: {
+                        divider
+                        contentView
+                    })
+                }
+            )
+        })
             .animation(uiModel.animations.expandCollapse, value: isEnabled)
             .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
     }

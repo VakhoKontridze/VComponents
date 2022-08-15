@@ -81,14 +81,8 @@ struct VBottomSheet<HeaderLabel, Content>: View
     
     private var bottomSheet: some View {
         ZStack(content: {
-            VSheet(uiModel: uiModel.sheetModel)
-                .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    x: uiModel.colors.shadowOffset.width,
-                    y: uiModel.colors.shadowOffset.height
-                )
-                .if(!uiModel.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
+            VSheet(uiModel: uiModel.sheetSubUIModel)
+                .if(!uiModel.misc.isContentDraggable, transform: {
                     $0
                         .frame(height: uiModel.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
@@ -98,6 +92,12 @@ struct VBottomSheet<HeaderLabel, Content>: View
                                 .onEnded(dragEnded)
                         )
                 })
+                .shadow(
+                    color: uiModel.colors.shadow,
+                    radius: uiModel.colors.shadowRadius,
+                    x: uiModel.colors.shadowOffset.width,
+                    y: uiModel.colors.shadowOffset.height
+                )
                     
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
@@ -118,7 +118,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
                 })
         })
             .frame(width: uiModel.layout.sizes._current.size.width)
-            .if(uiModel.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
+            .if(uiModel.misc.isContentDraggable, transform: {
                 $0
                     .frame(height: uiModel.layout.sizes._current.size.heights.max)
                     .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)

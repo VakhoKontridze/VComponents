@@ -70,23 +70,16 @@ struct VModal<HeaderLabel, Content>: View
     }
 
     private var modal: some View {
-        ZStack(content: {
-            VSheet(uiModel: uiModel.sheetSubUIModel)
-                .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    x: uiModel.colors.shadowOffset.width,
-                    y: uiModel.colors.shadowOffset.height
-                )
-
+        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
             VStack(spacing: 0, content: {
-                header
-                divider
+                VStack(spacing: 0, content: {
+                    header
+                    divider
+                })
+                    .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
+
                 contentView
             })
-                .frame(maxHeight: .infinity, alignment: .top)
-                .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.roundedCorners) // Fixes clipping when `contentMargin` is zero
-                .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
         })
             .frame(size: uiModel.layout.sizes._current.size)
             .ignoresSafeArea(.container, edges: .all)
@@ -94,6 +87,12 @@ struct VModal<HeaderLabel, Content>: View
             .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
+            .shadow(
+                color: uiModel.colors.shadow,
+                radius: uiModel.colors.shadowRadius,
+                x: uiModel.colors.shadowOffset.width,
+                y: uiModel.colors.shadowOffset.height
+            )
     }
 
     @ViewBuilder private var header: some View {

@@ -154,13 +154,20 @@ struct DemoView<ComponentContent, SettingsContent>: View
                 id: "demo_settings",
                 uiModel: {
                     var uiModel: VBottomSheetUIModel = .init()
-                    uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+                    uiModel.layout.contentMargins = .zero
                     uiModel.misc.dismissType.insert(.backTap)
                     return uiModel
                 }(),
                 isPresented: $isPresented,
                 headerTitle: "Parameters",
-                content: { ScrollView(content: settings) }
+                content: {
+                    ScrollView(content: {
+                        settings()
+                            .padding(.horizontal, VSheetUIModel.Layout().contentMargin)
+                    })
+                        .safeAreaMarginInsets(edges: .bottom)
+                        .padding(.vertical, VSheetUIModel.Layout().contentMargin)
+                }
             )
     }
 }

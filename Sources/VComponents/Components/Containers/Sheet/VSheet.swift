@@ -61,14 +61,14 @@ public struct VSheet<Content>: View where Content: View {
     public var body: some View {
         contentView
             .background(sheet)
-    }
-    
-    private var sheet: some View {
-        uiModel.colors.background
             .cornerRadius(
                 uiModel.layout.cornerRadius,
                 corners: uiModel.layout.roundedCorners
             )
+    }
+    
+    private var sheet: some View {
+        uiModel.colors.background
     }
     
     private var contentView: some View {

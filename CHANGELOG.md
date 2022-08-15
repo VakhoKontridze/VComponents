@@ -26,6 +26,7 @@ VMenuPicker
 VDisclosureGroup
 
 - `contentMargins` are changed from `15`s to `zero` in `VDisclosureGroupUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- Issue with corner radius messing layout when content margin is `zero` is fixed
 
 VModal
 
