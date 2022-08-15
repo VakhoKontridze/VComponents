@@ -20,7 +20,7 @@ struct VBottomSheetDemoView: View {
     @State private var hasGrabber: Bool = VBottomSheetUIModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
     @State private var hasDivider: Bool = VBottomSheetUIModel.Layout().dividerHeight > 0
-    @State private var isContentDraggable: Bool = VBottomSheetUIModel.Misc().isContentDraggable
+    @State private var contentIsDraggable: Bool = VBottomSheetUIModel.Misc().contentIsDraggable
     @State private var autoresizesContent: Bool = VBottomSheetUIModel.Layout().autoresizesContent
     
     private var uiModel: VBottomSheetUIModel {
@@ -52,7 +52,7 @@ struct VBottomSheetDemoView: View {
         uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
 
         uiModel.misc.dismissType = dismissType
-        uiModel.misc.isContentDraggable = isContentDraggable
+        uiModel.misc.contentIsDraggable = contentIsDraggable
         
         return uiModel
     }
@@ -121,7 +121,7 @@ struct VBottomSheetDemoView: View {
         
         DemoViewSettingsSection(content: {
             ToggleSettingView(
-                isOn: $isContentDraggable,
+                isOn: $contentIsDraggable,
                 title: "Draggable Content",
                 description: "Content dragging is disabled if height is fixed or autoresizing is enabled"
             )
@@ -132,7 +132,7 @@ struct VBottomSheetDemoView: View {
                     get: { autoresizesContent },
                     set: { newValue in
                         self.autoresizesContent = newValue
-                        if newValue { isContentDraggable = false }
+                        if newValue { contentIsDraggable = false }
                     }
                 ),
                 title: "Autoresizes Content"

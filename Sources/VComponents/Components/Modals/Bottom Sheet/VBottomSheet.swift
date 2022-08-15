@@ -85,7 +85,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     private var bottomSheet: some View {
         ZStack(content: {
             VSheet(uiModel: uiModel.sheetSubUIModel)
-                .if(!uiModel.misc.isContentDraggable, transform: {
+                .if(!uiModel.misc.contentIsDraggable, transform: {
                     $0
                         .frame(height: uiModel.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
@@ -115,14 +115,14 @@ struct VBottomSheet<HeaderLabel, Content>: View
             })
                 .frame(maxHeight: .infinity, alignment: .top)
                 .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // NOTE: Fixes issue of content-clipping, as it's not in `VSheet`
-                .if(!uiModel.misc.isContentDraggable, transform: {
+                .if(!uiModel.misc.contentIsDraggable, transform: {
                     $0
                         .frame(height: uiModel.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
                 })
         })
             .frame(width: uiModel.layout.sizes._current.size.width)
-            .if(uiModel.misc.isContentDraggable, transform: {
+            .if(uiModel.misc.contentIsDraggable, transform: {
                 $0
                     .frame(height: uiModel.layout.sizes._current.size.heights.max)
                     .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
@@ -199,7 +199,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
 
     private var contentView: some View {
         ZStack(content: {
-            if !uiModel.misc.isContentDraggable {
+            if !uiModel.misc.contentIsDraggable {
                 Color.clear
                     .contentShape(Rectangle())
             }

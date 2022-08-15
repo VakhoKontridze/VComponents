@@ -318,12 +318,12 @@ public struct VBottomSheetUIModel {
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: DismissType = .default
         
-        /// Indicates if sheet can be resized by dragging outside the header. Defaults to `false`.
+        /// Indicates if bottom sheet can be resized by dragging outside the header. Defaults to `false`.
         ///
         /// Setting to `true` may cause issues with scrollable views.
         ///
         /// Has no effect on fixed bottom sheet.
-        public var isContentDraggable: Bool = false
+        public var contentIsDraggable: Bool = false
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

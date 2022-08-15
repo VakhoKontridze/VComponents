@@ -41,6 +41,7 @@ VBottomSheet
 - `headerSafeAreaEdges` is added to `VBottomSheetUIModel` that can be used for full-sized modal
 - Issue with content clipping outside container with big corner radius is fixed
 - Issue with content not stretching to full height when grabber, header, and divider are all hidden if fixed
+- `isContentDraggable` is renamed to `contentIsDraggable` in `VBottomSheetUIModel`
 
 VSideBar
 
