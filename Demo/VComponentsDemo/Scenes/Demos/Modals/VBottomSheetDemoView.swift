@@ -40,7 +40,7 @@ struct VBottomSheetDemoView: View {
         }
         
         if !autoresizesContent { // No list
-            uiModel.layout.contentMargins = VBottomSheetUIModel.insetted.layout.contentMargins
+            uiModel.layout.contentMargins = VBottomSheetUIModel.insettedContent.layout.contentMargins
         }
         
         uiModel.layout.grabberSize.height = hasGrabber ? (uiModel.layout.grabberSize.height == 0 ? 4 : uiModel.layout.grabberSize.height) : 0

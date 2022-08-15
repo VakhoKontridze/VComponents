@@ -199,7 +199,7 @@ public struct VSideBarUIModel {
 // MARK: - Factory
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that insets content.
-    public var insettedContent: VSideBarUIModel {
+    public static var insettedContent: VSideBarUIModel {
         var uiModel: VSideBarUIModel = .init()
         
         uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)

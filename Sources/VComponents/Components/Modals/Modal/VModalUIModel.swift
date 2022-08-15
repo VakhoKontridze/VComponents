@@ -259,7 +259,7 @@ public struct VModalUIModel {
 // MARK: - Factory
 extension VModalUIModel {
     /// `VModalUIModel` that insets content.
-    public var insettedContent: VModalUIModel {
+    public static var insettedContent: VModalUIModel {
         var uiModel: VModalUIModel = .init()
         
         uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)

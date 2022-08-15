@@ -396,7 +396,7 @@ public struct VBottomSheetUIModel {
 // MARK: - Factory
 extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that insets content.
-    public var insettedContent: VBottomSheetUIModel {
+    public static var insettedContent: VBottomSheetUIModel {
         var uiModel: VBottomSheetUIModel = .init()
         
         uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
