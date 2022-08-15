@@ -37,7 +37,10 @@ VModal
 VBottomSheet
 
 - `contentMargins` are changed from `15`s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
-- `VBottomSheetUIModel.scrollableContent`, `VBottomSheetUIModel.noHeaderLabel`, and `VBottomSheetUIModel.scrollableContentNoHeaderLabel` are added
+- `VBottomSheetUIModel.scrollableContent` is added
+- `VBottomSheetUIModel.noHeaderLabel` is added
+- `VBottomSheetUIModel.scrollableContentNoHeaderLabel` is added
+- `VBottomSheetUIModel.fullSizedContent` is added
 - `headerSafeAreaEdges` is added to `VBottomSheetUIModel` that can be used for full-sized modal
 - Issue with content clipping outside container with big corner radius is fixed
 - Issue with content not stretching to full height when grabber, header, and divider are all hidden if fixed

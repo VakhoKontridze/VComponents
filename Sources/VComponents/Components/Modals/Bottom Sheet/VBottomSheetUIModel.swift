@@ -427,4 +427,13 @@ extension VBottomSheetUIModel {
         
         return uiModel
     }
+    
+    /// `VBottomSheetUIModel` that stretches content to full size.
+    public static var fullSizedContent: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .noHeaderLabel
+        
+        uiModel.layout.grabberSize.height = .zero
+        
+        return uiModel
+    }
 }
