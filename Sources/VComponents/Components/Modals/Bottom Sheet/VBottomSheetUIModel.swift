@@ -395,7 +395,16 @@ public struct VBottomSheetUIModel {
 
 // MARK: - Factory
 extension VBottomSheetUIModel {
-    /// `VBottomSheetUIModel` that can be used for scrollable content.
+    /// `VBottomSheetUIModel` that insets content.
+    public var insettedContent: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        
+        return uiModel
+    }
+    
+    /// `VBottomSheetUIModel` that autoresizes content and inserts bottom safe area for scrollable content.
     public static var scrollableContent: VBottomSheetUIModel {
         var uiModel: VBottomSheetUIModel = .init()
         
@@ -405,7 +414,9 @@ extension VBottomSheetUIModel {
         return uiModel
     }
     
-    /// `VBottomSheetUIModel` that can be used when modal has no header.
+    /// `VBottomSheetUIModel` that hides header.
+    ///
+    /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
     public static var noHeaderLabel: VBottomSheetUIModel {
         var uiModel: VBottomSheetUIModel = .init()
         
@@ -415,7 +426,9 @@ extension VBottomSheetUIModel {
         return uiModel
     }
     
-    /// `VBottomSheetUIModel` that can be used for scrollable content.
+    /// `VBottomSheetUIModel` that hides header, autoresizes content, and inserts bottom safe area for scrollable content.
+    ///
+    /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
     public static var scrollableContentNoHeaderLabel: VBottomSheetUIModel {
         var uiModel: VBottomSheetUIModel = .init()
         

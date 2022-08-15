@@ -26,17 +26,20 @@ VMenuPicker
 VDisclosureGroup
 
 - `contentMargins` are changed from `15`s to `zero` in `VDisclosureGroupUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VDisclosureGroupUIModel.insettedContent` is added
 - Issue with corner radius messing layout when content margin is `zero` is fixed
 
 VModal
 
 - `contentMargins` are changed from `15`s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VModalUIModel.insettedContent` is added
 - `VModalUIModel.noHeaderLabel` is added
 - `headerSafeAreaEdges` is added to `VModalUIModel` that can be used for full-sized modal
 
 VBottomSheet
 
 - `contentMargins` are changed from `15`s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VBottomSheetUIModel.insettedContent` is added
 - `VBottomSheetUIModel.scrollableContent` is added
 - `VBottomSheetUIModel.noHeaderLabel` is added
 - `VBottomSheetUIModel.scrollableContentNoHeaderLabel` is added
@@ -49,6 +52,7 @@ VBottomSheet
 VSideBar
 
 - `contentMargins` are changed from `15`s to `zero` in `VSideBarUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VSideBarUIModel.insettedContent` is added
 
 VAlert
 

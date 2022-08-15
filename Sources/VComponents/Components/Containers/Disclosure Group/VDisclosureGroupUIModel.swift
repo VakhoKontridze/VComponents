@@ -204,3 +204,15 @@ public struct VDisclosureGroupUIModel {
         return uiModel
     }
 }
+
+// MARK: - Factory
+extension VDisclosureGroupUIModel {
+    /// `VDisclosureGroupUIModel` that insets content.
+    public var insettedContent: VDisclosureGroupUIModel {
+        var uiModel: VDisclosureGroupUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        
+        return uiModel
+    }
+}

@@ -163,10 +163,10 @@ struct DemoView<ComponentContent, SettingsContent>: View
                 content: {
                     ScrollView(content: {
                         settings()
-                            .padding(.horizontal, VSheetUIModel.Layout().contentMargin)
+                            .padding(.horizontal, VBottomSheetUIModel.insetted.layout.contentMargins)
                     })
                         .safeAreaMarginInsets(edges: .bottom)
-                        .padding(.vertical, VSheetUIModel.Layout().contentMargin)
+                        .padding(.vertical, VBottomSheetUIModel.insetted.layout.contentMargins)
                 }
             )
     }

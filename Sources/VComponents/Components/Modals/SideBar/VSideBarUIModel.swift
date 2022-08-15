@@ -195,3 +195,15 @@ public struct VSideBarUIModel {
         return uiModel
     }
 }
+
+// MARK: - Factory
+extension VSideBarUIModel {
+    /// `VSideBarUIModel` that insets content.
+    public var insettedContent: VSideBarUIModel {
+        var uiModel: VSideBarUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        
+        return uiModel
+    }
+}

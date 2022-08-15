@@ -258,7 +258,16 @@ public struct VModalUIModel {
 
 // MARK: - Factory
 extension VModalUIModel {
-    /// `VModalUIModel` that can be used when modal has no header.
+    /// `VModalUIModel` that insets content.
+    public var insettedContent: VModalUIModel {
+        var uiModel: VModalUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        
+        return uiModel
+    }
+    
+    /// `VModalUIModel` that hides header.
     public static var noHeaderLabel: VModalUIModel {
         var uiModel: VModalUIModel = .init()
         
