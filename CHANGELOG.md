@@ -81,6 +81,7 @@ Other
 - `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to `VCore`
 - `GenericState`s and `GenericStateModels`s are moved to `VCore`
 - `BasicAnimation` is moved to `VCore`
+- pressed and disabled `Color`s in `ColorBook` are updated, to be `0.3` opacity of original reference `Color`s
 
 ### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*
 
