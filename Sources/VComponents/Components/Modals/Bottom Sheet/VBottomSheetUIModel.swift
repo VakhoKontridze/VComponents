@@ -57,6 +57,8 @@ public struct VBottomSheetUIModel {
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
         /// Grabber indicator size. Defaults to `50` width and `4` height.
+        ///
+        /// To hide, set to `zero`.
         public var grabberSize: CGSize = .init(width: 50, height: 4)
         
         /// Grabber corner radius. Defaults to `2`.

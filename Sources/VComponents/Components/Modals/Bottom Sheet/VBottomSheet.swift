@@ -27,7 +27,10 @@ struct VBottomSheet<HeaderLabel, Content>: View
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
-    private var hasGrabber: Bool { uiModel.misc.dismissType.contains(.pullDown) || uiModel.layout.sizes._current.size.heights.isResizable }
+    private var hasGrabber: Bool {
+        uiModel.layout.grabberSize.height > 0 &&
+        (uiModel.misc.dismissType.contains(.pullDown) || uiModel.layout.sizes._current.size.heights.isResizable)
+    }
     private var hasDivider: Bool { hasHeader && uiModel.layout.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
@@ -111,7 +114,8 @@ struct VBottomSheet<HeaderLabel, Content>: View
                 contentView
             })
                 .frame(maxHeight: .infinity, alignment: .top)
-                .if(!uiModel.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
+                .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // NOTE: Fixes issue of content-clipping, as it's not in `VSheet`
+                .if(!uiModel.misc.isContentDraggable, transform: {
                     $0
                         .frame(height: uiModel.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
