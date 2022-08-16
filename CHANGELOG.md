@@ -25,6 +25,7 @@ VMenuPicker
 
 VDisclosureGroup
 
+- Chevron icon direction is now right for collapsed state, and down for expanded
 - `contentMargins` are changed from `15`s to `zero` in `VDisclosureGroupUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 - `VDisclosureGroupUIModel.insettedContent` is added
 - Issue with corner radius messing layout when content margin is `zero` is fixed

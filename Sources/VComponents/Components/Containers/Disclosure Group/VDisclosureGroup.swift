@@ -197,9 +197,9 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 extension VDisclosureGroupInternalState {
     fileprivate var chevronButtonDirection: VChevronButtonDirection {
         switch self {
-        case .collapsed: return .down
-        case .expanded: return .up
-        case .disabled: return .down
+        case .collapsed: return .right
+        case .expanded: return .down
+        case .disabled: return .right
         }
     }
 }
