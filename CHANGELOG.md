@@ -29,6 +29,18 @@ VDisclosureGroup
 - `VDisclosureGroupUIModel.insettedContent` is added
 - Issue with corner radius messing layout when content margin is `zero` is fixed
 
+VLazyScrollView
+
+- List is removed for more versatile `VListRow`-based API
+
+VList
+
+- List is removed for more versatile `VListRow`-based API
+
+VStaticList
+
+- List is removed for more versatile `VListRow`-based API
+
 VModal
 
 - `contentMargins` are changed from `15`s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.

@@ -16,7 +16,7 @@ enum HomeRow: Int, DemoableRow {
     case stepper, slider,  rangeSlider
     case textField
     case sheet, disclosureGroup
-    case lazyScrollView, list, staticList
+    case list
     case modal, bottomSheet, sideBar, alert, confirmationDialog, menu, contextMenu
     case toast
     case spinner, progressBar, pageIndicator
@@ -34,7 +34,7 @@ enum HomeRow: Int, DemoableRow {
             .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
             .init(id: 4, title: "Inputs", rows: [.textField]),
             .init(id: 5, title: "Containers", rows: [.sheet, .disclosureGroup]),
-            .init(id: 6, title: "Lists", rows: [.lazyScrollView, .list, .staticList]),
+            .init(id: 6, title: "Lists", rows: [.list]),
             .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .confirmationDialog, .menu, .contextMenu]),
             .init(id: 8, title: "Messages", rows: [.toast]),
             .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
@@ -67,9 +67,7 @@ enum HomeRow: Int, DemoableRow {
         case .sheet: return VSheetDemoView.navBarTitle
         case .disclosureGroup: return VDisclosureGroupDemoView.navBarTitle
             
-        case .lazyScrollView: return VLazyScrollViewDemoView.navBarTitle
         case .list: return VListDemoView.navBarTitle
-        case .staticList: return VStaticListDemoView.navBarTitle
 
         case .modal: return VModalDemoView.navBarTitle
         case .bottomSheet: return VBottomSheetDemoView.navBarTitle
@@ -114,9 +112,7 @@ enum HomeRow: Int, DemoableRow {
         case .sheet: VSheetDemoView()
         case .disclosureGroup: VDisclosureGroupDemoView()
             
-        case .lazyScrollView: VLazyScrollViewDemoView()
         case .list: VListDemoView()
-        case .staticList: VStaticListDemoView()
 
         case .modal: VModalDemoView()
         case .bottomSheet: VBottomSheetDemoView()

@@ -14,7 +14,7 @@ public struct VDisclosureGroupUIModel {
     // MARK: Properties
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let chevronButtonReference: VChevronButtonUIModel = .init()
-    fileprivate static let listReference: VListUIModel = .init()
+    fileprivate static let listRowSeparatorReference: VListRowSeparatorUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -105,7 +105,7 @@ public struct VDisclosureGroupUIModel {
         )
         
         /// Divider color.
-        public var divider: Color = listReference.colors.separator
+        public var divider: Color = listRowSeparatorReference.colors.separator
         
         /// Chevron button background colors.
         public var chevronButtonBackground: ButtonStateColors = chevronButtonReference.colors.background

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 import VComponents
 
 // MARK: - V List Demo View
@@ -14,17 +15,7 @@ struct VListDemoView: View {
     static var navBarTitle: String { "List" }
     
     @State private var rowCount: Int = 5
-    @State private var showsFirstSeparator: Bool = VListUIModel.Layout().showsFirstSeparator
-    @State private var showsLastSeparator: Bool = VListUIModel.Layout().showsLastSeparator
-    
-    private var uiModel: VListUIModel {
-        var uiModel: VListUIModel = .init()
-        
-        uiModel.layout.showsFirstSeparator = showsFirstSeparator
-        uiModel.layout.showsLastSeparator = showsLastSeparator
-        
-        return uiModel
-    }
+    @State private var rowSeparatorType: VListRowSeparatorTypeHelper = .rowEnclosingSeparators
 
     // MARK: Body
     var body: some View {
@@ -33,15 +24,15 @@ struct VListDemoView: View {
     }
     
     private func component() -> some View {
-        VList(
-            uiModel: uiModel,
-            data: 0..<rowCount,
-            id: \.self,
-            content: {
-                Text(String($0))
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-        )
+        List(content: {
+            ForEach(0..<rowCount, id: \.self, content: { i in
+                VListRow(separator: rowSeparatorType.vListRowSeparatorType(isFirst: i == 0), content: {
+                    Text(String(i))
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                })
+            })
+        })
+            .vListStyle()
     }
     
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
@@ -50,9 +41,7 @@ struct VListDemoView: View {
         })
         
         DemoViewSettingsSection(content: {
-            ToggleSettingView(isOn: $showsFirstSeparator, title: "Shows First Separator")
-            
-            ToggleSettingView(isOn: $showsLastSeparator, title: "Shows Last Separator")
+            VWheelPicker(selection: $rowSeparatorType, headerTitle: "Separator Type")
         })
     }
 
@@ -67,5 +56,36 @@ struct VListDemoView: View {
 struct VListDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VListDemoView()
+    }
+}
+
+// MARK: - Helpers
+private enum VListRowSeparatorTypeHelper: Int, StringRepresentableHashableEnumeration {
+    case none
+    //case top
+    //case bottom
+    case noFirstSeparator
+    case noLastSeparator
+    case noFirstAndLastSeparators
+    case rowEnclosingSeparators
+    
+    var stringRepresentation: String {
+        switch self {
+        case .none: return "None"
+        case .noFirstSeparator: return "No First Separator"
+        case .noLastSeparator: return "No Last Separator"
+        case .noFirstAndLastSeparators: return "No First and Last Separators"
+        case .rowEnclosingSeparators: return "Row-Enclosing Separators"
+        }
+    }
+    
+    func vListRowSeparatorType(isFirst: Bool) -> VListRowSeparatorType {
+        switch self {
+        case .none: return .none
+        case .noFirstSeparator: return .noFirstSeparator()
+        case .noLastSeparator: return .noLastSeparator()
+        case .noFirstAndLastSeparators: return .noFirstAndLastSeparators(isFirst: isFirst)
+        case .rowEnclosingSeparators: return .rowEnclosingSeparators(isFirst: isFirst)
+        }
     }
 }

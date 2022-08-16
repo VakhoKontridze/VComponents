@@ -168,19 +168,15 @@ struct VBottomSheetDemoView: View {
                     .padding(.bottom, 10)
                 
             case true:
-                VList(
-                    uiModel: {
-                        var uiModel: VListUIModel = .init()
-                        uiModel.layout.showsFirstSeparator = false
-                        uiModel.layout.showsLastSeparator = false
-                        return uiModel
-                    }(),
-                    data: 0..<20,
-                    content: { num in
-                        Text(String(num))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                )
+                List(content: {
+                    ForEach(0..<20, content: { num in
+                        VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        })
+                    })
+                })
+                    .vListStyle()
                     .padding(.bottom, 10)
             }
 

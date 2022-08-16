@@ -20,19 +20,14 @@ import VCore
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
-///                 VStaticList(
-///                     uiModel: {
-///                         var uiModel: VStaticListUIModel = .init()
-///                         uiModel.layout.showsFirstSeparator = false
-///                         uiModel.layout.showsLastSeparator = false
-///                         return uiModel
-///                     }(),
-///                     data: 0..<10,
-///                     content: { num in
-///                         Text(String(num))
-///                             .frame(maxWidth: .infinity, alignment: .leading)
-///                     }
-///                 )
+///                 LazyVStack(spacing: 0, content: {
+///                     ForEach(0..<10, content: { num in
+///                         VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+///                             Text(String(num))
+///                                 .frame(maxWidth: .infinity, alignment: .leading)
+///                         })
+///                     })
+///                 })
 ///             }
 ///         )
 ///             .padding()
@@ -221,19 +216,14 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VStaticList(
-                        uiModel: {
-                            var uiModel: VStaticListUIModel = .init()
-                            uiModel.layout.showsFirstSeparator = false
-                            uiModel.layout.showsLastSeparator = false
-                            return uiModel
-                        }(),
-                        data: 0..<10,
-                        content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
+                    LazyVStack(spacing: 0, content: {
+                        ForEach(0..<10, content: { num in
+                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                Text(String(num))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            })
+                        })
+                    })
                 }
             )
                 .padding()

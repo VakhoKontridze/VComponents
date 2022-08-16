@@ -14,7 +14,6 @@
 		7A2F832025CFDC620099BA69 /* VLinkDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A2F831F25CFDC620099BA69 /* VLinkDemoView.swift */; };
 		7A32F88E25C999EC00BE8298 /* VStepperDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A32F88D25C999EC00BE8298 /* VStepperDemoView.swift */; };
 		7A3B880225ADAD2500295A87 /* VTextDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B880125ADAD2500295A87 /* VTextDemoView.swift */; };
-		7A3B880825ADB4A700295A87 /* VListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3B880725ADB4A700295A87 /* VListDemoView.swift */; };
 		7A3C1560258DE7F400CE1D96 /* VSpinnerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */; };
 		7A3C157F258DFCAA00CE1D96 /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */; };
 		7A43A612259CAE130029E3C9 /* VAlertDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */; };
@@ -41,7 +40,6 @@
 		7AB41B6325B81D8D00F83987 /* VTextFieldDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB41B6225B81D8D00F83987 /* VTextFieldDemoView.swift */; };
 		7ABD007225BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABD007125BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift */; };
 		7ABEAA4F2593423400A90B56 /* VSheetDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */; };
-		7ABEAADC2593969E00A90B56 /* VLazyScrollViewDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */; };
 		7AC4E03025ADFDBF00CE2816 /* VProgressBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4E02F25ADFDBF00CE2816 /* VProgressBarDemoView.swift */; };
 		7AC4E04225AE1DD900CE2816 /* VRangeSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AC4E04125AE1DD900CE2816 /* VRangeSliderDemoView.swift */; };
 		7ACC3EBE25AC893300EAD184 /* DemoableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7ACC3EBD25AC893300EAD184 /* DemoableRow.swift */; };
@@ -55,7 +53,7 @@
 		876B5A66284000B50081590D /* DemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A65284000B50081590D /* DemoTitledSettingView.swift */; };
 		876B5A68284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */; };
 		876B5A6A284015BE0081590D /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876B5A69284015BE0081590D /* HomeRow.swift */; };
-		8789E2942865ED93007A117B /* VStaticListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789E2932865ED93007A117B /* VStaticListDemoView.swift */; };
+		877DE8CF28ABE66C001E13BF /* VListDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877DE8CE28ABE66C001E13BF /* VListDemoView.swift */; };
 		87AF46C628635B2C005222A1 /* VContextMenuDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */; };
 		87B17B69283A765100122DE5 /* NoDismissTypeWarningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */; };
 /* End PBXBuildFile section */
@@ -81,7 +79,6 @@
 		7A2F831F25CFDC620099BA69 /* VLinkDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLinkDemoView.swift; sourceTree = "<group>"; };
 		7A32F88D25C999EC00BE8298 /* VStepperDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStepperDemoView.swift; sourceTree = "<group>"; };
 		7A3B880125ADAD2500295A87 /* VTextDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextDemoView.swift; sourceTree = "<group>"; };
-		7A3B880725ADB4A700295A87 /* VListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VListDemoView.swift; sourceTree = "<group>"; };
 		7A3C155F258DE7F400CE1D96 /* VSpinnerDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSpinnerDemoView.swift; sourceTree = "<group>"; };
 		7A3C157E258DFCAA00CE1D96 /* VSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
 		7A43A611259CAE130029E3C9 /* VAlertDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertDemoView.swift; sourceTree = "<group>"; };
@@ -110,7 +107,6 @@
 		7AB41B6225B81D8D00F83987 /* VTextFieldDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VTextFieldDemoView.swift; sourceTree = "<group>"; };
 		7ABD007125BC746B00F6FF75 /* DemoViewSettingsSectionBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoViewSettingsSectionBuilder.swift; sourceTree = "<group>"; };
 		7ABEAA4E2593423400A90B56 /* VSheetDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSheetDemoView.swift; sourceTree = "<group>"; };
-		7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VLazyScrollViewDemoView.swift; sourceTree = "<group>"; };
 		7AC4E02F25ADFDBF00CE2816 /* VProgressBarDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VProgressBarDemoView.swift; sourceTree = "<group>"; };
 		7AC4E04125AE1DD900CE2816 /* VRangeSliderDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VRangeSliderDemoView.swift; sourceTree = "<group>"; };
 		7ACC3EBD25AC893300EAD184 /* DemoableRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoableRow.swift; sourceTree = "<group>"; };
@@ -124,7 +120,7 @@
 		876B5A65284000B50081590D /* DemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A67284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontallyLabeledDemoTitledSettingView.swift; sourceTree = "<group>"; };
 		876B5A69284015BE0081590D /* HomeRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
-		8789E2932865ED93007A117B /* VStaticListDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VStaticListDemoView.swift; sourceTree = "<group>"; };
+		877DE8CE28ABE66C001E13BF /* VListDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VListDemoView.swift; sourceTree = "<group>"; };
 		87AF46C528635B2C005222A1 /* VContextMenuDemoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VContextMenuDemoView.swift; sourceTree = "<group>"; };
 		87B17B68283A765100122DE5 /* NoDismissTypeWarningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoDismissTypeWarningView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -363,9 +359,7 @@
 		7ABEAA4C2593421500A90B56 /* Lists */ = {
 			isa = PBXGroup;
 			children = (
-				7ABEAADB2593969E00A90B56 /* VLazyScrollViewDemoView.swift */,
-				7A3B880725ADB4A700295A87 /* VListDemoView.swift */,
-				8789E2932865ED93007A117B /* VStaticListDemoView.swift */,
+				877DE8CE28ABE66C001E13BF /* VListDemoView.swift */,
 			);
 			path = Lists;
 			sourceTree = "<group>";
@@ -509,10 +503,8 @@
 				7AD809612595073C00DABE49 /* VSideBarDemoView.swift in Sources */,
 				7A036BBE25D05CE800773302 /* VToastDemoView.swift in Sources */,
 				7A8A96FE258DDC7800309886 /* SceneDelegate.swift in Sources */,
-				7A3B880825ADB4A700295A87 /* VListDemoView.swift in Sources */,
 				7A767CC425B6D87D0008D2E9 /* VRadioButtonDemoView.swift in Sources */,
 				7AC4E04225AE1DD900CE2816 /* VRangeSliderDemoView.swift in Sources */,
-				8789E2942865ED93007A117B /* VStaticListDemoView.swift in Sources */,
 				7A48FDDE258DE58800AA4D4D /* VSquareButtonDemoView.swift in Sources */,
 				7ACC3EC225AC895000EAD184 /* DemoSection.swift in Sources */,
 				7A43A612259CAE130029E3C9 /* VAlertDemoView.swift in Sources */,
@@ -520,6 +512,7 @@
 				7A8A9739258DDEEE00309886 /* VPrimaryButtonDemoView.swift in Sources */,
 				7A32F88E25C999EC00BE8298 /* VStepperDemoView.swift in Sources */,
 				7A871E7925AC78EE007E27E3 /* DemoListView.swift in Sources */,
+				877DE8CF28ABE66C001E13BF /* VListDemoView.swift in Sources */,
 				87AF46C628635B2C005222A1 /* VContextMenuDemoView.swift in Sources */,
 				7A2F832025CFDC620099BA69 /* VLinkDemoView.swift in Sources */,
 				876B5A68284000D80081590D /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */,
@@ -528,7 +521,6 @@
 				87B17B69283A765100122DE5 /* NoDismissTypeWarningView.swift in Sources */,
 				7A0E49EB25CEF0E6006A8142 /* VPageIndicatorDemoView.swift in Sources */,
 				7A92926425B5B74400BBEA8A /* ToggleSettingView.swift in Sources */,
-				7ABEAADC2593969E00A90B56 /* VLazyScrollViewDemoView.swift in Sources */,
 				7ABEAA4F2593423400A90B56 /* VSheetDemoView.swift in Sources */,
 				7A3C1560258DE7F400CE1D96 /* VSpinnerDemoView.swift in Sources */,
 				7A00737F258E7C7A0003F0E9 /* VToggleDemoView.swift in Sources */,

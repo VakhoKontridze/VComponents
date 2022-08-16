@@ -28,19 +28,15 @@ extension View {
     ///                 id: "some_side_bar",
     ///                 isPresented: $isPresented,
     ///                 content: {
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
@@ -95,19 +91,15 @@ extension View {
     ///                 id: "some_side_bar",
     ///                 item: $sideBarItem,
     ///                 content: { item in
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
