@@ -113,7 +113,7 @@ public struct VListRow<Content>: View
 
 // MARK: - Preview
 struct VListRow_Previews: PreviewProvider {
-    private static let titles: [String] = (0..<10).map { .init($0) }
+    private static var titles: [String] { (0..<10).map { .init($0) } }
     
     static var previews: some View {
         List(content: {
