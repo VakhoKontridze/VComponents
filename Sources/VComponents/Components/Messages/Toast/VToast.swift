@@ -15,7 +15,7 @@ struct VToast: View {
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
     private let uiModel: VToastUIModel
-    private let toastType: VToastType
+    private let toastTextLineType: VToastTextLineType
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -29,13 +29,13 @@ struct VToast: View {
     // MARK: Initializers
     init(
         uiModel: VToastUIModel,
-        type toastType: VToastType,
+        type toastTextLineType: VToastTextLineType,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         text: String
     ) {
         self.uiModel = uiModel
-        self.toastType = toastType
+        self.toastTextLineType = toastTextLineType
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.text = text
@@ -61,7 +61,7 @@ struct VToast: View {
     
     private var contentView: some View {
         VText(
-            type: toastType._toastType.toTextType,
+            type: toastTextLineType._toastTextLineType.toTextLineType,
             color: uiModel.colors.text,
             font: .init(uiModel.fonts.text),
             text: text
@@ -80,7 +80,7 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         let initialHeight: CGFloat = {
-            switch toastType._toastType {
+            switch toastTextLineType._toastTextLineType {
             case .singleLine:
                 let label: UILabel = .init()
                 label.font = uiModel.fonts.text

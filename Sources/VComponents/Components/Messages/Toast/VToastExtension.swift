@@ -34,7 +34,7 @@ extension View {
     public func vToast(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -49,7 +49,7 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: text
@@ -90,7 +90,7 @@ extension View {
     public func vToast<Item>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -112,7 +112,7 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {
@@ -164,7 +164,7 @@ extension View {
     public func vToast<T>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         presenting data: T?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -185,7 +185,7 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {
@@ -235,7 +235,7 @@ extension View {
     public func vToast<E>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -258,7 +258,7 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {

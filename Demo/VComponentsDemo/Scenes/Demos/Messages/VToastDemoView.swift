@@ -17,7 +17,7 @@ struct VToastDemoView: View {
     @State private var isPresented: Bool = false
     
     @State private var presentationEdge: VToastUIModel.Layout.PresentationEdge = .default
-    @State private var toastType: VToastTypeHelper = .oneLine
+    @State private var toastTextLineType: VToastTextLineTypeHelper = .oneLine
     @State private var text: String = "Lorem ipsum dolor sit amet"
     
     private var uiModel: VToastUIModel {
@@ -40,7 +40,7 @@ struct VToastDemoView: View {
             .vToast(
                 id: "toast_demo",
                 uiModel: uiModel,
-                type: toastType.toastType,
+                type: toastTextLineType.toastTextLineType,
                 isPresented: $isPresented,
                 text: text
             )
@@ -56,7 +56,7 @@ struct VToastDemoView: View {
         
         DemoViewSettingsSection(content: {
             VSegmentedPicker(
-                selection: $toastType,
+                selection: $toastTextLineType,
                 headerTitle: "Type",
                 footerTitle: "In multi-line type, line limit and alignment can be set. For demo purposes, they are set to 5 and leading."
             )
@@ -76,7 +76,7 @@ extension VToastUIModel.Layout.PresentationEdge: StringRepresentableHashableEnum
     }
 }
 
-private enum VToastTypeHelper: Int, StringRepresentableHashableEnumeration {
+private enum VToastTextLineTypeHelper: Int, StringRepresentableHashableEnumeration {
     case oneLine
     case multiLine
     
@@ -87,7 +87,7 @@ private enum VToastTypeHelper: Int, StringRepresentableHashableEnumeration {
         }
     }
     
-    var toastType: VToastType {
+    var toastTextLineType: VToastTextLineType {
         switch self {
         case .oneLine: return .singleLine
         case .multiLine: return .multiLine(alignment: .leading, lineLimit: 5)

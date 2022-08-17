@@ -53,8 +53,8 @@ public struct VRadioButtonUIModel {
         /// Spacing between radio and label. Defaults to `5`.
         public var radioLabelSpacing: CGFloat = checkBoxReference.layout.checkBoxLabelSpacing
         
-        /// Title type. Defaults to `multiline` of `1...2` lines.
-        public var titleType: VTextType = checkBoxReference.layout.titleType
+        /// Title line type. Defaults to `multiline` of `1...2` lines.
+        public var titleLineType: TextLineType = checkBoxReference.layout.titleLineType
         
         /// Title minimum scale factor. Defaults to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = checkBoxReference.layout.titleMinimumScaleFactor

@@ -34,11 +34,11 @@ public struct VWheelPickerUIModel {
         /// Picker corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
-        /// Header title type. Defaults to `singleline`.
-        public var headerTitleType: VTextType = segmentedPickerReference.layout.headerTitleType
+        /// Header title line type. Defaults to `singleline`.
+        public var headerTitleLineType: TextLineType = segmentedPickerReference.layout.headerTitleLineType
         
-        /// Footer title type. Defaults to `multiline` of `1...5` lines.
-        public var footerTitleType: VTextType = segmentedPickerReference.layout.footerTitleType
+        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
+        public var footerTitleLineType: TextLineType = segmentedPickerReference.layout.footerTitleLineType
         
         /// Spacing between header, picker, and footer. Defaults to `3`.
         public var headerPickerFooterSpacing: CGFloat = segmentedPickerReference.layout.headerPickerFooterSpacing

@@ -61,8 +61,8 @@ public struct VRoundedLabeledButtonUIModel {
         /// Icon label size. Defaults to `18` by `18`.
         public var iconLabelSize: CGSize = .init(dimension: 18)
         
-        /// Title label type. Defaults to `multiline` of `1...2` lines.
-        public var titleLabelType: VTextType = .multiLine(alignment: .leading, lineLimit: 1...2)
+        /// Title label line type. Defaults to `multiline` of `1...2` lines.
+        public var titleLabelLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...2)
         
         /// Title label minimum scale factor. Defaults to `0.75`.
         public var titleLabelMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor

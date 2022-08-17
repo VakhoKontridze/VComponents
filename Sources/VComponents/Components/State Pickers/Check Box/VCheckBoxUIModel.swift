@@ -55,8 +55,8 @@ public struct VCheckBoxUIModel {
         /// Spacing between checkbox and label. Defaults to `0`.
         public var checkBoxLabelSpacing: CGFloat = 0
         
-        /// Title type. Defaults to `multiline` of `1...2` lines.
-        public var titleType: VTextType = toggleReference.layout.titleType
+        /// Title line type. Defaults to `multiline` of `1...2` lines.
+        public var titleLineType: TextLineType = toggleReference.layout.titleLineType
 
         /// Title minimum scale factor. Defaults to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = toggleReference.layout.titleMinimumScaleFactor

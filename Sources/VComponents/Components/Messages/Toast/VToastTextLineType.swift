@@ -1,5 +1,5 @@
 //
-//  VToastType.swift
+//  VToastTextLineType.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/7/21.
@@ -7,22 +7,22 @@
 
 import SwiftUI
 
-// MARK: - V Toast Type
-/// Model that represents toast layout, such as `singleLine` or `multiLine`.
-public struct VToastType {
+// MARK: - V Toast Text Line Type
+/// Model that represents text line, such as `singleLine` or `multiLine`.
+public struct VToastTextLineType {
     // MARK: Properties
-    let _toastType: _VToastType
+    let _toastTextLineType: _VToastType
     
     // MARK: Initializers
     private init(
-        toastType: _VToastType
+        toastTextLineType: _VToastType
     ) {
-        self._toastType = toastType
+        self._toastTextLineType = toastTextLineType
     }
     
     /// Single-line.
     public static var singleLine: Self {
-        .init(toastType: .singleLine)
+        .init(toastTextLineType: .singleLine)
     }
     
     /// Multi-line.
@@ -30,7 +30,7 @@ public struct VToastType {
         alignment: TextAlignment,
         lineLimit: Int?
     ) -> Self {
-        .init(toastType: .multiLine(
+        .init(toastTextLineType: .multiLine(
             alignment: alignment,
             lineLimit: lineLimit
         ))
@@ -44,7 +44,7 @@ enum _VToastType {
     case multiLine(alignment: TextAlignment, lineLimit: Int?)
     
     // MARK: Properties
-    var toTextType: VTextType {
+    var toTextLineType: TextLineType {
         switch self {
         case .singleLine:
             return .singleLine

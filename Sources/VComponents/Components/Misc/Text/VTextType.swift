@@ -5,91 +5,80 @@
 //  Created by Vakhtang Kontridze on 1/14/21.
 //
 
+// FIXME: Remove and use VCore one when iOS 16 releases
+
 import SwiftUI
 
-// MARK: - V Text Type
-/// Model that represents text layout, such as `singleLine` or `multiLine`.
-public struct VTextType {
-    // MARK: Properties
-    let _textType: _VTextType
+public struct TextLineType {
+    public let _textLineType: _TextLineType
     
-    // MARK: Initializers
     private init(
-        textType: _VTextType
+        textLineType: _TextLineType
     ) {
-        self._textType = textType
+        self._textLineType = textLineType
     }
     
-    /// Single-line.
     public static var singleLine: Self {
-        .init(textType: .singleLine)
+        .init(textLineType: .singleLine)
     }
     
-    /// Multi-line.
     public static func multiLine(
         alignment: TextAlignment,
         lineLimit: Int?
     ) -> Self {
-        .init(textType: .multiLine(
+        .init(textLineType: .multiLine(
             alignment: alignment,
             textLineLimitType: .fixed(lineLimit: lineLimit)
         ))
     }
     
-    /// Multi-line.
     public static func multiLine(
         alignment: TextAlignment,
         lineLimit: Int,
         reservesSpace: Bool
     ) -> Self {
-        .init(textType: .multiLine(
+        .init(textLineType: .multiLine(
             alignment: alignment,
             textLineLimitType: .spaceReserved(lineLimit: lineLimit, reservesSpace: reservesSpace)
         ))
     }
     
-    /// Multi-line.
     public static func multiLine(
         alignment: TextAlignment,
         lineLimit: PartialRangeFrom<Int>
     ) -> Self {
-        .init(textType: .multiLine(
+        .init(textLineType: .multiLine(
             alignment: alignment,
             textLineLimitType: .partialRangeFrom(lineLimit: lineLimit)
         ))
     }
     
-    /// Multi-line.
     public static func multiLine(
         alignment: TextAlignment,
         lineLimit: PartialRangeThrough<Int>
     ) -> Self {
-        .init(textType: .multiLine(
+        .init(textLineType: .multiLine(
             alignment: alignment,
             textLineLimitType: .partialRangeThrough(lineLimit: lineLimit)
         ))
     }
     
-    /// Multi-line.
     public static func multiLine(
         alignment: TextAlignment,
         lineLimit: ClosedRange<Int>
     ) -> Self {
-        .init(textType: .multiLine(
+        .init(textLineType: .multiLine(
             alignment: alignment,
             textLineLimitType: .closedRange(lineLimit: lineLimit)
         ))
     }
 }
 
-// MARK: - _ V Text Type
-enum _VTextType {
-    // MARK: Cases
+public enum _TextLineType {
     case singleLine
     case multiLine(alignment: TextAlignment, textLineLimitType: TextLineLimitType)
     
-    // MARK: Properties
-    var textAlignment: TextAlignment? {
+    public var textAlignment: TextAlignment? {
         switch self {
         case .singleLine:
             return nil
@@ -99,7 +88,7 @@ enum _VTextType {
         }
     }
     
-    var textLineLimitType: TextLineLimitType {
+    public var textLineLimitType: TextLineLimitType {
         switch self {
         case .singleLine:
             return .fixed(lineLimit: 1)
@@ -110,16 +99,14 @@ enum _VTextType {
     }
 }
 
-// FIXME: Remove and use VCore one when iOS 16 releases
-
 extension View {
-    func lineLimit(type: TextLineLimitType) -> some View {
+    public func lineLimit(type: TextLineLimitType) -> some View {
         self
             .modifier(TextLineLimitViewModifier(type: type))
     }
 }
 
-enum TextLineLimitType {
+public enum TextLineLimitType {
     case none
     case fixed(lineLimit: Int?)
     case spaceReserved(lineLimit: Int, reservesSpace: Bool)

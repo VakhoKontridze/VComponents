@@ -39,29 +39,29 @@ VLink
 
 VToggle
 
-- `titleLineLimit` is replaced with `titleType` in `VToggleUIModel`
+- `titleLineLimit` is replaced with `titleLineType` in `VToggleUIModel`
 - `titleMinimumScaleFactor` is added in `VToggleUIModel`
 
 VCheckBox
 
-- `titleLineLimit` is replaced with `titleType` in `VCheckBoxUIModel`
+- `titleLineLimit` is replaced with `titleLineType` in `VCheckBoxUIModel`
 - `titleMinimumScaleFactor` is added in `VCheckBoxUIModel`
 
 VRadioButton
 
-- `titleLineLimit` is replaced with `titleType` in `VRadioButtonUIModel`
+- `titleLineLimit` is replaced with `titleLineType` in `VRadioButtonUIModel`
 - `titleMinimumScaleFactor` is added in `VRadioButtonUIModel`
 
 VSegmentedPicker
 
-- `headerLineLimit` is replaced with `headerTitleType` is `VSegmentedPickerUIModel`
-- `footerLineLimit` is replaced with `footerTitleType` is `VSegmentedPickerUIModel`
+- `headerLineLimit` is replaced with `headerTitleLineType` is `VSegmentedPickerUIModel`
+- `footerLineLimit` is replaced with `footerTitleLineType` is `VSegmentedPickerUIModel`
 - `titleMinimumScaleFactor` is added in `VSegmentedPickerUIModel`
 
 VWheelPicker
 
-- `headerLineLimit` is replaced with `headerTitleType` is `VWheelPickerUIModel`
-- `footerLineLimit` is replaced with `footerTitleType` is `VWheelPickerUIModel`
+- `headerLineLimit` is replaced with `headerTitleLineType` is `VWheelPickerUIModel`
+- `footerLineLimit` is replaced with `footerTitleLineType` is `VWheelPickerUIModel`
 - `titleMinimumScaleFactor` is added in `VWheelPickerUIModel`
 
 VMenuPicker
@@ -71,8 +71,8 @@ VMenuPicker
 VTextField
 
 - TextField Height is changed from `45` to `50`
-- `headerLineLimit` is replaced with `headerTitleType` is `VTextFieldUIModel`
-- `footerLineLimit` is replaced with `footerTitleType` is `VTextFieldUIModel`
+- `headerLineLimit` is replaced with `headerTitleLineType` is `VTextFieldUIModel`
+- `footerLineLimit` is replaced with `footerTitleLineType` is `VTextFieldUIModel`
 
 VDisclosureGroup
 
@@ -137,6 +137,14 @@ VContextMenu
 - ContextMenu now support multiple section
 - ContextMenu now builds sections and rows using `resultBuilder`
 - ContextMenu now supports picker section, transferred from `VMenuPicker`
+
+VToast
+
+- `VToastType` is renamed to `VToastTextLineType`
+
+VText
+
+- `VTextType` is renamed to `TextLineType`
 
 Other
 

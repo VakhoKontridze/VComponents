@@ -20,7 +20,7 @@ import SwiftUI
 ///
 public struct VText: View {
     // MARK: Properties
-    private let textType: VTextType
+    private let textLineType: TextLineType
     private let truncatingMode: Text.TruncationMode
     private let minimumScaleFactor: CGFloat
     private let color: Color
@@ -30,14 +30,14 @@ public struct VText: View {
     // MARK: Initializers
     /// Initializes component with type, color, font, and text.
     public init(
-        type textType: VTextType = .singleLine,
+        type textLineType: TextLineType = .singleLine,
         truncatingMode: Text.TruncationMode = .tail,
         minimumScaleFactor: CGFloat = 0,
         color: Color,
         font: Font,
         text: String
     ) {
-        self.textType = textType
+        self.textLineType = textLineType
         self.truncatingMode = truncatingMode
         self.minimumScaleFactor = minimumScaleFactor
         self.color = color
@@ -48,8 +48,8 @@ public struct VText: View {
     // MARK: Body
     public var body: some View {
         Text(text)
-            .ifLet(textType._textType.textAlignment, transform: { $0.multilineTextAlignment($1) })
-            .lineLimit(type: textType._textType.textLineLimitType)
+            .ifLet(textLineType._textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
+            .lineLimit(type: textLineType._textLineType.textLineLimitType)
             .truncationMode(truncatingMode)
             .minimumScaleFactor(minimumScaleFactor)
             .foregroundColor(color)

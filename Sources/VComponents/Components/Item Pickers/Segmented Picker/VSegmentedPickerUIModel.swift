@@ -62,11 +62,11 @@ public struct VSegmentedPickerUIModel {
         /// Row content margin. Defaults to `2`.
         public var contentMargin: CGFloat = 2
         
-        /// Header title type. Defaults to `singleline`.
-        public var headerTitleType: VTextType = .singleLine
+        /// Header title line type. Defaults to `singleline`.
+        public var headerTitleLineType: TextLineType = .singleLine
         
-        /// Footer title type. Defaults to `multiline` of `1...5` lines.
-        public var footerTitleType: VTextType = .multiLine(alignment: .leading, lineLimit: 1...5)
+        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
+        public var footerTitleLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...5)
         
         /// Spacing between header, picker, and footer. Defaults to `3`.
         public var headerPickerFooterSpacing: CGFloat = 3
