@@ -70,7 +70,7 @@ struct VSideBarDemoView: View {
         VCheckBox(
             uiModel: {
                 var uiModel: VCheckBoxUIModel = .init()
-                uiModel.layout.titleType = .singleLine
+                uiModel.layout.titleLineType = .singleLine
                 return uiModel
             }(),
             isOn: .init(

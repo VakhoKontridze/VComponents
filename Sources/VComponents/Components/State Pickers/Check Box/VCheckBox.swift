@@ -128,7 +128,7 @@ public struct VCheckBox<Label>: View where Label: View {
 
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: uiModel.layout.titleType,
+                            type: uiModel.layout.titleLineType,
                             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                             color: uiModel.colors.title.value(for: internalState),
                             font: uiModel.fonts.title,
