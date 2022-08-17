@@ -62,9 +62,9 @@ public struct VPlainButtonUIModel {
         // MARK: Properties
         /// Title colors.
         public var title: StateColors = .init(
-            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
-            pressed: primaryButtonReference.colors.background.pressed,
-            disabled: primaryButtonReference.colors.background.disabled
+            enabled: ColorBook.accent,
+            pressed: ColorBook.accentPressedDisabled,
+            disabled: ColorBook.accentPressedDisabled
         )
         
         /// Icon colors.
@@ -72,9 +72,9 @@ public struct VPlainButtonUIModel {
         /// Applied to all images. But should be used for vector images.
         /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(
-            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
-            pressed: primaryButtonReference.colors.background.pressed,
-            disabled: primaryButtonReference.colors.background.disabled
+            enabled: ColorBook.accent,
+            pressed: ColorBook.accentPressedDisabled,
+            disabled: ColorBook.accentPressedDisabled
         )
         
         /// Icon opacities. Defaults to `1`s.

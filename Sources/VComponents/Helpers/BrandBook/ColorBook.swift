@@ -21,6 +21,9 @@ public struct ColorBook {
     /// Blue accent color.
     public static let accent: Color = .init(componentAsset: "Accent")
     
+    /// `accent` color used for pressed or disabled states.
+    public static let accentPressedDisabled: Color = .init(componentAsset: "Accent.presseddisabled")
+    
     // MARK: Properties - Text (Primary)
     /// Primary text color.
     public static let primary: Color = .init(componentAsset: "Primary")
@@ -34,23 +37,23 @@ public struct ColorBook {
     /// Primary black text color that inverts.
     public static let primaryBlack: Color = .init(componentAsset: "PrimaryBlack")
     
-    /// `primary` text color used for pressed or disabled states.
+    /// `primary` color used for pressed or disabled states.
     public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
     
-    /// `primaryInverted` text color used for pressed or disabled states.
+    /// `primaryInverted` color used for pressed or disabled states.
     public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
     
-    /// `primaryBlack` text color used for pressed or disabled states.
+    /// `primaryBlack` color used for pressed or disabled states.
     public static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
     
-    /// `primaryBlack` text color used for pressed or disabled states.
+    /// `primaryBlack` color used for pressed or disabled states.
     public static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
     
     // MARK: Properties - Text (Secondary)
     /// Secondary text color.
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
-    /// `secondary` text color used for pressed or disabled states.
+    /// `secondary` color used for pressed or disabled states.
     public static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
     
     // MARK: Initializers
@@ -163,10 +166,6 @@ extension Color {
  PageIndicator.Dot
  190.190.190
  120.120.120
- 
- PlainButton.Text.enabled
- 0.122.255
- 10.132.255
  
  PrimaryButton.Background.disabled
  128.176.240

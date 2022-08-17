@@ -13,7 +13,6 @@ import VCore
 public struct VTextFieldUIModel {
     // MARK: Properties
     fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
-    fileprivate static let plainButtonReference: VPlainButtonUIModel = .init()
     fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
     fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
