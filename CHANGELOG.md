@@ -31,11 +31,11 @@ VPlainButton
 
 VNavigationLink
 
-- Button can now be initialized with title
+- Component is removed, as package migrates to `NavigationStack`-based programatic navigation
 
 VLink
 
-- Button can now be initialized with title
+- Component is removed, to support more UI customization with simple `UIApplication.shared.open(:)` 
 
 VToggle
 

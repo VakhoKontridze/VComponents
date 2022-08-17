@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Home Row
 enum HomeRow: Int, DemoableRow {
     // MARK: Cases
-    case primaryButton, secondaryButton, roundedButton, roundedLabeledButton, plainButton, navigationLink, link
+    case primaryButton, secondaryButton, roundedButton, roundedLabeledButton, plainButton
     case toggle, checkBox, radioButton
     case segmentedPicker, wheelPicker
     case stepper, slider,  rangeSlider
@@ -25,10 +25,7 @@ enum HomeRow: Int, DemoableRow {
     // MARK: Properties
     static var sections: [DemoSection<Self>] {
         [
-            .init(id: 0, title: "Buttons", rows: [
-                .primaryButton, .secondaryButton, .roundedButton, .roundedLabeledButton, .plainButton,
-                .navigationLink, .link
-            ]),
+            .init(id: 0, title: "Buttons", rows: [.primaryButton, .secondaryButton, .roundedButton, .roundedLabeledButton, .plainButton]),
             .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
             .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .wheelPicker]),
             .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
@@ -49,8 +46,6 @@ enum HomeRow: Int, DemoableRow {
         case .roundedButton: return VRoundedButtonDemoView.navBarTitle
         case .roundedLabeledButton: return VRoundedLabeledButtonDemoView.navBarTitle
         case .plainButton: return VPlainButtonDemoView.navBarTitle
-        case .navigationLink: return VNavigationLinkDemoView.navBarTitle
-        case .link: return VLinkDemoView.navBarTitle
 
         case .toggle: return VToggleDemoView.navBarTitle
         case .checkBox: return VCheckBoxDemoView.navBarTitle
@@ -95,8 +90,6 @@ enum HomeRow: Int, DemoableRow {
         case .roundedButton: VRoundedButtonDemoView()
         case .roundedLabeledButton: VRoundedLabeledButtonDemoView()
         case .plainButton: VPlainButtonDemoView()
-        case .navigationLink: VNavigationLinkDemoView()
-        case .link: VLinkDemoView()
 
         case .toggle: VToggleDemoView()
         case .checkBox: VCheckBoxDemoView()
