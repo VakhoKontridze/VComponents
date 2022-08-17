@@ -196,7 +196,7 @@ public struct VWheelPicker<Data, Content>: View
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
+                type: uiModel.layout.headerTitleType,
                 color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
@@ -208,7 +208,7 @@ public struct VWheelPicker<Data, Content>: View
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
+                type: uiModel.layout.footerTitleType,
                 color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle

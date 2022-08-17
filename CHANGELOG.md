@@ -54,15 +54,24 @@ VRadioButton
 
 VSegmentedPicker
 
+- `headerLineLimit` is replaced with `headerTitleType` is `VSegmentedPickerUIModel`
+- `footerLineLimit` is replaced with `footerTitleType` is `VSegmentedPickerUIModel`
 - `titleMinimumScaleFactor` is added in `VSegmentedPickerUIModel`
 
 VWheelPicker
 
+- `headerLineLimit` is replaced with `headerTitleType` is `VWheelPickerUIModel`
+- `footerLineLimit` is replaced with `footerTitleType` is `VWheelPickerUIModel`
 - `titleMinimumScaleFactor` is added in `VWheelPickerUIModel`
 
 VMenuPicker
 
 - MenuPicker is deprecated. Use `VMenu` with `VMenuPickerSection`.
+
+VTextField
+
+- `headerLineLimit` is replaced with `headerTitleType` is `VTextFieldUIModel`
+- `footerLineLimit` is replaced with `footerTitleType` is `VTextFieldUIModel`
 
 VDisclosureGroup
 

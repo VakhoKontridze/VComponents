@@ -49,7 +49,7 @@ public struct VToggleUIModel {
         public var toggleLabelSpacing: CGFloat = 5
         
         /// Title type. Defaults to `multiline` of `1...2` lines.
-        public var titleType: VTextType = .multiLine(alignment: .center, lineLimit: 1...2)
+        public var titleType: VTextType = .multiLine(alignment: .leading, lineLimit: 1...2)
         
         /// Title minimum scale factor. Defaults to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = 0.75
