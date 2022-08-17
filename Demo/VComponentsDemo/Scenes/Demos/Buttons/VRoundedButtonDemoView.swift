@@ -41,7 +41,7 @@ struct VRoundedButtonDemoView: View {
         uiModel.layout.hitBox.vertical = uiModel.layout.hitBox.horizontal
 
         if borderType == .bordered {
-            uiModel.layout.borderWidth = 2
+            uiModel.layout.borderWidth = 1
             
             uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
@@ -51,7 +51,7 @@ struct VRoundedButtonDemoView: View {
 
             uiModel.colors.border = defaultUIModel.colors.background
             
-            uiModel.colors.title = uiModel.colors.icon
+            uiModel.colors.title = defaultUIModel.colors.background
             
             uiModel.colors.icon = defaultUIModel.colors.background
         }
@@ -114,7 +114,7 @@ enum VRoundedButtonLabel: Int, StringRepresentableHashableEnumeration {
     }
 }
 
-private enum VRoundedButtonShape: Int, StringRepresentableHashableEnumeration {
+enum VRoundedButtonShape: Int, StringRepresentableHashableEnumeration {
     case rounded
     case circular
     

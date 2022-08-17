@@ -101,7 +101,7 @@ public struct VDisclosureGroupUIModel {
         public var customHeaderLabelOpacities: StateOpacities = .init(
             collapsed: 1,
             expanded: 1,
-            disabled: 0.5
+            disabled: 0.3
         )
         
         /// Divider color.

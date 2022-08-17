@@ -103,26 +103,12 @@ public struct VPrimaryButton<Label>: View where Label: View {
             Group(content: {
                 switch label {
                 case .title(let title):
-                    VText(
-                        color: uiModel.colors.title.value(for: internalState),
-                        font: uiModel.fonts.title,
-                        text: title
-                    )
+                    labelTitleComponent(title: title)
                     
                 case .iconTitle(let icon, let title):
                     HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
-                        icon
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(size: uiModel.layout.iconSize)
-                            .foregroundColor(uiModel.colors.icon.value(for: internalState))
-                            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
-                        
-                        VText(
-                            color: uiModel.colors.title.value(for: internalState),
-                            font: uiModel.fonts.title,
-                            text: title
-                        )
+                        labelIconComponent(icon: icon)
+                        labelTitleComponent(title: title)
                     })
                     
                 case .custom(let label):
@@ -135,6 +121,23 @@ public struct VPrimaryButton<Label>: View where Label: View {
             loader
         })
             .padding(uiModel.layout.labelMargins)
+    }
+    
+    private func labelTitleComponent(title: String) -> some View {
+        VText(
+            color: uiModel.colors.title.value(for: internalState),
+            font: uiModel.fonts.title,
+            text: title
+        )
+    }
+    
+    private func labelIconComponent(icon: Image) -> some View {
+        icon
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(size: uiModel.layout.iconSize)
+            .foregroundColor(uiModel.colors.icon.value(for: internalState))
+            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
     }
     
     @ViewBuilder private var loaderCompensator: some View {

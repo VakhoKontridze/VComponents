@@ -33,7 +33,7 @@ struct VSecondaryButtonDemoView: View {
         uiModel.layout.hitBox.vertical = uiModel.layout.hitBox.horizontal
 
         if borderType == .bordered {
-            uiModel.layout.borderWidth = 1.5
+            uiModel.layout.borderWidth = 1
 
             uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
@@ -43,7 +43,7 @@ struct VSecondaryButtonDemoView: View {
 
             uiModel.colors.border = defaultUIModel.colors.background
             
-            uiModel.colors.title = uiModel.colors.icon
+            uiModel.colors.title = defaultUIModel.colors.background
             
             uiModel.colors.icon = defaultUIModel.colors.background
         }

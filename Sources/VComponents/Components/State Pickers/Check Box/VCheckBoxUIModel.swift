@@ -123,7 +123,7 @@ public struct VCheckBoxUIModel {
             pressedOff: 1,
             pressedOn: 1,
             pressedIndeterminate: 1,
-            disabled: 0.5
+            disabled: 0.3
         )
 
         // MARK: Initializers

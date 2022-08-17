@@ -25,7 +25,7 @@ struct VPrimaryButtonDemoView: View {
         var uiModel: VPrimaryButtonUIModel = .init()
 
         if borderType == .bordered {
-            uiModel.layout.borderWidth = 2
+            uiModel.layout.borderWidth = 1.5
 
             uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
@@ -36,7 +36,7 @@ struct VPrimaryButtonDemoView: View {
 
             uiModel.colors.border = defaultUIModel.colors.background
             
-            uiModel.colors.title = uiModel.colors.icon
+            uiModel.colors.title = defaultUIModel.colors.background
             
             uiModel.colors.icon = defaultUIModel.colors.background
             

@@ -104,7 +104,7 @@ public struct VToggleUIModel {
             on: 1,
             pressedOff: 1,
             pressedOn: 1,
-            disabled: 0.5
+            disabled: 0.3
         )
         
         // MARK: Initializers

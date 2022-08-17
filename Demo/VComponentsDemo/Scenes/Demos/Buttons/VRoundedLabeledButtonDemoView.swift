@@ -1,0 +1,119 @@
+//
+//  VRoundedLabeledButtonDemoView.swift
+//  VComponentsDemo
+//
+//  Created by Vakhtang Kontridze on 17.08.22.
+//
+
+import SwiftUI
+import VComponents
+import VCore
+
+// MARK: - V Rounded Labeled Button Demo View
+struct VRoundedLabeledButtonDemoView: View {
+    // MARK: Properties
+    static var navBarTitle: String { "Rounded Labeled Button" }
+    
+    @State private var isEnabled: Bool = true
+    @State private var labelType: VRoundedLabeledButtonLabel = .title
+    @State private var shapeType: VRoundedLabeledButtonShape = .init(dimension: VRoundedButtonUIModel.Layout().dimension, radius: VRoundedButtonUIModel.Layout().cornerRadius)
+    @State private var borderType: VPrimaryButtonBorder = .borderless
+    
+    private var uiModel: VRoundedLabeledButtonUIModel {
+        let defaultUIModel: VRoundedLabeledButtonUIModel = .init()
+        
+        var uiModel: VRoundedLabeledButtonUIModel = .init()
+        
+        uiModel.layout.cornerRadius = {
+            switch shapeType {
+            case .circular: return uiModel.layout.roundedRectangleDimension / 2
+            case .rounded: return uiModel.layout.cornerRadius == uiModel.layout.roundedRectangleDimension/2 ? 16 : uiModel.layout.cornerRadius
+            }
+        }()
+
+        if borderType == .bordered {
+            uiModel.layout.borderWidth = 1
+
+            uiModel.colors.border = defaultUIModel.colors.icon
+        }
+
+        return uiModel
+    }
+
+    // MARK: Body
+    var body: some View {
+        DemoView(component: component, settings: settings)
+            .standardNavigationTitle(Self.navBarTitle)
+    }
+    
+    private func component() -> some View {
+        Group(content: {
+            switch labelType {
+            case .title: VRoundedLabeledButton(uiModel: uiModel, action: {}, icon: buttonIcon, titleLabel: buttonTitle)
+            case .iconTitle: VRoundedLabeledButton(uiModel: uiModel, action: {}, icon: buttonIcon, iconLabel: buttonIcon, titleLabel: buttonTitle)
+            case .custom: VRoundedLabeledButton(uiModel: uiModel, action: {}, icon: buttonIcon, label: { buttonIcon })
+            }
+        })
+            .disabled(!isEnabled)
+    }
+    
+    @ViewBuilder private func settings() -> some View {
+        VSegmentedPicker(
+            selection: .init(
+                get: { VRoundedLabeledButtonInternalState(isEnabled: isEnabled) },
+                set: { isEnabled = $0 == .enabled }
+            ),
+            headerTitle: "State"
+        )
+        
+        VSegmentedPicker(selection: $labelType, headerTitle: "Label")
+        
+        VSegmentedPicker(selection: $borderType, headerTitle: "Border")
+    }
+    
+    private var buttonIcon: Image { .init(systemName: "swift") }
+    
+    private var buttonTitle: String { "Lorem Ipsum" }
+}
+
+// MARK: - Helpers
+private typealias VRoundedLabeledButtonInternalState = VSecondaryButtonInternalState
+
+private typealias VRoundedLabeledButtonLabel = VPrimaryButtonLabel
+
+private typealias VRoundedLabeledButtonShape = VRoundedButtonShape
+
+// MARK: - Preview
+struct VRoundedLabeledButtonDemoView_Previews: PreviewProvider {
+    static var previews: some View {
+        VRoundedLabeledButtonDemoView()
+    }
+}
+
+
+//VStack(spacing: 20, content: {
+//    VRoundedLabeledButton(
+//        action: {},
+//        icon: .init(systemName: "swift"),
+//        titleLabel: "Lorem Ipsum"
+//    )
+//
+//    VRoundedLabeledButton(
+//        uiModel: {
+//            var uiModel: VRoundedLabeledButtonUIModel = .init()
+//            uiModel.layout.labelWidthMax = .infinity
+//            uiModel.layout.titleLabelType = .singleLine
+//            return uiModel
+//        }(),
+//        action: {},
+//        icon: .init(systemName: "swift"),
+//        iconLabel: .init(systemName: "swift"),
+//        titleLabel: "Lorem Ipsum"
+//    )
+//
+//    VRoundedLabeledButton(
+//        action: {},
+//        icon: .init(systemName: "swift"),
+//        label: { Text("Lorem Ipsum") }
+//    )
+//})

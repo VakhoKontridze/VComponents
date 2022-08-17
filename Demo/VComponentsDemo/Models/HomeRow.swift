@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - Home Row
 enum HomeRow: Int, DemoableRow {
     // MARK: Cases
-    case primaryButton, secondaryButton, roundedButton, plainButton, navigationLink, link
+    case primaryButton, secondaryButton, roundedButton, roundedLabeledButton, plainButton, navigationLink, link
     case toggle, checkBox, radioButton
     case segmentedPicker, wheelPicker
     case stepper, slider,  rangeSlider
@@ -26,7 +26,7 @@ enum HomeRow: Int, DemoableRow {
     static var sections: [DemoSection<Self>] {
         [
             .init(id: 0, title: "Buttons", rows: [
-                .primaryButton, .secondaryButton, .roundedButton, .plainButton,
+                .primaryButton, .secondaryButton, .roundedButton, .roundedLabeledButton, .plainButton,
                 .navigationLink, .link
             ]),
             .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
@@ -47,6 +47,7 @@ enum HomeRow: Int, DemoableRow {
         case .primaryButton: return VPrimaryButtonDemoView.navBarTitle
         case .secondaryButton: return VSecondaryButtonDemoView.navBarTitle
         case .roundedButton: return VRoundedButtonDemoView.navBarTitle
+        case .roundedLabeledButton: return VRoundedLabeledButtonDemoView.navBarTitle
         case .plainButton: return VPlainButtonDemoView.navBarTitle
         case .navigationLink: return VNavigationLinkDemoView.navBarTitle
         case .link: return VLinkDemoView.navBarTitle
@@ -92,6 +93,7 @@ enum HomeRow: Int, DemoableRow {
         case .primaryButton: VPrimaryButtonDemoView()
         case .secondaryButton: VSecondaryButtonDemoView()
         case .roundedButton: VRoundedButtonDemoView()
+        case .roundedLabeledButton: VRoundedLabeledButtonDemoView()
         case .plainButton: VPlainButtonDemoView()
         case .navigationLink: VNavigationLinkDemoView()
         case .link: VLinkDemoView()

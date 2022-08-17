@@ -86,12 +86,14 @@ public struct VSecondaryButtonUIModel {
         
         /// Icon colors.
         ///
-        /// Can be used for vector images.
+        /// Applied to all images. But should be used for vector images.
+        /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(primaryButtonReference.colors.icon)
         
-        /// Icon opacities.
+        /// Icon opacities. Defaults to `1`s.
         ///
-        /// Can be used for bitmap images. Defaults to `1`s.
+        /// Applied to all images. But should be used for bitmap images.
+        /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
         /// Custom label opacities.

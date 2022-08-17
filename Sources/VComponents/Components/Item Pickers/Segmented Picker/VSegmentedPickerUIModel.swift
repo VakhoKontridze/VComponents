@@ -120,8 +120,8 @@ public struct VSegmentedPickerUIModel {
         /// so instead, a general opacity is being applied.
         public var customContentOpacities: RowStateOpacities = .init(
             enabled: 1,
-            pressed: 0.5,
-            disabled: 0.5
+            pressed: 0.3,
+            disabled: 0.3
         )
         
         /// Row divider colors.

@@ -15,6 +15,10 @@ VSquareButton
 
 - `VSquareButton` is renamed to `VRoundedButton`
 
+VRoundedLabeledButton
+
+- New button type is added
+
 VNavigationLink
 
 - Button can now be initialized with title

@@ -90,12 +90,14 @@ public struct VPrimaryButtonUIModel {
         
         /// Icon colors.
         ///
-        /// Can be used for vector images.
+        /// Applied to all images. But should be used for vector images.
+        /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(ColorBook.primaryWhite)
         
-        /// Icon opacities.
+        /// Icon opacities. Defaults to `1`s.
         ///
-        /// Can be used for bitmap images. Defaults to `1`s.
+        /// Applied to all images. But should be used for bitmap images.
+        /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
         /// Custom label opacities.
@@ -105,9 +107,9 @@ public struct VPrimaryButtonUIModel {
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
             enabled: 1,
-            pressed: 0.75,
-            loading: 0.75,
-            disabled: 0.75
+            pressed: 0.3,
+            loading: 0.3,
+            disabled: 0.3
         )
         
         /// Loader color.

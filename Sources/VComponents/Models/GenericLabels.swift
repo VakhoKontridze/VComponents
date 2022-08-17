@@ -46,6 +46,6 @@ enum GenericLabel_TitleIconTitleCustom<CustomLabel> where CustomLabel: View {
 enum GenericLabel_TitleIconIconTitleCustom<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
-    case iconTitle(icon: Image, text: String)
+    case iconTitle(icon: Image, title: String)
     case custom(label: () -> CustomLabel)
 }
