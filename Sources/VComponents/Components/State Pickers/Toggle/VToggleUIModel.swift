@@ -48,8 +48,11 @@ public struct VToggleUIModel {
         /// Spacing between toggle and label. Defaults to `5`.
         public var toggleLabelSpacing: CGFloat = 5
         
-        /// Title label line limit. Defaults to `nil`.
-        public var titleLineLimit: Int? = nil
+        /// Title type. Defaults to `multiline` of `1...2` lines.
+        public var titleType: VTextType = .multiLine(alignment: .center, lineLimit: 1...2)
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = 0.75
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2

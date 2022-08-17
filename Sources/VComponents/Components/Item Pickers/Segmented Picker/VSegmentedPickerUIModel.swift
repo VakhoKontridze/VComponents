@@ -74,6 +74,9 @@ public struct VSegmentedPickerUIModel {
         /// Header and footer horizontal margin. Defaults to `10`.
         public var headerFooterMarginHorizontal: CGFloat = 10
         
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = 0.75
+        
         /// Row divider size. Defaults to width `1` and height `19`, similarly to native picker.
         public var dividerSize: CGSize = .init(width: 1, height: 19)
         

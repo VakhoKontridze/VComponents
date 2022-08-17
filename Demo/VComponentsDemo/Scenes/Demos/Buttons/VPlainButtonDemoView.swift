@@ -68,7 +68,7 @@ struct VPlainButtonDemoView: View {
     
     private var buttonIcon: Image { .init(systemName: "swift") }
     
-    private var buttonTitle: String { "Lorem" }
+    private var buttonTitle: String { "Lorem Ipsum" }
 }
 
 // MARK: - Helpers

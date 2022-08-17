@@ -36,6 +36,9 @@ public struct VPlainButtonUIModel {
         /// Icon size. Defaults to `20` by `20`.
         public var iconSize: CGSize = roundedButtonReference.layout.iconSize
         
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = 0.75
+        
         /// Spacing between icon and title. Defaults to `8`.
         ///
         /// Applicable only if icon `init`with icon and title is used.

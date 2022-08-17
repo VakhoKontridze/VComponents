@@ -233,6 +233,7 @@ public struct VWheelPicker<Data, Content>: View
         case .titles(let titles):
             ForEach(titles.indices, id: \.self, content: { i in
                 VText(
+                    minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                     color: uiModel.colors.title.value(for: internalState),
                     font: uiModel.fonts.rows,
                     text: titles[i]

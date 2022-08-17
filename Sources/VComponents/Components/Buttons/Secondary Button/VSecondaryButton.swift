@@ -109,6 +109,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
     
     private func labelTitleComponent(title: String) -> some View {
         VText(
+            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
             color: uiModel.colors.title.value(for: internalState),
             font: uiModel.fonts.title,
             text: title

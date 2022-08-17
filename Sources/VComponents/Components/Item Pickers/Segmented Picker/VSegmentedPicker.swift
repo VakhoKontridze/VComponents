@@ -281,6 +281,7 @@ public struct VSegmentedPicker<Data, Content>: View
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
+                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                                 color: uiModel.colors.title.value(for: rowState(for: i)),
                                 font: uiModel.fonts.rows,
                                 text: titles[i]

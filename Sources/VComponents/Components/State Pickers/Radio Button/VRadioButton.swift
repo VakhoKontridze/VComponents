@@ -128,7 +128,8 @@ public struct VRadioButton<Label>: View where Label: View {
 
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
+                            type: uiModel.layout.titleType,
+                            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                             color: uiModel.colors.title.value(for: internalState),
                             font: uiModel.fonts.title,
                             text: title

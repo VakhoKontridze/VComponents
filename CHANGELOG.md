@@ -10,14 +10,24 @@ General
 VPrimaryButton
 
 - Corner radius is changed from `20` to `16`.
+- `titleMinimumScaleFactor` is added in `VPrimaryButtonUIModel`
+
+VSecondaryButton
+
+- `titleMinimumScaleFactor` is added in `VSecondaryButtonUIModel`
 
 VSquareButton
 
 - `VSquareButton` is renamed to `VRoundedButton`
+- `titleMinimumScaleFactor` is added in `VRoundedButtonUIModel`
 
 VRoundedLabeledButton
 
 - New button type is added
+
+VPlainButton
+
+- `titleMinimumScaleFactor` is added in `VPlainButtonUIModel`
 
 VNavigationLink
 
@@ -26,6 +36,29 @@ VNavigationLink
 VLink
 
 - Button can now be initialized with title
+
+VToggle
+
+- `titleLineLimit` is replaced with `titleType` in `VToggleUIModel`
+- `titleMinimumScaleFactor` is added in `VToggleUIModel`
+
+VCheckBox
+
+- `titleLineLimit` is replaced with `titleType` in `VCheckBoxUIModel`
+- `titleMinimumScaleFactor` is added in `VCheckBoxUIModel`
+
+VRadioButton
+
+- `titleLineLimit` is replaced with `titleType` in `VRadioButtonUIModel`
+- `titleMinimumScaleFactor` is added in `VRadioButtonUIModel`
+
+VSegmentedPicker
+
+- `titleMinimumScaleFactor` is added in `VSegmentedPickerUIModel`
+
+VWheelPicker
+
+- `titleMinimumScaleFactor` is added in `VWheelPickerUIModel`
 
 VMenuPicker
 

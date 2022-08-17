@@ -46,6 +46,9 @@ public struct VWheelPickerUIModel {
         /// Header and footer horizontal margin. Defaults to `10`.
         public var headerMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
         
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = 0.75
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}

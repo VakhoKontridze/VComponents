@@ -48,6 +48,9 @@ public struct VPrimaryButtonUIModel {
         /// Icon size. Defaults to `20` by `20`.
         public var iconSize: CGSize = .init(dimension: 20)
         
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = 0.75
+        
         /// Spacing between icon and title. Defaults to `10`.
         ///
         /// Applicable only if icon `init`with icon and title is used.
