@@ -29,6 +29,11 @@ struct VRoundedLabeledButtonDemoView: View {
             uiModel.colors.border = defaultUIModel.colors.icon
         }
 
+        if labelType == .iconTitle {
+            uiModel.layout.labelWidthMax = .infinity
+            uiModel.layout.titleLabelType = .singleLine
+        }
+
         return uiModel
     }
 
@@ -79,31 +84,3 @@ struct VRoundedLabeledButtonDemoView_Previews: PreviewProvider {
         VRoundedLabeledButtonDemoView()
     }
 }
-
-
-//VStack(spacing: 20, content: {
-//    VRoundedLabeledButton(
-//        action: {},
-//        icon: .init(systemName: "swift"),
-//        titleLabel: "Lorem Ipsum"
-//    )
-//
-//    VRoundedLabeledButton(
-//        uiModel: {
-//            var uiModel: VRoundedLabeledButtonUIModel = .init()
-//            uiModel.layout.labelWidthMax = .infinity
-//            uiModel.layout.titleLabelType = .singleLine
-//            return uiModel
-//        }(),
-//        action: {},
-//        icon: .init(systemName: "swift"),
-//        iconLabel: .init(systemName: "swift"),
-//        titleLabel: "Lorem Ipsum"
-//    )
-//
-//    VRoundedLabeledButton(
-//        action: {},
-//        icon: .init(systemName: "swift"),
-//        label: { Text("Lorem Ipsum") }
-//    )
-//})
