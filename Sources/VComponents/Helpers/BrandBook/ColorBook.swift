@@ -10,13 +10,18 @@ import SwiftUI
 // MARK: - Color Book
 /// Contains fundamental colors used throughout the library.
 public struct ColorBook {
-    // MARK: Properties
+    // MARK: Properties - Background
     /// Canvas color that can be used as background.
     public static let canvas: Color = .init(componentAsset: "Canvas")
     
     /// Layer color for container components.
     public static let layer: Color = .init(componentAsset: "Layer")
     
+    // MARK: Properties - Accent
+    /// Blue accent color.
+    public static let accent: Color = .init(componentAsset: "Accent")
+    
+    // MARK: Properties - Text (Primary)
     /// Primary text color.
     public static let primary: Color = .init(componentAsset: "Primary")
     
@@ -29,26 +34,24 @@ public struct ColorBook {
     /// Primary black text color that inverts.
     public static let primaryBlack: Color = .init(componentAsset: "PrimaryBlack")
     
+    /// `primary` text color used for pressed or disabled states.
+    public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
+    
+    /// `primaryInverted` text color used for pressed or disabled states.
+    public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
+    
+    /// `primaryBlack` text color used for pressed or disabled states.
+    public static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
+    
+    /// `primaryBlack` text color used for pressed or disabled states.
+    public static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
+    
+    // MARK: Properties - Text (Secondary)
     /// Secondary text color.
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
-    /// `Primary` text color used for pressed or disabled states.
-    public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
-    
-    /// `PrimaryInverted` text color used for pressed or disabled states.
-    public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
-    
-    /// `PrimaryBlack` text color used for pressed or disabled states.
-    public static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
-    
-    /// `PrimaryBlack` text color used for pressed or disabled states.
-    public static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
-    
-    /// `Secondary` text color used for pressed or disabled states.
+    /// `secondary` text color used for pressed or disabled states.
     public static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
-    
-    /// Blue accent color.
-    public static let accent: Color = .init(componentAsset: "Accent")
     
     // MARK: Initializers
     private init() {}
