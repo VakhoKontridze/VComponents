@@ -136,7 +136,7 @@ public struct VSegmentedPickerUIModel {
         /// Header colors.
         public var header: StateColors = .init(
             enabled: ColorBook.secondary,
-            disabled: ColorBook.primaryPressedDisabled
+            disabled: ColorBook.secondaryPressedDisabled
         )
         
         /// Footer colors.
