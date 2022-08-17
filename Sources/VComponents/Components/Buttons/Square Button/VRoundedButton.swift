@@ -1,5 +1,5 @@
 //
-//  VSquareButton.swift
+//  VRoundedButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -8,38 +8,38 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Square Button
-/// Squared colored button component that performs action when triggered.
+// MARK: - V Rounded Button
+/// Rounded colored button component that performs action when triggered.
 ///
 /// Component can be initialized with title, icon, and label.
 ///
 /// UI Model can be passed as parameter.
 ///
 ///     var body: some View {
-///         VSquareButton(
+///         VRoundedButton(
 ///             action: { print("Clicked") },
 ///             icon: .init(systemName: "swift")
 ///         )
 ///     }
 ///     
-public struct VSquareButton<Label>: View where Label: View {
+public struct VRoundedButton<Label>: View where Label: View {
     // MARK: Properties
-    private let uiModel: VSquareButtonUIModel
+    private let uiModel: VRoundedButtonUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
-    private var internalState: VSquareButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
+    private var internalState: VRoundedButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
     
     private let action: () -> Void
     
-    private let label: VSquareButtonLabel<Label>
+    private let label: VRoundedButtonLabel<Label>
     
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
 
     // MARK: Initializers
     /// Initializes component with action and title.
     public init(
-        uiModel: VSquareButtonUIModel = .init(),
+        uiModel: VRoundedButtonUIModel = .init(),
         action: @escaping () -> Void,
         title: String
     )
@@ -52,7 +52,7 @@ public struct VSquareButton<Label>: View where Label: View {
     
     /// Initializes component with action and icon.
     public init(
-        uiModel: VSquareButtonUIModel = .init(),
+        uiModel: VRoundedButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image
     )
@@ -65,7 +65,7 @@ public struct VSquareButton<Label>: View where Label: View {
     
     /// Initializes component with action and label.
     public init(
-        uiModel: VSquareButtonUIModel = .init(),
+        uiModel: VRoundedButtonUIModel = .init(),
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Label
     ) {
@@ -132,9 +132,9 @@ public struct VSquareButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-struct VSquareButton_Previews: PreviewProvider {
+struct VRoundedButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSquareButton(
+        VRoundedButton(
             action: { print("Clicked") },
             icon: .init(systemName: "swift")
         )

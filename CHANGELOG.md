@@ -11,6 +11,10 @@ VPrimaryButton
 
 - Corner radius is changed from `20` to `16`.
 
+VSquareButton
+
+- `VSquareButton` is renamed to `VRoundedButton`
+
 VNavigationLink
 
 - Button can now be initialized with title

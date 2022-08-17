@@ -1,5 +1,5 @@
 //
-//  VSquareButtonDemoView.swift
+//  VRoundedButtonDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -9,21 +9,21 @@ import SwiftUI
 import VComponents
 import VCore
 
-// MARK: - V Square Button Demo View
-struct VSquareButtonDemoView: View {
+// MARK: - V Rounded Button Demo View
+struct VRoundedButtonDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Square Button" }
+    static var navBarTitle: String { "Rounded Button" }
     
     @State private var isEnabled: Bool = true
-    @State private var labelType: VSquareButtonLabel = .title
-    @State private var shapeType: VSquareButtonShape = .init(dimension: VSquareButtonUIModel.Layout().dimension, radius: VSquareButtonUIModel.Layout().cornerRadius)
-    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VSquareButtonUIModel.Layout().hitBox.horizontal)
+    @State private var labelType: VRoundedButtonLabel = .title
+    @State private var shapeType: VRoundedButtonShape = .init(dimension: VRoundedButtonUIModel.Layout().dimension, radius: VRoundedButtonUIModel.Layout().cornerRadius)
+    @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VRoundedButtonUIModel.Layout().hitBox.horizontal)
     @State private var borderType: VPrimaryButtonBorder = .borderless
     
-    private var uiModel: VSquareButtonUIModel {
-        let defaultUIModel: VSquareButtonUIModel = .init()
+    private var uiModel: VRoundedButtonUIModel {
+        let defaultUIModel: VRoundedButtonUIModel = .init()
         
-        var uiModel: VSquareButtonUIModel = .init()
+        var uiModel: VRoundedButtonUIModel = .init()
         
         uiModel.layout.cornerRadius = {
             switch shapeType {
@@ -68,9 +68,9 @@ struct VSquareButtonDemoView: View {
     private func component() -> some View {
         Group(content: {
             switch labelType {
-            case .title: VSquareButton(uiModel: uiModel, action: {}, title: buttonTitle)
-            case .icon: VSquareButton(uiModel: uiModel, action: {}, icon: buttonIcon)
-            case .custom: VSquareButton(uiModel: uiModel, action: {}, label: { buttonIcon })
+            case .title: VRoundedButton(uiModel: uiModel, action: {}, title: buttonTitle)
+            case .icon: VRoundedButton(uiModel: uiModel, action: {}, icon: buttonIcon)
+            case .custom: VRoundedButton(uiModel: uiModel, action: {}, label: { buttonIcon })
             }
         })
             .disabled(!isEnabled)
@@ -79,7 +79,7 @@ struct VSquareButtonDemoView: View {
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: .init(
-                get: { VSquareButtonInternalState(isEnabled: isEnabled) },
+                get: { VRoundedButtonInternalState(isEnabled: isEnabled) },
                 set: { isEnabled = $0 == .enabled }
             ),
             headerTitle: "State"
@@ -98,9 +98,9 @@ struct VSquareButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private typealias VSquareButtonInternalState = VSecondaryButtonInternalState
+private typealias VRoundedButtonInternalState = VSecondaryButtonInternalState
 
-enum VSquareButtonLabel: Int, StringRepresentableHashableEnumeration {
+enum VRoundedButtonLabel: Int, StringRepresentableHashableEnumeration {
     case title
     case icon
     case custom
@@ -114,7 +114,7 @@ enum VSquareButtonLabel: Int, StringRepresentableHashableEnumeration {
     }
 }
 
-private enum VSquareButtonShape: Int, StringRepresentableHashableEnumeration {
+private enum VRoundedButtonShape: Int, StringRepresentableHashableEnumeration {
     case rounded
     case circular
     
@@ -134,8 +134,8 @@ private enum VSquareButtonShape: Int, StringRepresentableHashableEnumeration {
 }
 
 // MARK: - Preview
-struct VSquareButtonDemoView_Previews: PreviewProvider {
+struct VRoundedButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VSquareButtonDemoView()
+        VRoundedButtonDemoView()
     }
 }

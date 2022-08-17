@@ -43,12 +43,12 @@ public struct VChevronButtonUIModel {
         )
         
         // MARK: State Colors
-        public typealias StateColors = VSquareButtonUIModel.Colors.StateColors
+        public typealias StateColors = VRoundedButtonUIModel.Colors.StateColors
     }
     
     // MARK: Sub-Models
-    var squareButtonSubUIModel: VSquareButtonUIModel {
-        var uiModel: VSquareButtonUIModel = .init()
+    var roundedButtonSubUIModel: VRoundedButtonUIModel {
+        var uiModel: VRoundedButtonUIModel = .init()
 
         uiModel.layout.dimension = layout.dimension
         uiModel.layout.iconSize = .init(dimension: layout.iconDimension)

@@ -14,7 +14,7 @@ public struct VPlainButtonUIModel {
     // MARK: Properties
     fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     fileprivate static let secondaryButtonReference: VSecondaryButtonUIModel = .init()
-    fileprivate static let squareButtonReference: VSquareButtonUIModel = .init()
+    fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -34,7 +34,7 @@ public struct VPlainButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Icon size. Defaults to `20` by `20`.
-        public var iconSize: CGSize = squareButtonReference.layout.iconSize
+        public var iconSize: CGSize = roundedButtonReference.layout.iconSize
         
         /// Spacing between icon and title. Defaults to `8`.
         ///

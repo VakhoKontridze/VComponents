@@ -12,7 +12,7 @@ import VCore
 /// Model that describes UI.
 public struct VTextFieldUIModel {
     // MARK: Properties
-    fileprivate static let squareButtonReference: VSquareButtonUIModel = .init()
+    fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
     fileprivate static let plainButtonReference: VPlainButtonUIModel = .init()
     fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
     fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
@@ -243,8 +243,8 @@ public struct VTextFieldUIModel {
         return uiModel
     }
     
-    var visibilityButtonSubUIModel: VSquareButtonUIModel {
-        var uiModel: VSquareButtonUIModel = .init()
+    var visibilityButtonSubUIModel: VRoundedButtonUIModel {
+        var uiModel: VRoundedButtonUIModel = .init()
         
         uiModel.layout.dimension = layout.visibilityButtonDimension
         uiModel.layout.cornerRadius = layout.visibilityButtonDimension / 2

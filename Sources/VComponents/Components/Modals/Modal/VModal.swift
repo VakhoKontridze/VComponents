@@ -154,7 +154,7 @@ struct VModal<HeaderLabel, Content>: View
     }
 
     private var closeButton: some View {
-        VSquareButton.close(
+        VRoundedButton.close(
             uiModel: uiModel.closeButtonSubUIModel,
             action: animateOut
         )
