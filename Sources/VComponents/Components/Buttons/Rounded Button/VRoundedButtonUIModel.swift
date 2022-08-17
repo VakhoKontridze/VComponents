@@ -34,10 +34,10 @@ public struct VRoundedButtonUIModel {
         /// Button dimension. Defaults to `56`.
         public var dimension: CGFloat = 56
         
-        /// Button corner radius. Defaults to `16`.
+        /// Corner radius. Defaults to `16`.
         public var cornerRadius: CGFloat = 16
         
-        /// Button border width. Defaults to `0`.
+        /// Border width. Defaults to `0`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0

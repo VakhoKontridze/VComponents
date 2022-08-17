@@ -36,7 +36,7 @@ public struct VSecondaryButtonUIModel {
         
         var cornerRadius: CGFloat { height / 2 }
         
-        /// Button border width. Defaults to `0`.
+        /// Border width. Defaults to `0`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
