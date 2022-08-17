@@ -65,7 +65,7 @@ public struct VRoundedLabeledButtonUIModel {
         public var titleLabelType: VTextType = .multiLine(alignment: .leading, lineLimit: 1...2)
         
         /// Title label minimum scale factor. Defaults to `0.75`.
-        public var titleLabelMinimumScaleFactor: CGFloat = 0.75
+        public var titleLabelMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

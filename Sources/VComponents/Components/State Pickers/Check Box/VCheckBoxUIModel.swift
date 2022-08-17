@@ -59,7 +59,7 @@ public struct VCheckBoxUIModel {
         public var titleType: VTextType = toggleReference.layout.titleType
 
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = 0.75
+        public var titleMinimumScaleFactor: CGFloat = toggleReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

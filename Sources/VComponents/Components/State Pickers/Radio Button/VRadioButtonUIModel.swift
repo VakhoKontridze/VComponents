@@ -57,7 +57,7 @@ public struct VRadioButtonUIModel {
         public var titleType: VTextType = checkBoxReference.layout.titleType
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = 0.75
+        public var titleMinimumScaleFactor: CGFloat = checkBoxReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

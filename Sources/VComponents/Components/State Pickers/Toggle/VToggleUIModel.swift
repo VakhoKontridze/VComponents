@@ -52,7 +52,7 @@ public struct VToggleUIModel {
         public var titleType: VTextType = .multiLine(alignment: .leading, lineLimit: 1...2)
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = 0.75
+        public var titleMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2

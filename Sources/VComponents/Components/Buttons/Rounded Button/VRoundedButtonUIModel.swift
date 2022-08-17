@@ -46,7 +46,7 @@ public struct VRoundedButtonUIModel {
         public var labelMargins: LabelMargins = .init(3)
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = 0.75
+        public var titleMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         /// Icon size. Defaults to `20` by `20`.
         public var iconSize: CGSize = primaryButtonReference.layout.iconSize

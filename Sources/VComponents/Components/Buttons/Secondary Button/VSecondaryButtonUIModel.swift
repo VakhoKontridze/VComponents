@@ -48,7 +48,7 @@ public struct VSecondaryButtonUIModel {
         )
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = 0.75
+        public var titleMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         /// Icon size. Defaults to `16` by `16`.
         public var iconSize: CGSize = .init(dimension: 16)
