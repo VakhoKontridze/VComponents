@@ -70,6 +70,7 @@ VMenuPicker
 
 VTextField
 
+- TextField Height is changed from `45` to `50`
 - `headerLineLimit` is replaced with `headerTitleType` is `VTextFieldUIModel`
 - `footerLineLimit` is replaced with `footerTitleType` is `VTextFieldUIModel`
 

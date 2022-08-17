@@ -38,8 +38,8 @@ public struct VTextFieldUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Textfield height. Defaults to `45`.
-        public var height: CGFloat = 45
+        /// Textfield height. Defaults to `50`.
+        public var height: CGFloat = 50
         
         /// Textfield corner radius. Defaults to `12`.
         public var cornerRadius: CGFloat = 12
