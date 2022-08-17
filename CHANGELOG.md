@@ -57,12 +57,14 @@ VSegmentedPicker
 - `headerLineLimit` is replaced with `headerTitleLineType` is `VSegmentedPickerUIModel`
 - `footerLineLimit` is replaced with `footerTitleLineType` is `VSegmentedPickerUIModel`
 - `titleMinimumScaleFactor` is added in `VSegmentedPickerUIModel`
+- Header and footer color mismatched when disabled is fixed
 
 VWheelPicker
 
 - `headerLineLimit` is replaced with `headerTitleLineType` is `VWheelPickerUIModel`
 - `footerLineLimit` is replaced with `footerTitleLineType` is `VWheelPickerUIModel`
 - `titleMinimumScaleFactor` is added in `VWheelPickerUIModel`
+- Header and footer color mismatched when disabled is fixed
 
 VMenuPicker
 
@@ -73,6 +75,7 @@ VTextField
 - TextField Height is changed from `45` to `50`
 - `headerLineLimit` is replaced with `headerTitleLineType` is `VTextFieldUIModel`
 - `footerLineLimit` is replaced with `footerTitleLineType` is `VTextFieldUIModel`
+- Header and footer color mismatched when disabled is fixed
 
 VDisclosureGroup
 
