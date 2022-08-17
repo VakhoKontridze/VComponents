@@ -16,7 +16,6 @@ struct VRoundedButtonDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var labelType: VRoundedButtonLabel = .title
-    @State private var shapeType: VRoundedButtonShape = .init(dimension: VRoundedButtonUIModel.Layout().dimension, radius: VRoundedButtonUIModel.Layout().cornerRadius)
     @State private var hitBoxType: VSecondaryButtonHitBox = .init(value: VRoundedButtonUIModel.Layout().hitBox.horizontal)
     @State private var borderType: VPrimaryButtonBorder = .borderless
     
@@ -24,13 +23,6 @@ struct VRoundedButtonDemoView: View {
         let defaultUIModel: VRoundedButtonUIModel = .init()
         
         var uiModel: VRoundedButtonUIModel = .init()
-        
-        uiModel.layout.cornerRadius = {
-            switch shapeType {
-            case .circular: return uiModel.layout.dimension / 2
-            case .rounded: return uiModel.layout.cornerRadius == uiModel.layout.dimension/2 ? 16 : uiModel.layout.cornerRadius
-            }
-        }()
         
         uiModel.layout.hitBox.horizontal = {
             switch hitBoxType {
@@ -110,25 +102,6 @@ enum VRoundedButtonLabel: Int, StringRepresentableHashableEnumeration {
         case .title: return "Title"
         case .icon: return "Icon"
         case .custom: return "Custom"
-        }
-    }
-}
-
-enum VRoundedButtonShape: Int, StringRepresentableHashableEnumeration {
-    case rounded
-    case circular
-    
-    var stringRepresentation: String {
-        switch self {
-        case .rounded: return "Rounded"
-        case .circular: return "Circular"
-        }
-    }
-    
-    init(dimension: CGFloat, radius: CGFloat) {
-        switch radius {
-        case dimension/2: self = .circular
-        default: self = .rounded
         }
     }
 }

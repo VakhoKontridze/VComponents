@@ -16,20 +16,12 @@ struct VRoundedLabeledButtonDemoView: View {
     
     @State private var isEnabled: Bool = true
     @State private var labelType: VRoundedLabeledButtonLabel = .title
-    @State private var shapeType: VRoundedLabeledButtonShape = .init(dimension: VRoundedButtonUIModel.Layout().dimension, radius: VRoundedButtonUIModel.Layout().cornerRadius)
     @State private var borderType: VPrimaryButtonBorder = .borderless
     
     private var uiModel: VRoundedLabeledButtonUIModel {
         let defaultUIModel: VRoundedLabeledButtonUIModel = .init()
         
         var uiModel: VRoundedLabeledButtonUIModel = .init()
-        
-        uiModel.layout.cornerRadius = {
-            switch shapeType {
-            case .circular: return uiModel.layout.roundedRectangleDimension / 2
-            case .rounded: return uiModel.layout.cornerRadius == uiModel.layout.roundedRectangleDimension/2 ? 16 : uiModel.layout.cornerRadius
-            }
-        }()
 
         if borderType == .bordered {
             uiModel.layout.borderWidth = 1
@@ -80,8 +72,6 @@ struct VRoundedLabeledButtonDemoView: View {
 private typealias VRoundedLabeledButtonInternalState = VSecondaryButtonInternalState
 
 private typealias VRoundedLabeledButtonLabel = VPrimaryButtonLabel
-
-private typealias VRoundedLabeledButtonShape = VRoundedButtonShape
 
 // MARK: - Preview
 struct VRoundedLabeledButtonDemoView_Previews: PreviewProvider {
