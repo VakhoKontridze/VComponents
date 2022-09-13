@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Toast Text Line Type
 /// Model that represents text line, such as `singleLine` or `multiLine`.
