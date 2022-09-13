@@ -56,8 +56,8 @@ public struct VSideBarUIModel {
         /// Corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
-        /// Content margins. Defaults to `15`s.
-        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
+        /// Content margins. Defaults to `zero`.
+        public var contentMargins: Margins = .zero
         
         /// Edges on which content has safe area edges. Defaults to `all`.
         public var contentSafeAreaEdges: Edge.Set = .all
@@ -75,7 +75,7 @@ public struct VSideBarUIModel {
         public init() {}
         
         // MARK: Presentation Edge
-        /// Model that represents presentation edge, such as `left`, `right`, `top`, or `bottom`.
+        /// Enumeration that represents presentation edge, such as `left`, `right`, `top`, or `bottom`.
         public enum PresentationEdge: Int, CaseIterable {
             // MARK: Cases
             /// Presentation form left.
@@ -138,8 +138,8 @@ public struct VSideBarUIModel {
         /// Disappear animation.  Defaults to `easeInOut` with duration `0.3`.
         public var disappear: BasicAnimation? = bottomSheetReference.animations.disappear
         
-        /// Drag-back dismiss animation. Defaults to `easeInOut` with duration `0.1`.
-        public var dragBackDismiss: BasicAnimation? = bottomSheetReference.animations.pullDownDismiss
+        /// Drag-back dismiss animation. Defaults to `easeInOut` with duration `0.2`.
+        public var dragBackDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
         
         // MARK: Initializers
         /// Initializes sub-model with default values
@@ -191,6 +191,18 @@ public struct VSideBarUIModel {
         uiModel.layout.contentMargin = 0
         
         uiModel.colors.background = colors.background
+        
+        return uiModel
+    }
+}
+
+// MARK: - Factory
+extension VSideBarUIModel {
+    /// `VSideBarUIModel` that insets content.
+    public static var insettedContent: VSideBarUIModel {
+        var uiModel: VSideBarUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
         
         return uiModel
     }

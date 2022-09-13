@@ -31,10 +31,10 @@ public struct VPrimaryButtonUIModel {
         /// Button height. Defaults to `56`.
         public var height: CGFloat = 56
         
-        /// Button corner radius. Defaults to `20`.
-        public var cornerRadius: CGFloat = 20
+        /// Corner radius. Defaults to `16`.
+        public var cornerRadius: CGFloat = 16
         
-        /// Button border width. Defaults to `0`.
+        /// Border width. Defaults to `0`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
@@ -47,6 +47,9 @@ public struct VPrimaryButtonUIModel {
         
         /// Icon size. Defaults to `20` by `20`.
         public var iconSize: CGSize = .init(dimension: 20)
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = 0.75
         
         /// Spacing between icon and title. Defaults to `10`.
         ///
@@ -78,40 +81,27 @@ public struct VPrimaryButtonUIModel {
         public var background: StateColors = .init(
             enabled: .init(componentAsset: "PrimaryButton.Background.enabled"),
             pressed: .init(componentAsset: "PrimaryButton.Background.pressed"),
-            disabled: .init(componentAsset: "PrimaryButton.Background.disabled"),
-            loading: .init(componentAsset: "PrimaryButton.Background.disabled")
+            loading: .init(componentAsset: "PrimaryButton.Background.disabled"),
+            disabled: .init(componentAsset: "PrimaryButton.Background.disabled")
         )
         
         /// Border colors.
-        public var border: StateColors = .clear
+        public var border: StateColors = .clearColors
         
         /// Title colors.
-        public var title: StateColors = .init(
-            enabled: ColorBook.primaryWhite,
-            pressed: ColorBook.primaryWhite,
-            disabled: ColorBook.primaryWhite,
-            loading: ColorBook.primaryWhite
-        )
+        public var title: StateColors = .init(ColorBook.primaryWhite)
         
         /// Icon colors.
         ///
-        /// Can be used for vector images.
-        public var icon: StateColors = .init(
-            enabled: ColorBook.primaryWhite,
-            pressed: ColorBook.primaryWhite,
-            disabled: ColorBook.primaryWhite,
-            loading: ColorBook.primaryWhite
-        )
+        /// Applied to all images. But should be used for vector images.
+        /// In order to use bitmap images, set this to `clear`.
+        public var icon: StateColors = .init(ColorBook.primaryWhite)
         
-        /// Icon opacities.
+        /// Icon opacities. Defaults to `1`s.
         ///
-        /// Can be used for bitmap images. Defaults to `1`s.
-        public var iconOpacities: StateOpacities = .init(
-            enabled: 1,
-            pressed: 1,
-            disabled: 1,
-            loading: 1
-        )
+        /// Applied to all images. But should be used for bitmap images.
+        /// In order to use vector images, set this to `1`s.
+        public var iconOpacities: StateOpacities = .init(1)
         
         /// Custom label opacities.
         ///
@@ -120,9 +110,9 @@ public struct VPrimaryButtonUIModel {
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
             enabled: 1,
-            pressed: 0.75,
-            disabled: 0.75,
-            loading: 0.75
+            pressed: 0.3,
+            loading: 0.3,
+            disabled: 0.3
         )
         
         /// Loader color.
@@ -134,11 +124,11 @@ public struct VPrimaryButtonUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPDL<Color>
+        public typealias StateColors = GenericStateModel_EnabledPressedLoadingDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_EPDL<CGFloat>
+        public typealias StateOpacities = GenericStateModel_EnabledPressedLoadingDisabled<CGFloat>
     }
 
     // MARK: Fonts

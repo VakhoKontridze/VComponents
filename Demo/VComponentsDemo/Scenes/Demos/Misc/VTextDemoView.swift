@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Text Demo View
 struct VTextDemoView: View {
@@ -24,33 +25,94 @@ struct VTextDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(component: component, settings: settings)
+        DemoView(hasLayer: false, component: component, settings: settings)
             .standardNavigationTitle(Self.navBarTitle)
     }
     
-    @ViewBuilder private func component() -> some View {
-        switch vTextDemoType {
-        case .center:
-            VText(color: titleColor, font: titleFont, text: singleLineText)
-                .frame(maxWidth: .infinity, alignment: .center)
-        
-        case .leading:
-            VText(color: titleColor, font: titleFont, text: singleLineText)
-                .frame(maxWidth: .infinity, alignment: .leading)
-        
-        case .trailing:
-            VText(color: titleColor, font: titleFont, text: singleLineText)
-                .frame(maxWidth: .infinity, alignment: .trailing)
-        
-        case .multiLineCenter:
-            VText(type: .multiLine(alignment: .center, lineLimit: nil), color: titleColor, font: titleFont, text: multiLineText)
+    private func component() -> some View {
+        VSheet(content: {
+            switch vTextDemoType {
+            case .center:
+                VText(
+                    color: titleColor,
+                    font: titleFont,
+                    text: singleLineText
+                )
+                    .frame(maxWidth: .infinity, alignment: .center)
             
-        case .multiLineLeading:
-            VText(type: .multiLine(alignment: .leading, lineLimit: nil), color: titleColor, font: titleFont, text: multiLineText)
+            case .leading:
+                VText(
+                    color: titleColor,
+                    font: titleFont,
+                    text: singleLineText
+                )
+                    .frame(maxWidth: .infinity, alignment: .leading)
             
-        case .multiLineTrailing:
-            VText(type: .multiLine(alignment: .trailing, lineLimit: nil), color: titleColor, font: titleFont, text: multiLineText)
-        }
+            case .trailing:
+                VText(
+                    color: titleColor,
+                    font: titleFont,
+                    text: singleLineText
+                )
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            
+            case .multiLineCenter:
+                VText(
+                    type: .multiLine(alignment: .center, lineLimit: nil),
+                    color: titleColor,
+                    font: titleFont,
+                    text: multiLineText
+                )
+                
+            case .multiLineLeading:
+                VText(
+                    type: .multiLine(alignment: .leading, lineLimit: nil),
+                    color: titleColor,
+                    font: titleFont,
+                    text: multiLineText
+                )
+                
+            case .multiLineTrailing:
+                VText(
+                    type: .multiLine(alignment: .trailing, lineLimit: nil),
+                    color: titleColor,
+                    font: titleFont,
+                    text: multiLineText
+                )
+            
+            case .multiLineSpaceReserved:
+                VText(
+                    type: .multiLine(alignment: .center, lineLimit: 20, reservesSpace: true),
+                    color: titleColor,
+                    font: titleFont,
+                    text: multiLineText
+                )
+                
+            case .multiLinePartialRangeFrom:
+                VText(
+                    type: .multiLine(alignment: .center, lineLimit: 10...),
+                    color: titleColor,
+                    font: titleFont,
+                    text: multiLineText
+                )
+                
+            case .multiLinePartialRangeThrough:
+                VText(
+                    type: .multiLine(alignment: .center, lineLimit: ...20),
+                    color: titleColor,
+                    font: titleFont,
+                    text: multiLineText
+                )
+                
+            case .multiLineClosedRange:
+                VText(
+                    type: .multiLine(alignment: .center, lineLimit: 10...20),
+                    color: titleColor,
+                    font: titleFont,
+                    text: multiLineText
+                )
+            }
+        })
     }
     
     @ViewBuilder private func settings() -> some View {
@@ -63,15 +125,19 @@ struct VTextDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VTextDemoType: Int, PickableTitledEnumeration {
+private enum VTextDemoType: Int, StringRepresentableHashableEnumeration {
     case center
     case leading
     case trailing
     case multiLineCenter
     case multiLineLeading
     case multiLineTrailing
+    case multiLineSpaceReserved
+    case multiLinePartialRangeFrom
+    case multiLinePartialRangeThrough
+    case multiLineClosedRange
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .center: return "Center"
         case .leading: return "Leading"
@@ -79,6 +145,10 @@ private enum VTextDemoType: Int, PickableTitledEnumeration {
         case .multiLineCenter: return "Multi-Line Center"
         case .multiLineLeading: return "Multi-Line Leading"
         case .multiLineTrailing: return "Multi-Line Trailing"
+        case .multiLineSpaceReserved: return "Multi-Line Space-Reserved"
+        case .multiLinePartialRangeFrom: return "Multi-Line Partial Range (From)"
+        case .multiLinePartialRangeThrough: return "Multi-Line Partial Range (Through)"
+        case .multiLineClosedRange: return "Multi-Line Closed Range"
         }
     }
 }

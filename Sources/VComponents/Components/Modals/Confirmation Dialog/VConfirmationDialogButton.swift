@@ -7,143 +7,176 @@
 
 import SwiftUI
 
+// MARK: - V Confirmation Dialog Button Protocol
+/// `VConfirmationDialog` button.
+public protocol VConfirmationDialogButtonProtocol: VConfirmationDialogButtonConvertible {
+    /// Body type.
+    typealias Body = AnyView
+    
+    /// Body.
+    var body: Body { get }
+}
+
+extension VConfirmationDialogButtonProtocol {
+    public func toButtons() -> [any VConfirmationDialogButtonProtocol] { [self] }
+}
+
 // MARK: - V Confirmation Dialog Button
-/// Model that represents `VConfirmationDialog` button, such as `standard`, `secondary`, `destructive`, or `cancel`.
-///
-/// `cancel` will be moved to the end of the stack.
-/// If there are multiple `cancel` buttons, only the last one will be kept.
-/// If there are no buttons, an `ok` button will be added.
-public struct VConfirmationDialogButton {
+/// `VConfirmationDialog` button.
+public struct VConfirmationDialogButton: VConfirmationDialogButtonProtocol {
     // MARK: Properties
-    let _confirmationDialogButton: _VConfirmationDialogButton
-    let isEnabled: Bool
-    let action: (() -> Void)?
-    let title: String
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
     
     // MARK: Initializers
-    private init(
-        confirmationDialogButton: _VConfirmationDialogButton,
-        isEnabled: Bool,
+    /// Initializes `VConfirmationDialog` with action and title.
+    public init(
         action: (() -> Void)?,
         title: String
     ) {
-        self._confirmationDialogButton = confirmationDialogButton
-        self.isEnabled = isEnabled
         self.action = action
         self.title = title
     }
     
-    /// Standard button.
-    public static func standard(
-        isEnabled: Bool = true,
-        action: @escaping () -> Void,
-        title: String
-    ) -> Self {
+    // MARK: Body
+    public var body: AnyView {
         .init(
-            confirmationDialogButton: .standard,
-            isEnabled: isEnabled,
-            action: action,
-            title: title
-        )
-    }
-    
-    /// Destructive button.
-    public static func destructive(
-        isEnabled: Bool = true,
-        action: @escaping () -> Void,
-        title: String
-    ) -> Self {
-        .init(
-            confirmationDialogButton: .destructive,
-            isEnabled: isEnabled,
-            action: action,
-            title: title
-        )
-    }
-    
-    /// Cancel button.
-    public static func cancel(
-        isEnabled: Bool = true,
-        action: (() -> Void)? = nil,
-        title: String? = nil
-    ) -> Self {
-        .init(
-            confirmationDialogButton: .cancel,
-            isEnabled: isEnabled,
-            action: action,
-            title: title ?? VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogCancelButtonTitle
-        )
-    }
-    
-    private static func ok() -> Self {
-        .init(
-            confirmationDialogButton: .ok,
-            isEnabled: true,
-            action: nil,
-            title: VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogOKButtonTitle
-        )
-    }
-    
-    // MARK: Processing
-    static func process(_ buttons: [Self]) -> [Self] {
-        // `.confirmationDialog()` filters out disabled buttons
-        let buttons: [Self] = buttons.filter { $0.isEnabled }
-        
-        var result: [VConfirmationDialogButton] = .init()
-        
-        for button in buttons {
-            if button._confirmationDialogButton == .cancel { result.removeAll(where: { $0._confirmationDialogButton == .cancel }) }
-            result.append(button)
-        }
-        if let cancelButtonIndex: Int = result.firstIndex(where: { $0._confirmationDialogButton == .cancel }) {
-            result.append(result.remove(at: cancelButtonIndex))
-        }
-        
-        if result.isEmpty {
-            result.append(.ok())
-        }
-        
-        return result
-    }
-    
-    // MARK: Button
-    var swiftUIButton: Button<Text> {
-        switch _confirmationDialogButton {
-        case .standard:
-            return Button(
+            Button(
                 title,
                 role: nil,
                 action: { action?() }
             )
-            
-        case .destructive:
-            return Button(
+                .disabled(!isEnabled)
+        )
+    }
+    
+    // MARK: Modifiers
+    /// Adds a condition that controls whether users can interact with the button.
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
+}
+
+// MARK: - V Confirmation Dialog OK Button
+/// "OK" `VConfirmationDialog` button.
+public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
+    // MARK: Properties
+    private var isEnabled: Bool = true
+    private let title: String
+    private let action: (() -> Void)?
+    
+    // MARK: Initializers
+    /// Initializes `VConfirmationDialog` with action.
+    ///
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
+    public init(
+        action: (() -> Void)?,
+        title: String? = nil
+    ) {
+        self.action = action
+        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogOKButtonTitle
+    }
+    
+    // MARK: Modifiers
+    /// Adds a condition that controls whether users can interact with the button.
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
+    
+    // MARK: Body
+    public var body: AnyView {
+        .init(
+            Button(
+                title,
+                role: nil,
+                action: { action?() }
+            )
+                .disabled(!isEnabled)
+        )
+    }
+}
+
+// MARK: - V Confirmation Dialog Destructive Button
+/// Destructive `VConfirmationDialog` button.
+public struct VConfirmationDialogDestructiveButton: VConfirmationDialogButtonProtocol {
+    // MARK: Properties
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+    
+    // MARK: Initializers
+    /// Initializes `VConfirmationDialog` with action and title.
+    public init(
+        action: (() -> Void)?,
+        title: String
+    ) {
+        self.action = action
+        self.title = title
+    }
+    
+    // MARK: Body
+    public var body: AnyView {
+        AnyView(
+            Button(
                 title,
                 role: .destructive,
                 action: { action?() }
             )
-        
-        case .cancel:
-            return Button(
+                .disabled(!isEnabled)
+        )
+    }
+    
+    // MARK: Modifiers
+    /// Adds a condition that controls whether users can interact with the button.
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
+}
+
+// MARK: - V Confirmation Dialog Cancel Button
+/// Cancel `VConfirmationDialog` button.
+public struct VConfirmationDialogCancelButton: VConfirmationDialogButtonProtocol {
+    // MARK: Properties
+    private var isEnabled: Bool = true
+    private let action: (() -> Void)?
+    private let title: String
+    
+    // MARK: Initializers
+    /// Initializes `VConfirmationDialog` with action.
+    ///
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
+    public init(
+        action: (() -> Void)?,
+        title: String? = nil
+    ) {
+        self.action = action
+        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogCancelButtonTitle
+    }
+    
+    // MARK: Body
+    public var body: AnyView {
+        .init(
+            Button(
                 title,
                 role: .cancel,
                 action: { action?() }
             )
-            
-        case .ok:
-            return Button(
-                title,
-                role: nil,
-                action: { action?() }
-            )
-        }
+                .disabled(!isEnabled)
+        )
     }
-}
-
-// MARK: - _ V Confirmation Dialog Button
-enum _VConfirmationDialogButton {
-    case standard
-    case destructive
-    case cancel
-    case ok // Not accessible from outside
+    
+    // MARK: Modifiers
+    /// Adds a condition that controls whether users can interact with the button.
+    public func disabled(_ disabled: Bool) -> Self {
+        var row = self
+        row.isEnabled = !disabled
+        return row
+    }
 }

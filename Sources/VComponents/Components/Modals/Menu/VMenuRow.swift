@@ -7,88 +7,145 @@
 
 import SwiftUI
 
-// MARK: - V Menu Row
-/// Model that represents menu row, such as title, title with icons, or sub-menu.
-public struct VMenuRow {
+// MARK: - V Menu Row Protocol
+/// `VMenu` row.
+public protocol VMenuRowProtocol: VMenuRowConvertible {
+    /// Body type.
+    typealias Body = AnyView
+    
+    /// Body.
+    var body: Body { get }
+}
+
+extension VMenuRowProtocol {
+    public func toRows() -> [any VMenuRowProtocol] { [self] }
+}
+
+// MARK: - V Menu Title Row
+/// `VMenu` row with title.
+public struct VMenuTitleRow: VMenuRowProtocol {
     // MARK: Properties
-    let _menuRow: _VMenuRow
+    private let action: () -> Void
+    private let role: ButtonRole?
+    private let title: String
     
     // MARK: Initializers
-    private init(
-        menuRow: _VMenuRow
-    ) {
-        self._menuRow = menuRow
-    }
-    
-    /// Row with title.
-    public static func title(
+    /// Initializes `VMenuTitleRow` with action and title.
+    public init(
         action: @escaping () -> Void,
+        role: ButtonRole? = nil,
         title: String
-    ) -> Self {
-        .init(menuRow: .title(
-            action: action,
-            title: title
-        ))
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
     }
     
-    /// Row with title and icon from assets catalog.
-    public static func titleIcon(
-        action: @escaping () -> Void,
-        title: String,
-        assetIcon: String,
-        bundle: Bundle? = nil
-    ) -> Self {
-        .init(menuRow: .titleAssetIcon(
-            action: action,
-            title: title,
-            icon: assetIcon,
-            bundle: bundle
-        ))
-    }
-    
-    /// Row with title and icon.
-    public static func titleIcon(
-        action: @escaping () -> Void,
-        title: String,
-        icon: Image
-    ) -> Self {
-        .init(menuRow: .titleIcon(
-            action: action,
-            title: title,
-            icon: icon
-        ))
-    }
-    
-    /// Row with title and sytem icon.
-    public static func titleIcon(
-        action: @escaping () -> Void,
-        title: String,
-        systemIcon: String
-    ) -> Self {
-        .init(menuRow: .titleSystemIcon(
-            action: action,
-            title: title,
-            icon: systemIcon
-        ))
-    }
-    
-    /// Row that expands to sub-menu.
-    public static func menu(
-        title: String,
-        rows: [VMenuRow]
-    ) -> Self {
-        .init(menuRow: .menu(
-            title: title,
-            rows: rows
-        ))
+    // MARK: Body
+    public var body: AnyView {
+        .init(
+            Button(
+                title,
+                role: role,
+                action: action
+            )
+        )
     }
 }
 
-// MARK: - _ V Menu Row
-enum _VMenuRow {
-    case title(action: () -> Void, title: String)
-    case titleAssetIcon(action: () -> Void, title: String, icon: String, bundle: Bundle?)
-    case titleIcon(action: () -> Void, title: String, icon: Image)
-    case titleSystemIcon(action: () -> Void, title: String, icon: String)
-    case menu(title: String, rows: [VMenuRow])
+// MARK: - V Menu Title Icon Row
+/// `VMenu` row with title and icon.
+public struct VMenuTitleIconRow: VMenuRowProtocol {
+    // MARK: Properties
+    private let action: () -> Void
+    private let role: ButtonRole?
+    private let title: String
+    private let icon: Image
+    
+    // MARK: Initializers
+    /// Initializes `VMenuTitleIconRow` with action, title, and icon.
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        icon: Image
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = icon
+    }
+    
+    /// Initializes `VMenuTitleIconRow` with action, title, and asset icon name.
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        assetIcon: String,
+        bundle: Bundle? = nil
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = .init(assetIcon, bundle: bundle)
+    }
+    
+    /// Initializes `VMenuTitleIconRow` with action, title, and system icon name.
+    public init(
+        action: @escaping () -> Void,
+        role: ButtonRole? = nil,
+        title: String,
+        systemIcon: String
+    ) {
+        self.action = action
+        self.role = role
+        self.title = title
+        self.icon = .init(systemName: systemIcon)
+    }
+    
+    // MARK: Body
+    public var body: AnyView {
+        .init(
+            Button(
+                role: role,
+                action: action,
+                label: {
+                    Text(title)
+                    icon
+                }
+            )
+        )
+    }
+}
+
+// MARK: - V Menu Sub Menu Row
+/// `VMenu` row with submenu.
+public struct VMenuSubMenuRow: VMenuRowProtocol {
+    // MARK: Properties
+    private let title: String
+    private let primaryAction: (() -> Void)?
+    private let sections: () -> [any VMenuSectionProtocol]
+    
+    // MARK: Initializers
+    /// Initializes `VMenuPickerSection` title with sections.
+    public init(
+        title: String,
+        primaryAction: (() -> Void)? = nil,
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
+    ) {
+        self.title = title
+        self.primaryAction = primaryAction
+        self.sections = sections
+    }
+    
+    // MARK: Body
+    public var body: AnyView {
+        .init(
+            VMenu(
+                primaryAction: primaryAction,
+                title: title,
+                sections: sections
+            )
+        )
+    }
 }

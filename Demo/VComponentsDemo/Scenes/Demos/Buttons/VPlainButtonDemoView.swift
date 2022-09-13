@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Plain Button Demo View
 struct VPlainButtonDemoView: View {
@@ -67,19 +68,19 @@ struct VPlainButtonDemoView: View {
     
     private var buttonIcon: Image { .init(systemName: "swift") }
     
-    private var buttonTitle: String { "Lorem" }
+    private var buttonTitle: String { "Lorem Ipsum" }
 }
 
 // MARK: - Helpers
 private typealias VPlainButtonInternalState = VSecondaryButtonInternalState
 
-private enum VPlainButtonLabel: Int, PickableTitledEnumeration {
+private enum VPlainButtonLabel: Int, StringRepresentableHashableEnumeration {
     case title
     case icon
     case iconTitle
     case custom
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .title: return "Title"
         case .icon: return "Icon"

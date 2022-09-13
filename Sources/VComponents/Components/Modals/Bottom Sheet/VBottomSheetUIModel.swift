@@ -57,6 +57,8 @@ public struct VBottomSheetUIModel {
         public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
         
         /// Grabber indicator size. Defaults to `50` width and `4` height.
+        ///
+        /// To hide, set to `zero`.
         public var grabberSize: CGSize = .init(width: 50, height: 4)
         
         /// Grabber corner radius. Defaults to `2`.
@@ -91,7 +93,7 @@ public struct VBottomSheetUIModel {
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: Margins = modalReference.layout.dividerMargins
         
-        /// Content margins. Defaults to `15`s.
+        /// Content margins. Defaults to `zero`.
         public var contentMargins: Margins = modalReference.layout.contentMargins
         
         /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.
@@ -101,6 +103,11 @@ public struct VBottomSheetUIModel {
         ///
         /// Has no effect on fixed bottom sheet.
         public var autoresizesContent: Bool = false
+        
+        /// Edges on which header has safe area edges. Defaults to `[]`.
+        ///
+        /// Can be used for full-sized modal, to prevent header from leaving safe area.
+        public var headerSafeAreaEdges: Edge.Set = []
         
         /// Edges on which content has safe area edges. Defaults to `[]`.
         ///
@@ -266,7 +273,7 @@ public struct VBottomSheetUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPD<Color>
+        public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -311,12 +318,12 @@ public struct VBottomSheetUIModel {
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: DismissType = .default
         
-        /// Indicates if sheet can be resized by dragging outside the header. Defaults to `false`.
+        /// Indicates if bottom sheet can be resized by dragging outside the header. Defaults to `false`.
         ///
         /// Setting to `true` may cause issues with scrollable views.
         ///
         /// Has no effect on fixed bottom sheet.
-        public var isContentDraggable: Bool = false
+        public var contentIsDraggable: Bool = false
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -359,10 +366,10 @@ public struct VBottomSheetUIModel {
     }
     
     // MARK: Sub-Models
-    var sheetModel: VSheetUIModel {
+    var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         
-        uiModel.layout.roundedCorners = [.topLeft, .topRight]
+        uiModel.layout.roundedCorners = .topCorners
         uiModel.layout.cornerRadius = layout.cornerRadius
         uiModel.layout.contentMargin = 0
         
@@ -381,6 +388,64 @@ public struct VBottomSheetUIModel {
         
         uiModel.colors.background = colors.closeButtonBackground
         uiModel.colors.icon = colors.closeButtonIcon
+        
+        return uiModel
+    }
+}
+
+// MARK: - Factory
+extension VBottomSheetUIModel {
+    /// `VBottomSheetUIModel` that insets content.
+    public static var insettedContent: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        
+        return uiModel
+    }
+    
+    /// `VBottomSheetUIModel` that autoresizes content and inserts bottom safe area for scrollable content.
+    public static var scrollableContent: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.layout.autoresizesContent = true
+        uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+        
+        return uiModel
+    }
+    
+    /// `VBottomSheetUIModel` that hides header.
+    ///
+    /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
+    public static var noHeaderLabel: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.misc.dismissType.remove(.leadingButton)
+        uiModel.misc.dismissType.remove(.trailingButton)
+        
+        return uiModel
+    }
+    
+    /// `VBottomSheetUIModel` that hides header, autoresizes content, and inserts bottom safe area for scrollable content.
+    ///
+    /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
+    public static var scrollableContentNoHeaderLabel: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.layout.autoresizesContent = true
+        uiModel.layout.contentSafeAreaEdges.insert(.bottom)
+        
+        uiModel.misc.dismissType.remove(.leadingButton)
+        uiModel.misc.dismissType.remove(.trailingButton)
+        
+        return uiModel
+    }
+    
+    /// `VBottomSheetUIModel` that stretches content to full size.
+    public static var fullSizedContent: VBottomSheetUIModel {
+        var uiModel: VBottomSheetUIModel = .noHeaderLabel
+        
+        uiModel.layout.grabberSize.height = .zero
         
         return uiModel
     }

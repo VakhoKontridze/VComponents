@@ -25,46 +25,35 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     uiModel.misc.dismissType.remove(.leadingButton)
-    ///                     uiModel.misc.dismissType.remove(.trailingButton)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: .scrollableContentNoHeaderLabel,
     ///                 isPresented: $isPresented,
     ///                 content: {
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Content>(
+    public func vBottomSheet(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VBottomSheet<Never, _>(
@@ -94,46 +83,37 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: .scrollableContent,
     ///                 isPresented: $isPresented,
     ///                 headerTitle: "Lorem Ipsum Dolor Sit Amet",
     ///                 content: {
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Content>(
+    public func vBottomSheet(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         headerTitle: String,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VBottomSheet<Never, _>(
@@ -163,12 +143,8 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: .scrollableContent,
     ///                 isPresented: $isPresented,
     ///                 headerLabel: {
     ///                     HStack(content: {
@@ -177,39 +153,32 @@ extension View {
     ///                     })
     ///                 },
     ///                 content: {
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
     ///
-    public func vBottomSheet<HeaderLabel, Content>(
+    public func vBottomSheet(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View
-        where
-            HeaderLabel: View,
-            Content: View
-    {
+        @ViewBuilder headerLabel: @escaping () -> some View,
+        @ViewBuilder content: @escaping () -> some View
+    ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: isPresented,
                 content: {
                     VBottomSheet(
@@ -246,50 +215,39 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     uiModel.misc.dismissType.remove(.leadingButton)
-    ///                     uiModel.misc.dismissType.remove(.trailingButton)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: .scrollableContentNoHeaderLabel,
     ///                 item: $bottomSheetItem,
     ///                 content: { item in
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Item, Content>(
+    public func vBottomSheet<Item>(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -301,7 +259,7 @@ extension View {
                         onDismiss: dismissHandler,
                         headerLabel: .empty,
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 content(item)
                             }
                         }
@@ -330,50 +288,41 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: .scrollableContent,
     ///                 item: $bottomSheetItem,
     ///                 headerTitle: { item in "Lorem Ipsum Dolor Sit Amet" },
     ///                 content: { item in
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Item, Content>(
+    public func vBottomSheet<Item>(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         headerTitle: @escaping (Item) -> String,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            Content: View
+        where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
@@ -384,14 +333,14 @@ extension View {
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         headerLabel: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return .title(title: headerTitle(item))
                             } else {
                                 return .empty
                             }
                         }(),
                         content: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 content(item)
                             }
                         }
@@ -420,12 +369,8 @@ extension View {
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(
-    ///                 uiModel: {
-    ///                     var uiModel: VBottomSheetUIModel = .init()
-    ///                     uiModel.layout.autoresizesContent = true
-    ///                     uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-    ///                     return uiModel
-    ///                 }(),
+    ///                 id: "some_bottom_sheet",
+    ///                 uiModel: .scrollableContent,
     ///                 item: $bottomSheetItem,
     ///                 headerLabel: { item in
     ///                     HStack(content: {
@@ -434,60 +379,54 @@ extension View {
     ///                     })
     ///                 },
     ///                 content: { item in
-    ///                     VList(
-    ///                         uiModel: {
-    ///                             var uiModel: VListUIModel = .init()
-    ///                             uiModel.layout.showsFirstSeparator = false
-    ///                             uiModel.layout.showsLastSeparator = false
-    ///                             return uiModel
-    ///                         }(),
-    ///                         data: 0..<20,
-    ///                         content: { num in
-    ///                             Text(String(num))
-    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
-    ///                         }
-    ///                     )
+    ///                     List(content: {
+    ///                         ForEach(0..<20, content: { num in
+    ///                             VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+    ///                                 Text(String(num))
+    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
+    ///                             })
+    ///                         })
+    ///                     })
+    ///                         .vListStyle()
     ///                 }
     ///             )
     ///     }
     ///
-    public func vBottomSheet<Item, HeaderLabel, Content>(
+    public func vBottomSheet<Item>(
+        id: String,
         uiModel: VBottomSheetUIModel = .init(),
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
-        @ViewBuilder headerLabel: @escaping (Item) -> HeaderLabel,
-        @ViewBuilder content: @escaping (Item) -> Content
+        @ViewBuilder headerLabel: @escaping (Item) -> some View,
+        @ViewBuilder content: @escaping (Item) -> some View
     ) -> some View
-        where
-            Item: Identifiable,
-            HeaderLabel: View,
-            Content: View
+        where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
                 content: {
-                    VBottomSheet<HeaderLabel, _>(
-                        uiModel: uiModel,
+                    VBottomSheet(
+                       uiModel: uiModel,
                        onPresent: presentHandler,
                        onDismiss: dismissHandler,
                        headerLabel: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                return .custom(label: { headerLabel(item) })
                            } else {
                                return .empty
                            }
                        }(),
                        content: {
-                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                           if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                content(item)
                            }
                        }

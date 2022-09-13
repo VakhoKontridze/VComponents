@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK: - V Radio Button Label
-typealias VRadioButtonLabel = VToggleLabel
+typealias VRadioButtonLabel = GenericLabel_EmptyTitleCustom

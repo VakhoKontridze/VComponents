@@ -11,16 +11,16 @@ import VCore
 // MARK: - V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally.
 ///
-/// Component can be initialized with data, row titles, or `PickableEnumeration`/`PickableTitledEnumeration`.
+/// Component can be initialized with data, row titles, or `HashableEnumeration`/`StringRepresentableHashableEnumeration`.
 ///
 /// Best suited for `2` – `3` items.
 ///
 /// UI Model, header, footer, and disabled indexes can be passed as parameters.
 ///
-///     enum PickerRow: Int, PickableTitledEnumeration {
+///     enum PickerRow: Int, StringRepresentableHashableEnumeration {
 ///         case red, green, blue
 ///
-///         var pickerTitle: String {
+///         var stringRepresentation: String {
 ///             switch self {
 ///             case .red: return "Red"
 ///             case .green: return "Green"
@@ -158,35 +158,35 @@ public struct VSegmentedPicker<Data, Content>: View
         self.content = .titles(titles: rowTitles)
     }
     
-    // MARK: Initializers - Pickable Enumeration & Pickable Titled Enumeration
-    /// Initializes component with `PickableEnumeration` and row content.
-    public init<PickableItem>(
+    // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
+    /// Initializes component with `HashableEnumeration` and row content.
+    public init<T>(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<PickableItem>,
+        selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
-        @ViewBuilder content: @escaping (PickableItem) -> Content
+        @ViewBuilder content: @escaping (T) -> Content
     )
         where
-            Data == Array<PickableItem>,
-            PickableItem: PickableEnumeration
+            Data == Array<T>,
+            T: HashableEnumeration
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
-            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: Array(PickableItem.allCases), content: content)
+        self.content = .custom(data: Array(T.allCases), content: content)
     }
     
-    /// Initializes component with `PickableTitledEnumeration`.
-    public init<PickableItem>(
+    /// Initializes component with `StringRepresentableHashableEnumeration`.
+    public init<T>(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<PickableItem>,
+        selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = []
@@ -194,17 +194,17 @@ public struct VSegmentedPicker<Data, Content>: View
         where
             Data == Array<Never>,
             Content == Never,
-            PickableItem: PickableTitledEnumeration
+            T: StringRepresentableHashableEnumeration
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { Array(PickableItem.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
-            set: { selection.wrappedValue = Array(PickableItem.allCases)[$0] }
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .titles(titles: Array(PickableItem.allCases).map { $0.pickerTitle })
+        self.content = .titles(titles: Array(T.allCases).map { $0.stringRepresentation })
     }
     
     // MARK: Body
@@ -219,10 +219,10 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     @ViewBuilder private var header: some View {
-        if let headerTitle = headerTitle, !headerTitle.isEmpty {
+        if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
-                color: uiModel.colors.header.for(internalState),
+                type: uiModel.layout.headerTitleLineType,
+                color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
@@ -231,10 +231,10 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     @ViewBuilder private var footer: some View {
-        if let footerTitle = footerTitle, !footerTitle.isEmpty {
+        if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
-                color: uiModel.colors.footer.for(internalState),
+                type: uiModel.layout.footerTitleLineType,
+                color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
@@ -254,7 +254,7 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     private var pickerBackground: some View {
-        uiModel.colors.background.for(internalState)
+        uiModel.colors.background.value(for: internalState)
     }
     
     private var indicator: some View {
@@ -263,9 +263,9 @@ public struct VSegmentedPicker<Data, Content>: View
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale)
             .offset(x: rowWidth * .init(selectedIndex))
-            .foregroundColor(uiModel.colors.indicator.for(internalState))
+            .foregroundColor(uiModel.colors.indicator.value(for: internalState))
             .shadow(
-                color: uiModel.colors.indicatorShadow.for(internalState),
+                color: uiModel.colors.indicatorShadow.value(for: internalState),
                 radius: uiModel.layout.indicatorShadowRadius,
                 x: uiModel.layout.indicatorShadowOffsetX,
                 y: uiModel.layout.indicatorShadowOffsetY
@@ -281,7 +281,8 @@ public struct VSegmentedPicker<Data, Content>: View
                         gesture: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
-                                color: uiModel.colors.title.for(rowState(for: i)),
+                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+                                color: uiModel.colors.title.value(for: rowState(for: i)),
                                 font: uiModel.fonts.rows,
                                 text: titles[i]
                             )
@@ -307,7 +308,7 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
 
-                                .opacity(uiModel.colors.customContentOpacities.for(rowState(for: i)))
+                                .opacity(uiModel.colors.customContentOpacities.value(for: rowState(for: i)))
 
                                 .readSize(onChange: { rowWidth = $0.width })
                         }
@@ -326,7 +327,7 @@ public struct VSegmentedPicker<Data, Content>: View
                 if i <= content.count-2 {
                     Rectangle()
                         .frame(size: uiModel.layout.dividerSize)
-                        .foregroundColor(uiModel.colors.divider.for(internalState))
+                        .foregroundColor(uiModel.colors.divider.value(for: internalState))
                         .opacity(dividerOpacity(for: i))
                 }
             })
@@ -359,10 +360,10 @@ public struct VSegmentedPicker<Data, Content>: View
 
 // MARK: - Preview
 struct VSegmentedPicker_Previews: PreviewProvider {
-    enum PickerRow: Int, PickableTitledEnumeration {
+    enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
     
-        var pickerTitle: String {
+        var stringRepresentation: String {
             switch self {
             case .red: return "Red"
             case .green: return "Green"

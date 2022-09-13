@@ -1,5 +1,163 @@
 # Change Log
 
+### 3.0.0(?)
+
+General
+
+- `PresentationHost` API is updated, and all modals now have id-based `View` extension methods
+- `PresentationHostViewController` is no longer `public`
+
+VPrimaryButton
+
+- Corner radius is changed from `20` to `16`.
+- `titleMinimumScaleFactor` is added in `VPrimaryButtonUIModel`
+
+VSecondaryButton
+
+- `titleMinimumScaleFactor` is added in `VSecondaryButtonUIModel`
+
+VSquareButton
+
+- `VSquareButton` is renamed to `VRoundedButton`
+- `titleMinimumScaleFactor` is added in `VRoundedButtonUIModel`
+
+VRoundedLabeledButton
+
+- New button type is added
+
+VPlainButton
+
+- `titleMinimumScaleFactor` is added in `VPlainButtonUIModel`
+
+VNavigationLink
+
+- Component is removed, as package migrates to `NavigationStack`-based programatic navigation
+
+VLink
+
+- Component is removed, to support more UI customization with simple `UIApplication.shared.open(:)` 
+
+VToggle
+
+- `titleLineLimit` is replaced with `titleLineType` in `VToggleUIModel`
+- `titleMinimumScaleFactor` is added in `VToggleUIModel`
+
+VCheckBox
+
+- `titleLineLimit` is replaced with `titleLineType` in `VCheckBoxUIModel`
+- `titleMinimumScaleFactor` is added in `VCheckBoxUIModel`
+
+VRadioButton
+
+- `titleLineLimit` is replaced with `titleLineType` in `VRadioButtonUIModel`
+- `titleMinimumScaleFactor` is added in `VRadioButtonUIModel`
+
+VSegmentedPicker
+
+- `headerLineLimit` is replaced with `headerTitleLineType` is `VSegmentedPickerUIModel`
+- `footerLineLimit` is replaced with `footerTitleLineType` is `VSegmentedPickerUIModel`
+- `titleMinimumScaleFactor` is added in `VSegmentedPickerUIModel`
+- Header and footer color mismatched when disabled is fixed
+
+VWheelPicker
+
+- `headerLineLimit` is replaced with `headerTitleLineType` is `VWheelPickerUIModel`
+- `footerLineLimit` is replaced with `footerTitleLineType` is `VWheelPickerUIModel`
+- `titleMinimumScaleFactor` is added in `VWheelPickerUIModel`
+- Header and footer color mismatched when disabled is fixed
+
+VMenuPicker
+
+- MenuPicker is deprecated. Use `VMenu` with `VMenuPickerSection`.
+
+VTextField
+
+- TextField Height is changed from `45` to `50`
+- `headerLineLimit` is replaced with `headerTitleLineType` is `VTextFieldUIModel`
+- `footerLineLimit` is replaced with `footerTitleLineType` is `VTextFieldUIModel`
+- Header and footer color mismatched when disabled is fixed
+
+VDisclosureGroup
+
+- Chevron icon direction is now right for collapsed state, and down for expanded
+- `contentMargins` are changed from `15`s to `zero` in `VDisclosureGroupUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VDisclosureGroupUIModel.insettedContent` is added
+- Issue with corner radius messing layout when content margin is `zero` is fixed
+
+VLazyScrollView
+
+- List is removed for more versatile `VListRow`-based API
+
+VList
+
+- List is removed for more versatile `VListRow`-based API
+
+VStaticList
+
+- List is removed for more versatile `VListRow`-based API
+
+VModal
+
+- `contentMargins` are changed from `15`s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VModalUIModel.insettedContent` is added
+- `VModalUIModel.noHeaderLabel` is added
+- `headerSafeAreaEdges` is added to `VModalUIModel` that can be used for full-sized modal
+
+VBottomSheet
+
+- `contentMargins` are changed from `15`s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VBottomSheetUIModel.insettedContent` is added
+- `VBottomSheetUIModel.scrollableContent` is added
+- `VBottomSheetUIModel.noHeaderLabel` is added
+- `VBottomSheetUIModel.scrollableContentNoHeaderLabel` is added
+- `VBottomSheetUIModel.fullSizedContent` is added
+- `headerSafeAreaEdges` is added to `VBottomSheetUIModel` that can be used for full-sized modal
+- Issue with content clipping outside container with big corner radius is fixed
+- Issue with content not stretching to full height when grabber, header, and divider are all hidden if fixed
+- `isContentDraggable` is renamed to `contentIsDraggable` in `VBottomSheetUIModel`
+
+VSideBar
+
+- `contentMargins` are changed from `15`s to `zero` in `VSideBarUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
+- `VSideBarUIModel.insettedContent` is added
+
+VAlert
+
+- Alert now builds actions using `resultBuilder`
+
+VConfirmationDialog
+
+- ConfirmationDialog now builds actions using `resultBuilder`
+
+VMenu
+
+- Menu now support multiple section
+- Menu now builds sections and rows using `resultBuilder`
+- Menu now supports picker section, transferred from `VMenuPicker`
+
+VContextMenu
+
+- ContextMenu now support multiple section
+- ContextMenu now builds sections and rows using `resultBuilder`
+- ContextMenu now supports picker section, transferred from `VMenuPicker`
+
+VToast
+
+- `VToastType` is renamed to `VToastTextLineType`
+
+VText
+
+- `VTextType` is renamed to `TextLineType`
+
+Other
+
+- `PickableEnumeration` is renamed to `HashableEnumeration`
+- `PickableTitledEnumeration` is renamed to `StringRepresentableHashableEnumeration`
+- `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to `VCore`
+- `GenericState`s and `GenericStateModels`s are moved to `VCore`
+- `BasicAnimation` is moved to `VCore`
+- pressed and disabled `Color`s in `ColorBook` are updated, to be `0.3` opacity of original reference `Color`s
+
 ### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*
 
 General

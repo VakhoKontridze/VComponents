@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: V Text Field Demo View
 struct VTextFieldDemoView: View {
@@ -151,7 +152,7 @@ struct VTextFieldDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VTextFieldInternalState: PickableTitledEnumeration {
+private enum VTextFieldInternalState: StringRepresentableHashableEnumeration {
     case enabled
     case focused
     case disabled
@@ -164,7 +165,7 @@ private enum VTextFieldInternalState: PickableTitledEnumeration {
         }
     }
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .enabled: return "Enabled"
         case .focused: return "Focused"
@@ -173,8 +174,8 @@ private enum VTextFieldInternalState: PickableTitledEnumeration {
     }
 }
 
-extension VTextFieldType: PickableTitledEnumeration {
-    public var pickerTitle: String {
+extension VTextFieldType: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
         switch self {
         case .standard: return "Standard"
         case .secure: return "Secure"
@@ -183,8 +184,8 @@ extension VTextFieldType: PickableTitledEnumeration {
     }
 }
 
-extension TextAlignment: PickableTitledEnumeration {
-    public var pickerTitle: String {
+extension TextAlignment: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
         switch self {
         case .leading: return "Leading"
         case .center: return "Center"
@@ -193,13 +194,13 @@ extension TextAlignment: PickableTitledEnumeration {
     }
 }
 
-private enum VTextFieldHighlight: PickableTitledEnumeration {
+private enum VTextFieldHighlight: StringRepresentableHashableEnumeration {
     case none
     case success
     case warning
     case error
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .none: return "None"
         case .success:  return "Success"

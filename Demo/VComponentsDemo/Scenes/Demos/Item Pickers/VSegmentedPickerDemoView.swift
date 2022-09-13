@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Segmented Picker Demo View
 struct VSegmentedPickerDemoView: View {
@@ -107,11 +108,11 @@ struct VSegmentedPickerDemoView: View {
 // MARK: - Helpers
 private typealias VSegmentedPickerState = VSecondaryButtonInternalState
 
-enum VSegmentedPickerContent: Int, PickableTitledEnumeration {
+enum VSegmentedPickerContent: Int, StringRepresentableHashableEnumeration {
     case title
     case custom
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .title: return "Title"
         case .custom: return "Custom"
@@ -119,12 +120,12 @@ enum VSegmentedPickerContent: Int, PickableTitledEnumeration {
     }
 }
 
-enum VSegmentedPickerDataSource: Int, PickableTitledEnumeration {
+enum VSegmentedPickerDataSource: Int, StringRepresentableHashableEnumeration {
     case red
     case green
     case blue
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .red: return "Red"
         case .green: return "Green"

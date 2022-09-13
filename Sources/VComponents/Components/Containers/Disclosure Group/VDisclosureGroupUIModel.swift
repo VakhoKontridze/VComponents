@@ -14,7 +14,7 @@ public struct VDisclosureGroupUIModel {
     // MARK: Properties
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let chevronButtonReference: VChevronButtonUIModel = .init()
-    fileprivate static let listReference: VListUIModel = .init()
+    fileprivate static let listRowReference: VListRowUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -65,8 +65,8 @@ public struct VDisclosureGroupUIModel {
             vertical: 0
         )
         
-        /// Content margins. Defaults to `15`s.
-        public var contentMargins: Margins = .init(sheetReference.layout.contentMargin)
+        /// Content margins. Defaults to `zero`.
+        public var contentMargins: Margins = .zero
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -101,11 +101,11 @@ public struct VDisclosureGroupUIModel {
         public var customHeaderLabelOpacities: StateOpacities = .init(
             collapsed: 1,
             expanded: 1,
-            disabled: 0.5
+            disabled: 0.3
         )
         
         /// Divider color.
-        public var divider: Color = listReference.colors.separator
+        public var divider: Color = listRowReference.colors.separator
         
         /// Chevron button background colors.
         public var chevronButtonBackground: ButtonStateColors = chevronButtonReference.colors.background
@@ -119,15 +119,15 @@ public struct VDisclosureGroupUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_CED<Color>
+        public typealias StateColors = GenericStateModel_CollapsedExpandedDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_CED<CGFloat>
+        public typealias StateOpacities = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
         
         // MARK: Button State Colors
         /// Sub-model containing colors for component states.
-        public typealias ButtonStateColors = GenericStateModel_EPD<Color>
+        public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -182,7 +182,7 @@ public struct VDisclosureGroupUIModel {
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         
-        uiModel.layout.cornerRadius = 0
+        uiModel.layout.cornerRadius = uiModel.layout.cornerRadius
         uiModel.layout.contentMargin = 0
         
         uiModel.colors.background = colors.background
@@ -200,6 +200,18 @@ public struct VDisclosureGroupUIModel {
         
         uiModel.colors.background = colors.chevronButtonBackground
         uiModel.colors.icon = colors.chevronButtonIcon
+        
+        return uiModel
+    }
+}
+
+// MARK: - Factory
+extension VDisclosureGroupUIModel {
+    /// `VDisclosureGroupUIModel` that insets content.
+    public static var insettedContent: VDisclosureGroupUIModel {
+        var uiModel: VDisclosureGroupUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
         
         return uiModel
     }

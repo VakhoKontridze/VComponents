@@ -76,8 +76,13 @@ public struct VModalUIModel {
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: Margins = .zero
         
-        /// Content margins. Defaults to `15`s.
+        /// Content margins. Defaults to `zero`.
         public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
+        
+        /// Edges on which header has safe area edges. Defaults to `[]`.
+        ///
+        /// Can be used for full-sized modal, to prevent header from leaving safe area.
+        public var headerSafeAreaEdges: Edge.Set = []
         
         /// Edges ignored by keyboard. Defaults to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
@@ -138,7 +143,7 @@ public struct VModalUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPD<Color>
+        public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -229,6 +234,7 @@ public struct VModalUIModel {
         
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.contentMargin = 0
         
         uiModel.colors.background = colors.background
         
@@ -245,6 +251,28 @@ public struct VModalUIModel {
         
         uiModel.colors.background = colors.closeButtonBackground
         uiModel.colors.icon = colors.closeButtonIcon
+        
+        return uiModel
+    }
+}
+
+// MARK: - Factory
+extension VModalUIModel {
+    /// `VModalUIModel` that insets content.
+    public static var insettedContent: VModalUIModel {
+        var uiModel: VModalUIModel = .init()
+        
+        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        
+        return uiModel
+    }
+    
+    /// `VModalUIModel` that hides header.
+    public static var noHeaderLabel: VModalUIModel {
+        var uiModel: VModalUIModel = .init()
+        
+        uiModel.misc.dismissType.remove(.leadingButton)
+        uiModel.misc.dismissType.remove(.trailingButton)
         
         return uiModel
     }

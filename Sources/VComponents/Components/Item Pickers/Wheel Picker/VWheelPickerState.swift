@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Wheel Picker State
-typealias VWheelPickerInternalState = GenericState_ED
+typealias VWheelPickerInternalState = GenericState_EnabledDisabled

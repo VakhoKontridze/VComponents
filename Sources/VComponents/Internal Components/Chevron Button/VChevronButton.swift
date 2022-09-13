@@ -8,14 +8,14 @@
 import SwiftUI
 
 // MARK: - V Chevron Button
-extension VSquareButton where Label == Never {
+extension VRoundedButton where Label == Never {
     static func chevron(
         uiModel: VChevronButtonUIModel = .init(),
         direction: VChevronButtonDirection,
         action: @escaping () -> Void
     ) -> some View {
-        VSquareButton(
-            uiModel: uiModel.squareButtonSubUIModel,
+        VRoundedButton(
+            uiModel: uiModel.roundedButtonSubUIModel,
             action: action,
             icon: ImageBook.chevronUp
         )
@@ -26,9 +26,9 @@ extension VSquareButton where Label == Never {
 // MARK: - Preview
 struct VChevronButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSquareButton.chevron(
+        VRoundedButton.chevron(
             direction: .right,
-            action: {}
+            action: { print("Clicked") }
         )
     }
 }

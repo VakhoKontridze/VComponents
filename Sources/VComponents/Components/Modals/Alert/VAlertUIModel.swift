@@ -13,6 +13,7 @@ import VCore
 public struct VAlertUIModel {
     // MARK: Properties
     fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
+    fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let modalReference: VModalUIModel = .init()
     
     /// Sub-model containing layout properties.
@@ -49,10 +50,10 @@ public struct VAlertUIModel {
         /// Corner radius. Defaults to `20`.
         public var cornerRadius: CGFloat = 20
         
-        /// Additional margisn applied to title, message, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
+        /// Additional margins applied to title, message, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
         public var titleMessageContentMargins: Margins = .init(
-            leading: modalReference.layout.contentMargins.horizontal / 2,
-            trailing: modalReference.layout.contentMargins.horizontal / 2,
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
             top: 20,
             bottom: 10
         )
@@ -91,8 +92,8 @@ public struct VAlertUIModel {
         
         /// Button margins. Defaults to `15` leading, `15` trailing, `15` top, and `20` bottom.
         public var buttonMargins: Margins = .init(
-            leading: modalReference.layout.contentMargins.leading,
-            trailing: modalReference.layout.contentMargins.trailing,
+            leading: sheetReference.layout.contentMargin,
+            trailing: sheetReference.layout.contentMargin,
             top: 10,
             bottom: 20
         )
@@ -199,7 +200,7 @@ public struct VAlertUIModel {
         public init() {}
         
         /// Sub-model containing colors for button states.
-        public typealias ButtonStateColors = GenericStateModel_EPD<Color>
+        public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -227,6 +228,7 @@ public struct VAlertUIModel {
         
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.cornerRadius = layout.cornerRadius
+        uiModel.layout.contentMargin = 0
         
         uiModel.colors.background = colors.background
         
@@ -271,13 +273,13 @@ public struct VAlertUIModel {
 }
 
 // MARK: - Helpers
-extension GenericStateModel_EPDL where Value == Color {
-    fileprivate static func alertButton(_ model: GenericStateModel_EPD<Color>) -> Self {
+extension GenericStateModel_EnabledPressedLoadingDisabled where Value == Color {
+    fileprivate static func alertButton(_ model: GenericStateModel_EnabledPressedDisabled<Color>) -> Self {
         self.init(
             enabled: model.enabled,
             pressed: model.pressed,
-            disabled: model.disabled,
-            loading: .clear // Doesn't matter
+            loading: .clear, // Doesn't matter
+            disabled: model.disabled
         )
     }
 }

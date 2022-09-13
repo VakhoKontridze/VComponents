@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V CheckBox UI Model
 /// Model that describes UI.
@@ -54,8 +55,11 @@ public struct VCheckBoxUIModel {
         /// Spacing between checkbox and label. Defaults to `0`.
         public var checkBoxLabelSpacing: CGFloat = 0
         
-        /// Title label line limit. Defaults to `nil`.
-        public var titleLineLimit: Int? = toggleReference.layout.titleLineLimit
+        /// Title line type. Defaults to `multiline` of `1...2` lines.
+        public var titleLineType: TextLineType = toggleReference.layout.titleLineType
+
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = toggleReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -122,7 +126,7 @@ public struct VCheckBoxUIModel {
             pressedOff: 1,
             pressedOn: 1,
             pressedIndeterminate: 1,
-            disabled: 0.5
+            disabled: 0.3
         )
 
         // MARK: Initializers
@@ -131,11 +135,11 @@ public struct VCheckBoxUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_OOIPD<Color>
+        public typealias StateColors = GenericStateModel_OffOnIndeterminatePressedDisabled<Color>
 
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_OOIPD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_OffOnIndeterminatePressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

@@ -22,11 +22,6 @@ struct VModalDemoView: View {
     private var uiModel: VModalUIModel {
         var uiModel: VModalUIModel = .init()
         
-        if !hasDivider && (hasTitle || dismissType.hasButton) {
-            uiModel.layout.headerMargins.bottom /= 2
-            uiModel.layout.contentMargins.top /= 2
-        }
-        
         uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
         uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
         
@@ -49,8 +44,8 @@ struct VModalDemoView: View {
             .if(hasTitle,
                 ifTransform: {
                     $0
-                        .tag(0) // Uniquely identifies host
                         .vModal(
+                            id: "modal_demo_1",
                             uiModel: uiModel,
                             isPresented: $isPresented,
                             headerTitle: "Lorem Ipsum Dolor Sit Amet",
@@ -58,8 +53,8 @@ struct VModalDemoView: View {
                         )
                 }, elseTransform: {
                     $0
-                        .tag("0") // Uniquely identifies host
                         .vModal(
+                            id: "modal_demo_2",
                             uiModel: uiModel,
                             isPresented: $isPresented,
                             content: { modalContent }
@@ -92,7 +87,7 @@ struct VModalDemoView: View {
         VCheckBox(
             uiModel: {
                 var uiModel: VCheckBoxUIModel = .init()
-                uiModel.layout.titleLineLimit = 1
+                uiModel.layout.titleLineType = .singleLine
                 return uiModel
             }(),
             isOn: .init(
@@ -110,19 +105,15 @@ struct VModalDemoView: View {
     
     private var modalContent: some View {
         ZStack(content: {
-            VList(
-                uiModel: {
-                    var uiModel: VListUIModel = .init()
-                    uiModel.layout.showsFirstSeparator = false
-                    uiModel.layout.showsLastSeparator = false
-                    return uiModel
-                }(),
-                data: 0..<20,
-                content: { num in
-                    Text(String(num))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-            )
+            List(content: {
+                ForEach(0..<20, content: { num in
+                    VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    })
+                })
+            })
+                .vListStyle()
 
             if dismissType.isEmpty {
                 NoDismissTypeWarningView(onDismiss: { isPresented = false })

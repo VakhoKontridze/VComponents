@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Wheel Picker UI Model
 /// Model that describes UI.
@@ -33,17 +34,20 @@ public struct VWheelPickerUIModel {
         /// Picker corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
-        /// Header line limit. Defaults to `1`.
-        public var headerLineLimit: Int? = segmentedPickerReference.layout.headerLineLimit
+        /// Header title line type. Defaults to `singleline`.
+        public var headerTitleLineType: TextLineType = segmentedPickerReference.layout.headerTitleLineType
         
-        /// Footer line limit. Defaults to `5`.
-        public var footerLineLimit: Int? = segmentedPickerReference.layout.footerLineLimit
+        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
+        public var footerTitleLineType: TextLineType = segmentedPickerReference.layout.footerTitleLineType
         
         /// Spacing between header, picker, and footer. Defaults to `3`.
         public var headerPickerFooterSpacing: CGFloat = segmentedPickerReference.layout.headerPickerFooterSpacing
         
         /// Header and footer horizontal margin. Defaults to `10`.
         public var headerMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = segmentedPickerReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -55,10 +59,7 @@ public struct VWheelPickerUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background colors.
-        public var background: StateColors = .init(
-            enabled: ColorBook.layer,
-            disabled: ColorBook.layer
-        )
+        public var background: StateColors = .init(ColorBook.layer)
         
         /// Title content colors.
         ///
@@ -84,11 +85,11 @@ public struct VWheelPickerUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_ED<Color>
+        public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_ED<CGFloat>
+        public typealias StateOpacities = GenericStateModel_EnabledDisabled<CGFloat>
     }
 
     // MARK: Fonts

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Toast Demo View
 struct VToastDemoView: View {
@@ -16,7 +17,7 @@ struct VToastDemoView: View {
     @State private var isPresented: Bool = false
     
     @State private var presentationEdge: VToastUIModel.Layout.PresentationEdge = .default
-    @State private var toastType: VToastTypeHelper = .oneLine
+    @State private var toastTextLineType: VToastTextLineTypeHelper = .oneLine
     @State private var text: String = "Lorem ipsum dolor sit amet"
     
     private var uiModel: VToastUIModel {
@@ -37,8 +38,9 @@ struct VToastDemoView: View {
             title: "Present"
         )
             .vToast(
+                id: "toast_demo",
                 uiModel: uiModel,
-                type: toastType.toastType,
+                type: toastTextLineType.toastTextLineType,
                 isPresented: $isPresented,
                 text: text
             )
@@ -54,7 +56,7 @@ struct VToastDemoView: View {
         
         DemoViewSettingsSection(content: {
             VSegmentedPicker(
-                selection: $toastType,
+                selection: $toastTextLineType,
                 headerTitle: "Type",
                 footerTitle: "In multi-line type, line limit and alignment can be set. For demo purposes, they are set to 5 and leading."
             )
@@ -65,8 +67,8 @@ struct VToastDemoView: View {
 }
 
 // MARK: - Helpers
-extension VToastUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
-    public var pickerTitle: String {
+extension VToastUIModel.Layout.PresentationEdge: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
         switch self {
         case .top: return "Top"
         case .bottom: return "Bottom"
@@ -74,18 +76,18 @@ extension VToastUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
     }
 }
 
-private enum VToastTypeHelper: Int, PickableTitledEnumeration {
+private enum VToastTextLineTypeHelper: Int, StringRepresentableHashableEnumeration {
     case oneLine
     case multiLine
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .oneLine: return "Single-line"
         case .multiLine: return "Multi-line"
         }
     }
     
-    var toastType: VToastType {
+    var toastTextLineType: VToastTextLineType {
         switch self {
         case .oneLine: return .singleLine
         case .multiLine: return .multiLine(alignment: .leading, lineLimit: 5)

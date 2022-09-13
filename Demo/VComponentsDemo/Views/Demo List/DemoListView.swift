@@ -25,44 +25,28 @@ struct DemoListView<Row>: View where Row: DemoableRow {
         ZStack(content: {
             ColorBook.canvas.ignoresSafeArea()
             
-            VLazyScrollView(
-                type: .vertical(uiModel: {
-                    var uiModel: VLazyScrollViewVerticalUIModel = .init()
-                    uiModel.layout.rowSpacing = 20
-                    return uiModel
-                }()),
-                data: sections.enumeratedArray(),
-                id: \.element.id,
-                content: { (i, section) in
-                    VDisclosureGroup(
-                        uiModel: {
-                            var uiModel: VDisclosureGroupUIModel = .init()
-                            uiModel.layout.contentMargins.top = 5
-                            uiModel.layout.contentMargins.bottom = 5
-                            return uiModel
-                        }(),
-                        state: $disclosureGroupStates[i],
-                        headerTitle: section.title ?? "",
-                        content: {
-                            VStaticList(
-                                uiModel: {
-                                    var model: VStaticListUIModel = .init()
-                                    model.layout.showsFirstSeparator = false
-                                    model.layout.showsLastSeparator = false
-                                    return model
-                                }(),
-                                data: section.rows,
-                                content: { row in DemoListRowView(title: row.title, destination: row.body) }
-                            )
-                        }
-                    )
-                    
-                    if i == sections.enumeratedArray().count - 1 {
-                        Spacer()
-                            .frame(height: UIDevice.safeAreaInsetBottom + 10)
-                    }
-                }
-            )
+            ScrollView(content: {
+                LazyVStack(spacing: 20, content: {
+                    ForEach(sections.enumeratedArray(), id: \.element.id, content: { (i, section) in
+                        VDisclosureGroup(
+                            state: $disclosureGroupStates[i],
+                            headerTitle: section.title ?? "",
+                            content: {
+                                LazyVStack(spacing: 0, content: {
+                                    ForEach(section.rows.enumeratedArray(), id: \.element.id, content: { (j, row) in
+                                        VListRow(separator: .noFirstAndLastSeparators(isFirst: j == 0), content: {
+                                            DemoListRowView(title: row.title, destination: row.body)
+                                        })
+                                    })
+                                })
+                            }
+                        )
+                    })
+                })
+                
+                Spacer()
+                    .frame(height: UIDevice.safeAreaInsetBottom + 10)
+            })
                 .padding(.top, 10)
         })
             .ignoresSafeArea(.container, edges: .bottom)

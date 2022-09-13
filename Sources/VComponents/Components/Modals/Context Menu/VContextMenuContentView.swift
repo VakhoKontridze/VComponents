@@ -10,67 +10,70 @@ import SwiftUI
 // MARK: - V Menu Content View
 struct VContextMenuContentView: View {
     // MARK: Properties
-    private let rows: [VContextMenuRow]
+    private let sections: () -> [any VMenuSectionProtocol]
     
     // MARK: Initializers
-    init(rows: [VContextMenuRow]) {
-        self.rows = rows
+    init(
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
+    ) {
+        self.sections = sections
     }
 
     // MARK: Body
     var body: some View {
-        ForEach(rows.enumeratedArray(), id: \.offset, content: { (_, row) in
-            switch row._contextMenuRow {
-            case .title(let action, let title):
-                Button(title, action: action)
-                
-            case .titleAssetIcon(let action, let title, let name, let bundle):
-                Button(action: action, label: {
-                    Text(title)
-                    Image(name, bundle: bundle)
-                })
-                
-            case .titleIcon(let action, let title, let icon):
-                Button(action: action, label: {
-                    Text(title)
-                    icon
-                })
-                
-            case .titleSystemIcon(let action, let title, let name):
-                Button(action: action, label: {
-                    Text(title)
-                    Image(systemName: name)
-                })
-            
-            case .menu(let title, let rows):
-                Menu(
-                    content: { VContextMenuContentView(rows: rows) },
-                    label: { Text(title) }
+        ForEach(
+            sections().enumeratedArray(),
+            id: \.offset,
+            content: { (_, section) in
+                TitledSection(
+                    title: section.title,
+                    content: { section.body }
                 )
             }
-        })
+        )
     }
 }
 
 // MARK: - Preview
+import VCore
+
 struct VContextMenuContentView_Previews: PreviewProvider {
+    private enum PickerRow: Int, StringRepresentableHashableEnumeration {
+        case red, green, blue
+
+        var stringRepresentation: String {
+            switch self {
+            case .red: return "Red"
+            case .green: return "Green"
+            case .blue: return "Blue"
+            }
+        }
+    }
+
+    @State private static var selection: PickerRow = .red
+    
     static var previews: some View {
         Text("Lorem ipsum")
-            .vContextMenu(rows: [
-                .titleIcon(action: {}, title: "One", assetIcon: "XMark", bundle: .module),
-                .titleIcon(action: {}, title: "Two", icon: .init(systemName: "swift")),
-                .titleIcon(action: {}, title: "Three", systemIcon: "swift"),
-                .title(action: {}, title: "Four"),
-                .title(action: {}, title: "Five"),
-                .menu(title: "Five...", rows: [
-                    .title(action: {}, title: "One"),
-                    .title(action: {}, title: "Two"),
-                    .title(action: {}, title: "Three"),
-                    .menu(title: "Four...", rows: [
-                        .title(action: {}, title: "One"),
-                        .title(action: {}, title: "Two")
-                    ])
-                ])
-            ])
+            .vContextMenu(sections: {
+                VMenuGroupSection(title: "Section 1", rows: {
+                    VMenuTitleRow(action: { print("1.1") }, title: "One")
+                    VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
+                })
+                
+                VMenuGroupSection(title: "Section 2", rows: {
+                    VMenuTitleRow(action: { print("2.1") }, title: "One")
+                    
+                    VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
+                    
+                    VMenuSubMenuRow(title: "Three...", sections: {
+                        VMenuGroupSection(rows: {
+                            VMenuTitleRow(action: { print("2.3.1") }, title: "One")
+                            VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
+                        })
+                    })
+                })
+                
+                VMenuPickerSection(selection: $selection)
+            })
     }
 }

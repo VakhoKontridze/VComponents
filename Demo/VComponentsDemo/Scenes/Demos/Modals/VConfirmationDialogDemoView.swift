@@ -30,12 +30,12 @@ struct VConfirmationDialogDemoView: View {
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                actions: [
-                    .standard(action: {}, title: "Option A"),
-                    .standard(action: {}, title: "Option B"),
-                    .destructive(action: {}, title: "Delete"),
-                    .cancel(title: "Cancel")
-                ]
+                actions: {
+                    VConfirmationDialogButton(action: {}, title: "Option A")
+                    VConfirmationDialogButton(action: {}, title: "Option B")
+                    VConfirmationDialogDestructiveButton(action: {}, title: "Delete")
+                    VConfirmationDialogCancelButton(action: nil)
+                }
             )
     }
 }

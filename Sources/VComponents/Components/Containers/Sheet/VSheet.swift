@@ -16,22 +16,15 @@ import VCore
 /// If content is passed during `init`, `VSheet` would resize according to the size of the content. If content is not passed, `VSheet` would expand to occupy maximum space.
 ///
 ///     var body: some View {
-///         ZStack(alignment: .top, content: {
+///         ZStack(content: {
 ///             ColorBook.canvas.ignoresSafeArea()
 ///
 ///             VSheet(content: {
-///                 VList(
-///                     uiModel: {
-///                         var uiModel: VListUIModel = .init()
-///                         uiModel.layout.showsFirstSeparator = false
-///                         uiModel.layout.showsLastSeparator = false
-///                         return uiModel
-///                     }(),
-///                     data: 0..<20,
-///                     content: { num in
-///                         Text(String(num))
-///                             .frame(maxWidth: .infinity, alignment: .leading)
-///                     }
+///                 VText(
+///                     type: .multiLine(alignment: .center, lineLimit: nil),
+///                     color: ColorBook.primary,
+///                     font: .body,
+///                     text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."
 ///                 )
 ///
 ///             })
@@ -68,14 +61,14 @@ public struct VSheet<Content>: View where Content: View {
     public var body: some View {
         contentView
             .background(sheet)
-    }
-    
-    private var sheet: some View {
-        uiModel.colors.background
             .cornerRadius(
                 uiModel.layout.cornerRadius,
                 corners: uiModel.layout.roundedCorners
             )
+    }
+    
+    private var sheet: some View {
+        uiModel.colors.background
     }
     
     private var contentView: some View {
@@ -95,24 +88,16 @@ public struct VSheet<Content>: View where Content: View {
 // MARK: - Preview
 struct VSheet_Previews: PreviewProvider {
     static var previews: some View {
-        ZStack(alignment: .top, content: {
+        ZStack(content: {
             ColorBook.canvas.ignoresSafeArea()
             
             VSheet(content: {
-                VList(
-                    uiModel: {
-                        var uiModel: VListUIModel = .init()
-                        uiModel.layout.showsFirstSeparator = false
-                        uiModel.layout.showsLastSeparator = false
-                        return uiModel
-                    }(),
-                    data: 0..<20,
-                    content: { num in
-                        Text(String(num))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
+                VText(
+                    type: .multiLine(alignment: .center, lineLimit: nil),
+                    color: ColorBook.primary,
+                    font: .body,
+                    text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci."
                 )
-
             })
                 .padding()
         })

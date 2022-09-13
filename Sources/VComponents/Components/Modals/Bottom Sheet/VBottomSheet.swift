@@ -27,7 +27,10 @@ struct VBottomSheet<HeaderLabel, Content>: View
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
-    private var hasGrabber: Bool { uiModel.misc.dismissType.contains(.pullDown) || uiModel.layout.sizes._current.size.heights.isResizable }
+    private var hasGrabber: Bool {
+        uiModel.layout.grabberSize.height > 0 &&
+        (uiModel.misc.dismissType.contains(.pullDown) || uiModel.layout.sizes._current.size.heights.isResizable)
+    }
     private var hasDivider: Bool { hasHeader && uiModel.layout.dividerHeight > 0 }
     
     @State private var isInternallyPresented: Bool = false
@@ -81,14 +84,8 @@ struct VBottomSheet<HeaderLabel, Content>: View
     
     private var bottomSheet: some View {
         ZStack(content: {
-            VSheet(uiModel: uiModel.sheetModel)
-                .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    x: uiModel.colors.shadowOffset.width,
-                    y: uiModel.colors.shadowOffset.height
-                )
-                .if(!uiModel.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
+            VSheet(uiModel: uiModel.sheetSubUIModel)
+                .if(!uiModel.misc.contentIsDraggable, transform: {
                     $0
                         .frame(height: uiModel.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
@@ -98,6 +95,12 @@ struct VBottomSheet<HeaderLabel, Content>: View
                                 .onEnded(dragEnded)
                         )
                 })
+                .shadow(
+                    color: uiModel.colors.shadow,
+                    radius: uiModel.colors.shadowRadius,
+                    x: uiModel.colors.shadowOffset.width,
+                    y: uiModel.colors.shadowOffset.height
+                )
                     
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
@@ -106,18 +109,20 @@ struct VBottomSheet<HeaderLabel, Content>: View
                     divider
                 })
                     .readSize(onChange: { headerDividerHeight = $0.height })
+                    .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
 
                 contentView
             })
                 .frame(maxHeight: .infinity, alignment: .top)
-                .if(!uiModel.misc.isContentDraggable, transform: { // NOTE: Frame must come before DragGesture
+                .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // NOTE: Fixes issue of content-clipping, as it's not in `VSheet`
+                .if(!uiModel.misc.contentIsDraggable, transform: {
                     $0
                         .frame(height: uiModel.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
                 })
         })
             .frame(width: uiModel.layout.sizes._current.size.width)
-            .if(uiModel.misc.isContentDraggable, transform: {  // NOTE: Frame must come before DragGesture
+            .if(uiModel.misc.contentIsDraggable, transform: {
                 $0
                     .frame(height: uiModel.layout.sizes._current.size.heights.max)
                     .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
@@ -194,7 +199,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
 
     private var contentView: some View {
         ZStack(content: {
-            if !uiModel.misc.isContentDraggable {
+            if !uiModel.misc.contentIsDraggable {
                 Color.clear
                     .contentShape(Rectangle())
             }
@@ -212,7 +217,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     }
 
     private var closeButton: some View {
-        VSquareButton.close(
+        VRoundedButton.close(
             uiModel: uiModel.closeButtonSubUIModel,
             action: animateOut
         )
@@ -270,7 +275,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
-        guard let offsetBeforeDrag = offsetBeforeDrag else { fatalError() }
+        guard let offsetBeforeDrag else { fatalError() }
         
         previousDragValue = currentDragValue
         currentDragValue = dragValue
@@ -309,7 +314,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
         
         switch velocityExceedsNextAreaSnapThreshold {
         case false:
-            guard let offsetBeforeDrag = offsetBeforeDrag else { return }
+            guard let offsetBeforeDrag else { return }
             
             animateOffsetOrPullDismissFromSnapAction(.dragEndedSnapAction(
                 heights: uiModel.layout.sizes._current.size.heights,
@@ -352,28 +357,20 @@ struct VBottomSheet_Previews: PreviewProvider {
             title: "Present"
         )
             .vBottomSheet(
-                uiModel: {
-                    var uiModel: VBottomSheetUIModel = .init()
-                    uiModel.layout.autoresizesContent = true
-                    uiModel.layout.contentSafeAreaEdges.insert(.bottom)
-                    return uiModel
-                }(),
+                id: "bottom_sheet_preview",
+                uiModel: .scrollableContent,
                 isPresented: $isPresented,
                 headerTitle: "Lorem Ipsum Dolor Sit Amet",
                 content: {
-                    VList(
-                        uiModel: {
-                            var uiModel: VListUIModel = .init()
-                            uiModel.layout.showsFirstSeparator = false
-                            uiModel.layout.showsLastSeparator = false
-                            return uiModel
-                        }(),
-                        data: 0..<20,
-                        content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
+                    List(content: {
+                        ForEach(0..<20, content: { num in
+                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                Text(String(num))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            })
+                        })
+                    })
+                        .vListStyle()
                 }
             )
     }

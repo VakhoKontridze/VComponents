@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Toggle UI Model
 /// Model that describes UI.
@@ -47,8 +48,11 @@ public struct VToggleUIModel {
         /// Spacing between toggle and label. Defaults to `5`.
         public var toggleLabelSpacing: CGFloat = 5
         
-        /// Title label line limit. Defaults to `nil`.
-        public var titleLineLimit: Int? = nil
+        /// Title line type. Defaults to `multiline` of `1...2` lines.
+        public var titleLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...2)
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         var animationOffset: CGFloat {
             let spacing: CGFloat = (size.height - thumbDimension)/2
@@ -103,7 +107,7 @@ public struct VToggleUIModel {
             on: 1,
             pressedOff: 1,
             pressedOn: 1,
-            disabled: 0.5
+            disabled: 0.3
         )
         
         // MARK: Initializers
@@ -112,11 +116,11 @@ public struct VToggleUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_OOPD<Color>
+        public typealias StateColors = GenericStateModel_OffOnPressedDisabled<Color>
 
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_OOPD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_OffOnPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

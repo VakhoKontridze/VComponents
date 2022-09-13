@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Side Bar
 struct VSideBar<Content>: View where Content: View {
@@ -77,7 +78,7 @@ struct VSideBar<Content>: View where Content: View {
             .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
             .offset(isInternallyPresented ? presentedOffset : initialOffset)
             .gesture(
-                DragGesture(minimumDistance: 20)
+                DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
                     .onChanged(dragChanged)
             )
     }
@@ -219,21 +220,18 @@ struct VSideBar_Previews: PreviewProvider {
             title: "Present"
         )
             .vSideBar(
+                id: "side_bar_preview",
                 isPresented: $isPresented,
                 content: {
-                    VList(
-                        uiModel: {
-                            var uiModel: VListUIModel = .init()
-                            uiModel.layout.showsFirstSeparator = false
-                            uiModel.layout.showsLastSeparator = false
-                            return uiModel
-                        }(),
-                        data: 0..<20,
-                        content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
+                    List(content: {
+                        ForEach(0..<20, content: { num in
+                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                Text(String(num))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            })
+                        })
+                    })
+                        .vListStyle()
                 }
             )
     }

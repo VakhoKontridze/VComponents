@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Menu Demo View
 struct VContextMenuDemoView: View {
@@ -14,6 +15,7 @@ struct VContextMenuDemoView: View {
     static var navBarTitle: String { "Context Menu" }
     
     @State private var isEnabled: Bool = true
+    @State private var selection: _PickerRow = .red
 
     // MARK: Body
     var body: some View {
@@ -23,7 +25,17 @@ struct VContextMenuDemoView: View {
     
     private func component() -> some View {
         Text("Present")
-            .vContextMenu(rows: rows)
+            .vContextMenu(
+                sections: sections,
+                preview: {
+                    ZStack(content: {
+                        ColorBook.canvas
+                            .frame(width: UIScreen.main.bounds.width * 0.9, height: 100)
+                        
+                        Text("Selection: \(selection.stringRepresentation)")
+                    })
+                }
+            )
     }
     
     @ViewBuilder private func settings() -> some View {
@@ -36,27 +48,43 @@ struct VContextMenuDemoView: View {
         )
     }
     
-    private var rows: [VContextMenuRow] {
-        [
-            .titleIcon(action: {}, title: "One", icon: .init(systemName: "swift")),
-            .titleIcon(action: {}, title: "Two", systemIcon: "swift"),
-            .title(action: {}, title: "Three"),
-            .title(action: {}, title: "Four"),
-            .menu(title: "Five...", rows: [
-                .title(action: {}, title: "One"),
-                .title(action: {}, title: "Two"),
-                .title(action: {}, title: "Three"),
-                .menu(title: "Four...", rows: [
-                    .title(action: {}, title: "One"),
-                    .title(action: {}, title: "Two")
-                ])
-            ])
-        ]
+    @VMenuSectionBuilder private func sections() -> [any VMenuSectionProtocol] {
+        VMenuGroupSection(title: "Section 1", rows: {
+            VMenuTitleRow(action: {}, title: "One")
+            VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+        })
+        
+        VMenuGroupSection(title: "Section 2", rows: {
+            VMenuTitleRow(action: {}, title: "One")
+            
+            VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+            
+            VMenuSubMenuRow(title: "Three...", sections: {
+                VMenuGroupSection(rows: {
+                    VMenuTitleRow(action: {}, title: "One")
+                    VMenuTitleIconRow(action: {}, title: "Two", systemIcon: "swift")
+                })
+            })
+        })
+        
+        VMenuPickerSection(selection: $selection)
     }
 }
 
 // MARK: - Helpers
 private typealias VContextMenuState = VSecondaryButtonInternalState
+
+private enum _PickerRow: Int, StringRepresentableHashableEnumeration {
+    case red, green, blue
+
+    var stringRepresentation: String {
+        switch self {
+        case .red: return "Red"
+        case .green: return "Green"
+        case .blue: return "Blue"
+        }
+    }
+}
 
 // MARK: - Preview
 struct VContextMenuDemoView_Previews: PreviewProvider {

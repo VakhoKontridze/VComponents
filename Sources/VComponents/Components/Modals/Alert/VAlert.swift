@@ -24,7 +24,7 @@ struct VAlert<Content>: View
     private let title: String?
     private let message: String?
     private let content: VAlertContent<Content>
-    private let buttons: [VAlertButton]
+    private let buttons: [any VAlertButtonProtocol]
     
     @State private var isInternallyPresented: Bool = false
     
@@ -51,7 +51,7 @@ struct VAlert<Content>: View
         title: String?,
         message: String?,
         content: VAlertContent<Content>,
-        buttons: [VAlertButton]
+        buttons: [any VAlertButtonProtocol]
     ) {
         self.uiModel = uiModel
         self.presentHandler = presentHandler
@@ -59,7 +59,7 @@ struct VAlert<Content>: View
         self.title = title
         self.message = message
         self.content = content
-        self.buttons = VAlertButton.process(buttons)
+        self.buttons = VAlertButtonBuilder.process(buttons)
     }
 
     // MARK: Body
@@ -83,28 +83,25 @@ struct VAlert<Content>: View
     }
     
     private var alert: some View {
-        VStack(spacing: 0, content: {
+        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
             VStack(spacing: 0, content: {
-                titleView
-                messageView
-                contentView
+                VStack(spacing: 0, content: {
+                    titleView
+                    messageView
+                    contentView
+                })
+                    .padding(uiModel.layout.titleMessageContentMargins)
+                    .readSize(onChange: { titleMessageContentHeight = $0.height })
+
+                buttonsScrollView
             })
-                .padding(uiModel.layout.titleMessageContentMargins)
-                .readSize(onChange: { titleMessageContentHeight = $0.height })
-            
-            buttonsScrollView
         })
             .frame(width: uiModel.layout.sizes._current.size.width)
             .ignoresSafeArea(.container, edges: .horizontal)
             .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
-            .background(background)
             .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
-    }
-    
-    private var background: some View {
-        VSheet(uiModel: uiModel.sheetSubUIModel)
             .shadow(
                 color: uiModel.colors.shadow,
                 radius: uiModel.colors.shadowRadius,
@@ -114,7 +111,7 @@ struct VAlert<Content>: View
     }
 
     @ViewBuilder private var titleView: some View {
-        if let title = title, !title.isEmpty {
+        if let title, !title.isEmpty {
             VText(
                 type: .multiLine(alignment: .center, lineLimit: uiModel.layout.titleLineLimit),
                 color: uiModel.colors.title,
@@ -126,7 +123,7 @@ struct VAlert<Content>: View
     }
 
     @ViewBuilder private var messageView: some View {
-        if let message = message, !message.isEmpty {
+        if let message, !message.isEmpty {
             VText(
                 type: .multiLine(alignment: .center, lineLimit: uiModel.layout.messageLineLimit),
                 color: uiModel.colors.message,
@@ -152,7 +149,7 @@ struct VAlert<Content>: View
     
     @ViewBuilder private var buttonsScrollView: some View {
         if buttonsStackShouldScroll {
-            ScrollView(content: { buttonsStack }).padding(.bottom, 0.1) // Fixes SwiftUI `ScrollView` safe area bug
+            ScrollView(content: { buttonsStack }).padding(.bottom, 1) // Fixes SwiftUI `ScrollView` safe area bug
         } else {
             buttonsStack
         }
@@ -165,9 +162,9 @@ struct VAlert<Content>: View
                 buttonsContent()
             
             case 2:
-                HStack(  // Cancel button is last
+                HStack(
                     spacing: uiModel.layout.horizontalButtonSpacing,
-                    content: { buttonsContent(reverseOrder: true) }
+                    content: { buttonsContent(reverseOrder: true) } // Cancel button is last
                 )
             
             case 3...:
@@ -185,58 +182,14 @@ struct VAlert<Content>: View
     }
     
     private func buttonsContent(reverseOrder: Bool = false) -> some View {
-        let buttons: [VAlertButton] = {
-            switch reverseOrder {
-            case false: return self.buttons
-            case true: return self.buttons.reversed()
-            }
-        }()
+        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reverseOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
-            buttonView(buttons[i])
+            buttons[i].body(
+                uiModel: uiModel,
+                animateOut: { animateOut(completion: $0) }
+            )
         })
-    }
-    
-    private func buttonView(_ button: VAlertButton) -> some View {
-        Group(content: {
-            switch button._alertButton {
-            case .primary:
-                VAlertPrimaryButton(
-                    uiModel: uiModel.primaryButtonSubUIModel,
-                    action: { animateOut(completion: button.action) },
-                    title: button.title
-                )
-                
-            case .secondary:
-                VAlertSecondaryButton(
-                    uiModel: uiModel.secondaryButtonSubUIModel,
-                    action: { animateOut(completion: button.action) },
-                    title: button.title
-                )
-                
-            case .destructive:
-                VAlertSecondaryButton(
-                    uiModel: uiModel.destructiveButtonSubUIModel,
-                    action: { animateOut(completion: button.action) },
-                    title: button.title
-                )
-            
-            case .cancel:
-                VAlertSecondaryButton(
-                    uiModel: uiModel.secondaryButtonSubUIModel,
-                    action: { animateOut(completion: button.action) },
-                    title: button.title
-                )
-                
-            case .ok:
-                VAlertSecondaryButton(
-                    uiModel: uiModel.secondaryButtonSubUIModel,
-                    action: { animateOut(completion: button.action) },
-                    title: button.title
-                )
-            }
-        })
-            .disabled(!button.isEnabled)
     }
     
     // MARK: Animations
@@ -283,16 +236,28 @@ struct VAlert_Previews: PreviewProvider {
             title: "Present"
         )
             .vAlert(
+                id: "alert_preview",
                 isPresented: $isPresented,
                 title: "Lorem Ipsum Dolor Sit Amet",
                 message: "Lorem ipsum dolor sit amet",
                 content: {
                     VTextField(text: .constant("Lorem ipsum dolor sit amet"))
                 },
-                actions: [
-                    .primary(action: { print("Confirmed") }, title: "Confirm"),
-                    .cancel(action: { print("Cancelled") })
-                ]
+                actions: {
+                    VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+                    VAlertCancelButton(action: nil)
+                }
             )
+    }
+}
+
+// MARK: - Helpers
+extension Array {
+    fileprivate func reversed(if condition: Bool) -> [Element] {
+        if condition {
+            return self.reversed()
+        } else {
+            return self
+        }
     }
 }

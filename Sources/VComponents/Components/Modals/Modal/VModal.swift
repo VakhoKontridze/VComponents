@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Modal
 struct VModal<HeaderLabel, Content>: View
@@ -69,22 +70,16 @@ struct VModal<HeaderLabel, Content>: View
     }
 
     private var modal: some View {
-        ZStack(content: {
-            VSheet(uiModel: uiModel.sheetSubUIModel)
-                .shadow(
-                    color: uiModel.colors.shadow,
-                    radius: uiModel.colors.shadowRadius,
-                    x: uiModel.colors.shadowOffset.width,
-                    y: uiModel.colors.shadowOffset.height
-                )
-
+        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
             VStack(spacing: 0, content: {
-                header
-                divider
+                VStack(spacing: 0, content: {
+                    header
+                    divider
+                })
+                    .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
+
                 contentView
             })
-                .frame(maxHeight: .infinity, alignment: .top)
-                .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.roundedCorners) // Fixes clipping when `contentMargin` is zero
         })
             .frame(size: uiModel.layout.sizes._current.size)
             .ignoresSafeArea(.container, edges: .all)
@@ -92,6 +87,12 @@ struct VModal<HeaderLabel, Content>: View
             .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
             .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
             .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
+            .shadow(
+                color: uiModel.colors.shadow,
+                radius: uiModel.colors.shadowRadius,
+                x: uiModel.colors.shadowOffset.width,
+                y: uiModel.colors.shadowOffset.height
+            )
     }
 
     @ViewBuilder private var header: some View {
@@ -153,7 +154,7 @@ struct VModal<HeaderLabel, Content>: View
     }
 
     private var closeButton: some View {
-        VSquareButton.close(
+        VRoundedButton.close(
             uiModel: uiModel.closeButtonSubUIModel,
             action: animateOut
         )
@@ -208,22 +209,19 @@ struct VModal_Previews: PreviewProvider {
             title: "Present"
         )
             .vModal(
+                id: "modal_preview",
                 isPresented: $isPresented,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VList(
-                        uiModel: {
-                            var uiModel: VListUIModel = .init()
-                            uiModel.layout.showsFirstSeparator = false
-                            uiModel.layout.showsLastSeparator = false
-                            return uiModel
-                        }(),
-                        data: 0..<20,
-                        content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
+                    List(content: {
+                        ForEach(0..<20, content: { num in
+                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                Text(String(num))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            })
+                        })
+                    })
+                        .vListStyle()
                 }
             )
     }

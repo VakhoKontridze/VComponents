@@ -15,7 +15,7 @@ struct VToast: View {
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
     private let uiModel: VToastUIModel
-    private let toastType: VToastType
+    private let toastTextLineType: VToastTextLineType
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -29,13 +29,13 @@ struct VToast: View {
     // MARK: Initializers
     init(
         uiModel: VToastUIModel,
-        type toastType: VToastType,
+        type toastTextLineType: VToastTextLineType,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         text: String
     ) {
         self.uiModel = uiModel
-        self.toastType = toastType
+        self.toastTextLineType = toastTextLineType
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.text = text
@@ -61,7 +61,7 @@ struct VToast: View {
     
     private var contentView: some View {
         VText(
-            type: toastType,
+            type: toastTextLineType._toastTextLineType.toTextLineType,
             color: uiModel.colors.text,
             font: .init(uiModel.fonts.text),
             text: text
@@ -80,7 +80,7 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         let initialHeight: CGFloat = {
-            switch toastType._textType {
+            switch toastTextLineType._toastTextLineType {
             case .singleLine:
                 let label: UILabel = .init()
                 label.font = uiModel.fonts.text
@@ -134,14 +134,6 @@ struct VToast: View {
     
     // MARK: Animations
     private func animateIn() {
-        guard
-            let instanceID: Int = presentationMode.instanceID,
-            !VToastSessionManager.shared.isVisible(instanceID)
-        else {
-            return
-        }
-        VToastSessionManager.shared.didAppear(instanceID)
-
         withBasicAnimation(
             uiModel.animations.appear,
             body: { isInternallyPresented = true },
@@ -158,8 +150,6 @@ struct VToast: View {
             completion: {
                 presentationMode.dismiss()
                 DispatchQueue.main.async(execute: { dismissHandler?() })
-                
-                presentationMode.instanceID.map { VToastSessionManager.shared.didDisappear($0) }
             }
         )
     }
@@ -167,16 +157,7 @@ struct VToast: View {
     private func animateOutAfterLifecycle() {
         DispatchQueue.main.asyncAfter(
             deadline: .now() + uiModel.animations.duration,
-            execute: {
-                guard
-                    let instanceID: Int = presentationMode.instanceID,
-                    VToastSessionManager.shared.isVisible(instanceID)
-                else {
-                    return
-                }
-                
-                animateOut()
-            }
+            execute: animateOut
         )
     }
 
@@ -187,8 +168,6 @@ struct VToast: View {
             completion: {
                 presentationMode.externalDismissCompletion()
                 DispatchQueue.main.async(execute: { dismissHandler?() })
-                
-                presentationMode.instanceID.map { VToastSessionManager.shared.didDisappear($0) }
             }
         )
     }
@@ -204,6 +183,7 @@ struct _VToast_Previews: PreviewProvider {
             title: "Present"
         )
             .vToast(
+                id: "toast_preview",
                 isPresented: $isPresented,
                 text: "Lorem ipsum dolor sit amet"
             )

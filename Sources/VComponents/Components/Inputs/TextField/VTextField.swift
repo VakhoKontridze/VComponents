@@ -174,10 +174,10 @@ public struct VTextField: View {
     }
     
     @ViewBuilder private var header: some View {
-        if let headerTitle = headerTitle, !headerTitle.isEmpty {
+        if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.headerLineLimit),
-                color: uiModel.colors.header.for(internalState),
+                type: uiModel.layout.headerTitleLineType,
+                color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
@@ -186,10 +186,10 @@ public struct VTextField: View {
     }
 
     @ViewBuilder private var footer: some View {
-        if let footerTitle = footerTitle, !footerTitle.isEmpty {
+        if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.footerLineLimit),
-                color: uiModel.colors.footer.for(internalState),
+                type: uiModel.layout.footerTitleLineType,
+                color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
@@ -207,16 +207,15 @@ public struct VTextField: View {
             .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
             .frame(height: uiModel.layout.height)
             .background(background)
-            .frame(height: uiModel.layout.height)
     }
     
     private var background: some View {
         ZStack(content: {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .foregroundColor(uiModel.colors.background.for(internalState))
+                .foregroundColor(uiModel.colors.background.value(for: internalState))
 
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWidth)
+                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         })
     }
 
@@ -225,7 +224,7 @@ public struct VTextField: View {
             ImageBook.textFieldSearch
                 .resizable()
                 .frame(dimension: uiModel.layout.searchIconDimension)
-                .foregroundColor(uiModel.colors.searchIcon.for(internalState))
+                .foregroundColor(uiModel.colors.searchIcon.value(for: internalState))
         }
     }
 
@@ -240,7 +239,7 @@ public struct VTextField: View {
             .onChange(of: text, perform: textChanged)
         
             .multilineTextAlignment(uiModel.layout.textAlignment)
-            .foregroundColor(uiModel.colors.text.for(internalState))
+            .foregroundColor(uiModel.colors.text.value(for: internalState))
             .font({
                 switch text.isEmpty {
                 case false: return uiModel.fonts.text
@@ -256,7 +255,7 @@ public struct VTextField: View {
 
     @ViewBuilder private var clearButton: some View {
         if !textFieldType.isSecure && clearButtonIsVisible && uiModel.misc.hasClearButton {
-            VSquareButton.close(
+            VRoundedButton.close(
                 uiModel: uiModel.clearButtonSubUIModel,
                 action: didTapClearButton
             )
@@ -266,7 +265,7 @@ public struct VTextField: View {
 
     @ViewBuilder private var visibilityButton: some View {
         if textFieldType.isSecure {
-            VSquareButton(
+            VRoundedButton(
                 uiModel: uiModel.visibilityButtonSubUIModel,
                 action: { secureFieldIsVisible.toggle() },
                 icon: visibilityIcon

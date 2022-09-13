@@ -41,19 +41,15 @@ struct DemoView<ComponentContent, SettingsContent>: View
     // MARK: Properties
     private let demoViewType: DemoViewType<ComponentContent, SettingsContent>
     private let hasLayer: Bool
+    private let paddedEdges: Edge.Set
     
     @State private var isPresented: Bool = false
-    
-    private let bottomSheetUIModel: VBottomSheetUIModel = {
-        var uiModel: VBottomSheetUIModel = .init()
-        uiModel.misc.dismissType.insert(.backTap)
-        return uiModel
-    }()
-    
+
     // MARK: Initializers
     init(
         type: DemoViewComponentContentType = .fixed,
         hasLayer: Bool = true,
+        paddedEdges: Edge.Set = .all,
         component: @escaping () -> ComponentContent
     )
         where SettingsContent == Never
@@ -63,11 +59,13 @@ struct DemoView<ComponentContent, SettingsContent>: View
             content: component
         )
         self.hasLayer = hasLayer
+        self.paddedEdges = paddedEdges
     }
     
     init(
         type: DemoViewComponentContentType = .fixed,
         hasLayer: Bool = true,
+        paddedEdges: Edge.Set = .all,
         component componentContent: @escaping () -> ComponentContent,
         @DemoViewSettingsSectionBuilder settingsSections settingsContent: @escaping () -> SettingsContent
     ) {
@@ -77,11 +75,13 @@ struct DemoView<ComponentContent, SettingsContent>: View
             settings: settingsContent
         )
         self.hasLayer = hasLayer
+        self.paddedEdges = paddedEdges
     }
     
     init<SingleSectionSettingsContent>(
         type: DemoViewComponentContentType = .fixed,
         hasLayer: Bool = true,
+        paddedEdges: Edge.Set = .all,
         component componentContent: @escaping () -> ComponentContent,
         @ViewBuilder settings settingsContent: @escaping () -> SingleSectionSettingsContent
     )
@@ -93,6 +93,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
             settings: { DemoViewSettingsSection(content: settingsContent) }
         )
         self.hasLayer = hasLayer
+        self.paddedEdges = paddedEdges
     }
 
     // MARK: Body
@@ -117,12 +118,10 @@ struct DemoView<ComponentContent, SettingsContent>: View
         })
     }
     
-    private func componentView<Content>(
+    private func componentView(
         type: DemoViewComponentContentType,
-        @ViewBuilder component: @escaping () -> Content
-    ) -> some View
-        where Content: View
-    {
+        @ViewBuilder component: @escaping () -> some View
+    ) -> some View {
         // Component view is embedded in VStack, as some demo's contain swift case in Groups.
         // Since Group is a pseudo-view, it may cause `VBottomSheets` flicker.
         VStack(content: {
@@ -140,24 +139,35 @@ struct DemoView<ComponentContent, SettingsContent>: View
                     
                 }
             })
-                .padding(20)
+                .padding(paddedEdges, 20)
         })
     }
     
-    private func settingsView<Content>(
-        @ViewBuilder settings: @escaping () -> Content
-    )  -> some View
-        where Content: View
-    {
+    private func settingsView(
+        @ViewBuilder settings: @escaping () -> some View
+    )  -> some View {
         VPlainButton(
             action: { isPresented = true },
             icon: .init(systemName: "gearshape")
         )
             .vBottomSheet(
-                uiModel: bottomSheetUIModel,
+                id: "demo_settings",
+                uiModel: {
+                    var uiModel: VBottomSheetUIModel = .init()
+                    uiModel.layout.contentMargins = .zero
+                    uiModel.misc.dismissType.insert(.backTap)
+                    return uiModel
+                }(),
                 isPresented: $isPresented,
                 headerTitle: "Parameters",
-                content: { ScrollView(content: settings) }
+                content: {
+                    ScrollView(content: {
+                        settings()
+                            .padding(.horizontal, VBottomSheetUIModel.insettedContent.layout.contentMargins.horizontalAverage)
+                    })
+                        .safeAreaMarginInsets(edges: .bottom)
+                        .padding(.vertical, VBottomSheetUIModel.insettedContent.layout.contentMargins.verticalAverage)
+                }
             )
     }
 }

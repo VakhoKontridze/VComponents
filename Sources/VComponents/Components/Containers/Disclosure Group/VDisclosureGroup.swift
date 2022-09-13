@@ -17,28 +17,17 @@ import VCore
 ///         ColorBook.canvas.ignoresSafeArea()
 ///
 ///         VDisclosureGroup(
-///             uiModel: {
-///                 var uiModel: VDisclosureGroupUIModel = .init()
-///                 uiModel.layout.contentMargins.top = 5
-///                 uiModel.layout.contentMargins.bottom = 5
-///                 return uiModel
-///             }(),
 ///             isExpanded: $isExpanded,
 ///             headerTitle: "Lorem Ipsum",
 ///             content: {
-///                 VStaticList(
-///                     uiModel: {
-///                         var uiModel: VStaticListUIModel = .init()
-///                         uiModel.layout.showsFirstSeparator = false
-///                         uiModel.layout.showsLastSeparator = false
-///                         return uiModel
-///                     }(),
-///                     data: 0..<10,
-///                     content: { num in
-///                         Text(String(num))
-///                             .frame(maxWidth: .infinity, alignment: .leading)
-///                     }
-///                 )
+///                 LazyVStack(spacing: 0, content: {
+///                     ForEach(0..<10, content: { num in
+///                         VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+///                             Text(String(num))
+///                                 .frame(maxWidth: .infinity, alignment: .leading)
+///                         })
+///                     })
+///                 })
 ///             }
 ///         )
 ///             .padding()
@@ -54,7 +43,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @Binding private var state: VDisclosureGroupState
-    private var internalState: VDisclosureGroupInternalState { .init(isEnabled: isEnabled, state: state) }
+    private var internalState: VDisclosureGroupInternalState { .init(isEnabled: isEnabled, isExpanded: state == .expanded) }
     
     private let headerLabel: VDisclosureGroupLabel<HeaderLabel>
     
@@ -102,7 +91,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         where HeaderLabel == Never
     {
         self.uiModel = uiModel
-        self._state = .init(bool: isExpanded)
+        self._state = .init(isExpanded: isExpanded)
         self.headerLabel = .title(title: headerTitle)
         self.content = content
     }
@@ -115,29 +104,29 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
-        self._state = .init(bool: isExpanded)
+        self._state = .init(isExpanded: isExpanded)
         self.headerLabel = .custom(label: headerLabel)
         self.content = content
     }
 
     // MARK: Body
     public var body: some View {
-        PlainDisclosureGroup(
-            uiModel: uiModel.plainDisclosureGroupSubUIModel,
-            isExpanded: .init(
-                get: { internalState.isExpanded },
-                set: { expandCollapseFromHeaderTap($0) }
-            ),
-            label: { header },
-            content: {
-                VStack(spacing: 0, content: {
-                    divider
-                    contentView
-                })
-            }
-        )
-            .background(VSheet(uiModel: uiModel.sheetSubUIModel))
-            .cornerRadius(uiModel.layout.cornerRadius)
+        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
+            PlainDisclosureGroup(
+                uiModel: uiModel.plainDisclosureGroupSubUIModel,
+                isExpanded: .init(
+                    get: { internalState == .expanded },
+                    set: { expandCollapseFromHeaderTap($0) }
+                ),
+                label: { header },
+                content: {
+                    VStack(spacing: 0, content: {
+                        divider
+                        contentView
+                    })
+                }
+            )
+        })
             .animation(uiModel.animations.expandCollapse, value: isEnabled)
             .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
     }
@@ -148,21 +137,21 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 switch headerLabel {
                 case .title(let title):
                     VText(
-                        color: uiModel.colors.headerTitle.for(internalState),
+                        color: uiModel.colors.headerTitle.value(for: internalState),
                         font: uiModel.fonts.headerTitle,
                         text: title
                     )
                     
                 case .custom(let label):
                     label()
-                        .opacity(uiModel.colors.customHeaderLabelOpacities.for(internalState))
+                        .opacity(uiModel.colors.customHeaderLabelOpacities.value(for: internalState))
                 }
             })
                 .frame(maxWidth: .infinity, alignment: .leading)
             
             Spacer()
             
-            VSquareButton.chevron(
+            VRoundedButton.chevron(
                 uiModel: uiModel.chevronButtonSubUIModel,
                 direction: internalState.chevronButtonDirection,
                 action: expandCollapse
@@ -195,7 +184,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     private func expandCollapseFromHeaderTap(_ isExpanded: Bool) {
         guard
             uiModel.misc.expandsAndCollapsesOnHeaderTap,
-            isExpanded ^^ internalState.isExpanded
+            isExpanded ^^ (internalState == .expanded)
         else {
             return
         }
@@ -208,9 +197,9 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 extension VDisclosureGroupInternalState {
     fileprivate var chevronButtonDirection: VChevronButtonDirection {
         switch self {
-        case .collapsed: return .down
-        case .expanded: return .up
-        case .disabled: return .down
+        case .collapsed: return .right
+        case .expanded: return .down
+        case .disabled: return .right
         }
     }
 }
@@ -224,28 +213,17 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             ColorBook.canvas.ignoresSafeArea()
 
             VDisclosureGroup(
-                uiModel: {
-                    var uiModel: VDisclosureGroupUIModel = .init()
-                    uiModel.layout.contentMargins.top = 5
-                    uiModel.layout.contentMargins.bottom = 5
-                    return uiModel
-                }(),
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VStaticList(
-                        uiModel: {
-                            var uiModel: VStaticListUIModel = .init()
-                            uiModel.layout.showsFirstSeparator = false
-                            uiModel.layout.showsLastSeparator = false
-                            return uiModel
-                        }(),
-                        data: 0..<10,
-                        content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
+                    LazyVStack(spacing: 0, content: {
+                        ForEach(0..<10, content: { num in
+                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                Text(String(num))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            })
+                        })
+                    })
                 }
             )
                 .padding()

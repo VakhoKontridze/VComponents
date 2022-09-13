@@ -25,30 +25,31 @@ extension View {
     ///             text: "Present"
     ///         )
     ///             .vToast(
+    ///                 id: "some_toast",
     ///                 isPresented: $isPresented,
     ///                 text: "Lorem ipsum dolor sit amet"
     ///             )
     ///     }
     ///
     public func vToast(
+        id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         text: String
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
-            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
-                isPresented: isPresented,
+                id: id,
                 allowsHitTests: false,
+                isPresented: isPresented,
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: text
@@ -80,14 +81,16 @@ extension View {
     ///             text: "Present"
     ///         )
     ///             .vToast(
+    ///                 id: "some_toast",
     ///                 item: $toastItem,
     ///                 text: { item in "Lorem ipsum dolor sit amet" }
     ///             )
     ///     }
     ///
     public func vToast<Item>(
+        id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -95,26 +98,25 @@ extension View {
     ) -> some View
         where Item: Identifiable
     {
-        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
-            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
+                allowsHitTests: false,
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                allowsHitTests: false,
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {
-                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: self) as? Item {
+                            if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
                                 return text(item)
                             } else {
                                 return ""
@@ -152,6 +154,7 @@ extension View {
     ///             text: "Present"
     ///         )
     ///             .vToast(
+    ///                 id: "some_toast",
     ///                 isPresented: $isPresented,
     ///                 presenting: toastData,
     ///                 text: { data in "Lorem ipsum dolor sit amet" }
@@ -159,34 +162,34 @@ extension View {
     ///     }
     ///
     public func vToast<T>(
+        id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         presenting data: T?,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
         text: @escaping (T) -> String
     ) -> some View {
-        data.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
-            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
+                allowsHitTests: false,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
-                allowsHitTests: false,
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {
-                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: self) as? T {
+                            if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
                                 return text(data)
                             } else {
                                 return ""
@@ -222,6 +225,7 @@ extension View {
     ///             text: "Present"
     ///         )
     ///             .vToast(
+    ///                 id: "some_toast",
     ///                 isPresented: $isPresented,
     ///                 error: toastError,
     ///                 text: { error in "Lorem ipsum dolor sit amet" }
@@ -229,8 +233,9 @@ extension View {
     ///     }
     ///
     public func vToast<E>(
+        id: String,
         uiModel: VToastUIModel = .init(),
-        type toastType: VToastType = .singleLine,
+        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -239,26 +244,25 @@ extension View {
     ) -> some View
         where E: Error
     {
-        error.map { PresentationHostDataSourceCache.shared.set(key: self, value: $0) }
+        error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(in: self) })
-            .onDisappear(perform: { VToastSessionManager.shared.forceDismissAll() })
+            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
             .background(PresentationHost(
-                in: self,
+                id: id,
+                allowsHitTests: false,
                 isPresented: .init(
                     get: { isPresented.wrappedValue && error != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
-                allowsHitTests: false,
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastType,
+                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {
-                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: self) as? E {
+                            if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
                                 return text(error)
                             } else {
                                 return ""

@@ -8,4 +8,4 @@
 import Foundation
 
 // MARK: - V Bottom Sheet Header Label
-typealias VBottomSheetHeaderLabel = VModalHeaderLabel
+typealias VBottomSheetHeaderLabel = GenericLabel_EmptyTitleCustom

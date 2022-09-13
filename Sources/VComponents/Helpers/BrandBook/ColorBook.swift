@@ -10,45 +10,64 @@ import SwiftUI
 // MARK: - Color Book
 /// Contains fundamental colors used throughout the library.
 public struct ColorBook {
-    // MARK: Properties
+    // MARK: Properties - Basic
+    /// Black text color that inverts.
+    public static let black: Color = .init(componentAsset: "Black")
+    
+    /// White text color.
+    public static let white: Color = .init(componentAsset: "White")
+
+    /// `black` color used for pressed or disabled states.
+    public static let blackPressedDisabled: Color = .init(componentAsset: "Black.presseddisabled")
+    
+    /// `white` color used for pressed or disabled states.
+    public static let whitePressedDisabled: Color = .init(componentAsset: "White.presseddisabled")
+    
+    // MARK: Properties - Background
     /// Canvas color that can be used as background.
     public static let canvas: Color = .init(componentAsset: "Canvas")
     
     /// Layer color for container components.
     public static let layer: Color = .init(componentAsset: "Layer")
     
+    // MARK: Properties - Accent
+    /// Blue accent color.
+    public static let accent: Color = .init(componentAsset: "Accent")
+    
+    /// `accent` color used for pressed or disabled states.
+    public static let accentPressedDisabled: Color = .init(componentAsset: "Accent.presseddisabled")
+    
+    // MARK: Properties - Text (Primary)
     /// Primary text color.
     public static let primary: Color = .init(componentAsset: "Primary")
     
     /// Primary text color that inverts color scheme.
     public static let primaryInverted: Color = .init(componentAsset: "PrimaryInverted")
     
-    /// Primary white text color.
-    public static let primaryWhite: Color = .init(componentAsset: "PrimaryWhite")
-    
     /// Primary black text color that inverts.
-    public static let primaryBlack: Color = .init(componentAsset: "PrimaryBlack")
+    public static var primaryBlack: Color { black }
     
+    /// Primary white text color.
+    public static var primaryWhite: Color { white }
+    
+    /// `primary` color used for pressed or disabled states.
+    public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
+    
+    /// `primaryInverted` color used for pressed or disabled states.
+    public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
+    
+    /// `primaryBlack` color used for pressed or disabled states.
+    public static var primaryBlackPressedDisabled: Color { blackPressedDisabled }
+    
+    /// `primaryBlack` color used for pressed or disabled states.
+    public static var primaryWhitePressedDisabled: Color { whitePressedDisabled }
+    
+    // MARK: Properties - Text (Secondary)
     /// Secondary text color.
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
-    /// `Primary` text color used for pressed or disabled states.
-    public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
-    
-    /// `PrimaryInverted` text color used for pressed or disabled states.
-    public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
-    
-    /// `PrimaryBlack` text color used for pressed or disabled states.
-    public static let primaryWhitePressedDisabled: Color = .init(componentAsset: "PrimaryWhite.presseddisabled")
-    
-    /// `PrimaryBlack` text color used for pressed or disabled states.
-    public static let primaryBlackPressedDisabled: Color = .init(componentAsset: "PrimaryBlack.presseddisabled")
-    
-    /// `Secondary` text color used for pressed or disabled states.
+    /// `secondary` color used for pressed or disabled states.
     public static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
-    
-    /// Blue accent color.
-    public static let accent: Color = .init(componentAsset: "Accent")
     
     // MARK: Initializers
     private init() {}
@@ -160,10 +179,6 @@ extension Color {
  PageIndicator.Dot
  190.190.190
  120.120.120
- 
- PlainButton.Text.enabled
- 0.122.255
- 10.132.255
  
  PrimaryButton.Background.disabled
  128.176.240

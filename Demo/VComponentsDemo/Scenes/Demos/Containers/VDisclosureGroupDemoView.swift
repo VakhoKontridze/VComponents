@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Disclosure Group Demo View
 struct VDisclosureGroupDemoView: View {
@@ -20,9 +21,6 @@ struct VDisclosureGroupDemoView: View {
     
     private var uiModel: VDisclosureGroupUIModel {
         var uiModel: VDisclosureGroupUIModel = .init()
-        
-        uiModel.layout.contentMargins.top = 5 // Better for VStaticList
-        uiModel.layout.contentMargins.bottom = 5 // Better for VStaticList
         
         uiModel.layout.dividerHeight = hasDivider ? (uiModel.layout.dividerHeight == 0 ? 1 : uiModel.layout.dividerHeight) : 0
         uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
@@ -51,19 +49,14 @@ struct VDisclosureGroupDemoView: View {
                 isExpanded: $isExpanded,
                 headerTitle: "Lorem Ipsum",
                 content: {
-                    VStaticList(
-                        uiModel: {
-                            var uiModel: VStaticListUIModel = .init()
-                            uiModel.layout.showsFirstSeparator = false
-                            uiModel.layout.showsLastSeparator = false
-                            return uiModel
-                        }(),
-                        data: 0..<10,
-                        content: { num in
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
+                    LazyVStack(spacing: 0, content: {
+                        ForEach(0..<10, content: { num in
+                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                Text(String(num))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            })
+                        })
+                    })
                 }
             )
                 .disabled(!isEnabled)
@@ -89,7 +82,7 @@ struct VDisclosureGroupDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VDisclosureGroupInternalState: PickableTitledEnumeration {
+private enum VDisclosureGroupInternalState: StringRepresentableHashableEnumeration {
     case collapsed
     case expanded
     case disabled
@@ -102,7 +95,7 @@ private enum VDisclosureGroupInternalState: PickableTitledEnumeration {
         }
     }
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .collapsed: return "Collapsed"
         case .expanded: return "Expanded"

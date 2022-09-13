@@ -72,7 +72,7 @@ public struct VPlainButton<Label>: View where Label: View {
     {
         self.uiModel = uiModel
         self.action = action
-        self.label = .iconTitle(icon: icon, text: title)
+        self.label = .iconTitle(icon: icon, title: title)
     }
     
     /// Initializes component with action and label.
@@ -98,40 +98,39 @@ public struct VPlainButton<Label>: View where Label: View {
     @ViewBuilder private var buttonLabel: some View {
         switch label {
         case .title(let title):
-            VText(
-                color: uiModel.colors.title.for(internalState),
-                font: uiModel.fonts.title,
-                text: title
-            )
+            labelTitleComponent(title: title)
             
         case .icon(let icon):
-            icon
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(size: uiModel.layout.iconSize)
-                .foregroundColor(uiModel.colors.icon.for(internalState))
-                .opacity(uiModel.colors.iconOpacities.for(internalState))
+            labelIconComponent(icon: icon)
             
         case .iconTitle(let icon, let title):
             HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
-                icon
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(size: uiModel.layout.iconSize)
-                    .foregroundColor(uiModel.colors.icon.for(internalState))
-                    .opacity(uiModel.colors.iconOpacities.for(internalState))
-                
-                VText(
-                    color: uiModel.colors.title.for(internalState),
-                    font: uiModel.fonts.title,
-                    text: title
-                )
+                labelIconComponent(icon: icon)
+                labelTitleComponent(title: title)
             })
             
         case .custom(let label):
             label()
-                .opacity(uiModel.colors.customLabelOpacities.for(internalState))
+                .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
         }
+    }
+    
+    private func labelTitleComponent(title: String) -> some View {
+        VText(
+            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+            color: uiModel.colors.title.value(for: internalState),
+            font: uiModel.fonts.title,
+            text: title
+        )
+    }
+    
+    private func labelIconComponent(icon: Image) -> some View {
+        icon
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(size: uiModel.layout.iconSize)
+            .foregroundColor(uiModel.colors.icon.value(for: internalState))
+            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
     }
 
     // MARK: Actions
@@ -145,7 +144,7 @@ public struct VPlainButton<Label>: View where Label: View {
 struct VPlainButton_Previews: PreviewProvider {
     static var previews: some View {
         VPlainButton(
-            action: {},
+            action: { print("Clicked") },
             title: "Lorem Ipsum"
         )
             .padding()

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Radio Button UI Model
 /// Model that describes UI.
@@ -52,8 +53,11 @@ public struct VRadioButtonUIModel {
         /// Spacing between radio and label. Defaults to `5`.
         public var radioLabelSpacing: CGFloat = checkBoxReference.layout.checkBoxLabelSpacing
         
-        /// Title label line limit. Defaults to `nil`.
-        public var titleLineLimit: Int? = checkBoxReference.layout.titleLineLimit
+        /// Title line type. Defaults to `multiline` of `1...2` lines.
+        public var titleLineType: TextLineType = checkBoxReference.layout.titleLineType
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = checkBoxReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -107,11 +111,11 @@ public struct VRadioButtonUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_OOPD<Color>
+        public typealias StateColors = GenericStateModel_OffOnPressedDisabled<Color>
 
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_OOPD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_OffOnPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Primary Button Demo View
 struct VPrimaryButtonDemoView: View {
@@ -24,18 +25,18 @@ struct VPrimaryButtonDemoView: View {
         var uiModel: VPrimaryButtonUIModel = .init()
 
         if borderType == .bordered {
-            uiModel.layout.borderWidth = 2
+            uiModel.layout.borderWidth = 1.5
 
             uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
                 pressed: .init("PrimaryButtonBordered.Background.pressed"),
-                disabled: .init("PrimaryButtonBordered.Background.disabled"),
-                loading: .init("PrimaryButtonBordered.Background.disabled")
+                loading: .init("PrimaryButtonBordered.Background.disabled"),
+                disabled: .init("PrimaryButtonBordered.Background.disabled")
             )
 
             uiModel.colors.border = defaultUIModel.colors.background
             
-            uiModel.colors.title = uiModel.colors.icon
+            uiModel.colors.title = defaultUIModel.colors.background
             
             uiModel.colors.icon = defaultUIModel.colors.background
             
@@ -85,16 +86,16 @@ struct VPrimaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPrimaryButtonInternalState: Int, PickableTitledEnumeration {
+private enum VPrimaryButtonInternalState: Int, StringRepresentableHashableEnumeration {
     case enabled
-    case disabled
     case loading
+    case disabled
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .enabled: return "Enabled"
-        case .disabled: return "Disabled"
         case .loading: return "Loading"
+        case .disabled: return "Disabled"
         }
     }
     
@@ -107,12 +108,12 @@ private enum VPrimaryButtonInternalState: Int, PickableTitledEnumeration {
     }
 }
 
-enum VPrimaryButtonLabel: Int, PickableTitledEnumeration {
+enum VPrimaryButtonLabel: Int, StringRepresentableHashableEnumeration {
     case title
     case iconTitle
     case custom
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .title: return "Title"
         case .iconTitle: return "Icon & Title"
@@ -121,11 +122,11 @@ enum VPrimaryButtonLabel: Int, PickableTitledEnumeration {
     }
 }
 
-enum VPrimaryButtonBorder: Int, PickableTitledEnumeration {
+enum VPrimaryButtonBorder: Int, StringRepresentableHashableEnumeration {
     case borderless
     case bordered
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .borderless: return "Borderless"
         case .bordered: return "Bordered"

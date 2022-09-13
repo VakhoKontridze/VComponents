@@ -35,128 +35,108 @@ private struct DemoViewSettingsSectionUIModel {
 @resultBuilder struct DemoViewSettingsSectionBuilder {
     private static var spacing: CGFloat { DemoViewSettingsSectionUIModel.sectionSpacing }
 
-    static func buildBlock<C0>(
-        _ c0: DemoViewSettingsSection<C0>
-    ) -> some View
-        where C0: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0 })
     }
     
-    static func buildBlock<C0, C1>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>
-    ) -> some View
-        where C0: View, C1: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1 })
     }
     
-    static func buildBlock<C0, C1, C2>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>
-    ) -> some View
-        where C0: View, C1: View, C2: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2 })
     }
     
-    static func buildBlock<C0, C1, C2, C3>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>,
-        _ c3: DemoViewSettingsSection<C3>
-    ) -> some View
-        where C0: View, C1: View, C2: View, C3: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>,
+        _ c3: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2; c3 })
     }
     
-    static func buildBlock<C0, C1, C2, C3, C4>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>,
-        _ c3: DemoViewSettingsSection<C3>,
-        _ c4: DemoViewSettingsSection<C4>
-    ) -> some View
-        where C0: View, C1: View, C2: View, C3: View, C4: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>,
+        _ c3: DemoViewSettingsSection<some View>,
+        _ c4: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2; c3; c4 })
     }
     
-    static func buildBlock<C0, C1, C2, C3, C4, C5>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>,
-        _ c3: DemoViewSettingsSection<C3>,
-        _ c4: DemoViewSettingsSection<C4>,
-        _ c5: DemoViewSettingsSection<C5>
-    ) -> some View
-        where C0: View, C1: View, C2: View, C3: View, C4: View, C5: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>,
+        _ c3: DemoViewSettingsSection<some View>,
+        _ c4: DemoViewSettingsSection<some View>,
+        _ c5: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2; c3; c4; c5 })
     }
     
-    static func buildBlock<C0, C1, C2, C3, C4, C5, C6>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>,
-        _ c3: DemoViewSettingsSection<C3>,
-        _ c4: DemoViewSettingsSection<C4>,
-        _ c5: DemoViewSettingsSection<C5>,
-        _ c6: DemoViewSettingsSection<C6>
-    ) -> some View
-        where C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>,
+        _ c3: DemoViewSettingsSection<some View>,
+        _ c4: DemoViewSettingsSection<some View>,
+        _ c5: DemoViewSettingsSection<some View>,
+        _ c6: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2; c3; c4; c5; c6 })
     }
 
-    static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>,
-        _ c3: DemoViewSettingsSection<C3>,
-        _ c4: DemoViewSettingsSection<C4>,
-        _ c5: DemoViewSettingsSection<C5>,
-        _ c6: DemoViewSettingsSection<C6>,
-        _ c7: DemoViewSettingsSection<C7>
-    ) -> some View
-        where C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View, C7: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>,
+        _ c3: DemoViewSettingsSection<some View>,
+        _ c4: DemoViewSettingsSection<some View>,
+        _ c5: DemoViewSettingsSection<some View>,
+        _ c6: DemoViewSettingsSection<some View>,
+        _ c7: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2; c3; c4; c5; c6; c7 })
     }
     
-    static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>,
-        _ c3: DemoViewSettingsSection<C3>,
-        _ c4: DemoViewSettingsSection<C4>,
-        _ c5: DemoViewSettingsSection<C5>,
-        _ c6: DemoViewSettingsSection<C6>,
-        _ c7: DemoViewSettingsSection<C7>,
-        _ c8: DemoViewSettingsSection<C8>
-    ) -> some View
-        where C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View, C7: View, C8: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>,
+        _ c3: DemoViewSettingsSection<some View>,
+        _ c4: DemoViewSettingsSection<some View>,
+        _ c5: DemoViewSettingsSection<some View>,
+        _ c6: DemoViewSettingsSection<some View>,
+        _ c7: DemoViewSettingsSection<some View>,
+        _ c8: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2; c3; c4; c5; c6; c7; c8 })
     }
     
-    static func buildBlock<C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(
-        _ c0: DemoViewSettingsSection<C0>,
-        _ c1: DemoViewSettingsSection<C1>,
-        _ c2: DemoViewSettingsSection<C2>,
-        _ c3: DemoViewSettingsSection<C3>,
-        _ c4: DemoViewSettingsSection<C4>,
-        _ c5: DemoViewSettingsSection<C5>,
-        _ c6: DemoViewSettingsSection<C6>,
-        _ c7: DemoViewSettingsSection<C7>,
-        _ c8: DemoViewSettingsSection<C8>,
-        _ c9: DemoViewSettingsSection<C9>
-    ) -> some View
-        where C0: View, C1: View, C2: View, C3: View, C4: View, C5: View, C6: View, C7: View, C8: View, C9: View
-    {
+    static func buildBlock(
+        _ c0: DemoViewSettingsSection<some View>,
+        _ c1: DemoViewSettingsSection<some View>,
+        _ c2: DemoViewSettingsSection<some View>,
+        _ c3: DemoViewSettingsSection<some View>,
+        _ c4: DemoViewSettingsSection<some View>,
+        _ c5: DemoViewSettingsSection<some View>,
+        _ c6: DemoViewSettingsSection<some View>,
+        _ c7: DemoViewSettingsSection<some View>,
+        _ c8: DemoViewSettingsSection<some View>,
+        _ c9: DemoViewSettingsSection<some View>
+    ) -> some View {
         VStack(spacing: spacing, content: { c0; c1; c2; c3; c4; c5; c6; c7; c8; c9 })
     }
 }

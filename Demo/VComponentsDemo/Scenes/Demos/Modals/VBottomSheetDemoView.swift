@@ -20,7 +20,7 @@ struct VBottomSheetDemoView: View {
     @State private var hasGrabber: Bool = VBottomSheetUIModel.Layout().grabberSize.height > 0
     @State private var hasTitle: Bool = true
     @State private var hasDivider: Bool = VBottomSheetUIModel.Layout().dividerHeight > 0
-    @State private var isContentDraggable: Bool = VBottomSheetUIModel.Misc().isContentDraggable
+    @State private var contentIsDraggable: Bool = VBottomSheetUIModel.Misc().contentIsDraggable
     @State private var autoresizesContent: Bool = VBottomSheetUIModel.Layout().autoresizesContent
     
     private var uiModel: VBottomSheetUIModel {
@@ -39,9 +39,8 @@ struct VBottomSheetDemoView: View {
             )
         }
         
-        if !hasDivider && (hasGrabber || hasTitle || dismissType.hasButton) {
-            uiModel.layout.headerMargins.bottom /= 2
-            uiModel.layout.contentMargins.top /= 2
+        if !autoresizesContent { // No list
+            uiModel.layout.contentMargins = VBottomSheetUIModel.insettedContent.layout.contentMargins
         }
         
         uiModel.layout.grabberSize.height = hasGrabber ? (uiModel.layout.grabberSize.height == 0 ? 4 : uiModel.layout.grabberSize.height) : 0
@@ -53,7 +52,7 @@ struct VBottomSheetDemoView: View {
         uiModel.colors.divider = hasDivider ? (uiModel.colors.divider == .clear ? .gray : uiModel.colors.divider) : .clear
 
         uiModel.misc.dismissType = dismissType
-        uiModel.misc.isContentDraggable = isContentDraggable
+        uiModel.misc.contentIsDraggable = contentIsDraggable
         
         return uiModel
     }
@@ -72,8 +71,8 @@ struct VBottomSheetDemoView: View {
             .if(hasTitle,
                 ifTransform: {
                     $0
-                        .tag(0) // Uniquely identifies host
                         .vBottomSheet(
+                            id: "bottom_sheet_demo_1",
                             uiModel: uiModel,
                             isPresented: $isPresented,
                             headerTitle: "Lorem Ipsum Dolor Sit Amet",
@@ -81,8 +80,8 @@ struct VBottomSheetDemoView: View {
                         )
                 }, elseTransform: {
                     $0
-                        .tag("0") // Uniquely identifies host
                         .vBottomSheet(
+                            id: "bottom_sheet_demo_2",
                             uiModel: uiModel,
                             isPresented: $isPresented,
                             content: { bottomSheetContent }
@@ -122,7 +121,7 @@ struct VBottomSheetDemoView: View {
         
         DemoViewSettingsSection(content: {
             ToggleSettingView(
-                isOn: $isContentDraggable,
+                isOn: $contentIsDraggable,
                 title: "Draggable Content",
                 description: "Content dragging is disabled if height is fixed or autoresizing is enabled"
             )
@@ -133,7 +132,7 @@ struct VBottomSheetDemoView: View {
                     get: { autoresizesContent },
                     set: { newValue in
                         self.autoresizesContent = newValue
-                        if newValue { isContentDraggable = false }
+                        if newValue { contentIsDraggable = false }
                     }
                 ),
                 title: "Autoresizes Content"
@@ -145,7 +144,7 @@ struct VBottomSheetDemoView: View {
         VCheckBox(
             uiModel: {
                 var uiModel: VCheckBoxUIModel = .init()
-                uiModel.layout.titleLineLimit = 1
+                uiModel.layout.titleLineType = .singleLine
                 return uiModel
             }(),
             isOn: .init(
@@ -169,19 +168,15 @@ struct VBottomSheetDemoView: View {
                     .padding(.bottom, 10)
                 
             case true:
-                VList(
-                    uiModel: {
-                        var uiModel: VListUIModel = .init()
-                        uiModel.layout.showsFirstSeparator = false
-                        uiModel.layout.showsLastSeparator = false
-                        return uiModel
-                    }(),
-                    data: 0..<20,
-                    content: { num in
-                        Text(String(num))
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                    }
-                )
+                List(content: {
+                    ForEach(0..<20, content: { num in
+                        VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                        })
+                    })
+                })
+                    .vListStyle()
                     .padding(.bottom, 10)
             }
 
@@ -193,11 +188,11 @@ struct VBottomSheetDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VBottomSheetSizeHelper: Int, PickableTitledEnumeration {
+private enum VBottomSheetSizeHelper: Int, StringRepresentableHashableEnumeration {
     case fixed
     case dynamic
 
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .fixed: return "Fixed"
         case .dynamic: return "Dynamic"

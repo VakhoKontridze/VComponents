@@ -91,45 +91,49 @@ public struct VSecondaryButton<Label>: View where Label: View {
         Group(content: {
             switch label {
             case .title(let title):
-                VText(
-                    color: uiModel.colors.title.for(internalState),
-                    font: uiModel.fonts.title,
-                    text: title
-                )
+                labelTitleComponent(title: title)
                 
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
-                    icon
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(size: uiModel.layout.iconSize)
-                        .foregroundColor(uiModel.colors.icon.for(internalState))
-                        .opacity(uiModel.colors.iconOpacities.for(internalState))
-                    
-                    VText(
-                        color: uiModel.colors.title.for(internalState),
-                        font: uiModel.fonts.title,
-                        text: title
-                    )
+                    labelIconComponent(icon: icon)
+                    labelTitleComponent(title: title)
                 })
                 
             case .custom(let label):
                 label()
-                    .opacity(uiModel.colors.customLabelOpacities.for(internalState))
+                    .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
             }
         })
             .padding(uiModel.layout.labelMargins)
     }
     
+    private func labelTitleComponent(title: String) -> some View {
+        VText(
+            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+            color: uiModel.colors.title.value(for: internalState),
+            font: uiModel.fonts.title,
+            text: title
+        )
+    }
+    
+    private func labelIconComponent(icon: Image) -> some View {
+        icon
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(size: uiModel.layout.iconSize)
+            .foregroundColor(uiModel.colors.icon.value(for: internalState))
+            .opacity(uiModel.colors.iconOpacities.value(for: internalState))
+    }
+    
     private var background: some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-            .foregroundColor(uiModel.colors.background.for(internalState))
+            .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
     @ViewBuilder private var border: some View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                .strokeBorder(uiModel.colors.border.for(internalState), lineWidth: uiModel.layout.borderWidth)
+                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         }
     }
 
@@ -144,7 +148,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
 struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
         VSecondaryButton(
-            action: {},
+            action: { print("Clicked") },
             title: "Lorem Ipsum"
         )
             .padding()

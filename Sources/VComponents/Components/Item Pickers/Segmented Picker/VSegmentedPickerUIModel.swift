@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Segmented Picker UI Model
 /// Model that describes UI.
@@ -61,17 +62,20 @@ public struct VSegmentedPickerUIModel {
         /// Row content margin. Defaults to `2`.
         public var contentMargin: CGFloat = 2
         
-        /// Header line limit. Defaults to `1`.
-        public var headerLineLimit: Int? = 1
+        /// Header title line type. Defaults to `singleline`.
+        public var headerTitleLineType: TextLineType = .singleLine
         
-        /// Footer line limit. Defaults to `5`.
-        public var footerLineLimit: Int? = 5
+        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
+        public var footerTitleLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...5)
         
         /// Spacing between header, picker, and footer. Defaults to `3`.
         public var headerPickerFooterSpacing: CGFloat = 3
         
         /// Header and footer horizontal margin. Defaults to `10`.
         public var headerFooterMarginHorizontal: CGFloat = 10
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = 0.75
         
         /// Row divider size. Defaults to width `1` and height `19`, similarly to native picker.
         public var dividerSize: CGSize = .init(width: 1, height: 19)
@@ -119,8 +123,8 @@ public struct VSegmentedPickerUIModel {
         /// so instead, a general opacity is being applied.
         public var customContentOpacities: RowStateOpacities = .init(
             enabled: 1,
-            pressed: 0.5,
-            disabled: 0.5
+            pressed: 0.3,
+            disabled: 0.3
         )
         
         /// Row divider colors.
@@ -132,7 +136,7 @@ public struct VSegmentedPickerUIModel {
         /// Header colors.
         public var header: StateColors = .init(
             enabled: ColorBook.secondary,
-            disabled: ColorBook.primaryPressedDisabled
+            disabled: ColorBook.secondaryPressedDisabled
         )
         
         /// Footer colors.
@@ -147,14 +151,14 @@ public struct VSegmentedPickerUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_ED<Color>
+        public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
         /// Sub-model containing colors for component states.
-        public typealias RowStateColors = GenericStateModel_EPD<Color>
+        public typealias RowStateColors = GenericStateModel_EnabledPressedDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias RowStateOpacities = GenericStateModel_EPD<CGFloat>
+        public typealias RowStateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

@@ -36,7 +36,7 @@ public struct VSecondaryButtonUIModel {
         
         var cornerRadius: CGFloat { height / 2 }
         
-        /// Button border width. Defaults to `0`.
+        /// Border width. Defaults to `0`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
@@ -46,6 +46,9 @@ public struct VSecondaryButtonUIModel {
             horizontal: 10,
             vertical: 3
         )
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         /// Icon size. Defaults to `16` by `16`.
         public var iconSize: CGSize = .init(dimension: 16)
@@ -86,12 +89,14 @@ public struct VSecondaryButtonUIModel {
         
         /// Icon colors.
         ///
-        /// Can be used for vector images.
+        /// Applied to all images. But should be used for vector images.
+        /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(primaryButtonReference.colors.icon)
         
-        /// Icon opacities.
+        /// Icon opacities. Defaults to `1`s.
         ///
-        /// Can be used for bitmap images. Defaults to `1`s.
+        /// Applied to all images. But should be used for bitmap images.
+        /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
         /// Custom label opacities.
@@ -107,11 +112,11 @@ public struct VSecondaryButtonUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPD<Color>
+        public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_EPD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

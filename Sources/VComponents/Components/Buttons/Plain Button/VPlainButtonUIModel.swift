@@ -14,7 +14,7 @@ public struct VPlainButtonUIModel {
     // MARK: Properties
     fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     fileprivate static let secondaryButtonReference: VSecondaryButtonUIModel = .init()
-    fileprivate static let squareButtonReference: VSquareButtonUIModel = .init()
+    fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -34,7 +34,10 @@ public struct VPlainButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Icon size. Defaults to `20` by `20`.
-        public var iconSize: CGSize = squareButtonReference.layout.iconSize
+        public var iconSize: CGSize = roundedButtonReference.layout.iconSize
+        
+        /// Title minimum scale factor. Defaults to `0.75`.
+        public var titleMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         /// Spacing between icon and title. Defaults to `8`.
         ///
@@ -59,23 +62,25 @@ public struct VPlainButtonUIModel {
         // MARK: Properties
         /// Title colors.
         public var title: StateColors = .init(
-            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
-            pressed: primaryButtonReference.colors.background.pressed,
-            disabled: primaryButtonReference.colors.background.disabled
+            enabled: ColorBook.accent,
+            pressed: ColorBook.accentPressedDisabled,
+            disabled: ColorBook.accentPressedDisabled
         )
         
-        /// Icon opacities.
+        /// Icon colors.
         ///
-        /// Can be used for vector images.
+        /// Applied to all images. But should be used for vector images.
+        /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(
-            enabled: .init(componentAsset: "PlainButton.Text.enabled"),
-            pressed: primaryButtonReference.colors.background.pressed,
-            disabled: primaryButtonReference.colors.background.disabled
+            enabled: ColorBook.accent,
+            pressed: ColorBook.accentPressedDisabled,
+            disabled: ColorBook.accentPressedDisabled
         )
         
-        /// Icon opacities.
+        /// Icon opacities. Defaults to `1`s.
         ///
-        /// Can be used for bitmap images. Defaults to `1`s.
+        /// Applied to all images. But should be used for bitmap images.
+        /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
         
         /// Custom label opacities.
@@ -91,11 +96,11 @@ public struct VPlainButtonUIModel {
         
         // MARK: State Colors
         /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EPD<Color>
+        public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
         
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
-        public typealias StateOpacities = GenericStateModel_EPD<CGFloat>
+        public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts

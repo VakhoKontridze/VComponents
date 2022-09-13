@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Side Bar Demo View
 struct VSideBarDemoView: View {
@@ -36,6 +37,7 @@ struct VSideBarDemoView: View {
             title: "Present"
         )
             .vSideBar(
+                id: "side_bar_demo",
                 uiModel: uiModel,
                 isPresented: $isPresented,
                 content: { sideBarContent }
@@ -68,7 +70,7 @@ struct VSideBarDemoView: View {
         VCheckBox(
             uiModel: {
                 var uiModel: VCheckBoxUIModel = .init()
-                uiModel.layout.titleLineLimit = 1
+                uiModel.layout.titleLineType = .singleLine
                 return uiModel
             }(),
             isOn: .init(
@@ -86,20 +88,17 @@ struct VSideBarDemoView: View {
 
     private var sideBarContent: some View {
         ZStack(content: {
-            VList(
-                uiModel: {
-                    var uiModel: VListUIModel = .init()
-                    uiModel.layout.showsFirstSeparator = false
-                    uiModel.layout.showsLastSeparator = false
-                    return uiModel
-                }(),
-                data: 0..<40,
-                content: { num in
-                    Text(String(num))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
-            )
-            
+            List(content: {
+                ForEach(0..<40, content: { num in
+                    VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                        Text(String(num))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    })
+                })
+            })
+                .vListStyle()
+                .padding(.vertical, 1) // Fixes SwiftUI `ScrollView` safe area bug
+
             if dismissType.isEmpty {
                 NoDismissTypeWarningView(onDismiss: { isPresented = false })
             }
@@ -108,8 +107,8 @@ struct VSideBarDemoView: View {
 }
 
 // MARK: - Helpers
-extension VSideBarUIModel.Layout.PresentationEdge: PickableTitledEnumeration {
-    public var pickerTitle: String {
+extension VSideBarUIModel.Layout.PresentationEdge: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
         switch self {
         case .left: return "Left"
         case .right: return "Right"

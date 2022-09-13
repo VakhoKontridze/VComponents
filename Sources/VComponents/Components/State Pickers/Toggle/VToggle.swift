@@ -33,7 +33,7 @@ public struct VToggle<Label>: View where Label: View {
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
     @Binding private var state: VToggleState
-    private var internalState: VToggleInternalState { .init(isEnabled: isEnabled, state: state, isPressed: isPressed) }
+    private var internalState: VToggleInternalState { .init(isEnabled: isEnabled, isOn: state == .on, isPressed: isPressed) }
     
     private let label: VToggleLabel<Label>
     
@@ -85,7 +85,7 @@ public struct VToggle<Label>: View where Label: View {
         where Label == Never
     {
         self.uiModel = uiModel
-        self._state = .init(bool: isOn)
+        self._state = .init(isOn: isOn)
         self.label = .empty
     }
     
@@ -98,7 +98,7 @@ public struct VToggle<Label>: View where Label: View {
         where Label == Never
     {
         self.uiModel = uiModel
-        self._state = .init(bool: isOn)
+        self._state = .init(isOn: isOn)
         self.label = .title(title: title)
     }
     
@@ -109,7 +109,7 @@ public struct VToggle<Label>: View where Label: View {
         @ViewBuilder label: @escaping () -> Label
     ) {
         self.uiModel = uiModel
-        self._state = .init(bool: isOn)
+        self._state = .init(isOn: isOn)
         self.label = .custom(label: label)
     }
 
@@ -128,8 +128,9 @@ public struct VToggle<Label>: View where Label: View {
 
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: .multiLine(alignment: .leading, lineLimit: uiModel.layout.titleLineLimit),
-                            color: uiModel.colors.title.for(internalState),
+                            type: uiModel.layout.titleLineType,
+                            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+                            color: uiModel.colors.title.value(for: internalState),
                             font: uiModel.fonts.title,
                             text: title
                         )
@@ -145,7 +146,7 @@ public struct VToggle<Label>: View where Label: View {
                     
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         label()
-                            .opacity(uiModel.colors.customLabelOpacities.for(internalState))
+                            .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
                     })
                         .disabled(!labelIsEnabled)
                 })
@@ -158,11 +159,11 @@ public struct VToggle<Label>: View where Label: View {
         SwiftUIBaseButton(gesture: gestureHandler, label: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                    .foregroundColor(uiModel.colors.fill.for(internalState))
+                    .foregroundColor(uiModel.colors.fill.value(for: internalState))
 
                 Circle()
                     .frame(dimension: uiModel.layout.thumbDimension)
-                    .foregroundColor(uiModel.colors.thumb.for(internalState))
+                    .foregroundColor(uiModel.colors.thumb.value(for: internalState))
                     .offset(x: thumbOffset)
             })
                 .frame(size: uiModel.layout.size)

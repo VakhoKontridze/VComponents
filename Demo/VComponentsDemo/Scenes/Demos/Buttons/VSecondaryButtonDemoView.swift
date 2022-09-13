@@ -7,6 +7,7 @@
 
 import SwiftUI
 import VComponents
+import VCore
 
 // MARK: - V Secondary Button Demo View
 struct VSecondaryButtonDemoView: View {
@@ -32,7 +33,7 @@ struct VSecondaryButtonDemoView: View {
         uiModel.layout.hitBox.vertical = uiModel.layout.hitBox.horizontal
 
         if borderType == .bordered {
-            uiModel.layout.borderWidth = 1.5
+            uiModel.layout.borderWidth = 1
 
             uiModel.colors.background = .init(
                 enabled: .init("PrimaryButtonBordered.Background.enabled"),
@@ -42,7 +43,7 @@ struct VSecondaryButtonDemoView: View {
 
             uiModel.colors.border = defaultUIModel.colors.background
             
-            uiModel.colors.title = uiModel.colors.icon
+            uiModel.colors.title = defaultUIModel.colors.background
             
             uiModel.colors.icon = defaultUIModel.colors.background
         }
@@ -89,11 +90,11 @@ struct VSecondaryButtonDemoView: View {
 }
 
 // MARK: - Helpers
-enum VSecondaryButtonInternalState: Int, PickableTitledEnumeration {
+enum VSecondaryButtonInternalState: Int, StringRepresentableHashableEnumeration {
     case enabled
     case disabled
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .enabled: return "Enabled"
         case .disabled: return "Disabled"
@@ -110,11 +111,11 @@ enum VSecondaryButtonInternalState: Int, PickableTitledEnumeration {
 
 private typealias VSecondaryButtonLabel = VPrimaryButtonLabel
 
-enum VSecondaryButtonHitBox: Int, PickableTitledEnumeration {
+enum VSecondaryButtonHitBox: Int, StringRepresentableHashableEnumeration {
     case clipped
     case extended
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .clipped: return "Clipped"
         case .extended: return "Extended"

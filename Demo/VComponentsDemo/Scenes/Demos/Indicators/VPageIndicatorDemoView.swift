@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import VComponents
+import VCore
 
 // MARK: - V Page Indicator Demo View
 struct VPageIndicatorDemoView: View {
@@ -58,12 +59,12 @@ struct VPageIndicatorDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPageIndicatorTypeHelper: Int, PickableTitledEnumeration {
+private enum VPageIndicatorTypeHelper: Int, StringRepresentableHashableEnumeration {
     case finite
     case infinite
     case automatic
     
-    var pickerTitle: String {
+    var stringRepresentation: String {
         switch self {
         case .finite: return "Finite"
         case .infinite: return "Infinite"

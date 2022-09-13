@@ -85,14 +85,14 @@ public struct VSlider: View {
 
     private var track: some View {
         Rectangle()
-            .foregroundColor(uiModel.colors.track.for(internalState))
+            .foregroundColor(uiModel.colors.track.value(for: internalState))
     }
 
     private var progress: some View {
         Rectangle()
             .frame(width: progressWidth)
             .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
-            .foregroundColor(uiModel.colors.progress.for(internalState))
+            .foregroundColor(uiModel.colors.progress.value(for: internalState))
     }
     
     @ViewBuilder private var thumb: some View {
@@ -100,11 +100,11 @@ public struct VSlider: View {
             Group(content: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
-                        .foregroundColor(uiModel.colors.thumb.for(internalState))
-                        .shadow(color: uiModel.colors.thumbShadow.for(internalState), radius: uiModel.layout.thumbShadowRadius)
+                        .foregroundColor(uiModel.colors.thumb.value(for: internalState))
+                        .shadow(color: uiModel.colors.thumbShadow.value(for: internalState), radius: uiModel.layout.thumbShadowRadius)
                     
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
-                        .strokeBorder(uiModel.colors.thumbBorder.for(internalState), lineWidth: uiModel.layout.thumbBorderWidth)
+                        .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
                 })
                     .frame(dimension: uiModel.layout.thumbDimension)
                     .offset(x: thumbOffset)

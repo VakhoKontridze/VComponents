@@ -16,11 +16,10 @@ struct HomeView: View {
 
     // MARK: Body
     var body: some View {
-        NavigationView(content: {
+        NavigationStack(root: {
             DemoListView(sections: HomeRow.sections)
                 .standardNavigationTitle(Self.navBarTitle)
         })
-            .navigationViewStyle(.stack)
     }
 }
 
