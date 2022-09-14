@@ -109,7 +109,7 @@ public struct VWheelPicker<Data, Content>: View
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { data.firstIndex(of: selection.wrappedValue)! }, // fatalError
+            get: { data.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = data[$0] }
         )
         self.headerTitle = headerTitle
@@ -131,7 +131,7 @@ public struct VWheelPicker<Data, Content>: View
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { rowTitles.firstIndex(of: selection.wrappedValue)! }, // fatalError
+            get: { rowTitles.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = rowTitles[$0] }
         )
         self.headerTitle = headerTitle
@@ -154,7 +154,7 @@ public struct VWheelPicker<Data, Content>: View
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.headerTitle = headerTitle
@@ -176,7 +176,7 @@ public struct VWheelPicker<Data, Content>: View
     {
         self.uiModel = uiModel
         self._selectedIndex = .init(
-            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // fatalError
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.headerTitle = headerTitle
