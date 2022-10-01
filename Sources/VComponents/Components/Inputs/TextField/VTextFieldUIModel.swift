@@ -53,6 +53,9 @@ public struct VTextFieldUIModel {
         /// Content horizontal margin. Defaults to `15`.
         public var contentMarginHorizontal: CGFloat = 15
         
+        /// Spacing between text and buttons. Defaults to `10`.
+        public var contentSpacing: CGFloat = 10
+        
         /// Search icon dimension. Defaults to `15`.
         public var searchIconDimension: CGFloat = 15
         
@@ -67,9 +70,6 @@ public struct VTextFieldUIModel {
         
         /// Visibility button  icon dimension. Defaults to `8`.
         public var visibilityButtonIconDimension: CGFloat = 20
-        
-        /// Spacing between text and buttons. Defaults to `10`.
-        public var contentSpacing: CGFloat = 10
         
         /// Header title line type. Defaults to `singleline`.
         public var headerTitleLineType: TextLineType = .singleLine
