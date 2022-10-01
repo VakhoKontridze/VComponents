@@ -58,9 +58,10 @@ import VCore
 ///             .focused($isFocused)
 ///             .onChange(of: text, perform: { _ in print("Editing Changed") })
 ///             .onChange(of: isFocused, perform: {
-///                 switch $0 {
-///                 case false: print("Editing Ended")
-///                 case true: print("Editing Began")
+///                 if $0 {
+///                     print("Editing Began")
+///                 } else {
+///                     print("Editing Ended")
 ///                 }
 ///             })
 ///             .onSubmit({ print("Submitted") })
@@ -286,9 +287,10 @@ public struct VTextField: View {
 
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
-        switch secureFieldIsVisible {
-        case false: return ImageBook.textFieldVisibilityOff
-        case true: return ImageBook.textFieldVisibilityOn
+        if secureFieldIsVisible {
+            return ImageBook.textFieldVisibilityOn
+        } else {
+            return ImageBook.textFieldVisibilityOff
         }
     }
 

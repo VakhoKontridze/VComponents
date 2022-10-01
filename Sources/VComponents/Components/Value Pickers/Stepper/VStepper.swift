@@ -124,15 +124,17 @@ public struct VStepper: View {
         
         switch button {
         case .minus:
-            switch value <= range.lowerBound {
-            case false: value -= step
-            case true: zeroLongPressTimers()
+            if value <= range.lowerBound {
+                zeroLongPressTimers()
+            } else {
+                value -= step
             }
         
         case .plus:
-            switch value >= range.upperBound {
-            case false: value += step
-            case true: zeroLongPressTimers()
+            if value >= range.upperBound {
+                zeroLongPressTimers()
+            } else {
+                value += step
             }
         }
     }

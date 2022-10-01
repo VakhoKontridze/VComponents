@@ -150,9 +150,10 @@ struct VBottomSheetDemoView: View {
             isOn: .init(
                 get: { dismissType.contains(position) },
                 set: { isOn in
-                    switch isOn {
-                    case false: dismissType.remove(position)
-                    case true: dismissType.insert(position)
+                    if isOn {
+                        dismissType.insert(position)
+                    } else {
+                        dismissType.remove(position)
                     }
                 }
             ),

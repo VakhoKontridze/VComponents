@@ -351,9 +351,10 @@ public struct VSegmentedPicker<Data, Content>: View
     private func dividerOpacity(for index: Int) -> Double {
         let isBeforeIndicator: Bool = index < selectedIndex
         
-        switch isBeforeIndicator {
-        case false: return index - selectedIndex < 1 ? 0 : 1
-        case true: return selectedIndex - index <= 1 ? 0 : 1
+        if isBeforeIndicator {
+            return selectedIndex - index <= 1 ? 0 : 1
+        } else {
+            return index - selectedIndex < 1 ? 0 : 1
         }
     }
 }

@@ -174,30 +174,34 @@ public struct VBottomSheetUIModel {
             }
             
             var minOffset: CGFloat {
-                switch isResizable {
-                case false: return (UIScreen.main.bounds.height - min) / 2
-                case true: return UIScreen.main.bounds.height - min
+                if isResizable {
+                    return UIScreen.main.bounds.height - min
+                } else {
+                    return (UIScreen.main.bounds.height - min) / 2
                 }
             }
             
             var idealOffset: CGFloat {
-                switch isResizable {
-                case false: return (UIScreen.main.bounds.height - ideal) / 2
-                case true: return UIScreen.main.bounds.height - ideal
+                if isResizable {
+                    return UIScreen.main.bounds.height - ideal
+                } else {
+                    return (UIScreen.main.bounds.height - ideal) / 2
                 }
             }
             
             var maxOffset: CGFloat {
-                switch isResizable {
-                case false: return (UIScreen.main.bounds.height - max) / 2
-                case true: return UIScreen.main.bounds.height - max
+                if isResizable {
+                    return UIScreen.main.bounds.height - max
+                } else {
+                    return (UIScreen.main.bounds.height - max) / 2
                 }
             }
             
             var hiddenOffset: CGFloat {
-                switch isResizable {
-                case false: return UIScreen.main.bounds.height - maxOffset
-                case true: return UIScreen.main.bounds.height
+                if isResizable {
+                    return UIScreen.main.bounds.height
+                } else {
+                    return UIScreen.main.bounds.height - maxOffset
                 }
             }
             

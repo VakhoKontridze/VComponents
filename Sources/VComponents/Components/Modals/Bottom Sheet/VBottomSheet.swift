@@ -289,9 +289,10 @@ struct VBottomSheet<HeaderLabel, Content>: View
                     return uiModel.layout.sizes._current.size.heights.maxOffset
                     
                 case uiModel.layout.sizes._current.size.heights.minOffset...:
-                    switch uiModel.misc.dismissType.contains(.pullDown) {
-                    case false: return uiModel.layout.sizes._current.size.heights.minOffset
-                    case true: return newOffset
+                    if uiModel.misc.dismissType.contains(.pullDown) {
+                        return newOffset
+                    } else {
+                        return uiModel.layout.sizes._current.size.heights.minOffset
                     }
                     
                 default:
