@@ -109,6 +109,9 @@ public struct VTextFieldUIModel {
             disabled: ColorBook.primaryPressedDisabled
         )
         
+        /// Placeholder colors.
+        public var placeholder: StateColors = .init(ColorBook.primaryPressedDisabled)
+        
         /// Header colors.
         public var header: StateColors = .init(
             enabled: segmentedPickerReference.colors.header.enabled,
@@ -219,7 +222,7 @@ public struct VTextFieldUIModel {
         /// Submit button type. Defaults to `return`.
         public var submitButton: SubmitLabel = .return
         
-        /// Indicates if text field has clear button. Defaults to `true`.
+        /// Indicates if textfield has clear button. Defaults to `true`.
         public var hasClearButton: Bool = true
         
         // MARK: Initializers

@@ -36,7 +36,7 @@ Versions with different majors are not compatible.
 
 **Value Pickers.** VStepper, VSlider, VRangeSlider
 
-**Inputs.** VTextField
+**Inputs.** VTextField, VTextView
 
 **Containers**. VSheet, VDisclosureGroup
 

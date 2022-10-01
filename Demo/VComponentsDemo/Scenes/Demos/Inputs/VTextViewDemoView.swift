@@ -1,8 +1,8 @@
 //
-//  VTextFieldDemoView.swift
+//  VTextViewDemoView.swift
 //  VComponentsDemo
 //
-//  Created by Vakhtang Kontridze on 1/20/21.
+//  Created by Vakhtang Kontridze on 01.10.22.
 //
 
 import SwiftUI
@@ -10,31 +10,31 @@ import VComponents
 import VCore
 
 // MARK: V Text Field Demo View
-struct VTextFieldDemoView: View {
+struct VTextViewDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "TextField" }
+    static var navBarTitle: String { "TextView" }
 
     @State private var text: String = ""
     @State private var isEnabled: Bool = true
     @FocusState private var isFocused: Bool
-    @State private var textFieldType: VTextFieldType = .default
-    @State private var textFieldHighlight: VTextFieldHighlight = .none
+    @State private var textLineLimitType: TextLineLimitTypeHelper = .default
+    @State private var textViewHighlight: VTextViewHighlight = .none
     @State private var hasPlaceholder: Bool = true
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var numericalKeyboard: Bool = false
-    @State private var textAlignment: TextAlignment = VTextFieldUIModel.Layout().textAlignment
+    @State private var textAlignment: TextAlignment = VTextViewUIModel.Layout().textAlignment
     @State private var autocapitalization: Bool = false
     @State private var autocorrection: Bool = false
-    @State private var hasClearButton: Bool = VTextFieldUIModel.Misc().hasClearButton
+    @State private var hasClearButton: Bool = VTextViewUIModel.Misc().hasClearButton
     
-    private var uiModel: VTextFieldUIModel {
-        var uiModel: VTextFieldUIModel = .init()
+    private var uiModel: VTextViewUIModel {
+        var uiModel: VTextViewUIModel = .init()
         
         uiModel.layout.textAlignment = textAlignment
         
         uiModel.colors = {
-            switch textFieldHighlight {
+            switch textViewHighlight {
             case .none: return .init()
             case .success: return .success
             case .warning: return .warning
@@ -65,9 +65,9 @@ struct VTextFieldDemoView: View {
                 .contentShape(Rectangle())
                 .onTapGesture(perform: { isFocused = false })
             
-            VTextField(
+            VTextView(
                 uiModel: uiModel,
-                type: textFieldType,
+                type: textLineLimitType.textLineLimitType,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
@@ -82,7 +82,7 @@ struct VTextFieldDemoView: View {
         DemoViewSettingsSection(content: {
             VSegmentedPicker(
                 selection: .init(
-                    get: { VTextFieldInternalState(isEnabled: isEnabled, isFocused: isFocused) },
+                    get: { VTextViewInternalState(isEnabled: isEnabled, isFocused: isFocused) },
                     set: { state in
                         isEnabled = state != .disabled
                         isFocused = state == .focused
@@ -93,9 +93,9 @@ struct VTextFieldDemoView: View {
         })
 
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $textFieldType, headerTitle: "Type")
+            VWheelPicker(selection: $textLineLimitType, headerTitle: "Line Limit Type")
 
-            VSegmentedPicker(selection: $textFieldHighlight, headerTitle: "Highlight")
+            VSegmentedPicker(selection: $textViewHighlight, headerTitle: "Highlight")
         })
 
         DemoViewSettingsSection(content: {
@@ -152,67 +152,46 @@ struct VTextFieldDemoView: View {
 }
 
 // MARK: - Helpers
-enum VTextFieldInternalState: StringRepresentableHashableEnumeration {
-    case enabled
-    case focused
-    case disabled
-    
-    init(isEnabled: Bool, isFocused: Bool) {
-        switch (isEnabled, isFocused) {
-        case (false, _): self = .disabled
-        case (true, false): self = .enabled
-        case (true, true): self = .focused
-        }
-    }
-    
-    var stringRepresentation: String {
-        switch self {
-        case .enabled: return "Enabled"
-        case .focused: return "Focused"
-        case .disabled: return "Disabled"
-        }
-    }
-}
-
-extension VTextFieldType: StringRepresentableHashableEnumeration {
-    public var stringRepresentation: String {
-        switch self {
-        case .standard: return "Standard"
-        case .secure: return "Secure"
-        case .search: return "Search"
-        }
-    }
-}
-
-extension TextAlignment: StringRepresentableHashableEnumeration {
-    public var stringRepresentation: String {
-        switch self {
-        case .leading: return "Leading"
-        case .center: return "Center"
-        case .trailing: return "Traiiling"
-        }
-    }
-}
-
-enum VTextFieldHighlight: StringRepresentableHashableEnumeration {
+private enum TextLineLimitTypeHelper: StringRepresentableHashableEnumeration {
     case none
-    case success
-    case warning
-    case error
+    case fixed
+    case spaceReserved
+    case partialRangeFrom
+    case partialRangeThrough
+    case closedRange
     
     var stringRepresentation: String {
         switch self {
         case .none: return "None"
-        case .success:  return "Success"
-        case .warning:  return "Warning"
-        case .error:  return "Error"
+        case .fixed: return "Fixed"
+        case .spaceReserved: return "Space-Reserved"
+        case .partialRangeFrom: return "Partial Range (From)"
+        case .partialRangeThrough: return "Partial Range (To)"
+        case .closedRange: return "Closed Range"
         }
     }
+    
+    var textLineLimitType: TextLineLimitType {
+        switch self {
+        case .none: return .none
+        case .fixed: return .fixed(lineLimit: 10)
+        case .spaceReserved: return .spaceReserved(lineLimit: 20, reservesSpace: true)
+        case .partialRangeFrom: return .partialRangeFrom(lineLimit: 10...)
+        case .partialRangeThrough: return .partialRangeThrough(lineLimit: ...20)
+        case .closedRange: return .closedRange(lineLimit: 10...20)
+        }
+    }
+    
+    static var `default`: Self { .none }
 }
 
+private typealias VTextViewInternalState = VTextFieldInternalState
+
+private typealias VTextViewHighlight = VTextFieldHighlight
+
 // MARK: - Preview
-struct VTextFieldDemoView_Previews: PreviewProvider {
+struct VTextViewDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VTextFieldDemoView()
+        VTextViewDemoView()
     }
 }

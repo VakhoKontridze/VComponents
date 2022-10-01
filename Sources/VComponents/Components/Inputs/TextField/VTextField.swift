@@ -145,20 +145,20 @@ public struct VTextField: View {
     @State private var secureFieldIsVisible: Bool = false
 
     // MARK: Initializers
-    /// Initializes component with title.
+    /// Initializes component with text.
     public init(
         uiModel: VTextFieldUIModel = .init(),
         type textFieldType: VTextFieldType = .default,
-        placeholder: String? = nil,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
+        placeholder: String? = nil,
         text: Binding<String>
     ) {
         self.uiModel = uiModel
         self.textFieldType = textFieldType
-        self.placeholder = placeholder
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
+        self.placeholder = placeholder
         self._text = text
     }
 
@@ -231,7 +231,11 @@ public struct VTextField: View {
     private var textField: some View {
         SecurableTextField(
             isSecure: textFieldType.isSecure && !secureFieldIsVisible,
-            placeholder: placeholder,
+            placeholder: placeholder.map {
+                Text($0)
+                    .foregroundColor(uiModel.colors.placeholder.value(for: internalState))
+                    .font(uiModel.fonts.placeholder)
+            },
             text: $text
         )
             .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
@@ -240,12 +244,7 @@ public struct VTextField: View {
         
             .multilineTextAlignment(uiModel.layout.textAlignment)
             .foregroundColor(uiModel.colors.text.value(for: internalState))
-            .font({
-                switch text.isEmpty {
-                case false: return uiModel.fonts.text
-                case true: return uiModel.fonts.placeholder
-                }
-            }())
+            .font(uiModel.fonts.text)
             .keyboardType(uiModel.misc.keyboardType)
             .textContentType(uiModel.misc.textContentType)
             .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
@@ -313,9 +312,9 @@ struct VTextField_Previews: PreviewProvider {
             ForEach(VTextFieldType.allCases, id: \.self, content: { type in
                 VTextField(
                     type: type,
-                    placeholder: "Lorem ipsum",
                     headerTitle: "Lorem ipsum dolor sit amet",
                     footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    placeholder: "Lorem ipsum",
                     text: $text
                 )
             })

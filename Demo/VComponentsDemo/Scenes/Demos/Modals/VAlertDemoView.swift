@@ -55,14 +55,14 @@ struct VAlertDemoView: View {
     @DemoViewSettingsSectionBuilder private func settings() -> some View {
         DemoViewSettingsSection(content: {
             VTextField(
-                placeholder: "Title",
                 headerTitle: "Title",
+                placeholder: "Title",
                 text: $title
             )
             
             VTextField(
-                placeholder: "Description",
                 headerTitle: "Description",
+                placeholder: "Description",
                 text: $message
             )
         })

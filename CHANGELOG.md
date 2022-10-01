@@ -73,9 +73,14 @@ VMenuPicker
 VTextField
 
 - TextField Height is changed from `45` to `50`
+- `placeholder` color is added to `VTextFieldUIModel`
 - `headerLineLimit` is replaced with `headerTitleLineType` is `VTextFieldUIModel`
 - `footerLineLimit` is replaced with `footerTitleLineType` is `VTextFieldUIModel`
 - Header and footer color mismatched when disabled is fixed
+
+VTextView
+
+- TextView component is added
 
 VDisclosureGroup
 

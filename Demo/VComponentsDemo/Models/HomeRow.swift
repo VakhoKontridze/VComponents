@@ -14,7 +14,7 @@ enum HomeRow: Int, DemoableRow {
     case toggle, checkBox, radioButton
     case segmentedPicker, wheelPicker
     case stepper, slider,  rangeSlider
-    case textField
+    case textField, textView
     case sheet, disclosureGroup
     case list
     case modal, bottomSheet, sideBar, alert, confirmationDialog, menu, contextMenu
@@ -29,7 +29,7 @@ enum HomeRow: Int, DemoableRow {
             .init(id: 1, title: "State Pickers", rows: [.toggle, .checkBox, .radioButton]),
             .init(id: 2, title: "Item Pickers", rows: [.segmentedPicker, .wheelPicker]),
             .init(id: 3, title: "Value Pickers", rows: [.stepper, .slider, .rangeSlider]),
-            .init(id: 4, title: "Inputs", rows: [.textField]),
+            .init(id: 4, title: "Inputs", rows: [.textField, .textView]),
             .init(id: 5, title: "Containers", rows: [.sheet, .disclosureGroup]),
             .init(id: 6, title: "Lists", rows: [.list]),
             .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .confirmationDialog, .menu, .contextMenu]),
@@ -59,6 +59,7 @@ enum HomeRow: Int, DemoableRow {
         case .rangeSlider: return VRangeSliderDemoView.navBarTitle
 
         case .textField: return VTextFieldDemoView.navBarTitle
+        case .textView: return VTextViewDemoView.navBarTitle
             
         case .sheet: return VSheetDemoView.navBarTitle
         case .disclosureGroup: return VDisclosureGroupDemoView.navBarTitle
@@ -103,6 +104,7 @@ enum HomeRow: Int, DemoableRow {
         case .rangeSlider: VRangeSliderDemoView()
             
         case .textField: VTextFieldDemoView()
+        case .textView: VTextViewDemoView()
 
         case .sheet: VSheetDemoView()
         case .disclosureGroup: VDisclosureGroupDemoView()

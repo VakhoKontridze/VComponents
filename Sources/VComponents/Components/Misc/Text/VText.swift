@@ -49,8 +49,8 @@ public struct VText: View {
     // MARK: Body
     public var body: some View {
         Text(text)
-            .ifLet(textLineType._textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
-            .lineLimit(type: textLineType._textLineType.textLineLimitType)
+            .ifLet(textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
+            .lineLimit(type: textLineType.textLineLimitType)
             .truncationMode(truncatingMode)
             .minimumScaleFactor(minimumScaleFactor)
             .foregroundColor(color)
