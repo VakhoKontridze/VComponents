@@ -45,7 +45,7 @@ public struct VTextViewUIModel {
         /// Textfield border width. Defaults to `1`.
         public var borderWidth: CGFloat = textFieldReference.layout.borderWidth
 
-        /// Content margin. Defaults to `15`. ???
+        /// Content margin. Defaults to `15`.
         public var contentMargin: Margins = .init(textFieldReference.layout.contentMarginHorizontal)
 
         /// Header title line type. Defaults to `singleline`.
@@ -65,7 +65,7 @@ public struct VTextViewUIModel {
         public init() {}
         
         // MARK: Margins
-        /// ???.
+        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
