@@ -56,7 +56,7 @@ public struct VRadioButtonUIModel {
         /// Title line type. Defaults to `multiline` of `1...2` lines.
         public var titleLineType: TextLineType = checkBoxReference.layout.titleLineType
         
-        /// Title minimum scale factor. Defaults to `0.75`.
+        /// Title minimum scale factor. Defaults to `1`.
         public var titleMinimumScaleFactor: CGFloat = checkBoxReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers

@@ -58,7 +58,7 @@ public struct VCheckBoxUIModel {
         /// Title line type. Defaults to `multiline` of `1...2` lines.
         public var titleLineType: TextLineType = toggleReference.layout.titleLineType
 
-        /// Title minimum scale factor. Defaults to `0.75`.
+        /// Title minimum scale factor. Defaults to `1`.
         public var titleMinimumScaleFactor: CGFloat = toggleReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
