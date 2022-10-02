@@ -147,7 +147,10 @@ struct DemoView<ComponentContent, SettingsContent>: View
         @ViewBuilder settings: @escaping () -> some View
     )  -> some View {
         VPlainButton(
-            action: { isPresented = true },
+            action: {
+                dismissKeyboard()
+                isPresented = true
+            },
             icon: .init(systemName: "gearshape")
         )
             .vBottomSheet(
@@ -169,6 +172,12 @@ struct DemoView<ComponentContent, SettingsContent>: View
                         .vBottomSheetHeaderTitle("Parameters")
                 }
             )
+    }
+    
+    // MARK: Helpers
+    private func dismissKeyboard() {
+        let resign: Selector = #selector(UIResponder.resignFirstResponder)
+        _ = UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
     }
 }
 
