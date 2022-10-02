@@ -131,11 +131,13 @@ VSideBar
 VAlert
 
 - Alert now builds actions using `resultBuilder`
+- `VAlertPresentable` is added in style of `AlertPresentable` from `VCore`
 
 VConfirmationDialog
 
 - ConfirmationDialog now builds actions using `resultBuilder`
 - ConfirmationDialog API is updated to match `VAlert`
+- `VConfirmationDialogPresentable` is added in style of `ConfirmationDialogPresentable` from `VCore`
 
 VMenu
 
@@ -152,6 +154,10 @@ VContextMenu
 VToast
 
 - `VToastType` is renamed to `VToastTextLineType`
+
+VSpinner
+
+- `VSpinnerPresentable` is added in style of `ProgressViewPresentable` from `VCore`
 
 VText
 
