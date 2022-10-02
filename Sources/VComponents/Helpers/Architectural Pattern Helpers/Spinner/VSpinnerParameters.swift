@@ -20,7 +20,7 @@ public struct VSpinnerParameters: Identifiable {
     /// ID.
     public let id: UUID = .init()
     
-    /// Spinner type.
+    /// Type.
     public var spinnerType: VSpinnerType
     
     /// Indicates if interaction is disabled.
