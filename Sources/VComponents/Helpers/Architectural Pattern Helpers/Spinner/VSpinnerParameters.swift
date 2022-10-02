@@ -30,7 +30,7 @@ public struct VSpinnerParameters: Identifiable {
     /// Initializes `VSpinnerParameters`.
     public init(
         type spinnerType: VSpinnerType = .default,
-        isInteractionDisabled: Bool = false
+        isInteractionDisabled: Bool
     ) {
         self.spinnerType = spinnerType
         self.isInteractionDisabled = isInteractionDisabled
