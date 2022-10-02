@@ -27,7 +27,7 @@ extension View {
     ///             .vConfirmationDialog(
     ///                 isPresented: $isPresented,
     ///                 title: "Lorem Ipsum Dolor Sit Amet",
-    ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+    ///                 message: "Lorem ipsum dolor sit amet",
     ///                 actions: {
     ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
     ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
@@ -43,14 +43,12 @@ extension View {
         message: String?,
         @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
     ) -> some View {
-        let buttons: [any VConfirmationDialogButtonProtocol] = buttons()
-        
-        return self
+        self
             .confirmationDialog(
                 title ?? "",
                 isPresented: isPresented,
                 titleVisibility: .vConfirmationDialog(title: title, message: message),
-                actions: { VConfirmationDialogContentView(button: buttons) },
+                actions: { VConfirmationDialogContentView(button: buttons()) },
                 message: {
                     if let message {
                         Text(message)
@@ -83,9 +81,9 @@ extension View {
     ///         )
     ///             .vConfirmationDialog(
     ///                 item: $confirmationDialogItem,
-    ///                 title: "Lorem Ipsum Dolor Sit Amet",
-    ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///                 actions: {
+    ///                 title: { item in "Lorem Ipsum" },
+    ///                 message: { item in "Lorem ipsum dolor sit amet" },
+    ///                 actions: { item in
     ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
     ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
     ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
@@ -96,25 +94,30 @@ extension View {
     ///
     public func vConfirmationDialog<Item>(
         item: Binding<Item?>,
-        title: String?,
-        message: String?,
-        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
+        title: @escaping (Item) -> String?,
+        message: @escaping (Item) -> String?,
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping (Item) -> [any VConfirmationDialogButtonProtocol]
     ) -> some View
         where Item: Identifiable
     {
-        let buttons: [any VConfirmationDialogButtonProtocol] = buttons()
-        
-        return self
+        self
             .confirmationDialog(
-                title ?? "",
+                item.wrappedValue.flatMap { title($0) } ?? "",
                 isPresented: .init(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
-                titleVisibility: .vConfirmationDialog(title: title, message: message),
-                actions: { VConfirmationDialogContentView(button: buttons) },
+                titleVisibility: .vConfirmationDialog(
+                    title: item.wrappedValue.flatMap { title($0) },
+                    message: item.wrappedValue.flatMap { message($0) }
+                ),
+                actions: {
+                    if let item = item.wrappedValue {
+                        VConfirmationDialogContentView(button: buttons(item))
+                    }
+                },
                 message: {
-                    if let message {
+                    if let item = item.wrappedValue, let message = message(item) {
                         Text(message)
                     }
                 }
@@ -150,9 +153,9 @@ extension View {
     ///             .vConfirmationDialog(
     ///                 isPresented: $isPresented,
     ///                 presenting: confirmationDialogData,
-    ///                 title: "Lorem Ipsum Dolor Sit Amet",
-    ///                 message: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-    ///                 actions: {
+    ///                 title: { data in "Lorem Ipsum" },
+    ///                 message: { data in "Lorem ipsum dolor sit amet" },
+    ///                 actions: { data in
     ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
     ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
     ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
@@ -164,23 +167,28 @@ extension View {
     public func vConfirmationDialog<T>(
         isPresented: Binding<Bool>,
         presenting data: T?,
-        title: String?,
-        message: String?,
-        @VConfirmationDialogButtonBuilder actions buttons: @escaping () -> [any VConfirmationDialogButtonProtocol]
+        title: @escaping (T) -> String?,
+        message: @escaping (T) -> String?,
+        @VConfirmationDialogButtonBuilder actions buttons: @escaping (T) -> [any VConfirmationDialogButtonProtocol]
     ) -> some View {
-        let buttons: [any VConfirmationDialogButtonProtocol] = buttons()
-        
-        return self
+        self
             .confirmationDialog(
-                title ?? "",
+                data.flatMap { title($0) } ?? "",
                 isPresented: .init(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),
-                titleVisibility: .vConfirmationDialog(title: title, message: message),
-                actions: { VConfirmationDialogContentView(button: buttons) },
+                titleVisibility: .vConfirmationDialog(
+                    title: data.flatMap { title($0) },
+                    message: data.flatMap { message($0) }
+                ),
+                actions: {
+                    if let data {
+                        VConfirmationDialogContentView(button: buttons(data))
+                    }
+                },
                 message: {
-                    if let message {
+                    if let data, let message = message(data) {
                         Text(message)
                     }
                 }

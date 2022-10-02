@@ -135,6 +135,7 @@ VAlert
 VConfirmationDialog
 
 - ConfirmationDialog now builds actions using `resultBuilder`
+- ConfirmationDialog API is updated to match `VAlert`
 
 VMenu
 
