@@ -27,7 +27,7 @@ import SwiftUI
 ///                 .vAlert(
 ///                     id: "some_alert",
 ///                     parameters: $presenter.vAlertParameters
-///                     )
+///                 )
 ///         }
 ///     }
 ///

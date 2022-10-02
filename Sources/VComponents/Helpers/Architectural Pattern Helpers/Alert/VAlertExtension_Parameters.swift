@@ -19,6 +19,7 @@ extension View {
     ) -> some View {
         vAlert(
             id: id,
+            uiModel: parameters.wrappedValue?.uiModel ?? .init(),
             item: parameters,
             title: { $0.title },
             message: { $0.message },
