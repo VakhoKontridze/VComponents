@@ -22,7 +22,7 @@ import VCore
 ///             content: {
 ///                 LazyVStack(spacing: 0, content: {
 ///                     ForEach(0..<10, content: { num in
-///                         VListRow(separator: .noFirstAndLastSeparatorsInList(isFirst: num == 0), content: {
+///                         VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
 ///                             Text(String(num))
 ///                                 .frame(maxWidth: .infinity, alignment: .leading)
 ///                         })
