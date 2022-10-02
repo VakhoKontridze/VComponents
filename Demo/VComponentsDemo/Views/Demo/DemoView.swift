@@ -159,7 +159,6 @@ struct DemoView<ComponentContent, SettingsContent>: View
                     return uiModel
                 }(),
                 isPresented: $isPresented,
-                headerTitle: "Parameters",
                 content: {
                     ScrollView(content: {
                         settings()
@@ -167,6 +166,7 @@ struct DemoView<ComponentContent, SettingsContent>: View
                     })
                         .safeAreaMarginInsets(edges: .bottom)
                         .padding(.vertical, VBottomSheetUIModel.insettedContent.layout.contentMargins.verticalAverage)
+                        .vBottomSheetHeaderTitle("Parameters")
                 }
             )
     }

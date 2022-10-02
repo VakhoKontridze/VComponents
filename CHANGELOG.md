@@ -103,6 +103,7 @@ VStaticList
 
 VModal
 
+- Modal header title now can be changed via `vModalHeaderTitle(_:)` and `vModalHeaderLabel(_:)`
 - `contentMargins` are changed from `15`s to `zero` in `VModalUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 - `VModalUIModel.insettedContent` is added
 - `VModalUIModel.noHeaderLabel` is added
@@ -110,6 +111,7 @@ VModal
 
 VBottomSheet
 
+- BottomSheet header title now can be changed via `vBottomSheetHeaderTitle(_:)` and `vBottomSheetHeaderLabel(_:)`
 - `contentMargins` are changed from `15`s to `zero` in `VBottomSheetUIModel`. This configuration supports list with already-padded rows. But in case of non-list content, additional padding must be used.
 - `VBottomSheetUIModel.insettedContent` is added
 - `VBottomSheetUIModel.scrollableContent` is added

@@ -9,10 +9,8 @@ import SwiftUI
 import VCore
 
 // MARK: - V Bottom Sheet
-struct VBottomSheet<HeaderLabel, Content>: View
-    where
-        HeaderLabel: View,
-        Content: View
+struct VBottomSheet<Content>: View
+    where Content: View
 {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
@@ -23,7 +21,7 @@ struct VBottomSheet<HeaderLabel, Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    private let headerLabel: VBottomSheetHeaderLabel<HeaderLabel>
+    @State private var headerLabel: VBottomSheetHeaderLabelPreferenceKey.Value = VBottomSheetHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -46,13 +44,11 @@ struct VBottomSheet<HeaderLabel, Content>: View
         uiModel: VBottomSheetUIModel,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
-        headerLabel: VBottomSheetHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
-        self.headerLabel = headerLabel
         self.content = content
         
         _offset = .init(initialValue: uiModel.layout.sizes._current.size.heights.idealOffset)
@@ -72,6 +68,9 @@ struct VBottomSheet<HeaderLabel, Content>: View
                 perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
             )
             .onChange(of: interfaceOrientationChangeObserver.orientation, perform: { _ in resetHeightFromOrientationChange() })
+            .onPreferenceChange(VBottomSheetHeaderLabelPreferenceKey.self, perform: {
+                headerLabel = $0
+            })
     }
     
     private var dimmingView: some View {
@@ -361,7 +360,6 @@ struct VBottomSheet_Previews: PreviewProvider {
                 id: "bottom_sheet_preview",
                 uiModel: .scrollableContent,
                 isPresented: $isPresented,
-                headerTitle: "Lorem Ipsum Dolor Sit Amet",
                 content: {
                     List(content: {
                         ForEach(0..<20, content: { num in
@@ -372,6 +370,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                         })
                     })
                         .vListStyle()
+                        .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
                 }
             )
     }

@@ -68,24 +68,13 @@ struct VBottomSheetDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .if(hasTitle,
-                ifTransform: {
-                    $0
-                        .vBottomSheet(
-                            id: "bottom_sheet_demo_1",
-                            uiModel: uiModel,
-                            isPresented: $isPresented,
-                            headerTitle: "Lorem Ipsum Dolor Sit Amet",
-                            content: { bottomSheetContent }
-                        )
-                }, elseTransform: {
-                    $0
-                        .vBottomSheet(
-                            id: "bottom_sheet_demo_2",
-                            uiModel: uiModel,
-                            isPresented: $isPresented,
-                            content: { bottomSheetContent }
-                        )
+            .vBottomSheet(
+                id: "bottom_sheet_demo",
+                uiModel: uiModel,
+                isPresented: $isPresented,
+                content: {
+                    bottomSheetContent
+                        .if(hasTitle, transform: { $0.vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet") })
                 }
             )
     }

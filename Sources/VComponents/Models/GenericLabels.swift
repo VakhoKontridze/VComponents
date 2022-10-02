@@ -14,7 +14,7 @@ enum GenericLabel_TitleCustom<CustomLabel> where CustomLabel: View {
 }
 
 // MARK: - Label (Empty, Title, Custom)
-enum GenericLabel_EmptyTitleCustom<CustomLabel> where CustomLabel: View {
+enum GenericLabel_EmptyTitleCustom<CustomLabel>: Equatable where CustomLabel: View {
     case empty
     case title(title: String)
     case custom(label: () -> CustomLabel)
@@ -24,6 +24,14 @@ enum GenericLabel_EmptyTitleCustom<CustomLabel> where CustomLabel: View {
         case .empty: return false
         case .title: return true
         case .custom: return true
+        }
+    }
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.empty, .empty): return true
+        case (.title(let lhs), .title(let rhs)): return lhs == rhs
+        default: return false
         }
     }
 }

@@ -41,24 +41,13 @@ struct VModalDemoView: View {
             action: { isPresented = true },
             title: "Present"
         )
-            .if(hasTitle,
-                ifTransform: {
-                    $0
-                        .vModal(
-                            id: "modal_demo_1",
-                            uiModel: uiModel,
-                            isPresented: $isPresented,
-                            headerTitle: "Lorem Ipsum Dolor Sit Amet",
-                            content: { modalContent }
-                        )
-                }, elseTransform: {
-                    $0
-                        .vModal(
-                            id: "modal_demo_2",
-                            uiModel: uiModel,
-                            isPresented: $isPresented,
-                            content: { modalContent }
-                        )
+            .vModal(
+                id: "modal_demo",
+                uiModel: uiModel,
+                isPresented: $isPresented,
+                content: {
+                    modalContent
+                        .if(hasTitle, transform: { $0.vModalHeaderTitle("Lorem Ipsum Dolor Sit Amet") })
                 }
             )
     }

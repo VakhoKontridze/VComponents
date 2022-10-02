@@ -9,10 +9,8 @@ import SwiftUI
 import VCore
 
 // MARK: - V Modal
-struct VModal<HeaderLabel, Content>: View
-    where
-        HeaderLabel: View,
-        Content: View
+struct VModal<Content>: View
+    where Content: View
 {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
@@ -23,7 +21,7 @@ struct VModal<HeaderLabel, Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    private let headerLabel: VModalHeaderLabel<HeaderLabel>
+    @State private var headerLabel: VModalHeaderLabelPreferenceKey.Value = VModalHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -36,13 +34,11 @@ struct VModal<HeaderLabel, Content>: View
         uiModel: VModalUIModel,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
-        headerLabel: VModalHeaderLabel<HeaderLabel>,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
-        self.headerLabel = headerLabel
         self.content = content
     }
 
@@ -59,6 +55,9 @@ struct VModal<HeaderLabel, Content>: View
                 of: presentationMode.isExternallyDismissed,
                 perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
             )
+            .onPreferenceChange(VModalHeaderLabelPreferenceKey.self, perform: {
+                headerLabel = $0
+            })
     }
     
     private var dimmingView: some View {
@@ -211,7 +210,6 @@ struct VModal_Previews: PreviewProvider {
             .vModal(
                 id: "modal_preview",
                 isPresented: $isPresented,
-                headerTitle: "Lorem Ipsum",
                 content: {
                     List(content: {
                         ForEach(0..<20, content: { num in
@@ -222,6 +220,7 @@ struct VModal_Previews: PreviewProvider {
                         })
                     })
                         .vListStyle()
+                        .vModalHeaderTitle("Lorem Ipsum")
                 }
             )
     }
