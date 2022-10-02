@@ -17,7 +17,6 @@ struct VPageIndicatorDemoView: View {
     
     private let total: Int = 15
     @State private var selectedIndex: Int = 0
-    private let timer: AnyPublisher<Date, Never> = Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher()
     
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
 
@@ -25,7 +24,7 @@ struct VPageIndicatorDemoView: View {
     var body: some View {
         DemoView(component: component, settings: settings)
             .standardNavigationTitle(Self.navBarTitle)
-            .onReceive(timer, perform: updateValue)
+            .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher(), perform: updateValue)
     }
     
     @ViewBuilder private func component() -> some View {
