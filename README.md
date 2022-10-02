@@ -22,7 +22,7 @@ Versions with different majors are not compatible.
 
 | Release Date | VComponents | iOS  | SwiftUI |
 | ---          | ---         | ---  | ---     |
-| 2022 09 ??   | 3.0         | 16.0 | 4.0     |
+| 2022 10 02   | 3.0         | 16.0 | 4.0     |
 | 2022 05 26   | 2.0         | 15.0 | 3.0     |
 | 2021 02 07   | 1.0         | 14.0 | 2.0     |
 
@@ -60,7 +60,7 @@ Versions with different majors are not compatible.
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466176-209f3d54-b1b9-466e-bd42-ac30bed1a003.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466178-35d3c3b6-f7bd-44a3-a9ca-8765a62bda3b.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466179-828be48b-1df1-4836-bd56-fc769df97889.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466180-1ea775d4-2041-4bb0-85f3-f72b15a3da08.png">
+    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466478-8a2b6938-1ad0-4bbb-bb73-92693b8baa73.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466182-4e6fadf2-2e1d-49b8-8e6c-d85d84dc436a.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466184-9f210f29-4562-4841-b99c-a484887e2b80.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466185-98fd6608-948d-41b7-bfce-c78a08791aff.png">
