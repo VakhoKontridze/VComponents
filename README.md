@@ -179,7 +179,10 @@ Not Preferred:
 
 var body: some View {
     VStack(content: {
-        VToggle(isOn: $isOn, title: "Lorem ipsum")
+        VToggle(
+            isOn: $isOn, 
+            title: "Lorem ipsum"
+        )
         
         VSecondaryButton(
             action: { withAnimation(nil, { isOn.toggle() }) },
@@ -202,7 +205,11 @@ let uiModel: VToggleUIModel = {
 
 var body: some View {
     VStack(content: {
-        VToggle(uiModel: uiModel, isOn: $isOn, title: "Lorem ipsum")
+        VToggle(
+            uiModel: uiModel, 
+            isOn: $isOn, 
+            title: "Lorem ipsum"
+        )
         
         VSecondaryButton(
             action: { isOn.toggle() },
