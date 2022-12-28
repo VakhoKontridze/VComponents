@@ -18,7 +18,7 @@ struct HomeView: View {
     var body: some View {
         NavigationStack(root: {
             DemoListView(sections: HomeRow.sections)
-                .standardNavigationTitle(Self.navBarTitle)
+                .inlineNavigationTitle(Self.navBarTitle)
         })
     }
 }

@@ -54,7 +54,7 @@ struct VSecondaryButtonDemoView: View {
     // MARK: Body
     var body: some View {
         DemoView(component: component, settings: settings)
-            .standardNavigationTitle(Self.navBarTitle)
+            .inlineNavigationTitle(Self.navBarTitle)
     }
     
     private func component() -> some View {

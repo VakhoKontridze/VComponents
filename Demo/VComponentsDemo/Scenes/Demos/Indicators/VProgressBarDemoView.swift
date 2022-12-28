@@ -30,7 +30,7 @@ struct VProgressBarDemoView: View {
     // MARK: Body
     var body: some View {
         DemoView(component: component, settings: settings)
-            .standardNavigationTitle(Self.navBarTitle)
+            .inlineNavigationTitle(Self.navBarTitle)
             .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher(), perform: updateValue)
     }
     
