@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - V List Style Extension
 extension View {
-    /// Applies list style tjat supports `VListRow`.
+    /// Applies list style that supports `VListRow`.
     public func vListStyle() -> some View {
         self
             .modifier(VListStyle())
