@@ -1,5 +1,11 @@
 # Change Log
 
+### 3.1.0(28)
+
+General
+
+`VComponentsLocalizationService` is renamed to `VComponentsLocalizationManager`
+
 ### [3.0.0(27)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.0.0) — *2022 10 02*
 
 General

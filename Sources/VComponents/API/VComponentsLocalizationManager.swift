@@ -1,5 +1,5 @@
 //
-//  VComponentsLocalizationService.swift
+//  VComponentsLocalizationManager.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 23.05.22.
@@ -7,14 +7,14 @@
 
 import Foundation
 
-// MARK: - VComponents Localization Service
-/// Localization service that can be used to localize the package.
+// MARK: - VComponents Localization Manager
+/// Object that manages localization in the package.
 ///
 /// `localizationProvider` in `shared` instance can be set to override the localized values.
-public final class VComponentsLocalizationService {
+public final class VComponentsLocalizationManager {
     // MARK: Properties
     /// Shared instance of `VComponentsLocalizationService`.
-    public static let shared: VComponentsLocalizationService = .init()
+    public static let shared: VComponentsLocalizationManager = .init()
     
     /// Localization provider. Defaults to `DefaultVComponentsLocalizationProvider`.
     public var localizationProvider: any VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()

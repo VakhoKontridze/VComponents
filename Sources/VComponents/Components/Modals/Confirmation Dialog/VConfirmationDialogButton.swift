@@ -71,13 +71,13 @@ public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
     // MARK: Initializers
     /// Initializes `VConfirmationDialog` with action.
     ///
-    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationManager`.
     public init(
         action: (() -> Void)?,
         title: String? = nil
     ) {
         self.action = action
-        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogOKButtonTitle
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vConfirmationDialogOKButtonTitle
     }
     
     // MARK: Modifiers
@@ -151,13 +151,13 @@ public struct VConfirmationDialogCancelButton: VConfirmationDialogButtonProtocol
     // MARK: Initializers
     /// Initializes `VConfirmationDialog` with action.
     ///
-    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationManager`.
     public init(
         action: (() -> Void)?,
         title: String? = nil
     ) {
         self.action = action
-        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogCancelButtonTitle
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vConfirmationDialogCancelButtonTitle
     }
     
     // MARK: Body

@@ -121,13 +121,13 @@ public struct VAlertOKButton: VAlertButtonProtocol {
     // MARK: Initializers
     /// Initializes `VAlertOKButton` with action.
     ///
-    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationManager`.
     public init(
         action: (() -> Void)?,
         title: String? = nil
     ) {
         self.action = action
-        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vAlertOKButtonTitle
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vAlertOKButtonTitle
     }
     
     // MARK: Body
@@ -209,13 +209,13 @@ public struct VAlertCancelButton: VAlertButtonProtocol {
     // MARK: Initializers
     /// Initializes `VAlertCancelButton` with action.
     ///
-    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationService`.
+    /// If `title` is `nil`, value will be retrieved from `VComponentsLocalizationManager`.
     public init(
         action: (() -> Void)?,
         title: String? = nil
     ) {
         self.action = action
-        self.title = title ?? VComponentsLocalizationService.shared.localizationProvider.vAlertCancelButtonTitle
+        self.title = title ?? VComponentsLocalizationManager.shared.localizationProvider.vAlertCancelButtonTitle
     }
     
     // MARK: Body

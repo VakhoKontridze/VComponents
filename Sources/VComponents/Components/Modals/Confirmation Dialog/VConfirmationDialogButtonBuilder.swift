@@ -76,7 +76,7 @@ extension Array: VConfirmationDialogButtonConvertible where Element == VConfirma
         if result.isEmpty {
             result.append(VConfirmationDialogCancelButton(
                 action: nil,
-                title: VComponentsLocalizationService.shared.localizationProvider.vConfirmationDialogOKButtonTitle
+                title: VComponentsLocalizationManager.shared.localizationProvider.vConfirmationDialogOKButtonTitle
             ))
         }
 

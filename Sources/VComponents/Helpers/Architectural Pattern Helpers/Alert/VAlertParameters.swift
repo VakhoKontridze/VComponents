@@ -71,7 +71,7 @@ public struct VAlertParameters: Identifiable {
     ) {
         self.init(
             uiModel: uiModel,
-            title: VComponentsLocalizationService.shared.localizationProvider.vAlertErrorTitle,
+            title: VComponentsLocalizationManager.shared.localizationProvider.vAlertErrorTitle,
             message: error.localizedDescription,
             actions: {
                 VAlertOKButton(action: completion)
