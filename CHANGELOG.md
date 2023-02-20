@@ -37,7 +37,7 @@ VPlainButton
 
 VNavigationLink
 
-- Component is removed, as package migrates to `NavigationStack`-based programatic navigation
+- Component is removed, as Package migrates to `NavigationStack`-based programatic navigation
 
 VLink
 
@@ -270,14 +270,14 @@ Other
 
 General
 
-- Project is migrated from `XCFramework` to `Swift Package`
+- Project is migrated from `XCFramework` to `Swift` Package
 - Project now partially supports `macOS`, `tvOS`, and `watchOS`
 - Components are reworked
 - Colors have been reworked
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines
 - `ImageBook` is made public, and asset icons in library can no be re-set
-- `VComponentsLocalizationService` is added, that supports localization within the package
+- `VComponentsLocalizationService` is added, that supports localization within the Package
 - Several internal properties are now exposed to public in models
 - `blinder` is renamed to `dimmingView`
 
