@@ -17,7 +17,9 @@ struct VConfirmationDialogDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(component: component)
+        DemoView(
+            component: component
+        )
             .inlineNavigationTitle(Self.navBarTitle)
     }
     

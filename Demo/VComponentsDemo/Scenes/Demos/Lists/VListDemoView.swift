@@ -19,7 +19,11 @@ struct VListDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(paddedEdges: .vertical, component: component, settingsSections: settings)
+        DemoView(
+            paddedEdges: .vertical,
+            component: component,
+            settingsSections: settings
+        )
             .inlineNavigationTitle(Self.navBarTitle)
     }
     

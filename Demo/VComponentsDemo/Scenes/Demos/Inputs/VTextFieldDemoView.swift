@@ -54,7 +54,10 @@ struct VTextFieldDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(component: component, settingsSections: settings)
+        DemoView(
+            component: component,
+            settingsSections: settings
+        )
             .inlineNavigationTitle(Self.navBarTitle)
     }
     

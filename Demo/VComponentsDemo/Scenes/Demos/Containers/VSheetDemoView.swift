@@ -26,7 +26,11 @@ struct VSheetDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(hasLayer: false, component: component, settings: settings)
+        DemoView(
+            hasLayer: false,
+            component: component,
+            settings: settings
+        )
             .inlineNavigationTitle(Self.navBarTitle)
     }
     

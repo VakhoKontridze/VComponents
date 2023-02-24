@@ -19,7 +19,10 @@ struct VMenuDemoView: View {
 
     // MARK: Body
     var body: some View {
-        DemoView(component: component, settings: settings)
+        DemoView(
+            component: component,
+            settings: settings
+        )
             .inlineNavigationTitle(Self.navBarTitle)
     }
     
