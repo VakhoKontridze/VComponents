@@ -30,7 +30,7 @@ struct VPageIndicatorDemoView: View {
             .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher(), perform: updateValue)
     }
     
-    @ViewBuilder private func component() -> some View {
+    private func component() -> some View {
         DemoTitledSettingView(
             title: "\(selectedIndex+1)/\(total)",
             content: {
@@ -43,7 +43,7 @@ struct VPageIndicatorDemoView: View {
         )
     }
     
-    @ViewBuilder private func settings() -> some View {
+    private func settings() -> some View {
         VSegmentedPicker(
             selection: $pageIndicatorType,
             headerTitle: "Type",

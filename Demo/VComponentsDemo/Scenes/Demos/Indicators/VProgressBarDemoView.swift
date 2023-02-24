@@ -37,7 +37,7 @@ struct VProgressBarDemoView: View {
             .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect().eraseToAnyPublisher(), perform: updateValue)
     }
     
-    @ViewBuilder private func component() -> some View {
+    private func component() -> some View {
         DemoTitledSettingView(
             value: value,
             content: { VProgressBar(value: value) }
