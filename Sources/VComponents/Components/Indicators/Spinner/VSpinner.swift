@@ -29,7 +29,7 @@ public struct VSpinner: View {
     }
 
     // MARK: Body
-    @ViewBuilder public var body: some View {
+    public var body: some View {
         switch spinnerType._spinnerType {
         case .continuous(let uiModel): VSpinnerContinuous(uiModel: uiModel)
         case .dashed(let uiModel): VSpinnerDashed(uiModel: uiModel)
@@ -40,6 +40,9 @@ public struct VSpinner: View {
 // MARK: - Preview
 struct VSpinner_Previews: PreviewProvider {
     static var previews: some View {
-        VSpinner()
+        VStack(content: {
+            VSpinner(type: .continuous())
+            VSpinner(type: .dashed())
+        })
     }
 }

@@ -35,7 +35,7 @@ struct DemoListRowView<Content>: View where Content: View {
     }
 
     // MARK: Body
-    @ViewBuilder var body: some View {
+    var body: some View {
         switch rowType {
         case .link(let destination): NavigationLink(destination: { destination }, label: { row })
         case .custom(let action): Button(action: action, label: { row })

@@ -43,7 +43,7 @@ struct VPageIndicatorInfinite: View {
     }
 
     // MARK: Body
-    @ViewBuilder public var body: some View {
+    public var body: some View {
         switch total {
         case ...visible: VPageIndicatorFinite(uiModel: uiModel, total: total, selectedIndex: selectedIndex)
         case _: infiniteBody

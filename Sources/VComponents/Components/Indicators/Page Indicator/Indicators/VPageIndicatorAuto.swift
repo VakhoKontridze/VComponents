@@ -36,7 +36,7 @@ struct VPageIndicatorAuto: View {
     }
 
     // MARK: Body
-    @ViewBuilder var body: some View {
+    var body: some View {
         switch total {
         case ...finiteLimit:
             VPageIndicatorFinite(uiModel: uiModel, total: total, selectedIndex: selectedIndex)
