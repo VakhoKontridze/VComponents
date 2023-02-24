@@ -50,7 +50,7 @@ private enum VSpinnerTypeHelper: Int, StringRepresentableHashableEnumeration {
     }
 }
 
-// MARK: Preview
+// MARK: - Preview
 struct VSpinnerDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VSpinnerDemoView()

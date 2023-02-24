@@ -53,7 +53,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
     }
 }
 
-// MARK: Preview
+// MARK: - Preview
 struct DemoListView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView_Previews.previews

@@ -124,7 +124,7 @@ private typealias VCheckBoxLabel = VToggleLabel
 
 private typealias VCheckBoxHitBox = VSecondaryButtonHitBox
 
-// MARK: Preview
+// MARK: - Preview
 struct VCheckBoxDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VCheckBoxDemoView()

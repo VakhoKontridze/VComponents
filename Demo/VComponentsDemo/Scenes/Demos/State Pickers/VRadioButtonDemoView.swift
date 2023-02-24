@@ -118,7 +118,7 @@ private typealias VRadioButtonLabel = VToggleLabel
 
 private typealias VRadioButtonHitBox = VSecondaryButtonHitBox
 
-// MARK: Preview
+// MARK: - Preview
 struct VRadioButtonDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VRadioButtonDemoView()

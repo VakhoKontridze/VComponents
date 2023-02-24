@@ -58,7 +58,7 @@ struct VProgressBarDemoView: View {
     }
 }
 
-// MARK: Preview
+// MARK: - Preview
 struct VProgressBarDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VProgressBarDemoView()

@@ -115,7 +115,7 @@ enum VToggleLabel: Int, StringRepresentableHashableEnumeration {
     }
 }
 
-// MARK: Preview
+// MARK: - Preview
 struct VToggleDemoView_Previews: PreviewProvider {
     static var previews: some View {
         VToggleDemoView()
