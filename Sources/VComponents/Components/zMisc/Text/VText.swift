@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Base Title
-/// Core component that is used throughout the library as text.
+/// Core component that is used throughout the library as `Text`.
 ///
 ///     var body: some View {
 ///         VText(

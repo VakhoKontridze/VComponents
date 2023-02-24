@@ -10,7 +10,7 @@ import SwiftUI
 // MARK: - V Spinner
 /// Indicator component that indicates activity.
 ///
-/// UI Model can be passed as parameter.
+/// Type can be passed as parameter.
 ///
 ///     var body: some View {
 ///         VSpinner()
