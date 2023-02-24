@@ -218,12 +218,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		7A6217E72593D8D900515688 /* Misc */ = {
+		7A6217E72593D8D900515688 /* zMisc */ = {
 			isa = PBXGroup;
 			children = (
 				7A3B880125ADAD2500295A87 /* VTextDemoView.swift */,
 			);
-			path = Misc;
+			path = zMisc;
 			sourceTree = "<group>";
 		};
 		7A8A96DB258DDA9200309886 = {
@@ -351,7 +351,7 @@
 				7A3B87F625AD89B400295A87 /* Modals */,
 				7A036BBC25D05CD700773302 /* Messages */,
 				7A3B87F725AD89DE00295A87 /* Indicators */,
-				7A6217E72593D8D900515688 /* Misc */,
+				7A6217E72593D8D900515688 /* zMisc */,
 			);
 			path = Demos;
 			sourceTree = "<group>";
