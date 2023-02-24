@@ -2,7 +2,11 @@
 
 ### 3.1.0(28)
 
-General
+VMarquee
+
+- Marquee container is added, that auto-scrolls it's content
+
+API
 
 `VComponentsLocalizationService` is renamed to `VComponentsLocalizationManager`
 
@@ -277,7 +281,6 @@ General
 - Button, state, and value picker components' state enums are removed, and `disabled` modifier can be used instead
 - Generic type `Content` is renamed to `Label` in button and state pickers as per `SwiftUI`'s guidelines
 - `ImageBook` is made public, and asset icons in library can no be re-set
-- `VComponentsLocalizationService` is added, that supports localization within the Package
 - Several internal properties are now exposed to public in models
 - `blinder` is renamed to `dimmingView`
 
@@ -449,6 +452,10 @@ Other
 - `StateColors`s and `StateOpacities`s are replaced with`GenericStateModel`s
 - `LayoutGroup`s are renamed to `EdgeInsets`s
 - `VPickableItem` is renamed to `PickableEnumeration`
+
+API
+
+- `VComponentsLocalizationService` is added, that supports localization within the Package
 
 ### [1.6.0(16)](https://github.com/VakhoKontridze/VComponents/releases/tag/1.6.0) — *2022 01 07*
 

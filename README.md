@@ -48,7 +48,7 @@ Versions with different majors are not compatible.
 
 **Indicators.** VSpinner, VProgressBar, VPageIndicator
 
-**Misc.** VText
+**Misc.** VText, VMarquee
 
 ## Brand Book
 
@@ -71,7 +71,7 @@ Versions with different majors are not compatible.
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466192-3a679ac6-dfa8-4c70-9d69-e844457b861b.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466193-55548f74-9de6-4e99-9c07-f03cc4b6cdc9.png">
     <img width="300" src="https://user-images.githubusercontent.com/57289621/193466194-bb16433b-f8b9-451b-a5f5-ac273e281760.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466196-8389a3f0-556a-4885-a602-4b6be2c48a2a.png">
+    <img width="300" src="https://user-images.githubusercontent.com/57289621/221284614-942d689d-7e5f-444b-b671-bf2829128eaa.gif">
 </p>
 
 ## Guidelines

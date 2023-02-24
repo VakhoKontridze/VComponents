@@ -20,7 +20,7 @@ enum HomeRow: Int, DemoableRow {
     case modal, bottomSheet, sideBar, alert, confirmationDialog, menu, contextMenu
     case toast
     case spinner, progressBar, pageIndicator
-    case text
+    case text, marquee
 
     // MARK: Properties
     static var sections: [DemoSection<Self>] {
@@ -35,7 +35,7 @@ enum HomeRow: Int, DemoableRow {
             .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .confirmationDialog, .menu, .contextMenu]),
             .init(id: 8, title: "Messages", rows: [.toast]),
             .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicator]),
-            .init(id: 10, title: "Misc", rows: [.text])
+            .init(id: 10, title: "Misc", rows: [.text, .marquee])
         ]
     }
     
@@ -81,6 +81,7 @@ enum HomeRow: Int, DemoableRow {
         case .pageIndicator: return VPageIndicatorDemoView.navBarTitle
 
         case .text: return VTextDemoView.navBarTitle
+        case .marquee: return VMarqueeDemoView.navBarTitle
         }
     }
 
@@ -126,6 +127,7 @@ enum HomeRow: Int, DemoableRow {
         case .pageIndicator: VPageIndicatorDemoView()
 
         case .text: VTextDemoView()
+        case .marquee: VMarqueeDemoView()
         }
     }
 }
