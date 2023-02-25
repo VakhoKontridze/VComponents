@@ -108,8 +108,8 @@ public struct VMarqueeWrappingUIModel {
             case velocity(CGFloat)
             
             // MARK: Initializers
-            /// Default value. Set to `velocity` of  `50`.
-            public static var `default`: Self { .velocity(50) }
+            /// Default value. Set to `velocity` of  `20`.
+            public static var `default`: Self { .velocity(20) }
             
             // MARK: Helpers
             func duration(width: CGFloat) -> Double {

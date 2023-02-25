@@ -16,7 +16,7 @@ struct VMarqueeBouncing<Content>: View where Content: View {
     
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
-    private var isDynamic: Bool { contentSize.width > containerWidth }
+    private var isDynamic: Bool { (contentSize.width + 2*uiModel.layout.inset) > containerWidth }
     
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
@@ -46,7 +46,7 @@ struct VMarqueeBouncing<Content>: View where Content: View {
                 .offset(x: offsetDynamic)
                 .animation(animation, value: isAnimating)
                 .onAppear(perform: {
-                    DispatchQueue.main.async(execute: { isAnimating = containerWidth < contentSize.width })
+                    DispatchQueue.main.async(execute: { isAnimating = isDynamic })
                 })
             
         } else {
@@ -104,7 +104,7 @@ struct VMarqueeBouncing<Content>: View where Content: View {
     }
     
     private var offsetStatic: CGFloat {
-        let offset: CGFloat =  (contentSize.width - containerWidth)/2 + uiModel.layout.inset
+        let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
         
         switch uiModel.layout.alignmentStationary {
         case .leading: return offset
@@ -117,8 +117,8 @@ struct VMarqueeBouncing<Content>: View where Content: View {
     // MARK: Animation
     private var animation: Animation {
         let width: CGFloat =
-            contentSize.width +
-            2 * uiModel.layout.inset
+            (contentSize.width + 2*uiModel.layout.inset) -
+            containerWidth
         
         return BasicAnimation(
             curve: uiModel.animations.curve,

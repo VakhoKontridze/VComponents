@@ -16,7 +16,7 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     
     @State private var containerWidth: CGFloat = 0
     @State private var contentSize: CGSize = .zero
-    private var isDynamic: Bool { contentSize.width > containerWidth }
+    private var isDynamic: Bool { (contentSize.width + 2*uiModel.layout.inset) > containerWidth }
     
     @State private var isAnimating: Bool = Self.isAnimatingDefault
     private static var isAnimatingDefault: Bool { false }
@@ -47,14 +47,14 @@ struct VMarqueeWrapping<Content>: View where Content: View {
                     .offset(x: offsetDynamicFirst)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
                     .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = containerWidth < contentSize.width })
+                        DispatchQueue.main.async(execute: { isAnimating = isDynamic })
                     })
                 
                 contentView
                     .offset(x: offsetDynamicSecond)
                     .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
                     .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = containerWidth < contentSize.width })
+                        DispatchQueue.main.async(execute: { isAnimating = isDynamic })
                     })
             })
                 .offset(x: offsetDynamic)
@@ -148,10 +148,10 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     
     // MARK: Animations
     private var animation: Animation {
-        let width: CGFloat =
-            2 * contentSize.width +
-            4 * uiModel.layout.inset +
-            uiModel.layout.spacing
+        let width: CGFloat = // Not dependent on container width
+            contentSize.width +
+            uiModel.layout.inset +
+            uiModel.layout.spacing/2
         
         return BasicAnimation(
             curve: uiModel.animations.curve,
