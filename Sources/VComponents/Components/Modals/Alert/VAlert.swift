@@ -164,7 +164,7 @@ struct VAlert<Content>: View
             case 2:
                 HStack(
                     spacing: uiModel.layout.horizontalButtonSpacing,
-                    content: { buttonsContent(reverseOrder: true) } // Cancel button is last
+                    content: { buttonsContent(reversesOrder: true) } // Cancel button is last
                 )
             
             case 3...:
@@ -181,8 +181,8 @@ struct VAlert<Content>: View
             .readSize(onChange: { buttonsStackHeight = $0.height })
     }
     
-    private func buttonsContent(reverseOrder: Bool = false) -> some View {
-        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reverseOrder)
+    private func buttonsContent(reversesOrder: Bool = false) -> some View {
+        let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reversesOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
             buttons[i].body(
