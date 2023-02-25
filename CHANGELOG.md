@@ -4,6 +4,7 @@
 
 VPageIndicator
 
+- `axis` is added to UI models that support vertical layout
 - `VPageIndicatorUIModel` is split into 3 subsequent UI models representing each type
 
 VMarquee

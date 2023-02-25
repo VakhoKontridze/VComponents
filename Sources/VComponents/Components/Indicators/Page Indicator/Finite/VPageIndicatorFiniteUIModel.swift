@@ -30,6 +30,9 @@ public struct VPageIndicatorFiniteUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Axis. Defaults to `horizontal`.
+        public var axis: Axis = .horizontal
+        
         /// Dot dimension. Defaults to `10`.
         public var dotDimension: CGFloat = 10
         
@@ -69,5 +72,26 @@ public struct VPageIndicatorFiniteUIModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+    }
+}
+
+// MARK: - Factory
+extension VPageIndicatorFiniteUIModel {
+    /// ???.
+    public static var horizontal: VPageIndicatorFiniteUIModel {
+        var uiModel: VPageIndicatorFiniteUIModel = .init()
+        
+        uiModel.layout.axis = .horizontal
+        
+        return uiModel
+    }
+    
+    /// ???.
+    public static var vertical: VPageIndicatorFiniteUIModel {
+        var uiModel: VPageIndicatorFiniteUIModel = .init()
+        
+        uiModel.layout.axis = .vertical
+        
+        return uiModel
     }
 }

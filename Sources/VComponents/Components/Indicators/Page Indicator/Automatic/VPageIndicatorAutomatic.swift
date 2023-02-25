@@ -49,10 +49,20 @@ struct VPageIndicatorAutomatic: View {
 // MARK: - Preview
 struct VPageIndicatorAutomatic_Previews: PreviewProvider {
     static var previews: some View {
-        VPageIndicatorAutomatic(
-            uiModel: .init(),
-            total: 20,
-            selectedIndex: 4
-        )
+        VStack(spacing: 20, content: {
+            ForEach(Axis.allCases, id: \.rawValue, content: { axis in
+                ForEach([9, 15], id: \.self, content: { total in
+                    VPageIndicatorAutomatic(
+                        uiModel: {
+                            var uiModel: VPageIndicatorAutomaticUIModel = .init()
+                            uiModel.layout.axis = axis
+                            return uiModel
+                        }(),
+                        total: total,
+                        selectedIndex: 4
+                    )
+                })
+            })
+        })
     }
 }

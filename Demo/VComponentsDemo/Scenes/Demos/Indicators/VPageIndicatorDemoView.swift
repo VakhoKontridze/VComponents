@@ -19,6 +19,7 @@ struct VPageIndicatorDemoView: View {
     @State private var selectedIndex: Int = 0
     
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
+    @State private var axis: Axis = .horizontal
 
     // MARK: Body
     var body: some View {
@@ -35,7 +36,30 @@ struct VPageIndicatorDemoView: View {
             title: "\(selectedIndex+1)/\(total)",
             content: {
                 VPageIndicator(
-                    type: pageIndicatorType.indicatorType,
+                    type: {
+                        switch pageIndicatorType {
+                        case .finite:
+                            return .finite(uiModel: {
+                                var uiModel: VPageIndicatorFiniteUIModel = .init()
+                                uiModel.layout.axis = axis
+                                return uiModel
+                            }())
+                        
+                        case .infinite:
+                            return .infinite(uiModel: {
+                                var uiModel: VPageIndicatorInfiniteUIModel = .init()
+                                uiModel.layout.axis = axis
+                                return uiModel
+                            }())
+                        
+                        case .automatic:
+                            return .automatic(uiModel: {
+                                var uiModel: VPageIndicatorAutomaticUIModel = .init()
+                                uiModel.layout.axis = axis
+                                return uiModel
+                            }())
+                        }
+                    }(),
                     total: total,
                     selectedIndex: selectedIndex
                 )
@@ -43,11 +67,16 @@ struct VPageIndicatorDemoView: View {
         )
     }
     
-    private func settings() -> some View {
+    @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
             selection: $pageIndicatorType,
             headerTitle: "Type",
             footerTitle: pageIndicatorType.description
+        )
+        
+        VSegmentedPicker(
+            selection: $axis,
+            headerTitle: "Axis"
         )
     }
 
@@ -81,12 +110,13 @@ private enum VPageIndicatorTypeHelper: Int, StringRepresentableHashableEnumerati
         case .automatic: return "Type that switches between \"Finite\" and \"Infinite\""
         }
     }
-    
-    var indicatorType: VPageIndicatorType {
+}
+
+extension Axis: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
         switch self {
-        case .finite: return .finite()
-        case .infinite: return .infinite()
-        case .automatic: return .automatic()
+        case .horizontal: return "Horizontal"
+        case .vertical: return "Vertical"
         }
     }
 }

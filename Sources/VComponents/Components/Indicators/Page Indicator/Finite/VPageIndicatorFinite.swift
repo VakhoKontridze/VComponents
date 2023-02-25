@@ -28,7 +28,14 @@ struct VPageIndicatorFinite: View {
 
     // MARK: Body
     var body: some View {
-        HStack(spacing: uiModel.layout.spacing, content: {
+        let layout: AnyLayout = {
+            switch uiModel.layout.axis {
+            case .horizontal: return .init(HStackLayout(spacing: uiModel.layout.spacing))
+            case .vertical: return .init(VStackLayout(spacing: uiModel.layout.spacing))
+            }
+        }()
+        
+        return layout.callAsFunction({
             ForEach(0..<total, id: \.self, content: { i in
                 Circle()
                     .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
@@ -43,10 +50,18 @@ struct VPageIndicatorFinite: View {
 // MARK: - Preview
 struct VPageIndicatorFinite_Previews: PreviewProvider {
     static var previews: some View {
-        VPageIndicatorFinite(
-            uiModel: .init(),
-            total: 9,
-            selectedIndex: 4
-        )
+        VStack(spacing: 20, content: {
+            ForEach(Axis.allCases, id: \.rawValue, content: { axis in
+                VPageIndicatorFinite(
+                    uiModel: {
+                        var uiModel: VPageIndicatorFiniteUIModel = .init()
+                        uiModel.layout.axis = axis
+                        return uiModel
+                    }(),
+                    total: 9,
+                    selectedIndex: 4
+                )
+            })
+        })
     }
 }

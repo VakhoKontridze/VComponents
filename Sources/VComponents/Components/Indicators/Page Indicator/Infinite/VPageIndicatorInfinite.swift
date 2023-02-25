@@ -60,12 +60,33 @@ struct VPageIndicatorInfinite: View {
     }
     
     private var frame: some View {
-        Color.clear
-            .frame(size: .init(width: visibleWidth, height: uiModel.layout.dotDimension))
+        let size: CGSize = {
+            switch uiModel.layout.axis {
+            case .horizontal: return .init(width: visibleDimensionMainAxis, height: uiModel.layout.dotDimension)
+            case .vertical: return .init(width: uiModel.layout.dotDimension, height: visibleDimensionMainAxis)
+            }
+        }()
+        
+        return Color.clear
+            .frame(size: size)
     }
     
     private var dots: some View {
-        HStack(spacing: uiModel.layout.spacing, content: {
+        let layout: AnyLayout = {
+            switch uiModel.layout.axis {
+            case .horizontal: return .init(HStackLayout(spacing: uiModel.layout.spacing))
+            case .vertical: return .init(VStackLayout(spacing: uiModel.layout.spacing))
+            }
+        }()
+        
+        let offset2D: CGSize = {
+            switch uiModel.layout.axis {
+            case .horizontal: return .init(width: offset, height: 0)
+            case .vertical: return .init(width: 0, height: offset)
+            }
+        }()
+        
+        return layout.callAsFunction({
             ForEach(0..<total, id: \.self, content: { i in
                 Circle()
                     .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
@@ -73,19 +94,19 @@ struct VPageIndicatorInfinite: View {
                     .scaleEffect(scale(at: i), anchor: .center)
             })
         })
-            .offset(x: offset)
+            .offset(offset2D)
             .animation(uiModel.animations.transition, value: selectedIndex)
     }
 
-    // MARK: Widths
-    private var visibleWidth: CGFloat {
+    // MARK: Dimension on Main Axis
+    private var visibleDimensionMainAxis: CGFloat {
         let dots: CGFloat = .init(visible) * uiModel.layout.dotDimension
         let spacings: CGFloat = .init(visible - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
     
-    private var totalWidth: CGFloat {
+    private var totalDimensionMainAxis: CGFloat {
         let dots: CGFloat = .init(total) * uiModel.layout.dotDimension
         let spacings: CGFloat = .init(total - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
@@ -94,17 +115,17 @@ struct VPageIndicatorInfinite: View {
 
     // MARK: Animation Offset
     private var offset: CGFloat {
-        let rawOffset: CGFloat = (totalWidth - visibleWidth) / 2
+        let rawOffset: CGFloat = (totalDimensionMainAxis - visibleDimensionMainAxis) / 2
         
         switch region {
-        case .leftEdge:
+        case .start:
             return rawOffset
         
         case .center:
             let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (uiModel.layout.dotDimension + uiModel.layout.spacing)
             return rawOffset + incrementalOffset
         
-        case .rightEdge:
+        case .end:
             return -rawOffset
         }
     }
@@ -112,15 +133,15 @@ struct VPageIndicatorInfinite: View {
     // MARK: Animation Scale
     private func scale(at index: Int) -> CGFloat {
         switch region {
-        case .leftEdge:
+        case .start:
             guard
-                let leftEdgeVisibleIndex: Int = leftEdgeVisibleIndex(at: index),
-                let leftEdgeRightSideIndex: Int = leftEdgeRightSideIndex(at: leftEdgeVisibleIndex)
+                let startEdgeVisibleIndex: Int = startEdgeVisibleIndex(at: index),
+                let startEdgeEndSideIndex: Int = startEdgeEndSideIndex(at: startEdgeVisibleIndex)
             else {
                 return 1
             }
 
-            return leftEdgeRightSideScale(at: leftEdgeRightSideIndex)
+            return startEdgeEndSideScale(at: startEdgeEndSideIndex)
 
         case .center:
             guard
@@ -132,27 +153,27 @@ struct VPageIndicatorInfinite: View {
 
             return centerScale(at: centerIndexAbsolute)
 
-        case .rightEdge:
+        case .end:
             guard
-                let rightEdgeVisibleIndex: Int = rightEdgeVisibleIndex(at: index),
-                let rightEdgeLeftSideIndex: Int = rightEdgeLeftSideIndex(at: rightEdgeVisibleIndex)
+                let endEdgeVisibleIndex: Int = endEdgeVisibleIndex(at: index),
+                let endEdgeStartSideIndex: Int = endEdgeStartSideIndex(at: endEdgeVisibleIndex)
             else {
                 return 1
             }
 
-            return rightEdgeLeftSideScale(at: rightEdgeLeftSideIndex)
+            return endEdgeStartSideScale(at: endEdgeStartSideIndex)
         }
     }
     
-    // LEFT
-    private func leftEdgeVisibleIndex(at index: Int) -> Int? {
+    // START
+    private func startEdgeVisibleIndex(at index: Int) -> Int? {
         switch index {
         case 0..<visible: return index
         default: return nil
         }
     }
     
-    private func leftEdgeRightSideIndex(at index: Int) -> Int? {
+    private func startEdgeEndSideIndex(at index: Int) -> Int? {
         // (5 6) -> (0 1)
         switch index {
         case visible-side..<visible: return side + index - visible
@@ -160,7 +181,7 @@ struct VPageIndicatorInfinite: View {
         }
     }
     
-    private func leftEdgeRightSideScale(at index: Int) -> CGFloat {
+    private func startEdgeEndSideScale(at index: Int) -> CGFloat {
         let scaleStep: CGFloat = uiModel.layout.edgeDotScale / .init(side)
         let incrementalScale: CGFloat = .init(index + 1) * scaleStep
         return 1 - incrementalScale
@@ -186,18 +207,18 @@ struct VPageIndicatorInfinite: View {
     }
     
     private func centerScale(at index: Int) -> CGFloat {
-        rightEdgeLeftSideScale(at: index)
+        endEdgeStartSideScale(at: index)
     }
     
-    // RIGHT
-    private func rightEdgeVisibleIndex(at index: Int) -> Int? {
+    // END
+    private func endEdgeVisibleIndex(at index: Int) -> Int? {
         switch index {
         case total-visible..<total: return visible - total + index
         default: return nil
         }
     }
     
-    private func rightEdgeLeftSideIndex(at index: Int) -> Int? {
+    private func endEdgeStartSideIndex(at index: Int) -> Int? {
         // (0 1) -> (0 1)
         switch index {
         case 0..<side: return index
@@ -205,7 +226,7 @@ struct VPageIndicatorInfinite: View {
         }
     }
     
-    private func rightEdgeLeftSideScale(at index: Int) -> CGFloat {
+    private func endEdgeStartSideScale(at index: Int) -> CGFloat {
         let scaleStep: CGFloat = uiModel.layout.edgeDotScale / .init(side)
         let incrementalScale: CGFloat = uiModel.layout.edgeDotScale + .init(index) * scaleStep
         return incrementalScale
@@ -214,15 +235,15 @@ struct VPageIndicatorInfinite: View {
     // MARK: Region
     private enum Region {
         // MARK: Cases
-        case leftEdge
+        case start
         case center
-        case rightEdge
+        case end
         
         // MARK: Initializers
         init(selectedIndex: Int, total: Int, middle: Int) {
             switch selectedIndex {
-            case 0..<middle+1: self = .leftEdge
-            case total-middle-1..<total: self = .rightEdge
+            case 0..<middle+1: self = .start
+            case total-middle-1..<total: self = .end
             default: self = .center
             }
         }
@@ -239,10 +260,18 @@ extension Int {
 // MARK: - Preview
 struct VPageIndicatorInfinite_Previews: PreviewProvider {
     static var previews: some View {
-        VPageIndicatorInfinite(
-            uiModel: .init(),
-            total: 20,
-            selectedIndex: 4
-        )
+        VStack(spacing: 20, content: {
+            ForEach(Axis.allCases, id: \.rawValue, content: { axis in
+                VPageIndicatorInfinite(
+                    uiModel: {
+                        var uiModel: VPageIndicatorInfiniteUIModel = .init()
+                        uiModel.layout.axis = axis
+                        return uiModel
+                    }(),
+                    total: 9,
+                    selectedIndex: 4
+                )
+            })
+        })
     }
 }

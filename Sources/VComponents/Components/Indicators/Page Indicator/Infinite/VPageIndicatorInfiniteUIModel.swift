@@ -30,6 +30,9 @@ public struct VPageIndicatorInfiniteUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Axis. Defaults to `horizontal`.
+        public var axis: Axis = pageIndicatorFiniteReference.layout.axis
+        
         /// Number of visible dots. Default to `7`.
         ///
         /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
@@ -75,6 +78,7 @@ public struct VPageIndicatorInfiniteUIModel {
     var finiteSubModel: VPageIndicatorFiniteUIModel {
         var uiModel: VPageIndicatorFiniteUIModel = .init()
         
+        uiModel.layout.axis = layout.axis
         uiModel.layout.dotDimension = layout.dotDimension
         uiModel.layout.unselectedDotScale = layout.unselectedDotScaleForFiniteConfiguration
         uiModel.layout.spacing = layout.spacing
