@@ -106,3 +106,24 @@ public struct VPageIndicatorAutomaticUIModel {
         return uiModel
     }
 }
+
+// MARK: - Factory
+extension VPageIndicatorAutomaticUIModel {
+    /// `VPageIndicatorFiniteUIModel` with horizontal layout.
+    public static var horizontal: VPageIndicatorAutomaticUIModel {
+        var uiModel: VPageIndicatorAutomaticUIModel = .init()
+        
+        uiModel.layout.axis = .horizontal
+        
+        return uiModel
+    }
+    
+    /// `VPageIndicatorFiniteUIModel` with vertical layout.
+    public static var vertical: VPageIndicatorAutomaticUIModel {
+        var uiModel: VPageIndicatorAutomaticUIModel = .init()
+        
+        uiModel.layout.axis = .vertical
+        
+        return uiModel
+    }
+}

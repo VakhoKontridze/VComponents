@@ -90,3 +90,24 @@ public struct VPageIndicatorInfiniteUIModel {
         return uiModel
     }
 }
+
+// MARK: - Factory
+extension VPageIndicatorInfiniteUIModel {
+    /// `VPageIndicatorFiniteUIModel` with horizontal layout.
+    public static var horizontal: VPageIndicatorInfiniteUIModel {
+        var uiModel: VPageIndicatorInfiniteUIModel = .init()
+        
+        uiModel.layout.axis = .horizontal
+        
+        return uiModel
+    }
+    
+    /// `VPageIndicatorFiniteUIModel` with vertical layout.
+    public static var vertical: VPageIndicatorInfiniteUIModel {
+        var uiModel: VPageIndicatorInfiniteUIModel = .init()
+        
+        uiModel.layout.axis = .vertical
+        
+        return uiModel
+    }
+}

@@ -77,7 +77,7 @@ public struct VPageIndicatorFiniteUIModel {
 
 // MARK: - Factory
 extension VPageIndicatorFiniteUIModel {
-    /// ???.
+    /// `VPageIndicatorFiniteUIModel` with horizontal layout.
     public static var horizontal: VPageIndicatorFiniteUIModel {
         var uiModel: VPageIndicatorFiniteUIModel = .init()
         
@@ -86,7 +86,7 @@ extension VPageIndicatorFiniteUIModel {
         return uiModel
     }
     
-    /// ???.
+    /// `VPageIndicatorFiniteUIModel` with vertical layout.
     public static var vertical: VPageIndicatorFiniteUIModel {
         var uiModel: VPageIndicatorFiniteUIModel = .init()
         
