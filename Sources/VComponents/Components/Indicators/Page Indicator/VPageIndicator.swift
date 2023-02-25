@@ -37,7 +37,6 @@ import SwiftUI
 ///
 public struct VPageIndicator: View {
     // MARK: Properties
-    private let uiModel: VPageIndicatorUIModel
     private let pageIndicatorType: VPageIndicatorType
     
     private let total: Int
@@ -47,12 +46,10 @@ public struct VPageIndicator: View {
     // MARK: Initializers
     /// Initializes component with total and selected index.
     public init(
-        uiModel: VPageIndicatorUIModel = .init(),
         type pageIndicatorType: VPageIndicatorType = .default,
         total: Int,
         selectedIndex: Int
     ) {
-        self.uiModel = uiModel
         self.pageIndicatorType = pageIndicatorType
         self.total = total
         self.selectedIndex = selectedIndex
@@ -62,34 +59,28 @@ public struct VPageIndicator: View {
     public var body: some View {
         Group(content: {
             switch pageIndicatorType._pageIndicatorType {
-            case .finite:
+            case .finite(let uiModel):
                 VPageIndicatorFinite(
                     uiModel: uiModel,
                     total: total,
                     selectedIndex: selectedIndex
                 )
             
-            case .infinite(let visible, let center):
+            case .infinite(let uiModel):
                 VPageIndicatorInfinite(
                     uiModel: uiModel,
-                    visible: visible,
-                    center: center,
                     total: total,
                     selectedIndex: selectedIndex
                 )
             
-            case .automatic(let visible, let center, let finiteLimit):
-                VPageIndicatorAuto(
+            case .automatic(let uiModel):
+                VPageIndicatorAutomatic(
                     uiModel: uiModel,
-                    visible: visible,
-                    center: center,
-                    finiteLimit: finiteLimit,
                     total: total,
                     selectedIndex: selectedIndex
                 )
             }
         })
-            .animation(uiModel.animations.transition, value: selectedIndex)
     }
 }
 
@@ -97,7 +88,7 @@ public struct VPageIndicator: View {
 struct VPageIndicator_Previews: PreviewProvider {
     static var previews: some View {
         VStack(content: {
-            VPageIndicator(type: .finite, total: 9, selectedIndex: 4)
+            VPageIndicator(type: .finite(), total: 9, selectedIndex: 4)
             VPageIndicator(type: .infinite(), total: 100, selectedIndex: 4)
             VPageIndicator(type: .automatic(), total: 100, selectedIndex: 4)
         })

@@ -84,7 +84,7 @@ private enum VPageIndicatorTypeHelper: Int, StringRepresentableHashableEnumerati
     
     var indicatorType: VPageIndicatorType {
         switch self {
-        case .finite: return .finite
+        case .finite: return .finite()
         case .infinite: return .infinite()
         case .automatic: return .automatic()
         }

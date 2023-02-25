@@ -10,14 +10,14 @@ import SwiftUI
 // MARK: - V Page Indicator Finite
 struct VPageIndicatorFinite: View {
     // MARK: Properties
-    private let uiModel: VPageIndicatorUIModel
+    private let uiModel: VPageIndicatorFiniteUIModel
     
     private let total: Int
     private let selectedIndex: Int
 
     // MARK: Initializers
     init(
-        uiModel: VPageIndicatorUIModel,
+        uiModel: VPageIndicatorFiniteUIModel,
         total: Int,
         selectedIndex: Int
     ) {
@@ -33,15 +33,20 @@ struct VPageIndicatorFinite: View {
                 Circle()
                     .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
                     .frame(dimension: uiModel.layout.dotDimension)
-                    .scaleEffect(selectedIndex == i ? 1 : uiModel.layout.finiteDotScale)
+                    .scaleEffect(selectedIndex == i ? 1 : uiModel.layout.unselectedDotScale)
             })
         })
+            .animation(uiModel.animations.transition, value: selectedIndex)
     }
 }
 
 // MARK: - Preview
 struct VPageIndicatorFinite_Previews: PreviewProvider {
     static var previews: some View {
-        VPageIndicatorFinite(uiModel: .init(), total: 9, selectedIndex: 4)
+        VPageIndicatorFinite(
+            uiModel: .init(),
+            total: 9,
+            selectedIndex: 4
+        )
     }
 }

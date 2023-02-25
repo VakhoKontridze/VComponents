@@ -2,6 +2,10 @@
 
 ### 3.1.0(28)
 
+VPageIndicator
+
+- `VPageIndicatorUIModel` is split into 3 subsequent UI models representing each type
+
 VMarquee
 
 - Marquee container is added, that auto-scrolls it's content

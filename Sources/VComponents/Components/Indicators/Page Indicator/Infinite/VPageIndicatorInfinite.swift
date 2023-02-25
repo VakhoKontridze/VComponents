@@ -10,13 +10,13 @@ import SwiftUI
 // MARK: - V Page Indicator Infinite
 struct VPageIndicatorInfinite: View {
     // MARK: Properties
-    private let uiModel: VPageIndicatorUIModel
-    private let visible: Int
-    private let center: Int
-    private var side: Int { (visible - center) / 2 }
-    private var middle: Int { visible / 2 }
+    private let uiModel: VPageIndicatorInfiniteUIModel
     
     private let total: Int
+    private var visible: Int { uiModel.layout.visibleDots }
+    private var center: Int { uiModel.layout.centerDots }
+    private var side: Int { uiModel.layout.sideDots }
+    private var middle: Int { uiModel.layout.middleDots }
     private let selectedIndex: Int
     
     private var region: Region {
@@ -25,19 +25,15 @@ struct VPageIndicatorInfinite: View {
 
     // MARK: Initializers
     init(
-        uiModel: VPageIndicatorUIModel,
-        visible: Int,
-        center: Int,
+        uiModel: VPageIndicatorInfiniteUIModel,
         total: Int,
         selectedIndex: Int
     ) {
-        assert(visible.isOdd, "`VPageIndicator`'s `visible` count must be odd")
-        assert(center.isOdd, "`VPageIndicator`'s `center` count must be odd")
-        assert(visible > center, "`VPageIndicator`'s `visible` must be greater than `center`")
+        assert(uiModel.layout.visibleDots.isOdd, "`VPageIndicator`'s `visible` count must be odd")
+        assert(uiModel.layout.centerDots.isOdd, "`VPageIndicator`'s `center` count must be odd")
+        assert(uiModel.layout.visibleDots > uiModel.layout.centerDots, "`VPageIndicator`'s `visible` must be greater than `center`")
         
         self.uiModel = uiModel
-        self.visible = visible
-        self.center = center
         self.total = total
         self.selectedIndex = selectedIndex
     }
@@ -45,8 +41,15 @@ struct VPageIndicatorInfinite: View {
     // MARK: Body
     public var body: some View {
         switch total {
-        case ...visible: VPageIndicatorFinite(uiModel: uiModel, total: total, selectedIndex: selectedIndex)
-        case _: infiniteBody
+        case ...visible:
+            VPageIndicatorFinite(
+                uiModel: uiModel.finiteSubModel,
+                total: total,
+                selectedIndex: selectedIndex
+            )
+        
+        case _:
+            infiniteBody
         }
     }
     
@@ -71,6 +74,7 @@ struct VPageIndicatorInfinite: View {
             })
         })
             .offset(x: offset)
+            .animation(uiModel.animations.transition, value: selectedIndex)
     }
 
     // MARK: Widths
@@ -157,7 +161,7 @@ struct VPageIndicatorInfinite: View {
     }
     
     private func leftEdgeRightSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.layout.infiniteEdgeDotScale / .init(side)
+        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / .init(side)
         let incrementalScale: CGFloat = .init(index + 1) * scaleStep
         return 1 - incrementalScale
     }
@@ -202,8 +206,8 @@ struct VPageIndicatorInfinite: View {
     }
     
     private func rightEdgeLeftSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.layout.infiniteEdgeDotScale / .init(side)
-        let incrementalScale: CGFloat = uiModel.layout.infiniteEdgeDotScale + .init(index) * scaleStep
+        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / .init(side)
+        let incrementalScale: CGFloat = uiModel.layout.edgeDotScale + .init(index) * scaleStep
         return incrementalScale
     }
 
@@ -237,8 +241,6 @@ struct VPageIndicatorInfinite_Previews: PreviewProvider {
     static var previews: some View {
         VPageIndicatorInfinite(
             uiModel: .init(),
-            visible: 7,
-            center: 3,
             total: 20,
             selectedIndex: 4
         )

@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorUIModel.swift
+//  VPageIndicatorFiniteUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-// MARK: - V Page Indicator UI Model
+// MARK: - V Page Indicator Finite UI Model
 /// Model that describes UI.
-public struct VPageIndicatorUIModel {
+public struct VPageIndicatorFiniteUIModel {
     // MARK: Properties
     fileprivate static let progressBarReference: VProgressBarUIModel = .init()
     
@@ -33,16 +33,11 @@ public struct VPageIndicatorUIModel {
         /// Dot dimension. Defaults to `10`.
         public var dotDimension: CGFloat = 10
         
+        /// Unselected dot scale. Defaults to `0.85`.
+        public var unselectedDotScale: CGFloat = 0.85
+        
         /// Dot spacing. Defaults to `5`.
         public var spacing: CGFloat = 5
-
-        /// Unselected dot scale during finite type. Defaults to `0.85`.
-        public var finiteDotScale: CGFloat = 0.85
-        
-        /// Edge dot scale during infinite type. Defaults to `0.5`.
-        ///
-        /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
-        public var infiniteEdgeDotScale: CGFloat = 0.5
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

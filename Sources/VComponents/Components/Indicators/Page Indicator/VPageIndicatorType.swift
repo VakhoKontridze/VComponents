@@ -34,8 +34,12 @@ public struct VPageIndicatorType {
     /// Finite type.
     ///
     /// Finite number of dots would be displayed.
-    public static var finite: Self {
-        .init(pageIndicatorType: .finite)
+    public static func finite(
+        uiModel: VPageIndicatorFiniteUIModel = .init()
+    ) -> Self {
+        .init(pageIndicatorType: .finite(
+            uiModel: uiModel
+        ))
     }
     
     /// Infinite type.
@@ -44,12 +48,10 @@ public struct VPageIndicatorType {
     /// Dots are scrollable in carousel effect, and have scaling property to indicate more content.
     /// `visible` and `center` dots must be odd.
     public static func infinite(
-        visible: Int = 7,
-        center: Int = 3
+        uiModel: VPageIndicatorInfiniteUIModel = .init()
     ) -> Self {
         .init(pageIndicatorType: .infinite(
-            visible: visible,
-            center: center
+            uiModel: uiModel
         ))
     }
     
@@ -57,14 +59,10 @@ public struct VPageIndicatorType {
     ///
     /// Switches from `finite` to `infinite` after a `finiteLimit`.
     public static func automatic(
-        visible: Int = 7,
-        center: Int = 3,
-        finiteLimit: Int = 10
+        uiModel: VPageIndicatorAutomaticUIModel = .init()
     ) -> Self {
         .init(pageIndicatorType: .automatic(
-            visible: visible,
-            center: center,
-            finiteLimit: finiteLimit
+            uiModel: uiModel
         ))
     }
     
@@ -74,7 +72,7 @@ public struct VPageIndicatorType {
 
 // MARK: - _ V Page Indicator Type
 enum _VPageIndicatorType {
-    case finite
-    case infinite(visible: Int, center: Int)
-    case automatic(visible: Int, center: Int, finiteLimit: Int)
+    case finite(uiModel: VPageIndicatorFiniteUIModel)
+    case infinite(uiModel: VPageIndicatorInfiniteUIModel)
+    case automatic(uiModel: VPageIndicatorAutomaticUIModel)
 }
