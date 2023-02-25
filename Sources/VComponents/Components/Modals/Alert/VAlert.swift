@@ -250,14 +250,3 @@ struct VAlert_Previews: PreviewProvider {
             )
     }
 }
-
-// MARK: - Helpers
-extension Array {
-    fileprivate func reversed(if condition: Bool) -> [Element] {
-        if condition {
-            return self.reversed()
-        } else {
-            return self
-        }
-    }
-}
