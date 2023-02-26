@@ -18,6 +18,7 @@ struct VMarqueeDemoView: View {
     private var longText: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit." }
     
     @State private var marqueeType: VMarqueeTypeHelper = .wrapping
+    @State private var scrollDirection: LayoutDirection = .leftToRight
     @State private var contentType: ContentType = .long
     @State private var insettedWithGradient: Bool = true
     
@@ -39,13 +40,21 @@ struct VMarqueeDemoView: View {
                 switch marqueeType {
                 case .wrapping:
                     VMarquee(
-                        type: .wrapping(uiModel: insettedWithGradient ? .insettedGradient : .init()),
+                        type: .wrapping(uiModel: {
+                            var uiModel: VMarqueeWrappingUIModel = insettedWithGradient ? .insettedGradient : .init()
+                            uiModel.layout.scrollDirection = scrollDirection
+                            return uiModel
+                        }()),
                         content: { contentView }
                     )
                 
                 case .bouncing:
                     VMarquee(
-                        type: .bouncing(uiModel: insettedWithGradient ? .insettedGradient : .init()),
+                        type: .bouncing(uiModel: {
+                            var uiModel: VMarqueeBouncingUIModel = insettedWithGradient ? .insettedGradient : .init()
+                            uiModel.layout.scrollDirection = scrollDirection
+                            return uiModel
+                        }()),
                         content: { contentView }
                     )
                 }
@@ -56,6 +65,9 @@ struct VMarqueeDemoView: View {
     
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(selection: $marqueeType, headerTitle: "Type")
+        
+        VSegmentedPicker(selection: $scrollDirection, headerTitle: "Scroll Direction")
+            .onChange(of: scrollDirection, perform: { _ in resetAction?() })
         
         VSegmentedPicker(selection: $contentType, headerTitle: "Content Type")
             .onChange(of: contentType, perform: { _ in resetAction?() })
@@ -86,6 +98,16 @@ private enum VMarqueeTypeHelper: Int, StringRepresentableHashableEnumeration {
         switch self {
         case .wrapping: return "Wrapping"
         case .bouncing: return "Bouncing"
+        }
+    }
+}
+
+extension LayoutDirection: StringRepresentableHashableEnumeration {
+    public var stringRepresentation: String {
+        switch self {
+        case .leftToRight: return "Left-to-right"
+        case .rightToLeft: return "Right-to-left"
+        @unknown default: fatalError()
         }
     }
 }

@@ -32,9 +32,7 @@ public struct VMarqueeBouncingUIModel {
     public struct Layout {
         // MARK: Properties
         /// Scroll direction. Defaults to `leftToRight`.
-        ///
-        /// Can be modified to support right-to-left languages.
-        public var direction: LayoutDirection = marqueeWrappingReference.layout.direction
+        public var scrollDirection: LayoutDirection = marqueeWrappingReference.layout.scrollDirection
         
         /// Content inset. Defaults to `0`.
         ///

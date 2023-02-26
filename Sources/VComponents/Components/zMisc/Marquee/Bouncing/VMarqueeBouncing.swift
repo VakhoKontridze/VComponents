@@ -94,7 +94,7 @@ struct VMarqueeBouncing<Content>: View where Content: View {
     private var offsetDynamic: CGFloat {
         let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
         
-        switch (uiModel.layout.direction, isAnimating) {
+        switch (uiModel.layout.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
         case (.leftToRight, true): return -offset
         case (.rightToLeft, false): return -offset

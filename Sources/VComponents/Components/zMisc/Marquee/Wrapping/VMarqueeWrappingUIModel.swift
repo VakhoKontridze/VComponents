@@ -29,9 +29,7 @@ public struct VMarqueeWrappingUIModel {
     public struct Layout {
         // MARK: Properties
         /// Scroll direction. Defaults to `leftToRight`.
-        ///
-        /// Can be modified to support right-to-left languages.
-        public var direction: LayoutDirection = .leftToRight
+        public var scrollDirection: LayoutDirection = .leftToRight
         
         /// Spacing between wrapped content. Defaults to  `20`.
         ///

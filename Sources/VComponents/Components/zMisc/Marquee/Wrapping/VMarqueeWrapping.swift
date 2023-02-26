@@ -104,7 +104,7 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     private var offsetDynamic: CGFloat {
         let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
         
-        switch uiModel.layout.direction {
+        switch uiModel.layout.scrollDirection {
         case .leftToRight: return offset
         case .rightToLeft: return -offset
         @unknown default: return offset
@@ -114,7 +114,7 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     private var offsetDynamicFirst: CGFloat {
         let offset: CGFloat = -(contentSize.width + uiModel.layout.inset + uiModel.layout.spacing/2)
         
-        switch (uiModel.layout.direction, isAnimating) {
+        switch (uiModel.layout.scrollDirection, isAnimating) {
         case (.leftToRight, false): return 0
         case (.leftToRight, true): return offset
         case (.rightToLeft, false): return offset
@@ -126,7 +126,7 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     private var offsetDynamicSecond: CGFloat {
         let offset: CGFloat = contentSize.width + uiModel.layout.inset + uiModel.layout.spacing/2
         
-        switch (uiModel.layout.direction, isAnimating) {
+        switch (uiModel.layout.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
         case (.leftToRight, true): return 0
         case (.rightToLeft, false): return 0
