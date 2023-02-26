@@ -150,23 +150,19 @@ var body: some View {
 
 #### Types
 
-Some components take type as parameter. Types are represented as enums, as more can be added in the future.
-
-For instance, `VPageIndicator` has three types: `Finite`, `Infinite`, and `Auto`. Unlike UI models, types may be required in some instances. For other enums, a default case is provided.
+Some components take `type` as parameter. For instance, `VPageIndicator` has three types: `finite`, `infinite`, and `automatic`
 
 ```swift
 var body: some View {
     VStack(content: {
-        VPageIndicator(type: .finite, total: 9, selectedIndex: 4)
+        VPageIndicator(type: .finite(), total: 9, selectedIndex: 4)
         
         VPageIndicator(type: .infinite(), total: 99, selectedIndex: 4)
         
-        VPageIndicator(type: .auto(), total: 99, selectedIndex: 4)
+        VPageIndicator(type: .automatic(), total: 99, selectedIndex: 4)
     })
 }
 ```
-
-Some enums can also contain additional cases, such as `focused` for `VBaseTextField` and `VTextField`.
 
 #### Animations
 
