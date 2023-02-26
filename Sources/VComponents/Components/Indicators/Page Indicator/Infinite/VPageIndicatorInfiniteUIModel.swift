@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Page Indicator Infinite UI Model
 /// Model that describes UI.
@@ -30,8 +31,8 @@ public struct VPageIndicatorInfiniteUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Axis. Defaults to `horizontal`.
-        public var axis: Axis = pageIndicatorFiniteReference.layout.axis
+        /// Direction. Defaults to `leftToRight`.
+        public var direction: OmniLayoutDirection = pageIndicatorFiniteReference.layout.direction
         
         /// Number of visible dots. Default to `7`.
         ///
@@ -78,7 +79,7 @@ public struct VPageIndicatorInfiniteUIModel {
     var finiteSubModel: VPageIndicatorFiniteUIModel {
         var uiModel: VPageIndicatorFiniteUIModel = .init()
         
-        uiModel.layout.axis = layout.axis
+        uiModel.layout.direction = layout.direction
         uiModel.layout.dotDimension = layout.dotDimension
         uiModel.layout.unselectedDotScale = layout.unselectedDotScaleForFiniteConfiguration
         uiModel.layout.spacing = layout.spacing
@@ -86,27 +87,6 @@ public struct VPageIndicatorInfiniteUIModel {
         uiModel.colors = colors
         
         uiModel.animations = animations
-        
-        return uiModel
-    }
-}
-
-// MARK: - Factory
-extension VPageIndicatorInfiniteUIModel {
-    /// `VPageIndicatorFiniteUIModel` with horizontal layout.
-    public static var horizontal: VPageIndicatorInfiniteUIModel {
-        var uiModel: VPageIndicatorInfiniteUIModel = .init()
-        
-        uiModel.layout.axis = .horizontal
-        
-        return uiModel
-    }
-    
-    /// `VPageIndicatorFiniteUIModel` with vertical layout.
-    public static var vertical: VPageIndicatorInfiniteUIModel {
-        var uiModel: VPageIndicatorInfiniteUIModel = .init()
-        
-        uiModel.layout.axis = .vertical
         
         return uiModel
     }

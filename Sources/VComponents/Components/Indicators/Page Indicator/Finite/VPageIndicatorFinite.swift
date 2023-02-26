@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Page Indicator Finite
 struct VPageIndicatorFinite: View {
@@ -28,15 +29,13 @@ struct VPageIndicatorFinite: View {
 
     // MARK: Body
     var body: some View {
-        let layout: AnyLayout = {
-            switch uiModel.layout.axis {
-            case .horizontal: return .init(HStackLayout(spacing: uiModel.layout.spacing))
-            case .vertical: return .init(VStackLayout(spacing: uiModel.layout.spacing))
-            }
-        }()
+        let layout: AnyLayout = uiModel.layout.direction.stackLayout(spacing: uiModel.layout.spacing)
+        
+        let range: [Int] = (0..<total)
+            .reversedArray(if: uiModel.layout.direction.isReversed)
         
         return layout.callAsFunction({
-            ForEach(0..<total, id: \.self, content: { i in
+            ForEach(range, id: \.self, content: { i in
                 Circle()
                     .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
                     .frame(dimension: uiModel.layout.dotDimension)
@@ -51,11 +50,11 @@ struct VPageIndicatorFinite: View {
 struct VPageIndicatorFinite_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20, content: {
-            ForEach(Axis.allCases, id: \.rawValue, content: { axis in
+            ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
                 VPageIndicatorFinite(
                     uiModel: {
                         var uiModel: VPageIndicatorFiniteUIModel = .init()
-                        uiModel.layout.axis = axis
+                        uiModel.layout.direction = direction
                         return uiModel
                     }(),
                     total: 9,

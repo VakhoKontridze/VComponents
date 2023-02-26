@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Page Indicator Infinite
 struct VPageIndicatorInfinite: View {
@@ -60,34 +61,30 @@ struct VPageIndicatorInfinite: View {
     }
     
     private var frame: some View {
-        let size: CGSize = {
-            switch uiModel.layout.axis {
-            case .horizontal: return .init(width: visibleDimensionMainAxis, height: uiModel.layout.dotDimension)
-            case .vertical: return .init(width: uiModel.layout.dotDimension, height: visibleDimensionMainAxis)
-            }
-        }()
+        let size: CGSize = .init(
+            width: visibleDimensionMainAxis,
+            height: uiModel.layout.dotDimension
+        )
+            .withReversedDimensions(if: uiModel.layout.direction.isVertical)
         
         return Color.clear
             .frame(size: size)
     }
     
     private var dots: some View {
-        let layout: AnyLayout = {
-            switch uiModel.layout.axis {
-            case .horizontal: return .init(HStackLayout(spacing: uiModel.layout.spacing))
-            case .vertical: return .init(VStackLayout(spacing: uiModel.layout.spacing))
-            }
-        }()
+        let layout: AnyLayout = uiModel.layout.direction.stackLayout(spacing: uiModel.layout.spacing)
         
-        let offset2D: CGSize = {
-            switch uiModel.layout.axis {
-            case .horizontal: return .init(width: offset, height: 0)
-            case .vertical: return .init(width: 0, height: offset)
-            }
-        }()
+        let range: [Int] = (0..<total)
+            .reversedArray(if: uiModel.layout.direction.isReversed)
+        
+        let offset2D: CGSize = .init(
+            width: offset,
+            height: 0
+        )
+            .withReversedDimensions(if: uiModel.layout.direction.isVertical)
         
         return layout.callAsFunction({
-            ForEach(0..<total, id: \.self, content: { i in
+            ForEach(range, id: \.self, content: { i in
                 Circle()
                     .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
                     .frame(dimension: uiModel.layout.dotDimension)
@@ -117,17 +114,22 @@ struct VPageIndicatorInfinite: View {
     private var offset: CGFloat {
         let rawOffset: CGFloat = (totalDimensionMainAxis - visibleDimensionMainAxis) / 2
         
-        switch region {
-        case .start:
-            return rawOffset
+        let directionalOffset: CGFloat = {
+            switch region {
+            case .start:
+                return rawOffset
+            
+            case .center:
+                let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (uiModel.layout.dotDimension + uiModel.layout.spacing)
+                return rawOffset + incrementalOffset
+            
+            case .end:
+                return -rawOffset
+            }
+        }()
         
-        case .center:
-            let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (uiModel.layout.dotDimension + uiModel.layout.spacing)
-            return rawOffset + incrementalOffset
-        
-        case .end:
-            return -rawOffset
-        }
+        return directionalOffset
+            .withOppositeSign(if: uiModel.layout.direction.isReversed)
     }
 
     // MARK: Animation Scale
@@ -167,18 +169,13 @@ struct VPageIndicatorInfinite: View {
     
     // START
     private func startEdgeVisibleIndex(at index: Int) -> Int? {
-        switch index {
-        case 0..<visible: return index
-        default: return nil
-        }
+        guard (0..<visible).contains(index) else { return nil }
+        return index
     }
     
     private func startEdgeEndSideIndex(at index: Int) -> Int? {
-        // (5 6) -> (0 1)
-        switch index {
-        case visible-side..<visible: return side + index - visible
-        default: return nil
-        }
+        guard (visible-side..<visible).contains(index) else { return nil }
+        return side + index - visible // (5 6) -> (0 1)
     }
     
     private func startEdgeEndSideScale(at index: Int) -> CGFloat {
@@ -190,11 +187,8 @@ struct VPageIndicatorInfinite: View {
     // CENTER
     private func centerVisibleIndex(at index: Int) -> Int? {
         let offset: Int = selectedIndex - (side+1)
-        
-        switch index {
-        case offset..<visible+offset: return index - offset
-        default: return nil
-        }
+        guard (offset..<visible+offset).contains(index) else { return nil }
+        return index - offset
     }
     
     private func centerIndexAbsolute(at index: Int) -> Int? {
@@ -212,18 +206,13 @@ struct VPageIndicatorInfinite: View {
     
     // END
     private func endEdgeVisibleIndex(at index: Int) -> Int? {
-        switch index {
-        case total-visible..<total: return visible - total + index
-        default: return nil
-        }
+        guard (total-visible..<total).contains(index) else { return nil }
+        return visible - total + index
     }
     
     private func endEdgeStartSideIndex(at index: Int) -> Int? {
-        // (0 1) -> (0 1)
-        switch index {
-        case 0..<side: return index
-        default: return nil
-        }
+        guard (0..<side).contains(index) else { return nil }
+        return index // (0 1) -> (0 1)
     }
     
     private func endEdgeStartSideScale(at index: Int) -> CGFloat {
@@ -261,11 +250,11 @@ extension Int {
 struct VPageIndicatorInfinite_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20, content: {
-            ForEach(Axis.allCases, id: \.rawValue, content: { axis in
+            ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
                 VPageIndicatorInfinite(
                     uiModel: {
                         var uiModel: VPageIndicatorInfiniteUIModel = .init()
-                        uiModel.layout.axis = axis
+                        uiModel.layout.direction = direction
                         return uiModel
                     }(),
                     total: 9,

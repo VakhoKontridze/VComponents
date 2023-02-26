@@ -19,7 +19,7 @@ struct VPageIndicatorDemoView: View {
     @State private var selectedIndex: Int = 0
     
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
-    @State private var axis: Axis = .horizontal
+    @State private var direction: OmniLayoutDirection = .leftToRight
 
     // MARK: Body
     var body: some View {
@@ -41,21 +41,21 @@ struct VPageIndicatorDemoView: View {
                         case .finite:
                             return .finite(uiModel: {
                                 var uiModel: VPageIndicatorFiniteUIModel = .init()
-                                uiModel.layout.axis = axis
+                                uiModel.layout.direction = direction
                                 return uiModel
                             }())
                         
                         case .infinite:
                             return .infinite(uiModel: {
                                 var uiModel: VPageIndicatorInfiniteUIModel = .init()
-                                uiModel.layout.axis = axis
+                                uiModel.layout.direction = direction
                                 return uiModel
                             }())
                         
                         case .automatic:
                             return .automatic(uiModel: {
                                 var uiModel: VPageIndicatorAutomaticUIModel = .init()
-                                uiModel.layout.axis = axis
+                                uiModel.layout.direction = direction
                                 return uiModel
                             }())
                         }
@@ -74,9 +74,9 @@ struct VPageIndicatorDemoView: View {
             footerTitle: pageIndicatorType.description
         )
         
-        VSegmentedPicker(
-            selection: $axis,
-            headerTitle: "Axis"
+        VWheelPicker(
+            selection: $direction,
+            headerTitle: "Direction"
         )
     }
 
@@ -112,11 +112,13 @@ private enum VPageIndicatorTypeHelper: Int, StringRepresentableHashableEnumerati
     }
 }
 
-extension Axis: StringRepresentableHashableEnumeration {
+extension OmniLayoutDirection: StringRepresentableHashableEnumeration {
     public var stringRepresentation: String {
         switch self {
-        case .horizontal: return "Horizontal"
-        case .vertical: return "Vertical"
+        case .leftToRight: return "Left-to-right"
+        case .rightToLeft: return "Right-to-bottom"
+        case .topToBottom: return "Top-to-bottom"
+        case .bottomToTop: return "Bottom-to-top"
         }
     }
 }

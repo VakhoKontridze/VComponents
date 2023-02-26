@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Page Indicator Automatic
 struct VPageIndicatorAutomatic: View {
@@ -50,12 +51,12 @@ struct VPageIndicatorAutomatic: View {
 struct VPageIndicatorAutomatic_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20, content: {
-            ForEach(Axis.allCases, id: \.rawValue, content: { axis in
+            ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
                 ForEach([9, 15], id: \.self, content: { total in
                     VPageIndicatorAutomatic(
                         uiModel: {
                             var uiModel: VPageIndicatorAutomaticUIModel = .init()
-                            uiModel.layout.axis = axis
+                            uiModel.layout.direction = direction
                             return uiModel
                         }(),
                         total: total,

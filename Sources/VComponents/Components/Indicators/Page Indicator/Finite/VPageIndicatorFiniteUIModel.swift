@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Page Indicator Finite UI Model
 /// Model that describes UI.
@@ -30,8 +31,8 @@ public struct VPageIndicatorFiniteUIModel {
     /// Sub-model containing layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Axis. Defaults to `horizontal`.
-        public var axis: Axis = .horizontal
+        /// Direction. Defaults to `leftToRight`.
+        public var direction: OmniLayoutDirection = .leftToRight
         
         /// Dot dimension. Defaults to `10`.
         public var dotDimension: CGFloat = 10
@@ -72,26 +73,5 @@ public struct VPageIndicatorFiniteUIModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
-    }
-}
-
-// MARK: - Factory
-extension VPageIndicatorFiniteUIModel {
-    /// `VPageIndicatorFiniteUIModel` with horizontal layout.
-    public static var horizontal: VPageIndicatorFiniteUIModel {
-        var uiModel: VPageIndicatorFiniteUIModel = .init()
-        
-        uiModel.layout.axis = .horizontal
-        
-        return uiModel
-    }
-    
-    /// `VPageIndicatorFiniteUIModel` with vertical layout.
-    public static var vertical: VPageIndicatorFiniteUIModel {
-        var uiModel: VPageIndicatorFiniteUIModel = .init()
-        
-        uiModel.layout.axis = .vertical
-        
-        return uiModel
     }
 }
