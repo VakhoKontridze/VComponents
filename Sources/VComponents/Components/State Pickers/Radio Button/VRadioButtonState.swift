@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Radio Button State
-/// Enumeration that represents state, such as `off` or `on`.
+/// Enum that represents state, such as `off` or `on`.
 public typealias VRadioButtonState = GenericState_OffOn
 
 // MARK: - V Radio Button Internal State

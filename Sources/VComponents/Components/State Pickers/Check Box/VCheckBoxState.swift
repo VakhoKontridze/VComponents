@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Toggle State
-/// Enumeration that represents state, such as `off`, `on`, or `indeterminate`.
+/// Enum that represents state, such as `off`, `on`, or `indeterminate`.
 public typealias VCheckBoxState = GenericState_OffOnIndeterminate
 
 // MARK: - V Checkbox Internal State

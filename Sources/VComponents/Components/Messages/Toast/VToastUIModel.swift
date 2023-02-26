@@ -61,7 +61,7 @@ public struct VToastUIModel {
         public typealias Margins = EdgeInsets_HorizontalVertical
         
         // MARK: Presentation Edge
-        /// Enumeration that represents presentation edge, such as `top` or `bottom`.
+        /// Enum that represents presentation edge, such as `top` or `bottom`.
         public enum PresentationEdge: Int, CaseIterable {
             // MARK: Cases
             /// Presentation from top.
