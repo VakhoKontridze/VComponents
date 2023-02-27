@@ -26,7 +26,7 @@ import SwiftUI
 ///
 ///     @State var selection: PickerRow = .red
 ///
-///     var body: some View {
+///     private var body: some View {
 ///         VMenu(title: "Lorem Ipsum", sections: {
 ///             VMenuGroupSection(title: "Section 1", rows: {
 ///                 VMenuTitleRow(action: { print("1.1") }, title: "One")

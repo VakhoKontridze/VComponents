@@ -19,7 +19,7 @@ extension View {
     ///
     /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -77,9 +77,9 @@ extension View {
     ///
     /// `vAlert` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     @State var text: String = ""
+    ///     @State private var text: String = ""
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -148,7 +148,7 @@ extension View {
     ///         let id: UUID = .init()
     ///     }
     ///
-    ///     @State var alertItem: AlertItem?
+    ///     @State private var alertItem: AlertItem?
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -235,9 +235,9 @@ extension View {
     ///         let id: UUID = .init()
     ///     }
     ///
-    ///     @State var alertItem: AlertItem?
+    ///     @State private var alertItem: AlertItem?
     ///
-    ///     @State var text: String = ""
+    ///     @State private var text: String = ""
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -339,9 +339,9 @@ extension View {
     ///
     ///     struct AlertData {}
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     @State var alertData: AlertData?
+    ///     @State private var alertData: AlertData?
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -430,10 +430,10 @@ extension View {
     ///
     ///     struct AlertData {}
     ///
-    ///     @State var isPresented: Bool = false
-    ///     @State var alertData: AlertData?
+    ///     @State private var isPresented: Bool = false
+    ///     @State private var alertData: AlertData?
     ///
-    ///     @State var text: String = ""
+    ///     @State private var text: String = ""
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -533,9 +533,9 @@ extension View {
     /// The `error` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     @State var alertError: Error?
+    ///     @State private var alertError: Error?
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -621,9 +621,9 @@ extension View {
     /// The `error` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     @State var alertError: Error?
+    ///     @State private var alertError: Error?
     ///
     ///     var body: some View {
     ///         VPlainButton(

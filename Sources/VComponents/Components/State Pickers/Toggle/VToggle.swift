@@ -17,7 +17,7 @@ import VCore
 ///
 /// `Bool` can also be passed as state.
 ///
-///     @State var state: VToggleState = .on
+///     @State private var state: VToggleState = .on
 ///
 ///     var body: some View {
 ///         VToggle(

@@ -13,7 +13,7 @@ import VCore
 ///
 /// UI Model and total value can be passed as parameters.
 ///
-///     @State var progress: Double = 0.5
+///     @State private var progress: Double = 0.5
 ///
 ///     var body: some View {
 ///         VProgressBar(value: progress)

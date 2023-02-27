@@ -13,7 +13,7 @@ import VCore
 ///
 /// UI Model, range, step, state, and onChange callback can be passed as parameters.
 ///
-///     @State var value: Double = 0.5
+///     @State private var value: Double = 0.5
 ///
 ///     var body: some View {
 ///         VSlider(value: $value)

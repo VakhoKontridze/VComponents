@@ -17,7 +17,7 @@ import VCore
 ///
 /// `Bool` can also be passed as state.
 ///
-///     @State var state: VCheckBoxState = .on
+///     @State private var state: VCheckBoxState = .on
 ///
 ///     var body: some View {
 ///         VCheckBox(

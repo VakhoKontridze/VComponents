@@ -29,7 +29,7 @@ import VCore
 ///         }
 ///     }
 ///
-///     @State var selection: PickerRow = .red
+///     @State private var selection: PickerRow = .red
 ///
 ///     var body: some View {
 ///         VSegmentedPicker(

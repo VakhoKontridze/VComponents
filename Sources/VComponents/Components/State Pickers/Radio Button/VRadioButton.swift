@@ -17,7 +17,7 @@ import VCore
 ///
 /// `Bool` can also be passed as state.
 ///
-///     @State var state: VRadioButtonState = .on
+///     @State private var state: VRadioButtonState = .on
 ///
 ///     var body: some View {
 ///         VRadioButton(

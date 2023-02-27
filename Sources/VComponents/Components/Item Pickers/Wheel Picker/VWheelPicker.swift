@@ -17,7 +17,7 @@ import VCore
 ///
 /// UI Model, header, and footer can be passed as parameters.
 ///
-///     @State var selection: String = "January"
+///     @State private var selection: String = "January"
 ///
 ///     let rowTitles: [String] = [
 ///         "January", "February", "March",

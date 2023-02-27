@@ -13,7 +13,7 @@ import VCore
 ///
 /// UI Model, line limit type, placeholder, header, and footer can be passed as parameters.
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextView(
@@ -27,7 +27,7 @@ import VCore
 ///
 /// Text line limit can be changed the following way:
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextView(

@@ -19,7 +19,7 @@ extension View {
     ///
     ///     @State var isPresented: Bool = false
     ///
-    ///     var body: some View {
+    ///     private var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true },
     ///             title: "Present"
@@ -74,7 +74,7 @@ extension View {
     ///
     ///     @State var confirmationDialogItem: ConfirmationDialogItem?
     ///
-    ///     var body: some View {
+    ///     private var body: some View {
     ///         VPlainButton(
     ///             action: { confirmationDialogItem = .init() },
     ///             title: "Present"
@@ -145,7 +145,7 @@ extension View {
     ///
     ///     @State var confirmationDialogData: ConfirmationDialogData?
     ///
-    ///     var body: some View {
+    ///     private var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true; confirmationDialogData = .init() },
     ///             title: "Present"

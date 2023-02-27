@@ -13,8 +13,8 @@ import VCore
 ///
 /// UI Model, range, step, state, and onChange callbacks can be passed as parameters.
 ///
-///     @State var valueLow: Double = 0.3
-///     @State var valueHigh: Double = 0.8
+///     @State private var valueLow: Double = 0.3
+///     @State private var valueHigh: Double = 0.8
 ///
 ///     var body: some View {
 ///         VRangeSlider(

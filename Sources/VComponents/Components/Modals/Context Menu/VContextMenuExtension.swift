@@ -25,7 +25,7 @@ extension View {
     ///
     ///     @State private var selection: PickerRow = .red
     ///
-    ///     var body: some View {
+    ///     private var body: some View {
     ///         Text("Lorem Ipsum")
     ///             .vContextMenu(sections: {
     ///                 VMenuGroupSection(title: "Section 1", rows: {
@@ -78,7 +78,7 @@ extension View {
     ///
     ///     @State private var selection: PickerRow = .red
     ///
-    ///     var body: some View {
+    ///     private var body: some View {
     ///         Text("Lorem Ipsum")
     ///             .vContextMenu(
     ///                 sections: {

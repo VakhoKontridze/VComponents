@@ -17,7 +17,7 @@ extension View {
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -73,7 +73,7 @@ extension View {
     ///         let id: UUID = .init()
     ///     }
     ///
-    ///     @State var toastItem: ToastItem?
+    ///     @State private var toastItem: ToastItem?
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -144,9 +144,9 @@ extension View {
     ///
     ///     struct ToastData {}
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     @State var toastData: ToastData?
+    ///     @State private var toastData: ToastData?
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -215,9 +215,9 @@ extension View {
     /// The `error` should not change after the presentation occurs.
     /// Any changes that you make after the presentation occurs are ignored.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     @State var toastError: Error?
+    ///     @State private var toastError: Error?
     ///
     ///     var body: some View {
     ///         VPlainButton(

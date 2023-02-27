@@ -19,7 +19,7 @@ extension View {
     ///
     ///     @State var isPresented: Bool = false
     ///
-    ///     var body: some View {
+    ///     private var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true },
     ///             title: "Present"
@@ -83,7 +83,7 @@ extension View {
     ///
     ///     @State var modalItem: ModalItem?
     ///
-    ///     var body: some View {
+    ///     private var body: some View {
     ///         VPlainButton(
     ///             action: { modalItem = .init() },
     ///             title: "Present"

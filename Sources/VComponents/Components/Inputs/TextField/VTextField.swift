@@ -17,7 +17,7 @@ import VCore
 /// If `secure` type is used, visibility button would replace clear button. When textfield is secure and text is empty, and buttons are not visible.
 /// If `search` type is used, a magnification glass icon would appear on the left.
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(
@@ -31,8 +31,8 @@ import VCore
 ///
 /// Textfield can also be focused externally by passing state:
 ///
-///     @FocusState var isFocused: Bool
-///     @State var text: String = ""
+///     @FocusState private var isFocused: Bool
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(text: $text)
@@ -69,7 +69,7 @@ import VCore
 ///
 /// `Secure` textfield:
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(
@@ -81,7 +81,7 @@ import VCore
 ///
 /// `Search` textfield:
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(
@@ -93,7 +93,7 @@ import VCore
 ///
 /// Success textfield:
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(
@@ -105,7 +105,7 @@ import VCore
 ///
 /// Warning textfield:
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(
@@ -117,7 +117,7 @@ import VCore
 ///
 /// Error textfield:
 ///
-///     @State var text: String = ""
+///     @State private var text: String = ""
 ///
 ///     var body: some View {
 ///         VTextField(

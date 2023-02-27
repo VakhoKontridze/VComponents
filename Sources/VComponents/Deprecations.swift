@@ -16,7 +16,9 @@ extension VPageIndicator {
         type pageIndicatorType: VPageIndicatorType = .default,
         total: Int,
         selectedIndex: Int
-    ) {
+    )
+        where Content == Never
+    {
         self.init(
             type: pageIndicatorType,
             total: total,
@@ -75,6 +77,33 @@ extension VPageIndicatorAutomaticUIModel.Layout {
         get { standardDotLimit }
         set { standardDotLimit = newValue }
     }
+    
+    @available(*, deprecated, renamed: "visibleDotsForCompactConfiguration")
+    public var visibleDots: Int {
+        get { visibleDotsForCompactConfiguration }
+        set { visibleDotsForCompactConfiguration = newValue }
+    }
+    
+    @available(*, deprecated, renamed: "centerDotsForCompactConfiguration")
+    public var centerDots: Int {
+        get { centerDotsForCompactConfiguration }
+        set { centerDotsForCompactConfiguration = newValue }
+    }
+}
+
+extension VPageIndicatorStandardUIModel.Layout {
+    @available(*, unavailable, message: "Use `dotDimensionPrimaryAxis` and `dotDimensionSecondaryAxis` instead")
+    public var dotDimension: CGFloat { 10 }
+}
+
+extension VPageIndicatorCompactUIModel.Layout {
+    @available(*, unavailable, message: "Use `dotDimensionPrimaryAxis`, `dotDimensionPrimaryAxisForStandardConfiguration` and `dotDimensionSecondaryAxis` instead")
+    public var dotDimension: CGFloat { 10 }
+}
+
+extension VPageIndicatorAutomaticUIModel.Layout {
+    @available(*, unavailable, message: "Use `dotDimensionPrimaryAxisForStandardConfiguration`, `dotDimensionPrimaryAxisForCompactConfiguration` and `dotDimensionSecondaryAxis` instead")
+    public var dotDimension: CGFloat { 10 }
 }
 
 // MARK: - V Components Localization Manager

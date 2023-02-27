@@ -17,7 +17,7 @@ extension View {
     ///
     /// `vBottomSheet` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
     ///     var body: some View {
     ///         VPlainButton(
@@ -82,7 +82,7 @@ extension View {
     ///         let id: UUID = .init()
     ///     }
     ///
-    ///     @State var bottomSheetItem: BottomSheetItem?
+    ///     @State private var bottomSheetItem: BottomSheetItem?
     ///
     ///     var body: some View {
     ///         VPlainButton(

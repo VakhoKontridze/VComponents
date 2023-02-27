@@ -13,7 +13,7 @@ import VCore
 ///
 /// UI Model, step, and state can be passed as parameters.
 ///
-///     @State var value: Double = 0.5
+///     @State private var value: Double = 0.5
 ///
 ///     var body: some View {
 ///         VStepper(
