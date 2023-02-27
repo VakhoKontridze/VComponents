@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Page Indicator Compact
-struct VPageIndicatorCompact: View {
+struct VPageIndicatorCompact<Content>: View where Content: View {
     // MARK: Properties
     private let uiModel: VPageIndicatorCompactUIModel
     
@@ -20,6 +20,8 @@ struct VPageIndicatorCompact: View {
     private var middle: Int { uiModel.layout.middleDots }
     private let selectedIndex: Int
     
+    private let dotContent: VPageIndicatorDotContent<Content>
+    
     private var region: Region {
         .init(selectedIndex: selectedIndex, total: total, middle: middle)
     }
@@ -28,7 +30,8 @@ struct VPageIndicatorCompact: View {
     init(
         uiModel: VPageIndicatorCompactUIModel,
         total: Int,
-        selectedIndex: Int
+        selectedIndex: Int,
+        dotContent: VPageIndicatorDotContent<Content>
     ) {
         assert(uiModel.layout.visibleDots.isOdd, "`VPageIndicator`'s `visible` count must be odd")
         assert(uiModel.layout.centerDots.isOdd, "`VPageIndicator`'s `center` count must be odd")
@@ -37,6 +40,7 @@ struct VPageIndicatorCompact: View {
         self.uiModel = uiModel
         self.total = total
         self.selectedIndex = selectedIndex
+        self.dotContent = dotContent
     }
 
     // MARK: Body
@@ -46,7 +50,8 @@ struct VPageIndicatorCompact: View {
             VPageIndicatorStandard(
                 uiModel: uiModel.standardSubModel,
                 total: total,
-                selectedIndex: selectedIndex
+                selectedIndex: selectedIndex,
+                dotContent: dotContent
             )
         
         case _:
@@ -62,8 +67,8 @@ struct VPageIndicatorCompact: View {
     
     private var frame: some View {
         let size: CGSize = .init(
-            width: visibleDimensionMainAxis,
-            height: uiModel.layout.dotDimension
+            width: visibleDimensionPrimaryAxis,
+            height: uiModel.layout.dotDimensionSecondaryAxis
         )
             .withReversedDimensions(if: uiModel.layout.direction.isVertical)
         
@@ -85,26 +90,37 @@ struct VPageIndicatorCompact: View {
         
         return layout.callAsFunction({
             ForEach(range, id: \.self, content: { i in
-                Circle()
-                    .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
-                    .frame(dimension: uiModel.layout.dotDimension)
+                dotContentView
+                    .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
+                    .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
                     .scaleEffect(scale(at: i), anchor: .center)
+                    .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
             })
         })
             .offset(offset2D)
             .animation(uiModel.animations.transition, value: selectedIndex)
     }
+    
+    @ViewBuilder private var dotContentView: some View {
+        switch dotContent {
+        case .default:
+            Circle()
+        
+        case .custom(let content):
+            content()
+        }
+    }
 
     // MARK: Dimension on Main Axis
-    private var visibleDimensionMainAxis: CGFloat {
-        let dots: CGFloat = .init(visible) * uiModel.layout.dotDimension
+    private var visibleDimensionPrimaryAxis: CGFloat {
+        let dots: CGFloat = .init(visible) * uiModel.layout.dotDimensionPrimaryAxis
         let spacings: CGFloat = .init(visible - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
     
-    private var totalDimensionMainAxis: CGFloat {
-        let dots: CGFloat = .init(total) * uiModel.layout.dotDimension
+    private var totalDimensionPrimaryAxis: CGFloat {
+        let dots: CGFloat = .init(total) * uiModel.layout.dotDimensionPrimaryAxis
         let spacings: CGFloat = .init(total - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
@@ -112,7 +128,7 @@ struct VPageIndicatorCompact: View {
 
     // MARK: Animation Offset
     private var offset: CGFloat {
-        let rawOffset: CGFloat = (totalDimensionMainAxis - visibleDimensionMainAxis) / 2
+        let rawOffset: CGFloat = (totalDimensionPrimaryAxis - visibleDimensionPrimaryAxis) / 2
         
         let directionalOffset: CGFloat = {
             switch region {
@@ -120,7 +136,7 @@ struct VPageIndicatorCompact: View {
                 return rawOffset
             
             case .center:
-                let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (uiModel.layout.dotDimension + uiModel.layout.spacing)
+                let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (uiModel.layout.dotDimensionPrimaryAxis + uiModel.layout.spacing)
                 return rawOffset + incrementalOffset
             
             case .end:
@@ -251,14 +267,15 @@ struct VPageIndicatorCompact_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20, content: {
             ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
-                VPageIndicatorCompact(
+                VPageIndicatorCompact<Never>(
                     uiModel: {
                         var uiModel: VPageIndicatorCompactUIModel = .init()
                         uiModel.layout.direction = direction
                         return uiModel
                     }(),
                     total: 9,
-                    selectedIndex: 4
+                    selectedIndex: 4,
+                    dotContent: .default
                 )
             })
         })

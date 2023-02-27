@@ -34,18 +34,41 @@ public struct VPageIndicatorStandardUIModel {
         /// Direction. Defaults to `leftToRight`.
         public var direction: OmniLayoutDirection = .leftToRight
         
-        /// Dot dimension. Defaults to `10`.
-        public var dotDimension: CGFloat = 10
+        /// Dot dimension on the main axis. Defaults to `10`.
+        ///
+        /// For horizontal layouts, this will be width, and for vertical, height.
+        ///
+        /// Set to `nil`, to make dot stretch to take available space.
+        public var dotDimensionPrimaryAxis: CGFloat? = 10
         
-        /// Unselected dot scale. Defaults to `0.85`.
-        public var unselectedDotScale: CGFloat = 0.85
+        /// Dot dimension on the secondary axis. Defaults to `10`.
+        ///
+        /// For horizontal layouts, this will be height, and for vertical, width.
+        public var dotDimensionSecondaryAxis: CGFloat = 10
         
         /// Dot spacing. Defaults to `5`.
         public var spacing: CGFloat = 5
         
+        /// Unselected dot scale. Defaults to `0.85`.
+        public var unselectedDotScale: CGFloat = 0.85
+        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        init(
+            direction: OmniLayoutDirection,
+            dotDimensionPrimaryAxis: CGFloat?,
+            dotDimensionSecondaryAxis: CGFloat,
+            spacing: CGFloat,
+            unselectedDotScale: CGFloat
+        ) {
+            self.direction = direction
+            self.dotDimensionPrimaryAxis = dotDimensionPrimaryAxis
+            self.dotDimensionSecondaryAxis = dotDimensionSecondaryAxis
+            self.spacing = spacing
+            self.unselectedDotScale = unselectedDotScale
+        }
     }
 
     // MARK: Colors
@@ -73,5 +96,17 @@ public struct VPageIndicatorStandardUIModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+    }
+}
+
+// MARK: - Factory
+extension VPageIndicatorStandardUIModel {
+    /// `VPageIndicatorStandardUIModel` with vertical layout.
+    public static var vertical: VPageIndicatorStandardUIModel {
+        var uiModel: VPageIndicatorStandardUIModel = .init()
+        
+        uiModel.layout.direction = .topToBottom
+        
+        return uiModel
     }
 }

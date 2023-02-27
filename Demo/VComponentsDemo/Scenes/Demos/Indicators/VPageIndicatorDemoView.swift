@@ -20,6 +20,7 @@ struct VPageIndicatorDemoView: View {
     
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
     @State private var direction: OmniLayoutDirection = .leftToRight
+    @State private var stretchesOnPrimaryAxis: Bool = false
 
     // MARK: Body
     var body: some View {
@@ -35,42 +36,77 @@ struct VPageIndicatorDemoView: View {
         DemoTitledSettingView(
             title: "\(selectedIndex+1)/\(total)",
             content: {
-                VPageIndicator(
-                    type: {
-                        switch pageIndicatorType {
-                        case .standard:
-                            return .standard(uiModel: {
+                switch pageIndicatorType {
+                case .standard:
+                    if stretchesOnPrimaryAxis {
+                        VPageIndicator(
+                            type: .standard(uiModel: {
+                                var uiModel: VPageIndicatorStandardUIModel = .init()
+                                uiModel.layout.direction = direction
+                                uiModel.layout.dotDimensionPrimaryAxis = nil
+                                uiModel.layout.dotDimensionSecondaryAxis = 5
+                                return uiModel
+                            }()),
+                            total: total,
+                            selectedIndex: selectedIndex,
+                            dot: { RoundedRectangle(cornerRadius: 2.5) }
+                        )
+                        
+                    } else {
+                        VPageIndicator(
+                            type: .standard(uiModel: {
                                 var uiModel: VPageIndicatorStandardUIModel = .init()
                                 uiModel.layout.direction = direction
                                 return uiModel
-                            }())
-                        
-                        case .compact:
-                            return .compact(uiModel: {
-                                var uiModel: VPageIndicatorCompactUIModel = .init()
-                                uiModel.layout.direction = direction
-                                return uiModel
-                            }())
-                        
-                        case .automatic:
-                            return .automatic(uiModel: {
-                                var uiModel: VPageIndicatorAutomaticUIModel = .init()
-                                uiModel.layout.direction = direction
-                                return uiModel
-                            }())
-                        }
-                    }(),
-                    total: total,
-                    selectedIndex: selectedIndex
-                )
+                            }()),
+                            total: total,
+                            selectedIndex: selectedIndex
+                        )
+                    }
+                    
+                case .compact:
+                    VPageIndicator(
+                        type: .compact(uiModel: {
+                            var uiModel: VPageIndicatorCompactUIModel = .init()
+                            uiModel.layout.direction = direction
+                            return uiModel
+                        }()),
+                        total: total,
+                        selectedIndex: selectedIndex
+                    )
+                    
+                case .automatic:
+                    VPageIndicator(
+                        type: .automatic(uiModel: {
+                            var uiModel: VPageIndicatorAutomaticUIModel = .init()
+                            uiModel.layout.direction = direction
+                            return uiModel
+                        }()),
+                        total: total,
+                        selectedIndex: selectedIndex
+                    )
+                }
             }
         )
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $pageIndicatorType, headerTitle: "Type")
+        VSegmentedPicker(
+            selection: $pageIndicatorType,
+            headerTitle: "Type"
+        )
         
-        VWheelPicker(selection: $direction, headerTitle: "Direction")
+        VWheelPicker(
+            selection: $direction,
+            headerTitle: "Direction"
+        )
+        
+        ToggleSettingView(
+            isOn: $stretchesOnPrimaryAxis,
+            title: "Stretches on Primary Axis",
+            description: "Only applicable to \"standard\" type"
+        )
+            .disabled(pageIndicatorType != .standard)
     }
 
     // MARK: Timer

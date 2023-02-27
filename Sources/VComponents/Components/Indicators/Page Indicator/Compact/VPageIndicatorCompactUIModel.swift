@@ -34,6 +34,26 @@ public struct VPageIndicatorCompactUIModel {
         /// Direction. Defaults to `leftToRight`.
         public var direction: OmniLayoutDirection = pageIndicatorStandardReference.layout.direction
         
+        /// Dot dimension on the main axis. Defaults to `10`.
+        ///
+        /// For horizontal layouts, this will be width, and for vertical, height.
+        public var dotDimensionPrimaryAxis: CGFloat = 10
+        
+        /// Dot dimension on the main axis when switching to `standard` configuration. Defaults to `10`.
+        ///
+        /// For horizontal layouts, this will be width, and for vertical, height.
+        ///
+        /// Set to `nil`, to make dot stretch to take available space.
+        public var dotDimensionPrimaryAxisForStandardConfiguration: CGFloat? = pageIndicatorStandardReference.layout.dotDimensionPrimaryAxis
+        
+        /// Dot dimension on the secondary axis. Defaults to `10`.
+        ///
+        /// For horizontal layouts, this will be height, and for vertical, width.
+        public var dotDimensionSecondaryAxis: CGFloat = pageIndicatorStandardReference.layout.dotDimensionSecondaryAxis
+        
+        /// Dot spacing. Defaults to `5`.
+        public var spacing: CGFloat = pageIndicatorStandardReference.layout.spacing
+        
         /// Number of visible dots. Default to `7`.
         ///
         /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
@@ -42,14 +62,11 @@ public struct VPageIndicatorCompactUIModel {
         /// Number of center dots. Default to `7`.
         ///
         /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
-        public var `centerDots`: Int = 3
+        public var centerDots: Int = 3
         
         var sideDots: Int { (visibleDots - centerDots) / 2 }
         
         var middleDots: Int { visibleDots / 2 }
-        
-        /// Dot dimension. Defaults to `10`.
-        public var dotDimension: CGFloat = pageIndicatorStandardReference.layout.dotDimension
 
         /// Scale of dot at the edge. Defaults to `0.5`.
         ///
@@ -59,12 +76,31 @@ public struct VPageIndicatorCompactUIModel {
         /// Unselected dot scale when switching to `standard` configuration. Defaults to `0.85`.
         public var unselectedDotScaleForStandardConfiguration: CGFloat = pageIndicatorStandardReference.layout.unselectedDotScale
         
-        /// Dot spacing. Defaults to `5`.
-        public var spacing: CGFloat = pageIndicatorStandardReference.layout.spacing
-        
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        init(
+            direction: OmniLayoutDirection,
+            dotDimensionPrimaryAxis: CGFloat,
+            dotDimensionPrimaryAxisForStandardConfiguration: CGFloat?,
+            dotDimensionSecondaryAxis: CGFloat,
+            spacing: CGFloat,
+            visibleDots: Int,
+            centerDots: Int,
+            edgeDotScale: CGFloat,
+            unselectedDotScaleForStandardConfiguration: CGFloat
+        ) {
+            self.direction = direction
+            self.dotDimensionPrimaryAxis = dotDimensionPrimaryAxis
+            self.dotDimensionPrimaryAxisForStandardConfiguration = dotDimensionPrimaryAxisForStandardConfiguration
+            self.dotDimensionSecondaryAxis = dotDimensionSecondaryAxis
+            self.spacing = spacing
+            self.visibleDots = visibleDots
+            self.centerDots = centerDots
+            self.edgeDotScale = edgeDotScale
+            self.unselectedDotScaleForStandardConfiguration = unselectedDotScaleForStandardConfiguration
+        }
     }
     
     // MARK: Colors
@@ -79,14 +115,29 @@ public struct VPageIndicatorCompactUIModel {
     var standardSubModel: VPageIndicatorStandardUIModel {
         var uiModel: VPageIndicatorStandardUIModel = .init()
         
-        uiModel.layout.direction = layout.direction
-        uiModel.layout.dotDimension = layout.dotDimension
-        uiModel.layout.unselectedDotScale = layout.unselectedDotScaleForStandardConfiguration
-        uiModel.layout.spacing = layout.spacing
+        uiModel.layout = .init(
+            direction: layout.direction,
+            dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
+            dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
+            spacing: layout.spacing,
+            unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration
+        )
         
         uiModel.colors = colors
         
         uiModel.animations = animations
+        
+        return uiModel
+    }
+}
+
+// MARK: - Factory
+extension VPageIndicatorCompactUIModel {
+    /// `VPageIndicatorCompactUIModel` with vertical layout.
+    public static var vertical: VPageIndicatorCompactUIModel {
+        var uiModel: VPageIndicatorCompactUIModel = .init()
+        
+        uiModel.layout.direction = .topToBottom
         
         return uiModel
     }
