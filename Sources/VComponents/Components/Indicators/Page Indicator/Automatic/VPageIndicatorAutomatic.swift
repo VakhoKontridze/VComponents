@@ -30,7 +30,7 @@ struct VPageIndicatorAutomatic: View {
     // MARK: Body
     var body: some View {
         switch total {
-        case ...uiModel.layout.compactDotLimit:
+        case ...uiModel.layout.standardDotLimit:
             VPageIndicatorStandard(
                 uiModel: uiModel.standardSubModel,
                 total: total,

@@ -57,7 +57,7 @@ extension VPageIndicatorType {
             var uiModel: VPageIndicatorAutomaticUIModel = .init()
             uiModel.layout.visibleDots = visible
             uiModel.layout.centerDots = center
-            uiModel.layout.compactDotLimit = finiteLimit
+            uiModel.layout.standardDotLimit = finiteLimit
             return uiModel
         }())
     }
@@ -70,10 +70,10 @@ public typealias VPageIndicatorFiniteUIModel = VPageIndicatorStandardUIModel
 public typealias VPageIndicatorInfiniteUIModel = VPageIndicatorCompactUIModel
 
 extension VPageIndicatorAutomaticUIModel.Layout {
-    @available(*, deprecated, renamed: "compactDotLimit")
+    @available(*, deprecated, renamed: "standardDotLimit")
     public var finiteDotLimit: Int {
-        get { compactDotLimit }
-        set { compactDotLimit = newValue }
+        get { standardDotLimit }
+        set { standardDotLimit = newValue }
     }
 }
 

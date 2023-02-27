@@ -43,7 +43,7 @@ public struct VPageIndicatorType {
     
     /// Automatic type.
     ///
-    /// Switches from `standard` to `compact` after a `compactDotLimit` from UI model.
+    /// Switches from `standard` to `compact` after a `standardDotLimit` from UI model.
     public static func automatic(
         uiModel: VPageIndicatorAutomaticUIModel = .init()
     ) -> Self {

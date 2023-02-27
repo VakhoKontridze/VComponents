@@ -46,7 +46,7 @@ public struct VPageIndicatorAutomaticUIModel {
         public var centerDots: Int = pageIndicatorCompactReference.layout.centerDots
         
         /// Limit after which `standard` configuration switches to `compact` one. Defaults to `10`.
-        public var compactDotLimit: Int = 10
+        public var standardDotLimit: Int = 10
         
         /// Dot dimension. Defaults to `10`.
         public var dotDimension: CGFloat = pageIndicatorStandardReference.layout.dotDimension
