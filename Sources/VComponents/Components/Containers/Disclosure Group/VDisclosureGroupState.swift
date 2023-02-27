@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Disclosure Group State
-/// Enum that represents state, such as `collapsed` or `expanded`.
+/// Enum that represents state, such as `collapsed` or `standard`.
 public typealias VDisclosureGroupState = GenericState_CollapsedExpanded
 
 // MARK: - V Disclosure Group Internal State

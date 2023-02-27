@@ -8,18 +8,7 @@
 import Foundation
 
 // MARK: - V Page Indicator Type
-/// Model that represents `VPageIndicator` type, such as `finite` or `infinite`.
-///
-/// 1. `Finite`.
-/// Finite number of dots would be displayed.
-///
-/// 2. `Infinite`.
-/// Infinite dots are possible, but only dots specified by `visible` will be displayed.
-/// Dots are scrollable in carousel effect, and have scaling property to indicate more content.
-/// `visible` and `center` dots must be odd.
-///
-/// 3. `Auto`.
-/// Switches from `finite` to `infinite` after a `finiteLimit`.
+/// Model that represents `VPageIndicator` type, such as `standard` or `compact`.
 public struct VPageIndicatorType {
     // MARK: Properties
     let _pageIndicatorType: _VPageIndicatorType
@@ -31,33 +20,30 @@ public struct VPageIndicatorType {
         self._pageIndicatorType = pageIndicatorType
     }
     
-    /// Finite type.
-    ///
-    /// Finite number of dots would be displayed.
-    public static func finite(
-        uiModel: VPageIndicatorFiniteUIModel = .init()
+    /// Standard type.
+    public static func standard(
+        uiModel: VPageIndicatorStandardUIModel = .init()
     ) -> Self {
-        .init(pageIndicatorType: .finite(
+        .init(pageIndicatorType: .standard(
             uiModel: uiModel
         ))
     }
     
-    /// Infinite type.
+    /// Compact type.
     ///
-    /// Infinite dots are possible, but only dots specified by `visible` will be displayed.
+    /// Only limited number of dots will be visible, determined by `visibleDots` from the UI model.
     /// Dots are scrollable in carousel effect, and have scaling property to indicate more content.
-    /// `visible` and `center` dots must be odd.
-    public static func infinite(
-        uiModel: VPageIndicatorInfiniteUIModel = .init()
+    public static func compact(
+        uiModel: VPageIndicatorCompactUIModel = .init()
     ) -> Self {
-        .init(pageIndicatorType: .infinite(
+        .init(pageIndicatorType: .compact(
             uiModel: uiModel
         ))
     }
     
     /// Automatic type.
     ///
-    /// Switches from `finite` to `infinite` after a `finiteLimit`.
+    /// Switches from `standard` to `compact` after a `compactDotLimit` from UI model.
     public static func automatic(
         uiModel: VPageIndicatorAutomaticUIModel = .init()
     ) -> Self {
@@ -72,7 +58,7 @@ public struct VPageIndicatorType {
 
 // MARK: - _ V Page Indicator Type
 enum _VPageIndicatorType {
-    case finite(uiModel: VPageIndicatorFiniteUIModel)
-    case infinite(uiModel: VPageIndicatorInfiniteUIModel)
+    case standard(uiModel: VPageIndicatorStandardUIModel)
+    case compact(uiModel: VPageIndicatorCompactUIModel)
     case automatic(uiModel: VPageIndicatorAutomaticUIModel)
 }

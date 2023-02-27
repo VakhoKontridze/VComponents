@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorFinite.swift
+//  VPageIndicatorStandard.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -8,17 +8,17 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Page Indicator Finite
-struct VPageIndicatorFinite: View {
+// MARK: - V Page Indicator Standard
+struct VPageIndicatorStandard: View {
     // MARK: Properties
-    private let uiModel: VPageIndicatorFiniteUIModel
+    private let uiModel: VPageIndicatorStandardUIModel
     
     private let total: Int
     private let selectedIndex: Int
 
     // MARK: Initializers
     init(
-        uiModel: VPageIndicatorFiniteUIModel,
+        uiModel: VPageIndicatorStandardUIModel,
         total: Int,
         selectedIndex: Int
     ) {
@@ -47,13 +47,13 @@ struct VPageIndicatorFinite: View {
 }
 
 // MARK: - Preview
-struct VPageIndicatorFinite_Previews: PreviewProvider {
+struct VPageIndicatorStandard_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20, content: {
             ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
-                VPageIndicatorFinite(
+                VPageIndicatorStandard(
                     uiModel: {
-                        var uiModel: VPageIndicatorFiniteUIModel = .init()
+                        var uiModel: VPageIndicatorStandardUIModel = .init()
                         uiModel.layout.direction = direction
                         return uiModel
                     }(),

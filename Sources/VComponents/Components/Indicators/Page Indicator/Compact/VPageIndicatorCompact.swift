@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorInfinite.swift
+//  VPageIndicatorCompact.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -8,10 +8,10 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Page Indicator Infinite
-struct VPageIndicatorInfinite: View {
+// MARK: - V Page Indicator Compact
+struct VPageIndicatorCompact: View {
     // MARK: Properties
-    private let uiModel: VPageIndicatorInfiniteUIModel
+    private let uiModel: VPageIndicatorCompactUIModel
     
     private let total: Int
     private var visible: Int { uiModel.layout.visibleDots }
@@ -26,7 +26,7 @@ struct VPageIndicatorInfinite: View {
 
     // MARK: Initializers
     init(
-        uiModel: VPageIndicatorInfiniteUIModel,
+        uiModel: VPageIndicatorCompactUIModel,
         total: Int,
         selectedIndex: Int
     ) {
@@ -43,18 +43,18 @@ struct VPageIndicatorInfinite: View {
     public var body: some View {
         switch total {
         case ...visible:
-            VPageIndicatorFinite(
-                uiModel: uiModel.finiteSubModel,
+            VPageIndicatorStandard(
+                uiModel: uiModel.standardSubModel,
                 total: total,
                 selectedIndex: selectedIndex
             )
         
         case _:
-            infiniteBody
+            compactBody
         }
     }
     
-    private var infiniteBody: some View {
+    private var compactBody: some View {
         frame
             .overlay(dots)
             .clipped()
@@ -247,13 +247,13 @@ extension Int {
 }
 
 // MARK: - Preview
-struct VPageIndicatorInfinite_Previews: PreviewProvider {
+struct VPageIndicatorCompact_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 20, content: {
             ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
-                VPageIndicatorInfinite(
+                VPageIndicatorCompact(
                     uiModel: {
-                        var uiModel: VPageIndicatorInfiniteUIModel = .init()
+                        var uiModel: VPageIndicatorCompactUIModel = .init()
                         uiModel.layout.direction = direction
                         return uiModel
                     }(),

@@ -38,16 +38,16 @@ struct VPageIndicatorDemoView: View {
                 VPageIndicator(
                     type: {
                         switch pageIndicatorType {
-                        case .finite:
-                            return .finite(uiModel: {
-                                var uiModel: VPageIndicatorFiniteUIModel = .init()
+                        case .standard:
+                            return .standard(uiModel: {
+                                var uiModel: VPageIndicatorStandardUIModel = .init()
                                 uiModel.layout.direction = direction
                                 return uiModel
                             }())
                         
-                        case .infinite:
-                            return .infinite(uiModel: {
-                                var uiModel: VPageIndicatorInfiniteUIModel = .init()
+                        case .compact:
+                            return .compact(uiModel: {
+                                var uiModel: VPageIndicatorCompactUIModel = .init()
                                 uiModel.layout.direction = direction
                                 return uiModel
                             }())
@@ -68,16 +68,9 @@ struct VPageIndicatorDemoView: View {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(
-            selection: $pageIndicatorType,
-            headerTitle: "Type",
-            footerTitle: pageIndicatorType.description
-        )
+        VSegmentedPicker(selection: $pageIndicatorType, headerTitle: "Type")
         
-        VWheelPicker(
-            selection: $direction,
-            headerTitle: "Direction"
-        )
+        VWheelPicker(selection: $direction, headerTitle: "Direction")
     }
 
     // MARK: Timer
@@ -91,23 +84,15 @@ struct VPageIndicatorDemoView: View {
 
 // MARK: - Helpers
 private enum VPageIndicatorTypeHelper: Int, StringRepresentableHashableEnumeration {
-    case finite
-    case infinite
+    case standard
+    case compact
     case automatic
     
     var stringRepresentation: String {
         switch self {
-        case .finite: return "Finite"
-        case .infinite: return "Infinite"
+        case .standard: return "Standard"
+        case .compact: return "Compact"
         case .automatic: return "Automatic"
-        }
-    }
-    
-    var description: String {
-        switch self {
-        case .finite: return "Finite number of dots would be displayed"
-        case .infinite: return "Infinite dots are possible, but limited numbers are displayed. Scrolling with carousel effect may become enabled."
-        case .automatic: return "Type that switches between \"Finite\" and \"Infinite\""
         }
     }
 }

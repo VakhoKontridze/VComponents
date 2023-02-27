@@ -12,8 +12,8 @@ import VCore
 /// Model that describes UI.
 public struct VPageIndicatorAutomaticUIModel {
     // MARK: Properties
-    fileprivate static let pageIndicatorFiniteReference: VPageIndicatorFiniteUIModel = .init()
-    fileprivate static let pageIndicatorInfiniteReference: VPageIndicatorInfiniteUIModel = .init()
+    fileprivate static let pageIndicatorStandardReference: VPageIndicatorStandardUIModel = .init()
+    fileprivate static let pageIndicatorCompactReference: VPageIndicatorCompactUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -33,34 +33,34 @@ public struct VPageIndicatorAutomaticUIModel {
     public struct Layout {
         // MARK: Properties
         /// Direction. Defaults to `leftToRight`.
-        public var direction: OmniLayoutDirection = pageIndicatorFiniteReference.layout.direction
+        public var direction: OmniLayoutDirection = pageIndicatorStandardReference.layout.direction
         
         /// Number of visible dots. Default to `7`.
         ///
         /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
-        public var visibleDots: Int = pageIndicatorInfiniteReference.layout.visibleDots
+        public var visibleDots: Int = pageIndicatorCompactReference.layout.visibleDots
         
         /// Number of center dots. Default to `7`.
         ///
         /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
-        public var centerDots: Int = pageIndicatorInfiniteReference.layout.centerDots
+        public var centerDots: Int = pageIndicatorCompactReference.layout.centerDots
         
-        /// Limit after with `finite` configuration turns to `infinite` one. Defaults to `10`.
-        public var finiteDotLimit: Int = 10
+        /// Limit after which `standard` configuration switches to `compact` one. Defaults to `10`.
+        public var compactDotLimit: Int = 10
         
         /// Dot dimension. Defaults to `10`.
-        public var dotDimension: CGFloat = pageIndicatorFiniteReference.layout.dotDimension
+        public var dotDimension: CGFloat = pageIndicatorStandardReference.layout.dotDimension
 
-        /// Unselected dot scale during `finite` configuration. Defaults to `0.85`.
-        public var unselectedDotScaleForFiniteConfiguration: CGFloat = pageIndicatorFiniteReference.layout.unselectedDotScale
+        /// Unselected dot scale during `standard` configuration. Defaults to `0.85`.
+        public var unselectedDotScaleForStandardConfiguration: CGFloat = pageIndicatorStandardReference.layout.unselectedDotScale
         
-        /// Scale of dot at the edge during `infinite` configuration. Defaults to `0.5`.
+        /// Scale of dot at the edge during `compact` configuration. Defaults to `0.5`.
         ///
         /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
-        public var edgeDotScaleForInfiniteConfiguration: CGFloat = pageIndicatorInfiniteReference.layout.edgeDotScale
+        public var edgeDotScaleForCompactConfiguration: CGFloat = pageIndicatorCompactReference.layout.edgeDotScale
         
         /// Dot spacing. Defaults to `5`.
-        public var spacing: CGFloat = pageIndicatorFiniteReference.layout.spacing
+        public var spacing: CGFloat = pageIndicatorStandardReference.layout.spacing
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -69,19 +69,19 @@ public struct VPageIndicatorAutomaticUIModel {
     
     // MARK: Colors
     /// Sub-model containing color properties.
-    public typealias Colors = VPageIndicatorFiniteUIModel.Colors
+    public typealias Colors = VPageIndicatorStandardUIModel.Colors
 
     // MARK: Animations
     /// Sub-model containing animation properties.
-    public typealias Animations = VPageIndicatorFiniteUIModel.Animations
+    public typealias Animations = VPageIndicatorStandardUIModel.Animations
     
     // MARK: Sub-Models
-    var finiteSubModel: VPageIndicatorFiniteUIModel {
-        var uiModel: VPageIndicatorFiniteUIModel = .init()
+    var standardSubModel: VPageIndicatorStandardUIModel {
+        var uiModel: VPageIndicatorStandardUIModel = .init()
         
         uiModel.layout.direction = layout.direction
         uiModel.layout.dotDimension = layout.dotDimension
-        uiModel.layout.unselectedDotScale = layout.unselectedDotScaleForFiniteConfiguration
+        uiModel.layout.unselectedDotScale = layout.unselectedDotScaleForStandardConfiguration
         uiModel.layout.spacing = layout.spacing
         
         uiModel.colors = colors
@@ -91,14 +91,14 @@ public struct VPageIndicatorAutomaticUIModel {
         return uiModel
     }
     
-    var infiniteSubModel: VPageIndicatorInfiniteUIModel {
-        var uiModel: VPageIndicatorInfiniteUIModel = .init()
+    var compactSubModel: VPageIndicatorCompactUIModel {
+        var uiModel: VPageIndicatorCompactUIModel = .init()
         
         uiModel.layout.direction = layout.direction
         uiModel.layout.visibleDots = layout.visibleDots
         uiModel.layout.centerDots = layout.centerDots
         uiModel.layout.dotDimension = layout.dotDimension
-        uiModel.layout.edgeDotScale = layout.edgeDotScaleForInfiniteConfiguration
+        uiModel.layout.edgeDotScale = layout.edgeDotScaleForCompactConfiguration
         
         uiModel.colors = colors
         

@@ -6,6 +6,8 @@ VPageIndicator
 
 - `direction` is added to `VPageIndicatorUIModel` that support omni-directional layout
 - `VPageIndicatorUIModel` is split into 3 subsequent UI models representing each type
+- `VPageIndicatorType.finite` is renamed to `VPageIndicatorType.standard` 
+- `VPageIndicatorType.infinite` is renamed to `VPageIndicatorType.compact`
 
 VMarquee
 

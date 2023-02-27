@@ -10,20 +10,7 @@ import SwiftUI
 // MARK: - V Page Indicator
 /// Indicator component that indicates selection in page control.
 ///
-/// UI Model and type can be passed as parameters.
-///
-/// There are three possible types:
-///
-/// 1. `Finite`.
-/// Finite number of dots would be displayed.
-///
-/// 2. `Infinite`.
-/// Infinite dots are possible, but only dots specified by `visible` will be displayed.
-/// Dots are scrollable in carousel effect, and have scaling property to indicate more content.
-/// `visible` and `center` dots must be odd.
-///
-/// 3. `Auto`.
-/// Switches from `finite` to `infinite` after a `finiteLimit`.
+/// Type can be passed as parameter.
 ///
 ///     let total: Int = 10
 ///     @State var selectedIndex: Int = 4
@@ -59,15 +46,15 @@ public struct VPageIndicator: View {
     public var body: some View {
         Group(content: {
             switch pageIndicatorType._pageIndicatorType {
-            case .finite(let uiModel):
-                VPageIndicatorFinite(
+            case .standard(let uiModel):
+                VPageIndicatorStandard(
                     uiModel: uiModel,
                     total: total,
                     selectedIndex: selectedIndex
                 )
             
-            case .infinite(let uiModel):
-                VPageIndicatorInfinite(
+            case .compact(let uiModel):
+                VPageIndicatorCompact(
                     uiModel: uiModel,
                     total: total,
                     selectedIndex: selectedIndex
@@ -88,8 +75,8 @@ public struct VPageIndicator: View {
 struct VPageIndicator_Previews: PreviewProvider {
     static var previews: some View {
         VStack(content: {
-            VPageIndicator(type: .finite(), total: 9, selectedIndex: 4)
-            VPageIndicator(type: .infinite(), total: 100, selectedIndex: 4)
+            VPageIndicator(type: .standard(), total: 9, selectedIndex: 4)
+            VPageIndicator(type: .compact(), total: 100, selectedIndex: 4)
             VPageIndicator(type: .automatic(), total: 100, selectedIndex: 4)
         })
     }

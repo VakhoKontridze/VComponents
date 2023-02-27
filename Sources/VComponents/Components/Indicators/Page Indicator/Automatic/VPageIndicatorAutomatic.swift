@@ -30,16 +30,16 @@ struct VPageIndicatorAutomatic: View {
     // MARK: Body
     var body: some View {
         switch total {
-        case ...uiModel.layout.finiteDotLimit:
-            VPageIndicatorFinite(
-                uiModel: uiModel.finiteSubModel,
+        case ...uiModel.layout.compactDotLimit:
+            VPageIndicatorStandard(
+                uiModel: uiModel.standardSubModel,
                 total: total,
                 selectedIndex: selectedIndex
             )
             
         default:
-            VPageIndicatorInfinite(
-                uiModel: uiModel.infiniteSubModel,
+            VPageIndicatorCompact(
+                uiModel: uiModel.compactSubModel,
                 total: total,
                 selectedIndex: selectedIndex
             )
