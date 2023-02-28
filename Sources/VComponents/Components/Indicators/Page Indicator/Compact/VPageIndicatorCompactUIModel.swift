@@ -37,7 +37,7 @@ public struct VPageIndicatorCompactUIModel {
         /// Dot dimension on the main axis. Defaults to `10`.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
-        public var dotDimensionPrimaryAxis: CGFloat = 10
+        public var dotDimensionPrimaryAxis: CGFloat = pageIndicatorStandardReference.layout.dotDimensionPrimaryAxis ?? 10
         
         /// Dot dimension on the main axis when switching to `standard` configuration. Defaults to `10`.
         ///
