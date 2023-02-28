@@ -33,7 +33,7 @@ import SwiftUI
 ///     }
 ///
 /// You can fully customize dot by passing a `dot` parameter. For instance, we can get a "bullet" shape.
-/// Keep in mind, that `.frame()` modifier shouldn't be applied to the dot itself.
+/// `.frame()` modifier shouldn't be applied to the dot itself.
 ///
 ///     var body: some View {
 ///         VPageIndicator(
@@ -59,7 +59,7 @@ import SwiftUI
 ///     }
 ///
 /// You can stretch the component on it's primary axis by removing dimension.
-/// Keep in mind, that standard circular shape doesn't support stretching.
+/// Standard circular shape doesn't support stretching.
 ///
 ///     var body: some View {
 ///         VPageIndicator(

@@ -216,15 +216,16 @@ struct VBottomSheet<Content>: View
     }
 
     private var closeButton: some View {
-        VRoundedButton.close(
+        VRoundedButton(
             uiModel: uiModel.closeButtonSubUIModel,
-            action: animateOut
+            action: animateOut,
+            icon: ImageBook.xMark
         )
     }
     
     private var closeButtonCompensator: some View {
         Spacer()
-            .frame(width: uiModel.layout.closeButtonDimension)
+            .frame(width: uiModel.layout.closeButtonSubUIModel.dimension)
     }
 
     // MARK: Animation

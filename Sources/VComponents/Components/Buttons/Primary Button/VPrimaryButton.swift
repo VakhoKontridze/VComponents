@@ -97,8 +97,8 @@ public struct VPrimaryButton<Label>: View where Label: View {
     }
     
     private var buttonLabel: some View {
-        HStack(spacing: uiModel.layout.labelLoaderSpacing, content: {
-            loaderCompensator
+        HStack(spacing: uiModel.layout.labelSpinnerSpacing, content: {
+            spinnerCompensator
 
             Group(content: {
                 switch label {
@@ -118,7 +118,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
             })
                 .frame(maxWidth: .infinity)
 
-            loader
+            spinner
         })
             .padding(uiModel.layout.labelMargins)
     }
@@ -141,14 +141,14 @@ public struct VPrimaryButton<Label>: View where Label: View {
             .opacity(uiModel.colors.iconOpacities.value(for: internalState))
     }
     
-    @ViewBuilder private var loaderCompensator: some View {
+    @ViewBuilder private var spinnerCompensator: some View {
         if internalState == .loading {
             Spacer()
-                .frame(width: uiModel.layout.loaderDimension)
+                .frame(width: uiModel.layout.spinnerSubUIModel.dimension)
         }
     }
     
-    @ViewBuilder private var loader: some View {
+    @ViewBuilder private var spinner: some View {
         if internalState == .loading {
             VSpinner(type: .continuous(uiModel: uiModel.spinnerSubUIModel))
         }

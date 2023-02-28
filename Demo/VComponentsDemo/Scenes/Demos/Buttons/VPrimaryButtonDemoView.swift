@@ -40,7 +40,7 @@ struct VPrimaryButtonDemoView: View {
             
             uiModel.colors.icon = defaultUIModel.colors.background
             
-            uiModel.colors.loader = uiModel.colors.icon.disabled
+            uiModel.colors.spinnerSubUIModel.spinner = uiModel.colors.icon.disabled
         }
 
         return uiModel

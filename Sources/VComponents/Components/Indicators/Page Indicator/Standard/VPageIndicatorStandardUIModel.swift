@@ -26,6 +26,16 @@ public struct VPageIndicatorStandardUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
+    
+    init(
+        layout: Layout,
+        colors: Colors,
+        animations: Animations
+    ) {
+        self.layout = layout
+        self.colors = colors
+        self.animations = animations
+    }
 
     // MARK: Layout
     /// Sub-model containing layout properties.
@@ -79,7 +89,7 @@ public struct VPageIndicatorStandardUIModel {
         public var dot: Color = .init(componentAsset: "PageIndicator.Dot")
         
         /// Selected dot color.
-        public var selectedDot: Color = progressBarReference.colors.progress
+        public var selectedDot: Color = progressBarReference.colors.progress.enabled
         
         // MARK: Initializers
         /// Initializes sub-model with default values.

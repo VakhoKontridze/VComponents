@@ -2,6 +2,18 @@
 
 ### 3.1.0(28)
 
+General
+
+- Various properties inside UI models are replaced with relevant mapped sub-models for additional customization. For instance, spinner properties inside `VPrimaryButtonUIModel` are replaced with `VPlainButtonUIModel`.
+
+VPrimaryButton
+
+- `animations` sub-model is added to `VPrimaryButtonUIModel` for customizing spinner animation
+
+VProgressBar
+
+- `track` and `progress` in `VProgressBarUIModel` are changed from `Color` to state model
+
 VPageIndicator
 
 - `direction` is added to `VPageIndicatorUIModel` that support omni-directional layout
@@ -12,7 +24,7 @@ VPageIndicator
 
 VMarquee
 
-- Marquee container is added, that auto-scrolls it's content
+- Marquee container is added that auto-scrolls it's content
 
 API
 

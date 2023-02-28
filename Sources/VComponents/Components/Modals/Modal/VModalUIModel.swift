@@ -12,7 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VModalUIModel {
     // MARK: Properties
-    fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let disclosureGroupReference: VDisclosureGroupUIModel = .init()
     
@@ -59,11 +58,10 @@ public struct VModalUIModel {
         /// Header margins. Defaults to `15` horizontal, `10` vertical.
         public var headerMargins: Margins = disclosureGroupReference.layout.headerMargins
         
-        /// Close button dimension. Defaults to `30`.
-        public var closeButtonDimension: CGFloat = closeButtonReference.layout.dimension
-        
-        /// Close button icon dimension. Defaults to `12`.
-        public var closeButtonIconDimension: CGFloat = closeButtonReference.layout.iconDimension
+        /// Model for customizing close button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = disclosureGroupReference.layout.chevronButtonSubUIModel
         
         /// Spacing between label and close button. Defaults to `10`.
         public var labelCloseButtonSpacing: CGFloat = 10
@@ -120,16 +118,16 @@ public struct VModalUIModel {
         ///
         /// Only applicable when using `init`with title.
         public var headerTitle: Color = ColorBook.primary
-        
-        /// Close button background colors.
-        public var closeButtonBackground: StateColors = closeButtonReference.colors.background
-        
-        /// Close button icon colors.
-        public var closeButtonIcon: StateColors = .init(
-            enabled: .init(componentAsset: "Modal.CloseButton.Icon.enabled"),
-            pressed: .init(componentAsset: "Modal.CloseButton.Icon.enabled"),
-            disabled: closeButtonReference.colors.icon.disabled
-        )
+
+        /// Model for customizing close button colors.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = { 
+            var uiModel: VRoundedButtonUIModel.Colors = .init()
+            uiModel.background = disclosureGroupReference.colors.chevronButtonSubUIModel.background
+            uiModel.icon = .init(.init(componentAsset: "Modal.CloseButton.Icon.enabled"))
+            return uiModel
+        }()
         
         /// Divider color.
         public var divider: Color = disclosureGroupReference.colors.divider
@@ -140,10 +138,6 @@ public struct VModalUIModel {
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
-        
-        // MARK: State Colors
-        /// Sub-model containing colors for component states.
-        public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -241,16 +235,12 @@ public struct VModalUIModel {
         return uiModel
     }
     
-    var closeButtonSubUIModel: VCloseButtonUIModel {
-        var uiModel: VCloseButtonUIModel = .init()
+    var closeButtonSubUIModel: VRoundedButtonUIModel {
+        var uiModel: VRoundedButtonUIModel = .init()
         
-        uiModel.layout.dimension = layout.closeButtonDimension
-        uiModel.layout.iconDimension = layout.closeButtonIconDimension
-        uiModel.layout.hitBox.horizontal = 0
-        uiModel.layout.hitBox.vertical = 0
+        uiModel.layout = layout.closeButtonSubUIModel
         
-        uiModel.colors.background = colors.closeButtonBackground
-        uiModel.colors.icon = colors.closeButtonIcon
+        uiModel.colors = colors.closeButtonSubUIModel
         
         return uiModel
     }

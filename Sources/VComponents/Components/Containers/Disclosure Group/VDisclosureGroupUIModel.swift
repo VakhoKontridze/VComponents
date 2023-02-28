@@ -13,7 +13,6 @@ import VCore
 public struct VDisclosureGroupUIModel {
     // MARK: Properties
     fileprivate static let sheetReference: VSheetUIModel = .init()
-    fileprivate static let chevronButtonReference: VChevronButtonUIModel = .init()
     fileprivate static let listRowReference: VListRowUIModel = .init()
     
     /// Sub-model containing layout properties.
@@ -47,12 +46,17 @@ public struct VDisclosureGroupUIModel {
             horizontal: sheetReference.layout.contentMargin,
             vertical: 10
         )
-        
-        /// Chevron button dimension. Defaults to `30`.
-        public var chevronButtonDimension: CGFloat = chevronButtonReference.layout.dimension
-        
-        /// Chevron button icon dimension. Defaults to `12`.
-        public var chevronButtonIconDimension: CGFloat = chevronButtonReference.layout.iconDimension
+
+        /// Model for customizing chevron button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
+            var uiModel: VRoundedButtonUIModel.Layout = .init()
+            uiModel.dimension = 30
+            uiModel.iconSize = .init(dimension: 12)
+            uiModel.hitBox = .zero
+            return uiModel
+        }()
         
         /// Divider height. Defaults to `2` scaled to screen.
         ///
@@ -107,11 +111,23 @@ public struct VDisclosureGroupUIModel {
         /// Divider color.
         public var divider: Color = listRowReference.colors.separator
         
-        /// Chevron button background colors.
-        public var chevronButtonBackground: ButtonStateColors = chevronButtonReference.colors.background
-        
-        /// Chevron button icon colors.
-        public var chevronButtonIcon: ButtonStateColors = chevronButtonReference.colors.icon
+        /// Model for customizing chevron button colors.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var chevronButtonSubUIModel: VRoundedButtonUIModel.Colors = {
+            var uiModel: VRoundedButtonUIModel.Colors = .init()
+            uiModel.background = .init(
+                enabled: .init(componentAsset: "DisclosureGroup.ChevronButton.Background.enabled"),
+                pressed: .init(componentAsset: "DisclosureGroup.ChevronButton.Background.pressed"),
+                disabled: .init(componentAsset: "DisclosureGroup.ChevronButton.Background.disabled")
+            )
+            uiModel.icon = .init(
+                enabled: ColorBook.primary,
+                pressed: ColorBook.primary, // Looks better without `primaryPressedDisabled`
+                disabled: ColorBook.primaryBlackPressedDisabled
+            )
+            return uiModel
+        }()
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -124,10 +140,6 @@ public struct VDisclosureGroupUIModel {
         // MARK: State Opacities
         /// Sub-model containing opacities for component states.
         public typealias StateOpacities = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
-        
-        // MARK: Button State Colors
-        /// Sub-model containing colors for component states.
-        public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -182,6 +194,7 @@ public struct VDisclosureGroupUIModel {
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         
+        uiModel.layout.roundedCorners = .allCorners
         uiModel.layout.cornerRadius = uiModel.layout.cornerRadius
         uiModel.layout.contentMargin = 0
         
@@ -190,16 +203,12 @@ public struct VDisclosureGroupUIModel {
         return uiModel
     }
     
-    var chevronButtonSubUIModel: VChevronButtonUIModel {
-        var uiModel: VChevronButtonUIModel = .init()
+    var chevronButtonSubUIModel: VRoundedButtonUIModel {
+        var uiModel: VRoundedButtonUIModel = .init()
+
+        uiModel.layout = layout.chevronButtonSubUIModel
         
-        uiModel.layout.dimension = layout.chevronButtonDimension
-        uiModel.layout.iconDimension = layout.chevronButtonIconDimension
-        uiModel.layout.hitBox.horizontal = 0
-        uiModel.layout.hitBox.vertical = 0
-        
-        uiModel.colors.background = colors.chevronButtonBackground
-        uiModel.colors.icon = colors.chevronButtonIcon
+        uiModel.colors = colors.chevronButtonSubUIModel
         
         return uiModel
     }

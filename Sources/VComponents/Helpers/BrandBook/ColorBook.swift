@@ -125,30 +125,6 @@ extension Color {
 
 /*
 
- CheckBox.Border.disabled
- 230.230.230
- 40.40.40
- 
- CheckBox.Border.off
- 200.200.200
- 80.80.80
- 
- CheckBox.Border.pressedOff
- 180.180.180
- 60.60.60
- 
- ChevronButton.Background.disabled
- 250.250.250
- 80.80.80
- 
- ChevronButton.Background.enabled
- 235.235.235
- 55.55.55
- 
- ChevronButton.Background.pressed
- 210.210.210
- 45.45.45
-
  Alert.DestructiveButton.Background.disabled
  255.140.140
  
@@ -163,6 +139,30 @@ extension Color {
  BottomSheet.Grabber
  230.230.230
  100.100.100
+ 
+ CheckBox.Border.disabled
+ 230.230.230
+ 40.40.40
+ 
+ CheckBox.Border.off
+ 200.200.200
+ 80.80.80
+ 
+ CheckBox.Border.pressedOff
+ 180.180.180
+ 60.60.60
+ 
+ DisclosureGroup.ChevronButton.Background.disabled
+ 250.250.250
+ 80.80.80
+ 
+ DisclosureGroup.ChevronButton.Background.enabled
+ 235.235.235
+ 55.55.55
+ 
+ DisclosureGroup.ChevronButton.Background.pressed
+ 210.210.210
+ 45.45.45
  
  List.Separator
  60.60.60 @ 30

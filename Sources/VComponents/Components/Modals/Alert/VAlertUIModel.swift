@@ -235,12 +235,12 @@ public struct VAlertUIModel {
         return uiModel
     }
     
-    var primaryButtonSubUIModel: VPrimaryButtonUIModel {
+    var primaryButtonSubUIModel: VPrimaryButtonUIModel { 
         var uiModel: VPrimaryButtonUIModel = .init()
-        
+
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
-        
+
         uiModel.colors.background = .alertButton(colors.primaryButtonBackground)
         uiModel.colors.title = .alertButton(colors.primaryButtonTitle)
 

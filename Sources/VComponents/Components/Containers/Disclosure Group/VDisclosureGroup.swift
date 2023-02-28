@@ -152,12 +152,13 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             
             Spacer()
             
-            VRoundedButton.chevron(
+            VRoundedButton(
                 uiModel: uiModel.chevronButtonSubUIModel,
-                direction: internalState.chevronButtonDirection,
-                action: expandCollapse
+                action: expandCollapse,
+                icon: ImageBook.chevronUp
             )
                 .disabled(!internalState.isEnabled)
+                .rotationEffect(.init(degrees: internalState.chevronButtonDirection.angle))
         })
             .padding(uiModel.layout.headerMargins)
     }
@@ -196,7 +197,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 
 // MARK: - Helpers
 extension VDisclosureGroupInternalState {
-    fileprivate var chevronButtonDirection: VChevronButtonDirection {
+    fileprivate var chevronButtonDirection: ChevronButtonDirection {
         switch self {
         case .collapsed: return .right
         case .expanded: return .down

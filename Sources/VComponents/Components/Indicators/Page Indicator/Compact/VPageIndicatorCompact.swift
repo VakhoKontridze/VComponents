@@ -48,7 +48,7 @@ struct VPageIndicatorCompact<Content>: View where Content: View {
         switch total {
         case ...visible:
             VPageIndicatorStandard(
-                uiModel: uiModel.standardSubModel,
+                uiModel: uiModel.standardPageIndicatorSubUIModel,
                 total: total,
                 selectedIndex: selectedIndex,
                 dotContent: dotContent

@@ -90,44 +90,36 @@ public struct VPageIndicatorAutomaticUIModel {
     public typealias Animations = VPageIndicatorStandardUIModel.Animations
     
     // MARK: Sub-Models
-    var standardSubModel: VPageIndicatorStandardUIModel {
-        var uiModel: VPageIndicatorStandardUIModel = .init()
-        
-        uiModel.layout = .init(
-            direction: layout.direction,
-            dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
-            dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
-            spacing: layout.spacing,
-            unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration
+    var standardPageIndicatorSubUIModel: VPageIndicatorStandardUIModel {
+        .init(
+            layout: .init(
+                direction: layout.direction,
+                dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
+                dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
+                spacing: layout.spacing,
+                unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration
+            ),
+            colors: colors,
+            animations: animations
         )
-        
-        uiModel.colors = colors
-        
-        uiModel.animations = animations
-        
-        return uiModel
     }
     
-    var compactSubModel: VPageIndicatorCompactUIModel {
-        var uiModel: VPageIndicatorCompactUIModel = .init()
-
-        uiModel.layout = .init(
-            direction: layout.direction,
-            dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForCompactConfiguration,
-            dotDimensionPrimaryAxisForStandardConfiguration: layout.dotDimensionPrimaryAxisForStandardConfiguration,
-            dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
-            spacing: layout.spacing,
-            visibleDots: layout.visibleDotsForCompactConfiguration,
-            centerDots: layout.centerDotsForCompactConfiguration,
-            edgeDotScale: layout.edgeDotScaleForCompactConfiguration,
-            unselectedDotScaleForStandardConfiguration: layout.unselectedDotScaleForStandardConfiguration
+    var compactPageIndicatorSubUIModel: VPageIndicatorCompactUIModel {
+        .init(
+            layout: .init(
+                direction: layout.direction,
+                dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForCompactConfiguration,
+                dotDimensionPrimaryAxisForStandardConfiguration: layout.dotDimensionPrimaryAxisForStandardConfiguration,
+                dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
+                spacing: layout.spacing,
+                visibleDots: layout.visibleDotsForCompactConfiguration,
+                centerDots: layout.centerDotsForCompactConfiguration,
+                edgeDotScale: layout.edgeDotScaleForCompactConfiguration,
+                unselectedDotScaleForStandardConfiguration: layout.unselectedDotScaleForStandardConfiguration
+            ),
+            colors: colors,
+            animations: animations
         )
-        
-        uiModel.colors = colors
-        
-        uiModel.animations = animations
-        
-        return uiModel
     }
 }
 

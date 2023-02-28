@@ -1,5 +1,5 @@
 //
-//  VChevronButtonDirection.swift
+//  ChevronButtonDirection.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/23/20.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-// MARK: - V Chevron Button Direction
-enum VChevronButtonDirection {
+// MARK: - Chevron Button Direction
+enum ChevronButtonDirection {
     // MARK: Cases
     case up
     case right

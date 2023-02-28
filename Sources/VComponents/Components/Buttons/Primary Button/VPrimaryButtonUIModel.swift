@@ -21,6 +21,9 @@ public struct VPrimaryButtonUIModel {
     /// Sub-model containing font properties.
     public var fonts: Fonts = .init()
     
+    /// Sub-model containing animation properties.
+    public var animations: Animations = .init()
+    
     /// Initializes UI model with default values.
     public init() {}
 
@@ -56,13 +59,15 @@ public struct VPrimaryButtonUIModel {
         /// Applicable only if icon `init`with icon and title is used.
         public var iconTitleSpacing: CGFloat = 10
         
-        /// Loader dimension. Defaults to `15`.
-        public var loaderDimension: CGFloat = 15
+        /// Model for customizing spinner layout.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var spinnerSubUIModel: VSpinnerContinuousUIModel.Layout = .init()
         
         /// Spacing between label and spinner. Defaults to `20`.
         ///
         /// Only visible when state is set to `loading`.
-        public var labelLoaderSpacing: CGFloat = 20
+        public var labelSpinnerSpacing: CGFloat = 20
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -115,8 +120,14 @@ public struct VPrimaryButtonUIModel {
             disabled: 0.3
         )
         
-        /// Loader color.
-        public var loader: Color = ColorBook.primaryWhite
+        /// Model for customizing spinner colors.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var spinnerSubUIModel: VSpinnerContinuousUIModel.Colors = {
+            var uiModel: VSpinnerContinuousUIModel.Colors = .init()
+            uiModel.spinner = ColorBook.primaryWhite
+            return uiModel
+        }()
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -145,11 +156,30 @@ public struct VPrimaryButtonUIModel {
         public init() {}
     }
     
+    // MARK: Animations
+    /// Sub-model containing animation properties.
+    public struct Animations {
+        // MARK: Properties
+        /// Model for customizing spinner animations.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var spinnerSubUIModel: VSpinnerContinuousUIModel.Animations = .init()
+        
+        // MARK: Initializers
+        /// Initializes sub-model with default values.
+        public init() {}
+    }
+    
     // MARK: Sub-Models
     var spinnerSubUIModel: VSpinnerContinuousUIModel {
         var uiModel: VSpinnerContinuousUIModel = .init()
-        uiModel.layout.dimension = layout.loaderDimension
-        uiModel.colors.spinner = colors.loader
+        
+        uiModel.layout = layout.spinnerSubUIModel
+        
+        uiModel.colors = colors.spinnerSubUIModel
+        
+        uiModel.animations = animations.spinnerSubUIModel
+        
         return uiModel
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Progress Bar UI Model
 /// Model that describes UI.
@@ -49,14 +50,18 @@ public struct VProgressBarUIModel {
     public struct Colors {
         // MARK: Properties
         /// Track color.
-        public var track: Color = sliderReference.colors.track.enabled
+        public var track: StateColors = sliderReference.colors.track
         
         /// Progress color.
-        public var progress: Color = sliderReference.colors.progress.enabled
+        public var progress: StateColors = sliderReference.colors.progress
 
         // MARK: Initializers
         /// Initializes sub-model with default values.
         public init() {}
+        
+        // MARK: State Colors
+        /// Sub-model containing colors for component states.
+        public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
     }
 
     // MARK: Animations
@@ -80,8 +85,8 @@ public struct VProgressBarUIModel {
         uiModel.layout.roundsProgressViewRightEdge = layout.roundsProgressViewRightEdge
         uiModel.layout.thumbDimension = 0
         
-        uiModel.colors.track.enabled = colors.track
-        uiModel.colors.progress.enabled = colors.progress
+        uiModel.colors.track = colors.track
+        uiModel.colors.progress = colors.progress
         
         uiModel.animations.progress = animations.progress
         

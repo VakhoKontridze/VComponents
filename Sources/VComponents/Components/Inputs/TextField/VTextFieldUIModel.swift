@@ -13,7 +13,6 @@ import VCore
 public struct VTextFieldUIModel {
     // MARK: Properties
     fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
-    fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
     fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
     /// Sub-model containing layout properties.
@@ -59,17 +58,26 @@ public struct VTextFieldUIModel {
         /// Search icon dimension. Defaults to `15`.
         public var searchIconDimension: CGFloat = 15
         
-        /// Clear button dimension. Defaults to `22`.
-        public var clearButtonDimension: CGFloat = 22
+        /// Model for customizing clear button layout. `dimension` defaults to `22`, `iconSize` defaults to `8` by `8`, and `hitBox` defaults to `zero`.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
+            var uiModel: VRoundedButtonUIModel.Layout = .init()
+            uiModel.dimension = 22
+            uiModel.iconSize = .init(dimension: 8)
+            uiModel.hitBox = .zero
+            return uiModel
+        }()
         
-        /// Clear button  icon dimension. Defaults to `8`.
-        public var clearButtonIconDimension: CGFloat = 8
-        
-        /// Visibility button dimension. Defaults to `22`.
-        public var visibilityButtonDimension: CGFloat = 22
-        
-        /// Visibility button  icon dimension. Defaults to `8`.
-        public var visibilityButtonIconDimension: CGFloat = 20
+        /// Model for customizing visibility button layout. `iconSize` defaults to `20` by `20` and `hitBox` defaults to `zero`.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var visibilityButtonSubUIModel: VPlainButtonUIModel.Layout = {
+            var uiModel: VPlainButtonUIModel.Layout = .init()
+            uiModel.iconSize = .init(dimension: 20)
+            uiModel.hitBox = .zero
+            return uiModel
+        }()
         
         /// Header title line type. Defaults to `singleline`.
         public var headerTitleLineType: TextLineType = .singleLine
@@ -132,30 +140,33 @@ public struct VTextFieldUIModel {
             focused: .init(componentAsset: "TextField.PlainButton.enabled"),
             disabled: ColorBook.primaryPressedDisabled
         )
-
-        /// Visibility button icon colors.
-        public var visibilityButtonIcon: ButtonStateColors = .init(
-            enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
-            pressed: ColorBook.primaryPressedDisabled,
-            focused: .init(componentAsset: "TextField.PlainButton.enabled"),
-            disabled: ColorBook.primaryPressedDisabled
-        )
-
-        /// Clear button background colors.
-        public var clearButtonBackground: ButtonStateColors = .init(
-            enabled: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
-            pressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
-            focused: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
-            disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
-        )
-
-        /// Clear button icon colors.
-        public var clearButtonIcon: ButtonStateColors = .init(
-            enabled: .init(componentAsset: "TextField.ClearButton.Icon"),
-            pressed: .init(componentAsset: "TextField.ClearButton.Icon"),
-            focused: .init(componentAsset: "TextField.ClearButton.Icon"),
-            disabled: .init(componentAsset: "TextField.ClearButton.Icon")
-        )
+        
+        /// Model for customizing clear button colors.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var clearButtonSubUIModel: VRoundedButtonUIModel.Colors = {
+            var uiModel: VRoundedButtonUIModel.Colors = .init()
+            uiModel.background = .init(
+                enabled: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
+                pressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
+                disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
+            )
+            uiModel.icon = .init(.init(componentAsset: "TextField.ClearButton.Icon"))
+            return uiModel
+        }()
+        
+        /// Model for customizing visibility button colors.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var visibilityButtonSubUIModel: VPlainButtonUIModel.Colors = {
+            var uiModel: VPlainButtonUIModel.Colors = .init()
+            uiModel.icon = .init(
+                enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
+                pressed: ColorBook.primaryPressedDisabled,
+                disabled: ColorBook.primaryPressedDisabled
+            )
+            return uiModel
+        }()
         
         // MARK: Initializers
         /// Initializes sub-model with default values.
@@ -164,10 +175,6 @@ public struct VTextFieldUIModel {
         // MARK: State Colors
         /// Sub-model containing colors for component states.
         public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
-        
-        // MARK: Button State Colors
-        /// Sub-model containing colors for component states.
-        public typealias ButtonStateColors = GenericStateModel_EnabledPressedFocusedDisabled<Color>
     }
 
     // MARK: Fonts
@@ -231,32 +238,22 @@ public struct VTextFieldUIModel {
     }
     
     // MARK: Sub-Models
-    var clearButtonSubUIModel: VCloseButtonUIModel {
-        var uiModel: VCloseButtonUIModel = .init()
+    var clearButtonSubUIModel: VRoundedButtonUIModel {
+        var uiModel: VRoundedButtonUIModel = .init()
         
-        uiModel.layout.dimension = layout.clearButtonDimension
-        uiModel.layout.iconDimension = layout.clearButtonIconDimension
-        uiModel.layout.hitBox.horizontal = 0
-        uiModel.layout.hitBox.vertical = 0
+        uiModel.layout = layout.clearButtonSubUIModel
         
-        uiModel.colors.background = .init(colors.clearButtonBackground)
-        uiModel.colors.icon = .init(colors.clearButtonIcon)
+        uiModel.colors = colors.clearButtonSubUIModel
         
         return uiModel
     }
     
-    var visibilityButtonSubUIModel: VRoundedButtonUIModel {
-        var uiModel: VRoundedButtonUIModel = .init()
+    var visibilityButtonSubUIModel: VPlainButtonUIModel {
+        var uiModel: VPlainButtonUIModel = .init()
         
-        uiModel.layout.dimension = layout.visibilityButtonDimension
-        uiModel.layout.cornerRadius = layout.visibilityButtonDimension / 2
-        uiModel.layout.labelMargins.horizontal = 0
-        uiModel.layout.labelMargins.vertical = 0
-        uiModel.layout.hitBox.horizontal = 0
-        uiModel.layout.hitBox.vertical = 0
+        uiModel.layout = layout.visibilityButtonSubUIModel
         
-        uiModel.colors.background = .clearColors
-        uiModel.colors.icon = .init(colors.visibilityButtonIcon)
+        uiModel.colors = colors.visibilityButtonSubUIModel
         
         return uiModel
     }

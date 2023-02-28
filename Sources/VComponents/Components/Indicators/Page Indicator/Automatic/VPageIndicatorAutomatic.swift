@@ -36,7 +36,7 @@ struct VPageIndicatorAutomatic<Content>: View where Content: View {
         switch total {
         case ...uiModel.layout.standardDotLimit:
             VPageIndicatorStandard(
-                uiModel: uiModel.standardSubModel,
+                uiModel: uiModel.standardPageIndicatorSubUIModel,
                 total: total,
                 selectedIndex: selectedIndex,
                 dotContent: dotContent
@@ -44,7 +44,7 @@ struct VPageIndicatorAutomatic<Content>: View where Content: View {
             
         default:
             VPageIndicatorCompact(
-                uiModel: uiModel.compactSubModel,
+                uiModel: uiModel.compactPageIndicatorSubUIModel,
                 total: total,
                 selectedIndex: selectedIndex,
                 dotContent: dotContent

@@ -14,7 +14,6 @@ public struct VBottomSheetUIModel {
     // MARK: Properties
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let modalReference: VModalUIModel = .init()
-    fileprivate static let closeButtonReference: VCloseButtonUIModel = .init()
     
     /// Sub-model containing layout properties.
     public var layout: Layout = .init()
@@ -76,11 +75,10 @@ public struct VBottomSheetUIModel {
         /// Header margins. Defaults to `15` horizontal, `10` vertical.
         public var headerMargins: Margins = modalReference.layout.headerMargins
         
-        /// Close button dimension. Defaults to `30`.
-        public var closeButtonDimension: CGFloat = modalReference.layout.closeButtonDimension
-        
-        /// Close button icon dimension. Defaults to `12`.
-        public var closeButtonIconDimension: CGFloat = modalReference.layout.closeButtonIconDimension
+        /// Model for customizing close button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = modalReference.layout.closeButtonSubUIModel
         
         /// Spacing between label and close button. Defaults to `10`.
         public var labelCloseButtonSpacing: CGFloat = modalReference.layout.labelCloseButtonSpacing
@@ -262,11 +260,10 @@ public struct VBottomSheetUIModel {
         /// Only applicable when using `init`with title.
         public var headerTitle: Color = modalReference.colors.headerTitle
         
-        /// Close button background colors.
-        public var closeButtonBackground: StateColors = modalReference.colors.closeButtonBackground
-        
-        /// Close button icon colors.
-        public var closeButtonIcon: StateColors = modalReference.colors.closeButtonIcon
+        /// Model for customizing close button colors.
+        ///
+        /// Not all properties will have an effect, and setting them may be futile.
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = modalReference.colors.closeButtonSubUIModel
         
         /// Divider color.
         public var divider: Color = modalReference.colors.divider
@@ -382,16 +379,12 @@ public struct VBottomSheetUIModel {
         return uiModel
     }
     
-    var closeButtonSubUIModel: VCloseButtonUIModel {
-        var uiModel: VCloseButtonUIModel = .init()
+    var closeButtonSubUIModel: VRoundedButtonUIModel {
+        var uiModel: VRoundedButtonUIModel = .init()
         
-        uiModel.layout.dimension = layout.closeButtonDimension
-        uiModel.layout.iconDimension = layout.closeButtonIconDimension
-        uiModel.layout.hitBox.horizontal = 0
-        uiModel.layout.hitBox.vertical = 0
+        uiModel.layout = layout.closeButtonSubUIModel
         
-        uiModel.colors.background = colors.closeButtonBackground
-        uiModel.colors.icon = colors.closeButtonIcon
+        uiModel.colors = colors.closeButtonSubUIModel
         
         return uiModel
     }

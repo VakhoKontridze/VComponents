@@ -27,6 +27,16 @@ public struct VPageIndicatorCompactUIModel {
     /// Initializes UI model with default values.
     public init() {}
     
+    init(
+        layout: Layout,
+        colors: Colors,
+        animations: Animations
+    ) {
+        self.layout = layout
+        self.colors = colors
+        self.animations = animations
+    }
+    
     // MARK: Layout
     /// Sub-model containing layout properties.
     public struct Layout {
@@ -112,22 +122,18 @@ public struct VPageIndicatorCompactUIModel {
     public typealias Animations = VPageIndicatorStandardUIModel.Animations
     
     // MARK: Sub-Models
-    var standardSubModel: VPageIndicatorStandardUIModel {
-        var uiModel: VPageIndicatorStandardUIModel = .init()
-        
-        uiModel.layout = .init(
-            direction: layout.direction,
-            dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
-            dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
-            spacing: layout.spacing,
-            unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration
+    var standardPageIndicatorSubUIModel: VPageIndicatorStandardUIModel {
+        .init(
+            layout: .init(
+                direction: layout.direction,
+                dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
+                dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
+                spacing: layout.spacing,
+                unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration
+            ),
+            colors: colors,
+            animations: animations
         )
-        
-        uiModel.colors = colors
-        
-        uiModel.animations = animations
-        
-        return uiModel
     }
 }
 

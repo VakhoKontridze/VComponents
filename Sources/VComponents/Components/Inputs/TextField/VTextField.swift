@@ -255,9 +255,10 @@ public struct VTextField: View {
 
     @ViewBuilder private var clearButton: some View {
         if !textFieldType.isSecure && clearButtonIsVisible && uiModel.misc.hasClearButton {
-            VRoundedButton.close(
+            VRoundedButton(
                 uiModel: uiModel.clearButtonSubUIModel,
-                action: didTapClearButton
+                action: didTapClearButton,
+                icon: ImageBook.xMark
             )
                 .disabled(!internalState.isEnabled)
         }
@@ -265,7 +266,7 @@ public struct VTextField: View {
 
     @ViewBuilder private var visibilityButton: some View {
         if textFieldType.isSecure {
-            VRoundedButton(
+            VPlainButton(
                 uiModel: uiModel.visibilityButtonSubUIModel,
                 action: { secureFieldIsVisible.toggle() },
                 icon: visibilityIcon
