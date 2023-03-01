@@ -33,7 +33,7 @@ import VCore
 ///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///             rowTitles: rowTitles
 ///         )
-///             .padding(20)
+///             .padding()
 ///     }
 ///
 public struct VWheelPicker<Data, Content>: View

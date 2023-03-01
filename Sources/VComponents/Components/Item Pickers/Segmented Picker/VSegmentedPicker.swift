@@ -386,7 +386,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                 headerTitle: "Lorem ipsum dolor sit amet",
                 footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
             )
-                .padding(20)
+                .padding()
         }
     }
 }
