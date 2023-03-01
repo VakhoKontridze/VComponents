@@ -78,7 +78,7 @@ Versions with different majors are not compatible.
 
 #### UI Models
 
-Components are not meant to be customized like you would a native SwiftUI component.
+Components are not meant to be customized like you would a native `SwiftUI` component.
 
 Instead, UI model can be passed as parameter to initializers. This parameter has default value, and is not required every time you create a view.
 
