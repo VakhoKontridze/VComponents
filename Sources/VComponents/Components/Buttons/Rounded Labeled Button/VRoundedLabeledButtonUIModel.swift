@@ -15,13 +15,13 @@ public struct VRoundedLabeledButtonUIModel {
     fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
     // MARK: Initializers
@@ -29,7 +29,7 @@ public struct VRoundedLabeledButtonUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Rectangle dimension. Defaults to `56`.
@@ -68,20 +68,20 @@ public struct VRoundedLabeledButtonUIModel {
         public var titleLabelMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Label Margins
-        /// Sub-model containing `horizontal` and `vertical` margins.
+        /// Model that contains `horizontal` and `vertical` margins.
         public typealias LabelMargins = EdgeInsets_HorizontalVertical
         
         // MARK: Hit Box
-        /// Sub-model containing `horizontal` and `vertical` hit boxes.
+        /// Model that contains `horizontal` and `vertical` hit boxes.
         public typealias HitBox = EdgeInsets_HorizontalVertical
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background colors.
@@ -137,20 +137,20 @@ public struct VRoundedLabeledButtonUIModel {
         public var customLabelOpacities: StateOpacities = roundedButtonReference.colors.customLabelOpacities
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
+        /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Title font. Defaults to system font of size `15.
@@ -159,7 +159,7 @@ public struct VRoundedLabeledButtonUIModel {
         public var titleLabel: Font = .system(size: 15)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

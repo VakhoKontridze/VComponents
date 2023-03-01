@@ -15,13 +15,13 @@ public struct VSliderUIModel {
     fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     fileprivate static let toggleReference: VToggleUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -29,7 +29,7 @@ public struct VSliderUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Slider height. Defaults to `10`.
@@ -64,12 +64,12 @@ public struct VSliderUIModel {
         public var thumbShadowRadius: CGFloat = 2
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Slider track colors.
@@ -103,23 +103,23 @@ public struct VSliderUIModel {
         )
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Progress animation. Defaults to `nil`.
         public var progress: Animation? = nil
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

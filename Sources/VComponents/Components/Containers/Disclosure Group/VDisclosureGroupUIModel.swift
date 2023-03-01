@@ -15,19 +15,19 @@ public struct VDisclosureGroupUIModel {
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let listRowReference: VListRowUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
@@ -35,7 +35,7 @@ public struct VDisclosureGroupUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Disclosure group corner radius. Defaults to `15`.
@@ -73,16 +73,16 @@ public struct VDisclosureGroupUIModel {
         public var contentMargins: Margins = .zero
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
+        /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background color.
@@ -130,20 +130,20 @@ public struct VDisclosureGroupUIModel {
         }()
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_CollapsedExpandedDisabled<Color>
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
+        /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Header title font.
@@ -152,35 +152,35 @@ public struct VDisclosureGroupUIModel {
         public var headerTitle: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Expand and collapse animation. Defaults to `default`.
         public var expandCollapse: Animation? = .default
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if disclosure group expands and collapses from header tap. Defaults to `true`.
         public var expandsAndCollapsesOnHeaderTap: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
         var uiModel: PlainDisclosureGroupUIModel = .init()
         

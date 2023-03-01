@@ -13,7 +13,7 @@ public struct VSpinnerDashedUIModel {
     // MARK: Properties
     fileprivate static let spinnerContinuousReference: VSpinnerContinuousUIModel = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
     // MARK: Initializers
@@ -21,14 +21,14 @@ public struct VSpinnerDashedUIModel {
     public init() {}
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Spinner color.
         public var spinner: Color = spinnerContinuousReference.colors.spinner
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

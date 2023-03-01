@@ -15,26 +15,26 @@ public struct VTextFieldUIModel {
     fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
     fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Textfield height. Defaults to `50`.
@@ -92,12 +92,12 @@ public struct VTextFieldUIModel {
         public var headerFooterMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background colors.
@@ -169,16 +169,16 @@ public struct VTextFieldUIModel {
         }()
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Text font. Defaults to system font of size `16`.
@@ -194,24 +194,24 @@ public struct VTextFieldUIModel {
         public var footer: Font = segmentedPickerReference.fonts.footer
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Clear button appear and disappear animation. Defaults to `easeInOut` with duration `0.2`.
         public var clearButton: Animation? = .easeInOut(duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
         /// Keyboard type. Defaults to `default`.
@@ -233,11 +233,11 @@ public struct VTextFieldUIModel {
         public var hasClearButton: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
     
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var clearButtonSubUIModel: VRoundedButtonUIModel {
         var uiModel: VRoundedButtonUIModel = .init()
         

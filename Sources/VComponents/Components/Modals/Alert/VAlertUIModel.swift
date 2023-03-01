@@ -16,16 +16,16 @@ public struct VAlertUIModel {
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let modalReference: VModalUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
 
     // MARK: Initializers
@@ -33,7 +33,7 @@ public struct VAlertUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Alert sizes.
@@ -108,7 +108,7 @@ public struct VAlertUIModel {
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
 
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Sizes
@@ -132,12 +132,12 @@ public struct VAlertUIModel {
         }
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
+        /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background color.
@@ -196,15 +196,15 @@ public struct VAlertUIModel {
         )
 
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
-        /// Sub-model containing colors for button states.
+        /// Model that contains colors for button states.
         public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Title font. Defaults to system font of size `16` and weight `bold`.
@@ -214,15 +214,15 @@ public struct VAlertUIModel {
         public var message: Font = .system(size: 14)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public typealias Animations = VModalUIModel.Animations
     
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         

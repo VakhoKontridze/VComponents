@@ -14,19 +14,19 @@ public struct VToggleUIModel {
     // MARK: Properties
     fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
@@ -34,7 +34,7 @@ public struct VToggleUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Toggle size. Defaults to `51` width and `32` height, similarly to native toggle.
@@ -62,12 +62,12 @@ public struct VToggleUIModel {
         }
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Fill colors.
@@ -111,20 +111,20 @@ public struct VToggleUIModel {
         )
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_OffOnPressedDisabled<Color>
 
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
+        /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_OffOnPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Title font. Defaults to system font of size `15`.
@@ -133,31 +133,31 @@ public struct VToggleUIModel {
         public var title: Font = .system(size: 15)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = .easeIn(duration: 0.1)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
         /// Indicates if label is clickable. Defaults to `true`.
         public var labelIsClickable: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

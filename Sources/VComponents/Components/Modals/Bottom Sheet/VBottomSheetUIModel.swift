@@ -15,19 +15,19 @@ public struct VBottomSheetUIModel {
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let modalReference: VModalUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
@@ -35,7 +35,7 @@ public struct VBottomSheetUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Bottom sheet sizes.
@@ -124,7 +124,7 @@ public struct VBottomSheetUIModel {
         var pullDownDismissDistance: CGFloat { pullDownDismissDistanceMinHeightRatio * sizes._current.size.heights.min }
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Sizes
@@ -225,16 +225,16 @@ public struct VBottomSheetUIModel {
         }
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
+        /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
         
         // MARK: Vertical Margins
-        /// Sub-model containing `top` and `bottom` margins.
+        /// Model that contains `top` and `bottom` margins.
         public typealias VerticalMargins = EdgeInsets_TopBottom
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background color.
@@ -269,16 +269,16 @@ public struct VBottomSheetUIModel {
         public var divider: Color = modalReference.colors.divider
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Header font.
@@ -287,12 +287,12 @@ public struct VBottomSheetUIModel {
         public var header: Font = modalReference.fonts.header
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Defaults to `easeInOut` with duration `0.3`.
@@ -308,12 +308,12 @@ public struct VBottomSheetUIModel {
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
@@ -327,7 +327,7 @@ public struct VBottomSheetUIModel {
         public var contentIsDraggable: Bool = false
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Dismiss Type
@@ -366,7 +366,7 @@ public struct VBottomSheetUIModel {
         }
     }
     
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         

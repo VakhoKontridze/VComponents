@@ -11,13 +11,13 @@ import VCore
 // MARK: - V Marquee Wrapping UI Model
 /// Model that describes UI.
 public struct VMarqueeWrappingUIModel {
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -25,7 +25,7 @@ public struct VMarqueeWrappingUIModel {
     public init() {}
     
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Scroll direction. Defaults to `leftToRight`.
@@ -49,12 +49,12 @@ public struct VMarqueeWrappingUIModel {
         public var alignmentStationary: HorizontalAlignment = .leading
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
     
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Width of fading gradient. Defaults to  `0`.
@@ -74,12 +74,12 @@ public struct VMarqueeWrappingUIModel {
         public var gradientColorContentEdge: Color = ColorBook.layer.opacity(0.01)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
     
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Animation curve. Defaults to `linear`.
@@ -92,7 +92,7 @@ public struct VMarqueeWrappingUIModel {
         public var delay: Double = 1
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Duration Type

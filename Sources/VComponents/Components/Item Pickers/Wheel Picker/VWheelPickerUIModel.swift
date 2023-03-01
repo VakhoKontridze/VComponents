@@ -14,13 +14,13 @@ public struct VWheelPickerUIModel {
     // MARK: Properties
     fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
     // MARK: Initializers
@@ -28,7 +28,7 @@ public struct VWheelPickerUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Picker corner radius. Defaults to `15`.
@@ -50,12 +50,12 @@ public struct VWheelPickerUIModel {
         public var titleMinimumScaleFactor: CGFloat = segmentedPickerReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background colors.
@@ -80,20 +80,20 @@ public struct VWheelPickerUIModel {
         public var footer: StateColors = segmentedPickerReference.colors.footer
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
+        /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_EnabledDisabled<CGFloat>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Header font. Defaults to system font of size `14`.
@@ -108,7 +108,7 @@ public struct VWheelPickerUIModel {
         public var rows: Font = segmentedPickerReference.fonts.rows
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

@@ -14,13 +14,13 @@ public struct VProgressBarUIModel {
     // MARK: Properties
     fileprivate static let sliderReference: VSliderUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -28,7 +28,7 @@ public struct VProgressBarUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Slider height. Defaults to `10`.
@@ -41,12 +41,12 @@ public struct VProgressBarUIModel {
         public var roundsProgressViewRightEdge: Bool = true
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Track color.
@@ -56,27 +56,27 @@ public struct VProgressBarUIModel {
         public var progress: StateColors = sliderReference.colors.progress
 
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Progress animation. Defaults to `default`.
         public var progress: Animation? = .default
 
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
     
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var sliderSubUIModel: VSliderUIModel {
         var uiModel: VSliderUIModel = .init()
         

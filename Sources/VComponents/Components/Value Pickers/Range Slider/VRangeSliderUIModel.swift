@@ -13,13 +13,13 @@ public struct VRangeSliderUIModel {
     // MARK: Properties
     fileprivate static let sliderReference: VSliderUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -27,7 +27,7 @@ public struct VRangeSliderUIModel {
     public init() {}
     
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Slider height. Defaults to `10`.
@@ -49,15 +49,15 @@ public struct VRangeSliderUIModel {
         public var thumbShadowRadius: CGFloat = sliderReference.layout.thumbShadowRadius
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
     
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public typealias Colors = VSliderUIModel.Colors
     
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public typealias Animations = VSliderUIModel.Animations
 }

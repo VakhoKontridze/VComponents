@@ -12,10 +12,10 @@ import VCore
 /// Model that describes UI.
 public struct VListRowUIModel {
     // MARK: Properties
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
     // MARK: Initializers
@@ -23,7 +23,7 @@ public struct VListRowUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Margins. Defaults to `15` horizontal, `9` vertical.
@@ -39,19 +39,19 @@ public struct VListRowUIModel {
         public var separatorHeight: CGFloat = 0.9999 / UIScreen.main.scale
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
+        /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
         
-        /// Sub-model containing `leading` and `trailing` margins.
+        /// Model that contains `leading` and `trailing` margins.
         public typealias HorizontalMargins = EdgeInsets_LeadingTrailing
     }
     
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background color.
@@ -61,7 +61,7 @@ public struct VListRowUIModel {
         public var separator: Color = .init(componentAsset: "List.Separator")
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

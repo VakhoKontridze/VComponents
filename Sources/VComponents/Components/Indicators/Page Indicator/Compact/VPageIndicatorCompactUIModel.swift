@@ -14,13 +14,13 @@ public struct VPageIndicatorCompactUIModel {
     // MARK: Properties
     fileprivate static let pageIndicatorStandardReference: VPageIndicatorStandardUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -38,7 +38,7 @@ public struct VPageIndicatorCompactUIModel {
     }
     
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Direction. Defaults to `leftToRight`.
@@ -87,7 +87,7 @@ public struct VPageIndicatorCompactUIModel {
         public var unselectedDotScaleForStandardConfiguration: CGFloat = pageIndicatorStandardReference.layout.unselectedDotScale
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         init(
@@ -114,14 +114,14 @@ public struct VPageIndicatorCompactUIModel {
     }
     
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public typealias Colors = VPageIndicatorStandardUIModel.Colors
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public typealias Animations = VPageIndicatorStandardUIModel.Animations
     
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var standardPageIndicatorSubUIModel: VPageIndicatorStandardUIModel {
         .init(
             layout: .init(

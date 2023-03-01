@@ -14,13 +14,13 @@ public struct VStepperUIModel {
     // MARK: Properties
     fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
@@ -28,7 +28,7 @@ public struct VStepperUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Stepper size.Defaults to `94` width and `32` height, similarly to native toggle.
@@ -44,12 +44,12 @@ public struct VStepperUIModel {
         public var divider: CGSize = segmentedPickerReference.layout.dividerSize
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Layout
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background colors.
@@ -73,20 +73,20 @@ public struct VStepperUIModel {
         public var divider: StateColors = segmentedPickerReference.colors.divider
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
         // MARK: Button State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
         /// Time interval after which long press incrementation begins. Defaults to `1` second.
@@ -99,7 +99,7 @@ public struct VStepperUIModel {
         public var longPressIncrementExponent: Int = 2
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

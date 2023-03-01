@@ -11,13 +11,13 @@ import SwiftUI
 /// Model that describes UI.
 public struct VSpinnerContinuousUIModel {
     // MARK: Properties
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -25,7 +25,7 @@ public struct VSpinnerContinuousUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Spinner dimension. Defaults to `15`.
@@ -38,31 +38,31 @@ public struct VSpinnerContinuousUIModel {
         public var borderWidth: CGFloat = 2
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Spinner color.
         public var spinner: Color = ColorBook.accent
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Spinner animation. Defaults to `linear` with duration `0.75`.
         public var spinning: Animation = .linear(duration: 0.75)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

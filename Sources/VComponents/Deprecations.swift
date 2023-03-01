@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Primary Button
 extension VPrimaryButtonUIModel.Layout {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var loaderDimension: CGFloat {
         get { spinnerSubUIModel.dimension }
         set { spinnerSubUIModel.dimension = newValue }
@@ -24,7 +24,7 @@ extension VPrimaryButtonUIModel.Layout {
 }
 
 extension VPrimaryButtonUIModel.Colors {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var loader: Color {
         get { spinnerSubUIModel.spinner }
         set { spinnerSubUIModel.spinner = newValue }
@@ -33,13 +33,13 @@ extension VPrimaryButtonUIModel.Colors {
 
 // MARK: - V Disclosure Group
 extension VDisclosureGroupUIModel.Layout {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var chevronButtonDimension: CGFloat {
         get { chevronButtonSubUIModel.dimension }
         set { chevronButtonSubUIModel.dimension = newValue }
     }
     
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var chevronButtonIconDimension: CGFloat {
         get { chevronButtonSubUIModel.iconSize.width }
         set { chevronButtonSubUIModel.iconSize = .init(dimension: newValue) }
@@ -47,13 +47,13 @@ extension VDisclosureGroupUIModel.Layout {
 }
 
 extension VDisclosureGroupUIModel.Colors {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var chevronButtonBackground: GenericStateModel_EnabledPressedDisabled<Color> {
         get { chevronButtonSubUIModel.background }
         set { chevronButtonSubUIModel.background = newValue }
     }
     
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var chevronButtonIcon: GenericStateModel_EnabledPressedDisabled<Color> {
         get { chevronButtonSubUIModel.icon }
         set { chevronButtonSubUIModel.icon = newValue }
@@ -62,13 +62,13 @@ extension VDisclosureGroupUIModel.Colors {
 
 // MARK: - V Text Field
 extension VTextFieldUIModel.Layout {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var clearButtonDimension: CGFloat {
         get { clearButtonSubUIModel.dimension }
         set { clearButtonSubUIModel.dimension = newValue }
     }
 
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var clearButtonIconDimension: CGFloat {
         get { clearButtonSubUIModel.iconSize.width }
         set { clearButtonSubUIModel.iconSize = .init(dimension: newValue) }
@@ -80,7 +80,7 @@ extension VTextFieldUIModel.Layout {
         set {}
     }
     
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var visibilityButtonIconDimension: CGFloat {
         get { visibilityButtonSubUIModel.iconSize.width }
         set { visibilityButtonSubUIModel.iconSize = .init(dimension: newValue) }
@@ -88,7 +88,7 @@ extension VTextFieldUIModel.Layout {
 }
 
 extension VTextFieldUIModel.Colors {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var clearButtonBackground: GenericStateModel_EnabledPressedFocusedDisabled<Color> {
         get {
             .init(
@@ -101,7 +101,7 @@ extension VTextFieldUIModel.Colors {
         set { clearButtonSubUIModel.background = .init(newValue) }
     }
 
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var clearButtonIcon: GenericStateModel_EnabledPressedFocusedDisabled<Color> {
         get {
             .init(
@@ -114,7 +114,7 @@ extension VTextFieldUIModel.Colors {
         set { clearButtonSubUIModel.icon = .init(newValue) }
     }
     
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var visibilityButtonIcon: GenericStateModel_EnabledPressedFocusedDisabled<Color> {
         get {
             .init(
@@ -130,13 +130,13 @@ extension VTextFieldUIModel.Colors {
 
 // MARK: - V Modal
 extension VModalUIModel.Layout {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonDimension: CGFloat {
         get { closeButtonSubUIModel.dimension }
         set { closeButtonSubUIModel.dimension = newValue }
     }
 
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonIconDimension: CGFloat {
         get { closeButtonSubUIModel.iconSize.width }
         set { closeButtonSubUIModel.iconSize = .init(dimension: newValue) }
@@ -144,13 +144,13 @@ extension VModalUIModel.Layout {
 }
 
 extension VModalUIModel.Colors {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonBackground: GenericStateModel_EnabledPressedDisabled<Color> {
         get { closeButtonSubUIModel.background }
         set { closeButtonSubUIModel.background = newValue }
     }
 
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonIcon: GenericStateModel_EnabledPressedDisabled<Color> {
         get { closeButtonSubUIModel.icon }
         set { closeButtonSubUIModel.icon = newValue }
@@ -159,13 +159,13 @@ extension VModalUIModel.Colors {
 
 // MARK: - V Bottom Sheet
 extension VBottomSheetUIModel.Layout {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonDimension: CGFloat {
         get { closeButtonSubUIModel.dimension }
         set { closeButtonSubUIModel.dimension = newValue }
     }
 
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonIconDimension: CGFloat {
         get { closeButtonSubUIModel.iconSize.width }
         set { closeButtonSubUIModel.iconSize = .init(dimension: newValue) }
@@ -173,13 +173,13 @@ extension VBottomSheetUIModel.Layout {
 }
 
 extension VBottomSheetUIModel.Colors {
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonBackground: GenericStateModel_EnabledPressedDisabled<Color> {
         get { closeButtonSubUIModel.background }
         set { closeButtonSubUIModel.background = newValue }
     }
     
-    @available(*, deprecated, message: "Use sub-model instead")
+    @available(*, deprecated, message: "Use sub UI model instead")
     public var closeButtonIcon: GenericStateModel_EnabledPressedDisabled<Color> {
         get { closeButtonSubUIModel.icon }
         set { closeButtonSubUIModel.icon = newValue }

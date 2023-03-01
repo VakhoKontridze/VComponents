@@ -16,16 +16,16 @@ public struct VSideBarUIModel {
     fileprivate static let modalReference: VModalUIModel = .init()
     fileprivate static let bottomSheetReference: VBottomSheetUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
@@ -33,7 +33,7 @@ public struct VSideBarUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Edge from which side bar appears, and to which it disappears. Defaults to `default`.
@@ -71,7 +71,7 @@ public struct VSideBarUIModel {
         var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes._current.size.width }
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Presentation Edge
@@ -100,12 +100,12 @@ public struct VSideBarUIModel {
         public typealias Sizes = ModalSizes<CGSize>
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
+        /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background color.
@@ -124,12 +124,12 @@ public struct VSideBarUIModel {
         public var dimmingView: Color = modalReference.colors.dimmingView
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Appear animation.  Defaults to `easeInOut` with duration `0.3`.
@@ -142,19 +142,19 @@ public struct VSideBarUIModel {
         public var dragBackDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values
+        /// Initializes model with default values.
         public init() {}
     }
     
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
         /// Method of dismissing side bar. Defaults to `default`.
         public var dismissType: DismissType = .default
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Dismiss Type
@@ -182,7 +182,7 @@ public struct VSideBarUIModel {
         }
     }
     
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         

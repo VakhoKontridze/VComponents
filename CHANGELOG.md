@@ -4,11 +4,11 @@
 
 General
 
-- Various properties inside UI models are replaced with relevant mapped sub-models for additional customization. For instance, spinner properties inside `VPrimaryButtonUIModel` are replaced with `VPlainButtonUIModel`.
+- Various properties inside UI models are replaced with relevant mapped sub UI models for additional customization. For instance, spinner properties inside `VPrimaryButtonUIModel` are replaced with `VPlainButtonUIModel`.
 
 VPrimaryButton
 
-- `animations` sub-model is added to `VPrimaryButtonUIModel` for customizing spinner animation
+- `animations` model is added to `VPrimaryButtonUIModel` for customizing spinner animations
 
 VProgressBar
 

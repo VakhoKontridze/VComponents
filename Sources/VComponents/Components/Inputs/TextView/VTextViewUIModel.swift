@@ -14,23 +14,23 @@ public struct VTextViewUIModel {
     // MARK: Properties
     fileprivate static let textFieldReference: VTextFieldUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Textfield min height. Defaults to `50`.
@@ -61,16 +61,16 @@ public struct VTextViewUIModel {
         public var headerFooterMarginHorizontal: CGFloat = textFieldReference.layout.headerFooterMarginHorizontal
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top` and `bottom` and margins.
+        /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background colors.
@@ -92,19 +92,19 @@ public struct VTextViewUIModel {
         public var footer: StateColors = textFieldReference.colors.footer
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public typealias Fonts = VTextFieldUIModel.Fonts
 
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public typealias Misc = VTextFieldUIModel.Misc
 }

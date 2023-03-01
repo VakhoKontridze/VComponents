@@ -14,16 +14,16 @@ public struct VToastUIModel {
     // MARK: Properties
     fileprivate static let textFieldReference: VTextFieldUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -31,7 +31,7 @@ public struct VToastUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Toast horizontal margin. Defaults to `20`.
@@ -53,11 +53,11 @@ public struct VToastUIModel {
         public var presentationEdgeSafeAreaInset: CGFloat = 20
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Margins
-        /// Sub-model containing `horizontal` and `vertical` margins.
+        /// Model that contains `horizontal` and `vertical` margins.
         public typealias Margins = EdgeInsets_HorizontalVertical
         
         // MARK: Presentation Edge
@@ -94,7 +94,7 @@ public struct VToastUIModel {
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Text color.
@@ -104,12 +104,12 @@ public struct VToastUIModel {
         public var background: Color = textFieldReference.colors.background.enabled
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Text font. Defaults to system font of size `16` and weight `semibold`.
@@ -118,12 +118,12 @@ public struct VToastUIModel {
         public var text: UIFont = .systemFont(ofSize: 16, weight: .semibold)
             
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Display duration. Defaults to `3` seconds.
@@ -136,7 +136,7 @@ public struct VToastUIModel {
         public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

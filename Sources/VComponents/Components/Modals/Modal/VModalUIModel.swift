@@ -15,19 +15,19 @@ public struct VModalUIModel {
     fileprivate static let sheetReference: VSheetUIModel = .init()
     fileprivate static let disclosureGroupReference: VDisclosureGroupUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public var misc: Misc = .init()
     
     // MARK: Initializers
@@ -35,7 +35,7 @@ public struct VModalUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Modal sizes.
@@ -86,7 +86,7 @@ public struct VModalUIModel {
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Sizes
@@ -94,12 +94,12 @@ public struct VModalUIModel {
         public typealias Sizes = ModalSizes<CGSize>
 
         // MARK: Margins
-        /// Sub-model containing `leading`, `trailing`, `top`, and `bottom` margins.
+        /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background color.
@@ -136,12 +136,12 @@ public struct VModalUIModel {
         public var dimmingView: Color = .init(componentAsset: "Modal.DimmingView")
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Header font.
@@ -150,12 +150,12 @@ public struct VModalUIModel {
         public var header: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Defaults to `linear` with duration `0.05`.
@@ -174,19 +174,19 @@ public struct VModalUIModel {
         public var blur: CGFloat = 3
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Misc
-    /// Sub-model containing misc properties.
+    /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
         /// Method of dismissing modal. Defaults to `default`.
         public var dismissType: DismissType = .default
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Dismiss Type
@@ -222,7 +222,7 @@ public struct VModalUIModel {
         }
     }
 
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()
         

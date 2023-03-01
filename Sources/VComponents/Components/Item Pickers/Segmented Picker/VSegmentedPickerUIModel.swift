@@ -15,16 +15,16 @@ public struct VSegmentedPickerUIModel {
     fileprivate static let toggleReference: VToggleUIModel = .init()
     fileprivate static let sliderReference: VSliderUIModel = .init()
     
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     // MARK: Initializers
@@ -32,7 +32,7 @@ public struct VSegmentedPickerUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Picker height. Defaults to `31`, similarly to native picker.
@@ -81,12 +81,12 @@ public struct VSegmentedPickerUIModel {
         public var dividerSize: CGSize = .init(width: 1, height: 19)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background colors.
@@ -146,23 +146,23 @@ public struct VSegmentedPickerUIModel {
         )
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias RowStateColors = GenericStateModel_EnabledPressedDisabled<Color>
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
+        /// Model that contains opacities for component states.
         public typealias RowStateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Header font. Defaults to system font of size `14`.
@@ -177,19 +177,19 @@ public struct VSegmentedPickerUIModel {
         public var rows: Font = .system(size: 14, weight: .medium)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeInOut` with duration `0.2`.
         public var selection: Animation? = .easeInOut(duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

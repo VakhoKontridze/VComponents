@@ -11,10 +11,10 @@ import SwiftUI
 /// Model that describes UI.
 public struct VSheetUIModel {
     // MARK: Properties
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
     // MARK: Initializers
@@ -22,7 +22,7 @@ public struct VSheetUIModel {
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Rounded corners. Defaults to to `allCorners`.
@@ -35,19 +35,19 @@ public struct VSheetUIModel {
         public var contentMargin: CGFloat = 15
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background color.
         public var background: Color = ColorBook.layer
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
 }

@@ -12,23 +12,23 @@ import VCore
 /// Model that describes UI.
 public struct VPrimaryButtonUIModel {
     // MARK: Properties
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public var layout: Layout = .init()
     
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public var colors: Colors = .init()
     
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public var animations: Animations = .init()
     
     /// Initializes UI model with default values.
     public init() {}
 
     // MARK: Layout
-    /// Sub-model containing layout properties.
+    /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
         /// Button height. Defaults to `56`.
@@ -70,16 +70,16 @@ public struct VPrimaryButtonUIModel {
         public var labelSpinnerSpacing: CGFloat = 20
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: Label Margin
-        /// Sub-model containing `horizontal` and `vertical` margins.
+        /// Model that contains `horizontal` and `vertical` margins.
         public typealias LabelMargins = EdgeInsets_HorizontalVertical
     }
 
     // MARK: Colors
-    /// Sub-model containing color properties.
+    /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
         /// Background colors.
@@ -130,20 +130,20 @@ public struct VPrimaryButtonUIModel {
         }()
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
         
         // MARK: State Colors
-        /// Sub-model containing colors for component states.
+        /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledPressedLoadingDisabled<Color>
         
         // MARK: State Opacities
-        /// Sub-model containing opacities for component states.
+        /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_EnabledPressedLoadingDisabled<CGFloat>
     }
 
     // MARK: Fonts
-    /// Sub-model containing font properties.
+    /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Title font. Defaults to system font of size `16` with `semibold` weight.
@@ -152,12 +152,12 @@ public struct VPrimaryButtonUIModel {
         public var title: Font = .system(size: 16, weight: .semibold)
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
     
     // MARK: Animations
-    /// Sub-model containing animation properties.
+    /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Model for customizing spinner animations.
@@ -166,11 +166,11 @@ public struct VPrimaryButtonUIModel {
         public var spinnerSubUIModel: VSpinnerContinuousUIModel.Animations = .init()
         
         // MARK: Initializers
-        /// Initializes sub-model with default values.
+        /// Initializes model with default values.
         public init() {}
     }
     
-    // MARK: Sub-Models
+    // MARK: Sub UI Models
     var spinnerSubUIModel: VSpinnerContinuousUIModel {
         var uiModel: VSpinnerContinuousUIModel = .init()
         

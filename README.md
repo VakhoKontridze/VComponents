@@ -82,7 +82,7 @@ Components are not meant to be customized like you would a native SwiftUI compon
 
 Instead, UI model can be passed as parameter to initializers. This parameter has default value, and is not required every time you create a view.
 
-UI Models are structs with default values. They break down into 5 sub-structs: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
+UI Models are `struct`s with default values. They break down into 5 models: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
 For instance, changing foreground color of `VSecondaryButton` can be done by passing an IU model.
 
