@@ -361,26 +361,32 @@ public struct VSegmentedPicker<Data, Content>: View
 
 // MARK: - Preview
 struct VSegmentedPicker_Previews: PreviewProvider {
-    enum PickerRow: Int, StringRepresentableHashableEnumeration {
-        case red, green, blue
-    
-        var stringRepresentation: String {
-            switch self {
-            case .red: return "Red"
-            case .green: return "Green"
-            case .blue: return "Blue"
-            }
-        }
+    static var previews: some View {
+        Preview()
     }
     
-    @State private static var selection: PickerRow = .red
-
-    static var previews: some View {
-        VSegmentedPicker(
-            selection: $selection,
-            headerTitle: "Lorem ipsum dolor sit amet",
-            footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
-        )
-            .padding(20)
+    private struct Preview: View {
+        enum PickerRow: Int, StringRepresentableHashableEnumeration {
+            case red, green, blue
+        
+            var stringRepresentation: String {
+                switch self {
+                case .red: return "Red"
+                case .green: return "Green"
+                case .blue: return "Blue"
+                }
+            }
+        }
+        
+        @State private var selection: PickerRow = .red
+        
+        var body: some View {
+            VSegmentedPicker(
+                selection: $selection,
+                headerTitle: "Lorem ipsum dolor sit amet",
+                footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+            )
+                .padding(20)
+        }
     }
 }

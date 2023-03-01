@@ -203,12 +203,18 @@ public struct VToggle<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VToggle_Previews: PreviewProvider {
-    @State private static var state: VToggleState = .on
-
     static var previews: some View {
-        VToggle(
-            state: $state,
-            title: "Lorem Ipsum"
-        )
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var state: VToggleState = .on
+        
+        var body: some View {
+            VToggle(
+                state: $state,
+                title: "Lorem Ipsum"
+            )
+        }
     }
 }

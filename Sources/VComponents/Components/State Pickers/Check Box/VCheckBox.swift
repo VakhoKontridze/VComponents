@@ -206,12 +206,18 @@ public struct VCheckBox<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VCheckBox_Previews: PreviewProvider {
-    @State private static var state: VCheckBoxState = .on
-
     static var previews: some View {
-        VCheckBox(
-            state: $state,
-            title: "Lorem Ipsum"
-        )
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var state: VCheckBoxState = .on
+        
+        var body: some View {
+            VCheckBox(
+                state: $state,
+                title: "Lorem Ipsum"
+            )
+        }
     }
 }

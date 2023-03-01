@@ -308,20 +308,26 @@ public struct VTextField: View {
 
 // MARK: - Preview
 struct VTextField_Previews: PreviewProvider {
-    @State private static var text: String = "Lorem ipsum"
-
     static var previews: some View {
-        VStack(spacing: 50, content: {
-            ForEach(VTextFieldType.allCases, id: \.self, content: { type in
-                VTextField(
-                    type: type,
-                    headerTitle: "Lorem ipsum dolor sit amet",
-                    footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                    placeholder: "Lorem ipsum",
-                    text: $text
-                )
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var text: String = "Lorem ipsum"
+        
+        var body: some View {
+            VStack(spacing: 50, content: {
+                ForEach(VTextFieldType.allCases, id: \.self, content: { type in
+                    VTextField(
+                        type: type,
+                        headerTitle: "Lorem ipsum dolor sit amet",
+                        footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                        placeholder: "Lorem ipsum",
+                        text: $text
+                    )
+                })
             })
-        })
-            .padding()
+                .padding()
+        }
     }
 }

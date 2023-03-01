@@ -208,27 +208,33 @@ extension VDisclosureGroupInternalState {
 
 // MARK: - Previews
 struct VDisclosureGroup_Previews: PreviewProvider {
-    @State private static var isExpanded: Bool = true
-    
     static var previews: some View {
-        ZStack(alignment: .top, content: {
-            ColorBook.canvas.ignoresSafeArea()
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var isExpanded: Bool = true
+        
+        var body: some View {
+            ZStack(alignment: .top, content: {
+                ColorBook.canvas.ignoresSafeArea()
 
-            VDisclosureGroup(
-                isExpanded: $isExpanded,
-                headerTitle: "Lorem Ipsum",
-                content: {
-                    LazyVStack(spacing: 0, content: {
-                        ForEach(0..<10, content: { num in
-                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                                Text(String(num))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                VDisclosureGroup(
+                    isExpanded: $isExpanded,
+                    headerTitle: "Lorem Ipsum",
+                    content: {
+                        LazyVStack(spacing: 0, content: {
+                            ForEach(0..<10, content: { num in
+                                VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                    Text(String(num))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                })
                             })
                         })
-                    })
-                }
-            )
-                .padding()
-        })
+                    }
+                )
+                    .padding()
+            })
+        }
     }
 }

@@ -218,12 +218,22 @@ public struct VStepper: View {
 
 // MARK: - Preview
 struct VStepper_Previews: PreviewProvider {
-    @State private static var value: Int = 5
-    
     static var previews: some View {
-        VStepper(
-            range: 1...10,
-            value: $value
-        )
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var value: Int = 5
+        
+        var body: some View {
+            VStack(content: {
+                VStepper(
+                    range: 1...10,
+                    value: $value
+                )
+                
+                Text(String(value))
+            })
+        }
     }
 }

@@ -153,14 +153,21 @@ public struct VTextView: View {
 
 // MARK: - Preview
 struct VTextView_Previews: PreviewProvider {
-    @State private static var text: String = "Lorem ipsum"
-
     static var previews: some View {
-        VTextView(
-            headerTitle: "Lorem ipsum dolor sit amet",
-            footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            placeholder: "Lorem ipsum",
-            text: $text
-        )
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var text: String = "Lorem ipsum"
+        
+        var body: some View {
+            VTextView(
+                headerTitle: "Lorem ipsum dolor sit amet",
+                footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                placeholder: "Lorem ipsum",
+                text: $text
+            )
+                .padding()
+        }
     }
 }

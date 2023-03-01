@@ -195,12 +195,18 @@ public struct VRadioButton<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VRadioButton_Previews: PreviewProvider {
-    @State private static var state: VRadioButtonState = .on
-
     static var previews: some View {
-        VRadioButton(
-            state: $state,
-            title: "Lorem Ipsum"
-        )
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var state: VRadioButtonState = .on
+        
+        var body: some View {
+            VRadioButton(
+                state: $state,
+                title: "Lorem Ipsum"
+            )
+        }
     }
 }

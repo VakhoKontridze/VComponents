@@ -221,17 +221,6 @@ public struct VRangeSlider: View {
     }
 }
 
-// MARK: - Preview
-struct VRangeSlider_Previews: PreviewProvider {
-    @State private static var valueLow: Double = 0.1
-    @State private static var valueHigh: Double = 0.8
-
-    static var previews: some View {
-        VRangeSlider(difference: 0.1, valueLow: $valueLow, valueHigh: $valueHigh)
-            .padding()
-    }
-}
-
 // MARK: - Helpers
 extension Double {
     fileprivate func roundedUpWithStep(
@@ -246,5 +235,26 @@ extension Double {
     ) -> Double {
         guard let step else { return self }
         return floor(self / step) * step
+    }
+}
+
+// MARK: - Preview
+struct VRangeSlider_Previews: PreviewProvider {
+    static var previews: some View {
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var valueLow: Double = 0.1
+        @State private var valueHigh: Double = 0.8
+        
+        var body: some View {
+            VRangeSlider(
+                difference: 0.1,
+                valueLow: $valueLow,
+                valueHigh: $valueHigh
+            )
+                .padding()
+        }
     }
 }

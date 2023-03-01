@@ -161,10 +161,16 @@ public struct VSlider: View {
 
 // MARK: - Preview
 struct VSlider_Previews: PreviewProvider {
-    @State private static var value: Double = 0.5
-
     static var previews: some View {
-        VSlider(value: $value)
-            .padding()
+        Preview()
+    }
+    
+    private struct Preview: View {
+        @State private var value: Double = 0.5
+        
+        var body: some View {
+            VSlider(value: $value)
+                .padding()
+        }
     }
 }

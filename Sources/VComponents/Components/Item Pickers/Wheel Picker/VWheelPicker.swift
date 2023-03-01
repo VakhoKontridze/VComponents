@@ -253,24 +253,31 @@ public struct VWheelPicker<Data, Content>: View
 
 // MARK: - Preview
 struct VWheelPicker_Previews: PreviewProvider {
-    @State private static var selection: String = rowTitles.first!
-    
-    private static var rowTitles: [String] {
-        [
-            "January", "February", "March",
-            "April", "May", "June",
-            "July", "August", "September",
-            "October", "November", "December"
-        ]
-    }
-
     static var previews: some View {
-        VWheelPicker(
-            selection: $selection,
-            headerTitle: "Lorem ipsum dolor sit amet",
-            footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-            rowTitles: rowTitles
-        )
-            .padding(20)
+        Preview()
+    }
+    
+    private struct Preview: View {
+        private static var rowTitles: [String] {
+            [
+                "January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"
+            ]
+        }
+        
+        
+        @State private var selection: String = rowTitles.first!
+        
+        var body: some View {
+            VWheelPicker(
+                selection: $selection,
+                headerTitle: "Lorem ipsum dolor sit amet",
+                footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                rowTitles: Self.rowTitles
+            )
+                .padding()
+        }
     }
 }
