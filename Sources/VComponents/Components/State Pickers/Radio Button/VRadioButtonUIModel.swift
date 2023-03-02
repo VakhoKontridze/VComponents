@@ -100,7 +100,7 @@ public struct VRadioButtonUIModel {
         
         /// Custom label opacities.
         ///
-        /// Applicable only when `init`with label is used.
+        /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = toggleReference.colors.customLabelOpacities
@@ -124,7 +124,7 @@ public struct VRadioButtonUIModel {
         // MARK: Properties
         /// Title font. Defaults to system font of size `15`.
         ///
-        /// Only applicable when using `init`with title.
+        /// Only applicable when using `init` with title.
         public var title: Font = toggleReference.fonts.title
         
         // MARK: Initializers

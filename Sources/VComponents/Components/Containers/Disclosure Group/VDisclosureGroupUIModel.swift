@@ -90,7 +90,7 @@ public struct VDisclosureGroupUIModel {
         
         /// Header title colors.
         ///
-        /// Only applicable when using `init`with title.
+        /// Only applicable when using `init` with title.
         public var headerTitle: StateColors = .init(
             collapsed: ColorBook.primary,
             expanded: ColorBook.primary,
@@ -99,7 +99,7 @@ public struct VDisclosureGroupUIModel {
         
         /// Custom header label opacities.
         ///
-        /// Applicable only when `init`with header label is used.
+        /// Applicable only when `init` with header label is used.
         /// When using a custom header label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customHeaderLabelOpacities: StateOpacities = .init(
@@ -148,7 +148,7 @@ public struct VDisclosureGroupUIModel {
         // MARK: Properties
         /// Header title font.
         ///
-        /// Only applicable when using `init`with header.
+        /// Only applicable when using `init` with header.
         public var headerTitle: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers

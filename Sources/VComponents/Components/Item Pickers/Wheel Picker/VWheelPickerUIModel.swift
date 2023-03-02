@@ -63,12 +63,12 @@ public struct VWheelPickerUIModel {
         
         /// Title content colors.
         ///
-        /// Only applicable when using `init`with title.
+        /// Only applicable when using `init` with title.
         public var title: StateColors = .init(segmentedPickerReference.colors.title)
         
         /// Custom content opacities.
         ///
-        /// Applicable only when `init`with content is used.
+        /// Applicable only when `init` with content is used.
         /// When using a custom content, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customContentOpacities: StateOpacities = .init(segmentedPickerReference.colors.customContentOpacities)
@@ -104,7 +104,7 @@ public struct VWheelPickerUIModel {
         
         /// Row font
         ///
-        /// Only applicable when using `init`with title.
+        /// Only applicable when using `init` with title.
         public var rows: Font = segmentedPickerReference.fonts.rows
         
         // MARK: Initializers

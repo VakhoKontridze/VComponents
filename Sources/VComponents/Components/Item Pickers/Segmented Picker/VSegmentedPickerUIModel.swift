@@ -109,7 +109,7 @@ public struct VSegmentedPickerUIModel {
         
         /// Title colors.
         ///
-        /// Only applicable when using `init`with title.
+        /// Only applicable when using `init` with title.
         public var title: RowStateColors = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primaryPressedDisabled,
@@ -118,7 +118,7 @@ public struct VSegmentedPickerUIModel {
         
         /// Custom content opacities.
         ///
-        /// Applicable only when `init`with content is used.
+        /// Applicable only when `init` with content is used.
         /// When using a custom content, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customContentOpacities: RowStateOpacities = .init(
@@ -173,7 +173,7 @@ public struct VSegmentedPickerUIModel {
         
         /// Row font. Defaults to system font of size `14` with `medium` weight.
         ///
-        /// Only applicable when using `init`with title.
+        /// Only applicable when using `init` with title.
         public var rows: Font = .system(size: 14, weight: .medium)
         
         // MARK: Initializers

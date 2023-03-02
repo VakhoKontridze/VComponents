@@ -94,7 +94,7 @@ public struct VRoundedButtonUIModel {
         
         /// Custom label opacities.
         ///
-        /// Applicable only when `init`with label is used.
+        /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
@@ -118,7 +118,7 @@ public struct VRoundedButtonUIModel {
         // MARK: Properties
         /// Title font. Defaults to system font of size `15` with `semibold` weight.
         ///
-        /// Only applicable when using `init`with title.
+        /// Only applicable when using `init` with title.
         public var title: Font = .system(size: 15, weight: .semibold)
         
         // MARK: Initializers
