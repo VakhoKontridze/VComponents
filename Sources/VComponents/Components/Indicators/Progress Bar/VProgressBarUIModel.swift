@@ -50,18 +50,14 @@ public struct VProgressBarUIModel {
     public struct Colors {
         // MARK: Properties
         /// Track color.
-        public var track: StateColors = sliderReference.colors.track
+        public var track: Color = sliderReference.colors.track.enabled
         
         /// Progress color.
-        public var progress: StateColors = sliderReference.colors.progress
+        public var progress: Color = sliderReference.colors.progress.enabled
 
         // MARK: Initializers
         /// Initializes model with default values.
         public init() {}
-        
-        // MARK: State Colors
-        /// Model that contains colors for component states.
-        public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
     }
 
     // MARK: Animations
@@ -85,8 +81,8 @@ public struct VProgressBarUIModel {
         uiModel.layout.roundsProgressViewRightEdge = layout.roundsProgressViewRightEdge
         uiModel.layout.thumbDimension = 0
         
-        uiModel.colors.track = colors.track
-        uiModel.colors.progress = colors.progress
+        uiModel.colors.track = .init(colors.track)
+        uiModel.colors.progress = .init(colors.progress)
         
         uiModel.animations.progress = animations.progress
         

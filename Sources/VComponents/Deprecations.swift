@@ -243,12 +243,6 @@ extension VPageIndicatorType {
 @available(*, deprecated, message: "`VPageIndicatorUIModel` no longer exists, and is split into 3 UI models")
 public typealias VPageIndicatorUIModel = VPageIndicatorAutomaticUIModel
 
-@available(*, deprecated, renamed: "VPageIndicatorStandardUIModel")
-public typealias VPageIndicatorFiniteUIModel = VPageIndicatorStandardUIModel
-
-@available(*, deprecated, renamed: "VPageIndicatorCompactUIModel")
-public typealias VPageIndicatorInfiniteUIModel = VPageIndicatorCompactUIModel
-
 extension VPageIndicatorAutomaticUIModel.Layout {
     @available(*, deprecated, renamed: "standardDotLimit")
     public var finiteDotLimit: Int {
@@ -267,16 +261,6 @@ extension VPageIndicatorAutomaticUIModel.Layout {
         get { centerDotsForCompactConfiguration }
         set { centerDotsForCompactConfiguration = newValue }
     }
-}
-
-extension VPageIndicatorStandardUIModel.Layout {
-    @available(*, unavailable, message: "Use `dotDimensionPrimaryAxis` and `dotDimensionSecondaryAxis` instead")
-    public var dotDimension: CGFloat { 10 }
-}
-
-extension VPageIndicatorCompactUIModel.Layout {
-    @available(*, unavailable, message: "Use `dotDimensionPrimaryAxis`, `dotDimensionPrimaryAxisForStandardConfiguration` and `dotDimensionSecondaryAxis` instead")
-    public var dotDimension: CGFloat { 10 }
 }
 
 extension VPageIndicatorAutomaticUIModel.Layout {

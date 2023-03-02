@@ -89,7 +89,7 @@ public struct VPageIndicatorStandardUIModel {
         public var dot: Color = .init(componentAsset: "PageIndicator.Dot")
         
         /// Selected dot color.
-        public var selectedDot: Color = progressBarReference.colors.progress.enabled
+        public var selectedDot: Color = progressBarReference.colors.progress
         
         // MARK: Initializers
         /// Initializes model with default values.

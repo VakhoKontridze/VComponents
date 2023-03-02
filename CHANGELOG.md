@@ -10,10 +10,6 @@ VPrimaryButton
 
 - `animations` model is added to `VPrimaryButtonUIModel` for customizing spinner animations
 
-VProgressBar
-
-- `track` and `progress` in `VProgressBarUIModel` are changed from `Color` to state model
-
 VPageIndicator
 
 - `direction` is added to `VPageIndicatorUIModel` that support omni-directional layout
