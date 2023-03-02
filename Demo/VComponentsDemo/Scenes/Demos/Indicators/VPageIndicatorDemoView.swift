@@ -110,7 +110,7 @@ struct VPageIndicatorDemoView: View {
     }
 
     // MARK: Timer
-    fileprivate func updateValue(_ output: Date) {
+    private func updateValue(_ output: Date) {
         var valueToSet: Int = selectedIndex + 1
         if valueToSet > total-1 { valueToSet = 0 }
         

@@ -56,21 +56,12 @@ struct VPageIndicatorAutomatic<Content>: View where Content: View {
 // MARK: - Preview
 struct VPageIndicatorAutomatic_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 20, content: {
-            ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
-                ForEach([9, 15], id: \.self, content: { total in
-                    VPageIndicatorAutomatic<Never>(
-                        uiModel: {
-                            var uiModel: VPageIndicatorAutomaticUIModel = .init()
-                            uiModel.layout.direction = direction
-                            return uiModel
-                        }(),
-                        total: total,
-                        selectedIndex: 4,
-                        dotContent: .default
-                    )
-                })
-            })
+        VStack(content: {
+            VPageIndicatorStandard_Previews.previews
+            
+            Divider()
+            
+            VPageIndicatorCompact_Previews.previews
         })
     }
 }

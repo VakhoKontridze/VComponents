@@ -265,19 +265,39 @@ extension Int {
 // MARK: - Preview
 struct VPageIndicatorCompact_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(spacing: 20, content: {
-            ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
-                VPageIndicatorCompact<Never>(
-                    uiModel: {
-                        var uiModel: VPageIndicatorCompactUIModel = .init()
-                        uiModel.layout.direction = direction
-                        return uiModel
-                    }(),
-                    total: 9,
-                    selectedIndex: 4,
-                    dotContent: .default
-                )
+        Preview()
+    }
+    
+    private struct Preview: View {
+        private let total: Int = 10
+        @State private var selectedIndex: Int = 0
+        
+        var body: some View {
+            VStack(spacing: 20, content: {
+                ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
+                    VPageIndicatorCompact<Never>(
+                        uiModel: {
+                            var uiModel: VPageIndicatorCompactUIModel = .init()
+                            uiModel.layout.direction = direction
+                            return uiModel
+                        }(),
+                        total: total,
+                        selectedIndex: selectedIndex,
+                        dotContent: .default
+                    )
+                })
             })
-        })
+                .onReceive(
+                    Timer.publish(every: 1, on: .main, in: .common).autoconnect(),
+                    perform: updateValue
+                )
+        }
+        
+        private func updateValue(_ output: Date) {
+            var valueToSet: Int = selectedIndex + 1
+            if valueToSet > total-1 { valueToSet = 0 }
+            
+            selectedIndex = valueToSet
+        }
     }
 }
