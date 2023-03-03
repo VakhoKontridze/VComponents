@@ -274,7 +274,7 @@ struct VPageIndicatorCompact_Previews: PreviewProvider {
         
         var body: some View {
             VStack(spacing: 20, content: {
-                ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
+                ForEach(LayoutDirectionOmni.allCases, id: \.self, content: { direction in
                     VPageIndicatorCompact<Never>(
                         uiModel: {
                             var uiModel: VPageIndicatorCompactUIModel = .init()

@@ -42,7 +42,7 @@ public struct VPageIndicatorStandardUIModel {
     public struct Layout {
         // MARK: Properties
         /// Direction. Defaults to `leftToRight`.
-        public var direction: OmniLayoutDirection = .leftToRight
+        public var direction: LayoutDirectionOmni = .leftToRight
         
         /// Dot dimension on the main axis. Defaults to `10`.
         ///
@@ -67,7 +67,7 @@ public struct VPageIndicatorStandardUIModel {
         public init() {}
         
         init(
-            direction: OmniLayoutDirection,
+            direction: LayoutDirectionOmni,
             dotDimensionPrimaryAxis: CGFloat?,
             dotDimensionSecondaryAxis: CGFloat,
             spacing: CGFloat,

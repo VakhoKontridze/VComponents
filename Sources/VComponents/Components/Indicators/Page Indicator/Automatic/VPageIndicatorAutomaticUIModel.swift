@@ -33,7 +33,7 @@ public struct VPageIndicatorAutomaticUIModel {
     public struct Layout {
         // MARK: Properties
         /// Direction. Defaults to `leftToRight`.
-        public var direction: OmniLayoutDirection = pageIndicatorStandardReference.layout.direction
+        public var direction: LayoutDirectionOmni = pageIndicatorStandardReference.layout.direction
         
         /// Dot dimension on the main axis when switching to `standard` configuration. Defaults to `10`.
         ///

@@ -19,7 +19,7 @@ struct VPageIndicatorDemoView: View {
     @State private var selectedIndex: Int = 0
     
     @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
-    @State private var direction: OmniLayoutDirection = .leftToRight
+    @State private var direction: LayoutDirectionOmni = .leftToRight
     @State private var stretchesOnPrimaryAxis: Bool = false
 
     // MARK: Body
@@ -133,11 +133,11 @@ private enum VPageIndicatorTypeHelper: Int, StringRepresentableHashableEnumerati
     }
 }
 
-extension OmniLayoutDirection: StringRepresentableHashableEnumeration {
+extension LayoutDirectionOmni: StringRepresentableHashableEnumeration {
     public var stringRepresentation: String {
         switch self {
         case .leftToRight: return "Left-to-right"
-        case .rightToLeft: return "Right-to-bottom"
+        case .rightToLeft: return "Right-to-left"
         case .topToBottom: return "Top-to-bottom"
         case .bottomToTop: return "Bottom-to-top"
         }

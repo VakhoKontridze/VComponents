@@ -73,7 +73,7 @@ struct VPageIndicatorStandard_Previews: PreviewProvider {
         
         var body: some View {
             VStack(spacing: 20, content: {
-                ForEach(OmniLayoutDirection.allCases, id: \.self, content: { direction in
+                ForEach(LayoutDirectionOmni.allCases, id: \.self, content: { direction in
                     VPageIndicatorStandard<Never>(
                         uiModel: {
                             var uiModel: VPageIndicatorStandardUIModel = .init()
