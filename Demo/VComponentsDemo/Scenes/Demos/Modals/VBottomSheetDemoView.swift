@@ -39,8 +39,8 @@ struct VBottomSheetDemoView: View {
             )
         }
         
-        if !autoresizesContent { // No list
-            uiModel.layout.contentMargins = VBottomSheetUIModel.insettedContent.layout.contentMargins
+        if !hasTitle && !dismissType.hasButton {
+            uiModel.layout.grabberMargins = VBottomSheetUIModel.noHeaderLabel.layout.grabberMargins
         }
         
         uiModel.layout.grabberSize.height = hasGrabber ? (uiModel.layout.grabberSize.height == 0 ? 4 : uiModel.layout.grabberSize.height) : 0
@@ -158,7 +158,6 @@ struct VBottomSheetDemoView: View {
             switch autoresizesContent {
             case false:
                 ColorBook.accent
-                    .padding(.bottom, 10)
                 
             case true:
                 List(content: {
@@ -170,7 +169,6 @@ struct VBottomSheetDemoView: View {
                     })
                 })
                     .vListStyle()
-                    .padding(.bottom, 10)
             }
 
             if dismissType.isEmpty {
