@@ -8,6 +8,10 @@ General
 - Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
 - `presentationHost(id:allowsHitTests:isPresented:content:)` method is added that replaces current `PresentationHost` API
 
+VRoundedLabeledButton
+
+- Missing `titleLabelLineType` from `VRoundedLabeledButtonUIModel` is now utilized inside the button
+
 VModal
 
 - Issue with some content not stretching to full width is fixed

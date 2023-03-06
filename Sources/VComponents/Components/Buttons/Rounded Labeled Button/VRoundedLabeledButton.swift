@@ -142,6 +142,7 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
     
     private func labelTitleComponent(title: String) -> some View {
         VText(
+            type: uiModel.layout.titleLabelLineType,
             minimumScaleFactor: uiModel.layout.titleLabelMinimumScaleFactor,
             color: uiModel.colors.titleLabel.value(for: internalState),
             font: uiModel.fonts.titleLabel,
