@@ -19,8 +19,6 @@ final class PresentationHostViewController: UIViewController, UIViewControllerTr
     
     var isPresentingView: Bool { hostingController != nil }
     
-    private static var storage: [String: PresentationHostViewController] = [:]
-    
     // MARK: Initializers
     init(
         id: String,
@@ -49,7 +47,7 @@ final class PresentationHostViewController: UIViewController, UIViewControllerTr
         
         present(hostingController, animated: true, completion: nil)
         
-        Self.storage[id] = self
+        PresentationHostViewControllerStorage.shared.storage[id] = self
     }
     
     func updateHostedView(with content: some View) {
@@ -61,7 +59,7 @@ final class PresentationHostViewController: UIViewController, UIViewControllerTr
     }
     
     static func forceDismiss(id: String) {
-        Self.storage[id]?.dismissHostedView(force: true)
+        PresentationHostViewControllerStorage.shared.storage[id]?.dismissHostedView(force: true)
     }
     
     private func dismissHostedView(force: Bool) {
@@ -76,7 +74,7 @@ final class PresentationHostViewController: UIViewController, UIViewControllerTr
             dismiss(animated: true, completion: nil)
         }
         hostingController = nil
-        _ = Self.storage.removeValue(forKey: id)
+        _ = PresentationHostViewControllerStorage.shared.storage.removeValue(forKey: id)
         
         PresentationHostDataSourceCache.shared.remove(key: id)
     }
