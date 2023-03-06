@@ -19,8 +19,7 @@ import SwiftUI
 ///             @ViewBuilder content: @escaping () -> some View
 ///         ) -> some View {
 ///             self
-///                 .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-///                 .background(PresentationHost(
+///                 .presentationHost(
 ///                     id: id,
 ///                     isPresented: isPresented,
 ///                     content: {
@@ -28,7 +27,7 @@ import SwiftUI
 ///                             content: content
 ///                         )
 ///                     }
-///                 ))
+///                 )
 ///         }
 ///     }
 ///
@@ -89,6 +88,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     
     // MARK: Initializers
     /// Initializes `PresentationHost` with condition and content.
+    @available(*, deprecated, message: "`PresentationHost` will no longer be exposed to public in `4.0.0`. Use `presentationHost` method instead.")
     public init(
         id: String,
         allowsHitTests: Bool = true,

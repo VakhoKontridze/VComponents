@@ -51,8 +51,7 @@ extension View {
         @ViewBuilder content: @escaping () -> some View
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
                 isPresented: isPresented,
                 content: {
@@ -63,7 +62,7 @@ extension View {
                         content: content
                     )
                 }
-            ))
+            )
     }
 }
 
@@ -119,13 +118,9 @@ extension View {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
+                item: item,
                 content: {
                     VModal<_>(
                         uiModel: uiModel,
@@ -138,6 +133,6 @@ extension View {
                         }
                     )
                 }
-            ))
+            )
     }
 }

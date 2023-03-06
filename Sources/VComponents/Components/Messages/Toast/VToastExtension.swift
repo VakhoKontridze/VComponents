@@ -41,8 +41,7 @@ extension View {
         text: String
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
                 allowsHitTests: false,
                 isPresented: isPresented,
@@ -55,7 +54,7 @@ extension View {
                         text: text
                     )
                 }
-            ))
+            )
     }
 }
 
@@ -101,14 +100,10 @@ extension View {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
                 allowsHitTests: false,
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
+                item: item,
                 content: {
                     VToast(
                         uiModel: uiModel,
@@ -124,7 +119,7 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
 }
 
@@ -174,14 +169,11 @@ extension View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
                 allowsHitTests: false,
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && data != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
+                isPresented: isPresented,
+                presenting: data,
                 content: {
                     VToast(
                         uiModel: uiModel,
@@ -197,7 +189,7 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
 }
 
@@ -247,14 +239,11 @@ extension View {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
                 allowsHitTests: false,
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && error != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
+                isPresented: isPresented,
+                error: error,
                 content: {
                     VToast(
                         uiModel: uiModel,
@@ -270,6 +259,6 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
 }

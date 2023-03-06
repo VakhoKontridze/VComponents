@@ -6,6 +6,7 @@ General
 
 - Issue with tap gesture falling through some contents when presenting modal using `PresentationHost` is fixed
 - Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
+- `presentationHost(id:allowsHitTests:isPresented:content:)` method is added that replaces current `PresentationHost` API
 
 VModal
 

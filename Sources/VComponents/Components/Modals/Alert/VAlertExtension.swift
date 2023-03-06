@@ -49,8 +49,7 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
                 isPresented: isPresented,
                 content: {
@@ -64,7 +63,7 @@ extension View {
                         buttons: buttons()
                     )
                 }
-            ))
+            )
     }
     
     /// Presents alert when `Bool` is `true`.
@@ -113,8 +112,7 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) -> some View {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
                 isPresented: isPresented,
                 content: {
@@ -128,7 +126,7 @@ extension View {
                         buttons: buttons()
                     )
                 }
-            ))
+            )
     }
 }
 
@@ -182,13 +180,9 @@ extension View {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
+                item: item,
                 content: {
                     VAlert<Never>(
                         uiModel: uiModel,
@@ -218,7 +212,7 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
     
     /// Presents alert using the item as data source for content.
@@ -275,13 +269,9 @@ extension View {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
-                isPresented: .init(
-                    get: { item.wrappedValue != nil },
-                    set: { if !$0 { item.wrappedValue = nil } }
-                ),
+                item: item,
                 content: {
                     VAlert(
                         uiModel: uiModel,
@@ -317,7 +307,7 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
 }
 
@@ -375,13 +365,10 @@ extension View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && data != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
+                isPresented: isPresented,
+                presenting: data,
                 content: {
                     VAlert<Never>(
                         uiModel: uiModel,
@@ -411,7 +398,7 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
     
     /// Presents alert when `Bool` is `true` using data to produce content.
@@ -471,13 +458,10 @@ extension View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && data != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
+                isPresented: isPresented,
+                presenting: data,
                 content: {
                     VAlert(
                         uiModel: uiModel,
@@ -513,7 +497,7 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
 }
 
@@ -568,13 +552,10 @@ extension View {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && error != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
+                isPresented: isPresented,
+                error: error,
                 content: {
                     VAlert<Never>(
                         uiModel: uiModel,
@@ -604,7 +585,7 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
     
     /// Presents alert when `Bool` is `true` using `Error`
@@ -658,13 +639,10 @@ extension View {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
 
         return self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
-            .background(PresentationHost(
+            .presentationHost(
                 id: id,
-                isPresented: .init(
-                    get: { isPresented.wrappedValue && error != nil },
-                    set: { if !$0 { isPresented.wrappedValue = false } }
-                ),
+                isPresented: isPresented,
+                error: error,
                 content: {
                     VAlert(
                         uiModel: uiModel,
@@ -700,6 +678,6 @@ extension View {
                         }()
                     )
                 }
-            ))
+            )
     }
 }
