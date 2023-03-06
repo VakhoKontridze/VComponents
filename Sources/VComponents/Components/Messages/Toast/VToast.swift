@@ -174,19 +174,20 @@ struct VToast: View {
 }
 
 // MARK: - Preview
-struct _VToast_Previews: PreviewProvider {
-    @State static var isPresented: Bool = true
-
+struct VToast_Previews: PreviewProvider {
     static var previews: some View {
-        VPlainButton(
-            action: { /*isPresented = true*/ },
-            title: "Present"
+        VToast(
+            uiModel: {
+                var uiModel: VToastUIModel = .init()
+                uiModel.animations.appear = nil
+                uiModel.animations.duration = .infinity
+                return uiModel
+            }(),
+            type: .singleLine,
+            onPresent: nil,
+            onDismiss: nil,
+            text: "Lorem ipsum dolor sit amet"
         )
-            .vToast(
-                id: "toast_preview",
-                isPresented: $isPresented,
-                text: "Lorem ipsum dolor sit amet"
-            )
     }
 }
 

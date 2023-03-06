@@ -350,29 +350,23 @@ struct VBottomSheet<Content>: View
 
 // MARK: - Preview
 struct VBottomSheet_Previews: PreviewProvider {
-    @State static var isPresented: Bool = true
-
     static var previews: some View {
-        VPlainButton(
-            action: { /*isPresented = true*/ },
-            title: "Present"
-        )
-            .vBottomSheet(
-                id: "bottom_sheet_preview",
-                uiModel: .scrollableContent,
-                isPresented: $isPresented,
-                content: {
-                    List(content: {
-                        ForEach(0..<20, content: { num in
-                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                                Text(String(num))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            })
+        VBottomSheet(
+            uiModel: .scrollableContent,
+            onPresent: nil,
+            onDismiss: nil,
+            content: {
+                List(content: {
+                    ForEach(0..<20, content: { num in
+                        VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         })
                     })
-                        .vListStyle()
-                        .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-                }
-            )
+                })
+                    .vListStyle()
+                    .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
+            }
+        )
     }
 }

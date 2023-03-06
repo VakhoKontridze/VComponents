@@ -228,25 +228,22 @@ struct VAlert<Content>: View
 
 // MARK: - Preview
 struct VAlert_Previews: PreviewProvider {
-    @State static var isPresented: Bool = true
-
     static var previews: some View {
-        VPlainButton(
-            action: { /*isPresented = true*/ },
-            title: "Present"
-        )
-            .vAlert(
-                id: "alert_preview",
-                isPresented: $isPresented,
-                title: "Lorem Ipsum Dolor Sit Amet",
-                message: "Lorem ipsum dolor sit amet",
-                content: {
+        VAlert(
+            uiModel: .init(),
+            onPresent: nil,
+            onDismiss: nil,
+            title: "Lorem Ipsum Dolor Sit Amet",
+            message: "Lorem ipsum dolor sit amet",
+            content: {
+                .custom(content: {
                     VTextField(text: .constant("Lorem ipsum dolor sit amet"))
-                },
-                actions: {
-                    VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-                    VAlertCancelButton(action: nil)
-                }
-            )
+                })
+            }(),
+            buttons: [
+                VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
+                VAlertCancelButton(action: nil)
+            ]
+        )
     }
 }

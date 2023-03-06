@@ -212,27 +212,22 @@ struct VSideBar<Content>: View where Content: View {
 
 // MARK: - Preview
 struct VSideBar_Previews: PreviewProvider {
-    @State static var isPresented: Bool = true
-
     static var previews: some View {
-        VPlainButton(
-            action: { /*isPresented = true*/ },
-            title: "Present"
-        )
-            .vSideBar(
-                id: "side_bar_preview",
-                isPresented: $isPresented,
-                content: {
-                    List(content: {
-                        ForEach(0..<20, content: { num in
-                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                                Text(String(num))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            })
+        VSideBar(
+            uiModel: .init(),
+            onPresent: nil,
+            onDismiss: nil,
+            content: {
+                List(content: {
+                    ForEach(0..<20, content: { num in
+                        VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         })
                     })
-                        .vListStyle()
-                }
-            )
+                })
+                    .vListStyle()
+            }
+        )
     }
 }

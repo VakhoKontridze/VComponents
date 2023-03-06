@@ -202,28 +202,23 @@ struct VModal<Content>: View
 
 // MARK: - Previews
 struct VModal_Previews: PreviewProvider {
-    @State static var isPresented: Bool = true
-
     static var previews: some View {
-        VPlainButton(
-            action: { /*isPresented = true*/ },
-            title: "Present"
-        )
-            .vModal(
-                id: "modal_preview",
-                isPresented: $isPresented,
-                content: {
-                    List(content: {
-                        ForEach(0..<20, content: { num in
-                            VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                                Text(String(num))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                            })
+        VModal(
+            uiModel: .init(),
+            onPresent: nil,
+            onDismiss: nil,
+            content: {
+                List(content: {
+                    ForEach(0..<20, content: { num in
+                        VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                            Text(String(num))
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         })
                     })
-                        .vListStyle()
-                        .vModalHeaderTitle("Lorem Ipsum")
-                }
-            )
+                })
+                    .vListStyle()
+                    .vModalHeaderTitle("Lorem Ipsum")
+            }
+        )
     }
 }
