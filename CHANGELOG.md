@@ -4,6 +4,7 @@
 
 General
 
+- Issue with tap gesture falling through some contents when presenting modal using `PresentationHost` is fixed
 - Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
 
 ### [3.1.0(28)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.1.0) — *2023 03 03*
