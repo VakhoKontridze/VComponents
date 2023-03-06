@@ -1,5 +1,11 @@
 # Change Log
 
+### 3.1.1(29)
+
+General
+
+- Memory leak caused by `forceDismiss(id:)` method in `PresentationHost` is fixed
+
 ### [3.1.0(28)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.1.0) — *2023 03 03*
 
 General

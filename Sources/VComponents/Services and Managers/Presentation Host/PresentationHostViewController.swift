@@ -12,13 +12,14 @@ import VCore
 final class PresentationHostViewController: UIViewController {
     // MARK: Properties
     private let id: String
-    
     private let allowsHitTests: Bool
     
     typealias HostingViewControllerType = UIHostingController<AnyView>
     private var hostingController: HostingViewControllerType?
     
     var isPresentingView: Bool { hostingController != nil }
+    
+    private static var storage: [String: PresentationHostViewController] = [:]
     
     // MARK: Initializers
     init(
@@ -60,6 +61,8 @@ final class PresentationHostViewController: UIViewController {
             hostingController.view.constraintTop(to: windowView),
             hostingController.view.constraintBottom(to: windowView)
         ])
+        
+        Self.storage[id] = self
     }
     
     func updateHostedView(with content: some View) {
@@ -71,13 +74,13 @@ final class PresentationHostViewController: UIViewController {
         hostingController = nil
         
         PresentationHostDataSourceCache.shared.remove(key: id)
+        
+        _ = Self.storage.removeValue(forKey: id)
     }
     
     // MARK: Force Dismiss
     static func forceDismiss(id: String) {
-        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.asViewTag })?.removeFromSuperview()
-
-        PresentationHostDataSourceCache.shared.remove(key: id)
+        Self.storage[id]?.dismissHostedView()
     }
 }
 
