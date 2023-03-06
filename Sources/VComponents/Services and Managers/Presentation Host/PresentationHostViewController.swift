@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - Presentation Host View Controller
-final class PresentationHostViewController: UIViewController {
+final class PresentationHostViewController: UIViewController, UIViewControllerTransitioningDelegate {
     // MARK: Properties
     private let id: String
     private let allowsHitTests: Bool
@@ -38,29 +38,16 @@ final class PresentationHostViewController: UIViewController {
     
     // MARK: Presentation
     func presentHostedView(_ content: some View) {
-        guard let windowView: UIView = UIApplication.shared.activeView else { return }
-        
         hostingController = .init(rootView: .init(content))
         guard let hostingController = hostingController else { fatalError() }
         
-        hostingController.view.tag = id.asViewTag
-        
         hostingController.modalPresentationStyle = .overFullScreen
         hostingController.modalTransitionStyle = .crossDissolve
-        
+        hostingController.transitioningDelegate = self
         hostingController.view.translatesAutoresizingMaskIntoConstraints = false
-        hostingController.view.isUserInteractionEnabled = allowsHitTests
         hostingController.view.backgroundColor = .clear
         
-        windowView.addSubview(hostingController.view)
-        windowView.bringSubviewToFront(hostingController.view)
-        
-        NSLayoutConstraint.activate([
-            hostingController.view.constraintLeading(to: windowView),
-            hostingController.view.constraintTrailing(to: windowView),
-            hostingController.view.constraintTop(to: windowView),
-            hostingController.view.constraintBottom(to: windowView)
-        ])
+        present(hostingController, animated: true, completion: nil)
         
         Self.storage[id] = self
     }
@@ -70,23 +57,36 @@ final class PresentationHostViewController: UIViewController {
     }
     
     func dismissHostedView() {
-        UIApplication.shared.activeView?.subviews.first(where: { $0.tag == id.asViewTag })?.removeFromSuperview()
-        hostingController = nil
-        
-        PresentationHostDataSourceCache.shared.remove(key: id)
-        
-        _ = Self.storage.removeValue(forKey: id)
+        dismissHostedView(force: false)
     }
     
-    // MARK: Force Dismiss
     static func forceDismiss(id: String) {
-        Self.storage[id]?.dismissHostedView()
+        Self.storage[id]?.dismissHostedView(force: true)
     }
-}
-
-// MARK: - Helpers
-extension String {
-    fileprivate var asViewTag: Int {
-        hashValue
+    
+    private func dismissHostedView(force: Bool) {
+        if force {
+            if
+                let activeViewController: UIViewController = UIApplication.shared.activeViewController,
+                activeViewController.presentedViewController == hostingController
+            {
+                activeViewController.dismiss(animated: false, completion: nil)
+            }
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+        hostingController = nil
+        _ = Self.storage.removeValue(forKey: id)
+        
+        PresentationHostDataSourceCache.shared.remove(key: id)
+    }
+    
+    // MARK: View Controller Transitioning Delegate
+    func animationController(
+        forPresented presented: UIViewController,
+        presenting: UIViewController,
+        source: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        PresentationHostAnimatedTransitioner(allowsHitTests: allowsHitTests)
     }
 }

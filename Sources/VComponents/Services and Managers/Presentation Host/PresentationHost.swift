@@ -10,26 +10,7 @@ import SwiftUI
 // MARK: - Presentation Host
 /// Presentation Host that allows `SwiftUI` `View` to present another `View` modally in `UIKit` style.
 ///
-/// `View` works by inserting an `UIViewController` in view hierarchy and using it as a presentation host.
-/// `PresentationHost` presents content via `UIHostingController` embedded inside an `UIViewController`.
-///
-/// When `isPresented` is set to `true` from code, and content is not yet presented, `PresentationHost` passes content to view hierarchy.
-/// After this appear animations can occur.
-///
-/// When `dismiss` must be called from presented modal after dismiss animations have finished, `PresentationHost` will remove content from view hierarchy.
-///
-/// When `isPresented` is set to `false` from code, `PresentationHost` triggers external dismiss via `PresentationHostPresentationMode`.
-/// This allows content to perform dismiss animations before being removed from view hierarchy.
-/// For additional documentation, refer to `PresentationHostPresentationMode`.
-///
-/// If presenting view disappears, either by navigation, or by `ViewBuilder` render (such as `if` block evaluating to `false`),
-/// modal must be removed from view hierarchy. To ensure proper removal, call `PresentationHost.forceDismiss(in:)`.
-/// `id` passed to extension is used for removing expired models.
-/// `forceDismiss` ignores the animations of modal, and force removes `View` from the hierarchy.
-/// Since presenting `View` may have disappeared, state of the modal can no longer be updated, and animations cannot occur.
-///
-/// Presentation Host caches data when `item: Binding<Item?>`, `presenting data: T?`, and `error: E?` extensions are used.
-/// `id` passed to extension is used to identify data.
+/// It works by embedding an `UIHostingController` in view hierarchy and using it as a presentation host.
 ///
 ///     extension View {
 ///         public func someModal(
