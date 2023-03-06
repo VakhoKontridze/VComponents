@@ -78,6 +78,7 @@ struct VModal<Content>: View
                     .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
 
                 contentView
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             })
         })
             .frame(size: uiModel.layout.sizes._current.size)
