@@ -414,8 +414,12 @@ extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that hides header.
     ///
     /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
+    ///
+    /// It's recommended that you do not use header title or label with this configuration.
     public static var noHeaderLabel: VBottomSheetUIModel {
         var uiModel: VBottomSheetUIModel = .init()
+        
+        uiModel.layout.grabberMargins = .init(15)
         
         uiModel.misc.dismissType.remove(.leadingButton)
         uiModel.misc.dismissType.remove(.trailingButton)
@@ -426,9 +430,12 @@ extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that hides header, autoresizes content, and inserts bottom safe area for scrollable content.
     ///
     /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
+    ///
+    /// It's recommended that you do not use header title or label with this configuration.
     public static var scrollableContentNoHeaderLabel: VBottomSheetUIModel {
         var uiModel: VBottomSheetUIModel = .init()
         
+        uiModel.layout.grabberMargins = .init(15)
         uiModel.layout.autoresizesContent = true
         uiModel.layout.contentSafeAreaEdges.insert(.bottom)
         
@@ -439,6 +446,8 @@ extension VBottomSheetUIModel {
     }
     
     /// `VBottomSheetUIModel` that stretches content to full size.
+    ///
+    /// It's recommended that you do not use header title or label with this configuration.
     public static var fullSizedContent: VBottomSheetUIModel {
         var uiModel: VBottomSheetUIModel = .noHeaderLabel
         
