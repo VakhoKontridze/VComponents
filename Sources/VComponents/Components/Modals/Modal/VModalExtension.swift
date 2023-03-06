@@ -17,9 +17,9 @@ extension View {
     ///
     /// `vModal` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     private var body: some View {
+    ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true },
     ///             title: "Present"
@@ -81,9 +81,9 @@ extension View {
     ///         let id: UUID = .init()
     ///     }
     ///
-    ///     @State var modalItem: ModalItem?
+    ///     @State private var modalItem: ModalItem?
     ///
-    ///     private var body: some View {
+    ///     var body: some View {
     ///         VPlainButton(
     ///             action: { modalItem = .init() },
     ///             title: "Present"

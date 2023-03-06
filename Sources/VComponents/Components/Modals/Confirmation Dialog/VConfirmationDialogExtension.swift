@@ -17,9 +17,9 @@ extension View {
     ///
     /// `vConfirmationDialog` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     private var body: some View {
+    ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true },
     ///             title: "Present"
@@ -72,9 +72,9 @@ extension View {
     ///         let id: UUID = .init()
     ///     }
     ///
-    ///     @State var confirmationDialogItem: ConfirmationDialogItem?
+    ///     @State private var confirmationDialogItem: ConfirmationDialogItem?
     ///
-    ///     private var body: some View {
+    ///     var body: some View {
     ///         VPlainButton(
     ///             action: { confirmationDialogItem = .init() },
     ///             title: "Present"
@@ -141,11 +141,11 @@ extension View {
     ///
     ///     struct ConfirmationDialogData {}
     ///
-    ///     @State var isPresented: Bool = false
+    ///     @State private var isPresented: Bool = false
     ///
-    ///     @State var confirmationDialogData: ConfirmationDialogData?
+    ///     @State private var confirmationDialogData: ConfirmationDialogData?
     ///
-    ///     private var body: some View {
+    ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true; confirmationDialogData = .init() },
     ///             title: "Present"
