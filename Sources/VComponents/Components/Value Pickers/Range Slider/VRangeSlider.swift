@@ -89,8 +89,8 @@ public struct VRangeSlider: View {
             progress
         })
             .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-            .overlay(thumb(.low))
-            .overlay(thumb(.high))
+            .overlay(content: { thumb(.low) })
+            .overlay(content: { thumb(.high) })
             .frame(height: uiModel.layout.height)
             .readSize(onChange: { sliderWidth = $0.width })
             .padding(.horizontal, uiModel.layout.thumbDimension / 2)

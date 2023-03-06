@@ -207,7 +207,7 @@ public struct VTextField: View {
         })
             .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
             .frame(height: uiModel.layout.height)
-            .background(background)
+            .background(content: { background })
     }
     
     private var background: some View {

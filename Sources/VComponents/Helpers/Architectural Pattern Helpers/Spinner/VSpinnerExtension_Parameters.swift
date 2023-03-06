@@ -22,13 +22,10 @@ extension View {
             
         case let parameters?:
             self
-                .if(parameters.isInteractionDisabled, transform: {
-                    $0
-                        .overlay(Color.clear.contentShape(Rectangle()))
-                })
-                .overlay(
+                .overlayGestureBlocker(if: parameters.isInteractionDisabled)
+                .overlay(content: {
                     VSpinner(type: parameters.spinnerType)
-                )
+                })
         }
     }
 }

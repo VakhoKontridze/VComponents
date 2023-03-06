@@ -79,8 +79,8 @@ public struct VRoundedButton<Label>: View where Label: View {
         SwiftUIBaseButton(gesture: gestureHandler, label: {
             buttonLabel
                 .frame(dimension: uiModel.layout.dimension)
-                .background(background)
-                .overlay(border)
+                .background(content: { background })
+                .overlay(content: { border })
                 .padding(uiModel.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)
