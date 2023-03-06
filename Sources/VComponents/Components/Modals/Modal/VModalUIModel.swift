@@ -257,8 +257,10 @@ extension VModalUIModel {
         return uiModel
     }
     
-    /// `VModalUIModel` that hides header.
-    public static var noHeaderLabel: VModalUIModel {
+    /// `VModalUIModel` that stretches content to full size.
+    ///
+    /// It's recommended that you do not use header title or label with this configuration.
+    public static var fullSizedContent: VModalUIModel {
         var uiModel: VModalUIModel = .init()
         
         uiModel.misc.dismissType.remove(.leadingButton)

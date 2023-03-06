@@ -157,6 +157,13 @@ extension VModalUIModel.Colors {
     }
 }
 
+extension VModalUIModel {
+    @available(*, deprecated, renamed: "fullSizedContent")
+    public static var noHeaderLabel: Self {
+        fullSizedContent
+    }
+}
+
 // MARK: - V Bottom Sheet
 extension VBottomSheetUIModel.Layout {
     @available(*, deprecated, message: "Use sub UI model instead")
