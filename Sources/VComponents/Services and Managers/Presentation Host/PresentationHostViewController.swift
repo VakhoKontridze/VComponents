@@ -65,10 +65,11 @@ final class PresentationHostViewController: UIViewController, UIViewControllerTr
     private func dismissHostedView(force: Bool) {
         if force {
             if
-                let activeViewController: UIViewController = UIApplication.shared.activeViewController,
-                activeViewController.presentedViewController == hostingController
+                let rootViewController: UIViewController = UIApplication.shared.firstWindow(where: { window in
+                    window.rootViewController?.presentedViewController == hostingController
+                })?.rootViewController
             {
-                activeViewController.dismiss(animated: false, completion: nil)
+                rootViewController.dismiss(animated: false, completion: nil)
             }
         } else {
             dismiss(animated: true, completion: nil)

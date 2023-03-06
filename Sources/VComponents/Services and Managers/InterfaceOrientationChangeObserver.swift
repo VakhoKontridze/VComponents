@@ -35,7 +35,7 @@ enum DeviceInterfaceOrientation {
     case landscape
     
     init?() {
-        switch UIApplication.shared.activeWindow?.windowScene?.interfaceOrientation {
+        switch UIApplication.shared.keyWindowInSingleSceneApplication?.windowScene?.interfaceOrientation {
         case nil: return nil
         case .unknown: return nil
         case .portrait: self = .portrait

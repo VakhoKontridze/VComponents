@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Spinner Extension (Parameters)
 extension View {
@@ -22,7 +23,7 @@ extension View {
             
         case let parameters?:
             self
-                .overlayGestureBlocker(if: parameters.isInteractionDisabled)
+                .blocksHitTesting(parameters.isInteractionDisabled)
                 .overlay(content: {
                     VSpinner(type: parameters.spinnerType)
                 })
