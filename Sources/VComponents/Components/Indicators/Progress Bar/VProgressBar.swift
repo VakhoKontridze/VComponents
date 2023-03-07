@@ -27,6 +27,8 @@ public struct VProgressBar: View {
     private let range: ClosedRange<Double>
     private let value: Double
     
+    @State private var progressBarWidth: CGFloat = 0
+    
     // MARK: Initializers
     /// Initializes `VProgressBar` with value.
     public init<V>(
@@ -48,14 +50,35 @@ public struct VProgressBar: View {
         }()
     }
 
+    // MARK: Body
     public var body: some View {
-        VSlider(
-            uiModel: uiModel.sliderSubUIModel,
-            range: range,
-            step: nil,
-            value: .constant(value),
-            onChange: nil
-        )
+        ZStack(alignment: .leading, content: {
+            track
+            progress
+        })
+            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
+            .frame(height: uiModel.layout.height)
+            .readSize(onChange: { progressBarWidth = $0.width })
+            .animation(uiModel.animations.progress, value: value)
+    }
+
+    private var track: some View {
+        Rectangle()
+            .foregroundColor(uiModel.colors.track)
+    }
+
+    private var progress: some View {
+        Rectangle()
+            .frame(width: progressWidth)
+            .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
+            .foregroundColor(uiModel.colors.progress)
+    }
+    
+    // MARK: Progress Width
+    private var progressWidth: CGFloat {
+        let width: CGFloat = progressBarWidth
+
+        return value * width
     }
 }
 

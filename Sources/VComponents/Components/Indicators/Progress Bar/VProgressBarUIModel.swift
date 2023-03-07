@@ -40,6 +40,14 @@ public struct VProgressBarUIModel {
         /// Indicates if progress bar rounds progress view right-edge. Defaults to `true`.
         public var roundsProgressViewRightEdge: Bool = true
         
+        var progressViewRoundedCorners: UIRectCorner {
+            if roundsProgressViewRightEdge {
+                return .allCorners
+            } else {
+                return []
+            }
+        }
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -70,22 +78,5 @@ public struct VProgressBarUIModel {
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
-    }
-    
-    // MARK: Sub UI Models
-    var sliderSubUIModel: VSliderUIModel {
-        var uiModel: VSliderUIModel = .init()
-        
-        uiModel.layout.height = layout.height
-        uiModel.layout.cornerRadius = layout.cornerRadius
-        uiModel.layout.roundsProgressViewRightEdge = layout.roundsProgressViewRightEdge
-        uiModel.layout.thumbDimension = 0
-        
-        uiModel.colors.track = .init(colors.track)
-        uiModel.colors.progress = .init(colors.progress)
-        
-        uiModel.animations.progress = animations.progress
-        
-        return uiModel
     }
 }
