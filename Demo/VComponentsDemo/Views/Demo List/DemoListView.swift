@@ -34,7 +34,7 @@ struct DemoListView<Row>: View where Row: DemoableRow {
                             content: {
                                 LazyVStack(spacing: 0, content: {
                                     ForEach(section.rows.enumeratedArray(), id: \.element.id, content: { (j, row) in
-                                        VListRow(separator: .noFirstAndLastSeparators(isFirst: j == 0), content: {
+                                        VListRow(uiModel: .noFirstAndLastSeparators(isFirst: j == 0), content: {
                                             DemoListRowView(title: row.title, destination: row.body)
                                         })
                                     })

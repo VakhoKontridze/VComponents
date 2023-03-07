@@ -16,6 +16,14 @@ struct VListDemoView: View {
     
     @State private var rowCount: Int = 5
     @State private var rowSeparatorType: VListRowSeparatorTypeHelper = .rowEnclosingSeparators
+    
+    private func uiModel(i: Int) -> VListRowUIModel {
+        var uiModel: VListRowUIModel = .init()
+        
+        uiModel.layout.separatorType = rowSeparatorType.vListRowSeparatorType(isFirst: i == 0)
+        
+        return uiModel
+    }
 
     // MARK: Body
     var body: some View {
@@ -30,10 +38,13 @@ struct VListDemoView: View {
     private func component() -> some View {
         List(content: {
             ForEach(0..<rowCount, id: \.self, content: { i in
-                VListRow(separator: rowSeparatorType.vListRowSeparatorType(isFirst: i == 0), content: {
-                    Text(String(i))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                })
+                VListRow(
+                    uiModel: uiModel(i: i),
+                    content: {
+                        Text(String(i))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                )
             })
         })
             .vListStyle()
@@ -83,7 +94,7 @@ private enum VListRowSeparatorTypeHelper: Int, StringRepresentableHashableEnumer
         }
     }
     
-    func vListRowSeparatorType(isFirst: Bool) -> VListRowSeparatorType {
+    func vListRowSeparatorType(isFirst: Bool) -> VListRowUIModel.Layout.SeparatorType {
         switch self {
         case .none: return .none
         case .noFirstSeparator: return .noFirstSeparator()

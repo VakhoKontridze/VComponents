@@ -164,7 +164,7 @@ struct VBottomSheetDemoView: View {
             case true:
                 List(content: {
                     ForEach(0..<20, content: { num in
-                        VListRow(separator: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                        VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
                             Text(String(num))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         })
