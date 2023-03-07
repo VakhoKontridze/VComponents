@@ -20,7 +20,7 @@ struct VConfirmationDialogContentView: View {
     // MARK: Body
     var body: some View {
         ForEach(buttons.indices, id: \.self, content: { i in
-            buttons[i].body
+            buttons[i].makeBody()
         })
     }
 }

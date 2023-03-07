@@ -13,8 +13,8 @@ public protocol VAlertButtonProtocol: VAlertButtonConvertible {
     /// Body type.
     typealias Body = AnyView
     
-    /// Body.
-    func body(
+    /// Creates a `View` that represents the body of a button.
+    func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> Body
@@ -43,7 +43,7 @@ public struct VAlertPrimaryButton: VAlertButtonProtocol {
     }
     
     // MARK: Body
-    public func body(
+    public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
@@ -86,7 +86,7 @@ public struct VAlertSecondaryButton: VAlertButtonProtocol {
     }
     
     // MARK: Body
-    public func body(
+    public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
@@ -131,7 +131,7 @@ public struct VAlertOKButton: VAlertButtonProtocol {
     }
     
     // MARK: Body
-    public func body(
+    public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
@@ -174,7 +174,7 @@ public struct VAlertDestructiveButton: VAlertButtonProtocol {
     }
     
     // MARK: Body
-    public func body(
+    public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
@@ -219,7 +219,7 @@ public struct VAlertCancelButton: VAlertButtonProtocol {
     }
     
     // MARK: Body
-    public func body(
+    public func makeBody(
         uiModel: VAlertUIModel,
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {

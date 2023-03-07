@@ -13,8 +13,8 @@ public protocol VConfirmationDialogButtonProtocol: VConfirmationDialogButtonConv
     /// Body type.
     typealias Body = AnyView
     
-    /// Body.
-    var body: Body { get }
+    /// Creates a `View` that represents the body of a button.
+    func makeBody() -> Body
 }
 
 extension VConfirmationDialogButtonProtocol {
@@ -40,7 +40,7 @@ public struct VConfirmationDialogButton: VConfirmationDialogButtonProtocol {
     }
     
     // MARK: Body
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             Button(
                 title,
@@ -89,7 +89,7 @@ public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
     }
     
     // MARK: Body
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             Button(
                 title,
@@ -120,7 +120,7 @@ public struct VConfirmationDialogDestructiveButton: VConfirmationDialogButtonPro
     }
     
     // MARK: Body
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         AnyView(
             Button(
                 title,
@@ -161,7 +161,7 @@ public struct VConfirmationDialogCancelButton: VConfirmationDialogButtonProtocol
     }
     
     // MARK: Body
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             Button(
                 title,

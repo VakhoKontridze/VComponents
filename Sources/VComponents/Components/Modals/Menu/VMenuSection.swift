@@ -17,8 +17,8 @@ public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     /// Section body type.
     typealias Body = AnyView
     
-    /// Section body.
-    var body: Body { get }
+    /// Creates a `View` that represents the body of a section.
+    func makeBody() -> Body
 }
 
 extension VMenuSectionProtocol {
@@ -44,12 +44,12 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
     // MARK: Body
     public var title: String?
     
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             ForEach(
                 rows().enumeratedArray(),
                 id: \.offset,
-                content: { (_, row) in row.body }
+                content: { (_, row) in row.makeBody() }
             )
         )
     }
@@ -136,7 +136,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
     // MARK: Body
     public var title: String?
     
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             Picker(
                 selection: $selectedIndex,
@@ -145,7 +145,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
                         data.enumeratedArray(),
                         id: \.offset,
                         content: { (i, element) in
-                            content(element).body
+                            content(element).makeBody()
                                 .tag(i)
                         }
                     )

@@ -185,7 +185,7 @@ struct VAlert<Content>: View
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reversesOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
-            buttons[i].body(
+            buttons[i].makeBody(
                 uiModel: uiModel,
                 animateOut: { animateOut(completion: $0) }
             )

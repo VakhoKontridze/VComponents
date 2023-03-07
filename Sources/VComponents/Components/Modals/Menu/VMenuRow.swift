@@ -13,8 +13,8 @@ public protocol VMenuRowProtocol: VMenuRowConvertible {
     /// Body type.
     typealias Body = AnyView
     
-    /// Body.
-    var body: Body { get }
+    /// Creates a `View` that represents the body of a row.
+    func makeBody() -> Body
 }
 
 extension VMenuRowProtocol {
@@ -42,7 +42,7 @@ public struct VMenuTitleRow: VMenuRowProtocol {
     }
     
     // MARK: Body
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             Button(
                 title,
@@ -104,7 +104,7 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
     }
     
     // MARK: Body
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             Button(
                 role: role,
@@ -139,7 +139,7 @@ public struct VMenuSubMenuRow: VMenuRowProtocol {
     }
     
     // MARK: Body
-    public var body: AnyView {
+    public func makeBody() -> AnyView {
         .init(
             VMenu(
                 primaryAction: primaryAction,

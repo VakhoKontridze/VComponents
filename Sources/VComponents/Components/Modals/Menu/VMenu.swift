@@ -136,7 +136,7 @@ public struct VMenu<Label>: View where Label: View {
             content: { (_, section) in
                 TitledSection(
                     title: section.title,
-                    content: { section.body }
+                    content: { section.makeBody() }
                 )
             }
         )

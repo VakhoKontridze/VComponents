@@ -27,7 +27,7 @@ struct VContextMenuContentView: View {
             content: { (_, section) in
                 TitledSection(
                     title: section.title,
-                    content: { section.body }
+                    content: { section.makeBody() }
                 )
             }
         )
