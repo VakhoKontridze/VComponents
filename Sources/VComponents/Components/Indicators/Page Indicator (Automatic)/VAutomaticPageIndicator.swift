@@ -95,18 +95,6 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
         self.selectedIndex = selectedIndex
         self.dotContent = .custom(content: dot)
     }
-    
-    init( // TODO: Remove in 4.0.0
-        uiModel: VAutomaticPageIndicatorUIModel,
-        total: Int,
-        selectedIndex: Int,
-        dotContent: VPageIndicatorDotContent<Content>
-    ) {
-        self.uiModel = uiModel
-        self.total = total
-        self.selectedIndex = selectedIndex
-        self.dotContent = dotContent
-    }
 
     // MARK: Body
     public var body: some View {
