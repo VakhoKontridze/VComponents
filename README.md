@@ -46,7 +46,7 @@ Versions with different majors are not compatible.
 
 **Messages.** VToast
 
-**Indicators.** VSpinner, VProgressBar, VContinuousPageIndicator, VDashedPageIndicator, VCompactPageIndicator, VAutomaticPageIndicator
+**Indicators.** VContinuousSpinner, VDashedSpinner, VProgressBar, VPageIndicator, VCompactPageIndicator, VAutomaticPageIndicator
 
 **Misc.** VText, VWrappingMarquee, VBouncingMarquee
 
