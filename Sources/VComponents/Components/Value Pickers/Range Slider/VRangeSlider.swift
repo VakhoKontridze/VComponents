@@ -107,8 +107,8 @@ public struct VRangeSlider: View {
 
     private var progress: some View {
         Rectangle()
-            .padding(.leading, progress(.low))
-            .padding(.trailing, progress(.high))
+            .padding(.leading, progressWidth(.low))
+            .padding(.trailing, progressWidth(.high))
             .foregroundColor(uiModel.colors.progress.value(for: internalState))
     }
 
@@ -135,7 +135,10 @@ public struct VRangeSlider: View {
     }
     
     // MARK: Thumb
-    fileprivate enum Thumb { case low, high }
+    private enum Thumb {
+        case low
+        case high
+    }
 
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
@@ -192,8 +195,8 @@ public struct VRangeSlider: View {
         self.valueHigh = value
     }
 
-    // MARK: Progress
-    private func progress(_ thumb: Thumb) -> CGFloat {
+    // MARK: Progress Width
+    private func progressWidth(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
             case .low: return .init(valueLow - min)
@@ -209,9 +212,9 @@ public struct VRangeSlider: View {
         }
     }
 
-    // MARK: Thumb
+    // MARK: Thumb Offset
     private func thumbOffset(_ thumb: Thumb) -> CGFloat {
-        let progressW: CGFloat = progress(thumb)
+        let progressW: CGFloat = progressWidth(thumb)
         let thumbW: CGFloat = uiModel.layout.thumbDimension
         let width: CGFloat = sliderWidth
 
