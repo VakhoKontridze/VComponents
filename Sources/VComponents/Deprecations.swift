@@ -128,6 +128,28 @@ extension VTextFieldUIModel.Colors {
     }
 }
 
+// MARK: - V List
+@available(*, deprecated, message: "Pass type to UI model instead")
+public typealias VListRowSeparatorType = VListRowUIModel.Layout.SeparatorType
+
+extension VListRow {
+    @available(*, deprecated, message: "Pass type to UI model instead")
+    public init(
+        uiModel: VListRowUIModel = .init(),
+        separator separatorType: VListRowSeparatorType,// = .default,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.init(
+            uiModel: {
+                var uiModel = uiModel
+                uiModel.layout.separatorType = separatorType
+                return uiModel
+            }(),
+            content: content
+        )
+    }
+}
+
 // MARK: - V Modal
 extension VModalUIModel.Layout {
     @available(*, deprecated, message: "Use sub UI model instead")
@@ -224,7 +246,7 @@ extension View {
     public func vToast(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
+        type toastTextLineType: VToastTextLineType,// = .singleLine,
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -248,7 +270,7 @@ extension View {
     public func vToast<Item>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
+        type toastTextLineType: VToastTextLineType,// = .singleLine,
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -274,7 +296,7 @@ extension View {
     public func vToast<T>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
+        type toastTextLineType: VToastTextLineType,// = .singleLine,
         isPresented: Binding<Bool>,
         presenting data: T?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -300,7 +322,7 @@ extension View {
     public func vToast<E>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
+        type toastTextLineType: VToastTextLineType,// = .singleLine,
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,

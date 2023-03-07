@@ -12,6 +12,10 @@ VRoundedLabeledButton
 
 - Missing `titleLabelLineType` from `VRoundedLabeledButtonUIModel` is now utilized inside the button
 
+VList
+
+- `VListRowSeparatorType` is renamed to `SeparatorType` and is moved to `VListRowUIModel`
+
 VModal
 
 - Issue with some content not stretching to full width is fixed

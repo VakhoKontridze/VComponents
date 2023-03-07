@@ -54,7 +54,7 @@ import SwiftUI
 ///
 ///     List(content: {
 ///         ForEach(titles, id: \.self, content: { title in
-///             VListRow(separator: .none, content: {
+///             VListRow(uiModel: .none, content: {
 ///                 Text(title)
 ///             })
 ///         })
@@ -65,7 +65,7 @@ import SwiftUI
 ///
 ///     List(content: {
 ///         ForEach(titles.enumeratedArray(), id: \.element, content: { (i, title) in
-///             VListRow(separator: .rowEnclosingSeparators(isFirst: i == 0), content: {
+///             VListRow(uiModel: .rowEnclosingSeparators(isFirst: i == 0), content: {
 ///                 Text(title)
 ///             })
 ///         })
@@ -77,30 +77,27 @@ public struct VListRow<Content>: View
 {
     // MARK: Properties
     private let uiModel: VListRowUIModel
-    private let separatorType: VListRowSeparatorType
     private let content: () -> Content
     
     // MARK: Initializers
     /// Initializes component with content.
     public init(
         uiModel: VListRowUIModel = .init(),
-        separator separatorType: VListRowSeparatorType = .default,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
-        self.separatorType = separatorType
         self.content = content
     }
     
     // MARK: Body
     public var body: some View {
         VStack(alignment: .leading, spacing: 0, content: {
-            if separatorType.contains(.top) { separator }
+            if uiModel.layout.separatorType.contains(.top) { separator }
             
             content()
                 .padding(uiModel.layout.margins)
             
-            if separatorType.contains(.bottom) { separator }
+            if uiModel.layout.separatorType.contains(.bottom) { separator }
         })
             .listRowInsets(.init())
             .listRowBackground(uiModel.colors.background)

@@ -26,6 +26,9 @@ public struct VListRowUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Separator type. Defaults to `default`.
+        public var separatorType: SeparatorType = .default
+        
         /// Margins. Defaults to `15` horizontal, `9` vertical.
         public var margins: Margins = .init(
             horizontal: 15,
@@ -41,6 +44,66 @@ public struct VListRowUIModel {
         // MARK: Initializers
         /// Initializes model with default values.
         public init() {}
+        
+        // MARK: Separator Type
+        /// Enum that represents separator type, such as `top` or `bottom`.
+        public struct SeparatorType: OptionSet {
+            // MARK: Options
+            /// Separator at the top of the row.
+            public static var top: Self { .init(rawValue: 1 << 0) }
+            
+            /// Separator at the bottom of the row.
+            public static var bottom: Self { .init(rawValue: 1 << 1) }
+            
+            // MARK: Options Initializers
+            /// Default value. Set to `bottom`.
+            public static var `default`: Self { .bottom }
+            
+            /// No separators.
+            public static var none: Self { [] }
+            
+            /// Separator at the top and the bottom of the row.
+            ///
+            /// Shouldn't be used as standard parameter, since in the non-first, non-last rows,
+            /// separators would duplicate and stack in height.
+            public static var all: Self { [.top, .bottom] }
+            
+            /// Configuration that displays separators at the bottom of all rows in the list.
+            public static func noFirstSeparator() -> Self {
+                .bottom
+            }
+            
+            /// Configuration that displays separators at the top of all rows in the list.
+            public static func noLastSeparator() -> Self {
+                .top
+            }
+            
+            /// Configuration that displays separators in rows at every position in the list, except for the top and bottom.
+            public static func noFirstAndLastSeparators(isFirst: Bool) -> Self {
+                if isFirst {
+                    return .none
+                } else {
+                    return .top
+                }
+            }
+            
+            /// Configuration that displays separators at the top and bottom of all rows in the list.
+            public static func rowEnclosingSeparators(isFirst: Bool) -> Self {
+                if isFirst {
+                    return .all
+                } else {
+                    return .bottom
+                }
+            }
+            
+            // MARK: Properties
+            public let rawValue: Int
+            
+            // MARK: Initializers
+            public init(rawValue: Int) {
+                self.rawValue = rawValue
+            }
+        }
         
         // MARK: Margins
         /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
@@ -63,5 +126,56 @@ public struct VListRowUIModel {
         // MARK: Initializers
         /// Initializes model with default values.
         public init() {}
+    }
+}
+
+// MARK: - Factory
+extension VListRowUIModel {
+    /// `VListRowUIModel` that displays separators at the bottom of all rows in the list.
+    public static func noFirstSeparator() -> VListRowUIModel {
+        var uiModel: VListRowUIModel = .init()
+        
+        uiModel.layout.separatorType = .bottom
+        
+        return uiModel
+    }
+    
+    /// `VListRowUIModel` that displays separators at the top of all rows in the list.
+    public static func noLastSeparator() -> VListRowUIModel {
+        var uiModel: VListRowUIModel = .init()
+        
+        uiModel.layout.separatorType = .top
+        
+        return uiModel
+    }
+    
+    /// `VListRowUIModel` that displays separators in rows at every position in the list, except for the top and bottom.
+    public static func noFirstAndLastSeparators(isFirst: Bool) -> VListRowUIModel {
+        var uiModel: VListRowUIModel = .init()
+        
+        uiModel.layout.separatorType = {
+            if isFirst {
+                return .none
+            } else {
+                return .top
+            }
+        }()
+        
+        return uiModel
+    }
+    
+    /// `VListRowUIModel` that displays separators at the top and bottom of all rows in the list.
+    public static func rowEnclosingSeparators(isFirst: Bool) -> VListRowUIModel {
+        var uiModel: VListRowUIModel = .init()
+        
+        uiModel.layout.separatorType = {
+            if isFirst {
+                return .all
+            } else {
+                return .bottom
+            }
+        }()
+        
+        return uiModel
     }
 }
