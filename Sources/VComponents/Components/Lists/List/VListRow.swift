@@ -13,8 +13,6 @@ import SwiftUI
 /// Component is designed to be used within `List` and `ScrollView`.
 /// When creating a `List`, `.vListStyle()` modifier must be applied.
 ///
-/// Component works by inserting `VListRowSeparator` as separators, based on strategy of `VListRowSeparatorType`.
-///
 /// UI Model can be passed as parameter.
 ///
 /// Default `List` can be created as:

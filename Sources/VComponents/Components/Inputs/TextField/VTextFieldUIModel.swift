@@ -49,6 +49,9 @@ public struct VTextFieldUIModel {
         /// Textfield border width. Defaults to `1`.
         public var borderWidth: CGFloat = 1
         
+        /// Content type. Defaults to `default`.
+        public var contentType: ContentType = .default
+        
         /// Content horizontal margin. Defaults to `15`.
         public var contentMarginHorizontal: CGFloat = 15
         
@@ -94,6 +97,53 @@ public struct VTextFieldUIModel {
         // MARK: Initializers
         /// Initializes model with default values.
         public init() {}
+        
+        // MARK: Content Type
+        /// Enum that represents content type, such as `standard`, `secure`, or `search`.
+        public enum ContentType: Int, CaseIterable {
+            // MARK: Cases
+            /// Standard type.
+            case standard
+            
+            /// Secure type.
+            ///
+            /// Visibility icon is present, and securities, such as copying is enabled.
+            case secure
+            
+            /// Search type.
+            ///
+            /// Magnification icon is present.
+            case search
+            
+            // MARK: Properties
+            var isStandard: Bool {
+                switch self {
+                case .standard: return true
+                case .secure: return false
+                case .search: return false
+                }
+            }
+            
+            var isSecure: Bool {
+                switch self {
+                case .standard: return false
+                case .secure: return true
+                case .search: return false
+                }
+            }
+            
+            var isSearch: Bool {
+                switch self {
+                case .standard: return false
+                case .secure: return false
+                case .search: return true
+                }
+            }
+            
+            // MARK: Initializers
+            /// Default value. Set to `standard`.
+            public static var `default`: Self { .standard }
+        }
     }
 
     // MARK: Colors
@@ -254,6 +304,27 @@ public struct VTextFieldUIModel {
         uiModel.layout = layout.visibilityButtonSubUIModel
         
         uiModel.colors = colors.visibilityButtonSubUIModel
+        
+        return uiModel
+    }
+}
+
+// MARK: - Factory
+extension VTextFieldUIModel {
+    /// `VTextFieldUIModel` with secure content type.
+    public static var secure: VTextFieldUIModel {
+        var uiModel: VTextFieldUIModel = .init()
+        
+        uiModel.layout.contentType = .secure
+        
+        return uiModel
+    }
+    
+    /// `VTextFieldUIModel` with search content type.
+    public static var search: VTextFieldUIModel {
+        var uiModel: VTextFieldUIModel = .init()
+        
+        uiModel.layout.contentType = .search
         
         return uiModel
     }

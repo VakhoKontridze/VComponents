@@ -12,6 +12,10 @@ VRoundedLabeledButton
 
 - Missing `titleLabelLineType` from `VRoundedLabeledButtonUIModel` is now utilized inside the button
 
+VTextField
+
+- `VTextFieldType` is renamed to `ContentType` and is moved to `VTextFieldUIModel`
+
 VList
 
 - `VListRowSeparatorType` is renamed to `SeparatorType` and is moved to `VListRowUIModel`

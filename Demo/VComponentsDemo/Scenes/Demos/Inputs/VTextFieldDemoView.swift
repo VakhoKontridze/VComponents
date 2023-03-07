@@ -17,7 +17,7 @@ struct VTextFieldDemoView: View {
     @State private var text: String = ""
     @State private var isEnabled: Bool = true
     @FocusState private var isFocused: Bool
-    @State private var textFieldType: VTextFieldType = .default
+    @State private var textFieldContentType: VTextFieldUIModel.Layout.ContentType = .default
     @State private var textFieldHighlight: VTextFieldHighlight = .none
     @State private var hasPlaceholder: Bool = true
     @State private var hasHeader: Bool = true
@@ -30,6 +30,8 @@ struct VTextFieldDemoView: View {
     
     private var uiModel: VTextFieldUIModel {
         var uiModel: VTextFieldUIModel = .init()
+        
+        uiModel.layout.contentType = textFieldContentType
         
         uiModel.layout.textAlignment = textAlignment
         
@@ -70,7 +72,6 @@ struct VTextFieldDemoView: View {
             
             VTextField(
                 uiModel: uiModel,
-                type: textFieldType,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
@@ -96,7 +97,7 @@ struct VTextFieldDemoView: View {
         })
 
         DemoViewSettingsSection(content: {
-            VSegmentedPicker(selection: $textFieldType, headerTitle: "Type")
+            VSegmentedPicker(selection: $textFieldContentType, headerTitle: "Type")
 
             VSegmentedPicker(selection: $textFieldHighlight, headerTitle: "Highlight")
         })
@@ -177,7 +178,7 @@ enum VTextFieldInternalState: StringRepresentableHashableEnumeration {
     }
 }
 
-extension VTextFieldType: StringRepresentableHashableEnumeration {
+extension VTextFieldUIModel.Layout.ContentType: StringRepresentableHashableEnumeration {
     public var stringRepresentation: String {
         switch self {
         case .standard: return "Standard"

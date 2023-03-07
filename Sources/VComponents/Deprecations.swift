@@ -128,6 +128,33 @@ extension VTextFieldUIModel.Colors {
     }
 }
 
+@available(*, deprecated, message: "Pass type to UI model instead")
+public typealias VTextFieldType = VTextFieldUIModel.Layout.ContentType
+
+extension VTextField {
+    @available(*, deprecated, message: "Pass type to UI model instead")
+    public init(
+        uiModel: VTextFieldUIModel = .init(),
+        type textFieldType: VTextFieldType,// = .default,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        placeholder: String? = nil,
+        text: Binding<String>
+    ) {
+        self.init(
+            uiModel: {
+                var uiModel = uiModel
+                uiModel.layout.contentType = textFieldType
+                return uiModel
+            }(),
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
+            placeholder: placeholder,
+            text: text
+        )
+    }
+}
+
 // MARK: - V List
 @available(*, deprecated, message: "Pass type to UI model instead")
 public typealias VListRowSeparatorType = VListRowUIModel.Layout.SeparatorType

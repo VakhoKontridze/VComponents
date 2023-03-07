@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Text Field
 /// Input component that displays an editable text interface.
 ///
-/// UI Model, type, placeholder, header, and footer can be passed as parameters.
+/// UI Model, placeholder, header, and footer can be passed as parameters.
 ///
 /// By default, component type is `standard`.
 /// If `secure` type is used, visibility button would replace clear button. When textfield is secure and text is empty, and buttons are not visible.
@@ -73,7 +73,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VTextField(
-///             type: .secure,
+///             uiModel: .secure,
 ///             text: $text
 ///         )
 ///             .padding()
@@ -85,7 +85,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VTextField(
-///             type: .search,
+///             uiModel: .search,
 ///             text: $text
 ///         )
 ///             .padding()
@@ -130,7 +130,6 @@ import VCore
 public struct VTextField: View {
     // MARK: Properties
     private let uiModel: VTextFieldUIModel
-    private let textFieldType: VTextFieldType
 
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
@@ -149,14 +148,12 @@ public struct VTextField: View {
     /// Initializes component with text.
     public init(
         uiModel: VTextFieldUIModel = .init(),
-        type textFieldType: VTextFieldType = .default,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         placeholder: String? = nil,
         text: Binding<String>
     ) {
         self.uiModel = uiModel
-        self.textFieldType = textFieldType
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.placeholder = placeholder
@@ -221,7 +218,7 @@ public struct VTextField: View {
     }
 
     @ViewBuilder private var searchIcon: some View {
-        if textFieldType.isSearch {
+        if uiModel.layout.contentType.isSearch {
             ImageBook.textFieldSearch
                 .resizable()
                 .frame(dimension: uiModel.layout.searchIconDimension)
@@ -231,7 +228,7 @@ public struct VTextField: View {
 
     private var textField: some View {
         SecurableTextField(
-            isSecure: textFieldType.isSecure && !secureFieldIsVisible,
+            isSecure: uiModel.layout.contentType.isSecure && !secureFieldIsVisible,
             placeholder: placeholder.map {
                 Text($0)
                     .foregroundColor(uiModel.colors.placeholder.value(for: internalState))
@@ -254,7 +251,7 @@ public struct VTextField: View {
     }
 
     @ViewBuilder private var clearButton: some View {
-        if !textFieldType.isSecure && clearButtonIsVisible && uiModel.misc.hasClearButton {
+        if !uiModel.layout.contentType.isSecure && clearButtonIsVisible && uiModel.misc.hasClearButton {
             VRoundedButton(
                 uiModel: uiModel.clearButtonSubUIModel,
                 action: didTapClearButton,
@@ -265,7 +262,7 @@ public struct VTextField: View {
     }
 
     @ViewBuilder private var visibilityButton: some View {
-        if textFieldType.isSecure {
+        if uiModel.layout.contentType.isSecure {
             VPlainButton(
                 uiModel: uiModel.visibilityButtonSubUIModel,
                 action: { secureFieldIsVisible.toggle() },
@@ -282,7 +279,7 @@ public struct VTextField: View {
         })
 
         DispatchQueue.main.async(execute: {
-            if secureFieldIsVisible && !textFieldType.isSecure { secureFieldIsVisible = false }
+            if secureFieldIsVisible && !uiModel.layout.contentType.isSecure { secureFieldIsVisible = false }
         })
     }
 
@@ -317,9 +314,13 @@ struct VTextField_Previews: PreviewProvider {
         
         var body: some View {
             VStack(spacing: 50, content: {
-                ForEach(VTextFieldType.allCases, id: \.self, content: { type in
+                ForEach(VTextFieldUIModel.Layout.ContentType.allCases, id: \.self, content: { contentType in
                     VTextField(
-                        type: type,
+                        uiModel: {
+                            var uiModel: VTextFieldUIModel = .init()
+                            uiModel.layout.contentType = contentType
+                            return uiModel
+                        }(),
                         headerTitle: "Lorem ipsum dolor sit amet",
                         footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
                         placeholder: "Lorem ipsum",
