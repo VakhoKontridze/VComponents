@@ -25,7 +25,13 @@ extension View {
             self
                 .blocksHitTesting(parameters.isInteractionDisabled)
                 .overlay(content: {
-                    VSpinner(type: parameters.spinnerType)
+                    switch parameters.spinnerType {
+                    case .continuous(let uiModel):
+                        VContinuousSpinner(uiModel: uiModel)
+                        
+                    case .dashed(let uiModel):
+                        VDashedSpinner(uiModel: uiModel)
+                    }
                 })
         }
     }

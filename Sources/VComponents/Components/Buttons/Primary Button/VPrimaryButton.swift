@@ -150,7 +150,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
     
     @ViewBuilder private var spinner: some View {
         if internalState == .loading {
-            VSpinner(type: .continuous(uiModel: uiModel.spinnerSubUIModel))
+            VContinuousSpinner(uiModel: uiModel.spinnerSubUIModel)
         }
     }
     

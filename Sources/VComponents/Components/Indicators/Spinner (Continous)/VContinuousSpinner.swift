@@ -1,5 +1,5 @@
 //
-//  VSpinnerContinuous.swift
+//  VContinuousSpinner.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 18.12.20.
@@ -7,20 +7,31 @@
 
 import SwiftUI
 
-// MARK: - V Spinner Continuous
-struct VSpinnerContinuous: View {
+// MARK: - V Continuous Spinner
+/// Indicator component that indicates activity.
+///
+/// UI model can be passed as parameter.
+///
+///     var body: some View {
+///         VContinuousSpinner()
+///     }
+///
+public struct VContinuousSpinner: View {
     // MARK: Properties
-    private let uiModel: VSpinnerContinuousUIModel
+    private let uiModel: VContinuousSpinnerUIModel
     
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers
-    init(uiModel: VSpinnerContinuousUIModel) {
+    /// Initializes component.
+    public init(
+        uiModel: VContinuousSpinnerUIModel = .init()
+    ) {
         self.uiModel = uiModel
     }
 
     // MARK: Body
-    var body: some View {
+    public var body: some View {
         Circle()
             .trim(from: 0, to: uiModel.layout.length)
             .stroke(
@@ -39,8 +50,9 @@ struct VSpinnerContinuous: View {
     }
 }
 
-struct VSpinnerContinuous_Previews: PreviewProvider {
+// MARK: - Preview
+struct VContinuousSpinner_Previews: PreviewProvider {
     static var previews: some View {
-        VSpinnerContinuous(uiModel: .init())
+        VContinuousSpinner()
     }
 }

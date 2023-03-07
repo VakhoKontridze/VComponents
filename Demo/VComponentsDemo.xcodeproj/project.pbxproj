@@ -22,7 +22,7 @@
 		87ADCD7A29B6275800FE3F9E /* VRangeSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4029B6275800FE3F9E /* VRangeSliderDemoView.swift */; };
 		87ADCD7B29B6275800FE3F9E /* VStepperDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4129B6275800FE3F9E /* VStepperDemoView.swift */; };
 		87ADCD7C29B6275800FE3F9E /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4229B6275800FE3F9E /* VSliderDemoView.swift */; };
-		87ADCD7D29B6275800FE3F9E /* VSpinnerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4429B6275800FE3F9E /* VSpinnerDemoView.swift */; };
+		87ADCD7D29B6275800FE3F9E /* VSpinnersDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4429B6275800FE3F9E /* VSpinnersDemoView.swift */; };
 		87ADCD7E29B6275800FE3F9E /* VProgressBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4529B6275800FE3F9E /* VProgressBarDemoView.swift */; };
 		87ADCD8029B6275800FE3F9E /* VSegmentedPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4829B6275800FE3F9E /* VSegmentedPickerDemoView.swift */; };
 		87ADCD8129B6275800FE3F9E /* VWheelPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4929B6275800FE3F9E /* VWheelPickerDemoView.swift */; };
@@ -75,7 +75,7 @@
 		87ADCD4029B6275800FE3F9E /* VRangeSliderDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VRangeSliderDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4129B6275800FE3F9E /* VStepperDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStepperDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4229B6275800FE3F9E /* VSliderDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
-		87ADCD4429B6275800FE3F9E /* VSpinnerDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerDemoView.swift; sourceTree = "<group>"; };
+		87ADCD4429B6275800FE3F9E /* VSpinnersDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnersDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4529B6275800FE3F9E /* VProgressBarDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VProgressBarDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4829B6275800FE3F9E /* VSegmentedPickerDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4929B6275800FE3F9E /* VWheelPickerDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VWheelPickerDemoView.swift; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 		87ADCD4329B6275800FE3F9E /* Indicators */ = {
 			isa = PBXGroup;
 			children = (
-				87ADCD4429B6275800FE3F9E /* VSpinnerDemoView.swift */,
+				87ADCD4429B6275800FE3F9E /* VSpinnersDemoView.swift */,
 				87ADCD4529B6275800FE3F9E /* VProgressBarDemoView.swift */,
 				87F76CA229B76934000CC396 /* VPageIndicatorsDemoView.swift */,
 			);
@@ -480,7 +480,7 @@
 				87ADCD9029B6275800FE3F9E /* VTextViewDemoView.swift in Sources */,
 				87F76CA129B761EB000CC396 /* VMarqueesDemoView.swift in Sources */,
 				87ADCD9829B6275800FE3F9E /* NoDismissTypeWarningView.swift in Sources */,
-				87ADCD7D29B6275800FE3F9E /* VSpinnerDemoView.swift in Sources */,
+				87ADCD7D29B6275800FE3F9E /* VSpinnersDemoView.swift in Sources */,
 				87ADCD9D29B6275800FE3F9E /* HomeRow.swift in Sources */,
 				87ADCD9129B6275800FE3F9E /* VTextFieldDemoView.swift in Sources */,
 				87ADCD8A29B6275800FE3F9E /* VTextDemoView.swift in Sources */,

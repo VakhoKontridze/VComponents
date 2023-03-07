@@ -19,7 +19,7 @@ enum HomeRow: Int, DemoableRow {
     case list
     case modal, bottomSheet, sideBar, alert, confirmationDialog, menu, contextMenu
     case toast
-    case spinner, progressBar, pageIndicators
+    case spinners, progressBar, pageIndicators
     case text, marquees
 
     // MARK: Properties
@@ -34,7 +34,7 @@ enum HomeRow: Int, DemoableRow {
             .init(id: 6, title: "Lists", rows: [.list]),
             .init(id: 7, title: "Modals", rows: [.modal, .bottomSheet, .sideBar, .alert, .confirmationDialog, .menu, .contextMenu]),
             .init(id: 8, title: "Messages", rows: [.toast]),
-            .init(id: 9, title: "Indicators", rows: [.spinner, .progressBar, .pageIndicators]),
+            .init(id: 9, title: "Indicators", rows: [.spinners, .progressBar, .pageIndicators]),
             .init(id: 10, title: "Misc", rows: [.text, .marquees])
         ]
     }
@@ -76,7 +76,7 @@ enum HomeRow: Int, DemoableRow {
             
         case .toast: return VToastDemoView.navBarTitle
 
-        case .spinner: return VSpinnerDemoView.navBarTitle
+        case .spinners: return VSpinnersDemoView.navBarTitle
         case .progressBar: return VProgressBarDemoView.navBarTitle
         case .pageIndicators: return VPageIndicatorsDemoView.navBarTitle
 
@@ -122,7 +122,7 @@ enum HomeRow: Int, DemoableRow {
             
         case .toast: VToastDemoView()
 
-        case .spinner: VSpinnerDemoView()
+        case .spinners: VSpinnersDemoView()
         case .progressBar: VProgressBarDemoView()
         case .pageIndicators: VPageIndicatorsDemoView()
 

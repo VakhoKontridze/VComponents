@@ -1,5 +1,5 @@
 //
-//  VSpinnerDemoView.swift
+//  VSpinnersDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -9,12 +9,12 @@ import SwiftUI
 import VComponents
 import VCore
 
-// MARK: - V Spinner Demo View
-struct VSpinnerDemoView: View {
+// MARK: - V Spinners Demo View
+struct VSpinnersDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Spinner" }
+    static var navBarTitle: String { "Spinners (Continuous, Dashed)" }
     
-    @State private var spinnerType: VSpinnerTypeHelper = .continuous
+    @State private var spinnerStyle: VSpinnerStyleHelper = .continuous
 
     // MARK: Body
     var body: some View {
@@ -26,19 +26,19 @@ struct VSpinnerDemoView: View {
     }
     
     @ViewBuilder private func component() -> some View {
-        switch spinnerType {
-        case .continuous: VSpinner(type: .continuous())
-        case .dashed: VSpinner(type: .dashed())
+        switch spinnerStyle {
+        case .continuous: VContinuousSpinner()
+        case .dashed: VDashedSpinner()
         }
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $spinnerType, headerTitle: "Type")
+        VSegmentedPicker(selection: $spinnerStyle, headerTitle: "Style")
     }
 }
 
 // MARK: - Helpers
-private enum VSpinnerTypeHelper: Int, StringRepresentableHashableEnumeration {
+private enum VSpinnerStyleHelper: Int, StringRepresentableHashableEnumeration {
     case continuous
     case dashed
     
@@ -51,8 +51,8 @@ private enum VSpinnerTypeHelper: Int, StringRepresentableHashableEnumeration {
 }
 
 // MARK: - Preview
-struct VSpinnerDemoView_Previews: PreviewProvider {
+struct VSpinnersDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VSpinnerDemoView()
+        VSpinnersDemoView()
     }
 }

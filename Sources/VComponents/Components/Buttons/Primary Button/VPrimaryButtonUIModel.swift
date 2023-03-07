@@ -62,7 +62,7 @@ public struct VPrimaryButtonUIModel {
         /// Model for customizing spinner layout.
         ///
         /// Not all properties will have an effect, and setting them may be futile.
-        public var spinnerSubUIModel: VSpinnerContinuousUIModel.Layout = .init()
+        public var spinnerSubUIModel: VContinuousSpinnerUIModel.Layout = .init()
         
         /// Spacing between label and spinner. Defaults to `20`.
         ///
@@ -123,8 +123,8 @@ public struct VPrimaryButtonUIModel {
         /// Model for customizing spinner colors.
         ///
         /// Not all properties will have an effect, and setting them may be futile.
-        public var spinnerSubUIModel: VSpinnerContinuousUIModel.Colors = {
-            var uiModel: VSpinnerContinuousUIModel.Colors = .init()
+        public var spinnerSubUIModel: VContinuousSpinnerUIModel.Colors = {
+            var uiModel: VContinuousSpinnerUIModel.Colors = .init()
             uiModel.spinner = ColorBook.primaryWhite
             return uiModel
         }()
@@ -163,7 +163,7 @@ public struct VPrimaryButtonUIModel {
         /// Model for customizing spinner animations.
         ///
         /// Not all properties will have an effect, and setting them may be futile.
-        public var spinnerSubUIModel: VSpinnerContinuousUIModel.Animations = .init()
+        public var spinnerSubUIModel: VContinuousSpinnerUIModel.Animations = .init()
         
         // MARK: Initializers
         /// Initializes model with default values.
@@ -171,8 +171,8 @@ public struct VPrimaryButtonUIModel {
     }
     
     // MARK: Sub UI Models
-    var spinnerSubUIModel: VSpinnerContinuousUIModel {
-        var uiModel: VSpinnerContinuousUIModel = .init()
+    var spinnerSubUIModel: VContinuousSpinnerUIModel {
+        var uiModel: VContinuousSpinnerUIModel = .init()
         
         uiModel.layout = layout.spinnerSubUIModel
         

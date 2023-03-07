@@ -28,6 +28,10 @@ VToast
 
 - `VToastTextLineType` is renamed to `TextLineType` and is moved to `VToastUIModel`
 
+VSpinner
+
+- `VSpinner` is split to `VContinuousSpinner` and `VDashedSpinner`
+
 VPageIndicator
 
 - `VPageIndicator` is split to `VPageIndicator`, `VCompactPageIndicator` and `VAutomaticPageIndicator`

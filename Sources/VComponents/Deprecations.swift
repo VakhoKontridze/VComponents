@@ -374,6 +374,82 @@ extension View {
     }
 }
 
+// MARK: - V Spinner
+@available(*, deprecated, message: "Use `VContinuousSpinner` or `VDashedSpinner` instead")
+public struct VSpinner: View {
+    private let spinnerType: VSpinnerType
+    
+    public init(
+        type spinnerType: VSpinnerType = .default
+    ) {
+        self.spinnerType = spinnerType
+    }
+
+    public var body: some View {
+        switch spinnerType._spinnerType {
+        case .continuous(let uiModel): VContinuousSpinner(uiModel: uiModel)
+        case .dashed(let uiModel): VDashedSpinner(uiModel: uiModel)
+        }
+    }
+}
+
+@available(*, deprecated, message: "Use `VContinuousSpinner` or `VDashedSpinner` instead")
+public struct VSpinnerType {
+    fileprivate let _spinnerType: _VSpinnerType
+    
+    private init(
+        spinnerType: _VSpinnerType
+    ) {
+        self._spinnerType = spinnerType
+    }
+    
+    public static func continuous(
+        uiModel: VContinuousSpinnerUIModel = .init()
+    ) -> Self {
+        .init(spinnerType: .continuous(
+            uiModel: uiModel
+        ))
+    }
+    
+    public static func dashed(
+        uiModel: VDashedSpinnerUIModel = .init()
+    ) -> Self {
+        .init(spinnerType: .dashed(
+            uiModel: uiModel
+        ))
+    }
+    
+    public static var `default`: Self { .continuous() }
+}
+
+private enum _VSpinnerType {
+    case continuous(uiModel: VContinuousSpinnerUIModel)
+    case dashed(uiModel: VDashedSpinnerUIModel)
+}
+
+@available(*, deprecated, renamed: "VContinuousSpinnerUIModel")
+public typealias VSpinnerContinuousUIModel = VContinuousSpinnerUIModel
+
+@available(*, deprecated, renamed: "VDashedSpinnerUIModel")
+public typealias VSpinnerDashedUIModel = VDashedSpinnerUIModel
+
+@available(*, deprecated, message: "Use `init` with `VSpinnerParameters.SpinnerType` instead")
+extension VSpinnerParameters {
+    public init(
+        type spinnerType: VSpinnerType,
+        isInteractionDisabled: Bool
+    ) {
+        self.spinnerType = {
+            switch spinnerType._spinnerType {
+            case .continuous(let uiModel): return .continuous(uiModel: uiModel)
+            case .dashed(let uiModel): return .dashed(uiModel: uiModel)
+            }
+        }()
+        
+        self.isInteractionDisabled = isInteractionDisabled
+    }
+}
+
 // MARK: - V Page Indicator
 extension VPageIndicator {
     @available(*, unavailable, message: "'init(type:total:selectedIndex:)' is unavailable: Use `VPageIndicator`, `VCompactPageIndicator`, or `VAutomaticPageIndicator` instead")
