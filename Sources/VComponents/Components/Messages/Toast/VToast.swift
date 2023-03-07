@@ -15,7 +15,6 @@ struct VToast: View {
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
     private let uiModel: VToastUIModel
-    private let toastTextLineType: VToastTextLineType
     
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
@@ -29,13 +28,11 @@ struct VToast: View {
     // MARK: Initializers
     init(
         uiModel: VToastUIModel,
-        type toastTextLineType: VToastTextLineType,
         onPresent presentHandler: (() -> Void)?,
         onDismiss dismissHandler: (() -> Void)?,
         text: String
     ) {
         self.uiModel = uiModel
-        self.toastTextLineType = toastTextLineType
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
         self.text = text
@@ -61,7 +58,7 @@ struct VToast: View {
     
     private var contentView: some View {
         VText(
-            type: toastTextLineType._toastTextLineType.toTextLineType,
+            type: uiModel.layout.textLineType.toVCoreTextLineType,
             color: uiModel.colors.text,
             font: .init(uiModel.fonts.text),
             text: text
@@ -80,7 +77,7 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         let initialHeight: CGFloat = {
-            switch toastTextLineType._toastTextLineType {
+            switch uiModel.layout.textLineType {
             case .singleLine:
                 let label: UILabel = .init()
                 label.font = uiModel.fonts.text
@@ -183,7 +180,6 @@ struct VToast_Previews: PreviewProvider {
                 uiModel.animations.duration = .infinity
                 return uiModel
             }(),
-            type: .singleLine,
             onPresent: nil,
             onDismiss: nil,
             text: "Lorem ipsum dolor sit amet"

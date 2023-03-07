@@ -40,6 +40,9 @@ public struct VToastUIModel {
         /// Corner radius type. Defaults to `default`.
         public var cornerRadiusType: CornerRadiusType = .default
         
+        /// Text line type. Defaults to `default`.
+        public var textLineType: TextLineType = .default
+        
         /// Text margins. Defaults to `20` horizontal and `12` vertical.
         public var textMargins: Margins = .init(
             horizontal: 20,
@@ -59,6 +62,32 @@ public struct VToastUIModel {
         // MARK: Margins
         /// Model that contains `horizontal` and `vertical` margins.
         public typealias Margins = EdgeInsets_HorizontalVertical
+        
+        // MARK: Text Line Type
+        /// Enum that represents text line, such as `singleLine` or `multiLine`.
+        public enum TextLineType {
+            // MARK: Cases
+            /// Single-line.
+            case singleLine
+            
+            /// Multi-line.
+            case multiLine(alignment: TextAlignment, lineLimit: Int?)
+            
+            // MARK: Properties
+            var toVCoreTextLineType: VCore.TextLineType {
+                switch self {
+                case .singleLine:
+                    return .singleLine
+                
+                case .multiLine(let alignment, let lineLimit):
+                    return .multiLine(alignment: alignment, lineLimit: lineLimit)
+                }
+            }
+            
+            // MARK: Initializers
+            /// Default value. Set to `singleLine`.
+            public static var `default`: Self { .singleLine }
+        }
         
         // MARK: Presentation Edge
         /// Enum that represents presentation edge, such as `top` or `bottom`.

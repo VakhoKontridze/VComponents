@@ -193,6 +193,138 @@ extension VBottomSheetUIModel.Colors {
     }
 }
 
+// MARK: - V Toast
+@available(*, deprecated, message: "Pass type to UI model instead")
+public struct VToastTextLineType {
+    let _toastTextLineType: VToastUIModel.Layout.TextLineType
+    
+    private init(
+        toastTextLineType: VToastUIModel.Layout.TextLineType
+    ) {
+        self._toastTextLineType = toastTextLineType
+    }
+    
+    public static var singleLine: Self {
+        .init(toastTextLineType: .singleLine)
+    }
+    
+    public static func multiLine(
+        alignment: TextAlignment,
+        lineLimit: Int?
+    ) -> Self {
+        .init(toastTextLineType: .multiLine(
+            alignment: alignment,
+            lineLimit: lineLimit
+        ))
+    }
+}
+
+extension View {
+    @available(*, deprecated, message: "Pass type to UI model instead")
+    public func vToast(
+        id: String,
+        uiModel: VToastUIModel = .init(),
+        type toastTextLineType: VToastTextLineType = .singleLine,
+        isPresented: Binding<Bool>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        text: String
+    ) -> some View {
+        vToast(
+            id: id,
+            uiModel: {
+                var uiModel = uiModel
+                uiModel.layout.textLineType = toastTextLineType._toastTextLineType
+                return uiModel
+            }(),
+            isPresented: isPresented,
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            text: text
+        )
+    }
+    
+    @available(*, deprecated, message: "Pass type to UI model instead")
+    public func vToast<Item>(
+        id: String,
+        uiModel: VToastUIModel = .init(),
+        type toastTextLineType: VToastTextLineType = .singleLine,
+        item: Binding<Item?>,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        text: @escaping (Item) -> String
+    ) -> some View
+        where Item: Identifiable
+    {
+        vToast(
+            id: id,
+            uiModel: {
+                var uiModel = uiModel
+                uiModel.layout.textLineType = toastTextLineType._toastTextLineType
+                return uiModel
+            }(),
+            item: item,
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            text: text
+        )
+    }
+    
+    @available(*, deprecated, message: "Pass type to UI model instead")
+    public func vToast<T>(
+        id: String,
+        uiModel: VToastUIModel = .init(),
+        type toastTextLineType: VToastTextLineType = .singleLine,
+        isPresented: Binding<Bool>,
+        presenting data: T?,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        text: @escaping (T) -> String
+    ) -> some View {
+        vToast(
+            id: id,
+            uiModel: {
+                var uiModel = uiModel
+                uiModel.layout.textLineType = toastTextLineType._toastTextLineType
+                return uiModel
+            }(),
+            isPresented: isPresented,
+            presenting: data,
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            text: text
+        )
+    }
+    
+    @available(*, deprecated, message: "Pass type to UI model instead")
+    public func vToast<E>(
+        id: String,
+        uiModel: VToastUIModel = .init(),
+        type toastTextLineType: VToastTextLineType = .singleLine,
+        isPresented: Binding<Bool>,
+        error: E?,
+        onPresent presentHandler: (() -> Void)? = nil,
+        onDismiss dismissHandler: (() -> Void)? = nil,
+        text: @escaping (E) -> String
+    ) -> some View
+        where E: Error
+    {
+        vToast(
+            id: id,
+            uiModel: {
+                var uiModel = uiModel
+                uiModel.layout.textLineType = toastTextLineType._toastTextLineType
+                return uiModel
+            }(),
+            isPresented: isPresented,
+            error: error,
+            onPresent: presentHandler,
+            onDismiss: dismissHandler,
+            text: text
+        )
+    }
+}
+
 // MARK: - V Page Indicator
 extension VPageIndicator {
     @available(*, deprecated, message: "Pass UI model type type parameter")

@@ -1,6 +1,6 @@
 # Change Log
 
-### 3.1.1(29)
+### 3.2.0(29)
 
 General
 
@@ -15,6 +15,10 @@ VRoundedLabeledButton
 VModal
 
 - Issue with some content not stretching to full width is fixed
+
+VToast
+
+- `VToastTextLineType` is renamed to `TextLineType` and is moved to `VToastUIModel`
 
 ### [3.1.0(28)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.1.0) — *2023 03 03*
 

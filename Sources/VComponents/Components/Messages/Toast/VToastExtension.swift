@@ -13,7 +13,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -34,7 +34,6 @@ extension View {
     public func vToast(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -48,7 +47,6 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: text
@@ -64,7 +62,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -89,7 +87,6 @@ extension View {
     public func vToast<Item>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
         item: Binding<Item?>,
         onPresent presentHandler: (() -> Void)? = nil,
         onDismiss dismissHandler: (() -> Void)? = nil,
@@ -107,7 +104,6 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {
@@ -129,7 +125,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -159,7 +155,6 @@ extension View {
     public func vToast<T>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         presenting data: T?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -177,7 +172,6 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {
@@ -199,7 +193,7 @@ extension View {
     ///
     /// Modal component that presents toast, and hosts content.
     ///
-    /// UI Model, type, and present and dismiss handlers can be passed as parameters.
+    /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
     /// `vToast` modifier can be used on any view down the view hierarchy, as content overlay will always be overlayed on the screen.
     ///
@@ -227,7 +221,6 @@ extension View {
     public func vToast<E>(
         id: String,
         uiModel: VToastUIModel = .init(),
-        type toastTextLineType: VToastTextLineType = .singleLine,
         isPresented: Binding<Bool>,
         error: E?,
         onPresent presentHandler: (() -> Void)? = nil,
@@ -247,7 +240,6 @@ extension View {
                 content: {
                     VToast(
                         uiModel: uiModel,
-                        type: toastTextLineType,
                         onPresent: presentHandler,
                         onDismiss: dismissHandler,
                         text: {

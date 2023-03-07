@@ -17,11 +17,12 @@ struct VToastDemoView: View {
     @State private var isPresented: Bool = false
     
     @State private var presentationEdge: VToastUIModel.Layout.PresentationEdge = .default
-    @State private var toastTextLineType: VToastTextLineTypeHelper = .oneLine
+    @State private var textLineType: VTextLineTypeHelper = .singleLine
     @State private var text: String = "Lorem ipsum dolor sit amet"
     
     private var uiModel: VToastUIModel {
         var uiModel: VToastUIModel = .init()
+        uiModel.layout.textLineType = textLineType.textLineType
         uiModel.layout.presentationEdge = presentationEdge
         return uiModel
     }
@@ -43,7 +44,6 @@ struct VToastDemoView: View {
             .vToast(
                 id: "toast_demo",
                 uiModel: uiModel,
-                type: toastTextLineType.toastTextLineType,
                 isPresented: $isPresented,
                 text: text
             )
@@ -59,7 +59,7 @@ struct VToastDemoView: View {
         
         DemoViewSettingsSection(content: {
             VSegmentedPicker(
-                selection: $toastTextLineType,
+                selection: $textLineType,
                 headerTitle: "Type",
                 footerTitle: "In multi-line type, line limit and alignment can be set. For demo purposes, they are set to 5 and leading."
             )
@@ -70,30 +70,30 @@ struct VToastDemoView: View {
 }
 
 // MARK: - Helpers
+private enum VTextLineTypeHelper: Int, StringRepresentableHashableEnumeration {
+    case singleLine
+    case multiLine
+    
+    var stringRepresentation: String {
+        switch self {
+        case .singleLine: return "Single-line"
+        case .multiLine: return "Multi-line"
+        }
+    }
+    
+    var textLineType: VToastUIModel.Layout.TextLineType {
+        switch self {
+        case .singleLine: return .singleLine
+        case .multiLine: return .multiLine(alignment: .leading, lineLimit: 5)
+        }
+    }
+}
+
 extension VToastUIModel.Layout.PresentationEdge: StringRepresentableHashableEnumeration {
     public var stringRepresentation: String {
         switch self {
         case .top: return "Top"
         case .bottom: return "Bottom"
-        }
-    }
-}
-
-private enum VToastTextLineTypeHelper: Int, StringRepresentableHashableEnumeration {
-    case oneLine
-    case multiLine
-    
-    var stringRepresentation: String {
-        switch self {
-        case .oneLine: return "Single-line"
-        case .multiLine: return "Multi-line"
-        }
-    }
-    
-    var toastTextLineType: VToastTextLineType {
-        switch self {
-        case .oneLine: return .singleLine
-        case .multiLine: return .multiLine(alignment: .leading, lineLimit: 5)
         }
     }
 }
