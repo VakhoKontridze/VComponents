@@ -21,7 +21,7 @@ public struct VDashedSpinner: View {
     private let uiModel: VDashedSpinnerUIModel
     
     // MARK: Initializers
-    /// Initializes component
+    /// Initializes `VDashedSpinner`
     public init(
         uiModel: VDashedSpinnerUIModel = .init()
     ) {

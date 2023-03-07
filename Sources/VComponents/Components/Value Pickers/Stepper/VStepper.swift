@@ -49,7 +49,7 @@ public struct VStepper: View {
     @State private var shouldSkipIncrementBecauseOfLongPressIncrementFinish: Bool = false
     
     // MARK: Initializers
-    /// Initializes component with range and value.
+    /// Initializes `VStepper` with range and value.
     public init(
         uiModel: VStepperUIModel = .init(),
         range: ClosedRange<Int>,

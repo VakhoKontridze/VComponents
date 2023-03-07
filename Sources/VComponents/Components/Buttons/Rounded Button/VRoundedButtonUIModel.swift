@@ -55,7 +55,7 @@ public struct VRoundedButtonUIModel {
         public var hitBox: HitBox = .zero
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Label Margins
@@ -100,7 +100,7 @@ public struct VRoundedButtonUIModel {
         public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -122,7 +122,7 @@ public struct VRoundedButtonUIModel {
         public var title: Font = .system(size: 15, weight: .semibold)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

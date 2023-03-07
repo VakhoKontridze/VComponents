@@ -39,7 +39,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private static var isAnimatingDefault: Bool { false }
     
     // MARK: Initializers
-    /// Initializes component with content.
+    /// Initializes `VWrappingMarquee` with content.
     public init(
         uiModel: VWrappingMarqueeUIModel = .init(),
         @ViewBuilder content: @escaping () -> Content

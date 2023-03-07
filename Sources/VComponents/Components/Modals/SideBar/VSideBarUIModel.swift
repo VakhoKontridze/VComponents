@@ -71,7 +71,7 @@ public struct VSideBarUIModel {
         var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes._current.size.width }
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Presentation Edge
@@ -124,7 +124,7 @@ public struct VSideBarUIModel {
         public var dimmingView: Color = modalReference.colors.dimmingView
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -142,7 +142,7 @@ public struct VSideBarUIModel {
         public var dragBackDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     
@@ -154,7 +154,7 @@ public struct VSideBarUIModel {
         public var dismissType: DismissType = .default
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Dismiss Type

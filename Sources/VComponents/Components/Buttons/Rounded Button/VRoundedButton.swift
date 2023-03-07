@@ -37,7 +37,7 @@ public struct VRoundedButton<Label>: View where Label: View {
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
 
     // MARK: Initializers
-    /// Initializes component with action and title.
+    /// Initializes `VRoundedButton` with action and title.
     public init(
         uiModel: VRoundedButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -50,7 +50,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with action and icon.
+    /// Initializes `VRoundedButton` with action and icon.
     public init(
         uiModel: VRoundedButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -63,7 +63,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         self.label = .icon(icon: icon)
     }
     
-    /// Initializes component with action and label.
+    /// Initializes `VRoundedButton` with action and label.
     public init(
         uiModel: VRoundedButtonUIModel = .init(),
         action: @escaping () -> Void,

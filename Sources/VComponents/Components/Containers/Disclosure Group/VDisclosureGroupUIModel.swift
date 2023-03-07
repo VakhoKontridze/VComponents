@@ -73,7 +73,7 @@ public struct VDisclosureGroupUIModel {
         public var contentMargins: Margins = .zero
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Margins
@@ -130,7 +130,7 @@ public struct VDisclosureGroupUIModel {
         }()
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -152,7 +152,7 @@ public struct VDisclosureGroupUIModel {
         public var headerTitle: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -164,7 +164,7 @@ public struct VDisclosureGroupUIModel {
         public var expandCollapse: Animation? = .default
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -176,7 +176,7 @@ public struct VDisclosureGroupUIModel {
         public var expandsAndCollapsesOnHeaderTap: Bool = true
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 

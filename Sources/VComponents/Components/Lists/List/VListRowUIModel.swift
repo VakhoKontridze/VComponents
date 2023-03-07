@@ -43,7 +43,7 @@ public struct VListRowUIModel {
         public var separatorHeight: CGFloat = 0.9999 / UIScreen.main.scale
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Margins
@@ -126,7 +126,7 @@ public struct VListRowUIModel {
         public var separator: Color = .init(componentAsset: "List.Separator")
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

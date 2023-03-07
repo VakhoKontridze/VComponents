@@ -62,7 +62,7 @@ public struct VSecondaryButtonUIModel {
         public var hitBox: HitBox = .zero
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Label Margins
@@ -107,7 +107,7 @@ public struct VSecondaryButtonUIModel {
         public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -129,7 +129,7 @@ public struct VSecondaryButtonUIModel {
         public var title: Font = primaryButtonReference.fonts.title
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

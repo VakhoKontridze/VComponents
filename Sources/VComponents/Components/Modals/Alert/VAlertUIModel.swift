@@ -108,7 +108,7 @@ public struct VAlertUIModel {
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
 
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Sizes
@@ -196,7 +196,7 @@ public struct VAlertUIModel {
         )
 
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         /// Model that contains colors for button states.
@@ -214,7 +214,7 @@ public struct VAlertUIModel {
         public var message: Font = .system(size: 14)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 

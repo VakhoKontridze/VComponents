@@ -52,7 +52,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     private var hasDivider: Bool { uiModel.layout.dividerHeight > 0 }
 
     // MARK: Initializers - State
-    /// Initializes component with header title and content.
+    /// Initializes `VDisclosureGroup` with header title and content.
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
         state: Binding<VDisclosureGroupState>,
@@ -67,7 +67,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         self.content = content
     }
     
-    /// Initializes component with header and content.
+    /// Initializes `VDisclosureGroup` with header and content.
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
         state: Binding<VDisclosureGroupState>,
@@ -81,7 +81,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     }
     
     // MARK: Initializers - Bool
-    /// Initializes component with header title and content.
+    /// Initializes `VDisclosureGroup` with header title and content.
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
         isExpanded: Binding<Bool>,
@@ -96,7 +96,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         self.content = content
     }
     
-    /// Initializes component with header and content.
+    /// Initializes `VDisclosureGroup` with header and content.
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
         isExpanded: Binding<Bool>,

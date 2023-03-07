@@ -50,7 +50,7 @@ public struct VWheelPickerUIModel {
         public var titleMinimumScaleFactor: CGFloat = segmentedPickerReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -80,7 +80,7 @@ public struct VWheelPickerUIModel {
         public var footer: StateColors = segmentedPickerReference.colors.footer
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -108,7 +108,7 @@ public struct VWheelPickerUIModel {
         public var rows: Font = segmentedPickerReference.fonts.rows
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

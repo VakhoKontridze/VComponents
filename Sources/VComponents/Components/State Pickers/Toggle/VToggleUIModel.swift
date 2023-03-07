@@ -62,7 +62,7 @@ public struct VToggleUIModel {
         }
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -111,7 +111,7 @@ public struct VToggleUIModel {
         )
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -133,7 +133,7 @@ public struct VToggleUIModel {
         public var title: Font = .system(size: 15)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -145,7 +145,7 @@ public struct VToggleUIModel {
         public var stateChange: Animation? = .easeIn(duration: 0.1)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -157,7 +157,7 @@ public struct VToggleUIModel {
         public var labelIsClickable: Bool = true
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

@@ -38,7 +38,7 @@ public struct VContinuousSpinnerUIModel {
         public var borderWidth: CGFloat = 2
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -50,7 +50,7 @@ public struct VContinuousSpinnerUIModel {
         public var spinner: Color = ColorBook.accent
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -62,7 +62,7 @@ public struct VContinuousSpinnerUIModel {
         public var spinning: Animation = .linear(duration: 0.75)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

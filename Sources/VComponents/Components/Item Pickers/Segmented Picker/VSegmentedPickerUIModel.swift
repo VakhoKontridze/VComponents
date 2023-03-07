@@ -81,7 +81,7 @@ public struct VSegmentedPickerUIModel {
         public var dividerSize: CGSize = .init(width: 1, height: 19)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -146,7 +146,7 @@ public struct VSegmentedPickerUIModel {
         )
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -177,7 +177,7 @@ public struct VSegmentedPickerUIModel {
         public var rows: Font = .system(size: 14, weight: .medium)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -189,7 +189,7 @@ public struct VSegmentedPickerUIModel {
         public var selection: Animation? = .easeInOut(duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

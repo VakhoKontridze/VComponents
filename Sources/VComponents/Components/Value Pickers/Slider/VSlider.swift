@@ -40,7 +40,7 @@ public struct VSlider: View {
     private var hasThumb: Bool { uiModel.layout.thumbDimension > 0 }
     
     // MARK: Initializers
-    /// Initializes component with value.
+    /// Initializes `VSlider` with value.
     public init<V>(
         uiModel: VSliderUIModel = .init(),
         range: ClosedRange<V> = 0...1,

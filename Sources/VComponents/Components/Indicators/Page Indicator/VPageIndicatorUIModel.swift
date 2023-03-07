@@ -63,7 +63,7 @@ public struct VPageIndicatorUIModel {
         public var unselectedDotScale: CGFloat = 0.85
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         init(
@@ -92,7 +92,7 @@ public struct VPageIndicatorUIModel {
         public var selectedDot: Color = progressBarReference.colors.progress
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -104,7 +104,7 @@ public struct VPageIndicatorUIModel {
         public var transition: Animation = .linear(duration: 0.15)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

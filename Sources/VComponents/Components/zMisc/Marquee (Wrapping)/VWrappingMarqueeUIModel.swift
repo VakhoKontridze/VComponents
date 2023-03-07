@@ -49,7 +49,7 @@ public struct VWrappingMarqueeUIModel {
         public var alignmentStationary: HorizontalAlignment = .leading
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     
@@ -74,7 +74,7 @@ public struct VWrappingMarqueeUIModel {
         public var gradientColorContentEdge: Color = ColorBook.layer.opacity(0.01)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     
@@ -92,7 +92,7 @@ public struct VWrappingMarqueeUIModel {
         public var delay: Double = 1
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Duration Type

@@ -78,7 +78,7 @@ public struct VListRow<Content>: View
     private let content: () -> Content
     
     // MARK: Initializers
-    /// Initializes component with content.
+    /// Initializes `VListRow` with content.
     public init(
         uiModel: VListRowUIModel = .init(),
         @ViewBuilder content: @escaping () -> Content

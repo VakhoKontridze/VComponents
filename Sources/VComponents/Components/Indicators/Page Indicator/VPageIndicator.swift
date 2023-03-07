@@ -86,7 +86,7 @@ public struct VPageIndicator<Content>: View where Content: View {
     private let dotContent: VPageIndicatorDotContent<Content>
 
     // MARK: Initializers
-    /// Initializes component with total and selected index.
+    /// Initializes `VPageIndicator` with total and selected index.
     public init(
         uiModel: VPageIndicatorUIModel = .init(),
         total: Int,
@@ -100,7 +100,7 @@ public struct VPageIndicator<Content>: View where Content: View {
         self.dotContent = .default
     }
     
-    /// Initializes component with total, selected index, and custom dot content.
+    /// Initializes `VPageIndicator` with total, selected index, and custom dot content.
     public init(
         uiModel: VPageIndicatorUIModel = .init(),
         total: Int,

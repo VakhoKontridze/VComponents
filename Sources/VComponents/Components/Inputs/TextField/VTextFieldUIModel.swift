@@ -95,7 +95,7 @@ public struct VTextFieldUIModel {
         public var headerFooterMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Content Type
@@ -219,7 +219,7 @@ public struct VTextFieldUIModel {
         }()
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -244,7 +244,7 @@ public struct VTextFieldUIModel {
         public var footer: Font = segmentedPickerReference.fonts.footer
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -256,7 +256,7 @@ public struct VTextFieldUIModel {
         public var clearButton: Animation? = .easeInOut(duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -283,7 +283,7 @@ public struct VTextFieldUIModel {
         public var hasClearButton: Bool = true
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     

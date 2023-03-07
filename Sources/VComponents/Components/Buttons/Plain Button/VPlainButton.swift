@@ -35,7 +35,7 @@ public struct VPlainButton<Label>: View where Label: View {
     private let label: VPlainButtonLabel<Label>
 
     // MARK: Initializers
-    /// Initializes component with action and title.
+    /// Initializes `VPlainButton` with action and title.
     public init(
         uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -48,7 +48,7 @@ public struct VPlainButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with action and icon.
+    /// Initializes `VPlainButton` with action and icon.
     public init(
         uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -61,7 +61,7 @@ public struct VPlainButton<Label>: View where Label: View {
         self.label = .icon(icon: icon)
     }
     
-    /// Initializes component with action, icon, and title.
+    /// Initializes `VPlainButton` with action, icon, and title.
     public init(
         uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -75,7 +75,7 @@ public struct VPlainButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes component with action and label.
+    /// Initializes `VPlainButton` with action and label.
     public init(
         uiModel: VPlainButtonUIModel = .init(),
         action: @escaping () -> Void,

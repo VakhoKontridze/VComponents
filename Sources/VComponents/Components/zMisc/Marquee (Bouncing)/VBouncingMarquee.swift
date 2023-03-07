@@ -39,7 +39,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
     private static var isAnimatingDefault: Bool { false }
     
     // MARK: Initializers
-    /// Initializes component content.
+    /// Initializes `VBouncingMarquee` content.
     public init(
         uiModel: VBouncingMarqueeUIModel = .init(),
         @ViewBuilder content: @escaping () -> Content

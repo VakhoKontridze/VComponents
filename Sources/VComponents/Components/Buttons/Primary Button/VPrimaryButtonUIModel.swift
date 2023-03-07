@@ -70,7 +70,7 @@ public struct VPrimaryButtonUIModel {
         public var labelSpinnerSpacing: CGFloat = 20
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Label Margins
@@ -130,7 +130,7 @@ public struct VPrimaryButtonUIModel {
         }()
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -152,7 +152,7 @@ public struct VPrimaryButtonUIModel {
         public var title: Font = .system(size: 16, weight: .semibold)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     
@@ -166,7 +166,7 @@ public struct VPrimaryButtonUIModel {
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Animations = .init()
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     

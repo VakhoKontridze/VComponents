@@ -62,7 +62,7 @@ public struct VCheckBoxUIModel {
         public var titleMinimumScaleFactor: CGFloat = toggleReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -130,7 +130,7 @@ public struct VCheckBoxUIModel {
         )
 
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -152,7 +152,7 @@ public struct VCheckBoxUIModel {
         public var title: Font = toggleReference.fonts.title
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -164,7 +164,7 @@ public struct VCheckBoxUIModel {
         public var stateChange: Animation? = toggleReference.animations.stateChange
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -176,7 +176,7 @@ public struct VCheckBoxUIModel {
         public var labelIsClickable: Bool = toggleReference.misc.labelIsClickable
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

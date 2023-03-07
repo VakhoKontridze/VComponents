@@ -64,7 +64,7 @@ public struct VSliderUIModel {
         public var thumbShadowRadius: CGFloat = 2
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -103,7 +103,7 @@ public struct VSliderUIModel {
         )
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -119,7 +119,7 @@ public struct VSliderUIModel {
         public var progress: Animation? = nil
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

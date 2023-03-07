@@ -40,7 +40,7 @@ public struct VRadioButton<Label>: View where Label: View {
     private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
-    /// Initializes component with state.
+    /// Initializes `VRadioButton` with state.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>
@@ -52,7 +52,7 @@ public struct VRadioButton<Label>: View where Label: View {
         self.label = .empty
     }
     
-    /// Initializes component with state and title.
+    /// Initializes `VRadioButton` with state and title.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>,
@@ -65,7 +65,7 @@ public struct VRadioButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with state and label.
+    /// Initializes `VRadioButton` with state and label.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         state: Binding<VRadioButtonState>,
@@ -77,7 +77,7 @@ public struct VRadioButton<Label>: View where Label: View {
     }
     
     // MARK: Initializers - Bool
-    /// Initializes component with `Bool`.
+    /// Initializes `VRadioButton` with `Bool`.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         isOn: Binding<Bool>
@@ -89,7 +89,7 @@ public struct VRadioButton<Label>: View where Label: View {
         self.label = .empty
     }
     
-    /// Initializes component with `Bool` and title.
+    /// Initializes `VRadioButton` with `Bool` and title.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         isOn: Binding<Bool>,
@@ -102,7 +102,7 @@ public struct VRadioButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with `Bool` and label.
+    /// Initializes `VRadioButton` with `Bool` and label.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
         isOn: Binding<Bool>,

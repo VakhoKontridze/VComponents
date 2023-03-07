@@ -60,7 +60,7 @@ public struct VRadioButtonUIModel {
         public var titleMinimumScaleFactor: CGFloat = checkBoxReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -106,7 +106,7 @@ public struct VRadioButtonUIModel {
         public var customLabelOpacities: StateOpacities = toggleReference.colors.customLabelOpacities
 
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -128,7 +128,7 @@ public struct VRadioButtonUIModel {
         public var title: Font = toggleReference.fonts.title
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -140,7 +140,7 @@ public struct VRadioButtonUIModel {
         public var stateChange: Animation? = toggleReference.animations.stateChange
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -152,7 +152,7 @@ public struct VRadioButtonUIModel {
         public var labelIsClickable: Bool = toggleReference.misc.labelIsClickable
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

@@ -145,7 +145,7 @@ public struct VTextField: View {
     @State private var secureFieldIsVisible: Bool = false
 
     // MARK: Initializers
-    /// Initializes component with text.
+    /// Initializes `VTextField` with text.
     public init(
         uiModel: VTextFieldUIModel = .init(),
         headerTitle: String? = nil,

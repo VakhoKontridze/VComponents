@@ -57,7 +57,7 @@ public struct VTextView: View {
     @Binding private var text: String
     
     // MARK: Initializers
-    /// Initializes component with text.
+    /// Initializes `VTextView` with text.
     public init(
         uiModel: VTextViewUIModel = .init(),
         type textLineLimitType: TextLineLimitType = .none,

@@ -41,7 +41,7 @@ public struct VProgressBarUIModel {
         public var roundsProgressViewRightEdge: Bool = true
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -56,7 +56,7 @@ public struct VProgressBarUIModel {
         public var progress: Color = sliderReference.colors.progress.enabled
 
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -68,7 +68,7 @@ public struct VProgressBarUIModel {
         public var progress: Animation? = .default
 
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     

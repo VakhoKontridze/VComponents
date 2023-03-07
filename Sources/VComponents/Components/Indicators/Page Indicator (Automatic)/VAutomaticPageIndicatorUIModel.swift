@@ -77,7 +77,7 @@ public struct VAutomaticPageIndicatorUIModel {
         public var edgeDotScaleForCompactConfiguration: CGFloat = compactPageIndicatorReference.layout.edgeDotScale
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     

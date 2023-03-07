@@ -77,7 +77,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
 
     // MARK: Initializers
-    /// Initializes component with total and selected index.
+    /// Initializes `VCompactPageIndicator` with total and selected index.
     public init(
         uiModel: VCompactPageIndicatorUIModel = .init(),
         total: Int,
@@ -93,7 +93,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         self.dotContent = .default
     }
     
-    /// Initializes component with total, selected index, and custom dot content.
+    /// Initializes `VCompactPageIndicator` with total, selected index, and custom dot content.
     public init(
         uiModel: VCompactPageIndicatorUIModel = .init(),
         total: Int,

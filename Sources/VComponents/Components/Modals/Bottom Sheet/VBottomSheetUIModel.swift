@@ -124,7 +124,7 @@ public struct VBottomSheetUIModel {
         var pullDownDismissDistance: CGFloat { pullDownDismissDistanceMinHeightRatio * sizes._current.size.heights.min }
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Sizes
@@ -266,7 +266,7 @@ public struct VBottomSheetUIModel {
         public var divider: Color = modalReference.colors.divider
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -284,7 +284,7 @@ public struct VBottomSheetUIModel {
         public var header: Font = modalReference.fonts.header
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -305,7 +305,7 @@ public struct VBottomSheetUIModel {
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -324,7 +324,7 @@ public struct VBottomSheetUIModel {
         public var contentIsDraggable: Bool = false
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Dismiss Type

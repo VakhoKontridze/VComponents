@@ -29,7 +29,7 @@ public struct VText: View {
     private let text: String
     
     // MARK: Initializers
-    /// Initializes component with type, color, font, and text.
+    /// Initializes `VText` with type, color, font, and text.
     public init(
         type textLineType: TextLineType = .singleLine,
         truncatingMode: Text.TruncationMode = .tail,

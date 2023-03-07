@@ -23,7 +23,7 @@ public struct VContinuousSpinner: View {
     @State private var isAnimating: Bool = false
     
     // MARK: Initializers
-    /// Initializes component.
+    /// Initializes `VContinuousSpinner`.
     public init(
         uiModel: VContinuousSpinnerUIModel = .init()
     ) {

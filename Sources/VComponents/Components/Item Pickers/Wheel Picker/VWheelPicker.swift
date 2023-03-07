@@ -58,7 +58,7 @@ public struct VWheelPicker<Data, Content>: View
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers - Index
-    /// Initializes component with selected index, data, and row content.
+    /// initializes `VWheelPicker` with selected index, data, and row content.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
@@ -74,7 +74,7 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .custom(data: data, content: content)
     }
 
-    /// Initializes component with selected index and row titles.
+    /// initializes `VWheelPicker` with selected index and row titles.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
@@ -94,7 +94,7 @@ public struct VWheelPicker<Data, Content>: View
     }
     
     // MARK: Initializers - Hashable
-    /// Initializes component with selection value, data, and row content.
+    /// initializes `VWheelPicker` with selection value, data, and row content.
     public init<SelectionValue>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -117,7 +117,7 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .custom(data: data, content: content)
     }
     
-    /// Initializes component with selection value and row titles.
+    /// initializes `VWheelPicker` with selection value and row titles.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<String>,
@@ -140,7 +140,7 @@ public struct VWheelPicker<Data, Content>: View
     }
     
     // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
-    /// Initializes component with `HashableEnumeration` and row content.
+    /// initializes `VWheelPicker` with `HashableEnumeration` and row content.
     public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<T>,
@@ -162,7 +162,7 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .custom(data: Array(T.allCases), content: content)
     }
     
-    /// Initializes component with `StringRepresentableHashableEnumeration`.
+    /// initializes `VWheelPicker` with `StringRepresentableHashableEnumeration`.
     public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<T>,

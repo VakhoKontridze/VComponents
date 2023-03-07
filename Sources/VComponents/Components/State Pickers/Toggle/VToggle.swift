@@ -40,7 +40,7 @@ public struct VToggle<Label>: View where Label: View {
     private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
-    /// Initializes component with state.
+    /// Initializes `VToggle` with state.
     public init(
         uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>
@@ -52,7 +52,7 @@ public struct VToggle<Label>: View where Label: View {
         self.label = .empty
     }
     
-    /// Initializes component with state and title.
+    /// Initializes `VToggle` with state and title.
     public init(
         uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>,
@@ -65,7 +65,7 @@ public struct VToggle<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with state and label.
+    /// Initializes `VToggle` with state and label.
     public init(
         uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>,
@@ -77,7 +77,7 @@ public struct VToggle<Label>: View where Label: View {
     }
     
     // MARK: Initializers - Bool
-    /// Initializes component with `Bool`.
+    /// Initializes `VToggle` with `Bool`.
     public init(
         uiModel: VToggleUIModel = .init(),
         isOn: Binding<Bool>
@@ -89,7 +89,7 @@ public struct VToggle<Label>: View where Label: View {
         self.label = .empty
     }
     
-    /// Initializes component with `Bool` and title.
+    /// Initializes `VToggle` with `Bool` and title.
     public init(
         uiModel: VToggleUIModel = .init(),
         isOn: Binding<Bool>,
@@ -102,7 +102,7 @@ public struct VToggle<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with `Bool` and label.
+    /// Initializes `VToggle` with `Bool` and label.
     public init(
         uiModel: VToggleUIModel = .init(),
         isOn: Binding<Bool>,

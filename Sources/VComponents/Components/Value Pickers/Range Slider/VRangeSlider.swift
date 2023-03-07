@@ -45,7 +45,7 @@ public struct VRangeSlider: View {
     @State private var sliderWidth: CGFloat = 0
 
     // MARK: Initializers
-    /// Initializes component with difference, and low and high values.
+    /// Initializes `VRangeSlider` with difference, and low and high values.
     public init<V>(
         uiModel: VRangeSliderUIModel = .init(),
         range: ClosedRange<V> = 0...1,

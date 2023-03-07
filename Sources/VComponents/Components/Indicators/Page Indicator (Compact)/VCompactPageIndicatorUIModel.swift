@@ -87,7 +87,7 @@ public struct VCompactPageIndicatorUIModel {
         public var unselectedDotScaleForStandardConfiguration: CGFloat = pageIndicatorReference.layout.unselectedDotScale
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         init(

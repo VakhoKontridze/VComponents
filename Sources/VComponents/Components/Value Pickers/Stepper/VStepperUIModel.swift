@@ -44,7 +44,7 @@ public struct VStepperUIModel {
         public var divider: CGSize = segmentedPickerReference.layout.dividerSize
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -73,7 +73,7 @@ public struct VStepperUIModel {
         public var divider: StateColors = segmentedPickerReference.colors.divider
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -99,7 +99,7 @@ public struct VStepperUIModel {
         public var longPressIncrementExponent: Int = 2
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

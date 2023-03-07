@@ -68,7 +68,7 @@ public struct VRoundedLabeledButtonUIModel {
         public var titleLabelMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Label Margins
@@ -137,7 +137,7 @@ public struct VRoundedLabeledButtonUIModel {
         public var customLabelOpacities: StateOpacities = roundedButtonReference.colors.customLabelOpacities
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -159,7 +159,7 @@ public struct VRoundedLabeledButtonUIModel {
         public var titleLabel: Font = .system(size: 15)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

@@ -56,7 +56,7 @@ public struct VToastUIModel {
         public var presentationEdgeSafeAreaInset: CGFloat = 20
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Margins
@@ -133,7 +133,7 @@ public struct VToastUIModel {
         public var background: Color = textFieldReference.colors.background.enabled
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -147,7 +147,7 @@ public struct VToastUIModel {
         public var text: UIFont = .systemFont(ofSize: 16, weight: .semibold)
             
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -165,7 +165,7 @@ public struct VToastUIModel {
         public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }

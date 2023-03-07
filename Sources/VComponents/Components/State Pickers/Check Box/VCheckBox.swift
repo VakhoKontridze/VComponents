@@ -40,7 +40,7 @@ public struct VCheckBox<Label>: View where Label: View {
     private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
-    /// Initializes component with state.
+    /// Initializes `VCheckBox` with state.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>
@@ -52,7 +52,7 @@ public struct VCheckBox<Label>: View where Label: View {
         self.label = .empty
     }
     
-    /// Initializes component with state and title.
+    /// Initializes `VCheckBox` with state and title.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>,
@@ -65,7 +65,7 @@ public struct VCheckBox<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with state and label.
+    /// Initializes `VCheckBox` with state and label.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>,
@@ -77,7 +77,7 @@ public struct VCheckBox<Label>: View where Label: View {
     }
     
     // MARK: Initializers - Bool
-    /// Initializes component with `Bool`.
+    /// Initializes `VCheckBox` with `Bool`.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         isOn: Binding<Bool>
@@ -89,7 +89,7 @@ public struct VCheckBox<Label>: View where Label: View {
         self.label = .empty
     }
     
-    /// Initializes component with `Bool` and title.
+    /// Initializes `VCheckBox` with `Bool` and title.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         isOn: Binding<Bool>,
@@ -102,7 +102,7 @@ public struct VCheckBox<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with `Bool` and label.
+    /// Initializes `VCheckBox` with `Bool` and label.
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         isOn: Binding<Bool>,

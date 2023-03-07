@@ -86,7 +86,7 @@ public struct VModalUIModel {
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Sizes
@@ -136,7 +136,7 @@ public struct VModalUIModel {
         public var dimmingView: Color = .init(componentAsset: "Modal.DimmingView")
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -150,7 +150,7 @@ public struct VModalUIModel {
         public var header: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -174,7 +174,7 @@ public struct VModalUIModel {
         public var blur: CGFloat = 3
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 
@@ -186,7 +186,7 @@ public struct VModalUIModel {
         public var dismissType: DismissType = .default
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Dismiss Type

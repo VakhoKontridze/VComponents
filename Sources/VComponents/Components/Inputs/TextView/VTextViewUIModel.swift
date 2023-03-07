@@ -61,7 +61,7 @@ public struct VTextViewUIModel {
         public var headerFooterMarginHorizontal: CGFloat = textFieldReference.layout.headerFooterMarginHorizontal
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Margins
@@ -92,7 +92,7 @@ public struct VTextViewUIModel {
         public var footer: StateColors = textFieldReference.colors.footer
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors

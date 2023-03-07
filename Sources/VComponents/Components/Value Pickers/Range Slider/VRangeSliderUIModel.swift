@@ -49,7 +49,7 @@ public struct VRangeSliderUIModel {
         public var thumbShadowRadius: CGFloat = sliderReference.layout.thumbShadowRadius
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
     

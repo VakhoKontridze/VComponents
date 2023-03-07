@@ -37,7 +37,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
 
     // MARK: Initializers
-    /// Initializes component with action and title.
+    /// Initializes `VSecondaryButton` with action and title.
     public init(
         uiModel: VSecondaryButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -50,7 +50,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes component with action, icon, and title.
+    /// Initializes `VSecondaryButton` with action, icon, and title.
     public init(
         uiModel: VSecondaryButtonUIModel = .init(),
         action: @escaping () -> Void,
@@ -64,7 +64,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes component with action and label.
+    /// Initializes `VSecondaryButton` with action and label.
     public init(
         uiModel: VSecondaryButtonUIModel = .init(),
         action: @escaping () -> Void,

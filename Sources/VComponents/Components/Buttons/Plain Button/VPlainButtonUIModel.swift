@@ -48,7 +48,7 @@ public struct VPlainButtonUIModel {
         public var hitBox: HitBox = .init(5)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: Hit Box
@@ -91,7 +91,7 @@ public struct VPlainButtonUIModel {
         public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
         
         // MARK: State Colors
@@ -113,7 +113,7 @@ public struct VPlainButtonUIModel {
         public var title: Font = .system(size: 15, weight: .medium)
         
         // MARK: Initializers
-        /// Initializes model with default values.
+        /// Initializes UI model with default values.
         public init() {}
     }
 }
