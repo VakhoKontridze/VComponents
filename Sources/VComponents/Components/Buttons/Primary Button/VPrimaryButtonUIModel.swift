@@ -73,7 +73,7 @@ public struct VPrimaryButtonUIModel {
         /// Initializes model with default values.
         public init() {}
         
-        // MARK: Label Margin
+        // MARK: Label Margins
         /// Model that contains `horizontal` and `vertical` margins.
         public typealias LabelMargins = EdgeInsets_HorizontalVertical
     }
