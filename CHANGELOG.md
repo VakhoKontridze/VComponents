@@ -28,6 +28,10 @@ VToast
 
 - `VToastTextLineType` is renamed to `TextLineType` and is moved to `VToastUIModel`
 
+VPageIndicator
+
+- `VPageIndicator` is split to `VPageIndicator`, `VCompactPageIndicator` and `VAutomaticPageIndicator`
+
 VMarquee
 
 - `VMarquee` is split to `VWrappingMarquee` and `VBouncingMarquee`

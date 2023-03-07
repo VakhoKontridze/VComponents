@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorCompactUIModel.swift
+//  VCompactPageIndicatorUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 25.02.23.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Page Indicator Compact UI Model
+// MARK: - V Compact Page Indicator UI Model
 /// Model that describes UI.
-public struct VPageIndicatorCompactUIModel {
+public struct VCompactPageIndicatorUIModel {
     // MARK: Properties
-    fileprivate static let pageIndicatorStandardReference: VPageIndicatorStandardUIModel = .init()
+    fileprivate static let pageIndicatorReference: VPageIndicatorUIModel = .init()
     
     /// Model that contains layout properties.
     public var layout: Layout = .init()
@@ -42,27 +42,27 @@ public struct VPageIndicatorCompactUIModel {
     public struct Layout {
         // MARK: Properties
         /// Direction. Defaults to `leftToRight`.
-        public var direction: LayoutDirectionOmni = pageIndicatorStandardReference.layout.direction
+        public var direction: LayoutDirectionOmni = pageIndicatorReference.layout.direction
         
         /// Dot dimension on the main axis. Defaults to `10`.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
-        public var dotDimensionPrimaryAxis: CGFloat = pageIndicatorStandardReference.layout.dotDimensionPrimaryAxis ?? 10
+        public var dotDimensionPrimaryAxis: CGFloat = pageIndicatorReference.layout.dotDimensionPrimaryAxis ?? 10
         
         /// Dot dimension on the main axis when switching to `standard` configuration. Defaults to `10`.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
-        public var dotDimensionPrimaryAxisForStandardConfiguration: CGFloat? = pageIndicatorStandardReference.layout.dotDimensionPrimaryAxis
+        public var dotDimensionPrimaryAxisForStandardConfiguration: CGFloat? = pageIndicatorReference.layout.dotDimensionPrimaryAxis
         
         /// Dot dimension on the secondary axis. Defaults to `10`.
         ///
         /// For horizontal layouts, this will be height, and for vertical, width.
-        public var dotDimensionSecondaryAxis: CGFloat = pageIndicatorStandardReference.layout.dotDimensionSecondaryAxis
+        public var dotDimensionSecondaryAxis: CGFloat = pageIndicatorReference.layout.dotDimensionSecondaryAxis
         
         /// Dot spacing. Defaults to `5`.
-        public var spacing: CGFloat = pageIndicatorStandardReference.layout.spacing
+        public var spacing: CGFloat = pageIndicatorReference.layout.spacing
         
         /// Number of visible dots. Default to `7`.
         ///
@@ -84,7 +84,7 @@ public struct VPageIndicatorCompactUIModel {
         public var edgeDotScale: CGFloat = 0.5
         
         /// Unselected dot scale when switching to `standard` configuration. Defaults to `0.85`.
-        public var unselectedDotScaleForStandardConfiguration: CGFloat = pageIndicatorStandardReference.layout.unselectedDotScale
+        public var unselectedDotScaleForStandardConfiguration: CGFloat = pageIndicatorReference.layout.unselectedDotScale
         
         // MARK: Initializers
         /// Initializes model with default values.
@@ -115,14 +115,14 @@ public struct VPageIndicatorCompactUIModel {
     
     // MARK: Colors
     /// Model that contains color properties.
-    public typealias Colors = VPageIndicatorStandardUIModel.Colors
+    public typealias Colors = VPageIndicatorUIModel.Colors
 
     // MARK: Animations
     /// Model that contains animation properties.
-    public typealias Animations = VPageIndicatorStandardUIModel.Animations
+    public typealias Animations = VPageIndicatorUIModel.Animations
     
     // MARK: Sub UI Models
-    var standardPageIndicatorSubUIModel: VPageIndicatorStandardUIModel {
+    var standardPageIndicatorSubUIModel: VPageIndicatorUIModel {
         .init(
             layout: .init(
                 direction: layout.direction,
@@ -138,10 +138,10 @@ public struct VPageIndicatorCompactUIModel {
 }
 
 // MARK: - Factory
-extension VPageIndicatorCompactUIModel {
-    /// `VPageIndicatorCompactUIModel` with vertical layout.
-    public static var vertical: VPageIndicatorCompactUIModel {
-        var uiModel: VPageIndicatorCompactUIModel = .init()
+extension VCompactPageIndicatorUIModel {
+    /// `VCompactPageIndicatorUIModel` with vertical layout.
+    public static var vertical: VCompactPageIndicatorUIModel {
+        var uiModel: VCompactPageIndicatorUIModel = .init()
         
         uiModel.layout.direction = .topToBottom
         

@@ -2,15 +2,16 @@
 //  VPageIndicator.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 2/5/21.
+//  Created by Vakhtang Kontridze on 2/6/21.
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Page Indicator
 /// Indicator component that indicates selection in page control.
 ///
-/// Type can be passed as parameter.
+/// UI model can be passed as parameter.
 ///
 ///     private let total: Int = 10
 ///     @State private var selectedIndex: Int = 4
@@ -26,7 +27,7 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VPageIndicator(
-///             type: .compact(uiModel: .vertical),
+///             uiModel: .vertical,
 ///             total: total,
 ///             selectedIndex: selectedIndex
 ///         )
@@ -37,12 +38,12 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VPageIndicator(
-///             type: .standard(uiModel: {
-///                 var uiModel: VPageIndicatorStandardUIModel = .init()
+///             type: uiModel: {
+///                 var uiModel: VPageIndicatorUIModel = .init()
 ///                 uiModel.layout.dotDimensionPrimaryAxis = 15
 ///                 uiModel.layout.dotDimensionSecondaryAxis = 15
 ///                 return uiModel
-///             }()),
+///             }(),
 ///             total: total,
 ///             selectedIndex: selectedIndex,
 ///             dot: {
@@ -63,12 +64,12 @@ import SwiftUI
 ///
 ///     var body: some View {
 ///         VPageIndicator(
-///             type: .standard(uiModel: {
-///                 var uiModel: VPageIndicatorStandardUIModel = .init()
+///             type: uiModel: {
+///                 var uiModel: VPageIndicatorUIModel = .init()
 ///                 uiModel.layout.dotDimensionPrimaryAxis = nil
 ///                 uiModel.layout.dotDimensionSecondaryAxis = 5
 ///                 return uiModel
-///             }()),
+///             }(),
 ///             total: total,
 ///             selectedIndex: selectedIndex,
 ///             dot: { Rectangle() }
@@ -77,7 +78,7 @@ import SwiftUI
 ///
 public struct VPageIndicator<Content>: View where Content: View {
     // MARK: Properties
-    private let pageIndicatorType: VPageIndicatorType
+    private let uiModel: VPageIndicatorUIModel
     
     private let total: Int
     private let selectedIndex: Int
@@ -87,13 +88,13 @@ public struct VPageIndicator<Content>: View where Content: View {
     // MARK: Initializers
     /// Initializes component with total and selected index.
     public init(
-        type pageIndicatorType: VPageIndicatorType = .default,
+        uiModel: VPageIndicatorUIModel = .init(),
         total: Int,
         selectedIndex: Int
     )
         where Content == Never
     {
-        self.pageIndicatorType = pageIndicatorType
+        self.uiModel = uiModel
         self.total = total
         self.selectedIndex = selectedIndex
         self.dotContent = .default
@@ -101,56 +102,95 @@ public struct VPageIndicator<Content>: View where Content: View {
     
     /// Initializes component with total, selected index, and custom dot content.
     public init(
-        type pageIndicatorType: VPageIndicatorType = .default,
+        uiModel: VPageIndicatorUIModel = .init(),
         total: Int,
         selectedIndex: Int,
         @ViewBuilder dot: @escaping () -> Content
     ) {
-        self.pageIndicatorType = pageIndicatorType
+        self.uiModel = uiModel
         self.total = total
         self.selectedIndex = selectedIndex
         self.dotContent = .custom(content: dot)
     }
+    
+    init(
+        uiModel: VPageIndicatorUIModel,
+        total: Int,
+        selectedIndex: Int,
+        dotContent: VPageIndicatorDotContent<Content>
+    ) {
+        self.uiModel = uiModel
+        self.total = total
+        self.selectedIndex = selectedIndex
+        self.dotContent = dotContent
+    }
 
     // MARK: Body
     public var body: some View {
-        Group(content: {
-            switch pageIndicatorType._pageIndicatorType {
-            case .standard(let uiModel):
-                VPageIndicatorStandard(
-                    uiModel: uiModel,
-                    total: total,
-                    selectedIndex: selectedIndex,
-                    dotContent: dotContent
-                )
-            
-            case .compact(let uiModel):
-                VPageIndicatorCompact(
-                    uiModel: uiModel,
-                    total: total,
-                    selectedIndex: selectedIndex,
-                    dotContent: dotContent
-                )
-            
-            case .automatic(let uiModel):
-                VPageIndicatorAutomatic(
-                    uiModel: uiModel,
-                    total: total,
-                    selectedIndex: selectedIndex,
-                    dotContent: dotContent
-                )
-            }
+        let layout: AnyLayout = uiModel.layout.direction.stackLayout(spacing: uiModel.layout.spacing)
+        
+        let range: [Int] = (0..<total)
+            .reversedArray(if: uiModel.layout.direction.isReversed)
+        
+        return layout.callAsFunction({
+            ForEach(range, id: \.self, content: { i in
+                dotContentView
+                    .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
+                    .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
+                    .scaleEffect(selectedIndex == i ? 1 : uiModel.layout.unselectedDotScale)
+                    .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+            })
         })
+            .animation(uiModel.animations.transition, value: selectedIndex)
+    }
+    
+    @ViewBuilder private var dotContentView: some View {
+        switch dotContent {
+        case .default:
+            Circle()
+        
+        case .custom(let content):
+            content()
+        }
     }
 }
 
 // MARK: - Preview
 struct VPageIndicator_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(content: {
-            VPageIndicator(type: .standard(), total: 9, selectedIndex: 4)
-            VPageIndicator(type: .compact(), total: 100, selectedIndex: 4)
-            VPageIndicator(type: .automatic(), total: 100, selectedIndex: 4)
-        })
+        Preview()
+    }
+    
+    private struct Preview: View {
+        private let total: Int = 10
+        @State private var selectedIndex: Int = 0
+        
+        var body: some View {
+            VStack(spacing: 20, content: {
+                ForEach(LayoutDirectionOmni.allCases, id: \.self, content: { direction in
+                    VPageIndicator<Never>(
+                        uiModel: {
+                            var uiModel: VPageIndicatorUIModel = .init()
+                            uiModel.layout.direction = direction
+                            return uiModel
+                        }(),
+                        total: total,
+                        selectedIndex: selectedIndex,
+                        dotContent: .default
+                    )
+                })
+            })
+                .onReceive(
+                    Timer.publish(every: 1, on: .main, in: .common).autoconnect(),
+                    perform: updateValue
+                )
+        }
+        
+        private func updateValue(_ output: Date) {
+            var valueToSet: Int = selectedIndex + 1
+            if valueToSet > total-1 { valueToSet = 0 }
+            
+            selectedIndex = valueToSet
+        }
     }
 }

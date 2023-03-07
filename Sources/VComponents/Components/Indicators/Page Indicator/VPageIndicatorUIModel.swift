@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorStandardUIModel.swift
+//  VPageIndicatorUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -8,9 +8,9 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Page Indicator Standard UI Model
+// MARK: - V Page Indicator UI Model
 /// Model that describes UI.
-public struct VPageIndicatorStandardUIModel {
+public struct VPageIndicatorUIModel {
     // MARK: Properties
     fileprivate static let progressBarReference: VProgressBarUIModel = .init()
     
@@ -110,10 +110,10 @@ public struct VPageIndicatorStandardUIModel {
 }
 
 // MARK: - Factory
-extension VPageIndicatorStandardUIModel {
-    /// `VPageIndicatorStandardUIModel` with vertical layout.
-    public static var vertical: VPageIndicatorStandardUIModel {
-        var uiModel: VPageIndicatorStandardUIModel = .init()
+extension VPageIndicatorUIModel {
+    /// `VPageIndicatorUIModel` with vertical layout.
+    public static var vertical: VPageIndicatorUIModel {
+        var uiModel: VPageIndicatorUIModel = .init()
         
         uiModel.layout.direction = .topToBottom
         

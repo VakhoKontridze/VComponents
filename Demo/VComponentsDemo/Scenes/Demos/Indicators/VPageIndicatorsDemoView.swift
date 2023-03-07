@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorDemoView.swift
+//  VPageIndicatorsDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -10,15 +10,15 @@ import Combine
 import VComponents
 import VCore
 
-// MARK: - V Page Indicator Demo View
-struct VPageIndicatorDemoView: View {
+// MARK: - V Page Indicators Demo View
+struct VPageIndicatorsDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Page Indicator" }
+    static var navBarTitle: String { "Page Indicators (Standard, Compact, Automatic)" }
     
     private let total: Int = 15
     @State private var selectedIndex: Int = 0
     
-    @State private var pageIndicatorType: VPageIndicatorTypeHelper = .automatic
+    @State private var pageIndicatorStyle: VPageIndicatorStyleHelper = .automatic
     @State private var direction: LayoutDirectionOmni = .leftToRight
     @State private var stretchesOnPrimaryAxis: Bool = false
 
@@ -36,17 +36,17 @@ struct VPageIndicatorDemoView: View {
         DemoTitledSettingView(
             title: "\(selectedIndex+1)/\(total)",
             content: {
-                switch pageIndicatorType {
+                switch pageIndicatorStyle {
                 case .standard:
                     if stretchesOnPrimaryAxis {
                         VPageIndicator(
-                            type: .standard(uiModel: {
-                                var uiModel: VPageIndicatorStandardUIModel = .init()
+                           uiModel: {
+                                var uiModel: VPageIndicatorUIModel = .init()
                                 uiModel.layout.direction = direction
                                 uiModel.layout.dotDimensionPrimaryAxis = nil
                                 uiModel.layout.dotDimensionSecondaryAxis = 5
                                 return uiModel
-                            }()),
+                            }(),
                             total: total,
                             selectedIndex: selectedIndex,
                             dot: { RoundedRectangle(cornerRadius: 2.5) }
@@ -54,34 +54,34 @@ struct VPageIndicatorDemoView: View {
                         
                     } else {
                         VPageIndicator(
-                            type: .standard(uiModel: {
-                                var uiModel: VPageIndicatorStandardUIModel = .init()
+                            uiModel: {
+                                var uiModel: VPageIndicatorUIModel = .init()
                                 uiModel.layout.direction = direction
                                 return uiModel
-                            }()),
+                            }(),
                             total: total,
                             selectedIndex: selectedIndex
                         )
                     }
                     
                 case .compact:
-                    VPageIndicator(
-                        type: .compact(uiModel: {
-                            var uiModel: VPageIndicatorCompactUIModel = .init()
+                    VCompactPageIndicator(
+                        uiModel: {
+                            var uiModel: VCompactPageIndicatorUIModel = .init()
                             uiModel.layout.direction = direction
                             return uiModel
-                        }()),
+                        }(),
                         total: total,
                         selectedIndex: selectedIndex
                     )
                     
                 case .automatic:
-                    VPageIndicator(
-                        type: .automatic(uiModel: {
-                            var uiModel: VPageIndicatorAutomaticUIModel = .init()
+                    VAutomaticPageIndicator(
+                        uiModel: {
+                            var uiModel: VAutomaticPageIndicatorUIModel = .init()
                             uiModel.layout.direction = direction
                             return uiModel
-                        }()),
+                        }(),
                         total: total,
                         selectedIndex: selectedIndex
                     )
@@ -92,8 +92,8 @@ struct VPageIndicatorDemoView: View {
     
     @ViewBuilder private func settings() -> some View {
         VSegmentedPicker(
-            selection: $pageIndicatorType,
-            headerTitle: "Type"
+            selection: $pageIndicatorStyle,
+            headerTitle: "Style"
         )
         
         VWheelPicker(
@@ -104,9 +104,9 @@ struct VPageIndicatorDemoView: View {
         ToggleSettingView(
             isOn: $stretchesOnPrimaryAxis,
             title: "Stretches on Primary Axis",
-            description: "Only applicable to \"standard\" type"
+            description: "Only applicable to \"standard\" style"
         )
-            .disabled(pageIndicatorType != .standard)
+            .disabled(pageIndicatorStyle != .standard)
     }
 
     // MARK: Timer
@@ -119,7 +119,7 @@ struct VPageIndicatorDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPageIndicatorTypeHelper: Int, StringRepresentableHashableEnumeration {
+private enum VPageIndicatorStyleHelper: Int, StringRepresentableHashableEnumeration {
     case standard
     case compact
     case automatic
@@ -145,8 +145,8 @@ extension LayoutDirectionOmni: StringRepresentableHashableEnumeration {
 }
 
 // MARK: - Preview
-struct VPageIndicatorDemoView_Previews: PreviewProvider {
+struct VPageIndicatorsDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VPageIndicatorDemoView()
+        VPageIndicatorsDemoView()
     }
 }

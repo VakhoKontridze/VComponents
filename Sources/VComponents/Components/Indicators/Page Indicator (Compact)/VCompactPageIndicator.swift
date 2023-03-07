@@ -1,5 +1,5 @@
 //
-//  VPageIndicatorCompact.swift
+//  VCompactPageIndicator.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 2/6/21.
@@ -8,10 +8,60 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Page Indicator Compact
-struct VPageIndicatorCompact<Content>: View where Content: View {
+// MARK: - V Compact Page Indicator
+/// Indicator component that indicates selection in page control in compact fashion.
+///
+/// UI model can be passed as parameter.
+///
+///     private let total: Int = 10
+///     @State private var selectedIndex: Int = 4
+///
+///     var body: some View {
+///         VCompactPageIndicator(
+///             total: total,
+///             selectedIndex: selectedIndex
+///         )
+///     }
+///
+/// You can change direction by modifying `direction` in UI models, or passing `vertical` instance:
+///
+///     var body: some View {
+///         VCompactPageIndicator(
+///             uiModel: .vertical,
+///             total: total,
+///             selectedIndex: selectedIndex
+///         )
+///     }
+///
+/// You can fully customize dot by passing a `dot` parameter. For instance, we can get a "bullet" shape.
+/// `.frame()` modifier shouldn't be applied to the dot itself.
+///
+///     var body: some View {
+///         VCompactPageIndicator(
+///             type: uiModel: {
+///                 var uiModel: VCompactPageIndicatorUIModel = .init()
+///                 uiModel.layout.dotDimensionPrimaryAxis = 15
+///                 uiModel.layout.dotDimensionSecondaryAxis = 15
+///                 return uiModel
+///             }(),
+///             total: total,
+///             selectedIndex: selectedIndex,
+///             dot: {
+///                 ZStack(content: {
+///                     Circle()
+///                         .stroke(lineWidth: 1)
+///
+///                     Circle()
+///                         .padding(3)
+///                 })
+///             }
+///         )
+///             .padding()
+///     }
+///
+public struct VCompactPageIndicator<Content>: View where Content: View {
     // MARK: Properties
-    private let uiModel: VPageIndicatorCompactUIModel
+    private let uiModel: VCompactPageIndicatorUIModel
     
     private let total: Int
     private var visible: Int { uiModel.layout.visibleDots }
@@ -27,15 +77,44 @@ struct VPageIndicatorCompact<Content>: View where Content: View {
     }
 
     // MARK: Initializers
+    /// Initializes component with total and selected index.
+    public init(
+        uiModel: VCompactPageIndicatorUIModel = .init(),
+        total: Int,
+        selectedIndex: Int
+    )
+        where Content == Never
+    {
+        Self.assertUIModel(uiModel)
+        
+        self.uiModel = uiModel
+        self.total = total
+        self.selectedIndex = selectedIndex
+        self.dotContent = .default
+    }
+    
+    /// Initializes component with total, selected index, and custom dot content.
+    public init(
+        uiModel: VCompactPageIndicatorUIModel = .init(),
+        total: Int,
+        selectedIndex: Int,
+        @ViewBuilder dot: @escaping () -> Content
+    ) {
+        Self.assertUIModel(uiModel)
+        
+        self.uiModel = uiModel
+        self.total = total
+        self.selectedIndex = selectedIndex
+        self.dotContent = .custom(content: dot)
+    }
+    
     init(
-        uiModel: VPageIndicatorCompactUIModel,
+        uiModel: VCompactPageIndicatorUIModel,
         total: Int,
         selectedIndex: Int,
         dotContent: VPageIndicatorDotContent<Content>
     ) {
-        assert(uiModel.layout.visibleDots.isOdd, "`VPageIndicator`'s `visible` count must be odd")
-        assert(uiModel.layout.centerDots.isOdd, "`VPageIndicator`'s `center` count must be odd")
-        assert(uiModel.layout.visibleDots > uiModel.layout.centerDots, "`VPageIndicator`'s `visible` must be greater than `center`")
+        Self.assertUIModel(uiModel)
         
         self.uiModel = uiModel
         self.total = total
@@ -47,7 +126,7 @@ struct VPageIndicatorCompact<Content>: View where Content: View {
     public var body: some View {
         switch total {
         case ...visible:
-            VPageIndicatorStandard(
+            VPageIndicator(
                 uiModel: uiModel.standardPageIndicatorSubUIModel,
                 total: total,
                 selectedIndex: selectedIndex,
@@ -253,6 +332,13 @@ struct VPageIndicatorCompact<Content>: View where Content: View {
             }
         }
     }
+    
+    // MARK: Assertion
+    private static func assertUIModel(_ uiModel: VCompactPageIndicatorUIModel) {
+        assert(uiModel.layout.visibleDots.isOdd, "`VCompactPageIndicator`'s `visible` count must be odd")
+        assert(uiModel.layout.centerDots.isOdd, "`VCompactPageIndicator`'s `center` count must be odd")
+        assert(uiModel.layout.visibleDots > uiModel.layout.centerDots, "`VCompactPageIndicator`'s `visible` must be greater than `center`")
+    }
 }
 
 // MARK: - Helpers
@@ -275,9 +361,9 @@ struct VPageIndicatorCompact_Previews: PreviewProvider {
         var body: some View {
             VStack(spacing: 20, content: {
                 ForEach(LayoutDirectionOmni.allCases, id: \.self, content: { direction in
-                    VPageIndicatorCompact<Never>(
+                    VCompactPageIndicator<Never>(
                         uiModel: {
-                            var uiModel: VPageIndicatorCompactUIModel = .init()
+                            var uiModel: VCompactPageIndicatorUIModel = .init()
                             uiModel.layout.direction = direction
                             return uiModel
                         }(),

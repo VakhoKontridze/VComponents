@@ -376,62 +376,20 @@ extension View {
 
 // MARK: - V Page Indicator
 extension VPageIndicator {
-    @available(*, deprecated, message: "Pass UI model type type parameter")
+    @available(*, unavailable, message: "'init(type:total:selectedIndex:)' is unavailable: Use `VPageIndicator`, `VCompactPageIndicator`, or `VAutomaticPageIndicator` instead")
     public init(
         uiModel: VPageIndicatorUIModel,
-        type pageIndicatorType: VPageIndicatorType = .default,
+        type pageIndicatorType: VPageIndicatorType,
         total: Int,
         selectedIndex: Int
     )
         where Content == Never
     {
-        self.init(
-            type: pageIndicatorType,
-            total: total,
-            selectedIndex: selectedIndex
-        )
+        fatalError()
     }
 }
 
-extension VPageIndicatorType {
-    @available(*, deprecated, message: "Use method with UI model instead. Also, renamed to `standard`.")
-    public static var finite: Self {
-        standard()
-    }
-    
-    @available(*, deprecated, message: "Use method with UI model instead. Also, renamed to `compact`.")
-    public static func infinite(
-        visible: Int = 7,
-        center: Int = 3
-    ) -> Self {
-        compact(uiModel: {
-            var uiModel: VPageIndicatorCompactUIModel = .init()
-            uiModel.layout.visibleDots = visible
-            uiModel.layout.centerDots = center
-            return uiModel
-        }())
-    }
-    
-    @available(*, deprecated, message: "Use method with UI model instead")
-    public static func automatic(
-        visible: Int = 7,
-        center: Int = 3,
-        finiteLimit: Int = 10
-    ) -> Self {
-        automatic(uiModel: {
-            var uiModel: VPageIndicatorAutomaticUIModel = .init()
-            uiModel.layout.visibleDots = visible
-            uiModel.layout.centerDots = center
-            uiModel.layout.standardDotLimit = finiteLimit
-            return uiModel
-        }())
-    }
-}
-
-@available(*, deprecated, message: "`VPageIndicatorUIModel` no longer exists, and is split into 3 UI models")
-public typealias VPageIndicatorUIModel = VPageIndicatorAutomaticUIModel
-
-extension VPageIndicatorAutomaticUIModel.Layout {
+extension VAutomaticPageIndicatorUIModel.Layout {
     @available(*, deprecated, renamed: "standardDotLimit")
     public var finiteDotLimit: Int {
         get { standardDotLimit }
@@ -451,10 +409,119 @@ extension VPageIndicatorAutomaticUIModel.Layout {
     }
 }
 
-extension VPageIndicatorAutomaticUIModel.Layout {
+extension VAutomaticPageIndicatorUIModel.Layout {
     @available(*, unavailable, message: "Use `dotDimensionPrimaryAxisForStandardConfiguration`, `dotDimensionPrimaryAxisForCompactConfiguration` and `dotDimensionSecondaryAxis` instead")
     public var dotDimension: CGFloat { 10 }
 }
+
+extension VPageIndicator {
+    @available(*, unavailable, message: "Use `VPageIndicator`, `VCompactPageIndicator`, or `VAutomaticPageIndicator` instead")
+    public init(
+        type pageIndicatorType: VPageIndicatorType,
+        total: Int,
+        selectedIndex: Int
+    )
+        where Content == Never
+    {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "Use `VPageIndicator`, `VCompactPageIndicator`, or `VAutomaticPageIndicator` instead")
+    public init(
+        type pageIndicatorType: VPageIndicatorType,
+        total: Int,
+        selectedIndex: Int,
+        @ViewBuilder dot: @escaping () -> Content
+    ) {
+        fatalError()
+    }
+}
+
+@available(*, deprecated, message: "Use `VPageIndicator`, `VCompactPageIndicator`, or `VAutomaticPageIndicator` instead")
+public struct VPageIndicatorType {
+    fileprivate let _pageIndicatorType: _VPageIndicatorType
+    
+    private init(
+        pageIndicatorType: _VPageIndicatorType
+    ) {
+        self._pageIndicatorType = pageIndicatorType
+    }
+    
+    public static func standard(
+        uiModel: VPageIndicatorUIModel = .init()
+    ) -> Self {
+        .init(pageIndicatorType: .standard(
+            uiModel: uiModel
+        ))
+    }
+    
+    public static func compact(
+        uiModel: VCompactPageIndicatorUIModel = .init()
+    ) -> Self {
+        .init(pageIndicatorType: .compact(
+            uiModel: uiModel
+        ))
+    }
+
+    public static func automatic(
+        uiModel: VAutomaticPageIndicatorUIModel = .init()
+    ) -> Self {
+        .init(pageIndicatorType: .automatic(
+            uiModel: uiModel
+        ))
+    }
+    
+    public static var `default`: Self { .automatic() }
+    
+    // Old stuff below
+    @available(*, deprecated, message: "Use method with UI model instead. Also, renamed to `standard`.")
+    public static var finite: Self {
+        standard()
+    }
+    
+    @available(*, deprecated, message: "Use method with UI model instead. Also, renamed to `compact`.")
+    public static func infinite(
+        visible: Int = 7,
+        center: Int = 3
+    ) -> Self {
+        compact(uiModel: {
+            var uiModel: VCompactPageIndicatorUIModel = .init()
+            uiModel.layout.visibleDots = visible
+            uiModel.layout.centerDots = center
+            return uiModel
+        }())
+    }
+    
+    @available(*, deprecated, message: "Use method with UI model instead")
+    public static func automatic(
+        visible: Int = 7,
+        center: Int = 3,
+        finiteLimit: Int = 10
+    ) -> Self {
+        automatic(uiModel: {
+            var uiModel: VAutomaticPageIndicatorUIModel = .init()
+            uiModel.layout.visibleDots = visible
+            uiModel.layout.centerDots = center
+            uiModel.layout.standardDotLimit = finiteLimit
+            return uiModel
+        }())
+    }
+}
+
+private enum _VPageIndicatorType {
+    case standard(uiModel: VPageIndicatorUIModel)
+    case compact(uiModel: VCompactPageIndicatorUIModel)
+    case automatic(uiModel: VAutomaticPageIndicatorUIModel)
+}
+
+@available(*, deprecated, renamed: "VPageIndicatorUIModel")
+public typealias VPageIndicatorStandardUIModel = VPageIndicatorUIModel
+
+@available(*, deprecated, renamed: "VCompactPageIndicatorUIModel")
+public typealias VPageIndicatorCompactUIModel = VCompactPageIndicatorUIModel
+
+@available(*, deprecated, renamed: "VAutomaticPageIndicatorUIModel")
+public typealias VPageIndicatorAutomaticUIModel = VAutomaticPageIndicatorUIModel
 
 // MARK: - V Marquee
 @available(*, deprecated, message: "Use `VWrappingMarquee` or `VBouncingMarquee` instead")

@@ -24,7 +24,6 @@
 		87ADCD7C29B6275800FE3F9E /* VSliderDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4229B6275800FE3F9E /* VSliderDemoView.swift */; };
 		87ADCD7D29B6275800FE3F9E /* VSpinnerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4429B6275800FE3F9E /* VSpinnerDemoView.swift */; };
 		87ADCD7E29B6275800FE3F9E /* VProgressBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4529B6275800FE3F9E /* VProgressBarDemoView.swift */; };
-		87ADCD7F29B6275800FE3F9E /* VPageIndicatorDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4629B6275800FE3F9E /* VPageIndicatorDemoView.swift */; };
 		87ADCD8029B6275800FE3F9E /* VSegmentedPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4829B6275800FE3F9E /* VSegmentedPickerDemoView.swift */; };
 		87ADCD8129B6275800FE3F9E /* VWheelPickerDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4929B6275800FE3F9E /* VWheelPickerDemoView.swift */; };
 		87ADCD8229B6275800FE3F9E /* VSideBarDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4B29B6275800FE3F9E /* VSideBarDemoView.swift */; };
@@ -56,6 +55,7 @@
 		87ADCD9D29B6275800FE3F9E /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD6F29B6275800FE3F9E /* HomeRow.swift */; };
 		87ADCDA329B6279200FE3F9E /* VComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 87ADCDA229B6279200FE3F9E /* VComponents */; };
 		87F76CA129B761EB000CC396 /* VMarqueesDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F76CA029B761EB000CC396 /* VMarqueesDemoView.swift */; };
+		87F76CA329B76935000CC396 /* VPageIndicatorsDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F76CA229B76934000CC396 /* VPageIndicatorsDemoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,7 +77,6 @@
 		87ADCD4229B6275800FE3F9E /* VSliderDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSliderDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4429B6275800FE3F9E /* VSpinnerDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSpinnerDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4529B6275800FE3F9E /* VProgressBarDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VProgressBarDemoView.swift; sourceTree = "<group>"; };
-		87ADCD4629B6275800FE3F9E /* VPageIndicatorDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPageIndicatorDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4829B6275800FE3F9E /* VSegmentedPickerDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSegmentedPickerDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4929B6275800FE3F9E /* VWheelPickerDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VWheelPickerDemoView.swift; sourceTree = "<group>"; };
 		87ADCD4B29B6275800FE3F9E /* VSideBarDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSideBarDemoView.swift; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		87ADCD6F29B6275800FE3F9E /* HomeRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
 		87ADCDA029B6278000FE3F9E /* ~VComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "~VComponents"; path = ..; sourceTree = "<group>"; };
 		87F76CA029B761EB000CC396 /* VMarqueesDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMarqueesDemoView.swift; sourceTree = "<group>"; };
+		87F76CA229B76934000CC396 /* VPageIndicatorsDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VPageIndicatorsDemoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -257,7 +257,7 @@
 			children = (
 				87ADCD4429B6275800FE3F9E /* VSpinnerDemoView.swift */,
 				87ADCD4529B6275800FE3F9E /* VProgressBarDemoView.swift */,
-				87ADCD4629B6275800FE3F9E /* VPageIndicatorDemoView.swift */,
+				87F76CA229B76934000CC396 /* VPageIndicatorsDemoView.swift */,
 			);
 			path = Indicators;
 			sourceTree = "<group>";
@@ -490,7 +490,6 @@
 				87ADCD9229B6275800FE3F9E /* DemoView.swift in Sources */,
 				87ADCD7829B6275800FE3F9E /* VSecondaryButtonDemoView.swift in Sources */,
 				87ADCD7C29B6275800FE3F9E /* VSliderDemoView.swift in Sources */,
-				87ADCD7F29B6275800FE3F9E /* VPageIndicatorDemoView.swift in Sources */,
 				87ADCD8E29B6275800FE3F9E /* VDisclosureGroupDemoView.swift in Sources */,
 				87ADCD8D29B6275800FE3F9E /* VToggleDemoView.swift in Sources */,
 				87ADCD8829B6275800FE3F9E /* VAlertDemoView.swift in Sources */,
@@ -500,6 +499,7 @@
 				87ADCD7129B6275800FE3F9E /* HomeView.swift in Sources */,
 				87ADCD8129B6275800FE3F9E /* VWheelPickerDemoView.swift in Sources */,
 				87ADCD7629B6275800FE3F9E /* VPrimaryButtonDemoView.swift in Sources */,
+				87F76CA329B76935000CC396 /* VPageIndicatorsDemoView.swift in Sources */,
 				87ADCD9629B6275800FE3F9E /* ToggleSettingView.swift in Sources */,
 				87ADCD9A29B6275800FE3F9E /* DemoListRowView.swift in Sources */,
 				87ADCD9C29B6275800FE3F9E /* DemoableRow.swift in Sources */,
