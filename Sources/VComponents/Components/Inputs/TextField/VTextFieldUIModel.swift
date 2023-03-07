@@ -332,7 +332,7 @@ extension VTextFieldUIModel {
 
 // MARK: - Factory (Highlights)
 extension VTextFieldUIModel { // ???
-    /// Model that applies green color scheme.
+    /// `VTextFieldUIModel` that applies green color scheme.
     public static var success: VTextFieldUIModel {
         var uiModel: VTextFieldUIModel = .init()
         
@@ -341,7 +341,7 @@ extension VTextFieldUIModel { // ???
         return uiModel
     }
 
-    /// Model that applies yellow color scheme.
+    /// `VTextFieldUIModel` that applies yellow color scheme.
     public static var warning: VTextFieldUIModel {
         var uiModel: VTextFieldUIModel = .init()
         
@@ -350,7 +350,7 @@ extension VTextFieldUIModel { // ???
         return uiModel
     }
 
-    /// Model that applies error color scheme.
+    /// `VTextFieldUIModel` that applies error color scheme.
     public static var error: VTextFieldUIModel {
         var uiModel: VTextFieldUIModel = .init()
         
@@ -361,7 +361,7 @@ extension VTextFieldUIModel { // ???
 }
 
 extension VTextFieldUIModel.Colors {
-    /// Model that applies green color scheme.
+    /// `VTextFieldUIModel.Colors` that applies green color scheme.
     public static var success: VTextFieldUIModel.Colors {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
@@ -371,7 +371,7 @@ extension VTextFieldUIModel.Colors {
         )
     }
 
-    /// Model that applies yellow color scheme.
+    /// `VTextFieldUIModel.Colors` that applies yellow color scheme.
     public static var warning: VTextFieldUIModel.Colors {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
@@ -381,7 +381,7 @@ extension VTextFieldUIModel.Colors {
         )
     }
 
-    /// Model that applies error color scheme.
+    /// `VTextFieldUIModel.Colors` that applies error color scheme.
     public static var error: VTextFieldUIModel.Colors {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
