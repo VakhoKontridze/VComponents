@@ -192,9 +192,7 @@ public struct VModalUIModel {
         // MARK: Dismiss Type
         /// Dismiss type, such as `leadingButton`, `trailingButton`, or `backTap`.
         public struct DismissType: OptionSet {
-            // MARK: Properties
-            public let rawValue: Int
-            
+            // MARK: Options
             /// Leading.
             public static var leadingButton: DismissType { .init(rawValue: 1 << 0) }
             
@@ -204,6 +202,7 @@ public struct VModalUIModel {
             /// Back-tap.
             public static var backTap: DismissType { .init(rawValue: 1 << 2) }
             
+            // MARK: Options Initializers
             /// All.
             public static var all: DismissType { [.leadingButton, .trailingButton, .backTap] }
             
@@ -214,6 +213,9 @@ public struct VModalUIModel {
             public var hasButton: Bool {
                 [.leadingButton, .trailingButton].contains(where: { contains($0) })
             }
+            
+            // MARK: Properties
+            public let rawValue: Int
             
             // MARK: Initializers
             public init(rawValue: Int) {

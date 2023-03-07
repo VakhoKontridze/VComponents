@@ -333,9 +333,7 @@ public struct VBottomSheetUIModel {
         // MARK: Dismiss Type
         /// Dismiss type, such as `leadingButton`, `trailingButton`, `backTap`, or `pullDown`.
         public struct DismissType: OptionSet {
-            // MARK: Properties
-            public let rawValue: Int
-            
+            // MARK: Options
             /// Leading.
             public static var leadingButton: DismissType { .init(rawValue: 1 << 0) }
             
@@ -348,11 +346,15 @@ public struct VBottomSheetUIModel {
             /// Pull down.
             public static var pullDown: DismissType { .init(rawValue: 1 << 3) }
             
+            // MARK: Options Initializers
+            /// Default value. Set to `trailingButton` and `.pullDown`.
+            public static var `default`: DismissType { [.trailingButton, .pullDown] }
+            
             /// All.
             public static var all: DismissType { [.leadingButton, .trailingButton, .backTap, .pullDown] }
             
-            /// Default value. Set to `trailingButton` and `.pullDown`.
-            public static var `default`: DismissType { [.trailingButton, .pullDown] }
+            // MARK: Properties
+            public let rawValue: Int
             
             /// Indicates if dismiss type inclues a button.
             public var hasButton: Bool {
