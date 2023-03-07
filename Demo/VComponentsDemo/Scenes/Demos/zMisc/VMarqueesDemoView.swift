@@ -1,5 +1,5 @@
 //
-//  VMarqueeDemoView.swift
+//  VMarqueesDemoView.swift
 //  VComponentsDemo
 //
 //  Created by Vakhtang Kontridze on 24.02.23.
@@ -9,15 +9,15 @@ import SwiftUI
 import VCore
 import VComponents
 
-// MARK: - V Marquee Demo View
-struct VMarqueeDemoView: View {
+// MARK: - V Marquees Demo View
+struct VMarqueesDemoView: View {
     // MARK: Properties
-    static var navBarTitle: String { "Marquee" }
+    static var navBarTitle: String { "Marquee (Wrapping, Bouncing)" }
     
     private var shortText: String { "Lorem ipsum" }
     private var longText: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit." }
     
-    @State private var marqueeType: VMarqueeTypeHelper = .wrapping
+    @State private var marqueeStyle: VMarqueeStyleHelper = .wrapping
     @State private var scrollDirection: LayoutDirection = .leftToRight
     @State private var contentType: ContentType = .long
     @State private var insettedWithGradient: Bool = true
@@ -37,24 +37,24 @@ struct VMarqueeDemoView: View {
     private func component() -> some View {
         ViewResettingContainer(content: { viewResetter in
             Group(content: {
-                switch marqueeType {
+                switch marqueeStyle {
                 case .wrapping:
-                    VMarquee(
-                        type: .wrapping(uiModel: {
-                            var uiModel: VMarqueeWrappingUIModel = insettedWithGradient ? .insettedGradient : .init()
+                    VWrappingMarquee(
+                        uiModel: {
+                            var uiModel: VWrappingMarqueeUIModel = insettedWithGradient ? .insettedGradient : .init()
                             uiModel.layout.scrollDirection = scrollDirection
                             return uiModel
-                        }()),
+                        }(),
                         content: { contentView }
                     )
                 
                 case .bouncing:
-                    VMarquee(
-                        type: .bouncing(uiModel: {
-                            var uiModel: VMarqueeBouncingUIModel = insettedWithGradient ? .insettedGradient : .init()
+                    VBouncingMarquee(
+                        uiModel: {
+                            var uiModel: VBouncingMarqueeUIModel = insettedWithGradient ? .insettedGradient : .init()
                             uiModel.layout.scrollDirection = scrollDirection
                             return uiModel
-                        }()),
+                        }(),
                         content: { contentView }
                     )
                 }
@@ -64,7 +64,7 @@ struct VMarqueeDemoView: View {
     }
     
     @ViewBuilder private func settings() -> some View {
-        VSegmentedPicker(selection: $marqueeType, headerTitle: "Type")
+        VSegmentedPicker(selection: $marqueeStyle, headerTitle: "Style")
         
         VSegmentedPicker(selection: $scrollDirection, headerTitle: "Scroll Direction")
             .onChange(of: scrollDirection, perform: { _ in resetAction?() })
@@ -90,7 +90,7 @@ struct VMarqueeDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VMarqueeTypeHelper: Int, StringRepresentableHashableEnumeration {
+private enum VMarqueeStyleHelper: Int, StringRepresentableHashableEnumeration {
     case wrapping
     case bouncing
     
@@ -125,8 +125,8 @@ private enum ContentType: Int, StringRepresentableHashableEnumeration {
 }
 
 // MARK: - Preview
-struct VMarqueeDemoView_Previews: PreviewProvider {
+struct VMarqueesDemoView_Previews: PreviewProvider {
     static var previews: some View {
-        VMarqueeDemoView()
+        VMarqueesDemoView()
     }
 }

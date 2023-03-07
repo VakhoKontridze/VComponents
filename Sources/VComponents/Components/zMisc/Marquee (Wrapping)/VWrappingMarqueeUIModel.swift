@@ -1,5 +1,5 @@
 //
-//  VMarqueeWrappingUIModel.swift
+//  VWrappingMarqueeUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 24.02.23.
@@ -8,9 +8,9 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Marquee Wrapping UI Model
+// MARK: - V Wrapping Marquee UI Model
 /// Model that describes UI.
-public struct VMarqueeWrappingUIModel {
+public struct VWrappingMarqueeUIModel {
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -33,14 +33,14 @@ public struct VMarqueeWrappingUIModel {
         
         /// Spacing between wrapped content. Defaults to  `20`.
         ///
-        /// If you set `inset` to non-`0` value or use `VMarqueeWrappingUIModel.insettedGradient`,
+        /// If you set `inset` to non-`0` value or use `VWrappingMarqueeUIModel.insettedGradient`,
         /// it's better to set `spacing` to `0`.
         public var spacing: CGFloat = 20
         
         /// Content inset. Defaults to `0`.
         ///
         /// Ideal for text content.
-        /// Alternately, use `insettedGradient` instance of `VMarqueeWrappingUIModel`.
+        /// Alternately, use `insettedGradient` instance of `VWrappingMarqueeUIModel`.
         ///
         /// For best result, should be greater than or equal to `gradientWidth`.
         public var inset: CGFloat = 0
@@ -62,7 +62,7 @@ public struct VMarqueeWrappingUIModel {
         /// To hide gradient, set to `0`.
         ///
         /// Ideal for text content.
-        /// Alternately, use `insettedGradient` instance of `VMarqueeBouncingUIModel`.
+        /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
         ///
         /// For best result, should be less than or equal to `inset`.
         public var gradientWidth: CGFloat = 0
@@ -121,12 +121,12 @@ public struct VMarqueeWrappingUIModel {
 }
 
 // MARK: - Factory
-extension VMarqueeWrappingUIModel {
-    /// `VMarqueeWrappingUIModel` that insets content and applies fading gradient.
+extension VWrappingMarqueeUIModel {
+    /// `VWrappingMarqueeUIModel` that insets content and applies fading gradient.
     ///
     /// Ideal for text content.
-    public static var insettedGradient: VMarqueeWrappingUIModel {
-        var uiModel: VMarqueeWrappingUIModel = .init()
+    public static var insettedGradient: VWrappingMarqueeUIModel {
+        var uiModel: VWrappingMarqueeUIModel = .init()
         
         uiModel.layout.spacing = 0
         uiModel.layout.inset = 20

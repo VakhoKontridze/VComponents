@@ -456,6 +456,68 @@ extension VPageIndicatorAutomaticUIModel.Layout {
     public var dotDimension: CGFloat { 10 }
 }
 
+// MARK: - V Marquee
+@available(*, deprecated, message: "Use `VWrappingMarquee` or `VBouncingMarquee` instead")
+public struct VMarquee<Content>: View where Content: View {
+    private let marqueeType: VMarqueeType
+    private let content: () -> Content
+
+    public init(
+        type marqueeType: VMarqueeType = .default,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.marqueeType = marqueeType
+        self.content = content
+    }
+    
+    public var body: some View {
+        switch marqueeType._marqueeType {
+        case .wrapping(let uiModel): VWrappingMarquee(uiModel: uiModel, content: content)
+        case .bouncing(let uiModel): VBouncingMarquee(uiModel: uiModel, content: content)
+        }
+    }
+}
+
+@available(*, deprecated, message: "Use `VWrappingMarquee` or `VBouncingMarquee` instead")
+public struct VMarqueeType {
+    fileprivate let _marqueeType: _VMarqueeType
+    
+    private init(
+        marqueeType: _VMarqueeType
+    ) {
+        self._marqueeType = marqueeType
+    }
+    
+    public static func wrapping(
+        uiModel: VWrappingMarqueeUIModel = .init()
+    ) -> Self {
+        .init(marqueeType: .wrapping(
+            uiModel: uiModel
+        ))
+    }
+    
+    public static func bouncing(
+        uiModel: VBouncingMarqueeUIModel = .init()
+    ) -> Self {
+        .init(marqueeType: .bouncing(
+            uiModel: uiModel
+        ))
+    }
+    
+    public static var `default`: Self { .wrapping() }
+}
+
+private enum _VMarqueeType {
+    case wrapping(uiModel: VWrappingMarqueeUIModel)
+    case bouncing(uiModel: VBouncingMarqueeUIModel)
+}
+
+@available(*, deprecated, renamed: "VBouncingMarqueeUIModel")
+public typealias VMarqueeBouncingUIModel = VBouncingMarqueeUIModel
+
+@available(*, deprecated, renamed: "VWrappingMarqueeUIModel")
+public typealias VMarqueeWrappingUIModel = VWrappingMarqueeUIModel
+
 // MARK: - Internal Components
 @available(*, unavailable)
 public struct VChevronButtonUIModel {}

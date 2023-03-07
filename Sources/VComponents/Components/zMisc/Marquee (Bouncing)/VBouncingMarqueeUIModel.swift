@@ -1,5 +1,5 @@
 //
-//  VMarqueeBouncingUIModel.swift
+//  VBouncingMarqueeUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 24.02.23.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Marquee Bouncing UI Model
+// MARK: - V Bouncing Marquee UI Model
 /// Model that describes UI.
-public struct VMarqueeBouncingUIModel {
+public struct VBouncingMarqueeUIModel {
     // MARK: Properties
-    fileprivate static let marqueeWrappingReference: VMarqueeWrappingUIModel = .init()
+    fileprivate static let wrappingMarqueeReference: VWrappingMarqueeUIModel = .init()
     
     /// Model that contains layout properties.
     public var layout: Layout = .init()
@@ -32,18 +32,18 @@ public struct VMarqueeBouncingUIModel {
     public struct Layout {
         // MARK: Properties
         /// Scroll direction. Defaults to `leftToRight`.
-        public var scrollDirection: LayoutDirection = marqueeWrappingReference.layout.scrollDirection
+        public var scrollDirection: LayoutDirection = wrappingMarqueeReference.layout.scrollDirection
         
         /// Content inset. Defaults to `0`.
         ///
         /// Ideal for text content.
-        /// Alternately, use `insettedGradient` instance of `VMarqueeBouncingUIModel`.
+        /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
         ///
         /// For best result, should be greater than or equal to `gradientWidth`.
-        public var inset: CGFloat = marqueeWrappingReference.layout.inset
+        public var inset: CGFloat = wrappingMarqueeReference.layout.inset
         
         /// Horizontal alignment for non-scrolling stationary content. Defaults to `leading`.
-        public var alignmentStationary: HorizontalAlignment = marqueeWrappingReference.layout.alignmentStationary
+        public var alignmentStationary: HorizontalAlignment = wrappingMarqueeReference.layout.alignmentStationary
         
         // MARK: Initializers
         /// Initializes model with default values.
@@ -52,20 +52,20 @@ public struct VMarqueeBouncingUIModel {
     
     // MARK: Colors
     /// Model that contains color properties.
-    public typealias Colors = VMarqueeWrappingUIModel.Colors
+    public typealias Colors = VWrappingMarqueeUIModel.Colors
     
     // MARK: Animations
     /// Model that contains animation properties.
-    public typealias Animations = VMarqueeWrappingUIModel.Animations
+    public typealias Animations = VWrappingMarqueeUIModel.Animations
 }
 
 // MARK: - Factory
-extension VMarqueeBouncingUIModel {
-    /// `VMarqueeBouncingUIModel` that insets content and applies fading gradient.
+extension VBouncingMarqueeUIModel {
+    /// `VBouncingMarqueeUIModel` that insets content and applies fading gradient.
     ///
     /// Ideal for text content.
-    public static var insettedGradient: VMarqueeBouncingUIModel {
-        var uiModel: VMarqueeBouncingUIModel = .init()
+    public static var insettedGradient: VBouncingMarqueeUIModel {
+        var uiModel: VBouncingMarqueeUIModel = .init()
         
         uiModel.layout.inset = 20
         

@@ -1,5 +1,5 @@
 //
-//  VMarqueeWrapping.swift
+//  VBouncingMarquee.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 24.02.23.
@@ -8,10 +8,27 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Marquee Wrapping
-struct VMarqueeWrapping<Content>: View where Content: View {
-    // MARK: Properties
-    private let uiModel: VMarqueeWrappingUIModel
+// MARK: - V Bouncing Marquee
+/// Container that automatically scrolls and bounces it's content edge-to-edge.
+///
+/// UI model can be passed as parameter.
+///
+///     var body: some View {
+///         VMarquee(
+///             uiModel: .insettedGradient,
+///             content: {
+///                 HStack(content: {
+///                     Image(systemName: "swift")
+///                     Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+///                 })
+///                     .drawingGroup() // For Images
+///             }
+///         )
+///     }
+///
+public struct VBouncingMarquee<Content>: View where Content: View {
+    // MARK: properties
+    private let uiModel: VBouncingMarqueeUIModel
     private let content: () -> Content
     
     @State private var containerWidth: CGFloat = 0
@@ -22,8 +39,9 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     private static var isAnimatingDefault: Bool { false }
     
     // MARK: Initializers
-    init(
-        uiModel: VMarqueeWrappingUIModel,
+    /// Initializes component content.
+    public init(
+        uiModel: VBouncingMarqueeUIModel = .init(),
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
@@ -31,7 +49,7 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     }
     
     // MARK: Body
-    var body: some View {
+    public var body: some View {
         Color.clear
             .frame(height: contentSize.height)
             .readSize(onChange: { containerWidth = $0.width })
@@ -42,22 +60,12 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     
     @ViewBuilder private var marqueeContentView: some View {
         if isDynamic {
-            Group(content: {
-                contentView
-                    .offset(x: offsetDynamicFirst)
-                    .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
-                    .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = isDynamic })
-                    })
-                
-                contentView
-                    .offset(x: offsetDynamicSecond)
-                    .animation(isAnimating ? animation : resettingAnimation, value: isAnimating)
-                    .onAppear(perform: {
-                        DispatchQueue.main.async(execute: { isAnimating = isDynamic })
-                    })
-            })
+            contentView
                 .offset(x: offsetDynamic)
+                .animation(animation, value: isAnimating)
+                .onAppear(perform: {
+                    DispatchQueue.main.async(execute: { isAnimating = isDynamic })
+                })
             
         } else {
             contentView
@@ -104,37 +112,15 @@ struct VMarqueeWrapping<Content>: View where Content: View {
     private var offsetDynamic: CGFloat {
         let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
         
-        switch uiModel.layout.scrollDirection {
-        case .leftToRight: return offset
-        case .rightToLeft: return -offset
-        @unknown default: return offset
-        }
-    }
-    
-    private var offsetDynamicFirst: CGFloat {
-        let offset: CGFloat = -(contentSize.width + uiModel.layout.inset + uiModel.layout.spacing/2)
-        
-        switch (uiModel.layout.scrollDirection, isAnimating) {
-        case (.leftToRight, false): return 0
-        case (.leftToRight, true): return offset
-        case (.rightToLeft, false): return offset
-        case (.rightToLeft, true): return 0
-        @unknown default: return offset
-        }
-    }
-    
-    private var offsetDynamicSecond: CGFloat {
-        let offset: CGFloat = contentSize.width + uiModel.layout.inset + uiModel.layout.spacing/2
-        
         switch (uiModel.layout.scrollDirection, isAnimating) {
         case (.leftToRight, false): return offset
-        case (.leftToRight, true): return 0
-        case (.rightToLeft, false): return 0
+        case (.leftToRight, true): return -offset
+        case (.rightToLeft, false): return -offset
         case (.rightToLeft, true): return offset
         @unknown default: return offset
         }
     }
-
+    
     private var offsetStatic: CGFloat {
         let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
         
@@ -146,12 +132,11 @@ struct VMarqueeWrapping<Content>: View where Content: View {
         }
     }
     
-    // MARK: Animations
+    // MARK: Animation
     private var animation: Animation {
-        let width: CGFloat = // Not dependent on container width
-            contentSize.width +
-            uiModel.layout.inset +
-            uiModel.layout.spacing/2
+        let width: CGFloat =
+            (contentSize.width + 2*uiModel.layout.inset) -
+            containerWidth
         
         return BasicAnimation(
             curve: uiModel.animations.curve,
@@ -159,24 +144,22 @@ struct VMarqueeWrapping<Content>: View where Content: View {
         )
             .toSwiftUIAnimation
             .delay(uiModel.animations.delay)
-            .repeatForever(autoreverses: false)
+            .repeatForever(autoreverses: true)
     }
-    
-    private let resettingAnimation: Animation = .linear(duration: 0)
 }
 
 // MARK: - Preview
-struct VMarqueeWrapping_Previews: PreviewProvider {
+struct VBouncingMarquee_Previews: PreviewProvider {
     private static var shortText: String { "Lorem ipsum" }
     private static var longText: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus facilisis risus, ut condimentum diam tempus non." }
     
     static var previews: some View {
         VStack(spacing: 10, content: {
-            VMarqueeWrapping(uiModel: .insettedGradient, content: {
+            VBouncingMarquee(uiModel: .insettedGradient, content: {
                 Text(shortText)
             })
             
-            VMarqueeWrapping(uiModel: .insettedGradient, content: {
+            VBouncingMarquee(uiModel: .insettedGradient, content: {
                 HStack(content: {
                     Image(systemName: "swift")
                     Text(longText)

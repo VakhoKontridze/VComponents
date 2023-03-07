@@ -48,7 +48,7 @@ Versions with different majors are not compatible.
 
 **Indicators.** VSpinner, VProgressBar, VPageIndicator
 
-**Misc.** VText, VMarquee
+**Misc.** VText, VMarquee (Wrapping), VMarquee (Bouncing)
 
 ## Brand Book
 

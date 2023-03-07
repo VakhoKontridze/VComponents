@@ -34,7 +34,6 @@
 		87ADCD8629B6275800FE3F9E /* VBottomSheetDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD4F29B6275800FE3F9E /* VBottomSheetDemoView.swift */; };
 		87ADCD8729B6275800FE3F9E /* VContextMenuDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD5029B6275800FE3F9E /* VContextMenuDemoView.swift */; };
 		87ADCD8829B6275800FE3F9E /* VAlertDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD5129B6275800FE3F9E /* VAlertDemoView.swift */; };
-		87ADCD8929B6275800FE3F9E /* VMarqueeDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD5329B6275800FE3F9E /* VMarqueeDemoView.swift */; };
 		87ADCD8A29B6275800FE3F9E /* VTextDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD5429B6275800FE3F9E /* VTextDemoView.swift */; };
 		87ADCD8B29B6275800FE3F9E /* VCheckBoxDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD5629B6275800FE3F9E /* VCheckBoxDemoView.swift */; };
 		87ADCD8C29B6275800FE3F9E /* VRadioButtonDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD5729B6275800FE3F9E /* VRadioButtonDemoView.swift */; };
@@ -56,6 +55,7 @@
 		87ADCD9C29B6275800FE3F9E /* DemoableRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD6E29B6275800FE3F9E /* DemoableRow.swift */; };
 		87ADCD9D29B6275800FE3F9E /* HomeRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87ADCD6F29B6275800FE3F9E /* HomeRow.swift */; };
 		87ADCDA329B6279200FE3F9E /* VComponents in Frameworks */ = {isa = PBXBuildFile; productRef = 87ADCDA229B6279200FE3F9E /* VComponents */; };
+		87F76CA129B761EB000CC396 /* VMarqueesDemoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F76CA029B761EB000CC396 /* VMarqueesDemoView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +87,6 @@
 		87ADCD4F29B6275800FE3F9E /* VBottomSheetDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VBottomSheetDemoView.swift; sourceTree = "<group>"; };
 		87ADCD5029B6275800FE3F9E /* VContextMenuDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VContextMenuDemoView.swift; sourceTree = "<group>"; };
 		87ADCD5129B6275800FE3F9E /* VAlertDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VAlertDemoView.swift; sourceTree = "<group>"; };
-		87ADCD5329B6275800FE3F9E /* VMarqueeDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMarqueeDemoView.swift; sourceTree = "<group>"; };
 		87ADCD5429B6275800FE3F9E /* VTextDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VTextDemoView.swift; sourceTree = "<group>"; };
 		87ADCD5629B6275800FE3F9E /* VCheckBoxDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VCheckBoxDemoView.swift; sourceTree = "<group>"; };
 		87ADCD5729B6275800FE3F9E /* VRadioButtonDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VRadioButtonDemoView.swift; sourceTree = "<group>"; };
@@ -109,6 +108,7 @@
 		87ADCD6E29B6275800FE3F9E /* DemoableRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoableRow.swift; sourceTree = "<group>"; };
 		87ADCD6F29B6275800FE3F9E /* HomeRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeRow.swift; sourceTree = "<group>"; };
 		87ADCDA029B6278000FE3F9E /* ~VComponents */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "~VComponents"; path = ..; sourceTree = "<group>"; };
+		87F76CA029B761EB000CC396 /* VMarqueesDemoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VMarqueesDemoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,8 +288,8 @@
 		87ADCD5229B6275800FE3F9E /* zMisc */ = {
 			isa = PBXGroup;
 			children = (
+				87F76CA029B761EB000CC396 /* VMarqueesDemoView.swift */,
 				87ADCD5429B6275800FE3F9E /* VTextDemoView.swift */,
-				87ADCD5329B6275800FE3F9E /* VMarqueeDemoView.swift */,
 			);
 			path = zMisc;
 			sourceTree = "<group>";
@@ -478,6 +478,7 @@
 				87ADCD7729B6275800FE3F9E /* VRoundedLabeledButtonDemoView.swift in Sources */,
 				87ADCD8B29B6275800FE3F9E /* VCheckBoxDemoView.swift in Sources */,
 				87ADCD9029B6275800FE3F9E /* VTextViewDemoView.swift in Sources */,
+				87F76CA129B761EB000CC396 /* VMarqueesDemoView.swift in Sources */,
 				87ADCD9829B6275800FE3F9E /* NoDismissTypeWarningView.swift in Sources */,
 				87ADCD7D29B6275800FE3F9E /* VSpinnerDemoView.swift in Sources */,
 				87ADCD9D29B6275800FE3F9E /* HomeRow.swift in Sources */,
@@ -500,7 +501,6 @@
 				87ADCD8129B6275800FE3F9E /* VWheelPickerDemoView.swift in Sources */,
 				87ADCD7629B6275800FE3F9E /* VPrimaryButtonDemoView.swift in Sources */,
 				87ADCD9629B6275800FE3F9E /* ToggleSettingView.swift in Sources */,
-				87ADCD8929B6275800FE3F9E /* VMarqueeDemoView.swift in Sources */,
 				87ADCD9A29B6275800FE3F9E /* DemoListRowView.swift in Sources */,
 				87ADCD9C29B6275800FE3F9E /* DemoableRow.swift in Sources */,
 				87ADCD9729B6275800FE3F9E /* HorizontallyLabeledDemoTitledSettingView.swift in Sources */,

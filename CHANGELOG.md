@@ -28,6 +28,10 @@ VToast
 
 - `VToastTextLineType` is renamed to `TextLineType` and is moved to `VToastUIModel`
 
+VMarquee
+
+- `VMarquee` is split to `VWrappingMarquee` and `VBouncingMarquee`
+
 ### [3.1.0(28)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.1.0) — *2023 03 03*
 
 General
