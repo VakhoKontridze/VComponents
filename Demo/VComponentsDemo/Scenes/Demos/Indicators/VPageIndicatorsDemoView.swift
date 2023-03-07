@@ -18,7 +18,7 @@ struct VPageIndicatorsDemoView: View {
     private let total: Int = 15
     @State private var selectedIndex: Int = 0
     
-    @State private var pageIndicatorStyle: VPageIndicatorStyleHelper = .automatic
+    @State private var pageIndicatorStyle: VPageIndicatorStyle = .automatic
     @State private var direction: LayoutDirectionOmni = .leftToRight
     @State private var stretchesOnPrimaryAxis: Bool = false
 
@@ -119,7 +119,7 @@ struct VPageIndicatorsDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VPageIndicatorStyleHelper: Int, StringRepresentableHashableEnumeration {
+private enum VPageIndicatorStyle: Int, StringRepresentableHashableEnumeration {
     case standard
     case compact
     case automatic

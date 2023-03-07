@@ -17,7 +17,7 @@ struct VMarqueesDemoView: View {
     private var shortText: String { "Lorem ipsum" }
     private var longText: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit." }
     
-    @State private var marqueeStyle: VMarqueeStyleHelper = .wrapping
+    @State private var marqueeStyle: VMarqueeStyle = .wrapping
     @State private var scrollDirection: LayoutDirection = .leftToRight
     @State private var contentType: ContentType = .long
     @State private var insettedWithGradient: Bool = true
@@ -90,7 +90,7 @@ struct VMarqueesDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VMarqueeStyleHelper: Int, StringRepresentableHashableEnumeration {
+private enum VMarqueeStyle: Int, StringRepresentableHashableEnumeration {
     case wrapping
     case bouncing
     

@@ -14,7 +14,7 @@ struct VSpinnersDemoView: View {
     // MARK: Properties
     static var navBarTitle: String { "Spinners (Continuous, Dashed)" }
     
-    @State private var spinnerStyle: VSpinnerStyleHelper = .continuous
+    @State private var spinnerStyle: VSpinnerStyle = .continuous
 
     // MARK: Body
     var body: some View {
@@ -38,7 +38,7 @@ struct VSpinnersDemoView: View {
 }
 
 // MARK: - Helpers
-private enum VSpinnerStyleHelper: Int, StringRepresentableHashableEnumeration {
+private enum VSpinnerStyle: Int, StringRepresentableHashableEnumeration {
     case continuous
     case dashed
     
