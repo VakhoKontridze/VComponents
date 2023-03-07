@@ -26,14 +26,15 @@ public struct VListRowUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Separator type. Defaults to `default`.
-        public var separatorType: SeparatorType = .default
-        
         /// Margins. Defaults to `15` horizontal, `9` vertical.
         public var margins: Margins = .init(
             horizontal: 15,
             vertical: 9
         )
+        
+        /// Separator type. Defaults to `default`.
+        public var separatorType: SeparatorType = .default
+        
         
         /// Separator margins. Defaults to `15`s.
         public var separatorMargins: HorizontalMargins = .init(15)
@@ -44,6 +45,13 @@ public struct VListRowUIModel {
         // MARK: Initializers
         /// Initializes model with default values.
         public init() {}
+        
+        // MARK: Margins
+        /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
+        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
+        
+        /// Model that contains `leading` and `trailing` margins.
+        public typealias HorizontalMargins = EdgeInsets_LeadingTrailing
         
         // MARK: Separator Type
         /// Enum that represents separator type, such as `top` or `bottom`.
@@ -104,13 +112,6 @@ public struct VListRowUIModel {
                 self.rawValue = rawValue
             }
         }
-        
-        // MARK: Margins
-        /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
-        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
-        
-        /// Model that contains `leading` and `trailing` margins.
-        public typealias HorizontalMargins = EdgeInsets_LeadingTrailing
     }
     
     // MARK: Colors
