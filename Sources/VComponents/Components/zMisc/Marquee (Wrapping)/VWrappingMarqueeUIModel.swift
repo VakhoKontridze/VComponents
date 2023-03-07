@@ -125,8 +125,8 @@ extension VWrappingMarqueeUIModel {
     /// `VWrappingMarqueeUIModel` that insets content and applies fading gradient.
     ///
     /// Ideal for text content.
-    public static var insettedGradient: VWrappingMarqueeUIModel {
-        var uiModel: VWrappingMarqueeUIModel = .init()
+    public static var insettedGradient: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.spacing = 0
         uiModel.layout.inset = 20

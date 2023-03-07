@@ -134,8 +134,8 @@ public struct VListRowUIModel {
 // MARK: - Factory
 extension VListRowUIModel {
     /// `VListRowUIModel` that displays separators at the bottom of all rows in the list.
-    public static func noFirstSeparator() -> VListRowUIModel {
-        var uiModel: VListRowUIModel = .init()
+    public static func noFirstSeparator() -> Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.separatorType = .bottom
         
@@ -143,8 +143,8 @@ extension VListRowUIModel {
     }
     
     /// `VListRowUIModel` that displays separators at the top of all rows in the list.
-    public static func noLastSeparator() -> VListRowUIModel {
-        var uiModel: VListRowUIModel = .init()
+    public static func noLastSeparator() -> Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.separatorType = .top
         
@@ -152,8 +152,8 @@ extension VListRowUIModel {
     }
     
     /// `VListRowUIModel` that displays separators in rows at every position in the list, except for the top and bottom.
-    public static func noFirstAndLastSeparators(isFirst: Bool) -> VListRowUIModel {
-        var uiModel: VListRowUIModel = .init()
+    public static func noFirstAndLastSeparators(isFirst: Bool) -> Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.separatorType = {
             if isFirst {
@@ -167,8 +167,8 @@ extension VListRowUIModel {
     }
     
     /// `VListRowUIModel` that displays separators at the top and bottom of all rows in the list.
-    public static func rowEnclosingSeparators(isFirst: Bool) -> VListRowUIModel {
-        var uiModel: VListRowUIModel = .init()
+    public static func rowEnclosingSeparators(isFirst: Bool) -> Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.separatorType = {
             if isFirst {

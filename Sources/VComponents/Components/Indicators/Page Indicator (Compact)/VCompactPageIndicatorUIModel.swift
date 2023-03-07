@@ -140,8 +140,8 @@ public struct VCompactPageIndicatorUIModel {
 // MARK: - Factory
 extension VCompactPageIndicatorUIModel {
     /// `VCompactPageIndicatorUIModel` with vertical layout.
-    public static var vertical: VCompactPageIndicatorUIModel {
-        var uiModel: VCompactPageIndicatorUIModel = .init()
+    public static var vertical: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.direction = .topToBottom
         

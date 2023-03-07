@@ -126,8 +126,8 @@ public struct VAutomaticPageIndicatorUIModel {
 // MARK: - Factory
 extension VAutomaticPageIndicatorUIModel {
     /// `VPageIndicatorAutomaticUIModel` with vertical layout.
-    public static var vertical: VAutomaticPageIndicatorUIModel {
-        var uiModel: VAutomaticPageIndicatorUIModel = .init()
+    public static var vertical: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.direction = .topToBottom
         

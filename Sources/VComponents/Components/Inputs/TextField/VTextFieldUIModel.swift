@@ -312,8 +312,8 @@ public struct VTextFieldUIModel {
 // MARK: - Factory (Content Types)
 extension VTextFieldUIModel {
     /// `VTextFieldUIModel` with secure content type.
-    public static var secure: VTextFieldUIModel {
-        var uiModel: VTextFieldUIModel = .init()
+    public static var secure: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.contentType = .secure
         
@@ -321,8 +321,8 @@ extension VTextFieldUIModel {
     }
     
     /// `VTextFieldUIModel` with search content type.
-    public static var search: VTextFieldUIModel {
-        var uiModel: VTextFieldUIModel = .init()
+    public static var search: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.contentType = .search
         
@@ -333,8 +333,8 @@ extension VTextFieldUIModel {
 // MARK: - Factory (Highlights)
 extension VTextFieldUIModel {
     /// `VTextFieldUIModel` that applies green color scheme.
-    public static var success: VTextFieldUIModel {
-        var uiModel: VTextFieldUIModel = .init()
+    public static var success: Self {
+        var uiModel: Self = .init()
         
         uiModel.colors = .success
         
@@ -342,8 +342,8 @@ extension VTextFieldUIModel {
     }
 
     /// `VTextFieldUIModel` that applies yellow color scheme.
-    public static var warning: VTextFieldUIModel {
-        var uiModel: VTextFieldUIModel = .init()
+    public static var warning: Self {
+        var uiModel: Self = .init()
         
         uiModel.colors = .warning
         
@@ -351,8 +351,8 @@ extension VTextFieldUIModel {
     }
 
     /// `VTextFieldUIModel` that applies error color scheme.
-    public static var error: VTextFieldUIModel {
-        var uiModel: VTextFieldUIModel = .init()
+    public static var error: Self {
+        var uiModel: Self = .init()
         
         uiModel.colors = .error
         
@@ -362,7 +362,7 @@ extension VTextFieldUIModel {
 
 extension VTextFieldUIModel.Colors {
     /// `VTextFieldUIModel.Colors` that applies green color scheme.
-    public static var success: VTextFieldUIModel.Colors {
+    public static var success: Self {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
             backgroundFocused: .init(componentAsset: "TextField.Success.Background.enabled"),
@@ -372,7 +372,7 @@ extension VTextFieldUIModel.Colors {
     }
 
     /// `VTextFieldUIModel.Colors` that applies yellow color scheme.
-    public static var warning: VTextFieldUIModel.Colors {
+    public static var warning: Self {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
             backgroundFocused: .init(componentAsset: "TextField.Warning.Background.enabled"),
@@ -382,7 +382,7 @@ extension VTextFieldUIModel.Colors {
     }
 
     /// `VTextFieldUIModel.Colors` that applies error color scheme.
-    public static var error: VTextFieldUIModel.Colors {
+    public static var error: Self {
         .createHighlightedColors(
             backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
             backgroundFocused: .init(componentAsset: "TextField.Error.Background.enabled"),
@@ -396,8 +396,8 @@ extension VTextFieldUIModel.Colors {
         backgroundFocused: Color,
         enabled: Color,
         focused: Color
-    ) -> VTextFieldUIModel.Colors {
-        var colors: VTextFieldUIModel.Colors = .init()
+    ) -> Self {
+        var colors: Self = .init()
         
         colors.background.enabled = backgroundEnabled
         colors.background.focused = backgroundFocused

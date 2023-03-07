@@ -64,8 +64,8 @@ extension VBouncingMarqueeUIModel {
     /// `VBouncingMarqueeUIModel` that insets content and applies fading gradient.
     ///
     /// Ideal for text content.
-    public static var insettedGradient: VBouncingMarqueeUIModel {
-        var uiModel: VBouncingMarqueeUIModel = .init()
+    public static var insettedGradient: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.inset = 20
         

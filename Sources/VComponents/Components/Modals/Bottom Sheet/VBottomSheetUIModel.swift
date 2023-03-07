@@ -392,8 +392,8 @@ public struct VBottomSheetUIModel {
 // MARK: - Factory
 extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that insets content.
-    public static var insettedContent: VBottomSheetUIModel {
-        var uiModel: VBottomSheetUIModel = .init()
+    public static var insettedContent: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
         
@@ -401,8 +401,8 @@ extension VBottomSheetUIModel {
     }
     
     /// `VBottomSheetUIModel` that autoresizes content and inserts bottom safe area for scrollable content.
-    public static var scrollableContent: VBottomSheetUIModel {
-        var uiModel: VBottomSheetUIModel = .init()
+    public static var scrollableContent: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.autoresizesContent = true
         uiModel.layout.contentSafeAreaEdges.insert(.bottom)
@@ -415,8 +415,8 @@ extension VBottomSheetUIModel {
     /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
     ///
     /// It's recommended that you do not use header title or label with this configuration.
-    public static var noHeaderLabel: VBottomSheetUIModel {
-        var uiModel: VBottomSheetUIModel = .init()
+    public static var noHeaderLabel: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.grabberMargins = .init(15)
         
@@ -431,8 +431,8 @@ extension VBottomSheetUIModel {
     /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
     ///
     /// It's recommended that you do not use header title or label with this configuration.
-    public static var scrollableContentNoHeaderLabel: VBottomSheetUIModel {
-        var uiModel: VBottomSheetUIModel = .init()
+    public static var scrollableContentNoHeaderLabel: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.grabberMargins = .init(15)
         uiModel.layout.autoresizesContent = true
@@ -447,8 +447,8 @@ extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that stretches content to full size.
     ///
     /// It's recommended that you do not use header title or label with this configuration.
-    public static var fullSizedContent: VBottomSheetUIModel {
-        var uiModel: VBottomSheetUIModel = .noHeaderLabel
+    public static var fullSizedContent: Self {
+        var uiModel: Self = .noHeaderLabel
         
         uiModel.layout.grabberSize.height = .zero
         

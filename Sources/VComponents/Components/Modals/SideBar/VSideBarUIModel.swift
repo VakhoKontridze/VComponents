@@ -201,8 +201,8 @@ public struct VSideBarUIModel {
 // MARK: - Factory (Misc)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that insets content.
-    public static var insettedContent: VSideBarUIModel {
-        var uiModel: VSideBarUIModel = .init()
+    public static var insettedContent: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
         
@@ -227,7 +227,7 @@ extension VSideBarUIModel {
     /// `VSideBarUIModel` that presents side bar from left.
     ///
     /// Default configuration.
-    public static var left: VSideBarUIModel {
+    public static var left: Self {
         .init()
     }
     
@@ -236,8 +236,8 @@ extension VSideBarUIModel {
     /// `roundedCorners` is set to `leftCorners`.
     ///
     /// Sets `roundedCorners` to `leftCorners`.
-    public static var right: VSideBarUIModel {
-        var uiModel: VSideBarUIModel = .init()
+    public static var right: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.presentationEdge = .right
         
@@ -258,8 +258,8 @@ extension VSideBarUIModel {
     /// `contentMargins.bottom` is set to `25`.
     ///
     /// `contentSafeAreaEdges` is set to all but `bottom`.
-    public static var top: VSideBarUIModel {
-        var uiModel: VSideBarUIModel = .init()
+    public static var top: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.presentationEdge = .top
         
@@ -288,8 +288,8 @@ extension VSideBarUIModel {
     /// `contentMargins.top` is set to `25`.
     ///
     /// `contentSafeAreaEdges` is set to all but `top`.
-    public static var bottom: VSideBarUIModel {
-        var uiModel: VSideBarUIModel = .init()
+    public static var bottom: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.presentationEdge = .bottom
         

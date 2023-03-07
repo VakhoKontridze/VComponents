@@ -217,8 +217,8 @@ public struct VDisclosureGroupUIModel {
 // MARK: - Factory
 extension VDisclosureGroupUIModel {
     /// `VDisclosureGroupUIModel` that insets content.
-    public static var insettedContent: VDisclosureGroupUIModel {
-        var uiModel: VDisclosureGroupUIModel = .init()
+    public static var insettedContent: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
         

@@ -251,8 +251,8 @@ public struct VModalUIModel {
 // MARK: - Factory
 extension VModalUIModel {
     /// `VModalUIModel` that insets content.
-    public static var insettedContent: VModalUIModel {
-        var uiModel: VModalUIModel = .init()
+    public static var insettedContent: Self {
+        var uiModel: Self = .init()
         
         uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
         
@@ -262,8 +262,8 @@ extension VModalUIModel {
     /// `VModalUIModel` that stretches content to full size.
     ///
     /// It's recommended that you do not use header title or label with this configuration.
-    public static var fullSizedContent: VModalUIModel {
-        var uiModel: VModalUIModel = .init()
+    public static var fullSizedContent: Self {
+        var uiModel: Self = .init()
         
         uiModel.misc.dismissType.remove(.leadingButton)
         uiModel.misc.dismissType.remove(.trailingButton)
