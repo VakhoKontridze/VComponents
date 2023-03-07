@@ -89,20 +89,12 @@ public struct VListRowUIModel {
             
             /// Configuration that displays separators in rows at every position in the list, except for the top and bottom.
             public static func noFirstAndLastSeparators(isFirst: Bool) -> Self {
-                if isFirst {
-                    return .none
-                } else {
-                    return .top
-                }
+                isFirst ? .none : .top
             }
             
             /// Configuration that displays separators at the top and bottom of all rows in the list.
             public static func rowEnclosingSeparators(isFirst: Bool) -> Self {
-                if isFirst {
-                    return .all
-                } else {
-                    return .bottom
-                }
+                isFirst ? .all : .bottom
             }
             
             // MARK: Properties
@@ -137,7 +129,7 @@ extension VListRowUIModel {
     public static func noFirstSeparator() -> Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.separatorType = .bottom
+        uiModel.layout.separatorType = .noFirstSeparator()
         
         return uiModel
     }
@@ -146,7 +138,7 @@ extension VListRowUIModel {
     public static func noLastSeparator() -> Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.separatorType = .top
+        uiModel.layout.separatorType = .noLastSeparator()
         
         return uiModel
     }
@@ -155,13 +147,7 @@ extension VListRowUIModel {
     public static func noFirstAndLastSeparators(isFirst: Bool) -> Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.separatorType = {
-            if isFirst {
-                return .none
-            } else {
-                return .top
-            }
-        }()
+        uiModel.layout.separatorType = .noFirstAndLastSeparators(isFirst: isFirst)
         
         return uiModel
     }
@@ -170,13 +156,7 @@ extension VListRowUIModel {
     public static func rowEnclosingSeparators(isFirst: Bool) -> Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.separatorType = {
-            if isFirst {
-                return .all
-            } else {
-                return .bottom
-            }
-        }()
+        uiModel.layout.separatorType = .noFirstAndLastSeparators(isFirst: isFirst)
         
         return uiModel
     }
