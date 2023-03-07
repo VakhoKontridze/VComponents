@@ -92,14 +92,14 @@ public struct VSliderUIModel {
         
         /// Thumb border colors.
         public var thumbBorder: StateColors = .init(
-            enabled: .init(componentAsset: "Slider.Thumb.Border.enabled"),
-            disabled: .init(componentAsset: "Slider.Thumb.Border.disabled")
+            enabled: .init(componentAsset: "color_96.96.96"),
+            disabled: .init(componentAsset: "color_192.192.192")
         )
         
         /// Thumb shadow colors.
         public var thumbShadow: StateColors = .init(
-            enabled: .init(componentAsset: "Slider.Thumb.Shadow.enabled"),
-            disabled: .init(componentAsset: "Slider.Thumb.Shadow.disabled")
+            enabled: .init(componentAsset: "color_96.96.96.50"),
+            disabled: .init(componentAsset: "color_96.96.96.20")
         )
         
         // MARK: Initializers

@@ -83,13 +83,13 @@ public struct VCheckBoxUIModel {
         
         /// Border colors.
         public var border: StateColors = .init(
-            off: .init(componentAsset: "CheckBox.Border.off"),
+            off: .init(componentAsset: "color_200.200.200_80.80.80"),
             on: .clear,
             indeterminate: .clear,
-            pressedOff: .init(componentAsset: "CheckBox.Border.pressedOff"),
+            pressedOff: .init(componentAsset: "color_180.180.180_60.60.60"),
             pressedOn: .clear,
             pressedIndeterminate: .clear,
-            disabled: .init(componentAsset: "CheckBox.Border.disabled")
+            disabled: .init(componentAsset: "color_230.230.230_40.40.40")
         )
         
         /// Checkmark icon colors.

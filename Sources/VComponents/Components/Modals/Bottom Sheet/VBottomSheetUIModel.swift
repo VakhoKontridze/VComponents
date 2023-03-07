@@ -250,7 +250,7 @@ public struct VBottomSheetUIModel {
         public var dimmingView: Color = modalReference.colors.dimmingView
         
         /// Grabber color.
-        public var grabber: Color = .init(componentAsset: "BottomSheet.Grabber")
+        public var grabber: Color = .init(componentAsset: "color_230.230.230_100.100.100")
         
         /// Header title color.
         ///

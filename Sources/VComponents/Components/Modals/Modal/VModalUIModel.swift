@@ -125,7 +125,7 @@ public struct VModalUIModel {
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = { 
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             uiModel.background = disclosureGroupReference.colors.chevronButtonSubUIModel.background
-            uiModel.icon = .init(.init(componentAsset: "Modal.CloseButton.Icon.enabled"))
+            uiModel.icon = .init(.init(componentAsset: "color_100.100.100_160.160.160"))
             return uiModel
         }()
         
@@ -133,7 +133,7 @@ public struct VModalUIModel {
         public var divider: Color = disclosureGroupReference.colors.divider
         
         /// Dimming view color.
-        public var dimmingView: Color = .init(componentAsset: "Modal.DimmingView")
+        public var dimmingView: Color = .init(componentAsset: "color_100.100.100.30_0.0.0_60")
         
         // MARK: Initializers
         /// Initializes UI model with default values.

@@ -115,7 +115,7 @@ public struct VListRowUIModel {
         public var background: Color = ColorBook.layer
         
         /// Separator color.
-        public var separator: Color = .init(componentAsset: "List.Separator")
+        public var separator: Color = .init(componentAsset: "color_60.60.60.30_85.85.85.60")
         
         // MARK: Initializers
         /// Initializes UI model with default values.

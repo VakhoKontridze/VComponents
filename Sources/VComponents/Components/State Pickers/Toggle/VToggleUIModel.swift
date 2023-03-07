@@ -72,20 +72,20 @@ public struct VToggleUIModel {
         // MARK: Properties
         /// Fill colors.
         public var fill: StateColors = .init(
-            off: .init(componentAsset: "Toggle.Fill.off"),
+            off: .init(componentAsset: "color_233.233.233_55.55.55"),
             on: primaryButtonReference.colors.background.enabled,
-            pressedOff: .init(componentAsset: "Toggle.Fill.pressedOff"),
+            pressedOff: .init(componentAsset: "color_220.220.220_70.70.70"),
             pressedOn: primaryButtonReference.colors.background.pressed,
-            disabled: .init(componentAsset: "Toggle.Fill.disabled")
+            disabled: .init(componentAsset: "color_244.244.244_40.40.40")
         )
         
         /// Thumb colors.
         public var thumb: StateColors = .init(
-            off: .init(componentAsset: "Toggle.Thumb"),
-            on: .init(componentAsset: "Toggle.Thumb"),
-            pressedOff: .init(componentAsset: "Toggle.Thumb"),
-            pressedOn: .init(componentAsset: "Toggle.Thumb"),
-            disabled: .init(componentAsset: "Toggle.Thumb")
+            off: .init(componentAsset: "color_254.254.254"),
+            on: .init(componentAsset: "color_254.254.254"),
+            pressedOff: .init(componentAsset: "color_254.254.254"),
+            pressedOn: .init(componentAsset: "color_254.254.254"),
+            disabled: .init(componentAsset: "color_254.254.254")
         )
         
         /// Title colors.

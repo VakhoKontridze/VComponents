@@ -117,9 +117,9 @@ public struct VDisclosureGroupUIModel {
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             uiModel.background = .init(
-                enabled: .init(componentAsset: "DisclosureGroup.ChevronButton.Background.enabled"),
-                pressed: .init(componentAsset: "DisclosureGroup.ChevronButton.Background.pressed"),
-                disabled: .init(componentAsset: "DisclosureGroup.ChevronButton.Background.disabled")
+                enabled: .init(componentAsset: "color_235.235.235_55.55.55"),
+                pressed: .init(componentAsset: "color_210.210.210_45.45.45"),
+                disabled: .init(componentAsset: "color_250.250.250_80.80.80")
             )
             uiModel.icon = .init(
                 enabled: ColorBook.primary,

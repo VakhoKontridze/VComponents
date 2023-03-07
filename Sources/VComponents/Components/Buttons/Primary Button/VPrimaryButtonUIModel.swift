@@ -84,10 +84,10 @@ public struct VPrimaryButtonUIModel {
         // MARK: Properties
         /// Background colors.
         public var background: StateColors = .init(
-            enabled: .init(componentAsset: "PrimaryButton.Background.enabled"),
-            pressed: .init(componentAsset: "PrimaryButton.Background.pressed"),
-            loading: .init(componentAsset: "PrimaryButton.Background.disabled"),
-            disabled: .init(componentAsset: "PrimaryButton.Background.disabled")
+            enabled: .init(componentAsset: "color_24.126.240_25.131.255"),
+            pressed: .init(componentAsset: "color_31.104.182_36.106.186"),
+            loading: .init(componentAsset: "color_128.176.240"),
+            disabled: .init(componentAsset: "color_128.176.240")
         )
         
         /// Border colors.

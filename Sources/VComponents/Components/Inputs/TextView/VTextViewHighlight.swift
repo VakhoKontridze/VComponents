@@ -35,30 +35,30 @@ extension VTextViewUIModel.Colors {
     /// Model that applies green color scheme.
     public static var success: VTextViewUIModel.Colors {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
-            backgroundFocused: .init(componentAsset: "TextField.Success.Background.enabled"),
-            enabled: .init(componentAsset: "TextField.Success.Foreground.enabled"),
-            focused: .init(componentAsset: "TextField.Success.Foreground.enabled")
+            backgroundEnabled: .init(componentAsset: "color_235.250.240_130.180.140"),
+            backgroundFocused: .init(componentAsset: "color_235.250.240_130.180.140"),
+            enabled: .init(componentAsset: "color_85.195.135"),
+            focused: .init(componentAsset: "color_85.195.135")
         )
     }
 
     /// Model that applies yellow color scheme.
     public static var warning: VTextViewUIModel.Colors {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
-            backgroundFocused: .init(componentAsset: "TextField.Warning.Background.enabled"),
-            enabled: .init(componentAsset: "TextField.Warning.Foreground.enabled"),
-            focused: .init(componentAsset: "TextField.Warning.Foreground.enabled")
+            backgroundEnabled: .init(componentAsset: "color_255.250.240_240.200.100"),
+            backgroundFocused: .init(componentAsset: "color_255.250.240_240.200.100"),
+            enabled: .init(componentAsset: "color_255.190.35"),
+            focused: .init(componentAsset: "color_255.190.35")
         )
     }
 
     /// Model that applies error color scheme.
     public static var error: VTextViewUIModel.Colors {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
-            backgroundFocused: .init(componentAsset: "TextField.Error.Background.enabled"),
-            enabled: .init(componentAsset: "TextField.Error.Foreground.enabled"),
-            focused: .init(componentAsset: "TextField.Error.Foreground.enabled")
+            backgroundEnabled: .init(componentAsset: "color_250.240.240_220.125.125"),
+            backgroundFocused: .init(componentAsset: "color_250.240.240_220.125.125"),
+            enabled: .init(componentAsset: "color_235.110.105"),
+            focused: .init(componentAsset: "color_235.110.105")
         )
     }
     

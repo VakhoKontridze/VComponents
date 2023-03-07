@@ -170,7 +170,7 @@ public struct VAlertUIModel {
         /// Secondary button background colors.
         public var secondaryButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(componentAsset: "Alert.SecondaryButton.Background.pressed"),
+            pressed: .init(componentAsset: "color_235.235.235_70.70.70"),
             disabled: .clear
         )
         
@@ -184,15 +184,15 @@ public struct VAlertUIModel {
         /// Destructive button background colors.
         public var destructiveButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(componentAsset: "Alert.SecondaryButton.Background.pressed"),
+            pressed: .init(componentAsset: "color_235.235.235_70.70.70"),
             disabled: .clear
         )
         
         /// Destructive button title colors.
         public var destructiveButtonTitle: ButtonStateColors = .init(
-            enabled: .init(componentAsset: "Alert.DesctructiveButton.Title.enabled"),
-            pressed: .init(componentAsset: "Alert.DesctructiveButton.Title.enabled"),
-            disabled: .init(componentAsset: "Alert.DesctructiveButton.Title.disabled")
+            enabled: .init(componentAsset: "color_255.59.48_255.69.68"),
+            pressed: .init(componentAsset: "color_255.59.48_255.69.68"),
+            disabled: .init(componentAsset: "color_255.140.140")
         )
 
         // MARK: Initializers

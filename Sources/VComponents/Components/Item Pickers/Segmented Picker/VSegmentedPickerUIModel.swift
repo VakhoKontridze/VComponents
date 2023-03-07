@@ -91,14 +91,14 @@ public struct VSegmentedPickerUIModel {
         // MARK: Properties
         /// Background colors.
         public var background: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Background.enabled"),
+            enabled: .init(componentAsset: "color_240.240.240_40.40.40"),
             disabled: toggleReference.colors.fill.disabled
         )
         
         /// Selection indicator colors.
         public var indicator: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Indicator.enabled"),
-            disabled: .init(componentAsset: "SegmentedPicker.Indicator.disabled")
+            enabled: .init(componentAsset: "color_254.254.254_90.90.90"),
+            disabled: .init(componentAsset: "color_254.254.254_60.60.60")
         )
         
         /// Selection indicator shadow colors.
@@ -129,8 +129,8 @@ public struct VSegmentedPickerUIModel {
         
         /// Row divider colors.
         public var divider: StateColors = .init(
-            enabled: .init(componentAsset: "SegmentedPicker.Divider.enabled"),
-            disabled: .init(componentAsset: "SegmentedPicker.Divider.disabled")
+            enabled: .init(componentAsset: "color_215.215.215_70.70.70"),
+            disabled: .init(componentAsset: "color_230.230.230_50.50.50")
         )
         
         /// Header colors.

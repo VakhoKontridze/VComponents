@@ -153,7 +153,7 @@ public struct VTextFieldUIModel {
         /// Background colors.
         public var background: StateColors = .init(
             enabled: segmentedPickerReference.colors.background.enabled,
-            focused: .init(componentAsset: "TextField.Background.focused"),
+            focused: .init(componentAsset: "color_225.225.225_50.50.50"),
             disabled: segmentedPickerReference.colors.background.disabled
         )
         
@@ -186,8 +186,8 @@ public struct VTextFieldUIModel {
 
         /// Search icon colors.
         public var searchIcon: StateColors = .init(
-            enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
-            focused: .init(componentAsset: "TextField.PlainButton.enabled"),
+            enabled: .init(componentAsset: "color_70.70.70_240.240.240"),
+            focused: .init(componentAsset: "color_70.70.70_240.240.240"),
             disabled: ColorBook.primaryPressedDisabled
         )
         
@@ -197,11 +197,11 @@ public struct VTextFieldUIModel {
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             uiModel.background = .init(
-                enabled: .init(componentAsset: "TextField.ClearButton.Background.enabled"),
-                pressed: .init(componentAsset: "TextField.ClearButton.Background.pressed"),
-                disabled: .init(componentAsset: "TextField.ClearButton.Background.disabled")
+                enabled: .init(componentAsset: "color_170.170.170_30.30.30"),
+                pressed: .init(componentAsset: "color_150.150.150_20.20.20"),
+                disabled: .init(componentAsset: "color_220.220.220_40.40.40")
             )
-            uiModel.icon = .init(.init(componentAsset: "TextField.ClearButton.Icon"))
+            uiModel.icon = .init(.init(componentAsset: "color_255.255.255_230.230.230"))
             return uiModel
         }()
         
@@ -211,7 +211,7 @@ public struct VTextFieldUIModel {
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Colors = {
             var uiModel: VPlainButtonUIModel.Colors = .init()
             uiModel.icon = .init(
-                enabled: .init(componentAsset: "TextField.PlainButton.enabled"),
+                enabled: .init(componentAsset: "color_70.70.70_240.240.240"),
                 pressed: ColorBook.primaryPressedDisabled,
                 disabled: ColorBook.primaryPressedDisabled
             )
@@ -364,30 +364,30 @@ extension VTextFieldUIModel.Colors {
     /// `VTextFieldUIModel.Colors` that applies green color scheme.
     public static var success: Self {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "TextField.Success.Background.enabled"),
-            backgroundFocused: .init(componentAsset: "TextField.Success.Background.enabled"),
-            enabled: .init(componentAsset: "TextField.Success.Foreground.enabled"),
-            focused: .init(componentAsset: "TextField.Success.Foreground.enabled")
+            backgroundEnabled: .init(componentAsset: "color_235.250.240_130.180.140"),
+            backgroundFocused: .init(componentAsset: "color_235.250.240_130.180.140"),
+            enabled: .init(componentAsset: "color_85.195.135"),
+            focused: .init(componentAsset: "color_85.195.135")
         )
     }
 
     /// `VTextFieldUIModel.Colors` that applies yellow color scheme.
     public static var warning: Self {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "TextField.Warning.Background.enabled"),
-            backgroundFocused: .init(componentAsset: "TextField.Warning.Background.enabled"),
-            enabled: .init(componentAsset: "TextField.Warning.Foreground.enabled"),
-            focused: .init(componentAsset: "TextField.Warning.Foreground.enabled")
+            backgroundEnabled: .init(componentAsset: "color_255.250.240_240.200.100"),
+            backgroundFocused: .init(componentAsset: "color_255.250.240_240.200.100"),
+            enabled: .init(componentAsset: "color_255.190.35"),
+            focused: .init(componentAsset: "color_255.190.35")
         )
     }
 
     /// `VTextFieldUIModel.Colors` that applies error color scheme.
     public static var error: Self {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "TextField.Error.Background.enabled"),
-            backgroundFocused: .init(componentAsset: "TextField.Error.Background.enabled"),
-            enabled: .init(componentAsset: "TextField.Error.Foreground.enabled"),
-            focused: .init(componentAsset: "TextField.Error.Foreground.enabled")
+            backgroundEnabled: .init(componentAsset: "color_250.240.240_220.125.125"),
+            backgroundFocused: .init(componentAsset: "color_250.240.240_220.125.125"),
+            enabled: .init(componentAsset: "color_235.110.105"),
+            focused: .init(componentAsset: "color_235.110.105")
         )
     }
     
