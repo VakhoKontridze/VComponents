@@ -18,10 +18,10 @@ public struct ColorBook {
     public static let white: Color = .init(componentAsset: "White")
 
     /// `black` color used for pressed or disabled states.
-    public static let blackPressedDisabled: Color = .init(componentAsset: "Black.presseddisabled")
+    public static let blackPressedDisabled: Color = .init(componentAsset: "Black.pressedDisabled")
     
     /// `white` color used for pressed or disabled states.
-    public static let whitePressedDisabled: Color = .init(componentAsset: "White.presseddisabled")
+    public static let whitePressedDisabled: Color = .init(componentAsset: "White.pressedDisabled")
     
     // MARK: Properties - Background
     /// Canvas color that can be used as background.
@@ -35,7 +35,7 @@ public struct ColorBook {
     public static let accent: Color = .init(componentAsset: "Accent")
     
     /// `accent` color used for pressed or disabled states.
-    public static let accentPressedDisabled: Color = .init(componentAsset: "Accent.presseddisabled")
+    public static let accentPressedDisabled: Color = .init(componentAsset: "Accent.pressedDisabled")
     
     // MARK: Properties - Text (Primary)
     /// Primary text color.
@@ -51,10 +51,10 @@ public struct ColorBook {
     public static var primaryWhite: Color { white }
     
     /// `primary` color used for pressed or disabled states.
-    public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.presseddisabled")
+    public static let primaryPressedDisabled: Color = .init(componentAsset: "Primary.pressedDisabled")
     
     /// `primaryInverted` color used for pressed or disabled states.
-    public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.presseddisabled")
+    public static let primaryInvertedPressedDisabled: Color = .init(componentAsset: "PrimaryInverted.pressedDisabled")
     
     /// `primaryBlack` color used for pressed or disabled states.
     public static var primaryBlackPressedDisabled: Color { blackPressedDisabled }
@@ -67,7 +67,7 @@ public struct ColorBook {
     public static let secondary: Color = .init(componentAsset: "Secondary")
     
     /// `secondary` color used for pressed or disabled states.
-    public static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.presseddisabled")
+    public static let secondaryPressedDisabled: Color = .init(componentAsset: "Secondary.pressedDisabled")
     
     // MARK: Initializers
     private init() {}
