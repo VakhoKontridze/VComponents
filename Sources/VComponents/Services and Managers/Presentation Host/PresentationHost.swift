@@ -8,76 +8,7 @@
 import SwiftUI
 
 // MARK: - Presentation Host
-/// Presentation Host that allows `SwiftUI` `View` to present another `View` modally in `UIKit` style.
-///
-/// It works by embedding an `UIHostingController` in view hierarchy and using it as a presentation host.
-///
-///     extension View {
-///         public func someModal(
-///             id: String,
-///             isPresented: Binding<Bool>,
-///             @ViewBuilder content: @escaping () -> some View
-///         ) -> some View {
-///             self
-///                 .presentationHost(
-///                     id: id,
-///                     isPresented: isPresented,
-///                     content: {
-///                         SomeModal(
-///                             content: content
-///                         )
-///                     }
-///                 )
-///         }
-///     }
-///
-///     struct SomeModal<Content>: View where Content: View {
-///         @Environment(\.presentationHostPresentationMode) private var presentationMode
-///         private let content: () -> Content
-///
-///         @State private var isInternallyPresented: Bool = false // Cane be used for animations
-///
-///         init(content: @escaping () -> Content) {
-///             self.content = content
-///         }
-///
-///         var body: some View {
-///             content() // UI, customization, and animations go here...
-///
-///                 .onAppear(perform: animateIn)
-///                 .onTapGesture(perform: animateOut)
-///                 .onChange(
-///                     of: presentationMode.isExternallyDismissed,
-///                     perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-///                  )
-///         }
-///
-///         private func animateIn() {
-///             withBasicAnimation(
-///                 .init(curve: .easeInOut, duration: 0.3),
-///                 body: { isInternallyPresented = true },
-///                 completion: nil
-///             )
-///         }
-///
-///         private func animateOut() {
-///             withBasicAnimation(
-///                 .init(curve: .easeInOut, duration: 0.3),
-///                 body: { isInternallyPresented = false },
-///                 completion: presentationMode.dismiss
-///             )
-///         }
-///
-///         private func animateOutFromExternalDismiss() {
-///             withBasicAnimation(
-///                 .init(curve: .easeInOut, duration: 0.3),
-///                 body: { isInternallyPresented = false },
-///                 completion: presentationMode.externalDismissCompletion
-///             )
-///         }
-///     }
-///
-public struct PresentationHost<Content>: UIViewControllerRepresentable where Content: View {
+struct PresentationHost<Content>: UIViewControllerRepresentable where Content: View {
     // MARK: Properties
     private let id: String
     private let allowsHitTests: Bool
@@ -87,9 +18,7 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     @State private var wasInternallyDismissed: Bool = false
     
     // MARK: Initializers
-    /// Initializes `PresentationHost` with condition and content.
-    @available(*, deprecated, message: "`PresentationHost` will no longer be exposed to public in `4.0.0`. Use `presentationHost` method instead.")
-    public init(
+    init(
         id: String,
         allowsHitTests: Bool = true,
         isPresented: Binding<Bool>,
@@ -102,14 +31,14 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
     }
     
     // MARK: Representable
-    public func makeUIViewController(context: Context) -> UIViewController {
+    func makeUIViewController(context: Context) -> UIViewController {
         PresentationHostViewController(
             id: id,
             allowsHitTests: allowsHitTests
         )
     }
 
-    public func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
+    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
         guard let uiViewController = uiViewController as? PresentationHostViewController else { fatalError() }
         
         let isExternallyDismissed: Bool =
@@ -143,13 +72,5 @@ public struct PresentationHost<Content>: UIViewControllerRepresentable where Con
         }
 
         uiViewController.updateHostedView(with: content)
-    }
-    
-    // MARK: Force Dismiss
-    /// Forcefully dismisses presented `View` from presenting `View`.
-    public static func forceDismiss(id: String)
-        where Content == Never
-    {
-        PresentationHostViewController.forceDismiss(id: id)
     }
 }

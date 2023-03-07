@@ -85,7 +85,7 @@ extension View {
         where Content: View
     {
         self
-            .onDisappear(perform: { PresentationHost.forceDismiss(id: id) })
+            .onDisappear(perform: { PresentationHostViewController.forceDismiss(id: id) })
             .background(PresentationHost(
                 id: id,
                 allowsHitTests: allowsHitTests,
