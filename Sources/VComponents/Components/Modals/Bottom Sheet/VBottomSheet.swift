@@ -46,6 +46,8 @@ struct VBottomSheet<Content>: View
         onDismiss dismissHandler: (() -> Void)?,
         @ViewBuilder content: @escaping () -> Content
     ) {
+        Self.assertUIModel(uiModel)
+        
         self.uiModel = uiModel
         self.presentHandler = presentHandler
         self.dismissHandler = dismissHandler
@@ -345,6 +347,19 @@ struct VBottomSheet<Content>: View
     // MARK: Orientation
     private func resetHeightFromOrientationChange() {
         offset = uiModel.layout.sizes._current.size.heights.idealOffset
+    }
+    
+    // MARK: Assertion
+    private static func assertUIModel(_ uiModel: VBottomSheetUIModel) {
+        assert(
+            uiModel.layout.sizes._current.size.heights.min <= uiModel.layout.sizes._current.size.heights.ideal,
+            "`VBottomSheet`'s `min` height must be less than or equal to `ideal` height"
+        )
+        
+        assert(
+            uiModel.layout.sizes._current.size.heights.ideal <= uiModel.layout.sizes._current.size.heights.max,
+            "`VBottomSheet`'s `ideal` height must be less than or equal to `max` height"
+        )
     }
 }
 

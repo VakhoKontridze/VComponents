@@ -60,9 +60,10 @@ public struct VRangeSlider: View {
             V: BinaryFloatingPoint,
             V.Stride: BinaryFloatingPoint
     {
-        assert(
-            valueHigh.wrappedValue - valueLow.wrappedValue >= difference - .ulpOfOne,
-            "Difference between `VRangeSlider`'s `valueLow` and `valueHeight` must be greater than or equal to `difference`"
+        Self.assertValues(
+            valueLow: valueLow.wrappedValue,
+            valueHigh: valueHigh.wrappedValue,
+            difference: difference
         )
         
         self.uiModel = uiModel
@@ -218,6 +219,22 @@ public struct VRangeSlider: View {
         case .low: return progressW - thumbW / 2
         case .high: return width - progressW - thumbW / 2
         }
+    }
+    
+    // MARK: Assertion
+    private static func assertValues<V>(
+        valueLow: V,
+        valueHigh: V,
+        difference: V
+    )
+        where
+            V: BinaryFloatingPoint,
+            V.Stride: BinaryFloatingPoint
+    {
+        assert(
+            valueHigh - valueLow >= difference - .ulpOfOne,
+            "Difference between `VRangeSlider`'s `valueLow` and `valueHeight` must be greater than or equal to `difference`"
+        )
     }
 }
 

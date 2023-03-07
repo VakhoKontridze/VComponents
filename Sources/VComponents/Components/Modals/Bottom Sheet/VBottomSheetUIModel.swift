@@ -205,10 +205,7 @@ public struct VBottomSheetUIModel {
             
             // MARK: Initializers
             /// Initializes `Height`.
-            public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
-                assert(min <= ideal, "`VBottomSheet`'s `min` height must be less than or equal to `ideal` height")
-                assert(ideal <= max, "`VBottomSheet`'s `ideal` height must be less than or equal to `max` height")
-                
+            public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {                
                 self.min = min
                 self.ideal = ideal
                 self.max = max
