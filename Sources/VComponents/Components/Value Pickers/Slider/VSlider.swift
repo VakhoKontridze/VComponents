@@ -140,7 +140,7 @@ public struct VSlider: View {
         self.value = value
     }
 
-    // MARK: Progress
+    // MARK: Progress Width
     private var progressWidth: CGFloat {
         let value: CGFloat = .init(value - min)
         let range: CGFloat = .init(max - min)
