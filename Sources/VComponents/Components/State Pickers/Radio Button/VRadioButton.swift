@@ -189,7 +189,17 @@ public struct VRadioButton<Label>: View where Label: View {
     // MARK: Actions
     private func gestureHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
-        if gestureState.isClicked { state.setNextState() }
+        if gestureState.isClicked { state.setNextStateRadio() }
+    }
+}
+
+// MARK: - Helpers
+extension VRadioButtonState {
+    mutating fileprivate func setNextStateRadio() {
+        switch self {
+        case .off: self = .on
+        case .on: break
+        }
     }
 }
 
@@ -200,7 +210,7 @@ struct VRadioButton_Previews: PreviewProvider {
     }
     
     private struct Preview: View {
-        @State private var state: VRadioButtonState = .on
+        @State private var state: VRadioButtonState = .off
         
         var body: some View {
             VRadioButton(

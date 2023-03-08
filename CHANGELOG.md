@@ -12,6 +12,10 @@ VRoundedLabeledButton
 
 - Missing `titleLabelLineType` from `VRoundedLabeledButtonUIModel` is now utilized inside the button
 
+VRadioButton
+
+- Issue with radio button turning off after being tapped is fixed
+
 VTextField
 
 - `VTextFieldType` is renamed to `ContentType` and is moved to `VTextFieldUIModel`
