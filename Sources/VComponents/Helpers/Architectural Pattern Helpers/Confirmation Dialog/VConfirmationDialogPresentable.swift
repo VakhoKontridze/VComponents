@@ -43,6 +43,7 @@ import SwiftUI
 ///         }
 ///     }
 ///
+@available(iOS 15.0, *)
 @MainActor public protocol VConfirmationDialogPresentable: ObservableObject {
     /// `VConfirmationDialogParameters`.
     var vConfirmationDialogParameters: VConfirmationDialogParameters? { get set }

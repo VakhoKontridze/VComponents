@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - V List Style
+@available(iOS 15.0, *)
 extension View {
     /// Applies list style that supports `VListRow`.
     public func vListStyle() -> some View {

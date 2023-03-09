@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - V Confirmation Dialog Extension (Parameters)
+@available(iOS 15.0, *)
 extension View {
     /// Presents `VConfirmationDialog` when `VConfirmationDialogParameters` is non-`nil`.
     ///

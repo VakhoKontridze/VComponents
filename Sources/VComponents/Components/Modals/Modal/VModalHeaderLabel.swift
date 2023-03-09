@@ -8,9 +8,11 @@
 import SwiftUI
 
 // MARK: - V Modal Header Label
+@available(iOS 15.0, *)
 typealias VModalHeaderLabel = GenericLabel_EmptyTitleCustom
 
 // MARK: - V Modal Header Label Extension
+@available(iOS 15.0, *)
 extension View {
     /// Configures `View`'s header title for purposes of presentation inside `VModal`.
     public func vModalHeaderTitle(_ title: String) -> some View {
@@ -36,6 +38,7 @@ extension View {
 }
 
 // MARK: - V Modal Header Label Preference Key
+@available(iOS 15.0, *)
 struct VModalHeaderLabelPreferenceKey: PreferenceKey {
     static var defaultValue: VModalHeaderLabel<AnyView> = .empty
     

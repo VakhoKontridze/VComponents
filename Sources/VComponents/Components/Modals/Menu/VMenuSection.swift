@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Menu Section Protocol
 /// Container view that you can use to add hierarchy to `VMenuRowProtocol`s.
+@available(iOS 15.0, *)
 public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     /// Section title.
     var title: String? { get }
@@ -21,12 +22,14 @@ public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     func makeBody() -> Body
 }
 
+@available(iOS 15.0, *)
 extension VMenuSectionProtocol {
     public func toSections() -> [any VMenuSectionProtocol] { [self] }
 }
 
 // MARK: - V Menu Group Section
 /// Grouped container view that you can use to add hierarchy to `VMenuRowProtocol`s.
+@available(iOS 15.0, *)
 public struct VMenuGroupSection: VMenuSectionProtocol {
     // MARK: Properties
     private let rows: () -> [any VMenuRowProtocol]
@@ -57,6 +60,7 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
 
 // MARK: - V Menu Picker Section
 /// Container view with picker that you can use to add hierarchy to `VMenuRowProtocol`s.
+@available(iOS 15.0, *)
 public struct VMenuPickerSection<Data>: VMenuSectionProtocol
     where
         Data: RandomAccessCollection,

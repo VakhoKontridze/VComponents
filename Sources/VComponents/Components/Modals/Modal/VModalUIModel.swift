@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Modal UI Model
 /// Model that describes UI.
+@available(iOS 15.0, *)
 public struct VModalUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -166,19 +167,19 @@ public struct VModalUIModel {
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Set to `linear` with duration `0.05`.
-        public var appear: BasicAnimation? = .init(curve: .linear, duration: 0.05)
+        public var appear: BasicAnimation? = GlobalUIModel.Modals.poppingAppearAnimation
         
         /// Disappear animation. Set to `easeIn` with duration `0.05`.
-        public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
+        public var disappear: BasicAnimation? = GlobalUIModel.Modals.poppingDisappearAnimation
         
         /// Scale effect during appear and disappear. Set to `1.01`.
-        public var scaleEffect: CGFloat = 1.01
+        public var scaleEffect: CGFloat = GlobalUIModel.Modals.poppingAnimationScaleEffect
         
         /// Opacity level during appear and disappear. Set to `0.5`.
-        public var opacity: Double = 0.5
+        public var opacity: Double = GlobalUIModel.Modals.poppingAnimationOpacity
         
         /// Blur during appear and disappear. Set to `3`.
-        public var blur: CGFloat = 3
+        public var blur: CGFloat = GlobalUIModel.Modals.poppingAnimationBlur
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -256,6 +257,7 @@ public struct VModalUIModel {
 }
 
 // MARK: - Factory
+@available(iOS 15.0, *)
 extension VModalUIModel {
     /// `VModalUIModel` that insets content.
     public static var insettedContent: Self {

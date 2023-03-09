@@ -78,6 +78,7 @@ import VCore
 ///             .padding()
 ///     }
 ///
+@available(iOS 15.0, *)
 public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel
@@ -186,6 +187,7 @@ public struct VTextView: View {
 }
 
 // MARK: - Preview
+@available(iOS 15.0, *)
 struct VTextView_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }

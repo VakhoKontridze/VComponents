@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - Standard Menu
+@available(iOS 15.0, *)
 extension View {
     /// Presents context menu when `View` is long-pressed.
     ///

@@ -9,17 +9,20 @@ import Foundation
 
 // MARK: - V Confirmation Dialog Button Convertible
 /// Type that allows for conversion to `VConfirmationDialogButtonProtocol`.
+@available(iOS 15.0, *)
 public protocol VConfirmationDialogButtonConvertible {
     /// Converts `VConfirmationDialogButtonConvertible` to `VConfirmationDialogButton` `Array`.
     func toButtons() -> [any VConfirmationDialogButtonProtocol]
 }
 
+@available(iOS 15.0, *)
 extension Array: VConfirmationDialogButtonConvertible where Element == VConfirmationDialogButtonProtocol {
     public func toButtons() -> [any VConfirmationDialogButtonProtocol] { self }
 }
 
 // MARK: - V Confirmation Dialog Button Builder
 /// Custom parameter attribute that constructs views from closures.
+@available(iOS 15.0, *)
 @resultBuilder public struct VConfirmationDialogButtonBuilder {
     // MARK: Properties
     public typealias Component = any VConfirmationDialogButtonConvertible

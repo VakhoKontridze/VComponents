@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Confirmation Dialog Button Protocol
 /// `VConfirmationDialog` button.
+@available(iOS 15.0, *)
 public protocol VConfirmationDialogButtonProtocol: VConfirmationDialogButtonConvertible {
     /// Body type.
     typealias Body = AnyView
@@ -17,12 +18,14 @@ public protocol VConfirmationDialogButtonProtocol: VConfirmationDialogButtonConv
     func makeBody() -> Body
 }
 
+@available(iOS 15.0, *)
 extension VConfirmationDialogButtonProtocol {
     public func toButtons() -> [any VConfirmationDialogButtonProtocol] { [self] }
 }
 
 // MARK: - V Confirmation Dialog Button
 /// `VConfirmationDialog` button.
+@available(iOS 15.0, *)
 public struct VConfirmationDialogButton: VConfirmationDialogButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -62,6 +65,7 @@ public struct VConfirmationDialogButton: VConfirmationDialogButtonProtocol {
 
 // MARK: - V Confirmation Dialog OK Button
 /// "OK" `VConfirmationDialog` button.
+@available(iOS 15.0, *)
 public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -103,6 +107,7 @@ public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
 
 // MARK: - V Confirmation Dialog Destructive Button
 /// Destructive `VConfirmationDialog` button.
+@available(iOS 15.0, *)
 public struct VConfirmationDialogDestructiveButton: VConfirmationDialogButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -142,6 +147,7 @@ public struct VConfirmationDialogDestructiveButton: VConfirmationDialogButtonPro
 
 // MARK: - V Confirmation Dialog Cancel Button
 /// Cancel `VConfirmationDialog` button.
+@available(iOS 15.0, *)
 public struct VConfirmationDialogCancelButton: VConfirmationDialogButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true

@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Modal
+@available(iOS 15.0, *)
 struct VModal<Content>: View
     where Content: View
 {
@@ -201,6 +202,7 @@ struct VModal<Content>: View
 }
 
 // MARK: - Previews
+@available(iOS 15.0, *)
 struct VModal_Previews: PreviewProvider {
     private static func content() -> some View {
         ColorBook.accentBlue

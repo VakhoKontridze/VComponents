@@ -70,6 +70,7 @@ import SwiftUI
 ///     })
 ///         .vListStyle()
 ///
+@available(iOS 15.0, *)
 public struct VListRow<Content>: View
     where Content: View
 {
@@ -115,6 +116,7 @@ public struct VListRow<Content>: View
 import VCore
 #endif
 
+@available(iOS 15.0, *)
 struct VListRow_Previews: PreviewProvider {
     private static var titles: [String] { (1...3).map { .init($0) } }
     

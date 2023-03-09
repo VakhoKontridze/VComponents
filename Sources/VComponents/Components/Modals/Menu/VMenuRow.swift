@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Menu Row Protocol
 /// `VMenu` row.
+@available(iOS 15.0, *)
 public protocol VMenuRowProtocol: VMenuRowConvertible {
     /// Body type.
     typealias Body = AnyView
@@ -17,12 +18,14 @@ public protocol VMenuRowProtocol: VMenuRowConvertible {
     func makeBody() -> Body
 }
 
+@available(iOS 15.0, *)
 extension VMenuRowProtocol {
     public func toRows() -> [any VMenuRowProtocol] { [self] }
 }
 
 // MARK: - V Menu Title Row
 /// `VMenu` row with title.
+@available(iOS 15.0, *)
 public struct VMenuTitleRow: VMenuRowProtocol {
     // MARK: Properties
     private let action: () -> Void
@@ -55,6 +58,7 @@ public struct VMenuTitleRow: VMenuRowProtocol {
 
 // MARK: - V Menu Title Icon Row
 /// `VMenu` row with title and icon.
+@available(iOS 15.0, *)
 public struct VMenuTitleIconRow: VMenuRowProtocol {
     // MARK: Properties
     private let action: () -> Void
@@ -120,6 +124,7 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
 
 // MARK: - V Menu Sub Menu Row
 /// `VMenu` row with submenu.
+@available(iOS 15.0, *)
 public struct VMenuSubMenuRow: VMenuRowProtocol {
     // MARK: Properties
     private let title: String

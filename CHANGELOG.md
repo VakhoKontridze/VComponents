@@ -4,7 +4,7 @@
 
 General
 
-- Package now supports `iOS` `15.0`
+- Package now supports `iOS` `14.0`
 - `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - Demo app replaced with details component previews
 - Some colors are changed throughout the package

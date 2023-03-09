@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - Bool
+@available(iOS 15.0, *)
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///
@@ -69,6 +70,7 @@ extension View {
 }
 
 // MARK: - Item
+@available(iOS 15.0, *)
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///

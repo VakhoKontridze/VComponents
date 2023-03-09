@@ -38,6 +38,7 @@ extension VAlertUIModel.Layout.AlertSize: ScreenRelativeSizeMeasurement {
 }
 
 // MARK: - V Bottom Sheet Size
+@available(iOS 15.0, *)
 extension VBottomSheetUIModel.Layout.BottomSheetSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
         _ measurement: VBottomSheetUIModel.Layout.BottomSheetSize

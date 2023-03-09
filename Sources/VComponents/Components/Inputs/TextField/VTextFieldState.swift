@@ -9,7 +9,9 @@ import SwiftUI
 import VCore
 
 // MARK: - V Text Field Internal State
+@available(iOS 15.0, *)
 typealias VTextFieldInternalState = GenericState_EnabledFocusedDisabled
 
 // MARK: - V Text Field Button Internal State
+@available(iOS 15.0, *)
 typealias VTextFieldButtonInternalState = GenericState_EnabledPressedFocusedDisabled

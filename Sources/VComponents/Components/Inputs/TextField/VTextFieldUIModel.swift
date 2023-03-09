@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Text Field UI Model
 /// Model that describes UI.
+@available(iOS 15.0, *)
 public struct VTextFieldUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -307,6 +308,7 @@ public struct VTextFieldUIModel {
 }
 
 // MARK: - Factory (Content Types)
+@available(iOS 15.0, *)
 extension VTextFieldUIModel {
     /// `VTextFieldUIModel` with secure content type.
     public static var secure: Self {
@@ -328,6 +330,7 @@ extension VTextFieldUIModel {
 }
 
 // MARK: - Factory (Highlights)
+@available(iOS 15.0, *)
 extension VTextFieldUIModel {
     /// `VTextFieldUIModel` that applies green color scheme.
     public static var success: Self {
@@ -363,6 +366,7 @@ extension VTextFieldUIModel {
     }
 }
 
+@available(iOS 15.0, *)
 extension VTextFieldUIModel.Colors {
     /// `VTextFieldUIModel.Colors` that applies green color scheme.
     public static var success: Self {

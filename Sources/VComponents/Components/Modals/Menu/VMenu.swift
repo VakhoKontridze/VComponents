@@ -50,6 +50,7 @@ import SwiftUI
 ///         })
 ///     }
 ///
+@available(iOS 15.0, *)
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -154,6 +155,7 @@ public struct VMenu<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
+@available(iOS 15.0, *)
 extension View {
     @ViewBuilder fileprivate var menuOrderFixedIOS16BackwardsCompatible: some View {
         if #available(iOS 16.0, *) {
@@ -171,6 +173,7 @@ extension View {
 import VCore
 #endif
 
+@available(iOS 15.0, *)
 struct VMenu_Previews: PreviewProvider {
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue

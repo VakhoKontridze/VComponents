@@ -9,4 +9,5 @@ import Foundation
 import VCore
 
 // MARK: - V Menu Internal State
+@available(iOS 15.0, *)
 typealias VMenuInternalState = GenericState_EnabledDisabled

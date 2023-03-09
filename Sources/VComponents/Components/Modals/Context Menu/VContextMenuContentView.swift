@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - V Menu Content View
+@available(iOS 15.0, *)
 struct VContextMenuContentView: View {
     // MARK: Properties
     private let sections: () -> [any VMenuSectionProtocol]
@@ -39,6 +40,7 @@ struct VContextMenuContentView: View {
 import VCore
 #endif
 
+@available(iOS 15.0, *)
 struct VContextMenuContentView_Previews: PreviewProvider {
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue

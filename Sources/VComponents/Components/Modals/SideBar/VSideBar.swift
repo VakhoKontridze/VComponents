@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Side Bar
+@available(iOS 15.0, *)
 struct VSideBar<Content>: View where Content: View {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
@@ -211,6 +212,7 @@ struct VSideBar<Content>: View where Content: View {
 }
 
 // MARK: - Preview
+@available(iOS 15.0, *)
 struct VSideBar_Previews: PreviewProvider {
     private static func content() -> some View {
         ColorBook.accentBlue

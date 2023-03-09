@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - Bool
+@available(iOS 15.0, *)
 extension View {
     /// Presents side bar when boolean is `true`.
     ///
@@ -67,6 +68,7 @@ extension View {
 }
 
 // MARK: - Item
+@available(iOS 15.0, *)
 extension View {
     /// Presents side bar using the item as data source for content.
     ///

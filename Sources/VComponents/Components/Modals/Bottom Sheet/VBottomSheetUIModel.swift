@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Bottom Sheet UI Model
 /// Model that describes UI.
+@available(iOS 15.0, *)
 public struct VBottomSheetUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -305,10 +306,10 @@ public struct VBottomSheetUIModel {
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Set to `easeInOut` with duration `0.3`.
-        public var appear: BasicAnimation? = GlobalUIModel.Modals.slideableAppearAnimation
+        public var appear: BasicAnimation? = GlobalUIModel.Modals.slidingAppearAnimation
         
         /// Disappear animation. Set to `easeInOut` with duration `0.3`.
-        public var disappear: BasicAnimation? = GlobalUIModel.Modals.slideableDisappearAnimation
+        public var disappear: BasicAnimation? = GlobalUIModel.Modals.slidingDisappearAnimation
         
         /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.1`.
         public var pullDownDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
@@ -402,6 +403,7 @@ public struct VBottomSheetUIModel {
 }
 
 // MARK: - Factory
+@available(iOS 15.0, *)
 extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that insets content.
     public static var insettedContent: Self {

@@ -226,7 +226,27 @@ public struct VAlertUIModel {
 
     // MARK: Animations
     /// Model that contains animation properties.
-    public typealias Animations = VModalUIModel.Animations
+    public struct Animations {
+        // MARK: Properties
+        /// Appear animation. Set to `linear` with duration `0.05`.
+        public var appear: BasicAnimation? = GlobalUIModel.Modals.poppingAppearAnimation
+        
+        /// Disappear animation. Set to `easeIn` with duration `0.05`.
+        public var disappear: BasicAnimation? = GlobalUIModel.Modals.poppingDisappearAnimation
+        
+        /// Scale effect during appear and disappear. Set to `1.01`.
+        public var scaleEffect: CGFloat = GlobalUIModel.Modals.poppingAnimationScaleEffect
+        
+        /// Opacity level during appear and disappear. Set to `0.5`.
+        public var opacity: Double = GlobalUIModel.Modals.poppingAnimationOpacity
+        
+        /// Blur during appear and disappear. Set to `3`.
+        public var blur: CGFloat = GlobalUIModel.Modals.poppingAnimationBlur
+        
+        // MARK: Initializers
+        /// Initializes UI model with default values.
+        public init() {}
+    }
     
     // MARK: Sub UI Models
     var sheetSubUIModel: VSheetUIModel {

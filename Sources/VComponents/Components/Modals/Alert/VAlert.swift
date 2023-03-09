@@ -231,8 +231,14 @@ struct VAlert_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
     private static var message: String { "Lorem ipsum dolor sit amet" }
     
-    private static func content() -> some View {
-        VTextField(text: .constant("Lorem ipsum dolor sit amet"))
+    @ViewBuilder private static func content() -> some View {
+        if #available(iOS 15.0, *) {
+            VTextField(text: .constant("Lorem ipsum dolor sit amet"))
+        } else {
+            RoundedRectangle(cornerRadius: 10)
+                .frame(height: 50)
+                .foregroundColor(ColorBook.accentBlue)
+        }
     }
     
     static var previews: some View {

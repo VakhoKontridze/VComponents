@@ -123,6 +123,7 @@ import VCore
 ///             .padding()
 ///     }
 ///
+@available(iOS 15.0, *)
 public struct VTextField: View {
     // MARK: Properties
     private let uiModel: VTextFieldUIModel
@@ -300,6 +301,7 @@ public struct VTextField: View {
 }
 
 // MARK: - Preview
+@available(iOS 15.0, *)
 struct VTextField_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }

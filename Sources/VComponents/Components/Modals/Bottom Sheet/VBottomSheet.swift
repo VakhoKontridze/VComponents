@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Bottom Sheet
+@available(iOS 15.0, *)
 struct VBottomSheet<Content>: View
     where Content: View
 {
@@ -364,6 +365,7 @@ struct VBottomSheet<Content>: View
 }
 
 // MARK: - Preview
+@available(iOS 15.0, *)
 struct VBottomSheet_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem Ipsum Dolor Sit Amet" }
     private static func content() -> some View {

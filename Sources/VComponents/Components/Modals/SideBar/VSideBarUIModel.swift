@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Side Bar UI Model
 /// Model that describes UI.
+@available(iOS 15.0, *)
 public struct VSideBarUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -129,10 +130,10 @@ public struct VSideBarUIModel {
     public struct Animations {
         // MARK: Properties
         /// Appear animation.  Set to `easeInOut` with duration `0.3`.
-        public var appear: BasicAnimation? = GlobalUIModel.Modals.slideableAppearAnimation
+        public var appear: BasicAnimation? = GlobalUIModel.Modals.slidingAppearAnimation
         
         /// Disappear animation.  Set to `easeInOut` with duration `0.3`.
-        public var disappear: BasicAnimation? = GlobalUIModel.Modals.slideableDisappearAnimation
+        public var disappear: BasicAnimation? = GlobalUIModel.Modals.slidingDisappearAnimation
         
         /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
         public var dragBackDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
@@ -195,6 +196,7 @@ public struct VSideBarUIModel {
 }
 
 // MARK: - Factory (Misc)
+@available(iOS 15.0, *)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that insets content.
     public static var insettedContent: Self {
@@ -207,6 +209,7 @@ extension VSideBarUIModel {
 }
 
 // MARK: - Factory (Presentation Edge)
+@available(iOS 15.0, *)
 extension VSideBarUIModel.Layout.PresentationEdge {
     /// UI model for the presentation edge.
     public var uiModel: VSideBarUIModel {
@@ -219,6 +222,7 @@ extension VSideBarUIModel.Layout.PresentationEdge {
     }
 }
 
+@available(iOS 15.0, *)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that presents side bar from left.
     ///
