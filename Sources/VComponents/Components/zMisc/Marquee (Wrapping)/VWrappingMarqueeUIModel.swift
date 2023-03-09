@@ -28,16 +28,16 @@ public struct VWrappingMarqueeUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Scroll direction. Defaults to `leftToRight`.
+        /// Scroll direction. Set to `leftToRight`.
         public var scrollDirection: LayoutDirection = .leftToRight
         
-        /// Spacing between wrapped content. Defaults to  `20`.
+        /// Spacing between wrapped content. Set to  `20`.
         ///
         /// If you set `inset` to non-`0` value or use `VWrappingMarqueeUIModel.insettedGradient`,
         /// it's better to set `spacing` to `0`.
         public var spacing: CGFloat = 20
         
-        /// Content inset. Defaults to `0`.
+        /// Content inset. Set to `0`.
         ///
         /// Ideal for text content.
         /// Alternately, use `insettedGradient` instance of `VWrappingMarqueeUIModel`.
@@ -45,7 +45,7 @@ public struct VWrappingMarqueeUIModel {
         /// For best result, should be greater than or equal to `gradientWidth`.
         public var inset: CGFloat = 0
         
-        /// Horizontal alignment for non-scrolling stationary content. Defaults to `leading`.
+        /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
         public var alignmentStationary: HorizontalAlignment = .leading
         
         // MARK: Initializers
@@ -57,7 +57,7 @@ public struct VWrappingMarqueeUIModel {
     /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
-        /// Width of fading gradient. Defaults to  `0`.
+        /// Width of fading gradient. Set to  `0`.
         ///
         /// To hide gradient, set to `0`.
         ///
@@ -82,13 +82,13 @@ public struct VWrappingMarqueeUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Animation curve. Defaults to `linear`.
+        /// Animation curve. Set to `linear`.
         public var curve: BasicAnimation.AnimationCurve = .linear
         
-        /// Animation duration type. Defaults to `default`.
+        /// Animation duration type. Set to `default`.
         public var durationType: DurationType = .default
         
-        /// Animation delay. Defaults to `1` second.
+        /// Animation delay. Set to `1` second.
         public var delay: Double = 1
         
         // MARK: Initializers

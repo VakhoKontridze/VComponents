@@ -28,13 +28,13 @@ public struct VContinuousSpinnerUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Spinner dimension. Defaults to `15`.
+        /// Spinner dimension. Set to `15`.
         public var dimension: CGFloat = 15
         
-        /// Length of colored part of spinner. Defaults to `0.75`.
+        /// Length of colored part of spinner. Set to `0.75`.
         public var length: CGFloat = 0.75
         
-        /// Thickness. Defaults to `2`.
+        /// Thickness. Set to `2`.
         public var thickness: CGFloat = 2
         
         // MARK: Initializers
@@ -58,7 +58,7 @@ public struct VContinuousSpinnerUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Spinner animation. Defaults to `linear` with duration `0.75`.
+        /// Spinner animation. Set to `linear` with duration `0.75`.
         public var spinning: Animation = .linear(duration: 0.75)
         
         // MARK: Initializers

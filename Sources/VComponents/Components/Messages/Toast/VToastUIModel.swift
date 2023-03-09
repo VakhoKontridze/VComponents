@@ -32,25 +32,25 @@ public struct VToastUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Toast horizontal margin. Defaults to `20`.
+        /// Toast horizontal margin. Set to `20`.
         public var toastHorizontalMargin: CGFloat = 20
         
-        /// Corner radius type. Defaults to `default`.
+        /// Corner radius type. Set to `default`.
         public var cornerRadiusType: CornerRadiusType = .default
         
-        /// Text line type. Defaults to `default`.
+        /// Text line type. Set to `default`.
         public var titleTextLineType: TextLineType = .default
         
-        /// Text margins. Defaults to `20` horizontal and `12` vertical.
+        /// Text margins. Set to `20` horizontal and `12` vertical.
         public var textMargins: Margins = .init(
             horizontal: 20,
             vertical: 12
         )
         
-        /// Edge from which toast appears, and to which it disappears. Defaults to `default`.
+        /// Edge from which toast appears, and to which it disappears. Set to `default`.
         public var presentationEdge: PresentationEdge = .default
         
-        /// Safe area inset from presented edge. Defaults to `20`.
+        /// Safe area inset from presented edge. Set to `20`.
         public var presentationEdgeSafeAreaInset: CGFloat = 20
         
         // MARK: Initializers
@@ -139,7 +139,7 @@ public struct VToastUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Text font. Defaults to system font of size `16` and weight `semibold`.
+        /// Text font. Set to system font of size `16` and weight `semibold`.
         ///
         /// Font is of type `UIFont`, as height must be calculated.
         public var text: UIFont = .systemFont(ofSize: 16, weight: .semibold)
@@ -153,13 +153,13 @@ public struct VToastUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Display duration. Defaults to `3` seconds.
+        /// Display duration. Set to `3` seconds.
         public var duration: TimeInterval = 3
         
-        /// Appear animation. Defaults to `easeOut` with duration `0.2`.
+        /// Appear animation. Set to `easeOut` with duration `0.2`.
         public var appear: BasicAnimation? = .init(curve: .easeOut, duration: 0.2)
         
-        /// Disappear animation. Defaults to `easeIn` with duration `0.2`.
+        /// Disappear animation. Set to `easeIn` with duration `0.2`.
         public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
         
         // MARK: Initializers

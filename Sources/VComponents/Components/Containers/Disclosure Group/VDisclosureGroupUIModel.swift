@@ -35,13 +35,13 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Disclosure group corner radius. Defaults to `15`.
+        /// Disclosure group corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Header margins. Defaults to `15` horizontal and  `10` vertical.
+        /// Header margins. Set to `15` horizontal and  `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
 
-        /// Model for customizing chevron button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
+        /// Model for customizing chevron button layout. `dimension` Set to `30`, `iconSize` Set to `12` by `12`, and `hitBox` Set to `zero`.
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -52,18 +52,18 @@ public struct VDisclosureGroupUIModel {
             return uiModel
         }()
         
-        /// Divider height. Defaults to `2` scaled to screen.
+        /// Divider height. Set to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
         
-        /// Divider margins. Defaults to `15` horizontal and  `0` vertical.
+        /// Divider margins. Set to `15` horizontal and  `0` vertical.
         public var dividerMargins: Margins = .init(
             horizontal: GlobalUIModel.Common.containerContentMargin,
             vertical: 0
         )
         
-        /// Content margins. Defaults to `zero`.
+        /// Content margins. Set to `zero`.
         public var contentMargins: Margins = .zero
         
         // MARK: Initializers
@@ -154,7 +154,7 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Expand and collapse animation. Defaults to `default`.
+        /// Expand and collapse animation. Set to `default`.
         public var expandCollapse: Animation? = .default
         
         // MARK: Initializers
@@ -166,7 +166,7 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if disclosure group expands and collapses from header tap. Defaults to `true`.
+        /// Indicates if disclosure group expands and collapses from header tap. Set to `true`.
         public var expandsAndCollapsesOnHeaderTap: Bool = true
         
         // MARK: Initializers

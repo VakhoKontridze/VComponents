@@ -26,19 +26,19 @@ public struct VListRowUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Margins. Defaults to `15` horizontal and `9` vertical.
+        /// Margins. Set to `15` horizontal and `9` vertical.
         public var margins: Margins = .init(
             horizontal: GlobalUIModel.Common.containerContentMargin,
             vertical: 9
         )
         
-        /// Separator type. Defaults to `default`.
+        /// Separator type. Set to `default`.
         public var separatorType: SeparatorType = .default
         
-        /// Separator margins. Defaults to `15`s.
+        /// Separator margins. Set to `15`s.
         public var separatorMargins: HorizontalMargins = .init(GlobalUIModel.Common.containerContentMargin)
         
-        /// Separator height. Defaults to `1` scaled to screen.
+        /// Separator height. Set to `1` scaled to screen.
         public var separatorHeight: CGFloat = GlobalUIModel.Common.separatorHeight
         
         // MARK: Initializers

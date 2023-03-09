@@ -25,13 +25,13 @@ public struct VSheetUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Rounded corners. Defaults to to `allCorners`.
+        /// Rounded corners. Set to to `allCorners`.
         public var roundedCorners: UIRectCorner = .allCorners
         
-        /// Corner radius. Defaults to `15`.
+        /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Content margin. Defaults to `15`.
+        /// Content margin. Set to `15`.
         public var contentMargin: CGFloat = GlobalUIModel.Common.containerContentMargin
         
         // MARK: Initializers

@@ -39,25 +39,25 @@ public struct VPageIndicatorUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Direction. Defaults to `leftToRight`.
+        /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Dot dimension on the main axis. Defaults to `10`.
+        /// Dot dimension on the main axis. Set to `10`.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
         public var dotDimensionPrimaryAxis: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the secondary axis. Defaults to `10`.
+        /// Dot dimension on the secondary axis. Set to `10`.
         ///
         /// For horizontal layouts, this will be height, and for vertical, width.
         public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot spacing. Defaults to `5`.
+        /// Dot spacing. Set to `5`.
         public var spacing: CGFloat = GlobalUIModel.Indicators.pageIndicatorSpacing
         
-        /// Unselected dot scale. Defaults to `0.85`.
+        /// Unselected dot scale. Set to `0.85`.
         public var unselectedDotScale: CGFloat = GlobalUIModel.Indicators.pageIndicatorStandardUnselectedDotScale
         
         // MARK: Initializers
@@ -98,7 +98,7 @@ public struct VPageIndicatorUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Transition animation. Defaults to `linear` with duration `0.15`.
+        /// Transition animation. Set to `linear` with duration `0.15`.
         public var transition: Animation = .linear(duration: 0.15)
         
         // MARK: Initializers

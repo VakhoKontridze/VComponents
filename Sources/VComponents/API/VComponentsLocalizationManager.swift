@@ -16,7 +16,7 @@ public final class VComponentsLocalizationManager {
     /// Shared instance of `VComponentsLocalizationService`.
     public static let shared: VComponentsLocalizationManager = .init()
     
-    /// Localization provider. Defaults to `DefaultVComponentsLocalizationProvider`.
+    /// Localization provider. Set to `DefaultVComponentsLocalizationProvider`.
     public var localizationProvider: any VComponentsLocalizationProvider = DefaultVComponentsLocalizationProvider()
     
     // MARK: Initializers

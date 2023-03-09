@@ -43,19 +43,19 @@ public struct VModalUIModel {
             landscape: .fraction(.init(width: 0.6, height: 0.9))
         )
         
-        /// Rounded corners. Defaults to to `allCorners`.
+        /// Rounded corners. Set to to `allCorners`.
         public var roundedCorners: UIRectCorner = .allCorners
         
-        /// Corner radius. Defaults to `15`.
+        /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Header alignment. Defaults to `center`.
+        /// Header alignment. Set to `center`.
         public var headerAlignment: VerticalAlignment = .center
         
-        /// Header margins. Defaults to `15` horizontal and `10` vertical.
+        /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing close button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
+        /// Model for customizing close button layout. `dimension` Set to `30`, `iconSize` Set to `12` by `12`, and `hitBox` Set to `zero`.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -66,26 +66,26 @@ public struct VModalUIModel {
             return uiModel
         }()
         
-        /// Spacing between label and close button. Defaults to `10`.
+        /// Spacing between label and close button. Set to `10`.
         public var labelCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
         
-        /// Divider height. Defaults to `2` scaled to screen.
+        /// Divider height. Set to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
     
-        /// Divider margins. Defaults to `.zero`.
+        /// Divider margins. Set to `.zero`.
         public var dividerMargins: Margins = .zero
         
-        /// Content margins. Defaults to `zero`.
+        /// Content margins. Set to `zero`.
         public var contentMargins: Margins = .zero
         
-        /// Edges on which header has safe area edges. Defaults to `[]`.
+        /// Edges on which header has safe area edges. Set to `[]`.
         ///
         /// Can be used for full-sized modal, to prevent header from leaving safe area.
         public var headerSafeAreaEdges: Edge.Set = []
         
-        /// Edges ignored by keyboard. Defaults to `[]`.
+        /// Edges ignored by keyboard. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
         // MARK: Initializers
@@ -111,10 +111,10 @@ public struct VModalUIModel {
         /// Shadow color.
         public var shadow: Color = .clear
         
-        /// Shadow radius. Defaults to `0`.
+        /// Shadow radius. Set to `0`.
         public var shadowRadius: CGFloat = 0
         
-        /// Shadow offset. Defaults to `zero`.
+        /// Shadow offset. Set to `zero`.
         public var shadowOffset: CGSize = .zero
         
         /// Header title color.
@@ -165,19 +165,19 @@ public struct VModalUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Appear animation. Defaults to `linear` with duration `0.05`.
+        /// Appear animation. Set to `linear` with duration `0.05`.
         public var appear: BasicAnimation? = .init(curve: .linear, duration: 0.05)
         
-        /// Disappear animation. Defaults to `easeIn` with duration `0.05`.
+        /// Disappear animation. Set to `easeIn` with duration `0.05`.
         public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.05)
         
-        /// Scale effect during appear and disappear. Defaults to `1.01`.
+        /// Scale effect during appear and disappear. Set to `1.01`.
         public var scaleEffect: CGFloat = 1.01
         
-        /// Opacity level during appear and disappear. Defaults to `0.5`.
+        /// Opacity level during appear and disappear. Set to `0.5`.
         public var opacity: Double = 0.5
         
-        /// Blur during appear and disappear. Defaults to `3`.
+        /// Blur during appear and disappear. Set to `3`.
         public var blur: CGFloat = 3
         
         // MARK: Initializers
@@ -189,7 +189,7 @@ public struct VModalUIModel {
     /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Method of dismissing modal. Defaults to `default`.
+        /// Method of dismissing modal. Set to `default`.
         public var dismissType: DismissType = .default
         
         // MARK: Initializers

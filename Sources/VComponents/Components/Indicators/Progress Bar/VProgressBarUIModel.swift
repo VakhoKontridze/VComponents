@@ -29,13 +29,13 @@ public struct VProgressBarUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Slider height. Defaults to `10`.
+        /// Slider height. Set to `10`.
         public var height: CGFloat = GlobalUIModel.Common.barHeight
         
-        /// Slider corner radius. Defaults to `5`.
+        /// Slider corner radius. Set to `5`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
-        /// Indicates if progress bar rounds progress view right-edge. Defaults to `true`.
+        /// Indicates if progress bar rounds progress view right-edge. Set to `true`.
         public var roundsProgressViewRightEdge: Bool = true
         
         var progressViewRoundedCorners: UIRectCorner {
@@ -70,7 +70,7 @@ public struct VProgressBarUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Progress animation. Defaults to `default`.
+        /// Progress animation. Set to `default`.
         public var progress: Animation? = .default
 
         // MARK: Initializers

@@ -29,46 +29,46 @@ public struct VAutomaticPageIndicatorUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Direction. Defaults to `leftToRight`.
+        /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Dot dimension on the main axis when switching to `standard` configuration. Defaults to `10`.
+        /// Dot dimension on the main axis when switching to `standard` configuration. Set to `10`.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
         public var dotDimensionPrimaryAxisForStandardConfiguration: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the main axis when switching to `compact` configuration. Defaults to `10`.
+        /// Dot dimension on the main axis when switching to `compact` configuration. Set to `10`.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         public var dotDimensionPrimaryAxisForCompactConfiguration: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the secondary axis. Defaults to `10`.
+        /// Dot dimension on the secondary axis. Set to `10`.
         ///
         /// For horizontal layouts, this will be height, and for vertical, width.
         public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot spacing. Defaults to `5`.
+        /// Dot spacing. Set to `5`.
         public var spacing: CGFloat = GlobalUIModel.Indicators.pageIndicatorSpacing
         
-        /// Number of visible dots when switching to `compact` configuration. Defaults to `7`.
+        /// Number of visible dots when switching to `compact` configuration. Set to `7`.
         ///
         /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
         public var visibleDotsForCompactConfiguration: Int = GlobalUIModel.Indicators.pageIndicatorCompactVisibleDots
         
-        /// Number of center dots when switching to `compact` configuration. Defaults to `7`.
+        /// Number of center dots when switching to `compact` configuration. Set to `7`.
         ///
         /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
         public var centerDotsForCompactConfiguration: Int = GlobalUIModel.Indicators.pageIndicatorCompactCenterDots
         
-        /// Limit after which `standard` configuration switches to `compact` one. Defaults to `10`.
+        /// Limit after which `standard` configuration switches to `compact` one. Set to `10`.
         public var standardDotLimit: Int = 10
 
-        /// Unselected dot scale when switching to `standard` configuration. Defaults to `0.85`.
+        /// Unselected dot scale when switching to `standard` configuration. Set to `0.85`.
         public var unselectedDotScaleForStandardConfiguration: CGFloat = GlobalUIModel.Indicators.pageIndicatorStandardUnselectedDotScale
         
-        /// Scale of dot at the edge when switching to `compact` configuration. Defaults to `0.5`.
+        /// Scale of dot at the edge when switching to `compact` configuration. Set to `0.5`.
         ///
         /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
         public var edgeDotScaleForCompactConfiguration: CGFloat = GlobalUIModel.Indicators.pageIndicatorCompactEdgeDotScale

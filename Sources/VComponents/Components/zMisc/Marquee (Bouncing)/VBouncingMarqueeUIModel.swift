@@ -29,10 +29,10 @@ public struct VBouncingMarqueeUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Scroll direction. Defaults to `leftToRight`.
+        /// Scroll direction. Set to `leftToRight`.
         public var scrollDirection: LayoutDirection = .leftToRight
         
-        /// Content inset. Defaults to `0`.
+        /// Content inset. Set to `0`.
         ///
         /// Ideal for text content.
         /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
@@ -40,7 +40,7 @@ public struct VBouncingMarqueeUIModel {
         /// For best result, should be greater than or equal to `gradientWidth`.
         public var inset: CGFloat = 0
         
-        /// Horizontal alignment for non-scrolling stationary content. Defaults to `leading`.
+        /// Horizontal alignment for non-scrolling stationary content. Set to `leading`.
         public var alignmentStationary: HorizontalAlignment = .leading
         
         // MARK: Initializers

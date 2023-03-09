@@ -29,18 +29,18 @@ public struct VPlainButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Icon size. Defaults to `20` by `20`.
+        /// Icon size. Set to `20` by `20`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
         
-        /// Title minimum scale factor. Defaults to `0.75`.
+        /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Spacing between icon and title. Defaults to `8`.
+        /// Spacing between icon and title. Set to `8`.
         ///
         /// Applicable only if icon `init` with icon and title is used.
         public var iconTitleSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
-        /// Hit box. Defaults to `5`s.
+        /// Hit box. Set to `5`s.
         public var hitBox: HitBox = .init(5)
         
         // MARK: Initializers
@@ -73,13 +73,13 @@ public struct VPlainButtonUIModel {
             disabled: ColorBook.accentBluePressedDisabled
         )
         
-        /// Icon opacities. Defaults to `1`s.
+        /// Icon opacities. Set to `1`s.
         ///
         /// Applied to all images. But should be used for bitmap images.
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities. Defaults to `1` enabled, `0.3` pressed, and `0.3` disabled.
+        /// Custom label opacities. Set to `1` enabled, `0.3` pressed, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
@@ -107,7 +107,7 @@ public struct VPlainButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `15` with `medium` weight.
+        /// Title font. Set to system font of size `15` with `medium` weight.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeSmall, weight: .medium)

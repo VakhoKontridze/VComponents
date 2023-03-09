@@ -34,31 +34,31 @@ public struct VTextFieldUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Textfield height. Defaults to `50`.
+        /// Textfield height. Set to `50`.
         public var height: CGFloat = GlobalUIModel.Inputs.height
         
-        /// Textfield corner radius. Defaults to `12`.
+        /// Textfield corner radius. Set to `12`.
         public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
         
-        /// Textfield text alignment. Defaults to `leading`.
+        /// Textfield text alignment. Set to `leading`.
         public var textAlignment: TextAlignment = .leading
         
-        /// Textfield border width. Defaults to `0`.
+        /// Textfield border width. Set to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Content type. Defaults to `default`.
+        /// Content type. Set to `default`.
         public var contentType: ContentType = .default
         
-        /// Content horizontal margin. Defaults to `15`.
+        /// Content horizontal margin. Set to `15`.
         public var contentMarginHorizontal: CGFloat = GlobalUIModel.Common.containerContentMargin
         
-        /// Spacing between text and buttons. Defaults to `10`.
+        /// Spacing between text and buttons. Set to `10`.
         public var contentSpacing: CGFloat = 10
         
-        /// Search icon dimension. Defaults to `15`.
+        /// Search icon dimension. Set to `15`.
         public var searchIconDimension: CGFloat = 15
         
-        /// Model for customizing clear button layout. `dimension` defaults to `22`, `iconSize` defaults to `8` by `8`, and `hitBox` defaults to `zero`.
+        /// Model for customizing clear button layout. `dimension` Set to `22`, `iconSize` Set to `8` by `8`, and `hitBox` Set to `zero`.
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -69,7 +69,7 @@ public struct VTextFieldUIModel {
             return uiModel
         }()
         
-        /// Model for customizing visibility button layout. `iconSize` defaults to `20` by `20` and `hitBox` defaults to `zero`.
+        /// Model for customizing visibility button layout. `iconSize` Set to `20` by `20` and `hitBox` Set to `zero`.
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Layout = {
             var uiModel: VPlainButtonUIModel.Layout = .init()
             
@@ -79,16 +79,16 @@ public struct VTextFieldUIModel {
             return uiModel
         }()
         
-        /// Header text line type. Defaults to `singleLine`.
+        /// Header text line type. Set to `singleLine`.
         public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
         
-        /// Footer text line type. Defaults to `multiline` with `leading` alignment and `1...5` lines.
+        /// Footer text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
         public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
         
-        /// Spacing between header, textfield, and footer. Defaults to `3`.
+        /// Spacing between header, textfield, and footer. Set to `3`.
         public var headerTextFieldFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
         
-        /// Header and footer horizontal margin. Defaults to `10`.
+        /// Header and footer horizontal margin. Set to `10`.
         public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
         // MARK: Initializers
@@ -228,16 +228,16 @@ public struct VTextFieldUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Text font. Defaults to system font of size `16`.
+        /// Text font. Set to system font of size `16`.
         public var text: Font = .system(size: 16)
         
-        /// Placeholder font. Defaults to system font of size `16`.
+        /// Placeholder font. Set to system font of size `16`.
         public var placeholder: Font = .system(size: 16)
         
-        /// Header font. Defaults to system font of size `14`.
+        /// Header font. Set to system font of size `14`.
         public var header: Font = GlobalUIModel.Common.headerFont
         
-        /// Footer font. Defaults to system font of size `13`.
+        /// Footer font. Set to system font of size `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
         // MARK: Initializers
@@ -249,7 +249,7 @@ public struct VTextFieldUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Clear button appear and disappear animation. Defaults to `easeInOut` with duration `0.2`.
+        /// Clear button appear and disappear animation. Set to `easeInOut` with duration `0.2`.
         public var clearButton: Animation? = .easeInOut(duration: 0.2)
         
         // MARK: Initializers
@@ -261,22 +261,22 @@ public struct VTextFieldUIModel {
     /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Keyboard type. Defaults to `default`.
+        /// Keyboard type. Set to `default`.
         public var keyboardType: UIKeyboardType = .default
         
-        /// Text content type. Defaults to `nil`.
+        /// Text content type. Set to `nil`.
         public var textContentType: UITextContentType? = nil
 
-        /// Auto correct type. Defaults to `nil`.
+        /// Auto correct type. Set to `nil`.
         public var autocorrection: Bool? = nil
         
-        /// Auto capitalization type. Defaults to `nil`.
+        /// Auto capitalization type. Set to `nil`.
         public var autocapitalization: TextInputAutocapitalization? = nil
          
-        /// Submit button type. Defaults to `return`.
+        /// Submit button type. Set to `return`.
         public var submitButton: SubmitLabel = .return
         
-        /// Indicates if textfield has clear button. Defaults to `true`.
+        /// Indicates if textfield has clear button. Set to `true`.
         public var hasClearButton: Bool = true
         
         // MARK: Initializers

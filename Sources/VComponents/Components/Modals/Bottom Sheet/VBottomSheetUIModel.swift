@@ -49,30 +49,30 @@ public struct VBottomSheetUIModel {
             ))
         )
         
-        /// Corner radius. Defaults to `15`.
+        /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Grabber indicator size. Defaults to `50` width and `4` height.
+        /// Grabber indicator size. Set to `50` width and `4` height.
         ///
         /// To hide, set to `zero`.
         public var grabberSize: CGSize = .init(width: 50, height: 4)
         
-        /// Grabber corner radius. Defaults to `2`.
+        /// Grabber corner radius. Set to `2`.
         public var grabberCornerRadius: CGFloat = 2
         
-        /// Grabber margins. Defaults to `10` top  and `0` bottom.
+        /// Grabber margins. Set to `10` top  and `0` bottom.
         public var grabberMargins: VerticalMargins = .init(
             top: 10,
             bottom: 0
         )
         
-        /// Header alignment. Defaults to `center`.
+        /// Header alignment. Set to `center`.
         public var headerAlignment: VerticalAlignment = .center
         
-        /// Header margins. Defaults to `15` horizontal and `10` vertical.
+        /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing close button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
+        /// Model for customizing close button layout. `dimension` Set to `30`, `iconSize` Set to `12` by `12`, and `hitBox` Set to `zero`.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -83,21 +83,21 @@ public struct VBottomSheetUIModel {
             return uiModel
         }()
         
-        /// Spacing between label and close button. Defaults to `10`.
+        /// Spacing between label and close button. Set to `10`.
         public var labelCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
         
-        /// Divider height. Defaults to `2` scaled to screen.
+        /// Divider height. Set to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`, and remove header.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
     
-        /// Divider margins. Defaults to `.zero`.
+        /// Divider margins. Set to `.zero`.
         public var dividerMargins: Margins = .zero
         
-        /// Content margins. Defaults to `zero`.
+        /// Content margins. Set to `zero`.
         public var contentMargins: Margins = .zero
         
-        /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.
+        /// Indicates if sheet resizes content based on its visible frame. Set to `false`.
         ///
         /// Can be used for scrollable content.
         /// Optionally, add `bottom` to `contentSafeAreaEdges` to ensure that scrollable content always has bottom safe area inset.
@@ -105,23 +105,23 @@ public struct VBottomSheetUIModel {
         /// Has no effect on fixed bottom sheet.
         public var autoresizesContent: Bool = false
         
-        /// Edges on which header has safe area edges. Defaults to `[]`.
+        /// Edges on which header has safe area edges. Set to `[]`.
         ///
         /// Can be used for full-sized modal, to prevent header from leaving safe area.
         public var headerSafeAreaEdges: Edge.Set = []
         
-        /// Edges on which content has safe area edges. Defaults to `[]`.
+        /// Edges on which content has safe area edges. Set to `[]`.
         ///
         /// `autoresizesContent` must be set to `true` for scrollable content to always have bottom safe area inset.
         public var contentSafeAreaEdges: Edge.Set = []
         
-        /// Edges ignored by keyboard. Defaults to `[]`.
+        /// Edges ignored by keyboard. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
-        /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Defaults to `600` points/s.
+        /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Set to `600` points/s.
         public var velocityToSnapToNextHeight: CGFloat = 600
         
-        /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Defaults to `0.1`.
+        /// Ratio of distance to drag sheet downwards to initiate dismiss relative to min height. Set to `0.1`.
         public var pullDownDismissDistanceMinHeightRatio: CGFloat = 0.1
         
         var pullDownDismissDistance: CGFloat { pullDownDismissDistanceMinHeightRatio * sizes._current.size.heights.min }
@@ -243,10 +243,10 @@ public struct VBottomSheetUIModel {
         /// Shadow color.
         public var shadow: Color = .clear
         
-        /// Shadow radius. Defaults to `0`.
+        /// Shadow radius. Set to `0`.
         public var shadowRadius: CGFloat = 0
         
-        /// Shadow offset. Defaults to `zero`.
+        /// Shadow offset. Set to `zero`.
         public var shadowOffset: CGSize = .zero
         
         /// Grabber color.
@@ -304,16 +304,16 @@ public struct VBottomSheetUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Appear animation. Defaults to `easeInOut` with duration `0.3`.
+        /// Appear animation. Set to `easeInOut` with duration `0.3`.
         public var appear: BasicAnimation? = GlobalUIModel.Modals.slideableAppearAnimation
         
-        /// Disappear animation. Defaults to `easeInOut` with duration `0.3`.
+        /// Disappear animation. Set to `easeInOut` with duration `0.3`.
         public var disappear: BasicAnimation? = GlobalUIModel.Modals.slideableDisappearAnimation
         
-        /// Pull-down dismiss animation. Defaults to `easeInOut` with duration `0.1`.
+        /// Pull-down dismiss animation. Set to `easeInOut` with duration `0.1`.
         public var pullDownDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
         
-        /// Height snapping animation between `min`, `ideal`, and `max` states. Defaults to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
+        /// Height snapping animation between `min`, `ideal`, and `max` states. Set to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
         
         // MARK: Initializers
@@ -325,10 +325,10 @@ public struct VBottomSheetUIModel {
     /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Method of dismissing modal. Defaults to `default`.
+        /// Method of dismissing modal. Set to `default`.
         public var dismissType: DismissType = .default
         
-        /// Indicates if bottom sheet can be resized by dragging outside the header. Defaults to `false`.
+        /// Indicates if bottom sheet can be resized by dragging outside the header. Set to `false`.
         ///
         /// Setting to `true` may cause issues with scrollable views.
         ///

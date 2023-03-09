@@ -32,13 +32,13 @@ public struct VSideBarUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Edge from which side bar appears, and to which it disappears. Defaults to `default`.
+        /// Edge from which side bar appears, and to which it disappears. Set to `default`.
         ///
         /// Changing this property in model alone doesn't guarantee proper sizes and rounding.
         /// Consider using `left`, `right`, `top`, and `bottom` instances of `VSideBarUIModel`.
         public var presentationEdge: PresentationEdge = .default
         
-        /// Side bar sizes. Defaults to `default`.
+        /// Side bar sizes. Set to `default`.
         /// Set to `0.75` ratio of screen width and `1` ratio of screen height in portrait.
         /// Set to`0.5` ratio of screen width and `1` ratio of screen height in landscape.
         public var sizes: Sizes = .init(
@@ -46,22 +46,22 @@ public struct VSideBarUIModel {
             landscape: .fraction(.init(width: 0.5, height: 1))
         )
         
-        /// Rounded corners. Defaults to `rightCorners`.
+        /// Rounded corners. Set to `rightCorners`.
         public var roundedCorners: UIRectCorner = .rightCorners
         
-        /// Corner radius. Defaults to `15`.
+        /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Content margins. Defaults to `zero`.
+        /// Content margins. Set to `zero`.
         public var contentMargins: Margins = .zero
         
-        /// Edges on which content has safe area edges. Defaults to `all`.
+        /// Edges on which content has safe area edges. Set to `all`.
         public var contentSafeAreaEdges: Edge.Set = .all
         
-        /// Edges ignored by keyboard. Defaults to `[]`.
+        /// Edges ignored by keyboard. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
-        /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Defaults to `0.1`.
+        /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
         public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1
         
         var dragBackDismissDistance: CGFloat { dragBackDismissDistanceWidthRatio * sizes._current.size.width }
@@ -110,10 +110,10 @@ public struct VSideBarUIModel {
         /// Shadow color.
         public var shadow: Color = .clear
         
-        /// Shadow radius. Defaults to `0`.
+        /// Shadow radius. Set to `0`.
         public var shadowRadius: CGFloat = 0
         
-        /// Shadow offset. Defaults to `zero`.
+        /// Shadow offset. Set to `zero`.
         public var shadowOffset: CGSize = .zero
         
         /// Dimming view color.
@@ -128,13 +128,13 @@ public struct VSideBarUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Appear animation.  Defaults to `easeInOut` with duration `0.3`.
+        /// Appear animation.  Set to `easeInOut` with duration `0.3`.
         public var appear: BasicAnimation? = GlobalUIModel.Modals.slideableAppearAnimation
         
-        /// Disappear animation.  Defaults to `easeInOut` with duration `0.3`.
+        /// Disappear animation.  Set to `easeInOut` with duration `0.3`.
         public var disappear: BasicAnimation? = GlobalUIModel.Modals.slideableDisappearAnimation
         
-        /// Drag-back dismiss animation. Defaults to `easeInOut` with duration `0.2`.
+        /// Drag-back dismiss animation. Set to `easeInOut` with duration `0.2`.
         public var dragBackDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)
         
         // MARK: Initializers
@@ -146,7 +146,7 @@ public struct VSideBarUIModel {
     /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Method of dismissing side bar. Defaults to `default`.
+        /// Method of dismissing side bar. Set to `default`.
         public var dismissType: DismissType = .default
         
         // MARK: Initializers

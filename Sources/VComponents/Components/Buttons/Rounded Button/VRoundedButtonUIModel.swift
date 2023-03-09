@@ -29,27 +29,27 @@ public struct VRoundedButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button dimension. Defaults to `56`.
+        /// Button dimension. Set to `56`.
         public var dimension: CGFloat = GlobalUIModel.Buttons.dimensionLarge
         
-        /// Corner radius. Defaults to `16`.
+        /// Corner radius. Set to `16`.
         public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusSmall
         
-        /// Border width. Defaults to `0`.
+        /// Border width. Set to `0`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Label margins. Defaults to `3`s.
+        /// Label margins. Set to `3`s.
         public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRounded
         
-        /// Title minimum scale factor. Defaults to `0.75`.
+        /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Icon size. Defaults to `20` by `20`.
+        /// Icon size. Set to `20` by `20`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
         
-        /// Hit box. Defaults to `zero`.
+        /// Hit box. Set to `zero`.
         public var hitBox: HitBox = .zero
         
         // MARK: Initializers
@@ -88,13 +88,13 @@ public struct VRoundedButtonUIModel {
         /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(ColorBook.primaryWhite)
         
-        /// Icon opacities. Defaults to `1`s.
+        /// Icon opacities. Set to `1`s.
         ///
         /// Applied to all images. But should be used for bitmap images.
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities. Defaults to `1` enabled, `0.3` pressed, and `0.3` disabled.
+        /// Custom label opacities. Set to `1` enabled, `0.3` pressed, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
@@ -122,7 +122,7 @@ public struct VRoundedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `15` with `semibold` weight.
+        /// Title font. Set to system font of size `15` with `semibold` weight.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeSmall, weight: .semibold)

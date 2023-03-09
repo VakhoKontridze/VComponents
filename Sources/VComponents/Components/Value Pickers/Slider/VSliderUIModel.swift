@@ -29,13 +29,13 @@ public struct VSliderUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Slider height. Defaults to `10`.
+        /// Slider height. Set to `10`.
         public var height: CGFloat = GlobalUIModel.Common.barHeight
         
-        /// Slider corner radius. Defaults to `5`.
+        /// Slider corner radius. Set to `5`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
-        /// Indicates if slider rounds progress view right-edge. Defaults to `true`.
+        /// Indicates if slider rounds progress view right-edge. Set to `true`.
         public var roundsProgressViewRightEdge: Bool = true
         
         var progressViewRoundedCorners: UIRectCorner {
@@ -46,21 +46,21 @@ public struct VSliderUIModel {
             }
         }
         
-        /// Thumb dimension. Defaults to `20`.
+        /// Thumb dimension. Set to `20`.
         ///
         /// To hide thumb, set to `0`.
         public var thumbDimension: CGFloat = GlobalUIModel.ValuePickers.sliderThumbDimension
         
-        /// Thumb corner radius. Defaults to `10`.
+        /// Thumb corner radius. Set to `10`.
         public var thumbCornerRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbCornerRadius
         
-        /// Thumb border widths. Defaults to `0`.
+        /// Thumb border widths. Set to `0`.
         public var thumbBorderWidth: CGFloat = 0
         
-        /// Thumb shadow radius. Defaults to `2`.
+        /// Thumb shadow radius. Set to `2`.
         public var thumbShadowRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbShadowRadius
         
-        /// Thumb shadow offset. Defaults to `0` width and  `2` height.
+        /// Thumb shadow offset. Set to `0` width and  `2` height.
         public var thumbShadowOffset: CGSize = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
         
         // MARK: Initializers
@@ -109,7 +109,7 @@ public struct VSliderUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Progress animation. Defaults to `nil`.
+        /// Progress animation. Set to `nil`.
         public var progress: Animation? = nil
         
         // MARK: Initializers

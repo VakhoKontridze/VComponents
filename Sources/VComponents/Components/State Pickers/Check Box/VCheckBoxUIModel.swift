@@ -35,28 +35,28 @@ public struct VCheckBoxUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Checkbox dimension. Defaults to `16.`
+        /// Checkbox dimension. Set to `16.`
         public var dimension: CGFloat = GlobalUIModel.StatePickers.dimensionSmall
         
-        /// Checkbox corner radius. Defaults to `5.`
+        /// Checkbox corner radius. Set to `5.`
         public var cornerRadius: CGFloat = 4
         
-        /// Checkbox border width. Defaults to `1.`
+        /// Checkbox border width. Set to `1.`
         public var borderWidth: CGFloat = 1
         
-        /// Checkmark icon dimension. Defaults to `9.`
+        /// Checkmark icon dimension. Set to `9.`
         public var iconDimension: CGFloat = 9
         
-        /// Hit box. Defaults to `5`.
+        /// Hit box. Set to `5`.
         public var hitBox: CGFloat = GlobalUIModel.StatePickers.statePickerLabelSpacing // Actual spacing is 0
         
-        /// Spacing between checkbox and label. Defaults to `0`.
+        /// Spacing between checkbox and label. Set to `0`.
         public var checkBoxLabelSpacing: CGFloat = 0
         
-        /// Title text line type. Defaults to `multiline` with `leading` alignment and `1...2` lines.
+        /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
         public var titleTextLineType: TextLineType = GlobalUIModel.StatePickers.titleTextLineType
 
-        /// Title minimum scale factor. Defaults to `1`.
+        /// Title minimum scale factor. Set to `1`.
         public var titleMinimumScaleFactor: CGFloat = 1
         
         // MARK: Initializers
@@ -112,7 +112,7 @@ public struct VCheckBoxUIModel {
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Custom label opacities. Defaults to `1` off, `1` on, `1` indeterminate, `1` pressed off, `1` pressed on, `1` pressed indeterminate, and `0.3` disabled.
+        /// Custom label opacities. Set to `1` off, `1` on, `1` indeterminate, `1` pressed off, `1` pressed on, `1` pressed indeterminate, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
@@ -144,7 +144,7 @@ public struct VCheckBoxUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `15`.
+        /// Title font. Set to system font of size `15`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = GlobalUIModel.StatePickers.font
@@ -158,7 +158,7 @@ public struct VCheckBoxUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// State change animation. Defaults to `easeIn` with duration `0.1`.
+        /// State change animation. Set to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
         
         // MARK: Initializers
@@ -170,7 +170,7 @@ public struct VCheckBoxUIModel {
     /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
-        /// Indicates if label is clickable. Defaults to `true`.
+        /// Indicates if label is clickable. Set to `true`.
         public var labelIsClickable: Bool = true
         
         // MARK: Initializers

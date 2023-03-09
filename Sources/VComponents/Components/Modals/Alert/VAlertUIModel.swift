@@ -40,13 +40,13 @@ public struct VAlertUIModel {
             landscape: .fraction(.init(width: 0.5))
         )
         
-        /// Rounded corners. Defaults to to `allCorners`.
+        /// Rounded corners. Set to to `allCorners`.
         public var roundedCorners: UIRectCorner = .allCorners
         
-        /// Corner radius. Defaults to `20`.
+        /// Corner radius. Set to `20`.
         public var cornerRadius: CGFloat = 20
         
-        /// Additional margins applied to title, message, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
+        /// Additional margins applied to title, message, and content as a whole. Set to `15` leading, `15` trailing,`20` top, and `10` bottom.
         public var titleMessageContentMargins: Margins = .init(
             leading: GlobalUIModel.Common.containerContentMargin,
             trailing: GlobalUIModel.Common.containerContentMargin,
@@ -54,25 +54,25 @@ public struct VAlertUIModel {
             bottom: 10
         )
         
-        /// Title text line type. Defaults to `singleLine`.
+        /// Title text line type. Set to `singleLine`.
         public var titleTextLineType: TextLineType = .singleLine
         
-        /// Title margins. Defaults to `0` horizontal and `5` vertical.
+        /// Title margins. Set to `0` horizontal and `5` vertical.
         public var titleMargins: Margins = .init(
             horizontal: 0,
             vertical: 5
         )
         
-        /// Message line type. Defaults to `multiline` with `center` alignment and `1...5` lines.
+        /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
         public var messageTextLineType: TextLineType = .multiLine(alignment: .center, lineLimit: 1...5)
         
-        /// Title margins. Defaults to `0` horizontal and `5` vertical.
+        /// Title margins. Set to `0` horizontal and `5` vertical.
         public var messageMargins: Margins = .init(
             horizontal: 0,
             vertical: 5
         )
         
-        /// Content margins  Defaults to `0` leading, `0` trailing, `10` top, and `0` bottom.
+        /// Content margins  Set to `0` leading, `0` trailing, `10` top, and `0` bottom.
         public var contentMargins: Margins = .init(
             leading: 0,
             trailing: 0,
@@ -80,13 +80,13 @@ public struct VAlertUIModel {
             bottom: 0
         )
         
-        /// Button height. Defaults to  `40`.
+        /// Button height. Set to  `40`.
         public var buttonHeight: CGFloat = 40
         
-        /// Button corner radius. Defaults to `10`.
+        /// Button corner radius. Set to `10`.
         public var buttonCornerRadius: CGFloat = 10
         
-        /// Button margins. Defaults to `15` leading, `15` trailing, `15` top, and `20` bottom.
+        /// Button margins. Set to `15` leading, `15` trailing, `15` top, and `20` bottom.
         public var buttonMargins: Margins = .init(
             leading: GlobalUIModel.Common.containerContentMargin,
             trailing: GlobalUIModel.Common.containerContentMargin,
@@ -94,13 +94,13 @@ public struct VAlertUIModel {
             bottom: 20
         )
         
-        /// Spacing between horizontal buttons.  Defaults to `10`.
+        /// Spacing between horizontal buttons.  Set to `10`.
         public var horizontalButtonSpacing: CGFloat = 10
         
-        /// Spacing between vertical buttons.  Defaults to `5`.
+        /// Spacing between vertical buttons.  Set to `5`.
         public var verticalButtonSpacing: CGFloat = 5
         
-        /// Edges ignored by keyboard. Defaults to `[]`.
+        /// Edges ignored by keyboard. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
 
         // MARK: Initializers
@@ -142,10 +142,10 @@ public struct VAlertUIModel {
         /// Shadow color.
         public var shadow: Color = .clear
         
-        /// Shadow radius. Defaults to `0`.
+        /// Shadow radius. Set to `0`.
         public var shadowRadius: CGFloat = 0
         
-        /// Shadow offset. Defaults to `zero`.
+        /// Shadow offset. Set to `zero`.
         public var shadowOffset: CGSize = .zero
         
         /// Dimming view color.
@@ -207,10 +207,10 @@ public struct VAlertUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `16` and weight `bold`.
+        /// Title font. Set to system font of size `16` and weight `bold`.
         public var title: Font = .system(size: 16, weight: .bold)
         
-        /// Message font. Defaults to system font of size `15`.
+        /// Message font. Set to system font of size `15`.
         public var message: Font = .system(size: 14)
         
         // MARK: Initializers

@@ -31,30 +31,30 @@ public struct VPrimaryButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button height. Defaults to `56`.
+        /// Button height. Set to `56`.
         public var height: CGFloat = GlobalUIModel.Buttons.dimensionLarge
         
-        /// Corner radius. Defaults to `16`.
+        /// Corner radius. Set to `16`.
         public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusSmall
         
-        /// Border width. Defaults to `0`.
+        /// Border width. Set to `0`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Label margins. Defaults to `15` horizontal and `3` vertical.
+        /// Label margins. Set to `15` horizontal and `3` vertical.
         public var labelMargins: LabelMargins = .init(
             horizontal: GlobalUIModel.Buttons.labelMargins.horizontal + 5,
             vertical: GlobalUIModel.Buttons.labelMargins.vertical
         )
         
-        /// Icon size. Defaults to `20` by `20`.
+        /// Icon size. Set to `20` by `20`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
         
-        /// Title minimum scale factor. Defaults to `0.75`.
+        /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Spacing between icon and title. Defaults to `8`.
+        /// Spacing between icon and title. Set to `8`.
         ///
         /// Applicable only if icon `init` with icon and title is used.
         public var iconTitleSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
@@ -62,7 +62,7 @@ public struct VPrimaryButtonUIModel {
         /// Model for customizing spinner layout.
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Layout = .init()
         
-        /// Spacing between label and spinner. Defaults to `20`.
+        /// Spacing between label and spinner. Set to `20`.
         ///
         /// Only visible when state is set to `loading`.
         public var labelSpinnerSpacing: CGFloat = 20
@@ -100,13 +100,13 @@ public struct VPrimaryButtonUIModel {
         /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(ColorBook.primaryWhite)
         
-        /// Icon opacities. Defaults to `1`s.
+        /// Icon opacities. Set to `1`s.
         ///
         /// Applied to all images. But should be used for bitmap images.
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities. Defaults to `1` enabled, `0.3` pressed, `0.3` loading, and `0.3` disabled.
+        /// Custom label opacities. Set to `1` enabled, `0.3` pressed, `0.3` loading, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
@@ -144,7 +144,7 @@ public struct VPrimaryButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Defaults to system font of size `16` with `semibold` weight.
+        /// Title font. Set to system font of size `16` with `semibold` weight.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeLarge, weight: .semibold)

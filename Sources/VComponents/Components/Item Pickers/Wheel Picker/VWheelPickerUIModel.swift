@@ -29,22 +29,22 @@ public struct VWheelPickerUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Picker corner radius. Defaults to `15`.
+        /// Picker corner radius. Set to `15`.
         public var cornerRadius: CGFloat = 15
         
-        /// Header text line type. Defaults to `singleLine`.
+        /// Header text line type. Set to `singleLine`.
         public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
         
-        /// Footer text line type. Defaults to `multiline` with `leading` alignment and `1...5` lines.
+        /// Footer text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
         public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
         
-        /// Spacing between header, picker, and footer. Defaults to `3`.
+        /// Spacing between header, picker, and footer. Set to `3`.
         public var headerPickerFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
         
-        /// Header and footer horizontal margin. Defaults to `10`.
+        /// Header and footer horizontal margin. Set to `10`.
         public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
-        /// Title minimum scale factor. Defaults to `0.75`.
+        /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         // MARK: Initializers
@@ -67,7 +67,7 @@ public struct VWheelPickerUIModel {
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Custom content opacities. Defaults to `1` enabled and `0.3` disabled.
+        /// Custom content opacities. Set to `1` enabled and `0.3` disabled.
         ///
         /// Applicable only when `init` with content is used.
         /// When using a custom content, it's subviews cannot be configured with individual colors,
@@ -106,13 +106,13 @@ public struct VWheelPickerUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font. Defaults to system font of size `14`.
+        /// Header font. Set to system font of size `14`.
         public var header: Font = GlobalUIModel.Common.headerFont
         
-        /// Footer font. Defaults to system font of size `13`.
+        /// Footer font. Set to system font of size `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
-        /// Row font. Defaults to system font of size `14` with `medium` weight.
+        /// Row font. Set to system font of size `14` with `medium` weight.
         ///
         /// Only applicable when using `init` with title.
         public var rows: Font = .system(size: 14, weight: .medium)

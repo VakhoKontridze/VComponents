@@ -31,31 +31,31 @@ public struct VTextViewUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Textfield min height. Defaults to `50`.
+        /// Textfield min height. Set to `50`.
         public var minHeight: CGFloat = GlobalUIModel.Inputs.height
         
-        /// Textfield corner radius. Defaults to `12`.
+        /// Textfield corner radius. Set to `12`.
         public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
 
-        /// Text line type. Defaults to `multiline` with `leading` alignment and no limit on lines.
+        /// Text line type. Set to `multiline` with `leading` alignment and no limit on lines.
         public var textLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: nil)
 
-        /// Textfield border width. Defaults to `0`.
+        /// Textfield border width. Set to `0`.
         public var borderWidth: CGFloat = 0
 
-        /// Content margin. Defaults to `15`s.
+        /// Content margin. Set to `15`s.
         public var contentMargin: Margins = .init(GlobalUIModel.Common.containerContentMargin)
 
-        /// Header text line type. Defaults to `singleLine`.
+        /// Header text line type. Set to `singleLine`.
         public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
         
-        /// Footer text line type. Defaults to `multiline` with `leading` alignment and `1...5` lines.
+        /// Footer text line type. Set to `multiline` with `leading` alignment and `1...5` lines.
         public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
         
-        /// Spacing between header, textview, and footer. Defaults to `3`.
+        /// Spacing between header, textview, and footer. Set to `3`.
         public var headerTextViewFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
         
-        /// Header and footer horizontal margin. Defaults to `10`.
+        /// Header and footer horizontal margin. Set to `10`.
         public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
         // MARK: Initializers
