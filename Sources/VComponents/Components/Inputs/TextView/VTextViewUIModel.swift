@@ -38,9 +38,9 @@ public struct VTextViewUIModel {
         
         /// Textfield corner radius. Defaults to `12`.
         public var cornerRadius: CGFloat = textFieldReference.layout.cornerRadius
-
-        /// Textfield text alignment. Defaults to `default`.
-        public var textAlignment: TextAlignment = textFieldReference.layout.textAlignment
+        
+        /// Text line type. Defaults to `none`.
+        public var textLineType: TextLineType = .multiLine(alignment: textFieldReference.layout.textAlignment, lineLimit: nil)
 
         /// Textfield border width. Defaults to `1`.
         public var borderWidth: CGFloat = textFieldReference.layout.borderWidth

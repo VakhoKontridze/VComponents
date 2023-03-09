@@ -155,6 +155,26 @@ extension VTextField {
     }
 }
 
+// MARK: - V Text View
+extension VTextView {
+    @available(*, unavailable, message: "Pass type to UI model instead")
+    public init(
+        uiModel: VTextViewUIModel = .init(),
+        type textLineLimitType: TextLineLimitType,// = .none,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        placeholder: String? = nil,
+        text: Binding<String>
+    ) {
+        fatalError()
+    }
+}
+
+extension VTextViewUIModel {
+    @available(*, unavailable, message: "Use `textLineType` instead")
+    public var textAlignment: TextAlignment { fatalError() }
+}
+
 // MARK: - V List
 @available(*, deprecated, message: "Pass type to UI model instead")
 public typealias VListRowSeparatorType = VListRowUIModel.Layout.SeparatorType

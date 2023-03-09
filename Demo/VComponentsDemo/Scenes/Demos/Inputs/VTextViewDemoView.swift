@@ -23,7 +23,7 @@ struct VTextViewDemoView: View {
     @State private var hasHeader: Bool = true
     @State private var hasFooter: Bool = true
     @State private var numericalKeyboard: Bool = false
-    @State private var textAlignment: TextAlignment = VTextViewUIModel.Layout().textAlignment
+    @State private var textAlignment: TextAlignment = VTextViewUIModel.Layout().textLineType.textAlignment ?? .leading
     @State private var autocapitalization: Bool = false
     @State private var autocorrection: Bool = false
     @State private var hasClearButton: Bool = VTextViewUIModel.Misc().hasClearButton
@@ -31,7 +31,7 @@ struct VTextViewDemoView: View {
     private var uiModel: VTextViewUIModel {
         var uiModel: VTextViewUIModel = .init()
         
-        uiModel.layout.textAlignment = textAlignment
+        uiModel.layout.textLineType = .multiLine(alignment: textAlignment, lineLimit: nil)
         
         uiModel.colors = {
             switch textViewHighlight {
@@ -70,7 +70,6 @@ struct VTextViewDemoView: View {
             
             VTextView(
                 uiModel: uiModel,
-                type: textLineLimitType.textLineLimitType,
                 headerTitle: hasHeader ? "Lorem ipsum dolor sit amet" : nil,
                 footerTitle: hasFooter ? "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tincidunt ante at finibus cursus." : nil,
                 placeholder: hasPlaceholder ? "Lorem ipsum" : nil,
