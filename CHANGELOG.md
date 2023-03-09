@@ -4,6 +4,7 @@
 
 General
 
+- `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - Demo app replaced with details component previews
 - Some colors are changed throughout the package
 - `ColorBook.accent` is renamed to `ColorBook.accentBlue`
@@ -258,13 +259,13 @@ VSideBar
 VAlert
 
 - Alert now builds actions using `resultBuilder`
-- `VAlertPresentable` is added in style of `AlertPresentable` from `VCore`
+- `VAlertPresentable` is added in style of `AlertPresentable` from [VCore](https://github.com/VakhoKontridze/VCore)
 
 VConfirmationDialog
 
 - ConfirmationDialog now builds actions using `resultBuilder`
 - ConfirmationDialog API is updated to match `VAlert`
-- `VConfirmationDialogPresentable` is added in style of `ConfirmationDialogPresentable` from `VCore`
+- `VConfirmationDialogPresentable` is added in style of `ConfirmationDialogPresentable` from [VCore](https://github.com/VakhoKontridze/VCore)
 
 VMenu
 
@@ -284,7 +285,7 @@ VToast
 
 VSpinner
 
-- `VSpinnerPresentable` is added in style of `ProgressViewPresentable` from `VCore`
+- `VSpinnerPresentable` is added in style of `ProgressViewPresentable` from [VCore](https://github.com/VakhoKontridze/VCore)
 
 VText
 
@@ -294,9 +295,9 @@ Other
 
 - `PickableEnumeration` is renamed to `HashableEnumeration`
 - `PickableTitledEnumeration` is renamed to `StringRepresentableHashableEnumeration`
-- `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to `VCore`
-- `GenericState`s and `GenericStateModels`s are moved to `VCore`
-- `BasicAnimation` is moved to `VCore`
+- `HashableEnumeration` and `CustomStringConvertibleHashableEnumeration` are moved to [VCore](https://github.com/VakhoKontridze/VCore)
+- `GenericState`s and `GenericStateModels`s are moved to [VCore](https://github.com/VakhoKontridze/VCore)
+- `BasicAnimation` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - pressed and disabled `Color`s in `ColorBook` are updated, to be `0.3` opacity of original reference `Color`s
 
 ### [2.3.4(26)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.4) — *2022 07 04*
@@ -309,13 +310,13 @@ General
 
 Models
 
-- `EdgeInsets`s are renamed to full names from `VCore`
+- `EdgeInsets`s are renamed to full names from [VCore](https://github.com/VakhoKontridze/VCore)
 
 ### [2.3.2(24)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.2) — *2022 07 04*
 
 Other
 
-- `VCore` is updated to the latest version
+- [VCore](https://github.com/VakhoKontridze/VCore) is updated to the latest version
 
 ### [2.3.1(23)](https://github.com/VakhoKontridze/VComponents/releases/tag/2.3.1) — *2022 07 04*
 
@@ -338,7 +339,7 @@ VSideBar
 
 VBaseButton
 
-- Button is deprecated, use `SwiftUIBaseButton` from `VCore`
+- Button is deprecated, use `SwiftUIBaseButton` from [VCore](https://github.com/VakhoKontridze/VCore)
 
 VTextField
 
