@@ -4,6 +4,7 @@
 
 General
 
+- Demo app replaced with details component previews
 - Some colors are changed throughout the package
 - `ColorBook.accent` is renamed to `ColorBook.accentBlue`
 - "TitleLineType" used in names is changed to "TextLineType"
