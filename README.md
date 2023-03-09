@@ -7,7 +7,6 @@
 - [Components](#components)
 - [Brand Book](#brand-book)
 - [Guidelines](#guidelines)
-- [Demo](#demo)
 - [Installation](#installation)
 - [Versioning](#versioning)
 - [Contact](#contact)
@@ -223,12 +222,6 @@ Components manage state parameters internally, and animations used to change the
 Thought process behind his design choice was to centralize animations to UI model.
 
 Components also prevent themselves from modifying external state with an animation.
-
-## Demo
-
-Package contains demo app, that can be run to showcase all components.
-
-<img width="700" src="https://user-images.githubusercontent.com/57289621/170541609-a6773104-f17d-4397-ac21-6593f858f90e.jpg">
 
 ## Installation
 
