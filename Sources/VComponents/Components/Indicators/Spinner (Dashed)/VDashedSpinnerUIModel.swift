@@ -11,8 +11,6 @@ import SwiftUI
 /// Model that describes UI.
 public struct VDashedSpinnerUIModel {
     // MARK: Properties
-    fileprivate static let continuousSpinnerReference: VContinuousSpinnerUIModel = .init()
-    
     /// Model that contains color properties.
     public var colors: Colors = .init()
     
@@ -25,7 +23,7 @@ public struct VDashedSpinnerUIModel {
     public struct Colors {
         // MARK: Properties
         /// Spinner color.
-        public var spinner: Color = continuousSpinnerReference.colors.spinner
+        public var spinner: Color = ColorBook.accentBlue
         
         // MARK: Initializers
         /// Initializes UI model with default values.

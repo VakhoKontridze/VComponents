@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VWheelPickerUIModel {
     // MARK: Properties
-    fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -34,20 +32,20 @@ public struct VWheelPickerUIModel {
         /// Picker corner radius. Defaults to `15`.
         public var cornerRadius: CGFloat = 15
         
-        /// Header title line type. Defaults to `singleline`.
-        public var headerTitleLineType: TextLineType = segmentedPickerReference.layout.headerTitleLineType
+        /// Header text line type. Defaults to `singleLine`.
+        public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
         
-        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
-        public var footerTitleLineType: TextLineType = segmentedPickerReference.layout.footerTitleLineType
+        /// Footer text line type. Defaults to `multiline` with `leading` alignment and `1...5` lines.
+        public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
         
         /// Spacing between header, picker, and footer. Defaults to `3`.
-        public var headerPickerFooterSpacing: CGFloat = segmentedPickerReference.layout.headerPickerFooterSpacing
+        public var headerPickerFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
         
         /// Header and footer horizontal margin. Defaults to `10`.
-        public var headerMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
+        public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = segmentedPickerReference.layout.titleMinimumScaleFactor
+        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -64,20 +62,32 @@ public struct VWheelPickerUIModel {
         /// Title content colors.
         ///
         /// Only applicable when using `init` with title.
-        public var title: StateColors = .init(segmentedPickerReference.colors.title)
+        public var title: StateColors = .init(
+            enabled: ColorBook.primary,
+            disabled: ColorBook.primaryPressedDisabled
+        )
         
-        /// Custom content opacities.
+        /// Custom content opacities. Defaults to `1` enabled and `0.3` disabled.
         ///
         /// Applicable only when `init` with content is used.
         /// When using a custom content, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = .init(segmentedPickerReference.colors.customContentOpacities)
+        public var customContentOpacities: StateOpacities = .init(
+            enabled: 1,
+            disabled: GlobalUIModel.ItemPickers.customContentOpacityDisabled
+        )
         
         /// Header colors.
-        public var header: StateColors = segmentedPickerReference.colors.header
+        public var header: StateColors = .init(
+            enabled: ColorBook.secondary,
+            disabled: ColorBook.secondaryPressedDisabled
+        )
         
         /// Footer colors.
-        public var footer: StateColors = segmentedPickerReference.colors.footer
+        public var footer: StateColors = .init(
+            enabled: ColorBook.secondary,
+            disabled: ColorBook.secondaryPressedDisabled
+        )
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -97,15 +107,15 @@ public struct VWheelPickerUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Header font. Defaults to system font of size `14`.
-        public var header: Font = segmentedPickerReference.fonts.header
+        public var header: Font = GlobalUIModel.Common.headerFont
         
         /// Footer font. Defaults to system font of size `13`.
-        public var footer: Font = segmentedPickerReference.fonts.footer
+        public var footer: Font = GlobalUIModel.Common.footerFont
         
-        /// Row font
+        /// Row font. Defaults to system font of size `14` with `medium` weight.
         ///
         /// Only applicable when using `init` with title.
-        public var rows: Font = segmentedPickerReference.fonts.rows
+        public var rows: Font = .system(size: 14, weight: .medium)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

@@ -142,7 +142,7 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
     
     private func labelTitleComponent(title: String) -> some View {
         VText(
-            type: uiModel.layout.titleLabelLineType,
+            type: uiModel.layout.titleLabelTextLineType,
             minimumScaleFactor: uiModel.layout.titleLabelMinimumScaleFactor,
             color: uiModel.colors.titleLabel.value(for: internalState),
             font: uiModel.fonts.titleLabel,
@@ -168,11 +168,73 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VRoundedLabeledButton_Previews: PreviewProvider {
+    private static var icon: Image { .init(systemName: "swift") }
+    private static var titleLabel: String { "Lorem Ipsum" }
+    
     static var previews: some View {
-        VRoundedLabeledButton(
-            action: { print("Clicked") },
-            icon: .init(systemName: "swift"),
-            titleLabel: "Lorem Ipsum"
-        )
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VRoundedLabeledButton(
+                    action: { print("Clicked") },
+                    icon: icon,
+                    titleLabel: titleLabel
+                )
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Enabled",
+                    content: {
+                        VRoundedLabeledButton(
+                            action: {},
+                            icon: icon,
+                            titleLabel: titleLabel
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed",
+                    content: {
+                        VRoundedLabeledButton(
+                            uiModel: {
+                                var uiModel: VRoundedLabeledButtonUIModel = .init()
+                                uiModel.colors.background.enabled = uiModel.colors.background.pressed
+                                uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
+                                uiModel.colors.titleLabel.enabled = uiModel.colors.titleLabel.pressed
+                                return uiModel
+                            }(),
+                            action: {},
+                            icon: icon,
+                            titleLabel: titleLabel
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        VRoundedLabeledButton(
+                            action: {},
+                            icon: icon,
+                            titleLabel: titleLabel
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
+        }
     }
 }

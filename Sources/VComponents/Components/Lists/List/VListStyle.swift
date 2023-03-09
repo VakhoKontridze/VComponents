@@ -7,19 +7,11 @@
 
 import SwiftUI
 
-// MARK: - V List Style Extension
+// MARK: - V List Style
 extension View {
     /// Applies list style that supports `VListRow`.
     public func vListStyle() -> some View {
         self
-            .modifier(VListStyle())
-    }
-}
-
-// MARK: - V List Style
-struct VListStyle: ViewModifier {
-    func body(content: Content) -> some View {
-        content
             .listStyle(.plain)
             .environment(\.defaultMinListRowHeight, 0)
     }

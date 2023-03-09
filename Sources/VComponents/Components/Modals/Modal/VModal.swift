@@ -21,7 +21,7 @@ struct VModal<Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    @State private var headerLabel: VModalHeaderLabelPreferenceKey.Value = VModalHeaderLabelPreferenceKey.defaultValue
+    @State private var headerLabel: GenericLabel_EmptyTitleCustom<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -202,23 +202,65 @@ struct VModal<Content>: View
 
 // MARK: - Previews
 struct VModal_Previews: PreviewProvider {
+    private static func content() -> some View {
+        ColorBook.accentBlue
+            .vModalHeaderTitle("Lorem Ipsum")
+    }
+    
     static var previews: some View {
-        VModal(
-            uiModel: .init(),
-            onPresent: nil,
-            onDismiss: nil,
-            content: {
-                List(content: {
-                    ForEach(0..<20, content: { num in
-                        VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                        })
-                    })
-                })
-                    .vListStyle()
-                    .vModalHeaderTitle("Lorem Ipsum")
-            }
-        )
+        ColorSchemePreview(title: nil, content: Preview.init)
+        InsettedContentPreview().previewDisplayName("Insetted Content")
+        FullSizedContentPreview().previewDisplayName("Full-Sized Content")
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VModal(
+                    uiModel: {
+                        var uiModel: VModalUIModel = .init()
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: content
+                )
+            })
+        }
+    }
+    
+    private struct InsettedContentPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VModal(
+                    uiModel: {
+                        var uiModel: VModalUIModel = .insettedContent
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: content
+                )
+            })
+        }
+    }
+    
+    private struct FullSizedContentPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VModal(
+                    uiModel: {
+                        var uiModel: VModalUIModel = .fullSizedContent
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: { ColorBook.accentBlue }
+                )
+            })
+        }
     }
 }

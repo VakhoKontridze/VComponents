@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - Extension
+// MARK: - Presentation Host Presentation Mode Extension
 extension View {
     func presentationHostPresentationMode(
         _ presentationHostExternalDismiss: PresentationHostPresentationMode

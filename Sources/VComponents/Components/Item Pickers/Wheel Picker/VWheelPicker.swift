@@ -196,24 +196,24 @@ public struct VWheelPicker<Data, Content>: View
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: uiModel.layout.headerTitleLineType,
+                type: uiModel.layout.headerTextLineType,
                 color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: uiModel.layout.footerTitleLineType,
+                type: uiModel.layout.footerTextLineType,
                 color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerMarginHorizontal)
+                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -253,31 +253,70 @@ public struct VWheelPicker<Data, Content>: View
 
 // MARK: - Preview
 struct VWheelPicker_Previews: PreviewProvider {
+    private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
+    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+    
+    private static var rowTitles: [String] {
+        [
+            "January", "February", "March",
+            "April", "May", "June",
+            "July", "August", "September",
+            "October", "November", "December"
+        ]
+    }
+    private static var selection: String { rowTitles[rowTitles.count/2] }
+
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
     }
     
     private struct Preview: View {
-        private static var rowTitles: [String] {
-            [
-                "January", "February", "March",
-                "April", "May", "June",
-                "July", "August", "September",
-                "October", "November", "December"
-            ]
-        }
-        
-        
-        @State private var selection: String = rowTitles.first!
+        @State private var selection: String = VWheelPicker_Previews.selection
         
         var body: some View {
-            VWheelPicker(
-                selection: $selection,
-                headerTitle: "Lorem ipsum dolor sit amet",
-                footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                rowTitles: Self.rowTitles
-            )
-                .padding()
+            PreviewContainer(content: {
+                VWheelPicker(
+                    selection: $selection,
+                    headerTitle: headerTitle,
+                    footerTitle: footerTitle,
+                    rowTitles: rowTitles
+                )
+                    .padding()
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Enabled",
+                    content: {
+                        VWheelPicker(
+                            selection: .constant(selection),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            rowTitles: rowTitles
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        VWheelPicker(
+                            selection: .constant(selection),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            rowTitles: rowTitles
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
         }
     }
 }

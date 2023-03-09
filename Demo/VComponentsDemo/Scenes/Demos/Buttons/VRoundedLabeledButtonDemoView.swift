@@ -31,7 +31,7 @@ struct VRoundedLabeledButtonDemoView: View {
 
         if labelType == .iconTitle {
             uiModel.layout.labelWidthMax = .infinity
-            uiModel.layout.titleLabelLineType = .singleLine
+            uiModel.layout.titleLabelTextLineType = .singleLine
         }
 
         return uiModel

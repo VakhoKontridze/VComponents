@@ -101,7 +101,12 @@ public struct VSlider: View {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
                         .foregroundColor(uiModel.colors.thumb.value(for: internalState))
-                        .shadow(color: uiModel.colors.thumbShadow.value(for: internalState), radius: uiModel.layout.thumbShadowRadius)
+                        .shadow(
+                            color: uiModel.colors.thumbShadow.value(for: internalState),
+                            radius: uiModel.layout.thumbShadowRadius,
+                            x: uiModel.layout.thumbShadowOffset.width,
+                            y: uiModel.layout.thumbShadowOffset.height
+                        )
                     
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
                         .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
@@ -161,16 +166,63 @@ public struct VSlider: View {
 
 // MARK: - Preview
 struct VSlider_Previews: PreviewProvider {
+    private static var value: Double { 0.5 }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
     }
     
     private struct Preview: View {
-        @State private var value: Double = 0.5
+        @State private var value: Double = VSlider_Previews.value
         
         var body: some View {
-            VSlider(value: $value)
-                .padding()
+            PreviewContainer(content: {
+                VSlider(value: $value)
+                    .padding()
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Enabled",
+                    content: {
+                        VSlider(value: .constant(value))
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        VSlider(value: .constant(value))
+                            .disabled(true)
+                    }
+                )
+                
+                PreviewSectionHeader("Native")
+
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Enabled",
+                    content: {
+                        Slider(value: .constant(value))
+                    }
+                )
+
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        Slider(value: .constant(value))
+                            .disabled(true)
+                    }
+                )
+            })
         }
     }
 }

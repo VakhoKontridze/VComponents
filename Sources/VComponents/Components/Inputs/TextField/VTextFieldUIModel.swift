@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VTextFieldUIModel {
     // MARK: Properties
-    fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
-    fileprivate static let segmentedPickerReference: VSegmentedPickerUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -38,22 +35,22 @@ public struct VTextFieldUIModel {
     public struct Layout {
         // MARK: Properties
         /// Textfield height. Defaults to `50`.
-        public var height: CGFloat = 50
+        public var height: CGFloat = GlobalUIModel.Inputs.height
         
         /// Textfield corner radius. Defaults to `12`.
-        public var cornerRadius: CGFloat = 12
+        public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
         
         /// Textfield text alignment. Defaults to `default`.
         public var textAlignment: TextAlignment = .leading
         
-        /// Textfield border width. Defaults to `1`.
-        public var borderWidth: CGFloat = 1
+        /// Textfield border width. Defaults to `0`.
+        public var borderWidth: CGFloat = 0
         
         /// Content type. Defaults to `default`.
         public var contentType: ContentType = .default
         
         /// Content horizontal margin. Defaults to `15`.
-        public var contentMarginHorizontal: CGFloat = 15
+        public var contentMarginHorizontal: CGFloat = GlobalUIModel.Common.containerContentMargin
         
         /// Spacing between text and buttons. Defaults to `10`.
         public var contentSpacing: CGFloat = 10
@@ -62,37 +59,37 @@ public struct VTextFieldUIModel {
         public var searchIconDimension: CGFloat = 15
         
         /// Model for customizing clear button layout. `dimension` defaults to `22`, `iconSize` defaults to `8` by `8`, and `hitBox` defaults to `zero`.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
+            
             uiModel.dimension = 22
             uiModel.iconSize = .init(dimension: 8)
             uiModel.hitBox = .zero
+            
             return uiModel
         }()
         
         /// Model for customizing visibility button layout. `iconSize` defaults to `20` by `20` and `hitBox` defaults to `zero`.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Layout = {
             var uiModel: VPlainButtonUIModel.Layout = .init()
+            
             uiModel.iconSize = .init(dimension: 20)
             uiModel.hitBox = .zero
+            
             return uiModel
         }()
         
-        /// Header title line type. Defaults to `singleline`.
-        public var headerTitleLineType: TextLineType = .singleLine
+        /// Header text line type. Defaults to `singleLine`.
+        public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
         
-        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
-        public var footerTitleLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...5)
-
+        /// Footer text line type. Defaults to `multiline` with `leading` alignment and `1...5` lines.
+        public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
+        
         /// Spacing between header, textfield, and footer. Defaults to `3`.
-        public var headerTextFieldFooterSpacing: CGFloat = segmentedPickerReference.layout.headerPickerFooterSpacing
+        public var headerTextFieldFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
         
         /// Header and footer horizontal margin. Defaults to `10`.
-        public var headerFooterMarginHorizontal: CGFloat = segmentedPickerReference.layout.headerFooterMarginHorizontal
+        public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -152,9 +149,9 @@ public struct VTextFieldUIModel {
         // MARK: Properties
         /// Background colors.
         public var background: StateColors = .init(
-            enabled: segmentedPickerReference.colors.background.enabled,
-            focused: .init(componentAsset: "color_225.225.225_50.50.50"),
-            disabled: segmentedPickerReference.colors.background.disabled
+            enabled: ColorBook.layerGray,
+            focused: GlobalUIModel.Inputs.backgroundColorFocused,
+            disabled: ColorBook.layerGrayDisabled
         )
         
         /// Border colors.
@@ -172,49 +169,49 @@ public struct VTextFieldUIModel {
         
         /// Header colors.
         public var header: StateColors = .init(
-            enabled: segmentedPickerReference.colors.header.enabled,
-            focused: segmentedPickerReference.colors.header.enabled,
-            disabled: segmentedPickerReference.colors.header.disabled
+            enabled: ColorBook.secondary,
+            focused: ColorBook.secondary,
+            disabled: ColorBook.secondaryPressedDisabled
         )
 
         /// Footer colors.
         public var footer: StateColors = .init(
-            enabled: segmentedPickerReference.colors.footer.enabled,
-            focused: segmentedPickerReference.colors.footer.enabled,
-            disabled: segmentedPickerReference.colors.footer.disabled
+            enabled: ColorBook.secondary,
+            focused: ColorBook.secondary,
+            disabled: ColorBook.secondaryPressedDisabled
         )
 
         /// Search icon colors.
         public var searchIcon: StateColors = .init(
-            enabled: .init(componentAsset: "color_70.70.70_240.240.240"),
-            focused: .init(componentAsset: "color_70.70.70_240.240.240"),
-            disabled: ColorBook.primaryPressedDisabled
+            enabled: GlobalUIModel.Inputs.searchIconEnabledFocused,
+            focused: GlobalUIModel.Inputs.searchIconEnabledFocused,
+            disabled: GlobalUIModel.Inputs.searchIconDisabled
         )
         
         /// Model for customizing clear button colors.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
+            
             uiModel.background = .init(
-                enabled: .init(componentAsset: "color_170.170.170_30.30.30"),
-                pressed: .init(componentAsset: "color_150.150.150_20.20.20"),
-                disabled: .init(componentAsset: "color_220.220.220_40.40.40")
+                enabled: GlobalUIModel.Inputs.clearButtonBackgroundEnabled,
+                pressed: GlobalUIModel.Inputs.clearButtonBackgroundPressed,
+                disabled: GlobalUIModel.Inputs.clearButtonBackgroundDisabled
             )
-            uiModel.icon = .init(.init(componentAsset: "color_255.255.255_230.230.230"))
+            uiModel.icon = .init(GlobalUIModel.Inputs.clearButtonIcon)
+            
             return uiModel
         }()
         
         /// Model for customizing visibility button colors.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Colors = {
             var uiModel: VPlainButtonUIModel.Colors = .init()
+            
             uiModel.icon = .init(
-                enabled: .init(componentAsset: "color_70.70.70_240.240.240"),
-                pressed: ColorBook.primaryPressedDisabled,
-                disabled: ColorBook.primaryPressedDisabled
+                enabled: GlobalUIModel.Inputs.visibilityButtonEnabled,
+                pressed: GlobalUIModel.Inputs.visibilityButtonPressedDisabled,
+                disabled: GlobalUIModel.Inputs.visibilityButtonPressedDisabled
             )
+            
             return uiModel
         }()
         
@@ -238,10 +235,10 @@ public struct VTextFieldUIModel {
         public var placeholder: Font = .system(size: 16)
         
         /// Header font. Defaults to system font of size `14`.
-        public var header: Font = segmentedPickerReference.fonts.header
+        public var header: Font = GlobalUIModel.Common.headerFont
         
         /// Footer font. Defaults to system font of size `13`.
-        public var footer: Font = segmentedPickerReference.fonts.footer
+        public var footer: Font = GlobalUIModel.Common.footerFont
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -336,6 +333,8 @@ extension VTextFieldUIModel {
     public static var success: Self {
         var uiModel: Self = .init()
         
+        uiModel.layout.borderWidth = 1
+        
         uiModel.colors = .success
         
         return uiModel
@@ -345,6 +344,8 @@ extension VTextFieldUIModel {
     public static var warning: Self {
         var uiModel: Self = .init()
         
+        uiModel.layout.borderWidth = 1
+        
         uiModel.colors = .warning
         
         return uiModel
@@ -353,6 +354,8 @@ extension VTextFieldUIModel {
     /// `VTextFieldUIModel` that applies error color scheme.
     public static var error: Self {
         var uiModel: Self = .init()
+        
+        uiModel.layout.borderWidth = 1
         
         uiModel.colors = .error
         
@@ -364,61 +367,44 @@ extension VTextFieldUIModel.Colors {
     /// `VTextFieldUIModel.Colors` that applies green color scheme.
     public static var success: Self {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "color_235.250.240_130.180.140"),
-            backgroundFocused: .init(componentAsset: "color_235.250.240_130.180.140"),
-            enabled: .init(componentAsset: "color_85.195.135"),
-            focused: .init(componentAsset: "color_85.195.135")
+            background: ColorBook.layerGreen,
+            foreground: ColorBook.borderGreen
         )
     }
 
     /// `VTextFieldUIModel.Colors` that applies yellow color scheme.
     public static var warning: Self {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "color_255.250.240_240.200.100"),
-            backgroundFocused: .init(componentAsset: "color_255.250.240_240.200.100"),
-            enabled: .init(componentAsset: "color_255.190.35"),
-            focused: .init(componentAsset: "color_255.190.35")
+            background: ColorBook.layerYellow,
+            foreground: ColorBook.borderYellow
         )
     }
 
     /// `VTextFieldUIModel.Colors` that applies error color scheme.
     public static var error: Self {
         .createHighlightedColors(
-            backgroundEnabled: .init(componentAsset: "color_250.240.240_220.125.125"),
-            backgroundFocused: .init(componentAsset: "color_250.240.240_220.125.125"),
-            enabled: .init(componentAsset: "color_235.110.105"),
-            focused: .init(componentAsset: "color_235.110.105")
+            background: ColorBook.layerRed,
+            foreground: ColorBook.borderRed
         )
     }
     
     private static func createHighlightedColors(
-        backgroundEnabled: Color,
-        backgroundFocused: Color,
-        enabled: Color,
-        focused: Color
+        background: Color,
+        foreground: Color
     ) -> Self {
         var colors: Self = .init()
         
-        colors.background.enabled = backgroundEnabled
-        colors.background.focused = backgroundFocused
+        colors.background.enabled = background
+        colors.background.focused = background
         
-        colors.border.enabled = enabled
-        colors.border.focused = focused
+        colors.border.enabled = foreground
+        colors.border.focused = foreground
         
-        //colors.text
+        colors.header.enabled = foreground
+        colors.header.focused = foreground
         
-        colors.header.enabled = enabled
-        colors.header.focused = focused
-        
-        colors.footer.enabled = enabled
-        colors.footer.focused = focused
-        
-        //colors.searchIcon
-        
-        //colors.visibilityButtonIcon
-        
-        //colors.clearButtonBackground
-        //colors.clearButtonIcon
+        colors.footer.enabled = foreground
+        colors.footer.focused = foreground
         
         return colors
     }

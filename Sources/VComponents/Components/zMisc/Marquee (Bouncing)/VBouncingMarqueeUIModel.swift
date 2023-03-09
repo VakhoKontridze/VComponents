@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VBouncingMarqueeUIModel {
     // MARK: Properties
-    fileprivate static let wrappingMarqueeReference: VWrappingMarqueeUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -32,7 +30,7 @@ public struct VBouncingMarqueeUIModel {
     public struct Layout {
         // MARK: Properties
         /// Scroll direction. Defaults to `leftToRight`.
-        public var scrollDirection: LayoutDirection = wrappingMarqueeReference.layout.scrollDirection
+        public var scrollDirection: LayoutDirection = .leftToRight
         
         /// Content inset. Defaults to `0`.
         ///
@@ -40,10 +38,10 @@ public struct VBouncingMarqueeUIModel {
         /// Alternately, use `insettedGradient` instance of `VBouncingMarqueeUIModel`.
         ///
         /// For best result, should be greater than or equal to `gradientWidth`.
-        public var inset: CGFloat = wrappingMarqueeReference.layout.inset
+        public var inset: CGFloat = 0
         
         /// Horizontal alignment for non-scrolling stationary content. Defaults to `leading`.
-        public var alignmentStationary: HorizontalAlignment = wrappingMarqueeReference.layout.alignmentStationary
+        public var alignmentStationary: HorizontalAlignment = .leading
         
         // MARK: Initializers
         /// Initializes UI model with default values.

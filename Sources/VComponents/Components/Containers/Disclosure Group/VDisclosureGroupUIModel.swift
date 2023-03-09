@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VDisclosureGroupUIModel {
     // MARK: Properties
-    fileprivate static let sheetReference: VSheetUIModel = .init()
-    fileprivate static let listRowReference: VListRowUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -39,33 +36,30 @@ public struct VDisclosureGroupUIModel {
     public struct Layout {
         // MARK: Properties
         /// Disclosure group corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = 15
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
         /// Header margins. Defaults to `15` horizontal and  `10` vertical.
-        public var headerMargins: Margins = .init(
-            horizontal: sheetReference.layout.contentMargin,
-            vertical: 10
-        )
+        public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
 
         /// Model for customizing chevron button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
-            uiModel.dimension = 30
-            uiModel.iconSize = .init(dimension: 12)
+            
+            uiModel.dimension = GlobalUIModel.Common.circularButtonGrayDimension
+            uiModel.iconSize = .init(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
+            
             return uiModel
         }()
         
         /// Divider height. Defaults to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`.
-        public var dividerHeight: CGFloat = CGFloat(2) / UIScreen.main.scale
+        public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
         
-        /// Divider margins .Defaults to `15` horizontal and  `0` vertical.
+        /// Divider margins. Defaults to `15` horizontal and  `0` vertical.
         public var dividerMargins: Margins = .init(
-            horizontal: sheetReference.layout.contentMargin,
+            horizontal: GlobalUIModel.Common.containerContentMargin,
             vertical: 0
         )
         
@@ -86,7 +80,7 @@ public struct VDisclosureGroupUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background color.
-        public var background: Color = sheetReference.colors.background
+        public var background: Color = ColorBook.layer
         
         /// Header title colors.
         ///
@@ -109,23 +103,23 @@ public struct VDisclosureGroupUIModel {
         )
         
         /// Divider color.
-        public var divider: Color = listRowReference.colors.separator
+        public var divider: Color = GlobalUIModel.Common.dividerColor
         
         /// Model for customizing chevron button colors.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
+            
             uiModel.background = .init(
-                enabled: .init(componentAsset: "color_235.235.235_55.55.55"),
-                pressed: .init(componentAsset: "color_210.210.210_45.45.45"),
-                disabled: .init(componentAsset: "color_250.250.250_80.80.80")
+                enabled: GlobalUIModel.Common.circularButtonBackgroundColorEnabled,
+                pressed: GlobalUIModel.Common.circularButtonBackgroundColorPressed,
+                disabled: GlobalUIModel.Common.circularButtonBackgroundColorDisabled
             )
             uiModel.icon = .init(
-                enabled: ColorBook.primary,
-                pressed: ColorBook.primary, // Looks better without `primaryPressedDisabled`
-                disabled: ColorBook.primaryBlackPressedDisabled
+                enabled: GlobalUIModel.Common.circularButtonIconPrimaryColorEnabled,
+                pressed: GlobalUIModel.Common.circularButtonIconPrimaryColorPressed,
+                disabled: GlobalUIModel.Common.circularButtonIconPrimaryColorDisabled
             )
+            
             return uiModel
         }()
         

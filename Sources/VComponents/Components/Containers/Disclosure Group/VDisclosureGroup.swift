@@ -208,32 +208,116 @@ extension VDisclosureGroupInternalState {
 
 // MARK: - Previews
 struct VDisclosureGroup_Previews: PreviewProvider {
+    private static var headerTitle: String { "Lorem Ipsum" }
+
+    private static func content() -> some View {
+        ColorBook.accentBlue
+            .frame(height: 100)
+    }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+        InsettedContentPreview().previewDisplayName("Insetted Content")
     }
     
     private struct Preview: View {
-        @State private var isExpanded: Bool = true
+        @State private var state: VDisclosureGroupState = .expanded
         
         var body: some View {
-            ZStack(alignment: .top, content: {
-                ColorBook.canvas.ignoresSafeArea()
-
+            PreviewContainer(hasLayer: false, content: {
                 VDisclosureGroup(
-                    isExpanded: $isExpanded,
-                    headerTitle: "Lorem Ipsum",
-                    content: {
-                        LazyVStack(spacing: 0, content: {
-                            ForEach(0..<10, content: { num in
-                                VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                                    Text(String(num))
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                })
-                            })
-                        })
-                    }
+                    state: $state,
+                    headerTitle: headerTitle,
+                    content: content
                 )
                     .padding()
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(hasLayer: false, content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Collapsed",
+                    content: {
+                        VDisclosureGroup(
+                            state: .constant(.collapsed),
+                            headerTitle: headerTitle,
+                            content: content
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Expanded",
+                    content: {
+                        VDisclosureGroup(
+                            state: .constant(.expanded),
+                            headerTitle: headerTitle,
+                            content: content
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Pressed (Button)",
+                    content: {
+                        VDisclosureGroup(
+                            uiModel: {
+                                var uiModel: VDisclosureGroupUIModel = .init()
+                                uiModel.colors.chevronButtonSubUIModel.background.enabled = uiModel.colors.chevronButtonSubUIModel.background.pressed
+                                uiModel.colors.chevronButtonSubUIModel.icon.enabled = uiModel.colors.chevronButtonSubUIModel.icon.pressed
+                                return uiModel
+                            }(),
+                            state: .constant(.collapsed),
+                            headerTitle: headerTitle,
+                            content: content
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        VDisclosureGroup(
+                            uiModel: { // Needed for some reason
+                                var uiModel: VDisclosureGroupUIModel = .init()
+                                uiModel.colors.chevronButtonSubUIModel.background.enabled = uiModel.colors.chevronButtonSubUIModel.background.disabled
+                                uiModel.colors.chevronButtonSubUIModel.icon.enabled = uiModel.colors.chevronButtonSubUIModel.icon.disabled
+                                return uiModel
+                            }(),
+                            state: .constant(.expanded),
+                            headerTitle: headerTitle,
+                            content: content
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
+        }
+    }
+    
+    private struct InsettedContentPreview: View {
+        var body: some View {
+            PreviewContainer(hasLayer: false, content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Insetted Content",
+                    content: {
+                        VDisclosureGroup(
+                            uiModel: .insettedContent,
+                            state: .constant(.expanded),
+                            headerTitle: headerTitle,
+                            content: content
+                        )
+                    }
+                )
             })
         }
     }

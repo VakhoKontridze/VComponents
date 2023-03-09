@@ -360,41 +360,99 @@ extension Int {
 }
 
 // MARK: - Preview
-struct VPageIndicatorCompact_Previews: PreviewProvider {
+struct VCompactPageIndicator_Previews: PreviewProvider {
+    private static var total: Int { 10 }
+    private static var selectedIndex: Int { 0 }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        LayoutDirectionsPreview().previewDisplayName("Layout Directions")
     }
     
     private struct Preview: View {
-        private let total: Int = 10
-        @State private var selectedIndex: Int = 0
+        @State private var selectedIndex: Int = VCompactPageIndicator_Previews.selectedIndex
         
         var body: some View {
-            VStack(spacing: 20, content: {
-                ForEach(LayoutDirectionOmni.allCases, id: \.self, content: { direction in
-                    VCompactPageIndicator<Never>(
-                        uiModel: {
-                            var uiModel: VCompactPageIndicatorUIModel = .init()
-                            uiModel.layout.direction = direction
-                            return uiModel
-                        }(),
-                        total: total,
-                        selectedIndex: selectedIndex,
-                        dotContent: .default
-                    )
-                })
-            })
-                .onReceive(
-                    Timer.publish(every: 1, on: .main, in: .common).autoconnect(),
-                    perform: updateValue
+            PreviewContainer(content: {
+                VCompactPageIndicator(
+                    total: total,
+                    selectedIndex: selectedIndex
                 )
+                    .onReceiveOfTimerIncrement($selectedIndex, to: total-1)
+            })
         }
+    }
+    
+    private struct LayoutDirectionsPreview: View {
+        @State private var selectedIndex: Int = VCompactPageIndicator_Previews.selectedIndex
         
-        private func updateValue(_ output: Date) {
-            var valueToSet: Int = selectedIndex + 1
-            if valueToSet > total-1 { valueToSet = 0 }
-            
-            selectedIndex = valueToSet
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Left-to-Right",
+                    content: {
+                        VCompactPageIndicator(
+                            uiModel: {
+                                var uiModel: VCompactPageIndicatorUIModel = .init()
+                                uiModel.layout.direction = .leftToRight
+                                return uiModel
+                            }(),
+                            total: total,
+                            selectedIndex: selectedIndex
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Right-to-Left",
+                    content: {
+                        VCompactPageIndicator(
+                            uiModel: {
+                                var uiModel: VCompactPageIndicatorUIModel = .init()
+                                uiModel.layout.direction = .rightToLeft
+                                return uiModel
+                            }(),
+                            total: total,
+                            selectedIndex: selectedIndex
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Top-to-Bottom",
+                    content: {
+                        VCompactPageIndicator(
+                            uiModel: {
+                                var uiModel: VCompactPageIndicatorUIModel = .init()
+                                uiModel.layout.direction = .topToBottom
+                                return uiModel
+                            }(),
+                            total: total,
+                            selectedIndex: selectedIndex
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Bottom-to-Top",
+                    content: {
+                        VCompactPageIndicator(
+                            uiModel: {
+                                var uiModel: VCompactPageIndicatorUIModel = .init()
+                                uiModel.layout.direction = .bottomToTop
+                                return uiModel
+                            }(),
+                            total: total,
+                            selectedIndex: selectedIndex
+                        )
+                    }
+                )
+            })
+                .onReceiveOfTimerIncrement($selectedIndex, to: total-1)
         }
     }
 }

@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VSliderUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
-    fileprivate static let toggleReference: VToggleUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -33,10 +30,10 @@ public struct VSliderUIModel {
     public struct Layout {
         // MARK: Properties
         /// Slider height. Defaults to `10`.
-        public var height: CGFloat = 10
+        public var height: CGFloat = GlobalUIModel.Common.barHeight
         
         /// Slider corner radius. Defaults to `5`.
-        public var cornerRadius: CGFloat = 5
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
         /// Indicates if slider rounds progress view right-edge. Defaults to `true`.
         public var roundsProgressViewRightEdge: Bool = true
@@ -52,16 +49,19 @@ public struct VSliderUIModel {
         /// Thumb dimension. Defaults to `20`.
         ///
         /// To hide thumb, set to `0`.
-        public var thumbDimension: CGFloat = 20
+        public var thumbDimension: CGFloat = GlobalUIModel.ValuePickers.sliderThumbDimension
         
         /// Thumb corner radius. Defaults to `10`.
-        public var thumbCornerRadius: CGFloat = 10
+        public var thumbCornerRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbCornerRadius
         
         /// Thumb border widths. Defaults to `0`.
         public var thumbBorderWidth: CGFloat = 0
         
         /// Thumb shadow radius. Defaults to `2`.
-        public var thumbShadowRadius: CGFloat = 2
+        public var thumbShadowRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbShadowRadius
+        
+        /// Thumb shadow offset. Defaults to `0` width and  `2` height.
+        public var thumbShadowOffset: CGSize = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -74,32 +74,26 @@ public struct VSliderUIModel {
         // MARK: Properties
         /// Slider track colors.
         public var track: StateColors = .init(
-            enabled: toggleReference.colors.fill.off,
-            disabled: toggleReference.colors.fill.disabled
+            enabled: ColorBook.layerGray,
+            disabled: ColorBook.layerGrayDisabled
         )
         
         /// Slider progress colors.
         public var progress: StateColors = .init(
-            enabled: toggleReference.colors.fill.on,
-            disabled: primaryButtonReference.colors.background.disabled
+            enabled: ColorBook.accentBlue,
+            disabled: ColorBook.accentBluePressedDisabled
         )
         
         /// Thumb colors.
-        public var thumb: StateColors = .init(
-            enabled: toggleReference.colors.thumb.on,
-            disabled: toggleReference.colors.thumb.on
-        )
+        public var thumb: StateColors = .init(ColorBook.white)
         
         /// Thumb border colors.
-        public var thumbBorder: StateColors = .init(
-            enabled: .init(componentAsset: "color_96.96.96"),
-            disabled: .init(componentAsset: "color_192.192.192")
-        )
+        public var thumbBorder: StateColors = .clearColors
         
         /// Thumb shadow colors.
         public var thumbShadow: StateColors = .init(
-            enabled: .init(componentAsset: "color_96.96.96.50"),
-            disabled: .init(componentAsset: "color_96.96.96.20")
+            enabled: GlobalUIModel.Common.shadowColorEnabled,
+            disabled: GlobalUIModel.Common.shadowColorDisabled
         )
         
         // MARK: Initializers

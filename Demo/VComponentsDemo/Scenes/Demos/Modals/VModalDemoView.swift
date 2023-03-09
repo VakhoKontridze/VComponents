@@ -79,7 +79,7 @@ struct VModalDemoView: View {
         VCheckBox(
             uiModel: {
                 var uiModel: VCheckBoxUIModel = .init()
-                uiModel.layout.titleLineType = .singleLine
+                uiModel.layout.titleTextLineType = .singleLine
                 return uiModel
             }(),
             isOn: .init(

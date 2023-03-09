@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VToggleUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -46,10 +44,10 @@ public struct VToggleUIModel {
         public var thumbDimension: CGFloat = 27
         
         /// Spacing between toggle and label. Defaults to `5`.
-        public var toggleLabelSpacing: CGFloat = 5
+        public var toggleLabelSpacing: CGFloat = GlobalUIModel.StatePickers.statePickerLabelSpacing
         
-        /// Title line type. Defaults to `multiline` of `1...2` lines.
-        public var titleLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...2)
+        /// Title text line type. Defaults to `multiline` with `leading` alignment and `1...2` lines.
+        public var titleTextLineType: TextLineType = GlobalUIModel.StatePickers.titleTextLineType
         
         /// Title minimum scale factor. Defaults to `1`.
         public var titleMinimumScaleFactor: CGFloat = 1
@@ -72,21 +70,15 @@ public struct VToggleUIModel {
         // MARK: Properties
         /// Fill colors.
         public var fill: StateColors = .init(
-            off: .init(componentAsset: "color_233.233.233_55.55.55"),
-            on: primaryButtonReference.colors.background.enabled,
-            pressedOff: .init(componentAsset: "color_220.220.220_70.70.70"),
-            pressedOn: primaryButtonReference.colors.background.pressed,
-            disabled: .init(componentAsset: "color_244.244.244_40.40.40")
+            off: ColorBook.layerGray,
+            on: ColorBook.controlLayerBlue,
+            pressedOff: ColorBook.layerGrayPressed,
+            pressedOn: ColorBook.controlLayerBluePressed,
+            disabled: ColorBook.layerGrayDisabled
         )
         
         /// Thumb colors.
-        public var thumb: StateColors = .init(
-            off: .init(componentAsset: "color_254.254.254"),
-            on: .init(componentAsset: "color_254.254.254"),
-            pressedOff: .init(componentAsset: "color_254.254.254"),
-            pressedOn: .init(componentAsset: "color_254.254.254"),
-            disabled: .init(componentAsset: "color_254.254.254")
-        )
+        public var thumb: StateColors = .init(ColorBook.white)
         
         /// Title colors.
         public var title: StateColors = .init(
@@ -97,7 +89,7 @@ public struct VToggleUIModel {
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Custom label opacities.
+        /// Custom label opacities. Defaults to `1` off, `1` on, `1` pressed off, `1` pressed on, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
@@ -107,7 +99,7 @@ public struct VToggleUIModel {
             on: 1,
             pressedOff: 1,
             pressedOn: 1,
-            disabled: 0.3
+            disabled: GlobalUIModel.StatePickers.customLabelOpacityDisabled
         )
         
         // MARK: Initializers
@@ -130,7 +122,7 @@ public struct VToggleUIModel {
         /// Title font. Defaults to system font of size `15`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: 15)
+        public var title: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -142,7 +134,7 @@ public struct VToggleUIModel {
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
-        public var stateChange: Animation? = .easeIn(duration: 0.1)
+        public var stateChange: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
         
         // MARK: Initializers
         /// Initializes UI model with default values.

@@ -40,7 +40,7 @@ struct VBottomSheetDemoView: View {
         }
 
         if !hasTitle && !dismissType.hasButton {
-            uiModel.layout.grabberMargins = VBottomSheetUIModel.noHeaderLabel.layout.grabberMargins
+            uiModel.layout.grabberMargins = VBottomSheetUIModel.onlyGrabber.layout.grabberMargins
         } else {
             uiModel.layout.contentMargins = VBottomSheetUIModel.insettedContent.layout.contentMargins
         }
@@ -138,7 +138,7 @@ struct VBottomSheetDemoView: View {
         VCheckBox(
             uiModel: {
                 var uiModel: VCheckBoxUIModel = .init()
-                uiModel.layout.titleLineType = .singleLine
+                uiModel.layout.titleTextLineType = .singleLine
                 return uiModel
             }(),
             isOn: .init(
@@ -159,7 +159,7 @@ struct VBottomSheetDemoView: View {
         ZStack(content: {
             switch autoresizesContent {
             case false:
-                ColorBook.accent
+                ColorBook.accentBlue
                 
             case true:
                 List(content: {

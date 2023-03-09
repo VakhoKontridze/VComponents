@@ -13,10 +13,6 @@ import VCore
 ///
 /// UI Model, placeholder, header, and footer can be passed as parameters.
 ///
-/// By default, component type is `standard`.
-/// If `secure` type is used, visibility button would replace clear button. When textfield is secure and text is empty, and buttons are not visible.
-/// If `search` type is used, a magnification glass icon would appear on the left.
-///
 ///     @State private var text: String = ""
 ///
 ///     var body: some View {
@@ -174,7 +170,7 @@ public struct VTextField: View {
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: uiModel.layout.headerTitleLineType,
+                type: uiModel.layout.headerTextLineType,
                 color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
@@ -186,7 +182,7 @@ public struct VTextField: View {
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: uiModel.layout.footerTitleLineType,
+                type: uiModel.layout.footerTextLineType,
                 color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle
@@ -305,30 +301,184 @@ public struct VTextField: View {
 
 // MARK: - Preview
 struct VTextField_Previews: PreviewProvider {
+    private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
+    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+    private static var placeholder: String { "Lorem ipsum" }
+    private static var text: String { "Lorem ipsum" }
+    
+    private static let contentType: VTextFieldUIModel.Layout.ContentType = .standard
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+        ColorSchemePreview(title: "Highlights", content: HighlightsPreview.init)
     }
     
     private struct Preview: View {
-        @State private var text: String = "Lorem ipsum"
+        @State private var text: String = VTextField_Previews.text
         
         var body: some View {
-            VStack(spacing: 50, content: {
-                ForEach(VTextFieldUIModel.Layout.ContentType.allCases, id: \.self, content: { contentType in
-                    VTextField(
-                        uiModel: {
-                            var uiModel: VTextFieldUIModel = .init()
-                            uiModel.layout.contentType = contentType
-                            return uiModel
-                        }(),
-                        headerTitle: "Lorem ipsum dolor sit amet",
-                        footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                        placeholder: "Lorem ipsum",
-                        text: $text
-                    )
-                })
+            PreviewContainer(content: {
+                VTextField(
+                    uiModel: {
+                        var uiModel: VTextFieldUIModel = .init()
+                        uiModel.layout.contentType = contentType
+                        return uiModel
+                    }(),
+                    headerTitle: headerTitle,
+                    footerTitle: footerTitle,
+                    placeholder: placeholder,
+                    text: $text
+                )
+                    .padding()
             })
-                .padding()
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Enabled",
+                    content: {
+                        VTextField(
+                            uiModel: {
+                                var uiModel: VTextFieldUIModel = .init()
+                                uiModel.layout.contentType = contentType
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Focused",
+                    content: {
+                        VTextField(
+                            uiModel: {
+                                var uiModel: VTextFieldUIModel = .init()
+                                uiModel.layout.contentType = contentType
+                                uiModel.colors.background.enabled = uiModel.colors.background.focused
+                                uiModel.colors.text.enabled = uiModel.colors.text.focused
+                                uiModel.colors.header.enabled = uiModel.colors.header.focused
+                                uiModel.colors.footer.enabled = uiModel.colors.footer.focused
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Pressed (Button)",
+                    content: {
+                        VTextField(
+                            uiModel: {
+                                var uiModel: VTextFieldUIModel = .init()
+                                uiModel.layout.contentType = contentType
+                                uiModel.colors.clearButtonSubUIModel.background.enabled = uiModel.colors.clearButtonSubUIModel.background.pressed
+                                uiModel.colors.clearButtonSubUIModel.icon.enabled = uiModel.colors.clearButtonSubUIModel.icon.pressed
+                                uiModel.colors.visibilityButtonSubUIModel.icon.enabled = uiModel.colors.visibilityButtonSubUIModel.icon.pressed
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        VTextField(
+                            uiModel: {
+                                var uiModel: VTextFieldUIModel = .init()
+                                uiModel.layout.contentType = contentType
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
+        }
+    }
+    
+    // No focus or disabled state is supported, so there's no need to exhaust them.
+    private struct HighlightsPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Success",
+                    content: {
+                        VTextField(
+                            uiModel: {
+                                var uiModel: VTextFieldUIModel = .success
+                                uiModel.layout.contentType = contentType
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Warning",
+                    content: {
+                        VTextField(
+                            uiModel: {
+                                var uiModel: VTextFieldUIModel = .warning
+                                uiModel.layout.contentType = contentType
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Error",
+                    content: {
+                        VTextField(
+                            uiModel: {
+                                var uiModel: VTextFieldUIModel = .error
+                                uiModel.layout.contentType = contentType
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+            })
         }
     }
 }

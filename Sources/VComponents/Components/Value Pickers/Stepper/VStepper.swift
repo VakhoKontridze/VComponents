@@ -218,21 +218,95 @@ public struct VStepper: View {
 
 // MARK: - Preview
 struct VStepper_Previews: PreviewProvider {
+    private static var range: ClosedRange<Int> { 1...10 }
+    private static var value: Int { 5 }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
     }
     
     private struct Preview: View {
-        @State private var value: Int = 5
+        @State private var value: Int = VStepper_Previews.value
         
         var body: some View {
-            VStack(content: {
-                VStepper(
-                    range: 1...10,
-                    value: $value
+            PreviewContainer(content: {
+                VStack(content: {
+                    VStepper(
+                        range: range,
+                        value: $value
+                    )
+                    
+                    Text(String(value))
+                })
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Enabled",
+                    content: {
+                        VStepper(
+                            range: range,
+                            value: .constant(value)
+                        )
+                    }
                 )
                 
-                Text(String(value))
+                // Color is also applied to other rows.
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed (Row)",
+                    content: {
+                        VStepper(
+                            uiModel: {
+                                var uiModel: VStepperUIModel = .init()
+                                uiModel.colors.buttonBackground.enabled = uiModel.colors.buttonBackground.pressed
+                                uiModel.colors.buttonIcon.enabled = uiModel.colors.buttonIcon.pressed
+                                return uiModel
+                            }(),
+                            range: range,
+                            value: .constant(value)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        VStepper(
+                            range: range,
+                            value: .constant(value)
+                        )
+                            .disabled(true)
+                    }
+                )
+                
+                PreviewSectionHeader("Native")
+
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Enabled",
+                    content: {
+                        Stepper("", value: .constant(value), in: range)
+                            .labelsHidden()
+                    }
+                )
+
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        Stepper("", value: .constant(value), in: range)
+                            .labelsHidden()
+                            .disabled(true)
+                    }
+                )
             })
         }
     }

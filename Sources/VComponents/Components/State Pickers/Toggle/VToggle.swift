@@ -128,7 +128,7 @@ public struct VToggle<Label>: View where Label: View {
 
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: uiModel.layout.titleLineType,
+                            type: uiModel.layout.titleTextLineType,
                             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                             color: uiModel.colors.title.value(for: internalState),
                             font: uiModel.fonts.title,
@@ -203,18 +203,141 @@ public struct VToggle<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VToggle_Previews: PreviewProvider {
+    private static var title: String { "Lorem Ipsum" }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
     }
     
     private struct Preview: View {
         @State private var state: VToggleState = .on
         
         var body: some View {
-            VToggle(
-                state: $state,
-                title: "Lorem Ipsum"
-            )
+            PreviewContainer(content: {
+                VToggle(
+                    state: $state,
+                    title: title
+                )
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Off",
+                    content: {
+                        VToggle(
+                            state: .constant(.off),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed Off",
+                    content: {
+                        VToggle(
+                            uiModel: {
+                                var uiModel: VToggleUIModel = .init()
+                                uiModel.colors.fill.off = uiModel.colors.fill.pressedOff
+                                uiModel.colors.thumb.off = uiModel.colors.thumb.pressedOff
+                                uiModel.colors.title.off = uiModel.colors.title.pressedOff
+                                return uiModel
+                            }(),
+                            state: .constant(.off),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "On",
+                    content: {
+                        VToggle(
+                            state: .constant(.on),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed On",
+                    content: {
+                        VToggle(
+                            uiModel: {
+                                var uiModel: VToggleUIModel = .init()
+                                uiModel.colors.fill.on = uiModel.colors.fill.pressedOn
+                                uiModel.colors.thumb.on = uiModel.colors.thumb.pressedOn
+                                uiModel.colors.title.on = uiModel.colors.title.pressedOn
+                                return uiModel
+                            }(),
+                            state: .constant(.on),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        VToggle(
+                            state: .constant(.off),
+                            title: title
+                        )
+                            .disabled(true)
+                    }
+                )
+                
+                PreviewSectionHeader("Native")
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Off",
+                    content: {
+                        Toggle(
+                            "",
+                            isOn: .constant(false)
+                        )
+                            .labelsHidden()
+                            .padding(.trailing, 95)
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "On",
+                    content: {
+                        Toggle(
+                            "",
+                            isOn: .constant(true)
+                        )
+                            .labelsHidden()
+                            .padding(.trailing, 95)
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        Toggle(
+                            "",
+                            isOn: .constant(false)
+                        )
+                            .labelsHidden()
+                            .disabled(true)
+                            .padding(.trailing, 95)
+                    }
+                )
+            })
         }
     }
 }

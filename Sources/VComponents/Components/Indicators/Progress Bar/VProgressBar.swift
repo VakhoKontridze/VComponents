@@ -85,7 +85,18 @@ public struct VProgressBar: View {
 // MARK: - Preview
 struct VProgressBar_Previews: PreviewProvider {
     static var previews: some View {
-        VProgressBar(value: 0.5)
-            .padding()
+        ColorSchemePreview(title: nil, content: Preview.init)
+    }
+    
+    private struct Preview: View {
+        @State private var value: Double = 0
+        
+        var body: some View {
+            PreviewContainer(content: {
+                VProgressBar(value: value)
+                    .padding()
+            })
+                .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
+        }
     }
 }

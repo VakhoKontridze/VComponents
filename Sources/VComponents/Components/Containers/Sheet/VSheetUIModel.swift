@@ -29,10 +29,10 @@ public struct VSheetUIModel {
         public var roundedCorners: UIRectCorner = .allCorners
         
         /// Corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = 15
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
         /// Content margin. Defaults to `15`.
-        public var contentMargin: CGFloat = 15
+        public var contentMargin: CGFloat = GlobalUIModel.Common.containerContentMargin
         
         // MARK: Initializers
         /// Initializes UI model with default values.

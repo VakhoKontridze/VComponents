@@ -22,7 +22,7 @@ struct VToastDemoView: View {
     
     private var uiModel: VToastUIModel {
         var uiModel: VToastUIModel = .init()
-        uiModel.layout.textLineType = textLineType.textLineType
+        uiModel.layout.titleTextLineType = textLineType.textLineType
         uiModel.layout.presentationEdge = presentationEdge
         return uiModel
     }

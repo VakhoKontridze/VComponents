@@ -142,11 +142,93 @@ public struct VPlainButton<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VPlainButton_Previews: PreviewProvider {
+    private static var title: String { "Lorem Ipsum" }
+    
     static var previews: some View {
-        VPlainButton(
-            action: { print("Clicked") },
-            title: "Lorem Ipsum"
-        )
-            .padding()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VPlainButton(
+                    action: { print("Clicked") },
+                    title: title
+                )
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Enabled",
+                    content: {
+                        VPlainButton(
+                            action: {},
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed",
+                    content: {
+                        VPlainButton(
+                            uiModel: {
+                                var uiModel: VPlainButtonUIModel = .init()
+                                uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                return uiModel
+                            }(),
+                            action: {},
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        VPlainButton(
+                            action: {},
+                            title: title
+                        )
+                            .disabled(true)
+                    }
+                )
+                
+                PreviewSectionHeader("Native")
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Enabled",
+                    content: {
+                        Button(
+                            title,
+                            action: {}
+                        )
+                            .font(VPlainButtonUIModel.Fonts().title)
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        Button(
+                            title,
+                            action: {}
+                        )
+                            .font(VPlainButtonUIModel.Fonts().title)
+                            .disabled(true)
+                    }
+                )
+            })
+        }
     }
 }

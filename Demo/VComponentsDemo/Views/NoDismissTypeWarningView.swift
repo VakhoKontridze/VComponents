@@ -45,7 +45,7 @@ struct NoDismissTypeWarningView: View {
             )
         })
             .padding(15)
-            .background(ColorBook.accent.opacity(0.75))
+            .background(ColorBook.accentBlue.opacity(0.75))
             .cornerRadius(10)
             .padding(15)
     }

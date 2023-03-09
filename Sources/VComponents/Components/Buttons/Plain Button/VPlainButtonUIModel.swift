@@ -12,10 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VPlainButtonUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
-    fileprivate static let secondaryButtonReference: VSecondaryButtonUIModel = .init()
-    fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -34,15 +30,15 @@ public struct VPlainButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Icon size. Defaults to `20` by `20`.
-        public var iconSize: CGSize = roundedButtonReference.layout.iconSize
+        public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
+        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         /// Spacing between icon and title. Defaults to `8`.
         ///
         /// Applicable only if icon `init` with icon and title is used.
-        public var iconTitleSpacing: CGFloat = secondaryButtonReference.layout.iconTitleSpacing
+        public var iconTitleSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
         /// Hit box. Defaults to `5`s.
         public var hitBox: HitBox = .init(5)
@@ -62,9 +58,9 @@ public struct VPlainButtonUIModel {
         // MARK: Properties
         /// Title colors.
         public var title: StateColors = .init(
-            enabled: ColorBook.accent,
-            pressed: ColorBook.accentPressedDisabled,
-            disabled: ColorBook.accentPressedDisabled
+            enabled: ColorBook.accentBlue,
+            pressed: ColorBook.accentBluePressedDisabled,
+            disabled: ColorBook.accentBluePressedDisabled
         )
         
         /// Icon colors.
@@ -72,23 +68,27 @@ public struct VPlainButtonUIModel {
         /// Applied to all images. But should be used for vector images.
         /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(
-            enabled: ColorBook.accent,
-            pressed: ColorBook.accentPressedDisabled,
-            disabled: ColorBook.accentPressedDisabled
+            enabled: ColorBook.accentBlue,
+            pressed: ColorBook.accentBluePressedDisabled,
+            disabled: ColorBook.accentBluePressedDisabled
         )
         
         /// Icon opacities. Defaults to `1`s.
         ///
         /// Applied to all images. But should be used for bitmap images.
         /// In order to use vector images, set this to `1`s.
-        public var iconOpacities: StateOpacities = .init(primaryButtonReference.colors.iconOpacities)
+        public var iconOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities.
+        /// Custom label opacities. Defaults to `1` enabled, `0.3` pressed, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
-        public var customLabelOpacities: StateOpacities = .init(primaryButtonReference.colors.customLabelOpacities)
+        public var customLabelOpacities: StateOpacities = .init(
+            enabled: 1,
+            pressed: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled,
+            disabled: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled
+        )
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -110,7 +110,7 @@ public struct VPlainButtonUIModel {
         /// Title font. Defaults to system font of size `15` with `medium` weight.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: 15, weight: .medium)
+        public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeSmall, weight: .medium)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

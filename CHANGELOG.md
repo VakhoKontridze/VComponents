@@ -1,5 +1,57 @@
 # Change Log
 
+### 4.0.0(30)
+
+General
+
+- Some colors are changed throughout the package
+- `ColorBook.accent` is renamed to `ColorBook.accentBlue`
+- "TitleLineType" used in names is changed to "TextLineType"
+
+VCheckBox
+
+- `borderWith` is renamed to `borderWidth` in `VCheckBoxUIModel`
+
+VRadioButton
+
+- `borderWith` is renamed to `borderWidth` in `VRadioButtonUIModel`
+
+VSegmentedPicker
+
+- `indicatorShadowOffsetX` and `indicatorShadowOffsetY` are replaced with `indicatorShadowOffset` in `VSegmentedPickerUIModel`
+- `indicatorShadow.width` is changed from `0` to `1`
+
+VWheelPicker
+
+- `headerMarginHorizontal` is renamed to `headerFooterMarginHorizontal` in `VWheelPickerUIModel`
+
+VStepper
+
+- `iconDimension` is changed from `15` to `14`
+
+VSlider
+
+- `thumbShadowOffset` is added to `VSliderUIModel`
+- `border` colors are set to `clearColors` in `VSliderUIModel`, since `borderWidth` was `0`
+
+VRangeSlider
+
+- `thumbShadowOffset` is added to `VRangeSliderUIModel`
+- `border` colors are set to `clearColors` in `VRangeSliderUIModel`, since `borderWidth` was `0`
+
+VBottomSheet
+
+- `VBottomSheetUIModel.noHeaderLabel` is renamed to `VBottomSheetUIModel.onlyGrabber`
+
+VAlert
+
+- `titleLineLimit` is replaced with `titleLineType` in `VAlertUIModel`
+- `messageLineLimit` is replaced with `messageLineType` in `VAlertUIModel`
+
+VContinuousSpinner
+
+- `borderWidth` is renamed to `thickness` in `VContinuousSpinnerUIModel`
+
 ### 3.2.0(29)
 
 General

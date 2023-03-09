@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VSegmentedPickerUIModel {
     // MARK: Properties
-    fileprivate static let toggleReference: VToggleUIModel = .init()
-    fileprivate static let sliderReference: VSliderUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -53,29 +50,26 @@ public struct VSegmentedPickerUIModel {
         /// Indicator shadow radius. Defaults to `1`.
         public var indicatorShadowRadius: CGFloat = 1
         
-        /// Indicator shadow X offset. Defaults to `0`.
-        public var indicatorShadowOffsetX: CGFloat = 0
-        
-        /// Indicator shadow Y offset. Defaults to `1`.
-        public var indicatorShadowOffsetY: CGFloat = 1
+        /// Indicator shadow offset. Defaults to `1` width and  `1` height.
+        public var indicatorShadowOffset: CGSize = .init(dimension: 1)
         
         /// Row content margin. Defaults to `2`.
         public var contentMargin: CGFloat = 2
         
-        /// Header title line type. Defaults to `singleline`.
-        public var headerTitleLineType: TextLineType = .singleLine
+        /// Header text line type. Defaults to `singleLine`.
+        public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
         
-        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
-        public var footerTitleLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...5)
+        /// Footer text line type. Defaults to `multiline` with `leading` alignment and `1...5` lines.
+        public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
         
         /// Spacing between header, picker, and footer. Defaults to `3`.
-        public var headerPickerFooterSpacing: CGFloat = 3
+        public var headerPickerFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
         
         /// Header and footer horizontal margin. Defaults to `10`.
-        public var headerFooterMarginHorizontal: CGFloat = 10
+        public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = 0.75
+        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         /// Row divider size. Defaults to width `1` and height `19`, similarly to native picker.
         public var dividerSize: CGSize = .init(width: 1, height: 19)
@@ -91,20 +85,20 @@ public struct VSegmentedPickerUIModel {
         // MARK: Properties
         /// Background colors.
         public var background: StateColors = .init(
-            enabled: .init(componentAsset: "color_240.240.240_40.40.40"),
-            disabled: toggleReference.colors.fill.disabled
+            enabled: ColorBook.layerGray,
+            disabled: ColorBook.layerGrayDisabled
         )
         
         /// Selection indicator colors.
         public var indicator: StateColors = .init(
-            enabled: .init(componentAsset: "color_254.254.254_90.90.90"),
-            disabled: .init(componentAsset: "color_254.254.254_60.60.60")
+            enabled: .init(module: "SegmentedPicker.Indicator"),
+            disabled: .init(module: "SegmentedPicker.Indicator.Disabled")
         )
         
         /// Selection indicator shadow colors.
         public var indicatorShadow: StateColors = .init(
-            enabled: sliderReference.colors.thumbShadow.enabled,
-            disabled: sliderReference.colors.thumbShadow.disabled
+            enabled: GlobalUIModel.Common.shadowColorEnabled,
+            disabled: GlobalUIModel.Common.shadowColorDisabled
         )
         
         /// Title colors.
@@ -116,21 +110,21 @@ public struct VSegmentedPickerUIModel {
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Custom content opacities.
+        /// Custom content opacities. Defaults to `1` enabled, `0.3` pressed, and `0.3` disabled.
         ///
         /// Applicable only when `init` with content is used.
         /// When using a custom content, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customContentOpacities: RowStateOpacities = .init(
             enabled: 1,
-            pressed: 0.3,
-            disabled: 0.3
+            pressed: GlobalUIModel.ItemPickers.customContentOpacityDisabled,
+            disabled: GlobalUIModel.ItemPickers.customContentOpacityDisabled
         )
         
         /// Row divider colors.
         public var divider: StateColors = .init(
-            enabled: .init(componentAsset: "color_215.215.215_70.70.70"),
-            disabled: .init(componentAsset: "color_230.230.230_50.50.50")
+            enabled: GlobalUIModel.Common.dividerDashColorEnabled,
+            disabled: GlobalUIModel.Common.dividerDashColorDisabled
         )
         
         /// Header colors.
@@ -166,10 +160,10 @@ public struct VSegmentedPickerUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Header font. Defaults to system font of size `14`.
-        public var header: Font = .system(size: 14)
+        public var header: Font = GlobalUIModel.Common.headerFont
         
         /// Footer font. Defaults to system font of size `13`.
-        public var footer: Font = .system(size: 13)
+        public var footer: Font = GlobalUIModel.Common.footerFont
         
         /// Row font. Defaults to system font of size `14` with `medium` weight.
         ///

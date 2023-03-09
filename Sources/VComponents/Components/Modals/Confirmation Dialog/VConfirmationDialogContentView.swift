@@ -24,3 +24,32 @@ struct VConfirmationDialogContentView: View {
         })
     }
 }
+
+// MARK: - Preview
+struct VConfirmationDialogContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ColorSchemePreview(title: nil, content: Preview.init)
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VPlainButton(
+                    action: {},
+                    title: "Present"
+                )
+                    .vConfirmationDialog(
+                        isPresented: .constant(true),
+                        title: "Lorem Ipsum Dolor Sit Amet",
+                        message: "Lorem ipsum dolor sit amet",
+                        actions: {
+                            VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
+                            VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
+                            VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
+                            VConfirmationDialogCancelButton(action: nil)
+                        }
+                    )
+            })
+        }
+    }
+}

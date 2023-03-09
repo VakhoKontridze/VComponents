@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - Extension
+// MARK: - Presentation Host Extension
 extension View {
     /// Injects an `UIHostingController` in view hierarchy that can be used to present modals in `UIKit` style.
     ///

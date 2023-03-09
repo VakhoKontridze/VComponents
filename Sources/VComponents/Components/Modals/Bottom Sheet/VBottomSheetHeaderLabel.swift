@@ -10,15 +10,6 @@ import SwiftUI
 // MARK: - V Bottom Sheet Header Label
 typealias VBottomSheetHeaderLabel = GenericLabel_EmptyTitleCustom
 
-// MARK: - V Bottom Sheet Header Label Preference Key
-struct VBottomSheetHeaderLabelPreferenceKey: PreferenceKey {
-    static var defaultValue: VBottomSheetHeaderLabel<AnyView> = .empty
-    
-    static func reduce(value: inout GenericLabel_EmptyTitleCustom<AnyView>, nextValue: () -> GenericLabel_EmptyTitleCustom<AnyView>) {
-        value = nextValue()
-    }
-}
-
 // MARK: - V Bottom Sheet Header Label Extension
 extension View {
     /// Configures `View`'s header title for purposes of presentation inside `VBottomSheet`.
@@ -41,5 +32,14 @@ extension View {
                 key: VBottomSheetHeaderLabelPreferenceKey.self,
                 value: .custom(label: { .init(label()) })
             )
+    }
+}
+
+// MARK: - V Bottom Sheet Header Label Preference Key
+struct VBottomSheetHeaderLabelPreferenceKey: PreferenceKey {
+    static var defaultValue: VBottomSheetHeaderLabel<AnyView> = .empty
+    
+    static func reduce(value: inout GenericLabel_EmptyTitleCustom<AnyView>, nextValue: () -> GenericLabel_EmptyTitleCustom<AnyView>) {
+        value = nextValue()
     }
 }

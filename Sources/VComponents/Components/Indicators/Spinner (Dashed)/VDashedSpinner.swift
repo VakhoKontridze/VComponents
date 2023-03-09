@@ -38,6 +38,14 @@ public struct VDashedSpinner: View {
 // MARK: - Preview
 struct VDashedSpinner_Previews: PreviewProvider {
     static var previews: some View {
-        VDashedSpinner()
+        ColorSchemePreview(title: nil, content: Preview.init)
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VDashedSpinner()
+            })
+        }
     }
 }

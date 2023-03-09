@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VRoundedLabeledButtonUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
-    fileprivate static let roundedButtonReference: VRoundedButtonUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -33,21 +30,21 @@ public struct VRoundedLabeledButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Rectangle dimension. Defaults to `56`.
-        public var roundedRectangleDimension: CGFloat = roundedButtonReference.layout.dimension
+        public var roundedRectangleDimension: CGFloat = GlobalUIModel.Buttons.dimensionLarge
         
-        /// Rectangle corner radius. Defaults to `25`.
-        public var cornerRadius: CGFloat = 25
+        /// Rectangle corner radius. Defaults to `24`.
+        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusLarge
         
         /// Rectangle border width. Defaults to `0`.
         ///
         /// To hide border, set to `0`.
-        public var borderWidth: CGFloat = roundedButtonReference.layout.borderWidth
+        public var borderWidth: CGFloat = 0
         
         /// Icon margins. Defaults to `3`s.
-        public var iconMargins: LabelMargins = roundedButtonReference.layout.labelMargins
+        public var iconMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRounded
         
         /// Icon size. Defaults to `24` by `24`.
-        public var iconSize: CGSize = .init(dimension: 24)
+        public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionLarge)
         
         /// Spacing between rounded rectangle and label. Defaults to `4`.
         public var rectangleLabelSpacing: CGFloat = 4
@@ -55,17 +52,17 @@ public struct VRoundedLabeledButtonUIModel {
         /// Maximum label width. Defaults to `100`.
         public var labelWidthMax: CGFloat = 100
         
-        /// Spacing between icon label and icon title. Defaults to `7`.
-        public var labelSpacing: CGFloat = 7
+        /// Spacing between icon label and icon title. Defaults to `8`.
+        public var labelSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
         /// Icon label size. Defaults to `18` by `18`.
         public var iconLabelSize: CGSize = .init(dimension: 18)
         
-        /// Title label line type. Defaults to `multiline` of `1...2` lines.
-        public var titleLabelLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...2)
+        /// Title label text line type. Defaults to `multiline` with `leading` alignment and `1...2` lines.
+        public var titleLabelTextLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...2)
         
         /// Title label minimum scale factor. Defaults to `0.75`.
-        public var titleLabelMinimumScaleFactor: CGFloat = primaryButtonReference.layout.titleMinimumScaleFactor
+        public var titleLabelMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -86,25 +83,29 @@ public struct VRoundedLabeledButtonUIModel {
         // MARK: Properties
         /// Background colors.
         public var background: StateColors = .init(
-            enabled: roundedButtonReference.colors.background.enabled.opacity(0.25),
-            pressed: roundedButtonReference.colors.background.pressed.opacity(0.25),
-            disabled: roundedButtonReference.colors.background.disabled.opacity(0.25)
+            enabled: ColorBook.controlLayerBlueTransparentColor,
+            pressed: ColorBook.controlLayerBlueTransparentColorPressed,
+            disabled: ColorBook.controlLayerBlueTransparentColorDisabled
         )
         
         /// Border colors.
-        public var border: StateColors = roundedButtonReference.colors.border
+        public var border: StateColors = .clearColors
         
         /// Icon colors.
         ///
         /// Applied to all images. But should be used for vector images.
         /// In order to use bitmap images, set this to `clear`.
-        public var icon: StateColors = .init(primaryButtonReference.colors.background)
+        public var icon: StateColors = .init(
+            enabled: ColorBook.controlLayerBlue,
+            pressed: ColorBook.controlLayerBluePressed,
+            disabled: ColorBook.controlLayerBlueDisabled.opacity(0.5) // Exception to opacity
+        )
         
         /// Icon opacities. Defaults to `1`s.
         ///
         /// Applied to all images. But should be used for bitmap images.
         /// In order to use vector images, set this to `1`s.
-        public var iconOpacities: StateOpacities = roundedButtonReference.colors.iconOpacities
+        public var iconOpacities: StateOpacities = .init(1)
         
         /// Title label colors.
         public var titleLabel: StateColors = .init(
@@ -127,14 +128,18 @@ public struct VRoundedLabeledButtonUIModel {
         ///
         /// Applied to all images. But should be used for bitmap images.
         /// In order to use vector images, set this to `1`s.
-        public var iconLabelOpacities: StateOpacities = roundedButtonReference.colors.iconOpacities
+        public var iconLabelOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities.
+        /// Custom label opacities. Defaults to `1` enabled, `0.3` pressed, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
-        public var customLabelOpacities: StateOpacities = roundedButtonReference.colors.customLabelOpacities
+        public var customLabelOpacities: StateOpacities = .init(
+            enabled: 1,
+            pressed: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled,
+            disabled: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled
+        )
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -156,7 +161,7 @@ public struct VRoundedLabeledButtonUIModel {
         /// Title font. Defaults to system font of size `15.
         ///
         /// Only applicable when using `init` with title.
-        public var titleLabel: Font = .system(size: 15)
+        public var titleLabel: Font = .system(size: GlobalUIModel.Buttons.fontSizeSmall)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

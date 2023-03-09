@@ -40,6 +40,59 @@ import VCore
 ///             .padding()
 ///     }
 ///
+/// Textview can also be focused externally by passing state:
+///
+///     @FocusState private var isFocused: Bool
+///     @State private var text: String = ""
+///
+///     var body: some View {
+///         VTextView(text: $text)
+///             .padding()
+///
+///             .focused($isFocused)
+///             .onAppear(perform: {
+///                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+///                     isFocused = true
+///                 })
+///             })
+///     }
+///
+/// Success textview:
+///
+///     @State private var text: String = ""
+///
+///     var body: some View {
+///         VTextView(
+///             uiModel: .success,
+///             text: $text
+///         )
+///             .padding()
+///     }
+///
+/// Warning textview:
+///
+///     @State private var text: String = ""
+///
+///     var body: some View {
+///         VTextView(
+///             uiModel: .warning,
+///             text: $text
+///         )
+///             .padding()
+///     }
+///
+/// Error textview:
+///
+///     @State private var text: String = ""
+///
+///     var body: some View {
+///         VTextView(
+///             uiModel: .error,
+///             text: $text
+///         )
+///             .padding()
+///     }
+///
 public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel
@@ -86,7 +139,7 @@ public struct VTextView: View {
     @ViewBuilder private var header: some View {
         if let headerTitle, !headerTitle.isEmpty {
             VText(
-                type: uiModel.layout.headerTitleLineType,
+                type: uiModel.layout.headerTextLineType,
                 color: uiModel.colors.header.value(for: internalState),
                 font: uiModel.fonts.header,
                 text: headerTitle
@@ -98,7 +151,7 @@ public struct VTextView: View {
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
-                type: uiModel.layout.footerTitleLineType,
+                type: uiModel.layout.footerTextLineType,
                 color: uiModel.colors.footer.value(for: internalState),
                 font: uiModel.fonts.footer,
                 text: footerTitle
@@ -153,21 +206,133 @@ public struct VTextView: View {
 
 // MARK: - Preview
 struct VTextView_Previews: PreviewProvider {
+    private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
+    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+    private static var placeholder: String { "Lorem ipsum" }
+    private static var text: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+        ColorSchemePreview(title: "Highlights", content: HighlightsPreview.init)
     }
     
     private struct Preview: View {
-        @State private var text: String = "Lorem ipsum"
+        @State private var text: String = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
         
         var body: some View {
-            VTextView(
-                headerTitle: "Lorem ipsum dolor sit amet",
-                footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-                placeholder: "Lorem ipsum",
-                text: $text
-            )
-                .padding()
+            PreviewContainer(content: {
+                VTextView(
+                    headerTitle: headerTitle,
+                    footerTitle: footerTitle,
+                    placeholder: placeholder,
+                    text: $text
+                )
+                    .padding()
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Enabled",
+                    content: {
+                        VTextView(
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Focused",
+                    content: {
+                        VTextView(
+                            uiModel: {
+                                var uiModel: VTextViewUIModel = .init()
+                                uiModel.colors.background.enabled = uiModel.colors.background.focused
+                                uiModel.colors.text.enabled = uiModel.colors.text.focused
+                                uiModel.colors.header.enabled = uiModel.colors.header.focused
+                                uiModel.colors.footer.enabled = uiModel.colors.footer.focused
+                                return uiModel
+                            }(),
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        VTextView(
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
+        }
+    }
+    
+    // No focus or disabled state is supported, so there's no need to exhaust them.
+    private struct HighlightsPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Success",
+                    content: {
+                        VTextView(
+                            uiModel: .success,
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Warning",
+                    content: {
+                        VTextView(
+                            uiModel: .warning,
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Error",
+                    content: {
+                        VTextView(
+                            uiModel: .error,
+                            headerTitle: headerTitle,
+                            footerTitle: footerTitle,
+                            placeholder: placeholder,
+                            text: .constant(text)
+                        )
+                    }
+                )
+            })
         }
     }
 }

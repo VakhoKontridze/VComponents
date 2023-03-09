@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VTextViewUIModel {
     // MARK: Properties
-    fileprivate static let textFieldReference: VTextFieldUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -34,31 +32,31 @@ public struct VTextViewUIModel {
     public struct Layout {
         // MARK: Properties
         /// Textfield min height. Defaults to `50`.
-        public var minHeight: CGFloat = textFieldReference.layout.height
+        public var minHeight: CGFloat = GlobalUIModel.Inputs.height
         
         /// Textfield corner radius. Defaults to `12`.
-        public var cornerRadius: CGFloat = textFieldReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
 
         /// Textfield text alignment. Defaults to `default`.
-        public var textAlignment: TextAlignment = textFieldReference.layout.textAlignment
+        public var textAlignment: TextAlignment = .leading
 
-        /// Textfield border width. Defaults to `1`.
-        public var borderWidth: CGFloat = textFieldReference.layout.borderWidth
+        /// Textfield border width. Defaults to `0`.
+        public var borderWidth: CGFloat = 0
 
-        /// Content margin. Defaults to `15`.
-        public var contentMargin: Margins = .init(textFieldReference.layout.contentMarginHorizontal)
+        /// Content margin. Defaults to `15`s.
+        public var contentMargin: Margins = .init(GlobalUIModel.Common.containerContentMargin)
 
-        /// Header title line type. Defaults to `singleline`.
-        public var headerTitleLineType: TextLineType = textFieldReference.layout.headerTitleLineType
-
-        /// Footer title line type. Defaults to `multiline` of `1...5` lines.
-        public var footerTitleLineType: TextLineType = textFieldReference.layout.footerTitleLineType
-
+        /// Header text line type. Defaults to `singleLine`.
+        public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
+        
+        /// Footer text line type. Defaults to `multiline` with `leading` alignment and `1...5` lines.
+        public var footerTextLineType: TextLineType = GlobalUIModel.Common.footerTextLineType
+        
         /// Spacing between header, textview, and footer. Defaults to `3`.
-        public var headerTextViewFooterSpacing: CGFloat = textFieldReference.layout.headerTextFieldFooterSpacing
-
+        public var headerTextViewFooterSpacing: CGFloat = GlobalUIModel.Common.headerComponentFooterSpacing
+        
         /// Header and footer horizontal margin. Defaults to `10`.
-        public var headerFooterMarginHorizontal: CGFloat = textFieldReference.layout.headerFooterMarginHorizontal
+        public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -74,22 +72,38 @@ public struct VTextViewUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background colors.
-        public var background: StateColors = textFieldReference.colors.background
+        public var background: StateColors = .init(
+            enabled: ColorBook.layerGray,
+            focused: GlobalUIModel.Inputs.backgroundColorFocused,
+            disabled: ColorBook.layerGrayDisabled
+        )
 
         /// Border colors.
-        public var border: StateColors = textFieldReference.colors.border
+        public var border: StateColors = .clearColors
 
         /// Text colors.
-        public var text: StateColors = textFieldReference.colors.text
+        public var text: StateColors = .init(
+            enabled: ColorBook.primary,
+            focused: ColorBook.primary,
+            disabled: ColorBook.primaryPressedDisabled
+        )
         
         /// Placeholder colors.
-        public var placeholder: StateColors = textFieldReference.colors.placeholder
+        public var placeholder: StateColors = .init(ColorBook.primaryPressedDisabled)
 
         /// Header colors.
-        public var header: StateColors = textFieldReference.colors.header
+        public var header: StateColors = .init(
+            enabled: ColorBook.secondary,
+            focused: ColorBook.secondary,
+            disabled: ColorBook.secondaryPressedDisabled
+        )
 
         /// Footer colors.
-        public var footer: StateColors = textFieldReference.colors.footer
+        public var footer: StateColors = .init(
+            enabled: ColorBook.secondary,
+            focused: ColorBook.secondary,
+            disabled: ColorBook.secondaryPressedDisabled
+        )
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -107,4 +121,86 @@ public struct VTextViewUIModel {
     // MARK: Misc
     /// Model that contains misc properties.
     public typealias Misc = VTextFieldUIModel.Misc
+}
+
+// MARK: - Factory
+extension VTextViewUIModel {
+    /// `VTextViewUIModel` that applies green color scheme.
+    public static var success: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.layout.borderWidth = 1
+        uiModel.colors = .success
+        
+        return uiModel
+    }
+
+    /// `VTextViewUIModel` that applies yellow color scheme.
+    public static var warning: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.layout.borderWidth = 1
+        
+        uiModel.colors = .warning
+        
+        return uiModel
+    }
+
+    /// `VTextViewUIModel` that applies error color scheme.
+    public static var error: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.layout.borderWidth = 1
+        
+        uiModel.colors = .error
+        
+        return uiModel
+    }
+}
+
+extension VTextViewUIModel.Colors {
+    /// `VTextViewUIModel.Colors` that applies green color scheme.
+    public static var success: Self {
+        .createHighlightedColors(
+            background: ColorBook.layerGreen,
+            foreground: ColorBook.borderGreen
+        )
+    }
+
+    /// `VTextViewUIModel.Colors` that applies yellow color scheme.
+    public static var warning: Self {
+        .createHighlightedColors(
+            background: ColorBook.layerYellow,
+            foreground: ColorBook.borderYellow
+        )
+    }
+
+    /// `VTextViewUIModel.Colors` that applies error color scheme.
+    public static var error: Self {
+        .createHighlightedColors(
+            background: ColorBook.layerRed,
+            foreground: ColorBook.borderRed
+        )
+    }
+    
+    private static func createHighlightedColors(
+        background: Color,
+        foreground: Color
+    ) -> Self {
+        var colors: Self = .init()
+        
+        colors.background.enabled = background
+        colors.background.focused = background
+        
+        colors.border.enabled = foreground
+        colors.border.focused = foreground
+        
+        colors.header.enabled = foreground
+        colors.header.focused = foreground
+        
+        colors.footer.enabled = foreground
+        colors.footer.focused = foreground
+        
+        return colors
+    }
 }

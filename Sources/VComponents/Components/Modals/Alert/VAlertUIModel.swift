@@ -12,10 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VAlertUIModel {
     // MARK: Properties
-    fileprivate static let primaryButtonReference: VPrimaryButtonUIModel = .init()
-    fileprivate static let sheetReference: VSheetUIModel = .init()
-    fileprivate static let modalReference: VModalUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -52,14 +48,14 @@ public struct VAlertUIModel {
         
         /// Additional margins applied to title, message, and content as a whole. Defaults to `15` leading, `15` trailing,`20` top, and `10` bottom.
         public var titleMessageContentMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
+            leading: GlobalUIModel.Common.containerContentMargin,
+            trailing: GlobalUIModel.Common.containerContentMargin,
             top: 20,
             bottom: 10
         )
         
-        /// Title line limit. Defaults to `1`.
-        public var titleLineLimit: Int? = 1
+        /// Title text line type. Defaults to `singleLine`.
+        public var titleTextLineType: TextLineType = .singleLine
         
         /// Title margins. Defaults to `0` horizontal and `5` vertical.
         public var titleMargins: Margins = .init(
@@ -67,8 +63,8 @@ public struct VAlertUIModel {
             vertical: 5
         )
         
-        /// Message line limit. Defaults to `5`.
-        public var messageLineLimit: Int? = 5
+        /// Message line type. Defaults to `multiline` with `center` alignment and `1...5` lines.
+        public var messageTextLineType: TextLineType = .multiLine(alignment: .center, lineLimit: 1...5)
         
         /// Title margins. Defaults to `0` horizontal and `5` vertical.
         public var messageMargins: Margins = .init(
@@ -92,8 +88,8 @@ public struct VAlertUIModel {
         
         /// Button margins. Defaults to `15` leading, `15` trailing, `15` top, and `20` bottom.
         public var buttonMargins: Margins = .init(
-            leading: sheetReference.layout.contentMargin,
-            trailing: sheetReference.layout.contentMargin,
+            leading: GlobalUIModel.Common.containerContentMargin,
+            trailing: GlobalUIModel.Common.containerContentMargin,
             top: 10,
             bottom: 20
         )
@@ -141,7 +137,7 @@ public struct VAlertUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background color.
-        public var background: Color = modalReference.colors.background
+        public var background: Color = ColorBook.layer
         
         /// Shadow color.
         public var shadow: Color = .clear
@@ -153,7 +149,7 @@ public struct VAlertUIModel {
         public var shadowOffset: CGSize = .zero
         
         /// Dimming view color.
-        public var dimmingView: Color = modalReference.colors.dimmingView
+        public var dimmingView: Color = GlobalUIModel.Common.dimmingViewColor
         
         /// Title color.
         public var title: Color = ColorBook.primary
@@ -162,37 +158,41 @@ public struct VAlertUIModel {
         public var message: Color = ColorBook.primary
         
         /// Primary button background colors.
-        public var primaryButtonBackground: ButtonStateColors = .init(primaryButtonReference.colors.background)
+        public var primaryButtonBackground: ButtonStateColors = .init(
+            enabled: ColorBook.controlLayerBlue,
+            pressed: ColorBook.controlLayerBluePressed,
+            disabled: ColorBook.controlLayerBlueDisabled
+        )
         
         /// Primary button title colors.
-        public var primaryButtonTitle: ButtonStateColors = .init(primaryButtonReference.colors.title)
+        public var primaryButtonTitle: ButtonStateColors = .init(ColorBook.primaryWhite)
         
         /// Secondary button background colors.
         public var secondaryButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(componentAsset: "color_235.235.235_70.70.70"),
+            pressed: .init(module: "Alert.LayerColoredButton.Background.Pressed"),
             disabled: .clear
         )
         
         /// Secondary button title colors.
         public var secondaryButtonTitle: ButtonStateColors = .init(
-            enabled: primaryButtonReference.colors.background.enabled,
-            pressed: primaryButtonReference.colors.background.enabled,
-            disabled: primaryButtonReference.colors.background.disabled
+            enabled: ColorBook.accentBlue,
+            pressed: ColorBook.accentBlue, // Looks better
+            disabled: ColorBook.accentBluePressedDisabled
         )
         
         /// Destructive button background colors.
         public var destructiveButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(componentAsset: "color_235.235.235_70.70.70"),
+            pressed: .init(module: "Alert.LayerColoredButton.Background.Pressed"),
             disabled: .clear
         )
         
         /// Destructive button title colors.
         public var destructiveButtonTitle: ButtonStateColors = .init(
-            enabled: .init(componentAsset: "color_255.59.48_255.69.68"),
-            pressed: .init(componentAsset: "color_255.59.48_255.69.68"),
-            disabled: .init(componentAsset: "color_255.140.140")
+            enabled: ColorBook.accentRed,
+            pressed: ColorBook.accentRed, // Looks better
+            disabled: ColorBook.accentRedPressedDisabled
         )
 
         // MARK: Initializers

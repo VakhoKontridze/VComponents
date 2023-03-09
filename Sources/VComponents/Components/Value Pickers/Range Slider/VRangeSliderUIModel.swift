@@ -11,8 +11,6 @@ import SwiftUI
 /// Model that describes UI.
 public struct VRangeSliderUIModel {
     // MARK: Properties
-    fileprivate static let sliderReference: VSliderUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -31,22 +29,27 @@ public struct VRangeSliderUIModel {
     public struct Layout {
         // MARK: Properties
         /// Slider height. Defaults to `10`.
-        public var height: CGFloat = sliderReference.layout.height
+        public var height: CGFloat = GlobalUIModel.Common.barHeight
         
         /// Slider corner radius. Defaults to `5`.
-        public var cornerRadius: CGFloat = sliderReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
         /// Thumb dimension. Defaults to `20`.
-        public var thumbDimension: CGFloat = sliderReference.layout.thumbDimension
+        ///
+        /// To hide thumb, set to `0`.
+        public var thumbDimension: CGFloat = GlobalUIModel.ValuePickers.sliderThumbDimension
         
         /// Thumb corner radius. Defaults to `10`.
-        public var thumbCornerRadius: CGFloat = sliderReference.layout.thumbCornerRadius
+        public var thumbCornerRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbCornerRadius
         
         /// Thumb border widths. Defaults to `0`.
-        public var thumbBorderWidth: CGFloat = sliderReference.layout.thumbBorderWidth
+        public var thumbBorderWidth: CGFloat = 0
         
         /// Thumb shadow radius. Defaults to `2`.
-        public var thumbShadowRadius: CGFloat = sliderReference.layout.thumbShadowRadius
+        public var thumbShadowRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbShadowRadius
+        
+        /// Thumb shadow offset. Defaults to `0` width and  `2` height.
+        public var thumbShadowOffset: CGSize = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
         
         // MARK: Initializers
         /// Initializes UI model with default values.

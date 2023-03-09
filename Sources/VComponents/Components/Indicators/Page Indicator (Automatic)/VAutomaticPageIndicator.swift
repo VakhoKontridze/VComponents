@@ -121,12 +121,6 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
 // MARK: - Preview
 struct VAutomaticPageIndicator_Previews: PreviewProvider {
     static var previews: some View {
-        VStack(content: {
-            VPageIndicator_Previews.previews
-            
-            Divider()
-            
-            VPageIndicatorCompact_Previews.previews
-        })
+        VPageIndicator_Previews.previews
     }
 }

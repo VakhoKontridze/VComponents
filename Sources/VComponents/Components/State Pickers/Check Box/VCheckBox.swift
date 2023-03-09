@@ -128,7 +128,7 @@ public struct VCheckBox<Label>: View where Label: View {
 
                     SwiftUIBaseButton(gesture: gestureHandler, label: {
                         VText(
-                            type: uiModel.layout.titleLineType,
+                            type: uiModel.layout.titleTextLineType,
                             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                             color: uiModel.colors.title.value(for: internalState),
                             font: uiModel.fonts.title,
@@ -162,7 +162,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     .foregroundColor(uiModel.colors.fill.value(for: internalState))
                 
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                    .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWith)
+                    .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
 
                 if let checkMarkIcon {
                     checkMarkIcon
@@ -206,18 +206,101 @@ public struct VCheckBox<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VCheckBox_Previews: PreviewProvider {
+    private static var title: String { "Lorem Ipsum" }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
     }
     
     private struct Preview: View {
         @State private var state: VCheckBoxState = .on
         
         var body: some View {
-            VCheckBox(
-                state: $state,
-                title: "Lorem Ipsum"
-            )
+            PreviewContainer(content: {
+                VCheckBox(
+                    state: $state,
+                    title: "Lorem Ipsum"
+                )
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Off",
+                    content: {
+                        VCheckBox(
+                            state: .constant(.off),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed Off",
+                    content: {
+                        VCheckBox(
+                            uiModel: {
+                                var uiModel: VCheckBoxUIModel = .init()
+                                uiModel.colors.fill.off = uiModel.colors.fill.pressedOff
+                                uiModel.colors.border.off = uiModel.colors.border.pressedOff
+                                uiModel.colors.checkmark.off = uiModel.colors.checkmark.pressedOff
+                                uiModel.colors.title.off = uiModel.colors.title.pressedOff
+                                return uiModel
+                            }(),
+                            state: .constant(.off),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "On",
+                    content: {
+                        VCheckBox(
+                            state: .constant(.on),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed On",
+                    content: {
+                        VCheckBox(
+                            uiModel: {
+                                var uiModel: VCheckBoxUIModel = .init()
+                                uiModel.colors.fill.on = uiModel.colors.fill.pressedOn
+                                uiModel.colors.border.on = uiModel.colors.border.pressedOn
+                                uiModel.colors.checkmark.on = uiModel.colors.checkmark.pressedOn
+                                uiModel.colors.title.on = uiModel.colors.title.pressedOn
+                                return uiModel
+                            }(),
+                            state: .constant(.on),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        VCheckBox(
+                            state: .constant(.off),
+                            title: title
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
         }
     }
 }

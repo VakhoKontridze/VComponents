@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VModalUIModel {
     // MARK: Properties
-    fileprivate static let sheetReference: VSheetUIModel = .init()
-    fileprivate static let disclosureGroupReference: VDisclosureGroupUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -50,32 +47,38 @@ public struct VModalUIModel {
         public var roundedCorners: UIRectCorner = .allCorners
         
         /// Corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = sheetReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
         /// Header alignment. Defaults to `center`.
         public var headerAlignment: VerticalAlignment = .center
         
-        /// Header margins. Defaults to `15` horizontal, `10` vertical.
-        public var headerMargins: Margins = disclosureGroupReference.layout.headerMargins
+        /// Header margins. Defaults to `15` horizontal and `10` vertical.
+        public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
         /// Model for customizing close button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
-        public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = disclosureGroupReference.layout.chevronButtonSubUIModel
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
+            var uiModel: VRoundedButtonUIModel.Layout = .init()
+            
+            uiModel.dimension = GlobalUIModel.Common.circularButtonGrayDimension
+            uiModel.iconSize = .init(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+            uiModel.hitBox = .zero
+            
+            return uiModel
+        }()
         
         /// Spacing between label and close button. Defaults to `10`.
-        public var labelCloseButtonSpacing: CGFloat = 10
+        public var labelCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
         
-        /// Divider height. Defaults to `0.67`.
+        /// Divider height. Defaults to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`.
-        public var dividerHeight: CGFloat = disclosureGroupReference.layout.dividerHeight
+        public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
     
         /// Divider margins. Defaults to `.zero`.
         public var dividerMargins: Margins = .zero
         
         /// Content margins. Defaults to `zero`.
-        public var contentMargins: Margins = disclosureGroupReference.layout.contentMargins
+        public var contentMargins: Margins = .zero
         
         /// Edges on which header has safe area edges. Defaults to `[]`.
         ///
@@ -103,7 +106,7 @@ public struct VModalUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background color.
-        public var background: Color = sheetReference.colors.background
+        public var background: Color = ColorBook.layer
         
         /// Shadow color.
         public var shadow: Color = .clear
@@ -120,20 +123,24 @@ public struct VModalUIModel {
         public var headerTitle: Color = ColorBook.primary
 
         /// Model for customizing close button colors.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = { 
             var uiModel: VRoundedButtonUIModel.Colors = .init()
-            uiModel.background = disclosureGroupReference.colors.chevronButtonSubUIModel.background
-            uiModel.icon = .init(.init(componentAsset: "color_100.100.100_160.160.160"))
+            
+            uiModel.background = .init(
+                enabled: GlobalUIModel.Common.circularButtonBackgroundColorEnabled,
+                pressed: GlobalUIModel.Common.circularButtonBackgroundColorPressed,
+                disabled: .clear // Has no effect
+            )
+            uiModel.icon = .init(GlobalUIModel.Common.circularButtonIconGrayColor)
+            
             return uiModel
         }()
         
         /// Divider color.
-        public var divider: Color = disclosureGroupReference.colors.divider
+        public var divider: Color = GlobalUIModel.Common.dividerColor
         
         /// Dimming view color.
-        public var dimmingView: Color = .init(componentAsset: "color_100.100.100.30_0.0.0_60")
+        public var dimmingView: Color = GlobalUIModel.Common.dimmingViewColor
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -147,7 +154,7 @@ public struct VModalUIModel {
         /// Header font.
         ///
         /// Only applicable when using `init` with title.
-        public var header: Font = .system(size: 17, weight: .bold)
+        public var header: Font = GlobalUIModel.Modals.headerFont
         
         // MARK: Initializers
         /// Initializes UI model with default values.

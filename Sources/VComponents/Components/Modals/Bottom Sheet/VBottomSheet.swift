@@ -21,7 +21,7 @@ struct VBottomSheet<Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    @State private var headerLabel: VBottomSheetHeaderLabelPreferenceKey.Value = VBottomSheetHeaderLabelPreferenceKey.defaultValue
+    @State private var headerLabel: GenericLabel_EmptyTitleCustom<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -365,23 +365,115 @@ struct VBottomSheet<Content>: View
 
 // MARK: - Preview
 struct VBottomSheet_Previews: PreviewProvider {
+    private static var headerTitle: String { "Lorem Ipsum Dolor Sit Amet" }
+    private static func content() -> some View {
+        ColorBook.accentBlue
+            .vBottomSheetHeaderTitle(headerTitle)
+    }
+    
     static var previews: some View {
-        VBottomSheet(
-            uiModel: .scrollableContent,
-            onPresent: nil,
-            onDismiss: nil,
-            content: {
-                List(content: {
-                    ForEach(0..<20, content: { num in
-                        VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-                            Text(String(num))
-                                .frame(maxWidth: .infinity, alignment: .leading)
+        ColorSchemePreview(title: nil, content: Preview.init)
+        InsettedContentPreview().previewDisplayName("Insetted Content")
+        ScrollableContentPreview().previewDisplayName("Scrollable Content")
+        OnlyGrabberPreview().previewDisplayName("Only Grabber")
+        FullSizedContentPreview().previewDisplayName("Full-Sized Content")
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VBottomSheet(
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: content
+                )
+            })
+        }
+    }
+    
+    private struct InsettedContentPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VBottomSheet(
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .insettedContent
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: content
+                )
+            })
+        }
+    }
+    
+    private struct ScrollableContentPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VBottomSheet(
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .scrollableContent
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: {
+                        List(content: {
+                            ForEach(0..<20, content: { num in
+                                VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+                                    Text(String(num))
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                })
+                            })
                         })
-                    })
-                })
-                    .vListStyle()
-                    .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-            }
-        )
+                            .vListStyle()
+                            .vBottomSheetHeaderTitle(headerTitle)
+                    }
+                )
+            })
+        }
+    }
+    
+    private struct FullSizedContentPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VBottomSheet(
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .fullSizedContent
+                        uiModel.misc.contentIsDraggable = true
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: { ColorBook.accentBlue }
+                )
+            })
+        }
+    }
+    
+    private struct OnlyGrabberPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VBottomSheet(
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .onlyGrabber
+                        uiModel.misc.contentIsDraggable = true
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: { ColorBook.accentBlue }
+                )
+            })
+        }
     }
 }

@@ -147,10 +147,64 @@ public struct VSecondaryButton<Label>: View where Label: View {
 // MARK: - Preview
 struct VSecondaryButton_Previews: PreviewProvider {
     static var previews: some View {
-        VSecondaryButton(
-            action: { print("Clicked") },
-            title: "Lorem Ipsum"
-        )
-            .padding()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VSecondaryButton(
+                    action: { print("Clicked") },
+                    title: "Lorem Ipsum"
+                )
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Enabled",
+                    content: {
+                        VSecondaryButton(
+                            action: {},
+                            title: "Lorem Ipsum"
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed",
+                    content: {
+                        VSecondaryButton(
+                            uiModel: {
+                                var uiModel: VSecondaryButtonUIModel = .init()
+                                uiModel.colors.background.enabled = uiModel.colors.background.pressed
+                                uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                return uiModel
+                            }(),
+                            action: {},
+                            title: "Lorem Ipsum"
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        VSecondaryButton(
+                            action: {},
+                            title: "Lorem Ipsum"
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
+        }
     }
 }

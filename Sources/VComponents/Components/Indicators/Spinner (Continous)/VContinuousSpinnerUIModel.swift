@@ -34,8 +34,8 @@ public struct VContinuousSpinnerUIModel {
         /// Length of colored part of spinner. Defaults to `0.75`.
         public var length: CGFloat = 0.75
         
-        /// Border width. Defaults to `2`.
-        public var borderWidth: CGFloat = 2
+        /// Thickness. Defaults to `2`.
+        public var thickness: CGFloat = 2
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -47,7 +47,7 @@ public struct VContinuousSpinnerUIModel {
     public struct Colors {
         // MARK: Properties
         /// Spinner color.
-        public var spinner: Color = ColorBook.accent
+        public var spinner: Color = ColorBook.accentBlue
         
         // MARK: Initializers
         /// Initializes UI model with default values.

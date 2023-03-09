@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VCheckBoxUIModel {
     // MARK: Properties
-    fileprivate static let toggleReference: VToggleUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -38,28 +36,28 @@ public struct VCheckBoxUIModel {
     public struct Layout {
         // MARK: Properties
         /// Checkbox dimension. Defaults to `16.`
-        public var dimension: CGFloat = 16
+        public var dimension: CGFloat = GlobalUIModel.StatePickers.dimensionSmall
         
         /// Checkbox corner radius. Defaults to `5.`
         public var cornerRadius: CGFloat = 4
         
         /// Checkbox border width. Defaults to `1.`
-        public var borderWith: CGFloat = 1
+        public var borderWidth: CGFloat = 1
         
         /// Checkmark icon dimension. Defaults to `9.`
         public var iconDimension: CGFloat = 9
         
         /// Hit box. Defaults to `5`.
-        public var hitBox: CGFloat = toggleReference.layout.toggleLabelSpacing
+        public var hitBox: CGFloat = GlobalUIModel.StatePickers.statePickerLabelSpacing // Actual spacing is 0
         
         /// Spacing between checkbox and label. Defaults to `0`.
         public var checkBoxLabelSpacing: CGFloat = 0
         
-        /// Title line type. Defaults to `multiline` of `1...2` lines.
-        public var titleLineType: TextLineType = toggleReference.layout.titleLineType
+        /// Title text line type. Defaults to `multiline` with `leading` alignment and `1...2` lines.
+        public var titleTextLineType: TextLineType = GlobalUIModel.StatePickers.titleTextLineType
 
         /// Title minimum scale factor. Defaults to `1`.
-        public var titleMinimumScaleFactor: CGFloat = toggleReference.layout.titleMinimumScaleFactor
+        public var titleMinimumScaleFactor: CGFloat = 1
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -73,33 +71,33 @@ public struct VCheckBoxUIModel {
         /// Fill colors.
         public var fill: StateColors = .init(
             off: ColorBook.layer,
-            on: toggleReference.colors.fill.on,
-            indeterminate: toggleReference.colors.fill.on,
+            on: ColorBook.controlLayerBlue,
+            indeterminate: ColorBook.controlLayerBlue,
             pressedOff: ColorBook.layer,
-            pressedOn: toggleReference.colors.fill.pressedOn,
-            pressedIndeterminate: toggleReference.colors.fill.pressedOn,
+            pressedOn: ColorBook.controlLayerBluePressed,
+            pressedIndeterminate: ColorBook.controlLayerBluePressed,
             disabled: ColorBook.layer
         )
         
         /// Border colors.
         public var border: StateColors = .init(
-            off: .init(componentAsset: "color_200.200.200_80.80.80"),
+            off: ColorBook.borderGray,
             on: .clear,
             indeterminate: .clear,
-            pressedOff: .init(componentAsset: "color_180.180.180_60.60.60"),
+            pressedOff: ColorBook.borderGrayPressed,
             pressedOn: .clear,
             pressedIndeterminate: .clear,
-            disabled: .init(componentAsset: "color_230.230.230_40.40.40")
+            disabled: ColorBook.borderGrayDisabled
         )
         
         /// Checkmark icon colors.
         public var checkmark: StateColors = .init(
             off: .clear,
-            on: toggleReference.colors.thumb.off,
-            indeterminate: toggleReference.colors.thumb.on,
+            on: ColorBook.white,
+            indeterminate: ColorBook.white,
             pressedOff: .clear,
-            pressedOn: toggleReference.colors.thumb.pressedOn,
-            pressedIndeterminate: toggleReference.colors.thumb.pressedOn,
+            pressedOn: ColorBook.white,
+            pressedIndeterminate: ColorBook.white,
             disabled: .clear
         )
 
@@ -114,7 +112,7 @@ public struct VCheckBoxUIModel {
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Custom label opacities.
+        /// Custom label opacities. Defaults to `1` off, `1` on, `1` indeterminate, `1` pressed off, `1` pressed on, `1` pressed indeterminate, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
@@ -126,7 +124,7 @@ public struct VCheckBoxUIModel {
             pressedOff: 1,
             pressedOn: 1,
             pressedIndeterminate: 1,
-            disabled: 0.3
+            disabled: GlobalUIModel.StatePickers.customLabelOpacityDisabled
         )
 
         // MARK: Initializers
@@ -149,7 +147,7 @@ public struct VCheckBoxUIModel {
         /// Title font. Defaults to system font of size `15`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = toggleReference.fonts.title
+        public var title: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -161,7 +159,7 @@ public struct VCheckBoxUIModel {
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
-        public var stateChange: Animation? = toggleReference.animations.stateChange
+        public var stateChange: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -173,7 +171,7 @@ public struct VCheckBoxUIModel {
     public struct Misc {
         // MARK: Properties
         /// Indicates if label is clickable. Defaults to `true`.
-        public var labelIsClickable: Bool = toggleReference.misc.labelIsClickable
+        public var labelIsClickable: Bool = true
         
         // MARK: Initializers
         /// Initializes UI model with default values.

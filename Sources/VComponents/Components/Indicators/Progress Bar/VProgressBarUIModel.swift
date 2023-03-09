@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VProgressBarUIModel {
     // MARK: Properties
-    fileprivate static let sliderReference: VSliderUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -32,10 +30,10 @@ public struct VProgressBarUIModel {
     public struct Layout {
         // MARK: Properties
         /// Slider height. Defaults to `10`.
-        public var height: CGFloat = sliderReference.layout.height
+        public var height: CGFloat = GlobalUIModel.Common.barHeight
         
         /// Slider corner radius. Defaults to `5`.
-        public var cornerRadius: CGFloat = sliderReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
         /// Indicates if progress bar rounds progress view right-edge. Defaults to `true`.
         public var roundsProgressViewRightEdge: Bool = true
@@ -58,10 +56,10 @@ public struct VProgressBarUIModel {
     public struct Colors {
         // MARK: Properties
         /// Track color.
-        public var track: Color = sliderReference.colors.track.enabled
+        public var track: Color = ColorBook.layerGray
         
         /// Progress color.
-        public var progress: Color = sliderReference.colors.progress.enabled
+        public var progress: Color = ColorBook.accentBlue
 
         // MARK: Initializers
         /// Initializes UI model with default values.

@@ -14,31 +14,31 @@ import SwiftUI
 public struct ImageBook {
     // MARK: Properties
     /// Checkmark for `on` state in `VCheckBox`.
-    public static var checkBoxCheckMarkOn: Image = .init(templateComponentAsset: "CheckMark.On")
+    public static var checkBoxCheckMarkOn: Image = .init(module: "CheckMark.On").template
     
     /// Checkmark for `indeterminate` state in `VCheckBox`.
-    public static var checkBoxCheckMarkIndeterminate: Image = .init(templateComponentAsset: "CheckMark.Indeterminate")
+    public static var checkBoxCheckMarkIndeterminate: Image = .init(module: "CheckMark.Indeterminate").template
     
     /// Decrement icon for `VStepper`.
-    public static var stepperDecrement: Image = .init(templateComponentAsset: "Minus")
+    public static var stepperDecrement: Image = .init(module: "Minus").template
     
     /// Increment icon for `VStepper`.
-    public static var stepperIncrement: Image = .init(templateComponentAsset: "Plus")
+    public static var stepperIncrement: Image = .init(module: "Plus").template
     
     /// Search icon for `VTextField`.
-    public static var textFieldSearch: Image = .init(templateComponentAsset: "Search")
+    public static var textFieldSearch: Image = .init(module: "Search").template
     
     /// Visibility off icon for `VTextField`.
-    public static var textFieldVisibilityOff: Image = .init(templateComponentAsset: "Visibility.Off")
+    public static var textFieldVisibilityOff: Image = .init(module: "Visibility.Off").template
     
     /// Visibility on icon for `VTextField`
-    public static var textFieldVisibilityOn: Image = .init(templateComponentAsset: "Visibility.On")
+    public static var textFieldVisibilityOn: Image = .init(module: "Visibility.On").template
     
     /// General close or clear button x-mark icon.
-    public static var xMark: Image = .init(templateComponentAsset: "XMark")
+    public static var xMark: Image = .init(module: "XMark").template
     
     /// General chevron icon.
-    public static var chevronUp: Image = .init(templateComponentAsset: "Chevron.Up")
+    public static var chevronUp: Image = .init(module: "Chevron.Up").template
     
     // MARK: Initializers
     private init() {}
@@ -46,11 +46,12 @@ public struct ImageBook {
 
 // MARK: - Helpers
 extension Image {
-    fileprivate init(componentAsset name: String) {
-        self = Image(name, bundle: .module)
+    fileprivate init(module name: String) {
+        self.init(name, bundle: .module)
     }
     
-    fileprivate init(templateComponentAsset name: String) {
-        self = .init(componentAsset: name).renderingMode(.template)
+    fileprivate var template: Self {
+        self
+            .renderingMode(.template)
     }
 }

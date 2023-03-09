@@ -142,10 +142,67 @@ public struct VRoundedButton<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VRoundedButton_Previews: PreviewProvider {
+    private static var icon: Image { .init(systemName: "swift") }
+    
     static var previews: some View {
-        VRoundedButton(
-            action: { print("Clicked") },
-            icon: .init(systemName: "swift")
-        )
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VRoundedButton(
+                    action: { print("Clicked") },
+                    icon: icon
+                )
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Enabled",
+                    content: {
+                        VRoundedButton(
+                            action: {},
+                            icon: icon
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed",
+                    content: {
+                        VRoundedButton(
+                            uiModel: {
+                                var uiModel: VRoundedButtonUIModel = .init()
+                                uiModel.colors.background.enabled = uiModel.colors.background.pressed
+                                uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
+                                return uiModel
+                            }(),
+                            action: {},
+                            icon: icon
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Disabled",
+                    content: {
+                        VRoundedButton(
+                            action: {},
+                            icon: icon
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
+        }
     }
 }

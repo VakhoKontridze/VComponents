@@ -175,11 +175,80 @@ public struct VPrimaryButton<Label>: View where Label: View {
 
 // MARK: - Preview
 struct VPrimaryButton_Previews: PreviewProvider {
+    private static var title: String { "Lorem Ipsum" }
+    
     static var previews: some View {
-        VPrimaryButton(
-            action: { print("Clicked") },
-            title: "Lorem Ipsum"
-        )
-            .padding()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VPrimaryButton(
+                    action: { print("Clicked") },
+                    title: title
+                )
+                .padding()
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Enabled",
+                    content: {
+                        VPrimaryButton(
+                            action: {},
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Pressed",
+                    content: {
+                        VPrimaryButton(
+                            uiModel: {
+                                var uiModel: VPrimaryButtonUIModel = .init()
+                                uiModel.colors.background.enabled = uiModel.colors.background.pressed
+                                uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                return uiModel
+                            }(),
+                            action: {},
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Loading",
+                    content: {
+                        VPrimaryButton(
+                            isLoading: true,
+                            action: {},
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        VPrimaryButton(
+                            action: {},
+                            title: title
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
+        }
     }
 }

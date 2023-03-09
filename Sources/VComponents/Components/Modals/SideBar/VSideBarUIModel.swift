@@ -12,10 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VSideBarUIModel {
     // MARK: Properties
-    fileprivate static let sheetReference: VSheetUIModel = .init()
-    fileprivate static let modalReference: VModalUIModel = .init()
-    fileprivate static let bottomSheetReference: VBottomSheetUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -54,7 +50,7 @@ public struct VSideBarUIModel {
         public var roundedCorners: UIRectCorner = .rightCorners
         
         /// Corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
         /// Content margins. Defaults to `zero`.
         public var contentMargins: Margins = .zero
@@ -109,19 +105,19 @@ public struct VSideBarUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background color.
-        public var background: Color = modalReference.colors.background
+        public var background: Color = ColorBook.layer
         
         /// Shadow color.
-        public var shadow: Color = modalReference.colors.shadow
+        public var shadow: Color = .clear
         
         /// Shadow radius. Defaults to `0`.
-        public var shadowRadius: CGFloat = modalReference.colors.shadowRadius
+        public var shadowRadius: CGFloat = 0
         
         /// Shadow offset. Defaults to `zero`.
-        public var shadowOffset: CGSize = modalReference.colors.shadowOffset
+        public var shadowOffset: CGSize = .zero
         
         /// Dimming view color.
-        public var dimmingView: Color = modalReference.colors.dimmingView
+        public var dimmingView: Color = GlobalUIModel.Common.dimmingViewColor
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -133,10 +129,10 @@ public struct VSideBarUIModel {
     public struct Animations {
         // MARK: Properties
         /// Appear animation.  Defaults to `easeInOut` with duration `0.3`.
-        public var appear: BasicAnimation? = bottomSheetReference.animations.appear
+        public var appear: BasicAnimation? = GlobalUIModel.Modals.slideableAppearAnimation
         
         /// Disappear animation.  Defaults to `easeInOut` with duration `0.3`.
-        public var disappear: BasicAnimation? = bottomSheetReference.animations.disappear
+        public var disappear: BasicAnimation? = GlobalUIModel.Modals.slideableDisappearAnimation
         
         /// Drag-back dismiss animation. Defaults to `easeInOut` with duration `0.2`.
         public var dragBackDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.2)

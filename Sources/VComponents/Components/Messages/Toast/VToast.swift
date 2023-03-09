@@ -58,7 +58,7 @@ struct VToast: View {
     
     private var contentView: some View {
         VText(
-            type: uiModel.layout.textLineType.toVCoreTextLineType,
+            type: uiModel.layout.titleTextLineType.toVCoreTextLineType,
             color: uiModel.colors.text,
             font: .init(uiModel.fonts.text),
             text: text
@@ -77,7 +77,7 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         let initialHeight: CGFloat = {
-            switch uiModel.layout.textLineType {
+            switch uiModel.layout.titleTextLineType {
             case .singleLine:
                 let label: UILabel = .init()
                 label.font = uiModel.fonts.text
@@ -170,23 +170,6 @@ struct VToast: View {
     }
 }
 
-// MARK: - Preview
-struct VToast_Previews: PreviewProvider {
-    static var previews: some View {
-        VToast(
-            uiModel: {
-                var uiModel: VToastUIModel = .init()
-                uiModel.animations.appear = nil
-                uiModel.animations.duration = .infinity
-                return uiModel
-            }(),
-            onPresent: nil,
-            onDismiss: nil,
-            text: "Lorem ipsum dolor sit amet"
-        )
-    }
-}
-
 // MARK: - Helpers
 extension TextAlignment {
     fileprivate var toNSTextAlignment: NSTextAlignment {
@@ -194,6 +177,74 @@ extension TextAlignment {
         case .leading: return .left
         case .center: return .center
         case .trailing: return .right
+        }
+    }
+}
+
+// MARK: - Preview
+struct VToast_Previews: PreviewProvider {
+    private static var text: String { "Lorem ipsum dolor sit amet" }
+    private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+    
+    static var previews: some View {
+        ColorSchemePreview(title: nil, content: Preview.init)
+        MultiLineTextPreview().previewDisplayName("MultiLine Text")
+        PresentationEdgePreview_Top().previewDisplayName("Presentation Edge - Top")
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VToast(
+                    uiModel: {
+                        var uiModel: VToastUIModel = .init()
+                        uiModel.animations.appear = nil
+                        uiModel.animations.duration = .infinity
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    text: text
+                )
+            })
+        }
+    }
+    
+    private struct MultiLineTextPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VToast(
+                    uiModel: {
+                        var uiModel: VToastUIModel = .init()
+                        uiModel.layout.titleTextLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                        uiModel.animations.appear = nil
+                        uiModel.animations.duration = .infinity
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    text: textLong
+                )
+            })
+        }
+    }
+    
+    private struct PresentationEdgePreview_Top: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VToast(
+                    uiModel: {
+                        var uiModel: VToastUIModel = .init()
+                        uiModel.layout.presentationEdge = .top
+                        uiModel.animations.appear = nil
+                        uiModel.animations.duration = .infinity
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    text: text
+                )
+            })
         }
     }
 }

@@ -150,22 +150,109 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 
 // MARK: - Preview
 struct VBouncingMarquee_Previews: PreviewProvider {
-    private static var shortText: String { "Lorem ipsum" }
-    private static var longText: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin tempus facilisis risus, ut condimentum diam tempus non." }
+    private static func contentSmall() -> some View {
+        HStack(content: {
+            Image(systemName: "swift")
+            Text("Lorem ipsum")
+        })
+            .drawingGroup()
+    }
+    
+    private static func contentLarge() -> some View {
+        HStack(content: {
+            Image(systemName: "swift")
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+        })
+            .drawingGroup()
+    }
     
     static var previews: some View {
-        VStack(spacing: 10, content: {
-            VBouncingMarquee(uiModel: .insettedGradient, content: {
-                Text(shortText)
+        Preview().previewDisplayName("-")
+        InsettedContentPreview().previewDisplayName("Insetted & Gradient")
+        ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    paddedEdges: .vertical,
+                    title: "Small Content",
+                    content: {
+                        VBouncingMarquee(
+                            content: contentSmall
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    paddedEdges: .vertical,
+                    title: "Large Content",
+                    content: {
+                        VBouncingMarquee(
+                            content: contentLarge
+                        )
+                    }
+                )
             })
-            
-            VBouncingMarquee(uiModel: .insettedGradient, content: {
-                HStack(content: {
-                    Image(systemName: "swift")
-                    Text(longText)
-                })
-                    .drawingGroup()
+        }
+    }
+    
+    private struct InsettedContentPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    paddedEdges: .vertical,
+                    title: "Insetted Gradient",
+                    content: {
+                        VBouncingMarquee(
+                            uiModel: .insettedGradient,
+                            content: contentLarge
+                        )
+                    }
+                )
             })
-        })
+        }
+    }
+    
+    private struct ScrollDirectionsPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    paddedEdges: .vertical,
+                    title: "Left-to-Right",
+                    content: {
+                        VBouncingMarquee(
+                            uiModel: {
+                                var uiModel: VBouncingMarqueeUIModel = .init()
+                                uiModel.layout.scrollDirection = .leftToRight
+                                return uiModel
+                            }(),
+                            content: contentLarge
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    paddedEdges: .vertical,
+                    title: "Right-to-Left",
+                    content: {
+                        VBouncingMarquee(
+                            uiModel: {
+                                var uiModel: VBouncingMarqueeUIModel = .init()
+                                uiModel.layout.scrollDirection = .rightToLeft
+                                return uiModel
+                            }(),
+                            content: contentLarge
+                        )
+                    }
+                )
+            })
+        }
     }
 }

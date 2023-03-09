@@ -26,21 +26,20 @@ public struct VListRowUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Margins. Defaults to `15` horizontal, `9` vertical.
+        /// Margins. Defaults to `15` horizontal and `9` vertical.
         public var margins: Margins = .init(
-            horizontal: 15,
+            horizontal: GlobalUIModel.Common.containerContentMargin,
             vertical: 9
         )
         
         /// Separator type. Defaults to `default`.
         public var separatorType: SeparatorType = .default
         
-        
         /// Separator margins. Defaults to `15`s.
-        public var separatorMargins: HorizontalMargins = .init(15)
+        public var separatorMargins: HorizontalMargins = .init(GlobalUIModel.Common.containerContentMargin)
         
         /// Separator height. Defaults to `1` scaled to screen.
-        public var separatorHeight: CGFloat = 0.9999 / UIScreen.main.scale
+        public var separatorHeight: CGFloat = GlobalUIModel.Common.separatorHeight
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -115,7 +114,7 @@ public struct VListRowUIModel {
         public var background: Color = ColorBook.layer
         
         /// Separator color.
-        public var separator: Color = .init(componentAsset: "color_60.60.60.30_85.85.85.60")
+        public var separator: Color = GlobalUIModel.Common.separatorColor
         
         // MARK: Initializers
         /// Initializes UI model with default values.

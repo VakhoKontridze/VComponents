@@ -32,10 +32,10 @@ public struct VPrimaryButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Button height. Defaults to `56`.
-        public var height: CGFloat = 56
+        public var height: CGFloat = GlobalUIModel.Buttons.dimensionLarge
         
         /// Corner radius. Defaults to `16`.
-        public var cornerRadius: CGFloat = 16
+        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusSmall
         
         /// Border width. Defaults to `0`.
         ///
@@ -44,24 +44,22 @@ public struct VPrimaryButtonUIModel {
         
         /// Label margins. Defaults to `15` horizontal and `3` vertical.
         public var labelMargins: LabelMargins = .init(
-            horizontal: 15,
-            vertical: 3
+            horizontal: GlobalUIModel.Buttons.labelMargins.horizontal + 5,
+            vertical: GlobalUIModel.Buttons.labelMargins.vertical
         )
         
         /// Icon size. Defaults to `20` by `20`.
-        public var iconSize: CGSize = .init(dimension: 20)
+        public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
         
         /// Title minimum scale factor. Defaults to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = 0.75
+        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Spacing between icon and title. Defaults to `10`.
+        /// Spacing between icon and title. Defaults to `8`.
         ///
         /// Applicable only if icon `init` with icon and title is used.
-        public var iconTitleSpacing: CGFloat = 10
+        public var iconTitleSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
         /// Model for customizing spinner layout.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Layout = .init()
         
         /// Spacing between label and spinner. Defaults to `20`.
@@ -84,10 +82,10 @@ public struct VPrimaryButtonUIModel {
         // MARK: Properties
         /// Background colors.
         public var background: StateColors = .init(
-            enabled: .init(componentAsset: "color_24.126.240_25.131.255"),
-            pressed: .init(componentAsset: "color_31.104.182_36.106.186"),
-            loading: .init(componentAsset: "color_128.176.240"),
-            disabled: .init(componentAsset: "color_128.176.240")
+            enabled: ColorBook.controlLayerBlue,
+            pressed: ColorBook.controlLayerBluePressed,
+            loading: ColorBook.controlLayerBlueDisabled,
+            disabled: ColorBook.controlLayerBlueDisabled
         )
         
         /// Border colors.
@@ -108,24 +106,24 @@ public struct VPrimaryButtonUIModel {
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities.
+        /// Custom label opacities. Defaults to `1` enabled, `0.3` pressed, `0.3` loading, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
         public var customLabelOpacities: StateOpacities = .init(
             enabled: 1,
-            pressed: 0.3,
-            loading: 0.3,
-            disabled: 0.3
+            pressed: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled,
+            loading: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled,
+            disabled: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled
         )
         
         /// Model for customizing spinner colors.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Colors = {
             var uiModel: VContinuousSpinnerUIModel.Colors = .init()
+            
             uiModel.spinner = ColorBook.primaryWhite
+            
             return uiModel
         }()
         
@@ -149,7 +147,7 @@ public struct VPrimaryButtonUIModel {
         /// Title font. Defaults to system font of size `16` with `semibold` weight.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: 16, weight: .semibold)
+        public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeLarge, weight: .semibold)
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -161,8 +159,6 @@ public struct VPrimaryButtonUIModel {
     public struct Animations {
         // MARK: Properties
         /// Model for customizing spinner animations.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Animations = .init()
         
         // MARK: Initializers

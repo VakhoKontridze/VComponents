@@ -117,7 +117,12 @@ public struct VRangeSlider: View {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
                     .foregroundColor(uiModel.colors.thumb.value(for: internalState))
-                    .shadow(color: uiModel.colors.thumbShadow.value(for: internalState), radius: uiModel.layout.thumbShadowRadius)
+                    .shadow(
+                        color: uiModel.colors.thumbShadow.value(for: internalState),
+                        radius: uiModel.layout.thumbShadowRadius,
+                        x: uiModel.layout.thumbShadowOffset.width,
+                        y: uiModel.layout.thumbShadowOffset.height
+                    )
 
                 RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
                     .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
@@ -260,21 +265,58 @@ extension Double {
 
 // MARK: - Preview
 struct VRangeSlider_Previews: PreviewProvider {
+    private static var difference: Double { 0.1 }
+    private static var valueLow: Double { 0.1 }
+    private static var valueHigh: Double { 0.8 }
+    
     static var previews: some View {
-        Preview()
+        ColorSchemePreview(title: nil, content: Preview.init)
+        ColorSchemePreview(title: "States", content: StatesPreview.init)
     }
     
     private struct Preview: View {
-        @State private var valueLow: Double = 0.1
-        @State private var valueHigh: Double = 0.8
+        @State private var valueLow: Double = VRangeSlider_Previews.valueLow
+        @State private var valueHigh: Double = VRangeSlider_Previews.valueHigh
         
         var body: some View {
-            VRangeSlider(
-                difference: 0.1,
-                valueLow: $valueLow,
-                valueHigh: $valueHigh
-            )
-                .padding()
+            PreviewContainer(content: {
+                VRangeSlider(
+                    difference: difference,
+                    valueLow: $valueLow,
+                    valueHigh: $valueHigh
+                )
+            })
+        }
+    }
+    
+    private struct StatesPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Enabled",
+                    content: {
+                        VRangeSlider(
+                            difference: difference,
+                            valueLow: .constant(valueLow),
+                            valueHigh: .constant(valueHigh)
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Disabled",
+                    content: {
+                        VRangeSlider(
+                            difference: difference,
+                            valueLow: .constant(valueLow),
+                            valueHigh: .constant(valueHigh)
+                        )
+                            .disabled(true)
+                    }
+                )
+            })
         }
     }
 }

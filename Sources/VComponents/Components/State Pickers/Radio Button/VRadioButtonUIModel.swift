@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VRadioButtonUIModel {
     // MARK: Properties
-    fileprivate static let toggleReference: VToggleUIModel = .init()
-    fileprivate static let checkBoxReference: VCheckBoxUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -39,25 +36,25 @@ public struct VRadioButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Radio button dimension. Defaults to `16.`
-        public var dimension: CGFloat = checkBoxReference.layout.dimension
+        public var dimension: CGFloat = GlobalUIModel.StatePickers.dimensionSmall
         
-        /// Radio button corner radius. Defaults to `5.`
-        public var borderWith: CGFloat = checkBoxReference.layout.borderWith
+        /// Radio button corner radius. Defaults to `1.`
+        public var borderWidth: CGFloat = 1
         
         /// Bullet dimension. Defaults to `8`.
         public var bulletDimension: CGFloat = 8
         
         /// Hit box. Defaults to `5`.
-        public var hitBox: CGFloat = checkBoxReference.layout.hitBox
+        public var hitBox: CGFloat = GlobalUIModel.StatePickers.statePickerLabelSpacing // Actual spacing is 0
         
-        /// Spacing between radio and label. Defaults to `5`.
-        public var radioLabelSpacing: CGFloat = checkBoxReference.layout.checkBoxLabelSpacing
+        /// Spacing between radio and label. Defaults to `0`.
+        public var radioLabelSpacing: CGFloat = 0
         
-        /// Title line type. Defaults to `multiline` of `1...2` lines.
-        public var titleLineType: TextLineType = checkBoxReference.layout.titleLineType
+        /// Title text line type. Defaults to `multiline` with `leading` alignment and `1...2` lines.
+        public var titleTextLineType: TextLineType = GlobalUIModel.StatePickers.titleTextLineType
         
         /// Title minimum scale factor. Defaults to `1`.
-        public var titleMinimumScaleFactor: CGFloat = checkBoxReference.layout.titleMinimumScaleFactor
+        public var titleMinimumScaleFactor: CGFloat = 1
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -69,41 +66,47 @@ public struct VRadioButtonUIModel {
     public struct Colors {
         // MARK: Properties
         /// Fill colors.
-        public var fill: StateColors = .init(
-            off: ColorBook.layer,
-            on: ColorBook.layer,
-            pressedOff: ColorBook.layer,
-            pressedOn: ColorBook.layer,
-            disabled: ColorBook.layer
-        )
+        public var fill: StateColors = .init(ColorBook.layer)
         
         /// Border colors.
         public var border: StateColors = .init(
-            off: checkBoxReference.colors.border.off,
-            on: toggleReference.colors.fill.on,
-            pressedOff: checkBoxReference.colors.border.pressedOff,
-            pressedOn: toggleReference.colors.fill.pressedOn,
-            disabled: checkBoxReference.colors.border.disabled
+            off: ColorBook.borderGray,
+            on: ColorBook.controlLayerBlue,
+            pressedOff: ColorBook.borderGrayPressed,
+            pressedOn: ColorBook.controlLayerBluePressed,
+            disabled: ColorBook.borderGrayDisabled
         )
         
         /// Bullet colors.
         public var bullet: StateColors = .init(
             off: .clear,
-            on: toggleReference.colors.fill.on,
+            on: ColorBook.controlLayerBlue,
             pressedOff: .clear,
-            pressedOn: toggleReference.colors.fill.pressedOn,
+            pressedOn: ColorBook.controlLayerBluePressed,
             disabled: .clear
         )
 
         /// Title colors.
-        public var title: StateColors = toggleReference.colors.title
+        public var title: StateColors = .init(
+            off: ColorBook.primary,
+            on: ColorBook.primary,
+            pressedOff: ColorBook.primary,
+            pressedOn: ColorBook.primary,
+            disabled: ColorBook.primaryPressedDisabled
+        )
         
-        /// Custom label opacities.
+        /// Custom label opacities. Defaults to `1` off, `1` on, `1` pressed off, `1` pressed on, and `0.3` disabled.
         ///
         /// Applicable only when `init` with label is used.
         /// When using a custom label, it's subviews cannot be configured with individual colors,
         /// so instead, a general opacity is being applied.
-        public var customLabelOpacities: StateOpacities = toggleReference.colors.customLabelOpacities
+        public var customLabelOpacities: StateOpacities = .init(
+            off: 1,
+            on: 1,
+            pressedOff: 1,
+            pressedOn: 1,
+            disabled: GlobalUIModel.StatePickers.customLabelOpacityDisabled
+        )
 
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -125,7 +128,7 @@ public struct VRadioButtonUIModel {
         /// Title font. Defaults to system font of size `15`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = toggleReference.fonts.title
+        public var title: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -137,7 +140,7 @@ public struct VRadioButtonUIModel {
     public struct Animations {
         // MARK: Properties
         /// State change animation. Defaults to `easeIn` with duration `0.1`.
-        public var stateChange: Animation? = toggleReference.animations.stateChange
+        public var stateChange: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -149,7 +152,7 @@ public struct VRadioButtonUIModel {
     public struct Misc {
         // MARK: Properties
         /// Indicates if label is clickable. Defaults to `true`.
-        public var labelIsClickable: Bool = toggleReference.misc.labelIsClickable
+        public var labelIsClickable: Bool = true
         
         // MARK: Initializers
         /// Initializes UI model with default values.

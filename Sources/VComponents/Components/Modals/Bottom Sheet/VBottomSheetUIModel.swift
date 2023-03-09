@@ -12,9 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VBottomSheetUIModel {
     // MARK: Properties
-    fileprivate static let sheetReference: VSheetUIModel = .init()
-    fileprivate static let modalReference: VModalUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -53,7 +50,7 @@ public struct VBottomSheetUIModel {
         )
         
         /// Corner radius. Defaults to `15`.
-        public var cornerRadius: CGFloat = modalReference.layout.cornerRadius
+        public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
         /// Grabber indicator size. Defaults to `50` width and `4` height.
         ///
@@ -70,29 +67,35 @@ public struct VBottomSheetUIModel {
         )
         
         /// Header alignment. Defaults to `center`.
-        public var headerAlignment: VerticalAlignment = modalReference.layout.headerAlignment
+        public var headerAlignment: VerticalAlignment = .center
         
-        /// Header margins. Defaults to `15` horizontal, `10` vertical.
-        public var headerMargins: Margins = modalReference.layout.headerMargins
+        /// Header margins. Defaults to `15` horizontal and `10` vertical.
+        public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
         /// Model for customizing close button layout. `dimension` defaults to `30`, `iconSize` defaults to `12` by `12`, and `hitBox` defaults to `zero`.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
-        public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = modalReference.layout.closeButtonSubUIModel
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
+            var uiModel: VRoundedButtonUIModel.Layout = .init()
+            
+            uiModel.dimension = GlobalUIModel.Common.circularButtonGrayDimension
+            uiModel.iconSize = .init(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+            uiModel.hitBox = .zero
+            
+            return uiModel
+        }()
         
         /// Spacing between label and close button. Defaults to `10`.
-        public var labelCloseButtonSpacing: CGFloat = modalReference.layout.labelCloseButtonSpacing
+        public var labelCloseButtonSpacing: CGFloat = GlobalUIModel.Modals.labelCloseButtonSpacing
         
-        /// Divider height. Defaults to `0.67`.
+        /// Divider height. Defaults to `2` scaled to screen.
         ///
         /// To hide divider, set to `0`, and remove header.
-        public var dividerHeight: CGFloat = modalReference.layout.dividerHeight
+        public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
     
         /// Divider margins. Defaults to `.zero`.
-        public var dividerMargins: Margins = modalReference.layout.dividerMargins
+        public var dividerMargins: Margins = .zero
         
         /// Content margins. Defaults to `zero`.
-        public var contentMargins: Margins = modalReference.layout.contentMargins
+        public var contentMargins: Margins = .zero
         
         /// Indicates if sheet resizes content based on its visible frame. Defaults to `false`.
         ///
@@ -235,35 +238,44 @@ public struct VBottomSheetUIModel {
     public struct Colors {
         // MARK: Properties
         /// Background color.
-        public var background: Color = modalReference.colors.background
+        public var background: Color = ColorBook.layer
         
         /// Shadow color.
-        public var shadow: Color = modalReference.colors.shadow
+        public var shadow: Color = .clear
         
         /// Shadow radius. Defaults to `0`.
-        public var shadowRadius: CGFloat = modalReference.colors.shadowRadius
+        public var shadowRadius: CGFloat = 0
         
         /// Shadow offset. Defaults to `zero`.
-        public var shadowOffset: CGSize = modalReference.colors.shadowOffset
-        
-        /// Dimming view color.
-        public var dimmingView: Color = modalReference.colors.dimmingView
+        public var shadowOffset: CGSize = .zero
         
         /// Grabber color.
-        public var grabber: Color = .init(componentAsset: "color_230.230.230_100.100.100")
+        public var grabber: Color = GlobalUIModel.Common.grabberColor
         
         /// Header title color.
         ///
         /// Only applicable when using `init` with title.
-        public var headerTitle: Color = modalReference.colors.headerTitle
+        public var headerTitle: Color = ColorBook.primary
         
         /// Model for customizing close button colors.
-        ///
-        /// Not all properties will have an effect, and setting them may be futile.
-        public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = modalReference.colors.closeButtonSubUIModel
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = {
+            var uiModel: VRoundedButtonUIModel.Colors = .init()
+            
+            uiModel.background = .init(
+                enabled: GlobalUIModel.Common.circularButtonBackgroundColorEnabled,
+                pressed: GlobalUIModel.Common.circularButtonBackgroundColorPressed,
+                disabled: .clear // Has no effect
+            )
+            uiModel.icon = .init(GlobalUIModel.Common.circularButtonIconGrayColor)
+            
+            return uiModel
+        }()
         
         /// Divider color.
-        public var divider: Color = modalReference.colors.divider
+        public var divider: Color = GlobalUIModel.Common.dividerColor
+        
+        /// Dimming view color.
+        public var dimmingView: Color = GlobalUIModel.Common.dimmingViewColor
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -281,7 +293,7 @@ public struct VBottomSheetUIModel {
         /// Header font.
         ///
         /// Only applicable when using `init` with title.
-        public var header: Font = modalReference.fonts.header
+        public var header: Font = GlobalUIModel.Modals.headerFont
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -293,10 +305,10 @@ public struct VBottomSheetUIModel {
     public struct Animations {
         // MARK: Properties
         /// Appear animation. Defaults to `easeInOut` with duration `0.3`.
-        public var appear: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+        public var appear: BasicAnimation? = GlobalUIModel.Modals.slideableAppearAnimation
         
         /// Disappear animation. Defaults to `easeInOut` with duration `0.3`.
-        public var disappear: BasicAnimation? = .init(curve: .easeInOut, duration: 0.3)
+        public var disappear: BasicAnimation? = GlobalUIModel.Modals.slideableDisappearAnimation
         
         /// Pull-down dismiss animation. Defaults to `easeInOut` with duration `0.1`.
         public var pullDownDismiss: BasicAnimation? = .init(curve: .easeInOut, duration: 0.1)
@@ -410,12 +422,12 @@ extension VBottomSheetUIModel {
         return uiModel
     }
     
-    /// `VBottomSheetUIModel` that hides header.
+    /// `VBottomSheetUIModel` that hides only leaves grabber.
     ///
     /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
     ///
     /// It's recommended that you do not use header title or label with this configuration.
-    public static var noHeaderLabel: Self {
+    public static var onlyGrabber: Self {
         var uiModel: Self = .init()
         
         uiModel.layout.grabberMargins = .init(15)
@@ -426,12 +438,12 @@ extension VBottomSheetUIModel {
         return uiModel
     }
     
-    /// `VBottomSheetUIModel` that hides header, autoresizes content, and inserts bottom safe area for scrollable content.
+    /// `VBottomSheetUIModel` that only leaves grabber, autoresizes content, and inserts bottom safe area for scrollable content.
     ///
     /// Grabber is still visible. To hide grabber, use `fullSizedContent`.
     ///
     /// It's recommended that you do not use header title or label with this configuration.
-    public static var scrollableContentNoHeaderLabel: Self {
+    public static var scrollableContentOnlyGrabber: Self {
         var uiModel: Self = .init()
         
         uiModel.layout.grabberMargins = .init(15)
@@ -448,7 +460,7 @@ extension VBottomSheetUIModel {
     ///
     /// It's recommended that you do not use header title or label with this configuration.
     public static var fullSizedContent: Self {
-        var uiModel: Self = .noHeaderLabel
+        var uiModel: Self = .onlyGrabber
         
         uiModel.layout.grabberSize.height = .zero
         

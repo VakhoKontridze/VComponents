@@ -113,7 +113,7 @@ struct VAlert<Content>: View
     @ViewBuilder private var titleView: some View {
         if let title, !title.isEmpty {
             VText(
-                type: .multiLine(alignment: .center, lineLimit: uiModel.layout.titleLineLimit),
+                type: uiModel.layout.titleTextLineType,
                 color: uiModel.colors.title,
                 font: uiModel.fonts.title,
                 text: title
@@ -125,7 +125,7 @@ struct VAlert<Content>: View
     @ViewBuilder private var messageView: some View {
         if let message, !message.isEmpty {
             VText(
-                type: .multiLine(alignment: .center, lineLimit: uiModel.layout.messageLineLimit),
+                type: uiModel.layout.messageTextLineType,
                 color: uiModel.colors.message,
                 font: uiModel.fonts.message,
                 text: message
@@ -228,22 +228,251 @@ struct VAlert<Content>: View
 
 // MARK: - Preview
 struct VAlert_Previews: PreviewProvider {
+    private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
+    private static var message: String { "Lorem ipsum dolor sit amet" }
+    
+    private static func content() -> some View {
+        VTextField(text: .constant("Lorem ipsum dolor sit amet"))
+    }
+    
     static var previews: some View {
-        VAlert(
-            uiModel: .init(),
-            onPresent: nil,
-            onDismiss: nil,
-            title: "Lorem Ipsum Dolor Sit Amet",
-            message: "Lorem ipsum dolor sit amet",
-            content: {
-                .custom(content: {
-                    VTextField(text: .constant("Lorem ipsum dolor sit amet"))
-                })
-            }(),
-            buttons: [
-                VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
-                VAlertCancelButton(action: nil)
-            ]
-        )
+        ColorSchemePreview(title: nil, content: Preview.init)
+        
+//        NoContentPreview().previewDisplayName("No Content")
+        
+//        NoButtonPreview().previewDisplayName("No Button")
+//        SingleButtonPreview().previewDisplayName("Single Button")
+//        ManyButtonsPreview().previewDisplayName("Many Buttons")
+        
+//        ButtonStatesPreview_Pressed().previewDisplayName("Button States - Pressed")
+//        ButtonStatesPreview_Disabled().previewDisplayName("Button States - Disabled")
+        
+//        NoTitlePreview().previewDisplayName("No Title")
+//        NoMessagePreview().previewDisplayName("No Message")
+//        NoTitleNoMessagePreview().previewDisplayName("No Title & Message")
+        
+//        OnlyButtonsPreview().previewDisplayName("Only Buttons")
+    }
+    
+    private struct Preview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: message,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct NoContentPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert<Never>(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: message,
+                    content: .empty,
+                    buttons: [
+                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct NoButtonPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: message,
+                    content: .custom(content: content),
+                    buttons: []
+                )
+            })
+        }
+    }
+    
+    private struct SingleButtonPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: message,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct ManyButtonsPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: message,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertPrimaryButton(action: {}, title: "Option A"),
+                        VAlertSecondaryButton(action: {}, title: "Option B"),
+                        VAlertDestructiveButton(action: {}, title: "Delete"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct ButtonStatesPreview_Pressed: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: {
+                        var uiModel: VAlertUIModel = .init()
+                        uiModel.colors.primaryButtonBackground.enabled = uiModel.colors.primaryButtonBackground.pressed
+                        uiModel.colors.primaryButtonTitle.enabled = uiModel.colors.primaryButtonTitle.pressed
+                        uiModel.colors.secondaryButtonBackground.enabled = uiModel.colors.secondaryButtonBackground.pressed
+                        uiModel.colors.secondaryButtonTitle.enabled = uiModel.colors.secondaryButtonTitle.pressed
+                        uiModel.colors.destructiveButtonBackground.enabled = uiModel.colors.destructiveButtonBackground.pressed
+                        uiModel.colors.destructiveButtonTitle.enabled = uiModel.colors.destructiveButtonTitle.pressed
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: message,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertPrimaryButton(action: {}, title: "Option A"),
+                        VAlertDestructiveButton(action: {}, title: "Delete"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct ButtonStatesPreview_Disabled: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: message,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertPrimaryButton(action: {}, title: "Option A").disabled(true),
+                        VAlertDestructiveButton(action: {}, title: "Delete").disabled(true),
+                        VAlertCancelButton(action: nil).disabled(true)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct NoTitlePreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: nil,
+                    message: message,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct NoMessagePreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: title,
+                    message: nil,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct NoTitleNoMessagePreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert(
+                    uiModel: .init(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: nil,
+                    message: nil,
+                    content: .custom(content: content),
+                    buttons: [
+                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
+    }
+    
+    private struct OnlyButtonsPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VAlert<Never>(
+                    uiModel: {
+                        var uiModel: VAlertUIModel = .init()
+                        uiModel.layout.titleMessageContentMargins.top = uiModel.layout.titleMessageContentMargins.bottom
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    title: nil,
+                    message: nil,
+                    content: .empty,
+                    buttons: [
+                        VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
+                        VAlertCancelButton(action: nil)
+                    ]
+                )
+            })
+        }
     }
 }

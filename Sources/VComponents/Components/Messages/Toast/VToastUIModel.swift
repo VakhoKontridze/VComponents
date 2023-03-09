@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VToastUIModel {
     // MARK: Properties
-    fileprivate static let textFieldReference: VTextFieldUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -41,7 +39,7 @@ public struct VToastUIModel {
         public var cornerRadiusType: CornerRadiusType = .default
         
         /// Text line type. Defaults to `default`.
-        public var textLineType: TextLineType = .default
+        public var titleTextLineType: TextLineType = .default
         
         /// Text margins. Defaults to `20` horizontal and `12` vertical.
         public var textMargins: Margins = .init(
@@ -130,7 +128,7 @@ public struct VToastUIModel {
         public var text: Color = ColorBook.primary
         
         /// Background color.
-        public var background: Color = textFieldReference.colors.background.enabled
+        public var background: Color = ColorBook.layerGray
         
         // MARK: Initializers
         /// Initializes UI model with default values.

@@ -67,10 +67,10 @@ public struct VWrappingMarqueeUIModel {
         /// For best result, should be less than or equal to `inset`.
         public var gradientWidth: CGFloat = 0
         
-        /// Gradient color at the edge of the container. Defaults to `ColorBook.layer`.
+        /// Gradient color at the edge of the container.
         public var gradientColorContainerEdge: Color = ColorBook.layer
         
-        /// Gradient color at the edge of the content. Defaults to almost-transparent `ColorBook.layer`.
+        /// Gradient color at the edge of the content.
         public var gradientColorContentEdge: Color = ColorBook.layer.opacity(0.01)
         
         // MARK: Initializers

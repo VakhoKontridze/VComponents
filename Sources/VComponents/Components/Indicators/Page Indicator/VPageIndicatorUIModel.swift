@@ -12,8 +12,6 @@ import VCore
 /// Model that describes UI.
 public struct VPageIndicatorUIModel {
     // MARK: Properties
-    fileprivate static let progressBarReference: VProgressBarUIModel = .init()
-    
     /// Model that contains layout properties.
     public var layout: Layout = .init()
     
@@ -49,18 +47,18 @@ public struct VPageIndicatorUIModel {
         /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
-        public var dotDimensionPrimaryAxis: CGFloat? = 10
+        public var dotDimensionPrimaryAxis: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
         /// Dot dimension on the secondary axis. Defaults to `10`.
         ///
         /// For horizontal layouts, this will be height, and for vertical, width.
-        public var dotDimensionSecondaryAxis: CGFloat = 10
+        public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
         /// Dot spacing. Defaults to `5`.
-        public var spacing: CGFloat = 5
+        public var spacing: CGFloat = GlobalUIModel.Indicators.pageIndicatorSpacing
         
         /// Unselected dot scale. Defaults to `0.85`.
-        public var unselectedDotScale: CGFloat = 0.85
+        public var unselectedDotScale: CGFloat = GlobalUIModel.Indicators.pageIndicatorStandardUnselectedDotScale
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -86,10 +84,10 @@ public struct VPageIndicatorUIModel {
     public struct Colors {
         // MARK: Properties
         /// Dot color.
-        public var dot: Color = .init(componentAsset: "color_190.190.190_120.120.120")
+        public var dot: Color = .init(module: "PageIndicator.Dot")
         
         /// Selected dot color.
-        public var selectedDot: Color = progressBarReference.colors.progress
+        public var selectedDot: Color = ColorBook.accentBlue
         
         // MARK: Initializers
         /// Initializes UI model with default values.
