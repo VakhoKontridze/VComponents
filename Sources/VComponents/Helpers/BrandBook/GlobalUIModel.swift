@@ -28,7 +28,13 @@ struct GlobalUIModel {
         static var headerTextLineType: TextLineType { .singleLine }
         static var headerFont: Font { .system(size: 14) }
         
-        static var footerTextLineType: TextLineType { .multiLine(alignment: .leading, lineLimit: 1...5) }
+        static var footerTextLineType: TextLineType = {
+            if #available(iOS 16.0, *) {
+                return .multiLine(alignment: .leading, lineLimit: 1...5)
+            } else {
+                return .multiLine(alignment: .leading, lineLimit: 5)
+            }
+        }()
         static var footerFont: Font { .system(size: 13) }
         
         static var headerComponentFooterSpacing: CGFloat { 3 }
@@ -110,7 +116,13 @@ struct GlobalUIModel {
         
         static var statePickerLabelSpacing: CGFloat { 5 }
         
-        static var titleTextLineType: TextLineType { .multiLine(alignment: .leading, lineLimit: 1...2) }
+        static var titleTextLineType: TextLineType = {
+            if #available(iOS 16.0, *) {
+                return .multiLine(alignment: .leading, lineLimit: 1...2)
+            } else {
+                return .multiLine(alignment: .leading, lineLimit: 2)
+            }
+        }()
         static var font: Font { .system(size: 15) }
         
         static var customLabelOpacityDisabled: CGFloat { Common.customLabelOpacitySpecialState }

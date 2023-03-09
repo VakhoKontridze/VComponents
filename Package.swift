@@ -6,7 +6,7 @@ let package: Package = .init(
     name: "VComponents",
     
     platforms: [
-        .iOS(.v16)
+        .iOS(.v15)
     ],
     
     products: [

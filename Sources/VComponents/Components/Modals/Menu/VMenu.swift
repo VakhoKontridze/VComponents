@@ -126,7 +126,7 @@ public struct VMenu<Label>: View where Label: View {
             }
         })
             .disabled(!internalState.isEnabled)
-            .menuOrder(.fixed)
+            .menuOrderFixedIOS16BackwardsCompatible
     }
     
     private func contentView() -> some View {
@@ -149,6 +149,19 @@ public struct VMenu<Label>: View where Label: View {
             
         case .custom(let label):
             label()
+        }
+    }
+}
+
+// MARK: - Helpers
+extension View {
+    @ViewBuilder fileprivate var menuOrderFixedIOS16BackwardsCompatible: some View {
+        if #available(iOS 16.0, *) {
+            self
+                .menuOrder(.fixed)
+            
+        } else {
+            self
         }
     }
 }

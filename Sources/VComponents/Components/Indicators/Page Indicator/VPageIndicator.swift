@@ -127,20 +127,22 @@ public struct VPageIndicator<Content>: View where Content: View {
 
     // MARK: Body
     public var body: some View {
-        let layout: AnyLayout = uiModel.layout.direction.stackLayout(spacing: uiModel.layout.spacing)
-        
         let range: [Int] = (0..<total)
             .reversedArray(if: uiModel.layout.direction.isReversed)
         
-        return layout.callAsFunction({
-            ForEach(range, id: \.self, content: { i in
-                dotContentView
-                    .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
-                    .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
-                    .scaleEffect(selectedIndex == i ? 1 : uiModel.layout.unselectedDotScale)
-                    .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
-            })
-        })
+        return HOrVStack(
+            spacing: uiModel.layout.spacing,
+            isHorizontal: uiModel.layout.direction.isHorizontal,
+            content: {
+                ForEach(range, id: \.self, content: { i in
+                    dotContentView
+                        .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
+                        .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
+                        .scaleEffect(selectedIndex == i ? 1 : uiModel.layout.unselectedDotScale)
+                        .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                })
+            }
+        )
             .animation(uiModel.animations.transition, value: selectedIndex)
     }
     

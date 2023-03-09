@@ -168,7 +168,7 @@ public struct VTextView: View {
                     .foregroundColor(uiModel.colors.placeholder.value(for: internalState))
                     .font(uiModel.fonts.placeholder)
             },
-            axis: .vertical,
+            //axis: .vertical,
             label: EmptyView.init
         )
             .focused($isFocused) // Catches the focus from outside and stores in `isFocused`

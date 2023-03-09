@@ -21,7 +21,7 @@ Versions with different majors are not compatible.
 
 | Ver | Release Date | iOS  | SwiftUI | VCore         | Comment                                    |
 | :-- | :--          | :--  | :--     | :--           | :--                                        |
-| 4.0 | 2023 XX XX   | 16.0 | 4.0     | 4.7.0 - 4.x.x | XXX                                        |
+| 4.0 | 2023 XX XX   | 15.0 | 3.0     | 4.7.0 - 4.x.x | iOS 15.0 support                           |
 | 3.0 | 2022 10 02   | 16.0 | 4.0     | 4.1.0 - 4.x.x | New SwiftUI API. API changes.              |
 | 2.0 | 2022 05 26   | 15.0 | 3.0     | 3.2.0 - 3.x.x | New SwiftUI API. API changes. SPM support. |
 | 1.0 | 2021 02 07   | 14.0 | 2.0     | -             | -                                          |

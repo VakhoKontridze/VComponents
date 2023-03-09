@@ -58,8 +58,14 @@ public struct VRoundedLabeledButtonUIModel {
         /// Icon label size. Set to `18` by `18`.
         public var iconLabelSize: CGSize = .init(dimension: 18)
         
-        /// Title label text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
-        public var titleLabelTextLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: 1...2)
+        /// Title label text line type. Set to `multiline` with `center` alignment and `1...2` lines.
+        public var titleLabelTextLineType: TextLineType = {
+            if #available(iOS 16.0, *) {
+                return .multiLine(alignment: .center, lineLimit: 1...2)
+            } else {
+                return .multiLine(alignment: .center, lineLimit: 2)
+            }
+        }()
         
         /// Title label minimum scale factor. Set to `0.75`.
         public var titleLabelMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor

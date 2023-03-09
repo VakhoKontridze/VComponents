@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Compact Page Indicator UI Model
 /// Model that describes UI.
+@available(iOS 16.0, *)
 public struct VCompactPageIndicatorUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -136,6 +137,7 @@ public struct VCompactPageIndicatorUIModel {
 }
 
 // MARK: - Factory
+@available(iOS 16.0, *)
 extension VCompactPageIndicatorUIModel {
     /// `VCompactPageIndicatorUIModel` with vertical layout.
     public static var vertical: Self {

@@ -170,61 +170,69 @@ struct VText_Previews: PreviewProvider {
                     }
                 )
                 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Multi-Line Space-Reserved",
-                    content: {
-                        VText(
-                            type: .multiLine(alignment: .center, lineLimit: lineMax, reservesSpace: true),
-                            color: textColor,
-                            font: textFont,
-                            text: textLong
-                        )
+                if #available(iOS 16.0, *) {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Multi-Line Space-Reserved",
+                        content: {
+                            VText(
+                                type: .multiLine(alignment: .center, lineLimit: lineMax, reservesSpace: true),
+                                color: textColor,
+                                font: textFont,
+                                text: textLong
+                            )
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                )
+                        }
+                    )
+                }
                 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Multi-Line Partial Range (From)",
-                    content: {
-                        VText(
-                            type: .multiLine(alignment: .center, lineLimit: lineMin...),
-                            color: textColor,
-                            font: textFont,
-                            text: textLong
-                        )
+                if #available(iOS 16.0, *) {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Multi-Line Partial Range (From)",
+                        content: {
+                            VText(
+                                type: .multiLine(alignment: .center, lineLimit: lineMin...),
+                                color: textColor,
+                                font: textFont,
+                                text: textLong
+                            )
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                )
+                        }
+                    )
+                }
                 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Multi-Line Partial Range (Through)",
-                    content: {
-                        VText(
-                            type: .multiLine(alignment: .center, lineLimit: ...lineMax),
-                            color: textColor,
-                            font: textFont,
-                            text: textLong
-                        )
+                if #available(iOS 16.0, *) {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Multi-Line Partial Range (Through)",
+                        content: {
+                            VText(
+                                type: .multiLine(alignment: .center, lineLimit: ...lineMax),
+                                color: textColor,
+                                font: textFont,
+                                text: textLong
+                            )
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                )
+                        }
+                    )
+                }
                 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Multi-Line Closed Range",
-                    content: {
-                        VText(
-                            type: .multiLine(alignment: .center, lineLimit: lineMin...lineMax),
-                            color: textColor,
-                            font: textFont,
-                            text: textLong
-                        )
+                if #available(iOS 16.0, *) {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Multi-Line Closed Range",
+                        content: {
+                            VText(
+                                type: .multiLine(alignment: .center, lineLimit: lineMin...lineMax),
+                                color: textColor,
+                                font: textFont,
+                                text: textLong
+                            )
                             .frame(maxWidth: .infinity, alignment: .trailing)
-                    }
-                )
+                        }
+                    )
+                }
             })
         }
     }

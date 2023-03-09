@@ -64,7 +64,13 @@ public struct VAlertUIModel {
         )
         
         /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
-        public var messageTextLineType: TextLineType = .multiLine(alignment: .center, lineLimit: 1...5)
+        public var messageTextLineType: TextLineType = {
+            if #available(iOS 16.0, *) {
+                return .multiLine(alignment: .center, lineLimit: 1...5)
+            } else {
+                return .multiLine(alignment: .center, lineLimit: 5)
+            }
+        }()
         
         /// Title margins. Set to `0` horizontal and `5` vertical.
         public var messageMargins: Margins = .init(

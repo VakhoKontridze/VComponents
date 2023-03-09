@@ -59,6 +59,7 @@ import VCore
 ///             .padding()
 ///     }
 ///
+@available(iOS 16.0, *)
 public struct VCompactPageIndicator<Content>: View where Content: View {
     // MARK: Properties
     private let uiModel: VCompactPageIndicatorUIModel
@@ -353,6 +354,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
 }
 
 // MARK: - Helpers
+@available(iOS 16.0, *)
 extension Int {
     fileprivate var isEven: Bool { self % 2 == 0 }
     
@@ -360,6 +362,7 @@ extension Int {
 }
 
 // MARK: - Preview
+@available(iOS 16.0, *)
 struct VCompactPageIndicator_Previews: PreviewProvider {
     private static var total: Int { 10 }
     private static var selectedIndex: Int { 0 }

@@ -61,6 +61,7 @@ extension View {
 }
 
 // MARK: - Menu with Preview
+@available(iOS 16.0, *)
 extension View {
     /// Presents context menu when `View` is long-pressed.
     ///
