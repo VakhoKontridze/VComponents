@@ -40,7 +40,7 @@ public struct VTextFieldUIModel {
         /// Textfield corner radius. Defaults to `12`.
         public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
         
-        /// Textfield text alignment. Defaults to `default`.
+        /// Textfield text alignment. Defaults to `leading`.
         public var textAlignment: TextAlignment = .leading
         
         /// Textfield border width. Defaults to `0`.
