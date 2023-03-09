@@ -1,6 +1,6 @@
 # Change Log
 
-### 3.2.0(29)
+### [3.2.0(29)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.0) — *2023 03 09*
 
 General
 
