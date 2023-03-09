@@ -31,10 +31,3 @@ struct TitledSection<Content>: View where Content: View {
         }
     }
 }
-
-// MARK: - Preview
-struct TitledSection_Previews: PreviewProvider {
-    static var previews: some View {
-        VMenu_Previews.previews
-    }
-}
