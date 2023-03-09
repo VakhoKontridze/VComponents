@@ -35,9 +35,6 @@ struct TitledSection<Content>: View where Content: View {
 // MARK: - Preview
 struct TitledSection_Previews: PreviewProvider {
     static var previews: some View {
-        TitledSection(title: "Lorem Ipsum", content: {
-            Color.blue
-                .frame(height: 100)
-        })
+        VMenu_Previews.previews
     }
 }
