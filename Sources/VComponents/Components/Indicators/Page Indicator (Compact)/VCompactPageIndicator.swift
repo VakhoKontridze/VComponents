@@ -141,7 +141,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     private var compactBody: some View {
         frame
-            .overlay(content: { dots })
+            .overlay(dots)
             .clipped()
     }
     

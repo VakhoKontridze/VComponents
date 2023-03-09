@@ -225,7 +225,7 @@ public struct VWheelPicker<Data, Content>: View
         )
             .pickerStyle(.wheel)
             .disabled(!internalState.isEnabled) // Luckily, doesn't affect colors
-            .background(content: { uiModel.colors.background.value(for: internalState).cornerRadius(uiModel.layout.cornerRadius) })
+            .background(uiModel.colors.background.value(for: internalState).cornerRadius(uiModel.layout.cornerRadius))
     }
     
     @ViewBuilder private func rows() -> some View {

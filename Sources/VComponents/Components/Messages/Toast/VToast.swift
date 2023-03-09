@@ -64,7 +64,7 @@ struct VToast: View {
             text: text
         )
             .padding(uiModel.layout.textMargins)
-            .background(content: { background })
+            .background(background)
             .readSize(onChange: { height = $0.height })
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }

@@ -147,7 +147,7 @@ public struct VTextView: View {
         })
             .padding(uiModel.layout.contentMargin)
             .frame(minHeight: uiModel.layout.minHeight)
-            .background(content: { background })
+            .background(background)
     }
     
     private var background: some View {

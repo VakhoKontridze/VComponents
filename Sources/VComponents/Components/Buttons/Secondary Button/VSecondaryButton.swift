@@ -80,8 +80,8 @@ public struct VSecondaryButton<Label>: View where Label: View {
         SwiftUIBaseButton(gesture: gestureHandler, label: {
             buttonLabel
                 .frame(height: uiModel.layout.height)
-                .background(content: { background })
-                .overlay(content: { border })
+                .background(background)
+                .overlay(border)
                 .padding(uiModel.layout.hitBox)
         })
             .disabled(!internalState.isEnabled)

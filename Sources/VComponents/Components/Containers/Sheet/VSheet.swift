@@ -60,7 +60,7 @@ public struct VSheet<Content>: View where Content: View {
     // MARK: Body
     public var body: some View {
         contentView
-            .background(content: { sheet })
+            .background(sheet)
             .cornerRadius(
                 uiModel.layout.cornerRadius,
                 corners: uiModel.layout.roundedCorners

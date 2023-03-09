@@ -104,8 +104,8 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
                 .opacity(uiModel.colors.iconOpacities.value(for: internalState))
         })
             .frame(dimension: uiModel.layout.roundedRectangleDimension)
-            .background(content: { rectangleBackground })
-            .overlay(content: { roundedRectangleBorder })
+            .background(rectangleBackground)
+            .overlay(roundedRectangleBorder)
     }
     
     private var rectangleBackground: some View {

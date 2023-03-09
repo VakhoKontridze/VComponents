@@ -70,7 +70,7 @@ public struct VSlider: View {
             progress
         })
             .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-            .overlay(content: { thumb })
+            .overlay(thumb)
             .frame(height: uiModel.layout.height)
             .readSize(onChange: { sliderWidth = $0.width })
             .padding(.horizontal, uiModel.layout.thumbDimension / 2)

@@ -90,8 +90,8 @@ public struct VPrimaryButton<Label>: View where Label: View {
         SwiftUIBaseButton(gesture: gestureHandler, label: {
             buttonLabel
                 .frame(height: uiModel.layout.height)
-                .background(content: { background })
-                .overlay(content: { border })
+                .background(background)
+                .overlay(border)
         })
             .disabled(!internalState.isEnabled)
     }

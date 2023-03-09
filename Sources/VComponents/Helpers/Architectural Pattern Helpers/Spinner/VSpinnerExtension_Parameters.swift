@@ -24,15 +24,17 @@ extension View {
         case let parameters?:
             self
                 .blocksHitTesting(parameters.isInteractionDisabled)
-                .overlay(content: {
-                    switch parameters.spinnerType {
-                    case .continuous(let uiModel):
-                        VContinuousSpinner(uiModel: uiModel)
-                        
-                    case .dashed(let uiModel):
-                        VDashedSpinner(uiModel: uiModel)
-                    }
-                })
+                .overlay({
+                    Group(content: {
+                        switch parameters.spinnerType {
+                        case .continuous(let uiModel):
+                            VContinuousSpinner(uiModel: uiModel)
+                            
+                        case .dashed(let uiModel):
+                            VDashedSpinner(uiModel: uiModel)
+                        }
+                    })
+                }())
         }
     }
 }
