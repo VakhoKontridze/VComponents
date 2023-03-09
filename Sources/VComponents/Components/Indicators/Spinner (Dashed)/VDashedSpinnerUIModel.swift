@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Dashed Spinner UI Model
 /// Model that describes UI.
+@available(iOS 14.0, *)
 public struct VDashedSpinnerUIModel {
     // MARK: Properties
     /// Model that contains color properties.

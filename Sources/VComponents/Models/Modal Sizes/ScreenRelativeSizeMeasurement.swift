@@ -27,6 +27,7 @@ extension CGSize: ScreenRelativeSizeMeasurement {
 }
 
 // MARK: - V Alert Size
+@available(iOS 14.0, *)
 extension VAlertUIModel.Layout.AlertSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
         _ measurement: VAlertUIModel.Layout.AlertSize

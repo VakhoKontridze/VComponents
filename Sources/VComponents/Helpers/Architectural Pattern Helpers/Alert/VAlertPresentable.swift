@@ -46,6 +46,7 @@ import SwiftUI
 ///         }
 ///     }
 ///
+@available(iOS 14.0, *)
 @MainActor public protocol VAlertPresentable: ObservableObject {
     /// `VAlertParameters`.
     var vAlertParameters: VAlertParameters? { get set }

@@ -24,7 +24,7 @@ import SwiftUI
 ///                 action: { presenter.didTapButton() },
 ///                 title: "Lorem ipsum"
 ///             )
-///                 .vSpinner(parameters: presenter.vSpinnerParameters)
+///                 .vContinuousSpinner(parameters: presenter.vSpinnerParameters)
 ///         }
 ///     }
 ///

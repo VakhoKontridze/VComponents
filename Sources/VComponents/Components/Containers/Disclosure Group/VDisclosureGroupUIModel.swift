@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Disclosure Group UI Model
 /// Model that describes UI.
+@available(iOS 14.0, *)
 public struct VDisclosureGroupUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -209,6 +210,7 @@ public struct VDisclosureGroupUIModel {
 }
 
 // MARK: - Factory
+@available(iOS 14.0, *)
 extension VDisclosureGroupUIModel {
     /// `VDisclosureGroupUIModel` that insets content.
     public static var insettedContent: Self {

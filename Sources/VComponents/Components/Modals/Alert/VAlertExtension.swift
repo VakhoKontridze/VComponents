@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - Bool
+@available(iOS 14.0, *)
 extension View {
     /// Presents alert when `Bool` is `true`.
     ///
@@ -132,6 +133,7 @@ extension View {
 }
 
 // MARK: - Item
+@available(iOS 14.0, *)
 extension View {
     /// Presents alert using the item as data source for content.
     ///
@@ -313,6 +315,7 @@ extension View {
 }
 
 // MARK: - Presenting Data
+@available(iOS 14.0, *)
 extension View {
     /// Presents alert when `Bool` is `true` using data to produce content.
     ///
@@ -503,6 +506,7 @@ extension View {
 }
 
 // MARK: - Error
+@available(iOS 14.0, *)
 extension View {
     /// Presents alert when `Bool` is `true` using `Error`
     ///

@@ -9,6 +9,7 @@ import SwiftUI
 
 // MARK: - V Alert Button Protocol
 /// `VAlert` button protocol.
+@available(iOS 14.0, *)
 public protocol VAlertButtonProtocol: VAlertButtonConvertible {
     /// Body type.
     typealias Body = AnyView
@@ -20,12 +21,14 @@ public protocol VAlertButtonProtocol: VAlertButtonConvertible {
     ) -> Body
 }
 
+@available(iOS 14.0, *)
 extension VAlertButtonProtocol {
     public func toButtons() -> [any VAlertButtonProtocol] { [self] }
 }
 
 // MARK: - V Alert Primary Button
 /// Primary `VAlert` button.
+@available(iOS 14.0, *)
 public struct VAlertPrimaryButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -69,6 +72,7 @@ public struct VAlertPrimaryButton: VAlertButtonProtocol {
 
 // MARK: - V Alert Secondary Button
 /// Secondary `VAlert` button.
+@available(iOS 14.0, *)
 public struct VAlertSecondaryButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -112,6 +116,7 @@ public struct VAlertSecondaryButton: VAlertButtonProtocol {
 
 // MARK: - V Alert OK Button
 /// "Ok" `VAlert` button.
+@available(iOS 14.0, *)
 public struct VAlertOKButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -157,6 +162,7 @@ public struct VAlertOKButton: VAlertButtonProtocol {
 
 // MARK: - V Alert Destructive Button
 /// Destructive `VAlert` button.
+@available(iOS 14.0, *)
 public struct VAlertDestructiveButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true
@@ -200,6 +206,7 @@ public struct VAlertDestructiveButton: VAlertButtonProtocol {
 
 // MARK: - V Alert Cancel Button
 /// Cancel `VAlert` button.
+@available(iOS 14.0, *)
 public struct VAlertCancelButton: VAlertButtonProtocol {
     // MARK: Properties
     private var isEnabled: Bool = true

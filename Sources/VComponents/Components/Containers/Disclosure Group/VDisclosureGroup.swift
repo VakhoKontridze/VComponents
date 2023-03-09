@@ -33,6 +33,7 @@ import VCore
 ///             .padding()
 ///     })
 ///
+@available(iOS 14.0, *)
 public struct VDisclosureGroup<HeaderLabel, Content>: View
     where
         HeaderLabel: View,
@@ -196,6 +197,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 }
 
 // MARK: - Helpers
+@available(iOS 14.0, *)
 extension VDisclosureGroupInternalState {
     fileprivate var chevronButtonDirection: ChevronButtonDirection {
         switch self {
@@ -207,6 +209,7 @@ extension VDisclosureGroupInternalState {
 }
 
 // MARK: - Previews
+@available(iOS 14.0, *)
 struct VDisclosureGroup_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem Ipsum" }
 

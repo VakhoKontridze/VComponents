@@ -9,17 +9,20 @@ import Foundation
 
 // MARK: - V Alert Button Convertible
 /// Type that allows for conversion to `VAlertButtonProtocol`.
+@available(iOS 14.0, *)
 public protocol VAlertButtonConvertible {
     /// Converts `VAlertButtonConvertible` to `VAlertButtonProtocol` `Array`.
     func toButtons() -> [any VAlertButtonProtocol]
 }
 
+@available(iOS 14.0, *)
 extension Array: VAlertButtonConvertible where Element == VAlertButtonProtocol {
     public func toButtons() -> [any VAlertButtonProtocol] { self }
 }
 
 // MARK: - V Alert Button Builder
 /// Custom parameter attribute that constructs views from closures.
+@available(iOS 14.0, *)
 @resultBuilder public struct VAlertButtonBuilder {
     // MARK: Properties
     public typealias Component = any VAlertButtonConvertible

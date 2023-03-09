@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Toast
+@available(iOS 14.0, *)
 struct VToast: View {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
@@ -171,6 +172,7 @@ struct VToast: View {
 }
 
 // MARK: - Helpers
+@available(iOS 14.0, *)
 extension TextAlignment {
     fileprivate var toNSTextAlignment: NSTextAlignment {
         switch self {
@@ -182,6 +184,7 @@ extension TextAlignment {
 }
 
 // MARK: - Preview
+@available(iOS 14.0, *)
 struct VToast_Previews: PreviewProvider {
     private static var text: String { "Lorem ipsum dolor sit amet" }
     private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }

@@ -16,6 +16,7 @@ import SwiftUI
 ///         VDashedSpinner()
 ///     }
 ///
+@available(iOS 14.0, *)
 public struct VDashedSpinner: View {
     // MARK: Properties
     private let uiModel: VDashedSpinnerUIModel
@@ -36,6 +37,7 @@ public struct VDashedSpinner: View {
 }
 
 // MARK: - Preview
+@available(iOS 14.0, *)
 struct VDashedSpinner_Previews: PreviewProvider {
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)

@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Toast UI Model
 /// Model that describes UI.
+@available(iOS 14.0, *)
 public struct VToastUIModel {
     // MARK: Properties
     /// Model that contains layout properties.

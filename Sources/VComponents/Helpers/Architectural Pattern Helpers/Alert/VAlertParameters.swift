@@ -15,13 +15,11 @@ import SwiftUI
 ///
 /// In `MVP`, `VIP`, and `VIPER` architectures, parameters are stored in`Presenter`.
 /// in `MVVM` architecture, parameters are stored in `ViewModel.`
+@available(iOS 14.0, *)
 public struct VAlertParameters: Identifiable {
     // MARK: Properties
     /// ID.
     public let id: UUID = .init()
-    
-    /// UI model.
-    public var uiModel: VAlertUIModel
     
     /// Title.
     public var title: String
@@ -35,12 +33,10 @@ public struct VAlertParameters: Identifiable {
     // MARK: Parameters
     /// Initializes `VAlertParameters`.
     public init(
-        uiModel: VAlertUIModel = .init(),
         title: String,
         message: String?,
         @VAlertButtonBuilder actions buttons: @escaping () -> [any VAlertButtonProtocol]
     ) {
-        self.uiModel = uiModel
         self.title = title
         self.message = message
         self.buttons = buttons
@@ -48,13 +44,11 @@ public struct VAlertParameters: Identifiable {
 
     /// Initializes `VAlertParameters` with "ok" action.
     public init(
-        uiModel: VAlertUIModel = .init(),
         title: String,
         message: String?,
         completion: (() -> Void)?
     ) {
         self.init(
-            uiModel: uiModel,
             title: title,
             message: message,
             actions: {
@@ -65,12 +59,10 @@ public struct VAlertParameters: Identifiable {
 
     /// Initializes `VAlertParameters` with error and "ok" action.
     public init(
-        uiModel: VAlertUIModel = .init(),
         error: some Error,
         completion: (() -> Void)?
     ) {
         self.init(
-            uiModel: uiModel,
             title: VComponentsLocalizationManager.shared.localizationProvider.vAlertErrorTitle,
             message: error.localizedDescription,
             actions: {

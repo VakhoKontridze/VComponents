@@ -10,6 +10,7 @@ import VCore
 
 // MARK: - V Alert UI Model
 /// Model that describes UI.
+@available(iOS 14.0, *)
 public struct VAlertUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -299,6 +300,7 @@ public struct VAlertUIModel {
 }
 
 // MARK: - Helpers
+@available(iOS 14.0, *)
 extension GenericStateModel_EnabledPressedLoadingDisabled where Value == Color {
     fileprivate static func alertButton(_ model: GenericStateModel_EnabledPressedDisabled<Color>) -> Self {
         self.init(

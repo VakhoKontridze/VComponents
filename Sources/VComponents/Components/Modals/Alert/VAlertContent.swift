@@ -8,6 +8,7 @@
 import SwiftUI
 
 // MARK: - V Alert Content
+@available(iOS 14.0, *)
 enum VAlertContent<CustomContent> where CustomContent: View {
     case empty
     case custom(content: () -> CustomContent)

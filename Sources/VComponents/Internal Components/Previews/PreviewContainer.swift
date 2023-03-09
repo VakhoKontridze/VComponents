@@ -29,7 +29,7 @@ struct PreviewContainer<Content>: View where Content: View {
     var body: some View {
         ZStack(content: {
             ColorBook.canvas
-                .ignoresSafeArea()
+                .edgesIgnoringSafeArea(.all)
             
             if hasLayer { ColorBook.layer }
             

@@ -20,34 +20,12 @@ public struct VSpinnerParameters: Identifiable {
     /// ID.
     public let id: UUID = .init()
     
-    /// Type.
-    public var spinnerType: SpinnerType
-    
     /// Indicates if interaction is disabled.
     public var isInteractionDisabled: Bool
     
     // MARK: Initializers
     /// Initializes `VSpinnerParameters`.
-    public init(
-        type spinnerType: SpinnerType = .default,
-        isInteractionDisabled: Bool
-    ) {
-        self.spinnerType = spinnerType
+    public init(isInteractionDisabled: Bool) {
         self.isInteractionDisabled = isInteractionDisabled
-    }
-    
-    // MARK: Spinner Type
-    /// Enum that represents `VSpinner` type, such as `continuous` or `dashed`
-    public enum SpinnerType {
-        // MARK: Cases
-        /// Continuous spinner.
-        case continuous(uiModel: VContinuousSpinnerUIModel = .init())
-        
-        /// Dashed spinner.
-        case dashed(uiModel: VDashedSpinnerUIModel = .init())
-        
-        // MARK: Initializes
-        /// Default value. Set to `continuous`.
-        public static var `default`: Self { .continuous() }
     }
 }

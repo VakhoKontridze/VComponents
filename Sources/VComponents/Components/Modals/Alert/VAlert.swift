@@ -9,6 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Alert
+@available(iOS 14.0, *)
 struct VAlert<Content>: View
     where Content: View
 {
@@ -227,6 +228,7 @@ struct VAlert<Content>: View
 }
 
 // MARK: - Preview
+@available(iOS 14.0, *)
 struct VAlert_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
     private static var message: String { "Lorem ipsum dolor sit amet" }
