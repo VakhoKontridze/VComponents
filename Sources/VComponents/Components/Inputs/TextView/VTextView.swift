@@ -25,21 +25,6 @@ import VCore
 ///             .padding()
 ///     }
 ///
-/// Text line limit can be changed the following way:
-///
-///     @State private var text: String = ""
-///
-///     var body: some View {
-///         VTextView(
-///             type: .spaceReserved(lineLimit: 10, reservesSpace: true),
-///             placeholder: "Lorem ipsum",
-///             headerTitle: "Lorem ipsum dolor sit amet",
-///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///             text: $text
-///         )
-///             .padding()
-///     }
-///
 /// Textview can also be focused externally by passing state:
 ///
 ///     @FocusState private var isFocused: Bool
@@ -97,8 +82,6 @@ public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel
     
-    private let textLineLimitType: TextLineLimitType
-    
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
     private var internalState: VTextFieldInternalState { .init(isEnabled: isEnabled, isFocused: isFocused) }
@@ -113,14 +96,12 @@ public struct VTextView: View {
     /// Initializes `VTextView` with text.
     public init(
         uiModel: VTextViewUIModel = .init(),
-        type textLineLimitType: TextLineLimitType = .none,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         placeholder: String? = nil,
         text: Binding<String>
     ) {
         self.uiModel = uiModel
-        self.textLineLimitType = textLineLimitType
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.placeholder = placeholder
@@ -192,8 +173,8 @@ public struct VTextView: View {
         )
             .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
         
-            .multilineTextAlignment(uiModel.layout.textAlignment)
-            .lineLimit(type: textLineLimitType)
+            .ifLet(uiModel.layout.textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
+            .lineLimit(type: uiModel.layout.textLineType.textLineLimitType)
             .foregroundColor(uiModel.colors.text.value(for: internalState))
             .font(uiModel.fonts.text)
             .keyboardType(uiModel.misc.keyboardType)

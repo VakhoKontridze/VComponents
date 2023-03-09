@@ -72,6 +72,10 @@ VTextField
 
 - `VTextFieldType` is renamed to `ContentType` and is moved to `VTextFieldUIModel`
 
+VTextView
+
+- `TextLineLimitType` is removed from `init` and can now be customized via `textLineType` in `VTextViewUIModel`
+
 VList
 
 - `VListRowSeparatorType` is renamed to `SeparatorType` and is moved to `VListRowUIModel`
