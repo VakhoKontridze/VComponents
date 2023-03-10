@@ -13,9 +13,7 @@ import VCore
 ///
 /// Component can be initialized with title, icon and title, and label.
 ///
-/// UI Model can be passed as parameter.
-///
-/// `isLoading` can be passed as parameter.
+/// UI Model and `isLoading` can be passed as parameters.
 ///
 ///     var body: some View {
 ///         VPrimaryButton(
