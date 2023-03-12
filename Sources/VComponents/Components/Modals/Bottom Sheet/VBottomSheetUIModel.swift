@@ -55,7 +55,7 @@ public struct VBottomSheetUIModel {
         
         /// Grabber indicator size. Set to `50` width and `4` height.
         ///
-        /// To hide, set to `zero`.
+        /// To hide grabber, set to `zero`.
         public var grabberSize: CGSize = .init(width: 50, height: 4)
         
         /// Grabber corner radius. Set to `2`.

@@ -44,7 +44,9 @@ public struct VTextFieldUIModel {
         /// Textfield text alignment. Set to `leading`.
         public var textAlignment: TextAlignment = .leading
         
-        /// Textfield border width. Set to `0`.
+        /// Border width. Set to `0`.
+        ///
+        /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
         
         /// Content type. Set to `default`.

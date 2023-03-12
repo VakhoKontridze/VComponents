@@ -41,7 +41,9 @@ public struct VTextViewUIModel {
         /// Text line type. Set to `multiline` with `leading` alignment and no limit on lines.
         public var textLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: nil)
 
-        /// Textfield border width. Set to `0`.
+        /// Border width. Set to `0`.
+        ///
+        /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
 
         /// Content margin. Set to `15`s.

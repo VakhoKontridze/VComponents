@@ -72,7 +72,7 @@ public struct VModalUIModel {
         
         /// Divider height. Set to `2` scaled to screen.
         ///
-        /// To hide divider, set to `0`.
+        /// To hide divider, set to `0`, and remove header.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
     
         /// Divider margins. Set to `.zero`.

@@ -55,6 +55,8 @@ public struct VSliderUIModel {
         public var thumbCornerRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbCornerRadius
         
         /// Thumb border widths. Set to `0`.
+        ///
+        /// To hide border, set to `0`.
         public var thumbBorderWidth: CGFloat = 0
         
         /// Thumb shadow radius. Set to `2`.
