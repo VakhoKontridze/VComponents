@@ -59,7 +59,6 @@ import VCore
 ///             .padding()
 ///     }
 ///
-@available(iOS 16.0, *)
 public struct VCompactPageIndicator<Content>: View where Content: View {
     // MARK: Properties
     private let uiModel: VCompactPageIndicatorUIModel
@@ -139,9 +138,20 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         }
     }
     
+    // There's something weird going on with animations here.
+    // Ideally, I would combine `dotsHorizontal` and `dotsVertical` into on property,
+    // and get rid of `dots()`, since `ForEach` would be declared internally.
+    // There, I would rely on `AnyLayout`, or at least, `HVStack` to conditionally change direction.
+    // But unlike `VPageIndicator`, they don't work. Animation breaks and some dots disappear.
+    // Even wrapping them with if-else with `ViewBuilder`, or `Group` doesn't help it.
+    // The only solution I found is to write conditional outside body that defines `HStack`/`VStack`.
     private var compactBody: some View {
         frame
-            .overlay(dots)
+            .if(
+                uiModel.layout.direction.isHorizontal,
+                ifTransform: { $0.overlay(dotsHorizontal) },
+                elseTransform: { $0.overlay(dotsVertical) }
+            )
             .clipped()
     }
     
@@ -156,29 +166,35 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             .frame(size: size)
     }
     
-    private var dots: some View {
-        let layout: AnyLayout = uiModel.layout.direction.stackLayout(spacing: uiModel.layout.spacing)
-        
+    private var dotsHorizontal: some View {
+        HStack(
+            spacing: uiModel.layout.spacing,
+            content: dots
+        )
+            .offset(x: offset)
+            .animation(uiModel.animations.transition, value: selectedIndex)
+    }
+    
+    private var dotsVertical: some View {
+        VStack(
+            spacing: uiModel.layout.spacing,
+            content: dots
+        )
+            .offset(y: offset)
+            .animation(uiModel.animations.transition, value: selectedIndex)
+    }
+    
+    private func dots() -> some View {
         let range: [Int] = (0..<total)
             .reversedArray(if: uiModel.layout.direction.isReversed)
         
-        let offset2D: CGSize = .init(
-            width: offset,
-            height: 0
-        )
-            .withReversedDimensions(if: uiModel.layout.direction.isVertical)
-        
-        return layout.callAsFunction({
-            ForEach(range, id: \.self, content: { i in
-                dotContentView
-                    .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
-                    .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
-                    .scaleEffect(scale(at: i), anchor: .center)
-                    .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
-            })
+        return ForEach(range, id: \.self, content: { i in
+            dotContentView
+                .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
+                .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
+                .scaleEffect(scale(at: i), anchor: .center)
+                .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
         })
-            .offset(offset2D)
-            .animation(uiModel.animations.transition, value: selectedIndex)
     }
     
     @ViewBuilder private var dotContentView: some View {
@@ -354,7 +370,6 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
 }
 
 // MARK: - Helpers
-@available(iOS 16.0, *)
 extension Int {
     fileprivate var isEven: Bool { self % 2 == 0 }
     
@@ -362,7 +377,6 @@ extension Int {
 }
 
 // MARK: - Preview
-@available(iOS 16.0, *)
 struct VCompactPageIndicator_Previews: PreviewProvider {
     private static var total: Int { 10 }
     private static var selectedIndex: Int { 0 }

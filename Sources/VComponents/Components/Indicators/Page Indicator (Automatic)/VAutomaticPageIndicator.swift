@@ -59,7 +59,6 @@ import VCore
 ///             .padding()
 ///     }
 ///
-@available(iOS 16.0, *)
 public struct VAutomaticPageIndicator<Content>: View where Content: View {
     // MARK: Properties
     private let uiModel: VAutomaticPageIndicatorUIModel
@@ -120,7 +119,6 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
 }
 
 // MARK: - Preview
-@available(iOS 16.0, *)
 struct VAutomaticPageIndicator_Previews: PreviewProvider {
     static var previews: some View {
         VPageIndicator_Previews.previews
