@@ -52,7 +52,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     public var body: some View {
         Color.clear
             .frame(height: contentSize.height)
-            .readSize(onChange: { containerWidth = $0.width })
+            .onSizeChange(perform: { containerWidth = $0.width })
             .overlay(marqueeContentView)
             .overlay(gradient)
             .clipped()
@@ -87,7 +87,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
     private var contentView: some View {
         content()
             .fixedSize()
-            .readSize(onChange: { contentSize = $0 })
+            .onSizeChange(perform: { contentSize = $0 })
     }
     
     @ViewBuilder private var gradient: some View {

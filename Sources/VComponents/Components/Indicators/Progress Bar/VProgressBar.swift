@@ -58,7 +58,7 @@ public struct VProgressBar: View {
         })
             .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
             .frame(height: uiModel.layout.height)
-            .readSize(onChange: { progressBarWidth = $0.width })
+            .onSizeChange(perform: { progressBarWidth = $0.width })
             .animation(uiModel.animations.progress, value: value)
     }
 

@@ -290,7 +290,7 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
 
-                                .readSize(onChange: { rowWidth = $0.width })
+                                .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
                         .disabled(!internalState.isEnabled || disabledIndexes.contains(i))
@@ -310,7 +310,7 @@ public struct VSegmentedPicker<Data, Content>: View
 
                                 .opacity(uiModel.colors.customContentOpacities.value(for: rowState(for: i)))
 
-                                .readSize(onChange: { rowWidth = $0.width })
+                                .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
                         .disabled(!internalState.isEnabled || disabledIndexes.contains(i))

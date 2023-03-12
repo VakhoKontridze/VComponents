@@ -72,7 +72,7 @@ public struct VSlider: View {
             .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
             .overlay(thumb)
             .frame(height: uiModel.layout.height)
-            .readSize(onChange: { sliderWidth = $0.width })
+            .onSizeChange(perform: { sliderWidth = $0.width })
             .padding(.horizontal, uiModel.layout.thumbDimension / 2)
             .animation(uiModel.animations.progress, value: value)
             .gesture(
