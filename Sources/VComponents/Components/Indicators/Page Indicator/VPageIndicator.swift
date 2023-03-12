@@ -130,7 +130,7 @@ public struct VPageIndicator<Content>: View where Content: View {
         let range: [Int] = (0..<total)
             .reversedArray(if: uiModel.layout.direction.isReversed)
         
-        return HOrVStack(
+        return HVStack(
             spacing: uiModel.layout.spacing,
             isHorizontal: uiModel.layout.direction.isHorizontal,
             content: {
