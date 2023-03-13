@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-// MARK: - Label (Title, Custom)
+// MARK: - Generic Label (Title, Custom)
 enum GenericLabel_TitleCustom<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case custom(label: () -> CustomLabel)
 }
 
-// MARK: - Label (Empty, Title, Custom)
+// MARK: - Generic Label (Empty, Title, Custom)
 enum GenericLabel_EmptyTitleCustom<CustomLabel>: Equatable where CustomLabel: View {
     case empty
     case title(title: String)
@@ -36,21 +36,21 @@ enum GenericLabel_EmptyTitleCustom<CustomLabel>: Equatable where CustomLabel: Vi
     }
 }
 
-// MARK: - Label (Title, Icon, Custom)
+// MARK: - Generic Label (Title, Icon, Custom)
 enum GenericLabel_TitleIconCustom<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
     case custom(label: () -> CustomLabel)
 }
 
-// MARK: - Label (Title, Icon Title, Custom)
+// MARK: - Generic Label (Title, Icon Title, Custom)
 enum GenericLabel_TitleIconTitleCustom<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case iconTitle(icon: Image, title: String)
     case custom(label: () -> CustomLabel)
 }
 
-// MARK: - Label (Title, Icon, Icon Title, Custom)
+// MARK: - Generic Label (Title, Icon, Icon Title, Custom)
 enum GenericLabel_TitleIconIconTitleCustom<CustomLabel> where CustomLabel: View {
     case title(title: String)
     case icon(icon: Image)
