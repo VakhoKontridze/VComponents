@@ -278,7 +278,7 @@ public struct VSegmentedPicker<Data, Content>: View
             HStack(spacing: 0, content: {
                 ForEach(titles.indices, id: \.self, content: { i in
                     SwiftUIBaseButton(
-                        gesture: { gestureHandler(i: i, gestureState: $0) },
+                        onStateChange: { stateChangeHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
                                 minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
@@ -301,7 +301,7 @@ public struct VSegmentedPicker<Data, Content>: View
             HStack(spacing: 0, content: {
                 ForEach(data.indices, id: \.self, content: { i in
                     SwiftUIBaseButton(
-                        gesture: { gestureHandler(i: i, gestureState: $0) },
+                        onStateChange: { stateChangeHandler(i: i, gestureState: $0) },
                         label: {
                             content(data[i])
                                 .padding(uiModel.layout.indicatorMargin)
@@ -335,7 +335,7 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     // MARK: Actions
-    private func gestureHandler(i: Int, gestureState: BaseButtonGestureState) {
+    private func stateChangeHandler(i: Int, gestureState: BaseButtonGestureState) {
         pressedIndex = gestureState.isPressed ? i : nil
         if gestureState.isClicked { selectedIndex = i }
     }

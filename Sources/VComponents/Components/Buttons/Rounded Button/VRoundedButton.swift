@@ -76,7 +76,7 @@ public struct VRoundedButton<Label>: View where Label: View {
 
     // MARK: Body
     public var body: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
             buttonLabel
                 .frame(dimension: uiModel.layout.dimension)
                 .background(background)
@@ -134,7 +134,7 @@ public struct VRoundedButton<Label>: View where Label: View {
     }
     
     // MARK: Actions
-    private func gestureHandler(gestureState: BaseButtonGestureState) {
+    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }

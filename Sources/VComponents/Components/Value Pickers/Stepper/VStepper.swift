@@ -87,7 +87,7 @@ public struct VStepper: View {
     
     private func button(_ button: VStepperButton) -> some View {
         SwiftUIBaseButton(
-            gesture: { gestureHandler(button: button, gestureState: $0) },
+            gesture: { stateChangeHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
@@ -111,12 +111,12 @@ public struct VStepper: View {
     }
     
     // MARK: Actions
-    private func gestureHandler(button: VStepperButton, gestureState: BaseButtonGestureState) {
-        pressGestureHandler(button, isPressed: gestureState.isPressed)
-        if gestureState.isClicked { clickGestureHandler(button) }
+    private func stateChangeHandler(button: VStepperButton, gestureState: BaseButtonGestureState) {
+        pressstateChangeHandler(button, isPressed: gestureState.isPressed)
+        if gestureState.isClicked { clickstateChangeHandler(button) }
     }
 
-    private func clickGestureHandler(_ button: VStepperButton) {
+    private func clickstateChangeHandler(_ button: VStepperButton) {
         guard !shouldSkipIncrementBecauseOfLongPressIncrementFinish else {
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = false
             return
@@ -139,7 +139,7 @@ public struct VStepper: View {
         }
     }
     
-    private func pressGestureHandler(_ button: VStepperButton, isPressed: Bool) {
+    private func pressstateChangeHandler(_ button: VStepperButton, isPressed: Bool) {
         if !isPressed {
             pressedButton = nil
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
@@ -184,7 +184,7 @@ public struct VStepper: View {
         
         longPressIncrementTimerIncremental = .scheduledTimer(withTimeInterval: interval, repeats: true, block: { timer in
             if let pressedButton {
-                clickGestureHandler(pressedButton)
+                clickstateChangeHandler(pressedButton)
             } else {
                 zeroLongPressTimers()
             }

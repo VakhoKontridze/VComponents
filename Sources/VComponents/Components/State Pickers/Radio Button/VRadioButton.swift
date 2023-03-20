@@ -126,7 +126,7 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     spacer
 
-                    SwiftUIBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
                         VText(
                             type: uiModel.layout.titleTextLineType,
                             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
@@ -144,7 +144,7 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     spacer
                     
-                    SwiftUIBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
                         label()
                             .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
                     })
@@ -156,7 +156,7 @@ public struct VRadioButton<Label>: View where Label: View {
     }
     
     private var radioButton: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
             ZStack(content: {
                 Circle()
                     .frame(dimension: uiModel.layout.dimension)
@@ -177,7 +177,7 @@ public struct VRadioButton<Label>: View where Label: View {
     }
     
     private var spacer: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: uiModel.layout.radioLabelSpacing)
@@ -187,7 +187,7 @@ public struct VRadioButton<Label>: View where Label: View {
     }
 
     // MARK: Actions
-    private func gestureHandler(gestureState: BaseButtonGestureState) {
+    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { state.setNextStateRadio() }
     }

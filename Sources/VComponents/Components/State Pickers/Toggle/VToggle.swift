@@ -126,7 +126,7 @@ public struct VToggle<Label>: View where Label: View {
                     
                     spacer
 
-                    SwiftUIBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
                         VText(
                             type: uiModel.layout.titleTextLineType,
                             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
@@ -144,7 +144,7 @@ public struct VToggle<Label>: View where Label: View {
                     
                     spacer
                     
-                    SwiftUIBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
                         label()
                             .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
                     })
@@ -156,7 +156,7 @@ public struct VToggle<Label>: View where Label: View {
     }
     
     private var toggle: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                     .foregroundColor(uiModel.colors.fill.value(for: internalState))
@@ -172,7 +172,7 @@ public struct VToggle<Label>: View where Label: View {
     }
     
     private var spacer: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: uiModel.layout.toggleLabelSpacing)
@@ -182,7 +182,7 @@ public struct VToggle<Label>: View where Label: View {
     }
 
     // MARK: Actions
-    private func gestureHandler(gestureState: BaseButtonGestureState) {
+    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { state.setNextState() }
     }
