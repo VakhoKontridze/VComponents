@@ -202,20 +202,20 @@ public struct VModalUIModel {
         public struct DismissType: OptionSet {
             // MARK: Options
             /// Leading.
-            public static var leadingButton: DismissType { .init(rawValue: 1 << 0) }
+            public static let leadingButton: Self = .init(rawValue: 1 << 0)
             
             /// Trailing.
-            public static var trailingButton: DismissType { .init(rawValue: 1 << 1) }
+            public static let trailingButton: Self = .init(rawValue: 1 << 1)
             
             /// Back-tap.
-            public static var backTap: DismissType { .init(rawValue: 1 << 2) }
+            public static let backTap: Self = .init(rawValue: 1 << 2)
             
             // MARK: Options Initializers
             /// All.
-            public static var all: DismissType { [.leadingButton, .trailingButton, .backTap] }
+            public static var all: Self { [.leadingButton, .trailingButton, .backTap] }
             
             /// Default value. Set to `trailingButton`.
-            public static var `default`: DismissType { .trailingButton }
+            public static var `default`: Self { .trailingButton }
             
             /// Indicates if dismiss type includes a button.
             public var hasButton: Bool {

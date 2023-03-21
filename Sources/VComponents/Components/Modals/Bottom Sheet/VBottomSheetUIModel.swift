@@ -345,23 +345,23 @@ public struct VBottomSheetUIModel {
         public struct DismissType: OptionSet {
             // MARK: Options
             /// Leading.
-            public static var leadingButton: DismissType { .init(rawValue: 1 << 0) }
+            public static let leadingButton: Self = .init(rawValue: 1 << 0)
             
             /// Trailing.
-            public static var trailingButton: DismissType { .init(rawValue: 1 << 1) }
+            public static let trailingButton: Self = .init(rawValue: 1 << 1)
             
             /// Back-tap.
-            public static var backTap: DismissType { .init(rawValue: 1 << 2) }
+            public static let backTap: Self = .init(rawValue: 1 << 2)
             
             /// Pull down.
-            public static var pullDown: DismissType { .init(rawValue: 1 << 3) }
+            public static let pullDown: Self = .init(rawValue: 1 << 3)
             
             // MARK: Options Initializers
             /// Default value. Set to `trailingButton` and `.pullDown`.
-            public static var `default`: DismissType { [.trailingButton, .pullDown] }
+            public static var `default`: Self { [.trailingButton, .pullDown] }
             
             /// All.
-            public static var all: DismissType { [.leadingButton, .trailingButton, .backTap, .pullDown] }
+            public static var all: Self { [.leadingButton, .trailingButton, .backTap, .pullDown] }
             
             // MARK: Properties
             public let rawValue: Int

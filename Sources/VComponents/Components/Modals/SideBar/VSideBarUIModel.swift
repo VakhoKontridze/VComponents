@@ -159,10 +159,10 @@ public struct VSideBarUIModel {
         public struct DismissType: OptionSet {
             // MARK: Options
             /// Back tap.
-            public static var backTap: DismissType { .init(rawValue: 1 << 0) }
+            public static let backTap: Self = .init(rawValue: 1 << 0)
             
             /// Drag-back.
-            public static var dragBack: DismissType { .init(rawValue: 1 << 1) }
+            public static let dragBack: Self = .init(rawValue: 1 << 1)
             
             // MARK: Options Initializers
             /// All.

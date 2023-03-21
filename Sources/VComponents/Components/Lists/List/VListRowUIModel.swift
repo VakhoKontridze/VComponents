@@ -59,10 +59,10 @@ public struct VListRowUIModel {
         public struct SeparatorType: OptionSet {
             // MARK: Options
             /// Separator at the top of the row.
-            public static var top: Self { .init(rawValue: 1 << 0) }
+            public static let top: Self = .init(rawValue: 1 << 0)
             
             /// Separator at the bottom of the row.
-            public static var bottom: Self { .init(rawValue: 1 << 1) }
+            public static let bottom: Self = .init(rawValue: 1 << 1)
             
             // MARK: Options Initializers
             /// Default value. Set to `bottom`.
