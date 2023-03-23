@@ -17,9 +17,9 @@ import VCore
 ///
 ///     var body: some View {
 ///         VTextField(
-///             placeholder: "Lorem ipsum",
 ///             headerTitle: "Lorem ipsum dolor sit amet",
 ///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             placeholder: "Lorem ipsum",
 ///             text: $text
 ///         )
 ///             .padding()
