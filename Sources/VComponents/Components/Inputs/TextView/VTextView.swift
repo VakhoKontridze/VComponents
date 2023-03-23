@@ -78,10 +78,10 @@ import VCore
 ///             .padding()
 ///     }
 ///
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(iOS 16.0, *)
+@available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel
@@ -172,7 +172,7 @@ public struct VTextView: View {
                     .foregroundColor(uiModel.colors.placeholder.value(for: internalState))
                     .font(uiModel.fonts.placeholder)
             },
-            //axis: .vertical,
+            axis: .vertical,
             label: EmptyView.init
         )
             .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
@@ -208,7 +208,7 @@ public struct VTextView: View {
 }
 
 // MARK: - Preview
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -230,6 +230,11 @@ struct VTextView_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VTextView(
+                    uiModel: {
+                        var uiModel: VTextViewUIModel = .init()
+                        uiModel.layout.textLineType = .multiLine(alignment: .leading, lineLimit: 7, reservesSpace: true)
+                        return uiModel
+                    }(),
                     headerTitle: headerTitle,
                     footerTitle: footerTitle,
                     placeholder: placeholder,
