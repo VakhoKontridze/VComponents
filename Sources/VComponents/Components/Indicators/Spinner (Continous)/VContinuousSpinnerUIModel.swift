@@ -28,14 +28,26 @@ public struct VContinuousSpinnerUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Spinner dimension. Set to `15`.
-        public var dimension: CGFloat = 15
+        /// Spinner dimension. Set to `30` for `tvOS` and `15` for other platforms.
+        public var dimension: CGFloat = {
+#if os(tvOS)
+            return 30
+#else
+            return 15
+#endif
+        }()
         
         /// Length of colored part of spinner. Set to `0.75`.
         public var length: CGFloat = 0.75
         
-        /// Thickness. Set to `2`.
-        public var thickness: CGFloat = 2
+        /// Thickness. Set to `4` for `tvOS` and `2` for other platforms.
+        public var thickness: CGFloat = {
+#if os(tvOS)
+            return 4
+#else
+            return 2
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.

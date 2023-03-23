@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Alert
 @available(iOS 14.0, *)
+@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(tvOS 14.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VAlert<Content>: View
     where Content: View
 {
@@ -33,9 +36,9 @@ struct VAlert<Content>: View
     @State private var buttonsStackHeight: CGFloat = 0
     private var buttonsStackShouldScroll: Bool {
         let safeAreaHeight: CGFloat =
-            UIScreen.main.bounds.height -
-            UIDevice.safeAreaInsetTop -
-            UIDevice.safeAreaInsetBottom
+            MultiplatformConstants.screenSize.height -
+            MultiplatformConstants.safeAreaInsets.top -
+            MultiplatformConstants.safeAreaInsets.bottom
         
         let alertHeight: CGFloat =
             titleMessageContentHeight +
@@ -141,7 +144,7 @@ struct VAlert<Content>: View
             case .empty:
                 EmptyView()
                 
-            case .custom(let content):
+            case .content(let content):
                 content()
                     .padding(uiModel.layout.contentMargins)
             }
@@ -229,11 +232,15 @@ struct VAlert<Content>: View
 
 // MARK: - Preview
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VAlert_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
     private static var message: String { "Lorem ipsum dolor sit amet" }
     
     @ViewBuilder private static func content() -> some View {
+#if os(iOS)
         if #available(iOS 15.0, *) {
             VTextField(text: .constant("Lorem ipsum dolor sit amet"))
         } else {
@@ -241,6 +248,7 @@ struct VAlert_Previews: PreviewProvider {
                 .frame(height: 50)
                 .foregroundColor(ColorBook.accentBlue)
         }
+#endif
     }
     
     static var previews: some View {
@@ -271,7 +279,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: title,
                     message: message,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
                         VAlertCancelButton(action: nil)
@@ -309,7 +317,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: title,
                     message: message,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: []
                 )
             })
@@ -325,7 +333,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: title,
                     message: message,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertCancelButton(action: nil)
                     ]
@@ -343,7 +351,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: title,
                     message: message,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertPrimaryButton(action: {}, title: "Option A"),
                         VAlertSecondaryButton(action: {}, title: "Option B"),
@@ -373,7 +381,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: title,
                     message: message,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertPrimaryButton(action: {}, title: "Option A"),
                         VAlertDestructiveButton(action: {}, title: "Delete"),
@@ -393,7 +401,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: title,
                     message: message,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertPrimaryButton(action: {}, title: "Option A").disabled(true),
                         VAlertDestructiveButton(action: {}, title: "Delete").disabled(true),
@@ -413,7 +421,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: nil,
                     message: message,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
                         VAlertCancelButton(action: nil)
@@ -432,7 +440,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: title,
                     message: nil,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
                         VAlertCancelButton(action: nil)
@@ -451,7 +459,7 @@ struct VAlert_Previews: PreviewProvider {
                     onDismiss: nil,
                     title: nil,
                     message: nil,
-                    content: .custom(content: content),
+                    content: .content(content: content),
                     buttons: [
                         VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm"),
                         VAlertCancelButton(action: nil)

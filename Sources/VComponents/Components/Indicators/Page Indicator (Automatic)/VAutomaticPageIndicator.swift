@@ -80,7 +80,7 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
         self.uiModel = uiModel
         self.total = total
         self.selectedIndex = selectedIndex
-        self.dotContent = .default
+        self.dotContent = .empty
     }
     
     /// Initializes `VAutomaticPageIndicator` with total, selected index, and custom dot content.
@@ -93,7 +93,7 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
         self.uiModel = uiModel
         self.total = total
         self.selectedIndex = selectedIndex
-        self.dotContent = .custom(content: dot)
+        self.dotContent = .content(content: dot)
     }
 
     // MARK: Body

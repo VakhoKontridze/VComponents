@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Secondary Button UI Model
 /// Model that describes UI.
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VSecondaryButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.

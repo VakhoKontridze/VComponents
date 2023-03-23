@@ -24,6 +24,8 @@ import VCore
 ///         )
 ///     }
 ///
+@available(tvOS, unavailable) // No `DragGesture` support
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VRangeSlider: View {
     // MARK: Properties
     private let uiModel: VRangeSliderUIModel
@@ -247,6 +249,8 @@ public struct VRangeSlider: View {
 }
 
 // MARK: - Helpers
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension Double {
     fileprivate func roundedUpWithStep(
         _ step: Double?
@@ -264,6 +268,8 @@ extension Double {
 }
 
 // MARK: - Preview
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VRangeSlider_Previews: PreviewProvider {
     private static var difference: Double { 0.1 }
     private static var valueLow: Double { 0.1 }

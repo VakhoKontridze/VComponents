@@ -8,4 +8,7 @@
 import Foundation
 
 // MARK: - V Wheel Picker Content
-typealias VWheelPickerContent = VSegmentedPickerContent
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VWheelPickerContent = GenericContent_TitlesDataSourcedContent

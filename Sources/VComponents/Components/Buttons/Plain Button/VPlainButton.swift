@@ -21,7 +21,10 @@ import VCore
 ///             title: "Lorem Ipsum"
 ///         )
 ///     }
-///     
+///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VPlainButtonUIModel
@@ -83,7 +86,7 @@ public struct VPlainButton<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self.action = action
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
 
     // MARK: Body
@@ -109,7 +112,7 @@ public struct VPlainButton<Label>: View where Label: View {
                 labelTitleComponent(title: title)
             })
             
-        case .custom(let label):
+        case .content(let label):
             label()
                 .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
         }
@@ -141,6 +144,9 @@ public struct VPlainButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VPlainButton_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum" }
     

@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - Bool
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension View {
     /// Presents confirmation dialog when boolean is `true`.
     ///
@@ -60,7 +60,7 @@ extension View {
 }
 
 // MARK: - Item
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension View {
     /// Presents confirmation dialog using the item as data source for content.
     ///
@@ -128,7 +128,7 @@ extension View {
 }
 
 // MARK: - Presenting Data
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension View {
     /// Presents confirmation dialog when boolean is `true` using data to produce content.
     ///
@@ -200,7 +200,7 @@ extension View {
 }
 
 // MARK: - Helpers
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension Visibility {
     fileprivate static func vConfirmationDialog(title: String?, message: String?) -> Self {
         switch (title, message) {

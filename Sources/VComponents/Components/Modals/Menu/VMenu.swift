@@ -51,6 +51,9 @@ import SwiftUI
 ///     }
 ///
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable) // No `Menu` support
+@available(watchOS, unavailable) // No `Menu` support
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool
@@ -69,7 +72,7 @@ public struct VMenu<Label>: View where Label: View {
     ) {
         self.sections = sections
         self.primaryAction = primaryAction
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
     
     /// initializes `VMenu` with title and sections.
@@ -94,7 +97,7 @@ public struct VMenu<Label>: View where Label: View {
     ) {
         self.sections = { [VMenuGroupSection(rows: rows)] }
         self.primaryAction = primaryAction
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
     
     /// initializes `VMenu` with title and rows.
@@ -127,7 +130,13 @@ public struct VMenu<Label>: View where Label: View {
             }
         })
             .disabled(!internalState.isEnabled)
-            .menuOrderFixedIOS16BackwardsCompatible
+            .modifier({
+                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+                    $0.menuOrder(.fixed)
+                } else {
+                    $0
+                }
+            })
     }
     
     private func contentView() -> some View {
@@ -146,24 +155,14 @@ public struct VMenu<Label>: View where Label: View {
     @ViewBuilder private func menuLabel() -> some View {
         switch label {
         case .title(let title):
+#if os(iOS)
             VPlainButton(action: {}, title: title)
+#else
+            Text(title)
+#endif
             
-        case .custom(let label):
+        case .content(let label):
             label()
-        }
-    }
-}
-
-// MARK: - Helpers
-@available(iOS 15.0, *)
-extension View {
-    @ViewBuilder fileprivate var menuOrderFixedIOS16BackwardsCompatible: some View {
-        if #available(iOS 16.0, *) {
-            self
-                .menuOrder(.fixed)
-            
-        } else {
-            self
         }
     }
 }
@@ -174,6 +173,9 @@ import VCore
 #endif
 
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VMenu_Previews: PreviewProvider {
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue

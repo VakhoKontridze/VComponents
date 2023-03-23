@@ -23,6 +23,9 @@ import VCore
 ///             .padding()
 ///     }
 ///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 public struct VPrimaryButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VPrimaryButtonUIModel
@@ -80,7 +83,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
         self.uiModel = uiModel
         self.isLoading = isLoading
         self.action = action
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
     
     // MARK: Body
@@ -109,7 +112,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
                         labelTitleComponent(title: title)
                     })
                     
-                case .custom(let label):
+                case .content(let label):
                     label()
                         .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
                 }
@@ -172,6 +175,9 @@ public struct VPrimaryButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VPrimaryButton_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum" }
     

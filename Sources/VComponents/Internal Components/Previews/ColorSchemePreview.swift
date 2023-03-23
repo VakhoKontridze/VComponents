@@ -25,11 +25,11 @@ struct ColorSchemePreview<Content>: View where Content: View {
     // MARK: Body
     var body: some View {
         content()
-            .preferredColorScheme(.light)
+            .colorScheme(.light)
             .previewDisplayName(formateTitle("Light"))
         
         content()
-            .preferredColorScheme(.dark)
+            .colorScheme(.dark)
             .previewDisplayName(formateTitle("Dark"))
     }
     

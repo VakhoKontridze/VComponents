@@ -47,6 +47,9 @@ import SwiftUI
 ///     }
 ///
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 @MainActor public protocol VAlertPresentable: ObservableObject {
     /// `VAlertParameters`.
     var vAlertParameters: VAlertParameters? { get set }

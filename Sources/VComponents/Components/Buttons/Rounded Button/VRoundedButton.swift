@@ -21,7 +21,10 @@ import VCore
 ///             icon: .init(systemName: "swift")
 ///         )
 ///     }
-///     
+///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VRoundedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRoundedButtonUIModel
@@ -71,7 +74,7 @@ public struct VRoundedButton<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self.action = action
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
 
     // MARK: Body
@@ -95,7 +98,7 @@ public struct VRoundedButton<Label>: View where Label: View {
             case .icon(let icon):
                 labelIconComponent(icon: icon)
                 
-            case .custom(let label):
+            case .content(let label):
                 label()
                     .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
             }
@@ -141,8 +144,17 @@ public struct VRoundedButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VRoundedButton_Previews: PreviewProvider {
-    private static var icon: Image { .init(systemName: "swift") }
+    private static var icon: Image {
+#if os(iOS)
+        return .init(systemName: "swift")
+#else
+        fatalError() // Not supported
+#endif
+    }
     
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)

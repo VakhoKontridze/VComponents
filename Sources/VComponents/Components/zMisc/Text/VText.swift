@@ -66,8 +66,20 @@ struct VText_Previews: PreviewProvider {
     private static var lineMin: Int { 2 }
     private static var lineMax: Int { 5 }
     
-    private static var text: String { "Lorem ipsum dolor sit amet" }
-    private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet." }
+    private static var text: String {
+#if os(watchOS)
+        return "Lorem ipsum"
+#else
+        return "Lorem ipsum dolor sit amet"
+#endif
+    }
+    private static var textLong: String {
+#if os(tvOS)
+        return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet eros id tellus porta ullamcorper. Ut odio purus, posuere sit amet odio non, tempus scelerisque arcu. Pellentesque quis pretium erat. Pellentesque fermentum purus varius augue auctor lacinia. In lobortis orci sed velit fermentum, eu feugiat libero bibendum. Aliquam vitae magna tincidunt, vehicula eros eget, convallis mauris. Vivamus vitae nisl in felis vehicula finibus. In quis pretium arcu. Phasellus mollis ut neque eget feugiat. Ut mattis, nisl a varius imperdiet, neque velit bibendum nisl, nec euismod nibh dui quis dolor. Maecenas posuere justo felis, tempor rutrum est sodales non. Vivamus et felis imperdiet, congue metus vitae, lobortis quam. Sed in tincidunt ex. Mauris eu auctor libero. Cras massa arcu, lobortis quis enim eu, cursus tincidunt augue. Maecenas pulvinar diam turpis, ac tristique arcu scelerisque sed."
+#else
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet."   
+#endif
+    }
     
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
@@ -170,7 +182,7 @@ struct VText_Previews: PreviewProvider {
                     }
                 )
                 
-                if #available(iOS 16.0, *) {
+                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                     PreviewRow(
                         axis: .vertical,
                         title: "Multi-Line Space-Reserved",
@@ -181,12 +193,12 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: textLong
                             )
-                            .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     )
                 }
                 
-                if #available(iOS 16.0, *) {
+                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                     PreviewRow(
                         axis: .vertical,
                         title: "Multi-Line Partial Range (From)",
@@ -197,12 +209,12 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: textLong
                             )
-                            .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     )
                 }
                 
-                if #available(iOS 16.0, *) {
+                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                     PreviewRow(
                         axis: .vertical,
                         title: "Multi-Line Partial Range (Through)",
@@ -213,12 +225,12 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: textLong
                             )
-                            .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     )
                 }
                 
-                if #available(iOS 16.0, *) {
+                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                     PreviewRow(
                         axis: .vertical,
                         title: "Multi-Line Closed Range",
@@ -229,7 +241,7 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: textLong
                             )
-                            .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     )
                 }

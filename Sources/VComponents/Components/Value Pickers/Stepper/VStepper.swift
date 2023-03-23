@@ -23,6 +23,9 @@ import VCore
 ///             .padding()
 ///     }
 ///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VStepper: View {
     // MARK: Properties
     private let uiModel: VStepperUIModel
@@ -87,7 +90,7 @@ public struct VStepper: View {
     
     private func button(_ button: VStepperButton) -> some View {
         SwiftUIBaseButton(
-            gesture: { stateChangeHandler(button: button, gestureState: $0) },
+            onStateChange: { stateChangeHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
@@ -112,11 +115,11 @@ public struct VStepper: View {
     
     // MARK: Actions
     private func stateChangeHandler(button: VStepperButton, gestureState: BaseButtonGestureState) {
-        pressstateChangeHandler(button, isPressed: gestureState.isPressed)
-        if gestureState.isClicked { clickstateChangeHandler(button) }
+        stateChangeHandlerPress(button, isPressed: gestureState.isPressed)
+        if gestureState.isClicked { stateChangeHandlerClick(button) }
     }
 
-    private func clickstateChangeHandler(_ button: VStepperButton) {
+    private func stateChangeHandlerClick(_ button: VStepperButton) {
         guard !shouldSkipIncrementBecauseOfLongPressIncrementFinish else {
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = false
             return
@@ -139,7 +142,7 @@ public struct VStepper: View {
         }
     }
     
-    private func pressstateChangeHandler(_ button: VStepperButton, isPressed: Bool) {
+    private func stateChangeHandlerPress(_ button: VStepperButton, isPressed: Bool) {
         if !isPressed {
             pressedButton = nil
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
@@ -184,7 +187,7 @@ public struct VStepper: View {
         
         longPressIncrementTimerIncremental = .scheduledTimer(withTimeInterval: interval, repeats: true, block: { timer in
             if let pressedButton {
-                clickstateChangeHandler(pressedButton)
+                stateChangeHandlerClick(pressedButton)
             } else {
                 zeroLongPressTimers()
             }
@@ -217,6 +220,9 @@ public struct VStepper: View {
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS 9.0, *)@available(watchOS, unavailable)
 struct VStepper_Previews: PreviewProvider {
     private static var range: ClosedRange<Int> { 1...10 }
     private static var value: Int { 5 }

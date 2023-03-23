@@ -39,10 +39,7 @@ struct PreviewSectionHeader_Previews: PreviewProvider {
                 axis: .vertical,
                 title: "Button",
                 content: {
-                    VPrimaryButton(
-                        action: {},
-                        title: "Lorem Ipsum"
-                    )
+                    PreviewContainer_Previews.ContentView()
                 }
             )
             
@@ -52,10 +49,7 @@ struct PreviewSectionHeader_Previews: PreviewProvider {
                 axis: .vertical,
                 title: "Button",
                 content: {
-                    VPrimaryButton(
-                        action: {},
-                        title: "Lorem Ipsum"
-                    )
+                    PreviewContainer_Previews.ContentView()
                 }
             )
         })

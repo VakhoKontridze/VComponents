@@ -140,12 +140,6 @@ public struct ColorBook {
 // MARK: - Helpers
 extension Color {
     init(module name: String) {
-        guard
-            let uiColor: UIColor = .init(named: name, in: .module, compatibleWith: nil)
-        else {
-            fatalError()
-        }
-        
-        self.init(uiColor)
+        self.init(name, bundle: .module)
     }
 }

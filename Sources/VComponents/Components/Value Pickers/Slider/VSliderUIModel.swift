@@ -10,6 +10,8 @@ import VCore
 
 // MARK: - V Slider UI Model
 /// Model that describes UI.
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VSliderUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -38,7 +40,7 @@ public struct VSliderUIModel {
         /// Indicates if slider rounds progress view right-edge. Set to `true`.
         public var roundsProgressViewRightEdge: Bool = true
         
-        var progressViewRoundedCorners: UIRectCorner {
+        var progressViewRoundedCorners: RectCorner {
             if roundsProgressViewRightEdge {
                 return .allCorners
             } else {

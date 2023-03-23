@@ -50,11 +50,22 @@ struct PreviewContainer<Content>: View where Content: View {
 struct PreviewContainer_Previews: PreviewProvider {
     static var previews: some View {
         PreviewContainer(content: {
+            ContentView()
+        })
+    }
+    
+    struct ContentView: View {
+        var body: some View {
+#if os(iOS)
             VPrimaryButton(
                 action: {},
                 title: "Lorem Ipsum"
             )
                 .padding()
-        })
+#else
+            ColorBook.accentBlue
+                .padding()
+#endif
+        }
     }
 }

@@ -9,7 +9,7 @@ import SwiftUI
 
 // MARK: - V Dashed Spinner UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
+@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 public struct VDashedSpinnerUIModel {
     // MARK: Properties
     /// Model that contains color properties.
@@ -24,6 +24,8 @@ public struct VDashedSpinnerUIModel {
     public struct Colors {
         // MARK: Properties
         /// Spinner color.
+        ///
+        /// Has no effect on `macOS`.
         public var spinner: Color = ColorBook.accentBlue
         
         // MARK: Initializers

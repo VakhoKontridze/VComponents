@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Side Bar UI Model
 /// Model that describes UI.
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VSideBarUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -48,7 +51,7 @@ public struct VSideBarUIModel {
         )
         
         /// Rounded corners. Set to `rightCorners`.
-        public var roundedCorners: UIRectCorner = .rightCorners
+        public var roundedCorners: RectCorner = .rightCorners
         
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
@@ -197,6 +200,9 @@ public struct VSideBarUIModel {
 
 // MARK: - Factory (Misc)
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that insets content.
     public static var insettedContent: Self {
@@ -210,6 +216,9 @@ extension VSideBarUIModel {
 
 // MARK: - Factory (Presentation Edge)
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VSideBarUIModel.Layout.PresentationEdge {
     /// UI model for the presentation edge.
     public var uiModel: VSideBarUIModel {
@@ -223,6 +232,9 @@ extension VSideBarUIModel.Layout.PresentationEdge {
 }
 
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VSideBarUIModel {
     /// `VSideBarUIModel` that presents side bar from left.
     ///

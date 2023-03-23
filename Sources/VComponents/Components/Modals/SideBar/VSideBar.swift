@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Side Bar
 @available(iOS 15.0, *)
+@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS 7.0, *)@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VSideBar<Content>: View where Content: View {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
@@ -144,8 +147,8 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Presentation Edge Offsets
     private var sheetScreenMargins: CGSize {
         .init(
-            width: (UIScreen.main.bounds.size.width - uiModel.layout.sizes._current.size.width) / 2,
-            height: (UIScreen.main.bounds.size.height - uiModel.layout.sizes._current.size.height) / 2
+            width: (MultiplatformConstants.screenSize.width - uiModel.layout.sizes._current.size.width) / 2,
+            height: (MultiplatformConstants.screenSize.height - uiModel.layout.sizes._current.size.height) / 2
         )
     }
     
@@ -153,7 +156,7 @@ struct VSideBar<Content>: View where Content: View {
         let x: CGFloat = {
             switch uiModel.layout.presentationEdge {
             case .left: return -uiModel.layout.sizes._current.size.width - sheetScreenMargins.width
-            case .right: return UIScreen.main.bounds.size.width - sheetScreenMargins.width
+            case .right: return MultiplatformConstants.screenSize.width - sheetScreenMargins.width
             case .top: return 0
             case .bottom: return 0
             }
@@ -164,7 +167,7 @@ struct VSideBar<Content>: View where Content: View {
             case .left: return 0
             case .right: return 0
             case .top: return -uiModel.layout.sizes._current.size.height - sheetScreenMargins.height
-            case .bottom: return UIScreen.main.bounds.size.height - sheetScreenMargins.height
+            case .bottom: return MultiplatformConstants.screenSize.height - sheetScreenMargins.height
             }
         }()
         
@@ -213,6 +216,9 @@ struct VSideBar<Content>: View where Content: View {
 
 // MARK: - Preview
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VSideBar_Previews: PreviewProvider {
     private static func content() -> some View {
         ColorBook.accentBlue

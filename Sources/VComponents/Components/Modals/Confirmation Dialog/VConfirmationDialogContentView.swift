@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Confirmation Dialog Content View
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct VConfirmationDialogContentView: View {
     // MARK: Properties
     let buttons: [any VConfirmationDialogButtonProtocol]
@@ -27,7 +27,7 @@ struct VConfirmationDialogContentView: View {
 }
 
 // MARK: - Preview
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct VConfirmationDialogContentView_Previews: PreviewProvider {
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
@@ -36,10 +36,7 @@ struct VConfirmationDialogContentView_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VPlainButton(
-                    action: {},
-                    title: "Present"
-                )
+                Text("Present")
                     .vConfirmationDialog(
                         isPresented: .constant(true),
                         title: "Lorem Ipsum Dolor Sit Amet",

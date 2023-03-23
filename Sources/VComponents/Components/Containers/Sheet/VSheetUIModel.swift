@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Sheet UI Model
 /// Model that describes UI.
@@ -26,7 +27,7 @@ public struct VSheetUIModel {
     public struct Layout {
         // MARK: Properties
         /// Rounded corners. Set to to `allCorners`.
-        public var roundedCorners: UIRectCorner = .allCorners
+        public var roundedCorners: RectCorner = .allCorners
         
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius

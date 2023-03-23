@@ -20,36 +20,42 @@ extension CGSize: ScreenRelativeSizeMeasurement {
         _ measurement: CGSize
     ) -> CGSize {
         .init(
-            width: UIScreen.main.bounds.size.width * measurement.width,
-            height: UIScreen.main.bounds.size.height * measurement.height
+            width: MultiplatformConstants.screenSize.width * measurement.width,
+            height: MultiplatformConstants.screenSize.height * measurement.height
         )
     }
 }
 
 // MARK: - V Alert Size
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VAlertUIModel.Layout.AlertSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
         _ measurement: VAlertUIModel.Layout.AlertSize
     ) -> VAlertUIModel.Layout.AlertSize {
         .init(
-            width: UIScreen.main.bounds.size.width * measurement.width
+            width: MultiplatformConstants.screenSize.width * measurement.width
         )
     }
 }
 
 // MARK: - V Bottom Sheet Size
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VBottomSheetUIModel.Layout.BottomSheetSize: ScreenRelativeSizeMeasurement {
     public static func relativeMeasurementToPoints(
         _ measurement: VBottomSheetUIModel.Layout.BottomSheetSize
     ) -> VBottomSheetUIModel.Layout.BottomSheetSize {
         .init(
-            width: UIScreen.main.bounds.size.width * measurement.width,
+            width: MultiplatformConstants.screenSize.width * measurement.width,
             heights: .init(
-                min: UIScreen.main.bounds.size.height * measurement.heights.min,
-                ideal: UIScreen.main.bounds.size.height * measurement.heights.ideal,
-                max: UIScreen.main.bounds.size.height * measurement.heights.max
+                min: MultiplatformConstants.screenSize.height * measurement.heights.min,
+                ideal: MultiplatformConstants.screenSize.height * measurement.heights.ideal,
+                max: MultiplatformConstants.screenSize.height * measurement.heights.max
             )
         )
     }

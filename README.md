@@ -5,7 +5,6 @@
 - [Description](#description)
 - [Compatibility](#compatibility)
 - [Components](#components)
-- [Brand Book](#brand-book)
 - [Guidelines](#guidelines)
 - [Installation](#installation)
 - [Versioning](#versioning)
@@ -19,60 +18,18 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 
 Versions with different majors are not compatible.
 
-| Ver | Release Date | iOS  | SwiftUI | VCore         | Comment                                    |
-| :-- | :--          | :--  | :--     | :--           | :--                                        |
-| 4.0 | 2023 XX XX   | 13.0 | 1.0     | 4.7.0 - 4.x.x | iOS 13.0 support                           |
-| 3.0 | 2022 10 02   | 16.0 | 4.0     | 4.1.0 - 4.x.x | New SwiftUI API. API changes.              |
-| 2.0 | 2022 05 26   | 15.0 | 3.0     | 3.2.0 - 3.x.x | New SwiftUI API. API changes. SPM support. |
-| 1.0 | 2021 02 07   | 14.0 | 2.0     | -             | -                                          |
+| Ver | Release Date | iOS  | macOS\* | tvOS\* | watchOS\* | VCore         | Comment                                    |
+| :-- | :--          | :--  | :--     | :--    | :--       | :--           | :--                                        |
+| 4.0 | 2023 XX XX   | 13.0 | 10.15   | 13.0   | 6.0       | 4.7.0 - 4.x.x | iOS 13.0 support. Multiplatform support.   |
+| 3.0 | 2022 10 02   | 16.0 | -       | -      |           | 4.1.0 - 4.x.x | New SwiftUI API. API changes.              |
+| 2.0 | 2022 05 26   | 15.0 | -       | -      |           | 3.2.0 - 3.x.x | New SwiftUI API. API changes. SPM support. |
+| 1.0 | 2021 02 07   | 14.0 | -       | -      |           | -             | -                                          |
+
+**Limited support*
 
 ## Components
 
-**Buttons.** VPrimaryButton, VSecondaryButton, VRoundedButton, VRoundedLabeledButton, VPlainButton
-
-**State Pickers.** VToggle, VCheckBox, VRadioButton
-
-**Item Pickers.** VSegmentedPicker, VWheelPicker
-
-**Value Pickers.** VStepper, VSlider, VRangeSlider
-
-**Inputs.** VTextField, VTextView
-
-**Containers**. VSheet, VDisclosureGroup
-
-**Lists.** VList
-
-**Modals.** VModal, VBottomSheet, VSideBar, VAlert, VConfirmationDialog, VMenu, VContextMenu
-
-**Messages.** VToast
-
-**Indicators.** VContinuousSpinner, VDashedSpinner, VProgressBar, VPageIndicator, VCompactPageIndicator, VAutomaticPageIndicator
-
-**Misc.** VText, VWrappingMarquee, VBouncingMarquee
-
-## Brand Book
-
-<p>
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466168-56484ad7-f13b-45be-9000-1e52cb699605.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466173-44782cb0-144f-42ce-a14b-e9fa719e5108.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466174-528a392b-949a-4e3c-b862-8a7b65106492.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466175-feb582e1-2f40-4096-96cc-635ee5301ac8.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466176-209f3d54-b1b9-466e-bd42-ac30bed1a003.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466178-35d3c3b6-f7bd-44a3-a9ca-8765a62bda3b.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466179-828be48b-1df1-4836-bd56-fc769df97889.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466478-8a2b6938-1ad0-4bbb-bb73-92693b8baa73.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466182-4e6fadf2-2e1d-49b8-8e6c-d85d84dc436a.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466184-9f210f29-4562-4841-b99c-a484887e2b80.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466185-98fd6608-948d-41b7-bfce-c78a08791aff.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466187-fca3aaa8-0359-49d9-a2a7-6fe9cf50469d.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466188-c6f14c0c-0c3d-4cbd-b3e7-6f7019ab7685.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466189-3af1d2fb-ecfb-4a4e-a235-06c4a31ed9b7.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466191-dc4efead-5e18-40ae-8e42-d6d04c451508.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466192-3a679ac6-dfa8-4c70-9d69-e844457b861b.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/193466193-55548f74-9de6-4e99-9c07-f03cc4b6cdc9.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/221526614-d4adbedd-34fb-4c7d-b79e-da8dd8c29fa5.png">
-    <img width="300" src="https://user-images.githubusercontent.com/57289621/221408558-a72108ed-e921-4d29-9ff8-68254339bce0.gif">
-</p>
+???
 
 ## Guidelines
 

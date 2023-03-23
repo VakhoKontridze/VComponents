@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Text View UI Model
 /// Model that describes UI.
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VTextViewUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -128,6 +131,9 @@ public struct VTextViewUIModel {
 
 // MARK: - Factory
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VTextViewUIModel {
     /// `VTextViewUIModel` that applies green color scheme.
     public static var success: Self {
@@ -163,6 +169,9 @@ extension VTextViewUIModel {
 }
 
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VTextViewUIModel.Colors {
     /// `VTextViewUIModel.Colors` that applies green color scheme.
     public static var success: Self {

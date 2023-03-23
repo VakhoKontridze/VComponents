@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Toast
 @available(iOS 14.0, *)
+@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(tvOS 14.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VToast: View {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
@@ -78,6 +81,7 @@ struct VToast: View {
     // MARK: Offsets
     private var initialOffset: CGFloat {
         let initialHeight: CGFloat = {
+#if canImport(UIKit) && !os(watchOS)
             switch uiModel.layout.titleTextLineType {
             case .singleLine:
                 let label: UILabel = .init()
@@ -93,16 +97,21 @@ struct VToast: View {
                 
                 return
                     label.multiLineHeight(
-                        width: UIScreen.main.bounds.width,  // width can't be calculated
+                        width: MultiplatformConstants.screenSize.width,  // width can't be calculated
                         text: text
                     ) +
                     2 * uiModel.layout.textMargins.vertical
             }
+#elseif canImport(UIKit) && os(watchOS)
+            fatalError() // Not supported
+#elseif canImport(AppKit)
+            fatalError() // Not supported
+#endif
         }()
         
         switch uiModel.layout.presentationEdge {
         case .top: return -initialHeight
-        case .bottom: return UIScreen.main.bounds.height + initialHeight
+        case .bottom: return MultiplatformConstants.screenSize.height + initialHeight
         }
     }
 
@@ -110,13 +119,13 @@ struct VToast: View {
         switch uiModel.layout.presentationEdge {
         case .top:
             return
-                UIDevice.safeAreaInsetTop +
+                MultiplatformConstants.safeAreaInsets.top +
                 uiModel.layout.presentationEdgeSafeAreaInset
 
         case .bottom:
             return
-                UIScreen.main.bounds.height -
-                UIDevice.safeAreaInsetBottom -
+                MultiplatformConstants.screenSize.height -
+                MultiplatformConstants.safeAreaInsets.bottom -
                 height -
                 uiModel.layout.presentationEdgeSafeAreaInset
         }
@@ -173,6 +182,9 @@ struct VToast: View {
 
 // MARK: - Helpers
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension TextAlignment {
     fileprivate var toNSTextAlignment: NSTextAlignment {
         switch self {
@@ -185,6 +197,9 @@ extension TextAlignment {
 
 // MARK: - Preview
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VToast_Previews: PreviewProvider {
     private static var text: String { "Lorem ipsum dolor sit amet" }
     private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }

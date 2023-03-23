@@ -34,6 +34,9 @@ import VCore
 ///     })
 ///
 @available(iOS 14.0, *)
+@available(macOS, unavailable) // No `PlainDisclosureGroup` support
+@available(tvOS, unavailable) // No `PlainDisclosureGroup` support
+@available(watchOS, unavailable) // No `PlainDisclosureGroup` support
 public struct VDisclosureGroup<HeaderLabel, Content>: View
     where
         HeaderLabel: View,
@@ -77,7 +80,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.headerLabel = .custom(label: headerLabel)
+        self.headerLabel = .content(content: headerLabel)
         self.content = content
     }
     
@@ -106,7 +109,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     ) {
         self.uiModel = uiModel
         self._state = .init(isExpanded: isExpanded)
-        self.headerLabel = .custom(label: headerLabel)
+        self.headerLabel = .content(content: headerLabel)
         self.content = content
     }
 
@@ -143,7 +146,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                         text: title
                     )
                     
-                case .custom(let label):
+                case .content(let label):
                     label()
                         .opacity(uiModel.colors.customHeaderLabelOpacities.value(for: internalState))
                 }
@@ -198,6 +201,9 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 
 // MARK: - Helpers
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VDisclosureGroupInternalState {
     fileprivate var chevronButtonDirection: ChevronButtonDirection {
         switch self {
@@ -210,6 +216,9 @@ extension VDisclosureGroupInternalState {
 
 // MARK: - Previews
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VDisclosureGroup_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem Ipsum" }
 

@@ -10,12 +10,18 @@ import SwiftUI
 // MARK: - V Menu Section Convertible
 /// Type that allows for conversion to `VMenuSectionProtocol`.
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public protocol VMenuSectionConvertible {
     /// Converts `VMenuSectionConvertible` to `VMenuSectionProtocol` `Array`.
     func toSections() -> [any VMenuSectionProtocol]
 }
 
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension Array: VMenuSectionConvertible where Element == VMenuSectionProtocol {
     public func toSections() -> [any VMenuSectionProtocol] { self }
 }
@@ -23,6 +29,9 @@ extension Array: VMenuSectionConvertible where Element == VMenuSectionProtocol {
 // MARK: - V Menu Section Builder
 /// Custom parameter attribute that constructs views from closures.
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 @resultBuilder public struct VMenuSectionBuilder {
     // MARK: Properties
     public typealias Component = any VMenuSectionConvertible

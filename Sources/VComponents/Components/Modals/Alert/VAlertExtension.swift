@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - Bool
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Presents alert when `Bool` is `true`.
     ///
@@ -124,7 +127,7 @@ extension View {
                         onDismiss: dismissHandler,
                         title: title,
                         message: message,
-                        content: .custom(content: content),
+                        content: .content(content: content),
                         buttons: buttons()
                     )
                 }
@@ -134,6 +137,9 @@ extension View {
 
 // MARK: - Item
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Presents alert using the item as data source for content.
     ///
@@ -296,7 +302,7 @@ extension View {
                         }(),
                         content: {
                             if let item = item.wrappedValue ?? PresentationHostDataSourceCache.shared.get(key: id) as? Item {
-                                return .custom(content: { content(item) })
+                                return .content(content: { content(item) })
                             } else {
                                 return .empty
                             }
@@ -316,6 +322,9 @@ extension View {
 
 // MARK: - Presenting Data
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Presents alert when `Bool` is `true` using data to produce content.
     ///
@@ -487,7 +496,7 @@ extension View {
                         }(),
                         content: {
                             if let data = data ?? PresentationHostDataSourceCache.shared.get(key: id) as? T {
-                                return .custom(content: { content(data) })
+                                return .content(content: { content(data) })
                             } else {
                                 return .empty
                             }
@@ -507,6 +516,9 @@ extension View {
 
 // MARK: - Error
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Presents alert when `Bool` is `true` using `Error`
     ///
@@ -669,7 +681,7 @@ extension View {
                         }(),
                         content: {
                             if let error = error ?? PresentationHostDataSourceCache.shared.get(key: id) as? E {
-                                return .custom(content: { content(error) })
+                                return .content(content: { content(error) })
                             } else {
                                 return .empty
                             }

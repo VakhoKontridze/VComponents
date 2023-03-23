@@ -36,6 +36,9 @@ import VCore
 ///             .padding()
 ///     }
 ///
+@available(macOS, unavailable) // No `WheelPickerStyle` support
+@available(tvOS, unavailable) // No `WheelPickerStyle` support
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VWheelPicker<Data, Content>: View
     where
         Data: RandomAccessCollection,
@@ -71,7 +74,7 @@ public struct VWheelPicker<Data, Content>: View
         self._selectedIndex = selectedIndex
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .custom(data: data, content: content)
+        self.content = .content(data: data, content: content)
     }
 
     /// initializes `VWheelPicker` with selected index and row titles.
@@ -114,7 +117,7 @@ public struct VWheelPicker<Data, Content>: View
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .custom(data: data, content: content)
+        self.content = .content(data: data, content: content)
     }
     
     /// initializes `VWheelPicker` with selection value and row titles.
@@ -159,7 +162,7 @@ public struct VWheelPicker<Data, Content>: View
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .custom(data: Array(T.allCases), content: content)
+        self.content = .content(data: Array(T.allCases), content: content)
     }
     
     /// initializes `VWheelPicker` with `StringRepresentableHashableEnumeration`.
@@ -241,7 +244,7 @@ public struct VWheelPicker<Data, Content>: View
                     .tag(i)
             })
             
-        case .custom(let data, let content):
+        case .content(let data, let content):
             ForEach(data.indices, id: \.self, content: { i in
                 content(data[i])
                     .opacity(uiModel.colors.customContentOpacities.value(for: internalState))
@@ -252,6 +255,9 @@ public struct VWheelPicker<Data, Content>: View
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VWheelPicker_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }

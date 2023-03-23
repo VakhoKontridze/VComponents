@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Bottom Sheet
 @available(iOS 15.0, *)
+@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VBottomSheet<Content>: View
     where Content: View
 {
@@ -22,7 +25,7 @@ struct VBottomSheet<Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    @State private var headerLabel: GenericLabel_EmptyTitleCustom<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
+    @State private var headerLabel: GenericContent_EmptyTitleContent<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -171,7 +174,7 @@ struct VBottomSheet<Content>: View
                             text: title
                         )
                         
-                    case .custom(let label):
+                    case .content(let label):
                         label()
                     }
                 })
@@ -213,7 +216,7 @@ struct VBottomSheet<Content>: View
             .frame(maxWidth: .infinity)
             .if(
                 uiModel.layout.autoresizesContent && uiModel.layout.sizes._current.size.heights.isResizable,
-                ifTransform: { $0.frame(height: UIScreen.main.bounds.height - offset - headerDividerHeight) },
+                ifTransform: { $0.frame(height: MultiplatformConstants.screenSize.height - offset - headerDividerHeight) },
                 elseTransform: { $0.frame(maxHeight: .infinity) }
             )
     }
@@ -366,6 +369,9 @@ struct VBottomSheet<Content>: View
 
 // MARK: - Preview
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VBottomSheet_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem Ipsum Dolor Sit Amet" }
     private static func content() -> some View {
@@ -417,6 +423,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     
     private struct ScrollableContentPreview: View {
         var body: some View {
+#if os(iOS)
             PreviewContainer(content: {
                 VBottomSheet(
                     uiModel: {
@@ -439,7 +446,8 @@ struct VBottomSheet_Previews: PreviewProvider {
                             .vBottomSheetHeaderTitle(headerTitle)
                     }
                 )
-            })
+            })  
+#endif
         }
     }
     

@@ -23,6 +23,9 @@ import VCore
 ///         )
 ///     }
 ///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VRoundedLabeledButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRoundedLabeledButtonUIModel
@@ -80,7 +83,7 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
         self.uiModel = uiModel
         self.action = action
         self.icon = icon
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
     
     // MARK: Body
@@ -132,7 +135,7 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
                     labelTitleComponent(title: title)
                 })
                 
-            case .custom(let label):
+            case .content(let label):
                 label()
                     .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
             }
@@ -167,8 +170,17 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VRoundedLabeledButton_Previews: PreviewProvider {
-    private static var icon: Image { .init(systemName: "swift") }
+    private static var icon: Image {
+#if os(iOS)
+        return .init(systemName: "swift")
+#else
+        fatalError() // Not supported
+#endif
+    }
     private static var titleLabel: String { "Lorem Ipsum" }
     
     static var previews: some View {

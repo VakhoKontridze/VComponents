@@ -29,7 +29,7 @@ struct GlobalUIModel {
         static var headerFont: Font { .system(size: 14) }
         
         static var footerTextLineType: TextLineType = {
-            if #available(iOS 16.0, *) {
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .leading, lineLimit: 1...5)
             } else {
                 return .multiLine(alignment: .leading, lineLimit: 5)
@@ -41,10 +41,10 @@ struct GlobalUIModel {
         static var headerFooterMarginHorizontal: CGFloat { 10 }
         
         // MARK: Properties - Divider and Separator
-        static var dividerHeight: CGFloat { 2 / UIScreen.main.scale }
+        static let dividerHeight: CGFloat = 2 / MultiplatformConstants.screenScale
         static let dividerColor: Color = .init(module: "Divider")
         
-        static var separatorHeight: CGFloat { 1 / UIScreen.main.scale }
+        static let separatorHeight: CGFloat = 1 / MultiplatformConstants.screenScale
         static var separatorColor: Color { dividerColor }
         
         static var dividerDashColorEnabled: Color { .init(module: "DividerDash") }
@@ -65,7 +65,13 @@ struct GlobalUIModel {
         static var circularButtonIconPrimaryColorDisabled: Color { ColorBook.primaryPressedDisabled }
         
         // MARK: Properties - Bar
-        static var barHeight: CGFloat { 10 }
+        static var barHeight: CGFloat {
+#if os(watchOS)
+            return 5
+#else
+            return 10
+#endif
+        }
         static var barCornerRadius: CGFloat { barHeight/2 }
         
         // MARK: Properties - Misc
@@ -117,7 +123,7 @@ struct GlobalUIModel {
         static var statePickerLabelSpacing: CGFloat { 5 }
         
         static var titleTextLineType: TextLineType = {
-            if #available(iOS 16.0, *) {
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .leading, lineLimit: 1...2)
             } else {
                 return .multiLine(alignment: .leading, lineLimit: 2)
@@ -200,8 +206,24 @@ struct GlobalUIModel {
     // MARK: Indicators
     struct Indicators {
         // MARK: Properties
-        static var pageIndicatorDotDimension: CGFloat { 10 }
-        static var pageIndicatorSpacing: CGFloat { 5 }
+        static var pageIndicatorDotDimension: CGFloat {
+#if os(tvOS)
+            return 20
+#elseif os(watchOS)
+            return 7
+#else
+            return 10
+#endif
+        }
+        static var pageIndicatorSpacing: CGFloat {
+#if os(tvOS)
+            return 10
+#elseif os(watchOS)
+            return 3
+#else
+            return 5
+#endif
+        }
         
         static var pageIndicatorStandardUnselectedDotScale: CGFloat { 0.85 }
         

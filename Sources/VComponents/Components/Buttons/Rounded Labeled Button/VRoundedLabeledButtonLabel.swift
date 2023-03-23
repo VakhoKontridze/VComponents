@@ -8,4 +8,7 @@
 import Foundation
 
 // MARK: - V Rounded Labeled Button Label
-typealias VRoundedLabeledButtonLabel = GenericLabel_TitleIconTitleCustom
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VRoundedLabeledButtonLabel = GenericContent_TitleIconTitleContent

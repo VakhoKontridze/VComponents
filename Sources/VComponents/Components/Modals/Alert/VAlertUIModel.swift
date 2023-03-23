@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Alert UI Model
 /// Model that describes UI.
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VAlertUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -42,7 +45,7 @@ public struct VAlertUIModel {
         )
         
         /// Rounded corners. Set to to `allCorners`.
-        public var roundedCorners: UIRectCorner = .allCorners
+        public var roundedCorners: RectCorner = .allCorners
         
         /// Corner radius. Set to `20`.
         public var cornerRadius: CGFloat = 20
@@ -66,7 +69,7 @@ public struct VAlertUIModel {
         
         /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
         public var messageTextLineType: TextLineType = {
-            if #available(iOS 16.0, *) {
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .center, lineLimit: 1...5)
             } else {
                 return .multiLine(alignment: .center, lineLimit: 5)
@@ -301,6 +304,9 @@ public struct VAlertUIModel {
 
 // MARK: - Helpers
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension GenericStateModel_EnabledPressedLoadingDisabled where Value == Color {
     fileprivate static func alertButton(_ model: GenericStateModel_EnabledPressedDisabled<Color>) -> Self {
         self.init(

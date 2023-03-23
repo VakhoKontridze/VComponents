@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - Bool
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///
@@ -71,6 +74,9 @@ extension View {
 
 // MARK: - Item
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension View {
     /// Presents bottom sheet when `Bool` is `true`.
     ///

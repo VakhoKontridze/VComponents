@@ -8,4 +8,7 @@
 import SwiftUI
 
 // MARK: - V Toggle Label
-typealias VToggleLabel = GenericLabel_EmptyTitleCustom
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VToggleLabel = GenericContent_EmptyTitleContent

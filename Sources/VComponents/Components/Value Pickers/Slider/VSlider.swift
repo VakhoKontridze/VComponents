@@ -20,6 +20,8 @@ import VCore
 ///             .padding()
 ///     }
 ///
+@available(tvOS, unavailable) // No `DragGesture` support
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VSlider: View {
     // MARK: Properties
     private let uiModel: VSliderUIModel
@@ -165,6 +167,8 @@ public struct VSlider: View {
 }
 
 // MARK: - Preview
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VSlider_Previews: PreviewProvider {
     private static var value: Double { 0.5 }
     

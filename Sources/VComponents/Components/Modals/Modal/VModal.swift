@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Modal
 @available(iOS 15.0, *)
+@available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VModal<Content>: View
     where Content: View
 {
@@ -22,7 +25,7 @@ struct VModal<Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    @State private var headerLabel: GenericLabel_EmptyTitleCustom<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
+    @State private var headerLabel: GenericContent_EmptyTitleContent<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -120,7 +123,7 @@ struct VModal<Content>: View
                             text: title
                         )
                         
-                    case .custom(let label):
+                    case .content(let label):
                         label()
                     }
                 })
@@ -203,6 +206,9 @@ struct VModal<Content>: View
 
 // MARK: - Previews
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VModal_Previews: PreviewProvider {
     private static func content() -> some View {
         ColorBook.accentBlue

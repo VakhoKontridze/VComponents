@@ -8,4 +8,7 @@
 import SwiftUI
 
 // MARK: - V Primary Button Label
-typealias VPrimaryButtonLabel = GenericLabel_TitleIconTitleCustom
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VPrimaryButtonLabel = GenericContent_TitleIconTitleContent

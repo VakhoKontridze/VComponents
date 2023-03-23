@@ -33,7 +33,7 @@ extension View {
     ///
     /// Done in the style of `View.progressView(parameters:)` from `VCore`.
     /// For additional info, refer to [documentation](https://github.com/VakhoKontridze/VCore/blob/main/Sources/VCore/Helpers/Architectural%20Pattern%20Helpers/SwiftUI/Progress%20View/ProgressViewExtension.swift) .
-    @available(iOS 14.0, *)
+    @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
     @ViewBuilder public func vDashedSpinner(
         uiModel: VDashedSpinnerUIModel = .init(),
         parameters: VSpinnerParameters?

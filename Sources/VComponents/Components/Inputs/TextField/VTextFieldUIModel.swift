@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Text Field UI Model
 /// Model that describes UI.
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)@available(macOS, unavailable)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VTextFieldUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -264,17 +267,23 @@ public struct VTextFieldUIModel {
     /// Model that contains misc properties.
     public struct Misc {
         // MARK: Properties
+#if os(iOS)
         /// Keyboard type. Set to `default`.
         public var keyboardType: UIKeyboardType = .default
+#endif
         
+#if os(iOS)
         /// Text content type. Set to `nil`.
         public var textContentType: UITextContentType? = nil
+#endif
 
         /// Auto correct type. Set to `nil`.
         public var autocorrection: Bool? = nil
         
+#if os(iOS)
         /// Auto capitalization type. Set to `nil`.
         public var autocapitalization: TextInputAutocapitalization? = nil
+#endif
          
         /// Submit button type. Set to `return`.
         public var submitButton: SubmitLabel = .return
@@ -311,6 +320,9 @@ public struct VTextFieldUIModel {
 
 // MARK: - Factory (Content Types)
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VTextFieldUIModel {
     /// `VTextFieldUIModel` with secure content type.
     public static var secure: Self {
@@ -333,6 +345,9 @@ extension VTextFieldUIModel {
 
 // MARK: - Factory (Highlights)
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VTextFieldUIModel {
     /// `VTextFieldUIModel` that applies green color scheme.
     public static var success: Self {
@@ -369,6 +384,9 @@ extension VTextFieldUIModel {
 }
 
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VTextFieldUIModel.Colors {
     /// `VTextFieldUIModel.Colors` that applies green color scheme.
     public static var success: Self {

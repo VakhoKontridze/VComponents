@@ -16,6 +16,9 @@ import SwiftUI
 /// In `MVP`, `VIP`, and `VIPER` architectures, parameters are stored in`Presenter`.
 /// in `MVVM` architecture, parameters are stored in `ViewModel.`
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VAlertParameters: Identifiable {
     // MARK: Properties
     /// ID.

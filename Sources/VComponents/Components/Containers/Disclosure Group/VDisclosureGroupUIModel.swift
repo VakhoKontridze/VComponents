@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Disclosure Group UI Model
 /// Model that describes UI.
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VDisclosureGroupUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -211,6 +214,9 @@ public struct VDisclosureGroupUIModel {
 
 // MARK: - Factory
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VDisclosureGroupUIModel {
     /// `VDisclosureGroupUIModel` that insets content.
     public static var insettedContent: Self {

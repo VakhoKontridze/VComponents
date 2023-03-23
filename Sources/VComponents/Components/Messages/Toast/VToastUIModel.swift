@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Toast UI Model
 /// Model that describes UI.
 @available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VToastUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -143,11 +146,20 @@ public struct VToastUIModel {
         /// Text font. Set to system font of size `16` and weight `semibold`.
         ///
         /// Font is of type `UIFont`, as height must be calculated.
-        public var text: UIFont = .systemFont(ofSize: 16, weight: .semibold)
+        public var text: _Font = .systemFont(ofSize: 16, weight: .semibold)
             
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
+        
+        // MARK: Font
+#if canImport(UIKit)
+        /// Font.
+        public typealias _Font = UIFont
+#elseif canImport(AppKit)
+        /// Font.
+        public typealias _Font = NSFont
+#endif
     }
 
     // MARK: Animations

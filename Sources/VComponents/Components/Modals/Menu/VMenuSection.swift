@@ -11,18 +11,24 @@ import VCore
 // MARK: - V Menu Section Protocol
 /// Container view that you can use to add hierarchy to `VMenuRowProtocol`s.
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     /// Section title.
     var title: String? { get }
-    
+
     /// Section body type.
     typealias Body = AnyView
-    
+
     /// Creates a `View` that represents the body of a section.
     func makeBody() -> Body
 }
 
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VMenuSectionProtocol {
     public func toSections() -> [any VMenuSectionProtocol] { [self] }
 }
@@ -30,10 +36,13 @@ extension VMenuSectionProtocol {
 // MARK: - V Menu Group Section
 /// Grouped container view that you can use to add hierarchy to `VMenuRowProtocol`s.
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VMenuGroupSection: VMenuSectionProtocol {
     // MARK: Properties
     private let rows: () -> [any VMenuRowProtocol]
-    
+
     // MARK: Initializers
     /// Initializes `VMenuGroupSection` with rows.
     public init(
@@ -43,10 +52,10 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
         self.title = title
         self.rows = rows
     }
-    
+
     // MARK: Body
     public var title: String?
-    
+
     public func makeBody() -> AnyView {
         .init(
             ForEach(
@@ -61,6 +70,9 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
 // MARK: - V Menu Picker Section
 /// Container view with picker that you can use to add hierarchy to `VMenuRowProtocol`s.
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS 14.0, *)@available(tvOS, unavailable)
+@available(watchOS 7, *)@available(watchOS, unavailable)
 public struct VMenuPickerSection<Data>: VMenuSectionProtocol
     where
         Data: RandomAccessCollection,
@@ -69,9 +81,9 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
     // MARK: Properties
     private let data: Data
     private let content: (Data.Element) -> VMenuRowProtocol
-    
+
     @Binding private var selectedIndex: Int
-    
+
     // MARK: Initializers
     /// Initializes `VMenuPickerSection` with selected index, data, and content.
     public init(
@@ -85,7 +97,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = data
         self.content = content
     }
-    
+
     /// Initializes `VMenuPickerSection` with selected index and row titles.
     public init(
         title: String? = nil,
@@ -99,7 +111,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = rowTitles
         self.content = { VMenuTitleRow(action: {}, title: $0) }
     }
-    
+
     /// Initializes `VMenuPickerSection` with `HashableEnumeration` and content.
     public init<T>(
         title: String? = nil,
@@ -118,7 +130,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = Array(T.allCases)
         self.content = content
     }
-    
+
     /// Initializes `VMenuPickerSection` with `StringRepresentableHashableEnumeration`.
     public init<T>(
         title: String? = nil,
@@ -136,10 +148,10 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = Array(T.allCases)
         self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
     }
-    
+
     // MARK: Body
     public var title: String?
-    
+
     public func makeBody() -> AnyView {
         .init(
             Picker(

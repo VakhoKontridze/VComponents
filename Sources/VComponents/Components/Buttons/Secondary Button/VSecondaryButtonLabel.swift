@@ -8,4 +8,7 @@
 import Foundation
 
 // MARK: - V Secondary Button Label
-typealias VSecondaryButtonLabel = GenericLabel_TitleIconTitleCustom
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VSecondaryButtonLabel = GenericContent_TitleIconTitleContent

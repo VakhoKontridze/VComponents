@@ -70,7 +70,8 @@ import SwiftUI
 ///     })
 ///         .vListStyle()
 ///
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 public struct VListRow<Content>: View
     where Content: View
 {
@@ -100,7 +101,13 @@ public struct VListRow<Content>: View
         })
             .listRowInsets(.init())
             .listRowBackground(uiModel.colors.background)
-            .listRowSeparator(.hidden)
+            .modifier({
+#if os(iOS) || os(macOS)
+                $0.listRowSeparator(.hidden)
+#else
+                $0
+#endif
+            })
     }
     
     private var separator: some View {
@@ -116,7 +123,8 @@ public struct VListRow<Content>: View
 import VCore
 #endif
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
+@available(watchOS, unavailable)
 struct VListRow_Previews: PreviewProvider {
     private static var titles: [String] { (1...3).map { .init($0) } }
     
@@ -130,7 +138,7 @@ struct VListRow_Previews: PreviewProvider {
             PreviewContainer(content: {
                 List(content: {
                     ForEach(titles, id: \.self, content: { title in
-                        VListRow(content: {
+                        VListRow(uiModel: .noLastSeparator(), content: {
                             Text(title)
                         })
                     })

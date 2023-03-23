@@ -8,4 +8,7 @@
 import Foundation
 
 // MARK: - V Radio Button Label
-typealias VRadioButtonLabel = GenericLabel_EmptyTitleCustom
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VRadioButtonLabel = GenericContent_EmptyTitleContent

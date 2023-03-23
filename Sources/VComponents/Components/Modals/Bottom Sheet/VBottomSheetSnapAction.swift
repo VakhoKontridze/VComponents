@@ -9,6 +9,9 @@ import SwiftUI
 
 // MARK: - V Bottom Sheet Snap Action
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 enum VBottomSheetSnapAction {
     // MARK: Cases
     case dismiss
@@ -84,6 +87,9 @@ enum VBottomSheetSnapAction {
 
 // MARK: - V Bottom Sheet Region
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 private enum VBottomSheetRegion {
     // MARK: Cases
     case idealToMax

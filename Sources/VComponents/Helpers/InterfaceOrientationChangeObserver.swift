@@ -18,10 +18,14 @@ final class InterfaceOrientationChangeObserver: ObservableObject {
     init() {
         self.orientation = .init()
         
+#if os(iOS)
         listener = NotificationCenter.default
             .publisher(for: UIDevice.orientationDidChangeNotification)
             .compactMap { _ in DeviceInterfaceOrientation() }
             .assign(to: \.orientation, on: self)
+#else
+        fatalError() // Not supported
+#endif
     }
     
     deinit {
@@ -35,6 +39,7 @@ enum DeviceInterfaceOrientation {
     case landscape
     
     init?() {
+#if os(iOS)
         switch UIApplication.shared.firstWindowInSingleSceneApp?.windowScene?.interfaceOrientation {
         case nil: return nil
         case .unknown: return nil
@@ -44,5 +49,8 @@ enum DeviceInterfaceOrientation {
         case .landscapeRight: self = .landscape
         @unknown default: return nil
         }
+#else
+        fatalError() // Not supported   
+#endif
     }
 }

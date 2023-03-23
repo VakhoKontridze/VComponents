@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Bottom Sheet UI Model
 /// Model that describes UI.
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VBottomSheetUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -177,39 +180,39 @@ public struct VBottomSheetUIModel {
             
             var minOffset: CGFloat {
                 if isResizable {
-                    return UIScreen.main.bounds.height - min
+                    return MultiplatformConstants.screenSize.height - min
                 } else {
-                    return (UIScreen.main.bounds.height - min) / 2
+                    return (MultiplatformConstants.screenSize.height - min) / 2
                 }
             }
             
             var idealOffset: CGFloat {
                 if isResizable {
-                    return UIScreen.main.bounds.height - ideal
+                    return MultiplatformConstants.screenSize.height - ideal
                 } else {
-                    return (UIScreen.main.bounds.height - ideal) / 2
+                    return (MultiplatformConstants.screenSize.height - ideal) / 2
                 }
             }
             
             var maxOffset: CGFloat {
                 if isResizable {
-                    return UIScreen.main.bounds.height - max
+                    return MultiplatformConstants.screenSize.height - max
                 } else {
-                    return (UIScreen.main.bounds.height - max) / 2
+                    return (MultiplatformConstants.screenSize.height - max) / 2
                 }
             }
             
             var hiddenOffset: CGFloat {
                 if isResizable {
-                    return UIScreen.main.bounds.height
+                    return MultiplatformConstants.screenSize.height
                 } else {
-                    return UIScreen.main.bounds.height - maxOffset
+                    return MultiplatformConstants.screenSize.height - maxOffset
                 }
             }
             
             // MARK: Initializers
             /// Initializes `Height`.
-            public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {                
+            public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
                 self.min = min
                 self.ideal = ideal
                 self.max = max
@@ -404,6 +407,9 @@ public struct VBottomSheetUIModel {
 
 // MARK: - Factory
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VBottomSheetUIModel {
     /// `VBottomSheetUIModel` that insets content.
     public static var insettedContent: Self {

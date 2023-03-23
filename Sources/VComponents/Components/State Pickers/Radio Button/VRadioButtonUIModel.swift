@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Radio Button UI Model
 /// Model that describes UI.
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VRadioButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.

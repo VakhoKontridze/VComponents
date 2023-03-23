@@ -5,6 +5,7 @@
 General
 
 - Package now supports `iOS` `13.0`
+- Package now partially supports `macOS` `10.15`, `tvOS` `13.0`, and `watchOS` `6.0`
 - `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - Demo app replaced with details component previews
 - Some colors are changed throughout the package

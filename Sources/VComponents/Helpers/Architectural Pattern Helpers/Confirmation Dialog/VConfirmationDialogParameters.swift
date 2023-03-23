@@ -15,7 +15,7 @@ import SwiftUI
 ///
 /// In `MVP`, `VIP`, and `VIPER` architectures, parameters are stored in`Presenter`.
 /// in `MVVM` architecture, parameters are stored in `ViewModel.`
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct VConfirmationDialogParameters: Identifiable {
     // MARK: Properties
     /// ID.

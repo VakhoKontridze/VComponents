@@ -184,10 +184,13 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 }
 
 // MARK: - Preview
-struct VWrappingMarquee_Previews: PreviewProvider {
+struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`
     private static func contentSmall() -> some View {
         HStack(content: {
-            Image(systemName: "swift")
+            if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
+                Image(systemName: "swift")
+            }
+            
             Text("Lorem ipsum")
         })
             .drawingGroup()
@@ -195,8 +198,17 @@ struct VWrappingMarquee_Previews: PreviewProvider {
     
     private static func contentLarge() -> some View {
         HStack(content: {
-            Image(systemName: "swift")
+            if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
+                Image(systemName: "swift")
+            }
+            
+#if os(macOS)
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique tempor vehicula. Pellentesque habitant morbi...")
+#elseif os(tvOS)
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet eros id tellus porta ullamcorper. Ut odio purus, posuere sit amet odio non, tempus scelerisque arcu. Pellentesque quis pretium erat.")
+#else
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+#endif
         })
             .drawingGroup()
     }

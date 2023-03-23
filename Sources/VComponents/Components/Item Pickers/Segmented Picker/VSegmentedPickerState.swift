@@ -9,7 +9,13 @@ import SwiftUI
 import VCore
 
 // MARK: - V Segmented Picker State
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 typealias VSegmentedPickerInternalState = GenericState_EnabledDisabled
 
 // MARK: - V Segmented Picker Row State
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 typealias VSegmentedPickerRowInternalState = GenericState_EnabledPressedDisabled

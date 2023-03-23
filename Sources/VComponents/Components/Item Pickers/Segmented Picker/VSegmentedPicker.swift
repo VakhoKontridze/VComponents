@@ -39,6 +39,9 @@ import VCore
 ///         )
 ///     }
 ///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VSegmentedPicker<Data, Content>: View
     where
         Data: RandomAccessCollection,
@@ -84,7 +87,7 @@ public struct VSegmentedPicker<Data, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: data, content: content)
+        self.content = .content(data: data, content: content)
     }
 
     /// initializes `VSegmentedPicker` with selected index and row titles.
@@ -131,7 +134,7 @@ public struct VSegmentedPicker<Data, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: data, content: content)
+        self.content = .content(data: data, content: content)
     }
     
     /// initializes `VSegmentedPicker` with selection value and row titles.
@@ -180,7 +183,7 @@ public struct VSegmentedPicker<Data, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledIndexes = disabledIndexes
-        self.content = .custom(data: Array(T.allCases), content: content)
+        self.content = .content(data: Array(T.allCases), content: content)
     }
     
     /// initializes `VSegmentedPicker` with `StringRepresentableHashableEnumeration`.
@@ -297,7 +300,7 @@ public struct VSegmentedPicker<Data, Content>: View
                 })
             })
             
-        case .custom(let data, let content):
+        case .content(let data, let content):
             HStack(spacing: 0, content: {
                 ForEach(data.indices, id: \.self, content: { i in
                     SwiftUIBaseButton(
@@ -360,6 +363,9 @@ public struct VSegmentedPicker<Data, Content>: View
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VSegmentedPicker_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }

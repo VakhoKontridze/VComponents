@@ -9,4 +9,6 @@ import SwiftUI
 import VCore
 
 // MARK: - V Slider Internal State
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 typealias VSliderInternalState = GenericState_EnabledDisabled

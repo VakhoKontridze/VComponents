@@ -9,6 +9,8 @@ import SwiftUI
 
 // MARK: - V Range Slider UI Model
 /// Model that describes UI.
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VRangeSliderUIModel {
     // MARK: Properties
     /// Model that contains layout properties.

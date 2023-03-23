@@ -25,7 +25,10 @@ import VCore
 ///             title: "Lorem Ipsum"
 ///         )
 ///     }
-///     
+///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VRadioButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRadioButtonUIModel
@@ -73,7 +76,7 @@ public struct VRadioButton<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
     
     // MARK: Initializers - Bool
@@ -110,7 +113,7 @@ public struct VRadioButton<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self._state = .init(isOn: isOn)
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
 
     // MARK: Body
@@ -138,7 +141,7 @@ public struct VRadioButton<Label>: View where Label: View {
                         .disabled(!labelIsEnabled)
                 })
                 
-            case .custom(let label):
+            case .content(let label):
                 HStack(spacing: 0, content: {
                     radioButton
                     
@@ -194,6 +197,9 @@ public struct VRadioButton<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VRadioButtonState {
     mutating fileprivate func setNextStateRadio() {
         switch self {
@@ -204,6 +210,9 @@ extension VRadioButtonState {
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VRadioButton_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum" }
     

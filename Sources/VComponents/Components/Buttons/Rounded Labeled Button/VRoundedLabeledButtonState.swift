@@ -9,4 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Rounded Labeled Button Internal State
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 typealias VRoundedLabeledButtonInternalState = GenericState_EnabledPressedDisabled

@@ -90,7 +90,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         self.uiModel = uiModel
         self.total = total
         self.selectedIndex = selectedIndex
-        self.dotContent = .default
+        self.dotContent = .empty
     }
     
     /// Initializes `VCompactPageIndicator` with total, selected index, and custom dot content.
@@ -105,7 +105,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         self.uiModel = uiModel
         self.total = total
         self.selectedIndex = selectedIndex
-        self.dotContent = .custom(content: dot)
+        self.dotContent = .content(content: dot)
     }
     
     init(
@@ -199,10 +199,10 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     @ViewBuilder private var dotContentView: some View {
         switch dotContent {
-        case .default:
+        case .empty:
             Circle()
         
-        case .custom(let content):
+        case .content(let content):
             content()
         }
     }

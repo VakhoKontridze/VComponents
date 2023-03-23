@@ -8,4 +8,7 @@
 import Foundation
 
 // MARK: - V Check Box Label
-typealias VCheckBoxLabel = GenericLabel_EmptyTitleCustom
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VCheckBoxLabel = GenericContent_EmptyTitleContent

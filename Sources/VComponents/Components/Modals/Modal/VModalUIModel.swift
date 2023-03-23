@@ -11,6 +11,9 @@ import VCore
 // MARK: - V Modal UI Model
 /// Model that describes UI.
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VModalUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -45,7 +48,7 @@ public struct VModalUIModel {
         )
         
         /// Rounded corners. Set to to `allCorners`.
-        public var roundedCorners: UIRectCorner = .allCorners
+        public var roundedCorners: RectCorner = .allCorners
         
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
@@ -124,7 +127,7 @@ public struct VModalUIModel {
         public var headerTitle: Color = ColorBook.primary
 
         /// Model for customizing close button colors.
-        public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = { 
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             
             uiModel.background = .init(
@@ -258,6 +261,9 @@ public struct VModalUIModel {
 
 // MARK: - Factory
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 extension VModalUIModel {
     /// `VModalUIModel` that insets content.
     public static var insettedContent: Self {

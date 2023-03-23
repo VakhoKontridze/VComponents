@@ -22,11 +22,15 @@ public struct ModalSizes<ModalSizeMeasurement>
     
     /// Current size configuration based on interface orientation.
     public var current: SizeConfiguration? {
+#if canImport(UIKit)
         switch DeviceInterfaceOrientation() {
         case nil: return nil
         case .portrait: return portrait
         case .landscape: return landscape
         }
+#else
+        fatalError() // Not supported
+#endif
     }
     
     var _current: SizeConfiguration {

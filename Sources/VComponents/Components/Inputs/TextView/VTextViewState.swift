@@ -10,8 +10,7 @@ import VCore
 
 // MARK: - V Text View Internal State
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 typealias VTextViewInternalState = GenericState_EnabledFocusedDisabled
-
-// MARK: - V Text View Button Internal State
-@available(iOS 15.0, *)
-typealias VTextViewButtonInternalState = GenericState_EnabledPressedFocusedDisabled

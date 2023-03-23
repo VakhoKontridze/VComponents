@@ -26,6 +26,9 @@ import VCore
 ///         )
 ///     }
 ///
+@available(macOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VToggleUIModel
@@ -73,7 +76,7 @@ public struct VToggle<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
     
     // MARK: Initializers - Bool
@@ -110,7 +113,7 @@ public struct VToggle<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self._state = .init(isOn: isOn)
-        self.label = .custom(label: label)
+        self.label = .content(content: label)
     }
 
     // MARK: Body
@@ -138,7 +141,7 @@ public struct VToggle<Label>: View where Label: View {
                         .disabled(!labelIsEnabled)
                 })
                 
-            case .custom(let label):
+            case .content(let label):
                 HStack(spacing: 0, content: {
                     toggle
                     
@@ -202,6 +205,9 @@ public struct VToggle<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VToggle_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum" }
     

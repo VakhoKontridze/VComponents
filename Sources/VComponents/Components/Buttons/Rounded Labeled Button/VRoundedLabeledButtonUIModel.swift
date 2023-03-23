@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Rounded Labeled Button UI Model
 /// Model that describes UI.
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VRoundedLabeledButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -60,7 +63,7 @@ public struct VRoundedLabeledButtonUIModel {
         
         /// Title label text line type. Set to `multiline` with `center` alignment and `1...2` lines.
         public var titleLabelTextLineType: TextLineType = {
-            if #available(iOS 16.0, *) {
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .center, lineLimit: 1...2)
             } else {
                 return .multiLine(alignment: .center, lineLimit: 2)

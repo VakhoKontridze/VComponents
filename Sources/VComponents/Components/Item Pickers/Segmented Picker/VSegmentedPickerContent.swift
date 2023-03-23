@@ -8,21 +8,7 @@
 import SwiftUI
 
 // MARK: - V Segmented Picker Content
-enum VSegmentedPickerContent<Data, CustomContent>
-    where
-        Data: RandomAccessCollection,
-        Data.Index == Int,
-        CustomContent: View
-{
-    // MARK: Properties
-    case titles(titles: [String])
-    case custom(data: Data, content: (Data.Element) -> CustomContent)
-    
-    // MARK: Properties
-    var count: Int {
-        switch self {
-        case .titles(let titles): return titles.count
-        case .custom(let data, _): return data.count
-        }
-    }
-}
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VSegmentedPickerContent = GenericContent_TitlesDataSourcedContent

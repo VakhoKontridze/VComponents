@@ -8,7 +8,4 @@
 import SwiftUI
 
 // MARK: - VSheetContent
-enum VSheetContent<Content> where Content: View {
-    case empty
-    case content(content: () -> Content)
-}
+typealias VSheetContent = GenericContent_EmptyContent

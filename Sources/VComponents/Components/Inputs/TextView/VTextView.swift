@@ -79,13 +79,16 @@ import VCore
 ///     }
 ///
 @available(iOS 15.0, *)
+@available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
-    private var internalState: VTextFieldInternalState { .init(isEnabled: isEnabled, isFocused: isFocused) }
+    private var internalState: VTextViewInternalState { .init(isEnabled: isEnabled, isFocused: isFocused) }
     
     private let headerTitle: String?
     private let footerTitle: String?
@@ -178,16 +181,37 @@ public struct VTextView: View {
             .lineLimit(type: uiModel.layout.textLineType.textLineLimitType)
             .foregroundColor(uiModel.colors.text.value(for: internalState))
             .font(uiModel.fonts.text)
-            .keyboardType(uiModel.misc.keyboardType)
-            .textContentType(uiModel.misc.textContentType)
+            .modifier({
+#if os(iOS)
+                $0.keyboardType(uiModel.misc.keyboardType)
+#else
+                $0
+#endif
+            })
+            .modifier({
+#if os(iOS)
+                $0.textContentType(uiModel.misc.textContentType)
+#else
+                $0
+#endif
+            })
             .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
-            .textInputAutocapitalization(uiModel.misc.autocapitalization)
+            .modifier({
+#if os(iOS)
+                $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
+#else
+                $0
+#endif
+            })
             .submitLabel(uiModel.misc.submitButton)
     }
 }
 
 // MARK: - Preview
 @available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VTextView_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }

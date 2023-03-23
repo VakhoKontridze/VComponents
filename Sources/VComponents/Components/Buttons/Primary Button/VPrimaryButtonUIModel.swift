@@ -10,6 +10,9 @@ import VCore
 
 // MARK: - V Primary Button UI Model
 /// Model that describes UI.
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VPrimaryButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.

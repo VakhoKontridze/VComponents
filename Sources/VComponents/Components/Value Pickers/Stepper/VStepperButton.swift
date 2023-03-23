@@ -8,6 +8,9 @@
 import SwiftUI
 
 // MARK: - V Stepper Button
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 enum VStepperButton {
     // MARK: Cases
     case minus

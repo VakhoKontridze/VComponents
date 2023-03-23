@@ -32,24 +32,24 @@ public struct VAutomaticPageIndicatorUIModel {
         /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Dot dimension on the main axis when switching to `standard` configuration. Set to `10`.
+        /// Dot dimension on the main axis when switching to `standard` configuration. Set to `20` for `tvOS`, `7` for `watchOS`, and `10` for other platforms.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
         public var dotDimensionPrimaryAxisForStandardConfiguration: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the main axis when switching to `compact` configuration. Set to `10`.
+        /// Dot dimension on the main axis when switching to `compact` configuration. Set to `20` for `tvOS`, `7` for `watchOS`, and `10` for other platforms.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         public var dotDimensionPrimaryAxisForCompactConfiguration: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the secondary axis. Set to `10`.
+        /// Dot dimension on the secondary axis. Set to `20` for `tvOS`, `7` for `watchOS`, and `10` for other platforms.
         ///
         /// For horizontal layouts, this will be height, and for vertical, width.
         public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot spacing. Set to `5`.
+        /// Dot spacing. Set to `10` for `tvOS`, `3` for `watchOS`, and `5` for other platforms.
         public var spacing: CGFloat = GlobalUIModel.Indicators.pageIndicatorSpacing
         
         /// Number of visible dots when switching to `compact` configuration. Set to `7`.
