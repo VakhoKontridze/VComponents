@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.0.0(30)
+### 4.0.0(31)
 
 General
 
@@ -62,6 +62,12 @@ Helpers - Architectural Pattern Helpers
 
 - `VAlertUIModel` is moved from `VAlertParameters` to `View.vAlert(id:parameters)`
 - `SpinnerType` is removed from `VSpinnerParameters` and is moved to `View.vContinuousSpinner(parameters:)` and `View.vDashedSpinner(parameters:)`
+
+### [3.2.1(30)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.1) — *2023 03 23*
+
+VTextField
+
+- Issue with password visibility icon not being visible is fixed
 
 ### [3.2.0(29)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.0) — *2023 03 09*
 
