@@ -27,7 +27,7 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true },
-    ///             text: "Present"
+    ///             title: "Present"
     ///         )
     ///             .vToast(
     ///                 id: "some_toast",
@@ -84,7 +84,7 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { toastItem = .init() },
-    ///             text: "Present"
+    ///             title: "Present"
     ///         )
     ///             .vToast(
     ///                 id: "some_toast",
@@ -155,7 +155,7 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true; toastData = .init() },
-    ///             text: "Present"
+    ///             title: "Present"
     ///         )
     ///             .vToast(
     ///                 id: "some_toast",
@@ -225,7 +225,7 @@ extension View {
     ///     var body: some View {
     ///         VPlainButton(
     ///             action: { isPresented = true; toastError = SomeError() },
-    ///             text: "Present"
+    ///             title: "Present"
     ///         )
     ///             .vToast(
     ///                 id: "some_toast",
