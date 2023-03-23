@@ -1,6 +1,6 @@
 # Change Log
 
-### 3.2.1(30)
+### [3.2.1(30)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.1) — *2023 03 23*
 
 VTextField
 
