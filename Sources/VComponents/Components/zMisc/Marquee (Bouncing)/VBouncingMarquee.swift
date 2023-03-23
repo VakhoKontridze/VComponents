@@ -14,7 +14,7 @@ import VCore
 /// UI model can be passed as parameter.
 ///
 ///     var body: some View {
-///         VMarquee(
+///         VBouncingMarquee(
 ///             uiModel: .insettedGradient,
 ///             content: {
 ///                 HStack(content: {
