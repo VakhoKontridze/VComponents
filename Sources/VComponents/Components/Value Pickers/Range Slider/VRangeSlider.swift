@@ -88,13 +88,16 @@ public struct VRangeSlider: View {
     // MARK: Body
     public var body: some View {
         ZStack(alignment: .leading, content: {
-            track
-            progress
+            ZStack(alignment: .leading, content: {
+                track
+                progress
+            })
+                .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
+                .frame(height: uiModel.layout.height)
+            
+            thumb(.low)
+            thumb(.high)
         })
-            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-            .overlay(thumb(.low))
-            .overlay(thumb(.high))
-            .frame(height: uiModel.layout.height)
             .onSizeChange(perform: { sliderWidth = $0.width })
             .padding(.horizontal, uiModel.layout.thumbDimension / 2)
             .disabled(!internalState.isEnabled)
