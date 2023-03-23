@@ -57,7 +57,7 @@ public struct VAutomaticPageIndicatorUIModel {
         /// Must be odd and greater than `centerDots`, otherwise a `fatalError` will occur.
         public var visibleDotsForCompactConfiguration: Int = GlobalUIModel.Indicators.pageIndicatorCompactVisibleDots
         
-        /// Number of center dots when switching to `compact` configuration. Set to `7`.
+        /// Number of center dots when switching to `compact` configuration. Set to `3`.
         ///
         /// Must be odd and less than `visibleDots`, otherwise a `fatalError` will occur.
         public var centerDotsForCompactConfiguration: Int = GlobalUIModel.Indicators.pageIndicatorCompactCenterDots
