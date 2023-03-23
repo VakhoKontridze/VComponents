@@ -38,7 +38,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VAutomaticPageIndicator(
-///             type: uiModel: {
+///             uiModel: {
 ///                 var uiModel: VPageIndicatorUIModel = .init()
 ///                 uiModel.layout.dotDimensionPrimaryAxis = 15
 ///                 uiModel.layout.dotDimensionSecondaryAxis = 15

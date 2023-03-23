@@ -38,7 +38,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VCompactPageIndicator(
-///             type: uiModel: {
+///             uiModel: {
 ///                 var uiModel: VCompactPageIndicatorUIModel = .init()
 ///                 uiModel.layout.dotDimensionPrimaryAxis = 15
 ///                 uiModel.layout.dotDimensionSecondaryAxis = 15
