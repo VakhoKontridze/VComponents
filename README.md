@@ -18,14 +18,14 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 
 Versions with different majors are not compatible.
 
-| Ver | Release Date | iOS  | macOS\* | tvOS\* | watchOS\* | VCore         | Comment                                    |
-| :-- | :--          | :--  | :--     | :--    | :--       | :--           | :--                                        |
-| 4.0 | 2023 XX XX   | 13.0 | 10.15   | 13.0   | 6.0       | 4.7.0 - 4.x.x | iOS 13.0 support. Multiplatform support.   |
-| 3.0 | 2022 10 02   | 16.0 | -       | -      |           | 4.1.0 - 4.x.x | New SwiftUI API. API changes.              |
-| 2.0 | 2022 05 26   | 15.0 | -       | -      |           | 3.2.0 - 3.x.x | New SwiftUI API. API changes. SPM support. |
-| 1.0 | 2021 02 07   | 14.0 | -       | -      |           | -             | -                                          |
+Package provides minimal `macOS`, `tvOS`, and `watchOS` support.
 
-**Limited support*
+| Ver | Release Date | SDK                                                    | VCore         | Comment                                    |
+| :-- | :--          | :--                                                    | :--           | :--                                        |
+| 4.0 | 2023 XX XX   | iOS 13.0<br/>macOS 10.15<br/>tvOS 13.0<br/>watchOS 6.0 | 4.7.0 - 4.x.x | iOS 13.0 support.<br/>Multiplatform support.   |
+| 3.0 | 2022 10 02   | iOS 16.0                                               | 4.1.0 - 4.x.x | New SwiftUI API.<br/>API changes.              |
+| 2.0 | 2022 05 26   | iOS 15.0                                               | 3.2.0 - 3.x.x | New SwiftUI API.<br/>API changes.<br/>SPM support. |
+| 1.0 | 2021 02 07   | iOS 14.0                                               | -             | -                                          |
 
 ## Components
 
