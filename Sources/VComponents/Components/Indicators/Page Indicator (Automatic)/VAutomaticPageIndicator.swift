@@ -14,12 +14,12 @@ import VCore
 /// UI model can be passed as parameter.
 ///
 ///     private let total: Int = 10
-///     @State private var selectedIndex: Int = 4
+///     @State private var current: Int = 4
 ///
 ///     var body: some View {
 ///         VAutomaticPageIndicator(
 ///             total: total,
-///             selectedIndex: selectedIndex
+///             current: current
 ///         )
 ///     }
 ///
@@ -29,7 +29,7 @@ import VCore
 ///         VAutomaticPageIndicator(
 ///             uiModel: .vertical,
 ///             total: total,
-///             selectedIndex: selectedIndex
+///             current: current
 ///         )
 ///     }
 ///
@@ -45,7 +45,7 @@ import VCore
 ///                 return uiModel
 ///             }(),
 ///             total: total,
-///             selectedIndex: selectedIndex,
+///             current: current,
 ///             dot: {
 ///                 ZStack(content: {
 ///                     Circle()
@@ -64,35 +64,35 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
     private let uiModel: VAutomaticPageIndicatorUIModel
     
     private let total: Int
-    private let selectedIndex: Int
+    private let current: Int
     
     private let dotContent: VPageIndicatorDotContent<Content>
 
     // MARK: Initializers
-    /// Initializes `VAutomaticPageIndicator` with total and selected index.
+    /// Initializes `VAutomaticPageIndicator` with total and current index.
     public init(
         uiModel: VAutomaticPageIndicatorUIModel = .init(),
         total: Int,
-        selectedIndex: Int
+        current: Int
     )
         where Content == Never
     {
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = .empty
     }
     
-    /// Initializes `VAutomaticPageIndicator` with total, selected index, and custom dot content.
+    /// Initializes `VAutomaticPageIndicator` with total, current index, and custom dot content.
     public init(
         uiModel: VAutomaticPageIndicatorUIModel = .init(),
         total: Int,
-        selectedIndex: Int,
+        current: Int,
         @ViewBuilder dot: @escaping () -> Content
     ) {
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = .content(content: dot)
     }
 
@@ -103,7 +103,7 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
             VPageIndicator(
                 uiModel: uiModel.standardPageIndicatorSubUIModel,
                 total: total,
-                selectedIndex: selectedIndex,
+                current: current,
                 dotContent: dotContent
             )
             
@@ -111,7 +111,7 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
             VCompactPageIndicator(
                 uiModel: uiModel.compactPageIndicatorSubUIModel,
                 total: total,
-                selectedIndex: selectedIndex,
+                current: current,
                 dotContent: dotContent
             )
         }

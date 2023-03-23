@@ -14,12 +14,12 @@ import VCore
 /// UI model can be passed as parameter.
 ///
 ///     private let total: Int = 10
-///     @State private var selectedIndex: Int = 4
+///     @State private var current: Int = 4
 ///
 ///     var body: some View {
 ///         VCompactPageIndicator(
 ///             total: total,
-///             selectedIndex: selectedIndex
+///             current: current
 ///         )
 ///     }
 ///
@@ -29,7 +29,7 @@ import VCore
 ///         VCompactPageIndicator(
 ///             uiModel: .vertical,
 ///             total: total,
-///             selectedIndex: selectedIndex
+///             current: current
 ///         )
 ///     }
 ///
@@ -45,7 +45,7 @@ import VCore
 ///                 return uiModel
 ///             }(),
 ///             total: total,
-///             selectedIndex: selectedIndex,
+///             current: current,
 ///             dot: {
 ///                 ZStack(content: {
 ///                     Circle()
@@ -68,20 +68,20 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private var center: Int { uiModel.layout.centerDots }
     private var side: Int { uiModel.layout.sideDots }
     private var middle: Int { uiModel.layout.middleDots }
-    private let selectedIndex: Int
+    private let current: Int
     
     private let dotContent: VPageIndicatorDotContent<Content>
     
     private var region: Region {
-        .init(selectedIndex: selectedIndex, total: total, middle: middle)
+        .init(current: current, total: total, middle: middle)
     }
 
     // MARK: Initializers
-    /// Initializes `VCompactPageIndicator` with total and selected index.
+    /// Initializes `VCompactPageIndicator` with total and current index.
     public init(
         uiModel: VCompactPageIndicatorUIModel = .init(),
         total: Int,
-        selectedIndex: Int
+        current: Int
     )
         where Content == Never
     {
@@ -89,36 +89,36 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = .empty
     }
     
-    /// Initializes `VCompactPageIndicator` with total, selected index, and custom dot content.
+    /// Initializes `VCompactPageIndicator` with total, current index, and custom dot content.
     public init(
         uiModel: VCompactPageIndicatorUIModel = .init(),
         total: Int,
-        selectedIndex: Int,
+        current: Int,
         @ViewBuilder dot: @escaping () -> Content
     ) {
         Self.assertUIModel(uiModel)
         
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = .content(content: dot)
     }
     
     init(
         uiModel: VCompactPageIndicatorUIModel,
         total: Int,
-        selectedIndex: Int,
+        current: Int,
         dotContent: VPageIndicatorDotContent<Content>
     ) {
         Self.assertUIModel(uiModel)
         
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = dotContent
     }
 
@@ -129,7 +129,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             VPageIndicator(
                 uiModel: uiModel.standardPageIndicatorSubUIModel,
                 total: total,
-                selectedIndex: selectedIndex,
+                current: current,
                 dotContent: dotContent
             )
         
@@ -172,7 +172,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             content: dots
         )
             .offset(x: offset)
-            .animation(uiModel.animations.transition, value: selectedIndex)
+            .animation(uiModel.animations.transition, value: current)
     }
     
     private var dotsVertical: some View {
@@ -181,7 +181,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             content: dots
         )
             .offset(y: offset)
-            .animation(uiModel.animations.transition, value: selectedIndex)
+            .animation(uiModel.animations.transition, value: current)
     }
     
     private func dots() -> some View {
@@ -193,7 +193,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
                 .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
                 .scaleEffect(scale(at: i), anchor: .center)
-                .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
         })
     }
     
@@ -232,7 +232,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 return rawOffset
             
             case .center:
-                let incrementalOffset: CGFloat = -.init(selectedIndex - middle) * (uiModel.layout.dotDimensionPrimaryAxis + uiModel.layout.spacing)
+                let incrementalOffset: CGFloat = -.init(current - middle) * (uiModel.layout.dotDimensionPrimaryAxis + uiModel.layout.spacing)
                 return rawOffset + incrementalOffset
             
             case .end:
@@ -298,7 +298,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     // CENTER
     private func centerVisibleIndex(at index: Int) -> Int? {
-        let offset: Int = selectedIndex - (side+1)
+        let offset: Int = current - (side+1)
         guard (offset..<visible+offset).contains(index) else { return nil }
         return index - offset
     }
@@ -341,8 +341,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         case end
         
         // MARK: Initializers
-        init(selectedIndex: Int, total: Int, middle: Int) {
-            switch selectedIndex {
+        init(current: Int, total: Int, middle: Int) {
+            switch current {
             case 0..<middle+1: self = .start
             case total-middle-1..<total: self = .end
             default: self = .center
@@ -379,7 +379,7 @@ extension Int {
 // MARK: - Preview
 struct VCompactPageIndicator_Previews: PreviewProvider {
     private static var total: Int { 10 }
-    private static var selectedIndex: Int { 0 }
+    private static var current: Int { 0 }
     
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
@@ -387,21 +387,21 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
     }
     
     private struct Preview: View {
-        @State private var selectedIndex: Int = VCompactPageIndicator_Previews.selectedIndex
+        @State private var current: Int = VCompactPageIndicator_Previews.current
         
         var body: some View {
             PreviewContainer(content: {
                 VCompactPageIndicator(
                     total: total,
-                    selectedIndex: selectedIndex
+                    current: current
                 )
-                    .onReceiveOfTimerIncrement($selectedIndex, to: total-1)
+                    .onReceiveOfTimerIncrement($current, to: total-1)
             })
         }
     }
     
     private struct LayoutDirectionsPreview: View {
-        @State private var selectedIndex: Int = VCompactPageIndicator_Previews.selectedIndex
+        @State private var current: Int = VCompactPageIndicator_Previews.current
         
         var body: some View {
             PreviewContainer(content: {
@@ -416,7 +416,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
@@ -432,7 +432,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
@@ -448,7 +448,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
@@ -464,12 +464,12 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
             })
-                .onReceiveOfTimerIncrement($selectedIndex, to: total-1)
+                .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
 }

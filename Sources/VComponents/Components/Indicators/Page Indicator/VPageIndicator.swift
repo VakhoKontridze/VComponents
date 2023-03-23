@@ -14,12 +14,12 @@ import VCore
 /// UI model can be passed as parameter.
 ///
 ///     private let total: Int = 10
-///     @State private var selectedIndex: Int = 4
+///     @State private var current: Int = 4
 ///
 ///     var body: some View {
 ///         VPageIndicator(
 ///             total: total,
-///             selectedIndex: selectedIndex
+///             current: current
 ///         )
 ///     }
 ///
@@ -29,7 +29,7 @@ import VCore
 ///         VPageIndicator(
 ///             uiModel: .vertical,
 ///             total: total,
-///             selectedIndex: selectedIndex
+///             current: current
 ///         )
 ///     }
 ///
@@ -45,7 +45,7 @@ import VCore
 ///                 return uiModel
 ///             }(),
 ///             total: total,
-///             selectedIndex: selectedIndex,
+///             current: current,
 ///             dot: {
 ///                 ZStack(content: {
 ///                     Circle()
@@ -71,7 +71,7 @@ import VCore
 ///                 return uiModel
 ///             }(),
 ///             total: total,
-///             selectedIndex: selectedIndex,
+///             current: current,
 ///             dot: { RoundedRectangle(cornerRadius: 2.5) }
 ///         )
 ///             .padding()
@@ -81,47 +81,47 @@ public struct VPageIndicator<Content>: View where Content: View {
     private let uiModel: VPageIndicatorUIModel
     
     private let total: Int
-    private let selectedIndex: Int
+    private let current: Int
     
     private let dotContent: VPageIndicatorDotContent<Content>
 
     // MARK: Initializers
-    /// Initializes `VPageIndicator` with total and selected index.
+    /// Initializes `VPageIndicator` with total and current index.
     public init(
         uiModel: VPageIndicatorUIModel = .init(),
         total: Int,
-        selectedIndex: Int
+        current: Int
     )
         where Content == Never
     {
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = .empty
     }
     
-    /// Initializes `VPageIndicator` with total, selected index, and custom dot content.
+    /// Initializes `VPageIndicator` with total, current index, and custom dot content.
     public init(
         uiModel: VPageIndicatorUIModel = .init(),
         total: Int,
-        selectedIndex: Int,
+        current: Int,
         @ViewBuilder dot: @escaping () -> Content
     ) {
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = .content(content: dot)
     }
     
     init(
         uiModel: VPageIndicatorUIModel,
         total: Int,
-        selectedIndex: Int,
+        current: Int,
         dotContent: VPageIndicatorDotContent<Content>
     ) {
         self.uiModel = uiModel
         self.total = total
-        self.selectedIndex = selectedIndex
+        self.current = current
         self.dotContent = dotContent
     }
 
@@ -138,12 +138,12 @@ public struct VPageIndicator<Content>: View where Content: View {
                     dotContentView
                         .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
                         .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
-                        .scaleEffect(selectedIndex == i ? 1 : uiModel.layout.unselectedDotScale)
-                        .foregroundColor(selectedIndex == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                        .scaleEffect(current == i ? 1 : uiModel.layout.unselectedDotScale)
+                        .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
                 })
             }
         )
-            .animation(uiModel.animations.transition, value: selectedIndex)
+            .animation(uiModel.animations.transition, value: current)
     }
     
     @ViewBuilder private var dotContentView: some View {
@@ -160,7 +160,7 @@ public struct VPageIndicator<Content>: View where Content: View {
 // MARK: - Preview
 struct VPageIndicator_Previews: PreviewProvider {
     private static var total: Int { 10 }
-    private static var selectedIndex: Int { 0 }
+    private static var current: Int { 0 }
     
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
@@ -169,21 +169,21 @@ struct VPageIndicator_Previews: PreviewProvider {
     }
     
     private struct Preview: View {
-        @State private var selectedIndex: Int = VPageIndicator_Previews.selectedIndex
+        @State private var current: Int = VPageIndicator_Previews.current
         
         var body: some View {
             PreviewContainer(content: {
                 VPageIndicator(
                     total: total,
-                    selectedIndex: selectedIndex
+                    current: current
                 )
-                    .onReceiveOfTimerIncrement($selectedIndex, to: total-1)
+                    .onReceiveOfTimerIncrement($current, to: total-1)
             })
         }
     }
     
     private struct LayoutDirectionsPreview: View {
-        @State private var selectedIndex: Int = VPageIndicator_Previews.selectedIndex
+        @State private var current: Int = VPageIndicator_Previews.current
         
         var body: some View {
             PreviewContainer(content: {
@@ -198,7 +198,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
@@ -214,7 +214,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
@@ -230,7 +230,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
@@ -246,17 +246,17 @@ struct VPageIndicator_Previews: PreviewProvider {
                                 return uiModel
                             }(),
                             total: total,
-                            selectedIndex: selectedIndex
+                            current: current
                         )
                     }
                 )
             })
-                .onReceiveOfTimerIncrement($selectedIndex, to: total-1)
+                .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
     
     private struct StretchingPreview: View {
-        @State private var selectedIndex: Int = VPageIndicator_Previews.selectedIndex
+        @State private var current: Int = VPageIndicator_Previews.current
         
         var body: some View {
             PreviewContainer(content: {
@@ -269,12 +269,12 @@ struct VPageIndicator_Previews: PreviewProvider {
                         return uiModel
                     }(),
                     total: total,
-                    selectedIndex: selectedIndex,
+                    current: current,
                     dot: { RoundedRectangle(cornerRadius: 2.5) }
                 )
                     .padding()
             })
-                .onReceiveOfTimerIncrement($selectedIndex, to: total-1)
+                .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
 }

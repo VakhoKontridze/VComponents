@@ -58,6 +58,18 @@ VContinuousSpinner
 
 - `borderWidth` is renamed to `thickness` in `VContinuousSpinnerUIModel`
 
+VPageIndicator
+
+- `selectedIndex` is renamed to `current`
+
+VCompactPageIndicator
+
+- `selectedIndex` is renamed to `current`
+
+VAutomaticPageIndicator
+
+- `selectedIndex` is renamed to `current`
+
 Helpers - Architectural Pattern Helpers
 
 - `VAlertUIModel` is moved from `VAlertParameters` to `View.vAlert(id:parameters)`
