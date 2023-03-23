@@ -232,9 +232,9 @@ public struct VTextView: View {
 
 // MARK: - Preview
 @available(iOS 16.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(macOS 13.0, *)@available(macOS, unavailable)
+@available(tvOS 16.0, *)@available(tvOS, unavailable)
+@available(watchOS 9.0, *)@available(watchOS, unavailable)
 struct VTextView_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
