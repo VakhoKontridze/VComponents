@@ -25,6 +25,29 @@ import VCore
 ///             .padding()
 ///     }
 ///
+/// To change height, change `textLineType`:
+///
+///     @State private var text: String = ""
+///
+///     var body: some View {
+///         VTextView(
+///             uiModel: {
+///                 var uiModel: VTextViewUIModel = .init()
+///                 uiModel.layout.textLineType = .multiLine(
+///                     alignment: .leading,
+///                     lineLimit: 7,
+///                     reservesSpace: true
+///                 )
+///                 return uiModel
+///             }(),
+///             headerTitle: "Lorem ipsum dolor sit amet",
+///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+///             placeholder: "Lorem ipsum",
+///             text: $text
+///         )
+///             .padding()
+///     }
+///
 /// Textview can also be focused externally by passing state:
 ///
 ///     @FocusState private var isFocused: Bool
