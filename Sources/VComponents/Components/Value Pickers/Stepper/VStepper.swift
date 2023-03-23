@@ -23,9 +23,9 @@ import VCore
 ///             .padding()
 ///     }
 ///
-@available(macOS, unavailable) // No `SwiftUIBaseButton` support
-@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
-@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
+@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 public struct VStepper: View {
     // MARK: Properties
     private let uiModel: VStepperUIModel

@@ -36,8 +36,8 @@ import VCore
 ///             .padding()
 ///     }
 ///
-@available(macOS, unavailable) // No `WheelPickerStyle` support
-@available(tvOS, unavailable) // No `WheelPickerStyle` support
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VWheelPicker<Data, Content>: View
     where

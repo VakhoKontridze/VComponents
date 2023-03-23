@@ -40,7 +40,7 @@ public struct VModalUIModel {
     public struct Layout {
         // MARK: Properties
         /// Modal sizes.
-        /// Set to `0.9` ratio of screen width and `0.6` ratio of screen height in portrait.
+        /// Set to `0.9x0.6` screen ratios in portrait.
         /// Set to reverse in landscape.
         public var sizes: Sizes = .init(
             portrait: .fraction(.init(width: 0.9, height: 0.6)),
@@ -59,7 +59,7 @@ public struct VModalUIModel {
         /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing close button layout. `dimension` Set to `30`, `iconSize` Set to `12` by `12`, and `hitBox` Set to `zero`.
+        /// Model for customizing close button layout. `dimension` Set to `30`, `iconSize` Set to `12x12`, and `hitBox` Set to `zero`.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -155,7 +155,7 @@ public struct VModalUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font.
+        /// Header font. Set to`system` `bold`-`17`.
         ///
         /// Only applicable when using `init` with title.
         public var header: Font = GlobalUIModel.Modals.headerFont

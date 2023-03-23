@@ -64,7 +64,7 @@ public struct VTextFieldUIModel {
         /// Search icon dimension. Set to `15`.
         public var searchIconDimension: CGFloat = 15
         
-        /// Model for customizing clear button layout. `dimension` Set to `22`, `iconSize` Set to `8` by `8`, and `hitBox` Set to `zero`.
+        /// Model for customizing clear button layout. `dimension` Set to `22`, `iconSize` Set to `8x8`, and `hitBox` Set to `zero`.
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -75,7 +75,7 @@ public struct VTextFieldUIModel {
             return uiModel
         }()
         
-        /// Model for customizing visibility button layout. `iconSize` Set to `20` by `20` and `hitBox` Set to `zero`.
+        /// Model for customizing visibility button layout. `iconSize` Set to `20x20` and `hitBox` Set to `zero`.
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Layout = {
             var uiModel: VPlainButtonUIModel.Layout = .init()
             
@@ -234,16 +234,16 @@ public struct VTextFieldUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Text font. Set to system font of size `16`.
+        /// Text font. Set to`system` `16`.
         public var text: Font = .system(size: 16)
         
-        /// Placeholder font. Set to system font of size `16`.
+        /// Placeholder font. Set to`system` `16`.
         public var placeholder: Font = .system(size: 16)
         
-        /// Header font. Set to system font of size `14`.
+        /// Header font. Set to`system` `14`.
         public var header: Font = GlobalUIModel.Common.headerFont
         
-        /// Footer font. Set to system font of size `13`.
+        /// Footer font. Set to`system` `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
         // MARK: Initializers

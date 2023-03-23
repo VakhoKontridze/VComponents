@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V CheckBox UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VCheckBoxUIModel {
@@ -147,7 +146,7 @@ public struct VCheckBoxUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to system font of size `15`.
+        /// Title font. Set to`system` `15`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = GlobalUIModel.StatePickers.font

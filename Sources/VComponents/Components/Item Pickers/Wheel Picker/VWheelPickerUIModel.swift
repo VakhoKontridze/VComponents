@@ -109,13 +109,13 @@ public struct VWheelPickerUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font. Set to system font of size `14`.
+        /// Header font. Set to`system` `14`.
         public var header: Font = GlobalUIModel.Common.headerFont
         
-        /// Footer font. Set to system font of size `13`.
+        /// Footer font. Set to`system` `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
-        /// Row font. Set to system font of size `14` with `medium` weight.
+        /// Row font. Set to`system` `medium`-`14`.
         ///
         /// Only applicable when using `init` with title.
         public var rows: Font = .system(size: 14, weight: .medium)

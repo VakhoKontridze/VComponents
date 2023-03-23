@@ -97,11 +97,8 @@ struct GlobalUIModel {
         static var cornerRadiusSmall: CGFloat { 16 }
         static var cornerRadiusLarge: CGFloat { 24 }
         
-        static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 10, vertical: 3) }
+        static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 15, vertical: 3) }
         static var labelMarginsRounded: EdgeInsets_HorizontalVertical { .init(3) }
-        
-        static var fontSizeSmall: CGFloat { 15 }
-        static var fontSizeLarge: CGFloat { 16 }
 
         static var iconDimensionSmall: CGFloat { 16 }
         static var iconDimensionMedium: CGFloat { 20 }

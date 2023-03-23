@@ -32,16 +32,16 @@ public struct VStepperUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Stepper size. Set to `94` width and `32` height, similarly to native toggle.
+        /// Stepper size. Set to `94x32`, similarly to native stepper.
         public var size: CGSize = .init(width: 94, height: 32)
         
-        /// Stepper corner radius. Set to `7`, similarly to native toggle.
+        /// Stepper corner radius. Set to `7`, similarly to native stepper.
         public var cornerRadius: CGFloat = 7
         
         /// Plus and minus icon dimensions. Set to `14`.
         public var iconDimension: CGFloat = 14
         
-        /// Plus and minus button divider size. Set to width `1` and height `19`.
+        /// Plus and minus button divider size. Set to `1x19`.
         public var divider: CGSize = .init(width: 1, height: 19)
         
         // MARK: Initializers

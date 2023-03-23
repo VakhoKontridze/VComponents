@@ -26,9 +26,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(macOS, unavailable) // No `SwiftUIBaseButton` support
-@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
-@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VCheckBox<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VCheckBoxUIModel
@@ -208,7 +207,6 @@ public struct VCheckBox<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VCheckBox_Previews: PreviewProvider {
@@ -297,6 +295,36 @@ struct VCheckBox_Previews: PreviewProvider {
                 
                 PreviewRow(
                     axis: .horizontal,
+                    title: "Indeterminate",
+                    content: {
+                        VCheckBox(
+                            state: .constant(.indeterminate),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
+                    title: "Pressed Indeterminate",
+                    content: {
+                        VCheckBox(
+                            uiModel: {
+                                var uiModel: VCheckBoxUIModel = .init()
+                                uiModel.colors.fill.indeterminate = uiModel.colors.fill.pressedIndeterminate
+                                uiModel.colors.border.indeterminate = uiModel.colors.border.pressedIndeterminate
+                                uiModel.colors.checkmark.indeterminate = uiModel.colors.checkmark.pressedIndeterminate
+                                uiModel.colors.title.indeterminate = uiModel.colors.title.pressedIndeterminate
+                                return uiModel
+                            }(),
+                            state: .constant(.indeterminate),
+                            title: title
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .horizontal,
                     title: "Disabled",
                     content: {
                         VCheckBox(
@@ -306,6 +334,55 @@ struct VCheckBox_Previews: PreviewProvider {
                             .disabled(true)
                     }
                 )
+                
+#if os(macOS)
+                Group(content: {
+                    PreviewSectionHeader("Native")
+                    
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Off",
+                        content: {
+                            Toggle(
+                                "",
+                                isOn: .constant(false)
+                            )
+                                .labelsHidden()
+                                .toggleStyle(.checkbox)
+                                .padding(.trailing, 95)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "On",
+                        content: {
+                            Toggle(
+                                "",
+                                isOn: .constant(true)
+                            )
+                                .labelsHidden()
+                                .toggleStyle(.checkbox)
+                                .padding(.trailing, 95)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Disabled",
+                        content: {
+                            Toggle(
+                                "",
+                                isOn: .constant(false)
+                            )
+                                .labelsHidden()
+                                .toggleStyle(.checkbox)
+                                .disabled(true)
+                                .padding(.trailing, 95)
+                        }
+                    )
+                })
+#endif
             })
         }
     }

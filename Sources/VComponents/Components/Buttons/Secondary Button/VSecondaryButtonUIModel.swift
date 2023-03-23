@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Secondary Button UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VSecondaryButtonUIModel {
@@ -42,13 +41,13 @@ public struct VSecondaryButtonUIModel {
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
         
-        /// Label margins. Set to `10` horizontal and `3` vertical.
+        /// Label margins. Set to `15` horizontal and `3` vertical.
         public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
         
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Icon size. Set to `16` by `16`.
+        /// Icon size. Set to `16x16`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionSmall)
         
         /// Spacing between icon and title. Set to `8`.
@@ -129,10 +128,18 @@ public struct VSecondaryButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to system font of size `16` with `semibold` weight.
+        /// Title font. Set to`system` `semibold`-`16` for `iOS`, and `medium`-`14` for `macOS`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeLarge, weight: .semibold)
+        public var title: Font = {
+#if os(iOS)
+            return .system(size: 16, weight: .semibold)
+#elseif canImport(AppKit)
+            return .system(size: 14, weight: .medium)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.

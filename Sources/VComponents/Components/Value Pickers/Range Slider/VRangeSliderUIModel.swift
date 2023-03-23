@@ -52,7 +52,7 @@ public struct VRangeSliderUIModel {
         /// Thumb shadow radius. Set to `2`.
         public var thumbShadowRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbShadowRadius
         
-        /// Thumb shadow offset. Set to `0` width and  `2` height.
+        /// Thumb shadow offset. Set to `0x2`.
         public var thumbShadowOffset: CGSize = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
         
         // MARK: Initializers

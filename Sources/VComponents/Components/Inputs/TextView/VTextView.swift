@@ -103,8 +103,8 @@ import VCore
 ///
 @available(iOS 16.0, *)
 @available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel
@@ -198,6 +198,8 @@ public struct VTextView: View {
             axis: .vertical,
             label: EmptyView.init
         )
+            .textFieldStyle(.plain)
+        
             .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
         
             .ifLet(uiModel.layout.textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })

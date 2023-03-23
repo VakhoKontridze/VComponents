@@ -22,8 +22,7 @@ import VCore
 ///         )
 ///     }
 ///
-@available(macOS, unavailable) // No `SwiftUIBaseButton` support
-@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 @available(watchOS, unavailable) // No `SwiftUIBaseButton` support
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
@@ -144,7 +143,6 @@ public struct VPlainButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VPlainButton_Previews: PreviewProvider {
@@ -218,7 +216,8 @@ struct VPlainButton_Previews: PreviewProvider {
                             title,
                             action: {}
                         )
-                            .font(VPlainButtonUIModel.Fonts().title)
+                            .buttonStyle(.plain)
+                            .foregroundColor(ColorBook.accentBlue)
                     }
                 )
                 
@@ -230,7 +229,7 @@ struct VPlainButton_Previews: PreviewProvider {
                             title,
                             action: {}
                         )
-                            .font(VPlainButtonUIModel.Fonts().title)
+                            .buttonStyle(.plain)
                             .disabled(true)
                     }
                 )

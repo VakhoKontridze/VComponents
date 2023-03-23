@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Segmented Picker UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VSegmentedPickerUIModel {
@@ -35,17 +34,33 @@ public struct VSegmentedPickerUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Picker height. Set to `31`, similarly to native picker.
-        public var height: CGFloat = 31
+        /// Picker height. Set to `31` similarly to native picker, and `24` for `macOS`.
+        public var height: CGFloat = {
+#if os(iOS)
+            return 31
+#elseif canImport(AppKit)
+            return 24
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
-        /// Picker corner radius. Set to `8`, similarly to native picker.
+        /// Picker corner radius. Set to `7`, similarly to native picker.
         public var cornerRadius: CGFloat = 7
         
         /// Selection indicator corner radius.  Set to `6`, similarly to native picker.
         public var indicatorCornerRadius: CGFloat = 6
         
-        /// Selection indicator margin. Set to `2`.
-        public var indicatorMargin: CGFloat = 2
+        /// Selection indicator margin. Set to `2` for `iOS`, and `1` for `macOS`.
+        public var indicatorMargin: CGFloat = {
+#if os(iOS)
+            return 2
+#elseif canImport(AppKit)
+            return 1
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Scale by which selection indicator changes on press. Set to `0.95`.
         public var indicatorPressedScale: CGFloat = 0.95
@@ -53,7 +68,7 @@ public struct VSegmentedPickerUIModel {
         /// Indicator shadow radius. Set to `1`.
         public var indicatorShadowRadius: CGFloat = 1
         
-        /// Indicator shadow offset. Set to `1` width and  `1` height.
+        /// Indicator shadow offset. Set to `1x1`.
         public var indicatorShadowOffset: CGSize = .init(dimension: 1)
         
         /// Row content margin. Set to `2`.
@@ -74,8 +89,16 @@ public struct VSegmentedPickerUIModel {
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Row divider size. Set to width `1` and height `19`, similarly to native picker.
-        public var dividerSize: CGSize = .init(width: 1, height: 19)
+        /// Row divider size. Set to width `1x19` for `iOS`, and `1x12` for `macOS`, similarly to native pickers.
+        public var dividerSize: CGSize = {
+#if os(iOS)
+            return .init(width: 1, height: 19)
+#elseif canImport(AppKit)
+            return .init(width: 1, height: 12)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -162,16 +185,24 @@ public struct VSegmentedPickerUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font. Set to system font of size `14`.
+        /// Header font. Set to`system` `14`.
         public var header: Font = GlobalUIModel.Common.headerFont
         
-        /// Footer font. Set to system font of size `13`.
+        /// Footer font. Set to`system` `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
-        /// Row font. Set to system font of size `14` with `medium` weight.
+        /// Row font. Set to `system` `medium`-`14` for `iOS`, and `system` `13` for `macOS`.
         ///
         /// Only applicable when using `init` with title.
-        public var rows: Font = .system(size: 14, weight: .medium)
+        public var rows: Font = {
+#if os(iOS)
+            return .system(size: 14, weight: .medium)
+#elseif canImport(AppKit)
+            return .system(size: 13)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.

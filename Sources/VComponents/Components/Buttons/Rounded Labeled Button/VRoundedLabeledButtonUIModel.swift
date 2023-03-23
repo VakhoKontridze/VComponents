@@ -46,7 +46,7 @@ public struct VRoundedLabeledButtonUIModel {
         /// Icon margins. Set to `3`s.
         public var iconMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRounded
         
-        /// Icon size. Set to `24` by `24`.
+        /// Icon size. Set to `24x24`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionLarge)
         
         /// Spacing between rounded rectangle and label. Set to `4`.
@@ -58,7 +58,7 @@ public struct VRoundedLabeledButtonUIModel {
         /// Spacing between icon label and icon title. Set to `8`.
         public var labelSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
-        /// Icon label size. Set to `18` by `18`.
+        /// Icon label size. Set to `18x18`.
         public var iconLabelSize: CGSize = .init(dimension: 18)
         
         /// Title label text line type. Set to `multiline` with `center` alignment and `1...2` lines.
@@ -167,10 +167,10 @@ public struct VRoundedLabeledButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to system font of size `15.
+        /// Title font. Set to`system` `15`.
         ///
         /// Only applicable when using `init` with title.
-        public var titleLabel: Font = .system(size: GlobalUIModel.Buttons.fontSizeSmall)
+        public var titleLabel: Font = .system(size: 15)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

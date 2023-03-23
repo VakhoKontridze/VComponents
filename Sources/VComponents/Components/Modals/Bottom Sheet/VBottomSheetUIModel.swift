@@ -56,7 +56,7 @@ public struct VBottomSheetUIModel {
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Grabber indicator size. Set to `50` width and `4` height.
+        /// Grabber indicator size. Set to `50x4`.
         ///
         /// To hide grabber, set to `zero`.
         public var grabberSize: CGSize = .init(width: 50, height: 4)
@@ -76,7 +76,7 @@ public struct VBottomSheetUIModel {
         /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing close button layout. `dimension` Set to `30`, `iconSize` Set to `12` by `12`, and `hitBox` Set to `zero`.
+        /// Model for customizing close button layout. `dimension` Set to `30`, `iconSize` Set to `12x12`, and `hitBox` Set to `zero`.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -294,7 +294,7 @@ public struct VBottomSheetUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font.
+        /// Header font. Set to`system` `bold`-`17`.
         ///
         /// Only applicable when using `init` with title.
         public var header: Font = GlobalUIModel.Modals.headerFont

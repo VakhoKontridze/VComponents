@@ -22,9 +22,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(macOS, unavailable) // No `SwiftUIBaseButton` support
-@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
-@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 public struct VRoundedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRoundedButtonUIModel
@@ -144,17 +143,11 @@ public struct VRoundedButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-@available(macOS, unavailable)
+@available(macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VRoundedButton_Previews: PreviewProvider {
-    private static var icon: Image {
-#if os(iOS)
-        return .init(systemName: "swift")
-#else
-        fatalError() // Not supported
-#endif
-    }
+    private static var icon: Image { .init(systemName: "swift") }
     
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)

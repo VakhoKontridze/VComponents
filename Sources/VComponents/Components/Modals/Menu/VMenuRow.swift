@@ -106,7 +106,7 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
         self.icon = .init(assetIcon, bundle: bundle)
     }
     
-    /// Initializes `VMenuTitleIconRow` with action, title, and system icon name.
+    /// Initializes `VMenuTitleIconRow` with action, title, and`system`icon name.
     public init(
         action: @escaping () -> Void,
         role: ButtonRole? = nil,

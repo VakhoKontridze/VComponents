@@ -45,7 +45,7 @@ public struct VDisclosureGroupUIModel {
         /// Header margins. Set to `15` horizontal and  `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
 
-        /// Model for customizing chevron button layout. `dimension` Set to `30`, `iconSize` Set to `12` by `12`, and `hitBox` Set to `zero`.
+        /// Model for customizing chevron button layout. `dimension` Set to `30`, `iconSize` Set to `12x12`, and `hitBox` Set to `zero`.
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -144,7 +144,7 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header title font.
+        /// Header title font. Set to`system` `bold`-`17`.
         ///
         /// Only applicable when using `init` with header.
         public var headerTitle: Font = .system(size: 17, weight: .bold)

@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Toggle UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VToggleUIModel {
@@ -38,13 +37,29 @@ public struct VToggleUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Toggle size. Set to `51` width and `32` height, similarly to native toggle.
-        public var size: CGSize = .init(width: 51, height: 31)
+        /// Toggle size. Set to `51x32` for `iOS`, and `38x22` for `macOS`, similarly to native toggles.
+        public var size: CGSize = {
+#if os(iOS)
+            return .init(width: 51, height: 31)
+#elseif canImport(AppKit)
+            return .init(width: 38, height: 22)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         var cornerRadius: CGFloat { size.height }
         
-        /// Thumb dimension. Set to `27`, similarly to native toggle.
-        public var thumbDimension: CGFloat = 27
+        /// Thumb dimension. Set to `27` for `iOS`, and `20` for `macOS`, similarly to native toggles.
+        public var thumbDimension: CGFloat = {
+#if os(iOS)
+            return 27
+#elseif canImport(AppKit)
+            return 20
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Spacing between toggle and label. Set to `5`.
         public var toggleLabelSpacing: CGFloat = GlobalUIModel.StatePickers.statePickerLabelSpacing
@@ -122,7 +137,7 @@ public struct VToggleUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to system font of size `15`.
+        /// Title font. Set to`system` `15`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = GlobalUIModel.StatePickers.font

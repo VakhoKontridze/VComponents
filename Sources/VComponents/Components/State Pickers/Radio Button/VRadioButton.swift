@@ -26,9 +26,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(macOS, unavailable) // No `SwiftUIBaseButton` support
-@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
-@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VRadioButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRadioButtonUIModel
@@ -197,7 +196,6 @@ public struct VRadioButton<Label>: View where Label: View {
 }
 
 // MARK: - Helpers
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VRadioButtonState {
@@ -210,7 +208,6 @@ extension VRadioButtonState {
 }
 
 // MARK: - Preview
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VRadioButton_Previews: PreviewProvider {

@@ -124,7 +124,7 @@ import VCore
 ///     }
 ///
 @available(iOS 15.0, *)
-@available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 @available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 public struct VTextField: View {
@@ -236,6 +236,8 @@ public struct VTextField: View {
             },
             text: $text
         )
+            .textFieldStyle(.plain)
+        
             .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
         
             .onChange(of: text, perform: textChanged)

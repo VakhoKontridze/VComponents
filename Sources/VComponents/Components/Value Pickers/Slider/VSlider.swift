@@ -20,7 +20,7 @@ import VCore
 ///             .padding()
 ///     }
 ///
-@available(tvOS, unavailable) // No `DragGesture` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VSlider: View {
     // MARK: Properties

@@ -71,7 +71,7 @@ import SwiftUI
 ///         .vListStyle()
 ///
 @available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VListRow<Content>: View
     where Content: View
 {

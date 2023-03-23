@@ -39,9 +39,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(macOS, unavailable) // No `SwiftUIBaseButton` support
-@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
-@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(watchOS, unavailable)
 public struct VSegmentedPicker<Data, Content>: View
     where
         Data: RandomAccessCollection,
@@ -363,7 +362,6 @@ public struct VSegmentedPicker<Data, Content>: View
 }
 
 // MARK: - Preview
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VSegmentedPicker_Previews: PreviewProvider {

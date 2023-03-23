@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Rounded Button UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VRoundedButtonUIModel {
@@ -32,11 +31,27 @@ public struct VRoundedButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button dimension. Set to `56`.
-        public var dimension: CGFloat = GlobalUIModel.Buttons.dimensionLarge
+        /// Button dimension. Set to `56` for `iOS`, and `28` for `macOS`.
+        public var dimension: CGFloat = {
+#if os(iOS)
+            return GlobalUIModel.Buttons.dimensionLarge
+#elseif canImport(AppKit)
+            return 28
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
-        /// Corner radius. Set to `16`.
-        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusSmall
+        /// Corner radius. Set to `16` for `iOS`, and `6` for `macOS`.
+        public var cornerRadius: CGFloat = {
+#if os(iOS)
+            return GlobalUIModel.Buttons.cornerRadiusSmall
+#elseif canImport(AppKit)
+            return 6
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Border width. Set to `0`.
         ///
@@ -49,8 +64,16 @@ public struct VRoundedButtonUIModel {
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Icon size. Set to `20` by `20`.
-        public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
+        /// Icon size. Set to `20x20` for `iOS`, and `14x14` for `macOS`.
+        public var iconSize: CGSize = {
+#if os(iOS)
+            return .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
+#elseif canImport(AppKit)
+            return .init(dimension: 14)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Hit box. Set to `zero`.
         public var hitBox: HitBox = .zero
@@ -125,10 +148,10 @@ public struct VRoundedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to system font of size `15` with `semibold` weight.
+        /// Title font. Set to`system` `semibold`-`15`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeSmall, weight: .semibold)
+        public var title: Font = .system(size: 15, weight: .semibold)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

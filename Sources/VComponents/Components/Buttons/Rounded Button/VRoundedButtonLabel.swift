@@ -8,7 +8,6 @@
 import SwiftUI
 
 // MARK: - V Rounded Button Label
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 typealias VRoundedButtonLabel = GenericContent_TitleIconContent

@@ -24,7 +24,7 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // No `DragGesture` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VRangeSlider: View {
     // MARK: Properties

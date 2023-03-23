@@ -35,8 +35,8 @@ import VCore
 ///
 @available(iOS 14.0, *)
 @available(macOS, unavailable) // No `PlainDisclosureGroup` support
-@available(tvOS, unavailable) // No `PlainDisclosureGroup` support
-@available(watchOS, unavailable) // No `PlainDisclosureGroup` support
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VDisclosureGroup<HeaderLabel, Content>: View
     where
         HeaderLabel: View,

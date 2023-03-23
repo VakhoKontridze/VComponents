@@ -52,8 +52,8 @@ import SwiftUI
 ///
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)
-@available(tvOS, unavailable) // No `Menu` support
-@available(watchOS, unavailable) // No `Menu` support
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
     @Environment(\.isEnabled) private var isEnabled: Bool

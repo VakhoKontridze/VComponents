@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Plain Button UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VPlainButtonUIModel {
@@ -32,7 +31,7 @@ public struct VPlainButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Icon size. Set to `20` by `20`.
+        /// Icon size. Set to `20x20`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
         
         /// Title minimum scale factor. Set to `0.75`.
@@ -110,10 +109,18 @@ public struct VPlainButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to system font of size `15` with `medium` weight.
+        /// Title font. Set to`system` `medium`-`15` for `iOS`, and `13` for `macOS`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeSmall, weight: .medium)
+        public var title: Font = {
+#if os(iOS)
+            return .system(size: 15, weight: .medium)
+#elseif canImport(AppKit)
+            return .system(size: 13)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.

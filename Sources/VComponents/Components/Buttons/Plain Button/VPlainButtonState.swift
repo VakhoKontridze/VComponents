@@ -9,7 +9,6 @@ import SwiftUI
 import VCore
 
 // MARK: - V Plain Button Internal State
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 typealias VPlainButtonInternalState = GenericState_EnabledPressedDisabled

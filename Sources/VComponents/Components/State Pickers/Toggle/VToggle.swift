@@ -26,9 +26,8 @@ import VCore
 ///         )
 ///     }
 ///
-@available(macOS, unavailable) // No `SwiftUIBaseButton` support
-@available(tvOS, unavailable) // No `SwiftUIBaseButton` support
-@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VToggleUIModel
@@ -205,7 +204,6 @@ public struct VToggle<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VToggle_Previews: PreviewProvider {
@@ -313,6 +311,7 @@ struct VToggle_Previews: PreviewProvider {
                             isOn: .constant(false)
                         )
                             .labelsHidden()
+                            .toggleStyle(.switch)
                             .padding(.trailing, 95)
                     }
                 )
@@ -326,6 +325,7 @@ struct VToggle_Previews: PreviewProvider {
                             isOn: .constant(true)
                         )
                             .labelsHidden()
+                            .toggleStyle(.switch)
                             .padding(.trailing, 95)
                     }
                 )
@@ -339,6 +339,7 @@ struct VToggle_Previews: PreviewProvider {
                             isOn: .constant(false)
                         )
                             .labelsHidden()
+                            .toggleStyle(.switch)
                             .disabled(true)
                             .padding(.trailing, 95)
                     }

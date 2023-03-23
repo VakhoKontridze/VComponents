@@ -46,12 +46,9 @@ public struct VPrimaryButtonUIModel {
         public var borderWidth: CGFloat = 0
         
         /// Label margins. Set to `15` horizontal and `3` vertical.
-        public var labelMargins: LabelMargins = .init(
-            horizontal: GlobalUIModel.Buttons.labelMargins.horizontal + 5,
-            vertical: GlobalUIModel.Buttons.labelMargins.vertical
-        )
+        public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
         
-        /// Icon size. Set to `20` by `20`.
+        /// Icon size. Set to `20x20`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
         
         /// Title minimum scale factor. Set to `0.75`.
@@ -147,10 +144,10 @@ public struct VPrimaryButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to system font of size `16` with `semibold` weight.
+        /// Title font. Set to`system` `semibold`-`16`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: GlobalUIModel.Buttons.fontSizeLarge, weight: .semibold)
+        public var title: Font = .system(size: 16, weight: .semibold)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

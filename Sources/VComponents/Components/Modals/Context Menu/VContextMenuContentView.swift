@@ -10,8 +10,8 @@ import SwiftUI
 // MARK: - V Menu Content View
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)
-@available(tvOS, unavailable) // No `View.contextMenu(...)` support
-@available(watchOS, unavailable) // No `View.contextMenu(...)` support
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VContextMenuContentView: View {
     // MARK: Properties
     private let sections: () -> [any VMenuSectionProtocol]
