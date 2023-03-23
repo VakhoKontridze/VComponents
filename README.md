@@ -105,22 +105,6 @@ var body: some View {
 }
 ```
 
-#### Types
-
-Some components take `type` as parameter. For instance, `VPageIndicator` has three types: `standard`, `compact`, and `automatic`
-
-```swift
-var body: some View {
-    VStack(content: {
-        VPageIndicator(type: .standard(), total: 9, selectedIndex: 4)
-        
-        VPageIndicator(type: .compact(), total: 99, selectedIndex: 4)
-        
-        VPageIndicator(type: .automatic(), total: 99, selectedIndex: 4)
-    })
-}
-```
-
 #### Animations
 
 VComponents approaches animations as bound to components and their UI models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom UI model.
