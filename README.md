@@ -16,7 +16,7 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 
 ## Compatibility
 
-Package provides some `macOS`, and minimal `tvOS` and `watchOS` support.
+Package provides limited `macOS`, `tvOS`, and `watchOS` support.
 
 Versions with different majors are not directly compatible. When a new major is released, deprecated symbols are removed.
 
