@@ -238,6 +238,8 @@ public struct VTextView: View {
 @available(tvOS 16.0, *)@available(tvOS, unavailable)
 @available(watchOS 9.0, *)@available(watchOS, unavailable)
 struct VTextView_Previews: PreviewProvider {
+    private static let highlight: VTextViewUIModel = .init()
+    
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
     private static var placeholder: String { "Lorem ipsum" }
@@ -246,7 +248,6 @@ struct VTextView_Previews: PreviewProvider {
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
         ColorSchemePreview(title: "States", content: StatesPreview.init)
-        ColorSchemePreview(title: "Highlights", content: HighlightsPreview.init)
     }
     
     private struct Preview: View {
@@ -256,7 +257,7 @@ struct VTextView_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VTextView(
                     uiModel: {
-                        var uiModel: VTextViewUIModel = .init()
+                        var uiModel: VTextViewUIModel = highlight
                         uiModel.layout.textLineType = .multiLine(alignment: .leading, lineLimit: 7, reservesSpace: true)
                         return uiModel
                     }(),
@@ -278,6 +279,7 @@ struct VTextView_Previews: PreviewProvider {
                     title: "Enabled",
                     content: {
                         VTextView(
+                            uiModel: highlight,
                             headerTitle: headerTitle,
                             footerTitle: footerTitle,
                             placeholder: placeholder,
@@ -292,7 +294,7 @@ struct VTextView_Previews: PreviewProvider {
                     content: {
                         VTextView(
                             uiModel: {
-                                var uiModel: VTextViewUIModel = .init()
+                                var uiModel: VTextViewUIModel = highlight
                                 uiModel.colors.background.enabled = uiModel.colors.background.focused
                                 uiModel.colors.text.enabled = uiModel.colors.text.focused
                                 uiModel.colors.header.enabled = uiModel.colors.header.focused
@@ -312,61 +314,13 @@ struct VTextView_Previews: PreviewProvider {
                     title: "Disabled",
                     content: {
                         VTextView(
+                            uiModel: highlight,
                             headerTitle: headerTitle,
                             footerTitle: footerTitle,
                             placeholder: placeholder,
                             text: .constant(text)
                         )
                             .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-    
-    // No focus or disabled state is supported, so there's no need to exhaust them.
-    private struct HighlightsPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Success",
-                    content: {
-                        VTextView(
-                            uiModel: .success,
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Warning",
-                    content: {
-                        VTextView(
-                            uiModel: .warning,
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Error",
-                    content: {
-                        VTextView(
-                            uiModel: .error,
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
                     }
                 )
             })

@@ -329,17 +329,17 @@ public struct VTextField: View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VTextField_Previews: PreviewProvider {
+    private static let highlight: VTextFieldUIModel = .init()
+    private static let contentType: VTextFieldUIModel.Layout.ContentType = .standard
+    
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
     private static var placeholder: String { "Lorem ipsum" }
     private static var text: String { "Lorem ipsum" }
     
-    private static let contentType: VTextFieldUIModel.Layout.ContentType = .standard
-    
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
         ColorSchemePreview(title: "States", content: StatesPreview.init)
-        ColorSchemePreview(title: "Highlights", content: HighlightsPreview.init)
     }
     
     private struct Preview: View {
@@ -349,7 +349,7 @@ struct VTextField_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VTextField(
                     uiModel: {
-                        var uiModel: VTextFieldUIModel = .init()
+                        var uiModel: VTextFieldUIModel = highlight
                         uiModel.layout.contentType = contentType
                         return uiModel
                     }(),
@@ -372,7 +372,7 @@ struct VTextField_Previews: PreviewProvider {
                     content: {
                         VTextField(
                             uiModel: {
-                                var uiModel: VTextFieldUIModel = .init()
+                                var uiModel: VTextFieldUIModel = highlight
                                 uiModel.layout.contentType = contentType
                                 return uiModel
                             }(),
@@ -390,7 +390,7 @@ struct VTextField_Previews: PreviewProvider {
                     content: {
                         VTextField(
                             uiModel: {
-                                var uiModel: VTextFieldUIModel = .init()
+                                var uiModel: VTextFieldUIModel = highlight
                                 uiModel.layout.contentType = contentType
                                 uiModel.colors.background.enabled = uiModel.colors.background.focused
                                 uiModel.colors.text.enabled = uiModel.colors.text.focused
@@ -412,7 +412,7 @@ struct VTextField_Previews: PreviewProvider {
                     content: {
                         VTextField(
                             uiModel: {
-                                var uiModel: VTextFieldUIModel = .init()
+                                var uiModel: VTextFieldUIModel = highlight
                                 uiModel.layout.contentType = contentType
                                 uiModel.colors.clearButtonSubUIModel.background.enabled = uiModel.colors.clearButtonSubUIModel.background.pressed
                                 uiModel.colors.clearButtonSubUIModel.icon.enabled = uiModel.colors.clearButtonSubUIModel.icon.pressed
@@ -433,7 +433,7 @@ struct VTextField_Previews: PreviewProvider {
                     content: {
                         VTextField(
                             uiModel: {
-                                var uiModel: VTextFieldUIModel = .init()
+                                var uiModel: VTextFieldUIModel = highlight
                                 uiModel.layout.contentType = contentType
                                 return uiModel
                             }(),
@@ -443,67 +443,6 @@ struct VTextField_Previews: PreviewProvider {
                             text: .constant(text)
                         )
                             .disabled(true)
-                    }
-                )
-            })
-        }
-    }
-    
-    // No focus or disabled state is supported, so there's no need to exhaust them.
-    private struct HighlightsPreview: View {
-        var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Success",
-                    content: {
-                        VTextField(
-                            uiModel: {
-                                var uiModel: VTextFieldUIModel = .success
-                                uiModel.layout.contentType = contentType
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Warning",
-                    content: {
-                        VTextField(
-                            uiModel: {
-                                var uiModel: VTextFieldUIModel = .warning
-                                uiModel.layout.contentType = contentType
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Error",
-                    content: {
-                        VTextField(
-                            uiModel: {
-                                var uiModel: VTextFieldUIModel = .error
-                                uiModel.layout.contentType = contentType
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
                     }
                 )
             })
