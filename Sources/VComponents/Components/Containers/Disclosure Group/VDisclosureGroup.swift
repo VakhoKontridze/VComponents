@@ -220,6 +220,20 @@ extension VDisclosureGroupInternalState {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VDisclosureGroup_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            StatesPreview().previewDisplayName("States")
+            InsettedContentPreview().previewDisplayName("Insetted Content")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static var headerTitle: String { "Lorem Ipsum" }
 
     private static func content() -> some View {
@@ -227,12 +241,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             .frame(height: 100)
     }
     
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        ColorSchemePreview(title: "States", content: StatesPreview.init)
-        InsettedContentPreview().previewDisplayName("Insetted Content")
-    }
-    
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var state: VDisclosureGroupState = .expanded
         

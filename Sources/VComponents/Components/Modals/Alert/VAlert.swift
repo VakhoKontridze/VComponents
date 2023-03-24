@@ -236,6 +236,33 @@ struct VAlert<Content>: View
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VAlert_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            
+//            NoContentPreview().previewDisplayName("No Content")
+//
+//            NoButtonPreview().previewDisplayName("No Button")
+//            SingleButtonPreview().previewDisplayName("Single Button")
+//            ManyButtonsPreview().previewDisplayName("Many Buttons")
+//
+//            ButtonStatesPreview_Pressed().previewDisplayName("Button States - Pressed")
+//            ButtonStatesPreview_Disabled().previewDisplayName("Button States - Disabled")
+            
+//            NoTitlePreview().previewDisplayName("No Title")
+//            NoMessagePreview().previewDisplayName("No Message")
+//            NoTitleNoMessagePreview().previewDisplayName("No Title & Message")
+            
+//            OnlyButtonsPreview().previewDisplayName("Only Buttons")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
     private static var message: String { "Lorem ipsum dolor sit amet" }
     
@@ -250,26 +277,8 @@ struct VAlert_Previews: PreviewProvider {
         }
 #endif
     }
-    
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        
-//        NoContentPreview().previewDisplayName("No Content")
-        
-//        NoButtonPreview().previewDisplayName("No Button")
-//        SingleButtonPreview().previewDisplayName("Single Button")
-//        ManyButtonsPreview().previewDisplayName("Many Buttons")
-        
-//        ButtonStatesPreview_Pressed().previewDisplayName("Button States - Pressed")
-//        ButtonStatesPreview_Disabled().previewDisplayName("Button States - Disabled")
-        
-//        NoTitlePreview().previewDisplayName("No Title")
-//        NoMessagePreview().previewDisplayName("No Message")
-//        NoTitleNoMessagePreview().previewDisplayName("No Title & Message")
-        
-//        OnlyButtonsPreview().previewDisplayName("Only Buttons")
-    }
-    
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {

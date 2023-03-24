@@ -60,6 +60,19 @@ public struct VText: View {
 
 // MARK: - Preview
 struct VText_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            TextLineTypesPreview().previewDisplayName("Text Line Types")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static var textColor: Color { ColorBook.primary }
     private static var textFont: Font { .system(size: 16) }
     
@@ -77,15 +90,11 @@ struct VText_Previews: PreviewProvider {
 #if os(tvOS)
         return "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet eros id tellus porta ullamcorper. Ut odio purus, posuere sit amet odio non, tempus scelerisque arcu. Pellentesque quis pretium erat. Pellentesque fermentum purus varius augue auctor lacinia. In lobortis orci sed velit fermentum, eu feugiat libero bibendum. Aliquam vitae magna tincidunt, vehicula eros eget, convallis mauris. Vivamus vitae nisl in felis vehicula finibus. In quis pretium arcu. Phasellus mollis ut neque eget feugiat. Ut mattis, nisl a varius imperdiet, neque velit bibendum nisl, nec euismod nibh dui quis dolor. Maecenas posuere justo felis, tempor rutrum est sodales non. Vivamus et felis imperdiet, congue metus vitae, lobortis quam. Sed in tincidunt ex. Mauris eu auctor libero. Cras massa arcu, lobortis quis enim eu, cursus tincidunt augue. Maecenas pulvinar diam turpis, ac tristique arcu scelerisque sed."
 #else
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet."   
+        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet."
 #endif
     }
-    
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        TextLineTypesPreview().previewDisplayName("Text Line Types")
-    }
-    
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {

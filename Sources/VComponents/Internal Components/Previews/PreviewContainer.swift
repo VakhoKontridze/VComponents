@@ -33,16 +33,32 @@ struct PreviewContainer<Content>: View where Content: View {
             
             if hasLayer { ColorBook.layer }
             
-            if embeddedInScrollView {
-                ScrollView(content: {
-                    VStack(content: content)
-                })
+            Group(content: {
+                if embeddedInScrollView {
+                    ScrollView(content: {
+                        VStack(content: content)
+                    })
                     .padding(.vertical, 1)
-                
-            } else {
-                VStack(content: content)
-            }
+                    
+                } else {
+                    VStack(content: content)
+                }
+            })
+                .modifier({
+#if os(macOS)
+                    $0.padding(.vertical, 20)
+#else
+                    $0
+#endif
+                })
         })
+            .modifier({
+#if os(macOS)
+                $0.previewLayout(.sizeThatFits)
+#else
+                $0
+#endif
+            })
     }
 }
 

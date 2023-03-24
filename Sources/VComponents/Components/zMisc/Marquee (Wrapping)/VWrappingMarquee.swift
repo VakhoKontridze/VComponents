@@ -186,6 +186,20 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 // MARK: - Preview
 @available(macOS 11.0, *)
 struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            InsettedContentPreview().previewDisplayName("Insetted & Gradient")
+            ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static func contentSmall() -> some View {
         HStack(content: {
             Image(systemName: "swift")
@@ -209,13 +223,8 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`
         })
             .drawingGroup()
     }
-    
-    static var previews: some View {
-        Preview().previewDisplayName("-")
-        InsettedContentPreview().previewDisplayName("Insetted & Gradient")
-        ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
-    }
-    
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {

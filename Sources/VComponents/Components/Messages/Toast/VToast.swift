@@ -222,18 +222,26 @@ extension HorizontalAlignment {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VToast_Previews: PreviewProvider {
-    private static let highlights: VToastUIModel = .init()
-    private static let widthType: VToastUIModel.Layout.WidthType = .default
-    
-    private static var text: String { "Lorem ipsum dolor sit amet" }
-    private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
-    
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    private static var highlights: VToastUIModel { .init() }
+    private static var widthType: VToastUIModel.Layout.WidthType { .default }
+    private static var presentationEdge: VToastUIModel.Layout.PresentationEdge { .default }
+
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        MultiLineTextPreview().previewDisplayName("MultiLine Text")
-        PresentationEdgePreview_Top().previewDisplayName("Presentation Edge - Top")
+        Group(content: {
+            Preview().previewDisplayName("*")
+            MultiLineTextPreview().previewDisplayName("MultiLine Text")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Data
+    private static var text: String { "Lorem ipsum dolor sit amet" }
+    private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
@@ -241,6 +249,7 @@ struct VToast_Previews: PreviewProvider {
                     uiModel: {
                         var uiModel: VToastUIModel = highlights
                         uiModel.layout.widthType = widthType
+                        uiModel.layout.presentationEdge = presentationEdge
                         uiModel.animations.appear = nil
                         uiModel.animations.duration = .infinity
                         return uiModel
@@ -261,6 +270,7 @@ struct VToast_Previews: PreviewProvider {
                         var uiModel: VToastUIModel = highlights
                         uiModel.layout.widthType = widthType
                         uiModel.layout.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                        uiModel.layout.presentationEdge = presentationEdge
                         uiModel.animations.appear = nil
                         uiModel.animations.duration = .infinity
                         return uiModel
@@ -268,26 +278,6 @@ struct VToast_Previews: PreviewProvider {
                     onPresent: nil,
                     onDismiss: nil,
                     text: textLong
-                )
-            })
-        }
-    }
-    
-    private struct PresentationEdgePreview_Top: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VToast(
-                    uiModel: {
-                        var uiModel: VToastUIModel = highlights
-                        uiModel.layout.widthType = widthType
-                        uiModel.layout.presentationEdge = .top
-                        uiModel.animations.appear = nil
-                        uiModel.animations.duration = .infinity
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    text: text
                 )
             })
         }

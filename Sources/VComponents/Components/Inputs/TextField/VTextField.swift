@@ -294,19 +294,27 @@ public struct VTextField: View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VTextField_Previews: PreviewProvider {
-    private static let highlight: VTextFieldUIModel = .init()
-    private static let contentType: VTextFieldUIModel.Layout.ContentType = .standard
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    private static var highlight: VTextFieldUIModel { .init() }
+    private static var contentType: VTextFieldUIModel.Layout.ContentType { .standard }
     
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            StatesPreview().previewDisplayName("States")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
     private static var placeholder: String { "Lorem ipsum" }
     private static var text: String { "Lorem ipsum" }
     
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        ColorSchemePreview(title: "States", content: StatesPreview.init)
-    }
-    
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var text: String = VTextField_Previews.text
         

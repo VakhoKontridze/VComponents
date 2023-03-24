@@ -211,13 +211,22 @@ extension VRadioButtonState {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VRadioButton_Previews: PreviewProvider {
-    private static var title: String { "Lorem Ipsum" }
-    
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        ColorSchemePreview(title: "States", content: StatesPreview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+            StatesPreview().previewDisplayName("States")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Data
+    private static var title: String { "Lorem Ipsum" }
+
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var state: VRadioButtonState = .off
         

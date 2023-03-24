@@ -147,13 +147,22 @@ public struct VRoundedButton<Label>: View where Label: View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VRoundedButton_Previews: PreviewProvider {
-    private static var icon: Image { .init(systemName: "swift") }
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
     
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        ColorSchemePreview(title: "States", content: StatesPreview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+            StatesPreview().previewDisplayName("States")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Data
+    private static var icon: Image { .init(systemName: "swift") }
+    
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {

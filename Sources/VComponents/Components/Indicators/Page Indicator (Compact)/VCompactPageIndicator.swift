@@ -378,14 +378,23 @@ extension Int {
 
 // MARK: - Preview
 struct VCompactPageIndicator_Previews: PreviewProvider {
-    private static var total: Int { 10 }
-    private static var current: Int { 0 }
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
     
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        LayoutDirectionsPreview().previewDisplayName("Layout Directions")
+        Group(content: {
+            Preview().previewDisplayName("*")
+            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Data
+    private static var total: Int { 10 }
+    private static var current: Int { 0 }
+
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var current: Int = VCompactPageIndicator_Previews.current
         

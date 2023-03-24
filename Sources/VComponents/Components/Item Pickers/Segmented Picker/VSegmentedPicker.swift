@@ -365,6 +365,19 @@ public struct VSegmentedPicker<Data, Content>: View
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VSegmentedPicker_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            StatesPreview().previewDisplayName("States")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
     
@@ -380,12 +393,8 @@ struct VSegmentedPicker_Previews: PreviewProvider {
         }
     }
     private static var selection: PickerRow { .red }
-    
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        ColorSchemePreview(title: "States", content: StatesPreview.init)
-    }
-    
+
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var selection: PickerRow = VSegmentedPicker_Previews.selection
         

@@ -84,10 +84,18 @@ public struct VProgressBar: View {
 
 // MARK: - Preview
 struct VProgressBar_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var value: Double = 0
         

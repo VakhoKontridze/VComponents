@@ -220,24 +220,31 @@ struct VSideBar<Content>: View where Content: View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VSideBar_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    private static var presentationEdge: VSideBarUIModel { .init() }
+
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            InsettedContentPreview().previewDisplayName("Insetted Content")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static func content() -> some View {
         ColorBook.accentBlue
     }
-    
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        InsettedContentPreview().previewDisplayName("Insetted Content")
-        PresentationEdgePreview_Right().previewDisplayName("Presentation Edge - Right")
-        PresentationEdgePreview_Top().previewDisplayName("Presentation Edge - Top")
-        PresentationEdgePreview_Bottom().previewDisplayName("Presentation Edge - Bottom")
-    }
-    
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
                 VSideBar(
                     uiModel: {
-                        var uiModel: VSideBarUIModel = .init()
+                        var uiModel: VSideBarUIModel = presentationEdge
                         uiModel.animations.appear = nil
                         return uiModel
                     }(),
@@ -254,58 +261,8 @@ struct VSideBar_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VSideBar(
                     uiModel: {
-                        var uiModel: VSideBarUIModel = .insettedContent
-                        uiModel.animations.appear = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
-            })
-        }
-    }
-    
-    private struct PresentationEdgePreview_Right: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VSideBar(
-                    uiModel: {
-                        var uiModel: VSideBarUIModel = .right
-                        uiModel.animations.appear = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
-            })
-        }
-    }
-    
-    private struct PresentationEdgePreview_Top: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VSideBar(
-                    uiModel: {
-                        var uiModel: VSideBarUIModel = .top
-                        uiModel.animations.appear = nil
-                        return uiModel
-                    }(),
-                    onPresent: nil,
-                    onDismiss: nil,
-                    content: content
-                )
-            })
-        }
-    }
-    
-    private struct PresentationEdgePreview_Bottom: View {
-        var body: some View {
-            PreviewContainer(content: {
-                VSideBar(
-                    uiModel: {
-                        var uiModel: VSideBarUIModel = .bottom
+                        var uiModel: VSideBarUIModel = presentationEdge
+                        uiModel.layout.contentMargins = VSideBarUIModel.insettedContent.layout.contentMargins
                         uiModel.animations.appear = nil
                         return uiModel
                     }(),

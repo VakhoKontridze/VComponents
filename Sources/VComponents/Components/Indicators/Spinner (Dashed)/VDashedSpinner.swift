@@ -39,10 +39,18 @@ public struct VDashedSpinner: View {
 // MARK: - Preview
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct VDashedSpinner_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {

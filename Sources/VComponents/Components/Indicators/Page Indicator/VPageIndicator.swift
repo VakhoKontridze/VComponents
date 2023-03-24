@@ -159,15 +159,24 @@ public struct VPageIndicator<Content>: View where Content: View {
 
 // MARK: - Preview
 struct VPageIndicator_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
+            StretchedPreview().previewDisplayName("Stretched")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static var total: Int { 10 }
     private static var current: Int { 0 }
     
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        LayoutDirectionsPreview().previewDisplayName("Layout Directions")
-        StretchedPreview().previewDisplayName("Stretched")
-    }
-    
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var current: Int = VPageIndicator_Previews.current
         

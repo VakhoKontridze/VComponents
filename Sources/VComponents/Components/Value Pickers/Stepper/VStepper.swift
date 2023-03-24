@@ -224,14 +224,23 @@ public struct VStepper: View {
 @available(tvOS, unavailable)
 @available(watchOS 9.0, *)@available(watchOS, unavailable)
 struct VStepper_Previews: PreviewProvider {
-    private static var range: ClosedRange<Int> { 1...10 }
-    private static var value: Int { 5 }
-    
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        ColorSchemePreview(title: "States", content: StatesPreview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+            StatesPreview().previewDisplayName("States")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Data
+    private static var range: ClosedRange<Int> { 1...10 }
+    private static var value: Int { 5 }
+
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var value: Int = VStepper_Previews.value
         

@@ -173,13 +173,22 @@ public struct VSlider: View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VSlider_Previews: PreviewProvider {
-    private static var value: Double { 0.5 }
-    
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        ColorSchemePreview(title: "States", content: StatesPreview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+            StatesPreview().previewDisplayName("States")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Data
+    private static var value: Double { 0.5 }
+
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var value: Double = VSlider_Previews.value
         

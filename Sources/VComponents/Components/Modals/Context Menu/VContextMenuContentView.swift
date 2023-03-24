@@ -48,6 +48,18 @@ import VCore
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VContextMenuContentView_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
 
@@ -60,10 +72,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-    }
-
+    // Previews (Scenes)
     private struct Preview: View {
         @State private var selection: PickerRow = .red
 

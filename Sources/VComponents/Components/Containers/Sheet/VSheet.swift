@@ -87,10 +87,18 @@ public struct VSheet<Content>: View where Content: View {
 
 // MARK: - Preview
 struct VSheet_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+    
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(hasLayer: false, content: {

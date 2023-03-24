@@ -29,18 +29,30 @@ struct VConfirmationDialogContentView: View {
 // MARK: - Preview
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct VConfirmationDialogContentView_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
+        Group(content: {
+            Preview().previewDisplayName("*")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // MARK: Data
+    private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
+    private static var message: String { "Lorem ipsum dolor sit amet" }
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
                 Text("Present")
                     .vConfirmationDialog(
                         isPresented: .constant(true),
-                        title: "Lorem Ipsum Dolor Sit Amet",
-                        message: "Lorem ipsum dolor sit amet",
+                        title: title,
+                        message: message,
                         actions: {
                             VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
                             VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")

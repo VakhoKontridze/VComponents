@@ -210,17 +210,26 @@ struct VModal<Content>: View
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VModal_Previews: PreviewProvider {
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
+    static var previews: some View {
+        Group(content: {
+            Preview().previewDisplayName("*")
+            InsettedContentPreview().previewDisplayName("Insetted Content")
+            FullSizedContentPreview().previewDisplayName("Full-Sized Content")
+        })
+            .colorScheme(colorScheme)
+    }
+    
+    // Data
     private static func content() -> some View {
         ColorBook.accentBlue
             .vModalHeaderTitle("Lorem Ipsum")
     }
-    
-    static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        InsettedContentPreview().previewDisplayName("Insetted Content")
-        FullSizedContentPreview().previewDisplayName("Full-Sized Content")
-    }
-    
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {

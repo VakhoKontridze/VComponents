@@ -126,13 +126,22 @@ import VCore
 @available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
 @available(watchOS, unavailable)
 struct VListRow_Previews: PreviewProvider {
-    private static var titles: [String] { (1...3).map { .init($0) } }
-    
+    // Configuration
+    private static var colorScheme: ColorScheme { .light }
+
+    // Previews
     static var previews: some View {
-        ColorSchemePreview(title: nil, content: Preview.init)
-        SeparatorsPreview().previewDisplayName("Separator")
+        Group(content: {
+            Preview().previewDisplayName("*")
+            SeparatorsPreview().previewDisplayName("Separator")
+        })
+            .colorScheme(colorScheme)
     }
     
+    // Data
+    private static var titles: [String] { (1...3).map { .init($0) } }
+
+    // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
