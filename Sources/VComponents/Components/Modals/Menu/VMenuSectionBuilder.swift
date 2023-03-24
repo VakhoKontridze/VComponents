@@ -26,6 +26,14 @@ extension Array: VMenuSectionConvertible where Element == VMenuSectionProtocol {
     public func toSections() -> [any VMenuSectionProtocol] { self }
 }
 
+@available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension EmptyView: VMenuSectionConvertible {
+    public func toSections() -> [any VMenuSectionProtocol] { [] }
+}
+
 // MARK: - V Menu Section Builder
 /// Custom parameter attribute that constructs views from closures.
 @available(iOS 15.0, *)

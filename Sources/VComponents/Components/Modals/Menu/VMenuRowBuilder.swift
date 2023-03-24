@@ -26,6 +26,14 @@ extension Array: VMenuRowConvertible where Element == VMenuRowProtocol {
     public func toRows() -> [any VMenuRowProtocol] { self }
 }
 
+@available(iOS 15.0, *)
+@available(macOS 12.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension EmptyView: VMenuRowConvertible {
+    public func toRows() -> [any VMenuRowProtocol] { [] }
+}
+
 // MARK: - V Menu Row Builder
 /// Custom parameter attribute that constructs views from closures.
 @available(iOS 15.0, *)

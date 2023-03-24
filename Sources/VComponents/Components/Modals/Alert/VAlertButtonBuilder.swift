@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 16.07.22.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Alert Button Convertible
 /// Type that allows for conversion to `VAlertButtonProtocol`.
@@ -24,6 +24,14 @@ public protocol VAlertButtonConvertible {
 @available(watchOS, unavailable)
 extension Array: VAlertButtonConvertible where Element == VAlertButtonProtocol {
     public func toButtons() -> [any VAlertButtonProtocol] { self }
+}
+
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension EmptyView: VAlertButtonConvertible {
+    public func toButtons() -> [VAlertButtonProtocol] { [] }
 }
 
 // MARK: - V Alert Button Builder

@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 16.07.22.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Confirmation Dialog Button Convertible
 /// Type that allows for conversion to `VConfirmationDialogButtonProtocol`.
@@ -18,6 +18,11 @@ public protocol VConfirmationDialogButtonConvertible {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 extension Array: VConfirmationDialogButtonConvertible where Element == VConfirmationDialogButtonProtocol {
     public func toButtons() -> [any VConfirmationDialogButtonProtocol] { self }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+extension EmptyView: VConfirmationDialogButtonConvertible {
+    public func toButtons() -> [any VConfirmationDialogButtonProtocol] { [] }
 }
 
 // MARK: - V Confirmation Dialog Button Builder
