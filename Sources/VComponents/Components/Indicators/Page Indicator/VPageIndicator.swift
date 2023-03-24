@@ -165,7 +165,7 @@ struct VPageIndicator_Previews: PreviewProvider {
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
         LayoutDirectionsPreview().previewDisplayName("Layout Directions")
-        StretchingPreview().previewDisplayName("Stretching")
+        StretchedPreview().previewDisplayName("Stretched")
     }
     
     private struct Preview: View {
@@ -255,7 +255,7 @@ struct VPageIndicator_Previews: PreviewProvider {
         }
     }
     
-    private struct StretchingPreview: View {
+    private struct StretchedPreview: View {
         @State private var current: Int = VPageIndicator_Previews.current
         
         var body: some View {
