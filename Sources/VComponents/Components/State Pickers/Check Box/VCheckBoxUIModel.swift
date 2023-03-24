@@ -146,7 +146,7 @@ public struct VCheckBoxUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to`system` `15`.
+        /// Title font. Set to `system` `15`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = GlobalUIModel.StatePickers.font

@@ -143,7 +143,7 @@ public struct VToastUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Text font. Set to`system` `semibold`-`16`.
+        /// Text font. Set to `system` `semibold`-`16`.
         ///
         /// Font is of type `UIFont`, as height must be calculated.
         public var text: _Font = .systemFont(ofSize: 16, weight: .semibold)

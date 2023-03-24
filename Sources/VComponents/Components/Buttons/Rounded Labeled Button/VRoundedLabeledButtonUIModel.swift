@@ -167,7 +167,7 @@ public struct VRoundedLabeledButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to`system` `15`.
+        /// Title font. Set to `system` `15`.
         ///
         /// Only applicable when using `init` with title.
         public var titleLabel: Font = .system(size: 15)

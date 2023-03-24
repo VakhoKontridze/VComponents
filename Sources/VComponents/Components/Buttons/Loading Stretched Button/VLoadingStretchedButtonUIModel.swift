@@ -144,7 +144,7 @@ public struct VLoadingStretchedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to`system` `semibold`-`16`.
+        /// Title font. Set to `system` `semibold`-`16`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = .system(size: 16, weight: .semibold)

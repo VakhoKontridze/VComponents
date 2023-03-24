@@ -185,10 +185,10 @@ public struct VSegmentedPickerUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font. Set to`system` `14`.
+        /// Header font. Set to `system` `14`.
         public var header: Font = GlobalUIModel.Common.headerFont
         
-        /// Footer font. Set to`system` `13`.
+        /// Footer font. Set to `system` `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
         /// Row font. Set to `system` `medium`-`14` for `iOS`, and `system` `13` for `macOS`.

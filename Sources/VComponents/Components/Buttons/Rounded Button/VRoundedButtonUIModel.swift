@@ -148,7 +148,7 @@ public struct VRoundedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to`system` `semibold`-`15`.
+        /// Title font. Set to `system` `semibold`-`15`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = .system(size: 15, weight: .semibold)

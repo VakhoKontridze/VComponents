@@ -109,7 +109,7 @@ public struct VPlainButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to`system` `medium`-`15` for `iOS`, and `13` for `macOS`.
+        /// Title font. Set to `system` `medium`-`15` for `iOS`, and `13` for `macOS`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = {
