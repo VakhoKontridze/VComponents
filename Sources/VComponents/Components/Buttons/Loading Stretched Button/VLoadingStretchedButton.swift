@@ -42,7 +42,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
     
     // MARK: Initializers
-    /// Initializes `VLoadingStretchedButton` with action and title.
+    /// Initializes `VLoadingStretchedButton` with loading state, action, and title.
     public init(
         uiModel: VLoadingStretchedButtonUIModel = .init(),
         isLoading: Bool,
@@ -57,7 +57,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes `VLoadingStretchedButton` with action, icon, and title.
+    /// Initializes `VLoadingStretchedButton` with loading state, action, icon, and title.
     public init(
         uiModel: VLoadingStretchedButtonUIModel = .init(),
         isLoading: Bool,
@@ -73,7 +73,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes `VLoadingStretchedButton` with action and label.
+    /// Initializes `VLoadingStretchedButton` with loading state, action, and label.
     public init(
         uiModel: VLoadingStretchedButtonUIModel = .init(),
         isLoading: Bool,
