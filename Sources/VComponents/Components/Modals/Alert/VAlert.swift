@@ -335,7 +335,7 @@ struct VAlert_Previews: PreviewProvider {
                     message: message,
                     content: .content(content: content),
                     buttons: [
-                        VAlertCancelButton(action: nil)
+                        VAlertSecondaryButton(action: {}, title: "Ok"),
                     ]
                 )
             })
