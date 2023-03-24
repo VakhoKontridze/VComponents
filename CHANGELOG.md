@@ -20,14 +20,6 @@ VSecondaryButton
 
 - `VSecondaryButton` is renamed to `VCapsuleButton`
 
-VCheckBox
-
-- `borderWith` is renamed to `borderWidth` in `VCheckBoxUIModel`
-
-VRadioButton
-
-- `borderWith` is renamed to `borderWidth` in `VRadioButtonUIModel`
-
 VSegmentedPicker
 
 - `indicatorShadowOffsetX` and `indicatorShadowOffsetY` are replaced with `indicatorShadowOffset` in `VSegmentedPickerUIModel`
@@ -65,6 +57,7 @@ VAlert
 VToast
 
 - `WidthType` is added in `VToastUIModel` that allows for additional customization, such as wrapping, stretching, or applying fixed width
+- Highlighted factory instances are added to `VToastUIModel`
 
 VContinuousSpinner
 

@@ -65,42 +65,7 @@ import VCore
 ///             })
 ///     }
 ///
-/// Success textview:
-///
-///     @State private var text: String = ""
-///
-///     var body: some View {
-///         VTextView(
-///             uiModel: .success,
-///             text: $text
-///         )
-///             .padding()
-///     }
-///
-/// Warning textview:
-///
-///     @State private var text: String = ""
-///
-///     var body: some View {
-///         VTextView(
-///             uiModel: .warning,
-///             text: $text
-///         )
-///             .padding()
-///     }
-///
-/// Error textview:
-///
-///     @State private var text: String = ""
-///
-///     var body: some View {
-///         VTextView(
-///             uiModel: .error,
-///             text: $text
-///         )
-///             .padding()
-///     }
-///
+/// You can apply highlights by using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
 @available(iOS 16.0, *)
 @available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.

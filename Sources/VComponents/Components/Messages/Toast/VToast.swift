@@ -222,6 +222,7 @@ extension HorizontalAlignment {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VToast_Previews: PreviewProvider {
+    private static let highlights: VToastUIModel = .init()
     private static let widthType: VToastUIModel.Layout.WidthType = .default
     
     private static var text: String { "Lorem ipsum dolor sit amet" }
@@ -238,7 +239,7 @@ struct VToast_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VToast(
                     uiModel: {
-                        var uiModel: VToastUIModel = .init()
+                        var uiModel: VToastUIModel = highlights
                         uiModel.layout.widthType = widthType
                         uiModel.animations.appear = nil
                         uiModel.animations.duration = .infinity
@@ -257,7 +258,7 @@ struct VToast_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VToast(
                     uiModel: {
-                        var uiModel: VToastUIModel = .init()
+                        var uiModel: VToastUIModel = highlights
                         uiModel.layout.widthType = widthType
                         uiModel.layout.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
                         uiModel.animations.appear = nil
@@ -277,7 +278,7 @@ struct VToast_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VToast(
                     uiModel: {
-                        var uiModel: VToastUIModel = .init()
+                        var uiModel: VToastUIModel = highlights
                         uiModel.layout.widthType = widthType
                         uiModel.layout.presentationEdge = .top
                         uiModel.animations.appear = nil

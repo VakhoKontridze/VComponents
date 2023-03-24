@@ -87,42 +87,7 @@ import VCore
 ///             .padding()
 ///     }
 ///
-/// Success textfield:
-///
-///     @State private var text: String = ""
-///
-///     var body: some View {
-///         VTextField(
-///             uiModel: .success,
-///             text: $text
-///         )
-///             .padding()
-///     }
-///
-/// Warning textfield:
-///
-///     @State private var text: String = ""
-///
-///     var body: some View {
-///         VTextField(
-///             uiModel: .warning,
-///             text: $text
-///         )
-///             .padding()
-///     }
-///
-/// Error textfield:
-///
-///     @State private var text: String = ""
-///
-///     var body: some View {
-///         VTextField(
-///             uiModel: .error,
-///             text: $text
-///         )
-///             .padding()
-///     }
-///
+/// You can apply highlights by using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.

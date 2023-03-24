@@ -166,7 +166,7 @@ public struct VToastUIModel {
         public var text: Color = ColorBook.primary
         
         /// Background color.
-        public var background: Color = ColorBook.layerGray
+        public var background: Color = GlobalUIModel.Messages.layerGray
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -212,5 +212,72 @@ public struct VToastUIModel {
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
+    }
+}
+
+// MARK: - Factory (Highlights)
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VToastUIModel {
+    /// `VToastUIModel` that applies green color scheme.
+    public static var success: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.colors = .success
+
+        return uiModel
+    }
+
+    /// `VToastUIModel` that applies yellow color scheme.
+    public static var warning: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.colors = .warning
+        
+        return uiModel
+    }
+
+    /// `VToastUIModel` that applies error color scheme.
+    public static var error: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.colors = .error
+        
+        return uiModel
+    }
+}
+
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VToastUIModel.Colors {
+    /// `VToastUIModel.Colors` that applies green color scheme.
+    public static var success: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.background = GlobalUIModel.Messages.layerGreen
+        
+        return uiModel
+    }
+    
+    /// `VToastUIModel.Colors` that applies yellow color scheme.
+    public static var warning: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.background = GlobalUIModel.Messages.layerYellow
+        
+        return uiModel
+    }
+    
+    /// `VToastUIModel.Colors` that applies error color scheme.
+    public static var error: Self {
+        var uiModel: Self = .init()
+        
+        uiModel.background = GlobalUIModel.Messages.layerRed
+        
+        return uiModel
     }
 }
