@@ -266,8 +266,8 @@ public struct VBottomSheetUIModel {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             
             uiModel.background = .init(
-                enabled: GlobalUIModel.Common.circularButtonBackgroundColorEnabled,
-                pressed: GlobalUIModel.Common.circularButtonBackgroundColorPressed,
+                enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
+                pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
                 disabled: .clear // Has no effect
             )
             uiModel.icon = .init(GlobalUIModel.Common.circularButtonIconGrayColor)

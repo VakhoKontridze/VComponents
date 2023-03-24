@@ -86,13 +86,13 @@ public struct ColorBook {
     /// Gray layer color and disabled state. `(245, 245, 245)` and `(50, 50, 50)`.
     internal static let layerGrayDisabled: Color = .init(module: "Layer.Gray.Disabled")
 
-    /// Green layer color. `(235, 250, 240)`` and `(130, 180, 140)`.`
+    /// Green layer color. `(235, 250, 240)` and `(130, 190, 140)`.
     public static let layerGreen: Color = .init(module: "Layer.Green")
 
-    /// Yellow layer color. `(255, 250, 240)` and `(240, 200, 100)`.
+    /// Yellow layer color. `(255, 250, 240)` and `(240, 200, 120)`.
     public static let layerYellow: Color = .init(module: "Layer.Yellow")
 
-    /// Red layer color. `(250, 240, 240)` and `(220, 125, 125)`.
+    /// Red layer color. `(250, 240, 240)` and `(230, 125, 125)`.
     public static let layerRed: Color = .init(module: "Layer.Red")
     
     // MARK: Properties - Layer (Control)
@@ -124,13 +124,13 @@ public struct ColorBook {
     /// Gray border color for disabled state. Set to `(230, 230, 230)` and `(70, 70, 70)`.
     public static let borderGrayDisabled: Color = .init(module: "Border.Gray.Disabled")
     
-    /// Green border color. Set to `(85, 195, 135)`.
+    /// Green border color. Set to `(85, 195, 135)` and `(45, 150, 75)`.
     public static let borderGreen: Color = .init(module: "Border.Green")
     
-    /// Yellow border color. Set to `(235, 110, 105)`.
+    /// Yellow border color. Set to `(235, 110, 105)` and `(215, 60, 55)`.
     public static let borderYellow: Color = .init(module: "Border.Yellow")
     
-    /// Red border color. Set to `(255, 190, 35)`.
+    /// Red border color. Set to `(255, 190, 35)` and `(240, 150, 20)`.
     public static let borderRed: Color = .init(module: "Border.Red")
     
     // MARK: Initializers

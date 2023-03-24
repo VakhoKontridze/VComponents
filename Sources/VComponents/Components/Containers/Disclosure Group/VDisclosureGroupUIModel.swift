@@ -114,9 +114,9 @@ public struct VDisclosureGroupUIModel {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             
             uiModel.background = .init(
-                enabled: GlobalUIModel.Common.circularButtonBackgroundColorEnabled,
-                pressed: GlobalUIModel.Common.circularButtonBackgroundColorPressed,
-                disabled: GlobalUIModel.Common.circularButtonBackgroundColorDisabled
+                enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
+                pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
+                disabled: GlobalUIModel.Common.circularButtonLayerColorDisabled
             )
             uiModel.icon = .init(
                 enabled: GlobalUIModel.Common.circularButtonIconPrimaryColorEnabled,

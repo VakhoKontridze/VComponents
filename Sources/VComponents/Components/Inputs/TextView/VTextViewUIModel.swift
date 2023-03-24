@@ -80,7 +80,7 @@ public struct VTextViewUIModel {
         /// Background colors.
         public var background: StateColors = .init(
             enabled: ColorBook.layerGray,
-            focused: GlobalUIModel.Inputs.backgroundColorFocused,
+            focused: GlobalUIModel.Inputs.layerGrayColorFocused,
             disabled: ColorBook.layerGrayDisabled
         )
 
@@ -176,44 +176,52 @@ extension VTextViewUIModel.Colors {
     /// `VTextViewUIModel.Colors` that applies green color scheme.
     public static var success: Self {
         .createHighlightedColors(
-            background: ColorBook.layerGreen,
-            foreground: ColorBook.borderGreen
+            layer: ColorBook.layerGreen,
+            layerFocused: GlobalUIModel.Inputs.layerGreenColorFocused,
+            border: ColorBook.borderGreen,
+            headerFooter: GlobalUIModel.Inputs.headerFooterGreenColor
         )
     }
 
     /// `VTextViewUIModel.Colors` that applies yellow color scheme.
     public static var warning: Self {
         .createHighlightedColors(
-            background: ColorBook.layerYellow,
-            foreground: ColorBook.borderYellow
+            layer: ColorBook.layerYellow,
+            layerFocused: GlobalUIModel.Inputs.layerYellowColorFocused,
+            border: ColorBook.borderYellow,
+            headerFooter: GlobalUIModel.Inputs.headerFooterYellowColor
         )
     }
 
     /// `VTextViewUIModel.Colors` that applies error color scheme.
     public static var error: Self {
         .createHighlightedColors(
-            background: ColorBook.layerRed,
-            foreground: ColorBook.borderRed
+            layer: ColorBook.layerRed,
+            layerFocused: GlobalUIModel.Inputs.layerRedColorFocused,
+            border: ColorBook.borderRed,
+            headerFooter: GlobalUIModel.Inputs.headerFooterRedColor
         )
     }
     
     private static func createHighlightedColors(
-        background: Color,
-        foreground: Color
+        layer: Color,
+        layerFocused: Color,
+        border: Color,
+        headerFooter: Color
     ) -> Self {
         var colors: Self = .init()
         
-        colors.background.enabled = background
-        colors.background.focused = background
+        colors.background.enabled = layer
+        colors.background.focused = layerFocused
         
-        colors.border.enabled = foreground
-        colors.border.focused = foreground
+        colors.border.enabled = border
+        colors.border.focused = border
         
-        colors.header.enabled = foreground
-        colors.header.focused = foreground
+        colors.header.enabled = headerFooter
+        colors.header.focused = headerFooter
         
-        colors.footer.enabled = foreground
-        colors.footer.focused = foreground
+        colors.footer.enabled = headerFooter
+        colors.footer.focused = headerFooter
         
         return colors
     }

@@ -54,9 +54,9 @@ struct GlobalUIModel {
         static var circularButtonGrayDimension: CGFloat { 30 }
         static var circularButtonGrayIconDimension: CGFloat { 12 }
         
-        static var circularButtonBackgroundColorEnabled: Color { .init(module: "CircularButton.Background") }
-        static var circularButtonBackgroundColorPressed: Color { .init(module: "CircularButton.Background.Pressed") }
-        static var circularButtonBackgroundColorDisabled: Color { .init(module: "CircularButton.Background.Disabled") }
+        static var circularButtonLayerColorEnabled: Color { .init(module: "CircularButton.Layer") }
+        static var circularButtonLayerColorPressed: Color { .init(module: "CircularButton.Layer.Pressed") }
+        static var circularButtonLayerColorDisabled: Color { .init(module: "CircularButton.Layer.Disabled") }
         
         static var circularButtonIconGrayColor: Color { .init(module: "CircularButton.Icon.Gray") }
         
@@ -167,11 +167,18 @@ struct GlobalUIModel {
         static var height: CGFloat { 50 }
         static var cornerRadius: CGFloat { 12 }
         
-        static var backgroundColorFocused: Color { .init(module: "Input.Background.focused") }
+        static var layerGrayColorFocused: Color { .init(module: "Input.Layer.Gray.Focused") }
+        static var layerGreenColorFocused: Color { .init(module: "Input.Layer.Green.Focused") }
+        static var layerYellowColorFocused: Color { .init(module: "Input.Layer.Yellow.Focused") }
+        static var layerRedColorFocused: Color { .init(module: "Input.Layer.Red.Focused") }
         
-        static var clearButtonBackgroundEnabled: Color { .init(module: "Input.ClearButton.Background") }
-        static var clearButtonBackgroundPressed: Color { .init(module: "Input.ClearButton.Background.Pressed") }
-        static var clearButtonBackgroundDisabled: Color { .init(module: "Input.ClearButton.Background.Disabled") }
+        static var headerFooterGreenColor: Color { .init(module: "Input.HeaderFooter.Green") }
+        static var headerFooterYellowColor: Color { .init(module: "Input.HeaderFooter.Yellow") }
+        static var headerFooterRedColor: Color { .init(module: "Input.HeaderFooter.Red") }
+        
+        static var clearButtonLayerEnabled: Color { .init(module: "Input.ClearButton.Layer") }
+        static var clearButtonLayerPressed: Color { .init(module: "Input.ClearButton.Layer.Pressed") }
+        static var clearButtonLayerDisabled: Color { .init(module: "Input.ClearButton.Layer.Disabled") }
         static var clearButtonIcon: Color { .init(module: "Input.ClearButton.Icon") }
         
         static var visibilityButtonEnabled: Color { .init(module: "Input.VisibilityButton.Icon") }
