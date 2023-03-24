@@ -60,7 +60,7 @@ public struct VAlertPrimaryButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VPrimaryButton(
+            VLoadingStretchedButton(
                 uiModel: uiModel.primaryButtonSubUIModel,
                 isLoading: false,
                 action: { animateOut(/*completion: */action) },
@@ -107,7 +107,7 @@ public struct VAlertSecondaryButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VPrimaryButton(
+            VLoadingStretchedButton(
                 uiModel: uiModel.secondaryButtonSubUIModel,
                 isLoading: false,
                 action: { animateOut(/*completion: */action) },
@@ -156,7 +156,7 @@ public struct VAlertOKButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VPrimaryButton(
+            VLoadingStretchedButton(
                 uiModel: uiModel.secondaryButtonSubUIModel,
                 isLoading: false,
                 action: { animateOut(/*completion: */action) },
@@ -203,7 +203,7 @@ public struct VAlertDestructiveButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VPrimaryButton(
+            VLoadingStretchedButton(
                 uiModel: uiModel.destructiveButtonSubUIModel,
                 isLoading: false,
                 action: { animateOut(/*completion: */action) },
@@ -252,7 +252,7 @@ public struct VAlertCancelButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VPrimaryButton(
+            VLoadingStretchedButton(
                 uiModel: uiModel.secondaryButtonSubUIModel,
                 isLoading: false,
                 action: { animateOut(/*completion: */action) },

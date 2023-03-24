@@ -265,8 +265,8 @@ public struct VAlertUIModel {
         return uiModel
     }
     
-    var primaryButtonSubUIModel: VPrimaryButtonUIModel { 
-        var uiModel: VPrimaryButtonUIModel = .init()
+    var primaryButtonSubUIModel: VLoadingStretchedButtonUIModel {
+        var uiModel: VLoadingStretchedButtonUIModel = .init()
 
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
@@ -277,8 +277,8 @@ public struct VAlertUIModel {
         return uiModel
     }
     
-    var secondaryButtonSubUIModel: VPrimaryButtonUIModel {
-        var uiModel: VPrimaryButtonUIModel = .init()
+    var secondaryButtonSubUIModel: VLoadingStretchedButtonUIModel {
+        var uiModel: VLoadingStretchedButtonUIModel = .init()
         
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
@@ -289,8 +289,8 @@ public struct VAlertUIModel {
         return uiModel
     }
     
-    var destructiveButtonSubUIModel: VPrimaryButtonUIModel {
-        var uiModel: VPrimaryButtonUIModel = .init()
+    var destructiveButtonSubUIModel: VLoadingStretchedButtonUIModel {
+        var uiModel: VLoadingStretchedButtonUIModel = .init()
         
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius

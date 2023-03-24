@@ -1,5 +1,5 @@
 //
-//  VPrimaryButtonUIModel.swift
+//  VLoadingStretchedButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,12 +8,12 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Primary Button UI Model
+// MARK: - V Loading Stretched Button UI Model
 /// Model that describes UI.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct VPrimaryButtonUIModel {
+public struct VLoadingStretchedButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
     public var layout: Layout = .init()

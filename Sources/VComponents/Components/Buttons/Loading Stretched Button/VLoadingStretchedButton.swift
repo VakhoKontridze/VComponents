@@ -1,5 +1,5 @@
 //
-//  VPrimaryButton.swift
+//  VLoadingStretchedButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 19.12.20.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Primary Button
+// MARK: - V Loading Stretched Button
 /// Large colored button component that performs action when triggered.
 ///
 /// Component can be initialized with title, icon and title, and label.
@@ -16,7 +16,7 @@ import VCore
 /// UI Model and `isLoading` can be passed as parameters.
 ///
 ///     var body: some View {
-///         VPrimaryButton(
+///         VLoadingStretchedButton(
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
@@ -26,26 +26,26 @@ import VCore
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-public struct VPrimaryButton<Label>: View where Label: View {
+public struct VLoadingStretchedButton<Label>: View where Label: View {
     // MARK: Properties
-    private let uiModel: VPrimaryButtonUIModel
+    private let uiModel: VLoadingStretchedButtonUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
     private let isLoading: Bool
-    private var internalState: VPrimaryButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed, isLoading: isLoading) }
+    private var internalState: VLoadingStretchedButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed, isLoading: isLoading) }
     
     private let action: () -> Void
     
-    private let label: VPrimaryButtonLabel<Label>
+    private let label: VLoadingStretchedButtonLabel<Label>
     
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
     
     // MARK: Initializers
-    /// Initializes `VPrimaryButton` with action and title.
+    /// Initializes `VLoadingStretchedButton` with action and title.
     public init(
-        uiModel: VPrimaryButtonUIModel = .init(),
-        isLoading: Bool = false,
+        uiModel: VLoadingStretchedButtonUIModel = .init(),
+        isLoading: Bool,
         action: @escaping () -> Void,
         title: String
     )
@@ -57,10 +57,10 @@ public struct VPrimaryButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes `VPrimaryButton` with action, icon, and title.
+    /// Initializes `VLoadingStretchedButton` with action, icon, and title.
     public init(
-        uiModel: VPrimaryButtonUIModel = .init(),
-        isLoading: Bool = false,
+        uiModel: VLoadingStretchedButtonUIModel = .init(),
+        isLoading: Bool,
         action: @escaping () -> Void,
         icon: Image,
         title: String
@@ -73,10 +73,10 @@ public struct VPrimaryButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes `VPrimaryButton` with action and label.
+    /// Initializes `VLoadingStretchedButton` with action and label.
     public init(
-        uiModel: VPrimaryButtonUIModel = .init(),
-        isLoading: Bool = false,
+        uiModel: VLoadingStretchedButtonUIModel = .init(),
+        isLoading: Bool,
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Label
     ) {
@@ -178,7 +178,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-struct VPrimaryButton_Previews: PreviewProvider {
+struct VLoadingStretchedButton_Previews: PreviewProvider {
     private static var title: String { "Lorem Ipsum" }
     
     static var previews: some View {
@@ -189,7 +189,8 @@ struct VPrimaryButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VPrimaryButton(
+                VLoadingStretchedButton(
+                    isLoading: false,
                     action: { print("Clicked") },
                     title: title
                 )
@@ -205,7 +206,8 @@ struct VPrimaryButton_Previews: PreviewProvider {
                     axis: .vertical,
                     title: "Enabled",
                     content: {
-                        VPrimaryButton(
+                        VLoadingStretchedButton(
+                            isLoading: false,
                             action: {},
                             title: title
                         )
@@ -216,13 +218,14 @@ struct VPrimaryButton_Previews: PreviewProvider {
                     axis: .vertical,
                     title: "Pressed",
                     content: {
-                        VPrimaryButton(
+                        VLoadingStretchedButton(
                             uiModel: {
-                                var uiModel: VPrimaryButtonUIModel = .init()
+                                var uiModel: VLoadingStretchedButtonUIModel = .init()
                                 uiModel.colors.background.enabled = uiModel.colors.background.pressed
                                 uiModel.colors.title.enabled = uiModel.colors.title.pressed
                                 return uiModel
                             }(),
+                            isLoading: false,
                             action: {},
                             title: title
                         )
@@ -233,7 +236,7 @@ struct VPrimaryButton_Previews: PreviewProvider {
                     axis: .vertical,
                     title: "Loading",
                     content: {
-                        VPrimaryButton(
+                        VLoadingStretchedButton(
                             isLoading: true,
                             action: {},
                             title: title
@@ -245,7 +248,8 @@ struct VPrimaryButton_Previews: PreviewProvider {
                     axis: .vertical,
                     title: "Disabled",
                     content: {
-                        VPrimaryButton(
+                        VLoadingStretchedButton(
+                            isLoading: false,
                             action: {},
                             title: title
                         )

@@ -12,6 +12,10 @@ General
 - `ColorBook.accent` is renamed to `ColorBook.accentBlue`
 - "TitleLineType" used in names is changed to "TextLineType"
 
+VPrimaryButton
+
+- `VPrimaryButton` is renamed to `VLoadingStretchedButton`
+
 VSecondaryButton
 
 - `VSecondaryButton` is renamed to `VCapsuleButton`
