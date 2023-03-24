@@ -106,13 +106,13 @@ public struct ColorBook {
     public static let controlLayerBlueDisabled: Color = .init(module: "LayerControl.Blue.Disabled")
     
     /// Transparent blue control layer. Set to `(24, 126, 240, 25)` and `(25, 131, 255, 25)`.
-    public static let controlLayerBlueTransparentColor: Color = .init(module: "LayerControl.Blue.Transparent")
+    public static let controlLayerBlueTransparent: Color = .init(module: "LayerControl.Blue.Transparent")
     
     /// Transparent blue control layer for pressed state. Set to `(31, 104, 182, 25)` and `(36, 106, 186, 25)`.
-    public static let controlLayerBlueTransparentColorPressed: Color = .init(module: "LayerControl.Blue.Transparent.Pressed")
+    public static let controlLayerBlueTransparentPressed: Color = .init(module: "LayerControl.Blue.Transparent.Pressed")
     
     /// Transparent blue control layer for disabled state. Set to `(24, 126, 240, 25, 25)` and `(25, 131, 255, 25, 25)`.
-    public static let controlLayerBlueTransparentColorDisabled: Color = .init(module: "LayerControl.Blue.Transparent.Disabled")
+    public static let controlLayerBlueTransparentDisabled: Color = .init(module: "LayerControl.Blue.Transparent.Disabled")
     
     // MARK: Properties - Border
     /// Gray border color. Set to `(200, 200, 200)` and `(100, 100, 100)`.

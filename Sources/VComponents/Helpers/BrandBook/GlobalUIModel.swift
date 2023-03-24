@@ -99,6 +99,10 @@ struct GlobalUIModel {
         
         static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 15, vertical: 3) }
         static var labelMarginsRounded: EdgeInsets_HorizontalVertical { .init(3) }
+        
+        static var transparentLayerLabelEnabled: Color { ColorBook.controlLayerBlue }
+        static var transparentLayerLabelPressed: Color { ColorBook.controlLayerBluePressed }
+        static var transparentLayerLabelDisabled: Color { ColorBook.controlLayerBlueDisabled.opacity(0.5) }
 
         static var iconDimensionSmall: CGFloat { 16 }
         static var iconDimensionMedium: CGFloat { 20 }

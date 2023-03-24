@@ -92,9 +92,9 @@ public struct VRoundedLabeledButtonUIModel {
         // MARK: Properties
         /// Background colors.
         public var background: StateColors = .init(
-            enabled: ColorBook.controlLayerBlueTransparentColor,
-            pressed: ColorBook.controlLayerBlueTransparentColorPressed,
-            disabled: ColorBook.controlLayerBlueTransparentColorDisabled
+            enabled: ColorBook.controlLayerBlueTransparent,
+            pressed: ColorBook.controlLayerBlueTransparentPressed,
+            disabled: ColorBook.controlLayerBlueTransparentDisabled
         )
         
         /// Border colors.
@@ -105,9 +105,9 @@ public struct VRoundedLabeledButtonUIModel {
         /// Applied to all images. But should be used for vector images.
         /// In order to use bitmap images, set this to `clear`.
         public var icon: StateColors = .init(
-            enabled: ColorBook.controlLayerBlue,
-            pressed: ColorBook.controlLayerBluePressed,
-            disabled: ColorBook.controlLayerBlueDisabled.opacity(0.5) // Exception to opacity
+            enabled: GlobalUIModel.Buttons.transparentLayerLabelEnabled,
+            pressed: GlobalUIModel.Buttons.transparentLayerLabelPressed,
+            disabled: GlobalUIModel.Buttons.transparentLayerLabelDisabled
         )
         
         /// Icon opacities. Set to `1`s.
