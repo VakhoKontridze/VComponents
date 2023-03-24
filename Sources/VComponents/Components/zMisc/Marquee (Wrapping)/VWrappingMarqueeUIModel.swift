@@ -96,7 +96,7 @@ public struct VWrappingMarqueeUIModel {
         public init() {}
         
         // MARK: Duration Type
-        /// Model that represents animation duration, such as `duration` or `velocity`.
+        /// Enum that represents animation duration, such as `duration` or `velocity`.
         public enum DurationType {
             // MARK: Cases
             /// Duration.

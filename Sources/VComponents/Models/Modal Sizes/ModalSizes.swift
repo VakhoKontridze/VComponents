@@ -47,7 +47,7 @@ public struct ModalSizes<ModalSizeMeasurement>
 
 // MARK: - Size Configuration
 extension ModalSizes {
-    /// Model that represents state, either `point` or `relative`.
+    /// Enum that represents state, either `point` or `relative`.
     public enum SizeConfiguration {
         // MARK: Cases
         /// Size configuration with fixed sizes represented in points.
