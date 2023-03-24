@@ -74,7 +74,13 @@ struct VText_Previews: PreviewProvider {
     
     // Data
     private static var textColor: Color { ColorBook.primary }
-    private static var textFont: Font { .system(size: 16) }
+    private static var textFont: Font {
+#if os(macOS)
+        return .system(size: 14, weight: .light)
+#else
+        return .system(size: 16)
+#endif
+    }
     
     private static var lineMin: Int { 2 }
     private static var lineMax: Int { 5 }

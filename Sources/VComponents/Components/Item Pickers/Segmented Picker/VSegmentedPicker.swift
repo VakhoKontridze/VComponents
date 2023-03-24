@@ -256,7 +256,9 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     private var pickerBackground: some View {
-        uiModel.colors.background.value(for: internalState)
+        RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+            .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+            .background(uiModel.colors.background.value(for: internalState))
     }
     
     private var indicator: some View {

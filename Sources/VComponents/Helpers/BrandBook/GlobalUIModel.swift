@@ -102,7 +102,7 @@ struct GlobalUIModel {
         
         static var transparentLayerLabelEnabled: Color { ColorBook.controlLayerBlue }
         static var transparentLayerLabelPressed: Color { ColorBook.controlLayerBluePressed }
-        static var transparentLayerLabelDisabled: Color { ColorBook.controlLayerBlueDisabled.opacity(0.5) }
+        static var transparentLayerLabelDisabled: Color { ColorBook.controlLayerBlueDisabled.opacity(0.5) } // Looks better
 
         static var iconDimensionSmall: CGFloat { 16 }
         static var iconDimensionMedium: CGFloat { 20 }
@@ -130,7 +130,35 @@ struct GlobalUIModel {
                 return .multiLine(alignment: .leading, lineLimit: 2)
             }
         }()
-        static var font: Font { .system(size: 15) }
+        static var font: Font {
+#if os(iOS)
+            return .system(size: 15)
+#elseif canImport(AppKit)
+            return .system(size: 13)
+#else
+            fatalError() // Not supported
+#endif
+        }
+        
+        static var titleColor: Color {
+#if os(iOS)
+            return ColorBook.primary
+#elseif canImport(AppKit)
+            return ColorBook.primary.opacity(0.85) // Similar to `NSColor.controlTextColor`
+#else
+            fatalError() // Not supported
+#endif
+        }
+        
+        static var titleColorDisabled: Color {
+#if os(iOS)
+            return ColorBook.primaryPressedDisabled
+#elseif canImport(AppKit)
+            return ColorBook.primaryPressedDisabled.opacity(0.85) // Similar to `NSColor.controlTextColor`
+#else
+            fatalError() // Not supported
+#endif
+        }
         
         static var customLabelOpacityDisabled: CGFloat { Common.customLabelOpacitySpecialState }
         
@@ -154,8 +182,24 @@ struct GlobalUIModel {
         // MARK: Properties
         static var sliderThumbDimension: CGFloat { 20 }
         static var sliderThumbCornerRadius: CGFloat { 10 }
-        static var sliderThumbShadowRadius: CGFloat { 2 }
-        static var sliderThumbShadowOffset: CGSize { .init(width: 0, height: 2) }
+        static var sliderThumbShadowRadius: CGFloat {
+#if os(iOS)
+            return 2
+#elseif canImport(AppKit)
+            return 1
+#else
+            fatalError() // Not supported
+#endif
+        }
+        static var sliderThumbShadowOffset: CGSize {
+#if os(iOS)
+            return .init(width: 0, height: 2)
+#elseif canImport(AppKit)
+            return .init(width: 0, height: 1)
+#else
+            fatalError() // Not supported
+#endif
+ }
         
         // MARK: Initializers
         private init() {}

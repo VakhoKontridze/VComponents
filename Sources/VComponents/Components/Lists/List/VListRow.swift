@@ -147,7 +147,7 @@ struct VListRow_Previews: PreviewProvider {
             PreviewContainer(content: {
                 List(content: {
                     ForEach(titles, id: \.self, content: { title in
-                        VListRow(uiModel: .noLastSeparator(), content: {
+                        VListRow(uiModel: .noFirstSeparator(), content: {
                             Text(title)
                         })
                     })

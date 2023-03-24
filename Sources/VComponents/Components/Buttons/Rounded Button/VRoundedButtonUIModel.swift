@@ -148,10 +148,18 @@ public struct VRoundedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `semibold`-`15`.
+        /// Title font. Set to `system` `semibold`-`15` for `iOS`, and `13` for `macOS`.
         ///
         /// Only applicable when using `init` with title.
-        public var title: Font = .system(size: 15, weight: .semibold)
+        public var title: Font = {
+#if os(iOS)
+            return .system(size: 15, weight: .semibold)
+#elseif canImport(AppKit)
+            return .system(size: 13)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.

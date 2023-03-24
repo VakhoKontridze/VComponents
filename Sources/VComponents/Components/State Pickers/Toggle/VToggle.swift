@@ -220,7 +220,7 @@ struct VToggle_Previews: PreviewProvider {
     }
     
     // Data
-    private static var title: String { "Lorem Ipsum" }
+    private static var title: String { "Lorem ipsum" }
 
     // Previews (Scenes)
     private struct Preview: View {

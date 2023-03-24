@@ -29,10 +29,10 @@ public struct VProgressBarUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Slider height. Set to `5` for `watchOS` and `10` for other platforms.
+        /// Slider height. Set to `5` for `watchOS`, and `10` for other platforms.
         public var height: CGFloat = GlobalUIModel.Common.barHeight
         
-        /// Slider corner radius. Set to `2.5` for `watchOS` and `5` for other platforms.
+        /// Slider corner radius. Set to `2.5` for `watchOS`, and `5` for other platforms.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
         /// Indicates if progress bar rounds progress view right-edge. Set to `true`.

@@ -105,13 +105,13 @@ public struct VCheckBoxUIModel {
 
         /// Title colors.
         public var title: StateColors = .init(
-            off: ColorBook.primary,
-            on: ColorBook.primary,
-            indeterminate: ColorBook.primary,
-            pressedOff: ColorBook.primary,
-            pressedOn: ColorBook.primary,
-            pressedIndeterminate: ColorBook.primary,
-            disabled: ColorBook.primaryPressedDisabled
+            off: GlobalUIModel.StatePickers.titleColor,
+            on: GlobalUIModel.StatePickers.titleColor,
+            indeterminate: GlobalUIModel.StatePickers.titleColor,
+            pressedOff: GlobalUIModel.StatePickers.titleColor,
+            pressedOn: GlobalUIModel.StatePickers.titleColor,
+            pressedIndeterminate: GlobalUIModel.StatePickers.titleColor,
+            disabled: GlobalUIModel.StatePickers.titleColorDisabled
         )
         
         /// Custom label opacities. Set to `1` off, `1` on, `1` indeterminate, `1` pressed off, `1` pressed on, `1` pressed indeterminate, and `0.3` disabled.
@@ -146,7 +146,7 @@ public struct VCheckBoxUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `15`.
+        /// Title font. Set to `system` `15` for `iOS`, and `13` for `macOS`.
         ///
         /// Only applicable when using `init` with title.
         public var title: Font = GlobalUIModel.StatePickers.font

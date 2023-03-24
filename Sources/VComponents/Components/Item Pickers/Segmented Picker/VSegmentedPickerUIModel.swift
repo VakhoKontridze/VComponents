@@ -34,12 +34,12 @@ public struct VSegmentedPickerUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Picker height. Set to `31` similarly to native picker, and `24` for `macOS`.
+        /// Picker height. Set to `31`, and `22` for `macOS`, similarly to native pickers.
         public var height: CGFloat = {
 #if os(iOS)
             return 31
 #elseif canImport(AppKit)
-            return 24
+            return 22
 #else
             fatalError() // Not supported
 #endif
@@ -47,6 +47,19 @@ public struct VSegmentedPickerUIModel {
         
         /// Picker corner radius. Set to `7`, similarly to native picker.
         public var cornerRadius: CGFloat = 7
+        
+        /// Border width. Set to `0` for `iOS`, and `1` scaled to screen for `macOS`.
+        ///
+        /// To hide border, set to `0`.
+        public var borderWidth: CGFloat = {
+#if os(iOS)
+            return 0
+#elseif canImport(AppKit)
+            return 1/MultiplatformConstants.screenScale
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Selection indicator corner radius.  Set to `6`, similarly to native picker.
         public var indicatorCornerRadius: CGFloat = 6
@@ -68,8 +81,16 @@ public struct VSegmentedPickerUIModel {
         /// Indicator shadow radius. Set to `1`.
         public var indicatorShadowRadius: CGFloat = 1
         
-        /// Indicator shadow offset. Set to `1x1`.
-        public var indicatorShadowOffset: CGSize = .init(dimension: 1)
+        /// Indicator shadow offset. Set to `1x1` for `iOS`, and `0x1` for `macOS`.
+        public var indicatorShadowOffset: CGSize = {
+#if os(iOS)
+            return .init(dimension: 1)
+#elseif canImport(AppKit)
+            return .init(width: 0, height: 1)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Row content margin. Set to `2`.
         public var contentMargin: CGFloat = 2
@@ -89,7 +110,7 @@ public struct VSegmentedPickerUIModel {
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Row divider size. Set to width `1x19` for `iOS`, and `1x12` for `macOS`, similarly to native pickers.
+        /// Row divider size. Set to width `1x19` for `iOS`, and `1x13` for `macOS`, similarly to native pickers.
         public var dividerSize: CGSize = {
 #if os(iOS)
             return .init(width: 1, height: 19)
@@ -114,6 +135,20 @@ public struct VSegmentedPickerUIModel {
             enabled: ColorBook.layerGray,
             disabled: ColorBook.layerGrayDisabled
         )
+        
+        /// Border colors.
+        public var border: StateColors = {
+#if os(iOS)
+            return .clearColors
+#elseif canImport(AppKit)
+            return .init(
+                enabled: ColorBook.borderGray,
+                disabled: ColorBook.borderGrayDisabled
+            )
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Selection indicator colors.
         public var indicator: StateColors = .init(
