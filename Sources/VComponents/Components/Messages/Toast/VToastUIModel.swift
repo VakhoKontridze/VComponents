@@ -36,14 +36,14 @@ public struct VToastUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Toast horizontal margin. Set to `20`.
-        public var toastHorizontalMargin: CGFloat = 20
+        /// Width type. Set to `default`.
+        public var widthType: WidthType = .default
         
         /// Corner radius type. Set to `default`.
         public var cornerRadiusType: CornerRadiusType = .default
         
         /// Text line type. Set to `default`.
-        public var titleTextLineType: TextLineType = .default
+        public var textLineType: TextLineType = .default
         
         /// Text margins. Set to `20` horizontal and `12` vertical.
         public var textMargins: Margins = .init(
@@ -61,9 +61,56 @@ public struct VToastUIModel {
         /// Initializes UI model with default values.
         public init() {}
         
-        // MARK: Margins
-        /// Model that contains `horizontal` and `vertical` margins.
-        public typealias Margins = EdgeInsets_HorizontalVertical
+        // MARK: Width Type
+        /// Enum that represents width type, such as `wrapped`, `stretched`, `fixedPoint`, or `fixedFraction`.
+        public enum WidthType {
+            // MARK: Cases
+            /// Toast only takes required width, and container wraps it's content.
+            ///
+            /// Margin can be specified to space out toast from the edges of the screen.
+            case wrapped(margin: CGFloat)
+            
+            /// Toast stretches to full width with an alignment.
+            ///
+            /// Alignment may not be sufficient to affect multi-line text contents.
+            /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
+            ///
+            /// Margin can be specified to space out toast from the edges of the screen.
+            case stretched(alignment: HorizontalAlignment, margin: CGFloat)
+            
+            /// Toast takes specified width with an alignment.
+            ///
+            /// Alignment may not be sufficient to affect multi-line text contents.
+            /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
+            case fixedPoint(width: CGFloat, alignment: HorizontalAlignment)
+            
+            /// Toast takes specified width relative to screen ratio, with an alignment.
+            ///
+            /// Alignment may not be sufficient to affect multi-line text contents.
+            /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
+            case fixedFraction(ratio: CGFloat, alignment: HorizontalAlignment)
+            
+            // MARK: Initializers
+            /// Default value. Set to `wrapped` with  `20` `margin`.
+            public static var `default`: Self { .wrapped(margin: 20) }
+        }
+        
+        // MARK: Corner Radius Type
+        /// Enum that represents corner radius, such as `capsule` or `rounded`.
+        public enum CornerRadiusType {
+            // MARK: Cases
+            /// Capsule.
+            ///
+            /// This case automatically calculates height and takes half of its value.
+            case capsule
+            
+            /// Rounded.
+            case rounded(cornerRadius: CGFloat)
+
+            // MARK: Initializers
+            /// Default value. Set to `rounded`.
+            public static var `default`: Self { .capsule }
+        }
         
         // MARK: Text Line Type
         /// Enum that represents text line, such as `singleLine` or `multiLine`.
@@ -91,6 +138,10 @@ public struct VToastUIModel {
             public static var `default`: Self { .singleLine }
         }
         
+        // MARK: Margins
+        /// Model that contains `horizontal` and `vertical` margins.
+        public typealias Margins = EdgeInsets_HorizontalVertical
+        
         // MARK: Presentation Edge
         /// Enum that represents presentation edge, such as `top` or `bottom`.
         public enum PresentationEdge: Int, CaseIterable {
@@ -104,23 +155,6 @@ public struct VToastUIModel {
             // MARK: Initializers
             /// Default value. Set to `bottom`.
             public static var `default`: Self { .bottom }
-        }
-        
-        // MARK: Corner Radius Type
-        /// Model that represents corner radius, such as `capsule` or `rounded`.
-        public enum CornerRadiusType {
-            // MARK: Cases
-            /// Capsule.
-            ///
-            /// This case automatically calculates height and takes half of its value.
-            case capsule
-            
-            /// Rounded.
-            case rounded(cornerRadius: CGFloat)
-
-            // MARK: Initializers
-            /// Default value. Set to `rounded`.
-            public static var `default`: Self { .capsule }
         }
     }
 

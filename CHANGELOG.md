@@ -62,6 +62,10 @@ VAlert
 - `titleLineLimit` is replaced with `titleLineType` in `VAlertUIModel`
 - `messageLineLimit` is replaced with `messageLineType` in `VAlertUIModel`
 
+VToast
+
+- `WidthType` is added in `VToastUIModel` that allows for additional customization, such as wrapping, stretching, or applying fixed width
+
 VContinuousSpinner
 
 - `borderWidth` is renamed to `thickness` in `VContinuousSpinnerUIModel`

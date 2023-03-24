@@ -50,7 +50,13 @@ struct VToast: View {
                 .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
         })
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .padding(.horizontal, uiModel.layout.toastHorizontalMargin) // Must be applied here
+            .modifier({ view in
+                switch uiModel.layout.widthType {
+                case .wrapped(let margin): view.padding(.horizontal, margin)
+                case .stretched(_, let margin): view.padding(.horizontal, margin)
+                case .fixedPoint, .fixedFraction: view
+                }
+            })
             .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
@@ -62,12 +68,39 @@ struct VToast: View {
     
     private var contentView: some View {
         VText(
-            type: uiModel.layout.titleTextLineType.toVCoreTextLineType,
+            type: uiModel.layout.textLineType.toVCoreTextLineType,
             color: uiModel.colors.text,
             font: .init(uiModel.fonts.text),
             text: text
         )
             .padding(uiModel.layout.textMargins)
+            .modifier({ view in
+                switch uiModel.layout.widthType {
+                case .wrapped:
+                    view
+                
+                case .stretched(let alignment, _):
+                    view
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: alignment.toAlignment
+                        )
+                
+                case .fixedPoint(let width, let alignment):
+                    view
+                        .frame(
+                            width: width,
+                            alignment: alignment.toAlignment
+                        )
+                    
+                case .fixedFraction(let ratio, let alignment):
+                    view
+                        .frame(
+                            width: MultiplatformConstants.screenSize.width * ratio,
+                            alignment: alignment.toAlignment
+                        )
+                }
+            })
             .background(background)
             .onSizeChange(perform: { height = $0.height })
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
@@ -80,38 +113,11 @@ struct VToast: View {
 
     // MARK: Offsets
     private var initialOffset: CGFloat {
-        let initialHeight: CGFloat = {
-#if canImport(UIKit) && !os(watchOS)
-            switch uiModel.layout.titleTextLineType {
-            case .singleLine:
-                let label: UILabel = .init()
-                label.font = uiModel.fonts.text
-                
-                return label.singleLineHeight + 2 * uiModel.layout.textMargins.vertical
-                
-            case .multiLine(let alignment, let lineLimit):
-                let label: UILabel = .init()
-                label.textAlignment = alignment.toNSTextAlignment
-                lineLimit.map { label.numberOfLines = $0 }
-                label.font = uiModel.fonts.text
-                
-                return
-                    label.multiLineHeight(
-                        width: MultiplatformConstants.screenSize.width,  // width can't be calculated
-                        text: text
-                    ) +
-                    2 * uiModel.layout.textMargins.vertical
-            }
-#elseif canImport(UIKit) && os(watchOS)
-            fatalError() // Not supported
-#elseif canImport(AppKit)
-            fatalError() // Not supported
-#endif
-        }()
+        let initialOffset: CGFloat = height + 2*uiModel.layout.textMargins.vertical
         
         switch uiModel.layout.presentationEdge {
-        case .top: return -initialHeight
-        case .bottom: return MultiplatformConstants.screenSize.height + initialHeight
+        case .top: return -initialOffset
+        case .bottom: return MultiplatformConstants.screenSize.height + initialOffset
         }
     }
 
@@ -195,12 +201,29 @@ extension TextAlignment {
     }
 }
 
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension HorizontalAlignment {
+    fileprivate var toAlignment: Alignment {
+        switch self {
+        case .leading: return .leading
+        case .center: return .center
+        case .trailing: return .trailing
+        default: fatalError()
+        }
+    }
+}
+
 // MARK: - Preview
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VToast_Previews: PreviewProvider {
+    private static let widthType: VToastUIModel.Layout.WidthType = .default
+    
     private static var text: String { "Lorem ipsum dolor sit amet" }
     private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
     
@@ -216,6 +239,7 @@ struct VToast_Previews: PreviewProvider {
                 VToast(
                     uiModel: {
                         var uiModel: VToastUIModel = .init()
+                        uiModel.layout.widthType = widthType
                         uiModel.animations.appear = nil
                         uiModel.animations.duration = .infinity
                         return uiModel
@@ -234,7 +258,8 @@ struct VToast_Previews: PreviewProvider {
                 VToast(
                     uiModel: {
                         var uiModel: VToastUIModel = .init()
-                        uiModel.layout.titleTextLineType = .multiLine(alignment: .leading, lineLimit: 10)
+                        uiModel.layout.widthType = widthType
+                        uiModel.layout.textLineType = .multiLine(alignment: .leading, lineLimit: 10)
                         uiModel.animations.appear = nil
                         uiModel.animations.duration = .infinity
                         return uiModel
@@ -253,6 +278,7 @@ struct VToast_Previews: PreviewProvider {
                 VToast(
                     uiModel: {
                         var uiModel: VToastUIModel = .init()
+                        uiModel.layout.widthType = widthType
                         uiModel.layout.presentationEdge = .top
                         uiModel.animations.appear = nil
                         uiModel.animations.duration = .infinity
