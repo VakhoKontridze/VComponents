@@ -20,12 +20,12 @@ Package provides limited `macOS`, `tvOS`, and `watchOS` support.
 
 Versions with different majors are not directly compatible. When a new major is released, deprecated symbols are removed.
 
-| Ver | Release Date | SDK                                                    | VCore         | Comment                                    |
-| :-- | :--          | :--                                                    | :--           | :--                                        |
-| 4.0 | 2023 XX XX   | iOS 13.0<br/>macOS 10.15<br/>tvOS 13.0<br/>watchOS 6.0 | 4.7.0 - 4.x.x | iOS 13.0 support.<br/>Multiplatform support.   |
-| 3.0 | 2022 10 02   | iOS 16.0                                               | 4.1.0 - 4.x.x | New SwiftUI API.<br/>API changes.              |
+| Ver | Release Date | SDK                                                    | VCore         | Comment                                            |
+| :-- | :--          | :--                                                    | :--           | :--                                                |
+| 4.0 | 2023 XX XX   | iOS 13.0<br/>macOS 10.15<br/>tvOS 13.0<br/>watchOS 6.0 | 4.7.0 - 4.x.x | iOS 13.0 support.<br/>Multiplatform support.       |
+| 3.0 | 2022 10 02   | iOS 16.0                                               | 4.1.0 - 4.x.x | New SwiftUI API.<br/>API changes.                  |
 | 2.0 | 2022 05 26   | iOS 15.0                                               | 3.2.0 - 3.x.x | New SwiftUI API.<br/>API changes.<br/>SPM support. |
-| 1.0 | 2021 02 07   | iOS 14.0                                               | -             | -                                          |
+| 1.0 | 2021 02 07   | iOS 14.0                                               | -             | -                                                  |
 
 ## Components
 
@@ -41,13 +41,13 @@ Instead, UI model can be passed as parameter to initializers. This parameter has
 
 UI Models are `struct`s with default values. They break down into 5 models: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
-For instance, changing foreground color of `VSecondaryButton` can be done by passing an IU model.
+For instance, changing foreground color of `VCapsuleButton` can be done by passing an IU model.
 
 Not Preferred:
 
 ```swift
 var body: some View {
-    VSecondaryButton(
+    VCapsuleButton(
         action: doSomething,
         title: "Lorem ipsum"
     )
@@ -58,8 +58,8 @@ var body: some View {
 Preferred:
 
 ```swift
-let uiModel: VSecondaryButtonUIModel = {
-    var UIModel: VSecondaryButtonUIModel = .init()
+let uiModel: VCapsuleButtonUIModel = {
+    var UIModel: VCapsuleButtonUIModel = .init()
     
     uiModel.colors.textContent = .init(
         enabled: .black,
@@ -71,7 +71,7 @@ let uiModel: VSecondaryButtonUIModel = {
 }()
 
 var body: some View {
-    VSecondaryButton(
+    VCapsuleButton(
         uiModel: uiModel,
         action: doSomething,
         title: "Lorem ipsum"
@@ -82,9 +82,9 @@ var body: some View {
 Alternately, you can create static instances of UI models for reusability.
 
 ```swift
-extension VSecondaryButtonUIModel {
-    static let someUIModel: VSecondaryButtonUIModel = {
-        var uiModel: VSecondaryButtonModel = .init()
+extension VCapsuleButtonUIModel {
+    static let someUIModel: VCapsuleButtonUIModel = {
+        var uiModel: VCapsuleButtonModel = .init()
         
         uiModel.colors.textContent = .init(
             enabled: .black,
@@ -97,7 +97,7 @@ extension VSecondaryButtonUIModel {
 }
 
 var body: some View {
-    VSecondaryButton(
+    VCapsuleButton(
         uiModel: .someUIModel,
         action: doSomething,
         title: "Lorem ipsum"
@@ -121,7 +121,7 @@ var body: some View {
             title: "Lorem ipsum"
         )
         
-        VSecondaryButton(
+        VCapsuleButton(
             action: { withAnimation(nil, { isOn.toggle() }) },
             title: "Toggle"
         )
@@ -148,7 +148,7 @@ var body: some View {
             title: "Lorem ipsum"
         )
         
-        VSecondaryButton(
+        VCapsuleButton(
             action: { isOn.toggle() },
             title: "Toggle"
         )

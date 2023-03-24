@@ -1,5 +1,5 @@
 //
-//  VSecondaryButtonState.swift
+//  VCapsuleButtonState.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Secondary Button Internal State
+// MARK: - V Capsule Button Internal State
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VSecondaryButtonInternalState = GenericState_EnabledPressedDisabled
+typealias VCapsuleButtonInternalState = GenericState_EnabledPressedDisabled

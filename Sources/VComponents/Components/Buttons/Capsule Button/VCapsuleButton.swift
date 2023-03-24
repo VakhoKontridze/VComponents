@@ -1,5 +1,5 @@
 //
-//  VSecondaryButton.swift
+//  VCapsuleButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,7 +8,7 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Secondary Button
+// MARK: - V Capsule Button
 /// Small colored button component that performs action when triggered.
 ///
 /// Component can be initialized with title, icon and title, and label.
@@ -16,7 +16,7 @@ import VCore
 /// UI Model can be passed as parameter.
 ///
 ///     var body: some View {
-///         VSecondaryButton(
+///         VCapsuleButton(
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
@@ -24,24 +24,24 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-public struct VSecondaryButton<Label>: View where Label: View {
+public struct VCapsuleButton<Label>: View where Label: View {
     // MARK: Properties
-    private let uiModel: VSecondaryButtonUIModel
+    private let uiModel: VCapsuleButtonUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var isPressed: Bool = false
-    private var internalState: VSecondaryButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
+    private var internalState: VCapsuleButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
     
     private let action: () -> Void
     
-    private let label: VSecondaryButtonLabel<Label>
+    private let label: VCapsuleButtonLabel<Label>
     
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
 
     // MARK: Initializers
-    /// Initializes `VSecondaryButton` with action and title.
+    /// Initializes `VCapsuleButton` with action and title.
     public init(
-        uiModel: VSecondaryButtonUIModel = .init(),
+        uiModel: VCapsuleButtonUIModel = .init(),
         action: @escaping () -> Void,
         title: String
     )
@@ -52,9 +52,9 @@ public struct VSecondaryButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes `VSecondaryButton` with action, icon, and title.
+    /// Initializes `VCapsuleButton` with action, icon, and title.
     public init(
-        uiModel: VSecondaryButtonUIModel = .init(),
+        uiModel: VCapsuleButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
         title: String
@@ -66,9 +66,9 @@ public struct VSecondaryButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes `VSecondaryButton` with action and label.
+    /// Initializes `VCapsuleButton` with action and label.
     public init(
-        uiModel: VSecondaryButtonUIModel = .init(),
+        uiModel: VCapsuleButtonUIModel = .init(),
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Label
     ) {
@@ -149,7 +149,7 @@ public struct VSecondaryButton<Label>: View where Label: View {
 // MARK: - Preview
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-struct VSecondaryButton_Previews: PreviewProvider {
+struct VCapsuleButton_Previews: PreviewProvider {
     static var previews: some View {
         ColorSchemePreview(title: nil, content: Preview.init)
         ColorSchemePreview(title: "States", content: StatesPreview.init)
@@ -158,7 +158,7 @@ struct VSecondaryButton_Previews: PreviewProvider {
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VSecondaryButton(
+                VCapsuleButton(
                     action: { print("Clicked") },
                     title: "Lorem Ipsum"
                 )
@@ -173,7 +173,7 @@ struct VSecondaryButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Enabled",
                     content: {
-                        VSecondaryButton(
+                        VCapsuleButton(
                             action: {},
                             title: "Lorem Ipsum"
                         )
@@ -184,9 +184,9 @@ struct VSecondaryButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Pressed",
                     content: {
-                        VSecondaryButton(
+                        VCapsuleButton(
                             uiModel: {
-                                var uiModel: VSecondaryButtonUIModel = .init()
+                                var uiModel: VCapsuleButtonUIModel = .init()
                                 uiModel.colors.background.enabled = uiModel.colors.background.pressed
                                 uiModel.colors.title.enabled = uiModel.colors.title.pressed
                                 return uiModel
@@ -201,7 +201,7 @@ struct VSecondaryButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Disabled",
                     content: {
-                        VSecondaryButton(
+                        VCapsuleButton(
                             action: {},
                             title: "Lorem Ipsum"
                         )

@@ -12,6 +12,10 @@ General
 - `ColorBook.accent` is renamed to `ColorBook.accentBlue`
 - "TitleLineType" used in names is changed to "TextLineType"
 
+VSecondaryButton
+
+- `VSecondaryButton` is renamed to `VCapsuleButton`
+
 VCheckBox
 
 - `borderWith` is renamed to `borderWidth` in `VCheckBoxUIModel`

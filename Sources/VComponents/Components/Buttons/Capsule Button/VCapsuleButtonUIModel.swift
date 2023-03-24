@@ -1,5 +1,5 @@
 //
-//  VSecondaryButtonUIModel.swift
+//  VCapsuleButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 12/24/20.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Secondary Button UI Model
+// MARK: - V Capsule Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct VSecondaryButtonUIModel {
+public struct VCapsuleButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
     public var layout: Layout = .init()
