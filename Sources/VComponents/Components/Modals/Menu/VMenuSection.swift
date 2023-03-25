@@ -10,8 +10,7 @@ import VCore
 
 // MARK: - V Menu Section Protocol
 /// Container view that you can use to add hierarchy to `VMenuRowProtocol`s.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuSectionProtocol: VMenuSectionConvertible {
@@ -25,8 +24,7 @@ public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     func makeBody() -> Body
 }
 
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VMenuSectionProtocol {
@@ -35,8 +33,7 @@ extension VMenuSectionProtocol {
 
 // MARK: - V Menu Group Section
 /// Grouped container view that you can use to add hierarchy to `VMenuRowProtocol`s.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VMenuGroupSection: VMenuSectionProtocol {
@@ -69,8 +66,7 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
 
 // MARK: - V Menu Picker Section
 /// Container view with picker that you can use to add hierarchy to `VMenuRowProtocol`s.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS 7, *)@available(watchOS, unavailable)
 public struct VMenuPickerSection<Data>: VMenuSectionProtocol

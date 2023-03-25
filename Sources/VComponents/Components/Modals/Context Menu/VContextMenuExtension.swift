@@ -8,8 +8,7 @@
 import SwiftUI
 
 // MARK: - Standard Menu
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {
@@ -65,8 +64,7 @@ extension View {
 }
 
 // MARK: - Menu with Preview
-@available(iOS 16.0, *)
-@available(macOS 13.0, *)
+@available(iOS 16.0, macOS 13.0, *)
 @available(tvOS 16.0, *)@available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension View {

@@ -8,8 +8,7 @@
 import Foundation
 
 // MARK: - V Menu Label
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 typealias VMenuLabel = GenericContent_TitleContent

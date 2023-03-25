@@ -12,7 +12,7 @@ import VCore
 @available(iOS 15.0, *)
 @available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
-@available(watchOS 7.0, *)@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
+@available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VSideBar<Content>: View where Content: View {
     // MARK: Properties
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode

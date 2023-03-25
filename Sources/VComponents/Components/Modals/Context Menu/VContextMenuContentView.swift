@@ -8,8 +8,7 @@
 import SwiftUI
 
 // MARK: - V Menu Content View
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VContextMenuContentView: View {
@@ -43,8 +42,7 @@ struct VContextMenuContentView: View {
 import VCore
 #endif
 
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VContextMenuContentView_Previews: PreviewProvider {

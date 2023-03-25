@@ -50,8 +50,7 @@ import SwiftUI
 ///         })
 ///     }
 ///
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VMenu<Label>: View where Label: View {
@@ -172,8 +171,7 @@ public struct VMenu<Label>: View where Label: View {
 import VCore
 #endif
 
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VMenu_Previews: PreviewProvider {

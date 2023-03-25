@@ -9,8 +9,7 @@ import SwiftUI
 
 // MARK: - V Menu Row Protocol
 /// `VMenu` row.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public protocol VMenuRowProtocol: VMenuRowConvertible {
@@ -21,8 +20,7 @@ public protocol VMenuRowProtocol: VMenuRowConvertible {
     func makeBody() -> Body
 }
 
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VMenuRowProtocol {
@@ -31,8 +29,7 @@ extension VMenuRowProtocol {
 
 // MARK: - V Menu Title Row
 /// `VMenu` row with title.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 15.0, *)@available(tvOS, unavailable)
 @available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VMenuTitleRow: VMenuRowProtocol {
@@ -67,8 +64,7 @@ public struct VMenuTitleRow: VMenuRowProtocol {
 
 // MARK: - V Menu Title Icon Row
 /// `VMenu` row with title and icon.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 15.0, *)@available(tvOS, unavailable)
 @available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VMenuTitleIconRow: VMenuRowProtocol {
@@ -136,8 +132,7 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
 
 // MARK: - V Menu Sub Menu Row
 /// `VMenu` row with submenu.
-@available(iOS 15.0, *)
-@available(macOS 12.0, *)
+@available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VMenuSubMenuRow: VMenuRowProtocol {
