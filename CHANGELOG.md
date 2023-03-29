@@ -16,10 +16,24 @@ General
 VPrimaryButton
 
 - `VPrimaryButton` is renamed to `VLoadingStretchedButton`
+- `animatesStateChange` is added in `VLoadingStretchedButtonUIModel`
 
 VSecondaryButton
 
 - `VSecondaryButton` is renamed to `VCapsuleButton`
+- `animatesStateChange` is added in `VCapsuleButtonUIModel`
+
+VRoundedButton
+
+- `animatesStateChange` is added in `VRoundedButtonUIModel`
+
+VRoundedLabeledButton
+
+- `animatesStateChange` is added in `VRoundedLabeledButtonUIModel`
+
+VPlainButton
+
+- `animatesStateChange` is added in `VPlainButtonUIModel`
 
 VSegmentedPicker
 
