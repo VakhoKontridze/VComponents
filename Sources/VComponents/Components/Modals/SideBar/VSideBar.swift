@@ -171,7 +171,7 @@ struct VSideBar<Content>: View where Content: View {
             }
         }()
         
-        return .init(width: x, height: y)
+        return CGSize(width: x, height: y)
     }
     
     private var presentedOffset: CGSize {
@@ -193,7 +193,7 @@ struct VSideBar<Content>: View where Content: View {
             }
         }()
         
-        return .init(width: x, height: y)
+        return CGSize(width: x, height: y)
     }
     
     // MARK: Presentation Edge Dismiss

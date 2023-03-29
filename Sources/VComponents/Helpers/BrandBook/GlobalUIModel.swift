@@ -201,9 +201,9 @@ struct GlobalUIModel {
         }
         static var sliderThumbShadowOffset: CGSize {
 #if os(iOS)
-            return .init(width: 0, height: 2)
+            return CGSize(width: 0, height: 2)
 #elseif os(macOS)
-            return .init(width: 0, height: 1)
+            return CGSize(width: 0, height: 1)
 #else
             fatalError() // Not supported
 #endif

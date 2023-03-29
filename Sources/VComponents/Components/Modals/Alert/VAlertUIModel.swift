@@ -40,8 +40,8 @@ public struct VAlertUIModel {
         /// Set to `0.75` ratio of screen width in portrait.
         /// Set to `0.5` ratio of screen width in landscape.
         public var sizes: Sizes = .init(
-            portrait: .fraction(.init(width: 0.75)),
-            landscape: .fraction(.init(width: 0.5))
+            portrait: .fraction(AlertSize(width: 0.75)),
+            landscape: .fraction(AlertSize(width: 0.5))
         )
         
         /// Rounded corners. Set to to `allCorners`.
@@ -180,7 +180,7 @@ public struct VAlertUIModel {
         /// Secondary button background colors.
         public var secondaryButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(module: "Alert.LayerColoredButton.Background.Pressed"),
+            pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
             disabled: .clear
         )
         
@@ -194,7 +194,7 @@ public struct VAlertUIModel {
         /// Destructive button background colors.
         public var destructiveButtonBackground: ButtonStateColors = .init(
             enabled: .clear,
-            pressed: .init(module: "Alert.LayerColoredButton.Background.Pressed"),
+            pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
             disabled: .clear
         )
         

@@ -85,7 +85,7 @@ public struct VRadioButton<Label>: View where Label: View {
         where Label == Never
     {
         self.uiModel = uiModel
-        self._state = .init(isOn: isOn)
+        self._state = Binding(isOn: isOn)
         self.label = .empty
     }
     
@@ -98,7 +98,7 @@ public struct VRadioButton<Label>: View where Label: View {
         where Label == Never
     {
         self.uiModel = uiModel
-        self._state = .init(isOn: isOn)
+        self._state = Binding(isOn: isOn)
         self.label = .title(title: title)
     }
     
@@ -109,7 +109,7 @@ public struct VRadioButton<Label>: View where Label: View {
         @ViewBuilder label: @escaping (VRadioButtonInternalState) -> Label
     ) {
         self.uiModel = uiModel
-        self._state = .init(isOn: isOn)
+        self._state = Binding(isOn: isOn)
         self.label = .label(label: label)
     }
 

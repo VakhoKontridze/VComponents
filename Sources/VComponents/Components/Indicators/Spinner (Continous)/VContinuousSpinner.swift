@@ -36,10 +36,10 @@ public struct VContinuousSpinner: View {
             .trim(from: 0, to: uiModel.layout.length)
             .stroke(
                 uiModel.colors.spinner,
-                style: .init(lineWidth: uiModel.layout.thickness, lineCap: .round)
+                style: StrokeStyle(lineWidth: uiModel.layout.thickness, lineCap: .round)
             )
             .frame(width: uiModel.layout.dimension, height: uiModel.layout.dimension)
-            .rotationEffect(.init(degrees: isAnimating ? 360 : 0))
+            .rotationEffect(Angle(degrees: isAnimating ? 360 : 0))
             .onAppear(perform: {
                 DispatchQueue.main.async(execute: {
                     withAnimation(uiModel.animations.spinning.repeatForever(autoreverses: false), {

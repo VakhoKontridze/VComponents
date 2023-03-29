@@ -43,8 +43,8 @@ public struct VModalUIModel {
         /// Set to `0.9x0.6` screen ratios in portrait.
         /// Set to reverse in landscape.
         public var sizes: Sizes = .init(
-            portrait: .fraction(.init(width: 0.9, height: 0.6)),
-            landscape: .fraction(.init(width: 0.6, height: 0.9))
+            portrait: .fraction(CGSize(width: 0.9, height: 0.6)),
+            landscape: .fraction(CGSize(width: 0.6, height: 0.9))
         )
         
         /// Rounded corners. Set to to `allCorners`.
@@ -64,7 +64,7 @@ public struct VModalUIModel {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
             uiModel.dimension = GlobalUIModel.Common.circularButtonGrayDimension
-            uiModel.iconSize = .init(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+            uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
             
             return uiModel
@@ -128,12 +128,12 @@ public struct VModalUIModel {
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             
-            uiModel.background = .init(
+            uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
                 enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
                 pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
                 disabled: .clear // Has no effect
             )
-            uiModel.icon = .init(GlobalUIModel.Common.circularButtonIconGrayColor)
+            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(GlobalUIModel.Common.circularButtonIconGrayColor)
             
             return uiModel
         }()
@@ -265,7 +265,7 @@ extension VModalUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
         
         return uiModel
     }

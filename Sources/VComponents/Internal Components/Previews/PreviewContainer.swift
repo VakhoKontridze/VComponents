@@ -73,7 +73,7 @@ struct PreviewContainer<Content>: View where Content: View {
 extension PreviewPlatform {
     static var currentDevice: Self {
 #if os(iOS)
-        return .ios
+        return .iOS
 #elseif os(macOS)
         return .macOS
 #elseif os(tvOS)

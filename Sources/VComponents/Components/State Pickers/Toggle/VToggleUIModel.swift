@@ -42,9 +42,9 @@ public struct VToggleUIModel {
         /// Set to `38x22` on `macOS`, similarly to native toggle.
         public var size: CGSize = {
 #if os(iOS)
-            return .init(width: 51, height: 31)
+            return CGSize(width: 51, height: 31)
 #elseif os(macOS)
-            return .init(width: 38, height: 22)
+            return CGSize(width: 38, height: 22)
 #else
             fatalError() // Not supported
 #endif

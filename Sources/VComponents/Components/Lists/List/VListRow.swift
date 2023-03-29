@@ -99,7 +99,7 @@ public struct VListRow<Content>: View
             
             if uiModel.layout.separatorType.contains(.bottom) { separator }
         })
-            .listRowInsets(.init())
+            .listRowInsets(EdgeInsets())
             .listRowBackground(uiModel.colors.background)
             .modifier({
 #if os(iOS) || os(macOS)
@@ -139,7 +139,7 @@ struct VListRow_Previews: PreviewProvider {
     }
     
     // Data
-    private static var titles: [String] { (1...3).map { .init($0) } }
+    private static var titles: [String] { (1...3).map { String($0) } }
 
     // Previews (Scenes)
     private struct Preview: View {

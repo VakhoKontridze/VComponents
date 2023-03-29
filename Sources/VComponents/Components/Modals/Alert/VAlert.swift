@@ -283,7 +283,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: title,
@@ -302,7 +302,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert<Never>(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: title,
@@ -321,7 +321,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: title,
@@ -337,7 +337,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: title,
@@ -355,7 +355,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: title,
@@ -405,7 +405,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: title,
@@ -425,7 +425,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: nil,
@@ -444,7 +444,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: title,
@@ -463,7 +463,7 @@ struct VAlert_Previews: PreviewProvider {
         var body: some View {
             PreviewContainer(content: {
                 VAlert(
-                    uiModel: .init(),
+                    uiModel: VAlertUIModel(),
                     onPresent: nil,
                     onDismiss: nil,
                     title: nil,

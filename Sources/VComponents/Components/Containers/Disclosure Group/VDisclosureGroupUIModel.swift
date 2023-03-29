@@ -50,7 +50,7 @@ public struct VDisclosureGroupUIModel {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
             uiModel.dimension = GlobalUIModel.Common.circularButtonGrayDimension
-            uiModel.iconSize = .init(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+            uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
             
             return uiModel
@@ -100,12 +100,12 @@ public struct VDisclosureGroupUIModel {
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             
-            uiModel.background = .init(
+            uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
                 enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
                 pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
                 disabled: GlobalUIModel.Common.circularButtonLayerColorDisabled
             )
-            uiModel.icon = .init(
+            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(
                 enabled: GlobalUIModel.Common.circularButtonIconPrimaryColorEnabled,
                 pressed: GlobalUIModel.Common.circularButtonIconPrimaryColorPressed,
                 disabled: GlobalUIModel.Common.circularButtonIconPrimaryColorDisabled
@@ -207,7 +207,7 @@ extension VDisclosureGroupUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = VDisclosureGroupUIModel.Layout.Margins(VSheetUIModel.Layout().contentMargin)
         
         return uiModel
     }

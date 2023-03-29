@@ -61,7 +61,7 @@ extension View {
         self
             .preference(
                 key: VBottomSheetHeaderLabelPreferenceKey.self,
-                value: .label(label: { .init(label()) })
+                value: .label(label: { AnyView(label()) })
             )
     }
 }

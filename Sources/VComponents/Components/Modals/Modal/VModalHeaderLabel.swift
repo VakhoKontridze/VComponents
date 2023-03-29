@@ -61,7 +61,7 @@ extension View {
         self
             .preference(
                 key: VModalHeaderLabelPreferenceKey.self,
-                value: .label(label: { .init(label()) })
+                value: .label(label: { AnyView(label()) })
             )
     }
 }

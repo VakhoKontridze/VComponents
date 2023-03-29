@@ -28,7 +28,7 @@ struct MultiplatformConstants {
     
     static var safeAreaInsets: EdgeInsets {
 #if canImport(UIKit) && !os(watchOS)
-        return .init(
+        return EdgeInsets(
             top: UIDevice.safeAreaInsetTop,
             leading: UIDevice.safeAreaInsetLeft,
             bottom: UIDevice.safeAreaInsetBottom,

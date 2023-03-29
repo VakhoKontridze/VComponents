@@ -119,7 +119,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
             Data == Array<T>
     {
         self.title = title
-        self._selectedIndex = .init(
+        self._selectedIndex = Binding(
             get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
@@ -137,7 +137,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
             Data == Array<T>
     {
         self.title = title
-        self._selectedIndex = .init(
+        self._selectedIndex = Binding(
             get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )

@@ -89,9 +89,9 @@ public struct VSegmentedPickerUIModel {
         /// Set to `0x1` on `macOS`.
         public var indicatorShadowOffset: CGSize = {
 #if os(iOS)
-            return .init(dimension: 1)
+            return CGSize(dimension: 1)
 #elseif os(macOS)
-            return .init(width: 0, height: 1)
+            return CGSize(width: 0, height: 1)
 #else
             fatalError() // Not supported
 #endif
@@ -120,9 +120,9 @@ public struct VSegmentedPickerUIModel {
         /// Set to `1x13` on `macOS`, similarly to native segmented picker.
         public var dividerSize: CGSize = {
 #if os(iOS)
-            return .init(width: 1, height: 19)
+            return CGSize(width: 1, height: 19)
 #elseif os(macOS)
-            return .init(width: 1, height: 12)
+            return CGSize(width: 1, height: 12)
 #else
             fatalError() // Not supported
 #endif
@@ -148,7 +148,7 @@ public struct VSegmentedPickerUIModel {
 #if os(iOS)
             return .clearColors
 #elseif os(macOS)
-            return .init(
+            return StateColors(
                 enabled: ColorBook.borderGray,
                 disabled: ColorBook.borderGrayDisabled
             )
@@ -159,8 +159,8 @@ public struct VSegmentedPickerUIModel {
         
         /// Selection indicator colors.
         public var indicator: StateColors = .init(
-            enabled: .init(module: "SegmentedPicker.Indicator"),
-            disabled: .init(module: "SegmentedPicker.Indicator.Disabled")
+            enabled: Color(module: "SegmentedPicker.Indicator"),
+            disabled: Color(module: "SegmentedPicker.Indicator.Disabled")
         )
         
         /// Selection indicator shadow colors.

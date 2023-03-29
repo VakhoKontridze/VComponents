@@ -55,12 +55,12 @@ public struct VSlider: View {
             V.Stride: BinaryFloatingPoint
     {
         self.uiModel = uiModel
-        self.min = .init(range.lowerBound)
-        self.max = .init(range.upperBound)
-        self.step = step.map { .init($0) }
-        self._value = .init(
-            get: { .init(value.wrappedValue.clamped(to: range, step: step)) },
-            set: { value.wrappedValue = .init($0) }
+        self.min = Double(range.lowerBound)
+        self.max = Double(range.upperBound)
+        self.step = step.map { Double($0) }
+        self._value = Binding(
+            get: { Double(value.wrappedValue.clamped(to: range, step: step)) },
+            set: { value.wrappedValue = V($0) }
         )
         self.action = action
     }

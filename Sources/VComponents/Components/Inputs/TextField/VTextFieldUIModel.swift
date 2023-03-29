@@ -69,7 +69,7 @@ public struct VTextFieldUIModel {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
             uiModel.dimension = 22
-            uiModel.iconSize = .init(dimension: 8)
+            uiModel.iconSize = CGSize(dimension: 8)
             uiModel.hitBox = .zero
             
             return uiModel
@@ -79,7 +79,7 @@ public struct VTextFieldUIModel {
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Layout = {
             var uiModel: VPlainButtonUIModel.Layout = .init()
             
-            uiModel.iconSize = .init(dimension: 20)
+            uiModel.iconSize = CGSize(dimension: 20)
             uiModel.hitBox = .zero
             
             return uiModel
@@ -203,7 +203,7 @@ public struct VTextFieldUIModel {
                 pressed: GlobalUIModel.Inputs.clearButtonLayerPressed,
                 disabled: GlobalUIModel.Inputs.clearButtonLayerDisabled
             )
-            uiModel.icon = .init(GlobalUIModel.Inputs.clearButtonIcon)
+            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(GlobalUIModel.Inputs.clearButtonIcon)
             
             return uiModel
         }()
@@ -212,7 +212,7 @@ public struct VTextFieldUIModel {
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Colors = {
             var uiModel: VPlainButtonUIModel.Colors = .init()
             
-            uiModel.icon = .init(
+            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(
                 enabled: GlobalUIModel.Inputs.visibilityButtonEnabled,
                 pressed: GlobalUIModel.Inputs.visibilityButtonPressedDisabled,
                 disabled: GlobalUIModel.Inputs.visibilityButtonPressedDisabled

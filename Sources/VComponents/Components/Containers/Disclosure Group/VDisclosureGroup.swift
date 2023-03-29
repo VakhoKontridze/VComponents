@@ -112,7 +112,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
-        self._state = .init(isExpanded: isExpanded)
+        self._state = Binding(isExpanded: isExpanded)
         self.headerLabel = .label(label: headerLabel)
         self.content = content
     }
@@ -122,7 +122,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         VSheet(uiModel: uiModel.sheetSubUIModel, content: {
             PlainDisclosureGroup(
                 uiModel: uiModel.plainDisclosureGroupSubUIModel,
-                isExpanded: .init(
+                isExpanded: Binding(
                     get: { internalState == .expanded },
                     set: { expandCollapseFromHeaderTap($0) }
                 ),
@@ -164,7 +164,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 action: expandCollapse,
                 icon: ImageBook.chevronUp
             )
-                .rotationEffect(.init(degrees: internalState.chevronButtonDirection.angle))
+                .rotationEffect(Angle(degrees: internalState.chevronButtonDirection.angle))
         })
             .padding(uiModel.layout.headerMargins)
     }

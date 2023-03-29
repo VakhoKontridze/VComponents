@@ -32,7 +32,7 @@ import SwiftUI
 ///         @Published var vSpinnerParameters: VSpinnerParameters?
 ///
 ///         func didTapButton() {
-///             vSpinnerParameters = .init(isInteractionDisabled: true)
+///             vSpinnerParameters = VSpinnerParameters(isInteractionDisabled: true)
 ///             DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [weak self] in self?.vSpinnerParameters = nil })
 ///         }
 ///     }

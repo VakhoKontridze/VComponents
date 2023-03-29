@@ -85,7 +85,7 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { toastItem = .init() },
+    ///             action: { toastItem = ToastItem() },
     ///             title: "Present"
     ///         )
     ///             .vToast(
@@ -153,12 +153,14 @@ extension View {
     ///     struct ToastData {}
     ///
     ///     @State private var isPresented: Bool = false
-    ///
     ///     @State private var toastData: ToastData?
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true; toastData = .init() },
+    ///             action: {
+    ///                 isPresented = true
+    ///                 toastData = ToastData()
+    ///             },
     ///             title: "Present"
     ///         )
     ///             .vToast(
@@ -225,12 +227,14 @@ extension View {
     /// Any changes that you make after the presentation occurs are ignored.
     ///
     ///     @State private var isPresented: Bool = false
-    ///
     ///     @State private var toastError: Error?
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true; toastError = SomeError() },
+    ///             action: {
+    ///                 isPresented = true
+    ///                 toastError = SomeError()
+    ///             },
     ///             title: "Present"
     ///         )
     ///             .vToast(

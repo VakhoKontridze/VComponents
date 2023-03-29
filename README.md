@@ -27,13 +27,13 @@ Instead, UI model can be passed as parameter to initializers. This parameter has
 
 UI Models are `struct`s with default values. They break down into 5 models: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
-For instance, changing foreground color of `VCapsuleButton` can be done by passing an IU model.
+For instance, changing foreground color of `VPlainButton` can be done by passing an IU model.
 
 Not Preferred:
 
 ```swift
 var body: some View {
-    VCapsuleButton(
+    VPlainButton(
         action: doSomething,
         title: "Lorem ipsum"
     )
@@ -44,10 +44,10 @@ var body: some View {
 Preferred:
 
 ```swift
-let uiModel: VCapsuleButtonUIModel = {
-    var UIModel: VCapsuleButtonUIModel = .init()
+let uiModel: VPlainButtonUIModel = {
+    var UIModel: VPlainButtonUIModel = .init()
     
-    uiModel.colors.textContent = .init(
+    uiModel.colors.title = VPlainButtonUIModel.Colors.StateColors(
         enabled: .black,
         pressed: .gray,
         disabled: .gray
@@ -57,7 +57,7 @@ let uiModel: VCapsuleButtonUIModel = {
 }()
 
 var body: some View {
-    VCapsuleButton(
+    VPlainButton(
         uiModel: uiModel,
         action: doSomething,
         title: "Lorem ipsum"
@@ -68,11 +68,11 @@ var body: some View {
 Alternately, you can create static instances of UI models for reusability.
 
 ```swift
-extension VCapsuleButtonUIModel {
-    static let someUIModel: VCapsuleButtonUIModel = {
-        var uiModel: VCapsuleButtonModel = .init()
+extension VPlainButtonUIModel {
+    static let someUIModel: VPlainButtonUIModel = {
+        var uiModel: VPlainButtonUIModel = .init()
         
-        uiModel.colors.textContent = .init(
+        uiModel.colors.title = VPlainButtonUIModel.Colors.StateColors(
             enabled: .black,
             pressed: .gray,
             disabled: .gray
@@ -83,7 +83,7 @@ extension VCapsuleButtonUIModel {
 }
 
 var body: some View {
-    VCapsuleButton(
+    VPlainButton(
         uiModel: .someUIModel,
         action: doSomething,
         title: "Lorem ipsum"
@@ -107,7 +107,7 @@ var body: some View {
             title: "Lorem ipsum"
         )
         
-        VCapsuleButton(
+        VPlainButton(
             action: { withAnimation(nil, { isOn.toggle() }) },
             title: "Toggle"
         )
@@ -134,7 +134,7 @@ var body: some View {
             title: "Lorem ipsum"
         )
         
-        VCapsuleButton(
+        VPlainButton(
             action: { isOn.toggle() },
             title: "Toggle"
         )

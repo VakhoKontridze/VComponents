@@ -92,7 +92,7 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { sideBarItem = .init() },
+    ///             action: { sideBarItem = SideBarItem() },
     ///             title: "Present"
     ///         )
     ///             .vSideBar(

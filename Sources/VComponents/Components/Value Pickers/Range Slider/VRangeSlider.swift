@@ -69,17 +69,17 @@ public struct VRangeSlider: View {
         )
         
         self.uiModel = uiModel
-        self.min = .init(range.lowerBound)
-        self.max = .init(range.upperBound)
-        self.difference = .init(difference)
+        self.min = Double(range.lowerBound)
+        self.max = Double(range.upperBound)
+        self.difference = Double(difference)
         self.step = step.map { .init($0) }
-        self._valueLow = .init(
-            get: { .init(valueLow.wrappedValue.clamped(to: range, step: step)) },
-            set: { valueLow.wrappedValue = .init($0) }
+        self._valueLow = Binding(
+            get: { Double(valueLow.wrappedValue.clamped(to: range, step: step)) },
+            set: { valueLow.wrappedValue = V($0) }
         )
-        self._valueHigh = .init(
-            get: { .init(valueHigh.wrappedValue.clamped(to: range, step: step)) },
-            set: { valueHigh.wrappedValue = .init($0) }
+        self._valueHigh = Binding(
+            get: { Double(valueHigh.wrappedValue.clamped(to: range, step: step)) },
+            set: { valueHigh.wrappedValue = V($0) }
         )
         self.actionLow = actionLow
         self.actionHigh = actionHigh
@@ -152,9 +152,9 @@ public struct VRangeSlider: View {
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
         let rawValue: Double = {
-            let value: Double = .init(dragValue.location.x)
+            let value: Double = Double(dragValue.location.x)
             let range: Double = max - min
-            let width: Double = .init(sliderWidth)
+            let width: Double = Double(sliderWidth)
 
             return min + (value / width) * range
         }()
@@ -208,8 +208,8 @@ public struct VRangeSlider: View {
     private func progressWidth(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
-            case .low: return .init(valueLow - min)
-            case .high: return .init(valueHigh - min)
+            case .low: return CGFloat(valueLow - min)
+            case .high: return CGFloat(valueHigh - min)
             }
         }()
         let range: CGFloat = .init(max - min)

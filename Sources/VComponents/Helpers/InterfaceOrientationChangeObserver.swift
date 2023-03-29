@@ -16,7 +16,7 @@ final class InterfaceOrientationChangeObserver: ObservableObject {
     
     // MARK: Initializers
     init() {
-        self.orientation = .init()
+        self.orientation = DeviceInterfaceOrientation()
         
 #if os(iOS)
         listener = NotificationCenter.default

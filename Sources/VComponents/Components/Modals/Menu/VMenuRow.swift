@@ -99,7 +99,7 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
         self.action = action
         self.role = role
         self.title = title
-        self.icon = .init(assetIcon, bundle: bundle)
+        self.icon = Image(assetIcon, bundle: bundle)
     }
     
     /// Initializes `VMenuTitleIconRow` with action, title, and `system`icon name.
@@ -112,7 +112,7 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
         self.action = action
         self.role = role
         self.title = title
-        self.icon = .init(systemName: systemIcon)
+        self.icon = Image(systemName: systemIcon)
     }
     
     // MARK: Body

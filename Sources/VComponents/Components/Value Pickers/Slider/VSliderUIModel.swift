@@ -110,7 +110,7 @@ public struct VSliderUIModel {
 #if os(iOS)
             return .clearColors
 #elseif os(macOS)
-            return .init(
+            return StateColors(
                 enabled: ColorBook.borderGray,
                 disabled: ColorBook.borderGrayDisabled
             )

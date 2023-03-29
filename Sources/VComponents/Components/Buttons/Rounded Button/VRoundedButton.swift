@@ -18,7 +18,7 @@ import VCore
 ///     var body: some View {
 ///         VRoundedButton(
 ///             action: { print("Clicked") },
-///             icon: .init(systemName: "swift")
+///             icon: Image(systemName: "swift")
 ///         )
 ///     }
 ///

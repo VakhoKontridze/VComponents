@@ -52,7 +52,7 @@ extension VBottomSheetUIModel.Layout.BottomSheetSize: ScreenRelativeSizeMeasurem
     ) -> VBottomSheetUIModel.Layout.BottomSheetSize {
         .init(
             width: MultiplatformConstants.screenSize.width * measurement.width,
-            heights: .init(
+            heights: VBottomSheetUIModel.Layout.BottomSheetHeights(
                 min: MultiplatformConstants.screenSize.height * measurement.heights.min,
                 ideal: MultiplatformConstants.screenSize.height * measurement.heights.ideal,
                 max: MultiplatformConstants.screenSize.height * measurement.heights.max

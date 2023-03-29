@@ -46,8 +46,8 @@ public struct VSideBarUIModel {
         /// Set to `0.75x1` screen ratios in portrait.
         /// Set to`0.5x1` screen ratios in landscape.
         public var sizes: Sizes = .init(
-            portrait: .fraction(.init(width: 0.75, height: 1)),
-            landscape: .fraction(.init(width: 0.5, height: 1))
+            portrait: .fraction(CGSize(width: 0.75, height: 1)),
+            landscape: .fraction(CGSize(width: 0.5, height: 1))
         )
         
         /// Rounded corners. Set to `rightCorners`.
@@ -208,7 +208,7 @@ extension VSideBarUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
         
         return uiModel
     }
@@ -275,9 +275,9 @@ extension VSideBarUIModel {
         
         uiModel.layout.presentationEdge = .top
         
-        uiModel.layout.sizes = .init(
-            portrait: .fraction(.init(width: 1, height: 0.5)),
-            landscape: .fraction(.init(width: 1, height: 0.75))
+        uiModel.layout.sizes = Layout.Sizes(
+            portrait: .fraction(CGSize(width: 1, height: 0.5)),
+            landscape: .fraction(CGSize(width: 1, height: 0.75))
         )
         
         uiModel.layout.roundedCorners = .bottomCorners
@@ -305,9 +305,9 @@ extension VSideBarUIModel {
         
         uiModel.layout.presentationEdge = .bottom
         
-        uiModel.layout.sizes = .init(
-            portrait: .fraction(.init(width: 1, height: 0.5)),
-            landscape: .fraction(.init(width: 1, height: 0.75))
+        uiModel.layout.sizes = Layout.Sizes(
+            portrait: .fraction(CGSize(width: 1, height: 0.5)),
+            landscape: .fraction(CGSize(width: 1, height: 0.75))
         )
         
         uiModel.layout.roundedCorners = .topCorners

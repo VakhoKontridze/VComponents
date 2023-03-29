@@ -182,8 +182,8 @@ public struct VStepper: View {
         longPressIncrementTimerIncremental = nil
 
         let interval: TimeInterval = {
-            let adjustedStep: Int = .init(pow(.init(uiModel.misc.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
-            let interval: TimeInterval = 1 / .init(adjustedStep)
+            let adjustedStep: Int = .init(pow(Double(uiModel.misc.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
+            let interval: TimeInterval = 1 / Double(adjustedStep)
             return interval
         }()
         

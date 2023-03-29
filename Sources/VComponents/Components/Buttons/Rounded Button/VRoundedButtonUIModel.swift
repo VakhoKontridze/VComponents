@@ -76,9 +76,9 @@ public struct VRoundedButtonUIModel {
         /// Set to `14x14` on `macOS`.
         public var iconSize: CGSize = {
 #if os(iOS)
-            return .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
+            return CGSize(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
 #elseif os(macOS)
-            return .init(dimension: 14)
+            return CGSize(dimension: 14)
 #else
             fatalError() // Not supported
 #endif

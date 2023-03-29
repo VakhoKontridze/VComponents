@@ -93,7 +93,7 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { modalItem = .init() },
+    ///             action: { modalItem = ModalItem() },
     ///             title: "Present"
     ///         )
     ///             .vModal(

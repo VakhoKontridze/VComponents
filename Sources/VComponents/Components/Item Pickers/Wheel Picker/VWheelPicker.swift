@@ -111,7 +111,7 @@ public struct VWheelPicker<Data, Content>: View
             SelectionValue: Hashable
     {
         self.uiModel = uiModel
-        self._selectedIndex = .init(
+        self._selectedIndex = Binding(
             get: { data.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = data[$0] }
         )
@@ -133,7 +133,7 @@ public struct VWheelPicker<Data, Content>: View
             Content == Never
     {
         self.uiModel = uiModel
-        self._selectedIndex = .init(
+        self._selectedIndex = Binding(
             get: { rowTitles.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = rowTitles[$0] }
         )
@@ -156,7 +156,7 @@ public struct VWheelPicker<Data, Content>: View
             T: HashableEnumeration
     {
         self.uiModel = uiModel
-        self._selectedIndex = .init(
+        self._selectedIndex = Binding(
             get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
@@ -178,7 +178,7 @@ public struct VWheelPicker<Data, Content>: View
             T: StringRepresentableHashableEnumeration
     {
         self.uiModel = uiModel
-        self._selectedIndex = .init(
+        self._selectedIndex = Binding(
             get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
             set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )

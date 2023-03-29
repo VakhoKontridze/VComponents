@@ -94,7 +94,7 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { bottomSheetItem = .init() },
+    ///             action: { bottomSheetItem = BottomSheetItem() },
     ///             title: "Present"
     ///         )
     ///             .vBottomSheet(

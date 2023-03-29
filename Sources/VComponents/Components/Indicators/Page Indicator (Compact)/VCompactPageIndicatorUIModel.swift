@@ -138,7 +138,7 @@ public struct VCompactPageIndicatorUIModel {
     // MARK: Sub UI Models
     var standardPageIndicatorSubUIModel: VPageIndicatorUIModel {
         .init(
-            layout: .init(
+            layout: VPageIndicatorUIModel.Layout(
                 direction: layout.direction,
                 dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
                 dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,

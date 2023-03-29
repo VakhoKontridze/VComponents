@@ -105,7 +105,7 @@ public struct VAutomaticPageIndicatorUIModel {
     // MARK: Sub UI Models
     var standardPageIndicatorSubUIModel: VPageIndicatorUIModel {
         .init(
-            layout: .init(
+            layout: VPageIndicatorUIModel.Layout(
                 direction: layout.direction,
                 dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
                 dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
@@ -119,7 +119,7 @@ public struct VAutomaticPageIndicatorUIModel {
     
     var compactPageIndicatorSubUIModel: VCompactPageIndicatorUIModel {
         .init(
-            layout: .init(
+            layout: VCompactPageIndicatorUIModel.Layout(
                 direction: layout.direction,
                 dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForCompactConfiguration,
                 dotDimensionPrimaryAxisForStandardConfiguration: layout.dotDimensionPrimaryAxisForStandardConfiguration,

@@ -209,15 +209,15 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
 
     // MARK: Dimension on Main Axis
     private var visibleDimensionPrimaryAxis: CGFloat {
-        let dots: CGFloat = .init(visible) * uiModel.layout.dotDimensionPrimaryAxis
-        let spacings: CGFloat = .init(visible - 1) * uiModel.layout.spacing
+        let dots: CGFloat = CGFloat(visible) * uiModel.layout.dotDimensionPrimaryAxis
+        let spacings: CGFloat = CGFloat(visible - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
     
     private var totalDimensionPrimaryAxis: CGFloat {
-        let dots: CGFloat = .init(total) * uiModel.layout.dotDimensionPrimaryAxis
-        let spacings: CGFloat = .init(total - 1) * uiModel.layout.spacing
+        let dots: CGFloat = CGFloat(total) * uiModel.layout.dotDimensionPrimaryAxis
+        let spacings: CGFloat = CGFloat(total - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
@@ -232,7 +232,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 return rawOffset
             
             case .center:
-                let incrementalOffset: CGFloat = -.init(current - middle) * (uiModel.layout.dotDimensionPrimaryAxis + uiModel.layout.spacing)
+                let incrementalOffset: CGFloat = -CGFloat(current - middle) * (uiModel.layout.dotDimensionPrimaryAxis + uiModel.layout.spacing)
                 return rawOffset + incrementalOffset
             
             case .end:
@@ -291,8 +291,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
     
     private func startEdgeEndSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / .init(side)
-        let incrementalScale: CGFloat = .init(index + 1) * scaleStep
+        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / CGFloat(side)
+        let incrementalScale: CGFloat = CGFloat(index + 1) * scaleStep
         return 1 - incrementalScale
     }
     
@@ -328,8 +328,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     }
     
     private func endEdgeStartSideScale(at index: Int) -> CGFloat {
-        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / .init(side)
-        let incrementalScale: CGFloat = uiModel.layout.edgeDotScale + .init(index) * scaleStep
+        let scaleStep: CGFloat = uiModel.layout.edgeDotScale / CGFloat(side)
+        let incrementalScale: CGFloat = uiModel.layout.edgeDotScale + CGFloat(index) * scaleStep
         return incrementalScale
     }
 

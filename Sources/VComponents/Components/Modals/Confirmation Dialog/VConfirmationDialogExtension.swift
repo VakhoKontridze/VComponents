@@ -78,7 +78,7 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { confirmationDialogItem = .init() },
+    ///             action: { confirmationDialogItem = ConfirmationDialogItem() },
     ///             title: "Present"
     ///         )
     ///             .vConfirmationDialog(
@@ -105,7 +105,7 @@ extension View {
         self
             .confirmationDialog(
                 item.wrappedValue.flatMap { title($0) } ?? "",
-                isPresented: .init(
+                isPresented: Binding(
                     get: { item.wrappedValue != nil },
                     set: { if !$0 { item.wrappedValue = nil } }
                 ),
@@ -145,12 +145,14 @@ extension View {
     ///     struct ConfirmationDialogData {}
     ///
     ///     @State private var isPresented: Bool = false
-    ///
     ///     @State private var confirmationDialogData: ConfirmationDialogData?
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true; confirmationDialogData = .init() },
+    ///             action: {
+    ///                 isPresented = true
+    ///                 confirmationDialogData = ConfirmationDialogData()
+    ///             },
     ///             title: "Present"
     ///         )
     ///             .vConfirmationDialog(
@@ -177,7 +179,7 @@ extension View {
         self
             .confirmationDialog(
                 data.flatMap { title($0) } ?? "",
-                isPresented: .init(
+                isPresented: Binding(
                     get: { isPresented.wrappedValue && data != nil },
                     set: { if !$0 { isPresented.wrappedValue = false } }
                 ),

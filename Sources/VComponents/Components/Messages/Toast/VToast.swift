@@ -70,7 +70,7 @@ struct VToast: View {
         VText(
             type: uiModel.layout.textLineType.toVCoreTextLineType,
             color: uiModel.colors.text,
-            font: .init(uiModel.fonts.text),
+            font: Font(uiModel.fonts.text),
             text: text
         )
             .padding(uiModel.layout.textMargins)

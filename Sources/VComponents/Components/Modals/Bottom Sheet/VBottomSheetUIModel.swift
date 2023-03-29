@@ -43,11 +43,11 @@ public struct VBottomSheetUIModel {
         /// Set to `1` ratio of screen width, and `0.6`, `0.6`, and `0.9` ratios of screen height in portrait.
         /// Set to `0.7` ratio of screen width and `0.9` ratio of screen height in landscape.
         public var sizes: Sizes = .init(
-            portrait: .fraction(.init(
+            portrait: .fraction(BottomSheetSize(
                 width: 1,
                 heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
             )),
-            landscape: .fraction(.init(
+            landscape: .fraction(BottomSheetSize(
                 width: 0.7,
                 heights: .fixed(0.9)
             ))
@@ -81,7 +81,7 @@ public struct VBottomSheetUIModel {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
             uiModel.dimension = GlobalUIModel.Common.circularButtonGrayDimension
-            uiModel.iconSize = .init(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
+            uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
             
             return uiModel
@@ -263,12 +263,12 @@ public struct VBottomSheetUIModel {
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
             
-            uiModel.background = .init(
+            uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
                 enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
                 pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
                 disabled: .clear // Has no effect
             )
-            uiModel.icon = .init(GlobalUIModel.Common.circularButtonIconGrayColor)
+            uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(GlobalUIModel.Common.circularButtonIconGrayColor)
             
             return uiModel
         }()
@@ -411,7 +411,7 @@ extension VBottomSheetUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = .init(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
         
         return uiModel
     }
@@ -434,7 +434,7 @@ extension VBottomSheetUIModel {
     public static var onlyGrabber: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.grabberMargins = .init(15)
+        uiModel.layout.grabberMargins = Layout.VerticalMargins(15)
         
         uiModel.misc.dismissType.remove(.leadingButton)
         uiModel.misc.dismissType.remove(.trailingButton)
@@ -450,7 +450,7 @@ extension VBottomSheetUIModel {
     public static var scrollableContentOnlyGrabber: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.grabberMargins = .init(15)
+        uiModel.layout.grabberMargins = Layout.VerticalMargins(15)
         uiModel.layout.autoresizesContent = true
         uiModel.layout.contentSafeAreaEdges.insert(.bottom)
         

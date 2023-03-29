@@ -159,7 +159,7 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { alertItem = .init() },
+    ///             action: { alertItem = AlertItem() },
     ///             title: "Present"
     ///         )
     ///             .vAlert(
@@ -244,7 +244,7 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { alertItem = .init() },
+    ///             action: { alertItem = AlertItem() },
     ///             title: "Present"
     ///         )
     ///             .vAlert(
@@ -343,12 +343,14 @@ extension View {
     ///     struct AlertData {}
     ///
     ///     @State private var isPresented: Bool = false
-    ///
     ///     @State private var alertData: AlertData?
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true; alertData = .init() },
+    ///             action: {
+    ///                 isPresented = true
+    ///                 alertData = AlertData()
+    ///             },
     ///             title: "Present"
     ///         )
     ///             .vAlert(
@@ -437,7 +439,10 @@ extension View {
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true; alertData = .init() },
+    ///             action: {
+    ///                 isPresented = true
+    ///                 alertData = AlertData()
+    ///             },
     ///             title: "Present"
     ///         )
     ///             .vAlert(
@@ -535,12 +540,14 @@ extension View {
     /// Any changes that you make after the presentation occurs are ignored.
     ///
     ///     @State private var isPresented: Bool = false
-    ///
     ///     @State private var alertError: Error?
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true; alertError = SomeError() },
+    ///             action: {
+    ///                 isPresented = true
+    ///                 alertError = SomeError()
+    ///             },
     ///             title: "Present"
     ///         )
     ///             .vAlert(
@@ -620,12 +627,14 @@ extension View {
     /// Any changes that you make after the presentation occurs are ignored.
     ///
     ///     @State private var isPresented: Bool = false
-    ///
     ///     @State private var alertError: Error?
     ///
     ///     var body: some View {
     ///         VPlainButton(
-    ///             action: { isPresented = true; alertError = SomeError() },
+    ///             action: {
+    ///                 isPresented = true
+    ///                 alertError = SomeError()
+    ///             },
     ///             title: "Present"
     ///         )
     ///             .vAlert(

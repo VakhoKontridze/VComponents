@@ -57,7 +57,7 @@ struct VBottomSheet<Content>: View
         self.dismissHandler = dismissHandler
         self.content = content
         
-        _offset = .init(initialValue: uiModel.layout.sizes._current.size.heights.idealOffset)
+        _offset = State(initialValue: uiModel.layout.sizes._current.size.heights.idealOffset)
     }
 
     // MARK: Body
