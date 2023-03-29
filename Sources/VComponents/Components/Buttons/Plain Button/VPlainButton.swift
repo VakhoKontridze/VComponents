@@ -23,11 +23,10 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable)
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VPlainButtonUIModel
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState { baseButtonState }
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VPlainButtonInternalState { baseButtonState }
     private let action: () -> Void
     private let label: VPlainButtonLabel<Label>
 
@@ -92,30 +91,33 @@ public struct VPlainButton<Label>: View where Label: View {
                 let internalState: VPlainButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
-                    .padding(uiModel.layout.hitBox)
             }
         )
     }
     
-    @ViewBuilder private func buttonLabel(
+    private func buttonLabel(
         internalState: VPlainButtonInternalState
     ) -> some View {
-        switch label {
-        case .title(let title):
-            labelTitleComponent(internalState: internalState, title: title)
-            
-        case .icon(let icon):
-            labelIconComponent(internalState: internalState, icon: icon)
-            
-        case .iconTitle(let icon, let title):
-            HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
-                labelIconComponent(internalState: internalState, icon: icon)
+        Group(content: {
+            switch label {
+            case .title(let title):
                 labelTitleComponent(internalState: internalState, title: title)
-            })
-            
-        case .label(let label):
-            label(internalState)
-        }
+                
+            case .icon(let icon):
+                labelIconComponent(internalState: internalState, icon: icon)
+                
+            case .iconTitle(let icon, let title):
+                HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
+                    labelIconComponent(internalState: internalState, icon: icon)
+                    labelTitleComponent(internalState: internalState, title: title)
+                })
+                
+            case .label(let label):
+                label(internalState)
+            }
+        })
+            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
+            .padding(uiModel.layout.hitBox)
     }
     
     private func labelTitleComponent(
@@ -145,7 +147,6 @@ public struct VPlainButton<Label>: View where Label: View {
 
 // MARK: - Preview
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 struct VPlainButton_Previews: PreviewProvider {
     // Configuration
     private static var colorScheme: ColorScheme { .light }
@@ -176,74 +177,84 @@ struct VPlainButton_Previews: PreviewProvider {
     
     private struct StatesPreview: View {
         var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Enabled",
-                    content: {
-                        VPlainButton(
-                            action: {},
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed",
-                    content: {
-                        VPlainButton(
-                            uiModel: {
-                                var uiModel: VPlainButtonUIModel = .init()
-                                uiModel.colors.title.enabled = uiModel.colors.title.pressed
-                                return uiModel
-                            }(),
-                            action: {},
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VPlainButton(
-                            action: {},
-                            title: title
-                        )
-                            .disabled(true)
-                    }
-                )
-                
-                PreviewSectionHeader("Native")
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Enabled",
-                    content: {
-                        Button(
-                            title,
-                            action: {}
-                        )
-                            .buttonStyle(.plain)
-                            .foregroundColor(ColorBook.accentBlue)
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        Button(
-                            title,
-                            action: {}
-                        )
-                            .buttonStyle(.plain)
-                            .disabled(true)
-                    }
-                )
-            })
+            PreviewContainer(
+                embeddedInScrollViewOnPlatforms: [.watchOS],
+                content: {
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Enabled",
+                        content: {
+                            VPlainButton(
+                                action: {},
+                                title: title
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Pressed",
+                        content: {
+                            VPlainButton(
+                                uiModel: {
+                                    var uiModel: VPlainButtonUIModel = .init()
+                                    uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                    return uiModel
+                                }(),
+                                action: {},
+                                title: title
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Disabled",
+                        content: {
+                            VPlainButton(
+                                action: {},
+                                title: title
+                            )
+                                .disabled(true)
+                        }
+                    )
+                    
+                    PreviewSectionHeader("Native")
+                    
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Enabled",
+                        content: {
+                            Button(
+                                title,
+                                action: {}
+                            )
+                                .buttonStyle(.plain)
+                                .foregroundColor(ColorBook.accentBlue)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Disabled",
+                        content: {
+                            Button(
+                                title,
+                                action: {}
+                            )
+                                .buttonStyle(.plain)
+                                .disabled(true)
+                                .modifier({
+#if os(watchOS)
+                                    $0.foregroundColor(ColorBook.controlLayerBlue)
+#else
+                                    $0
+#endif
+                                })
+                        }
+                    )
+                }
+            )
         }
     }
 }

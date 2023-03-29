@@ -23,6 +23,14 @@ struct PreviewSectionHeader: View {
             VStack(content: Divider.init)
             
             Text(title)
+                .modifier({
+#if os(watchOS)
+                    $0
+                        .foregroundColor(ColorBook.primary)
+#else
+                    $0
+#endif
+                })
                 .font(.footnote)
             
             VStack(content: Divider.init)

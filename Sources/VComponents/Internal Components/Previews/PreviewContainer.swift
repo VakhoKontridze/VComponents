@@ -25,6 +25,16 @@ struct PreviewContainer<Content>: View where Content: View {
         self.content = content
     }
     
+    init(
+        embeddedInScrollViewOnPlatforms platforms: [PreviewPlatform],
+        hasLayer: Bool = true,
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.embeddedInScrollView = platforms.contains(.currentDevice)
+        self.hasLayer = hasLayer
+        self.content = content
+    }
+    
     // MARK: Body
     var body: some View {
         ZStack(content: {
@@ -56,6 +66,29 @@ struct PreviewContainer<Content>: View where Content: View {
 #endif
                 })
         })
+    }
+}
+
+// MARK: - Helpers
+extension PreviewPlatform {
+    static var currentDevice: Self {
+#if os(iOS)
+        return .ios
+#elseif os(macOS)
+        return .macOS
+#elseif os(tvOS)
+        return .tvOS
+#elseif os(watchOS)
+        return .watchOS
+#endif
+    }
+}
+
+extension Axis {
+    static func horizontal(
+        butVerticalOnPlatforms platforms: [PreviewPlatform]
+    ) -> Self {
+        platforms.contains(.currentDevice) ? .vertical : .horizontal
     }
 }
 

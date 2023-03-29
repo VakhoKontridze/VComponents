@@ -37,9 +37,9 @@ public struct VRoundedButtonUIModel {
         /// Button dimension. Set to `56` for `iOS`, and `28` for `macOS`.
         public var dimension: CGFloat = {
 #if os(iOS)
-            return GlobalUIModel.Buttons.dimensionLarge
-#elseif canImport(AppKit)
-            return 28
+            return GlobalUIModel.Buttons.dimensionIOSLarge
+#elseif os(macOS)
+            return GlobalUIModel.Buttons.dimensionMacOSLarge
 #else
             fatalError() // Not supported
 #endif
@@ -48,9 +48,9 @@ public struct VRoundedButtonUIModel {
         /// Corner radius. Set to `16` for `iOS`, and `6` for `macOS`.
         public var cornerRadius: CGFloat = {
 #if os(iOS)
-            return GlobalUIModel.Buttons.cornerRadiusSmall
-#elseif canImport(AppKit)
-            return 6
+            return GlobalUIModel.Buttons.cornerRadiusIOSSmall
+#elseif os(macOS)
+            return GlobalUIModel.Buttons.cornerRadiusMacOSSmall
 #else
             fatalError() // Not supported
 #endif
@@ -71,7 +71,7 @@ public struct VRoundedButtonUIModel {
         public var iconSize: CGSize = {
 #if os(iOS)
             return .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .init(dimension: 14)
 #else
             fatalError() // Not supported
@@ -144,7 +144,7 @@ public struct VRoundedButtonUIModel {
         public var title: Font = {
 #if os(iOS)
             return .system(size: 15, weight: .semibold)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .system(size: 13)
 #else
             fatalError() // Not supported

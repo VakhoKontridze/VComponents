@@ -345,7 +345,7 @@ public struct VSegmentedPicker<Data, Content>: View
     // MARK: State Indication
     private var indicatorScale: CGFloat {
         switch selectedIndex {
-        case pressedIndex: return uiModel.layout.indicatorPressedScale
+        case pressedIndex: return uiModel.animations.indicatorPressedScale
         case _: return 1
         }
     }

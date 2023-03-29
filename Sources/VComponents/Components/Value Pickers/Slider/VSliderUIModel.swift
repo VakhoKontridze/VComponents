@@ -62,7 +62,7 @@ public struct VSliderUIModel {
         public var thumbBorderWidth: CGFloat = {
 #if os(iOS)
             return 0
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return 1/MultiplatformConstants.screenScale
 #else
             fatalError() // Not supported
@@ -103,7 +103,7 @@ public struct VSliderUIModel {
         public var thumbBorder: StateColors = {
 #if os(iOS)
             return .clearColors
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .init(
                 enabled: ColorBook.borderGray,
                 disabled: ColorBook.borderGrayDisabled

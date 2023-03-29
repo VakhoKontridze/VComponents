@@ -159,106 +159,109 @@ struct VListRow_Previews: PreviewProvider {
     
     private struct SeparatorsPreview: View {
         var body: some View {
-            PreviewContainer(embeddedInScrollView: true, content: {
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "None",
-                    content: {
-                        List(content: {
-                            ForEach(titles, id: \.self, content: { title in
-                                VListRow(
-                                    uiModel: {
-                                        var uiModel: VListRowUIModel = .init()
-                                        uiModel.layout.separatorType = .none
-                                        return uiModel
-                                    }(),
-                                    content: { Text(title) }
-                                )
+            PreviewContainer(
+                embeddedInScrollView: true,
+                content: {
+                    PreviewRow(
+                        axis: .vertical,
+                        paddedEdges: .vertical,
+                        title: "None",
+                        content: {
+                            List(content: {
+                                ForEach(titles, id: \.self, content: { title in
+                                    VListRow(
+                                        uiModel: {
+                                            var uiModel: VListRowUIModel = .init()
+                                            uiModel.layout.separatorType = .none
+                                            return uiModel
+                                        }(),
+                                        content: { Text(title) }
+                                    )
+                                })
                             })
-                        })
-                            .vListStyle()
-                            .frame(height: 120)
-                            .blocksHitTesting()
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "No First",
-                    content: {
-                        List(content: {
-                            ForEach(titles, id: \.self, content: { title in
-                                VListRow(
-                                    uiModel: .noFirstSeparator(),
-                                    content: { Text(title) }
-                                )
+                                .vListStyle()
+                                .frame(height: 120)
+                                .blocksHitTesting()
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        paddedEdges: .vertical,
+                        title: "No First",
+                        content: {
+                            List(content: {
+                                ForEach(titles, id: \.self, content: { title in
+                                    VListRow(
+                                        uiModel: .noFirstSeparator(),
+                                        content: { Text(title) }
+                                    )
+                                })
                             })
-                        })
-                            .vListStyle()
-                            .frame(height: 120)
-                            .blocksHitTesting()
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "No Last",
-                    content: {
-                        List(content: {
-                            ForEach(titles, id: \.self, content: { title in
-                                VListRow(
-                                    uiModel: .noLastSeparator(),
-                                    content: { Text(title) }
-                                )
+                                .vListStyle()
+                                .frame(height: 120)
+                                .blocksHitTesting()
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        paddedEdges: .vertical,
+                        title: "No Last",
+                        content: {
+                            List(content: {
+                                ForEach(titles, id: \.self, content: { title in
+                                    VListRow(
+                                        uiModel: .noLastSeparator(),
+                                        content: { Text(title) }
+                                    )
+                                })
                             })
-                        })
-                            .vListStyle()
-                            .frame(height: 120)
-                            .blocksHitTesting()
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "No First and Last",
-                    content: {
-                        List(content: {
-                            ForEach(titles.enumeratedArray(), id: \.element, content: { (i, title) in
-                                VListRow(
-                                    uiModel: .noFirstAndLastSeparators(isFirst: i == 0),
-                                    content: { Text(title) }
-                                )
+                                .vListStyle()
+                                .frame(height: 120)
+                                .blocksHitTesting()
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        paddedEdges: .vertical,
+                        title: "No First and Last",
+                        content: {
+                            List(content: {
+                                ForEach(titles.enumeratedArray(), id: \.element, content: { (i, title) in
+                                    VListRow(
+                                        uiModel: .noFirstAndLastSeparators(isFirst: i == 0),
+                                        content: { Text(title) }
+                                    )
+                                })
                             })
-                        })
-                            .vListStyle()
-                            .frame(height: 120)
-                            .blocksHitTesting()
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    paddedEdges: .vertical,
-                    title: "Row-Enclosing",
-                    content: {
-                        List(content: {
-                            ForEach(titles.enumeratedArray(), id: \.element, content: { (i, title) in
-                                VListRow(
-                                    uiModel: .noFirstAndLastSeparators(isFirst: i == 0),
-                                    content: { Text(title) }
-                                )
+                                .vListStyle()
+                                .frame(height: 120)
+                                .blocksHitTesting()
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        paddedEdges: .vertical,
+                        title: "Row-Enclosing",
+                        content: {
+                            List(content: {
+                                ForEach(titles.enumeratedArray(), id: \.element, content: { (i, title) in
+                                    VListRow(
+                                        uiModel: .noFirstAndLastSeparators(isFirst: i == 0),
+                                        content: { Text(title) }
+                                    )
+                                })
                             })
-                        })
-                            .vListStyle()
-                            .frame(height: 120)
-                            .blocksHitTesting()
-                    }
-                )
-            })
+                                .vListStyle()
+                                .frame(height: 120)
+                                .blocksHitTesting()
+                        }
+                    )
+                }
+            )
         }
     }
 }

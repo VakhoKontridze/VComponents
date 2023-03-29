@@ -38,7 +38,7 @@ public struct VSegmentedPickerUIModel {
         public var height: CGFloat = {
 #if os(iOS)
             return 31
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return 22
 #else
             fatalError() // Not supported
@@ -54,7 +54,7 @@ public struct VSegmentedPickerUIModel {
         public var borderWidth: CGFloat = {
 #if os(iOS)
             return 0
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return 1/MultiplatformConstants.screenScale
 #else
             fatalError() // Not supported
@@ -68,15 +68,12 @@ public struct VSegmentedPickerUIModel {
         public var indicatorMargin: CGFloat = {
 #if os(iOS)
             return 2
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return 1
 #else
             fatalError() // Not supported
 #endif
         }()
-        
-        /// Scale by which selection indicator changes on press. Set to `0.95`.
-        public var indicatorPressedScale: CGFloat = 0.95
         
         /// Indicator shadow radius. Set to `1`.
         public var indicatorShadowRadius: CGFloat = 1
@@ -85,7 +82,7 @@ public struct VSegmentedPickerUIModel {
         public var indicatorShadowOffset: CGSize = {
 #if os(iOS)
             return .init(dimension: 1)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .init(width: 0, height: 1)
 #else
             fatalError() // Not supported
@@ -114,7 +111,7 @@ public struct VSegmentedPickerUIModel {
         public var dividerSize: CGSize = {
 #if os(iOS)
             return .init(width: 1, height: 19)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .init(width: 1, height: 12)
 #else
             fatalError() // Not supported
@@ -140,7 +137,7 @@ public struct VSegmentedPickerUIModel {
         public var border: StateColors = {
 #if os(iOS)
             return .clearColors
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .init(
                 enabled: ColorBook.borderGray,
                 disabled: ColorBook.borderGrayDisabled
@@ -217,7 +214,7 @@ public struct VSegmentedPickerUIModel {
         public var rows: Font = {
 #if os(iOS)
             return .system(size: 14, weight: .medium)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .system(size: 13)
 #else
             fatalError() // Not supported
@@ -235,6 +232,9 @@ public struct VSegmentedPickerUIModel {
         // MARK: Properties
         /// State change animation. Set to `easeInOut` with duration `0.2`.
         public var selection: Animation? = .easeInOut(duration: 0.2)
+        
+        /// Ratio to which selection indicator scales down on press. Set to `0.95`.
+        public var indicatorPressedScale: CGFloat = 0.95
         
         // MARK: Initializers
         /// Initializes UI model with default values.

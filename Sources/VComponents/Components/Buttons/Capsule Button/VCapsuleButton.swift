@@ -23,7 +23,6 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VCapsuleButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VCapsuleButtonUIModel
@@ -107,6 +106,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
+            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
             .padding(uiModel.layout.labelMargins)
     }
     
@@ -139,6 +139,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
+            .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
     }
     
     @ViewBuilder private func border(
@@ -147,13 +148,13 @@ public struct VCapsuleButton<Label>: View where Label: View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+                .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
         }
     }
 }
 
 // MARK: - Preview
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 struct VCapsuleButton_Previews: PreviewProvider {
     // Configuration
     private static var colorScheme: ColorScheme { .light }
@@ -184,47 +185,64 @@ struct VCapsuleButton_Previews: PreviewProvider {
     
     private struct StatesPreview: View {
         var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Enabled",
-                    content: {
-                        VCapsuleButton(
-                            action: {},
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed",
-                    content: {
-                        VCapsuleButton(
-                            uiModel: {
-                                var uiModel: VCapsuleButtonUIModel = .init()
-                                uiModel.colors.background.enabled = uiModel.colors.background.pressed
-                                uiModel.colors.title.enabled = uiModel.colors.title.pressed
-                                return uiModel
-                            }(),
-                            action: {},
-                            title: title
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VCapsuleButton(
-                            action: {},
-                            title: title
-                        )
-                            .disabled(true)
-                    }
-                )
-            })
+            PreviewContainer(
+                embeddedInScrollViewOnPlatforms: [.watchOS],
+                content: {
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Enabled",
+                        content: {
+                            VCapsuleButton(
+                                action: {},
+                                title: title
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Pressed",
+                        content: {
+                            VCapsuleButton(
+                                uiModel: {
+                                    var uiModel: VCapsuleButtonUIModel = .init()
+                                    uiModel.colors.background.enabled = uiModel.colors.background.pressed
+                                    uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                    return uiModel
+                                }(),
+                                action: {},
+                                title: title
+                            )
+                        }
+                    )
+
+                    PreviewRow(
+                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        title: "Disabled",
+                        content: {
+                            VCapsuleButton(
+                                action: {},
+                                title: title
+                            )
+                                .disabled(true)
+                        }
+                    )
+                    
+#if os(watchOS)
+          
+                    PreviewSectionHeader("Native (Sort Of)")
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Enabled",
+                        content: {
+                            Button(title, action: {})
+                                .background(Color.gray)
+                        }
+                    )
+#endif
+                }
+            )
         }
     }
 }

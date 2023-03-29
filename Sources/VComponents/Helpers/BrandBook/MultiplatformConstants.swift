@@ -9,7 +9,7 @@ import SwiftUI
 
 #if canImport(UIKit)
 import UIKit
-#elseif canImport(AppKit)
+#elseif os(macOS)
 import AppKit
 #endif
 
@@ -21,7 +21,7 @@ struct MultiplatformConstants {
         return UIScreen.main.bounds.size
 #elseif canImport(UIKit) && os(watchOS)
         fatalError() // Not supported
-#elseif canImport(AppKit)
+#elseif os(macOS)
         fatalError() // Not supported
 #endif
     }
@@ -36,7 +36,7 @@ struct MultiplatformConstants {
         )
 #elseif canImport(UIKit) && os(watchOS)
         fatalError() // Not supported
-#elseif canImport(AppKit)
+#elseif os(macOS)
         fatalError() // Not supported
 #endif
     }
@@ -46,7 +46,7 @@ struct MultiplatformConstants {
         return UIScreen.main.scale
 #elseif canImport(UIKit) && os(watchOS)
         return WKInterfaceDevice.current().screenScale
-#elseif canImport(AppKit)
+#elseif os(macOS)
         return (NSScreen.main ?? .init()).backingScaleFactor
 #endif
     }()

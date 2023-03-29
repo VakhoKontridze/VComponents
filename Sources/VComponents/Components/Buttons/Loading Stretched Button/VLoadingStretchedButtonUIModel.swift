@@ -35,10 +35,10 @@ public struct VLoadingStretchedButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Button height. Set to `56`.
-        public var height: CGFloat = GlobalUIModel.Buttons.dimensionLarge
+        public var height: CGFloat = GlobalUIModel.Buttons.dimensionIOSLarge
         
         /// Corner radius. Set to `16`.
-        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusSmall
+        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusIOSSmall
         
         /// Border width. Set to `0`.
         ///

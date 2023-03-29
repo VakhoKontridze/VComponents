@@ -38,7 +38,7 @@ public struct VRadioButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Radio button dimension. Set to `16.`
-        public var dimension: CGFloat = GlobalUIModel.StatePickers.dimensionSmall
+        public var dimension: CGFloat = GlobalUIModel.StatePickers.dimension
         
         /// Radio button corner radius. Set to `1.`
         public var borderWidth: CGFloat = 1

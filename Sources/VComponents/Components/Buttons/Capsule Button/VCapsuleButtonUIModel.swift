@@ -11,7 +11,6 @@ import VCore
 // MARK: - V Capsule Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 public struct VCapsuleButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -34,8 +33,18 @@ public struct VCapsuleButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button height. Set to `32`.
-        public var height: CGFloat = GlobalUIModel.Buttons.dimensionSmall
+        /// Button height. Set to `32` for `iOS`, `32` for `macOS`, and `48` for `watchOS`.
+        public var height: CGFloat = {
+#if os(iOS)
+            return GlobalUIModel.Buttons.dimensionIOSSmall
+#elseif os(macOS)
+            return GlobalUIModel.Buttons.dimensionMacOSLarge
+#elseif os(watchOS)
+            return GlobalUIModel.Buttons.dimensionWatchOS
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         var cornerRadius: CGFloat { height / 2 }
         
@@ -120,12 +129,14 @@ public struct VCapsuleButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `semibold`-`16` for `iOS`, and `medium`-`14` for `macOS`.
+        /// Title font. Set to `system` `semibold`-`16` for `iOS`, `medium`-`14` for `macOS`, and `medium`-`17` for `watchOS`.
         public var title: Font = {
 #if os(iOS)
             return .system(size: 16, weight: .semibold)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .system(size: 14, weight: .medium)
+#elseif os(watchOS)
+            return .system(size: 17, weight: .medium)
 #else
             fatalError() // Not supported
 #endif
@@ -142,6 +153,12 @@ public struct VCapsuleButtonUIModel {
         // MARK: Properties
         /// Indicates if button animates state change. Defaults to `true`.
         public var animatesStateChange: Bool = true
+        
+        /// Ratio to which label scales down on press. Set to `0.98` for `watchOS`, and `1` for other platforms.
+        public var backgroundPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+        
+        /// Ratio to which label scales down on press. Set to `0.98` for `watchOS`, and `1` for other platforms.
+        public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
         // MARK: Initializers
         /// Initializes UI model with default values.

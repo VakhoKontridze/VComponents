@@ -190,7 +190,7 @@ public struct VToastUIModel {
 #if canImport(UIKit)
         /// Font.
         public typealias _Font = UIFont
-#elseif canImport(AppKit)
+#elseif os(macOS)
         /// Font.
         public typealias _Font = NSFont
 #endif

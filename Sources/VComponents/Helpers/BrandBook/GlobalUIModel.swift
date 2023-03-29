@@ -88,11 +88,19 @@ struct GlobalUIModel {
     // MARK: Buttons
     struct Buttons {
         // MARK: Properties
-        static var dimensionSmall: CGFloat { 32 }
-        static var dimensionLarge: CGFloat { 56 }
+        static var dimensionIOSSmall: CGFloat { 32 }
+        static var dimensionIOSLarge: CGFloat { 56 }
         
-        static var cornerRadiusSmall: CGFloat { 16 }
-        static var cornerRadiusLarge: CGFloat { 24 }
+        static var dimensionMacOSSmall: CGFloat { 28 }
+        static var dimensionMacOSLarge: CGFloat { 32 }
+        
+        static var dimensionWatchOS: CGFloat { 48 }
+        
+        static var cornerRadiusIOSSmall: CGFloat { 16 }
+        static var cornerRadiusIOSLarge: CGFloat { 24 }
+        
+        static var cornerRadiusMacOSSmall: CGFloat { 6 }
+        static var cornerRadiusMacOSLarge: CGFloat { 16 }
         
         static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 15, vertical: 3) }
         static var labelMarginsRounded: EdgeInsets_HorizontalVertical { .init(3) }
@@ -107,6 +115,14 @@ struct GlobalUIModel {
         
         static var iconTitleSpacing: CGFloat { 8 }
         
+        static var pressedScale: CGFloat = {
+#if os(watchOS)
+            return 0.98
+#else
+            return 1
+#endif
+        }()
+        
         // MARK: Initializers
         private init() {}
     }
@@ -114,7 +130,7 @@ struct GlobalUIModel {
     // MARK: State Pickers
     struct StatePickers {
         // MARK: Properties
-        static var dimensionSmall: CGFloat { 16 }
+        static var dimension: CGFloat { 16 }
         
         static var statePickerLabelSpacing: CGFloat { 5 }
         
@@ -128,7 +144,7 @@ struct GlobalUIModel {
         static var font: Font {
 #if os(iOS)
             return .system(size: 15)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .system(size: 13)
 #else
             fatalError() // Not supported
@@ -138,7 +154,7 @@ struct GlobalUIModel {
         static var titleColor: Color {
 #if os(iOS)
             return ColorBook.primary
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return ColorBook.primary.opacity(0.85) // Similar to `NSColor.controlTextColor`
 #else
             fatalError() // Not supported
@@ -148,7 +164,7 @@ struct GlobalUIModel {
         static var titleColorDisabled: Color {
 #if os(iOS)
             return ColorBook.primaryPressedDisabled
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return ColorBook.primaryPressedDisabled.opacity(0.85) // Similar to `NSColor.controlTextColor`
 #else
             fatalError() // Not supported
@@ -169,7 +185,7 @@ struct GlobalUIModel {
         static var sliderThumbShadowRadius: CGFloat {
 #if os(iOS)
             return 2
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return 1
 #else
             fatalError() // Not supported
@@ -178,7 +194,7 @@ struct GlobalUIModel {
         static var sliderThumbShadowOffset: CGSize {
 #if os(iOS)
             return .init(width: 0, height: 2)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .init(width: 0, height: 1)
 #else
             fatalError() // Not supported

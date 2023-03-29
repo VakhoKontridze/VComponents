@@ -38,7 +38,7 @@ public struct VCheckBoxUIModel {
     public struct Layout {
         // MARK: Properties
         /// Checkbox dimension. Set to `16.`
-        public var dimension: CGFloat = GlobalUIModel.StatePickers.dimensionSmall
+        public var dimension: CGFloat = GlobalUIModel.StatePickers.dimension
         
         /// Checkbox corner radius. Set to `5.`
         public var cornerRadius: CGFloat = 4

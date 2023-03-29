@@ -50,7 +50,7 @@ public struct VRangeSliderUIModel {
         public var thumbBorderWidth: CGFloat = {
 #if os(iOS)
             return 0
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return 1/MultiplatformConstants.screenScale
 #else
             fatalError() // Not supported

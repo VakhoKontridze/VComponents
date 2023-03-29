@@ -11,7 +11,6 @@ import VCore
 // MARK: - V Plain Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 public struct VPlainButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -101,12 +100,14 @@ public struct VPlainButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `medium`-`15` for `iOS`, and `13` for `macOS`.
+        /// Title font. Set to `system` `medium`-`15` for `iOS`, `13` for `macOS`, and `17` for `watchOS`.
         public var title: Font = {
 #if os(iOS)
             return .system(size: 15, weight: .medium)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .system(size: 13)
+#elseif os(watchOS)
+            return .system(size: 17)
 #else
             fatalError() // Not supported
 #endif
@@ -123,6 +124,9 @@ public struct VPlainButtonUIModel {
         // MARK: Properties
         /// Indicates if button animates state change. Defaults to `true`.
         public var animatesStateChange: Bool = true
+        
+        /// Ratio to which label scales down on press. Set to `0.98` for `watchOS`, and `1` for other platforms.
+        public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
         // MARK: Initializers
         /// Initializes UI model with default values.

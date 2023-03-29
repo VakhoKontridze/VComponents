@@ -41,7 +41,7 @@ public struct VToggleUIModel {
         public var size: CGSize = {
 #if os(iOS)
             return .init(width: 51, height: 31)
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return .init(width: 38, height: 22)
 #else
             fatalError() // Not supported
@@ -54,7 +54,7 @@ public struct VToggleUIModel {
         public var thumbDimension: CGFloat = {
 #if os(iOS)
             return 27
-#elseif canImport(AppKit)
+#elseif os(macOS)
             return 20
 #else
             fatalError() // Not supported

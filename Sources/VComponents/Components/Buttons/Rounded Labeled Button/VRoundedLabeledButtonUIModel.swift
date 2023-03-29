@@ -36,10 +36,10 @@ public struct VRoundedLabeledButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Rectangle dimension. Set to `56`.
-        public var roundedRectangleDimension: CGFloat = GlobalUIModel.Buttons.dimensionLarge
+        public var roundedRectangleDimension: CGFloat = GlobalUIModel.Buttons.dimensionIOSLarge
         
         /// Rectangle corner radius. Set to `24`.
-        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusLarge
+        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusIOSLarge
         
         /// Rectangle border width. Set to `0`.
         ///
