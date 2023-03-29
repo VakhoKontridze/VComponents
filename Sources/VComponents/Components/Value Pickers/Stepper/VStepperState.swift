@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 2/2/21.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Stepper Internal State

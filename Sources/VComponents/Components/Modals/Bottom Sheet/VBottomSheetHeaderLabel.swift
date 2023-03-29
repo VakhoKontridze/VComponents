@@ -12,7 +12,30 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VBottomSheetHeaderLabel = GenericContent_EmptyTitleContent
+enum VBottomSheetHeaderLabel<Label>: Equatable where Label: View {
+    // MARK: Cases
+    case empty
+    case title(title: String)
+    case label(label: () -> Label)
+    
+    // MARK: Properties
+    var hasLabel: Bool {
+        switch self {
+        case .empty: return false
+        case .title: return true
+        case .label: return true
+        }
+    }
+    
+    // MARK: Equatable
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.empty, .empty): return true
+        case (.title(let lhs), .title(let rhs)): return lhs == rhs
+        default: return false
+        }
+    }
+}
 
 // MARK: - V Bottom Sheet Header Label Extension
 @available(iOS 15.0, *)
@@ -38,7 +61,7 @@ extension View {
         self
             .preference(
                 key: VBottomSheetHeaderLabelPreferenceKey.self,
-                value: .content(content: { .init(label()) })
+                value: .label(label: { .init(label()) })
             )
     }
 }
@@ -51,7 +74,10 @@ extension View {
 struct VBottomSheetHeaderLabelPreferenceKey: PreferenceKey {
     static var defaultValue: VBottomSheetHeaderLabel<AnyView> = .empty
     
-    static func reduce(value: inout GenericContent_EmptyTitleContent<AnyView>, nextValue: () -> GenericContent_EmptyTitleContent<AnyView>) {
+    static func reduce(
+        value: inout VBottomSheetHeaderLabel<AnyView>,
+        nextValue: () -> VBottomSheetHeaderLabel<AnyView>
+    ) {
         value = nextValue()
     }
 }

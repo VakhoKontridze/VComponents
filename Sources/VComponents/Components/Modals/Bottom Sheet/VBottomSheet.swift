@@ -25,7 +25,7 @@ struct VBottomSheet<Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    @State private var headerLabel: GenericContent_EmptyTitleContent<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
+    @State private var headerLabel: VBottomSheetHeaderLabel<AnyView> = VBottomSheetHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -174,7 +174,7 @@ struct VBottomSheet<Content>: View
                             text: title
                         )
                         
-                    case .content(let label):
+                    case .label(let label):
                         label()
                     }
                 })

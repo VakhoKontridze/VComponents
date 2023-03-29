@@ -71,11 +71,11 @@ public struct VToggle<Label>: View where Label: View {
     public init(
         uiModel: VToggleUIModel = .init(),
         state: Binding<VToggleState>,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder label: @escaping (VToggleInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .content(content: label)
+        self.label = .label(label: label)
     }
     
     // MARK: Initializers - Bool
@@ -108,11 +108,11 @@ public struct VToggle<Label>: View where Label: View {
     public init(
         uiModel: VToggleUIModel = .init(),
         isOn: Binding<Bool>,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder label: @escaping (VToggleInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self._state = .init(isOn: isOn)
-        self.label = .content(content: label)
+        self.label = .label(label: label)
     }
 
     // MARK: Body
@@ -140,15 +140,14 @@ public struct VToggle<Label>: View where Label: View {
                         .disabled(!labelIsEnabled)
                 })
                 
-            case .content(let label):
+            case .label(let label):
                 HStack(spacing: 0, content: {
                     toggle
                     
                     spacer
                     
                     SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        label()
-                            .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
+                        label(internalState)
                     })
                         .disabled(!labelIsEnabled)
                 })

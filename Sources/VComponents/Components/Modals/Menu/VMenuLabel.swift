@@ -5,10 +5,13 @@
 //  Created by Vakhtang Kontridze on 01.07.22.
 //
 
-import Foundation
+import SwiftUI
 
 // MARK: - V Menu Label
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VMenuLabel = GenericContent_TitleContent
+enum VMenuLabel<Content> where Content: View {
+    case title(title: String)
+    case content(content: () -> Content)
+}

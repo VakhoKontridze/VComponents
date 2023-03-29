@@ -5,10 +5,11 @@
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Rounded Button Internal State
+/// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VRoundedButtonInternalState = GenericState_EnabledPressedDisabled
+public typealias VRoundedButtonInternalState = GenericState_EnabledPressedDisabled

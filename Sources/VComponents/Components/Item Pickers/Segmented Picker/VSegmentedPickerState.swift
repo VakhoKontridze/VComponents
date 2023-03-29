@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/7/21.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Segmented Picker State
@@ -14,6 +14,7 @@ import VCore
 typealias VSegmentedPickerInternalState = GenericState_EnabledDisabled
 
 // MARK: - V Segmented Picker Row State
+/// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VSegmentedPickerRowInternalState = GenericState_EnabledPressedDisabled
+public typealias VSegmentedPickerRowInternalState = GenericState_EnabledPressedDisabled

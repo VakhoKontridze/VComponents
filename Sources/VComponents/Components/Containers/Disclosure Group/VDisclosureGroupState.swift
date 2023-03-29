@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/11/21.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Disclosure Group State
@@ -17,8 +17,9 @@ import VCore
 public typealias VDisclosureGroupState = GenericState_CollapsedExpanded
 
 // MARK: - V Disclosure Group Internal State
+/// Enum that represents state, such as `collapsed`, `expanded`, or `disabled`.
 @available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VDisclosureGroupInternalState = GenericState_CollapsedExpandedDisabled
+public typealias VDisclosureGroupInternalState = GenericState_CollapsedExpandedDisabled

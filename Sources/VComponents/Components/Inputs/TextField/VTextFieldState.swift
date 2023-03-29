@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/19/21.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Text Field Internal State

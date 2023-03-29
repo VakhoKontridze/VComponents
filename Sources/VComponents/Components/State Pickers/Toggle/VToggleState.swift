@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 19.12.20.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Toggle State
@@ -15,6 +15,7 @@ import VCore
 public typealias VToggleState = GenericState_OffOn
 
 // MARK: - V Toggle Internal State
+/// Enum that represents state, such as `off`, `on`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VToggleInternalState = GenericState_OffOnPressedDisabled
+public typealias VToggleInternalState = GenericState_OffOnPressedDisabled

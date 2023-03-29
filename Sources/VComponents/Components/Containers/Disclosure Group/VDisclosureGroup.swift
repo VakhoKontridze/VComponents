@@ -49,7 +49,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     @Binding private var state: VDisclosureGroupState
     private var internalState: VDisclosureGroupInternalState { .init(isEnabled: isEnabled, isExpanded: state == .expanded) }
     
-    private let headerLabel: VDisclosureGroupLabel<HeaderLabel>
+    private let headerLabel: VDisclosureGroupHeaderLabel<HeaderLabel>
     
     private let content: () -> Content
     
@@ -75,12 +75,12 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
         state: Binding<VDisclosureGroupState>,
-        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
+        @ViewBuilder headerLabel: @escaping (VDisclosureGroupInternalState) -> HeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.headerLabel = .content(content: headerLabel)
+        self.headerLabel = .label(label: headerLabel)
         self.content = content
     }
     
@@ -104,12 +104,12 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
         isExpanded: Binding<Bool>,
-        @ViewBuilder headerLabel: @escaping () -> HeaderLabel,
+        @ViewBuilder headerLabel: @escaping (VDisclosureGroupInternalState) -> HeaderLabel,
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.uiModel = uiModel
         self._state = .init(isExpanded: isExpanded)
-        self.headerLabel = .content(content: headerLabel)
+        self.headerLabel = .label(label: headerLabel)
         self.content = content
     }
 
@@ -146,9 +146,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                         text: title
                     )
                     
-                case .content(let label):
-                    label()
-                        .opacity(uiModel.colors.customHeaderLabelOpacities.value(for: internalState))
+                case .label(let label):
+                    label(internalState)
                 }
             })
                 .frame(maxWidth: .infinity, alignment: .leading)

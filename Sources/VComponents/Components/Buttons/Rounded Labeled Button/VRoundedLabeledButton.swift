@@ -78,12 +78,12 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
         uiModel: VRoundedLabeledButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder label: @escaping (VRoundedLabeledButtonInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self.action = action
         self.icon = icon
-        self.label = .content(content: label)
+        self.label = .label(label: label)
     }
     
     // MARK: Body
@@ -135,9 +135,8 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
                     labelTitleComponent(title: title)
                 })
                 
-            case .content(let label):
-                label()
-                    .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
+            case .label(let label):
+                label(internalState)
             }
         })
             .frame(maxWidth: uiModel.layout.labelWidthMax)

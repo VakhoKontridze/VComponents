@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 01.10.22.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Text View Internal State

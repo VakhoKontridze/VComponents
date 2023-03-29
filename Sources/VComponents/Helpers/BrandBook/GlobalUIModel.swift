@@ -81,9 +81,6 @@ struct GlobalUIModel {
         
         static var grabberColor: Color { .init(module: "Grabber") }
         
-        // MARK: Properties - Private
-        fileprivate static var customLabelOpacitySpecialState: CGFloat { 0.3 }
-        
         // MARK: Initializers
         private init() {}
     }
@@ -107,8 +104,6 @@ struct GlobalUIModel {
         static var iconDimensionSmall: CGFloat { 16 }
         static var iconDimensionMedium: CGFloat { 20 }
         static var iconDimensionLarge: CGFloat { 24 }
-        
-        static var customLabelOpacityPressedLoadingDisabled: CGFloat { Common.customLabelOpacitySpecialState }
         
         static var iconTitleSpacing: CGFloat { 8 }
         
@@ -160,18 +155,7 @@ struct GlobalUIModel {
 #endif
         }
         
-        static var customLabelOpacityDisabled: CGFloat { Common.customLabelOpacitySpecialState }
-        
         static var stateChangeAnimation: Animation { .easeIn(duration: 0.1) }
-        
-        // MARK: Initializers
-        private init() {}
-    }
-    
-    // MARK: Item Pickers
-    struct ItemPickers {
-        // MARK: Properties
-        static var customContentOpacityDisabled: CGFloat { Common.customLabelOpacitySpecialState }
         
         // MARK: Initializers
         private init() {}

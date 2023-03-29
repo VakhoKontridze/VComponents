@@ -106,18 +106,6 @@ public struct VLoadingStretchedButtonUIModel {
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities. Set to `1` enabled, `0.3` pressed, `0.3` loading, and `0.3` disabled.
-        ///
-        /// Applicable only when `init` with label is used.
-        /// When using a custom label, it's subviews cannot be configured with individual colors,
-        /// so instead, a general opacity is being applied.
-        public var customLabelOpacities: StateOpacities = .init(
-            enabled: 1,
-            pressed: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled,
-            loading: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled,
-            disabled: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled
-        )
-        
         /// Model for customizing spinner colors.
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Colors = {
             var uiModel: VContinuousSpinnerUIModel.Colors = .init()
@@ -145,8 +133,6 @@ public struct VLoadingStretchedButtonUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title font. Set to `system` `semibold`-`16`.
-        ///
-        /// Only applicable when using `init` with title.
         public var title: Font = .system(size: 16, weight: .semibold)
         
         // MARK: Initializers

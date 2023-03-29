@@ -63,21 +63,9 @@ public struct VWheelPickerUIModel {
         public var background: StateColors = .init(ColorBook.layer)
         
         /// Title content colors.
-        ///
-        /// Only applicable when using `init` with title.
         public var title: StateColors = .init(
             enabled: ColorBook.primary,
             disabled: ColorBook.primaryPressedDisabled
-        )
-        
-        /// Custom content opacities. Set to `1` enabled and `0.3` disabled.
-        ///
-        /// Applicable only when `init` with content is used.
-        /// When using a custom content, it's subviews cannot be configured with individual colors,
-        /// so instead, a general opacity is being applied.
-        public var customContentOpacities: StateOpacities = .init(
-            enabled: 1,
-            disabled: GlobalUIModel.ItemPickers.customContentOpacityDisabled
         )
         
         /// Header colors.
@@ -116,8 +104,6 @@ public struct VWheelPickerUIModel {
         public var footer: Font = GlobalUIModel.Common.footerFont
         
         /// Row font. Set to `system` `medium`-`14`.
-        ///
-        /// Only applicable when using `init` with title.
         public var rows: Font = .system(size: 14, weight: .medium)
         
         // MARK: Initializers

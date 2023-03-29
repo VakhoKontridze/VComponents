@@ -79,7 +79,7 @@ public struct VSegmentedPicker<Data, Content>: View
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, Data.Element) -> Content
     ) {
         self.uiModel = uiModel
         self._selectedIndex = selectedIndex
@@ -119,7 +119,7 @@ public struct VSegmentedPicker<Data, Content>: View
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, Data.Element) -> Content
     )
         where
             Data == Array<SelectionValue>,
@@ -168,7 +168,7 @@ public struct VSegmentedPicker<Data, Content>: View
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         disabledIndexes: Set<Int> = [],
-        @ViewBuilder content: @escaping (T) -> Content
+        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, T) -> Content
     )
         where
             Data == Array<T>,
@@ -307,12 +307,10 @@ public struct VSegmentedPicker<Data, Content>: View
                     SwiftUIBaseButton(
                         onStateChange: { stateChangeHandler(i: i, gestureState: $0) },
                         label: {
-                            content(data[i])
+                            content(rowState(for: i), data[i])
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
-
-                                .opacity(uiModel.colors.customContentOpacities.value(for: rowState(for: i)))
 
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }

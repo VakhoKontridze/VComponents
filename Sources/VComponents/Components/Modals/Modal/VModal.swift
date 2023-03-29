@@ -25,7 +25,7 @@ struct VModal<Content>: View
     private let presentHandler: (() -> Void)?
     private let dismissHandler: (() -> Void)?
     
-    @State private var headerLabel: GenericContent_EmptyTitleContent<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
+    @State private var headerLabel: VModalHeaderLabel<AnyView> = VModalHeaderLabelPreferenceKey.defaultValue
     private let content: () -> Content
     
     private var hasHeader: Bool { headerLabel.hasLabel || uiModel.misc.dismissType.hasButton }
@@ -123,7 +123,7 @@ struct VModal<Content>: View
                             text: title
                         )
                         
-                    case .content(let label):
+                    case .label(let label):
                         label()
                     }
                 })

@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/19/21.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Radio Button State
@@ -15,6 +15,7 @@ import VCore
 public typealias VRadioButtonState = GenericState_OffOn
 
 // MARK: - V Radio Button Internal State
+/// Enum that represents state, such as `off`, `on`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VRadioButtonInternalState = GenericState_OffOnPressedDisabled
+public typealias VRadioButtonInternalState = GenericState_OffOnPressedDisabled

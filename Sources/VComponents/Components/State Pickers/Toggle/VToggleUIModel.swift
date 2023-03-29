@@ -107,19 +107,6 @@ public struct VToggleUIModel {
             disabled: GlobalUIModel.StatePickers.titleColorDisabled
         )
         
-        /// Custom label opacities. Set to `1` off, `1` on, `1` pressed off, `1` pressed on, and `0.3` disabled.
-        ///
-        /// Applicable only when `init` with label is used.
-        /// When using a custom label, it's subviews cannot be configured with individual colors,
-        /// so instead, a general opacity is being applied.
-        public var customLabelOpacities: StateOpacities = .init(
-            off: 1,
-            on: 1,
-            pressedOff: 1,
-            pressedOn: 1,
-            disabled: GlobalUIModel.StatePickers.customLabelOpacityDisabled
-        )
-        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -138,8 +125,6 @@ public struct VToggleUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title font. Set to `system` `15` for `iOS`, and `13` for `macOS`.
-        ///
-        /// Only applicable when using `init` with title.
         public var title: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers

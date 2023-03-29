@@ -5,7 +5,7 @@
 //  Created by Vakhtang Kontridze on 1/12/21.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Range Slider Internal State

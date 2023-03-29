@@ -8,4 +8,7 @@
 import SwiftUI
 
 // MARK: - V Page Indicator Dot Content
-typealias VPageIndicatorDotContent = GenericContent_EmptyContent
+enum VPageIndicatorDotContent<Content> where Content: View {
+    case empty
+    case content(content: () -> Content)
+}

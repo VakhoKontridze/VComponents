@@ -11,4 +11,8 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VLoadingStretchedButtonLabel = GenericContent_TitleIconTitleContent
+enum VLoadingStretchedButtonLabel<Label> where Label: View {
+    case title(title: String)
+    case iconTitle(icon: Image, title: String)
+    case label(label: (VLoadingStretchedButtonInternalState) -> Label)
+}

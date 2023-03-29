@@ -71,11 +71,11 @@ public struct VCheckBox<Label>: View where Label: View {
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         state: Binding<VCheckBoxState>,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder label: @escaping (VCheckBoxInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .content(content: label)
+        self.label = .label(label: label)
     }
     
     // MARK: Initializers - Bool
@@ -108,11 +108,11 @@ public struct VCheckBox<Label>: View where Label: View {
     public init(
         uiModel: VCheckBoxUIModel = .init(),
         isOn: Binding<Bool>,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder label: @escaping (VCheckBoxInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self._state = .init(isOn: isOn)
-        self.label = .content(content: label)
+        self.label = .label(label: label)
     }
 
     // MARK: Body
@@ -140,15 +140,14 @@ public struct VCheckBox<Label>: View where Label: View {
                         .disabled(!labelIsEnabled)
                 })
                 
-            case .content(let label):
+            case .label(let label):
                 HStack(spacing: 0, content: {
                     checkBox
                     
                     spacer
                     
                     SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        label()
-                            .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
+                        label(internalState)
                     })
                         .disabled(!labelIsEnabled)
                 })

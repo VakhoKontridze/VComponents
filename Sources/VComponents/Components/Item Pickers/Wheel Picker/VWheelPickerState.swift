@@ -5,11 +5,12 @@
 //  Created by Vakhtang Kontridze on 1/19/21.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Wheel Picker State
+/// Enum that represents state, such as `enabled`, or `disabled`.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VWheelPickerInternalState = GenericState_EnabledDisabled
+public typealias VWheelPickerInternalState = GenericState_EnabledDisabled

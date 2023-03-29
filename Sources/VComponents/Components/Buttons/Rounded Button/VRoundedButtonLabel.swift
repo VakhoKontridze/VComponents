@@ -10,4 +10,8 @@ import SwiftUI
 // MARK: - V Rounded Button Label
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VRoundedButtonLabel = GenericContent_TitleIconContent
+enum VRoundedButtonLabel<Label> where Label: View {
+    case title(title: String)
+    case icon(icon: Image)
+    case label(label: (VRoundedButtonInternalState) -> Label)
+}

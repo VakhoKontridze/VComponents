@@ -68,7 +68,7 @@ public struct VWheelPicker<Data, Content>: View
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, Data.Element) -> Content
     ) {
         self.uiModel = uiModel
         self._selectedIndex = selectedIndex
@@ -104,7 +104,7 @@ public struct VWheelPicker<Data, Content>: View
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         data: Data,
-        @ViewBuilder content: @escaping (Data.Element) -> Content
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, Data.Element) -> Content
     )
         where
             Data == Array<SelectionValue>,
@@ -149,7 +149,7 @@ public struct VWheelPicker<Data, Content>: View
         selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        @ViewBuilder content: @escaping (T) -> Content
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, T) -> Content
     )
         where
             Data == Array<T>,
@@ -246,8 +246,7 @@ public struct VWheelPicker<Data, Content>: View
             
         case .content(let data, let content):
             ForEach(data.indices, id: \.self, content: { i in
-                content(data[i])
-                    .opacity(uiModel.colors.customContentOpacities.value(for: internalState))
+                content(internalState, data[i])
                     .tag(i)
             })
         }

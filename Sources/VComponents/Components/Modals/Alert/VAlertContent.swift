@@ -12,4 +12,7 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VAlertContent = GenericContent_EmptyContent
+enum VAlertContent<Content> where Content: View {
+    case empty
+    case content(content: () -> Content)
+}

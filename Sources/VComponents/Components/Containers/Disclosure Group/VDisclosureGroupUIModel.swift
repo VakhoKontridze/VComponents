@@ -87,23 +87,10 @@ public struct VDisclosureGroupUIModel {
         public var background: Color = ColorBook.layer
         
         /// Header title colors.
-        ///
-        /// Only applicable when using `init` with title.
         public var headerTitle: StateColors = .init(
             collapsed: ColorBook.primary,
             expanded: ColorBook.primary,
             disabled: ColorBook.primaryPressedDisabled
-        )
-        
-        /// Custom header label opacities.
-        ///
-        /// Applicable only when `init` with header label is used.
-        /// When using a custom header label, it's subviews cannot be configured with individual colors,
-        /// so instead, a general opacity is being applied.
-        public var customHeaderLabelOpacities: StateOpacities = .init(
-            collapsed: 1,
-            expanded: 1,
-            disabled: 0.3
         )
         
         /// Divider color.
@@ -145,8 +132,6 @@ public struct VDisclosureGroupUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Header title font. Set to `system` `bold`-`17`.
-        ///
-        /// Only applicable when using `init` with header.
         public var headerTitle: Font = .system(size: 17, weight: .bold)
         
         // MARK: Initializers

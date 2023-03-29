@@ -78,12 +78,12 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         uiModel: VLoadingStretchedButtonUIModel = .init(),
         isLoading: Bool,
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping () -> Label
+        @ViewBuilder label: @escaping (VLoadingStretchedButtonInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self.isLoading = isLoading
         self.action = action
-        self.label = .content(content: label)
+        self.label = .label(label: label)
     }
     
     // MARK: Body
@@ -112,9 +112,8 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                         labelTitleComponent(title: title)
                     })
                     
-                case .content(let label):
-                    label()
-                        .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
+                case .label(let label):
+                    label(internalState)
                 }
             })
                 .frame(maxWidth: .infinity)

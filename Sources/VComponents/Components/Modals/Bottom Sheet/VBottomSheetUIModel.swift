@@ -257,8 +257,6 @@ public struct VBottomSheetUIModel {
         public var grabber: Color = GlobalUIModel.Common.grabberColor
         
         /// Header title color.
-        ///
-        /// Only applicable when using `init` with title.
         public var headerTitle: Color = ColorBook.primary
         
         /// Model for customizing close button colors.
@@ -295,8 +293,6 @@ public struct VBottomSheetUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Header font. Set to `system` `bold`-`17`.
-        ///
-        /// Only applicable when using `init` with title.
         public var header: Font = GlobalUIModel.Modals.headerFont
         
         // MARK: Initializers

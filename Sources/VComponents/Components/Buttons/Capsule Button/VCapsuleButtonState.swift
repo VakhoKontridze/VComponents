@@ -5,10 +5,11 @@
 //  Created by Vakhtang Kontridze on 12/24/20.
 //
 
-import SwiftUI
+import Foundation
 import VCore
 
 // MARK: - V Capsule Button Internal State
+/// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VCapsuleButtonInternalState = GenericState_EnabledPressedDisabled
+public typealias VCapsuleButtonInternalState = GenericState_EnabledPressedDisabled

@@ -10,4 +10,8 @@ import SwiftUI
 // MARK: - V Toggle Label
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-typealias VToggleLabel = GenericContent_EmptyTitleContent
+enum VToggleLabel<Label> where Label: View {
+    case empty
+    case title(title: String)
+    case label(label: (VToggleInternalState) -> Label)
+}

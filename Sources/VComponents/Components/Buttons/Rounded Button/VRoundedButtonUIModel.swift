@@ -120,17 +120,6 @@ public struct VRoundedButtonUIModel {
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Custom label opacities. Set to `1` enabled, `0.3` pressed, and `0.3` disabled.
-        ///
-        /// Applicable only when `init` with label is used.
-        /// When using a custom label, it's subviews cannot be configured with individual colors,
-        /// so instead, a general opacity is being applied.
-        public var customLabelOpacities: StateOpacities = .init(
-            enabled: 1,
-            pressed: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled,
-            disabled: GlobalUIModel.Buttons.customLabelOpacityPressedLoadingDisabled
-        )
-        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -149,8 +138,6 @@ public struct VRoundedButtonUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title font. Set to `system` `semibold`-`15` for `iOS`, and `13` for `macOS`.
-        ///
-        /// Only applicable when using `init` with title.
         public var title: Font = {
 #if os(iOS)
             return .system(size: 15, weight: .semibold)

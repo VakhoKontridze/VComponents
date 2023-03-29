@@ -7,40 +7,40 @@
 
 import SwiftUI
 
-// MARK: - Generic Content (Empty, Content)
-enum GenericContent_EmptyContent<Content> where Content: View {
-    case empty
-    case content(content: () -> Content)
-}
+//// MARK: - Generic Content (Empty, Content)
+//enum GenericContent_EmptyContent<Content> where Content: View {
+//    case empty
+//    case content(content: () -> Content)
+//}
 
-// MARK: - Generic Content (Title, Content)
-enum GenericContent_TitleContent<Content> where Content: View {
-    case title(title: String)
-    case content(content: () -> Content)
-}
+//// MARK: - Generic Content (Title, Content)
+//enum GenericContent_TitleContent<Content> where Content: View {
+//    case title(title: String)
+//    case content(content: () -> Content)
+//}
 
-// MARK: - Generic Content (Empty, Title, Content)
-enum GenericContent_EmptyTitleContent<Content>: Equatable where Content: View {
-    case empty
-    case title(title: String)
-    case content(content: () -> Content)
-    
-    var hasLabel: Bool {
-        switch self {
-        case .empty: return false
-        case .title: return true
-        case .content: return true
-        }
-    }
-    
-    static func == (lhs: Self, rhs: Self) -> Bool {
-        switch (lhs, rhs) {
-        case (.empty, .empty): return true
-        case (.title(let lhs), .title(let rhs)): return lhs == rhs
-        default: return false
-        }
-    }
-}
+//// MARK: - Generic Content (Empty, Title, Content)
+//enum GenericContent_EmptyTitleContent<Content>: Equatable where Content: View {
+//    case empty
+//    case title(title: String)
+//    case content(content: () -> Content)
+//    
+//    var hasLabel: Bool {
+//        switch self {
+//        case .empty: return false
+//        case .title: return true
+//        case .content: return true
+//        }
+//    }
+//    
+//    static func == (lhs: Self, rhs: Self) -> Bool {
+//        switch (lhs, rhs) {
+//        case (.empty, .empty): return true
+//        case (.title(let lhs), .title(let rhs)): return lhs == rhs
+//        default: return false
+//        }
+//    }
+//}
 
 // MARK: - Generic Content (Title, Icon, Content)
 enum GenericContent_TitleIconContent<Content> where Content: View {
