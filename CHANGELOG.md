@@ -22,6 +22,8 @@ VSecondaryButton
 
 - `VSecondaryButton` is renamed to `VCapsuleButton`
 - `animatesStateChange` is added in `VCapsuleButtonUIModel`
+- `backgroundPressedScale` is added in `VCapsuleButtonUIModel`
+- `labelPressedScale` is added in `VCapsuleButtonUIModel`
 
 VRoundedButton
 
@@ -34,6 +36,7 @@ VRoundedLabeledButton
 VPlainButton
 
 - `animatesStateChange` is added in `VPlainButtonUIModel`
+- `labelPressedScale` is added in `VPlainButtonUIModel`
 
 VSegmentedPicker
 
