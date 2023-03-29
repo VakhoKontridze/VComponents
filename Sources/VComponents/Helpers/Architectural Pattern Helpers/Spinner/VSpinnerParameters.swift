@@ -20,12 +20,14 @@ public struct VSpinnerParameters: Identifiable {
     /// ID.
     public let id: UUID = .init()
     
-    /// Indicates if interaction is disabled.
-    public var isInteractionDisabled: Bool
+    /// Indicates if interaction is enabled.
+    public var isInteractionEnabled: Bool
     
     // MARK: Initializers
     /// Initializes `VSpinnerParameters`.
-    public init(isInteractionDisabled: Bool) {
-        self.isInteractionDisabled = isInteractionDisabled
+    public init(
+        isInteractionEnabled: Bool = true
+    ) {
+        self.isInteractionEnabled = isInteractionEnabled
     }
 }

@@ -32,8 +32,23 @@ import SwiftUI
 ///         @Published var vSpinnerParameters: VSpinnerParameters?
 ///
 ///         func didTapButton() {
-///             vSpinnerParameters = VSpinnerParameters(isInteractionDisabled: true)
-///             DispatchQueue.main.asyncAfter(deadline: .now() + 3, execute: { [weak self] in self?.vSpinnerParameters = nil })
+///             vSpinnerParameters = VSpinnerParameters()
+///
+///             Task(operation: {
+///                 ...
+///
+///                 do {
+///                     let (data, response) = try await URLSession.shared.data(for: request)
+///                     vSpinnerParameters = nil
+///
+///                     ...
+///
+///                 } catch {
+///                     vSpinnerParameters = nil
+///
+///                     ...
+///                 }
+///             })
 ///         }
 ///     }
 ///

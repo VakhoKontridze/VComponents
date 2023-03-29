@@ -24,7 +24,7 @@ extension View {
             
         case let parameters?:
             self
-                .blocksHitTesting(parameters.isInteractionDisabled)
+                .blocksHitTesting(!parameters.isInteractionEnabled)
                 .overlay(VContinuousSpinner(uiModel: uiModel))
         }
     }
@@ -44,7 +44,7 @@ extension View {
             
         case let parameters?:
             self
-                .blocksHitTesting(parameters.isInteractionDisabled)
+                .blocksHitTesting(!parameters.isInteractionEnabled)
                 .overlay(VDashedSpinner(uiModel: uiModel))
         }
     }
