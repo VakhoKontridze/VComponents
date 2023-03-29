@@ -258,7 +258,7 @@ struct GlobalUIModel {
 #if os(tvOS)
             return 20
 #elseif os(watchOS)
-            return 7
+            return 8
 #else
             return 10
 #endif

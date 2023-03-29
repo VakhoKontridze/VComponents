@@ -38,27 +38,24 @@ struct PreviewContainer<Content>: View where Content: View {
                     ScrollView(content: {
                         VStack(content: content)
                     })
-                    .padding(.vertical, 1)
+                        .padding(.vertical, 1)
                     
                 } else {
                     VStack(content: content)
                 }
             })
-                .modifier({
+                .modifier({ view in
 #if os(macOS)
-                    $0.padding(.vertical, 20)
+                    view
+                        .padding(.vertical, 20)
+                        .previewLayout(.sizeThatFits)
+#elseif os(watchOS)
+                    view
 #else
-                    $0
+                    view
 #endif
                 })
         })
-            .modifier({
-#if os(macOS)
-                $0.previewLayout(.sizeThatFits)
-#else
-                $0
-#endif
-            })
     }
 }
 

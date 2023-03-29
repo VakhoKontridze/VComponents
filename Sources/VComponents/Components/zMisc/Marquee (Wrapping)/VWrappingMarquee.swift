@@ -185,7 +185,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 
 // MARK: - Preview
 @available(macOS 11.0, *)
-struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`
+struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can be viewed separately.
     // Configuration
     private static var colorScheme: ColorScheme { .light }
 

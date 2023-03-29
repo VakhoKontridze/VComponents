@@ -42,19 +42,19 @@ public struct VCompactPageIndicatorUIModel {
         /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Dot dimension on the main axis. Set to `20` for `tvOS`, `7` for `watchOS`, and `10` for other platforms.
+        /// Dot dimension on the main axis. Set to `20` for `tvOS`, `8` for `watchOS`, and `10` for other platforms.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         public var dotDimensionPrimaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the main axis when switching to `standard` configuration. Set to `20` for `tvOS`, `7` for `watchOS`, and `10` for other platforms.
+        /// Dot dimension on the main axis when switching to `standard` configuration. Set to `20` for `tvOS`, `8` for `watchOS`, and `10` for other platforms.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
         public var dotDimensionPrimaryAxisForStandardConfiguration: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the secondary axis. Set to `20` for `tvOS`, `7` for `watchOS`, and `10` for other platforms.
+        /// Dot dimension on the secondary axis. Set to `20` for `tvOS`, `8` for `watchOS`, and `10` for other platforms.
         ///
         /// For horizontal layouts, this will be height, and for vertical, width.
         public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension

@@ -150,7 +150,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 
 // MARK: - Preview
 @available(macOS 11.0, *)
-struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`
+struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can be viewed separately.
     // Configuration
     private static var colorScheme: ColorScheme { .light }
 
