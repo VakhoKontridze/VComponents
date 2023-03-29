@@ -90,8 +90,8 @@ import VCore
 /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
 @available(iOS 15.0, *)
 @available(macOS 12.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(tvOS 15.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS 8.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextField: View {
     // MARK: Properties
     private let uiModel: VTextFieldUIModel
@@ -242,7 +242,6 @@ public struct VTextField: View {
                 action: didTapClearButton,
                 icon: ImageBook.xMark
             )
-                .disabled(!internalState.isEnabled)
         }
     }
 
@@ -253,7 +252,6 @@ public struct VTextField: View {
                 action: { secureFieldIsVisible.toggle() },
                 icon: visibilityIcon
             )
-                .disabled(!internalState.isEnabled)
         }
     }
 

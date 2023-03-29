@@ -144,6 +144,9 @@ public struct VLoadingStretchedButtonUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
+        /// Indicates if button animates state change. Defaults to `true`.
+        public var animatesStateChange: Bool = true
+        
         /// Model for customizing spinner animations.
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Animations = .init()
         
@@ -153,6 +156,14 @@ public struct VLoadingStretchedButtonUIModel {
     }
     
     // MARK: Sub UI Models
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+        
+        uiModel.animations.animatesStateChange = animations.animatesStateChange
+        
+        return uiModel
+    }
+    
     var spinnerSubUIModel: VContinuousSpinnerUIModel {
         var uiModel: VContinuousSpinnerUIModel = .init()
         

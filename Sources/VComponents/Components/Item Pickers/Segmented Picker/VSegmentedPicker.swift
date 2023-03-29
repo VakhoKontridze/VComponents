@@ -39,7 +39,7 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 @available(watchOS, unavailable)
 public struct VSegmentedPicker<Data, Content>: View
     where
@@ -53,10 +53,10 @@ public struct VSegmentedPicker<Data, Content>: View
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var pressedIndex: Int?
     private var internalState: VSegmentedPickerInternalState { .init(isEnabled: isEnabled) }
-    private func rowState(for index: Int) -> VSegmentedPickerRowInternalState {
+    private func rowInternalState(i: Int) -> VSegmentedPickerRowInternalState {
         .init(
-            isEnabled: internalState.isEnabled && !disabledIndexes.contains(index),
-            isPressed: pressedIndex == index
+            isEnabled: internalState.isEnabled && !disabledIndexes.contains(i), // `isEnabled` check is required
+            isPressed: pressedIndex == i
         )
     }
     
@@ -71,7 +71,7 @@ public struct VSegmentedPicker<Data, Content>: View
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers - Index
-    /// initializes `VSegmentedPicker` with selected index, data, and row content.
+    /// Initializes `VSegmentedPicker` with selected index, data, and row content.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
@@ -89,7 +89,7 @@ public struct VSegmentedPicker<Data, Content>: View
         self.content = .content(data: data, content: content)
     }
 
-    /// initializes `VSegmentedPicker` with selected index and row titles.
+    /// Initializes `VSegmentedPicker` with selected index and row titles.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
@@ -111,7 +111,7 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     // MARK: Initializers - Hashable
-    /// initializes `VSegmentedPicker` with selection value, data, and row content.
+    /// Initializes `VSegmentedPicker` with selection value, data, and row content.
     public init<SelectionValue>(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -136,7 +136,7 @@ public struct VSegmentedPicker<Data, Content>: View
         self.content = .content(data: data, content: content)
     }
     
-    /// initializes `VSegmentedPicker` with selection value and row titles.
+    /// Initializes `VSegmentedPicker` with selection value and row titles.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<String>,
@@ -161,7 +161,7 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
-    /// initializes `VSegmentedPicker` with `HashableEnumeration` and row content.
+    /// Initializes `VSegmentedPicker` with `HashableEnumeration` and row content.
     public init<T>(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<T>,
@@ -185,7 +185,7 @@ public struct VSegmentedPicker<Data, Content>: View
         self.content = .content(data: Array(T.allCases), content: content)
     }
     
-    /// initializes `VSegmentedPicker` with `StringRepresentableHashableEnumeration`.
+    /// Initializes `VSegmentedPicker` with `StringRepresentableHashableEnumeration`.
     public init<T>(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<T>,
@@ -281,12 +281,12 @@ public struct VSegmentedPicker<Data, Content>: View
         case .titles(let titles):
             HStack(spacing: 0, content: {
                 ForEach(titles.indices, id: \.self, content: { i in
-                    SwiftUIBaseButton(
+                    SwiftUIGestureBaseButton(
                         onStateChange: { stateChangeHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
                                 minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-                                color: uiModel.colors.title.value(for: rowState(for: i)),
+                                color: uiModel.colors.title.value(for: rowInternalState(i: i)),
                                 font: uiModel.fonts.rows,
                                 text: titles[i]
                             )
@@ -297,17 +297,17 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
-                        .disabled(!internalState.isEnabled || disabledIndexes.contains(i))
+                        .disabled(disabledIndexes.contains(i))
                 })
             })
             
         case .content(let data, let content):
             HStack(spacing: 0, content: {
                 ForEach(data.indices, id: \.self, content: { i in
-                    SwiftUIBaseButton(
+                    SwiftUIGestureBaseButton(
                         onStateChange: { stateChangeHandler(i: i, gestureState: $0) },
                         label: {
-                            content(rowState(for: i), data[i])
+                            content(rowInternalState(i: i), data[i])
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
@@ -315,7 +315,7 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
-                        .disabled(!internalState.isEnabled || disabledIndexes.contains(i))
+                        .disabled(disabledIndexes.contains(i))
                 })
             })
         }

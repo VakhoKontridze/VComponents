@@ -24,8 +24,8 @@ import VCore
 ///     }
 ///
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 public struct VStepper: View {
     // MARK: Properties
     private let uiModel: VStepperUIModel
@@ -35,7 +35,7 @@ public struct VStepper: View {
     @State private var pressedButton: VStepperButton?
     private func buttonInternalState(_ button: VStepperButton) -> VStepperButtonInternalState {
         .init(
-            isEnabled: buttonIsEnabled(for: button),
+            isEnabled: buttonIsEnabled(button),
             isPressed: pressedButton == button
         )
     }
@@ -89,7 +89,7 @@ public struct VStepper: View {
     }
     
     private func button(_ button: VStepperButton) -> some View {
-        SwiftUIBaseButton(
+        SwiftUIGestureBaseButton(
             onStateChange: { stateChangeHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
@@ -104,7 +104,7 @@ public struct VStepper: View {
                     .frame(maxWidth: .infinity)
             }
         )
-            .disabled(!buttonIsEnabled(for: button))
+            .disabled(!buttonIsEnabled(button))
     }
     
     private var divider: some View {
@@ -114,12 +114,26 @@ public struct VStepper: View {
     }
     
     // MARK: Actions
-    private func stateChangeHandler(button: VStepperButton, gestureState: BaseButtonGestureState) {
-        stateChangeHandlerPress(button, isPressed: gestureState.isPressed)
-        if gestureState.isClicked { stateChangeHandlerClick(button) }
+    private func stateChangeHandler(
+        button: VStepperButton,
+        gestureState: BaseButtonGestureState
+    ) {
+        DispatchQueue.main.async(execute: {
+            if !gestureState.isPressed {
+                pressedButton = nil
+                shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
+                zeroLongPressTimers()
+                
+            } else if pressedButton != button {
+                pressedButton = button
+                scheduleLongPressIncrementSchedulerTimer(for: button)
+            }
+            
+            if gestureState.isClicked { action(button: button) }
+        })
     }
-
-    private func stateChangeHandlerClick(_ button: VStepperButton) {
+    
+    private func action(button: VStepperButton) {
         guard !shouldSkipIncrementBecauseOfLongPressIncrementFinish else {
             shouldSkipIncrementBecauseOfLongPressIncrementFinish = false
             return
@@ -139,18 +153,6 @@ public struct VStepper: View {
             } else {
                 value += step
             }
-        }
-    }
-    
-    private func stateChangeHandlerPress(_ button: VStepperButton, isPressed: Bool) {
-        if !isPressed {
-            pressedButton = nil
-            shouldSkipIncrementBecauseOfLongPressIncrementFinish = longPressIncrementTimer != nil
-            zeroLongPressTimers()
-            
-        } else if pressedButton != button {
-            pressedButton = button
-            scheduleLongPressIncrementSchedulerTimer(for: button)
         }
     }
 
@@ -187,7 +189,7 @@ public struct VStepper: View {
         
         longPressIncrementTimerIncremental = .scheduledTimer(withTimeInterval: interval, repeats: true, block: { timer in
             if let pressedButton {
-                stateChangeHandlerClick(pressedButton)
+                action(button: pressedButton)
             } else {
                 zeroLongPressTimers()
             }
@@ -210,7 +212,7 @@ public struct VStepper: View {
     }
     
     // MARK: Helpers
-    private func buttonIsEnabled(for button: VStepperButton) -> Bool {
+    private func buttonIsEnabled(_ button: VStepperButton) -> Bool {
         switch (internalState, button) {
         case (.disabled, _): return false
         case (.enabled, .minus): return !(value <= range.lowerBound)

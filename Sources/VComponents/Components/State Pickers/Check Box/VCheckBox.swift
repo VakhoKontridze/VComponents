@@ -39,8 +39,6 @@ public struct VCheckBox<Label>: View where Label: View {
     
     private let label: VCheckBoxLabel<Label>
     
-    private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
-    
     // MARK: Initializers - State
     /// Initializes `VCheckBox` with state.
     public init(
@@ -128,16 +126,19 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     spacer
 
-                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        VText(
-                            type: uiModel.layout.titleTextLineType,
-                            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-                            color: uiModel.colors.title.value(for: internalState),
-                            font: uiModel.fonts.title,
-                            text: title
-                        )
-                    })
-                        .disabled(!labelIsEnabled)
+                    SwiftUIGestureBaseButton(
+                        onStateChange: stateChangeHandler,
+                        label: {
+                            VText(
+                                type: uiModel.layout.titleTextLineType,
+                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+                                color: uiModel.colors.title.value(for: internalState),
+                                font: uiModel.fonts.title,
+                                text: title
+                            )
+                        }
+                    )
+                        .disabled(!uiModel.misc.labelIsClickable)
                 })
                 
             case .label(let label):
@@ -146,10 +147,13 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     spacer
                     
-                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        label(internalState)
-                    })
-                        .disabled(!labelIsEnabled)
+                    SwiftUIGestureBaseButton(
+                        onStateChange: stateChangeHandler,
+                        label: {
+                            label(internalState)
+                        }
+                    )
+                        .disabled(!uiModel.misc.labelIsClickable)
                 })
             }
         })
@@ -157,35 +161,40 @@ public struct VCheckBox<Label>: View where Label: View {
     }
     
     private var checkBox: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            ZStack(content: {
-                RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                    .foregroundColor(uiModel.colors.fill.value(for: internalState))
-                
-                RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                    .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+        SwiftUIGestureBaseButton(
+            onStateChange: stateChangeHandler,
+            label: {
+                ZStack(content: {
+                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                        .foregroundColor(uiModel.colors.fill.value(for: internalState))
+                    
+                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                        .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
 
-                if let checkMarkIcon {
-                    checkMarkIcon
-                        .resizable()
-                        .frame(dimension: uiModel.layout.iconDimension)
-                        .foregroundColor(uiModel.colors.checkmark.value(for: internalState))
-                }
-            })
-                .frame(dimension: uiModel.layout.dimension)
-                .padding(uiModel.layout.hitBox)
-        })
-            .disabled(!internalState.isEnabled)
+                    if let checkMarkIcon {
+                        checkMarkIcon
+                            .resizable()
+                            .frame(dimension: uiModel.layout.iconDimension)
+                            .foregroundColor(uiModel.colors.checkmark.value(for: internalState))
+                    }
+                })
+                    .frame(dimension: uiModel.layout.dimension)
+                    .padding(uiModel.layout.hitBox)
+            }
+        )
     }
     
     private var spacer: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            Rectangle()
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(width: uiModel.layout.checkBoxLabelSpacing)
-                .foregroundColor(.clear)
-        })
-            .disabled(!labelIsEnabled)
+        SwiftUIGestureBaseButton(
+            onStateChange: stateChangeHandler,
+            label: {
+                Rectangle()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: uiModel.layout.checkBoxLabelSpacing)
+                    .foregroundColor(.clear)
+            }
+        )
+            .disabled(!uiModel.misc.labelIsClickable)
     }
 
     // MARK: Actions

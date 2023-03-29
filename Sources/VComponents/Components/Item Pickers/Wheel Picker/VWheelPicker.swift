@@ -61,7 +61,7 @@ public struct VWheelPicker<Data, Content>: View
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers - Index
-    /// initializes `VWheelPicker` with selected index, data, and row content.
+    /// Initializes `VWheelPicker` with selected index, data, and row content.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
@@ -77,7 +77,7 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .content(data: data, content: content)
     }
 
-    /// initializes `VWheelPicker` with selected index and row titles.
+    /// Initializes `VWheelPicker` with selected index and row titles.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
@@ -97,7 +97,7 @@ public struct VWheelPicker<Data, Content>: View
     }
     
     // MARK: Initializers - Hashable
-    /// initializes `VWheelPicker` with selection value, data, and row content.
+    /// Initializes `VWheelPicker` with selection value, data, and row content.
     public init<SelectionValue>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -120,7 +120,7 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .content(data: data, content: content)
     }
     
-    /// initializes `VWheelPicker` with selection value and row titles.
+    /// Initializes `VWheelPicker` with selection value and row titles.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<String>,
@@ -143,7 +143,7 @@ public struct VWheelPicker<Data, Content>: View
     }
     
     // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
-    /// initializes `VWheelPicker` with `HashableEnumeration` and row content.
+    /// Initializes `VWheelPicker` with `HashableEnumeration` and row content.
     public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<T>,
@@ -165,7 +165,7 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .content(data: Array(T.allCases), content: content)
     }
     
-    /// initializes `VWheelPicker` with `StringRepresentableHashableEnumeration`.
+    /// Initializes `VWheelPicker` with `StringRepresentableHashableEnumeration`.
     public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<T>,
@@ -227,7 +227,6 @@ public struct VWheelPicker<Data, Content>: View
             label: EmptyView.init
         )
             .pickerStyle(.wheel)
-            .disabled(!internalState.isEnabled) // Luckily, doesn't affect colors
             .background(uiModel.colors.background.value(for: internalState).cornerRadius(uiModel.layout.cornerRadius))
     }
     

@@ -13,25 +13,29 @@ import VCore
 ///
 /// UI Model and layout can be passed as parameters.
 ///
-///     ZStack(alignment: .top, content: {
-///         ColorBook.canvas.ignoresSafeArea()
+///     @State private var isExpanded: Bool = true
 ///
-///         VDisclosureGroup(
-///             isExpanded: $isExpanded,
-///             headerTitle: "Lorem Ipsum",
-///             content: {
-///                 LazyVStack(spacing: 0, content: {
-///                     ForEach(0..<10, content: { num in
-///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-///                             Text(String(num))
-///                                 .frame(maxWidth: .infinity, alignment: .leading)
+///     var body: some View {
+///         ZStack(alignment: .top, content: {
+///             ColorBook.canvas.ignoresSafeArea()
+///
+///             VDisclosureGroup(
+///                 isExpanded: $isExpanded,
+///                 headerTitle: "Lorem Ipsum",
+///                 content: {
+///                     LazyVStack(spacing: 0, content: {
+///                         ForEach(0..<10, content: { num in
+///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+///                                 Text(String(num))
+///                                     .frame(maxWidth: .infinity, alignment: .leading)
+///                             })
 ///                         })
 ///                     })
-///                 })
-///             }
-///         )
-///             .padding()
-///     })
+///                 }
+///             )
+///              .padding()
+///         })
+///     }
 ///
 @available(iOS 14.0, *)
 @available(macOS, unavailable) // No `PlainDisclosureGroup` support
@@ -160,7 +164,6 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 action: expandCollapse,
                 icon: ImageBook.chevronUp
             )
-                .disabled(!internalState.isEnabled)
                 .rotationEffect(.init(degrees: internalState.chevronButtonDirection.angle))
         })
             .padding(uiModel.layout.headerMargins)

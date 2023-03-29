@@ -24,15 +24,13 @@ import VCore
 ///     }
 ///
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VRoundedLabeledButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRoundedLabeledButtonUIModel
     
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var isPressed: Bool = false
-    private var internalState: VRoundedLabeledButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedLabeledButtonInternalState { baseButtonState }
     
     private let action: () -> Void
     
@@ -88,16 +86,23 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
     
     // MARK: Body
     public var body: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            VStack(spacing: uiModel.layout.rectangleLabelSpacing, content: {
-                rectangle
-                buttonLabel
-            })
-        })
-            .disabled(!internalState.isEnabled)
+        SwiftUIBaseButton(
+            uiModel: uiModel.baseButtonSubUIModel,
+            action: action,
+            label: { baseButtonState in
+                let internalState: VRoundedLabeledButtonInternalState = internalState(baseButtonState)
+                
+                VStack(spacing: uiModel.layout.rectangleLabelSpacing, content: {
+                    rectangle(internalState: internalState)
+                    buttonLabel(internalState: internalState)
+                })
+            }
+        )
     }
     
-    private var rectangle: some View {
+    private func rectangle(
+        internalState: VRoundedLabeledButtonInternalState
+    ) -> some View {
         Group(content: {
             icon
                 .resizable()
@@ -107,32 +112,38 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
                 .opacity(uiModel.colors.iconOpacities.value(for: internalState))
         })
             .frame(dimension: uiModel.layout.roundedRectangleDimension)
-            .background(rectangleBackground)
-            .overlay(roundedRectangleBorder)
+            .background(rectangleBackground(internalState: internalState))
+            .overlay(roundedRectangleBorder(internalState: internalState))
     }
     
-    private var rectangleBackground: some View {
+    private func rectangleBackground(
+        internalState: VRoundedLabeledButtonInternalState
+    ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
-    @ViewBuilder private var roundedRectangleBorder: some View {
+    @ViewBuilder private func roundedRectangleBorder(
+        internalState: VRoundedLabeledButtonInternalState
+    ) -> some View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         }
     }
     
-    private var buttonLabel: some View {
+    private func buttonLabel(
+        internalState: VRoundedLabeledButtonInternalState
+    ) -> some View {
         Group(content: {
             switch label {
             case .title(let title):
-                labelTitleComponent(title: title)
+                labelTitleComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.layout.labelSpacing, content: {
-                    labelIconComponent(icon: icon)
-                    labelTitleComponent(title: title)
+                    labelIconComponent(internalState: internalState, icon: icon)
+                    labelTitleComponent(internalState: internalState, title: title)
                 })
                 
             case .label(let label):
@@ -142,7 +153,10 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
             .frame(maxWidth: uiModel.layout.labelWidthMax)
     }
     
-    private func labelTitleComponent(title: String) -> some View {
+    private func labelTitleComponent(
+        internalState: VRoundedLabeledButtonInternalState,
+        title: String
+    ) -> some View {
         VText(
             type: uiModel.layout.titleLabelTextLineType,
             minimumScaleFactor: uiModel.layout.titleLabelMinimumScaleFactor,
@@ -152,19 +166,16 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
         )
     }
     
-    private func labelIconComponent(icon: Image) -> some View {
+    private func labelIconComponent(
+        internalState: VRoundedLabeledButtonInternalState,
+        icon: Image
+    ) -> some View {
         icon
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(size: uiModel.layout.iconLabelSize)
             .foregroundColor(uiModel.colors.iconLabel.value(for: internalState))
             .opacity(uiModel.colors.iconLabelOpacities.value(for: internalState))
-    }
-    
-    // MARK: Actions
-    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
-        isPressed = gestureState.isPressed
-        if gestureState.isClicked { action() }
     }
 }
 

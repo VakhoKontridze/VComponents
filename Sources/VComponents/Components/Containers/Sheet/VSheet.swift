@@ -38,15 +38,6 @@ public struct VSheet<Content>: View where Content: View {
     private let content: VSheetContent<Content>
     
     // MARK: Initializers
-    /// Initializes `VSheet` with content.
-    public init(
-        uiModel: VSheetUIModel = .init(),
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.uiModel = uiModel
-        self.content = .content(content: content)
-    }
-    
     /// Initializes `VSheet`.
     public init(
         uiModel: VSheetUIModel = .init()
@@ -55,6 +46,15 @@ public struct VSheet<Content>: View where Content: View {
     {
         self.uiModel = uiModel
         self.content = .empty
+    }
+    
+    /// Initializes `VSheet` with content.
+    public init(
+        uiModel: VSheetUIModel = .init(),
+        @ViewBuilder content: @escaping () -> Content
+    ) {
+        self.uiModel = uiModel
+        self.content = .content(content: content)
     }
 
     // MARK: Body

@@ -22,18 +22,13 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VCapsuleButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VCapsuleButtonUIModel
-    
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var isPressed: Bool = false
-    private var internalState: VCapsuleButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
-    
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState { baseButtonState }
     private let action: () -> Void
-    
     private let label: VCapsuleButtonLabel<Label>
     
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
@@ -79,26 +74,33 @@ public struct VCapsuleButton<Label>: View where Label: View {
 
     // MARK: Body
     public var body: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            buttonLabel
-                .frame(height: uiModel.layout.height)
-                .background(background)
-                .overlay(border)
-                .padding(uiModel.layout.hitBox)
-        })
-            .disabled(!internalState.isEnabled)
+        SwiftUIBaseButton(
+            uiModel: uiModel.baseButtonSubUIModel,
+            action: action,
+            label: { baseButtonState in
+                let internalState: VCapsuleButtonInternalState = internalState(baseButtonState)
+                
+                buttonLabel(internalState: internalState)
+                    .frame(height: uiModel.layout.height)
+                    .background(background(internalState: internalState))
+                    .overlay(border(internalState: internalState))
+                    .padding(uiModel.layout.hitBox)
+            }
+        )
     }
     
-    private var buttonLabel: some View {
+    private func buttonLabel(
+        internalState: VCapsuleButtonInternalState
+    ) -> some View {
         Group(content: {
             switch label {
             case .title(let title):
-                labelTitleComponent(title: title)
+                labelTitleComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
-                    labelIconComponent(icon: icon)
-                    labelTitleComponent(title: title)
+                    labelIconComponent(internalState: internalState, icon: icon)
+                    labelTitleComponent(internalState: internalState, title: title)
                 })
                 
             case .label(let label):
@@ -108,7 +110,10 @@ public struct VCapsuleButton<Label>: View where Label: View {
             .padding(uiModel.layout.labelMargins)
     }
     
-    private func labelTitleComponent(title: String) -> some View {
+    private func labelTitleComponent(
+        internalState: VCapsuleButtonInternalState,
+        title: String
+    ) -> some View {
         VText(
             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
             color: uiModel.colors.title.value(for: internalState),
@@ -117,7 +122,10 @@ public struct VCapsuleButton<Label>: View where Label: View {
         )
     }
     
-    private func labelIconComponent(icon: Image) -> some View {
+    private func labelIconComponent(
+        internalState: VCapsuleButtonInternalState,
+        icon: Image
+    ) -> some View {
         icon
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -126,22 +134,20 @@ public struct VCapsuleButton<Label>: View where Label: View {
             .opacity(uiModel.colors.iconOpacities.value(for: internalState))
     }
     
-    private var background: some View {
+    private func background(
+        internalState: VCapsuleButtonInternalState
+    ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
-    @ViewBuilder private var border: some View {
+    @ViewBuilder private func border(
+        internalState: VCapsuleButtonInternalState
+    ) -> some View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         }
-    }
-
-    // MARK: Actions
-    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
-        isPressed = gestureState.isPressed
-        if gestureState.isClicked { action() }
     }
 }
 

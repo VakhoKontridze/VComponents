@@ -63,7 +63,7 @@ public struct VMenu<Label>: View where Label: View {
     private let label: VMenuLabel<Label>
     
     // MARK: Initializers - Sections
-    /// initializes `VMenu` with label and sections.
+    /// Initializes `VMenu` with label and sections.
     public init(
         primaryAction: (() -> Void)? = nil,
         @ViewBuilder label: @escaping () -> Label,
@@ -74,7 +74,7 @@ public struct VMenu<Label>: View where Label: View {
         self.label = .content(content: label)
     }
     
-    /// initializes `VMenu` with title and sections.
+    /// Initializes `VMenu` with title and sections.
     public init(
         primaryAction: (() -> Void)? = nil,
         title: String,
@@ -88,7 +88,7 @@ public struct VMenu<Label>: View where Label: View {
     }
     
     // MARK: Initializers - Rows
-    /// initializes `VMenu` with label and rows.
+    /// Initializes `VMenu` with label and rows.
     public init(
         primaryAction: (() -> Void)? = nil,
         @ViewBuilder label: @escaping () -> Label,
@@ -99,7 +99,7 @@ public struct VMenu<Label>: View where Label: View {
         self.label = .content(content: label)
     }
     
-    /// initializes `VMenu` with title and rows.
+    /// Initializes `VMenu` with title and rows.
     public init(
         primaryAction: (() -> Void)? = nil,
         title: String,

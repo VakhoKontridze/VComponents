@@ -27,7 +27,7 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 public struct VToggle<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VToggleUIModel
@@ -38,8 +38,6 @@ public struct VToggle<Label>: View where Label: View {
     private var internalState: VToggleInternalState { .init(isEnabled: isEnabled, isOn: state == .on, isPressed: isPressed) }
     
     private let label: VToggleLabel<Label>
-    
-    private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
     
     // MARK: Initializers - State
     /// Initializes `VToggle` with state.
@@ -128,16 +126,19 @@ public struct VToggle<Label>: View where Label: View {
                     
                     spacer
 
-                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        VText(
-                            type: uiModel.layout.titleTextLineType,
-                            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-                            color: uiModel.colors.title.value(for: internalState),
-                            font: uiModel.fonts.title,
-                            text: title
-                        )
-                    })
-                        .disabled(!labelIsEnabled)
+                    SwiftUIGestureBaseButton(
+                        onStateChange: stateChangeHandler,
+                        label: {
+                            VText(
+                                type: uiModel.layout.titleTextLineType,
+                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+                                color: uiModel.colors.title.value(for: internalState),
+                                font: uiModel.fonts.title,
+                                text: title
+                            )
+                        }
+                    )
+                        .disabled(!uiModel.misc.labelIsClickable)
                 })
                 
             case .label(let label):
@@ -146,10 +147,13 @@ public struct VToggle<Label>: View where Label: View {
                     
                     spacer
                     
-                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        label(internalState)
-                    })
-                        .disabled(!labelIsEnabled)
+                    SwiftUIGestureBaseButton(
+                        onStateChange: stateChangeHandler,
+                        label: {
+                            label(internalState)
+                        }
+                    )
+                        .disabled(!uiModel.misc.labelIsClickable)
                 })
             }
         })
@@ -157,29 +161,34 @@ public struct VToggle<Label>: View where Label: View {
     }
     
     private var toggle: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            ZStack(content: {
-                RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-                    .foregroundColor(uiModel.colors.fill.value(for: internalState))
+        SwiftUIGestureBaseButton(
+            onStateChange: stateChangeHandler,
+            label: {
+                ZStack(content: {
+                    RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                        .foregroundColor(uiModel.colors.fill.value(for: internalState))
 
-                Circle()
-                    .frame(dimension: uiModel.layout.thumbDimension)
-                    .foregroundColor(uiModel.colors.thumb.value(for: internalState))
-                    .offset(x: thumbOffset)
-            })
-                .frame(size: uiModel.layout.size)
-        })
-            .disabled(!internalState.isEnabled)
+                    Circle()
+                        .frame(dimension: uiModel.layout.thumbDimension)
+                        .foregroundColor(uiModel.colors.thumb.value(for: internalState))
+                        .offset(x: thumbOffset)
+                })
+                    .frame(size: uiModel.layout.size)
+            }
+        )
     }
     
     private var spacer: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            Rectangle()
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(width: uiModel.layout.toggleLabelSpacing)
-                .foregroundColor(.clear)
-        })
-            .disabled(!labelIsEnabled)
+        SwiftUIGestureBaseButton(
+            onStateChange: stateChangeHandler,
+            label: {
+                Rectangle()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: uiModel.layout.toggleLabelSpacing)
+                    .foregroundColor(.clear)
+            }
+        )
+            .disabled(!uiModel.misc.labelIsClickable)
     }
 
     // MARK: Actions

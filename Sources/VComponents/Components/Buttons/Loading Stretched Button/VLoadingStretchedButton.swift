@@ -24,16 +24,16 @@ import VCore
 ///     }
 ///
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VLoadingStretchedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VLoadingStretchedButtonUIModel
     
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var isPressed: Bool = false
     private let isLoading: Bool
-    private var internalState: VLoadingStretchedButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed, isLoading: isLoading) }
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VLoadingStretchedButtonInternalState {
+        .init(isEnabled: baseButtonState.isEnabled, isPressed: baseButtonState == .pressed, isLoading: isLoading)
+    }
     
     private let action: () -> Void
     
@@ -88,28 +88,35 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
     
     // MARK: Body
     public var body: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            buttonLabel
-                .frame(height: uiModel.layout.height)
-                .background(background)
-                .overlay(border)
-        })
-            .disabled(!internalState.isEnabled)
+        SwiftUIBaseButton(
+            uiModel: uiModel.baseButtonSubUIModel,
+            action: action,
+            label: { baseButtonState in
+                let internalState: VLoadingStretchedButtonInternalState = internalState(baseButtonState)
+                
+                buttonLabel(internalState: internalState)
+                    .frame(height: uiModel.layout.height)
+                    .background(background(internalState: internalState))
+                    .overlay(border(internalState: internalState))
+            }
+        )
     }
     
-    private var buttonLabel: some View {
+    private func buttonLabel(
+        internalState: VLoadingStretchedButtonInternalState
+    ) -> some View {
         HStack(spacing: uiModel.layout.labelSpinnerSpacing, content: {
-            spinnerCompensator
+            spinnerCompensator(internalState: internalState)
 
             Group(content: {
                 switch label {
                 case .title(let title):
-                    labelTitleComponent(title: title)
+                    labelTitleComponent(internalState: internalState, title: title)
                     
                 case .iconTitle(let icon, let title):
                     HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
-                        labelIconComponent(icon: icon)
-                        labelTitleComponent(title: title)
+                        labelIconComponent(internalState: internalState, icon: icon)
+                        labelTitleComponent(internalState: internalState, title: title)
                     })
                     
                 case .label(let label):
@@ -118,12 +125,15 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
             })
                 .frame(maxWidth: .infinity)
 
-            spinner
+            spinner(internalState: internalState)
         })
             .padding(uiModel.layout.labelMargins)
     }
     
-    private func labelTitleComponent(title: String) -> some View {
+    private func labelTitleComponent(
+        internalState: VLoadingStretchedButtonInternalState,
+        title: String
+    ) -> some View {
         VText(
             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
             color: uiModel.colors.title.value(for: internalState),
@@ -132,7 +142,10 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         )
     }
     
-    private func labelIconComponent(icon: Image) -> some View {
+    private func labelIconComponent(
+        internalState: VLoadingStretchedButtonInternalState,
+        icon: Image
+    ) -> some View {
         icon
             .resizable()
             .aspectRatio(contentMode: .fit)
@@ -141,35 +154,37 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
             .opacity(uiModel.colors.iconOpacities.value(for: internalState))
     }
     
-    @ViewBuilder private var spinnerCompensator: some View {
+    @ViewBuilder private func spinnerCompensator(
+        internalState: VLoadingStretchedButtonInternalState
+    ) -> some View {
         if internalState == .loading {
             Spacer()
                 .frame(width: uiModel.layout.spinnerSubUIModel.dimension)
         }
     }
     
-    @ViewBuilder private var spinner: some View {
+    @ViewBuilder private func spinner(
+        internalState: VLoadingStretchedButtonInternalState
+    ) -> some View {
         if internalState == .loading {
             VContinuousSpinner(uiModel: uiModel.spinnerSubUIModel)
         }
     }
     
-    private var background: some View {
+    private func background(
+        internalState: VLoadingStretchedButtonInternalState
+    ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
-    @ViewBuilder private var border: some View {
+    @ViewBuilder private func border(
+        internalState: VLoadingStretchedButtonInternalState
+    ) -> some View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         }
-    }
-    
-    // MARK: Actions
-    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
-        isPressed = gestureState.isPressed
-        if gestureState.isClicked { action() }
     }
 }
 

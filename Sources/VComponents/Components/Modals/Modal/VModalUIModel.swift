@@ -78,7 +78,7 @@ public struct VModalUIModel {
         /// To hide divider, set to `0`, and remove header.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
     
-        /// Divider margins. Set to `.zero`.
+        /// Divider margins. Set to `zero`.
         public var dividerMargins: Margins = .zero
         
         /// Content margins. Set to `zero`.

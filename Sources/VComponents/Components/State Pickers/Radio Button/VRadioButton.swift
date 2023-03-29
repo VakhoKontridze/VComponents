@@ -39,8 +39,6 @@ public struct VRadioButton<Label>: View where Label: View {
     
     private let label: VRadioButtonLabel<Label>
     
-    private var labelIsEnabled: Bool { uiModel.misc.labelIsClickable && internalState.isEnabled }
-    
     // MARK: Initializers - State
     /// Initializes `VRadioButton` with state.
     public init(
@@ -128,16 +126,19 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     spacer
 
-                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        VText(
-                            type: uiModel.layout.titleTextLineType,
-                            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-                            color: uiModel.colors.title.value(for: internalState),
-                            font: uiModel.fonts.title,
-                            text: title
-                        )
-                    })
-                        .disabled(!labelIsEnabled)
+                    SwiftUIGestureBaseButton(
+                        onStateChange: stateChangeHandler,
+                        label: {
+                            VText(
+                                type: uiModel.layout.titleTextLineType,
+                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+                                color: uiModel.colors.title.value(for: internalState),
+                                font: uiModel.fonts.title,
+                                text: title
+                            )
+                        }
+                    )
+                        .disabled(!uiModel.misc.labelIsClickable)
                 })
                 
             case .label(let label):
@@ -146,10 +147,13 @@ public struct VRadioButton<Label>: View where Label: View {
                     
                     spacer
                     
-                    SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-                        label(internalState)
-                    })
-                        .disabled(!labelIsEnabled)
+                    SwiftUIGestureBaseButton(
+                        onStateChange: stateChangeHandler,
+                        label: {
+                            label(internalState)
+                        }
+                    )
+                        .disabled(!uiModel.misc.labelIsClickable)
                 })
             }
         })
@@ -157,34 +161,39 @@ public struct VRadioButton<Label>: View where Label: View {
     }
     
     private var radioButton: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            ZStack(content: {
-                Circle()
+        SwiftUIGestureBaseButton(
+            onStateChange: stateChangeHandler,
+            label: {
+                ZStack(content: {
+                    Circle()
+                        .frame(dimension: uiModel.layout.dimension)
+                        .foregroundColor(uiModel.colors.fill.value(for: internalState))
+                    
+                    Circle()
+                        .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+                        .frame(dimension: uiModel.layout.dimension)
+                    
+                    Circle()
+                        .frame(dimension: uiModel.layout.bulletDimension)
+                        .foregroundColor(uiModel.colors.bullet.value(for: internalState))
+                })
                     .frame(dimension: uiModel.layout.dimension)
-                    .foregroundColor(uiModel.colors.fill.value(for: internalState))
-                
-                Circle()
-                    .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
-                    .frame(dimension: uiModel.layout.dimension)
-                
-                Circle()
-                    .frame(dimension: uiModel.layout.bulletDimension)
-                    .foregroundColor(uiModel.colors.bullet.value(for: internalState))
-            })
-                .frame(dimension: uiModel.layout.dimension)
-                .padding(uiModel.layout.hitBox)
-        })
-            .disabled(!internalState.isEnabled)
+                    .padding(uiModel.layout.hitBox)
+            }
+        )
     }
     
     private var spacer: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            Rectangle()
-                .fixedSize(horizontal: false, vertical: true)
-                .frame(width: uiModel.layout.radioLabelSpacing)
-                .foregroundColor(.clear)
-        })
-            .disabled(!labelIsEnabled)
+        SwiftUIGestureBaseButton(
+            onStateChange: stateChangeHandler,
+            label: {
+                Rectangle()
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(width: uiModel.layout.radioLabelSpacing)
+                    .foregroundColor(.clear)
+            }
+        )
+            .disabled(!uiModel.misc.labelIsClickable)
     }
 
     // MARK: Actions

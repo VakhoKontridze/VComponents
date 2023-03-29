@@ -68,8 +68,8 @@ import VCore
 /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VTextViewIModel`.
 @available(iOS 16.0, *)
 @available(macOS 13.0, *)@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
+@available(tvOS 16.0, *)@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS 9.0, *)@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VTextView: View {
     // MARK: Properties
     private let uiModel: VTextViewUIModel

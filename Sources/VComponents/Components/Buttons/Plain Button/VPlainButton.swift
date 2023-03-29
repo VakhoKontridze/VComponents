@@ -22,18 +22,13 @@ import VCore
 ///         )
 ///     }
 ///
-@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIBaseButton` support.
-@available(watchOS, unavailable) // No `SwiftUIBaseButton` support
+@available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
+@available(watchOS, unavailable)
 public struct VPlainButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VPlainButtonUIModel
-    
-    @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var isPressed: Bool = false
-    private var internalState: VPlainButtonInternalState { .init(isEnabled: isEnabled, isPressed: isPressed) }
-    
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState { baseButtonState }
     private let action: () -> Void
-    
     private let label: VPlainButtonLabel<Label>
 
     // MARK: Initializers
@@ -90,25 +85,32 @@ public struct VPlainButton<Label>: View where Label: View {
 
     // MARK: Body
     public var body: some View {
-        SwiftUIBaseButton(onStateChange: stateChangeHandler, label: {
-            buttonLabel
-                .padding(uiModel.layout.hitBox)
-        })
-            .disabled(!internalState.isEnabled)
+        SwiftUIBaseButton(
+            uiModel: uiModel.baseButtonSubUIModel,
+            action: action,
+            label: { baseButtonState in
+                let internalState: VPlainButtonInternalState = internalState(baseButtonState)
+                
+                buttonLabel(internalState: internalState)
+                    .padding(uiModel.layout.hitBox)
+            }
+        )
     }
     
-    @ViewBuilder private var buttonLabel: some View {
+    @ViewBuilder private func buttonLabel(
+        internalState: VPlainButtonInternalState
+    ) -> some View {
         switch label {
         case .title(let title):
-            labelTitleComponent(title: title)
+            labelTitleComponent(internalState: internalState, title: title)
             
         case .icon(let icon):
-            labelIconComponent(icon: icon)
+            labelIconComponent(internalState: internalState, icon: icon)
             
         case .iconTitle(let icon, let title):
             HStack(spacing: uiModel.layout.iconTitleSpacing, content: {
-                labelIconComponent(icon: icon)
-                labelTitleComponent(title: title)
+                labelIconComponent(internalState: internalState, icon: icon)
+                labelTitleComponent(internalState: internalState, title: title)
             })
             
         case .label(let label):
@@ -116,7 +118,10 @@ public struct VPlainButton<Label>: View where Label: View {
         }
     }
     
-    private func labelTitleComponent(title: String) -> some View {
+    private func labelTitleComponent(
+        internalState: VPlainButtonInternalState,
+        title: String
+    ) -> some View {
         VText(
             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
             color: uiModel.colors.title.value(for: internalState),
@@ -125,19 +130,16 @@ public struct VPlainButton<Label>: View where Label: View {
         )
     }
     
-    private func labelIconComponent(icon: Image) -> some View {
+    private func labelIconComponent(
+        internalState: VPlainButtonInternalState,
+        icon: Image
+    ) -> some View {
         icon
             .resizable()
             .aspectRatio(contentMode: .fit)
             .frame(size: uiModel.layout.iconSize)
             .foregroundColor(uiModel.colors.icon.value(for: internalState))
             .opacity(uiModel.colors.iconOpacities.value(for: internalState))
-    }
-
-    // MARK: Actions
-    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
-        isPressed = gestureState.isPressed
-        if gestureState.isClicked { action() }
     }
 }
 

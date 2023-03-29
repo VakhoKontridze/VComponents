@@ -24,6 +24,9 @@ public struct VRoundedLabeledButtonUIModel {
     /// Model that contains font properties.
     public var fonts: Fonts = .init()
     
+    /// Model that contains animation properties.
+    public var animations: Animations = .init()
+    
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
@@ -162,5 +165,26 @@ public struct VRoundedLabeledButtonUIModel {
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
+    }
+    
+    // MARK: Animations
+    /// Model that contains animation properties.
+    public struct Animations {
+        // MARK: Properties
+        /// Indicates if button animates state change. Defaults to `true`.
+        public var animatesStateChange: Bool = true
+        
+        // MARK: Initializers
+        /// Initializes UI model with default values.
+        public init() {}
+    }
+    
+    // MARK: Sub UI Models
+    var baseButtonSubUIModel: SwiftUIBaseButtonUIModel {
+        var uiModel: SwiftUIBaseButtonUIModel = .init()
+        
+        uiModel.animations.animatesStateChange = animations.animatesStateChange
+        
+        return uiModel
     }
 }

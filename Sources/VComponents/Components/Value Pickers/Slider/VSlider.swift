@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Slider
 /// Value picker component that selects value from a bounded linear range of values.
 ///
-/// UI Model, range, step, state, and onChange callback can be passed as parameters.
+/// UI Model, range, step, and onChange callback can be passed as parameters.
 ///
 ///     @State private var value: Double = 0.5
 ///
@@ -85,7 +85,6 @@ public struct VSlider: View {
                     .onChanged(dragChanged)
                     .onEnded(dragEnded)
             )
-            .disabled(!internalState.isEnabled)
     }
 
     private var track: some View {

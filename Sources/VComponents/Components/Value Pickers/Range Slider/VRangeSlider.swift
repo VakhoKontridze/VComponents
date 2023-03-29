@@ -11,7 +11,7 @@ import VCore
 // MARK: - V Range Slider
 /// Value picker component that selects values from a bounded linear range of values to represent a range.
 ///
-/// UI Model, range, step, state, and onChange callbacks can be passed as parameters.
+/// UI Model, range, step, and onChange callbacks can be passed as parameters.
 ///
 ///     @State private var valueLow: Double = 0.3
 ///     @State private var valueHigh: Double = 0.8
@@ -100,7 +100,6 @@ public struct VRangeSlider: View {
         })
             .onSizeChange(perform: { sliderWidth = $0.width })
             .padding(.horizontal, uiModel.layout.thumbDimension / 2)
-            .disabled(!internalState.isEnabled)
             .animation(uiModel.animations.progress, value: valueLow)
             .animation(uiModel.animations.progress, value: valueHigh)
     }
