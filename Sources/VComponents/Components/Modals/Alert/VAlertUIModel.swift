@@ -217,7 +217,7 @@ public struct VAlertUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `bold`-`16`.
+        /// Title font. Set to `system` `bold` `16`.
         public var title: Font = .system(size: 16, weight: .bold)
         
         /// Message font. Set to `system` `14`.

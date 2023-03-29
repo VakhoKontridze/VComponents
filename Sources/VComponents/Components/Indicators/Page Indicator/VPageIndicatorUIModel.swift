@@ -42,19 +42,31 @@ public struct VPageIndicatorUIModel {
         /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Dot dimension on the main axis. Set to `20` for `tvOS`, `8` for `watchOS`, and `10` for other platforms.
+        /// Dot dimension on the main axis.
+        /// Set to `10` on `iOS`.
+        /// Set to `10` on `macOS`.
+        /// Set to `20` on `tvOS`.
+        /// Set to `8` on `watchOS`.
         ///
         /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
         public var dotDimensionPrimaryAxis: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the secondary axis. Set to `20` for `tvOS`, `8` for `watchOS`, and `10` for other platforms.
+        /// Dot dimension on the secondary axis.
+        /// Set to `10` on `iOS`.
+        /// Set to `10` on `macOS`.
+        /// Set to `20` on `tvOS`.
+        /// Set to `8` on `watchOS`.
         ///
         /// For horizontal layouts, this will be height, and for vertical, width.
         public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot spacing. Set to `10` for `tvOS`, `3` for `watchOS`, and `5` for other platforms.
+        /// Dot spacing.
+        /// Set to `5` on `iOS`.
+        /// Set to `5` on `macOS`.
+        /// Set to `10` on `tvOS`.
+        /// Set to `3` on `watchOS`.
         public var spacing: CGFloat = GlobalUIModel.Indicators.pageIndicatorSpacing
         
         /// Unselected dot scale. Set to `0.85`.

@@ -56,7 +56,9 @@ public struct VSliderUIModel {
         /// Thumb corner radius. Set to `10`.
         public var thumbCornerRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbCornerRadius
         
-        /// Thumb border widths. Set to `0` for `iOS`, and `1` scaled to screen for `macOS`..
+        /// Thumb border widths.
+        /// Set to `0` on `iOS`.
+        /// Set to `1` scaled to screen on `macOS`.
         ///
         /// To hide border, set to `0`.
         public var thumbBorderWidth: CGFloat = {
@@ -69,10 +71,14 @@ public struct VSliderUIModel {
 #endif
         }()
         
-        /// Thumb shadow radius. Set to `2` for `iOS`, and `1` for `macOS`.
+        /// Thumb shadow radius.
+        /// Set to `2` on `iOS`.
+        /// Set to `1` on `macOS`.
         public var thumbShadowRadius: CGFloat = GlobalUIModel.ValuePickers.sliderThumbShadowRadius
         
-        /// Thumb shadow offset. Set to `0x2` for `iOS`, and `0x1` for `macOS`.
+        /// Thumb shadow offset.
+        /// Set to `0x2` on `iOS`.
+        /// Set to `0x1` on `macOS`.
         public var thumbShadowOffset: CGSize = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
         
         // MARK: Initializers

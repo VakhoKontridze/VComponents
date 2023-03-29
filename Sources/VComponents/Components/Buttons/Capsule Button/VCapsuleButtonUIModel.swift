@@ -33,7 +33,10 @@ public struct VCapsuleButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button height. Set to `32` for `iOS`, `32` for `macOS`, and `48` for `watchOS`.
+        /// Button height.
+        /// Set to `32` on `iOS`.
+        /// Set to `32` on `macOS`.
+        /// Set to `48` on `watchOS`.
         public var height: CGFloat = {
 #if os(iOS)
             return GlobalUIModel.Buttons.dimensionIOSSmall
@@ -129,7 +132,10 @@ public struct VCapsuleButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `semibold`-`16` for `iOS`, `medium`-`14` for `macOS`, and `medium`-`17` for `watchOS`.
+        /// Title font.
+        /// Set to `system` `semibold` `16` on `iOS`.
+        /// Set to `system` `medium` `14` on `macOS`.
+        /// Set to `system` `medium` `17` on `watchOS`.
         public var title: Font = {
 #if os(iOS)
             return .system(size: 16, weight: .semibold)
@@ -154,10 +160,16 @@ public struct VCapsuleButtonUIModel {
         /// Indicates if button animates state change. Defaults to `true`.
         public var animatesStateChange: Bool = true
         
-        /// Ratio to which label scales down on press. Set to `0.98` for `watchOS`, and `1` for other platforms.
+        /// Ratio to which label scales down on press.
+        /// Set to `1` on `iOS`.
+        /// Set to `1` on `macOS`.
+        /// Set to `0.98` on `watchOS`.
         public var backgroundPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
-        /// Ratio to which label scales down on press. Set to `0.98` for `watchOS`, and `1` for other platforms.
+        /// Ratio to which label scales down on press.
+        /// Set to `1` on `iOS`.
+        /// Set to `1` on `macOS`.
+        /// Set to `0.98` on `watchOS`.
         public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
         // MARK: Initializers

@@ -34,7 +34,9 @@ public struct VRoundedButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button dimension. Set to `56` for `iOS`, and `28` for `macOS`.
+        /// Button dimension.
+        /// Set to `56` on `iOS`.
+        /// Set to `28` on `macOS`.
         public var dimension: CGFloat = {
 #if os(iOS)
             return GlobalUIModel.Buttons.dimensionIOSLarge
@@ -45,7 +47,9 @@ public struct VRoundedButtonUIModel {
 #endif
         }()
         
-        /// Corner radius. Set to `16` for `iOS`, and `6` for `macOS`.
+        /// Corner radius.
+        /// Set to `16` on `iOS`.
+        /// Set to `6` on `macOS`.
         public var cornerRadius: CGFloat = {
 #if os(iOS)
             return GlobalUIModel.Buttons.cornerRadiusIOSSmall
@@ -67,7 +71,9 @@ public struct VRoundedButtonUIModel {
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Icon size. Set to `20x20` for `iOS`, and `14x14` for `macOS`.
+        /// Icon size.
+        /// Set to `20x20` on `iOS`.
+        /// Set to `14x14` on `macOS`.
         public var iconSize: CGSize = {
 #if os(iOS)
             return .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
@@ -140,7 +146,9 @@ public struct VRoundedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `semibold`-`15` for `iOS`, and `13` for `macOS`.
+        /// Title font.
+        /// Set to `system` `semibold` `15` on `iOS`.
+        /// Set to `system` `13` on `macOS`.
         public var title: Font = {
 #if os(iOS)
             return .system(size: 15, weight: .semibold)

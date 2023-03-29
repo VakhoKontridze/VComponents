@@ -103,7 +103,7 @@ public struct VWheelPickerUIModel {
         /// Footer font. Set to `system` `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
-        /// Row font. Set to `system` `medium`-`14`.
+        /// Row font. Set to `system` `medium` `14`.
         public var rows: Font = .system(size: 14, weight: .medium)
         
         // MARK: Initializers

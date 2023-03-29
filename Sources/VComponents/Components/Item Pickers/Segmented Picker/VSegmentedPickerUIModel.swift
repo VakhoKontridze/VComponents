@@ -34,7 +34,9 @@ public struct VSegmentedPickerUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Picker height. Set to `31`, and `22` for `macOS`, similarly to native pickers.
+        /// Picker height.
+        /// Set to `31` on `iOS`, similarly to native segmented picker.
+        /// Set to `22` on `macOS`, similarly to native segmented picker.
         public var height: CGFloat = {
 #if os(iOS)
             return 31
@@ -45,10 +47,12 @@ public struct VSegmentedPickerUIModel {
 #endif
         }()
         
-        /// Picker corner radius. Set to `7`, similarly to native picker.
+        /// Picker corner radius. Set to `7`, similarly to native segmented picker.
         public var cornerRadius: CGFloat = 7
         
-        /// Border width. Set to `0` for `iOS`, and `1` scaled to screen for `macOS`.
+        /// Border width.
+        /// Set to `0` on `iOS`.
+        /// Set to `1` scaled to screen on `macOS`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = {
@@ -61,10 +65,12 @@ public struct VSegmentedPickerUIModel {
 #endif
         }()
         
-        /// Selection indicator corner radius.  Set to `6`, similarly to native picker.
+        /// Selection indicator corner radius.  Set to `6`, similarly to native segmented picker.
         public var indicatorCornerRadius: CGFloat = 6
         
-        /// Selection indicator margin. Set to `2` for `iOS`, and `1` for `macOS`.
+        /// Selection indicator margin.
+        /// Set to `2` on `iOS`.
+        /// Set to `1` on `macOS`.
         public var indicatorMargin: CGFloat = {
 #if os(iOS)
             return 2
@@ -78,7 +84,9 @@ public struct VSegmentedPickerUIModel {
         /// Indicator shadow radius. Set to `1`.
         public var indicatorShadowRadius: CGFloat = 1
         
-        /// Indicator shadow offset. Set to `1x1` for `iOS`, and `0x1` for `macOS`.
+        /// Indicator shadow offset.
+        /// Set to `1x1` on `iOS`.
+        /// Set to `0x1` on `macOS`.
         public var indicatorShadowOffset: CGSize = {
 #if os(iOS)
             return .init(dimension: 1)
@@ -107,7 +115,9 @@ public struct VSegmentedPickerUIModel {
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Row divider size. Set to width `1x19` for `iOS`, and `1x13` for `macOS`, similarly to native pickers.
+        /// Row divider size.
+        /// Set to `1x19` on `iOS`, similarly to native segmented picker.
+        /// Set to `1x13` on `macOS`, similarly to native segmented picker.
         public var dividerSize: CGSize = {
 #if os(iOS)
             return .init(width: 1, height: 19)
@@ -210,7 +220,9 @@ public struct VSegmentedPickerUIModel {
         /// Footer font. Set to `system` `13`.
         public var footer: Font = GlobalUIModel.Common.footerFont
         
-        /// Row font. Set to `system` `medium`-`14` for `iOS`, and `system` `13` for `macOS`.
+        /// Row font.
+        /// Set to `system` `medium` `14` on `iOS`.
+        /// Set to `system`  `system` `13` on `macOS`.
         public var rows: Font = {
 #if os(iOS)
             return .system(size: 14, weight: .medium)

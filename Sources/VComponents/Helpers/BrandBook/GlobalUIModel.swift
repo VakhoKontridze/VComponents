@@ -66,10 +66,14 @@ struct GlobalUIModel {
         
         // MARK: Properties - Bar
         static var barHeight: CGFloat {
-#if os(watchOS)
-            return 5
-#else
+#if os(iOS)
             return 10
+#elseif os(macOS)
+            return 10
+#elseif os(tvOS)
+            return 10
+#elseif os(watchOS)
+            return 5
 #endif
         }
         static var barCornerRadius: CGFloat { barHeight/2 }
@@ -116,10 +120,14 @@ struct GlobalUIModel {
         static var iconTitleSpacing: CGFloat { 8 }
         
         static var pressedScale: CGFloat = {
-#if os(watchOS)
+#if os(iOS)
+            return 1
+#elseif os(macOS)
+            return 1
+#elseif os(watchOS)
             return 0.98
 #else
-            return 1
+            fatalError() // Not supported
 #endif
         }()
         
@@ -271,21 +279,25 @@ struct GlobalUIModel {
     struct Indicators {
         // MARK: Properties
         static var pageIndicatorDotDimension: CGFloat {
-#if os(tvOS)
+#if os(iOS)
+            return 10
+#elseif os(macOS)
+            return 10
+#elseif os(tvOS)
             return 20
 #elseif os(watchOS)
             return 8
-#else
-            return 10
 #endif
         }
         static var pageIndicatorSpacing: CGFloat {
-#if os(tvOS)
+#if os(iOS)
+            return 5
+#elseif os(macOS)
+            return 5
+#elseif os(tvOS)
             return 10
 #elseif os(watchOS)
             return 3
-#else
-            return 5
 #endif
         }
         

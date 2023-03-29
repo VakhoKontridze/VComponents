@@ -37,7 +37,9 @@ public struct VToggleUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Toggle size. Set to `51x32` for `iOS`, and `38x22` for `macOS`, similarly to native toggles.
+        /// Toggle size.
+        /// Set to `51x32` on `iOS`, similarly to native toggle.
+        /// Set to `38x22` on `macOS`, similarly to native toggle.
         public var size: CGSize = {
 #if os(iOS)
             return .init(width: 51, height: 31)
@@ -50,7 +52,9 @@ public struct VToggleUIModel {
         
         var cornerRadius: CGFloat { size.height }
         
-        /// Thumb dimension. Set to `27` for `iOS`, and `20` for `macOS`, similarly to native toggles.
+        /// Thumb dimension.
+        /// Set to `27` on `iOS`, similarly to native toggle.
+        /// Set to `20` on `macOS`, similarly to native toggle.
         public var thumbDimension: CGFloat = {
 #if os(iOS)
             return 27
@@ -124,7 +128,9 @@ public struct VToggleUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `15` for `iOS`, and `13` for `macOS`.
+        /// Title font.
+        /// Set to `system` `15` on `iOS`.
+        /// Set to `system` `13` on `macOS`.
         public var title: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers

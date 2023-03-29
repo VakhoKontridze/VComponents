@@ -100,7 +100,10 @@ public struct VPlainButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `medium`-`15` for `iOS`, `13` for `macOS`, and `17` for `watchOS`.
+        /// Title font.
+        /// Set to `system` `medium` `15` on `iOS`.
+        /// Set to `system` `13` on `macOS`.
+        /// Set to `system` `17` on `watchOS`.
         public var title: Font = {
 #if os(iOS)
             return .system(size: 15, weight: .medium)
@@ -125,7 +128,10 @@ public struct VPlainButtonUIModel {
         /// Indicates if button animates state change. Defaults to `true`.
         public var animatesStateChange: Bool = true
         
-        /// Ratio to which label scales down on press. Set to `0.98` for `watchOS`, and `1` for other platforms.
+        /// Ratio to which label scales down on press.
+        /// Set to `1` on `iOS`.
+        /// Set to `1` on `macOS`.
+        /// Set to `0.98` on `watchOS`.
         public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
         // MARK: Initializers

@@ -28,13 +28,19 @@ public struct VContinuousSpinnerUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Spinner dimension. Set to `25` for `macOS`, `30` for `tvOS`, and `15` for other platforms.
+        /// Spinner dimension.
+        /// Set to `15` on `iOS`.
+        /// Set to `25` on `macOS`.
+        /// Set to `30` on `tvOS`.
+        /// Set to `15` on `watchOS`.
         public var dimension: CGFloat = {
-#if os(macOS)
+#if os(iOS)
+            return 15
+#elseif os(macOS)
             return 25
 #elseif os(tvOS)
             return 30
-#else
+#elseif os(watchOS)
             return 15
 #endif
         }()
@@ -42,13 +48,19 @@ public struct VContinuousSpinnerUIModel {
         /// Length of colored part of spinner. Set to `0.75`.
         public var length: CGFloat = 0.75
         
-        /// Thickness. Set to `3` for `macOS`, `4` for `tvOS`, and `2` for other platforms.
+        /// Thickness.
+        /// Set to `2` on `watchOS`.
+        /// Set to `3` on `macOS`.
+        /// Set to `4` on `tvOS`.
+        /// Set to `2` on `watchOS`.
         public var thickness: CGFloat = {
-#if os(macOS)
+#if os(iOS)
+            return 2
+#elseif os(macOS)
             return 3
 #elseif os(tvOS)
             return 4
-#else
+#elseif os(watchOS)
             return 2
 #endif
         }()

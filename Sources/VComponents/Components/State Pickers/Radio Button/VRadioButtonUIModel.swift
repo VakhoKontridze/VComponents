@@ -114,7 +114,9 @@ public struct VRadioButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `15` for `iOS`, and `13` for `macOS`.
+        /// Title font.
+        /// Set to `system` `15` on `iOS`.
+        /// Set to `system` `13` on `macOS`.
         public var title: Font = GlobalUIModel.StatePickers.font
         
         // MARK: Initializers

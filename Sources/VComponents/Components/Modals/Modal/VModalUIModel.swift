@@ -153,7 +153,7 @@ public struct VModalUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font. Set to `system` `bold`-`17`.
+        /// Header font. Set to `system` `bold` `17`.
         public var header: Font = GlobalUIModel.Modals.headerFont
         
         // MARK: Initializers
