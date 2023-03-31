@@ -13,5 +13,5 @@ import SwiftUI
 @available(watchOS, unavailable)
 enum VMenuLabel<Content> where Content: View {
     case title(title: String)
-    case content(content: () -> Content)
+    case content(content: (VMenuInternalState) -> Content)
 }

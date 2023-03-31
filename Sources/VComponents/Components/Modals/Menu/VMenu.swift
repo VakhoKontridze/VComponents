@@ -55,61 +55,72 @@ import SwiftUI
 @available(watchOS, unavailable)
 public struct VMenu<Label>: View where Label: View {
     // MARK: Properties
+    private let uiModel: VMenuUIModel
+    
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VMenuInternalState { .init(isEnabled: isEnabled) }
     
-    private let sections: () -> [any VMenuSectionProtocol]
     private let primaryAction: (() -> Void)?
+    
     private let label: VMenuLabel<Label>
+    private let sections: () -> [any VMenuSectionProtocol]
     
     // MARK: Initializers - Sections
-    /// Initializes `VMenu` with label and sections.
-    public init(
-        primaryAction: (() -> Void)? = nil,
-        @ViewBuilder label: @escaping () -> Label,
-        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
-    ) {
-        self.sections = sections
-        self.primaryAction = primaryAction
-        self.label = .content(content: label)
-    }
-    
     /// Initializes `VMenu` with title and sections.
     public init(
+        uiModel: VMenuUIModel = .init(),
         primaryAction: (() -> Void)? = nil,
         title: String,
         @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
     )
         where Label == Never
     {
-        self.sections = sections
+        self.uiModel = uiModel
         self.primaryAction = primaryAction
         self.label = .title(title: title)
+        self.sections = sections
+    }
+    
+    /// Initializes `VMenu` with label and sections.
+    public init(
+        uiModel: VMenuUIModel = .init(),
+        primaryAction: (() -> Void)? = nil,
+        @ViewBuilder label: @escaping (VMenuInternalState) -> Label,
+        @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
+    ) {
+        self.uiModel = uiModel
+        self.primaryAction = primaryAction
+        self.label = .content(content: label)
+        self.sections = sections
     }
     
     // MARK: Initializers - Rows
-    /// Initializes `VMenu` with label and rows.
-    public init(
-        primaryAction: (() -> Void)? = nil,
-        @ViewBuilder label: @escaping () -> Label,
-        @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
-    ) {
-        self.sections = { [VMenuGroupSection(rows: rows)] }
-        self.primaryAction = primaryAction
-        self.label = .content(content: label)
-    }
-    
     /// Initializes `VMenu` with title and rows.
     public init(
+        uiModel: VMenuUIModel = .init(),
         primaryAction: (() -> Void)? = nil,
         title: String,
         @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
     )
         where Label == Never
     {
-        self.sections = { [VMenuGroupSection(rows: rows)] }
+        self.uiModel = uiModel
         self.primaryAction = primaryAction
         self.label = .title(title: title)
+        self.sections = { [VMenuGroupSection(rows: rows)] }
+    }
+    
+    /// Initializes `VMenu` with label and rows.
+    public init(
+        uiModel: VMenuUIModel = .init(),
+        primaryAction: (() -> Void)? = nil,
+        @ViewBuilder label: @escaping (VMenuInternalState) -> Label,
+        @VMenuRowBuilder rows: @escaping () -> [any VMenuRowProtocol]
+    ) {
+        self.uiModel = uiModel
+        self.primaryAction = primaryAction
+        self.label = .content(content: label)
+        self.sections = { [VMenuGroupSection(rows: rows)] }
     }
 
     // MARK: Body
@@ -128,7 +139,6 @@ public struct VMenu<Label>: View where Label: View {
                 )
             }
         })
-            .disabled(!internalState.isEnabled)
             .modifier({
                 if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                     $0.menuOrder(.fixed)
@@ -154,14 +164,11 @@ public struct VMenu<Label>: View where Label: View {
     @ViewBuilder private func menuLabel() -> some View {
         switch label {
         case .title(let title):
-#if os(iOS)
-            VPlainButton(action: {}, title: title)
-#else
             Text(title)
-#endif
+                .foregroundColor(uiModel.colors.label.value(for: internalState))
             
         case .content(let label):
-            label()
+            label(internalState)
         }
     }
 }
