@@ -209,8 +209,10 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                     .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
             }
         })
-            .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight)
-            .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth)
+            .frame(
+                width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight,
+                height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth
+            )
             .scaleEffect(scale(at: i))
     }
 
