@@ -265,7 +265,7 @@ public struct VSegmentedPicker<Data, Content>: View
         RoundedRectangle(cornerRadius: uiModel.layout.indicatorCornerRadius)
             .padding(uiModel.layout.indicatorMargin)
             .frame(width: rowWidth)
-            .scaleEffect(indicatorScale)
+            .scaleEffect(indicatorScale, anchor: indicatorScaleAnchor)
             .offset(x: rowWidth * CGFloat(selectedIndex))
             .foregroundColor(uiModel.colors.indicator.value(for: internalState))
             .shadow(
@@ -293,6 +293,7 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
+                                .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(i: i))
 
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }
@@ -311,6 +312,7 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .padding(uiModel.layout.indicatorMargin)
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
+                                .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(i: i))
 
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }
@@ -338,7 +340,10 @@ public struct VSegmentedPicker<Data, Content>: View
     
     // MARK: Actions
     private func stateChangeHandler(i: Int, gestureState: BaseButtonGestureState) {
-        pressedIndex = gestureState.isPressed ? i : nil
+        withAnimation(uiModel.animations.indicatorPress, { // Doesn't work as modifier
+            pressedIndex = gestureState.isPressed ? i : nil
+        })
+        
         if gestureState.isClicked { selectedIndex = i }
     }
 
@@ -348,6 +353,26 @@ public struct VSegmentedPicker<Data, Content>: View
         case pressedIndex: return uiModel.animations.indicatorPressedScale
         case _: return 1
         }
+    }
+    
+    public var indicatorScaleAnchor: UnitPoint {
+        switch selectedIndex {
+        case 0: return .leading
+        case content.count-1: return .trailing
+        default: return .center
+        }
+    }
+    
+    public var rowContentScale: CGFloat {
+        switch selectedIndex {
+        case pressedIndex: return uiModel.animations.rowContentPressedScale
+        case _: return 1
+        }
+    }
+    
+    public func rowContentScaleAnchor(i: Int) -> UnitPoint {
+        guard i == selectedIndex else { return .center }
+        return indicatorScaleAnchor
     }
     
     private func dividerOpacity(for index: Int) -> Double {
@@ -412,84 +437,87 @@ struct VSegmentedPicker_Previews: PreviewProvider {
     
     private struct StatesPreview: View {
         var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        VSegmentedPicker(
-                            selection: .constant(selection),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle
-                        )
-                    }
-                )
-                
-                // Color is also applied to other rows.
-                // Scale effect cannot be shown.
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Pressed (Row)",
-                    content: {
-                        VSegmentedPicker(
-                            uiModel: {
-                                var uiModel: VSegmentedPickerUIModel = .init()
-                                uiModel.colors.title.enabled = uiModel.colors.title.pressed
-                                return uiModel
-                            }(),
-                            selection: .constant(selection),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VSegmentedPicker(
-                            selection: .constant(selection),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle
-                        )
-                            .disabled(true)
-                    }
-                )
-                
-                PreviewSectionHeader("Native")
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        Picker("", selection: .constant(selection), content: {
-                            ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
-                                Text(row.stringRepresentation)
-                                    .tag(i)
+            PreviewContainer(
+                embeddedInScrollViewOnPlatforms: [.macOS],
+                content: {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Enabled",
+                        content: {
+                            VSegmentedPicker(
+                                selection: .constant(selection),
+                                headerTitle: headerTitle,
+                                footerTitle: footerTitle
+                            )
+                        }
+                    )
+                    
+                    // Color is also applied to other rows.
+                    // Scale effect cannot be shown.
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Pressed (Row)",
+                        content: {
+                            VSegmentedPicker(
+                                uiModel: {
+                                    var uiModel: VSegmentedPickerUIModel = .init()
+                                    uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                    return uiModel
+                                }(),
+                                selection: .constant(selection),
+                                headerTitle: headerTitle,
+                                footerTitle: footerTitle
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Disabled",
+                        content: {
+                            VSegmentedPicker(
+                                selection: .constant(selection),
+                                headerTitle: headerTitle,
+                                footerTitle: footerTitle
+                            )
+                                .disabled(true)
+                        }
+                    )
+                    
+                    PreviewSectionHeader("Native")
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Enabled",
+                        content: {
+                            Picker("", selection: .constant(selection), content: {
+                                ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
+                                    Text(row.stringRepresentation)
+                                        .tag(i)
+                                })
                             })
-                        })
-                            .labelsHidden()
-                            .pickerStyle(.segmented)
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        Picker("", selection: .constant(selection), content: {
-                            ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
-                                Text(row.stringRepresentation)
-                                    .tag(i)
+                                .labelsHidden()
+                                .pickerStyle(.segmented)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Disabled",
+                        content: {
+                            Picker("", selection: .constant(selection), content: {
+                                ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
+                                    Text(row.stringRepresentation)
+                                        .tag(i)
+                                })
                             })
-                        })
-                            .labelsHidden()
-                            .pickerStyle(.segmented)
-                            .disabled(true)
-                    }
-                )
-            })
+                                .labelsHidden()
+                                .pickerStyle(.segmented)
+                                .disabled(true)
+                        }
+                    )
+                }
+            )
         }
     }
 }

@@ -245,6 +245,12 @@ public struct VSegmentedPickerUIModel {
         /// State change animation. Set to `easeInOut` with duration `0.2`.
         public var selection: Animation? = .easeInOut(duration: 0.2)
         
+        /// Indicator press animation. Set to `linear` with duration `0.2`.
+        public var indicatorPress: Animation? = .linear(duration: 0.2)
+        
+        /// Ratio to which selected row content scales down on press. Set to `0.95`.
+        public var rowContentPressedScale: CGFloat = 0.95
+        
         /// Ratio to which selection indicator scales down on press. Set to `0.95`.
         public var indicatorPressedScale: CGFloat = 0.95
         

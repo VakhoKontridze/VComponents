@@ -243,6 +243,8 @@ VSegmentedPicker
 - `headerLineLimit` is replaced with `headerTitleLineType` is `VSegmentedPickerUIModel`
 - `footerLineLimit` is replaced with `footerTitleLineType` is `VSegmentedPickerUIModel`
 - `titleMinimumScaleFactor` is added in `VSegmentedPickerUIModel`
+- `indicatorPress` is added in `VSegmentedPickerUIModel`
+- `rowContentPressedScale` is added in `VSegmentedPickerUIModel`
 - Header and footer color mismatched when disabled is fixed
 
 VWheelPicker
