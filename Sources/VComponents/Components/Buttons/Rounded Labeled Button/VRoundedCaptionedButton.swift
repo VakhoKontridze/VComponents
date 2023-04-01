@@ -138,12 +138,12 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
         Group(content: {
             switch caption {
             case .title(let title):
-                                    captionTitleComponent(internalState: internalState, title: title)
+                titleCaptionComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
                 HStack(spacing: uiModel.layout.captionSpacing, content: {
-                    captionIconComponent(internalState: internalState, icon: icon)
-                    captionTitleComponent(internalState: internalState, title: title)
+                    iconCaptionComponent(internalState: internalState, icon: icon)
+                    titleCaptionComponent(internalState: internalState, title: title)
                 })
                 
             case .caption(let caption):
@@ -153,7 +153,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
             .frame(maxWidth: uiModel.layout.captionWidthMax)
     }
     
-    private func captionTitleComponent(
+    private func titleCaptionComponent(
         internalState: VRoundedCaptionedButtonInternalState,
         title: String
     ) -> some View {
@@ -166,7 +166,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
         )
     }
     
-    private func captionIconComponent(
+    private func iconCaptionComponent(
         internalState: VRoundedCaptionedButtonInternalState,
         icon: Image
     ) -> some View {

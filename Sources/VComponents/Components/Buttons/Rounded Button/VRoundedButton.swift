@@ -94,10 +94,10 @@ public struct VRoundedButton<Label>: View where Label: View {
         Group(content: {
             switch label {
             case .title(let title):
-                labelTitleComponent(internalState: internalState, title: title)
+                titleLabelComponent(internalState: internalState, title: title)
                 
             case .icon(let icon):
-                labelIconComponent(internalState: internalState, icon: icon)
+                iconLabelComponent(internalState: internalState, icon: icon)
                 
             case .label(let label):
                 label(internalState)
@@ -106,7 +106,7 @@ public struct VRoundedButton<Label>: View where Label: View {
             .padding(uiModel.layout.labelMargins)
     }
     
-    private func labelTitleComponent(
+    private func titleLabelComponent(
         internalState: VRoundedButtonInternalState,
         title: String
     ) -> some View {
@@ -118,7 +118,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         )
     }
     
-    private func labelIconComponent(
+    private func iconLabelComponent(
         internalState: VRoundedButtonInternalState,
         icon: Image
     ) -> some View {
