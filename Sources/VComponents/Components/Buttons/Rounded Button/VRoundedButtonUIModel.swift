@@ -171,6 +171,12 @@ public struct VRoundedButtonUIModel {
         /// Indicates if button animates state change. Defaults to `true`.
         public var animatesStateChange: Bool = true
         
+        /// Ratio to which label scales down on press. Set to `1`.
+        public var backgroundPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+        
+        /// Ratio to which label scales down on press. Set to `1`.
+        public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

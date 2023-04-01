@@ -17,6 +17,7 @@ VPrimaryButton
 
 - `VPrimaryButton` is renamed to `VLoadingStretchedButton`
 - `animatesStateChange` is added in `VLoadingStretchedButtonUIModel`
+- `backgroundPressedScale` and `labelPressedScale` are added in `VLoadingStretchedButtonUIModel`
 
 VSecondaryButton
 
@@ -24,15 +25,18 @@ VSecondaryButton
 - `animatesStateChange` is added in `VCapsuleButtonUIModel`
 - `backgroundPressedScale` is added in `VCapsuleButtonUIModel`
 - `labelPressedScale` is added in `VCapsuleButtonUIModel`
+- `backgroundPressedScale` and `labelPressedScale` are added in `VCapsuleButtonUIModel`
 
 VRoundedButton
 
 - `animatesStateChange` is added in `VRoundedButtonUIModel`
+- `backgroundPressedScale` and `labelPressedScale` are added in `VRoundedButtonUIModel`
 
 VRoundedLabeledButton
 
 - `VRoundedLabeledButton` is renamed to `VRoundedCaptionedButton`
 - `animatesStateChange` is added in `VRoundedLabeledButtonUIModel`
+- `backgroundPressedScale`, `labelPressedScale`, and `captionPressedScale` are added in `VRoundedLabeledButtonUIModel`
 
 VPlainButton
 

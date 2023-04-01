@@ -108,6 +108,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(size: uiModel.layout.iconSize)
+                .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
                 .foregroundColor(uiModel.colors.icon.value(for: internalState))
                 .opacity(uiModel.colors.iconOpacities.value(for: internalState))
         })
@@ -120,6 +121,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
         internalState: VRoundedCaptionedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+            .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
@@ -129,6 +131,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+                .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
         }
     }
     
@@ -151,6 +154,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
             }
         })
             .frame(maxWidth: uiModel.layout.captionWidthMax)
+            .scaleEffect(internalState == .pressed ? uiModel.animations.captionPressedScale : 1)
     }
     
     private func titleCaptionComponent(

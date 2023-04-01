@@ -103,6 +103,7 @@ public struct VRoundedButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
+            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
             .padding(uiModel.layout.labelMargins)
     }
     
@@ -134,6 +135,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         internalState: VRoundedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+            .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
@@ -143,6 +145,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+                .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
         }
     }
 }

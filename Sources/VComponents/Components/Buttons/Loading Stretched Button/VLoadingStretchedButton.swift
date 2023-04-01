@@ -127,6 +127,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
 
             spinner(internalState: internalState)
         })
+            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
             .padding(uiModel.layout.labelMargins)
     }
     
@@ -175,6 +176,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+            .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
@@ -184,6 +186,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+                .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
         }
     }
 }

@@ -138,8 +138,8 @@ public struct VCapsuleButton<Label>: View where Label: View {
         internalState: VCapsuleButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
-            .foregroundColor(uiModel.colors.background.value(for: internalState))
             .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
+            .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
     @ViewBuilder private func border(
