@@ -1,5 +1,5 @@
 //
-//  VRoundedLabeledButton.swift
+//  VRoundedCaptionedButton.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 17.08.22.
@@ -8,80 +8,80 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rounded Labeled Button
-/// Rounded colored labeled button component that performs action when triggered.
+// MARK: - V Rounded Captioned Button
+/// Rounded colored labeled button component with caption that performs action when triggered.
 ///
 /// Component can be initialized with title, icon and title, and label.
 ///
 /// UI Model can be passed as parameter.
 ///
 ///     var body: some View {
-///         VRoundedLabeledButton(
+///         VRoundedCaptionedButton(
 ///             action: { print("Clicked") },
 ///             icon: Image(systemName: "swift"),
-///             titleLabel: "Lorem Ipsum"
+///             titleCaption: "Lorem Ipsum"
 ///         )
 ///     }
 ///
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
-public struct VRoundedLabeledButton<Label>: View where Label: View {
+public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: View {
     // MARK: Properties
-    private let uiModel: VRoundedLabeledButtonUIModel
+    private let uiModel: VRoundedCaptionedButtonUIModel
     
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedLabeledButtonInternalState { baseButtonState }
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedCaptionedButtonInternalState { baseButtonState }
     
     private let action: () -> Void
     
     private let icon: Image
-    private let label: VRoundedLabeledButtonLabel<Label>
+    private let caption: VRoundedCaptionedButtonCaption<CaptionLabel>
     
     private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
     
     // MARK: Initializers
-    /// Initializes `VRoundedLabeledButton` with action, icon, and title label.
+    /// Initializes `VRoundedCaptionedButton` with action, icon, and title caption.
     public init(
-        uiModel: VRoundedLabeledButtonUIModel = .init(),
+        uiModel: VRoundedCaptionedButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        titleLabel: String
+        titleCaption: String
     )
-        where Label == Never
+        where CaptionLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
         self.icon = icon
-        self.label = .title(title: titleLabel)
+        self.caption = .title(title: titleCaption)
     }
     
-    /// Initializes `VRoundedLabeledButton` with action, icon, icon label, and title label.
+    /// Initializes `VRoundedCaptionedButton` with action, icon, icon caption, and title caption.
     public init(
-        uiModel: VRoundedLabeledButtonUIModel = .init(),
+        uiModel: VRoundedCaptionedButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        iconLabel: Image,
-        titleLabel: String
+        iconCaption: Image,
+        titleCaption: String
     )
-        where Label == Never
+        where CaptionLabel == Never
     {
         self.uiModel = uiModel
         self.action = action
         self.icon = icon
-        self.label = .iconTitle(icon: iconLabel, title: titleLabel)
+        self.caption = .iconTitle(icon: iconCaption, title: titleCaption)
     }
     
-    /// Initializes `VRoundedLabeledButton` with action, icon, and label.
+    /// Initializes `VRoundedCaptionedButton` with action, icon, and caption.
     public init(
-        uiModel: VRoundedLabeledButtonUIModel = .init(),
+        uiModel: VRoundedCaptionedButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
-        @ViewBuilder label: @escaping (VRoundedLabeledButtonInternalState) -> Label
+        @ViewBuilder caption: @escaping (VRoundedCaptionedButtonInternalState) -> CaptionLabel
     ) {
         self.uiModel = uiModel
         self.action = action
         self.icon = icon
-        self.label = .label(label: label)
+        self.caption = .caption(caption: caption)
     }
     
     // MARK: Body
@@ -90,18 +90,18 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
             uiModel: uiModel.baseButtonSubUIModel,
             action: action,
             label: { baseButtonState in
-                let internalState: VRoundedLabeledButtonInternalState = internalState(baseButtonState)
+                let internalState: VRoundedCaptionedButtonInternalState = internalState(baseButtonState)
                 
-                VStack(spacing: uiModel.layout.rectangleLabelSpacing, content: {
+                VStack(spacing: uiModel.layout.rectangleCaptionSpacing, content: {
                     rectangle(internalState: internalState)
-                    buttonLabel(internalState: internalState)
+                    buttonCaption(internalState: internalState)
                 })
             }
         )
     }
     
     private func rectangle(
-        internalState: VRoundedLabeledButtonInternalState
+        internalState: VRoundedCaptionedButtonInternalState
     ) -> some View {
         Group(content: {
             icon
@@ -117,14 +117,14 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
     }
     
     private func rectangleBackground(
-        internalState: VRoundedLabeledButtonInternalState
+        internalState: VRoundedCaptionedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .foregroundColor(uiModel.colors.background.value(for: internalState))
     }
     
     @ViewBuilder private func roundedRectangleBorder(
-        internalState: VRoundedLabeledButtonInternalState
+        internalState: VRoundedCaptionedButtonInternalState
     ) -> some View {
         if hasBorder {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
@@ -132,50 +132,50 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
         }
     }
     
-    private func buttonLabel(
-        internalState: VRoundedLabeledButtonInternalState
+    private func buttonCaption(
+        internalState: VRoundedCaptionedButtonInternalState
     ) -> some View {
         Group(content: {
-            switch label {
+            switch caption {
             case .title(let title):
-                labelTitleComponent(internalState: internalState, title: title)
+                                    captionTitleComponent(internalState: internalState, title: title)
                 
             case .iconTitle(let icon, let title):
-                HStack(spacing: uiModel.layout.labelSpacing, content: {
-                    labelIconComponent(internalState: internalState, icon: icon)
-                    labelTitleComponent(internalState: internalState, title: title)
+                HStack(spacing: uiModel.layout.captionSpacing, content: {
+                    captionIconComponent(internalState: internalState, icon: icon)
+                    captionTitleComponent(internalState: internalState, title: title)
                 })
                 
-            case .label(let label):
-                label(internalState)
+            case .caption(let caption):
+                caption(internalState)
             }
         })
-            .frame(maxWidth: uiModel.layout.labelWidthMax)
+            .frame(maxWidth: uiModel.layout.captionWidthMax)
     }
     
-    private func labelTitleComponent(
-        internalState: VRoundedLabeledButtonInternalState,
+    private func captionTitleComponent(
+        internalState: VRoundedCaptionedButtonInternalState,
         title: String
     ) -> some View {
         VText(
-            type: uiModel.layout.titleLabelTextLineType,
-            minimumScaleFactor: uiModel.layout.titleLabelMinimumScaleFactor,
-            color: uiModel.colors.titleLabel.value(for: internalState),
-            font: uiModel.fonts.titleLabel,
+            type: uiModel.layout.titleCaptionTextLineType,
+            minimumScaleFactor: uiModel.layout.titleCaptionMinimumScaleFactor,
+            color: uiModel.colors.titleCaption.value(for: internalState),
+            font: uiModel.fonts.titleCaption,
             text: title
         )
     }
     
-    private func labelIconComponent(
-        internalState: VRoundedLabeledButtonInternalState,
+    private func captionIconComponent(
+        internalState: VRoundedCaptionedButtonInternalState,
         icon: Image
     ) -> some View {
         icon
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(size: uiModel.layout.iconLabelSize)
-            .foregroundColor(uiModel.colors.iconLabel.value(for: internalState))
-            .opacity(uiModel.colors.iconLabelOpacities.value(for: internalState))
+            .frame(size: uiModel.layout.iconCaptionSize)
+            .foregroundColor(uiModel.colors.iconCaption.value(for: internalState))
+            .opacity(uiModel.colors.iconCaptionOpacities.value(for: internalState))
     }
 }
 
@@ -183,7 +183,7 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
 @available(macOS 11.0, *)@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-struct VRoundedLabeledButton_Previews: PreviewProvider {
+struct VRoundedCaptionedButton_Previews: PreviewProvider {
     // Configuration
     private static var colorScheme: ColorScheme { .light }
     
@@ -198,16 +198,16 @@ struct VRoundedLabeledButton_Previews: PreviewProvider {
     
     // Data
     private static var icon: Image { .init(systemName: "swift") }
-    private static var titleLabel: String { "Lorem Ipsum" }
+    private static var titleCaption: String { "Lorem Ipsum" }
     
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VRoundedLabeledButton(
+                VRoundedCaptionedButton(
                     action: { print("Clicked") },
                     icon: icon,
-                    titleLabel: titleLabel
+                    titleCaption: titleCaption
                 )
             })
         }
@@ -220,10 +220,10 @@ struct VRoundedLabeledButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Enabled",
                     content: {
-                        VRoundedLabeledButton(
+                        VRoundedCaptionedButton(
                             action: {},
                             icon: icon,
-                            titleLabel: titleLabel
+                            titleCaption: titleCaption
                         )
                     }
                 )
@@ -232,17 +232,17 @@ struct VRoundedLabeledButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Pressed",
                     content: {
-                        VRoundedLabeledButton(
+                        VRoundedCaptionedButton(
                             uiModel: {
-                                var uiModel: VRoundedLabeledButtonUIModel = .init()
+                                var uiModel: VRoundedCaptionedButtonUIModel = .init()
                                 uiModel.colors.background.enabled = uiModel.colors.background.pressed
                                 uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
-                                uiModel.colors.titleLabel.enabled = uiModel.colors.titleLabel.pressed
+                                uiModel.colors.titleCaption.enabled = uiModel.colors.titleCaption.pressed
                                 return uiModel
                             }(),
                             action: {},
                             icon: icon,
-                            titleLabel: titleLabel
+                            titleCaption: titleCaption
                         )
                     }
                 )
@@ -251,10 +251,10 @@ struct VRoundedLabeledButton_Previews: PreviewProvider {
                     axis: .horizontal,
                     title: "Disabled",
                     content: {
-                        VRoundedLabeledButton(
+                        VRoundedCaptionedButton(
                             action: {},
                             icon: icon,
-                            titleLabel: titleLabel
+                            titleCaption: titleCaption
                         )
                             .disabled(true)
                     }

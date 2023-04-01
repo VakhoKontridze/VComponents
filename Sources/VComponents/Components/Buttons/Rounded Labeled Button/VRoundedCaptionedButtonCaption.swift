@@ -1,5 +1,5 @@
 //
-//  VRoundedLabeledButtonLabel.swift
+//  VRoundedCaptionedButtonCaption.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 17.08.22.
@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-// MARK: - V Rounded Labeled Button Label
+// MARK: - V Rounded Captioned Button Caption
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-enum VRoundedLabeledButtonLabel<Label> where Label: View {
+enum VRoundedCaptionedButtonCaption<Caption> where Caption: View {
     case title(title: String)
     case iconTitle(icon: Image, title: String)
-    case label(label: (VRoundedLabeledButtonInternalState) -> Label)
+    case caption(caption: (VRoundedCaptionedButtonInternalState) -> Caption)
 }

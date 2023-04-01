@@ -31,6 +31,7 @@ VRoundedButton
 
 VRoundedLabeledButton
 
+- `VRoundedLabeledButton` is renamed to `VRoundedCaptionedButton`
 - `animatesStateChange` is added in `VRoundedLabeledButtonUIModel`
 
 VPlainButton

@@ -1,5 +1,5 @@
 //
-//  VRoundedLabeledButtonUIModel.swift
+//  VRoundedCaptionedButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 17.08.22.
@@ -8,12 +8,12 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rounded Labeled Button UI Model
+// MARK: - V Rounded Captioned Button UI Model
 /// Model that describes UI.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct VRoundedLabeledButtonUIModel {
+public struct VRoundedCaptionedButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
     public var layout: Layout = .init()
@@ -52,20 +52,20 @@ public struct VRoundedLabeledButtonUIModel {
         /// Icon size. Set to `24x24`.
         public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionLarge)
         
-        /// Spacing between rounded rectangle and label. Set to `4`.
-        public var rectangleLabelSpacing: CGFloat = 4
+        /// Spacing between rounded rectangle and caption. Set to `4`.
+        public var rectangleCaptionSpacing: CGFloat = 4
         
-        /// Maximum label width. Set to `100`.
-        public var labelWidthMax: CGFloat = 100
+        /// Maximum caption width. Set to `100`.
+        public var captionWidthMax: CGFloat = 100
         
-        /// Spacing between icon label and icon title. Set to `8`.
-        public var labelSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
+        /// Spacing between icon caption and title caption. Set to `8`.
+        public var captionSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
-        /// Icon label size. Set to `18x18`.
-        public var iconLabelSize: CGSize = .init(dimension: 18)
+        /// Icon caption size. Set to `18x18`.
+        public var iconCaptionSize: CGSize = .init(dimension: 18)
         
-        /// Title label text line type. Set to `multiline` with `center` alignment and `1...2` lines.
-        public var titleLabelTextLineType: TextLineType = {
+        /// Title caption text line type. Set to `multiline` with `center` alignment and `1...2` lines.
+        public var titleCaptionTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .center, lineLimit: 1...2)
             } else {
@@ -73,8 +73,8 @@ public struct VRoundedLabeledButtonUIModel {
             }
         }()
         
-        /// Title label minimum scale factor. Set to `0.75`.
-        public var titleLabelMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        /// Title caption minimum scale factor. Set to `0.75`.
+        public var titleCaptionMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -119,28 +119,28 @@ public struct VRoundedLabeledButtonUIModel {
         /// In order to use vector images, set this to `1`s.
         public var iconOpacities: StateOpacities = .init(1)
         
-        /// Title label colors.
-        public var titleLabel: StateColors = .init(
+        /// Title caption colors.
+        public var titleCaption: StateColors = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primaryPressedDisabled,
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Icon label colors.
+        /// Icon caption colors.
         ///
         /// Applied to all images. But should be used for vector images.
         /// In order to use bitmap images, set this to `clear`.
-        public var iconLabel: StateColors = .init(
+        public var iconCaption: StateColors = .init(
             enabled: ColorBook.primary,
             pressed: ColorBook.primaryPressedDisabled,
             disabled: ColorBook.primaryPressedDisabled
         )
         
-        /// Icon label opacities. Set to `1`s.
+        /// Icon caption opacities. Set to `1`s.
         ///
         /// Applied to all images. But should be used for bitmap images.
         /// In order to use vector images, set this to `1`s.
-        public var iconLabelOpacities: StateOpacities = .init(1)
+        public var iconCaptionOpacities: StateOpacities = .init(1)
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -159,8 +159,8 @@ public struct VRoundedLabeledButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `15`.
-        public var titleLabel: Font = .system(size: 15)
+        /// Title caption font. Set to `system` `15`.
+        public var titleCaption: Font = .system(size: 15)
         
         // MARK: Initializers
         /// Initializes UI model with default values.
