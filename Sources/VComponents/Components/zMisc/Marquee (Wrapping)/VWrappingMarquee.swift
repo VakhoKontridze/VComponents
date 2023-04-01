@@ -178,6 +178,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             .toSwiftUIAnimation
             .delay(uiModel.animations.delay)
             .repeatForever(autoreverses: false)
+            .delay(uiModel.animations.initialDelay)
     }
     
     private let resettingAnimation: Animation = .linear(duration: 0)

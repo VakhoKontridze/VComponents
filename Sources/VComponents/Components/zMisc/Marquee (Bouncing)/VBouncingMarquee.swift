@@ -145,6 +145,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             .toSwiftUIAnimation
             .delay(uiModel.animations.delay)
             .repeatForever(autoreverses: true)
+            .delay(uiModel.animations.initialDelay)
     }
 }
 

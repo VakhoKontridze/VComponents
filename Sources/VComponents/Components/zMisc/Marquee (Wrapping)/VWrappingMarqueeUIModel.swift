@@ -91,6 +91,9 @@ public struct VWrappingMarqueeUIModel {
         /// Animation delay. Set to `1` second.
         public var delay: Double = 1
         
+        /// Initial animation delay. Set to `1` second.
+        public var initialDelay: Double = 1
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
