@@ -42,25 +42,21 @@ public struct VPageIndicatorUIModel {
         /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Dot dimension on the main axis.
+        /// Dot width, but height for vertical layouts.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.
         /// Set to `20` on `tvOS`.
         /// Set to `8` on `watchOS`.
-        ///
-        /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
-        public var dotDimensionPrimaryAxis: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
+        public var dotWidth: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the secondary axis.
+        /// Dot height, but width for vertical layouts.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.
         /// Set to `20` on `tvOS`.
         /// Set to `8` on `watchOS`.
-        ///
-        /// For horizontal layouts, this will be height, and for vertical, width.
-        public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
+        public var dotHeight: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
         /// Border width. Set to `0.`
         ///
@@ -83,15 +79,15 @@ public struct VPageIndicatorUIModel {
         
         init(
             direction: LayoutDirectionOmni,
-            dotDimensionPrimaryAxis: CGFloat?,
-            dotDimensionSecondaryAxis: CGFloat,
+            dotWidth: CGFloat?,
+            dotHeight: CGFloat,
             dotBorderWidth: CGFloat,
             unselectedDotScale: CGFloat,
             spacing: CGFloat
         ) {
             self.direction = direction
-            self.dotDimensionPrimaryAxis = dotDimensionPrimaryAxis
-            self.dotDimensionSecondaryAxis = dotDimensionSecondaryAxis
+            self.dotWidth = dotWidth
+            self.dotHeight = dotHeight
             self.dotBorderWidth = dotBorderWidth
             self.unselectedDotScale = unselectedDotScale
             self.spacing = spacing

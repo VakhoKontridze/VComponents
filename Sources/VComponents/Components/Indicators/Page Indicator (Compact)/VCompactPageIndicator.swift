@@ -40,8 +40,8 @@ import VCore
 ///         VCompactPageIndicator(
 ///             uiModel: {
 ///                 var uiModel: VCompactPageIndicatorUIModel = .init()
-///                 uiModel.layout.dotDimensionPrimaryAxis = 15
-///                 uiModel.layout.dotDimensionSecondaryAxis = 15
+///                 uiModel.layout.dotWidth = 15
+///                 uiModel.layout.dotHeight = 15
 ///                 return uiModel
 ///             }(),
 ///             total: total,
@@ -157,8 +157,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     
     private var frame: some View {
         let size: CGSize = .init(
-            width: visibleDimensionPrimaryAxis,
-            height: uiModel.layout.dotDimensionSecondaryAxis
+            width: visibleWidth,
+            height: uiModel.layout.dotHeight
         )
             .withReversedDimensions(if: uiModel.layout.direction.isVertical)
         
@@ -209,21 +209,21 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                     .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
             }
         })
-            .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
-            .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
+            .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight)
+            .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth)
             .scaleEffect(scale(at: i))
     }
 
     // MARK: Dimension on Main Axis
-    private var visibleDimensionPrimaryAxis: CGFloat {
-        let dots: CGFloat = CGFloat(visible) * uiModel.layout.dotDimensionPrimaryAxis
+    private var visibleWidth: CGFloat {
+        let dots: CGFloat = CGFloat(visible) * uiModel.layout.dotWidth
         let spacings: CGFloat = CGFloat(visible - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
     }
     
-    private var totalDimensionPrimaryAxis: CGFloat {
-        let dots: CGFloat = CGFloat(total) * uiModel.layout.dotDimensionPrimaryAxis
+    private var totalWidth: CGFloat {
+        let dots: CGFloat = CGFloat(total) * uiModel.layout.dotWidth
         let spacings: CGFloat = CGFloat(total - 1) * uiModel.layout.spacing
         let total: CGFloat = dots + spacings
         return total
@@ -231,7 +231,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
 
     // MARK: Animation Offset
     private var offset: CGFloat {
-        let rawOffset: CGFloat = (totalDimensionPrimaryAxis - visibleDimensionPrimaryAxis) / 2
+        let rawOffset: CGFloat = (totalWidth - visibleWidth) / 2
         
         let directionalOffset: CGFloat = {
             switch region {
@@ -239,7 +239,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 return rawOffset
             
             case .center:
-                let incrementalOffset: CGFloat = -CGFloat(current - middle) * (uiModel.layout.dotDimensionPrimaryAxis + uiModel.layout.spacing)
+                let incrementalOffset: CGFloat = -CGFloat(current - middle) * (uiModel.layout.dotWidth + uiModel.layout.spacing)
                 return rawOffset + incrementalOffset
             
             case .end:

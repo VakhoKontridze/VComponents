@@ -32,34 +32,28 @@ public struct VAutomaticPageIndicatorUIModel {
         /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Dot dimension on the main axis when switching to `standard` configuration.
+        /// Dot width, but height for vertical layouts, when switching to `standard` configuration.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.
         /// Set to `20` on `tvOS`.
         /// Set to `8` on `watchOS`.
-        ///
-        /// For horizontal layouts, this will be width, and for vertical, height.
         ///
         /// Set to `nil`, to make dot stretch to take available space.
-        public var dotDimensionPrimaryAxisForStandardConfiguration: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
+        public var dotWidthForStandardConfiguration: CGFloat? = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the main axis when switching to `compact` configuration.
+        /// Dot width, but height for vertical layouts, when switching to `compact` configuration.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.
         /// Set to `20` on `tvOS`.
         /// Set to `8` on `watchOS`.
-        ///
-        /// For horizontal layouts, this will be width, and for vertical, height.
-        public var dotDimensionPrimaryAxisForCompactConfiguration: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
+        public var dotWidthForCompactConfiguration: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
-        /// Dot dimension on the secondary axis.
+        /// Dot height, but width for vertical layouts.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.
         /// Set to `20` on `tvOS`.
         /// Set to `8` on `watchOS`.
-        ///
-        /// For horizontal layouts, this will be height, and for vertical, width.
-        public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
+        public var dotHeight: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
         /// Border width. Set to `0.`
         ///
@@ -112,8 +106,8 @@ public struct VAutomaticPageIndicatorUIModel {
         .init(
             layout: VPageIndicatorUIModel.Layout(
                 direction: layout.direction,
-                dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
-                dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
+                dotWidth: layout.dotWidthForStandardConfiguration,
+                dotHeight: layout.dotHeight,
                 dotBorderWidth: layout.dotBorderWidth,
                 unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration,
                 spacing: layout.spacing
@@ -127,9 +121,9 @@ public struct VAutomaticPageIndicatorUIModel {
         .init(
             layout: VCompactPageIndicatorUIModel.Layout(
                 direction: layout.direction,
-                dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForCompactConfiguration,
-                dotDimensionPrimaryAxisForStandardConfiguration: layout.dotDimensionPrimaryAxisForStandardConfiguration,
-                dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
+                dotWidth: layout.dotWidthForCompactConfiguration,
+                dotWidthForStandardConfiguration: layout.dotWidthForStandardConfiguration,
+                dotHeight: layout.dotHeight,
                 spacing: layout.spacing,
                 visibleDots: layout.visibleDotsForCompactConfiguration,
                 centerDots: layout.centerDotsForCompactConfiguration,

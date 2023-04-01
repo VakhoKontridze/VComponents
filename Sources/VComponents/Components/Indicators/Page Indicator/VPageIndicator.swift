@@ -40,8 +40,8 @@ import VCore
 ///         VPageIndicator(
 ///             uiModel: {
 ///                 var uiModel: VPageIndicatorUIModel = .init()
-///                 uiModel.layout.dotDimensionPrimaryAxis = 15
-///                 uiModel.layout.dotDimensionSecondaryAxis = 15
+///                 uiModel.layout.dotWidth = 15
+///                 uiModel.layout.dotHeight = 15
 ///                 return uiModel
 ///             }(),
 ///             total: total,
@@ -66,8 +66,8 @@ import VCore
 ///         VPageIndicator(
 ///             uiModel: {
 ///                 var uiModel: VPageIndicatorUIModel = .init()
-///                 uiModel.layout.dotDimensionPrimaryAxis = nil
-///                 uiModel.layout.dotDimensionSecondaryAxis = 5
+///                 uiModel.layout.dotWidth = nil
+///                 uiModel.layout.dotHeight = 5
 ///                 return uiModel
 ///             }(),
 ///             total: total,
@@ -158,8 +158,8 @@ public struct VPageIndicator<Content>: View where Content: View {
                     .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
             }
         })
-            .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
-            .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
+            .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight)
+            .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth)
             .scaleEffect(current == i ? 1 : uiModel.layout.unselectedDotScale)
     }
 }
@@ -280,8 +280,8 @@ struct VPageIndicator_Previews: PreviewProvider {
                     uiModel: {
                         var uiModel: VPageIndicatorUIModel = .init()
                         uiModel.layout.direction = .leftToRight
-                        uiModel.layout.dotDimensionPrimaryAxis = nil
-                        uiModel.layout.dotDimensionSecondaryAxis = 5
+                        uiModel.layout.dotWidth = nil
+                        uiModel.layout.dotHeight = 5
                         return uiModel
                     }(),
                     total: total,
