@@ -88,14 +88,17 @@ VContinuousSpinner
 
 VPageIndicator
 
+- `dotBorderWidth`, and `dotBorder`/`selectedDotBorder` colors are added in `VPageIndicatorUIModel`, that allows for border customization
 - `selectedIndex` is renamed to `current`
 
 VCompactPageIndicator
 
+- `dotBorderWidth`, and `dotBorder`/`selectedDotBorder` colors are added in `VCompactPageIndicatorUIModel`, that allows for border customization
 - `selectedIndex` is renamed to `current`
 
 VAutomaticPageIndicator
 
+- `dotBorderWidth`, and `dotBorder`/`selectedDotBorder` colors are added in `VAutomaticPageIndicatorUIModel`, that allows for border customization
 - `selectedIndex` is renamed to `current`
 
 Helpers - Architectural Pattern Helpers

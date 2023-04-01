@@ -62,15 +62,20 @@ public struct VPageIndicatorUIModel {
         /// For horizontal layouts, this will be height, and for vertical, width.
         public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
+        /// Border width. Set to `0.`
+        ///
+        /// To hide border, set to `0`.
+        public var dotBorderWidth: CGFloat = 0
+        
+        /// Unselected dot scale. Set to `0.85`.
+        public var unselectedDotScale: CGFloat = GlobalUIModel.Indicators.pageIndicatorStandardUnselectedDotScale
+        
         /// Dot spacing.
         /// Set to `5` on `iOS`.
         /// Set to `5` on `macOS`.
         /// Set to `10` on `tvOS`.
         /// Set to `3` on `watchOS`.
         public var spacing: CGFloat = GlobalUIModel.Indicators.pageIndicatorSpacing
-        
-        /// Unselected dot scale. Set to `0.85`.
-        public var unselectedDotScale: CGFloat = GlobalUIModel.Indicators.pageIndicatorStandardUnselectedDotScale
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -80,14 +85,16 @@ public struct VPageIndicatorUIModel {
             direction: LayoutDirectionOmni,
             dotDimensionPrimaryAxis: CGFloat?,
             dotDimensionSecondaryAxis: CGFloat,
-            spacing: CGFloat,
-            unselectedDotScale: CGFloat
+            dotBorderWidth: CGFloat,
+            unselectedDotScale: CGFloat,
+            spacing: CGFloat
         ) {
             self.direction = direction
             self.dotDimensionPrimaryAxis = dotDimensionPrimaryAxis
             self.dotDimensionSecondaryAxis = dotDimensionSecondaryAxis
-            self.spacing = spacing
+            self.dotBorderWidth = dotBorderWidth
             self.unselectedDotScale = unselectedDotScale
+            self.spacing = spacing
         }
     }
 
@@ -100,6 +107,12 @@ public struct VPageIndicatorUIModel {
         
         /// Selected dot color.
         public var selectedDot: Color = ColorBook.accentBlue
+        
+        /// Dot border color.
+        public var dotBorder: Color = .clear
+        
+        /// Selected dot border color.
+        public var selectedDotBorder: Color = .clear
         
         // MARK: Initializers
         /// Initializes UI model with default values.

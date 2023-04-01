@@ -188,23 +188,30 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         let range: [Int] = (0..<total)
             .reversedArray(if: uiModel.layout.direction.isReversed)
         
-        return ForEach(range, id: \.self, content: { i in
-            dotContentView
-                .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
-                .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
-                .scaleEffect(scale(at: i))
-                .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
-        })
+        return ForEach(range, id: \.self, content: dotContentView)
     }
     
-    @ViewBuilder private var dotContentView: some View {
-        switch dotContent {
-        case .empty:
-            Circle()
-        
-        case .content(let content):
-            content()
-        }
+    private func dotContentView(i: Int) -> some View {
+        Group(content: {
+            switch dotContent {
+            case .empty:
+                ZStack(content: {
+                    Circle()
+                        .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                    
+                    Circle()
+                        .strokeBorder(lineWidth: uiModel.layout.dotBorderWidth)
+                        .foregroundColor(current == i ? uiModel.colors.selectedDotBorder : uiModel.colors.dotBorder)
+                })
+            
+            case .content(let content):
+                content()
+                    .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+            }
+        })
+            .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
+            .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
+            .scaleEffect(scale(at: i))
     }
 
     // MARK: Dimension on Main Axis

@@ -71,6 +71,11 @@ public struct VCompactPageIndicatorUIModel {
         /// For horizontal layouts, this will be height, and for vertical, width.
         public var dotDimensionSecondaryAxis: CGFloat = GlobalUIModel.Indicators.pageIndicatorDotDimension
         
+        /// Border width. Set to `0.`
+        ///
+        /// To hide border, set to `0`.
+        public var dotBorderWidth: CGFloat = 0
+        
         /// Dot spacing.
         /// Set to `5` on `iOS`.
         /// Set to `5` on `macOS`.
@@ -142,8 +147,9 @@ public struct VCompactPageIndicatorUIModel {
                 direction: layout.direction,
                 dotDimensionPrimaryAxis: layout.dotDimensionPrimaryAxisForStandardConfiguration,
                 dotDimensionSecondaryAxis: layout.dotDimensionSecondaryAxis,
-                spacing: layout.spacing,
-                unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration
+                dotBorderWidth: layout.dotBorderWidth,
+                unselectedDotScale: layout.unselectedDotScaleForStandardConfiguration,
+                spacing: layout.spacing
             ),
             colors: colors,
             animations: animations

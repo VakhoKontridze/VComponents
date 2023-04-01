@@ -134,26 +134,33 @@ public struct VPageIndicator<Content>: View where Content: View {
             spacing: uiModel.layout.spacing,
             isHorizontal: uiModel.layout.direction.isHorizontal,
             content: {
-                ForEach(range, id: \.self, content: { i in
-                    dotContentView
-                        .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
-                        .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
-                        .scaleEffect(current == i ? 1 : uiModel.layout.unselectedDotScale)
-                        .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
-                })
+                ForEach(range, id: \.self, content: dotContentView)
             }
         )
             .animation(uiModel.animations.transition, value: current)
     }
     
-    @ViewBuilder private var dotContentView: some View {
-        switch dotContent {
-        case .empty:
-            Circle()
-            
-        case .content(let content):
-            content()
-        }
+    private func dotContentView(i: Int) -> some View {
+        Group(content: {
+            switch dotContent {
+            case .empty:
+                ZStack(content: {
+                    Circle()
+                        .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+                    
+                    Circle()
+                        .strokeBorder(lineWidth: uiModel.layout.dotBorderWidth)
+                        .foregroundColor(current == i ? uiModel.colors.selectedDotBorder : uiModel.colors.dotBorder)
+                })
+                
+            case .content(let content):
+                content()
+                    .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
+            }
+        })
+            .frame(width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionPrimaryAxis : uiModel.layout.dotDimensionSecondaryAxis)
+            .frame(height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotDimensionSecondaryAxis : uiModel.layout.dotDimensionPrimaryAxis)
+            .scaleEffect(current == i ? 1 : uiModel.layout.unselectedDotScale)
     }
 }
 
