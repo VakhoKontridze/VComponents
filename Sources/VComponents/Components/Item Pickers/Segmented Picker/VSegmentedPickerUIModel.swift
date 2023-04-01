@@ -158,7 +158,7 @@ public struct VSegmentedPickerUIModel {
         }()
         
         /// Selection indicator colors.
-        public var indicator: RowStateColors = {
+        public var indicator: IndicatorStateColors = {
 #if os(iOS)
             return .init(
                 enabled: Color(module: "SegmentedPicker.Indicator"),
@@ -177,7 +177,7 @@ public struct VSegmentedPickerUIModel {
         }()
         
         /// Selection indicator shadow colors.
-        public var indicatorShadow: RowStateColors = .init(
+        public var indicatorShadow: IndicatorStateColors = .init(
             enabled: GlobalUIModel.Common.shadowColorEnabled,
             pressed: GlobalUIModel.Common.shadowColorEnabled,
             disabled: GlobalUIModel.Common.shadowColorDisabled
@@ -185,8 +185,10 @@ public struct VSegmentedPickerUIModel {
         
         /// Title colors.
         public var title: RowStateColors = .init(
-            enabled: ColorBook.primary,
-            pressed: ColorBook.primaryPressedDisabled,
+            deselected: ColorBook.primary,
+            selected: ColorBook.primary,
+            pressedDeselected: ColorBook.primaryPressedDisabled,
+            pressedSelected: ColorBook.primary, // Looks better this way
             disabled: ColorBook.primaryPressedDisabled
         )
         
@@ -217,7 +219,10 @@ public struct VSegmentedPickerUIModel {
         public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
         
         /// Model that contains colors for component states.
-        public typealias RowStateColors = GenericStateModel_EnabledPressedDisabled<Color>
+        public typealias IndicatorStateColors = GenericStateModel_EnabledPressedDisabled<Color>
+        
+        /// Model that contains colors for component states.
+        public typealias RowStateColors = GenericStateModel_DeselectedSelectedPressedDisabled<Color>
         
         // MARK: State Opacities
         /// Model that contains opacities for component states.

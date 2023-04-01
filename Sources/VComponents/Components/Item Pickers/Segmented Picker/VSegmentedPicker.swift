@@ -62,6 +62,7 @@ public struct VSegmentedPicker<Data, Content>: View
     private func rowInternalState(i: Int) -> VSegmentedPickerRowInternalState {
         .init(
             isEnabled: internalState.isEnabled && !disabledIndexes.contains(i), // `isEnabled` check is required
+            isSelected: selectedIndex == i,
             isPressed: pressedIndex == i
         )
     }
@@ -397,7 +398,7 @@ public struct VSegmentedPicker<Data, Content>: View
 @available(watchOS, unavailable)
 struct VSegmentedPicker_Previews: PreviewProvider {
     // Configuration
-    private static var colorScheme: ColorScheme { .dark }
+    private static var colorScheme: ColorScheme { .light }
 
     // Previews
     static var previews: some View {
@@ -467,7 +468,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                             VSegmentedPicker(
                                 uiModel: {
                                     var uiModel: VSegmentedPickerUIModel = .init()
-                                    uiModel.colors.title.enabled = uiModel.colors.title.pressed
+                                    uiModel.colors.title.selected = uiModel.colors.title.pressedSelected
                                     return uiModel
                                 }(),
                                 selection: .constant(selection),
