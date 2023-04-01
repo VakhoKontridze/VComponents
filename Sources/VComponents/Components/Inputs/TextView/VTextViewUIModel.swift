@@ -139,7 +139,7 @@ extension VTextViewUIModel {
     public static var success: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.borderWidth = 1
+        uiModel.layout.borderWidth = 1.5
         uiModel.colors = .success
         
         return uiModel
@@ -149,7 +149,7 @@ extension VTextViewUIModel {
     public static var warning: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.borderWidth = 1
+        uiModel.layout.borderWidth = 1.5
         
         uiModel.colors = .warning
         
@@ -160,7 +160,7 @@ extension VTextViewUIModel {
     public static var error: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.borderWidth = 1
+        uiModel.layout.borderWidth = 1.5
         
         uiModel.colors = .error
         
@@ -176,8 +176,6 @@ extension VTextViewUIModel.Colors {
     /// `VTextViewUIModel.Colors` that applies green color scheme.
     public static var success: Self {
         .createHighlightedColors(
-            layer: ColorBook.layerGreen,
-            layerFocused: GlobalUIModel.Inputs.layerGreenColorFocused,
             border: ColorBook.borderGreen,
             headerFooter: GlobalUIModel.Inputs.headerFooterGreenColor
         )
@@ -186,8 +184,6 @@ extension VTextViewUIModel.Colors {
     /// `VTextViewUIModel.Colors` that applies yellow color scheme.
     public static var warning: Self {
         .createHighlightedColors(
-            layer: ColorBook.layerYellow,
-            layerFocused: GlobalUIModel.Inputs.layerYellowColorFocused,
             border: ColorBook.borderYellow,
             headerFooter: GlobalUIModel.Inputs.headerFooterYellowColor
         )
@@ -196,23 +192,16 @@ extension VTextViewUIModel.Colors {
     /// `VTextViewUIModel.Colors` that applies error color scheme.
     public static var error: Self {
         .createHighlightedColors(
-            layer: ColorBook.layerRed,
-            layerFocused: GlobalUIModel.Inputs.layerRedColorFocused,
             border: ColorBook.borderRed,
             headerFooter: GlobalUIModel.Inputs.headerFooterRedColor
         )
     }
     
     private static func createHighlightedColors(
-        layer: Color,
-        layerFocused: Color,
         border: Color,
         headerFooter: Color
     ) -> Self {
         var colors: Self = .init()
-        
-        colors.background.enabled = layer
-        colors.background.focused = layerFocused
         
         colors.border.enabled = border
         colors.border.focused = border

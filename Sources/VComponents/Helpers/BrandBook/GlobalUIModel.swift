@@ -220,9 +220,6 @@ struct GlobalUIModel {
         static var cornerRadius: CGFloat { 12 }
         
         static var layerGrayColorFocused: Color { .init(module: "Input.Layer.Gray.Focused") }
-        static var layerGreenColorFocused: Color { .init(module: "Input.Layer.Green.Focused") }
-        static var layerYellowColorFocused: Color { .init(module: "Input.Layer.Yellow.Focused") }
-        static var layerRedColorFocused: Color { .init(module: "Input.Layer.Red.Focused") }
         
         static var headerFooterGreenColor: Color { .init(module: "Input.HeaderFooter.Green") }
         static var headerFooterYellowColor: Color { .init(module: "Input.HeaderFooter.Yellow") }
