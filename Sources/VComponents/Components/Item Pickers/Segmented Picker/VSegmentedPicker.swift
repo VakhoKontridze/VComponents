@@ -292,8 +292,8 @@ public struct VSegmentedPicker<Data, Content>: View
                         onStateChange: { stateChangeHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
-                                minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
-                                color: uiModel.colors.title.value(for: rowInternalState(i: i)),
+                                minimumScaleFactor: uiModel.layout.rowTitleMinimumScaleFactor,
+                                color: uiModel.colors.rowTitle.value(for: rowInternalState(i: i)),
                                 font: uiModel.fonts.rows,
                                 text: titles[i]
                             )
@@ -468,7 +468,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                             VSegmentedPicker(
                                 uiModel: {
                                     var uiModel: VSegmentedPickerUIModel = .init()
-                                    uiModel.colors.title.selected = uiModel.colors.title.pressedSelected
+                                    uiModel.colors.rowTitle.selected = uiModel.colors.rowTitle.pressedSelected
                                     return uiModel
                                 }(),
                                 selection: .constant(selection),

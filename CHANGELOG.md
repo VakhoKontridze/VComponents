@@ -246,6 +246,7 @@ VSegmentedPicker
 - `indicatorPress` is added in `VSegmentedPickerUIModel`
 - `rowContentPressedScale` is added in `VSegmentedPickerUIModel`
 - Header and footer color mismatched when disabled is fixed
+- `title` is renamed to `rowTitle` in `VSegmentedPickerUIModel`
 
 VWheelPicker
 

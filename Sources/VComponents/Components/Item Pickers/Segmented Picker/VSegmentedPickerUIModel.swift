@@ -112,8 +112,8 @@ public struct VSegmentedPickerUIModel {
         /// Header and footer horizontal margin. Set to `10`.
         public var headerFooterMarginHorizontal: CGFloat = GlobalUIModel.Common.headerFooterMarginHorizontal
         
-        /// Title minimum scale factor. Set to `0.75`.
-        public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
+        /// Row title minimum scale factor. Set to `0.75`.
+        public var rowTitleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         /// Row divider size.
         /// Set to `1x19` on `iOS`, similarly to native segmented picker.
@@ -183,8 +183,8 @@ public struct VSegmentedPickerUIModel {
             disabled: GlobalUIModel.Common.shadowColorDisabled
         )
         
-        /// Title colors.
-        public var title: RowStateColors = .init(
+        /// Row title colors.
+        public var rowTitle: RowStateColors = .init(
             deselected: ColorBook.primary,
             selected: ColorBook.primary,
             pressedDeselected: ColorBook.primaryPressedDisabled,
