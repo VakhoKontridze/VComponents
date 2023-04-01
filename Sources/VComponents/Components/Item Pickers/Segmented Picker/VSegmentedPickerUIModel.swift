@@ -248,11 +248,31 @@ public struct VSegmentedPickerUIModel {
         /// Indicator press animation. Set to `linear` with duration `0.2`.
         public var indicatorPress: Animation? = .linear(duration: 0.2)
         
-        /// Ratio to which selected row content scales down on press. Set to `0.95`.
-        public var rowContentPressedScale: CGFloat = 0.95
+        /// Ratio to which selected row content scales down on press.
+        /// Set to `0.95` on `iOS`.
+        /// Set to `1` on `macOS`
+        public var rowContentPressedScale: CGFloat = {
+#if os(iOS)
+            return 0.95
+#elseif os(macOS)
+            return 1
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
-        /// Ratio to which selection indicator scales down on press. Set to `0.95`.
-        public var indicatorPressedScale: CGFloat = 0.95
+        /// Ratio to which selection indicator scales down on press.
+        /// Set to `0.95` on `iOS`.
+        /// Set to `1` on `macOS`
+        public var indicatorPressedScale: CGFloat = {
+#if os(iOS)
+            return 0.95
+#elseif os(macOS)
+            return 1
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.
