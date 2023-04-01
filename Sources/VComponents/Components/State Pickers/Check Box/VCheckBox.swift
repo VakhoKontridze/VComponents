@@ -198,7 +198,7 @@ public struct VCheckBox<Label>: View where Label: View {
     }
 
     // MARK: Actions
-    private func stateChangeHandler(gestureState: BaseButtonGestureState) {
+    private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { state.setNextState() }
     }

@@ -345,7 +345,7 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     // MARK: Actions
-    private func stateChangeHandler(i: Int, gestureState: BaseButtonGestureState) {
+    private func stateChangeHandler(i: Int, gestureState: GestureBaseButtonGestureState) {
         withAnimation(uiModel.animations.indicatorPress, { // Doesn't work as modifier
             pressedIndex = gestureState.isPressed ? i : nil
         })

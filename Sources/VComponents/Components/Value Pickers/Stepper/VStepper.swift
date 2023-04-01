@@ -116,7 +116,7 @@ public struct VStepper: View {
     // MARK: Actions
     private func stateChangeHandler(
         button: VStepperButton,
-        gestureState: BaseButtonGestureState
+        gestureState: GestureBaseButtonGestureState
     ) {
         DispatchQueue.main.async(execute: {
             if !gestureState.isPressed {
