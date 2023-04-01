@@ -78,13 +78,13 @@ public struct VSlider: View {
             thumb
         })
             .onSizeChange(perform: { sliderWidth = $0.width })
-            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
-            .animation(uiModel.animations.progress, value: value)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged(dragChanged)
                     .onEnded(dragEnded)
             )
+            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
+            .animation(uiModel.animations.progress, value: value)
     }
 
     private var track: some View {
