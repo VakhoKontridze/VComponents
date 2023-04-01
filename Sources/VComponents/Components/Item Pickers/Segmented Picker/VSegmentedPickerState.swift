@@ -13,6 +13,11 @@ import VCore
 @available(watchOS, unavailable)
 typealias VSegmentedPickerInternalState = GenericState_EnabledDisabled
 
+// MARK: - V Segmented Picker Selection Indicator Internal State
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+typealias VSegmentedPickerSelectionIndicatorInternalState = GenericState_EnabledPressedDisabled
+
 // MARK: - V Segmented Picker Row State
 /// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)

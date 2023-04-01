@@ -158,14 +158,28 @@ public struct VSegmentedPickerUIModel {
         }()
         
         /// Selection indicator colors.
-        public var indicator: StateColors = .init(
-            enabled: Color(module: "SegmentedPicker.Indicator"),
-            disabled: Color(module: "SegmentedPicker.Indicator.Disabled")
-        )
+        public var indicator: RowStateColors = {
+#if os(iOS)
+            return .init(
+                enabled: Color(module: "SegmentedPicker.Indicator"),
+                pressed: Color(module: "SegmentedPicker.Indicator"),
+                disabled: Color(module: "SegmentedPicker.Indicator.Disabled")
+            )
+#elseif os(macOS)
+            return .init(
+                enabled: Color(module: "SegmentedPicker.Indicator"),
+                pressed: Color(module: "SegmentedPicker.Indicator.Pressed_macOS"),
+                disabled: Color(module: "SegmentedPicker.Indicator.Disabled")
+            )
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Selection indicator shadow colors.
-        public var indicatorShadow: StateColors = .init(
+        public var indicatorShadow: RowStateColors = .init(
             enabled: GlobalUIModel.Common.shadowColorEnabled,
+            pressed: GlobalUIModel.Common.shadowColorEnabled,
             disabled: GlobalUIModel.Common.shadowColorDisabled
         )
         
@@ -221,11 +235,11 @@ public struct VSegmentedPickerUIModel {
         public var footer: Font = GlobalUIModel.Common.footerFont
         
         /// Row font.
-        /// Set to `system` `medium` `14` on `iOS`.
+        /// Set to `system` `medium` `13` on `iOS`.
         /// Set to `system`  `system` `13` on `macOS`.
         public var rows: Font = {
 #if os(iOS)
-            return .system(size: 14, weight: .medium)
+            return .system(size: 13, weight: .medium)
 #elseif os(macOS)
             return .system(size: 13)
 #else
@@ -245,8 +259,18 @@ public struct VSegmentedPickerUIModel {
         /// State change animation. Set to `easeInOut` with duration `0.2`.
         public var selection: Animation? = .easeInOut(duration: 0.2)
         
-        /// Indicator press animation. Set to `linear` with duration `0.2`.
-        public var indicatorPress: Animation? = .linear(duration: 0.2)
+        /// Indicator press animation.
+        /// Set to `linear` with duration `0.2` on `iOS`.
+        /// Set to `nil` on `macOS`.
+        public var indicatorPress: Animation? = {
+#if os(iOS)
+            return .linear(duration: 0.2)
+#elseif os(macOS)
+            return nil
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Ratio to which selected row content scales down on press.
         /// Set to `0.95` on `iOS`.

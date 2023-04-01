@@ -53,6 +53,12 @@ public struct VSegmentedPicker<Data, Content>: View
     @Environment(\.isEnabled) private var isEnabled: Bool
     @State private var pressedIndex: Int?
     private var internalState: VSegmentedPickerInternalState { .init(isEnabled: isEnabled) }
+    private var indicatorInternalState: VSegmentedPickerSelectionIndicatorInternalState {
+        .init(
+            isEnabled: internalState.isEnabled, // `isEnabled` check is required
+            isPressed: pressedIndex == selectedIndex
+        )
+    }
     private func rowInternalState(i: Int) -> VSegmentedPickerRowInternalState {
         .init(
             isEnabled: internalState.isEnabled && !disabledIndexes.contains(i), // `isEnabled` check is required
@@ -267,9 +273,9 @@ public struct VSegmentedPicker<Data, Content>: View
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale, anchor: indicatorScaleAnchor)
             .offset(x: rowWidth * CGFloat(selectedIndex))
-            .foregroundColor(uiModel.colors.indicator.value(for: internalState))
+            .foregroundColor(uiModel.colors.indicator.value(for: indicatorInternalState))
             .shadow(
-                color: uiModel.colors.indicatorShadow.value(for: internalState),
+                color: uiModel.colors.indicatorShadow.value(for: indicatorInternalState),
                 radius: uiModel.layout.indicatorShadowRadius,
                 x: uiModel.layout.indicatorShadowOffset.width,
                 y: uiModel.layout.indicatorShadowOffset.height
@@ -391,7 +397,7 @@ public struct VSegmentedPicker<Data, Content>: View
 @available(watchOS, unavailable)
 struct VSegmentedPicker_Previews: PreviewProvider {
     // Configuration
-    private static var colorScheme: ColorScheme { .light }
+    private static var colorScheme: ColorScheme { .dark }
 
     // Previews
     static var previews: some View {
