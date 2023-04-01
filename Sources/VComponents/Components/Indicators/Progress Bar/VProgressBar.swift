@@ -27,7 +27,7 @@ public struct VProgressBar: View {
     private let range: ClosedRange<Double>
     private let value: Double
     
-    @State private var progressBarWidth: CGFloat = 0
+    @State private var progressBarSize: CGSize = .zero
     
     // MARK: Initializers
     /// Initializes `VProgressBar` with value.
@@ -52,13 +52,16 @@ public struct VProgressBar: View {
 
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: .leading, content: {
+        ZStack(alignment: uiModel.layout.direction.alignment, content: {
             track
             progress
         })
             .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-            .frame(height: uiModel.layout.height)
-            .onSizeChange(perform: { progressBarWidth = $0.width })
+            .frame(
+                width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
+                height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
+            )
+            .onSizeChange(perform: { progressBarSize = $0 })
             .animation(uiModel.animations.progress, value: value)
     }
 
@@ -69,16 +72,22 @@ public struct VProgressBar: View {
 
     private var progress: some View {
         Rectangle()
-            .frame(width: progressWidth)
+            .frame(
+                width: uiModel.layout.direction.isHorizontal ? progressWidth : nil,
+                height: uiModel.layout.direction.isHorizontal ? nil : progressWidth
+            )
             .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
             .foregroundColor(uiModel.colors.progress)
     }
     
     // MARK: Progress Width
     private var progressWidth: CGFloat {
-        let width: CGFloat = progressBarWidth
+        let dimension: CGFloat =
+            uiModel.layout.direction.isHorizontal ?
+            progressBarSize.width :
+            progressBarSize.height
 
-        return value * width
+        return value * dimension
     }
 }
 
@@ -91,6 +100,7 @@ struct VProgressBar_Previews: PreviewProvider {
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
+            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
             .colorScheme(colorScheme)
     }
@@ -103,6 +113,75 @@ struct VProgressBar_Previews: PreviewProvider {
             PreviewContainer(content: {
                 VProgressBar(value: value)
                     .padding()
+            })
+                .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
+        }
+    }
+    
+    private struct LayoutDirectionsPreview: View {
+        @State private var value: Double = 0
+        
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Left-to-Right",
+                    content: {
+                        VProgressBar(
+                            uiModel: {
+                                var uiModel: VProgressBarUIModel = .init()
+                                uiModel.layout.direction = .leftToRight
+                                return uiModel
+                            }(),
+                            value: value
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Right-to-Left",
+                    content: {
+                        VProgressBar(
+                            uiModel: {
+                                var uiModel: VProgressBarUIModel = .init()
+                                uiModel.layout.direction = .rightToLeft
+                                return uiModel
+                            }(),
+                            value: value
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Top-to-Bottom",
+                    content: {
+                        VProgressBar(
+                            uiModel: {
+                                var uiModel: VProgressBarUIModel = .init()
+                                uiModel.layout.direction = .topToBottom
+                                return uiModel
+                            }(),
+                            value: value
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Bottom-to-Top",
+                    content: {
+                        VProgressBar(
+                            uiModel: {
+                                var uiModel: VProgressBarUIModel = .init()
+                                uiModel.layout.direction = .bottomToTop
+                                return uiModel
+                            }(),
+                            value: value
+                        )
+                    }
+                )
             })
                 .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
         }

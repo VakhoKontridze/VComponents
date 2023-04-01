@@ -29,6 +29,9 @@ public struct VProgressBarUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Direction. Set to `leftToRight`.
+        public var direction: LayoutDirectionOmni = .leftToRight
+        
         /// Slider height.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.

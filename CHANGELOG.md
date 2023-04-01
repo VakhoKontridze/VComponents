@@ -86,6 +86,10 @@ VContinuousSpinner
 
 - `borderWidth` is renamed to `thickness` in `VContinuousSpinnerUIModel`
 
+VProgressBar
+
+- `direction` is added to `VProgressBarUIModel` that support omni-directional layout
+
 VPageIndicator
 
 - `dotBorderWidth`, and `dotBorder`/`selectedDotBorder` colors are added in `VPageIndicatorUIModel`, that allows for border customization
