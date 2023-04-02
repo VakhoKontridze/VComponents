@@ -58,6 +58,7 @@ VStepper
 
 VSlider
 
+- `direction` is added to `VSliderUIModel` that support omni-directional layout
 - `thumbShadowOffset` is added to `VSliderUIModel`
 - `border` colors are set to `clearColors` in `VSliderUIModel`, since `borderWidth` was `0`
 - Issue with thumb not accounting for slider height is fixed

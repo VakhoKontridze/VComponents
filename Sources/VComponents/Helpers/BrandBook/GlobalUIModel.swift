@@ -199,11 +199,11 @@ struct GlobalUIModel {
             fatalError() // Not supported
 #endif
         }
-        static var sliderThumbShadowOffset: CGSize {
+        static var sliderThumbShadowOffset: CGPoint {
 #if os(iOS)
-            return CGSize(width: 0, height: 2)
+            return CGPoint(x: 0, y: 2)
 #elseif os(macOS)
-            return CGSize(width: 0, height: 1)
+            return CGPoint(x: 0, y: 1)
 #else
             fatalError() // Not supported
 #endif

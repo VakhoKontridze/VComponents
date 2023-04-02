@@ -124,8 +124,8 @@ public struct VRangeSlider: View {
                     .shadow(
                         color: uiModel.colors.thumbShadow.value(for: internalState),
                         radius: uiModel.layout.thumbShadowRadius,
-                        x: uiModel.layout.thumbShadowOffset.width,
-                        y: uiModel.layout.thumbShadowOffset.height
+                        x: uiModel.layout.thumbShadowOffset.x,
+                        y: uiModel.layout.thumbShadowOffset.y
                     )
 
                 RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
@@ -152,9 +152,9 @@ public struct VRangeSlider: View {
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
         let rawValue: Double = {
-            let value: Double = Double(dragValue.location.x)
+            let value: Double = dragValue.location.x
             let range: Double = max - min
-            let width: Double = Double(sliderWidth)
+            let width: Double = sliderWidth
 
             return min + (value / width) * range
         }()
@@ -208,11 +208,11 @@ public struct VRangeSlider: View {
     private func progressWidth(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
             switch thumb {
-            case .low: return CGFloat(valueLow - min)
-            case .high: return CGFloat(valueHigh - min)
+            case .low: return valueLow - min
+            case .high: return valueHigh - min
             }
         }()
-        let range: CGFloat = .init(max - min)
+        let range: CGFloat = max - min
         let width: CGFloat = sliderWidth
 
         switch thumb {

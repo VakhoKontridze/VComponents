@@ -31,10 +31,17 @@ public struct VSliderUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Slider height. Set to `10`.
+        /// Direction. Set to `leftToRight`.
+        public var direction: LayoutDirectionOmni = .leftToRight
+        
+        /// Slider height, but width for vertical layouts.
+        /// Set to `10` on `iOS`.
+        /// Set to `10` on `macOS`.
         public var height: CGFloat = GlobalUIModel.Common.barHeight
         
-        /// Slider corner radius. Set to `5`.
+        /// Slider corner radius.
+        /// Set to `5` on `iOS`.
+        /// Set to `5` on `macOS`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
         /// Indicates if slider rounds progress view right-edge. Set to `true`.
@@ -79,7 +86,7 @@ public struct VSliderUIModel {
         /// Thumb shadow offset.
         /// Set to `0x2` on `iOS`.
         /// Set to `0x1` on `macOS`.
-        public var thumbShadowOffset: CGSize = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
+        public var thumbShadowOffset: CGPoint = GlobalUIModel.ValuePickers.sliderThumbShadowOffset
         
         // MARK: Initializers
         /// Initializes UI model with default values.

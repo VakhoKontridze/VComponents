@@ -82,12 +82,9 @@ public struct VProgressBar: View {
     
     // MARK: Progress Width
     private var progressWidth: CGFloat {
-        let dimension: CGFloat =
-            uiModel.layout.direction.isHorizontal ?
-            progressBarSize.width :
-            progressBarSize.height
+        let width: CGFloat = progressBarSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
 
-        return value * dimension
+        return value * width
     }
 }
 

@@ -37,7 +37,7 @@ public struct VSlider: View {
     
     private let action: ((Bool) -> Void)?
     
-    @State private var sliderWidth: CGFloat = 0
+    @State private var sliderSize: CGSize = .zero
     
     private var hasThumb: Bool { uiModel.layout.thumbDimension > 0 }
     
@@ -67,17 +67,20 @@ public struct VSlider: View {
 
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: .leading, content: {
-            ZStack(alignment: .leading, content: {
+        ZStack(alignment: uiModel.layout.direction.alignment, content: {
+            ZStack(alignment: uiModel.layout.direction.alignment, content: {
                 track
                 progress
             })
                 .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-                .frame(height: uiModel.layout.height)
+                .frame(
+                    width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
+                    height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
+                )
             
             thumb
         })
-            .onSizeChange(perform: { sliderWidth = $0.width })
+            .onSizeChange(perform: { sliderSize = $0 })
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged(dragChanged)
@@ -94,7 +97,10 @@ public struct VSlider: View {
 
     private var progress: some View {
         Rectangle()
-            .frame(width: progressWidth)
+            .frame(
+                width: uiModel.layout.direction.isHorizontal ? progressWidth : nil,
+                height: uiModel.layout.direction.isHorizontal ? nil : progressWidth
+            )
             .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
             .foregroundColor(uiModel.colors.progress.value(for: internalState))
     }
@@ -108,17 +114,23 @@ public struct VSlider: View {
                         .shadow(
                             color: uiModel.colors.thumbShadow.value(for: internalState),
                             radius: uiModel.layout.thumbShadowRadius,
-                            x: uiModel.layout.thumbShadowOffset.width,
-                            y: uiModel.layout.thumbShadowOffset.height
+                            offset: uiModel.layout.thumbShadowOffset // No need to reverse coordinates on shadow
                         )
                     
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
                         .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
                 })
                     .frame(dimension: uiModel.layout.thumbDimension)
-                    .offset(x: thumbOffset)
+                    .offset(
+                        x: uiModel.layout.direction.isHorizontal ? thumbOffset.withOppositeSign(if: uiModel.layout.direction.isReversed) : 0,
+                        y: uiModel.layout.direction.isHorizontal ? 0 : thumbOffset.withOppositeSign(if: uiModel.layout.direction.isReversed)
+                    )
             })
-                .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
+                .frame( // Must be put into group, as content already has frame
+                    maxWidth: uiModel.layout.direction.isHorizontal ? .infinity : nil,
+                    maxHeight: uiModel.layout.direction.isHorizontal ? nil : .infinity,
+                    alignment: uiModel.layout.direction.alignment
+                )
                 .allowsHitTesting(false)
         }
     }
@@ -126,11 +138,11 @@ public struct VSlider: View {
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value) {
         let rawValue: Double = {
-            let value: Double = .init(dragValue.location.x)
+            let value: Double = dragValue.location.coordinate(isX: uiModel.layout.direction.isHorizontal)
             let range: Double = max - min
-            let width: Double = .init(sliderWidth)
+            let width: Double = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
 
-            return (value / width) * range + min
+            return ((value / width) * range + min).invertedFromMax(max, if: uiModel.layout.direction.isReversed)
         }()
         
         let valueFixed: Double = rawValue.clamped(min: min, max: max, step: step)
@@ -151,20 +163,16 @@ public struct VSlider: View {
 
     // MARK: Progress Width
     private var progressWidth: CGFloat {
-        let value: CGFloat = .init(value - min)
-        let range: CGFloat = .init(max - min)
-        let width: CGFloat = sliderWidth
+        let value: CGFloat = value - min
+        let range: CGFloat = max - min
+        let width: CGFloat = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
 
         return (value / range) * width
     }
 
     // MARK: Thumb Offset
     private var thumbOffset: CGFloat {
-        let progressW: CGFloat = progressWidth
-        let thumbW: CGFloat = uiModel.layout.thumbDimension
-        let offset: CGFloat = progressW - thumbW / 2
-        
-        return offset
+        progressWidth - uiModel.layout.thumbDimension/2
     }
 }
 
@@ -180,6 +188,7 @@ struct VSlider_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
             .colorScheme(colorScheme)
     }
@@ -235,6 +244,74 @@ struct VSlider_Previews: PreviewProvider {
                     content: {
                         Slider(value: .constant(value))
                             .disabled(true)
+                    }
+                )
+            })
+        }
+    }
+    
+    private struct LayoutDirectionsPreview: View {
+        @State private var value: Double = VSlider_Previews.value
+        
+        var body: some View {
+            PreviewContainer(content: {
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Left-to-Right",
+                    content: {
+                        VSlider(
+                            uiModel: {
+                                var uiModel: VSliderUIModel = .init()
+                                uiModel.layout.direction = .leftToRight
+                                return uiModel
+                            }(),
+                            value: $value
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Right-to-Left",
+                    content: {
+                        VSlider(
+                            uiModel: {
+                                var uiModel: VSliderUIModel = .init()
+                                uiModel.layout.direction = .rightToLeft
+                                return uiModel
+                            }(),
+                            value: $value
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Top-to-Bottom",
+                    content: {
+                        VSlider(
+                            uiModel: {
+                                var uiModel: VSliderUIModel = .init()
+                                uiModel.layout.direction = .topToBottom
+                                return uiModel
+                            }(),
+                            value: $value
+                        )
+                    }
+                )
+                
+                PreviewRow(
+                    axis: .vertical,
+                    title: "Bottom-to-Top",
+                    content: {
+                        VSlider(
+                            uiModel: {
+                                var uiModel: VSliderUIModel = .init()
+                                uiModel.layout.direction = .bottomToTop
+                                return uiModel
+                            }(),
+                            value: $value
+                        )
                     }
                 )
             })

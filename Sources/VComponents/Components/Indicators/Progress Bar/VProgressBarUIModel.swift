@@ -32,14 +32,14 @@ public struct VProgressBarUIModel {
         /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Slider height.
+        /// Progress bar height, but width for vertical layouts.
         /// Set to `10` on `iOS`.
         /// Set to `10` on `macOS`.
         /// Set to `10` on `tvOS`.
         /// Set to `5` on `watchOS`.
         public var height: CGFloat = GlobalUIModel.Common.barHeight
         
-        /// Slider corner radius.
+        /// Progress bar corner radius.
         /// Set to `5` on `iOS`.
         /// Set to `5` on `macOS`.
         /// Set to `5` on `tvOS`.
