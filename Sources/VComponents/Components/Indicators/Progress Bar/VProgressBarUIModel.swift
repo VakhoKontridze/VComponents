@@ -47,6 +47,8 @@ public struct VProgressBarUIModel {
         public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
         /// Indicates if progress bar rounds progress view right-edge. Set to `true`.
+        ///
+        /// For RTL languages, this refers to left-edge.
         public var roundsProgressViewRightEdge: Bool = true
         
         var progressViewRoundedCorners: RectCorner {

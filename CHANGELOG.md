@@ -6,6 +6,7 @@ General
 
 - Package now supports `iOS` `13.0`
 - Package now partially supports `macOS` `10.15`, `tvOS` `13.0`, and `watchOS` `6.0`
+- Package now supports RTL languages
 - `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - Buttons that contained `customLabelContent` in UI models now support label APIs that pass internal states to the custom label callback 
 - Demo app replaced with detailed component previews

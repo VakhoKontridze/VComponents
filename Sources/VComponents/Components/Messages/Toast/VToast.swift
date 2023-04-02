@@ -191,20 +191,6 @@ struct VToast: View {
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-extension TextAlignment {
-    fileprivate var toNSTextAlignment: NSTextAlignment {
-        switch self {
-        case .leading: return .left
-        case .center: return .center
-        case .trailing: return .right
-        }
-    }
-}
-
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
 extension HorizontalAlignment {
     fileprivate var toAlignment: Alignment {
         switch self {

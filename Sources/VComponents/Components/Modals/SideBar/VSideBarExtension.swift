@@ -16,7 +16,7 @@ import VCore
 extension View {
     /// Presents side bar when boolean is `true`.
     ///
-    /// Side bar component that draws a from left side with background, and hosts content.
+    /// Side bar component that draws a from edge with background, and hosts content.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///
@@ -78,7 +78,7 @@ extension View {
 extension View {
     /// Presents side bar using the item as data source for content.
     ///
-    /// Side bar component that draws a from left side with background, and hosts content.
+    /// Side bar component that draws a from edge with background, and hosts content.
     ///
     /// UI Model, and present and dismiss handlers can be passed as parameters.
     ///

@@ -15,6 +15,7 @@ import VCore
 @available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VSideBar<Content>: View where Content: View {
     // MARK: Properties
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
@@ -154,8 +155,8 @@ struct VSideBar<Content>: View where Content: View {
     private var initialOffset: CGSize {
         let x: CGFloat = {
             switch uiModel.layout.presentationEdge {
-            case .left: return -uiModel.layout.sizes._current.size.width - sheetScreenMargins.width
-            case .right: return MultiplatformConstants.screenSize.width - sheetScreenMargins.width
+            case .leading: return -uiModel.layout.sizes._current.size.width - sheetScreenMargins.width
+            case .trailing: return MultiplatformConstants.screenSize.width - sheetScreenMargins.width
             case .top: return 0
             case .bottom: return 0
             }
@@ -163,8 +164,8 @@ struct VSideBar<Content>: View where Content: View {
         
         let y: CGFloat = {
             switch uiModel.layout.presentationEdge {
-            case .left: return 0
-            case .right: return 0
+            case .leading: return 0
+            case .trailing: return 0
             case .top: return -uiModel.layout.sizes._current.size.height - sheetScreenMargins.height
             case .bottom: return MultiplatformConstants.screenSize.height - sheetScreenMargins.height
             }
@@ -176,8 +177,8 @@ struct VSideBar<Content>: View where Content: View {
     private var presentedOffset: CGSize {
         let x: CGFloat = {
             switch uiModel.layout.presentationEdge {
-            case .left: return -sheetScreenMargins.width
-            case .right: return sheetScreenMargins.width
+            case .leading: return -sheetScreenMargins.width
+            case .trailing: return sheetScreenMargins.width
             case .top: return 0
             case .bottom: return 0
             }
@@ -185,8 +186,8 @@ struct VSideBar<Content>: View where Content: View {
         
         let y: CGFloat = {
             switch uiModel.layout.presentationEdge {
-            case .left: return 0
-            case .right: return 0
+            case .leading: return 0
+            case .trailing: return 0
             case .top: return -sheetScreenMargins.height
             case .bottom: return sheetScreenMargins.height
             }
@@ -198,16 +199,31 @@ struct VSideBar<Content>: View where Content: View {
     // MARK: Presentation Edge Dismiss
     private func isDraggedInCorrectDirection(_ dragValue: DragGesture.Value) -> Bool {
         switch uiModel.layout.presentationEdge {
-        case .left: return dragValue.translation.width <= 0
-        case .right: return dragValue.translation.width >= 0
-        case .top: return dragValue.translation.height <= 0
-        case .bottom: return dragValue.translation.height >= 0
+        case .leading:
+            switch layoutDirection {
+            case .leftToRight: return dragValue.translation.width <= 0
+            case .rightToLeft: return dragValue.translation.width >= 0
+            @unknown default: fatalError()
+            }
+        
+        case .trailing:
+            switch layoutDirection {
+            case .leftToRight: return dragValue.translation.width >= 0
+            case .rightToLeft: return dragValue.translation.width <= 0
+            @unknown default: fatalError()
+            }
+        
+        case .top:
+            return dragValue.translation.height <= 0
+        
+        case .bottom:
+            return dragValue.translation.height >= 0
         }
     }
     
     private func didExceedDragBackDismissDistance(_ dragValue: DragGesture.Value) -> Bool {
         switch uiModel.layout.presentationEdge {
-        case .left, .right: return abs(dragValue.translation.width) >= uiModel.layout.dragBackDismissDistance
+        case .leading, .trailing: return abs(dragValue.translation.width) >= uiModel.layout.dragBackDismissDistance
         case .top, .bottom: return abs(dragValue.translation.height) >= uiModel.layout.dragBackDismissDistance
         }
     }

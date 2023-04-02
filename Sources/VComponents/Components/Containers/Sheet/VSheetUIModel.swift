@@ -27,7 +27,10 @@ public struct VSheetUIModel {
     public struct Layout {
         // MARK: Properties
         /// Rounded corners. Set to to `allCorners`.
-        public var roundedCorners: RectCorner = .allCorners
+        public var roundedCorners: RectCorner = .leftCorners
+        
+        /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
+        public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
         
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius

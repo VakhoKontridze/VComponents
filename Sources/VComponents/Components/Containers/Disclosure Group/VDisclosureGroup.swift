@@ -205,6 +205,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VDisclosureGroupInternalState {
+    /// `rotationEffect(:_)` above auto-supports RTL languages.
     fileprivate var chevronButtonDirection: ChevronButtonDirection {
         switch self {
         case .collapsed: return .right

@@ -50,6 +50,9 @@ public struct VModalUIModel {
         /// Rounded corners. Set to to `allCorners`.
         public var roundedCorners: RectCorner = .allCorners
         
+        /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
+        public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
+        
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
@@ -236,6 +239,7 @@ public struct VModalUIModel {
         var uiModel: VSheetUIModel = .init()
         
         uiModel.layout.roundedCorners = layout.roundedCorners
+        uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
         uiModel.layout.cornerRadius = layout.cornerRadius
         uiModel.layout.contentMargin = 0
         

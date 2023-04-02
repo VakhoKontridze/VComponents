@@ -34,6 +34,8 @@ import VCore
 ///
 public struct VSheet<Content>: View where Content: View {
     // MARK: Properties
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    
     private let uiModel: VSheetUIModel
     private let content: VSheetContent<Content>
     
@@ -64,6 +66,10 @@ public struct VSheet<Content>: View where Content: View {
             .cornerRadius(
                 uiModel.layout.cornerRadius,
                 corners: uiModel.layout.roundedCorners
+                    .withReversedLeftAndRightCorners(
+                        uiModel.layout.reversesLeftAndRightCornersForRTLLanguages &&
+                        layoutDirection == .rightToLeft
+                    )
             )
     }
     

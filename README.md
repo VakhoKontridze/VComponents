@@ -172,12 +172,65 @@ Versions with different majors are not directly compatible. When a new major is 
 
 #### History
 
-| Ver | Release Date | SDK                                                    | VCore         | Comment                                            |
-| :-- | :--          | :--                                                    | :--           | :--                                                |
-| 4.0 | 2023 XX XX   | iOS 13.0<br/>macOS 10.15<br/>tvOS 13.0<br/>watchOS 6.0 | 4.7.0 - 4.x.x | iOS 13.0 support.<br/>Multiplatform support.       |
-| 3.0 | 2022 10 02   | iOS 16.0                                               | 4.1.0 - 4.x.x | New SwiftUI API.<br/>API changes.                  |
-| 2.0 | 2022 05 26   | iOS 15.0                                               | 3.2.0 - 3.x.x | New SwiftUI API.<br/>API changes.<br/>SPM support. |
-| 1.0 | 2021 02 07   | iOS 14.0                                               | -             | -                                                  |
+<table>
+
+  <tr>
+    <th align="left">Ver</th>
+    <th align="left">Release Date</th> 
+    <th align="left">SDK</th>
+    <th align="left">VCore</th>
+    <th align="left">Comment</th>
+  </tr>
+  
+  <tr>
+    <td>4.0</td>
+    <td>2023 XX XX</td>
+    <td>
+        iOS 13.0<br/>
+        macOS 10.15<br/>
+        tvOS 13.0<br/>
+        watchOS 6.0
+    </td>
+    <td>4.7.0 - 4.x.x</td>
+    <td>
+        iOS 13.0 support.<br/>
+        Multiplatform support.<br/
+        >RTL language support.
+    </td>
+  </tr>
+  
+  <tr>
+    <td>3.0</td>
+    <td>2022 10 02</td>
+    <td>iOS 16.0</td>
+    <td>4.1.0 - 4.x.x</td>
+    <td>
+        New SwiftUI API.<br/>
+        API changes.
+    </td>
+  </tr>
+    
+  <tr>
+    <td>2.0</td>
+    <td>2022 05 26</td>
+    <td>iOS 15.0</td>
+    <td>3.2.0 - 3.x.x</td>
+    <td>
+        New SwiftUI API.<br/>
+        API changes.<br/>
+        SPM support.
+    </td>
+  </tr>
+    
+  <tr>
+    <td>1.0</td>
+    <td>2021 02 07</td>
+    <td>iOS 14.0</td>
+    <td>-</td>
+    <td>-</td>
+  </tr>
+
+</table>
 
 ## Contact
 

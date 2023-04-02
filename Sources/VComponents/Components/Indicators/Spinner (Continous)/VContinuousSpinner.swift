@@ -47,6 +47,7 @@ public struct VContinuousSpinner: View {
                     })
                 })
             })
+            .environment(\.layoutDirection, .leftToRight) // Like native `ProgressView`, forces LTR
     }
 }
 

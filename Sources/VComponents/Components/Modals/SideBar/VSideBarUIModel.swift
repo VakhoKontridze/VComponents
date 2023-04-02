@@ -39,7 +39,7 @@ public struct VSideBarUIModel {
         /// Edge from which side bar appears, and to which it disappears. Set to `default`.
         ///
         /// Changing this property in model alone doesn't guarantee proper sizes and rounding.
-        /// Consider using `left`, `right`, `top`, and `bottom` instances of `VSideBarUIModel`.
+        /// Consider using `leading`, `trailing`, `top`, and `bottom` instances of `VSideBarUIModel`.
         public var presentationEdge: PresentationEdge = .default
         
         /// Side bar sizes. Set to `default`.
@@ -52,6 +52,9 @@ public struct VSideBarUIModel {
         
         /// Rounded corners. Set to `rightCorners`.
         public var roundedCorners: RectCorner = .rightCorners
+        
+        /// Indicates if left and right corners should switch to support RTL languages. Set to `true`.
+        public var reversesLeftAndRightCornersForRTLLanguages: Bool = true
         
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
@@ -75,24 +78,24 @@ public struct VSideBarUIModel {
         public init() {}
         
         // MARK: Presentation Edge
-        /// Enum that represents presentation edge, such as `left`, `right`, `top`, or `bottom`.
+        /// Enum that represents presentation edge, such as `leading`, `trailing`, `top`, or `bottom`.
         public enum PresentationEdge: Int, CaseIterable {
             // MARK: Cases
-            /// Presentation form left.
-            case left
+            /// Presentation form leading edge.
+            case leading
             
-            /// Presentation form right.
-            case right
+            /// Presentation form trailing edge.
+            case trailing
             
-            /// Presentation form top.
+            /// Presentation form top edge.
             case top
             
-            /// Presentation form bottom.
+            /// Presentation form bottom egge.
             case bottom
             
             // MARK: Initializers
-            /// Default value. Set to `left`.
-            public static var `default`: Self { .left }
+            /// Default value. Set to `leading`.
+            public static var `default`: Self { .leading }
         }
         
         // MARK: Sizes
@@ -189,6 +192,7 @@ public struct VSideBarUIModel {
         var uiModel: VSheetUIModel = .init()
         
         uiModel.layout.roundedCorners = layout.roundedCorners
+        uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
         uiModel.layout.cornerRadius = layout.cornerRadius
         uiModel.layout.contentMargin = 0
         
@@ -223,8 +227,8 @@ extension VSideBarUIModel.Layout.PresentationEdge {
     /// UI model for the presentation edge.
     public var uiModel: VSideBarUIModel {
         switch self {
-        case .left: return .left
-        case .right: return .right
+        case .leading: return .leading
+        case .trailing: return .trailing
         case .top: return .top
         case .bottom: return .bottom
         }
@@ -236,29 +240,29 @@ extension VSideBarUIModel.Layout.PresentationEdge {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VSideBarUIModel {
-    /// `VSideBarUIModel` that presents side bar from left.
+    /// `VSideBarUIModel` that presents side bar from leading edge.
     ///
     /// Default configuration.
-    public static var left: Self {
+    public static var leading: Self {
         .init()
     }
     
-    /// `VSideBarUIModel` that presents side bar from right.
+    /// `VSideBarUIModel` that presents side bar from trailing edge.
     ///
     /// `roundedCorners` is set to `leftCorners`.
     ///
     /// Sets `roundedCorners` to `leftCorners`.
-    public static var right: Self {
+    public static var trailing: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.presentationEdge = .right
+        uiModel.layout.presentationEdge = .trailing
         
         uiModel.layout.roundedCorners = .leftCorners
         
         return uiModel
     }
     
-    /// `VSideBarUIModel` that presents side bar from top.
+    /// `VSideBarUIModel` that presents side bar from top edge.
     ///
     /// `presentationEdge` is set to `top`.
     ///
@@ -288,7 +292,7 @@ extension VSideBarUIModel {
         return uiModel
     }
     
-    /// `VSideBarUIModel` that presents side bar from bottom.
+    /// `VSideBarUIModel` that presents side bar from bottom edge.
     ///
     /// `presentationEdge` is set to `bottom`.
     ///

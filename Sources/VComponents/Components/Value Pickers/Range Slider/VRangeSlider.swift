@@ -28,6 +28,8 @@ import VCore
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VRangeSlider: View {
     // MARK: Properties
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    
     private let uiModel: VRangeSliderUIModel
 
     private let min, max: Double
@@ -180,7 +182,7 @@ public struct VRangeSlider: View {
             return (min + (value / width) * range)
                 .invertedFromMax(
                     max,
-                    if: uiModel.layout.direction.isReversed
+                    if: layoutDirection == .rightToLeft || uiModel.layout.direction.isReversed
                 )
         }()
 

@@ -14,7 +14,7 @@ import SwiftUI
 public struct ImageBook {
     // MARK: Properties
     /// Checkmark for `on` state in `VCheckBox`.
-    public static var checkBoxCheckMarkOn: Image = .init(module: "CheckMark.On").template
+    public static var checkBoxCheckMarkOn: Image = .init(module: "CheckMark.On").template // Mirrored for RTL languages
     
     /// Checkmark for `indeterminate` state in `VCheckBox`.
     public static var checkBoxCheckMarkIndeterminate: Image = .init(module: "CheckMark.Indeterminate").template
@@ -26,10 +26,10 @@ public struct ImageBook {
     public static var stepperIncrement: Image = .init(module: "Plus").template
     
     /// Search icon for `VTextField`.
-    public static var textFieldSearch: Image = .init(module: "Search").template
+    public static var textFieldSearch: Image = .init(module: "Search").template // Doesn't mirror, like `UISearchBar/.searchable(text:)`
     
     /// Visibility off icon for `VTextField`.
-    public static var textFieldVisibilityOff: Image = .init(module: "Visibility.Off").template
+    public static var textFieldVisibilityOff: Image = .init(module: "Visibility.Off").template // Mirrored for RTL languages
     
     /// Visibility on icon for `VTextField`
     public static var textFieldVisibilityOn: Image = .init(module: "Visibility.On").template
