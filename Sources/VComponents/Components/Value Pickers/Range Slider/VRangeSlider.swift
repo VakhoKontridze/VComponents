@@ -44,7 +44,7 @@ public struct VRangeSlider: View {
     private let actionLow: ((Bool) -> Void)?
     private let actionHigh: ((Bool) -> Void)?
     
-    @State private var sliderWidth: CGFloat = 0
+    @State private var sliderSize: CGSize = .zero
 
     // MARK: Initializers
     /// Initializes `VRangeSlider` with difference, and low and high values.
@@ -87,19 +87,25 @@ public struct VRangeSlider: View {
 
     // MARK: Body
     public var body: some View {
-        ZStack(alignment: .leading, content: {
-            ZStack(alignment: .leading, content: {
+        ZStack(alignment: uiModel.layout.direction.alignment, content: {
+            ZStack(alignment: uiModel.layout.direction.alignment, content: {
                 track
                 progress
             })
                 .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-                .frame(height: uiModel.layout.height)
+                .frame(
+                    width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
+                    height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
+                )
             
             thumb(.low)
             thumb(.high)
         })
-            .onSizeChange(perform: { sliderWidth = $0.width })
-            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
+            .onSizeChange(perform: { sliderSize = $0 })
+            .padding(
+                uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
+                uiModel.layout.thumbDimension / 2
+            )
             .animation(uiModel.animations.progress, value: valueLow)
             .animation(uiModel.animations.progress, value: valueHigh)
     }
@@ -111,8 +117,8 @@ public struct VRangeSlider: View {
 
     private var progress: some View {
         Rectangle()
-            .padding(.leading, progressWidth(.low))
-            .padding(.trailing, progressWidth(.high))
+            .padding(uiModel.layout.direction.edgeSet, progressWidth(.low))
+            .padding(uiModel.layout.direction.reversed().edgeSet, progressWidth(.high))
             .foregroundColor(uiModel.colors.progress.value(for: internalState))
     }
 
@@ -124,18 +130,23 @@ public struct VRangeSlider: View {
                     .shadow(
                         color: uiModel.colors.thumbShadow.value(for: internalState),
                         radius: uiModel.layout.thumbShadowRadius,
-                        x: uiModel.layout.thumbShadowOffset.x,
-                        y: uiModel.layout.thumbShadowOffset.y
+                        offset: uiModel.layout.thumbShadowOffset // No need to reverse coordinates on shadow
                     )
 
                 RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
                     .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
             })
                 .frame(dimension: uiModel.layout.thumbDimension)
-                .offset(x: thumbOffset(thumb))
+                .offset(
+                    x: uiModel.layout.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(if: uiModel.layout.direction.isReversed) : 0,
+                    y: uiModel.layout.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(if: uiModel.layout.direction.isReversed)
+                )
         })
-            .frame(maxWidth: .infinity, alignment: .leading)    // Must be put into group, as content already has frame
-
+            .frame( // Must be put into group, as content already has frame
+                maxWidth: uiModel.layout.direction.isHorizontal ? .infinity : nil,
+                maxHeight: uiModel.layout.direction.isHorizontal ? nil : .infinity,
+                alignment: uiModel.layout.direction.alignment
+            )
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged({ dragChanged(dragValue: $0, thumb: thumb) })
@@ -152,11 +163,15 @@ public struct VRangeSlider: View {
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
         let rawValue: Double = {
-            let value: Double = dragValue.location.x
+            let value: Double = dragValue.location.coordinate(isX: uiModel.layout.direction.isHorizontal)
             let range: Double = max - min
-            let width: Double = sliderWidth
+            let width: Double = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
 
-            return min + (value / width) * range
+            return (min + (value / width) * range)
+                .invertedFromMax(
+                    max,
+                    if: uiModel.layout.direction.isReversed
+                )
         }()
 
         let valueFixed: Double = {
@@ -213,7 +228,7 @@ public struct VRangeSlider: View {
             }
         }()
         let range: CGFloat = max - min
-        let width: CGFloat = sliderWidth
+        let width: CGFloat = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
 
         switch thumb {
         case .low: return (value / range) * width
@@ -223,13 +238,13 @@ public struct VRangeSlider: View {
 
     // MARK: Thumb Offset
     private func thumbOffset(_ thumb: Thumb) -> CGFloat {
-        let progressW: CGFloat = progressWidth(thumb)
-        let thumbW: CGFloat = uiModel.layout.thumbDimension
-        let width: CGFloat = sliderWidth
+        let progressWidth: CGFloat = progressWidth(thumb)
+        let thumbWidth: CGFloat = uiModel.layout.thumbDimension
+        let width: CGFloat = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
 
         switch thumb {
-        case .low: return progressW - thumbW / 2
-        case .high: return width - progressW - thumbW / 2
+        case .low: return progressWidth - thumbWidth / 2
+        case .high: return width - progressWidth - thumbWidth / 2
         }
     }
     
@@ -281,6 +296,7 @@ struct VRangeSlider_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
+            LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
             .colorScheme(colorScheme)
     }
@@ -334,6 +350,102 @@ struct VRangeSlider_Previews: PreviewProvider {
                     }
                 )
             })
+        }
+    }
+    
+    private struct LayoutDirectionsPreview: View {
+        private let dimension: CGFloat = {
+#if os(iOS)
+            return 250
+#elseif os(macOS)
+            return 300
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        
+        @State private var valueLow: Double = VRangeSlider_Previews.valueLow
+        @State private var valueHigh: Double = VRangeSlider_Previews.valueHigh
+        
+        var body: some View {
+            PreviewContainer(
+                embeddedInScrollViewOnPlatforms: [.macOS],
+                content: {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Left-to-Right",
+                        content: {
+                            VRangeSlider(
+                                uiModel: {
+                                    var uiModel: VRangeSliderUIModel = .init()
+                                    uiModel.layout.direction = .leftToRight
+                                    return uiModel
+                                }(),
+                                difference: difference,
+                                valueLow: $valueLow,
+                                valueHigh: $valueHigh
+                            )
+                                .frame(width: dimension)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Right-to-Left",
+                        content: {
+                            VRangeSlider(
+                                uiModel: {
+                                    var uiModel: VRangeSliderUIModel = .init()
+                                    uiModel.layout.direction = .rightToLeft
+                                    return uiModel
+                                }(),
+                                difference: difference,
+                                valueLow: $valueLow,
+                                valueHigh: $valueHigh
+                            )
+                                .frame(width: dimension)
+                        }
+                    )
+                    
+                    HStack(content: {
+                        PreviewRow(
+                            axis: .vertical,
+                            title: "Top-to-Bottom",
+                            content: {
+                                VRangeSlider(
+                                    uiModel: {
+                                        var uiModel: VRangeSliderUIModel = .init()
+                                        uiModel.layout.direction = .topToBottom
+                                        return uiModel
+                                    }(),
+                                    difference: difference,
+                                    valueLow: $valueLow,
+                                    valueHigh: $valueHigh
+                                )
+                                    .frame(height: dimension)
+                            }
+                        )
+                        
+                        PreviewRow(
+                            axis: .vertical,
+                            title: "Bottom-to-Top",
+                            content: {
+                                VRangeSlider(
+                                    uiModel: {
+                                        var uiModel: VRangeSliderUIModel = .init()
+                                        uiModel.layout.direction = .bottomToTop
+                                        return uiModel
+                                    }(),
+                                    difference: difference,
+                                    valueLow: $valueLow,
+                                    valueHigh: $valueHigh
+                                )
+                                    .frame(height: dimension)
+                            }
+                        )
+                    })
+                }
+            )
         }
     }
 }

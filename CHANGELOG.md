@@ -65,6 +65,7 @@ VSlider
 
 VRangeSlider
 
+- `direction` is added to `VRangeSliderUIModel` that support omni-directional layout
 - `thumbShadowOffset` is added to `VRangeSliderUIModel`
 - `border` colors are set to `clearColors` in `VRangeSliderUIModel`, since `borderWidth` was `0`
 - Issue with thumb not accounting for slider height is fixed

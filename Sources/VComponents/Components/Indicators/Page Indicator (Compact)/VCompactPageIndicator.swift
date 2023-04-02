@@ -455,37 +455,39 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                     }
                 )
                 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Top-to-Bottom",
-                    content: {
-                        VCompactPageIndicator(
-                            uiModel: {
-                                var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.layout.direction = .topToBottom
-                                return uiModel
-                            }(),
-                            total: total,
-                            current: current
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Bottom-to-Top",
-                    content: {
-                        VCompactPageIndicator(
-                            uiModel: {
-                                var uiModel: VCompactPageIndicatorUIModel = .init()
-                                uiModel.layout.direction = .bottomToTop
-                                return uiModel
-                            }(),
-                            total: total,
-                            current: current
-                        )
-                    }
-                )
+                HStack(content: {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Top-to-Bottom",
+                        content: {
+                            VCompactPageIndicator(
+                                uiModel: {
+                                    var uiModel: VCompactPageIndicatorUIModel = .init()
+                                    uiModel.layout.direction = .topToBottom
+                                    return uiModel
+                                }(),
+                                total: total,
+                                current: current
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Bottom-to-Top",
+                        content: {
+                            VCompactPageIndicator(
+                                uiModel: {
+                                    var uiModel: VCompactPageIndicatorUIModel = .init()
+                                    uiModel.layout.direction = .bottomToTop
+                                    return uiModel
+                                }(),
+                                total: total,
+                                current: current
+                            )
+                        }
+                    )
+                })
             })
                 .onReceiveOfTimerIncrement($current, to: total-1)
         }

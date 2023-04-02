@@ -34,14 +34,10 @@ public struct VSliderUIModel {
         /// Direction. Set to `leftToRight`.
         public var direction: LayoutDirectionOmni = .leftToRight
         
-        /// Slider height, but width for vertical layouts.
-        /// Set to `10` on `iOS`.
-        /// Set to `10` on `macOS`.
+        /// Slider height, but width for vertical layouts. Set to `10`.
         public var height: CGFloat = GlobalUIModel.Common.barHeight
         
-        /// Slider corner radius.
-        /// Set to `5` on `iOS`.
-        /// Set to `5` on `macOS`.
+        /// Slider corner radius. Set to `5`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
         /// Indicates if slider rounds progress view right-edge. Set to `true`.

@@ -116,6 +116,16 @@ struct VProgressBar_Previews: PreviewProvider {
     }
     
     private struct LayoutDirectionsPreview: View {
+        private let dimension: CGFloat = {
+#if os(iOS)
+            return 250
+#elseif os(macOS)
+            return 300
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        
         @State private var value: Double = 0
         
         var body: some View {
@@ -132,6 +142,7 @@ struct VProgressBar_Previews: PreviewProvider {
                             }(),
                             value: value
                         )
+                            .frame(width: dimension)
                     }
                 )
                 
@@ -147,38 +158,43 @@ struct VProgressBar_Previews: PreviewProvider {
                             }(),
                             value: value
                         )
+                            .frame(width: dimension)
                     }
                 )
                 
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Top-to-Bottom",
-                    content: {
-                        VProgressBar(
-                            uiModel: {
-                                var uiModel: VProgressBarUIModel = .init()
-                                uiModel.layout.direction = .topToBottom
-                                return uiModel
-                            }(),
-                            value: value
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Bottom-to-Top",
-                    content: {
-                        VProgressBar(
-                            uiModel: {
-                                var uiModel: VProgressBarUIModel = .init()
-                                uiModel.layout.direction = .bottomToTop
-                                return uiModel
-                            }(),
-                            value: value
-                        )
-                    }
-                )
+                HStack(content: {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Top-to-Bottom",
+                        content: {
+                            VProgressBar(
+                                uiModel: {
+                                    var uiModel: VProgressBarUIModel = .init()
+                                    uiModel.layout.direction = .topToBottom
+                                    return uiModel
+                                }(),
+                                value: value
+                            )
+                                .frame(height: dimension)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Bottom-to-Top",
+                        content: {
+                            VProgressBar(
+                                uiModel: {
+                                    var uiModel: VProgressBarUIModel = .init()
+                                    uiModel.layout.direction = .bottomToTop
+                                    return uiModel
+                                }(),
+                                value: value
+                            )
+                                .frame(height: dimension)
+                        }
+                    )
+                })
             })
                 .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
         }

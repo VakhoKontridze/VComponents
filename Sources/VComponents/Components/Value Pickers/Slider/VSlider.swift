@@ -86,7 +86,10 @@ public struct VSlider: View {
                     .onChanged(dragChanged)
                     .onEnded(dragEnded)
             )
-            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
+            .padding(
+                uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
+                uiModel.layout.thumbDimension / 2
+            )
             .animation(uiModel.animations.progress, value: value)
     }
 
@@ -142,7 +145,11 @@ public struct VSlider: View {
             let range: Double = max - min
             let width: Double = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
 
-            return ((value / width) * range + min).invertedFromMax(max, if: uiModel.layout.direction.isReversed)
+            return ((value / width) * range + min)
+                .invertedFromMax(
+                    max,
+                    if: uiModel.layout.direction.isReversed
+                )
         }()
         
         let valueFixed: Double = rawValue.clamped(min: min, max: max, step: step)
@@ -251,70 +258,89 @@ struct VSlider_Previews: PreviewProvider {
     }
     
     private struct LayoutDirectionsPreview: View {
+        private let dimension: CGFloat = {
+#if os(iOS)
+            return 250
+#elseif os(macOS)
+            return 300
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        
         @State private var value: Double = VSlider_Previews.value
         
         var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Left-to-Right",
-                    content: {
-                        VSlider(
-                            uiModel: {
-                                var uiModel: VSliderUIModel = .init()
-                                uiModel.layout.direction = .leftToRight
-                                return uiModel
-                            }(),
-                            value: $value
+            PreviewContainer(
+                embeddedInScrollViewOnPlatforms: [.macOS],
+                content: {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Left-to-Right",
+                        content: {
+                            VSlider(
+                                uiModel: {
+                                    var uiModel: VSliderUIModel = .init()
+                                    uiModel.layout.direction = .leftToRight
+                                    return uiModel
+                                }(),
+                                value: $value
+                            )
+                                .frame(width: dimension)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Right-to-Left",
+                        content: {
+                            VSlider(
+                                uiModel: {
+                                    var uiModel: VSliderUIModel = .init()
+                                    uiModel.layout.direction = .rightToLeft
+                                    return uiModel
+                                }(),
+                                value: $value
+                            )
+                                .frame(width: dimension)
+                        }
+                    )
+                    
+                    HStack(content: {
+                        PreviewRow(
+                            axis: .vertical,
+                            title: "Top-to-Bottom",
+                            content: {
+                                VSlider(
+                                    uiModel: {
+                                        var uiModel: VSliderUIModel = .init()
+                                        uiModel.layout.direction = .topToBottom
+                                        return uiModel
+                                    }(),
+                                    value: $value
+                                )
+                                    .frame(height: dimension)
+                            }
                         )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Right-to-Left",
-                    content: {
-                        VSlider(
-                            uiModel: {
-                                var uiModel: VSliderUIModel = .init()
-                                uiModel.layout.direction = .rightToLeft
-                                return uiModel
-                            }(),
-                            value: $value
+                        
+                        PreviewRow(
+                            axis: .vertical,
+                            title: "Bottom-to-Top",
+                            content: {
+                                VSlider(
+                                    uiModel: {
+                                        var uiModel: VSliderUIModel = .init()
+                                        uiModel.layout.direction = .bottomToTop
+                                        return uiModel
+                                    }(),
+                                    value: $value
+                                )
+                                    .frame(height: dimension)
+                            }
                         )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Top-to-Bottom",
-                    content: {
-                        VSlider(
-                            uiModel: {
-                                var uiModel: VSliderUIModel = .init()
-                                uiModel.layout.direction = .topToBottom
-                                return uiModel
-                            }(),
-                            value: $value
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Bottom-to-Top",
-                    content: {
-                        VSlider(
-                            uiModel: {
-                                var uiModel: VSliderUIModel = .init()
-                                uiModel.layout.direction = .bottomToTop
-                                return uiModel
-                            }(),
-                            value: $value
-                        )
-                    }
-                )
-            })
+                    })
+                }
+            )
         }
     }
 }

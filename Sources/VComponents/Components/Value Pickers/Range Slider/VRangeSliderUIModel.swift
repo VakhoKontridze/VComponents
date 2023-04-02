@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - V Range Slider UI Model
 /// Model that describes UI.
@@ -30,7 +31,10 @@ public struct VRangeSliderUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Slider height. Set to `10`.
+        /// Direction. Set to `leftToRight`.
+        public var direction: LayoutDirectionOmni = .leftToRight
+        
+        /// Slider height, but width for vertical layouts. Set to `10`.
         public var height: CGFloat = GlobalUIModel.Common.barHeight
         
         /// Slider corner radius. Set to `5`.
