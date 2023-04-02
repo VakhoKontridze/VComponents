@@ -171,7 +171,7 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
     private static func contentSmall() -> some View {
         HStack(content: {
             Image(systemName: "swift")
-            Text("Lorem ipsum")
+            Text("Lorem ipsum".pseudoRTL(languageDirection))
         })
             .drawingGroup()
     }
@@ -181,11 +181,11 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             Image(systemName: "swift")
             
 #if os(macOS)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique tempor vehicula. Pellentesque habitant morbi...")
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tristique tempor vehicula. Pellentesque habitant morbi...".pseudoRTL(languageDirection))
 #elseif os(tvOS)
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet eros id tellus porta ullamcorper. Ut odio purus, posuere sit amet odio non, tempus scelerisque arcu. Pellentesque quis pretium erat.")
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis imperdiet eros id tellus porta ullamcorper. Ut odio purus, posuere sit amet odio non, tempus scelerisque arcu. Pellentesque quis pretium erat.".pseudoRTL(languageDirection))
 #else
-            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+            Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.".pseudoRTL(languageDirection))
 #endif
         })
             .drawingGroup()

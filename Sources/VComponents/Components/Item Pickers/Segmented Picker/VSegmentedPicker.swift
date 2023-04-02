@@ -411,13 +411,14 @@ struct VSegmentedPicker_Previews: PreviewProvider {
     }
     
     // Data
-    private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
-    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+    private static var headerTitle: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
+    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
     
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
         
-        var stringRepresentation: String {
+        var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
+        private var _stringRepresentation: String {
             switch self {
             case .red: return "Red"
             case .green: return "Green"

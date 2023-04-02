@@ -234,7 +234,7 @@ struct VRadioButton_Previews: PreviewProvider {
     }
     
     // Data
-    private static var title: String { "Lorem ipsum" }
+    private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
 
     // Previews (Scenes)
     private struct Preview: View {

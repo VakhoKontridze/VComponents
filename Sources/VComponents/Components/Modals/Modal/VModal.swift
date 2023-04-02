@@ -229,7 +229,7 @@ struct VModal_Previews: PreviewProvider {
     // Data
     private static func content() -> some View {
         ColorBook.accentBlue
-            .vModalHeaderTitle("Lorem Ipsum")
+            .vModalHeaderTitle("Lorem Ipsum".pseudoRTL(languageDirection))
     }
 
     // Previews (Scenes)

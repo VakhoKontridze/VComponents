@@ -65,7 +65,8 @@ struct VContextMenuContentView_Previews: PreviewProvider {
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
 
-        var stringRepresentation: String {
+        var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
+        private var _stringRepresentation: String {
             switch self {
             case .red: return "Red"
             case .green: return "Green"
@@ -75,7 +76,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
     }
 
     // Previews (Scenes)
-    private struct Preview: View {
+    private struct Preview: View { // Didn't bother with pseudoRTL
         @State private var selection: PickerRow = .red
 
         var body: some View {

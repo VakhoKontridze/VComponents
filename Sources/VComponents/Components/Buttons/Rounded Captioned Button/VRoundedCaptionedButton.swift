@@ -202,7 +202,7 @@ struct VRoundedCaptionedButton_Previews: PreviewProvider {
     
     // Data
     private static var icon: Image { .init(systemName: "swift") }
-    private static var titleCaption: String { "Lorem Ipsum" }
+    private static var titleCaption: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
     
     // Previews (Scenes)
     private struct Preview: View {

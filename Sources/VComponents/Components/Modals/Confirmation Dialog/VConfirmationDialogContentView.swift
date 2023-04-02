@@ -45,8 +45,8 @@ struct VConfirmationDialogContentView_Previews: PreviewProvider {
     }
     
     // MARK: Data
-    private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
-    private static var message: String { "Lorem ipsum dolor sit amet" }
+    private static var title: String { "Lorem Ipsum Dolor Sit Amet".pseudoRTL(languageDirection) }
+    private static var message: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
 
     // Previews (Scenes)
     private struct Preview: View {

@@ -249,8 +249,8 @@ struct VToast_Previews: PreviewProvider {
     }
     
     // Data
-    private static var text: String { "Lorem ipsum dolor sit amet" }
-    private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
+    private static var text: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
+    private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
 
     // Previews (Scenes)
     private struct Preview: View {

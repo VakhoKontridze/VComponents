@@ -236,7 +236,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
     }
     
     // Data
-    private static var headerTitle: String { "Lorem Ipsum" }
+    private static var headerTitle: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
 
     private static func content() -> some View {
         ColorBook.accentBlue

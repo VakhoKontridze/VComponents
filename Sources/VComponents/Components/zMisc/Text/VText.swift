@@ -87,7 +87,8 @@ struct VText_Previews: PreviewProvider {
     private static var lineMin: Int { 2 }
     private static var lineMax: Int { 5 }
     
-    private static var text: String {
+    private static var text: String { _text.pseudoRTL(languageDirection) }
+    private static var _text: String {
 #if os(watchOS)
         return "Lorem ipsum"
 #else

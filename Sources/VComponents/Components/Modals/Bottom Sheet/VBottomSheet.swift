@@ -392,7 +392,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     }
     
     // Data
-    private static var headerTitle: String { "Lorem Ipsum Dolor Sit Amet" }
+    private static var headerTitle: String { "Lorem Ipsum Dolor Sit Amet".pseudoRTL(languageDirection) }
     
     private static func content() -> some View {
         ColorBook.accentBlue

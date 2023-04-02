@@ -209,7 +209,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
     }
     
     // Data
-    private static var title: String { "Lorem Ipsum" }
+    private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
     
     // Previews (Scenes)
     private struct Preview: View {

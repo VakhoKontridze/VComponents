@@ -309,10 +309,10 @@ struct VTextField_Previews: PreviewProvider {
     }
     
     // Data
-    private static var headerTitle: String { "Lorem ipsum dolor sit amet" }
-    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit" }
-    private static var placeholder: String { "Lorem ipsum" }
-    private static var text: String { "Lorem ipsum" }
+    private static var headerTitle: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
+    private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
+    private static var placeholder: String { "Lorem ipsum".pseudoRTL(languageDirection) }
+    private static var text: String { "Lorem ipsum".pseudoRTL(languageDirection) }
     
     // Previews (Scenes)
     private struct Preview: View {

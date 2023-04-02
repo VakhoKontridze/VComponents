@@ -273,13 +273,13 @@ struct VAlert_Previews: PreviewProvider {
     }
     
     // Data
-    private static var title: String { "Lorem Ipsum Dolor Sit Amet" }
-    private static var message: String { "Lorem ipsum dolor sit amet" }
+    private static var title: String { "Lorem Ipsum Dolor Sit Amet".pseudoRTL(languageDirection) }
+    private static var message: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
     
     @ViewBuilder private static func content() -> some View {
 #if os(iOS)
         if #available(iOS 15.0, *) {
-            VTextField(text: .constant("Lorem ipsum dolor sit amet"))
+            VTextField(text: .constant("Lorem ipsum dolor sit amet".pseudoRTL(languageDirection)))
         } else {
             RoundedRectangle(cornerRadius: 10)
                 .frame(height: 50)
