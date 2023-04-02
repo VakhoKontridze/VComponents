@@ -209,6 +209,11 @@ public struct VToastUIModel {
         /// Disappear animation. Set to `easeIn` with duration `0.2`.
         public var disappear: BasicAnimation? = .init(curve: .easeIn, duration: 0.2)
         
+#if os(iOS)
+        /// Haptic feedback type. Set to `nil`.
+        public var haptic: UINotificationFeedbackGenerator.FeedbackType? = nil
+#endif
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -226,6 +231,10 @@ extension VToastUIModel {
         var uiModel: Self = .init()
         
         uiModel.colors = .success
+        
+#if os(iOS)
+        uiModel.animations.haptic = .success
+#endif
 
         return uiModel
     }
@@ -236,6 +245,10 @@ extension VToastUIModel {
         
         uiModel.colors = .warning
         
+#if os(iOS)
+        uiModel.animations.haptic = .warning
+#endif
+        
         return uiModel
     }
 
@@ -244,6 +257,10 @@ extension VToastUIModel {
         var uiModel: Self = .init()
         
         uiModel.colors = .error
+        
+#if os(iOS)
+        uiModel.animations.haptic = .error
+#endif
         
         return uiModel
     }

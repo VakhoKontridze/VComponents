@@ -24,6 +24,9 @@ public struct VStepperUIModel {
     /// Model that contains misc properties.
     public var misc: Misc = .init()
     
+    /// Model that contains animation properties.
+    public var animations: Animations = .init()
+    
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
@@ -90,6 +93,22 @@ public struct VStepperUIModel {
         // MARK: Button State Colors
         /// Model that contains colors for component states.
         public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
+    }
+    
+    // MARK: Animations
+    /// Model that contains animation properties.
+    public struct Animations {
+#if os(iOS)
+        /// Haptic feedback style on press. Set to `light`.
+        public var hapticPress: UIImpactFeedbackGenerator.FeedbackStyle? = .light
+        
+        /// Haptic feedback style on long press. Set to `soft`.
+        public var hapticLongPress: UIImpactFeedbackGenerator.FeedbackStyle? = .soft
+#endif
+        
+        // MARK: Initializers
+        /// Initializes UI model with default values.
+        public init() {}
     }
 
     // MARK: Misc

@@ -156,6 +156,11 @@ public struct VLoadingStretchedButtonUIModel {
         /// Model for customizing spinner animations.
         public var spinnerSubUIModel: VContinuousSpinnerUIModel.Animations = .init()
         
+#if os(iOS)
+        /// Haptic feedback style. Set to `medium`.
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
+#endif
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

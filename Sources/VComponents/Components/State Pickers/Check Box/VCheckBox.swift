@@ -200,7 +200,18 @@ public struct VCheckBox<Label>: View where Label: View {
     // MARK: Actions
     private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
-        if gestureState.isClicked { state.setNextState() }
+        
+        if gestureState.isClicked {
+            playHapticEffect()
+            state.setNextState()
+        }
+    }
+    
+    // MARK: Haptics
+    private func playHapticEffect() {
+#if os(iOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
+#endif
     }
 
     // MARK: Icon

@@ -131,6 +131,12 @@ struct GlobalUIModel {
 #endif
         }()
         
+#if os(iOS)
+        static var haptic_iOS: UIImpactFeedbackGenerator.FeedbackStyle? { .light }
+#elseif os(watchOS)
+        static var haptic_watchOS: WKHapticType? { nil }
+#endif
+        
         // MARK: Initializers
         private init() {}
     }
@@ -180,6 +186,10 @@ struct GlobalUIModel {
         }
         
         static var stateChangeAnimation: Animation { .easeIn(duration: 0.1) }
+        
+#if os(iOS)
+        static var haptic_iOS: UIImpactFeedbackGenerator.FeedbackStyle? { .light }
+#endif
         
         // MARK: Initializers
         private init() {}

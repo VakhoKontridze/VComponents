@@ -76,7 +76,7 @@ public struct VBottomSheetUIModel {
         /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing close button layout. `dimension` Set to `30`, `iconSize` Set to `12x12`, and `hitBox` Set to `zero`.
+        /// Model for customizing close button layout. `dimension` is set to `30`, `iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -316,6 +316,17 @@ public struct VBottomSheetUIModel {
         /// Height snapping animation between `min`, `ideal`, and `max` states. Set to `interpolatingSpring`, with mass `1`, stiffness `300`, damping `30`, and initialVelocity `1`.
         public var heightSnap: Animation = .interpolatingSpring(mass: 1, stiffness: 300, damping: 30, initialVelocity: 1)
         
+        /// Model for customizing close button animations. `haptic` is se to `nil`.
+        public var closeButtonSubUIModel: VRoundedButtonUIModel.Animations = {
+            var uiModel: VRoundedButtonUIModel.Animations = .init()
+            
+#if os(iOS)
+            uiModel.haptic = nil
+#endif
+            
+            return uiModel
+        }()
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -396,6 +407,8 @@ public struct VBottomSheetUIModel {
         uiModel.layout = layout.closeButtonSubUIModel
         
         uiModel.colors = colors.closeButtonSubUIModel
+        
+        uiModel.animations = animations.closeButtonSubUIModel
         
         return uiModel
     }

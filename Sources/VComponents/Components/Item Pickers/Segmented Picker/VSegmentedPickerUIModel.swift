@@ -303,6 +303,11 @@ public struct VSegmentedPickerUIModel {
 #endif
         }()
         
+#if os(iOS)
+        /// Indicates if picker uses haptic feedback. Set to `true`.
+        public var usesHaptic: Bool = true
+#endif
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

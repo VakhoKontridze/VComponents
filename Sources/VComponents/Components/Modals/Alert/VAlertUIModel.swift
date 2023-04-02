@@ -250,6 +250,11 @@ public struct VAlertUIModel {
         /// Blur during appear and disappear. Set to `3`.
         public var blur: CGFloat = GlobalUIModel.Modals.poppingAnimationBlur
         
+#if os(iOS)
+        /// Button haptic feedback style. Set to `light`.
+        public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
+#endif
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -277,6 +282,10 @@ public struct VAlertUIModel {
 
         uiModel.colors.background = .alertButton(colors.primaryButtonBackground)
         uiModel.colors.title = .alertButton(colors.primaryButtonTitle)
+        
+#if os(iOS)
+        uiModel.animations.haptic = animations.buttonHaptic
+#endif
 
         return uiModel
     }
@@ -289,6 +298,10 @@ public struct VAlertUIModel {
         
         uiModel.colors.background = .alertButton(colors.secondaryButtonBackground)
         uiModel.colors.title = .alertButton(colors.secondaryButtonTitle)
+        
+#if os(iOS)
+        uiModel.animations.haptic = animations.buttonHaptic
+#endif
 
         return uiModel
     }
@@ -301,6 +314,10 @@ public struct VAlertUIModel {
         
         uiModel.colors.background = .alertButton(colors.destructiveButtonBackground)
         uiModel.colors.title = .alertButton(colors.destructiveButtonTitle)
+        
+#if os(iOS)
+        uiModel.animations.haptic = animations.buttonHaptic
+#endif
 
         return uiModel
     }

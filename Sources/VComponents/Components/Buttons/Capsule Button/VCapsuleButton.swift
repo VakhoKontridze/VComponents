@@ -73,7 +73,10 @@ public struct VCapsuleButton<Label>: View where Label: View {
     public var body: some View {
         SwiftUIBaseButton(
             uiModel: uiModel.baseButtonSubUIModel,
-            action: action,
+            action: {
+                playHapticEffect()
+                action()
+            },
             label: { baseButtonState in
                 let internalState: VCapsuleButtonInternalState = internalState(baseButtonState)
                 
@@ -148,6 +151,15 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
                 .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
         }
+    }
+    
+    // MARK: Haptics
+    private func playHapticEffect() {
+#if os(iOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
+#elseif os(watchOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
+#endif
     }
 }
 

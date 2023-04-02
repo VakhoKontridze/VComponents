@@ -86,7 +86,10 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
     public var body: some View {
         SwiftUIBaseButton(
             uiModel: uiModel.baseButtonSubUIModel,
-            action: action,
+            action: {
+                playHapticEffect()
+                action()
+            },
             label: { baseButtonState in
                 let internalState: VRoundedCaptionedButtonInternalState = internalState(baseButtonState)
                 
@@ -178,6 +181,13 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
             .frame(size: uiModel.layout.iconCaptionSize)
             .foregroundColor(uiModel.colors.iconCaption.value(for: internalState))
             .opacity(uiModel.colors.iconCaptionOpacities.value(for: internalState))
+    }
+    
+    // MARK: Haptics
+    private func playHapticEffect() {
+#if os(iOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
+#endif
     }
 }
 

@@ -45,7 +45,7 @@ public struct VDisclosureGroupUIModel {
         /// Header margins. Set to `15` horizontal and  `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
 
-        /// Model for customizing chevron button layout. `dimension` Set to `30`, `iconSize` Set to `12x12`, and `hitBox` Set to `zero`.
+        /// Model for customizing chevron button layout. `dimension` is set to `30`, `iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -146,6 +146,17 @@ public struct VDisclosureGroupUIModel {
         /// Expand and collapse animation. Set to `default`.
         public var expandCollapse: Animation? = .default
         
+        /// Model for customizing chevron button animations. `haptic` is set to `nil`.
+        public var chevronButtonSubUIModel: VRoundedButtonUIModel.Animations = {
+            var uiModel: VRoundedButtonUIModel.Animations = .init()
+            
+#if os(iOS)
+            uiModel.haptic = nil
+#endif
+            
+            return uiModel
+        }()
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -192,6 +203,8 @@ public struct VDisclosureGroupUIModel {
         uiModel.layout = layout.chevronButtonSubUIModel
         
         uiModel.colors = colors.chevronButtonSubUIModel
+        
+        uiModel.animations = animations.chevronButtonSubUIModel
         
         return uiModel
     }

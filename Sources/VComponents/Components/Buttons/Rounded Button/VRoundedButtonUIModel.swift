@@ -177,6 +177,11 @@ public struct VRoundedButtonUIModel {
         /// Ratio to which label scales down on press. Set to `1`.
         public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
+#if os(iOS)
+        /// Haptic feedback style. Set to `light`.
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.haptic_iOS
+#endif
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

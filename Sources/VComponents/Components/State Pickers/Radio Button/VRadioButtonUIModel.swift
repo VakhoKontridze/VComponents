@@ -131,6 +131,11 @@ public struct VRadioButtonUIModel {
         /// State change animation. Set to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
         
+#if os(iOS)
+        /// Haptic feedback style. Set to `light`.
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.StatePickers.haptic_iOS
+#endif
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

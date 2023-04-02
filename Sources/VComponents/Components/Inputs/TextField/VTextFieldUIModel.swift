@@ -64,7 +64,7 @@ public struct VTextFieldUIModel {
         /// Search icon dimension. Set to `15`.
         public var searchIconDimension: CGFloat = 15
         
-        /// Model for customizing clear button layout. `dimension` Set to `22`, `iconSize` Set to `8x8`, and `hitBox` Set to `zero`.
+        /// Model for customizing clear button layout. `dimension` is set to `22`, `iconSize` is set to `8x8`, and `hitBox` is set to `zero`.
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
@@ -75,7 +75,7 @@ public struct VTextFieldUIModel {
             return uiModel
         }()
         
-        /// Model for customizing visibility button layout. `iconSize` Set to `20x20` and `hitBox` Set to `zero`.
+        /// Model for customizing visibility button layout. `iconSize` is set to `20x20` and `hitBox` is set to `zero`.
         public var visibilityButtonSubUIModel: VPlainButtonUIModel.Layout = {
             var uiModel: VPlainButtonUIModel.Layout = .init()
             
@@ -258,6 +258,28 @@ public struct VTextFieldUIModel {
         /// Clear button appear and disappear animation. Set to `easeInOut` with duration `0.2`.
         public var clearButton: Animation? = .easeInOut(duration: 0.2)
         
+        /// Model for customizing clear button animations. `haptic` is set to `nil`.
+        public var clearButtonSubUIModel: VRoundedButtonUIModel.Animations = {
+            var uiModel: VRoundedButtonUIModel.Animations = .init()
+            
+#if os(iOS)
+            uiModel.haptic = nil
+#endif
+            
+            return uiModel
+        }()
+        
+        /// Model for customizing visibility button animations. `haptic` is set to `nil`.
+        public var visibilityButtonSubUIModel: VPlainButtonUIModel.Animations = {
+            var uiModel: VPlainButtonUIModel.Animations = .init()
+            
+#if os(iOS)
+            uiModel.haptic = nil
+#endif
+            
+            return uiModel
+        }()
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -304,6 +326,8 @@ public struct VTextFieldUIModel {
         
         uiModel.colors = colors.clearButtonSubUIModel
         
+        uiModel.animations = animations.clearButtonSubUIModel
+        
         return uiModel
     }
     
@@ -313,6 +337,8 @@ public struct VTextFieldUIModel {
         uiModel.layout = layout.visibilityButtonSubUIModel
         
         uiModel.colors = colors.visibilityButtonSubUIModel
+        
+        uiModel.animations = animations.visibilityButtonSubUIModel
         
         return uiModel
     }

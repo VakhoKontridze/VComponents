@@ -147,6 +147,8 @@ struct VToast: View {
     
     // MARK: Animations
     private func animateIn() {
+        playHapticEffect()
+        
         withBasicAnimation(
             uiModel.animations.appear,
             body: { isInternallyPresented = true },
@@ -183,6 +185,13 @@ struct VToast: View {
                 DispatchQueue.main.async(execute: { dismissHandler?() })
             }
         )
+    }
+    
+    // MARK: Haptics
+    private func playHapticEffect() {
+#if os(iOS)
+        HapticManager.shared.playNotification(uiModel.animations.haptic)
+#endif
     }
 }
 

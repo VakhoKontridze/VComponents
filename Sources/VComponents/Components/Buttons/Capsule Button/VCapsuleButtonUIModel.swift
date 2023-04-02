@@ -172,6 +172,14 @@ public struct VCapsuleButtonUIModel {
         /// Set to `0.98` on `watchOS`.
         public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
+#if os(iOS)
+        /// Haptic feedback style. Set to `light`.
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.haptic_iOS
+#elseif os(watchOS)
+        /// Haptic feedback type. Set to `nil`.
+        public var haptic: WKHapticType? = GlobalUIModel.Buttons.haptic_watchOS
+#endif
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

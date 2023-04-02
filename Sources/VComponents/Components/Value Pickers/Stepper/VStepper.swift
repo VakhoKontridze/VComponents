@@ -129,7 +129,10 @@ public struct VStepper: View {
                 scheduleLongPressIncrementSchedulerTimer(for: button)
             }
             
-            if gestureState.isClicked { action(button: button) }
+            if gestureState.isClicked {
+                playHapticPressEffect()
+                action(button: button)
+            }
         })
     }
     
@@ -161,6 +164,7 @@ public struct VStepper: View {
         zeroLongPressTimers()
         
         longPressSchedulerTimer = .scheduledTimer(withTimeInterval: uiModel.misc.intervalToStartLongPressIncrement, repeats: false, block: { _ in
+            if longPressIncrementTimeElapsed == 0 { playHapticLongPressEffect() }
             scheduleLongPressIncrementTimer()
         })
     }
@@ -209,6 +213,19 @@ public struct VStepper: View {
         longPressIncrementTimerIncremental = nil
         
         longPressIncrementTimeElapsed = 0
+    }
+    
+    // MARK: Haptics
+    private func playHapticPressEffect() {
+#if os(iOS)
+        HapticManager.shared.playImpact(uiModel.animations.hapticPress)
+#endif
+    }
+    
+    private func playHapticLongPressEffect() {
+#if os(iOS)
+        HapticManager.shared.playImpact(uiModel.animations.hapticLongPress)
+#endif
     }
     
     // MARK: Helpers

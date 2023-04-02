@@ -350,7 +350,17 @@ public struct VSegmentedPicker<Data, Content>: View
             pressedIndex = gestureState.isPressed ? i : nil
         })
         
-        if gestureState.isClicked { selectedIndex = i }
+        if gestureState.isClicked {
+            playHapticEffect()
+            selectedIndex = i
+        }
+    }
+    
+    // MARK: Haptics
+    private func playHapticEffect() {
+#if os(iOS)
+        HapticManager.shared.playSelection()
+#endif
     }
 
     // MARK: State Indication

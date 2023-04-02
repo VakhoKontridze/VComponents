@@ -86,7 +86,10 @@ public struct VPlainButton<Label>: View where Label: View {
     public var body: some View {
         SwiftUIBaseButton(
             uiModel: uiModel.baseButtonSubUIModel,
-            action: action,
+            action: {
+                playHapticEffect()
+                action()
+            },
             label: { baseButtonState in
                 let internalState: VPlainButtonInternalState = internalState(baseButtonState)
                 
@@ -142,6 +145,15 @@ public struct VPlainButton<Label>: View where Label: View {
             .frame(size: uiModel.layout.iconSize)
             .foregroundColor(uiModel.colors.icon.value(for: internalState))
             .opacity(uiModel.colors.iconOpacities.value(for: internalState))
+    }
+    
+    // MARK: Haptics
+    private func playHapticEffect() {
+#if os(iOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
+#elseif os(watchOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
+#endif
     }
 }
 
