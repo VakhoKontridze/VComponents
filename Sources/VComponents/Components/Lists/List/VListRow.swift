@@ -181,7 +181,6 @@ struct VListRow_Previews: PreviewProvider {
                             })
                                 .vListStyle()
                                 .frame(height: 120)
-                                .blocksHitTesting()
                         }
                     )
                     
@@ -200,7 +199,6 @@ struct VListRow_Previews: PreviewProvider {
                             })
                                 .vListStyle()
                                 .frame(height: 120)
-                                .blocksHitTesting()
                         }
                     )
                     
@@ -219,7 +217,6 @@ struct VListRow_Previews: PreviewProvider {
                             })
                                 .vListStyle()
                                 .frame(height: 120)
-                                .blocksHitTesting()
                         }
                     )
                     
@@ -238,7 +235,6 @@ struct VListRow_Previews: PreviewProvider {
                             })
                                 .vListStyle()
                                 .frame(height: 120)
-                                .blocksHitTesting()
                         }
                     )
                     
@@ -257,7 +253,6 @@ struct VListRow_Previews: PreviewProvider {
                             })
                                 .vListStyle()
                                 .frame(height: 120)
-                                .blocksHitTesting()
                         }
                     )
                 }
