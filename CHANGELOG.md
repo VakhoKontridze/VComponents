@@ -1,6 +1,6 @@
 # Change Log
 
-### 3.2.2(31)
+### [3.2.2(31)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.2) — *2023 04 02*
 
 VSlider
 
