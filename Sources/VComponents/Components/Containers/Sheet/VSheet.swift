@@ -88,6 +88,7 @@ public struct VSheet<Content>: View where Content: View {
 // MARK: - Preview
 struct VSheet_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -95,6 +96,7 @@ struct VSheet_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

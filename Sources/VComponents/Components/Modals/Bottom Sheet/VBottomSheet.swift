@@ -368,11 +368,13 @@ struct VBottomSheet<Content>: View
 
 // MARK: - Preview
 @available(iOS 15.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(macOS 12.0, *)@available(macOS, unavailable)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
 struct VBottomSheet_Previews: PreviewProvider {
     // Configuration
+    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -384,6 +386,8 @@ struct VBottomSheet_Previews: PreviewProvider {
             OnlyGrabberPreview().previewDisplayName("Only Grabber")
             FullSizedContentPreview().previewDisplayName("Full-Sized Content")
         })
+            .previewInterfaceOrientation(interfaceOrientation)
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

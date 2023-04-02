@@ -195,6 +195,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
 @available(watchOS, unavailable)
 struct VLoadingStretchedButton_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -204,6 +205,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
             .colorScheme(colorScheme)
+            .environment(\.layoutDirection, languageDirection)
     }
     
     // Data

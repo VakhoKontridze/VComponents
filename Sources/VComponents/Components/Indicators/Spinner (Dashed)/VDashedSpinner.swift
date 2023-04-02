@@ -40,6 +40,7 @@ public struct VDashedSpinner: View {
 @available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
 struct VDashedSpinner_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -47,6 +48,7 @@ struct VDashedSpinner_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

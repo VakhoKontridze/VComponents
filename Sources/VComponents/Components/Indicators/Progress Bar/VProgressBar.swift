@@ -99,6 +99,7 @@ public struct VProgressBar: View {
 // MARK: - Preview
 struct VProgressBar_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -107,6 +108,7 @@ struct VProgressBar_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

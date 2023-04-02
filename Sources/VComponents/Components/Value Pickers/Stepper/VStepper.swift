@@ -227,6 +227,7 @@ public struct VStepper: View {
 @available(watchOS 9.0, *)@available(watchOS, unavailable)
 struct VStepper_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -235,6 +236,7 @@ struct VStepper_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

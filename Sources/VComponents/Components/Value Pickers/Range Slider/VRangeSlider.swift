@@ -299,6 +299,7 @@ extension Double {
 @available(watchOS, unavailable)
 struct VRangeSlider_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -308,6 +309,7 @@ struct VRangeSlider_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

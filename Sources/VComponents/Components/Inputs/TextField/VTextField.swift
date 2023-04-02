@@ -293,6 +293,7 @@ public struct VTextField: View {
 @available(watchOS, unavailable)
 struct VTextField_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextFieldUIModel { .init() }
     private static var contentType: VTextFieldUIModel.Layout.ContentType { .standard }
@@ -303,6 +304,7 @@ struct VTextField_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

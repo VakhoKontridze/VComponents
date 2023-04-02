@@ -204,6 +204,7 @@ public struct VTextView: View {
 @available(watchOS 9.0, *)@available(watchOS, unavailable)
 struct VTextView_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextViewUIModel { .init() }
     
@@ -213,6 +214,7 @@ struct VTextView_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

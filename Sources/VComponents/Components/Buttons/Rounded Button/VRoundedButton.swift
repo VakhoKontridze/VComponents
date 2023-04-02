@@ -154,6 +154,7 @@ public struct VRoundedButton<Label>: View where Label: View {
 @available(watchOS, unavailable)
 struct VRoundedButton_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -162,6 +163,7 @@ struct VRoundedButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

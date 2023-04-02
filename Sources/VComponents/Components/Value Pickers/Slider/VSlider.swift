@@ -194,6 +194,7 @@ public struct VSlider: View {
 @available(watchOS, unavailable)
 struct VSlider_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -203,6 +204,7 @@ struct VSlider_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

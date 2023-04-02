@@ -216,6 +216,7 @@ public struct VToggle<Label>: View where Label: View {
 @available(watchOS, unavailable)
 struct VToggle_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -224,6 +225,7 @@ struct VToggle_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

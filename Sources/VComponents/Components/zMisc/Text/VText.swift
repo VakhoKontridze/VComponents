@@ -61,6 +61,7 @@ public struct VText: View {
 // MARK: - Preview
 struct VText_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -69,6 +70,7 @@ struct VText_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             TextLineTypesPreview().previewDisplayName("Text Line Types")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

@@ -388,6 +388,7 @@ extension Int {
 // MARK: - Preview
 struct VCompactPageIndicator_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -396,6 +397,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

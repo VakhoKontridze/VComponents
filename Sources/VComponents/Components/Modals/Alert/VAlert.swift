@@ -236,6 +236,9 @@ struct VAlert<Content>: View
 @available(watchOS, unavailable)
 struct VAlert_Previews: PreviewProvider {
     // Configuration
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -258,6 +261,14 @@ struct VAlert_Previews: PreviewProvider {
             
 //            OnlyButtonsPreview().previewDisplayName("Only Buttons")
         })
+            .modifier({
+                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                    $0.previewInterfaceOrientation(interfaceOrientation)
+                } else {
+                    $0
+                }
+            })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

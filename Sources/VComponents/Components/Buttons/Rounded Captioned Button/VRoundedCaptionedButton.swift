@@ -187,6 +187,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
 @available(watchOS, unavailable)
 struct VRoundedCaptionedButton_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -195,6 +196,7 @@ struct VRoundedCaptionedButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

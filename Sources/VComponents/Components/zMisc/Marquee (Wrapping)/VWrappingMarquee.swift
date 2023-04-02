@@ -188,6 +188,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 @available(macOS 11.0, *)
 struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can be viewed separately.
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -197,6 +198,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             InsettedContentPreview().previewDisplayName("Insetted & Gradient")
             ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

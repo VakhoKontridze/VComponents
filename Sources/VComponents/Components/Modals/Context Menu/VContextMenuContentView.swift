@@ -43,10 +43,12 @@ import VCore
 #endif
 
 @available(iOS 15.0, macOS 12.0, *)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
 struct VContextMenuContentView_Previews: PreviewProvider {
     // Configuration
+    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -54,6 +56,8 @@ struct VContextMenuContentView_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
         })
+            .previewInterfaceOrientation(interfaceOrientation)
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

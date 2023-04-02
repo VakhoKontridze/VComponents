@@ -219,6 +219,7 @@ public struct VCheckBox<Label>: View where Label: View {
 @available(watchOS, unavailable)
 struct VCheckBox_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -227,6 +228,7 @@ struct VCheckBox_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

@@ -221,6 +221,7 @@ extension VDisclosureGroupInternalState {
 @available(watchOS, unavailable)
 struct VDisclosureGroup_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -230,6 +231,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
             InsettedContentPreview().previewDisplayName("Insetted Content")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

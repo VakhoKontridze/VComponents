@@ -30,6 +30,8 @@ struct VConfirmationDialogContentView: View {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct VConfirmationDialogContentView_Previews: PreviewProvider {
     // Configuration
+    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -37,6 +39,8 @@ struct VConfirmationDialogContentView_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
         })
+            .previewInterfaceOrientation(interfaceOrientation)
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

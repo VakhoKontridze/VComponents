@@ -258,6 +258,7 @@ public struct VWheelPicker<Data, Content>: View
 @available(watchOS, unavailable)
 struct VWheelPicker_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -266,6 +267,7 @@ struct VWheelPicker_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

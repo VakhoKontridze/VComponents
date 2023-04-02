@@ -153,6 +153,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
 @available(macOS 11.0, *)
 struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can be viewed separately.
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -162,6 +163,7 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             InsettedContentPreview().previewDisplayName("Insetted & Gradient")
             ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

@@ -397,6 +397,7 @@ public struct VSegmentedPicker<Data, Content>: View
 @available(watchOS, unavailable)
 struct VSegmentedPicker_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -405,6 +406,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

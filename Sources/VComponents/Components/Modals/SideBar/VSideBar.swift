@@ -215,11 +215,13 @@ struct VSideBar<Content>: View where Content: View {
 
 // MARK: - Preview
 @available(iOS 15.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
+@available(macOS 12.0, *)@available(macOS, unavailable)
+@available(tvOS 15.0, *)@available(tvOS, unavailable)
+@available(watchOS 8.0, *)@available(watchOS, unavailable)
 struct VSideBar_Previews: PreviewProvider {
     // Configuration
+    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     private static var presentationEdge: VSideBarUIModel { .init() }
 
@@ -229,6 +231,8 @@ struct VSideBar_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             InsettedContentPreview().previewDisplayName("Insetted Content")
         })
+            .previewInterfaceOrientation(interfaceOrientation)
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

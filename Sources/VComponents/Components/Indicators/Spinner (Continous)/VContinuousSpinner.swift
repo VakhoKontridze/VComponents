@@ -53,6 +53,7 @@ public struct VContinuousSpinner: View {
 // MARK: - Preview
 struct VContinuousSpinner_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -60,6 +61,7 @@ struct VContinuousSpinner_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

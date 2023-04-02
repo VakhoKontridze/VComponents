@@ -169,6 +169,7 @@ public struct VPageIndicator<Content>: View where Content: View {
 // MARK: - Preview
 struct VPageIndicator_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -178,6 +179,7 @@ struct VPageIndicator_Previews: PreviewProvider {
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
             StretchedPreview().previewDisplayName("Stretched")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

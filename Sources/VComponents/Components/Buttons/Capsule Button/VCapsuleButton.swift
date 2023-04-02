@@ -155,6 +155,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
 @available(tvOS, unavailable)
 struct VCapsuleButton_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -163,6 +164,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     

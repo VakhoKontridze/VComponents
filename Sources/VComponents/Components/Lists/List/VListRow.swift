@@ -127,6 +127,7 @@ import VCore
 @available(watchOS, unavailable)
 struct VListRow_Previews: PreviewProvider {
     // Configuration
+    private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
     // Previews
@@ -135,6 +136,7 @@ struct VListRow_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             SeparatorsPreview().previewDisplayName("Separator")
         })
+            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
     }
     
