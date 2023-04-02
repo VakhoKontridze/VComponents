@@ -29,8 +29,6 @@ public struct VCapsuleButton<Label>: View where Label: View {
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState { baseButtonState }
     private let action: () -> Void
     private let label: VCapsuleButtonLabel<Label>
-    
-    private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
 
     // MARK: Initializers
     /// Initializes `VCapsuleButton` with action and title.
@@ -145,7 +143,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     @ViewBuilder private func border(
         internalState: VCapsuleButtonInternalState
     ) -> some View {
-        if hasBorder {
+        if uiModel.layout.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
                 .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)

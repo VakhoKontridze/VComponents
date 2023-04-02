@@ -130,26 +130,27 @@ public struct VRangeSlider: View {
         }
     }
 
-    private func thumb(_ thumb: Thumb) -> some View {
-        Group(content: {
-            ZStack(content: {
-                RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
-                    .foregroundColor(uiModel.colors.thumb.value(for: internalState))
-                    .shadow(
-                        color: uiModel.colors.thumbShadow.value(for: internalState),
-                        radius: uiModel.layout.thumbShadowRadius,
-                        offset: uiModel.layout.thumbShadowOffset // No need to reverse coordinates on shadow
-                    )
-
-                RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
-                    .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
-            })
+    @ViewBuilder private func thumb(_ thumb: Thumb) -> some View {
+        if uiModel.layout.thumbDimension > 0 {
+            Group(content: {
+                ZStack(content: {
+                    RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
+                        .foregroundColor(uiModel.colors.thumb.value(for: internalState))
+                        .shadow(
+                            color: uiModel.colors.thumbShadow.value(for: internalState),
+                            radius: uiModel.layout.thumbShadowRadius,
+                            offset: uiModel.layout.thumbShadowOffset // No need to reverse coordinates on shadow
+                        )
+                    
+                    RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
+                        .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
+                })
                 .frame(dimension: uiModel.layout.thumbDimension)
                 .offset(
                     x: uiModel.layout.direction.isHorizontal ? thumbOffset(thumb).withOppositeSign(if: uiModel.layout.direction.isReversed) : 0,
                     y: uiModel.layout.direction.isHorizontal ? 0 : thumbOffset(thumb).withOppositeSign(if: uiModel.layout.direction.isReversed)
                 )
-        })
+            })
             .frame( // Must be put into group, as content already has frame
                 maxWidth: uiModel.layout.direction.isHorizontal ? .infinity : nil,
                 maxHeight: uiModel.layout.direction.isHorizontal ? nil : .infinity,
@@ -160,6 +161,7 @@ public struct VRangeSlider: View {
                     .onChanged({ dragChanged(dragValue: $0, thumb: thumb) })
                     .onEnded({ dragEnded(dragValue: $0, thumb: thumb) })
             )
+        }
     }
     
     // MARK: Thumb

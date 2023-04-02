@@ -37,8 +37,6 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
     private let icon: Image
     private let caption: VRoundedCaptionedButtonCaption<CaptionLabel>
     
-    private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
-    
     // MARK: Initializers
     /// Initializes `VRoundedCaptionedButton` with action, icon, and title caption.
     public init(
@@ -128,7 +126,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
     @ViewBuilder private func roundedRectangleBorder(
         internalState: VRoundedCaptionedButtonInternalState
     ) -> some View {
-        if hasBorder {
+        if uiModel.layout.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
                 .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)

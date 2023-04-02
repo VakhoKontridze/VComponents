@@ -39,8 +39,6 @@ public struct VSlider: View {
     
     @State private var sliderSize: CGSize = .zero
     
-    private var hasThumb: Bool { uiModel.layout.thumbDimension > 0 }
-    
     // MARK: Initializers
     /// Initializes `VSlider` with value.
     public init<V>(
@@ -117,7 +115,7 @@ public struct VSlider: View {
     }
     
     @ViewBuilder private var thumb: some View {
-        if hasThumb {
+        if uiModel.layout.thumbDimension > 0 {
             Group(content: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)

@@ -39,8 +39,6 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
     
     private let label: VLoadingStretchedButtonLabel<Label>
     
-    private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
-    
     // MARK: Initializers
     /// Initializes `VLoadingStretchedButton` with loading state, action, and title.
     public init(
@@ -183,7 +181,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
     @ViewBuilder private func border(
         internalState: VLoadingStretchedButtonInternalState
     ) -> some View {
-        if hasBorder {
+        if uiModel.layout.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
                 .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)

@@ -30,8 +30,6 @@ public struct VRoundedButton<Label>: View where Label: View {
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedButtonInternalState { baseButtonState }
     private let action: () -> Void
     private let label: VRoundedButtonLabel<Label>
-    
-    private var hasBorder: Bool { uiModel.layout.borderWidth > 0 }
 
     // MARK: Initializers
     /// Initializes `VRoundedButton` with action and title.
@@ -142,7 +140,7 @@ public struct VRoundedButton<Label>: View where Label: View {
     @ViewBuilder private func border(
         internalState: VRoundedButtonInternalState
     ) -> some View {
-        if hasBorder {
+        if uiModel.layout.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
                 .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)

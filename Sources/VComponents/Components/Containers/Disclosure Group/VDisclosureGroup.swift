@@ -56,8 +56,6 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     private let headerLabel: VDisclosureGroupHeaderLabel<HeaderLabel>
     
     private let content: () -> Content
-    
-    private var hasDivider: Bool { uiModel.layout.dividerHeight > 0 }
 
     // MARK: Initializers - State
     /// Initializes `VDisclosureGroup` with header title and content.
@@ -170,7 +168,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     }
     
     @ViewBuilder private var divider: some View {
-        if hasDivider {
+        if uiModel.layout.dividerHeight > 0 {
             Rectangle()
                 .frame(height: uiModel.layout.dividerHeight)
                 .padding(uiModel.layout.dividerMargins)
