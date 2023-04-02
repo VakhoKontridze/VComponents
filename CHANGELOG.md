@@ -44,6 +44,7 @@ VPlainButton
 
 - `animatesStateChange` is added in `VPlainButtonUIModel`
 - `labelPressedScale` is added in `VPlainButtonUIModel`
+- `title` font is changed to `system` `17`
 
 VSegmentedPicker
 

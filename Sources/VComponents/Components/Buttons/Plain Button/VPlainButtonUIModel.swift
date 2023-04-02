@@ -101,12 +101,12 @@ public struct VPlainButtonUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title font.
-        /// Set to `system` `medium` `15` on `iOS`.
+        /// Set to `system` `17` on `iOS`.
         /// Set to `system` `13` on `macOS`.
         /// Set to `system` `17` on `watchOS`.
         public var title: Font = {
 #if os(iOS)
-            return .system(size: 15, weight: .medium)
+            return .system(size: 17)
 #elseif os(macOS)
             return .system(size: 13)
 #elseif os(watchOS)
