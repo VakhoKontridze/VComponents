@@ -160,7 +160,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             width: visibleWidth,
             height: uiModel.layout.dotHeight
         )
-            .withReversedDimensions(if: uiModel.layout.direction.isVertical)
+            .withReversedDimensions(uiModel.layout.direction.isVertical)
         
         return Color.clear
             .frame(size: size)
