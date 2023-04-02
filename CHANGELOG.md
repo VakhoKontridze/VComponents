@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.0.0(31)
+### 4.0.0(32)
 
 General
 
@@ -109,6 +109,12 @@ Helpers - Architectural Pattern Helpers
 
 - `VAlertUIModel` is moved from `VAlertParameters` to `View.vAlert(id:parameters)`
 - `SpinnerType` is removed from `VSpinnerParameters` and is moved to `View.vContinuousSpinner(parameters:)` and `View.vDashedSpinner(parameters:)`
+
+### [3.2.2(31)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.2) — *2023 04 02*
+
+VSlider
+
+- Issue with tap gesture registering incorrect location is fixed
 
 ### [3.2.1(30)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.1) — *2023 03 23*
 
