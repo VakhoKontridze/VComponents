@@ -1,5 +1,11 @@
 # Change Log
 
+### 3.2.2(31)
+
+VSlider
+
+- Issue with tap gesture registering incorrect location is fixed
+
 ### [3.2.1(30)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.1) — *2023 03 23*
 
 VTextField

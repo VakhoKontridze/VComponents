@@ -71,16 +71,16 @@ public struct VSlider: View {
         })
             .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
             .overlay(content: { thumb })
-            .frame(height: uiModel.layout.height)
-            .readSize(onChange: { sliderWidth = $0.width })
-            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
-            .animation(uiModel.animations.progress, value: value)
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged(dragChanged)
                     .onEnded(dragEnded)
             )
             .disabled(!internalState.isEnabled)
+            .frame(height: uiModel.layout.height)
+            .readSize(onChange: { sliderWidth = $0.width })
+            .padding(.horizontal, uiModel.layout.thumbDimension / 2)
+            .animation(uiModel.animations.progress, value: value)
     }
 
     private var track: some View {
