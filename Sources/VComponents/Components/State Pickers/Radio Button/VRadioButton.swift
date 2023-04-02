@@ -138,7 +138,7 @@ public struct VRadioButton<Label>: View where Label: View {
                             )
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable)
+                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
                 
             case .label(let label):
@@ -153,7 +153,7 @@ public struct VRadioButton<Label>: View where Label: View {
                             label(internalState)
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable)
+                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
             }
         })
@@ -193,7 +193,7 @@ public struct VRadioButton<Label>: View where Label: View {
                     .foregroundColor(.clear)
             }
         )
-            .disabled(!uiModel.misc.labelIsClickable)
+            .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
 
     // MARK: Actions
