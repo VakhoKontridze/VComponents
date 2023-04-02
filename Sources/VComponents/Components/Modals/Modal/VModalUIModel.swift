@@ -119,7 +119,7 @@ public struct VModalUIModel {
         public var shadowRadius: CGFloat = 0
         
         /// Shadow offset. Set to `zero`.
-        public var shadowOffset: CGSize = .zero
+        public var shadowOffset: CGPoint = .zero
         
         /// Header title color.
         public var headerTitle: Color = ColorBook.primary

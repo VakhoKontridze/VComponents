@@ -87,11 +87,11 @@ public struct VSegmentedPickerUIModel {
         /// Indicator shadow offset.
         /// Set to `1x1` on `iOS`.
         /// Set to `0x1` on `macOS`.
-        public var indicatorShadowOffset: CGSize = {
+        public var indicatorShadowOffset: CGPoint = {
 #if os(iOS)
-            return CGSize(dimension: 1)
+            return CGPoint(x: 1, y: 1)
 #elseif os(macOS)
-            return CGSize(width: 0, height: 1)
+            return CGPoint(x: 0, y: 1)
 #else
             fatalError() // Not supported
 #endif

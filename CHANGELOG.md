@@ -12,6 +12,7 @@ General
 - Some colors are changed throughout the package
 - `ColorBook.accent` is renamed to `ColorBook.accentBlue`
 - "TitleLineType" used in names is changed to "TextLineType"
+- Shadow offsets are changed from `CGSize` to `CGPoint`
 
 VPrimaryButton
 

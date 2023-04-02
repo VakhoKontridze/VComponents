@@ -251,7 +251,7 @@ public struct VBottomSheetUIModel {
         public var shadowRadius: CGFloat = 0
         
         /// Shadow offset. Set to `zero`.
-        public var shadowOffset: CGSize = .zero
+        public var shadowOffset: CGPoint = .zero
         
         /// Grabber color.
         public var grabber: Color = GlobalUIModel.Common.grabberColor

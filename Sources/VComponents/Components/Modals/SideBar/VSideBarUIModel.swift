@@ -118,7 +118,7 @@ public struct VSideBarUIModel {
         public var shadowRadius: CGFloat = 0
         
         /// Shadow offset. Set to `zero`.
-        public var shadowOffset: CGSize = .zero
+        public var shadowOffset: CGPoint = .zero
         
         /// Dimming view color.
         public var dimmingView: Color = GlobalUIModel.Common.dimmingViewColor

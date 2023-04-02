@@ -109,8 +109,7 @@ struct VAlert<Content>: View
             .shadow(
                 color: uiModel.colors.shadow,
                 radius: uiModel.colors.shadowRadius,
-                x: uiModel.colors.shadowOffset.width,
-                y: uiModel.colors.shadowOffset.height
+                offset: uiModel.colors.shadowOffset
             )
     }
 
