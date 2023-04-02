@@ -354,15 +354,13 @@ struct VBottomSheet<Content>: View
     
     // MARK: Assertion
     private static func assertUIModel(_ uiModel: VBottomSheetUIModel) {
-        assert(
-            uiModel.layout.sizes._current.size.heights.min <= uiModel.layout.sizes._current.size.heights.ideal,
-            "`VBottomSheet`'s `min` height must be less than or equal to `ideal` height"
-        )
+        guard uiModel.layout.sizes._current.size.heights.min <= uiModel.layout.sizes._current.size.heights.ideal else {
+            VCoreFatalError("`VBottomSheet`'s `min` height must be less than or equal to `ideal` height", module: "VComponents")
+        }
         
-        assert(
-            uiModel.layout.sizes._current.size.heights.ideal <= uiModel.layout.sizes._current.size.heights.max,
-            "`VBottomSheet`'s `ideal` height must be less than or equal to `max` height"
-        )
+        guard uiModel.layout.sizes._current.size.heights.ideal <= uiModel.layout.sizes._current.size.heights.max else {
+            VCoreFatalError("`VBottomSheet`'s `ideal` height must be less than or equal to `max` height", module: "VComponents")
+        }
     }
 }
 
