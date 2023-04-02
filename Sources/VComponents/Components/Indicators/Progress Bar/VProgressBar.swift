@@ -55,6 +55,7 @@ public struct VProgressBar: View {
         ZStack(alignment: uiModel.layout.direction.alignment, content: {
             track
             progress
+            border
         })
             .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
             .frame(
@@ -78,6 +79,13 @@ public struct VProgressBar: View {
             )
             .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
             .foregroundColor(uiModel.colors.progress)
+    }
+    
+    @ViewBuilder private var border: some View {
+        if uiModel.layout.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                .strokeBorder(uiModel.colors.border, lineWidth: uiModel.layout.borderWidth)
+        }
     }
     
     // MARK: Progress Width

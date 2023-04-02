@@ -61,14 +61,14 @@ VSlider
 
 - `direction` is added to `VSliderUIModel` that support omni-directional layout
 - `thumbShadowOffset` is added to `VSliderUIModel`
-- `border` colors are set to `clearColors` in `VSliderUIModel`, since `borderWidth` was `0`
+- `borderWidth`, and `border` colors are added in `VSliderUIModel`, that allows for border customization
 - Issue with thumb not accounting for slider height is fixed
 
 VRangeSlider
 
 - `direction` is added to `VRangeSliderUIModel` that support omni-directional layout
 - `thumbShadowOffset` is added to `VRangeSliderUIModel`
-- `border` colors are set to `clearColors` in `VRangeSliderUIModel`, since `borderWidth` was `0`
+- `borderWidth`, and `border` colors are added in `VRangeSliderUIModel`, that allows for border customization
 - Issue with thumb not accounting for slider height is fixed
 
 VBottomSheet
@@ -92,6 +92,7 @@ VContinuousSpinner
 VProgressBar
 
 - `direction` is added to `VProgressBarUIModel` that support omni-directional layout
+- `borderWidth`, and `border` colors are added in `VProgressBarUIModel`, that allows for border customization
 
 VPageIndicator
 

@@ -40,6 +40,11 @@ public struct VRangeSliderUIModel {
         /// Slider corner radius. Set to `5`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.barCornerRadius
         
+        /// Border width. Set to `0`.
+        ///
+        /// To hide border, set to `0`.
+        public var borderWidth: CGFloat = 0
+        
         /// Thumb dimension. Set to `20`.
         ///
         /// To hide thumb, set to `0`.

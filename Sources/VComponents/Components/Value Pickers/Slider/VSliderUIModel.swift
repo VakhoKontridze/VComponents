@@ -51,6 +51,11 @@ public struct VSliderUIModel {
             }
         }
         
+        /// Border width. Set to `0`.
+        ///
+        /// To hide border, set to `0`.
+        public var borderWidth: CGFloat = 0
+        
         /// Thumb dimension. Set to `20`.
         ///
         /// To hide thumb, set to `0`.
@@ -104,6 +109,9 @@ public struct VSliderUIModel {
             enabled: ColorBook.accentBlue,
             disabled: ColorBook.accentBluePressedDisabled
         )
+        
+        /// Border colors.
+        public var border: StateColors = .clearColors
         
         /// Thumb colors.
         public var thumb: StateColors = .init(ColorBook.white)

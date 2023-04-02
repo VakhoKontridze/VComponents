@@ -71,6 +71,7 @@ public struct VSlider: View {
             ZStack(alignment: uiModel.layout.direction.alignment, content: {
                 track
                 progress
+                border
             })
                 .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
                 .frame(
@@ -106,6 +107,13 @@ public struct VSlider: View {
             )
             .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
             .foregroundColor(uiModel.colors.progress.value(for: internalState))
+    }
+    
+    @ViewBuilder private var border: some View {
+        if uiModel.layout.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+        }
     }
     
     @ViewBuilder private var thumb: some View {

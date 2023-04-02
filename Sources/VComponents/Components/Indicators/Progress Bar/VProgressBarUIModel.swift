@@ -57,6 +57,11 @@ public struct VProgressBarUIModel {
             }
         }
         
+        /// Border width. Set to `0`.
+        ///
+        /// To hide border, set to `0`.
+        public var borderWidth: CGFloat = 0
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -71,6 +76,9 @@ public struct VProgressBarUIModel {
         
         /// Progress color.
         public var progress: Color = ColorBook.accentBlue
+        
+        /// Border color.
+        public var border: Color = .clear
 
         // MARK: Initializers
         /// Initializes UI model with default values.

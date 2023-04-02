@@ -91,6 +91,7 @@ public struct VRangeSlider: View {
             ZStack(alignment: uiModel.layout.direction.alignment, content: {
                 track
                 progress
+                border
             })
                 .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
                 .frame(
@@ -120,6 +121,13 @@ public struct VRangeSlider: View {
             .padding(uiModel.layout.direction.edgeSet, progressWidth(.low))
             .padding(uiModel.layout.direction.reversed().edgeSet, progressWidth(.high))
             .foregroundColor(uiModel.colors.progress.value(for: internalState))
+    }
+    
+    @ViewBuilder private var border: some View {
+        if uiModel.layout.borderWidth > 0 {
+            RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
+                .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
+        }
     }
 
     private func thumb(_ thumb: Thumb) -> some View {
