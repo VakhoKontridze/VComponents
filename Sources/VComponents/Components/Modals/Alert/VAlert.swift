@@ -236,8 +236,8 @@ struct VAlert<Content>: View
 @available(watchOS, unavailable)
 struct VAlert_Previews: PreviewProvider {
     // Configuration
-    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+//    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) // Break's preview. Should be hard-typed.
+//    private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
 
@@ -263,7 +263,7 @@ struct VAlert_Previews: PreviewProvider {
         })
             .modifier({
                 if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    $0.previewInterfaceOrientation(interfaceOrientation)
+                    $0.previewInterfaceOrientation(.portrait)
                 } else {
                     $0
                 }
