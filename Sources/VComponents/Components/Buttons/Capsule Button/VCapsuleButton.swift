@@ -195,7 +195,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
     }
     
     // Data
-    private static var title: String { "$49.99".pseudoRTL(languageDirection) }
+    private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
     
     // Previews (Scenes)
     private struct Preview: View {

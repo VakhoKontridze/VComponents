@@ -25,7 +25,6 @@ import VCore
 ///
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: View {
     // MARK: Properties
     private let uiModel: VRoundedCaptionedButtonUIModel
@@ -113,7 +112,7 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
                 .foregroundColor(uiModel.colors.icon.value(for: internalState))
                 .opacity(uiModel.colors.iconOpacities.value(for: internalState))
         })
-            .frame(dimension: uiModel.layout.roundedRectangleDimension)
+            .frame(size: uiModel.layout.roundedRectangleSize)
             .background(rectangleBackground(internalState: internalState))
             .overlay(roundedRectangleBorder(internalState: internalState))
     }
@@ -187,6 +186,8 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
     private func playHapticEffect() {
 #if os(iOS)
         HapticManager.shared.playImpact(uiModel.animations.haptic)
+#elseif os(watchOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
 #endif
     }
 }
@@ -212,7 +213,13 @@ struct VRoundedCaptionedButton_Previews: PreviewProvider {
     
     // Data
     private static var icon: Image { .init(systemName: "swift") }
-    private static var titleCaption: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
+    private static var titleCaption: String {
+#if os(watchOS)
+        return "Lorem".pseudoRTL(languageDirection)
+#else
+        return "Lorem Ipsum".pseudoRTL(languageDirection)
+#endif
+    }
     
     // Previews (Scenes)
     private struct Preview: View {

@@ -100,19 +100,15 @@ struct GlobalUIModel {
     // MARK: Buttons
     struct Buttons {
         // MARK: Properties
-        static var dimensionRoundedButton: CGFloat {
+        static var sizeRoundedButton: CGSize {
 #if os(iOS)
-            return 56
+            return CGSize(dimension: 56)
 #elseif os(macOS)
-            return 28
-#endif
-        }
-        
-        static var cornerRadiusRoundedButton: CGFloat {
-#if os(iOS)
-            return 16
-#elseif os(macOS)
-            return 6
+            return CGSize(dimension: 28)
+#elseif os(watchOS)
+            return CGSize(width: 64, height: 56)
+#else
+            fatalError() // Not supported
 #endif
         }
         
@@ -122,9 +118,6 @@ struct GlobalUIModel {
         static var transparentLayerLabelEnabled: Color { ColorBook.controlLayerBlue }
         static var transparentLayerLabelPressed: Color { ColorBook.controlLayerBluePressed }
         static var transparentLayerLabelDisabled: Color { ColorBook.controlLayerBlueDisabled.opacity(0.5) } // Looks better
-
-        static var iconDimensionSmall: CGFloat { 16 }
-        static var iconDimensionMedium: CGFloat { 20 }
         
         static var iconTitleSpacing: CGFloat { 8 }
         

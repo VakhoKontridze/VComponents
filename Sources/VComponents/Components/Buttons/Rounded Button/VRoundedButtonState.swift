@@ -11,5 +11,4 @@ import VCore
 // MARK: - V Rounded Button Internal State
 /// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 public typealias VRoundedButtonInternalState = GenericState_EnabledPressedDisabled

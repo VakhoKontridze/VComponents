@@ -230,7 +230,7 @@ struct VBottomSheet<Content>: View
     
     private var closeButtonCompensator: some View {
         Spacer()
-            .frame(width: uiModel.layout.closeButtonSubUIModel.dimension)
+            .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
     }
 
     // MARK: Animation

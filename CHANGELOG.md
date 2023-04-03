@@ -33,12 +33,14 @@ VSecondaryButton
 
 VRoundedButton
 
+- `VRoundedButton` not supports size instead of dimension
 - `animatesStateChange` is added in `VRoundedButtonUIModel`
 - `backgroundPressedScale` and `labelPressedScale` are added in `VRoundedButtonUIModel`
 
 VRoundedLabeledButton
 
 - `VRoundedLabeledButton` is renamed to `VRoundedCaptionedButton`
+- `VRoundedCaptionedButton` not supports size instead of dimension
 - `animatesStateChange` is added in `VRoundedLabeledButtonUIModel`
 - `backgroundPressedScale`, `labelPressedScale`, and `captionPressedScale` are added in `VRoundedLabeledButtonUIModel`
 

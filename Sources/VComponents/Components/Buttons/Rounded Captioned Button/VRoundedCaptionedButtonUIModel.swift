@@ -12,7 +12,6 @@ import VCore
 /// Model that describes UI.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 public struct VRoundedCaptionedButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -35,11 +34,21 @@ public struct VRoundedCaptionedButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Rectangle dimension. Set to `56`.
-        public var roundedRectangleDimension: CGFloat = GlobalUIModel.Buttons.dimensionRoundedButton
+        /// Rectangle dimension.
+        /// Set to `56x56` on `iOS`.
+        /// Set to `64x56` on `watchOS`.
+        public var roundedRectangleSize: CGSize = GlobalUIModel.Buttons.sizeRoundedButton
         
         /// Rectangle corner radius. Set to `24`.
-        public var cornerRadius: CGFloat = 24
+        public var cornerRadius: CGFloat = {
+#if os(iOS)
+            return 24
+#elseif os(watchOS)
+            return 24
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Rectangle border width. Set to `0`.
         ///
@@ -64,13 +73,21 @@ public struct VRoundedCaptionedButtonUIModel {
         /// Icon caption size. Set to `18x18`.
         public var iconCaptionSize: CGSize = .init(dimension: 18)
         
-        /// Title caption text line type. Set to `multiline` with `center` alignment and `1...2` lines.
+        /// Title caption text line type.
+        /// Set to `multiline` with `center` alignment and `1...2` lines on `iOS`.
+        /// Set to `singleLine` on `watchOS`.
         public var titleCaptionTextLineType: TextLineType = {
+#if os(iOS)
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 return .multiLine(alignment: .center, lineLimit: 1...2)
             } else {
                 return .multiLine(alignment: .center, lineLimit: 2)
             }
+#elseif os(watchOS)
+            return .singleLine
+#else
+            fatalError() // Not supported
+#endif
         }()
         
         /// Title caption minimum scale factor. Set to `0.75`.
@@ -159,8 +176,18 @@ public struct VRoundedCaptionedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title caption font. Set to `subheadline` (`15`).
-        public var titleCaption: Font = .subheadline
+        /// Title caption font.
+        /// Set to `subheadline` (`15`) on `iOS`.
+        /// Set to  `body` (`17`) on `watchOS`.
+        public var titleCaption: Font = {
+#if os(iOS)
+            return .subheadline
+#elseif os(watchOS)
+            return Font.body
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -186,6 +213,9 @@ public struct VRoundedCaptionedButtonUIModel {
 #if os(iOS)
         /// Haptic feedback style. Set to `light`.
         public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticIOS
+#elseif os(watchOS)
+        /// Haptic feedback type. Set to `click`.
+        public var haptic: WKHapticType? = GlobalUIModel.Buttons.hapticWatchOS
 #endif
         
         // MARK: Initializers

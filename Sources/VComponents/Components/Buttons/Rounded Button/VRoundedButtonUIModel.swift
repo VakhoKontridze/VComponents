@@ -11,7 +11,6 @@ import VCore
 // MARK: - V Rounded Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 public struct VRoundedButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
@@ -35,14 +34,26 @@ public struct VRoundedButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Button dimension.
-        /// Set to `56` on `iOS`.
-        /// Set to `28` on `macOS`.
-        public var dimension: CGFloat = GlobalUIModel.Buttons.dimensionRoundedButton
+        /// Set to `56x56` on `iOS`.
+        /// Set to `28x28` on `macOS`.
+        /// Set to `65x56` on `watchOS`.
+        public var size: CGSize = GlobalUIModel.Buttons.sizeRoundedButton
         
         /// Corner radius.
         /// Set to `16` on `iOS`.
         /// Set to `6` on `macOS`.
-        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusRoundedButton
+        /// Set to `16` on `watchOS`.
+        public var cornerRadius: CGFloat = {
+#if os(iOS)
+            return 16
+#elseif os(macOS)
+            return 6
+#elseif os(watchOS)
+            return 16
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Border width. Set to `0`.
         ///
@@ -58,11 +69,14 @@ public struct VRoundedButtonUIModel {
         /// Icon size.
         /// Set to `20x20` on `iOS`.
         /// Set to `14x14` on `macOS`.
+        /// Set to `20x20` on `watchOS`.
         public var iconSize: CGSize = {
 #if os(iOS)
-            return CGSize(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
+            return CGSize(dimension: 20)
 #elseif os(macOS)
             return CGSize(dimension: 14)
+#elseif os(watchOS)
+            return CGSize(dimension: 20)
 #else
             fatalError() // Not supported
 #endif
@@ -133,11 +147,14 @@ public struct VRoundedButtonUIModel {
         /// Title font.
         /// Set to `semibold` `subheadline` (`15`) on `iOS`.
         /// Set to `body` (`13`) on `macOS`.
+        /// Set to `semibold` `body` (`17`) on `watchOS`.
         public var title: Font = {
 #if os(iOS)
             return Font.subheadline.weight(.semibold)
 #elseif os(macOS)
             return Font.body
+#elseif os(watchOS)
+            return Font.body.weight(.semibold)
 #else
             fatalError() // Not supported
 #endif
@@ -164,6 +181,9 @@ public struct VRoundedButtonUIModel {
 #if os(iOS)
         /// Haptic feedback style. Set to `light`.
         public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticIOS
+#elseif os(watchOS)
+        /// Haptic feedback type. Set to `click`.
+        public var haptic: WKHapticType? = GlobalUIModel.Buttons.hapticWatchOS
 #endif
         
         // MARK: Initializers

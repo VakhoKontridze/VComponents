@@ -62,11 +62,11 @@ public struct VModalUIModel {
         /// Header margins. Set to `15` horizontal and `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing close button layout. `dimension` is set to `30`, `iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
+        /// Model for customizing close button layout. `size` is set to `30x30`, `iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
-            uiModel.dimension = GlobalUIModel.Common.circularButtonGrayDimension
+            uiModel.size = .init(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
             uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
             

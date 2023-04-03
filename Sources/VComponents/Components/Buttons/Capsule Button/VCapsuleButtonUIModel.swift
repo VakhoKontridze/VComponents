@@ -43,7 +43,7 @@ public struct VCapsuleButtonUIModel {
 #elseif os(macOS)
             return 32
 #elseif os(watchOS)
-            return 40
+            return 48
 #else
             fatalError() // Not supported
 #endif
@@ -63,7 +63,7 @@ public struct VCapsuleButtonUIModel {
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
         /// Icon size. Set to `16x16`.
-        public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionSmall)
+        public var iconSize: CGSize = .init(dimension: 16)
         
         /// Spacing between icon and title. Set to `8`.
         ///

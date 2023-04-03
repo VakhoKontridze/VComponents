@@ -23,7 +23,6 @@ import VCore
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-@available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VRoundedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VRoundedButtonUIModel
@@ -81,7 +80,7 @@ public struct VRoundedButton<Label>: View where Label: View {
                 let internalState: VRoundedButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
-                    .frame(dimension: uiModel.layout.dimension)
+                    .frame(size: uiModel.layout.size)
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
                     .padding(uiModel.layout.hitBox)
@@ -166,6 +165,8 @@ public struct VRoundedButton<Label>: View where Label: View {
     // MARK: Haptics
     private func playHapticEffect() {
 #if os(iOS)
+        HapticManager.shared.playImpact(uiModel.animations.haptic)
+#elseif os(watchOS)
         HapticManager.shared.playImpact(uiModel.animations.haptic)
 #endif
     }

@@ -34,7 +34,7 @@ public struct VPlainButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Icon size. Set to `20x20`.
-        public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionMedium)
+        public var iconSize: CGSize = .init(dimension: 20)
         
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor

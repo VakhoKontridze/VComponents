@@ -10,7 +10,6 @@ import SwiftUI
 // MARK: - V Rounded Captioned Button Caption
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 enum VRoundedCaptionedButtonCaption<Caption> where Caption: View {
     case title(title: String)
     case iconTitle(icon: Image, title: String)

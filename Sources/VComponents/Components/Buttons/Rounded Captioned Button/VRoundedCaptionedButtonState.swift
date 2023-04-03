@@ -12,5 +12,4 @@ import VCore
 /// Enum that represents state, such as `enabled`, `pressed`, or `disabled`.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 public typealias VRoundedCaptionedButtonInternalState = GenericState_EnabledPressedDisabled

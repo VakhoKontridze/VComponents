@@ -64,11 +64,11 @@ public struct VTextFieldUIModel {
         /// Search icon dimension. Set to `15`.
         public var searchIconDimension: CGFloat = 15
         
-        /// Model for customizing clear button layout. `dimension` is set to `22`, `iconSize` is set to `8x8`, and `hitBox` is set to `zero`.
+        /// Model for customizing clear button layout. `size` is set to `22x22`, `iconSize` is set to `8x8`, and `hitBox` is set to `zero`.
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
-            uiModel.dimension = 22
+            uiModel.size = .init(dimension: 22)
             uiModel.iconSize = CGSize(dimension: 8)
             uiModel.hitBox = .zero
             
