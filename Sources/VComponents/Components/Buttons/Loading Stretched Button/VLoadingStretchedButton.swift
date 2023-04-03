@@ -23,6 +23,8 @@ import VCore
 ///             .padding()
 ///     }
 ///
+/// On `macOS`, you would typically provide an explicit width.
+///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VLoadingStretchedButton<Label>: View where Label: View {
