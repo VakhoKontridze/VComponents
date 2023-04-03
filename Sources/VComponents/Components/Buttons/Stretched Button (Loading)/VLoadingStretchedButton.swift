@@ -17,6 +17,7 @@ import VCore
 ///
 ///     var body: some View {
 ///         VLoadingStretchedButton(
+///             isLoading: false,
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
@@ -202,7 +203,6 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VLoadingStretchedButton_Previews: PreviewProvider {

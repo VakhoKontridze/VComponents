@@ -58,8 +58,18 @@ public struct VRoundedCaptionedButtonUIModel {
         /// Icon margins. Set to `3`s.
         public var iconMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton
         
-        /// Icon size. Set to `24x24`.
-        public var iconSize: CGSize = .init(dimension: 24)
+        /// Icon size.
+        /// Set to `24x24` on `iOS`.
+        /// Set to `26x26` on `watchOS`.
+        public var iconSize: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 24)
+#elseif os(watchOS)
+            return CGSize(dimension: 26)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Spacing between rounded rectangle and caption. Set to `4`.
         public var rectangleCaptionSpacing: CGFloat = 4
@@ -70,8 +80,18 @@ public struct VRoundedCaptionedButtonUIModel {
         /// Spacing between icon caption and title caption. Set to `8`.
         public var captionSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
-        /// Icon caption size. Set to `18x18`.
-        public var iconCaptionSize: CGSize = .init(dimension: 18)
+        /// Icon caption size.
+        /// Set to `16x16` on `iOS`.
+        /// Set to `18x18` on `watchOS`
+        public var iconCaptionSize: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 16)
+#elseif os(watchOS)
+            return CGSize(dimension: 18)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Title caption text line type.
         /// Set to `multiline` with `center` alignment and `1...2` lines on `iOS`.

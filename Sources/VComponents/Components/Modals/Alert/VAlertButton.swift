@@ -60,9 +60,8 @@ public struct VAlertPrimaryButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VLoadingStretchedButton(
+            VStretchedButton(
                 uiModel: uiModel.primaryButtonSubUIModel,
-                isLoading: false,
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
@@ -107,9 +106,8 @@ public struct VAlertSecondaryButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VLoadingStretchedButton(
+            VStretchedButton(
                 uiModel: uiModel.secondaryButtonSubUIModel,
-                isLoading: false,
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
@@ -156,9 +154,8 @@ public struct VAlertOKButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VLoadingStretchedButton(
+            VStretchedButton(
                 uiModel: uiModel.secondaryButtonSubUIModel,
-                isLoading: false,
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
@@ -203,9 +200,8 @@ public struct VAlertDestructiveButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VLoadingStretchedButton(
+            VStretchedButton(
                 uiModel: uiModel.destructiveButtonSubUIModel,
-                isLoading: false,
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
@@ -252,9 +248,8 @@ public struct VAlertCancelButton: VAlertButtonProtocol {
         animateOut: @escaping (/*completion*/ (() -> Void)?) -> Void
     ) -> AnyView {
         .init(
-            VLoadingStretchedButton(
+            VStretchedButton(
                 uiModel: uiModel.secondaryButtonSubUIModel,
-                isLoading: false,
                 action: { animateOut(/*completion: */action) },
                 title: title
             )

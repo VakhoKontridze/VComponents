@@ -62,8 +62,21 @@ public struct VCapsuleButtonUIModel {
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
         
-        /// Icon size. Set to `16x16`.
-        public var iconSize: CGSize = .init(dimension: 16)
+        /// Icon size.
+        /// Set to `16x16` on `iOS`.
+        /// Set to `16x16` on `macOS`.
+        /// Set to `18x18` on `watchOS`.
+        public var iconSize: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 16)
+#elseif os(macOS)
+            return CGSize(dimension: 16)
+#elseif os(watchOS)
+            return CGSize(dimension: 18)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Spacing between icon and title. Set to `8`.
         ///

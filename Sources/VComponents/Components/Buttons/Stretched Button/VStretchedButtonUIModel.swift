@@ -1,17 +1,17 @@
 //
-//  VPlainButtonUIModel.swift
+//  VStretchedButtonUIModel.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 19.12.20.
+//  Created by Vakhtang Kontridze on 03.04.23.
 //
 
 import SwiftUI
 import VCore
 
-// MARK: - V Plain Button UI Model
+// MARK: - V Stretched Button UI Model
 /// Model that describes UI.
 @available(tvOS, unavailable)
-public struct VPlainButtonUIModel {
+public struct VStretchedButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
     public var layout: Layout = .init()
@@ -25,7 +25,6 @@ public struct VPlainButtonUIModel {
     /// Model that contains animation properties.
     public var animations: Animations = .init()
     
-    // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
 
@@ -33,17 +32,37 @@ public struct VPlainButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
+        /// Button height.
+        /// Set to `48` on `iOS`.
+        /// Set to `40` on `macOS`.
+        /// Set to `64` on `watchOS`.
+        public var height: CGFloat = GlobalUIModel.Buttons.heightStretchedButton
+        
+        /// Corner radius.
+        /// Set to `14` on `iOS`.
+        /// Set to `12` on `macOS`.
+        /// Set to `32` on `watchOS`.
+        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusStretchedButton
+        
+        /// Border width. Set to `0`.
+        ///
+        /// To hide border, set to `0`.
+        public var borderWidth: CGFloat = 0
+        
+        /// Label margins. Set to `15` horizontal and `3` vertical.
+        public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
+        
         /// Icon size.
-        /// Set to `16x16` on `iOS`.
+        /// Set to `18x18` on `iOS`.
         /// Set to `16x16` on `macOS`.
-        /// Set to `18x18` on `watchOS`
+        /// Set to `22x22` on `watchOS`
         public var iconSize: CGSize = {
 #if os(iOS)
-            return CGSize(dimension: 16)
+            return CGSize(dimension: 18)
 #elseif os(macOS)
             return CGSize(dimension: 16)
 #elseif os(watchOS)
-            return CGSize(dimension: 18)
+            return CGSize(dimension: 22)
 #else
             fatalError() // Not supported
 #endif
@@ -57,38 +76,37 @@ public struct VPlainButtonUIModel {
         /// Applicable only if icon `init` with icon and title is used.
         public var iconTitleSpacing: CGFloat = GlobalUIModel.Buttons.iconTitleSpacing
         
-        /// Hit box. Set to `5`s.
-        public var hitBox: HitBox = .init(5)
-        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
         
-        // MARK: Hit Box
-        /// Model that contains `horizontal` and `vertical` hit boxes.
-        public typealias HitBox = EdgeInsets_HorizontalVertical
+        // MARK: Label Margins
+        /// Model that contains `horizontal` and `vertical` margins.
+        public typealias LabelMargins = EdgeInsets_HorizontalVertical
     }
 
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
-        /// Title colors.
-        public var title: StateColors = .init(
-            enabled: ColorBook.accentBlue,
-            pressed: ColorBook.accentBluePressedDisabled,
-            disabled: ColorBook.accentBluePressedDisabled
+        /// Background colors.
+        public var background: StateColors = .init(
+            enabled: ColorBook.controlLayerBlue,
+            pressed: ColorBook.controlLayerBluePressed,
+            disabled: ColorBook.controlLayerBlueDisabled
         )
+        
+        /// Border colors.
+        public var border: StateColors = .clearColors
+        
+        /// Title colors.
+        public var title: StateColors = .init(ColorBook.primaryWhite)
         
         /// Icon colors.
         ///
         /// Applied to all images. But should be used for vector images.
         /// In order to use bitmap images, set this to `clear`.
-        public var icon: StateColors = .init(
-            enabled: ColorBook.accentBlue,
-            pressed: ColorBook.accentBluePressedDisabled,
-            disabled: ColorBook.accentBluePressedDisabled
-        )
+        public var icon: StateColors = .init(ColorBook.primaryWhite)
         
         /// Icon opacities. Set to `1`s.
         ///
@@ -114,20 +132,10 @@ public struct VPlainButtonUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title font.
-        /// Set to `body` (`17`) on `iOS`.
-        /// Set to `body` (`13`) on `macOS`.
-        /// Set to `body` (`17`) on `watchOS`.
-        public var title: Font = {
-#if os(iOS)
-            return Font.body
-#elseif os(macOS)
-            return Font.body
-#elseif os(watchOS)
-            return Font.body
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        /// Set to `semibold` `callout` (`16`) on `iOS`.
+        /// Set to `semibold` `16` on `macOS`.
+        /// Set to `semibold` `title3` (`20`) on `watchOS`.
+        public var title: Font = GlobalUIModel.Buttons.titleFontStretchedButton
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -141,15 +149,15 @@ public struct VPlainButtonUIModel {
         /// Indicates if button animates state change. Defaults to `true`.
         public var animatesStateChange: Bool = true
         
-        /// Ratio to which label scales down on press.
-        /// Set to `1` on `iOS`.
-        /// Set to `1` on `macOS`.
-        /// Set to `0.98` on `watchOS`.
-        public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+        /// Ratio to which label scales down on press. Set to `1`.
+        public var backgroundPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
+        /// Ratio to which label scales down on press. Set to `1`.
+        public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
+
 #if os(iOS)
-        /// Haptic feedback style. Set to `light`.
-        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticIOS
+        /// Haptic feedback style. Set to `medium`.
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
 #elseif os(watchOS)
         /// Haptic feedback type. Set to `click`.
         public var haptic: WKHapticType? = GlobalUIModel.Buttons.hapticWatchOS

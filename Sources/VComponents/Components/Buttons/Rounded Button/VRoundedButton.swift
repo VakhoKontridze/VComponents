@@ -175,7 +175,6 @@ public struct VRoundedButton<Label>: View where Label: View {
 // MARK: - Preview
 @available(macOS 11.0, *)
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 struct VRoundedButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
@@ -208,47 +207,50 @@ struct VRoundedButton_Previews: PreviewProvider {
     
     private struct StatesPreview: View {
         var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Enabled",
-                    content: {
-                        VRoundedButton(
-                            action: {},
-                            icon: icon
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed",
-                    content: {
-                        VRoundedButton(
-                            uiModel: {
-                                var uiModel: VRoundedButtonUIModel = .init()
-                                uiModel.colors.background.enabled = uiModel.colors.background.pressed
-                                uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
-                                return uiModel
-                            }(),
-                            action: {},
-                            icon: icon
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VRoundedButton(
-                            action: {},
-                            icon: icon
-                        )
-                            .disabled(true)
-                    }
-                )
-            })
+            PreviewContainer(
+                embeddedInScrollViewOnPlatforms: [.watchOS],
+                content: {
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Enabled",
+                        content: {
+                            VRoundedButton(
+                                action: {},
+                                icon: icon
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Pressed",
+                        content: {
+                            VRoundedButton(
+                                uiModel: {
+                                    var uiModel: VRoundedButtonUIModel = .init()
+                                    uiModel.colors.background.enabled = uiModel.colors.background.pressed
+                                    uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
+                                    return uiModel
+                                }(),
+                                action: {},
+                                icon: icon
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Disabled",
+                        content: {
+                            VRoundedButton(
+                                action: {},
+                                icon: icon
+                            )
+                                .disabled(true)
+                        }
+                    )
+                }
+            )
         }
     }
 }

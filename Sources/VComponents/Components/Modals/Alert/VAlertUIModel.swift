@@ -278,8 +278,8 @@ public struct VAlertUIModel {
         return uiModel
     }
     
-    var primaryButtonSubUIModel: VLoadingStretchedButtonUIModel {
-        var uiModel: VLoadingStretchedButtonUIModel = .init()
+    var primaryButtonSubUIModel: VStretchedButtonUIModel {
+        var uiModel: VStretchedButtonUIModel = .init()
 
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
@@ -287,8 +287,8 @@ public struct VAlertUIModel {
             uiModel.layout.titleMinimumScaleFactor /= 2
         }
 
-        uiModel.colors.background = .alertButton(colors.primaryButtonBackground)
-        uiModel.colors.title = .alertButton(colors.primaryButtonTitle)
+        uiModel.colors.background = colors.primaryButtonBackground
+        uiModel.colors.title = colors.primaryButtonTitle
         
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
@@ -297,8 +297,8 @@ public struct VAlertUIModel {
         return uiModel
     }
     
-    var secondaryButtonSubUIModel: VLoadingStretchedButtonUIModel {
-        var uiModel: VLoadingStretchedButtonUIModel = .init()
+    var secondaryButtonSubUIModel: VStretchedButtonUIModel {
+        var uiModel: VStretchedButtonUIModel = .init()
         
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
@@ -306,8 +306,8 @@ public struct VAlertUIModel {
             uiModel.layout.titleMinimumScaleFactor /= 2
         }
         
-        uiModel.colors.background = .alertButton(colors.secondaryButtonBackground)
-        uiModel.colors.title = .alertButton(colors.secondaryButtonTitle)
+        uiModel.colors.background = colors.secondaryButtonBackground
+        uiModel.colors.title = colors.secondaryButtonTitle
         
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
@@ -316,8 +316,8 @@ public struct VAlertUIModel {
         return uiModel
     }
     
-    var destructiveButtonSubUIModel: VLoadingStretchedButtonUIModel {
-        var uiModel: VLoadingStretchedButtonUIModel = .init()
+    var destructiveButtonSubUIModel: VStretchedButtonUIModel {
+        var uiModel: VStretchedButtonUIModel = .init()
         
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
@@ -325,29 +325,13 @@ public struct VAlertUIModel {
             uiModel.layout.titleMinimumScaleFactor /= 2
         }
         
-        uiModel.colors.background = .alertButton(colors.destructiveButtonBackground)
-        uiModel.colors.title = .alertButton(colors.destructiveButtonTitle)
+        uiModel.colors.background = colors.destructiveButtonBackground
+        uiModel.colors.title = colors.destructiveButtonTitle
         
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
 #endif
 
         return uiModel
-    }
-}
-
-// MARK: - Helpers
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
-@available(tvOS, unavailable)
-@available(watchOS, unavailable)
-extension GenericStateModel_EnabledPressedLoadingDisabled where Value == Color {
-    fileprivate static func alertButton(_ model: GenericStateModel_EnabledPressedDisabled<Color>) -> Self {
-        self.init(
-            enabled: model.enabled,
-            pressed: model.pressed,
-            loading: .clear, // Doesn't matter
-            disabled: model.disabled
-        )
     }
 }

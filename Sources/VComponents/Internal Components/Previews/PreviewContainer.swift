@@ -103,8 +103,7 @@ struct PreviewContainer_Previews: PreviewProvider {
     struct ContentView: View {
         var body: some View {
 #if os(iOS)
-            VLoadingStretchedButton(
-                isLoading: false,
+            VStretchedButton(
                 action: {},
                 title: "Lorem Ipsum"
             )

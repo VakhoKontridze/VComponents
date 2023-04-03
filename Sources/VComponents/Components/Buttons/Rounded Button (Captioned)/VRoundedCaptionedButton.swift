@@ -195,7 +195,6 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
 // MARK: - Preview
 @available(macOS 11.0, *)@available(macOS, unavailable)
 @available(tvOS, unavailable)
-@available(watchOS, unavailable)
 struct VRoundedCaptionedButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
@@ -236,51 +235,54 @@ struct VRoundedCaptionedButton_Previews: PreviewProvider {
     
     private struct StatesPreview: View {
         var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Enabled",
-                    content: {
-                        VRoundedCaptionedButton(
-                            action: {},
-                            icon: icon,
-                            titleCaption: titleCaption
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Pressed",
-                    content: {
-                        VRoundedCaptionedButton(
-                            uiModel: {
-                                var uiModel: VRoundedCaptionedButtonUIModel = .init()
-                                uiModel.colors.background.enabled = uiModel.colors.background.pressed
-                                uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
-                                uiModel.colors.titleCaption.enabled = uiModel.colors.titleCaption.pressed
-                                return uiModel
-                            }(),
-                            action: {},
-                            icon: icon,
-                            titleCaption: titleCaption
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .horizontal,
-                    title: "Disabled",
-                    content: {
-                        VRoundedCaptionedButton(
-                            action: {},
-                            icon: icon,
-                            titleCaption: titleCaption
-                        )
-                            .disabled(true)
-                    }
-                )
-            })
+            PreviewContainer(
+                embeddedInScrollViewOnPlatforms: [.watchOS],
+                content: {
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Enabled",
+                        content: {
+                            VRoundedCaptionedButton(
+                                action: {},
+                                icon: icon,
+                                titleCaption: titleCaption
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Pressed",
+                        content: {
+                            VRoundedCaptionedButton(
+                                uiModel: {
+                                    var uiModel: VRoundedCaptionedButtonUIModel = .init()
+                                    uiModel.colors.background.enabled = uiModel.colors.background.pressed
+                                    uiModel.colors.icon.enabled = uiModel.colors.icon.pressed
+                                    uiModel.colors.titleCaption.enabled = uiModel.colors.titleCaption.pressed
+                                    return uiModel
+                                }(),
+                                action: {},
+                                icon: icon,
+                                titleCaption: titleCaption
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .horizontal,
+                        title: "Disabled",
+                        content: {
+                            VRoundedCaptionedButton(
+                                action: {},
+                                icon: icon,
+                                titleCaption: titleCaption
+                            )
+                                .disabled(true)
+                        }
+                    )
+                }
+            )
         }
     }
 }

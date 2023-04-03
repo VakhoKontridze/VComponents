@@ -100,6 +100,17 @@ struct GlobalUIModel {
     // MARK: Buttons
     struct Buttons {
         // MARK: Properties
+        static var heightStretchedButton: CGFloat = {
+#if os(iOS)
+            return 48
+#elseif os(macOS)
+            return 40
+#elseif os(watchOS)
+            return 64
+#else
+            fatalError() // Not supported
+#endif
+        }()
         static var sizeRoundedButton: CGSize {
 #if os(iOS)
             return CGSize(dimension: 56)
@@ -112,6 +123,18 @@ struct GlobalUIModel {
 #endif
         }
         
+        static var cornerRadiusStretchedButton: CGFloat = {
+#if os(iOS)
+            return 14
+#elseif os(macOS)
+            return 12
+#elseif os(watchOS)
+            return 32
+#else
+            fatalError() // Not supported
+#endif
+        }()
+        
         static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 15, vertical: 3) }
         static var labelMarginsRoundedButton: EdgeInsets_HorizontalVertical { .init(3) }
         
@@ -120,6 +143,22 @@ struct GlobalUIModel {
         static var transparentLayerLabelDisabled: Color { ColorBook.controlLayerBlueDisabled.opacity(0.5) } // Looks better
         
         static var iconTitleSpacing: CGFloat { 8 }
+        
+        static var titleFontStretchedButton: Font = {
+#if os(iOS)
+            return Font.callout.weight(.semibold) // 16
+#elseif os(macOS)
+            return Font.system(size: 16).weight(.semibold) // No dynamic type on `macOS` anyway
+#elseif os(watchOS)
+            if #available(watchOS 7.0, *) {
+                return Font.title3.weight(.semibold) // 20
+            } else {
+                return Font.system(size: 20)
+            }
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         static var pressedScale: CGFloat = {
 #if os(iOS)

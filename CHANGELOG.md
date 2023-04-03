@@ -17,6 +17,10 @@ General
 - "TitleLineType" used in names is changed to "TextLineType"
 - Shadow offsets are changed from `CGSize` to `CGPoint`
 
+VStretchedButton
+
+- A new button type is added as a non-loading alternative to `VLoadingStretchedButton`
+
 VPrimaryButton
 
 - `VPrimaryButton` is renamed to `VLoadingStretchedButton`

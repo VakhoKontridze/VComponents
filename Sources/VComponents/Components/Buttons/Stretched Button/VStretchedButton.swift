@@ -1,39 +1,42 @@
 //
-//  VCapsuleButton.swift
+//  VStretchedButton.swift
 //  VComponents
 //
-//  Created by Vakhtang Kontridze on 12/24/20.
+//  Created by Vakhtang Kontridze on 03.04.23.
 //
 
 import SwiftUI
 import VCore
 
-// MARK: - V Capsule Button
-/// Small colored button component that performs action when triggered.
+// MARK: - V Stretched Button
+/// Large colored button component that performs action when triggered.
 ///
 /// Component can be initialized with title, icon and title, and label.
 ///
 /// UI Model can be passed as parameter.
 ///
 ///     var body: some View {
-///         VCapsuleButton(
+///         VStretchedButton(
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
+///             .padding()
 ///     }
 ///
+/// On `macOS` and `watchOS`, you would typically provide an explicit width.
+///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
-public struct VCapsuleButton<Label>: View where Label: View {
+public struct VStretchedButton<Label>: View where Label: View {
     // MARK: Properties
-    private let uiModel: VCapsuleButtonUIModel
-    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState { baseButtonState }
+    private let uiModel: VStretchedButtonUIModel
+    private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VStretchedButtonInternalState { baseButtonState }
     private let action: () -> Void
-    private let label: VCapsuleButtonLabel<Label>
-
+    private let label: VStretchedButtonLabel<Label>
+    
     // MARK: Initializers
-    /// Initializes `VCapsuleButton` with action and title.
+    /// Initializes `VStretchedButton` with action and title.
     public init(
-        uiModel: VCapsuleButtonUIModel = .init(),
+        uiModel: VStretchedButtonUIModel = .init(),
         action: @escaping () -> Void,
         title: String
     )
@@ -44,9 +47,9 @@ public struct VCapsuleButton<Label>: View where Label: View {
         self.label = .title(title: title)
     }
     
-    /// Initializes `VCapsuleButton` with action, icon, and title.
+    /// Initializes `VStretchedButton` with action, icon, and title.
     public init(
-        uiModel: VCapsuleButtonUIModel = .init(),
+        uiModel: VStretchedButtonUIModel = .init(),
         action: @escaping () -> Void,
         icon: Image,
         title: String
@@ -58,17 +61,17 @@ public struct VCapsuleButton<Label>: View where Label: View {
         self.label = .iconTitle(icon: icon, title: title)
     }
     
-    /// Initializes `VCapsuleButton` with action and label.
+    /// Initializes `VStretchedButton` with action and label.
     public init(
-        uiModel: VCapsuleButtonUIModel = .init(),
+        uiModel: VStretchedButtonUIModel = .init(),
         action: @escaping () -> Void,
-        @ViewBuilder label: @escaping (VCapsuleButtonInternalState) -> Label
+        @ViewBuilder label: @escaping (VStretchedButtonInternalState) -> Label
     ) {
         self.uiModel = uiModel
         self.action = action
         self.label = .label(label: label)
     }
-
+    
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
@@ -78,20 +81,19 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 action()
             },
             label: { baseButtonState in
-                let internalState: VCapsuleButtonInternalState = internalState(baseButtonState)
+                let internalState: VStretchedButtonInternalState = internalState(baseButtonState)
                 
                 buttonLabel(internalState: internalState)
                     .frame(height: uiModel.layout.height)
                     .clipped()
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
-                    .padding(uiModel.layout.hitBox)
             }
         )
     }
     
     private func buttonLabel(
-        internalState: VCapsuleButtonInternalState
+        internalState: VStretchedButtonInternalState
     ) -> some View {
         Group(content: {
             switch label {
@@ -108,29 +110,17 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
+            .frame(maxWidth: .infinity)
             .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
             .padding(uiModel.layout.labelMargins)
-            .modifier({
-                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    $0.dynamicTypeSize(...(.accessibility3))
-                } else {
-                    $0
-                }
-            })
     }
     
     private func titleLabelComponent(
-        internalState: VCapsuleButtonInternalState,
+        internalState: VStretchedButtonInternalState,
         title: String
     ) -> some View {
         VText(
-            minimumScaleFactor: {
-                if #available(iOS 15.0, *) {
-                    return uiModel.layout.titleMinimumScaleFactor
-                } else {
-                    return uiModel.layout.titleMinimumScaleFactor/2 // Alternative to dynamic size upper limit
-                }
-            }(),
+            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
             color: uiModel.colors.title.value(for: internalState),
             font: uiModel.fonts.title,
             text: title
@@ -138,7 +128,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     private func iconLabelComponent(
-        internalState: VCapsuleButtonInternalState,
+        internalState: VStretchedButtonInternalState,
         icon: Image
     ) -> some View {
         icon
@@ -150,7 +140,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     private func background(
-        internalState: VCapsuleButtonInternalState
+        internalState: VStretchedButtonInternalState
     ) -> some View {
         RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
             .scaleEffect(internalState == .pressed ? uiModel.animations.backgroundPressedScale : 1)
@@ -158,7 +148,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     }
     
     @ViewBuilder private func border(
-        internalState: VCapsuleButtonInternalState
+        internalState: VStretchedButtonInternalState
     ) -> some View {
         if uiModel.layout.borderWidth > 0 {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
@@ -179,7 +169,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
 
 // MARK: - Preview
 @available(tvOS, unavailable)
-struct VCapsuleButton_Previews: PreviewProvider {
+struct VStretchedButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
@@ -190,22 +180,39 @@ struct VCapsuleButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
             .colorScheme(colorScheme)
+            .environment(\.layoutDirection, languageDirection)
     }
     
     // Data
-    private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
+    private static var title: String {
+#if os(watchOS)
+        return "Lorem".pseudoRTL(languageDirection)
+#else
+        "Lorem Ipsum".pseudoRTL(languageDirection)
+#endif
+    }
     
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
             PreviewContainer(content: {
-                VCapsuleButton(
+                VStretchedButton(
                     action: { print("Clicked") },
-                    icon: Image(systemName: "swift"),
                     title: title
                 )
+                    .modifier({
+#if os(iOS)
+                        $0
+#elseif os(macOS)
+                        $0.frame(width: 250)
+#elseif os(watchOS)
+                        $0.frame(width: 100)
+#else
+                        fatalError() // Not supported
+#endif
+                    })
+                    .padding()
             })
         }
     }
@@ -216,23 +223,34 @@ struct VCapsuleButton_Previews: PreviewProvider {
                 embeddedInScrollViewOnPlatforms: [.watchOS],
                 content: {
                     PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        axis: .vertical,
                         title: "Enabled",
                         content: {
-                            VCapsuleButton(
+                            VStretchedButton(
                                 action: {},
                                 title: title
                             )
+                                .modifier({
+#if os(iOS)
+                                    $0
+#elseif os(macOS)
+                                    $0.frame(width: 250)
+#elseif os(watchOS)
+                                    $0.frame(width: 100)
+#else
+                                    fatalError() // Not supported
+#endif
+                                })
                         }
                     )
                     
                     PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
+                        axis: .vertical,
                         title: "Pressed",
                         content: {
-                            VCapsuleButton(
+                            VStretchedButton(
                                 uiModel: {
-                                    var uiModel: VCapsuleButtonUIModel = .init()
+                                    var uiModel: VStretchedButtonUIModel = .init()
                                     uiModel.colors.background.enabled = uiModel.colors.background.pressed
                                     uiModel.colors.title.enabled = uiModel.colors.title.pressed
                                     return uiModel
@@ -240,36 +258,45 @@ struct VCapsuleButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
+                                .modifier({
+#if os(iOS)
+                                    $0
+#elseif os(macOS)
+                                    $0.frame(width: 250)
+#elseif os(watchOS)
+                                    $0.frame(width: 100)
+#else
+                                    fatalError() // Not supported
+#endif
+                                })
                         }
                     )
-
-                    PreviewRow(
-                        axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
-                        title: "Disabled",
-                        content: {
-                            VCapsuleButton(
-                                action: {},
-                                title: title
-                            )
-                                .disabled(true)
-                        }
-                    )
-                    
-#if os(watchOS)
-          
-                    PreviewSectionHeader("Native (Sort Of)")
                     
                     PreviewRow(
                         axis: .vertical,
-                        title: "Enabled",
+                        title: "Disabled",
                         content: {
-                            Button(title, action: {})
-                                .background(Color.gray)
+                            VStretchedButton(
+                                action: {},
+                                title: title
+                            )
+                                .modifier({
+#if os(iOS)
+                                    $0
+#elseif os(macOS)
+                                    $0.frame(width: 250)
+#elseif os(watchOS)
+                                    $0.frame(width: 100)
+#else
+                                    fatalError() // Not supported
+#endif
+                                })
+                                .disabled(true)
                         }
                     )
-#endif
                 }
             )
         }
     }
 }
+

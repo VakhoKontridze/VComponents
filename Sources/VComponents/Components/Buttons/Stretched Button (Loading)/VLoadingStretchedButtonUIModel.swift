@@ -34,30 +34,14 @@ public struct VLoadingStretchedButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Button height.
-        /// Set to `56` on `iOS`.
+        /// Set to `48` on `iOS`.
         /// Set to `40` on `macOS`.
-        public var height: CGFloat = {
-#if os(iOS)
-            return 56
-#elseif os(macOS)
-            return 40
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        public var height: CGFloat = GlobalUIModel.Buttons.heightStretchedButton
         
         /// Corner radius.
-        /// Set to `16` on `iOS`.
+        /// Set to `14` on `iOS`.
         /// Set to `12` on `macOS`.
-        public var cornerRadius: CGFloat = {
-#if os(iOS)
-            return 16
-#elseif os(macOS)
-            return 12
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusStretchedButton
         
         /// Border width. Set to `0`.
         ///
@@ -67,8 +51,18 @@ public struct VLoadingStretchedButtonUIModel {
         /// Label margins. Set to `15` horizontal and `3` vertical.
         public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMargins
         
-        /// Icon size. Set to `20x20`.
-        public var iconSize: CGSize = .init(dimension: 20)
+        /// Icon size.
+        /// Set to `18x18` on `iOS`.
+        /// Set to `16x16` on `macOS`.
+        public var iconSize: CGSize = {
+#if os(iOS)
+            return CGSize(dimension: 18)
+#elseif os(macOS)
+            return CGSize(dimension: 16)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
@@ -154,15 +148,7 @@ public struct VLoadingStretchedButtonUIModel {
         /// Title font.
         /// Set to `semibold` `callout` (`16`) on `iOS`.
         /// Set to `semibold` `16` on `macOS`.
-        public var title: Font = {
-#if os(iOS)
-            return Font.callout.weight(.semibold)
-#elseif os(macOS)
-            return Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS` anyway
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        public var title: Font = GlobalUIModel.Buttons.titleFontStretchedButton
         
         // MARK: Initializers
         /// Initializes UI model with default values.
