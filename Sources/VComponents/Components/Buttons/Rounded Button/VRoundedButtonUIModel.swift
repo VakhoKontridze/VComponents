@@ -179,7 +179,7 @@ public struct VRoundedButtonUIModel {
         
 #if os(iOS)
         /// Haptic feedback style. Set to `light`.
-        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.haptic_iOS
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticIOS
 #endif
         
         // MARK: Initializers

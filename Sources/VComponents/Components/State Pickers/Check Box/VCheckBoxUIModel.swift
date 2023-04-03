@@ -150,7 +150,7 @@ public struct VCheckBoxUIModel {
         
 #if os(iOS)
         /// Haptic feedback style. Set to `light`.
-        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.StatePickers.haptic_iOS
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.StatePickers.hapticIOS
 #endif
         
         // MARK: Initializers

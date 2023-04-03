@@ -136,10 +136,10 @@ public struct VPlainButtonUIModel {
         
 #if os(iOS)
         /// Haptic feedback style. Set to `light`.
-        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.haptic_iOS
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticIOS
 #elseif os(watchOS)
         /// Haptic feedback type. Set to `click`.
-        public var haptic: WKHapticType? = GlobalUIModel.Buttons.haptic_watchOS
+        public var haptic: WKHapticType? = GlobalUIModel.Buttons.hapticWatchOS
 #endif
         
         // MARK: Initializers
