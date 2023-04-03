@@ -234,16 +234,16 @@ public struct VTextFieldUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Text font. Set to `system` `16`.
-        public var text: Font = .system(size: 16)
+        /// Text font. Set to `body` (`17`).
+        public var text: Font = .body
         
-        /// Placeholder font. Set to `system` `16`.
-        public var placeholder: Font = .system(size: 16)
+        /// Placeholder font. Set to `body` (`17`).
+        public var placeholder: Font = .body
         
-        /// Header font. Set to `system` `14`.
+        /// Header font. Set to `footnote` (`13`).
         public var header: Font = GlobalUIModel.Common.headerFont
         
-        /// Footer font. Set to `system` `13`.
+        /// Footer font. Set to `footnote` (`13`).
         public var footer: Font = GlobalUIModel.Common.footerFont
         
         // MARK: Initializers

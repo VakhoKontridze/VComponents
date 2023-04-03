@@ -7,6 +7,7 @@ General
 - Package now supports `iOS` `13.0`
 - Package now partially supports `macOS` `10.15`, `tvOS` `13.0`, and `watchOS` `6.0`
 - Package now supports RTL languages
+- Fonts now support dynamic sizing
 - Haptic effects are added to most interactive components
 - `PresentationHost` is moved to [VCore](https://github.com/VakhoKontridze/VCore)
 - Buttons that contained `customLabelContent` in UI models now support label APIs that pass internal states to the custom label callback 
@@ -45,7 +46,6 @@ VPlainButton
 
 - `animatesStateChange` is added in `VPlainButtonUIModel`
 - `labelPressedScale` is added in `VPlainButtonUIModel`
-- `title` font is changed to `system` `17`
 
 VSegmentedPicker
 
@@ -87,6 +87,7 @@ VToast
 
 - `WidthType` is added in `VToastUIModel` that allows for additional customization, such as wrapping, stretching, or applying fixed width
 - Highlighted factory instances are added to `VToastUIModel`
+- `text` font no longer depends on backing `UIFont`
 
 VContinuousSpinner
 

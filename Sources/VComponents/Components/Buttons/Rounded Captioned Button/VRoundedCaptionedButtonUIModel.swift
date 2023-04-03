@@ -159,8 +159,8 @@ public struct VRoundedCaptionedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title caption font. Set to `system` `15`.
-        public var titleCaption: Font = .system(size: 15)
+        /// Title caption font. Set to `subheadline` (`15`).
+        public var titleCaption: Font = .subheadline
         
         // MARK: Initializers
         /// Initializes UI model with default values.

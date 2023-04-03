@@ -26,7 +26,15 @@ struct GlobalUIModel {
         
         // MARK: Properties - Header and Footer
         static var headerTextLineType: TextLineType { .singleLine }
-        static var headerFont: Font { .system(size: 14) }
+        static var headerFont: Font {
+#if os(iOS)
+            return Font.footnote // 13
+#elseif os(macOS)
+            return Font.footnote // 10
+#else
+            fatalError() // Not supported
+#endif
+        }
         
         static var footerTextLineType: TextLineType = {
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
@@ -35,7 +43,7 @@ struct GlobalUIModel {
                 return .multiLine(alignment: .leading, lineLimit: 5)
             }
         }()
-        static var footerFont: Font { .system(size: 13) }
+        static var footerFont: Font { headerFont } // 13, 10
         
         static var headerComponentFooterSpacing: CGFloat { 3 }
         static var headerFooterMarginHorizontal: CGFloat { 10 }
@@ -157,9 +165,9 @@ struct GlobalUIModel {
         }()
         static var font: Font {
 #if os(iOS)
-            return .system(size: 15)
+            return Font.subheadline // 15
 #elseif os(macOS)
-            return .system(size: 13)
+            return Font.body // 13
 #else
             fatalError() // Not supported
 #endif
@@ -255,7 +263,7 @@ struct GlobalUIModel {
         // MARK: Properties
         static var labelCloseButtonSpacing: CGFloat { 10 }
         
-        static var headerFont: Font { .system(size: 17, weight: .bold) }
+        static var headerFont: Font { .headline.weight(.bold) } // 17 (iOS Only)
         
         static var poppingAppearAnimation: BasicAnimation? { .init(curve: .linear, duration: 0.05) }
         static var poppingDisappearAnimation: BasicAnimation? { .init(curve: .easeIn, duration: 0.05) }

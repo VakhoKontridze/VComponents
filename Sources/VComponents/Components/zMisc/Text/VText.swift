@@ -78,9 +78,9 @@ struct VText_Previews: PreviewProvider {
     private static var textColor: Color { ColorBook.primary }
     private static var textFont: Font {
 #if os(macOS)
-        return .system(size: 14, weight: .light)
+        return Font.body.weight(.light)
 #else
-        return .system(size: 16)
+        return Font.body
 #endif
     }
     

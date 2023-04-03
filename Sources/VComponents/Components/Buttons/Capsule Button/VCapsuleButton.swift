@@ -82,6 +82,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 
                 buttonLabel(internalState: internalState)
                     .frame(height: uiModel.layout.height)
+                    .clipped()
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
                     .padding(uiModel.layout.hitBox)
@@ -109,6 +110,13 @@ public struct VCapsuleButton<Label>: View where Label: View {
         })
             .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
             .padding(uiModel.layout.labelMargins)
+            .modifier({
+                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                    $0.dynamicTypeSize(...(.accessibility3))
+                } else {
+                    $0
+                }
+            })
     }
     
     private func titleLabelComponent(
@@ -116,7 +124,13 @@ public struct VCapsuleButton<Label>: View where Label: View {
         title: String
     ) -> some View {
         VText(
-            minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
+            minimumScaleFactor: {
+                if #available(iOS 15.0, *) {
+                    return uiModel.layout.titleMinimumScaleFactor
+                } else {
+                    return uiModel.layout.titleMinimumScaleFactor/2 // Alternative to dynamic size upper limit
+                }
+            }(),
             color: uiModel.colors.title.value(for: internalState),
             font: uiModel.fonts.title,
             text: title
@@ -181,7 +195,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
     }
     
     // Data
-    private static var title: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
+    private static var title: String { "$49.99".pseudoRTL(languageDirection) }
     
     // Previews (Scenes)
     private struct Preview: View {

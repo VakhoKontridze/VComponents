@@ -147,13 +147,13 @@ public struct VRoundedButtonUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title font.
-        /// Set to `system` `semibold` `15` on `iOS`.
-        /// Set to `system` `13` on `macOS`.
+        /// Set to `semibold` `subheadline` (`15`) on `iOS`.
+        /// Set to `body` (`13`) on `macOS`.
         public var title: Font = {
 #if os(iOS)
-            return .system(size: 15, weight: .semibold)
+            return Font.subheadline.weight(.semibold)
 #elseif os(macOS)
-            return .system(size: 13)
+            return Font.body
 #else
             fatalError() // Not supported
 #endif

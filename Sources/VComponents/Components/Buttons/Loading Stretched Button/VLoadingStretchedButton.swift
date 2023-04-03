@@ -97,6 +97,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                 
                 buttonLabel(internalState: internalState)
                     .frame(height: uiModel.layout.height)
+                    .clipped()
                     .background(background(internalState: internalState))
                     .overlay(border(internalState: internalState))
             }

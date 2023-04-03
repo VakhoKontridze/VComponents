@@ -177,23 +177,12 @@ public struct VToastUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Text font. Set to `system` `semibold` `16`.
-        ///
-        /// Font is of type `UIFont`, as height must be calculated.
-        public var text: _Font = .systemFont(ofSize: 16, weight: .semibold)
+        /// Text font. Set to `headline` (`17`).
+        public var text: Font = .headline
             
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
-        
-        // MARK: Font
-#if canImport(UIKit)
-        /// Font.
-        public typealias _Font = UIFont
-#elseif os(macOS)
-        /// Font.
-        public typealias _Font = NSFont
-#endif
     }
 
     // MARK: Animations

@@ -70,7 +70,7 @@ struct VToast: View {
         VText(
             type: uiModel.layout.textLineType.toVCoreTextLineType,
             color: uiModel.colors.text,
-            font: Font(uiModel.fonts.text),
+            font: uiModel.fonts.text,
             text: text
         )
             .padding(uiModel.layout.textMargins)
@@ -101,6 +101,7 @@ struct VToast: View {
                         )
                 }
             })
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .background(background)
             .onSizeChange(perform: { height = $0.height })
             .offset(y: isInternallyPresented ? presentedOffset : initialOffset)

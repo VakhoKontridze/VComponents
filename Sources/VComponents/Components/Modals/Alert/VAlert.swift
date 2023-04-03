@@ -182,6 +182,13 @@ struct VAlert<Content>: View
         })
             .padding(uiModel.layout.buttonMargins)
             .onSizeChange(perform: { buttonsStackHeight = $0.height })
+            .modifier({
+                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                    $0.dynamicTypeSize(...(.xxxLarge))
+                } else {
+                    $0
+                }
+            })
     }
     
     private func buttonsContent(reversesOrder: Bool = false) -> some View {

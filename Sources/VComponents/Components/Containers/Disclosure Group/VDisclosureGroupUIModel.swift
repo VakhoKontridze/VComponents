@@ -131,8 +131,8 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header title font. Set to `system` `bold` `17`.
-        public var headerTitle: Font = .system(size: 17, weight: .bold)
+        /// Header title font. Set to `bold` `headline` (`17`).
+        public var headerTitle: Font = .headline.weight(.bold)
         
         // MARK: Initializers
         /// Initializes UI model with default values.

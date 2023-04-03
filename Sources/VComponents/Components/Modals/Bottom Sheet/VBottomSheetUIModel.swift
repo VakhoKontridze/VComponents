@@ -292,7 +292,7 @@ public struct VBottomSheetUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header font. Set to `system` `bold` `17`.
+        /// Header font. Set to `bold` `headline` (`17`).
         public var header: Font = GlobalUIModel.Modals.headerFont
         
         // MARK: Initializers

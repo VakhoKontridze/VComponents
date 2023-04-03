@@ -160,13 +160,13 @@ public struct VSegmentedPickerUIModel {
         /// Selection indicator colors.
         public var indicator: IndicatorStateColors = {
 #if os(iOS)
-            return .init(
+            return IndicatorStateColors(
                 enabled: Color(module: "SegmentedPicker.Indicator"),
                 pressed: Color(module: "SegmentedPicker.Indicator"),
                 disabled: Color(module: "SegmentedPicker.Indicator.Disabled")
             )
 #elseif os(macOS)
-            return .init(
+            return IndicatorStateColors(
                 enabled: Color(module: "SegmentedPicker.Indicator"),
                 pressed: Color(module: "SegmentedPicker.Indicator.Pressed_macOS"),
                 disabled: Color(module: "SegmentedPicker.Indicator.Disabled")
@@ -232,25 +232,29 @@ public struct VSegmentedPickerUIModel {
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
-        // MARK: Properties
-        /// Header font. Set to `system` `14`.
-        public var header: Font = GlobalUIModel.Common.headerFont
-        
-        /// Footer font. Set to `system` `13`.
-        public var footer: Font = GlobalUIModel.Common.footerFont
-        
         /// Row font.
-        /// Set to `system` `medium` `13` on `iOS`.
-        /// Set to `system`  `system` `13` on `macOS`.
+        /// Set to `medium` `13` (`footnote`) on `iOS`.
+        /// Set to `13` on `macOS`.
         public var rows: Font = {
 #if os(iOS)
-            return .system(size: 13, weight: .medium)
+            return Font.system(size: 13, weight: .medium) // Prevents scaling, similarly to native picker
 #elseif os(macOS)
-            return .system(size: 13)
+            return Font.system(size: 13) // No dynamic type on `macOS`
 #else
             fatalError() // Not supported
 #endif
         }()
+        
+        // MARK: Properties
+        /// Header font.
+        /// Set to `footnote` (`13`) on `iOS`.
+        /// Set to `footnote` (`10`) on `macOS`.
+        public var header: Font = GlobalUIModel.Common.headerFont
+        
+        /// Footer font.
+        /// Set to `footnote` (`13`) on `iOS`.
+        /// Set to `footnote` (`10`) on `macOS`
+        public var footer: Font = GlobalUIModel.Common.footerFont
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -269,7 +273,7 @@ public struct VSegmentedPickerUIModel {
         /// Set to `nil` on `macOS`.
         public var indicatorPress: Animation? = {
 #if os(iOS)
-            return .linear(duration: 0.2)
+            return Animation.linear(duration: 0.2)
 #elseif os(macOS)
             return nil
 #else

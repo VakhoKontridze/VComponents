@@ -133,16 +133,16 @@ public struct VCapsuleButtonUIModel {
     public struct Fonts {
         // MARK: Properties
         /// Title font.
-        /// Set to `system` `semibold` `16` on `iOS`.
-        /// Set to `system` `medium` `14` on `macOS`.
-        /// Set to `system` `medium` `17` on `watchOS`.
+        /// Set to  `semibold` `subheadline` (`15`) on `iOS`.
+        /// Set to `semibold` `body` (`13`) on `macOS`.
+        /// Set to `semibold` `body` (`17`) on `watchOS`.
         public var title: Font = {
 #if os(iOS)
-            return .system(size: 16, weight: .semibold)
+            return Font.subheadline.weight(.semibold)
 #elseif os(macOS)
-            return .system(size: 14, weight: .medium)
+            return Font.body.weight(.semibold)
 #elseif os(watchOS)
-            return .system(size: 17, weight: .medium)
+            return Font.body.weight(.semibold)
 #else
             fatalError() // Not supported
 #endif

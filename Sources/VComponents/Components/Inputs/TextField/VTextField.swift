@@ -169,6 +169,7 @@ public struct VTextField: View {
         })
             .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
             .frame(height: uiModel.layout.height)
+            .clipped()
             .background(background)
     }
     
@@ -338,87 +339,117 @@ struct VTextField_Previews: PreviewProvider {
     
     private struct StatesPreview: View {
         var body: some View {
-            PreviewContainer(content: {
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Enabled",
-                    content: {
-                        VTextField(
-                            uiModel: {
-                                var uiModel: VTextFieldUIModel = highlight
-                                uiModel.layout.contentType = contentType
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Focused",
-                    content: {
-                        VTextField(
-                            uiModel: {
-                                var uiModel: VTextFieldUIModel = highlight
-                                uiModel.layout.contentType = contentType
-                                uiModel.colors.background.enabled = uiModel.colors.background.focused
-                                uiModel.colors.text.enabled = uiModel.colors.text.focused
-                                uiModel.colors.header.enabled = uiModel.colors.header.focused
-                                uiModel.colors.footer.enabled = uiModel.colors.footer.focused
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Pressed (Button)",
-                    content: {
-                        VTextField(
-                            uiModel: {
-                                var uiModel: VTextFieldUIModel = highlight
-                                uiModel.layout.contentType = contentType
-                                uiModel.colors.clearButtonSubUIModel.background.enabled = uiModel.colors.clearButtonSubUIModel.background.pressed
-                                uiModel.colors.clearButtonSubUIModel.icon.enabled = uiModel.colors.clearButtonSubUIModel.icon.pressed
-                                uiModel.colors.visibilityButtonSubUIModel.icon.enabled = uiModel.colors.visibilityButtonSubUIModel.icon.pressed
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                    }
-                )
-                
-                PreviewRow(
-                    axis: .vertical,
-                    title: "Disabled",
-                    content: {
-                        VTextField(
-                            uiModel: {
-                                var uiModel: VTextFieldUIModel = highlight
-                                uiModel.layout.contentType = contentType
-                                return uiModel
-                            }(),
-                            headerTitle: headerTitle,
-                            footerTitle: footerTitle,
-                            placeholder: placeholder,
-                            text: .constant(text)
-                        )
-                            .disabled(true)
-                    }
-                )
-            })
+            PreviewContainer(
+                embeddedInScrollView: true,
+                content: {
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Enabled",
+                        content: {
+                            VTextField(
+                                uiModel: {
+                                    var uiModel: VTextFieldUIModel = highlight
+                                    uiModel.layout.contentType = contentType
+                                    return uiModel
+                                }(),
+                                headerTitle: headerTitle,
+                                footerTitle: footerTitle,
+                                placeholder: placeholder,
+                                text: .constant(text)
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Focused",
+                        content: {
+                            VTextField(
+                                uiModel: {
+                                    var uiModel: VTextFieldUIModel = highlight
+                                    uiModel.layout.contentType = contentType
+                                    uiModel.colors.background.enabled = uiModel.colors.background.focused
+                                    uiModel.colors.text.enabled = uiModel.colors.text.focused
+                                    uiModel.colors.header.enabled = uiModel.colors.header.focused
+                                    uiModel.colors.footer.enabled = uiModel.colors.footer.focused
+                                    return uiModel
+                                }(),
+                                headerTitle: headerTitle,
+                                footerTitle: footerTitle,
+                                placeholder: placeholder,
+                                text: .constant(text)
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Pressed (Button)",
+                        content: {
+                            VTextField(
+                                uiModel: {
+                                    var uiModel: VTextFieldUIModel = highlight
+                                    uiModel.layout.contentType = contentType
+                                    uiModel.colors.clearButtonSubUIModel.background.enabled = uiModel.colors.clearButtonSubUIModel.background.pressed
+                                    uiModel.colors.clearButtonSubUIModel.icon.enabled = uiModel.colors.clearButtonSubUIModel.icon.pressed
+                                    uiModel.colors.visibilityButtonSubUIModel.icon.enabled = uiModel.colors.visibilityButtonSubUIModel.icon.pressed
+                                    return uiModel
+                                }(),
+                                headerTitle: headerTitle,
+                                footerTitle: footerTitle,
+                                placeholder: placeholder,
+                                text: .constant(text)
+                            )
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Disabled",
+                        content: {
+                            VTextField(
+                                uiModel: {
+                                    var uiModel: VTextFieldUIModel = highlight
+                                    uiModel.layout.contentType = contentType
+                                    return uiModel
+                                }(),
+                                headerTitle: headerTitle,
+                                footerTitle: footerTitle,
+                                placeholder: placeholder,
+                                text: .constant(text)
+                            )
+                                .disabled(true)
+                        }
+                    )
+                    
+                    PreviewSectionHeader("Native")
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Enabled",
+                        content: {
+                            TextField(
+                                placeholder,
+                                text: .constant(text)
+                            )
+                                .textFieldStyle(.roundedBorder)
+                        }
+                    )
+                    
+                    PreviewRow(
+                        axis: .vertical,
+                        title: "Disabled",
+                        content: {
+                            TextField(
+                                placeholder,
+                                text: .constant(text)
+                            )
+                                .textFieldStyle(.roundedBorder)
+                                .disabled(true)
+                        }
+                    )
+                }
+            )
         }
     }
 }

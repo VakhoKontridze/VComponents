@@ -64,10 +64,12 @@ public struct VAlertUIModel {
         /// Title text line type. Set to `singleLine`.
         public var titleTextLineType: TextLineType = .singleLine
         
-        /// Title margins. Set to `0` horizontal and `5` vertical.
+        /// Title margins. Set to `0` leading, `0` trailing, `5` top, and `3` bottom.
         public var titleMargins: Margins = .init(
-            horizontal: 0,
-            vertical: 5
+            leading: 0,
+            trailing: 0,
+            top: 5,
+            bottom: 3
         )
         
         /// Message line type. Set to `multiline` with `center` alignment and `1...5` lines.
@@ -79,10 +81,12 @@ public struct VAlertUIModel {
             }
         }()
         
-        /// Title margins. Set to `0` horizontal and `5` vertical.
+        /// Title margins. Set to `0` leading, `0` trailing, `3` top, and `5` bottom.
         public var messageMargins: Margins = .init(
-            horizontal: 0,
-            vertical: 5
+            leading: 0,
+            trailing: 0,
+            top: 3,
+            bottom: 5
         )
         
         /// Content margins  Set to `0` leading, `0` trailing, `10` top, and `0` bottom.
@@ -220,11 +224,11 @@ public struct VAlertUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `system` `bold` `16`.
-        public var title: Font = .system(size: 16, weight: .bold)
+        /// Title font. Set to `bold` `headline` (`17`).
+        public var title: Font = .headline.weight(.bold)
         
-        /// Message font. Set to `system` `14`.
-        public var message: Font = .system(size: 14)
+        /// Message font. Set to `subheadline` (`15`).
+        public var message: Font = .subheadline
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -279,6 +283,9 @@ public struct VAlertUIModel {
 
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
+        if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
+            uiModel.layout.titleMinimumScaleFactor /= 2
+        }
 
         uiModel.colors.background = .alertButton(colors.primaryButtonBackground)
         uiModel.colors.title = .alertButton(colors.primaryButtonTitle)
@@ -295,6 +302,9 @@ public struct VAlertUIModel {
         
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
+        if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
+            uiModel.layout.titleMinimumScaleFactor /= 2
+        }
         
         uiModel.colors.background = .alertButton(colors.secondaryButtonBackground)
         uiModel.colors.title = .alertButton(colors.secondaryButtonTitle)
@@ -311,6 +321,9 @@ public struct VAlertUIModel {
         
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
+        if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
+            uiModel.layout.titleMinimumScaleFactor /= 2
+        }
         
         uiModel.colors.background = .alertButton(colors.destructiveButtonBackground)
         uiModel.colors.title = .alertButton(colors.destructiveButtonTitle)
