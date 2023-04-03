@@ -39,11 +39,11 @@ public struct VCapsuleButtonUIModel {
         /// Set to `48` on `watchOS`.
         public var height: CGFloat = {
 #if os(iOS)
-            return GlobalUIModel.Buttons.dimensionIOSSmall
+            return 32
 #elseif os(macOS)
-            return GlobalUIModel.Buttons.dimensionMacOSLarge
+            return 32
 #elseif os(watchOS)
-            return GlobalUIModel.Buttons.dimensionWatchOS
+            return 40
 #else
             fatalError() // Not supported
 #endif

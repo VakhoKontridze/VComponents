@@ -23,7 +23,6 @@ import VCore
 ///             .padding()
 ///     }
 ///
-@available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VLoadingStretchedButton<Label>: View where Label: View {
@@ -231,7 +230,14 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     action: { print("Clicked") },
                     title: title
                 )
-                .padding()
+                    .modifier({
+#if os(macOS)
+                        $0.frame(width: 250)
+#else
+                        $0
+#endif
+                    })
+                    .padding()
             })
         }
     }
@@ -248,6 +254,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
+                            .modifier({
+#if os(macOS)
+                                $0.frame(width: 250)
+#else
+                                $0
+#endif
+                            })
                     }
                 )
                 
@@ -266,6 +279,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
+                            .modifier({
+#if os(macOS)
+                                $0.frame(width: 250)
+#else
+                                $0
+#endif
+                            })
                     }
                 )
                 
@@ -278,6 +298,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
+                            .modifier({
+#if os(macOS)
+                                $0.frame(width: 250)
+#else
+                                $0
+#endif
+                            })
                     }
                 )
                 
@@ -290,6 +317,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
+                            .modifier({
+#if os(macOS)
+                                $0.frame(width: 250)
+#else
+                                $0
+#endif
+                            })
                             .disabled(true)
                     }
                 )

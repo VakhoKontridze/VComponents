@@ -8,7 +8,6 @@
 import SwiftUI
 
 // MARK: - V Loading Stretched Button Label
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 enum VLoadingStretchedButtonLabel<Label> where Label: View {

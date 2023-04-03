@@ -36,10 +36,10 @@ public struct VRoundedCaptionedButtonUIModel {
     public struct Layout {
         // MARK: Properties
         /// Rectangle dimension. Set to `56`.
-        public var roundedRectangleDimension: CGFloat = GlobalUIModel.Buttons.dimensionIOSLarge
+        public var roundedRectangleDimension: CGFloat = GlobalUIModel.Buttons.dimensionRoundedButton
         
         /// Rectangle corner radius. Set to `24`.
-        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusIOSLarge
+        public var cornerRadius: CGFloat = 24
         
         /// Rectangle border width. Set to `0`.
         ///
@@ -47,10 +47,10 @@ public struct VRoundedCaptionedButtonUIModel {
         public var borderWidth: CGFloat = 0
         
         /// Icon margins. Set to `3`s.
-        public var iconMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRounded
+        public var iconMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton
         
         /// Icon size. Set to `24x24`.
-        public var iconSize: CGSize = .init(dimension: GlobalUIModel.Buttons.iconDimensionLarge)
+        public var iconSize: CGSize = .init(dimension: 24)
         
         /// Spacing between rounded rectangle and caption. Set to `4`.
         public var rectangleCaptionSpacing: CGFloat = 4

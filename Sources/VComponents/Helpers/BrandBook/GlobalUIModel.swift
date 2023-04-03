@@ -100,22 +100,24 @@ struct GlobalUIModel {
     // MARK: Buttons
     struct Buttons {
         // MARK: Properties
-        static var dimensionIOSSmall: CGFloat { 32 }
-        static var dimensionIOSLarge: CGFloat { 56 }
+        static var dimensionRoundedButton: CGFloat {
+#if os(iOS)
+            return 56
+#elseif os(macOS)
+            return 28
+#endif
+        }
         
-        static var dimensionMacOSSmall: CGFloat { 28 }
-        static var dimensionMacOSLarge: CGFloat { 32 }
-        
-        static var dimensionWatchOS: CGFloat { 48 }
-        
-        static var cornerRadiusIOSSmall: CGFloat { 16 }
-        static var cornerRadiusIOSLarge: CGFloat { 24 }
-        
-        static var cornerRadiusMacOSSmall: CGFloat { 6 }
-        static var cornerRadiusMacOSLarge: CGFloat { 16 }
+        static var cornerRadiusRoundedButton: CGFloat {
+#if os(iOS)
+            return 16
+#elseif os(macOS)
+            return 6
+#endif
+        }
         
         static var labelMargins: EdgeInsets_HorizontalVertical { .init(horizontal: 15, vertical: 3) }
-        static var labelMarginsRounded: EdgeInsets_HorizontalVertical { .init(3) }
+        static var labelMarginsRoundedButton: EdgeInsets_HorizontalVertical { .init(3) }
         
         static var transparentLayerLabelEnabled: Color { ColorBook.controlLayerBlue }
         static var transparentLayerLabelPressed: Color { ColorBook.controlLayerBluePressed }
@@ -123,7 +125,6 @@ struct GlobalUIModel {
 
         static var iconDimensionSmall: CGFloat { 16 }
         static var iconDimensionMedium: CGFloat { 20 }
-        static var iconDimensionLarge: CGFloat { 24 }
         
         static var iconTitleSpacing: CGFloat { 8 }
         

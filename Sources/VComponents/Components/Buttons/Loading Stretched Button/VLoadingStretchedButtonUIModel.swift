@@ -10,7 +10,6 @@ import VCore
 
 // MARK: - V Loading Stretched Button UI Model
 /// Model that describes UI.
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VLoadingStretchedButtonUIModel {
@@ -34,11 +33,31 @@ public struct VLoadingStretchedButtonUIModel {
     /// Model that contains layout properties.
     public struct Layout {
         // MARK: Properties
-        /// Button height. Set to `56`.
-        public var height: CGFloat = GlobalUIModel.Buttons.dimensionIOSLarge
+        /// Button height.
+        /// Set to `56` on `iOS`.
+        /// Set to `40` on `macOS`.
+        public var height: CGFloat = {
+#if os(iOS)
+            return 56
+#elseif os(macOS)
+            return 40
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
-        /// Corner radius. Set to `16`.
-        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusIOSSmall
+        /// Corner radius.
+        /// Set to `16` on `iOS`.
+        /// Set to `12` on `macOS`.
+        public var cornerRadius: CGFloat = {
+#if os(iOS)
+            return 16
+#elseif os(macOS)
+            return 12
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Border width. Set to `0`.
         ///
@@ -132,8 +151,18 @@ public struct VLoadingStretchedButtonUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Title font. Set to `semibold` `callout` (`16`).
-        public var title: Font = .callout.weight(.semibold)
+        /// Title font.
+        /// Set to `semibold` `callout` (`16`) on `iOS`.
+        /// Set to `semibold` `16` on `macOS`.
+        public var title: Font = {
+#if os(iOS)
+            return Font.callout.weight(.semibold)
+#elseif os(macOS)
+            return Font.system(size: 16, weight: .semibold) // No dynamic type on `macOS` anyway
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         // MARK: Initializers
         /// Initializes UI model with default values.

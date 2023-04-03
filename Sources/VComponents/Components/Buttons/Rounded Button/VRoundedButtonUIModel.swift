@@ -37,28 +37,12 @@ public struct VRoundedButtonUIModel {
         /// Button dimension.
         /// Set to `56` on `iOS`.
         /// Set to `28` on `macOS`.
-        public var dimension: CGFloat = {
-#if os(iOS)
-            return GlobalUIModel.Buttons.dimensionIOSLarge
-#elseif os(macOS)
-            return GlobalUIModel.Buttons.dimensionMacOSLarge
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        public var dimension: CGFloat = GlobalUIModel.Buttons.dimensionRoundedButton
         
         /// Corner radius.
         /// Set to `16` on `iOS`.
         /// Set to `6` on `macOS`.
-        public var cornerRadius: CGFloat = {
-#if os(iOS)
-            return GlobalUIModel.Buttons.cornerRadiusIOSSmall
-#elseif os(macOS)
-            return GlobalUIModel.Buttons.cornerRadiusMacOSSmall
-#else
-            fatalError() // Not supported
-#endif
-        }()
+        public var cornerRadius: CGFloat = GlobalUIModel.Buttons.cornerRadiusRoundedButton
         
         /// Border width. Set to `0`.
         ///
@@ -66,7 +50,7 @@ public struct VRoundedButtonUIModel {
         public var borderWidth: CGFloat = 0
         
         /// Label margins. Set to `3`s.
-        public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRounded
+        public var labelMargins: LabelMargins = GlobalUIModel.Buttons.labelMarginsRoundedButton
         
         /// Title minimum scale factor. Set to `0.75`.
         public var titleMinimumScaleFactor: CGFloat = GlobalUIModel.Common.minimumScaleFactor
