@@ -134,7 +134,7 @@ public struct VModalUIModel {
             uiModel.background = VRoundedButtonUIModel.Colors.StateColors(
                 enabled: GlobalUIModel.Common.circularButtonLayerColorEnabled,
                 pressed: GlobalUIModel.Common.circularButtonLayerColorPressed,
-                disabled: .clear // Has no effect
+                disabled: .clear // Doesn't matter
             )
             uiModel.icon = VRoundedButtonUIModel.Colors.StateColors(GlobalUIModel.Common.circularButtonIconGrayColor)
             
