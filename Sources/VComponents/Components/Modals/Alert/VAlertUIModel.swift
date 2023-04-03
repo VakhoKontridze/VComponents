@@ -185,10 +185,10 @@ public struct VAlertUIModel {
         public var primaryButtonTitle: ButtonStateColors = .init(ColorBook.primaryWhite)
         
         /// Secondary button background colors.
-        public var secondaryButtonBackground: ButtonStateColors = .init(
-            enabled: .clear,
+        public var secondaryButtonBackground: ButtonStateColors = .init( // `clear` cannot be used, otherwise button won't register gestures
+            enabled: ColorBook.layer,
             pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
-            disabled: .clear
+            disabled: ColorBook.layer
         )
         
         /// Secondary button title colors.
@@ -199,10 +199,10 @@ public struct VAlertUIModel {
         )
         
         /// Destructive button background colors.
-        public var destructiveButtonBackground: ButtonStateColors = .init(
-            enabled: .clear,
+        public var destructiveButtonBackground: ButtonStateColors = .init( // `clear` cannot be used, otherwise button won't register gestures
+            enabled: ColorBook.layer,
             pressed: Color(module: "Alert.LayerColoredButton.Background.Pressed"),
-            disabled: .clear
+            disabled: ColorBook.layer
         )
         
         /// Destructive button title colors.
