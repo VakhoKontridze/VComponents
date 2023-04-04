@@ -44,12 +44,9 @@ struct VToast: View {
 
     // MARK: Body
     var body: some View {
-        ZStack(content: {
-            contentView
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
-        })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        contentView
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
             .modifier({ view in
                 switch uiModel.layout.widthType {
                 case .wrapped(let margin): view.padding(.horizontal, margin)
@@ -57,7 +54,6 @@ struct VToast: View {
                 case .fixedPoint, .fixedFraction: view
                 }
             })
-            .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
             .onChange(
