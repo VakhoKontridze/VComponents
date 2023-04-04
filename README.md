@@ -177,14 +177,20 @@ Versions with different majors are not directly compatible. When a new major is 
   <tr>
     <th align="left">Ver</th>
     <th align="left">Release Date</th> 
+    <th align="left">Swift</th>
     <th align="left">SDK</th>
     <th align="left">VCore</th>
     <th align="left">Comment</th>
   </tr>
   
   <tr>
-    <td>4.0</td>
-    <td>2023 XX XX</td>
+    <td>
+        4.0<br/><i><sup>(4.0.0 - 4.x.x)</sup></i>
+    </td>
+    <td>2023 ?????</td>
+    <td>
+        5.8
+    </td>
     <td>
         iOS 13.0<br/>
         macOS 10.15<br/>
@@ -200,8 +206,11 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
   
   <tr>
-    <td>3.0</td>
+    <td>
+        3.0<br/><i><sup>(3.0.0 - 3.2.2)</sup></i>
+    </td>
     <td>2022 10 02</td>
+    <td>5.7</td>
     <td>iOS 16.0</td>
     <td>4.1.0 - 4.x.x</td>
     <td>
@@ -211,8 +220,11 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
     
   <tr>
-    <td>2.0</td>
+    <td>
+        2.0<br/><i><sup>(2.0.0 - 2.3.4)</sup></i>
+    </td>
     <td>2022 05 26</td>
+    <td>5.6</td>
     <td>iOS 15.0</td>
     <td>3.2.0 - 3.x.x</td>
     <td>
@@ -223,8 +235,11 @@ Versions with different majors are not directly compatible. When a new major is 
   </tr>
     
   <tr>
-    <td>1.0</td>
+    <td>
+        1.0<br/><i><sup>(1.0.0 - 1.6.0)</sup></i>
+    </td>
     <td>2021 02 07</td>
+    <td>5.3</td>
     <td>iOS 14.0</td>
     <td>-</td>
     <td>-</td>
