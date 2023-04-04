@@ -36,8 +36,7 @@ public struct VProgressBar: View {
         total: V = 1,
         value: V
     )
-        where
-            V: BinaryFloatingPoint
+        where V: BinaryFloatingPoint
     {
         self.uiModel = uiModel
         self.range = 0...Double(total)
