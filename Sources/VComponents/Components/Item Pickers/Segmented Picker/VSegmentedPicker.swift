@@ -55,13 +55,13 @@ public struct VSegmentedPicker<Data, Content>: View
     private var internalState: VSegmentedPickerInternalState { .init(isEnabled: isEnabled) }
     private var indicatorInternalState: VSegmentedPickerSelectionIndicatorInternalState {
         .init(
-            isEnabled: internalState.isEnabled, // `isEnabled` check is required
+            isEnabled: isEnabled, // `isEnabled` check is required
             isPressed: pressedIndex == selectedIndex
         )
     }
     private func rowInternalState(i: Int) -> VSegmentedPickerRowInternalState {
         .init(
-            isEnabled: internalState.isEnabled && !disabledIndexes.contains(i), // `isEnabled` check is required
+            isEnabled: isEnabled && !disabledIndexes.contains(i), // `isEnabled` check is required
             isSelected: selectedIndex == i,
             isPressed: pressedIndex == i
         )

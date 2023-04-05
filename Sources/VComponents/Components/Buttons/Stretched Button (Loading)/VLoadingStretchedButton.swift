@@ -104,6 +104,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                     .overlay(border(internalState: internalState))
             }
         )
+            .disabled(isLoading)
     }
     
     private func buttonLabel(
