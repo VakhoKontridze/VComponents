@@ -25,16 +25,16 @@ import VCore
 ///     }
 ///
 /// On `macOS`, you would typically provide an explicit width.
-///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VLoadingStretchedButton<Label>: View where Label: View {
     // MARK: Properties
     private let uiModel: VLoadingStretchedButtonUIModel
     
+    @Environment(\.isEnabled) private var isEnabled: Bool
     private let isLoading: Bool
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VLoadingStretchedButtonInternalState {
-        .init(isEnabled: baseButtonState.isEnabled, isPressed: baseButtonState == .pressed, isLoading: isLoading)
+        .init(isEnabled: isEnabled, isPressed: baseButtonState == .pressed, isLoading: isLoading)
     }
     
     private let action: () -> Void

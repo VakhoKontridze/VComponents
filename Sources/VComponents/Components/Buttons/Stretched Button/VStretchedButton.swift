@@ -24,7 +24,6 @@ import VCore
 ///     }
 ///
 /// On `macOS` and `watchOS`, you would typically provide an explicit width.
-///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 public struct VStretchedButton<Label>: View where Label: View {
     // MARK: Properties
