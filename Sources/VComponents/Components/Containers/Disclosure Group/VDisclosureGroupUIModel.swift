@@ -220,7 +220,7 @@ extension VDisclosureGroupUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = VDisclosureGroupUIModel.Layout.Margins(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
         
         return uiModel
     }
