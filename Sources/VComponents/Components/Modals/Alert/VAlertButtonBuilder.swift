@@ -61,7 +61,7 @@ extension EmptyView: VAlertButtonConvertible {
     public static func buildEither(first component: Component) -> Result {
         component.toButtons()
     }
-
+    
     public static func buildEither(second component: Component) -> Result {
         component.toButtons()
     }
@@ -73,7 +73,7 @@ extension EmptyView: VAlertButtonConvertible {
     public static func buildLimitedAvailability(_ component: Component) -> Result {
         component.toButtons()
     }
-
+    
     public static func buildFinalResult(_ component: Component) -> Result {
         component.toButtons()
     }
@@ -84,7 +84,7 @@ extension EmptyView: VAlertButtonConvertible {
     // If there are no buttons, `VAlertOKButton` will be added.
     static func process(_ buttons: [any VAlertButtonProtocol]) -> [any VAlertButtonProtocol] {
         var result: [any VAlertButtonProtocol] = []
-
+        
         for button in buttons {
             if button is VAlertCancelButton { result.removeAll(where: { $0 is VAlertCancelButton }) }
             result.append(button)
@@ -92,11 +92,11 @@ extension EmptyView: VAlertButtonConvertible {
         if let cancelButtonIndex: Int = result.firstIndex(where: { $0 is VAlertCancelButton }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
-
+        
         if result.isEmpty {
             result.append(VAlertOKButton(action: nil))
         }
-
+        
         return result
     }
 }

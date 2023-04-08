@@ -35,7 +35,7 @@ struct PreviewSectionHeader: View {
             
             VStack(content: Divider.init)
         })
-            .padding(.horizontal)
+        .padding(.horizontal)
     }
 }
 

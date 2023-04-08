@@ -31,7 +31,7 @@ public struct VRangeSlider: View {
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     
     private let uiModel: VRangeSliderUIModel
-
+    
     private let min, max: Double
     private var range: ClosedRange<Double> { min...max }
     private let difference: Double
@@ -39,7 +39,7 @@ public struct VRangeSlider: View {
     
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VRangeSliderInternalState { .init(isEnabled: isEnabled) }
-
+    
     @Binding private var valueLow: Double
     @Binding private var valueHigh: Double
     
@@ -47,7 +47,7 @@ public struct VRangeSlider: View {
     private let actionHigh: ((Bool) -> Void)?
     
     @State private var sliderSize: CGSize = .zero
-
+    
     // MARK: Initializers
     /// Initializes `VRangeSlider` with difference, and low and high values.
     public init<V>(
@@ -86,7 +86,7 @@ public struct VRangeSlider: View {
         self.actionLow = actionLow
         self.actionHigh = actionHigh
     }
-
+    
     // MARK: Body
     public var body: some View {
         ZStack(alignment: uiModel.layout.direction.alignment, content: {
@@ -95,29 +95,29 @@ public struct VRangeSlider: View {
                 progress
                 border
             })
-                .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-                .frame(
-                    width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
-                    height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
-                )
+            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
+            .frame(
+                width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
+                height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
+            )
             
             thumb(.low)
             thumb(.high)
         })
-            .onSizeChange(perform: { sliderSize = $0 })
-            .padding(
-                uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
-                uiModel.layout.thumbDimension / 2
-            )
-            .animation(uiModel.animations.progress, value: valueLow)
-            .animation(uiModel.animations.progress, value: valueHigh)
+        .onSizeChange(perform: { sliderSize = $0 })
+        .padding(
+            uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
+            uiModel.layout.thumbDimension / 2
+        )
+        .animation(uiModel.animations.progress, value: valueLow)
+        .animation(uiModel.animations.progress, value: valueHigh)
     }
-
+    
     private var track: some View {
         Rectangle()
             .foregroundColor( uiModel.colors.track.value(for: internalState))
     }
-
+    
     private var progress: some View {
         Rectangle()
             .padding(uiModel.layout.direction.edgeSet, progressWidth(.low))
@@ -131,7 +131,7 @@ public struct VRangeSlider: View {
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         }
     }
-
+    
     @ViewBuilder private func thumb(_ thumb: Thumb) -> some View {
         if uiModel.layout.thumbDimension > 0 {
             Group(content: {
@@ -171,21 +171,21 @@ public struct VRangeSlider: View {
         case low
         case high
     }
-
+    
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value, thumb: Thumb) {
         let rawValue: Double = {
             let value: Double = dragValue.location.coordinate(isX: uiModel.layout.direction.isHorizontal)
             let range: Double = max - min
             let width: Double = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
-
+            
             return (min + (value / width) * range)
                 .invertedFromMax(
                     max,
                     if: layoutDirection == .rightToLeft || uiModel.layout.direction.isReversed
                 )
         }()
-
+        
         let valueFixed: Double = {
             switch thumb {
             case .low:
@@ -194,7 +194,7 @@ public struct VRangeSlider: View {
                     max: Swift.min((valueHigh - difference).roundedDownWithStep(step), max),
                     step: step
                 )
-
+                
             case .high:
                 return rawValue.clamped(
                     min: Swift.max((valueLow + difference).roundedUpWithStep(step), min),
@@ -203,25 +203,25 @@ public struct VRangeSlider: View {
                 )
             }
         }()
-
+        
         switch thumb {
         case .low: setValueLow(to: valueFixed)
         case .high: setValueHigh(to: valueFixed)
         }
-
+        
         switch thumb {
         case .low: actionLow?(true)
         case .high: actionHigh?(true)
         }
     }
-
+    
     private func dragEnded(dragValue: DragGesture.Value, thumb: Thumb) {
         switch thumb {
         case .low: actionLow?(false)
         case .high: actionHigh?(false)
         }
     }
-
+    
     // MARK: Actions
     private func setValueLow(to value: Double) {
         self.valueLow = value
@@ -230,7 +230,7 @@ public struct VRangeSlider: View {
     private func setValueHigh(to value: Double) {
         self.valueHigh = value
     }
-
+    
     // MARK: Progress Width
     private func progressWidth(_ thumb: Thumb) -> CGFloat {
         let value: CGFloat = {
@@ -241,19 +241,19 @@ public struct VRangeSlider: View {
         }()
         let range: CGFloat = max - min
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
-
+        
         switch thumb {
         case .low: return (value / range) * width
         case .high: return ((range - value) / range) * width
         }
     }
-
+    
     // MARK: Thumb Offset
     private func thumbOffset(_ thumb: Thumb) -> CGFloat {
         let progressWidth: CGFloat = progressWidth(thumb)
         let thumbWidth: CGFloat = uiModel.layout.thumbDimension
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
-
+        
         switch thumb {
         case .low: return progressWidth - thumbWidth / 2
         case .high: return width - progressWidth - thumbWidth / 2
@@ -303,7 +303,7 @@ struct VRangeSlider_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
@@ -311,15 +311,15 @@ struct VRangeSlider_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var difference: Double { 0.1 }
     private static var valueLow: Double { 0.1 }
     private static var valueHigh: Double { 0.8 }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var valueLow: Double = VRangeSlider_Previews.valueLow
@@ -360,7 +360,7 @@ struct VRangeSlider_Previews: PreviewProvider {
                             valueLow: .constant(valueLow),
                             valueHigh: .constant(valueHigh)
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
             })
@@ -399,7 +399,7 @@ struct VRangeSlider_Previews: PreviewProvider {
                                 valueLow: $valueLow,
                                 valueHigh: $valueHigh
                             )
-                                .frame(width: dimension)
+                            .frame(width: dimension)
                         }
                     )
                     
@@ -417,7 +417,7 @@ struct VRangeSlider_Previews: PreviewProvider {
                                 valueLow: $valueLow,
                                 valueHigh: $valueHigh
                             )
-                                .frame(width: dimension)
+                            .frame(width: dimension)
                         }
                     )
                     
@@ -436,7 +436,7 @@ struct VRangeSlider_Previews: PreviewProvider {
                                     valueLow: $valueLow,
                                     valueHigh: $valueHigh
                                 )
-                                    .frame(height: dimension)
+                                .frame(height: dimension)
                             }
                         )
                         
@@ -454,7 +454,7 @@ struct VRangeSlider_Previews: PreviewProvider {
                                     valueLow: $valueLow,
                                     valueHigh: $valueHigh
                                 )
-                                    .frame(height: dimension)
+                                .frame(height: dimension)
                             }
                         )
                     })

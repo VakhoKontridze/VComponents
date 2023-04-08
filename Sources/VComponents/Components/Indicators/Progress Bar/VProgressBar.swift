@@ -48,7 +48,7 @@ public struct VProgressBar: View {
             return value.clamped(min: min, max: max)
         }()
     }
-
+    
     // MARK: Body
     public var body: some View {
         ZStack(alignment: uiModel.layout.direction.alignment, content: {
@@ -56,20 +56,20 @@ public struct VProgressBar: View {
             progress
             border
         })
-            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-            .frame(
-                width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
-                height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
-            )
-            .onSizeChange(perform: { progressBarSize = $0 })
-            .animation(uiModel.animations.progress, value: value)
+        .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
+        .frame(
+            width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
+            height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
+        )
+        .onSizeChange(perform: { progressBarSize = $0 })
+        .animation(uiModel.animations.progress, value: value)
     }
-
+    
     private var track: some View {
         Rectangle()
             .foregroundColor(uiModel.colors.track)
     }
-
+    
     private var progress: some View {
         Rectangle()
             .frame(
@@ -90,7 +90,7 @@ public struct VProgressBar: View {
     // MARK: Progress Width
     private var progressWidth: CGFloat {
         let width: CGFloat = progressBarSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
-
+        
         return value * width
     }
 }
@@ -107,8 +107,8 @@ struct VProgressBar_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Previews (Scenes)
@@ -120,7 +120,7 @@ struct VProgressBar_Previews: PreviewProvider {
                 VProgressBar(value: value)
                     .padding()
             })
-                .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
+            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
         }
     }
     
@@ -151,7 +151,7 @@ struct VProgressBar_Previews: PreviewProvider {
                             }(),
                             value: value
                         )
-                            .frame(width: dimension)
+                        .frame(width: dimension)
                     }
                 )
                 
@@ -167,7 +167,7 @@ struct VProgressBar_Previews: PreviewProvider {
                             }(),
                             value: value
                         )
-                            .frame(width: dimension)
+                        .frame(width: dimension)
                     }
                 )
                 
@@ -184,7 +184,7 @@ struct VProgressBar_Previews: PreviewProvider {
                                 }(),
                                 value: value
                             )
-                                .frame(height: dimension)
+                            .frame(height: dimension)
                         }
                     )
                     
@@ -200,12 +200,12 @@ struct VProgressBar_Previews: PreviewProvider {
                                 }(),
                                 value: value
                             )
-                                .frame(height: dimension)
+                            .frame(height: dimension)
                         }
                     )
                 })
             })
-                .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
+            .onReceiveOfTimerIncrement($value, to: 1, by: 0.1)
         }
     }
 }

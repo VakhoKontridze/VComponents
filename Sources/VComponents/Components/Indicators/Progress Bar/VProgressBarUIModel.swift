@@ -24,7 +24,7 @@ public struct VProgressBarUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -68,7 +68,7 @@ public struct VProgressBarUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -81,19 +81,19 @@ public struct VProgressBarUIModel {
         
         /// Border color.
         public var border: Color = .clear
-
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
         /// Progress animation. Set to `default`.
         public var progress: Animation? = .default
-
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

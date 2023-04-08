@@ -112,7 +112,7 @@ public struct VToggle<Label>: View where Label: View {
         self._state = Binding(isOn: isOn)
         self.label = .label(label: label)
     }
-
+    
     // MARK: Body
     public var body: some View {
         Group(content: {
@@ -125,7 +125,7 @@ public struct VToggle<Label>: View where Label: View {
                     toggle
                     
                     spacer
-
+                    
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -138,7 +138,7 @@ public struct VToggle<Label>: View where Label: View {
                             )
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
                 
             case .label(let label):
@@ -153,11 +153,11 @@ public struct VToggle<Label>: View where Label: View {
                             label(internalState)
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
             }
         })
-            .animation(uiModel.animations.stateChange, value: state)
+        .animation(uiModel.animations.stateChange, value: state)
     }
     
     private var toggle: some View {
@@ -167,13 +167,13 @@ public struct VToggle<Label>: View where Label: View {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                         .foregroundColor(uiModel.colors.fill.value(for: internalState))
-
+                    
                     Circle()
                         .frame(dimension: uiModel.layout.thumbDimension)
                         .foregroundColor(uiModel.colors.thumb.value(for: internalState))
                         .offset(x: thumbOffset)
                 })
-                    .frame(size: uiModel.layout.size)
+                .frame(size: uiModel.layout.size)
             }
         )
     }
@@ -188,9 +188,9 @@ public struct VToggle<Label>: View where Label: View {
                     .foregroundColor(.clear)
             }
         )
-            .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
-
+    
     // MARK: Actions
     private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
@@ -207,7 +207,7 @@ public struct VToggle<Label>: View where Label: View {
         HapticManager.shared.playImpact(uiModel.animations.haptic)
 #endif
     }
-
+    
     // MARK: Thumb Position
     private var thumbOffset: CGFloat {
         let offset: CGFloat = uiModel.layout.animationOffset
@@ -229,20 +229,20 @@ struct VToggle_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var state: VToggleState = .on
@@ -326,7 +326,7 @@ struct VToggle_Previews: PreviewProvider {
                             state: .constant(.off),
                             title: title
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
                 
@@ -340,9 +340,9 @@ struct VToggle_Previews: PreviewProvider {
                             "",
                             isOn: .constant(false)
                         )
-                            .labelsHidden()
-                            .toggleStyle(.switch)
-                            .padding(.trailing, 95)
+                        .labelsHidden()
+                        .toggleStyle(.switch)
+                        .padding(.trailing, 95)
                     }
                 )
                 
@@ -354,9 +354,9 @@ struct VToggle_Previews: PreviewProvider {
                             "",
                             isOn: .constant(true)
                         )
-                            .labelsHidden()
-                            .toggleStyle(.switch)
-                            .padding(.trailing, 95)
+                        .labelsHidden()
+                        .toggleStyle(.switch)
+                        .padding(.trailing, 95)
                     }
                 )
                 
@@ -368,10 +368,10 @@ struct VToggle_Previews: PreviewProvider {
                             "",
                             isOn: .constant(false)
                         )
-                            .labelsHidden()
-                            .toggleStyle(.switch)
-                            .disabled(true)
-                            .padding(.trailing, 95)
+                        .labelsHidden()
+                        .toggleStyle(.switch)
+                        .disabled(true)
+                        .padding(.trailing, 95)
                     }
                 )
             })

@@ -21,7 +21,7 @@ import VCore
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// On `macOS`, you would typically provide an explicit width.
@@ -104,7 +104,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                     .overlay(border(internalState: internalState))
             }
         )
-            .disabled(isLoading)
+        .disabled(isLoading)
     }
     
     private func buttonLabel(
@@ -112,7 +112,7 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
     ) -> some View {
         HStack(spacing: uiModel.layout.labelSpinnerSpacing, content: {
             spinnerCompensator(internalState: internalState)
-
+            
             Group(content: {
                 switch label {
                 case .title(let title):
@@ -128,12 +128,12 @@ public struct VLoadingStretchedButton<Label>: View where Label: View {
                     label(internalState)
                 }
             })
-                .frame(maxWidth: .infinity)
-
+            .frame(maxWidth: .infinity)
+            
             spinner(internalState: internalState)
         })
-            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-            .padding(uiModel.layout.labelMargins)
+        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
+        .padding(uiModel.layout.labelMargins)
     }
     
     private func titleLabelComponent(
@@ -217,8 +217,8 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .colorScheme(colorScheme)
-            .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
     }
     
     // Data
@@ -233,14 +233,14 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     action: { print("Clicked") },
                     title: title
                 )
-                    .modifier({
+                .modifier({
 #if os(macOS)
-                        $0.frame(width: 250)
+                    $0.frame(width: 250)
 #else
-                        $0
+                    $0
 #endif
-                    })
-                    .padding()
+                })
+                .padding()
             })
         }
     }
@@ -257,13 +257,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                            .modifier({
+                        .modifier({
 #if os(macOS)
-                                $0.frame(width: 250)
+                            $0.frame(width: 250)
 #else
-                                $0
+                            $0
 #endif
-                            })
+                        })
                     }
                 )
                 
@@ -282,13 +282,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                            .modifier({
+                        .modifier({
 #if os(macOS)
-                                $0.frame(width: 250)
+                            $0.frame(width: 250)
 #else
-                                $0
+                            $0
 #endif
-                            })
+                        })
                     }
                 )
                 
@@ -301,13 +301,13 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                            .modifier({
+                        .modifier({
 #if os(macOS)
-                                $0.frame(width: 250)
+                            $0.frame(width: 250)
 #else
-                                $0
+                            $0
 #endif
-                            })
+                        })
                     }
                 )
                 
@@ -320,14 +320,14 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                            .modifier({
+                        .modifier({
 #if os(macOS)
-                                $0.frame(width: 250)
+                            $0.frame(width: 250)
 #else
-                                $0
+                            $0
 #endif
-                            })
-                            .disabled(true)
+                        })
+                        .disabled(true)
                     }
                 )
             })

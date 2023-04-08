@@ -30,7 +30,7 @@ public struct VStepperUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -51,7 +51,7 @@ public struct VStepperUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Layout
     /// Model that contains color properties.
     public struct Colors {
@@ -110,7 +110,7 @@ public struct VStepperUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public struct Misc {

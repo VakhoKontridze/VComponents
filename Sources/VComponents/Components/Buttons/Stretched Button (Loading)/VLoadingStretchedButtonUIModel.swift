@@ -28,7 +28,7 @@ public struct VLoadingStretchedButtonUIModel {
     
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -88,7 +88,7 @@ public struct VLoadingStretchedButtonUIModel {
         /// Model that contains `horizontal` and `vertical` margins.
         public typealias LabelMargins = EdgeInsets_HorizontalVertical
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -140,7 +140,7 @@ public struct VLoadingStretchedButtonUIModel {
         /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_EnabledPressedLoadingDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {

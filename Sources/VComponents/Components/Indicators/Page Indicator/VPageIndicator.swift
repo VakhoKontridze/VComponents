@@ -56,7 +56,7 @@ import VCore
 ///                 })
 ///             }
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// You can stretch the component on it's primary axis by removing dimension.
@@ -74,7 +74,8 @@ import VCore
 ///             current: current,
 ///             dot: { RoundedRectangle(cornerRadius: 2.5) }
 ///         )
-///             .padding()
+///         .padding()
+///     }
 ///
 public struct VPageIndicator<Content>: View where Content: View {
     // MARK: Properties
@@ -84,7 +85,7 @@ public struct VPageIndicator<Content>: View where Content: View {
     private let current: Int
     
     private let dotContent: VPageIndicatorDotContent<Content>
-
+    
     // MARK: Initializers
     /// Initializes `VPageIndicator` with total and current index.
     public init(
@@ -124,7 +125,7 @@ public struct VPageIndicator<Content>: View where Content: View {
         self.current = current
         self.dotContent = dotContent
     }
-
+    
     // MARK: Body
     public var body: some View {
         let range: [Int] = (0..<total)
@@ -137,7 +138,7 @@ public struct VPageIndicator<Content>: View where Content: View {
                 ForEach(range, id: \.self, content: dotContentView)
             }
         )
-            .animation(uiModel.animations.transition, value: current)
+        .animation(uiModel.animations.transition, value: current)
     }
     
     private func dotContentView(i: Int) -> some View {
@@ -158,11 +159,11 @@ public struct VPageIndicator<Content>: View where Content: View {
                     .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
             }
         })
-            .frame(
-                width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight,
-                height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth
-            )
-            .scaleEffect(current == i ? 1 : uiModel.layout.unselectedDotScale)
+        .frame(
+            width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight,
+            height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth
+        )
+        .scaleEffect(current == i ? 1 : uiModel.layout.unselectedDotScale)
     }
 }
 
@@ -179,8 +180,8 @@ struct VPageIndicator_Previews: PreviewProvider {
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
             StretchedPreview().previewDisplayName("Stretched")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -197,7 +198,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                     total: total,
                     current: current
                 )
-                    .onReceiveOfTimerIncrement($current, to: total-1)
+                .onReceiveOfTimerIncrement($current, to: total-1)
             })
         }
     }
@@ -273,7 +274,7 @@ struct VPageIndicator_Previews: PreviewProvider {
                     )
                 })
             })
-                .onReceiveOfTimerIncrement($current, to: total-1)
+            .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
     
@@ -294,9 +295,9 @@ struct VPageIndicator_Previews: PreviewProvider {
                     current: current,
                     dot: { RoundedRectangle(cornerRadius: 2.5) }
                 )
-                    .padding()
+                .padding()
             })
-                .onReceiveOfTimerIncrement($current, to: total-1)
+            .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
 }

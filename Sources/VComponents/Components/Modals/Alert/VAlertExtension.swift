@@ -31,16 +31,16 @@ extension View {
     ///             action: { isPresented = true },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 isPresented: $isPresented,
-    ///                 title: "Lorem Ipsum",
-    ///                 message: "Lorem ipsum dolor sit amet",
-    ///                 actions: {
-    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-    ///                     VAlertCancelButton(action: { print("Cancelled") })
-    ///                 }
-    ///             )
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             isPresented: $isPresented,
+    ///             title: "Lorem Ipsum",
+    ///             message: "Lorem ipsum dolor sit amet",
+    ///             actions: {
+    ///                 VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                 VAlertCancelButton(action: { print("Cancelled") })
+    ///             }
+    ///         )
     ///     }
     ///
     public func vAlert(
@@ -90,19 +90,19 @@ extension View {
     ///             action: { isPresented = true },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 isPresented: $isPresented,
-    ///                 title: "Lorem Ipsum",
-    ///                 message: "Lorem ipsum dolor sit amet",
-    ///                 content: { VTextField(text: $text) },
-    ///                 actions: {
-    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-    ///                         .disabled(text.isEmpty)
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             isPresented: $isPresented,
+    ///             title: "Lorem Ipsum",
+    ///             message: "Lorem ipsum dolor sit amet",
+    ///             content: { VTextField(text: $text) },
+    ///             actions: {
+    ///                 VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                     .disabled(text.isEmpty)
     ///
-    ///                     VAlertCancelButton(action: { print("Cancelled") })
-    ///                 }
-    ///             )
+    ///                 VAlertCancelButton(action: { print("Cancelled") })
+    ///             }
+    ///         )
     ///     }
     ///
     public func vAlert(
@@ -162,16 +162,16 @@ extension View {
     ///             action: { alertItem = AlertItem() },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 item: $alertItem,
-    ///                 title: { item in "Lorem Ipsum" },
-    ///                 message: { item in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { item in
-    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-    ///                     VAlertCancelButton(action: { print("Cancelled") })
-    ///                 }
-    ///             )
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             item: $alertItem,
+    ///             title: { item in "Lorem Ipsum" },
+    ///             message: { item in "Lorem ipsum dolor sit amet" },
+    ///             actions: { item in
+    ///                 VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                 VAlertCancelButton(action: { print("Cancelled") })
+    ///             }
+    ///         )
     ///     }
     ///
     public func vAlert<Item>(
@@ -187,7 +187,7 @@ extension View {
         where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,
@@ -247,19 +247,19 @@ extension View {
     ///             action: { alertItem = AlertItem() },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 item: $alertItem,
-    ///                 title: { item in "Lorem Ipsum" },
-    ///                 message: { item in "Lorem ipsum dolor sit amet" },
-    ///                 content: { item in VTextField(text: $text) },
-    ///                 actions: { item in
-    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-    ///                         .disabled(text.isEmpty)
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             item: $alertItem,
+    ///             title: { item in "Lorem Ipsum" },
+    ///             message: { item in "Lorem ipsum dolor sit amet" },
+    ///             content: { item in VTextField(text: $text) },
+    ///             actions: { item in
+    ///                 VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                     .disabled(text.isEmpty)
     ///
-    ///                     VAlertCancelButton(action: { print("Cancelled") })
-    ///                 }
-    ///             )
+    ///                 VAlertCancelButton(action: { print("Cancelled") })
+    ///             }
+    ///         )
     ///     }
     ///
     public func vAlert<Item>(
@@ -276,7 +276,7 @@ extension View {
         where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,
@@ -353,17 +353,17 @@ extension View {
     ///             },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertData,
-    ///                 title: { data in "Lorem Ipsum" },
-    ///                 message: { data in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { data in
-    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-    ///                     VAlertCancelButton(action: { print("Cancelled") })
-    ///                 }
-    ///             )
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             isPresented: $isPresented,
+    ///             presenting: $alertData,
+    ///             title: { data in "Lorem Ipsum" },
+    ///             message: { data in "Lorem ipsum dolor sit amet" },
+    ///             actions: { data in
+    ///                 VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                 VAlertCancelButton(action: { print("Cancelled") })
+    ///             }
+    ///         )
     ///     }
     ///
     public func vAlert<T>(
@@ -378,7 +378,7 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,
@@ -445,20 +445,20 @@ extension View {
     ///             },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertData,
-    ///                 title: { data in "Lorem Ipsum" },
-    ///                 message: { data in "Lorem ipsum dolor sit amet" },
-    ///                 content: { data in VTextField(text: $text) },
-    ///                 actions: { data in
-    ///                     VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
-    ///                         .disabled(text.isEmpty)
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             isPresented: $isPresented,
+    ///             presenting: $alertData,
+    ///             title: { data in "Lorem Ipsum" },
+    ///             message: { data in "Lorem ipsum dolor sit amet" },
+    ///             content: { data in VTextField(text: $text) },
+    ///             actions: { data in
+    ///                 VAlertPrimaryButton(action: { print("Confirmed") }, title: "Confirm")
+    ///                     .disabled(text.isEmpty)
     ///
-    ///                     VAlertCancelButton(action: { print("Cancelled") })
-    ///                 }
-    ///             )
+    ///                 VAlertCancelButton(action: { print("Cancelled") })
+    ///             }
+    ///         )
     ///     }
     ///
     public func vAlert<T>(
@@ -474,7 +474,7 @@ extension View {
         @VAlertButtonBuilder actions buttons: @escaping (T) -> [any VAlertButtonProtocol]
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,
@@ -550,14 +550,14 @@ extension View {
     ///             },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertError,
-    ///                 title: { error in "Lorem Ipsum" },
-    ///                 message: { error in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { error in }
-    ///             )
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             isPresented: $isPresented,
+    ///             presenting: $alertError,
+    ///             title: { error in "Lorem Ipsum" },
+    ///             message: { error in "Lorem ipsum dolor sit amet" },
+    ///             actions: { error in }
+    ///         )
     ///     }
     ///
     public func vAlert<E>(
@@ -574,7 +574,7 @@ extension View {
         where E: Error
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,
@@ -637,15 +637,15 @@ extension View {
     ///             },
     ///             title: "Present"
     ///         )
-    ///             .vAlert(
-    ///                 id: "some_alert",
-    ///                 isPresented: $isPresented,
-    ///                 presenting: $alertError,
-    ///                 title: { error in "Lorem Ipsum" },
-    ///                 message: { error in "Lorem ipsum dolor sit amet" },
-    ///                 content: { error in Image("Error") },
-    ///                 actions: { error in }
-    ///             )
+    ///         .vAlert(
+    ///             id: "some_alert",
+    ///             isPresented: $isPresented,
+    ///             presenting: $alertError,
+    ///             title: { error in "Lorem Ipsum" },
+    ///             message: { error in "Lorem ipsum dolor sit amet" },
+    ///             content: { error in Image("Error") },
+    ///             actions: { error in }
+    ///         )
     ///     }
     ///
     public func vAlert<E>(
@@ -663,7 +663,7 @@ extension View {
         where E: Error
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,

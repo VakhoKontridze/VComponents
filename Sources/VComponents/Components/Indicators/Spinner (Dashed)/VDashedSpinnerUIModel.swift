@@ -18,7 +18,7 @@ public struct VDashedSpinnerUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {

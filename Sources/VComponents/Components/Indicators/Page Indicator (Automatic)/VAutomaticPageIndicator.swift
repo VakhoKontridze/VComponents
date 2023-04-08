@@ -56,7 +56,7 @@ import VCore
 ///                 })
 ///             }
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 public struct VAutomaticPageIndicator<Content>: View where Content: View {
@@ -67,7 +67,7 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
     private let current: Int
     
     private let dotContent: VPageIndicatorDotContent<Content>
-
+    
     // MARK: Initializers
     /// Initializes `VAutomaticPageIndicator` with total and current index.
     public init(
@@ -95,7 +95,7 @@ public struct VAutomaticPageIndicator<Content>: View where Content: View {
         self.current = current
         self.dotContent = .content(content: dot)
     }
-
+    
     // MARK: Body
     public var body: some View {
         switch total {

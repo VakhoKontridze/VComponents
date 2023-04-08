@@ -122,7 +122,7 @@ public struct VMenu<Label>: View where Label: View {
         self.label = .content(content: label)
         self.sections = { [VMenuGroupSection(rows: rows)] }
     }
-
+    
     // MARK: Body
     public var body: some View {
         Group(content: {
@@ -139,13 +139,13 @@ public struct VMenu<Label>: View where Label: View {
                 )
             }
         })
-            .modifier({
-                if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
-                    $0.menuOrder(.fixed)
-                } else {
-                    $0
-                }
-            })
+        .modifier({
+            if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+                $0.menuOrder(.fixed)
+            } else {
+                $0
+            }
+        })
     }
     
     private func contentView() -> some View {
@@ -186,21 +186,21 @@ struct VMenu_Previews: PreviewProvider {
     private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
         })
-            .previewInterfaceOrientation(interfaceOrientation)
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .previewInterfaceOrientation(interfaceOrientation)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
-
+        
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
         private var _stringRepresentation: String {
             switch self {
@@ -210,7 +210,7 @@ struct VMenu_Previews: PreviewProvider {
             }
         }
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View { // Didn't bother with pseudoRTL
         @State private var selection: PickerRow = .red

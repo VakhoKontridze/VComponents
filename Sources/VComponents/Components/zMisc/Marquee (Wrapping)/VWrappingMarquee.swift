@@ -21,7 +21,7 @@ import VCore
 ///                     Image(systemName: "swift")
 ///                     Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
 ///                 })
-///                     .drawingGroup() // For Images
+///                 .drawingGroup() // For Images
 ///             }
 ///         )
 ///     }
@@ -75,7 +75,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                         DispatchQueue.main.async(execute: { isAnimating = isDynamic })
                     })
             })
-                .offset(x: offsetDynamic)
+            .offset(x: offsetDynamic)
             
         } else {
             contentView
@@ -101,7 +101,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                    .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.colors.gradientWidth)
                 
                 Spacer()
                 
@@ -113,7 +113,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                    .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.colors.gradientWidth)
             })
         }
     }
@@ -152,7 +152,7 @@ public struct VWrappingMarquee<Content>: View where Content: View {
         @unknown default: return offset
         }
     }
-
+    
     private var offsetStatic: CGFloat {
         let offset: CGFloat = (contentSize.width - containerWidth)/2 + uiModel.layout.inset
         
@@ -175,10 +175,10 @@ public struct VWrappingMarquee<Content>: View where Content: View {
             curve: uiModel.animations.curve,
             duration: uiModel.animations.durationType.duration(width: width)
         )
-            .toSwiftUIAnimation
-            .delay(uiModel.animations.delay)
-            .repeatForever(autoreverses: false)
-            .delay(uiModel.animations.initialDelay)
+        .toSwiftUIAnimation
+        .delay(uiModel.animations.delay)
+        .repeatForever(autoreverses: false)
+        .delay(uiModel.animations.initialDelay)
     }
     
     private let resettingAnimation: Animation = .linear(duration: 0)
@@ -190,7 +190,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
@@ -198,8 +198,8 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             InsettedContentPreview().previewDisplayName("Insetted & Gradient")
             ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -209,7 +209,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             
             Text("Lorem ipsum".pseudoRTL(languageDirection))
         })
-            .drawingGroup()
+        .drawingGroup()
     }
     
     private static func contentLarge() -> some View {
@@ -224,9 +224,9 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.".pseudoRTL(languageDirection))
 #endif
         })
-            .drawingGroup()
+        .drawingGroup()
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {

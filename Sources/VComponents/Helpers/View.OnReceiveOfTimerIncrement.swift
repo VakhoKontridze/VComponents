@@ -37,7 +37,7 @@ extension View {
                 perform: { _ in
                     var valueToSet: Double = value.wrappedValue + increment
                     if valueToSet > total { valueToSet = 0 }
-
+                    
                     value.wrappedValue = valueToSet
                 }
             )

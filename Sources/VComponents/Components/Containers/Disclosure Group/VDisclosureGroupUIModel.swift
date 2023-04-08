@@ -34,7 +34,7 @@ public struct VDisclosureGroupUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -44,7 +44,7 @@ public struct VDisclosureGroupUIModel {
         
         /// Header margins. Set to `15` horizontal and  `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
-
+        
         /// Model for customizing chevron button layout. `size` is set to `30x30`, `iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
@@ -78,7 +78,7 @@ public struct VDisclosureGroupUIModel {
         /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -126,7 +126,7 @@ public struct VDisclosureGroupUIModel {
         /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_CollapsedExpandedDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -138,7 +138,7 @@ public struct VDisclosureGroupUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -161,7 +161,7 @@ public struct VDisclosureGroupUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public struct Misc {
@@ -173,7 +173,7 @@ public struct VDisclosureGroupUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Sub UI Models
     var plainDisclosureGroupSubUIModel: PlainDisclosureGroupUIModel {
         var uiModel: PlainDisclosureGroupUIModel = .init()
@@ -199,7 +199,7 @@ public struct VDisclosureGroupUIModel {
     
     var chevronButtonSubUIModel: VRoundedButtonUIModel {
         var uiModel: VRoundedButtonUIModel = .init()
-
+        
         uiModel.layout = layout.chevronButtonSubUIModel
         
         uiModel.colors = colors.chevronButtonSubUIModel

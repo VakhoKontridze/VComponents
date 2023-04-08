@@ -37,7 +37,7 @@ var body: some View {
         action: doSomething,
         title: "Lorem ipsum"
     )
-        .foregroundColor(.black)
+    .foregroundColor(.black)
 }
 ```
 

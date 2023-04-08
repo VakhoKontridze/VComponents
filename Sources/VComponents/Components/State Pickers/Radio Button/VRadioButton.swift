@@ -112,7 +112,7 @@ public struct VRadioButton<Label>: View where Label: View {
         self._state = Binding(isOn: isOn)
         self.label = .label(label: label)
     }
-
+    
     // MARK: Body
     public var body: some View {
         Group(content: {
@@ -125,7 +125,7 @@ public struct VRadioButton<Label>: View where Label: View {
                     radioButton
                     
                     spacer
-
+                    
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -138,7 +138,7 @@ public struct VRadioButton<Label>: View where Label: View {
                             )
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
                 
             case .label(let label):
@@ -153,11 +153,11 @@ public struct VRadioButton<Label>: View where Label: View {
                             label(internalState)
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
             }
         })
-            .animation(uiModel.animations.stateChange, value: internalState)
+        .animation(uiModel.animations.stateChange, value: internalState)
     }
     
     private var radioButton: some View {
@@ -177,8 +177,8 @@ public struct VRadioButton<Label>: View where Label: View {
                         .frame(dimension: uiModel.layout.bulletDimension)
                         .foregroundColor(uiModel.colors.bullet.value(for: internalState))
                 })
-                    .frame(dimension: uiModel.layout.dimension)
-                    .padding(uiModel.layout.hitBox)
+                .frame(dimension: uiModel.layout.dimension)
+                .padding(uiModel.layout.hitBox)
             }
         )
     }
@@ -193,9 +193,9 @@ public struct VRadioButton<Label>: View where Label: View {
                     .foregroundColor(.clear)
             }
         )
-            .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
-
+    
     // MARK: Actions
     private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
@@ -233,20 +233,20 @@ struct VRadioButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var state: VRadioButtonState = .off
@@ -332,7 +332,7 @@ struct VRadioButton_Previews: PreviewProvider {
                             state: .constant(.off),
                             title: title
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
             })

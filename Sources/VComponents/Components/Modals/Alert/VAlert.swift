@@ -36,13 +36,13 @@ struct VAlert<Content>: View
     @State private var buttonsStackHeight: CGFloat = 0
     private var buttonsStackShouldScroll: Bool {
         let safeAreaHeight: CGFloat =
-            MultiplatformConstants.screenSize.height -
-            MultiplatformConstants.safeAreaInsets.top -
-            MultiplatformConstants.safeAreaInsets.bottom
+        MultiplatformConstants.screenSize.height -
+        MultiplatformConstants.safeAreaInsets.top -
+        MultiplatformConstants.safeAreaInsets.bottom
         
         let alertHeight: CGFloat =
-            titleMessageContentHeight +
-            buttonsStackHeight
+        titleMessageContentHeight +
+        buttonsStackHeight
         
         return alertHeight > safeAreaHeight
     }
@@ -65,20 +65,20 @@ struct VAlert<Content>: View
         self.content = content
         self.buttons = VAlertButtonBuilder.process(buttons)
     }
-
+    
     // MARK: Body
     var body: some View {
         ZStack(content: {
             dimmingView
             alert
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.container, edges: .all)
-            .onAppear(perform: animateIn)
-            .onChange(
-                of: presentationMode.isExternallyDismissed,
-                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-            )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.container, edges: .all)
+        .onAppear(perform: animateIn)
+        .onChange(
+            of: presentationMode.isExternallyDismissed,
+            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+        )
     }
     
     private var dimmingView: some View {
@@ -94,25 +94,25 @@ struct VAlert<Content>: View
                     messageView
                     contentView
                 })
-                    .padding(uiModel.layout.titleMessageContentMargins)
-                    .onSizeChange(perform: { titleMessageContentHeight = $0.height })
-
+                .padding(uiModel.layout.titleMessageContentMargins)
+                .onSizeChange(perform: { titleMessageContentHeight = $0.height })
+                
                 buttonsScrollView
             })
         })
-            .frame(width: uiModel.layout.sizes._current.size.width)
-            .ignoresSafeArea(.container, edges: .horizontal)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
-            .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
-            .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
-            .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
-            .shadow(
-                color: uiModel.colors.shadow,
-                radius: uiModel.colors.shadowRadius,
-                offset: uiModel.colors.shadowOffset
-            )
+        .frame(width: uiModel.layout.sizes._current.size.width)
+        .ignoresSafeArea(.container, edges: .horizontal)
+        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
+        .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
+        .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
+        .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
+        .shadow(
+            color: uiModel.colors.shadow,
+            radius: uiModel.colors.shadowRadius,
+            offset: uiModel.colors.shadowOffset
+        )
     }
-
+    
     @ViewBuilder private var titleView: some View {
         if let title, !title.isEmpty {
             VText(
@@ -121,10 +121,10 @@ struct VAlert<Content>: View
                 font: uiModel.fonts.title,
                 text: title
             )
-                .padding(uiModel.layout.titleMargins)
+            .padding(uiModel.layout.titleMargins)
         }
     }
-
+    
     @ViewBuilder private var messageView: some View {
         if let message, !message.isEmpty {
             VText(
@@ -133,10 +133,10 @@ struct VAlert<Content>: View
                 font: uiModel.fonts.message,
                 text: message
             )
-                .padding(uiModel.layout.messageMargins)
+            .padding(uiModel.layout.messageMargins)
         }
     }
-
+    
     private var contentView: some View {
         Group(content: {
             switch content {
@@ -163,32 +163,32 @@ struct VAlert<Content>: View
             switch buttons.count {
             case 1:
                 buttonsContent()
-            
+                
             case 2:
                 HStack(
                     spacing: uiModel.layout.horizontalButtonSpacing,
                     content: { buttonsContent(reversesOrder: true) } // Cancel button is last
                 )
-            
+                
             case 3...:
                 VStack(
                     spacing: uiModel.layout.verticalButtonSpacing,
                     content: { buttonsContent() }
                 )
-            
+                
             default:
                 fatalError()
             }
         })
-            .padding(uiModel.layout.buttonMargins)
-            .onSizeChange(perform: { buttonsStackHeight = $0.height })
-            .modifier({
-                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    $0.dynamicTypeSize(...(.xxxLarge))
-                } else {
-                    $0
-                }
-            })
+        .padding(uiModel.layout.buttonMargins)
+        .onSizeChange(perform: { buttonsStackHeight = $0.height })
+        .modifier({
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                $0.dynamicTypeSize(...(.xxxLarge))
+            } else {
+                $0
+            }
+        })
     }
     
     private func buttonsContent(reversesOrder: Bool = false) -> some View {
@@ -212,7 +212,7 @@ struct VAlert<Content>: View
             }
         )
     }
-
+    
     private func animateOut(completion: (() -> Void)?) {
         withBasicAnimation(
             uiModel.animations.disappear,
@@ -223,7 +223,7 @@ struct VAlert<Content>: View
             }
         )
     }
-
+    
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
             uiModel.animations.disappear,
@@ -247,7 +247,7 @@ struct VAlert_Previews: PreviewProvider {
 //    private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
@@ -261,22 +261,22 @@ struct VAlert_Previews: PreviewProvider {
 //
 //            ButtonStatesPreview_Pressed().previewDisplayName("Button States - Pressed")
 //            ButtonStatesPreview_Disabled().previewDisplayName("Button States - Disabled")
-            
+
 //            NoTitlePreview().previewDisplayName("No Title")
 //            NoMessagePreview().previewDisplayName("No Message")
 //            NoTitleNoMessagePreview().previewDisplayName("No Title & Message")
-            
+
 //            OnlyButtonsPreview().previewDisplayName("Only Buttons")
         })
-            .modifier({
-                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    $0.previewInterfaceOrientation(.portrait)
-                } else {
-                    $0
-                }
-            })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .modifier({
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                $0.previewInterfaceOrientation(.portrait)
+            } else {
+                $0
+            }
+        })
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -294,7 +294,7 @@ struct VAlert_Previews: PreviewProvider {
         }
 #endif
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {

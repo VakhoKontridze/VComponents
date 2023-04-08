@@ -29,7 +29,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VCapsuleButtonInternalState { baseButtonState }
     private let action: () -> Void
     private let label: VCapsuleButtonLabel<Label>
-
+    
     // MARK: Initializers
     /// Initializes `VCapsuleButton` with action and title.
     public init(
@@ -68,7 +68,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
         self.action = action
         self.label = .label(label: label)
     }
-
+    
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
@@ -108,15 +108,15 @@ public struct VCapsuleButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-            .padding(uiModel.layout.labelMargins)
-            .modifier({
-                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    $0.dynamicTypeSize(...(.accessibility3))
-                } else {
-                    $0
-                }
-            })
+        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
+        .padding(uiModel.layout.labelMargins)
+        .modifier({
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                $0.dynamicTypeSize(...(.accessibility3))
+            } else {
+                $0
+            }
+        })
     }
     
     private func titleLabelComponent(
@@ -190,8 +190,8 @@ struct VCapsuleButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -242,7 +242,7 @@ struct VCapsuleButton_Previews: PreviewProvider {
                             )
                         }
                     )
-
+                    
                     PreviewRow(
                         axis: .horizontal(butVerticalOnPlatforms: [.watchOS]),
                         title: "Disabled",
@@ -251,12 +251,12 @@ struct VCapsuleButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                                .disabled(true)
+                            .disabled(true)
                         }
                     )
                     
 #if os(watchOS)
-          
+                    
                     PreviewSectionHeader("Native (Sort Of)")
                     
                     PreviewRow(

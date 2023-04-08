@@ -33,7 +33,7 @@ import VCore
 ///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
 ///             rowTitles: rowTitles
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 @available(macOS, unavailable)
@@ -76,7 +76,7 @@ public struct VWheelPicker<Data, Content>: View
         self.footerTitle = footerTitle
         self.content = .content(data: data, content: content)
     }
-
+    
     /// Initializes `VWheelPicker` with selected index and row titles.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
@@ -186,7 +186,7 @@ public struct VWheelPicker<Data, Content>: View
         self.footerTitle = footerTitle
         self.content = .titles(titles: Array(T.allCases).map { $0.stringRepresentation })
     }
-
+    
     // MARK: Body
     public var body: some View {
         VStack(alignment: .leading, spacing: uiModel.layout.headerPickerFooterSpacing, content: {
@@ -204,7 +204,7 @@ public struct VWheelPicker<Data, Content>: View
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -216,7 +216,7 @@ public struct VWheelPicker<Data, Content>: View
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -226,8 +226,8 @@ public struct VWheelPicker<Data, Content>: View
             content: rows,
             label: EmptyView.init
         )
-            .pickerStyle(.wheel)
-            .background(uiModel.colors.background.value(for: internalState).cornerRadius(uiModel.layout.cornerRadius))
+        .pickerStyle(.wheel)
+        .background(uiModel.colors.background.value(for: internalState).cornerRadius(uiModel.layout.cornerRadius))
     }
     
     @ViewBuilder private func rows() -> some View {
@@ -240,7 +240,7 @@ public struct VWheelPicker<Data, Content>: View
                     font: uiModel.fonts.rows,
                     text: titles[i]
                 )
-                    .tag(i)
+                .tag(i)
             })
             
         case .content(let data, let content):
@@ -260,15 +260,15 @@ struct VWheelPicker_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -284,7 +284,7 @@ struct VWheelPicker_Previews: PreviewProvider {
         ].map { $0.pseudoRTL(languageDirection) }
     }
     private static var selection: String { rowTitles[rowTitles.count/2] }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var selection: String = VWheelPicker_Previews.selection
@@ -297,7 +297,7 @@ struct VWheelPicker_Previews: PreviewProvider {
                     footerTitle: footerTitle,
                     rowTitles: rowTitles
                 )
-                    .padding()
+                .padding()
             })
         }
     }
@@ -328,7 +328,7 @@ struct VWheelPicker_Previews: PreviewProvider {
                             footerTitle: footerTitle,
                             rowTitles: rowTitles
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
             })

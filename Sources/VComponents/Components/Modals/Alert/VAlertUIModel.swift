@@ -27,11 +27,11 @@ public struct VAlertUIModel {
     
     /// Model that contains animation properties.
     public var animations: Animations = .init()
-
+    
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -119,7 +119,7 @@ public struct VAlertUIModel {
         
         /// Edges ignored by keyboard. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
-
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -148,7 +148,7 @@ public struct VAlertUIModel {
         /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -211,7 +211,7 @@ public struct VAlertUIModel {
             pressed: ColorBook.accentRed, // Looks better
             disabled: ColorBook.accentRedPressedDisabled
         )
-
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -219,7 +219,7 @@ public struct VAlertUIModel {
         /// Model that contains colors for button states.
         public typealias ButtonStateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -234,7 +234,7 @@ public struct VAlertUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -280,20 +280,20 @@ public struct VAlertUIModel {
     
     var primaryButtonSubUIModel: VStretchedButtonUIModel {
         var uiModel: VStretchedButtonUIModel = .init()
-
+        
         uiModel.layout.height = layout.buttonHeight
         uiModel.layout.cornerRadius = layout.buttonCornerRadius
         if #unavailable(iOS 15.0) { // Alternative to dynamic size upper limit
             uiModel.layout.titleMinimumScaleFactor /= 2
         }
-
+        
         uiModel.colors.background = colors.primaryButtonBackground
         uiModel.colors.title = colors.primaryButtonTitle
         
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
 #endif
-
+        
         return uiModel
     }
     
@@ -312,7 +312,7 @@ public struct VAlertUIModel {
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
 #endif
-
+        
         return uiModel
     }
     
@@ -331,7 +331,7 @@ public struct VAlertUIModel {
 #if os(iOS)
         uiModel.animations.haptic = animations.buttonHaptic
 #endif
-
+        
         return uiModel
     }
 }

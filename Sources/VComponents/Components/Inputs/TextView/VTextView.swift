@@ -22,7 +22,7 @@ import VCore
 ///             placeholder: "Lorem ipsum",
 ///             text: $text
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// To change height, change `textLineType`:
@@ -45,7 +45,7 @@ import VCore
 ///             placeholder: "Lorem ipsum",
 ///             text: $text
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// Textview can also be focused externally by passing state:
@@ -117,10 +117,10 @@ public struct VTextView: View {
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
-
+    
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
@@ -129,7 +129,7 @@ public struct VTextView: View {
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -137,16 +137,16 @@ public struct VTextView: View {
         Group(content: {
             textField
         })
-            .padding(uiModel.layout.contentMargin)
-            .frame(minHeight: uiModel.layout.minHeight)
-            .background(background)
+        .padding(uiModel.layout.contentMargin)
+        .frame(minHeight: uiModel.layout.minHeight)
+        .background(background)
     }
     
     private var background: some View {
         ZStack(content: {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .foregroundColor(uiModel.colors.background.value(for: internalState))
-
+            
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         })
@@ -163,37 +163,37 @@ public struct VTextView: View {
             axis: .vertical,
             label: EmptyView.init
         )
-            .textFieldStyle(.plain)
+        .textFieldStyle(.plain)
         
-            .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
+        .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
         
-            .ifLet(uiModel.layout.textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
-            .lineLimit(type: uiModel.layout.textLineType.textLineLimitType)
-            .foregroundColor(uiModel.colors.text.value(for: internalState))
-            .font(uiModel.fonts.text)
-            .modifier({
+        .ifLet(uiModel.layout.textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
+        .lineLimit(type: uiModel.layout.textLineType.textLineLimitType)
+        .foregroundColor(uiModel.colors.text.value(for: internalState))
+        .font(uiModel.fonts.text)
+        .modifier({
 #if os(iOS)
-                $0.keyboardType(uiModel.misc.keyboardType)
+            $0.keyboardType(uiModel.misc.keyboardType)
 #else
-                $0
+            $0
 #endif
-            })
-            .modifier({
+        })
+        .modifier({
 #if os(iOS)
-                $0.textContentType(uiModel.misc.textContentType)
+            $0.textContentType(uiModel.misc.textContentType)
 #else
-                $0
+            $0
 #endif
-            })
-            .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
-            .modifier({
+        })
+        .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
+        .modifier({
 #if os(iOS)
-                $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
+            $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
 #else
-                $0
+            $0
 #endif
-            })
-            .submitLabel(uiModel.misc.submitButton)
+        })
+        .submitLabel(uiModel.misc.submitButton)
     }
 }
 
@@ -214,8 +214,8 @@ struct VTextView_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -241,7 +241,7 @@ struct VTextView_Previews: PreviewProvider {
                     placeholder: placeholder,
                     text: $text
                 )
-                    .padding()
+                .padding()
             })
         }
     }
@@ -295,7 +295,7 @@ struct VTextView_Previews: PreviewProvider {
                             placeholder: placeholder,
                             text: .constant(text)
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
             })

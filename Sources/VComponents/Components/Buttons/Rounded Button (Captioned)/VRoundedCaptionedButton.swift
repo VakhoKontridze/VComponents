@@ -112,9 +112,9 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
                 .foregroundColor(uiModel.colors.icon.value(for: internalState))
                 .opacity(uiModel.colors.iconOpacities.value(for: internalState))
         })
-            .frame(size: uiModel.layout.roundedRectangleSize)
-            .background(rectangleBackground(internalState: internalState))
-            .overlay(roundedRectangleBorder(internalState: internalState))
+        .frame(size: uiModel.layout.roundedRectangleSize)
+        .background(rectangleBackground(internalState: internalState))
+        .overlay(roundedRectangleBorder(internalState: internalState))
     }
     
     private func rectangleBackground(
@@ -153,8 +153,8 @@ public struct VRoundedCaptionedButton<CaptionLabel>: View where CaptionLabel: Vi
                 caption(internalState)
             }
         })
-            .frame(maxWidth: uiModel.layout.captionWidthMax)
-            .scaleEffect(internalState == .pressed ? uiModel.animations.captionPressedScale : 1)
+        .frame(maxWidth: uiModel.layout.captionWidthMax)
+        .scaleEffect(internalState == .pressed ? uiModel.animations.captionPressedScale : 1)
     }
     
     private func titleCaptionComponent(
@@ -206,8 +206,8 @@ struct VRoundedCaptionedButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -278,7 +278,7 @@ struct VRoundedCaptionedButton_Previews: PreviewProvider {
                                 icon: icon,
                                 titleCaption: titleCaption
                             )
-                                .disabled(true)
+                            .disabled(true)
                         }
                     )
                 }

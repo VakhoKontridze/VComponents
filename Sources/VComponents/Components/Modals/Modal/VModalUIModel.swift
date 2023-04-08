@@ -34,7 +34,7 @@ public struct VModalUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -80,7 +80,7 @@ public struct VModalUIModel {
         ///
         /// To hide divider, set to `0`, and remove header.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
-    
+        
         /// Divider margins. Set to `zero`.
         public var dividerMargins: Margins = .zero
         
@@ -102,12 +102,12 @@ public struct VModalUIModel {
         // MARK: Sizes
         /// Model that represents modal sizes.
         public typealias Sizes = ModalSizes<CGSize>
-
+        
         // MARK: Margins
         /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -126,7 +126,7 @@ public struct VModalUIModel {
         
         /// Header title color.
         public var headerTitle: Color = ColorBook.primary
-
+        
         /// Model for customizing close button colors.
         public var closeButtonSubUIModel: VRoundedButtonUIModel.Colors = {
             var uiModel: VRoundedButtonUIModel.Colors = .init()
@@ -151,7 +151,7 @@ public struct VModalUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -163,7 +163,7 @@ public struct VModalUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -198,7 +198,7 @@ public struct VModalUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public struct Misc {
@@ -244,7 +244,7 @@ public struct VModalUIModel {
             }
         }
     }
-
+    
     // MARK: Sub UI Models
     var sheetSubUIModel: VSheetUIModel {
         var uiModel: VSheetUIModel = .init()

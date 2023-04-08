@@ -20,7 +20,7 @@ import VCore
 ///             range: 1...10,
 ///             value: $value
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 @available(macOS, unavailable) // Doesn't follow Human Interface Guidelines
@@ -64,14 +64,14 @@ public struct VStepper: View {
         self.step = step
         self._value = value
     }
-
+    
     // MARK: Body
     public var body: some View {
         ZStack(content: {
             background
             buttons
         })
-            .frame(size: uiModel.layout.size)
+        .frame(size: uiModel.layout.size)
     }
     
     private var background: some View {
@@ -85,7 +85,7 @@ public struct VStepper: View {
             divider
             button(.plus)
         })
-            .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity)
     }
     
     private func button(_ button: VStepperButton) -> some View {
@@ -101,10 +101,10 @@ public struct VStepper: View {
                         .frame(dimension: uiModel.layout.iconDimension)
                         .foregroundColor(uiModel.colors.buttonIcon.value(for: buttonInternalState(button)))
                 })
-                    .frame(maxWidth: .infinity)
+                .frame(maxWidth: .infinity)
             }
         )
-            .disabled(!buttonIsEnabled(button))
+        .disabled(!buttonIsEnabled(button))
     }
     
     private var divider: some View {
@@ -149,7 +149,7 @@ public struct VStepper: View {
             } else {
                 value -= step
             }
-        
+            
         case .plus:
             if value >= range.upperBound {
                 zeroLongPressTimers()
@@ -158,7 +158,7 @@ public struct VStepper: View {
             }
         }
     }
-
+    
     // MARK: Long Press Increment
     private func scheduleLongPressIncrementSchedulerTimer(for button: VStepperButton) {
         zeroLongPressTimers()
@@ -184,7 +184,7 @@ public struct VStepper: View {
     private func incrementFromLongPress() {
         longPressIncrementTimerIncremental?.invalidate()
         longPressIncrementTimerIncremental = nil
-
+        
         let interval: TimeInterval = {
             let adjustedStep: Int = .init(pow(Double(uiModel.misc.longPressIncrementExponent), longPressIncrementTimeElapsed)) * step
             let interval: TimeInterval = 1 / Double(adjustedStep)
@@ -246,21 +246,21 @@ struct VStepper_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var range: ClosedRange<Int> { 1...10 }
     private static var value: Int { 5 }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var value: Int = VStepper_Previews.value
@@ -319,12 +319,12 @@ struct VStepper_Previews: PreviewProvider {
                             range: range,
                             value: .constant(value)
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
                 
                 PreviewSectionHeader("Native")
-
+                
                 PreviewRow(
                     axis: .horizontal,
                     title: "Enabled",
@@ -333,7 +333,7 @@ struct VStepper_Previews: PreviewProvider {
                             .labelsHidden()
                     }
                 )
-
+                
                 PreviewRow(
                     axis: .horizontal,
                     title: "Disabled",

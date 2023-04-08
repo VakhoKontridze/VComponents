@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
- 
+
 // MARK: - Screen Relative Size Measurement
 /// Measurement that allows screen relative sizes to be converted to points.
 public protocol ScreenRelativeSizeMeasurement {

@@ -48,23 +48,23 @@ struct PreviewContainer<Content>: View where Content: View {
                     ScrollView(content: {
                         VStack(content: content)
                     })
-                        .padding(.vertical, 1)
+                    .padding(.vertical, 1)
                     
                 } else {
                     VStack(content: content)
                 }
             })
-                .modifier({ view in
+            .modifier({ view in
 #if os(macOS)
-                    view
-                        .padding(.vertical, 20)
-                        .previewLayout(.sizeThatFits)
+                view
+                    .padding(.vertical, 20)
+                    .previewLayout(.sizeThatFits)
 #elseif os(watchOS)
-                    view
+                view
 #else
-                    view
+                view
 #endif
-                })
+            })
         })
     }
 }
@@ -107,7 +107,7 @@ struct PreviewContainer_Previews: PreviewProvider {
                 action: {},
                 title: "Lorem Ipsum"
             )
-                .padding()
+            .padding()
 #else
             ColorBook.accentBlue
                 .padding()

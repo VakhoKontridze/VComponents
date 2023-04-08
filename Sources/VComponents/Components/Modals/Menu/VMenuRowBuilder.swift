@@ -57,7 +57,7 @@ extension EmptyView: VMenuRowConvertible {
     public static func buildEither(first component: Component) -> Result {
         component.toRows()
     }
-
+    
     public static func buildEither(second component: Component) -> Result {
         component.toRows()
     }
@@ -69,7 +69,7 @@ extension EmptyView: VMenuRowConvertible {
     public static func buildLimitedAvailability(_ component: Component) -> Result {
         component.toRows()
     }
-
+    
     public static func buildFinalResult(_ component: Component) -> Result {
         component.toRows()
     }

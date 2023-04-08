@@ -24,7 +24,7 @@ import SwiftUI
 ///             })
 ///         })
 ///     })
-///         .vListStyle()
+///     .vListStyle()
 ///
 /// Default `ScrollView` can be created as:
 ///
@@ -57,7 +57,7 @@ import SwiftUI
 ///             })
 ///         })
 ///     })
-///         .vListStyle()
+///     .vListStyle()
 ///
 /// `iOS` `15`-like enclosed `List` can be created as:
 ///
@@ -68,7 +68,7 @@ import SwiftUI
 ///             })
 ///         })
 ///     })
-///         .vListStyle()
+///     .vListStyle()
 ///
 @available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
@@ -99,15 +99,15 @@ public struct VListRow<Content>: View
             
             if uiModel.layout.separatorType.contains(.bottom) { separator }
         })
-            .listRowInsets(EdgeInsets())
-            .listRowBackground(uiModel.colors.background)
-            .modifier({
+        .listRowInsets(EdgeInsets())
+        .listRowBackground(uiModel.colors.background)
+        .modifier({
 #if os(iOS) || os(macOS)
-                $0.listRowSeparator(.hidden)
+            $0.listRowSeparator(.hidden)
 #else
-                $0
+            $0
 #endif
-            })
+        })
     }
     
     private var separator: some View {
@@ -129,20 +129,20 @@ struct VListRow_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             SeparatorsPreview().previewDisplayName("Separator")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var titles: [String] { (1...3).map { String($0) } }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
@@ -154,7 +154,7 @@ struct VListRow_Previews: PreviewProvider {
                         })
                     })
                 })
-                    .vListStyle()
+                .vListStyle()
             })
         }
     }
@@ -181,8 +181,8 @@ struct VListRow_Previews: PreviewProvider {
                                     )
                                 })
                             })
-                                .vListStyle()
-                                .frame(height: 120)
+                            .vListStyle()
+                            .frame(height: 120)
                         }
                     )
                     
@@ -199,8 +199,8 @@ struct VListRow_Previews: PreviewProvider {
                                     )
                                 })
                             })
-                                .vListStyle()
-                                .frame(height: 120)
+                            .vListStyle()
+                            .frame(height: 120)
                         }
                     )
                     
@@ -217,8 +217,8 @@ struct VListRow_Previews: PreviewProvider {
                                     )
                                 })
                             })
-                                .vListStyle()
-                                .frame(height: 120)
+                            .vListStyle()
+                            .frame(height: 120)
                         }
                     )
                     
@@ -235,8 +235,8 @@ struct VListRow_Previews: PreviewProvider {
                                     )
                                 })
                             })
-                                .vListStyle()
-                                .frame(height: 120)
+                            .vListStyle()
+                            .frame(height: 120)
                         }
                     )
                     
@@ -253,8 +253,8 @@ struct VListRow_Previews: PreviewProvider {
                                     )
                                 })
                             })
-                                .vListStyle()
-                                .frame(height: 120)
+                            .vListStyle()
+                            .frame(height: 120)
                         }
                     )
                 }

@@ -28,11 +28,11 @@ public struct VCheckBoxUIModel {
     
     /// Model that contains misc properties.
     public var misc: Misc = .init()
-
+    
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -57,7 +57,7 @@ public struct VCheckBoxUIModel {
         
         /// Title text line type. Set to `multiline` with `leading` alignment and `1...2` lines.
         public var titleTextLineType: TextLineType = GlobalUIModel.StatePickers.titleTextLineType
-
+        
         /// Title minimum scale factor. Set to `1`.
         public var titleMinimumScaleFactor: CGFloat = 1
         
@@ -65,7 +65,7 @@ public struct VCheckBoxUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -102,7 +102,7 @@ public struct VCheckBoxUIModel {
             pressedIndeterminate: ColorBook.white,
             disabled: .clear
         )
-
+        
         /// Title colors.
         public var title: StateColors = .init(
             off: GlobalUIModel.StatePickers.titleColor,
@@ -113,7 +113,7 @@ public struct VCheckBoxUIModel {
             pressedIndeterminate: GlobalUIModel.StatePickers.titleColor,
             disabled: GlobalUIModel.StatePickers.titleColorDisabled
         )
-
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
@@ -121,12 +121,12 @@ public struct VCheckBoxUIModel {
         // MARK: State Colors
         /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_OffOnIndeterminatePressedDisabled<Color>
-
+        
         // MARK: State Opacities
         /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_OffOnIndeterminatePressedDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -140,7 +140,7 @@ public struct VCheckBoxUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -157,7 +157,7 @@ public struct VCheckBoxUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public struct Misc {

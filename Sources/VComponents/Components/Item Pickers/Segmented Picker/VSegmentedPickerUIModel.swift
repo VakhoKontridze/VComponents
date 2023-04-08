@@ -29,7 +29,7 @@ public struct VSegmentedPickerUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -132,7 +132,7 @@ public struct VSegmentedPickerUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -228,7 +228,7 @@ public struct VSegmentedPickerUIModel {
         /// Model that contains opacities for component states.
         public typealias RowStateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -260,7 +260,7 @@ public struct VSegmentedPickerUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {

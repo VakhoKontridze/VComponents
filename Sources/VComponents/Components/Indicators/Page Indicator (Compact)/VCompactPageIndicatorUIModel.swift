@@ -90,7 +90,7 @@ public struct VCompactPageIndicatorUIModel {
         var sideDots: Int { (visibleDots - centerDots) / 2 }
         
         var middleDots: Int { visibleDots / 2 }
-
+        
         /// Scale of dot at the edge. Set to `0.5`.
         ///
         /// If there are `7` visible dots, and `3` center dots, scales would sit at `[0.5, 0.75, 1, 1, 1, 0.75, 0.5]`.
@@ -129,7 +129,7 @@ public struct VCompactPageIndicatorUIModel {
     // MARK: Colors
     /// Model that contains color properties.
     public typealias Colors = VPageIndicatorUIModel.Colors
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public typealias Animations = VPageIndicatorUIModel.Animations

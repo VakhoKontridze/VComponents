@@ -32,7 +32,7 @@ public struct VToggleUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -85,7 +85,7 @@ public struct VToggleUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -118,12 +118,12 @@ public struct VToggleUIModel {
         // MARK: State Colors
         /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_OffOnPressedDisabled<Color>
-
+        
         // MARK: State Opacities
         /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_OffOnPressedDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -137,7 +137,7 @@ public struct VToggleUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -154,7 +154,7 @@ public struct VToggleUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public struct Misc {

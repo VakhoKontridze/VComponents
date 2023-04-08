@@ -16,10 +16,10 @@ import VCore
 public protocol VMenuSectionProtocol: VMenuSectionConvertible {
     /// Section title.
     var title: String? { get }
-
+    
     /// Section body type.
     typealias Body = AnyView
-
+    
     /// Creates a `View` that represents the body of a section.
     func makeBody() -> Body
 }
@@ -39,7 +39,7 @@ extension VMenuSectionProtocol {
 public struct VMenuGroupSection: VMenuSectionProtocol {
     // MARK: Properties
     private let rows: () -> [any VMenuRowProtocol]
-
+    
     // MARK: Initializers
     /// Initializes `VMenuGroupSection` with rows.
     public init(
@@ -49,10 +49,10 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
         self.title = title
         self.rows = rows
     }
-
+    
     // MARK: Body
     public var title: String?
-
+    
     public func makeBody() -> AnyView {
         .init(
             ForEach(
@@ -77,9 +77,9 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
     // MARK: Properties
     private let data: Data
     private let content: (Data.Element) -> VMenuRowProtocol
-
+    
     @Binding private var selectedIndex: Int
-
+    
     // MARK: Initializers
     /// Initializes `VMenuPickerSection` with selected index, data, and content.
     public init(
@@ -93,7 +93,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = data
         self.content = content
     }
-
+    
     /// Initializes `VMenuPickerSection` with selected index and row titles.
     public init(
         title: String? = nil,
@@ -107,7 +107,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = rowTitles
         self.content = { VMenuTitleRow(action: {}, title: $0) }
     }
-
+    
     /// Initializes `VMenuPickerSection` with `HashableEnumeration` and content.
     public init<T>(
         title: String? = nil,
@@ -126,7 +126,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = Array(T.allCases)
         self.content = content
     }
-
+    
     /// Initializes `VMenuPickerSection` with `StringRepresentableHashableEnumeration`.
     public init<T>(
         title: String? = nil,
@@ -144,10 +144,10 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
         self.data = Array(T.allCases)
         self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
     }
-
+    
     // MARK: Body
     public var title: String?
-
+    
     public func makeBody() -> AnyView {
         .init(
             Picker(
@@ -164,7 +164,7 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
                 },
                 label: EmptyView.init
             )
-                .pickerStyle(.inline)
+            .pickerStyle(.inline)
         )
     }
 }

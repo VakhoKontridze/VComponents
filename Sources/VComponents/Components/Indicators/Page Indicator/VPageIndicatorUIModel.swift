@@ -34,7 +34,7 @@ public struct VPageIndicatorUIModel {
         self.colors = colors
         self.animations = animations
     }
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -93,7 +93,7 @@ public struct VPageIndicatorUIModel {
             self.spacing = spacing
         }
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -114,7 +114,7 @@ public struct VPageIndicatorUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {

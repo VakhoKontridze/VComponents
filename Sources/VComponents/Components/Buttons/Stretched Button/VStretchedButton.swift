@@ -20,7 +20,7 @@ import VCore
 ///             action: { print("Clicked") },
 ///             title: "Lorem Ipsum"
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// On `macOS` and `watchOS`, you would typically provide an explicit width.
@@ -109,9 +109,9 @@ public struct VStretchedButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-            .frame(maxWidth: .infinity)
-            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-            .padding(uiModel.layout.labelMargins)
+        .frame(maxWidth: .infinity)
+        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
+        .padding(uiModel.layout.labelMargins)
     }
     
     private func titleLabelComponent(
@@ -179,8 +179,8 @@ struct VStretchedButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .colorScheme(colorScheme)
-            .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
     }
     
     // Data
@@ -200,18 +200,18 @@ struct VStretchedButton_Previews: PreviewProvider {
                     action: { print("Clicked") },
                     title: title
                 )
-                    .modifier({
+                .modifier({
 #if os(iOS)
-                        $0
+                    $0
 #elseif os(macOS)
-                        $0.frame(width: 250)
+                    $0.frame(width: 250)
 #elseif os(watchOS)
-                        $0.frame(width: 100)
+                    $0.frame(width: 100)
 #else
-                        fatalError() // Not supported
+                    fatalError() // Not supported
 #endif
-                    })
-                    .padding()
+                })
+                .padding()
             })
         }
     }
@@ -229,17 +229,17 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                                .modifier({
+                            .modifier({
 #if os(iOS)
-                                    $0
+                                $0
 #elseif os(macOS)
-                                    $0.frame(width: 250)
+                                $0.frame(width: 250)
 #elseif os(watchOS)
-                                    $0.frame(width: 100)
+                                $0.frame(width: 100)
 #else
-                                    fatalError() // Not supported
+                                fatalError() // Not supported
 #endif
-                                })
+                            })
                         }
                     )
                     
@@ -257,17 +257,17 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                                .modifier({
+                            .modifier({
 #if os(iOS)
-                                    $0
+                                $0
 #elseif os(macOS)
-                                    $0.frame(width: 250)
+                                $0.frame(width: 250)
 #elseif os(watchOS)
-                                    $0.frame(width: 100)
+                                $0.frame(width: 100)
 #else
-                                    fatalError() // Not supported
+                                fatalError() // Not supported
 #endif
-                                })
+                            })
                         }
                     )
                     
@@ -279,18 +279,18 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                                .modifier({
+                            .modifier({
 #if os(iOS)
-                                    $0
+                                $0
 #elseif os(macOS)
-                                    $0.frame(width: 250)
+                                $0.frame(width: 250)
 #elseif os(watchOS)
-                                    $0.frame(width: 100)
+                                $0.frame(width: 100)
 #else
-                                    fatalError() // Not supported
+                                fatalError() // Not supported
 #endif
-                                })
-                                .disabled(true)
+                            })
+                            .disabled(true)
                         }
                     )
                 }

@@ -34,7 +34,7 @@ public struct VBottomSheetUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -94,7 +94,7 @@ public struct VBottomSheetUIModel {
         ///
         /// To hide divider, set to `0`, and remove header.
         public var dividerHeight: CGFloat = GlobalUIModel.Common.dividerHeight
-    
+        
         /// Divider margins. Set to `zero`.
         public var dividerMargins: Margins = .zero
         
@@ -236,7 +236,7 @@ public struct VBottomSheetUIModel {
         /// Model that contains `top` and `bottom` margins.
         public typealias VerticalMargins = EdgeInsets_TopBottom
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -287,7 +287,7 @@ public struct VBottomSheetUIModel {
         /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledPressedDisabled<Color>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -299,7 +299,7 @@ public struct VBottomSheetUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -331,7 +331,7 @@ public struct VBottomSheetUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public struct Misc {

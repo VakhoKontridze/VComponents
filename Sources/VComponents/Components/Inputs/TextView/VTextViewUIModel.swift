@@ -30,7 +30,7 @@ public struct VTextViewUIModel {
     
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -40,18 +40,18 @@ public struct VTextViewUIModel {
         
         /// Textfield corner radius. Set to `12`.
         public var cornerRadius: CGFloat = GlobalUIModel.Inputs.cornerRadius
-
+        
         /// Text line type. Set to `multiline` with `leading` alignment and no limit on lines.
         public var textLineType: TextLineType = .multiLine(alignment: .leading, lineLimit: nil)
-
+        
         /// Border width. Set to `0`.
         ///
         /// To hide border, set to `0`.
         public var borderWidth: CGFloat = 0
-
+        
         /// Content margin. Set to `15`s.
         public var contentMargin: Margins = .init(GlobalUIModel.Common.containerContentMargin)
-
+        
         /// Header text line type. Set to `singleLine`.
         public var headerTextLineType: TextLineType = GlobalUIModel.Common.headerTextLineType
         
@@ -72,7 +72,7 @@ public struct VTextViewUIModel {
         /// Model that contains `leading`, `trailing`, `top` and `bottom` and margins.
         public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -83,10 +83,10 @@ public struct VTextViewUIModel {
             focused: GlobalUIModel.Inputs.layerGrayColorFocused,
             disabled: ColorBook.layerGrayDisabled
         )
-
+        
         /// Border colors.
         public var border: StateColors = .clearColors
-
+        
         /// Text colors.
         public var text: StateColors = .init(
             enabled: ColorBook.primary,
@@ -96,14 +96,14 @@ public struct VTextViewUIModel {
         
         /// Placeholder colors.
         public var placeholder: StateColors = .init(ColorBook.primaryPressedDisabled)
-
+        
         /// Header colors.
         public var header: StateColors = .init(
             enabled: ColorBook.secondary,
             focused: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
-
+        
         /// Footer colors.
         public var footer: StateColors = .init(
             enabled: ColorBook.secondary,
@@ -119,11 +119,11 @@ public struct VTextViewUIModel {
         /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public typealias Fonts = VTextFieldUIModel.Fonts
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public typealias Misc = VTextFieldUIModel.Misc
@@ -144,7 +144,7 @@ extension VTextViewUIModel {
         
         return uiModel
     }
-
+    
     /// `VTextViewUIModel` that applies yellow color scheme.
     public static var warning: Self {
         var uiModel: Self = .init()
@@ -155,7 +155,7 @@ extension VTextViewUIModel {
         
         return uiModel
     }
-
+    
     /// `VTextViewUIModel` that applies error color scheme.
     public static var error: Self {
         var uiModel: Self = .init()
@@ -180,7 +180,7 @@ extension VTextViewUIModel.Colors {
             headerFooter: GlobalUIModel.Inputs.headerFooterGreenColor
         )
     }
-
+    
     /// `VTextViewUIModel.Colors` that applies yellow color scheme.
     public static var warning: Self {
         .createHighlightedColors(
@@ -188,7 +188,7 @@ extension VTextViewUIModel.Colors {
             headerFooter: GlobalUIModel.Inputs.headerFooterYellowColor
         )
     }
-
+    
     /// `VTextViewUIModel.Colors` that applies error color scheme.
     public static var error: Self {
         .createHighlightedColors(

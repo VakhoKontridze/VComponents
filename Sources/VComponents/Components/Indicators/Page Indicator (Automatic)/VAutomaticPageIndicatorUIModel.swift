@@ -79,7 +79,7 @@ public struct VAutomaticPageIndicatorUIModel {
         
         /// Limit after which `standard` configuration switches to `compact` one. Set to `10`.
         public var standardDotLimit: Int = 10
-
+        
         /// Unselected dot scale when switching to `standard` configuration. Set to `0.85`.
         public var unselectedDotScaleForStandardConfiguration: CGFloat = GlobalUIModel.Indicators.pageIndicatorStandardUnselectedDotScale
         
@@ -96,7 +96,7 @@ public struct VAutomaticPageIndicatorUIModel {
     // MARK: Colors
     /// Model that contains color properties.
     public typealias Colors = VPageIndicatorUIModel.Colors
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public typealias Animations = VPageIndicatorUIModel.Animations

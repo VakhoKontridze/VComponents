@@ -49,7 +49,7 @@ extension EmptyView: VConfirmationDialogButtonConvertible {
     public static func buildEither(first component: Component) -> Result {
         component.toButtons()
     }
-
+    
     public static func buildEither(second component: Component) -> Result {
         component.toButtons()
     }
@@ -61,7 +61,7 @@ extension EmptyView: VConfirmationDialogButtonConvertible {
     public static func buildLimitedAvailability(_ component: Component) -> Result {
         component.toButtons()
     }
-
+    
     public static func buildFinalResult(_ component: Component) -> Result {
         component.toButtons()
     }
@@ -72,7 +72,7 @@ extension EmptyView: VConfirmationDialogButtonConvertible {
     // If there are no buttons, custom `VConfirmationDialogOKButton` will be added.
     static func process(_ buttons: [any VConfirmationDialogButtonProtocol]) -> [any VConfirmationDialogButtonProtocol] {
         var result: [any VConfirmationDialogButtonProtocol] = []
-
+        
         for button in buttons {
             if button is VConfirmationDialogCancelButton { result.removeAll(where: { $0 is VConfirmationDialogCancelButton }) }
             result.append(button)
@@ -80,14 +80,14 @@ extension EmptyView: VConfirmationDialogButtonConvertible {
         if let cancelButtonIndex: Int = result.firstIndex(where: { $0 is VConfirmationDialogCancelButton }) {
             result.append(result.remove(at: cancelButtonIndex))
         }
-
+        
         if result.isEmpty {
             result.append(VConfirmationDialogCancelButton(
                 action: nil,
                 title: VComponentsLocalizationManager.shared.localizationProvider.vConfirmationDialogOKButtonTitle
             ))
         }
-
+        
         return result
     }
 }

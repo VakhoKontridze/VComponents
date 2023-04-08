@@ -64,7 +64,7 @@ public struct VSlider: View {
         )
         self.action = action
     }
-
+    
     // MARK: Body
     public var body: some View {
         ZStack(alignment: uiModel.layout.direction.alignment, content: {
@@ -73,32 +73,32 @@ public struct VSlider: View {
                 progress
                 border
             })
-                .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
-                .frame(
-                    width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
-                    height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
-                )
+            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
+            .frame(
+                width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
+                height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
+            )
             
             thumb
         })
-            .onSizeChange(perform: { sliderSize = $0 })
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged(dragChanged)
-                    .onEnded(dragEnded)
-            )
-            .padding(
-                uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
-                uiModel.layout.thumbDimension / 2
-            )
-            .animation(uiModel.animations.progress, value: value)
+        .onSizeChange(perform: { sliderSize = $0 })
+        .gesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged(dragChanged)
+                .onEnded(dragEnded)
+        )
+        .padding(
+            uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
+            uiModel.layout.thumbDimension / 2
+        )
+        .animation(uiModel.animations.progress, value: value)
     }
-
+    
     private var track: some View {
         Rectangle()
             .foregroundColor(uiModel.colors.track.value(for: internalState))
     }
-
+    
     private var progress: some View {
         Rectangle()
             .frame(
@@ -131,28 +131,28 @@ public struct VSlider: View {
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)
                         .strokeBorder(uiModel.colors.thumbBorder.value(for: internalState), lineWidth: uiModel.layout.thumbBorderWidth)
                 })
-                    .frame(dimension: uiModel.layout.thumbDimension)
-                    .offset(
-                        x: uiModel.layout.direction.isHorizontal ? thumbOffset.withOppositeSign(if: uiModel.layout.direction.isReversed) : 0,
-                        y: uiModel.layout.direction.isHorizontal ? 0 : thumbOffset.withOppositeSign(if: uiModel.layout.direction.isReversed)
-                    )
-            })
-                .frame( // Must be put into group, as content already has frame
-                    maxWidth: uiModel.layout.direction.isHorizontal ? .infinity : nil,
-                    maxHeight: uiModel.layout.direction.isHorizontal ? nil : .infinity,
-                    alignment: uiModel.layout.direction.alignment
+                .frame(dimension: uiModel.layout.thumbDimension)
+                .offset(
+                    x: uiModel.layout.direction.isHorizontal ? thumbOffset.withOppositeSign(if: uiModel.layout.direction.isReversed) : 0,
+                    y: uiModel.layout.direction.isHorizontal ? 0 : thumbOffset.withOppositeSign(if: uiModel.layout.direction.isReversed)
                 )
-                .allowsHitTesting(false)
+            })
+            .frame( // Must be put into group, as content already has frame
+                maxWidth: uiModel.layout.direction.isHorizontal ? .infinity : nil,
+                maxHeight: uiModel.layout.direction.isHorizontal ? nil : .infinity,
+                alignment: uiModel.layout.direction.alignment
+            )
+            .allowsHitTesting(false)
         }
     }
-
+    
     // MARK: Drag
     private func dragChanged(dragValue: DragGesture.Value) {
         let rawValue: Double = {
             let value: Double = dragValue.location.coordinate(isX: uiModel.layout.direction.isHorizontal)
             let range: Double = max - min
             let width: Double = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
-
+            
             return ((value / width) * range + min)
                 .invertedFromMax(
                     max,
@@ -170,21 +170,21 @@ public struct VSlider: View {
     private func dragEnded(dragValue: DragGesture.Value) {
         action?(false)
     }
-
+    
     // MARK: Actions
     private func setValue(to value: Double) {
         self.value = value
     }
-
+    
     // MARK: Progress Width
     private var progressWidth: CGFloat {
         let value: CGFloat = value - min
         let range: CGFloat = max - min
         let width: CGFloat = sliderSize.dimension(isWidth: uiModel.layout.direction.isHorizontal)
-
+        
         return (value / range) * width
     }
-
+    
     // MARK: Thumb Offset
     private var thumbOffset: CGFloat {
         progressWidth - uiModel.layout.thumbDimension/2
@@ -198,7 +198,7 @@ struct VSlider_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
@@ -206,13 +206,13 @@ struct VSlider_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var value: Double { 0.5 }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var value: Double = VSlider_Previews.value
@@ -246,7 +246,7 @@ struct VSlider_Previews: PreviewProvider {
                 )
                 
                 PreviewSectionHeader("Native")
-
+                
                 PreviewRow(
                     axis: .vertical,
                     title: "Enabled",
@@ -254,7 +254,7 @@ struct VSlider_Previews: PreviewProvider {
                         Slider(value: .constant(value))
                     }
                 )
-
+                
                 PreviewRow(
                     axis: .vertical,
                     title: "Disabled",
@@ -296,7 +296,7 @@ struct VSlider_Previews: PreviewProvider {
                                 }(),
                                 value: $value
                             )
-                                .frame(width: dimension)
+                            .frame(width: dimension)
                         }
                     )
                     
@@ -312,7 +312,7 @@ struct VSlider_Previews: PreviewProvider {
                                 }(),
                                 value: $value
                             )
-                                .frame(width: dimension)
+                            .frame(width: dimension)
                         }
                     )
                     
@@ -329,7 +329,7 @@ struct VSlider_Previews: PreviewProvider {
                                     }(),
                                     value: $value
                                 )
-                                    .frame(height: dimension)
+                                .frame(height: dimension)
                             }
                         )
                         
@@ -345,7 +345,7 @@ struct VSlider_Previews: PreviewProvider {
                                     }(),
                                     value: $value
                                 )
-                                    .frame(height: dimension)
+                                .frame(height: dimension)
                             }
                         )
                     })

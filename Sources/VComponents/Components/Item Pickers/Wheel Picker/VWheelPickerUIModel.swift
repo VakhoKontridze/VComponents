@@ -27,7 +27,7 @@ public struct VWheelPickerUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -54,7 +54,7 @@ public struct VWheelPickerUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -92,7 +92,7 @@ public struct VWheelPickerUIModel {
         /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_EnabledDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {

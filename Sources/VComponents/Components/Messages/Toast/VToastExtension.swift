@@ -29,11 +29,11 @@ extension View {
     ///             action: { isPresented = true },
     ///             title: "Present"
     ///         )
-    ///             .vToast(
-    ///                 id: "some_toast",
-    ///                 isPresented: $isPresented,
-    ///                 text: "Lorem ipsum dolor sit amet"
-    ///             )
+    ///         .vToast(
+    ///             id: "some_toast",
+    ///             isPresented: $isPresented,
+    ///             text: "Lorem ipsum dolor sit amet"
+    ///         )
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
@@ -88,11 +88,11 @@ extension View {
     ///             action: { toastItem = ToastItem() },
     ///             title: "Present"
     ///         )
-    ///             .vToast(
-    ///                 id: "some_toast",
-    ///                 item: $toastItem,
-    ///                 text: { item in "Lorem ipsum dolor sit amet" }
-    ///             )
+    ///         .vToast(
+    ///             id: "some_toast",
+    ///             item: $toastItem,
+    ///             text: { item in "Lorem ipsum dolor sit amet" }
+    ///         )
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
@@ -108,7 +108,7 @@ extension View {
         where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,
@@ -163,12 +163,12 @@ extension View {
     ///             },
     ///             title: "Present"
     ///         )
-    ///             .vToast(
-    ///                 id: "some_toast",
-    ///                 isPresented: $isPresented,
-    ///                 presenting: toastData,
-    ///                 text: { data in "Lorem ipsum dolor sit amet" }
-    ///             )
+    ///         .vToast(
+    ///             id: "some_toast",
+    ///             isPresented: $isPresented,
+    ///             presenting: toastData,
+    ///             text: { data in "Lorem ipsum dolor sit amet" }
+    ///         )
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
@@ -183,7 +183,7 @@ extension View {
         text: @escaping (T) -> String
     ) -> some View {
         data.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,
@@ -237,12 +237,12 @@ extension View {
     ///             },
     ///             title: "Present"
     ///         )
-    ///             .vToast(
-    ///                 id: "some_toast",
-    ///                 isPresented: $isPresented,
-    ///                 error: toastError,
-    ///                 text: { error in "Lorem ipsum dolor sit amet" }
-    ///             )
+    ///         .vToast(
+    ///             id: "some_toast",
+    ///             isPresented: $isPresented,
+    ///             error: toastError,
+    ///             text: { error in "Lorem ipsum dolor sit amet" }
+    ///         )
     ///     }
     ///
     /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VToastUIModel`.
@@ -259,7 +259,7 @@ extension View {
         where E: Error
     {
         error.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,

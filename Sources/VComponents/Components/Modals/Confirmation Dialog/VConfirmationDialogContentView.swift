@@ -33,21 +33,21 @@ struct VConfirmationDialogContentView_Previews: PreviewProvider {
     private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
         })
-            .previewInterfaceOrientation(interfaceOrientation)
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .previewInterfaceOrientation(interfaceOrientation)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // MARK: Data
     private static var title: String { "Lorem Ipsum Dolor Sit Amet".pseudoRTL(languageDirection) }
     private static var message: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {

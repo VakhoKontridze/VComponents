@@ -27,7 +27,7 @@ public struct VStretchedButtonUIModel {
     
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -84,7 +84,7 @@ public struct VStretchedButtonUIModel {
         /// Model that contains `horizontal` and `vertical` margins.
         public typealias LabelMargins = EdgeInsets_HorizontalVertical
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -126,7 +126,7 @@ public struct VStretchedButtonUIModel {
         /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -154,7 +154,7 @@ public struct VStretchedButtonUIModel {
         
         /// Ratio to which label scales down on press. Set to `1`.
         public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
-
+        
 #if os(iOS)
         /// Haptic feedback style. Set to `medium`.
         public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .medium

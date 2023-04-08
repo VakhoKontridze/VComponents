@@ -33,7 +33,7 @@ import VCore
 ///                     })
 ///                 }
 ///             )
-///              .padding()
+///             .padding()
 ///         })
 ///     }
 ///
@@ -56,7 +56,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     private let headerLabel: VDisclosureGroupHeaderLabel<HeaderLabel>
     
     private let content: () -> Content
-
+    
     // MARK: Initializers - State
     /// Initializes `VDisclosureGroup` with header title and content.
     public init(
@@ -114,7 +114,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
         self.headerLabel = .label(label: headerLabel)
         self.content = content
     }
-
+    
     // MARK: Body
     public var body: some View {
         VSheet(uiModel: uiModel.sheetSubUIModel, content: {
@@ -133,8 +133,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 }
             )
         })
-            .animation(uiModel.animations.expandCollapse, value: isEnabled)
-            .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
+        .animation(uiModel.animations.expandCollapse, value: isEnabled)
+        .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
     }
     
     private var header: some View {
@@ -152,8 +152,8 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                     label(internalState)
                 }
             })
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .allowsHitTesting(false)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .allowsHitTesting(false)
             
             Spacer()
             
@@ -162,9 +162,9 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 action: expandCollapse,
                 icon: ImageBook.chevronUp
             )
-                .rotationEffect(Angle(degrees: internalState.chevronButtonDirection.angle))
+            .rotationEffect(Angle(degrees: internalState.chevronButtonDirection.angle))
         })
-            .padding(uiModel.layout.headerMargins)
+        .padding(uiModel.layout.headerMargins)
     }
     
     @ViewBuilder private var divider: some View {
@@ -181,7 +181,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
             .padding(uiModel.layout.contentMargins)
             .frame(maxWidth: .infinity)
     }
-
+    
     // MARK: Actions
     private func expandCollapse() {
         withAnimation(uiModel.animations.expandCollapse, { state.setNextState() })
@@ -232,13 +232,13 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
             InsettedContentPreview().previewDisplayName("Insetted Content")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var headerTitle: String { "Lorem Ipsum".pseudoRTL(languageDirection) }
-
+    
     private static func content() -> some View {
         ColorBook.accentBlue
             .frame(height: 100)
@@ -255,7 +255,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                     headerTitle: headerTitle,
                     content: content
                 )
-                    .padding()
+                .padding()
             })
         }
     }
@@ -320,7 +320,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
                             headerTitle: headerTitle,
                             content: content
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
             })

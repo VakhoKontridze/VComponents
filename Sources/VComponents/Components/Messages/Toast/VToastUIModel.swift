@@ -31,7 +31,7 @@ public struct VToastUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -106,7 +106,7 @@ public struct VToastUIModel {
             
             /// Rounded.
             case rounded(cornerRadius: CGFloat)
-
+            
             // MARK: Initializers
             /// Default value. Set to `rounded`.
             public static var `default`: Self { .capsule }
@@ -127,7 +127,7 @@ public struct VToastUIModel {
                 switch self {
                 case .singleLine:
                     return .singleLine
-                
+                    
                 case .multiLine(let alignment, let lineLimit):
                     return .multiLine(alignment: alignment, lineLimit: lineLimit)
                 }
@@ -157,7 +157,7 @@ public struct VToastUIModel {
             public static var `default`: Self { .bottom }
         }
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -172,19 +172,19 @@ public struct VToastUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
         /// Text font. Set to `headline` (`17`).
         public var text: Font = .headline
-            
+        
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -224,10 +224,10 @@ extension VToastUIModel {
 #if os(iOS)
         uiModel.animations.haptic = .success
 #endif
-
+        
         return uiModel
     }
-
+    
     /// `VToastUIModel` that applies yellow color scheme.
     public static var warning: Self {
         var uiModel: Self = .init()
@@ -240,7 +240,7 @@ extension VToastUIModel {
         
         return uiModel
     }
-
+    
     /// `VToastUIModel` that applies error color scheme.
     public static var error: Self {
         var uiModel: Self = .init()

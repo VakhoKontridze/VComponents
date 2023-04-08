@@ -112,7 +112,7 @@ public struct VCheckBox<Label>: View where Label: View {
         self._state = Binding(isOn: isOn)
         self.label = .label(label: label)
     }
-
+    
     // MARK: Body
     public var body: some View {
         Group(content: {
@@ -125,7 +125,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     checkBox
                     
                     spacer
-
+                    
                     SwiftUIGestureBaseButton(
                         onStateChange: stateChangeHandler,
                         label: {
@@ -138,7 +138,7 @@ public struct VCheckBox<Label>: View where Label: View {
                             )
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
                 
             case .label(let label):
@@ -153,11 +153,11 @@ public struct VCheckBox<Label>: View where Label: View {
                             label(internalState)
                         }
                     )
-                        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+                    .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
                 })
             }
         })
-            .animation(uiModel.animations.stateChange, value: internalState)
+        .animation(uiModel.animations.stateChange, value: internalState)
     }
     
     private var checkBox: some View {
@@ -170,7 +170,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                         .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
-
+                    
                     if let checkMarkIcon {
                         checkMarkIcon
                             .resizable()
@@ -178,8 +178,8 @@ public struct VCheckBox<Label>: View where Label: View {
                             .foregroundColor(uiModel.colors.checkmark.value(for: internalState))
                     }
                 })
-                    .frame(dimension: uiModel.layout.dimension)
-                    .padding(uiModel.layout.hitBox)
+                .frame(dimension: uiModel.layout.dimension)
+                .padding(uiModel.layout.hitBox)
             }
         )
     }
@@ -194,9 +194,9 @@ public struct VCheckBox<Label>: View where Label: View {
                     .foregroundColor(.clear)
             }
         )
-            .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
+        .disabled(!uiModel.misc.labelIsClickable) // `disabled(:_)` because it's a `SwiftUIGestureBaseButton`
     }
-
+    
     // MARK: Actions
     private func stateChangeHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
@@ -213,7 +213,7 @@ public struct VCheckBox<Label>: View where Label: View {
         HapticManager.shared.playImpact(uiModel.animations.haptic)
 #endif
     }
-
+    
     // MARK: Icon
     private var checkMarkIcon: Image? {
         switch internalState {
@@ -232,20 +232,20 @@ struct VCheckBox_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var title: String { "Lorem ipsum".pseudoRTL(languageDirection) }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var state: VCheckBoxState = .on
@@ -361,7 +361,7 @@ struct VCheckBox_Previews: PreviewProvider {
                             state: .constant(.off),
                             title: title
                         )
-                            .disabled(true)
+                        .disabled(true)
                     }
                 )
                 
@@ -377,9 +377,9 @@ struct VCheckBox_Previews: PreviewProvider {
                                 "",
                                 isOn: .constant(false)
                             )
-                                .labelsHidden()
-                                .toggleStyle(.checkbox)
-                                .padding(.trailing, 95)
+                            .labelsHidden()
+                            .toggleStyle(.checkbox)
+                            .padding(.trailing, 95)
                         }
                     )
                     
@@ -391,9 +391,9 @@ struct VCheckBox_Previews: PreviewProvider {
                                 "",
                                 isOn: .constant(true)
                             )
-                                .labelsHidden()
-                                .toggleStyle(.checkbox)
-                                .padding(.trailing, 95)
+                            .labelsHidden()
+                            .toggleStyle(.checkbox)
+                            .padding(.trailing, 95)
                         }
                     )
                     
@@ -405,10 +405,10 @@ struct VCheckBox_Previews: PreviewProvider {
                                 "",
                                 isOn: .constant(false)
                             )
-                                .labelsHidden()
-                                .toggleStyle(.checkbox)
-                                .disabled(true)
-                                .padding(.trailing, 95)
+                            .labelsHidden()
+                            .toggleStyle(.checkbox)
+                            .disabled(true)
+                            .padding(.trailing, 95)
                         }
                     )
                 })

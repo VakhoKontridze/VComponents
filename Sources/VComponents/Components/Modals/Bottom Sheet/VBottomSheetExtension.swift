@@ -29,23 +29,23 @@ extension View {
     ///             action: { isPresented = true },
     ///             title: "Present"
     ///         )
-    ///             .vBottomSheet(
-    ///                 id: "some_bottom_sheet",
-    ///                 uiModel: .scrollableContent,
-    ///                 isPresented: $isPresented,
-    ///                 content: {
-    ///                     List(content: {
-    ///                         ForEach(0..<20, content: { num in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                                 Text(String(num))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
+    ///         .vBottomSheet(
+    ///             id: "some_bottom_sheet",
+    ///             uiModel: .scrollableContent,
+    ///             isPresented: $isPresented,
+    ///             content: {
+    ///                 List(content: {
+    ///                     ForEach(0..<20, content: { num in
+    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
     ///                         })
     ///                     })
-    ///                         .vListStyle()
-    ///                         .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-    ///                 }
-    ///             )
+    ///                 })
+    ///                 .vListStyle()
+    ///                 .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
+    ///             }
+    ///         )
     ///     }
     ///
     public func vBottomSheet(
@@ -97,23 +97,23 @@ extension View {
     ///             action: { bottomSheetItem = BottomSheetItem() },
     ///             title: "Present"
     ///         )
-    ///             .vBottomSheet(
-    ///                 id: "some_bottom_sheet",
-    ///                 uiModel: .scrollableContent,
-    ///                 item: $bottomSheetItem,
-    ///                 content: { item in
-    ///                     List(content: {
-    ///                         ForEach(0..<20, content: { num in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                                 Text(String(num))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
+    ///         .vBottomSheet(
+    ///             id: "some_bottom_sheet",
+    ///             uiModel: .scrollableContent,
+    ///             item: $bottomSheetItem,
+    ///             content: { item in
+    ///                 List(content: {
+    ///                     ForEach(0..<20, content: { num in
+    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
     ///                         })
     ///                     })
-    ///                         .vListStyle()
-    ///                         .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-    ///                 }
-    ///             )
+    ///                 })
+    ///                 .vListStyle()
+    ///                 .vBottomSheetHeaderTitle("Lorem Ipsum Dolor Sit Amet")
+    ///             }
+    ///         )
     ///     }
     ///
     public func vBottomSheet<Item>(
@@ -127,7 +127,7 @@ extension View {
         where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,

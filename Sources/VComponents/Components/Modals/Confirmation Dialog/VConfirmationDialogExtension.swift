@@ -25,17 +25,17 @@ extension View {
     ///             action: { isPresented = true },
     ///             title: "Present"
     ///         )
-    ///             .vConfirmationDialog(
-    ///                 isPresented: $isPresented,
-    ///                 title: "Lorem Ipsum Dolor Sit Amet",
-    ///                 message: "Lorem ipsum dolor sit amet",
-    ///                 actions: {
-    ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
-    ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
-    ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
-    ///                     VConfirmationDialogCancelButton(action: nil)
-    ///                 }
-    ///             )
+    ///         .vConfirmationDialog(
+    ///             isPresented: $isPresented,
+    ///             title: "Lorem Ipsum Dolor Sit Amet",
+    ///             message: "Lorem ipsum dolor sit amet",
+    ///             actions: {
+    ///                 VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
+    ///                 VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
+    ///                 VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
+    ///                 VConfirmationDialogCancelButton(action: nil)
+    ///             }
+    ///         )
     ///     }
     ///
     public func vConfirmationDialog(
@@ -81,17 +81,17 @@ extension View {
     ///             action: { confirmationDialogItem = ConfirmationDialogItem() },
     ///             title: "Present"
     ///         )
-    ///             .vConfirmationDialog(
-    ///                 item: $confirmationDialogItem,
-    ///                 title: { item in "Lorem Ipsum" },
-    ///                 message: { item in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { item in
-    ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
-    ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
-    ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
-    ///                     VConfirmationDialogCancelButton(action: nil)
-    ///                 }
-    ///             )
+    ///         .vConfirmationDialog(
+    ///             item: $confirmationDialogItem,
+    ///             title: { item in "Lorem Ipsum" },
+    ///             message: { item in "Lorem ipsum dolor sit amet" },
+    ///             actions: { item in
+    ///                 VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
+    ///                 VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
+    ///                 VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
+    ///                 VConfirmationDialogCancelButton(action: nil)
+    ///             }
+    ///         )
     ///     }
     ///
     public func vConfirmationDialog<Item>(
@@ -155,18 +155,18 @@ extension View {
     ///             },
     ///             title: "Present"
     ///         )
-    ///             .vConfirmationDialog(
-    ///                 isPresented: $isPresented,
-    ///                 presenting: confirmationDialogData,
-    ///                 title: { data in "Lorem Ipsum" },
-    ///                 message: { data in "Lorem ipsum dolor sit amet" },
-    ///                 actions: { data in
-    ///                     VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
-    ///                     VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
-    ///                     VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
-    ///                     VConfirmationDialogCancelButton(action: nil)
-    ///                 }
-    ///             )
+    ///         .vConfirmationDialog(
+    ///             isPresented: $isPresented,
+    ///             presenting: confirmationDialogData,
+    ///             title: { data in "Lorem Ipsum" },
+    ///             message: { data in "Lorem ipsum dolor sit amet" },
+    ///             actions: { data in
+    ///                 VConfirmationDialogButton(action: { print("Confirmed A") }, title: "Option A")
+    ///                 VConfirmationDialogButton(action: { print("Confirmed B") }, title: "Option B")
+    ///                 VConfirmationDialogDestructiveButton(action: { print("Deleted") }, title: "Delete")
+    ///                 VConfirmationDialogCancelButton(action: nil)
+    ///             }
+    ///         )
     ///     }
     ///
     public func vConfirmationDialog<T>(

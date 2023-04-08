@@ -29,7 +29,7 @@ public struct VRoundedButton<Label>: View where Label: View {
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VRoundedButtonInternalState { baseButtonState }
     private let action: () -> Void
     private let label: VRoundedButtonLabel<Label>
-
+    
     // MARK: Initializers
     /// Initializes `VRoundedButton` with action and title.
     public init(
@@ -67,7 +67,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         self.action = action
         self.label = .label(label: label)
     }
-
+    
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
@@ -103,15 +103,15 @@ public struct VRoundedButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-            .padding(uiModel.layout.labelMargins)
-            .modifier({
-                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    $0.dynamicTypeSize(...(.accessibility3))
-                } else {
-                    $0
-                }
-            })
+        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
+        .padding(uiModel.layout.labelMargins)
+        .modifier({
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                $0.dynamicTypeSize(...(.accessibility3))
+            } else {
+                $0
+            }
+        })
     }
     
     private func titleLabelComponent(
@@ -143,7 +143,7 @@ public struct VRoundedButton<Label>: View where Label: View {
             .foregroundColor(uiModel.colors.icon.value(for: internalState))
             .opacity(uiModel.colors.iconOpacities.value(for: internalState))
     }
-
+    
     private func background(
         internalState: VRoundedButtonInternalState
     ) -> some View {
@@ -186,8 +186,8 @@ struct VRoundedButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -246,7 +246,7 @@ struct VRoundedButton_Previews: PreviewProvider {
                                 action: {},
                                 icon: icon
                             )
-                                .disabled(true)
+                            .disabled(true)
                         }
                     )
                 }

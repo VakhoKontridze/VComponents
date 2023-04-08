@@ -29,7 +29,7 @@ public struct VPlainButton<Label>: View where Label: View {
     private func internalState(_ baseButtonState: SwiftUIBaseButtonState) -> VPlainButtonInternalState { baseButtonState }
     private let action: () -> Void
     private let label: VPlainButtonLabel<Label>
-
+    
     // MARK: Initializers
     /// Initializes `VPlainButton` with action and title.
     public init(
@@ -81,7 +81,7 @@ public struct VPlainButton<Label>: View where Label: View {
         self.action = action
         self.label = .label(label: label)
     }
-
+    
     // MARK: Body
     public var body: some View {
         SwiftUIBaseButton(
@@ -119,8 +119,8 @@ public struct VPlainButton<Label>: View where Label: View {
                 label(internalState)
             }
         })
-            .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
-            .padding(uiModel.layout.hitBox)
+        .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
+        .padding(uiModel.layout.hitBox)
     }
     
     private func titleLabelComponent(
@@ -170,8 +170,8 @@ struct VPlainButton_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -229,7 +229,7 @@ struct VPlainButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                                .disabled(true)
+                            .disabled(true)
                         }
                     )
                     
@@ -243,8 +243,8 @@ struct VPlainButton_Previews: PreviewProvider {
                                 title,
                                 action: {}
                             )
-                                .buttonStyle(.plain)
-                                .foregroundColor(ColorBook.accentBlue)
+                            .buttonStyle(.plain)
+                            .foregroundColor(ColorBook.accentBlue)
                         }
                     )
                     
@@ -256,15 +256,15 @@ struct VPlainButton_Previews: PreviewProvider {
                                 title,
                                 action: {}
                             )
-                                .buttonStyle(.plain)
-                                .disabled(true)
-                                .modifier({
+                            .buttonStyle(.plain)
+                            .disabled(true)
+                            .modifier({
 #if os(watchOS)
-                                    $0.foregroundColor(ColorBook.controlLayerBlue)
+                                $0.foregroundColor(ColorBook.controlLayerBlue)
 #else
-                                    $0
+                                $0
 #endif
-                                })
+                            })
                         }
                     )
                 }

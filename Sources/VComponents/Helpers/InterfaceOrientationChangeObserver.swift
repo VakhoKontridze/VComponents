@@ -50,7 +50,7 @@ enum DeviceInterfaceOrientation {
         @unknown default: return nil
         }
 #else
-        fatalError() // Not supported   
+        fatalError() // Not supported
 #endif
     }
 }

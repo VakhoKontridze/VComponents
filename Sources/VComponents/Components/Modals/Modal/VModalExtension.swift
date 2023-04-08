@@ -29,22 +29,22 @@ extension View {
     ///             action: { isPresented = true },
     ///             title: "Present"
     ///         )
-    ///             .vModal(
-    ///                 id: "some_modal",
-    ///                 isPresented: $isPresented,
-    ///                 content: {
-    ///                     List(content: {
-    ///                         ForEach(0..<20, content: { num in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                                 Text(String(num))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
+    ///         .vModal(
+    ///             id: "some_modal",
+    ///             isPresented: $isPresented,
+    ///             content: {
+    ///                 List(content: {
+    ///                     ForEach(0..<20, content: { num in
+    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
     ///                         })
     ///                     })
-    ///                         .vListStyle()
-    ///                         .vModalHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-    ///                 }
-    ///             )
+    ///                 })
+    ///                 .vListStyle()
+    ///                 .vModalHeaderTitle("Lorem Ipsum Dolor Sit Amet")
+    ///             }
+    ///         )
     ///     }
     ///
     public func vModal(
@@ -96,22 +96,22 @@ extension View {
     ///             action: { modalItem = ModalItem() },
     ///             title: "Present"
     ///         )
-    ///             .vModal(
-    ///                 id: "some_modal",
-    ///                 item: $modalItem,
-    ///                 content: { item in
-    ///                     List(content: {
-    ///                         ForEach(0..<20, content: { num in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                                 Text(String(num))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
+    ///         .vModal(
+    ///             id: "some_modal",
+    ///             item: $modalItem,
+    ///             content: { item in
+    ///                 List(content: {
+    ///                     ForEach(0..<20, content: { num in
+    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
     ///                         })
     ///                     })
-    ///                         .vListStyle()
-    ///                         .vModalHeaderTitle("Lorem Ipsum Dolor Sit Amet")
-    ///                 }
-    ///             )
+    ///                 })
+    ///                 .vListStyle()
+    ///                 .vModalHeaderTitle("Lorem Ipsum Dolor Sit Amet")
+    ///             }
+    ///         )
     ///     }
     ///
     public func vModal<Item>(
@@ -125,7 +125,7 @@ extension View {
         where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,

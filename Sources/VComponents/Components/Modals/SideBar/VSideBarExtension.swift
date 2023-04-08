@@ -29,21 +29,21 @@ extension View {
     ///             action: { isPresented = true },
     ///             title: "Present"
     ///         )
-    ///             .vSideBar(
-    ///                 id: "some_side_bar",
-    ///                 isPresented: $isPresented,
-    ///                 content: {
-    ///                     List(content: {
-    ///                         ForEach(0..<20, content: { num in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                                 Text(String(num))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
+    ///         .vSideBar(
+    ///             id: "some_side_bar",
+    ///             isPresented: $isPresented,
+    ///             content: {
+    ///                 List(content: {
+    ///                     ForEach(0..<20, content: { num in
+    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
     ///                         })
     ///                     })
-    ///                         .vListStyle()
-    ///                 }
-    ///             )
+    ///                 })
+    ///                 .vListStyle()
+    ///            }
+    ///         )
     ///     }
     ///
     public func vSideBar(
@@ -95,21 +95,21 @@ extension View {
     ///             action: { sideBarItem = SideBarItem() },
     ///             title: "Present"
     ///         )
-    ///             .vSideBar(
-    ///                 id: "some_side_bar",
-    ///                 item: $sideBarItem,
-    ///                 content: { item in
-    ///                     List(content: {
-    ///                         ForEach(0..<20, content: { num in
-    ///                             VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
-    ///                                 Text(String(num))
-    ///                                     .frame(maxWidth: .infinity, alignment: .leading)
-    ///                             })
+    ///         .vSideBar(
+    ///             id: "some_side_bar",
+    ///             item: $sideBarItem,
+    ///             content: { item in
+    ///                 List(content: {
+    ///                     ForEach(0..<20, content: { num in
+    ///                         VListRow(uiModel: .noFirstAndLastSeparators(isFirst: num == 0), content: {
+    ///                             Text(String(num))
+    ///                                 .frame(maxWidth: .infinity, alignment: .leading)
     ///                         })
     ///                     })
-    ///                         .vListStyle()
-    ///                 }
-    ///             )
+    ///                 })
+    ///                 .vListStyle()
+    ///              }
+    ///          )
     ///     }
     ///
     public func vSideBar<Item>(
@@ -123,7 +123,7 @@ extension View {
         where Item: Identifiable
     {
         item.wrappedValue.map { PresentationHostDataSourceCache.shared.set(key: id, value: $0) }
-
+        
         return self
             .presentationHost(
                 id: id,

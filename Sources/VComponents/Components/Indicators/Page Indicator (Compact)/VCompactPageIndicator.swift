@@ -56,7 +56,7 @@ import VCore
 ///                 })
 ///             }
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 public struct VCompactPageIndicator<Content>: View where Content: View {
@@ -75,7 +75,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     private var region: Region {
         .init(current: current, total: total, middle: middle)
     }
-
+    
     // MARK: Initializers
     /// Initializes `VCompactPageIndicator` with total and current index.
     public init(
@@ -121,7 +121,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         self.current = current
         self.dotContent = dotContent
     }
-
+    
     // MARK: Body
     public var body: some View {
         switch total {
@@ -132,7 +132,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 current: current,
                 dotContent: dotContent
             )
-        
+            
         case _:
             compactBody
         }
@@ -152,7 +152,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 ifTransform: { $0.overlay(dotsHorizontal) },
                 elseTransform: { $0.overlay(dotsVertical) }
             )
-            .clipped()
+                .clipped()
     }
     
     private var frame: some View {
@@ -171,8 +171,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             spacing: uiModel.layout.spacing,
             content: dots
         )
-            .offset(x: offset)
-            .animation(uiModel.animations.transition, value: current)
+        .offset(x: offset)
+        .animation(uiModel.animations.transition, value: current)
     }
     
     private var dotsVertical: some View {
@@ -180,8 +180,8 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             spacing: uiModel.layout.spacing,
             content: dots
         )
-            .offset(y: offset)
-            .animation(uiModel.animations.transition, value: current)
+        .offset(y: offset)
+        .animation(uiModel.animations.transition, value: current)
     }
     
     private func dots() -> some View {
@@ -203,19 +203,19 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                         .strokeBorder(lineWidth: uiModel.layout.dotBorderWidth)
                         .foregroundColor(current == i ? uiModel.colors.selectedDotBorder : uiModel.colors.dotBorder)
                 })
-            
+                
             case .content(let content):
                 content()
                     .foregroundColor(current == i ? uiModel.colors.selectedDot : uiModel.colors.dot)
             }
         })
-            .frame(
-                width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight,
-                height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth
-            )
-            .scaleEffect(scale(at: i))
+        .frame(
+            width: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotWidth : uiModel.layout.dotHeight,
+            height: uiModel.layout.direction.isHorizontal ? uiModel.layout.dotHeight : uiModel.layout.dotWidth
+        )
+        .scaleEffect(scale(at: i))
     }
-
+    
     // MARK: Dimension on Main Axis
     private var visibleWidth: CGFloat {
         let dots: CGFloat = CGFloat(visible) * uiModel.layout.dotWidth
@@ -230,7 +230,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         let total: CGFloat = dots + spacings
         return total
     }
-
+    
     // MARK: Animation Offset
     private var offset: CGFloat {
         let rawOffset: CGFloat = (totalWidth - visibleWidth) / 2
@@ -239,11 +239,11 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             switch region {
             case .start:
                 return rawOffset
-            
+                
             case .center:
                 let incrementalOffset: CGFloat = -CGFloat(current - middle) * (uiModel.layout.dotWidth + uiModel.layout.spacing)
                 return rawOffset + incrementalOffset
-            
+                
             case .end:
                 return -rawOffset
             }
@@ -252,7 +252,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         return directionalOffset
             .withOppositeSign(if: uiModel.layout.direction.isReversed)
     }
-
+    
     // MARK: Animation Scale
     private func scale(at index: Int) -> CGFloat {
         switch region {
@@ -263,9 +263,9 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             else {
                 return 1
             }
-
+            
             return startEdgeEndSideScale(at: startEdgeEndSideIndex)
-
+            
         case .center:
             guard
                 let visibleIndex: Int = centerVisibleIndex(at: index),
@@ -273,9 +273,9 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             else {
                 return 1
             }
-
+            
             return centerScale(at: centerIndexAbsolute)
-
+            
         case .end:
             guard
                 let endEdgeVisibleIndex: Int = endEdgeVisibleIndex(at: index),
@@ -283,7 +283,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             else {
                 return 1
             }
-
+            
             return endEdgeStartSideScale(at: endEdgeStartSideIndex)
         }
     }
@@ -341,7 +341,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         let incrementalScale: CGFloat = uiModel.layout.edgeDotScale + CGFloat(index) * scaleStep
         return incrementalScale
     }
-
+    
     // MARK: Region
     private enum Region {
         // MARK: Cases
@@ -394,14 +394,14 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var total: Int { 10 }
     private static var current: Int { 0 }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var current: Int = VCompactPageIndicator_Previews.current
@@ -412,7 +412,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                     total: total,
                     current: current
                 )
-                    .onReceiveOfTimerIncrement($current, to: total-1)
+                .onReceiveOfTimerIncrement($current, to: total-1)
             })
         }
     }
@@ -488,7 +488,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
                     )
                 })
             })
-                .onReceiveOfTimerIncrement($current, to: total-1)
+            .onReceiveOfTimerIncrement($current, to: total-1)
         }
     }
 }

@@ -41,7 +41,7 @@ struct VToast: View {
         self.dismissHandler = dismissHandler
         self.text = text
     }
-
+    
     // MARK: Body
     var body: some View {
         contentView
@@ -69,45 +69,45 @@ struct VToast: View {
             font: uiModel.fonts.text,
             text: text
         )
-            .padding(uiModel.layout.textMargins)
-            .modifier({ view in
-                switch uiModel.layout.widthType {
-                case .wrapped:
-                    view
+        .padding(uiModel.layout.textMargins)
+        .modifier({ view in
+            switch uiModel.layout.widthType {
+            case .wrapped:
+                view
                 
-                case .stretched(let alignment, _):
-                    view
-                        .frame(
-                            maxWidth: .infinity,
-                            alignment: alignment.toAlignment
-                        )
+            case .stretched(let alignment, _):
+                view
+                    .frame(
+                        maxWidth: .infinity,
+                        alignment: alignment.toAlignment
+                    )
                 
-                case .fixedPoint(let width, let alignment):
-                    view
-                        .frame(
-                            width: width,
-                            alignment: alignment.toAlignment
-                        )
-                    
-                case .fixedFraction(let ratio, let alignment):
-                    view
-                        .frame(
-                            width: MultiplatformConstants.screenSize.width * ratio,
-                            alignment: alignment.toAlignment
-                        )
-                }
-            })
-            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            .background(background)
-            .onSizeChange(perform: { height = $0.height })
-            .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
+            case .fixedPoint(let width, let alignment):
+                view
+                    .frame(
+                        width: width,
+                        alignment: alignment.toAlignment
+                    )
+                
+            case .fixedFraction(let ratio, let alignment):
+                view
+                    .frame(
+                        width: MultiplatformConstants.screenSize.width * ratio,
+                        alignment: alignment.toAlignment
+                    )
+            }
+        })
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .background(background)
+        .onSizeChange(perform: { height = $0.height })
+        .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
     
     private var background: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .foregroundColor(uiModel.colors.background)
     }
-
+    
     // MARK: Offsets
     private var initialOffset: CGFloat {
         let initialOffset: CGFloat = height + 2*uiModel.layout.textMargins.vertical
@@ -117,7 +117,7 @@ struct VToast: View {
         case .bottom: return MultiplatformConstants.screenSize.height + initialOffset
         }
     }
-
+    
     private var presentedOffset: CGFloat {
         switch uiModel.layout.presentationEdge {
         case .top:
@@ -133,7 +133,7 @@ struct VToast: View {
                 uiModel.layout.presentationEdgeSafeAreaInset
         }
     }
-
+    
     // MARK: Corner Radius
     private var cornerRadius: CGFloat {
         switch uiModel.layout.cornerRadiusType {
@@ -165,14 +165,14 @@ struct VToast: View {
             }
         )
     }
-
+    
     private func animateOutAfterLifecycle() {
         DispatchQueue.main.asyncAfter(
             deadline: .now() + uiModel.animations.duration,
             execute: animateOut
         )
     }
-
+    
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
             uiModel.animations.disappear,
@@ -215,35 +215,35 @@ extension HorizontalAlignment {
 @available(watchOS, unavailable)
 struct VToast_Previews: PreviewProvider {
     // Configuration
-//    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-//    private static var interfaceOrientation: InterfaceOrientation { .portrait } // Break's preview. Should be hard-typed.
+    //    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+    //    private static var interfaceOrientation: InterfaceOrientation { .portrait } // Break's preview. Should be hard-typed.
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     private static var highlights: VToastUIModel { .init() }
     private static var widthType: VToastUIModel.Layout.WidthType { .default }
     private static var presentationEdge: VToastUIModel.Layout.PresentationEdge { .default }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             MultiLineTextPreview().previewDisplayName("MultiLine Text")
         })
-            .modifier({
-                if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                    $0.previewInterfaceOrientation(.portrait)
-                } else {
-                    $0
-                }
-            })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .modifier({
+            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
+                $0.previewInterfaceOrientation(.portrait)
+            } else {
+                $0
+            }
+        })
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static var text: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
     private static var textLong: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {

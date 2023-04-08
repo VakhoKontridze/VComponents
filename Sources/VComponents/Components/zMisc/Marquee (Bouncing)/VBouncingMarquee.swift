@@ -21,7 +21,7 @@ import VCore
 ///                     Image(systemName: "swift")
 ///                     Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
 ///                 })
-///                     .drawingGroup() // For Images
+///                 .drawingGroup() // For Images
 ///             }
 ///         )
 ///     }
@@ -91,7 +91,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                    .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.colors.gradientWidth)
                 
                 Spacer()
                 
@@ -103,7 +103,7 @@ public struct VBouncingMarquee<Content>: View where Content: View {
                     startPoint: .leading,
                     endPoint: .trailing
                 )
-                    .frame(width: uiModel.colors.gradientWidth)
+                .frame(width: uiModel.colors.gradientWidth)
             })
         }
     }
@@ -142,10 +142,10 @@ public struct VBouncingMarquee<Content>: View where Content: View {
             curve: uiModel.animations.curve,
             duration: uiModel.animations.durationType.duration(width: width)
         )
-            .toSwiftUIAnimation
-            .delay(uiModel.animations.delay)
-            .repeatForever(autoreverses: true)
-            .delay(uiModel.animations.initialDelay)
+        .toSwiftUIAnimation
+        .delay(uiModel.animations.delay)
+        .repeatForever(autoreverses: true)
+        .delay(uiModel.animations.initialDelay)
     }
 }
 
@@ -155,7 +155,7 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
@@ -163,8 +163,8 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             InsettedContentPreview().previewDisplayName("Insetted & Gradient")
             ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -173,7 +173,7 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             Image(systemName: "swift")
             Text("Lorem ipsum".pseudoRTL(languageDirection))
         })
-            .drawingGroup()
+        .drawingGroup()
     }
     
     private static func contentLarge() -> some View {
@@ -188,9 +188,9 @@ struct VBouncingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             Text("Lorem ipsum dolor sit amet, consectetur adipiscing elit.".pseudoRTL(languageDirection))
 #endif
         })
-            .drawingGroup()
+        .drawingGroup()
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {

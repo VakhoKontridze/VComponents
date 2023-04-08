@@ -14,14 +14,14 @@ import SwiftUI
 struct VContextMenuContentView: View {
     // MARK: Properties
     private let sections: () -> [any VMenuSectionProtocol]
-
+    
     // MARK: Initializers
     init(
         @VMenuSectionBuilder sections: @escaping () -> [any VMenuSectionProtocol]
     ) {
         self.sections = sections
     }
-
+    
     // MARK: Body
     var body: some View {
         ForEach(
@@ -50,21 +50,21 @@ struct VContextMenuContentView_Previews: PreviewProvider {
     private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
         })
-            .previewInterfaceOrientation(interfaceOrientation)
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .previewInterfaceOrientation(interfaceOrientation)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
         case red, green, blue
-
+        
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
         private var _stringRepresentation: String {
             switch self {
@@ -74,11 +74,11 @@ struct VContextMenuContentView_Previews: PreviewProvider {
             }
         }
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View { // Didn't bother with pseudoRTL
         @State private var selection: PickerRow = .red
-
+        
         var body: some View {
             PreviewContainer(content: {
                 Text("Lorem ipsum")
@@ -87,12 +87,12 @@ struct VContextMenuContentView_Previews: PreviewProvider {
                             VMenuTitleRow(action: { print("1.1") }, title: "One")
                             VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
                         })
-
+                        
                         VMenuGroupSection(title: "Section 2", rows: {
                             VMenuTitleRow(action: { print("2.1") }, title: "One")
-
+                            
                             VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
-
+                            
                             VMenuSubMenuRow(title: "Three...", sections: {
                                 VMenuGroupSection(rows: {
                                     VMenuTitleRow(action: { print("2.3.1") }, title: "One")
@@ -100,7 +100,7 @@ struct VContextMenuContentView_Previews: PreviewProvider {
                                 })
                             })
                         })
-
+                        
                         VMenuPickerSection(selection: $selection)
                     })
             })

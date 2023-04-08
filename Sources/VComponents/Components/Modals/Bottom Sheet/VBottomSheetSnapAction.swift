@@ -48,16 +48,16 @@ enum VBottomSheetSnapAction {
     ) -> VBottomSheetSnapAction {
         let shouldDismiss: Bool = {
             guard canPullDownToDismiss else { return false }
-
+            
             let isDraggedDown: Bool = translation > 0
             guard isDraggedDown else { return false }
-
+            
             let newOffset: CGFloat = offsetBeforeDrag + translation
             guard newOffset - heights.minOffset >= abs(pullDownDismissDistance) else { return false }
-
+            
             return true
         }()
-    
+        
         switch shouldDismiss {
         case false:
             switch VBottomSheetRegion(heights: heights, offset: offset) {
@@ -67,7 +67,7 @@ enum VBottomSheetSnapAction {
                 let newOffset: CGFloat = idealDiff < maxDiff ? heights.idealOffset : heights.maxOffset
                 
                 return .snap(newOffset)
-
+                
             case .pullDownToMin, .minToIdeal:
                 // If `pullDown` is disabled, code won't get here.
                 // So, modal should snap to min heights.
@@ -95,7 +95,7 @@ private enum VBottomSheetRegion {
     case idealToMax
     case minToIdeal
     case pullDownToMin
-
+    
     // MARK: Initializers
     init(
         heights: VBottomSheetUIModel.Layout.BottomSheetHeights,

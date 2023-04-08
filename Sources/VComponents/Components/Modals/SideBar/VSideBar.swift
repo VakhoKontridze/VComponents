@@ -27,7 +27,7 @@ struct VSideBar<Content>: View where Content: View {
     private let content: () -> Content
     
     @State private var isInternallyPresented: Bool = false
-
+    
     // MARK: Initializers
     init(
         uiModel: VSideBarUIModel,
@@ -40,20 +40,20 @@ struct VSideBar<Content>: View where Content: View {
         self.dismissHandler = dismissHandler
         self.content = content
     }
-
+    
     // MARK: Body
     var body: some View {
         ZStack(content: {
             dimmingView
             sideBar
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.container, edges: .all)
-            .onAppear(perform: animateIn)
-            .onChange(
-                of: presentationMode.isExternallyDismissed,
-                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-            )
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.container, edges: .all)
+        .onAppear(perform: animateIn)
+        .onChange(
+            of: presentationMode.isExternallyDismissed,
+            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+        )
     }
     
     private var dimmingView: some View {
@@ -63,7 +63,7 @@ struct VSideBar<Content>: View where Content: View {
                 if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
             })
     }
-
+    
     private var sideBar: some View {
         ZStack(content: {
             VSheet(uiModel: uiModel.sheetSubUIModel)
@@ -72,21 +72,21 @@ struct VSideBar<Content>: View where Content: View {
                     radius: uiModel.colors.shadowRadius,
                     offset: uiModel.colors.shadowOffset
                 )
-
+            
             content()
                 .padding(uiModel.layout.contentMargins)
                 .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
         })
-            .frame(size: uiModel.layout.sizes._current.size)
-            .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
-            .offset(isInternallyPresented ? presentedOffset : initialOffset)
-            .gesture(
-                DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
-                    .onChanged(dragChanged)
-            )
+        .frame(size: uiModel.layout.sizes._current.size)
+        .ignoresSafeArea(.container, edges: .all)
+        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
+        .offset(isInternallyPresented ? presentedOffset : initialOffset)
+        .gesture(
+            DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
+                .onChanged(dragChanged)
+        )
     }
-
+    
     // MARK: Actions
     private func animateIn() {
         withBasicAnimation(
@@ -97,7 +97,7 @@ struct VSideBar<Content>: View where Content: View {
             }
         )
     }
-
+    
     private func animateOut() {
         withBasicAnimation(
             uiModel.animations.disappear,
@@ -108,7 +108,7 @@ struct VSideBar<Content>: View where Content: View {
             }
         )
     }
-
+    
     private func animateOutFromDrag() {
         withBasicAnimation(
             uiModel.animations.dragBackDismiss,
@@ -130,7 +130,7 @@ struct VSideBar<Content>: View where Content: View {
             }
         )
     }
-
+    
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         guard
@@ -205,17 +205,17 @@ struct VSideBar<Content>: View where Content: View {
             case .rightToLeft: return dragValue.translation.width >= 0
             @unknown default: fatalError()
             }
-        
+            
         case .trailing:
             switch layoutDirection {
             case .leftToRight: return dragValue.translation.width >= 0
             case .rightToLeft: return dragValue.translation.width <= 0
             @unknown default: fatalError()
             }
-        
+            
         case .top:
             return dragValue.translation.height <= 0
-        
+            
         case .bottom:
             return dragValue.translation.height >= 0
         }
@@ -240,23 +240,23 @@ struct VSideBar_Previews: PreviewProvider {
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
     private static var presentationEdge: VSideBarUIModel { .init() }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             InsettedContentPreview().previewDisplayName("Insetted Content")
         })
-            .previewInterfaceOrientation(interfaceOrientation)
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .previewInterfaceOrientation(interfaceOrientation)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
     private static func content() -> some View {
         ColorBook.accentBlue
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {

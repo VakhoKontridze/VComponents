@@ -42,7 +42,7 @@ struct VBottomSheet<Content>: View
     @State private var offsetBeforeDrag: CGFloat? // Used for adding to translation
     @State private var currentDragValue: DragGesture.Value? // Used for storing "last" value for writing in `previousDragValue`. Equals to `dragValue` in methods.
     @State private var previousDragValue: DragGesture.Value? // Used for calculating velocity
-
+    
     // MARK: Initializers
     init(
         uiModel: VBottomSheetUIModel,
@@ -59,24 +59,24 @@ struct VBottomSheet<Content>: View
         
         _offset = State(initialValue: uiModel.layout.sizes._current.size.heights.idealOffset)
     }
-
+    
     // MARK: Body
     var body: some View {
         ZStack(content: {
             dimmingView
             bottomSheet
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.container, edges: .all)
-            .onAppear(perform: animateIn)
-            .onChange(
-                of: presentationMode.isExternallyDismissed,
-                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-            )
-            .onChange(of: interfaceOrientationChangeObserver.orientation, perform: { _ in resetHeightFromOrientationChange() })
-            .onPreferenceChange(VBottomSheetHeaderLabelPreferenceKey.self, perform: {
-                headerLabel = $0
-            })
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.container, edges: .all)
+        .onAppear(perform: animateIn)
+        .onChange(
+            of: presentationMode.isExternallyDismissed,
+            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+        )
+        .onChange(of: interfaceOrientationChangeObserver.orientation, perform: { _ in resetHeightFromOrientationChange() })
+        .onPreferenceChange(VBottomSheetHeaderLabelPreferenceKey.self, perform: {
+            headerLabel = $0
+        })
     }
     
     private var dimmingView: some View {
@@ -117,29 +117,29 @@ struct VBottomSheet<Content>: View
 
                 contentView
             })
-                .frame(maxHeight: .infinity, alignment: .top)
-                .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // NOTE: Fixes issue of content-clipping, as it's not in `VSheet`
-                .if(!uiModel.misc.contentIsDraggable, transform: {
-                    $0
-                        .frame(height: uiModel.layout.sizes._current.size.heights.max)
-                        .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
-                })
-        })
-            .frame(width: uiModel.layout.sizes._current.size.width)
-            .if(uiModel.misc.contentIsDraggable, transform: {
+            .frame(maxHeight: .infinity, alignment: .top)
+            .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // NOTE: Fixes issue of content-clipping, as it's not in `VSheet`
+            .if(!uiModel.misc.contentIsDraggable, transform: {
                 $0
                     .frame(height: uiModel.layout.sizes._current.size.heights.max)
                     .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
-                    .gesture(
-                        DragGesture(minimumDistance: 0)
-                            .onChanged(dragChanged)
-                            .onEnded(dragEnded)
-                    )
             })
-            .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
+        })
+        .frame(width: uiModel.layout.sizes._current.size.width)
+        .if(uiModel.misc.contentIsDraggable, transform: {
+            $0
+                .frame(height: uiModel.layout.sizes._current.size.heights.max)
+                .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
+                .gesture(
+                    DragGesture(minimumDistance: 0)
+                        .onChanged(dragChanged)
+                        .onEnded(dragEnded)
+                )
+        })
+        .ignoresSafeArea(.container, edges: .all)
+        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
     }
-
+    
     @ViewBuilder private var grabber: some View {
         if hasGrabber {
             RoundedRectangle(cornerRadius: uiModel.layout.grabberCornerRadius)
@@ -148,7 +148,7 @@ struct VBottomSheet<Content>: View
                 .foregroundColor(uiModel.colors.grabber)
         }
     }
-
+    
     @ViewBuilder private var header: some View {
         if hasHeader {
             HStack(alignment: uiModel.layout.headerAlignment, spacing: uiModel.layout.labelCloseButtonSpacing, content: {
@@ -159,8 +159,8 @@ struct VBottomSheet<Content>: View
                         closeButtonCompensator
                     }
                 })
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
                 Group(content: {
                     switch headerLabel {
                     case .empty:
@@ -177,8 +177,8 @@ struct VBottomSheet<Content>: View
                         label()
                     }
                 })
-                    .layoutPriority(1)
-
+                .layoutPriority(1)
+                
                 Group(content: {
                     if uiModel.misc.dismissType.contains(.trailingButton) {
                         closeButton
@@ -186,12 +186,12 @@ struct VBottomSheet<Content>: View
                         closeButtonCompensator
                     }
                 })
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                .frame(maxWidth: .infinity, alignment: .trailing)
             })
-                .padding(uiModel.layout.headerMargins)
+            .padding(uiModel.layout.headerMargins)
         }
     }
-
+    
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
@@ -200,7 +200,7 @@ struct VBottomSheet<Content>: View
                 .foregroundColor(uiModel.colors.divider)
         }
     }
-
+    
     private var contentView: some View {
         ZStack(content: {
             if !uiModel.misc.contentIsDraggable {
@@ -211,15 +211,15 @@ struct VBottomSheet<Content>: View
             content()
                 .padding(uiModel.layout.contentMargins)
         })
-            .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
-            .frame(maxWidth: .infinity)
-            .if(
-                uiModel.layout.autoresizesContent && uiModel.layout.sizes._current.size.heights.isResizable,
-                ifTransform: { $0.frame(height: MultiplatformConstants.screenSize.height - offset - headerDividerHeight) },
-                elseTransform: { $0.frame(maxHeight: .infinity) }
-            )
+        .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
+        .frame(maxWidth: .infinity)
+        .if(
+            uiModel.layout.autoresizesContent && uiModel.layout.sizes._current.size.heights.isResizable,
+            ifTransform: { $0.frame(height: MultiplatformConstants.screenSize.height - offset - headerDividerHeight) },
+            elseTransform: { $0.frame(maxHeight: .infinity) }
+        )
     }
-
+    
     private var closeButton: some View {
         VRoundedButton(
             uiModel: uiModel.closeButtonSubUIModel,
@@ -232,7 +232,7 @@ struct VBottomSheet<Content>: View
         Spacer()
             .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
     }
-
+    
     // MARK: Animation
     private func animateIn() {
         withBasicAnimation(
@@ -243,7 +243,7 @@ struct VBottomSheet<Content>: View
             }
         )
     }
-
+    
     private func animateOut() {
         withBasicAnimation(
             uiModel.animations.disappear,
@@ -254,7 +254,7 @@ struct VBottomSheet<Content>: View
             }
         )
     }
-
+    
     private func animateOutFromDrag() {
         withBasicAnimation(
             uiModel.animations.pullDownDismiss,
@@ -276,7 +276,7 @@ struct VBottomSheet<Content>: View
             }
         )
     }
-
+    
     // MARK: Gestures
     private func dragChanged(dragValue: DragGesture.Value) {
         if offsetBeforeDrag == nil { offsetBeforeDrag = offset }
@@ -286,7 +286,7 @@ struct VBottomSheet<Content>: View
         currentDragValue = dragValue
         
         let newOffset: CGFloat = offsetBeforeDrag + dragValue.translation.height
-
+        
         withAnimation(.linear(duration: 0.1), { // Gets rid of stuttering
             offset = {
                 switch newOffset {
@@ -306,7 +306,7 @@ struct VBottomSheet<Content>: View
             }()
         })
     }
-
+    
     private func dragEnded(dragValue: DragGesture.Value) {
         defer {
             offsetBeforeDrag = nil
@@ -374,7 +374,7 @@ struct VBottomSheet_Previews: PreviewProvider {
     private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
@@ -384,9 +384,9 @@ struct VBottomSheet_Previews: PreviewProvider {
             OnlyGrabberPreview().previewDisplayName("Only Grabber")
             FullSizedContentPreview().previewDisplayName("Full-Sized Content")
         })
-            .previewInterfaceOrientation(interfaceOrientation)
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .previewInterfaceOrientation(interfaceOrientation)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -396,7 +396,7 @@ struct VBottomSheet_Previews: PreviewProvider {
         ColorBook.accentBlue
             .vBottomSheetHeaderTitle(headerTitle)
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
@@ -453,11 +453,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                                 })
                             })
                         })
-                            .vListStyle()
-                            .vBottomSheetHeaderTitle(headerTitle)
+                        .vListStyle()
+                        .vBottomSheetHeaderTitle(headerTitle)
                     }
                 )
-            })  
+            })
 #endif
         }
     }

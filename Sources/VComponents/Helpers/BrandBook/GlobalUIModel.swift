@@ -19,7 +19,7 @@ struct GlobalUIModel {
         static var containerCornerRadius: CGFloat { 15 }
         static var containerContentMargin: CGFloat { 15 }
         static var containerHeaderMargins: EdgeInsets_LeadingTrailingTopBottom { .init(horizontal: containerContentMargin, vertical: 10) }
-                
+        
         // MARK: Properties - Shadow
         static let shadowColorEnabled: Color = .init(module: "Shadow")
         static let shadowColorDisabled: Color = .init(module: "Shadow.Disabled")
@@ -258,7 +258,7 @@ struct GlobalUIModel {
 #else
             fatalError() // Not supported
 #endif
- }
+        }
         
         // MARK: Initializers
         private init() {}

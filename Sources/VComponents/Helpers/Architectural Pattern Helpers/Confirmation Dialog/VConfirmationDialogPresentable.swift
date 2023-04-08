@@ -24,7 +24,7 @@ import SwiftUI
 ///                 action: { presenter.didTapButton() },
 ///                 title: "Lorem ipsum"
 ///             )
-///                 .vConfirmationDialog(parameters: $presenter.vConfirmationDialogParameters)
+///             .vConfirmationDialog(parameters: $presenter.vConfirmationDialogParameters)
 ///         }
 ///     }
 ///

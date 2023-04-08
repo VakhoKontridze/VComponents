@@ -49,8 +49,8 @@ struct PreviewRow<Content>: View where Content: View {
                     Spacer()
                 }
             )
-                .padding(paddedEdges)
-        
+            .padding(paddedEdges)
+            
         case .vertical:
             VStack(
                 spacing: 10,
@@ -63,7 +63,7 @@ struct PreviewRow<Content>: View where Content: View {
                         .font(.caption)
                 }
             )
-                .padding(paddedEdges)
+            .padding(paddedEdges)
         }
     }
 }

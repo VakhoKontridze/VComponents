@@ -45,23 +45,23 @@ struct VModal<Content>: View
         self.dismissHandler = dismissHandler
         self.content = content
     }
-
+    
     // MARK: Body
     var body: some View {
         ZStack(content: {
             dimmingView
             modal
         })
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .ignoresSafeArea(.container, edges: .all)
-            .onAppear(perform: animateIn)
-            .onChange(
-                of: presentationMode.isExternallyDismissed,
-                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-            )
-            .onPreferenceChange(VModalHeaderLabelPreferenceKey.self, perform: {
-                headerLabel = $0
-            })
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .ignoresSafeArea(.container, edges: .all)
+        .onAppear(perform: animateIn)
+        .onChange(
+            of: presentationMode.isExternallyDismissed,
+            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+        )
+        .onPreferenceChange(VModalHeaderLabelPreferenceKey.self, perform: {
+            headerLabel = $0
+        })
     }
     
     private var dimmingView: some View {
@@ -71,7 +71,7 @@ struct VModal<Content>: View
                 if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
             })
     }
-
+    
     private var modal: some View {
         VSheet(uiModel: uiModel.sheetSubUIModel, content: {
             VStack(spacing: 0, content: {
@@ -79,25 +79,25 @@ struct VModal<Content>: View
                     header
                     divider
                 })
-                    .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
-
+                .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
+                
                 contentView
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             })
         })
-            .frame(size: uiModel.layout.sizes._current.size)
-            .ignoresSafeArea(.container, edges: .all)
-            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
-            .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
-            .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
-            .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
-            .shadow(
-                color: uiModel.colors.shadow,
-                radius: uiModel.colors.shadowRadius,
-                offset: uiModel.colors.shadowOffset
-            )
+        .frame(size: uiModel.layout.sizes._current.size)
+        .ignoresSafeArea(.container, edges: .all)
+        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
+        .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
+        .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
+        .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
+        .shadow(
+            color: uiModel.colors.shadow,
+            radius: uiModel.colors.shadowRadius,
+            offset: uiModel.colors.shadowOffset
+        )
     }
-
+    
     @ViewBuilder private var header: some View {
         if hasHeader {
             HStack(alignment: uiModel.layout.headerAlignment, spacing: uiModel.layout.labelCloseButtonSpacing, content: {
@@ -108,8 +108,8 @@ struct VModal<Content>: View
                         closeButtonCompensator
                     }
                 })
-                    .frame(maxWidth: .infinity, alignment: .leading)
-
+                .frame(maxWidth: .infinity, alignment: .leading)
+                
                 Group(content: {
                     switch headerLabel {
                     case .empty:
@@ -126,8 +126,8 @@ struct VModal<Content>: View
                         label()
                     }
                 })
-                    .layoutPriority(1)
-
+                .layoutPriority(1)
+                
                 Group(content: {
                     if uiModel.misc.dismissType.contains(.trailingButton) {
                         closeButton
@@ -135,12 +135,12 @@ struct VModal<Content>: View
                         closeButtonCompensator
                     }
                 })
-                    .frame(maxWidth: .infinity, alignment: .trailing)
+                .frame(maxWidth: .infinity, alignment: .trailing)
             })
-                .padding(uiModel.layout.headerMargins)
+            .padding(uiModel.layout.headerMargins)
         }
     }
-
+    
     @ViewBuilder private var divider: some View {
         if hasDivider {
             Rectangle()
@@ -149,13 +149,13 @@ struct VModal<Content>: View
                 .foregroundColor(uiModel.colors.divider)
         }
     }
-
+    
     private var contentView: some View {
         content()
             .padding(uiModel.layout.contentMargins)
             .frame(maxHeight: .infinity)
     }
-
+    
     private var closeButton: some View {
         VRoundedButton(
             uiModel: uiModel.closeButtonSubUIModel,
@@ -168,7 +168,7 @@ struct VModal<Content>: View
         Spacer()
             .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
     }
-
+    
     // MARK: Animations
     private func animateIn() {
         withBasicAnimation(
@@ -179,7 +179,7 @@ struct VModal<Content>: View
             }
         )
     }
-
+    
     private func animateOut() {
         withBasicAnimation(
             uiModel.animations.disappear,
@@ -190,7 +190,7 @@ struct VModal<Content>: View
             }
         )
     }
-
+    
     private func animateOutFromExternalDismiss() {
         withBasicAnimation(
             uiModel.animations.disappear,
@@ -213,7 +213,7 @@ struct VModal_Previews: PreviewProvider {
     private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
@@ -221,9 +221,9 @@ struct VModal_Previews: PreviewProvider {
             InsettedContentPreview().previewDisplayName("Insetted Content")
             FullSizedContentPreview().previewDisplayName("Full-Sized Content")
         })
-            .previewInterfaceOrientation(interfaceOrientation)
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .previewInterfaceOrientation(interfaceOrientation)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -231,7 +231,7 @@ struct VModal_Previews: PreviewProvider {
         ColorBook.accentBlue
             .vModalHeaderTitle("Lorem Ipsum".pseudoRTL(languageDirection))
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {

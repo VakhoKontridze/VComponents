@@ -28,7 +28,7 @@ import VCore
 ///                 )
 ///
 ///             })
-///                 .padding()
+///             .padding()
 ///         })
 ///     }
 ///
@@ -58,7 +58,7 @@ public struct VSheet<Content>: View where Content: View {
         self.uiModel = uiModel
         self.content = .content(content: content)
     }
-
+    
     // MARK: Body
     public var body: some View {
         contentView
@@ -87,7 +87,7 @@ public struct VSheet<Content>: View where Content: View {
                 content()
             }
         })
-            .padding(uiModel.layout.contentMargin)
+        .padding(uiModel.layout.contentMargin)
     }
 }
 
@@ -102,8 +102,8 @@ struct VSheet_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Previews (Scenes)
@@ -118,7 +118,7 @@ struct VSheet_Previews: PreviewProvider {
                         text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet. Aenean vitae leo tincidunt, sollicitudin mauris a, mollis massa. Sed posuere, nibh non fermentum ultrices, ipsum nunc luctus arcu, a auctor velit nisl ac nibh. Donec vel arcu condimentum, iaculis quam sed, commodo orci.".pseudoRTL(languageDirection)
                     )
                 })
-                    .padding()
+                .padding()
             })
         }
     }

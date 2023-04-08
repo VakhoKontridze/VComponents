@@ -82,16 +82,16 @@ public struct ColorBook {
     
     /// Gray layer color for pressed state. `(220, 220, 220)` and `(80, 80, 80)`.
     internal static let layerGrayPressed: Color = .init(module: "Layer.Gray.Pressed")
-
+    
     /// Gray layer color and disabled state. `(245, 245, 245)` and `(50, 50, 50)`.
     internal static let layerGrayDisabled: Color = .init(module: "Layer.Gray.Disabled")
-
+    
     /// Green layer color. `(235, 250, 240)` and `(130, 190, 140)`.
     public static let layerGreen: Color = .init(module: "Layer.Green")
-
+    
     /// Yellow layer color. `(255, 250, 240)` and `(240, 200, 120)`.
     public static let layerYellow: Color = .init(module: "Layer.Yellow")
-
+    
     /// Red layer color. `(250, 240, 240)` and `(230, 125, 125)`.
     public static let layerRed: Color = .init(module: "Layer.Red")
     

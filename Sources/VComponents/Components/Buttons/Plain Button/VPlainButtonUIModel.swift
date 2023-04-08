@@ -28,7 +28,7 @@ public struct VPlainButtonUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -68,7 +68,7 @@ public struct VPlainButtonUIModel {
         /// Model that contains `horizontal` and `vertical` hit boxes.
         public typealias HitBox = EdgeInsets_HorizontalVertical
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -108,7 +108,7 @@ public struct VPlainButtonUIModel {
         /// Model that contains opacities for component states.
         public typealias StateOpacities = GenericStateModel_EnabledPressedDisabled<CGFloat>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {

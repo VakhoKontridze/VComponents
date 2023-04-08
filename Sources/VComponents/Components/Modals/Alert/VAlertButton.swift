@@ -65,7 +65,7 @@ public struct VAlertPrimaryButton: VAlertButtonProtocol {
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     
@@ -111,7 +111,7 @@ public struct VAlertSecondaryButton: VAlertButtonProtocol {
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     
@@ -159,7 +159,7 @@ public struct VAlertOKButton: VAlertButtonProtocol {
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     
@@ -205,7 +205,7 @@ public struct VAlertDestructiveButton: VAlertButtonProtocol {
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     
@@ -253,7 +253,7 @@ public struct VAlertCancelButton: VAlertButtonProtocol {
                 action: { animateOut(/*completion: */action) },
                 title: title
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     

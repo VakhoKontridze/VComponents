@@ -24,10 +24,10 @@ import SwiftUI
 ///                 action: { presenter.didTapButton() },
 ///                 title: "Lorem ipsum"
 ///             )
-///                 .vAlert(
-///                     id: "some_alert",
-///                     parameters: $presenter.vAlertParameters
-///                 )
+///             .vAlert(
+///                 id: "some_alert",
+///                 parameters: $presenter.vAlertParameters
+///             )
 ///         }
 ///     }
 ///

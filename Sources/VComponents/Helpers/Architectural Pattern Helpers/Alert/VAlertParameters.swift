@@ -44,7 +44,7 @@ public struct VAlertParameters: Identifiable {
         self.message = message
         self.buttons = buttons
     }
-
+    
     /// Initializes `VAlertParameters` with "ok" action.
     public init(
         title: String,
@@ -59,7 +59,7 @@ public struct VAlertParameters: Identifiable {
             }
         )
     }
-
+    
     /// Initializes `VAlertParameters` with error and "ok" action.
     public init(
         error: some Error,

@@ -50,7 +50,7 @@ public struct VConfirmationDialogButton: VConfirmationDialogButtonProtocol {
                 role: nil,
                 action: { action?() }
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     
@@ -100,7 +100,7 @@ public struct VConfirmationDialogOKButton: VConfirmationDialogButtonProtocol {
                 role: nil,
                 action: { action?() }
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
 }
@@ -132,7 +132,7 @@ public struct VConfirmationDialogDestructiveButton: VConfirmationDialogButtonPro
                 role: .destructive,
                 action: { action?() }
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     
@@ -174,7 +174,7 @@ public struct VConfirmationDialogCancelButton: VConfirmationDialogButtonProtocol
                 role: .cancel,
                 action: { action?() }
             )
-                .disabled(!isEnabled)
+            .disabled(!isEnabled)
         )
     }
     

@@ -26,7 +26,7 @@ public struct VSliderUIModel {
     // MARK: Initializers
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -95,7 +95,7 @@ public struct VSliderUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -146,7 +146,7 @@ public struct VSliderUIModel {
         /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledDisabled<Color>
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {

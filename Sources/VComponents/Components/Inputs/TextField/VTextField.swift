@@ -22,7 +22,7 @@ import VCore
 ///             placeholder: "Lorem ipsum",
 ///             text: $text
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// Textfield can also be focused externally by passing state:
@@ -72,7 +72,7 @@ import VCore
 ///             uiModel: .secure,
 ///             text: $text
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// `Search` textfield:
@@ -84,7 +84,7 @@ import VCore
 ///             uiModel: .search,
 ///             text: $text
 ///         )
-///             .padding()
+///         .padding()
 ///     }
 ///
 /// You can apply highlights by using `success`, `warning`, and `secure` instances of `VTextFieldUIModel`.
@@ -95,11 +95,11 @@ import VCore
 public struct VTextField: View {
     // MARK: Properties
     private let uiModel: VTextFieldUIModel
-
+    
     @Environment(\.isEnabled) private var isEnabled: Bool
     @FocusState private var isFocused: Bool
     private var internalState: VTextFieldInternalState { .init(isEnabled: isEnabled, isFocused: isFocused) }
-
+    
     private let headerTitle: String?
     private let footerTitle: String?
     
@@ -108,7 +108,7 @@ public struct VTextField: View {
     
     @State private var clearButtonIsVisible: Bool = false
     @State private var secureFieldIsVisible: Bool = false
-
+    
     // MARK: Initializers
     /// Initializes `VTextField` with text.
     public init(
@@ -124,11 +124,11 @@ public struct VTextField: View {
         self.placeholder = placeholder
         self._text = text
     }
-
+    
     // MARK: Body
     public var body: some View {
         syncInternalStateWithState()
-
+        
         return VStack(alignment: .leading, spacing: uiModel.layout.headerTextFieldFooterSpacing, content: {
             header
             input
@@ -144,10 +144,10 @@ public struct VTextField: View {
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
-
+    
     @ViewBuilder private var footer: some View {
         if let footerTitle, !footerTitle.isEmpty {
             VText(
@@ -156,7 +156,7 @@ public struct VTextField: View {
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -167,22 +167,22 @@ public struct VTextField: View {
             clearButton
             visibilityButton // Only for secure field
         })
-            .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
-            .frame(height: uiModel.layout.height)
-            .clipped()
-            .background(background)
+        .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
+        .frame(height: uiModel.layout.height)
+        .clipped()
+        .background(background)
     }
     
     private var background: some View {
         ZStack(content: {
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .foregroundColor(uiModel.colors.background.value(for: internalState))
-
+            
             RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                 .strokeBorder(uiModel.colors.border.value(for: internalState), lineWidth: uiModel.layout.borderWidth)
         })
     }
-
+    
     @ViewBuilder private var searchIcon: some View {
         if uiModel.layout.contentType.isSearch {
             ImageBook.textFieldSearch
@@ -191,7 +191,7 @@ public struct VTextField: View {
                 .foregroundColor(uiModel.colors.searchIcon.value(for: internalState))
         }
     }
-
+    
     private var textField: some View {
         SecurableTextField(
             isSecure: uiModel.layout.contentType.isSecure && !secureFieldIsVisible,
@@ -202,40 +202,40 @@ public struct VTextField: View {
             },
             text: $text
         )
-            .textFieldStyle(.plain)
+        .textFieldStyle(.plain)
         
-            .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
+        .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
         
-            .onChange(of: text, perform: textChanged)
+        .onChange(of: text, perform: textChanged)
         
-            .multilineTextAlignment(uiModel.layout.textAlignment)
-            .foregroundColor(uiModel.colors.text.value(for: internalState))
-            .font(uiModel.fonts.text)
-            .modifier({
+        .multilineTextAlignment(uiModel.layout.textAlignment)
+        .foregroundColor(uiModel.colors.text.value(for: internalState))
+        .font(uiModel.fonts.text)
+        .modifier({
 #if os(iOS)
-                $0.keyboardType(uiModel.misc.keyboardType)
+            $0.keyboardType(uiModel.misc.keyboardType)
 #else
-                $0
+            $0
 #endif
-            })
-            .modifier({
+        })
+        .modifier({
 #if os(iOS)
-                $0.textContentType(uiModel.misc.textContentType)
+            $0.textContentType(uiModel.misc.textContentType)
 #else
-                $0
+            $0
 #endif
-            })
-            .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
-            .modifier({
+        })
+        .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
+        .modifier({
 #if os(iOS)
-                $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
+            $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
 #else
-                $0
+            $0
 #endif
-            })
-            .submitLabel(uiModel.misc.submitButton)
+        })
+        .submitLabel(uiModel.misc.submitButton)
     }
-
+    
     @ViewBuilder private var clearButton: some View {
         if !uiModel.layout.contentType.isSecure && clearButtonIsVisible && uiModel.misc.hasClearButton {
             VRoundedButton(
@@ -245,7 +245,7 @@ public struct VTextField: View {
             )
         }
     }
-
+    
     @ViewBuilder private var visibilityButton: some View {
         if uiModel.layout.contentType.isSecure {
             VPlainButton(
@@ -255,18 +255,18 @@ public struct VTextField: View {
             )
         }
     }
-
+    
     // MARK: State Syncs
     private func syncInternalStateWithState() {
         DispatchQueue.main.async(execute: {
             textChanged(text)
         })
-
+        
         DispatchQueue.main.async(execute: {
             if secureFieldIsVisible && !uiModel.layout.contentType.isSecure { secureFieldIsVisible = false }
         })
     }
-
+    
     // MARK: Visibility Icon
     private var visibilityIcon: Image {
         if secureFieldIsVisible {
@@ -275,12 +275,12 @@ public struct VTextField: View {
             return ImageBook.textFieldVisibilityOff
         }
     }
-
+    
     // MARK: Actions
     private func textChanged(_ text: String) {
         withAnimation(uiModel.animations.clearButton, { clearButtonIsVisible = !text.isEmpty })
     }
-
+    
     private func didTapClearButton() {
         text = ""
         withAnimation(uiModel.animations.clearButton, { clearButtonIsVisible = false })
@@ -305,8 +305,8 @@ struct VTextField_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -332,7 +332,7 @@ struct VTextField_Previews: PreviewProvider {
                     placeholder: placeholder,
                     text: $text
                 )
-                    .padding()
+                .padding()
             })
         }
     }
@@ -418,7 +418,7 @@ struct VTextField_Previews: PreviewProvider {
                                 placeholder: placeholder,
                                 text: .constant(text)
                             )
-                                .disabled(true)
+                            .disabled(true)
                         }
                     )
                     
@@ -432,7 +432,7 @@ struct VTextField_Previews: PreviewProvider {
                                 placeholder,
                                 text: .constant(text)
                             )
-                                .textFieldStyle(.roundedBorder)
+                            .textFieldStyle(.roundedBorder)
                         }
                     )
                     
@@ -444,8 +444,8 @@ struct VTextField_Previews: PreviewProvider {
                                 placeholder,
                                 text: .constant(text)
                             )
-                                .textFieldStyle(.roundedBorder)
-                                .disabled(true)
+                            .textFieldStyle(.roundedBorder)
+                            .disabled(true)
                         }
                     )
                 }

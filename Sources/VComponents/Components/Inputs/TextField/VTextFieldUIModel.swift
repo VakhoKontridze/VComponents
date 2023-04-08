@@ -33,7 +33,7 @@ public struct VTextFieldUIModel {
     
     /// Initializes UI model with default values.
     public init() {}
-
+    
     // MARK: Layout
     /// Model that contains layout properties.
     public struct Layout {
@@ -148,7 +148,7 @@ public struct VTextFieldUIModel {
             public static var `default`: Self { .standard }
         }
     }
-
+    
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
@@ -179,14 +179,14 @@ public struct VTextFieldUIModel {
             focused: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
-
+        
         /// Footer colors.
         public var footer: StateColors = .init(
             enabled: ColorBook.secondary,
             focused: ColorBook.secondary,
             disabled: ColorBook.secondaryPressedDisabled
         )
-
+        
         /// Search icon colors.
         public var searchIcon: StateColors = .init(
             enabled: GlobalUIModel.Inputs.searchIconEnabledFocused,
@@ -229,7 +229,7 @@ public struct VTextFieldUIModel {
         /// Model that contains colors for component states.
         public typealias StateColors = GenericStateModel_EnabledFocusedDisabled<Color>
     }
-
+    
     // MARK: Fonts
     /// Model that contains font properties.
     public struct Fonts {
@@ -250,7 +250,7 @@ public struct VTextFieldUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Animations
     /// Model that contains animation properties.
     public struct Animations {
@@ -284,7 +284,7 @@ public struct VTextFieldUIModel {
         /// Initializes UI model with default values.
         public init() {}
     }
-
+    
     // MARK: Misc
     /// Model that contains misc properties.
     public struct Misc {
@@ -298,7 +298,7 @@ public struct VTextFieldUIModel {
         /// Text content type. Set to `nil`.
         public var textContentType: UITextContentType? = nil
 #endif
-
+        
         /// Auto correct type. Set to `nil`.
         public var autocorrection: Bool? = nil
         
@@ -306,7 +306,7 @@ public struct VTextFieldUIModel {
         /// Auto capitalization type. Set to `nil`.
         public var autocapitalization: TextInputAutocapitalization? = nil
 #endif
-         
+        
         /// Submit button type. Set to `return`.
         public var submitButton: SubmitLabel = .return
         
@@ -385,7 +385,7 @@ extension VTextFieldUIModel {
         
         return uiModel
     }
-
+    
     /// `VTextFieldUIModel` that applies yellow color scheme.
     public static var warning: Self {
         var uiModel: Self = .init()
@@ -396,7 +396,7 @@ extension VTextFieldUIModel {
         
         return uiModel
     }
-
+    
     /// `VTextFieldUIModel` that applies error color scheme.
     public static var error: Self {
         var uiModel: Self = .init()
@@ -421,7 +421,7 @@ extension VTextFieldUIModel.Colors {
             headerFooter: GlobalUIModel.Inputs.headerFooterGreenColor
         )
     }
-
+    
     /// `VTextFieldUIModel.Colors` that applies yellow color scheme.
     public static var warning: Self {
         .createHighlightedColors(
@@ -429,7 +429,7 @@ extension VTextFieldUIModel.Colors {
             headerFooter: GlobalUIModel.Inputs.headerFooterYellowColor
         )
     }
-
+    
     /// `VTextFieldUIModel.Colors` that applies error color scheme.
     public static var error: Self {
         .createHighlightedColors(
@@ -443,7 +443,7 @@ extension VTextFieldUIModel.Colors {
         headerFooter: Color
     ) -> Self {
         var colors: Self = .init()
-
+        
         colors.border.enabled = border
         colors.border.focused = border
         

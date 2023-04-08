@@ -28,7 +28,7 @@ public struct VDashedSpinner: View {
     ) {
         self.uiModel = uiModel
     }
-
+    
     // MARK: Body
     public var body: some View {
         ProgressView()
@@ -48,8 +48,8 @@ struct VDashedSpinner_Previews: PreviewProvider {
         Group(content: {
             Preview().previewDisplayName("*")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Previews (Scenes)

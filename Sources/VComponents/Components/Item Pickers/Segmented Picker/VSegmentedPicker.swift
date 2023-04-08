@@ -95,7 +95,7 @@ public struct VSegmentedPicker<Data, Content>: View
         self.disabledIndexes = disabledIndexes
         self.content = .content(data: data, content: content)
     }
-
+    
     /// Initializes `VSegmentedPicker` with selected index and row titles.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
@@ -223,8 +223,8 @@ public struct VSegmentedPicker<Data, Content>: View
             picker
             footer
         })
-            .animation(uiModel.animations.selection, value: internalState)
-            .animation(uiModel.animations.selection, value: selectedIndex)
+        .animation(uiModel.animations.selection, value: internalState)
+        .animation(uiModel.animations.selection, value: selectedIndex)
     }
     
     @ViewBuilder private var header: some View {
@@ -235,7 +235,7 @@ public struct VSegmentedPicker<Data, Content>: View
                 font: uiModel.fonts.header,
                 text: headerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -247,7 +247,7 @@ public struct VSegmentedPicker<Data, Content>: View
                 font: uiModel.fonts.footer,
                 text: footerTitle
             )
-                .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
+            .padding(.horizontal, uiModel.layout.headerFooterMarginHorizontal)
         }
     }
     
@@ -258,8 +258,8 @@ public struct VSegmentedPicker<Data, Content>: View
             rows
             dividers
         })
-            .frame(height: uiModel.layout.height)
-            .cornerRadius(uiModel.layout.cornerRadius)
+        .frame(height: uiModel.layout.height)
+        .cornerRadius(uiModel.layout.cornerRadius)
     }
     
     private var pickerBackground: some View {
@@ -296,15 +296,15 @@ public struct VSegmentedPicker<Data, Content>: View
                                 font: uiModel.fonts.rows,
                                 text: titles[i]
                             )
-                                .padding(uiModel.layout.indicatorMargin)
-                                .padding(uiModel.layout.contentMargin)
-                                .frame(maxWidth: .infinity)
-                                .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(i: i))
-
-                                .onSizeChange(perform: { rowWidth = $0.width })
+                            .padding(uiModel.layout.indicatorMargin)
+                            .padding(uiModel.layout.contentMargin)
+                            .frame(maxWidth: .infinity)
+                            .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(i: i))
+                            
+                            .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
-                        .disabled(disabledIndexes.contains(i))
+                    .disabled(disabledIndexes.contains(i))
                 })
             })
             
@@ -319,11 +319,11 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
                                 .scaleEffect(rowContentScale, anchor: rowContentScaleAnchor(i: i))
-
+                            
                                 .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
-                        .disabled(disabledIndexes.contains(i))
+                    .disabled(disabledIndexes.contains(i))
                 })
             })
         }
@@ -333,7 +333,7 @@ public struct VSegmentedPicker<Data, Content>: View
         HStack(spacing: 0, content: {
             ForEach(0..<content.count, id: \.self, content: { i in
                 Spacer()
-
+                
                 if i <= content.count-2 {
                     Rectangle()
                         .frame(size: uiModel.layout.dividerSize)
@@ -362,7 +362,7 @@ public struct VSegmentedPicker<Data, Content>: View
         HapticManager.shared.playSelection()
 #endif
     }
-
+    
     // MARK: State Indication
     private var indicatorScale: CGFloat {
         switch selectedIndex {
@@ -409,15 +409,15 @@ struct VSegmentedPicker_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             StatesPreview().previewDisplayName("States")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -437,7 +437,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
         }
     }
     private static var selection: PickerRow { .red }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         @State private var selection: PickerRow = VSegmentedPicker_Previews.selection
@@ -449,7 +449,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                     headerTitle: headerTitle,
                     footerTitle: footerTitle
                 )
-                    .padding()
+                .padding()
             })
         }
     }
@@ -499,7 +499,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                                 headerTitle: headerTitle,
                                 footerTitle: footerTitle
                             )
-                                .disabled(true)
+                            .disabled(true)
                         }
                     )
                     
@@ -515,8 +515,8 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                                         .tag(i)
                                 })
                             })
-                                .labelsHidden()
-                                .pickerStyle(.segmented)
+                            .labelsHidden()
+                            .pickerStyle(.segmented)
                         }
                     )
                     
@@ -530,9 +530,9 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                                         .tag(i)
                                 })
                             })
-                                .labelsHidden()
-                                .pickerStyle(.segmented)
-                                .disabled(true)
+                            .labelsHidden()
+                            .pickerStyle(.segmented)
+                            .disabled(true)
                         }
                     )
                 }

@@ -53,11 +53,11 @@ extension EmptyView: VMenuSectionConvertible {
     public static func buildOptional(_ component: Component?) -> Result {
         component?.toSections() ?? []
     }
-
+    
     public static func buildEither(first component: Component) -> Result {
         component.toSections()
     }
-
+    
     public static func buildEither(second component: Component) -> Result {
         component.toSections()
     }
@@ -69,7 +69,7 @@ extension EmptyView: VMenuSectionConvertible {
     public static func buildLimitedAvailability(_ component: Component) -> Result {
         component.toSections()
     }
-
+    
     public static func buildFinalResult(_ component: Component) -> Result {
         component.toSections()
     }

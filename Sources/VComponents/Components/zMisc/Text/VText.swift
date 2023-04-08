@@ -45,7 +45,7 @@ public struct VText: View {
         self.font = font
         self.text = text
     }
-
+    
     // MARK: Body
     public var body: some View {
         Text(text)
@@ -63,15 +63,15 @@ struct VText_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var colorScheme: ColorScheme { .light }
-
+    
     // Previews
     static var previews: some View {
         Group(content: {
             Preview().previewDisplayName("*")
             TextLineTypesPreview().previewDisplayName("Text Line Types")
         })
-            .environment(\.layoutDirection, languageDirection)
-            .colorScheme(colorScheme)
+        .environment(\.layoutDirection, languageDirection)
+        .colorScheme(colorScheme)
     }
     
     // Data
@@ -102,7 +102,7 @@ struct VText_Previews: PreviewProvider {
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dapibus volutpat enim, vitae blandit justo iaculis sit amet."
 #endif
     }
-
+    
     // Previews (Scenes)
     private struct Preview: View {
         var body: some View {
@@ -130,7 +130,7 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: text
                             )
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     )
                     
@@ -143,7 +143,7 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: text
                             )
-                                .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                     )
                     
@@ -156,7 +156,7 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: text
                             )
-                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     )
                     
@@ -170,7 +170,7 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: textLong
                             )
-                                .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
                         }
                     )
                     
@@ -184,7 +184,7 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: textLong
                             )
-                                .frame(maxWidth: .infinity, alignment: .center)
+                            .frame(maxWidth: .infinity, alignment: .center)
                         }
                     )
                     
@@ -198,7 +198,7 @@ struct VText_Previews: PreviewProvider {
                                 font: textFont,
                                 text: textLong
                             )
-                                .frame(maxWidth: .infinity, alignment: .trailing)
+                            .frame(maxWidth: .infinity, alignment: .trailing)
                         }
                     )
                     
@@ -213,7 +213,7 @@ struct VText_Previews: PreviewProvider {
                                     font: textFont,
                                     text: textLong
                                 )
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         )
                     }
@@ -229,7 +229,7 @@ struct VText_Previews: PreviewProvider {
                                     font: textFont,
                                     text: textLong
                                 )
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         )
                     }
@@ -245,7 +245,7 @@ struct VText_Previews: PreviewProvider {
                                     font: textFont,
                                     text: textLong
                                 )
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         )
                     }
@@ -261,7 +261,7 @@ struct VText_Previews: PreviewProvider {
                                     font: textFont,
                                     text: textLong
                                 )
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         )
                     }
