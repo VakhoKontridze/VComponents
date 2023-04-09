@@ -52,9 +52,12 @@ public struct VContinuousSpinner: View {
 }
 
 // MARK: - Preview
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 struct VContinuousSpinner_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -63,6 +66,7 @@ struct VContinuousSpinner_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
         })
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

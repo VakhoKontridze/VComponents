@@ -288,13 +288,15 @@ public struct VTextField: View {
 }
 
 // MARK: - Preview
-@available(iOS 15.0, *)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VTextField_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlight: VTextFieldUIModel { .init() }
     private static var contentType: VTextFieldUIModel.Layout.ContentType { .standard }
@@ -306,6 +308,7 @@ struct VTextField_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

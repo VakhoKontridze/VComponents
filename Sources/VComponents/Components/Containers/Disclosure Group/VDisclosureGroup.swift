@@ -220,13 +220,15 @@ extension VDisclosureGroupInternalState {
 }
 
 // MARK: - Previews
-@available(iOS 14.0, *)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VDisclosureGroup_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -237,6 +239,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             InsettedContentPreview().previewDisplayName("Insetted Content")
         })
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

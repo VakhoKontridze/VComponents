@@ -237,7 +237,8 @@ struct VAlert<Content>: View
 }
 
 // MARK: - Preview
-@available(iOS 14.0, *)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -246,6 +247,7 @@ struct VAlert_Previews: PreviewProvider {
 //    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) // Break's preview. Should be hard-typed.
 //    private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -268,14 +270,9 @@ struct VAlert_Previews: PreviewProvider {
 
 //            OnlyButtonsPreview().previewDisplayName("Only Buttons")
         })
-        .modifier({
-            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                $0.previewInterfaceOrientation(.portrait)
-            } else {
-                $0
-            }
-        })
+        .previewInterfaceOrientation(.portrait)
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     
@@ -284,15 +281,7 @@ struct VAlert_Previews: PreviewProvider {
     private static var message: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
     
     @ViewBuilder private static func content() -> some View {
-#if os(iOS)
-        if #available(iOS 15.0, *) {
-            VTextField(text: .constant("Lorem ipsum dolor sit amet".pseudoRTL(languageDirection)))
-        } else {
-            RoundedRectangle(cornerRadius: 10)
-                .frame(height: 50)
-                .foregroundColor(ColorBook.accentBlue)
-        }
-#endif
+        VTextField(text: .constant("Lorem ipsum dolor sit amet".pseudoRTL(languageDirection)))
     }
     
     // Previews (Scenes)

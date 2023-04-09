@@ -27,11 +27,13 @@ struct VConfirmationDialogContentView: View {
 }
 
 // MARK: - Preview
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 struct VConfirmationDialogContentView_Previews: PreviewProvider {
     // Configuration
     private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -41,6 +43,7 @@ struct VConfirmationDialogContentView_Previews: PreviewProvider {
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

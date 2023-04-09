@@ -37,10 +37,12 @@ public struct VDashedSpinner: View {
 }
 
 // MARK: - Preview
-@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 struct VDashedSpinner_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -49,6 +51,7 @@ struct VDashedSpinner_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
         })
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

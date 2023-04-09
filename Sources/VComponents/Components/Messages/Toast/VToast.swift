@@ -209,7 +209,8 @@ extension HorizontalAlignment {
 }
 
 // MARK: - Preview
-@available(iOS 14.0, *)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -218,6 +219,7 @@ struct VToast_Previews: PreviewProvider {
     //    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
     //    private static var interfaceOrientation: InterfaceOrientation { .portrait } // Break's preview. Should be hard-typed.
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var highlights: VToastUIModel { .init() }
     private static var widthType: VToastUIModel.Layout.WidthType { .default }
@@ -229,14 +231,9 @@ struct VToast_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             MultiLineTextPreview().previewDisplayName("MultiLine Text")
         })
-        .modifier({
-            if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
-                $0.previewInterfaceOrientation(.portrait)
-            } else {
-                $0
-            }
-        })
+        .previewInterfaceOrientation(.portrait)
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

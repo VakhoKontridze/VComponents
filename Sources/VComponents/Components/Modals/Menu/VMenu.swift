@@ -178,13 +178,15 @@ public struct VMenu<Label>: View where Label: View {
 import VCore
 #endif
 
-@available(iOS 15.0, macOS 12.0, *)
-@available(tvOS 15.0, *)@available(tvOS, unavailable)
-@available(watchOS 8.0, *)@available(watchOS, unavailable)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
 struct VMenu_Previews: PreviewProvider {
     // Configuration
     private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -194,6 +196,7 @@ struct VMenu_Previews: PreviewProvider {
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

@@ -185,10 +185,12 @@ public struct VWrappingMarquee<Content>: View where Content: View {
 }
 
 // MARK: - Preview
-@available(macOS 11.0, *)
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can be viewed separately.
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -199,6 +201,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
         })
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

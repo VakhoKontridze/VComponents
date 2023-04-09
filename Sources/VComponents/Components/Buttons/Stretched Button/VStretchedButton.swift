@@ -167,10 +167,13 @@ public struct VStretchedButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+// Developmental only
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
 struct VStretchedButton_Previews: PreviewProvider {
     // Configuration
     private static var languageDirection: LayoutDirection { .leftToRight }
+    private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     
     // Previews
@@ -181,6 +184,7 @@ struct VStretchedButton_Previews: PreviewProvider {
         })
         .colorScheme(colorScheme)
         .environment(\.layoutDirection, languageDirection)
+        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
     }
     
     // Data
