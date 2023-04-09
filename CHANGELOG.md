@@ -43,8 +43,8 @@ VRoundedButton
 
 VRoundedLabeledButton
 
-- `VRoundedLabeledButton` is renamed to `VRoundedCaptionedButton`
-- `VRoundedCaptionedButton` not supports size instead of dimension
+- `VRoundedLabeledButton` is renamed to `VRoundedCaptionButton`
+- `VRoundedCaptionButton` not supports size instead of dimension
 - `animatesStateChange` is added in `VRoundedLabeledButtonUIModel`
 - `backgroundPressedScale`, `labelPressedScale`, and `captionPressedScale` are added in `VRoundedLabeledButtonUIModel`
 

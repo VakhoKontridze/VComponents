@@ -1,5 +1,5 @@
 //
-//  VRoundedCaptionedButtonUIModel.swift
+//  VRoundedCaptionButtonUIModel.swift
 //  VComponents
 //
 //  Created by Vakhtang Kontridze on 17.08.22.
@@ -8,11 +8,11 @@
 import SwiftUI
 import VCore
 
-// MARK: - V Rounded Captioned Button UI Model
+// MARK: - V Rounded Caption Button UI Model
 /// Model that describes UI.
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
-public struct VRoundedCaptionedButtonUIModel {
+public struct VRoundedCaptionButtonUIModel {
     // MARK: Properties
     /// Model that contains layout properties.
     public var layout: Layout = .init()
