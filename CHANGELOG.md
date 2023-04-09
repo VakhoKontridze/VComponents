@@ -94,6 +94,7 @@ VToast
 - `WidthType` is added in `VToastUIModel` that allows for additional customization, such as wrapping, stretching, or applying fixed width
 - Highlighted factory instances are added to `VToastUIModel`
 - `text` font no longer depends on backing `UIFont`
+- Shadow configuration is added to `VToast`, but currently set to clear
 
 VContinuousSpinner
 

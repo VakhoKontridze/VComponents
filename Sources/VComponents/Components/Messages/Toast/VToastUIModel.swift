@@ -162,11 +162,20 @@ public struct VToastUIModel {
     /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
-        /// Text color.
-        public var text: Color = ColorBook.primary
-        
         /// Background color.
         public var background: Color = GlobalUIModel.Messages.layerGray
+        
+        /// Shadow color.
+        public var shadow: Color = .clear
+        
+        /// Shadow radius. Set to `0`.
+        public var shadowRadius: CGFloat = 0
+        
+        /// Shadow offset. Set to `zero`.
+        public var shadowOffset: CGPoint = .zero
+        
+        /// Text color.
+        public var text: Color = ColorBook.primary
         
         // MARK: Initializers
         /// Initializes UI model with default values.

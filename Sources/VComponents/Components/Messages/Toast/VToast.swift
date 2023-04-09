@@ -106,6 +106,11 @@ struct VToast: View {
     private var background: some View {
         RoundedRectangle(cornerRadius: cornerRadius)
             .foregroundColor(uiModel.colors.background)
+            .shadow(
+                color: uiModel.colors.shadow,
+                radius: uiModel.colors.shadowRadius,
+                offset: uiModel.colors.shadowOffset
+            )
     }
     
     // MARK: Offsets
