@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.0.0(32)
+### 4.0.0(33)
 
 General
 
@@ -124,6 +124,12 @@ Helpers - Architectural Pattern Helpers
 
 - `VAlertUIModel` is moved from `VAlertParameters` to `View.vAlert(id:parameters)`
 - `SpinnerType` is removed from `VSpinnerParameters` and is moved to `View.vContinuousSpinner(parameters:)` and `View.vDashedSpinner(parameters:)`
+
+### [3.2.3(32)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.3) — *2023 04 09*
+
+Other
+
+- `VCore` is updated to support `4.7.0` and up
 
 ### [3.2.2(31)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.2) — *2023 04 02*
 

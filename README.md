@@ -245,7 +245,7 @@ Versions with different majors are not directly compatible. When a new major is 
   
   <tr>
     <td>
-        3.0<br/><i><sup>(3.0.0 - 3.2.2)</sup></i>
+        3.0<br/><i><sup>(3.0.0 - 3.2.3)</sup></i>
     </td>
     <td>2022 10 02</td>
     <td>5.7</td>
