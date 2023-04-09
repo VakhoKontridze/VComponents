@@ -26,6 +26,17 @@ import VCore
 ///         )
 ///     }
 ///
+/// Component can be also initialized with `Bool`:
+///
+///     @State private var isOn: Bool = true
+///
+///     var body: some View {
+///         VRadioButton(
+///             state: Binding(isOn: $isOn),
+///             title: "Lorem Ipsum"
+///         )
+///     }
+///
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VRadioButton<Label>: View where Label: View {
@@ -39,7 +50,7 @@ public struct VRadioButton<Label>: View where Label: View {
     
     private let label: VRadioButtonLabel<Label>
     
-    // MARK: Initializers - State
+    // MARK: Initializers
     /// Initializes `VRadioButton` with state.
     public init(
         uiModel: VRadioButtonUIModel = .init(),
@@ -73,43 +84,6 @@ public struct VRadioButton<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
-    }
-    
-    // MARK: Initializers - Bool
-    /// Initializes `VRadioButton` with `Bool`.
-    public init(
-        uiModel: VRadioButtonUIModel = .init(),
-        isOn: Binding<Bool>
-    )
-        where Label == Never
-    {
-        self.uiModel = uiModel
-        self._state = Binding(isOn: isOn)
-        self.label = .empty
-    }
-    
-    /// Initializes `VRadioButton` with `Bool` and title.
-    public init(
-        uiModel: VRadioButtonUIModel = .init(),
-        isOn: Binding<Bool>,
-        title: String
-    )
-        where Label == Never
-    {
-        self.uiModel = uiModel
-        self._state = Binding(isOn: isOn)
-        self.label = .title(title: title)
-    }
-    
-    /// Initializes `VRadioButton` with `Bool` and label.
-    public init(
-        uiModel: VRadioButtonUIModel = .init(),
-        isOn: Binding<Bool>,
-        @ViewBuilder label: @escaping (VRadioButtonInternalState) -> Label
-    ) {
-        self.uiModel = uiModel
-        self._state = Binding(isOn: isOn)
         self.label = .label(label: label)
     }
     

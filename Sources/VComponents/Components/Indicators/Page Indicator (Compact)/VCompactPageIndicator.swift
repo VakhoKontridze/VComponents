@@ -108,6 +108,7 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
         self.dotContent = .content(content: dot)
     }
     
+    // MARK: Initializers - Internal
     init(
         uiModel: VCompactPageIndicatorUIModel,
         total: Int,

@@ -26,6 +26,17 @@ import VCore
 ///         )
 ///     }
 ///
+/// Component can be also initialized with `Bool`:
+///
+///     @State private var isOn: Bool = true
+///
+///     var body: some View {
+///         VToggle(
+///             state: Binding(isOn: $isOn),
+///             title: "Lorem Ipsum"
+///         )
+///     }
+///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 public struct VToggle<Label>: View where Label: View {
@@ -39,7 +50,7 @@ public struct VToggle<Label>: View where Label: View {
     
     private let label: VToggleLabel<Label>
     
-    // MARK: Initializers - State
+    // MARK: Initializers
     /// Initializes `VToggle` with state.
     public init(
         uiModel: VToggleUIModel = .init(),
@@ -73,43 +84,6 @@ public struct VToggle<Label>: View where Label: View {
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.label = .label(label: label)
-    }
-    
-    // MARK: Initializers - Bool
-    /// Initializes `VToggle` with `Bool`.
-    public init(
-        uiModel: VToggleUIModel = .init(),
-        isOn: Binding<Bool>
-    )
-        where Label == Never
-    {
-        self.uiModel = uiModel
-        self._state = Binding(isOn: isOn)
-        self.label = .empty
-    }
-    
-    /// Initializes `VToggle` with `Bool` and title.
-    public init(
-        uiModel: VToggleUIModel = .init(),
-        isOn: Binding<Bool>,
-        title: String
-    )
-        where Label == Never
-    {
-        self.uiModel = uiModel
-        self._state = Binding(isOn: isOn)
-        self.label = .title(title: title)
-    }
-    
-    /// Initializes `VToggle` with `Bool` and label.
-    public init(
-        uiModel: VToggleUIModel = .init(),
-        isOn: Binding<Bool>,
-        @ViewBuilder label: @escaping (VToggleInternalState) -> Label
-    ) {
-        self.uiModel = uiModel
-        self._state = Binding(isOn: isOn)
         self.label = .label(label: label)
     }
     

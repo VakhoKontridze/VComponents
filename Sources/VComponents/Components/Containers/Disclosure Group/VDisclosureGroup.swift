@@ -37,6 +37,18 @@ import VCore
 ///         })
 ///     }
 ///
+/// Component can be also initialized with `Bool`:
+///
+///     @State private var isExpanded: Bool = true
+///
+///     var body: some View {
+///         VDisclosureGroup(
+///             state: Binding(isExpanded: $isExpanded),
+///             ...
+///         )
+///     }
+///
+///
 @available(iOS 14.0, *)
 @available(macOS, unavailable) // No `PlainDisclosureGroup` support
 @available(tvOS, unavailable)
@@ -57,7 +69,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     private let content: () -> Content
     
-    // MARK: Initializers - State
+    // MARK: Initializers
     /// Initializes `VDisclosureGroup` with header title and content.
     public init(
         uiModel: VDisclosureGroupUIModel = .init(),
@@ -82,35 +94,6 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     ) {
         self.uiModel = uiModel
         self._state = state
-        self.headerLabel = .label(label: headerLabel)
-        self.content = content
-    }
-    
-    // MARK: Initializers - Bool
-    /// Initializes `VDisclosureGroup` with header title and content.
-    public init(
-        uiModel: VDisclosureGroupUIModel = .init(),
-        isExpanded: Binding<Bool>,
-        headerTitle: String,
-        @ViewBuilder content: @escaping () -> Content
-    )
-        where HeaderLabel == Never
-    {
-        self.uiModel = uiModel
-        self._state = .init(isExpanded: isExpanded)
-        self.headerLabel = .title(title: headerTitle)
-        self.content = content
-    }
-    
-    /// Initializes `VDisclosureGroup` with header and content.
-    public init(
-        uiModel: VDisclosureGroupUIModel = .init(),
-        isExpanded: Binding<Bool>,
-        @ViewBuilder headerLabel: @escaping (VDisclosureGroupInternalState) -> HeaderLabel,
-        @ViewBuilder content: @escaping () -> Content
-    ) {
-        self.uiModel = uiModel
-        self._state = Binding(isExpanded: isExpanded)
         self.headerLabel = .label(label: headerLabel)
         self.content = content
     }
