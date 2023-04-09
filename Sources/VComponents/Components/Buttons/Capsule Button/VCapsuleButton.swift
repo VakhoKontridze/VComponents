@@ -178,6 +178,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
 }
 
 // MARK: - Preview
+@available(macOS 11.0, *)
 @available(tvOS, unavailable)
 struct VCapsuleButton_Previews: PreviewProvider {
     // Configuration
