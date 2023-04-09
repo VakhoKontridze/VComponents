@@ -126,8 +126,8 @@ public struct VSlider: View {
                         .foregroundColor(uiModel.colors.thumb.value(for: internalState))
                         .shadow(
                             color: uiModel.colors.thumbShadow.value(for: internalState),
-                            radius: uiModel.layout.thumbShadowRadius,
-                            offset: uiModel.layout.thumbShadowOffset // No need to reverse coordinates on shadow
+                            radius: uiModel.colors.thumbShadowRadius,
+                            offset: uiModel.colors.thumbShadowOffset // No need to reverse coordinates on shadow
                         )
                     
                     RoundedRectangle(cornerRadius: uiModel.layout.thumbCornerRadius)

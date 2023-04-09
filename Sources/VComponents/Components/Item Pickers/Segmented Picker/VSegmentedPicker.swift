@@ -280,8 +280,8 @@ public struct VSegmentedPicker<Data, Content>: View
             .foregroundColor(uiModel.colors.indicator.value(for: indicatorInternalState))
             .shadow(
                 color: uiModel.colors.indicatorShadow.value(for: indicatorInternalState),
-                radius: uiModel.layout.indicatorShadowRadius,
-                offset: uiModel.layout.indicatorShadowOffset
+                radius: uiModel.colors.indicatorShadowRadius,
+                offset: uiModel.colors.indicatorShadowOffset
             )
     }
     

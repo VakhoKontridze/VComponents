@@ -81,22 +81,6 @@ public struct VSegmentedPickerUIModel {
 #endif
         }()
         
-        /// Indicator shadow radius. Set to `1`.
-        public var indicatorShadowRadius: CGFloat = 1
-        
-        /// Indicator shadow offset.
-        /// Set to `1x1` on `iOS`.
-        /// Set to `0x1` on `macOS`.
-        public var indicatorShadowOffset: CGPoint = {
-#if os(iOS)
-            return CGPoint(x: 1, y: 1)
-#elseif os(macOS)
-            return CGPoint(x: 0, y: 1)
-#else
-            fatalError() // Not supported
-#endif
-        }()
-        
         /// Row content margin. Set to `2`.
         public var contentMargin: CGFloat = 2
         
@@ -182,6 +166,22 @@ public struct VSegmentedPickerUIModel {
             pressed: GlobalUIModel.Common.shadowColorEnabled,
             disabled: GlobalUIModel.Common.shadowColorDisabled
         )
+        
+        /// Indicator shadow radius. Set to `1`.
+        public var indicatorShadowRadius: CGFloat = 1
+        
+        /// Indicator shadow offset.
+        /// Set to `1x1` on `iOS`.
+        /// Set to `0x1` on `macOS`.
+        public var indicatorShadowOffset: CGPoint = {
+#if os(iOS)
+            return CGPoint(x: 1, y: 1)
+#elseif os(macOS)
+            return CGPoint(x: 0, y: 1)
+#else
+            fatalError() // Not supported
+#endif
+        }()
         
         /// Row title colors.
         public var rowTitle: RowStateColors = .init(
