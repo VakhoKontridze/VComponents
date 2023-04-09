@@ -11,31 +11,103 @@ import VCore
 // MARK: - V Segmented Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content horizontally.
 ///
-/// Component can be initialized with data, row titles, or `HashableEnumeration`/`StringRepresentableHashableEnumeration`.
-///
 /// Best suited for `2` – `3` items.
 ///
 /// UI Model, header, footer, and disabled indexes can be passed as parameters.
 ///
-///     enum PickerRow: Int, StringRepresentableHashableEnumeration {
-///         case red, green, blue
+/// There are four possible ways of initializing `VSegmentedPicker`.
 ///
-///         var stringRepresentation: String {
-///             switch self {
-///             case .red: return "Red"
-///             case .green: return "Green"
-///             case .blue: return "Blue"
-///             }
-///         }
+/// 1. Data, Index, and Title/Content:
+///
+///     private enum SomeEnum: CaseIterable {
+///         case red, green, blue
 ///     }
 ///
-///     @State private var selection: PickerRow = .red
+///     @State private var selectedIndex: Int = 0
+///
+///     var body: some View {
+///         VSegmentedPicker(
+///             selectedIndex: $selectedIndex,
+///             data: SomeEnum.allCases,
+///             title: { String(describing: $0) }
+///         )
+///     }
+///
+///     or
+///
+///     var body: some View {
+///         VSegmentedPicker(
+///             selectedIndex: $selectedIndex,
+///             data: SomeEnum.allCases,
+///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
+///         )
+///     }
+///
+/// 2. Data, Selection, and Title/Content:
+///
+///     private enum SomeEnum: CaseIterable {
+///         case red, green, blue
+///     }
+///
+///     @State private var selection: SomeEnum = .red
 ///
 ///     var body: some View {
 ///         VSegmentedPicker(
 ///             selection: $selection,
-///             headerTitle: "Lorem ipsum dolor sit amet",
-///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+///             data: SomeEnum.allCases,
+///             title: { String(describing: $0) }
+///         )
+///     }
+///
+///     or
+///
+///     var body: some View {
+///         VSegmentedPicker(
+///             selection: $selection,
+///             data: SomeEnum.allCases,
+///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
+///         )
+///     }
+///
+/// 3. `HashableEnumeration` API - Title/Content:
+///
+///     private enum SomeEnum: HashableEnumeration {
+///         case red, green, blue
+///     }
+///
+///     @State private var selection: SomeEnum = .red
+///
+///     var body: some View {
+///         VSegmentedPicker(
+///             selection: $selection,
+///             title: { String(describing: $0) }
+///         )
+///     }
+///
+///     or
+///
+///     var body: some View {
+///         VSegmentedPicker(
+///             selection: $selection,
+///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
+///         )
+///     }
+///
+/// 4. `StringRepresentableHashableEnumeration` API:
+///
+///     private enum SomeEnum: StringRepresentableHashableEnumeration {
+///         case red, green, blue
+///
+///         var stringRepresentation: String {
+///             String(describing: self)
+///         }
+///     }
+///
+///     @State private var selection: SomeEnum = .red
+///
+///     var body: some View {
+///         VSegmentedPicker(
+///             selection: $selection
 ///         )
 ///     }
 ///

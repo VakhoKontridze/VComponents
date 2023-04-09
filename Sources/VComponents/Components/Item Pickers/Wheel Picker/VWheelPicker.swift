@@ -11,30 +11,104 @@ import VCore
 // MARK: - V Wheel Picker
 /// Item picker component that selects from a set of mutually exclusive values, and displays their representative content in a scrollable wheel.
 ///
-/// Component can be initialized with data, row titles, `HashableEnumeration`, or `StringRepresentableHashableEnumeration`.
-///
 /// Best suited for `5`+ items.
 ///
 /// UI Model, header, and footer can be passed as parameters.
 ///
-///     @State private var selection: String = "January"
+/// There are four possible ways of initializing `VWheelPicker`.
 ///
-///     private let rowTitles: [String] = [
-///         "January", "February", "March",
-///         "April", "May", "June",
-///         "July", "August", "September",
-///         "October", "November", "December"
-///     ]
+/// 1. Data, Index, and Title/Content:
+///
+///     private enum SomeEnum: CaseIterable {
+///         case red, green, blue
+///     }
+///
+///     @State private var selectedIndex: Int = 0
+///
+///     var body: some View {
+///         VWheelPicker(
+///             selectedIndex: $selectedIndex,
+///             data: SomeEnum.allCases,
+///             title: { String(describing: $0) }
+///         )
+///     }
+///
+///     or
+///
+///     var body: some View {
+///         VWheelPicker(
+///             selectedIndex: $selectedIndex,
+///             data: SomeEnum.allCases,
+///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
+///         )
+///     }
+///
+/// 2. Data, Selection, and Title/Content:
+///
+///     private enum SomeEnum: CaseIterable {
+///         case red, green, blue
+///     }
+///
+///     @State private var selection: SomeEnum = .red
 ///
 ///     var body: some View {
 ///         VWheelPicker(
 ///             selection: $selection,
-///             headerTitle: "Lorem ipsum dolor sit amet",
-///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///             data: rowTitles,
-///             title: { $0 }
+///             data: SomeEnum.allCases,
+///             title: { String(describing: $0) }
 ///         )
-///         .padding()
+///     }
+///
+///     or
+///
+///     var body: some View {
+///         VWheelPicker(
+///             selection: $selection,
+///             data: SomeEnum.allCases,
+///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
+///         )
+///     }
+///
+/// 3. `HashableEnumeration` API - Title/Content:
+///
+///     private enum SomeEnum: HashableEnumeration {
+///         case red, green, blue
+///     }
+///
+///     @State private var selection: SomeEnum = .red
+///
+///     var body: some View {
+///         VWheelPicker(
+///             selection: $selection,
+///             title: { String(describing: $0) }
+///         )
+///     }
+///
+///     or
+///
+///     var body: some View {
+///         VWheelPicker(
+///             selection: $selection,
+///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
+///         )
+///     }
+///
+/// 4. `StringRepresentableHashableEnumeration` API:
+///
+///     private enum SomeEnum: StringRepresentableHashableEnumeration {
+///         case red, green, blue
+///
+///         var stringRepresentation: String {
+///             String(describing: self)
+///         }
+///     }
+///
+///     @State private var selection: SomeEnum = .red
+///
+///     var body: some View {
+///         VWheelPicker(
+///             selection: $selection
+///         )
 ///     }
 ///
 @available(macOS, unavailable)
