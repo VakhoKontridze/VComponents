@@ -10,8 +10,7 @@ import VCore
 
 // MARK: - V Disclosure Group UI Model
 /// Model that describes UI.
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
+@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VDisclosureGroupUIModel {
@@ -45,11 +44,12 @@ public struct VDisclosureGroupUIModel {
         /// Header margins. Set to `15` horizontal and  `10` vertical.
         public var headerMargins: Margins = GlobalUIModel.Common.containerHeaderMargins
         
-        /// Model for customizing chevron button layout. `size` is set to `30x30`, `iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
+        /// Model for customizing chevron button layout. `size` is set to `30x30`, `cornerRadius` is set to `16`, iconSize` is set to `12x12`, and `hitBox` is set to `zero`.
         public var chevronButtonSubUIModel: VRoundedButtonUIModel.Layout = {
             var uiModel: VRoundedButtonUIModel.Layout = .init()
             
             uiModel.size = .init(dimension: GlobalUIModel.Common.circularButtonGrayDimension)
+            uiModel.cornerRadius = 16
             uiModel.iconSize = CGSize(dimension: GlobalUIModel.Common.circularButtonGrayIconDimension)
             uiModel.hitBox = .zero
             
@@ -131,7 +131,9 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains font properties.
     public struct Fonts {
         // MARK: Properties
-        /// Header title font. Set to `bold` `headline` (`17`).
+        /// Header title font.
+        /// Set to `bold` `headline` (`17`) on `iOS`.
+        /// Set to `bold` `headline` (`13`) on `macOS`.
         public var headerTitle: Font = .headline.weight(.bold)
         
         // MARK: Initializers
@@ -221,8 +223,7 @@ public struct VDisclosureGroupUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
+@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VDisclosureGroupUIModel {

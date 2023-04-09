@@ -49,8 +49,7 @@ import VCore
 ///     }
 ///
 ///
-@available(iOS 14.0, *)
-@available(macOS, unavailable) // No `PlainDisclosureGroup` support
+@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct VDisclosureGroup<HeaderLabel, Content>: View
@@ -187,8 +186,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
 }
 
 // MARK: - Helpers
-@available(iOS 14.0, *)
-@available(macOS, unavailable)
+@available(iOS 14.0, macOS 11.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension VDisclosureGroupInternalState {
@@ -205,7 +203,6 @@ extension VDisclosureGroupInternalState {
 // MARK: - Previews
 // Developmental only
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-@available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 struct VDisclosureGroup_Previews: PreviewProvider {
