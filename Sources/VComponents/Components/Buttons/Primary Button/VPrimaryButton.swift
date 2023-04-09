@@ -87,7 +87,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
     
     // MARK: Body
     public var body: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIGestureBaseButton(onStateChange: gestureHandler, label: {
             buttonLabel
                 .frame(height: uiModel.layout.height)
                 .background(content: { background })
@@ -167,7 +167,7 @@ public struct VPrimaryButton<Label>: View where Label: View {
     }
     
     // MARK: Actions
-    private func gestureHandler(gestureState: BaseButtonGestureState) {
+    private func gestureHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }

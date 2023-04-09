@@ -126,7 +126,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     spacer
 
-                    SwiftUIBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIGestureBaseButton(onStateChange: gestureHandler, label: {
                         VText(
                             type: uiModel.layout.titleLineType,
                             minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
@@ -144,7 +144,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     
                     spacer
                     
-                    SwiftUIBaseButton(gesture: gestureHandler, label: {
+                    SwiftUIGestureBaseButton(onStateChange: gestureHandler, label: {
                         label()
                             .opacity(uiModel.colors.customLabelOpacities.value(for: internalState))
                     })
@@ -156,7 +156,7 @@ public struct VCheckBox<Label>: View where Label: View {
     }
     
     private var checkBox: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIGestureBaseButton(onStateChange: gestureHandler, label: {
             ZStack(content: {
                 RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
                     .foregroundColor(uiModel.colors.fill.value(for: internalState))
@@ -178,7 +178,7 @@ public struct VCheckBox<Label>: View where Label: View {
     }
     
     private var spacer: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIGestureBaseButton(onStateChange: gestureHandler, label: {
             Rectangle()
                 .fixedSize(horizontal: false, vertical: true)
                 .frame(width: uiModel.layout.checkBoxLabelSpacing)
@@ -188,7 +188,7 @@ public struct VCheckBox<Label>: View where Label: View {
     }
 
     // MARK: Actions
-    private func gestureHandler(gestureState: BaseButtonGestureState) {
+    private func gestureHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { state.setNextState() }
     }

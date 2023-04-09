@@ -78,7 +78,7 @@ public struct VSlider: View {
             )
             .disabled(!internalState.isEnabled)
             .frame(height: uiModel.layout.height)
-            .readSize(onChange: { sliderWidth = $0.width })
+            .onSizeChange(perform: { sliderWidth = $0.width })
             .padding(.horizontal, uiModel.layout.thumbDimension / 2)
             .animation(uiModel.animations.progress, value: value)
     }
@@ -91,7 +91,7 @@ public struct VSlider: View {
     private var progress: some View {
         Rectangle()
             .frame(width: progressWidth)
-            .cornerRadius(uiModel.layout.cornerRadius, corners: uiModel.layout.progressViewRoundedCorners)
+            .cornerRadius(uiModel.layout.cornerRadius, uiCorners: uiModel.layout.progressViewRoundedCorners)
             .foregroundColor(uiModel.colors.progress.value(for: internalState))
     }
     

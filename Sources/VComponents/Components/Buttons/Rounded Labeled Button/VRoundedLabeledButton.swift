@@ -85,7 +85,7 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
     
     // MARK: Body
     public var body: some View {
-        SwiftUIBaseButton(gesture: gestureHandler, label: {
+        SwiftUIGestureBaseButton(onStateChange: gestureHandler, label: {
             VStack(spacing: uiModel.layout.rectangleLabelSpacing, content: {
                 rectangle
                 buttonLabel
@@ -160,7 +160,7 @@ public struct VRoundedLabeledButton<Label>: View where Label: View {
     }
     
     // MARK: Actions
-    private func gestureHandler(gestureState: BaseButtonGestureState) {
+    private func gestureHandler(gestureState: GestureBaseButtonGestureState) {
         isPressed = gestureState.isPressed
         if gestureState.isClicked { action() }
     }

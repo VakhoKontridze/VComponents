@@ -93,7 +93,7 @@ public struct VRangeSlider: View {
             .overlay(content: { thumb(.low) })
             .overlay(content: { thumb(.high) })
             .frame(height: uiModel.layout.height)
-            .readSize(onChange: { sliderWidth = $0.width })
+            .onSizeChange(perform: { sliderWidth = $0.width })
             .padding(.horizontal, uiModel.layout.thumbDimension / 2)
             .disabled(!internalState.isEnabled)
             .animation(uiModel.animations.progress, value: valueLow)

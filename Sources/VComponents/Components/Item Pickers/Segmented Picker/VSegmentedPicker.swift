@@ -277,8 +277,8 @@ public struct VSegmentedPicker<Data, Content>: View
         case .titles(let titles):
             HStack(spacing: 0, content: {
                 ForEach(titles.indices, id: \.self, content: { i in
-                    SwiftUIBaseButton(
-                        gesture: { gestureHandler(i: i, gestureState: $0) },
+                    SwiftUIGestureBaseButton(
+                        onStateChange: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             VText(
                                 minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
@@ -290,7 +290,7 @@ public struct VSegmentedPicker<Data, Content>: View
                                 .padding(uiModel.layout.contentMargin)
                                 .frame(maxWidth: .infinity)
 
-                                .readSize(onChange: { rowWidth = $0.width })
+                                .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
                         .disabled(!internalState.isEnabled || disabledIndexes.contains(i))
@@ -300,8 +300,8 @@ public struct VSegmentedPicker<Data, Content>: View
         case .custom(let data, let content):
             HStack(spacing: 0, content: {
                 ForEach(data.indices, id: \.self, content: { i in
-                    SwiftUIBaseButton(
-                        gesture: { gestureHandler(i: i, gestureState: $0) },
+                    SwiftUIGestureBaseButton(
+                        onStateChange: { gestureHandler(i: i, gestureState: $0) },
                         label: {
                             content(data[i])
                                 .padding(uiModel.layout.indicatorMargin)
@@ -310,7 +310,7 @@ public struct VSegmentedPicker<Data, Content>: View
 
                                 .opacity(uiModel.colors.customContentOpacities.value(for: rowState(for: i)))
 
-                                .readSize(onChange: { rowWidth = $0.width })
+                                .onSizeChange(perform: { rowWidth = $0.width })
                         }
                     )
                         .disabled(!internalState.isEnabled || disabledIndexes.contains(i))
@@ -335,7 +335,7 @@ public struct VSegmentedPicker<Data, Content>: View
     }
     
     // MARK: Actions
-    private func gestureHandler(i: Int, gestureState: BaseButtonGestureState) {
+    private func gestureHandler(i: Int, gestureState: GestureBaseButtonGestureState) {
         pressedIndex = gestureState.isPressed ? i : nil
         if gestureState.isClicked { selectedIndex = i }
     }

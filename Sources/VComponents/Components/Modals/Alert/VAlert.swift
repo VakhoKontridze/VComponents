@@ -91,7 +91,7 @@ struct VAlert<Content>: View
                     contentView
                 })
                     .padding(uiModel.layout.titleMessageContentMargins)
-                    .readSize(onChange: { titleMessageContentHeight = $0.height })
+                    .onSizeChange(perform: { titleMessageContentHeight = $0.height })
 
                 buttonsScrollView
             })
@@ -178,7 +178,7 @@ struct VAlert<Content>: View
             }
         })
             .padding(uiModel.layout.buttonMargins)
-            .readSize(onChange: { buttonsStackHeight = $0.height })
+            .onSizeChange(perform: { buttonsStackHeight = $0.height })
     }
     
     private func buttonsContent(reversesOrder: Bool = false) -> some View {

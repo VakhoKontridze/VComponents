@@ -86,8 +86,8 @@ public struct VStepper: View {
     }
     
     private func button(_ button: VStepperButton) -> some View {
-        SwiftUIBaseButton(
-            gesture: { gestureHandler(button: button, gestureState: $0) },
+        SwiftUIGestureBaseButton(
+            onStateChange: { gestureHandler(button: button, gestureState: $0) },
             label: {
                 ZStack(content: {
                     RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius)
@@ -111,7 +111,7 @@ public struct VStepper: View {
     }
     
     // MARK: Actions
-    private func gestureHandler(button: VStepperButton, gestureState: BaseButtonGestureState) {
+    private func gestureHandler(button: VStepperButton, gestureState: GestureBaseButtonGestureState) {
         pressGestureHandler(button, isPressed: gestureState.isPressed)
         if gestureState.isClicked { clickGestureHandler(button) }
     }
