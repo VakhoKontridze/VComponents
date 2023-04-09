@@ -19,7 +19,7 @@ import VCore
 ///
 ///     @State private var selection: String = "January"
 ///
-///     let rowTitles: [String] = [
+///     private let rowTitles: [String] = [
 ///         "January", "February", "March",
 ///         "April", "May", "June",
 ///         "July", "August", "September",
@@ -31,7 +31,8 @@ import VCore
 ///             selection: $selection,
 ///             headerTitle: "Lorem ipsum dolor sit amet",
 ///             footerTitle: "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-///             rowTitles: rowTitles
+///             data: rowTitles,
+///             title: { $0 }
 ///         )
 ///         .padding()
 ///     }
@@ -61,6 +62,24 @@ public struct VWheelPicker<Data, Content>: View
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers - Index
+    /// Initializes `VWheelPicker` with selected index, data, and row title.
+    public init(
+        uiModel: VWheelPickerUIModel = .init(),
+        selectedIndex: Binding<Int>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        data: Data,
+        title: @escaping (Data.Element) -> String
+    )
+        where Content == Never
+    {
+        self.uiModel = uiModel
+        self._selectedIndex = selectedIndex
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.content = .title(data: data, title: title)
+    }
+    
     /// Initializes `VWheelPicker` with selected index, data, and row content.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
@@ -77,26 +96,31 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .content(data: data, content: content)
     }
     
-    /// Initializes `VWheelPicker` with selected index and row titles.
-    public init(
+    // MARK: Initializers - Hashable
+    /// Initializes `VWheelPicker` with selection value, data, and row title.
+    public init<SelectionValue>(
         uiModel: VWheelPickerUIModel = .init(),
-        selectedIndex: Binding<Int>,
+        selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        rowTitles: [String]
+        data: Data,
+        title: @escaping (Data.Element) -> String
     )
         where
-            Data == Array<Never>,
-            Content == Never
+            Data == Array<SelectionValue>,
+            Content == Never,
+            SelectionValue: Hashable
     {
         self.uiModel = uiModel
-        self._selectedIndex = selectedIndex
+        self._selectedIndex = Binding(
+            get: { data.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
+            set: { selection.wrappedValue = data[$0] }
+        )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .titles(titles: rowTitles)
+        self.content = .title(data: data, title: title)
     }
     
-    // MARK: Initializers - Hashable
     /// Initializes `VWheelPicker` with selection value, data, and row content.
     public init<SelectionValue>(
         uiModel: VWheelPickerUIModel = .init(),
@@ -120,29 +144,30 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .content(data: data, content: content)
     }
     
-    /// Initializes `VWheelPicker` with selection value and row titles.
-    public init(
+    // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
+    /// Initializes `VWheelPicker` with `HashableEnumeration` and row title.
+    public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<String>,
+        selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        rowTitles: [String]
+        title: @escaping (T) -> String
     )
         where
-            Data == Array<Never>,
-            Content == Never
+            Data == Array<T>,
+            Content == Never,
+            T: HashableEnumeration
     {
         self.uiModel = uiModel
         self._selectedIndex = Binding(
-            get: { rowTitles.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = rowTitles[$0] }
+            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
+            set: { selection.wrappedValue = Array(T.allCases)[$0] }
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .titles(titles: rowTitles)
+        self.content = .title(data: Array(T.allCases), title: title)
     }
     
-    // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
     /// Initializes `VWheelPicker` with `HashableEnumeration` and row content.
     public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
@@ -165,6 +190,7 @@ public struct VWheelPicker<Data, Content>: View
         self.content = .content(data: Array(T.allCases), content: content)
     }
     
+    // MARK: Initializers - String Representable Hashable Enumeration
     /// Initializes `VWheelPicker` with `StringRepresentableHashableEnumeration`.
     public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
@@ -173,7 +199,7 @@ public struct VWheelPicker<Data, Content>: View
         footerTitle: String? = nil
     )
         where
-            Data == Array<Never>,
+            Data == Array<T>,
             Content == Never,
             T: StringRepresentableHashableEnumeration
     {
@@ -184,7 +210,7 @@ public struct VWheelPicker<Data, Content>: View
         )
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .titles(titles: Array(T.allCases).map { $0.stringRepresentation })
+        self.content = .title(data:  Array(T.allCases), title: { $0.stringRepresentation })
     }
     
     // MARK: Body
@@ -232,13 +258,13 @@ public struct VWheelPicker<Data, Content>: View
     
     @ViewBuilder private func rows() -> some View {
         switch content {
-        case .titles(let titles):
-            ForEach(titles.indices, id: \.self, content: { i in
+        case .title(let data, let title):
+            ForEach(data.indices, id: \.self, content: { i in
                 VText(
                     minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                     color: uiModel.colors.title.value(for: internalState),
                     font: uiModel.fonts.rows,
-                    text: titles[i]
+                    text: title(data[i])
                 )
                 .tag(i)
             })
@@ -299,7 +325,8 @@ struct VWheelPicker_Previews: PreviewProvider {
                     selection: $selection,
                     headerTitle: headerTitle,
                     footerTitle: footerTitle,
-                    rowTitles: rowTitles
+                    data: rowTitles,
+                    title: { $0 }
                 )
                 .padding()
             })
@@ -317,7 +344,8 @@ struct VWheelPicker_Previews: PreviewProvider {
                             selection: .constant(selection),
                             headerTitle: headerTitle,
                             footerTitle: footerTitle,
-                            rowTitles: rowTitles
+                            data: rowTitles,
+                            title: { $0 }
                         )
                     }
                 )
@@ -330,7 +358,8 @@ struct VWheelPicker_Previews: PreviewProvider {
                             selection: .constant(selection),
                             headerTitle: headerTitle,
                             footerTitle: footerTitle,
-                            rowTitles: rowTitles
+                            data: rowTitles,
+                            title: { $0 }
                         )
                         .disabled(true)
                     }
