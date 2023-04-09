@@ -1,6 +1,6 @@
 # Change Log
 
-### 3.2.3(32)
+### [3.2.3(32)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.3) — *2023 04 09*
 
 Other
 
