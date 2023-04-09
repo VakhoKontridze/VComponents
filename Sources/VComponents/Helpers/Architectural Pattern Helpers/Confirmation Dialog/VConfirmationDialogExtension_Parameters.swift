@@ -17,7 +17,7 @@ extension View {
     public func vConfirmationDialog(
         parameters: Binding<VConfirmationDialogParameters?>
     ) -> some View {
-        vConfirmationDialog(
+        self.vConfirmationDialog(
             item: parameters,
             title: { $0.title },
             message: { $0.message },

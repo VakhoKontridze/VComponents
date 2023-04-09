@@ -22,7 +22,7 @@ extension View {
         uiModel: VAlertUIModel = .init(),
         parameters: Binding<VAlertParameters?>
     ) -> some View {
-        vAlert(
+        self.vAlert(
             id: id,
             uiModel: uiModel,
             item: parameters,
