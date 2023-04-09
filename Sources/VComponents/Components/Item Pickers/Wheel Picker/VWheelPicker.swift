@@ -17,7 +17,7 @@ import VCore
 ///
 /// There are four possible ways of initializing `VWheelPicker`.
 ///
-/// 1. Data, Index, and Title/Content:
+/// [1] Data, Index, and Title/Content:
 ///
 ///     private enum SomeEnum: CaseIterable {
 ///         case red, green, blue
@@ -43,7 +43,7 @@ import VCore
 ///         )
 ///     }
 ///
-/// 2. Data, Selection, and Title/Content:
+/// [2] Data, Selection, and Title/Content:
 ///
 ///     private enum SomeEnum: CaseIterable {
 ///         case red, green, blue
@@ -69,7 +69,7 @@ import VCore
 ///         )
 ///     }
 ///
-/// 3. `HashableEnumeration` API - Title/Content:
+/// [3] `HashableEnumeration` API - Title/Content:
 ///
 ///     private enum SomeEnum: HashableEnumeration {
 ///         case red, green, blue
@@ -93,7 +93,7 @@ import VCore
 ///         )
 ///     }
 ///
-/// 4. `StringRepresentableHashableEnumeration` API:
+/// [4] `StringRepresentableHashableEnumeration` API:
 ///
 ///     private enum SomeEnum: StringRepresentableHashableEnumeration {
 ///         case red, green, blue
