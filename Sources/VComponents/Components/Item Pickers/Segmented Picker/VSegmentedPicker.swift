@@ -223,8 +223,11 @@ public struct VSegmentedPicker<Data, Content>: View
             picker
             footer
         })
-        .animation(uiModel.animations.selection, value: internalState)
-        .animation(uiModel.animations.selection, value: selectedIndex)
+        .if(uiModel.animations.appliesSelectionAnimation, transform: {
+            $0
+                .animation(uiModel.animations.selection, value: internalState)
+                .animation(uiModel.animations.selection, value: selectedIndex)
+        })
     }
     
     @ViewBuilder private var header: some View {
@@ -346,7 +349,9 @@ public struct VSegmentedPicker<Data, Content>: View
     
     // MARK: Actions
     private func stateChangeHandler(i: Int, gestureState: GestureBaseButtonGestureState) {
-        withAnimation(uiModel.animations.indicatorPress, { // Doesn't work as modifier
+        // Doesn't work as modifier
+        // Not affected by animation flag
+        withAnimation(uiModel.animations.indicatorPress, {
             pressedIndex = gestureState.isPressed ? i : nil
         })
         

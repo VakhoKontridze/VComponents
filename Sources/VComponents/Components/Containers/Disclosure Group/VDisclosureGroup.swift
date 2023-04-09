@@ -133,8 +133,11 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 }
             )
         })
-        .animation(uiModel.animations.expandCollapse, value: isEnabled)
-        .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
+        .if(uiModel.animations.appliesExpandCollapseAnimation, transform: {
+            $0
+                .animation(uiModel.animations.expandCollapse, value: isEnabled)
+                .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
+        })
     }
     
     private var header: some View {
@@ -184,6 +187,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
     
     // MARK: Actions
     private func expandCollapse() {
+        // Not affected by animation flag
         withAnimation(uiModel.animations.expandCollapse, { state.setNextState() })
     }
     

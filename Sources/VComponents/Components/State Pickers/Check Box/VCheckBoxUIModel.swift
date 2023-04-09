@@ -145,6 +145,14 @@ public struct VCheckBoxUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
+        /// Indicates if `stateChange` animation is applied. Defaults to `true`.
+        ///
+        /// If  animation is set to `nil`, a `nil` animation is still applied.
+        /// If this property is set to `false`, then no animation is applied.
+        ///
+        /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+        public var appliesStateChangeAnimation: Bool = true
+        
         /// State change animation. Set to `easeIn` with duration `0.1`.
         public var stateChange: Animation? = GlobalUIModel.StatePickers.stateChangeAnimation
         

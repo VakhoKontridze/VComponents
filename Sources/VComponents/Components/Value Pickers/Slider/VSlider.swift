@@ -91,7 +91,9 @@ public struct VSlider: View {
             uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
             uiModel.layout.thumbDimension / 2
         )
-        .animation(uiModel.animations.progress, value: value)
+        .if(uiModel.animations.appliesProgressAnimation, transform: {
+            $0.animation(uiModel.animations.progress, value: value)
+        })
     }
     
     private var track: some View {

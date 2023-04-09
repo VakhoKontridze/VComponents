@@ -138,7 +138,9 @@ public struct VPageIndicator<Content>: View where Content: View {
                 ForEach(range, id: \.self, content: dotContentView)
             }
         )
-        .animation(uiModel.animations.transition, value: current)
+        .if(uiModel.animations.appliesTransitionAnimation, transform: {
+            $0.animation(uiModel.animations.transition, value: current)
+        })
     }
     
     private func dotContentView(i: Int) -> some View {

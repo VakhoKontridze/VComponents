@@ -62,7 +62,9 @@ public struct VProgressBar: View {
             height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
         )
         .onSizeChange(perform: { progressBarSize = $0 })
-        .animation(uiModel.animations.progress, value: value)
+        .if(uiModel.animations.appliesProgressAnimation, transform: {
+            $0.animation(uiModel.animations.progress, value: value)
+        })
     }
     
     private var track: some View {

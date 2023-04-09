@@ -143,6 +143,16 @@ public struct VDisclosureGroupUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
+        /// Indicates if `expandCollapse` animation is applied. Defaults to `true`.
+        ///
+        /// This property doesn't affect internal expand/collapse button press.
+        ///
+        /// If  animation is set to `nil`, a `nil` animation is still applied.
+        /// If this property is set to `false`, then no animation is applied.
+        ///
+        /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+        public var appliesExpandCollapseAnimation: Bool = true
+        
         /// Expand and collapse animation. Set to `default`.
         public var expandCollapse: Animation? = .default
         

@@ -95,43 +95,37 @@ var body: some View {
 
 VComponents approaches animations as bound to components and their UI models, and not to state. Which means, that to modify a state of component with an animation, you need to pass a custom UI model.
 
-Not Preferred:
+For instance, by default, `VToggle` uses `easeIn` animation with duration `0.1` to state change. This applies to both toggle press, as well as external modification of state:
 
 ```swift
-@State var isOn: Bool = false
+@State private var isOn: Bool = false
 
 var body: some View {
     VStack(content: {
-        VToggle(
-            isOn: $isOn, 
-            title: "Lorem ipsum"
-        )
+        VToggle(isOn: $isOn)
         
         VPlainButton(
-            action: { withAnimation(nil, { isOn.toggle() }) },
+            action: { isOn.toggle() },
             title: "Toggle"
         )
     })
 }
 ```
 
-Preferred:
+If you wish to completely cancel animations, you have two options. First, is to set `stateChange` animation to `nil`, which still applies a `nil` animation. Second, is to set `appliesStateChangeAnimation` to `false`, which doesn't apply `stateChange` animation at all.
 
 ```swift
-@State var isOn: Bool = false
-
-let uiModel: VToggleUIModel = {
-    var uiModel: VToggleUIModel = .init()
-    uiModel.animations.stateChange = nil
-    return uiModel
-}()
+@State private var isOn: Bool = false
 
 var body: some View {
     VStack(content: {
         VToggle(
-            uiModel: uiModel, 
-            isOn: $isOn, 
-            title: "Lorem ipsum"
+            uiModel: {
+                var uiModel: VToggleUIModel = .init()
+                uiModel.animations.stateChange = nil
+                return uiModel
+            }(),
+            isOn: $isOn
         )
         
         VPlainButton(
@@ -142,13 +136,57 @@ var body: some View {
 }
 ```
 
-First method is not only not preferred, but it will also not work. Despite specifying `nil` to change state, `VToggle` would still use its default animation.
+or
 
-Components manage state parameters internally, and animations used to change them externally do not have any effect.
+```swift
+@State private var isOn: Bool = false
 
-Thought process behind his design choice was to centralize animations to UI model.
+var body: some View {
+    VStack(content: {
+        VToggle(
+            uiModel: {
+                var uiModel: VToggleUIModel = .init()
+                uiModel.animations.appliesStateChangeAnimation = false
+                return uiModel
+            }(),
+            isOn: $isOn
+        )
+        
+        VPlainButton(
+            action: { isOn.toggle() },
+            title: "Toggle"
+        )
+    })
+}
+```
 
-Components also prevent themselves from modifying external state with an animation.
+In some cases, the difference between these two may be significant. For instance, we can set the flag to `false`, and mutate state with an external animation:
+
+```swift
+@State private var isOn: Bool = false
+
+var body: some View {
+    VStack(content: {
+        VToggle(
+            uiModel: {
+                var uiModel: VToggleUIModel = .init()
+                uiModel.animations.appliesStateChangeAnimation = false
+                return uiModel
+            }(),
+            isOn: $isOn
+        )
+        
+        VPlainButton(
+            action: { 
+                withAnimation(.linear(duration: 1), {
+                    isOn.toggle()
+                })
+            },
+            title: "Toggle"
+        )
+    })
+}
+```
 
 ## Installation
 

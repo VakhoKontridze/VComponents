@@ -157,7 +157,9 @@ public struct VCheckBox<Label>: View where Label: View {
                 })
             }
         })
-        .animation(uiModel.animations.stateChange, value: internalState)
+        .if(uiModel.animations.appliesStateChangeAnimation, transform: {
+            $0.animation(uiModel.animations.stateChange, value: internalState)
+        })
     }
     
     private var checkBox: some View {

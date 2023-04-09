@@ -153,6 +153,9 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
                 elseTransform: { $0.overlay(dotsVertical) }
             )
                 .clipped()
+                .if(uiModel.animations.appliesTransitionAnimation, transform: {
+                    $0.animation(uiModel.animations.transition, value: current)
+                })
     }
     
     private var frame: some View {
@@ -172,7 +175,6 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             content: dots
         )
         .offset(x: offset)
-        .animation(uiModel.animations.transition, value: current)
     }
     
     private var dotsVertical: some View {
@@ -181,7 +183,6 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
             content: dots
         )
         .offset(y: offset)
-        .animation(uiModel.animations.transition, value: current)
     }
     
     private func dots() -> some View {

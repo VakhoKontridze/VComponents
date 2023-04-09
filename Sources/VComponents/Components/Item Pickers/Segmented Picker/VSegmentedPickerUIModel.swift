@@ -265,6 +265,16 @@ public struct VSegmentedPickerUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
+        /// Indicates if `selection` animation is applied. Defaults to `true`.
+        ///
+        /// This property doesn't affect internal button press.
+        ///
+        /// If  animation is set to `nil`, a `nil` animation is still applied.
+        /// If this property is set to `false`, then no animation is applied.
+        ///
+        /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+        public var appliesSelectionAnimation: Bool = true
+        
         /// State change animation. Set to `easeInOut` with duration `0.2`.
         public var selection: Animation? = .easeInOut(duration: 0.2)
         

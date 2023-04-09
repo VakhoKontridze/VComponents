@@ -151,6 +151,14 @@ public struct VSliderUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
+        /// Indicates if `progress` animation is applied. Defaults to `true`.
+        ///
+        /// If  animation is set to `nil`, a `nil` animation is still applied.
+        /// If this property is set to `false`, then no animation is applied.
+        ///
+        /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+        public var appliesProgressAnimation: Bool = true
+        
         /// Progress animation. Set to `nil`.
         public var progress: Animation? = nil
         

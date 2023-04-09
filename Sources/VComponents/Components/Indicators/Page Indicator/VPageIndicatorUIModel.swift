@@ -119,8 +119,16 @@ public struct VPageIndicatorUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
+        /// Indicates if `transition` animation is applied. Defaults to `true`.
+        ///
+        /// If  animation is set to `nil`, a `nil` animation is still applied.
+        /// If this property is set to `false`, then no animation is applied.
+        ///
+        /// One use-case for this property is to externally mutate state using `withAnimation(_:_:)` function.
+        public var appliesTransitionAnimation: Bool = true
+        
         /// Transition animation. Set to `linear` with duration `0.15`.
-        public var transition: Animation = .linear(duration: 0.15)
+        public var transition: Animation? = .linear(duration: 0.15)
         
         // MARK: Initializers
         /// Initializes UI model with default values.
