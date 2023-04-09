@@ -128,6 +128,15 @@ public struct VListRowUIModel {
 @available(iOS 15.0, macOS 13.0, tvOS 13.0, *)
 @available(watchOS, unavailable)
 extension VListRowUIModel {
+    /// `VListRowUIModel` that displays no separators.
+    public static func noSeparators() -> Self {
+        var uiModel: Self = .init()
+        
+        uiModel.layout.separatorType = .none
+        
+        return uiModel
+    }
+    
     /// `VListRowUIModel` that displays separators at the bottom of all rows in the list.
     public static func noFirstSeparator() -> Self {
         var uiModel: Self = .init()
