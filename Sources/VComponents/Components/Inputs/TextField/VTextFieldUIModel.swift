@@ -255,8 +255,8 @@ public struct VTextFieldUIModel {
     /// Model that contains animation properties.
     public struct Animations {
         // MARK: Properties
-        /// Clear button appear and disappear animation. Set to `easeInOut` with duration `0.2`.
-        public var clearButton: Animation? = .easeInOut(duration: 0.2)
+        /// Clear button appear and disappear animation. Set to `nil`.
+        public var clearButton: Animation? = nil
         
         /// Model for customizing clear button animations. `haptic` is set to `nil`.
         public var clearButtonSubUIModel: VRoundedButtonUIModel.Animations = {

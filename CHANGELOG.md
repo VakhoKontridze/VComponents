@@ -135,6 +135,8 @@ VSlider
 VTextField
 
 - Issue with password visibility icon not being visible is fixed
+- Close button animation is set to `nil`
+- Issue with keyboard animation affecting close button's offset is fixed
 
 ### [3.2.0(29)](https://github.com/VakhoKontridze/VComponents/releases/tag/3.2.0) — *2023 03 09*
 

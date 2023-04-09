@@ -106,7 +106,7 @@ public struct VTextField: View {
     private let placeholder: String?
     @Binding private var text: String
     
-    @State private var clearButtonIsVisible: Bool = false
+    @State private var textIsNonEmpty: Bool = false
     @State private var secureFieldIsVisible: Bool = false
     
     // MARK: Initializers
@@ -236,14 +236,20 @@ public struct VTextField: View {
         .submitLabel(uiModel.misc.submitButton)
     }
     
-    @ViewBuilder private var clearButton: some View {
-        if !uiModel.layout.contentType.isSecure && clearButtonIsVisible && uiModel.misc.hasClearButton {
-            VRoundedButton(
-                uiModel: uiModel.clearButtonSubUIModel,
-                action: didTapClearButton,
-                icon: ImageBook.xMark
-            )
-        }
+    private var clearButton: some View {
+        let isVisible: Bool = // Keyboard animation breaks offset when using conditional instead of opacity
+            !uiModel.layout.contentType.isSecure &&
+            uiModel.misc.hasClearButton &&
+            internalState == .focused &&
+            textIsNonEmpty
+        
+        return VRoundedButton(
+            uiModel: uiModel.clearButtonSubUIModel,
+            action: didTapClearButton,
+            icon: ImageBook.xMark
+        )
+            .opacity(isVisible ? 1 : 0)
+            .allowsHitTesting(isVisible)
     }
     
     @ViewBuilder private var visibilityButton: some View {
@@ -278,12 +284,12 @@ public struct VTextField: View {
     
     // MARK: Actions
     private func textChanged(_ text: String) {
-        withAnimation(uiModel.animations.clearButton, { clearButtonIsVisible = !text.isEmpty })
+        withAnimation(uiModel.animations.clearButton, { textIsNonEmpty = !text.isEmpty })
     }
     
     private func didTapClearButton() {
         text = ""
-        withAnimation(uiModel.animations.clearButton, { clearButtonIsVisible = false })
+        withAnimation(uiModel.animations.clearButton, { textIsNonEmpty = false })
     }
 }
 
