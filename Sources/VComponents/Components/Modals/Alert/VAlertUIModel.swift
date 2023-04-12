@@ -130,7 +130,7 @@ public struct VAlertUIModel {
         
         // MARK: Alert Size
         /// Alert size.
-        public struct AlertSize: Equatable {
+        public struct AlertSize: Equatable, ScreenRelativeSizeMeasurement {
             // MARK: Properties
             /// Width.
             public var width: CGFloat
@@ -141,6 +141,13 @@ public struct VAlertUIModel {
                 width: CGFloat
             ) {
                 self.width = width
+            }
+            
+            // MARK: Screen Relative Size Measurement
+            public static func relativeMeasurementToPoints(_ measurement: Self) -> Self {
+                .init(
+                    width: MultiplatformConstants.screenSize.width * measurement.width
+                )
             }
         }
         

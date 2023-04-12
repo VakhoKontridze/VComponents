@@ -140,7 +140,7 @@ public struct VBottomSheetUIModel {
         
         // MARK: Bottom Sheet Size
         /// Bottom sheet size.
-        public struct BottomSheetSize: Equatable {
+        public struct BottomSheetSize: Equatable, ScreenRelativeSizeMeasurement {
             // MARK: Properties
             /// Width.
             public var width: CGFloat
@@ -156,6 +156,18 @@ public struct VBottomSheetUIModel {
             ) {
                 self.width = width
                 self.heights = heights
+            }
+            
+            // MARK: Screen Relative Size Measurement
+            public static func relativeMeasurementToPoints(_ measurement: Self) -> Self {
+                .init(
+                    width: MultiplatformConstants.screenSize.width * measurement.width,
+                    heights: BottomSheetHeights(
+                        min: MultiplatformConstants.screenSize.height * measurement.heights.min,
+                        ideal: MultiplatformConstants.screenSize.height * measurement.heights.ideal,
+                        max: MultiplatformConstants.screenSize.height * measurement.heights.max
+                    )
+                )
             }
         }
         
