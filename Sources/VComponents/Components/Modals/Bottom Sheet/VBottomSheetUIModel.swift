@@ -190,8 +190,14 @@ public struct VBottomSheetUIModel {
                 ideal != max
             }
             
+            /// Indicates if model suggests fully fixed height.
+            public var isFixed: Bool {
+                min == ideal &&
+                ideal == max
+            }
+            
             var minOffset: CGFloat {
-                if isResizable {
+                if isResizable || isFixed {
                     return MultiplatformConstants.screenSize.height - min
                 } else {
                     return (MultiplatformConstants.screenSize.height - min) / 2
@@ -199,7 +205,7 @@ public struct VBottomSheetUIModel {
             }
             
             var idealOffset: CGFloat {
-                if isResizable {
+                if isResizable || isFixed {
                     return MultiplatformConstants.screenSize.height - ideal
                 } else {
                     return (MultiplatformConstants.screenSize.height - ideal) / 2
@@ -207,7 +213,7 @@ public struct VBottomSheetUIModel {
             }
             
             var maxOffset: CGFloat {
-                if isResizable {
+                if isResizable || isFixed {
                     return MultiplatformConstants.screenSize.height - max
                 } else {
                     return (MultiplatformConstants.screenSize.height - max) / 2
@@ -215,7 +221,7 @@ public struct VBottomSheetUIModel {
             }
             
             var hiddenOffset: CGFloat {
-                if isResizable {
+                if isResizable || isFixed {
                     return MultiplatformConstants.screenSize.height
                 } else {
                     return MultiplatformConstants.screenSize.height - maxOffset

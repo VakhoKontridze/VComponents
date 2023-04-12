@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.0.2
+
+VBottomSheet
+
+- Issue with positioning when using fully fixed height is fixed
+
 ### [4.0.1(34)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.1) — *2023 04 12*
 
 General
