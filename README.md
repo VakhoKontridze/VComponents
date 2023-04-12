@@ -116,7 +116,7 @@ Instead, UI model can be passed as parameter to initializers. This parameter has
 
 UI Models are `struct`s with default values. They break down into 5 models: `Layout`, `Colors`, `Fonts`, `Animations`, and `Misc`.
 
-For instance, changing foreground color of `VPlainButton` can be done by passing an IU model.
+For instance, changing foreground color of `VPlainButton` can be done by passing an UI model.
 
 Not Preferred:
 
