@@ -8,6 +8,10 @@
 import SwiftUI
 import VCore
 
+#if os(watchOS)
+import WatchKit
+#endif
+
 // MARK: - Global UI Model
 struct GlobalUIModel {
     // MARK: Initializers
@@ -173,9 +177,9 @@ struct GlobalUIModel {
         }()
         
 #if os(iOS)
-        static var hapticIOS: UIImpactFeedbackGenerator.FeedbackStyle? { .light }
+        static var hapticStretchedButtonIOS: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
 #elseif os(watchOS)
-        static var hapticWatchOS: WKHapticType? { nil }
+        static var hapticStretchedButtonWatchOS: WKHapticType? = .click
 #endif
         
         // MARK: Initializers

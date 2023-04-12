@@ -157,10 +157,10 @@ public struct VStretchedButtonUIModel {
         
 #if os(iOS)
         /// Haptic feedback style. Set to `medium`.
-        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticStretchedButtonIOS
 #elseif os(watchOS)
         /// Haptic feedback type. Set to `click`.
-        public var haptic: WKHapticType? = GlobalUIModel.Buttons.hapticWatchOS
+        public var haptic: WKHapticType? = GlobalUIModel.Buttons.hapticStretchedButtonWatchOS
 #endif
         
         // MARK: Initializers

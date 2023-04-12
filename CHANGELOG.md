@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.0.1(34)
+
+General
+
+- Default haptic value is set to `nil` for most button components - `VCapsuleButton`, `VRoundedButton`, `VRoundedCaptionButton`, and `VPlainButton`
+
 ### [4.0.0(33)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.0) — *2023 04 09*
 
 General

@@ -173,7 +173,7 @@ public struct VLoadingStretchedButtonUIModel {
         
 #if os(iOS)
         /// Haptic feedback style. Set to `medium`.
-        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = .medium
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticStretchedButtonIOS
 #endif
         
         // MARK: Initializers

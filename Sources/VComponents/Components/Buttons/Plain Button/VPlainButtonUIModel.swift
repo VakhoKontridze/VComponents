@@ -148,11 +148,11 @@ public struct VPlainButtonUIModel {
         public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
 #if os(iOS)
-        /// Haptic feedback style. Set to `light`.
-        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = GlobalUIModel.Buttons.hapticIOS
+        /// Haptic feedback style. Set to `nil`.
+        public var haptic: UIImpactFeedbackGenerator.FeedbackStyle? = nil
 #elseif os(watchOS)
-        /// Haptic feedback type. Set to `click`.
-        public var haptic: WKHapticType? = GlobalUIModel.Buttons.hapticWatchOS
+        /// Haptic feedback type. Set to `nil`.
+        public var haptic: WKHapticType? = nil
 #endif
         
         // MARK: Initializers

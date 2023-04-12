@@ -255,8 +255,8 @@ public struct VAlertUIModel {
         public var blur: CGFloat = GlobalUIModel.Modals.poppingAnimationBlur
         
 #if os(iOS)
-        /// Button haptic feedback style. Set to `light`.
-        public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle? = .light
+        /// Button haptic feedback style. Set to `nil`.
+        public var buttonHaptic: UIImpactFeedbackGenerator.FeedbackStyle? = nil
 #endif
         
         // MARK: Initializers
