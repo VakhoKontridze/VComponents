@@ -38,9 +38,7 @@ struct VContextMenuContentView: View {
 }
 
 // MARK: - Preview
-#if DEBUG
 import VCore
-#endif
 
 // Developmental only
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)

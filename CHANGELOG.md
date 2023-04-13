@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.0.3(36)
+
+Other
+
+- Issue of DEBUG imports preventing archiving is fixed 
+
 ### [4.0.2(35)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.2) — *2023 04 13*
 
 VBottomSheet
