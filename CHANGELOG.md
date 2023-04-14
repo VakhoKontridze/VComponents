@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.0.5(38)
+
+General
+
+- `VCore` is updated to `4.8.1` with fix to `PresentationHost` breaking modal frames when presented from `UIHostingController`
+
 ### [4.0.4(37)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 14*
 
 VBottomSheet
