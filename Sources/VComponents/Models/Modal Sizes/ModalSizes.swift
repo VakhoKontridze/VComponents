@@ -15,10 +15,10 @@ public struct ModalSizes<ModalSizeMeasurement>
 {
     // MARK: Properties
     /// Portrait size configuration.
-    public let portrait: SizeConfiguration
+    public var portrait: SizeConfiguration
     
     /// Landscape size configuration.
-    public let landscape: SizeConfiguration
+    public var landscape: SizeConfiguration
     
     /// Current size configuration based on interface orientation.
     public var current: SizeConfiguration? {
