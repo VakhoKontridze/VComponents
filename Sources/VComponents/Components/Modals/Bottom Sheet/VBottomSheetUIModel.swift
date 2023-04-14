@@ -49,7 +49,7 @@ public struct VBottomSheetUIModel {
             )),
             landscape: .fraction(BottomSheetSize(
                 width: 0.7,
-                heights: BottomSheetHeights.fixed(0.9)
+                heights: BottomSheetHeights(0.9)
             ))
         )
         
@@ -205,20 +205,24 @@ public struct VBottomSheetUIModel {
             var hiddenOffset: CGFloat { MultiplatformConstants.screenSize.height }
             
             // MARK: Initializers
-            /// Initializes `Height`.
-            public init(min: CGFloat, ideal: CGFloat, max: CGFloat) {
+            /// Initializes `Height` with values.
+            public init(
+                min: CGFloat,
+                ideal: CGFloat,
+                max: CGFloat
+            ) {
                 self.min = min
                 self.ideal = ideal
                 self.max = max
             }
             
-            /// Initializes `Height` with fixed values.
-            public static func fixed(_ value: CGFloat) -> Self {
-                .init(
-                    min: value,
-                    ideal: value,
-                    max: value
-                )
+            /// Initializes `Height` with value.
+            public init(
+                _ value: CGFloat
+            ) {
+                self.min = value
+                self.ideal = value
+                self.max = value
             }
         }
         

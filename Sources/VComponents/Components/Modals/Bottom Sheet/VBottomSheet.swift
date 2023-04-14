@@ -485,11 +485,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                         uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
                             portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
                                 width: 1,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.9)
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.9)
                             )),
                             landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
                                 width: 0.7,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.9)
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.9)
                             ))
                         )
                         uiModel.animations.appear = nil
@@ -512,11 +512,11 @@ struct VBottomSheet_Previews: PreviewProvider {
                         uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
                             portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
                                 width: 1,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.2)
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.2)
                             )),
                             landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
                                 width: 0.7,
-                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.2)
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights(0.2)
                             ))
                         )
                         uiModel.animations.appear = nil
