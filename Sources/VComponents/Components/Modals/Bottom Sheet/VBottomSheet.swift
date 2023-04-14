@@ -372,7 +372,7 @@ struct VBottomSheet<Content>: View
 @available(watchOS, unavailable)
 struct VBottomSheet_Previews: PreviewProvider {
     // Configuration
-    private static var interfaceOrientation: InterfaceOrientation { .portrait }
+    private static var interfaceOrientation: InterfaceOrientation { .landscapeLeft }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
@@ -434,7 +434,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                 heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
                             )),
                             landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
-                                width: 1,
+                                width: 0.7,
                                 heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
                             ))
                         )
@@ -461,7 +461,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                 heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
                             )),
                             landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
-                                width: 1,
+                                width: 0.7,
                                 heights: .init(min: 0.6, ideal: 0.9, max: 0.9)
                             ))
                         )
@@ -488,7 +488,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                 heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.9)
                             )),
                             landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
-                                width: 1,
+                                width: 0.7,
                                 heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.9)
                             ))
                         )
@@ -515,7 +515,7 @@ struct VBottomSheet_Previews: PreviewProvider {
                                 heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.2)
                             )),
                             landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
-                                width: 1,
+                                width: 0.7,
                                 heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.2)
                             ))
                         )
