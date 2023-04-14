@@ -210,7 +210,6 @@ struct VBottomSheet<Content>: View
             
             content()
                 .padding(uiModel.layout.contentMargins)
-                .overlay({ Text("\(offset)") }())
         })
         .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
         .frame(maxWidth: .infinity)
