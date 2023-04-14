@@ -45,11 +45,11 @@ public struct VBottomSheetUIModel {
         public var sizes: Sizes = .init(
             portrait: .fraction(BottomSheetSize(
                 width: 1,
-                heights: .init(min: 0.6, ideal: 0.6, max: 0.9)
+                heights: BottomSheetHeights(min: 0.6, ideal: 0.6, max: 0.9)
             )),
             landscape: .fraction(BottomSheetSize(
                 width: 0.7,
-                heights: .fixed(0.9)
+                heights: BottomSheetHeights.fixed(0.9)
             ))
         )
         
@@ -196,37 +196,13 @@ public struct VBottomSheetUIModel {
                 ideal == max
             }
             
-            var minOffset: CGFloat {
-                if isResizable || isFixed {
-                    return MultiplatformConstants.screenSize.height - min
-                } else {
-                    return (MultiplatformConstants.screenSize.height - min) / 2
-                }
-            }
+            var minOffset: CGFloat { MultiplatformConstants.screenSize.height - min }
             
-            var idealOffset: CGFloat {
-                if isResizable || isFixed {
-                    return MultiplatformConstants.screenSize.height - ideal
-                } else {
-                    return (MultiplatformConstants.screenSize.height - ideal) / 2
-                }
-            }
+            var idealOffset: CGFloat { MultiplatformConstants.screenSize.height - ideal }
             
-            var maxOffset: CGFloat {
-                if isResizable || isFixed {
-                    return MultiplatformConstants.screenSize.height - max
-                } else {
-                    return (MultiplatformConstants.screenSize.height - max) / 2
-                }
-            }
+            var maxOffset: CGFloat { MultiplatformConstants.screenSize.height - max }
             
-            var hiddenOffset: CGFloat {
-                if isResizable || isFixed {
-                    return MultiplatformConstants.screenSize.height
-                } else {
-                    return MultiplatformConstants.screenSize.height - maxOffset
-                }
-            }
+            var hiddenOffset: CGFloat { MultiplatformConstants.screenSize.height }
             
             // MARK: Initializers
             /// Initializes `Height`.

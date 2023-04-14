@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.0.4(37)
+
+VBottomSheet
+
+- Issue with positioning of smaller sheets when using fully fixed height is fixed
+
 ### [4.0.3(36)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.3) — *2023 04 13*
 
 Other

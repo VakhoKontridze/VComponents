@@ -62,7 +62,7 @@ struct VBottomSheet<Content>: View
     
     // MARK: Body
     var body: some View {
-        ZStack(content: {
+        ZStack(alignment: .top, content: {
             dimmingView
             bottomSheet
         })
@@ -383,7 +383,8 @@ struct VBottomSheet_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
             FixedHeightMinIdealPreview().previewDisplayName("Fixed Height (Min & Ideal)")
             FixedHeightIdealMaxPreview().previewDisplayName("Fixed Height (Ideal & Max)")
-            FixedHeightMinIdealMaxPreview().previewDisplayName("Fixed Height")
+            FixedHeightMinIdealMaxLargePreview().previewDisplayName("Fixed Height (Large)")
+            FixedHeightMinIdealMaxSmallPreview().previewDisplayName("Fixed Height (Small)")
             InsettedContentPreview().previewDisplayName("Insetted Content")
             ScrollableContentPreview().previewDisplayName("Scrollable Content")
             OnlyGrabberPreview().previewDisplayName("Only Grabber")
@@ -475,7 +476,7 @@ struct VBottomSheet_Previews: PreviewProvider {
         }
     }
     
-    private struct FixedHeightMinIdealMaxPreview: View {
+    private struct FixedHeightMinIdealMaxLargePreview: View {
         var body: some View {
             PreviewContainer(content: {
                 VBottomSheet(
@@ -484,11 +485,38 @@ struct VBottomSheet_Previews: PreviewProvider {
                         uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
                             portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
                                 width: 1,
-                                heights: .init(min: 0.9, ideal: 0.9, max: 0.9)
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.9)
                             )),
                             landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
                                 width: 1,
-                                heights: .init(min: 0.9, ideal: 0.9, max: 0.9)
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.9)
+                            ))
+                        )
+                        uiModel.animations.appear = nil
+                        return uiModel
+                    }(),
+                    onPresent: nil,
+                    onDismiss: nil,
+                    content: content
+                )
+            })
+        }
+    }
+    
+    private struct FixedHeightMinIdealMaxSmallPreview: View {
+        var body: some View {
+            PreviewContainer(content: {
+                VBottomSheet(
+                    uiModel: {
+                        var uiModel: VBottomSheetUIModel = .init()
+                        uiModel.layout.sizes = VBottomSheetUIModel.Layout.Sizes(
+                            portrait: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                                width: 1,
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.2)
+                            )),
+                            landscape: .fraction(VBottomSheetUIModel.Layout.BottomSheetSize(
+                                width: 1,
+                                heights: VBottomSheetUIModel.Layout.BottomSheetHeights.fixed(0.2)
                             ))
                         )
                         uiModel.animations.appear = nil

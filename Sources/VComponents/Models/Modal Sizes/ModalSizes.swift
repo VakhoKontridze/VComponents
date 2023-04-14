@@ -39,9 +39,20 @@ public struct ModalSizes<ModalSizeMeasurement>
     
     // MARK: Initializers
     /// Initializes `ModalSizes` with size configurations.
-    public init(portrait: SizeConfiguration, landscape: SizeConfiguration) {
+    public init(
+        portrait: SizeConfiguration,
+        landscape: SizeConfiguration
+    ) {
         self.portrait = portrait
         self.landscape = landscape
+    }
+    
+    /// Initializes `ModalSizes` with size configuration.
+    public init(
+        _ configuration: SizeConfiguration
+    ) {
+        self.portrait = configuration
+        self.landscape = configuration
     }
 }
 
