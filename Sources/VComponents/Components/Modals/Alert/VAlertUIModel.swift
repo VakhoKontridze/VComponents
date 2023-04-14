@@ -160,6 +160,11 @@ public struct VAlertUIModel {
     /// Model that contains color properties.
     public struct Colors {
         // MARK: Properties
+        /// Color scheme. Set to `nil`.
+        ///
+        /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+        public var colorScheme: ColorScheme? = nil
+        
         /// Background color.
         public var background: Color = ColorBook.layer
         

@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.1.0(38)
+
+General
+
+- `colorScheme` is added to modal components
+
 ### [4.0.4(37)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 14*
 
 VBottomSheet

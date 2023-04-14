@@ -111,6 +111,11 @@ public struct VModalUIModel {
     // MARK: Colors
     /// Model that contains color properties.
     public struct Colors {
+        /// Color scheme. Set to `nil`.
+        ///
+        /// Since this is a modal, color scheme cannot be applied directly. Use this property instead.
+        public var colorScheme: ColorScheme? = nil
+        
         // MARK: Properties
         /// Background color.
         public var background: Color = ColorBook.layer

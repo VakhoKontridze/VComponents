@@ -54,6 +54,7 @@ struct VToast: View {
                 case .fixedPoint, .fixedFraction: view
                 }
             })
+            .ifLet(uiModel.colors.colorScheme, transform: { $0.environment(\.colorScheme, $1) })
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
             .onChange(

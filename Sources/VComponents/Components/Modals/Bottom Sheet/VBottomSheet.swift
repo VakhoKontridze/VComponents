@@ -68,6 +68,7 @@ struct VBottomSheet<Content>: View
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.container, edges: .all)
+        .ifLet(uiModel.colors.colorScheme, transform: { $0.environment(\.colorScheme, $1) })
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
