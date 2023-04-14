@@ -210,6 +210,7 @@ struct VBottomSheet<Content>: View
             
             content()
                 .padding(uiModel.layout.contentMargins)
+                .overlay({ Text("\(offset)") }())
         })
         .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
         .frame(maxWidth: .infinity)
@@ -372,7 +373,7 @@ struct VBottomSheet<Content>: View
 @available(watchOS, unavailable)
 struct VBottomSheet_Previews: PreviewProvider {
     // Configuration
-    private static var interfaceOrientation: InterfaceOrientation { .landscapeLeft }
+    private static var interfaceOrientation: InterfaceOrientation { .portrait }
     private static var languageDirection: LayoutDirection { .leftToRight }
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
