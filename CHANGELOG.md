@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.0.6(39)
+### [4.0.6(39)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.5) — *2023 04 15*
 
 VSheet
 
