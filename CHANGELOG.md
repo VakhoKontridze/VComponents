@@ -6,6 +6,14 @@ General
 
 - `colorScheme` is added to modal components
 
+VMenu
+
+- Rows can now be disabled
+
+VContextMenu
+
+- Rows can now be disabled
+
 ### [4.0.6(39)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.5) — *2023 04 15*
 
 VSheet

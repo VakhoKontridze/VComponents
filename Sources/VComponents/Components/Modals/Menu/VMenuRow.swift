@@ -34,6 +34,7 @@ extension VMenuRowProtocol {
 @available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VMenuTitleRow: VMenuRowProtocol {
     // MARK: Properties
+    private var isEnabled: Bool = true
     private let action: () -> Void
     private let role: ButtonRole?
     private let title: String
@@ -58,7 +59,16 @@ public struct VMenuTitleRow: VMenuRowProtocol {
                 role: role,
                 action: action
             )
+            .disabled(!isEnabled)
         )
+    }
+    
+    // MARK: Modifiers
+    /// Adds a condition that controls whether users can interact with the button.
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
     }
 }
 
@@ -69,6 +79,7 @@ public struct VMenuTitleRow: VMenuRowProtocol {
 @available(watchOS 8.0, *)@available(watchOS, unavailable)
 public struct VMenuTitleIconRow: VMenuRowProtocol {
     // MARK: Properties
+    private var isEnabled: Bool = true
     private let action: () -> Void
     private let role: ButtonRole?
     private let title: String
@@ -126,7 +137,16 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
                     icon
                 }
             )
+            .disabled(!isEnabled)
         )
+    }
+    
+    // MARK: Modifiers
+    /// Adds a condition that controls whether users can interact with the button.
+    public func disabled(_ disabled: Bool) -> Self {
+        var button = self
+        button.isEnabled = !disabled
+        return button
     }
 }
 
@@ -135,7 +155,7 @@ public struct VMenuTitleIconRow: VMenuRowProtocol {
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-public struct VMenuSubMenuRow: VMenuRowProtocol {
+public struct VMenuSubMenuRow: VMenuRowProtocol { // Cannot be disabled
     // MARK: Properties
     private let title: String
     private let primaryAction: (() -> Void)?
