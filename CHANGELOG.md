@@ -1,10 +1,22 @@
 # Change Log
 
-### 4.1.0(38)
+### 4.1.0(40)
 
 General
 
 - `colorScheme` is added to modal components
+
+### 4.0.6(39)
+
+VSheet
+
+- Default value of `roundedCorner` is fixed to be `allCorners` again in `VSheetUIModel`
+
+### [4.0.5(38)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 15*
+
+General
+
+- `VCore` is updated to `4.8.1` with fix to `PresentationHost` breaking modal frames when presented from `UIHostingController`
 
 ### [4.0.4(37)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.4) — *2023 04 14*
 
