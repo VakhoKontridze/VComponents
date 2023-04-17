@@ -106,7 +106,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
         Group(content: {
             icon
                 .resizable()
-                .aspectRatio(contentMode: .fit)
+                .scaledToFit()
                 .frame(size: uiModel.layout.iconSize)
                 .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
                 .foregroundColor(uiModel.colors.icon.value(for: internalState))
@@ -176,7 +176,7 @@ public struct VRoundedCaptionButton<CaptionLabel>: View where CaptionLabel: View
     ) -> some View {
         icon
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFit()
             .frame(size: uiModel.layout.iconCaptionSize)
             .foregroundColor(uiModel.colors.iconCaption.value(for: internalState))
             .opacity(uiModel.colors.iconCaptionOpacities.value(for: internalState))

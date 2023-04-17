@@ -187,6 +187,7 @@ public struct VTextField: View {
         if uiModel.layout.contentType.isSearch {
             ImageBook.textFieldSearch
                 .resizable()
+                .scaledToFit()
                 .frame(dimension: uiModel.layout.searchIconDimension)
                 .foregroundColor(uiModel.colors.searchIcon.value(for: internalState))
         }

@@ -143,7 +143,7 @@ public struct VCapsuleButton<Label>: View where Label: View {
     ) -> some View {
         icon
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFit()
             .frame(size: uiModel.layout.iconSize)
             .foregroundColor(uiModel.colors.icon.value(for: internalState))
             .opacity(uiModel.colors.iconOpacities.value(for: internalState))

@@ -150,6 +150,7 @@ public struct VCheckBox<Label>: View where Label: View {
                     if let checkMarkIcon {
                         checkMarkIcon
                             .resizable()
+                            .scaledToFit()
                             .frame(dimension: uiModel.layout.iconDimension)
                             .foregroundColor(uiModel.colors.checkmark.value(for: internalState))
                     }

@@ -98,6 +98,7 @@ public struct VStepper: View {
                     
                     button.icon
                         .resizable()
+                        .scaledToFit()
                         .frame(dimension: uiModel.layout.iconDimension)
                         .foregroundColor(uiModel.colors.buttonIcon.value(for: buttonInternalState(button)))
                 })
