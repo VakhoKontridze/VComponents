@@ -1,5 +1,11 @@
 # Change Log
 
+### 4.0.7(40)
+
+General
+
+- Issue with button's content overflowing over rounded corners when margins are zero is fex
+
 ### [4.0.6(39)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.5) — *2023 04 15*
 
 VSheet

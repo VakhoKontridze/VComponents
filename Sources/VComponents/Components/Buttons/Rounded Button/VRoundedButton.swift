@@ -105,6 +105,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         })
         .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
         .padding(uiModel.layout.labelMargins)
+        .cornerRadius(uiModel.layout.cornerRadius)
         .modifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 $0.dynamicTypeSize(...(.accessibility3))
