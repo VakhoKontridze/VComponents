@@ -18,11 +18,7 @@ extension View {
     ///         case red, green, blue
     ///
     ///         var stringRepresentation: String {
-    ///             switch self {
-    ///             case .red: return "Red"
-    ///             case .green: return "Green"
-    ///             case .blue: return "Blue"
-    ///             }
+    ///             String(describing: self)
     ///         }
     ///     }
     ///
@@ -74,11 +70,7 @@ extension View {
     ///         case red, green, blue
     ///
     ///         var stringRepresentation: String {
-    ///             switch self {
-    ///             case .red: return "Red"
-    ///             case .green: return "Green"
-    ///             case .blue: return "Blue"
-    ///             }
+    ///             String(describing: self)
     ///         }
     ///     }
     ///

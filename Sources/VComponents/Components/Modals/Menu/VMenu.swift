@@ -16,11 +16,7 @@ import SwiftUI
 ///         case red, green, blue
 ///
 ///         var stringRepresentation: String {
-///             switch self {
-///             case .red: return "Red"
-///             case .green: return "Green"
-///             case .blue: return "Blue"
-///             }
+///             String(describing: self)
 ///         }
 ///     }
 ///
@@ -204,11 +200,7 @@ struct VMenu_Previews: PreviewProvider {
         
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
         private var _stringRepresentation: String {
-            switch self {
-            case .red: return "Red"
-            case .green: return "Green"
-            case .blue: return "Blue"
-            }
+            String(describing: self)
         }
     }
     

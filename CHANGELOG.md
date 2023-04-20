@@ -6,9 +6,21 @@ General
 
 - `colorScheme` is added to modal components
 
+VSegmentedPicker
+
+- Picker API is overhauled
+
+VWheelPicker
+
+- Picker API is overhauled
+
 VMenu
 
 - Rows can now be disabled
+- Picker API is overhauled
+
+VContextMenu
+- Picker API is overhauled
 
 VContextMenu
 

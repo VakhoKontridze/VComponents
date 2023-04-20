@@ -15,67 +15,31 @@ import VCore
 ///
 /// UI Model, header, and footer can be passed as parameters.
 ///
-/// There are four possible ways of initializing `VWheelPicker`.
+/// There are three possible ways of initializing `VWheelPicker`.
 ///
-/// [1] Data, Index, and Title/Content:
+/// [1] Data, Selection, and Title/Content:
 ///
-///     private enum SomeEnum: CaseIterable {
+///     private enum RGBColor: CaseIterable {
 ///         case red, green, blue
 ///     }
 ///
-///     @State private var selectedIndex: Int = 0
-///
-///     var body: some View {
-///         VWheelPicker(
-///             selectedIndex: $selectedIndex,
-///             data: SomeEnum.allCases,
-///             title: { String(describing: $0) }
-///         )
-///     }
-///
-///     or
-///
-///     var body: some View {
-///         VWheelPicker(
-///             selectedIndex: $selectedIndex,
-///             data: SomeEnum.allCases,
-///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
-///         )
-///     }
-///
-/// [2] Data, Selection, and Title/Content:
-///
-///     private enum SomeEnum: CaseIterable {
-///         case red, green, blue
-///     }
-///
-///     @State private var selection: SomeEnum = .red
+///     @State private var selection: RGBColor = .red
 ///
 ///     var body: some View {
 ///         VWheelPicker(
 ///             selection: $selection,
-///             data: SomeEnum.allCases,
+///             data: RGBColor.allCases,
 ///             title: { String(describing: $0) }
 ///         )
 ///     }
 ///
-///     or
+/// [2] `HashableEnumeration` API - Title/Content:
 ///
-///     var body: some View {
-///         VWheelPicker(
-///             selection: $selection,
-///             data: SomeEnum.allCases,
-///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
-///         )
-///     }
-///
-/// [3] `HashableEnumeration` API - Title/Content:
-///
-///     private enum SomeEnum: HashableEnumeration {
+///     private enum RGBColor: HashableEnumeration {
 ///         case red, green, blue
 ///     }
 ///
-///     @State private var selection: SomeEnum = .red
+///     @State private var selection: RGBColor = .red
 ///
 ///     var body: some View {
 ///         VWheelPicker(
@@ -84,18 +48,9 @@ import VCore
 ///         )
 ///     }
 ///
-///     or
+/// [3] `StringRepresentableHashableEnumeration` API:
 ///
-///     var body: some View {
-///         VWheelPicker(
-///             selection: $selection,
-///             content: { (internalState, value) in Text(String(describing: value)) } // Requires custom state-management
-///         )
-///     }
-///
-/// [4] `StringRepresentableHashableEnumeration` API:
-///
-///     private enum SomeEnum: StringRepresentableHashableEnumeration {
+///     private enum RGBColor: StringRepresentableHashableEnumeration {
 ///         case red, green, blue
 ///
 ///         var stringRepresentation: String {
@@ -103,7 +58,7 @@ import VCore
 ///         }
 ///     }
 ///
-///     @State private var selection: SomeEnum = .red
+///     @State private var selection: RGBColor = .red
 ///
 ///     var body: some View {
 ///         VWheelPicker(
@@ -114,10 +69,9 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
-public struct VWheelPicker<Data, Content>: View
+public struct VWheelPicker<SelectionValue, Content>: View
     where
-        Data: RandomAccessCollection,
-        Data.Index == Int,
+        SelectionValue: Hashable,
         Content: View
 {
     // MARK: Properties
@@ -126,165 +80,104 @@ public struct VWheelPicker<Data, Content>: View
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VWheelPickerInternalState { .init(isEnabled: isEnabled) }
     
-    @Binding private var selectedIndex: Int
+    @Binding private var selection: SelectionValue
     
     private let headerTitle: String?
     private let footerTitle: String?
     
-    private let content: VWheelPickerContent<Data, Content>
+    private let content: VWheelPickerContent<SelectionValue, Content>
     
     @State private var rowWidth: CGFloat = 0
     
-    // MARK: Initializers - Index
-    /// Initializes `VWheelPicker` with selected index, data, and row title.
-    public init(
-        uiModel: VWheelPickerUIModel = .init(),
-        selectedIndex: Binding<Int>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        data: Data,
-        title: @escaping (Data.Element) -> String
-    )
-        where Content == Never
-    {
-        self.uiModel = uiModel
-        self._selectedIndex = selectedIndex
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-        self.content = .title(data: data, title: title)
-    }
-    
-    /// Initializes `VWheelPicker` with selected index, data, and row content.
-    public init(
-        uiModel: VWheelPickerUIModel = .init(),
-        selectedIndex: Binding<Int>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        data: Data,
-        @ViewBuilder content: @escaping (VWheelPickerInternalState, Data.Element) -> Content
-    ) {
-        self.uiModel = uiModel
-        self._selectedIndex = selectedIndex
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-        self.content = .content(data: data, content: content)
-    }
-    
-    // MARK: Initializers - Hashable
+    // MARK: Initializers
     /// Initializes `VWheelPicker` with selection value, data, and row title.
-    public init<SelectionValue>(
+    public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        data: Data,
-        title: @escaping (Data.Element) -> String
+        data: [SelectionValue],
+        title: @escaping (SelectionValue) -> String
     )
-        where
-            Data == Array<SelectionValue>,
-            Content == Never,
-            SelectionValue: Hashable
+        where Content == Never
     {
         self.uiModel = uiModel
-        self._selectedIndex = Binding(
-            get: { data.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = data[$0] }
-        )
+        self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.content = .title(data: data, title: title)
     }
     
     /// Initializes `VWheelPicker` with selection value, data, and row content.
-    public init<SelectionValue>(
+    public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        data: Data,
-        @ViewBuilder content: @escaping (VWheelPickerInternalState, Data.Element) -> Content
-    )
-        where
-            Data == Array<SelectionValue>,
-            SelectionValue: Hashable
-    {
+        data: [SelectionValue],
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
+    ) {
         self.uiModel = uiModel
-        self._selectedIndex = Binding(
-            get: { data.firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = data[$0] }
-        )
+        self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.content = .content(data: data, content: content)
     }
     
-    // MARK: Initializers - Hashable Enumeration & String Representable Hashable Enumeration
+    // MARK: Initializers - Hashable Enumeration
     /// Initializes `VWheelPicker` with `HashableEnumeration` and row title.
-    public init<T>(
+    public init(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<T>,
+        selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        title: @escaping (T) -> String
+        title: @escaping (SelectionValue) -> String
     )
         where
-            Data == Array<T>,
             Content == Never,
-            T: HashableEnumeration
+            SelectionValue: HashableEnumeration
     {
         self.uiModel = uiModel
-        self._selectedIndex = Binding(
-            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = Array(T.allCases)[$0] }
-        )
+        self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .title(data: Array(T.allCases), title: title)
+        self.content = .title(data: Array(SelectionValue.allCases), title: title)
     }
     
     /// Initializes `VWheelPicker` with `HashableEnumeration` and row content.
-    public init<T>(
+    public init(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<T>,
+        selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        @ViewBuilder content: @escaping (VWheelPickerInternalState, T) -> Content
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
     )
-        where
-            Data == Array<T>,
-            T: HashableEnumeration
+        where SelectionValue: HashableEnumeration
     {
         self.uiModel = uiModel
-        self._selectedIndex = Binding(
-            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = Array(T.allCases)[$0] }
-        )
+        self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .content(data: Array(T.allCases), content: content)
+        self.content = .content(data: Array(SelectionValue.allCases), content: content)
     }
     
     // MARK: Initializers - String Representable Hashable Enumeration
     /// Initializes `VWheelPicker` with `StringRepresentableHashableEnumeration`.
-    public init<T>(
+    public init(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<T>,
+        selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil
     )
         where
-            Data == Array<T>,
             Content == Never,
-            T: StringRepresentableHashableEnumeration
+            SelectionValue: StringRepresentableHashableEnumeration
     {
         self.uiModel = uiModel
-        self._selectedIndex = Binding(
-            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = Array(T.allCases)[$0] }
-        )
+        self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .title(data:  Array(T.allCases), title: { $0.stringRepresentation })
+        self.content = .title(data: Array(SelectionValue.allCases), title: { $0.stringRepresentation })
     }
     
     // MARK: Body
@@ -322,7 +215,7 @@ public struct VWheelPicker<Data, Content>: View
     
     private var picker: some View {
         Picker(
-            selection: $selectedIndex,
+            selection: $selection,
             content: rows,
             label: EmptyView.init
         )
@@ -333,18 +226,18 @@ public struct VWheelPicker<Data, Content>: View
     @ViewBuilder private func rows() -> some View {
         switch content {
         case .title(let data, let title):
-            ForEach(data.indices, id: \.self, content: { i in
+            ForEach(data, id: \.hashValue, content: { element in
                 VText(
                     minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                     color: uiModel.colors.title.value(for: internalState),
                     font: uiModel.fonts.rows,
-                    text: title(data[i])
+                    text: title(element)
                 )
             })
             
         case .content(let data, let content):
-            ForEach(data.indices, id: \.self, content: { i in
-                content(internalState, data[i])
+            ForEach(data, id: \.hashValue, content: { element in
+                content(internalState, element)
             })
         }
     }

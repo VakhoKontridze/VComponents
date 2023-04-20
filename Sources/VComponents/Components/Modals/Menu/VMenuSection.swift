@@ -69,79 +69,51 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS 7, *)@available(watchOS, unavailable)
-public struct VMenuPickerSection<Data>: VMenuSectionProtocol
-    where
-        Data: RandomAccessCollection,
-        Data.Index == Int
-{
+public struct VMenuPickerSection<SelectionValue>: VMenuSectionProtocol where SelectionValue: Hashable {
     // MARK: Properties
-    private let data: Data
-    private let content: (Data.Element) -> VMenuRowProtocol
+    private let data: [SelectionValue]
+    private let content: (SelectionValue) -> VMenuRowProtocol
     
-    @Binding private var selectedIndex: Int
+    @Binding private var selection: SelectionValue
     
     // MARK: Initializers
-    /// Initializes `VMenuPickerSection` with selected index, data, and content.
+    /// Initializes `VMenuPickerSection` with selection, data, and title.
     public init(
         title: String? = nil,
-        selectedIndex: Binding<Int>,
-        data: Data,
-        content: @escaping (Data.Element) -> VMenuRowProtocol
+        selection: Binding<SelectionValue>,
+        data: [SelectionValue],
+        _title: @escaping (SelectionValue) -> String // TODO: Rename
     ) {
         self.title = title
-        self._selectedIndex = selectedIndex
+        self._selection = selection
         self.data = data
-        self.content = content
-    }
-    
-    /// Initializes `VMenuPickerSection` with selected index and row titles.
-    public init(
-        title: String? = nil,
-        selectedIndex: Binding<Int>,
-        rowTitles: [String]
-    )
-        where Data == Array<String>
-    {
-        self.title = title
-        self._selectedIndex = selectedIndex
-        self.data = rowTitles
-        self.content = { VMenuTitleRow(action: {}, title: $0) }
+        self.content = { VMenuTitleRow(action: {}, title: _title($0)) } // TODO: Handle
     }
     
     /// Initializes `VMenuPickerSection` with `HashableEnumeration` and content.
-    public init<T>(
+    public init(
         title: String? = nil,
-        selection: Binding<T>,
-        content: @escaping (T) -> VMenuRowProtocol
+        selection: Binding<SelectionValue>,
+        content: @escaping (SelectionValue) -> VMenuRowProtocol
     )
-        where
-            T: HashableEnumeration,
-            Data == Array<T>
+        where SelectionValue: HashableEnumeration
     {
         self.title = title
-        self._selectedIndex = Binding(
-            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = Array(T.allCases)[$0] }
-        )
-        self.data = Array(T.allCases)
+        self._selection = selection
+        self.data = Array(SelectionValue.allCases)
         self.content = content
     }
     
     /// Initializes `VMenuPickerSection` with `StringRepresentableHashableEnumeration`.
-    public init<T>(
+    public init(
         title: String? = nil,
-        selection: Binding<T>
+        selection: Binding<SelectionValue>
     )
-        where
-            T: StringRepresentableHashableEnumeration,
-            Data == Array<T>
+        where SelectionValue: StringRepresentableHashableEnumeration
     {
         self.title = title
-        self._selectedIndex = Binding(
-            get: { Array(T.allCases).firstIndex(of: selection.wrappedValue)! }, // Force-unwrap
-            set: { selection.wrappedValue = Array(T.allCases)[$0] }
-        )
-        self.data = Array(T.allCases)
+        self._selection = selection
+        self.data = Array(SelectionValue.allCases)
         self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
     }
     
@@ -151,15 +123,11 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
     public func makeBody() -> AnyView {
         .init(
             Picker(
-                selection: $selectedIndex,
+                selection: $selection,
                 content: {
-                    ForEach(
-                        data.enumeratedArray(),
-                        id: \.offset,
-                        content: { (i, element) in
-                            content(element).makeBody()
-                        }
-                    )
+                    ForEach(data, id: \.hashValue, content: { element in
+                        content(element).makeBody()
+                    })
                 },
                 label: EmptyView.init
             )
