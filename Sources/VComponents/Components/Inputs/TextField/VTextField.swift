@@ -169,7 +169,7 @@ public struct VTextField: View {
         })
         .padding(.horizontal, uiModel.layout.contentMarginHorizontal)
         .frame(height: uiModel.layout.height)
-        .clipped()
+        .clipped() // Just in case font is too big
         .background(background)
     }
     

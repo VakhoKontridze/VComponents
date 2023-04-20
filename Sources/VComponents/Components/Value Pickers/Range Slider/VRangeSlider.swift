@@ -95,7 +95,7 @@ public struct VRangeSlider: View {
                 progress
                 border
             })
-            .mask(RoundedRectangle(cornerRadius: uiModel.layout.cornerRadius))
+            .cornerRadius(uiModel.layout.cornerRadius)
             .frame(
                 width: uiModel.layout.direction.isHorizontal ? nil : uiModel.layout.height,
                 height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil

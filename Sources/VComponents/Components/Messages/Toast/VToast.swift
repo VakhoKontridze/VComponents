@@ -93,7 +93,7 @@ struct VToast: View {
                     )
             }
         })
-        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .cornerRadius(cornerRadius)
         .background(background)
         .onSizeChange(perform: { height = $0.height })
         .offset(y: isInternallyPresented ? presentedOffset : initialOffset)

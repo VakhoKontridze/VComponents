@@ -620,7 +620,6 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                             Picker("", selection: .constant(selection), content: {
                                 ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
                                     Text(row.stringRepresentation)
-                                        .tag(i)
                                 })
                             })
                             .labelsHidden()
@@ -635,7 +634,6 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                             Picker("", selection: .constant(selection), content: {
                                 ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
                                     Text(row.stringRepresentation)
-                                        .tag(i)
                                 })
                             })
                             .labelsHidden()

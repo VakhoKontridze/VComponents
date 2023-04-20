@@ -340,13 +340,11 @@ public struct VWheelPicker<Data, Content>: View
                     font: uiModel.fonts.rows,
                     text: title(data[i])
                 )
-                .tag(i)
             })
             
         case .content(let data, let content):
             ForEach(data.indices, id: \.self, content: { i in
                 content(internalState, data[i])
-                    .tag(i)
             })
         }
     }
