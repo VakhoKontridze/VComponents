@@ -371,7 +371,7 @@ struct VWheelPicker_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

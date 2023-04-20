@@ -62,7 +62,7 @@ public struct VProgressBar: View {
             height: uiModel.layout.direction.isHorizontal ? uiModel.layout.height : nil
         )
         .onSizeChange(perform: { progressBarSize = $0 })
-        .if(uiModel.animations.appliesProgressAnimation, transform: {
+        .applyIf(uiModel.animations.appliesProgressAnimation, transform: {
             $0.animation(uiModel.animations.progress, value: value)
         })
     }
@@ -113,7 +113,7 @@ struct VProgressBar_Previews: PreviewProvider {
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

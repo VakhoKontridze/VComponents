@@ -51,7 +51,7 @@ struct VDashedSpinner_Previews: PreviewProvider {
             Preview().previewDisplayName("*")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

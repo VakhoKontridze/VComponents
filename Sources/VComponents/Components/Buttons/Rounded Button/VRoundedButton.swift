@@ -105,7 +105,7 @@ public struct VRoundedButton<Label>: View where Label: View {
         })
         .scaleEffect(internalState == .pressed ? uiModel.animations.labelPressedScale : 1)
         .padding(uiModel.layout.labelMargins)
-        .modifier({
+        .applyModifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 $0.dynamicTypeSize(...(.accessibility3))
             } else {
@@ -189,7 +189,7 @@ struct VRoundedButton_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

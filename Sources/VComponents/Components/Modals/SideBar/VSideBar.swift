@@ -16,6 +16,7 @@ import VCore
 struct VSideBar<Content>: View where Content: View {
     // MARK: Properties
     @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
@@ -49,7 +50,7 @@ struct VSideBar<Content>: View where Content: View {
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.container, edges: .all)
-        .ifLet(uiModel.colors.colorScheme, transform: { $0.environment(\.colorScheme, $1) })
+        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -252,7 +253,7 @@ struct VSideBar_Previews: PreviewProvider {
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

@@ -139,7 +139,7 @@ public struct VMenu<Label>: View where Label: View {
                 )
             }
         })
-        .modifier({
+        .applyModifier({
             if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
                 $0.menuOrder(.fixed)
             } else {
@@ -194,7 +194,7 @@ struct VMenu_Previews: PreviewProvider {
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

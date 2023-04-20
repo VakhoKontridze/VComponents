@@ -174,7 +174,7 @@ struct VPlainButton_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     
@@ -262,7 +262,7 @@ struct VPlainButton_Previews: PreviewProvider {
                             )
                             .buttonStyle(.plain)
                             .disabled(true)
-                            .modifier({
+                            .applyModifier({
 #if os(watchOS)
                                 $0.foregroundColor(ColorBook.controlLayerBlue)
 #else

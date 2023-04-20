@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Preview Container
 struct PreviewContainer<Content>: View where Content: View {
@@ -54,7 +55,7 @@ struct PreviewContainer<Content>: View where Content: View {
                     VStack(content: content)
                 }
             })
-            .modifier({ view in
+            .applyModifier({ view in
 #if os(macOS)
                 view
                     .padding(.vertical, 20)

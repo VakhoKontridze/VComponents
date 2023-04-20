@@ -101,7 +101,7 @@ public struct VListRow<Content>: View
         })
         .listRowInsets(EdgeInsets())
         .listRowBackground(uiModel.colors.background)
-        .modifier({
+        .applyModifier({
 #if os(iOS) || os(macOS)
             $0.listRowSeparator(.hidden)
 #else
@@ -137,7 +137,7 @@ struct VListRow_Previews: PreviewProvider {
             SeparatorsPreview().previewDisplayName("Separator")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

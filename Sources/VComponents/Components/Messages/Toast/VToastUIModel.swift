@@ -89,6 +89,16 @@ public struct VToastUIModel {
             /// Alignment may not be sufficient to affect multi-line text contents.
             /// To achieve desired result, modify `alignment` in `TextLineType.multiline(..)`.
             case fixedFraction(ratio: CGFloat, alignment: HorizontalAlignment)
+
+            // MARK: Properties
+            var marginHor: CGFloat {
+                switch self {
+                case .wrapped(let margin): return margin
+                case .stretched(_, let margin): return margin
+                case .fixedPoint: return 0
+                case .fixedFraction: return 0
+                }
+            }
             
             // MARK: Initializers
             /// Default value. Set to `wrapped` with  `20` `margin`.

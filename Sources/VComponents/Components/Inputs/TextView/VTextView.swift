@@ -166,19 +166,19 @@ public struct VTextView: View {
         .textFieldStyle(.plain)
         
         .focused($isFocused) // Catches the focus from outside and stores in `isFocused`
-        
-        .ifLet(uiModel.layout.textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
+
+        .multilineTextAlignment(uiModel.layout.textLineType.textAlignment ?? .leading)
         .lineLimit(type: uiModel.layout.textLineType.textLineLimitType)
         .foregroundColor(uiModel.colors.text.value(for: internalState))
         .font(uiModel.fonts.text)
-        .modifier({
+        .applyModifier({
 #if os(iOS)
             $0.keyboardType(uiModel.misc.keyboardType)
 #else
             $0
 #endif
         })
-        .modifier({
+        .applyModifier({
 #if os(iOS)
             $0.textContentType(uiModel.misc.textContentType)
 #else
@@ -186,7 +186,7 @@ public struct VTextView: View {
 #endif
         })
         .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
-        .modifier({
+        .applyModifier({
 #if os(iOS)
             $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
 #else
@@ -217,7 +217,7 @@ struct VTextView_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

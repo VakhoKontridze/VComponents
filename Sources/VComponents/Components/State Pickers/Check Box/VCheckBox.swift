@@ -131,7 +131,7 @@ public struct VCheckBox<Label>: View where Label: View {
                 })
             }
         })
-        .if(uiModel.animations.appliesStateChangeAnimation, transform: {
+        .applyIf(uiModel.animations.appliesStateChangeAnimation, transform: {
             $0.animation(uiModel.animations.stateChange, value: internalState)
         })
     }
@@ -220,7 +220,7 @@ struct VCheckBox_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

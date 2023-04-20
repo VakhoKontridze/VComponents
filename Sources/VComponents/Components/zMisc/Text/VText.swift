@@ -49,7 +49,7 @@ public struct VText: View {
     // MARK: Body
     public var body: some View {
         Text(text)
-            .ifLet(textLineType.textAlignment, transform: { $0.multilineTextAlignment($1) })
+            .multilineTextAlignment(textLineType.textAlignment ?? .leading)
             .lineLimit(type: textLineType.textLineLimitType)
             .truncationMode(truncatingMode)
             .minimumScaleFactor(minimumScaleFactor)
@@ -74,7 +74,7 @@ struct VText_Previews: PreviewProvider {
             TextLineTypesPreview().previewDisplayName("Text Line Types")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

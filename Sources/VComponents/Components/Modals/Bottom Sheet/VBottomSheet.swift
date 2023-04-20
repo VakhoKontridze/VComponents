@@ -17,6 +17,7 @@ struct VBottomSheet<Content>: View
     where Content: View
 {
     // MARK: Properties
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
@@ -68,7 +69,7 @@ struct VBottomSheet<Content>: View
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.container, edges: .all)
-        .ifLet(uiModel.colors.colorScheme, transform: { $0.environment(\.colorScheme, $1) })
+        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -91,7 +92,7 @@ struct VBottomSheet<Content>: View
     private var bottomSheet: some View {
         ZStack(content: {
             VSheet(uiModel: uiModel.sheetSubUIModel)
-                .if(!uiModel.misc.contentIsDraggable, transform: {
+                .applyIf(!uiModel.misc.contentIsDraggable, transform: {
                     $0
                         .frame(height: uiModel.layout.sizes._current.size.heights.max)
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
@@ -120,14 +121,14 @@ struct VBottomSheet<Content>: View
             })
             .frame(maxHeight: .infinity, alignment: .top)
             .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // NOTE: Fixes issue of content-clipping, as it's not in `VSheet`
-            .if(!uiModel.misc.contentIsDraggable, transform: {
+            .applyIf(!uiModel.misc.contentIsDraggable, transform: {
                 $0
                     .frame(height: uiModel.layout.sizes._current.size.heights.max)
                     .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
             })
         })
         .frame(width: uiModel.layout.sizes._current.size.width)
-        .if(uiModel.misc.contentIsDraggable, transform: {
+        .applyIf(uiModel.misc.contentIsDraggable, transform: {
             $0
                 .frame(height: uiModel.layout.sizes._current.size.heights.max)
                 .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
@@ -214,7 +215,7 @@ struct VBottomSheet<Content>: View
         })
         .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
         .frame(maxWidth: .infinity)
-        .if(
+        .applyIf(
             uiModel.layout.autoresizesContent && uiModel.layout.sizes._current.size.heights.isResizable,
             ifTransform: { $0.frame(height: MultiplatformConstants.screenSize.height - offset - headerDividerHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
@@ -393,7 +394,7 @@ struct VBottomSheet_Previews: PreviewProvider {
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

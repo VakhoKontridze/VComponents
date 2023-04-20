@@ -17,6 +17,7 @@ struct VAlert<Content>: View
     where Content: View
 {
     // MARK: Properties
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
@@ -74,7 +75,7 @@ struct VAlert<Content>: View
         })
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea(.container, edges: .all)
-        .ifLet(uiModel.colors.colorScheme, transform: { $0.environment(\.colorScheme, $1) })
+        .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -183,7 +184,7 @@ struct VAlert<Content>: View
         })
         .padding(uiModel.layout.buttonMargins)
         .onSizeChange(perform: { buttonsStackHeight = $0.height })
-        .modifier({
+        .applyModifier({
             if #available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *) {
                 $0.dynamicTypeSize(...(.xxxLarge))
             } else {
@@ -272,7 +273,7 @@ struct VAlert_Previews: PreviewProvider {
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

@@ -212,14 +212,14 @@ public struct VTextField: View {
         .multilineTextAlignment(uiModel.layout.textAlignment)
         .foregroundColor(uiModel.colors.text.value(for: internalState))
         .font(uiModel.fonts.text)
-        .modifier({
+        .applyModifier({
 #if os(iOS)
             $0.keyboardType(uiModel.misc.keyboardType)
 #else
             $0
 #endif
         })
-        .modifier({
+        .applyModifier({
 #if os(iOS)
             $0.textContentType(uiModel.misc.textContentType)
 #else
@@ -227,7 +227,7 @@ public struct VTextField: View {
 #endif
         })
         .disableAutocorrection(uiModel.misc.autocorrection.map { !$0 })
-        .modifier({
+        .applyModifier({
 #if os(iOS)
             $0.textInputAutocapitalization(uiModel.misc.autocapitalization)
 #else
@@ -315,7 +315,7 @@ struct VTextField_Previews: PreviewProvider {
             StatesPreview().previewDisplayName("States")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

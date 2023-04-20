@@ -109,7 +109,7 @@ public struct VRangeSlider: View {
             uiModel.layout.direction.isHorizontal ? .horizontal : .vertical,
             uiModel.layout.thumbDimension / 2
         )
-        .if(uiModel.animations.appliesProgressAnimation, transform: {
+        .applyIf(uiModel.animations.appliesProgressAnimation, transform: {
             $0
                 .animation(uiModel.animations.progress, value: valueLow)
                 .animation(uiModel.animations.progress, value: valueHigh)
@@ -318,7 +318,7 @@ struct VRangeSlider_Previews: PreviewProvider {
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

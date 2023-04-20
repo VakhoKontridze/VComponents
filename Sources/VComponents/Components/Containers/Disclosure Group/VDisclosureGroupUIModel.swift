@@ -147,6 +147,8 @@ public struct VDisclosureGroupUIModel {
         // MARK: Properties
         /// Indicates if `expandCollapse` animation is applied. Defaults to `true`.
         ///
+        /// Changing this property conditionally will cause view state to be reset.
+        ///
         /// This property doesn't affect internal expand/collapse button press.
         ///
         /// If  animation is set to `nil`, a `nil` animation is still applied.

@@ -15,6 +15,7 @@ import VCore
 @available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
 struct VToast: View {
     // MARK: Properties
+    @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
     
@@ -47,14 +48,8 @@ struct VToast: View {
         contentView
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
-            .modifier({ view in
-                switch uiModel.layout.widthType {
-                case .wrapped(let margin): view.padding(.horizontal, margin)
-                case .stretched(_, let margin): view.padding(.horizontal, margin)
-                case .fixedPoint, .fixedFraction: view
-                }
-            })
-            .ifLet(uiModel.colors.colorScheme, transform: { $0.environment(\.colorScheme, $1) })
+            .padding(.horizontal, uiModel.layout.widthType.marginHor)
+            .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
             .onAppear(perform: animateIn)
             .onAppear(perform: animateOutAfterLifecycle)
             .onChange(
@@ -71,7 +66,7 @@ struct VToast: View {
             text: text
         )
         .padding(uiModel.layout.textMargins)
-        .modifier({ view in
+        .applyModifier({ view in
             switch uiModel.layout.widthType {
             case .wrapped:
                 view
@@ -238,7 +233,7 @@ struct VToast_Previews: PreviewProvider {
         })
         .previewInterfaceOrientation(interfaceOrientation)
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

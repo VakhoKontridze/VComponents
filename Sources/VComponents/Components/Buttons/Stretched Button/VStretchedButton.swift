@@ -184,7 +184,7 @@ struct VStretchedButton_Previews: PreviewProvider {
         })
         .colorScheme(colorScheme)
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
     }
     
     // Data
@@ -204,7 +204,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                     action: { print("Clicked") },
                     title: title
                 )
-                .modifier({
+                .applyModifier({
 #if os(iOS)
                     $0
 #elseif os(macOS)
@@ -233,7 +233,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                            .modifier({
+                            .applyModifier({
 #if os(iOS)
                                 $0
 #elseif os(macOS)
@@ -261,7 +261,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                            .modifier({
+                            .applyModifier({
 #if os(iOS)
                                 $0
 #elseif os(macOS)
@@ -283,7 +283,7 @@ struct VStretchedButton_Previews: PreviewProvider {
                                 action: {},
                                 title: title
                             )
-                            .modifier({
+                            .applyModifier({
 #if os(iOS)
                                 $0
 #elseif os(macOS)

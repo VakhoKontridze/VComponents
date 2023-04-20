@@ -139,7 +139,7 @@ public struct VPageIndicator<Content>: View where Content: View {
                 ForEach(range, id: \.self, content: dotContentView)
             }
         )
-        .if(uiModel.animations.appliesTransitionAnimation, transform: {
+        .applyIf(uiModel.animations.appliesTransitionAnimation, transform: {
             $0.animation(uiModel.animations.transition, value: current)
         })
     }
@@ -187,7 +187,7 @@ struct VPageIndicator_Previews: PreviewProvider {
             StretchedPreview().previewDisplayName("Stretched")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

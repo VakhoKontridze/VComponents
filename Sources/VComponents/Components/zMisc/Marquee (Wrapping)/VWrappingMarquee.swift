@@ -201,7 +201,7 @@ struct VWrappingMarquee_Previews: PreviewProvider { // Breaks for `watchOS`. Can
             ScrollDirectionsPreview().previewDisplayName("Scroll Directions")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

@@ -115,7 +115,7 @@ public struct VDisclosureGroup<HeaderLabel, Content>: View
                 }
             )
         })
-        .if(uiModel.animations.appliesExpandCollapseAnimation, transform: {
+        .applyIf(uiModel.animations.appliesExpandCollapseAnimation, transform: {
             $0
                 .animation(uiModel.animations.expandCollapse, value: isEnabled)
                 .animation(uiModel.animations.expandCollapse, value: state) // +withAnimation
@@ -219,7 +219,7 @@ struct VDisclosureGroup_Previews: PreviewProvider {
             InsettedContentPreview().previewDisplayName("Insetted Content")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     

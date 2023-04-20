@@ -222,7 +222,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
         })
         .colorScheme(colorScheme)
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
     }
     
     // Data
@@ -237,7 +237,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                     action: { print("Clicked") },
                     title: title
                 )
-                .modifier({
+                .applyModifier({
 #if os(macOS)
                     $0.frame(width: 250)
 #else
@@ -261,7 +261,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .modifier({
+                        .applyModifier({
 #if os(macOS)
                             $0.frame(width: 250)
 #else
@@ -286,7 +286,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .modifier({
+                        .applyModifier({
 #if os(macOS)
                             $0.frame(width: 250)
 #else
@@ -305,7 +305,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .modifier({
+                        .applyModifier({
 #if os(macOS)
                             $0.frame(width: 250)
 #else
@@ -324,7 +324,7 @@ struct VLoadingStretchedButton_Previews: PreviewProvider {
                             action: {},
                             title: title
                         )
-                        .modifier({
+                        .applyModifier({
 #if os(macOS)
                             $0.frame(width: 250)
 #else

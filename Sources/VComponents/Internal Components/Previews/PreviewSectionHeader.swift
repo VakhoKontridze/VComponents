@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import VCore
 
 // MARK: - Preview Section Header
 struct PreviewSectionHeader: View {
@@ -23,7 +24,7 @@ struct PreviewSectionHeader: View {
             VStack(content: Divider.init)
             
             Text(title)
-                .modifier({
+                .applyModifier({
 #if os(watchOS)
                     $0
                         .foregroundColor(ColorBook.primary)

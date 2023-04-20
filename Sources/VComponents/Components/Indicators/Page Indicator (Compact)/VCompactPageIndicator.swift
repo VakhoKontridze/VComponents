@@ -148,15 +148,15 @@ public struct VCompactPageIndicator<Content>: View where Content: View {
     // The only solution I found is to write conditional outside body that defines `HStack`/`VStack`.
     private var compactBody: some View {
         frame
-            .if(
+            .applyIf(
                 uiModel.layout.direction.isHorizontal,
                 ifTransform: { $0.overlay(dotsHorizontal) },
                 elseTransform: { $0.overlay(dotsVertical) }
             )
-                .clipped()
-                .if(uiModel.animations.appliesTransitionAnimation, transform: {
-                    $0.animation(uiModel.animations.transition, value: current)
-                })
+            .clipped()
+            .applyIf(uiModel.animations.appliesTransitionAnimation, transform: {
+                $0.animation(uiModel.animations.transition, value: current)
+            })
     }
     
     private var frame: some View {
@@ -400,7 +400,7 @@ struct VCompactPageIndicator_Previews: PreviewProvider {
             LayoutDirectionsPreview().previewDisplayName("Layout Directions")
         })
         .environment(\.layoutDirection, languageDirection)
-        .ifLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
+        .applyIfLet(dynamicTypeSize, transform: { $0.dynamicTypeSize($1) })
         .colorScheme(colorScheme)
     }
     
