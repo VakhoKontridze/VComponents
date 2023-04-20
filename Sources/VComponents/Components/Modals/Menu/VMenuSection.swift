@@ -158,7 +158,6 @@ public struct VMenuPickerSection<Data>: VMenuSectionProtocol
                         id: \.offset,
                         content: { (i, element) in
                             content(element).makeBody()
-                                .tag(i)
                         }
                     )
                 },
