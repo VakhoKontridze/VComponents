@@ -149,10 +149,16 @@ public struct VStretchedButtonUIModel {
         /// Indicates if button animates state change. Defaults to `true`.
         public var animatesStateChange: Bool = true
         
-        /// Ratio to which label scales down on press. Set to `1`.
+        /// Ratio to which label scales down on press.
+        /// Set to `1` on `iOS`.
+        /// Set to `1` on `macOS`.
+        /// Set to `0.98` on `watchOS`.
         public var backgroundPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
-        /// Ratio to which label scales down on press. Set to `1`.
+        /// Ratio to which label scales down on press.
+        /// Set to `1` on `iOS`.
+        /// Set to `1` on `macOS`.
+        /// Set to `0.98` on `watchOS`.
         public var labelPressedScale: CGFloat = GlobalUIModel.Buttons.pressedScale
         
 #if os(iOS)
