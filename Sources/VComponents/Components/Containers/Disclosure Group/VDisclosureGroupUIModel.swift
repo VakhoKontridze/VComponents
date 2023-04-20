@@ -202,7 +202,7 @@ public struct VDisclosureGroupUIModel {
         
         uiModel.layout.roundedCorners = .allCorners
         uiModel.layout.cornerRadius = uiModel.layout.cornerRadius
-        uiModel.layout.contentMargin = 0
+        uiModel.layout.contentMargins = .zero
         
         uiModel.colors.background = colors.background
         
@@ -231,7 +231,7 @@ extension VDisclosureGroupUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = .init(GlobalUIModel.Common.containerCornerRadius)
         
         return uiModel
     }

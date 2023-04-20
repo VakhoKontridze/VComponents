@@ -252,7 +252,7 @@ public struct VModalUIModel {
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
         uiModel.layout.cornerRadius = layout.cornerRadius
-        uiModel.layout.contentMargin = 0
+        uiModel.layout.contentMargins = .zero
         
         uiModel.colors.background = colors.background
         
@@ -282,7 +282,7 @@ extension VModalUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = .init(GlobalUIModel.Common.containerCornerRadius)
         
         return uiModel
     }

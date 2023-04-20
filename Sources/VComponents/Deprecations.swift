@@ -8,6 +8,15 @@
 import SwiftUI
 import VCore
 
+// MARK: - V Sheet
+extension VSheetUIModel.Layout {
+    @available(*, deprecated, message: "Use `contentMargins` instead")
+    public var contentMargin: CGFloat {
+        get { (contentMargins.horizontalAverage + contentMargins.verticalAverage)/2 }
+        set { contentMargins = .init(newValue) }
+    }
+}
+
 // MARK: - V Bottom Sheet
 @available(iOS 15.0, *)
 @available(macOS, unavailable)

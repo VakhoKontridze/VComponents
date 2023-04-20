@@ -35,12 +35,16 @@ public struct VSheetUIModel {
         /// Corner radius. Set to `15`.
         public var cornerRadius: CGFloat = GlobalUIModel.Common.containerCornerRadius
         
-        /// Content margin. Set to `15`.
-        public var contentMargin: CGFloat = GlobalUIModel.Common.containerContentMargin
+        /// Content margins. Set to `15`s.
+        public var contentMargins: Margins = .init(GlobalUIModel.Common.containerContentMargin)
         
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}
+
+        // MARK: Margins
+        /// Model that contains `leading`, `trailing`, `top`, and `bottom` margins.
+        public typealias Margins = EdgeInsets_LeadingTrailingTopBottom
     }
     
     // MARK: Colors

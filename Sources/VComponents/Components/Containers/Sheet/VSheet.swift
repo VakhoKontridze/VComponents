@@ -87,7 +87,7 @@ public struct VSheet<Content>: View where Content: View {
                 content()
             }
         })
-        .padding(uiModel.layout.contentMargin)
+        .padding(uiModel.layout.contentMargins)
     }
 }
 
