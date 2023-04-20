@@ -20,9 +20,6 @@ VMenu
 - Picker API is overhauled
 
 VContextMenu
-- Picker API is overhauled
-
-VContextMenu
 
 - Rows can now be disabled
 
