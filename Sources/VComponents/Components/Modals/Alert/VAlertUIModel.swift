@@ -116,10 +116,23 @@ public struct VAlertUIModel {
         
         /// Spacing between vertical buttons.  Set to `5`.
         public var verticalButtonSpacing: CGFloat = 5
-        
-        /// Edges ignored by keyboard. Set to `[]`.
-        public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
-        
+
+        /// Container edges ignored by modal container. Set to `[]`.
+        ///
+        /// Setting this property to `all` may cause container to ignore explicit `sizes`.
+        public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = []
+
+        /// Keyboard edges ignored by modal container. Set to `[]`.
+        ///
+        /// Setting this property to `all` may cause container to ignore explicit `sizes`.
+        public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = []
+
+        /// Container edges ignored by modal content. Set to `[]`.
+        public var ignoredContainerSafeAreaEdgesByContent: Edge.Set = []
+
+        /// Keyboard edges ignored by modal content. Set to `[]`.
+        public var ignoredKeyboardSafeAreaEdgesByContent: Edge.Set = []
+
         // MARK: Initializers
         /// Initializes UI model with default values.
         public init() {}

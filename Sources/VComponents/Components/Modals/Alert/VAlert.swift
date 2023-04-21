@@ -32,7 +32,8 @@ struct VAlert<Content>: View
     private let buttons: [any VAlertButtonProtocol]
     
     @State private var isInternallyPresented: Bool = false
-    
+
+    @State private var alertSize: CGFloat = 0
     @State private var titleMessageContentHeight: CGFloat = 0
     @State private var buttonsStackHeight: CGFloat = 0
     
@@ -75,7 +76,16 @@ struct VAlert<Content>: View
     }
     
     private var alert: some View {
-        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
+        ZStack(content: {
+            VSheet(uiModel: uiModel.sheetSubUIModel)
+                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContainer)
+                .shadow(
+                    color: uiModel.colors.shadow,
+                    radius: uiModel.colors.shadowRadius,
+                    offset: uiModel.colors.shadowOffset
+                )
+
             VStack(spacing: 0, content: {
                 VStack(spacing: 0, content: {
                     titleView
@@ -84,22 +94,20 @@ struct VAlert<Content>: View
                 })
                 .padding(uiModel.layout.titleMessageContentMargins)
                 .onSizeChange(perform: { titleMessageContentHeight = $0.height })
-                
+
                 buttonsScrollView
             })
+            .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContent)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContent)
+            .onSizeChange(perform: { alertSize = $0.height })
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
-            maxWidth: uiModel.layout.sizes._current.size.width
+            maxWidth: uiModel.layout.sizes._current.size.width,
+            maxHeight: alertSize
         )
-        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
         .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
         .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
         .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
-        .shadow(
-            color: uiModel.colors.shadow,
-            radius: uiModel.colors.shadowRadius,
-            offset: uiModel.colors.shadowOffset
-        )
     }
     
     @ViewBuilder private var titleView: some View {

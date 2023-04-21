@@ -119,7 +119,7 @@ public struct VBottomSheetUIModel {
         /// `autoresizesContent` must be set to `true` for scrollable content to always have bottom safe area inset.
         public var contentSafeAreaEdges: Edge.Set = []
         
-        /// Edges ignored by keyboard. Set to `[]`.
+        /// Keyboard edges ignored by modal. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
         
         /// Velocity at which sheet snaps to next height, regardless of sufficient distance traveled. Set to `600` points/s.

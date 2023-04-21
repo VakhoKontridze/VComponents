@@ -50,6 +50,7 @@ import VCore
 ///                 ZStack(content: {
 ///                     Circle()
 ///                         .stroke(lineWidth: 1)
+///                         .padding(1)
 ///
 ///                     Circle()
 ///                         .padding(3)

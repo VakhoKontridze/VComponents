@@ -61,12 +61,22 @@ public struct VSideBarUIModel {
         
         /// Content margins. Set to `zero`.
         public var contentMargins: Margins = .zero
-        
-        /// Edges ignored by container. Set to `[]`.
-        public var ignoredContainerSafeAreaEdges: Edge.Set = []
-        
-        /// Edges ignored by keyboard. Set to `[]`.
-        public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
+
+        /// Container edges ignored by modal container. Set to `all`.
+        ///
+        /// Setting this property to `all` may cause container to ignore explicit `sizes`.
+        public var ignoredContainerSafeAreaEdgesByContainer: Edge.Set = .all
+
+        /// Keyboard edges ignored by modal container. Set to `all`.
+        ///
+        /// Setting this property to `all` may cause container to ignore explicit `sizes`.
+        public var ignoredKeyboardSafeAreaEdgesByContainer: Edge.Set = .all
+
+        /// Container edges ignored by modal content. Set to `[]`.
+        public var ignoredContainerSafeAreaEdgesByContent: Edge.Set = []
+
+        /// Keyboard edges ignored by modal content. Set to `[]`.
+        public var ignoredKeyboardSafeAreaEdgesByContent: Edge.Set = []
         
         /// Ratio of distance to drag side bar backward to initiate dismiss relative to width. Set to `0.1`.
         public var dragBackDismissDistanceWidthRatio: CGFloat = 0.1

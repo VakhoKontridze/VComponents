@@ -23,7 +23,7 @@ VContextMenu
 
 - Rows can now be disabled
 
-### 4.1.0(41)
+### [4.1.0(41)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.1.0) — *2023 04 21*
 
 VModal
 

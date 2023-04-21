@@ -70,7 +70,8 @@ struct VSideBar<Content>: View where Content: View {
     private var sideBar: some View {
         ZStack(content: {
             VSheet(uiModel: uiModel.sheetSubUIModel)
-                .ignoresSafeArea()
+                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContainer)
+                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContainer)
                 .shadow(
                     color: uiModel.colors.shadow,
                     radius: uiModel.colors.shadowRadius,
@@ -79,8 +80,8 @@ struct VSideBar<Content>: View where Content: View {
             
             content()
                 .padding(uiModel.layout.contentMargins)
-                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdges)
-                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
+                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdgesByContent)
+                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdgesByContent)
         })
         .frame( // Max dimension fix issue of safe areas and/or landscape
             maxWidth: uiModel.layout.sizes._current.size.width,

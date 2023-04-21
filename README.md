@@ -72,9 +72,9 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
 #### Modals
 
 <p>
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781593-e4d86158-2b12-428b-96a0-b6b4cd2ac036.mp4">
+    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587704-43250eff-6562-4de1-b8d4-e53db4d405d0.mp4">
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781706-354f5f84-2513-4371-aba2-9cf3f13b3a0b.mp4">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781803-942f3023-7518-4eb7-bac8-52e1dad7d158.mp4">
+    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587709-5d22a962-30f3-45b2-afa5-61317afe5963.mp4">
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230781879-befcedb5-d182-4611-9d89-1ff0c117457d.mp4">
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782026-4ecfe120-7d91-436f-a999-5eba2f839ab1.png">
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782027-583f42eb-f0a1-457f-a7f2-30e99be0aa27.png">
@@ -93,8 +93,8 @@ VComponents is a `SwiftUI` package that contains 30+ customizable UI components.
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782380-ccd33ca5-1fdf-4c62-bee3-0091c9bcdaca.png">
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782386-fcd6f14b-986a-482f-bbfe-86ecb92c3670.png">
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782388-f55c43b9-7a2f-4bd2-a29a-ddfb262885d4.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782390-896d1182-e9d9-4cab-aa54-e71af922ae4d.png">
-    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782391-52f2aa3c-fb7f-4a08-8457-23d462b6a520.png">
+    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587684-db5652bc-c20f-44d0-9b26-ae2298903608.png">
+    <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/233587698-df51dcbc-3370-49e2-9f41-0e2615b96c4d.png">
     <img width="350" align="top" src="https://user-images.githubusercontent.com/57289621/230782392-7867a1c3-4408-4f14-bd2c-d2119b387b01.png">
 <p/>
 
