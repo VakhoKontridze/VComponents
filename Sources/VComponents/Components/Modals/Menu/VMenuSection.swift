@@ -87,13 +87,28 @@ public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
         selection: Binding<SelectionValue>,
         data: [SelectionValue],
         id: KeyPath<SelectionValue, ID>,
-        _title: @escaping (SelectionValue) -> String // TODO: Rename
+        rowTitle: @escaping (SelectionValue) -> String // TODO: Rename
     ) {
         self.title = title
         self._selection = selection
         self.data = data
         self.id = id
-        self.content = { VMenuTitleRow(action: {}, title: _title($0)) } // TODO: Handle
+        self.content = { VMenuTitleRow(action: {}, title: rowTitle($0)) } // TODO: Handle
+    }
+
+    /// Initializes `VMenuPickerSection` with selection, data, id, and row content.
+    public init(
+        title: String? = nil,
+        selection: Binding<SelectionValue>,
+        data: [SelectionValue],
+        id: KeyPath<SelectionValue, ID>,
+        content: @escaping (SelectionValue) -> VMenuRowProtocol
+    ) {
+        self.title = title
+        self._selection = selection
+        self.data = data
+        self.id = id
+        self.content = content
     }
 
     // MARK: Initializers - Identifiable
@@ -102,7 +117,7 @@ public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
         title: String? = nil,
         selection: Binding<SelectionValue>,
         data: [SelectionValue],
-        _title: @escaping (SelectionValue) -> String
+        rowTitle: @escaping (SelectionValue) -> String
     )
         where
             SelectionValue: Identifiable,
@@ -112,7 +127,25 @@ public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
         self._selection = selection
         self.data = data
         self.id = \.id
-        self.content = { VMenuTitleRow(action: {}, title: _title($0)) }
+        self.content = { VMenuTitleRow(action: {}, title: rowTitle($0)) }
+    }
+
+    /// Initializes `VMenuPickerSection` with selection, data, and row content.
+    public init(
+        title: String? = nil,
+        selection: Binding<SelectionValue>,
+        data: [SelectionValue],
+        content: @escaping (SelectionValue) -> VMenuRowProtocol
+    )
+        where
+            SelectionValue: Identifiable,
+            ID == SelectionValue.ID
+    {
+        self.title = title
+        self._selection = selection
+        self.data = data
+        self.id = \.id
+        self.content = content
     }
     
     // MARK: Initializers - String Representable

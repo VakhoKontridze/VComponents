@@ -193,20 +193,6 @@ extension VBottomSheetUIModel.Layout.BottomSheetHeights {
 @available(iOS 15.0, *)
 extension VMenuPickerSection {
     @available(*, unavailable, message: "This `init` is no longer available")
-    public init<Data>(
-        title: String? = nil,
-        selectedIndex: Binding<Int>,
-        data: Data,
-        content: @escaping (Data.Element) -> VMenuRowProtocol
-    )
-        where
-            Data: RandomAccessCollection,
-            Data.Index == Int
-    {
-        fatalError()
-    }
-
-    @available(*, unavailable, message: "This `init` is no longer available")
     public init(
         title: String? = nil,
         selectedIndex: Binding<Int>,
