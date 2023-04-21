@@ -18,7 +18,7 @@ extension VSheetUIModel.Layout {
 }
 
 // MARK: - V Modal
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -26,6 +26,18 @@ extension VModalUIModel.Layout {
     @available(*, unavailable, message: "Use `ignoredContainerSafeAreaEdges` instead")
     public var headerSafeAreaEdges: Edge.Set {
         fatalError()
+    }
+
+    @available(*, deprecated, renamed: "ignoredContainerSafeAreaEdgesByContent")
+    public var ignoredContainerSafeAreaEdges: Edge.Set {
+        get { ignoredContainerSafeAreaEdgesByContent }
+        set { ignoredContainerSafeAreaEdgesByContent = newValue }
+    }
+
+    @available(*, deprecated, renamed: "ignoredKeyboardSafeAreaEdgesByContent")
+    public var ignoredKeyboardSafeAreaEdges: Edge.Set {
+        get { ignoredKeyboardSafeAreaEdgesByContent }
+        set { ignoredKeyboardSafeAreaEdgesByContent = newValue }
     }
 }
 
@@ -46,7 +58,7 @@ extension VBottomSheetUIModel.Layout.BottomSheetHeights {
 }
 
 // MARK: - V Side Bar
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -54,5 +66,30 @@ extension VSideBarUIModel.Layout {
     @available(*, unavailable, message: "Use `ignoredContainerSafeAreaEdges` instead")
     public var contentSafeAreaEdges: Edge.Set {
         fatalError()
+    }
+
+    @available(*, deprecated, renamed: "ignoredContainerSafeAreaEdgesByContent")
+    public var ignoredContainerSafeAreaEdges: Edge.Set {
+        get { ignoredContainerSafeAreaEdgesByContent }
+        set { ignoredContainerSafeAreaEdgesByContent = newValue }
+    }
+
+    @available(*, deprecated, renamed: "ignoredKeyboardSafeAreaEdgesByContent")
+    public var ignoredKeyboardSafeAreaEdges: Edge.Set {
+        get { ignoredKeyboardSafeAreaEdgesByContent }
+        set { ignoredKeyboardSafeAreaEdgesByContent = newValue }
+    }
+}
+
+// MARK: - V Alert
+@available(iOS 14.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VAlertUIModel.Layout {
+    @available(*, deprecated, renamed: "ignoredKeyboardSafeAreaEdgesByContent")
+    public var ignoredKeyboardSafeAreaEdges: Edge.Set {
+        get { ignoredKeyboardSafeAreaEdgesByContent }
+        set { ignoredKeyboardSafeAreaEdgesByContent = newValue }
     }
 }
