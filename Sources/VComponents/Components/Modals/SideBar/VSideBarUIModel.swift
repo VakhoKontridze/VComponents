@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Side Bar UI Model
 /// Model that describes UI.
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -62,8 +62,8 @@ public struct VSideBarUIModel {
         /// Content margins. Set to `zero`.
         public var contentMargins: Margins = .zero
         
-        /// Edges on which content has safe area edges. Set to `all`.
-        public var contentSafeAreaEdges: Edge.Set = .all
+        /// Edges ignored by container. Set to `[]`.
+        public var ignoredContainerSafeAreaEdges: Edge.Set = []
         
         /// Edges ignored by keyboard. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
@@ -90,8 +90,18 @@ public struct VSideBarUIModel {
             /// Presentation form top edge.
             case top
             
-            /// Presentation form bottom egge.
+            /// Presentation form bottom edge.
             case bottom
+
+            // MARK: Properties
+            var alignment: Alignment {
+                switch self {
+                case .leading: return .leading
+                case .trailing: return .trailing
+                case .top: return .top
+                case .bottom: return .bottom
+                }
+            }
             
             // MARK: Initializers
             /// Default value. Set to `leading`.
@@ -203,7 +213,7 @@ public struct VSideBarUIModel {
 }
 
 // MARK: - Factory (Misc)
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -219,7 +229,7 @@ extension VSideBarUIModel {
 }
 
 // MARK: - Factory (Presentation Edge)
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -235,7 +245,7 @@ extension VSideBarUIModel.Layout.PresentationEdge {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -272,8 +282,8 @@ extension VSideBarUIModel {
     /// `roundedCorners` is set to `bottomCorners`.
     ///
     /// `contentMargins.bottom` is set to `25`.
-    ///
-    /// `contentSafeAreaEdges` is set to all but `bottom`.
+    /// This is because, corner radius is applied to container, and not content.
+    /// If you wish for `contentMargins.bottom` to be `0`, then make sure to apply corner radius to content itself.
     public static var top: Self {
         var uiModel: Self = .init()
         
@@ -287,7 +297,6 @@ extension VSideBarUIModel {
         uiModel.layout.roundedCorners = .bottomCorners
         
         uiModel.layout.contentMargins.bottom = 25
-        uiModel.layout.contentSafeAreaEdges = .all.subtracting(.bottom)
         
         return uiModel
     }
@@ -302,8 +311,8 @@ extension VSideBarUIModel {
     /// `roundedCorners` is set to `topCorners`.
     ///
     /// `contentMargins.top` is set to `25`.
-    ///
-    /// `contentSafeAreaEdges` is set to all but `top`.
+    /// This is because, corner radius is applied to container, and not content.
+    /// If you wish for `contentMargins.top` to be `0`, then make sure to apply corner radius to content itself.
     public static var bottom: Self {
         var uiModel: Self = .init()
         
@@ -317,7 +326,6 @@ extension VSideBarUIModel {
         uiModel.layout.roundedCorners = .topCorners
         
         uiModel.layout.contentMargins.top = 25
-        uiModel.layout.contentSafeAreaEdges = .all.subtracting(.top)
         
         return uiModel
     }

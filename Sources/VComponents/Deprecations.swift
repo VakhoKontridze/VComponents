@@ -17,6 +17,18 @@ extension VSheetUIModel.Layout {
     }
 }
 
+// MARK: - V Modal
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VModalUIModel.Layout {
+    @available(*, unavailable, message: "Use `ignoredContainerSafeAreaEdges` instead")
+    public var headerSafeAreaEdges: Edge.Set {
+        fatalError()
+    }
+}
+
 // MARK: - V Bottom Sheet
 @available(iOS 15.0, *)
 @available(macOS, unavailable)
@@ -30,5 +42,17 @@ extension VBottomSheetUIModel.Layout.BottomSheetHeights {
             ideal: value,
             max: value
         )
+    }
+}
+
+// MARK: - V Side Bar
+@available(iOS 15.0, *)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension VSideBarUIModel.Layout {
+    @available(*, unavailable, message: "Use `ignoredContainerSafeAreaEdges` instead")
+    public var contentSafeAreaEdges: Edge.Set {
+        fatalError()
     }
 }

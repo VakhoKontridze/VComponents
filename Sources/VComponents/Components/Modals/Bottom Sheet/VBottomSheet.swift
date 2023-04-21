@@ -66,8 +66,6 @@ struct VBottomSheet<Content>: View
             dimmingView
             bottomSheet
         })
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea(.container, edges: .all)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -92,7 +90,9 @@ struct VBottomSheet<Content>: View
             VSheet(uiModel: uiModel.sheetSubUIModel)
                 .if(!uiModel.misc.contentIsDraggable, transform: {
                     $0
-                        .frame(height: uiModel.layout.sizes._current.size.heights.max)
+                        .frame( // Max dimension fix issue of safe areas and/or landscape
+                            maxHeight: uiModel.layout.sizes._current.size.heights.max
+                        )
                         .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
                         .gesture(
                             DragGesture(minimumDistance: 0)
@@ -118,17 +118,21 @@ struct VBottomSheet<Content>: View
                 contentView
             })
             .frame(maxHeight: .infinity, alignment: .top)
-            .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // NOTE: Fixes issue of content-clipping, as it's not in `VSheet`
+            .cornerRadius(uiModel.layout.cornerRadius, corners: .topCorners) // Fixes issue of content-clipping, as it's not in `VSheet`
             .if(!uiModel.misc.contentIsDraggable, transform: {
                 $0
-                    .frame(height: uiModel.layout.sizes._current.size.heights.max)
+                    .frame( // Max dimension fix issue of safe areas and/or landscape
+                        maxHeight: uiModel.layout.sizes._current.size.heights.max
+                    )
                     .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
             })
         })
         .frame(width: uiModel.layout.sizes._current.size.width)
         .if(uiModel.misc.contentIsDraggable, transform: {
             $0
-                .frame(height: uiModel.layout.sizes._current.size.heights.max)
+                .frame( // Max dimension fix issue of safe areas and/or landscape
+                    maxHeight: uiModel.layout.sizes._current.size.heights.max
+                )
                 .offset(y: isInternallyPresented ? offset : uiModel.layout.sizes._current.size.heights.hiddenOffset)
                 .gesture(
                     DragGesture(minimumDistance: 0)
@@ -200,6 +204,19 @@ struct VBottomSheet<Content>: View
                 .foregroundColor(uiModel.colors.divider)
         }
     }
+
+    private var closeButton: some View {
+        VRoundedButton(
+            uiModel: uiModel.closeButtonSubUIModel,
+            action: animateOut,
+            icon: ImageBook.xMark
+        )
+    }
+
+    private var closeButtonCompensator: some View {
+        Spacer()
+            .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
+    }
     
     private var contentView: some View {
         ZStack(content: {
@@ -218,19 +235,6 @@ struct VBottomSheet<Content>: View
             ifTransform: { $0.frame(height: MultiplatformConstants.screenSize.height - offset - headerDividerHeight) },
             elseTransform: { $0.frame(maxHeight: .infinity) }
         )
-    }
-    
-    private var closeButton: some View {
-        VRoundedButton(
-            uiModel: uiModel.closeButtonSubUIModel,
-            action: animateOut,
-            icon: ImageBook.xMark
-        )
-    }
-    
-    private var closeButtonCompensator: some View {
-        Spacer()
-            .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
     }
     
     // MARK: Animation

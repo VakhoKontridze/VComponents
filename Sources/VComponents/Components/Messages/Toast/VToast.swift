@@ -44,22 +44,21 @@ struct VToast: View {
     
     // MARK: Body
     var body: some View {
-        contentView
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .ignoresSafeArea(.container, edges: .vertical) // Should have horizontal safe area
-            .modifier({ view in
-                switch uiModel.layout.widthType {
-                case .wrapped(let margin): view.padding(.horizontal, margin)
-                case .stretched(_, let margin): view.padding(.horizontal, margin)
-                case .fixedPoint, .fixedFraction: view
-                }
-            })
-            .onAppear(perform: animateIn)
-            .onAppear(perform: animateOutAfterLifecycle)
-            .onChange(
-                of: presentationMode.isExternallyDismissed,
-                perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
-            )
+        ZStack(alignment: uiModel.layout.presentationEdge.alignment, content: {
+            dimmingView
+            contentView
+        })
+        .onAppear(perform: animateIn)
+        .onAppear(perform: animateOutAfterLifecycle)
+        .onChange(
+            of: presentationMode.isExternallyDismissed,
+            perform: { if $0 && isInternallyPresented { animateOutFromExternalDismiss() } }
+        )
+    }
+
+    private var dimmingView: some View {
+        Color.clear
+            .ignoresSafeArea()
     }
     
     private var contentView: some View {
@@ -100,6 +99,13 @@ struct VToast: View {
         .cornerRadius(cornerRadius)
         .background(background)
         .onSizeChange(perform: { height = $0.height })
+        .modifier({ view in
+            switch uiModel.layout.widthType {
+            case .wrapped(let margin): view.padding(.horizontal, margin)
+            case .stretched(_, let margin): view.padding(.horizontal, margin)
+            case .fixedPoint, .fixedFraction: view
+            }
+        })
         .offset(y: isInternallyPresented ? presentedOffset : initialOffset)
     }
     
@@ -115,27 +121,16 @@ struct VToast: View {
     
     // MARK: Offsets
     private var initialOffset: CGFloat {
-        let initialOffset: CGFloat = height + 2*uiModel.layout.textMargins.vertical
-        
         switch uiModel.layout.presentationEdge {
-        case .top: return -initialOffset
-        case .bottom: return MultiplatformConstants.screenSize.height + initialOffset
+        case .top: return -(MultiplatformConstants.safeAreaInsets.top + height)
+        case .bottom: return MultiplatformConstants.safeAreaInsets.bottom + 100
         }
     }
     
     private var presentedOffset: CGFloat {
         switch uiModel.layout.presentationEdge {
-        case .top:
-            return
-                MultiplatformConstants.safeAreaInsets.top +
-                uiModel.layout.presentationEdgeSafeAreaInset
-
-        case .bottom:
-            return
-                MultiplatformConstants.screenSize.height -
-                MultiplatformConstants.safeAreaInsets.bottom -
-                height -
-                uiModel.layout.presentationEdgeSafeAreaInset
+        case .top: return uiModel.layout.presentationEdgeSafeAreaInset
+        case .bottom: return -uiModel.layout.presentationEdgeSafeAreaInset
         }
     }
     
@@ -150,14 +145,19 @@ struct VToast: View {
     // MARK: Animations
     private func animateIn() {
         playHapticEffect()
-        
-        withBasicAnimation(
-            uiModel.animations.appear,
-            body: { isInternallyPresented = true },
-            completion: {
-                DispatchQueue.main.async(execute: { presentHandler?() })
-            }
-        )
+
+        // `VToast` doesn't have an intrinsic height
+        // This delay gives SwiftUI change to return height.
+        // Other option was to calculate it using `UILabel`.
+        DispatchQueue.main.async(execute: {
+            withBasicAnimation(
+                uiModel.animations.appear,
+                body: { isInternallyPresented = true },
+                completion: {
+                    DispatchQueue.main.async(execute: { presentHandler?() })
+                }
+            )
+        })
     }
     
     private func animateOut() {
@@ -228,7 +228,7 @@ struct VToast_Previews: PreviewProvider {
     private static var highlights: VToastUIModel { .init() }
     private static var widthType: VToastUIModel.Layout.WidthType { .default }
     private static var presentationEdge: VToastUIModel.Layout.PresentationEdge { .default }
-    
+
     // Previews
     static var previews: some View {
         Group(content: {

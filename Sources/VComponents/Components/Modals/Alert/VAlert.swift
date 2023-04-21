@@ -34,18 +34,6 @@ struct VAlert<Content>: View
     
     @State private var titleMessageContentHeight: CGFloat = 0
     @State private var buttonsStackHeight: CGFloat = 0
-    private var buttonsStackShouldScroll: Bool {
-        let safeAreaHeight: CGFloat =
-        MultiplatformConstants.screenSize.height -
-        MultiplatformConstants.safeAreaInsets.top -
-        MultiplatformConstants.safeAreaInsets.bottom
-        
-        let alertHeight: CGFloat =
-        titleMessageContentHeight +
-        buttonsStackHeight
-        
-        return alertHeight > safeAreaHeight
-    }
     
     // MARK: Initializers
     init(
@@ -72,8 +60,6 @@ struct VAlert<Content>: View
             dimmingView
             alert
         })
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea(.container, edges: .all)
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -100,8 +86,9 @@ struct VAlert<Content>: View
                 buttonsScrollView
             })
         })
-        .frame(width: uiModel.layout.sizes._current.size.width)
-        .ignoresSafeArea(.container, edges: .horizontal)
+        .frame( // Max dimension fix issue of safe areas and/or landscape
+            maxWidth: uiModel.layout.sizes._current.size.width
+        )
         .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
         .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
         .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
@@ -151,29 +138,31 @@ struct VAlert<Content>: View
     }
     
     @ViewBuilder private var buttonsScrollView: some View {
-        if buttonsStackShouldScroll {
-            ScrollView(content: { buttonsStack }).padding(.bottom, 1) // Fixes SwiftUI `ScrollView` safe area bug
+        if isButtonContentLargerThanContainer {
+            ScrollView(content: { buttonStack })
+                .padding(.bottom, 1) // Fixes SwiftUI `ScrollView` safe area bug
+
         } else {
-            buttonsStack
+            buttonStack
         }
     }
     
-    private var buttonsStack: some View {
+    private var buttonStack: some View {
         Group(content: {
             switch buttons.count {
             case 1:
-                buttonsContent()
+                buttonContent()
                 
             case 2:
                 HStack(
                     spacing: uiModel.layout.horizontalButtonSpacing,
-                    content: { buttonsContent(reversesOrder: true) } // Cancel button is last
+                    content: { buttonContent(reversesOrder: true) } // Cancel button is last
                 )
                 
             case 3...:
                 VStack(
                     spacing: uiModel.layout.verticalButtonSpacing,
-                    content: { buttonsContent() }
+                    content: { buttonContent() }
                 )
                 
             default:
@@ -191,7 +180,7 @@ struct VAlert<Content>: View
         })
     }
     
-    private func buttonsContent(reversesOrder: Bool = false) -> some View {
+    private func buttonContent(reversesOrder: Bool = false) -> some View {
         let buttons: [any VAlertButtonProtocol] = self.buttons.reversed(if: reversesOrder)
         
         return ForEach(buttons.indices, id: \.self, content: { i in
@@ -233,6 +222,20 @@ struct VAlert<Content>: View
                 DispatchQueue.main.async(execute: { dismissHandler?() })
             }
         )
+    }
+
+    // MARK: Size that Fits
+    private var isButtonContentLargerThanContainer: Bool {
+        let safeAreaHeight: CGFloat =
+            MultiplatformConstants.screenSize.height -
+            MultiplatformConstants.safeAreaInsets.top -
+            MultiplatformConstants.safeAreaInsets.bottom
+
+        let alertHeight: CGFloat =
+            titleMessageContentHeight +
+            buttonsStackHeight
+
+        return alertHeight > safeAreaHeight
     }
 }
 

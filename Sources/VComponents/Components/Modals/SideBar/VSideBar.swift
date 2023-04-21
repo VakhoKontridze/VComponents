@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Side Bar
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
@@ -43,12 +43,13 @@ struct VSideBar<Content>: View where Content: View {
     
     // MARK: Body
     var body: some View {
-        ZStack(content: {
-            dimmingView
-            sideBar
-        })
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea(.container, edges: .all)
+        ZStack(
+            alignment: uiModel.layout.presentationEdge.alignment,
+            content: {
+                dimmingView
+                sideBar
+            }
+        )
         .onAppear(perform: animateIn)
         .onChange(
             of: presentationMode.isExternallyDismissed,
@@ -67,6 +68,7 @@ struct VSideBar<Content>: View where Content: View {
     private var sideBar: some View {
         ZStack(content: {
             VSheet(uiModel: uiModel.sheetSubUIModel)
+                .ignoresSafeArea()
                 .shadow(
                     color: uiModel.colors.shadow,
                     radius: uiModel.colors.shadowRadius,
@@ -75,12 +77,14 @@ struct VSideBar<Content>: View where Content: View {
             
             content()
                 .padding(uiModel.layout.contentMargins)
-                .safeAreaMarginInsets(edges: uiModel.layout.contentSafeAreaEdges)
+                .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdges)
+                .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
         })
-        .frame(size: uiModel.layout.sizes._current.size)
-        .ignoresSafeArea(.container, edges: .all)
-        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
-        .offset(isInternallyPresented ? presentedOffset : initialOffset)
+        .frame( // Max dimension fix issue of safe areas and/or landscape
+            maxWidth: uiModel.layout.sizes._current.size.width,
+            maxHeight: uiModel.layout.sizes._current.size.height
+        )
+        .offset(isInternallyPresented ? .zero : initialOffset)
         .gesture(
             DragGesture(minimumDistance: 20) // Non-zero value prevents collision with scrolling
                 .onChanged(dragChanged)
@@ -145,18 +149,11 @@ struct VSideBar<Content>: View where Content: View {
     }
     
     // MARK: Presentation Edge Offsets
-    private var sheetScreenMargins: CGSize {
-        .init(
-            width: (MultiplatformConstants.screenSize.width - uiModel.layout.sizes._current.size.width) / 2,
-            height: (MultiplatformConstants.screenSize.height - uiModel.layout.sizes._current.size.height) / 2
-        )
-    }
-    
     private var initialOffset: CGSize {
         let x: CGFloat = {
             switch uiModel.layout.presentationEdge {
-            case .leading: return -uiModel.layout.sizes._current.size.width - sheetScreenMargins.width
-            case .trailing: return MultiplatformConstants.screenSize.width - sheetScreenMargins.width
+            case .leading: return -(uiModel.layout.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.leading)
+            case .trailing: return uiModel.layout.sizes._current.size.width + MultiplatformConstants.safeAreaInsets.trailing
             case .top: return 0
             case .bottom: return 0
             }
@@ -166,30 +163,8 @@ struct VSideBar<Content>: View where Content: View {
             switch uiModel.layout.presentationEdge {
             case .leading: return 0
             case .trailing: return 0
-            case .top: return -uiModel.layout.sizes._current.size.height - sheetScreenMargins.height
-            case .bottom: return MultiplatformConstants.screenSize.height - sheetScreenMargins.height
-            }
-        }()
-        
-        return CGSize(width: x, height: y)
-    }
-    
-    private var presentedOffset: CGSize {
-        let x: CGFloat = {
-            switch uiModel.layout.presentationEdge {
-            case .leading: return -sheetScreenMargins.width
-            case .trailing: return sheetScreenMargins.width
-            case .top: return 0
-            case .bottom: return 0
-            }
-        }()
-        
-        let y: CGFloat = {
-            switch uiModel.layout.presentationEdge {
-            case .leading: return 0
-            case .trailing: return 0
-            case .top: return -sheetScreenMargins.height
-            case .bottom: return sheetScreenMargins.height
+            case .top: return -(uiModel.layout.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.top)
+            case .bottom: return uiModel.layout.sizes._current.size.height + MultiplatformConstants.safeAreaInsets.bottom
             }
         }()
         
@@ -242,7 +217,7 @@ struct VSideBar_Previews: PreviewProvider {
     private static var dynamicTypeSize: DynamicTypeSize? { nil }
     private static var colorScheme: ColorScheme { .light }
     private static var presentationEdge: VSideBarUIModel { .init() }
-    
+
     // Previews
     static var previews: some View {
         Group(content: {

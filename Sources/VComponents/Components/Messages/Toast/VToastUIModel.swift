@@ -54,8 +54,8 @@ public struct VToastUIModel {
         /// Edge from which toast appears, and to which it disappears. Set to `default`.
         public var presentationEdge: PresentationEdge = .default
         
-        /// Safe area inset from presented edge. Set to `20`.
-        public var presentationEdgeSafeAreaInset: CGFloat = 20
+        /// Safe area inset from presented edge. Set to `10`.
+        public var presentationEdgeSafeAreaInset: CGFloat = 10
         
         // MARK: Initializers
         /// Initializes UI model with default values.
@@ -151,6 +151,14 @@ public struct VToastUIModel {
             
             /// Presentation from bottom.
             case bottom
+
+            // MARK: Properties
+            var alignment: Alignment {
+                switch self {
+                case .top: return .top
+                case .bottom: return .bottom
+                }
+            }
             
             // MARK: Initializers
             /// Default value. Set to `bottom`.

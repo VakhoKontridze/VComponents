@@ -8,7 +8,7 @@
 import SwiftUI
 
 // MARK: - V Modal Header Label
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -38,7 +38,7 @@ enum VModalHeaderLabel<Label>: Equatable where Label: View {
 }
 
 // MARK: - V Modal Header Label Extension
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -67,7 +67,7 @@ extension View {
 }
 
 // MARK: - V Modal Header Label Preference Key
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
