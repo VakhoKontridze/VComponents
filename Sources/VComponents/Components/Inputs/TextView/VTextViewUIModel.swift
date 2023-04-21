@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Text View UI Model
 /// Model that describes UI.
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -130,7 +130,7 @@ public struct VTextViewUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -168,7 +168,7 @@ extension VTextViewUIModel {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
