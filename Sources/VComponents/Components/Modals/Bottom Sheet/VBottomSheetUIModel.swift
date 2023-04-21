@@ -397,7 +397,7 @@ public struct VBottomSheetUIModel {
         
         uiModel.layout.roundedCorners = .topCorners
         uiModel.layout.cornerRadius = layout.cornerRadius
-        uiModel.layout.contentMargin = 0
+        uiModel.layout.contentMargins = .zero
         
         uiModel.colors.background = colors.background
         
@@ -427,7 +427,7 @@ extension VBottomSheetUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = Layout.Margins(GlobalUIModel.Common.containerContentMargin)
         
         return uiModel
     }

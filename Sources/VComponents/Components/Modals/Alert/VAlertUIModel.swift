@@ -283,7 +283,7 @@ public struct VAlertUIModel {
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
         uiModel.layout.cornerRadius = layout.cornerRadius
-        uiModel.layout.contentMargin = 0
+        uiModel.layout.contentMargins = .zero
         
         uiModel.colors.background = colors.background
         

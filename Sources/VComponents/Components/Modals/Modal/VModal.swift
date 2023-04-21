@@ -9,7 +9,7 @@ import SwiftUI
 import VCore
 
 // MARK: - V Modal
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS 11.0, *)@available(macOS, unavailable) // No `View.presentationHost(...)` support
 @available(tvOS 16.0, *)@available(tvOS, unavailable) // No `View.presentationHost(...)` support
 @available(watchOS 7.0, *)@available(watchOS, unavailable) // No `View.presentationHost(...)` support
@@ -17,6 +17,7 @@ struct VModal<Content>: View
     where Content: View
 {
     // MARK: Properties
+    @Environment(\.layoutDirection) private var layoutDirection: LayoutDirection
     @Environment(\.colorScheme) private var colorScheme: ColorScheme
     @Environment(\.presentationHostPresentationMode) private var presentationMode: PresentationHostPresentationMode
     @StateObject private var interfaceOrientationChangeObserver: InterfaceOrientationChangeObserver = .init()
@@ -53,8 +54,6 @@ struct VModal<Content>: View
             dimmingView
             modal
         })
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .ignoresSafeArea(.container, edges: .all)
         .environment(\.colorScheme, uiModel.colors.colorScheme ?? colorScheme)
         .onAppear(perform: animateIn)
         .onChange(
@@ -73,31 +72,40 @@ struct VModal<Content>: View
                 if uiModel.misc.dismissType.contains(.backTap) { animateOut() }
             })
     }
-    
+
     private var modal: some View {
-        VSheet(uiModel: uiModel.sheetSubUIModel, content: {
+        ZStack(content: {
+            VSheet(uiModel: uiModel.sheetSubUIModel)
+                .ignoresSafeArea()
+                .shadow(
+                    color: uiModel.colors.shadow,
+                    radius: uiModel.colors.shadowRadius,
+                    offset: uiModel.colors.shadowOffset
+                )
+
             VStack(spacing: 0, content: {
-                VStack(spacing: 0, content: {
-                    header
-                    divider
-                })
-                .safeAreaMarginInsets(edges: uiModel.layout.headerSafeAreaEdges)
-                
+                header
+                divider
                 contentView
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
             })
+            .cornerRadius( // Fixes issue of content-clipping, as it's not in `VSheet`
+                uiModel.layout.cornerRadius,
+                corners: uiModel.layout.roundedCorners
+                    .withReversedLeftAndRightCorners(
+                        uiModel.layout.reversesLeftAndRightCornersForRTLLanguages &&
+                        layoutDirection == .rightToLeft
+                    )
+            )
+            .ignoresSafeArea(.container, edges: uiModel.layout.ignoredContainerSafeAreaEdges)
+            .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
         })
-        .frame(size: uiModel.layout.sizes._current.size)
-        .ignoresSafeArea(.container, edges: .all)
-        .ignoresSafeArea(.keyboard, edges: uiModel.layout.ignoredKeyboardSafeAreaEdges)
+        .frame( // Max dimension fix issue of safe areas and/or landscape
+            maxWidth: uiModel.layout.sizes._current.size.width,
+            maxHeight: uiModel.layout.sizes._current.size.height
+        )
         .scaleEffect(isInternallyPresented ? 1 : uiModel.animations.scaleEffect)
         .opacity(isInternallyPresented ? 1 : uiModel.animations.opacity)
         .blur(radius: isInternallyPresented ? 0 : uiModel.animations.blur)
-        .shadow(
-            color: uiModel.colors.shadow,
-            radius: uiModel.colors.shadowRadius,
-            offset: uiModel.colors.shadowOffset
-        )
     }
     
     @ViewBuilder private var header: some View {
@@ -142,6 +150,19 @@ struct VModal<Content>: View
             .padding(uiModel.layout.headerMargins)
         }
     }
+
+    private var closeButton: some View {
+        VRoundedButton(
+            uiModel: uiModel.closeButtonSubUIModel,
+            action: animateOut,
+            icon: ImageBook.xMark
+        )
+    }
+
+    private var closeButtonCompensator: some View {
+        Spacer()
+            .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
+    }
     
     @ViewBuilder private var divider: some View {
         if hasDivider {
@@ -155,20 +176,7 @@ struct VModal<Content>: View
     private var contentView: some View {
         content()
             .padding(uiModel.layout.contentMargins)
-            .frame(maxHeight: .infinity)
-    }
-    
-    private var closeButton: some View {
-        VRoundedButton(
-            uiModel: uiModel.closeButtonSubUIModel,
-            action: animateOut,
-            icon: ImageBook.xMark
-        )
-    }
-    
-    private var closeButtonCompensator: some View {
-        Spacer()
-            .frame(width: uiModel.layout.closeButtonSubUIModel.size.width)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: Animations

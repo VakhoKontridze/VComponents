@@ -1,6 +1,6 @@
 # Change Log
 
-### 4.1.0(41)
+### 4.2.0(42)
 
 General
 
@@ -22,6 +22,22 @@ VMenu
 VContextMenu
 
 - Rows can now be disabled
+
+### 4.1.0(41)
+
+VModal
+
+- Modal now supports `iOS` `14.0`
+- Issue with screen-sized modal in landscape is fixed
+
+VBottomSheet
+
+- Issue with screen-sized modal in landscape is fixed
+
+VSideBar
+
+- SideBar now supports `iOS` `14.0`
+- Issue with screen-sized modal in landscape is fixed
 
 ### [4.0.7(40)](https://github.com/VakhoKontridze/VComponents/releases/tag/4.0.7) — *2023 04 20*
 

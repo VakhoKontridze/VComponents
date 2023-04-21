@@ -10,7 +10,7 @@ import VCore
 
 // MARK: - V Modal UI Model
 /// Model that describes UI.
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -87,10 +87,8 @@ public struct VModalUIModel {
         /// Content margins. Set to `zero`.
         public var contentMargins: Margins = .zero
         
-        /// Edges on which header has safe area edges. Set to `[]`.
-        ///
-        /// Can be used for full-sized modal, to prevent header from leaving safe area.
-        public var headerSafeAreaEdges: Edge.Set = []
+        /// Edges ignored by container. Set to `[]`.
+        public var ignoredContainerSafeAreaEdges: Edge.Set = []
         
         /// Edges ignored by keyboard. Set to `[]`.
         public var ignoredKeyboardSafeAreaEdges: Edge.Set = []
@@ -257,7 +255,7 @@ public struct VModalUIModel {
         uiModel.layout.roundedCorners = layout.roundedCorners
         uiModel.layout.reversesLeftAndRightCornersForRTLLanguages = layout.reversesLeftAndRightCornersForRTLLanguages
         uiModel.layout.cornerRadius = layout.cornerRadius
-        uiModel.layout.contentMargin = 0
+        uiModel.layout.contentMargins = .zero
         
         uiModel.colors.background = colors.background
         
@@ -278,7 +276,7 @@ public struct VModalUIModel {
 }
 
 // MARK: - Factory
-@available(iOS 15.0, *)
+@available(iOS 14.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
@@ -287,7 +285,7 @@ extension VModalUIModel {
     public static var insettedContent: Self {
         var uiModel: Self = .init()
         
-        uiModel.layout.contentMargins = Layout.Margins(VSheetUIModel.Layout().contentMargin)
+        uiModel.layout.contentMargins = .init(GlobalUIModel.Common.containerCornerRadius)
         
         return uiModel
     }
