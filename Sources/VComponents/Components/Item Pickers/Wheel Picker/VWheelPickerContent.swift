@@ -16,15 +16,6 @@ enum VWheelPickerContent<SelectionValue, Content>
         SelectionValue: Hashable,
         Content: View
 {
-    // MARK: Properties
-    case title(data: [SelectionValue], title: (SelectionValue) -> String)
-    case content(data: [SelectionValue], content: (VWheelPickerInternalState, SelectionValue) -> Content)
-    
-    // MARK: Array API
-    var count: Int {
-        switch self {
-        case .title(let data, _): return data.count
-        case .content(let data, _): return data.count
-        }
-    }
+    case title(title: (SelectionValue) -> String)
+    case content(content: (VWheelPickerInternalState, SelectionValue) -> Content)
 }

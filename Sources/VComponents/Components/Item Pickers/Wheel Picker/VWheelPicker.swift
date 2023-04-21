@@ -15,12 +15,10 @@ import VCore
 ///
 /// UI Model, header, and footer can be passed as parameters.
 ///
-/// There are three possible ways of initializing `VWheelPicker`.
-///
-/// [1] Data, Selection, and Title/Content:
-///
-///     private enum RGBColor: CaseIterable {
+///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable {
 ///         case red, green, blue
+///
+///         var id: Int { rawValue }
 ///     }
 ///
 ///     @State private var selection: RGBColor = .red
@@ -29,49 +27,34 @@ import VCore
 ///         VWheelPicker(
 ///             selection: $selection,
 ///             data: RGBColor.allCases,
-///             title: { String(describing: $0) }
+///             title: { String(describing: $0).capitalized }
 ///         )
+///         .padding()
 ///     }
 ///
-/// [2] `HashableEnumeration` API - Title/Content:
+/// If you make selection conform to `CaseIterable` and `StringRepresentable`, you cal use the following API:
 ///
-///     private enum RGBColor: HashableEnumeration {
+///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
 ///         case red, green, blue
+///
+///         var id: Int { rawValue }
+///         var stringRepresentation: String { .init(describing: self).capitalized }
 ///     }
 ///
 ///     @State private var selection: RGBColor = .red
 ///
 ///     var body: some View {
-///         VWheelPicker(
-///             selection: $selection,
-///             title: { String(describing: $0) }
-///         )
-///     }
-///
-/// [3] `StringRepresentableHashableEnumeration` API:
-///
-///     private enum RGBColor: StringRepresentableHashableEnumeration {
-///         case red, green, blue
-///
-///         var stringRepresentation: String {
-///             String(describing: self)
-///         }
-///     }
-///
-///     @State private var selection: RGBColor = .red
-///
-///     var body: some View {
-///         VWheelPicker(
-///             selection: $selection
-///         )
+///         VWheelPicker(selection: $selection)
+///             .padding()
 ///     }
 ///
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
-public struct VWheelPicker<SelectionValue, Content>: View
+public struct VWheelPicker<SelectionValue, ID, Content>: View
     where
         SelectionValue: Hashable,
+        ID: Hashable,
         Content: View
 {
     // MARK: Properties
@@ -84,19 +67,24 @@ public struct VWheelPicker<SelectionValue, Content>: View
     
     private let headerTitle: String?
     private let footerTitle: String?
-    
+
+    private let data: [SelectionValue]
+
+    private let id: KeyPath<SelectionValue, ID>
+
     private let content: VWheelPickerContent<SelectionValue, Content>
     
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers
-    /// Initializes `VWheelPicker` with selection value, data, and row title.
+    /// Initializes `VWheelPicker` with selection, data, id, and row title.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
         data: [SelectionValue],
+        id: KeyPath<SelectionValue, ID>,
         title: @escaping (SelectionValue) -> String
     )
         where Content == Never
@@ -105,10 +93,55 @@ public struct VWheelPicker<SelectionValue, Content>: View
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .title(data: data, title: title)
+        self.data = data
+        self.id = id
+        self.content = .title(title: title)
     }
     
-    /// Initializes `VWheelPicker` with selection value, data, and row content.
+    /// Initializes `VWheelPicker` with selection, data, id, and row content.
+    public init(
+        uiModel: VWheelPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        data: [SelectionValue],
+        id: KeyPath<SelectionValue, ID>,
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
+    ) {
+        self.uiModel = uiModel
+        self._selection = selection
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.data = data
+        self.id = id
+        self.content = .content(content: content)
+    }
+
+    // MARK: Initializers - Identifiable
+    /// Initializes `VWheelPicker` with selection, data, and row title.
+    public init(
+        uiModel: VWheelPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        data: [SelectionValue],
+        title: @escaping (SelectionValue) -> String
+    )
+        where
+            SelectionValue: Identifiable,
+            ID == SelectionValue.ID,
+            Content == Never
+    {
+        self.uiModel = uiModel
+        self._selection = selection
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.data = data
+        self.id = \.id
+        self.content = .title(title: title)
+    }
+
+    /// Initializes `VWheelPicker` with selection, data, and row content.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -116,53 +149,22 @@ public struct VWheelPicker<SelectionValue, Content>: View
         footerTitle: String? = nil,
         data: [SelectionValue],
         @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
-    ) {
-        self.uiModel = uiModel
-        self._selection = selection
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-        self.content = .content(data: data, content: content)
-    }
-    
-    // MARK: Initializers - Hashable Enumeration
-    /// Initializes `VWheelPicker` with `HashableEnumeration` and row title.
-    public init(
-        uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        title: @escaping (SelectionValue) -> String
     )
         where
-            Content == Never,
-            SelectionValue: HashableEnumeration
+            SelectionValue: Identifiable,
+            ID == SelectionValue.ID
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .title(data: Array(SelectionValue.allCases), title: title)
+        self.data = data
+        self.id = \.id
+        self.content = .content(content: content)
     }
-    
-    /// Initializes `VWheelPicker` with `HashableEnumeration` and row content.
-    public init(
-        uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
-    )
-        where SelectionValue: HashableEnumeration
-    {
-        self.uiModel = uiModel
-        self._selection = selection
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-        self.content = .content(data: Array(SelectionValue.allCases), content: content)
-    }
-    
-    // MARK: Initializers - String Representable Hashable Enumeration
-    /// Initializes `VWheelPicker` with `StringRepresentableHashableEnumeration`.
+
+    // MARK: Initializers - String Representable
+    /// Initializes `VWheelPicker` with `StringRepresentable` API.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -170,14 +172,17 @@ public struct VWheelPicker<SelectionValue, Content>: View
         footerTitle: String? = nil
     )
         where
-            Content == Never,
-            SelectionValue: StringRepresentableHashableEnumeration
+            SelectionValue: Identifiable & CaseIterable & StringRepresentable,
+            ID == SelectionValue.ID,
+            Content == Never
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.content = .title(data: Array(SelectionValue.allCases), title: { $0.stringRepresentation })
+        self.data = Array(SelectionValue.allCases)
+        self.id = \.id
+        self.content = .title(title: { $0.stringRepresentation })
     }
     
     // MARK: Body
@@ -220,13 +225,19 @@ public struct VWheelPicker<SelectionValue, Content>: View
             label: EmptyView.init
         )
         .pickerStyle(.wheel)
-        .background(uiModel.colors.background.value(for: internalState).cornerRadius(uiModel.layout.cornerRadius))
+        .labelsHidden()
+        .background(background)
+    }
+
+    private var background: some View {
+        uiModel.colors.background.value(for: internalState)
+            .cornerRadius(uiModel.layout.cornerRadius)
     }
     
     @ViewBuilder private func rows() -> some View {
         switch content {
-        case .title(let data, let title):
-            ForEach(data, id: \.hashValue, content: { element in
+        case .title(let title):
+            ForEach(data, id: id, content: { element in
                 VText(
                     minimumScaleFactor: uiModel.layout.titleMinimumScaleFactor,
                     color: uiModel.colors.title.value(for: internalState),
@@ -235,8 +246,8 @@ public struct VWheelPicker<SelectionValue, Content>: View
                 )
             })
             
-        case .content(let data, let content):
-            ForEach(data, id: \.hashValue, content: { element in
+        case .content(let content):
+            ForEach(data, id: id, content: { element in
                 content(internalState, element)
             })
         }
@@ -291,6 +302,7 @@ struct VWheelPicker_Previews: PreviewProvider {
                     headerTitle: headerTitle,
                     footerTitle: footerTitle,
                     data: rowTitles,
+                    id: \.self,
                     title: { $0 }
                 )
                 .padding()
@@ -310,6 +322,7 @@ struct VWheelPicker_Previews: PreviewProvider {
                             headerTitle: headerTitle,
                             footerTitle: footerTitle,
                             data: rowTitles,
+                            id: \.self,
                             title: { $0 }
                         )
                     }
@@ -324,6 +337,7 @@ struct VWheelPicker_Previews: PreviewProvider {
                             headerTitle: headerTitle,
                             footerTitle: footerTitle,
                             data: rowTitles,
+                            id: \.self,
                             title: { $0 }
                         )
                         .disabled(true)

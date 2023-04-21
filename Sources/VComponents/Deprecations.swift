@@ -44,6 +44,36 @@ extension VSegmentedPicker {
     {
         fatalError()
     }
+
+    @available(*, unavailable, message: "This `init` is no longer available")
+    public init(
+        uiModel: VSegmentedPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledValues: Set<SelectionValue> = [],
+        title: @escaping (SelectionValue) -> String
+    )
+        where
+            Content == Never,
+            SelectionValue: CaseIterable
+    {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "This `init` is no longer available")
+    public init(
+        uiModel: VSegmentedPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledValues: Set<SelectionValue> = [],
+        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
+    )
+        where SelectionValue: CaseIterable
+    {
+        fatalError()
+    }
 }
 
 // MARK: - V Wheel Picker
@@ -77,6 +107,34 @@ extension VWheelPicker {
         where
             Data: RandomAccessCollection,
             Data.Index == Int
+    {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "This `init` is no longer available")
+    public init(
+        uiModel: VWheelPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        title: @escaping (SelectionValue) -> String
+    )
+        where
+            Content == Never,
+            SelectionValue: CaseIterable
+    {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "This `init` is no longer available")
+    public init(
+        uiModel: VWheelPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
+    )
+        where SelectionValue: CaseIterable
     {
         fatalError()
     }
@@ -157,6 +215,17 @@ extension VMenuPickerSection {
         where
             Data: RandomAccessCollection,
             Data.Index == Int
+    {
+        fatalError()
+    }
+
+    @available(*, unavailable, message: "This `init` is no longer available")
+    public init(
+        title: String? = nil,
+        selection: Binding<SelectionValue>,
+        content: @escaping (SelectionValue) -> VMenuRowProtocol
+    )
+        where SelectionValue: CaseIterable
     {
         fatalError()
     }

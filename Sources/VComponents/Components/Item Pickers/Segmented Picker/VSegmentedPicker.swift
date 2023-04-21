@@ -15,12 +15,10 @@ import VCore
 ///
 /// UI Model, header, footer, and disabled values can be passed as parameters.
 ///
-/// There are three possible ways of initializing `VSegmentedPicker`.
-///
-/// [1] Data, Selection, and Title/Content:
-///
-///     private enum RGBColor: CaseIterable {
+///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable {
 ///         case red, green, blue
+///
+///         var id: Int { rawValue }
 ///     }
 ///
 ///     @State private var selection: RGBColor = .red
@@ -29,51 +27,33 @@ import VCore
 ///         VSegmentedPicker(
 ///             selection: $selection,
 ///             data: RGBColor.allCases,
-///             title: { String(describing: $0) }
+///             title: { String(describing: $0).capitalized }
 ///         )
 ///         .padding()
 ///     }
 ///
-/// [2] `HashableEnumeration` API - Title/Content:
+/// If you make selection conform to `CaseIterable` and `StringRepresentable`, you cal use the following API:
 ///
-///     private enum RGBColor: HashableEnumeration {
+///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
 ///         case red, green, blue
+///
+///         var id: Int { rawValue }
+///         var stringRepresentation: String { .init(describing: self).capitalized }
 ///     }
 ///
 ///     @State private var selection: RGBColor = .red
 ///
 ///     var body: some View {
-///         VSegmentedPicker(
-///             selection: $selection,
-///             title: { String(describing: $0) }
-///         )
-///         .padding()
-///     }
-///
-/// [3] `StringRepresentableHashableEnumeration` API:
-///
-///     private enum RGBColor: StringRepresentableHashableEnumeration {
-///         case red, green, blue
-///
-///         var stringRepresentation: String {
-///             String(describing: self)
-///         }
-///     }
-///
-///     @State private var selection: RGBColor = .red
-///
-///     var body: some View {
-///         VSegmentedPicker(
-///             selection: $selection
-///         )
-///         .padding()
+///         VSegmentedPicker(selection: $selection)
+///             .padding()
 ///     }
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 @available(watchOS, unavailable)
-public struct VSegmentedPicker<SelectionValue, Content>: View
+public struct VSegmentedPicker<SelectionValue, ID, Content>: View
     where
         SelectionValue: Hashable,
+        ID: Hashable,
         Content: View
 {
     // MARK: Properties
@@ -97,18 +77,22 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
     }
     
     @Binding private var selection: SelectionValue
-    private var selectedIndex: Int { content.firstIndex(of: selection) }
+    private var selectedIndex: Int { data.firstIndex(of: selection)! } // Force-unwrap
     
     private let headerTitle: String?
     private let footerTitle: String?
     private let disabledValues: Set<SelectionValue>
-    
+
+    private let data: [SelectionValue]
+
+    private let id: KeyPath<SelectionValue, ID>
+
     private let content: VSegmentedPickerContent<SelectionValue, Content>
     
     @State private var rowWidth: CGFloat = 0
     
     // MARK: Initializers
-    /// Initializes `VSegmentedPicker` with selection value, data, and row title.
+    /// Initializes `VSegmentedPicker` with selection, data, id, and row title.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -116,6 +100,7 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
         footerTitle: String? = nil,
         disabledValues: Set<SelectionValue> = [],
         data: [SelectionValue],
+        id: KeyPath<SelectionValue, ID>,
         title: @escaping (SelectionValue) -> String
     )
         where Content == Never
@@ -125,10 +110,59 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.content = .title(data: data, title: title)
+        self.data = data
+        self.id = id
+        self.content = .title(title: title)
     }
     
-    /// Initializes `VSegmentedPicker` with selection value, data, and row content.
+    /// Initializes `VSegmentedPicker` with selection, data, id, and row content.
+    public init(
+        uiModel: VSegmentedPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledValues: Set<SelectionValue> = [],
+        data: [SelectionValue],
+        id: KeyPath<SelectionValue, ID>,
+        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
+    ) {
+        self.uiModel = uiModel
+        self._selection = selection
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.disabledValues = disabledValues
+        self.data = data
+        self.id = id
+        self.content = .content(content: content)
+    }
+    
+    // MARK: Initializers - Identifiable
+    /// Initializes `VSegmentedPicker` with selection, data, and row title.
+    public init(
+        uiModel: VSegmentedPickerUIModel = .init(),
+        selection: Binding<SelectionValue>,
+        headerTitle: String? = nil,
+        footerTitle: String? = nil,
+        disabledValues: Set<SelectionValue> = [],
+        data: [SelectionValue],
+        title: @escaping (SelectionValue) -> String
+    )
+        where
+            SelectionValue: Identifiable,
+            ID == SelectionValue.ID,
+            Content == Never
+    {
+        self.uiModel = uiModel
+        self._selection = selection
+        self.headerTitle = headerTitle
+        self.footerTitle = footerTitle
+        self.disabledValues = disabledValues
+        self.data = data
+        self.id = \.id
+        self.content = .title(title: title)
+    }
+
+    /// Initializes `VSegmentedPicker` with selection, data, and row content.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -137,58 +171,23 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
         disabledValues: Set<SelectionValue> = [],
         data: [SelectionValue],
         @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
-    ) {
-        self.uiModel = uiModel
-        self._selection = selection
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-        self.disabledValues = disabledValues
-        self.content = .content(data: data, content: content)
-    }
-    
-    // MARK: Initializers - Hashable Enumeration
-    /// Initializes `VSegmentedPicker` with `HashableEnumeration` and row title.
-    public init(
-        uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        disabledValues: Set<SelectionValue> = [],
-        title: @escaping (SelectionValue) -> String
     )
         where
-            Content == Never,
-            SelectionValue: HashableEnumeration
+            SelectionValue: Identifiable,
+            ID == SelectionValue.ID
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.content = .title(data: Array(SelectionValue.allCases), title: title)
+        self.data = data
+        self.id = \.id
+        self.content = .content(content: content)
     }
     
-    /// Initializes `VSegmentedPicker` with `HashableEnumeration` and row content.
-    public init(
-        uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
-        headerTitle: String? = nil,
-        footerTitle: String? = nil,
-        disabledValues: Set<SelectionValue> = [],
-        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
-    )
-        where SelectionValue: HashableEnumeration
-    {
-        self.uiModel = uiModel
-        self._selection = selection
-        self.headerTitle = headerTitle
-        self.footerTitle = footerTitle
-        self.disabledValues = disabledValues
-        self.content = .content(data: Array(SelectionValue.allCases), content: content)
-    }
-    
-    // MARK: Initializers - String Representable Hashable Enumeration
-    /// Initializes `VSegmentedPicker` with `StringRepresentableHashableEnumeration`.
+    // MARK: Initializers - String Representable
+    /// Initializes `VSegmentedPicker` with `StringRepresentable` API.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -197,15 +196,18 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
         disabledValues: Set<SelectionValue> = []
     )
         where
-            Content == Never,
-            SelectionValue: StringRepresentableHashableEnumeration
+            SelectionValue: Identifiable & CaseIterable & StringRepresentable,
+            ID == SelectionValue.ID,
+            Content == Never
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.content = .title(data: Array(SelectionValue.allCases), title: { $0.stringRepresentation })
+        self.data = Array(SelectionValue.allCases)
+        self.id = \.id
+        self.content = .title(title: { $0.stringRepresentation })
     }
     
     // MARK: Body
@@ -279,9 +281,9 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
     
     @ViewBuilder private var rows: some View {
         switch content {
-        case .title(let data, let title):
+        case .title(let title):
             HStack(spacing: 0, content: {
-                ForEach(data, id: \.hashValue, content: { element in
+                ForEach(data, id: id, content: { element in
                     SwiftUIGestureBaseButton(
                         onStateChange: { stateChangeHandler(element: element, gestureState: $0) },
                         label: {
@@ -303,9 +305,9 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
                 })
             })
             
-        case .content(let data, let content):
+        case .content(let content):
             HStack(spacing: 0, content: {
-                ForEach(data, id: \.hashValue, content: { element in
+                ForEach(data, id: id, content: { element in
                     SwiftUIGestureBaseButton(
                         onStateChange: { stateChangeHandler(element: element, gestureState: $0) },
                         label: {
@@ -326,10 +328,10 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
     
     private var dividers: some View {
         HStack(spacing: 0, content: {
-            ForEach(content.indices, id: \.self, content: { i in
+            ForEach(data.indices, id: \.self, content: { i in
                 Spacer()
                 
-                if i <= content.count-2 {
+                if i <= data.count-2 {
                     Rectangle()
                         .frame(size: uiModel.layout.dividerSize)
                         .foregroundColor(uiModel.colors.divider.value(for: internalState))
@@ -371,7 +373,7 @@ public struct VSegmentedPicker<SelectionValue, Content>: View
     public var indicatorScaleAnchor: UnitPoint {
         switch selectedIndex {
         case 0: return .leading
-        case content.count-1: return .trailing
+        case data.count-1: return .trailing
         default: return .center
         }
     }
@@ -425,8 +427,10 @@ struct VSegmentedPicker_Previews: PreviewProvider {
     private static var headerTitle: String { "Lorem ipsum dolor sit amet".pseudoRTL(languageDirection) }
     private static var footerTitle: String { "Lorem ipsum dolor sit amet, consectetur adipiscing elit".pseudoRTL(languageDirection) }
     
-    private enum PickerRow: Int, StringRepresentableHashableEnumeration {
+    private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
         case red, green, blue
+
+        var id: Int { rawValue }
         
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
         private var _stringRepresentation: String {
@@ -437,11 +441,11 @@ struct VSegmentedPicker_Previews: PreviewProvider {
             }
         }
     }
-    private static var selection: PickerRow { .red }
+    private static var selection: RGBColor { .red }
     
     // Previews (Scenes)
     private struct Preview: View {
-        @State private var selection: PickerRow = VSegmentedPicker_Previews.selection
+        @State private var selection: RGBColor = VSegmentedPicker_Previews.selection
         
         var body: some View {
             PreviewContainer(content: {
@@ -511,8 +515,9 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                         title: "Enabled",
                         content: {
                             Picker("", selection: .constant(selection), content: {
-                                ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
-                                    Text(row.stringRepresentation)
+                                ForEach(Array(RGBColor.allCases), content: { element in
+                                    Text(element.stringRepresentation)
+                                        .tag(element)
                                 })
                             })
                             .labelsHidden()
@@ -525,8 +530,9 @@ struct VSegmentedPicker_Previews: PreviewProvider {
                         title: "Disabled",
                         content: {
                             Picker("", selection: .constant(selection), content: {
-                                ForEach(PickerRow.allCases.enumeratedArray(), id: \.element, content: { (i, row) in
-                                    Text(row.stringRepresentation)
+                                ForEach(Array(RGBColor.allCases), content: { element in
+                                    Text(element.stringRepresentation)
+                                        .tag(element)
                                 })
                             })
                             .labelsHidden()

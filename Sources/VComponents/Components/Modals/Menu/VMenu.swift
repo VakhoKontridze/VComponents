@@ -12,15 +12,14 @@ import SwiftUI
 ///
 /// Unlike native menu, this components doesn't take reverse row order.
 ///
-///     enum PickerRow: Int, StringRepresentableHashableEnumeration {
+///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
 ///         case red, green, blue
 ///
-///         var stringRepresentation: String {
-///             String(describing: self)
-///         }
+///         var id: Int { rawValue }
+///         var stringRepresentation: String { .init(describing: self).capitalized }
 ///     }
 ///
-///     @State private var selection: PickerRow = .red
+///     @State private var selection: RGBColor = .red
 ///
 ///     var body: some View {
 ///         VMenu(title: "Lorem Ipsum", sections: {
@@ -195,18 +194,24 @@ struct VMenu_Previews: PreviewProvider {
     }
     
     // Data
-    private enum PickerRow: Int, StringRepresentableHashableEnumeration {
+    private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
         case red, green, blue
-        
+
+        var id: Int { rawValue }
+
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
         private var _stringRepresentation: String {
-            String(describing: self)
+            switch self {
+            case .red: return "Red"
+            case .green: return "Green"
+            case .blue: return "Blue"
+            }
         }
     }
     
     // Previews (Scenes)
     private struct Preview: View { // Didn't bother with pseudoRTL
-        @State private var selection: PickerRow = .red
+        @State private var selection: RGBColor = .red
         
         var body: some View {
             PreviewContainer(content: {

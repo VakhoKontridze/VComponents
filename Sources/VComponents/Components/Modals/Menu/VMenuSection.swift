@@ -69,51 +69,66 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS 7, *)@available(watchOS, unavailable)
-public struct VMenuPickerSection<SelectionValue>: VMenuSectionProtocol where SelectionValue: Hashable {
+public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
+    where
+        SelectionValue: Hashable,
+        ID: Hashable
+{
     // MARK: Properties
+    @Binding private var selection: SelectionValue
     private let data: [SelectionValue]
+    private let id: KeyPath<SelectionValue, ID>
     private let content: (SelectionValue) -> VMenuRowProtocol
     
-    @Binding private var selection: SelectionValue
-    
     // MARK: Initializers
-    /// Initializes `VMenuPickerSection` with selection, data, and title.
+    /// Initializes `VMenuPickerSection` with selection, data, id, and row title.
     public init(
         title: String? = nil,
         selection: Binding<SelectionValue>,
         data: [SelectionValue],
+        id: KeyPath<SelectionValue, ID>,
         _title: @escaping (SelectionValue) -> String // TODO: Rename
     ) {
         self.title = title
         self._selection = selection
         self.data = data
+        self.id = id
         self.content = { VMenuTitleRow(action: {}, title: _title($0)) } // TODO: Handle
     }
-    
-    /// Initializes `VMenuPickerSection` with `HashableEnumeration` and content.
+
+    // MARK: Initializers - Identifiable
+    /// Initializes `VMenuPickerSection` with selection, data, and row title.
     public init(
         title: String? = nil,
         selection: Binding<SelectionValue>,
-        content: @escaping (SelectionValue) -> VMenuRowProtocol
+        data: [SelectionValue],
+        _title: @escaping (SelectionValue) -> String
     )
-        where SelectionValue: HashableEnumeration
+        where
+            SelectionValue: Identifiable,
+            ID == SelectionValue.ID
     {
         self.title = title
         self._selection = selection
-        self.data = Array(SelectionValue.allCases)
-        self.content = content
+        self.data = data
+        self.id = \.id
+        self.content = { VMenuTitleRow(action: {}, title: _title($0)) }
     }
     
-    /// Initializes `VMenuPickerSection` with `StringRepresentableHashableEnumeration`.
+    // MARK: Initializers - String Representable
+    /// Initializes `VSegmentedPicker` with `StringRepresentable` API.
     public init(
         title: String? = nil,
         selection: Binding<SelectionValue>
     )
-        where SelectionValue: StringRepresentableHashableEnumeration
+        where
+            SelectionValue: Identifiable & CaseIterable & StringRepresentable,
+            ID == SelectionValue.ID
     {
         self.title = title
         self._selection = selection
         self.data = Array(SelectionValue.allCases)
+        self.id = \.id
         self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
     }
     
@@ -125,8 +140,9 @@ public struct VMenuPickerSection<SelectionValue>: VMenuSectionProtocol where Sel
             Picker(
                 selection: $selection,
                 content: {
-                    ForEach(data, id: \.hashValue, content: { element in
+                    ForEach(data, id: id, content: { element in
                         content(element).makeBody()
+                            .tag(element) // TODO: `Picker` requires tag. Remove this when custom component is added.
                     })
                 },
                 label: EmptyView.init

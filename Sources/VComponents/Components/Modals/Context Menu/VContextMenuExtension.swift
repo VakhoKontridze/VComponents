@@ -14,15 +14,14 @@ import SwiftUI
 extension View {
     /// Presents context menu when `View` is long-pressed.
     ///
-    ///     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
+    ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
     ///         case red, green, blue
     ///
-    ///         var stringRepresentation: String {
-    ///             String(describing: self)
-    ///         }
+    ///         var id: Int { rawValue }
+    ///         var stringRepresentation: String { .init(describing: self).capitalized }
     ///     }
     ///
-    ///     @State private var selection: PickerRow = .red
+    ///     @State private var selection: RGBColor = .red
     ///
     ///     var body: some View {
     ///         Text("Lorem Ipsum")
@@ -66,15 +65,14 @@ extension View {
 extension View {
     /// Presents context menu when `View` is long-pressed.
     ///
-    ///     private enum PickerRow: Int, StringRepresentableHashableEnumeration {
+    ///     private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
     ///         case red, green, blue
     ///
-    ///         var stringRepresentation: String {
-    ///             String(describing: self)
-    ///         }
+    ///         var id: Int { rawValue }
+    ///         var stringRepresentation: String { .init(describing: self).capitalized }
     ///     }
     ///
-    ///     @State private var selection: PickerRow = .red
+    ///     @State private var selection: RGBColor = .red
     ///
     ///     var body: some View {
     ///         Text("Lorem Ipsum")
@@ -100,7 +98,6 @@ extension View {
     ///
     ///                     VMenuPickerSection(selection: $selection)
     ///                 },
-    ///                 sections: sections,
     ///                 preview: {
     ///                     ZStack(content: {
     ///                         Color.blue

@@ -63,9 +63,11 @@ struct VContextMenuContentView_Previews: PreviewProvider {
     }
     
     // Data
-    private enum PickerRow: Int, StringRepresentableHashableEnumeration {
+    private enum RGBColor: Int, Hashable, Identifiable, CaseIterable, StringRepresentable {
         case red, green, blue
-        
+
+        var id: Int { rawValue }
+
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
         private var _stringRepresentation: String {
             switch self {
@@ -78,32 +80,43 @@ struct VContextMenuContentView_Previews: PreviewProvider {
     
     // Previews (Scenes)
     private struct Preview: View { // Didn't bother with pseudoRTL
-        @State private var selection: PickerRow = .red
+        @State private var selection: RGBColor = .red
         
         var body: some View {
             PreviewContainer(content: {
                 Text("Lorem ipsum")
-                    .vContextMenu(sections: {
-                        VMenuGroupSection(title: "Section 1", rows: {
-                            VMenuTitleRow(action: { print("1.1") }, title: "One")
-                            VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
-                        })
-                        
-                        VMenuGroupSection(title: "Section 2", rows: {
-                            VMenuTitleRow(action: { print("2.1") }, title: "One")
-                            
-                            VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
-                            
-                            VMenuSubMenuRow(title: "Three...", sections: {
-                                VMenuGroupSection(rows: {
-                                    VMenuTitleRow(action: { print("2.3.1") }, title: "One")
-                                    VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
+                    .vContextMenu(
+                        sections: {
+                            VMenuGroupSection(title: "Section 1", rows: {
+                                VMenuTitleRow(action: { print("1.1") }, title: "One")
+                                VMenuTitleIconRow(action: { print("1.2") }, title: "Two", systemIcon: "swift")
+                            })
+
+                            VMenuGroupSection(title: "Section 2", rows: {
+                                VMenuTitleRow(action: { print("2.1") }, title: "One")
+
+                                VMenuTitleIconRow(action: { print("2.2") }, title: "Two", systemIcon: "swift")
+
+                                VMenuSubMenuRow(title: "Three...", sections: {
+                                    VMenuGroupSection(rows: {
+                                        VMenuTitleRow(action: { print("2.3.1") }, title: "One")
+                                        VMenuTitleIconRow(action: { print("2.3.2") }, title: "Two", systemIcon: "swift")
+                                    })
                                 })
                             })
-                        })
-                        
-                        VMenuPickerSection(selection: $selection)
-                    })
+
+                            VMenuPickerSection(selection: $selection)
+                        },
+                        preview: {
+                            ZStack(content: {
+                                Color.blue
+                                    .frame(width: UIScreen.main.bounds.width * 0.9, height: 100)
+
+                                Text("Selection: \(selection.stringRepresentation)")
+                                    .foregroundColor(.white)
+                            })
+                        }
+                    )
             })
         }
     }
