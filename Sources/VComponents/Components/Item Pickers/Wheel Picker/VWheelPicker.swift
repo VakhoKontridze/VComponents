@@ -51,9 +51,10 @@ import VCore
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable) // Doesn't follow Human Interface Guidelines
-public struct VWheelPicker<SelectionValue, ID, Content>: View
+public struct VWheelPicker<Data, ID, Content>: View
     where
-        SelectionValue: Hashable,
+        Data: RandomAccessCollection,
+        Data.Element: Hashable,
         ID: Hashable,
         Content: View
 {
@@ -63,16 +64,16 @@ public struct VWheelPicker<SelectionValue, ID, Content>: View
     @Environment(\.isEnabled) private var isEnabled: Bool
     private var internalState: VWheelPickerInternalState { .init(isEnabled: isEnabled) }
     
-    @Binding private var selection: SelectionValue
+    @Binding private var selection: Data.Element
     
     private let headerTitle: String?
     private let footerTitle: String?
 
-    private let data: [SelectionValue]
+    private let data: [Data.Element]
 
-    private let id: KeyPath<SelectionValue, ID>
+    private let id: KeyPath<Data.Element, ID>
 
-    private let content: VWheelPickerContent<SelectionValue, Content>
+    private let content: VWheelPickerContent<Data.Element, Content>
     
     @State private var rowWidth: CGFloat = 0
     
@@ -80,12 +81,12 @@ public struct VWheelPicker<SelectionValue, ID, Content>: View
     /// Initializes `VWheelPicker` with selection, data, id, and row title.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        data: [SelectionValue],
-        id: KeyPath<SelectionValue, ID>,
-        title: @escaping (SelectionValue) -> String
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        title: @escaping (Data.Element) -> String
     )
         where Content == Never
     {
@@ -93,7 +94,7 @@ public struct VWheelPicker<SelectionValue, ID, Content>: View
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = data
+        self.data = Array(data)
         self.id = id
         self.content = .title(title: title)
     }
@@ -101,18 +102,18 @@ public struct VWheelPicker<SelectionValue, ID, Content>: View
     /// Initializes `VWheelPicker` with selection, data, id, and row content.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        data: [SelectionValue],
-        id: KeyPath<SelectionValue, ID>,
-        @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, Data.Element) -> Content
     ) {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = data
+        self.data = Array(data)
         self.id = id
         self.content = .content(content: content)
     }
@@ -121,22 +122,22 @@ public struct VWheelPicker<SelectionValue, ID, Content>: View
     /// Initializes `VWheelPicker` with selection, data, and row title.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        data: [SelectionValue],
-        title: @escaping (SelectionValue) -> String
+        data: Data,
+        title: @escaping (Data.Element) -> String
     )
         where
-            SelectionValue: Identifiable,
-            ID == SelectionValue.ID,
+            Data.Element: Identifiable,
+            ID == Data.Element.ID,
             Content == Never
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = data
+        self.data = Array(data)
         self.id = \.id
         self.content = .title(title: title)
     }
@@ -144,43 +145,44 @@ public struct VWheelPicker<SelectionValue, ID, Content>: View
     /// Initializes `VWheelPicker` with selection, data, and row content.
     public init(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        data: [SelectionValue],
-        @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
+        data: Data,
+        @ViewBuilder content: @escaping (VWheelPickerInternalState, Data.Element) -> Content
     )
         where
-            SelectionValue: Identifiable,
-            ID == SelectionValue.ID
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = data
+        self.data = Array(data)
         self.id = \.id
         self.content = .content(content: content)
     }
 
     // MARK: Initializers - String Representable
     /// Initializes `VWheelPicker` with `StringRepresentable` API.
-    public init(
+    public init<T>(
         uiModel: VWheelPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil
     )
         where
-            SelectionValue: Identifiable & CaseIterable & StringRepresentable,
-            ID == SelectionValue.ID,
+            Data == Array<T>,
+            T: Identifiable & CaseIterable & StringRepresentable,
+            ID == T.ID,
             Content == Never
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = Array(SelectionValue.allCases)
+        self.data = Array(T.allCases)
         self.id = \.id
         self.content = .title(title: { $0.stringRepresentation })
     }

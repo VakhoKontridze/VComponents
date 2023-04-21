@@ -69,29 +69,30 @@ public struct VMenuGroupSection: VMenuSectionProtocol {
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS 14.0, *)@available(tvOS, unavailable)
 @available(watchOS 7, *)@available(watchOS, unavailable)
-public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
+public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     where
-        SelectionValue: Hashable,
+        Data: RandomAccessCollection,
+        Data.Element: Hashable,
         ID: Hashable
 {
     // MARK: Properties
-    @Binding private var selection: SelectionValue
-    private let data: [SelectionValue]
-    private let id: KeyPath<SelectionValue, ID>
-    private let content: (SelectionValue) -> VMenuRowProtocol
+    @Binding private var selection: Data.Element
+    private let data: [Data.Element]
+    private let id: KeyPath<Data.Element, ID>
+    private let content: (Data.Element) -> VMenuRowProtocol
     
     // MARK: Initializers
     /// Initializes `VMenuPickerSection` with selection, data, id, and row title.
     public init(
         title: String? = nil,
-        selection: Binding<SelectionValue>,
-        data: [SelectionValue],
-        id: KeyPath<SelectionValue, ID>,
-        rowTitle: @escaping (SelectionValue) -> String // TODO: Rename
+        selection: Binding<Data.Element>,
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        rowTitle: @escaping (Data.Element) -> String // TODO: Rename
     ) {
         self.title = title
         self._selection = selection
-        self.data = data
+        self.data = Array(data)
         self.id = id
         self.content = { VMenuTitleRow(action: {}, title: rowTitle($0)) } // TODO: Handle
     }
@@ -99,14 +100,14 @@ public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
     /// Initializes `VMenuPickerSection` with selection, data, id, and row content.
     public init(
         title: String? = nil,
-        selection: Binding<SelectionValue>,
-        data: [SelectionValue],
-        id: KeyPath<SelectionValue, ID>,
-        content: @escaping (SelectionValue) -> VMenuRowProtocol
+        selection: Binding<Data.Element>,
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        content: @escaping (Data.Element) -> VMenuRowProtocol
     ) {
         self.title = title
         self._selection = selection
-        self.data = data
+        self.data = Array(data)
         self.id = id
         self.content = content
     }
@@ -115,17 +116,17 @@ public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
     /// Initializes `VMenuPickerSection` with selection, data, and row title.
     public init(
         title: String? = nil,
-        selection: Binding<SelectionValue>,
-        data: [SelectionValue],
-        rowTitle: @escaping (SelectionValue) -> String
+        selection: Binding<Data.Element>,
+        data: Data,
+        rowTitle: @escaping (Data.Element) -> String
     )
         where
-            SelectionValue: Identifiable,
-            ID == SelectionValue.ID
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
     {
         self.title = title
         self._selection = selection
-        self.data = data
+        self.data = Array(data)
         self.id = \.id
         self.content = { VMenuTitleRow(action: {}, title: rowTitle($0)) }
     }
@@ -133,34 +134,35 @@ public struct VMenuPickerSection<SelectionValue, ID>: VMenuSectionProtocol
     /// Initializes `VMenuPickerSection` with selection, data, and row content.
     public init(
         title: String? = nil,
-        selection: Binding<SelectionValue>,
-        data: [SelectionValue],
-        content: @escaping (SelectionValue) -> VMenuRowProtocol
+        selection: Binding<Data.Element>,
+        data: Data,
+        content: @escaping (Data.Element) -> VMenuRowProtocol
     )
         where
-            SelectionValue: Identifiable,
-            ID == SelectionValue.ID
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
     {
         self.title = title
         self._selection = selection
-        self.data = data
+        self.data = Array(data)
         self.id = \.id
         self.content = content
     }
     
     // MARK: Initializers - String Representable
     /// Initializes `VSegmentedPicker` with `StringRepresentable` API.
-    public init(
+    public init<T>(
         title: String? = nil,
-        selection: Binding<SelectionValue>
+        selection: Binding<T>
     )
         where
-            SelectionValue: Identifiable & CaseIterable & StringRepresentable,
-            ID == SelectionValue.ID
+            Data == Array<T>,
+            T: Identifiable & CaseIterable & StringRepresentable,
+            ID == T.ID
     {
         self.title = title
         self._selection = selection
-        self.data = Array(SelectionValue.allCases)
+        self.data = Array(T.allCases)
         self.id = \.id
         self.content = { VMenuTitleRow(action: {}, title: $0.stringRepresentation) }
     }

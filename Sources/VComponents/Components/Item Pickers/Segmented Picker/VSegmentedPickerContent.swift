@@ -10,11 +10,11 @@ import SwiftUI
 // MARK: - V Segmented Picker Content
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-enum VSegmentedPickerContent<SelectionValue, Content>
+enum VSegmentedPickerContent<Element, Content>
     where
-        SelectionValue: Hashable,
+        Element: Hashable,
         Content: View
 {
-    case title(title: (SelectionValue) -> String)
-    case content(content: (VSegmentedPickerRowInternalState, SelectionValue) -> Content)
+    case title(title: (Element) -> String)
+    case content(content: (VSegmentedPickerRowInternalState, Element) -> Content)
 }

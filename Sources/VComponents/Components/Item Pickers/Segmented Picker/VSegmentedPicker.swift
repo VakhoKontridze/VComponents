@@ -50,9 +50,10 @@ import VCore
 ///
 @available(tvOS, unavailable) // Doesn't follow Human Interface Guidelines. No `SwiftUIGestureBaseButton` support.
 @available(watchOS, unavailable)
-public struct VSegmentedPicker<SelectionValue, ID, Content>: View
+public struct VSegmentedPicker<Data, ID, Content>: View
     where
-        SelectionValue: Hashable,
+        Data: RandomAccessCollection,
+        Data.Element: Hashable,
         ID: Hashable,
         Content: View
 {
@@ -60,7 +61,7 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
     private let uiModel: VSegmentedPickerUIModel
     
     @Environment(\.isEnabled) private var isEnabled: Bool
-    @State private var pressedValue: SelectionValue?
+    @State private var pressedValue: Data.Element?
     private var internalState: VSegmentedPickerInternalState { .init(isEnabled: isEnabled) }
     private var indicatorInternalState: VSegmentedPickerSelectionIndicatorInternalState {
         .init(
@@ -68,7 +69,7 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
             isPressed: pressedValue == selection
         )
     }
-    private func rowInternalState(element: SelectionValue) -> VSegmentedPickerRowInternalState {
+    private func rowInternalState(element: Data.Element) -> VSegmentedPickerRowInternalState {
         .init(
             isEnabled: isEnabled && !disabledValues.contains(element), // `isEnabled` check is required
             isSelected: selection == element,
@@ -76,18 +77,18 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
         )
     }
     
-    @Binding private var selection: SelectionValue
+    @Binding private var selection: Data.Element
     private var selectedIndex: Int { data.firstIndex(of: selection)! } // Force-unwrap
     
     private let headerTitle: String?
     private let footerTitle: String?
-    private let disabledValues: Set<SelectionValue>
+    private let disabledValues: Set<Data.Element>
 
-    private let data: [SelectionValue]
+    private let data: [Data.Element]
 
-    private let id: KeyPath<SelectionValue, ID>
+    private let id: KeyPath<Data.Element, ID>
 
-    private let content: VSegmentedPickerContent<SelectionValue, Content>
+    private let content: VSegmentedPickerContent<Data.Element, Content>
     
     @State private var rowWidth: CGFloat = 0
     
@@ -95,13 +96,13 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
     /// Initializes `VSegmentedPicker` with selection, data, id, and row title.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        disabledValues: Set<SelectionValue> = [],
-        data: [SelectionValue],
-        id: KeyPath<SelectionValue, ID>,
-        title: @escaping (SelectionValue) -> String
+        disabledValues: Set<Data.Element> = [],
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        title: @escaping (Data.Element) -> String
     )
         where Content == Never
     {
@@ -110,7 +111,7 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = data
+        self.data = Array(data)
         self.id = id
         self.content = .title(title: title)
     }
@@ -118,20 +119,20 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
     /// Initializes `VSegmentedPicker` with selection, data, id, and row content.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        disabledValues: Set<SelectionValue> = [],
-        data: [SelectionValue],
-        id: KeyPath<SelectionValue, ID>,
-        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
+        disabledValues: Set<Data.Element> = [],
+        data: Data,
+        id: KeyPath<Data.Element, ID>,
+        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, Data.Element) -> Content
     ) {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = data
+        self.data = Array(data)
         self.id = id
         self.content = .content(content: content)
     }
@@ -140,16 +141,16 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
     /// Initializes `VSegmentedPicker` with selection, data, and row title.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        disabledValues: Set<SelectionValue> = [],
-        data: [SelectionValue],
-        title: @escaping (SelectionValue) -> String
+        disabledValues: Set<Data.Element> = [],
+        data: Data,
+        title: @escaping (Data.Element) -> String
     )
         where
-            SelectionValue: Identifiable,
-            ID == SelectionValue.ID,
+            Data.Element: Identifiable,
+            ID == Data.Element.ID,
             Content == Never
     {
         self.uiModel = uiModel
@@ -157,7 +158,7 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = data
+        self.data = Array(data)
         self.id = \.id
         self.content = .title(title: title)
     }
@@ -165,39 +166,40 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
     /// Initializes `VSegmentedPicker` with selection, data, and row content.
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<Data.Element>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        disabledValues: Set<SelectionValue> = [],
-        data: [SelectionValue],
-        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
+        disabledValues: Set<Data.Element> = [],
+        data: Data,
+        @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, Data.Element) -> Content
     )
         where
-            SelectionValue: Identifiable,
-            ID == SelectionValue.ID
+            Data.Element: Identifiable,
+            ID == Data.Element.ID
     {
         self.uiModel = uiModel
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = data
+        self.data = Array(data)
         self.id = \.id
         self.content = .content(content: content)
     }
     
     // MARK: Initializers - String Representable
     /// Initializes `VSegmentedPicker` with `StringRepresentable` API.
-    public init(
+    public init<T>(
         uiModel: VSegmentedPickerUIModel = .init(),
-        selection: Binding<SelectionValue>,
+        selection: Binding<T>,
         headerTitle: String? = nil,
         footerTitle: String? = nil,
-        disabledValues: Set<SelectionValue> = []
+        disabledValues: Set<T> = []
     )
         where
-            SelectionValue: Identifiable & CaseIterable & StringRepresentable,
-            ID == SelectionValue.ID,
+            Data == Array<T>,
+            T: Identifiable & CaseIterable & StringRepresentable,
+            ID == T.ID,
             Content == Never
     {
         self.uiModel = uiModel
@@ -205,7 +207,7 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = Array(SelectionValue.allCases)
+        self.data = Array(T.allCases)
         self.id = \.id
         self.content = .title(title: { $0.stringRepresentation })
     }
@@ -342,7 +344,7 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
     }
     
     // MARK: Actions
-    private func stateChangeHandler(element: SelectionValue, gestureState: GestureBaseButtonGestureState) {
+    private func stateChangeHandler(element: Data.Element, gestureState: GestureBaseButtonGestureState) {
         // Doesn't work as modifier
         // Not affected by animation flag
         withAnimation(uiModel.animations.indicatorPress, {
@@ -385,7 +387,7 @@ public struct VSegmentedPicker<SelectionValue, ID, Content>: View
         }
     }
     
-    public func rowContentScaleAnchor(element: SelectionValue) -> UnitPoint {
+    public func rowContentScaleAnchor(element: Data.Element) -> UnitPoint {
         guard element == selection else { return .center }
         return indicatorScaleAnchor
     }

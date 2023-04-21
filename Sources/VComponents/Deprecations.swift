@@ -46,7 +46,7 @@ extension VSegmentedPicker {
     }
 
     @available(*, deprecated, message: "Use `init` with `id`")
-    public init(
+    public init<SelectionValue>(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
@@ -55,6 +55,7 @@ extension VSegmentedPicker {
         title: @escaping (SelectionValue) -> String
     )
         where
+            Data == Array<SelectionValue>,
             SelectionValue: CaseIterable,
             ID == Int,
             Content == Never
@@ -72,7 +73,7 @@ extension VSegmentedPicker {
     }
 
     @available(*, deprecated, message: "Use `init` with `id`")
-    public init(
+    public init<SelectionValue>(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
@@ -81,6 +82,7 @@ extension VSegmentedPicker {
         @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
     )
         where
+            Data == Array<SelectionValue>,
             SelectionValue: CaseIterable,
             ID == Int
     {
@@ -100,7 +102,7 @@ extension VSegmentedPicker {
 // MARK: - V Wheel Picker
 extension VWheelPicker {
     @available(*, unavailable, message: "This `init` is no longer available")
-    public init<Data>(
+    public init(
         uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
@@ -109,15 +111,14 @@ extension VWheelPicker {
         title: @escaping (Data.Element) -> String
     )
         where
-            Content == Never,
-            Data: RandomAccessCollection,
-            Data.Index == Int
+            Data.Index == Int,
+            Content == Never
     {
         fatalError()
     }
 
     @available(*, unavailable, message: "This `init` is no longer available")
-    public init<Data>(
+    public init(
         uiModel: VWheelPickerUIModel = .init(),
         selectedIndex: Binding<Int>,
         headerTitle: String? = nil,
@@ -125,15 +126,13 @@ extension VWheelPicker {
         data: Data,
         @ViewBuilder content: @escaping (VWheelPickerInternalState, Data.Element) -> Content
     )
-        where
-            Data: RandomAccessCollection,
-            Data.Index == Int
+        where Data.Index == Int
     {
         fatalError()
     }
 
     @available(*, deprecated, message: "Use `init` with `id`")
-    public init(
+    public init<SelectionValue>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
@@ -141,6 +140,7 @@ extension VWheelPicker {
         title: @escaping (SelectionValue) -> String
     )
         where
+            Data == Array<SelectionValue>,
             SelectionValue: CaseIterable,
             ID == Int,
             Content == Never
@@ -157,7 +157,7 @@ extension VWheelPicker {
     }
 
     @available(*, deprecated, message: "Use `init` with `id`")
-    public init(
+    public init<SelectionValue>(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
         headerTitle: String? = nil,
@@ -165,6 +165,7 @@ extension VWheelPicker {
         @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
     )
         where
+            Data == Array<SelectionValue>,
             SelectionValue: CaseIterable,
             ID == Int
     {
@@ -246,12 +247,13 @@ extension VMenuPickerSection {
     }
 
     @available(*, deprecated, message: "Use `init` with `id`")
-    public init(
+    public init<SelectionValue>(
         title: String? = nil,
         selection: Binding<SelectionValue>,
         content: @escaping (SelectionValue) -> VMenuRowProtocol
     )
         where
+            Data == Array<SelectionValue>,
             SelectionValue: CaseIterable,
             ID == Int
     {

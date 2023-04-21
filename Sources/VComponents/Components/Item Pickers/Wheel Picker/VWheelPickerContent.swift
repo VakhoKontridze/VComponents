@@ -11,11 +11,11 @@ import SwiftUI
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
-enum VWheelPickerContent<SelectionValue, Content>
+enum VWheelPickerContent<Element, Content>
     where
-        SelectionValue: Hashable,
+        Element: Hashable,
         Content: View
 {
-    case title(title: (SelectionValue) -> String)
-    case content(content: (VWheelPickerInternalState, SelectionValue) -> Content)
+    case title(title: (Element) -> String)
+    case content(content: (VWheelPickerInternalState, Element) -> Content)
 }
