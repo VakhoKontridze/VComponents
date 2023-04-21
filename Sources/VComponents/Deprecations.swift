@@ -45,7 +45,7 @@ extension VSegmentedPicker {
         fatalError()
     }
 
-    @available(*, unavailable, message: "This `init` is no longer available")
+    @available(*, deprecated, message: "Use `init` with `id`")
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -55,13 +55,23 @@ extension VSegmentedPicker {
         title: @escaping (SelectionValue) -> String
     )
         where
-            Content == Never,
-            SelectionValue: CaseIterable
+            SelectionValue: CaseIterable,
+            ID == Int,
+            Content == Never
     {
-        fatalError()
+        self.init(
+            uiModel: uiModel,
+            selection: selection,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
+            disabledValues: disabledValues,
+            data: Array(SelectionValue.allCases),
+            id: \.hashValue,
+            title: title
+        )
     }
 
-    @available(*, unavailable, message: "This `init` is no longer available")
+    @available(*, deprecated, message: "Use `init` with `id`")
     public init(
         uiModel: VSegmentedPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -70,9 +80,20 @@ extension VSegmentedPicker {
         disabledValues: Set<SelectionValue> = [],
         @ViewBuilder content: @escaping (VSegmentedPickerRowInternalState, SelectionValue) -> Content
     )
-        where SelectionValue: CaseIterable
+        where
+            SelectionValue: CaseIterable,
+            ID == Int
     {
-        fatalError()
+        self.init(
+            uiModel: uiModel,
+            selection: selection,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
+            disabledValues: disabledValues,
+            data: Array(SelectionValue.allCases),
+            id: \.hashValue,
+            content: content
+        )
     }
 }
 
@@ -111,7 +132,7 @@ extension VWheelPicker {
         fatalError()
     }
 
-    @available(*, unavailable, message: "This `init` is no longer available")
+    @available(*, deprecated, message: "Use `init` with `id`")
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -120,13 +141,22 @@ extension VWheelPicker {
         title: @escaping (SelectionValue) -> String
     )
         where
-            Content == Never,
-            SelectionValue: CaseIterable
+            SelectionValue: CaseIterable,
+            ID == Int,
+            Content == Never
     {
-        fatalError()
+        self.init(
+            uiModel: uiModel,
+            selection: selection,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
+            data: Array(SelectionValue.allCases),
+            id: \.hashValue,
+            title: title
+        )
     }
 
-    @available(*, unavailable, message: "This `init` is no longer available")
+    @available(*, deprecated, message: "Use `init` with `id`")
     public init(
         uiModel: VWheelPickerUIModel = .init(),
         selection: Binding<SelectionValue>,
@@ -134,9 +164,19 @@ extension VWheelPicker {
         footerTitle: String? = nil,
         @ViewBuilder content: @escaping (VWheelPickerInternalState, SelectionValue) -> Content
     )
-        where SelectionValue: CaseIterable
+        where
+            SelectionValue: CaseIterable,
+            ID == Int
     {
-        fatalError()
+        self.init(
+            uiModel: uiModel,
+            selection: selection,
+            headerTitle: headerTitle,
+            footerTitle: footerTitle,
+            data: Array(SelectionValue.allCases),
+            id: \.hashValue,
+            content: content
+        )
     }
 }
 
@@ -205,15 +245,23 @@ extension VMenuPickerSection {
         fatalError()
     }
 
-    @available(*, unavailable, message: "This `init` is no longer available")
+    @available(*, deprecated, message: "Use `init` with `id`")
     public init(
         title: String? = nil,
         selection: Binding<SelectionValue>,
         content: @escaping (SelectionValue) -> VMenuRowProtocol
     )
-        where SelectionValue: CaseIterable
+        where
+            SelectionValue: CaseIterable,
+            ID == Int
     {
-        fatalError()
+        self.init(
+            title: title,
+            selection: selection,
+            data: Array(SelectionValue.allCases),
+            id: \.hashValue,
+            content: content
+        )
     }
 }
 
