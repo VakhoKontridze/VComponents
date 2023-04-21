@@ -81,18 +81,17 @@ extension ModalSizes {
     }
 }
 
-// MARK: Hashable, Equatable, Comparable
-extension ModalSizes: Hashable where ModalSizeMeasurement: Hashable {}
+// MARK: Equatable, Hashable, Comparable
 
 extension ModalSizes: Equatable where ModalSizeMeasurement: Equatable {}
+
+extension ModalSizes: Hashable where ModalSizeMeasurement: Hashable {}
 
 extension ModalSizes: Comparable where ModalSizeMeasurement: Comparable {
     public static func < (lhs: Self, rhs: Self) -> Bool {
         isLess(lhs, than: rhs, by: \.portrait, \.landscape)
     }
 }
-
-extension ModalSizes.SizeConfiguration: Hashable where ModalSizeMeasurement: Hashable {}
 
 extension ModalSizes.SizeConfiguration: Equatable where ModalSizeMeasurement: Equatable {
     public static func == (lhs: Self, rhs: Self) -> Bool {
@@ -104,5 +103,7 @@ extension ModalSizes.SizeConfiguration: Equatable where ModalSizeMeasurement: Eq
         }
     }
 }
+
+extension ModalSizes.SizeConfiguration: Hashable where ModalSizeMeasurement: Hashable {}
 
 extension ModalSizes.SizeConfiguration: Comparable where ModalSizeMeasurement: Comparable {}
