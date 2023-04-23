@@ -200,13 +200,7 @@ struct VMenu_Previews: PreviewProvider {
         var id: Int { rawValue }
 
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
-        private var _stringRepresentation: String {
-            switch self {
-            case .red: return "Red"
-            case .green: return "Green"
-            case .blue: return "Blue"
-            }
-        }
+        private var _stringRepresentation: String { .init(describing: self).capitalized }
     }
     
     // Previews (Scenes)

@@ -69,7 +69,7 @@ public struct VWheelPicker<Data, ID, Content>: View
     private let headerTitle: String?
     private let footerTitle: String?
 
-    private let data: [Data.Element]
+    private let data: Data
 
     private let id: KeyPath<Data.Element, ID>
 
@@ -94,7 +94,7 @@ public struct VWheelPicker<Data, ID, Content>: View
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = Array(data)
+        self.data = data
         self.id = id
         self.content = .title(title: title)
     }
@@ -113,7 +113,7 @@ public struct VWheelPicker<Data, ID, Content>: View
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = Array(data)
+        self.data = data
         self.id = id
         self.content = .content(content: content)
     }
@@ -137,7 +137,7 @@ public struct VWheelPicker<Data, ID, Content>: View
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = Array(data)
+        self.data = data
         self.id = \.id
         self.content = .title(title: title)
     }
@@ -159,7 +159,7 @@ public struct VWheelPicker<Data, ID, Content>: View
         self._selection = selection
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
-        self.data = Array(data)
+        self.data = data
         self.id = \.id
         self.content = .content(content: content)
     }

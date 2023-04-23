@@ -78,13 +78,14 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     }
     
     @Binding private var selection: Data.Element
-    private var selectedIndex: Int { data.firstIndex(of: selection)! } // Force-unwrap
+    private var selectedIndex: Data.Index { data.firstIndex(of: selection)! } // Force-unwrap
+    private var selectedIndexInt: Int { data.distance(from: data.startIndex, to: selectedIndex) }
     
     private let headerTitle: String?
     private let footerTitle: String?
     private let disabledValues: Set<Data.Element>
 
-    private let data: [Data.Element]
+    private let data: Data
 
     private let id: KeyPath<Data.Element, ID>
 
@@ -111,7 +112,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = Array(data)
+        self.data = data
         self.id = id
         self.content = .title(title: title)
     }
@@ -132,7 +133,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = Array(data)
+        self.data = data
         self.id = id
         self.content = .content(content: content)
     }
@@ -158,7 +159,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = Array(data)
+        self.data = data
         self.id = \.id
         self.content = .title(title: title)
     }
@@ -182,7 +183,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
         self.headerTitle = headerTitle
         self.footerTitle = footerTitle
         self.disabledValues = disabledValues
-        self.data = Array(data)
+        self.data = data
         self.id = \.id
         self.content = .content(content: content)
     }
@@ -272,7 +273,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
             .padding(uiModel.layout.indicatorMargin)
             .frame(width: rowWidth)
             .scaleEffect(indicatorScale, anchor: indicatorScaleAnchor)
-            .offset(x: rowWidth * CGFloat(selectedIndex))
+            .offset(x: rowWidth * CGFloat(selectedIndexInt))
             .foregroundColor(uiModel.colors.indicator.value(for: indicatorInternalState))
             .shadow(
                 color: uiModel.colors.indicatorShadow.value(for: indicatorInternalState),
@@ -330,7 +331,7 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     
     private var dividers: some View {
         HStack(spacing: 0, content: {
-            ForEach(data.indices, id: \.self, content: { i in
+            ForEach(0..<data.count, id: \.self, content: { i in
                 Spacer()
                 
                 if i <= data.count-2 {
@@ -374,8 +375,8 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     
     public var indicatorScaleAnchor: UnitPoint {
         switch selectedIndex {
-        case 0: return .leading
-        case data.count-1: return .trailing
+        case data.startIndex: return .leading
+        case data.endIndex: return .trailing
         default: return .center
         }
     }
@@ -393,12 +394,12 @@ public struct VSegmentedPicker<Data, ID, Content>: View
     }
     
     private func dividerOpacity(for index: Int) -> Double {
-        let isBeforeIndicator: Bool = index < selectedIndex
+        let isBeforeIndicator: Bool = index < selectedIndexInt
         
         if isBeforeIndicator {
-            return selectedIndex - index <= 1 ? 0 : 1
+            return selectedIndexInt - index <= 1 ? 0 : 1
         } else {
-            return index - selectedIndex < 1 ? 0 : 1
+            return index - selectedIndexInt < 1 ? 0 : 1
         }
     }
 }
@@ -435,13 +436,7 @@ struct VSegmentedPicker_Previews: PreviewProvider {
         var id: Int { rawValue }
         
         var stringRepresentation: String { _stringRepresentation.pseudoRTL(languageDirection) }
-        private var _stringRepresentation: String {
-            switch self {
-            case .red: return "Red"
-            case .green: return "Green"
-            case .blue: return "Blue"
-            }
-        }
+        private var _stringRepresentation: String { .init(describing: self).capitalized }
     }
     private static var selection: RGBColor { .red }
     

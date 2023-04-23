@@ -77,7 +77,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
 {
     // MARK: Properties
     @Binding private var selection: Data.Element
-    private let data: [Data.Element]
+    private let data: Data
     private let id: KeyPath<Data.Element, ID>
     private let content: (Data.Element) -> VMenuRowProtocol
     
@@ -92,7 +92,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     ) {
         self.title = title
         self._selection = selection
-        self.data = Array(data)
+        self.data = data
         self.id = id
         self.content = { VMenuTitleRow(action: {}, title: rowTitle($0)) } // TODO: Handle
     }
@@ -107,7 +107,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     ) {
         self.title = title
         self._selection = selection
-        self.data = Array(data)
+        self.data = data
         self.id = id
         self.content = content
     }
@@ -126,7 +126,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     {
         self.title = title
         self._selection = selection
-        self.data = Array(data)
+        self.data = data
         self.id = \.id
         self.content = { VMenuTitleRow(action: {}, title: rowTitle($0)) }
     }
@@ -144,7 +144,7 @@ public struct VMenuPickerSection<Data, ID>: VMenuSectionProtocol
     {
         self.title = title
         self._selection = selection
-        self.data = Array(data)
+        self.data = data
         self.id = \.id
         self.content = content
     }
