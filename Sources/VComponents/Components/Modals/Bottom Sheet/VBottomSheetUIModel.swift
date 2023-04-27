@@ -172,7 +172,7 @@ public struct VBottomSheetUIModel {
         }
         
         // MARK: Bottom Sheet Heights
-        /// Bottom Sheet Heights
+        /// Bottom sheet heights.
         public struct BottomSheetHeights: Equatable {
             // MARK: Properties
             /// Minimum height.
